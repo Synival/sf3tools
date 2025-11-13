@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using SF3.Win.Controls;
 
 namespace SF3.Editor.Forms {
     partial class SF3EditorForm {
@@ -26,7 +27,7 @@ namespace SF3.Editor.Forms {
         /// </summary>
         private void InitializeComponent() {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(SF3EditorForm));
-            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            menuStrip1 = new DarkModeMenuStrip();
             tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_OpenScenario = new System.Windows.Forms.ToolStripMenuItem();
@@ -878,7 +879,7 @@ namespace SF3.Editor.Forms {
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private DarkModeMenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Open;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_Save;
