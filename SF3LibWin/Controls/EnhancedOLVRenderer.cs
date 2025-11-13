@@ -20,13 +20,14 @@ namespace SF3.Win.Controls {
             => formatString.StartsWith("{0:X") ? HexFont : _defaultFont;
 
         public override bool RenderSubItem(DrawListViewSubItemEventArgs e, Graphics g, Rectangle cellBounds, object rowObject) {
-            var lvc = ((ObjectListView) e.Item.ListView).GetColumn(e.ColumnIndex);
+            var eolv = (EnhancedObjectListView) e.Item.ListView;
+            var lvc = eolv.GetColumn(e.ColumnIndex);
             _ = lvc.AspectGetter(rowObject);
 
             // If an AspectToStringConverter was supplied, this is probably a named value. Just use the default font.
             var formatString = (lvc.AspectToStringConverter == null) ? (lvc.AspectToStringFormat ?? "") : "";
             _currentRenderFont = GetCellFont(formatString);
-            _currentRenderColor = lvc.IsEditable ? Color.Black : _readOnlyColor;
+            _currentRenderColor = lvc.IsEditable ? eolv.ForeColor : eolv.ReadOnlyFieldColor;
 
             return base.RenderSubItem(e, g, cellBounds, rowObject);
         }

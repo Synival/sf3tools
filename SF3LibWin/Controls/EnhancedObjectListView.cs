@@ -11,6 +11,7 @@ using CommonLib.NamedValues;
 using CommonLib.Utils;
 using CommonLib.ViewModels;
 using SF3.Models.Structs;
+using SF3.Win.DarkMode;
 using SF3.Win.Views;
 
 namespace SF3.Win.Controls {
@@ -21,37 +22,93 @@ namespace SF3.Win.Controls {
     /// The alternative is to set up an elaborate system of events to *hopefully* inform child controls property.
     /// Just don't make 1,000 of these things at once, okay?
     /// </summary>
-    public class EnhancedObjectListView : ObjectListView {
+    public partial class EnhancedObjectListView : ObjectListView {
         public delegate INameGetterContext NameGetterContextFetcherHandler();
-
-        private static readonly Color _headerBackColor = Color.FromArgb(244, 244, 244);
-        private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
 
         public EnhancedObjectListView(INameGetterContext nameGetterContext) : this(() => nameGetterContext) {}
 
         public EnhancedObjectListView(NameGetterContextFetcherHandler nameGetterContextFetcher) {
             SuspendLayout();
 
-            CellToolTipGetter = GetCellTooltip;
-            HighlightBackgroundColor = SystemColors.Highlight;
-            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
-
             HeaderUsesThemes = false;
             HeaderFormatStyle = new HeaderFormatStyle();
             var olvStyle = HeaderFormatStyle;
             olvStyle.SetFont(DefaultFont);
-            olvStyle.Normal.BackColor = _headerBackColor;
+
+            CellToolTipGetter = GetCellTooltip;
+            HighlightBackgroundColor = SystemColors.Highlight;
+            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, SystemColors.Window, 0.50f);
 
             NameGetterContextFetcher = nameGetterContextFetcher;
             OwnerDraw = true;
+            GridLines = false;
             DefaultRenderer = EnhancedOLVRenderer.Instance;
             CellEditStarting += (s, e) => EnhanceOlvCellEditControl(e);
+
+            HighlightBackgroundColor = SystemColors.Highlight;
+            HighlightForegroundColor = SystemColors.HighlightText;
+            UnfocusedHighlightBackgroundColor = Utils.MathHelpers.Lerp(HighlightBackgroundColor, BackColor, 0.50f);
+            UnfocusedHighlightForegroundColor = SystemColors.HighlightText;
+            HeaderBackgroundColor = Color.FromArgb(0xF0, 0xF0, 0xF0);
 
             _timer.Interval = 100;
             _timer.Tick += CheckForVisibility;
             _timer.Start();
 
             ResumeLayout();
+        }
+
+        protected override void OnHandleCreated(EventArgs e) {
+            base.OnHandleCreated(e);
+
+            if (DarkModeContext == null) {
+                OriginalAltLineColor1 = AlternateRowBackColor;
+                OriginalAltLineColor2 = AlternateRowBackColor2;
+                OriginalReadOnlyFieldColor = ReadOnlyFieldColor;
+                OriginalHighlightBackgroundColor = HighlightBackgroundColor;
+                OriginalHighlightForegroundColor = HighlightForegroundColor;
+                OriginalUnfocusedHighlightBackgroundColor = UnfocusedHighlightBackgroundColor;
+                OriginalUnfocusedHighlightForegroundColor = UnfocusedHighlightForegroundColor;
+                OriginalHeaderBackColor = HeaderBackgroundColor;
+                OriginalHeaderSelectedColor = HeaderSelectedColor;
+                OriginalHeaderHoverColor = HeaderHoverColor;
+
+                DarkModeContext = new DarkModeControlContext<EnhancedObjectListView>(this);
+                DarkModeContext.EnabledChanged += (s, e) => {
+                    if (DarkModeContext.Enabled) {
+                        AlternateRowBackColor  = Color.FromArgb(0x30, 0x30, 0x00);
+                        AlternateRowBackColor2 = Color.FromArgb(0x00, 0x00, 0x30);
+                        ReadOnlyFieldColor = DarkModeColors.HighlightedDisabledColor;
+                        HighlightBackgroundColor = DarkModeColors.HighlightedBackColor;
+                        HighlightForegroundColor = DarkModeColors.HighlightedForeColor;
+                        UnfocusedHighlightBackgroundColor = DarkModeColors.HalfHighlightedBackColor;
+                        UnfocusedHighlightForegroundColor = DarkModeColors.HighlightedForeColor;
+                        HeaderBackgroundColor = DarkModeColors.BackColor;
+                        HeaderSelectedColor = DarkModeColors.HighlightedBackColor;
+                        HeaderHoverColor  = DarkModeColors.HalfHighlightedBackColor;
+                    }
+                    else {
+                        AlternateRowBackColor  = OriginalAltLineColor1;
+                        AlternateRowBackColor2 = OriginalAltLineColor2;
+                        ReadOnlyFieldColor = OriginalReadOnlyFieldColor;
+                        HighlightBackgroundColor = OriginalHighlightBackgroundColor;
+                        HighlightForegroundColor = OriginalHighlightForegroundColor;
+                        UnfocusedHighlightBackgroundColor = OriginalUnfocusedHighlightBackgroundColor;
+                        UnfocusedHighlightForegroundColor = OriginalUnfocusedHighlightForegroundColor;
+                        HeaderBackgroundColor = OriginalHeaderBackColor;
+                        HeaderSelectedColor = OriginalHeaderSelectedColor;
+                        HeaderHoverColor  = OriginalHeaderHoverColor;
+                    }
+                    RefreshAllItems();
+                };
+                DarkModeContext.Init();
+            }
+        }
+
+        protected override void OnCreateControl() {
+            // To render the non-client area of the header -- which we need to do to render dark mode -- we need to
+            // subclass the window handle to extend the WM_PAINT procedure.
+            SubClassHeader();
         }
 
         protected override void OnVisibleChanged(EventArgs e) {
@@ -88,13 +145,13 @@ namespace SF3.Win.Controls {
         }
 
         public void AddColumn(OLVColumn lvc) {
-            if (!lvc.IsEditable) {
-                lvc.HeaderFormatStyle = new HeaderFormatStyle();
-                var lvcStyle = lvc.HeaderFormatStyle;
-                lvcStyle.SetFont(Control.DefaultFont);
-                lvcStyle.SetForeColor(_readOnlyColor);
-                lvcStyle.Normal.BackColor = _headerBackColor;
-            }
+            lvc.HeaderFormatStyle = new HeaderFormatStyle();
+            var lvcStyle = lvc.HeaderFormatStyle;
+            lvcStyle.SetFont(DefaultFont);
+            lvcStyle.SetForeColor((lvc?.IsEditable ?? true) ? ForeColor : _readOnlyFieldColor);
+            lvcStyle.Normal.BackColor  = _headerBackgroundColor;
+            lvcStyle.Hot.BackColor     = _headerHoverColor;
+            lvcStyle.Pressed.BackColor = _headerSelectedColor;
 
             var headerTextWidth = TextRenderer.MeasureText(lvc.Text, lvc.HeaderFont).Width + 8;
             var aspectTextSample = string.Format(lvc.AspectToStringFormat ?? "", 0);
@@ -265,6 +322,13 @@ namespace SF3.Win.Controls {
             }
         }
 
+        private void ForAllHeaderStyles(Action<HeaderFormatStyle, OLVColumn> func) {
+            func(HeaderFormatStyle, null);
+            foreach (var lvc in AllColumns)
+                if (lvc.HeaderFormatStyle != null)
+                    func(lvc.HeaderFormatStyle, lvc);
+        }
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public NameGetterContextFetcherHandler NameGetterContextFetcher { get; set; }
@@ -280,7 +344,71 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color AlternateRowBackColor2 { get; set; } = Color.Empty;
 
+        private Color _readOnlyFieldColor = Color.FromArgb(0x60, 0x60, 0x60);
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color ReadOnlyFieldColor {
+            get => _readOnlyFieldColor;
+            set {
+                if (_readOnlyFieldColor != value) {
+                    _readOnlyFieldColor = value;
+                    ForAllHeaderStyles((style, lvc) => style.SetForeColor((lvc?.IsEditable ?? true) ? ForeColor : value));
+                }
+            }
+        }
+
+        private Color _headerBackgroundColor = Color.Empty;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color HeaderBackgroundColor {
+            get => _headerBackgroundColor;
+            set {
+                if (_headerBackgroundColor != value) {
+                    _headerBackgroundColor = value;
+                    ForAllHeaderStyles((style, column) => style.Normal.BackColor = value);
+                }
+            }
+        }
+
+        private Color _headerHoverColor = Color.Empty;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color HeaderHoverColor {
+            get => _headerHoverColor;
+            set {
+                if (_headerHoverColor != value) {
+                    _headerHoverColor = value;
+                    ForAllHeaderStyles((style, column) => style.Hot.BackColor = value);
+                }
+            }
+        }
+
+        private Color _headerSelectedColor = Color.Empty;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public Color HeaderSelectedColor {
+            get => _headerSelectedColor;
+            set {
+                if (_headerSelectedColor != value) {
+                    _headerSelectedColor = value;
+                    ForAllHeaderStyles((style, column) => style.Pressed.BackColor = value);
+                }
+            }
+        }
+
+        public Color OriginalAltLineColor1 { get; private set; }
+        public Color OriginalAltLineColor2 { get; private set; }
+        public Color OriginalReadOnlyFieldColor { get; private set; }
+        public Color OriginalHighlightBackgroundColor { get; private set; }
+        public Color OriginalHighlightForegroundColor { get; private set; }
+        public Color OriginalUnfocusedHighlightBackgroundColor { get; private set; }
+        public Color OriginalUnfocusedHighlightForegroundColor { get; private set; }
+        public Color OriginalHeaderBackColor { get; private set; }
+        public Color OriginalHeaderSelectedColor { get; private set; }
+        public Color OriginalHeaderHoverColor { get; private set; }
+
         private bool _wasVisible = true;
         private Timer _timer = new Timer();
+        private DarkModeControlContext<EnhancedObjectListView> DarkModeContext { get; set; }
     }
 }
