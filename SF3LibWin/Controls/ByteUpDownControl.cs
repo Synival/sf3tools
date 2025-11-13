@@ -1,9 +1,8 @@
-﻿using System.Windows.Forms;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace SF3.Win.Controls {
 
-    public class ByteUpDownControl : NumericUpDown {
+    public class ByteUpDownControl : DarkModeNumericUpDown {
         public ByteUpDownControl() {
             this.DecimalPlaces = 0;
             this.Minimum = byte.MinValue;

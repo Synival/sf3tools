@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
 
-    public class FloatUpDownControl : NumericUpDown {
+    public class FloatUpDownControl : DarkModeNumericUpDown {
         public FloatUpDownControl() {
             this.DecimalPlaces = 7;
             this.Maximum = int.MaxValue;

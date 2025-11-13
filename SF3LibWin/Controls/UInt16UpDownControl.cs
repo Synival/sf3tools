@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace SF3.Win.Controls {
 
-    public class UInt16UpDownControl : NumericUpDown {
+    public class UInt16UpDownControl : DarkModeNumericUpDown {
         public UInt16UpDownControl() {
             this.DecimalPlaces = 0;
             this.Minimum = ushort.MinValue;
