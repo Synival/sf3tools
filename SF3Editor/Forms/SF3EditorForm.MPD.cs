@@ -7,13 +7,13 @@ using System.Windows.Forms;
 using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
+using CommonLib.Utils;
 using CommonLib.Win;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Types;
 using SF3.Win.Types;
-using SF3.Win.Utils;
 using SF3.Win.Views.MPD;
 using static CommonLib.Utils.Compression;
 using static CommonLib.Win.Utils.MessageUtils;
@@ -176,7 +176,7 @@ namespace SF3.Editor.Forms {
                 var path = dialog.FileName;
 
                 try {
-                    var results = mpdFile.ExportTexturesToPath(path, (f, data) => ImageUtils.SaveBitmapToFile(f, data, ImageFormat.Png));
+                    var results = mpdFile.ExportTexturesToPath(path, (f, data) => BitmapUtils.SaveBitmapToFile(f, data, ImageFormat.Png));
                     var message =
                         "Export complete.\n" +
                         "   Exported successfully: " + results.Exported + "\n" +
