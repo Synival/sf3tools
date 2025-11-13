@@ -1,12 +1,22 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using SF3.Win.DarkMode;
 
 namespace SF3.Win.Controls {
     public partial class ImageControl : UserControl {
         public ImageControl() {
             InitializeComponent();
             DoubleBuffered = true;
+        }
+
+        protected override void CreateHandle() {
+            base.CreateHandle();
+            if (DarkModeContext == null) {
+                DarkModeContext = new DarkModeControlContext<ImageControl>(this);
+                DarkModeContext.Init();
+                DarkModeContext.OriginalBackColor = SystemColors.Control;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e) {
@@ -21,7 +31,8 @@ namespace SF3.Win.Controls {
                 var imageScale = ImageScale;
                 var w = (int) (_image.Width * imageScale);
                 var h = (int) (_image.Height * imageScale);
-                e.Graphics.DrawRectangle(Pens.Black, new Rectangle(1, 1, w + 1, h + 1));
+                using (var pen = new Pen(DarkModeContext.Enabled ? DarkModeColors.BorderColor : Color.Black))
+                    e.Graphics.DrawRectangle(pen, new Rectangle(1, 1, w + 1, h + 1));
                 e.Graphics.DrawImage(Image, 1, 1, w, h);
             }
         }
@@ -59,5 +70,7 @@ namespace SF3.Win.Controls {
                 }
             }
         }
+
+        private DarkModeControlContext<ImageControl> DarkModeContext { get; set; }
     }
 }

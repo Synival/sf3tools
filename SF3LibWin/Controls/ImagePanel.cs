@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Win.Utils;
+using SF3.Win.DarkMode;
 
 namespace SF3.Win.Controls {
     public partial class ImagePanel : UserControl {
@@ -15,6 +16,15 @@ namespace SF3.Win.Controls {
 
             btnExport.Enabled = false;
             btnImport.Enabled = false;
+        }
+
+        protected override void CreateHandle() {
+            base.CreateHandle();
+            if (DarkModeContext == null) {
+                DarkModeContext = new DarkModeControlContext<ImagePanel>(this);
+                DarkModeContext.Init();
+                DarkModeContext.OriginalBackColor = SystemColors.Control;
+            }
         }
 
         [Browsable(false)]
@@ -70,5 +80,7 @@ namespace SF3.Win.Controls {
                 MessageUtils.ErrorMessage("Couldn't import image", ex);
             }
         }
+
+        private DarkModeControlContext<ImagePanel> DarkModeContext { get; set; }
     }
 }
