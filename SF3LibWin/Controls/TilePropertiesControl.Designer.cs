@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             gbMovement = new DarkModeGroupBox();
-            cbMoveSlope = new System.Windows.Forms.CheckBox();
+            cbMoveSlope = new DarkModeCheckBox();
             nudMoveHeightmapBR = new System.Windows.Forms.NumericUpDown();
             nudMoveHeightmapBL = new System.Windows.Forms.NumericUpDown();
             nudMoveHeightmapTR = new System.Windows.Forms.NumericUpDown();
@@ -39,7 +39,7 @@
             labelEventID = new DarkModeLabel();
             gbModel = new DarkModeGroupBox();
             nudModelTextureID = new System.Windows.Forms.NumericUpDown();
-            cbModelTileIsFlat = new System.Windows.Forms.CheckBox();
+            cbModelTileIsFlat = new DarkModeCheckBox();
             cbModelRotate = new DarkModeComboBox();
             labelModelRotate = new DarkModeLabel();
             labelModelFlip = new DarkModeLabel();
@@ -47,7 +47,7 @@
             cbModelFlip = new DarkModeComboBox();
             labelTileEdited = new DarkModeLabel();
             labelRealCoordinates = new DarkModeLabel();
-            cbModelHasTree = new System.Windows.Forms.CheckBox();
+            cbModelHasTree = new DarkModeCheckBox();
             gbMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).BeginInit();
@@ -364,7 +364,7 @@
         private DarkModeComboBox cbModelFlip;
         private DarkModeComboBox cbModelRotate;
         private DarkModeLabel labelModelRotate;
-        private System.Windows.Forms.CheckBox cbModelTileIsFlat;
+        private DarkModeCheckBox cbModelTileIsFlat;
         private DarkModeLabel labelTileEdited;
         private DarkModeLabel labelRealCoordinates;
         private System.Windows.Forms.NumericUpDown nudMoveHeight;
@@ -374,7 +374,7 @@
         private System.Windows.Forms.NumericUpDown nudMoveHeightmapTL;
         private System.Windows.Forms.NumericUpDown nudEventID;
         private System.Windows.Forms.NumericUpDown nudModelTextureID;
-        private System.Windows.Forms.CheckBox cbMoveSlope;
-        private System.Windows.Forms.CheckBox cbModelHasTree;
+        private DarkModeCheckBox cbMoveSlope;
+        private DarkModeCheckBox cbModelHasTree;
     }
 }
