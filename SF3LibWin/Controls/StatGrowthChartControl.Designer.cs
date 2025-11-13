@@ -45,7 +45,7 @@
             var series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             var series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             var series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            cbCurveGraphCharacter = new System.Windows.Forms.ComboBox();
+            cbCurveGraphCharacter = new DarkModeComboBox();
             CurveGraph = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize) CurveGraph).BeginInit();
             SuspendLayout();
@@ -283,7 +283,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cbCurveGraphCharacter;
+        private DarkModeComboBox cbCurveGraphCharacter;
         private System.Windows.Forms.DataVisualization.Charting.Chart CurveGraph;
     }
 }

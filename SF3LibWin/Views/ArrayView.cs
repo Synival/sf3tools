@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public abstract class ArrayView<TElement, TView> : ControlSpaceView where TView : IView {
@@ -16,7 +17,7 @@ namespace SF3.Win.Views {
             if (control == null)
                 return control;            
 
-            DropdownList = new ComboBox();
+            DropdownList = new DarkModeComboBox();
             DropdownList.Width = 400;
             DropdownList.DataSource = new BindingSource(Elements ?? [], null);
             DropdownList.DisplayMember = KeyProperty;
@@ -53,6 +54,6 @@ namespace SF3.Win.Views {
         public string KeyProperty { get; }
         public TView ElementView { get; }
 
-        public ComboBox DropdownList { get; private set; } = null;
+        public DarkModeComboBox DropdownList { get; private set; } = null;
     }
 }
