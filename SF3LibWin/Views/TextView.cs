@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using SF3.Win.Controls;
+using CommonLib.Win.Controls;
 
 namespace SF3.Win.Views {
     public class TextView : ControlView<DarkModeTextBox> {

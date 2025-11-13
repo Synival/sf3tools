@@ -12,4 +12,57 @@
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Contols\ByteUpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\DarkModeToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\EnhancedTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\FloatUpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\Int16UpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\Int32UpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\SByteUpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\UInt16UpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Contols\UInt32UpDownControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

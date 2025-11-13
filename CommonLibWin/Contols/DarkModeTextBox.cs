@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using CommonLib.Win.DarkMode;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
     /// <summary>
     /// TextBox with dark mode support.
     /// </summary>

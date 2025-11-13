@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
-using SF3.Win.Controls;
+using CommonLib.Win.Controls;
 
 namespace SF3.Win.Utils {
     public static class ControlUtils {

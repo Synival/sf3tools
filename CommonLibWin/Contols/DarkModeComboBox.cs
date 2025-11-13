@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib.Win.DarkMode;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
     public class DarkModeComboBox : ComboBox {
         [DllImport("gdi32.dll")]
         private static extern IntPtr CreateSolidBrush(int color);

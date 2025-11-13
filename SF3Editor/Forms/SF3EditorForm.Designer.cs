@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using CommonLib.Win.Controls;
 using SF3.Win.Controls;
 
 namespace SF3.Editor.Forms {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using SF3.Win.Controls;
+using CommonLib.Win.Controls;
 
 namespace SF3.Win.Views {
     public abstract class ArrayView<TElement, TView> : ControlSpaceView where TView : IView {

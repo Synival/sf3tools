@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
 
     public class UInt16UpDownControl : DarkModeNumericUpDown {
         public UInt16UpDownControl() {

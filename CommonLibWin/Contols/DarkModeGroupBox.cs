@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Win.DarkMode;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
     public class DarkModeGroupBox : GroupBox {
         protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);

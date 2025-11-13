@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Attributes;
+using CommonLib.Win.Controls;
 using SF3.Win.Controls;
 using static SF3.Win.Utils.ControlUtils;
 

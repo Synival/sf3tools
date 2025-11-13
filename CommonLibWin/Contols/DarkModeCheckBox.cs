@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using CommonLib.Win.DarkMode;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
     public class DarkModeCheckBox : CheckBox {
         protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);

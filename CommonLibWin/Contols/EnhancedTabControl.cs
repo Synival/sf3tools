@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using CommonLib.Win.DarkMode;
 using CommonLib.Win.Utils;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
     /// <summary>
     /// TabControl with enhanced drawing.
     /// </summary>

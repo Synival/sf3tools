@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using SF3.Win.Controls;
+using CommonLib.Win.Controls;
 
 namespace SF3.Win.Views {
     public class TabView : ViewBase, ITabView {

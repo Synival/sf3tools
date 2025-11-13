@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
     public class UInt32UpDownControl : DarkModeNumericUpDown {
         public UInt32UpDownControl() {
             this.DecimalPlaces = 0;

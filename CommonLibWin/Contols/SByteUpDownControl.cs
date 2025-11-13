@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SF3.Win.Controls {
+namespace CommonLib.Win.Controls {
 
     public class SByteUpDownControl : DarkModeNumericUpDown {
         public SByteUpDownControl() {

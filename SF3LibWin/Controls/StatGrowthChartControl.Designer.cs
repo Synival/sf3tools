@@ -1,4 +1,6 @@
-﻿namespace SF3.Win.Controls {
+﻿using CommonLib.Win.Controls;
+
+namespace SF3.Win.Controls {
     partial class StatGrowthChartControl {
         /// <summary> 
         /// Required designer variable.
