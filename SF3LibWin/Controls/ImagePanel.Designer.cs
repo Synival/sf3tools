@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             imageControl = new ImageControl();
-            btnExport = new System.Windows.Forms.Button();
-            btnImport = new System.Windows.Forms.Button();
+            btnExport = new DarkModeButton();
+            btnImport = new DarkModeButton();
             SuspendLayout();
             // 
             // imageControl
@@ -75,7 +75,7 @@
         #endregion
 
         private ImageControl imageControl;
-        private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btnImport;
+        private DarkModeButton btnExport;
+        private DarkModeButton btnImport;
     }
 }
