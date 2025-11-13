@@ -403,7 +403,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiView_DarkMode.Name = "tsmiView_DarkMode";
             tsmiView_DarkMode.Size = new Size(265, 22);
-            tsmiView_DarkMode.Text = "&Dark Mode";
+            tsmiView_DarkMode.Text = "&Dark Mode (Experimental)";
             tsmiView_DarkMode.Click += tsmiView_DarkMode_Click;
             // 
             // tsmiView_HighlightEndcodesInTextureViews
