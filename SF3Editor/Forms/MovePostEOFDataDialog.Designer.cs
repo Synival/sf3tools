@@ -1,4 +1,6 @@
-﻿namespace SF3.Editor.Forms {
+﻿using CommonLib.Win.Controls;
+
+namespace SF3.Editor.Forms {
     partial class MovePostEOFDataDialog {
         /// <summary>
         /// Required designer variable.
@@ -23,33 +25,33 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            labelMoveBy = new System.Windows.Forms.Label();
-            btnCancel = new System.Windows.Forms.Button();
-            btnMove = new System.Windows.Forms.Button();
-            tbMoveBy = new System.Windows.Forms.TextBox();
-            labelFirstAddrRAM = new System.Windows.Forms.Label();
-            labelLastAddrRAM = new System.Windows.Forms.Label();
-            tbFirstAddrRAM = new System.Windows.Forms.TextBox();
-            tbLastAddrRAM = new System.Windows.Forms.TextBox();
-            tbFirstAddrFile = new System.Windows.Forms.TextBox();
-            tbLastAddrFile = new System.Windows.Forms.TextBox();
-            labelLastAddrFile = new System.Windows.Forms.Label();
-            labelFirstAddrFile = new System.Windows.Forms.Label();
-            labelFileEndRam = new System.Windows.Forms.Label();
-            tbFileEndRAM = new System.Windows.Forms.TextBox();
-            tbFreeSpaceBeforePostEOFData = new System.Windows.Forms.TextBox();
-            labelFreeSpace = new System.Windows.Forms.Label();
-            labelValuesInHex = new System.Windows.Forms.Label();
-            tbFileEndFile = new System.Windows.Forms.TextBox();
-            labelFileEndFile = new System.Windows.Forms.Label();
-            tbFileStartRam = new System.Windows.Forms.TextBox();
-            label1 = new System.Windows.Forms.Label();
-            labelChangeAnyValue = new System.Windows.Forms.Label();
-            tbLimitRAM = new System.Windows.Forms.TextBox();
-            labelLimit = new System.Windows.Forms.Label();
-            tbFreeSpaceBeforeLimit = new System.Windows.Forms.TextBox();
-            labelFreeSpaceBeforeLimit = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
+            labelMoveBy = new DarkModeLabel();
+            btnCancel = new DarkModeButton();
+            btnMove = new DarkModeButton();
+            tbMoveBy = new DarkModeTextBox();
+            labelFirstAddrRAM = new DarkModeLabel();
+            labelLastAddrRAM = new DarkModeLabel();
+            tbFirstAddrRAM = new DarkModeTextBox();
+            tbLastAddrRAM = new DarkModeTextBox();
+            tbFirstAddrFile = new DarkModeTextBox();
+            tbLastAddrFile = new DarkModeTextBox();
+            labelLastAddrFile = new DarkModeLabel();
+            labelFirstAddrFile = new DarkModeLabel();
+            labelFileEndRam = new DarkModeLabel();
+            tbFileEndRAM = new DarkModeTextBox();
+            tbFreeSpaceBeforePostEOFData = new DarkModeTextBox();
+            labelFreeSpace = new DarkModeLabel();
+            labelValuesInHex = new DarkModeLabel();
+            tbFileEndFile = new DarkModeTextBox();
+            labelFileEndFile = new DarkModeLabel();
+            tbFileStartRam = new DarkModeTextBox();
+            label1 = new DarkModeLabel();
+            labelChangeAnyValue = new DarkModeLabel();
+            tbLimitRAM = new DarkModeTextBox();
+            labelLimit = new DarkModeLabel();
+            tbFreeSpaceBeforeLimit = new DarkModeTextBox();
+            labelFreeSpaceBeforeLimit = new DarkModeLabel();
+            label2 = new DarkModeLabel();
             SuspendLayout();
             // 
             // labelMoveBy
@@ -409,32 +411,32 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelMoveBy;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnMove;
-        private System.Windows.Forms.TextBox tbMoveBy;
-        private System.Windows.Forms.Label labelFirstAddrRAM;
-        private System.Windows.Forms.Label labelLastAddrRAM;
-        private System.Windows.Forms.TextBox tbFirstAddrRAM;
-        private System.Windows.Forms.TextBox tbLastAddrRAM;
-        private System.Windows.Forms.TextBox tbFirstAddrFile;
-        private System.Windows.Forms.TextBox tbLastAddrFile;
-        private System.Windows.Forms.Label labelLastAddrFile;
-        private System.Windows.Forms.Label labelFirstAddrFile;
-        private System.Windows.Forms.Label labelFileEndRam;
-        private System.Windows.Forms.TextBox tbFileEndRAM;
-        private System.Windows.Forms.TextBox tbFreeSpaceBeforePostEOFData;
-        private System.Windows.Forms.Label labelFreeSpace;
-        private System.Windows.Forms.Label labelValuesInHex;
-        private System.Windows.Forms.TextBox tbFileEndFile;
-        private System.Windows.Forms.Label labelFileEndFile;
-        private System.Windows.Forms.TextBox tbFileStartRam;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelChangeAnyValue;
-        private System.Windows.Forms.TextBox tbLimitRAM;
-        private System.Windows.Forms.Label labelLimit;
-        private System.Windows.Forms.TextBox tbFreeSpaceBeforeLimit;
-        private System.Windows.Forms.Label labelFreeSpaceBeforeLimit;
-        private System.Windows.Forms.Label label2;
+        private DarkModeLabel labelMoveBy;
+        private DarkModeButton btnCancel;
+        private DarkModeButton btnMove;
+        private DarkModeTextBox tbMoveBy;
+        private DarkModeLabel labelFirstAddrRAM;
+        private DarkModeLabel labelLastAddrRAM;
+        private DarkModeTextBox tbFirstAddrRAM;
+        private DarkModeTextBox tbLastAddrRAM;
+        private DarkModeTextBox tbFirstAddrFile;
+        private DarkModeTextBox tbLastAddrFile;
+        private DarkModeLabel labelLastAddrFile;
+        private DarkModeLabel labelFirstAddrFile;
+        private DarkModeLabel labelFileEndRam;
+        private DarkModeTextBox tbFileEndRAM;
+        private DarkModeTextBox tbFreeSpaceBeforePostEOFData;
+        private DarkModeLabel labelFreeSpace;
+        private DarkModeLabel labelValuesInHex;
+        private DarkModeTextBox tbFileEndFile;
+        private DarkModeLabel labelFileEndFile;
+        private DarkModeTextBox tbFileStartRam;
+        private DarkModeLabel label1;
+        private DarkModeLabel labelChangeAnyValue;
+        private DarkModeTextBox tbLimitRAM;
+        private DarkModeLabel labelLimit;
+        private DarkModeTextBox tbFreeSpaceBeforeLimit;
+        private DarkModeLabel labelFreeSpaceBeforeLimit;
+        private DarkModeLabel label2;
     }
 }

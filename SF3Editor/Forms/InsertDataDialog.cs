@@ -8,9 +8,10 @@ using CommonLib.Win.Utils;
 using SF3.Models.Files;
 using static CommonLib.Utils.ValueUtils;
 using System.ComponentModel;
+using SF3.Win.Forms;
 
 namespace SF3.Editor.Forms {
-    public partial class InsertDataDialog : Form {
+    public partial class InsertDataDialog : DarkModeForm {
         public InsertDataDialog(ScenarioTableFile file) {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));

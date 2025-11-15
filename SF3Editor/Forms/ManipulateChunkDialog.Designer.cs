@@ -1,4 +1,6 @@
-﻿namespace SF3.Editor.Forms {
+﻿using CommonLib.Win.Controls;
+
+namespace SF3.Editor.Forms {
     partial class ManipulateChunkDialog {
         /// <summary>
         /// Required designer variable.
@@ -23,11 +25,11 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            btnCancel = new System.Windows.Forms.Button();
-            btnAction = new System.Windows.Forms.Button();
-            labelSelectAChunk = new System.Windows.Forms.Label();
-            cbChunk = new System.Windows.Forms.ComboBox();
-            labelWhichData = new System.Windows.Forms.Label();
+            btnCancel = new DarkModeButton();
+            btnAction = new DarkModeButton();
+            labelSelectAChunk = new DarkModeLabel();
+            cbChunk = new DarkModeComboBox();
+            labelWhichData = new DarkModeLabel();
             rbCompressed = new System.Windows.Forms.RadioButton();
             rbUncompressed = new System.Windows.Forms.RadioButton();
             SuspendLayout();
@@ -133,11 +135,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnAction;
-        private System.Windows.Forms.Label labelSelectAChunk;
-        private System.Windows.Forms.ComboBox cbChunk;
-        private System.Windows.Forms.Label labelWhichData;
+        private DarkModeButton btnCancel;
+        private DarkModeButton btnAction;
+        private DarkModeLabel labelSelectAChunk;
+        private DarkModeComboBox cbChunk;
+        private DarkModeLabel labelWhichData;
         private System.Windows.Forms.RadioButton rbCompressed;
         private System.Windows.Forms.RadioButton rbUncompressed;
     }

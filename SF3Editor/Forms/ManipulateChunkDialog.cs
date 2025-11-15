@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Structs.MPD;
+using SF3.Win.Forms;
 using SF3.Win.Types;
 
 namespace SF3.Editor.Forms {
-    public partial class ManipulateChunkDialog : Form {
+    public partial class ManipulateChunkDialog : DarkModeForm {
         public ManipulateChunkDialog(ManipulateChunkDialogType type, ChunkLocation[] chunks, string fileNamePrefix) {
             Type           = type;
             Chunks         = chunks;
