@@ -15,10 +15,14 @@ namespace CommonLib.Win.Controls {
                 OriginalBorderStyle = BorderStyle;
                 if (OriginalBorderStyle != BorderStyle.None && BorderStyle != BorderStyle.FixedSingle) {
                     DarkModeContext.EnabledChanged += (s, e) => {
-                        if (DarkModeContext.Enabled)
+                        if (DarkModeContext.Enabled) {
+                            // Must use BeginInvoke() to prevent call to RecreateHandle() that breaks everything
                             BeginInvoke(() => this.BorderStyle = BorderStyle.FixedSingle);
-                        else
+                        }
+                        else {
+                            // Must use BeginInvoke() to prevent call to RecreateHandle() that breaks everything
                             BeginInvoke(() => this.BorderStyle = OriginalBorderStyle);
+                        }
                     };
                 }
 

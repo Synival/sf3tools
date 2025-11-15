@@ -21,14 +21,20 @@ namespace CommonLib.Win.Controls {
                             if (IsSeparator) {
                                 BackColor = DarkModeColors.SeparatorColor;
                                 Height = 1;
+
+                                // Must use BeginInvoke() to prevent call to RecreateHandle() that breaks everything
                                 BeginInvoke(() => BorderStyle = BorderStyle.None);
                             }
-                            else
+                            else {
+                                // Must use BeginInvoke() to prevent call to RecreateHandle() that breaks everything
                                 BeginInvoke(() => BorderStyle = BorderStyle.FixedSingle);
+                            }
                         }
                         else {
                             if (IsSeparator)
                                 Height = 2;
+
+                            // Must use BeginInvoke() to prevent call to RecreateHandle() that breaks everything
                             BeginInvoke(() => BorderStyle = OriginalBorderStyle);
                         }
                     }
