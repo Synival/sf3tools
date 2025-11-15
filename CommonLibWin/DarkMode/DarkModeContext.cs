@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonLib.Logging;
 
 namespace CommonLib.Win.DarkMode {
     /// <summary>
@@ -23,17 +24,21 @@ namespace CommonLib.Win.DarkMode {
             if (IsInitialized)
                 throw new InvalidOperationException("Dark mode already initialized");
             if (Observable == null)
-                throw new InvalidOperationException($"Global '{nameof(Observable)}' is unset; please set before using dark mode");
+                Logger.WriteLine($"Global '{nameof(Observable)}' is unset; automatic dark mode will be disabled for this {GetType().Name}");
 
             IsInitialized = true;
-            Observable.DarkModeChanged += ToggleDarkModeHandler;
+            _observable = Observable;
+            if (_observable != null)
+                _observable.DarkModeChanged += ToggleDarkModeHandler;
+
             OnInit();
 
-            Enabled = Observable.DarkMode;
+            if (_observable != null)
+                Enabled = _observable.DarkMode;
         }
 
         private void ToggleDarkModeHandler(object sender, EventArgs args)
-             => Enabled = Observable.DarkMode;
+             => Enabled = _observable.DarkMode;
 
         /// <summary>
         /// Run during OnInit(), after setting up events but before turning dark mode on if necessary.
@@ -78,9 +83,10 @@ namespace CommonLib.Win.DarkMode {
         protected virtual void Dispose(bool disposing) {
             if (!_disposed) {
                 if (disposing) {
-                    if (IsInitialized)
-                        Observable.DarkModeChanged -= ToggleDarkModeHandler;
+                    if (IsInitialized && _observable != null)
+                        _observable.DarkModeChanged -= ToggleDarkModeHandler;
                     OnDispose();
+                    _observable = null;
                 }
                 _disposed = true;
             }
@@ -97,5 +103,7 @@ namespace CommonLib.Win.DarkMode {
         /// Invokes when Enabled is changed.
         /// </summary>
         public event EventHandler EnabledChanged;
+
+        private IDarkModeObservable _observable = null;
     }
 }
