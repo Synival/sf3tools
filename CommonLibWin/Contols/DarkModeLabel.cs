@@ -34,9 +34,9 @@ namespace CommonLib.Win.Controls {
 
         protected override void OnPaint(PaintEventArgs e) {
             var textFormatFlags = ToTextFormatFlags(TextAlign);
-            if (!Enabled && DisabledColor != Color.Empty) {
-                e.Graphics.Clear(Parent?.BackColor ?? Color.Empty);
-                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, DisabledColor, textFormatFlags);
+            if (DarkModeContext.Enabled) {
+                e.Graphics.Clear((BackColor != Color.Empty) ? BackColor : Parent?.BackColor ?? Color.Empty);
+                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, Enabled ? ForeColor : DisabledColor, textFormatFlags);
             }
             else
                 base.OnPaint(e);
