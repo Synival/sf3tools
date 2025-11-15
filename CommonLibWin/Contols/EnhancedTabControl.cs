@@ -10,7 +10,9 @@ namespace CommonLib.Win.Controls {
     /// TabControl with enhanced drawing.
     /// </summary>
     public class EnhancedTabControl : TabControl {
-        public EnhancedTabControl(TabAlignment tabAlignment = TabAlignment.Top) {
+        public EnhancedTabControl() : this(TabAlignment.Top) {}
+
+        public EnhancedTabControl(TabAlignment tabAlignment) {
             SuspendLayout();
 
             Alignment = tabAlignment;
@@ -167,7 +169,7 @@ namespace CommonLib.Win.Controls {
             }
         }
 
-        private bool _customPaint;
+        private bool _customPaint = false;
         /// <summary>
         /// When enabled, a custom managed paint method should be used.
         /// </summary>
