@@ -121,7 +121,7 @@ namespace SF3.Win.Views {
         public delegate Control CreateCustomChildDelegate(string name, string text);
 
         public void CreateChild(IView childView, Action<Control> onCreate = null, bool autoFill = true)
-            => CreateCustomChild(childView, onCreate, autoFill, (name, text) => new TabPage(text) { Name = name, AutoScroll = true });
+            => CreateCustomChild(childView, onCreate, autoFill, (name, text) => new DarkModeTabPage(text) { Name = name, AutoScroll = true });
 
         public void CreateCustomChild(IView childView, Action<Control> onCreate, bool autoFill, CreateCustomChildDelegate createTabDelegate) {
             if (childView == null)
