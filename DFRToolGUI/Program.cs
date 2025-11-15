@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using CommonLib.Win.DarkMode;
 using DFRLib.Win.Forms;
 
 namespace DFRTool.GUI {
@@ -11,6 +12,7 @@ namespace DFRTool.GUI {
         private static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            DarkModeContext.Observable = new StandaloneDarkModeObservable(false);
             Application.Run(new frmDFRTool());
         }
     }

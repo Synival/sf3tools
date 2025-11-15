@@ -1,3 +1,5 @@
+using CommonLib.Win.Controls;
+
 namespace DFRLib.Win.Controls {
     partial class CreateDFRControl {
         /// <summary> 
@@ -23,19 +25,19 @@ namespace DFRLib.Win.Controls {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            cbCombineAllAppendedData = new System.Windows.Forms.CheckBox();
-            cbOpenWhenGenerated = new System.Windows.Forms.CheckBox();
-            btnGenerateDFR = new System.Windows.Forms.Button();
-            labelSeparator2 = new System.Windows.Forms.Label();
-            tbOutputFile = new System.Windows.Forms.TextBox();
-            tbAlteredFile = new System.Windows.Forms.TextBox();
-            tbOriginalFile = new System.Windows.Forms.TextBox();
-            labelOutputFile = new System.Windows.Forms.Label();
-            labelSelectInputs = new System.Windows.Forms.Label();
-            labelSeparator1 = new System.Windows.Forms.Label();
-            btnOutputFile = new System.Windows.Forms.Button();
-            btnAlteredFile = new System.Windows.Forms.Button();
-            btnOriginalFile = new System.Windows.Forms.Button();
+            cbCombineAllAppendedData = new DarkModeCheckBox();
+            cbOpenWhenGenerated = new DarkModeCheckBox();
+            btnGenerateDFR = new DarkModeButton();
+            labelSeparator2 = new DarkModeLabel();
+            tbOutputFile = new DarkModeTextBox();
+            tbAlteredFile = new DarkModeTextBox();
+            tbOriginalFile = new DarkModeTextBox();
+            labelOutputFile = new DarkModeLabel();
+            labelSelectInputs = new DarkModeLabel();
+            labelSeparator1 = new DarkModeLabel();
+            btnOutputFile = new DarkModeButton();
+            btnAlteredFile = new DarkModeButton();
+            btnOriginalFile = new DarkModeButton();
             SuspendLayout();
             // 
             // cbCombineAllAppendedData
@@ -209,18 +211,18 @@ namespace DFRLib.Win.Controls {
 
         #endregion
 
-        private System.Windows.Forms.CheckBox cbCombineAllAppendedData;
-        private System.Windows.Forms.CheckBox cbOpenWhenGenerated;
-        private System.Windows.Forms.Button btnGenerateDFR;
-        private System.Windows.Forms.Label labelSeparator2;
-        private System.Windows.Forms.TextBox tbOutputFile;
-        private System.Windows.Forms.TextBox tbAlteredFile;
-        private System.Windows.Forms.TextBox tbOriginalFile;
-        private System.Windows.Forms.Label labelOutputFile;
-        private System.Windows.Forms.Label labelSelectInputs;
-        private System.Windows.Forms.Label labelSeparator1;
-        private System.Windows.Forms.Button btnOutputFile;
-        private System.Windows.Forms.Button btnAlteredFile;
-        private System.Windows.Forms.Button btnOriginalFile;
+        private DarkModeCheckBox cbCombineAllAppendedData;
+        private DarkModeCheckBox cbOpenWhenGenerated;
+        private DarkModeButton btnGenerateDFR;
+        private DarkModeLabel labelSeparator2;
+        private DarkModeTextBox tbOutputFile;
+        private DarkModeTextBox tbAlteredFile;
+        private DarkModeTextBox tbOriginalFile;
+        private DarkModeLabel labelOutputFile;
+        private DarkModeLabel labelSelectInputs;
+        private DarkModeLabel labelSeparator1;
+        private DarkModeButton btnOutputFile;
+        private DarkModeButton btnAlteredFile;
+        private DarkModeButton btnOriginalFile;
     }
 }

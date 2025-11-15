@@ -4,9 +4,10 @@ using System.Linq;
 using System.Windows.Forms;
 using DFRLib.Types;
 using System.ComponentModel;
+using SF3.Win.Forms;
 
 namespace DFRLib.Win.Forms {
-    public partial class frmDFRTool : Form {
+    public partial class frmDFRTool : DarkModeForm {
         bool _isDialogMode = true;
 
         /// <summary>

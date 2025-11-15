@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
+using CommonLib.Win.Controls;
 
 namespace DFRLib.Win.Forms
 {
@@ -31,10 +32,10 @@ namespace DFRLib.Win.Forms
         /// </summary>
         private void InitializeComponent() {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDFRTool));
-            tabCommand = new TabControl();
-            tabCommand_Apply = new TabPage();
+            tabCommand = new EnhancedTabControl();
+            tabCommand_Apply = new DarkModeTabPage();
             applyDFRControl1 = new Controls.ApplyDFRControl();
-            tabCommand_Create = new TabPage();
+            tabCommand_Create = new DarkModeTabPage();
             createDFRControl1 = new Controls.CreateDFRControl();
             tabCommand.SuspendLayout();
             tabCommand_Apply.SuspendLayout();
@@ -122,9 +123,9 @@ namespace DFRLib.Win.Forms
         }
 
         #endregion
-        private TabControl tabCommand;
-        private TabPage tabCommand_Apply;
-        private TabPage tabCommand_Create;
+        private EnhancedTabControl tabCommand;
+        private DarkModeTabPage tabCommand_Apply;
+        private DarkModeTabPage tabCommand_Create;
         private Controls.ApplyDFRControl applyDFRControl1;
         private Controls.CreateDFRControl createDFRControl1;
     }

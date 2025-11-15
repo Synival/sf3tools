@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using CommonLib.Win.Controls;
 using static CommonLib.Win.Utils.MessageUtils;
 
 namespace DFRLib.Win.Controls {
-    public partial class CreateDFRControl : UserControl {
+    public partial class CreateDFRControl : DarkModeUserControl {
         private const string c_dataReadFromEditor = "(Data Read from Editor)";
 
         public CreateDFRControl() {

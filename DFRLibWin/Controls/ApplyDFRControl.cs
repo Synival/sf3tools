@@ -4,9 +4,10 @@ using System.IO;
 using System.Windows.Forms;
 using static CommonLib.Win.Utils.MessageUtils;
 using System.ComponentModel;
+using CommonLib.Win.Controls;
 
 namespace DFRLib.Win.Controls {
-    public partial class ApplyDFRControl : UserControl {
+    public partial class ApplyDFRControl : DarkModeUserControl {
         private const string c_dataReadFromEditor           = "(Data Read from Editor)";
         private const string c_changesAppliedToEditorData   = "(Changes Applied to Editor Data)";
         private const string c_changesAppliedToInputFile = "(Changes Applied to Input File)";

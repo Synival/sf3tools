@@ -1,3 +1,5 @@
+using CommonLib.Win.Controls;
+
 namespace DFRLib.Win.Controls {
     partial class ApplyDFRControl {
         /// <summary> 
@@ -23,18 +25,18 @@ namespace DFRLib.Win.Controls {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            cbApplyToInputFile = new System.Windows.Forms.CheckBox();
-            btnApplyDFR = new System.Windows.Forms.Button();
-            labelSeparator2 = new System.Windows.Forms.Label();
-            tbOutputFile = new System.Windows.Forms.TextBox();
-            tbDFRFile = new System.Windows.Forms.TextBox();
-            labelSelectOutputDestination = new System.Windows.Forms.Label();
-            labelSeparator1 = new System.Windows.Forms.Label();
-            btnOutputFile = new System.Windows.Forms.Button();
-            btnDFRFile = new System.Windows.Forms.Button();
-            tbInputFile = new System.Windows.Forms.TextBox();
-            btnInputFile = new System.Windows.Forms.Button();
-            labelSelectInputFiles = new System.Windows.Forms.Label();
+            cbApplyToInputFile = new DarkModeCheckBox();
+            btnApplyDFR = new DarkModeButton();
+            labelSeparator2 = new DarkModeLabel();
+            tbOutputFile = new DarkModeTextBox();
+            tbDFRFile = new DarkModeTextBox();
+            labelSelectOutputDestination = new DarkModeLabel();
+            labelSeparator1 = new DarkModeLabel();
+            btnOutputFile = new DarkModeButton();
+            btnDFRFile = new DarkModeButton();
+            tbInputFile = new DarkModeTextBox();
+            btnInputFile = new DarkModeButton();
+            labelSelectInputFiles = new DarkModeLabel();
             SuspendLayout();
             // 
             // cbApplyToInputFile
@@ -193,17 +195,17 @@ namespace DFRLib.Win.Controls {
 
         #endregion
 
-        private System.Windows.Forms.CheckBox cbApplyToInputFile;
-        private System.Windows.Forms.Button btnApplyDFR;
-        private System.Windows.Forms.Label labelSeparator2;
-        private System.Windows.Forms.TextBox tbOutputFile;
-        private System.Windows.Forms.TextBox tbDFRFile;
-        private System.Windows.Forms.Label labelSelectOutputDestination;
-        private System.Windows.Forms.Label labelSeparator1;
-        private System.Windows.Forms.Button btnOutputFile;
-        private System.Windows.Forms.Button btnDFRFile;
-        private System.Windows.Forms.TextBox tbInputFile;
-        private System.Windows.Forms.Button btnInputFile;
-        private System.Windows.Forms.Label labelSelectInputFiles;
+        private DarkModeCheckBox cbApplyToInputFile;
+        private DarkModeButton btnApplyDFR;
+        private DarkModeLabel labelSeparator2;
+        private DarkModeTextBox tbOutputFile;
+        private DarkModeTextBox tbDFRFile;
+        private DarkModeLabel labelSelectOutputDestination;
+        private DarkModeLabel labelSeparator1;
+        private DarkModeButton btnOutputFile;
+        private DarkModeButton btnDFRFile;
+        private DarkModeTextBox tbInputFile;
+        private DarkModeButton btnInputFile;
+        private DarkModeLabel labelSelectInputFiles;
     }
 }
