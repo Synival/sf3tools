@@ -9,9 +9,31 @@ namespace CommonLib.Win.Controls {
             base.OnHandleCreated(e);
             if (DarkModeContext == null) {
                 DarkModeContext = new DarkModeControlContext<DarkModeLabel>(this);
+
+                OriginalBorderStyle = BorderStyle;
+                IsSeparator = (Height == 2 && BorderStyle == BorderStyle.Fixed3D && Text == string.Empty);
+
                 DarkModeContext.EnabledChanged += (s, e) => {
                     DisabledColor = DarkModeContext.Enabled ? DarkModeColors.DisabledColor : Color.Empty;
+
+                    if (OriginalBorderStyle != BorderStyle.None && BorderStyle != BorderStyle.FixedSingle) {
+                        if (DarkModeContext.Enabled) {
+                            if (IsSeparator) {
+                                BackColor = DarkModeColors.SeparatorColor;
+                                Height = 1;
+                                BeginInvoke(() => BorderStyle = BorderStyle.None);
+                            }
+                            else
+                                BeginInvoke(() => BorderStyle = BorderStyle.FixedSingle);
+                        }
+                        else {
+                            if (IsSeparator)
+                                Height = 2;
+                            BeginInvoke(() => BorderStyle = OriginalBorderStyle);
+                        }
+                    }
                 };
+
                 DarkModeContext.Init();
                 DarkModeContext.OriginalBackColor = DefaultBackColor;
             }
@@ -43,6 +65,9 @@ namespace CommonLib.Win.Controls {
         }
 
         public Color DisabledColor { get; set; } = Color.Empty;
+        public BorderStyle OriginalBorderStyle { get; set; }
+        public bool IsSeparator { get; set; }
+
         private DarkModeControlContext<DarkModeLabel> DarkModeContext { get; set; }
     }
 }

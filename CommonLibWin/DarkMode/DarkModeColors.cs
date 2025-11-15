@@ -11,6 +11,7 @@ namespace CommonLib.Win.DarkMode {
         public static readonly Color ForeColor = Color.FromArgb(0xC0, 0xC0, 0xC0);
         public static readonly Color DisabledColor = MathHelpers.Lerp(BackColor, ForeColor, 0.5f);
         public static readonly Color BorderColor = Color.FromArgb(0x40, 0x40, 0x40);
+        public static readonly Color SeparatorColor = Color.FromArgb(0x30, 0x30, 0x30);
 
         // Highlighted colors
         public static readonly Color HighlightedBackColor = Color.FromArgb(0x60, 0x60, 0x60);

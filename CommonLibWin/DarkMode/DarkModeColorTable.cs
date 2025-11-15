@@ -6,9 +6,9 @@ namespace CommonLib.Win.DarkMode {
     public class DarkModeColorTable : ProfessionalColorTable {
         // Background colors
         public override Color ToolStripDropDownBackground => DarkModeColors.BackColor;
-        public override Color ImageMarginGradientBegin  => DarkModeColors.ImageMarginColor;
+        public override Color ImageMarginGradientBegin => DarkModeColors.ImageMarginColor;
         public override Color ImageMarginGradientMiddle => DarkModeColors.ImageMarginColor;
-        public override Color ImageMarginGradientEnd    => DarkModeColors.ImageMarginColor;
+        public override Color ImageMarginGradientEnd => DarkModeColors.ImageMarginColor;
         public override Color CheckBackground => DarkModeColors.HalfHighlightedBackColor;
 
         // Selected colors
@@ -50,5 +50,7 @@ namespace CommonLib.Win.DarkMode {
         // Misc. colors
         public override Color GripLight => DarkModeColors.BorderColor;
         public override Color GripDark => Utils.MathHelpers.Lerp(DarkModeColors.BackColor, GripLight, 0.50f);
+        public override Color SeparatorLight => DarkModeColors.SeparatorColor;
+        public override Color SeparatorDark => DarkModeColors.SeparatorColor;
     };
 }
