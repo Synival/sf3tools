@@ -31,7 +31,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelsByMemoryAddressByCollection.Clear();
             SGL_ModelsByMemoryAddressByCollection.Clear();
 
-            Models = null;
+            ModelInstances = null;
         }
 
         private void InitDictsForType(ModelCollectionType collectionType) {
@@ -92,11 +92,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (mpdFile?.ModelCollections == null)
                 return;
 
-            var modelsList = new List<ModelBase>();
-            foreach (var models in mpdFile.ModelCollections) {
-                if (models.CollectionType != ModelCollectionType.Chunk19Model &&
-                    models.CollectionType != ModelCollectionType.PrimaryModels &&
-                    models.CollectionType != ModelCollectionType.Chunk1Model)
+            var modelInstanceList = new List<ModelInstanceBase>();
+            foreach (var mc in mpdFile.ModelCollections) {
+                if (mc.CollectionType != ModelCollectionType.Chunk19Model &&
+                    mc.CollectionType != ModelCollectionType.PrimaryModels &&
+                    mc.CollectionType != ModelCollectionType.Chunk1Model)
                 {
                     continue;
                 }
@@ -104,7 +104,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 // There is a function that scans for models with the tag '2000' and forcibly changes all the textures
                 // in their PDATAs to be semi-transparent. Yes, this is redundant to have on the *model* instead of the *PDATA*,
                 // so who knows why it works this way.
-                var modelsWith2000Tag = ApplyShadowTags ? models.ModelTable
+                var modelsWith2000Tag = ApplyShadowTags ? mc.ModelInstanceTable
                     .Where(x => x.Tag >= 2000 && x.Tag < 2100)
                     .SelectMany(x => x.PDatas)
                     .Select(x => x.Value)
@@ -114,7 +114,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 // There are some (usually) bright-red models in Scenario 3 that are removed when
                 // the 3000 tag is present. They are used to crop out models so the ground texture (VDP2) is visible instead.
-                var modelsWith3000Tag = ApplyHideTags ? models.ModelTable
+                var modelsWith3000Tag = ApplyHideTags ? mc.ModelInstanceTable
                     .Where(x => x.Tag == 3000)
                     .SelectMany(x => x.PDatas)
                     .Select(x => x.Value)
@@ -122,43 +122,43 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .ToHashSet()
                     : [];
 
-                InitDictsForType(models.CollectionType);
-                var sglModelsByAddress = SGL_ModelsByMemoryAddressByCollection[models.CollectionType];
+                InitDictsForType(mc.CollectionType);
+                var sglModelsByAddress = SGL_ModelsByMemoryAddressByCollection[mc.CollectionType];
 
-                if (models.ModelTable != null)
-                    modelsList.AddRange(models.ModelTable.Rows);
-                if (models.MovableModelTable != null)
-                    modelsList.AddRange(models.MovableModelTable.Rows);
+                if (mc.ModelInstanceTable != null)
+                    modelInstanceList.AddRange(mc.ModelInstanceTable.Rows);
+                if (mc.MovableModelTable != null)
+                    modelInstanceList.AddRange(mc.MovableModelTable.Rows);
 
-                var uniquePData0Addresses = modelsList
+                var uniquePData0Addresses = modelInstanceList
                     .Select(x => x.PData0)
                     .Where(x => x != 0)
                     .Distinct()
                     .ToArray();
 
-                var texCollection = GetTextureCollection(models.CollectionType);
+                var texCollection = GetTextureCollection(mc.CollectionType);
                 var texturesById = GetTexturesByID(mpdFile, texCollection);
                 var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
                 foreach (var address in uniquePData0Addresses) {
                     var sglModel = sglModelsByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
                     if (sglModel == null) {
-                        var pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address, out var mc);
+                        var pdata = mc.PDatasByMemoryAddress.TryGetValue(address, out var pdataOut) ? pdataOut : null;
                         sglModelsByAddress[address] = sglModel = (pdata != null) ? mc.MakeSGLModel(pdata) : null;
                     }
                     if (sglModel == null)
                         continue;
 
                     // Don't render movable models; they're not placed on the map in that way.
-                    if (!models.IsMovableModelCollection) {
+                    if (!mc.IsMovableModelCollection) {
                         bool isForcedSemiTransparent = modelsWith2000Tag.Contains(address);
                         bool isHideMesh = modelsWith3000Tag.Contains(address);
-                        CreateAndAddQuadModels(mpdFile, models.CollectionType, address, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
+                        CreateAndAddQuadModels(mpdFile, mc.CollectionType, address, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
                     }
                 }
             }
 
-            Models = modelsList.ToArray();
+            ModelInstances = modelInstanceList.ToArray();
         }
 
         public void Update(IMPD_File mpdFile, ModelCollection models, uint pdataAddr, SGL_Model sglModel,
@@ -179,7 +179,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             CreateAndAddQuadModels(mpdFile, models.CollectionType, pdataAddr, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 
-            var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
+            var model = new ModelInstance(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
             model.PData0 = pdataAddr;
             model.PositionX = -32 * 32;
             model.PositionZ = -32 * 32;
@@ -190,7 +190,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             model.ScaleY = scaleY;
             model.ScaleZ = scaleZ;
 
-            Models = [model];
+            ModelInstances = [model];
         }
 
         private TValue GetFromAnyCollection<TValue>(
@@ -391,7 +391,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public Dictionary<ModelCollectionType, Dictionary<uint, ModelGroup>> ModelsByMemoryAddressByCollection { get; } = [];
         public Dictionary<ModelCollectionType, Dictionary<uint, SGL_Model>> SGL_ModelsByMemoryAddressByCollection { get; } = [];
-        public ModelBase[] Models { get; private set; }
+        public ModelInstanceBase[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;
         public bool ApplyHideTags { get; set; } = false;

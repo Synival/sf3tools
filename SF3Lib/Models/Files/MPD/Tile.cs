@@ -328,10 +328,10 @@ namespace SF3.Models.Files.MPD {
             if (modelCollection == null)
                 return false;
 
-            if (TreeModelID >= modelCollection.ModelTable.Length)
+            if (TreeModelID >= modelCollection.ModelInstanceTable.Length)
                 return false;
 
-            var model = modelCollection.ModelTable[TreeModelID.Value];
+            var model = modelCollection.ModelInstanceTable[TreeModelID.Value];
 
             // Simply place it really far off the map.
             model.PositionX -= 4096;
@@ -372,7 +372,7 @@ namespace SF3.Models.Files.MPD {
                 return false;
 
             // Look for any tree that doesn't have an assigned tile.
-            var model = modelCollection.ModelTable
+            var model = modelCollection.ModelInstanceTable
                 .FirstOrDefault(x => x.PData0 == pdata.RamAddress && x.AlwaysFacesCamera && !associatedModels.Contains(x.ID));
             if (model == null)
                 return false;

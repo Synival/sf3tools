@@ -67,11 +67,11 @@ namespace SF3.Models.Files.MPD {
                 MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address, CollectionType);
             else {
                 ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", Address + 0x0000);
-                ModelTable = ModelTable.Create(Data, "Models", Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other, CollectionType);
+                ModelInstanceTable = ModelInstanceTable.Create(Data, "ModelInstances", Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other, CollectionType);
             }
 
             var pdataAddressesPre =
-                (ModelTable != null) ? ModelTable
+                (ModelInstanceTable != null) ? ModelInstanceTable
                     .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
                 : MovableModelTable
                     .Select(x => new { PDataAddress = x.PData0, Index = 0 });
@@ -231,7 +231,7 @@ namespace SF3.Models.Files.MPD {
 
             var tables =
                 new List<ITable>() {
-                    ModelTable,
+                    ModelInstanceTable,
                     MovableModelTable,
                     PDataTable,
                     CollisionPointTable,
@@ -303,7 +303,7 @@ namespace SF3.Models.Files.MPD {
         public ModelsHeader ModelsHeader { get; private set; }
 
         [BulkCopyRecurse]
-        public ModelTable ModelTable { get; private set; }
+        public ModelInstanceTable ModelInstanceTable { get; private set; }
 
         [BulkCopyRecurse]
         public MovableModelTable MovableModelTable { get; private set; }

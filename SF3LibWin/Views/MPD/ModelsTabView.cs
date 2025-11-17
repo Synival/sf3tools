@@ -6,10 +6,10 @@ using SF3.Models.Tables.MPD.TextureCollection;
 namespace SF3.Win.Views.MPD {
     public class ModelsTabView : TabView {
         public ModelsTabView(string name, IMPD_File model) : base(name) {
-            var allModels = model.ModelCollections.Where(x => x != null).Select(x => x.ModelTable).ToList();
+            var allModelInstances = model.ModelCollections.Where(x => x != null).Select(x => x.ModelInstanceTable).ToList();
             var allPDatas = model.ModelCollections.Where(x => x != null).Select(x => x.PDataTable).ToList();
 
-            AllModelsTable = AllModelsTable.Create("AllModelInstances", allModels);
+            AllModelInstancesTable = AllModelInstancesTable.Create("AllModelInstances", allModelInstances);
             AllPDatasTable = AllPDatasTable.Create("AllPDatas", allPDatas);
             Model = model;
         }
@@ -19,14 +19,14 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new ModelTableView("Models", Model, AllModelsTable, ngc));
+            CreateChild(new ModelTableView("Model Instances", Model, AllModelInstancesTable, ngc));
             CreateChild(new PDataTableView("PDATAs", Model, AllPDatasTable, ngc));
 
             return Control;
         }
 
         public IMPD_File Model { get; }
-        public AllModelsTable AllModelsTable { get; }
+        public AllModelInstancesTable AllModelInstancesTable { get; }
         public AllPDatasTable AllPDatasTable { get; }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
+using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public abstract class ModelBase : Struct {
+    public abstract class ModelInstanceBase : Struct, IMPD_ModelInstance {
         protected readonly int _pdata0Address;
         protected readonly int _positionXAddress;
         protected readonly int _positionYAddress;
@@ -16,7 +17,7 @@ namespace SF3.Models.Structs.MPD.Model {
         protected readonly int _scaleYAddress;
         protected readonly int _scaleZAddress;
 
-        public ModelBase(IByteData data, int id, string name, int address, int positionXOffset, int size, ModelCollectionType collectionType)
+        public ModelInstanceBase(IByteData data, int id, string name, int address, int positionXOffset, int size, ModelCollectionType collectionType)
         : base(data, id, name, address, size) {
             CollectionType = collectionType;
 
@@ -34,6 +35,11 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.5f, minWidth: 120)]
         public ModelCollectionType CollectionType { get; }
+
+        public int ModelIndex {
+            get => (int) PData0;
+            set => PData0 = (uint) value;
+        }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata0Address), displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]
@@ -105,6 +111,8 @@ namespace SF3.Models.Structs.MPD.Model {
             set => Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
         }
 
+        public abstract ushort Tag { get; set; }
+        public abstract ushort Flags { get; set; }
         public abstract bool AlwaysFacesCamera { get; set; }
         public abstract ModelDirectionType OnlyVisibleFromDirection { get; set; }
     }

@@ -944,7 +944,7 @@ namespace SF3.Models.Files.MPD {
 
         private struct TreeModelInfo {
             public ModelCollection ModelCollection;
-            public Structs.MPD.Model.Model Model;
+            public ModelInstance ModelInstance;
             public VECTOR TilePosition;
             public Tile Tile;
             public float Distance;
@@ -959,7 +959,7 @@ namespace SF3.Models.Files.MPD {
                 if (mc == null || !mc.ChunkIndex.HasValue)
                     continue;
 
-                foreach (var model in mc.ModelTable) {
+                foreach (var model in mc.ModelInstanceTable) {
                     try {
                         // Trees always face the camera.
                         if (!model.AlwaysFacesCamera)
@@ -997,7 +997,7 @@ namespace SF3.Models.Files.MPD {
                         // Looks like a tree -- add it to the list.
                         treeModels.Add(new TreeModelInfo() {
                             ModelCollection = mc,
-                            Model = model,
+                            ModelInstance = model,
                             TilePosition = tilePosition,
                             Tile = tile,
                             Distance = distance
@@ -1020,7 +1020,7 @@ namespace SF3.Models.Files.MPD {
                 if (tree.Tile.TreeModelID.HasValue)
                     continue;
                 tree.Tile.TreeModelChunkIndex = tree.ModelCollection.ChunkIndex;
-                tree.Tile.TreeModelID = tree.Model.ID;
+                tree.Tile.TreeModelID = tree.ModelInstance.ID;
             }
         }
 

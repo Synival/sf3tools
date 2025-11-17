@@ -271,7 +271,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (models?.ModelsByMemoryAddressByCollection == null)
                 return;
 
-            var modelsWithGroups = models.Models
+            var modelsWithGroups = models.ModelInstances
                 .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddressByCollection[x.CollectionType].TryGetValue(x.PData0, out ModelGroup pd) ? pd : null })
                 .Where(x => x.ModelGroup != null)
                 .Where(x => {
@@ -398,7 +398,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             bool[] modelDirectionsFacingCamera,
             bool transparentPass
         ) {
-            if (models?.Models == null)
+            if (models?.ModelInstances == null)
                 return;
 
             general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? 1 : 0);
@@ -411,7 +411,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
             using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
             using (general.ObjectShader.Use()) {
-                var modelsWithGroups = models.Models
+                var modelsWithGroups = models.ModelInstances
                     .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddressByCollection[x.CollectionType].TryGetValue(x.PData0, out ModelGroup pd) ? pd : null })
                     .Where(x => x.ModelGroup != null)
                     .Where(x => {
@@ -561,10 +561,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             float cameraPitch,
             bool[] modelDirectionsFacingCamera
         ) {
-            if (models?.Models == null)
+            if (models?.ModelInstances == null)
                 return;
 
-            foreach (var model in models.Models) {
+            foreach (var model in models.ModelInstances) {
                 var direction = model.OnlyVisibleFromDirection;
                 if (!(direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction]))
                     continue;
@@ -652,8 +652,8 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
 
-        private Dictionary<ModelBase, Matrix4?> _modelMatricesByModel = [];
-        private Dictionary<ModelBase, Matrix3?> _normalMatricesByModel = [];
+        private Dictionary<ModelInstanceBase, Matrix4?> _modelMatricesByModel = [];
+        private Dictionary<ModelInstanceBase, Matrix3?> _normalMatricesByModel = [];
 
         public void InvalidateModelMatrices() {
             _normalMatricesByModel.Clear();
@@ -661,9 +661,9 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public void InvalidateSpriteMatrices(ModelResources models) {
-            if (models?.Models == null)
+            if (models?.ModelInstances == null)
                 return;
-            var spriteModels = models.Models.Where(x => x.AlwaysFacesCamera).ToList();
+            var spriteModels = models.ModelInstances.Where(x => x.AlwaysFacesCamera).ToList();
             foreach (var sm in spriteModels) {
                 _modelMatricesByModel.Remove(sm);
                 _normalMatricesByModel.Remove(sm);
@@ -672,7 +672,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private void SetModelAndNormalMatricesForModel(
             ModelResources models,
-            ModelBase model,
+            ModelInstanceBase model,
             Shader shader,
             RendererOptions options,
             float cameraYaw,

@@ -11,9 +11,9 @@ namespace SF3.Win.Views {
             MPD_File = mpdFile;
         }
 
-        public Model3DView(string name, IMPD_File mpdFile, Model model) : base(name) {
+        public Model3DView(string name, IMPD_File mpdFile, ModelInstance modelInstance) : base(name) {
             MPD_File = mpdFile;
-            _model = model;
+            _modelInstance = modelInstance;
             UpdateSGL_Model();
         }
 
@@ -33,12 +33,12 @@ namespace SF3.Win.Views {
 
         public IMPD_File MPD_File { get; }
 
-        private Model _model = null;
-        public Model Model {
-            get => _model;
+        private ModelInstance _modelInstance = null;
+        public ModelInstance Model {
+            get => _modelInstance;
             set {
-                if (value != _model) {
-                    _model = value;
+                if (value != _modelInstance) {
+                    _modelInstance = value;
                     UpdateSGL_Model();
 
                     if (Control != null)
@@ -48,15 +48,15 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateSGL_Model() {
-            var mc = (_model == null) ? null : MPD_File?.ModelCollections
-                ?.FirstOrDefault(x => x.CollectionType == _model.CollectionType && x.PDatasByMemoryAddress?.ContainsKey(_model.PData0) == true);
+            var mc = (_modelInstance == null) ? null : MPD_File?.ModelCollections
+                ?.FirstOrDefault(x => x.CollectionType == _modelInstance.CollectionType && x.PDatasByMemoryAddress?.ContainsKey(_modelInstance.PData0) == true);
 
             if (mc == null) {
                 _sglModel = null;
                 _pdataAddr = 0;
             }
             else {
-                var pdata = mc.PDatasByMemoryAddress[_model.PData0];
+                var pdata = mc.PDatasByMemoryAddress[_modelInstance.PData0];
                 _pdataAddr = pdata.RamAddress;
                 _sglModel = mc.MakeSGLModel(pdata);
             }
@@ -66,10 +66,10 @@ namespace SF3.Win.Views {
         private uint _pdataAddr;
 
         private void UpdateViewerControl() {
-            if (_model == null)
+            if (_modelInstance == null)
                 Control.Update(MPD_File, _pdataAddr, _sglModel);
             else
-                Control.Update(MPD_File, _pdataAddr, _sglModel, _model.AngleX, _model.AngleY, _model.AngleZ, _model.ScaleX, _model.ScaleY, _model.ScaleZ);
+                Control.Update(MPD_File, _pdataAddr, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
         }
     }
 }

@@ -5,7 +5,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class Model : ModelBase {
+    public class ModelInstance : ModelInstanceBase {
         private readonly int _pdata1Address;
         private readonly int _pdata2Address;
         private readonly int _pdata3Address;
@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _tagAddress;
         private readonly int _flagsAddress;
 
-        public Model(IByteData data, int id, string name, int address, bool hasTagsAndFlags, ModelCollectionType collectionType)
+        public ModelInstance(IByteData data, int id, string name, int address, bool hasTagsAndFlags, ModelCollectionType collectionType)
         : base(data, id, name, address, 0x20, hasTagsAndFlags ? 0x3C : 0x38, collectionType) {
             PDatas = new PDataAccessorCollection(this);
             HasTagsAndFlags = hasTagsAndFlags;
@@ -82,7 +82,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public class PDataAccessor {
-            public PDataAccessor(Model model, int index) {
+            public PDataAccessor(ModelInstance model, int index) {
                 Model = model;
                 Index = index;
             }
@@ -92,14 +92,14 @@ namespace SF3.Models.Structs.MPD.Model {
                 set => Model.Data.SetDouble(Model._pdata0Address + Index * 0x04, (int) value);
             }
 
-            public Model Model { get; }
+            public ModelInstance Model { get; }
             public int Index { get; }
         };
 
         // Helper class to index PData's
         // TODO: This should be the other way around!!!! Make an array first, and let the properties access it
         public class PDataAccessorCollection : IEnumerable<PDataAccessor> {
-            public PDataAccessorCollection(Model model) {
+            public PDataAccessorCollection(ModelInstance model) {
                 _accessors = new PDataAccessor[] {
                     new PDataAccessor(model, 0),
                     new PDataAccessor(model, 1),
@@ -128,7 +128,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_tagAddress), displayOrder: 17)]
-        public ushort Tag {
+        public override ushort Tag {
             get => HasTagsAndFlags ? (ushort) Data.GetWord(_tagAddress) : (ushort) 0;
             set {
                 if (HasTagsAndFlags)
@@ -138,7 +138,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_flagsAddress), displayOrder: 18, displayFormat: "X4")]
-        public ushort Flags {
+        public override ushort Flags {
             get => HasTagsAndFlags ? (ushort) Data.GetWord(_flagsAddress) : (ushort) 0;
             set {
                 if (HasTagsAndFlags)

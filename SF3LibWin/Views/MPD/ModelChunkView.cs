@@ -20,8 +20,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.ModelsHeader != null)
                 CreateChild(new DataModelView("Header", Model.ModelsHeader, ngc));
 
-            if (Model.ModelTable != null)
-                CreateChild(new ModelTableView("Models", MPD_File, Model.ModelTable, ngc));
+            if (Model.ModelInstanceTable != null)
+                CreateChild(new ModelTableView("Model Instances", MPD_File, Model.ModelInstanceTable, ngc));
 
             if (Model.MovableModelTable != null)
                 CreateChild(new TableView("Movable Models", Model.MovableModelTable, ngc));
