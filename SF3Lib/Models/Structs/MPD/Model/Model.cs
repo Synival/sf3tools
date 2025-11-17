@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _pdata5Address;
         private readonly int _pdata6Address;
         private readonly int _pdata7Address;
-        private readonly int _modelIdAddress;
+        private readonly int _tagAddress;
         private readonly int _flagsAddress;
 
         public Model(IByteData data, int id, string name, int address, bool hasTagsAndFlags, ModelCollectionType collectionType)
@@ -21,15 +21,15 @@ namespace SF3.Models.Structs.MPD.Model {
             PDatas = new PDataAccessorCollection(this);
             HasTagsAndFlags = hasTagsAndFlags;
 
-            _pdata1Address    = Address + 0x04; // 4 bytes
-            _pdata2Address    = Address + 0x08; // 4 bytes
-            _pdata3Address    = Address + 0x0C; // 4 bytes
-            _pdata4Address    = Address + 0x10; // 4 bytes
-            _pdata5Address    = Address + 0x14; // 4 bytes
-            _pdata6Address    = Address + 0x18; // 4 bytes
-            _pdata7Address    = Address + 0x1C; // 4 bytes
-            _modelIdAddress   = hasTagsAndFlags ? (Address + 0x38) : -1; // 2 bytes
-            _flagsAddress     = hasTagsAndFlags ? (Address + 0x3A) : -1; // 2 bytes
+            _pdata1Address = Address + 0x04; // 4 bytes
+            _pdata2Address = Address + 0x08; // 4 bytes
+            _pdata3Address = Address + 0x0C; // 4 bytes
+            _pdata4Address = Address + 0x10; // 4 bytes
+            _pdata5Address = Address + 0x14; // 4 bytes
+            _pdata6Address = Address + 0x18; // 4 bytes
+            _pdata7Address = Address + 0x1C; // 4 bytes
+            _tagAddress    = hasTagsAndFlags ? (Address + 0x38) : -1; // 2 bytes
+            _flagsAddress  = hasTagsAndFlags ? (Address + 0x3A) : -1; // 2 bytes
         }
 
         [BulkCopy]
@@ -127,12 +127,12 @@ namespace SF3.Models.Structs.MPD.Model {
         public bool HasTagsAndFlags { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_modelIdAddress), displayOrder: 17)]
+        [TableViewModelColumn(addressField: nameof(_tagAddress), displayOrder: 17)]
         public ushort Tag {
-            get => HasTagsAndFlags ? (ushort) Data.GetWord(_modelIdAddress) : (ushort) 0;
+            get => HasTagsAndFlags ? (ushort) Data.GetWord(_tagAddress) : (ushort) 0;
             set {
                 if (HasTagsAndFlags)
-                    Data.SetWord(_modelIdAddress, value);
+                    Data.SetWord(_tagAddress, value);
             }
         }
 

@@ -303,5 +303,17 @@ namespace SF3.Tests.Models.Files {
             Assert.IsFalse(data.Data.IsModified);
             Assert.IsTrue(data.IsModified);
         }
+
+        [TestMethod]
+        public void MakeSGLModels_HasExpectedModelCount() {
+            var data = MakeFile();
+            var models = data.ModelCollections.First(x => x.CollectionType == ModelCollectionType.PrimaryModels).MakeSGLModels();
+
+            Assert.AreEqual(14, models.Length);
+
+            var sarabandModel = models[7];
+            Assert.AreEqual(289, sarabandModel.Vertices.Count);
+            Assert.AreEqual(193, sarabandModel.Faces.Count);
+        }
     }
 }

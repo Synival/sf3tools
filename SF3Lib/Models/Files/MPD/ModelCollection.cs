@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
+using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
+using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
@@ -260,6 +262,30 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress - 0x252100;
             else
                 return memoryAddress;
+        }
+
+        public SGL_Model MakeSGLModel(PDataModel pdata) {
+            var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
+                .Select(x => x.Vector)
+                .ToArray();
+
+            var attrTable = AttrTablesByMemoryAddress[pdata.AttributesOffset];
+            var faces = PolygonTablesByMemoryAddress[pdata.PolygonsOffset]
+                .Select((x, i) => new SGL_ModelFace(
+                    new int[] { x.Vertex1, x.Vertex2, x.Vertex3, x.Vertex4 },
+                    new VECTOR(x.NormalX, x.NormalY, x.NormalZ),
+                    new ATTR(attrTable[i])
+                ))
+                .ToArray();
+
+            return new SGL_Model(vertices, faces);
+        }
+
+        public SGL_Model[] MakeSGLModels() {
+            return PDatasByMemoryAddress.Values
+                .Where(x => x.Index == 0)
+                .Select(x => MakeSGLModel(x))
+                .ToArray();
         }
 
         [BulkCopyRowName]
