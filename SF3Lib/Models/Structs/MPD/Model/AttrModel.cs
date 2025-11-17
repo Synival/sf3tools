@@ -1,10 +1,11 @@
 ﻿using CommonLib.Attributes;
 using CommonLib.Imaging;
+using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class AttrModel : Struct {
+    public class AttrModel : Struct, IATTR {
         public int _planeAddr;               // (Uint8) Single/double-sided flag
         public int _sortAndOptionsAddr;      // (Uint8) Options for lighting, has texture, sorting
         public int _textureNoAddr;           // (Uint16) Texture number
@@ -47,8 +48,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: null, displayOrder: 0.03f, minWidth: 100)]
         public SortOrder Sort {
-            get => (SortOrder) (Data.GetByte(_sortAndOptionsAddr) & 0x03);
-            set => Data.SetByte(_sortAndOptionsAddr, (byte) ((int) value & 0x03));
+            get => (SortOrder) (SortAndOptions & 0x03);
+            set => SortAndOptions = (byte) ((SortAndOptions & ~0x03) | ((int) value & 0x03));
         }
 
         [BulkCopy]
@@ -142,7 +143,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [TableViewModelColumn(addressField: nameof(_colorNoAddr), displayName: "HTML Color", displayOrder: 4.5f, displayFormat: "X", minWidth: 80)]
         public string HtmlColor {
-            get => PixelConversion.ABGR1555toChannels((ushort) Data.GetWord(_colorNoAddr)).ToHtmlColor();
+            get => PixelConversion.ABGR1555toChannels(ColorNo).ToHtmlColor();
             set {
                 if (!PixelConversion.IsValidHtmlColor(value))
                     return;
