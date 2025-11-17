@@ -6,6 +6,7 @@ using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
+using SF3.MPD;
 
 namespace SF3.Models.Files.MPD {
     public class Chunk3Frame {
@@ -95,7 +96,7 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderModel MPDHeader { get; }
-        MPDFlags MPDFlags { get; }
+        IMPD_Flags MPDFlags { get; }
         ChunkLocationTable ChunkLocations { get; }
         ColorTable LightPalette { get; }
         LightPosition LightPosition { get; }

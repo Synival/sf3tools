@@ -20,6 +20,7 @@ using static CommonLib.Utils.ResourceUtils;
 using CommonLib.Extensions;
 using CommonLib.Types;
 using SF3.NamedValues;
+using SF3.MPD;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -137,7 +138,7 @@ namespace SF3.Models.Files.MPD {
             var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
             var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
             MPDHeader = new MPDHeaderModel(Data, 0, "MPDHeader", headerAddr, Scenario);
-            MPDFlags = new MPDFlags(MPDHeader);
+            MPDFlags = new MPDFlagsFromHeader(MPDHeader);
             return MPDHeader;
         }
 
@@ -1612,7 +1613,7 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public MPDHeaderModel MPDHeader { get; private set; }
-        public MPDFlags MPDFlags { get; private set; }
+        public IMPD_Flags MPDFlags { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkLocationTable ChunkLocations { get; private set; }

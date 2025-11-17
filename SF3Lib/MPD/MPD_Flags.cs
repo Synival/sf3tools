@@ -1,31 +1,20 @@
 ﻿using CommonLib.Attributes;
+using SF3.Models.Structs.MPD;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD {
-    public class MPDFlags {
-        public MPDFlags(MPDHeaderModel header) {
+namespace SF3.MPD {
+    public class MPDFlagsFromHeader : IMPD_Flags {
+        public MPDFlagsFromHeader(MPDHeaderModel header) {
             Header = header;
         }
 
         public MPDHeaderModel Header { get; }
 
-        public ScenarioType Scenario => Header.Scenario;
-
-        public bool IsScenario1             => Header.IsScenario1;
-        public bool IsScenario1OrEarlier    => Header.IsScenario1OrEarlier;
-        public bool IsScenario1OrLater      => Header.IsScenario1OrLater;
-        public bool IsScenario2OrEarlier    => Header.IsScenario2OrEarlier;
-        public bool IsScenario2OrLater      => Header.IsScenario2OrLater;
-        public bool IsScenario3OrLater      => Header.IsScenario3OrLater;
-
-        public bool HasUnknown1Table        => Header.HasUnknown1Table;
-        public bool HasLightAdjustmentTable => Header.HasLightAdjustmentTable;
-        public bool HasUnknown2Table        => Header.HasUnknown2Table;
-        public bool HasGradientTable        => Header.HasGradientTable;
-        public bool HasMesh3                => Header.HasMesh3;
-        public bool HasModelsInfo           => Header.HasModelsInfo;
-        public bool HasPalette3             => Header.HasPalette3;
-        public bool HasIndexedTextures      => Header.HasIndexedTextures;
+        private bool IsScenario1          => Header.IsScenario1;
+        private bool IsScenario1OrEarlier => Header.IsScenario1OrEarlier;
+        private bool IsScenario2OrEarlier => Header.IsScenario2OrEarlier;
+        private bool IsScenario2OrLater   => Header.IsScenario2OrLater;
+        private bool IsScenario3OrLater   => Header.IsScenario3OrLater;
 
         private ushort MapFlags {
             get => Header.MapFlags;
@@ -40,18 +29,18 @@ namespace SF3.Models.Structs.MPD {
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.0002f, displayName: "(0x0002) " + nameof(UnknownMapFlag0x0002) + " (Scn1,2)", visibilityProperty: nameof(IsScenario2OrEarlier), displayGroup: "Flags")]
         public bool UnknownMapFlag0x0002 {
-            get => Scenario < ScenarioType.Scenario3 && (MapFlags & 0x0002) == 0x0002;
+            get => IsScenario2OrEarlier && (MapFlags & 0x0002) == 0x0002;
             set {
-                if (Scenario < ScenarioType.Scenario3)
+                if (IsScenario2OrEarlier)
                     MapFlags = value ? (ushort) (MapFlags | 0x0002) : (ushort) (MapFlags & ~0x0002);
             }
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.00021f, displayName: "(0x0002) " + nameof(HasSurfaceTextureRotation) + " (Scn3+)", visibilityProperty: nameof(IsScenario3OrLater), displayGroup: "Flags")]
         public bool HasSurfaceTextureRotation {
-            get => Scenario >= ScenarioType.Scenario3 && (MapFlags & 0x0002) == 0x0002;
+            get => IsScenario3OrLater && (MapFlags & 0x0002) == 0x0002;
             set {
-                if (Scenario >= ScenarioType.Scenario3)
+                if (IsScenario3OrLater)
                     MapFlags = value ? (ushort) (MapFlags | 0x0002) : (ushort) (MapFlags & ~0x0002);
             }
         }
@@ -71,7 +60,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: null, displayOrder: 0.0010f, displayName: "(0x0010 | 40) " + nameof(BackgroundImageType), minWidth: 100, displayGroup: "Flags")]
         public BackgroundImageType BackgroundImageType {
             get => BackgroundImageTypeExtensions.FromMapFlags(MapFlags);
-            set => MapFlags = (ushort) ((MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
+            set => MapFlags = (ushort) (MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags | value.ToMapFlags());
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.0020f, displayName: "(0x0020) " + nameof(UnknownMapFlag0x0020), displayGroup: "Flags")]
@@ -85,15 +74,15 @@ namespace SF3.Models.Structs.MPD {
             get => IsScenario1 && (MapFlags & 0x0080) == 0x0080;
             set {
                 if (IsScenario1)
-                    MapFlags = (ushort) ((MapFlags & ~0x0080) | (value ? 0x0080 : 0));
+                    MapFlags = (ushort) (MapFlags & ~0x0080 | (value ? 0x0080 : 0));
             }
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.0081f, displayName: "(0x0080) " + nameof(ModifyPalette1ForGradient) + " (Redundant) (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool ModifyPalette1ForGradient {
-            get => Scenario >= ScenarioType.Scenario2 && (MapFlags & 0x0080) == 0x0080;
+            get => IsScenario2OrLater && (MapFlags & 0x0080) == 0x0080;
             set {
-                if (Scenario >= ScenarioType.Scenario2)
+                if (IsScenario2OrLater)
                     MapFlags = value ? (ushort) (MapFlags | 0x0080) : (ushort) (MapFlags & ~0x0080);
             }
         }
@@ -113,7 +102,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: null, displayOrder: 0.0400f, displayName: "(0x0400 | 1000): Ground Image Type", minWidth: 100, displayGroup: "Flags")]
         public GroundImageType GroundImageType {
             get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
-            set => MapFlags = (ushort) ((MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags) | value.ToMapFlags());
+            set => MapFlags = (ushort) (MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags | value.ToMapFlags());
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.0801f, displayName: "(0x0800) " + nameof(HasCutsceneSkyBox) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
@@ -139,7 +128,7 @@ namespace SF3.Models.Structs.MPD {
             get => IsScenario2OrLater && (MapFlags & 0x2000) == 0x2000;
             set {
                 if (IsScenario2OrLater)
-                    MapFlags = (ushort) ((MapFlags & ~0x2000) | (value ? 0x2000 : 0));
+                    MapFlags = (ushort) (MapFlags & ~0x2000 | (value ? 0x2000 : 0));
             }
         }
 
@@ -148,7 +137,7 @@ namespace SF3.Models.Structs.MPD {
             get => IsScenario2OrLater && (MapFlags & 0x4000) == 0x4000;
             set {
                 if (IsScenario2OrLater)
-                    MapFlags = (ushort) (value ? (MapFlags | 0x4000) : (MapFlags & ~0x4000));
+                    MapFlags = (ushort) (value ? MapFlags | 0x4000 : MapFlags & ~0x4000);
             }
         }
 
@@ -163,7 +152,7 @@ namespace SF3.Models.Structs.MPD {
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8010f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromLowMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
         public bool Chunk1IsLoadedFromLowMemory
-            => HasModels && (IsScenario1OrEarlier ? (!HasSurfaceModel || Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists) : Chunk1IsModels);
+            => HasModels && (IsScenario1OrEarlier ? !HasSurfaceModel || Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists : Chunk1IsModels);
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8011f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromHighMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
         public bool Chunk1IsLoadedFromHighMemory
@@ -180,7 +169,7 @@ namespace SF3.Models.Structs.MPD {
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8013f, displayName: "(Derived) " + nameof(Chunk1IsModels) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Chunk1IsModels
-            => HasModels && (IsScenario1OrEarlier || (!HasSurfaceModel || Chunk20IsSurfaceModelIfExists || HasExtraChunk1ModelWithChunk21Textures));
+            => HasModels && (IsScenario1OrEarlier || !HasSurfaceModel || Chunk20IsSurfaceModelIfExists || HasExtraChunk1ModelWithChunk21Textures);
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8014f, displayName: "(Derived) " + nameof(Chunk2IsSurfaceModel) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Chunk2IsSurfaceModel

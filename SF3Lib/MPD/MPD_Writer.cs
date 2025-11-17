@@ -71,6 +71,7 @@ namespace SF3.MPD {
             var headerPos = CurrentOffset;
             WriteHeader(
                 mpd.MPDHeader,
+                mpd.MPDFlags,
                 lightPalettePos,
                 lightPositionPos,
                 unknown1Pos,
@@ -216,6 +217,7 @@ namespace SF3.MPD {
 
         public void WriteHeader(
             MPDHeaderModel header,
+            IMPD_Flags flags,
             uint? lightPalettePos,
             uint? lightPositionPos,
             uint? unknown1Pos,
