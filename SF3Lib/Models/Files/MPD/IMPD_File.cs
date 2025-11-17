@@ -95,6 +95,7 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderModel MPDHeader { get; }
+        MPDFlags MPDFlags { get; }
         ChunkLocationTable ChunkLocations { get; }
         ColorTable LightPalette { get; }
         LightPosition LightPosition { get; }

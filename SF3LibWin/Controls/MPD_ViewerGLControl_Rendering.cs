@@ -226,7 +226,7 @@ namespace SF3.Win.Controls {
                     DrawModels = DrawModels,
                     DrawSurfaceModel = DrawSurfaceModel,
                     DrawGround = DrawGround,
-                    DrawSkyBox = MPD_File?.MPDHeader?.HasCutsceneSkyBox == true && DrawSkyBox,
+                    DrawSkyBox = MPD_File?.MPDFlags?.HasCutsceneSkyBox == true && DrawSkyBox,
                     DrawGradients = DrawGradients,
                     ApplyLighting = ApplyLighting,
 
@@ -245,7 +245,7 @@ namespace SF3.Win.Controls {
 
                     DrawHelp = DrawHelp,
 
-                    UseOutsideLighting = MPD_File?.MPDHeader?.NarrowAngleBasedLightmap == true,
+                    UseOutsideLighting = MPD_File?.MPDFlags?.NarrowAngleBasedLightmap == true,
 
                     ModelsToHide = allModelsToHide,
                 },

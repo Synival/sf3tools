@@ -14,7 +14,7 @@ namespace SF3.Win.Views.MPD {
 
             var ngc = Model.NameGetterContext;
             CreateChild(new DataModelView("Header", Model.MPDHeader, ngc, displayGroups: ["Metadata", "Main"]));
-            CreateChild(new DataModelView("Map Flags", Model.MPDHeader, ngc, displayGroups: ["Flags"]));
+            CreateChild(new DataModelView("Map Flags", Model.MPDFlags, ngc, displayGroups: ["Flags"]));
 
             if (Model.LightPalette != null)
                 CreateChild(new ColorTableView("Light Palette", Model.LightPalette, Model.NameGetterContext));
