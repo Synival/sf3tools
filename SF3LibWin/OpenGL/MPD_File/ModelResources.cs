@@ -10,6 +10,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
 
@@ -92,7 +93,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (mpdFile?.ModelCollections == null)
                 return;
 
-            var modelInstanceList = new List<ModelInstanceBase>();
+            var modelInstanceList = new List<IMPD_ModelInstance>();
             foreach (var mc in mpdFile.ModelCollections) {
                 if (mc.CollectionType != ModelCollectionType.Chunk19Model &&
                     mc.CollectionType != ModelCollectionType.PrimaryModels &&
@@ -131,7 +132,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     modelInstanceList.AddRange(mc.MovableModelTable.Rows);
 
                 var uniquePData0Addresses = modelInstanceList
-                    .Select(x => x.PData0)
+                    .Select(x => (uint) x.ModelID)
                     .Where(x => x != 0)
                     .Distinct()
                     .ToArray();
@@ -390,7 +391,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public Dictionary<ModelCollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
         public Dictionary<ModelCollectionType, Dictionary<int, SGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
-        public ModelInstanceBase[] ModelInstances { get; private set; }
+        public IMPD_ModelInstance[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;
         public bool ApplyHideTags { get; set; } = false;

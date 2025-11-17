@@ -6,6 +6,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Types;
 
@@ -652,8 +653,8 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
 
-        private Dictionary<ModelInstanceBase, Matrix4?> _modelMatricesByModel = [];
-        private Dictionary<ModelInstanceBase, Matrix3?> _normalMatricesByModel = [];
+        private Dictionary<IMPD_ModelInstance, Matrix4?> _modelMatricesByModel = [];
+        private Dictionary<IMPD_ModelInstance, Matrix3?> _normalMatricesByModel = [];
 
         public void InvalidateModelMatrices() {
             _normalMatricesByModel.Clear();
@@ -672,24 +673,24 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private void SetModelAndNormalMatricesForModel(
             ModelResources models,
-            ModelInstanceBase model,
+            IMPD_ModelInstance modelInstance,
             Shader shader,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch
         ) {
-            var modelMatrix = _modelMatricesByModel.TryGetValue(model, out var modelMatrixValue) ? modelMatrixValue : null;
+            var modelMatrix = _modelMatricesByModel.TryGetValue(modelInstance, out var modelMatrixValue) ? modelMatrixValue : null;
             if (!modelMatrix.HasValue) {
                 var angleXAdjust = 0.00f;
-                var angleYAdjust = model.AlwaysFacesCamera ? (float) ((cameraYaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
+                var angleYAdjust = modelInstance.AlwaysFacesCamera ? (float) ((cameraYaw + 180.0f) / 180.0f * Math.PI) : 0.00f;
                 var scaleAdjust  = 1.00f;
 
                 var yAdjust = 0.00f;
                 var prePostAdjustY = 0.00f;
 
-                if (model.AlwaysFacesCamera && options.RotateSpritesUp) {
+                if (modelInstance.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var sglModel = models.SGL_ModelsByIDByCollection[model.CollectionType].TryGetValue(model.ModelID, out var pdataValue) ? pdataValue : null;
+                    var sglModel = models.SGL_ModelsByIDByCollection[modelInstance.CollectionType].TryGetValue(modelInstance.ModelID, out var pdataValue) ? pdataValue : null;
 
                     var topY     = sglModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var bottomY  = sglModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
@@ -702,24 +703,24 @@ namespace SF3.Win.OpenGL.MPD_File {
                 }
 
                 var newModelMatrix =
-                    Matrix4.CreateScale(model.ScaleX * scaleAdjust, model.ScaleY * scaleAdjust, model.ScaleZ * scaleAdjust) *
-                    Matrix4.CreateRotationX(model.AngleX * (float) Math.PI / -180.00f) *
+                    Matrix4.CreateScale(modelInstance.ScaleX * scaleAdjust, modelInstance.ScaleY * scaleAdjust, modelInstance.ScaleZ * scaleAdjust) *
+                    Matrix4.CreateRotationX(modelInstance.AngleX * (float) Math.PI / -180.00f) *
                     Matrix4.CreateTranslation(0, prePostAdjustY, 0) *
                     Matrix4.CreateRotationX(angleXAdjust) *
-                    Matrix4.CreateRotationY(model.AngleY * (float) Math.PI / -180.00f + angleYAdjust) *
-                    Matrix4.CreateRotationZ(model.AngleZ * (float) Math.PI / 180.00f) *
-                    Matrix4.CreateTranslation(model.PositionX / -32.0f - 32.0f, model.PositionY / -32.0f - prePostAdjustY + yAdjust, model.PositionZ / 32.0f + 32.0f);
+                    Matrix4.CreateRotationY(modelInstance.AngleY * (float) Math.PI / -180.00f + angleYAdjust) *
+                    Matrix4.CreateRotationZ(modelInstance.AngleZ * (float) Math.PI / 180.00f) *
+                    Matrix4.CreateTranslation(modelInstance.PositionX / -32.0f - 32.0f, modelInstance.PositionY / -32.0f - prePostAdjustY + yAdjust, modelInstance.PositionZ / 32.0f + 32.0f);
 
-                _modelMatricesByModel[model] = newModelMatrix;
+                _modelMatricesByModel[modelInstance] = newModelMatrix;
                 modelMatrix = newModelMatrix;
             }
 
-            var normalMatrix = _normalMatricesByModel.TryGetValue(model, out var normalMatrixValue) ? normalMatrixValue : null;
+            var normalMatrix = _normalMatricesByModel.TryGetValue(modelInstance, out var normalMatrixValue) ? normalMatrixValue : null;
             if (!normalMatrix.HasValue) {
                 var newNormalMatrix = new Matrix3(modelMatrix.Value).Inverted();
                 newNormalMatrix.Transpose();
 
-                _normalMatricesByModel[model] = newNormalMatrix;
+                _normalMatricesByModel[modelInstance] = newNormalMatrix;
                 normalMatrix = newNormalMatrix;
             }
 
