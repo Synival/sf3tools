@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using CommonLib.Arrays;
-using CommonLib.Extensions;
 using CommonLib.Utils;
-using SF3.Types;
+using SF3.Files;
 
 namespace SF3.CHR {
-    public class CHR_Writer {
-        public CHR_Writer(Stream stream) {
-            StreamStartPosition = stream.Position;
-            Stream = stream;
-        }
+    /// <summary>
+    /// Performs the writing of binary data to a CHR file.
+    /// </summary>
+    public class CHR_Writer : BinaryFileWriter {
+        public CHR_Writer(Stream stream) : base(stream) {}
 
         /// <summary>
         /// Writes a single 0x18 byte-long entry for the sprite table.
@@ -100,7 +99,7 @@ namespace SF3.CHR {
         public void WriteAnimationTable(int spriteIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
             if (spriteInfo.UnassignedAnimationTablePointerOffset.HasValue) {
-                AtPointer(spriteInfo.UnassignedAnimationTablePointerOffset.Value, (currentPos) => Stream.Write(currentPos.ToByteArray(), 0, 4));
+                AtOffset(spriteInfo.UnassignedAnimationTablePointerOffset.Value, (currentPos) => Stream.Write(currentPos.ToByteArray(), 0, 4));
                 spriteInfo.UnassignedAnimationTablePointerOffset = null;
             }
 
@@ -122,7 +121,6 @@ namespace SF3.CHR {
         /// </summary>
         /// <param name="spriteIndex">Index of the sprite to which this frame table belongs.</param>
         /// <param name="frameKey">A unique keyword for the image this represents. This can be a hash or,
-        /// <param name="aniFrameKey">An identifier for matching up animation frames, in format "FrameGroup (Dir)"</param>
         /// if the image is intentionally duplicated, any identifying string unique to this CHR.</param>
         public void WriteFrameTableFrame(int spriteIndex, string frameKey) {
             AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
@@ -158,7 +156,7 @@ namespace SF3.CHR {
             // Update existing pointers to this image.
             var frameImageInfo = GetFrameImageInfo(frameKey);
             if (frameImageInfo.UnassignedPointerOffsets.Count > 0) {
-                AtPointers(frameImageInfo.UnassignedPointerOffsets.ToArray(), (offset) => Stream.Write(offset.ToByteArray(), 0, 4));
+                AtOffsets(frameImageInfo.UnassignedPointerOffsets.ToArray(), (offset) => Stream.Write(offset.ToByteArray(), 0, 4));
                 frameImageInfo.UnassignedPointerOffsets.Clear();
             }
 
@@ -169,19 +167,9 @@ namespace SF3.CHR {
         }
 
         /// <summary>
-        /// Writes enough bytes so the position is divisible by 'alignment'.
-        /// </summary>
-        /// <param name="alignment">The number of bytes the stream's length should be visible by.</param>
-        public void WriteToAlignTo(int alignment) {
-            var pos = Stream.Position;
-            if (pos % alignment != 0)
-                Write(new byte[alignment - (pos % alignment)]);
-        }
-
-        /// <summary>
         /// Ends the CHR file by writing some necessary padding.
         /// </summary>
-        public void Finish() {
+        public override void Finish() {
             // Write an additional 4 bytes at the end.
             Write(new byte[4]);
         }
@@ -189,38 +177,9 @@ namespace SF3.CHR {
         private void AssignUnassignedFrameTablePointerToCurrentPosition(int spriteIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
             if (spriteInfo.UnassignedFrameTablePointerOffset.HasValue) {
-                AtPointer(spriteInfo.UnassignedFrameTablePointerOffset.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
+                AtOffset(spriteInfo.UnassignedFrameTablePointerOffset.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
                 spriteInfo.UnassignedFrameTablePointerOffset = null;
             }
-        }
-
-        /// <summary>
-        /// Writes arbitrary data to the stream. Should only be used when the stream position is at the end.
-        /// </summary>
-        /// <param name="bytes">Bytes to write to the stream.</param>
-        public void Write(byte[] bytes) {
-            Stream.Write(bytes, 0, bytes.Length);
-            BytesWritten += bytes.Length;
-        }
-
-        private void AtPointer(long ptr, Action<int> action) {
-            var oldPosition = Stream.Position;
-            Stream.Position = ptr;
-            action((int) (oldPosition - StreamStartPosition));
-            Stream.Position = oldPosition;
-        }
-
-        private void AtPointers(long[] ptrs, Action<int> action) {
-            var oldPosition = Stream.Position;
-            var currentPosition = oldPosition;
-            foreach (var ptr in ptrs) {
-                if (ptr != 0) {
-                    Stream.Position = currentPosition = ptr;
-                    action((int) (oldPosition - StreamStartPosition));
-                }
-            }
-            if (currentPosition != oldPosition)
-                Stream.Position = oldPosition;
         }
 
         private SpriteInfo GetSpriteInfo(int spriteIndex) {
@@ -234,10 +193,6 @@ namespace SF3.CHR {
                 return info;
             return _frameImageInfoByFrameKey[frameKey] = new FrameImageInfo();
         }
-
-        public long StreamStartPosition { get; }
-        public Stream Stream { get; }
-        public int BytesWritten { get; private set; } = 0;
 
         private class SpriteInfo {
             public long? UnassignedFrameTablePointerOffset;
