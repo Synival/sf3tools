@@ -29,7 +29,8 @@ namespace SF3.Models.Files.MPD {
         private const int c_RamAddress = 0x00290000;
         private const int c_SurfaceModelChunkSize = 0xCF00;
 
-        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) : base(data, nameContexts?[DetectScenario(data)], DetectScenario(data)) {
+        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType fallbackScenario)
+        : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario], DetectScenario(data) ?? fallbackScenario) {
             PrimaryTextureChunksFirstIndex = 6;
             PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
                 ((Scenario >= ScenarioType.Other) ? 4 : 3);
@@ -59,44 +60,49 @@ namespace SF3.Models.Files.MPD {
             ForegroundMapChunkIndex    = BackgroundChunk2Index + 4;
         }
 
-        public static MPD_File Create(IByteData data, NameGetterContext nameContext)
-            => Create(data, new Dictionary<ScenarioType, INameGetterContext>() { { nameContext.Scenario, nameContext } });
+        public static MPD_File Create(IByteData data, NameGetterContext nameContext, ScenarioType fallbackScenario)
+            => Create(data, new Dictionary<ScenarioType, INameGetterContext>() { { nameContext.Scenario, nameContext } }, fallbackScenario);
 
-        public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) {
-            var newFile = new MPD_File(data, nameContexts);
+        public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType fallbackScenario) {
+            var newFile = new MPD_File(data, nameContexts, fallbackScenario);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize MPD_File");
             return newFile;
         }
 
-        public static ScenarioType DetectScenario(IByteData data) {
-            // Get addresses we need to check.
-            var headerAddrPtr = data.GetDouble(0x0000) - c_RamAddress;
-            var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamAddress;
+        public static ScenarioType? DetectScenario(IByteData data) {
+            try {
+                // Get addresses we need to check.
+                var headerAddrPtr = data.GetDouble(0x0000) - c_RamAddress;
+                var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamAddress;
 
-            var chunk18Addr   = data.GetDouble(0x2090);
-            var chunk19Addr   = data.GetDouble(0x2098);
-            var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
-            var chunk21Addr   = data.GetDouble(0x20A8);
+                var chunk18Addr   = data.GetDouble(0x2090);
+                var chunk19Addr   = data.GetDouble(0x2098);
+                var palette3Addr  = data.GetDouble(headerAddr + 0x0044);
+                var chunk21Addr   = data.GetDouble(0x20A8);
 
-            // Determine some things about this MPD file.
-            var hasChunk18  = (chunk18Addr > 0);
-            var hasChunk19  = (chunk19Addr > 0);
-            var hasPalette3 = (palette3Addr & 0xFFFF0000) == 0x00290000;
-            var hasChunk21  = (chunk21Addr > 0);
+                // Determine some things about this MPD file.
+                var hasChunk18  = (chunk18Addr > 0);
+                var hasChunk19  = (chunk19Addr > 0);
+                var hasPalette3 = (palette3Addr & 0xFFFF0000) == 0x00290000;
+                var hasChunk21  = (chunk21Addr > 0);
 
-            // We should be able to accurately detect the scenario.
-            // Scenario 3 and the Premium Disk have the same MPD format.
-            if (hasPalette3)
-                return ScenarioType.Scenario3;
-            else if (hasChunk21)
-                return ScenarioType.Scenario2;
-            else if (hasChunk19)
-                return ScenarioType.Scenario1;
-            else if (hasChunk18)
-                return ScenarioType.Other;
-            else
-                return ScenarioType.Ship2;
+                // We should be able to accurately detect the scenario.
+                // Scenario 3 and the Premium Disk have the same MPD format.
+                if (hasPalette3)
+                    return ScenarioType.Scenario3;
+                else if (hasChunk21)
+                    return ScenarioType.Scenario2;
+                else if (hasChunk19)
+                    return ScenarioType.Scenario1;
+                else if (hasChunk18)
+                    return ScenarioType.Other;
+                else
+                    return ScenarioType.Ship2;
+            }
+            catch {
+                return null;
+            }
         }
 
         public override IEnumerable<ITable> MakeTables() {

@@ -31,7 +31,7 @@ namespace SF3.Tests.Models.Files {
             };
 
             var data = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(getResourcePath())));
-            return MPD_File.Create(data, nameGetters);
+            return MPD_File.Create(data, nameGetters, scenario);
         }
 
         [TestMethod]

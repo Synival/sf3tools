@@ -113,7 +113,7 @@ namespace MPD_Analyzer {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
                             var header = mpdFile.MPDHeader;
                             var chunkHeaders = mpdFile.ChunkLocations;
                             var mapFlags = mpdFile.MPDHeader.MapFlags;

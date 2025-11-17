@@ -11,7 +11,7 @@ namespace SF3.Tests.MPD {
         public void WriteMPD_WithScenario1VoidFile_ProducesSameData() {
             var filePath = TestDataPaths.ResourcePath(ScenarioType.Scenario1, "VOID.MPD")!;
             var fileData = File.ReadAllBytes(filePath);
-            var file = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(fileData)), new NameGetterContext(ScenarioType.Scenario1));
+            var file = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(fileData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
 
             byte[] outputData = null;
             using (var memoryStream = new MemoryStream()) {

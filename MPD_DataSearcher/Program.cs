@@ -93,7 +93,7 @@ namespace MPD_DataSearcher {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
                             var mpdFileData = mpdFile.Data.Data;
 
                             var fileStr = GetFileString(scenario, file, mpdFile);

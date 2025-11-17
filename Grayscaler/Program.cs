@@ -35,7 +35,7 @@ namespace Grayscaler {
                 var byteData = new ByteData(new ByteArray(File.ReadAllBytes(fileIn)));
 
                 // Create an MPD file that works with our new ByteData.
-                var mpdFile = MPD_File.Create(byteData, nameGetters);
+                var mpdFile = MPD_File.Create(byteData, nameGetters, scenario);
 
                 // Gather all textures into one collection.
                 var textures1 = (mpdFile.TextureCollections == null) ? [] : mpdFile.TextureCollections

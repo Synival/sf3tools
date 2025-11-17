@@ -192,7 +192,7 @@ namespace SF3.Utils {
                 case SF3FileType.X031:    return X031_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X033:    return X033_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario);
-                case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts);
+                case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts, scenario);
                 case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                 case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
                 case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);

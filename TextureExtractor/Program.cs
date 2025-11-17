@@ -87,7 +87,7 @@ namespace TextureExtractor {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
                             // Let's only gather tiles used in surface character rows.
                             if (mpdFile.SurfaceModel == null) {
                                 Console.WriteLine("No surface textures");
