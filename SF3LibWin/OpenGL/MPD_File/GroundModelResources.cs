@@ -60,7 +60,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var uvWidth  = size / (Texture.Width  / 32.0f);
             var uvHeight = size / (Texture.Height / 32.0f);
 
-            var theta = (header.GroundAngle - 0.25f) * (float) Math.PI * 2.0f;
+            var theta = header.GroundAngle * (float) Math.PI * 2.0f;
             var sin = (float) Math.Sin(theta);
             var cos = (float) Math.Cos(theta);
 
