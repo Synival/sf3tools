@@ -16,7 +16,7 @@ namespace SF3.Tests.MPD {
             byte[] outputData = null;
             using (var memoryStream = new MemoryStream()) {
                 var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
-                writer.WriteMPD(file);
+                writer.Write(file);
                 outputData = memoryStream.ToArray();
             }
 

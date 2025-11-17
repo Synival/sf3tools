@@ -1,7 +1,11 @@
 using System;
 using System.IO;
+using CommonLib.SGL;
 using SF3.Files;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD;
+using SF3.Models.Tables;
+using SF3.Models.Tables.MPD;
 using SF3.Types;
 
 namespace SF3.MPD {
@@ -21,10 +25,256 @@ namespace SF3.MPD {
         /// Writes an entire MPD_File's contents to the stream.
         /// </summary>
         /// <param name="mpd">The MPD_File to write to the stream.</param>
-        public void WriteMPD(MPD_File mpd) {
-            // TODO: write data table by table.
-            Write(mpd.Data.GetDataCopyOrReference());
+        public void Write(MPD_File mpd) {
+            // VOID.MPD tables:
+            // X 0x0000: Offset of pointer to header (int), followed by 8 bytes of 0x00
+            // X 0x000C: Light palette
+            // X 0x004C: Light positions
+            // X 0x0050: Unknown1
+            // X 0x0090: Model switch groups
+            // X 0x0094: Texture animations
+            // X 0x0096: Unknown2
+            // X 0x0098: Ground animation
+            // X 0x009A: Boundaries
+            // X 0x00AA: Texture anim alt
+            // X 0x00AC: Palette 1 (actually header)
+            // X 0x00AC: Palette 2 (also actually header)
+            // - 0x00AC: Header
+            // - 0x0104: Pointer to header
+            // - 0x2000: Chunk table
+            // - 0x2100: Model chunk
+            // - 0x2898: Surface (compressed)
+            // - 0x2C3C: Textures 1
+            // - 0x32B0: Textures 2
+            // - 0x32B8: Textures 3
+            // - 0x32C0: Textures 4
+            // - 0x32C8: Textures 5
+            // - 0x32D0: Chest 1 Textures
+            // - 0x3DB0: Chest 2 Textures
+            // - 0x46F4: Barrel Textures
+
+            Write(new byte[0x0C]);
+
+            var lightPalettePos      = WriteDataOrNull(mpd.LightPalette);
+            var lightPositionPos     = WriteDataOrNull(mpd.LightPosition);
+            var unknown1Pos          = WriteDataOrNull(mpd.Unknown1Table);
+            var modelSwitchGroupsPos = WriteDataOrNull(mpd.ModelSwitchGroupsTable);
+            var textureAnimationsPos = WriteDataOrNull(mpd.TextureAnimations);
+            var unknown2Pos          = WriteDataOrNull(mpd.Unknown2Table);
+            var groundAnimationPos   = WriteDataOrNull(mpd.GroundAnimationTable);
+            var boundariesPos        = WriteDataOrNull(mpd.BoundariesTable);
+            var textureAnimAltPos    = WriteDataOrNull(mpd.TextureAnimationsAlt);
+            var palette1Pos          = WriteDataOrNull(mpd.PaletteTables?.Length >= 1 ? mpd.PaletteTables[0] : null);
+            var palette2Pos          = WriteDataOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
+
+            var headerPos = CurrentOffset;
+            WriteHeader(
+                mpd.MPDHeader,
+                lightPalettePos,
+                lightPositionPos,
+                unknown1Pos,
+                modelSwitchGroupsPos,
+                textureAnimationsPos,
+                unknown2Pos,
+                groundAnimationPos,
+                textureAnimAltPos,
+                palette1Pos,
+                palette2Pos,
+                boundariesPos
+            );
+
+            var headerPtrPos = CurrentOffset;
+            Write((uint) (headerPos + 0x290000));
+
+            AtOffset(0, _ => Write((uint) (headerPtrPos + 0x290000)));
+            Write(new byte[0x2000 - CurrentOffset]);
+
+            // TODO: write the actual chunk table
+            for (int i = 0; i < 20; i++) {
+                Write(0x292100);
+                Write((uint) 0);
+            }
+            Write(new byte[12 * 0x08]);
+
             Finish();
+        }
+
+        private uint? WriteDataOrNull<T>(T data) where T : class {
+            if (data == null)
+                return null;
+            var pos = (uint) CurrentOffset;
+
+            switch (data) {
+                case ColorTable ct:              Write(ct);   break;
+                case LightPosition lp:           Write(lp);   break;
+                case UnknownUInt32Table ui32:    Write(ui32); break;
+                case UnknownUInt16Table ui16:    Write(ui16); break;
+                case UnknownUInt8Table ui8:      Write(ui8);  break;
+                case ModelSwitchGroupsTable msg: Write(msg);  break;
+                case TextureAnimationTable ta:   Write(ta);   break;
+                case BoundaryTable bt:           Write(bt);   break;
+                case TextureIDTable tid:         Write(tid);  break;
+            }
+
+            WriteToAlignTo(2);
+            return pos;
+        }
+
+        public void Write(byte value)
+            => Write(new byte[] { value });
+
+        public void Write(ushort[] values) {
+            foreach (var value in values)
+                Write(value);
+        }
+
+        public void Write(ushort value) {
+            Write(new byte[] {
+                (byte) (value >> 8),
+                (byte) value
+            });
+        }
+
+        public void Write(uint[] values) {
+            foreach (var value in values)
+                Write(value);
+        }
+
+        public void Write(short value)
+            => Write((ushort) value);
+
+        public void Write(short[] values) {
+            foreach (var value in values)
+                Write(value);
+        }
+
+        public void Write(uint value) {
+            Write(new byte[] {
+                (byte) (value >> 24),
+                (byte) (value >> 16),
+                (byte) (value >> 8),
+                (byte) value
+            });
+        }
+
+        public void Write(int[] values) {
+            foreach (var value in values)
+                Write(value);
+        }
+
+        public void Write(int value)
+            => Write((uint) value);
+
+        public void Write(ColorTable colorTable) {
+            foreach (var color in colorTable)
+                Write(color.ColorABGR1555);
+        }
+
+        public void Write(LightPosition lightPosition) {
+            Write(lightPosition.Pitch);
+            Write(lightPosition.Yaw);
+        }
+
+        public void Write(UnknownUInt8Table table) {
+            foreach (var value in table)
+                Write(value.Value);
+            if (table.ReadUntil.HasValue)
+                Write(table.ReadUntil.Value);
+        }
+
+        public void Write(UnknownUInt16Table table) {
+            foreach (var value in table)
+                Write(value.Value);
+            if (table.ReadUntil.HasValue)
+                Write(table.ReadUntil.Value);
+        }
+
+        public void Write(UnknownUInt32Table table) {
+            foreach (var value in table)
+                Write(value.Value);
+            if (table.ReadUntil.HasValue)
+                Write(table.ReadUntil.Value);
+        }
+
+        public void Write(ModelSwitchGroupsTable modelSwitchGroups) {
+            // TODO: Write the things
+            Write(0xFFFFFFFF);
+        }
+
+        public void Write(TextureAnimationTable textureAnimations) {
+            // TODO: Write the things
+            if (textureAnimations.Is32Bit)
+                Write((uint) textureAnimations.TextureEndId);
+            else
+                Write((ushort) textureAnimations.TextureEndId);
+        }
+
+        public void Write(BoundaryTable boundaries) {
+            foreach (var boundary in boundaries) {
+                Write(boundary.X1);
+                Write(boundary.Z1);
+                Write(boundary.X2);
+                Write(boundary.Z2);
+            }
+        }
+
+        public void Write(TextureIDTable textureIds) {
+            foreach (var textureId in textureIds)
+                Write(textureId.TextureID);
+            Write((ushort) 0xFFFF);
+        }
+
+        public void WriteHeader(
+            MPDHeaderModel header,
+            uint? lightPalettePos,
+            uint? lightPositionPos,
+            uint? unknown1Pos,
+            uint? modelSwitchGroupsPos,
+            uint? textureAnimationsPos,
+            uint? unknown2Pos,
+            uint? groundAnimationPos,
+            uint? textureAnimAltPos,
+            uint? palette1Pos,
+            uint? palette2Pos,
+            uint? boundariesPos
+        ) {
+            var headerAddr = (uint) CurrentOffset;
+
+            void WritePointer(uint? offset) {
+                WriteToAlignTo(4);
+                Write((uint) (offset.HasValue ? (offset.Value + 0x290000) : 0));
+            };
+
+            // TODO: determine proper map flags
+            Write((ushort) header.MapFlags);
+            WritePointer(lightPalettePos);
+            WritePointer(lightPositionPos);
+            WritePointer(unknown1Pos);
+            Write((ushort) header.ViewDistance);
+            WritePointer(modelSwitchGroupsPos);
+            WritePointer(textureAnimationsPos);
+            WritePointer(unknown2Pos);
+            WritePointer(groundAnimationPos);
+            // TODO: mesh1pos
+            WritePointer(null);
+            // TODO: mesh2pos
+            WritePointer(null);
+            // TODO: mesh3pos
+            WritePointer(null);
+            Write((ushort) new CompressedFIXED(header.ModelsPreYRotation, 0).RawShort);
+            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMin, 0).RawShort);
+            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMax, 0).RawShort);
+            WritePointer(textureAnimAltPos);
+            WritePointer(palette1Pos ?? headerAddr);
+            WritePointer(palette2Pos ?? headerAddr);
+            Write((ushort) header.GroundX);
+            Write((ushort) header.GroundY);
+            Write((ushort) header.GroundZ);
+            Write((ushort) new CompressedFIXED(header.GroundAngle, 0).RawShort);
+            Write((ushort) header.Unknown1);
+            Write((ushort) header.BackgroundX);
+            Write((ushort) header.BackgroundY);
+            WritePointer(boundariesPos);
         }
 
         public ScenarioType Scenario { get; }
