@@ -5,7 +5,7 @@ using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
     public class UnknownUInt8Table : TerminatedTable<UnknownUInt8Struct> {
-        protected UnknownUInt8Table(IByteData data, string name, int address, int? count, int? readUntil)
+        protected UnknownUInt8Table(IByteData data, string name, int address, int? count, byte? readUntil)
         : base(data, name, address, readUntil.HasValue ? 1 : 0, count) {
             if (!count.HasValue && !readUntil.HasValue)
                 throw new ArgumentNullException(nameof(count) + ", " + nameof(readUntil));
@@ -14,7 +14,7 @@ namespace SF3.Models.Tables {
             FormatString = "X" + MaxSize.ToString().Length;
         }
 
-        public static UnknownUInt8Table Create(IByteData data, string name, int address, int? count, int? readUntil)
+        public static UnknownUInt8Table Create(IByteData data, string name, int address, int? count, byte? readUntil)
             => Create(() => new UnknownUInt8Table(data, name, address, count, readUntil));
 
         private bool ContinueReadingPred(Dictionary<int, UnknownUInt8Struct> currentRows, UnknownUInt8Struct newModel)
@@ -25,7 +25,7 @@ namespace SF3.Models.Tables {
             return Load((id, address) => new UnknownUInt8Struct(Data, id, "Unknown UInt8 " + id.ToString(FormatString), address), pred, false);
         }
 
-        public int? ReadUntil { get; }
+        public byte? ReadUntil { get; }
         private string FormatString { get; }
     }
 }
