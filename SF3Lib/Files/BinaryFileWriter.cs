@@ -16,7 +16,7 @@ namespace SF3.Files {
         /// </summary>
         /// <param name="alignment">The number of bytes the stream's length should be visible by.</param>
         public void WriteToAlignTo(int alignment) {
-            var pos = Stream.Position;
+            var pos = CurrentOffset;
             if (pos % alignment != 0)
                 Write(new byte[alignment - pos % alignment]);
         }
@@ -68,5 +68,10 @@ namespace SF3.Files {
         public long StreamStartPosition { get; }
         public Stream Stream { get; }
         public int BytesWritten { get; private set; } = 0;
+
+        public long CurrentOffset {
+            get => Stream.Position - StreamStartPosition;
+            set => Stream.Position = value + StreamStartPosition;
+        }
     }
 }
