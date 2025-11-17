@@ -27,10 +27,9 @@ namespace SF3.Models.Files.MPD {
         public override int RamAddressLimit => 0x002D0000;
 
         private const int c_RamAddress = 0x00290000;
-        private const int c_SurfaceModelChunkSize = 0xCF00;
 
-        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType fallbackScenario)
-        : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario], DetectScenario(data) ?? fallbackScenario) {
+        protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType? fallbackScenario = null)
+        : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other], DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other) {
             PrimaryTextureChunksFirstIndex = 6;
             PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
                 ((Scenario >= ScenarioType.Other) ? 4 : 3);
@@ -60,10 +59,13 @@ namespace SF3.Models.Files.MPD {
             ForegroundMapChunkIndex    = BackgroundChunk2Index + 4;
         }
 
-        public static MPD_File Create(IByteData data, NameGetterContext nameContext, ScenarioType fallbackScenario)
-            => Create(data, new Dictionary<ScenarioType, INameGetterContext>() { { nameContext.Scenario, nameContext } }, fallbackScenario);
+        public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType fallbackScenario)
+            => Create(data, new Dictionary<ScenarioType, INameGetterContext>() { { fallbackScenario, nameContext } }, fallbackScenario);
 
-        public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType fallbackScenario) {
+        public static MPD_File Create(IByteData data, NameGetterContext nameContext)
+            => Create(data, new Dictionary<ScenarioType, INameGetterContext>() { { nameContext.Scenario, nameContext } }, nameContext.Scenario);
+
+        public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType? fallbackScenario) {
             var newFile = new MPD_File(data, nameContexts, fallbackScenario);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize MPD_File");
