@@ -264,7 +264,43 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        public SGL_Model GetSGLModel(PDataModel pdata) {
+        public IMPD_ModelInstance[] GetModelInstances() {
+            var instances = new List<IMPD_ModelInstance>();
+
+            void AddInstance(ModelInstanceBase mi) {
+                var pdata = (PDatasByMemoryAddress?.TryGetValue(mi.PData0, out var pdataOut) == true) ? pdataOut : null;
+                if (pdata != null) {
+                    int collectionId = (int) mi.CollectionType * 1000;
+                    instances.Add(new MPD_ModelInstance(mi) {
+                        ID = mi.ID + collectionId,
+                        ModelID = pdata.ID + collectionId
+                    });
+                }
+            }
+
+            if (ModelInstanceTable != null)
+                foreach (var mi in ModelInstanceTable)
+                    AddInstance(mi);
+            if (MovableModelTable != null)
+                foreach (var mi in MovableModelTable)
+                    AddInstance(mi);
+
+            return instances.ToArray();
+        }
+
+        public SGL_Model GetSGLModel(int id) {
+            var collectionType = (ModelCollectionType) (id / 1000);
+            if (collectionType != this.CollectionType)
+                return null;
+
+            var subId = id % 1000;
+            return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(x => x.ID == subId && x.Index == 0));
+        }
+
+        private SGL_Model GetSGLModel(PDataModel pdata) {
+            if (pdata == null)
+                return null;
+
             var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
                 .Select(x => x.Vector)
                 .ToArray();
@@ -278,7 +314,7 @@ namespace SF3.Models.Files.MPD {
                 ))
                 .ToArray();
 
-            return new SGL_Model((int) pdata.RamAddress, vertices, faces);
+            return new SGL_Model(pdata.ID + (int) pdata.Collection * 1000, vertices, faces);
         }
 
         public SGL_Model[] GetSGLModels() {
@@ -295,9 +331,6 @@ namespace SF3.Models.Files.MPD {
         public int Address { get; }
         public int? ChunkIndex { get; }
         public int? MovableModelsIndex { get; }
-
-        public bool IsMovableModelCollection
-            => CollectionType >= ModelCollectionType.MovableModels1 && CollectionType <= ModelCollectionType.MovableModels3;
 
         [BulkCopyRecurse]
         public ModelsHeader ModelsHeader { get; private set; }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.MPD;
-using SF3.Types;
+using SF3.Extensions;
 
 namespace SF3.Win.Views.MPD {
     public class MainTablesView : TabView {
@@ -49,7 +49,7 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.ModelCollections != null) {
                 foreach (var models in Model.ModelCollections)
-                    if (models.IsMovableModelCollection)
+                    if (models.IsMovableModelCollection())
                         CreateChild(new ModelChunkView(models.CollectionType.ToString(), Model, models));
             }
 

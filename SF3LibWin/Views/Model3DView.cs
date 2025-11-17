@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
@@ -11,7 +12,7 @@ namespace SF3.Win.Views {
             MPD_File = mpdFile;
         }
 
-        public Model3DView(string name, IMPD_File mpdFile, ModelInstance modelInstance) : base(name) {
+        public Model3DView(string name, IMPD_File mpdFile, ModelInstanceBase modelInstance) : base(name) {
             MPD_File = mpdFile;
             _modelInstance = modelInstance;
             UpdateSGL_Model();
@@ -33,8 +34,8 @@ namespace SF3.Win.Views {
 
         public IMPD_File MPD_File { get; }
 
-        private ModelInstance _modelInstance = null;
-        public ModelInstance Model {
+        private ModelInstanceBase _modelInstance = null;
+        public ModelInstanceBase Model {
             get => _modelInstance;
             set {
                 if (value != _modelInstance) {
@@ -48,15 +49,14 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateSGL_Model() {
-            var mc = (_modelInstance == null) ? null : MPD_File?.ModelCollections
-                ?.FirstOrDefault(x => x.CollectionType == _modelInstance.CollectionType && x.PDatasByMemoryAddress?.ContainsKey(_modelInstance.PData0) == true);
-
-            if (mc == null)
+            var mc = (_modelInstance == null) ? null : MPD_File?.ModelCollections?.FirstOrDefault(x => x.CollectionType == _modelInstance.CollectionType);
+            var pdata = (mc?.PDatasByMemoryAddress?.TryGetValue(_modelInstance.PData0, out var pdataOut) == true) ? pdataOut : null;
+            if (pdata == null) {
                 _sglModel = null;
-            else {
-                var pdata = mc.PDatasByMemoryAddress[_modelInstance.PData0];
-                _sglModel = mc.GetSGLModel(pdata);
+                return;
             }
+
+            _sglModel = mc?.GetSGLModel(pdata.ID + (int) pdata.Collection * 1000);
         }
 
         private SGL_Model _sglModel = null;

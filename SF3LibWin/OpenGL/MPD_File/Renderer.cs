@@ -5,7 +5,6 @@ using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Structs.MPD;
-using SF3.Models.Structs.MPD.Model;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Types;
@@ -277,7 +276,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .Where(x => x.ModelGroup != null)
                 .Where(x => {
                     var direction = x.Model.OnlyVisibleFromDirection;
-                    return direction == SF3.Types.ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
+                    return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                 })
                 .Where(x => options.ModelsToHide?.Contains(x.Model.ID) != true)
                 .ToArray();
@@ -690,7 +689,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 if (modelInstance.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var sglModel = models.SGL_ModelsByIDByCollection[modelInstance.CollectionType].TryGetValue(modelInstance.ModelID, out var pdataValue) ? pdataValue : null;
+                    var sglModel = models.SGL_ModelsByIDByCollection[modelInstance.CollectionType].TryGetValue(modelInstance.ModelID, out var sglModelOut) ? sglModelOut : null;
 
                     var topY     = sglModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var bottomY  = sglModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;

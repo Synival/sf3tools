@@ -37,8 +37,8 @@ namespace SF3.Models.Structs.MPD.Model {
         public ModelCollectionType CollectionType { get; }
 
         public int ModelID {
-            get => (int) PData0;
-            set => PData0 = (uint) value;
+            get => -1;
+            set {}
         }
 
         [BulkCopy]

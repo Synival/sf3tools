@@ -10,6 +10,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD;
 using SF3.MPD;
+using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
@@ -175,7 +176,8 @@ namespace SF3.Win.Controls {
 
             MPD_File = mpdFile;
             _sglModel = sglModel;
-            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey((uint) sglModel.ID));
+            var collectionType = (ModelCollectionType?) (sglModel == null ? null : (ModelCollectionType) (sglModel.ID / 1000));
+            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.CollectionType == collectionType);
             _vertices = null;
 
             _size = 1.0f;

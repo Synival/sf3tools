@@ -15,7 +15,6 @@ namespace SF3.MPD {
         float ScaleY { get; set; }
         float ScaleZ { get; set; }
         ushort Tag { get; set; }
-        ushort Flags { get; set; }
         bool AlwaysFacesCamera { get; set; }
         ModelDirectionType OnlyVisibleFromDirection { get; set; }
     }

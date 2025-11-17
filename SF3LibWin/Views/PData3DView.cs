@@ -15,8 +15,7 @@ namespace SF3.Win.Views {
         public PData3DView(string name, IMPD_File mpdFile, PDataModel pdata) : base(name) {
             MPD_File = mpdFile;
             _pdata = pdata;
-            _models = (pdata == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdata.RamAddress));
-            _sglModel = _models?.GetSGLModel(_pdata);
+            UpdateSGLModel();
         }
 
         private IMPD_ModelCollection _models = null;
@@ -36,6 +35,11 @@ namespace SF3.Win.Views {
             Control.Update(MPD_File, _sglModel);
         }
 
+        private void UpdateSGLModel() {
+            _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(_pdata.RamAddress));
+            _sglModel = (_pdata == null) ? null : _models?.GetSGLModel(_pdata.ID + (int) _pdata.Collection * 1000);
+        }
+
         public IMPD_File MPD_File { get; }
 
         private PDataModel _pdata = null;
@@ -44,8 +48,7 @@ namespace SF3.Win.Views {
             set {
                 if (value != _pdata) {
                     _pdata = value;
-                    _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(_pdata.RamAddress));
-                    _sglModel = _models?.GetSGLModel(_pdata);
+                    UpdateSGLModel();
                     if (Control != null)
                         Control.Update(MPD_File, _sglModel);
                 }
