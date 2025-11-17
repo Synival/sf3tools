@@ -1,5 +1,7 @@
 ﻿using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
+using CommonLib.Utils;
 using SF3;
 using SF3.ByteData;
 using SF3.Models.Files;
@@ -97,6 +99,8 @@ namespace CHR_Analyzer {
         private static List<string> s_matchReports = [];
 
         private static bool? CHR_MatchFunc(string filename, ICHR_File[] chrFiles, INameGetterContext ngc) {
+            return true;
+
             foreach (var chr in chrFiles) {
 #if false
                 var duplicateFramesByHash = chr.SpriteTable
@@ -299,6 +303,21 @@ namespace CHR_Analyzer {
                 foreach (var tex in texturesToFix)
                     Console.WriteLine($"    {tex.ImageHash} ({tex.Texture.Width}x{tex.Texture.Height})");
             }
+
+            Console.WriteLine();
+            Console.WriteLine($"There are {s_framesByHash.Count} unique frames.");
+            var unidentifiedFrameCount = s_framesByHash.Values.Where(x => !(x.FrameRefs?.Count > 0)).Count();
+            Console.WriteLine($"{unidentifiedFrameCount} are unidentified.");
+            var totalUncompressedFramesSize = s_framesByHash.Sum(x => {
+                var tex = x.Value.Texture;
+                return tex.Width * tex.Height * sizeof(ushort);
+            });
+            Console.WriteLine($"Total uncompressed frame image size: {totalUncompressedFramesSize} bytes (0x{totalUncompressedFramesSize:X5})");
+            var totalCompressedFramesSize = s_framesByHash.Sum(x => {
+                var data = x.Value.Texture.ImageData16Bit.To1DArrayTransposed();
+                return Compression.CompressSpriteData(data, 0, data.Length).Length;
+            });
+            Console.WriteLine($"Total compressed frame image size: {totalCompressedFramesSize} bytes (0x{totalCompressedFramesSize:X5})");
 
             Console.WriteLine();
             Console.WriteLine($"There are {s_animationsByHash.Count} unique animations.");
