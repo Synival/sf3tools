@@ -190,9 +190,9 @@ namespace SF3.Win.Controls {
                     if (_models.VerticesByAddressByCollection[Models.CollectionType]?.TryGetValue(_pdata.VerticesOffset, out var vertices) == true) {
                         var verticesMatrix =
                             Matrix3.CreateScale(scaleX, scaleY, scaleZ) *
-                            Matrix3.CreateRotationX(rotX * (float) Math.PI) *
-                            Matrix3.CreateRotationY(rotY * (float) Math.PI) *
-                            Matrix3.CreateRotationZ(rotZ * (float) Math.PI);
+                            Matrix3.CreateRotationX(rotX * (float) Math.PI / 180.0f) *
+                            Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
+                            Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
 
                         _vertices = vertices.Select(x => x.Vector.ToVector3() * verticesMatrix).ToArray();
 
