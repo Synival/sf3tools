@@ -689,11 +689,10 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 if (model.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var pdata    = models.PDatasByAddressByCollection[model.CollectionType].TryGetValue(model.PData0, out var pdataValue) ? pdataValue : null;
-                    var vertices = (pdata == null) ? null : models.VerticesByAddressByCollection[model.CollectionType].TryGetValue(pdata.VerticesOffset, out var verticesValue) ? verticesValue : null;
+                    var sglModel = models.SGL_ModelsByMemoryAddressByCollection[model.CollectionType].TryGetValue(model.PData0, out var pdataValue) ? pdataValue : null;
 
-                    var topY     = vertices?.Min(x => Math.Min(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
-                    var bottomY  = vertices?.Max(x => Math.Max(x.Vector.Y.Float, x.Vector.Z.Float)) / 32.0f ?? 0.00f;
+                    var topY     = sglModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
+                    var bottomY  = sglModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var centerY  = (topY + bottomY) * 0.5f;
 
                     angleXAdjust = (float) (cameraPitch / 180.0f * Math.PI) * -1.00f;

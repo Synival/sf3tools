@@ -3,11 +3,11 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Arrays;
 using CommonLib.Imaging;
+using CommonLib.SGL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables.MPD;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD_File;
@@ -40,8 +40,8 @@ namespace SF3.Win.Controls {
 
             _renderer = new Renderer();
 
-            if (MPD_File != null && Models != null && _pdata != null)
-                _models.Update(MPD_File, Models, _pdata);
+            if (MPD_File != null && Models != null && _sglModel != null)
+                _models.Update(MPD_File, Models, _pdataAddr, _sglModel);
 
             var lighting = ColorTable.Create(new ByteData.ByteData(new ByteArray(256)), "Colors", 0, 32);
             for (int i = 0; i < 32; i++) {
@@ -162,19 +162,21 @@ namespace SF3.Win.Controls {
         public IMPD_File MPD_File { get; private set; } = null;
         public ModelCollection Models { get; private set; } = null;
 
-        private PDataModel _pdata = null;
+        private SGL_Model _sglModel = null;
+        private uint _pdataAddr;
 
         public void Update(
-            IMPD_File mpdFile, PDataModel pdata,
+            IMPD_File mpdFile, uint pdataAddr, SGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
-            if (_pdata == pdata)
+            if (_sglModel == sglModel)
                 return;
 
             MPD_File = mpdFile;
-            _pdata = pdata;
-            Models = (pdata == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdata.RamAddress));
+            _pdataAddr = pdataAddr;
+            _sglModel = sglModel;
+            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdataAddr));
             _vertices = null;
 
             _size = 1.0f;
@@ -183,36 +185,34 @@ namespace SF3.Win.Controls {
 
             if (_models != null) {
                 _models.Reset();
-                if (MPD_File != null && Models != null && _pdata != null) {
-                    _models.Update(MPD_File, Models, _pdata, forceSemiTransparent: false, isHideMesh: false,
+                if (MPD_File != null && Models != null && sglModel != null) {
+                    _models.Update(MPD_File, Models, pdataAddr, sglModel, forceSemiTransparent: false, isHideMesh: false,
                         rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
 
-                    if (_models.VerticesByAddressByCollection[Models.CollectionType]?.TryGetValue(_pdata.VerticesOffset, out var vertices) == true) {
-                        var verticesMatrix =
-                            Matrix3.CreateScale(scaleX, scaleY, scaleZ) *
-                            Matrix3.CreateRotationX(rotX * (float) Math.PI / 180.0f) *
-                            Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
-                            Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
+                    var verticesMatrix =
+                        Matrix3.CreateScale(scaleX, scaleY, scaleZ) *
+                        Matrix3.CreateRotationX(rotX * (float) Math.PI / 180.0f) *
+                        Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
+                        Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
 
-                        _vertices = vertices.Select(x => x.Vector.ToVector3() * verticesMatrix).ToArray();
+                    _vertices = sglModel.Vertices.Select(x => x.ToVector3() * verticesMatrix).ToArray();
 
-                        _minX = _vertices.Min(x => x.X) / 32.0f;
-                        _minY = _vertices.Min(x => x.Y) / 32.0f;
-                        _minZ = _vertices.Min(x => x.Z) / 32.0f;
+                    _minX = _vertices.Min(x => x.X) / 32.0f;
+                    _minY = _vertices.Min(x => x.Y) / 32.0f;
+                    _minZ = _vertices.Min(x => x.Z) / 32.0f;
 
-                        _maxX = _vertices.Max(x => x.X) / 32.0f;
-                        _maxY = _vertices.Max(x => x.Y) / 32.0f;
-                        _maxZ = _vertices.Max(x => x.Z) / 32.0f;
+                    _maxX = _vertices.Max(x => x.X) / 32.0f;
+                    _maxY = _vertices.Max(x => x.Y) / 32.0f;
+                    _maxZ = _vertices.Max(x => x.Z) / 32.0f;
 
-                        _width  = _maxX - _minX;
-                        _height = _maxY - _minY;
-                        _depth  = _maxZ - _minZ;
+                    _width  = _maxX - _minX;
+                    _height = _maxY - _minY;
+                    _depth  = _maxZ - _minZ;
 
-                        _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
-                        _center = new Vector3((_minX + _maxX) / -2, (_minY + _maxY) / -2, (_minZ + _maxZ) / 2);
+                    _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
+                    _center = new Vector3((_minX + _maxX) / -2, (_minY + _maxY) / -2, (_minZ + _maxZ) / 2);
 
-                        _dist = (float) Math.Pow(_size, 0.875f) * 4f;
-                    }
+                    _dist = (float) Math.Pow(_size, 0.875f) * 4f;
                 }
                 else {
                     // TODO: throw?? what to do here???

@@ -29,10 +29,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     model.Dispose();
 
             ModelsByMemoryAddressByCollection.Clear();
-            PDatasByAddressByCollection.Clear();
-            VerticesByAddressByCollection.Clear();
-            PolygonsByAddressByCollection.Clear();
-            AttributesByAddressByCollection.Clear();
+            SGL_ModelsByMemoryAddressByCollection.Clear();
 
             Models = null;
         }
@@ -41,14 +38,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             // TODO: Just have one structure with all this info!
             if (!ModelsByMemoryAddressByCollection.ContainsKey(collectionType))
                 ModelsByMemoryAddressByCollection[collectionType] = [];
-            if (!PDatasByAddressByCollection.ContainsKey(collectionType))
-                PDatasByAddressByCollection[collectionType] = [];
-            if (!VerticesByAddressByCollection.ContainsKey(collectionType))
-                VerticesByAddressByCollection[collectionType] = [];
-            if (!PolygonsByAddressByCollection.ContainsKey(collectionType))
-                PolygonsByAddressByCollection[collectionType] = [];
-            if (!AttributesByAddressByCollection.ContainsKey(collectionType))
-                AttributesByAddressByCollection[collectionType] = [];
+            if (!SGL_ModelsByMemoryAddressByCollection.ContainsKey(collectionType))
+                SGL_ModelsByMemoryAddressByCollection[collectionType] = [];
         }
 
         private TextureCollectionType GetTextureCollection(ModelCollectionType modelCollection) {
@@ -132,10 +123,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     : [];
 
                 InitDictsForType(models.CollectionType);
-                var pdatasByAddress     = PDatasByAddressByCollection[models.CollectionType];
-                var verticesByAddress   = VerticesByAddressByCollection[models.CollectionType];
-                var polygonsByAddress   = PolygonsByAddressByCollection[models.CollectionType];
-                var attributesByAddress = AttributesByAddressByCollection[models.CollectionType];
+                var sglModelsByAddress = SGL_ModelsByMemoryAddressByCollection[models.CollectionType];
 
                 if (models.ModelTable != null)
                     modelsList.AddRange(models.ModelTable.Rows);
@@ -153,34 +141,19 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
                 foreach (var address in uniquePData0Addresses) {
-                    var pdata = pdatasByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
-                    if (pdata == null) {
-                        pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address);
-                        pdatasByAddress[address] = pdata;
+                    var sglModel = sglModelsByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
+                    if (sglModel == null) {
+                        var pdata = GetFromAnyCollection(mpdFile, mc => mc.PDatasByMemoryAddress, address, out var mc);
+                        sglModelsByAddress[address] = sglModel = (pdata != null) ? mc.MakeSGLModel(pdata) : null;
                     }
-                    if (pdata == null)
+                    if (sglModel == null)
                         continue;
-
-                    if (!verticesByAddress.ContainsKey(pdata.VerticesOffset)) {
-                        var table = GetFromAnyCollection(mpdFile, mc => mc.VertexTablesByMemoryAddress, pdata.VerticesOffset);
-                        verticesByAddress[pdata.VerticesOffset] = table.ToArray();
-                    }
-
-                    if (!polygonsByAddress.ContainsKey(pdata.PolygonsOffset)) {
-                        var table = GetFromAnyCollection(mpdFile, mc => mc.PolygonTablesByMemoryAddress, pdata.PolygonsOffset);
-                        polygonsByAddress[pdata.PolygonsOffset] = table.ToArray();
-                    }
-
-                    if (!attributesByAddress.ContainsKey(pdata.AttributesOffset)) {
-                        var table = GetFromAnyCollection(mpdFile, mc => mc.AttrTablesByMemoryAddress, pdata.AttributesOffset);
-                        attributesByAddress[pdata.AttributesOffset] = table.ToArray();
-                    }
 
                     // Don't render movable models; they're not placed on the map in that way.
                     if (!models.IsMovableModelCollection) {
-                        bool isForcedSemiTransparent = modelsWith2000Tag.Contains(pdata.RamAddress);
-                        bool isHideMesh = modelsWith3000Tag.Contains(pdata.RamAddress);
-                        CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
+                        bool isForcedSemiTransparent = modelsWith2000Tag.Contains(address);
+                        bool isHideMesh = modelsWith3000Tag.Contains(address);
+                        CreateAndAddQuadModels(mpdFile, models.CollectionType, address, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
                     }
                 }
             }
@@ -188,29 +161,26 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = modelsList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, PDataModel pdata,
+        public void Update(IMPD_File mpdFile, ModelCollection models, uint pdataAddr, SGL_Model sglModel,
             bool forceSemiTransparent = false, bool isHideMesh = false,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
             Reset();
-            if (models == null || pdata == null)
+            if (models == null || sglModel == null)
                 return;
 
             InitDictsForType(models.CollectionType);
-            PDatasByAddressByCollection[models.CollectionType][pdata.RamAddress]           = pdata;
-            VerticesByAddressByCollection[models.CollectionType][pdata.VerticesOffset]     = models.VertexTablesByMemoryAddress .TryGetValue(pdata.VerticesOffset,   out var vv) ? vv.ToArray() : null;
-            PolygonsByAddressByCollection[models.CollectionType][pdata.PolygonsOffset]     = models.PolygonTablesByMemoryAddress.TryGetValue(pdata.PolygonsOffset,   out var pv) ? pv.ToArray() : null;
-            AttributesByAddressByCollection[models.CollectionType][pdata.AttributesOffset] = models.AttrTablesByMemoryAddress   .TryGetValue(pdata.AttributesOffset, out var av) ? av.ToArray() : null;
+            SGL_ModelsByMemoryAddressByCollection[models.CollectionType][pdataAddr] = sglModel;
 
             var texCollection  = GetTextureCollection(models.CollectionType);
             var texturesById   = GetTexturesByID(mpdFile, texCollection);
             var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
-            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdata, texturesById, animationsById, forceSemiTransparent, isHideMesh);
+            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdataAddr, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 
             var model = new Model(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
-            model.PData0 = pdata.RamAddress;
+            model.PData0 = pdataAddr;
             model.PositionX = -32 * 32;
             model.PositionZ = -32 * 32;
             model.AngleX = rotX;
@@ -223,21 +193,30 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = [model];
         }
 
-        private TValue GetFromAnyCollection<TValue>(IMPD_File mpdFile, Func<ModelCollection, Dictionary<uint, TValue>> tableGetter, uint address) where TValue : class {
+        private TValue GetFromAnyCollection<TValue>(
+            IMPD_File mpdFile,
+            Func<ModelCollection, Dictionary<uint, TValue>> tableGetter,
+            uint address,
+            out ModelCollection mcOut
+        ) where TValue : class {
             foreach (var mc in mpdFile.ModelCollections) {
                 if (mc != null) {
                     var dict = tableGetter(mc);
-                    if (dict.TryGetValue(address, out TValue value))
+                    if (dict.TryGetValue(address, out TValue value)) {
+                        mcOut = mc;
                         return value;
+                    }
                 }
             }
+            mcOut = null;
             return null;
         }
 
         private void CreateAndAddQuadModels(
             IMPD_File mpdFile,
             ModelCollectionType modelCollection,
-            PDataModel pdata,
+            uint pdataAddr,
+            SGL_Model sglModel,
             Dictionary<int, ITexture> texturesById,
             Dictionary<int, ModelAnimationInfo> animationsById,
             bool forceSemiTransparent,
@@ -246,22 +225,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => (flip & ~TextureFlipType.Horizontal) | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
-            VertexModel[]  vertices = null;
-            PolygonModel[] polygons = null;
-            AttrModel[]    attrs    = null;
-
-            try {
-                vertices = VerticesByAddressByCollection[modelCollection][pdata.VerticesOffset];
-                polygons = PolygonsByAddressByCollection[modelCollection][pdata.PolygonsOffset];
-                attrs    = AttributesByAddressByCollection[modelCollection][pdata.AttributesOffset];
-            }
-            catch {
-                // TODO: what to do in this case??
-                return;
-            }
-
-            if (vertices == null || polygons == null || attrs == null)
-                return;
+            var vertices = sglModel.Vertices;
+            var faces = sglModel.Faces;
 
             bool modelExists = false;
 
@@ -271,9 +236,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             var semiTransparentTexturedQuads   = new List<Quad>();
             var semiTransparentUntexturedQuads = new List<Quad>();
 
-            for (var i = 0; i < polygons.Length; i++) {
-                var polygon = polygons[i];
-                var attr = attrs[i];
+            for (var i = 0; i < faces.Count; i++) {
+                var polygon = faces[i];
+                var attr = polygon.Attributes;
 
                 var color = new Vector4(1);
                 TextureAnimation anim = null;
@@ -342,17 +307,17 @@ namespace SF3.Win.OpenGL.MPD_File {
                 }
 
                 VECTOR[] polyVertexModels = [
-                    vertices[polygon.Vertex1].Vector,
-                    vertices[polygon.Vertex2].Vector,
-                    vertices[polygon.Vertex3].Vector,
-                    vertices[polygon.Vertex4].Vector,
+                    vertices[polygon.VertexIndices[0]],
+                    vertices[polygon.VertexIndices[1]],
+                    vertices[polygon.VertexIndices[2]],
+                    vertices[polygon.VertexIndices[3]],
                 ];
 
                 var polyVertices = polyVertexModels
                     .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float) * new Vector3(1 / 32.0f))
                     .ToArray();
 
-                var normal = new Vector3(-polygon.NormalX, -polygon.NormalY, polygon.NormalZ);
+                var normal = new Vector3(-polygon.Normal.X.Float, -polygon.Normal.Y.Float, polygon.Normal.Z.Float);
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
@@ -414,7 +379,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var semiTransparentUntexturedModel = (semiTransparentUntexturedQuads.Count > 0) ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
             if (modelExists) {
-                ModelsByMemoryAddressByCollection[modelCollection][pdata.RamAddress] = new ModelGroup(
+                ModelsByMemoryAddressByCollection[modelCollection][pdataAddr] = new ModelGroup(
                     solidTexturedModel,
                     solidUntexturedModel,
                     semiTransparentTexturedModel,
@@ -425,10 +390,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public Dictionary<ModelCollectionType, Dictionary<uint, ModelGroup>> ModelsByMemoryAddressByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<uint, PDataModel>> PDatasByAddressByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<uint, VertexModel[]>> VerticesByAddressByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<uint, PolygonModel[]>> PolygonsByAddressByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<uint, AttrModel[]>> AttributesByAddressByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<uint, SGL_Model>> SGL_ModelsByMemoryAddressByCollection { get; } = [];
         public ModelBase[] Models { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;
