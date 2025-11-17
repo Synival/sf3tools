@@ -56,7 +56,7 @@ namespace SF3.CHR {
             spriteInfo.UnassignedAnimationTablePointerOffset = currentPos + 0x14;
 
             // Write the entry to the stream.
-            Write(outputData.Data.GetDataCopyOrReference());
+            Write(outputData.GetDataCopyOrReference());
         }
 
         /// <summary>

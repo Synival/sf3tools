@@ -34,7 +34,7 @@ namespace SF3.ModelLoaders {
             if (!IsLoaded)
                 throw new Exception("Nothing is loaded");
             return PerformSave(() => {
-                File.WriteAllBytes(filename, ByteData.Data.GetDataCopyOrReference());
+                File.WriteAllBytes(filename, ByteData.GetDataCopyOrReference());
                 Filename = filename;
                 return true;
             });

@@ -31,6 +31,13 @@ namespace SF3.ByteData {
         byte[] GetDataCopy();
 
         /// <summary>
+        /// Gets a reference of the data (if available), and a copy if not.
+        /// The only reason this exists is for efficient reading without copies. Only use for reading, and keep the references short-lived!
+        /// </summary>
+        /// <returns>A reference to the underlying byte[] data or a copy if no reference is available.</returns>
+        byte[] GetDataCopyOrReference();
+
+        /// <summary>
         /// Returns a copy of byte data loaded in a specific range.
         /// </summary>
         /// <returns>A copy of the byte data loaded at a specific range as a byte[].</returns>

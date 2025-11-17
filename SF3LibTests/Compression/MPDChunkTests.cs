@@ -105,7 +105,7 @@ namespace SF3.Tests.Compression {
                         continue;
 
                     // Let's go!
-                    var decompressed1 = DecompressLZSS(data.Data.GetDataCopyOrReference());
+                    var decompressed1 = DecompressLZSS(data.GetDataCopyOrReference());
                     var compressed1 = CompressLZSS(decompressed1);
                     var decompressed2 = DecompressLZSS(compressed1);
 

@@ -95,7 +95,7 @@ namespace SF3.Models.Structs.CHR {
 
         private ushort[,] GetUncompressedTextureData() {
             try {
-                var decompressedData = Compression.DecompressSpriteData(Data.Data.GetDataCopyOrReference(), TextureOffset + DataOffset, out var size);
+                var decompressedData = Compression.DecompressSpriteData(Data.GetDataCopyOrReference(), TextureOffset + DataOffset, out var size);
                 TextureCompressedSize = size;
                 TextureDecompressedSize = (uint) decompressedData.Length * 2;
 

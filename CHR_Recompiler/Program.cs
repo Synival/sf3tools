@@ -200,11 +200,11 @@ namespace CHR_Extractor {
                             }
 
                             var newData = isChr
-                                ? ((CHR_File) deserializedFile).Data.Data.GetDataCopyOrReference()
-                                : ((CHP_File) deserializedFile).Data.Data.GetDataCopyOrReference();
+                                ? ((CHR_File) deserializedFile).Data.GetDataCopyOrReference()
+                                : ((CHP_File) deserializedFile).Data.GetDataCopyOrReference();
                             var origData = isChr
-                                ? ((CHR_File) chrChpFile).Data.Data.GetDataCopyOrReference()
-                                : ((CHP_File) chrChpFile).Data.Data.GetDataCopyOrReference();
+                                ? ((CHR_File) chrChpFile).Data.GetDataCopyOrReference()
+                                : ((CHP_File) chrChpFile).Data.GetDataCopyOrReference();
 
                             // An analysis of what's different from vanilla would be super helpful!
                             // Report changes in file size.

@@ -48,6 +48,7 @@ namespace SF3.ByteData {
 
         public bool SetDataTo(byte[] data) => ChildData.SetDataTo(data);
         public byte[] GetDataCopy() => ChildData.GetDataCopy();
+        public byte[] GetDataCopyOrReference() => ChildData.GetDataCopyOrReference();
         public byte[] GetDataCopyAt(int offset, int length) => ChildData.GetDataCopyAt(offset, length);
         public uint GetData(int location, int bytes) => ChildData.GetData(location, bytes);
         public int GetByte(int location) => ChildData.GetByte(location);

@@ -44,7 +44,7 @@ namespace SF3.Models.Tables.DAT {
 
             try {
                 var address = Address;
-                var rawData = Data.Data.GetDataCopyOrReference();
+                var rawData = Data.GetDataCopyOrReference();
 
                 int? itemsStart = null;
                 for (var id = 0; id < 0x1000; ++id) {

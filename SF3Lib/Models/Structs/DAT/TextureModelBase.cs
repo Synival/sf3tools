@@ -72,7 +72,7 @@ namespace SF3.Models.Structs.DAT {
 
                 int storedSize = ImageDataSize;
                 var inputData = IsCompressed
-                    ? Compression.DecompressLZSS(Data.Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
                     : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
                 var outputData = new byte[Width, Height];
 
@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.DAT {
 
                 int storedSize = ImageDataSize;
                 var inputData = (IsCompressed
-                    ? Compression.DecompressLZSS(Data.Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
                     : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
                     .ToUShorts();
 

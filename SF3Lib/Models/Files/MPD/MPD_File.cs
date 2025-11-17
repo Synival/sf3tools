@@ -19,6 +19,7 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 using CommonLib.Extensions;
 using CommonLib.Types;
+using SF3.NamedValues;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -57,6 +58,9 @@ namespace SF3.Models.Files.MPD {
             ForegroundTileChunk2Index  = BackgroundChunk2Index + 3;
             ForegroundMapChunkIndex    = BackgroundChunk2Index + 4;
         }
+
+        public static MPD_File Create(IByteData data, NameGetterContext nameContext)
+            => Create(data, new Dictionary<ScenarioType, INameGetterContext>() { { nameContext.Scenario, nameContext } });
 
         public static MPD_File Create(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts) {
             var newFile = new MPD_File(data, nameContexts);
@@ -684,7 +688,7 @@ namespace SF3.Models.Files.MPD {
             int blockXMax = blockCountX * tileSize;
             int tile = 0, tileInBlock = 0, blockX = 0, blockY = 0, tileInBlockX = 0, tileInBlockY = 0;
             foreach (var tileMap in tileMaps) {
-                var data = tileMap.Data.GetDataCopyOrReference();
+                var data = tileMap.GetDataCopyOrReference();
                 for (var dataPos = 0; dataPos < data.Length - 1; tile++, tileInBlock++, tileInBlockX++) {
                     // Reset some tile locations when we've reached the end of a block.
                     if (tileInBlock == tilesPerBlock) {
@@ -1383,7 +1387,7 @@ namespace SF3.Models.Files.MPD {
                     continue;
                 var copyToOffset = ChunkLocations[chunk.Index].ChunkFileAddress - 0x2100;
                 if (copyToOffset >= 0)
-                    chunk.Data.GetDataCopyOrReference().CopyTo(newChunkData, copyToOffset);
+                    chunk.GetDataCopyOrReference().CopyTo(newChunkData, copyToOffset);
                 else
                     CommonLib.Logging.Logger.WriteLine($"Chunk[{chunk.Index}] position (0x{copyToOffset + 0x2100:X4}) is < 0x2100; not writing", CommonLib.Types.LogType.Error);
             }
