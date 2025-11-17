@@ -83,41 +83,25 @@ namespace SF3.MPD {
                 boundariesPos
             );
 
+            // Write a pointer to the header.
             var headerPtrPos = CurrentOffset;
             Write((uint) (headerPos + 0x290000));
 
+            // Write a *double pointer* to the header at the start of the file.
             AtOffset(0, _ => Write((uint) (headerPtrPos + 0x290000)));
-            Write(new byte[0x2000 - CurrentOffset]);
 
-            // TODO: write the actual chunk table
-            for (int i = 0; i < 20; i++) {
-                Write(0x292100);
-                Write((uint) 0);
-            }
-            Write(new byte[12 * 0x08]);
+            // Write a blank chunk table. We're going to flesh it out as we write chunks.
+            Write(new byte[0x2100 - CurrentOffset]);
+
+            // Chunk[0] is always empty.
+            WriteEmptyChunk();
+
+            // TODO: actual chunks!!
+            int chunkTableSize = 20;
+            for (int i = 1; i < chunkTableSize; i++)
+                WriteEmptyChunk();
 
             Finish();
-        }
-
-        private uint? WriteDataOrNull<T>(T data) where T : class {
-            if (data == null)
-                return null;
-            var pos = (uint) CurrentOffset;
-
-            switch (data) {
-                case ColorTable ct:              Write(ct);   break;
-                case LightPosition lp:           Write(lp);   break;
-                case UnknownUInt32Table ui32:    Write(ui32); break;
-                case UnknownUInt16Table ui16:    Write(ui16); break;
-                case UnknownUInt8Table ui8:      Write(ui8);  break;
-                case ModelSwitchGroupsTable msg: Write(msg);  break;
-                case TextureAnimationTable ta:   Write(ta);   break;
-                case BoundaryTable bt:           Write(bt);   break;
-                case TextureIDTable tid:         Write(tid);  break;
-            }
-
-            WriteToAlignTo(2);
-            return pos;
         }
 
         public void Write(byte value)
@@ -129,6 +113,7 @@ namespace SF3.MPD {
         }
 
         public void Write(ushort value) {
+            WriteToAlignTo(2);
             Write(new byte[] {
                 (byte) (value >> 8),
                 (byte) value
@@ -149,6 +134,7 @@ namespace SF3.MPD {
         }
 
         public void Write(uint value) {
+            WriteToAlignTo(4);
             Write(new byte[] {
                 (byte) (value >> 24),
                 (byte) (value >> 16),
@@ -164,6 +150,9 @@ namespace SF3.MPD {
 
         public void Write(int value)
             => Write((uint) value);
+
+        void WritePointer(uint? offset)
+            => Write((uint) (offset.HasValue ? (offset.Value + 0x290000) : 0));
 
         public void Write(ColorTable colorTable) {
             foreach (var color in colorTable)
@@ -240,11 +229,6 @@ namespace SF3.MPD {
         ) {
             var headerAddr = (uint) CurrentOffset;
 
-            void WritePointer(uint? offset) {
-                WriteToAlignTo(4);
-                Write((uint) (offset.HasValue ? (offset.Value + 0x290000) : 0));
-            };
-
             // TODO: determine proper map flags
             Write((ushort) header.MapFlags);
             WritePointer(lightPalettePos);
@@ -277,6 +261,33 @@ namespace SF3.MPD {
             WritePointer(boundariesPos);
         }
 
+        public void WriteEmptyChunk() {
+            AtOffset(0x2000 + Chunks * 0x08, curOffset => WritePointer((uint) curOffset));
+            Chunks++;
+        }
+
+        private uint? WriteDataOrNull<T>(T data) where T : class {
+            if (data == null)
+                return null;
+            var pos = (uint) CurrentOffset;
+
+            switch (data) {
+                case ColorTable ct:              Write(ct);   break;
+                case LightPosition lp:           Write(lp);   break;
+                case UnknownUInt32Table ui32:    Write(ui32); break;
+                case UnknownUInt16Table ui16:    Write(ui16); break;
+                case UnknownUInt8Table ui8:      Write(ui8);  break;
+                case ModelSwitchGroupsTable msg: Write(msg);  break;
+                case TextureAnimationTable ta:   Write(ta);   break;
+                case BoundaryTable bt:           Write(bt);   break;
+                case TextureIDTable tid:         Write(tid);  break;
+            }
+
+            WriteToAlignTo(2);
+            return pos;
+        }
+
         public ScenarioType Scenario { get; }
+        public int Chunks { get; private set; } = 0;
     }
 }
