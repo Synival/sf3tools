@@ -7,7 +7,7 @@ namespace SF3.Models.Structs {
 
         public UnknownInt16Struct(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x02) {
-            _valueAddr = Address + 0x02; // 2 bytes
+            _valueAddr = Address + 0x00; // 2 bytes
         }
 
         [BulkCopy]

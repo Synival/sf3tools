@@ -39,9 +39,9 @@ namespace SF3.MPD {
             // X 0x00AA: Texture anim alt
             // X 0x00AC: Palette 1 (actually header)
             // X 0x00AC: Palette 2 (also actually header)
-            // - 0x00AC: Header
-            // - 0x0104: Pointer to header
-            // - 0x2000: Chunk table
+            // X 0x00AC: Header
+            // X 0x0104: Pointer to header
+            // X 0x2000: Chunk table
             // - 0x2100: Model chunk
             // - 0x2898: Surface (compressed)
             // - 0x2C3C: Textures 1
@@ -53,6 +53,7 @@ namespace SF3.MPD {
             // - 0x3DB0: Chest 2 Textures
             // - 0x46F4: Barrel Textures
 
+            // Placeholder for a pointer to the header with 8 bytes of padding.
             Write(new byte[0x0C]);
 
             var lightPalettePos      = WriteDataOrNull(mpd.LightPalette);
