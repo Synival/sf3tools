@@ -175,23 +175,23 @@ namespace SF3.Win.Controls {
             // Keys to adjust lighting
             if (MPD_File?.LightPosition != null) {
                 if (keysDown.Contains(Keys.Oemcomma)) {
-                    MPD_File.LightPosition.Pitch -= (ushort) (0x080 * rate);
+                    MPD_File.LightPosition.Pitch -= 0.25f * rate;
                     UpdateLightPosition();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemPeriod)) {
-                    MPD_File.LightPosition.Pitch += (ushort) (0x080 * rate);
+                    MPD_File.LightPosition.Pitch += 0.25f * rate;
                     UpdateLightPosition();
                     Invalidate();
                 }
 
                 if (keysDown.Contains(Keys.OemOpenBrackets)) {
-                    MPD_File.LightPosition.Yaw -= (ushort) (0x080 * rate);
+                    MPD_File.LightPosition.Yaw -= 0.25f * rate;
                     UpdateLightPosition();
                     Invalidate();
                 }
                 else if (keysDown.Contains(Keys.OemCloseBrackets)) {
-                    MPD_File.LightPosition.Yaw += (ushort) (0x080 * rate);
+                    MPD_File.LightPosition.Yaw += 0.25f * rate;
                     UpdateLightPosition();
                     Invalidate();
                 }

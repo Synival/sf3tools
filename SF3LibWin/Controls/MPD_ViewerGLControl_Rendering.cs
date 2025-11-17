@@ -231,8 +231,8 @@ namespace SF3.Win.Controls {
                     ApplyLighting = ApplyLighting,
 
                     HideModelsNotFacingCamera = HideModelsNotFacingCamera,
-                    ModelsViewAngleMin = MPD_File.MPDHeader.ModelsViewAngleMin * 180.0f,
-                    ModelsViewAngleMax = MPD_File.MPDHeader.ModelsViewAngleMax * 180.0f,
+                    ModelsViewAngleMin = MPD_File.MPDHeader.ModelsViewAngleMin,
+                    ModelsViewAngleMax = MPD_File.MPDHeader.ModelsViewAngleMax,
 
                     DrawNormals = DrawNormals,
                     DrawWireframe = DrawWireframe,
@@ -314,13 +314,12 @@ namespace SF3.Win.Controls {
                 return new Vector3(0, -1, 0);
 
             var lightPos = MPD_File.LightPosition;
-            var pitch = lightPos.Pitch;
 
-            var pitchInRadians = pitch / 32768f * Math.PI;
+            var pitchInRadians = lightPos.Pitch / 180.0f * Math.PI;
             var pitchSin = -Math.Sin(pitchInRadians);
             var pitchCos = Math.Cos(pitchInRadians);
 
-            var yawInRadians = lightPos.Yaw / 32768f * Math.PI;
+            var yawInRadians = lightPos.Yaw / 180.0f * Math.PI;
             var x = -Math.Sin(yawInRadians) * pitchCos;
             var y = pitchSin;
             var z = Math.Cos(yawInRadians) * pitchCos;

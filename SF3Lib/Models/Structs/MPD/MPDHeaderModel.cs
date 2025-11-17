@@ -294,30 +294,30 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsPreYRotationAddr), displayOrder: 14, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public float ModelsPreYRotation {
-            get => HasModelsInfo ? Data.GetCompressedFIXED(_modelsPreYRotationAddr).Float : -1;
+            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsPreYRotationAddr).Float : -1) * 180.0f;
             set {
                 if (HasModelsInfo)
-                    Data.SetCompressedFIXED(_modelsPreYRotationAddr, new CompressedFIXED(value, 0));
+                    Data.SetCompressedFIXED(_modelsPreYRotationAddr, new CompressedFIXED(value / 180.0f, 0));
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsViewAngleMinAddr), displayOrder: 14.5f, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public float ModelsViewAngleMin {
-            get => HasModelsInfo ? Data.GetCompressedFIXED(_modelsViewAngleMinAddr).Float : -0.6f;
+            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsViewAngleMinAddr).Float : -0.6f) * 180.0f;
             set {
                 if (HasModelsInfo)
-                    Data.SetCompressedFIXED(_modelsViewAngleMinAddr, new CompressedFIXED(value, 0));
+                    Data.SetCompressedFIXED(_modelsViewAngleMinAddr, new CompressedFIXED(value / 180.0f, 0));
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsViewAngleMaxAddr), displayOrder: 15, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
         public float ModelsViewAngleMax {
-            get => HasModelsInfo ? Data.GetCompressedFIXED(_modelsViewAngleMaxAddr).Float : 0.6f;
+            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsViewAngleMaxAddr).Float : 0.6f) * 180.0f;
             set {
                 if (HasModelsInfo)
-                    Data.SetCompressedFIXED(_modelsViewAngleMaxAddr, new CompressedFIXED(value, 0));
+                    Data.SetCompressedFIXED(_modelsViewAngleMaxAddr, new CompressedFIXED(value / 180.0f, 0));
             }
         }
 

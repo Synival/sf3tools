@@ -162,8 +162,8 @@ namespace SF3.MPD {
         }
 
         public void Write(LightPosition lightPosition) {
-            Write(lightPosition.Pitch);
-            Write(lightPosition.Yaw);
+            Write(new CompressedFIXED(lightPosition.Pitch / 180.0f, 0).RawShort);
+            Write(new CompressedFIXED(lightPosition.Yaw / 180.0f, 0).RawShort);
         }
 
         public void Write(UnknownUInt8Table table) {
@@ -248,9 +248,9 @@ namespace SF3.MPD {
             WritePointer(null);
             // TODO: mesh3pos
             WritePointer(null);
-            Write((ushort) new CompressedFIXED(header.ModelsPreYRotation, 0).RawShort);
-            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMin, 0).RawShort);
-            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMax, 0).RawShort);
+            Write((ushort) new CompressedFIXED(header.ModelsPreYRotation / 180.0f, 0).RawShort);
+            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMin / 180.0f, 0).RawShort);
+            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WritePointer(textureAnimAltPos);
             WritePointer(palette1Pos ?? headerAddr);
             WritePointer(palette2Pos ?? headerAddr);
