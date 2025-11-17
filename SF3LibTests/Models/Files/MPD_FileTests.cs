@@ -305,9 +305,9 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void MakeSGLModels_HasExpectedModelCount() {
+        public void GetSGLModels_HasExpectedCounts() {
             var data = MakeFile();
-            var models = data.ModelCollections.First(x => x.CollectionType == ModelCollectionType.PrimaryModels).MakeSGLModels();
+            var models = data.ModelCollections.First(x => x.CollectionType == ModelCollectionType.PrimaryModels).GetSGLModels();
 
             Assert.AreEqual(14, models.Length);
 

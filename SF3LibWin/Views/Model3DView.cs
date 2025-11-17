@@ -55,7 +55,7 @@ namespace SF3.Win.Views {
                 _sglModel = null;
             else {
                 var pdata = mc.PDatasByMemoryAddress[_modelInstance.PData0];
-                _sglModel = mc.MakeSGLModel(pdata);
+                _sglModel = mc.GetSGLModel(pdata);
             }
         }
 

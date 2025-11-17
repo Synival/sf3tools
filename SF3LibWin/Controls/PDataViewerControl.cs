@@ -9,6 +9,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD;
+using SF3.MPD;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
@@ -160,7 +161,7 @@ namespace SF3.Win.Controls {
         }
 
         public IMPD_File MPD_File { get; private set; } = null;
-        public ModelCollection Models { get; private set; } = null;
+        public IMPD_ModelCollection Models { get; private set; } = null;
 
         private SGL_Model _sglModel = null;
 

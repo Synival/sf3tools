@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
@@ -15,10 +16,10 @@ namespace SF3.Win.Views {
             MPD_File = mpdFile;
             _pdata = pdata;
             _models = (pdata == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdata.RamAddress));
-            _sglModel = _models?.MakeSGLModel(_pdata);
+            _sglModel = _models?.GetSGLModel(_pdata);
         }
 
-        private ModelCollection _models = null;
+        private IMPD_ModelCollection _models = null;
         private SGL_Model _sglModel = null;
 
         public override Control Create() {
@@ -44,7 +45,7 @@ namespace SF3.Win.Views {
                 if (value != _pdata) {
                     _pdata = value;
                     _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(_pdata.RamAddress));
-                    _sglModel = _models?.MakeSGLModel(_pdata);
+                    _sglModel = _models?.GetSGLModel(_pdata);
                     if (Control != null)
                         Control.Update(MPD_File, _sglModel);
                 }

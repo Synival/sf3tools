@@ -12,7 +12,7 @@ using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public class ModelCollection : TableFile {
+    public class ModelCollection : TableFile, IMPD_ModelCollection {
         protected ModelCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,
             ScenarioType scenario, int? chunkIndex, ModelCollectionType collectionType)
@@ -264,7 +264,7 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        public SGL_Model MakeSGLModel(PDataModel pdata) {
+        public SGL_Model GetSGLModel(PDataModel pdata) {
             var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
                 .Select(x => x.Vector)
                 .ToArray();
@@ -281,10 +281,10 @@ namespace SF3.Models.Files.MPD {
             return new SGL_Model((int) pdata.RamAddress, vertices, faces);
         }
 
-        public SGL_Model[] MakeSGLModels() {
+        public SGL_Model[] GetSGLModels() {
             return PDatasByMemoryAddress.Values
                 .Where(x => x.Index == 0)
-                .Select(x => MakeSGLModel(x))
+                .Select(x => GetSGLModel(x))
                 .ToArray();
         }
 

@@ -145,7 +145,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var sglModel = sglModelsByAddress.TryGetValue((int) address, out var pdataVal) ? pdataVal : null;
                     if (sglModel == null) {
                         var pdata = mc.PDatasByMemoryAddress.TryGetValue(address, out var pdataOut) ? pdataOut : null;
-                        sglModelsByAddress[(int) address] = sglModel = (pdata != null) ? mc.MakeSGLModel(pdata) : null;
+                        sglModelsByAddress[(int) address] = sglModel = (pdata != null) ? mc.GetSGLModel(pdata) : null;
                     }
                     if (sglModel == null)
                         continue;
@@ -162,7 +162,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelInstances = modelInstanceList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, SGL_Model sglModel,
+        public void Update(IMPD_File mpdFile, IMPD_ModelCollection models, SGL_Model sglModel,
             bool forceSemiTransparent = false, bool isHideMesh = false,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
@@ -192,25 +192,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             model.ScaleZ = scaleZ;
 
             ModelInstances = [model];
-        }
-
-        private TValue GetFromAnyCollection<TValue>(
-            IMPD_File mpdFile,
-            Func<ModelCollection, Dictionary<uint, TValue>> tableGetter,
-            uint address,
-            out ModelCollection mcOut
-        ) where TValue : class {
-            foreach (var mc in mpdFile.ModelCollections) {
-                if (mc != null) {
-                    var dict = tableGetter(mc);
-                    if (dict.TryGetValue(address, out TValue value)) {
-                        mcOut = mc;
-                        return value;
-                    }
-                }
-            }
-            mcOut = null;
-            return null;
         }
 
         private void CreateAndAddQuadModels(
