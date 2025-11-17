@@ -5,7 +5,7 @@ namespace SF3.MPD {
         public MPD_ModelInstance() {}
 
         public ModelCollectionType CollectionType { get; set; }
-        public int ModelIndex { get; set; }
+        public int ModelID { get; set; }
         public short PositionX { get; set; }
         public short PositionY { get; set; }
         public short PositionZ { get; set; }

@@ -36,7 +36,7 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: -0.5f, minWidth: 120)]
         public ModelCollectionType CollectionType { get; }
 
-        public int ModelIndex {
+        public int ModelID {
             get => (int) PData0;
             set => PData0 = (uint) value;
         }

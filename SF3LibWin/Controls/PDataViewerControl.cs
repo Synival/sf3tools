@@ -41,7 +41,7 @@ namespace SF3.Win.Controls {
             _renderer = new Renderer();
 
             if (MPD_File != null && Models != null && _sglModel != null)
-                _models.Update(MPD_File, Models, _pdataAddr, _sglModel);
+                _models.Update(MPD_File, Models, _sglModel);
 
             var lighting = ColorTable.Create(new ByteData.ByteData(new ByteArray(256)), "Colors", 0, 32);
             for (int i = 0; i < 32; i++) {
@@ -163,10 +163,9 @@ namespace SF3.Win.Controls {
         public ModelCollection Models { get; private set; } = null;
 
         private SGL_Model _sglModel = null;
-        private uint _pdataAddr;
 
         public void Update(
-            IMPD_File mpdFile, uint pdataAddr, SGL_Model sglModel,
+            IMPD_File mpdFile, SGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
@@ -174,9 +173,8 @@ namespace SF3.Win.Controls {
                 return;
 
             MPD_File = mpdFile;
-            _pdataAddr = pdataAddr;
             _sglModel = sglModel;
-            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(pdataAddr));
+            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey((uint) sglModel.ID));
             _vertices = null;
 
             _size = 1.0f;
@@ -186,7 +184,7 @@ namespace SF3.Win.Controls {
             if (_models != null) {
                 _models.Reset();
                 if (MPD_File != null && Models != null && sglModel != null) {
-                    _models.Update(MPD_File, Models, pdataAddr, sglModel, forceSemiTransparent: false, isHideMesh: false,
+                    _models.Update(MPD_File, Models, sglModel, forceSemiTransparent: false, isHideMesh: false,
                         rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
 
                     var verticesMatrix =
@@ -230,7 +228,7 @@ namespace SF3.Win.Controls {
 
             // TODO: this doesn't update at 30fps, please fix!
             if (_models != null && Models != null)
-                foreach (var modelGroup in _models.ModelsByMemoryAddressByCollection[Models.CollectionType].Values)
+                foreach (var modelGroup in _models.ModelsByIDByCollection[Models.CollectionType].Values)
                     foreach (var model in modelGroup.Models)
                         model.UpdateAnimatedTextures();
 

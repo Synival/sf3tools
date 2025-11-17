@@ -268,11 +268,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             float cameraPitch,
             bool[] modelDirectionsFacingCamera
         ) {
-            if (models?.ModelsByMemoryAddressByCollection == null)
+            if (models?.ModelsByIDByCollection == null)
                 return;
 
             var modelsWithGroups = models.ModelInstances
-                .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddressByCollection[x.CollectionType].TryGetValue(x.PData0, out ModelGroup pd) ? pd : null })
+                .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.CollectionType].TryGetValue(x.ModelID, out ModelGroup pd) ? pd : null })
                 .Where(x => x.ModelGroup != null)
                 .Where(x => {
                     var direction = x.Model.OnlyVisibleFromDirection;
@@ -412,7 +412,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
             using (general.ObjectShader.Use()) {
                 var modelsWithGroups = models.ModelInstances
-                    .Select(x => new { Model = x, ModelGroup = models.ModelsByMemoryAddressByCollection[x.CollectionType].TryGetValue(x.PData0, out ModelGroup pd) ? pd : null })
+                    .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.CollectionType].TryGetValue(x.ModelID, out ModelGroup pd) ? pd : null })
                     .Where(x => x.ModelGroup != null)
                     .Where(x => {
                         var direction = x.Model.OnlyVisibleFromDirection;
@@ -571,7 +571,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (options.ModelsToHide?.Contains(model.ID) == true)
                     continue;
 
-                var modelGroup = models.ModelsByMemoryAddressByCollection[model.CollectionType].TryGetValue(model.PData0, out ModelGroup pd) ? pd : null;
+                var modelGroup = models.ModelsByIDByCollection[model.CollectionType].TryGetValue(model.ModelID, out ModelGroup pd) ? pd : null;
                 if (modelGroup != null) {
                     SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch);
                     modelGroup.SolidTexturedModel?.Draw(general.WireframeShader);
@@ -689,7 +689,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 if (model.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var sglModel = models.SGL_ModelsByMemoryAddressByCollection[model.CollectionType].TryGetValue(model.PData0, out var pdataValue) ? pdataValue : null;
+                    var sglModel = models.SGL_ModelsByIDByCollection[model.CollectionType].TryGetValue(model.ModelID, out var pdataValue) ? pdataValue : null;
 
                     var topY     = sglModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var bottomY  = sglModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;

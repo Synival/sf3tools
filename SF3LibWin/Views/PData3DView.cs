@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
 
         public override Control Create() {
             var rval = base.Create();
-            Control.Update(MPD_File, _pdata?.RamAddress ?? 0, _sglModel);
+            Control.Update(MPD_File, _sglModel);
             return rval;
         }
 
@@ -31,8 +31,8 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
 
-            Control.Update(null, 0, null);
-            Control.Update(MPD_File, _pdata?.RamAddress ?? 0, _sglModel);
+            Control.Update(null, null);
+            Control.Update(MPD_File, _sglModel);
         }
 
         public IMPD_File MPD_File { get; }
@@ -46,7 +46,7 @@ namespace SF3.Win.Views {
                     _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(_pdata.RamAddress));
                     _sglModel = _models?.MakeSGLModel(_pdata);
                     if (Control != null)
-                        Control.Update(MPD_File, _pdata?.RamAddress ?? 0, _sglModel);
+                        Control.Update(MPD_File, _sglModel);
                 }
             }
         }

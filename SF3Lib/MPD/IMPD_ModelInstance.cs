@@ -3,7 +3,7 @@
 namespace SF3.MPD {
     public interface IMPD_ModelInstance {
         ModelCollectionType CollectionType { get; }
-        int ModelIndex { get; set; }
+        int ModelID { get; set; }
         short PositionX { get; set; }
         short PositionY { get; set; }
         short PositionZ { get; set; }

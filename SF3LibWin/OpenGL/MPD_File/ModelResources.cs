@@ -24,22 +24,22 @@ namespace SF3.Win.OpenGL.MPD_File {
         public override void DeInit() { }
 
         public override void Reset() {
-            foreach (var modelsDict in ModelsByMemoryAddressByCollection.Values)
+            foreach (var modelsDict in ModelsByIDByCollection.Values)
                 foreach (var model in modelsDict.Values)
                     model.Dispose();
 
-            ModelsByMemoryAddressByCollection.Clear();
-            SGL_ModelsByMemoryAddressByCollection.Clear();
+            ModelsByIDByCollection.Clear();
+            SGL_ModelsByIDByCollection.Clear();
 
             ModelInstances = null;
         }
 
         private void InitDictsForType(ModelCollectionType collectionType) {
             // TODO: Just have one structure with all this info!
-            if (!ModelsByMemoryAddressByCollection.ContainsKey(collectionType))
-                ModelsByMemoryAddressByCollection[collectionType] = [];
-            if (!SGL_ModelsByMemoryAddressByCollection.ContainsKey(collectionType))
-                SGL_ModelsByMemoryAddressByCollection[collectionType] = [];
+            if (!ModelsByIDByCollection.ContainsKey(collectionType))
+                ModelsByIDByCollection[collectionType] = [];
+            if (!SGL_ModelsByIDByCollection.ContainsKey(collectionType))
+                SGL_ModelsByIDByCollection[collectionType] = [];
         }
 
         private TextureCollectionType GetTextureCollection(ModelCollectionType modelCollection) {
@@ -123,7 +123,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     : [];
 
                 InitDictsForType(mc.CollectionType);
-                var sglModelsByAddress = SGL_ModelsByMemoryAddressByCollection[mc.CollectionType];
+                var sglModelsByAddress = SGL_ModelsByIDByCollection[mc.CollectionType];
 
                 if (mc.ModelInstanceTable != null)
                     modelInstanceList.AddRange(mc.ModelInstanceTable.Rows);
@@ -141,10 +141,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
                 foreach (var address in uniquePData0Addresses) {
-                    var sglModel = sglModelsByAddress.TryGetValue(address, out var pdataVal) ? pdataVal : null;
+                    var sglModel = sglModelsByAddress.TryGetValue((int) address, out var pdataVal) ? pdataVal : null;
                     if (sglModel == null) {
                         var pdata = mc.PDatasByMemoryAddress.TryGetValue(address, out var pdataOut) ? pdataOut : null;
-                        sglModelsByAddress[address] = sglModel = (pdata != null) ? mc.MakeSGLModel(pdata) : null;
+                        sglModelsByAddress[(int) address] = sglModel = (pdata != null) ? mc.MakeSGLModel(pdata) : null;
                     }
                     if (sglModel == null)
                         continue;
@@ -153,7 +153,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     if (!mc.IsMovableModelCollection) {
                         bool isForcedSemiTransparent = modelsWith2000Tag.Contains(address);
                         bool isHideMesh = modelsWith3000Tag.Contains(address);
-                        CreateAndAddQuadModels(mpdFile, mc.CollectionType, address, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
+                        CreateAndAddQuadModels(mpdFile, mc.CollectionType, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
                     }
                 }
             }
@@ -161,7 +161,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelInstances = modelInstanceList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, ModelCollection models, uint pdataAddr, SGL_Model sglModel,
+        public void Update(IMPD_File mpdFile, ModelCollection models, SGL_Model sglModel,
             bool forceSemiTransparent = false, bool isHideMesh = false,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
@@ -171,16 +171,16 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             InitDictsForType(models.CollectionType);
-            SGL_ModelsByMemoryAddressByCollection[models.CollectionType][pdataAddr] = sglModel;
+            SGL_ModelsByIDByCollection[models.CollectionType][sglModel.ID] = sglModel;
 
             var texCollection  = GetTextureCollection(models.CollectionType);
             var texturesById   = GetTexturesByID(mpdFile, texCollection);
             var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
-            CreateAndAddQuadModels(mpdFile, models.CollectionType, pdataAddr, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
+            CreateAndAddQuadModels(mpdFile, models.CollectionType, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 
             var model = new ModelInstance(new ByteData.ByteData(new ByteArray(256)), 0, "Model", 0, true, models.CollectionType);
-            model.PData0 = pdataAddr;
+            model.PData0 = (uint) sglModel.ID;
             model.PositionX = -32 * 32;
             model.PositionZ = -32 * 32;
             model.AngleX = rotX;
@@ -215,7 +215,6 @@ namespace SF3.Win.OpenGL.MPD_File {
         private void CreateAndAddQuadModels(
             IMPD_File mpdFile,
             ModelCollectionType modelCollection,
-            uint pdataAddr,
             SGL_Model sglModel,
             Dictionary<int, ITexture> texturesById,
             Dictionary<int, ModelAnimationInfo> animationsById,
@@ -379,7 +378,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var semiTransparentUntexturedModel = (semiTransparentUntexturedQuads.Count > 0) ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
             if (modelExists) {
-                ModelsByMemoryAddressByCollection[modelCollection][pdataAddr] = new ModelGroup(
+                ModelsByIDByCollection[modelCollection][sglModel.ID] = new ModelGroup(
                     solidTexturedModel,
                     solidUntexturedModel,
                     semiTransparentTexturedModel,
@@ -389,8 +388,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public Dictionary<ModelCollectionType, Dictionary<uint, ModelGroup>> ModelsByMemoryAddressByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<uint, SGL_Model>> SGL_ModelsByMemoryAddressByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<int, SGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
         public ModelInstanceBase[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;

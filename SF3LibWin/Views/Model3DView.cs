@@ -27,7 +27,7 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
 
-            Control.Update(null, 0, null);
+            Control.Update(null, null);
             UpdateViewerControl();
         }
 
@@ -51,25 +51,21 @@ namespace SF3.Win.Views {
             var mc = (_modelInstance == null) ? null : MPD_File?.ModelCollections
                 ?.FirstOrDefault(x => x.CollectionType == _modelInstance.CollectionType && x.PDatasByMemoryAddress?.ContainsKey(_modelInstance.PData0) == true);
 
-            if (mc == null) {
+            if (mc == null)
                 _sglModel = null;
-                _pdataAddr = 0;
-            }
             else {
                 var pdata = mc.PDatasByMemoryAddress[_modelInstance.PData0];
-                _pdataAddr = pdata.RamAddress;
                 _sglModel = mc.MakeSGLModel(pdata);
             }
         }
 
         private SGL_Model _sglModel = null;
-        private uint _pdataAddr;
 
         private void UpdateViewerControl() {
             if (_modelInstance == null)
-                Control.Update(MPD_File, _pdataAddr, _sglModel);
+                Control.Update(MPD_File, _sglModel);
             else
-                Control.Update(MPD_File, _pdataAddr, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
+                Control.Update(MPD_File, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
         }
     }
 }

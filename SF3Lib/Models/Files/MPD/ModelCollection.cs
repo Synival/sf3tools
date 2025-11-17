@@ -278,7 +278,7 @@ namespace SF3.Models.Files.MPD {
                 ))
                 .ToArray();
 
-            return new SGL_Model(vertices, faces);
+            return new SGL_Model((int) pdata.RamAddress, vertices, faces);
         }
 
         public SGL_Model[] MakeSGLModels() {
