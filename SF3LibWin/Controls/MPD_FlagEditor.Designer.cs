@@ -89,7 +89,7 @@
             gbContent.Controls.Add(cbHasAnySkyBox);
             gbContent.Location = new System.Drawing.Point(3, 3);
             gbContent.Name = "gbContent";
-            gbContent.Size = new System.Drawing.Size(568, 446);
+            gbContent.Size = new System.Drawing.Size(568, 471);
             gbContent.TabIndex = 0;
             gbContent.TabStop = false;
             gbContent.Text = "Content";
@@ -312,7 +312,7 @@
             // 
             cbChunk20IsSurfaceModelIfExists.AutoSize = true;
             cbChunk20IsSurfaceModelIfExists.Enabled = false;
-            cbChunk20IsSurfaceModelIfExists.Location = new System.Drawing.Point(329, 72);
+            cbChunk20IsSurfaceModelIfExists.Location = new System.Drawing.Point(6, 447);
             cbChunk20IsSurfaceModelIfExists.Name = "cbChunk20IsSurfaceModelIfExists";
             cbChunk20IsSurfaceModelIfExists.Size = new System.Drawing.Size(212, 19);
             cbChunk20IsSurfaceModelIfExists.TabIndex = 1;
@@ -323,7 +323,7 @@
             // 
             cbChunk1IsModels.AutoSize = true;
             cbChunk1IsModels.Enabled = false;
-            cbChunk1IsModels.Location = new System.Drawing.Point(329, 97);
+            cbChunk1IsModels.Location = new System.Drawing.Point(329, 72);
             cbChunk1IsModels.Name = "cbChunk1IsModels";
             cbChunk1IsModels.Size = new System.Drawing.Size(128, 19);
             cbChunk1IsModels.TabIndex = 1;
@@ -334,7 +334,7 @@
             // 
             cbChunk2IsSurfaceModel.AutoSize = true;
             cbChunk2IsSurfaceModel.Enabled = false;
-            cbChunk2IsSurfaceModel.Location = new System.Drawing.Point(329, 122);
+            cbChunk2IsSurfaceModel.Location = new System.Drawing.Point(329, 97);
             cbChunk2IsSurfaceModel.Name = "cbChunk2IsSurfaceModel";
             cbChunk2IsSurfaceModel.Size = new System.Drawing.Size(165, 19);
             cbChunk2IsSurfaceModel.TabIndex = 1;
@@ -345,7 +345,7 @@
             // 
             cbChunk20IsSurfaceModel.AutoSize = true;
             cbChunk20IsSurfaceModel.Enabled = false;
-            cbChunk20IsSurfaceModel.Location = new System.Drawing.Point(329, 147);
+            cbChunk20IsSurfaceModel.Location = new System.Drawing.Point(329, 122);
             cbChunk20IsSurfaceModel.Name = "cbChunk20IsSurfaceModel";
             cbChunk20IsSurfaceModel.Size = new System.Drawing.Size(171, 19);
             cbChunk20IsSurfaceModel.TabIndex = 1;
@@ -356,7 +356,7 @@
             // 
             cbChunk20IsModels.AutoSize = true;
             cbChunk20IsModels.Enabled = false;
-            cbChunk20IsModels.Location = new System.Drawing.Point(329, 172);
+            cbChunk20IsModels.Location = new System.Drawing.Point(329, 147);
             cbChunk20IsModels.Name = "cbChunk20IsModels";
             cbChunk20IsModels.Size = new System.Drawing.Size(134, 19);
             cbChunk20IsModels.TabIndex = 1;
@@ -367,7 +367,7 @@
             // 
             cbHighMemoryHasModels.AutoSize = true;
             cbHighMemoryHasModels.Enabled = false;
-            cbHighMemoryHasModels.Location = new System.Drawing.Point(329, 197);
+            cbHighMemoryHasModels.Location = new System.Drawing.Point(329, 172);
             cbHighMemoryHasModels.Name = "cbHighMemoryHasModels";
             cbHighMemoryHasModels.Size = new System.Drawing.Size(165, 19);
             cbHighMemoryHasModels.TabIndex = 1;
@@ -378,7 +378,7 @@
             // 
             cbHighMemoryHasSurfaceModel.AutoSize = true;
             cbHighMemoryHasSurfaceModel.Enabled = false;
-            cbHighMemoryHasSurfaceModel.Location = new System.Drawing.Point(329, 222);
+            cbHighMemoryHasSurfaceModel.Location = new System.Drawing.Point(329, 197);
             cbHighMemoryHasSurfaceModel.Name = "cbHighMemoryHasSurfaceModel";
             cbHighMemoryHasSurfaceModel.Size = new System.Drawing.Size(202, 19);
             cbHighMemoryHasSurfaceModel.TabIndex = 1;
@@ -389,7 +389,7 @@
             // 
             cbHasAnySkyBox.AutoSize = true;
             cbHasAnySkyBox.Enabled = false;
-            cbHasAnySkyBox.Location = new System.Drawing.Point(329, 247);
+            cbHasAnySkyBox.Location = new System.Drawing.Point(329, 222);
             cbHasAnySkyBox.Name = "cbHasAnySkyBox";
             cbHasAnySkyBox.Size = new System.Drawing.Size(111, 19);
             cbHasAnySkyBox.TabIndex = 1;
@@ -402,7 +402,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(gbContent);
             Name = "MPD_FlagEditor";
-            Size = new System.Drawing.Size(575, 451);
+            Size = new System.Drawing.Size(575, 477);
             gbContent.ResumeLayout(false);
             gbContent.PerformLayout();
             ResumeLayout(false);

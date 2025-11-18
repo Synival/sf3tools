@@ -20,11 +20,11 @@ namespace SF3.MPD {
         bool NarrowAngleBasedLightmap { get; set; }
         bool HasExtraChunk1ModelWithChunk21Textures { get; set; }
         bool Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
+        bool Chunk20IsSurfaceModelIfExists { get; set; }
 
         // Derived flags based on other flags
         bool Chunk1IsLoadedFromLowMemory { get; }
         bool Chunk1IsLoadedFromHighMemory { get; }
-        bool Chunk20IsSurfaceModelIfExists { get; }
         bool Chunk1IsModels { get; }
         bool Chunk2IsSurfaceModel { get; }
         bool Chunk20IsSurfaceModel { get; }

@@ -1,8 +1,8 @@
 ﻿using CommonLib.Attributes;
-using SF3.Models.Structs.MPD;
+using SF3.MPD;
 using SF3.Types;
 
-namespace SF3.MPD {
+namespace SF3.Models.Structs.MPD {
     public class MPDFlagsFromHeader : IMPD_Flags {
         public MPDFlagsFromHeader(MPDHeaderModel header) {
             Header = header;
@@ -150,15 +150,7 @@ namespace SF3.MPD {
             }
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0.8010f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromLowMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
-        public bool Chunk1IsLoadedFromLowMemory
-            => HasModels && (IsScenario1OrEarlier ? !HasSurfaceModel || Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists : Chunk1IsModels);
-
-        [TableViewModelColumn(addressField: null, displayOrder: 0.8011f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromHighMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
-        public bool Chunk1IsLoadedFromHighMemory
-            => HasModels && IsScenario1OrEarlier && HasSurfaceModel && !Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists;
-
-        [TableViewModelColumn(addressField: null, displayOrder: 0.8012f, displayName: "(0x8000) " + nameof(Chunk20IsSurfaceModelIfExists) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        [TableViewModelColumn(addressField: null, displayOrder: 0.8001f, displayName: "(0x8000) " + nameof(Chunk20IsSurfaceModelIfExists) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Chunk20IsSurfaceModelIfExists {
             get => IsScenario2OrLater ? (MapFlags & 0x8000) == 0x8000 : false;
             set {
@@ -166,6 +158,14 @@ namespace SF3.MPD {
                     MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
             }
         }
+
+        [TableViewModelColumn(addressField: null, displayOrder: 0.8010f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromLowMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Chunk1IsLoadedFromLowMemory
+            => HasModels && (IsScenario1OrEarlier ? !HasSurfaceModel || Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists : Chunk1IsModels);
+
+        [TableViewModelColumn(addressField: null, displayOrder: 0.8011f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromHighMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Chunk1IsLoadedFromHighMemory
+            => HasModels && IsScenario1OrEarlier && HasSurfaceModel && !Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists;
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8013f, displayName: "(Derived) " + nameof(Chunk1IsModels) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Chunk1IsModels
