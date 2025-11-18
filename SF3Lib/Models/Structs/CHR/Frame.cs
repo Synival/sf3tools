@@ -20,12 +20,14 @@ namespace SF3.Models.Structs.CHR {
 
         private readonly int _textureOffsetAddr;
 
-        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteIndex, int spriteId) : base(data, id, name, address, 0x04) {
+        public Frame(IByteData data, int id, string name, int address, uint dataOffset, int width, int height, int spriteIndex, int spriteId, bool isInCHP)
+        : base(data, id, name, address, 0x04) {
             DataOffset = dataOffset;
             Width      = width;
             Height     = height;
             SpriteIndex = spriteIndex;
             SpriteID   = spriteId;
+            IsInCHP    = isInCHP;
 
             _textureOffsetAddr = Address + 0x00; // 4 bytes
 
@@ -54,6 +56,8 @@ namespace SF3.Models.Structs.CHR {
         [NameGetter(NamedValueType.Sprite)]
         public int SpriteID { get; }
 
+        public bool IsInCHP { get; }
+
         [TableViewModelColumn(displayOrder: -0.25f, minWidth: 175)]
         public string SpriteName
             => FrameRefs?.GetAggergateSpriteName();
@@ -79,11 +83,23 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetDouble(_textureOffsetAddr, (int) value);
         }
 
-        [TableViewModelColumn(displayOrder: 0.5f, displayFormat: "X4")]
-        public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetDouble((int) (TextureOffset + DataOffset));
+        [TableViewModelColumn(displayOrder: 0.21f, displayName: "TexOff (In File)", displayFormat: "X4", visibilityProperty: nameof(IsInCHP))]
+        public uint TextureOffsetInFile {
+            get => TextureOffset + DataOffset;
+            set => TextureOffset = value - DataOffset;
+        }
 
-        [TableViewModelColumn(displayOrder: 0.6f, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 0.3f, displayFormat: "X4")]
+        public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetDouble((int) TextureOffsetInFile);
+
+        [TableViewModelColumn(displayOrder: 0.31f, displayName: "TexBitStreamOff (In File)", displayFormat: "X4", visibilityProperty: nameof(IsInCHP))]
+        public uint TextureBitstreamOffsetInFile => TextureOffset + (uint) (Data.GetDouble((int) TextureOffsetInFile) + DataOffset);
+
+        [TableViewModelColumn(displayOrder: 0.4f, displayFormat: "X4")]
         public uint TextureEndOffset => TextureOffset + TextureCompressedSize;
+
+        [TableViewModelColumn(displayOrder: 0.41f, displayName: "TexEndOff (In File)", displayFormat: "X4", visibilityProperty: nameof(IsInCHP))]
+        public uint TextureEndOffsetInFile => TextureOffset + TextureCompressedSize + DataOffset;
 
         [TableViewModelColumn(displayOrder: 0.7f, displayFormat: "X2")]
         public uint TextureCompressedSize { get; private set; } = 0;

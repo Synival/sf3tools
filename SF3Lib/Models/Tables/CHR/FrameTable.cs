@@ -5,7 +5,7 @@ using SF3.Models.Structs.CHR;
 
 namespace SF3.Models.Tables.CHR {
     public class FrameTable : TerminatedTable<Frame> {
-        protected FrameTable(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections)
+        protected FrameTable(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, bool isInCHP)
         : base(data, name, address, 0x04, 0xF1) {
             DataOffset       = dataOffset;
             Width            = width;
@@ -14,14 +14,15 @@ namespace SF3.Models.Tables.CHR {
             SpriteIndex      = spriteIndex;
             SpriteID         = spriteId;
             SpriteDirections = spriteDirections;
+            IsInCHP          = isInCHP;
         }
 
-        public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections)
-            => Create(() => new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections));
+        public static FrameTable Create(IByteData data, string name, int address, uint dataOffset, int width, int height, string rowPrefix, int spriteIndex, int spriteId, int spriteDirections, bool isInCHP)
+            => Create(() => new FrameTable(data, name, address, dataOffset, width, height, rowPrefix, spriteIndex, spriteId, spriteDirections, isInCHP));
 
         public override bool Load() {
             return Load(
-                (id, addr) => new Frame(Data, id, $"{RowPrefix}Frame{id:D2}", addr, DataOffset, Width, Height, SpriteIndex, SpriteID),
+                (id, addr) => new Frame(Data, id, $"{RowPrefix}Frame{id:D2}", addr, DataOffset, Width, Height, SpriteIndex, SpriteID, IsInCHP),
                 (rows, prevRow) => prevRow.TextureOffset != 0,
                 addEndModel: false
             );
@@ -48,5 +49,6 @@ namespace SF3.Models.Tables.CHR {
         public int SpriteIndex { get; }
         public int SpriteID { get; }
         public int SpriteDirections { get; }
+        public bool IsInCHP { get; }
     }
 }

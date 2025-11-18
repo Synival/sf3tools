@@ -10,13 +10,14 @@ using SF3.Utils;
 
 namespace SF3.Models.Structs.CHR {
     public class Sprite : Struct {
-        public Sprite(IByteData data, int id, int idInGroup, string name, int address, uint dataOffset, INameGetterContext ngc)
+        public Sprite(IByteData data, int id, int idInGroup, string name, int address, uint dataOffset, INameGetterContext ngc, bool isInCHP)
         : base(data, id, name, address, 0x18 /* just the header */) {
             IDInGroup = idInGroup;
             DataOffset = dataOffset;
             NameGetterContext = ngc;
+            IsInCHP = isInCHP;
 
-            Header = new SpriteHeader(data, 0, $"{nameof(Header)}{ID:D2}", address, dataOffset);
+            Header = new SpriteHeader(data, 0, $"{nameof(Header)}{ID:D2}", address, dataOffset, isInCHP);
 
             // We're often reading invalid headers when looking at CHP files. If this doesn't look like a valid header, abort reading here.
             if (!Header.IsValid() || Header.SpriteID == 0xFFFF)
@@ -30,7 +31,9 @@ namespace SF3.Models.Structs.CHR {
                 $"Sprite{ID:D2}_",
                 ID,
                 Header.SpriteID,
-                Header.Directions);
+                Header.Directions,
+                isInCHP: IsInCHP
+            );
 
             // It seems that this CHR and *only* this CHR has a bigger animation table than the rest.
             var nextId = (uint) Data.GetWord(Address + 0x18);
@@ -52,7 +55,14 @@ namespace SF3.Models.Structs.CHR {
             }
             var animationTableSize = Math.Max(16, (nextAnimationTableOffset - (int) Header.AnimationTableOffset) / 4);
 
-            AnimationOffsetTable = AnimationOffsetTable.Create(Data, nameof(AnimationOffsetTable), (int) (DataOffset + Header.AnimationTableOffset), animationTableSize);
+            AnimationOffsetTable = AnimationOffsetTable.Create(
+                Data,
+                nameof(AnimationOffsetTable),
+                (int) (DataOffset + Header.AnimationTableOffset),
+                animationTableSize,
+                Header.DataOffset,
+                isInCHP: IsInCHP
+            );
 
             var aniOffsets = AnimationOffsetTable.Select(x => x.Offset).Concat(new uint[] { Header.AnimationTableOffset }).ToArray();
             for (int i = aniOffsets.Length - 1; i >= 0; i--)
@@ -367,6 +377,7 @@ namespace SF3.Models.Structs.CHR {
         public int IDInGroup { get; }
         public uint DataOffset { get; }
         public INameGetterContext NameGetterContext { get; }
+        public bool IsInCHP { get; }
         public string SpriteName { get; }
         public string DropdownName { get; }
 

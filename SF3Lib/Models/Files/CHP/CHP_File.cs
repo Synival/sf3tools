@@ -32,7 +32,7 @@ namespace SF3.Models.Files.CHP {
 
             var dataEof = Data.Length;
             while (addr + 0x18 < dataEof) {
-                var header = new SpriteHeader(Data, 0, "", addr, (uint) addr);
+                var header = new SpriteHeader(Data, 0, "", addr, (uint) addr, isInCHP: true);
                 if (header.IsValid()) {
                     var newFile = CHR_File.Create(Data, NameGetterContext, Scenario, globalId, (uint) addr);
                     globalId += newFile.SpriteTable.Length;

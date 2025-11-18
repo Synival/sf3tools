@@ -6,10 +6,10 @@ namespace SF3.Models.Tables.CHR {
     public class SpriteTable : TerminatedTable<Sprite> {
         protected SpriteTable(IByteData data, string name, int address, int startId, uint dataOffset, INameGetterContext ngc, bool isInCHP)
         : base(data, name, address, 4, maxSize: 300) {
-            StartID = startId;
-            DataOffset = dataOffset;
+            StartID           = startId;
+            DataOffset        = dataOffset;
             NameGetterContext = ngc;
-            IsInCHP = isInCHP;
+            IsInCHP           = isInCHP;
         }
 
         public static SpriteTable Create(IByteData data, string name, int address, int startId, uint dataOffset, INameGetterContext ngc, bool isInCHP)
@@ -20,7 +20,7 @@ namespace SF3.Models.Tables.CHR {
             return Load(
                 (id, addr) => {
                     var name = IsInCHP ? $"{nameof(Sprite)}{globalId - id:D2}_{id:D2}" : $"{nameof(Sprite)}{globalId:D2}";
-                    return new Sprite(Data, globalId++, id, name, addr, DataOffset, NameGetterContext);
+                    return new Sprite(Data, globalId++, id, name, addr, DataOffset, NameGetterContext, isInCHP: IsInCHP);
                 },
                 (rows, prevRow) => prevRow.Header.SpriteID != 0xFFFF, false
             );

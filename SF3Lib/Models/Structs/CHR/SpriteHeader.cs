@@ -18,8 +18,10 @@ namespace SF3.Models.Structs.CHR {
         private readonly int _frameTableOffsetAddr;
         private readonly int _animationTableOffsetAddr;
 
-        public SpriteHeader(IByteData data, int id, string name, int address, uint dataOffset) : base(data, id, name, address, 0x18) {
+        public SpriteHeader(IByteData data, int id, string name, int address, uint dataOffset, bool isInCHP)
+        : base(data, id, name, address, 0x18) {
             DataOffset = dataOffset;
+            IsInCHP    = isInCHP;
 
             _spriteIdAddr                = Address + 0x00; // 2 bytes
             _widthAddr                   = Address + 0x02; // 2 bytes
@@ -57,6 +59,7 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         public uint DataOffset { get; }
+        public bool IsInCHP { get; }
 
         [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0.1f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
@@ -137,6 +140,12 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetDouble(_frameTableOffsetAddr, (int) value);
         }
 
+        [TableViewModelColumn(displayOrder: 10.1f, displayName: "FrameTableOff (In File)", displayFormat: "X2")]
+        public uint FrameTableOffsetInFile {
+            get => FrameTableOffset + DataOffset;
+            set => FrameTableOffset = value - DataOffset;
+        }
+
         [TableViewModelColumn(addressField: nameof(_animationTableOffsetAddr), displayOrder: 11, displayFormat: "X2")]
         [BulkCopy]
         public uint AnimationTableOffset {
@@ -144,8 +153,14 @@ namespace SF3.Models.Structs.CHR {
             set => Data.SetDouble(_animationTableOffsetAddr, (int) value);
         }
 
+        [TableViewModelColumn(displayOrder: 11.1f, displayName: "AniTableOff (In File)", displayFormat: "X2", visibilityProperty: nameof(IsInCHP))]
+        public uint AnimationTableOffsetInFile {
+            get => AnimationTableOffset + DataOffset;
+            set => AnimationTableOffset = value - DataOffset;
+        }
+
         // TODO: Not actually part of the header! Only here for views.
-        [TableViewModelColumn(displayOrder: 12, displayFormat: "X4", displayName: "TotalCompressedFramesSize (Derived)")]
+        [TableViewModelColumn(displayOrder: 12, displayFormat: "X4", displayName: "TotalCompressedFramesSize (Derived)", isReadOnly: true)]
         public uint TotalCompressedFramesSize { get; set; }
     }
 }
