@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
-using SF3.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {

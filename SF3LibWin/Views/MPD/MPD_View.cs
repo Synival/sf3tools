@@ -20,6 +20,7 @@ namespace SF3.Win.Views.MPD {
 
             TabControl.Selected += UpdateViewerMapEvent;
 
+            CreateChild(new MPD_FlagsView("Flags", Model.MPDFlags));
             CreateChild(new LightingView("Lighting", Model));
             CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
             CreateChild(new ModelsTabView("Models", Model));

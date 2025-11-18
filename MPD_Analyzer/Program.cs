@@ -55,18 +55,8 @@ namespace MPD_Analyzer {
             ]}
         };
 
-        private static string[] MPD_MatchFunc(IMPD_File mpdFile, string filename) {
-            List<string> matchReports = new List<string>();
-
-            foreach (var mc in mpdFile.ModelCollections) {
-                if (mc?.ModelInstanceTable == null)
-                    continue;
-                foreach (var model in mc.ModelInstanceTable)
-                    if (model.Tag == 3000)
-                        matchReports.Add($"{mc.Name}: Model 0x{model.ID:X2}.Tag = {model.Tag}");
-            }
-
-            return matchReports.ToArray();
+        private static string[]? MPD_MatchFunc(IMPD_File mpdFile, string filename) {
+            return [];
         }
 
         public static void Main(string[] args) {
@@ -167,7 +157,7 @@ namespace MPD_Analyzer {
                                 }
                             }
 
-                            //ScanForErrorsAndReport(scenario, mpdFile);
+                            ScanForErrorsAndReport(scenario, mpdFile);
                         }
                     }
                     catch (Exception e) {
