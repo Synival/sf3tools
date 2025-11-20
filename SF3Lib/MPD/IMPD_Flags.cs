@@ -22,6 +22,26 @@ namespace SF3.MPD {
         bool Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
         bool Chunk20IsSurfaceModelIfExists { get; set; }
 
+        // Properties to indicate whether or not this flag can be set
+        bool CanSetUnknownMapFlag0x0001 { get; }
+        bool CanSetUnknownMapFlag0x0002 { get; }
+        bool CanSetHasSurfaceTextureRotation { get; }
+        bool CanSetAddDotProductBasedNoiseToStandardLightmap { get; }
+        bool CanSetUnknownFlatTileFlag0x0008 { get; }
+        bool CanSetBackgroundImageType { get; }
+        bool CanSetUnknownMapFlag0x0020 { get; }
+        bool CanSetHasChunk19Model { get; }
+        bool CanSetModifyPalette1ForGradient { get; }
+        bool CanSetHasModels { get; }
+        bool CanSetHasSurfaceModel { get; }
+        bool CanSetGroundImageType { get; }
+        bool CanSetHasCutsceneSkyBox { get; }
+        bool CanSetHasBattleSkyBox { get; }
+        bool CanSetNarrowAngleBasedLightmap { get; }
+        bool CanSetHasExtraChunk1ModelWithChunk21Textures { get; }
+        bool CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; }
+        bool CanSetChunk20IsSurfaceModelIfExists { get; }
+
         // Derived flags based on other flags
         bool Chunk1IsLoadedFromLowMemory { get; }
         bool Chunk1IsLoadedFromHighMemory { get; }

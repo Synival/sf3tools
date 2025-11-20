@@ -21,11 +21,11 @@ namespace SF3.Win.Controls {
         }
 
         private class BackgroundImageTypeComboBoxValue : ComboBoxValue<BackgroundImageType> {
-            public BackgroundImageTypeComboBoxValue(BackgroundImageType value, string name) : base(value, name) {}
+            public BackgroundImageTypeComboBoxValue(BackgroundImageType value, string name) : base(value, name) { }
         }
 
         private class GroundImageTypeComboBoxValue : ComboBoxValue<GroundImageType> {
-            public GroundImageTypeComboBoxValue(GroundImageType value, string name) : base(value, name) {}
+            public GroundImageTypeComboBoxValue(GroundImageType value, string name) : base(value, name) { }
         }
 
         private static Dictionary<BackgroundImageType, BackgroundImageTypeComboBoxValue> c_backgroundImageComboBoxValues = new Dictionary<BackgroundImageType, BackgroundImageTypeComboBoxValue>() {
@@ -50,61 +50,115 @@ namespace SF3.Win.Controls {
             cbGroundImageType.Items.AddRange(c_groundImageComboBoxValues.Values.ToArray());
 
             cbUnknownMapFlag0x0001.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownMapFlag0x0001, nameof(IMPD_Flags.UnknownMapFlag0x0001), null);
+                => TrySetProperty(cbUnknownMapFlag0x0001,
+                    nameof(IMPD_Flags.UnknownMapFlag0x0001),
+                    nameof(IMPD_Flags.CanSetUnknownMapFlag0x0001));
             cbUnknownMapFlag0x0002.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownMapFlag0x0002, nameof(IMPD_Flags.UnknownMapFlag0x0002), null);
+                => TrySetProperty(cbUnknownMapFlag0x0002,
+                    nameof(IMPD_Flags.UnknownMapFlag0x0002),
+                    nameof(IMPD_Flags.CanSetUnknownMapFlag0x0002));
             cbHasSurfaceTextureRotation.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasSurfaceTextureRotation, nameof(IMPD_Flags.HasSurfaceTextureRotation), null);
+                => TrySetProperty(cbHasSurfaceTextureRotation,
+                    nameof(IMPD_Flags.HasSurfaceTextureRotation),
+                    nameof(IMPD_Flags.CanSetHasSurfaceTextureRotation));
             cbAddDotProductBasedNoiseToStandardLightmap.CheckedChanged += (s, e)
-                => TrySetProperty(cbAddDotProductBasedNoiseToStandardLightmap, nameof(IMPD_Flags.AddDotProductBasedNoiseToStandardLightmap), null);
+                => TrySetProperty(cbAddDotProductBasedNoiseToStandardLightmap,
+                    nameof(IMPD_Flags.AddDotProductBasedNoiseToStandardLightmap),
+                    nameof(IMPD_Flags.CanSetAddDotProductBasedNoiseToStandardLightmap));
             cbUnknownFlatTileFlag0x0008.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownFlatTileFlag0x0008, nameof(IMPD_Flags.UnknownFlatTileFlag0x0008), null);
+                => TrySetProperty(cbUnknownFlatTileFlag0x0008,
+                    nameof(IMPD_Flags.UnknownFlatTileFlag0x0008),
+                    nameof(IMPD_Flags.CanSetUnknownFlatTileFlag0x0008));
             cbBackgroundImageType.SelectedIndexChanged += (s, e)
-                => TrySetProperty<BackgroundImageType>(cbBackgroundImageType, nameof(IMPD_Flags.BackgroundImageType), null);
+                => TrySetProperty<BackgroundImageType>(cbBackgroundImageType,
+                    nameof(IMPD_Flags.BackgroundImageType),
+                    nameof(IMPD_Flags.CanSetBackgroundImageType));
             cbUnknownMapFlag0x0020.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownMapFlag0x0020, nameof(IMPD_Flags.UnknownMapFlag0x0020), null);
+                => TrySetProperty(cbUnknownMapFlag0x0020,
+                    nameof(IMPD_Flags.UnknownMapFlag0x0020),
+                    nameof(IMPD_Flags.CanSetUnknownMapFlag0x0020));
             cbHasChunk19Model.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasChunk19Model, nameof(IMPD_Flags.HasChunk19Model), null);
+                => TrySetProperty(cbHasChunk19Model,
+                    nameof(IMPD_Flags.HasChunk19Model),
+                    nameof(IMPD_Flags.CanSetHasChunk19Model));
             cbModifyPalette1ForGradient.CheckedChanged += (s, e)
-                => TrySetProperty(cbModifyPalette1ForGradient, nameof(IMPD_Flags.ModifyPalette1ForGradient), null);
+                => TrySetProperty(cbModifyPalette1ForGradient,
+                    nameof(IMPD_Flags.ModifyPalette1ForGradient),
+                    nameof(IMPD_Flags.CanSetModifyPalette1ForGradient));
             cbHasModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasModels, nameof(IMPD_Flags.HasModels), null);
+                => TrySetProperty(cbHasModels,
+                    nameof(IMPD_Flags.HasModels),
+                    nameof(IMPD_Flags.CanSetHasModels));
             cbHasSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasSurfaceModel, nameof(IMPD_Flags.HasSurfaceModel), null);
+                => TrySetProperty(cbHasSurfaceModel,
+                    nameof(IMPD_Flags.HasSurfaceModel),
+                    nameof(IMPD_Flags.CanSetHasSurfaceModel));
             cbGroundImageType.SelectedIndexChanged += (s, e)
-                => TrySetProperty<GroundImageType>(cbGroundImageType, nameof(IMPD_Flags.GroundImageType), null);
+                => TrySetProperty<GroundImageType>(cbGroundImageType,
+                    nameof(IMPD_Flags.GroundImageType),
+                    nameof(IMPD_Flags.CanSetGroundImageType));
             cbHasCutsceneSkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasCutsceneSkyBox, nameof(IMPD_Flags.HasCutsceneSkyBox), null);
+                => TrySetProperty(cbHasCutsceneSkyBox,
+                    nameof(IMPD_Flags.HasCutsceneSkyBox),
+                    nameof(IMPD_Flags.CanSetHasCutsceneSkyBox));
             cbHasBattleSkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasBattleSkyBox, nameof(IMPD_Flags.HasBattleSkyBox), null);
+                => TrySetProperty(cbHasBattleSkyBox,
+                    nameof(IMPD_Flags.HasBattleSkyBox),
+                    nameof(IMPD_Flags.CanSetHasBattleSkyBox));
             cbNarrowAngleBasedLightmap.CheckedChanged += (s, e)
-                => TrySetProperty(cbNarrowAngleBasedLightmap, nameof(IMPD_Flags.NarrowAngleBasedLightmap), null);
+                => TrySetProperty(cbNarrowAngleBasedLightmap,
+                    nameof(IMPD_Flags.NarrowAngleBasedLightmap),
+                    nameof(IMPD_Flags.CanSetNarrowAngleBasedLightmap));
             cbHasExtraChunk1ModelWithChunk21Textures.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasExtraChunk1ModelWithChunk21Textures, nameof(IMPD_Flags.HasExtraChunk1ModelWithChunk21Textures), null);
+                => TrySetProperty(cbHasExtraChunk1ModelWithChunk21Textures,
+                    nameof(IMPD_Flags.HasExtraChunk1ModelWithChunk21Textures),
+                    nameof(IMPD_Flags.CanSetHasExtraChunk1ModelWithChunk21Textures));
             cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists, nameof(IMPD_Flags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists), null);
+                => TrySetProperty(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
+                    nameof(IMPD_Flags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
+                    nameof(IMPD_Flags.CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
             cbChunk20IsSurfaceModelIfExists.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk20IsSurfaceModelIfExists, nameof(IMPD_Flags.Chunk20IsSurfaceModelIfExists), null);
+                => TrySetProperty(cbChunk20IsSurfaceModelIfExists,
+                    nameof(IMPD_Flags.Chunk20IsSurfaceModelIfExists),
+                    nameof(IMPD_Flags.CanSetChunk20IsSurfaceModelIfExists));
 
             // Derived values
             cbChunk1IsLoadedFromLowMemory.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsLoadedFromLowMemory, nameof(IMPD_Flags.Chunk1IsLoadedFromLowMemory), null);
+                => TrySetProperty(cbChunk1IsLoadedFromLowMemory,
+                    nameof(IMPD_Flags.Chunk1IsLoadedFromLowMemory),
+                    null);
             cbChunk1IsLoadedFromHighMemory.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsLoadedFromHighMemory, nameof(IMPD_Flags.Chunk1IsLoadedFromHighMemory), null);
+                => TrySetProperty(cbChunk1IsLoadedFromHighMemory,
+                    nameof(IMPD_Flags.Chunk1IsLoadedFromHighMemory),
+                    null);
             cbChunk1IsModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsModels, nameof(IMPD_Flags.Chunk1IsModels), null);
+                => TrySetProperty(cbChunk1IsModels,
+                    nameof(IMPD_Flags.Chunk1IsModels),
+                    null);
             cbChunk2IsSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk2IsSurfaceModel, nameof(IMPD_Flags.Chunk2IsSurfaceModel), null);
+                => TrySetProperty(cbChunk2IsSurfaceModel,
+                    nameof(IMPD_Flags.Chunk2IsSurfaceModel),
+                    null);
             cbChunk20IsSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk20IsSurfaceModel, nameof(IMPD_Flags.Chunk20IsSurfaceModel), null);
+                => TrySetProperty(cbChunk20IsSurfaceModel,
+                    nameof(IMPD_Flags.Chunk20IsSurfaceModel),
+                    null);
             cbChunk20IsModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk20IsModels, nameof(IMPD_Flags.Chunk20IsModels), null);
+                => TrySetProperty(cbChunk20IsModels,
+                    nameof(IMPD_Flags.Chunk20IsModels),
+                    null);
             cbHighMemoryHasModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbHighMemoryHasModels, nameof(IMPD_Flags.HighMemoryHasModels), null);
+                => TrySetProperty(cbHighMemoryHasModels,
+                    nameof(IMPD_Flags.HighMemoryHasModels),
+                    null);
             cbHighMemoryHasSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbHighMemoryHasSurfaceModel, nameof(IMPD_Flags.HighMemoryHasSurfaceModel), null);
+                => TrySetProperty(cbHighMemoryHasSurfaceModel,
+                    nameof(IMPD_Flags.HighMemoryHasSurfaceModel),
+                    null);
             cbHasAnySkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasAnySkyBox, nameof(IMPD_Flags.HasAnySkyBox), null);
+                => TrySetProperty(cbHasAnySkyBox,
+                    nameof(IMPD_Flags.HasAnySkyBox),
+                    null);
 
             ResumeLayout();
         }
@@ -127,34 +181,88 @@ namespace SF3.Win.Controls {
 
             _inUpdateFlagsFromSource = true;
 
-            SetControlState(cbUnknownMapFlag0x0001,                                 nameof(IMPD_Flags.UnknownMapFlag0x0001), null);
-            SetControlState(cbUnknownMapFlag0x0002,                                 nameof(IMPD_Flags.UnknownMapFlag0x0002), null);
-            SetControlState(cbHasSurfaceTextureRotation,                            nameof(IMPD_Flags.HasSurfaceTextureRotation), null);
-            SetControlState(cbAddDotProductBasedNoiseToStandardLightmap,            nameof(IMPD_Flags.AddDotProductBasedNoiseToStandardLightmap), null);
-            SetControlState(cbUnknownFlatTileFlag0x0008,                            nameof(IMPD_Flags.UnknownFlatTileFlag0x0008), null);
-            SetControlState<BackgroundImageType>(cbBackgroundImageType,             nameof(IMPD_Flags.BackgroundImageType), null);
-            SetControlState(cbUnknownMapFlag0x0020,                                 nameof(IMPD_Flags.UnknownMapFlag0x0020), null);
-            SetControlState(cbHasChunk19Model,                                      nameof(IMPD_Flags.HasChunk19Model), null);
-            SetControlState(cbModifyPalette1ForGradient,                            nameof(IMPD_Flags.ModifyPalette1ForGradient), null);
-            SetControlState(cbHasModels,                                            nameof(IMPD_Flags.HasModels), null);
-            SetControlState(cbHasSurfaceModel,                                      nameof(IMPD_Flags.HasSurfaceModel), null);
-            SetControlState<GroundImageType>(cbGroundImageType,                     nameof(IMPD_Flags.GroundImageType), null);
-            SetControlState(cbHasCutsceneSkyBox,                                    nameof(IMPD_Flags.HasCutsceneSkyBox), null);
-            SetControlState(cbHasBattleSkyBox,                                      nameof(IMPD_Flags.HasBattleSkyBox), null);
-            SetControlState(cbNarrowAngleBasedLightmap,                             nameof(IMPD_Flags.NarrowAngleBasedLightmap), null);
-            SetControlState(cbHasExtraChunk1ModelWithChunk21Textures,               nameof(IMPD_Flags.HasExtraChunk1ModelWithChunk21Textures), null);
-            SetControlState(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists, nameof(IMPD_Flags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists), null);
-            SetControlState(cbChunk20IsSurfaceModelIfExists,                        nameof(IMPD_Flags.Chunk20IsSurfaceModelIfExists), null);
+            SetControlState(cbUnknownMapFlag0x0001,
+                nameof(IMPD_Flags.UnknownMapFlag0x0001),
+                nameof(IMPD_Flags.CanSetUnknownMapFlag0x0001));
+            SetControlState(cbUnknownMapFlag0x0002,
+                nameof(IMPD_Flags.UnknownMapFlag0x0002),
+                nameof(IMPD_Flags.CanSetUnknownMapFlag0x0002));
+            SetControlState(cbHasSurfaceTextureRotation,
+                nameof(IMPD_Flags.HasSurfaceTextureRotation),
+                nameof(IMPD_Flags.CanSetHasSurfaceTextureRotation));
+            SetControlState(cbAddDotProductBasedNoiseToStandardLightmap,
+                nameof(IMPD_Flags.AddDotProductBasedNoiseToStandardLightmap),
+                nameof(IMPD_Flags.CanSetAddDotProductBasedNoiseToStandardLightmap));
+            SetControlState(cbUnknownFlatTileFlag0x0008,
+                nameof(IMPD_Flags.UnknownFlatTileFlag0x0008),
+                nameof(IMPD_Flags.CanSetUnknownFlatTileFlag0x0008));
+            SetControlState<BackgroundImageType>(cbBackgroundImageType,
+                nameof(IMPD_Flags.BackgroundImageType),
+                nameof(IMPD_Flags.CanSetBackgroundImageType));
+            SetControlState(cbUnknownMapFlag0x0020,
+                nameof(IMPD_Flags.UnknownMapFlag0x0020),
+                nameof(IMPD_Flags.CanSetUnknownMapFlag0x0020));
+            SetControlState(cbHasChunk19Model,
+                nameof(IMPD_Flags.HasChunk19Model),
+                nameof(IMPD_Flags.CanSetHasChunk19Model));
+            SetControlState(cbModifyPalette1ForGradient,
+                nameof(IMPD_Flags.ModifyPalette1ForGradient),
+                nameof(IMPD_Flags.CanSetModifyPalette1ForGradient));
+            SetControlState(cbHasModels,
+                nameof(IMPD_Flags.HasModels),
+                nameof(IMPD_Flags.CanSetHasModels));
+            SetControlState(cbHasSurfaceModel,
+                nameof(IMPD_Flags.HasSurfaceModel),
+                nameof(IMPD_Flags.CanSetHasSurfaceModel));
+            SetControlState<GroundImageType>(cbGroundImageType,
+                nameof(IMPD_Flags.GroundImageType),
+                nameof(IMPD_Flags.CanSetGroundImageType));
+            SetControlState(cbHasCutsceneSkyBox,
+                nameof(IMPD_Flags.HasCutsceneSkyBox),
+                nameof(IMPD_Flags.CanSetHasCutsceneSkyBox));
+            SetControlState(cbHasBattleSkyBox,
+                nameof(IMPD_Flags.HasBattleSkyBox),
+                nameof(IMPD_Flags.CanSetHasBattleSkyBox));
+            SetControlState(cbNarrowAngleBasedLightmap,
+                nameof(IMPD_Flags.NarrowAngleBasedLightmap),
+                nameof(IMPD_Flags.CanSetNarrowAngleBasedLightmap));
+            SetControlState(cbHasExtraChunk1ModelWithChunk21Textures,
+                nameof(IMPD_Flags.HasExtraChunk1ModelWithChunk21Textures),
+                nameof(IMPD_Flags.CanSetHasExtraChunk1ModelWithChunk21Textures));
+            SetControlState(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
+                nameof(IMPD_Flags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
+                nameof(IMPD_Flags.CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
+            SetControlState(cbChunk20IsSurfaceModelIfExists,
+                nameof(IMPD_Flags.Chunk20IsSurfaceModelIfExists),
+                nameof(IMPD_Flags.CanSetChunk20IsSurfaceModelIfExists));
 
-            SetControlState(cbChunk1IsLoadedFromLowMemory,                          nameof(IMPD_Flags.Chunk1IsLoadedFromLowMemory), null);
-            SetControlState(cbChunk1IsLoadedFromHighMemory,                         nameof(IMPD_Flags.Chunk1IsLoadedFromHighMemory), null);
-            SetControlState(cbChunk1IsModels,                                       nameof(IMPD_Flags.Chunk1IsModels), null);
-            SetControlState(cbChunk2IsSurfaceModel,                                 nameof(IMPD_Flags.Chunk2IsSurfaceModel), null);
-            SetControlState(cbChunk20IsSurfaceModel,                                nameof(IMPD_Flags.Chunk20IsSurfaceModel), null);
-            SetControlState(cbChunk20IsModels,                                      nameof(IMPD_Flags.Chunk20IsModels), null);
-            SetControlState(cbHighMemoryHasModels,                                  nameof(IMPD_Flags.HighMemoryHasModels), null);
-            SetControlState(cbHighMemoryHasSurfaceModel,                            nameof(IMPD_Flags.HighMemoryHasSurfaceModel), null);
-            SetControlState(cbHasAnySkyBox,                                         nameof(IMPD_Flags.HasAnySkyBox), null);
+            SetControlState(cbChunk1IsLoadedFromLowMemory,
+                nameof(IMPD_Flags.Chunk1IsLoadedFromLowMemory),
+                null);
+            SetControlState(cbChunk1IsLoadedFromHighMemory,
+                nameof(IMPD_Flags.Chunk1IsLoadedFromHighMemory),
+                null);
+            SetControlState(cbChunk1IsModels,
+                nameof(IMPD_Flags.Chunk1IsModels),
+                null);
+            SetControlState(cbChunk2IsSurfaceModel,
+                nameof(IMPD_Flags.Chunk2IsSurfaceModel),
+                null);
+            SetControlState(cbChunk20IsSurfaceModel,
+                nameof(IMPD_Flags.Chunk20IsSurfaceModel),
+                null);
+            SetControlState(cbChunk20IsModels,
+                nameof(IMPD_Flags.Chunk20IsModels),
+                null);
+            SetControlState(cbHighMemoryHasModels,
+                nameof(IMPD_Flags.HighMemoryHasModels),
+                null);
+            SetControlState(cbHighMemoryHasSurfaceModel,
+                nameof(IMPD_Flags.HighMemoryHasSurfaceModel),
+                null);
+            SetControlState(cbHasAnySkyBox,
+                nameof(IMPD_Flags.HasAnySkyBox),
+                null);
 
             _inUpdateFlagsFromSource = false;
         }
@@ -184,7 +292,7 @@ namespace SF3.Win.Controls {
             }
 
             // We can get the value. We can now set the state.
-            control.Enabled = propertyInfo.GetSetMethod() != null;
+            control.Enabled = CanSetIsTrue(canSetPropertyName) && propertyInfo.GetSetMethod() != null;
             control.Checked = (bool) getter.Invoke(FlagsSource, null);
         }
 
@@ -213,7 +321,7 @@ namespace SF3.Win.Controls {
             }
 
             // We can get the value. We can now set the state.
-            control.Enabled = propertyInfo.GetSetMethod() != null;
+            control.Enabled = CanSetIsTrue(canSetPropertyName) && propertyInfo.GetSetMethod() != null;
             var comboBoxItems = control.Items.Cast<ComboBoxValue<T>>().ToArray();
             control.SelectedItem = comboBoxItems.FirstOrDefault(x => x.Value.Equals((T) getter.Invoke(FlagsSource, null)));
         }
@@ -249,7 +357,7 @@ namespace SF3.Win.Controls {
             }
 
             // Getter and setter are available - let's assume we can modify this control.
-            control.Enabled = true;
+            control.Enabled = CanSetIsTrue(canSetPropertyName);
 
             // Don't do anything if there will be no change.
             var newValue = control.Checked;
@@ -308,7 +416,7 @@ namespace SF3.Win.Controls {
             }
 
             // Getter and setter are available - let's assume we can modify this control.
-            control.Enabled = true;
+            control.Enabled = CanSetIsTrue(canSetPropertyName);
 
             // Don't do anything if there will be no change.
             var newValue = ((ComboBoxValue<T>) control.SelectedItem)?.Value;
@@ -327,6 +435,23 @@ namespace SF3.Win.Controls {
 
             // Changes were made; update all checkboxes.
             UpdateFlagsFromSource();
+        }
+
+        private bool CanSetIsTrue(string propertyName) {
+            if (propertyName == null)
+                return true;
+            if (FlagsSource == null)
+                return false;
+
+            var propertyInfo = FlagsSource.GetType().GetProperty(propertyName);
+            if (propertyInfo == null)
+                return false;
+
+            var getter = propertyInfo.GetGetMethod();
+            if (getter == null)
+                return false;
+
+            return (bool) getter.Invoke(FlagsSource, null);
         }
     }
 }
