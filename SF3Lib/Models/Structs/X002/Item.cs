@@ -213,7 +213,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_effective1TypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_effective1PowAddr), displayOrder: 10, displayFormat: "X2", displayGroup: "Stats")]
+        [TableViewModelColumn(addressField: nameof(_effective1PowAddr), displayOrder: 10, displayGroup: "Stats")]
         [BulkCopy]
         public int Effective1Pow {
             get => Data.GetByte(_effective1PowAddr);
@@ -228,7 +228,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_effective2TypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_effective2PowAddr), displayOrder: 12, displayFormat: "X2", displayGroup: "Stats")]
+        [TableViewModelColumn(addressField: nameof(_effective2PowAddr), displayOrder: 12, displayGroup: "Stats")]
         [BulkCopy]
         public int Effective2Pow {
             get => Data.GetByte(_effective2PowAddr);
