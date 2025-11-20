@@ -65,10 +65,10 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cbAddDotProductBasedNoiseToStandardLightmap,
                     nameof(IMPD_Flags.AddDotProductBasedNoiseToStandardLightmap),
                     nameof(IMPD_Flags.CanSetAddDotProductBasedNoiseToStandardLightmap));
-            cbUnknownFlatTileFlag0x0008.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownFlatTileFlag0x0008,
-                    nameof(IMPD_Flags.UnknownFlatTileFlag0x0008),
-                    nameof(IMPD_Flags.CanSetUnknownFlatTileFlag0x0008));
+            cbKeepTexturelessFlatTiles.CheckedChanged += (s, e)
+                => TrySetProperty(cbKeepTexturelessFlatTiles,
+                    nameof(IMPD_Flags.KeepTexturelessFlatTiles),
+                    nameof(IMPD_Flags.CanSetKeepTexturelessFlatTiles));
             cbBackgroundImageType.SelectedIndexChanged += (s, e)
                 => TrySetProperty<BackgroundImageType>(cbBackgroundImageType,
                     nameof(IMPD_Flags.BackgroundImageType),
@@ -193,9 +193,9 @@ namespace SF3.Win.Controls {
             SetControlState(cbAddDotProductBasedNoiseToStandardLightmap,
                 nameof(IMPD_Flags.AddDotProductBasedNoiseToStandardLightmap),
                 nameof(IMPD_Flags.CanSetAddDotProductBasedNoiseToStandardLightmap));
-            SetControlState(cbUnknownFlatTileFlag0x0008,
-                nameof(IMPD_Flags.UnknownFlatTileFlag0x0008),
-                nameof(IMPD_Flags.CanSetUnknownFlatTileFlag0x0008));
+            SetControlState(cbKeepTexturelessFlatTiles,
+                nameof(IMPD_Flags.KeepTexturelessFlatTiles),
+                nameof(IMPD_Flags.CanSetKeepTexturelessFlatTiles));
             SetControlState<BackgroundImageType>(cbBackgroundImageType,
                 nameof(IMPD_Flags.BackgroundImageType),
                 nameof(IMPD_Flags.CanSetBackgroundImageType));

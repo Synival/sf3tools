@@ -7,7 +7,7 @@ namespace SF3.MPD {
         bool UnknownMapFlag0x0002 { get; set; }
         bool HasSurfaceTextureRotation { get; set; }
         bool AddDotProductBasedNoiseToStandardLightmap { get; set; }
-        bool UnknownFlatTileFlag0x0008 { get; set; }
+        bool KeepTexturelessFlatTiles { get; set; }
         BackgroundImageType BackgroundImageType { get; set; }
         bool UnknownMapFlag0x0020 { get; set; }
         bool HasChunk19Model { get; set; }
@@ -27,7 +27,7 @@ namespace SF3.MPD {
         bool CanSetUnknownMapFlag0x0002 { get; }
         bool CanSetHasSurfaceTextureRotation { get; }
         bool CanSetAddDotProductBasedNoiseToStandardLightmap { get; }
-        bool CanSetUnknownFlatTileFlag0x0008 { get; }
+        bool CanSetKeepTexturelessFlatTiles { get; }
         bool CanSetBackgroundImageType { get; }
         bool CanSetUnknownMapFlag0x0020 { get; }
         bool CanSetHasChunk19Model { get; }

@@ -45,7 +45,7 @@
             cbHighMemoryHasModels = new CommonLib.Win.Controls.DarkModeCheckBox();
             cbHasSurfaceTextureRotation = new CommonLib.Win.Controls.DarkModeCheckBox();
             cbAddDotProductBasedNoiseToStandardLightmap = new CommonLib.Win.Controls.DarkModeCheckBox();
-            cbUnknownFlatTileFlag0x0008 = new CommonLib.Win.Controls.DarkModeCheckBox();
+            cbKeepTexturelessFlatTiles = new CommonLib.Win.Controls.DarkModeCheckBox();
             cbHasSurfaceModel = new CommonLib.Win.Controls.DarkModeCheckBox();
             cbNarrowAngleBasedLightmap = new CommonLib.Win.Controls.DarkModeCheckBox();
             cbChunk20IsSurfaceModelIfExists = new CommonLib.Win.Controls.DarkModeCheckBox();
@@ -282,7 +282,7 @@
             // cbHasSurfaceTextureRotation
             // 
             cbHasSurfaceTextureRotation.AutoSize = true;
-            cbHasSurfaceTextureRotation.Location = new System.Drawing.Point(6, 124);
+            cbHasSurfaceTextureRotation.Location = new System.Drawing.Point(6, 99);
             cbHasSurfaceTextureRotation.Name = "cbHasSurfaceTextureRotation";
             cbHasSurfaceTextureRotation.Size = new System.Drawing.Size(221, 19);
             cbHasSurfaceTextureRotation.TabIndex = 1;
@@ -299,15 +299,15 @@
             cbAddDotProductBasedNoiseToStandardLightmap.Text = "Add Dot Product-Based Noise to Surface Lightmap";
             cbAddDotProductBasedNoiseToStandardLightmap.UseVisualStyleBackColor = true;
             // 
-            // cbUnknownFlatTileFlag0x0008
+            // cbKeepTexturelessFlatTiles
             // 
-            cbUnknownFlatTileFlag0x0008.AutoSize = true;
-            cbUnknownFlatTileFlag0x0008.Location = new System.Drawing.Point(6, 74);
-            cbUnknownFlatTileFlag0x0008.Name = "cbUnknownFlatTileFlag0x0008";
-            cbUnknownFlatTileFlag0x0008.Size = new System.Drawing.Size(192, 19);
-            cbUnknownFlatTileFlag0x0008.TabIndex = 1;
-            cbUnknownFlatTileFlag0x0008.Text = "Unknown Flat Tile Flag (0x0008)";
-            cbUnknownFlatTileFlag0x0008.UseVisualStyleBackColor = true;
+            cbKeepTexturelessFlatTiles.AutoSize = true;
+            cbKeepTexturelessFlatTiles.Location = new System.Drawing.Point(6, 124);
+            cbKeepTexturelessFlatTiles.Name = "cbKeepTexturelessFlatTiles";
+            cbKeepTexturelessFlatTiles.Size = new System.Drawing.Size(161, 19);
+            cbKeepTexturelessFlatTiles.TabIndex = 1;
+            cbKeepTexturelessFlatTiles.Text = "Keep Textureless Flat Tiles";
+            cbKeepTexturelessFlatTiles.UseVisualStyleBackColor = true;
             // 
             // cbHasSurfaceModel
             // 
@@ -322,7 +322,7 @@
             // cbNarrowAngleBasedLightmap
             // 
             cbNarrowAngleBasedLightmap.AutoSize = true;
-            cbNarrowAngleBasedLightmap.Location = new System.Drawing.Point(6, 99);
+            cbNarrowAngleBasedLightmap.Location = new System.Drawing.Point(6, 74);
             cbNarrowAngleBasedLightmap.Name = "cbNarrowAngleBasedLightmap";
             cbNarrowAngleBasedLightmap.Size = new System.Drawing.Size(275, 19);
             cbNarrowAngleBasedLightmap.TabIndex = 1;
@@ -379,7 +379,7 @@
             gbSurface.Controls.Add(labelSeparator1);
             gbSurface.Controls.Add(cbHasSurfaceTextureRotation);
             gbSurface.Controls.Add(cbAddDotProductBasedNoiseToStandardLightmap);
-            gbSurface.Controls.Add(cbUnknownFlatTileFlag0x0008);
+            gbSurface.Controls.Add(cbKeepTexturelessFlatTiles);
             gbSurface.Controls.Add(cbHasSurfaceModel);
             gbSurface.Controls.Add(cbNarrowAngleBasedLightmap);
             gbSurface.Controls.Add(cbChunk2IsSurfaceModel);
@@ -553,7 +553,7 @@
         private CommonLib.Win.Controls.DarkModeCheckBox cbUnknownMapFlag0x0002;
         private CommonLib.Win.Controls.DarkModeCheckBox cbHasSurfaceTextureRotation;
         private CommonLib.Win.Controls.DarkModeCheckBox cbAddDotProductBasedNoiseToStandardLightmap;
-        private CommonLib.Win.Controls.DarkModeCheckBox cbUnknownFlatTileFlag0x0008;
+        private CommonLib.Win.Controls.DarkModeCheckBox cbKeepTexturelessFlatTiles;
         private CommonLib.Win.Controls.DarkModeCheckBox cbUnknownMapFlag0x0020;
         private CommonLib.Win.Controls.DarkModeCheckBox cbHasChunk19Model;
         private CommonLib.Win.Controls.DarkModeCheckBox cbModifyPalette1ForGradient;

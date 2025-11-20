@@ -55,9 +55,9 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0004) : (ushort) (MapFlags & ~0x0004);
         }
 
-        public bool CanSetUnknownFlatTileFlag0x0008 => true;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0008f, displayName: "(0x0008) " + nameof(UnknownFlatTileFlag0x0008), displayGroup: "Flags")]
-        public bool UnknownFlatTileFlag0x0008 {
+        public bool CanSetKeepTexturelessFlatTiles => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0008f, displayName: "(0x0008) " + nameof(KeepTexturelessFlatTiles), displayGroup: "Flags")]
+        public bool KeepTexturelessFlatTiles {
             get => (MapFlags & 0x0008) == 0x0008;
             set => MapFlags = value ? (ushort) (MapFlags | 0x0008) : (ushort) (MapFlags & ~0x0008);
         }
