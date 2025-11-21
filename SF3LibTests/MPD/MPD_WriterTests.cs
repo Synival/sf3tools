@@ -43,6 +43,8 @@ namespace SF3.Tests.MPD {
                 outputData = memoryStream.ToArray();
             }
 
+            File.WriteAllBytes("VOID_Test.MPD", outputData);
+
             AssertByteComparison(fileData, outputData);
         }
 

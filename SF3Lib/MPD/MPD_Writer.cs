@@ -1,5 +1,6 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CommonLib.SGL;
 using SF3.Files;
 using SF3.Models.Files.MPD;
@@ -98,9 +99,17 @@ namespace SF3.MPD {
             // Chunk[0] is always empty.
             WriteEmptyChunk();
 
+            // TODO: check for this, and get memory mapping stuff!!
+            // Chunk[1] is always models if it exists.
+            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.CollectionType == ModelCollectionType.PrimaryModels);
+            if (mc == null)
+                WriteEmptyChunk();
+            else
+                WriteModelChunk(mc.GetSGLModels(), mc.GetModelInstances());
+
             // TODO: actual chunks!!
             int chunkTableSize = 20;
-            for (int i = 1; i < chunkTableSize; i++)
+            for (int i = 2; i < chunkTableSize; i++)
                 WriteEmptyChunk();
 
             Finish();
@@ -290,7 +299,183 @@ namespace SF3.MPD {
             return pos;
         }
 
+        public void WriteModelChunk(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */) {
+            // Update the address of this new chunk.
+            AtOffset(0x2000 + Chunks * 0x08, curOffset => WritePointer((uint) curOffset));
+
+            // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
+            // We'll need to pass this information along to the writers so they write the pointers correctly.
+            var fileChunkAddr = (int) CurrentOffset;
+            // TODO: support high-memory
+            var ramChunkAddr = 0x290000 + fileChunkAddr;
+
+            // Write header. Collision-related offsets will be written later.
+            var collisionLinesHeaderOffset = CurrentOffset;
+            WritePointer(null);
+            var collisionBlocksOffset = CurrentOffset;
+            WritePointer(null);
+            Write((ushort) (instances?.Length ?? 0));
+
+            // Model instances immediately follow the header.
+            if (instances != null)
+                foreach (var inst in instances)
+                    WriteInstance(inst, fileChunkAddr, ramChunkAddr);
+            Write((uint) 0);
+
+            // PDATAs, POINTs, POLYGONs, and ATTRs follow after that.
+            if (models != null)
+                foreach (var model in models)
+                    WriteModel(model, eightPDatas: true, fileChunkAddr, ramChunkAddr);
+
+            // The collision data is at the end.
+            WriteCollisionLinesHeader(collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
+            WriteCollisionBlocks(collisionBlocksOffset, fileChunkAddr, ramChunkAddr);
+
+            // Write size
+            var endOffset = CurrentOffset;
+            AtOffset(0x2000 + Chunks * 0x08 + 0x04, curOffset => Write((uint) (endOffset - fileChunkAddr)));
+            Chunks++;
+
+            WriteToAlignTo(4);
+        }
+
+        public void WriteInstance(IMPD_ModelInstance instance, int fileChunkAddr, int ramChunkAddr) {
+            // Placeholder pointers to be populated later.
+            for (int i = 0; i < 8; i++) {
+                int pdataId = instance.ModelID * 10 + i;
+                if (!_pdataIdToOffsetPtrMap.ContainsKey(pdataId))
+                    _pdataIdToOffsetPtrMap.Add(pdataId, new List<long>());
+                _pdataIdToOffsetPtrMap[pdataId].Add(CurrentOffset);
+                WritePointer(null);
+            }
+
+            Write(instance.PositionX);
+            Write(instance.PositionY);
+            Write(instance.PositionZ);
+
+            Write(new CompressedFIXED(instance.AngleX, 0).RawShort);
+            Write(new CompressedFIXED(instance.AngleY, 0).RawShort);
+            Write(new CompressedFIXED(instance.AngleZ, 0).RawShort);
+
+            Write(new FIXED(instance.ScaleX, 0).RawInt);
+            Write(new FIXED(instance.ScaleY, 0).RawInt);
+            Write(new FIXED(instance.ScaleZ, 0).RawInt);
+
+            Write(instance.Tag);
+            Write(instance.Flags);
+        }
+
+        public void WriteModel(SGL_Model model, bool eightPDatas, int fileChunkAddr, int ramChunkAddr) {
+            var pdataCount = eightPDatas ? 8 : 1;
+
+            // Track where the pointers to the various tables will be.
+            var pointsPtrs   = new long[pdataCount];
+            var polygonsPtrs = new long[pdataCount];
+            var attrsPtrs    = new long[pdataCount];
+
+            // Write PDATAs.
+            uint addr;
+            for (int i = 0; i < pdataCount; i++) {
+                var pdataId = model.ID + i;
+                if (_pdataIdToOffsetPtrMap.TryGetValue(pdataId, out var ptrs)) {
+                    addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
+                    AtOffsets(ptrs.ToArray(), _ => Write(addr));
+                }
+
+                // Write placeholders for the tables to write and their counts.
+                pointsPtrs[i] = CurrentOffset;
+                WritePointer(null);
+                Write((uint) model.Vertices.Count);
+                polygonsPtrs[i] = CurrentOffset;
+                WritePointer(null);
+                Write((uint) model.Faces.Count);
+                attrsPtrs[i] = CurrentOffset;
+                WritePointer(null);
+            }
+
+            addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
+            AtOffsets(pointsPtrs, _ => Write(addr));
+            WritePOINTs(model);
+
+            addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
+            AtOffsets(polygonsPtrs, _ => Write(addr));
+            WritePOLYGONs(model);
+
+            for (var i = 0; i < pdataCount; i++) {
+                addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
+                AtOffset(attrsPtrs[i], _ => Write(addr));
+                WriteATTRs(model, i);
+            }
+        }
+
+        public void WritePOINTs(SGL_Model model) {
+            foreach (var vertex in model.Vertices)
+                WritePOINT(vertex);
+        }
+
+        public void WritePOINT(VECTOR vertex) {
+            Write(vertex.X.RawInt);
+            Write(vertex.Y.RawInt);
+            Write(vertex.Z.RawInt);
+        }
+
+        public void WritePOLYGONs(SGL_Model model) {
+            foreach (var face in model.Faces)
+                WritePOLYGON(face);
+        }
+
+        public void WritePOLYGON(SGL_ModelFace face) {
+            Write(face.Normal.X.RawInt);
+            Write(face.Normal.Y.RawInt);
+            Write(face.Normal.Z.RawInt);
+            Write((ushort) face.VertexIndices[0]);
+            Write((ushort) face.VertexIndices[1]);
+            Write((ushort) face.VertexIndices[2]);
+            Write((ushort) face.VertexIndices[3]);
+        }
+
+        public void WriteATTRs(SGL_Model model, int lodIndex) {
+            foreach (var face in model.Faces)
+                WriteATTR(face.Attributes, lodIndex);
+        }
+
+        public void WriteATTR(IATTR attr, int lodIndex) {
+            Write((byte) attr.Plane);
+            Write((byte) attr.SortAndOptions);
+            Write((ushort) attr.TextureNo);
+            Write((ushort) (attr.Mode | ((lodIndex > 0) ? 0x1000 : 0x0000)));
+            Write((ushort) attr.ColorNo);
+            Write((ushort) (attr.GouraudShadingTable + lodIndex));
+            Write((ushort) attr.Dir);
+        }
+
+        public void WriteCollisionLinesHeader(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
+            AtOffset(ptrToOffset, curAddr => Write((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
+
+            // TODO: actually write the real lines!
+            Write((uint) 0);
+            Write((uint) 0);
+        }
+
+        public void WriteCollisionBlocks(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
+            AtOffset(ptrToOffset, curAddr => Write((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
+
+            // TODO: actually write the real blocks!
+            // 16 * 16 pointers
+            var blockAddr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr) + 0x400;
+            for (var i = 0; i < 0x100; i++) {
+                Write(blockAddr);
+                blockAddr += 2;
+            }
+
+            // 16 * 16 tables, terminated by 0xFFFF.
+            for (var i = 0; i < 0x100; i++)
+                Write((ushort) 0xFFFF);
+        }
+
         public ScenarioType Scenario { get; }
         public int Chunks { get; private set; } = 0;
+
+        private Dictionary<int, List<long>> _pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();
     }
 }

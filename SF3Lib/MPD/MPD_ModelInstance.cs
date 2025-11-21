@@ -20,8 +20,7 @@ namespace SF3.MPD {
             ScaleY = mi.ScaleY;
             ScaleZ = mi.ScaleZ;
             Tag = mi.Tag;
-            AlwaysFacesCamera = mi.AlwaysFacesCamera;
-            OnlyVisibleFromDirection = mi.OnlyVisibleFromDirection;
+            Flags = mi.Flags;
         }
 
         public ModelCollectionType CollectionType { get; set; }
@@ -37,7 +36,16 @@ namespace SF3.MPD {
         public float ScaleY { get; set; }
         public float ScaleZ { get; set; }
         public ushort Tag { get; set; }
-        public bool AlwaysFacesCamera { get; set; }
-        public ModelDirectionType OnlyVisibleFromDirection { get; set; }
+        public ushort Flags { get; set; }
+
+        public bool AlwaysFacesCamera {
+            get => (Flags & 0x08) == 0x08;
+            set => Flags = (ushort) ((Flags & ~0x08) | (value ? 0x08 : 0x00));
+        }
+
+        public ModelDirectionType OnlyVisibleFromDirection {
+            get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
+            set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));
+        }
     }
 }
