@@ -218,6 +218,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var attr = polygon.Attributes;
 
                 var color = new Vector4(1);
+                bool useTexture = attr.UseTexture;
                 TextureAnimation anim = null;
                 bool isSemiTransparent = false;
                 TextureFlipType flip = TextureFlipType.NoFlip;
@@ -246,7 +247,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     if (attr.Mode_MESHon)
                         transparency *= 0.5f;
 
-                    if (!attr.UseTexture) {
+                    if (!useTexture) {
                         var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
                         color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                     }
@@ -260,9 +261,12 @@ namespace SF3.Win.OpenGL.MPD_File {
                             else if (texturesById.ContainsKey(textureId))
                                 anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
                         }
-                        // TODO: what to do for missing textures?
-                        if (anim == null)
-                            continue;
+
+                        // If the texture is missing, mark this polygon bright red.
+                        if (anim == null) {
+                            useTexture = false;
+                            color = new Vector4(1f, 0f, 0f, 1f);
+                        }
                     }
 
                     // If forcing semi-transparency, and there aren't any already-indexed textures, force color to black.
@@ -298,7 +302,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var vertexNormals = new Vector3[] { normal, normal, normal, normal };
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
-                var useGouraud = attr.CL_Gouraud && attr.UseTexture;
+                var useGouraud = attr.CL_Gouraud && useTexture;
                 var applyLighting = ((attr.UseLight || anim == null) && !useGouraud) ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 

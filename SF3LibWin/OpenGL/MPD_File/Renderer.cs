@@ -513,8 +513,13 @@ namespace SF3.Win.OpenGL.MPD_File {
                     else
                         block.Model?.Draw(general.ObjectShader, null);
 
-                    using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                        block.UntexturedModel?.Draw(general.ObjectShader, null);
+                    if (block.MissingTexturesModel != null)
+                        using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas))
+                            block.MissingTexturesModel?.Draw(general.ObjectShader, null);
+
+                    if (block.UntexturedModel != null)
+                        using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                            block.UntexturedModel?.Draw(general.ObjectShader, null);
                 }
             }
 
@@ -590,6 +595,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             foreach (var block in surfaceModel.Blocks) {
                 block.UntexturedModel?.Draw(general.WireframeShader, null);
+                block.MissingTexturesModel?.Draw(general.WireframeShader, null);
                 block.Model?.Draw(general.WireframeShader, null);
             }
         }

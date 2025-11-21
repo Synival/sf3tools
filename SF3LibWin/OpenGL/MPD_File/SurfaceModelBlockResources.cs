@@ -62,6 +62,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventIDs);
 
             var surfaceQuads           = new List<Quad>();
+            var missingSurfaceQuads    = new List<Quad>();
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
 
@@ -133,20 +134,27 @@ namespace SF3.Win.OpenGL.MPD_File {
                     var eventIdVboData = eventIdData.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 2);
 
                     var vertices = tile.GetSurfaceModelVertices();
+
+                    void AddAttributes(Quad quad) {
+                        quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
+                        quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
+                        quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
+                        quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, _applyLightingVboData));
+                    }
+
                     if (anim != null) {
                         var newQuad = new Quad(vertices, anim, rotate, flip);
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, _applyLightingVboData));
+                        AddAttributes(newQuad);
                         surfaceQuads.Add(newQuad);
+                    }
+                    else if (textureData != null && tile.ModelTextureID != 0xFF) {
+                        var newQuad = new Quad(vertices, new Vector4(1f, 0f, 0f, 1f));
+                        AddAttributes(newQuad);
+                        missingSurfaceQuads.Add(newQuad);
                     }
                     else {
                         var newQuad = new Quad(vertices);
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, terrainTypeTexInfo.TexCoordName, 4, terrainTypeVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, eventIdTexInfo.TexCoordName, 4, eventIdVboData));
-                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, _applyLightingVboData));
+                        AddAttributes(newQuad);
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
@@ -159,7 +167,11 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             if (surfaceQuads.Count > 0) {
                 Model = new QuadModel(surfaceQuads.ToArray());
-                models.Add(this.Model);
+                models.Add(Model);
+            }
+            if (missingSurfaceQuads.Count > 0) {
+                MissingTexturesModel = new QuadModel(missingSurfaceQuads.ToArray());
+                models.Add(MissingTexturesModel);
             }
             if (untexturedSurfaceQuads.Count > 0) {
                 UntexturedModel = new QuadModel(untexturedSurfaceQuads.ToArray());
@@ -184,6 +196,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public int TileY2 { get; }
 
         public QuadModel Model { get; private set; } = null;
+        public QuadModel MissingTexturesModel { get; private set; } = null;
         public QuadModel UntexturedModel { get; private set; } = null;
         public QuadModel SelectionModel { get; private set; } = null;
 
