@@ -56,14 +56,14 @@ namespace SF3.CHR {
             spriteInfo.UnassignedAnimationTablePointerOffset = currentPos + 0x14;
 
             // Write the entry to the stream.
-            Write(outputData.GetDataCopyOrReference());
+            WriteBytes(outputData.GetDataCopyOrReference());
         }
 
         /// <summary>
         /// Writes the final 0x18 byte-long indicating the end of the header.
         /// </summary>
         public void WriteHeaderTerminator() {
-            Write(new byte[] {
+            WriteBytes(new byte[] {
                 0xFF, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -87,8 +87,8 @@ namespace SF3.CHR {
         /// <param name="command">Command or FrameID for this frame.</param>
         /// <param name="parameter">Parameter for this command.</param>
         public void WriteAnimationCommand(int command, int parameter) {
-            Write(((ushort) command).ToByteArray());
-            Write(((ushort) parameter).ToByteArray());
+            WriteBytes(((ushort) command).ToByteArray());
+            WriteBytes(((ushort) parameter).ToByteArray());
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace SF3.CHR {
             var animationOffsetTable = spriteInfo.AnimationOffsetTableOffsets;
             for (int i = 0; i < tableSize; i++) {
                 var offset = (int) (animationOffsetTable.ContainsKey(i) ? (animationOffsetTable[i] - StreamStartPosition) : 0);
-                Write(offset.ToByteArray());
+                WriteBytes(offset.ToByteArray());
             }
         }
 
@@ -130,7 +130,7 @@ namespace SF3.CHR {
 
             // Get the frame image offset if it's already been written. Otherwise, write '0' as a placeholder.
             var frameImageOffset = frameImageInfo.Offset ?? 0;
-            Write(((uint) frameImageOffset).ToByteArray());
+            WriteBytes(((uint) frameImageOffset).ToByteArray());
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace SF3.CHR {
             AssignUnassignedFrameTablePointerToCurrentPosition(spriteIndex);
 
             // Two blank uints; one for a terminator, another for padding.
-            Write(new byte[8]);
+            WriteBytes(new byte[8]);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace SF3.CHR {
             // Remember the offset of this image.
             frameImageInfo.Offset = Stream.Position - StreamStartPosition;
 
-            Write(compressedImage);
+            WriteBytes(compressedImage);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace SF3.CHR {
         /// </summary>
         public override void Finish() {
             // Write an additional 4 bytes at the end.
-            Write(new byte[4]);
+            WriteBytes(new byte[4]);
         }
 
         private void AssignUnassignedFrameTablePointerToCurrentPosition(int spriteIndex) {

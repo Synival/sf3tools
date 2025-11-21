@@ -55,7 +55,7 @@ namespace SF3.MPD {
             // - 0x46F4: Barrel Textures
 
             // Placeholder for a pointer to the header with 8 bytes of padding.
-            Write(new byte[0x0C]);
+            WriteBytes(new byte[0x0C]);
 
             var lightPalettePos      = WriteDataOrNull(mpd.LightPalette);
             var lightPositionPos     = WriteDataOrNull(mpd.LightPosition);
@@ -70,7 +70,7 @@ namespace SF3.MPD {
             var palette2Pos          = WriteDataOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
 
             var headerPos = CurrentOffset;
-            WriteHeader(
+            WriteMPDHeader(
                 mpd.MPDHeader,
                 mpd.MPDFlags,
                 lightPalettePos,
@@ -88,13 +88,13 @@ namespace SF3.MPD {
 
             // Write a pointer to the header.
             var headerPtrPos = CurrentOffset;
-            Write((uint) (headerPos + 0x290000));
+            WriteUInt((uint) (headerPos + 0x290000));
 
             // Write a *double pointer* to the header at the start of the file.
-            AtOffset(0, _ => Write((uint) (headerPtrPos + 0x290000)));
+            AtOffset(0, _ => WriteUInt((uint) (headerPtrPos + 0x290000)));
 
             // Write a blank chunk table. We're going to flesh it out as we write chunks.
-            Write(new byte[0x2100 - CurrentOffset]);
+            WriteBytes(new byte[0x2100 - CurrentOffset]);
 
             // Chunk[0] is always empty.
             WriteEmptyChunk();
@@ -115,116 +115,72 @@ namespace SF3.MPD {
             Finish();
         }
 
-        public void Write(byte value)
-            => Write(new byte[] { value });
+        private void WriteMPDPointer(int? offset)
+            => WriteInt(offset.HasValue ? (offset.Value + 0x290000) : 0);
 
-        public void Write(ushort[] values) {
-            foreach (var value in values)
-                Write(value);
-        }
+        private void WriteMPDPointer(uint? offset)
+            => WriteUInt(offset.HasValue ? (offset.Value + 0x290000) : 0);
 
-        public void Write(ushort value) {
-            WriteToAlignTo(2);
-            Write(new byte[] {
-                (byte) (value >> 8),
-                (byte) value
-            });
-        }
-
-        public void Write(uint[] values) {
-            foreach (var value in values)
-                Write(value);
-        }
-
-        public void Write(short value)
-            => Write((ushort) value);
-
-        public void Write(short[] values) {
-            foreach (var value in values)
-                Write(value);
-        }
-
-        public void Write(uint value) {
-            WriteToAlignTo(4);
-            Write(new byte[] {
-                (byte) (value >> 24),
-                (byte) (value >> 16),
-                (byte) (value >> 8),
-                (byte) value
-            });
-        }
-
-        public void Write(int[] values) {
-            foreach (var value in values)
-                Write(value);
-        }
-
-        public void Write(int value)
-            => Write((uint) value);
-
-        void WritePointer(uint? offset)
-            => Write((uint) (offset.HasValue ? (offset.Value + 0x290000) : 0));
-
-        public void Write(ColorTable colorTable) {
+        public void WriteColorTable(ColorTable colorTable) {
             foreach (var color in colorTable)
-                Write(color.ColorABGR1555);
+                WriteUShort(color.ColorABGR1555);
         }
 
-        public void Write(LightPosition lightPosition) {
-            Write(new CompressedFIXED(lightPosition.Pitch / 180.0f, 0).RawShort);
-            Write(new CompressedFIXED(lightPosition.Yaw / 180.0f, 0).RawShort);
+        public void WriteLightPosition(LightPosition lightPosition) {
+            WriteShort(new CompressedFIXED(lightPosition.Pitch / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(lightPosition.Yaw / 180.0f, 0).RawShort);
         }
 
-        public void Write(UnknownUInt8Table table) {
+        public void WriteUInt8Table(UnknownUInt8Table table) {
             foreach (var value in table)
-                Write(value.Value);
+                WriteByte(value.Value);
             if (table.ReadUntil.HasValue)
-                Write(table.ReadUntil.Value);
+                WriteByte(table.ReadUntil.Value);
         }
 
-        public void Write(UnknownUInt16Table table) {
+        public void WriteUInt16Table(UnknownUInt16Table table) {
             foreach (var value in table)
-                Write(value.Value);
+                WriteUShort(value.Value);
             if (table.ReadUntil.HasValue)
-                Write(table.ReadUntil.Value);
+                WriteUShort(table.ReadUntil.Value);
         }
 
-        public void Write(UnknownUInt32Table table) {
+        public void WriteUInt32Table(UnknownUInt32Table table) {
             foreach (var value in table)
-                Write(value.Value);
+                WriteUInt(value.Value);
             if (table.ReadUntil.HasValue)
-                Write(table.ReadUntil.Value);
+                WriteInt(table.ReadUntil.Value);
         }
 
-        public void Write(ModelSwitchGroupsTable modelSwitchGroups) {
+        public void WriteModelSwitchGroups(ModelSwitchGroupsTable modelSwitchGroups) {
             // TODO: Write the things
-            Write(0xFFFFFFFF);
+            WriteUInt(0xFFFFFFFF);
         }
 
-        public void Write(TextureAnimationTable textureAnimations) {
+        public void WriteTextureAnimations(TextureAnimationTable textureAnimations) {
             // TODO: Write the things
             if (textureAnimations.Is32Bit)
-                Write((uint) textureAnimations.TextureEndId);
+                WriteUInt(textureAnimations.TextureEndId);
             else
-                Write((ushort) textureAnimations.TextureEndId);
+                WriteUShort((ushort) textureAnimations.TextureEndId);
         }
 
-        public void Write(BoundaryTable boundaries) {
+        public void WriteBoundaries(BoundaryTable boundaries) {
             foreach (var boundary in boundaries) {
-                Write(boundary.X1);
-                Write(boundary.Z1);
-                Write(boundary.X2);
-                Write(boundary.Z2);
+                WriteShort(boundary.X1);
+                WriteShort(boundary.Z1);
+                WriteShort(boundary.X2);
+                WriteShort(boundary.Z2);
             }
         }
 
-        public void Write(TextureIDTable textureIds) {
+        public void WriteTextureIDs(TextureIDTable textureIds) {
             foreach (var textureId in textureIds)
-                Write(textureId.TextureID);
-            Write((ushort) 0xFFFF);
+                WriteUShort(textureId.TextureID);
+            WriteUShort(0xFFFF);
         }
 
-        public void WriteHeader(
+        public void WriteMPDHeader(
             MPDHeaderModel header,
             IMPD_Flags flags,
             uint? lightPalettePos,
@@ -242,39 +198,39 @@ namespace SF3.MPD {
             var headerAddr = (uint) CurrentOffset;
 
             // TODO: determine proper map flags
-            Write((ushort) header.MapFlags);
-            WritePointer(lightPalettePos);
-            WritePointer(lightPositionPos);
-            WritePointer(unknown1Pos);
-            Write((ushort) header.ViewDistance);
-            WritePointer(modelSwitchGroupsPos);
-            WritePointer(textureAnimationsPos);
-            WritePointer(unknown2Pos);
-            WritePointer(groundAnimationPos);
+            WriteUShort(header.MapFlags);
+            WriteMPDPointer(lightPalettePos);
+            WriteMPDPointer(lightPositionPos);
+            WriteMPDPointer(unknown1Pos);
+            WriteUShort(header.ViewDistance);
+            WriteMPDPointer(modelSwitchGroupsPos);
+            WriteMPDPointer(textureAnimationsPos);
+            WriteMPDPointer(unknown2Pos);
+            WriteMPDPointer(groundAnimationPos);
             // TODO: mesh1pos
-            WritePointer(null);
+            WriteMPDPointer(null);
             // TODO: mesh2pos
-            WritePointer(null);
+            WriteMPDPointer(null);
             // TODO: mesh3pos
-            WritePointer(null);
-            Write((ushort) new CompressedFIXED(header.ModelsPreYRotation / 180.0f, 0).RawShort);
-            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMin / 180.0f, 0).RawShort);
-            Write((ushort) new CompressedFIXED(header.ModelsViewAngleMax / 180.0f, 0).RawShort);
-            WritePointer(textureAnimAltPos);
-            WritePointer(palette1Pos ?? headerAddr);
-            WritePointer(palette2Pos ?? headerAddr);
-            Write((ushort) header.GroundX);
-            Write((ushort) header.GroundY);
-            Write((ushort) header.GroundZ);
-            Write((ushort) new CompressedFIXED(header.GroundAngle, 0).RawShort);
-            Write((ushort) header.Unknown1);
-            Write((ushort) header.BackgroundX);
-            Write((ushort) header.BackgroundY);
-            WritePointer(boundariesPos);
+            WriteMPDPointer(null);
+            WriteShort(new CompressedFIXED(header.ModelsPreYRotation / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(header.ModelsViewAngleMin / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(header.ModelsViewAngleMax / 180.0f, 0).RawShort);
+            WriteMPDPointer(textureAnimAltPos);
+            WriteMPDPointer(palette1Pos ?? headerAddr);
+            WriteMPDPointer(palette2Pos ?? headerAddr);
+            WriteShort(header.GroundX);
+            WriteShort(header.GroundY);
+            WriteShort(header.GroundZ);
+            WriteShort(new CompressedFIXED(header.GroundAngle, 0).RawShort);
+            WriteShort(header.Unknown1);
+            WriteShort(header.BackgroundX);
+            WriteShort(header.BackgroundY);
+            WriteMPDPointer(boundariesPos);
         }
 
         public void WriteEmptyChunk() {
-            AtOffset(0x2000 + Chunks * 0x08, curOffset => WritePointer((uint) curOffset));
+            AtOffset(0x2000 + Chunks * 0x08, curOffset => WriteMPDPointer((uint) curOffset));
             Chunks++;
         }
 
@@ -284,15 +240,15 @@ namespace SF3.MPD {
             var pos = (uint) CurrentOffset;
 
             switch (data) {
-                case ColorTable ct:              Write(ct);   break;
-                case LightPosition lp:           Write(lp);   break;
-                case UnknownUInt32Table ui32:    Write(ui32); break;
-                case UnknownUInt16Table ui16:    Write(ui16); break;
-                case UnknownUInt8Table ui8:      Write(ui8);  break;
-                case ModelSwitchGroupsTable msg: Write(msg);  break;
-                case TextureAnimationTable ta:   Write(ta);   break;
-                case BoundaryTable bt:           Write(bt);   break;
-                case TextureIDTable tid:         Write(tid);  break;
+                case ColorTable ct:              WriteColorTable(ct);   break;
+                case LightPosition lp:           WriteLightPosition(lp);   break;
+                case UnknownUInt32Table ui32:    WriteUInt32Table(ui32); break;
+                case UnknownUInt16Table ui16:    WriteUInt16Table(ui16); break;
+                case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);  break;
+                case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
+                case TextureAnimationTable ta:   WriteTextureAnimations(ta);   break;
+                case BoundaryTable bt:           WriteBoundaries(bt);   break;
+                case TextureIDTable tid:         WriteTextureIDs(tid);  break;
             }
 
             WriteToAlignTo(2);
@@ -301,7 +257,7 @@ namespace SF3.MPD {
 
         public void WriteModelChunk(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */) {
             // Update the address of this new chunk.
-            AtOffset(0x2000 + Chunks * 0x08, curOffset => WritePointer((uint) curOffset));
+            AtOffset(0x2000 + Chunks * 0x08, curOffset => WriteMPDPointer((uint) curOffset));
 
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
@@ -311,16 +267,16 @@ namespace SF3.MPD {
 
             // Write header. Collision-related offsets will be written later.
             var collisionLinesHeaderOffset = CurrentOffset;
-            WritePointer(null);
+            WriteMPDPointer(null);
             var collisionBlocksOffset = CurrentOffset;
-            WritePointer(null);
-            Write((ushort) (instances?.Length ?? 0));
+            WriteMPDPointer(null);
+            WriteUShort((ushort) (instances?.Length ?? 0));
 
             // Model instances immediately follow the header.
             if (instances != null)
                 foreach (var inst in instances)
                     WriteInstance(inst, fileChunkAddr, ramChunkAddr);
-            Write((uint) 0);
+            WriteUInt(0);
 
             // PDATAs, POINTs, POLYGONs, and ATTRs follow after that.
             if (models != null)
@@ -333,7 +289,7 @@ namespace SF3.MPD {
 
             // Write size
             var endOffset = CurrentOffset;
-            AtOffset(0x2000 + Chunks * 0x08 + 0x04, curOffset => Write((uint) (endOffset - fileChunkAddr)));
+            AtOffset(0x2000 + Chunks * 0x08 + 0x04, curOffset => WriteUInt((uint) (endOffset - fileChunkAddr)));
             Chunks++;
 
             WriteToAlignTo(4);
@@ -346,23 +302,23 @@ namespace SF3.MPD {
                 if (!_pdataIdToOffsetPtrMap.ContainsKey(pdataId))
                     _pdataIdToOffsetPtrMap.Add(pdataId, new List<long>());
                 _pdataIdToOffsetPtrMap[pdataId].Add(CurrentOffset);
-                WritePointer(null);
+                WriteMPDPointer(null);
             }
 
-            Write(instance.PositionX);
-            Write(instance.PositionY);
-            Write(instance.PositionZ);
+            WriteShort(instance.PositionX);
+            WriteShort(instance.PositionY);
+            WriteShort(instance.PositionZ);
 
-            Write(new CompressedFIXED(instance.AngleX, 0).RawShort);
-            Write(new CompressedFIXED(instance.AngleY, 0).RawShort);
-            Write(new CompressedFIXED(instance.AngleZ, 0).RawShort);
+            WriteShort(new CompressedFIXED(instance.AngleX, 0).RawShort);
+            WriteShort(new CompressedFIXED(instance.AngleY, 0).RawShort);
+            WriteShort(new CompressedFIXED(instance.AngleZ, 0).RawShort);
 
-            Write(new FIXED(instance.ScaleX, 0).RawInt);
-            Write(new FIXED(instance.ScaleY, 0).RawInt);
-            Write(new FIXED(instance.ScaleZ, 0).RawInt);
+            WriteInt(new FIXED(instance.ScaleX, 0).RawInt);
+            WriteInt(new FIXED(instance.ScaleY, 0).RawInt);
+            WriteInt(new FIXED(instance.ScaleZ, 0).RawInt);
 
-            Write(instance.Tag);
-            Write(instance.Flags);
+            WriteUShort(instance.Tag);
+            WriteUShort(instance.Flags);
         }
 
         public void WriteModel(SGL_Model model, bool eightPDatas, int fileChunkAddr, int ramChunkAddr) {
@@ -379,31 +335,31 @@ namespace SF3.MPD {
                 var pdataId = model.ID + i;
                 if (_pdataIdToOffsetPtrMap.TryGetValue(pdataId, out var ptrs)) {
                     addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
-                    AtOffsets(ptrs.ToArray(), _ => Write(addr));
+                    AtOffsets(ptrs.ToArray(), _ => WriteUInt(addr));
                 }
 
                 // Write placeholders for the tables to write and their counts.
                 pointsPtrs[i] = CurrentOffset;
-                WritePointer(null);
-                Write((uint) model.Vertices.Count);
+                WriteMPDPointer(null);
+                WriteInt(model.Vertices.Count);
                 polygonsPtrs[i] = CurrentOffset;
-                WritePointer(null);
-                Write((uint) model.Faces.Count);
+                WriteMPDPointer(null);
+                WriteInt(model.Faces.Count);
                 attrsPtrs[i] = CurrentOffset;
-                WritePointer(null);
+                WriteMPDPointer(null);
             }
 
             addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
-            AtOffsets(pointsPtrs, _ => Write(addr));
+            AtOffsets(pointsPtrs, _ => WriteUInt(addr));
             WritePOINTs(model);
 
             addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
-            AtOffsets(polygonsPtrs, _ => Write(addr));
+            AtOffsets(polygonsPtrs, _ => WriteUInt(addr));
             WritePOLYGONs(model);
 
             for (var i = 0; i < pdataCount; i++) {
                 addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
-                AtOffset(attrsPtrs[i], _ => Write(addr));
+                AtOffset(attrsPtrs[i], _ => WriteUInt(addr));
                 WriteATTRs(model, i);
             }
         }
@@ -414,9 +370,9 @@ namespace SF3.MPD {
         }
 
         public void WritePOINT(VECTOR vertex) {
-            Write(vertex.X.RawInt);
-            Write(vertex.Y.RawInt);
-            Write(vertex.Z.RawInt);
+            WriteInt(vertex.X.RawInt);
+            WriteInt(vertex.Y.RawInt);
+            WriteInt(vertex.Z.RawInt);
         }
 
         public void WritePOLYGONs(SGL_Model model) {
@@ -425,13 +381,13 @@ namespace SF3.MPD {
         }
 
         public void WritePOLYGON(SGL_ModelFace face) {
-            Write(face.Normal.X.RawInt);
-            Write(face.Normal.Y.RawInt);
-            Write(face.Normal.Z.RawInt);
-            Write((ushort) face.VertexIndices[0]);
-            Write((ushort) face.VertexIndices[1]);
-            Write((ushort) face.VertexIndices[2]);
-            Write((ushort) face.VertexIndices[3]);
+            WriteInt(face.Normal.X.RawInt);
+            WriteInt(face.Normal.Y.RawInt);
+            WriteInt(face.Normal.Z.RawInt);
+            WriteUShort((ushort) face.VertexIndices[0]);
+            WriteUShort((ushort) face.VertexIndices[1]);
+            WriteUShort((ushort) face.VertexIndices[2]);
+            WriteUShort((ushort) face.VertexIndices[3]);
         }
 
         public void WriteATTRs(SGL_Model model, int lodIndex) {
@@ -440,37 +396,37 @@ namespace SF3.MPD {
         }
 
         public void WriteATTR(IATTR attr, int lodIndex) {
-            Write((byte) attr.Plane);
-            Write((byte) attr.SortAndOptions);
-            Write((ushort) attr.TextureNo);
-            Write((ushort) (attr.Mode | ((lodIndex > 0) ? 0x1000 : 0x0000)));
-            Write((ushort) attr.ColorNo);
-            Write((ushort) (attr.GouraudShadingTable + lodIndex));
-            Write((ushort) attr.Dir);
+            WriteByte(attr.Plane);
+            WriteByte(attr.SortAndOptions);
+            WriteUShort(attr.TextureNo);
+            WriteUShort((ushort) (attr.Mode | ((lodIndex > 0) ? 0x1000 : 0x0000)));
+            WriteUShort(attr.ColorNo);
+            WriteUShort((ushort) (attr.GouraudShadingTable + lodIndex));
+            WriteUShort(attr.Dir);
         }
 
         public void WriteCollisionLinesHeader(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
-            AtOffset(ptrToOffset, curAddr => Write((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
+            AtOffset(ptrToOffset, curAddr => WriteUInt((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
 
             // TODO: actually write the real lines!
-            Write((uint) 0);
-            Write((uint) 0);
+            WriteUInt(0);
+            WriteUInt(0);
         }
 
         public void WriteCollisionBlocks(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
-            AtOffset(ptrToOffset, curAddr => Write((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
+            AtOffset(ptrToOffset, curAddr => WriteUInt((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
 
             // TODO: actually write the real blocks!
             // 16 * 16 pointers
             var blockAddr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr) + 0x400;
             for (var i = 0; i < 0x100; i++) {
-                Write(blockAddr);
+                WriteUInt(blockAddr);
                 blockAddr += 2;
             }
 
             // 16 * 16 tables, terminated by 0xFFFF.
             for (var i = 0; i < 0x100; i++)
-                Write((ushort) 0xFFFF);
+                WriteUShort(0xFFFF);
         }
 
         public ScenarioType Scenario { get; }

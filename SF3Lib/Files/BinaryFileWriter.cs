@@ -18,7 +18,7 @@ namespace SF3.Files {
         public void WriteToAlignTo(int alignment) {
             var pos = CurrentOffset;
             if (pos % alignment != 0)
-                Write(new byte[alignment - pos % alignment]);
+                WriteBytes(new byte[alignment - pos % alignment]);
         }
 
         /// <summary>
@@ -27,13 +27,61 @@ namespace SF3.Files {
         public abstract void Finish();
 
         /// <summary>
-        /// Writes arbitrary data to the stream. Should only be used when the stream position is at the end.
+        /// Writes an arbitrary number of bytes to the stream.
         /// </summary>
         /// <param name="bytes">Bytes to write to the stream.</param>
-        public void Write(byte[] bytes) {
+        public void WriteBytes(byte[] bytes) {
             Stream.Write(bytes, 0, bytes.Length);
-            BytesWritten += bytes.Length;
+            if (AtEndOfStream)
+                BytesWritten += bytes.Length;
         }
+
+        public void WriteUShorts(ushort[] values) {
+            foreach (var value in values)
+                WriteUShort(value);
+        }
+
+        public void WriteShorts(short[] values) {
+            foreach (var value in values)
+                WriteShort(value);
+        }
+
+        public void WriteUInts(uint[] values) {
+            foreach (var value in values)
+                WriteUInt(value);
+        }
+
+        public void WriteInts(int[] values) {
+            foreach (var value in values)
+                WriteInt(value);
+        }
+
+        public void WriteByte(byte value)
+            => WriteBytes(new byte[] { value });
+
+        public void WriteUShort(ushort value) {
+            WriteToAlignTo(2);
+            WriteBytes(new byte[] {
+                (byte) (value >> 8),
+                (byte) value
+            });
+        }
+
+        public void WriteShort(short value)
+            => WriteUShort((ushort) value);
+
+        public void WriteUInt(uint value) {
+            WriteToAlignTo(4);
+            WriteBytes(new byte[] {
+                (byte) (value >> 24),
+                (byte) (value >> 16),
+                (byte) (value >> 8),
+                (byte) value
+            });
+        }
+
+        public void WriteInt(int value)
+            => WriteUInt((uint) value);
 
         /// <summary>
         /// Sets the stream position to an offset, performs an action, and returns to the original offset.
@@ -43,7 +91,9 @@ namespace SF3.Files {
         protected void AtOffset(long offset, Action<int> action) {
             var oldPosition = Stream.Position;
             Stream.Position = offset;
+            SeekCount++;
             action((int) (oldPosition - StreamStartPosition));
+            SeekCount--;
             Stream.Position = oldPosition;
         }
 
@@ -55,12 +105,14 @@ namespace SF3.Files {
         protected void AtOffsets(long[] offsets, Action<int> action) {
             var oldPosition = Stream.Position;
             var currentPosition = oldPosition;
+            SeekCount++;
             foreach (var offset in offsets) {
                 if (offset != 0) {
                     Stream.Position = currentPosition = offset;
                     action((int) (oldPosition - StreamStartPosition));
                 }
             }
+            SeekCount--;
             if (currentPosition != oldPosition)
                 Stream.Position = oldPosition;
         }
@@ -73,5 +125,8 @@ namespace SF3.Files {
             get => Stream.Position - StreamStartPosition;
             set => Stream.Position = value + StreamStartPosition;
         }
+
+        private int SeekCount = 0;
+        private bool AtEndOfStream => SeekCount == 0;
     }
 }

@@ -643,7 +643,7 @@ namespace SF3.CHR {
 
                 // XBTL127.CHR has junk data after the frame table. Write it here.
                 if (junkAfterFrameTables != null)
-                    chrWriter.Write(junkAfterFrameTables);
+                    chrWriter.WriteBytes(junkAfterFrameTables);
 
                 WriteFrameImages(chrWriter);
             }
