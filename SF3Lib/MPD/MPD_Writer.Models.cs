@@ -4,8 +4,7 @@ using CommonLib.SGL;
 namespace SF3.MPD {
     public partial class MPD_Writer {
         public void WriteModelChunk(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */) {
-            // Update the address of this new chunk.
-            AtOffset(0x2000 + Chunks * 0x08, curOffset => WriteMPDPointer((uint) curOffset));
+            StartNewChunk();
 
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
@@ -35,12 +34,7 @@ namespace SF3.MPD {
             WriteCollisionLinesHeader(collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
             WriteCollisionBlocks(collisionBlocksOffset, fileChunkAddr, ramChunkAddr);
 
-            // Write size
-            var endOffset = CurrentOffset;
-            AtOffset(0x2000 + Chunks * 0x08 + 0x04, curOffset => WriteUInt((uint) (endOffset - fileChunkAddr)));
-            Chunks++;
-
-            WriteToAlignTo(4);
+            FinishCurrentChunk();
         }
 
         public void WriteModelInstance(IMPD_ModelInstance instance, int fileChunkAddr, int ramChunkAddr) {
@@ -176,5 +170,7 @@ namespace SF3.MPD {
             for (var i = 0; i < 0x100; i++)
                 WriteUShort(0xFFFF);
         }
+
+        private Dictionary<int, List<long>> _pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();
     }
 }

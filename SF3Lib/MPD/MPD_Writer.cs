@@ -50,70 +50,18 @@ namespace SF3.MPD {
             // - 0x3DB0: Chest 2 Textures
             // - 0x46F4: Barrel Textures
 
-            // Placeholder for a pointer to the header with 8 bytes of padding.
-            WriteBytes(new byte[0x0C]);
+            // Write the main section of the MPD (0x0000 - 0x2000).
+            WriteMain(mpd);
 
-            var lightPalettePos      = WriteTableOrNull(mpd.LightPalette);
-            var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
-            var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
-            var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
-            var textureAnimationsPos = WriteTableOrNull(mpd.TextureAnimations);
-            var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
-            var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
-            var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
-            var textureAnimAltPos    = WriteTableOrNull(mpd.TextureAnimationsAlt);
-            var palette1Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 1 ? mpd.PaletteTables[0] : null);
-            var palette2Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
-
-            var headerPos = CurrentOffset;
-            WriteMPDHeader(
-                mpd.MPDHeader,
-                mpd.Flags,
-                lightPalettePos,
-                lightPositionPos,
-                unknown1Pos,
-                modelSwitchGroupsPos,
-                textureAnimationsPos,
-                unknown2Pos,
-                groundAnimationPos,
-                textureAnimAltPos,
-                palette1Pos,
-                palette2Pos,
-                boundariesPos
-            );
-
-            // Write a pointer to the header.
-            var headerPtrPos = CurrentOffset;
-            WriteUInt((uint) (headerPos + 0x290000));
-
-            // Write a *double pointer* to the header at the start of the file.
-            AtOffset(0, _ => WriteUInt((uint) (headerPtrPos + 0x290000)));
-
-            // Write a blank chunk table. We're going to flesh it out as we write chunks.
+            // Write zeroes up until 0x2000 (empty space before the chunk table) and all the way through 0x2100,
+            // which writes all zeroes for the chunk table. The chunk table's actual entries will be written as
+            // chunks are written.
             WriteBytes(new byte[0x2100 - CurrentOffset]);
 
-            // Chunk[0] is always empty.
-            WriteEmptyChunk();
-
-            // TODO: check for this, and get memory mapping stuff!!
-            // Chunk[1] is always models if it exists.
-            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.CollectionType == ModelCollectionType.PrimaryModels);
-            if (mc == null)
-                WriteEmptyChunk();
-            else
-                WriteModelChunk(mc.GetSGLModels(), mc.GetModelInstances());
-
-            // TODO: actual chunks!!
-            int chunkTableSize = 20;
-            for (int i = 2; i < chunkTableSize; i++)
-                WriteEmptyChunk();
+            // Write all chunks in the file.
+            WriteChunks(mpd);
 
             Finish();
-        }
-
-        public void WriteEmptyChunk() {
-            AtOffset(0x2000 + Chunks * 0x08, curOffset => WriteMPDPointer((uint) curOffset));
-            Chunks++;
         }
 
         private void WriteMPDPointer(int? offset)
@@ -123,8 +71,5 @@ namespace SF3.MPD {
             => WriteUInt(offset.HasValue ? (offset.Value + 0x290000) : 0);
 
         public ScenarioType Scenario { get; }
-        public int Chunks { get; private set; } = 0;
-
-        private Dictionary<int, List<long>> _pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();
     }
 }

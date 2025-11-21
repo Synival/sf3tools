@@ -1,9 +1,51 @@
 ﻿using CommonLib.SGL;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteMPDHeader(
+        public void WriteMain(IMPD_File mpd) {
+            // Placeholder for a pointer to the header with 8 bytes of padding.
+            WriteBytes(new byte[0x0C]);
+
+            var lightPalettePos      = WriteTableOrNull(mpd.LightPalette);
+            var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
+            var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
+            var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
+            var textureAnimationsPos = WriteTableOrNull(mpd.TextureAnimations);
+            var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
+            var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
+            var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
+            var textureAnimAltPos    = WriteTableOrNull(mpd.TextureAnimationsAlt);
+            var palette1Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 1 ? mpd.PaletteTables[0] : null);
+            var palette2Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
+
+            var headerPos = CurrentOffset;
+            WriteHeader(
+                mpd.MPDHeader,
+                mpd.Flags,
+                lightPalettePos,
+                lightPositionPos,
+                unknown1Pos,
+                modelSwitchGroupsPos,
+                textureAnimationsPos,
+                unknown2Pos,
+                groundAnimationPos,
+                textureAnimAltPos,
+                palette1Pos,
+                palette2Pos,
+                boundariesPos
+            );
+
+            // Write a pointer to the header.
+            var headerPtrPos = CurrentOffset;
+            WriteUInt((uint) (headerPos + 0x290000));
+
+            // Write a *double pointer* to the header at the start of the file.
+            AtOffset(0, _ => WriteUInt((uint) (headerPtrPos + 0x290000)));
+        }
+
+        public void WriteHeader(
             MPDHeaderModel header,
             IMPD_Flags flags,
             uint? lightPalettePos,
