@@ -135,7 +135,7 @@ namespace SF3.Win {
             get => _darkMode;
             set => SetValue(ref _darkMode, value, DarkModeChanged);
         }
-        private bool _darkMode = false;
+        private bool _darkMode = true;
         public event EventHandler DarkModeChanged;
 
         /// <summary>

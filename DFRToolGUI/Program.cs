@@ -12,7 +12,7 @@ namespace DFRTool.GUI {
         private static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            DarkModeContext.Observable = new StandaloneDarkModeObservable(false);
+            DarkModeContext.Observable = new StandaloneDarkModeObservable(true);
             Application.Run(new frmDFRTool());
         }
     }
