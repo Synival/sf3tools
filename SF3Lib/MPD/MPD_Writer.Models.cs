@@ -3,9 +3,10 @@ using CommonLib.SGL;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteModelChunk(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */) {
-            StartNewChunk();
+        public void WriteModelChunk(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */)
+            => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances));
 
+        public void WriteModelChunkContent(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -33,8 +34,6 @@ namespace SF3.MPD {
             // The collision data is at the end.
             WriteCollisionLinesHeader(collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
             WriteCollisionBlocks(collisionBlocksOffset, fileChunkAddr, ramChunkAddr);
-
-            FinishCurrentChunk();
         }
 
         public void WriteModelInstance(IMPD_ModelInstance instance, int fileChunkAddr, int ramChunkAddr) {

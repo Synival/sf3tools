@@ -169,7 +169,7 @@ namespace SF3.CHR {
         /// <summary>
         /// Ends the CHR file by writing some necessary padding.
         /// </summary>
-        public override void Finish() {
+        public void Finish() {
             // Write an additional 4 bytes at the end.
             WriteBytes(new byte[4]);
         }

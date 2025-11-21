@@ -4,11 +4,12 @@ using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.SGL;
 using CommonLib.Types;
+using SF3.MPD;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD {
-    public class Tile {
+    public class Tile : IMPD_Tile {
         private static int[,] s_tileSeeds = null;
 
         public Tile(IMPD_File mpdFile, int x, int y) {

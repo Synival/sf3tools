@@ -29,12 +29,12 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public byte GetTextureFlags(int x)
             => (byte) (this[x] >> 8 & 0xFF);
         public void SetTextureFlags(int x, byte value)
-            => this[x] = (this[x] & 0xFF) + (value << 8);
+            => this[x] = (ushort) ((this[x] & 0xFF) + (value << 8));
 
         public byte GetTextureID(int x)
             => (byte) (this[x] & 0xFF);
         public void SetTextureID(int x, byte value)
-            => this[x] = (this[x] & 0xFF00) + value;
+            => this[x] = (ushort) ((this[x] & 0xFF00) + value);
 
         public TextureRotateType GetRotate(int x)
             => HasRotation ? (TextureRotateType) (GetTextureFlags(x) & 0x03) : 0x00;
@@ -53,8 +53,8 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public void SetIsFlatFlag(int x, bool value)
             => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x80 | (value ? 0x80 : 0x00)));
 
-        public int this[int index] {
-            get => Data.GetWord(xAddress[index]);
+        public ushort this[int index] {
+            get => (ushort) Data.GetWord(xAddress[index]);
             set => Data.SetWord(xAddress[index], value);
         }
 
@@ -67,69 +67,69 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
 
         // This is NUTs, but the ObjectListView is excrutiatingly slow with array indexing, so we're stuck
         // with 64 individual properties.
-        [TileMetadata(0)] public int X0Tile { get => Data.GetWord(xAddress[0]); set => Data.SetWord(xAddress[0], value); }
-        [TileMetadata(1)] public int X1Tile { get => Data.GetWord(xAddress[1]); set => Data.SetWord(xAddress[1], value); }
-        [TileMetadata(2)] public int X2Tile { get => Data.GetWord(xAddress[2]); set => Data.SetWord(xAddress[2], value); }
-        [TileMetadata(3)] public int X3Tile { get => Data.GetWord(xAddress[3]); set => Data.SetWord(xAddress[3], value); }
-        [TileMetadata(4)] public int X4Tile { get => Data.GetWord(xAddress[4]); set => Data.SetWord(xAddress[4], value); }
-        [TileMetadata(5)] public int X5Tile { get => Data.GetWord(xAddress[5]); set => Data.SetWord(xAddress[5], value); }
-        [TileMetadata(6)] public int X6Tile { get => Data.GetWord(xAddress[6]); set => Data.SetWord(xAddress[6], value); }
-        [TileMetadata(7)] public int X7Tile { get => Data.GetWord(xAddress[7]); set => Data.SetWord(xAddress[7], value); }
-        [TileMetadata(8)] public int X8Tile { get => Data.GetWord(xAddress[8]); set => Data.SetWord(xAddress[8], value); }
-        [TileMetadata(9)] public int X9Tile { get => Data.GetWord(xAddress[9]); set => Data.SetWord(xAddress[9], value); }
-        [TileMetadata(10)] public int X10Tile { get => Data.GetWord(xAddress[10]); set => Data.SetWord(xAddress[10], value); }
-        [TileMetadata(11)] public int X11Tile { get => Data.GetWord(xAddress[11]); set => Data.SetWord(xAddress[11], value); }
-        [TileMetadata(12)] public int X12Tile { get => Data.GetWord(xAddress[12]); set => Data.SetWord(xAddress[12], value); }
-        [TileMetadata(13)] public int X13Tile { get => Data.GetWord(xAddress[13]); set => Data.SetWord(xAddress[13], value); }
-        [TileMetadata(14)] public int X14Tile { get => Data.GetWord(xAddress[14]); set => Data.SetWord(xAddress[14], value); }
-        [TileMetadata(15)] public int X15Tile { get => Data.GetWord(xAddress[15]); set => Data.SetWord(xAddress[15], value); }
-        [TileMetadata(16)] public int X16Tile { get => Data.GetWord(xAddress[16]); set => Data.SetWord(xAddress[16], value); }
-        [TileMetadata(17)] public int X17Tile { get => Data.GetWord(xAddress[17]); set => Data.SetWord(xAddress[17], value); }
-        [TileMetadata(18)] public int X18Tile { get => Data.GetWord(xAddress[18]); set => Data.SetWord(xAddress[18], value); }
-        [TileMetadata(19)] public int X19Tile { get => Data.GetWord(xAddress[19]); set => Data.SetWord(xAddress[19], value); }
-        [TileMetadata(20)] public int X20Tile { get => Data.GetWord(xAddress[20]); set => Data.SetWord(xAddress[20], value); }
-        [TileMetadata(21)] public int X21Tile { get => Data.GetWord(xAddress[21]); set => Data.SetWord(xAddress[21], value); }
-        [TileMetadata(22)] public int X22Tile { get => Data.GetWord(xAddress[22]); set => Data.SetWord(xAddress[22], value); }
-        [TileMetadata(23)] public int X23Tile { get => Data.GetWord(xAddress[23]); set => Data.SetWord(xAddress[23], value); }
-        [TileMetadata(24)] public int X24Tile { get => Data.GetWord(xAddress[24]); set => Data.SetWord(xAddress[24], value); }
-        [TileMetadata(25)] public int X25Tile { get => Data.GetWord(xAddress[25]); set => Data.SetWord(xAddress[25], value); }
-        [TileMetadata(26)] public int X26Tile { get => Data.GetWord(xAddress[26]); set => Data.SetWord(xAddress[26], value); }
-        [TileMetadata(27)] public int X27Tile { get => Data.GetWord(xAddress[27]); set => Data.SetWord(xAddress[27], value); }
-        [TileMetadata(28)] public int X28Tile { get => Data.GetWord(xAddress[28]); set => Data.SetWord(xAddress[28], value); }
-        [TileMetadata(29)] public int X29Tile { get => Data.GetWord(xAddress[29]); set => Data.SetWord(xAddress[29], value); }
-        [TileMetadata(30)] public int X30Tile { get => Data.GetWord(xAddress[30]); set => Data.SetWord(xAddress[30], value); }
-        [TileMetadata(31)] public int X31Tile { get => Data.GetWord(xAddress[31]); set => Data.SetWord(xAddress[31], value); }
-        [TileMetadata(32)] public int X32Tile { get => Data.GetWord(xAddress[32]); set => Data.SetWord(xAddress[32], value); }
-        [TileMetadata(33)] public int X33Tile { get => Data.GetWord(xAddress[33]); set => Data.SetWord(xAddress[33], value); }
-        [TileMetadata(34)] public int X34Tile { get => Data.GetWord(xAddress[34]); set => Data.SetWord(xAddress[34], value); }
-        [TileMetadata(35)] public int X35Tile { get => Data.GetWord(xAddress[35]); set => Data.SetWord(xAddress[35], value); }
-        [TileMetadata(36)] public int X36Tile { get => Data.GetWord(xAddress[36]); set => Data.SetWord(xAddress[36], value); }
-        [TileMetadata(37)] public int X37Tile { get => Data.GetWord(xAddress[37]); set => Data.SetWord(xAddress[37], value); }
-        [TileMetadata(38)] public int X38Tile { get => Data.GetWord(xAddress[38]); set => Data.SetWord(xAddress[38], value); }
-        [TileMetadata(39)] public int X39Tile { get => Data.GetWord(xAddress[39]); set => Data.SetWord(xAddress[39], value); }
-        [TileMetadata(40)] public int X40Tile { get => Data.GetWord(xAddress[40]); set => Data.SetWord(xAddress[40], value); }
-        [TileMetadata(41)] public int X41Tile { get => Data.GetWord(xAddress[41]); set => Data.SetWord(xAddress[41], value); }
-        [TileMetadata(42)] public int X42Tile { get => Data.GetWord(xAddress[42]); set => Data.SetWord(xAddress[42], value); }
-        [TileMetadata(43)] public int X43Tile { get => Data.GetWord(xAddress[43]); set => Data.SetWord(xAddress[43], value); }
-        [TileMetadata(44)] public int X44Tile { get => Data.GetWord(xAddress[44]); set => Data.SetWord(xAddress[44], value); }
-        [TileMetadata(45)] public int X45Tile { get => Data.GetWord(xAddress[45]); set => Data.SetWord(xAddress[45], value); }
-        [TileMetadata(46)] public int X46Tile { get => Data.GetWord(xAddress[46]); set => Data.SetWord(xAddress[46], value); }
-        [TileMetadata(47)] public int X47Tile { get => Data.GetWord(xAddress[47]); set => Data.SetWord(xAddress[47], value); }
-        [TileMetadata(48)] public int X48Tile { get => Data.GetWord(xAddress[48]); set => Data.SetWord(xAddress[48], value); }
-        [TileMetadata(49)] public int X49Tile { get => Data.GetWord(xAddress[49]); set => Data.SetWord(xAddress[49], value); }
-        [TileMetadata(50)] public int X50Tile { get => Data.GetWord(xAddress[50]); set => Data.SetWord(xAddress[50], value); }
-        [TileMetadata(51)] public int X51Tile { get => Data.GetWord(xAddress[51]); set => Data.SetWord(xAddress[51], value); }
-        [TileMetadata(52)] public int X52Tile { get => Data.GetWord(xAddress[52]); set => Data.SetWord(xAddress[52], value); }
-        [TileMetadata(53)] public int X53Tile { get => Data.GetWord(xAddress[53]); set => Data.SetWord(xAddress[53], value); }
-        [TileMetadata(54)] public int X54Tile { get => Data.GetWord(xAddress[54]); set => Data.SetWord(xAddress[54], value); }
-        [TileMetadata(55)] public int X55Tile { get => Data.GetWord(xAddress[55]); set => Data.SetWord(xAddress[55], value); }
-        [TileMetadata(56)] public int X56Tile { get => Data.GetWord(xAddress[56]); set => Data.SetWord(xAddress[56], value); }
-        [TileMetadata(57)] public int X57Tile { get => Data.GetWord(xAddress[57]); set => Data.SetWord(xAddress[57], value); }
-        [TileMetadata(58)] public int X58Tile { get => Data.GetWord(xAddress[58]); set => Data.SetWord(xAddress[58], value); }
-        [TileMetadata(59)] public int X59Tile { get => Data.GetWord(xAddress[59]); set => Data.SetWord(xAddress[59], value); }
-        [TileMetadata(60)] public int X60Tile { get => Data.GetWord(xAddress[60]); set => Data.SetWord(xAddress[60], value); }
-        [TileMetadata(61)] public int X61Tile { get => Data.GetWord(xAddress[61]); set => Data.SetWord(xAddress[61], value); }
-        [TileMetadata(62)] public int X62Tile { get => Data.GetWord(xAddress[62]); set => Data.SetWord(xAddress[62], value); }
-        [TileMetadata(63)] public int X63Tile { get => Data.GetWord(xAddress[63]); set => Data.SetWord(xAddress[63], value); }
+        [TileMetadata( 0)] public ushort X00Tile { get => this[ 0]; set => this[ 0] = value; }
+        [TileMetadata( 1)] public ushort X01Tile { get => this[ 1]; set => this[ 1] = value; }
+        [TileMetadata( 2)] public ushort X02Tile { get => this[ 2]; set => this[ 2] = value; }
+        [TileMetadata( 3)] public ushort X03Tile { get => this[ 3]; set => this[ 3] = value; }
+        [TileMetadata( 4)] public ushort X04Tile { get => this[ 4]; set => this[ 4] = value; }
+        [TileMetadata( 5)] public ushort X05Tile { get => this[ 5]; set => this[ 5] = value; }
+        [TileMetadata( 6)] public ushort X06Tile { get => this[ 6]; set => this[ 6] = value; }
+        [TileMetadata( 7)] public ushort X07Tile { get => this[ 7]; set => this[ 7] = value; }
+        [TileMetadata( 8)] public ushort X08Tile { get => this[ 8]; set => this[ 8] = value; }
+        [TileMetadata( 9)] public ushort X09Tile { get => this[ 9]; set => this[ 9] = value; }
+        [TileMetadata(10)] public ushort X10Tile { get => this[10]; set => this[10] = value; }
+        [TileMetadata(11)] public ushort X11Tile { get => this[11]; set => this[11] = value; }
+        [TileMetadata(12)] public ushort X12Tile { get => this[12]; set => this[12] = value; }
+        [TileMetadata(13)] public ushort X13Tile { get => this[13]; set => this[13] = value; }
+        [TileMetadata(14)] public ushort X14Tile { get => this[14]; set => this[14] = value; }
+        [TileMetadata(15)] public ushort X15Tile { get => this[15]; set => this[15] = value; }
+        [TileMetadata(16)] public ushort X16Tile { get => this[16]; set => this[16] = value; }
+        [TileMetadata(17)] public ushort X17Tile { get => this[17]; set => this[17] = value; }
+        [TileMetadata(18)] public ushort X18Tile { get => this[18]; set => this[18] = value; }
+        [TileMetadata(19)] public ushort X19Tile { get => this[19]; set => this[19] = value; }
+        [TileMetadata(20)] public ushort X20Tile { get => this[20]; set => this[20] = value; }
+        [TileMetadata(21)] public ushort X21Tile { get => this[21]; set => this[21] = value; }
+        [TileMetadata(22)] public ushort X22Tile { get => this[22]; set => this[22] = value; }
+        [TileMetadata(23)] public ushort X23Tile { get => this[23]; set => this[23] = value; }
+        [TileMetadata(24)] public ushort X24Tile { get => this[24]; set => this[24] = value; }
+        [TileMetadata(25)] public ushort X25Tile { get => this[25]; set => this[25] = value; }
+        [TileMetadata(26)] public ushort X26Tile { get => this[26]; set => this[26] = value; }
+        [TileMetadata(27)] public ushort X27Tile { get => this[27]; set => this[27] = value; }
+        [TileMetadata(28)] public ushort X28Tile { get => this[28]; set => this[28] = value; }
+        [TileMetadata(29)] public ushort X29Tile { get => this[29]; set => this[29] = value; }
+        [TileMetadata(30)] public ushort X30Tile { get => this[30]; set => this[30] = value; }
+        [TileMetadata(31)] public ushort X31Tile { get => this[31]; set => this[31] = value; }
+        [TileMetadata(32)] public ushort X32Tile { get => this[32]; set => this[32] = value; }
+        [TileMetadata(33)] public ushort X33Tile { get => this[33]; set => this[33] = value; }
+        [TileMetadata(34)] public ushort X34Tile { get => this[34]; set => this[34] = value; }
+        [TileMetadata(35)] public ushort X35Tile { get => this[35]; set => this[35] = value; }
+        [TileMetadata(36)] public ushort X36Tile { get => this[36]; set => this[36] = value; }
+        [TileMetadata(37)] public ushort X37Tile { get => this[37]; set => this[37] = value; }
+        [TileMetadata(38)] public ushort X38Tile { get => this[38]; set => this[38] = value; }
+        [TileMetadata(39)] public ushort X39Tile { get => this[39]; set => this[39] = value; }
+        [TileMetadata(40)] public ushort X40Tile { get => this[40]; set => this[40] = value; }
+        [TileMetadata(41)] public ushort X41Tile { get => this[41]; set => this[41] = value; }
+        [TileMetadata(42)] public ushort X42Tile { get => this[42]; set => this[42] = value; }
+        [TileMetadata(43)] public ushort X43Tile { get => this[43]; set => this[43] = value; }
+        [TileMetadata(44)] public ushort X44Tile { get => this[44]; set => this[44] = value; }
+        [TileMetadata(45)] public ushort X45Tile { get => this[45]; set => this[45] = value; }
+        [TileMetadata(46)] public ushort X46Tile { get => this[46]; set => this[46] = value; }
+        [TileMetadata(47)] public ushort X47Tile { get => this[47]; set => this[47] = value; }
+        [TileMetadata(48)] public ushort X48Tile { get => this[48]; set => this[48] = value; }
+        [TileMetadata(49)] public ushort X49Tile { get => this[49]; set => this[49] = value; }
+        [TileMetadata(50)] public ushort X50Tile { get => this[50]; set => this[50] = value; }
+        [TileMetadata(51)] public ushort X51Tile { get => this[51]; set => this[51] = value; }
+        [TileMetadata(52)] public ushort X52Tile { get => this[52]; set => this[52] = value; }
+        [TileMetadata(53)] public ushort X53Tile { get => this[53]; set => this[53] = value; }
+        [TileMetadata(54)] public ushort X54Tile { get => this[54]; set => this[54] = value; }
+        [TileMetadata(55)] public ushort X55Tile { get => this[55]; set => this[55] = value; }
+        [TileMetadata(56)] public ushort X56Tile { get => this[56]; set => this[56] = value; }
+        [TileMetadata(57)] public ushort X57Tile { get => this[57]; set => this[57] = value; }
+        [TileMetadata(58)] public ushort X58Tile { get => this[58]; set => this[58] = value; }
+        [TileMetadata(59)] public ushort X59Tile { get => this[59]; set => this[59] = value; }
+        [TileMetadata(60)] public ushort X60Tile { get => this[60]; set => this[60] = value; }
+        [TileMetadata(61)] public ushort X61Tile { get => this[61]; set => this[61] = value; }
+        [TileMetadata(62)] public ushort X62Tile { get => this[62]; set => this[62] = value; }
+        [TileMetadata(63)] public ushort X63Tile { get => this[63]; set => this[63] = value; }
     }
 }

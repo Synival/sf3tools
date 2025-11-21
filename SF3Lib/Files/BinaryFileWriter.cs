@@ -5,7 +5,7 @@ namespace SF3.Files {
     /// <summary>
     /// Performs the writing of binary data to an MPD file.
     /// </summary>
-    public abstract class BinaryFileWriter {
+    public class BinaryFileWriter {
         public BinaryFileWriter(Stream stream) {
             StreamStartPosition = stream.Position;
             Stream = stream;
@@ -20,11 +20,6 @@ namespace SF3.Files {
             if (pos % alignment != 0)
                 WriteBytes(new byte[alignment - pos % alignment]);
         }
-
-        /// <summary>
-        /// Ends the file, likely by writing some necessary padding.
-        /// </summary>
-        public abstract void Finish();
 
         /// <summary>
         /// Writes an arbitrary number of bytes to the stream.

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using SF3.Files;
 using SF3.Models.Files.MPD;
 using SF3.Types;
@@ -12,10 +10,6 @@ namespace SF3.MPD {
     public partial class MPD_Writer : BinaryFileWriter {
         public MPD_Writer(Stream stream, ScenarioType scenario) : base(stream) {
             Scenario = scenario;
-        }
-
-        public override void Finish() {
-            // TODO: do what's necessary to finish.
         }
 
         /// <summary>
@@ -60,8 +54,6 @@ namespace SF3.MPD {
 
             // Write all chunks in the file.
             WriteChunks(mpd);
-
-            Finish();
         }
 
         private void WriteMPDPointer(int? offset)

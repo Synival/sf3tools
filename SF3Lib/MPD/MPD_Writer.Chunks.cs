@@ -1,6 +1,7 @@
-﻿using System.Linq;
-using CommonLib.Logging;
-using CommonLib.Types;
+﻿using System;
+using System.IO;
+using System.Linq;
+using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 
@@ -12,44 +13,67 @@ namespace SF3.MPD {
 
             // TODO: check for this, and get memory mapping stuff!!
             // Chunk[1] is always models if it exists.
+            // TODO: In Scenario 2+, this could be Chunk[20].
             var mc = mpd.ModelCollections.FirstOrDefault(x => x?.CollectionType == ModelCollectionType.PrimaryModels);
             if (mc == null)
                 WriteEmptyChunk();
             else
                 WriteModelChunk(mc.GetSGLModels(), mc.GetModelInstances());
 
+            // Chunk[2] is the surface model.
+            // TODO: In Scenario 2+, this could be Chunk[20].
+            if (mpd.SurfaceModel == null)
+                WriteEmptyChunk();
+            else
+                WriteSurfaceModelChunk(mpd.Tiles);
+
             // TODO: actual chunks!!
-            int chunkTableSize = 20;
-            for (int i = 2; i < chunkTableSize; i++)
+            while (_currentChunks < 20)
                 WriteEmptyChunk();
         }
 
-        public void WriteEmptyChunk() {
-            StartNewChunk();
-            FinishCurrentChunk();
-        }
+        public void WriteEmptyChunk()
+            => WriteUncompressedChunk(_ => {});
 
-        private void StartNewChunk() {
-            if (_currentChunkStart != null)
-                Logger.WriteLine($"Chunk[{_currentChunks}] started again before it was finished", LogType.Error);
-            _currentChunkStart = CurrentOffset;
+        private void WriteUncompressedChunk(Action<MPD_Writer> writerFunc) {
+            // Write the address of this chunk in the chunk table.
+            var currentChunkStart = CurrentOffset;
             AtOffset(0x2000 + _currentChunks * 0x08, curOffset => WriteMPDPointer((uint) curOffset));
+
+            // Perform the actual writing.
+            writerFunc(this);
+
+            // Write the size of the chunk.
+            AtOffset(0x2000 + _currentChunks * 0x08 + 0x04, curOffset => WriteUInt((uint) (curOffset - currentChunkStart)));
+
+            // Get ready for the next chunk.
+            WriteToAlignTo(4);
+            _currentChunks++;
         }
 
-        private void FinishCurrentChunk() {
-            if (_currentChunkStart == null) {
-                Logger.WriteLine($"{nameof(FinishCurrentChunk)}() called before {nameof(StartNewChunk)}()", LogType.Error);
-                return;
+        private void WriteCompressedChunk(Action<MPD_Writer> writerFunc) {
+            // Write the address of this chunk in the chunk table.
+            var currentChunkStart = CurrentOffset;
+            AtOffset(0x2000 + _currentChunks * 0x08, curOffset => WriteMPDPointer((uint) curOffset));
+
+            // Write to an uncompressed buffer.
+            byte[] uncompressedData = null;
+            using (var ms = new MemoryStream()) {
+                writerFunc(new MPD_Writer(ms, Scenario));
+                uncompressedData = ms.ToArray();
             }
 
-            AtOffset(0x2000 + _currentChunks * 0x08 + 0x04, curOffset => WriteUInt((uint) (curOffset - _currentChunkStart)));
-            WriteToAlignTo(4);
+            // Write the compressed data out.
+            WriteBytes(Compression.CompressLZSS(uncompressedData));
 
+            // Write the size of the chunk.
+            AtOffset(0x2000 + _currentChunks * 0x08 + 0x04, curOffset => WriteUInt((uint) (curOffset - currentChunkStart)));
+
+            // Get ready for the next chunk.
+            WriteToAlignTo(4);
             _currentChunks++;
-            _currentChunkStart = null;
         }
 
         private int _currentChunks = 0;
-        private long? _currentChunkStart = null;
     }
 }
