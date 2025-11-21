@@ -20,7 +20,7 @@ namespace SF3.Tests.MPD {
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
                 var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
-                writer.Write(originalFile);
+                writer.WriteMPD(originalFile);
                 outputData = memoryStream.ToArray();
             }
 
@@ -39,7 +39,7 @@ namespace SF3.Tests.MPD {
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
                 var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
-                writer.Write(file);
+                writer.WriteMPD(file);
                 outputData = memoryStream.ToArray();
             }
 
