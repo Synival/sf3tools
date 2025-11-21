@@ -55,7 +55,7 @@ namespace SF3.Win.Views {
                 return;
             }
 
-            _sglModel = mc?.GetSGLModel(pdata.ID + (int) pdata.Collection * 1000);
+            _sglModel = mc?.GetSGLModel(pdata.ID + (int) pdata.Collection * ModelCollection.IDsPerCollectionType);
         }
 
         private SGL_Model _sglModel = null;

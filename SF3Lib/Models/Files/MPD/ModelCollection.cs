@@ -13,6 +13,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile, IMPD_ModelCollection {
+        public static int IDsPerCollectionType = 10000;
+
         protected ModelCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,
             ScenarioType scenario, int? chunkIndex, ModelCollectionType collectionType)
@@ -270,7 +272,7 @@ namespace SF3.Models.Files.MPD {
             void AddInstance(ModelInstanceBase mi) {
                 var pdata = (PDatasByMemoryAddress?.TryGetValue(mi.PData0, out var pdataOut) == true) ? pdataOut : null;
                 if (pdata != null) {
-                    int collectionId = (int) mi.CollectionType * 1000;
+                    int collectionId = (int) mi.CollectionType * IDsPerCollectionType;
                     instances.Add(new MPD_ModelInstance(mi) {
                         ID = mi.ID + collectionId,
                         ModelID = pdata.ID + collectionId
@@ -289,11 +291,11 @@ namespace SF3.Models.Files.MPD {
         }
 
         public SGL_Model GetSGLModel(int id) {
-            var collectionType = (ModelCollectionType) (id / 1000);
+            var collectionType = (ModelCollectionType) (id / IDsPerCollectionType);
             if (collectionType != this.CollectionType)
                 return null;
 
-            var subId = id % 1000;
+            var subId = id % IDsPerCollectionType;
             return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(x => x.ID == subId && x.Index == 0));
         }
 
@@ -314,7 +316,7 @@ namespace SF3.Models.Files.MPD {
                 ))
                 .ToArray();
 
-            return new SGL_Model(pdata.ID + (int) pdata.Collection * 1000, vertices, faces);
+            return new SGL_Model(pdata.ID + (int) pdata.Collection * IDsPerCollectionType, vertices, faces);
         }
 
         public SGL_Model[] GetSGLModels() {

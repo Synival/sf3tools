@@ -36,8 +36,8 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateSGLModel() {
-            _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.PDatasByMemoryAddress.ContainsKey(_pdata.RamAddress));
-            _sglModel = (_pdata == null) ? null : _models?.GetSGLModel(_pdata.ID + (int) _pdata.Collection * 1000);
+            _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.CollectionType == _pdata.Collection);
+            _sglModel = (_pdata == null) ? null : _models?.GetSGLModel(_pdata.ID + (int) _pdata.Collection * ModelCollection.IDsPerCollectionType);
         }
 
         public IMPD_File MPD_File { get; }

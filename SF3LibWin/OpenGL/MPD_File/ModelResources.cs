@@ -127,7 +127,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 InitDictsForType(mc.CollectionType);
                 var sglModelsByID = SGL_ModelsByIDByCollection[mc.CollectionType];
 
-                var uniqueModelIDs = modelInstanceList
+                var uniqueModelIDs = instances
                     .Select(x => x.ModelID)
                     .Distinct()
                     .ToArray();
