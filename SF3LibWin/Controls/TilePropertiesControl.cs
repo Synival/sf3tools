@@ -168,7 +168,7 @@ namespace SF3.Win.Controls {
                     cbModelHasTree.Enabled = true;
 
                     var disabledMessage = _tile.MPD_File.Scenario >= ScenarioType.Scenario3 ? "(Enable in header)" : "(Scenario 3+ only)";
-                    if (_tile.MPD_File.SurfaceModel.TileTextureRowTable.HasRotation && _tile.MPD_File.MPDFlags.HasSurfaceTextureRotation) {
+                    if (_tile.MPD_File.SurfaceModel.TileTextureRowTable.HasRotation && _tile.MPD_File.Flags.HasSurfaceTextureRotation) {
                         cbModelRotate.SelectedItem = _tile.ModelTextureRotate;
                         cbModelRotate.Enabled = true;
                     }

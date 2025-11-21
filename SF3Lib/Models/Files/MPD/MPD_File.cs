@@ -138,7 +138,7 @@ namespace SF3.Models.Files.MPD {
             var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
             var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
             MPDHeader = new MPDHeaderModel(Data, 0, "MPDHeader", headerAddr, Scenario);
-            MPDFlags = new MPDFlagsFromHeader(MPDHeader);
+            Flags = new MPDFlagsFromHeader(MPDHeader);
             return MPDHeader;
         }
 
@@ -341,7 +341,7 @@ namespace SF3.Models.Files.MPD {
 
             // Repeating backgrounds
             var repeatingGroundChunks = new List<IChunkData>();
-            if (MPDFlags.GroundImageType == GroundImageType.Repeated) {
+            if (Flags.GroundImageType == GroundImageType.Repeated) {
                 if (chunks[RepeatingGroundChunk1Index].Exists)
                     repeatingGroundChunks.Add(_ = MakeChunkData(RepeatingGroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[RepeatingGroundChunk2Index].Exists)
@@ -352,7 +352,7 @@ namespace SF3.Models.Files.MPD {
             // Tiled ground images
             var tiledGroundTileChunks = new List<IChunkData>();
             var tiledGroundMapChunks = new List<IChunkData>();
-            if (MPDFlags.GroundImageType == GroundImageType.Tiled) {
+            if (Flags.GroundImageType == GroundImageType.Tiled) {
                 if (chunks[TiledGroundTileChunk1Index].Exists)
                     tiledGroundTileChunks.Add(_ = MakeChunkData(TiledGroundTileChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
                 if (chunks[TiledGroundTileChunk2Index].Exists)
@@ -367,7 +367,7 @@ namespace SF3.Models.Files.MPD {
 
             // Sky boxes
             var skyBoxChunks = new List<IChunkData>();
-            if (MPDFlags.HasAnySkyBox) {
+            if (Flags.HasAnySkyBox) {
                 if (chunks[SkyBoxChunk1Index].Exists)
                     skyBoxChunks.Add(_ = MakeChunkData(SkyBoxChunk1Index, ChunkType.Palette2Image, CompressionType.Compressed));
                 if (chunks[SkyBoxChunk2Index].Exists)
@@ -377,7 +377,7 @@ namespace SF3.Models.Files.MPD {
 
             // Background image
             var backgroundChunks = new List<IChunkData>();
-            if (MPDFlags.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+            if (Flags.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
                 if (chunks[BackgroundChunk1Index].Exists)
                     backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[BackgroundChunk2Index].Exists)
@@ -387,7 +387,7 @@ namespace SF3.Models.Files.MPD {
 
             // Foreground image tiles
             var foregroundTileChunks = new List<IChunkData>();
-            if (MPDFlags.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+            if (Flags.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
                 if (chunks[ForegroundTileChunk1Index].Exists)
                     foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
                 if (chunks[ForegroundTileChunk2Index].Exists)
@@ -477,7 +477,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private int[] GetModelsChunkIndices(ChunkLocation[] chunks) {
-            var flags = MPDFlags;
+            var flags = Flags;
             var indices = new List<int>();
 
             if (chunks[20].Exists && flags.Chunk20IsModels)
@@ -494,7 +494,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private int? GetSurfaceModelChunkIndex(ChunkLocation[] chunks) {
-            var flags = MPDFlags;
+            var flags = Flags;
             if (!flags.HasSurfaceModel)
                 return null;
 
@@ -506,7 +506,7 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
             TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
-                if (chunkIndex == 10 && MPDFlags.HasChunk19Model)
+                if (chunkIndex == 10 && Flags.HasChunk19Model)
                     return TextureCollectionType.Chunk19ModelTextures;
 
                 if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
@@ -532,7 +532,7 @@ namespace SF3.Models.Files.MPD {
                 modelsList.AddRange(ModelCollections);
 
             foreach (var mc in modelsChunks) {
-                var collectionType = (mc.Index == 19 && MPDFlags.HasChunk19Model)
+                var collectionType = (mc.Index == 19 && Flags.HasChunk19Model)
                     ? ModelCollectionType.Chunk19Model
                     : (chunkDatas[21] != null && mc.Index == 1) ? ModelCollectionType.Chunk1Model
                     : ModelCollectionType.PrimaryModels;
@@ -1171,7 +1171,7 @@ namespace SF3.Models.Files.MPD {
                 errors.Add("Chunk[21] errors: ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
 
             // Make sure the header indicates the correct chunks.
-            var flags = MPDFlags;
+            var flags = Flags;
             if (flags.Chunk1IsModels && chunkHeaders[1].ChunkType != ChunkType.Models)
                 errors.Add($"Chunk[1] type should be 'Models', but is {chunkHeaders[1].ChunkType}");
             if (flags.Chunk2IsSurfaceModel && chunkHeaders[2].ChunkType != ChunkType.SurfaceModel)
@@ -1193,7 +1193,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private string[] GetModelChunkErrors() {
-            var flags = MPDFlags;
+            var flags = Flags;
             var errors = new List<string>();
 
             var mc1  = ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1);
@@ -1223,7 +1223,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private string[] GetSurfaceChunkErrors() {
-            var flags = MPDFlags;
+            var flags = Flags;
             var chunkHeaders = ChunkLocations;
             var errors = new List<string>();
 
@@ -1258,7 +1258,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private string[] GetImageChunkErrors() {
-            var flags = MPDFlags;
+            var flags = Flags;
             var chunkHeaders = ChunkLocations;
             var errors = new List<string>();
 
@@ -1337,7 +1337,7 @@ namespace SF3.Models.Files.MPD {
                 return new string[0];
 
             var errors = new List<string>();
-            var flags = MPDFlags;
+            var flags = Flags;
             var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
 
             foreach (var tile in Tiles) {
@@ -1458,7 +1458,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public PDataModel GetTreePData0() {
-            var modelChunkIndex = MPDFlags.Chunk20IsModels ? 20 : 1;
+            var modelChunkIndex = Flags.Chunk20IsModels ? 20 : 1;
             var mc = ModelCollections.FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
             if (mc == null)
                 return null;
@@ -1613,7 +1613,7 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public MPDHeaderModel MPDHeader { get; private set; }
-        public IMPD_Flags MPDFlags { get; private set; }
+        public IMPD_Flags Flags { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkLocationTable ChunkLocations { get; private set; }

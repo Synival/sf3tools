@@ -22,7 +22,7 @@ namespace SF3.MPD {
         /// Writes an entire MPD_File's contents to the stream.
         /// </summary>
         /// <param name="mpd">The MPD_File to write to the stream.</param>
-        public void WriteMPD(MPD_File mpd) {
+        public void WriteMPD(IMPD_File mpd) {
             // VOID.MPD tables:
             // X 0x0000: Offset of pointer to header (int), followed by 8 bytes of 0x00
             // X 0x000C: Light palette
@@ -68,7 +68,7 @@ namespace SF3.MPD {
             var headerPos = CurrentOffset;
             WriteMPDHeader(
                 mpd.MPDHeader,
-                mpd.MPDFlags,
+                mpd.Flags,
                 lightPalettePos,
                 lightPositionPos,
                 unknown1Pos,

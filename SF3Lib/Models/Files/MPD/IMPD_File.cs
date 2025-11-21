@@ -32,7 +32,7 @@ namespace SF3.Models.Files.MPD {
         public int Failed;
     }
 
-    public interface IMPD_File : IScenarioTableFile {
+    public interface IMPD_File : IScenarioTableFile, IMPD {
         /// <summary>
         /// Recompresses compressed chunks.
         /// </summary>
@@ -96,7 +96,6 @@ namespace SF3.Models.Files.MPD {
         IChunkData SurfaceChunkData { get; }
 
         MPDHeaderModel MPDHeader { get; }
-        IMPD_Flags MPDFlags { get; }
         ChunkLocationTable ChunkLocations { get; }
         ColorTable LightPalette { get; }
         LightPosition LightPosition { get; }
