@@ -69,16 +69,19 @@ namespace SF3.Models.Files.MPD {
                 return new float[] { brHeight, brHeight, brHeight, brHeight };
             }
 
-            if (MPD_File.Surface == null)
-                return new float[] { 0, 0, 0, 0 };
+            // The model to show should come from the surface model.
+            if (MPD_File.SurfaceModel?.VertexHeightBlockTable != null) {
+                return BlockVertexLocations.Values
+                    .Select(bvl => MPD_File.SurfaceModel.VertexHeightBlockTable[bvl.Num][bvl.X, bvl.Y] / 16.0f)
+                    .ToArray();
+            }
 
-            // Otherwise, gather heights from the 5x5 block with the surface mesh's heightmap.
-            if (MPD_File.SurfaceModel?.VertexNormalBlockTable == null)
+            // If that doesn't exist, fall back to the surface heightmap.
+            if (MPD_File.Surface?.HeightmapRowTable != null)
                 return MPD_File.Surface.HeightmapRowTable[Y].GetQuadHeights(X);
 
-            return BlockVertexLocations.Values
-                .Select(x => MPD_File.SurfaceModel.VertexHeightBlockTable[x.Num][x.X, x.Y] / 16.0f)
-                .ToArray();
+            // If *that* doesn't exist, there isn't a surface; return nothing.
+            return new float[] { 0, 0, 0, 0 };
         }
 
         public VECTOR GetVertexNormal(CornerType corner) {
