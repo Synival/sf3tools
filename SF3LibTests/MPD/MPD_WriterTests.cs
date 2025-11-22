@@ -14,8 +14,8 @@ namespace SF3.Tests.MPD {
         }
 
         [TestMethod]
-        public void WriteMPD_WithScenario1VoidFile_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "VOID.MPD");
+        public void WriteMPD_WithScenario1TestMap_CanBeLoaded() {
+            var originalFile = MakeFile(ScenarioType.Scenario1, "TESMAP.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -32,8 +32,8 @@ namespace SF3.Tests.MPD {
         }
 
         [TestMethod]
-        public void WriteMPD_WithScenario1VoidFile_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "VOID.MPD");
+        public void WriteMPD_WithScenario1TestMap_ProducesSameData() {
+            var file = MakeFile(ScenarioType.Scenario1, "TESMAP.MPD");
             var fileData = file.Data.GetDataCopyOrReference();
 
             byte[]? outputData = null;
@@ -43,7 +43,7 @@ namespace SF3.Tests.MPD {
                 outputData = memoryStream.ToArray();
             }
 
-            File.WriteAllBytes("VOID_Test.MPD", outputData);
+            File.WriteAllBytes("TESMAP_Test.MPD", outputData);
 
             AssertByteComparison(fileData, outputData);
         }
