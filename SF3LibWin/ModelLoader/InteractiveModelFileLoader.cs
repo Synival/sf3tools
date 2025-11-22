@@ -9,6 +9,8 @@ namespace SF3.Win.ModelLoader {
             var errors = Model.GetErrors();
 
             if (errors.Length > 0) {
+                if (errors.Length > 50)
+                    errors = errors.Take(50).Append($"({errors.Length - 50} more)").ToArray();
                 DialogResult dialogResult = MessageBox.Show(
                     "This file has the following known errors:\r\n\r\n" +
                     string.Join("\r\n", errors.Select(x => "- " + x)) + "\r\n\r\n" +

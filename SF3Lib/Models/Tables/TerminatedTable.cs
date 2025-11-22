@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CommonLib.Logging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
@@ -30,22 +32,27 @@ namespace SF3.Models.Tables {
                 var max = MaxSize ?? 65536;
                 for (var id = 0; id < max; ++id) {
                     var newModel = makeTFunc(id, address);
+                    if (newModel == null)
+                        break;
+
                     var predResult = pred != null ? pred(rowDict, newModel) : true;
                     if (!predResult && !addEndModel)
                         break;
 
                     rowDict[id] = newModel;
                     rows.Add(newModel);
-                    address += newModel.Size;
 
                     if (!predResult && addEndModel)
                         break;
 
+                    address += newModel.Size;
                     prevModel = newModel;
                 }
             }
-            catch {
-                return false;
+            catch (Exception e) {
+                Logger.WriteLine($"Error loading table '{this.GetType().Name}':", LogType.Error);
+                using (Logger.IndentedSection())
+                    Logger.LogException(e);
             }
             finally {
                 _rows = rows.ToArray();

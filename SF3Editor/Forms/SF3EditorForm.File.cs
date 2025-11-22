@@ -185,12 +185,15 @@ namespace SF3.Editor.Forms {
             // Report any known errors in the file.
             if (_appState.ShowErrorsOnFileLoad) {
                 var errors = loadedFile?.Loader?.Model?.GetErrors() ?? new string[0];
-                if (errors.Length > 0)
+                if (errors.Length > 0) {
+                    if (errors.Length > 50)
+                        errors = errors.Take(50).Append($"({errors.Length - 50} more)").ToArray();
                     WarningMessage(
                         "Warning: File contains known errors:\r\n\r\n" +
                         string.Join("\r\n", errors.Select(x => "- " + x).ToArray()) + "\r\n\r\n" +
                         "To disable these error messages, disable setting at:\r\n" +
                         "   Settings -> Show Errors when Loading File");
+                }
             }
 
             return loadedFile;
