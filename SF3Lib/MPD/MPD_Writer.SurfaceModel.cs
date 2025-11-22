@@ -77,7 +77,7 @@ namespace SF3.MPD {
             for (int i = 0; i < 4; i++) {
                 var relativePosition = _getNonFlatTileAtVertexOffsets[i];
                 var x = upperTileX + relativePosition.X;
-                var y = upperTileX + relativePosition.Y;
+                var y = upperTileY + relativePosition.Y;
                 if (x < 0 || y < 0 || x >= tilesWidth || y >= tilesHeight)
                     continue;
 
