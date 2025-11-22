@@ -20,6 +20,7 @@ namespace SF3.MPD {
             var palette1Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 1 ? mpd.PaletteTables[0] : null);
             var palette2Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
 
+            WriteToAlignTo(4);
             var headerPos = CurrentOffset;
             WriteHeader(
                 mpd.MPDHeader,
