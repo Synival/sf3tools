@@ -1,4 +1,5 @@
-﻿using CommonLib.SGL;
+﻿using System;
+using CommonLib.SGL;
 using CommonLib.Types;
 
 namespace SF3.MPD {
@@ -13,54 +14,65 @@ namespace SF3.MPD {
             => WriteUncompressedChunk(writer => writer.WriteSurfaceModelChunkContent(tiles));
 
         public void WriteSurfaceModelChunkContent(IMPD_Tile[,] tiles) {
-/*
-            0x0000 - 0x2000: TileTextureRowTable    | Textures
-            0x2000 - 0xB600: VertexNormalBlockTable | Normals
-            0xB600 - 0xCF00: VertexHeightBlockTable | Heightmap
-*/
-
             // The surface model is stored as 256 4x4 blocks, in row major order.
             // There are 16 columns of blocks and 16 rows of blocks.
+            void ForEachBlock(Action<int /*blockTileX*/, int /*blockTileY*/> action) {
+                for (int block = 0; block < c_surfaceModelBlockCount; block++) {
+                    int tileBlockX = (block % 0x10) * c_surfaceModelBlockTilesWidth;
+                    int tileBlockY = (block / 0x10) * c_surfaceModelBlockTilesHeight;
+                    action(tileBlockX, tileBlockY);
+                }
+            }
+
+            void ForEachBlockTile(Action<int /*tileX*/, int /*tileY*/> action) {
+                ForEachBlock((blockTileX, blockTileY) => {
+                    for (int y = 0; y < c_surfaceModelBlockTilesHeight; y++)
+                        for (int x = 0; x < c_surfaceModelBlockTilesWidth; x++)
+                            action(x + blockTileX, y + blockTileY);
+                });
+            }
+
+            void ForEachBlockVertex(Action<int /*tileX*/, int /*tileY*/> action) {
+                ForEachBlock((blockTileX, blockTileY) => {
+                    for (int y = 0; y < c_surfaceModelBlockVerticesHeight; y++)
+                        for (int x = 0; x < c_surfaceModelBlockVerticesWidth; x++)
+                            action(x + blockTileX, y + blockTileY);
+                });
+            }
 
             // 0x10 words (2 bytes each) for 0x100 blocks.
             // 0x2000 bytes total.
-            for (int block = 0; block < c_surfaceModelBlockCount; block++) {
-                int blockX = (block % 0x10) * c_surfaceModelBlockTilesWidth;
-                int blockY = (block / 0x10) * c_surfaceModelBlockTilesHeight;
-                for (int y = 0; y < c_surfaceModelBlockTilesHeight; y++) {
-                    for (int x = 0; x < c_surfaceModelBlockTilesWidth; x++) {
-                        var tile = tiles[x + blockX, y + blockY];
-                        WriteUShort((ushort) ((tile.ModelTextureFlags << 8) | tile.ModelTextureID));
-                    }
-                }
-            }
+            ForEachBlockTile((x, y) => {
+                var tile = tiles[x, y];
+                WriteUShort((ushort) ((tile.ModelTextureFlags << 8) | tile.ModelTextureID));
+            });
 
-            // 0x03 "weird" compressed fixed decimal values (2 bytes each) in a 5x5 mesh for 0x100 blocks.
+            // 0x03 "weird" compressed fixed decimal values (2 bytes each) per vertex in a 5x5 mesh for 0x100 blocks.
             // 0x9600 bytes total.
-            for (int block = 0; block < c_surfaceModelBlockCount; block++) {
-                int blockX = (block % 0x10) * c_surfaceModelBlockTilesWidth;
-                int blockY = (block / 0x10) * c_surfaceModelBlockTilesHeight;
-                for (int y = 0; y < c_surfaceModelBlockVerticesHeight; y++) {
-                    for (int x = 0; x < c_surfaceModelBlockVerticesWidth; x++) {
-                        var tile = GetNonFlatTileAtVertex(tiles, x + blockX, y + blockY, out var corner);
-                        if (tile != null) {
-                            var normal = tile.GetVertexNormal(corner);
-                            WriteUShort(new CompressedFIXED(normal.X).WeirdRawShort);
-                            WriteUShort(new CompressedFIXED(normal.Y).WeirdRawShort);
-                            WriteUShort(new CompressedFIXED(normal.Z).WeirdRawShort);
-                        }
-                        else {
-                            WriteUShort(0);
-                            WriteUShort(0);
-                            WriteUShort(0);
-                        }
-                    }
+            ForEachBlockVertex((x, y) => {
+                var tile = GetNonFlatTileAtVertex(tiles, x, y, out var corner);
+                if (tile != null) {
+                    var normal = tile.GetVertexNormal(corner);
+                    WriteUShort(new CompressedFIXED(normal.X).WeirdRawShort);
+                    WriteUShort(new CompressedFIXED(normal.Y).WeirdRawShort);
+                    WriteUShort(new CompressedFIXED(normal.Z).WeirdRawShort);
                 }
-            }
+                else {
+                    WriteUShort(0);
+                    WriteUShort(0);
+                    WriteUShort(0);
+                }
+            });
 
-            // TODO: Mesh heightmap.
-            const int remainingBytes = 0xCF00 - 0xB600;
-            WriteBytes(new byte[remainingBytes]);
+            // 0x01 byte per vertex in a 5x5 mesh for 0x100 blocks.
+            // 0x1900 bytes total.
+            ForEachBlockVertex((x, y) => {
+                var tile = GetNonFlatTileAtVertex(tiles, x, y, out var corner);
+                if (tile != null)
+                    WriteByte((byte) Math.Round(tile.GetSurfaceModelVertexHeight(corner) * 16.00f));
+                else
+                    WriteByte(0);
+            });
         }
 
         private static readonly (sbyte X, sbyte Y, CornerType ConnectedCorner)[] _getNonFlatTileAtVertexOffsets = new (sbyte, sbyte, CornerType)[] {

@@ -29,5 +29,13 @@ namespace SF3.MPD {
         /// <param name="corner">The corner of the tile whose normal vector should be retrieved.</param>
         /// <returns>A normal VECTOR.</returns>
         VECTOR GetVertexNormal(CornerType corner);
+
+        /// <summary>
+        /// Gets the height of a corner of a tile for use in the surface model. The height returns is relative to the
+        /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
+        /// </summary>
+        /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
+        /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
+        float GetSurfaceModelVertexHeight(CornerType corner);
     }
 }

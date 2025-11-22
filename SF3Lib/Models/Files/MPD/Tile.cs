@@ -62,6 +62,25 @@ namespace SF3.Models.Files.MPD {
                     TriggerNeighborTileModified(x, y);
         }
 
+        public float GetSurfaceModelVertexHeight(CornerType corner) {
+            // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
+            if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelIsFlat)
+                return MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
+
+            // The model to show should come from the surface model.
+            if (MPD_File.SurfaceModel?.VertexHeightBlockTable != null) {
+                var bvl = BlockVertexLocations[corner];
+                return MPD_File.SurfaceModel.VertexHeightBlockTable[bvl.Num][bvl.X, bvl.Y] / 16.0f;
+            }
+
+            // If that doesn't exist, fall back to the surface heightmap.
+            if (MPD_File.Surface?.HeightmapRowTable != null)
+                return MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, corner);
+
+            // If *that* doesn't exist, there isn't a surface; return nothing.
+            return 0;
+        }
+
         public float[] GetSurfaceModelVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && ModelIsFlat) {
