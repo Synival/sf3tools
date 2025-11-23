@@ -987,7 +987,7 @@ namespace SF3.Models.Files.MPD {
                             continue;
 
                         var tile = Tiles[tileX, tileZ];
-                        var tileY = tile.GetAverageHeight();
+                        var tileY = tile.GetAverageSurfaceHeight();
 
                         // Trees should be very close to the center of the tile vertically.
                         var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
@@ -1342,8 +1342,8 @@ namespace SF3.Models.Files.MPD {
 
             foreach (var tile in Tiles) {
                 // This *would* report irregularities in heightmaps, if the existed :)
-                var moveHeights  = corners.ToDictionary(c => c, tile.GetMoveHeightmap);
-                if (tile.ModelIsFlat) {
+                var moveHeights  = corners.ToDictionary(c => c, tile.GetSurfaceVertexHeight);
+                if (tile.IsFlat) {
                     var br = CornerType.BottomRight;
                     foreach (var c in corners) {
                         if (c == br)
@@ -1353,7 +1353,7 @@ namespace SF3.Models.Files.MPD {
                     }
                 }
                 else {
-                    var modelHeights = corners.ToDictionary(c => c, tile.GetModelVertexHeightmap);
+                    var modelHeights = corners.ToDictionary(c => c, tile.GetSurfaceModelVertexHeight);
                     foreach (var c in corners) {
                         if (moveHeights[c] != modelHeights[c])
                             errors.Add("Non-flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match surface model height: " + moveHeights[c] + " != " + modelHeights[c]);
@@ -1361,12 +1361,12 @@ namespace SF3.Models.Files.MPD {
                 }
 
                 // Report unknown or unhandled tile flags. Only Scenario 3+ has rotation flags 0x01 and 0x02.
-                var weirdTexFlags = tile.ModelTextureFlags & ~0xB0;
+                var weirdTexFlags = tile.TextureFlags & ~0xB0;
                 if (Scenario >= ScenarioType.Scenario3)
                     weirdTexFlags &= ~0x03;
                 if (weirdTexFlags != 0x00)
                     errors.Add("Tile (" + tile.X + ", " + tile.Y + ") has unhandled texture flag 0x" + weirdTexFlags.ToString("X2"));
-                if (Scenario >= ScenarioType.Scenario3 && !flags.HasSurfaceTextureRotation && (tile.ModelTextureFlags & 0x03) != 0)
+                if (Scenario >= ScenarioType.Scenario3 && !flags.HasSurfaceTextureRotation && (tile.TextureFlags & 0x03) != 0)
                     errors.Add("HasSurfaceTextureRotation flag is off but tile (" + tile.X + ", " + tile.Y + ") has rotation flags 0x" + (weirdTexFlags & 0x03).ToString("X2"));
             }
 

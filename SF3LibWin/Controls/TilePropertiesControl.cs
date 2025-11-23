@@ -38,9 +38,9 @@ namespace SF3.Win.Controls {
             cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
 
             // Event handling for 'Movement' group.
-            cbMoveTerrain.SelectedValueChanged         += (s, e) => DoIfUserInput(() => _tile.MoveTerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
+            cbMoveTerrain.SelectedValueChanged         += (s, e) => DoIfUserInput(() => _tile.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
             nudMoveHeight.ValueChanged                 += (s, e) => UserSetMoveHeight((float) nudMoveHeight.Value);
-            cbMoveSlope.CheckedChanged                 += (s, e) => DoIfUserInput(() => _tile.MoveTerrainFlags ^= TerrainFlags.SteepSlope);
+            cbMoveSlope.CheckedChanged                 += (s, e) => DoIfUserInput(() => _tile.TerrainFlags ^= TerrainFlags.SteepSlope);
             foreach (var nud in _nudMoveHeightmaps)
                 nud.Value.ValueChanged                 += (s, e) => UserSetMoveHeightmap(nud.Key, (float) nud.Value.Value);
             nudMoveHeightmapTR.ValueChanged            += (s, e) => UserSetMoveHeightmap(CornerType.TopRight, (float) nudMoveHeightmapTR.Value);
@@ -51,14 +51,14 @@ namespace SF3.Win.Controls {
             nudEventID.ValueChanged                    += (s, e) => DoIfUserInput(() => _tile.EventID = (byte) nudEventID.Value);
 
             // Event handling for 'Model' group.
-            nudModelTextureID.ValueChanged             += (s, e) => DoIfUserInput(() => _tile.ModelTextureID = (byte) nudModelTextureID.Value);
-            cbModelRotate.SelectedValueChanged         += (s, e) => DoIfUserInput(() => _tile.ModelTextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
-            cbModelFlip.SelectedValueChanged           += (s, e) => DoIfUserInput(() => _tile.ModelTextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
+            nudModelTextureID.ValueChanged             += (s, e) => DoIfUserInput(() => _tile.TextureID = (byte) nudModelTextureID.Value);
+            cbModelRotate.SelectedValueChanged         += (s, e) => DoIfUserInput(() => _tile.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
+            cbModelFlip.SelectedValueChanged           += (s, e) => DoIfUserInput(() => _tile.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
 
             cbModelTileIsFlat.CheckedChanged           += (s, e) => DoIfUserInput(() => {
-                _tile.ModelIsFlat = cbModelTileIsFlat.Checked;
+                _tile.IsFlat = cbModelTileIsFlat.Checked;
                 UpdateMoveHeightsEnabled();
-                if (_tile.ModelIsFlat)
+                if (_tile.IsFlat)
                     FlattenTile();
                 else
                     UnflattenTile();
@@ -132,11 +132,11 @@ namespace SF3.Win.Controls {
                         nud.Text = "";
                 }
                 else {
-                    cbMoveTerrain.SelectedItem = _tile.MoveTerrainType;
-                    InitNUD(nudMoveHeight, (decimal) _tile.MoveHeight);
-                    cbMoveSlope.Checked = ((_tile.MoveTerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
+                    cbMoveTerrain.SelectedItem = _tile.TerrainType;
+                    InitNUD(nudMoveHeight, (decimal) _tile.CenterHeight);
+                    cbMoveSlope.Checked = ((_tile.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
                     foreach (var nud in _nudMoveHeightmaps)
-                        InitNUD(nud.Value, (decimal) _tile.GetMoveHeightmap(nud.Key));
+                        InitNUD(nud.Value, (decimal) _tile.GetSurfaceVertexHeight(nud.Key));
                 }
 
                 // 'Event' group
@@ -163,13 +163,13 @@ namespace SF3.Win.Controls {
                     }
                 }
                 else {
-                    InitNUD(nudModelTextureID, _tile.ModelTextureID);
+                    InitNUD(nudModelTextureID, _tile.TextureID);
                     cbModelHasTree.Checked = _tile.TreeModelID != null;
                     cbModelHasTree.Enabled = true;
 
                     var disabledMessage = _tile.MPD_File.Scenario >= ScenarioType.Scenario3 ? "(Enable in header)" : "(Scenario 3+ only)";
                     if (_tile.MPD_File.SurfaceModel.TileTextureRowTable.HasRotation && _tile.MPD_File.Flags.HasSurfaceTextureRotation) {
-                        cbModelRotate.SelectedItem = _tile.ModelTextureRotate;
+                        cbModelRotate.SelectedItem = _tile.TextureRotate;
                         cbModelRotate.Enabled = true;
                     }
                     else {
@@ -178,10 +178,10 @@ namespace SF3.Win.Controls {
                         cbModelRotate.Enabled = false;
                     }
 
-                    cbModelFlip.SelectedItem = _tile.ModelTextureFlip;
+                    cbModelFlip.SelectedItem = _tile.TextureFlip;
 
-                    if (cbModelTileIsFlat.Checked != _tile.ModelIsFlat) {
-                        cbModelTileIsFlat.Checked = _tile.ModelIsFlat;
+                    if (cbModelTileIsFlat.Checked != _tile.IsFlat) {
+                        cbModelTileIsFlat.Checked = _tile.IsFlat;
                         UpdateMoveHeightsEnabled();
                     }
                 }
@@ -190,9 +190,9 @@ namespace SF3.Win.Controls {
 
         private void SetMoveHeightToAverageMoveHeight() {
             using (IncrementNonUserInputGuard()) {
-                var avgHeight = _tile.GetAverageHeight();
+                var avgHeight = _tile.GetAverageSurfaceHeight();
                 nudMoveHeight.Value = (decimal) avgHeight;
-                _tile.MoveHeight = avgHeight;
+                _tile.CenterHeight = avgHeight;
             }
         }
 
@@ -273,10 +273,10 @@ namespace SF3.Win.Controls {
                 return;
 
             value = Math.Clamp(value, 0.00f, 15.9375f);
-            var diff = value - _tile.MoveHeight;
+            var diff = value - _tile.CenterHeight;
 
             foreach (var corner in Enum.GetValues<CornerType>()) {
-                var height = Math.Clamp(_tile.GetMoveHeightmap(corner) + diff, 0.00f, 15.9375f);
+                var height = Math.Clamp(_tile.GetSurfaceVertexHeight(corner) + diff, 0.00f, 15.9375f);
                 _nudMoveHeightmaps[corner].Value = (decimal) height;
             }
         }
@@ -287,19 +287,19 @@ namespace SF3.Win.Controls {
 
             value = Math.Clamp(value, 0.00f, 15.9375f);
             using (IncrementNonUserInputGuard()) {
-                var oldValue = _tile.GetMoveHeightmap(corner);
-                _tile.SetMoveHeightmap(corner, value);
+                var oldValue = _tile.GetSurfaceVertexHeight(corner);
+                _tile.SetSurfaceVertexHeight(corner, value);
                 if (adjustMoveHeight)
                     SetMoveHeightToAverageMoveHeight();
 
-                if (_tile.MPD_File.SurfaceModel != null && !_tile.ModelIsFlat) {
-                    _tile.SetModelVertexHeightmap(corner, value);
-                    _tile.CopyMoveHeightToNonFlatNeighbors(corner);
+                if (_tile.MPD_File.SurfaceModel != null && !_tile.IsFlat) {
+                    _tile.SetSurfaceModelVertexHeight(corner, value);
+                    _tile.CopySurfaceVertexHeightToNonFlatNeighbors(corner);
 
                     // Technically we *could* recalculate normals because the normals of neighboring flat tiles are also included
                     // in the calculations, but the normals of flat tiles are constant, so neighboring tiles' normals never change
                     // when a flat tile moves up or down.
-                    _tile.UpdateNormalsForCorner(corner, AppState.RetrieveAppState().MakeNormalCalculationSettings());
+                    _tile.UpdateSharedVertexNormals(corner, AppState.RetrieveAppState().MakeNormalCalculationSettings());
                 }
             }
         }
@@ -314,13 +314,13 @@ namespace SF3.Win.Controls {
         private void FlattenTile() {
             using (IncrementNonUserInputGuard()) {
                 var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
-                var height = _tile.MoveHeight;
+                var height = _tile.CenterHeight;
                 foreach (var nud in _nudMoveHeightmaps) {
-                    _tile.SetMoveHeightmap(nud.Key, height);
+                    _tile.SetSurfaceVertexHeight(nud.Key, height);
                     nud.Value.Value = (decimal) height;
                 }
                 foreach (var corner in corners)
-                    _tile.UpdateNormalsForCorner(corner, AppState.RetrieveAppState().MakeNormalCalculationSettings());
+                    _tile.UpdateSharedVertexNormals(corner, AppState.RetrieveAppState().MakeNormalCalculationSettings());
             }
         }
 
@@ -329,12 +329,12 @@ namespace SF3.Win.Controls {
                 var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
                 foreach (var nud in _nudMoveHeightmaps) {
                     nud.Value.Enabled = true;
-                    var height = _tile.GetMoveHeightmap(nud.Key);
-                    _tile.SetModelVertexHeightmap(nud.Key, height);
-                    _tile.CopyMoveHeightToNonFlatNeighbors(nud.Key);
+                    var height = _tile.GetSurfaceVertexHeight(nud.Key);
+                    _tile.SetSurfaceModelVertexHeight(nud.Key, height);
+                    _tile.CopySurfaceVertexHeightToNonFlatNeighbors(nud.Key);
                 }
                 foreach (var corner in corners)
-                    _tile.UpdateNormalsForCorner(corner, AppState.RetrieveAppState().MakeNormalCalculationSettings());
+                    _tile.UpdateSharedVertexNormals(corner, AppState.RetrieveAppState().MakeNormalCalculationSettings());
             }
         }
 

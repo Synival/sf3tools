@@ -77,9 +77,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                     if (textureData != null) {
                         // Get texture. Fetch animated textures if possible.
-                        var textureId = tile.ModelTextureID;
-                        rotate = tile.ModelTextureRotate;
-                        flip = tile.ModelTextureFlip;
+                        var textureId = tile.TextureID;
+                        rotate = tile.TextureRotate;
+                        flip = tile.TextureFlip;
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
@@ -107,7 +107,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         }
                     }
 
-                    var terrainType = (int) tile.MoveTerrainType;
+                    var terrainType = (int) tile.TerrainType;
                     var ttX = (terrainType % 4) / 4.0f;
                     var ttY = (terrainType / 4) / 4.0f;
                     const float ttWidth = 0.25f;
@@ -147,7 +147,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         AddAttributes(newQuad);
                         surfaceQuads.Add(newQuad);
                     }
-                    else if (textureData != null && tile.ModelTextureID != 0xFF) {
+                    else if (textureData != null && tile.TextureID != 0xFF) {
                         var newQuad = new Quad(vertices, new Vector4(1f, 0f, 0f, 1f));
                         AddAttributes(newQuad);
                         missingSurfaceQuads.Add(newQuad);

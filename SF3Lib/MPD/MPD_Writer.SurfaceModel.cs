@@ -44,7 +44,7 @@ namespace SF3.MPD {
             // 0x2000 bytes total.
             ForEachBlockTile((x, y) => {
                 var tile = tiles[x, y];
-                WriteUShort((ushort) ((tile.ModelTextureFlags << 8) | tile.ModelTextureID));
+                WriteUShort((ushort) ((tile.TextureFlags << 8) | tile.TextureID));
             });
 
             // 0x03 "weird" compressed fixed decimal values (2 bytes each) per vertex in a 5x5 mesh for 0x100 blocks.
@@ -69,7 +69,7 @@ namespace SF3.MPD {
             ForEachBlockVertex((x, y) => {
                 var tile = GetNonFlatTileAtVertex(tiles, x, y, out var corner);
                 if (tile != null)
-                    WriteByte((byte) Math.Round(tile.GetSurfaceModelVertexHeight(corner) * 16.00f));
+                    WriteByte((byte) Math.Round(tile.GetVertexHeight(corner) * 16.00f));
                 else
                     WriteByte(0);
             });
@@ -94,7 +94,7 @@ namespace SF3.MPD {
                     continue;
 
                 var tile = tiles[x, y];
-                if (!tile.ModelIsFlat) {
+                if (!tile.IsFlat) {
                     connectedCorner = relativePosition.ConnectedCorner;
                     return tile;
                 }

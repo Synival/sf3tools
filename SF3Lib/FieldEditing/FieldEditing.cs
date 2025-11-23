@@ -21,7 +21,7 @@ namespace SF3.FieldEditing {
         }
 
         public static void UpdateTileTexture(Tile tile, bool setDefaultIfNothingFound) {
-            var tileType = GetTileTypeByTexID(tile.ModelTextureID);
+            var tileType = GetTileTypeByTexID(tile.TextureID);
             if (tileType.HasValue)
                 SetTileTexture(tile, tileType.Value, setDefaultIfNothingFound);
         }
@@ -37,7 +37,7 @@ namespace SF3.FieldEditing {
                     var tx = tile.X + ix;
                     var texId =
                         (ix == 0 && iy == 0) ? defaultTexId :
-                        (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) ? tiles[tx, ty].ModelTextureID : (byte) 0xFF;
+                        (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) ? tiles[tx, ty].TextureID : (byte) 0xFF;
                     gridTileTypes[ix + 1, iy + 1] = GetTileTypeByTexID(texId) ?? TileType.Water;
                 }
             }
@@ -103,9 +103,9 @@ namespace SF3.FieldEditing {
 
             if (validTileDefs.Length == 0) {
                 if (setDefaultIfNothingFound) {
-                    tile.ModelTextureID     = defaultTexId;
-                    tile.ModelTextureFlip   = TextureFlipType.NoFlip;
-                    tile.ModelTextureRotate = TextureRotateType.NoRotation;
+                    tile.TextureID     = defaultTexId;
+                    tile.TextureFlip   = TextureFlipType.NoFlip;
+                    tile.TextureRotate = TextureRotateType.NoRotation;
                 }
                 return;
             }
@@ -118,9 +118,9 @@ namespace SF3.FieldEditing {
             var random = new Random(tile.RandomSeed);
 
             var tileDef = validTileDefs[random.Next(validTileDefs.Length)];
-            tile.ModelTextureID     = tileDef.TexID;
-            tile.ModelTextureFlip   = tileDef.Orientation.GetTextureFlip();
-            tile.ModelTextureRotate = tileDef.Orientation.GetTextureRotate();
+            tile.TextureID     = tileDef.TexID;
+            tile.TextureFlip   = tileDef.Orientation.GetTextureFlip();
+            tile.TextureRotate = tileDef.Orientation.GetTextureRotate();
         }
     }
 }
