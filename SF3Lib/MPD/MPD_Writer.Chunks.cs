@@ -37,7 +37,27 @@ namespace SF3.MPD {
             WriteSurfaceChunk(mpd.Tiles);
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
-            WriteTextureChunks(mpd.Textures, chunkCount: 5);
+            // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
+            bool IdBelongsToTextureCollection(int id, TextureCollectionType collection) {
+                var min = (int) collection * TextureCollection.IDsPerCollectionType;
+                return (id >= min && id < min + TextureCollection.IDsPerCollectionType);
+            }
+            if (mpd.Flags.HasChunk19Model) {
+                WriteTextureChunks(mpd.Textures.Where(x => IdBelongsToTextureCollection(x.ID, TextureCollectionType.PrimaryTextures)).ToArray(), chunkCount: 4, startID: 0);
+                WriteTextureChunks(mpd.Textures.Where(x => IdBelongsToTextureCollection(x.ID, TextureCollectionType.Chunk19ModelTextures)).ToArray(), chunkCount: 1, startID: 0);
+            }
+            else
+                WriteTextureChunks(mpd.Textures.Where(x => IdBelongsToTextureCollection(x.ID, TextureCollectionType.PrimaryTextures)).ToArray(), chunkCount: 5, startID: 0);
+
+            // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
+            // (it's so silly that it works this way, lol)
+            var chest1Textures = mpd.Textures.Where(x => IdBelongsToTextureCollection(x.ID, TextureCollectionType.MovableModels1)).ToArray();
+            var chest2Textures = mpd.Textures.Where(x => IdBelongsToTextureCollection(x.ID, TextureCollectionType.MovableModels2)).ToArray();
+            var barrelTextures = mpd.Textures.Where(x => IdBelongsToTextureCollection(x.ID, TextureCollectionType.MovableModels3)).ToArray();
+
+            WriteTextureChunk(chest1Textures, 0, out _);
+            WriteTextureChunk(chest2Textures, 0, out _);
+            WriteTextureChunk(barrelTextures, 0, out _);
 
             // TODO: actual chunks!!
             while (_currentChunks < 20)

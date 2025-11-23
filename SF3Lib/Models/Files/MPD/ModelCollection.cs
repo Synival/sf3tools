@@ -13,7 +13,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile, IMPD_ModelCollection {
-        public static int IDsPerCollectionType = 10000;
+        public static int IDsPerCollectionType = 0x1000;
 
         protected ModelCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,

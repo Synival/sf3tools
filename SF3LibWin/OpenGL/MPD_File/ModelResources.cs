@@ -67,23 +67,27 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         private Dictionary<int, ITexture> GetTexturesByID(IMPD_File mpdFile, TextureCollectionType texCollection) {
+            var textureIdOffset = (int) texCollection * TextureCollection.IDsPerCollectionType;
             return mpdFile.TextureCollections != null ? mpdFile.TextureCollections
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)
                 .SelectMany(x => x.TextureTable)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ID, x => x.Texture)
+                .ToDictionary(x => x.ID - textureIdOffset, x => x.Texture)
                 : [];
         }
 
         private Dictionary<int, ModelAnimationInfo> GetAnimationsByID(IMPD_File mpdFile, TextureCollectionType texCollection) {
-            return (texCollection == TextureCollectionType.PrimaryTextures && mpdFile.TextureAnimations != null) ? mpdFile.TextureAnimations
+            if (texCollection != TextureCollectionType.PrimaryTextures || mpdFile.TextureAnimations == null)
+                return [];
+
+            return mpdFile.TextureAnimations
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => new ModelAnimationInfo {
                     Textures = x.FrameTable.OrderBy(x => x.FrameNum).Select(x => x.Texture).ToArray(),
                     FrameTimerStart = x.FrameTimerStart
-                }) : [];
+                });
         }
 
         public void Update(IMPD_File mpdFile) {
@@ -258,8 +262,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                             // TODO: this isn't quite right... it should check to see if it's in the "Palette3" list
                             else if (animationsById.ContainsKey(textureId + 0x100))
                                 anim = new TextureAnimation(textureId + 0x100, animationsById[textureId + 0x100].Textures, animationsById[textureId + 0x100].FrameTimerStart);
-                            else if (texturesById.ContainsKey(textureId))
-                                anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
+                            else if (texturesById.ContainsKey(textureId)) {
+                                var tex = texturesById[textureId];
+                                anim = new TextureAnimation(tex.ID, [tex], 0);
+                            }
                         }
 
                         // If the texture is missing, mark this polygon bright red.

@@ -9,6 +9,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class TextureCollection : TableFile {
+        public static int IDsPerCollectionType = 0x1000;
+
         protected TextureCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,
             TextureCollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,

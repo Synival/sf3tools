@@ -35,8 +35,13 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
                 var nextImageDataOffset = id + 1 >= Size
                     ? Data.Length
                     : Data.GetWord(address + size + 2);
+
+                var texId = StartID + id;
+                var texColId = texId % Files.MPD.TextureCollection.IDsPerCollectionType;
+                var texSubId = texId / Files.MPD.TextureCollection.IDsPerCollectionType;
+
                 return new TextureModel(
-                    Data, Collection, StartID + id, "Texture" + (StartID + id).ToString("D3"), address,
+                    Data, Collection, StartID + id, $"Texture{texColId}_{texSubId:D3}", address,
                     pixelFormat, GetPalette(pixelFormat), ChunkIndex, nextImageDataOffset
                 );
             });

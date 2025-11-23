@@ -602,21 +602,33 @@ namespace SF3.Models.Files.MPD {
             var texColList = new List<TextureCollection>();
             var texChunks = ChunkLocations.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
 
+            int nextPrimaryCollectionStartId = 0;
             int nextModelCollectionStartId = 0x102;
+
             int index = 0;
             foreach (var chunk in texChunks) {
                 var collection = TextureCollectionForChunkIndex(chunk.Index);
                 bool isMovableModelsChunk = collection >= TextureCollectionType.MovableModels1 && collection <= TextureCollectionType.MovableModels3;
 
-                var startId = isMovableModelsChunk ? nextModelCollectionStartId : (int?) null;
+                int? startId = null;
+                if (isMovableModelsChunk)
+                    startId = nextModelCollectionStartId;
+                else if (collection == TextureCollectionType.PrimaryTextures)
+                    startId = nextPrimaryCollectionStartId;
+                else if (collection == TextureCollectionType.Chunk19ModelTextures || collection == TextureCollectionType.Chunk1ModelTextures)
+                    startId = 0;
+                startId += ((int) collection) * TextureCollection.IDsPerCollectionType;
+
                 try {
                     var texCol = TextureCollection.Create(
                         chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
                         collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
                     if (texCol.TextureTable != null) {
-                        if (isMovableModelsChunk && texCol.TextureTable.Length > 0)
-                            nextModelCollectionStartId = texCol.TextureTable.Last().ID + 1;
+                        if (isMovableModelsChunk)
+                            nextModelCollectionStartId += texCol.TextureTable.Length;
+                        else if (collection == TextureCollectionType.PrimaryTextures)
+                            nextPrimaryCollectionStartId += texCol.TextureTable.Length;
 
                         texColList.Add(texCol);
                         tables.AddRange(texCol.Tables);

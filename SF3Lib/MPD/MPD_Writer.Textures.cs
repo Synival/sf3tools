@@ -5,28 +5,29 @@ using CommonLib.Utils;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteTextureChunks(List<ITexture> textures, int chunkCount) {
-            var texturesByID = textures.ToDictionary(x => x.ID, x => x);
-            int startID = 0;
+        public void WriteTextureChunks(IEnumerable<ITexture> textures, int chunkCount, int startID) {
+            var sortedTextures = textures
+                .OrderBy(x => x.ID)
+                .ToArray();
+
             for (int i = 0; i < chunkCount; i++) {
-                WriteTextureChunk(texturesByID, startID, out var textureCount);
+                WriteTextureChunk(sortedTextures, startID, out var textureCount);
                 startID += textureCount;
             }
         }
 
-        public void WriteTextureChunk(Dictionary<int /*id*/, ITexture> textures, int startID, out int textureCount) {
+        public void WriteTextureChunk(ITexture[] sortedTextures, int startID, out int textureCount) {
             int textureCountBigDumbLocal = 0;
-            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(textures, startID, out textureCountBigDumbLocal));
+            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures, startID, out textureCountBigDumbLocal));
             textureCount = textureCountBigDumbLocal;
         }
 
-        public void WriteTextureChunkContent(Dictionary<int /*id*/, ITexture> textures, int startID, out int textureCount) {
+        public void WriteTextureChunkContent(ITexture[] sortedTextures, int startID, out int textureCount) {
             // Figure out how many textures we can write here. Enforce a limit 0x10000 bytes worth of texture data.
             textureCount = 0;
             int totalTextureDataSize = 0;
-            for (int id = startID; id < textures.Count && id < 0x100; id++) {
-                if (!textures.TryGetValue(id, out var texture))
-                    break;
+            for (int id = startID; id < sortedTextures.Length; id++) {
+                var texture = sortedTextures[id];
 
                 // Size of texture, also accounting for its entry in the table.
                 // (Based on MPD analysis, this appears to be the limit.)
@@ -55,7 +56,7 @@ namespace SF3.MPD {
             // Write texture width+height+offset table.
             var endID = startID + textureCount;
             for (int i = startID; i < endID; i++) {
-                var texture = textures[i];
+                var texture = sortedTextures[i];
                 WriteByte((byte) texture.Width);
                 WriteByte((byte) texture.Height);
                 WriteUShort(curTexOffset);
@@ -65,7 +66,7 @@ namespace SF3.MPD {
 
             // Write texture data.
             for (int i = startID; i < endID; i++) {
-                var texture = textures[i];
+                var texture = sortedTextures[i];
                 if (texture.BytesPerPixel == 1)
                     WriteBytes(texture.ImageData8Bit.To1DArrayTransposed());
                 else
