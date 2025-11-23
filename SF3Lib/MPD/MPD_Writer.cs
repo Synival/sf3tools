@@ -34,7 +34,7 @@ namespace SF3.MPD {
             // X 0x0104: Pointer to header
             // X 0x2000: Chunk table
             // X 0x2100: Model chunk
-            // - 0x2898: Surface (compressed)
+            // X 0x2898: Surface (compressed)
             // - 0x2C3C: Textures 1
             // - 0x32B0: Textures 2
             // - 0x32B8: Textures 3

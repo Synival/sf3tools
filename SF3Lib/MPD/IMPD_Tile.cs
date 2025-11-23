@@ -1,5 +1,6 @@
 ﻿using CommonLib.SGL;
 using CommonLib.Types;
+using SF3.Types;
 
 namespace SF3.MPD {
     /// <summary>
@@ -37,6 +38,22 @@ namespace SF3.MPD {
         /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
         /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
         float GetVisualVertexHeight(CornerType corner);
+
+        /// <summary>
+        /// The height of the tile's center. The center should always be an average of the four corner
+        /// vertex heights.
+        /// </summary>
+        float CenterHeight { get; set; }
+
+        /// <summary>
+        /// Type of terrain during battle. Used for movement and land effect calculations.
+        /// </summary>
+        TerrainType TerrainType { get; set; }
+
+        /// <summary>
+        /// Special flags applied to the terrain for battles.
+        /// </summary>
+        TerrainFlags TerrainFlags { get; set; }
 
         /// <summary>
         /// Event ID of the tile that ties in with warps, interactables, searchable items, pre-loading triggers, etc.

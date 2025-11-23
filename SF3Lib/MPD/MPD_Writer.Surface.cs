@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonLib.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
@@ -6,11 +7,6 @@ namespace SF3.MPD {
             => WriteCompressedChunk(writer => writer.WriteSurfaceChunkContent(tiles));
 
         public void WriteSurfaceChunkContent(IMPD_Tile[,] tiles) {
-/*
-                (HeightmapRowTable     = HeightmapRowTable.Create    (Data, "HeightmapRows",     0x0000)),
-                (HeightTerrainRowTable = HeightTerrainRowTable.Create(Data, "HeightTerrainRows", 0x4000)),
-                (EventIDRowTable       = EventIDRowTable.Create      (Data, "EventIDRows",       0x6000)),
-*/
             var tilesWidth  = tiles.GetLength(0);
             var tilesHeight = tiles.GetLength(1);
 
@@ -22,14 +18,20 @@ namespace SF3.MPD {
 
             // Tile corner heights: 0x4000 bytes (64x64x4)
             ForEachTile(tile => {
-                // TODO: actually write the thing
-                WriteBytes(new byte[4]);
+                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.BottomRight) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.BottomLeft) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.TopLeft) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.TopRight) * 16.0f));
             });
 
             // Tile center heights + terrain: 0x2000 bytes (64x64x2)
             ForEachTile(tile => {
-                // TODO: actually write the thing
-                WriteBytes(new byte[2]);
+                ushort word = (ushort) (
+                    ((byte) Math.Round(tile.CenterHeight * 16.0f) << 8) |
+                    (((byte) tile.TerrainFlags & 0x0F) << 4) |
+                    ((byte) tile.TerrainType & 0x0F)
+                );
+                WriteUShort(word);
             });
 
             // Tile event IDs: 0x1000 bytes (64x64x1)
