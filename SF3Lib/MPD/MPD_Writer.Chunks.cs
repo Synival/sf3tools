@@ -27,6 +27,15 @@ namespace SF3.MPD {
             else
                 WriteSurfaceModelChunk(mpd.Tiles);
 
+            // TODO: Chunk[3] (animated texture frames)
+            WriteEmptyChunk();
+
+            // Chunk[4] is always empty.
+            WriteEmptyChunk();
+
+            // Chunk[5] is the surface (heightmap + gameplay, not the model for rendering).
+            WriteSurfaceChunk(mpd.Tiles);
+
             // TODO: actual chunks!!
             while (_currentChunks < 20)
                 WriteEmptyChunk();
