@@ -36,6 +36,9 @@ namespace SF3.MPD {
             // Chunk[5] is the surface (heightmap + gameplay, not the model for rendering).
             WriteSurfaceChunk(mpd.Tiles);
 
+            // Chunk[6, 7, 8, 9, 10] are all textures.
+            WriteTextureChunks(mpd.Textures, chunkCount: 5);
+
             // TODO: actual chunks!!
             while (_currentChunks < 20)
                 WriteEmptyChunk();

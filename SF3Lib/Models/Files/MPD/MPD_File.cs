@@ -628,7 +628,14 @@ namespace SF3.Models.Files.MPD {
 
                 index++;
             }
+
             TextureCollections = texColList.ToArray();
+
+            // Big, abstract collection of textures.
+            Textures = TextureCollections
+                .SelectMany(x => x.TextureTable)
+                .Select(x => x.Texture)
+                .ToList();
 
             // Now that textures are loaded, build the texture animation frame data.
             // TODO: This function is a MESS. Please refactor it!!
@@ -1684,6 +1691,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public TextureCollection[] TextureCollections { get; private set; }
 
+        public List<ITexture> Textures { get; private set; }
         public Tile[,] Tiles { get; } = new Tile[64, 64];
 
         public int RepeatingGroundChunk1Index { get; }

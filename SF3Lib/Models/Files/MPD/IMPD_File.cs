@@ -133,6 +133,7 @@ namespace SF3.Models.Files.MPD {
         int? ExtraModelTextureChunkIndex { get; }
 
         TextureCollection[] TextureCollections { get; }
+        List<ITexture> Textures { get; }
 
         Tile[,] Tiles { get; }
 
