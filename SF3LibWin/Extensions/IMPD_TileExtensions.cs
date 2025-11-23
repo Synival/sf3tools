@@ -2,12 +2,13 @@ using System.Linq;
 using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Win.OpenGL.MPD_File;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {
-    public static class TileExtensions {
-        public static Vector3[] GetVector3Vertices(this Tile tile, float scale = 1.00f) {
+    public static class IMPD_TileExtensions {
+        public static Vector3[] GetVector3Vertices(this IMPD_Tile tile, float scale = 1.00f) {
             var xzOff = scale * 0.5f;
 
             var heights = tile.GetVisualVertexHeights();

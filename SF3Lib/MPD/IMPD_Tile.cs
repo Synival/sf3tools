@@ -9,6 +9,16 @@ namespace SF3.MPD {
     /// </summary>
     public interface IMPD_Tile {
         /// <summary>
+        /// The X position of the tile, where 0 is left-most.
+        /// </summary>
+        int X { get; }
+
+        /// <summary>
+        /// The Y position of the tile, where 0 is bottom-most.
+        /// </summary>
+        int Y { get; }
+
+        /// <summary>
         /// Flipping, rotation, and "is flat" tile flags.
         /// </summary>
         byte TextureFlags { get; set; }
@@ -32,12 +42,19 @@ namespace SF3.MPD {
         VECTOR GetVertexNormal(CornerType corner);
 
         /// <summary>
-        /// Gets the height of a corner of a tile for use in the surface model. The height returns is relative to the
+        /// Gets the height of a corner of a tile for display. The height returned is relative to the
         /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
         /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
         float GetVisualVertexHeight(CornerType corner);
+
+        /// <summary>
+        /// Gets the heights of all corners of a tile for display. The heights returned are relative to the
+        /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
+        /// </summary>
+        /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
+        float[] GetVisualVertexHeights();
 
         /// <summary>
         /// The height of the tile's center. The center should always be an average of the four corner
