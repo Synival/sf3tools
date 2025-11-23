@@ -18,7 +18,7 @@ namespace SF3.MPD {
             if (mc == null)
                 WriteEmptyChunk();
             else
-                WriteModelChunk(mc.GetSGLModels(), mc.GetModelInstances());
+                WriteModelChunk(mc.GetSGLModels(), mc.GetModelInstances(), mpd.Flags.HighMemoryHasModels);
 
             // Chunk[2] is the surface model.
             // TODO: In Scenario 2+, this could be Chunk[20].
