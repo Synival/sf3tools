@@ -28,9 +28,9 @@ namespace SF3.Models.Structs.MPD.Surface {
             => this[x] = (this[x] & 0xFFF0) + (byte) ((byte) value & 0x0F);
 
         public TerrainFlags GetTerrainFlags(int x)
-            => (TerrainFlags) (this[x] & 0xF0);
+            => (TerrainFlags) ((this[x] & 0xF0) >> 4);
         public void SetTerrainFlags(int x, TerrainFlags flags)
-            => this[x] = (this[x] & 0xFF0F) + (byte) ((byte) flags & 0xF0);
+            => this[x] = (this[x] & 0xFF0F) + (byte) (((byte) flags & 0x0F) << 4);
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
             // TODO: address!
