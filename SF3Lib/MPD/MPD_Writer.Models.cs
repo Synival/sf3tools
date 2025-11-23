@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.SGL;
 
 namespace SF3.MPD {
@@ -39,7 +40,7 @@ namespace SF3.MPD {
         public void WriteModelInstance(IMPD_ModelInstance instance, int fileChunkAddr, int ramChunkAddr) {
             // Placeholder pointers to be populated later.
             for (int i = 0; i < 8; i++) {
-                int pdataId = instance.ModelID * 10 + i;
+                int pdataId = instance.ModelID + i;
                 if (!_pdataIdToOffsetPtrMap.ContainsKey(pdataId))
                     _pdataIdToOffsetPtrMap.Add(pdataId, new List<long>());
                 _pdataIdToOffsetPtrMap[pdataId].Add(CurrentOffset);
@@ -50,9 +51,9 @@ namespace SF3.MPD {
             WriteShort(instance.PositionY);
             WriteShort(instance.PositionZ);
 
-            WriteShort(new CompressedFIXED(instance.AngleX, 0).RawShort);
-            WriteShort(new CompressedFIXED(instance.AngleY, 0).RawShort);
-            WriteShort(new CompressedFIXED(instance.AngleZ, 0).RawShort);
+            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleX / 180.0f * 0x8000)).RawShort);
+            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleY / 180.0f * 0x8000)).RawShort);
+            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleZ / 180.0f * 0x8000)).RawShort);
 
             WriteInt(new FIXED(instance.ScaleX, 0).RawInt);
             WriteInt(new FIXED(instance.ScaleY, 0).RawInt);
