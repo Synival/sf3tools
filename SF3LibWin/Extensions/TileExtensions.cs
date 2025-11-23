@@ -7,10 +7,10 @@ using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {
     public static class TileExtensions {
-        public static Vector3[] GetSurfaceModelVertices(this Tile tile, float scale = 1.00f) {
+        public static Vector3[] GetVector3Vertices(this Tile tile, float scale = 1.00f) {
             var xzOff = scale * 0.5f;
 
-            var heights = tile.GetVertexHeights();
+            var heights = tile.GetVisualVertexHeights();
             if (scale != 1.00f) {
                 var centerHeight = heights.Average();
                 for (var i = 0; i < 4; i++)
@@ -38,10 +38,10 @@ namespace SF3.Win.Extensions {
             ];
         }
 
-        public static Vector3 GetVertex3Normal(this Tile tile, CornerType corner)
+        public static Vector3 GetVector3Normal(this Tile tile, CornerType corner)
             => tile.GetVertexNormal(corner).ToVector3();
 
-        public static Vector3[] GetVertex3Normals(this Tile tile)
+        public static Vector3[] GetVector3Normals(this Tile tile)
             => tile.GetVertexNormals().Select(x => x.ToVector3()).ToArray();
     }
 }

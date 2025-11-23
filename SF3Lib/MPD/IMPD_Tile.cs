@@ -36,7 +36,7 @@ namespace SF3.MPD {
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
         /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
-        float GetVertexHeight(CornerType corner);
+        float GetVisualVertexHeight(CornerType corner);
 
         /// <summary>
         /// Event ID of the tile that ties in with warps, interactables, searchable items, pre-loading triggers, etc.

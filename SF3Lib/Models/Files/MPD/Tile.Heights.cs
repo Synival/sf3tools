@@ -4,7 +4,7 @@ using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
-        public float GetVertexHeight(CornerType corner) {
+        public float GetVisualVertexHeight(CornerType corner) {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat)
                 return MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
@@ -23,7 +23,7 @@ namespace SF3.Models.Files.MPD {
             return 0;
         }
 
-        public float[] GetVertexHeights() {
+        public float[] GetVisualVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat) {
                 var brHeight = MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);

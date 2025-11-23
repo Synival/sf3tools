@@ -89,7 +89,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         }
                     }
 
-                    var vertexNormals = tile.GetVertex3Normals();
+                    var vertexNormals = tile.GetVector3Normals();
 
                     // Convert normals to normals understood by the shader (which doesn't make much sense, but it works...)
                     var normalVboData = vertexNormals.SelectMany(x => (x * new Vector3(1, -1, -1)).ToFloatArray()).ToArray().To2DArray(4, 3);
@@ -133,7 +133,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     eventIdData[(int) CornerType.BottomRight] = new Vector2(eidX + Corner4UVX * eidWidth, eidY + Corner4UVY * eidHeight);
                     var eventIdVboData = eventIdData.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 2);
 
-                    var vertices = tile.GetSurfaceModelVertices();
+                    var vertices = tile.GetVector3Vertices();
 
                     void AddAttributes(Quad quad) {
                         quad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));

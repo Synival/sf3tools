@@ -58,7 +58,7 @@ namespace SF3.Win.Controls {
                 return null;
 
             var tile = MPD_File.Tiles[_tileHoverPos.Value.X, _tileHoverPos.Value.Y];
-            var tileVertices = tile.GetSurfaceModelVertices();
+            var tileVertices = tile.GetVector3Vertices();
             var target = new Vector3(
                 _tileHoverPos.Value.X + GeneralResources.ModelOffsetX + 0.5f,
                 tileVertices.Select(x => x.Y).Average(),

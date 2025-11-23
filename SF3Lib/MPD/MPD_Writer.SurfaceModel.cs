@@ -69,7 +69,7 @@ namespace SF3.MPD {
             ForEachBlockVertex((x, y) => {
                 var tile = GetNonFlatTileAtVertex(tiles, x, y, out var corner);
                 if (tile != null)
-                    WriteByte((byte) Math.Round(tile.GetVertexHeight(corner) * 16.00f));
+                    WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(corner) * 16.00f));
                 else
                     WriteByte(0);
             });
