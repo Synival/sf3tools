@@ -34,12 +34,12 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelInstances = null;
         }
 
-        private void InitDictsForType(ModelCollectionType collectionType) {
+        private void InitDictsForType(ModelCollectionType collection) {
             // TODO: Just have one structure with all this info!
-            if (!ModelsByIDByCollection.ContainsKey(collectionType))
-                ModelsByIDByCollection[collectionType] = [];
-            if (!SGL_ModelsByIDByCollection.ContainsKey(collectionType))
-                SGL_ModelsByIDByCollection[collectionType] = [];
+            if (!ModelsByIDByCollection.ContainsKey(collection))
+                ModelsByIDByCollection[collection] = [];
+            if (!SGL_ModelsByIDByCollection.ContainsKey(collection))
+                SGL_ModelsByIDByCollection[collection] = [];
         }
 
         private TextureCollectionType GetTextureCollection(ModelCollectionType modelCollection) {
@@ -97,9 +97,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var modelInstanceList = new List<IMPD_ModelInstance>();
             foreach (IMPD_ModelCollection mc in mpdFile.ModelCollections) {
-                if (mc.CollectionType != ModelCollectionType.Chunk19Model &&
-                    mc.CollectionType != ModelCollectionType.PrimaryModels &&
-                    mc.CollectionType != ModelCollectionType.Chunk1Model)
+                if (mc.Collection != ModelCollectionType.Chunk19Model &&
+                    mc.Collection != ModelCollectionType.PrimaryModels &&
+                    mc.Collection != ModelCollectionType.Chunk1Model)
                 {
                     continue;
                 }
@@ -127,15 +127,15 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .ToHashSet()
                     : [];
 
-                InitDictsForType(mc.CollectionType);
-                var sglModelsByID = SGL_ModelsByIDByCollection[mc.CollectionType];
+                InitDictsForType(mc.Collection);
+                var sglModelsByID = SGL_ModelsByIDByCollection[mc.Collection];
 
                 var uniqueModelIDs = instances
                     .Select(x => x.ModelID)
                     .Distinct()
                     .ToArray();
 
-                var texCollection = GetTextureCollection(mc.CollectionType);
+                var texCollection = GetTextureCollection(mc.Collection);
                 var texturesById = GetTextureDictionaryByCollection(mpdFile, texCollection);
                 var animationsById = GetAnimationDictionaryByCollection(mpdFile, texCollection);
 
@@ -153,7 +153,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     if (!mc.IsMovableModelCollection()) {
                         bool isForcedSemiTransparent = modelsWith2000Tag.Contains(id);
                         bool isHideMesh = modelsWith3000Tag.Contains(id);
-                        CreateAndAddQuadModels(mpdFile, mc.CollectionType, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
+                        CreateAndAddQuadModels(mpdFile, mc.Collection, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
                     }
                 }
             }
@@ -170,17 +170,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (models == null || sglModel == null)
                 return;
 
-            InitDictsForType(models.CollectionType);
-            SGL_ModelsByIDByCollection[models.CollectionType][sglModel.ID] = sglModel;
+            InitDictsForType(models.Collection);
+            SGL_ModelsByIDByCollection[models.Collection][sglModel.ID] = sglModel;
 
-            var texCollection  = GetTextureCollection(models.CollectionType);
+            var texCollection  = GetTextureCollection(models.Collection);
             var texturesById   = GetTextureDictionaryByCollection(mpdFile, texCollection);
             var animationsById = GetAnimationDictionaryByCollection(mpdFile, texCollection);
 
-            CreateAndAddQuadModels(mpdFile, models.CollectionType, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
+            CreateAndAddQuadModels(mpdFile, models.Collection, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 
             var modelInstance = new MPD_ModelInstance() {
-                CollectionType = models.CollectionType,
+                Collection = models.Collection,
                 ID = 0,
                 ModelID = sglModel.ID,
                 PositionX = -32 * 32,

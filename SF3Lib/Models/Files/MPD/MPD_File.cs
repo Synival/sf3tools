@@ -533,12 +533,12 @@ namespace SF3.Models.Files.MPD {
                 modelsList.AddRange(ModelCollections);
 
             foreach (var mc in modelsChunks) {
-                var collectionType = (mc.Index == 19 && Flags.HasChunk19Model)
+                var collection = (mc.Index == 19 && Flags.HasChunk19Model)
                     ? ModelCollectionType.Chunk19Model
                     : (chunkDatas[21] != null && mc.Index == 1) ? ModelCollectionType.Chunk1Model
                     : ModelCollectionType.PrimaryModels;
 
-                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collectionType);
+                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }

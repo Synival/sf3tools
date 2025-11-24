@@ -14,7 +14,7 @@ namespace SF3.MPD {
             // TODO: check for this, and get memory mapping stuff!!
             // Chunk[1] is always models if it exists.
             // TODO: In Scenario 2+, this could be Chunk[20].
-            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.CollectionType == ModelCollectionType.PrimaryModels);
+            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.Collection == ModelCollectionType.PrimaryModels);
             if (mc == null)
                 WriteEmptyChunk();
             else

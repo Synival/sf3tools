@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             ModelInstances = modelTables
                 .Where(x => x != null)
                 .SelectMany(x => x.Rows)
-                .OrderBy(x => x.CollectionType)
+                .OrderBy(x => x.Collection)
                 .OrderBy(x => x.ID)
                 .ToArray();
         }
@@ -19,7 +19,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             => Create(() => new AllModelInstancesTable(name, modelTables));
 
         public override bool Load() {
-            _rows = ModelInstances.OrderBy(x => x.CollectionType).ThenBy(x => x.ID).ToArray();
+            _rows = ModelInstances.OrderBy(x => x.Collection).ThenBy(x => x.ID).ToArray();
             return true;
         }
 

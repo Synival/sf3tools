@@ -15,12 +15,12 @@ namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile, IMPD_ModelCollection {
         protected ModelCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,
-            ScenarioType scenario, int? chunkIndex, ModelCollectionType collectionType)
+            ScenarioType scenario, int? chunkIndex, ModelCollectionType collection)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
             Scenario   = scenario;
-            CollectionType = collectionType;
+            Collection = collection;
             ChunkIndex = chunkIndex;
             MovableModelsIndex = null;
         }
@@ -31,7 +31,7 @@ namespace SF3.Models.Files.MPD {
             Name       = name;
             Scenario   = (ScenarioType) (-1);
 
-            CollectionType =
+            Collection =
                 (movableModelsIndex == 0) ? ModelCollectionType.MovableModels1 :
                 (movableModelsIndex == 1) ? ModelCollectionType.MovableModels2 :
                 (movableModelsIndex == 2) ? ModelCollectionType.MovableModels3 :
@@ -64,10 +64,10 @@ namespace SF3.Models.Files.MPD {
 
         public override IEnumerable<ITable> MakeTables() {
             if (MovableModelsIndex.HasValue)
-                MovableModelTable = MovableModelTable.Create(Data, "MovableModelsHeader", Address, CollectionType);
+                MovableModelTable = MovableModelTable.Create(Data, Collection, "MovableModelsHeader", Address);
             else {
                 ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", Address + 0x0000);
-                ModelInstanceTable = ModelInstanceTable.Create(Data, "ModelInstances", Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other, CollectionType);
+                ModelInstanceTable = ModelInstanceTable.Create(Data, Collection, "ModelInstances", Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other);
             }
 
             var pdataAddressesPre =
@@ -86,7 +86,7 @@ namespace SF3.Models.Files.MPD {
             var pdataRefs = pdataAddresses
                 .Select(x => new PDataTable.PDataRef() {
                     Address    = (int) GetOffsetInChunk(x.AddressInMemory),
-                    Collection = CollectionType,
+                    Collection = Collection,
                     ChunkIndex = ChunkIndex,
                     Index      = x.Index,
                     RefCount   = x.Count
@@ -293,7 +293,7 @@ namespace SF3.Models.Files.MPD {
 
         public ISGL_Model GetSGLModel(int id) {
             return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(
-                x => x.Collection == CollectionType && x.ID == id && x.Index == 0
+                x => x.Collection == Collection && x.ID == id && x.Index == 0
             ));
         }
 
@@ -336,7 +336,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRowName]
         public string Name { get; }
         public ScenarioType Scenario { get; }
-        public ModelCollectionType CollectionType { get; }
+        public ModelCollectionType Collection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
         public int? MovableModelsIndex { get; }

@@ -16,8 +16,8 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _tagAddress;
         private readonly int _flagsAddress;
 
-        public ModelInstance(IByteData data, int id, string name, int address, bool hasTagsAndFlags, ModelCollectionType collectionType)
-        : base(data, id, name, address, 0x20, hasTagsAndFlags ? 0x3C : 0x38, collectionType) {
+        public ModelInstance(IByteData data, ModelCollectionType collection, int id, string name, int address, bool hasTagsAndFlags)
+        : base(data, collection, id, name, address, 0x20, hasTagsAndFlags ? 0x3C : 0x38) {
             PDatas = new PDataAccessorCollection(this);
             HasTagsAndFlags = hasTagsAndFlags;
 

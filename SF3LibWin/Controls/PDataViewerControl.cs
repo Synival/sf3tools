@@ -176,8 +176,8 @@ namespace SF3.Win.Controls {
 
             MPD_File = mpdFile;
             _sglModel = sglModel;
-            var collectionType = (ModelCollectionType?) sglModel?.Collection;
-            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.CollectionType == collectionType);
+            var collection = (ModelCollectionType?) sglModel?.Collection;
+            Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.Collection == collection);
             _vertices = null;
 
             _size = 1.0f;
@@ -231,7 +231,7 @@ namespace SF3.Win.Controls {
 
             // TODO: this doesn't update at 30fps, please fix!
             if (_models != null && Models != null)
-                foreach (var modelGroup in _models.ModelsByIDByCollection[Models.CollectionType].Values)
+                foreach (var modelGroup in _models.ModelsByIDByCollection[Models.Collection].Values)
                     foreach (var model in modelGroup.Models)
                         model.UpdateAnimatedTextures();
 

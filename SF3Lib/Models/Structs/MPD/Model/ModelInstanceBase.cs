@@ -17,9 +17,9 @@ namespace SF3.Models.Structs.MPD.Model {
         protected readonly int _scaleYAddress;
         protected readonly int _scaleZAddress;
 
-        public ModelInstanceBase(IByteData data, int id, string name, int address, int positionXOffset, int size, ModelCollectionType collectionType)
+        public ModelInstanceBase(IByteData data, ModelCollectionType collection, int id, string name, int address, int positionXOffset, int size)
         : base(data, id, name, address, size) {
-            CollectionType = collectionType;
+            Collection = collection;
 
             _pdata0Address = Address + 0x00; // 4 bytes
             _positionXAddress   = Address + positionXOffset + 0x00; // 2 bytes
@@ -34,7 +34,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.5f, minWidth: 120)]
-        public ModelCollectionType CollectionType { get; }
+        public ModelCollectionType Collection { get; }
 
         // (Updated elsewhere)
         public int ModelID { get; set; } = -1;

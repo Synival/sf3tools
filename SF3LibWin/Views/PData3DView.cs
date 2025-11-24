@@ -36,7 +36,7 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateSGLModel() {
-            _models   = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.CollectionType == _pdata.Collection);
+            _models   = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.Collection == _pdata.Collection);
             _sglModel = (_pdata == null) ? null : _models?.GetSGLModel(_pdata.ID);
         }
 

@@ -7,7 +7,7 @@ namespace SF3.MPD {
         }
 
         public MPD_ModelInstance(IMPD_ModelInstance mi) {
-            CollectionType = mi.CollectionType;
+            Collection = mi.Collection;
             ID = mi.ID;
             ModelID = mi.ModelID;
             PositionX = mi.PositionX;
@@ -23,7 +23,7 @@ namespace SF3.MPD {
             Flags = mi.Flags;
         }
 
-        public ModelCollectionType CollectionType { get; set; }
+        public ModelCollectionType Collection { get; set; }
         public int ID { get; set; }
         public int ModelID { get; set; }
         public short PositionX { get; set; }

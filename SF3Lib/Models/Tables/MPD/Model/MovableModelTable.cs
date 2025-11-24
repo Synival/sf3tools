@@ -4,20 +4,21 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class MovableModelTable : TerminatedTable<MovableModel> {
-        protected MovableModelTable(IByteData data, string name, int address, ModelCollectionType collectionType) : base(data, name, address, 4, null) {
-            CollectionType = collectionType;
+        protected MovableModelTable(IByteData data, ModelCollectionType collection, string name, int address)
+        : base(data, name, address, 4, null) {
+            Collection = collection;
         }
 
-        public static MovableModelTable Create(IByteData data, string name, int address, ModelCollectionType collectionType)
-            => Create(() => new MovableModelTable(data, name, address, collectionType));
+        public static MovableModelTable Create(IByteData data, ModelCollectionType collection, string name, int address)
+            => Create(() => new MovableModelTable(data, collection, name, address));
 
         public override bool Load() {
             return Load(
-                (id, address) => new MovableModel(Data, id, "MovableModel" + id.ToString("D2"), address, CollectionType),
+                (id, address) => new MovableModel(Data, Collection, id, "MovableModel" + id.ToString("D2"), address),
                 (rows, lastRow) => lastRow.PData0 != 0x00,
                 false);
         }
 
-        public ModelCollectionType CollectionType { get; }
+        public ModelCollectionType Collection { get; }
     }
 }

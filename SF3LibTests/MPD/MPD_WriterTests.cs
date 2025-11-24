@@ -81,11 +81,11 @@ namespace SF3.Tests.MPD {
             TestMPDTextures(originalFile, TextureCollectionType.Chunk19ModelTextures);
         }
 
-        private void TestMPDTextures(IMPD_File originalFile, TextureCollectionType collectionType) {
+        private void TestMPDTextures(IMPD_File originalFile, TextureCollectionType collection) {
             var newFile = RecreateMPD(originalFile);
 
             var primaryTextureCollections = originalFile.TextureCollections
-                .Where(x => x != null && x.Collection == collectionType)
+                .Where(x => x != null && x.Collection == collection)
                 .OrderBy(x => x.ChunkIndex)
                 .ToArray();
 

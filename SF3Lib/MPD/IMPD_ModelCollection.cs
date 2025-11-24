@@ -7,7 +7,7 @@ namespace SF3.MPD {
         ISGL_Model[] GetSGLModels();
         IMPD_ModelInstance[] GetModelInstances();
 
-        ModelCollectionType CollectionType { get; }
+        ModelCollectionType Collection { get; }
         int? MovableModelsIndex { get; }
     }
 }
