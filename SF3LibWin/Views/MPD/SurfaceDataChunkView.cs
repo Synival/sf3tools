@@ -2,8 +2,8 @@
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
-    public class SurfaceDataView : TabView {
-        public SurfaceDataView(string name, SurfaceData model) : base(name) {
+    public class SurfaceDataChunkView : TabView {
+        public SurfaceDataChunkView(string name, SurfaceDataChunk model) : base(name) {
             Model = model;
         }
 
@@ -19,6 +19,6 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        public SurfaceData Model { get; }
+        public SurfaceDataChunk Model { get; }
     }
 }

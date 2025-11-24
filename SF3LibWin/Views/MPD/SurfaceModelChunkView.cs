@@ -3,7 +3,7 @@ using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class SurfaceModelChunkView : TabView {
-        public SurfaceModelChunkView(string name, SurfaceModel model) : base(name) {
+        public SurfaceModelChunkView(string name, SurfaceModelChunk model) : base(name) {
             Model = model;
         }
 
@@ -17,6 +17,6 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        public SurfaceModel Model { get; }
+        public SurfaceModelChunk Model { get; }
     }
 }

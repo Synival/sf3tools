@@ -12,8 +12,8 @@ using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public class ModelCollection : TableFile, IMPD_ModelCollection {
-        protected ModelCollection(
+    public class ModelChunk : TableFile, IMPD_ModelCollection {
+        protected ModelChunk(
             IMPD_File mpdFile,
             IByteData data, 
             INameGetterContext nameContext,
@@ -32,7 +32,7 @@ namespace SF3.Models.Files.MPD {
             MovableModelsIndex = null;
         }
 
-        protected ModelCollection(
+        protected ModelChunk(
             IMPD_File mpdFile,
             IByteData data,
             INameGetterContext nameContext,
@@ -55,17 +55,17 @@ namespace SF3.Models.Files.MPD {
             MovableModelsIndex = movableModelsIndex;
         }
 
-        public static ModelCollection Create(
+        public static ModelChunk Create(
             IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name,
             ScenarioType scenario, int? chunkIndex, CollectionType modelCollection
         ) {
-            var newFile = new ModelCollection(mpdFile, data, nameContext, address, name, scenario, chunkIndex, modelCollection);
+            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, scenario, chunkIndex, modelCollection);
             newFile.Init();
             return newFile;
         }
 
-        public static ModelCollection Create(IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex) {
-            var newFile = new ModelCollection(mpdFile, data, nameContext, address, name, movableModelsIndex);
+        public static ModelChunk Create(IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex) {
+            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, movableModelsIndex);
             newFile.Init();
             return newFile;
         }
@@ -402,7 +402,7 @@ namespace SF3.Models.Files.MPD {
         public IEnumerable<ITexture> Textures {
             get {
                 if (_textures == null) {
-                    _textures = MPD_File.TextureCollections
+                    _textures = MPD_File.TextureChunks
                         .Where(x => x.Collection == Collection)
                         .Select(x => x.TextureTable)
                         .SelectMany(x => x)

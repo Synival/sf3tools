@@ -44,7 +44,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Update(IMPD_File mpdFile) {
             Reset();
 
-            var texturesById = mpdFile.TextureCollections != null ? mpdFile.TextureCollections
+            var texturesById = mpdFile.TextureChunks != null ? mpdFile.TextureChunks
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == CollectionType.Primary)
                 .SelectMany(x => x.TextureTable)
                 .GroupBy(x => x.ID)
@@ -66,7 +66,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
 
-            var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
+            var textureData = mpdFile.SurfaceModelChunk?.TileTextureRowTable?.Make2DTextureData();
             for (var y = TileY1; y < TileY2; y++) {
                 for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Surface.GetTile(x, y);

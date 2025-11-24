@@ -23,7 +23,7 @@ namespace SF3.MPD {
 
             // Chunk[2] is the surface model.
             // TODO: In Scenario 2+, this could be Chunk[20].
-            if (mpd.SurfaceModel == null)
+            if (mpd.SurfaceModelChunk == null)
                 WriteEmptyChunk();
             else
                 WriteSurfaceModelChunk(mpd.Surface);

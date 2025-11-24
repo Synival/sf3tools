@@ -227,7 +227,7 @@ namespace SF3.Models.Files.MPD {
                 if (offset == 0)
                     continue;
 
-                var newModel = ModelCollection.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), i);
+                var newModel = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), i);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
@@ -535,21 +535,21 @@ namespace SF3.Models.Files.MPD {
                     (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
                     CollectionType.Primary;
 
-                var newModel = ModelCollection.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
+                var newModel = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
             ModelCollections = modelsList.ToArray();
 
             if (chunkDatas[5] != null) {
-                SurfaceData = SurfaceData.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
-                tables.AddRange(SurfaceData.Tables);
+                SurfaceDataChunk = SurfaceDataChunk.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
+                tables.AddRange(SurfaceDataChunk.Tables);
             }
 
             // TODO: get this chunk loading with Ship2?
             if (surfaceModelChunk != null && Scenario != ScenarioType.Ship2) {
-                SurfaceModel = SurfaceModel.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel", surfaceModelChunk.Index, Scenario);
-                tables.AddRange(SurfaceModel.Tables);
+                SurfaceModelChunk = SurfaceModelChunk.Create(surfaceModelChunk.DecompressedData, NameGetterContext, 0x00, "SurfaceModel", surfaceModelChunk.Index, Scenario);
+                tables.AddRange(SurfaceModelChunk.Tables);
             }
 
             // Gather all information about texture picture formats from existing data.
@@ -560,8 +560,8 @@ namespace SF3.Models.Files.MPD {
             var primaryPixelFormats = pixelFormats[CollectionType.Primary];
 
             // Always ABGR1555 for surface tiles.
-            if (SurfaceModel != null) {
-                var textureIds = SurfaceModel.TileTextureRowTable
+            if (SurfaceModelChunk != null) {
+                var textureIds = SurfaceModelChunk.TileTextureRowTable
                     .SelectMany(row => {
                         var ids = new byte[64];
                         for (var x = 0; x < 64; x++)
@@ -578,7 +578,7 @@ namespace SF3.Models.Files.MPD {
 
             // Textures in models are ABGR1555.
             foreach (var models in ModelCollections) {
-                var fileModels = (ModelCollection) models;
+                var fileModels = (ModelChunk) models;
                 if (fileModels?.AttrTablesByMemoryAddress != null)
                     foreach (var attrTable in fileModels.AttrTablesByMemoryAddress.Values)
                         foreach (var attr in attrTable)
@@ -598,7 +598,7 @@ namespace SF3.Models.Files.MPD {
             // Gather palettes.
             var palettes = CreatePalettesForTextures();
 
-            var texColList = new List<TextureCollection>();
+            var texColList = new List<TextureChunk>();
             var texChunks = ChunkLocations.Where(x => x.Exists && x.ChunkType == ChunkType.Textures).Select(x => chunkDatas[x.ID]).ToList();
 
             int nextPrimaryCollectionStartId = 0;
@@ -618,7 +618,7 @@ namespace SF3.Models.Files.MPD {
                     startId = 0;
 
                 try {
-                    var texCol = TextureCollection.Create(
+                    var texCol = TextureChunk.Create(
                         chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
                         collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
@@ -639,7 +639,7 @@ namespace SF3.Models.Files.MPD {
                 index++;
             }
 
-            TextureCollections = texColList.ToArray();
+            TextureChunks = texColList.ToArray();
 
             // Now that textures are loaded, build the texture animation frame data.
             // TODO: This function is a MESS. Please refactor it!!
@@ -782,9 +782,9 @@ namespace SF3.Models.Files.MPD {
             var palettes = CreatePalettesForTextures();
 
             TextureModel GetTextureModelByID(int textureId) {
-                if (TextureCollections == null)
+                if (TextureChunks == null)
                     return null;
-                return TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == textureId);
+                return TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == textureId);
             }
 
             // TODO: Duplicate code, copied from TextureTable! BAD!!
@@ -957,7 +957,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private struct TreeModelInfo {
-            public ModelCollection ModelCollection;
+            public ModelChunk ModelCollection;
             public ModelInstance ModelInstance;
             public VECTOR TilePosition;
             public Tile Tile;
@@ -970,7 +970,7 @@ namespace SF3.Models.Files.MPD {
             // Gather a list of models that appear to be trees, associated with their tile.
             var treeModels = new List<TreeModelInfo>();
             foreach (var imc in ModelCollections) {
-                var mc = (ModelCollection) imc;
+                var mc = (ModelChunk) imc;
                 if (mc == null || !mc.ChunkIndex.HasValue)
                     continue;
 
@@ -1203,7 +1203,7 @@ namespace SF3.Models.Files.MPD {
             return errors.ToArray();
         }
 
-        private static bool? HasHighMemoryModels(ModelCollection mc) {
+        private static bool? HasHighMemoryModels(ModelChunk mc) {
             if (mc == null)
                 return null;
             return (mc.PDatasByMemoryAddress.Values.Count == 0)
@@ -1215,8 +1215,8 @@ namespace SF3.Models.Files.MPD {
             var flags = Flags;
             var errors = new List<string>();
 
-            var mc1  = ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == 1);
-            var mc20 = ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == 20);
+            var mc1  = ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 1);
+            var mc20 = ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
                 var expectedLmm = flags.Chunk1IsLoadedFromLowMemory;
@@ -1251,7 +1251,7 @@ namespace SF3.Models.Files.MPD {
             var chunk20LooksLikeSurfaceChunk = chunkHeaders[20].Exists && chunkHeaders[20].ChunkSize == 0xCF00;
 
             if (flags.HasSurfaceModel) {
-                if (SurfaceModel == null) {
+                if (SurfaceModelChunk == null) {
                     errors.Add("HasSurfaceModel flag is set but no surface model was created");
                     if (chunk2LooksLikeSurfaceChunk)
                         errors.Add($"  (Chunk[2] (expected={expectedIndex}) looks like one -- this could be an SF3Lib error)");
@@ -1352,7 +1352,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private string[] GetSurfaceTileErrors() {
-            if (SurfaceModel == null)
+            if (SurfaceModelChunk == null)
                 return new string[0];
 
             var errors = new List<string>();
@@ -1480,7 +1480,7 @@ namespace SF3.Models.Files.MPD {
 
         public PDataModel GetTreePData0() {
             var modelChunkIndex = Flags.Chunk20IsModels ? 20 : 1;
-            var mc = ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
+            var mc = ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
             if (mc == null)
                 return null;
 
@@ -1500,7 +1500,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader) {
-            var textures1 = (TextureCollections == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureCollections
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
                 .Where(x => x.TextureIsLoaded)
@@ -1563,7 +1563,7 @@ namespace SF3.Models.Files.MPD {
                     if (tm != null)
                         tm.RawImageData16Bit = imageData;
                     else if (model is FrameModel fm) {
-                        var referenceTex = TextureCollections.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
+                        var referenceTex = TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
                         _ = fm.UpdateTextureABGR1555(Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, imageData, referenceTex);
                     }
                     else
@@ -1585,7 +1585,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter) {
-            var textures1 = (TextureCollections == null) ? new Dictionary<string, ITexture>() : TextureCollections
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, ITexture>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
                 .Where(x => x.TextureIsLoaded)
@@ -1686,7 +1686,7 @@ namespace SF3.Models.Files.MPD {
         public int? SurfaceModelChunkIndex { get; private set; } = null;
 
         [BulkCopyRecurse]
-        public SurfaceModel SurfaceModel { get; private set; }
+        public SurfaceModelChunk SurfaceModelChunk { get; private set; }
 
         public int[] ModelsChunkIndices { get; private set; } = null;
 
@@ -1694,7 +1694,7 @@ namespace SF3.Models.Files.MPD {
         public IEnumerable<IMPD_ModelCollection> ModelCollections { get; private set; }
 
         [BulkCopyRecurse]
-        public SurfaceData SurfaceData { get; private set; }
+        public SurfaceDataChunk SurfaceDataChunk { get; private set; }
 
         public int PrimaryTextureChunksFirstIndex { get; }
         public int PrimaryTextureChunksLastIndex { get; }
@@ -1702,7 +1702,7 @@ namespace SF3.Models.Files.MPD {
         public int MeshTextureChunksLastIndex { get; }
 
         [BulkCopyRecurse]
-        public TextureCollection[] TextureCollections { get; private set; }
+        public TextureChunk[] TextureChunks { get; private set; }
 
         public IMPD_Surface Surface { get; private set; }
 

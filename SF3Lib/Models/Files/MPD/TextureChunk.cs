@@ -8,8 +8,8 @@ using SF3.Models.Tables.MPD.TextureCollection;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public class TextureCollection : TableFile {
-        protected TextureCollection(
+    public class TextureChunk : TableFile {
+        protected TextureChunk(
             IByteData data, INameGetterContext nameContext, int address, string name,
             CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex, int? firstTextureId
@@ -23,12 +23,12 @@ namespace SF3.Models.Files.MPD {
             FirstTextureID = firstTextureId;
         }
 
-        public static TextureCollection Create(
+        public static TextureChunk Create(
             IByteData data, INameGetterContext nameContext, int address, string name,
             CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex, int? firstTextureId
         ) {
-            var newFile = new TextureCollection(data, nameContext, address, name, collection, pixelFormats, palettes, chunkIndex, firstTextureId);
+            var newFile = new TextureChunk(data, nameContext, address, name, collection, pixelFormats, palettes, chunkIndex, firstTextureId);
             newFile.Init();
             return newFile;
         }

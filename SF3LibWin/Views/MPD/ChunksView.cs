@@ -27,23 +27,23 @@ namespace SF3.Win.Views.MPD {
                 chunkViews.Add(chunkIndex.Value, newView);
             }
 
-            if (Model.SurfaceModel != null)
-                AddChunkView(Model.SurfaceModel.ChunkIndex, "Surface Model", (name) => new SurfaceModelChunkView(name, Model.SurfaceModel));
+            if (Model.SurfaceModelChunk != null)
+                AddChunkView(Model.SurfaceModelChunk.ChunkIndex, "Surface Model", (name) => new SurfaceModelChunkView(name, Model.SurfaceModelChunk));
             if (Model.TextureAnimations != null)
                 AddChunkView(3, "Texture Animation Frames", (name) => new TextureAnimFramesView(name, Model, ngc));
-            if (Model.SurfaceData != null)
-                AddChunkView(Model.SurfaceData.ChunkIndex, "Surface Data", (name) => new SurfaceChunkView(name, Model.SurfaceData));
+            if (Model.SurfaceDataChunk != null)
+                AddChunkView(Model.SurfaceDataChunk.ChunkIndex, "Surface Data", (name) => new SurfaceDataChunkView(name, Model.SurfaceDataChunk));
 
             if (Model.ModelCollections != null) {
                 foreach (var iModelCollection in Model.ModelCollections) {
-                    var modelCollection = (ModelCollection) iModelCollection;
+                    var modelCollection = (ModelChunk) iModelCollection;
                     if (modelCollection != null && modelCollection.ChunkIndex.HasValue)
                         AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, Model, modelCollection));
                 }
             }
 
-            if (Model.TextureCollections != null)
-                foreach (var texCollection in Model.TextureCollections)
+            if (Model.TextureChunks != null)
+                foreach (var texCollection in Model.TextureChunks)
                     if (texCollection != null)
                         AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
 

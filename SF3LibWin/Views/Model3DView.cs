@@ -50,7 +50,7 @@ namespace SF3.Win.Views {
         private void UpdateSGL_Model() {
             var mc = (_modelInstance == null)
                 ? null 
-                : (ModelCollection) MPD_File?.ModelCollections?.FirstOrDefault(x => x.Collection == _modelInstance.Collection);
+                : (ModelChunk) MPD_File?.ModelCollections?.FirstOrDefault(x => x.Collection == _modelInstance.Collection);
             var pdata = (mc?.PDatasByMemoryAddress?.TryGetValue(_modelInstance.PData0, out var pdataOut) == true) ? pdataOut : null;
             if (pdata == null) {
                 _sglModel = null;

@@ -119,18 +119,18 @@ namespace SF3.Models.Files.MPD {
         List<Chunk3Frame> Chunk3Frames { get; }
 
         int? SurfaceModelChunkIndex { get; }
-        SurfaceModel SurfaceModel { get; }
+        SurfaceModelChunk SurfaceModelChunk { get; }
 
         int[] ModelsChunkIndices { get; }
 
-        SurfaceData SurfaceData { get; }
+        SurfaceDataChunk SurfaceDataChunk { get; }
 
         int PrimaryTextureChunksFirstIndex { get; }
         int PrimaryTextureChunksLastIndex { get; }
         int MeshTextureChunksFirstIndex { get; }
         int MeshTextureChunksLastIndex { get; }
 
-        TextureCollection[] TextureCollections { get; }
+        TextureChunk[] TextureChunks { get; }
 
         int RepeatingGroundChunk1Index { get; }
         int RepeatingGroundChunk2Index { get; }

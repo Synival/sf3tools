@@ -6,16 +6,16 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Surface;
 
 namespace SF3.Models.Files.MPD {
-    public class SurfaceData : TableFile {
-        protected SurfaceData(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
+    public class SurfaceDataChunk : TableFile {
+        protected SurfaceDataChunk(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
             ChunkIndex = chunkIndex;
         }
 
-        public static SurfaceData Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
-            var newFile = new SurfaceData(data, nameContext, address, name, chunkIndex);
+        public static SurfaceDataChunk Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex) {
+            var newFile = new SurfaceDataChunk(data, nameContext, address, name, chunkIndex);
             newFile.Init();
             return newFile;
         }

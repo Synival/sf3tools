@@ -89,19 +89,19 @@ namespace TextureExtractor {
                     try {
                         using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
                             // Let's only gather tiles used in surface character rows.
-                            if (mpdFile.SurfaceModel == null) {
+                            if (mpdFile.SurfaceModelChunk == null) {
                                 Console.WriteLine("No surface textures");
                                 continue;
                             }
 
-                            var tileSurfaceCharacterIDs = mpdFile.SurfaceModel.TileTextureRowTable
+                            var tileSurfaceCharacterIDs = mpdFile.SurfaceModelChunk.TileTextureRowTable
                                 .SelectMany(x => x.GetRowCopy())
                                 .Select(x => x & 0xFF)
                                 .Distinct()
                                 .ToArray();
 
                             // Gather all textures into one collection.
-                            var textures = mpdFile.TextureCollections
+                            var textures = mpdFile.TextureChunks
                                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == CollectionType.Primary)
                                 .SelectMany(x => x.TextureTable)
                                 .Where(x => tileSurfaceCharacterIDs.Contains(x.ID) && x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)

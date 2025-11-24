@@ -84,7 +84,7 @@ namespace SF3.Tests.MPD {
         private void TestMPDTextures(IMPD_File originalFile, CollectionType collection) {
             var newFile = RecreateMPD(originalFile);
 
-            var primaryTextureCollections = originalFile.TextureCollections
+            var primaryTextureCollections = originalFile.TextureChunks
                 .Where(x => x != null && x.Collection == collection)
                 .OrderBy(x => x.ChunkIndex)
                 .ToArray();
@@ -95,7 +95,7 @@ namespace SF3.Tests.MPD {
 
                 var origLoc = originalFile.ChunkLocations[chunkIndex];
                 var newLoc  = newFile.ChunkLocations[chunkIndex];
-                var newTexCollection  = newFile.TextureCollections.FirstOrDefault(x => x.ChunkIndex == chunkIndex);
+                var newTexCollection  = newFile.TextureChunks.FirstOrDefault(x => x.ChunkIndex == chunkIndex);
 
                 // Compare chunk size, allowing a 0x04 reduction tolerance to account for the ever-so-slightly more efficient LZSS algorithm.
                 var chunkSizeMin = newLoc.ChunkSize - 0x04;

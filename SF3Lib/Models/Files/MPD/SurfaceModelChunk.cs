@@ -12,8 +12,8 @@ using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
 namespace SF3.Models.Files.MPD {
-    public class SurfaceModel : TableFile {
-        protected SurfaceModel(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario)
+    public class SurfaceModelChunk : TableFile {
+        protected SurfaceModelChunk(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario)
         : base(data, nameContext) {
             Address    = address;
             Name       = name;
@@ -21,8 +21,8 @@ namespace SF3.Models.Files.MPD {
             Scenario   = scenario;
         }
 
-        public static SurfaceModel Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario) {
-            var newFile = new SurfaceModel(data, nameContext, address, name, chunkIndex, scenario);
+        public static SurfaceModelChunk Create(IByteData data, INameGetterContext nameContext, int address, string name, int? chunkIndex, ScenarioType scenario) {
+            var newFile = new SurfaceModelChunk(data, nameContext, address, name, chunkIndex, scenario);
             newFile.Init();
             return newFile;
         }

@@ -112,7 +112,7 @@ namespace SF3.Win.Controls {
             // It's probably really buggy.
             // Let's do it right sometime soon, shall we?
 
-            if (MPD_File == null || MPD_File.SurfaceModel == null || x < 0 || y < 0 || x >= 64 || y >= 64)
+            if (MPD_File == null || MPD_File.SurfaceModelChunk == null || x < 0 || y < 0 || x >= 64 || y >= 64)
                 return;
 
             TileType GetTileTypeForCursorMode() {

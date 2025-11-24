@@ -127,7 +127,7 @@ namespace MPD_DataSearcher {
                             );
 
                             foreach (var imc in mpdFile!.ModelCollections) {
-                                var mc = (ModelCollection) imc;
+                                var mc = (ModelChunk) imc;
 
                                 var mh = mc.ModelsHeader;
                                 if (mh != null)
@@ -150,7 +150,7 @@ namespace MPD_DataSearcher {
                                     dataRanges.Add(new DataRange(mpdFileData, "Chunk" + cd.ID, cd.ChunkFileAddress, cd.ChunkFileAddress + cd.ChunkSize));
 
                             // Add textures as tracked data ranges.
-                            foreach (var tc in mpdFile.TextureCollections)
+                            foreach (var tc in mpdFile.TextureChunks)
                                 foreach (var tex in tc.TextureTable)
                                     dataRanges.Add(new DataRange(tex.Data.Data, tex.Name + "_Data", tex.ImageDataOffset, tex.ImageDataOffset + tex.ImageDataSize));
 

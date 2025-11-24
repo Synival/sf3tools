@@ -261,7 +261,7 @@ namespace MPD_Analyzer {
             return chunkString;
         }
 
-        private static bool? HasHighMemoryModels(ModelCollection? mc) {
+        private static bool? HasHighMemoryModels(ModelChunk? mc) {
             if (mc == null)
                 return null;
             return mc.PDatasByMemoryAddress.Values.Count == 0
@@ -273,8 +273,8 @@ namespace MPD_Analyzer {
             var mapFlags = mpdFile.MPDHeader.MapFlags;
             var chunkLocations = mpdFile.ChunkLocations;
 
-            var hmm1  = HasHighMemoryModels(mpdFile.ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == 1));
-            var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == 20));
+            var hmm1  = HasHighMemoryModels(mpdFile.ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 1));
+            var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20));
 
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 + " | " + mapFlags.ToString("X4") + ", " + BitString(mapFlags)

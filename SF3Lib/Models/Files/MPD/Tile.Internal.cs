@@ -66,7 +66,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private void UpdateVertexNormals(CornerType corner, out HashSet<Tile> tilesModified) {
-            var surfaceModel = MPD_File.SurfaceModel;
+            var surfaceModel = MPD_File.SurfaceModelChunk;
             if (surfaceModel == null) {
                 tilesModified = new HashSet<Tile>();
                 return;
@@ -76,7 +76,7 @@ namespace SF3.Models.Files.MPD {
             var vyCenter = BlockHelpers.TileToVertexY(Y, corner);
 
             // Normals need to be updated in a 3x3 grid.
-            var heightmapRowTable = MPD_File.SurfaceData.HeightmapRowTable;
+            var heightmapRowTable = MPD_File.SurfaceDataChunk.HeightmapRowTable;
             for (var x = -1; x <= 1; x++) {
                 for (var y = -1; y <= 1; y++) {
                     var vx = x + vxCenter;

@@ -7,9 +7,9 @@ using SF3.Models.Tables.MPD.TextureCollection;
 namespace SF3.Win.Views.MPD {
     public class TexturesView : TabView {
         public TexturesView(string name, IMPD_File model) : base(name) {
-            var allTables = (model.TextureCollections == null)
+            var allTables = (model.TextureChunks == null)
                 ? new List<TextureTable>()
-                : model.TextureCollections.Where(x => x != null).Select(x => x.TextureTable).ToList();
+                : model.TextureChunks.Where(x => x != null).Select(x => x.TextureTable).ToList();
             AllTexturesTable = AllTexturesTable.Create("AllTextures", allTables);
             Model = model;
         }
