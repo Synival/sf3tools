@@ -36,10 +36,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: -0.5f, minWidth: 120)]
         public ModelCollectionType CollectionType { get; }
 
-        public int ModelID {
-            get => -1;
-            set {}
-        }
+        // (Updated elsewhere)
+        public int ModelID { get; set; } = -1;
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata0Address), displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]

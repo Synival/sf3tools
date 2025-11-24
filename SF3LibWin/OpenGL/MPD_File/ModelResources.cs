@@ -141,6 +141,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                 var animationsById = GetAnimationsByID(mpdFile, texCollection);
 
                 foreach (var id in uniqueModelIDs) {
+                    if (id == -1)
+                        continue;
+
                     var sglModel = sglModelsByID.TryGetValue(id, out var sglModelOut) ? sglModelOut : null;
                     if (sglModel == null)
                         sglModelsByID[id] = sglModel = mc.GetSGLModel(id);

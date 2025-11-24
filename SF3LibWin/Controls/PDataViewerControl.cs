@@ -176,7 +176,7 @@ namespace SF3.Win.Controls {
 
             MPD_File = mpdFile;
             _sglModel = sglModel;
-            var collectionType = (ModelCollectionType?) (sglModel == null ? null : (ModelCollectionType) (sglModel.ID / ModelCollection.IDsPerCollectionType));
+            var collectionType = (ModelCollectionType?) sglModel?.Collection;
             Models = (sglModel == null) ? null : mpdFile.ModelCollections.FirstOrDefault(x => x.CollectionType == collectionType);
             _vertices = null;
 

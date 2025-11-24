@@ -13,8 +13,6 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile, IMPD_ModelCollection {
-        public static int IDsPerCollectionType = 0x1000;
-
         protected ModelCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,
             ScenarioType scenario, int? chunkIndex, ModelCollectionType collectionType)
@@ -266,64 +264,73 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
+        private IMPD_ModelInstance[] _sglModelInstances;
         public IMPD_ModelInstance[] GetModelInstances() {
-            var instances = new List<IMPD_ModelInstance>();
+            if (_sglModelInstances == null) {
+                var instances = new List<IMPD_ModelInstance>();
 
-            void AddInstance(ModelInstanceBase mi) {
-                var pdata = (PDatasByMemoryAddress?.TryGetValue(mi.PData0, out var pdataOut) == true) ? pdataOut : null;
-                if (pdata != null) {
-                    int collectionId = (int) mi.CollectionType * IDsPerCollectionType;
-                    instances.Add(new MPD_ModelInstance(mi) {
-                        ID = mi.ID + collectionId,
-                        ModelID = pdata.ID + collectionId
-                    });
-                }
+                if (ModelInstanceTable != null)
+                    foreach (var mi in ModelInstanceTable)
+                        instances.Add(mi);
+                if (MovableModelTable != null)
+                    foreach (var mi in MovableModelTable)
+                        instances.Add(mi);
+
+                _sglModelInstances = instances.ToArray();
             }
 
-            if (ModelInstanceTable != null)
-                foreach (var mi in ModelInstanceTable)
-                    AddInstance(mi);
-            if (MovableModelTable != null)
-                foreach (var mi in MovableModelTable)
-                    AddInstance(mi);
+            UpdateModelInstanceIDs();
+            return _sglModelInstances;
+        }
 
-            return instances.ToArray();
+        private void UpdateModelInstanceIDs() {
+            var instances = _sglModelInstances;
+            foreach (var inst in instances) {
+                var fileInst = (ModelInstanceBase) inst;
+                inst.ModelID = PDatasByMemoryAddress.TryGetValue(fileInst.PData0, out var pdata) ? pdata.ID : -1;
+            }
         }
 
         public ISGL_Model GetSGLModel(int id) {
-            var collectionType = (ModelCollectionType) (id / IDsPerCollectionType);
-            if (collectionType != this.CollectionType)
-                return null;
-
-            var subId = id % IDsPerCollectionType;
-            return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(x => x.ID == subId && x.Index == 0));
+            return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(
+                x => x.Collection == CollectionType && x.ID == id && x.Index == 0
+            ));
         }
 
+        private Dictionary<int, ISGL_Model> _sglModelsById = new Dictionary<int, ISGL_Model>();
         private ISGL_Model GetSGLModel(PDataModel pdata) {
             if (pdata == null)
                 return null;
 
-            var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
-                .Select(x => x.Vector)
-                .ToArray();
+            if (!_sglModelsById.ContainsKey(pdata.ID)) {
+                var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
+                    .Select(x => x.Vector)
+                    .ToArray();
 
-            var attrTable = AttrTablesByMemoryAddress[pdata.AttributesOffset];
-            var faces = PolygonTablesByMemoryAddress[pdata.PolygonsOffset]
-                .Select((x, i) => new SGL_ModelFace(
-                    new int[] { x.Vertex1, x.Vertex2, x.Vertex3, x.Vertex4 },
-                    new VECTOR(x.NormalX, x.NormalY, x.NormalZ),
-                    new ATTR(attrTable[i])
-                ))
-                .ToArray();
+                var attrTable = AttrTablesByMemoryAddress[pdata.AttributesOffset];
+                var faces = PolygonTablesByMemoryAddress[pdata.PolygonsOffset]
+                    .Select((x, i) => new SGL_ModelFace(
+                        new int[] { x.Vertex1, x.Vertex2, x.Vertex3, x.Vertex4 },
+                        new VECTOR(x.NormalX, x.NormalY, x.NormalZ),
+                        new ATTR(attrTable[i])
+                    ))
+                    .ToArray();
 
-            return new SGL_Model(pdata.ID + (int) pdata.Collection * IDsPerCollectionType, vertices, faces);
+                _sglModelsById[pdata.ID] = new SGL_Model((int) pdata.Collection, pdata.ID, vertices, faces);
+            }
+
+            return _sglModelsById[pdata.ID];
         }
 
+        private ISGL_Model[] _sglModels;
         public ISGL_Model[] GetSGLModels() {
-            return PDatasByMemoryAddress.Values
-                .Where(x => x.Index == 0)
-                .Select(x => GetSGLModel(x))
-                .ToArray();
+            if (_sglModels == null) {
+                _sglModels = PDatasByMemoryAddress.Values
+                    .Where(x => x.Index == 0)
+                    .Select(x => GetSGLModel(x))
+                    .ToArray();
+            }
+            return _sglModels;
         }
 
         [BulkCopyRowName]
