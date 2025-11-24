@@ -100,10 +100,8 @@ namespace SF3.Models.Files.MPD {
                     tilesModified.Add(t);
             }
 
-            foreach (var t in tilesModified) {
-                System.Diagnostics.Debug.WriteLine($"({t.X}, {t.Y})");
+            foreach (var t in tilesModified)
                 t.Modified?.Invoke(t, EventArgs.Empty);
-            }
         }
 
         public bool IsFlat {
