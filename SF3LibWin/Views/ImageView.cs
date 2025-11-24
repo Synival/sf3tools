@@ -72,11 +72,8 @@ namespace SF3.Win.Views {
 
         public virtual void LoadImage(string filename) {
             var image = Image.FromFile(filename);
-            OnLoadImage(image, filename);
+            LoadImageAction?.Invoke(image, filename);
         }
-
-        protected virtual void OnLoadImage(Image image, string filename)
-        { }
 
         public override void RefreshContent() {
             if (!IsCreated)
@@ -112,5 +109,7 @@ namespace SF3.Win.Views {
                 }
             }
         }
+
+        public Action<Image /*image*/, string /*filename*/> LoadImageAction { get; set; } = null;
     }
 }

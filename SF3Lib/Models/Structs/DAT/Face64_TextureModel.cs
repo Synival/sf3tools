@@ -1,5 +1,7 @@
-﻿using CommonLib.Attributes;
+﻿using System.Drawing;
+using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Extensions;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
@@ -11,8 +13,20 @@ namespace SF3.Models.Structs.DAT {
 
         public override int ImageDataOffset => Address;
         public override bool HasImage => true;
+        public override bool CanLoadImage => true;
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffsetViewable => ImageDataOffset;
+
+        public override void LoadImageAction(Image image, string filename) {
+            // TODO: better error handling
+            if (image.Width != Width || image.Height != Height)
+                return;
+            Texture = image.CreateTextureABGR1555(CollectionType.Primary, 0, 0, 0);
+        }
+
+        public override void LoadPaletteFromImage(ITexture texture) {
+            // Nothing to do; there shouldn't ever be a palette to load.
+        }
     }
 }

@@ -1,19 +1,17 @@
-﻿using CommonLib.Attributes;
-using CommonLib.Extensions;
-using CommonLib.Imaging;
+﻿using System;
+using System.Drawing;
+using CommonLib.Attributes;
 using SF3.ByteData;
-using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public class BtlEnkei_TextureModel : TextureModelBase {
+    public class BtlEnkei_TextureModel : BtlEnkei_TextureModelBase {
         private readonly int _paletteImageOffsetAddr;
         private readonly int _paletteImageSizeAddr;
         private readonly int _loadSizeAddr;
         private readonly int _paddingAddr;
 
         public BtlEnkei_TextureModel(IByteData data, int id, string name, int address)
-        : base(data, id, name, address, 0x10, 512, 256, TexturePixelFormat.Palette1,
-               MakePalette(data, address), true, false
+        : base(data, id, name, address, 0x10, data.GetDouble(address), fetchImmediately: false
         ) {
             _paletteImageOffsetAddr = Address + 0x00; // 4 bytes
             _paletteImageSizeAddr   = Address + 0x04; // 4 bytes
@@ -23,17 +21,10 @@ namespace SF3.Models.Structs.DAT {
             _ = FetchAndCacheTexture();
         }
 
-        private static Palette MakePalette(IByteData data, int addr) {
-            var paletteOffset = data.GetDouble(addr);
-            if (paletteOffset == 0)
-                return new Palette(256);
-    
-            var colors = data.GetDataCopyAt(paletteOffset, 0x200).ToUShorts();
-            return new Palette(colors);
-        }
-
         public override int ImageDataOffset => HasImage ? (PaletteImageOffset + 0x200) : 0;
         public override bool HasImage => PaletteImageOffset != 0;
+        public override bool CanLoadImage => HasImage;
+        public override int PaletteOffset => PaletteImageOffset;
 
         [TableViewModelColumn(addressField: nameof(_paletteImageOffsetAddr), displayOrder: -0.5f, isPointer: true)]
         public int PaletteImageOffset {
@@ -57,6 +48,12 @@ namespace SF3.Models.Structs.DAT {
         public int Padding {
             get => Data.GetDouble(_paddingAddr);
             set => Data.SetDouble(_paddingAddr, value);
+        }
+
+        public override void LoadImageAction(Image image, string filename) {
+            base.LoadImageAction(image, filename);
+            PaletteImageSize = 0x200 + StoredImageDataSize;
+            LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CommonLib.Attributes;
+﻿using System.Drawing;
+using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Types;
@@ -12,8 +13,17 @@ namespace SF3.Models.Structs.DAT {
 
         public override int ImageDataOffset => Address;
         public override bool HasImage => true;
+        public override bool CanLoadImage => false;
 
         [TableViewModelColumn(addressField: null, displayName: nameof(ImageDataOffset), displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffsetView => ImageDataOffset;
+
+        public override void LoadImageAction(Image image, string filename) {
+            // Can't replace these so easily :(
+        }
+
+        public override void LoadPaletteFromImage(ITexture texture) {
+            // We can't change the palette for these; they're hard-coded.
+        }
     }
 }
