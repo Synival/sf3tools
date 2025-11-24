@@ -1025,18 +1025,14 @@ namespace SF3.Models.Files.MPD {
                 // Skip tiles already accounted for by more accurate trees.
                 if (tree.Tile.TreeModelID.HasValue)
                     continue;
-                tree.Tile.TreeModelChunkIndex = tree.ModelCollection.ChunkIndex;
                 tree.Tile.TreeModelID = tree.ModelInstance.ID;
             }
         }
 
         public void ResetTileTrees() {
-            foreach (var tile in Surface.GetAllTiles()) {
-                if (tile is Tile fileTile) {
+            foreach (var tile in Surface.GetAllTiles())
+                if (tile is Tile fileTile)
                     fileTile.TreeModelID = null;
-                    fileTile.TreeModelChunkIndex = null;
-                }
-            }
         }
 
         public override bool IsModified {

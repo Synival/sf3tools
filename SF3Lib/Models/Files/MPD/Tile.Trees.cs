@@ -14,7 +14,7 @@ namespace SF3.Models.Files.MPD {
         /// <returns>'true' if a tree was associated and now unassigned, otherwise 'false'.</returns>
         public bool OrphanTree() {
             // Get the tree model.
-            if (!TreeModelID.HasValue || !TreeModelChunkIndex.HasValue || TreeModelID < 0)
+            if (!TreeModelID.HasValue || TreeModelID < 0)
                 return false;
 
             var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
@@ -31,7 +31,6 @@ namespace SF3.Models.Files.MPD {
 
             // Do whatever we need to do to detach the tree from the tile, and return success.
             TreeModelID = null;
-            TreeModelChunkIndex = null;
             return true;
         }
 
@@ -82,11 +81,9 @@ namespace SF3.Models.Files.MPD {
             model.PositionZ = (short) ((Y + 0.5f) * -32.0f);
 
             TreeModelID = model.ID;
-            TreeModelChunkIndex = chunkIndex;
             return true;
         }
 
-        public int? TreeModelChunkIndex { get; set; } = null;
         public int? TreeModelID { get; set; } = null;
     }
 }
