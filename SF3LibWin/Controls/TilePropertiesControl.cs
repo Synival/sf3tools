@@ -54,29 +54,8 @@ namespace SF3.Win.Controls {
             nudModelTextureID.ValueChanged     += (s, e) => DoIfUserInput(() => _tile.TextureID = (byte) nudModelTextureID.Value);
             cbModelRotate.SelectedValueChanged += (s, e) => DoIfUserInput(() => _tile.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
             cbModelFlip.SelectedValueChanged   += (s, e) => DoIfUserInput(() => _tile.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
-
             cbModelTileIsFlat.CheckedChanged   += (s, e) => UserSetIsFlat(cbModelTileIsFlat.Checked);
-            cbModelHasTree.CheckedChanged += (s, e) => DoIfUserInput(() => {
-                // This only really applies to MPD_File tiles. We have a better way otherwise.
-                var fileTile = _tile as Tile;
-                if (fileTile == null)
-                    return;
-
-                using (IncrementNonUserInputGuard()) {
-                    if (cbModelHasTree.Checked) {
-                        if (!fileTile.AdoptTree())
-                            cbModelHasTree.Checked = false;
-                        else
-                            fileTile.MPD_File.ModelsUpdated?.Invoke(this, EventArgs.Empty);
-                    }
-                    else {
-                        if (!fileTile.OrphanTree())
-                            cbModelHasTree.Checked = true;
-                        else
-                            fileTile.MPD_File.ModelsUpdated?.Invoke(this, EventArgs.Empty);
-                    }
-                }
-            });
+            cbModelHasTree.CheckedChanged      += (s, e) => UserSetHasTree(cbModelHasTree.Checked);
 
             // Update enabled status, visibility, and default values of controls.
             UpdateControls();
@@ -300,6 +279,33 @@ namespace SF3.Win.Controls {
                 _tile.IsFlat = cbModelTileIsFlat.Checked;
                 UpdateVertexHeights();
                 UpdateVertexHeightsEnabled();
+            }
+        }
+
+        private void UserSetHasTree(bool value) {
+            if (_nonUserInputGuard > 0)
+                return;
+
+            using (IncrementNonUserInputGuard()) {
+                // This only really applies to MPD_File tiles. We have a better way otherwise.
+                var fileTile = _tile as Tile;
+                if (fileTile == null)
+                    return;
+
+                using (IncrementNonUserInputGuard()) {
+                    if (value) {
+                        if (!fileTile.AdoptTree())
+                            cbModelHasTree.Checked = false;
+                        else
+                            fileTile.MPD_File.ModelsUpdated?.Invoke(fileTile.MPD_File, EventArgs.Empty);
+                    }
+                    else {
+                        if (!fileTile.OrphanTree())
+                            cbModelHasTree.Checked = true;
+                        else
+                            fileTile.MPD_File.ModelsUpdated?.Invoke(fileTile.MPD_File, EventArgs.Empty);
+                    }
+                }
             }
         }
 

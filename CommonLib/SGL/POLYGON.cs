@@ -3,7 +3,7 @@ using System.Linq;
 using CommonLib.Types;
 
 namespace CommonLib.SGL {
-    public class POLYGON {
+    public class POLYGON : IPOLYGON {
         public POLYGON(VECTOR[] vertices) {
             if (vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));

@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace CommonLib.SGL {
-    public class SGL_ModelFace {
+    public class SGL_ModelFace : ISGL_ModelFace {
         public SGL_ModelFace() {
             VertexIndices = new int[4];
             Normal        = new VECTOR(0, 0, 0);

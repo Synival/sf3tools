@@ -159,7 +159,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelInstances = modelInstanceList.ToArray();
         }
 
-        public void Update(IMPD_File mpdFile, IMPD_ModelCollection models, SGL_Model sglModel,
+        public void Update(IMPD_File mpdFile, IMPD_ModelCollection models, ISGL_Model sglModel,
             bool forceSemiTransparent = false, bool isHideMesh = false,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
@@ -197,7 +197,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         private void CreateAndAddQuadModels(
             IMPD_File mpdFile,
             ModelCollectionType modelCollection,
-            SGL_Model sglModel,
+            ISGL_Model sglModel,
             Dictionary<int, ITexture> texturesById,
             Dictionary<int, ModelAnimationInfo> animationsById,
             bool forceSemiTransparent,
@@ -377,7 +377,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public Dictionary<ModelCollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<int, SGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
+        public Dictionary<ModelCollectionType, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
         public IMPD_ModelInstance[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;

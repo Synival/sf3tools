@@ -58,7 +58,7 @@ namespace SF3.Win.Views {
             _sglModel = mc?.GetSGLModel(pdata.ID + (int) pdata.Collection * ModelCollection.IDsPerCollectionType);
         }
 
-        private SGL_Model _sglModel = null;
+        private ISGL_Model _sglModel = null;
 
         private void UpdateViewerControl() {
             if (_modelInstance == null)

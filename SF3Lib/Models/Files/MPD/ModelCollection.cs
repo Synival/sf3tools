@@ -290,7 +290,7 @@ namespace SF3.Models.Files.MPD {
             return instances.ToArray();
         }
 
-        public SGL_Model GetSGLModel(int id) {
+        public ISGL_Model GetSGLModel(int id) {
             var collectionType = (ModelCollectionType) (id / IDsPerCollectionType);
             if (collectionType != this.CollectionType)
                 return null;
@@ -299,7 +299,7 @@ namespace SF3.Models.Files.MPD {
             return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(x => x.ID == subId && x.Index == 0));
         }
 
-        private SGL_Model GetSGLModel(PDataModel pdata) {
+        private ISGL_Model GetSGLModel(PDataModel pdata) {
             if (pdata == null)
                 return null;
 
@@ -319,7 +319,7 @@ namespace SF3.Models.Files.MPD {
             return new SGL_Model(pdata.ID + (int) pdata.Collection * IDsPerCollectionType, vertices, faces);
         }
 
-        public SGL_Model[] GetSGLModels() {
+        public ISGL_Model[] GetSGLModels() {
             return PDatasByMemoryAddress.Values
                 .Where(x => x.Index == 0)
                 .Select(x => GetSGLModel(x))

@@ -19,7 +19,7 @@ namespace SF3.Win.Views {
         }
 
         private IMPD_ModelCollection _models = null;
-        private SGL_Model _sglModel = null;
+        private ISGL_Model _sglModel = null;
 
         public override Control Create() {
             var rval = base.Create();
@@ -36,7 +36,7 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateSGLModel() {
-            _models = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.CollectionType == _pdata.Collection);
+            _models   = (_pdata == null) ? null : MPD_File.ModelCollections.FirstOrDefault(x => x.CollectionType == _pdata.Collection);
             _sglModel = (_pdata == null) ? null : _models?.GetSGLModel(_pdata.ID + (int) _pdata.Collection * ModelCollection.IDsPerCollectionType);
         }
 

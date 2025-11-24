@@ -4,10 +4,10 @@ using CommonLib.SGL;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteModelChunk(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */, bool isHighMemory)
+        public void WriteModelChunk(ISGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */, bool isHighMemory)
             => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, isHighMemory));
 
-        public void WriteModelChunkContent(SGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */, bool isHighMemory) {
+        public void WriteModelChunkContent(ISGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */, bool isHighMemory) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -63,7 +63,7 @@ namespace SF3.MPD {
             WriteUShort(instance.Flags);
         }
 
-        public void WriteModel(SGL_Model model, bool eightPDatas, int fileChunkAddr, int ramChunkAddr) {
+        public void WriteModel(ISGL_Model model, bool eightPDatas, int fileChunkAddr, int ramChunkAddr) {
             var pdataCount = eightPDatas ? 8 : 1;
 
             // Track where the pointers to the various tables will be.
@@ -106,7 +106,7 @@ namespace SF3.MPD {
             }
         }
 
-        public void WritePOINTs(SGL_Model model) {
+        public void WritePOINTs(ISGL_Model model) {
             foreach (var vertex in model.Vertices)
                 WritePOINT(vertex);
         }
@@ -117,12 +117,12 @@ namespace SF3.MPD {
             WriteInt(vertex.Z.RawInt);
         }
 
-        public void WritePOLYGONs(SGL_Model model) {
+        public void WritePOLYGONs(ISGL_Model model) {
             foreach (var face in model.Faces)
                 WritePOLYGON(face);
         }
 
-        public void WritePOLYGON(SGL_ModelFace face) {
+        public void WritePOLYGON(ISGL_ModelFace face) {
             WriteInt(face.Normal.X.RawInt);
             WriteInt(face.Normal.Y.RawInt);
             WriteInt(face.Normal.Z.RawInt);
@@ -132,7 +132,7 @@ namespace SF3.MPD {
             WriteUShort((ushort) face.VertexIndices[3]);
         }
 
-        public void WriteATTRs(SGL_Model model, int lodIndex) {
+        public void WriteATTRs(ISGL_Model model, int lodIndex) {
             foreach (var face in model.Faces)
                 WriteATTR(face.Attributes, lodIndex);
         }
