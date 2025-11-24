@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SF3.Types;
 
 namespace SF3.MPD {
     /// <summary>
@@ -20,6 +21,6 @@ namespace SF3.MPD {
         /// <summary>
         /// All models that exist in this MPD, sorted by their collection (model+surface, chests+barrel, extra model).
         /// </summary>
-        IEnumerable<IMPD_ModelCollection> ModelCollections { get; }
+        Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; }
     }
 }

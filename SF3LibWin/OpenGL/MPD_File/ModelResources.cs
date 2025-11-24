@@ -70,7 +70,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             var modelInstanceList = new List<IMPD_ModelInstance>();
-            foreach (IMPD_ModelCollection mc in mpdFile.ModelCollections) {
+            foreach (IMPD_ModelCollection mc in mpdFile.ModelCollections.Values) {
                 if (mc.Collection != CollectionType.ExtraModel &&
                     mc.Collection != CollectionType.Primary)
                 {

@@ -2,6 +2,7 @@
 using System.Linq;
 using CommonLib.Extensions;
 using SF3.Extensions;
+using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
@@ -16,7 +17,7 @@ namespace SF3.Models.Files.MPD {
             if (!TreeModelID.HasValue || !TreeModelChunkIndex.HasValue || TreeModelID < 0)
                 return false;
 
-            var modelCollection = MPD_File.ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == TreeModelChunkIndex.Value);
+            var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
             if (modelCollection == null)
                 return false;
 
@@ -52,7 +53,7 @@ namespace SF3.Models.Files.MPD {
 
             // Get a list of all currently associated trees.
             var chunkIndex = MPD_File.Flags.Chunk20IsModels ? 20 : 1;
-            var modelCollection = MPD_File.ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == chunkIndex);
+            var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
             if (modelCollection == null || modelCollection.PDataTable.Length == 0)
                 return false;
 

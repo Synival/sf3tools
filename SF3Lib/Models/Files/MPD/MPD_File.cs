@@ -217,22 +217,17 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeMovableModelCollections(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            var modelsList = new List<IMPD_ModelCollection>();
-            if (ModelCollections != null)
-                modelsList.AddRange(ModelCollections);
-
             var offsets = new int[] { header.OffsetMesh1, header.OffsetMesh2, header.OffsetMesh3 };
             for (int i = 0; i < 3; i++) {
                 var offset = offsets[i];
                 if (offset == 0)
                     continue;
 
-                var newModel = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), null, CollectionType.MovableModels1 + i);
-                modelsList.Add(newModel);
-                tables.AddRange(newModel.Tables);
+                var collection = CollectionType.MovableModels1 + i;
+                var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), null, collection);
+                ModelCollections[collection] = newChunk;
+                tables.AddRange(newChunk.Tables);
             }
-
-            ModelCollections = modelsList.ToArray();
 
             return tables.ToArray();
         }
@@ -525,21 +520,15 @@ namespace SF3.Models.Files.MPD {
 
             var tables = new List<ITable>();
 
-            var modelsList = new List<IMPD_ModelCollection>();
-            if (ModelCollections != null)
-                modelsList.AddRange(ModelCollections);
-
             foreach (var mc in modelsChunks) {
                 var collection =
                     (mc.Index == 19 && Flags.HasChunk19Model) ? CollectionType.ExtraModel :
                     (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
                     CollectionType.Primary;
 
-                var newModel = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, mc.Index, collection);
-                modelsList.Add(newModel);
-                tables.AddRange(newModel.Tables);
+                var newChunk = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, mc.Index, collection);
+                ModelCollections[collection] = newChunk;
             }
-            ModelCollections = modelsList.ToArray();
 
             if (chunkDatas[5] != null) {
                 SurfaceDataChunk = SurfaceDataChunk.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
@@ -577,7 +566,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             // Textures in models are ABGR1555.
-            foreach (var models in ModelCollections) {
+            foreach (var models in ModelCollections.Values) {
                 var fileModels = (ModelChunk) models;
                 if (fileModels?.AttrTablesByMemoryAddress != null)
                     foreach (var attrTable in fileModels.AttrTablesByMemoryAddress.Values)
@@ -969,7 +958,7 @@ namespace SF3.Models.Files.MPD {
 
             // Gather a list of models that appear to be trees, associated with their tile.
             var treeModels = new List<TreeModelInfo>();
-            foreach (var imc in ModelCollections) {
+            foreach (var imc in ModelCollections.Values) {
                 var mc = (ModelChunk) imc;
                 if (mc == null || !mc.ChunkIndex.HasValue)
                     continue;
@@ -1215,8 +1204,8 @@ namespace SF3.Models.Files.MPD {
             var flags = Flags;
             var errors = new List<string>();
 
-            var mc1  = ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 1);
-            var mc20 = ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20);
+            var mc1  = ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 1);
+            var mc20 = ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
                 var expectedLmm = flags.Chunk1IsLoadedFromLowMemory;
@@ -1480,7 +1469,7 @@ namespace SF3.Models.Files.MPD {
 
         public PDataModel GetTreePData0() {
             var modelChunkIndex = Flags.Chunk20IsModels ? 20 : 1;
-            var mc = ModelCollections.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
+            var mc = ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
             if (mc == null)
                 return null;
 
@@ -1691,7 +1680,7 @@ namespace SF3.Models.Files.MPD {
         public int[] ModelsChunkIndices { get; private set; } = null;
 
         [BulkCopyRecurse]
-        public IEnumerable<IMPD_ModelCollection> ModelCollections { get; private set; }
+        public Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<CollectionType, IMPD_ModelCollection>();
 
         [BulkCopyRecurse]
         public SurfaceDataChunk SurfaceDataChunk { get; private set; }

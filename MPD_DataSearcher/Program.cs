@@ -126,7 +126,7 @@ namespace MPD_DataSearcher {
                                 .Select(x => new DataRange(mpdFileData, x.Name, x.Address, x.Address + x.Size))
                             );
 
-                            foreach (var imc in mpdFile!.ModelCollections) {
+                            foreach (var imc in mpdFile!.ModelCollections.Values) {
                                 var mc = (ModelChunk) imc;
 
                                 var mh = mc.ModelsHeader;

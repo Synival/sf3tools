@@ -35,7 +35,7 @@ namespace SF3.Win.Views.MPD {
                 AddChunkView(Model.SurfaceDataChunk.ChunkIndex, "Surface Data", (name) => new SurfaceDataChunkView(name, Model.SurfaceDataChunk));
 
             if (Model.ModelCollections != null) {
-                foreach (var iModelCollection in Model.ModelCollections) {
+                foreach (var iModelCollection in Model.ModelCollections.Values) {
                     var modelCollection = (ModelChunk) iModelCollection;
                     if (modelCollection != null && modelCollection.ChunkIndex.HasValue)
                         AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, Model, modelCollection));

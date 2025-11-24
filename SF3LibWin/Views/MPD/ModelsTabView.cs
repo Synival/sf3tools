@@ -6,7 +6,7 @@ using SF3.Models.Tables.MPD.TextureCollection;
 namespace SF3.Win.Views.MPD {
     public class ModelsTabView : TabView {
         public ModelsTabView(string name, IMPD_File model) : base(name) {
-            var modelCollections = model.ModelCollections.Where(x => x != null).Cast<ModelChunk>();
+            var modelCollections = model.ModelCollections.Values.Cast<ModelChunk>().OrderBy(x => x.Collection).ToList();
             var allModelInstances = modelCollections.Select(x => x.ModelInstanceTable).ToList();
             var allPDatas = modelCollections.Select(x => x.PDataTable).ToList();
 

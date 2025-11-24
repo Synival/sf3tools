@@ -14,8 +14,7 @@ namespace SF3.MPD {
             // TODO: check for this, and get memory mapping stuff!!
             // Chunk[1] is always models if it exists.
             // TODO: In Scenario 2+, this could be Chunk[20].
-            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.Collection == CollectionType.Primary);
-            if (mc == null)
+            if (!mpd.ModelCollections.TryGetValue(CollectionType.Primary, out var mc))
                 WriteEmptyChunk();
             else
                 WriteModelChunk(mc.Models, mc.ModelInstances, mpd.Flags.HighMemoryHasModels);
@@ -38,10 +37,9 @@ namespace SF3.MPD {
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
             IEnumerable<ITexture> GetTexturesForCollection(CollectionType collection) {
-                return mpd.ModelCollections
-                    .Where(x => x.Collection == collection)
-                    .SelectMany(x => x.Textures)
-                    .ToArray();
+                if (!mpd.ModelCollections.TryGetValue(collection, out mc))
+                    return new ITexture[0];
+                return mc.Textures ?? new ITexture[0];
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.

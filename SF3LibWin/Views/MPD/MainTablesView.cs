@@ -48,7 +48,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TableView("Ground Animation", Model.GroundAnimationTable, ngc));
 
             if (Model.ModelCollections != null) {
-                foreach (var models in Model.ModelCollections)
+                foreach (var models in Model.ModelCollections.Values)
                     if (models.IsMovableModelCollection())
                         CreateChild(new ModelChunkView(models.Collection.ToString(), Model, (ModelChunk) models));
             }
