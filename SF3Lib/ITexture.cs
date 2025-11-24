@@ -26,7 +26,7 @@ namespace SF3 {
         /// <summary>
         /// Collection to which this texture belongs.
         /// </summary>
-        TextureCollectionType Collection { get; }
+        CollectionType Collection { get; }
 
         /// <summary>
         /// ID for texture.

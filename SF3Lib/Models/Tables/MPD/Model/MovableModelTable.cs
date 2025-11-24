@@ -4,12 +4,12 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class MovableModelTable : TerminatedTable<MovableModel> {
-        protected MovableModelTable(IByteData data, ModelCollectionType collection, string name, int address)
+        protected MovableModelTable(IByteData data, CollectionType collection, string name, int address)
         : base(data, name, address, 4, null) {
             Collection = collection;
         }
 
-        public static MovableModelTable Create(IByteData data, ModelCollectionType collection, string name, int address)
+        public static MovableModelTable Create(IByteData data, CollectionType collection, string name, int address)
             => Create(() => new MovableModelTable(data, collection, name, address));
 
         public override bool Load() {
@@ -19,6 +19,6 @@ namespace SF3.Models.Tables.MPD.Model {
                 false);
         }
 
-        public ModelCollectionType Collection { get; }
+        public CollectionType Collection { get; }
     }
 }

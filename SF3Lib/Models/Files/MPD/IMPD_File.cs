@@ -129,7 +129,6 @@ namespace SF3.Models.Files.MPD {
         int PrimaryTextureChunksLastIndex { get; }
         int MeshTextureChunksFirstIndex { get; }
         int MeshTextureChunksLastIndex { get; }
-        int? ExtraModelTextureChunkIndex { get; }
 
         TextureCollection[] TextureCollections { get; }
 

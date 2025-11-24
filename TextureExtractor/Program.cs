@@ -102,7 +102,7 @@ namespace TextureExtractor {
 
                             // Gather all textures into one collection.
                             var textures = mpdFile.TextureCollections
-                                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == TextureCollectionType.PrimaryTextures)
+                                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == CollectionType.Primary)
                                 .SelectMany(x => x.TextureTable)
                                 .Where(x => tileSurfaceCharacterIDs.Contains(x.ID) && x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
                                 .ToArray();

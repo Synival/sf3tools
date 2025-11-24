@@ -7,7 +7,7 @@ namespace SF3.MPD {
         /// <summary>
         /// Identifier for this collection of models.
         /// </summary>
-        ModelCollectionType Collection { get; }
+        CollectionType Collection { get; }
 
         /// <summary>
         /// Fetches a single model belonging to this collection by ID.

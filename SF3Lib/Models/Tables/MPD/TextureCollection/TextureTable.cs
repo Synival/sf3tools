@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
     public class TextureTable : FixedSizeTable<TextureModel> {
         protected TextureTable(
             IByteData data, string name, int address,
-            TextureCollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
+            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex
         ) : base(data, name, address, textureCount) {
             if (textureCount > 255)
@@ -23,7 +23,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
 
         public static TextureTable Create(
             IByteData data, string name, int address,
-            TextureCollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
+            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex
         )
             => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, palettes, chunkIndex));
@@ -61,7 +61,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             }
         }
 
-        public TextureCollectionType Collection { get; }
+        public CollectionType Collection { get; }
         public int StartID { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
         public Dictionary<TexturePixelFormat, Palette> Palettes { get; }

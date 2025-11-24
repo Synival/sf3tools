@@ -21,7 +21,7 @@ namespace SF3.Models.Files.MPD {
             string name,
             ScenarioType scenario,
             int? chunkIndex,
-            ModelCollectionType collection
+            CollectionType collection
         ) : base(data, nameContext)
         {
             MPD_File   = mpdFile;
@@ -30,7 +30,6 @@ namespace SF3.Models.Files.MPD {
             Collection = collection;
             ChunkIndex = chunkIndex;
             MovableModelsIndex = null;
-            TextureCollection = GetTextureCollection();
         }
 
         protected ModelCollection(
@@ -47,19 +46,18 @@ namespace SF3.Models.Files.MPD {
             Name       = name;
 
             Collection =
-                (movableModelsIndex == 0) ? ModelCollectionType.MovableModels1 :
-                (movableModelsIndex == 1) ? ModelCollectionType.MovableModels2 :
-                (movableModelsIndex == 2) ? ModelCollectionType.MovableModels3 :
+                (movableModelsIndex == 0) ? CollectionType.MovableModels1 :
+                (movableModelsIndex == 1) ? CollectionType.MovableModels2 :
+                (movableModelsIndex == 2) ? CollectionType.MovableModels3 :
                 throw new ArgumentException(nameof(movableModelsIndex));
 
             ChunkIndex = null;
             MovableModelsIndex = movableModelsIndex;
-            TextureCollection = GetTextureCollection();
         }
 
         public static ModelCollection Create(
             IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name,
-            ScenarioType scenario, int? chunkIndex, ModelCollectionType modelCollection
+            ScenarioType scenario, int? chunkIndex, CollectionType modelCollection
         ) {
             var newFile = new ModelCollection(mpdFile, data, nameContext, address, name, scenario, chunkIndex, modelCollection);
             newFile.Init();
@@ -280,25 +278,6 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        private TextureCollectionType GetTextureCollection() {
-            switch (Collection) {
-                case ModelCollectionType.PrimaryModels:
-                    return TextureCollectionType.PrimaryTextures;
-                case ModelCollectionType.Chunk19Model:
-                    return TextureCollectionType.Chunk19ModelTextures;
-                case ModelCollectionType.Chunk1Model:
-                    return TextureCollectionType.Chunk1ModelTextures;
-                case ModelCollectionType.MovableModels1:
-                    return TextureCollectionType.MovableModels1;
-                case ModelCollectionType.MovableModels2:
-                    return TextureCollectionType.MovableModels2;
-                case ModelCollectionType.MovableModels3:
-                    return TextureCollectionType.MovableModels3;
-                default:
-                    throw new ArgumentException($"Unhandled collection type '{Collection}'");
-            }
-        }
-
         private IMPD_ModelInstance[] _sglModelInstances;
         public IEnumerable<IMPD_ModelInstance> ModelInstances {
             get {
@@ -376,8 +355,7 @@ namespace SF3.Models.Files.MPD {
         public string Name { get; }
         public ScenarioType Scenario => MPD_File.Scenario;
         public IMPD_File MPD_File { get; }
-        public ModelCollectionType Collection { get; }
-        public TextureCollectionType TextureCollection { get; }
+        public CollectionType Collection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
         public int? MovableModelsIndex { get; }
@@ -425,7 +403,7 @@ namespace SF3.Models.Files.MPD {
             get {
                 if (_textures == null) {
                     _textures = MPD_File.TextureCollections
-                        .Where(x => x.Collection == TextureCollection)
+                        .Where(x => x.Collection == Collection)
                         .Select(x => x.TextureTable)
                         .SelectMany(x => x)
                         .Select(x => x.Texture)

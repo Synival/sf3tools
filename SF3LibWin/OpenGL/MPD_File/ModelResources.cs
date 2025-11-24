@@ -34,7 +34,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelInstances = null;
         }
 
-        private void InitDictsForType(ModelCollectionType collection) {
+        private void InitDictsForType(CollectionType collection) {
             // TODO: Just have one structure with all this info!
             if (!ModelsByIDByCollection.ContainsKey(collection))
                 ModelsByIDByCollection[collection] = [];
@@ -51,7 +51,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             => modelCollection.Textures.ToDictionary(x => x.ID, x => x);
 
         private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
-            if (modelCollection.Collection != ModelCollectionType.PrimaryModels || mpdFile.TextureAnimations == null)
+            if (modelCollection.Collection != CollectionType.Primary || mpdFile.TextureAnimations == null)
                 return [];
 
             return mpdFile.TextureAnimations
@@ -71,9 +71,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var modelInstanceList = new List<IMPD_ModelInstance>();
             foreach (IMPD_ModelCollection mc in mpdFile.ModelCollections) {
-                if (mc.Collection != ModelCollectionType.Chunk19Model &&
-                    mc.Collection != ModelCollectionType.PrimaryModels &&
-                    mc.Collection != ModelCollectionType.Chunk1Model)
+                if (mc.Collection != CollectionType.ExtraModel &&
+                    mc.Collection != CollectionType.Primary)
                 {
                     continue;
                 }
@@ -170,7 +169,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private void CreateAndAddQuadModels(
             IMPD_File mpdFile,
-            ModelCollectionType modelCollection,
+            CollectionType modelCollection,
             ISGL_Model sglModel,
             Dictionary<int, ITexture> texturesById,
             Dictionary<int, ModelAnimationInfo> animationsById,
@@ -350,8 +349,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public Dictionary<ModelCollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
-        public Dictionary<ModelCollectionType, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
+        public Dictionary<CollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
+        public Dictionary<CollectionType, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
         public IMPD_ModelInstance[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;

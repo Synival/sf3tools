@@ -36,8 +36,6 @@ namespace SF3.Models.Files.MPD {
             PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
                 ((Scenario >= ScenarioType.Other) ? 4 : 3);
 
-            ExtraModelTextureChunkIndex = (Scenario >= ScenarioType.Scenario2) ? 21 : (int?) null;
-
             MeshTextureChunksFirstIndex = PrimaryTextureChunksLastIndex + 1;
             MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
                 ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
@@ -337,8 +335,10 @@ namespace SF3.Models.Files.MPD {
             for (var i = PrimaryTextureChunksFirstIndex; i <= MeshTextureChunksLastIndex; i++)
                 if (chunks[i].Exists)
                     _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
-            if (ExtraModelTextureChunkIndex.HasValue && chunks[ExtraModelTextureChunkIndex.Value].Exists)
-                _ = MakeChunkData(ExtraModelTextureChunkIndex.Value, ChunkType.Textures, CompressionType.Compressed);
+
+            // In Scenario 2+, Chunk[21] is a set of extra textures for things like the Kraken.
+            if (chunks[21].Exists)
+                _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
             // Repeating backgrounds
             var repeatingGroundChunks = new List<IChunkData>();
@@ -506,22 +506,19 @@ namespace SF3.Models.Files.MPD {
         }
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
-            TextureCollectionType TextureCollectionForChunkIndex(int chunkIndex) {
+            CollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 if (chunkIndex == 10 && Flags.HasChunk19Model)
-                    return TextureCollectionType.Chunk19ModelTextures;
-
-                if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
-                    return TextureCollectionType.PrimaryTextures;
-
-                if (chunkIndex == MeshTextureChunksFirstIndex + 0 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return TextureCollectionType.MovableModels1;
-                if (chunkIndex == MeshTextureChunksFirstIndex + 1 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return TextureCollectionType.MovableModels2;
-                if (chunkIndex == MeshTextureChunksFirstIndex + 2 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return TextureCollectionType.MovableModels3;
-
-                if (chunkIndex == ExtraModelTextureChunkIndex)
-                    return TextureCollectionType.Chunk1ModelTextures;
+                    return CollectionType.ExtraModel;
+                else if (chunkIndex == 21)
+                    return CollectionType.ExtraModel;
+                else if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
+                    return CollectionType.Primary;
+                else if (chunkIndex == MeshTextureChunksFirstIndex + 0 && chunkIndex <= MeshTextureChunksLastIndex)
+                    return CollectionType.MovableModels1;
+                else if (chunkIndex == MeshTextureChunksFirstIndex + 1 && chunkIndex <= MeshTextureChunksLastIndex)
+                    return CollectionType.MovableModels2;
+                else if (chunkIndex == MeshTextureChunksFirstIndex + 2 && chunkIndex <= MeshTextureChunksLastIndex)
+                    return CollectionType.MovableModels3;
 
                 throw new Exception("Can't determine texture collection based on chunk index");
             }
@@ -533,10 +530,10 @@ namespace SF3.Models.Files.MPD {
                 modelsList.AddRange(ModelCollections);
 
             foreach (var mc in modelsChunks) {
-                var collection = (mc.Index == 19 && Flags.HasChunk19Model)
-                    ? ModelCollectionType.Chunk19Model
-                    : (chunkDatas[21] != null && mc.Index == 1) ? ModelCollectionType.Chunk1Model
-                    : ModelCollectionType.PrimaryModels;
+                var collection =
+                    (mc.Index == 19 && Flags.HasChunk19Model) ? CollectionType.ExtraModel :
+                    (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
+                    CollectionType.Primary;
 
                 var newModel = ModelCollection.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
                 modelsList.Add(newModel);
@@ -557,10 +554,10 @@ namespace SF3.Models.Files.MPD {
 
             // Gather all information about texture picture formats from existing data.
             // Each texture collection needs its own info.
-            var pixelFormats = new Dictionary<TextureCollectionType, Dictionary<int, TexturePixelFormat>>();
-            foreach (var texCollection in (TextureCollectionType[]) Enum.GetValues(typeof(TextureCollectionType)))
+            var pixelFormats = new Dictionary<CollectionType, Dictionary<int, TexturePixelFormat>>();
+            foreach (var texCollection in (CollectionType[]) Enum.GetValues(typeof(CollectionType)))
                 pixelFormats[texCollection] = new Dictionary<int, TexturePixelFormat>();
-            var primaryPixelFormats = pixelFormats[TextureCollectionType.PrimaryTextures];
+            var primaryPixelFormats = pixelFormats[CollectionType.Primary];
 
             // Always ABGR1555 for surface tiles.
             if (SurfaceModel != null) {
@@ -610,14 +607,14 @@ namespace SF3.Models.Files.MPD {
             int index = 0;
             foreach (var chunk in texChunks) {
                 var collection = TextureCollectionForChunkIndex(chunk.Index);
-                bool isMovableModelsChunk = collection >= TextureCollectionType.MovableModels1 && collection <= TextureCollectionType.MovableModels3;
+                bool isMovableModelsChunk = collection >= CollectionType.MovableModels1 && collection <= CollectionType.MovableModels3;
 
                 int? startId = null;
                 if (isMovableModelsChunk)
                     startId = nextModelCollectionStartId;
-                else if (collection == TextureCollectionType.PrimaryTextures)
+                else if (collection == CollectionType.Primary)
                     startId = nextPrimaryCollectionStartId;
-                else if (collection == TextureCollectionType.Chunk19ModelTextures || collection == TextureCollectionType.Chunk1ModelTextures)
+                else if (collection == CollectionType.ExtraModel)
                     startId = 0;
 
                 try {
@@ -628,7 +625,7 @@ namespace SF3.Models.Files.MPD {
                     if (texCol.TextureTable != null) {
                         if (isMovableModelsChunk)
                             nextModelCollectionStartId += texCol.TextureTable.Length;
-                        else if (collection == TextureCollectionType.PrimaryTextures)
+                        else if (collection == CollectionType.Primary)
                             nextPrimaryCollectionStartId += texCol.TextureTable.Length;
 
                         texColList.Add(texCol);
@@ -1703,7 +1700,6 @@ namespace SF3.Models.Files.MPD {
         public int PrimaryTextureChunksLastIndex { get; }
         public int MeshTextureChunksFirstIndex { get; }
         public int MeshTextureChunksLastIndex { get; }
-        public int? ExtraModelTextureChunkIndex { get; }
 
         [BulkCopyRecurse]
         public TextureCollection[] TextureCollections { get; private set; }

@@ -41,8 +41,8 @@ namespace SF3.Models.Structs.DAT {
                 }
                 else {
                     Texture = (PixelFormat == TexturePixelFormat.ABGR1555)
-                        ? new TextureABGR1555(TextureCollectionType.PrimaryTextures, ID, 0, 0, RawImageData16Bit)
-                        : (ITexture) new TextureIndexed(TextureCollectionType.PrimaryTextures, ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
+                        ? new TextureABGR1555(CollectionType.Primary, ID, 0, 0, RawImageData16Bit)
+                        : (ITexture) new TextureIndexed(CollectionType.Primary, ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
                 }
                 return true;
             }

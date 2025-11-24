@@ -15,7 +15,7 @@ namespace SF3.MPD {
             // TODO: check for this, and get memory mapping stuff!!
             // Chunk[1] is always models if it exists.
             // TODO: In Scenario 2+, this could be Chunk[20].
-            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.Collection == ModelCollectionType.PrimaryModels);
+            var mc = mpd.ModelCollections.FirstOrDefault(x => x?.Collection == CollectionType.Primary);
             if (mc == null)
                 WriteEmptyChunk();
             else
@@ -38,7 +38,7 @@ namespace SF3.MPD {
             WriteSurfaceDataChunk(mpd.Surface);
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
-            IEnumerable<ITexture> GetTexturesForCollection(ModelCollectionType collection) {
+            IEnumerable<ITexture> GetTexturesForCollection(CollectionType collection) {
                 return mpd.ModelCollections
                     .Where(x => x.Collection == collection)
                     .SelectMany(x => x.Textures)
@@ -47,17 +47,17 @@ namespace SF3.MPD {
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             if (mpd.Flags.HasChunk19Model) {
-                WriteTextureChunks(GetTexturesForCollection(ModelCollectionType.PrimaryModels), chunkCount: 4, startID: 0);
-                WriteTextureChunks(GetTexturesForCollection(ModelCollectionType.Chunk19Model), chunkCount: 1, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(CollectionType.Primary), chunkCount: 4, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(CollectionType.ExtraModel), chunkCount: 1, startID: 0);
             }
             else
-                WriteTextureChunks(GetTexturesForCollection(ModelCollectionType.PrimaryModels), chunkCount: 5, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(CollectionType.Primary), chunkCount: 5, startID: 0);
 
             // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
             // (it's so silly that it works this way, lol)
-            var chest1Textures = GetTexturesForCollection(ModelCollectionType.MovableModels1);
-            var chest2Textures = GetTexturesForCollection(ModelCollectionType.MovableModels2);
-            var barrelTextures = GetTexturesForCollection(ModelCollectionType.MovableModels3);
+            var chest1Textures = GetTexturesForCollection(CollectionType.MovableModels1);
+            var chest2Textures = GetTexturesForCollection(CollectionType.MovableModels2);
+            var barrelTextures = GetTexturesForCollection(CollectionType.MovableModels3);
 
             WriteTextureChunk(chest1Textures, 0, out _);
             WriteTextureChunk(chest2Textures, 0, out _);

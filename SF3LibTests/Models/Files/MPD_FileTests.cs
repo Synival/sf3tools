@@ -307,7 +307,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void Models_HasExpectedCounts() {
             var data = MakeFile();
-            var models = data.ModelCollections.First(x => x.Collection == ModelCollectionType.PrimaryModels).Models.ToArray();
+            var models = data.ModelCollections.First(x => x.Collection == CollectionType.Primary).Models.ToArray();
 
             Assert.AreEqual(14, models.Length);
 

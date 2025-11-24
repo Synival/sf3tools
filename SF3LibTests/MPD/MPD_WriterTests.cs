@@ -65,23 +65,23 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
             ForEachMPD(ScenarioType.Scenario1, originalFile => {
-                TestMPDTextures(originalFile, TextureCollectionType.PrimaryTextures);
+                TestMPDTextures(originalFile, CollectionType.Primary);
             });
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_HasCorrectPrimaryTextures() {
             var originalFile = MakeFile(ScenarioType.Scenario1, "Z_AS.MPD");
-            TestMPDTextures(originalFile, TextureCollectionType.PrimaryTextures);
+            TestMPDTextures(originalFile, CollectionType.Primary);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_HasCorrectExtraTextures() {
             var originalFile = MakeFile(ScenarioType.Scenario1, "Z_AS.MPD");
-            TestMPDTextures(originalFile, TextureCollectionType.Chunk19ModelTextures);
+            TestMPDTextures(originalFile, CollectionType.ExtraModel);
         }
 
-        private void TestMPDTextures(IMPD_File originalFile, TextureCollectionType collection) {
+        private void TestMPDTextures(IMPD_File originalFile, CollectionType collection) {
             var newFile = RecreateMPD(originalFile);
 
             var primaryTextureCollections = originalFile.TextureCollections

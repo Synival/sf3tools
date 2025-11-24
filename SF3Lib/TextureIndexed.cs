@@ -9,7 +9,7 @@ using SF3.Types;
 namespace SF3 {
     public class TextureIndexed : ITexture {
         public TextureIndexed(
-            TextureCollectionType collection,
+            CollectionType collection,
             int id,
             int frame,
             int duration,
@@ -36,7 +36,7 @@ namespace SF3 {
         private byte[] _bitmapDataARGB1555 = null;
         private byte[] _bitmapDataARGB8888 = null;
 
-        public TextureCollectionType Collection { get; }
+        public CollectionType Collection { get; }
         public int ID { get; }
         public int Frame { get; }
         public int Duration { get; }

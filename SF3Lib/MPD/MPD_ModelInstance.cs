@@ -23,7 +23,7 @@ namespace SF3.MPD {
             Flags = mi.Flags;
         }
 
-        public ModelCollectionType Collection { get; set; }
+        public CollectionType Collection { get; set; }
         public int ID { get; set; }
         public int ModelID { get; set; }
         public short PositionX { get; set; }

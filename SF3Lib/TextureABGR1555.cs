@@ -9,7 +9,7 @@ using SF3.Types;
 namespace SF3 {
     public class TextureABGR1555 : ITexture {
         public TextureABGR1555(
-            TextureCollectionType collection,
+            CollectionType collection,
             int id,
             int frame,
             int duration,
@@ -33,7 +33,7 @@ namespace SF3 {
         private byte[] _bitmapDataARGB8888 = null;
         private byte[] _bitmapDataARGB8888_Endcodes = null;
 
-        public TextureCollectionType Collection { get; }
+        public CollectionType Collection { get; }
         public int ID { get; }
         public int Frame { get; }
         public int Duration { get; }

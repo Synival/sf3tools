@@ -11,7 +11,7 @@ namespace SF3.Models.Files.MPD {
     public class TextureCollection : TableFile {
         protected TextureCollection(
             IByteData data, INameGetterContext nameContext, int address, string name,
-            TextureCollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
+            CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex, int? firstTextureId
         ) : base(data, nameContext) {
             Address      = address;
@@ -25,7 +25,7 @@ namespace SF3.Models.Files.MPD {
 
         public static TextureCollection Create(
             IByteData data, INameGetterContext nameContext, int address, string name,
-            TextureCollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
+            CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
             int? chunkIndex, int? firstTextureId
         ) {
             var newFile = new TextureCollection(data, nameContext, address, name, collection, pixelFormats, palettes, chunkIndex, firstTextureId);
@@ -48,7 +48,7 @@ namespace SF3.Models.Files.MPD {
         public string Name { get; }
 
         public int Address { get; }
-        public TextureCollectionType Collection { get; }
+        public CollectionType Collection { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
         public Dictionary<TexturePixelFormat, Palette> Palettes { get; }
         public int? ChunkIndex { get; }
