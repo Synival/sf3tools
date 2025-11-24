@@ -34,7 +34,7 @@ namespace SF3.Win.Extensions {
                 return null;
 
             var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format8bppIndexed);
-            bitmap.UsePalette(texture.Palette);
+            bitmap.SetPalette(texture.Palette);
 
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
             Marshal.Copy(texBitmapData, 0, bitmapData.Scan0, texBitmapData.Length);

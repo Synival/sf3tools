@@ -115,6 +115,18 @@ namespace CommonLib.Extensions {
                     to.SetPixel(ix + x, iy + y, from.GetPixel(ix, iy));
         }
 
+        public static byte[] GetBitmapDataIndexed(this Bitmap bitmap) {
+            if (bitmap.PixelFormat != PixelFormat.Format8bppIndexed)
+                throw new ArgumentException($"Bitmap pixel format ({bitmap.PixelFormat}) should be 'Format8bppIndexed'");
+
+            var readBytes = new byte[bitmap.Width * bitmap.Height];
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            Marshal.Copy(bitmapData.Scan0, readBytes, 0, readBytes.Length);
+            bitmap.UnlockBits(bitmapData);
+
+            return readBytes;
+        }
+
         public static byte[] GetBitmapDataBGRA8888(this Bitmap bitmap) {
             if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
                 using (bitmap = bitmap.CreateARGB8888Bitmap())
@@ -148,6 +160,13 @@ namespace CommonLib.Extensions {
             return outputData;
         }
 
+        public static byte[,] Get2DDataIndexed(this Bitmap bitmap) {
+            if (bitmap.PixelFormat != PixelFormat.Format8bppIndexed)
+                throw new ArgumentException($"Bitmap pixel format ({bitmap.PixelFormat}) should be 'Format8bppIndexed'");
+            var inputData = bitmap.GetBitmapDataIndexed();
+            return inputData.To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
+        }
+
         public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap) {
             var outputData = new ushort[bitmap.Width, bitmap.Height];
             var inputData = bitmap.GetBitmapDataBGRA8888();
@@ -166,17 +185,6 @@ namespace CommonLib.Extensions {
             }
 
             return outputData;
-        }
-
-        public static void UsePalette(this Bitmap bitmap, Palette palette) {
-            var outputPalette = bitmap.Palette;
-            var palLen = Math.Min(256, palette.Channels.Length);
-
-            for (int i = 0; i < palLen; ++i) {
-                var inputColor = palette[i];
-                outputPalette.Entries[i] = Color.FromArgb(inputColor.r, inputColor.g, inputColor.b);
-            }
-            bitmap.Palette = outputPalette;
         }
     }
 }

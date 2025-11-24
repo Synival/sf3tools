@@ -90,7 +90,7 @@ namespace SF3.Win.Views {
             }
 
             if (pixelFormat == PixelFormat.Format8bppIndexed)
-                bitmap.UsePalette(Palettes[0]);
+                bitmap.SetPalette(Palettes[0]);
 
             Image = bitmap;
         }

@@ -12,5 +12,14 @@ namespace SF3.Extensions {
                     return BitmapExtensions.CreateTextureABGR1555(bitmap, collection, id, frame, duration);
             }
         }
+
+        public static TextureIndexed CreateTextureIndexed(this Image image, CollectionType collection, int id, int frame, int duration, bool zeroIsTransparent) {
+            if (image is Bitmap bitmap)
+                return BitmapExtensions.CreateTextureIndexed(bitmap, collection, id, frame, duration, zeroIsTransparent);
+            else {
+                using (bitmap = image.CreateIndexedBitmap())
+                    return BitmapExtensions.CreateTextureIndexed(bitmap, collection, id, frame, duration, zeroIsTransparent);
+            }
+        }
     }
 }
