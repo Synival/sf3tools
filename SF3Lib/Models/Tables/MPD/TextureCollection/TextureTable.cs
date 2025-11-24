@@ -37,11 +37,8 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
                     : Data.GetWord(address + size + 2);
 
                 var texId = StartID + id;
-                var texColId = texId % Files.MPD.TextureCollection.IDsPerCollectionType;
-                var texSubId = texId / Files.MPD.TextureCollection.IDsPerCollectionType;
-
                 return new TextureModel(
-                    Data, Collection, StartID + id, $"Texture{texColId}_{texSubId:D3}", address,
+                    Data, Collection, StartID + id, $"Texture{(int) Collection}_{texId:X2}", address,
                     pixelFormat, GetPalette(pixelFormat), ChunkIndex, nextImageDataOffset
                 );
             });

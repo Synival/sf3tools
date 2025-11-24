@@ -66,18 +66,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             public int FrameTimerStart;
         }
 
-        private Dictionary<int, ITexture> GetTexturesByID(IMPD_File mpdFile, TextureCollectionType texCollection) {
-            var textureIdOffset = (int) texCollection * TextureCollection.IDsPerCollectionType;
+        private Dictionary<int, ITexture> GetTextureDictionaryByCollection(IMPD_File mpdFile, TextureCollectionType texCollection) {
             return mpdFile.TextureCollections != null ? mpdFile.TextureCollections
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)
                 .SelectMany(x => x.TextureTable)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ID - textureIdOffset, x => x.Texture)
+                .ToDictionary(x => x.ID, x => x.Texture)
                 : [];
         }
 
-        private Dictionary<int, ModelAnimationInfo> GetAnimationsByID(IMPD_File mpdFile, TextureCollectionType texCollection) {
+        private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_File mpdFile, TextureCollectionType texCollection) {
             if (texCollection != TextureCollectionType.PrimaryTextures || mpdFile.TextureAnimations == null)
                 return [];
 
@@ -137,8 +136,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .ToArray();
 
                 var texCollection = GetTextureCollection(mc.CollectionType);
-                var texturesById = GetTexturesByID(mpdFile, texCollection);
-                var animationsById = GetAnimationsByID(mpdFile, texCollection);
+                var texturesById = GetTextureDictionaryByCollection(mpdFile, texCollection);
+                var animationsById = GetAnimationDictionaryByCollection(mpdFile, texCollection);
 
                 foreach (var id in uniqueModelIDs) {
                     if (id == -1)
@@ -175,8 +174,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             SGL_ModelsByIDByCollection[models.CollectionType][sglModel.ID] = sglModel;
 
             var texCollection  = GetTextureCollection(models.CollectionType);
-            var texturesById   = GetTexturesByID(mpdFile, texCollection);
-            var animationsById = GetAnimationsByID(mpdFile, texCollection);
+            var texturesById   = GetTextureDictionaryByCollection(mpdFile, texCollection);
+            var animationsById = GetAnimationDictionaryByCollection(mpdFile, texCollection);
 
             CreateAndAddQuadModels(mpdFile, models.CollectionType, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 

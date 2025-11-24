@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             }
 
             PixelFormat = TexturePixelFormat.ABGR1555;
-            Texture = new TextureABGR1555(TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureABGR1555(TextureCollectionType.PrimaryTextures, TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
         private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat pixelFormat, Palette palette, ITexture referenceTexture) {
@@ -58,7 +58,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
                     imageData[x, y] = (byte) data.GetByte(off++);
 
             PixelFormat = pixelFormat;
-            Texture = new TextureIndexed(TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette, true,
+            Texture = new TextureIndexed(TextureCollectionType.PrimaryTextures, TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette, true,
                 tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
         }
 
@@ -76,7 +76,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             }
             data.Data.SetDataTo(newData.GetDataCopy());
 
-            Texture = new TextureABGR1555(TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
+            Texture = new TextureABGR1555(TextureCollectionType.PrimaryTextures, TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
             return imageData;
         }
 

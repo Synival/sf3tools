@@ -24,6 +24,11 @@ namespace SF3 {
     /// </summary>
     public interface ITexture {
         /// <summary>
+        /// Collection to which this texture belongs.
+        /// </summary>
+        TextureCollectionType Collection { get; }
+
+        /// <summary>
         /// ID for texture.
         /// </summary>
         int ID { get; }

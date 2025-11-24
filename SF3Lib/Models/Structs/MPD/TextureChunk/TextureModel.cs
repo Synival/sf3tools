@@ -69,8 +69,8 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
             try {
                 Texture = PixelFormat == TexturePixelFormat.ABGR1555
-                    ? new TextureABGR1555(ID, 0, 0, RawImageData16Bit, tags: tags)
-                    : (ITexture) new TextureIndexed(ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, true, tags: tags);
+                    ? new TextureABGR1555(Collection, ID, 0, 0, RawImageData16Bit, tags: tags)
+                    : (ITexture) new TextureIndexed(Collection, ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, true, tags: tags);
                 return true;
             }
             catch {
@@ -78,7 +78,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
+        [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 130)]
         public TextureCollectionType Collection { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]

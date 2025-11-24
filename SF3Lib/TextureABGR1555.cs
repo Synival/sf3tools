@@ -8,13 +8,22 @@ using SF3.Types;
 
 namespace SF3 {
     public class TextureABGR1555 : ITexture {
-        public TextureABGR1555(int id, int frame, int duration, ushort[,] data, Dictionary<TagKey, TagValue> tags = null, string hashPrefix = "") {
-            ID = id;
-            Frame = frame;
-            Duration = duration;
-
-            _data = data;
+        public TextureABGR1555(
+            TextureCollectionType collection,
+            int id,
+            int frame,
+            int duration,
+            ushort[,] data,
+            Dictionary<TagKey, TagValue> tags = null,
+            string hashPrefix = ""
+        ) {
+            Collection  = collection;
+            ID          = id;
+            Frame       = frame;
+            Duration    = duration;
+            _data       = data;
             _hashPrefix = hashPrefix;
+
             Tags = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
         }
 
@@ -24,6 +33,7 @@ namespace SF3 {
         private byte[] _bitmapDataARGB8888 = null;
         private byte[] _bitmapDataARGB8888_Endcodes = null;
 
+        public TextureCollectionType Collection { get; }
         public int ID { get; }
         public int Frame { get; }
         public int Duration { get; }

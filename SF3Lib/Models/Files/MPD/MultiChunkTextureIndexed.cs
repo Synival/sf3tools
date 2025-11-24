@@ -10,7 +10,7 @@ namespace SF3.Models.Files.MPD {
         public const int c_width = 512;
 
         public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Palette palette, bool isTiled = false)
-        : base(0, 0, 0, FetchTextureData(datas, isTiled), format, palette, false)
+        : base(0, 0, 0, 0, FetchTextureData(datas, isTiled), format, palette, false)
         {
             IsTiled = isTiled;
         }

@@ -8,9 +8,19 @@ using SF3.Types;
 
 namespace SF3 {
     public class TextureIndexed : ITexture {
-        public TextureIndexed(int id, int frame, int duration, byte[,] data,
-            TexturePixelFormat format, Palette palette, bool zeroIsTransparent, Dictionary<TagKey, TagValue> tags = null, string hashPrefix = ""
+        public TextureIndexed(
+            TextureCollectionType collection,
+            int id,
+            int frame,
+            int duration,
+            byte[,] data,
+            TexturePixelFormat format,
+            Palette palette,
+            bool zeroIsTransparent,
+            Dictionary<TagKey, TagValue> tags = null,
+            string hashPrefix = ""
         ) {
+            Collection  = collection;
             ID          = id;
             Frame       = frame;
             Duration    = duration;
@@ -26,6 +36,7 @@ namespace SF3 {
         private byte[] _bitmapDataARGB1555 = null;
         private byte[] _bitmapDataARGB8888 = null;
 
+        public TextureCollectionType Collection { get; }
         public int ID { get; }
         public int Frame { get; }
         public int Duration { get; }

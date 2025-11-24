@@ -618,7 +618,6 @@ namespace SF3.Models.Files.MPD {
                     startId = nextPrimaryCollectionStartId;
                 else if (collection == TextureCollectionType.Chunk19ModelTextures || collection == TextureCollectionType.Chunk1ModelTextures)
                     startId = 0;
-                startId += ((int) collection) * TextureCollection.IDsPerCollectionType;
 
                 try {
                     var texCol = TextureCollection.Create(
@@ -670,7 +669,7 @@ namespace SF3.Models.Files.MPD {
                 TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
                 var tiledGroundImageData = CreateTiledImageData(TiledGroundTileImage, TiledGroundMapChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
-                TiledGroundImage = new TextureIndexed(0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
+                TiledGroundImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
             if (SkyBoxChunks?.Any() == true)
@@ -684,7 +683,7 @@ namespace SF3.Models.Files.MPD {
                 ForegroundTileImage = new MultiChunkTextureIndexed(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
                 var foregroundImageData = CreateTiledImageData(ForegroundTileImage, new IByteData[] { ForegroundMapChunk.DecompressedData }, 64, 1);
-                ForegroundImage = new TextureIndexed(0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
+                ForegroundImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
             }
 
             return tables.ToArray();

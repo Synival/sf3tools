@@ -4,7 +4,7 @@ using SF3.Types;
 
 namespace SF3.Utils {
     public static class TextureUtils {
-        public static ITexture StackTextures(int id, int frame, int duration, ITexture[] textures) {
+        public static ITexture StackTextures(TextureCollectionType collection, int id, int frame, int duration, ITexture[] textures) {
             if (textures.Length == 0)
                 return null;
 
@@ -14,13 +14,13 @@ namespace SF3.Utils {
 
             switch (expectedFormat) {
                 case TexturePixelFormat.ABGR1555:
-                    return StackTexturesABGR1555(id, frame, duration, textures);
+                    return StackTexturesABGR1555(collection, id, frame, duration, textures);
                 default:
                     throw new ArgumentException($"TexturePixelFormat '{expectedFormat}' not supported");
             }
         }
 
-        private static ITexture StackTexturesABGR1555(int id, int frame, int duration, ITexture[] textures) {
+        private static ITexture StackTexturesABGR1555(TextureCollectionType collection, int id, int frame, int duration, ITexture[] textures) {
             var frameDatas = textures.Select(x => x.ImageData16Bit).ToArray();
             var allData = new ushort[frameDatas.Max(x => x.GetLength(0)), frameDatas.Sum(x => x.GetLength(1))];
 
@@ -32,7 +32,7 @@ namespace SF3.Utils {
                         allData[x, row] = data[x, y];
             }
 
-            return new TextureABGR1555(id, frame, duration, allData);
+            return new TextureABGR1555(collection, id, frame, duration, allData);
         }
     }
 }

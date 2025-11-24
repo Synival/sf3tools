@@ -260,7 +260,7 @@ namespace SF3.Sprites {
                                 if (frame.Coding != SpriteImageCodingType.Ignore)
                                     bitmapData.FixSaturnTransparency(frame.Coding == SpriteImageCodingType.On);
 
-                                var texture = new TextureABGR1555(0, 0, 0, bitmapData);
+                                var texture = new TextureABGR1555(0, 0, 0, 0, bitmapData);
                                 var hash = texture.Hash;
                                 if (AddFrameRef(hash, spriteDef.Name, frameSize.Width, frameSize.Height, frameGroupName, frameDir))
                                     framesAdded++;
