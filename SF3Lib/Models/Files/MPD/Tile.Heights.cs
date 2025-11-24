@@ -6,8 +6,8 @@ namespace SF3.Models.Files.MPD {
     public partial class Tile {
         public float GetVisualVertexHeight(CornerType corner) {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
-            if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat)
-                return MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
+            if (MPD_File.SurfaceData?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat)
+                return MPD_File.SurfaceData.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
 
             // The model to show should come from the surface model.
             if (MPD_File.SurfaceModel?.VertexHeightBlockTable != null) {
@@ -16,8 +16,8 @@ namespace SF3.Models.Files.MPD {
             }
 
             // If that doesn't exist, fall back to the surface heightmap.
-            if (MPD_File.Surface?.HeightmapRowTable != null)
-                return MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, corner);
+            if (MPD_File.SurfaceData?.HeightmapRowTable != null)
+                return MPD_File.SurfaceData.HeightmapRowTable[Y].GetHeight(X, corner);
 
             // If *that* doesn't exist, there isn't a surface; return nothing.
             return 0;
@@ -25,8 +25,8 @@ namespace SF3.Models.Files.MPD {
 
         public float[] GetVisualVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
-            if (MPD_File.Surface?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat) {
-                var brHeight = MPD_File.Surface.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
+            if (MPD_File.SurfaceData?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat) {
+                var brHeight = MPD_File.SurfaceData.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
                 return new float[] { brHeight, brHeight, brHeight, brHeight };
             }
 
@@ -38,19 +38,19 @@ namespace SF3.Models.Files.MPD {
             }
 
             // If that doesn't exist, fall back to the surface heightmap.
-            if (MPD_File.Surface?.HeightmapRowTable != null)
-                return MPD_File.Surface.HeightmapRowTable[Y].GetQuadHeights(X);
+            if (MPD_File.SurfaceData?.HeightmapRowTable != null)
+                return MPD_File.SurfaceData.HeightmapRowTable[Y].GetQuadHeights(X);
 
             // If *that* doesn't exist, there isn't a surface; return nothing.
             return new float[] { 0, 0, 0, 0 };
         }
 
-        public float GetSurfaceVertexHeight(CornerType corner)
-            => MPD_File.Surface?.HeightmapRowTable?[Y]?.GetHeight(X, corner) ?? 0.0f;
-        public void SetSurfaceVertexHeight(CornerType corner, float value) {
-            if (MPD_File.Surface?.HeightTerrainRowTable == null)
+        public float GetSurfaceDataVertexHeight(CornerType corner)
+            => MPD_File.SurfaceData?.HeightmapRowTable?[Y]?.GetHeight(X, corner) ?? 0.0f;
+        public void SetSurfaceDataVertexHeight(CornerType corner, float value) {
+            if (MPD_File.SurfaceData?.HeightTerrainRowTable == null)
                 return;
-            MPD_File.Surface.HeightmapRowTable[Y].SetHeight(X, corner, value);
+            MPD_File.SurfaceData.HeightmapRowTable[Y].SetHeight(X, corner, value);
             Modified?.Invoke(this, EventArgs.Empty);
         }
 
@@ -73,17 +73,17 @@ namespace SF3.Models.Files.MPD {
             TriggerNeighborTileModified(otherTilesOffsetX, otherTilesOffsetY);
         }
 
-        public float GetAverageSurfaceHeight()
-            => (float) Math.Round(((CornerType[]) Enum.GetValues(typeof(CornerType))).Average(x => GetSurfaceVertexHeight(x) * 16f)) / 16f;
+        public float GetAverageSurfaceDataVertexHeight()
+            => (float) Math.Round(((CornerType[]) Enum.GetValues(typeof(CornerType))).Average(x => GetSurfaceDataVertexHeight(x) * 16f)) / 16f;
 
-        public void CopySurfaceVertexHeightToNonFlatNeighbors(CornerType corner) {
-            var height = GetSurfaceVertexHeight(corner);
+        public void CopySurfaceDataVertexHeightToNonFlatNeighbors(CornerType corner) {
+            var height = GetSurfaceDataVertexHeight(corner);
             var adjacentCorners = GetAdjacentTilesAtCorner(corner);
             foreach (var ac in adjacentCorners) {
                 var acTile = MPD_File.Tiles[ac.X, ac.Y];
                 if (!acTile.IsFlat) {
-                    acTile.SetSurfaceVertexHeight(ac.Corner, height);
-                    acTile.CenterHeight = acTile.GetAverageSurfaceHeight();
+                    acTile.SetSurfaceDataVertexHeight(ac.Corner, height);
+                    acTile.CenterHeight = acTile.GetAverageSurfaceDataVertexHeight();
                 }
             }
         }
@@ -97,9 +97,9 @@ namespace SF3.Models.Files.MPD {
         }
 
         public float CenterHeight {
-            get => (MPD_File.Surface != null) ? MPD_File.Surface.HeightTerrainRowTable[Y].GetHeight(X) : 0.0f;
+            get => (MPD_File.SurfaceData != null) ? MPD_File.SurfaceData.HeightTerrainRowTable[Y].GetHeight(X) : 0.0f;
             set {
-                MPD_File.Surface.HeightTerrainRowTable[Y].SetHeight(X, value);
+                MPD_File.SurfaceData.HeightTerrainRowTable[Y].SetHeight(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }

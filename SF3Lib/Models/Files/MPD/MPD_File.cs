@@ -544,8 +544,8 @@ namespace SF3.Models.Files.MPD {
             ModelCollections = modelsList.ToArray();
 
             if (chunkDatas[5] != null) {
-                Surface = Surface.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
-                tables.AddRange(Surface.Tables);
+                SurfaceData = SurfaceData.Create(chunkDatas[5].DecompressedData, NameGetterContext, 0x00, "Surface", 5);
+                tables.AddRange(SurfaceData.Tables);
             }
 
             // TODO: get this chunk loading with Ship2?
@@ -1006,7 +1006,7 @@ namespace SF3.Models.Files.MPD {
                             continue;
 
                         var tile = Tiles[tileX, tileZ];
-                        var tileY = tile.GetAverageSurfaceHeight();
+                        var tileY = tile.GetAverageSurfaceDataVertexHeight();
 
                         // Trees should be very close to the center of the tile vertically.
                         var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
@@ -1361,7 +1361,7 @@ namespace SF3.Models.Files.MPD {
 
             foreach (var tile in Tiles) {
                 // This *would* report irregularities in heightmaps, if the existed :)
-                var moveHeights  = corners.ToDictionary(c => c, tile.GetSurfaceVertexHeight);
+                var moveHeights  = corners.ToDictionary(c => c, tile.GetSurfaceDataVertexHeight);
                 if (tile.IsFlat) {
                     var br = CornerType.BottomRight;
                     foreach (var c in corners) {
@@ -1692,7 +1692,7 @@ namespace SF3.Models.Files.MPD {
         public ModelCollection[] ModelCollections { get; private set; }
 
         [BulkCopyRecurse]
-        public Surface Surface { get; private set; }
+        public SurfaceData SurfaceData { get; private set; }
 
         public int PrimaryTextureChunksFirstIndex { get; }
         public int PrimaryTextureChunksLastIndex { get; }

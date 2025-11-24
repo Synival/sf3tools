@@ -138,12 +138,12 @@ namespace SF3.Tests.Compression {
             RunOnAllTestCases((testCase, mpdFile) => {
                 if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
                     return;
-                if (mpdFile.Surface == null)
+                if (mpdFile.SurfaceData == null)
                     return;
 
                 var rng = new Random();
                 var rngBytes = new byte[4];
-                foreach (var row in mpdFile.Surface.HeightmapRowTable) {
+                foreach (var row in mpdFile.SurfaceData.HeightmapRowTable) {
                     for (var x = 0; x < 64; x++) {
                         rng.NextBytes(rngBytes);
                         row.SetQuadHeights(x, rngBytes.Select(x => x / 16f).ToArray());

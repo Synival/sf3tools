@@ -11,8 +11,8 @@ namespace SF3.Models.Files.MPD {
         /// Updates all normals for the tile, also correcting neighboring tiles.
         /// </summary>
         /// <param name="settings">Settings for normal calculations.</param>
-        public void UpdateNormals(NormalCalculationSettings settings) {
-            MPD_File.SurfaceModel?.UpdateVertexNormals(X, Y, MPD_File.Surface.HeightmapRowTable, settings);
+        public void UpdateVertexNormals(NormalCalculationSettings settings) {
+            MPD_File.SurfaceModel?.UpdateVertexNormals(X, Y, MPD_File.SurfaceData.HeightmapRowTable, settings);
             for (var y = -1; y <= 1; y++)
                 for (var x = -1; x <= 1; x++)
                     TriggerNeighborTileModified(x, y);
@@ -27,7 +27,7 @@ namespace SF3.Models.Files.MPD {
             var vyCenter = TileToVertexY(Y, corner);
 
             // Normals need to be updated in a 3x3 grid.
-            var heightmapRowTable = MPD_File.Surface.HeightmapRowTable;
+            var heightmapRowTable = MPD_File.SurfaceData.HeightmapRowTable;
             for (var x = -1; x <= 1; x++) {
                 for (var y = -1; y <= 1; y++) {
                     var vx = x + vxCenter;

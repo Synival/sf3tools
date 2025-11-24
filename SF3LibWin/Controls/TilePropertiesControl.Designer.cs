@@ -31,9 +31,9 @@ namespace SF3.Win.Controls {
             nudMoveHeightmapBL = new DarkModeNumericUpDown();
             nudMoveHeightmapTR = new DarkModeNumericUpDown();
             nudMoveHeightmapTL = new DarkModeNumericUpDown();
-            nudMoveHeight = new DarkModeNumericUpDown();
+            nudMoveCenterHeight = new DarkModeNumericUpDown();
             labelMoveHeightmap = new DarkModeLabel();
-            labelMoveHeight = new DarkModeLabel();
+            labelMoveCenterHeight = new DarkModeLabel();
             cbMoveTerrain = new DarkModeComboBox();
             labelMoveTerrain = new DarkModeLabel();
             gbEvent = new DarkModeGroupBox();
@@ -55,7 +55,7 @@ namespace SF3.Win.Controls {
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTL).BeginInit();
-            ((System.ComponentModel.ISupportInitialize) nudMoveHeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) nudMoveCenterHeight).BeginInit();
             gbEvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudEventID).BeginInit();
             gbModel.SuspendLayout();
@@ -69,9 +69,9 @@ namespace SF3.Win.Controls {
             gbMovement.Controls.Add(nudMoveHeightmapBL);
             gbMovement.Controls.Add(nudMoveHeightmapTR);
             gbMovement.Controls.Add(nudMoveHeightmapTL);
-            gbMovement.Controls.Add(nudMoveHeight);
+            gbMovement.Controls.Add(nudMoveCenterHeight);
             gbMovement.Controls.Add(labelMoveHeightmap);
-            gbMovement.Controls.Add(labelMoveHeight);
+            gbMovement.Controls.Add(labelMoveCenterHeight);
             gbMovement.Controls.Add(cbMoveTerrain);
             gbMovement.Controls.Add(labelMoveTerrain);
             gbMovement.Location = new System.Drawing.Point(3, 77);
@@ -131,50 +131,60 @@ namespace SF3.Win.Controls {
             nudMoveHeightmapTL.Size = new System.Drawing.Size(88, 23);
             nudMoveHeightmapTL.TabIndex = 3;
             // 
-            // nudMoveHeight
+            // nudMoveCenterHeight
             // 
-            nudMoveHeight.DecimalPlaces = 4;
-            nudMoveHeight.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
-            nudMoveHeight.Location = new System.Drawing.Point(73, 52);
-            nudMoveHeight.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
-            nudMoveHeight.Name = "nudMoveHeight";
-            nudMoveHeight.Size = new System.Drawing.Size(120, 23);
-            nudMoveHeight.TabIndex = 1;
+            nudMoveCenterHeight.DecimalPlaces = 4;
+            nudMoveCenterHeight.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
+            nudMoveCenterHeight.Location = new System.Drawing.Point(105, 52);
+            nudMoveCenterHeight.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
+            nudMoveCenterHeight.Name = "nudMoveCenterHeight";
+            nudMoveCenterHeight.Size = new System.Drawing.Size(88, 23);
+            nudMoveCenterHeight.TabIndex = 1;
             // 
             // labelMoveHeightmap
             // 
             labelMoveHeightmap.AutoSize = true;
+            labelMoveHeightmap.DisabledColor = System.Drawing.Color.Empty;
+            labelMoveHeightmap.IsSeparator = false;
             labelMoveHeightmap.Location = new System.Drawing.Point(6, 112);
             labelMoveHeightmap.Name = "labelMoveHeightmap";
+            labelMoveHeightmap.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelMoveHeightmap.Size = new System.Drawing.Size(70, 15);
             labelMoveHeightmap.TabIndex = 5;
             labelMoveHeightmap.Text = "Heightmap:";
             // 
-            // labelMoveHeight
+            // labelMoveCenterHeight
             // 
-            labelMoveHeight.AutoSize = true;
-            labelMoveHeight.Location = new System.Drawing.Point(6, 54);
-            labelMoveHeight.Name = "labelMoveHeight";
-            labelMoveHeight.Size = new System.Drawing.Size(46, 15);
-            labelMoveHeight.TabIndex = 0;
-            labelMoveHeight.Text = "Height:";
+            labelMoveCenterHeight.AutoSize = true;
+            labelMoveCenterHeight.DisabledColor = System.Drawing.Color.Empty;
+            labelMoveCenterHeight.IsSeparator = false;
+            labelMoveCenterHeight.Location = new System.Drawing.Point(6, 54);
+            labelMoveCenterHeight.Name = "labelMoveCenterHeight";
+            labelMoveCenterHeight.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelMoveCenterHeight.Size = new System.Drawing.Size(84, 15);
+            labelMoveCenterHeight.TabIndex = 0;
+            labelMoveCenterHeight.Text = "Center Height:";
             // 
             // cbMoveTerrain
             // 
             cbMoveTerrain.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             cbMoveTerrain.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            cbMoveTerrain.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             cbMoveTerrain.FormattingEnabled = true;
             cbMoveTerrain.Location = new System.Drawing.Point(73, 22);
             cbMoveTerrain.Name = "cbMoveTerrain";
-            cbMoveTerrain.Size = new System.Drawing.Size(121, 23);
+            cbMoveTerrain.Size = new System.Drawing.Size(121, 24);
             cbMoveTerrain.TabIndex = 0;
             cbMoveTerrain.Text = "Desert";
             // 
             // labelMoveTerrain
             // 
             labelMoveTerrain.AutoSize = true;
+            labelMoveTerrain.DisabledColor = System.Drawing.Color.Empty;
+            labelMoveTerrain.IsSeparator = false;
             labelMoveTerrain.Location = new System.Drawing.Point(6, 25);
             labelMoveTerrain.Name = "labelMoveTerrain";
+            labelMoveTerrain.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelMoveTerrain.Size = new System.Drawing.Size(46, 15);
             labelMoveTerrain.TabIndex = 3;
             labelMoveTerrain.Text = "Terrain:";
@@ -203,8 +213,11 @@ namespace SF3.Win.Controls {
             // labelEventID
             // 
             labelEventID.AutoSize = true;
+            labelEventID.DisabledColor = System.Drawing.Color.Empty;
+            labelEventID.IsSeparator = false;
             labelEventID.Location = new System.Drawing.Point(6, 25);
             labelEventID.Name = "labelEventID";
+            labelEventID.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelEventID.Size = new System.Drawing.Size(53, 15);
             labelEventID.TabIndex = 10;
             labelEventID.Text = "Event ID:";
@@ -230,7 +243,7 @@ namespace SF3.Win.Controls {
             // 
             nudModelTextureID.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
             nudModelTextureID.Hexadecimal = true;
-            nudModelTextureID.Location = new System.Drawing.Point(73, 20);
+            nudModelTextureID.Location = new System.Drawing.Point(74, 23);
             nudModelTextureID.Maximum = new decimal(new int[] { 255, 0, 0, 0 });
             nudModelTextureID.Name = "nudModelTextureID";
             nudModelTextureID.Size = new System.Drawing.Size(120, 21);
@@ -249,18 +262,22 @@ namespace SF3.Win.Controls {
             // 
             // cbModelRotate
             // 
+            cbModelRotate.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             cbModelRotate.FormattingEnabled = true;
             cbModelRotate.Location = new System.Drawing.Point(73, 80);
             cbModelRotate.Name = "cbModelRotate";
-            cbModelRotate.Size = new System.Drawing.Size(121, 23);
+            cbModelRotate.Size = new System.Drawing.Size(121, 24);
             cbModelRotate.TabIndex = 10;
             cbModelRotate.Text = "90° CW";
             // 
             // labelModelRotate
             // 
             labelModelRotate.AutoSize = true;
+            labelModelRotate.DisabledColor = System.Drawing.Color.Empty;
+            labelModelRotate.IsSeparator = false;
             labelModelRotate.Location = new System.Drawing.Point(6, 83);
             labelModelRotate.Name = "labelModelRotate";
+            labelModelRotate.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelModelRotate.Size = new System.Drawing.Size(44, 15);
             labelModelRotate.TabIndex = 13;
             labelModelRotate.Text = "Rotate:";
@@ -268,8 +285,11 @@ namespace SF3.Win.Controls {
             // labelModelFlip
             // 
             labelModelFlip.AutoSize = true;
+            labelModelFlip.DisabledColor = System.Drawing.Color.Empty;
+            labelModelFlip.IsSeparator = false;
             labelModelFlip.Location = new System.Drawing.Point(6, 112);
             labelModelFlip.Name = "labelModelFlip";
+            labelModelFlip.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelModelFlip.Size = new System.Drawing.Size(29, 15);
             labelModelFlip.TabIndex = 12;
             labelModelFlip.Text = "Flip:";
@@ -277,27 +297,34 @@ namespace SF3.Win.Controls {
             // labelModelTextureID
             // 
             labelModelTextureID.AutoSize = true;
+            labelModelTextureID.DisabledColor = System.Drawing.Color.Empty;
+            labelModelTextureID.IsSeparator = false;
             labelModelTextureID.Location = new System.Drawing.Point(6, 25);
             labelModelTextureID.Name = "labelModelTextureID";
+            labelModelTextureID.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelModelTextureID.Size = new System.Drawing.Size(62, 15);
             labelModelTextureID.TabIndex = 11;
             labelModelTextureID.Text = "Texture ID:";
             // 
             // cbModelFlip
             // 
+            cbModelFlip.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             cbModelFlip.FormattingEnabled = true;
             cbModelFlip.Location = new System.Drawing.Point(73, 109);
             cbModelFlip.Name = "cbModelFlip";
-            cbModelFlip.Size = new System.Drawing.Size(121, 23);
+            cbModelFlip.Size = new System.Drawing.Size(121, 24);
             cbModelFlip.TabIndex = 11;
             cbModelFlip.Text = "Horizontal";
             // 
             // labelTileEdited
             // 
             labelTileEdited.AutoSize = true;
+            labelTileEdited.DisabledColor = System.Drawing.Color.Empty;
             labelTileEdited.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point,  0);
+            labelTileEdited.IsSeparator = false;
             labelTileEdited.Location = new System.Drawing.Point(5, 5);
             labelTileEdited.Name = "labelTileEdited";
+            labelTileEdited.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelTileEdited.Size = new System.Drawing.Size(69, 15);
             labelTileEdited.TabIndex = 3;
             labelTileEdited.Text = "Tile: (none)";
@@ -305,8 +332,11 @@ namespace SF3.Win.Controls {
             // labelRealCoordinates
             // 
             labelRealCoordinates.AutoSize = true;
+            labelRealCoordinates.DisabledColor = System.Drawing.Color.Empty;
+            labelRealCoordinates.IsSeparator = false;
             labelRealCoordinates.Location = new System.Drawing.Point(5, 24);
             labelRealCoordinates.Name = "labelRealCoordinates";
+            labelRealCoordinates.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelRealCoordinates.Size = new System.Drawing.Size(137, 45);
             labelRealCoordinates.TabIndex = 4;
             labelRealCoordinates.Text = "Center Real Coordinates:\r\nAddress 1:\r\nAddress 2:";
@@ -340,7 +370,7 @@ namespace SF3.Win.Controls {
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTR).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapTL).EndInit();
-            ((System.ComponentModel.ISupportInitialize) nudMoveHeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize) nudMoveCenterHeight).EndInit();
             gbEvent.ResumeLayout(false);
             gbEvent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudEventID).EndInit();
@@ -354,7 +384,7 @@ namespace SF3.Win.Controls {
         #endregion
 
         private DarkModeGroupBox gbMovement;
-        private DarkModeLabel labelMoveHeight;
+        private DarkModeLabel labelMoveCenterHeight;
         private DarkModeGroupBox gbEvent;
         private DarkModeGroupBox gbModel;
         private DarkModeLabel labelMoveTerrain;
@@ -369,7 +399,7 @@ namespace SF3.Win.Controls {
         private DarkModeCheckBox cbModelTileIsFlat;
         private DarkModeLabel labelTileEdited;
         private DarkModeLabel labelRealCoordinates;
-        private DarkModeNumericUpDown nudMoveHeight;
+        private DarkModeNumericUpDown nudMoveCenterHeight;
         private DarkModeNumericUpDown nudMoveHeightmapBR;
         private DarkModeNumericUpDown nudMoveHeightmapBL;
         private DarkModeNumericUpDown nudMoveHeightmapTR;

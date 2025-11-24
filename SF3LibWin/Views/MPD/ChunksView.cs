@@ -31,8 +31,8 @@ namespace SF3.Win.Views.MPD {
                 AddChunkView(Model.SurfaceModel.ChunkIndex, "Surface Model", (name) => new SurfaceModelChunkView(name, Model.SurfaceModel));
             if (Model.TextureAnimations != null)
                 AddChunkView(3, "Texture Animation Frames", (name) => new TextureAnimFramesView(name, Model, ngc));
-            if (Model.Surface != null)
-                AddChunkView(Model.Surface.ChunkIndex, "Surface", (name) => new SurfaceChunkView(name, Model.Surface));
+            if (Model.SurfaceData != null)
+                AddChunkView(Model.SurfaceData.ChunkIndex, "Surface Data", (name) => new SurfaceChunkView(name, Model.SurfaceData));
 
             if (Model.ModelCollections != null)
                 foreach (var modelCollection in Model.ModelCollections)

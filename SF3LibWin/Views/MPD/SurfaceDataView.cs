@@ -2,8 +2,8 @@
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
-    public class SurfaceView : TabView {
-        public SurfaceView(string name, Surface model) : base(name) {
+    public class SurfaceDataView : TabView {
+        public SurfaceDataView(string name, SurfaceData model) : base(name) {
             Model = model;
         }
 
@@ -19,6 +19,6 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
-        public Surface Model { get; }
+        public SurfaceData Model { get; }
     }
 }

@@ -124,7 +124,7 @@ namespace SF3.Models.Files.MPD {
         int[] ModelsChunkIndices { get; }
         ModelCollection[] ModelCollections { get; }
 
-        Surface Surface { get; }
+        SurfaceData SurfaceData { get; }
 
         int PrimaryTextureChunksFirstIndex { get; }
         int PrimaryTextureChunksLastIndex { get; }

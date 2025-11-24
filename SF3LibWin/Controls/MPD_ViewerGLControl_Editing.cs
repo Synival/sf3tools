@@ -229,8 +229,8 @@ namespace SF3.Win.Controls {
                         foreach (var kv in layersAtVertex)
                             vertexHeight += GetHeightBonusForTileType(kv.Key, kv.Value, layersNearby[kv.Key]);
 
-                        affectedTile.SetSurfaceVertexHeight(corner, vertexHeight);
-                        affectedTile.CopySurfaceVertexHeightToNonFlatNeighbors(corner);
+                        affectedTile.SetSurfaceDataVertexHeight(corner, vertexHeight);
+                        affectedTile.CopySurfaceDataVertexHeightToNonFlatNeighbors(corner);
                         if (updateSurfaceModel)
                             affectedTile.SetSurfaceModelVertexHeight(corner, vertexHeight);
                     }
@@ -247,8 +247,8 @@ namespace SF3.Win.Controls {
                 for (int ty = y - 2 - nearbyRange; ty <= y + 2 + nearbyRange; ty++) {
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
                         var affectedTile = MPD_File.Tiles[tx, ty];
-                        affectedTile.CenterHeight = affectedTile.GetAverageSurfaceHeight();
-                        affectedTile.UpdateNormals(settings);
+                        affectedTile.CenterHeight = affectedTile.GetAverageSurfaceDataVertexHeight();
+                        affectedTile.UpdateVertexNormals(settings);
                     }
                 }
             }
