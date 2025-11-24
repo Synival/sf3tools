@@ -219,7 +219,7 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeMovableModelCollections(MPDHeaderModel header) {
             var tables = new List<ITable>();
 
-            var modelsList = new List<ModelCollection>();
+            var modelsList = new List<IMPD_ModelCollection>();
             if (ModelCollections != null)
                 modelsList.AddRange(ModelCollections);
 
@@ -229,7 +229,7 @@ namespace SF3.Models.Files.MPD {
                 if (offset == 0)
                     continue;
 
-                var newModel = ModelCollection.Create(Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), i);
+                var newModel = ModelCollection.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), i);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
@@ -528,7 +528,7 @@ namespace SF3.Models.Files.MPD {
 
             var tables = new List<ITable>();
 
-            var modelsList = new List<ModelCollection>();
+            var modelsList = new List<IMPD_ModelCollection>();
             if (ModelCollections != null)
                 modelsList.AddRange(ModelCollections);
 
@@ -538,7 +538,7 @@ namespace SF3.Models.Files.MPD {
                     : (chunkDatas[21] != null && mc.Index == 1) ? ModelCollectionType.Chunk1Model
                     : ModelCollectionType.PrimaryModels;
 
-                var newModel = ModelCollection.Create(mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
+                var newModel = ModelCollection.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
@@ -581,8 +581,9 @@ namespace SF3.Models.Files.MPD {
 
             // Textures in models are ABGR1555.
             foreach (var models in ModelCollections) {
-                if (models?.AttrTablesByMemoryAddress != null)
-                    foreach (var attrTable in models.AttrTablesByMemoryAddress.Values)
+                var fileModels = (ModelCollection) models;
+                if (fileModels?.AttrTablesByMemoryAddress != null)
+                    foreach (var attrTable in fileModels.AttrTablesByMemoryAddress.Values)
                         foreach (var attr in attrTable)
                             primaryPixelFormats[attr.TextureNo] = TexturePixelFormat.ABGR1555;
             }
@@ -642,12 +643,6 @@ namespace SF3.Models.Files.MPD {
             }
 
             TextureCollections = texColList.ToArray();
-
-            // Big, abstract collection of textures.
-            Textures = TextureCollections
-                .SelectMany(x => x.TextureTable)
-                .Select(x => x.Texture)
-                .ToList();
 
             // Now that textures are loaded, build the texture animation frame data.
             // TODO: This function is a MESS. Please refactor it!!
@@ -977,7 +972,8 @@ namespace SF3.Models.Files.MPD {
 
             // Gather a list of models that appear to be trees, associated with their tile.
             var treeModels = new List<TreeModelInfo>();
-            foreach (var mc in ModelCollections) {
+            foreach (var imc in ModelCollections) {
+                var mc = (ModelCollection) imc;
                 if (mc == null || !mc.ChunkIndex.HasValue)
                     continue;
 
@@ -1222,8 +1218,8 @@ namespace SF3.Models.Files.MPD {
             var flags = Flags;
             var errors = new List<string>();
 
-            var mc1  = ModelCollections.FirstOrDefault(x => x.ChunkIndex == 1);
-            var mc20 = ModelCollections.FirstOrDefault(x => x.ChunkIndex == 20);
+            var mc1  = ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == 1);
+            var mc20 = ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
                 var expectedLmm = flags.Chunk1IsLoadedFromLowMemory;
@@ -1487,7 +1483,7 @@ namespace SF3.Models.Files.MPD {
 
         public PDataModel GetTreePData0() {
             var modelChunkIndex = Flags.Chunk20IsModels ? 20 : 1;
-            var mc = ModelCollections.FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
+            var mc = ModelCollections.Cast<ModelCollection>().FirstOrDefault(x => x.ChunkIndex == modelChunkIndex);
             if (mc == null)
                 return null;
 
@@ -1698,7 +1694,7 @@ namespace SF3.Models.Files.MPD {
         public int[] ModelsChunkIndices { get; private set; } = null;
 
         [BulkCopyRecurse]
-        public ModelCollection[] ModelCollections { get; private set; }
+        public IEnumerable<IMPD_ModelCollection> ModelCollections { get; private set; }
 
         [BulkCopyRecurse]
         public SurfaceData SurfaceData { get; private set; }
@@ -1712,7 +1708,6 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public TextureCollection[] TextureCollections { get; private set; }
 
-        public List<ITexture> Textures { get; private set; }
         public IMPD_Surface Surface { get; private set; }
 
         public int RepeatingGroundChunk1Index { get; }

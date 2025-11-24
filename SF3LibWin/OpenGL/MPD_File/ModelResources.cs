@@ -42,42 +42,16 @@ namespace SF3.Win.OpenGL.MPD_File {
                 SGL_ModelsByIDByCollection[collection] = [];
         }
 
-        private TextureCollectionType GetTextureCollection(ModelCollectionType modelCollection) {
-            switch (modelCollection) {
-                case ModelCollectionType.PrimaryModels:
-                    return TextureCollectionType.PrimaryTextures;
-                case ModelCollectionType.Chunk19Model:
-                    return TextureCollectionType.Chunk19ModelTextures;
-                case ModelCollectionType.Chunk1Model:
-                    return TextureCollectionType.Chunk1ModelTextures;
-                case ModelCollectionType.MovableModels1:
-                    return TextureCollectionType.MovableModels1;
-                case ModelCollectionType.MovableModels2:
-                    return TextureCollectionType.MovableModels2;
-                case ModelCollectionType.MovableModels3:
-                    return TextureCollectionType.MovableModels3;
-                default:
-                    throw new ArgumentException(nameof(modelCollection));
-            }
-        }
-
         public struct ModelAnimationInfo {
             public ITexture[] Textures;
             public int FrameTimerStart;
         }
 
-        private Dictionary<int, ITexture> GetTextureDictionaryByCollection(IMPD_File mpdFile, TextureCollectionType texCollection) {
-            return mpdFile.TextureCollections != null ? mpdFile.TextureCollections
-                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == texCollection)
-                .SelectMany(x => x.TextureTable)
-                .GroupBy(x => x.ID)
-                .Select(x => x.First())
-                .ToDictionary(x => x.ID, x => x.Texture)
-                : [];
-        }
+        private Dictionary<int, ITexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection)
+            => modelCollection.Textures.ToDictionary(x => x.ID, x => x);
 
-        private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_File mpdFile, TextureCollectionType texCollection) {
-            if (texCollection != TextureCollectionType.PrimaryTextures || mpdFile.TextureAnimations == null)
+        private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
+            if (modelCollection.Collection != ModelCollectionType.PrimaryModels || mpdFile.TextureAnimations == null)
                 return [];
 
             return mpdFile.TextureAnimations
@@ -105,7 +79,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 }
 
                 // Get all instances of models in this collection.
-                var instances = mc.GetModelInstances();
+                var instances = mc.ModelInstances;
                 modelInstanceList.AddRange(instances);
 
                 // There is a function that scans for models with the tag '2000' and forcibly changes all the textures
@@ -135,9 +109,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .Distinct()
                     .ToArray();
 
-                var texCollection = GetTextureCollection(mc.Collection);
-                var texturesById = GetTextureDictionaryByCollection(mpdFile, texCollection);
-                var animationsById = GetAnimationDictionaryByCollection(mpdFile, texCollection);
+                var texturesById = GetTextureDictionaryByCollection(mc);
+                var animationsById = GetAnimationDictionaryByCollection(mc, mpdFile);
 
                 foreach (var id in uniqueModelIDs) {
                     if (id == -1)
@@ -145,7 +118,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                     var sglModel = sglModelsByID.TryGetValue(id, out var sglModelOut) ? sglModelOut : null;
                     if (sglModel == null)
-                        sglModelsByID[id] = sglModel = mc.GetSGLModel(id);
+                        sglModelsByID[id] = sglModel = mc.GetModel(id);
                     if (sglModel == null)
                         continue;
 
@@ -173,9 +146,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             InitDictsForType(models.Collection);
             SGL_ModelsByIDByCollection[models.Collection][sglModel.ID] = sglModel;
 
-            var texCollection  = GetTextureCollection(models.Collection);
-            var texturesById   = GetTextureDictionaryByCollection(mpdFile, texCollection);
-            var animationsById = GetAnimationDictionaryByCollection(mpdFile, texCollection);
+            var texturesById = GetTextureDictionaryByCollection(models);
+            var animationsById = GetAnimationDictionaryByCollection(models, mpdFile);
 
             CreateAndAddQuadModels(mpdFile, models.Collection, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
 

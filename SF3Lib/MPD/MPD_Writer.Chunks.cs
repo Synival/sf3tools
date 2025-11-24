@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommonLib.Utils;
@@ -18,7 +19,7 @@ namespace SF3.MPD {
             if (mc == null)
                 WriteEmptyChunk();
             else
-                WriteModelChunk(mc.GetSGLModels(), mc.GetModelInstances(), mpd.Flags.HighMemoryHasModels);
+                WriteModelChunk(mc.Models, mc.ModelInstances, mpd.Flags.HighMemoryHasModels);
 
             // Chunk[2] is the surface model.
             // TODO: In Scenario 2+, this could be Chunk[20].
@@ -37,19 +38,26 @@ namespace SF3.MPD {
             WriteSurfaceDataChunk(mpd.Surface);
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
+            IEnumerable<ITexture> GetTexturesForCollection(ModelCollectionType collection) {
+                return mpd.ModelCollections
+                    .Where(x => x.Collection == collection)
+                    .SelectMany(x => x.Textures)
+                    .ToArray();
+            }
+
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             if (mpd.Flags.HasChunk19Model) {
-                WriteTextureChunks(mpd.Textures.Where(x => x.Collection == TextureCollectionType.PrimaryTextures).ToArray(), chunkCount: 4, startID: 0);
-                WriteTextureChunks(mpd.Textures.Where(x => x.Collection == TextureCollectionType.Chunk19ModelTextures).ToArray(), chunkCount: 1, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(ModelCollectionType.PrimaryModels), chunkCount: 4, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(ModelCollectionType.Chunk19Model), chunkCount: 1, startID: 0);
             }
             else
-                WriteTextureChunks(mpd.Textures.Where(x => x.Collection == TextureCollectionType.PrimaryTextures).ToArray(), chunkCount: 5, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(ModelCollectionType.PrimaryModels), chunkCount: 5, startID: 0);
 
             // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
             // (it's so silly that it works this way, lol)
-            var chest1Textures = mpd.Textures.Where(x => x.Collection == TextureCollectionType.MovableModels1).ToArray();
-            var chest2Textures = mpd.Textures.Where(x => x.Collection == TextureCollectionType.MovableModels2).ToArray();
-            var barrelTextures = mpd.Textures.Where(x => x.Collection == TextureCollectionType.MovableModels3).ToArray();
+            var chest1Textures = GetTexturesForCollection(ModelCollectionType.MovableModels1);
+            var chest2Textures = GetTexturesForCollection(ModelCollectionType.MovableModels2);
+            var barrelTextures = GetTexturesForCollection(ModelCollectionType.MovableModels3);
 
             WriteTextureChunk(chest1Textures, 0, out _);
             WriteTextureChunk(chest2Textures, 0, out _);

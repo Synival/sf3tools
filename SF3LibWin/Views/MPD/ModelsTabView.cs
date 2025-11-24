@@ -6,8 +6,9 @@ using SF3.Models.Tables.MPD.TextureCollection;
 namespace SF3.Win.Views.MPD {
     public class ModelsTabView : TabView {
         public ModelsTabView(string name, IMPD_File model) : base(name) {
-            var allModelInstances = model.ModelCollections.Where(x => x != null).Select(x => x.ModelInstanceTable).ToList();
-            var allPDatas = model.ModelCollections.Where(x => x != null).Select(x => x.PDataTable).ToList();
+            var modelCollections = model.ModelCollections.Where(x => x != null).Cast<ModelCollection>();
+            var allModelInstances = modelCollections.Select(x => x.ModelInstanceTable).ToList();
+            var allPDatas = modelCollections.Select(x => x.PDataTable).ToList();
 
             AllModelInstancesTable = AllModelInstancesTable.Create("AllModelInstances", allModelInstances);
             AllPDatasTable = AllPDatasTable.Create("AllPDatas", allPDatas);

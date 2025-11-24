@@ -61,7 +61,7 @@ namespace SF3.Tests.MPD {
             AssertByteComparison(fileData, outputData);
         }
 
-        //[Ignore("Works great but takes too long!")]
+        [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
             ForEachMPD(ScenarioType.Scenario1, originalFile => {

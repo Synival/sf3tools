@@ -126,7 +126,9 @@ namespace MPD_DataSearcher {
                                 .Select(x => new DataRange(mpdFileData, x.Name, x.Address, x.Address + x.Size))
                             );
 
-                            foreach (var mc in mpdFile!.ModelCollections) {
+                            foreach (var imc in mpdFile!.ModelCollections) {
+                                var mc = (ModelCollection) imc;
+
                                 var mh = mc.ModelsHeader;
                                 if (mh != null)
                                     AddDataRange(mh.Name, mh.Data.Data, mh.Address, mh.Size);

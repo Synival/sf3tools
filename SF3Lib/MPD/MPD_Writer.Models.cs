@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.SGL;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteModelChunk(ISGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */, bool isHighMemory)
+        public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances /* TODO: collision line data */, bool isHighMemory)
             => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, isHighMemory));
 
-        public void WriteModelChunkContent(ISGL_Model[] models, IMPD_ModelInstance[] instances /* TODO: collision line data */, bool isHighMemory) {
+        public void WriteModelChunkContent(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances /* TODO: collision line data */, bool isHighMemory) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -19,7 +20,7 @@ namespace SF3.MPD {
             WriteMPDPointer(null);
             var collisionBlocksOffset = CurrentOffset;
             WriteMPDPointer(null);
-            WriteUShort((ushort) (instances?.Length ?? 0));
+            WriteUShort((ushort) (instances?.Count() ?? 0));
 
             // Model instances immediately follow the header.
             if (instances != null)

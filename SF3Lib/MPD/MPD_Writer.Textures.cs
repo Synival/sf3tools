@@ -16,9 +16,9 @@ namespace SF3.MPD {
             }
         }
 
-        public void WriteTextureChunk(ITexture[] sortedTextures, int startID, out int textureCount) {
+        public void WriteTextureChunk(IEnumerable<ITexture> sortedTextures, int startID, out int textureCount) {
             int textureCountBigDumbLocal = 0;
-            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures, startID, out textureCountBigDumbLocal));
+            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal));
             textureCount = textureCountBigDumbLocal;
         }
 
@@ -26,7 +26,8 @@ namespace SF3.MPD {
             // Figure out how many textures we can write here. Enforce a limit 0x10000 bytes worth of texture data.
             textureCount = 0;
             int totalTextureDataSize = 0;
-            for (int id = startID; id < sortedTextures.Length; id++) {
+
+            for (int id = startID; id < sortedTextures.Count(); id++) {
                 var texture = sortedTextures[id];
 
                 // Size of texture, also accounting for its entry in the table.

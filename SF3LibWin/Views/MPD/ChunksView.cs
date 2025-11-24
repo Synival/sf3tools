@@ -34,10 +34,13 @@ namespace SF3.Win.Views.MPD {
             if (Model.SurfaceData != null)
                 AddChunkView(Model.SurfaceData.ChunkIndex, "Surface Data", (name) => new SurfaceChunkView(name, Model.SurfaceData));
 
-            if (Model.ModelCollections != null)
-                foreach (var modelCollection in Model.ModelCollections)
+            if (Model.ModelCollections != null) {
+                foreach (var iModelCollection in Model.ModelCollections) {
+                    var modelCollection = (ModelCollection) iModelCollection;
                     if (modelCollection != null && modelCollection.ChunkIndex.HasValue)
                         AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, Model, modelCollection));
+                }
+            }
 
             if (Model.TextureCollections != null)
                 foreach (var texCollection in Model.TextureCollections)

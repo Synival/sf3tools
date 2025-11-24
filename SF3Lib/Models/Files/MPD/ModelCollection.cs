@@ -14,22 +14,37 @@ using SF3.Types;
 namespace SF3.Models.Files.MPD {
     public class ModelCollection : TableFile, IMPD_ModelCollection {
         protected ModelCollection(
-            IByteData data, INameGetterContext nameContext, int address, string name,
-            ScenarioType scenario, int? chunkIndex, ModelCollectionType collection)
-        : base(data, nameContext) {
+            IMPD_File mpdFile,
+            IByteData data, 
+            INameGetterContext nameContext,
+            int address,
+            string name,
+            ScenarioType scenario,
+            int? chunkIndex,
+            ModelCollectionType collection
+        ) : base(data, nameContext)
+        {
+            MPD_File   = mpdFile;
             Address    = address;
             Name       = name;
-            Scenario   = scenario;
             Collection = collection;
             ChunkIndex = chunkIndex;
             MovableModelsIndex = null;
+            TextureCollection = GetTextureCollection();
         }
 
-        protected ModelCollection(IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex)
-        : base(data, nameContext) {
+        protected ModelCollection(
+            IMPD_File mpdFile,
+            IByteData data,
+            INameGetterContext nameContext,
+            int address,
+            string name,
+            int movableModelsIndex
+        ) : base(data, nameContext)
+        {
+            MPD_File   = mpdFile;
             Address    = address;
             Name       = name;
-            Scenario   = (ScenarioType) (-1);
 
             Collection =
                 (movableModelsIndex == 0) ? ModelCollectionType.MovableModels1 :
@@ -39,19 +54,20 @@ namespace SF3.Models.Files.MPD {
 
             ChunkIndex = null;
             MovableModelsIndex = movableModelsIndex;
+            TextureCollection = GetTextureCollection();
         }
 
         public static ModelCollection Create(
-            IByteData data, INameGetterContext nameContext, int address, string name,
+            IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name,
             ScenarioType scenario, int? chunkIndex, ModelCollectionType modelCollection
         ) {
-            var newFile = new ModelCollection(data, nameContext, address, name, scenario, chunkIndex, modelCollection);
+            var newFile = new ModelCollection(mpdFile, data, nameContext, address, name, scenario, chunkIndex, modelCollection);
             newFile.Init();
             return newFile;
         }
 
-        public static ModelCollection Create(IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex) {
-            var newFile = new ModelCollection(data, nameContext, address, name, movableModelsIndex);
+        public static ModelCollection Create(IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex) {
+            var newFile = new ModelCollection(mpdFile, data, nameContext, address, name, movableModelsIndex);
             newFile.Init();
             return newFile;
         }
@@ -264,23 +280,44 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        private IMPD_ModelInstance[] _sglModelInstances;
-        public IMPD_ModelInstance[] GetModelInstances() {
-            if (_sglModelInstances == null) {
-                var instances = new List<IMPD_ModelInstance>();
-
-                if (ModelInstanceTable != null)
-                    foreach (var mi in ModelInstanceTable)
-                        instances.Add(mi);
-                if (MovableModelTable != null)
-                    foreach (var mi in MovableModelTable)
-                        instances.Add(mi);
-
-                _sglModelInstances = instances.ToArray();
+        private TextureCollectionType GetTextureCollection() {
+            switch (Collection) {
+                case ModelCollectionType.PrimaryModels:
+                    return TextureCollectionType.PrimaryTextures;
+                case ModelCollectionType.Chunk19Model:
+                    return TextureCollectionType.Chunk19ModelTextures;
+                case ModelCollectionType.Chunk1Model:
+                    return TextureCollectionType.Chunk1ModelTextures;
+                case ModelCollectionType.MovableModels1:
+                    return TextureCollectionType.MovableModels1;
+                case ModelCollectionType.MovableModels2:
+                    return TextureCollectionType.MovableModels2;
+                case ModelCollectionType.MovableModels3:
+                    return TextureCollectionType.MovableModels3;
+                default:
+                    throw new ArgumentException($"Unhandled collection type '{Collection}'");
             }
+        }
 
-            UpdateModelInstanceIDs();
-            return _sglModelInstances;
+        private IMPD_ModelInstance[] _sglModelInstances;
+        public IEnumerable<IMPD_ModelInstance> ModelInstances {
+            get {
+                if (_sglModelInstances == null) {
+                    var instances = new List<IMPD_ModelInstance>();
+
+                    if (ModelInstanceTable != null)
+                        foreach (var mi in ModelInstanceTable)
+                            instances.Add(mi);
+                    if (MovableModelTable != null)
+                        foreach (var mi in MovableModelTable)
+                            instances.Add(mi);
+
+                    _sglModelInstances = instances.ToArray();
+                }
+
+                UpdateModelInstanceIDs();
+                return _sglModelInstances;
+            }
         }
 
         private void UpdateModelInstanceIDs() {
@@ -291,14 +328,14 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public ISGL_Model GetSGLModel(int id) {
-            return GetSGLModel(PDatasByMemoryAddress.Values.FirstOrDefault(
+        public ISGL_Model GetModel(int id) {
+            return GetModel(PDatasByMemoryAddress.Values.FirstOrDefault(
                 x => x.Collection == Collection && x.ID == id && x.Index == 0
             ));
         }
 
         private Dictionary<int, ISGL_Model> _sglModelsById = new Dictionary<int, ISGL_Model>();
-        private ISGL_Model GetSGLModel(PDataModel pdata) {
+        private ISGL_Model GetModel(PDataModel pdata) {
             if (pdata == null)
                 return null;
 
@@ -323,20 +360,24 @@ namespace SF3.Models.Files.MPD {
         }
 
         private ISGL_Model[] _sglModels;
-        public ISGL_Model[] GetSGLModels() {
-            if (_sglModels == null) {
-                _sglModels = PDatasByMemoryAddress.Values
-                    .Where(x => x.Index == 0)
-                    .Select(x => GetSGLModel(x))
-                    .ToArray();
+        public IEnumerable<ISGL_Model> Models {
+            get {
+                if (_sglModels == null) {
+                    _sglModels = PDatasByMemoryAddress.Values
+                        .Where(x => x.Index == 0)
+                        .Select(x => GetModel(x))
+                        .ToArray();
+                }
+                return _sglModels;
             }
-            return _sglModels;
         }
 
         [BulkCopyRowName]
         public string Name { get; }
-        public ScenarioType Scenario { get; }
+        public ScenarioType Scenario => MPD_File.Scenario;
+        public IMPD_File MPD_File { get; }
         public ModelCollectionType Collection { get; }
+        public TextureCollectionType TextureCollection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
         public int? MovableModelsIndex { get; }
@@ -377,6 +418,21 @@ namespace SF3.Models.Files.MPD {
         public CollisionBlockTable CollisionBlockTable { get; private set; } 
 
         [BulkCopyRecurse]
-        public Dictionary<int, CollisionLineIndexTable> CollisionLineIndexTablesByBlock { get; private set; } 
+        public Dictionary<int, CollisionLineIndexTable> CollisionLineIndexTablesByBlock { get; private set; }
+
+        private ITexture[] _textures = null;
+        public IEnumerable<ITexture> Textures {
+            get {
+                if (_textures == null) {
+                    _textures = MPD_File.TextureCollections
+                        .Where(x => x.Collection == TextureCollection)
+                        .Select(x => x.TextureTable)
+                        .SelectMany(x => x)
+                        .Select(x => x.Texture)
+                        .ToArray();
+                }
+                return _textures;
+            }
+        }
     }
 }

@@ -122,7 +122,6 @@ namespace SF3.Models.Files.MPD {
         SurfaceModel SurfaceModel { get; }
 
         int[] ModelsChunkIndices { get; }
-        ModelCollection[] ModelCollections { get; }
 
         SurfaceData SurfaceData { get; }
 
@@ -133,9 +132,6 @@ namespace SF3.Models.Files.MPD {
         int? ExtraModelTextureChunkIndex { get; }
 
         TextureCollection[] TextureCollections { get; }
-        List<ITexture> Textures { get; }
-
-        IMPD_Surface Surface { get; }
 
         int RepeatingGroundChunk1Index { get; }
         int RepeatingGroundChunk2Index { get; }
