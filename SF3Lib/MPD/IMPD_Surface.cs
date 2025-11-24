@@ -30,5 +30,15 @@ namespace SF3.MPD {
         /// Settings to use when calculating normals for tile model vertices.
         /// </summary>
         NormalCalculationSettings NormalSettings { get; set; }
+
+        /// <summary>
+        /// When true, there is a render surface model as well as height + event data.
+        /// </summary>
+        bool HasModel { get; }
+
+        /// <summary>
+        /// When true, the textures in the surface model can be rotated, which is a Scenario 3+ feature that must be enabled.
+        /// </summary>
+        bool HasRotatableTextures { get; }
     }
 }

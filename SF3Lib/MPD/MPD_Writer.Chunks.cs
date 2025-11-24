@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CommonLib.Utils;
-using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteChunks(IMPD_File mpd) {
+        public void WriteChunks(IMPD mpd) {
             // Chunk[0] is always empty.
             WriteEmptyChunk();
 
@@ -23,10 +22,10 @@ namespace SF3.MPD {
 
             // Chunk[2] is the surface model.
             // TODO: In Scenario 2+, this could be Chunk[20].
-            if (mpd.SurfaceModelChunk == null)
-                WriteEmptyChunk();
-            else
+            if (mpd.Surface.HasModel)
                 WriteSurfaceModelChunk(mpd.Surface);
+            else
+                WriteEmptyChunk();
 
             // TODO: Chunk[3] (animated texture frames)
             WriteEmptyChunk();
@@ -62,6 +61,9 @@ namespace SF3.MPD {
             WriteTextureChunk(chest1Textures, 0, out _);
             WriteTextureChunk(chest2Textures, 0, out _);
             WriteTextureChunk(barrelTextures, 0, out _);
+
+            // TODO: ground + skybox chunks
+            // TODO: Chunk[19] for the Titan
 
             // TODO: actual chunks!!
             while (_currentChunks < 20)

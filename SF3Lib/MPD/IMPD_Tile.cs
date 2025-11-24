@@ -123,16 +123,6 @@ namespace SF3.MPD {
         byte EventID { get; set; }
 
         /// <summary>
-        /// When true, this tile has visual data (i.e. a SurfaceModel) so its texture ID and flags can be set.
-        /// </summary>
-        bool HasModel { get; }
-
-        /// <summary>
-        /// When true, the texture of this tile can be rotated, which is a Scenario 3+ feature that must be enabled.
-        /// </summary>
-        bool HasRotatableTexture { get; }
-
-        /// <summary>
         /// Is invoked when the tile is modified.
         /// </summary>
         event EventHandler Modified;

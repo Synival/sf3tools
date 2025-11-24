@@ -123,7 +123,7 @@ namespace SF3.Win.Controls {
                     InitNUD(nudEventID, _tile.EventID);
 
                 // 'Model' group
-                gbModel.Enabled = _tile?.HasModel == true;
+                gbModel.Enabled = _tile?.Surface?.HasModel == true;
                 if (!gbModel.Enabled) {
                     nudModelTextureID.Text = "";
                     cbModelHasTree.Checked = false;
@@ -145,7 +145,7 @@ namespace SF3.Win.Controls {
                     cbModelHasTree.Checked = fileTile?.TreeModelID != null;
                     cbModelHasTree.Enabled = true;
 
-                    if (_tile.HasRotatableTexture) {
+                    if (_tile?.Surface?.HasRotatableTextures == true) {
                         cbModelRotate.SelectedItem = _tile.TextureRotate;
                         cbModelRotate.Enabled = true;
                     }

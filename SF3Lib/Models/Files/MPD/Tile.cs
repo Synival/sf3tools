@@ -37,10 +37,6 @@ namespace SF3.Models.Files.MPD {
         public int RandomSeed { get; private set; }
         public BlockHelpers.BlockTileLocation BlockLocation { get; }
 
-        public bool HasModel => MPD_File.SurfaceModelChunk != null;
-        public bool HasRotatableTexture => HasModel && MPD_File.SurfaceModelChunk.TileTextureRowTable.HasRotation && MPD_File.Flags.HasSurfaceTextureRotation;
-
-
         public event EventHandler Modified;
 
         private struct TileAndCorner {
