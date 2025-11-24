@@ -1,3 +1,4 @@
+using System;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.SurfaceModel {
@@ -23,6 +24,11 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             get => (byte) Data.GetByte(normalAddresses[x, y]);
             set => Data.SetByte(normalAddresses[x, y], value);
         }
+
+        public float GetHeight(int x, int y)
+            => this[x, y] / 16.0f;
+        public void SetHeight(int x, int y, float value)
+            => this[x, y] = (byte) Math.Max(0, Math.Min(255, Math.Round(value * 16.0f)));
 
         public int BlockX { get; }
         public int BlockY { get; }

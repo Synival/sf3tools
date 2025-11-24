@@ -69,7 +69,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             var textureData = mpdFile.SurfaceModel?.TileTextureRowTable?.Make2DTextureData();
             for (var y = TileY1; y < TileY2; y++) {
                 for (var x = TileX1; x < TileX2; x++) {
-                    var tile = mpdFile.Tiles[x, y];
+                    var tile = mpdFile.Surface.GetTile(x, y);
 
                     TextureAnimation  anim   = null;
                     TextureRotateType rotate = TextureRotateType.NoRotation;

@@ -10,10 +10,10 @@ namespace SF3.MPD {
         private const int c_surfaceModelBlockVerticesWidth  = 5;
         private const int c_surfaceModelBlockVerticesHeight = 5;
 
-        public void WriteSurfaceModelChunk(IMPD_Tile[,] tiles)
-            => WriteUncompressedChunk(writer => writer.WriteSurfaceModelChunkContent(tiles));
+        public void WriteSurfaceModelChunk(IMPD_Surface surface)
+            => WriteUncompressedChunk(writer => writer.WriteSurfaceModelChunkContent(surface));
 
-        public void WriteSurfaceModelChunkContent(IMPD_Tile[,] tiles) {
+        public void WriteSurfaceModelChunkContent(IMPD_Surface surface) {
             // The surface model is stored as 256 4x4 blocks, in row major order.
             // There are 16 columns of blocks and 16 rows of blocks.
             void ForEachBlock(Action<int /*blockTileX*/, int /*blockTileY*/> action) {
@@ -43,14 +43,14 @@ namespace SF3.MPD {
             // 0x10 words (2 bytes each) for 0x100 blocks.
             // 0x2000 bytes total.
             ForEachBlockTile((x, y) => {
-                var tile = tiles[x, y];
+                var tile = surface.GetTile(x, y);
                 WriteUShort((ushort) ((tile.TextureFlags << 8) | tile.TextureID));
             });
 
             // 0x03 "weird" compressed fixed decimal values (2 bytes each) per vertex in a 5x5 mesh for 0x100 blocks.
             // 0x9600 bytes total.
             ForEachBlockVertex((x, y) => {
-                var tile = GetNonFlatTileAtVertex(tiles, x, y, out var corner);
+                var tile = GetNonFlatTileAtVertex(surface, x, y, out var corner);
                 if (tile != null) {
                     var normal = tile.GetVertexNormal(corner);
                     WriteUShort(new CompressedFIXED(normal.X).WeirdRawShort);
@@ -67,7 +67,7 @@ namespace SF3.MPD {
             // 0x01 byte per vertex in a 5x5 mesh for 0x100 blocks.
             // 0x1900 bytes total.
             ForEachBlockVertex((x, y) => {
-                var tile = GetNonFlatTileAtVertex(tiles, x, y, out var corner);
+                var tile = GetNonFlatTileAtVertex(surface, x, y, out var corner);
                 if (tile != null)
                     WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(corner) * 16.00f));
                 else
@@ -82,9 +82,9 @@ namespace SF3.MPD {
             ( 0,  0, CornerType.BottomLeft),
         };
 
-        private IMPD_Tile GetNonFlatTileAtVertex(IMPD_Tile[,] tiles, int upperTileX, int upperTileY, out CornerType connectedCorner) {
-            var tilesWidth  = tiles.GetLength(0);
-            var tilesHeight = tiles.GetLength(1);
+        private IMPD_Tile GetNonFlatTileAtVertex(IMPD_Surface surface, int upperTileX, int upperTileY, out CornerType connectedCorner) {
+            var tilesWidth  = surface.Width;
+            var tilesHeight = surface.Height;
 
             for (int i = 0; i < 4; i++) {
                 var relativePosition = _getNonFlatTileAtVertexOffsets[i];
@@ -93,7 +93,7 @@ namespace SF3.MPD {
                 if (x < 0 || y < 0 || x >= tilesWidth || y >= tilesHeight)
                     continue;
 
-                var tile = tiles[x, y];
+                var tile = surface.GetTile(x, y);
                 if (!tile.IsFlat) {
                     connectedCorner = relativePosition.ConnectedCorner;
                     return tile;

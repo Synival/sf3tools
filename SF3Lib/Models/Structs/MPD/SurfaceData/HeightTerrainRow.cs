@@ -1,3 +1,4 @@
+using System;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Types;
@@ -20,7 +21,7 @@ namespace SF3.Models.Structs.MPD.Surface {
         public float GetHeight(int x)
             => ((this[x] >> 8) & 0xFF) / 16f;
         public void SetHeight(int x, float value)
-            => this[x] = (this[x] & 0xFF) + (((int) (value * 16f)) << 8);
+            => this[x] = (this[x] & 0xFF) + (((int) Math.Round(value * 16f)) << 8);
 
         public TerrainType GetTerrainType(int x)
             => (TerrainType) (this[x] & 0x0F);

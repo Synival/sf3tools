@@ -25,7 +25,7 @@ namespace SF3.MPD {
             if (mpd.SurfaceModel == null)
                 WriteEmptyChunk();
             else
-                WriteSurfaceModelChunk(mpd.Tiles);
+                WriteSurfaceModelChunk(mpd.Surface);
 
             // TODO: Chunk[3] (animated texture frames)
             WriteEmptyChunk();
@@ -34,7 +34,7 @@ namespace SF3.MPD {
             WriteEmptyChunk();
 
             // Chunk[5] is the surface (heightmap + gameplay, not the model for rendering).
-            WriteSurfaceChunk(mpd.Tiles);
+            WriteSurfaceDataChunk(mpd.Surface);
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.

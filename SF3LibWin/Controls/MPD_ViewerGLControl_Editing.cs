@@ -5,8 +5,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
-using SF3.Extensions;
 using SF3.FieldEditing;
+using SF3.Models.Files.MPD;
 using SF3.Types;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
@@ -47,7 +47,7 @@ namespace SF3.Win.Controls {
                 return;
 
             _tileSelectedPos = tilePos;
-            var tile = (_tileSelectedPos == null) ? null : MPD_File.Tiles[_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y];
+            var tile = (_tileSelectedPos == null) ? null : MPD_File.Surface.GetTile(_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y);
             TilePropertiesControl.Tile = tile;
             _tileSelectedNeedsUpdate = true;
 
@@ -189,14 +189,15 @@ namespace SF3.Win.Controls {
             var terrainType = GetTerrainTypeForCursorMode();
             var layers      = GetLayersForTileType(tileType);
 
-            var thisTile = MPD_File.Tiles[x, y];
+            var thisTile = MPD_File.Surface.GetTile(x, y);
             thisTile.TextureID  = GetDefaultTexIdByTileType(tileType);
             thisTile.TerrainType = terrainType;
             var updateSurfaceModel = !thisTile.IsFlat;
 
+            MPD_File.Surface.NormalSettings = _appState.MakeNormalCalculationSettings();
             for (int x2 = Math.Max(0, x - nearbyRange); x2 <= Math.Min(63, x + nearbyRange); x2++) {
                 for (int y2 = Math.Max(0, y - nearbyRange); y2 <= Math.Min(63, y + nearbyRange); y2++) {
-                    var affectedTile = MPD_File.Tiles[x2, y2];
+                    var affectedTile = MPD_File.Surface.GetTile(x2, y2);
                     foreach (var corner in Enum.GetValues<CornerType>()) {
                         var vx = x2 + corner.GetVertexOffsetX();
                         var vy = y2 + corner.GetVertexOffsetY();
@@ -204,7 +205,7 @@ namespace SF3.Win.Controls {
                         Dictionary<TileType, int> layersAtVertex = [];
                         for (int tx = Math.Max(0, vx - 1); tx <= Math.Min(63, vx); tx++) {
                             for (int ty = Math.Max(0, vy - 1); ty <= Math.Min(63, vy); ty++) {
-                                var neighborTile = MPD_File.Tiles[tx, ty];
+                                var neighborTile = MPD_File.Surface.GetTile(tx, ty);
                                 random = new Random(neighborTile.RandomSeed);
 
                                 var neighborTexId = neighborTile.TextureID;
@@ -218,7 +219,7 @@ namespace SF3.Win.Controls {
                         Dictionary<TileType, int> layersNearby = [];
                         for (int tx = Math.Max(0, vx - 1 - nearbyRange); tx <= Math.Min(63, vx + nearbyRange); tx++) {
                             for (int ty = Math.Max(0, vy - 1 - nearbyRange); ty <= Math.Min(63, vy + nearbyRange); ty++) {
-                                var neighborTexId = MPD_File.Tiles[tx, ty].TextureID;
+                                var neighborTexId = MPD_File.Surface.GetTile(tx, ty).TextureID;
                                 var neighborTileType = GetTileTypeByTexID(neighborTexId) ?? TileType.Water;
                                 var neighborLayers = GetLayersForTileType(neighborTileType);
                                 foreach (var layer in neighborLayers)
@@ -229,11 +230,7 @@ namespace SF3.Win.Controls {
                         var vertexHeight = 0.00f;
                         foreach (var kv in layersAtVertex)
                             vertexHeight += GetHeightBonusForTileType(kv.Key, kv.Value, layersNearby[kv.Key]);
-
-                        affectedTile.SetSurfaceDataVertexHeight(corner, vertexHeight);
-                        affectedTile.CopySurfaceDataVertexHeightToNonFlatNeighbors(corner);
-                        if (updateSurfaceModel)
-                            affectedTile.SetSurfaceModelVertexHeight(corner, vertexHeight);
+                        affectedTile.SetVisualVertexHeight(corner, vertexHeight);
                     }
                 }
             }
@@ -241,26 +238,17 @@ namespace SF3.Win.Controls {
             for (int tx = x - 1; tx <= x + 1; tx++)
                 for (int ty = y - 1; ty <= y + 1; ty++)
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64)
-                        FieldEditing.FieldEditing.UpdateTileTexture(MPD_File.Tiles[tx, ty], true);
+                        FieldEditing.FieldEditing.UpdateTileTexture(MPD_File.Surface.GetTile(tx, ty), true);
 
-            var settings = _appState.MakeNormalCalculationSettings();
-            for (int tx = x - 2 - nearbyRange; tx <= x + 2 + nearbyRange; tx++) {
-                for (int ty = y - 2 - nearbyRange; ty <= y + 2 + nearbyRange; ty++) {
-                    if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
-                        var affectedTile = MPD_File.Tiles[tx, ty];
-                        affectedTile.CenterHeight = affectedTile.GetAverageVisualVertexHeight();
-                        affectedTile.UpdateVertexNormals(settings);
-                    }
-                }
+            if (thisTile is Tile fileTile) {
+                bool modelsChanged = false;
+                if (thisTile.TerrainType == TerrainType.Forest)
+                    modelsChanged = fileTile.AdoptTree();
+                else
+                    modelsChanged = fileTile.OrphanTree();
+                if (modelsChanged)
+                    OnModelsUpdated(this, EventArgs.Empty);
             }
-
-            bool modelsChanged = false;
-            if (thisTile.TerrainType == TerrainType.Forest)
-                modelsChanged = thisTile.AdoptTree();
-            else
-                modelsChanged = thisTile.OrphanTree();
-            if (modelsChanged)
-                OnModelsUpdated(this, EventArgs.Empty);
 
             Invalidate();
         }

@@ -38,16 +38,16 @@ namespace SF3.Models.Structs.MPD.Surface {
             // Heights are clockwise from bottom-right.
             switch (corner) {
                 case CornerType.BottomRight:
-                    Data.SetByte(xAddress[x] + 0, (byte) (value * 16f));
+                    Data.SetByte(xAddress[x] + 0, (byte) Math.Round(value * 16f));
                     break;
                 case CornerType.BottomLeft:
-                    Data.SetByte(xAddress[x] + 1, (byte) (value * 16f));
+                    Data.SetByte(xAddress[x] + 1, (byte) Math.Round(value * 16f));
                     break;
                 case CornerType.TopLeft:
-                    Data.SetByte(xAddress[x] + 2, (byte) (value * 16f));
+                    Data.SetByte(xAddress[x] + 2, (byte) Math.Round(value * 16f));
                     break;
                 case CornerType.TopRight:
-                    Data.SetByte(xAddress[x] + 3, (byte) (value * 16f));
+                    Data.SetByte(xAddress[x] + 3, (byte) Math.Round(value * 16f));
                     break;
                 default:
                     throw new ArgumentException(nameof(corner));

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
+using CommonLib.Utils;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
@@ -18,30 +20,12 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        private void TriggerNeighborTileModified(int offsetX, int offsetY) {
-            var x = X + offsetX;
-            var y = Y + offsetY;
-
-            if (x >= 0 && y >= 0 && x < 64 && y < 64) {
-                var tile = MPD_File.Tiles[x, y] as Tile;
-                tile.TriggerModified(this);
-            }
-        }
-
-        private void TriggerModified(object from)
-            => Modified?.Invoke(from, EventArgs.Empty);
-
-        private struct TileAndCorner {
-            public int X;
-            public int Y;
-            public CornerType Corner;
-        }
-
-        private TileAndCorner[] GetAdjacentTilesAtCorner(CornerType corner) {
+        private TileAndCorner[] GetSharedTilesAtCorner(CornerType corner) {
             TileAndCorner[] GetUnfiltered() {
                 switch (corner) {
                     case CornerType.TopLeft:
                         return new TileAndCorner[] {
+                            new TileAndCorner { X = X,     Y = Y,     Corner = corner },
                             new TileAndCorner { X = X - 1, Y = Y + 1, Corner = CornerType.BottomRight },
                             new TileAndCorner { X = X - 1, Y = Y + 0, Corner = CornerType.TopRight },
                             new TileAndCorner { X = X - 0, Y = Y + 1, Corner = CornerType.BottomLeft },
@@ -49,6 +33,7 @@ namespace SF3.Models.Files.MPD {
 
                     case CornerType.TopRight:
                         return new TileAndCorner[] {
+                            new TileAndCorner { X = X,     Y = Y,     Corner = corner },
                             new TileAndCorner { X = X + 1, Y = Y + 1, Corner = CornerType.BottomLeft },
                             new TileAndCorner { X = X + 1, Y = Y + 0, Corner = CornerType.TopLeft },
                             new TileAndCorner { X = X + 0, Y = Y + 1, Corner = CornerType.BottomRight },
@@ -56,6 +41,7 @@ namespace SF3.Models.Files.MPD {
 
                     case CornerType.BottomRight:
                         return new TileAndCorner[] {
+                            new TileAndCorner { X = X,     Y = Y,     Corner = corner },
                             new TileAndCorner { X = X + 1, Y = Y - 1, Corner = CornerType.TopLeft },
                             new TileAndCorner { X = X + 1, Y = Y - 0, Corner = CornerType.BottomLeft },
                             new TileAndCorner { X = X + 0, Y = Y - 1, Corner = CornerType.TopRight },
@@ -63,6 +49,7 @@ namespace SF3.Models.Files.MPD {
 
                     case CornerType.BottomLeft:
                         return new TileAndCorner[] {
+                            new TileAndCorner { X = X,     Y = Y,     Corner = corner },
                             new TileAndCorner { X = X - 1, Y = Y - 1, Corner = CornerType.TopRight },
                             new TileAndCorner { X = X - 1, Y = Y - 0, Corner = CornerType.BottomRight },
                             new TileAndCorner { X = X - 0, Y = Y - 1, Corner = CornerType.TopLeft },
@@ -76,6 +63,41 @@ namespace SF3.Models.Files.MPD {
             return GetUnfiltered()
                 .Where(x => x.X >= 0 && x.Y >= 0 && x.X < 64 && x.Y < 64)
                 .ToArray();
+        }
+
+        private void UpdateVertexNormals(CornerType corner, out HashSet<Tile> tilesModified) {
+            var surfaceModel = MPD_File.SurfaceModel;
+            if (surfaceModel == null) {
+                tilesModified = new HashSet<Tile>();
+                return;
+            }
+
+            var vxCenter = BlockHelpers.TileToVertexX(X, corner);
+            var vyCenter = BlockHelpers.TileToVertexY(Y, corner);
+
+            // Normals need to be updated in a 3x3 grid.
+            var heightmapRowTable = MPD_File.SurfaceData.HeightmapRowTable;
+            for (var x = -1; x <= 1; x++) {
+                for (var y = -1; y <= 1; y++) {
+                    var vx = x + vxCenter;
+                    var vy = y + vyCenter;
+                    if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
+                        surfaceModel.UpdateVertexNormal(vx, vy, heightmapRowTable, Surface.NormalSettings);
+                }
+            }
+
+            // Updating vertex normals in a 3x3 grid means tiles need to be re-rendered in a 4x4 grid.
+            tilesModified = new HashSet<Tile>();
+            for (var x = -2; x <= 1; x++) {
+                for (var y = -2; y <= 1; y++) {
+                    var tx = x + vxCenter;
+                    var ty = y + vyCenter;
+                    if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
+                        var tile = MPD_File.Surface.GetTile(tx, ty) as Tile;
+                        tilesModified.Add(tile);
+                    }
+                }
+            }
         }
     }
 }

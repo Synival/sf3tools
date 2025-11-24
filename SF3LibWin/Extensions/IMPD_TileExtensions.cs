@@ -1,7 +1,6 @@
 using System.Linq;
 using CommonLib.Types;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
 using SF3.MPD;
 using SF3.Win.OpenGL.MPD_File;
 using static CommonLib.Types.CornerTypeConsts;
@@ -39,10 +38,10 @@ namespace SF3.Win.Extensions {
             ];
         }
 
-        public static Vector3 GetVector3Normal(this Tile tile, CornerType corner)
+        public static Vector3 GetVector3Normal(this IMPD_Tile tile, CornerType corner)
             => tile.GetVertexNormal(corner).ToVector3();
 
-        public static Vector3[] GetVector3Normals(this Tile tile)
+        public static Vector3[] GetVector3Normals(this IMPD_Tile tile)
             => tile.GetVertexNormals().Select(x => x.ToVector3()).ToArray();
     }
 }

@@ -55,7 +55,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             TileHoverModel = null;
 
             if (tilePos != null) {
-                var tile = mpdFile.Tiles[tilePos.Value.X, tilePos.Value.Y];
+                var tile = mpdFile.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
                 var quad = new Quad(tile.GetVector3Vertices());
                 Models.Add(TileHoverModel = new QuadModel([quad]));
             }
@@ -68,7 +68,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             TileSelectedModel = null;
 
             if (tilePos != null) {
-                var tile = mpdFile.Tiles[tilePos.Value.X, tilePos.Value.Y];
+                var tile = mpdFile.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
                 var quad = new Quad(tile.GetVector3Vertices(2.00f));
                 Models.Add(TileSelectedModel = new QuadModel([quad]));
             }

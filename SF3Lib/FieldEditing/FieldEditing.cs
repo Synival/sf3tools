@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Types;
 using static SF3.FieldEditing.Constants;
 
@@ -11,23 +11,24 @@ namespace SF3.FieldEditing {
     ///       It only works with a very modified version of FIELD.MPD from the Premium Disk.
     /// </summary>
     public static class FieldEditing {
-        public static void UpdateTileTextures(Tile[,] tiles, bool setDefaultIfNothingFound) {
-            var maxX = tiles.GetLength(0);
-            var maxY = tiles.GetLength(1);
+        public static void UpdateTileTextures(IMPD_Surface surface, bool setDefaultIfNothingFound) {
+            var tiles = surface;
+            var maxX = surface.Width;
+            var maxY = surface.Height;
 
             for (int iy = 0; iy < maxY; iy++)
                 for (int ix = 0; ix < maxX; ix++)
-                    UpdateTileTexture(tiles[ix, iy], setDefaultIfNothingFound);
+                    UpdateTileTexture(surface.GetTile(ix, iy), setDefaultIfNothingFound);
         }
 
-        public static void UpdateTileTexture(Tile tile, bool setDefaultIfNothingFound) {
+        public static void UpdateTileTexture(IMPD_Tile tile, bool setDefaultIfNothingFound) {
             var tileType = GetTileTypeByTexID(tile.TextureID);
             if (tileType.HasValue)
                 SetTileTexture(tile, tileType.Value, setDefaultIfNothingFound);
         }
 
-        public static void SetTileTexture(Tile tile, TileType tileType, bool setDefaultIfNothingFound) {
-            var tiles = tile.MPD_File.Tiles;
+        public static void SetTileTexture(IMPD_Tile tile, TileType tileType, bool setDefaultIfNothingFound) {
+            var surface = tile.Surface;
             var gridTileTypes = new TileType[3, 3];
             var defaultTexId = GetDefaultTexIdByTileType(tileType);
 
@@ -37,7 +38,7 @@ namespace SF3.FieldEditing {
                     var tx = tile.X + ix;
                     var texId =
                         (ix == 0 && iy == 0) ? defaultTexId :
-                        (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) ? tiles[tx, ty].TextureID : (byte) 0xFF;
+                        (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) ? surface.GetTile(tx, ty).TextureID : (byte) 0xFF;
                     gridTileTypes[ix + 1, iy + 1] = GetTileTypeByTexID(texId) ?? TileType.Water;
                 }
             }

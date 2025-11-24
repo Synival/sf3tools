@@ -249,7 +249,7 @@ namespace SF3.Win.Controls {
         // TODO: big dumb hack!!!
         private void tsbFixTiles_Click(object sender, EventArgs e) {
             if (MPD_File != null)
-                FieldEditing.FieldEditing.UpdateTileTextures(MPD_File.Tiles, true);
+                FieldEditing.FieldEditing.UpdateTileTextures(MPD_File.Surface, true);
             GLControl.UpdateModels();
         }
 

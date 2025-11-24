@@ -102,16 +102,20 @@ namespace SF3.Win.Controls {
         }
 
         private void AttachListeners(IMPD_File mpdFile) {
-            for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
-                for (var y = 0; y < mpdFile.Tiles.GetLength(1); y++)
-                    mpdFile.Tiles[x, y].Modified += OnTileModified;
+            var maxX = mpdFile.Surface.Width;
+            var maxY = mpdFile.Surface.Height;
+            for (var x = 0; x < maxX; x++)
+                for (var y = 0; y < maxY; y++)
+                    mpdFile.Surface.GetTile(x, y).Modified += OnTileModified;
             mpdFile.ModelsUpdated += OnModelsUpdated;
         }
 
         private void DetachListeners(IMPD_File mpdFile) {
-            for (var x = 0; x < mpdFile.Tiles.GetLength(0); x++)
-                for (var y = 0; y < mpdFile.Tiles.GetLength(1); y++)
-                    mpdFile.Tiles[x, y].Modified -= OnTileModified;
+            var maxX = mpdFile.Surface.Width;
+            var maxY = mpdFile.Surface.Height;
+            for (var x = 0; x < maxX; x++)
+                for (var y = 0; y < maxY; y++)
+                    mpdFile.Surface.GetTile(x, y).Modified -= OnTileModified;
             mpdFile.ModelsUpdated -= OnModelsUpdated;
         }
 

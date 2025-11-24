@@ -47,7 +47,7 @@ namespace SF3.Models.Files.MPD {
 
             // Do nothing unless the IMPD_File's tiles are file-based tiles.
             // (We have better methods otherwise)
-            if (MPD_File.Tiles == null || !(MPD_File.Tiles[0, 0] is Tile))
+            if (MPD_File.Surface == null || !(MPD_File.Surface.GetTile(0, 0) is Tile))
                 return false;
 
             // Get a list of all currently associated trees.
@@ -56,7 +56,7 @@ namespace SF3.Models.Files.MPD {
             if (modelCollection == null || modelCollection.PDataTable.Length == 0)
                 return false;
 
-            var associatedModelsList = MPD_File.Tiles.To1DArray()
+            var associatedModelsList = MPD_File.Surface.GetAllTiles()
                 .Cast<Tile>()
                 .Where(x => x.TreeModelID.HasValue)
                 .Select(x => x.TreeModelID.Value)

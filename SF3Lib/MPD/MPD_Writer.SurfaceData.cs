@@ -3,17 +3,17 @@ using CommonLib.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteSurfaceChunk(IMPD_Tile[,] tiles)
-            => WriteCompressedChunk(writer => writer.WriteSurfaceChunkContent(tiles));
+        public void WriteSurfaceDataChunk(IMPD_Surface surface)
+            => WriteCompressedChunk(writer => writer.WriteSurfaceDataChunkContent(surface));
 
-        public void WriteSurfaceChunkContent(IMPD_Tile[,] tiles) {
-            var tilesWidth  = tiles.GetLength(0);
-            var tilesHeight = tiles.GetLength(1);
+        public void WriteSurfaceDataChunkContent(IMPD_Surface surface) {
+            var tilesWidth  = surface.Width;
+            var tilesHeight = surface.Height;
 
             void ForEachTile(Action<IMPD_Tile> action) {
                 for (int y = 0; y < tilesHeight; y++)
                     for (int x = 0; x < tilesWidth; x++)
-                        action(tiles[x, y]);
+                        action(surface.GetTile(x, y));
             };
 
             // Tile corner heights: 0x4000 bytes (64x64x4)

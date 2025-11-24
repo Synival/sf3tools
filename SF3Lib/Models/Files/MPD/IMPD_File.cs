@@ -135,7 +135,7 @@ namespace SF3.Models.Files.MPD {
         TextureCollection[] TextureCollections { get; }
         List<ITexture> Textures { get; }
 
-        Tile[,] Tiles { get; }
+        IMPD_Surface Surface { get; }
 
         int RepeatingGroundChunk1Index { get; }
         int RepeatingGroundChunk2Index { get; }

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
-using SF3.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
@@ -12,7 +12,7 @@ namespace SF3.Models.Files.MPD {
 
             // The model to show should come from the surface model.
             if (MPD_File.SurfaceModel?.VertexHeightBlockTable != null) {
-                var bvl = BlockVertexLocations[corner];
+                var bvl = _blockVertexLocations[corner];
                 return MPD_File.SurfaceModel.VertexHeightBlockTable[bvl.Num][bvl.X, bvl.Y] / 16.0f;
             }
 
@@ -33,7 +33,7 @@ namespace SF3.Models.Files.MPD {
 
             // The model to show should come from the surface model.
             if (MPD_File.SurfaceModel?.VertexHeightBlockTable != null) {
-                return BlockVertexLocations.Values
+                return _blockVertexLocations.Values
                     .Select(bvl => MPD_File.SurfaceModel.VertexHeightBlockTable[bvl.Num][bvl.X, bvl.Y] / 16.0f)
                     .ToArray();
             }
@@ -46,60 +46,107 @@ namespace SF3.Models.Files.MPD {
             return new float[] { 0, 0, 0, 0 };
         }
 
-        public float GetSurfaceDataVertexHeight(CornerType corner)
-            => MPD_File.SurfaceData?.HeightmapRowTable?[Y]?.GetHeight(X, corner) ?? 0.0f;
-        public void SetSurfaceDataVertexHeight(CornerType corner, float value) {
-            if (MPD_File.SurfaceData?.HeightTerrainRowTable == null)
-                return;
-            MPD_File.SurfaceData.HeightmapRowTable[Y].SetHeight(X, corner, value);
-            Modified?.Invoke(this, EventArgs.Empty);
+        public void SetVisualVertexHeight(CornerType corner, float value) {
+            SetVisualVertexHeight(corner, value, out var tilesModified);
+            foreach (var t in tilesModified)
+                t.Modified?.Invoke(t, EventArgs.Empty);
         }
 
-        public float GetSurfaceModelVertexHeight(CornerType corner) {
-            var bl = BlockVertexLocations[corner];
-            return ((MPD_File.SurfaceModel?.VertexHeightBlockTable?[bl.Num]?[bl.X, bl.Y]) ?? 0) / 16f;
-        }
+        private void SetVisualVertexHeight(CornerType corner, float value, out HashSet<Tile> tilesModified) {
+            // Height can only be set in increments of 1/16.
+            value = (float) Math.Round(value * 16.0f) / 16.0f;
 
-        public void SetSurfaceModelVertexHeight(CornerType corner, float value) {
-            var bls = SharedBlockVertexLocations[corner];
-            foreach (var bl in bls)
-                MPD_File.SurfaceModel.VertexHeightBlockTable[bl.Num][bl.X, bl.Y] = (byte) (value * 16f);
+            // Track tiles updated so they can be informed of updates afterwards, without redundancy.
+            tilesModified = new HashSet<Tile>();
 
-            Modified?.Invoke(this, EventArgs.Empty);
+            // Update positions in the SurfaceData tables.
+            if (MPD_File.SurfaceData != null) {
+                var tilesToUpdate = IsFlat
+                    ? new TileAndCorner[] { _sharedTileLocations[corner][0] }
+                    : _sharedTileLocations[corner];
 
-            var otherTilesOffsetX = corner.GetVertexOffsetX() * 2 - 1;
-            var otherTilesOffsetY = corner.GetVertexOffsetY() * 2 - 1;
-            TriggerNeighborTileModified(otherTilesOffsetX, 0);
-            TriggerNeighborTileModified(0, otherTilesOffsetY);
-            TriggerNeighborTileModified(otherTilesOffsetX, otherTilesOffsetY);
-        }
+                foreach (var stl in tilesToUpdate) {
+                    var tile = (Tile) Surface.GetTile(stl.X, stl.Y);
+                    if (tile != this && tile.IsFlat)
+                        continue;
 
-        public void CopySurfaceDataVertexHeightToNonFlatNeighbors(CornerType corner) {
-            var height = GetSurfaceDataVertexHeight(corner);
-            var adjacentCorners = GetAdjacentTilesAtCorner(corner);
-            foreach (var ac in adjacentCorners) {
-                var acTile = MPD_File.Tiles[ac.X, ac.Y];
-                if (!acTile.IsFlat) {
-                    MPD_File.SurfaceData.HeightmapRowTable[ac.Y].SetHeight(ac.X, corner, height);
-                    acTile.CenterHeight = acTile.GetAverageVisualVertexHeight();
+                    var rowCorners = MPD_File.SurfaceData.HeightmapRowTable[tile.Y];
+                    var rowCenter = MPD_File.SurfaceData.HeightTerrainRowTable[tile.Y];
+
+                    rowCorners.SetHeight(tile.X, stl.Corner, value);
+                    rowCenter.SetHeight(tile.X, ((CornerType[]) Enum.GetValues(typeof(CornerType))).Select(x => rowCorners.GetHeight(tile.X, x)).Average());
+
+                    tilesModified.Add(tile);
                 }
+            }
+
+            if (MPD_File.SurfaceModel != null) {
+                if (!IsFlat)
+                    foreach (var bvl in _sharedBlockVertexLocations[corner])
+                        MPD_File.SurfaceModel.VertexHeightBlockTable[bvl.Num].SetHeight(bvl.X, bvl.Y, value);
+
+                UpdateVertexNormals(corner, out var tilesModifiedHere);
+                foreach (var t in tilesModifiedHere)
+                    tilesModified.Add(t);
+            }
+        }
+
+        public void SetVisualVertexHeights(float[] values) {
+            var tilesModified = new HashSet<Tile>();
+
+            foreach (var corner in (CornerType[]) Enum.GetValues(typeof(CornerType))) {
+                SetVisualVertexHeight(corner, values[(int) corner], out var tilesModifiedHere);
+                foreach (var t in tilesModifiedHere)
+                    tilesModified.Add(t);
+            }
+
+            foreach (var t in tilesModified) {
+                System.Diagnostics.Debug.WriteLine($"({t.X}, {t.Y})");
+                t.Modified?.Invoke(t, EventArgs.Empty);
             }
         }
 
         public bool IsFlat {
             get => (MPD_File.SurfaceModel != null) ? MPD_File.SurfaceModel.TileTextureRowTable[Y].GetIsFlatFlag(X) : false;
             set {
-                MPD_File.SurfaceModel.TileTextureRowTable[Y].SetIsFlatFlag(X, value);
-                Modified?.Invoke(this, EventArgs.Empty);
+                if (MPD_File.SurfaceModel == null)
+                    return;
+                if (MPD_File.SurfaceModel.TileTextureRowTable[Y].GetIsFlatFlag(X) != value) {
+                    // If flattening the tile, set heights to the lowest value.
+                    if (value) {
+                        var minHeight = GetVisualVertexHeights().Min();
+                        MPD_File.SurfaceModel.TileTextureRowTable[Y].SetIsFlatFlag(X, true);
+                        SetVisualVertexHeights(new float[] { minHeight, minHeight, minHeight, minHeight });
+                    }
+                    // If unflattening the tile, update its heights to its neighbors.
+                    else {
+                        // The bottom-right corner of the heightmap table determines the height.
+                        // We're going to use that as a fallback if there's no non-flat tile to fetch here.
+                        var brHeight = MPD_File.SurfaceData.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
+                        MPD_File.SurfaceModel.TileTextureRowTable[Y].SetIsFlatFlag(X, false);
+
+                        foreach (var corner in (CornerType[]) Enum.GetValues(typeof(CornerType))) {
+                            var newHeight = brHeight;
+                            foreach (var stl in _sharedTileLocations[corner]) {
+                                if (stl.X == X && stl.Y == Y)
+                                    continue;
+                                var tile = Surface.GetTile(stl.X, stl.Y);
+                                if (tile.IsFlat)
+                                    continue;
+                                newHeight = tile.GetVisualVertexHeight(stl.Corner);
+                                break;
+                            }
+
+                            SetVisualVertexHeight(corner, newHeight);
+                        }
+                    }
+
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
-        public float CenterHeight {
-            get => (MPD_File.SurfaceData != null) ? MPD_File.SurfaceData.HeightTerrainRowTable[Y].GetHeight(X) : 0.0f;
-            set {
-                MPD_File.SurfaceData.HeightTerrainRowTable[Y].SetHeight(X, value);
-                Modified?.Invoke(this, EventArgs.Empty);
-            }
-        }
+        public float CenterHeight
+            => (MPD_File.SurfaceData != null) ? MPD_File.SurfaceData.HeightTerrainRowTable[Y].GetHeight(X) : 0.0f;
     }
 }
