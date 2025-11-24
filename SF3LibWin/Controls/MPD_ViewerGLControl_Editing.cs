@@ -21,11 +21,13 @@ namespace SF3.Win.Controls {
         }
 
         private void OnMouseDownEditing(MouseEventArgs e) {
-            var cursorMode = CursorMode;
+            if (e.Button != MouseButtons.Left)
+                return;
 
-            if (cursorMode == ViewerCursorMode.Select && e.Button == MouseButtons.Left)
+            var cursorMode = CursorMode;
+            if (cursorMode == ViewerCursorMode.Select)
                 SelectTile(_tileHoverPos);
-            if (cursorMode.IsDrawingMode()) {
+            else if (cursorMode.IsDrawingMode()) {
                 DrawTileAtCursor();
                 _lastTileEdited = _tileHoverPos;
             }
