@@ -67,8 +67,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                                     var xInTile = 1.00f - (surfaceX - tileX);
                                     var yInTile = 1.00f - (surfaceY - tileY);
 
-                                    var heights1 = tile.GetSurfaceDataVertexHeight(CornerType.BottomLeft) * xInTile + tile.GetSurfaceDataVertexHeight(CornerType.BottomRight) * (1.0f - xInTile);
-                                    var heights2 = tile.GetSurfaceDataVertexHeight(CornerType.TopLeft)    * xInTile + tile.GetSurfaceDataVertexHeight(CornerType.TopRight)    * (1.0f - xInTile);
+                                    var heights1 = tile.GetVisualVertexHeight(CornerType.BottomLeft) * xInTile + tile.GetSurfaceDataVertexHeight(CornerType.BottomRight) * (1.0f - xInTile);
+                                    var heights2 = tile.GetVisualVertexHeight(CornerType.TopLeft)    * xInTile + tile.GetSurfaceDataVertexHeight(CornerType.TopRight)    * (1.0f - xInTile);
                                     var height = heights1 * yInTile + heights2 * (1.0f - yInTile);
 
                                     topY    = (topY == null) ? height + 1.0f : Math.Max(topY.Value, height + 1.0f);
