@@ -32,7 +32,5 @@ namespace SF3.MPD {
         /// All textures associated with this collection.
         /// </summary>
         IEnumerable<ITexture> Textures { get; }
-
-        int? MovableModelsIndex { get; }
     }
 }

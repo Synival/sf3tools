@@ -19,7 +19,6 @@ namespace SF3.Models.Files.MPD {
             INameGetterContext nameContext,
             int address,
             string name,
-            ScenarioType scenario,
             int? chunkIndex,
             CollectionType collection
         ) : base(data, nameContext)
@@ -29,43 +28,13 @@ namespace SF3.Models.Files.MPD {
             Name       = name;
             Collection = collection;
             ChunkIndex = chunkIndex;
-            MovableModelsIndex = null;
-        }
-
-        protected ModelChunk(
-            IMPD_File mpdFile,
-            IByteData data,
-            INameGetterContext nameContext,
-            int address,
-            string name,
-            int movableModelsIndex
-        ) : base(data, nameContext)
-        {
-            MPD_File   = mpdFile;
-            Address    = address;
-            Name       = name;
-
-            Collection =
-                (movableModelsIndex == 0) ? CollectionType.MovableModels1 :
-                (movableModelsIndex == 1) ? CollectionType.MovableModels2 :
-                (movableModelsIndex == 2) ? CollectionType.MovableModels3 :
-                throw new ArgumentException(nameof(movableModelsIndex));
-
-            ChunkIndex = null;
-            MovableModelsIndex = movableModelsIndex;
         }
 
         public static ModelChunk Create(
             IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name,
-            ScenarioType scenario, int? chunkIndex, CollectionType modelCollection
+            int? chunkIndex, CollectionType modelCollection
         ) {
-            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, scenario, chunkIndex, modelCollection);
-            newFile.Init();
-            return newFile;
-        }
-
-        public static ModelChunk Create(IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name, int movableModelsIndex) {
-            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, movableModelsIndex);
+            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, chunkIndex, modelCollection);
             newFile.Init();
             return newFile;
         }
@@ -77,7 +46,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            if (MovableModelsIndex.HasValue)
+            if (Collection >= CollectionType.MovableModels1 && Collection <= CollectionType.MovableModels3)
                 MovableModelTable = MovableModelTable.Create(Data, Collection, "MovableModelsHeader", Address);
             else {
                 ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", Address + 0x0000);
@@ -266,7 +235,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public uint GetOffsetInChunk(uint memoryAddress) {
-            if (MovableModelsIndex.HasValue)
+            if (Collection >= CollectionType.MovableModels1 && Collection <= CollectionType.MovableModels3)
                 return memoryAddress - 0x290000;
             else if (memoryAddress >= 0x60a0000)
                 return memoryAddress - 0x60a0000 /* TODO: apply actual offset of chunk! */;
@@ -358,7 +327,6 @@ namespace SF3.Models.Files.MPD {
         public CollectionType Collection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
-        public int? MovableModelsIndex { get; }
 
         [BulkCopyRecurse]
         public ModelsHeader ModelsHeader { get; private set; }

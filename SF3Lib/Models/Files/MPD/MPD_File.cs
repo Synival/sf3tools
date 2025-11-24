@@ -227,7 +227,7 @@ namespace SF3.Models.Files.MPD {
                 if (offset == 0)
                     continue;
 
-                var newModel = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), i);
+                var newModel = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), null, CollectionType.MovableModels1 + i);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
@@ -535,7 +535,7 @@ namespace SF3.Models.Files.MPD {
                     (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
                     CollectionType.Primary;
 
-                var newModel = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, Scenario, mc.Index, collection);
+                var newModel = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, mc.Index, collection);
                 modelsList.Add(newModel);
                 tables.AddRange(newModel.Tables);
             }
