@@ -5,7 +5,7 @@ using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
-        public float GetVisualVertexHeight(CornerType corner) {
+        public float GetVertexHeight(CornerType corner) {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.SurfaceData?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat)
                 return MPD_File.SurfaceData.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
@@ -24,7 +24,7 @@ namespace SF3.Models.Files.MPD {
             return 0;
         }
 
-        public float[] GetVisualVertexHeights() {
+        public float[] GetVertexHeights() {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.SurfaceData?.HeightmapRowTable != null && MPD_File.SurfaceModel?.TileTextureRowTable != null && IsFlat) {
                 var brHeight = MPD_File.SurfaceData.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
@@ -46,13 +46,13 @@ namespace SF3.Models.Files.MPD {
             return new float[] { 0, 0, 0, 0 };
         }
 
-        public void SetVisualVertexHeight(CornerType corner, float value) {
-            SetVisualVertexHeight(corner, value, out var tilesModified);
+        public void SetVertexHeight(CornerType corner, float value) {
+            SetVertexHeight(corner, value, out var tilesModified);
             foreach (var t in tilesModified)
                 t.Modified?.Invoke(t, EventArgs.Empty);
         }
 
-        private void SetVisualVertexHeight(CornerType corner, float value, out HashSet<Tile> tilesModified) {
+        private void SetVertexHeight(CornerType corner, float value, out HashSet<Tile> tilesModified) {
             // Height can only be set in increments of 1/16.
             value = (float) Math.Round(value * 16.0f) / 16.0f;
 
@@ -91,11 +91,11 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public void SetVisualVertexHeights(float[] values) {
+        public void SetVertexHeights(float[] values) {
             var tilesModified = new HashSet<Tile>();
 
             foreach (var corner in (CornerType[]) Enum.GetValues(typeof(CornerType))) {
-                SetVisualVertexHeight(corner, values[(int) corner], out var tilesModifiedHere);
+                SetVertexHeight(corner, values[(int) corner], out var tilesModifiedHere);
                 foreach (var t in tilesModifiedHere)
                     tilesModified.Add(t);
             }
@@ -112,9 +112,9 @@ namespace SF3.Models.Files.MPD {
                 if (MPD_File.SurfaceModel.TileTextureRowTable[Y].GetIsFlatFlag(X) != value) {
                     // If flattening the tile, set heights to the lowest value.
                     if (value) {
-                        var minHeight = GetVisualVertexHeights().Min();
+                        var minHeight = GetVertexHeights().Min();
                         MPD_File.SurfaceModel.TileTextureRowTable[Y].SetIsFlatFlag(X, true);
-                        SetVisualVertexHeights(new float[] { minHeight, minHeight, minHeight, minHeight });
+                        SetVertexHeights(new float[] { minHeight, minHeight, minHeight, minHeight });
                     }
                     // If unflattening the tile, update its heights to its neighbors.
                     else {
@@ -131,11 +131,11 @@ namespace SF3.Models.Files.MPD {
                                 var tile = Surface.GetTile(stl.X, stl.Y);
                                 if (tile.IsFlat)
                                     continue;
-                                newHeight = tile.GetVisualVertexHeight(stl.Corner);
+                                newHeight = tile.GetVertexHeight(stl.Corner);
                                 break;
                             }
 
-                            SetVisualVertexHeight(corner, newHeight);
+                            SetVertexHeight(corner, newHeight);
                         }
                     }
 

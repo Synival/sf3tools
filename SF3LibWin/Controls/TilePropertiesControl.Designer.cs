@@ -40,6 +40,7 @@ namespace SF3.Win.Controls {
             nudEventID = new DarkModeNumericUpDown();
             labelEventID = new DarkModeLabel();
             gbModel = new DarkModeGroupBox();
+            cbModelHasTree = new DarkModeCheckBox();
             nudModelTextureID = new DarkModeNumericUpDown();
             cbModelTileIsFlat = new DarkModeCheckBox();
             cbModelRotate = new DarkModeComboBox();
@@ -49,7 +50,6 @@ namespace SF3.Win.Controls {
             cbModelFlip = new DarkModeComboBox();
             labelTileEdited = new DarkModeLabel();
             labelRealCoordinates = new DarkModeLabel();
-            cbModelHasTree = new DarkModeCheckBox();
             gbMovement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBR).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudMoveHeightmapBL).BeginInit();
@@ -239,6 +239,16 @@ namespace SF3.Win.Controls {
             gbModel.TabStop = false;
             gbModel.Text = "Model";
             // 
+            // cbModelHasTree
+            // 
+            cbModelHasTree.AutoSize = true;
+            cbModelHasTree.Location = new System.Drawing.Point(7, 54);
+            cbModelHasTree.Name = "cbModelHasTree";
+            cbModelHasTree.Size = new System.Drawing.Size(71, 19);
+            cbModelHasTree.TabIndex = 9;
+            cbModelHasTree.Text = "Has Tree";
+            cbModelHasTree.UseVisualStyleBackColor = true;
+            // 
             // nudModelTextureID
             // 
             nudModelTextureID.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point,  0);
@@ -340,16 +350,6 @@ namespace SF3.Win.Controls {
             labelRealCoordinates.Size = new System.Drawing.Size(137, 45);
             labelRealCoordinates.TabIndex = 4;
             labelRealCoordinates.Text = "Center Real Coordinates:\r\nAddress 1:\r\nAddress 2:";
-            // 
-            // cbModelHasTree
-            // 
-            cbModelHasTree.AutoSize = true;
-            cbModelHasTree.Location = new System.Drawing.Point(7, 54);
-            cbModelHasTree.Name = "cbModelHasTree";
-            cbModelHasTree.Size = new System.Drawing.Size(71, 19);
-            cbModelHasTree.TabIndex = 9;
-            cbModelHasTree.Text = "Has Tree";
-            cbModelHasTree.UseVisualStyleBackColor = true;
             // 
             // TilePropertiesControl
             // 

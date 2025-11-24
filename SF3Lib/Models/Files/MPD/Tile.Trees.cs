@@ -77,7 +77,7 @@ namespace SF3.Models.Files.MPD {
 
             // We found a tree, so let's position it, associate it, and return success.
             model.PositionX = (short) ((X + 0.5f) * -32.0f);
-            model.PositionY = (short) (this.GetAverageVisualVertexHeight() * -32.0f);
+            model.PositionY = (short) (this.GetAverageVertexHeight() * -32.0f);
             model.PositionZ = (short) ((Y + 0.5f) * -32.0f);
 
             TreeModelID = model.ID;

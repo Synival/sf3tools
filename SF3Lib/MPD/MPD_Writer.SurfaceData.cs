@@ -18,10 +18,10 @@ namespace SF3.MPD {
 
             // Tile corner heights: 0x4000 bytes (64x64x4)
             ForEachTile(tile => {
-                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.BottomRight) * 16.0f));
-                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.BottomLeft) * 16.0f));
-                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.TopLeft) * 16.0f));
-                WriteByte((byte) Math.Round(tile.GetVisualVertexHeight(CornerType.TopRight) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.BottomRight) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.BottomLeft) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.TopLeft) * 16.0f));
+                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.TopRight) * 16.0f));
             });
 
             // Tile center heights + terrain: 0x2000 bytes (64x64x2)

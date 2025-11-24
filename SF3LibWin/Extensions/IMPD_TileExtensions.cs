@@ -10,7 +10,7 @@ namespace SF3.Win.Extensions {
         public static Vector3[] GetVector3Vertices(this IMPD_Tile tile, float scale = 1.00f) {
             var xzOff = scale * 0.5f;
 
-            var heights = tile.GetVisualVertexHeights();
+            var heights = tile.GetVertexHeights();
             if (scale != 1.00f) {
                 var centerHeight = heights.Average();
                 for (var i = 0; i < 4; i++)

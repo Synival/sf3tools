@@ -5,9 +5,9 @@ using SF3.MPD;
 
 namespace SF3.Extensions {
     public static class IMPD_FileExtensions {
-        public static float GetAverageVisualVertexHeight(this IMPD_Tile tile) {
+        public static float GetAverageVertexHeight(this IMPD_Tile tile) {
             return (float) Math.Round(((CornerType[]) Enum.GetValues(typeof(CornerType)))
-                .Average(x => tile.GetVisualVertexHeight(x) * 16f)) / 16f;
+                .Average(x => tile.GetVertexHeight(x) * 16f)) / 16f;
         }
     }
 }

@@ -230,7 +230,7 @@ namespace SF3.Win.Controls {
                         var vertexHeight = 0.00f;
                         foreach (var kv in layersAtVertex)
                             vertexHeight += GetHeightBonusForTileType(kv.Key, kv.Value, layersNearby[kv.Key]);
-                        affectedTile.SetVisualVertexHeight(corner, vertexHeight);
+                        affectedTile.SetVertexHeight(corner, vertexHeight);
                     }
                 }
             }

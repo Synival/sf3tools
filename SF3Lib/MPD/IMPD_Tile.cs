@@ -76,14 +76,14 @@ namespace SF3.MPD {
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
         /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
-        float GetVisualVertexHeight(CornerType corner);
+        float GetVertexHeight(CornerType corner);
 
         /// <summary>
         /// Gets the heights of all corners of a tile for display. The heights returned are relative to the
         /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
         /// </summary>
         /// <returns>A height value for every corner of the tile with a scale where 1 = width/height of tile.</returns>
-        float[] GetVisualVertexHeights();
+        float[] GetVertexHeights();
 
         /// <summary>
         /// Sets the height of a corner of a tile for display. The height to set is relative to the
@@ -92,7 +92,7 @@ namespace SF3.MPD {
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be modified.</param>
         /// <param name="value">The new height of the tile corner.</param>
-        void SetVisualVertexHeight(CornerType corner, float value);
+        void SetVertexHeight(CornerType corner, float value);
 
         /// <summary>
         /// Sets the height of all corners of a tile for display. The heights set are relative to the
@@ -100,7 +100,7 @@ namespace SF3.MPD {
         /// The tile center, adjacent tiles, and all impacted normals are updated as required.
         /// <param name="value">The new heights of all tile corners.</param>
         /// </summary>
-        void SetVisualVertexHeights(float[] values);
+        void SetVertexHeights(float[] values);
 
         /// <summary>
         /// The height of the tile's center. The center is always be an average of the four corner vertex heights.

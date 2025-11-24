@@ -1012,7 +1012,7 @@ namespace SF3.Models.Files.MPD {
                         var tile = Surface.GetTile(tileX, tileZ) as Tile;
                         if (tile == null)
                             continue;
-                        var tileY = tile.GetAverageVisualVertexHeight();
+                        var tileY = tile.GetAverageVertexHeight();
 
                         // Trees should be very close to the center of the tile vertically.
                         var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
