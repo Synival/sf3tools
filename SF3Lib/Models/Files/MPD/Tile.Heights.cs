@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CommonLib.Types;
+using SF3.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
@@ -73,17 +74,14 @@ namespace SF3.Models.Files.MPD {
             TriggerNeighborTileModified(otherTilesOffsetX, otherTilesOffsetY);
         }
 
-        public float GetAverageSurfaceDataVertexHeight()
-            => (float) Math.Round(((CornerType[]) Enum.GetValues(typeof(CornerType))).Average(x => GetSurfaceDataVertexHeight(x) * 16f)) / 16f;
-
         public void CopySurfaceDataVertexHeightToNonFlatNeighbors(CornerType corner) {
             var height = GetSurfaceDataVertexHeight(corner);
             var adjacentCorners = GetAdjacentTilesAtCorner(corner);
             foreach (var ac in adjacentCorners) {
                 var acTile = MPD_File.Tiles[ac.X, ac.Y];
                 if (!acTile.IsFlat) {
-                    acTile.SetSurfaceDataVertexHeight(ac.Corner, height);
-                    acTile.CenterHeight = acTile.GetAverageSurfaceDataVertexHeight();
+                    MPD_File.SurfaceData.HeightmapRowTable[ac.Y].SetHeight(ac.X, corner, height);
+                    acTile.CenterHeight = acTile.GetAverageVisualVertexHeight();
                 }
             }
         }

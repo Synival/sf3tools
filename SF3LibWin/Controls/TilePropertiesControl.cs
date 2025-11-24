@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
 using CommonLib.Types;
+using SF3.Extensions;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
@@ -187,7 +188,7 @@ namespace SF3.Win.Controls {
 
         private void SetCenterHeightToAverageSurfaceDataVertexHeight() {
             using (IncrementNonUserInputGuard()) {
-                var avgHeight = _tile.GetAverageSurfaceDataVertexHeight();
+                var avgHeight = _tile.GetAverageVisualVertexHeight();
                 nudMoveCenterHeight.Value = (decimal) avgHeight;
                 _tile.CenterHeight = avgHeight;
             }

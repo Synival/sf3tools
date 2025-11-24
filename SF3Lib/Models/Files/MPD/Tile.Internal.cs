@@ -23,10 +23,13 @@ namespace SF3.Models.Files.MPD {
             var y = Y + offsetY;
 
             if (x >= 0 && y >= 0 && x < 64 && y < 64) {
-                var tile = MPD_File.Tiles[x, y];
-                tile.Modified?.Invoke(tile, EventArgs.Empty);
+                var tile = MPD_File.Tiles[x, y] as Tile;
+                tile.TriggerModified(this);
             }
         }
+
+        private void TriggerModified(object from)
+            => Modified?.Invoke(from, EventArgs.Empty);
 
         private struct TileAndCorner {
             public int X;

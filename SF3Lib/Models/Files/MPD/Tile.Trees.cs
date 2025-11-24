@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
+using SF3.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
@@ -44,6 +45,11 @@ namespace SF3.Models.Files.MPD {
             if (TreeModelID.HasValue)
                 return false;
 
+            // Do nothing unless the IMPD_File's tiles are file-based tiles.
+            // (We have better methods otherwise)
+            if (MPD_File.Tiles == null || !(MPD_File.Tiles[0, 0] is Tile))
+                return false;
+
             // Get a list of all currently associated trees.
             var chunkIndex = MPD_File.Flags.Chunk20IsModels ? 20 : 1;
             var modelCollection = MPD_File.ModelCollections.FirstOrDefault(x => x.ChunkIndex == chunkIndex);
@@ -51,6 +57,7 @@ namespace SF3.Models.Files.MPD {
                 return false;
 
             var associatedModelsList = MPD_File.Tiles.To1DArray()
+                .Cast<Tile>()
                 .Where(x => x.TreeModelID.HasValue)
                 .Select(x => x.TreeModelID.Value)
                 .ToList();
@@ -70,7 +77,7 @@ namespace SF3.Models.Files.MPD {
 
             // We found a tree, so let's position it, associate it, and return success.
             model.PositionX = (short) ((X + 0.5f) * -32.0f);
-            model.PositionY = (short) (GetAverageSurfaceDataVertexHeight() * -32.0f);
+            model.PositionY = (short) (this.GetAverageVisualVertexHeight() * -32.0f);
             model.PositionZ = (short) ((Y + 0.5f) * -32.0f);
 
             TreeModelID = model.ID;

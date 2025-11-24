@@ -1,4 +1,5 @@
-﻿using CommonLib.SGL;
+﻿using System;
+using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.Types;
 
@@ -19,6 +20,11 @@ namespace SF3.MPD {
         int Y { get; }
 
         /// <summary>
+        /// Random seed assigned to this tile for random noise, tree placement offsets, etc.
+        /// </summary>
+        int RandomSeed { get; }
+
+        /// <summary>
         /// Flipping, rotation, and "is flat" tile flags.
         /// </summary>
         byte TextureFlags { get; set; }
@@ -27,6 +33,16 @@ namespace SF3.MPD {
         /// Texture ID for this paticular tile. Set to 0xFF for an empty tile.
         /// </summary>
         byte TextureID { get; set; }
+
+        /// <summary>
+        /// Horizontal or vertical flipping for the texture of this tile.
+        /// </summary>
+        TextureFlipType TextureFlip { get; set; }
+
+        /// <summary>
+        /// Rotation of the texture of this tile in increments of 90 degrees.
+        /// </summary>
+        TextureRotateType TextureRotate { get; set; }
 
         /// <summary>
         /// When set, the tile is flat and independent from the surface model mesh. Only 150 of this tiles can exist
@@ -76,5 +92,10 @@ namespace SF3.MPD {
         /// Event ID of the tile that ties in with warps, interactables, searchable items, pre-loading triggers, etc.
         /// </summary>
         byte EventID { get; set; }
+
+        /// <summary>
+        /// Is invoked when the tile is modified.
+        /// </summary>
+        event EventHandler Modified;
     }
 }

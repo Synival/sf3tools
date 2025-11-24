@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
+using SF3.Extensions;
 using SF3.FieldEditing;
 using SF3.Types;
 using SF3.Win.OpenGL.MPD_File;
@@ -247,7 +248,7 @@ namespace SF3.Win.Controls {
                 for (int ty = y - 2 - nearbyRange; ty <= y + 2 + nearbyRange; ty++) {
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
                         var affectedTile = MPD_File.Tiles[tx, ty];
-                        affectedTile.CenterHeight = affectedTile.GetAverageSurfaceDataVertexHeight();
+                        affectedTile.CenterHeight = affectedTile.GetAverageVisualVertexHeight();
                         affectedTile.UpdateVertexNormals(settings);
                     }
                 }

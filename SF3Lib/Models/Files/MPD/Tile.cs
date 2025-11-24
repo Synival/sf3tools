@@ -33,6 +33,6 @@ namespace SF3.Models.Files.MPD {
         public Dictionary<CornerType, BlockVertexLocation> BlockVertexLocations { get; }
         public Dictionary<CornerType, BlockVertexLocation[]> SharedBlockVertexLocations { get; }
 
-        public EventHandler Modified;
+        public event EventHandler Modified;
     }
 }

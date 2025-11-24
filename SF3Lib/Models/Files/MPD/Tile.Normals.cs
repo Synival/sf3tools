@@ -43,8 +43,8 @@ namespace SF3.Models.Files.MPD {
                     var tx = x + vxCenter;
                     var ty = y + vyCenter;
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64) {
-                        var tile = MPD_File.Tiles[tx, ty];
-                        tile.Modified?.Invoke(tile, EventArgs.Empty);
+                        var tile = MPD_File.Tiles[tx, ty] as Tile;
+                        tile?.Modified?.Invoke(tile, EventArgs.Empty);
                     }
                 }
             }

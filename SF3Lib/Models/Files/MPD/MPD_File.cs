@@ -21,6 +21,7 @@ using CommonLib.Extensions;
 using CommonLib.Types;
 using SF3.NamedValues;
 using SF3.MPD;
+using SF3.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {
@@ -1005,8 +1006,10 @@ namespace SF3.Models.Files.MPD {
                         if (tileX < 0 || tileX >= 64 || tileZ < 0 || tileZ >= 64)
                             continue;
 
-                        var tile = Tiles[tileX, tileZ];
-                        var tileY = tile.GetAverageSurfaceDataVertexHeight();
+                        var tile = Tiles[tileX, tileZ] as Tile;
+                        if (tile == null)
+                            continue;
+                        var tileY = tile.GetAverageVisualVertexHeight();
 
                         // Trees should be very close to the center of the tile vertically.
                         var distance = (new VECTOR(tileX, tileY, tileZ) - tilePosition).GetLength();
@@ -1045,8 +1048,10 @@ namespace SF3.Models.Files.MPD {
 
         public void ResetTileTrees() {
             foreach (var tile in Tiles) {
-                tile.TreeModelID = null;
-                tile.TreeModelChunkIndex = null;
+                if (tile is Tile fileTile) {
+                    fileTile.TreeModelID = null;
+                    fileTile.TreeModelChunkIndex = null;
+                }
             }
         }
 
@@ -1360,22 +1365,24 @@ namespace SF3.Models.Files.MPD {
             var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
 
             foreach (var tile in Tiles) {
-                // This *would* report irregularities in heightmaps, if the existed :)
-                var moveHeights  = corners.ToDictionary(c => c, tile.GetSurfaceDataVertexHeight);
-                if (tile.IsFlat) {
-                    var br = CornerType.BottomRight;
-                    foreach (var c in corners) {
-                        if (c == br)
-                            continue;
-                        if (moveHeights[c] != moveHeights[br])
-                            errors.Add("Flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match bottom-right corner height: " + moveHeights[c] + " != " + moveHeights[br]);
+                if (tile is Tile fileTile) {
+                    // This *would* report irregularities in heightmaps, if the existed :)
+                    var moveHeights = corners.ToDictionary(c => c, fileTile.GetSurfaceDataVertexHeight);
+                    if (tile.IsFlat) {
+                        var br = CornerType.BottomRight;
+                        foreach (var c in corners) {
+                            if (c == br)
+                                continue;
+                            if (moveHeights[c] != moveHeights[br])
+                                errors.Add("Flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match bottom-right corner height: " + moveHeights[c] + " != " + moveHeights[br]);
+                        }
                     }
-                }
-                else {
-                    var modelHeights = corners.ToDictionary(c => c, tile.GetSurfaceModelVertexHeight);
-                    foreach (var c in corners) {
-                        if (moveHeights[c] != modelHeights[c])
-                            errors.Add("Non-flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match surface model height: " + moveHeights[c] + " != " + modelHeights[c]);
+                    else {
+                        var modelHeights = corners.ToDictionary(c => c, fileTile.GetSurfaceModelVertexHeight);
+                        foreach (var c in corners) {
+                            if (moveHeights[c] != modelHeights[c])
+                                errors.Add("Non-flat tile (" + tile.X + ", " + tile.Y + ") corner '" + c.ToString() + " height doesn't match surface model height: " + moveHeights[c] + " != " + modelHeights[c]);
+                        }
                     }
                 }
 
