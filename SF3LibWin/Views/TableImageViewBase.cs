@@ -12,7 +12,8 @@ namespace SF3.Win.Views {
         where TImageView : ImageView
     {
         public TableImageViewBase(string name, TTable table, INameGetterContext nameGetterContext, float? imageScale = null) : base(name) {
-            TableView = new TableView("Table", table, nameGetterContext, typeof(TTableItem));
+            var firstItem = table.Length > 0 ? table[0] : null;
+            TableView = new TableView("Table", table, nameGetterContext, firstItem?.GetType() ?? typeof(TTableItem));
             ImageView = CreateImageView(imageScale);
         }
 

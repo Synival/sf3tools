@@ -67,7 +67,7 @@ namespace SF3.Models.Files.DAT {
                     break;
 
                 case DAT_FileType.BTLENKEI:
-                    tables.Add(TextureTable = BtlEnkei_TextureTable.Create(Data, nameof(BtlEnkei_TextureTable), 0, NameGetterContext));
+                    tables.Add(TextureTable = BtlEnkei_TextureTable.Create(Data, nameof(BtlEnkei_TextureTable), 0, NameGetterContext, headerless: Scenario >= ScenarioType.Scenario3));
                     TextureViewerScale = 1;
                     break;
             }

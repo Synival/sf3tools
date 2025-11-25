@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.DAT;
-using SF3.Models.Structs.DAT;
 
 namespace SF3.Win.Views.DAT {
     public class DAT_View : TabView {

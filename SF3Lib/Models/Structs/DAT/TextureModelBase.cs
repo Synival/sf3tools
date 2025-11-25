@@ -10,7 +10,8 @@ using SF3.Types;
 namespace SF3.Models.Structs.DAT {
     public abstract class TextureModelBase : Struct {
         public TextureModelBase(IByteData data, int id, string name, int address, int size,
-            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent)
+            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent,
+            bool fetchImmediately = true)
         : base(data, id, name, address, size) {
             Width  = width;
             Height = height;
@@ -20,7 +21,8 @@ namespace SF3.Models.Structs.DAT {
             IsCompressed = isCompressed;
             ZeroIsTransparent = zeroIsTransparent;
 
-            _ = FetchAndCacheTexture();
+            if (fetchImmediately)
+                _ = FetchAndCacheTexture();
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
