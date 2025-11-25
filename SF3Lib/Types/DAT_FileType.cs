@@ -3,6 +3,7 @@
         FACE32,
         FACE64,
         KAO,
-        ITEM_CG
+        ITEM_CG,
+        BTLENKEI,
     }
 }

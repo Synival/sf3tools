@@ -24,5 +24,6 @@ namespace SF3.Types {
         DAT_FACE64,
         //DAT_KAO,
         DAT_ITEM_CG,
+        DAT_BTLENKEI,
     }
 }

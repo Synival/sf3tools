@@ -98,6 +98,8 @@ namespace SF3.Utils {
                 //    return SF3FileType.DAT_KAO;
                 if (filenameUpper.Contains("ITEM_CG"))
                     return SF3FileType.DAT_ITEM_CG;
+                if (filenameUpper.Contains("BTLENKEI"))
+                    return SF3FileType.DAT_BTLENKEI;
             }
 
             // Couldn't figure it out; it's unknown.
@@ -199,6 +201,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_FACE64:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE64);
                 //case SF3FileType.DAT_KAO:     return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.KAO);
                 case SF3FileType.DAT_ITEM_CG: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.ITEM_CG);
+                case SF3FileType.DAT_BTLENKEI: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.BTLENKEI);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
@@ -230,6 +233,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_FACE64:  return "FACE64*.DAT Files";
                 //case SF3FileType.DAT_KAO:     return "KAO*.DAT Files";
                 case SF3FileType.DAT_ITEM_CG: return "ITEM_CG.DAT File";
+                case SF3FileType.DAT_BTLENKEI: return "BTLENKEI.DAT File";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -261,6 +265,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_FACE64:  return "*FACE64*.DAT";
                 //case SF3FileType.DAT_KAO:     return "*KAO*.DAT";
                 case SF3FileType.DAT_ITEM_CG: return "*ITEM_CG*.DAT";
+                case SF3FileType.DAT_BTLENKEI: return "*BTLENKEI*.DAT";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -292,6 +297,7 @@ namespace SF3.Utils {
                 case "*FACE64*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE64 };
                 //case "*KAO*.DAT":     return new SF3FileType[] { SF3FileType.DAT_KAO };
                 case "*ITEM_CG*.DAT": return new SF3FileType[] { SF3FileType.DAT_ITEM_CG };
+                case "*BTLENKEI*.DAT": return new SF3FileType[] { SF3FileType.DAT_BTLENKEI };
                 default:
                     return new SF3FileType[] {};
             }

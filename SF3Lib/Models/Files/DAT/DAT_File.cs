@@ -65,6 +65,11 @@ namespace SF3.Models.Files.DAT {
                     tables.Add(TextureTable = ItemCG_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext));
                     TextureViewerScale = 4;
                     break;
+
+                case DAT_FileType.BTLENKEI:
+                    tables.Add(TextureTable = BtlEnkei_TextureTable.Create(Data, nameof(BtlEnkei_TextureTable), 0, NameGetterContext));
+                    TextureViewerScale = 1;
+                    break;
             }
 
             return tables;
