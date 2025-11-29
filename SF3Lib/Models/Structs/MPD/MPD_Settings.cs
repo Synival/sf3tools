@@ -2,8 +2,8 @@
 using SF3.MPD;
 
 namespace SF3.Models.Structs.MPD {
-    public class MPDSettings : IMPD_Settings {
-        public MPDSettings(IMPD_File file) {
+    public class MPD_Settings : IMPD_Settings {
+        public MPD_Settings(IMPD_File file) {
             MPD_File = file;
         }
 

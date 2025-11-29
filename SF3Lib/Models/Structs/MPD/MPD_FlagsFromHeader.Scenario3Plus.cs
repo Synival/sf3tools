@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 
 namespace SF3.Models.Structs.MPD {
-    public partial class MPDFlagsFromHeader {
+    public partial class MPD_FlagsFromHeader {
         private bool IsScenario3OrLater   => Header.IsScenario3OrLater;
 
         public bool CanSet_0x0002_HasSurfaceTextureRotation => IsScenario3OrLater;

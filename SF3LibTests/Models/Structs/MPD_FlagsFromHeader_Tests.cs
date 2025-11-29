@@ -4,11 +4,11 @@ using SF3.Types;
 
 namespace SF3.Tests.Models.Structs {
     [TestClass]
-    public class MPDFlagsFromHeader_Tests {
+    public class MPD_FlagsFromHeader_Tests {
         [TestMethod]
         public void Scenario1_ModelSurfaceFlagSettings_AllPossibilitiesLookCorrect() {
-            var header = new MPDHeaderModel(new SF3.ByteData.ByteData(new ByteArray(100)), 0, "Header", 0, ScenarioType.Scenario1);
-            var flags = new MPDFlagsFromHeader(header);
+            var header = new MPD_HeaderModel(new SF3.ByteData.ByteData(new ByteArray(100)), 0, "Header", 0, ScenarioType.Scenario1);
+            var flags = new MPD_FlagsFromHeader(header);
 
             string? RunTestCase(
                 bool hasModels,
@@ -62,8 +62,8 @@ namespace SF3.Tests.Models.Structs {
 
         [TestMethod]
         public void Scenario2_ModelSurfaceFlagSettings_AllPossibilitiesLookCorrect() {
-            var header = new MPDHeaderModel(new SF3.ByteData.ByteData(new ByteArray(100)), 0, "Header", 0, ScenarioType.Scenario2);
-            var flags = new MPDFlagsFromHeader(header);
+            var header = new MPD_HeaderModel(new SF3.ByteData.ByteData(new ByteArray(100)), 0, "Header", 0, ScenarioType.Scenario2);
+            var flags = new MPD_FlagsFromHeader(header);
 
             string? RunTestCase(
                 bool hasModels,
@@ -134,8 +134,8 @@ namespace SF3.Tests.Models.Structs {
 
         [TestMethod]
         public void Scenario3_ModelSurfaceFlagSettings_AllPossibilitiesLookCorrect() {
-            var header = new MPDHeaderModel(new SF3.ByteData.ByteData(new ByteArray(100)), 0, "Header", 0, ScenarioType.Scenario3);
-            var flags = new MPDFlagsFromHeader(header);
+            var header = new MPD_HeaderModel(new SF3.ByteData.ByteData(new ByteArray(100)), 0, "Header", 0, ScenarioType.Scenario3);
+            var flags = new MPD_FlagsFromHeader(header);
 
             string? RunTestCase(
                 bool hasModels,

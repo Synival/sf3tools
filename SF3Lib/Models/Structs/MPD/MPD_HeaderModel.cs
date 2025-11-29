@@ -4,7 +4,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
-    public class MPDHeaderModel : Struct {
+    public class MPD_HeaderModel : Struct {
         private readonly int _mapFlagsAddr;                // int16  Unknown. Might be map id.
         private readonly int _padding1Addr;                // int16  Always zero
         private readonly int _offsetLightPaletteAddr;      // int32  Always 0x0c. Pointer to 32 values for light palette. See (#header-offset-1).
@@ -45,7 +45,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _padding4Addr;                // int16  Always zero
         private readonly int _offsetBoundariesAddr;        // int32  Pointer to camera and battle boundaries in real-world coordinates.
 
-        public MPDHeaderModel(IByteData data, int id, string name, int address, ScenarioType scenario)
+        public MPD_HeaderModel(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0x58) {
             Scenario = scenario;
 

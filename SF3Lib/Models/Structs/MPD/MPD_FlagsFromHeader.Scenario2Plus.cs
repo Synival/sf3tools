@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 
 namespace SF3.Models.Structs.MPD {
-    public partial class MPDFlagsFromHeader {
+    public partial class MPD_FlagsFromHeader {
         private bool IsScenario2OrLater   => Header.IsScenario2OrLater;
 
         public bool CanSet_0x0080_SetMSBForPalette1 => IsScenario2OrLater;

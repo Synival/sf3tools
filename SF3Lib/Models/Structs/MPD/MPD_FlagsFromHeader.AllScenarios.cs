@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 
 namespace SF3.Models.Structs.MPD {
-    public partial class MPDFlagsFromHeader {
+    public partial class MPD_FlagsFromHeader {
         public bool CanSet_0x0001_Unknown => true;
         [TableViewModelColumn(addressField: null, displayOrder: 0.0001f, displayName: "(0x0001) Unknown", displayGroup: "Flags")]
         public bool Bit_0x0001_Unknown {

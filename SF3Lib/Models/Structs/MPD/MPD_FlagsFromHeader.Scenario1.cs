@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 
 namespace SF3.Models.Structs.MPD {
-    public partial class MPDFlagsFromHeader {
+    public partial class MPD_FlagsFromHeader {
         private bool IsScenario1OrEarlier => Header.IsScenario1OrEarlier;
 
         public bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures => IsScenario1OrEarlier;

@@ -1,20 +1,8 @@
 ﻿using CommonLib.Attributes;
-using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
-    public partial class MPDFlagsFromHeader : IMPD_AllFlags {
-        public MPDFlagsFromHeader(MPDHeaderModel header) {
-            Header = header;
-        }
-
-        public MPDHeaderModel Header { get; }
-
-        private ushort MapFlags {
-            get => Header.MapFlags;
-            set => Header.MapFlags = value;
-        }
-
+    public partial class MPD_FlagsFromHeader {
         [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelsChunkIndex), displayGroup: "Flags")]
         public int? ModelsChunkIndex {
             get {
