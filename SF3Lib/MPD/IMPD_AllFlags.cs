@@ -4,11 +4,7 @@ namespace SF3.MPD {
     public interface IMPD_AllFlags : IMPD_AllScenarioFlags, IMPD_Scenario1Flags, IMPD_Scenario1and2Flags, IMPD_Scenario2PlusFlags, IMPD_Scenario3PlusFlags {
         // Possible flags/settings for all scenarios
         BackgroundImageType BackgroundImageType { get; set; }
-        bool HasModels { get; set; }
-        bool HasSurfaceModel { get; set; }
         GroundImageType GroundImageType { get; set; }
-        bool HasCutsceneSkyBox { get; set; }
-        bool HasBattleSkyBox { get; set; }
         bool HasExtraChunk1ModelWithChunk21Textures { get; set; }
         bool Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
         bool Chunk20IsSurfaceModelIfExists { get; set; }
@@ -26,8 +22,8 @@ namespace SF3.MPD {
         bool CanSetHasModels { get; }
         bool CanSetHasSurfaceModel { get; }
         bool CanSetGroundImageType { get; }
-        bool CanSetHasCutsceneSkyBox { get; }
-        bool CanSetHasBattleSkyBox { get; }
+        bool CanSet_0x0800_HasCutsceneSkyBox { get; }
+        bool CanSet_0x2000_HasBattleSkyBox { get; }
         bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
         bool CanSetHasExtraChunk1ModelWithChunk21Textures { get; }
         bool CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; }

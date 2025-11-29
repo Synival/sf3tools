@@ -226,7 +226,7 @@ namespace SF3.Win.Controls {
                     DrawModels = DrawModels,
                     DrawSurfaceModel = DrawSurfaceModel,
                     DrawGround = DrawGround,
-                    DrawSkyBox = MPD_File?.Flags?.HasCutsceneSkyBox == true && DrawSkyBox,
+                    DrawSkyBox = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSkyBox == true && DrawSkyBox,
                     DrawGradients = DrawGradients,
                     ApplyLighting = ApplyLighting,
 

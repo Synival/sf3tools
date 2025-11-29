@@ -23,5 +23,17 @@
         /// (Potentially exists in Scenario 1 but unused)
         /// </summary>
         bool Bit_0x0020_Unknown { get; set; }
+
+        /// <summary>
+        /// When set, models are present in this MPD. This can be toggled during gameplay to prevent the rendering of
+        /// models.
+        /// </summary>
+        bool Bit_0x0100_HasModels { get; set; }
+
+        /// <summary>
+        /// When set, the surface model is present in this MPD. This can be toggled during gameplay to prevent the
+        /// rendering of the surface model.
+        /// </summary>
+        bool Bit_0x0200_HasSurfaceModel { get; set; }
     }
 }

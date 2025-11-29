@@ -35,5 +35,10 @@
         /// useful for forcing it if a gradient is not immediately present.
         /// </summary>
         bool Bit_0x0080_SetMSBForPalette1 { get; set; }
+
+        /// <summary>
+        /// When set, there are chunks with data for a skybox image that is displayed outside of battle.
+        /// </summary>
+        bool Bit_0x0800_HasCutsceneSkyBox { get; set; }
     }
 }
