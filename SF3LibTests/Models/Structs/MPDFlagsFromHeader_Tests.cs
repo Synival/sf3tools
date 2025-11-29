@@ -27,7 +27,7 @@ namespace SF3.Tests.Models.Structs {
 
                 flags.Bit_0x0100_HasModels = hasModels;
                 flags.Bit_0x0200_HasSurfaceModel = hasSurfaceModel;
-                flags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists = has0x8000;
+                flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel = has0x8000;
 
                 var resultsString =
                     TF(expectedModelsChunkIndex             == flags.ModelsChunkIndex) +
@@ -84,7 +84,7 @@ namespace SF3.Tests.Models.Structs {
 
                 flags.Bit_0x0100_HasModels = hasModels;
                 flags.Bit_0x0200_HasSurfaceModel = hasSurfaceModel;
-                flags.Bit_0x8000_Chunk20IsSurfaceModelIfExists = has0x8000;
+                flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel = has0x8000;
                 flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures = hasKraken;
 
                 var resultsString =
@@ -157,7 +157,7 @@ namespace SF3.Tests.Models.Structs {
 
                 flags.Bit_0x0100_HasModels = hasModels;
                 flags.Bit_0x0200_HasSurfaceModel = hasSurfaceModel;
-                flags.Bit_0x8000_Chunk20IsSurfaceModelIfExists = has0x8000;
+                flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel = has0x8000;
                 flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures = hasKraken;
                 flags.Bit_0x0002_HasSurfaceTextureRotation = hasRotatableTextures;
 

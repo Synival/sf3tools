@@ -98,14 +98,10 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cb0x4000_HasExtraChunk1ModelWithChunk21Textures,
                     nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
                     nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.CheckedChanged += (s, e)
-                => TrySetProperty(cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
-                    nameof(IMPD_AllFlags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
-                    nameof(IMPD_AllFlags.CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
-            cb0x8000_Chunk20IsSurfaceModelIfExists.CheckedChanged += (s, e)
-                => TrySetProperty(cb0x8000_Chunk20IsSurfaceModelIfExists,
-                    nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
-                    nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel,
+                    nameof(IMPD_AllFlags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel),
+                    nameof(IMPD_AllFlags.CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel));
 
             ResumeLayout();
         }
@@ -185,12 +181,9 @@ namespace SF3.Win.Controls {
             SetControlState(cb0x4000_HasExtraChunk1ModelWithChunk21Textures,
                 nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
                 nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
-            SetControlState(cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
-                nameof(IMPD_AllFlags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
-                nameof(IMPD_AllFlags.CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
-            SetControlState(cb0x8000_Chunk20IsSurfaceModelIfExists,
-                nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
-                nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
+            SetControlState(cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel,
+                nameof(IMPD_AllFlags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel),
+                nameof(IMPD_AllFlags.CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel));
 
             _inUpdateFlagsFromSource = false;
         }

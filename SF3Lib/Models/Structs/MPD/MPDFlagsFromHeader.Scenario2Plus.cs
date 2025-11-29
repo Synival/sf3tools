@@ -43,15 +43,5 @@ namespace SF3.Models.Structs.MPD {
                     MapFlags = (ushort) (value ? MapFlags | 0x4000 : MapFlags & ~0x4000);
             }
         }
-
-        public bool CanSet_0x8000_Chunk20IsSurfaceModelIfExists => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.8001f, displayName: "(0x8000) Chunk20IsSurfaceModelIfExists (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
-        public bool Bit_0x8000_Chunk20IsSurfaceModelIfExists {
-            get => CanSet_0x8000_Chunk20IsSurfaceModelIfExists ? (MapFlags & 0x8000) == 0x8000 : false;
-            set {
-                if (CanSet_0x8000_Chunk20IsSurfaceModelIfExists)
-                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
-            }
-        }
     }
 }

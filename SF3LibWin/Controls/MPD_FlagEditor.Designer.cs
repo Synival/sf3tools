@@ -31,13 +31,12 @@
             cb0x0800_HasCutsceneSkyBox = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x2000_HasBattleSkyBox = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x4000_HasExtraChunk1ModelWithChunk21Textures = new CommonLib.Win.Controls.DarkModeCheckBox();
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists = new CommonLib.Win.Controls.DarkModeCheckBox();
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0002_HasSurfaceTextureRotation = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0004_AddDotProductBasedNoiseToStandardLightmap = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0008_KeepTexturelessFlatTiles = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0200_HasSurfaceModel = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x2000_NarrowAngleBasedLightmap = new CommonLib.Win.Controls.DarkModeCheckBox();
-            cb0x8000_Chunk20IsSurfaceModelIfExists = new CommonLib.Win.Controls.DarkModeCheckBox();
             label0x0001 = new CommonLib.Win.Controls.DarkModeLabel();
             label0x0002 = new CommonLib.Win.Controls.DarkModeLabel();
             label0x0004 = new CommonLib.Win.Controls.DarkModeLabel();
@@ -143,15 +142,15 @@
             cb0x4000_HasExtraChunk1ModelWithChunk21Textures.Text = "Has Extra Chunk[1] Model with Chunk[21] Textures (Scn2+)";
             cb0x4000_HasExtraChunk1ModelWithChunk21Textures.UseVisualStyleBackColor = true;
             // 
-            // cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists
+            // cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel
             // 
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.AutoSize = true;
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.Location = new System.Drawing.Point(54, 460);
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.Name = "cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists";
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.Size = new System.Drawing.Size(408, 19);
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.TabIndex = 20;
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.Text = "Chunk[1] Is Still Loaded from Low Memory if Surface Model Exists (Scn1)";
-            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.UseVisualStyleBackColor = true;
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.AutoSize = true;
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.Location = new System.Drawing.Point(54, 460);
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.Name = "cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel";
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.Size = new System.Drawing.Size(286, 19);
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.TabIndex = 20;
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.Text = "Models Are Still Low Memory with Surface Model";
+            cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.UseVisualStyleBackColor = true;
             // 
             // cb0x0002_HasSurfaceTextureRotation
             // 
@@ -202,17 +201,6 @@
             cb0x2000_NarrowAngleBasedLightmap.TabIndex = 17;
             cb0x2000_NarrowAngleBasedLightmap.Text = "Narrow Angle-Based Surface Lightmap (Scn2+)";
             cb0x2000_NarrowAngleBasedLightmap.UseVisualStyleBackColor = true;
-            // 
-            // cb0x8000_Chunk20IsSurfaceModelIfExists
-            // 
-            cb0x8000_Chunk20IsSurfaceModelIfExists.AutoSize = true;
-            cb0x8000_Chunk20IsSurfaceModelIfExists.Enabled = false;
-            cb0x8000_Chunk20IsSurfaceModelIfExists.Location = new System.Drawing.Point(54, 477);
-            cb0x8000_Chunk20IsSurfaceModelIfExists.Name = "cb0x8000_Chunk20IsSurfaceModelIfExists";
-            cb0x8000_Chunk20IsSurfaceModelIfExists.Size = new System.Drawing.Size(256, 19);
-            cb0x8000_Chunk20IsSurfaceModelIfExists.TabIndex = 21;
-            cb0x8000_Chunk20IsSurfaceModelIfExists.Text = "Chunk[20] Is Surface Model if Exists (Scn2+)";
-            cb0x8000_Chunk20IsSurfaceModelIfExists.UseVisualStyleBackColor = true;
             // 
             // label0x0001
             // 
@@ -469,7 +457,7 @@
             label0x8000.AutoSize = true;
             label0x8000.DisabledColor = System.Drawing.Color.Empty;
             label0x8000.IsSeparator = false;
-            label0x8000.Location = new System.Drawing.Point(3, 469);
+            label0x8000.Location = new System.Drawing.Point(3, 461);
             label0x8000.Name = "label0x8000";
             label0x8000.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             label0x8000.Size = new System.Drawing.Size(45, 15);
@@ -484,9 +472,8 @@
             Controls.Add(cb0x4000_HasExtraChunk1ModelWithChunk21Textures);
             Controls.Add(label0x4000);
             Controls.Add(cb0x4000_Unused);
-            Controls.Add(cb0x8000_Chunk20IsSurfaceModelIfExists);
             Controls.Add(cb0x0080_HasChunk19ModelWithChunk21Textures);
-            Controls.Add(cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists);
+            Controls.Add(cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel);
             Controls.Add(label0x2000);
             Controls.Add(label0x1000);
             Controls.Add(cb0x2000_NarrowAngleBasedLightmap);
@@ -519,7 +506,7 @@
             Controls.Add(label0x0002);
             Controls.Add(label0x0001);
             Name = "MPD_FlagEditor";
-            Size = new System.Drawing.Size(465, 499);
+            Size = new System.Drawing.Size(396, 482);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -538,8 +525,7 @@
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x2000_HasBattleSkyBox;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x2000_NarrowAngleBasedLightmap;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x4000_HasExtraChunk1ModelWithChunk21Textures;
-        private CommonLib.Win.Controls.DarkModeCheckBox cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists;
-        private CommonLib.Win.Controls.DarkModeCheckBox cb0x8000_Chunk20IsSurfaceModelIfExists;
+        private CommonLib.Win.Controls.DarkModeCheckBox cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel;
         private CommonLib.Win.Controls.DarkModeLabel label0x0001;
         private CommonLib.Win.Controls.DarkModeLabel label0x0002;
         private CommonLib.Win.Controls.DarkModeLabel label0x0004;

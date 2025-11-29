@@ -1222,7 +1222,7 @@ namespace SF3.Models.Files.MPD {
             var chunkHeaders = ChunkLocations;
             var errors = new List<string>();
 
-            var expectedIndex = (flags.Bit_0x8000_Chunk20IsSurfaceModelIfExists && chunkHeaders[20].Exists) ? 20 : 2;
+            var expectedIndex = (flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel && chunkHeaders[20].Exists) ? 20 : 2;
             var chunk2LooksLikeSurfaceChunk  = chunkHeaders[2].Exists  && chunkHeaders[2].ChunkSize  == 0xCF00;
             var chunk20LooksLikeSurfaceChunk = chunkHeaders[20].Exists && chunkHeaders[20].ChunkSize == 0xCF00;
 
@@ -1238,7 +1238,7 @@ namespace SF3.Models.Files.MPD {
                     errors.Add($"(Maybe not an error?) SurfaceModel in unexpected index. Expected in Chunk[{expectedIndex}] but found at Chunk[{SurfaceModelChunkIndex}]");
             }
             else if (!flags.Bit_0x0200_HasSurfaceModel) {
-                if (flags.Bit_0x8000_Chunk20IsSurfaceModelIfExists)
+                if (flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
                     errors.Add("HasSurfaceModel flag is unset but Chunk20IsSurfaceModelIfExists flag is set");
                 if (chunk2LooksLikeSurfaceChunk)
                     errors.Add($"HasSurfaceModel flag is unset but Chunk[2] (expected={expectedIndex}) looks like one");

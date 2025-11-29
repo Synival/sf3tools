@@ -67,5 +67,15 @@
         /// mutually exclusive.
         /// </summary>
         bool Bit_0x1000_HasTileBasedGroundImage { get; set; }
+
+        /// <summary>
+        /// Used when both a model chunk and surface model chunk are present. In that case:
+        /// - When unset, the model chunk will be loaded into high memory and 0x060A**** pointers are expected.
+        ///   (In Scenario 2+, the models chunk will now be in Chunk[20], not Chunk[1].)
+        /// - When set, the model chunk will remain looaded from low memory and 0x0029**** pointers are expected.
+        ///   (In Scenario 2+, the surface model chunk will now be in Chunk[20], not Chunk[2], unless
+        ///    the Scenario 3 "rotatable textures" flag it on.)
+        /// </summary>
+        bool Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel { get; set; }
     }
 }

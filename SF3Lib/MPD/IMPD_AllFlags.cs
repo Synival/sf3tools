@@ -28,7 +28,6 @@
         bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
         bool CanSet_0x4000_Unused { get; }
         bool CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures { get; }
-        bool CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; }
-        bool CanSet_0x8000_Chunk20IsSurfaceModelIfExists { get; }
+        bool CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel { get; }
     }
 }

@@ -7,20 +7,14 @@
         bool Bit_0x0080_HasChunk19ModelWithChunk10Textures { get; set; }
 
         /// <summary>
-        /// When set, there are chunks with data for a skybox image that is displayed during battle.
-        /// </summary>
-        bool Bit_0x2000_HasBattleSkyBox { get; set; }
-
-        /// <summary>
-        /// When set, if the surface model bit (0x0200) is set, then the models in Chunk[1] are in low memory rather
-        /// than high memory. The surface chunk is stored in high memory in this case.
-        /// </summary>
-        bool Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
-
-        /// <summary>
         /// Unused flag.
         /// </summary>
         bool Bit_0x0800_Unused { get; set; }
+
+        /// <summary>
+        /// When set, there are chunks with data for a skybox image that is displayed during battle.
+        /// </summary>
+        bool Bit_0x2000_HasBattleSkyBox { get; set; }
 
         /// <summary>
         /// Unused flag.

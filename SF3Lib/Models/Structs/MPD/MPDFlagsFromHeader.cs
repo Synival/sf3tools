@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.MPD {
             set => Header.MapFlags = value;
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelsChunkIndex), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelsChunkIndex), displayGroup: "Flags")]
         public int? ModelsChunkIndex {
             get {
                 if (!Bit_0x0100_HasModels)
@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.MPD {
 
                 return
                     (Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures ||
-                     (IsScenario2OrLater && Bit_0x0200_HasSurfaceModel && !Bit_0x8000_Chunk20IsSurfaceModelIfExists))
+                     (IsScenario2OrLater && Bit_0x0200_HasSurfaceModel && !Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel))
                     ? 20 : 1;
             }
         }
@@ -34,7 +34,7 @@ namespace SF3.Models.Structs.MPD {
                 if (!Bit_0x0200_HasSurfaceModel)
                     return null;
 
-                return (IsScenario2OrLater && (!Bit_0x0100_HasModels || !Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures) && Bit_0x8000_Chunk20IsSurfaceModelIfExists && !Bit_0x0002_HasSurfaceTextureRotation)
+                return (IsScenario2OrLater && (!Bit_0x0100_HasModels || !Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures) && Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel && !Bit_0x0002_HasSurfaceTextureRotation)
                     ? 20 : 2;
             }
         }
@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.MPD {
             get {
                 if (Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
                     return ChunkType.Models;
-                return Bit_0x0100_HasModels && (IsScenario1OrEarlier || !Bit_0x0200_HasSurfaceModel || Bit_0x8000_Chunk20IsSurfaceModelIfExists)
+                return Bit_0x0100_HasModels && (IsScenario1OrEarlier || !Bit_0x0200_HasSurfaceModel || Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
                     ? ChunkType.Models
                     : ChunkType.Unset;
             }
@@ -58,7 +58,7 @@ namespace SF3.Models.Structs.MPD {
             get {
                 if (Chunk1Type != ChunkType.Models)
                     return null;
-                return (IsScenario2OrLater || !Bit_0x0200_HasSurfaceModel || Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists)
+                return (IsScenario2OrLater || !Bit_0x0200_HasSurfaceModel || Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
                     ? MemoryLocationType.LowMemory
                     : MemoryLocationType.HighMemory;
             }
@@ -67,7 +67,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: null, displayOrder: 1.0005f, displayName: "(Derived) " + nameof(Chunk2Type), displayGroup: "Flags")]
         public ChunkType Chunk2Type {
             get {
-                return Bit_0x0200_HasSurfaceModel && (!Bit_0x8000_Chunk20IsSurfaceModelIfExists || Bit_0x0002_HasSurfaceTextureRotation)
+                return Bit_0x0200_HasSurfaceModel && (!Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel || Bit_0x0002_HasSurfaceTextureRotation || IsScenario1OrEarlier)
                     ? ChunkType.SurfaceModel
                     : ChunkType.Unset;
             }
@@ -82,7 +82,7 @@ namespace SF3.Models.Structs.MPD {
                 if (!Bit_0x0200_HasSurfaceModel)
                     return (Bit_0x0100_HasModels && Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures) ? ChunkType.Models : ChunkType.Unset;
 
-                if (Bit_0x8000_Chunk20IsSurfaceModelIfExists)
+                if (Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
                     return Bit_0x0002_HasSurfaceTextureRotation ? ChunkType.Unset : ChunkType.SurfaceModel;
 
                 return Bit_0x0100_HasModels ? ChunkType.Models : ChunkType.Unset;
@@ -99,11 +99,11 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 1.0008f, displayName: "(Derived) " + nameof(ModelsMemoryLocation), displayGroup: "Flags")]
+        [TableViewModelColumn(addressField: null, displayOrder: 1.0008f, displayName: "(Derived) " + nameof(SurfaceModelMemoryLocation), displayGroup: "Flags")]
         public MemoryLocationType? SurfaceModelMemoryLocation {
             get {
                 return Bit_0x0200_HasSurfaceModel
-                    ? ((IsScenario2OrLater && Bit_0x8000_Chunk20IsSurfaceModelIfExists && !Bit_0x0002_HasSurfaceTextureRotation) ? MemoryLocationType.HighMemory : MemoryLocationType.LowMemory)
+                    ? ((IsScenario2OrLater && Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel && !Bit_0x0002_HasSurfaceTextureRotation) ? MemoryLocationType.HighMemory : MemoryLocationType.LowMemory)
                     : (MemoryLocationType?) null;
             }
         }

@@ -71,5 +71,12 @@ namespace SF3.Models.Structs.MPD {
             get => (MapFlags & 0x1000) == 0x1000;
             set => MapFlags = value ? (ushort) (MapFlags | 0x1000) : (ushort) (MapFlags & ~0x1000);
         }
+
+        public bool CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.8000f, displayName: "(0x8000) ModelsAreStillLowMemoryWithSurfaceModel", displayGroup: "Flags")]
+        public bool Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel {
+            get => (MapFlags & 0x8000) == 0x8000;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
+        }
     }
 }
