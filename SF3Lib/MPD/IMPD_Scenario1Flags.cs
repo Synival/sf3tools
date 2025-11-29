@@ -16,5 +16,10 @@
         /// than high memory. The surface chunk is stored in high memory in this case.
         /// </summary>
         bool Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
+
+        /// <summary>
+        /// Unused flag.
+        /// </summary>
+        bool Bit_0x0800_Unused { get; set; }
     }
 }

@@ -123,6 +123,16 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0400) : (ushort) (MapFlags & ~0x0400);
         }
 
+        public bool CanSet_0x0800_Unused => IsScenario1OrEarlier;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0800f, displayName: "(0x0800) Unused (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Bit_0x0800_Unused {
+            get => CanSet_0x0800_Unused ? (MapFlags & 0x0800) == 0x0800 : false;
+            set {
+                if (CanSet_0x0800_Unused)
+                    MapFlags = value ? (ushort) (MapFlags | 0x0800) : (ushort) (MapFlags & ~0x0800);
+            }
+        }
+
         public bool CanSet_0x0800_HasCutsceneSkyBox => IsScenario2OrLater;
         [TableViewModelColumn(addressField: null, displayOrder: 0.0801f, displayName: "(0x0800) HasCutsceneSkyBox (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Bit_0x0800_HasCutsceneSkyBox {
