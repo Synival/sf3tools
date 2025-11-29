@@ -477,13 +477,10 @@ namespace SF3.Models.Files.MPD {
             var flags = Flags;
             var indices = new List<int>();
 
-            if (chunks[20].Exists && flags.Chunk20IsModels)
+            if (chunks[1].Exists && flags.Chunk1Type == ChunkType.Models)
+                indices.Add(1);
+            if (chunks[20].Exists && flags.Chunk20Type == ChunkType.Models)
                 indices.Add(20);
-
-            if (chunks[1].Exists)
-                if (!flags.Chunk20IsModels || flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
-                    indices.Add(1);
-
             if (chunks[19].Exists && flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
                 indices.Add(19);
 
@@ -491,14 +488,8 @@ namespace SF3.Models.Files.MPD {
         }
 
         private int? GetSurfaceModelChunkIndex(ChunkLocation[] chunks) {
-            var flags = Flags;
-            if (!flags.Bit_0x0200_HasSurfaceModel)
-                return null;
-
-            return
-                chunks[2].Exists ? 2 :
-                (flags.Chunk20IsSurfaceModel && chunks[20].Exists) ? 20 :
-                (int?) null;
+            var smci = Flags.SurfaceModelChunkIndex;
+            return (smci.HasValue && chunks[smci.Value].Exists) ? smci : null;
         }
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
@@ -1177,24 +1168,29 @@ namespace SF3.Models.Files.MPD {
 
             // Make sure the header indicates the correct chunks.
             var flags = Flags;
-            if (flags.Chunk1IsModels && chunkHeaders[1].ChunkType != ChunkType.Models)
-                errors.Add($"Chunk[1] type should be 'Models', but is {chunkHeaders[1].ChunkType}");
-            if (flags.Chunk2IsSurfaceModel && chunkHeaders[2].ChunkType != ChunkType.SurfaceModel)
-                errors.Add($"Chunk[2] type should be 'SurfaceModel', but is {chunkHeaders[2].ChunkType}");
-            if (flags.Chunk20IsModels && chunkHeaders[20].ChunkType != ChunkType.Models)
-                errors.Add($"Chunk[20] type should be 'Models', but is {chunkHeaders[20].ChunkType}");
-            if (flags.Chunk20IsSurfaceModel && chunkHeaders[20].ChunkType != ChunkType.SurfaceModel)
-                errors.Add($"Chunk[20] type should be 'SurfaceModel', but is {chunkHeaders[20].ChunkType}");
+            if (flags.Chunk1Type != chunkHeaders[1].ChunkType)
+                errors.Add($"Chunk[1] type should be '{flags.Chunk1Type}', but is '{chunkHeaders[1].ChunkType}'");
+            if (flags.Chunk2Type != chunkHeaders[2].ChunkType)
+                errors.Add($"Chunk[2] type should be '{flags.Chunk2Type}', but is '{chunkHeaders[2].ChunkType}'");
+            if (flags.Chunk20Type != chunkHeaders[20].ChunkType)
+                errors.Add($"Chunk[20] type should be '{flags.Chunk20Type}', but is '{chunkHeaders[20].ChunkType}'");
+
+            if (flags.ModelsChunkIndex.HasValue && chunkHeaders[flags.ModelsChunkIndex.Value].ChunkType != ChunkType.Models)
+                errors.Add($"Models chunk ({flags.ModelsChunkIndex}) type should be 'Models' but is '{chunkHeaders[flags.ModelsChunkIndex.Value].ChunkType}'");
+            if (flags.SurfaceModelChunkIndex.HasValue && chunkHeaders[flags.SurfaceModelChunkIndex.Value].ChunkType != ChunkType.SurfaceModel)
+                errors.Add($"Surface model chunk ({flags.SurfaceModelChunkIndex}) type should be 'SurfaceModel' but is '{chunkHeaders[flags.SurfaceModelChunkIndex.Value].ChunkType}'");
 
             return errors.ToArray();
         }
 
-        private static bool? HasHighMemoryModels(ModelChunk mc) {
+        private static MemoryLocationType? GetMemoryLocationOfPointers(ModelChunk mc) {
             if (mc == null)
                 return null;
             return (mc.PDatasByMemoryAddress.Values.Count == 0)
-                ? (bool?) null
-                : mc.PDatasByMemoryAddress.Values.First().RamAddress >= 0x0600_0000;
+                ? (MemoryLocationType?) null
+                : mc.PDatasByMemoryAddress.Values.First().RamAddress >= 0x0600_0000
+                    ? MemoryLocationType.HighMemory
+                    : MemoryLocationType.LowMemory;
         }
 
         private string[] GetModelChunkErrors() {
@@ -1205,24 +1201,18 @@ namespace SF3.Models.Files.MPD {
             var mc20 = ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
-                var expectedLmm = flags.Chunk1IsLoadedFromLowMemory;
-                var expectedHmm = flags.Chunk1IsLoadedFromHighMemory;
-                var actualHmm   = HasHighMemoryModels(mc1) == true;
+                var expected = flags.Chunk1PointersMemoryLocation;
+                var actual   = GetMemoryLocationOfPointers(mc1);
 
-                if (expectedLmm && expectedHmm)
-                    errors.Add("Chunk[1] is somehow expected to be both in high and low memory");
-                else if (!expectedLmm && !expectedHmm)
-                    errors.Add("Chunk[1] is somehow expected to be neither in high and low memory");
-                else {
-                    if (expectedHmm && !actualHmm)
-                        errors.Add("Chunk[1] has models in low memory but they should be in high memory");
-                    else if (!expectedHmm && actualHmm)
-                        errors.Add("Chunk[1] has models in high memory but they should be in low memory");
-                }
+                if (expected != actual)
+                    errors.Add($"Chunk[1] memory location is '{actual}' but should be '{expected}'");
             }
 
-            if (mc20 != null && HasHighMemoryModels(mc20) == false)
-                errors.Add("Chunk[20] has models in low memory but they should be in high memory");
+            if (mc20 != null) {
+                var actual = GetMemoryLocationOfPointers(mc20);
+                if (actual != MemoryLocationType.HighMemory)
+                    errors.Add($"Chunk[20] memory location is '{actual}' but should be '{nameof(MemoryLocationType.HighMemory)}'");
+            }
 
             return errors.ToArray();
         }
@@ -1465,7 +1455,6 @@ namespace SF3.Models.Files.MPD {
         }
 
         public PDataModel GetTreePData0() {
-            var modelChunkIndex = Flags.Chunk20IsModels ? 20 : 1;
             var mc = ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
             if (mc == null)
                 return null;
