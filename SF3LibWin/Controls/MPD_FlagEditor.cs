@@ -69,10 +69,6 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cbKeepTexturelessFlatTiles,
                     nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
                     nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
-            cbBackgroundImageType.SelectedIndexChanged += (s, e)
-                => TrySetProperty<BackgroundImageType>(cbBackgroundImageType,
-                    nameof(IMPD_AllFlags.BackgroundImageType),
-                    nameof(IMPD_AllFlags.CanSetBackgroundImageType));
             cbUnknownMapFlag0x0020.CheckedChanged += (s, e)
                 => TrySetProperty(cbUnknownMapFlag0x0020,
                     nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
@@ -93,10 +89,6 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cbHasSurfaceModel,
                     nameof(IMPD_AllFlags.Bit_0x0200_HasSurfaceModel),
                     nameof(IMPD_AllFlags.CanSet_0x0200_HasSurfaceModel));
-            cbGroundImageType.SelectedIndexChanged += (s, e)
-                => TrySetProperty<GroundImageType>(cbGroundImageType,
-                    nameof(IMPD_AllFlags.GroundImageType),
-                    nameof(IMPD_AllFlags.CanSetGroundImageType));
             cbHasCutsceneSkyBox.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasCutsceneSkyBox,
                     nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
@@ -123,6 +115,14 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
             // Derived values
+            cbBackgroundImageType.SelectedIndexChanged += (s, e)
+                => TrySetProperty<BackgroundImageType>(cbBackgroundImageType,
+                    nameof(IMPD_AllFlags.BackgroundImageType),
+                    null);
+            cbGroundImageType.SelectedIndexChanged += (s, e)
+                => TrySetProperty<GroundImageType>(cbGroundImageType,
+                    nameof(IMPD_AllFlags.GroundImageType),
+                    null);
             cbChunk1IsLoadedFromLowMemory.CheckedChanged += (s, e)
                 => TrySetProperty(cbChunk1IsLoadedFromLowMemory,
                     nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
@@ -196,9 +196,6 @@ namespace SF3.Win.Controls {
             SetControlState(cbKeepTexturelessFlatTiles,
                 nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
                 nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
-            SetControlState<BackgroundImageType>(cbBackgroundImageType,
-                nameof(IMPD_AllFlags.BackgroundImageType),
-                nameof(IMPD_AllFlags.CanSetBackgroundImageType));
             SetControlState(cbUnknownMapFlag0x0020,
                 nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
@@ -214,9 +211,6 @@ namespace SF3.Win.Controls {
             SetControlState(cbHasSurfaceModel,
                 nameof(IMPD_AllFlags.Bit_0x0200_HasSurfaceModel),
                 nameof(IMPD_AllFlags.CanSet_0x0200_HasSurfaceModel));
-            SetControlState<GroundImageType>(cbGroundImageType,
-                nameof(IMPD_AllFlags.GroundImageType),
-                nameof(IMPD_AllFlags.CanSetGroundImageType));
             SetControlState(cbHasCutsceneSkyBox,
                 nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
                 nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
@@ -236,6 +230,12 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
                 nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
+            SetControlState<BackgroundImageType>(cbBackgroundImageType,
+                nameof(IMPD_AllFlags.BackgroundImageType),
+                null);
+            SetControlState<GroundImageType>(cbGroundImageType,
+                nameof(IMPD_AllFlags.GroundImageType),
+                null);
             SetControlState(cbChunk1IsLoadedFromLowMemory,
                 nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
                 null);
