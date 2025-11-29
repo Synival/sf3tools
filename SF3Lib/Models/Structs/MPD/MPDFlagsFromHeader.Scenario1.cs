@@ -2,8 +2,10 @@
 
 namespace SF3.Models.Structs.MPD {
     public partial class MPDFlagsFromHeader {
-        public bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures => IsScenario1;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) HasChunk19ModelWithChunk10Textures (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
+        private bool IsScenario1OrEarlier => Header.IsScenario1OrEarlier;
+
+        public bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures => IsScenario1OrEarlier;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) HasChunk19ModelWithChunk10Textures (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
         public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures {
             get => CanSet_0x0080_HasChunk19ModelWithChunk10Textures && (MapFlags & 0x0080) == 0x0080;
             set {
