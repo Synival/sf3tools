@@ -137,7 +137,8 @@ namespace SF3.Models.Files.MPD {
             var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
             var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
             MPDHeader = new MPDHeaderModel(Data, 0, "MPDHeader", headerAddr, Scenario);
-            Flags = new MPDFlagsFromHeader(MPDHeader);
+            Flags     = new MPDFlagsFromHeader(MPDHeader);
+            Settings  = new MPDSettings(this);
             return MPDHeader;
         }
 
@@ -1619,7 +1620,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public MPDHeaderModel MPDHeader { get; private set; }
+
         public IMPD_AllFlags Flags { get; private set; }
+        public IMPD_Settings Settings { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkLocationTable ChunkLocations { get; private set; }
