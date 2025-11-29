@@ -5,7 +5,6 @@ namespace SF3.MPD {
         // Possible flags/settings for all scenarios
         BackgroundImageType BackgroundImageType { get; set; }
         GroundImageType GroundImageType { get; set; }
-        bool HasExtraChunk1ModelWithChunk21Textures { get; set; }
         bool Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
         bool Chunk20IsSurfaceModelIfExists { get; set; }
 
@@ -17,7 +16,7 @@ namespace SF3.MPD {
         bool CanSet_0x0008_KeepTexturelessFlatTiles { get; }
         bool CanSetBackgroundImageType { get; }
         bool CanSet_0x0020_Unknown { get; }
-        bool CanSet_0x0080_HasChunk19Model { get; }
+        bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures { get; }
         bool CanSet_0x0080_SetMSBForPalette1 { get; }
         bool CanSetHasModels { get; }
         bool CanSetHasSurfaceModel { get; }
@@ -25,7 +24,7 @@ namespace SF3.MPD {
         bool CanSet_0x0800_HasCutsceneSkyBox { get; }
         bool CanSet_0x2000_HasBattleSkyBox { get; }
         bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
-        bool CanSetHasExtraChunk1ModelWithChunk21Textures { get; }
+        bool CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures { get; }
         bool CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; }
         bool CanSetChunk20IsSurfaceModelIfExists { get; }
 

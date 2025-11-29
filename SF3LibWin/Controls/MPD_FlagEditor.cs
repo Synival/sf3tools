@@ -79,8 +79,8 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
             cbHasChunk19Model.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasChunk19Model,
-                    nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19Model),
-                    nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19Model));
+                    nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
+                    nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
             cbModifyPalette1ForGradient.CheckedChanged += (s, e)
                 => TrySetProperty(cbModifyPalette1ForGradient,
                     nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
@@ -111,8 +111,8 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
             cbHasExtraChunk1ModelWithChunk21Textures.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasExtraChunk1ModelWithChunk21Textures,
-                    nameof(IMPD_AllFlags.HasExtraChunk1ModelWithChunk21Textures),
-                    nameof(IMPD_AllFlags.CanSetHasExtraChunk1ModelWithChunk21Textures));
+                    nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
+                    nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
             cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.CheckedChanged += (s, e)
                 => TrySetProperty(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
                     nameof(IMPD_AllFlags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
@@ -203,8 +203,8 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
             SetControlState(cbHasChunk19Model,
-                nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19Model),
-                nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19Model));
+                nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
+                nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
             SetControlState(cbModifyPalette1ForGradient,
                 nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
                 nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
@@ -227,8 +227,8 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
                 nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
             SetControlState(cbHasExtraChunk1ModelWithChunk21Textures,
-                nameof(IMPD_AllFlags.HasExtraChunk1ModelWithChunk21Textures),
-                nameof(IMPD_AllFlags.CanSetHasExtraChunk1ModelWithChunk21Textures));
+                nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
+                nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
             SetControlState(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
                 nameof(IMPD_AllFlags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
                 nameof(IMPD_AllFlags.CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));

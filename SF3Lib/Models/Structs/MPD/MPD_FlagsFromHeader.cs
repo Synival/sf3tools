@@ -76,12 +76,12 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0020) : (ushort) (MapFlags & ~0x0020);
         }
 
-        public bool CanSet_0x0080_HasChunk19Model => IsScenario1;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) HasChunk19Model (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
-        public bool Bit_0x0080_HasChunk19Model {
-            get => CanSet_0x0080_HasChunk19Model && (MapFlags & 0x0080) == 0x0080;
+        public bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures => IsScenario1;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) HasChunk19ModelWithChunk10Textures (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
+        public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures {
+            get => CanSet_0x0080_HasChunk19ModelWithChunk10Textures && (MapFlags & 0x0080) == 0x0080;
             set {
-                if (CanSet_0x0080_HasChunk19Model)
+                if (CanSet_0x0080_HasChunk19ModelWithChunk10Textures)
                     MapFlags = (ushort) (MapFlags & ~0x0080 | (value ? 0x0080 : 0));
             }
         }
@@ -147,12 +147,12 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        public bool CanSetHasExtraChunk1ModelWithChunk21Textures => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.4001f, displayName: "(0x4000) " + nameof(HasExtraChunk1ModelWithChunk21Textures) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
-        public bool HasExtraChunk1ModelWithChunk21Textures {
-            get => CanSetHasExtraChunk1ModelWithChunk21Textures && (MapFlags & 0x4000) == 0x4000;
+        public bool CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures => IsScenario2OrLater;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.4001f, displayName: "(0x4000) HasExtraChunk1ModelWithChunk21Textures (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures {
+            get => CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures && (MapFlags & 0x4000) == 0x4000;
             set {
-                if (CanSetHasExtraChunk1ModelWithChunk21Textures)
+                if (CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures)
                     MapFlags = (ushort) (value ? MapFlags | 0x4000 : MapFlags & ~0x4000);
             }
         }
@@ -187,7 +187,7 @@ namespace SF3.Models.Structs.MPD {
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8013f, displayName: "(Derived) " + nameof(Chunk1IsModels) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Chunk1IsModels
-            => Bit_0x0100_HasModels && (IsScenario1OrEarlier || !Bit_0x0200_HasSurfaceModel || Chunk20IsSurfaceModelIfExists || HasExtraChunk1ModelWithChunk21Textures);
+            => Bit_0x0100_HasModels && (IsScenario1OrEarlier || !Bit_0x0200_HasSurfaceModel || Chunk20IsSurfaceModelIfExists || Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures);
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8014f, displayName: "(Derived) " + nameof(Chunk2IsSurfaceModel) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Chunk2IsSurfaceModel
