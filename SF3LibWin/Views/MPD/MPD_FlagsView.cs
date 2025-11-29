@@ -4,7 +4,7 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
     public class MPD_FlagsView : ControlView<MPD_FlagEditor> {
-        public MPD_FlagsView(string name, IMPD_Flags model) : base(name) {
+        public MPD_FlagsView(string name, IMPD_AllFlags model) : base(name) {
             _model = model;
         }
 
@@ -20,8 +20,8 @@ namespace SF3.Win.Views.MPD {
         public override void RefreshContent()
             => Control?.UpdateFlagsFromSource();
 
-        private IMPD_Flags _model;
-        public IMPD_Flags Model {
+        private IMPD_AllFlags _model;
+        public IMPD_AllFlags Model {
             get => _model;
             set {
                 if (_model != value) {

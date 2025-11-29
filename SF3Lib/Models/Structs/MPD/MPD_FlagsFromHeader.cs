@@ -3,7 +3,7 @@ using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
-    public class MPDFlagsFromHeader : IMPD_Flags {
+    public class MPDFlagsFromHeader : IMPD_AllFlags {
         public MPDFlagsFromHeader(MPDHeaderModel header) {
             Header = header;
         }
@@ -21,19 +21,19 @@ namespace SF3.Models.Structs.MPD {
             set => Header.MapFlags = value;
         }
 
-        public bool CanSetUnknownMapFlag0x0001 => true;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0001f, displayName: "(0x0001) " + nameof(UnknownMapFlag0x0001), displayGroup: "Flags")]
-        public bool UnknownMapFlag0x0001 {
+        public bool CanSet_0x0001_Unknown => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0001f, displayName: "(0x0001) Unknown", displayGroup: "Flags")]
+        public bool Bit_0x0001_Unknown {
             get => (MapFlags & 0x0001) == 0x0001;
             set => MapFlags = value ? (ushort) (MapFlags | 0x0001) : (ushort) (MapFlags & ~0x0001);
         }
 
-        public bool CanSetUnknownMapFlag0x0002 => IsScenario2OrEarlier;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0002f, displayName: "(0x0002) " + nameof(UnknownMapFlag0x0002) + " (Scn1,2)", visibilityProperty: nameof(IsScenario2OrEarlier), displayGroup: "Flags")]
-        public bool UnknownMapFlag0x0002 {
-            get => CanSetUnknownMapFlag0x0002 && (MapFlags & 0x0002) == 0x0002;
+        public bool CanSet_0x0002_Unknown => IsScenario2OrEarlier;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0002f, displayName: "(0x0002) Unknown (Scn1,2)", visibilityProperty: nameof(IsScenario2OrEarlier), displayGroup: "Flags")]
+        public bool Bit_0x0002_Unknown {
+            get => CanSet_0x0002_Unknown && (MapFlags & 0x0002) == 0x0002;
             set {
-                if (CanSetUnknownMapFlag0x0002)
+                if (CanSet_0x0002_Unknown)
                     MapFlags = value ? (ushort) (MapFlags | 0x0002) : (ushort) (MapFlags & ~0x0002);
             }
         }

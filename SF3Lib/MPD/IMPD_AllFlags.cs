@@ -1,10 +1,8 @@
 ﻿using SF3.Types;
 
 namespace SF3.MPD {
-    public interface IMPD_Flags {
+    public interface IMPD_AllFlags : IMPD_AllScenarioFlags, IMPD_Scenario1and2Flags {
         // Possible flags/settings for all scenarios
-        bool UnknownMapFlag0x0001 { get; set; }
-        bool UnknownMapFlag0x0002 { get; set; }
         bool HasSurfaceTextureRotation { get; set; }
         bool AddDotProductBasedNoiseToStandardLightmap { get; set; }
         bool KeepTexturelessFlatTiles { get; set; }
@@ -23,8 +21,8 @@ namespace SF3.MPD {
         bool Chunk20IsSurfaceModelIfExists { get; set; }
 
         // Properties to indicate whether or not this flag can be set
-        bool CanSetUnknownMapFlag0x0001 { get; }
-        bool CanSetUnknownMapFlag0x0002 { get; }
+        bool CanSet_0x0001_Unknown { get; }
+        bool CanSet_0x0002_Unknown { get; }
         bool CanSetHasSurfaceTextureRotation { get; }
         bool CanSetAddDotProductBasedNoiseToStandardLightmap { get; }
         bool CanSetKeepTexturelessFlatTiles { get; }

@@ -1619,7 +1619,7 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public MPDHeaderModel MPDHeader { get; private set; }
-        public IMPD_Flags Flags { get; private set; }
+        public IMPD_AllFlags Flags { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkLocationTable ChunkLocations { get; private set; }

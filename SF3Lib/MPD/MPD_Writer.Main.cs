@@ -48,7 +48,7 @@ namespace SF3.MPD {
 
         public void WriteHeader(
             MPDHeaderModel header,
-            IMPD_Flags flags,
+            IMPD_AllFlags flags,
             uint? lightPalettePos,
             uint? lightPositionPos,
             uint? unknown1Pos,

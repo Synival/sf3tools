@@ -11,7 +11,7 @@ namespace SF3.MPD {
         /// The flags for the MPD. This contains settings like lighting flags and flags that inform the game about what
         /// chunks are present and how they should be stored in memory.
         /// </summary>
-        IMPD_Flags Flags { get; }
+        IMPD_AllFlags Flags { get; }
 
         /// <summary>
         /// The "Surface" which contains the grid. Used for actor heights, battle grid data, and event IDs.
