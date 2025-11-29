@@ -2,7 +2,7 @@
 using SF3.MPD;
 
 namespace SF3.Models.Structs.MPD {
-    public class MPDFlagsFromHeader : IMPD_AllFlags {
+    public partial class MPDFlagsFromHeader : IMPD_AllFlags {
         public MPDFlagsFromHeader(MPDHeaderModel header) {
             Header = header;
         }
@@ -82,16 +82,6 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0040) : (ushort) (MapFlags & ~0x0040);
         }
 
-        public bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures => IsScenario1;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) HasChunk19ModelWithChunk10Textures (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
-        public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures {
-            get => CanSet_0x0080_HasChunk19ModelWithChunk10Textures && (MapFlags & 0x0080) == 0x0080;
-            set {
-                if (CanSet_0x0080_HasChunk19ModelWithChunk10Textures)
-                    MapFlags = (ushort) (MapFlags & ~0x0080 | (value ? 0x0080 : 0));
-            }
-        }
-
         public bool CanSet_0x0080_SetMSBForPalette1 => IsScenario2OrLater;
         [TableViewModelColumn(addressField: null, displayOrder: 0.0081f, displayName: "(0x0080) SetMSBForPalette1 (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Bit_0x0080_SetMSBForPalette1 {
@@ -123,16 +113,6 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0400) : (ushort) (MapFlags & ~0x0400);
         }
 
-        public bool CanSet_0x0800_Unused => IsScenario1OrEarlier;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0800f, displayName: "(0x0800) Unused (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
-        public bool Bit_0x0800_Unused {
-            get => CanSet_0x0800_Unused ? (MapFlags & 0x0800) == 0x0800 : false;
-            set {
-                if (CanSet_0x0800_Unused)
-                    MapFlags = value ? (ushort) (MapFlags | 0x0800) : (ushort) (MapFlags & ~0x0800);
-            }
-        }
-
         public bool CanSet_0x0800_HasCutsceneSkyBox => IsScenario2OrLater;
         [TableViewModelColumn(addressField: null, displayOrder: 0.0801f, displayName: "(0x0800) HasCutsceneSkyBox (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Bit_0x0800_HasCutsceneSkyBox {
@@ -148,16 +128,6 @@ namespace SF3.Models.Structs.MPD {
         public bool Bit_0x1000_HasTileBasedGroundImage {
             get => (MapFlags & 0x1000) == 0x1000;
             set => MapFlags = value ? (ushort) (MapFlags | 0x1000) : (ushort) (MapFlags & ~0x1000);
-        }
-
-        public bool CanSet_0x2000_HasBattleSkyBox => IsScenario1OrEarlier;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.2000f, displayName: "(0x2000) HasBattleSkyBox (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
-        public bool Bit_0x2000_HasBattleSkyBox {
-            get => CanSet_0x2000_HasBattleSkyBox ? (MapFlags & 0x2000) == 0x2000 : false;
-            set {
-                if (CanSet_0x2000_HasBattleSkyBox)
-                    MapFlags = value ? (ushort) (MapFlags | 0x2000) : (ushort) (MapFlags & ~0x2000);
-            }
         }
 
         public bool CanSet_0x2000_NarrowAngleBasedLightmap => IsScenario2OrLater;
@@ -177,16 +147,6 @@ namespace SF3.Models.Structs.MPD {
             set {
                 if (CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures)
                     MapFlags = (ushort) (value ? MapFlags | 0x4000 : MapFlags & ~0x4000);
-            }
-        }
-
-        public bool CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists => IsScenario1OrEarlier;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.8000f, displayName: "(0x8000) Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
-        public bool Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists {
-            get => CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists ? (MapFlags & 0x8000) == 0x8000 : false;
-            set {
-                if (CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists)
-                    MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
             }
         }
 
