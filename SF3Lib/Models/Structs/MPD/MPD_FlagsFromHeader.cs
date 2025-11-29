@@ -62,11 +62,25 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0008) : (ushort) (MapFlags & ~0x0008);
         }
 
+        public bool CanSet_0x0010_HasTileBasedForegroundImage => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0010f, displayName: "(0x0010) HasTileBasedForegroundImage", minWidth: 100, displayGroup: "Flags")]
+        public bool Bit_0x0010_HasTileBasedForegroundImage {
+            get => (MapFlags & 0x0010) == 0x0010;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x0010) : (ushort) (MapFlags & ~0x0010);
+        }
+
         public bool CanSet_0x0020_Unknown => true;
         [TableViewModelColumn(addressField: null, displayOrder: 0.0020f, displayName: "(0x0020) Unknown", displayGroup: "Flags")]
         public bool Bit_0x0020_Unknown {
             get => (MapFlags & 0x0020) == 0x0020;
             set => MapFlags = value ? (ushort) (MapFlags | 0x0020) : (ushort) (MapFlags & ~0x0020);
+        }
+
+        public bool CanSet_0x0040_HasBackgroundImage => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0040f, displayName: "(0x0040) HasBackgroundImage", minWidth: 100, displayGroup: "Flags")]
+        public bool Bit_0x0040_HasBackgroundImage {
+            get => (MapFlags & 0x0040) == 0x0040;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x0040) : (ushort) (MapFlags & ~0x0040);
         }
 
         public bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures => IsScenario1;
@@ -167,12 +181,6 @@ namespace SF3.Models.Structs.MPD {
         public GroundImageType GroundImageType {
             get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
             set => MapFlags = (ushort) (MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags | value.ToMapFlags());
-        }
-
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0010f, displayName: "(Derived) " + nameof(BackgroundImageType), minWidth: 100, displayGroup: "Flags")]
-        public BackgroundImageType BackgroundImageType {
-            get => BackgroundImageTypeExtensions.FromMapFlags(MapFlags);
-            set => MapFlags = (ushort) (MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags | value.ToMapFlags());
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8010f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromLowMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]

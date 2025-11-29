@@ -20,20 +20,9 @@ namespace SF3.Win.Controls {
             public string Name { get; }
         }
 
-        private class BackgroundImageTypeComboBoxValue : ComboBoxValue<BackgroundImageType> {
-            public BackgroundImageTypeComboBoxValue(BackgroundImageType value, string name) : base(value, name) { }
-        }
-
         private class GroundImageTypeComboBoxValue : ComboBoxValue<GroundImageType> {
             public GroundImageTypeComboBoxValue(GroundImageType value, string name) : base(value, name) { }
         }
-
-        private static Dictionary<BackgroundImageType, BackgroundImageTypeComboBoxValue> c_backgroundImageComboBoxValues = new Dictionary<BackgroundImageType, BackgroundImageTypeComboBoxValue>() {
-            { BackgroundImageType.None, new BackgroundImageTypeComboBoxValue(BackgroundImageType.None,  "None") },
-            { BackgroundImageType.Still, new BackgroundImageTypeComboBoxValue(BackgroundImageType.Still, "Still") },
-            { BackgroundImageType.Tiled, new BackgroundImageTypeComboBoxValue(BackgroundImageType.Tiled, "Tiled") },
-            { BackgroundImageType.StillAndTiled, new BackgroundImageTypeComboBoxValue(BackgroundImageType.StillAndTiled, "Still + Tiled") },
-        };
 
         private static Dictionary<GroundImageType, GroundImageTypeComboBoxValue> c_groundImageComboBoxValues = new Dictionary<GroundImageType, GroundImageTypeComboBoxValue>() {
             { GroundImageType.None, new GroundImageTypeComboBoxValue(GroundImageType.None, "None") },
@@ -46,7 +35,6 @@ namespace SF3.Win.Controls {
             SuspendLayout();
             InitializeComponent();
 
-            cbBackgroundImageType.Items.AddRange(c_backgroundImageComboBoxValues.Values.ToArray());
             cbGroundImageType.Items.AddRange(c_groundImageComboBoxValues.Values.ToArray());
 
             cbUnknownMapFlag0x0001.CheckedChanged += (s, e)
@@ -115,10 +103,6 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
             // Derived values
-            cbBackgroundImageType.SelectedIndexChanged += (s, e)
-                => TrySetProperty<BackgroundImageType>(cbBackgroundImageType,
-                    nameof(IMPD_AllFlags.BackgroundImageType),
-                    null);
             cbGroundImageType.SelectedIndexChanged += (s, e)
                 => TrySetProperty<GroundImageType>(cbGroundImageType,
                     nameof(IMPD_AllFlags.GroundImageType),
@@ -230,9 +214,6 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
                 nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
-            SetControlState<BackgroundImageType>(cbBackgroundImageType,
-                nameof(IMPD_AllFlags.BackgroundImageType),
-                null);
             SetControlState<GroundImageType>(cbGroundImageType,
                 nameof(IMPD_AllFlags.GroundImageType),
                 null);

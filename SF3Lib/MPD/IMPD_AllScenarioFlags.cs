@@ -19,10 +19,25 @@
         bool Bit_0x0008_KeepTexturelessFlatTiles { get; set; }
 
         /// <summary>
+        /// When set, there are three chunks in total that are:
+        ///   Foreground image tileset (2 chunks)
+        ///   Fileground image tile assignment (1 chunk)
+        /// This is used in BLACK.MPD (Ishahakat). This uses the same chunks as the ground plane; they are mutually
+        /// exclusive.
+        /// </summary>
+        bool Bit_0x0010_HasTileBasedForegroundImage { get; set; }
+
+        /// <summary>
         /// Is set sometimes in Scenario 2 and 3 but appears to do nothing (no breakpoints hit).
         /// (Potentially exists in Scenario 1 but unused)
         /// </summary>
         bool Bit_0x0020_Unknown { get; set; }
+
+        /// <summary>
+        /// When set, there are two chunks that, together, form a 512x256 image used as a background. Used in BLACK.MPD
+        /// (Ishahakat). This uses the same chunks as the ground plane; they are mutually exclusive.
+        /// </summary>
+        bool Bit_0x0040_HasBackgroundImage { get; set; }
 
         /// <summary>
         /// When set, models are present in this MPD. This can be toggled during gameplay to prevent the rendering of

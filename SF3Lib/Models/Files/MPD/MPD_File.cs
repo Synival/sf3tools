@@ -347,19 +347,19 @@ namespace SF3.Models.Files.MPD {
 
             // Tiled-based ground planes
             var groundTilesetChunks = new List<IChunkData>();
-            var groundTileAssignmentChunks = new List<IChunkData>();
+            var tiledGroundMapChunks = new List<IChunkData>();
             if (Flags.GroundImageType == GroundImageType.TileBased) {
                 if (chunks[GroundTilesetChunk1Index].Exists)
                     groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
                 if (chunks[GroundTilesetChunk2Index].Exists)
                     groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk2Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
                 if (chunks[GroundTileAssignmentChunk1Index].Exists)
-                    groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk1Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                    tiledGroundMapChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk1Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
                 if (chunks[GroundTileAssignmentChunk2Index].Exists)
-                    groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk2Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                    tiledGroundMapChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk2Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
             }
             GroundTilesetChunks = groundTilesetChunks.ToArray();
-            GroundTileAssignmentChunks = groundTileAssignmentChunks.ToArray();
+            GroundTileAssignmentChunks = tiledGroundMapChunks.ToArray();
 
             // Sky boxes
             var skyBoxChunks = new List<IChunkData>();
@@ -373,7 +373,7 @@ namespace SF3.Models.Files.MPD {
 
             // Background image
             var backgroundChunks = new List<IChunkData>();
-            if (Flags.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+            if (Flags.Bit_0x0040_HasBackgroundImage) {
                 if (chunks[BackgroundChunk1Index].Exists)
                     backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[BackgroundChunk2Index].Exists)
@@ -383,7 +383,7 @@ namespace SF3.Models.Files.MPD {
 
             // Foreground image tiles
             var foregroundTileChunks = new List<IChunkData>();
-            if (Flags.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+            if (Flags.Bit_0x0010_HasTileBasedForegroundImage) {
                 if (chunks[ForegroundTileChunk1Index].Exists)
                     foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
                 if (chunks[ForegroundTileChunk2Index].Exists)
@@ -1301,12 +1301,12 @@ namespace SF3.Models.Files.MPD {
                 chunkUses[18].Add("SkyBoxImageBottom");
             }
 
-            if (flags.BackgroundImageType.HasFlag(BackgroundImageType.Still)) {
+            if (flags.Bit_0x0040_HasBackgroundImage) {
                 chunkUses[14].Add("BackgroundImageTop");
                 chunkUses[15].Add("BackgroundImageBottom");
             }
 
-            if (flags.BackgroundImageType.HasFlag(BackgroundImageType.Tiled)) {
+            if (flags.Bit_0x0010_HasTileBasedForegroundImage) {
                 chunkUses[17].Add("ForegroundImageTopTiles");
                 chunkUses[18].Add("ForegroundImageBottomTiles");
                 chunkUses[19].Add("ForegroundImageTileMap");

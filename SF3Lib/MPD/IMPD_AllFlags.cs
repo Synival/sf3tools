@@ -8,7 +8,9 @@ namespace SF3.MPD {
         bool CanSet_0x0002_HasSurfaceTextureRotation { get; }
         bool CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap { get; }
         bool CanSet_0x0008_KeepTexturelessFlatTiles { get; }
+        bool CanSet_0x0010_HasTileBasedForegroundImage { get; }
         bool CanSet_0x0020_Unknown { get; }
+        bool CanSet_0x0040_HasBackgroundImage { get; }
         bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures { get; }
         bool CanSet_0x0080_SetMSBForPalette1 { get; }
         bool CanSet_0x0100_HasModels { get; }
@@ -21,7 +23,6 @@ namespace SF3.MPD {
         bool CanSet_0x8000_Chunk20IsSurfaceModelIfExists { get; }
 
         // Derived flags based on other flags
-        BackgroundImageType BackgroundImageType { get; set; }
         GroundImageType GroundImageType { get; set; }
         bool Chunk1IsLoadedFromLowMemory { get; }
         bool Chunk1IsLoadedFromHighMemory { get; }
