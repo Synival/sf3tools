@@ -79,12 +79,12 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
             cbHasChunk19Model.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasChunk19Model,
-                    nameof(IMPD_AllFlags.HasChunk19Model),
-                    nameof(IMPD_AllFlags.CanSetHasChunk19Model));
+                    nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19Model),
+                    nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19Model));
             cbModifyPalette1ForGradient.CheckedChanged += (s, e)
                 => TrySetProperty(cbModifyPalette1ForGradient,
-                    nameof(IMPD_AllFlags.ModifyPalette1ForGradient),
-                    nameof(IMPD_AllFlags.CanSetModifyPalette1ForGradient));
+                    nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
+                    nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
             cbHasModels.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasModels,
                     nameof(IMPD_AllFlags.HasModels),
@@ -203,11 +203,11 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
             SetControlState(cbHasChunk19Model,
-                nameof(IMPD_AllFlags.HasChunk19Model),
-                nameof(IMPD_AllFlags.CanSetHasChunk19Model));
+                nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19Model),
+                nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19Model));
             SetControlState(cbModifyPalette1ForGradient,
-                nameof(IMPD_AllFlags.ModifyPalette1ForGradient),
-                nameof(IMPD_AllFlags.CanSetModifyPalette1ForGradient));
+                nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
+                nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
             SetControlState(cbHasModels,
                 nameof(IMPD_AllFlags.HasModels),
                 nameof(IMPD_AllFlags.CanSetHasModels));

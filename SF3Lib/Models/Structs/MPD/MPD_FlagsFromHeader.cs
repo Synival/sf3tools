@@ -76,22 +76,22 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0020) : (ushort) (MapFlags & ~0x0020);
         }
 
-        public bool CanSetHasChunk19Model => IsScenario1;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) " + nameof(HasChunk19Model) + " (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
-        public bool HasChunk19Model {
-            get => CanSetHasChunk19Model && (MapFlags & 0x0080) == 0x0080;
+        public bool CanSet_0x0080_HasChunk19Model => IsScenario1;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0080f, displayName: "(0x0080) HasChunk19Model (Scn1)", visibilityProperty: nameof(IsScenario1), displayGroup: "Flags")]
+        public bool Bit_0x0080_HasChunk19Model {
+            get => CanSet_0x0080_HasChunk19Model && (MapFlags & 0x0080) == 0x0080;
             set {
-                if (CanSetHasChunk19Model)
+                if (CanSet_0x0080_HasChunk19Model)
                     MapFlags = (ushort) (MapFlags & ~0x0080 | (value ? 0x0080 : 0));
             }
         }
 
-        public bool CanSetModifyPalette1ForGradient => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0081f, displayName: "(0x0080) " + nameof(ModifyPalette1ForGradient) + " (Redundant) (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
-        public bool ModifyPalette1ForGradient {
-            get => CanSetModifyPalette1ForGradient && (MapFlags & 0x0080) == 0x0080;
+        public bool CanSet_0x0080_SetMSBForPalette1 => IsScenario2OrLater;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0081f, displayName: "(0x0080) SetMSBForPalette1 (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Bit_0x0080_SetMSBForPalette1 {
+            get => CanSet_0x0080_SetMSBForPalette1 && (MapFlags & 0x0080) == 0x0080;
             set {
-                if (CanSetModifyPalette1ForGradient)
+                if (CanSet_0x0080_SetMSBForPalette1)
                     MapFlags = value ? (ushort) (MapFlags | 0x0080) : (ushort) (MapFlags & ~0x0080);
             }
         }
@@ -136,9 +136,9 @@ namespace SF3.Models.Structs.MPD {
                     MapFlags = value ? (ushort) (MapFlags | 0x2000) : (ushort) (MapFlags & ~0x2000);
             }
         }
- 
+
         public bool CanSet_0x2000_NarrowAngleBasedLightmap => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.2001f, displayName: "(0x2000) " + nameof(Bit_0x2000_NarrowAngleBasedLightmap) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        [TableViewModelColumn(addressField: null, displayOrder: 0.2001f, displayName: "(0x2000) Bit_0x2000_NarrowAngleBasedLightmap (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Bit_0x2000_NarrowAngleBasedLightmap {
             get => CanSet_0x2000_NarrowAngleBasedLightmap && (MapFlags & 0x2000) == 0x2000;
             set {

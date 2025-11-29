@@ -483,7 +483,7 @@ namespace SF3.Models.Files.MPD {
                 if (!flags.Chunk20IsModels || flags.HasExtraChunk1ModelWithChunk21Textures)
                     indices.Add(1);
 
-            if (chunks[19].Exists && flags.HasChunk19Model)
+            if (chunks[19].Exists && flags.Bit_0x0080_HasChunk19Model)
                 indices.Add(19);
 
             return indices.ToArray();
@@ -502,7 +502,7 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
             CollectionType TextureCollectionForChunkIndex(int chunkIndex) {
-                if (chunkIndex == 10 && Flags.HasChunk19Model)
+                if (chunkIndex == 10 && Flags.Bit_0x0080_HasChunk19Model)
                     return CollectionType.ExtraModel;
                 else if (chunkIndex == 21)
                     return CollectionType.ExtraModel;
@@ -522,7 +522,7 @@ namespace SF3.Models.Files.MPD {
 
             foreach (var mc in modelsChunks) {
                 var collection =
-                    (mc.Index == 19 && Flags.HasChunk19Model) ? CollectionType.ExtraModel :
+                    (mc.Index == 19 && Flags.Bit_0x0080_HasChunk19Model) ? CollectionType.ExtraModel :
                     (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
                     CollectionType.Primary;
 
@@ -1312,7 +1312,7 @@ namespace SF3.Models.Files.MPD {
                 chunkUses[19].Add("ForegroundImageTileMap");
             }
 
-            if (flags.HasChunk19Model)
+            if (flags.Bit_0x0080_HasChunk19Model)
                 chunkUses[19].Add("ExtraModel");
 
             foreach (var cu in chunkUses) {

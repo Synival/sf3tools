@@ -28,5 +28,12 @@
         /// --- with poorer results --- directly from the side.
         /// </summary>
         bool Bit_0x2000_NarrowAngleBasedLightmap { get; set; }
+
+        /// <summary>
+        /// When set, the MSB for all values in Palette1 will be turned on. This seems to be important for maps with a
+        /// gradient, but seems redundant because the code that activates the gradient turns this on anyway. Could be
+        /// useful for forcing it if a gradient is not immediately present.
+        /// </summary>
+        bool Bit_0x0080_SetMSBForPalette1 { get; set; }
     }
 }

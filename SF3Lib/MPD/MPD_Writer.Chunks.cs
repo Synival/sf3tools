@@ -43,7 +43,7 @@ namespace SF3.MPD {
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
-            if (mpd.Flags.HasChunk19Model) {
+            if (mpd.Flags.Bit_0x0080_HasChunk19Model) {
                 WriteTextureChunks(GetTexturesForCollection(CollectionType.Primary), chunkCount: 4, startID: 0);
                 WriteTextureChunks(GetTexturesForCollection(CollectionType.ExtraModel), chunkCount: 1, startID: 0);
             }

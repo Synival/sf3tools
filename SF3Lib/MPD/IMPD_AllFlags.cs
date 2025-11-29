@@ -1,11 +1,9 @@
 ﻿using SF3.Types;
 
 namespace SF3.MPD {
-    public interface IMPD_AllFlags : IMPD_AllScenarioFlags, IMPD_Scenario1and2Flags, IMPD_Scenario2PlusFlags, IMPD_Scenario3PlusFlags {
+    public interface IMPD_AllFlags : IMPD_AllScenarioFlags, IMPD_Scenario1Flags, IMPD_Scenario1and2Flags, IMPD_Scenario2PlusFlags, IMPD_Scenario3PlusFlags {
         // Possible flags/settings for all scenarios
         BackgroundImageType BackgroundImageType { get; set; }
-        bool HasChunk19Model { get; set; }
-        bool ModifyPalette1ForGradient { get; set; }
         bool HasModels { get; set; }
         bool HasSurfaceModel { get; set; }
         GroundImageType GroundImageType { get; set; }
@@ -23,8 +21,8 @@ namespace SF3.MPD {
         bool CanSet_0x0008_KeepTexturelessFlatTiles { get; }
         bool CanSetBackgroundImageType { get; }
         bool CanSet_0x0020_Unknown { get; }
-        bool CanSetHasChunk19Model { get; }
-        bool CanSetModifyPalette1ForGradient { get; }
+        bool CanSet_0x0080_HasChunk19Model { get; }
+        bool CanSet_0x0080_SetMSBForPalette1 { get; }
         bool CanSetHasModels { get; }
         bool CanSetHasSurfaceModel { get; }
         bool CanSetGroundImageType { get; }
