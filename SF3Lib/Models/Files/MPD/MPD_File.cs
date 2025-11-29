@@ -40,23 +40,23 @@ namespace SF3.Models.Files.MPD {
             MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
                 ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
 
-            RepeatingGroundChunk1Index = MeshTextureChunksLastIndex + 1;
-            RepeatingGroundChunk2Index = MeshTextureChunksLastIndex + 2;
+            GroundImageChunk1Index = MeshTextureChunksLastIndex + 1;
+            GroundImageChunk2Index = MeshTextureChunksLastIndex + 2;
 
-            TiledGroundTileChunk1Index = MeshTextureChunksLastIndex + 1;
-            TiledGroundTileChunk2Index = MeshTextureChunksLastIndex + 2;
-            TiledGroundMapChunks1Index = RepeatingGroundChunk2Index + 1;
-            TiledGroundMapChunks2Index = RepeatingGroundChunk2Index + 4;
+            GroundTilesetChunk1Index        = MeshTextureChunksLastIndex + 1;
+            GroundTilesetChunk2Index        = MeshTextureChunksLastIndex + 2;
+            GroundTileAssignmentChunk1Index = GroundImageChunk2Index + 1;
+            GroundTileAssignmentChunk2Index = GroundImageChunk2Index + 4;
 
-            SkyBoxChunk1Index          = RepeatingGroundChunk2Index + 2;
-            SkyBoxChunk2Index          = RepeatingGroundChunk2Index + 3;
+            SkyBoxChunk1Index = GroundImageChunk2Index + 2;
+            SkyBoxChunk2Index = GroundImageChunk2Index + 3;
 
-            BackgroundChunk1Index      = MeshTextureChunksLastIndex + 1;
-            BackgroundChunk2Index      = MeshTextureChunksLastIndex + 2;
+            BackgroundChunk1Index = MeshTextureChunksLastIndex + 1;
+            BackgroundChunk2Index = MeshTextureChunksLastIndex + 2;
 
-            ForegroundTileChunk1Index  = BackgroundChunk2Index + 2;
-            ForegroundTileChunk2Index  = BackgroundChunk2Index + 3;
-            ForegroundMapChunkIndex    = BackgroundChunk2Index + 4;
+            ForegroundTileChunk1Index = BackgroundChunk2Index + 2;
+            ForegroundTileChunk2Index = BackgroundChunk2Index + 3;
+            ForegroundMapChunkIndex   = BackgroundChunk2Index + 4;
         }
 
         public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType fallbackScenario)
@@ -335,31 +335,31 @@ namespace SF3.Models.Files.MPD {
             if (chunks[21].Exists)
                 _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
 
-            // Repeating backgrounds
-            var repeatingGroundChunks = new List<IChunkData>();
-            if (Flags.GroundImageType == GroundImageType.Repeated) {
-                if (chunks[RepeatingGroundChunk1Index].Exists)
-                    repeatingGroundChunks.Add(_ = MakeChunkData(RepeatingGroundChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
-                if (chunks[RepeatingGroundChunk2Index].Exists)
-                    repeatingGroundChunks.Add(_ = MakeChunkData(RepeatingGroundChunk2Index, ChunkType.Palette1Image, CompressionType.Compressed));
+            // 512x256 image ground planes
+            var groundImageChunks = new List<IChunkData>();
+            if (Flags.GroundImageType == GroundImageType.Image) {
+                if (chunks[GroundImageChunk1Index].Exists)
+                    groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
+                if (chunks[GroundImageChunk2Index].Exists)
+                    groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk2Index, ChunkType.Palette1Image, CompressionType.Compressed));
             }
-            RepeatingGroundChunks = repeatingGroundChunks.ToArray();
+            GroundImageChunks = groundImageChunks.ToArray();
 
-            // Tiled ground images
-            var tiledGroundTileChunks = new List<IChunkData>();
-            var tiledGroundMapChunks = new List<IChunkData>();
-            if (Flags.GroundImageType == GroundImageType.Tiled) {
-                if (chunks[TiledGroundTileChunk1Index].Exists)
-                    tiledGroundTileChunks.Add(_ = MakeChunkData(TiledGroundTileChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
-                if (chunks[TiledGroundTileChunk2Index].Exists)
-                    tiledGroundTileChunks.Add(_ = MakeChunkData(TiledGroundTileChunk2Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
-                if (chunks[TiledGroundMapChunks1Index].Exists)
-                    tiledGroundMapChunks.Add(_ = MakeChunkData(TiledGroundMapChunks1Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
-                if (chunks[TiledGroundMapChunks2Index].Exists)
-                    tiledGroundMapChunks.Add(_ = MakeChunkData(TiledGroundMapChunks2Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+            // Tiled-based ground planes
+            var groundTilesetChunks = new List<IChunkData>();
+            var groundTileAssignmentChunks = new List<IChunkData>();
+            if (Flags.GroundImageType == GroundImageType.TileBased) {
+                if (chunks[GroundTilesetChunk1Index].Exists)
+                    groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[GroundTilesetChunk2Index].Exists)
+                    groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk2Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                if (chunks[GroundTileAssignmentChunk1Index].Exists)
+                    groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk1Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                if (chunks[GroundTileAssignmentChunk2Index].Exists)
+                    groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk2Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
             }
-            TiledGroundTileChunks = tiledGroundTileChunks.ToArray();
-            TiledGroundMapChunks = tiledGroundMapChunks.ToArray();
+            GroundTilesetChunks = groundTilesetChunks.ToArray();
+            GroundTileAssignmentChunks = groundTileAssignmentChunks.ToArray();
 
             // Sky boxes
             var skyBoxChunks = new List<IChunkData>();
@@ -395,7 +395,7 @@ namespace SF3.Models.Files.MPD {
 
             // Add unhandled images/scroll planes, in case they're not indicated by flags.
             // TODO: we should know what these are 100% of the time if the map flags are off.
-            for (var i = RepeatingGroundChunk1Index; i <= TiledGroundMapChunks2Index; i++)
+            for (var i = GroundImageChunk1Index; i <= GroundTileAssignmentChunk2Index; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
                     _ = MakeChunkData(i, ChunkType.UnhandledImageOrData, CompressionType.Compressed);
 
@@ -635,22 +635,22 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
 
             // Add some images.
-            if (RepeatingGroundChunks?.Any() == true) {
+            if (GroundImageChunks?.Any() == true) {
                 try {
                     var palette = CreatePalette(0);
-                    RepeatingGroundImage = new MultiChunkTextureIndexed(RepeatingGroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
+                    GroundImage = new MultiChunkTextureIndexed(GroundImageChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
                 }
                 catch {
                     // TODO: what to do here??
                 }
             }
 
-            if (TiledGroundTileChunks?.Any() == true && TiledGroundMapChunks?.Any() == true) {
+            if (GroundTilesetChunks?.Any() == true && GroundTileAssignmentChunks?.Any() == true) {
                 var palette = CreatePalette(0);
-                TiledGroundTileImage = new MultiChunkTextureIndexed(TiledGroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                GroundTileset = new MultiChunkTextureIndexed(GroundTilesetChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var tiledGroundImageData = CreateTiledImageData(TiledGroundTileImage, TiledGroundMapChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
-                TiledGroundImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
+                var tiledGroundImageData = CreateTiledImageData(GroundTileset, GroundTileAssignmentChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
+                GroundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
             if (SkyBoxChunks?.Any() == true)
@@ -1284,12 +1284,12 @@ namespace SF3.Models.Files.MPD {
                 { 19, "GroundImageBottomTileMap" },
             };
 
-            if (flags.GroundImageType.HasFlag(GroundImageType.Repeated)) {
+            if (flags.GroundImageType.HasFlag(GroundImageType.Image)) {
                 chunkUses[14].Add("GroundImageTop");
                 chunkUses[15].Add("GroundImageBottom");
             }
 
-            if (flags.GroundImageType.HasFlag(GroundImageType.Tiled)) {
+            if (flags.GroundImageType.HasFlag(GroundImageType.TileBased)) {
                 chunkUses[14].Add("GroundImageTopTiles");
                 chunkUses[15].Add("GroundImageBottomTiles");
                 chunkUses[16].Add("GroundImageTopTileMap");
@@ -1691,22 +1691,22 @@ namespace SF3.Models.Files.MPD {
 
         public IMPD_Surface Surface { get; private set; }
 
-        public int RepeatingGroundChunk1Index { get; }
-        public int RepeatingGroundChunk2Index { get; }
+        public int GroundImageChunk1Index { get; }
+        public int GroundImageChunk2Index { get; }
 
-        public IChunkData[] RepeatingGroundChunks { get; private set; }
-        public ITexture RepeatingGroundImage { get; private set; }
+        public IChunkData[] GroundImageChunks { get; private set; }
+        public ITexture GroundImage { get; private set; }
 
-        public int TiledGroundTileChunk1Index { get; }
-        public int TiledGroundTileChunk2Index { get; }
-        public int TiledGroundMapChunks1Index { get; }
-        public int TiledGroundMapChunks2Index { get; }
+        public int GroundTilesetChunk1Index { get; }
+        public int GroundTilesetChunk2Index { get; }
+        public int GroundTileAssignmentChunk1Index { get; }
+        public int GroundTileAssignmentChunk2Index { get; }
 
-        public IChunkData[] TiledGroundTileChunks { get; private set; }
-        public IChunkData[] TiledGroundMapChunks { get; private set; }
+        public IChunkData[] GroundTilesetChunks { get; private set; }
+        public IChunkData[] GroundTileAssignmentChunks { get; private set; }
 
-        public ITexture TiledGroundTileImage { get; private set; }
-        public ITexture TiledGroundImage { get; private set; }
+        public ITexture GroundTileset { get; private set; }
+        public ITexture GroundTiledImage { get; private set; }
 
         public int SkyBoxChunk1Index { get; }
         public int SkyBoxChunk2Index { get; }

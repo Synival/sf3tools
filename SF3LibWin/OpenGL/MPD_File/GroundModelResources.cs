@@ -22,25 +22,11 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void Update(IMPD_File mpdFile) {
             Reset();
-            if (mpdFile?.RepeatingGroundImage != null)
-                CreateGroundImageModel(mpdFile, mpdFile.RepeatingGroundImage, 65536.0f);
-            else if (mpdFile?.TiledGroundImage != null)
-                CreateGroundImageModel(mpdFile, mpdFile.TiledGroundImage, 128.0f);
+            if (mpdFile?.GroundImage != null)
+                CreateGroundImageModel(mpdFile, mpdFile.GroundImage, 65536.0f);
+            else if (mpdFile?.GroundTiledImage != null)
+                CreateGroundImageModel(mpdFile, mpdFile.GroundTiledImage, 128.0f);
         }
-
-        private static readonly float[,] c_normalCoordsVboData = new float[4, 3] {
-            {0, 1, 0},
-            {0, 1, 0},
-            {0, 1, 0},
-            {0, 1, 0},
-        };
-
-        private static readonly float[,] c_glowVboData = new float[4, 3] {
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-        };
 
         private void CreateGroundImageModel(IMPD_File mpdFile, ITexture texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);

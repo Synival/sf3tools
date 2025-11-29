@@ -132,21 +132,21 @@ namespace SF3.Models.Files.MPD {
 
         TextureChunk[] TextureChunks { get; }
 
-        int RepeatingGroundChunk1Index { get; }
-        int RepeatingGroundChunk2Index { get; }
+        int GroundImageChunk1Index { get; }
+        int GroundImageChunk2Index { get; }
 
-        IChunkData[] RepeatingGroundChunks { get; }
-        ITexture RepeatingGroundImage { get; }
+        IChunkData[] GroundImageChunks { get; }
+        ITexture GroundImage { get; }
 
-        int TiledGroundTileChunk1Index { get; }
-        int TiledGroundTileChunk2Index { get; }
-        int TiledGroundMapChunks1Index { get; }
-        int TiledGroundMapChunks2Index { get; }
+        int GroundTilesetChunk1Index { get; }
+        int GroundTilesetChunk2Index { get; }
+        int GroundTileAssignmentChunk1Index { get; }
+        int GroundTileAssignmentChunk2Index { get; }
 
-        IChunkData[] TiledGroundTileChunks { get; }
-        IChunkData[] TiledGroundMapChunks { get; }
-        ITexture TiledGroundTileImage { get; }
-        ITexture TiledGroundImage { get; }
+        IChunkData[] GroundTilesetChunks { get; }
+        IChunkData[] GroundTileAssignmentChunks { get; }
+        ITexture GroundTileset { get; }
+        ITexture GroundTiledImage { get; }
 
         int SkyBoxChunk1Index { get; }
         int SkyBoxChunk2Index { get; }

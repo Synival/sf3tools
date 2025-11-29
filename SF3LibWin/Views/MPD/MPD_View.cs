@@ -26,12 +26,12 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new ModelsTabView("Models", Model));
             CreateChild(new TexturesView("Textures", Model));
 
-            if (Model.RepeatingGroundImage != null)
-                CreateChild(new TextureView("Ground", Model.RepeatingGroundImage, 1));
-            if (Model.TiledGroundImage != null)
-                CreateChild(new TextureView("Ground", Model.TiledGroundImage, 0.50f));
-            if (Model.TiledGroundTileImage != null)
-                CreateChild(new TextureView("Ground Tiles", Model.TiledGroundTileImage, 1));
+            if (Model.GroundImage != null)
+                CreateChild(new TextureView("Ground (Image)", Model.GroundImage, 1));
+            if (Model.GroundTiledImage != null)
+                CreateChild(new TextureView("Ground (Tile-Based)", Model.GroundTiledImage, 0.50f));
+            if (Model.GroundTileset != null)
+                CreateChild(new TextureView("Ground Tileset", Model.GroundTileset, 1));
             if (Model.SkyBoxImage != null)
                 CreateChild(new TextureView("Sky Box", Model.SkyBoxImage, 1));
             if (Model.BackgroundImage != null)

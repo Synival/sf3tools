@@ -37,8 +37,8 @@ namespace SF3.Win.Controls {
 
         private static Dictionary<GroundImageType, GroundImageTypeComboBoxValue> c_groundImageComboBoxValues = new Dictionary<GroundImageType, GroundImageTypeComboBoxValue>() {
             { GroundImageType.None, new GroundImageTypeComboBoxValue(GroundImageType.None, "None") },
-            { GroundImageType.Repeated, new GroundImageTypeComboBoxValue(GroundImageType.Repeated, "Repeated") },
-            { GroundImageType.Tiled, new GroundImageTypeComboBoxValue(GroundImageType.Tiled, "Tiled") },
+            { GroundImageType.Image, new GroundImageTypeComboBoxValue(GroundImageType.Image, "Image") },
+            { GroundImageType.TileBased, new GroundImageTypeComboBoxValue(GroundImageType.TileBased, "Tile-Based") },
             { GroundImageType.Invalid, new GroundImageTypeComboBoxValue(GroundImageType.Invalid, "0x1400 (Invalid)") },
         };
 

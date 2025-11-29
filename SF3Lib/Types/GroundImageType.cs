@@ -1,9 +1,9 @@
 ﻿namespace SF3.Types {
     public enum GroundImageType {
-        None     = 0x0000,
-        Repeated = 0x0400,
-        Tiled    = 0x1000,
-        Invalid  = 0x1400
+        None      = 0x0000,
+        Image     = 0x0400,
+        TileBased = 0x1000,
+        Invalid   = 0x1400
     }
 
     public static class GroundImageTypeExtensions {
