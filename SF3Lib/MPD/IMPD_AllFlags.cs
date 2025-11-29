@@ -15,7 +15,9 @@ namespace SF3.MPD {
         bool CanSet_0x0080_SetMSBForPalette1 { get; }
         bool CanSet_0x0100_HasModels { get; }
         bool CanSet_0x0200_HasSurfaceModel { get; }
+        bool CanSet_0x0400_HasGroundImage { get; }
         bool CanSet_0x0800_HasCutsceneSkyBox { get; }
+        bool CanSet_0x1000_HasTileBasedGroundImage { get; }
         bool CanSet_0x2000_HasBattleSkyBox { get; }
         bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
         bool CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures { get; }
@@ -23,7 +25,6 @@ namespace SF3.MPD {
         bool CanSet_0x8000_Chunk20IsSurfaceModelIfExists { get; }
 
         // Derived flags based on other flags
-        GroundImageType GroundImageType { get; set; }
         bool Chunk1IsLoadedFromLowMemory { get; }
         bool Chunk1IsLoadedFromHighMemory { get; }
         bool Chunk1IsModels { get; }

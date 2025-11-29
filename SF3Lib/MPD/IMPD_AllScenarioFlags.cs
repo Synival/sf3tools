@@ -22,8 +22,8 @@
         /// When set, there are three chunks in total that are:
         ///   Foreground image tileset (2 chunks)
         ///   Fileground image tile assignment (1 chunk)
-        /// This is used in BLACK.MPD (Ishahakat). This uses the same chunks as the ground plane; they are mutually
-        /// exclusive.
+        /// This is used in BLACK.MPD (Ishahakat). This uses the same chunks as the battle skybox image; they are
+        /// mutually exclusive.
         /// </summary>
         bool Bit_0x0010_HasTileBasedForegroundImage { get; set; }
 
@@ -35,7 +35,8 @@
 
         /// <summary>
         /// When set, there are two chunks that, together, form a 512x256 image used as a background. Used in BLACK.MPD
-        /// (Ishahakat). This uses the same chunks as the ground plane; they are mutually exclusive.
+        /// (Ishahakat). This uses the same chunks as the ground image and tile-based ground image; they are mutually
+        /// exclusive.
         /// </summary>
         bool Bit_0x0040_HasBackgroundImage { get; set; }
 
@@ -50,5 +51,21 @@
         /// rendering of the surface model.
         /// </summary>
         bool Bit_0x0200_HasSurfaceModel { get; set; }
+
+        /// <summary>
+        /// When set, there are two chunks that, together, form a 512x256 image used as a ground plane. Used mostly for
+        /// water. This uses the same chunks as the background image and tile-based ground image; they are mutually
+        /// exclusive.
+        /// </summary>
+        bool Bit_0x0400_HasGroundImage { get; set; }
+
+        /// <summary>
+        /// When set, there are four chunks in total that are:
+        ///   Ground plane tileset (2 chunks)
+        ///   Ground plane tile assignment (1 chunk)
+        /// This is mostly used for towns. This uses the same chunks as the background image and ground image; they are
+        /// mutually exclusive.
+        /// </summary>
+        bool Bit_0x1000_HasTileBasedGroundImage { get; set; }
     }
 }

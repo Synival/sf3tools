@@ -337,7 +337,7 @@ namespace SF3.Models.Files.MPD {
 
             // 512x256 image ground planes
             var groundImageChunks = new List<IChunkData>();
-            if (Flags.GroundImageType == GroundImageType.Image) {
+            if (Flags.Bit_0x0400_HasGroundImage) {
                 if (chunks[GroundImageChunk1Index].Exists)
                     groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk1Index, ChunkType.Palette1Image, CompressionType.Compressed));
                 if (chunks[GroundImageChunk2Index].Exists)
@@ -348,7 +348,7 @@ namespace SF3.Models.Files.MPD {
             // Tiled-based ground planes
             var groundTilesetChunks = new List<IChunkData>();
             var tiledGroundMapChunks = new List<IChunkData>();
-            if (Flags.GroundImageType == GroundImageType.TileBased) {
+            if (Flags.Bit_0x1000_HasTileBasedGroundImage) {
                 if (chunks[GroundTilesetChunk1Index].Exists)
                     groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
                 if (chunks[GroundTilesetChunk2Index].Exists)
@@ -1284,12 +1284,12 @@ namespace SF3.Models.Files.MPD {
                 { 19, "GroundImageBottomTileMap" },
             };
 
-            if (flags.GroundImageType.HasFlag(GroundImageType.Image)) {
+            if (flags.Bit_0x0400_HasGroundImage) {
                 chunkUses[14].Add("GroundImageTop");
                 chunkUses[15].Add("GroundImageBottom");
             }
 
-            if (flags.GroundImageType.HasFlag(GroundImageType.TileBased)) {
+            if (flags.Bit_0x1000_HasTileBasedGroundImage) {
                 chunkUses[14].Add("GroundImageTopTiles");
                 chunkUses[15].Add("GroundImageBottomTiles");
                 chunkUses[16].Add("GroundImageTopTileMap");

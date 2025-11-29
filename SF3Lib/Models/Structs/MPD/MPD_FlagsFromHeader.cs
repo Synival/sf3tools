@@ -1,6 +1,5 @@
 ﻿using CommonLib.Attributes;
 using SF3.MPD;
-using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class MPDFlagsFromHeader : IMPD_AllFlags {
@@ -117,6 +116,13 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = value ? (ushort) (MapFlags | 0x0200) : (ushort) (MapFlags & ~0x0200);
         }
 
+        public bool CanSet_0x0400_HasGroundImage => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0400f, displayName: "(0x0400) HasGroundImage", minWidth: 100, displayGroup: "Flags")]
+        public bool Bit_0x0400_HasGroundImage {
+            get => (MapFlags & 0x0400) == 0x0400;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x0400) : (ushort) (MapFlags & ~0x0400);
+        }
+
         public bool CanSet_0x0800_HasCutsceneSkyBox => IsScenario2OrLater;
         [TableViewModelColumn(addressField: null, displayOrder: 0.0801f, displayName: "(0x0800) HasCutsceneSkyBox (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
         public bool Bit_0x0800_HasCutsceneSkyBox {
@@ -125,6 +131,13 @@ namespace SF3.Models.Structs.MPD {
                 if (CanSet_0x0800_HasCutsceneSkyBox)
                     MapFlags = value ? (ushort) (MapFlags | 0x0800) : (ushort) (MapFlags & ~0x0800);
             }
+        }
+
+        public bool CanSet_0x1000_HasTileBasedGroundImage => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.1000f, displayName: "(0x1000) HasTileBasedGroundImage", minWidth: 100, displayGroup: "Flags")]
+        public bool Bit_0x1000_HasTileBasedGroundImage {
+            get => (MapFlags & 0x1000) == 0x1000;
+            set => MapFlags = value ? (ushort) (MapFlags | 0x1000) : (ushort) (MapFlags & ~0x1000);
         }
 
         public bool CanSet_0x2000_HasBattleSkyBox => IsScenario1OrEarlier;
@@ -175,12 +188,6 @@ namespace SF3.Models.Structs.MPD {
                 if (CanSet_0x8000_Chunk20IsSurfaceModelIfExists)
                     MapFlags = value ? (ushort) (MapFlags | 0x8000) : (ushort) (MapFlags & ~0x8000);
             }
-        }
-
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0400f, displayName: "(Derived): " + nameof(GroundImageType), minWidth: 100, displayGroup: "Flags")]
-        public GroundImageType GroundImageType {
-            get => GroundImageTypeExtensions.FromMapFlags(MapFlags);
-            set => MapFlags = (ushort) (MapFlags & ~GroundImageTypeExtensions.ApplicableMapFlags | value.ToMapFlags());
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8010f, displayName: "(Derived) " + nameof(Chunk1IsLoadedFromLowMemory), visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]

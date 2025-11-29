@@ -20,22 +20,9 @@ namespace SF3.Win.Controls {
             public string Name { get; }
         }
 
-        private class GroundImageTypeComboBoxValue : ComboBoxValue<GroundImageType> {
-            public GroundImageTypeComboBoxValue(GroundImageType value, string name) : base(value, name) { }
-        }
-
-        private static Dictionary<GroundImageType, GroundImageTypeComboBoxValue> c_groundImageComboBoxValues = new Dictionary<GroundImageType, GroundImageTypeComboBoxValue>() {
-            { GroundImageType.None, new GroundImageTypeComboBoxValue(GroundImageType.None, "None") },
-            { GroundImageType.Image, new GroundImageTypeComboBoxValue(GroundImageType.Image, "Image") },
-            { GroundImageType.TileBased, new GroundImageTypeComboBoxValue(GroundImageType.TileBased, "Tile-Based") },
-            { GroundImageType.Invalid, new GroundImageTypeComboBoxValue(GroundImageType.Invalid, "0x1400 (Invalid)") },
-        };
-
         public MPD_FlagEditor() {
             SuspendLayout();
             InitializeComponent();
-
-            cbGroundImageType.Items.AddRange(c_groundImageComboBoxValues.Values.ToArray());
 
             cbUnknownMapFlag0x0001.CheckedChanged += (s, e)
                 => TrySetProperty(cbUnknownMapFlag0x0001,
@@ -103,10 +90,6 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
             // Derived values
-            cbGroundImageType.SelectedIndexChanged += (s, e)
-                => TrySetProperty<GroundImageType>(cbGroundImageType,
-                    nameof(IMPD_AllFlags.GroundImageType),
-                    null);
             cbChunk1IsLoadedFromLowMemory.CheckedChanged += (s, e)
                 => TrySetProperty(cbChunk1IsLoadedFromLowMemory,
                     nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
@@ -214,9 +197,6 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
                 nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
-            SetControlState<GroundImageType>(cbGroundImageType,
-                nameof(IMPD_AllFlags.GroundImageType),
-                null);
             SetControlState(cbChunk1IsLoadedFromLowMemory,
                 nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
                 null);
