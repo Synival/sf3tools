@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Win.Controls;
 using SF3.MPD;
-using SF3.Types;
 
 namespace SF3.Win.Controls {
     public partial class MPD_FlagEditor : DarkModeUserControl {
@@ -24,108 +22,90 @@ namespace SF3.Win.Controls {
             SuspendLayout();
             InitializeComponent();
 
-            cbUnknownMapFlag0x0001.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownMapFlag0x0001,
+            cb0x0001_Unknown.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0001_Unknown,
                     nameof(IMPD_AllFlags.Bit_0x0001_Unknown),
                     nameof(IMPD_AllFlags.CanSet_0x0001_Unknown));
-            cbUnknownMapFlag0x0002.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownMapFlag0x0002,
+            cb0x0002_Unknown.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0002_Unknown,
                     nameof(IMPD_AllFlags.Bit_0x0002_Unknown),
                     nameof(IMPD_AllFlags.CanSet_0x0002_Unknown));
-            cbHasSurfaceTextureRotation.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasSurfaceTextureRotation,
+            cb0x0002_HasSurfaceTextureRotation.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0002_HasSurfaceTextureRotation,
                     nameof(IMPD_AllFlags.Bit_0x0002_HasSurfaceTextureRotation),
                     nameof(IMPD_AllFlags.CanSet_0x0002_HasSurfaceTextureRotation));
-            cbAddDotProductBasedNoiseToStandardLightmap.CheckedChanged += (s, e)
-                => TrySetProperty(cbAddDotProductBasedNoiseToStandardLightmap,
+            cb0x0004_AddDotProductBasedNoiseToStandardLightmap.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0004_AddDotProductBasedNoiseToStandardLightmap,
                     nameof(IMPD_AllFlags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
                     nameof(IMPD_AllFlags.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
-            cbKeepTexturelessFlatTiles.CheckedChanged += (s, e)
-                => TrySetProperty(cbKeepTexturelessFlatTiles,
+            cb0x0008_KeepTexturelessFlatTiles.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0008_KeepTexturelessFlatTiles,
                     nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
                     nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
-            cbUnknownMapFlag0x0020.CheckedChanged += (s, e)
-                => TrySetProperty(cbUnknownMapFlag0x0020,
+            cb0x0020_Unknown.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0020_Unknown,
                     nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
                     nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
-            cbHasChunk19Model.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasChunk19Model,
+            cb0x0040_HasBackgroundImage.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0040_HasBackgroundImage,
+                    nameof(IMPD_AllFlags.Bit_0x0040_HasBackgroundImage),
+                    nameof(IMPD_AllFlags.CanSet_0x0040_HasBackgroundImage));
+            cb0x0080_HasChunk19ModelWithChunk21Textures.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0080_HasChunk19ModelWithChunk21Textures,
                     nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
                     nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
-            cbModifyPalette1ForGradient.CheckedChanged += (s, e)
-                => TrySetProperty(cbModifyPalette1ForGradient,
+            cb0x0080_SetMSBForPalette1.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0080_SetMSBForPalette1,
                     nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
                     nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
-            cbHasModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasModels,
+            cb0x0100_HasModels.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0100_HasModels,
                     nameof(IMPD_AllFlags.Bit_0x0100_HasModels),
                     nameof(IMPD_AllFlags.CanSet_0x0100_HasModels));
-            cbHasSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasSurfaceModel,
+            cb0x0200_HasSurfaceModel.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0200_HasSurfaceModel,
                     nameof(IMPD_AllFlags.Bit_0x0200_HasSurfaceModel),
                     nameof(IMPD_AllFlags.CanSet_0x0200_HasSurfaceModel));
-            cbHasCutsceneSkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasCutsceneSkyBox,
+            cb0x0400_HasGroundImage.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0400_HasGroundImage,
+                    nameof(IMPD_AllFlags.Bit_0x0400_HasGroundImage),
+                    nameof(IMPD_AllFlags.CanSet_0x0400_HasGroundImage));
+            cb0x0800_Unused.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0800_Unused,
+                    nameof(IMPD_AllFlags.Bit_0x0800_Unused),
+                    nameof(IMPD_AllFlags.CanSet_0x0800_Unused));
+            cb0x0800_HasCutsceneSkyBox.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0800_HasCutsceneSkyBox,
                     nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
                     nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
-            cbHasBattleSkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasBattleSkyBox,
+            cb0x1000_HasTileBasedBackgroundImage.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x1000_HasTileBasedBackgroundImage,
+                    nameof(IMPD_AllFlags.Bit_0x1000_HasTileBasedGroundImage),
+                    nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
+            cb0x2000_HasBattleSkyBox.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x2000_HasBattleSkyBox,
                     nameof(IMPD_AllFlags.Bit_0x2000_HasBattleSkyBox),
                     nameof(IMPD_AllFlags.CanSet_0x2000_HasBattleSkyBox));
-            cbNarrowAngleBasedLightmap.CheckedChanged += (s, e)
-                => TrySetProperty(cbNarrowAngleBasedLightmap,
+            cb0x2000_NarrowAngleBasedLightmap.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x2000_NarrowAngleBasedLightmap,
                     nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
                     nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
-            cbHasExtraChunk1ModelWithChunk21Textures.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasExtraChunk1ModelWithChunk21Textures,
+            cb0x4000_Unused.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x4000_Unused,
+                    nameof(IMPD_AllFlags.Bit_0x4000_Unused),
+                    nameof(IMPD_AllFlags.CanSet_0x4000_Unused));
+            cb0x4000_HasExtraChunk1ModelWithChunk21Textures.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x4000_HasExtraChunk1ModelWithChunk21Textures,
                     nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
                     nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
-            cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
+            cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
                     nameof(IMPD_AllFlags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
                     nameof(IMPD_AllFlags.CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
-            cbChunk20IsSurfaceModelIfExists.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk20IsSurfaceModelIfExists,
+            cb0x8000_Chunk20IsSurfaceModelIfExists.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x8000_Chunk20IsSurfaceModelIfExists,
                     nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
                     nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
-
-            // Derived values
-            cbChunk1IsLoadedFromLowMemory.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsLoadedFromLowMemory,
-                    nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
-                    null);
-            cbChunk1IsLoadedFromHighMemory.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsLoadedFromHighMemory,
-                    nameof(IMPD_AllFlags.Chunk1IsLoadedFromHighMemory),
-                    null);
-            cbChunk1IsModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk1IsModels,
-                    nameof(IMPD_AllFlags.Chunk1IsModels),
-                    null);
-            cbChunk2IsSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk2IsSurfaceModel,
-                    nameof(IMPD_AllFlags.Chunk2IsSurfaceModel),
-                    null);
-            cbChunk20IsSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk20IsSurfaceModel,
-                    nameof(IMPD_AllFlags.Chunk20IsSurfaceModel),
-                    null);
-            cbChunk20IsModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbChunk20IsModels,
-                    nameof(IMPD_AllFlags.Chunk20IsModels),
-                    null);
-            cbHighMemoryHasModels.CheckedChanged += (s, e)
-                => TrySetProperty(cbHighMemoryHasModels,
-                    nameof(IMPD_AllFlags.HighMemoryHasModels),
-                    null);
-            cbHighMemoryHasSurfaceModel.CheckedChanged += (s, e)
-                => TrySetProperty(cbHighMemoryHasSurfaceModel,
-                    nameof(IMPD_AllFlags.HighMemoryHasSurfaceModel),
-                    null);
-            cbHasAnySkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cbHasAnySkyBox,
-                    nameof(IMPD_AllFlags.HasAnySkyBox),
-                    null);
 
             ResumeLayout();
         }
@@ -148,82 +128,69 @@ namespace SF3.Win.Controls {
 
             _inUpdateFlagsFromSource = true;
 
-            SetControlState(cbUnknownMapFlag0x0001,
+            SetControlState(cb0x0001_Unknown,
                 nameof(IMPD_AllFlags.Bit_0x0001_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0001_Unknown));
-            SetControlState(cbUnknownMapFlag0x0002,
+            SetControlState(cb0x0002_Unknown,
                 nameof(IMPD_AllFlags.Bit_0x0002_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0002_Unknown));
-            SetControlState(cbHasSurfaceTextureRotation,
+            SetControlState(cb0x0002_HasSurfaceTextureRotation,
                 nameof(IMPD_AllFlags.Bit_0x0002_HasSurfaceTextureRotation),
                 nameof(IMPD_AllFlags.CanSet_0x0002_HasSurfaceTextureRotation));
-            SetControlState(cbAddDotProductBasedNoiseToStandardLightmap,
+            SetControlState(cb0x0004_AddDotProductBasedNoiseToStandardLightmap,
                 nameof(IMPD_AllFlags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
                 nameof(IMPD_AllFlags.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
-            SetControlState(cbKeepTexturelessFlatTiles,
+            SetControlState(cb0x0008_KeepTexturelessFlatTiles,
                 nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
                 nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
-            SetControlState(cbUnknownMapFlag0x0020,
+            SetControlState(cb0x0010_HasTileBasedForegroundImage,
+                nameof(IMPD_AllFlags.Bit_0x0010_HasTileBasedForegroundImage),
+                nameof(IMPD_AllFlags.CanSet_0x0010_HasTileBasedForegroundImage));
+            SetControlState(cb0x0020_Unknown,
                 nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
-            SetControlState(cbHasChunk19Model,
+            SetControlState(cb0x0040_HasBackgroundImage,
+                nameof(IMPD_AllFlags.Bit_0x0040_HasBackgroundImage),
+                nameof(IMPD_AllFlags.CanSet_0x0040_HasBackgroundImage));
+            SetControlState(cb0x0080_HasChunk19ModelWithChunk21Textures,
                 nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
                 nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
-            SetControlState(cbModifyPalette1ForGradient,
+            SetControlState(cb0x0080_SetMSBForPalette1,
                 nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
                 nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
-            SetControlState(cbHasModels,
+            SetControlState(cb0x0100_HasModels,
                 nameof(IMPD_AllFlags.Bit_0x0100_HasModels),
                 nameof(IMPD_AllFlags.CanSet_0x0100_HasModels));
-            SetControlState(cbHasSurfaceModel,
+            SetControlState(cb0x0200_HasSurfaceModel,
                 nameof(IMPD_AllFlags.Bit_0x0200_HasSurfaceModel),
                 nameof(IMPD_AllFlags.CanSet_0x0200_HasSurfaceModel));
-            SetControlState(cbHasCutsceneSkyBox,
+            SetControlState(cb0x0400_HasGroundImage,
+                nameof(IMPD_AllFlags.Bit_0x0400_HasGroundImage),
+                nameof(IMPD_AllFlags.CanSet_0x0400_HasGroundImage));
+            SetControlState(cb0x0800_HasCutsceneSkyBox,
                 nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
                 nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
-            SetControlState(cbHasBattleSkyBox,
+            SetControlState(cb0x1000_HasTileBasedBackgroundImage,
+                nameof(IMPD_AllFlags.Bit_0x1000_HasTileBasedGroundImage),
+                nameof(IMPD_AllFlags.CanSet_0x1000_HasTileBasedGroundImage));
+            SetControlState(cb0x2000_HasBattleSkyBox,
                 nameof(IMPD_AllFlags.Bit_0x2000_HasBattleSkyBox),
                 nameof(IMPD_AllFlags.CanSet_0x2000_HasBattleSkyBox));
-            SetControlState(cbNarrowAngleBasedLightmap,
+            SetControlState(cb0x2000_NarrowAngleBasedLightmap,
                 nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
                 nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
-            SetControlState(cbHasExtraChunk1ModelWithChunk21Textures,
+            SetControlState(cb0x4000_Unused,
+                nameof(IMPD_AllFlags.Bit_0x4000_Unused),
+                nameof(IMPD_AllFlags.CanSet_0x4000_Unused));
+            SetControlState(cb0x4000_HasExtraChunk1ModelWithChunk21Textures,
                 nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
                 nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
-            SetControlState(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
+            SetControlState(cb0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
                 nameof(IMPD_AllFlags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
                 nameof(IMPD_AllFlags.CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
-            SetControlState(cbChunk20IsSurfaceModelIfExists,
+            SetControlState(cb0x8000_Chunk20IsSurfaceModelIfExists,
                 nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
                 nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
-
-            SetControlState(cbChunk1IsLoadedFromLowMemory,
-                nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
-                null);
-            SetControlState(cbChunk1IsLoadedFromHighMemory,
-                nameof(IMPD_AllFlags.Chunk1IsLoadedFromHighMemory),
-                null);
-            SetControlState(cbChunk1IsModels,
-                nameof(IMPD_AllFlags.Chunk1IsModels),
-                null);
-            SetControlState(cbChunk2IsSurfaceModel,
-                nameof(IMPD_AllFlags.Chunk2IsSurfaceModel),
-                null);
-            SetControlState(cbChunk20IsSurfaceModel,
-                nameof(IMPD_AllFlags.Chunk20IsSurfaceModel),
-                null);
-            SetControlState(cbChunk20IsModels,
-                nameof(IMPD_AllFlags.Chunk20IsModels),
-                null);
-            SetControlState(cbHighMemoryHasModels,
-                nameof(IMPD_AllFlags.HighMemoryHasModels),
-                null);
-            SetControlState(cbHighMemoryHasSurfaceModel,
-                nameof(IMPD_AllFlags.HighMemoryHasSurfaceModel),
-                null);
-            SetControlState(cbHasAnySkyBox,
-                nameof(IMPD_AllFlags.HasAnySkyBox),
-                null);
 
             _inUpdateFlagsFromSource = false;
         }
