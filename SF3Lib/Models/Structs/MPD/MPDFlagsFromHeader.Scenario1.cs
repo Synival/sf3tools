@@ -34,6 +34,16 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
+        public bool CanSet_0x4000_Unused => IsScenario1OrEarlier;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.4000f, displayName: "(0x4000) Unused (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Bit_0x4000_Unused {
+            get => CanSet_0x4000_Unused ? (MapFlags & 0x4000) == 0x4000 : false;
+            set {
+                if (CanSet_0x4000_Unused)
+                    MapFlags = value ? (ushort) (MapFlags | 0x4000) : (ushort) (MapFlags & ~0x0400);
+            }
+        }
+
         public bool CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists => IsScenario1OrEarlier;
         [TableViewModelColumn(addressField: null, displayOrder: 0.8000f, displayName: "(0x8000) Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
         public bool Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists {

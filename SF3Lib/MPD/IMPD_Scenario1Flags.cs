@@ -21,5 +21,10 @@
         /// Unused flag.
         /// </summary>
         bool Bit_0x0800_Unused { get; set; }
+
+        /// <summary>
+        /// Unused flag.
+        /// </summary>
+        bool Bit_0x4000_Unused { get; set; }
     }
 }
