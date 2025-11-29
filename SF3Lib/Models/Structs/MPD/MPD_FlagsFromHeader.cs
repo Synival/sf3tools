@@ -38,26 +38,26 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        public bool CanSetHasSurfaceTextureRotation => IsScenario3OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.00021f, displayName: "(0x0002) " + nameof(HasSurfaceTextureRotation) + " (Scn3+)", visibilityProperty: nameof(IsScenario3OrLater), displayGroup: "Flags")]
-        public bool HasSurfaceTextureRotation {
-            get => CanSetHasSurfaceTextureRotation && (MapFlags & 0x0002) == 0x0002;
+        public bool CanSet_0x0002_HasSurfaceTextureRotation => IsScenario3OrLater;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.00021f, displayName: "(0x0002) HasSurfaceTextureRotation (Scn3+)", visibilityProperty: nameof(IsScenario3OrLater), displayGroup: "Flags")]
+        public bool Bit_0x0002_HasSurfaceTextureRotation {
+            get => CanSet_0x0002_HasSurfaceTextureRotation && (MapFlags & 0x0002) == 0x0002;
             set {
-                if (CanSetHasSurfaceTextureRotation)
+                if (CanSet_0x0002_HasSurfaceTextureRotation)
                     MapFlags = value ? (ushort) (MapFlags | 0x0002) : (ushort) (MapFlags & ~0x0002);
             }
         }
 
-        public bool CanSetAddDotProductBasedNoiseToStandardLightmap => true;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0004f, displayName: "(0x0004) " + nameof(AddDotProductBasedNoiseToStandardLightmap), displayGroup: "Flags")]
-        public bool AddDotProductBasedNoiseToStandardLightmap {
+        public bool CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0004f, displayName: "(0x0004) AddDotProductBasedNoiseToStandardLightmap", displayGroup: "Flags")]
+        public bool Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap {
             get => (MapFlags & 0x0004) == 0x0004;
             set => MapFlags = value ? (ushort) (MapFlags | 0x0004) : (ushort) (MapFlags & ~0x0004);
         }
 
-        public bool CanSetKeepTexturelessFlatTiles => true;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0008f, displayName: "(0x0008) " + nameof(KeepTexturelessFlatTiles), displayGroup: "Flags")]
-        public bool KeepTexturelessFlatTiles {
+        public bool CanSet_0x0008_KeepTexturelessFlatTiles => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0008f, displayName: "(0x0008) KeepTexturelessFlatTiles", displayGroup: "Flags")]
+        public bool Bit_0x0008_KeepTexturelessFlatTiles {
             get => (MapFlags & 0x0008) == 0x0008;
             set => MapFlags = value ? (ushort) (MapFlags | 0x0008) : (ushort) (MapFlags & ~0x0008);
         }
@@ -69,9 +69,9 @@ namespace SF3.Models.Structs.MPD {
             set => MapFlags = (ushort) (MapFlags & ~BackgroundImageTypeExtensions.ApplicableMapFlags | value.ToMapFlags());
         }
 
-        public bool CanSetUnknownMapFlag0x0020 => true;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0020f, displayName: "(0x0020) " + nameof(UnknownMapFlag0x0020), displayGroup: "Flags")]
-        public bool UnknownMapFlag0x0020 {
+        public bool CanSet_0x0020_Unknown => true;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0020f, displayName: "(0x0020) Unknown", displayGroup: "Flags")]
+        public bool Bit_0x0020_Unknown {
             get => (MapFlags & 0x0020) == 0x0020;
             set => MapFlags = value ? (ushort) (MapFlags | 0x0020) : (ushort) (MapFlags & ~0x0020);
         }
@@ -137,12 +137,12 @@ namespace SF3.Models.Structs.MPD {
             }
         }
  
-        public bool CanSetNarrowAngleBasedLightmap => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.2001f, displayName: "(0x2000) " + nameof(NarrowAngleBasedLightmap) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
-        public bool NarrowAngleBasedLightmap {
-            get => CanSetNarrowAngleBasedLightmap && (MapFlags & 0x2000) == 0x2000;
+        public bool CanSet_0x2000_NarrowAngleBasedLightmap => IsScenario2OrLater;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.2001f, displayName: "(0x2000) " + nameof(Bit_0x2000_NarrowAngleBasedLightmap) + " (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Bit_0x2000_NarrowAngleBasedLightmap {
+            get => CanSet_0x2000_NarrowAngleBasedLightmap && (MapFlags & 0x2000) == 0x2000;
             set {
-                if (CanSetNarrowAngleBasedLightmap)
+                if (CanSet_0x2000_NarrowAngleBasedLightmap)
                     MapFlags = (ushort) (MapFlags & ~0x2000 | (value ? 0x2000 : 0));
             }
         }

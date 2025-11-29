@@ -1372,7 +1372,7 @@ namespace SF3.Models.Files.MPD {
                     weirdTexFlags &= ~0x03;
                 if (weirdTexFlags != 0x00)
                     errors.Add("Tile (" + tile.X + ", " + tile.Y + ") has unhandled texture flag 0x" + weirdTexFlags.ToString("X2"));
-                if (Scenario >= ScenarioType.Scenario3 && !flags.HasSurfaceTextureRotation && (tile.TextureFlags & 0x03) != 0)
+                if (Scenario >= ScenarioType.Scenario3 && !flags.Bit_0x0002_HasSurfaceTextureRotation && (tile.TextureFlags & 0x03) != 0)
                     errors.Add("HasSurfaceTextureRotation flag is off but tile (" + tile.X + ", " + tile.Y + ") has rotation flags 0x" + (weirdTexFlags & 0x03).ToString("X2"));
             }
 

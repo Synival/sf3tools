@@ -245,7 +245,7 @@ namespace SF3.Win.Controls {
 
                     DrawHelp = DrawHelp,
 
-                    UseOutsideLighting = MPD_File?.Flags?.NarrowAngleBasedLightmap == true,
+                    UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
                     ModelsToHide = allModelsToHide,
                 },

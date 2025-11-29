@@ -59,24 +59,24 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x0002_Unknown));
             cbHasSurfaceTextureRotation.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasSurfaceTextureRotation,
-                    nameof(IMPD_AllFlags.HasSurfaceTextureRotation),
-                    nameof(IMPD_AllFlags.CanSetHasSurfaceTextureRotation));
+                    nameof(IMPD_AllFlags.Bit_0x0002_HasSurfaceTextureRotation),
+                    nameof(IMPD_AllFlags.CanSet_0x0002_HasSurfaceTextureRotation));
             cbAddDotProductBasedNoiseToStandardLightmap.CheckedChanged += (s, e)
                 => TrySetProperty(cbAddDotProductBasedNoiseToStandardLightmap,
-                    nameof(IMPD_AllFlags.AddDotProductBasedNoiseToStandardLightmap),
-                    nameof(IMPD_AllFlags.CanSetAddDotProductBasedNoiseToStandardLightmap));
+                    nameof(IMPD_AllFlags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
+                    nameof(IMPD_AllFlags.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
             cbKeepTexturelessFlatTiles.CheckedChanged += (s, e)
                 => TrySetProperty(cbKeepTexturelessFlatTiles,
-                    nameof(IMPD_AllFlags.KeepTexturelessFlatTiles),
-                    nameof(IMPD_AllFlags.CanSetKeepTexturelessFlatTiles));
+                    nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
+                    nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
             cbBackgroundImageType.SelectedIndexChanged += (s, e)
                 => TrySetProperty<BackgroundImageType>(cbBackgroundImageType,
                     nameof(IMPD_AllFlags.BackgroundImageType),
                     nameof(IMPD_AllFlags.CanSetBackgroundImageType));
             cbUnknownMapFlag0x0020.CheckedChanged += (s, e)
                 => TrySetProperty(cbUnknownMapFlag0x0020,
-                    nameof(IMPD_AllFlags.UnknownMapFlag0x0020),
-                    nameof(IMPD_AllFlags.CanSetUnknownMapFlag0x0020));
+                    nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
+                    nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
             cbHasChunk19Model.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasChunk19Model,
                     nameof(IMPD_AllFlags.HasChunk19Model),
@@ -107,8 +107,8 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSetHasBattleSkyBox));
             cbNarrowAngleBasedLightmap.CheckedChanged += (s, e)
                 => TrySetProperty(cbNarrowAngleBasedLightmap,
-                    nameof(IMPD_AllFlags.NarrowAngleBasedLightmap),
-                    nameof(IMPD_AllFlags.CanSetNarrowAngleBasedLightmap));
+                    nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
+                    nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
             cbHasExtraChunk1ModelWithChunk21Textures.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasExtraChunk1ModelWithChunk21Textures,
                     nameof(IMPD_AllFlags.HasExtraChunk1ModelWithChunk21Textures),
@@ -188,20 +188,20 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x0002_Unknown),
                 nameof(IMPD_AllFlags.CanSet_0x0002_Unknown));
             SetControlState(cbHasSurfaceTextureRotation,
-                nameof(IMPD_AllFlags.HasSurfaceTextureRotation),
-                nameof(IMPD_AllFlags.CanSetHasSurfaceTextureRotation));
+                nameof(IMPD_AllFlags.Bit_0x0002_HasSurfaceTextureRotation),
+                nameof(IMPD_AllFlags.CanSet_0x0002_HasSurfaceTextureRotation));
             SetControlState(cbAddDotProductBasedNoiseToStandardLightmap,
-                nameof(IMPD_AllFlags.AddDotProductBasedNoiseToStandardLightmap),
-                nameof(IMPD_AllFlags.CanSetAddDotProductBasedNoiseToStandardLightmap));
+                nameof(IMPD_AllFlags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
+                nameof(IMPD_AllFlags.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
             SetControlState(cbKeepTexturelessFlatTiles,
-                nameof(IMPD_AllFlags.KeepTexturelessFlatTiles),
-                nameof(IMPD_AllFlags.CanSetKeepTexturelessFlatTiles));
+                nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
+                nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
             SetControlState<BackgroundImageType>(cbBackgroundImageType,
                 nameof(IMPD_AllFlags.BackgroundImageType),
                 nameof(IMPD_AllFlags.CanSetBackgroundImageType));
             SetControlState(cbUnknownMapFlag0x0020,
-                nameof(IMPD_AllFlags.UnknownMapFlag0x0020),
-                nameof(IMPD_AllFlags.CanSetUnknownMapFlag0x0020));
+                nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
+                nameof(IMPD_AllFlags.CanSet_0x0020_Unknown));
             SetControlState(cbHasChunk19Model,
                 nameof(IMPD_AllFlags.HasChunk19Model),
                 nameof(IMPD_AllFlags.CanSetHasChunk19Model));
@@ -224,8 +224,8 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.HasBattleSkyBox),
                 nameof(IMPD_AllFlags.CanSetHasBattleSkyBox));
             SetControlState(cbNarrowAngleBasedLightmap,
-                nameof(IMPD_AllFlags.NarrowAngleBasedLightmap),
-                nameof(IMPD_AllFlags.CanSetNarrowAngleBasedLightmap));
+                nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
+                nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
             SetControlState(cbHasExtraChunk1ModelWithChunk21Textures,
                 nameof(IMPD_AllFlags.HasExtraChunk1ModelWithChunk21Textures),
                 nameof(IMPD_AllFlags.CanSetHasExtraChunk1ModelWithChunk21Textures));

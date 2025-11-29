@@ -21,7 +21,7 @@ namespace SF3.MPD {
         private Func<bool> _hasModelGetter;
         public bool HasModel => _hasModelGetter();
 
-        public bool HasRotatableTextures => _flags.HasSurfaceTextureRotation;
+        public bool HasRotatableTextures => _flags.Bit_0x0002_HasSurfaceTextureRotation;
 
         public NormalCalculationSettings NormalSettings { get; set; } = new NormalCalculationSettings();
 

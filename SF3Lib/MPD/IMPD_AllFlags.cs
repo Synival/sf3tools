@@ -1,13 +1,9 @@
 ﻿using SF3.Types;
 
 namespace SF3.MPD {
-    public interface IMPD_AllFlags : IMPD_AllScenarioFlags, IMPD_Scenario1and2Flags {
+    public interface IMPD_AllFlags : IMPD_AllScenarioFlags, IMPD_Scenario1and2Flags, IMPD_Scenario2PlusFlags, IMPD_Scenario3PlusFlags {
         // Possible flags/settings for all scenarios
-        bool HasSurfaceTextureRotation { get; set; }
-        bool AddDotProductBasedNoiseToStandardLightmap { get; set; }
-        bool KeepTexturelessFlatTiles { get; set; }
         BackgroundImageType BackgroundImageType { get; set; }
-        bool UnknownMapFlag0x0020 { get; set; }
         bool HasChunk19Model { get; set; }
         bool ModifyPalette1ForGradient { get; set; }
         bool HasModels { get; set; }
@@ -15,7 +11,6 @@ namespace SF3.MPD {
         GroundImageType GroundImageType { get; set; }
         bool HasCutsceneSkyBox { get; set; }
         bool HasBattleSkyBox { get; set; }
-        bool NarrowAngleBasedLightmap { get; set; }
         bool HasExtraChunk1ModelWithChunk21Textures { get; set; }
         bool Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; set; }
         bool Chunk20IsSurfaceModelIfExists { get; set; }
@@ -23,11 +18,11 @@ namespace SF3.MPD {
         // Properties to indicate whether or not this flag can be set
         bool CanSet_0x0001_Unknown { get; }
         bool CanSet_0x0002_Unknown { get; }
-        bool CanSetHasSurfaceTextureRotation { get; }
-        bool CanSetAddDotProductBasedNoiseToStandardLightmap { get; }
-        bool CanSetKeepTexturelessFlatTiles { get; }
+        bool CanSet_0x0002_HasSurfaceTextureRotation { get; }
+        bool CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap { get; }
+        bool CanSet_0x0008_KeepTexturelessFlatTiles { get; }
         bool CanSetBackgroundImageType { get; }
-        bool CanSetUnknownMapFlag0x0020 { get; }
+        bool CanSet_0x0020_Unknown { get; }
         bool CanSetHasChunk19Model { get; }
         bool CanSetModifyPalette1ForGradient { get; }
         bool CanSetHasModels { get; }
@@ -35,7 +30,7 @@ namespace SF3.MPD {
         bool CanSetGroundImageType { get; }
         bool CanSetHasCutsceneSkyBox { get; }
         bool CanSetHasBattleSkyBox { get; }
-        bool CanSetNarrowAngleBasedLightmap { get; }
+        bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
         bool CanSetHasExtraChunk1ModelWithChunk21Textures { get; }
         bool CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists { get; }
         bool CanSetChunk20IsSurfaceModelIfExists { get; }

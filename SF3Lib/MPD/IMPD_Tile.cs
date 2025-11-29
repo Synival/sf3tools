@@ -51,7 +51,7 @@ namespace SF3.MPD {
 
         /// <summary>
         /// When set, the tile is flat and independent from the surface model mesh. Only 150 of this tiles can exist
-        /// in any one MPD, excluding flat tiles with no texture (unless the 'KeepTexturelessFlatTiles' MPD flag is on).
+        /// in any one MPD, excluding flat tiles with no texture (unless the 'Bit_0x0008_KeepTexturelessFlatTiles' MPD flag is on).
         /// Setting this from 'false' to 'true' will automatically update heights to their lowest point and update the
         /// center height, adjacent tile heights, and adjacent tile normals as required.
         /// </summary>
