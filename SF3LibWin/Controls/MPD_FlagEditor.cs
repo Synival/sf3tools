@@ -163,6 +163,9 @@ namespace SF3.Win.Controls {
             SetControlState(cb0x0400_HasGroundImage,
                 nameof(IMPD_AllFlags.Bit_0x0400_HasGroundImage),
                 nameof(IMPD_AllFlags.CanSet_0x0400_HasGroundImage));
+            SetControlState(cb0x0800_Unused,
+                nameof(IMPD_AllFlags.Bit_0x0800_Unused),
+                nameof(IMPD_AllFlags.CanSet_0x0800_Unused));
             SetControlState(cb0x0800_HasCutsceneSkyBox,
                 nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
                 nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
