@@ -45,5 +45,12 @@
         /// When set, Chunk[1] is an additional model (used for the Kraken) and Chunk[21] is used for its textures.
         /// </summary>
         bool Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures { get; set; }
+
+        /// <summary>
+        /// Used when both a model chunk and surface model chunk are present.
+        /// When set, Chunk[1] is the model chunk (low memory) and Chunk[20] is the surface model chunk.
+        /// When set, Chunk[20] is the model chunk (high memory) and Chunk[2] is the surface model chunk.
+        /// </summary>
+        bool Bit_0x8000_Chunk20IsSurfaceModelIfExists { get; set; }
     }
 }

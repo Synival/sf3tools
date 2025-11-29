@@ -88,11 +88,11 @@ namespace SF3.Win.Controls {
             cbHasModels.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasModels,
                     nameof(IMPD_AllFlags.Bit_0x0100_HasModels),
-                    nameof(IMPD_AllFlags.CanSetHasModels));
+                    nameof(IMPD_AllFlags.CanSet_0x0100_HasModels));
             cbHasSurfaceModel.CheckedChanged += (s, e)
                 => TrySetProperty(cbHasSurfaceModel,
                     nameof(IMPD_AllFlags.Bit_0x0200_HasSurfaceModel),
-                    nameof(IMPD_AllFlags.CanSetHasSurfaceModel));
+                    nameof(IMPD_AllFlags.CanSet_0x0200_HasSurfaceModel));
             cbGroundImageType.SelectedIndexChanged += (s, e)
                 => TrySetProperty<GroundImageType>(cbGroundImageType,
                     nameof(IMPD_AllFlags.GroundImageType),
@@ -115,12 +115,12 @@ namespace SF3.Win.Controls {
                     nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
             cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists.CheckedChanged += (s, e)
                 => TrySetProperty(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
-                    nameof(IMPD_AllFlags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
-                    nameof(IMPD_AllFlags.CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
+                    nameof(IMPD_AllFlags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
+                    nameof(IMPD_AllFlags.CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
             cbChunk20IsSurfaceModelIfExists.CheckedChanged += (s, e)
                 => TrySetProperty(cbChunk20IsSurfaceModelIfExists,
-                    nameof(IMPD_AllFlags.Chunk20IsSurfaceModelIfExists),
-                    nameof(IMPD_AllFlags.CanSetChunk20IsSurfaceModelIfExists));
+                    nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
+                    nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
             // Derived values
             cbChunk1IsLoadedFromLowMemory.CheckedChanged += (s, e)
@@ -210,10 +210,10 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
             SetControlState(cbHasModels,
                 nameof(IMPD_AllFlags.Bit_0x0100_HasModels),
-                nameof(IMPD_AllFlags.CanSetHasModels));
+                nameof(IMPD_AllFlags.CanSet_0x0100_HasModels));
             SetControlState(cbHasSurfaceModel,
                 nameof(IMPD_AllFlags.Bit_0x0200_HasSurfaceModel),
-                nameof(IMPD_AllFlags.CanSetHasSurfaceModel));
+                nameof(IMPD_AllFlags.CanSet_0x0200_HasSurfaceModel));
             SetControlState<GroundImageType>(cbGroundImageType,
                 nameof(IMPD_AllFlags.GroundImageType),
                 nameof(IMPD_AllFlags.CanSetGroundImageType));
@@ -230,11 +230,11 @@ namespace SF3.Win.Controls {
                 nameof(IMPD_AllFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
                 nameof(IMPD_AllFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
             SetControlState(cbChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists,
-                nameof(IMPD_AllFlags.Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
-                nameof(IMPD_AllFlags.CanSetChunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
+                nameof(IMPD_AllFlags.Bit_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists),
+                nameof(IMPD_AllFlags.CanSet_0x8000_Chunk1IsStillLoadedFromLowMemoryIfSurfaceModelExists));
             SetControlState(cbChunk20IsSurfaceModelIfExists,
-                nameof(IMPD_AllFlags.Chunk20IsSurfaceModelIfExists),
-                nameof(IMPD_AllFlags.CanSetChunk20IsSurfaceModelIfExists));
+                nameof(IMPD_AllFlags.Bit_0x8000_Chunk20IsSurfaceModelIfExists),
+                nameof(IMPD_AllFlags.CanSet_0x8000_Chunk20IsSurfaceModelIfExists));
 
             SetControlState(cbChunk1IsLoadedFromLowMemory,
                 nameof(IMPD_AllFlags.Chunk1IsLoadedFromLowMemory),
