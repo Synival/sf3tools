@@ -33,5 +33,10 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.MPDHeader.ViewDistance;
             set => MPD_File.MPDHeader.ViewDistance = value;
         }
+
+        public float ModelsYRotation {
+            get => MPD_File.MPDHeader.ModelsYRotation;
+            set => MPD_File.MPDHeader.ModelsYRotation = value;
+        }
     }
 }

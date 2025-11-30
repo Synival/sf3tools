@@ -51,5 +51,11 @@
         /// Some sort of value that determines what models are visible. Usually 0x48, goes up to 0x90.
         /// </summary>
         ushort ViewDistance { get; set; }
+
+        /// <summary>
+        /// Rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
+        /// facing the wrong way.
+        /// </summary>
+        float ModelsYRotation { get; set; }
     }
 }

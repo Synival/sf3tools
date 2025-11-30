@@ -81,7 +81,7 @@ namespace SF3.MPD {
             WriteMPDPointer(null);
             // TODO: mesh3pos
             WriteMPDPointer(null);
-            WriteShort(new CompressedFIXED(header.ModelsPreYRotation / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(settings.ModelsYRotation / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(header.ModelsViewAngleMin / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(header.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WriteMPDPointer(textureAnimAltPos);

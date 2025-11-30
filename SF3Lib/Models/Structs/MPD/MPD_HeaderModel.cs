@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _offsetMesh2Addr;             // int32  Pointer to list of 2 movable/interactable mesh. may be null.
         private readonly int _otherUnknownAddr;            // int32  Unknown value only present in 'Other' MPD files
         private readonly int _offsetMesh3Addr;             // int32  Pointer to list of 2 movable/interactable mesh. may be null.
-        private readonly int _modelsPreYRotationAddr;      // ANGLE  mostly 0x8000. The meshes from the models chunk are pre-rotated by this angle.
+        private readonly int _modelsYRotationAddr;         // ANGLE  mostly 0x8000. The meshes from the models chunk are pre-rotated by this angle.
         private readonly int _modelsViewAngleMinAddr;      // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
         private readonly int _padding3Addr;                // int16  Always zero
@@ -99,7 +99,7 @@ namespace SF3.Models.Structs.MPD {
             }
 
             if (Scenario != ScenarioType.Other) {
-                _modelsPreYRotationAddr   = addressNext + 0x00; // 2 bytes
+                _modelsYRotationAddr      = addressNext + 0x00; // 2 bytes
                 _modelsViewAngleMinAddr   = addressNext + 0x02; // 2 bytes
                 _modelsViewAngleMaxAddr   = addressNext + 0x04; // 2 bytes
                 _padding3Addr             = addressNext + 0x06; // 2 bytes
@@ -107,7 +107,7 @@ namespace SF3.Models.Structs.MPD {
                 addressNext += 0x0C;
             }
             else {
-                _modelsPreYRotationAddr   = -1;
+                _modelsYRotationAddr      = -1;
                 _modelsViewAngleMinAddr   = -1;
                 _modelsViewAngleMaxAddr   = -1;
                 _padding3Addr             = -1;
@@ -292,12 +292,12 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_modelsPreYRotationAddr), displayOrder: 14, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
-        public float ModelsPreYRotation {
-            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsPreYRotationAddr).Float : -1) * 180.0f;
+        [TableViewModelColumn(addressField: nameof(_modelsYRotationAddr), displayOrder: 14, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        public float ModelsYRotation {
+            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsYRotationAddr).Float : -1) * 180.0f;
             set {
                 if (HasModelsInfo)
-                    Data.SetCompressedFIXED(_modelsPreYRotationAddr, new CompressedFIXED(value / 180.0f, 0));
+                    Data.SetCompressedFIXED(_modelsYRotationAddr, new CompressedFIXED(value / 180.0f, 0));
             }
         }
 

@@ -249,7 +249,7 @@ namespace SF3.Win.Controls {
 
                     ModelsToHide = allModelsToHide,
                 },
-                Yaw, Pitch, MPD_File.MPDHeader.ModelsPreYRotation, Width, Height,
+                Yaw, Pitch, MPD_File.Settings.ModelsYRotation, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix
             );
 
