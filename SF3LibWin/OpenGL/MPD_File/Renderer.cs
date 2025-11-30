@@ -64,6 +64,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             int screenWidth,
             int screenHeight,
             ref Matrix4 projectionMatrix,
@@ -108,9 +109,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             };
 
             if (options.DrawNormals)
-                DrawSceneObjectNormals(general, models, surfaceModel, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                DrawSceneObjectNormals(general, models, surfaceModel, options, cameraYaw, cameraPitch, sceneRotation, modelDirectionsFacingCamera);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(general, models, surfaceModel, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix, modelDirectionsFacingCamera);
+                DrawSceneObjects(general, models, surfaceModel, gradients, lighting, options, cameraYaw, cameraPitch, sceneRotation, ref projectionMatrix, ref viewMatrix, modelDirectionsFacingCamera);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
@@ -123,7 +124,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 DrawSceneCollisionLines(general, collisionModels, cameraYaw);
 
             if (options.DrawWireframe)
-                DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch, sceneRotation, modelDirectionsFacingCamera);
 
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
@@ -138,10 +139,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             bool[] modelDirectionsFacingCamera
         ) {
             if (options.DrawModels)
-                DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch, sceneRotation, modelDirectionsFacingCamera);
 
             if (options.DrawSurfaceModel)
                 DrawSceneSurfaceModelNormals(general, surfaceModel);
@@ -156,6 +158,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix,
             bool[] modelDirectionsFacingCamera
@@ -164,13 +167,13 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.StencilMask(0x04);
 
             if (options.DrawModels)
-                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: false);
+                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, sceneRotation, modelDirectionsFacingCamera, transparentPass: false);
 
             if (options.WillDrawSurfaceModel)
                 DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
 
             if (options.DrawModels)
-                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: true);
+                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, sceneRotation, modelDirectionsFacingCamera, transparentPass: true);
 
             if (options.DrawGradients)
                 DrawSceneGradient(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
@@ -211,6 +214,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             bool[] modelDirectionsFacingCamera
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
@@ -220,7 +224,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             using (general.WireframeShader.Use())
             using (general.TileWireframeTexture.Use(TextureUnit.Texture1)) {
                 if (options.DrawModels)
-                    DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                    DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch, sceneRotation, modelDirectionsFacingCamera);
 
                 if (options.WillDrawSurfaceModelWireframe)
                     DrawSceneSurfaceModelWireframe(general, surfaceModel);
@@ -266,6 +270,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             bool[] modelDirectionsFacingCamera
         ) {
             if (models?.ModelsByIDByCollection == null)
@@ -282,7 +287,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToArray();
 
             foreach (var mwg in modelsWithGroups) {
-                SetModelAndNormalMatricesForModel(models, mwg.Model, general.NormalsShader, options, cameraYaw, cameraPitch);
+                SetModelAndNormalMatricesForModel(models, mwg.Model, general.NormalsShader, options, cameraYaw, cameraPitch, sceneRotation);
                 mwg.ModelGroup.SolidTexturedModel?.Draw(general.NormalsShader, null);
                 mwg.ModelGroup.SolidUntexturedModel?.Draw(general.NormalsShader, null);
                 mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(general.NormalsShader, null);
@@ -395,6 +400,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             bool[] modelDirectionsFacingCamera,
             bool transparentPass
         ) {
@@ -429,7 +435,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         GL.ColorMask(false, false, false, false);
                         using (general.SolidShader.Use()) {
                             foreach (var mwg in modelsWithStencils) {
-                                SetModelAndNormalMatricesForModel(models, mwg.Model, general.SolidShader, options, cameraYaw, cameraPitch);
+                                SetModelAndNormalMatricesForModel(models, mwg.Model, general.SolidShader, options, cameraYaw, cameraPitch, sceneRotation);
                                 mwg.ModelGroup.HideModel.Draw(general.SolidShader, null);
                             }
                         }
@@ -438,14 +444,14 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                     // Pass 2: Textured models
                     foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidTexturedModel != null).ToArray()) {
-                        SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                        SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch, sceneRotation);
                         mwg.ModelGroup.SolidTexturedModel.Draw(general.ObjectShader);
                     }
 
                     // Pass 3: Untextured models
                     using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
-                            SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                            SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, sceneRotation, cameraPitch);
                             mwg.ModelGroup.SolidUntexturedModel.Draw(general.ObjectShader, null);
                         }
                     }
@@ -456,14 +462,14 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                     // Pass 3: Semi-transparent textured models
                     foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentTexturedModel != null).ToArray()) {
-                        SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                        SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch, sceneRotation);
                         mwg.ModelGroup.SemiTransparentTexturedModel.Draw(general.ObjectShader);
                     }
 
                     // Pass 4: Semi-transparent untextured models
                     using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentUntexturedModel != null).ToArray()) {
-                            SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch);
+                            SetModelAndNormalMatricesForModel(models, mwg.Model, general.ObjectShader, options, cameraYaw, cameraPitch, sceneRotation);
                             mwg.ModelGroup.SemiTransparentUntexturedModel.Draw(general.ObjectShader, null);
                         }
                     }
@@ -564,6 +570,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
+            float sceneRotation,
             bool[] modelDirectionsFacingCamera
         ) {
             if (models?.ModelInstances == null)
@@ -578,7 +585,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 var modelGroup = models.ModelsByIDByCollection[model.Collection].TryGetValue(model.ModelID, out ModelGroup pd) ? pd : null;
                 if (modelGroup != null) {
-                    SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch);
+                    SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch, sceneRotation);
                     modelGroup.SolidTexturedModel?.Draw(general.WireframeShader);
                     modelGroup.SolidUntexturedModel?.Draw(general.WireframeShader);
                     modelGroup.SemiTransparentTexturedModel?.Draw(general.WireframeShader);
@@ -682,7 +689,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             Shader shader,
             RendererOptions options,
             float cameraYaw,
-            float cameraPitch
+            float cameraPitch,
+            float sceneRotation
         ) {
             var modelMatrix = _modelMatricesByModel.TryGetValue(modelInstance, out var modelMatrixValue) ? modelMatrixValue : null;
             if (!modelMatrix.HasValue) {
@@ -714,7 +722,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     Matrix4.CreateRotationX(angleXAdjust) *
                     Matrix4.CreateRotationY(modelInstance.AngleY * (float) Math.PI / -180.00f + angleYAdjust) *
                     Matrix4.CreateRotationZ(modelInstance.AngleZ * (float) Math.PI / 180.00f) *
-                    Matrix4.CreateTranslation(modelInstance.PositionX / -32.0f - 32.0f, modelInstance.PositionY / -32.0f - prePostAdjustY + yAdjust, modelInstance.PositionZ / 32.0f + 32.0f);
+                    Matrix4.CreateRotationY((float) Math.PI) *
+                    Matrix4.CreateTranslation(modelInstance.PositionX / 32.0f, modelInstance.PositionY / -32.0f - prePostAdjustY + yAdjust, modelInstance.PositionZ / -32.0f) *
+                    Matrix4.CreateRotationY(sceneRotation * (float) Math.PI / -180.00f) *
+                    Matrix4.CreateTranslation(-32.0f, 0, 32.0f);
 
                 _modelMatricesByModel[modelInstance] = newModelMatrix;
                 modelMatrix = newModelMatrix;

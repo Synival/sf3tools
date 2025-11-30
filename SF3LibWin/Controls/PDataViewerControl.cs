@@ -154,7 +154,7 @@ namespace SF3.Win.Controls {
                     DrawWireframe  = true,
                     SmoothLighting = true,
                 },
-                Yaw, Pitch, ClientSize.Width, ClientSize.Height,
+                Yaw, Pitch, 0, ClientSize.Width, ClientSize.Height,
                 ref _projectionMatrix, ref _viewMatrix
             );
 
@@ -213,7 +213,7 @@ namespace SF3.Win.Controls {
                     _depth  = _maxZ - _minZ;
 
                     _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
-                    _center = new Vector3((_minX + _maxX) / -2, (_minY + _maxY) / -2, (_minZ + _maxZ) / 2);
+                    _center = new Vector3((_minX + _maxX) / 2, (_minY + _maxY) / -2, (_minZ + _maxZ) / -2);
 
                     _dist = (float) Math.Pow(_size, 0.875f) * 4f;
                 }
