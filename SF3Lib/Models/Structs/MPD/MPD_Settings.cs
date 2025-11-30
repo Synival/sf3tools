@@ -29,14 +29,24 @@ namespace SF3.Models.Structs.MPD {
             set => MPD_File.Flags.Bit_0x0002_HasSurfaceTextureRotation = value;
         }
 
-        public ushort ViewDistance {
-            get => MPD_File.MPDHeader.ViewDistance;
-            set => MPD_File.MPDHeader.ViewDistance = value;
-        }
-
         public float ModelsYRotation {
             get => MPD_File.MPDHeader.ModelsYRotation;
             set => MPD_File.MPDHeader.ModelsYRotation = value;
+        }
+
+        public ushort ModelsViewDistance {
+            get => MPD_File.MPDHeader.ModelsViewDistance;
+            set => MPD_File.MPDHeader.ModelsViewDistance = value;
+        }
+
+        public float ModelsViewAngleMin {
+            get => MPD_File.MPDHeader.ModelsViewAngleMin;
+            set => MPD_File.MPDHeader.ModelsViewAngleMin = value;
+        }
+
+        public float ModelsViewAngleMax {
+            get => MPD_File.MPDHeader.ModelsViewAngleMax;
+            set => MPD_File.MPDHeader.ModelsViewAngleMax = value;
         }
     }
 }

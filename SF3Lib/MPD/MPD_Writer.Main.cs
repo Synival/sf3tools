@@ -70,7 +70,7 @@ namespace SF3.MPD {
             WriteMPDPointer(lightPalettePos);
             WriteMPDPointer(lightPositionPos);
             WriteMPDPointer(unknown1Pos);
-            WriteUShort(settings.ViewDistance);
+            WriteUShort(settings.ModelsViewDistance);
             WriteMPDPointer(modelSwitchGroupsPos);
             WriteMPDPointer(textureAnimationsPos);
             WriteMPDPointer(unknown2Pos);
@@ -82,8 +82,8 @@ namespace SF3.MPD {
             // TODO: mesh3pos
             WriteMPDPointer(null);
             WriteShort(new CompressedFIXED(settings.ModelsYRotation / 180.0f, 0).RawShort);
-            WriteShort(new CompressedFIXED(header.ModelsViewAngleMin / 180.0f, 0).RawShort);
-            WriteShort(new CompressedFIXED(header.ModelsViewAngleMax / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WriteMPDPointer(textureAnimAltPos);
             WriteMPDPointer(palette1Pos ?? headerAddr);
             WriteMPDPointer(palette2Pos ?? headerAddr);

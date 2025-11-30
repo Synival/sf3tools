@@ -231,8 +231,9 @@ namespace SF3.Win.Controls {
                     ApplyLighting = ApplyLighting,
 
                     HideModelsNotFacingCamera = HideModelsNotFacingCamera,
-                    ModelsViewAngleMin = MPD_File.MPDHeader.ModelsViewAngleMin,
-                    ModelsViewAngleMax = MPD_File.MPDHeader.ModelsViewAngleMax,
+                    ModelsYRotation = MPD_File.Settings.ModelsYRotation,
+                    ModelsViewAngleMin = MPD_File.Settings.ModelsViewAngleMin,
+                    ModelsViewAngleMax = MPD_File.Settings.ModelsViewAngleMax,
 
                     DrawNormals = DrawNormals,
                     DrawWireframe = DrawWireframe,
@@ -249,7 +250,7 @@ namespace SF3.Win.Controls {
 
                     ModelsToHide = allModelsToHide,
                 },
-                Yaw, Pitch, MPD_File.Settings.ModelsYRotation, Width, Height,
+                Yaw, Pitch, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix
             );
 

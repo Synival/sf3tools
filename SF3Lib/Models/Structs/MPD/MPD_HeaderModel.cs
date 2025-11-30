@@ -215,7 +215,7 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_viewDistanceAddr), displayOrder: 5, displayFormat: "X2", displayGroup: "Main")]
-        public ushort ViewDistance {
+        public ushort ModelsViewDistance {
             get => (ushort) Data.GetWord(_viewDistanceAddr);
             set => Data.SetWord(_viewDistanceAddr, value);
         }

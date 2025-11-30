@@ -48,14 +48,24 @@
         bool HasSurfaceTextureRotation { get; set; }
 
         /// <summary>
-        /// Some sort of value that determines what models are visible. Usually 0x48, goes up to 0x90.
-        /// </summary>
-        ushort ViewDistance { get; set; }
-
-        /// <summary>
         /// Rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
         /// facing the wrong way.
         /// </summary>
         float ModelsYRotation { get; set; }
+
+        /// <summary>
+        /// Some sort of value that determines what models are visible. Usually 0x48, goes up to 0x90.
+        /// </summary>
+        ushort ModelsViewDistance { get; set; }
+
+        /// <summary>
+        /// Lower angle (in degrees) of the view area in which models appear. Usually -108.
+        /// </summary>
+        float ModelsViewAngleMin { get; set; }
+
+        /// <summary>
+        /// Upper angle (in degrees) of the view area in which models appear. Usually +108.
+        /// </summary>
+        float ModelsViewAngleMax { get; set; }
     }
 }
