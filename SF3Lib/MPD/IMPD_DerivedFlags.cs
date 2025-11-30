@@ -21,6 +21,7 @@ namespace SF3.MPD {
         /// When set, a skybox chunk is present for either battles (Scenario 1) or cutscenes (Scenario 2+).
         /// </summary>
         bool HasAnySkyBox { get; }
+
         /// <summary>
         /// When set, specifies the type of chunk located in Chunk[1] (should always be 'Models' if non-null).
         /// </summary>

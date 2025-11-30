@@ -46,5 +46,10 @@
         /// this is on.
         /// </summary>
         bool HasSurfaceTextureRotation { get; set; }
+
+        /// <summary>
+        /// Some sort of value that determines what models are visible. Usually 0x48, goes up to 0x90.
+        /// </summary>
+        ushort ViewDistance { get; set; }
     }
 }

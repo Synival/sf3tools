@@ -276,6 +276,7 @@ namespace MPD_Analyzer {
             var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20));
 
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
+                + " | " + mpdFile.Settings.ViewDistance.ToString("X2")
                 + " | " + mapFlags.ToString("X4") + ", " + BitString(mapFlags)
                 + " | " + ChunkString(chunkLocations.Rows)
                 + " | " + (hmm1  == true ? "High, " : hmm1  == false ? "Low,  " : "N/A,  ")

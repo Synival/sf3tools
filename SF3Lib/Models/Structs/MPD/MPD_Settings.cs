@@ -28,5 +28,10 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.Flags.Bit_0x0002_HasSurfaceTextureRotation;
             set => MPD_File.Flags.Bit_0x0002_HasSurfaceTextureRotation = value;
         }
+
+        public ushort ViewDistance {
+            get => MPD_File.MPDHeader.ViewDistance;
+            set => MPD_File.MPDHeader.ViewDistance = value;
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace SF3.MPD {
             var headerPos = CurrentOffset;
             WriteHeader(
                 mpd.MPDHeader,
+                mpd.Settings,
                 mpd.Flags,
                 lightPalettePos,
                 lightPositionPos,
@@ -48,6 +49,7 @@ namespace SF3.MPD {
 
         public void WriteHeader(
             MPD_HeaderModel header,
+            IMPD_Settings settings,
             IMPD_AllFlags flags,
             uint? lightPalettePos,
             uint? lightPositionPos,
@@ -68,7 +70,7 @@ namespace SF3.MPD {
             WriteMPDPointer(lightPalettePos);
             WriteMPDPointer(lightPositionPos);
             WriteMPDPointer(unknown1Pos);
-            WriteUShort(header.ViewDistance);
+            WriteUShort(settings.ViewDistance);
             WriteMPDPointer(modelSwitchGroupsPos);
             WriteMPDPointer(textureAnimationsPos);
             WriteMPDPointer(unknown2Pos);
