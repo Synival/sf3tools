@@ -40,6 +40,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool ForceTwoSidedTextures;
             public bool SmoothLighting;
 
+            public float BackgroundX = 0.00f;
+            public float BackgroundY = 0.00f;
+
             public HashSet<int> ModelsToHide;
 
             public bool WillDrawSurfaceModel
@@ -327,11 +330,18 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             general.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
 
-            const float c_repeatCount = 8f;
-            var xOffset = (MathHelpers.ActualMod((cameraYaw / 360f) * c_repeatCount, 1.0f) - 0.5f) * 2.0f;
-            var yOffset = (float) Math.Sin(-cameraPitch / 360.0f) * 32f + 0.975f;
+            const float c_horizRepeatCount = 2f;
+            const float c_vertRepeatCount = 15f;
+            const float c_width = 1.6f;
+            const float c_height = 1.0666f;
+            var xOffset = (MathHelpers.ActualMod(cameraYaw / 360f * c_horizRepeatCount - options.BackgroundX / 512.0f, 1.0f) * c_width - 0.5f) * 2.0f;
+            var yOffset = (MathHelpers.ActualMod(cameraPitch / -360f * c_vertRepeatCount + options.BackgroundY / 256.0f, 1.0f) * c_height - 0.5f) * 2.0f - 0.1f;
 
-            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, Matrix4.Identity * Matrix4.CreateTranslation(xOffset, yOffset, 0));
+            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix,
+                Matrix4.Identity *
+                Matrix4.CreateScale(c_width, c_height, 1.0f) *
+                Matrix4.CreateTranslation(xOffset, yOffset, 0)
+            );
 
             GL.StencilFunc(StencilFunction.Always, 2, 0x02);
             GL.StencilMask(0x02);

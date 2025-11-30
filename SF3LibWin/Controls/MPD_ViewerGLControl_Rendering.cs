@@ -231,9 +231,9 @@ namespace SF3.Win.Controls {
                     ApplyLighting = ApplyLighting,
 
                     HideModelsNotFacingCamera = HideModelsNotFacingCamera,
-                    ModelsYRotation = MPD_File.Settings.ModelsYRotation,
-                    ModelsViewAngleMin = MPD_File.Settings.ModelsViewAngleMin,
-                    ModelsViewAngleMax = MPD_File.Settings.ModelsViewAngleMax,
+                    ModelsYRotation = MPD_File?.Settings?.ModelsYRotation ?? 180.0f,
+                    ModelsViewAngleMin = MPD_File?.Settings?.ModelsViewAngleMin ?? 0,
+                    ModelsViewAngleMax = MPD_File?.Settings?.ModelsViewAngleMax ?? 0,
 
                     DrawNormals = DrawNormals,
                     DrawWireframe = DrawWireframe,
@@ -243,6 +243,9 @@ namespace SF3.Win.Controls {
                     DrawEventIDs = DrawEventIDs,
                     DrawBoundaries = DrawBoundaries,
                     DrawCollisionLines = DrawCollisionLines,
+
+                    BackgroundX = MPD_File?.MPDHeader?.BackgroundX ?? 0,
+                    BackgroundY = MPD_File?.MPDHeader?.BackgroundY ?? 0,
 
                     DrawHelp = DrawHelp,
 

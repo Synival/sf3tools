@@ -19,17 +19,17 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         private static readonly Vector3[] c_skyBoxCoords = [
-            new Vector3(Corner1DirX * 2, Corner1DirY, 0),
-            new Vector3(Corner2DirX * 2, Corner2DirY, 0),
-            new Vector3(Corner3DirX * 2, Corner3DirY, 0),
-            new Vector3(Corner4DirX * 2, Corner4DirY, 0),
+            new Vector3(Corner1DirX * 2, Corner1DirY * 2, 0),
+            new Vector3(Corner2DirX * 2, Corner2DirY * 2, 0),
+            new Vector3(Corner3DirX * 2, Corner3DirY * 2, 0),
+            new Vector3(Corner4DirX * 2, Corner4DirY * 2, 0),
         ];
 
         private static readonly float[,] c_skyBoxUvCoords = new float[,] {
-            { Corner1UVX * 2 - 0.5f, Corner1UVY },
-            { Corner2UVX * 2 - 0.5f, Corner2UVY },
-            { Corner3UVX * 2 - 0.5f, Corner3UVY },
-            { Corner4UVX * 2 - 0.5f, Corner4UVY }
+            { Corner1UVX * 2, Corner1UVY * 2 },
+            { Corner2UVX * 2, Corner2UVY * 2 },
+            { Corner3UVX * 2, Corner3UVY * 2 },
+            { Corner4UVX * 2, Corner4UVY * 2 }
         };
 
         public void Update(IMPD_File mpdFile) {
