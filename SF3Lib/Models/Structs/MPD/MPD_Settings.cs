@@ -48,5 +48,15 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.MPDHeader.ModelsViewAngleMax;
             set => MPD_File.MPDHeader.ModelsViewAngleMax = value;
         }
+
+        public short BackgroundX {
+            get => MPD_File.MPDHeader.BackgroundX;
+            set => MPD_File.MPDHeader.BackgroundX = value;
+        }
+
+        public short BackgroundY {
+            get => MPD_File.MPDHeader.BackgroundY;
+            set => MPD_File.MPDHeader.BackgroundY = value;
+        }
     }
 }

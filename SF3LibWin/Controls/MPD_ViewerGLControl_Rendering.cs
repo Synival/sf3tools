@@ -244,8 +244,8 @@ namespace SF3.Win.Controls {
                     DrawBoundaries = DrawBoundaries,
                     DrawCollisionLines = DrawCollisionLines,
 
-                    BackgroundX = MPD_File?.MPDHeader?.BackgroundX ?? 0,
-                    BackgroundY = MPD_File?.MPDHeader?.BackgroundY ?? 0,
+                    BackgroundX = MPD_File?.Settings?.BackgroundX ?? 0,
+                    BackgroundY = MPD_File?.Settings?.BackgroundY ?? 0,
 
                     DrawHelp = DrawHelp,
 

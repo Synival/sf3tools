@@ -67,5 +67,15 @@
         /// Upper angle (in degrees) of the view area in which models appear. Usually +108.
         /// </summary>
         float ModelsViewAngleMax { get; set; }
+
+        /// <summary>
+        /// X position of the skybox (in pixels), repeating every 512.
+        /// </summary>
+        short BackgroundX { get; set; }
+
+        /// <summary>
+        /// Y position of the skybox (in pixels), repeating every 256.
+        /// </summary>
+        short BackgroundY { get; set; }
     }
 }

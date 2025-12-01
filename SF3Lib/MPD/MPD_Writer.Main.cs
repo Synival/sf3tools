@@ -92,8 +92,8 @@ namespace SF3.MPD {
             WriteShort(header.GroundZ);
             WriteShort(new CompressedFIXED(header.GroundAngle, 0).RawShort);
             WriteShort(header.Unknown1);
-            WriteShort(header.BackgroundX);
-            WriteShort(header.BackgroundY);
+            WriteShort(settings.BackgroundX);
+            WriteShort(settings.BackgroundY);
             WriteMPDPointer(boundariesPos);
         }
     }
