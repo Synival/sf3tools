@@ -49,6 +49,26 @@ namespace SF3.Models.Structs.MPD {
             set => MPD_File.MPDHeader.ModelsViewAngleMax = value;
         }
 
+        public short GroundX {
+            get => MPD_File.MPDHeader.GroundX;
+            set => MPD_File.MPDHeader.GroundX = value;
+        }
+
+        public short GroundY {
+            get => MPD_File.MPDHeader.GroundY;
+            set => MPD_File.MPDHeader.GroundY = value;
+        }
+
+        public short GroundZ {
+            get => MPD_File.MPDHeader.GroundZ;
+            set => MPD_File.MPDHeader.GroundZ = value;
+        }
+
+        public float GroundXRotation {
+            get => MPD_File.MPDHeader.GroundXRotation;
+            set => MPD_File.MPDHeader.GroundXRotation = value;
+        }
+
         public short BackgroundX {
             get => MPD_File.MPDHeader.BackgroundX;
             set => MPD_File.MPDHeader.BackgroundX = value;

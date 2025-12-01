@@ -48,7 +48,7 @@
         bool HasSurfaceTextureRotation { get; set; }
 
         /// <summary>
-        /// Rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
+        /// Y-axis rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
         /// facing the wrong way.
         /// </summary>
         float ModelsYRotation { get; set; }
@@ -69,12 +69,32 @@
         float ModelsViewAngleMax { get; set; }
 
         /// <summary>
-        /// X position of the skybox (in pixels), repeating every 512.
+        /// Scene X position of the ground plane (in pixels), repeating every 512 for images and every 2048 for tile-based images.
+        /// </summary>
+        short GroundX { get; set; }
+
+        /// <summary>
+        /// Scene Y position of the ground plane.
+        /// </summary>
+        short GroundY { get; set; }
+
+        /// <summary>
+        /// X-axis rotation of the ground plane (in degrees). Usually -90, but is 0 in Scenario 3 TODI00.MPD.
+        /// </summary>
+        float GroundXRotation { get; set; }
+
+        /// <summary>
+        /// Scene Z position of the ground plane (in pixels), repeating every 256 for images and every 2048 for tile-based images.
+        /// </summary>
+        short GroundZ { get; set; }
+
+        /// <summary>
+        /// Screen X position of the skybox (in pixels), repeating every 512.
         /// </summary>
         short BackgroundX { get; set; }
 
         /// <summary>
-        /// Y position of the skybox (in pixels), repeating every 256.
+        /// Screen Y position of the skybox (in pixels), repeating every 256.
         /// </summary>
         short BackgroundY { get; set; }
     }

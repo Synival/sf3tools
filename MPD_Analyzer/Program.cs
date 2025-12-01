@@ -55,7 +55,7 @@ namespace MPD_Analyzer {
         };
 
         private static string[]? MPD_MatchFunc(IMPD_File mpdFile, string filename) {
-            return [];
+            return mpdFile.Settings.GroundXRotation != -90.0f ? [] : null;
         }
 
         public static void Main(string[] args) {
@@ -276,7 +276,7 @@ namespace MPD_Analyzer {
             var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20));
 
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
-                + " | " + mpdFile.Settings.ModelsViewDistance.ToString("X2")
+                + " | " + mpdFile.Settings.GroundXRotation
                 + " | " + mapFlags.ToString("X4") + ", " + BitString(mapFlags)
                 + " | " + ChunkString(chunkLocations.Rows)
                 + " | " + (hmm1  == true ? "High, " : hmm1  == false ? "Low,  " : "N/A,  ")

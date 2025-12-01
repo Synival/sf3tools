@@ -31,12 +31,12 @@ namespace SF3.Win.OpenGL.MPD_File {
         private void CreateGroundImageModel(IMPD_File mpdFile, ITexture texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
-            var header = mpdFile.MPDHeader;
+            var settings = mpdFile.Settings;
 
             var position = new Vector3(
-                header.GroundX / 32.0f,
-                header.GroundY / -32.0f,
-                header.GroundZ / -32.0f
+                settings.GroundX / 32.0f,
+                settings.GroundY / -32.0f,
+                settings.GroundZ / -32.0f
             );
 
             // A lot of maps like MUCHUR.MPD and BEER.MPD have some pretty stupid offsets for their ground planes.
@@ -46,7 +46,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var uvWidth  = size / (Texture.Width  / 32.0f);
             var uvHeight = size / (Texture.Height / 32.0f);
 
-            var theta = header.GroundAngle * (float) Math.PI * 2.0f;
+            // TODO: *X-axis* rotation, not *Y-axis* rotation!
+            var theta = Math.PI;// settings.GroundAngle * (float) Math.PI / 180.0f;
             var sin = (float) Math.Sin(theta);
             var cos = (float) Math.Cos(theta);
 

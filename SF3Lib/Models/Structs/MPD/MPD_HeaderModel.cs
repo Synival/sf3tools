@@ -397,9 +397,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_groundAngleAddr), displayOrder: 21.5f, displayGroup: "Main")]
-        public float GroundAngle {
-            get => Data.GetCompressedFIXED(_groundAngleAddr).Float;
-            set => Data.SetCompressedFIXED(_groundAngleAddr, new CompressedFIXED(value, 0));
+        public float GroundXRotation {
+            get => Data.GetCompressedFIXED(_groundAngleAddr).Float * 180.0f;
+            set => Data.SetCompressedFIXED(_groundAngleAddr, new CompressedFIXED(value / 180.0f, 0));
         }
 
         [BulkCopy]

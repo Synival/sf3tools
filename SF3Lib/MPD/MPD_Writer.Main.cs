@@ -87,10 +87,10 @@ namespace SF3.MPD {
             WriteMPDPointer(textureAnimAltPos);
             WriteMPDPointer(palette1Pos ?? headerAddr);
             WriteMPDPointer(palette2Pos ?? headerAddr);
-            WriteShort(header.GroundX);
-            WriteShort(header.GroundY);
-            WriteShort(header.GroundZ);
-            WriteShort(new CompressedFIXED(header.GroundAngle, 0).RawShort);
+            WriteShort(settings.GroundX);
+            WriteShort(settings.GroundY);
+            WriteShort(settings.GroundZ);
+            WriteShort(new CompressedFIXED(settings.GroundXRotation / 180.0f, 0).RawShort);
             WriteShort(header.Unknown1);
             WriteShort(settings.BackgroundX);
             WriteShort(settings.BackgroundY);
