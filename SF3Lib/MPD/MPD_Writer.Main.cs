@@ -1,10 +1,10 @@
 ﻿using CommonLib.SGL;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
+using SF3.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteMain(IMPD_File mpd) {
+        public void WriteMain(ScenarioType scenario, IMPD_File mpd) {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
@@ -23,7 +23,7 @@ namespace SF3.MPD {
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;
             WriteHeader(
-                mpd.MPDHeader,
+                scenario,
                 mpd.Settings,
                 mpd.Flags,
                 lightPalettePos,
@@ -48,7 +48,7 @@ namespace SF3.MPD {
         }
 
         public void WriteHeader(
-            MPD_HeaderModel header,
+            ScenarioType scenario,
             IMPD_Settings settings,
             IMPD_AllFlags flags,
             uint? lightPalettePos,
@@ -66,7 +66,7 @@ namespace SF3.MPD {
             var headerAddr = (uint) CurrentOffset;
 
             // TODO: determine proper map flags
-            WriteUShort(header.MapFlags);
+            WriteUShort(flags.GetHeaderFlags(scenario));
             WriteMPDPointer(lightPalettePos);
             WriteMPDPointer(lightPositionPos);
             WriteMPDPointer(unknown1Pos);
@@ -91,7 +91,7 @@ namespace SF3.MPD {
             WriteShort(settings.GroundY);
             WriteShort(settings.GroundZ);
             WriteShort(new CompressedFIXED(settings.GroundXRotation / 180.0f, 0).RawShort);
-            WriteShort(header.Unknown1);
+            WriteShort(settings.UnknownHeaderSetting);
             WriteShort(settings.BackgroundX);
             WriteShort(settings.BackgroundY);
             WriteMPDPointer(boundariesPos);

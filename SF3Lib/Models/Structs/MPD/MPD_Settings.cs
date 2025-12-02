@@ -78,5 +78,10 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.MPDHeader.BackgroundY;
             set => MPD_File.MPDHeader.BackgroundY = value;
         }
+
+        public short UnknownHeaderSetting {
+            get => MPD_File.MPDHeader.Unknown1;
+            set => MPD_File.MPDHeader.Unknown1 = value;
+        }
     }
 }
