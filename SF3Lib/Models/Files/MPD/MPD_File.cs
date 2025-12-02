@@ -627,10 +627,24 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
 
             // Add some images.
+            UpdatePlaneImages();
+
+            return tables.ToArray();
+        }
+
+        public void UpdatePlaneImages() {
+            ITexture groundImage         = null;
+            ITexture groundTileset       = null;
+            ITexture groundTiledImage    = null;
+            ITexture skyBoxImage         = null;
+            ITexture backgroundImage     = null;
+            ITexture foregroundTileImage = null;
+            ITexture foregroundImage     = null;
+
             if (GroundImageChunks?.Any() == true) {
                 try {
                     var palette = CreatePalette(0);
-                    GroundImage = new MultiChunkTextureIndexed(GroundImageChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
+                    groundImage = new MultiChunkTextureIndexed(GroundImageChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
                 }
                 catch {
                     // TODO: what to do here??
@@ -639,27 +653,33 @@ namespace SF3.Models.Files.MPD {
 
             if (GroundTilesetChunks?.Any() == true && GroundTileAssignmentChunks?.Any() == true) {
                 var palette = CreatePalette(0);
-                GroundTileset = new MultiChunkTextureIndexed(GroundTilesetChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                groundTileset = new MultiChunkTextureIndexed(GroundTilesetChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var tiledGroundImageData = CreateTiledImageData(GroundTileset, GroundTileAssignmentChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
-                GroundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
+                var tiledGroundImageData = CreateTiledImageData(groundTileset, GroundTileAssignmentChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
+                groundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
             if (SkyBoxChunks?.Any() == true)
-                SkyBoxImage = new MultiChunkTextureIndexed(SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, CreatePalette(1));
+                skyBoxImage = new MultiChunkTextureIndexed(SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, CreatePalette(1));
 
             if (BackgroundChunks?.Any() == true)
-                BackgroundImage = new MultiChunkTextureIndexed(BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
+                backgroundImage = new MultiChunkTextureIndexed(BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
 
             if (ForegroundTileChunks?.Any() == true) {
                 var palette = CreatePalette(1);
-                ForegroundTileImage = new MultiChunkTextureIndexed(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                foregroundTileImage = new MultiChunkTextureIndexed(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var foregroundImageData = CreateTiledImageData(ForegroundTileImage, new IByteData[] { ForegroundMapChunk.DecompressedData }, 64, 1);
-                ForegroundImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
+                var foregroundImageData = CreateTiledImageData(foregroundTileImage, new IByteData[] { ForegroundMapChunk.DecompressedData }, 64, 1);
+                foregroundImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
             }
 
-            return tables.ToArray();
+            GroundImage         = groundImage;
+            GroundTileset       = groundTileset;
+            GroundTiledImage    = groundTiledImage;
+            SkyBoxImage         = skyBoxImage;
+            BackgroundImage     = backgroundImage;
+            ForegroundTileImage = foregroundTileImage;
+            ForegroundImage     = foregroundImage;
         }
 
         private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, IByteData[] tileMaps, int tileSize, int blockCountX) {

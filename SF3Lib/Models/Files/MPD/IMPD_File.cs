@@ -89,6 +89,11 @@ namespace SF3.Models.Files.MPD {
         ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter);
 
         /// <summary>
+        /// Sets images used for rendering the ground, skybox, and background planes.
+        /// </summary>
+        void UpdatePlaneImages();
+
+        /// <summary>
         /// Byte data for (de)compressed data for chunks
         /// </summary>
         IChunkData[] ChunkData { get; }
