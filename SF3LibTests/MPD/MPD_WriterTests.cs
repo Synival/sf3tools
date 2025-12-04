@@ -33,7 +33,7 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("TESMAP_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData, 99.92f);
+            AssertByteComparison(fileData, outputData);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace SF3.Tests.MPD {
 
             // TODO: this test has the exact same data, but the LZSS algorithm is reducing Chunk[13] by 2 bytes.
             // This is definitely a passing test; let it pass, please!
-            AssertByteComparison(fileData, outputData, 99.66f);
+            AssertByteComparison(fileData, outputData);
         }
 
         [Ignore("Works great but takes too long!")]
@@ -122,8 +122,14 @@ namespace SF3.Tests.MPD {
                 Assert.Fail(string.Join("\r\n", errors));
         }
 
-        private void AssertByteComparison(byte[] fileData, byte[] outputData, float acceptablePercentage = 100.0f) {
-            var errors = ByteComparisonErrors(fileData, outputData, out var percentageCorrect) ?? [];
+        private struct ByteComparisonSkipRegion {
+            public int Offset;
+            public int Size;
+            public int ExpectedIndexAdjustment;
+        }
+
+        private void AssertByteComparison(byte[] fileData, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
+            var errors = ByteComparisonErrors(fileData, outputData, out var percentageCorrect, skipRegions) ?? [];
             if (percentageCorrect >= acceptablePercentage) {
                 foreach (var error in errors)
                     System.Diagnostics.Debug.WriteLine(error);
@@ -132,7 +138,7 @@ namespace SF3.Tests.MPD {
                 Assert.Fail(string.Join("\r\n", errors));
         }
 
-        private List<string> ByteComparisonErrors(byte[] expected, byte[] actual, out float percentageCorrect) {
+        private List<string> ByteComparisonErrors(byte[] expected, byte[] actual, out float percentageCorrect, ByteComparisonSkipRegion[]? skipRegions = null) {
             var errors = new List<string>();
 
             if (expected.Length != actual.Length)
@@ -141,10 +147,24 @@ namespace SF3.Tests.MPD {
             int wrongBytes = 0;
             int bytesToCompare = Math.Min(expected.Length, actual.Length);
 
-            for (uint i = 0; i < bytesToCompare; i++) {
-                if (expected[i] != actual[i]) {
+            // Sort the skip regions.
+            skipRegions = (skipRegions ?? []).OrderBy(x => x.Offset).ToArray();
+            int skipRegionIndex = 0;
+            var skipRegion = skipRegions.Length > skipRegionIndex ? skipRegions[skipRegionIndex] : (ByteComparisonSkipRegion?) null;
+
+            for (int i = 0, j = 0; i < expected.Length && j < actual.Length; i++, j++) {
+                if (i == skipRegion?.Offset) {
+                    i += skipRegion.Value.Size - 1;
+                    j += skipRegion.Value.Size - 1;
+                    i += skipRegion.Value.ExpectedIndexAdjustment;
+                    skipRegionIndex++;
+                    skipRegion = skipRegions.Length > skipRegionIndex ? skipRegions[skipRegionIndex] : (ByteComparisonSkipRegion?) null;
+                    continue;
+                }
+
+                if (expected[i] != actual[j]) {
                     if (!firstWrongByte.HasValue)
-                        firstWrongByte = i;
+                        firstWrongByte = (uint) i;
                     wrongBytes++;
                 }
             }
