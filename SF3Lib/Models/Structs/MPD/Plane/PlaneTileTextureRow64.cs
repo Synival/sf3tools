@@ -1,0 +1,82 @@
+using CommonLib.Attributes;
+using SF3.ByteData;
+
+namespace SF3.Models.Structs.MPD.Plane {
+    public class PlaneTileTextureRow64 : PlaneTileTextureRow {
+        public PlaneTileTextureRow64(IByteData data, int id, string name, int address)
+        : base(data, id, name, address, 1) {
+        }
+
+        private class TileMetadataAttribute : TableViewModelColumnAttribute {
+            // TODO: null
+            public TileMetadataAttribute(int x) : base(addressField: null, displayName: "X" + x.ToString("D2"), displayOrder: x, displayFormat: "X4", minWidth: 50) { }
+        }
+
+        // This is NUTs, but the ObjectListView is excrutiatingly slow with array indexing, so we're stuck
+        // with 256 individual properties.
+        [TileMetadata(  0)] public ushort X000Tile { get => this[  0]; set => this[  0] = value; }
+        [TileMetadata(  1)] public ushort X001Tile { get => this[  1]; set => this[  1] = value; }
+        [TileMetadata(  2)] public ushort X002Tile { get => this[  2]; set => this[  2] = value; }
+        [TileMetadata(  3)] public ushort X003Tile { get => this[  3]; set => this[  3] = value; }
+        [TileMetadata(  4)] public ushort X004Tile { get => this[  4]; set => this[  4] = value; }
+        [TileMetadata(  5)] public ushort X005Tile { get => this[  5]; set => this[  5] = value; }
+        [TileMetadata(  6)] public ushort X006Tile { get => this[  6]; set => this[  6] = value; }
+        [TileMetadata(  7)] public ushort X007Tile { get => this[  7]; set => this[  7] = value; }
+        [TileMetadata(  8)] public ushort X008Tile { get => this[  8]; set => this[  8] = value; }
+        [TileMetadata(  9)] public ushort X009Tile { get => this[  9]; set => this[  9] = value; }
+        [TileMetadata( 10)] public ushort X010Tile { get => this[ 10]; set => this[ 10] = value; }
+        [TileMetadata( 11)] public ushort X011Tile { get => this[ 11]; set => this[ 11] = value; }
+        [TileMetadata( 12)] public ushort X012Tile { get => this[ 12]; set => this[ 12] = value; }
+        [TileMetadata( 13)] public ushort X013Tile { get => this[ 13]; set => this[ 13] = value; }
+        [TileMetadata( 14)] public ushort X014Tile { get => this[ 14]; set => this[ 14] = value; }
+        [TileMetadata( 15)] public ushort X015Tile { get => this[ 15]; set => this[ 15] = value; }
+        [TileMetadata( 16)] public ushort X016Tile { get => this[ 16]; set => this[ 16] = value; }
+        [TileMetadata( 17)] public ushort X017Tile { get => this[ 17]; set => this[ 17] = value; }
+        [TileMetadata( 18)] public ushort X018Tile { get => this[ 18]; set => this[ 18] = value; }
+        [TileMetadata( 19)] public ushort X019Tile { get => this[ 19]; set => this[ 19] = value; }
+        [TileMetadata( 20)] public ushort X020Tile { get => this[ 20]; set => this[ 20] = value; }
+        [TileMetadata( 21)] public ushort X021Tile { get => this[ 21]; set => this[ 21] = value; }
+        [TileMetadata( 22)] public ushort X022Tile { get => this[ 22]; set => this[ 22] = value; }
+        [TileMetadata( 23)] public ushort X023Tile { get => this[ 23]; set => this[ 23] = value; }
+        [TileMetadata( 24)] public ushort X024Tile { get => this[ 24]; set => this[ 24] = value; }
+        [TileMetadata( 25)] public ushort X025Tile { get => this[ 25]; set => this[ 25] = value; }
+        [TileMetadata( 26)] public ushort X026Tile { get => this[ 26]; set => this[ 26] = value; }
+        [TileMetadata( 27)] public ushort X027Tile { get => this[ 27]; set => this[ 27] = value; }
+        [TileMetadata( 28)] public ushort X028Tile { get => this[ 28]; set => this[ 28] = value; }
+        [TileMetadata( 29)] public ushort X029Tile { get => this[ 29]; set => this[ 29] = value; }
+        [TileMetadata( 30)] public ushort X030Tile { get => this[ 30]; set => this[ 30] = value; }
+        [TileMetadata( 31)] public ushort X031Tile { get => this[ 31]; set => this[ 31] = value; }
+        [TileMetadata( 32)] public ushort X032Tile { get => this[ 32]; set => this[ 32] = value; }
+        [TileMetadata( 33)] public ushort X033Tile { get => this[ 33]; set => this[ 33] = value; }
+        [TileMetadata( 34)] public ushort X034Tile { get => this[ 34]; set => this[ 34] = value; }
+        [TileMetadata( 35)] public ushort X035Tile { get => this[ 35]; set => this[ 35] = value; }
+        [TileMetadata( 36)] public ushort X036Tile { get => this[ 36]; set => this[ 36] = value; }
+        [TileMetadata( 37)] public ushort X037Tile { get => this[ 37]; set => this[ 37] = value; }
+        [TileMetadata( 38)] public ushort X038Tile { get => this[ 38]; set => this[ 38] = value; }
+        [TileMetadata( 39)] public ushort X039Tile { get => this[ 39]; set => this[ 39] = value; }
+        [TileMetadata( 40)] public ushort X040Tile { get => this[ 40]; set => this[ 40] = value; }
+        [TileMetadata( 41)] public ushort X041Tile { get => this[ 41]; set => this[ 41] = value; }
+        [TileMetadata( 42)] public ushort X042Tile { get => this[ 42]; set => this[ 42] = value; }
+        [TileMetadata( 43)] public ushort X043Tile { get => this[ 43]; set => this[ 43] = value; }
+        [TileMetadata( 44)] public ushort X044Tile { get => this[ 44]; set => this[ 44] = value; }
+        [TileMetadata( 45)] public ushort X045Tile { get => this[ 45]; set => this[ 45] = value; }
+        [TileMetadata( 46)] public ushort X046Tile { get => this[ 46]; set => this[ 46] = value; }
+        [TileMetadata( 47)] public ushort X047Tile { get => this[ 47]; set => this[ 47] = value; }
+        [TileMetadata( 48)] public ushort X048Tile { get => this[ 48]; set => this[ 48] = value; }
+        [TileMetadata( 49)] public ushort X049Tile { get => this[ 49]; set => this[ 49] = value; }
+        [TileMetadata( 50)] public ushort X050Tile { get => this[ 50]; set => this[ 50] = value; }
+        [TileMetadata( 51)] public ushort X051Tile { get => this[ 51]; set => this[ 51] = value; }
+        [TileMetadata( 52)] public ushort X052Tile { get => this[ 52]; set => this[ 52] = value; }
+        [TileMetadata( 53)] public ushort X053Tile { get => this[ 53]; set => this[ 53] = value; }
+        [TileMetadata( 54)] public ushort X054Tile { get => this[ 54]; set => this[ 54] = value; }
+        [TileMetadata( 55)] public ushort X055Tile { get => this[ 55]; set => this[ 55] = value; }
+        [TileMetadata( 56)] public ushort X056Tile { get => this[ 56]; set => this[ 56] = value; }
+        [TileMetadata( 57)] public ushort X057Tile { get => this[ 57]; set => this[ 57] = value; }
+        [TileMetadata( 58)] public ushort X058Tile { get => this[ 58]; set => this[ 58] = value; }
+        [TileMetadata( 59)] public ushort X059Tile { get => this[ 59]; set => this[ 59] = value; }
+        [TileMetadata( 60)] public ushort X060Tile { get => this[ 60]; set => this[ 60] = value; }
+        [TileMetadata( 61)] public ushort X061Tile { get => this[ 61]; set => this[ 61] = value; }
+        [TileMetadata( 62)] public ushort X062Tile { get => this[ 62]; set => this[ 62] = value; }
+        [TileMetadata( 63)] public ushort X063Tile { get => this[ 63]; set => this[ 63] = value; }
+    }
+}

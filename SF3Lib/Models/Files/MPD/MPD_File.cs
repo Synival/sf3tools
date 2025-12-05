@@ -658,9 +658,8 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
 
             // Add chunks with tables for ground plane tile assignment.
-            // TODO: correct StartY
             GroundTileAssignmentChunks = GroundTileAssignmentChunkDatas
-                .Select((x, i) => PlaneTileAssignmentChunk.Create(x.DecompressedData, NameGetterContext, 0, "GroundTiles" + (i + 1), x.Index, 0))
+                .Select((x, i) => PlaneTileAssignmentChunk.Create(x.DecompressedData, NameGetterContext, 0, "GroundTiles" + (i + 1), x.Index, i * 64, 4))
                 .ToArray();
             foreach (var chunk in GroundTileAssignmentChunks)
                 tables.AddRange(chunk.Tables);
@@ -668,7 +667,7 @@ namespace SF3.Models.Files.MPD {
             // Add chunks with tables for foreground plane tile assignment.
             if (ForegroundTileAssignmentChunkData != null) {
                 var ch = ForegroundTileAssignmentChunkData;
-                ForegroundTileAssignmentChunk = PlaneTileAssignmentChunk.Create(ch.DecompressedData, NameGetterContext, 0, "ForegroundTiles", ch.Index, 0);
+                ForegroundTileAssignmentChunk = PlaneTileAssignmentChunk.Create(ch.DecompressedData, NameGetterContext, 0, "ForegroundTiles", ch.Index, 0, 1);
                 tables.AddRange(ForegroundTileAssignmentChunk.Tables);
             }
 

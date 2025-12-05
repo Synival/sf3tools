@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using SF3.ByteData;
+using SF3.Models.Tables.MPD.Plane;
 using SF3.MPD;
 using SF3.Types;
 
@@ -30,11 +31,11 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunkDatas?.Any() == true) {
+            if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunks?.Any() == true) {
                 var palette = MPD_File.CreatePalette(0);
                 groundTileset = new MultiChunkTextureIndexed(MPD_File.GroundTilesetChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var tiledGroundImageData = CreateTiledImageData(groundTileset, MPD_File.GroundTileAssignmentChunkDatas.Select(x => x.DecompressedData).ToArray(), 64, 4);
+                var tiledGroundImageData = CreateTiledImageData(groundTileset, MPD_File.GroundTileAssignmentChunks.Select(x => x.PlaneTileTextureRowTable).ToArray(), 4);
                 groundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
@@ -44,11 +45,11 @@ namespace SF3.Models.Files.MPD {
             if (MPD_File.BackgroundChunkDatas?.Any() == true)
                 backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
 
-            if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunkData != null) {
+            if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
                 var palette = MPD_File.CreatePalette(1);
                 foregroundTileset = new MultiChunkTextureIndexed(MPD_File.ForegroundTileChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var foregroundImageData = CreateTiledImageData(foregroundTileset, new IByteData[] { MPD_File.ForegroundTileAssignmentChunkData.DecompressedData }, 64, 1);
+                var foregroundImageData = CreateTiledImageData(foregroundTileset, new PlaneTileTextureRowTable[] { MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable}, 1);
                 foregroundTiledImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
             }
 
@@ -61,13 +62,8 @@ namespace SF3.Models.Files.MPD {
             ForegroundTiledImage = foregroundTiledImage;
         }
 
-        private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, IByteData[] tileMaps, int tileSize, int blockCountX) {
-            int tilesPerBlock = tileSize * tileSize;
-
-            // Count the number of tiles (they're 16 bits, so divide the byte count by 2)
-            var tileMapTileCount = tileMaps.Sum(x => x.Length) / 2;
-
-            var blockCountYf = (float) tileMapTileCount / tilesPerBlock / blockCountX;
+        private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, PlaneTileTextureRowTable[] tileMaps, int blockCountX) {
+            const int c_tilesPerBlockX = 64;
 
             var tileImageData = tiledGroundTileImage.ImageData8Bit;
             var tileImageDataWidth  = tileImageData.GetLength(0);
@@ -76,7 +72,10 @@ namespace SF3.Models.Files.MPD {
             var tileCountX = tileImageDataWidth / 8;
             var tileCountY = tileImageDataHeight / 8;
             var tileCount = tileCountX * tileCountY;
-            var outputImage = new byte[tileSize * blockCountX * 8, (int) Math.Ceiling(tileSize * blockCountYf) * 8];
+
+            var imageTileCountX = c_tilesPerBlockX * blockCountX;
+            var imageTileCountY = tileMaps.Sum(x => x.Length);
+            var outputImage = new byte[imageTileCountX * 8, imageTileCountY * 8];
 
             // Precalculations for tile lookups
             var tileInputX = new int[tileCount];
@@ -89,6 +88,9 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
+/*
+            var tileDataPosMap = new int[imageTileCountX, imageTileCountY];
+            var tileAssignmentMap = new (int TilesetX, int TilesetY)[imageTileCountX, imageTileCountY];
             int blockXMax = blockCountX * tileSize;
             int tile = 0, tileInBlock = 0, blockX = 0, blockY = 0, tileInBlockX = 0, tileInBlockY = 0;
             foreach (var tileMap in tileMaps) {
@@ -113,17 +115,32 @@ namespace SF3.Models.Files.MPD {
                         tileInBlockY++;
                     }
 
-                    var tileIndex = ((data[dataPos++] << 8) + data[dataPos++]) / 2;
+                    tileDataPosMap[tileInBlockX + blockX, tileInBlockY + blockY] = dataPos;
+
+                    var tileIndexValue = (data[dataPos] << 8) + data[dataPos + 1];
+                    dataPos += 2;
+                    var tileIndex = tileIndexValue / 2;
                     if (tileIndex >= tileCount) {
                         System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex}");
                         continue;
                     }
+                    if (tileIndexValue % 2 == 1)
+                        ; // Wow!
 
+                    tileAssignmentMap[tileInBlockX + blockX, tileInBlockY + blockY] = (tileIndex % tileCountX, tileIndex / tileCountX);
+                }
+            }
+*/
+            for (int tileY = 0; tileY < imageTileCountY; tileY++) {
+                var tileMap = tileMaps[tileY / 128];
+                var tileMapRow = tileMap[tileY % 128];
+                for (int tileX = 0; tileX < imageTileCountX; tileX++) {
+                    var tileIndex = tileMapRow[tileX] / 2;
                     var inputX = tileInputX[tileIndex];
                     var inputY = tileInputY[tileIndex];
 
-                    var outputX = (tileInBlockX + blockX) * 8;
-                    var outputY = (tileInBlockY + blockY) * 8;
+                    var outputX = tileX * 8;
+                    var outputY = tileY * 8;
 
                     for (int y = 0; y < 8; y++)
                         for (int x = 0; x < 8; x++)
