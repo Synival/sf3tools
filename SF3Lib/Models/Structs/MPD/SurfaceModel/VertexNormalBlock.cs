@@ -1,3 +1,4 @@
+using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 
@@ -38,8 +39,24 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             }
         }
 
-        public int BlockX { get; }
-        public int BlockY { get; }
         public int BlockNum => ID;
+
+        [TableViewModelColumn(displayOrder: 0, isReadOnly: true, displayFormat: "D2")]
+        public int BlockX { get; }
+
+        [TableViewModelColumn(displayOrder: 1, isReadOnly: true, displayFormat: "D2")]
+        public int BlockY { get; }
+
+        // TODO: Let's make this actually editable I guess?
+        [TableViewModelColumn(displayOrder: 2, isReadOnly: true, displayName: "Normals", minWidth: 1500)]
+        public string AllNormals {
+            get {
+                var output = "";
+                for (int y = 0; y < 5; y++)
+                    for (int x = 0; x < 5; x++)
+                        output += this[x, y] + " ";
+                return output;
+            }
+        }
     }
 }

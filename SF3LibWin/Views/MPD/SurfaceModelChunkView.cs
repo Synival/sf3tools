@@ -13,6 +13,8 @@ namespace SF3.Win.Views.MPD {
 
             var ngc = Model.NameGetterContext;
             CreateChild(new TableView("Texture Flags + IDs", Model.TileTextureRowTable, ngc));
+            CreateChild(new TableView("Vertex Normals", Model.VertexNormalBlockTable, ngc));
+            CreateChild(new TableView("Vertex Heights", Model.VertexHeightBlockTable, ngc));
 
             return Control;
         }
