@@ -44,7 +44,7 @@ namespace SF3.Models.Files.MPD {
             if (MPD_File.BackgroundChunks?.Any() == true)
                 backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
 
-            if (MPD_File.ForegroundTileChunks?.Any() == true) {
+            if (MPD_File.ForegroundTileChunks?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
                 var palette = MPD_File.CreatePalette(1);
                 foregroundTileset = new MultiChunkTextureIndexed(MPD_File.ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
