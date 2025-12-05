@@ -17,7 +17,7 @@ namespace SF3.Models.Files.MPD {
             if (!TreeModelID.HasValue || TreeModelID < 0)
                 return false;
 
-            var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
+            var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
             if (modelCollection == null)
                 return false;
 
@@ -51,7 +51,7 @@ namespace SF3.Models.Files.MPD {
                 return false;
 
             // Get a list of all currently associated trees.
-            var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
+            var modelCollection = MPD_File.ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
             if (modelCollection == null || modelCollection.PDataTable.Length == 0)
                 return false;
 

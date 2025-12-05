@@ -221,13 +221,15 @@ namespace SF3.Models.Files.MPD {
             var offsets = new int[] { header.OffsetMesh1, header.OffsetMesh2, header.OffsetMesh3 };
             for (int i = 0; i < 3; i++) {
                 var offset = offsets[i];
-                if (offset == 0)
-                    continue;
-
                 var collection = CollectionType.MovableModels1 + i;
-                var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), null, collection);
-                ModelCollections[collection] = newChunk;
-                tables.AddRange(newChunk.Tables);
+
+                if (offset != 0) {
+                    var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), null, collection);
+                    ModelCollections[collection] = newChunk;
+                    tables.AddRange(newChunk.Tables);
+                }
+                else
+                    ModelCollections[collection] = new MissingModelChunk(this, collection);
             }
 
             return tables.ToArray();
@@ -559,11 +561,12 @@ namespace SF3.Models.Files.MPD {
 
             // Textures in models are ABGR1555.
             foreach (var models in ModelCollections.Values) {
-                var fileModels = (ModelChunk) models;
-                if (fileModels?.AttrTablesByMemoryAddress != null)
-                    foreach (var attrTable in fileModels.AttrTablesByMemoryAddress.Values)
-                        foreach (var attr in attrTable)
-                            primaryPixelFormats[attr.TextureNo] = TexturePixelFormat.ABGR1555;
+                if (models is ModelChunk fileModels) {
+                    if (fileModels?.AttrTablesByMemoryAddress != null)
+                        foreach (var attrTable in fileModels.AttrTablesByMemoryAddress.Values)
+                            foreach (var attr in attrTable)
+                                primaryPixelFormats[attr.TextureNo] = TexturePixelFormat.ABGR1555;
+                }
             }
 
             // Textures in the alt animation frames table are ABGR1555.
@@ -850,7 +853,7 @@ namespace SF3.Models.Files.MPD {
             // Gather a list of models that appear to be trees, associated with their tile.
             var treeModels = new List<TreeModelInfo>();
             foreach (var imc in ModelCollections.Values) {
-                var mc = (ModelChunk) imc;
+                var mc = imc as ModelChunk;
                 if (mc == null || !mc.ChunkIndex.HasValue)
                     continue;
 
@@ -1096,8 +1099,9 @@ namespace SF3.Models.Files.MPD {
             var flags = Flags;
             var errors = new List<string>();
 
-            var mc1  = ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 1);
-            var mc20 = ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20);
+            var modelChunks = ModelCollections.Values.Select(x => x as ModelChunk).Where(x => x != null).ToArray();
+            var mc1  = modelChunks.FirstOrDefault(x => x.ChunkIndex == 1);
+            var mc20 = modelChunks.FirstOrDefault(x => x.ChunkIndex == 20);
 
             if (mc1 != null) {
                 var expected = flags.Chunk1PointersMemoryLocation;
@@ -1354,7 +1358,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public PDataModel GetTreePData0() {
-            var mc = ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? (ModelChunk) mcOut : null;
+            var mc = ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
             if (mc == null)
                 return null;
 

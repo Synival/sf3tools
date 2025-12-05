@@ -127,9 +127,8 @@ namespace MPD_DataSearcher {
                             );
 
                             foreach (var imc in mpdFile!.ModelCollections.Values) {
-                                var mc = (ModelChunk) imc;
-
-                                var mh = mc.ModelsHeader;
+                                var mc = imc as ModelChunk;
+                                var mh = mc?.ModelsHeader;
                                 if (mh != null)
                                     AddDataRange(mh.Name, mh.Data.Data, mh.Address, mh.Size);
 

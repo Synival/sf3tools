@@ -41,8 +41,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             var groundY = (mpdFile.MPDHeader?.GroundY ?? 0) / -32.0f;
             var fullQuads = new List<Quad>();
             foreach (var imc in mpdFile.ModelCollections.Values) {
-                var mc = (ModelChunk) imc;
-                if (mc.CollisionLineTable == null || mc.CollisionPointTable == null)
+                var mc = imc as ModelChunk;
+                if (mc == null || mc.CollisionLineTable == null || mc.CollisionPointTable == null)
                     continue;
 
                 foreach (var line in mc.CollisionLineTable) {

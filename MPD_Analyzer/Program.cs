@@ -272,8 +272,9 @@ namespace MPD_Analyzer {
             var mapFlags = mpdFile.MPDHeader.MapFlags;
             var chunkLocations = mpdFile.ChunkLocations;
 
-            var hmm1  = HasHighMemoryModels(mpdFile.ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 1));
-            var hmm20 = HasHighMemoryModels(mpdFile.ModelCollections.Values.Cast<ModelChunk>().FirstOrDefault(x => x.ChunkIndex == 20));
+            var modelChunks = mpdFile.ModelCollections.Values.Select(x => x as ModelChunk).Where(x => x != null).ToArray();
+            var hmm1  = HasHighMemoryModels(modelChunks.FirstOrDefault(x => x.ChunkIndex == 1));
+            var hmm20 = HasHighMemoryModels(modelChunks.FirstOrDefault(x => x.ChunkIndex == 20));
 
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 + " | " + mpdFile.Settings.GroundXRotation
