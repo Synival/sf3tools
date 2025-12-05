@@ -60,7 +60,9 @@ namespace SF3.MPD {
             WriteTextureChunk(chest2Textures, 0, out _);
             WriteTextureChunk(barrelTextures, 0, out _);
 
-            // TODO: ground + skybox chunks
+            // Ground + skybox chunks.
+            WritePlaneChunks(mpd.Planes);
+
             // TODO: Chunk[19] for the Titan
 
             // TODO: actual chunks!!

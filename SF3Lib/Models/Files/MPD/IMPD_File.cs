@@ -139,39 +139,24 @@ namespace SF3.Models.Files.MPD {
 
         int GroundImageChunk1Index { get; }
         int GroundImageChunk2Index { get; }
-
-        IChunkData[] GroundImageChunks { get; }
-        ITexture GroundImage { get; }
-
         int GroundTilesetChunk1Index { get; }
         int GroundTilesetChunk2Index { get; }
         int GroundTileAssignmentChunk1Index { get; }
         int GroundTileAssignmentChunk2Index { get; }
-
-        IChunkData[] GroundTilesetChunks { get; }
-        IChunkData[] GroundTileAssignmentChunks { get; }
-        ITexture GroundTileset { get; }
-        ITexture GroundTiledImage { get; }
-
         int SkyBoxChunk1Index { get; }
         int SkyBoxChunk2Index { get; }
-
-        IChunkData[] SkyBoxChunks { get; }
-        ITexture SkyBoxImage { get; }
-
         int BackgroundChunk1Index { get; }
         int BackgroundChunk2Index { get; }
+        int ForegroundTilesetChunk1Index { get; }
+        int ForegroundTilesetChunk2Index { get; }
 
+        IChunkData[] GroundImageChunks { get; }
+        IChunkData[] GroundTilesetChunks { get; }
+        IChunkData[] GroundTileAssignmentChunks { get; }
+        IChunkData[] SkyBoxChunks { get; }
         IChunkData[] BackgroundChunks { get; }
-        ITexture BackgroundImage { get; }
-
-        int ForegroundTileChunk1Index { get; }
-        int ForegroundTileChunk2Index { get; }
-
         IChunkData[] ForegroundTileChunks { get; }
         IChunkData ForegroundMapChunk { get; }
-        ITexture ForegroundTileImage { get; }
-        ITexture ForegroundImage { get; }
 
         /// <summary>
         /// Triggered when models have been updated and something needs to be informed, like a viewer.

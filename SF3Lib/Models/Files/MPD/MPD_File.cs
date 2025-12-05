@@ -54,9 +54,9 @@ namespace SF3.Models.Files.MPD {
             BackgroundChunk1Index = MeshTextureChunksLastIndex + 1;
             BackgroundChunk2Index = MeshTextureChunksLastIndex + 2;
 
-            ForegroundTileChunk1Index = BackgroundChunk2Index + 2;
-            ForegroundTileChunk2Index = BackgroundChunk2Index + 3;
-            ForegroundMapChunkIndex   = BackgroundChunk2Index + 4;
+            ForegroundTilesetChunk1Index = BackgroundChunk2Index + 2;
+            ForegroundTilesetChunk2Index = BackgroundChunk2Index + 3;
+            ForegroundTileAssignmentChunkIndex   = BackgroundChunk2Index + 4;
         }
 
         public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType fallbackScenario)
@@ -385,12 +385,12 @@ namespace SF3.Models.Files.MPD {
             // Foreground image tiles
             var foregroundTileChunks = new List<IChunkData>();
             if (Flags.Bit_0x0010_HasTileBasedForegroundImage) {
-                if (chunks[ForegroundTileChunk1Index].Exists)
-                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
-                if (chunks[ForegroundTileChunk2Index].Exists)
-                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTileChunk2Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
-                if (chunks[ForegroundMapChunkIndex].Exists)
-                    ForegroundMapChunk = MakeChunkData(ForegroundMapChunkIndex, ChunkType.ForegroundMap, CompressionType.Compressed);
+                if (chunks[ForegroundTilesetChunk1Index].Exists)
+                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTilesetChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
+                if (chunks[ForegroundTilesetChunk2Index].Exists)
+                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTilesetChunk2Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
+                if (chunks[ForegroundTileAssignmentChunkIndex].Exists)
+                    ForegroundMapChunk = MakeChunkData(ForegroundTileAssignmentChunkIndex, ChunkType.ForegroundMap, CompressionType.Compressed);
             }
             ForegroundTileChunks = foregroundTileChunks.ToArray();
 
@@ -627,133 +627,12 @@ namespace SF3.Models.Files.MPD {
             BuildTextureAnimFrameData();
 
             // Add some images.
-            UpdatePlaneImages();
+            Planes = new MPD_Planes(this);
 
             return tables.ToArray();
         }
 
-        public void UpdatePlaneImages() {
-            ITexture groundImage         = null;
-            ITexture groundTileset       = null;
-            ITexture groundTiledImage    = null;
-            ITexture skyBoxImage         = null;
-            ITexture backgroundImage     = null;
-            ITexture foregroundTileImage = null;
-            ITexture foregroundImage     = null;
-
-            if (GroundImageChunks?.Any() == true) {
-                try {
-                    var palette = CreatePalette(0);
-                    groundImage = new MultiChunkTextureIndexed(GroundImageChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
-                }
-                catch {
-                    // TODO: what to do here??
-                }
-            }
-
-            if (GroundTilesetChunks?.Any() == true && GroundTileAssignmentChunks?.Any() == true) {
-                var palette = CreatePalette(0);
-                groundTileset = new MultiChunkTextureIndexed(GroundTilesetChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
-
-                var tiledGroundImageData = CreateTiledImageData(groundTileset, GroundTileAssignmentChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
-                groundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
-            }
-
-            if (SkyBoxChunks?.Any() == true)
-                skyBoxImage = new MultiChunkTextureIndexed(SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, CreatePalette(1));
-
-            if (BackgroundChunks?.Any() == true)
-                backgroundImage = new MultiChunkTextureIndexed(BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, CreatePalette(0));
-
-            if (ForegroundTileChunks?.Any() == true) {
-                var palette = CreatePalette(1);
-                foregroundTileImage = new MultiChunkTextureIndexed(ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
-
-                var foregroundImageData = CreateTiledImageData(foregroundTileImage, new IByteData[] { ForegroundMapChunk.DecompressedData }, 64, 1);
-                foregroundImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
-            }
-
-            GroundImage         = groundImage;
-            GroundTileset       = groundTileset;
-            GroundTiledImage    = groundTiledImage;
-            SkyBoxImage         = skyBoxImage;
-            BackgroundImage     = backgroundImage;
-            ForegroundTileImage = foregroundTileImage;
-            ForegroundImage     = foregroundImage;
-        }
-
-        private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, IByteData[] tileMaps, int tileSize, int blockCountX) {
-            int tilesPerBlock = tileSize * tileSize;
-
-            // Count the number of tiles (they're 16 bits, so divide the byte count by 2)
-            var tileMapTileCount = tileMaps.Sum(x => x.Length) / 2;
-
-            var blockCountYf = (float) tileMapTileCount / tilesPerBlock / blockCountX;
-
-            var tileImageData = tiledGroundTileImage.ImageData8Bit;
-            var tileImageDataWidth  = tileImageData.GetLength(0);
-            var tileImageDataHeight = tileImageData.GetLength(1);
-
-            var tileCountX = tileImageDataWidth / 8;
-            var tileCountY = tileImageDataHeight / 8;
-            var tileCount = tileCountX * tileCountY;
-            var outputImage = new byte[tileSize * blockCountX * 8, (int) Math.Ceiling(tileSize * blockCountYf) * 8];
-
-            // Precalculations for tile lookups
-            var tileInputX = new int[tileCount];
-            var tileInputY = new int[tileCount];
-            int pos = 0;
-            for (int y = 0; y < tileCountY; y++) {
-                for (int x = 0; x < tileCountX; x++) {
-                    tileInputX[pos]   = x * 8;
-                    tileInputY[pos++] = y * 8;
-                }
-            }
-
-            int blockXMax = blockCountX * tileSize;
-            int tile = 0, tileInBlock = 0, blockX = 0, blockY = 0, tileInBlockX = 0, tileInBlockY = 0;
-            foreach (var tileMap in tileMaps) {
-                var data = tileMap.GetDataCopyOrReference();
-                for (var dataPos = 0; dataPos < data.Length - 1; tile++, tileInBlock++, tileInBlockX++) {
-                    // Reset some tile locations when we've reached the end of a block.
-                    if (tileInBlock == tilesPerBlock) {
-                        tileInBlock = 0;
-                        tileInBlockX = 0;
-                        tileInBlockY = 0;
-
-                        // Move ahead one block, wrapping when blockXMax is reached.
-                        blockX += tileSize;
-                        if (blockX == blockXMax) {
-                            blockX = 0;
-                            blockY += tileSize;
-                        }
-                    }
-                    // Make sure that tileInBlockX wraps.
-                    else if (tileInBlockX == tileSize) {
-                        tileInBlockX = 0;
-                        tileInBlockY++;
-                    }
-
-                    var tileIndex = ((data[dataPos++] << 8) + data[dataPos++]) / 2;
-                    if (tileIndex >= tileCount) {
-                        System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex}");
-                        continue;
-                    }
-
-                    var inputX = tileInputX[tileIndex];
-                    var inputY = tileInputY[tileIndex];
-
-                    var outputX = (tileInBlockX + blockX) * 8;
-                    var outputY = (tileInBlockY + blockY) * 8;
-
-                    for (int y = 0; y < 8; y++)
-                        for (int x = 0; x < 8; x++)
-                            outputImage[outputX + x, outputY + y] = tileImageData[inputX + x, inputY + y];
-                }
-            }
-
-            return outputImage;
-        }
+        public void UpdatePlaneImages() => ((MPD_Planes) Planes).UpdateImages();
 
         private Dictionary<TexturePixelFormat, Palette> CreatePalettesForTextures() {
             var palettes = new Dictionary<TexturePixelFormat, Palette>();
@@ -1693,58 +1572,42 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public SurfaceDataChunk SurfaceDataChunk { get; private set; }
 
-        public int PrimaryTextureChunksFirstIndex { get; }
-        public int PrimaryTextureChunksLastIndex { get; }
-        public int MeshTextureChunksFirstIndex { get; }
-        public int MeshTextureChunksLastIndex { get; }
+        public IMPD_Surface Surface { get; private set; }
 
         [BulkCopyRecurse]
         public TextureChunk[] TextureChunks { get; private set; }
 
-        public IMPD_Surface Surface { get; private set; }
-
+        public int PrimaryTextureChunksFirstIndex { get; }
+        public int PrimaryTextureChunksLastIndex { get; }
+        public int MeshTextureChunksFirstIndex { get; }
+        public int MeshTextureChunksLastIndex { get; }
         public int GroundImageChunk1Index { get; }
         public int GroundImageChunk2Index { get; }
-
-        public IChunkData[] GroundImageChunks { get; private set; }
-        public ITexture GroundImage { get; private set; }
-
         public int GroundTilesetChunk1Index { get; }
         public int GroundTilesetChunk2Index { get; }
         public int GroundTileAssignmentChunk1Index { get; }
         public int GroundTileAssignmentChunk2Index { get; }
-
-        public IChunkData[] GroundTilesetChunks { get; private set; }
-        public IChunkData[] GroundTileAssignmentChunks { get; private set; }
-
-        public ITexture GroundTileset { get; private set; }
-        public ITexture GroundTiledImage { get; private set; }
-
         public int SkyBoxChunk1Index { get; }
         public int SkyBoxChunk2Index { get; }
-
-        public IChunkData[] SkyBoxChunks { get; private set; }
-        public ITexture SkyBoxImage { get; private set; }
-
         public int BackgroundChunk1Index { get; }
         public int BackgroundChunk2Index { get; }
+        public int ForegroundTilesetChunk1Index { get; }
+        public int ForegroundTilesetChunk2Index { get; }
+        public int ForegroundTileAssignmentChunkIndex { get; }
 
+        public IChunkData[] GroundImageChunks { get; private set; }
+        public IChunkData[] GroundTilesetChunks { get; private set; }
+        public IChunkData[] GroundTileAssignmentChunks { get; private set; }
+        public IChunkData[] SkyBoxChunks { get; private set; }
         public IChunkData[] BackgroundChunks { get; private set; }
-        public ITexture BackgroundImage { get; private set; }
-
-
-        public int ForegroundTileChunk1Index { get; }
-        public int ForegroundTileChunk2Index { get; }
-        public int ForegroundMapChunkIndex { get; }
-
         public IChunkData[] ForegroundTileChunks { get; private set; }
         public IChunkData ForegroundMapChunk { get; private set; }
-        public ITexture ForegroundTileImage { get; private set; }
-        public ITexture ForegroundImage { get; private set; }
 
-        public EventHandler ModelsUpdated { get; set; }
+        public IMPD_Planes Planes { get; private set; }
 
         public static bool UpdateChunkTableOnChunkResize { get; set; } = true;
         public static bool RebuildChunkTableOnFinish { get; set; } = true;
+
+        public EventHandler ModelsUpdated { get; set; }
     }
 }

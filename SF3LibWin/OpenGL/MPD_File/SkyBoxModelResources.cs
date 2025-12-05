@@ -34,10 +34,10 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void Update(IMPD_File mpdFile) {
             Reset();
-            if (mpdFile?.SkyBoxImage == null)
+            if (mpdFile?.Planes?.SkyBoxImage == null)
                 return;
 
-            Texture = new Texture(mpdFile.SkyBoxImage.CreateBitmapARGB8888(), clampToEdge: false);
+            Texture = new Texture(mpdFile.Planes.SkyBoxImage.CreateBitmapARGB8888(), clampToEdge: false);
 
             var quad = new Quad(c_skyBoxCoords);
             var texInfo = GetTextureInfo(TextureUnit.Texture0);

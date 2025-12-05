@@ -27,5 +27,10 @@ namespace SF3.MPD {
         /// All models that exist in this MPD, sorted by their collection (model+surface, chests+barrel, extra model).
         /// </summary>
         Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; }
+
+        /// <summary>
+        /// Collection of specific plane types (ground, tiled ground, battle skybox, scene skybox, background, foreground).
+        /// </summary>
+        IMPD_Planes Planes { get; }
     }
 }

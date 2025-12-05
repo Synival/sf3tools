@@ -26,20 +26,21 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new ModelsTabView("Models", Model));
             CreateChild(new TexturesView("Textures", Model));
 
-            if (Model.GroundImage != null)
-                CreateChild(new TextureView("Ground (Image)", Model.GroundImage, 1));
-            if (Model.GroundTiledImage != null)
-                CreateChild(new TextureView("Ground (Tile-Based)", Model.GroundTiledImage, 0.50f));
-            if (Model.GroundTileset != null)
-                CreateChild(new TextureView("Ground Tileset", Model.GroundTileset, 1));
-            if (Model.SkyBoxImage != null)
-                CreateChild(new TextureView("Sky Box", Model.SkyBoxImage, 1));
-            if (Model.BackgroundImage != null)
-                CreateChild(new TextureView("Background", Model.BackgroundImage, 1));
-            if (Model.ForegroundTileImage != null)
-                CreateChild(new TextureView("Foreground Tiles", Model.ForegroundTileImage, 1));
-            if (Model.ForegroundImage != null)
-                CreateChild(new TextureView("Foreground", Model.ForegroundImage, 1));
+            var planes = Model.Planes;
+            if (planes.GroundImage != null)
+                CreateChild(new TextureView("Ground (Image)", planes.GroundImage, 1));
+            if (planes.GroundTiledImage != null)
+                CreateChild(new TextureView("Ground (Tile-Based)", planes.GroundTiledImage, 0.50f));
+            if (planes.GroundTileset != null)
+                CreateChild(new TextureView("Ground Tileset", planes.GroundTileset, 1));
+            if (planes.SkyBoxImage != null)
+                CreateChild(new TextureView("Sky Box", planes.SkyBoxImage, 1));
+            if (planes.BackgroundImage != null)
+                CreateChild(new TextureView("Background", planes.BackgroundImage, 1));
+            if (planes.ForegroundTileset != null)
+                CreateChild(new TextureView("Foreground Tileset", planes.ForegroundTileset, 1));
+            if (planes.ForegroundTiledImage != null)
+                CreateChild(new TextureView("Foreground (Tile-Based)", planes.ForegroundTiledImage, 1));
 
             CreateChild(new DataView("Data (advanced)", Model));
 
