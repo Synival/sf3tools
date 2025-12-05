@@ -98,7 +98,7 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         IChunkData[] ChunkData { get; }
 
-        IChunkData[] ModelsChunkData { get; }
+        IChunkData[] ModelChunkDatas { get; }
 
         IChunkData SurfaceChunkData { get; }
 
@@ -137,7 +137,7 @@ namespace SF3.Models.Files.MPD {
         int? SurfaceModelChunkIndex { get; }
         SurfaceModelChunk SurfaceModelChunk { get; }
 
-        int[] ModelsChunkIndices { get; }
+        int[] ModelChunkIndices { get; }
 
         SurfaceDataChunk SurfaceDataChunk { get; }
 

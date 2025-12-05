@@ -3,8 +3,8 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public partial class MPD_FlagsFromHeader {
-        [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelsChunkIndex), displayGroup: "Flags")]
-        public int? ModelsChunkIndex {
+        [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelChunkIndex), displayGroup: "Flags")]
+        public int? ModelChunkIndex {
             get {
                 if (!Bit_0x0100_HasModels)
                     return null;
@@ -80,7 +80,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: null, displayOrder: 1.0007f, displayName: "(Derived) " + nameof(ModelsMemoryLocation), displayGroup: "Flags")]
         public MemoryLocationType? ModelsMemoryLocation {
             get {
-                var mci = ModelsChunkIndex;
+                var mci = ModelChunkIndex;
                 return (mci.HasValue)
                     ? ((mci.Value == 1) ? Chunk1PointersMemoryLocation : MemoryLocationType.HighMemory)
                     : null;

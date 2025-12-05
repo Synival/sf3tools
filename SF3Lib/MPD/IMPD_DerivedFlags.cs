@@ -5,7 +5,7 @@ namespace SF3.MPD {
         /// <summary>
         /// When set, specifies the chunk in which models should be located (either 1 or 20).
         /// </summary>
-        int? ModelsChunkIndex { get; }
+        int? ModelChunkIndex { get; }
 
         /// <summary>
         /// When set, specifies the area of memory (low or high) in which it is accessed.

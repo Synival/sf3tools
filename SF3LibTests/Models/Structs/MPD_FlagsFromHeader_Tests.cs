@@ -14,7 +14,7 @@ namespace SF3.Tests.Models.Structs {
                 bool hasModels,
                 bool hasSurfaceModel,
                 bool has0x8000,
-                int? expectedModelsChunkIndex,
+                int? expectedModelChunkIndex,
                 int? expectedSurfaceModelChunkIndex,
                 ChunkType expectedChunk1Type,
                 ChunkType expectedChunk2Type,
@@ -30,7 +30,7 @@ namespace SF3.Tests.Models.Structs {
                 flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel = has0x8000;
 
                 var resultsString =
-                    TF(expectedModelsChunkIndex             == flags.ModelsChunkIndex) +
+                    TF(expectedModelChunkIndex              == flags.ModelChunkIndex) +
                     TF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
                     TF(expectedChunk1Type                   == flags.Chunk1Type) +
                     TF(expectedChunk2Type                   == flags.Chunk2Type) +
@@ -70,7 +70,7 @@ namespace SF3.Tests.Models.Structs {
                 bool hasSurfaceModel,
                 bool has0x8000,
                 bool hasKraken,
-                int? expectedModelsChunkIndex,
+                int? expectedModelChunkIndex,
                 int? expectedSurfaceModelChunkIndex,
                 ChunkType expectedChunk1Type,
                 ChunkType expectedChunk2Type,
@@ -88,7 +88,7 @@ namespace SF3.Tests.Models.Structs {
                 flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures = hasKraken;
 
                 var resultsString =
-                    TF(expectedModelsChunkIndex             == flags.ModelsChunkIndex) +
+                    TF(expectedModelChunkIndex              == flags.ModelChunkIndex) +
                     TF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
                     TF(expectedChunk1Type                   == flags.Chunk1Type) +
                     TF(expectedChunk2Type                   == flags.Chunk2Type) +
@@ -143,7 +143,7 @@ namespace SF3.Tests.Models.Structs {
                 bool has0x8000,
                 bool hasKraken,
                 bool hasRotatableTextures,
-                int? expectedModelsChunkIndex,
+                int? expectedModelChunkIndex,
                 int? expectedSurfaceModelChunkIndex,
                 ChunkType expectedChunk1Type,
                 ChunkType expectedChunk2Type,
@@ -162,7 +162,7 @@ namespace SF3.Tests.Models.Structs {
                 flags.Bit_0x0002_HasSurfaceTextureRotation = hasRotatableTextures;
 
                 var resultsString =
-                    TF(expectedModelsChunkIndex             == flags.ModelsChunkIndex) +
+                    TF(expectedModelChunkIndex              == flags.ModelChunkIndex) +
                     TF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
                     TF(expectedChunk1Type                   == flags.Chunk1Type) +
                     TF(expectedChunk2Type                   == flags.Chunk2Type) +

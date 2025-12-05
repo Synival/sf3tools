@@ -117,7 +117,7 @@ namespace SF3.Models.Files.MPD {
             // Load chunks
             var chunks = MakeChunkHeaderTable().Rows;
             var chunkDatas = MakeChunkDatas(chunks);
-            var chunkTables = MakeChunkTables(chunks, chunkDatas, ModelsChunkData, SurfaceChunkData);
+            var chunkTables = MakeChunkTables(chunks, chunkDatas, ModelChunkDatas, SurfaceChunkData);
 
             // Add two-way communication between 'Modified' events from the root IByteData and its children.
             WireChildDataModifiedEvents();
@@ -313,13 +313,13 @@ namespace SF3.Models.Files.MPD {
                 _ = MakeChunkData(SurfaceModelChunkIndex.Value, ChunkType.SurfaceModel, CompressionType.Uncompressed);
 
             // All model chunks
-            ModelsChunkIndices = GetModelsChunkIndices(chunks);
-            var modelsChunksList = new List<IChunkData>();
-            foreach (var i in ModelsChunkIndices) {
+            ModelChunkIndices = GetModelChunkIndices(chunks);
+            var modelChunksList = new List<IChunkData>();
+            foreach (var i in ModelChunkIndices) {
                 _ = MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed);
-                modelsChunksList.Add(ChunkData[i]);
+                modelChunksList.Add(ChunkData[i]);
             }
-            ModelsChunkData = modelsChunksList.ToArray();
+            ModelChunkDatas = modelChunksList.ToArray();
 
             // Animated textures chunk
             if (chunks[3].Exists)
@@ -500,7 +500,7 @@ namespace SF3.Models.Files.MPD {
             return chunkData;
         }
 
-        private int[] GetModelsChunkIndices(ChunkLocation[] chunks) {
+        private int[] GetModelChunkIndices(ChunkLocation[] chunks) {
             var flags = Flags;
             var indices = new List<int>();
 
@@ -519,7 +519,7 @@ namespace SF3.Models.Files.MPD {
             return (smci.HasValue && chunks[smci.Value].Exists) ? smci : null;
         }
 
-        private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelsChunks, IChunkData surfaceModelChunk) {
+        private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelChunks, IChunkData surfaceModelChunk) {
             CollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 if (chunkIndex == 10 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
                     return CollectionType.ExtraModel;
@@ -539,7 +539,7 @@ namespace SF3.Models.Files.MPD {
 
             var tables = new List<ITable>();
 
-            foreach (var mc in modelsChunks) {
+            foreach (var mc in modelChunks) {
                 var collection =
                     (mc.Index == 19 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) ? CollectionType.ExtraModel :
                     (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
@@ -619,10 +619,10 @@ namespace SF3.Models.Files.MPD {
             int index = 0;
             foreach (var chunk in texChunks) {
                 var collection = TextureCollectionForChunkIndex(chunk.Index);
-                bool isMovableModelsChunk = collection >= CollectionType.MovableModels1 && collection <= CollectionType.MovableModels3;
+                bool isMovableModelChunk = collection >= CollectionType.MovableModels1 && collection <= CollectionType.MovableModels3;
 
                 int? startId = null;
-                if (isMovableModelsChunk)
+                if (isMovableModelChunk)
                     startId = nextModelCollectionStartId;
                 else if (collection == CollectionType.Primary)
                     startId = nextPrimaryCollectionStartId;
@@ -635,7 +635,7 @@ namespace SF3.Models.Files.MPD {
                         collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
                     if (texCol.TextureTable != null) {
-                        if (isMovableModelsChunk)
+                        if (isMovableModelChunk)
                             nextModelCollectionStartId += texCol.TextureTable.Length;
                         else if (collection == CollectionType.Primary)
                             nextPrimaryCollectionStartId += texCol.TextureTable.Length;
@@ -1105,8 +1105,8 @@ namespace SF3.Models.Files.MPD {
             if (flags.Chunk20Type != chunkHeaders[20].ChunkType)
                 errors.Add($"Chunk[20] type should be '{flags.Chunk20Type}', but is '{chunkHeaders[20].ChunkType}'");
 
-            if (flags.ModelsChunkIndex.HasValue && chunkHeaders[flags.ModelsChunkIndex.Value].ChunkType != ChunkType.Models)
-                errors.Add($"Models chunk ({flags.ModelsChunkIndex}) type should be 'Models' but is '{chunkHeaders[flags.ModelsChunkIndex.Value].ChunkType}'");
+            if (flags.ModelChunkIndex.HasValue && chunkHeaders[flags.ModelChunkIndex.Value].ChunkType != ChunkType.Models)
+                errors.Add($"Model chunk ({flags.ModelChunkIndex}) type should be 'Models' but is '{chunkHeaders[flags.ModelChunkIndex.Value].ChunkType}'");
             if (flags.SurfaceModelChunkIndex.HasValue && chunkHeaders[flags.SurfaceModelChunkIndex.Value].ChunkType != ChunkType.SurfaceModel)
                 errors.Add($"Surface model chunk ({flags.SurfaceModelChunkIndex}) type should be 'SurfaceModel' but is '{chunkHeaders[flags.SurfaceModelChunkIndex.Value].ChunkType}'");
 
@@ -1535,7 +1535,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ChunkData { get; private set; }
 
-        public IChunkData[] ModelsChunkData { get; private set; }
+        public IChunkData[] ModelChunkDatas { get; private set; }
 
         public IChunkData SurfaceChunkData => (SurfaceModelChunkIndex.HasValue) ? ChunkData[SurfaceModelChunkIndex.Value] : null;
 
@@ -1606,7 +1606,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public SurfaceModelChunk SurfaceModelChunk { get; private set; }
 
-        public int[] ModelsChunkIndices { get; private set; } = null;
+        public int[] ModelChunkIndices { get; private set; } = null;
 
         [BulkCopyRecurse]
         public Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<CollectionType, IMPD_ModelCollection>();
