@@ -31,6 +31,18 @@ namespace SF3.Files {
                 BytesWritten += bytes.Length;
         }
 
+        /// <summary>
+        /// Writes an arbitrary number of bytes to the stream.
+        /// </summary>
+        /// <param name="bytes">Bytes to write to the stream.</param>
+        /// <param name="offset">Start position of data in 'bytes' to write.</param>
+        /// <param name="length">Number of bytes to write.</param>
+        public void WriteBytes(byte[] bytes, int offset, int length) {
+            Stream.Write(bytes, offset, length);
+            if (AtEndOfStream)
+                BytesWritten += length;
+        }
+
         public void WriteUShorts(ushort[] values) {
             foreach (var value in values)
                 WriteUShort(value);

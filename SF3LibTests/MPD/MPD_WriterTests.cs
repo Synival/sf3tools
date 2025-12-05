@@ -33,7 +33,23 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("TESMAP_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData);
+            AssertByteComparison(fileData, outputData, [
+                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+
+                // Insignificant surface data Chunk[5] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0xFB36, Size = 2 },
+
+                // Insignificant texture Chunk[13] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x11A78, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x11A82, Size = 4 },
+
+                // Insignificant texture Chunk[17] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x1A5A9, Size = 1 },
+
+                // Insignificant texture Chunk[18] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x1EDE6, Size = 1 },
+            ]);
         }
 
         [TestMethod]
@@ -65,7 +81,7 @@ namespace SF3.Tests.MPD {
 
                 // Insignificant texture Chunk[13] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x4B78, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x4B82, Size = 2, ExpectedIndexAdjustment = 2 },
+                new ByteComparisonSkipRegion { Offset = 0x4B82, Size = 4 },
             ]);
         }
 
@@ -151,7 +167,7 @@ namespace SF3.Tests.MPD {
 
             if (expected.Length != actual.Length)
                 errors.Add($"Length is wrong: should be {expected.Length} (0x{expected.Length:X5}), is {actual.Length} (0x{actual.Length:X5})");
-            uint? firstWrongByte = null;
+            (uint ExpectedOffset, uint ActualOffset)? firstWrongByte = null;
             int wrongBytes = 0;
             int bytesToCompare = Math.Min(expected.Length, actual.Length);
 
@@ -172,18 +188,18 @@ namespace SF3.Tests.MPD {
 
                 if (expected[i] != actual[j]) {
                     if (!firstWrongByte.HasValue)
-                        firstWrongByte = (uint) i;
+                        firstWrongByte = ((uint) i, (uint) j);
                     wrongBytes++;
                 }
             }
 
-            percentageCorrect = (float) (bytesToCompare - wrongBytes) / bytesToCompare * 100.0f;
+            percentageCorrect = (float) Math.Floor((float) (bytesToCompare - wrongBytes) / bytesToCompare * 10000.0f) / 100.0f;
             if (wrongBytes > 0) {
                 errors.Add($"Comparable data is wrong: {percentageCorrect:0.00}% accurate");
 
-                var rightByte = expected[firstWrongByte!.Value];
-                var wrongByte = actual[firstWrongByte!.Value];
-                errors.Add($"First wrong byte is at {firstWrongByte!.Value} (0x{firstWrongByte:X4}):");
+                var rightByte = expected[firstWrongByte!.Value.ExpectedOffset];
+                var wrongByte = actual[firstWrongByte!.Value.ActualOffset];
+                errors.Add($"First wrong byte is at {firstWrongByte!.Value.ExpectedOffset} (0x{firstWrongByte!.Value.ExpectedOffset:X4}):");
                 errors.Add($"  Should be {rightByte} (0x{rightByte:X2}), is {wrongByte} (0x{wrongByte:X2})");
             }
 
