@@ -12,7 +12,8 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new TableView("Tile Assignment", Model.PlaneTileTextureRowTable, ngc));
+            if (Model?.PlaneTileTextureRowTable?.Length > 0)
+                CreateChild(new TableView("Tile Assignment", Model.PlaneTileTextureRowTable, ngc, Model.PlaneTileTextureRowTable[0].GetType()));
 
             return Control;
         }

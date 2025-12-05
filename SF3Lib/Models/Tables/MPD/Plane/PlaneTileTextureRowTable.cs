@@ -7,7 +7,8 @@ namespace SF3.Models.Tables.MPD.Plane {
         : base(data, name, address, rowCount) {
             StartY      = startY;
             BlockCountX = blockCountX;
-            RowCount    = rowCount;
+            Width       = BlockCountX * 64;
+            Height      = Size;
         }
 
         public static PlaneTileTextureRowTable Create(IByteData data, string name, int address, int startY, int blockCountX, int rowCount)
@@ -30,7 +31,9 @@ namespace SF3.Models.Tables.MPD.Plane {
 
         public int StartY { get; }
         public int BlockCountX { get; }
-        public int RowCount { get; }
+
+        public int Width { get; }
+        public int Height { get; }
 
         public ushort this[int x, int y] {
             get => this[y][x];
