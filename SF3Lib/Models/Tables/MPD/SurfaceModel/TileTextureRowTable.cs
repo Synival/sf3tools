@@ -13,6 +13,7 @@ namespace SF3.Models.Tables.MPD.SurfaceModel {
         public override bool Load() {
             return Load((id, address) => {
                 // Ignore address; this table is in a special order:
+                //  Blocks      Tiles
                 // [Y:16, X:16][Y:4, X:4]
                 var block = id / 4;
                 var y = id % 4;
