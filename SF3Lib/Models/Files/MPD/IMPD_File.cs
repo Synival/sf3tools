@@ -156,7 +156,7 @@ namespace SF3.Models.Files.MPD {
         IChunkData[] SkyBoxChunks { get; }
         IChunkData[] BackgroundChunks { get; }
         IChunkData[] ForegroundTileChunks { get; }
-        IChunkData ForegroundMapChunk { get; }
+        IChunkData ForegroundTileAssignmentChunk { get; }
 
         /// <summary>
         /// Triggered when models have been updated and something needs to be informed, like a viewer.

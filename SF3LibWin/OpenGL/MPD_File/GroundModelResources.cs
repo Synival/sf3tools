@@ -5,7 +5,6 @@ using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
@@ -23,9 +22,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void Update(IMPD_File mpdFile) {
             Reset();
-            if (mpdFile?.Planes?.GroundImage != null)
+            if (mpdFile?.Planes?.GroundImage != null && mpdFile.Flags.Bit_0x0400_HasGroundImage)
                 CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundImage, 65536.0f);
-            else if (mpdFile?.Planes?.GroundTiledImage != null)
+            else if (mpdFile?.Planes?.GroundTiledImage != null && mpdFile.Flags.Bit_0x1000_HasTileBasedGroundImage)
                 CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage, 128.0f);
         }
 

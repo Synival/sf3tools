@@ -34,7 +34,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void Update(IMPD_File mpdFile) {
             Reset();
-            if (mpdFile?.Planes?.SkyBoxImage == null)
+            if (mpdFile?.Planes?.SkyBoxImage == null || mpdFile?.Flags?.Bit_0x0800_HasCutsceneSkyBox != true)
                 return;
 
             Texture = new Texture(mpdFile.Planes.SkyBoxImage.CreateBitmapARGB8888(), clampToEdge: false);
