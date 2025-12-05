@@ -657,6 +657,21 @@ namespace SF3.Models.Files.MPD {
             // TODO: This function is a MESS. Please refactor it!!
             BuildTextureAnimFrameData();
 
+            // Add chunks with tables for ground plane tile assignment.
+            // TODO: correct StartY
+            GroundTileAssignmentChunks = GroundTileAssignmentChunkDatas
+                .Select((x, i) => PlaneTileAssignmentChunk.Create(x.DecompressedData, NameGetterContext, 0, "GroundTiles" + (i + 1), x.Index, 0))
+                .ToArray();
+            foreach (var chunk in GroundTileAssignmentChunks)
+                tables.AddRange(chunk.Tables);
+
+            // Add chunks with tables for foreground plane tile assignment.
+            if (ForegroundTileAssignmentChunkData != null) {
+                var ch = ForegroundTileAssignmentChunkData;
+                ForegroundTileAssignmentChunk = PlaneTileAssignmentChunk.Create(ch.DecompressedData, NameGetterContext, 0, "ForegroundTiles", ch.Index, 0);
+                tables.AddRange(ForegroundTileAssignmentChunk.Tables);
+            }
+
             // Add some images.
             Planes = new MPD_Planes(this);
 
@@ -1618,6 +1633,12 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public TextureChunk[] TextureChunks { get; private set; }
+
+        [BulkCopyRecurse]
+        public PlaneTileAssignmentChunk[] GroundTileAssignmentChunks { get; private set; }
+
+        [BulkCopyRecurse]
+        public PlaneTileAssignmentChunk ForegroundTileAssignmentChunk { get; private set; }
 
         public int PrimaryTextureChunksFirstIndex { get; }
         public int PrimaryTextureChunksLastIndex { get; }

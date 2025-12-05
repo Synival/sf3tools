@@ -147,6 +147,8 @@ namespace SF3.Models.Files.MPD {
         int MeshTextureChunksLastIndex { get; }
 
         TextureChunk[] TextureChunks { get; }
+        PlaneTileAssignmentChunk[] GroundTileAssignmentChunks { get; }
+        PlaneTileAssignmentChunk ForegroundTileAssignmentChunk { get; }
 
         int GroundImageChunk1Index { get; }
         int GroundImageChunk2Index { get; }

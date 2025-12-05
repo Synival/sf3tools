@@ -47,6 +47,16 @@ namespace SF3.Win.Views.MPD {
                     if (texCollection != null)
                         AddChunkView(texCollection.ChunkIndex, "Textures", (name) => new TextureChunkView(name, texCollection));
 
+            if (Model.GroundTileAssignmentChunks != null)
+                foreach (var gtaChunk in Model.GroundTileAssignmentChunks)
+                    if (gtaChunk != null)
+                        AddChunkView(gtaChunk.ChunkIndex, "GroundTileAssignment", (name) => new PlaneTileAssignmentChunkView(name, gtaChunk));
+
+            if (Model.ForegroundTileAssignmentChunk != null) {
+                var fgChunk = Model.ForegroundTileAssignmentChunk;
+                AddChunkView(fgChunk.ChunkIndex, "ForegroundTileAssignment", (name) => new PlaneTileAssignmentChunkView(name, fgChunk));
+            }
+
             var palettes = Model.PaletteTables
                 .Take(Model.MPDHeader.HasPalette3 ? 3 : 2)
                 .Select(x => x != null ? new Palette(x.Select(x => x.ColorABGR1555).ToArray()) : new Palette(256))
