@@ -12,43 +12,43 @@ namespace SF3.Models.Files.MPD {
         }
 
         public void UpdateImages() {
-            ITexture groundImage         = null;
-            ITexture groundTileset       = null;
-            ITexture groundTiledImage    = null;
-            ITexture skyBoxImage         = null;
-            ITexture backgroundImage     = null;
-            ITexture foregroundTileset = null;
-            ITexture foregroundTiledImage     = null;
+            ITexture groundImage          = null;
+            ITexture groundTileset        = null;
+            ITexture groundTiledImage     = null;
+            ITexture skyBoxImage          = null;
+            ITexture backgroundImage      = null;
+            ITexture foregroundTileset    = null;
+            ITexture foregroundTiledImage = null;
 
-            if (MPD_File.GroundImageChunks?.Any() == true) {
+            if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 try {
                     var palette = MPD_File.CreatePalette(0);
-                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
+                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
                 }
                 catch {
                     // TODO: what to do here??
                 }
             }
 
-            if (MPD_File.GroundTilesetChunks?.Any() == true && MPD_File.GroundTileAssignmentChunks?.Any() == true) {
+            if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunkDatas?.Any() == true) {
                 var palette = MPD_File.CreatePalette(0);
-                groundTileset = new MultiChunkTextureIndexed(MPD_File.GroundTilesetChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                groundTileset = new MultiChunkTextureIndexed(MPD_File.GroundTilesetChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var tiledGroundImageData = CreateTiledImageData(groundTileset, MPD_File.GroundTileAssignmentChunks.Select(x => x.DecompressedData).ToArray(), 64, 4);
+                var tiledGroundImageData = CreateTiledImageData(groundTileset, MPD_File.GroundTileAssignmentChunkDatas.Select(x => x.DecompressedData).ToArray(), 64, 4);
                 groundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
-            if (MPD_File.SkyBoxChunks?.Any() == true)
-                skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, MPD_File.CreatePalette(1));
+            if (MPD_File.SkyBoxChunkDatas?.Any() == true)
+                skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, MPD_File.CreatePalette(1));
 
-            if (MPD_File.BackgroundChunks?.Any() == true)
-                backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
+            if (MPD_File.BackgroundChunkDatas?.Any() == true)
+                backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
 
-            if (MPD_File.ForegroundTileChunks?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
+            if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunkData != null) {
                 var palette = MPD_File.CreatePalette(1);
-                foregroundTileset = new MultiChunkTextureIndexed(MPD_File.ForegroundTileChunks.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                foregroundTileset = new MultiChunkTextureIndexed(MPD_File.ForegroundTileChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
 
-                var foregroundImageData = CreateTiledImageData(foregroundTileset, new IByteData[] { MPD_File.ForegroundTileAssignmentChunk.DecompressedData }, 64, 1);
+                var foregroundImageData = CreateTiledImageData(foregroundTileset, new IByteData[] { MPD_File.ForegroundTileAssignmentChunkData.DecompressedData }, 64, 1);
                 foregroundTiledImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
             }
 
@@ -139,8 +139,9 @@ namespace SF3.Models.Files.MPD {
         public ITexture GroundImage { get; private set; }
         public ITexture GroundTileset { get; private set; }
         public ITexture GroundTiledImage { get; private set; }
-        public ITexture SkyBoxImage { get; private set; }
         public ITexture BackgroundImage { get; private set; }
+
+        public ITexture SkyBoxImage { get; private set; }
         public ITexture ForegroundTileset { get; private set; }
         public ITexture ForegroundTiledImage { get; private set; }
     }

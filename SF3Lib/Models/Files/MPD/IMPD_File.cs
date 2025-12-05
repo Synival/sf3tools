@@ -97,8 +97,19 @@ namespace SF3.Models.Files.MPD {
         /// Byte data for (de)compressed data for chunks
         /// </summary>
         IChunkData[] ChunkData { get; }
+
         IChunkData[] ModelsChunkData { get; }
+
         IChunkData SurfaceChunkData { get; }
+
+        IChunkData[] GroundImageChunkDatas { get; }
+        IChunkData[] GroundTilesetChunkDatas { get; }
+        IChunkData[] GroundTileAssignmentChunkDatas { get; }
+        IChunkData[] BackgroundChunkDatas { get; }
+
+        IChunkData[] SkyBoxChunkDatas { get; }
+        IChunkData[] ForegroundTileChunkDatas { get; }
+        IChunkData ForegroundTileAssignmentChunkData { get; }
 
         MPD_HeaderModel MPDHeader { get; }
         ChunkLocationTable ChunkLocations { get; }
@@ -143,20 +154,13 @@ namespace SF3.Models.Files.MPD {
         int GroundTilesetChunk2Index { get; }
         int GroundTileAssignmentChunk1Index { get; }
         int GroundTileAssignmentChunk2Index { get; }
-        int SkyBoxChunk1Index { get; }
-        int SkyBoxChunk2Index { get; }
         int BackgroundChunk1Index { get; }
         int BackgroundChunk2Index { get; }
+
+        int SkyBoxChunk1Index { get; }
+        int SkyBoxChunk2Index { get; }
         int ForegroundTilesetChunk1Index { get; }
         int ForegroundTilesetChunk2Index { get; }
-
-        IChunkData[] GroundImageChunks { get; }
-        IChunkData[] GroundTilesetChunks { get; }
-        IChunkData[] GroundTileAssignmentChunks { get; }
-        IChunkData[] SkyBoxChunks { get; }
-        IChunkData[] BackgroundChunks { get; }
-        IChunkData[] ForegroundTileChunks { get; }
-        IChunkData ForegroundTileAssignmentChunk { get; }
 
         /// <summary>
         /// Triggered when models have been updated and something needs to be informed, like a viewer.

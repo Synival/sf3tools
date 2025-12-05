@@ -21,14 +21,14 @@
         ITexture GroundTiledImage { get; }
 
         /// <summary>
-        /// Image used for the skybox plane. Must be 512x256 and 8-bit indexed.
-        /// </summary>
-        ITexture SkyBoxImage { get; }
-
-        /// <summary>
         /// Image used for the background plane (Ishahakat's room). Must be 512x256 and 8-bit indexed.
         /// </summary>
         ITexture BackgroundImage { get; }
+
+        /// <summary>
+        /// Image used for the skybox plane. Must be 512x256 and 8-bit indexed.
+        /// </summary>
+        ITexture SkyBoxImage { get; }
 
         /// <summary>
         /// Tileset image used for a foregound plane (Ishahakat). Must be 512x256 and 8-bit indexed.
