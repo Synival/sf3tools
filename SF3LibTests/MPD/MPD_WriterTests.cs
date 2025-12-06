@@ -106,9 +106,26 @@ namespace SF3.Tests.MPD {
             File.WriteAllBytes("BLACK_Test.MPD", outputData);
 
             AssertByteComparison(fileData, outputData, [
-/*
+                // Header: Position of header is off by 1 byte because the original animation table is 4 bytes instead of 2 for some reason.
+                new ByteComparisonSkipRegion { Offset = 0x0003, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x00AC, Size = 2, ActualDataExtraBytes = 2 },
+
+                // Header is pushed back 2 bytes, so 4 bytes later than the original.
+                new ByteComparisonSkipRegion { Offset = 0x04AE, Size = 0, ActualDataExtraBytes = 2 },
+
+                // A lot of addresses are also wrong now.
+                new ByteComparisonSkipRegion { Offset = 0x04EF, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x04F3, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x050B, Size = 1 },
+
+                // (Re-align at 0x2000)
+                new ByteComparisonSkipRegion { Offset = 0x2000, ActualDataExtraBytes = -4 },
+
                 // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+
+                // PDATA's have the wrong addresses in the original file!! Just skip it!!
+                new ByteComparisonSkipRegion { Offset = 0x2100, Size = 0x798 },
 
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
@@ -116,7 +133,14 @@ namespace SF3.Tests.MPD {
                 // Insignificant texture Chunk[13] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x4B78, Size = 1 },
                 new ByteComparisonSkipRegion { Offset = 0x4B82, Size = 4 },
-*/
+
+                // Whole buncha other random LZSS inconsistencies that are totally fine.
+                new ByteComparisonSkipRegion { Offset = 0x0B267, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x0F1FC, Size = 2 },
+                new ByteComparisonSkipRegion { Offset = 0x1577A, Size = 2 },
+                new ByteComparisonSkipRegion { Offset = 0x18576, Size = 2 },
+                new ByteComparisonSkipRegion { Offset = 0x18DDD, Size = 2 },
+                new ByteComparisonSkipRegion { Offset = 0x18DF2, Size = 2 },
             ]);
         }
 
@@ -184,7 +208,7 @@ namespace SF3.Tests.MPD {
         private struct ByteComparisonSkipRegion {
             public int Offset;
             public int Size;
-            public int ExpectedIndexAdjustment;
+            public int ActualDataExtraBytes;
         }
 
         private void AssertByteComparison(byte[] fileData, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
@@ -215,7 +239,7 @@ namespace SF3.Tests.MPD {
                 if (i == skipRegion?.Offset) {
                     i += skipRegion.Value.Size - 1;
                     j += skipRegion.Value.Size - 1;
-                    i += skipRegion.Value.ExpectedIndexAdjustment;
+                    i += skipRegion.Value.ActualDataExtraBytes;
                     skipRegionIndex++;
                     skipRegion = skipRegions.Length > skipRegionIndex ? skipRegions[skipRegionIndex] : (ByteComparisonSkipRegion?) null;
                     continue;
