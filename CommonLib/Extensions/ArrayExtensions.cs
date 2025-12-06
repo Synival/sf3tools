@@ -128,7 +128,6 @@ namespace CommonLib.Extensions {
         /// <summary>
         /// Converts an array of bytes divided into tile chunks into image data in column-major order.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <typeparam name="T">Type of array to convert.</typeparam>
         /// <param name="array">The 1D array to convert.</param>
         /// <param name="width">The width (first index) of the new 2D array.</param>
@@ -158,6 +157,39 @@ namespace CommonLib.Extensions {
                 for (var y = 0; y < tileHeight; y++)
                     for (var x = 0; x < tileWidth; x++)
                         newArray[tileX + x, tileY + y] = array[pos++];
+            }
+
+            return newArray;
+        }
+
+        /// <summary>
+        /// Converts a 2D array of bytes from a tilemap image to a 1D array of tile images, one after the other.
+        /// </summary>
+        /// <typeparam name="T">Type of array to convert.</typeparam>
+        /// <param name="array">The 1D array to convert.</param>
+        /// <returns>A new 1D array with data from the input 2D array converted into tile data.</returns>
+        /// <exception cref="ArgumentException">Thrown if width * height != array.Length, or width or height is not divisible tile width or height.</exception>
+        public static T[] FromTiles<T>(this T[,] array, int tileWidth, int tileHeight) {
+            int width  = array.GetLength(0);
+            int height = array.GetLength(1);
+            if (width % tileWidth != 0)
+                throw new ArgumentException($"{nameof(width)} ({width}) is not divisible by {nameof(tileWidth)} ({tileWidth})");
+            if (height % tileHeight != 0)
+                throw new ArgumentException($"{nameof(height)} ({height}) is not divisible by {nameof(tileHeight)} ({tileHeight})");
+
+            var newArray = new T[width * height];
+
+            var tileXCount = width  / tileWidth;
+            var tileYCount = height / tileHeight;
+            var tileCount = tileXCount * tileYCount;
+
+            int pos = 0;
+            for (var tile = 0; tile < tileCount; tile++) {
+                int tileX = (tile % tileXCount) * tileWidth;
+                int tileY = (tile / tileXCount) * tileHeight;
+                for (var y = 0; y < tileHeight; y++)
+                    for (var x = 0; x < tileWidth; x++)
+                        newArray[pos++] = array[tileX + x, tileY + y];
             }
 
             return newArray;

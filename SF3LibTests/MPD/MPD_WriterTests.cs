@@ -85,6 +85,41 @@ namespace SF3.Tests.MPD {
             ]);
         }
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_BLACK_CanBeLoaded() {
+            var originalFile = MakeFile(ScenarioType.Scenario1, "BLACK.MPD");
+            _ = RecreateMPD(originalFile);
+        }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_BLACK_ProducesSameData() {
+            var file = MakeFile(ScenarioType.Scenario1, "BLACK.MPD");
+            var fileData = file.Data.GetDataCopyOrReference();
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(file);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("BLACK_Test.MPD", outputData);
+
+            AssertByteComparison(fileData, outputData, [
+/*
+                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+
+                // Insignificant surface data Chunk[5] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
+
+                // Insignificant texture Chunk[13] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x4B78, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x4B82, Size = 4 },
+*/
+            ]);
+        }
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
