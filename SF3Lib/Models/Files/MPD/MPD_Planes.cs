@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using SF3.ByteData;
-using SF3.Models.Tables.MPD.Plane;
+﻿using System.Linq;
 using SF3.MPD;
 using SF3.Types;
 
@@ -15,10 +12,13 @@ namespace SF3.Models.Files.MPD {
         public void UpdateImages() {
             ITexture groundImage          = null;
             ITexture groundTileset        = null;
+            IMPD_PlaneTileAssignment groundTileAssignment = null;
             ITexture groundTiledImage     = null;
-            ITexture skyBoxImage          = null;
             ITexture backgroundImage      = null;
+
+            ITexture skyBoxImage          = null;
             ITexture foregroundTileset    = null;
+            IMPD_PlaneTileAssignment foregroundTileAssignment = null;
             ITexture foregroundTiledImage = null;
 
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
@@ -31,11 +31,15 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunks?.Any() == true) {
+            if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunks?.Length == 2) {
                 var palette = MPD_File.CreatePalette(0);
                 groundTileset = new MultiChunkTextureIndexed(MPD_File.GroundTilesetChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                groundTileAssignment = new MPD_GroundPlaneTileAssignment(
+                    MPD_File.GroundTileAssignmentChunks[0].PlaneTileTextureRowTable,
+                    MPD_File.GroundTileAssignmentChunks[1].PlaneTileTextureRowTable
+                );
 
-                var tiledGroundImageData = CreateTiledImageData(groundTileset, MPD_File.GroundTileAssignmentChunks.Select(x => x.PlaneTileTextureRowTable).ToArray(), 4);
+                var tiledGroundImageData = CreateTiledImageData(groundTileset, groundTileAssignment);
                 groundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
             }
 
@@ -48,118 +52,57 @@ namespace SF3.Models.Files.MPD {
             if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
                 var palette = MPD_File.CreatePalette(1);
                 foregroundTileset = new MultiChunkTextureIndexed(MPD_File.ForegroundTileChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
+                foregroundTileAssignment = new MPD_ForegroundPlaneTileAssignment(MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable);
 
-                var foregroundImageData = CreateTiledImageData(foregroundTileset, new PlaneTileTextureRowTable[] { MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable}, 1);
+                var foregroundImageData = CreateTiledImageData(foregroundTileset, foregroundTileAssignment);
                 foregroundTiledImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
             }
 
             GroundImage          = groundImage;
             GroundTileset        = groundTileset;
+            GroundTileAssignment = groundTileAssignment;
             GroundTiledImage     = groundTiledImage;
-            SkyBoxImage          = skyBoxImage;
             BackgroundImage      = backgroundImage;
+
+            SkyBoxImage          = skyBoxImage;
             ForegroundTileset    = foregroundTileset;
+            ForegroundTileAssignment = foregroundTileAssignment;
             ForegroundTiledImage = foregroundTiledImage;
         }
 
-        private byte[,] CreateTiledImageData(ITexture tiledGroundTileImage, PlaneTileTextureRowTable[] tileMaps, int blockCountX) {
-            const int c_tilesPerBlockX = 64;
+        private byte[,] CreateTiledImageData(ITexture tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
+            var outputImageData = new byte[tileAssignment.Width * 8, tileAssignment.Height * 8];
+            var inputImageData  = tilesetImage.ImageData8Bit;
 
-            var tileImageData = tiledGroundTileImage.ImageData8Bit;
-            var tileImageDataWidth  = tileImageData.GetLength(0);
-            var tileImageDataHeight = tileImageData.GetLength(1);
-
-            var tileCountX = tileImageDataWidth / 8;
-            var tileCountY = tileImageDataHeight / 8;
-            var tileCount = tileCountX * tileCountY;
-
-            var imageTileCountX = c_tilesPerBlockX * blockCountX;
-            var imageTileCountY = tileMaps.Sum(x => x.Length);
-            var outputImage = new byte[imageTileCountX * 8, imageTileCountY * 8];
-
-            // Precalculations for tile lookups
-            var tileInputX = new int[tileCount];
-            var tileInputY = new int[tileCount];
-            int pos = 0;
-            for (int y = 0; y < tileCountY; y++) {
-                for (int x = 0; x < tileCountX; x++) {
-                    tileInputX[pos]   = x * 8;
-                    tileInputY[pos++] = y * 8;
-                }
-            }
-
-/*
-            var tileDataPosMap = new int[imageTileCountX, imageTileCountY];
-            var tileAssignmentMap = new (int TilesetX, int TilesetY)[imageTileCountX, imageTileCountY];
-            int blockXMax = blockCountX * tileSize;
-            int tile = 0, tileInBlock = 0, blockX = 0, blockY = 0, tileInBlockX = 0, tileInBlockY = 0;
-            foreach (var tileMap in tileMaps) {
-                var data = tileMap.GetDataCopyOrReference();
-                for (var dataPos = 0; dataPos < data.Length - 1; tile++, tileInBlock++, tileInBlockX++) {
-                    // Reset some tile locations when we've reached the end of a block.
-                    if (tileInBlock == tilesPerBlock) {
-                        tileInBlock = 0;
-                        tileInBlockX = 0;
-                        tileInBlockY = 0;
-
-                        // Move ahead one block, wrapping when blockXMax is reached.
-                        blockX += tileSize;
-                        if (blockX == blockXMax) {
-                            blockX = 0;
-                            blockY += tileSize;
-                        }
-                    }
-                    // Make sure that tileInBlockX wraps.
-                    else if (tileInBlockX == tileSize) {
-                        tileInBlockX = 0;
-                        tileInBlockY++;
-                    }
-
-                    tileDataPosMap[tileInBlockX + blockX, tileInBlockY + blockY] = dataPos;
-
-                    var tileIndexValue = (data[dataPos] << 8) + data[dataPos + 1];
-                    dataPos += 2;
-                    var tileIndex = tileIndexValue / 2;
-                    if (tileIndex >= tileCount) {
-                        System.Diagnostics.Debug.WriteLine($"{dataPos:X4}: {tileIndex}");
-                        continue;
-                    }
-                    if (tileIndexValue % 2 == 1)
-                        ; // Wow!
-
-                    tileAssignmentMap[tileInBlockX + blockX, tileInBlockY + blockY] = (tileIndex % tileCountX, tileIndex / tileCountX);
-                }
-            }
-*/
-            for (int tileY = 0; tileY < imageTileCountY; tileY++) {
-                var tileMap = tileMaps[tileY / 128];
-                var tileMapRow = tileMap[tileY % 128];
-                for (int tileX = 0; tileX < imageTileCountX; tileX++) {
-                    var tileIndex = tileMapRow[tileX] / 2;
-                    var inputX = tileInputX[tileIndex];
-                    var inputY = tileInputY[tileIndex];
-
+            for (int tileY = 0; tileY < tileAssignment.Height; tileY++) {
+                var outputY = tileY * 8;
+                for (int tileX = 0; tileX < tileAssignment.Width; tileX++) {
                     var outputX = tileX * 8;
-                    var outputY = tileY * 8;
+
+                    var tilesetCoords = tileAssignment[(byte) tileX, (byte) tileY];
+                    var inputX = tilesetCoords.X * 8;
+                    var inputY = tilesetCoords.Y * 8;
 
                     for (int y = 0; y < 8; y++)
                         for (int x = 0; x < 8; x++)
-                            outputImage[outputX + x, outputY + y] = tileImageData[inputX + x, inputY + y];
+                            outputImageData[outputX + x, outputY + y] = inputImageData[inputX + x, inputY + y];
                 }
             }
 
-            return outputImage;
+            return outputImageData;
         }
 
         public IMPD_File MPD_File { get; }
 
         public ITexture GroundImage { get; private set; }
         public ITexture GroundTileset { get; private set; }
+        public IMPD_PlaneTileAssignment GroundTileAssignment { get; private set; }
         public ITexture GroundTiledImage { get; private set; }
         public ITexture BackgroundImage { get; private set; }
 
         public ITexture SkyBoxImage { get; private set; }
         public ITexture ForegroundTileset { get; private set; }
+        public IMPD_PlaneTileAssignment ForegroundTileAssignment { get; private set; }
         public ITexture ForegroundTiledImage { get; private set; }
     }
 }

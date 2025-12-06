@@ -15,6 +15,11 @@
         ITexture GroundTileset { get; }
 
         /// <summary>
+        /// Table of tileset indices for a tiled ground image. Must be 256x256.
+        /// </summary>
+        IMPD_PlaneTileAssignment GroundTileAssignment { get; }
+
+        /// <summary>
         /// Image generated using the GroundTileset and tileset assignment data. Must be 2048x2048 and 8-bit indexed.
         /// This image cannot be directly assigned.
         /// </summary>
@@ -34,6 +39,11 @@
         /// Tileset image used for a foregound plane (Ishahakat). Must be 512x256 and 8-bit indexed.
         /// </summary>
         ITexture ForegroundTileset { get; }
+
+        /// <summary>
+        /// Table of tileset indices for a tiled foreground image. Must be 64x32.
+        /// </summary>
+        IMPD_PlaneTileAssignment ForegroundTileAssignment { get; }
 
         /// <summary>
         /// Image generated using the ForegroundTileset and tileset assignment data. Must be 512x256 and 8-bit indexed.
