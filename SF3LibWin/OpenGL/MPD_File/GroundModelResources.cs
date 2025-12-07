@@ -25,18 +25,18 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (mpdFile?.Planes?.GroundImage != null && mpdFile.Flags.Bit_0x0400_HasGroundImage)
                 CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundImage, 65536.0f);
             else if (mpdFile?.Planes?.GroundTiledImage != null && mpdFile.Flags.Bit_0x1000_HasTileBasedGroundImage)
-                CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage, 128.0f);
+                CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage.TiledImage, 128.0f);
         }
 
         private void CreateGroundImageModel(IMPD_File mpdFile, ITexture texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
-            var settings = mpdFile.Settings;
+            var planes = mpdFile.Planes;
 
             var position = new Vector3(
-                settings.GroundX / 32.0f,
-                settings.GroundY / -32.0f,
-                settings.GroundZ / -32.0f
+                planes.GroundX / 32.0f,
+                planes.GroundY / -32.0f,
+                planes.GroundZ / -32.0f
             );
 
             // A lot of maps like MUCHUR.MPD and BEER.MPD have some pretty stupid offsets for their ground planes.

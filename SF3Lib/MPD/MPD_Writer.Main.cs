@@ -26,6 +26,7 @@ namespace SF3.MPD {
                 scenario,
                 mpd.Settings,
                 mpd.Flags,
+                mpd.Planes,
                 lightPalettePos,
                 lightPositionPos,
                 unknown1Pos,
@@ -51,6 +52,7 @@ namespace SF3.MPD {
             ScenarioType scenario,
             IMPD_Settings settings,
             IMPD_AllFlags flags,
+            IMPD_Planes planes,
             uint? lightPalettePos,
             uint? lightPositionPos,
             uint? unknown1Pos,
@@ -87,13 +89,13 @@ namespace SF3.MPD {
             WriteMPDPointer(textureAnimAltPos);
             WriteMPDPointer(palette1Pos ?? headerAddr);
             WriteMPDPointer(palette2Pos ?? headerAddr);
-            WriteShort(settings.GroundX);
-            WriteShort(settings.GroundY);
-            WriteShort(settings.GroundZ);
-            WriteShort(new CompressedFIXED(settings.GroundXRotation / 180.0f, 0).RawShort);
+            WriteShort(planes.GroundX);
+            WriteShort(planes.GroundY);
+            WriteShort(planes.GroundZ);
+            WriteShort(new CompressedFIXED(planes.GroundXRotation / 180.0f, 0).RawShort);
             WriteShort(settings.UnknownHeaderSetting);
-            WriteShort(settings.BackgroundX);
-            WriteShort(settings.BackgroundY);
+            WriteShort(planes.BackgroundX);
+            WriteShort(planes.BackgroundY);
             WriteMPDPointer(boundariesPos);
         }
     }

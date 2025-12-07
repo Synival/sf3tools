@@ -5,9 +5,9 @@ namespace SF3.MPD {
     public partial class MPD_Writer {
         public void WritePlaneChunks(IMPD_Planes planes) {
             // Write the background image.
-            var bgImage = planes.GroundImage ?? planes.GroundTileset ?? planes.BackgroundImage;
+            var bgImage = planes.GroundImage ?? planes.GroundTiledImage?.Tileset ?? planes.BackgroundImage;
             if (bgImage != null && bgImage.Width == 512 && bgImage.Height == 256 && bgImage.BytesPerPixel == 1) {
-                var data = (bgImage == planes.GroundTileset) ? bgImage.ImageData8Bit.FromTiles(8, 8) : bgImage.ImageData8Bit.To1DArrayTransposed();
+                var data = (bgImage == planes.GroundTiledImage?.Tileset) ? bgImage.ImageData8Bit.FromTiles(8, 8) : bgImage.ImageData8Bit.To1DArrayTransposed();
                 WriteCompressedChunk(writer => writer.WriteBytes(data, 0x00000, 0x10000));
                 WriteCompressedChunk(writer => writer.WriteBytes(data, 0x10000, 0x10000));
             }
@@ -17,15 +17,15 @@ namespace SF3.MPD {
             }
 
             // 1/2 of ground tile assignments are written here.
-            if (planes.GroundTileAssignment != null)
-                WriteTileAssignmentChunk(planes.GroundTileAssignment, startBlock: 0, 8);
+            if (planes.GroundTiledImage?.TileAssignment != null)
+                WriteTileAssignmentChunk(planes.GroundTiledImage.TileAssignment, startBlock: 0, 8);
             else
                 WriteEmptyChunk();
 
             // Write the background image.
-            var fgImage = planes.SkyBoxImage ?? planes.ForegroundTileset;
+            var fgImage = planes.SkyBoxImage ?? planes.ForegroundTiledImage?.Tileset;
             if (fgImage != null && fgImage.Width == 512 && fgImage.Height == 256 && fgImage.BytesPerPixel == 1) {
-                var data = (fgImage == planes.ForegroundTileset) ? fgImage.ImageData8Bit.FromTiles(8, 8) : fgImage.ImageData8Bit.To1DArrayTransposed();
+                var data = (fgImage == planes.ForegroundTiledImage?.Tileset) ? fgImage.ImageData8Bit.FromTiles(8, 8) : fgImage.ImageData8Bit.To1DArrayTransposed();
                 WriteCompressedChunk(writer => writer.WriteBytes(data, 0x00000, 0x10000));
                 WriteCompressedChunk(writer => writer.WriteBytes(data, 0x10000, 0x10000));
             }
@@ -35,11 +35,11 @@ namespace SF3.MPD {
             }
 
             // 2/2 of ground tile assignments are written here.
-            if (planes.GroundTileAssignment != null)
-                WriteTileAssignmentChunk(planes.GroundTileAssignment, startBlock: 8, 16);
+            if (planes.GroundTiledImage?.TileAssignment != null)
+                WriteTileAssignmentChunk(planes.GroundTiledImage.TileAssignment, startBlock: 8, 16);
             // Foreground tile assignment shares the same chunk.
-            else if (planes.ForegroundTileAssignment != null)
-                WriteTileAssignmentChunk(planes.ForegroundTileAssignment, startBlock: 0, 1);
+            else if (planes.ForegroundTiledImage?.TileAssignment != null)
+                WriteTileAssignmentChunk(planes.ForegroundTiledImage.TileAssignment, startBlock: 0, 1);
             else
                 WriteEmptyChunk();
         }

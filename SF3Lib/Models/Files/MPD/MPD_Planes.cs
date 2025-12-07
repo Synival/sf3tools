@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using SF3.Models.Structs.MPD.Plane;
 using SF3.MPD;
 using SF3.Types;
 
@@ -10,99 +11,127 @@ namespace SF3.Models.Files.MPD {
         }
 
         public void UpdateImages() {
-            ITexture groundImage          = null;
-            ITexture groundTileset        = null;
-            IMPD_PlaneTileAssignment groundTileAssignment = null;
-            ITexture groundTiledImage     = null;
-            ITexture backgroundImage      = null;
-
-            ITexture skyBoxImage          = null;
-            ITexture foregroundTileset    = null;
-            IMPD_PlaneTileAssignment foregroundTileAssignment = null;
-            ITexture foregroundTiledImage = null;
-
+            // Set the ground plane.
+            ITexture groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 try {
-                    var palette = MPD_File.CreatePalette(0);
-                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette);
+                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
                 }
                 catch {
                     // TODO: what to do here??
                 }
             }
+            GroundImage = groundImage;
 
+            // Set the tiled ground plane.
+            IMPD_TiledPlane groundTiledImage = null;
             if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunks?.Length == 2) {
-                var palette = MPD_File.CreatePalette(0);
-                groundTileset = new MultiChunkTextureIndexed(MPD_File.GroundTilesetChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
-                groundTileAssignment = new MPD_GroundPlaneTileAssignment(
-                    MPD_File.GroundTileAssignmentChunks[0].PlaneTileTextureRowTable,
-                    MPD_File.GroundTileAssignmentChunks[1].PlaneTileTextureRowTable
-                );
-
-                var tiledGroundImageData = CreateTiledImageData(groundTileset, groundTileAssignment);
-                groundTiledImage = new TextureIndexed(0, 0, 0, 0, tiledGroundImageData, TexturePixelFormat.Palette1, palette, false);
-            }
-
-            if (MPD_File.SkyBoxChunkDatas?.Any() == true)
-                skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, MPD_File.CreatePalette(1));
-
-            if (MPD_File.BackgroundChunkDatas?.Any() == true)
-                backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
-
-            if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
-                var palette = MPD_File.CreatePalette(1);
-                foregroundTileset = new MultiChunkTextureIndexed(MPD_File.ForegroundTileChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, palette, true);
-                foregroundTileAssignment = new MPD_ForegroundPlaneTileAssignment(MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable);
-
-                var foregroundImageData = CreateTiledImageData(foregroundTileset, foregroundTileAssignment);
-                foregroundTiledImage = new TextureIndexed(0, 0, 0, 0, foregroundImageData, TexturePixelFormat.Palette2, palette, true);
-            }
-
-            GroundImage          = groundImage;
-            GroundTileset        = groundTileset;
-            GroundTileAssignment = groundTileAssignment;
-            GroundTiledImage     = groundTiledImage;
-            BackgroundImage      = backgroundImage;
-
-            SkyBoxImage          = skyBoxImage;
-            ForegroundTileset    = foregroundTileset;
-            ForegroundTileAssignment = foregroundTileAssignment;
-            ForegroundTiledImage = foregroundTiledImage;
-        }
-
-        private byte[,] CreateTiledImageData(ITexture tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
-            var outputImageData = new byte[tileAssignment.Width * 8, tileAssignment.Height * 8];
-            var inputImageData  = tilesetImage.ImageData8Bit;
-
-            for (int tileY = 0; tileY < tileAssignment.Height; tileY++) {
-                var outputY = tileY * 8;
-                for (int tileX = 0; tileX < tileAssignment.Width; tileX++) {
-                    var outputX = tileX * 8;
-
-                    var tilesetCoords = tileAssignment[(byte) tileX, (byte) tileY];
-                    var inputX = tilesetCoords.X * 8;
-                    var inputY = tilesetCoords.Y * 8;
-
-                    for (int y = 0; y < 8; y++)
-                        for (int x = 0; x < 8; x++)
-                            outputImageData[outputX + x, outputY + y] = inputImageData[inputX + x, inputY + y];
+                if ((groundTiledImage = GroundTiledImage) != null)
+                    ((TiledImagePlane) GroundTiledImage).UpdateImages();
+                else {
+                    try {
+                        groundTiledImage = new TiledImagePlane(
+                            MPD_File.GroundTilesetChunkDatas[0].DecompressedData,
+                            MPD_File.GroundTilesetChunkDatas[1].DecompressedData,
+                            new MPD_GroundPlaneTileAssignment(
+                                MPD_File.GroundTileAssignmentChunks[0].PlaneTileTextureRowTable,
+                                MPD_File.GroundTileAssignmentChunks[1].PlaneTileTextureRowTable
+                            ),
+                            TexturePixelFormat.Palette1,
+                            () => MPD_File.CreatePalette(0)
+                        );
+                    }
+                    catch {
+                        // TODO: what to do here??
+                    }
                 }
             }
+            GroundTiledImage = groundTiledImage;
 
-            return outputImageData;
+            // Set the background image (Ishahakat's room).
+            ITexture backgroundImage = null;
+            if (MPD_File.BackgroundChunkDatas?.Any() == true) {
+                try {
+                    backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
+                }
+                catch {
+                    // TODO: what to do here??
+                }
+            }
+            BackgroundImage = backgroundImage;
+
+            // Set the cutscene/battle skybox.
+            ITexture skyBoxImage = null;
+            if (MPD_File.SkyBoxChunkDatas?.Any() == true) {
+                try {
+                    skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, MPD_File.CreatePalette(1));
+                }
+                catch {
+                    // TODO: what to do here??
+                }
+            }
+            SkyBoxImage = skyBoxImage;
+
+            // Set the foreground image (Ishahakat).
+            IMPD_TiledPlane foregroundTiledImage = null;
+            if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
+                if ((foregroundTiledImage = ForegroundTiledImage) != null)
+                    ((TiledImagePlane) ForegroundTiledImage).UpdateImages();
+                else {
+                    try {
+                        foregroundTiledImage = new TiledImagePlane(
+                            MPD_File.ForegroundTileChunkDatas[0].DecompressedData,
+                            MPD_File.ForegroundTileChunkDatas[1].DecompressedData,
+                            new MPD_ForegroundPlaneTileAssignment(MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable),
+                            TexturePixelFormat.Palette2,
+                            () => MPD_File.CreatePalette(1)
+                        );
+                    }
+                    catch {
+                        // TODO: what to do here??
+                    }
+                }
+            }
+            ForegroundTiledImage = foregroundTiledImage;
         }
 
         public IMPD_File MPD_File { get; }
 
         public ITexture GroundImage { get; private set; }
-        public ITexture GroundTileset { get; private set; }
-        public IMPD_PlaneTileAssignment GroundTileAssignment { get; private set; }
-        public ITexture GroundTiledImage { get; private set; }
+        public IMPD_TiledPlane GroundTiledImage { get; private set; }
         public ITexture BackgroundImage { get; private set; }
 
         public ITexture SkyBoxImage { get; private set; }
-        public ITexture ForegroundTileset { get; private set; }
-        public IMPD_PlaneTileAssignment ForegroundTileAssignment { get; private set; }
-        public ITexture ForegroundTiledImage { get; private set; }
+        public IMPD_TiledPlane ForegroundTiledImage { get; private set; }
+
+        public short GroundX {
+            get => MPD_File.MPDHeader.GroundX;
+            set => MPD_File.MPDHeader.GroundX = value;
+        }
+
+        public short GroundY {
+            get => MPD_File.MPDHeader.GroundY;
+            set => MPD_File.MPDHeader.GroundY = value;
+        }
+
+        public short GroundZ {
+            get => MPD_File.MPDHeader.GroundZ;
+            set => MPD_File.MPDHeader.GroundZ = value;
+        }
+
+        public float GroundXRotation {
+            get => MPD_File.MPDHeader.GroundXRotation;
+            set => MPD_File.MPDHeader.GroundXRotation = value;
+        }
+
+        public short BackgroundX {
+            get => MPD_File.MPDHeader.BackgroundX;
+            set => MPD_File.MPDHeader.BackgroundX = value;
+        }
+
+        public short BackgroundY {
+            get => MPD_File.MPDHeader.BackgroundY;
+            set => MPD_File.MPDHeader.BackgroundY = value;
+        }
     }
 }

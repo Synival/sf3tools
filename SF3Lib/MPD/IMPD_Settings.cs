@@ -69,38 +69,6 @@
         float ModelsViewAngleMax { get; set; }
 
         /// <summary>
-        /// Scene X position of the ground plane (in pixels), repeating every 512 for normal images and every 2048
-        /// (the full size of the surface grid) for tile-based images.
-        /// </summary>
-        short GroundX { get; set; }
-
-        /// <summary>
-        /// Scene Y position of the ground plane.
-        /// </summary>
-        short GroundY { get; set; }
-
-        /// <summary>
-        /// Scene Z position of the ground plane (in pixels), repeating every 256 for nomal images and every 2048
-        /// (the full size of the surface grid) for tile-based images.
-        /// </summary>
-        short GroundZ { get; set; }
-
-        /// <summary>
-        /// X-axis rotation of the ground plane (in degrees). Usually -90, but is 0 in Scenario 3 TODI00.MPD.
-        /// </summary>
-        float GroundXRotation { get; set; }
-
-        /// <summary>
-        /// Screen X position of the skybox (in pixels), repeating every 512.
-        /// </summary>
-        short BackgroundX { get; set; }
-
-        /// <summary>
-        /// Screen Y position of the skybox (in pixels), repeating every 256.
-        /// </summary>
-        short BackgroundY { get; set; }
-
-        /// <summary>
         /// Some unknown value. Seems to usually be small and negative (~ -0x30).
         /// </summary>
         short UnknownHeaderSetting { get; set; }

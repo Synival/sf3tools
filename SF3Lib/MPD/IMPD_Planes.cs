@@ -10,20 +10,10 @@
         ITexture GroundImage { get; }
 
         /// <summary>
-        /// Tileset image used for a tiled ground plane. Must be 512x256 and 8-bit indexed.
+        /// Tiled image used for ground plane. Typically used for towns. Resulting image is 2048x2048 with a 256x256
+        /// tile assignment map.
         /// </summary>
-        ITexture GroundTileset { get; }
-
-        /// <summary>
-        /// Table of tileset indices for a tiled ground image. Must be 256x256.
-        /// </summary>
-        IMPD_PlaneTileAssignment GroundTileAssignment { get; }
-
-        /// <summary>
-        /// Image generated using the GroundTileset and tileset assignment data. Must be 2048x2048 and 8-bit indexed.
-        /// This image cannot be directly assigned.
-        /// </summary>
-        ITexture GroundTiledImage { get; }
+        IMPD_TiledPlane GroundTiledImage { get; }
 
         /// <summary>
         /// Image used for the background plane (Ishahakat's room). Must be 512x256 and 8-bit indexed.
@@ -36,19 +26,40 @@
         ITexture SkyBoxImage { get; }
 
         /// <summary>
-        /// Tileset image used for a foregound plane (Ishahakat). Must be 512x256 and 8-bit indexed.
+        /// Tiled image used for foregrounds (Ishahakat). Resulting image is 512x256 with a 64x32 tile assignment map.
         /// </summary>
-        ITexture ForegroundTileset { get; }
+        IMPD_TiledPlane ForegroundTiledImage { get; }
 
         /// <summary>
-        /// Table of tileset indices for a tiled foreground image. Must be 64x32.
+        /// Scene X position of the ground plane (in pixels), repeating every 512 for normal images and every 2048
+        /// (the full size of the surface grid) for tile-based images.
         /// </summary>
-        IMPD_PlaneTileAssignment ForegroundTileAssignment { get; }
+        short GroundX { get; set; }
 
         /// <summary>
-        /// Image generated using the ForegroundTileset and tileset assignment data. Must be 512x256 and 8-bit indexed.
-        /// This image cannot be directly assigned.
+        /// Scene Y position of the ground plane.
         /// </summary>
-        ITexture ForegroundTiledImage { get; }
+        short GroundY { get; set; }
+
+        /// <summary>
+        /// Scene Z position of the ground plane (in pixels), repeating every 256 for nomal images and every 2048
+        /// (the full size of the surface grid) for tile-based images.
+        /// </summary>
+        short GroundZ { get; set; }
+
+        /// <summary>
+        /// X-axis rotation of the ground plane (in degrees). Usually -90, but is 0 in Scenario 3 TODI00.MPD.
+        /// </summary>
+        float GroundXRotation { get; set; }
+
+        /// <summary>
+        /// Screen X position of the skybox (in pixels), repeating every 512.
+        /// </summary>
+        short BackgroundX { get; set; }
+
+        /// <summary>
+        /// Screen Y position of the skybox (in pixels), repeating every 256.
+        /// </summary>
+        short BackgroundY { get; set; }
     }
 }
