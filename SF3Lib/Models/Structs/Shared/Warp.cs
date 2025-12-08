@@ -14,9 +14,8 @@ namespace SF3.Models.Structs.Shared {
             NameGetterContext = nameGetterContext;
             IsBattle = isBattle;
 
-            Name = "Warp_" + MapName + "_" + (WarpID + 1).ToString("D2");
-
             _rawDataAddr = Address + 0x00; // 4 bytes
+            Name = "Warp_" + MapName + "_" + (WarpID + 1).ToString("D2");
         }
 
         public Warp PrevWarp { get; }
