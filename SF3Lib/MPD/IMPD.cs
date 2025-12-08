@@ -32,5 +32,10 @@ namespace SF3.MPD {
         /// Collection of specific plane types (ground, tiled ground, battle skybox, scene skybox, background, foreground).
         /// </summary>
         IMPD_Planes Planes { get; }
+
+        /// <summary>
+        /// Collection of all collision lines in the MPD.
+        /// </summary>
+        IMPD_Collisions Collisions { get; }
     }
 }

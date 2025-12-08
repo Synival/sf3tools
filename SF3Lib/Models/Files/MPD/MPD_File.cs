@@ -671,8 +671,11 @@ namespace SF3.Models.Files.MPD {
                 tables.AddRange(ForegroundTileAssignmentChunk.Tables);
             }
 
-            // Add some images.
+            // Add an abstract representation of planes.
             Planes = new MPD_Planes(this);
+
+            // Add an abstract representation of collision lines.
+            Collisions = new MPD_Collisions(this);
 
             return tables.ToArray();
         }
@@ -1661,6 +1664,7 @@ namespace SF3.Models.Files.MPD {
         public int ForegroundTileAssignmentChunkIndex { get; }
 
         public IMPD_Planes Planes { get; private set; }
+        public IMPD_Collisions Collisions { get; private set; }
 
         public static bool UpdateChunkTableOnChunkResize { get; set; } = true;
         public static bool RebuildChunkTableOnFinish { get; set; } = true;
