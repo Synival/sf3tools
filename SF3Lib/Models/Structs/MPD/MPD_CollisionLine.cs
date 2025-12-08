@@ -10,6 +10,9 @@ namespace SF3.Models.Structs.MPD {
             PointTable = pointTable;
         }
 
+        public override string ToString()
+            => $"({X1,4}, {Y1,4}), ({X2,4}, {Y2,4}) (Angle={Angle,7:0.00}) (Unknown={Tag,2})" + (Flag2XXToDisable > 0 ? $" (Flag={0x200 + Flag2XXToDisable:X2})" : "");
+
         public short X1 {
             get => Point1.X;
             set => Point1.X = value;
@@ -28,6 +31,21 @@ namespace SF3.Models.Structs.MPD {
         public short Y2 {
             get => Point2.Y;
             set => Point2.Y = value;
+        }
+
+        public float Angle {
+            get => Line.Angle;
+            set => Line.Angle = value;
+        }
+
+        public byte Flag2XXToDisable {
+            get => Line.IfFlagIn2XXOff;
+            set => Line.IfFlagIn2XXOff = value;
+        }
+
+        public byte Tag {
+            get => Line.Tag;
+            set => Line.Tag = value;
         }
 
         public CollisionLine Line { get; }

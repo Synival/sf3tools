@@ -1,4 +1,5 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Types;
 
@@ -7,14 +8,14 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _point1Addr;
         private readonly int _point2Addr;
         private readonly int _angleAddr;
-        private readonly int _unknown0x06Addr;
+        private readonly int _tagAddr;
         private readonly int _ifFlag2XXOffAddr;
 
         public CollisionLine(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x08) {
             _point1Addr   = Address + 0x00; // 2 bytes
             _point2Addr   = Address + 0x02; // 2 bytes
             _angleAddr    = Address + 0x04; // 2 bytes
-            _unknown0x06Addr = Address + 0x06; // 1 byte
+            _tagAddr      = Address + 0x06; // 1 byte
             _ifFlag2XXOffAddr = Address + 0x07; // 1 byte
         }
 
@@ -33,17 +34,17 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_angleAddr), displayOrder: 2, displayFormat: "X4")]
-        public ushort Angle {
-            get => (ushort) Data.GetWord(_angleAddr);
-            set => Data.SetWord(_angleAddr, value);
+        [TableViewModelColumn(addressField: nameof(_angleAddr), displayOrder: 2, minWidth: 100)]
+        public float Angle {
+            get => Data.GetCompressedFIXED(_angleAddr).Float * 180.0f;
+            set => Data.SetCompressedFIXED(_angleAddr, new CompressedFIXED(value / 180.0f, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_unknown0x06Addr), displayOrder: 3, displayName: "+0x06 (Order?)", displayFormat: "X2")]
-        public byte Unknown0x06 {
-            get => (byte) Data.GetByte(_unknown0x06Addr);
-            set => Data.SetByte(_unknown0x06Addr, value);
+        [TableViewModelColumn(addressField: nameof(_tagAddr), displayOrder: 3, displayFormat: "X2")]
+        public byte Tag {
+            get => (byte) Data.GetByte(_tagAddr);
+            set => Data.SetByte(_tagAddr, value);
         }
 
         [BulkCopy]
