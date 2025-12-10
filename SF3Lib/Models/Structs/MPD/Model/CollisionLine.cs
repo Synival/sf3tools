@@ -42,6 +42,22 @@ namespace SF3.Models.Structs.MPD.Model {
             set => Data.SetWord(_point2Addr, value);
         }
 
+        public IMPD_CollisionPoint Point1 {
+            get {
+                var index = Point1Index;
+                return (index >= 0 && index < PointTable.Length) ? PointTable[index] : null;
+            }
+            set => Point1Index = (ushort) ((value as CollisionPoint)?.ID ?? 0);
+        }
+
+        public IMPD_CollisionPoint Point2 {
+            get {
+                var index = Point2Index;
+                return (index >= 0 && index < PointTable.Length) ? PointTable[index] : null;
+            }
+            set => Point2Index = (ushort) ((value as CollisionPoint)?.ID ?? 0);
+        }
+
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleAddr), displayOrder: 2, minWidth: 100)]
         public float Angle {
@@ -71,22 +87,6 @@ namespace SF3.Models.Structs.MPD.Model {
                 return (flag200 == 0) ? (int?) null : flag200 + 0x200;
             }
             set => Flag2XXToDisable = (value >= 0x200 && value <= 0x2FF) ? (byte) (value - 0x200) : (byte) 0;
-        }
-
-        public CollisionPoint Point1 {
-            get {
-                var index = Point1Index;
-                return (index >= 0 && index < PointTable.Length) ? PointTable[index] : null;
-            }
-            set => Point1Index = (ushort) (value?.ID ?? 0);
-        }
-
-        public CollisionPoint Point2 {
-            get {
-                var index = Point2Index;
-                return (index >= 0 && index < PointTable.Length) ? PointTable[index] : null;
-            }
-            set => Point2Index = (ushort) (value?.ID ?? 0);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 5f, minWidth: 40)]

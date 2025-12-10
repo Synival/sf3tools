@@ -12,9 +12,11 @@ namespace SF3.Models.Structs.MPD {
                 ? (ModelChunk) mpdFile.ModelCollections.Values.FirstOrDefault(x => x.Collection == Types.CollectionType.Primary)
                 : null;
 
-            Lines = modelsChunk?.CollisionLineTable;
+            Points = (IEnumerable<IMPD_CollisionPoint>) (modelsChunk?.CollisionPointTable) ?? new IMPD_CollisionPoint[0];
+            Lines  = (IEnumerable<IMPD_CollisionLine>)  (modelsChunk?.CollisionLineTable)  ?? new IMPD_CollisionLine[0];
         }
 
+        public IEnumerable<IMPD_CollisionPoint> Points { get; }
         public IEnumerable<IMPD_CollisionLine> Lines { get; }
 
         public IMPD_File MPD_File { get; }

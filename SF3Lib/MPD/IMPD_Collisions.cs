@@ -6,6 +6,11 @@ namespace SF3.MPD {
     /// </summary>
     public interface IMPD_Collisions {
         /// <summary>
+        /// The set of points used to form lines.
+        /// </summary>
+        IEnumerable<IMPD_CollisionPoint> Points { get; }
+
+        /// <summary>
         /// The set of collision lines for the map.
         /// </summary>
         IEnumerable<IMPD_CollisionLine> Lines { get; }
