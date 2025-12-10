@@ -2,15 +2,16 @@
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Tables.MPD.Model;
+using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class CollisionLine : Struct {
+    public class CollisionLine : Struct, IMPD_CollisionLine {
         private readonly int _point1Addr;
         private readonly int _point2Addr;
         private readonly int _angleAddr;
         private readonly int _tagAddr;
-        private readonly int _ifFlag2XXOffAddr;
+        private readonly int _flag2XXToDisableAddr;
 
         public CollisionLine(IByteData data, int id, string name, int address, CollisionPointTable pointTable) : base(data, id, name, address, 0x08) {
             PointTable = pointTable;
@@ -19,11 +20,11 @@ namespace SF3.Models.Structs.MPD.Model {
             _point2Addr   = Address + 0x02; // 2 bytes
             _angleAddr    = Address + 0x04; // 2 bytes
             _tagAddr      = Address + 0x06; // 1 byte
-            _ifFlag2XXOffAddr = Address + 0x07; // 1 byte
+            _flag2XXToDisableAddr = Address + 0x07; // 1 byte
         }
 
         public override string ToString()
-            => $"({X1,4}, {Y1,4}), ({X2,4}, {Y2,4}) (Angle={Angle,7:0.00}) (Unknown={Tag,2})" + (IfFlagOff.HasValue ? $" (Flag={IfFlagOff.Value:X2})" : "");
+            => $"({X1,4}, {Y1,4}), ({X2,4}, {Y2,4}) (Angle={Angle,7:0.00}) (Unknown={Tag,2})" + (FlagToDisable.HasValue ? $" (Flag={FlagToDisable.Value:X2})" : "");
 
         public CollisionPointTable PointTable { get; }
 
@@ -56,19 +57,20 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_ifFlag2XXOffAddr), displayOrder: 4, displayFormat: "X2")]
-        public byte IfFlagIn2XXOff {
-            get => (byte) Data.GetByte(_ifFlag2XXOffAddr);
-            set => Data.SetByte(_ifFlag2XXOffAddr, value);
+        [TableViewModelColumn(addressField: nameof(_flag2XXToDisableAddr), displayOrder: 4, displayFormat: "X2")]
+        public byte Flag2XXToDisable {
+            get => (byte) Data.GetByte(_flag2XXToDisableAddr);
+            set => Data.SetByte(_flag2XXToDisableAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 4.1f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
-        public int? IfFlagOff {
+        public int? FlagToDisable {
             get {
-                var flag200 = IfFlagIn2XXOff;
+                var flag200 = Flag2XXToDisable;
                 return (flag200 == 0) ? (int?) null : flag200 + 0x200;
             }
+            set => Flag2XXToDisable = (value >= 0x200 && value <= 0x2FF) ? (byte) (value - 0x200) : (byte) 0;
         }
 
         public CollisionPoint Point1 {

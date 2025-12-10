@@ -1,9 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SF3.MPD {
+﻿namespace SF3.MPD {
     public interface IMPD_CollisionLine {
+        /// <summary>
+        /// Index of the point used for (X1, Y1).
+        /// </summary>
+        ushort Point1Index { get; set; }
+
+        /// <summary>
+        /// Index of the point used for (X2, Y2).
+        /// </summary>
+        ushort Point2Index { get; set; }
+
         /// <summary>
         /// X component of the first point of the line.
         /// </summary>
@@ -30,9 +36,10 @@ namespace SF3.MPD {
         float Angle { get; set; }
 
         /// <summary>
-        /// Lower two digits of the 2XX flag that, when on, disables this collision line.
+        /// The flag that, when on, disables this collision line.
+        /// If set, must be between 0x201 and 0x2FF (inclusive).
         /// </summary>
-        byte Flag2XXToDisable { get; set; }
+        int? FlagToDisable { get; set; }
 
         /// <summary>
         /// Value that seems to follow an order of lines but is sometimes very arbitrary.
