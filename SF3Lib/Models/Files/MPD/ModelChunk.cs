@@ -157,7 +157,6 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (ModelsHeader != null) {
-                var highestLineIndex = -1;
                 if (ModelsHeader.CollisionBlocksOffset != 0 &&
                     ModelsHeader.CollisionBlocksOffset != 0xDEADADD0 && /* found in some beta maps */
                     (ModelsHeader.CollisionBlocksOffset & 0xF000000) != 0xF000000 /* SHIP2.MPD */
@@ -174,8 +173,6 @@ namespace SF3.Models.Files.MPD {
                                 if (addr > 0) {
                                     var name = $"CollisionBlockLineIndexTable[{x}][{y}] (0x{addr:X})";
                                     CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk(addr));
-                                    if (CollisionLineIndexTablesByBlock[pos].Length > 0)
-                                        highestLineIndex = Math.Max(highestLineIndex, CollisionLineIndexTablesByBlock[pos].Max(li => li.LineIndex));
                                 }
                             }
                             catch {
@@ -197,7 +194,7 @@ namespace SF3.Models.Files.MPD {
                             var pointCount = (int) (CollisionLinesHeader.LinesOffset - CollisionLinesHeader.PointsOffset) / 4;
                             CollisionPointTable = CollisionPointTable.Create(Data, "CollisionPoints", (int) GetOffsetInChunk(CollisionLinesHeader.PointsOffset), pointCount);
 
-                            var lineCount = highestLineIndex + 1;
+                            var lineCount = (int) (ModelsHeader.CollisionBlocksOffset - CollisionLinesHeader.LinesOffset) / 0x08;
                             CollisionLineTable  = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount, CollisionPointTable);
                         }
                     }
