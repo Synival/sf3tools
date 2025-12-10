@@ -198,7 +198,7 @@ namespace SF3.Models.Files.MPD {
                             CollisionPointTable = CollisionPointTable.Create(Data, "CollisionPoints", (int) GetOffsetInChunk(CollisionLinesHeader.PointsOffset), pointCount);
 
                             var lineCount = highestLineIndex + 1;
-                            CollisionLineTable  = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount);
+                            CollisionLineTable  = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount, CollisionPointTable);
                         }
                     }
                     catch {
