@@ -284,7 +284,7 @@ namespace SF3.Win.Controls {
             _skyBoxModel?.Update(MPD_File);
             _gradients?.Update(MPD_File);
             _boundaryModels?.Update(MPD_File);
-            _collisionModels?.Update(MPD_File);
+            _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
 
             Invalidate();
         }
