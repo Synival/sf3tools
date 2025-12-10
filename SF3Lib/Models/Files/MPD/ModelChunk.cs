@@ -192,19 +192,14 @@ namespace SF3.Models.Files.MPD {
                 ) {
                     CollisionLinesHeader = new CollisionLinesHeader(Data, 0, "CollisionLinesHeader", (int) GetOffsetInChunk(ModelsHeader.CollisionLinesHeaderOffset));
 
-                    var lineCount = highestLineIndex + 1;
-                    var highestPointIndex = -1;
-
                     try {
-                        if (CollisionLinesHeader.LinesOffset != 0) {
-                            CollisionLineTable = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount);
-                            if (CollisionLineTable.Length > 0)
-                                highestPointIndex = CollisionLineTable.Max(x => Math.Max(x.Point1Index, x.Point2Index));
-                        }
-
-                        var pointCount = highestPointIndex + 1;
-                        if (CollisionLinesHeader.PointsOffset != 0)
+                        if (CollisionLinesHeader.PointsOffset != 0 && CollisionLinesHeader.LinesOffset != 0) {
+                            var pointCount = (int) (CollisionLinesHeader.LinesOffset - CollisionLinesHeader.PointsOffset) / 4;
                             CollisionPointTable = CollisionPointTable.Create(Data, "CollisionPoints", (int) GetOffsetInChunk(CollisionLinesHeader.PointsOffset), pointCount);
+
+                            var lineCount = highestLineIndex + 1;
+                            CollisionLineTable  = CollisionLineTable.Create(Data, "CollisionLines", (int) GetOffsetInChunk(CollisionLinesHeader.LinesOffset), lineCount);
+                        }
                     }
                     catch {
                         // TODO: what to do here?
