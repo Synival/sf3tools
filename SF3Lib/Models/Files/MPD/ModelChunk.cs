@@ -172,7 +172,7 @@ namespace SF3.Models.Files.MPD {
                                 var addr = row[x];
                                 if (addr > 0) {
                                     var name = $"CollisionBlockLineIndexTable[{x}][{y}] (0x{addr:X})";
-                                    CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk(addr));
+                                    CollisionLineIndexTablesByBlock[pos] = CollisionLineIndexTable.Create(Data, name, (int) GetOffsetInChunk(addr), x, y);
                                 }
                             }
                             catch {

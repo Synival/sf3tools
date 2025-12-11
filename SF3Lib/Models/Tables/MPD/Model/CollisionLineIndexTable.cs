@@ -3,11 +3,16 @@ using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class CollisionLineIndexTable : TerminatedTable<CollisionLineIndex> {
-        protected CollisionLineIndexTable(IByteData data, string name, int address) : base(data, name, address, 2, null) {
+        protected CollisionLineIndexTable(IByteData data, string name, int address, int blockX, int blockY) : base(data, name, address, 2, null) {
+            BlockX = blockX;
+            BlockY = blockY;
         }
 
-        public static CollisionLineIndexTable Create(IByteData data, string name, int address)
-            => Create(() => new CollisionLineIndexTable(data, name, address));
+        public int BlockX { get; }
+        public int BlockY { get; }
+
+        public static CollisionLineIndexTable Create(IByteData data, string name, int address, int blockX, int blockY)
+            => Create(() => new CollisionLineIndexTable(data, name, address, blockX, blockY));
 
         public override bool Load() {
             return Load(
