@@ -1,4 +1,6 @@
-﻿using CommonLib.Attributes;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Tables.MPD.Model;
@@ -13,8 +15,10 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _tagAddr;
         private readonly int _flag2XXToDisableAddr;
 
-        public CollisionLine(IByteData data, int id, string name, int address, CollisionPointTable pointTable) : base(data, id, name, address, 0x08) {
+        public CollisionLine(IByteData data, int id, string name, int address, CollisionPointTable pointTable, IEnumerable<CollisionLineIndexTable> blockLines)
+        : base(data, id, name, address, 0x08) {
             PointTable = pointTable;
+            BlockLines = blockLines;
 
             _point1Addr   = Address + 0x00; // 2 bytes
             _point2Addr   = Address + 0x02; // 2 bytes
@@ -24,9 +28,10 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public override string ToString()
-            => $"({X1,4}, {Y1,4}), ({X2,4}, {Y2,4}) (Angle={Angle,7:0.00}) (Unknown={Tag,2})" + (FlagToDisable.HasValue ? $" (Flag={FlagToDisable.Value:X2})" : "");
+            => $"({X1,4:X}, {Y1,4:X}), ({X2,4:X}, {Y2,4:X}) (Angle={Angle,7:0.00}) (Unknown={Tag,2})" + (FlagToDisable.HasValue ? $" (Flag={FlagToDisable.Value:X2})" : "");
 
         public CollisionPointTable PointTable { get; }
+        public IEnumerable<CollisionLineIndexTable> BlockLines { get; }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_point1Addr), displayOrder: 0, displayFormat: "X2")]
@@ -126,6 +131,24 @@ namespace SF3.Models.Structs.MPD.Model {
                 var point = Point2;
                 if (point != null)
                     point.Y = value;
+            }
+        }
+
+        public IEnumerable<(int X, int Y)> GetReferencingBlocks() {
+            return BlockLines
+                .Where(x => x.Rows.Any(y => y.LineIndex == ID))
+                .Select(x => (X: x.BlockX, Y: x.BlockY))
+                .ToArray();
+        }
+
+        [TableViewModelColumn(addressField: null, displayName: "Blocks", displayOrder: 9f, minWidth: 300)]
+        public string BlocksStr {
+            get {
+                return string.Join(" ", GetReferencingBlocks()
+                    .OrderBy(x => x.Y)
+                    .ThenBy(x => x.X)
+                    .Select(x => $"({x.X}, {x.Y})")
+                );
             }
         }
     }
