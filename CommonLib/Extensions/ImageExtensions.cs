@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using CommonLib.Imaging;
 
 namespace CommonLib.Extensions {
     public static class ImageExtensions {
         public static Bitmap CreateIndexedBitmap(this Image image) {
-            if (image.PixelFormat != PixelFormat.Indexed)
+            if (image.PixelFormat != PixelFormat.Format8bppIndexed)
                 throw new ArgumentException($"Bitmap pixel format ({image.PixelFormat}) should be 'Format8bppIndexed'");
 
             var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format8bppIndexed);
-            using (var graphics = Graphics.FromImage(bitmap)) {
-                graphics.DrawImage(image, 0, 0);
-                graphics.Flush();
-            }
             bitmap.SetPalette(image.GetPalette());
+
+            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            Marshal.Copy(image.GetDataIndexed(), 0, bitmapData.Scan0, bitmap.Width * bitmap.Height);
+            bitmap.UnlockBits(bitmapData);
+
             return bitmap;
         }
 
