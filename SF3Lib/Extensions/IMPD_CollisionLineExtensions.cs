@@ -4,7 +4,7 @@ using SF3.MPD;
 
 namespace SF3.Extensions {
     public static class IMPD_CollisionLineExtensions {
-        public static bool BlockShoukdCheck(this IMPD_CollisionLine line, int blockX, int blockY) {
+        public static bool BlockShouldCheck(this IMPD_CollisionLine line, int blockX, int blockY) {
             const short padding = 63;
 
             // Determine the boundaries of the block.
@@ -82,7 +82,7 @@ namespace SF3.Extensions {
             var blocks = new List<(int X, int Y)>();
             for (int y = 0; y < 16; y++)
                 for (int x = 0; x < 16; x++)
-                    if (line.BlockShoukdCheck(x, y))
+                    if (line.BlockShouldCheck(x, y))
                         blocks.Add((x, y));
             return new HashSet<(int X, int y)>(blocks);
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.SGL;
+using SF3.Extensions;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
@@ -35,8 +36,10 @@ namespace SF3.MPD {
                     WriteModelChunkModel(model, fileChunkAddr, ramChunkAddr);
 
             // The collision data is at the end.
-            WriteCollisionLinesSection(collisions, collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
-            WriteCollisionBlocks(collisionBlocksOffset, fileChunkAddr, ramChunkAddr);
+            AtOffset(collisionLinesHeaderOffset, pos => WriteUInt((uint) (pos - fileChunkAddr + ramChunkAddr)));
+            WriteCollisionLinesSection(collisions, fileChunkAddr, ramChunkAddr, out var linesWritten);
+            AtOffset(collisionBlocksOffset, pos => WriteUInt((uint) (pos - fileChunkAddr + ramChunkAddr)));
+            WriteCollisionBlocks(linesWritten, fileChunkAddr, ramChunkAddr);
         }
 
         public void WriteModelChunkInstance(IMPD_ModelInstance instance) {
@@ -207,9 +210,7 @@ namespace SF3.MPD {
             WriteUShort(attr.Dir);
         }
 
-        public void WriteCollisionLinesSection(IMPD_Collisions collisions, long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
-            AtOffset(ptrToOffset, curAddr => WriteUInt((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
-
+        public void WriteCollisionLinesSection(IMPD_Collisions collisions, int fileChunkAddr, int ramChunkAddr, out IMPD_CollisionLine[] linesWritten) {
             // Write a header. The points come first, then the lines.
             var pointsAddr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr) + 0x08;
             var linesAddr = pointsAddr + (uint) collisions.Points.Count() * 0x04;
@@ -218,7 +219,8 @@ namespace SF3.MPD {
             WriteUInt(linesAddr);
 
             WriteCollisionPoints(collisions.Points);
-            WriteCollisionLines(collisions.Points, collisions.Lines);
+            WriteCollisionLines(collisions.Points, collisions.Lines, out var linesWritten2);
+            linesWritten = linesWritten2;
         }
 
         public void WriteCollisionPoints(IEnumerable<IMPD_CollisionPoint> points) {
@@ -229,16 +231,17 @@ namespace SF3.MPD {
             }
         }
 
-        public void WriteCollisionLines(IEnumerable<IMPD_CollisionPoint> points, IEnumerable<IMPD_CollisionLine> lines) {
+        public void WriteCollisionLines(IEnumerable<IMPD_CollisionPoint> points, IEnumerable<IMPD_CollisionLine> lines, out IMPD_CollisionLine[] linesWritten) {
             // Map to retrieve indices from point references.
             var indicesForPoints = points
                 .Select((x, i) => (Point: x, Index: i))
                 .ToDictionary(x => x.Point, x => (ushort) x.Index);
 
+            var linesWrittenList = new List<IMPD_CollisionLine>();
             foreach (var line in lines) {
                 // Don't bother writing lines that don't have valid points or indices.
-                var index1 = indicesForPoints.TryGetValue(line.Point1, out var index1Out) ? (ushort?) index1Out: null;
-                var index2 = indicesForPoints.TryGetValue(line.Point2, out var index2Out) ? (ushort?) index2Out: null;
+                var index1 = indicesForPoints.TryGetValue(line.Point1, out var index1Out) ? (ushort?) index1Out : null;
+                var index2 = indicesForPoints.TryGetValue(line.Point2, out var index2Out) ? (ushort?) index2Out : null;
                 if (!index1.HasValue || !index2.HasValue)
                     continue;
 
@@ -247,23 +250,37 @@ namespace SF3.MPD {
                 WriteShort(new CompressedFIXED(line.Angle / 180.0f, 0).RawShort);
                 WriteByte(line.Tag);
                 WriteByte((line.FlagToDisable.HasValue && line.FlagToDisable.Value >= 0x201 && line.FlagToDisable.Value <= 0x2FF) ? (byte) (line.FlagToDisable & 0xFF) : (byte) 0);
+
+                linesWrittenList.Add(line);
             }
+
+            linesWritten = linesWrittenList.ToArray();
         }
 
-        public void WriteCollisionBlocks(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
-            AtOffset(ptrToOffset, curAddr => WriteUInt((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
-
-            // TODO: actually write the real blocks!
-            // 16 * 16 pointers
-            var blockAddr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr) + 0x400;
-            for (var i = 0; i < 0x100; i++) {
-                WriteUInt(blockAddr);
-                blockAddr += 2;
-            }
-
-            // 16 * 16 tables, terminated by 0xFFFF.
+        public void WriteCollisionBlocks(IEnumerable<IMPD_CollisionLine> lines, int fileChunkAddr, int ramChunkAddr) {
+            // Write placeholder pointers for 16 * 16 blocks.
+            var blocksPtr = (uint) CurrentOffset;
             for (var i = 0; i < 0x100; i++)
+                WriteUInt(0);
+
+            // We'll need the index for every line we want to write.
+            var linesWithIndex = lines.Select((x, i) => (Line: x, Index: (ushort) i)).ToArray();
+
+            // 16 * 16 tables, each terminated by 0xFFFF.
+            for (var i = 0; i < 0x100; i++) {
+                var blockX = i % 16;
+                var blockY = i / 16;
+                var linesIndicesForBlock = linesWithIndex
+                    .Where(x => x.Line.BlockShouldCheck(blockX, blockY))
+                    .Select(x => x.Index)
+                    .ToArray();
+
+                AtOffset(blocksPtr + (i * 0x04), pos => WriteUInt((uint) (pos - fileChunkAddr + ramChunkAddr)));
+                foreach (var lineIndex in linesIndicesForBlock)
+                    WriteUShort(lineIndex);
+
                 WriteUShort(0xFFFF);
+            }
         }
 
         private Dictionary<int, List<long>> _pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();

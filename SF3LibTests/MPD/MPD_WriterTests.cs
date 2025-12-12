@@ -193,7 +193,19 @@ namespace SF3.Tests.MPD {
             File.WriteAllBytes("HONJIN_Test.MPD", outputData);
 
             AssertByteComparison(fileData, outputData, [
-                // TODO: skip bogus LZSS stuff
+                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+
+                // Texture compression nonsense
+                new ByteComparisonSkipRegion { Offset = 0x7E9A, Size = 2 },
+
+                // Insignificant texture Chunk[13] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x12CD8, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x12CE2, Size = 4 },
+
+                // Image data LZSS issues
+                new ByteComparisonSkipRegion { Offset = 0x2042C, Size = 2 },
+                new ByteComparisonSkipRegion { Offset = 0x21560, Size = 2 },
             ]);
         }
 
