@@ -26,13 +26,13 @@ namespace SF3 {
             Duration    = duration;
             _data       = data;
             PixelFormat = format;
-            Palette     = palette;
+            _palette    = palette;
             ZeroIsTransparent = zeroIsTransparent;
             Tags        = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
             _hashPrefix = hashPrefix;
         }
 
-        private readonly byte[,] _data;
+        private byte[,] _data;
         private byte[] _bitmapDataARGB1555 = null;
         private byte[] _bitmapDataARGB8888 = null;
 
@@ -46,8 +46,29 @@ namespace SF3 {
         public int BytesPerPixel => 1;
         public TexturePixelFormat PixelFormat { get; }
 
-        public byte[,] ImageData8Bit => _data;
-        public ushort[,] ImageData16Bit => throw new NotSupportedException();
+        public byte[,] ImageData8Bit => (byte[,]) _data.Clone();
+        public void SetImageData8Bit(byte[,] data, Palette palette)  {
+            if (!CanSetImageData16Bit)
+                throw new NotSupportedException();
+            if (_data == data)
+                return;
+
+            var error = Validate8BitImageData(data, palette);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            _data               = data;
+            _palette            = palette;
+            _hash               = null;
+            _bitmapDataARGB8888 = null;
+            _bitmapDataARGB1555 = null;
+            ReplaceAction(_data, palette);
+        }
+
+        public ushort[,] ImageData16Bit {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
 
@@ -65,6 +86,9 @@ namespace SF3 {
             return _bitmapDataARGB8888;
         }
 
+        public string Validate8BitImageData(byte[,] data, Palette palette) => CanSetImageData8Bit ? ReplaceValidator(data, palette) : " Not supported";
+        public string Validate16BitImageData(ushort[,] data) => "Not applicable; 8-bit images cannot be set with 16-bit ABGR data";
+
         private string _hash = null;
         private readonly string _hashPrefix;
         public string Hash {
@@ -80,18 +104,26 @@ namespace SF3 {
         public Dictionary<TagKey, TagValue> Tags { get; }
 
         private Palette _palette = null;
-        public Palette Palette {
-            get => _palette;
-            set {
-                if (value != _palette) {
-                    _hash = null;
-                    _bitmapDataARGB1555 = null;
-                    _bitmapDataARGB8888 = null;
-                    _palette = value;
-                }
-            }
-        }
+        public Palette Palette => _palette;
 
         public bool ZeroIsTransparent { get; }
+
+        public virtual bool CanSetImageData8Bit => false;
+        public bool CanSetImageData16Bit => false;
+
+        /// <summary>
+        /// Checker to see if 8-bit indexed data can be set/imported.
+        /// </summary>
+        /// <param name="data">Data to set.</param>
+        /// <param name="palette">Palette to set. Set to 'null' to leave unchanged.</param>
+        /// <returns>Returns 'null' if no error was detected, otherwise returns an error string.</returns>
+        public virtual string ReplaceValidator(byte[,] data, Palette palette) => "Unimplemented";
+
+        /// <summary>
+        /// Action to perform when an the image data is set.
+        /// <param name="data">Data to set.</param>
+        /// <param name="palette">Palette to set. Set to 'null' to leave unchanged.</param>
+        /// </summary>
+        public virtual void ReplaceAction(byte[,] data, Palette palette) => throw new NotImplementedException();
     }
 }

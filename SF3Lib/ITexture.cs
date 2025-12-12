@@ -69,9 +69,16 @@ namespace SF3 {
         byte[,] ImageData8Bit { get; }
 
         /// <summary>
+        /// Sets the 8-bit indexed image data along with the palette.
+        /// </summary>
+        /// <param name="data">Data to set.</param>
+        /// <param name="palette">Palette to set.</param>
+        void SetImageData8Bit(byte[,] data, Palette palette);
+
+        /// <summary>
         /// Raw 16-bit image data in [x, y] order. Only usable when BytesPerPixel is 2.
         /// </summary>
-        ushort[,] ImageData16Bit { get; }
+        ushort[,] ImageData16Bit { get; set; }
 
         /// <summary>
         /// Image data for 16-bit ARGB1555 format. Cannot be set; it is based on the image data and PixelFormat.
@@ -110,6 +117,32 @@ namespace SF3 {
         /// <summary>
         /// The palette used for indexed images. Should be 'null' for non-indexed images.
         /// </summary>
-        Palette Palette { get; set; }
+        Palette Palette { get; }
+
+        /// <summary>
+        /// When 'true', the variable 'ImageData8Bit' can be set.
+        /// </summary>
+        bool CanSetImageData8Bit { get; }
+
+        /// <summary>
+        /// When 'true', the variable 'ImageData16Bit' can be set.
+        /// </summary>
+        bool CanSetImageData16Bit { get; }
+
+        /// <summary>
+        /// Checks 'data' and 'palette' to see if they're valid to be set for 'ImageData8Bit' / 'Palette'.
+        /// Returns a non-null value if 'data' or 'palette' is invalid.
+        /// </summary>
+        /// <param name="data">8-bit data to check for validity.</param>
+        /// <param name="palette">Palette for 8-bit data to set.</param>
+        /// <returns>Returns 'null' if 'data' and 'palette' is valid, or a string with an error if not.</returns>
+        string Validate8BitImageData(byte[,] data, Palette palette);
+
+        /// <summary>
+        /// Checks 'data' to see if it's valid to be set for 'ImageData16Bit'. Returns a non-null value if 'data' is invalid.
+        /// </summary>
+        /// <param name="data">16-bit data to check for validity.</param>
+        /// <returns>Returns 'null' if the data is valid, or a string with an error if not.</returns>
+        string Validate16BitImageData(ushort[,] data);
     }
 }
