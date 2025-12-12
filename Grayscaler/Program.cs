@@ -41,25 +41,25 @@ namespace Grayscaler {
                 var textures1 = (mpdFile.TextureChunks == null) ? [] : mpdFile.TextureChunks
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable)
-                    .Where(x => x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555)
+                    .Where(x => x.PixelFormat == TexturePixelFormat.ABGR1555)
                     .ToArray();
 
                 var textures2 = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations
                     .SelectMany(x => x.FrameTable)
                     .Where(x => x.FrameNum > 0)
-                    .Where(x => x.TextureIsLoaded && x.Texture.PixelFormat == TexturePixelFormat.ABGR1555)
+                    .Where(x => x.PixelFormat == TexturePixelFormat.ABGR1555)
                     .ToArray();
 
                 Console.WriteLine((textures1.Length + textures2.Length) + " textures");
 
                 // Transform every texture in ABGR1555 format to grayscale.
                 foreach (var tc in textures1)
-                    tc.ImageData16Bit = MakeTextureGrayscale(tc.Texture.ImageData16Bit);
+                    tc.ImageData16Bit = MakeTextureGrayscale(tc.ImageData16Bit);
 
                 foreach (var tc in textures2) {
                     // TODO: This shouldn't have to go through the trouble of finding the frameData
                     var frameData = mpdFile.Chunk3Frames.First(x => x.Offset == tc.CompressedImageDataOffset).Data.DecompressedData;
-                    var referenceTex = textures1.FirstOrDefault(x => x.ID == tc.TextureID)?.Texture;
+                    var referenceTex = textures1.FirstOrDefault(x => x.ID == tc.TextureID);
                     _ = tc.UpdateTextureABGR1555(frameData, MakeTextureGrayscale(tc.Texture.ImageData16Bit), referenceTex);
                 }
 

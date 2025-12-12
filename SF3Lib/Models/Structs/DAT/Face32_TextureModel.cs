@@ -15,7 +15,14 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
-        public override int ImageDataOffset => Data.GetDouble(_imageDataOffsetAddr);
+        public override int ImageDataOffset {
+            get => Data.GetDouble(_imageDataOffsetAddr);
+            set {
+                Data.SetDouble(_imageDataOffsetAddr, value);
+                InvalidateImage();
+            }
+        }
+
         public override bool HasImage => ImageDataOffset != -1;
         public override bool CanLoadImage => HasImage && !IsCompressed;
 

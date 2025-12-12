@@ -21,10 +21,10 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
-        public abstract int Width { get; }
+        public abstract int Width { get; set; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 1)]
-        public abstract int Height { get; }
+        public abstract int Height { get; set; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int StoredImageDataSize { get; private set; }
@@ -81,7 +81,7 @@ namespace SF3.Models.Structs.Shared {
             }
         }
 
-        public void InvalidateImage() {
+        public virtual void InvalidateImage() {
             _hash                        = null;
             _imageData8Bit               = null;
             _imageData16Bit              = null;
@@ -242,7 +242,7 @@ namespace SF3.Models.Structs.Shared {
 
         public abstract void OnSetImageData();
 
-        public abstract int ImageDataOffset { get; }
+        public abstract int ImageDataOffset { get; set; }
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
         public abstract Palette Palette { get; protected set; }

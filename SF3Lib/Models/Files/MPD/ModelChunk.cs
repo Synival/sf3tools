@@ -367,7 +367,6 @@ namespace SF3.Models.Files.MPD {
                         .Where(x => x.Collection == Collection)
                         .Select(x => x.TextureTable)
                         .SelectMany(x => x)
-                        .Select(x => x.Texture)
                         .ToArray();
                 }
                 return _textures;

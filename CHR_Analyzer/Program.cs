@@ -26,8 +26,9 @@ namespace CHR_Analyzer {
 
         private class TextureInfo {
             public TextureInfo(string imageHash, FrameRefSet frameRefs, ITextureData texture) {
+                ImageHash = imageHash;
                 FrameRefs = frameRefs;
-                Texture = texture;
+                Texture   = texture;
             }
 
             public string ImageHash { get; }

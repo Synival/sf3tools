@@ -742,7 +742,7 @@ namespace SF3.Models.Files.MPD {
 
                     var pixelFormat = ((frame.TextureID & 0x100) == 0x100) ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555;
                     var referenceTexID = ((frame.TextureID & 0x100) == 0x100) ? frame.TextureID - 0x100 : frame.TextureID;
-                    var referenceTex = GetTextureModelByID(referenceTexID)?.Texture;
+                    var referenceTex = GetTextureModelByID(referenceTexID);
 
                     if (existingFrame != null) {
                         frame.FetchAndCacheTexture(existingFrame.Data.DecompressedData, pixelFormat, GetPalette(pixelFormat), referenceTex);
@@ -797,7 +797,7 @@ namespace SF3.Models.Files.MPD {
                         var offset = ((ByteArraySegment) c3frame.Data.Data).Offset;
                         var affectedFrames = TextureAnimations.SelectMany(x => x.FrameTable).Where(x => x.CompressedImageDataOffset == offset).ToArray();
                         foreach (var frame in affectedFrames) {
-                            var referenceTex = GetTextureModelByID(frame.TextureID)?.Texture;
+                            var referenceTex = GetTextureModelByID(frame.TextureID);
                             frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.PixelFormat, GetPalette(frame.PixelFormat), referenceTex);
                         }
                     }
@@ -1428,14 +1428,12 @@ namespace SF3.Models.Files.MPD {
             var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .Where(x => x.TextureIsLoaded)
-                .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
+                .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x });
 
             var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureAnimations
                 .SelectMany(x => x.FrameTable)
                 .GroupBy(x => x.CompressedImageDataOffset)
                 .Select(x => x.First())
-                .Where(x => x.TextureIsLoaded)
                 .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
@@ -1488,7 +1486,7 @@ namespace SF3.Models.Files.MPD {
                     if (tm != null)
                         tm.ImageData16Bit = imageData;
                     else if (model is FrameModel fm) {
-                        var referenceTex = TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
+                        var referenceTex = TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID);
                         _ = fm.UpdateTextureABGR1555(Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, imageData, referenceTex);
                     }
                     else
@@ -1513,8 +1511,7 @@ namespace SF3.Models.Files.MPD {
             var textures1 = (TextureChunks == null) ? new Dictionary<string, ITextureData>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .Where(x => x.TextureIsLoaded)
-                .ToDictionary(x => x.ImportExportName, x => (ITextureData) x.Texture);
+                .ToDictionary(x => x.ImportExportName, x => (ITextureData) x);
 
             var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITextureData>() : TextureAnimations
                 .SelectMany(x => x.FrameTable)

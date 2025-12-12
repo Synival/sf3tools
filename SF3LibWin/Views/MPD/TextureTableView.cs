@@ -9,6 +9,6 @@ namespace SF3.Win.Views.MPD {
         : base(name, table, ngc, imageScale) {}
 
         protected override ITextureData GetTextureFromModel(TextureModel item)
-            => item?.Texture;
+            => item;
     }
 }

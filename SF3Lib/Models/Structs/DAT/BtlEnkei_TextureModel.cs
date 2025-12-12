@@ -19,7 +19,7 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
-        public override int ImageDataOffset => HasImage ? (PaletteImageOffset + 0x200) : 0;
+        public override int ImageDataOffset { get => HasImage ? (PaletteImageOffset + 0x200) : 0; set {} }
         public override bool HasImage => PaletteImageOffset != 0;
         public override bool CanLoadImage => HasImage;
         public override int PaletteOffset => PaletteImageOffset;
