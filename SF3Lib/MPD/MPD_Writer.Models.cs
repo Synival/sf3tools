@@ -108,6 +108,64 @@ namespace SF3.MPD {
             }
         }
 
+        public void WriteHeaderModels(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, out uint instanceTableOffset) {
+            var pdataPosByInstanceIndex = new Dictionary<int, uint>();
+            int index = -1;
+
+            // Write all models. Do it based on instances so we have a 1:1 models-to-instances relationship.
+            // TODO: (It doesn't really need to be 1:1 models to instances)
+            foreach (var instance in instances) {
+                index++;
+                var model = models.FirstOrDefault(x => x.ID == instance.ModelID);
+                if (model == null)
+                    continue;
+
+                // Write tables necessary for the PDATA
+                var verticesPos = (int) CurrentOffset;
+                WritePOINTs(model);
+                var polygonsPos = (int) CurrentOffset;
+                WritePOLYGONs(model);
+                var attributesPos = (int) CurrentOffset;
+                WriteATTRs(model, 0);
+
+                // Now write the PDATA
+                pdataPosByInstanceIndex[instance.ID] = (uint) CurrentOffset;
+                WriteMPDPointer(verticesPos);
+                WriteInt(model.Vertices.Count);
+                WriteMPDPointer(polygonsPos);
+                WriteInt(model.Faces.Count);
+                WriteMPDPointer(attributesPos);
+            }
+
+            // Write all instances.
+            instanceTableOffset = (uint) CurrentOffset;
+            index = -1;
+            foreach (var instance in instances) {
+                index++;
+                if (pdataPosByInstanceIndex.TryGetValue(index, out var pdataPos))
+                    WriteHeaderModelInstance(instance, pdataPos);
+            }
+
+            // Terminate with -- for some reason -- 28 empty bytes.
+            WriteBytes(new byte[0x1B]);
+        }
+
+        public void WriteHeaderModelInstance(IMPD_ModelInstance instance, uint pdataOffset) {
+            WriteMPDPointer(pdataOffset);
+
+            WriteShort(instance.PositionX);
+            WriteShort(instance.PositionY);
+            WriteShort(instance.PositionZ);
+
+            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleX / 180.0f * 0x8000)).RawShort);
+            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleY / 180.0f * 0x8000)).RawShort);
+            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleZ / 180.0f * 0x8000)).RawShort);
+
+            WriteInt(new FIXED(instance.ScaleX, 0).RawInt);
+            WriteInt(new FIXED(instance.ScaleY, 0).RawInt);
+            WriteInt(new FIXED(instance.ScaleZ, 0).RawInt);
+        }
+
         public void WritePOINTs(ISGL_Model model) {
             foreach (var vertex in model.Vertices)
                 WritePOINT(vertex);

@@ -38,12 +38,27 @@ namespace SF3.MPD {
                 textureAnimAltPos,
                 palette1Pos,
                 palette2Pos,
-                boundariesPos
+                boundariesPos,
+                out var chestModelsPosPtr,
+                out var lockedChestModelsPosPtr,
+                out var barrelModelsPosPtr
             );
 
             // Write a pointer to the header.
             var headerPtrPos = CurrentOffset;
             WriteUInt((uint) (headerPos + 0x290000));
+
+            // Write the chest/barrel models, if available, and update the main header pointers.
+            var chestModelsPos       = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Chest,       out var chestChunk)       == true) ? chestChunk       : null);
+            var lockedChestModelsPos = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.LockedChest, out var lockedChestChunk) == true) ? lockedChestChunk : null);
+            var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Barrel,      out var barrelChunk)      == true) ? barrelChunk      : null);
+
+            if (chestModelsPos.HasValue)
+                AtOffset(chestModelsPosPtr, _ => WriteUInt(chestModelsPos.Value + 0x290000));
+            if (lockedChestModelsPos.HasValue)
+                AtOffset(lockedChestModelsPosPtr, _ => WriteUInt(lockedChestModelsPos.Value + 0x290000));
+            if (barrelModelsPos.HasValue)
+                AtOffset(barrelModelsPosPtr, _ => WriteUInt(barrelModelsPos.Value + 0x290000));
 
             // Write a *double pointer* to the header at the start of the file.
             AtOffset(0, _ => WriteUInt((uint) (headerPtrPos + 0x290000)));
@@ -64,7 +79,10 @@ namespace SF3.MPD {
             uint? textureAnimAltPos,
             uint? palette1Pos,
             uint? palette2Pos,
-            uint? boundariesPos
+            uint? boundariesPos,
+            out uint chestModelsPosPtr,
+            out uint lockedChestModelsPosPtr,
+            out uint barrelModelsPosPtr
         ) {
             var headerAddr = (uint) CurrentOffset;
 
@@ -78,12 +96,15 @@ namespace SF3.MPD {
             WriteMPDPointer(textureAnimationsPos);
             WriteMPDPointer(unknown2Pos);
             WriteMPDPointer(groundAnimationPos);
-            // TODO: mesh1pos
+
+            // These are written afterwards; provide the pointer address so it can be updated
+            chestModelsPosPtr = (uint) CurrentOffset;
+            WriteMPDPointer(null); 
+            lockedChestModelsPosPtr = (uint) CurrentOffset;
             WriteMPDPointer(null);
-            // TODO: mesh2pos
+            barrelModelsPosPtr = (uint) CurrentOffset;
             WriteMPDPointer(null);
-            // TODO: mesh3pos
-            WriteMPDPointer(null);
+
             WriteShort(new CompressedFIXED(settings.ModelsYRotation / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);

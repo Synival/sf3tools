@@ -1,4 +1,6 @@
-﻿using CommonLib.SGL;
+﻿using System;
+using CommonLib.SGL;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
@@ -20,6 +22,10 @@ namespace SF3.MPD {
                 case TextureAnimationTable ta:   WriteTextureAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case BoundaryTable bt:           WriteBoundaries(bt);          break;
                 case TextureIDTable tid:         WriteTextureIDs(tid);         break;
+                case MissingModelChunk mmc:      return null;
+                case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
+                default:
+                    throw new ArgumentException($"Unhandled type '{data.GetType().Name}' for {nameof(WriteTableOrNull)}()");
             }
 
             WriteToAlignTo(2);
