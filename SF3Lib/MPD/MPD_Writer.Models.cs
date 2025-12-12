@@ -12,12 +12,13 @@ namespace SF3.MPD {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
-            // TODO: support high-memory
             var ramChunkAddr = (isHighMemory) ? 0x060A0000 : (0x00290000 + fileChunkAddr);
 
             // Write header. Collision-related offsets will be written later.
             var collisionLinesHeaderOffset = CurrentOffset;
+            // TODO: write lines!
             WriteMPDPointer(null);
+            // TODO: write blocks!
             var collisionBlocksOffset = CurrentOffset;
             WriteMPDPointer(null);
             WriteUShort((ushort) (instances?.Count() ?? 0));
@@ -25,20 +26,20 @@ namespace SF3.MPD {
             // Model instances immediately follow the header.
             if (instances != null)
                 foreach (var inst in instances)
-                    WriteModelInstance(inst, fileChunkAddr, ramChunkAddr);
+                    WriteModelChunkInstance(inst);
             WriteUInt(0);
 
             // PDATAs, POINTs, POLYGONs, and ATTRs follow after that.
             if (models != null)
                 foreach (var model in models)
-                    WriteModel(model, eightPDatas: true, fileChunkAddr, ramChunkAddr);
+                    WriteModelChunkModel(model, fileChunkAddr, ramChunkAddr);
 
             // The collision data is at the end.
             WriteCollisionLinesHeader(collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
             WriteCollisionBlocks(collisionBlocksOffset, fileChunkAddr, ramChunkAddr);
         }
 
-        public void WriteModelInstance(IMPD_ModelInstance instance, int fileChunkAddr, int ramChunkAddr) {
+        public void WriteModelChunkInstance(IMPD_ModelInstance instance) {
             // Placeholder pointers to be populated later.
             for (int i = 0; i < 8; i++) {
                 int pdataId = instance.ModelID + i;
@@ -64,17 +65,17 @@ namespace SF3.MPD {
             WriteUShort(instance.Flags);
         }
 
-        public void WriteModel(ISGL_Model model, bool eightPDatas, int fileChunkAddr, int ramChunkAddr) {
-            var pdataCount = eightPDatas ? 8 : 1;
+        public void WriteModelChunkModel(ISGL_Model model, int fileChunkAddr, int ramChunkAddr) {
+            const int c_pdataCount = 8;
 
             // Track where the pointers to the various tables will be.
-            var pointsPtrs   = new long[pdataCount];
-            var polygonsPtrs = new long[pdataCount];
-            var attrsPtrs    = new long[pdataCount];
+            var pointsPtrs   = new long[c_pdataCount];
+            var polygonsPtrs = new long[c_pdataCount];
+            var attrsPtrs    = new long[c_pdataCount];
 
             // Write PDATAs.
             uint addr;
-            for (int i = 0; i < pdataCount; i++) {
+            for (int i = 0; i < c_pdataCount; i++) {
                 var pdataId = model.ID + i;
                 if (_pdataIdToOffsetPtrMap.TryGetValue(pdataId, out var ptrs)) {
                     addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
@@ -100,7 +101,7 @@ namespace SF3.MPD {
             AtOffsets(polygonsPtrs, _ => WriteUInt(addr));
             WritePOLYGONs(model);
 
-            for (var i = 0; i < pdataCount; i++) {
+            for (var i = 0; i < c_pdataCount; i++) {
                 addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
                 AtOffset(attrsPtrs[i], _ => WriteUInt(addr));
                 WriteATTRs(model, i);
