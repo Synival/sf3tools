@@ -50,8 +50,8 @@ namespace SF3.Models.Structs.DAT {
                 }
                 else {
                     _texture = (PixelFormat == TexturePixelFormat.ABGR1555)
-                        ? new TextureABGR1555(CollectionType.Primary, ID, 0, 0, RawImageData16Bit)
-                        : (ITexture) new TextureIndexed(CollectionType.Primary, ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
+                        ? new TextureABGR1555(CollectionType.Primary, ID, 0, 0, ImageData16Bit)
+                        : (ITexture) new TextureIndexed(CollectionType.Primary, ID, 0, 0, ImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
                 }
                 return true;
             }
@@ -74,7 +74,7 @@ namespace SF3.Models.Structs.DAT {
         [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
         public string Hash => Texture?.Hash ?? "";
 
-        public byte[,] RawImageData8Bit {
+        public byte[,] ImageData8Bit {
             get {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
@@ -119,7 +119,7 @@ namespace SF3.Models.Structs.DAT {
             }
         }
 
-        public ushort[,] RawImageData16Bit {
+        public ushort[,] ImageData16Bit {
             get {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
@@ -182,10 +182,10 @@ namespace SF3.Models.Structs.DAT {
                 // Update image data and (if necessary) palette data.
                 if (BytesPerPixel == 1) {
                     LoadPaletteFromImage(value);
-                    RawImageData8Bit = value.ImageData8Bit;
+                    ImageData8Bit = value.ImageData8Bit;
                 }
                 else
-                    RawImageData16Bit = value.ImageData16Bit;
+                    ImageData16Bit = value.ImageData16Bit;
 
                 // Reload our cached image from the data.
                 FetchAndCacheTexture();

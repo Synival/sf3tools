@@ -54,7 +54,7 @@ namespace Grayscaler {
 
                 // Transform every texture in ABGR1555 format to grayscale.
                 foreach (var tc in textures1)
-                    tc.RawImageData16Bit = MakeTextureGrayscale(tc.Texture.ImageData16Bit);
+                    tc.ImageData16Bit = MakeTextureGrayscale(tc.Texture.ImageData16Bit);
 
                 foreach (var tc in textures2) {
                     // TODO: This shouldn't have to go through the trouble of finding the frameData

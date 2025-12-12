@@ -1486,7 +1486,7 @@ namespace SF3.Models.Files.MPD {
                     imageData.FixSaturnTransparency(useEndCodes: true, applyEndCodesToBorder);
 
                     if (tm != null)
-                        tm.RawImageData16Bit = imageData;
+                        tm.ImageData16Bit = imageData;
                     else if (model is FrameModel fm) {
                         var referenceTex = TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID)?.Texture;
                         _ = fm.UpdateTextureABGR1555(Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, imageData, referenceTex);

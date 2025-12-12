@@ -70,8 +70,8 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
             try {
                 Texture = PixelFormat == TexturePixelFormat.ABGR1555
-                    ? new TextureABGR1555(Collection, ID, 0, 0, RawImageData16Bit, tags: tags)
-                    : (ITexture) new TextureIndexed(Collection, ID, 0, 0, RawImageData8Bit, PixelFormat, Palette, true, tags: tags);
+                    ? new TextureABGR1555(Collection, ID, 0, 0, ImageData16Bit, tags: tags)
+                    : (ITexture) new TextureIndexed(Collection, ID, 0, 0, ImageData8Bit, PixelFormat, Palette, true, tags: tags);
                 return true;
             }
             catch {
@@ -136,7 +136,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public bool TextureIsLoaded => Texture != null;
 
-        public byte[,] RawImageData8Bit {
+        public byte[,] ImageData8Bit {
             get {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
@@ -168,7 +168,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
-        public ushort[,] RawImageData16Bit {
+        public ushort[,] ImageData16Bit {
             get {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();

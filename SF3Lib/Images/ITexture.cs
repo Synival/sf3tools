@@ -21,7 +21,7 @@ namespace SF3.Images {
     /// <summary>
     /// Interface for any object that contains texture data.
     /// </summary>
-    public interface ITexture : IImageData {
+    public interface ITexture : ITextureData {
         /// <summary>
         /// Collection to which this texture belongs.
         /// </summary>

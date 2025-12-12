@@ -5,7 +5,7 @@ namespace SF3.Images {
     /// <summary>
     /// Abstract representation of image data alone.
     /// </summary>
-    public interface IImageData {
+    public interface ITextureData {
         /// <summary>
         /// The number of bytes per pixel, in an inclusive range from (1 - 4).
         /// </summary>
