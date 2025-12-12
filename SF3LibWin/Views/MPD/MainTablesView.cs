@@ -49,8 +49,8 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.ModelCollections != null) {
                 foreach (var models in Model.ModelCollections.Values)
-                    if (models.IsMovableModelCollection() && models is ModelChunk fileModels)
-                        CreateChild(new ModelChunkView(models.Collection.ToString(), Model, fileModels));
+                    if (models.IsHeaderModelCollection() && models is ModelChunk fileModels)
+                        CreateChild(new ModelChunkView(models.Collection.ToString() + "Models", Model, fileModels));
             }
 
             for (var i = 0; i < Model.PaletteTables.Length; i++)

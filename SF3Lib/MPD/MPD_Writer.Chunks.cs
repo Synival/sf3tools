@@ -45,16 +45,16 @@ namespace SF3.MPD {
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
                 WriteTextureChunks(GetTexturesForCollection(CollectionType.Primary), chunkCount: 4, startID: 0);
-                WriteTextureChunks(GetTexturesForCollection(CollectionType.ExtraModel), chunkCount: 1, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(CollectionType.ExtraModels), chunkCount: 1, startID: 0);
             }
             else
                 WriteTextureChunks(GetTexturesForCollection(CollectionType.Primary), chunkCount: 5, startID: 0);
 
             // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
             // (it's so silly that it works this way, lol)
-            var chest1Textures = GetTexturesForCollection(CollectionType.MovableModels1);
-            var chest2Textures = GetTexturesForCollection(CollectionType.MovableModels2);
-            var barrelTextures = GetTexturesForCollection(CollectionType.MovableModels3);
+            var chest1Textures = GetTexturesForCollection(CollectionType.Chest);
+            var chest2Textures = GetTexturesForCollection(CollectionType.LockedChest);
+            var barrelTextures = GetTexturesForCollection(CollectionType.Barrel);
 
             WriteTextureChunk(chest1Textures, 0, out _);
             WriteTextureChunk(chest2Textures, 0, out _);

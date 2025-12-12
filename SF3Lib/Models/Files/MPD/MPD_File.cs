@@ -149,7 +149,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeTexturePaletteTables(header));
             tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
             tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
-            tables.AddRange(MakeMovableModelCollections(header));
+            tables.AddRange(MakeHeaderModelCollections(header));
             tables.AddRange(MakeUnknownTables(header));
 
             return tables.ToArray();
@@ -215,16 +215,17 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ITable[] MakeMovableModelCollections(MPD_HeaderModel header) {
+        private ITable[] MakeHeaderModelCollections(MPD_HeaderModel header) {
             var tables = new List<ITable>();
 
-            var offsets = new int[] { header.OffsetMesh1, header.OffsetMesh2, header.OffsetMesh3 };
+            var offsets = new int[] { header.OffsetChestModel, header.OffsetLockedChestModel, header.OffsetBarrelModel };
             for (int i = 0; i < 3; i++) {
                 var offset = offsets[i];
-                var collection = CollectionType.MovableModels1 + i;
+                var collection = CollectionType.Chest + i;
 
                 if (offset != 0) {
-                    var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, "MovableModels" + (i + 1), null, collection);
+                    var name = (i == 0) ? "ChestModel" : (i == 1) ? "LockedChestModel" : "BarrelModel";
+                    var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, name, null, collection);
                     ModelCollections[collection] = newChunk;
                     tables.AddRange(newChunk.Tables);
                 }
@@ -522,17 +523,17 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelChunks, IChunkData surfaceModelChunk) {
             CollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 if (chunkIndex == 10 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
-                    return CollectionType.ExtraModel;
+                    return CollectionType.ExtraModels;
                 else if (chunkIndex == 21)
-                    return CollectionType.ExtraModel;
+                    return CollectionType.ExtraModels;
                 else if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
                     return CollectionType.Primary;
                 else if (chunkIndex == MeshTextureChunksFirstIndex + 0 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return CollectionType.MovableModels1;
+                    return CollectionType.Chest;
                 else if (chunkIndex == MeshTextureChunksFirstIndex + 1 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return CollectionType.MovableModels2;
+                    return CollectionType.LockedChest;
                 else if (chunkIndex == MeshTextureChunksFirstIndex + 2 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return CollectionType.MovableModels3;
+                    return CollectionType.Barrel;
 
                 throw new Exception("Can't determine texture collection based on chunk index");
             }
@@ -541,8 +542,8 @@ namespace SF3.Models.Files.MPD {
 
             foreach (var mc in modelChunks) {
                 var collection =
-                    (mc.Index == 19 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) ? CollectionType.ExtraModel :
-                    (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModel :
+                    (mc.Index == 19 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) ? CollectionType.ExtraModels :
+                    (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModels :
                     CollectionType.Primary;
 
                 var newChunk = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, mc.Index, collection);
@@ -619,14 +620,14 @@ namespace SF3.Models.Files.MPD {
             int index = 0;
             foreach (var chunk in texChunks) {
                 var collection = TextureCollectionForChunkIndex(chunk.Index);
-                bool isMovableModelChunk = collection >= CollectionType.MovableModels1 && collection <= CollectionType.MovableModels3;
+                bool isHeaderModel = collection.IsHeaderModelCollection();
 
                 int? startId = null;
-                if (isMovableModelChunk)
+                if (isHeaderModel)
                     startId = nextModelCollectionStartId;
                 else if (collection == CollectionType.Primary)
                     startId = nextPrimaryCollectionStartId;
-                else if (collection == CollectionType.ExtraModel)
+                else if (collection == CollectionType.ExtraModels)
                     startId = 0;
 
                 try {
@@ -635,7 +636,7 @@ namespace SF3.Models.Files.MPD {
                         collection, pixelFormats[collection], palettes, chunk.Index, startId
                     );
                     if (texCol.TextureTable != null) {
-                        if (isMovableModelChunk)
+                        if (isHeaderModel)
                             nextModelCollectionStartId += texCol.TextureTable.Length;
                         else if (collection == CollectionType.Primary)
                             nextPrimaryCollectionStartId += texCol.TextureTable.Length;

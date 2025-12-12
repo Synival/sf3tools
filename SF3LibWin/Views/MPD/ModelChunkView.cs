@@ -22,8 +22,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.ModelInstanceTable != null)
                 CreateChild(new ModelTableView("Model Instances", MPD_File, Model.ModelInstanceTable, ngc));
 
-            if (Model.MovableModelTable != null)
-                CreateChild(new TableView("Movable Models", Model.MovableModelTable, ngc));
+            if (Model.HeaderModelInstanceTable != null)
+                CreateChild(new TableView("Model Instances", Model.HeaderModelInstanceTable, ngc));
 
             CreateChild(new PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));

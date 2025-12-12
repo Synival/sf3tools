@@ -71,11 +71,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
             var modelInstanceList = new List<IMPD_ModelInstance>();
             foreach (IMPD_ModelCollection mc in mpdFile.ModelCollections.Values) {
-                if (mc.Collection != CollectionType.ExtraModel &&
-                    mc.Collection != CollectionType.Primary)
-                {
+                if (mc.Collection.IsHeaderModelCollection())
                     continue;
-                }
 
                 // Get all instances of models in this collection.
                 var instances = mc.ModelInstances;
@@ -122,7 +119,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         continue;
 
                     // Don't render movable models; they're not placed on the map in that way.
-                    if (!mc.IsMovableModelCollection()) {
+                    if (!mc.IsHeaderModelCollection()) {
                         bool isForcedSemiTransparent = modelsWith2000Tag.Contains(id);
                         bool isHideMesh = modelsWith3000Tag.Contains(id);
                         CreateAndAddQuadModels(mpdFile, mc.Collection, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);

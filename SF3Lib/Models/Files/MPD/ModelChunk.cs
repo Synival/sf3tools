@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
@@ -10,6 +9,7 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
 using SF3.MPD;
 using SF3.Types;
+using SF3.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {
@@ -46,17 +46,17 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            if (Collection >= CollectionType.MovableModels1 && Collection <= CollectionType.MovableModels3)
-                MovableModelTable = MovableModelTable.Create(Data, Collection, "MovableModelsHeader", Address);
+            if (Collection.IsHeaderModelCollection())
+                HeaderModelInstanceTable = HeaderModelInstanceTable.Create(Data, Collection, nameof(HeaderModelInstanceTable), Address);
             else {
-                ModelsHeader = new ModelsHeader(Data, 0, "ModelsHeader", Address + 0x0000);
-                ModelInstanceTable = ModelInstanceTable.Create(Data, Collection, "ModelInstances", Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other);
+                ModelsHeader = new ModelsHeader(Data, 0, nameof(ModelsHeader), Address + 0x0000);
+                ModelInstanceTable = ModelInstanceTable.Create(Data, Collection, nameof(ModelInstanceTable), Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other);
             }
 
             var pdataAddressesPre =
                 (ModelInstanceTable != null) ? ModelInstanceTable
                     .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
-                : MovableModelTable
+                : HeaderModelInstanceTable
                     .Select(x => new { PDataAddress = x.PData0, Index = 0 });
 
             var pdataAddresses = pdataAddressesPre
@@ -207,7 +207,7 @@ namespace SF3.Models.Files.MPD {
             var tables =
                 new List<ITable>() {
                     ModelInstanceTable,
-                    MovableModelTable,
+                    HeaderModelInstanceTable,
                     PDataTable,
                     CollisionPointTable,
                     CollisionLineTable,
@@ -227,7 +227,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public uint GetOffsetInChunk(uint memoryAddress) {
-            if (Collection >= CollectionType.MovableModels1 && Collection <= CollectionType.MovableModels3)
+            if (Collection.IsHeaderModelCollection())
                 return memoryAddress - 0x290000;
             else if (memoryAddress >= 0x60a0000)
                 return memoryAddress - 0x60a0000 /* TODO: apply actual offset of chunk! */;
@@ -248,8 +248,8 @@ namespace SF3.Models.Files.MPD {
                     if (ModelInstanceTable != null)
                         foreach (var mi in ModelInstanceTable)
                             instances.Add(mi);
-                    if (MovableModelTable != null)
-                        foreach (var mi in MovableModelTable)
+                    if (HeaderModelInstanceTable != null)
+                        foreach (var mi in HeaderModelInstanceTable)
                             instances.Add(mi);
 
                     _sglModelInstances = instances.ToArray();
@@ -327,7 +327,7 @@ namespace SF3.Models.Files.MPD {
         public ModelInstanceTable ModelInstanceTable { get; private set; }
 
         [BulkCopyRecurse]
-        public MovableModelTable MovableModelTable { get; private set; }
+        public HeaderModelInstanceTable HeaderModelInstanceTable { get; private set; }
 
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }

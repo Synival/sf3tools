@@ -18,10 +18,10 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _offsetUnknown2Addr;          // int32  Pointer to unknown list. Only used in RAIL1.MPD. 5 values.
         private readonly int _offsetGradientAddr;          // int32  Pointer to gradient table that replaces Scenario 1 "unknown2" table.
         private readonly int _offsetGroundAnimationAddr;   // int32  Pointer to list of KA table for ground model animation.
-        private readonly int _offsetMesh1Addr;             // int32  Pointer to list of 2 movable/interactable mesh. may be null.
-        private readonly int _offsetMesh2Addr;             // int32  Pointer to list of 2 movable/interactable mesh. may be null.
+        private readonly int _offsetChestModelAddr;        // int32  Pointer to list of 3 movable/interactable mesh. may be null.
+        private readonly int _offsetLockedChestAddr;       // int32  Pointer to list of 3 movable/interactable mesh. may be null.
         private readonly int _otherUnknownAddr;            // int32  Unknown value only present in 'Other' MPD files
-        private readonly int _offsetMesh3Addr;             // int32  Pointer to list of 2 movable/interactable mesh. may be null.
+        private readonly int _offsetBarrelModelAddr;       // int32  Pointer to list of 3 movable/interactable mesh. may be null.
         private readonly int _modelsYRotationAddr;         // ANGLE  mostly 0x8000. The meshes from the models chunk are pre-rotated by this angle.
         private readonly int _modelsViewAngleMinAddr;      // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
@@ -78,23 +78,23 @@ namespace SF3.Models.Structs.MPD {
             }
 
             _offsetGroundAnimationAddr = Address + 0x20; // 4 bytes
-            _offsetMesh1Addr           = Address + 0x24; // 4 bytes
-            _offsetMesh2Addr           = Address + 0x28; // 4 bytes
+            _offsetChestModelAddr      = Address + 0x24; // 4 bytes
+            _offsetLockedChestAddr     = Address + 0x28; // 4 bytes
 
             int addressNext;
             if (Scenario >= ScenarioType.Scenario1) {
-                _offsetMesh3Addr  = Address + 0x2C; // 4 bytes
+                _offsetBarrelModelAddr = Address + 0x2C; // 4 bytes
                 _otherUnknownAddr = -1;
                 addressNext = Address + 0x30;
             }
             else if (Scenario == ScenarioType.Other) {
-                _offsetMesh3Addr  = -1;
+                _offsetBarrelModelAddr = -1;
                 _otherUnknownAddr = Address + 0x2C; // 4 bytes
                 addressNext = Address + 0x30;
             }
             else {
                 _otherUnknownAddr = -1;
-                _offsetMesh3Addr  = -1;
+                _offsetBarrelModelAddr = -1;
                 addressNext = Address + 0x2C;
             }
 
@@ -268,26 +268,26 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetMesh1Addr), displayOrder: 11, isPointer: true, displayGroup: "Main")]
-        public int OffsetMesh1 {
-            get => Data.GetDouble(_offsetMesh1Addr);
-            set => Data.SetDouble(_offsetMesh1Addr, value);
+        [TableViewModelColumn(addressField: nameof(_offsetChestModelAddr), displayOrder: 11, isPointer: true, displayGroup: "Main")]
+        public int OffsetChestModel {
+            get => Data.GetDouble(_offsetChestModelAddr);
+            set => Data.SetDouble(_offsetChestModelAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetMesh2Addr), displayOrder: 12, isPointer: true, displayGroup: "Main")]
-        public int OffsetMesh2 {
-            get => Data.GetDouble(_offsetMesh2Addr);
-            set => Data.SetDouble(_offsetMesh2Addr, value);
+        [TableViewModelColumn(addressField: nameof(_offsetLockedChestAddr), displayOrder: 12, isPointer: true, displayGroup: "Main")]
+        public int OffsetLockedChestModel {
+            get => Data.GetDouble(_offsetLockedChestAddr);
+            set => Data.SetDouble(_offsetLockedChestAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetMesh3Addr), displayOrder: 13, isPointer: true, visibilityProperty: nameof(HasMesh3), displayGroup: "Main")]
-        public int OffsetMesh3 {
-            get => HasMesh3 ? Data.GetDouble(_offsetMesh3Addr) : 0;
+        [TableViewModelColumn(addressField: nameof(_offsetBarrelModelAddr), displayOrder: 13, isPointer: true, visibilityProperty: nameof(HasMesh3), displayGroup: "Main")]
+        public int OffsetBarrelModel {
+            get => HasMesh3 ? Data.GetDouble(_offsetBarrelModelAddr) : 0;
             set {
                 if (HasMesh3)
-                    Data.SetDouble(_offsetMesh3Addr, value);
+                    Data.SetDouble(_offsetBarrelModelAddr, value);
             }
         }
 

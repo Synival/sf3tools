@@ -2,8 +2,8 @@
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class MovableModel : ModelInstanceBase {
-        public MovableModel(IByteData data, CollectionType collection, int id, string name, int address)
+    public class HeaderModelInstance : ModelInstanceBase {
+        public HeaderModelInstance(IByteData data, CollectionType collection, int id, string name, int address)
         : base(data, collection, id, name, address, 0x04, 0x1C) {
         }
 

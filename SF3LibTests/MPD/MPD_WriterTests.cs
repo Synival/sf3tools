@@ -161,7 +161,7 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_HasCorrectExtraTextures() {
             var originalFile = MakeFile(ScenarioType.Scenario1, "Z_AS.MPD");
-            TestMPDTextures(originalFile, CollectionType.ExtraModel);
+            TestMPDTextures(originalFile, CollectionType.ExtraModels);
         }
 
         private void TestMPDTextures(IMPD_File originalFile, CollectionType collection) {
