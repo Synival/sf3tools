@@ -8,6 +8,164 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File {
+        public void RecompressChunks(bool onlyModified) {
+            var framesModified = Chunk3Frames?.Any(x => x.Data.IsModified || x.Data.NeedsRecompression) ?? false;
+            var chunksModified = framesModified || ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
+
+            // Don't bother doing anything if no chunks have been modified.
+            if (onlyModified && !framesModified && !chunksModified)
+                return;
+
+            // Chunk 3 is made up of several individually-compressed images that need to be recompressed.
+            RecompressChunk3Frames(onlyModified);
+
+            // Perform recompression.
+            foreach (var chunkData in ChunkData) {
+                if (chunkData == null || !chunkData.IsCompressed)
+                    continue;
+                if (chunkData.IsModified || !onlyModified)
+                    chunkData.Recompress();
+            }
+
+            return;
+        }
+
+        public void RebuildChunkTable() {
+            // Chunks always start at file offset 0x2100.
+            int nextChunkOffset = 0x2100;
+
+            foreach (var loc in ChunkLocations) {
+                if (loc.ChunkRAMAddress == 0)
+                    break;
+
+                var chunkData = ChunkData[loc.ID];
+                if (chunkData == null) {
+                    loc.ChunkFileAddress = nextChunkOffset;
+                    loc.ChunkSize = 0;
+                }
+                else {
+                    loc.ChunkFileAddress = nextChunkOffset;
+                    loc.ChunkSize = chunkData.Length;
+                    nextChunkOffset += (int) (Math.Ceiling(loc.ChunkSize / 4.0) * 4.0);
+                }
+            }
+        }
+
+        public void CommitChunks() {
+            // We need to copy chunk data into the file -- get the new file size.
+            var maxChunkEnd = ChunkLocations.Max(x => x.ChunkFileAddress + x.ChunkSize);
+            var newFileSize = (int) (Math.Ceiling(maxChunkEnd / 4.0) * 4.0);
+
+            // Copy all the chunk data into a clean buffer.
+            var newChunkData = new byte[newFileSize - 0x2100];
+            foreach (var chunk in ChunkData) {
+                if (chunk == null)
+                    continue;
+                var copyToOffset = ChunkLocations[chunk.Index].ChunkFileAddress - 0x2100;
+                if (copyToOffset >= 0)
+                    chunk.GetDataCopyOrReference().CopyTo(newChunkData, copyToOffset);
+                else
+                    CommonLib.Logging.Logger.WriteLine($"Chunk[{chunk.Index}] position (0x{copyToOffset + 0x2100:X4}) is < 0x2100; not writing", CommonLib.Types.LogType.Error);
+            }
+
+            // Resize and update our file.
+            Data.Data.Resize(newFileSize);
+            Data.Data.SetDataAtTo(0x2100, newChunkData.Length, newChunkData);
+        }
+
+        public IChunkData MakeChunkData(int chunkIndex, ChunkType type, CompressionType compressionType) {
+            if (ChunkData[chunkIndex] != null)
+                throw new ArgumentException(nameof(chunkIndex));
+
+            var isCompressed = (compressionType == CompressionType.Compressed);
+            ByteArray byteArray = null;
+            ChunkData chunkData = null;
+
+            try {
+                byteArray = new ByteArray(Data.Data.GetDataCopyAt(ChunkLocations[chunkIndex].ChunkFileAddress, ChunkLocations[chunkIndex].ChunkSize));
+                chunkData = new ChunkData(byteArray, isCompressed, chunkIndex);
+            }
+            catch {
+                // TODO: what to do???
+                return null;
+            }
+            var chunkLocation = ChunkLocations[chunkIndex];
+
+            chunkLocation.DecompressedSize = chunkData.DecompressedData.Length;
+            chunkData.DecompressedData.Data.RangeModified += (s, a) => {
+                if (a.Resized)
+                    chunkLocation.DecompressedSize = chunkData.DecompressedData.Length;
+            };
+
+            chunkData.Data.RangeModified += (s, a) => {
+                // If the data hasn't been modified, do nothing.
+                if (chunkLocation.ChunkSize == chunkData.Length)
+                    return;
+
+                // Determine how much the next chunks should be moved by.
+                var oldNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkLocation.ChunkSize) / 4.0) * 4.0);
+                var newNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkData.Length) / 4.0) * 4.0);
+
+                // Set the new chunk size.
+                chunkLocation.ChunkSize = chunkData.Length;
+
+                // Don't move proceeding chunks if not requested.
+                if (!UpdateChunkTableOnChunkResize)
+                    return;
+
+                // Adjust the offset/address of every chunk after this one.
+                var nextChunkOffsetDelta = newNextChunkOffset - oldNextChunkOffset;
+                if (nextChunkOffsetDelta != 0) {
+                    var thisRamAddr = chunkLocation.ChunkRAMAddress;
+                    var thisIndex = chunkLocation.ID;
+                    foreach (var loc in ChunkLocations) {
+                        var ramAddr = loc.ChunkRAMAddress;
+                        var index = loc.ID;
+
+                        // Offset the chunk if either:
+                        //   1) its offset/address is later, or
+                        //   2) it's the same but is a higher ID (this happens when the earlier chunk has a size of 0)
+                        if (ramAddr > thisRamAddr || (ramAddr == thisRamAddr && index > thisIndex))
+                            loc.ChunkRAMAddress += nextChunkOffsetDelta;
+                    }
+                }
+            };
+
+            chunkLocation.ChunkType = type;
+            chunkLocation.CompressionType = compressionType;
+
+            ChunkData[chunkIndex] = chunkData;
+            return chunkData;
+        }
+
+        private void DetermineChunkIndices() {
+            PrimaryTextureChunksFirstIndex = 6;
+            PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
+                ((Scenario >= ScenarioType.Other) ? 4 : 3);
+
+            MeshTextureChunksFirstIndex = PrimaryTextureChunksLastIndex + 1;
+            MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
+                ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
+
+            GroundImageChunk1Index = MeshTextureChunksLastIndex + 1;
+            GroundImageChunk2Index = MeshTextureChunksLastIndex + 2;
+
+            GroundTilesetChunk1Index        = MeshTextureChunksLastIndex + 1;
+            GroundTilesetChunk2Index        = MeshTextureChunksLastIndex + 2;
+            GroundTileAssignmentChunk1Index = GroundImageChunk2Index + 1;
+            GroundTileAssignmentChunk2Index = GroundImageChunk2Index + 4;
+
+            SkyBoxChunk1Index = GroundImageChunk2Index + 2;
+            SkyBoxChunk2Index = GroundImageChunk2Index + 3;
+
+            BackgroundChunk1Index = MeshTextureChunksLastIndex + 1;
+            BackgroundChunk2Index = MeshTextureChunksLastIndex + 2;
+
+            ForegroundTilesetChunk1Index = BackgroundChunk2Index + 2;
+            ForegroundTilesetChunk2Index = BackgroundChunk2Index + 3;
+            ForegroundTileAssignmentChunkIndex   = BackgroundChunk2Index + 4;
+        }
+
         private IChunkData[] MakeChunkDatas(ChunkLocation[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
@@ -139,71 +297,6 @@ namespace SF3.Models.Files.MPD {
             return ChunkData;
         }
 
-        public IChunkData MakeChunkData(int chunkIndex, ChunkType type, CompressionType compressionType) {
-            if (ChunkData[chunkIndex] != null)
-                throw new ArgumentException(nameof(chunkIndex));
-
-            var isCompressed = (compressionType == CompressionType.Compressed);
-            ByteArray byteArray = null;
-            ChunkData chunkData = null;
-
-            try {
-                byteArray = new ByteArray(Data.Data.GetDataCopyAt(ChunkLocations[chunkIndex].ChunkFileAddress, ChunkLocations[chunkIndex].ChunkSize));
-                chunkData = new ChunkData(byteArray, isCompressed, chunkIndex);
-            }
-            catch {
-                // TODO: what to do???
-                return null;
-            }
-            var chunkLocation = ChunkLocations[chunkIndex];
-
-            chunkLocation.DecompressedSize = chunkData.DecompressedData.Length;
-            chunkData.DecompressedData.Data.RangeModified += (s, a) => {
-                if (a.Resized)
-                    chunkLocation.DecompressedSize = chunkData.DecompressedData.Length;
-            };
-
-            chunkData.Data.RangeModified += (s, a) => {
-                // If the data hasn't been modified, do nothing.
-                if (chunkLocation.ChunkSize == chunkData.Length)
-                    return;
-
-                // Determine how much the next chunks should be moved by.
-                var oldNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkLocation.ChunkSize) / 4.0) * 4.0);
-                var newNextChunkOffset = (int) (Math.Ceiling((chunkLocation.ChunkRAMAddress + chunkData.Length) / 4.0) * 4.0);
-
-                // Set the new chunk size.
-                chunkLocation.ChunkSize = chunkData.Length;
-
-                // Don't move proceeding chunks if not requested.
-                if (!UpdateChunkTableOnChunkResize)
-                    return;
-
-                // Adjust the offset/address of every chunk after this one.
-                var nextChunkOffsetDelta = newNextChunkOffset - oldNextChunkOffset;
-                if (nextChunkOffsetDelta != 0) {
-                    var thisRamAddr = chunkLocation.ChunkRAMAddress;
-                    var thisIndex = chunkLocation.ID;
-                    foreach (var loc in ChunkLocations) {
-                        var ramAddr = loc.ChunkRAMAddress;
-                        var index = loc.ID;
-
-                        // Offset the chunk if either:
-                        //   1) its offset/address is later, or
-                        //   2) it's the same but is a higher ID (this happens when the earlier chunk has a size of 0)
-                        if (ramAddr > thisRamAddr || (ramAddr == thisRamAddr && index > thisIndex))
-                            loc.ChunkRAMAddress += nextChunkOffsetDelta;
-                    }
-                }
-            };
-
-            chunkLocation.ChunkType = type;
-            chunkLocation.CompressionType = compressionType;
-
-            ChunkData[chunkIndex] = chunkData;
-            return chunkData;
-        }
-
         private int[] GetModelChunkIndices(ChunkLocation[] chunks) {
             var flags = Flags;
             var indices = new List<int>();
@@ -223,92 +316,26 @@ namespace SF3.Models.Files.MPD {
             return (smci.HasValue && chunks[smci.Value].Exists) ? smci : null;
         }
 
+        public int PrimaryTextureChunksFirstIndex { get; private set; }
+        public int PrimaryTextureChunksLastIndex { get; private set; }
 
-        public void RecompressChunks(bool onlyModified) {
-            var framesModified = Chunk3Frames?.Any(x => x.Data.IsModified || x.Data.NeedsRecompression) ?? false;
-            var chunksModified = framesModified || ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
+        public int MeshTextureChunksFirstIndex { get;private set;  }
+        public int MeshTextureChunksLastIndex { get; private set; }
 
-            // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !framesModified && !chunksModified)
-                return;
+        public int GroundImageChunk1Index { get; private set; }
+        public int GroundImageChunk2Index { get; private set; }
+        public int GroundTilesetChunk1Index { get; private set; }
+        public int GroundTilesetChunk2Index { get; private set; }
+        public int GroundTileAssignmentChunk1Index { get; private set; }
+        public int GroundTileAssignmentChunk2Index { get; private set; }
+        public int BackgroundChunk1Index { get; private set; }
+        public int BackgroundChunk2Index { get; private set; }
 
-            // Chunk 3 is made up of several individually-compressed images that need to be recompressed.
-            RecompressChunk3Frames(onlyModified);
-
-            // Perform recompression.
-            foreach (var chunkData in ChunkData) {
-                if (chunkData == null || !chunkData.IsCompressed)
-                    continue;
-                if (chunkData.IsModified || !onlyModified)
-                    chunkData.Recompress();
-            }
-
-            return;
-        }
-
-        public void RebuildChunkTable() {
-            // Chunks always start at file offset 0x2100.
-            int nextChunkOffset = 0x2100;
-
-            foreach (var loc in ChunkLocations) {
-                if (loc.ChunkRAMAddress == 0)
-                    break;
-
-                var chunkData = ChunkData[loc.ID];
-                if (chunkData == null) {
-                    loc.ChunkFileAddress = nextChunkOffset;
-                    loc.ChunkSize = 0;
-                }
-                else {
-                    loc.ChunkFileAddress = nextChunkOffset;
-                    loc.ChunkSize = chunkData.Length;
-                    nextChunkOffset += (int) (Math.Ceiling(loc.ChunkSize / 4.0) * 4.0);
-                }
-            }
-        }
-
-        public void CommitChunks() {
-            // We need to copy chunk data into the file -- get the new file size.
-            var maxChunkEnd = ChunkLocations.Max(x => x.ChunkFileAddress + x.ChunkSize);
-            var newFileSize = (int) (Math.Ceiling(maxChunkEnd / 4.0) * 4.0);
-
-            // Copy all the chunk data into a clean buffer.
-            var newChunkData = new byte[newFileSize - 0x2100];
-            foreach (var chunk in ChunkData) {
-                if (chunk == null)
-                    continue;
-                var copyToOffset = ChunkLocations[chunk.Index].ChunkFileAddress - 0x2100;
-                if (copyToOffset >= 0)
-                    chunk.GetDataCopyOrReference().CopyTo(newChunkData, copyToOffset);
-                else
-                    CommonLib.Logging.Logger.WriteLine($"Chunk[{chunk.Index}] position (0x{copyToOffset + 0x2100:X4}) is < 0x2100; not writing", CommonLib.Types.LogType.Error);
-            }
-
-            // Resize and update our file.
-            Data.Data.Resize(newFileSize);
-            Data.Data.SetDataAtTo(0x2100, newChunkData.Length, newChunkData);
-        }
-
-        public int PrimaryTextureChunksFirstIndex { get; }
-        public int PrimaryTextureChunksLastIndex { get; }
-
-        public int MeshTextureChunksFirstIndex { get; }
-        public int MeshTextureChunksLastIndex { get; }
-
-        public int GroundImageChunk1Index { get; }
-        public int GroundImageChunk2Index { get; }
-        public int GroundTilesetChunk1Index { get; }
-        public int GroundTilesetChunk2Index { get; }
-        public int GroundTileAssignmentChunk1Index { get; }
-        public int GroundTileAssignmentChunk2Index { get; }
-        public int BackgroundChunk1Index { get; }
-        public int BackgroundChunk2Index { get; }
-
-        public int SkyBoxChunk1Index { get; }
-        public int SkyBoxChunk2Index { get; }
-        public int ForegroundTilesetChunk1Index { get; }
-        public int ForegroundTilesetChunk2Index { get; }
-        public int ForegroundTileAssignmentChunkIndex { get; }
+        public int SkyBoxChunk1Index { get; private set; }
+        public int SkyBoxChunk2Index { get; private set; }
+        public int ForegroundTilesetChunk1Index { get; private set; }
+        public int ForegroundTilesetChunk2Index { get; private set; }
+        public int ForegroundTileAssignmentChunkIndex { get; private set; }
 
         public IChunkData[] ChunkData { get; private set; }
 

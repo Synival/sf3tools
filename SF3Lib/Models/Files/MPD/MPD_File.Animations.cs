@@ -128,5 +128,7 @@ namespace SF3.Models.Files.MPD {
                     _ = frameData.Finish();
             }
         }
+
+        public List<Chunk3Frame> Chunk3Frames { get; private set; }
     }
 }

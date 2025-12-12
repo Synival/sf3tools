@@ -20,31 +20,7 @@ namespace SF3.Models.Files.MPD {
 
         protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType? fallbackScenario = null)
         : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other], DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other) {
-            PrimaryTextureChunksFirstIndex = 6;
-            PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
-                ((Scenario >= ScenarioType.Other) ? 4 : 3);
-
-            MeshTextureChunksFirstIndex = PrimaryTextureChunksLastIndex + 1;
-            MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
-                ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
-
-            GroundImageChunk1Index = MeshTextureChunksLastIndex + 1;
-            GroundImageChunk2Index = MeshTextureChunksLastIndex + 2;
-
-            GroundTilesetChunk1Index        = MeshTextureChunksLastIndex + 1;
-            GroundTilesetChunk2Index        = MeshTextureChunksLastIndex + 2;
-            GroundTileAssignmentChunk1Index = GroundImageChunk2Index + 1;
-            GroundTileAssignmentChunk2Index = GroundImageChunk2Index + 4;
-
-            SkyBoxChunk1Index = GroundImageChunk2Index + 2;
-            SkyBoxChunk2Index = GroundImageChunk2Index + 3;
-
-            BackgroundChunk1Index = MeshTextureChunksLastIndex + 1;
-            BackgroundChunk2Index = MeshTextureChunksLastIndex + 2;
-
-            ForegroundTilesetChunk1Index = BackgroundChunk2Index + 2;
-            ForegroundTilesetChunk2Index = BackgroundChunk2Index + 3;
-            ForegroundTileAssignmentChunkIndex   = BackgroundChunk2Index + 4;
+            DetermineChunkIndices();
         }
 
         public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType fallbackScenario)
@@ -58,15 +34,6 @@ namespace SF3.Models.Files.MPD {
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize MPD_File");
             return newFile;
-        }
-
-        public override bool IsModified {
-            get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);
-            set {
-                base.IsModified = value;
-                foreach (var ce in ChunkData.Where(x => x != null))
-                    ce.IsModified = value;
-            }
         }
 
         public override bool OnFinish() {
@@ -99,11 +66,27 @@ namespace SF3.Models.Files.MPD {
 
         public void UpdatePlaneImages() => ((MPD_Planes) Planes).UpdateImages();
 
-        [BulkCopyRecurse]
-        public MPD_HeaderModel MPDHeader { get; private set; }
+        public override bool IsModified {
+            get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);
+            set {
+                base.IsModified = value;
+                foreach (var ce in ChunkData.Where(x => x != null))
+                    ce.IsModified = value;
+            }
+        }
 
         public IMPD_AllFlags Flags { get; private set; }
         public IMPD_Settings Settings { get; private set; }
+        public IMPD_Surface Surface { get; private set; }
+
+        [BulkCopyRecurse]
+        public Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<CollectionType, IMPD_ModelCollection>();
+
+        public IMPD_Planes Planes { get; private set; }
+        public IMPD_Collisions Collisions { get; private set; }
+
+        [BulkCopyRecurse]
+        public MPD_HeaderModel MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkLocationTable ChunkLocations { get; private set; }
@@ -147,8 +130,6 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public GradientTable GradientTable { get; private set; }
 
-        public List<Chunk3Frame> Chunk3Frames { get; private set; }
-
         [BulkCopyRecurse]
         public BoundaryTable BoundariesTable { get; private set; }
 
@@ -160,12 +141,7 @@ namespace SF3.Models.Files.MPD {
         public int[] ModelChunkIndices { get; private set; } = null;
 
         [BulkCopyRecurse]
-        public Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<CollectionType, IMPD_ModelCollection>();
-
-        [BulkCopyRecurse]
         public SurfaceDataChunk SurfaceDataChunk { get; private set; }
-
-        public IMPD_Surface Surface { get; private set; }
 
         [BulkCopyRecurse]
         public TextureChunk[] TextureChunks { get; private set; }
@@ -175,9 +151,6 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public PlaneTileAssignmentChunk ForegroundTileAssignmentChunk { get; private set; }
-
-        public IMPD_Planes Planes { get; private set; }
-        public IMPD_Collisions Collisions { get; private set; }
 
         public static bool UpdateChunkTableOnChunkResize { get; set; } = true;
         public static bool RebuildChunkTableOnFinish { get; set; } = true;
