@@ -110,6 +110,6 @@ namespace SF3.Win.Views {
             }
         }
 
-        public Action<Image /*image*/, string /*filename*/> LoadImageAction { get; set; } = null;
+        protected Action<Image /*image*/, string /*filename*/> LoadImageAction { get; set; } = null;
     }
 }

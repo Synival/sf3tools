@@ -21,8 +21,6 @@ namespace SF3.Win.Views {
         }
 
         public void SetColors(ushort[] colors) {
-            _colors = colors;
-
             if (colors == null) {
                 PaletteBitmap = null;
                 Image = null;
@@ -80,7 +78,6 @@ namespace SF3.Win.Views {
             ImportPalette?.Invoke(this, colors);
         }
 
-        private ushort[] _colors = null;
         public Bitmap PaletteBitmap { get; private set; } = null;
 
         public delegate void ImportPaletteEventHandler(object source, ushort[] colors);
