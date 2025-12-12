@@ -14,6 +14,7 @@ namespace SF3.MPD {
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
             var textureAnimationsPos = WriteTableOrNull(mpd.TextureAnimations, mpd.Settings);
             var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
+            WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
             var textureAnimAltPos    = WriteTableOrNull(mpd.TextureAnimationsAlt);
