@@ -212,14 +212,25 @@ namespace SF3.MPD {
 
         public void WriteCollisionLinesSection(IMPD_Collisions collisions, int fileChunkAddr, int ramChunkAddr, out IMPD_CollisionLine[] linesWritten) {
             // Write a header. The points come first, then the lines.
+            // If there are no points or lines, just write zeroes.
+            if (collisions.Points.Count() == 0 && collisions.Lines.Count() == 0) {
+                WriteUInt(0);
+                WriteUInt(0);
+                linesWritten = new IMPD_CollisionLine[0];
+                return;
+            }
+
+            // Predict what the offsets of the next tables will be and write the header.
             var pointsAddr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr) + 0x08;
             var linesAddr = pointsAddr + (uint) collisions.Points.Count() * 0x04;
-
             WriteUInt(pointsAddr);
             WriteUInt(linesAddr);
 
+            // Write the actual data.
             WriteCollisionPoints(collisions.Points);
             WriteCollisionLines(collisions.Points, collisions.Lines, out var linesWritten2);
+
+            // Handy dandy output parameters.
             linesWritten = linesWritten2;
         }
 

@@ -36,10 +36,6 @@ namespace SF3.Tests.MPD {
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0xFB36, Size = 2 },
 
-                // Insignificant texture Chunk[13] difference due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x11A78, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x11A82, Size = 4 },
-
                 // Insignificant texture Chunk[17] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x1A5A9, Size = 1 },
 
@@ -70,10 +66,6 @@ namespace SF3.Tests.MPD {
             AssertMPDByteComparison(file, outputData, [
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
-
-                // Insignificant texture Chunk[13] difference due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x4B78, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x4B82, Size = 4 },
             ]);
         }
 
@@ -102,10 +94,6 @@ namespace SF3.Tests.MPD {
 
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
-
-                // Insignificant texture Chunk[13] difference due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x4B78, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x4B82, Size = 4 },
 
                 // Whole buncha other random LZSS inconsistencies that are totally fine.
                 new ByteComparisonSkipRegion { Offset = 0x0B267, Size = 1 },
@@ -147,10 +135,6 @@ namespace SF3.Tests.MPD {
                 // Texture compression nonsense
                 new ByteComparisonSkipRegion { Offset = 0x1AA81, Size = 0x19 },
 
-                // Insignificant texture Chunk[13] difference due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x1DC54, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x1DC5E, Size = 4 },
-
                 // Image data LZSS issue
                 new ByteComparisonSkipRegion { Offset = 0x24515, Size = 1 },
             ]);
@@ -178,10 +162,6 @@ namespace SF3.Tests.MPD {
             AssertMPDByteComparison(file, outputData, [
                 // Texture compression nonsense
                 new ByteComparisonSkipRegion { Offset = 0x7E9A, Size = 2 },
-
-                // Insignificant texture Chunk[13] difference due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x12CD8, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x12CE2, Size = 4 },
 
                 // Image data LZSS issues
                 new ByteComparisonSkipRegion { Offset = 0x2042C, Size = 2 },
@@ -327,10 +307,23 @@ namespace SF3.Tests.MPD {
         /// time.
         /// </summary>
         private ByteComparisonSkipRegion[] GetKnownAcceptableInconsistenciesForMPD(IMPD_File file) {
-            return [
-                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
-            ];
+            var muhSize = file.ChunkLocations[13].ChunkSize;
+
+            ByteComparisonSkipRegion[] chunk13Errors = [];
+            var chunk13Info = file.ChunkLocations[13];
+            if (chunk13Info.Exists && chunk13Info.ChunkSize == 0x494) {
+                var fileAddr = chunk13Info.ChunkFileAddress;
+                chunk13Errors = [
+                    // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
+                    new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+
+                    // Insignificant texture Chunk[13] difference due to LZSS compression differences
+                    new ByteComparisonSkipRegion { Offset = fileAddr + 0x484, Size = 1 },
+                    new ByteComparisonSkipRegion { Offset = fileAddr + 0x48e, Size = 4 },
+                ];
+            }
+
+            return chunk13Errors;
         }
 
         private IMPD_File RecreateMPD(IMPD_File mpd) {
