@@ -5,7 +5,7 @@ using SF3.Models.Tables.MPD;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        private uint? WriteTableOrNull<T>(T data) where T : class {
+        private uint? WriteTableOrNull<T>(T data, IMPD_Settings settings = null) where T : class {
             if (data == null)
                 return null;
             var pos = (uint) CurrentOffset;
@@ -17,7 +17,7 @@ namespace SF3.MPD {
                 case UnknownUInt16Table ui16:    WriteUInt16Table(ui16);       break;
                 case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);         break;
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
-                case TextureAnimationTable ta:   WriteTextureAnimations(ta);   break;
+                case TextureAnimationTable ta:   WriteTextureAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case BoundaryTable bt:           WriteBoundaries(bt);          break;
                 case TextureIDTable tid:         WriteTextureIDs(tid);         break;
             }
@@ -62,12 +62,18 @@ namespace SF3.MPD {
             WriteUInt(0xFFFFFFFF);
         }
 
-        public void WriteTextureAnimations(TextureAnimationTable textureAnimations) {
+        public void WriteTextureAnimations(TextureAnimationTable textureAnimations, bool shortEmptyTable) {
             // TODO: Write the things
-            if (textureAnimations.Is32Bit)
-                WriteUInt(textureAnimations.TextureEndId);
-            else
-                WriteUShort((ushort) textureAnimations.TextureEndId);
+            if (shortEmptyTable)
+                WriteUShort(0xFFFF);
+            else {
+                for (int i = 0; i < 2; i++) {
+                    if (textureAnimations.Is32Bit)
+                        WriteUInt(textureAnimations.TextureEndId);
+                    else
+                        WriteUShort((ushort) textureAnimations.TextureEndId);
+                }
+            }
         }
 
         public void WriteBoundaries(BoundaryTable boundaries) {

@@ -12,7 +12,7 @@ namespace SF3.MPD {
             var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
-            var textureAnimationsPos = WriteTableOrNull(mpd.TextureAnimations);
+            var textureAnimationsPos = WriteTableOrNull(mpd.TextureAnimations, mpd.Settings);
             var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);

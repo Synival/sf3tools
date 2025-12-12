@@ -72,5 +72,11 @@
         /// Some unknown value. Seems to usually be small and negative (~ -0x30).
         /// </summary>
         short UnknownHeaderSetting { get; set; }
+
+        /// <summary>
+        /// Technical setting. When 'true', an empty animation table is written as 'FFFF' instead of the typical
+        /// longer value. (This is likely a holdover from older MPDs.)
+        /// </summary>
+        bool ShortEmptyAnimationTable { get; set; }
     }
 }

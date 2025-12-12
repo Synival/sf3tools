@@ -1,5 +1,6 @@
 ﻿using SF3.Models.Files.MPD;
 using SF3.MPD;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public class MPD_Settings : IMPD_Settings {
@@ -52,6 +53,11 @@ namespace SF3.Models.Structs.MPD {
         public short UnknownHeaderSetting {
             get => MPD_File.MPDHeader.Unknown1;
             set => MPD_File.MPDHeader.Unknown1 = value;
+        }
+
+        public bool ShortEmptyAnimationTable {
+            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetUnknown2 - MPD_File.MPDHeader.OffsetTextureAnimations == 0x02;
+            set {}
         }
     }
 }
