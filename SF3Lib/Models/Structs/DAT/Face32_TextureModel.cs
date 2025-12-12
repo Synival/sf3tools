@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.DAT {
             Texture = image.CreateTextureIndexed(CollectionType.Primary, 0, 0, 0, ZeroIsTransparent);
         }
 
-        public override void LoadPaletteFromImage(ITexture texture) {
+        public override void LoadPaletteFromImage(ITextureData texture) {
             // Palette can't be changed; it's shared between all images.
         }
     }

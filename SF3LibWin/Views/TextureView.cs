@@ -6,15 +6,15 @@ namespace SF3.Win.Views {
     public class TextureView : ImageView {
         public TextureView(string name, float? imageScale = null) : base(name, imageScale) {}
 
-        public TextureView(string name, ITexture texture, float? imageScale = null) : base(name, texture?.CreateBitmapARGB1555(), imageScale) {
+        public TextureView(string name, ITextureData texture, float? imageScale = null) : base(name, texture?.CreateBitmapARGB1555(), imageScale) {
             Texture = texture;
         }
 
         public override void SaveImage(string filename, ImageFormat format)
             => _texture?.CreateBitmap()?.Save(filename, format);
 
-        private ITexture _texture = null;
-        public ITexture Texture {
+        private ITextureData _texture = null;
+        public ITextureData Texture {
             get => _texture;
             set {
                 if (value != _texture) {

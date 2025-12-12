@@ -17,6 +17,6 @@ namespace SF3.Win.Views {
         protected override void SetImage(TTableItem item)
             => ImageView.Texture = GetTextureFromModel(item);
 
-        protected abstract ITexture GetTextureFromModel(TTableItem item);
+        protected abstract ITextureData GetTextureFromModel(TTableItem item);
     }
 }

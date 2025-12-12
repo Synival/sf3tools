@@ -8,7 +8,7 @@ namespace SF3.Win.Views.MPD {
         public TextureTableView(string name, ITable<TextureModel> table, INameGetterContext ngc, float? imageScale = null)
         : base(name, table, ngc, imageScale) {}
 
-        protected override ITexture GetTextureFromModel(TextureModel item)
+        protected override ITextureData GetTextureFromModel(TextureModel item)
             => item?.Texture;
     }
 }

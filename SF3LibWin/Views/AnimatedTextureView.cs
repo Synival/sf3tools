@@ -5,7 +5,7 @@ using SF3.Images;
 namespace SF3.Win.Views {
     public abstract class AnimatedTextureView : TextureView {
         public AnimatedTextureView(string name, float imageScale = 0) : base(name, imageScale) {}
-        public AnimatedTextureView(string name, ITexture firstTexture, float imageScale = 0) : base(name, firstTexture, imageScale) {}
+        public AnimatedTextureView(string name, ITextureData firstTexture, float imageScale = 0) : base(name, firstTexture, imageScale) {}
 
         private void OnTick(object sender, EventArgs e) {
             if (!Animating)
@@ -29,7 +29,7 @@ namespace SF3.Win.Views {
             FrameIndex   = 0;
         }
 
-        public void SetFrame(ITexture texture, int index, int duration) {
+        public void SetFrame(ITextureData texture, int index, int duration) {
             if (!Animating) {
                 _timer = new Timer() { Interval = 1000 / 30 };
                 _timer.Tick += OnTick;

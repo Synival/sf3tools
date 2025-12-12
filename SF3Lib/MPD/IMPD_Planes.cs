@@ -9,7 +9,7 @@ namespace SF3.MPD {
         /// <summary>
         /// Image for non-tiled ground plane. Must be 512x256 and 8-bit indexed.
         /// </summary>
-        ITexture GroundImage { get; }
+        ITextureData GroundImage { get; }
 
         /// <summary>
         /// Tiled image used for ground plane. Typically used for towns. Resulting image is 2048x2048 with a 256x256
@@ -20,12 +20,12 @@ namespace SF3.MPD {
         /// <summary>
         /// Image used for the background plane (Ishahakat's room). Must be 512x256 and 8-bit indexed.
         /// </summary>
-        ITexture BackgroundImage { get; }
+        ITextureData BackgroundImage { get; }
 
         /// <summary>
         /// Image used for the skybox plane. Must be 512x256 and 8-bit indexed.
         /// </summary>
-        ITexture SkyBoxImage { get; }
+        ITextureData SkyBoxImage { get; }
 
         /// <summary>
         /// Tiled image used for foregrounds (Ishahakat). Resulting image is 512x256 with a 64x32 tile assignment map.

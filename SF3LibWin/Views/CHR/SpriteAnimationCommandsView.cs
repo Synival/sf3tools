@@ -21,7 +21,7 @@ namespace SF3.Win.Views.CHR {
             Context = model;
         }
 
-        protected override ITexture GetTextureFromModel(AnimationCommand aniCommand)
+        protected override ITextureData GetTextureFromModel(AnimationCommand aniCommand)
             => aniCommand?.GetTexture(aniCommand.Directions);
 
         private SpriteAnimationCommandsViewContext _context = null;

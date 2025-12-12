@@ -8,7 +8,7 @@ namespace SF3.MPD {
         /// <summary>
         /// Tileset image used for the plane. Should be 512x256.
         /// </summary>
-        ITexture Tileset { get; }
+        ITextureData Tileset { get; }
 
         /// <summary>
         /// Table of tileset coordinates for each tile in the plane.
@@ -19,6 +19,6 @@ namespace SF3.MPD {
         /// Resulting image from the TilesetImage and TileAssignment.
         /// This image cannot be directly assigned.
         /// </summary>
-        ITexture TiledImage { get; }
+        ITextureData TiledImage { get; }
     }
 }

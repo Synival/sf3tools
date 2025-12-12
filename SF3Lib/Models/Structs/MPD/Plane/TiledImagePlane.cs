@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.MPD.Plane {
             TiledImage = new TextureIndexed(0, 0, 0, 0, CreateTiledImageData(Tileset, TileAssignment), PaletteType, palette, false);
         }
 
-        private byte[,] CreateTiledImageData(ITexture tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
+        private byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
             var outputImageData = new byte[tileAssignment.Width * 8, tileAssignment.Height * 8];
             var inputImageData  = tilesetImage.ImageData8Bit;
 
@@ -45,9 +45,9 @@ namespace SF3.Models.Structs.MPD.Plane {
             return outputImageData;
         }
 
-        public ITexture Tileset { get; private set; }
+        public ITextureData Tileset { get; private set; }
         public IMPD_PlaneTileAssignment TileAssignment { get; private set; }
-        public ITexture TiledImage { get; private set; }
+        public ITextureData TiledImage { get; private set; }
 
         public IByteData[] TilesetDatas { get; }
         public TexturePixelFormat PaletteType { get; }

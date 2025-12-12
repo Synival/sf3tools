@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.DAT {
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
         public abstract void LoadImageAction(Image image, string filename);
-        public abstract void LoadPaletteFromImage(ITexture texture);
+        public abstract void LoadPaletteFromImage(ITextureData texture);
 
         protected bool FetchAndCacheTexture() {
             try {
@@ -51,7 +51,7 @@ namespace SF3.Models.Structs.DAT {
                 else {
                     _texture = (PixelFormat == TexturePixelFormat.ABGR1555)
                         ? new TextureABGR1555(CollectionType.Primary, ID, 0, 0, ImageData16Bit)
-                        : (ITexture) new TextureIndexed(CollectionType.Primary, ID, 0, 0, ImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
+                        : (ITextureData) new TextureIndexed(CollectionType.Primary, ID, 0, 0, ImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
                 }
                 return true;
             }
@@ -165,8 +165,8 @@ namespace SF3.Models.Structs.DAT {
             }
         }
 
-        private ITexture _texture = null;
-        public ITexture Texture {
+        private ITextureData _texture = null;
+        public ITextureData Texture {
             get => _texture;
             set {
                 // Do nothing if not possible, no change is necessary, or someone is trying to unset a texture.

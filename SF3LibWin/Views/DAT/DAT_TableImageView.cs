@@ -26,7 +26,7 @@ namespace SF3.Win.Views.DAT {
             }
         }
 
-        protected override ITexture GetTextureFromModel(TextureModelBase frame)
+        protected override ITextureData GetTextureFromModel(TextureModelBase frame)
             => frame?.Texture;
     }
 }

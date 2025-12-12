@@ -150,7 +150,7 @@ namespace CHRTool {
         private class ExtractInfo {
             public string Hash;
             public FrameRef FrameRef;
-            public ITexture Texture;
+            public ITextureData Texture;
         }
 
         private static ExtractInfo[] GetExtractInfos(ICHR_File chrFile) {

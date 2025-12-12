@@ -97,9 +97,9 @@ namespace SF3.Models.Structs.CHR {
         }
 
         private readonly Dictionary<int, string> _textureHashByFrameCount = new Dictionary<int, string>();
-        private readonly Dictionary<int, ITexture> _texturesByFrameCount = new Dictionary<int, ITexture>();
+        private readonly Dictionary<int, ITextureData> _texturesByFrameCount = new Dictionary<int, ITextureData>();
 
-        public ITexture GetTexture(SpriteDirectionCountType directions) {
+        public ITextureData GetTexture(SpriteDirectionCountType directions) {
             if (FrameTable == null || !IsFrameCommand)
                 return null;
 

@@ -13,7 +13,7 @@ namespace SF3.Models.Files.MPD {
 
         public void UpdateImages() {
             // Set the ground plane.
-            ITexture groundImage = null;
+            ITextureData groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 try {
                     groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
@@ -50,7 +50,7 @@ namespace SF3.Models.Files.MPD {
             GroundTiledImage = groundTiledImage;
 
             // Set the background image (Ishahakat's room).
-            ITexture backgroundImage = null;
+            ITextureData backgroundImage = null;
             if (MPD_File.BackgroundChunkDatas?.Any() == true) {
                 try {
                     backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
@@ -62,7 +62,7 @@ namespace SF3.Models.Files.MPD {
             BackgroundImage = backgroundImage;
 
             // Set the cutscene/battle skybox.
-            ITexture skyBoxImage = null;
+            ITextureData skyBoxImage = null;
             if (MPD_File.SkyBoxChunkDatas?.Any() == true) {
                 try {
                     skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, MPD_File.CreatePalette(1));
@@ -98,11 +98,11 @@ namespace SF3.Models.Files.MPD {
 
         public IMPD_File MPD_File { get; }
 
-        public ITexture GroundImage { get; private set; }
+        public ITextureData GroundImage { get; private set; }
         public IMPD_TiledPlane GroundTiledImage { get; private set; }
-        public ITexture BackgroundImage { get; private set; }
+        public ITextureData BackgroundImage { get; private set; }
 
-        public ITexture SkyBoxImage { get; private set; }
+        public ITextureData SkyBoxImage { get; private set; }
         public IMPD_TiledPlane ForegroundTiledImage { get; private set; }
 
         public short GroundX {

@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.DAT {
             // Can't replace these so easily :(
         }
 
-        public override void LoadPaletteFromImage(ITexture texture) {
+        public override void LoadPaletteFromImage(ITextureData texture) {
             // We can't change the palette for these; they're hard-coded.
         }
     }

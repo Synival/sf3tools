@@ -108,7 +108,7 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.8f, displayFormat: "X2")]
         public uint TextureDecompressedSize { get; private set; } = 0;
 
-        public ITexture Texture { get; private set; }
+        public ITextureData Texture { get; private set; }
 
         private ushort[,] GetUncompressedTextureData() {
             try {

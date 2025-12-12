@@ -29,7 +29,7 @@ namespace SF3.Models.Structs.DAT {
             Texture = image.CreateTextureIndexed(CollectionType.Primary, 0, 0, 0, ZeroIsTransparent);
         }
 
-        public override void LoadPaletteFromImage(ITexture texture) {
+        public override void LoadPaletteFromImage(ITextureData texture) {
             var newColors = texture.Palette.Channels.Select(x => x.ToABGR1555()).ToArray();
             int pos = PaletteOffset;
             for (int i = 0; i < 0x100; i++) {

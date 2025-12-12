@@ -26,7 +26,7 @@ namespace SF3.Models.Structs.DAT {
             Texture = image.CreateTextureABGR1555(CollectionType.Primary, 0, 0, 0);
         }
 
-        public override void LoadPaletteFromImage(ITexture texture) {
+        public override void LoadPaletteFromImage(ITextureData texture) {
             // Nothing to do; there shouldn't ever be a palette to load.
         }
     }

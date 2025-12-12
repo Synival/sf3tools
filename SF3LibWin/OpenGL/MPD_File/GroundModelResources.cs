@@ -29,7 +29,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage.TiledImage, 128.0f);
         }
 
-        private void CreateGroundImageModel(IMPD_File mpdFile, ITexture texture, float size) {
+        private void CreateGroundImageModel(IMPD_File mpdFile, ITextureData texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
             var planes = mpdFile.Planes;

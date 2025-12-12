@@ -60,7 +60,7 @@ namespace TextureExtractor {
                 return filename;
         }
 
-        private static TextureRef[] GenerateTextureRefs(string filename, int id, int frame, ITexture texture)
+        private static TextureRef[] GenerateTextureRefs(string filename, int id, int frame, ITextureData texture)
             => [new TextureRef(filename, id, frame, texture.Width, texture.Height, texture.BitmapDataARGB1555, texture.Hash)];
 
         public static void Main(string[] args) {

@@ -17,13 +17,13 @@ namespace SF3.MPD {
             }
         }
 
-        public void WriteTextureChunk(IEnumerable<ITexture> sortedTextures, int startID, out int textureCount) {
+        public void WriteTextureChunk(IEnumerable<ITextureData> sortedTextures, int startID, out int textureCount) {
             int textureCountBigDumbLocal = 0;
             WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal));
             textureCount = textureCountBigDumbLocal;
         }
 
-        public void WriteTextureChunkContent(ITexture[] sortedTextures, int startID, out int textureCount) {
+        public void WriteTextureChunkContent(ITextureData[] sortedTextures, int startID, out int textureCount) {
             // Figure out how many textures we can write here. Enforce a limit 0x10000 bytes worth of texture data.
             textureCount = 0;
             int totalTextureDataSize = 0;
