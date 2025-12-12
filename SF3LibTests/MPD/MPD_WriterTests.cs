@@ -144,6 +144,49 @@ namespace SF3.Tests.MPD {
             ]);
         }
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_FURAIN_CanBeLoaded() {
+            var originalFile = MakeFile(ScenarioType.Scenario1, "FURAIN.MPD");
+            _ = RecreateMPD(originalFile);
+        }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_FURAIN_ProducesSameData() {
+            var file = MakeFile(ScenarioType.Scenario1, "FURAIN.MPD");
+            var fileData = file.Data.GetDataCopyOrReference();
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(file);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("FURAIN_Test.MPD", outputData);
+
+            AssertByteComparison(fileData, outputData, [
+                // Header: Insignificant texture Chunk[5] size difference (2 bytes) due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x2037, Size = 1 },
+
+                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+
+                // Chunk[2]: Some inconsequential heightmap differences caused by *not* ignoring neighbor tiles in other blocks when flat.
+                // TODO: we should be able to fix this one!!
+                new ByteComparisonSkipRegion { Offset = 0x134B7, Size = 0x500 },
+
+                // Texture compression nonsense
+                new ByteComparisonSkipRegion { Offset = 0x1AA81, Size = 0x19 },
+
+                // Insignificant texture Chunk[13] difference due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x1DC54, Size = 1 },
+                new ByteComparisonSkipRegion { Offset = 0x1DC5E, Size = 4 },
+
+                // Image data LZSS issue
+                new ByteComparisonSkipRegion { Offset = 0x24515, Size = 1 },
+            ]);
+        }
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
@@ -254,7 +297,7 @@ namespace SF3.Tests.MPD {
 
             percentageCorrect = (float) Math.Floor((float) (bytesToCompare - wrongBytes) / bytesToCompare * 10000.0f) / 100.0f;
             if (wrongBytes > 0) {
-                errors.Add($"Comparable data is wrong: {percentageCorrect:0.00}% accurate");
+                errors.Add($"Comparable data is wrong: {percentageCorrect:0.00}% accurate ({wrongBytes} wrong bytes)");
 
                 var rightByte = expected[firstWrongByte!.Value.ExpectedOffset];
                 var wrongByte = actual[firstWrongByte!.Value.ActualOffset];
