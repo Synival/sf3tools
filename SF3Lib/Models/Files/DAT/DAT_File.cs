@@ -4,7 +4,7 @@ using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using SF3.ByteData;
-using SF3.Models.Structs.DAT;
+using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
 using SF3.Models.Tables.DAT;
 using SF3.Types;
@@ -76,7 +76,7 @@ namespace SF3.Models.Files.DAT {
         }
 
         public DAT_FileType FileType { get; }
-        public Table<TextureModelBase> TextureTable { get; private set; }
+        public Table<TextureStructBase> TextureTable { get; private set; }
         public int TextureViewerScale { get; set; } = 0;
     }
 }

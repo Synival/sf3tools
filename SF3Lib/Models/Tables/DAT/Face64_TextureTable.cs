@@ -1,9 +1,10 @@
 ﻿using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
+using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.DAT {
-    public class Face64_TextureTable : FixedSizeTable<TextureModelBase> {
+    public class Face64_TextureTable : FixedSizeTable<TextureStructBase> {
         protected Face64_TextureTable(IByteData data, string name, int address, INameGetterContext nameGetterContext)
         : base(data, name, address, data.Length / 0x2000) {
             NameGetterContext = nameGetterContext;

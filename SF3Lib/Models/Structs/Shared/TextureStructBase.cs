@@ -9,9 +9,9 @@ using SF3.ByteData;
 using SF3.Images;
 using SF3.Types;
 
-namespace SF3.Models.Structs.DAT {
-    public abstract class TextureModelBase : Struct, ITextureData {
-        public TextureModelBase(IByteData data, int id, string name, int address, int size,
+namespace SF3.Models.Structs.Shared {
+    public abstract class TextureStructBase : Struct, ITextureData {
+        public TextureStructBase(IByteData data, int id, string name, int address, int size,
             int width, int height, TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
             Width  = width;
@@ -126,7 +126,7 @@ namespace SF3.Models.Structs.DAT {
             if (!CanSetImageData8Bit)
                 return "Not supported";
             if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return ($"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}");
+                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
             return null;
         }
 
@@ -134,7 +134,7 @@ namespace SF3.Models.Structs.DAT {
             if (!CanSetImageData16Bit)
                 return "Not supported";
             if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return ($"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}");
+                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
             if (IsCompressed)
                 return "Changing compressed images is not yet supported";
             return null;
@@ -170,7 +170,7 @@ namespace SF3.Models.Structs.DAT {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
 
-                int storedSize = ImageDataSize;
+                var storedSize = ImageDataSize;
                 var inputData = IsCompressed
                     ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
                     : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
@@ -179,7 +179,7 @@ namespace SF3.Models.Structs.DAT {
                 var off = 0;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        var texPixel = (off < inputData.Length) ? inputData[off++] : (byte) 0;
+                        var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
                         outputData[x, y] = texPixel;
                     }
                 }
@@ -198,7 +198,7 @@ namespace SF3.Models.Structs.DAT {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
 
-                int storedSize = ImageDataSize;
+                var storedSize = ImageDataSize;
                 var inputData = (IsCompressed
                     ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
                     : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
@@ -209,7 +209,7 @@ namespace SF3.Models.Structs.DAT {
                 var off = 0;
                 for (var y = 0; y < Height; y++) {
                     for (var x = 0; x < Width; x++) {
-                        var texPixel = (off < inputData.Length) ? inputData[off++] : (byte) 0;
+                        var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
                         outputData[x, y] = texPixel;
                     }
                 }

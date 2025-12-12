@@ -1,10 +1,11 @@
 ﻿using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
+using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public class ItemCG_TextureModel : TextureModelBase {
+    public class ItemCG_TextureModel : TextureStructBase {
         public ItemCG_TextureModel(IByteData data, int id, string name, int address, Palette palette)
         : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Palette1, true, false) {
             _palette = palette;

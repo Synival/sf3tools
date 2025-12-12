@@ -2,10 +2,11 @@
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using SF3.ByteData;
+using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public abstract class BtlEnkei_TextureModelBase : TextureModelBase {
+    public abstract class BtlEnkei_TextureModelBase : TextureStructBase {
         protected BtlEnkei_TextureModelBase(IByteData data, int id, string name, int address, int size, int paletteOffset)
         : base(data, id, name, address, size, 512, 256, TexturePixelFormat.Palette1, true, false) {}
 
