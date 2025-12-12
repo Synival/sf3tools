@@ -12,10 +12,8 @@ using SF3.Types;
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData {
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
-            int width, int height, TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
-            Width  = width;
-            Height = height;
             PixelFormat = pixelFormat;
             BytesPerPixel = PixelFormat.BytesPerPixel();
             IsCompressed = isCompressed;
@@ -23,10 +21,10 @@ namespace SF3.Models.Structs.Shared {
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
-        public int Width { get; }
+        public abstract int Width { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 1)]
-        public int Height { get; }
+        public abstract int Height { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int StoredImageDataSize { get; private set; }

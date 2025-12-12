@@ -5,7 +5,7 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public class Face32_TextureModel : TextureStructBase {
+    public class Face32_TextureModel : FixedSizeTextureStructBase {
         private readonly int _imageDataOffsetAddr;
 
         public Face32_TextureModel(IByteData data, int id, string name, int address, Palette palette, bool isCompressed)

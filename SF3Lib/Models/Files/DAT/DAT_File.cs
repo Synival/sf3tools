@@ -76,7 +76,7 @@ namespace SF3.Models.Files.DAT {
         }
 
         public DAT_FileType FileType { get; }
-        public Table<TextureStructBase> TextureTable { get; private set; }
+        public Table<FixedSizeTextureStructBase> TextureTable { get; private set; }
         public int TextureViewerScale { get; set; } = 0;
     }
 }

@@ -5,7 +5,7 @@ using SF3.Types;
 namespace SF3.Models.Files.DAT {
     public interface IDAT_File : IScenarioTableFile {
         DAT_FileType FileType { get; }
-        Table<TextureStructBase> TextureTable { get; }
+        Table<FixedSizeTextureStructBase> TextureTable { get; }
         int TextureViewerScale { get; }
     }
 }
