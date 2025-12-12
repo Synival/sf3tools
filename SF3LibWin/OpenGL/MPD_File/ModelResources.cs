@@ -12,6 +12,7 @@ using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Extensions;
+using SF3.Images;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class ModelResources : ResourcesBase, IMPD_Resources {

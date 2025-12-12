@@ -6,7 +6,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Types;
 
-namespace SF3 {
+namespace SF3.Images {
     public class TextureIndexed : ITexture {
         public TextureIndexed(
             CollectionType collection,
@@ -28,7 +28,7 @@ namespace SF3 {
             PixelFormat = format;
             _palette    = palette;
             ZeroIsTransparent = zeroIsTransparent;
-            Tags        = (tags == null) ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
+            Tags        = tags == null ? new Dictionary<TagKey, TagValue>() : tags.ToDictionary(x => x.Key, x => x.Value);
             _hashPrefix = hashPrefix;
         }
 
@@ -95,7 +95,7 @@ namespace SF3 {
             get {
                 if (_hash == null) {
                     using (var md5 = MD5.Create())
-                        _hash = (_hashPrefix == "" ? "" : (_hashPrefix + "-")) + BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
+                        _hash = (_hashPrefix == "" ? "" : _hashPrefix + "-") + BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
                 }
                 return _hash;
             }

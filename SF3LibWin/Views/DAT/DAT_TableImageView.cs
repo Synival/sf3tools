@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using CommonLib.NamedValues;
+using SF3.Images;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
 

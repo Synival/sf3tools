@@ -14,10 +14,10 @@ using SF3.Sprites;
 using SF3.Types;
 using SF3.Extensions;
 using CommonLib.Imaging;
-using SF3;
 using CommonLib.NamedValues;
 using CommonLib.Logging;
 using CommonLib.Types;
+using SF3.Images;
 
 namespace CHRTool {
     public static class ExtractSheets {

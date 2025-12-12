@@ -9,7 +9,7 @@ using CommonLib.Extensions;
 using CommonLib.Logging;
 using CommonLib.Types;
 using Newtonsoft.Json;
-using SF3.Extensions;
+using SF3.Images;
 using SF3.Types;
 using SF3.Utils;
 using static CommonLib.Utils.ResourceUtils;

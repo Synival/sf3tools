@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.Types;
 
-namespace SF3 {
+namespace SF3.Images {
     public class TagKey {
         public TagKey(byte bitFlags) {
             BitFlags = bitFlags;

@@ -2,8 +2,8 @@
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
-using SF3;
 using SF3.ByteData;
+using SF3.Images;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;

@@ -22,6 +22,7 @@ using CommonLib.Types;
 using SF3.NamedValues;
 using SF3.MPD;
 using SF3.Extensions;
+using SF3.Images;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_File : ScenarioTableFile, IMPD_File {

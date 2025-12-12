@@ -4,6 +4,7 @@ using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Extensions;
+using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {

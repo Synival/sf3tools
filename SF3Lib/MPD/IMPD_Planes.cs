@@ -1,4 +1,6 @@
-﻿namespace SF3.MPD {
+﻿using SF3.Images;
+
+namespace SF3.MPD {
     /// <summary>
     /// Collection of specific plane types used in an MPD (ground, tiled ground, battle skybox, scene skybox,
     /// background, foreground).

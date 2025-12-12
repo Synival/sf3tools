@@ -2,7 +2,7 @@
 using System.Linq;
 using CommonLib.Utils;
 
-namespace SF3 {
+namespace SF3.Images {
     public class TextureAnimation {
         public TextureAnimation(int id, ITexture[] frames, int frameTimerStart) {
             if (frames == null)
@@ -15,9 +15,9 @@ namespace SF3 {
             Frames = frames.Where(x => x != null).OrderBy(x => x.Frame).ToArray();
 
             _frameByTimeFrame = new ITexture[Frames.Sum(x => Math.Max(0, x.Duration))];
-            int pos = 0;
+            var pos = 0;
             foreach (var frame in Frames) {
-                for (int i = 0; i < frame.Duration; i++)
+                for (var i = 0; i < frame.Duration; i++)
                     _frameByTimeFrame[pos++] = frame;
             }
         }

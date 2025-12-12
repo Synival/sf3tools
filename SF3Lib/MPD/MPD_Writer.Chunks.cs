@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using CommonLib.Utils;
+using SF3.Images;
 using SF3.Types;
 
 namespace SF3.MPD {

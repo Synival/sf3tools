@@ -1,4 +1,6 @@
-﻿namespace SF3.MPD {
+﻿using SF3.Images;
+
+namespace SF3.MPD {
     /// <summary>
     /// Abstract representation of a plane that is built from a tileset and assignment map.
     /// </summary>

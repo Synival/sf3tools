@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using CommonLib.Extensions;
+using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Extensions {

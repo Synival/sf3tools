@@ -1,4 +1,5 @@
 using CommonLib.NamedValues;
+using SF3.Images;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Tables.MPD.TextureAnimation;

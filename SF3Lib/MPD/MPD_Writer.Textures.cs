@@ -2,6 +2,7 @@
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Utils;
+using SF3.Images;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {

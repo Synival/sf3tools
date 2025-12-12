@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Images;
 using SF3.Models.Tables.CHR;
 using SF3.Types;
 using SF3.Utils;

@@ -2,6 +2,7 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Extensions;
+using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {

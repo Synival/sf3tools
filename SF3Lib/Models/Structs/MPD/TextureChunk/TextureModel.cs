@@ -5,6 +5,7 @@ using CommonLib.Arrays;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
+using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {

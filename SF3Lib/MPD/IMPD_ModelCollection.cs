@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CommonLib.SGL;
+using SF3.Images;
 using SF3.Types;
 
 namespace SF3.MPD {

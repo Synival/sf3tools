@@ -1,4 +1,5 @@
 ﻿using CommonLib.NamedValues;
+using SF3.Images;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Tables;
 
