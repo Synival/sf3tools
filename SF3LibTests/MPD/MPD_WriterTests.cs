@@ -22,7 +22,6 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario1_TESMAP_ProducesSameData() {
             var file = MakeFile(ScenarioType.Scenario1, "TESMAP.MPD");
-            var fileData = file.Data.GetDataCopyOrReference();
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -33,10 +32,7 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("TESMAP_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData, [
-                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
-
+            AssertMPDByteComparison(file, outputData, [
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0xFB36, Size = 2 },
 
@@ -61,7 +57,6 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario1_VOID_ProducesSameData() {
             var file = MakeFile(ScenarioType.Scenario1, "VOID.MPD");
-            var fileData = file.Data.GetDataCopyOrReference();
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -72,10 +67,7 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("VOID_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData, [
-                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
-
+            AssertMPDByteComparison(file, outputData, [
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
 
@@ -94,7 +86,6 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario1_BLACK_ProducesSameData() {
             var file = MakeFile(ScenarioType.Scenario1, "BLACK.MPD");
-            var fileData = file.Data.GetDataCopyOrReference();
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -105,10 +96,7 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("BLACK_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData, [
-                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
-
+            AssertMPDByteComparison(file, outputData, [
                 // PDATA's have the wrong addresses in the original file!! Just skip it!!
                 new ByteComparisonSkipRegion { Offset = 0x2100, Size = 0x798 },
 
@@ -138,7 +126,6 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario1_FURAIN_ProducesSameData() {
             var file = MakeFile(ScenarioType.Scenario1, "FURAIN.MPD");
-            var fileData = file.Data.GetDataCopyOrReference();
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -149,12 +136,9 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("FURAIN_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData, [
+            AssertMPDByteComparison(file, outputData, [
                 // Header: Insignificant texture Chunk[5] size difference (2 bytes) due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2037, Size = 1 },
-
-                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
 
                 // Chunk[2]: Some inconsequential heightmap differences caused by *not* ignoring neighbor tiles in other blocks when flat.
                 // TODO: we should be able to fix this one!!
@@ -181,7 +165,6 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario1_HONJIN_ProducesSameData() {
             var file = MakeFile(ScenarioType.Scenario1, "HONJIN.MPD");
-            var fileData = file.Data.GetDataCopyOrReference();
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -192,10 +175,7 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("HONJIN_Test.MPD", outputData);
 
-            AssertByteComparison(fileData, outputData, [
-                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
-
+            AssertMPDByteComparison(file, outputData, [
                 // Texture compression nonsense
                 new ByteComparisonSkipRegion { Offset = 0x7E9A, Size = 2 },
 
@@ -276,6 +256,17 @@ namespace SF3.Tests.MPD {
             public int ActualDataExtraBytes;
         }
 
+        private void AssertMPDByteComparison(MPD_File file, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
+            skipRegions = GetKnownAcceptableInconsistenciesForMPD(file)
+                .Concat(skipRegions ?? [])
+                .OrderBy(x => x.Offset)
+                .GroupBy(x => x.Offset)
+                .Select(x => x.First())
+                .ToArray();
+
+            AssertByteComparison(file.Data.GetDataCopyOrReference(), outputData, skipRegions, acceptablePercentage);
+        }
+
         private void AssertByteComparison(byte[] fileData, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
             var errors = ByteComparisonErrors(fileData, outputData, out var percentageCorrect, skipRegions) ?? [];
             if (percentageCorrect >= acceptablePercentage) {
@@ -328,6 +319,18 @@ namespace SF3.Tests.MPD {
             }
 
             return errors;
+        }
+
+        /// <summary>
+        /// There are several specific things that the MPD_Writer can't get right, 99% of which are extremely minor
+        /// inconsistencies in LZSS compression. This will fetch them so they don't have to be added manually every
+        /// time.
+        /// </summary>
+        private ByteComparisonSkipRegion[] GetKnownAcceptableInconsistenciesForMPD(IMPD_File file) {
+            return [
+                // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
+                new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
+            ];
         }
 
         private IMPD_File RecreateMPD(IMPD_File mpd) {
