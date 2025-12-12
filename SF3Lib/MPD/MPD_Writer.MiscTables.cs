@@ -21,7 +21,7 @@ namespace SF3.MPD {
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
                 case TextureAnimationTable ta:   WriteTextureAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case BoundaryTable bt:           WriteBoundaries(bt);          break;
-                case TextureIDTable tid:         WriteTextureIDs(tid);         break;
+                case TextureIDTable tid:         WriteTextureIDs(tid, settings?.LongEmptyAltAnimationTable ?? false); break;
                 case MissingModelChunk mmc:      return null;
                 case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
                 default:
@@ -91,10 +91,16 @@ namespace SF3.MPD {
             }
         }
 
-        public void WriteTextureIDs(TextureIDTable textureIds) {
+        public void WriteTextureIDs(TextureIDTable textureIds, bool writeLongEmptyData) {
             foreach (var textureId in textureIds)
                 WriteUShort(textureId.TextureID);
-            WriteUShort(0xFFFF);
+
+            if (writeLongEmptyData && textureIds.Length == 0) {
+                WriteUShort(0xFFFF);
+                WriteUShort(0xFFFF);
+            }
+            else
+                WriteUShort(0xFFFF);
         }
     }
 }

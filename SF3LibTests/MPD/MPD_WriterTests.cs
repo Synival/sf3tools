@@ -106,21 +106,6 @@ namespace SF3.Tests.MPD {
             File.WriteAllBytes("BLACK_Test.MPD", outputData);
 
             AssertByteComparison(fileData, outputData, [
-                // Header: Position of header is off by 1 byte because the original animation table is 4 bytes instead of 2 for some reason.
-                new ByteComparisonSkipRegion { Offset = 0x0003, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x00AC, Size = 2, ActualDataExtraBytes = 2 },
-
-                // Header is pushed back 2 bytes, so 4 bytes later than the original.
-                new ByteComparisonSkipRegion { Offset = 0x04AE, Size = 0, ActualDataExtraBytes = 2 },
-
-                // A lot of addresses are also wrong now.
-                new ByteComparisonSkipRegion { Offset = 0x04EF, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x04F3, Size = 1 },
-                new ByteComparisonSkipRegion { Offset = 0x050B, Size = 1 },
-
-                // (Re-align at 0x2000)
-                new ByteComparisonSkipRegion { Offset = 0x2000, ActualDataExtraBytes = -4 },
-
                 // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
 
