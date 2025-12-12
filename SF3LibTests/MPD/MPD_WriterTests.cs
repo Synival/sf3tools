@@ -172,6 +172,31 @@ namespace SF3.Tests.MPD {
             ]);
         }
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_HONJIN_CanBeLoaded() {
+            var originalFile = MakeFile(ScenarioType.Scenario1, "HONJIN.MPD");
+            _ = RecreateMPD(originalFile);
+        }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_HONJIN_ProducesSameData() {
+            var file = MakeFile(ScenarioType.Scenario1, "HONJIN.MPD");
+            var fileData = file.Data.GetDataCopyOrReference();
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(file);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("HONJIN_Test.MPD", outputData);
+
+            AssertByteComparison(fileData, outputData, [
+                // TODO: skip bogus LZSS stuff
+            ]);
+        }
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {

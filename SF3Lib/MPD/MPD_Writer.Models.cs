@@ -5,10 +5,10 @@ using CommonLib.SGL;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances /* TODO: collision line data */, bool isHighMemory)
-            => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, isHighMemory));
+        public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory)
+            => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, collisions, isHighMemory));
 
-        public void WriteModelChunkContent(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances /* TODO: collision line data */, bool isHighMemory) {
+        public void WriteModelChunkContent(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -16,11 +16,11 @@ namespace SF3.MPD {
 
             // Write header. Collision-related offsets will be written later.
             var collisionLinesHeaderOffset = CurrentOffset;
-            // TODO: write lines!
             WriteMPDPointer(null);
-            // TODO: write blocks!
             var collisionBlocksOffset = CurrentOffset;
             WriteMPDPointer(null);
+
+            // Last part of the header: the number of model instances.
             WriteUShort((ushort) (instances?.Count() ?? 0));
 
             // Model instances immediately follow the header.
@@ -35,7 +35,7 @@ namespace SF3.MPD {
                     WriteModelChunkModel(model, fileChunkAddr, ramChunkAddr);
 
             // The collision data is at the end.
-            WriteCollisionLinesHeader(collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
+            WriteCollisionLinesSection(collisions, collisionLinesHeaderOffset, fileChunkAddr, ramChunkAddr);
             WriteCollisionBlocks(collisionBlocksOffset, fileChunkAddr, ramChunkAddr);
         }
 
@@ -207,12 +207,47 @@ namespace SF3.MPD {
             WriteUShort(attr.Dir);
         }
 
-        public void WriteCollisionLinesHeader(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
+        public void WriteCollisionLinesSection(IMPD_Collisions collisions, long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
             AtOffset(ptrToOffset, curAddr => WriteUInt((uint) (curAddr - fileChunkAddr + ramChunkAddr)));
 
-            // TODO: actually write the real lines!
-            WriteUInt(0);
-            WriteUInt(0);
+            // Write a header. The points come first, then the lines.
+            var pointsAddr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr) + 0x08;
+            var linesAddr = pointsAddr + (uint) collisions.Points.Count() * 0x04;
+
+            WriteUInt(pointsAddr);
+            WriteUInt(linesAddr);
+
+            WriteCollisionPoints(collisions.Points);
+            WriteCollisionLines(collisions.Points, collisions.Lines);
+        }
+
+        public void WriteCollisionPoints(IEnumerable<IMPD_CollisionPoint> points) {
+            // Just (X, Y) coordinates!
+            foreach (var point in points) {
+                WriteShort(point.X);
+                WriteShort(point.Y);
+            }
+        }
+
+        public void WriteCollisionLines(IEnumerable<IMPD_CollisionPoint> points, IEnumerable<IMPD_CollisionLine> lines) {
+            // Map to retrieve indices from point references.
+            var indicesForPoints = points
+                .Select((x, i) => (Point: x, Index: i))
+                .ToDictionary(x => x.Point, x => (ushort) x.Index);
+
+            foreach (var line in lines) {
+                // Don't bother writing lines that don't have valid points or indices.
+                var index1 = indicesForPoints.TryGetValue(line.Point1, out var index1Out) ? (ushort?) index1Out: null;
+                var index2 = indicesForPoints.TryGetValue(line.Point2, out var index2Out) ? (ushort?) index2Out: null;
+                if (!index1.HasValue || !index2.HasValue)
+                    continue;
+
+                WriteUShort(index1.Value);
+                WriteUShort(index2.Value);
+                WriteShort(new CompressedFIXED(line.Angle / 180.0f, 0).RawShort);
+                WriteByte(line.Tag);
+                WriteByte((line.FlagToDisable.HasValue && line.FlagToDisable.Value >= 0x201 && line.FlagToDisable.Value <= 0x2FF) ? (byte) (line.FlagToDisable & 0xFF) : (byte) 0);
+            }
         }
 
         public void WriteCollisionBlocks(long ptrToOffset, int fileChunkAddr, int ramChunkAddr) {
