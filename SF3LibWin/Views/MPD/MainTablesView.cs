@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.MPD;
 using SF3.Extensions;
+using SF3.Types;
 
 namespace SF3.Win.Views.MPD {
     public class MainTablesView : TabView {
@@ -48,9 +49,12 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TableView("Ground Animation", Model.GroundAnimationTable, ngc));
 
             if (Model.ModelCollections != null) {
-                foreach (var models in Model.ModelCollections.Values)
-                    if (models.IsHeaderModelCollection() && models is ModelChunk fileModels)
-                        CreateChild(new ModelChunkView(models.Collection.ToString() + "Models", Model, fileModels));
+                foreach (var models in Model.ModelCollections.Values) {
+                    if (models.IsHeaderModelCollection() && models is ModelChunk fileModels) {
+                        var name = (models.Collection == CollectionType.Chest ? "Chest Models" : models.Collection == CollectionType.LockedChest ? "Locked Chest Models" : "Barrel Models");
+                        CreateChild(new ModelChunkView(name, Model, fileModels));
+                    }
+                }
             }
 
             for (var i = 0; i < Model.PaletteTables.Length; i++)
