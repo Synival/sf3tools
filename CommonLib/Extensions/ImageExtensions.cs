@@ -36,6 +36,24 @@ namespace CommonLib.Extensions {
             }
         }
 
+        public static byte[] GetDataIndexed(this Image image) {
+            if (image is Bitmap bitmap)
+                return BitmapExtensions.GetDataIndexed(bitmap);
+            else {
+                using (bitmap = image.CreateIndexedBitmap())
+                    return BitmapExtensions.GetDataIndexed(bitmap);
+            }
+        }
+
+        public static byte[,] Get2DDataIndexed(this Image image) {
+            if (image is Bitmap bitmap)
+                return BitmapExtensions.Get2DDataIndexed(bitmap);
+            else {
+                using (bitmap = image.CreateIndexedBitmap())
+                    return BitmapExtensions.Get2DDataIndexed(bitmap);
+            }
+        }
+
         public static ushort[] GetDataABGR1555(this Image image) {
             if (image is Bitmap bitmap)
                 return BitmapExtensions.GetDataABGR1555(bitmap);

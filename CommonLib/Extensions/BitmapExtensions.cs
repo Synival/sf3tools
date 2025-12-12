@@ -160,12 +160,14 @@ namespace CommonLib.Extensions {
             return outputData;
         }
 
-        public static byte[,] Get2DDataIndexed(this Bitmap bitmap) {
+        public static byte[] GetDataIndexed(this Bitmap bitmap) {
             if (bitmap.PixelFormat != PixelFormat.Format8bppIndexed)
                 throw new ArgumentException($"Bitmap pixel format ({bitmap.PixelFormat}) should be 'Format8bppIndexed'");
-            var inputData = bitmap.GetBitmapDataIndexed();
-            return inputData.To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
+            return bitmap.GetBitmapDataIndexed();
         }
+
+        public static byte[,] Get2DDataIndexed(this Bitmap bitmap)
+            => bitmap.GetDataIndexed().To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
 
         public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap) {
             var outputData = new ushort[bitmap.Width, bitmap.Height];
