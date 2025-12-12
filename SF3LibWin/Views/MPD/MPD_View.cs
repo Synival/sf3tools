@@ -25,23 +25,7 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
             CreateChild(new ModelsTabView("Models", Model));
             CreateChild(new TexturesView("Textures", Model));
-
-            var planes = Model.Planes;
-            if (planes.GroundImage != null)
-                CreateChild(new TextureView("Ground (Image)", planes.GroundImage, 1));
-            if (planes.GroundTiledImage?.Tileset != null)
-                CreateChild(new TextureView("Ground Tileset", planes.GroundTiledImage.Tileset, 1));
-            if (planes.GroundTiledImage?.TiledImage != null)
-                CreateChild(new TextureView("Ground (Tiled Image)", planes.GroundTiledImage.TiledImage, 0.50f));
-            if (planes.SkyBoxImage != null)
-                CreateChild(new TextureView("Sky Box", planes.SkyBoxImage, 1));
-            if (planes.BackgroundImage != null)
-                CreateChild(new TextureView("Background", planes.BackgroundImage, 1));
-            if (planes.ForegroundTiledImage?.Tileset != null)
-                CreateChild(new TextureView("Foreground Tileset", planes.ForegroundTiledImage.Tileset, 1));
-            if (planes.ForegroundTiledImage?.TiledImage != null)
-                CreateChild(new TextureView("Foreground (Tiled Image)", planes.ForegroundTiledImage.TiledImage, 1));
-
+            CreateChild(new PlanesView("Planes", Model.Planes));
             CreateChild(new DataView("Data (advanced)", Model));
 
             return Control;
