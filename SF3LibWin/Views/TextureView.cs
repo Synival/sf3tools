@@ -25,16 +25,20 @@ namespace SF3.Win.Views {
                 if (value != _texture) {
                     _texture = value;
                     Image = value?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
-
-                    if (_texture != null && (_texture.CanSetImageData8Bit || _texture.CanSetImageData16Bit)) {
-                        Control.ImportAction = ImportImageDialog;
-                        LoadImageAction = LoadImage;
-                    }
-                    else {
-                        Control.ImportAction = null;
-                        LoadImageAction = null;
-                    }
                 }
+            }
+        }
+
+        protected override void OnImageSet() {
+            if (_texture != null && (_texture.CanSetImageData8Bit || _texture.CanSetImageData16Bit)) {
+                if (Control != null)
+                    Control.ImportAction = ImportImageDialog;
+                LoadImageAction = LoadImage;
+            }
+            else {
+                if (Control != null)
+                    Control.ImportAction = null;
+                LoadImageAction = null;
             }
         }
 

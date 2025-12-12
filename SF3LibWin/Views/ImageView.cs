@@ -12,7 +12,7 @@ namespace SF3.Win.Views {
         }
 
         public ImageView(string name, Image image, float? imageScale = null) : base(name) {
-            _image = image;
+            Image = image;
             ImageScale = imageScale ?? 0;
         }
 
@@ -29,8 +29,11 @@ namespace SF3.Win.Views {
             _image = null;
             Image = controlImage;
 
+            OnImageSet();
             return rval;
         }
+
+        protected virtual void OnImageSet() {}
 
         public void ExportImageDialog() {
             if (Image == null)
@@ -94,6 +97,7 @@ namespace SF3.Win.Views {
                         Control.Image = value;
                         Control.ExportAction = (value == null) ? null : ExportImageDialog;
                     }
+                    OnImageSet();
                 }
             }
         }

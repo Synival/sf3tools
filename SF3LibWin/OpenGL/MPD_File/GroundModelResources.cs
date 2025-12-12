@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.Logging;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -23,10 +24,22 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         public void Update(IMPD_File mpdFile) {
             Reset();
-            if (mpdFile?.Planes?.GroundImage != null && mpdFile.Flags.Bit_0x0400_HasGroundImage)
-                CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundImage, 65536.0f);
-            else if (mpdFile?.Planes?.GroundTiledImage != null && mpdFile.Flags.Bit_0x1000_HasTileBasedGroundImage)
-                CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage.TiledImage, 128.0f);
+            if (mpdFile?.Planes?.GroundImage != null && mpdFile.Flags.Bit_0x0400_HasGroundImage) {
+                try {
+                    CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundImage, 65536.0f);
+                }
+                catch (Exception e) {
+                    Logger.LogException(e);
+                }
+            }
+            else if (mpdFile?.Planes?.GroundTiledImage != null && mpdFile.Flags.Bit_0x1000_HasTileBasedGroundImage) {
+                try {
+                    CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage.TiledImage, 128.0f);
+                }
+                catch (Exception e) {
+                    Logger.LogException(e);
+                }
+            }
         }
 
         private void CreateGroundImageModel(IMPD_File mpdFile, ITextureData texture, float size) {
