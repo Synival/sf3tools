@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Security.Cryptography;
 using CommonLib.Arrays;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
@@ -10,21 +10,16 @@ using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public abstract class TextureModelBase : Struct {
+    public abstract class TextureModelBase : Struct, ITextureData {
         public TextureModelBase(IByteData data, int id, string name, int address, int size,
-            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent,
-            bool fetchImmediately = true)
+            int width, int height, TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
             Width  = width;
             Height = height;
             PixelFormat = pixelFormat;
             BytesPerPixel = PixelFormat.BytesPerPixel();
-            Palette = palette;
             IsCompressed = isCompressed;
             ZeroIsTransparent = zeroIsTransparent;
-
-            if (fetchImmediately)
-                _ = FetchAndCacheTexture();
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
@@ -36,28 +31,113 @@ namespace SF3.Models.Structs.DAT {
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int StoredImageDataSize { get; private set; }
 
-        public abstract int ImageDataOffset { get; }
-        public abstract bool HasImage { get; }
-        public abstract bool CanLoadImage { get; }
-        public abstract void LoadImageAction(Image image, string filename);
-        public abstract void LoadPaletteFromImage(ITextureData texture);
+        public void LoadImageData() {
+            // Accessing the getter performs loading.
+            if (BytesPerPixel == 1)
+                _ = ImageData8Bit;
+            else
+                _ = ImageData16Bit;
+        }
 
-        protected bool FetchAndCacheTexture() {
-            try {
-                if (!HasImage) {
-                    _texture = null;
-                    StoredImageDataSize = 0;
-                }
-                else {
-                    _texture = (PixelFormat == TexturePixelFormat.ABGR1555)
-                        ? new TextureABGR1555(CollectionType.Primary, ID, 0, 0, ImageData16Bit)
-                        : (ITextureData) new TextureIndexed(CollectionType.Primary, ID, 0, 0, ImageData8Bit, PixelFormat, Palette, ZeroIsTransparent);
-                }
-                return true;
+        public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
+
+        private byte[] _bitmapDataARGB1555          = null;
+        private byte[] _bitmapDataARGB1555_Endcodes = null;
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
+            if (BytesPerPixel == 1) {
+                if (_bitmapDataARGB1555 == null)
+                    _bitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
+                return _bitmapDataARGB1555;
             }
-            catch {
-                return false;
+            else if (highlightEndcodes) {
+                if (_bitmapDataARGB1555_Endcodes == null)
+                    _bitmapDataARGB1555_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true);
+                return _bitmapDataARGB1555_Endcodes;
             }
+            else {
+                if (_bitmapDataARGB1555 == null)
+                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false);
+                return _bitmapDataARGB1555;
+            }
+        }
+
+        public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
+
+        private byte[] _bitmapDataARGB8888          = null;
+        private byte[] _bitmapDataARGB8888_Endcodes = null;
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
+            if (BytesPerPixel == 1) {
+                if (_bitmapDataARGB8888 == null)
+                    _bitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
+                return _bitmapDataARGB8888;
+            }
+            else if (highlightEndcodes) {
+                if (_bitmapDataARGB8888_Endcodes == null)
+                    _bitmapDataARGB8888_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true);
+                return _bitmapDataARGB8888_Endcodes;
+            }
+            else {
+                if (_bitmapDataARGB8888 == null)
+                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false);
+                return _bitmapDataARGB8888;
+            }
+        }
+
+        public void InvalidateImage() {
+            _hash                        = null;
+            _imageData8Bit               = null;
+            _imageData16Bit              = null;
+            _bitmapDataARGB1555          = null;
+            _bitmapDataARGB1555_Endcodes = null;
+            _bitmapDataARGB8888          = null;
+            _bitmapDataARGB8888_Endcodes = null;
+        }
+
+        public void SetImageData8Bit(byte[,] data, Palette palette) {
+            var error = Validate8BitImageData(data, palette);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            if (BytesPerPixel != 1)
+                throw new InvalidOperationException("Incoming texture must be 1 byte-per-pixel");
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                throw new ArgumentException("Incoming data dimensions must match specified width/height");
+
+            var rawData = new byte[Width * Height];
+            var off = 0;
+            for (var y = 0; y < Height; y++)
+                for (var x = 0; x < Width; x++)
+                    rawData[off++] = data[x, y];
+
+            if (IsCompressed) {
+                var compressedData = Compression.CompressLZSS(rawData);
+                Data.Data.SetDataAtTo(ImageDataOffset, compressedData.Length, compressedData);
+            }
+            else
+                Data.Data.SetDataAtTo(ImageDataOffset, rawData.Length, rawData);
+
+            InvalidateImage();
+            _imageData8Bit = data;
+            Palette = palette;
+            OnSetImageData();
+        }
+
+        public string Validate8BitImageData(byte[,] data, Palette palette) {
+            if (!CanSetImageData8Bit)
+                return "Not supported";
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                return ($"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}");
+            return null;
+        }
+
+        public string Validate16BitImageData(ushort[,] data) {
+            if (!CanSetImageData16Bit)
+                return "Not supported";
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                return ($"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}");
+            if (IsCompressed)
+                return "Changing compressed images is not yet supported";
+            return null;
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 3, displayFormat: "X4")]
@@ -67,15 +147,26 @@ namespace SF3.Models.Structs.DAT {
         public TexturePixelFormat PixelFormat { get; }
 
         public int BytesPerPixel { get; }
-        public Palette Palette { get; protected set; }
         public bool IsCompressed { get; }
         public bool ZeroIsTransparent { get; }
 
+        private string _hash = null;
         [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
-        public string Hash => Texture?.Hash ?? "";
+        public string Hash {
+            get {
+                if (_hash == null) {
+                    using (var md5 = MD5.Create())
+                        _hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
+                }
+                return _hash;
+            }
+        }
 
+        private byte[,] _imageData8Bit = null;
         public byte[,] ImageData8Bit {
             get {
+                if (_imageData8Bit != null)
+                    return _imageData8Bit;
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
 
@@ -94,33 +185,16 @@ namespace SF3.Models.Structs.DAT {
                 }
 
                 StoredImageDataSize = storedSize;
+                _imageData8Bit = outputData;
                 return outputData;
-            }
-            set {
-                if (BytesPerPixel != 1)
-                    throw new InvalidOperationException("Incoming texture must be 1 byte-per-pixel");
-                if (value.GetLength(0) != Width || value.GetLength(1) != Height)
-                    throw new ArgumentException("Incoming data dimensions must match specified width/height");
-
-                var rawData = new byte[Width * Height];
-                var off = 0;
-                for (var y = 0; y < Height; y++)
-                    for (var x = 0; x < Width; x++)
-                        rawData[off++] = value[x, y];
-
-                if (IsCompressed) {
-                    var compressedData = Compression.CompressLZSS(rawData);
-                    Data.Data.SetDataAtTo(ImageDataOffset, compressedData.Length, compressedData);
-                }
-                else
-                    Data.Data.SetDataAtTo(ImageDataOffset, rawData.Length, rawData);
-
-                FetchAndCacheTexture();
             }
         }
 
+        private ushort[,] _imageData16Bit = null;
         public ushort[,] ImageData16Bit {
             get {
+                if (_imageData16Bit != null)
+                    return _imageData16Bit;
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
 
@@ -141,15 +215,13 @@ namespace SF3.Models.Structs.DAT {
                 }
 
                 StoredImageDataSize = storedSize;
+                _imageData16Bit = outputData;
                 return outputData;
             }
             set {
-                if (BytesPerPixel != 2)
-                    throw new InvalidOperationException("Incoming texture must be 2 bytes-per-pixel");
-                if (IsCompressed)
-                    throw new InvalidOperationException("Changing compressed images is not yet supported");
-                if (value.GetLength(0) != Width || value.GetLength(1) != Height)
-                    throw new ArgumentException("Incoming data dimensions must match specified width/height");
+                var error = Validate16BitImageData(value);
+                if (error != null)
+                    throw new ArgumentException(error);
 
                 var off = 0;
                 var newData = new ByteData.ByteData(new ByteArray(Width * Height * 2));
@@ -161,35 +233,20 @@ namespace SF3.Models.Structs.DAT {
                 }
                 Data.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopyOrReference());
 
-                FetchAndCacheTexture();
+                InvalidateImage();
+                _imageData16Bit = value;
+                OnSetImageData();
             }
         }
 
-        private ITextureData _texture = null;
-        public ITextureData Texture {
-            get => _texture;
-            set {
-                // Do nothing if not possible, no change is necessary, or someone is trying to unset a texture.
-                if (!CanLoadImage || value == _texture || value == null)
-                    return;
+        public bool CanSetImageData8Bit => BytesPerPixel == 1 && CanLoadImage;
+        public bool CanSetImageData16Bit => BytesPerPixel == 2 && CanLoadImage;
 
-                // Texture must be the same dimensions and bytes-per-pixel.
-                if (value.Width != Width || value.Height != Height)
-                    throw new ArgumentException($"Incoming texture height ({value.Width}x{value.Height}) should be {Width}x{Height}");
-                if (value.BytesPerPixel != BytesPerPixel)
-                    throw new ArgumentException($"Incoming texture bytes-per-pixel ({value.BytesPerPixel}) should be {BytesPerPixel}");
+        public abstract void OnSetImageData();
 
-                // Update image data and (if necessary) palette data.
-                if (BytesPerPixel == 1) {
-                    LoadPaletteFromImage(value);
-                    ImageData8Bit = value.ImageData8Bit;
-                }
-                else
-                    ImageData16Bit = value.ImageData16Bit;
-
-                // Reload our cached image from the data.
-                FetchAndCacheTexture();
-            }
-        }
+        public abstract int ImageDataOffset { get; }
+        public abstract bool HasImage { get; }
+        public abstract bool CanLoadImage { get; }
+        public abstract Palette Palette { get; protected set; }
     }
 }

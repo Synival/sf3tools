@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using CommonLib.Attributes;
+﻿using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.DAT {
@@ -11,14 +9,14 @@ namespace SF3.Models.Structs.DAT {
         private readonly int _paddingAddr;
 
         public BtlEnkei_TextureModel(IByteData data, int id, string name, int address)
-        : base(data, id, name, address, 0x10, data.GetDouble(address), fetchImmediately: false
+        : base(data, id, name, address, 0x10, data.GetDouble(address)
         ) {
             _paletteImageOffsetAddr = Address + 0x00; // 4 bytes
             _paletteImageSizeAddr   = Address + 0x04; // 4 bytes
             _loadSizeAddr           = Address + 0x08; // 4 bytes
             _paddingAddr            = Address + 0x0C; // 4 bytes
 
-            _ = FetchAndCacheTexture();
+            LoadImageData();
         }
 
         public override int ImageDataOffset => HasImage ? (PaletteImageOffset + 0x200) : 0;
@@ -32,7 +30,7 @@ namespace SF3.Models.Structs.DAT {
             set => Data.SetDouble(_paletteImageOffsetAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_paletteImageSizeAddr), displayOrder: -0.4f, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_paletteImageSizeAddr), displayOrder: -0.4f, displayName: "Palette+Image Size", displayFormat: "X4")]
         public int PaletteImageSize {
             get => Data.GetDouble(_paletteImageSizeAddr);
             set => Data.SetDouble(_paletteImageSizeAddr, value);
@@ -50,8 +48,7 @@ namespace SF3.Models.Structs.DAT {
             set => Data.SetDouble(_paddingAddr, value);
         }
 
-        public override void LoadImageAction(Image image, string filename) {
-            base.LoadImageAction(image, filename);
+        public override void OnSetImageData() {
             PaletteImageSize = 0x200 + StoredImageDataSize;
             LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
         }
