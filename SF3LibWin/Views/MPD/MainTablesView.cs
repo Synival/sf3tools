@@ -52,6 +52,8 @@ namespace SF3.Win.Views.MPD {
                 foreach (var models in Model.ModelCollections.Values) {
                     if (models.IsHeaderModelCollection() && models is ModelChunk fileModels) {
                         var name = (models.Collection == CollectionType.Chest ? "Chest Models" : models.Collection == CollectionType.LockedChest ? "Locked Chest Models" : "Barrel Models");
+                        if (models.IsUnreferenced)
+                            name += " (Unreferenced)";
                         CreateChild(new ModelChunkView(name, Model, fileModels));
                     }
                 }

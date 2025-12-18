@@ -218,7 +218,6 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        public int UnusedHeaderBytes = 0;
         private ITable[] CreateUnreferencedTables(MPD_HeaderModel header, IEnumerable<ITable> existingTables) {
             var newTables = new List<ITable>();
 
@@ -227,11 +226,6 @@ namespace SF3.Models.Files.MPD {
 
             newTables.AddRange(MakeUnreferencedHeaderModelCollections(usedSpace, contiguousUnusedSpace));
 
-            var data = Data.GetDataCopyOrReference();
-            UnusedHeaderBytes = 0;
-            for (int i = 0; i < usedSpace.Length; ++i)
-                if (!usedSpace[i] && data[i] != 0)
-                    UnusedHeaderBytes++;
 
             return newTables.ToArray();
         }

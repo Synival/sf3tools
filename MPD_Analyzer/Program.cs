@@ -55,7 +55,8 @@ namespace MPD_Analyzer {
         };
 
         private static string[]? MPD_MatchFunc(IMPD_File mpdFile, string filename) {
-            return mpdFile.Planes.GroundXRotation != -90.0f ? [] : null;
+            var unreferencedModels = mpdFile.ModelCollections.Values.Where(x => x.IsUnreferenced && x is ModelChunk).ToArray();
+            return unreferencedModels.Select(x => x.Collection.ToString()).ToArray();
         }
 
         public static void Main(string[] args) {
