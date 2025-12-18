@@ -7,8 +7,10 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Images;
+using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Structs.MPD.TextureChunk;
+using SF3.Models.Tables;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
@@ -210,6 +212,58 @@ namespace SF3.Models.Files.MPD {
                 Failed   = failed,
                 Skipped  = skipped
             };
+        }
+
+        private void MarkAllocatedSpace(bool[] usedSpace, int start, int stop) {
+            for (int i = 0; i < stop; ++i)
+                usedSpace[i] = true;
+        }
+
+        private bool[] MarkAllocatedSpace(bool[] usedSpace, IEnumerable<ITable> existingTables) {
+            foreach (var table in existingTables)
+                MarkAllocatedSpace(usedSpace, table.Address, table.Address + table.SizeInBytesPlusTerminator);
+            return usedSpace;
+        }
+
+
+        private bool[] GetUsedHeaderSpace(MPD_HeaderModel header, IEnumerable<ITable> existingTables) {
+            var usedSpace = new bool[0x2000];
+
+            // Mark '**header', '*header', and 'header'.
+            MarkAllocatedSpace(usedSpace, 0, 4);                                         // double-pointer to header
+            var headerPtr = Data.GetDouble(0) - 0x290000;                                // pointer to...
+            MarkAllocatedSpace(usedSpace, headerPtr, headerPtr + 4);                     //    ...header
+            MarkAllocatedSpace(usedSpace, header.Address, header.Address + header.Size); // header
+
+            // Mark all referenced tables
+            MarkAllocatedSpace(usedSpace, existingTables);
+
+            return usedSpace;
+        }
+
+        private ushort[] GetContiguousUnusedHeaderSpace(bool[] usedSpace) {
+            var contiguousUnusedBytes = new ushort[usedSpace.Length];
+            MarkContiguousUnusedHeaderSpace(contiguousUnusedBytes, usedSpace);
+            return contiguousUnusedBytes;
+        }
+
+        private void MarkContiguousUnusedHeaderSpace(ushort[] contiguousUnusedBytes, bool[] usedSpace) {
+            if (contiguousUnusedBytes.Length != usedSpace.Length)
+                throw new ArgumentException($"{nameof(contiguousUnusedBytes)} should be " +
+                    $"{usedSpace.Length} (0x{usedSpace.Length:X4}) bytes, not " +
+                    $"{contiguousUnusedBytes.Length} (0x{contiguousUnusedBytes.Length:X4})"
+            );
+
+            // Mark contiguous unused bytes by incrementing a counter in reverse.
+            ushort contiguousCount = 0;
+            for (int i = usedSpace.Length - 1; i >= 0; --i) {
+                if (!usedSpace[i])
+                    contiguousUnusedBytes[i] = ++contiguousCount;
+                else {
+                    contiguousUnusedBytes[i] = 0;
+                    contiguousCount = 0;
+                }
+            }
         }
     }
 }

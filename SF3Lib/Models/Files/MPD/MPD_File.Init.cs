@@ -56,6 +56,11 @@ namespace SF3.Models.Files.MPD {
             tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceUtils.ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
             tables.AddRange(MakeHeaderModelCollections(header));
             tables.AddRange(MakeUnknownTables(header));
+            tables.AddRange(CreateUnreferencedTables(header, tables));
+
+            foreach (var collection in ((CollectionType[]) Enum.GetValues(typeof(CollectionType))).Where(x => x.IsHeaderModelCollection()).ToArray())
+                if (!ModelCollections.ContainsKey(collection))
+                    ModelCollections[collection] = new MissingModelChunk(this, collection);
 
             return tables.ToArray();
         }
@@ -122,23 +127,26 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeHeaderModelCollections(MPD_HeaderModel header) {
             var tables = new List<ITable>();
-
             var offsets = new int[] { header.OffsetChestModel, header.OffsetLockedChestModel, header.OffsetBarrelModel };
+
             for (int i = 0; i < 3; i++) {
                 var offset = offsets[i];
                 var collection = CollectionType.Chest + i;
 
                 if (offset != 0) {
-                    var name = (i == 0) ? "ChestModel" : (i == 1) ? "LockedChestModel" : "BarrelModel";
-                    var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset - RamAddress, name, null, collection);
-                    ModelCollections[collection] = newChunk;
-                    tables.AddRange(newChunk.Tables);
+                    ModelCollections[collection] = MakeHeaderModelCollection(offset - RamAddress, collection, out var newTables);
+                    tables.AddRange(newTables);
                 }
-                else
-                    ModelCollections[collection] = new MissingModelChunk(this, collection);
             }
 
             return tables.ToArray();
+        }
+
+        private ModelChunk MakeHeaderModelCollection(int offset, CollectionType collection, out ITable[] tablesOut) {
+            var name = collection.ToString() + "Model";
+            var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset, name, null, collection);
+            tablesOut = newChunk.Tables.ToArray();
+            return newChunk;
         }
 
         private ITable[] MakeUnknownTables(MPD_HeaderModel header) {
@@ -208,6 +216,123 @@ namespace SF3.Models.Files.MPD {
             }
 
             return tables.ToArray();
+        }
+
+        public int UnusedHeaderBytes = 0;
+        private ITable[] CreateUnreferencedTables(MPD_HeaderModel header, IEnumerable<ITable> existingTables) {
+            var newTables = new List<ITable>();
+
+            var usedSpace = GetUsedHeaderSpace(header, existingTables);
+            var contiguousUnusedSpace = GetContiguousUnusedHeaderSpace(usedSpace);
+
+            newTables.AddRange(MakeUnreferencedHeaderModelCollections(usedSpace, contiguousUnusedSpace));
+
+            var data = Data.GetDataCopyOrReference();
+            UnusedHeaderBytes = 0;
+            for (int i = 0; i < usedSpace.Length; ++i)
+                if (!usedSpace[i] && data[i] != 0)
+                    UnusedHeaderBytes++;
+
+            return newTables.ToArray();
+        }
+
+        private ITable[] MakeUnreferencedHeaderModelCollections(bool[] usedSpace, ushort[] contiguousUnusedSpace) {
+            var newTables = new List<ITable>();
+
+            while (TryMakeUnreferencedHeaderModelCollection(usedSpace, contiguousUnusedSpace, out var newTablesSub))
+                newTables.AddRange(newTablesSub);
+
+            return newTables.ToArray();
+        }
+
+        private bool TryMakeUnreferencedHeaderModelCollection(bool[] usedSpace, ushort[] contiguousUnusedSpace, out ITable[] newTablesOut) {
+            // See if there are any header model collections not yet used.
+            var unusedModelChunks =
+                new CollectionType?[] {
+                    CollectionType.Chest,
+                    CollectionType.LockedChest,
+                    CollectionType.Barrel,
+                }
+                .FirstOrDefault(x => !ModelCollections.ContainsKey(x.Value));
+
+            // If there isn't an unused one, don't try to add a new one.
+            if (!unusedModelChunks.HasValue) {
+                newTablesOut = null;
+                return false;
+            }
+
+            // We're going to look for some models. Key it to the first unused set of models.
+            var collection = unusedModelChunks.Value;
+
+            bool LooksLikeHeaderPointer(int address) {
+                if (address % 4 != 0 && contiguousUnusedSpace[address] < 4)
+                    return false;
+                var value = Data.GetDouble(address);
+                return value >= 0x290000 && value <= 0x291FFC;
+            }
+
+            bool LooksLikeHeaderModelInstance(int address) {
+                if (address % 4 != 0 || contiguousUnusedSpace[address] < 0x1C)
+                    return false;
+
+                var notPointers = new int[] {
+                    address + 0x04,
+                    address + 0x08,
+                    address + 0x0C,
+                    address + 0x10,
+                    address + 0x14,
+                    address + 0x18,
+                };
+
+                // Looking for pointers and non-pointers is enough.
+                return LooksLikeHeaderPointer(address) && notPointers.All(x => !LooksLikeHeaderPointer(x));
+            }
+
+            bool IsAllZeroes(int address, int count) {
+                if (address > Data.Length - count)
+                    return false;
+                var dataRef = Data.GetDataCopyOrReference();
+                for (int i = 0; i < count; i++)
+                    if (dataRef[address + count] != 0)
+                        return false;
+                return true;
+            }
+ 
+            // Get the possible locations with some reasonable criteria.
+            var possibleHeaderModelInstancesPass1 = Enumerable
+                .Range(0, contiguousUnusedSpace.Length)
+                .Where(x => x % 4 == 0 && contiguousUnusedSpace[x] >= 0x1C && LooksLikeHeaderPointer(x))
+                .ToArray();
+
+            // Narrow it down a bit more.
+            var possibleHeaderModelInstances = possibleHeaderModelInstancesPass1.Where(x => LooksLikeHeaderModelInstance(x)).ToArray();
+
+            // Look for a table with a proper terminator (0x1C zero bytes)
+            for (int i = 0; i < possibleHeaderModelInstances.Length; i++) {
+                // Skip headers with a match before.
+                var addr = possibleHeaderModelInstances[i];
+                if (i > 0 && possibleHeaderModelInstances[i - 1] == addr - 0x1C)
+                    continue;
+    
+                // Get the position of the end of the table.
+                var endAddr = addr + 0x1C;
+                for (int j = i + 1; j < possibleHeaderModelInstances.Length; j++)
+                    if (possibleHeaderModelInstances[j] == endAddr)
+                        endAddr += 0x1C;
+
+                // If we found an appropriate end entry, then make the collection, mark the space as used, and return success.
+                if (IsAllZeroes(endAddr, 0x1C)) {
+                    ModelCollections[collection] = MakeHeaderModelCollection(addr, collection, out var newTables);
+                    MarkAllocatedSpace(usedSpace, newTables);
+                    MarkContiguousUnusedHeaderSpace(contiguousUnusedSpace, usedSpace);
+                    newTablesOut = newTables;
+                    return true;
+                }
+            }
+
+            // We didn't find a table; return failure.
+            newTablesOut = null;
+            return false;
         }
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelChunks, IChunkData surfaceModelChunk) {
