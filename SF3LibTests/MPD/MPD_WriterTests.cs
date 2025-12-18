@@ -169,6 +169,29 @@ namespace SF3.Tests.MPD {
             ]);
         }
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_BAL_3_CanBeLoaded() {
+            var originalFile = MakeFile(ScenarioType.Scenario1, "BAL_3.MPD");
+            _ = RecreateMPD(originalFile);
+        }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_BAL_3_ProducesSameData() {
+            var file = MakeFile(ScenarioType.Scenario1, "BAL_3.MPD");
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(file);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("BAL_3_Test.MPD", outputData);
+
+            AssertMPDByteComparison(file, outputData, [
+            ]);
+        }
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {

@@ -142,9 +142,9 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ModelChunk MakeHeaderModelCollection(int offset, CollectionType collection, out ITable[] tablesOut) {
+        private ModelChunk MakeHeaderModelCollection(int offset, CollectionType collection, out ITable[] tablesOut, bool isUnreferenced = false) {
             var name = collection.ToString() + "Model";
-            var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset, name, null, collection);
+            var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset, name, null, collection, isUnreferenced);
             tablesOut = newChunk.Tables.ToArray();
             return newChunk;
         }
@@ -322,7 +322,7 @@ namespace SF3.Models.Files.MPD {
 
                 // If we found an appropriate end entry, then make the collection, mark the space as used, and return success.
                 if (IsAllZeroes(endAddr, 0x1C)) {
-                    ModelCollections[collection] = MakeHeaderModelCollection(addr, collection, out var newTables);
+                    ModelCollections[collection] = MakeHeaderModelCollection(addr, collection, out var newTables, isUnreferenced: true);
                     MarkAllocatedSpace(usedSpace, newTables);
                     MarkContiguousUnusedHeaderSpace(contiguousUnusedSpace, usedSpace);
                     newTablesOut = newTables;

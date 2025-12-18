@@ -35,5 +35,6 @@ namespace SF3.Models.Files.MPD {
         }
 
         public IMPD_File MPD_File { get; }
+        public bool IsUnreferenced { get; set; } = true;
     }
 }

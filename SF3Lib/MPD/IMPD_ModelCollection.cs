@@ -33,5 +33,10 @@ namespace SF3.MPD {
         /// All textures associated with this collection.
         /// </summary>
         IEnumerable<ITexture> Textures { get; }
+
+        /// <summary>
+        /// When 'true', this model is serialized but not referenced in the MPD header.
+        /// </summary>
+        bool IsUnreferenced { get; set; }
     }
 }

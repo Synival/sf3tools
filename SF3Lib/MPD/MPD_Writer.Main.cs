@@ -49,15 +49,19 @@ namespace SF3.MPD {
             WriteUInt((uint) (headerPos + 0x290000));
 
             // Write the chest/barrel models, if available, and update the main header pointers.
-            var chestModelsPos       = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Chest,       out var chestChunk)       == true) ? chestChunk       : null);
-            var lockedChestModelsPos = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.LockedChest, out var lockedChestChunk) == true) ? lockedChestChunk : null);
-            var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Barrel,      out var barrelChunk)      == true) ? barrelChunk      : null);
+            IMPD_ModelCollection chestChunk       = null;
+            IMPD_ModelCollection lockedChestChunk = null;
+            IMPD_ModelCollection barrelChunk      = null;
 
-            if (chestModelsPos.HasValue)
+            var chestModelsPos       = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Chest,       out chestChunk)       == true) ? chestChunk       : null);
+            var lockedChestModelsPos = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.LockedChest, out lockedChestChunk) == true) ? lockedChestChunk : null);
+            var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Barrel,      out barrelChunk)      == true) ? barrelChunk      : null);
+
+            if (chestModelsPos.HasValue && chestChunk?.IsUnreferenced != true)
                 AtOffset(chestModelsPosPtr, _ => WriteUInt(chestModelsPos.Value + 0x290000));
-            if (lockedChestModelsPos.HasValue)
+            if (lockedChestModelsPos.HasValue && lockedChestChunk?.IsUnreferenced != true)
                 AtOffset(lockedChestModelsPosPtr, _ => WriteUInt(lockedChestModelsPos.Value + 0x290000));
-            if (barrelModelsPos.HasValue)
+            if (barrelModelsPos.HasValue && barrelChunk?.IsUnreferenced != true)
                 AtOffset(barrelModelsPosPtr, _ => WriteUInt(barrelModelsPos.Value + 0x290000));
 
             // Write a *double pointer* to the header at the start of the file.

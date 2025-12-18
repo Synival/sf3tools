@@ -21,7 +21,8 @@ namespace SF3.Models.Files.MPD {
             int address,
             string name,
             int? chunkIndex,
-            CollectionType collection
+            CollectionType collection,
+            bool isUnreferenced = false
         ) : base(data, nameContext)
         {
             MPD_File   = mpdFile;
@@ -29,13 +30,14 @@ namespace SF3.Models.Files.MPD {
             Name       = name;
             Collection = collection;
             ChunkIndex = chunkIndex;
+            IsUnreferenced = isUnreferenced;
         }
 
         public static ModelChunk Create(
             IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name,
-            int? chunkIndex, CollectionType modelCollection
+            int? chunkIndex, CollectionType modelCollection, bool isUnreferenced = false
         ) {
-            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, chunkIndex, modelCollection);
+            var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, chunkIndex, modelCollection, isUnreferenced);
             newFile.Init();
             return newFile;
         }
@@ -372,5 +374,7 @@ namespace SF3.Models.Files.MPD {
                 return _textures;
             }
         }
+
+        public bool IsUnreferenced { get; set; }
     }
 }
