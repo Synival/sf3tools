@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.Model;
+using SF3.Types;
 
 namespace SF3.Win.Views.MPD {
     public class ModelChunkView : TabView {
@@ -15,6 +16,7 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
+            var mc = (MPD_File.ModelCollections?.TryGetValue(Model.Collection, out var mcOut) == true) ? mcOut : null;
 
             if (Model.ModelsHeader != null)
                 CreateChild(new DataModelView("Header", Model.ModelsHeader, ngc));
@@ -28,7 +30,7 @@ namespace SF3.Win.Views.MPD {
             CreateChild(new PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
-            CreateChild(new TableArrayView<AttrTable>("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), ngc));
+            CreateChild(new AttrTableArrayView("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), mc, ngc));
 
             if (Model.CollisionLinesHeader != null)
                 CreateChild(new DataModelView("Collision Lines Header", Model.CollisionLinesHeader, ngc));
