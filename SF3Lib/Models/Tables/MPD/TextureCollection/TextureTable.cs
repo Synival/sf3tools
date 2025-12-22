@@ -32,7 +32,11 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         public override bool Load() {
             var size = TextureModel.GlobalSize;
             return Load((id, address) => {
-                var pixelFormat = PixelFormats.TryGetValue(StartID + id, out var pixelFormatOut) ? pixelFormatOut : TexturePixelFormat.Unknown;
+                var pixelFormat =
+                    (Collection != CollectionType.Primary) ? TexturePixelFormat.ABGR1555 :
+                    PixelFormats.TryGetValue(StartID + id, out var pixelFormatOut) ? pixelFormatOut :
+                    TexturePixelFormat.Unknown;
+
                 var nextImageDataOffset = id + 1 >= Size
                     ? Data.Length
                     : Data.GetWord(address + size + 2);
