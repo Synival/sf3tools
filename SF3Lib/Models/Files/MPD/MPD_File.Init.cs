@@ -466,11 +466,11 @@ namespace SF3.Models.Files.MPD {
             // Now that textures are loaded, build the texture animation frame data.
             if (chunkDatas[3] != null) {
                 var infoByOffset = TextureAnimations
-                    .SelectMany(x => x.TextureAnimationFrameTable)
-                    .GroupBy(x => x.ImageDataOffset)
+                    .SelectMany(x => x.TextureAnimationFrameTable.Select(y => (Anim: x, Frame: y)))
+                    .GroupBy(x => x.Frame.ImageDataOffset)
                     .ToDictionary(x => x.Key, x => {
-                        var frame = x.First();
-                        return new UniqueTextureAnimationFrameInfo(frame.Width, frame.Height, frame.PixelFormat != TexturePixelFormat.ABGR1555);
+                        var anim = x.First().Anim;
+                        return new UniqueTextureAnimationFrameInfo((int) anim.Width, (int) anim.Height, anim.IsIndexed);
                     });
 
                 TextureAnimationFrameChunk = TextureAnimationFrameChunk.Create(chunkDatas[3], NameGetterContext, 0, nameof(TextureAnimationFrameChunk), infoByOffset, this);

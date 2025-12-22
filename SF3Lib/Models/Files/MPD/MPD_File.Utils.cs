@@ -6,7 +6,9 @@ using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Images;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
 using SF3.Types;
@@ -83,16 +85,16 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader) {
-            var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureStructBase>() : TextureChunks
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, ITexture>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
+                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
 
-            var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureStructBase>() : TextureAnimations
+            var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
                 .SelectMany(x => x.TextureAnimationFrameTable)
                 .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
+                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
@@ -135,7 +137,7 @@ namespace SF3.Models.Files.MPD {
                     // One common texture used for the locked chest is encoded in an ever-so-slightly different way,
                     // so account for that to prevent "IsModified" from always being set.
                     bool applyEndCodesToBorder = true;
-                    if (texture != null && texture.ID == 0x109 && texture.ChunkIndex == 12)
+                    if (texture != null && texture.ID == 0x109 && texture is TextureStruct tsb && tsb.ChunkIndex == 12)
                         applyEndCodesToBorder = false;
                     imageData.FixSaturnTransparency(useEndCodes: true, applyEndCodesToBorder);
 
@@ -156,16 +158,16 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter) {
-            var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureStructBase>() : TextureChunks
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, ITexture>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
+                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
 
-            var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureStructBase>() : TextureAnimations
+            var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
                 .SelectMany(x => x.TextureAnimationFrameTable)
                 .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
+                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 

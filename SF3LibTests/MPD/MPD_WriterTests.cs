@@ -222,7 +222,7 @@ namespace SF3.Tests.MPD {
 
             var errors = new List<string>();
             foreach (var origTexCollection in primaryTextureCollections) {
-                var chunkIndex = origTexCollection.ChunkIndex!.Value;
+                var chunkIndex = origTexCollection.ChunkIndex;
 
                 var origLoc = originalFile.ChunkLocations[chunkIndex];
                 var newLoc  = newFile.ChunkLocations[chunkIndex];

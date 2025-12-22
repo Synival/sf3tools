@@ -17,13 +17,14 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public TextureStruct(
             IByteData data, CollectionType collection, int id, string name, int address,
-            TexturePixelFormat pixelFormat, int? chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
+            TexturePixelFormat pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
         ) : base(
             data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset),
-            isCompressed: false, zeroIsTransparent: true, chunkIndex: chunkIndex
+            isCompressed: false, zeroIsTransparent: true
         ) {
             Collection       = collection;
             ImportExportName = "Texture_" + ((collection == CollectionType.Primary) ? "" : $"{collection}_") + $"{id:X2}";
+            ChunkIndex       = chunkIndex;
 
             _widthAddr           = Address;     // 1 byte
             _heightAddr          = Address + 1; // 1 byte
@@ -70,6 +71,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 130)]
         public CollectionType Collection { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
+        public int ChunkIndex { get; }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 0)]

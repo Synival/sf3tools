@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public UniqueTextureAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, bool isReferenced, IMPD_File mpdFile)
         : base(
             data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555,
-            isCompressed: true, zeroIsTransparent: true, chunkIndex: 3
+            isCompressed: true, zeroIsTransparent: true
         ) {
             MPD_File = mpdFile;
             _width   = width;

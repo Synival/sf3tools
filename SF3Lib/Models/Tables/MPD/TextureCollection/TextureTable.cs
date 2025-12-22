@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         protected TextureTable(
             IByteData data, string name, int address,
             CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
-            int? chunkIndex, IMPD_File mpdFile
+            int chunkIndex, IMPD_File mpdFile
         ) : base(data, name, address, textureCount) {
             if (textureCount > 255)
                 throw new ArgumentOutOfRangeException(nameof(textureCount));
@@ -25,7 +25,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         public static TextureTable Create(
             IByteData data, string name, int address,
             CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
-            int? chunkIndex, IMPD_File mpdFile
+            int chunkIndex, IMPD_File mpdFile
         )
             => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, chunkIndex, mpdFile));
 
@@ -52,7 +52,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         public int StartID { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
         public Dictionary<TexturePixelFormat, Palette> Palettes { get; }
-        public int? ChunkIndex { get; }
+        public int ChunkIndex { get; }
         public IMPD_File MPD_File { get; }
     }
 }

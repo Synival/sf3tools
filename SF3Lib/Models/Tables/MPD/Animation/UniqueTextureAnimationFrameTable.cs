@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Images;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 
@@ -72,6 +74,10 @@ namespace SF3.Models.Tables.MPD.Animation {
             finally {
                 _rows = rows.ToArray();
             }
+
+            if (_rows != null)
+                FrameByOffset = _rows.ToDictionary(x => x.ImageDataOffset, x => x);
+
             return true;
         }
 
@@ -102,7 +108,11 @@ namespace SF3.Models.Tables.MPD.Animation {
                 return (1, size, true);
         }
 
+        public ITexture AtOffset(int offset)
+            => (FrameByOffset?.TryGetValue(offset, out var frame) == true) ? frame : null;
+
         public Dictionary<int, UniqueTextureAnimationFrameInfo> InfoByOffset { get; }
+        public Dictionary<int, UniqueTextureAnimationFrame> FrameByOffset { get; private set; }
         public IMPD_File MPD_File { get; }
     }
 }

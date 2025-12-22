@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.MPD {
                     // everything else. No clue why, but let's consider that the end as well.
                     var textureId = Data.GetData(address, Is32Bit ? 4 : 2);
                     var atEnd = textureId == FrameEndId || textureId == TextureEndId;
-                    return new TextureAnimation(Data, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit, MPD_File);
+                    return new TextureAnimation(Data, id, atEnd ? "--" : $"TexAnim{id:D2}", address, Is32Bit, MPD_File);
                 },
                 (currentRows, model) => model.TextureIDRaw != FrameEndId && model.TextureIDRaw != TextureEndId, addEndModel: false);
         }

@@ -4,21 +4,17 @@ using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Images;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class TextureAnimationFrame : TextureStructBase, ITexture {
+    public class TextureAnimationFrame : Struct, ITexture {
         private readonly int _bytesPerProperty;
         private readonly int _imageDataOffsetAddr;
         private readonly int _durationAddr;
 
         public TextureAnimationFrame(
             IByteData data, string name, int address, bool is32Bit, int frameNum, IMPD_File mpdFile, TextureAnimation animation
-        ) : base(
-            data, mpdFile.ChunkData[3], (int) animation.TextureID, name, address, is32Bit ? 0x08 : 0x04, 
-            animation.IsIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
-        ) {
+        ) : base(data, (int) animation.TextureID, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit          = is32Bit;
             Frame            = frameNum;
             ImportExportName = $"Texture_{ID:X2}_Frame_{frameNum:X2}";
@@ -29,12 +25,16 @@ namespace SF3.Models.Structs.MPD.Animation {
 
             _imageDataOffsetAddr = Address + 0 * _bytesPerProperty;
             _durationAddr        = Address + 1 * _bytesPerProperty;
-
-            if (ImageDataOffset >= 0)
-                LoadImageData();
         }
 
-        public override void OnSetImageData() => throw new System.NotImplementedException();
+        public void SetImageData8Bit(byte[,] data, Palette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB1555(highlightEndcodes);
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB8888(highlightEndcodes);
+        public string Validate8BitImageData(byte[,] data, Palette palette) => Chunk3Texture?.Validate8BitImageData(data, palette);
+        public string Validate16BitImageData(ushort[,] data) => Chunk3Texture?.Validate16BitImageData(data);
+
+        private ITexture Chunk3Texture
+            => MPD_File?.TextureAnimationFrameChunk?.UniqueTextureAnimationFrameTable?.AtOffset(ImageDataOffset);
 
         public bool Is32Bit { get; }
 
@@ -42,13 +42,13 @@ namespace SF3.Models.Structs.MPD.Animation {
         public int TexAnimID => Animation.ID;
 
         [TableViewModelColumn(displayOrder: 1.0f)]
-        public override int Width { get => (int) Animation.Width; set {} }
+        public int Width => Chunk3Texture?.Width ?? 0;
 
         [TableViewModelColumn(displayOrder: 1.1f)]
-        public override int Height { get => (int) Animation.Height; set {} }
+        public int Height => Chunk3Texture?.Height ?? 0;
 
         [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X4")]
-        public override int ImageDataOffset {
+        public int ImageDataOffset {
             get => (int) Data.GetData(_imageDataOffsetAddr, _bytesPerProperty);
             set => Data.SetData(_imageDataOffsetAddr, (uint) value, _bytesPerProperty);
         }
@@ -62,20 +62,32 @@ namespace SF3.Models.Structs.MPD.Animation {
         [TableViewModelColumn(displayOrder: 2.2f)]
         public int Frame { get; }
 
-        public override bool HasImage => true;
-        public override bool CanLoadImage => false;
-
-        public override Palette Palette {
-            get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2);
-            protected set {}
-        }
-
-        public CollectionType Collection => CollectionType.Primary;
-        public Dictionary<TagKey, TagValue> Tags => null;
+        [TableViewModelColumn(displayOrder: 3f)]
+        public string Hash => Chunk3Texture?.Hash;
 
         public string ImportExportName { get; }
-        public bool IsIndexed => Animation.IsIndexed;
         public IMPD_File MPD_File { get; }
         public TextureAnimation Animation { get; }
+
+        public CollectionType Collection => Chunk3Texture?.Collection ?? (CollectionType) (-1);
+        public Dictionary<TagKey, TagValue> Tags => Chunk3Texture?.Tags;
+        public int BytesPerPixel => Chunk3Texture?.BytesPerPixel ?? 0;
+        public TexturePixelFormat PixelFormat => Chunk3Texture?.PixelFormat ?? TexturePixelFormat.Unknown;
+        public byte[,] ImageData8Bit => Chunk3Texture?.ImageData8Bit;
+
+        public ushort[,] ImageData16Bit {
+            get => Chunk3Texture?.ImageData16Bit;
+            set {
+                var tex = Chunk3Texture;
+                if (tex != null)
+                    tex.ImageData16Bit = value;
+            }
+        }
+
+        public byte[] BitmapDataARGB1555 => Chunk3Texture?.BitmapDataARGB1555;
+        public byte[] BitmapDataARGB8888 => Chunk3Texture?.BitmapDataARGB8888;
+        public Palette Palette => Chunk3Texture?.Palette;
+        public bool CanSetImageData8Bit => Chunk3Texture?.CanSetImageData8Bit ?? false;
+        public bool CanSetImageData16Bit => Chunk3Texture?.CanSetImageData16Bit ?? false;
     }
 }

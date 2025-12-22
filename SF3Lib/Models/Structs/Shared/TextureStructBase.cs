@@ -12,19 +12,18 @@ using SF3.Types;
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData {
         public TextureStructBase(IByteData data, IByteData imageData, int id, string name, int address, int size,
-            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, int? chunkIndex)
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
             ImageData         = imageData;
             PixelFormat       = pixelFormat;
             BytesPerPixel     = PixelFormat.BytesPerPixel();
             IsCompressed      = isCompressed;
             ZeroIsTransparent = zeroIsTransparent;
-            ChunkIndex        = chunkIndex;
         }
 
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
-            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, int? chunkIndex = null)
-        : this(data, data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent, chunkIndex) {}
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
+        : this(data, data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
         public abstract int Width { get; set; }
@@ -155,9 +154,6 @@ namespace SF3.Models.Structs.Shared {
         public int BytesPerPixel { get; }
         public bool IsCompressed { get; }
         public bool ZeroIsTransparent { get; }
-
-        [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
-        public int? ChunkIndex { get; }
 
         private string _hash = null;
         [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]

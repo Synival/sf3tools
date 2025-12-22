@@ -12,7 +12,7 @@ namespace SF3.Models.Files.MPD {
         protected TextureChunk(
             IByteData data, INameGetterContext nameContext, int address, string name,
             CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats,
-            int? chunkIndex, int? firstTextureId, IMPD_File mpdFile
+            int chunkIndex, int? firstTextureId, IMPD_File mpdFile
         ) : base(data, nameContext) {
             Address      = address;
             Name         = name;
@@ -26,7 +26,7 @@ namespace SF3.Models.Files.MPD {
         public static TextureChunk Create(
             IByteData data, INameGetterContext nameContext, int address, string name,
             CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats,
-            int? chunkIndex, int? firstTextureId, IMPD_File mpdFile
+            int chunkIndex, int? firstTextureId, IMPD_File mpdFile
         ) {
             var newFile = new TextureChunk(data, nameContext, address, name, collection, pixelFormats, chunkIndex, firstTextureId, mpdFile);
             newFile.Init();
@@ -50,7 +50,7 @@ namespace SF3.Models.Files.MPD {
         public int Address { get; }
         public CollectionType Collection { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
-        public int? ChunkIndex { get; }
+        public int ChunkIndex { get; }
         public int? FirstTextureID { get; }
         public IMPD_File MPD_File { get; }
         [BulkCopyRecurse]
