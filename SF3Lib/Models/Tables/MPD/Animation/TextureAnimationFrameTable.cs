@@ -1,9 +1,9 @@
 ﻿using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.TextureAnimation;
+using SF3.Models.Structs.MPD.Animation;
 
-namespace SF3.Models.Tables.MPD.TextureAnimation {
-    public class TextureAnimationFrameTable : TerminatedTable<TextureAnimationFrameModel> {
+namespace SF3.Models.Tables.MPD.Animation {
+    public class TextureAnimationFrameTable : TerminatedTable<TextureAnimationFrame> {
         protected TextureAnimationFrameTable(IByteData data, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, bool isIndexed, IMPD_File mpdFile)
         : base(data, name, address, is32Bit ? 4 : 2, null) {
             Is32Bit   = is32Bit;
@@ -21,7 +21,7 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
 
         public override bool Load() {
             return Load(
-                (id, address) => new TextureAnimationFrameModel(
+                (id, address) => new TextureAnimationFrame(
                     Data, TexID, "TexAnim" + TexAnimID + "_" + (id + 1), address, Is32Bit,
                     Width, Height, TexAnimID, id + 1, IsIndexed, MPD_File
                 ),

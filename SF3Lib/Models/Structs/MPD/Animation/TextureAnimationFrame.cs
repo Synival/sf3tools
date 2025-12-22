@@ -7,13 +7,13 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD.TextureAnimation {
-    public class TextureAnimationFrameModel : TextureStructBase, ITexture {
+namespace SF3.Models.Structs.MPD.Animation {
+    public class TextureAnimationFrame : TextureStructBase, ITexture {
         private readonly int _bytesPerProperty;
         private readonly int _imageDataOffsetAddr;
         private readonly int _durationAddr;
 
-        public TextureAnimationFrameModel(
+        public TextureAnimationFrame(
             IByteData data, int id, string name, int address, bool is32Bit, int width, int height, int texAnimId, int frameNum, bool isIndexed, IMPD_File mpdFile
         ) : base(
             data, mpdFile.ChunkData[3], id, name, address, is32Bit ? 0x08 : 0x04, isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _height          = height;
             TexAnimID        = texAnimId;
             Frame            = frameNum;
-            ImportExportName = $"Texture_{ID:X2}_Frame_{(frameNum):X2}";
+            ImportExportName = $"Texture_{ID:X2}_Frame_{frameNum:X2}";
             IsIndexed        = isIndexed;
             MPD_File         = mpdFile;
 

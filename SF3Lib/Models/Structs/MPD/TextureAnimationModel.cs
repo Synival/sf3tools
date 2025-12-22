@@ -2,8 +2,8 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.TextureAnimation;
-using SF3.Models.Tables.MPD.TextureAnimation;
+using SF3.Models.Structs.MPD.Animation;
+using SF3.Models.Tables.MPD.Animation;
 
 namespace SF3.Models.Structs.MPD {
     public class TextureAnimationModel : Struct {
@@ -30,7 +30,7 @@ namespace SF3.Models.Structs.MPD {
             // Determine the number of frames. That will determine the size of this animation.
             var pos = FramesAddress;
 
-            var frames = new List<TextureAnimationFrameModel>();
+            var frames = new List<TextureAnimationFrame>();
 
             // This happens in Scn2 SARA23.MPD for some reason...
             if (TextureIDRaw == _frameEndOffset)

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.TextureAnimation;
+using SF3.Models.Structs.MPD.Animation;
 
-namespace SF3.Models.Tables.MPD.TextureAnimation {
+namespace SF3.Models.Tables.MPD.Animation {
     public readonly struct UniqueTextureAnimationFrameInfo {
         public UniqueTextureAnimationFrameInfo(int width, int height, bool isIndexed) {
             Width     = width;
@@ -44,8 +44,8 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
 
                     var size = decompressed.Length;
                     int width = 0, height = 0;
-                    bool isIndexed = false;
-                    bool isKnown = false;
+                    var isIndexed = false;
+                    var isKnown = false;
 
                     // Get the width/height/"is indexed" value, if known.
                     if (InfoByOffset.TryGetValue(address, out var infoOut)) {
@@ -63,7 +63,7 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
 
                     address += newModel.StoredImageDataSize;
                     if (address % 4 != 0)
-                        address += 4 - (address % 4);
+                        address += 4 - address % 4;
                 }
             }
             catch {

@@ -2,10 +2,10 @@
 using System.Linq;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
-using SF3.Models.Structs.MPD.TextureAnimation;
+using SF3.Models.Structs.MPD.Animation;
 
-namespace SF3.Models.Tables.MPD.TextureAnimation {
-    public class AllTextureAnimationFramesTable : Table<TextureAnimationFrameModel> {
+namespace SF3.Models.Tables.MPD.Animation {
+    public class AllTextureAnimationFramesTable : Table<TextureAnimationFrame> {
         protected AllTextureAnimationFramesTable(IByteData data, string name, int address, IEnumerable<TextureAnimationModel> animations) : base(data, name, address) {
             Animations = animations;
         }

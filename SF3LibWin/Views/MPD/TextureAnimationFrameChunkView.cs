@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.TextureAnimation;
-using SF3.Models.Tables.MPD.TextureAnimation;
+using SF3.Models.Structs.MPD.Animation;
 
 namespace SF3.Win.Views.MPD {
     public class TextureAnimationFrameChunkView : TabView {

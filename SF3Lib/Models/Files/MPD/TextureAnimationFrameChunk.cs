@@ -3,7 +3,7 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
-using SF3.Models.Tables.MPD.TextureAnimation;
+using SF3.Models.Tables.MPD.Animation;
 
 namespace SF3.Models.Files.MPD {
     public class TextureAnimationFrameChunk : TableFile {
