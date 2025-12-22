@@ -14,18 +14,16 @@ namespace SF3.Models.Structs.MPD.Animation {
         private readonly int _durationAddr;
 
         public TextureAnimationFrame(
-            IByteData data, int id, string name, int address, bool is32Bit, int width, int height, int texAnimId, int frameNum, bool isIndexed, IMPD_File mpdFile
+            IByteData data, string name, int address, bool is32Bit, int frameNum, IMPD_File mpdFile, TextureAnimation animation
         ) : base(
-            data, mpdFile.ChunkData[3], id, name, address, is32Bit ? 0x08 : 0x04, isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
+            data, mpdFile.ChunkData[3], (int) animation.TextureID, name, address, is32Bit ? 0x08 : 0x04, 
+            animation.IsIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
         ) {
             Is32Bit          = is32Bit;
-            _width           = width;
-            _height          = height;
-            TexAnimID        = texAnimId;
             Frame            = frameNum;
             ImportExportName = $"Texture_{ID:X2}_Frame_{frameNum:X2}";
-            IsIndexed        = isIndexed;
             MPD_File         = mpdFile;
+            Animation        = animation;
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
 
@@ -41,15 +39,13 @@ namespace SF3.Models.Structs.MPD.Animation {
         public bool Is32Bit { get; }
 
         [TableViewModelColumn(displayOrder: 0.0f)]
-        public int TexAnimID { get; }
+        public int TexAnimID => Animation.ID;
 
-        private int _width;
         [TableViewModelColumn(displayOrder: 1.0f)]
-        public override int Width { get => _width; set {} }
+        public override int Width { get => (int) Animation.Width; set {} }
 
-        private int _height;
         [TableViewModelColumn(displayOrder: 1.1f)]
-        public override int Height { get => _height; set {} }
+        public override int Height { get => (int) Animation.Height; set {} }
 
         [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X4")]
         public override int ImageDataOffset {
@@ -78,7 +74,8 @@ namespace SF3.Models.Structs.MPD.Animation {
         public Dictionary<TagKey, TagValue> Tags => null;
 
         public string ImportExportName { get; }
-        public bool IsIndexed { get; }
+        public bool IsIndexed => Animation.IsIndexed;
         public IMPD_File MPD_File { get; }
+        public TextureAnimation Animation { get; }
     }
 }

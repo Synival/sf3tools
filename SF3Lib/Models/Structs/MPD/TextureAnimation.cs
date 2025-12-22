@@ -36,8 +36,7 @@ namespace SF3.Models.Structs.MPD {
             if (TextureIDRaw == _frameEndOffset)
                 pos = Address + _bytesPerProperty;
             else if (TextureIDRaw != _textureEndId) {
-                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(
-                    data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id, IsIndexed, MPD_File);
+                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, MPD_File, this);
                 pos += TextureAnimationFrameTable.SizeInBytesPlusTerminator;
             }
 
