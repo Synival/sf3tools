@@ -467,6 +467,14 @@ namespace SF3.Models.Files.MPD {
             // TODO: This function is a MESS. Please refactor it!!
             BuildTextureAnimFrameData();
 
+            // Now that textures are loaded, build the texture animation frame data.
+            // TODO: Only use this one!!
+            if (chunkDatas[3] != null) {
+                // TODO: Supply known texture data.
+                TextureAnimationFrameChunk = TextureAnimationFrameChunk.Create(chunkDatas[3], NameGetterContext, 0, nameof(TextureAnimationFrameChunk), this);
+                tables.AddRange(TextureAnimationFrameChunk.Tables);
+            }
+
             // Add chunks with tables for ground plane tile assignment.
             GroundTileAssignmentChunks = GroundTileAssignmentChunkDatas
                 .Select((x, i) => PlaneTileAssignmentChunk.Create(x.DecompressedData, NameGetterContext, 0, "GroundTiles" + (i + 1), x.Index, i * 64, 4))

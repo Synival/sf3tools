@@ -140,6 +140,8 @@ namespace SF3.Models.Files.MPD {
 
         public int[] ModelChunkIndices { get; private set; } = null;
 
+        public TextureAnimationFrameChunk TextureAnimationFrameChunk { get; private set; }
+
         [BulkCopyRecurse]
         public SurfaceDataChunk SurfaceDataChunk { get; private set; }
 

@@ -139,6 +139,7 @@ namespace SF3.Models.Files.MPD {
 
         int[] ModelChunkIndices { get; }
 
+        TextureAnimationFrameChunk TextureAnimationFrameChunk { get; }
         SurfaceDataChunk SurfaceDataChunk { get; }
 
         int PrimaryTextureChunksFirstIndex { get; }
