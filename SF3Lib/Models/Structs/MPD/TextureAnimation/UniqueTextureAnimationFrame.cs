@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public UniqueTextureAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, bool isReferenced, IMPD_File mpdFile)
         : base(
             data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555,
-            isCompressed: true, zeroIsTransparent: true
+            isCompressed: true, zeroIsTransparent: true, chunkIndex: 3
         ) {
             MPD_File = mpdFile;
             _width   = width;
@@ -28,8 +28,6 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public override int Width { get => _width; set {} }
 
         private int _height;
-
-
         [TableViewModelColumn(displayOrder: 1)]
         public override int Height { get => _height; set {} }
 

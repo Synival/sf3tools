@@ -57,11 +57,6 @@ namespace SF3.Models.Files.MPD {
                 foreach (var cd in ChunkData.Where(x => x != null))
                     cd.Dispose();
             }
-            if (Chunk3Frames != null) {
-                foreach (var cd in Chunk3Frames)
-                    cd.Data.Dispose();
-                Chunk3Frames.Clear();
-            }
         }
 
         public void UpdatePlaneImages() => ((MPD_Planes) Planes).UpdateImages();

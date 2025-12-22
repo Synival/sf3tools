@@ -9,15 +9,11 @@ using SF3.Types;
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File {
         public void RecompressChunks(bool onlyModified) {
-            var framesModified = Chunk3Frames?.Any(x => x.Data.IsModified || x.Data.NeedsRecompression) ?? false;
-            var chunksModified = framesModified || ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
+            var chunksModified = ChunkData.Any(x => x != null && (x.IsModified || x.NeedsRecompression));
 
             // Don't bother doing anything if no chunks have been modified.
-            if (onlyModified && !framesModified && !chunksModified)
+            if (onlyModified && !chunksModified)
                 return;
-
-            // Chunk 3 is made up of several individually-compressed images that need to be recompressed.
-            RecompressChunk3Frames(onlyModified);
 
             // Perform recompression.
             foreach (var chunkData in ChunkData) {

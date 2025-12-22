@@ -9,16 +9,6 @@ using SF3.Models.Tables.MPD;
 using SF3.MPD;
 
 namespace SF3.Models.Files.MPD {
-    public class Chunk3Frame {
-        public Chunk3Frame(int offset, CompressedData data) {
-            Offset = offset;
-            Data = data;
-        }
-
-        public int Offset { get; }
-        public CompressedData Data { get; }
-    };
-
     public struct ReplaceTexturesFromFilesResult {
         public int Replaced;
         public int Missing;
@@ -128,11 +118,6 @@ namespace SF3.Models.Files.MPD {
         UnknownUInt16Table Unknown2Table { get; }
         GradientTable GradientTable { get; }
         BoundaryTable BoundariesTable { get; }
-
-        /// <summary>
-        /// The compressed data for each texture in Chunk3, paired with an offset.
-        /// </summary>
-        List<Chunk3Frame> Chunk3Frames { get; }
 
         int? SurfaceModelChunkIndex { get; }
         SurfaceModelChunk SurfaceModelChunk { get; }

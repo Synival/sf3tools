@@ -2,6 +2,7 @@
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.Shared;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -42,26 +43,20 @@ namespace Grayscaler {
                     .Where(x => x != null && x.TextureTable != null)
                     .SelectMany(x => x.TextureTable)
                     .Where(x => x.PixelFormat == TexturePixelFormat.ABGR1555)
+                    .Cast<TextureStructBase>()
                     .ToArray();
 
-                var textures2 = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations
-                    .SelectMany(x => x.TextureAnimationFrameTable)
-                    .Where(x => x.FrameNum > 0)
+                var textures2 = (mpdFile.TextureAnimationFrameChunk?.UniqueTextureAnimationFrameTable == null) ? [] : mpdFile.TextureAnimationFrameChunk.UniqueTextureAnimationFrameTable
                     .Where(x => x.PixelFormat == TexturePixelFormat.ABGR1555)
+                    .Cast<TextureStructBase>()
                     .ToArray();
 
-                Console.WriteLine((textures1.Length + textures2.Length) + " textures");
+                var textures = textures1.Concat(textures2).ToArray();
+                Console.WriteLine(textures.Length + " textures");
 
                 // Transform every texture in ABGR1555 format to grayscale.
-                foreach (var tc in textures1)
+                foreach (var tc in textures)
                     tc.ImageData16Bit = MakeTextureGrayscale(tc.ImageData16Bit);
-
-                foreach (var tc in textures2) {
-                    // TODO: This shouldn't have to go through the trouble of finding the frameData
-                    var frameData = mpdFile.Chunk3Frames.First(x => x.Offset == tc.CompressedImageDataOffset).Data.DecompressedData;
-                    var referenceTex = textures1.FirstOrDefault(x => x.ID == tc.TextureID);
-                    _ = tc.UpdateTextureABGR1555(frameData, MakeTextureGrayscale(tc.Texture.ImageData16Bit), referenceTex);
-                }
 
                 // This will compress chunks and update the chunk table header.
                 _ = mpdFile.Finish();

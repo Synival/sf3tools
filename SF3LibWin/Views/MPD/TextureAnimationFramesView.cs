@@ -15,7 +15,7 @@ namespace SF3.Win.Views.MPD {
             => AllTextureAnimationFramesTable.Create(model.TextureAnimations.Data, "AllFrames", model.TextureAnimations.Address, model.TextureAnimations);
 
         protected override ITextureData GetTextureFromModel(TextureAnimationFrameModel frame)
-            => frame?.Texture;
+            => frame;
 
         public IMPD_File Model { get; }
     }

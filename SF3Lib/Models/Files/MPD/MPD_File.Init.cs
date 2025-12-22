@@ -18,11 +18,13 @@ namespace SF3.Models.Files.MPD {
 
             // Load root headers
             var header = MakeHeader();
-            var headerTables = MakeHeaderTables(header, areAnimatedTextures32Bit);
 
-            // Load chunks
+            // Make chunk data accessors
             var chunks = MakeChunkHeaderTable().Rows;
             var chunkDatas = MakeChunkDatas(chunks);
+
+            // Load header and chunk tables
+            var headerTables = MakeHeaderTables(header, areAnimatedTextures32Bit);
             var chunkTables = MakeChunkTables(chunks, chunkDatas, ModelChunkDatas, SurfaceChunkData);
 
             // Add two-way communication between 'Modified' events from the root IByteData and its children.
@@ -463,15 +465,10 @@ namespace SF3.Models.Files.MPD {
             TextureChunks = texColList.ToArray();
 
             // Now that textures are loaded, build the texture animation frame data.
-            // TODO: This function is a MESS. Please refactor it!!
-            BuildTextureAnimFrameData();
-
-            // Now that textures are loaded, build the texture animation frame data.
-            // TODO: Only use this one!!
             if (chunkDatas[3] != null) {
                 var infoByOffset = TextureAnimations
                     .SelectMany(x => x.TextureAnimationFrameTable)
-                    .GroupBy(x => (int) x.CompressedImageDataOffset)
+                    .GroupBy(x => x.ImageDataOffset)
                     .ToDictionary(x => x.Key, x => {
                         var frame = x.First();
                         return new UniqueTextureAnimationFrameInfo(frame.Width, frame.Height, frame.PixelFormat != TexturePixelFormat.ABGR1555);
@@ -508,8 +505,6 @@ namespace SF3.Models.Files.MPD {
             // Add some callbacks to all child data.
             var allData = ChunkData
                 .Where(x => x != null)
-                .Cast<IByteData>()
-                .Concat((Chunk3Frames != null) ? Chunk3Frames.Select(x => x.Data) : new CompressedData[0])
                 .ToArray();
 
             foreach (var d in allData) {

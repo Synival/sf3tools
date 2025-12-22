@@ -1,143 +1,80 @@
-﻿using System;
-using System.Linq;
-using CommonLib.Arrays;
+﻿using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Images;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
-    public class TextureAnimationFrameModel : Struct {
-        private readonly int _compressedTextureOffsetAddr;
+    public class TextureAnimationFrameModel : TextureStructBase, ITexture {
+        private readonly int _bytesPerProperty;
+        private readonly int _imageDataOffsetAddr;
         private readonly int _durationAddr;
 
         public TextureAnimationFrameModel(
-            IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum, IMPD_File mpdFile
-        ) : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
+            IByteData data, int id, string name, int address, bool is32Bit, int width, int height, int texAnimId, int frameNum, IMPD_File mpdFile
+        ) : base(
+            data, mpdFile.ChunkData[3], id, name, address, is32Bit ? 0x08 : 0x04, (id & 0x100) == 0x100 ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
+        ) {
             Is32Bit          = is32Bit;
-            TextureID        = texId;
-            Width            = width;
-            Height           = height;
-            texAnimID        = texAnimId;
-            FrameNum         = frameNum;
-            ImportExportName = $"Texture_{texId:X2}_Frame_{(frameNum):X2}";
+            _width           = width;
+            _height          = height;
+            TexAnimID        = texAnimId;
+            Frame            = frameNum;
+            ImportExportName = $"Texture_{ID:X2}_Frame_{(frameNum):X2}";
             MPD_File         = mpdFile;
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
 
-            _compressedTextureOffsetAddr = Address + 0 * _bytesPerProperty;
-            _durationAddr                = Address + 1 * _bytesPerProperty;
+            _imageDataOffsetAddr = Address + 0 * _bytesPerProperty;
+            _durationAddr        = Address + 1 * _bytesPerProperty;
+
+            if (ImageDataOffset >= 0)
+                LoadImageData();
         }
 
-        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, ITexture referenceTexture) {
-            if (pixelFormat == TexturePixelFormat.ABGR1555)
-                FetchAndCacheTextureABGR1555(data, referenceTexture);
-            else
-                FetchAndCacheTextureIndexed(data, pixelFormat, MPD_File.CreatePalette(2), referenceTexture);
-        }
+        public override void OnSetImageData() => throw new System.NotImplementedException();
 
-        private void FetchAndCacheTextureABGR1555(IByteData data, ITexture referenceTexture) {
-            var imageData = new ushort[Width, Height];
-            var off = 0;
-            for (var y = 0; y < Height; y++) {
-                for (var x = 0; x < Width; x++) {
-                    var texPixel = (ushort) data.GetWord(off);
-                    off += 2;
-                    imageData[x, y] = texPixel;
-                }
-            }
-
-            PixelFormat = TexturePixelFormat.ABGR1555;
-            Texture = new TextureABGR1555(CollectionType.Primary, TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
-        }
-
-        private void FetchAndCacheTextureIndexed(IByteData data, TexturePixelFormat pixelFormat, Palette palette, ITexture referenceTexture) {
-            var imageData = new byte[Width, Height];
-            var off = 0;
-            for (var y = 0; y < Height; y++)
-                for (var x = 0; x < Width; x++)
-                    imageData[x, y] = (byte) data.GetByte(off++);
-
-            PixelFormat = pixelFormat;
-            Texture = new TextureIndexed(CollectionType.Primary, TextureID, FrameNum, (int) Duration, imageData, pixelFormat, palette, true,
-                tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
-        }
-
-        public ushort[,] UpdateTextureABGR1555(IByteData data, ushort[,] imageData, ITexture referenceTexture) {
-            if (imageData.GetLength(0) != Width || imageData.GetLength(1) != Height)
-                throw new ArgumentException("Incoming data dimensions must match specified width/height");
-
-            var newData = new SF3.ByteData.ByteData(new ByteArray(Width * Height * 2));
-            var off = 0;
-            for (var y = 0; y < Height; y++) {
-                for (var x = 0; x < Width; x++) {
-                    newData.SetWord(off, imageData[x, y]);
-                    off += 2;
-                }
-            }
-            data.Data.SetDataTo(newData.GetDataCopy());
-
-            Texture = new TextureABGR1555(CollectionType.Primary, TextureID, FrameNum, (int) Duration, imageData, tags: referenceTexture?.Tags, hashPrefix: referenceTexture?.Hash ?? "NOTEX");
-            return imageData;
-        }
-
-        // TODO: UpdateTextureIndexed()
-
-        /// <summary>
-        /// Used for Scenario 3 and PD, which has 32-bit member variables instead of 16-bit.
-        /// </summary>
         public bool Is32Bit { get; }
 
-        public bool TextureIsLoaded => Texture != null;
+        [TableViewModelColumn(displayOrder: 0.0f)]
+        public int TexAnimID { get; }
 
-        [TableViewModelColumn(addressField: null, displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
-        public int TextureID { get; }
+        private int _width;
+        [TableViewModelColumn(displayOrder: 1.0f)]
+        public override int Width { get => _width; set {} }
 
-        [TableViewModelColumn(addressField: null, displayName: "Width", displayOrder: 1)]
-        public int Width { get; }
+        private int _height;
+        [TableViewModelColumn(displayOrder: 1.1f)]
+        public override int Height { get => _height; set {} }
 
-        [TableViewModelColumn(addressField: null, displayName: "Height", displayOrder: 2)]
-        public int Height { get; }
-
-        [TableViewModelColumn(addressField: null, displayName: "Tex. Anim ID", displayOrder: 3, displayFormat: "X2")]
-        public int texAnimID { get; }
-
-        public int FrameNum { get; }
-
-        [TableViewModelColumn(addressField: null, displayName: "Frame #", displayOrder: 4)]
-        public string FrameNumStr => FrameNum == 0 ? "" : FrameNum.ToString();
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_compressedTextureOffsetAddr), displayOrder: 5, displayFormat: "X4")]
-        public uint CompressedImageDataOffset {
-            get => Data.GetData(_compressedTextureOffsetAddr, _bytesPerProperty);
-            set => Data.SetData(_compressedTextureOffsetAddr, value, _bytesPerProperty);
+        [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X4")]
+        public override int ImageDataOffset {
+            get => (int) Data.GetData(_imageDataOffsetAddr, _bytesPerProperty);
+            set => Data.SetData(_imageDataOffsetAddr, (uint) value, _bytesPerProperty);
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 5.5f, displayFormat: "X4")]
-        public int UncompressedImageDataSize => Width * Height * PixelFormat.BytesPerPixel();
-
-        [TableViewModelColumn(addressField: null, displayOrder: 5.6f)]
-        public TexturePixelFormat PixelFormat { get; private set; } = TexturePixelFormat.Unknown;
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_durationAddr), displayName: "Duration (30fps)", displayOrder: 6)]
-        public uint Duration {
-            get => Data.GetData(_durationAddr, _bytesPerProperty);
-            set => Data.SetData(_durationAddr, value, _bytesPerProperty);
+        [TableViewModelColumn(displayOrder: 2.1f)]
+        public int Duration {
+            get => (int) Data.GetData(_durationAddr, _bytesPerProperty);
+            set => Data.SetData(_durationAddr, (uint) value, _bytesPerProperty);
         }
 
-        [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 7, minWidth: 450)]
-        public string Hash => Texture?.Hash ?? "";
+        [TableViewModelColumn(displayOrder: 2.2f)]
+        public int Frame { get; }
 
-        [TableViewModelColumn(addressField: null, displayName: "Tags", displayOrder: 8, minWidth: 200)]
-        public string Tags => (Texture?.Tags == null) ? "" : string.Join(", ", Texture.Tags.Select(x => x.Key + "|" + x.Value));
+        public override bool HasImage => true;
+        public override bool CanLoadImage => false;
 
-        private readonly int _bytesPerProperty;
+        public override Palette Palette {
+            get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2);
+            protected set {}
+        }
 
-        public ITexture Texture { get; private set; }
+        public CollectionType Collection => CollectionType.Primary;
+        public Dictionary<TagKey, TagValue> Tags => null;
 
         public string ImportExportName { get; }
         public IMPD_File MPD_File { get; }

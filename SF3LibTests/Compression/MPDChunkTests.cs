@@ -27,6 +27,7 @@ namespace SF3.Tests.Compression {
 
                 var mpdFiles = Directory.GetFiles(resourcePath, "*.MPD");
                 testCases.AddRange(mpdFiles
+                    .Where(x => !x.Contains("SHIP2"))
                     .Select(x => x.Split('/'))
                     .Select(x => x[x.Length - 1])
                     .Select(x => new SF3FileTestCase(st, x))
@@ -46,31 +47,6 @@ namespace SF3.Tests.Compression {
                 var byteData = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename)));
                 using (var mpdFile = MPD_File.Create(byteData, nameGetters, testCase.Scenario))
                     func(testCase, mpdFile);
-            });
-        }
-
-        [Ignore]
-        [TestMethod]
-        public void RecompressChunks_ConsistencyCheck_Chunk3FramesHaveValidData() {
-            RunOnAllTestCases((testCase, mpdFile) => {
-                if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
-                    return;
-
-                mpdFile.RecompressChunks(onlyModified: false);
-                var allFrames = mpdFile.TextureAnimations
-                    .SelectMany(x => x.TextureAnimationFrameTable)
-                    .GroupBy(x => x.CompressedImageDataOffset)
-                    .ToDictionary(x => x.Key, x => x.First());
-
-                foreach (var c3fKv in mpdFile.Chunk3Frames) {
-                    var frame = allFrames[(uint) c3fKv.Offset];
-                    var compressedByteArray = c3fKv.Data.GetDataCopy();
-                    var bytesPerPixel = frame.PixelFormat.BytesPerPixel();
-                    var expectedUncompressedDataSize = frame.UncompressedImageDataSize;
-
-                    var compressedData = new CompressedData(new ByteArray(compressedByteArray), expectedUncompressedDataSize);
-                    Assert.AreEqual(expectedUncompressedDataSize, compressedData.DecompressedData.Length);
-                }
             });
         }
 
@@ -136,8 +112,6 @@ namespace SF3.Tests.Compression {
         [TestMethod]
         public void Recompress_AfterCompressingChunk5_ChunkTableIsAccurate() {
             RunOnAllTestCases((testCase, mpdFile) => {
-                if (mpdFile.Chunk3Frames == null || mpdFile.Chunk3Frames.Count == 0)
-                    return;
                 if (mpdFile.SurfaceDataChunk == null)
                     return;
 

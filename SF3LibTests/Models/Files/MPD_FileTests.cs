@@ -47,10 +47,6 @@ namespace SF3.Tests.Models.Files {
                     Assert.IsFalse(cd.DecompressedData.IsModified);
                 }
             }
-            foreach (var c3fKv in mpdFile.Chunk3Frames) {
-                Assert.IsFalse(c3fKv.Data.IsModified);
-                Assert.IsFalse(c3fKv.Data.DecompressedData.IsModified);
-            }
         }
 
         [TestMethod]

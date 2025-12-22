@@ -11,14 +11,20 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData {
-        public TextureStructBase(IByteData data, int id, string name, int address, int size,
-            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
+        public TextureStructBase(IByteData data, IByteData imageData, int id, string name, int address, int size,
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, int? chunkIndex)
         : base(data, id, name, address, size) {
-            PixelFormat = pixelFormat;
-            BytesPerPixel = PixelFormat.BytesPerPixel();
-            IsCompressed = isCompressed;
+            ImageData         = imageData;
+            PixelFormat       = pixelFormat;
+            BytesPerPixel     = PixelFormat.BytesPerPixel();
+            IsCompressed      = isCompressed;
             ZeroIsTransparent = zeroIsTransparent;
+            ChunkIndex        = chunkIndex;
         }
+
+        public TextureStructBase(IByteData data, int id, string name, int address, int size,
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, int? chunkIndex = null)
+        : this(data, data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent, chunkIndex) {}
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
         public abstract int Width { get; set; }
@@ -138,6 +144,8 @@ namespace SF3.Models.Structs.Shared {
             return null;
         }
 
+        public IByteData ImageData { get; }
+
         [TableViewModelColumn(addressField: null, displayOrder: 3, displayFormat: "X4")]
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
@@ -147,6 +155,9 @@ namespace SF3.Models.Structs.Shared {
         public int BytesPerPixel { get; }
         public bool IsCompressed { get; }
         public bool ZeroIsTransparent { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
+        public int? ChunkIndex { get; }
 
         private string _hash = null;
         [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
@@ -170,8 +181,8 @@ namespace SF3.Models.Structs.Shared {
 
                 var storedSize = ImageDataSize;
                 var inputData = IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                    : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
+                    ? Compression.DecompressLZSS(ImageData.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                    : ImageData.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, ImageData.Length - ImageDataOffset));
                 var outputData = new byte[Width, Height];
 
                 var off = 0;
@@ -198,8 +209,8 @@ namespace SF3.Models.Structs.Shared {
 
                 var storedSize = ImageDataSize;
                 var inputData = (IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                    : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
+                    ? Compression.DecompressLZSS(ImageData.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                    : ImageData.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, ImageData.Length - ImageDataOffset)))
                     .ToUShorts();
 
                 var outputData = new ushort[Width, Height];
@@ -229,7 +240,7 @@ namespace SF3.Models.Structs.Shared {
                         off += 2;
                     }
                 }
-                Data.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopyOrReference());
+                ImageData.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopyOrReference());
 
                 InvalidateImage();
                 _imageData16Bit = value;

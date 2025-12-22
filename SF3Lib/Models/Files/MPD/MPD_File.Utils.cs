@@ -10,6 +10,7 @@ using SF3.Images;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Structs.MPD.TextureChunk;
+using SF3.Models.Structs.Shared;
 using SF3.Models.Tables;
 using SF3.Types;
 
@@ -84,22 +85,17 @@ namespace SF3.Models.Files.MPD {
             return new Palette(paletteTable.Select(x => x.ColorABGR1555).ToArray());
         }
 
-        private struct TextureModelAndTextureByName {
-            public object Model;
-            public ITextureData Texture;
-        }
-
         public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader) {
-            var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureChunks
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureStructBase>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x });
+                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
 
-            var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureModelAndTextureByName>() : TextureAnimations
+            var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureStructBase>() : TextureAnimations
                 .SelectMany(x => x.TextureAnimationFrameTable)
-                .GroupBy(x => x.CompressedImageDataOffset)
+                .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ImportExportName, x => new TextureModelAndTextureByName { Model = x, Texture = x.Texture });
+                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
@@ -110,8 +106,7 @@ namespace SF3.Models.Files.MPD {
 
             foreach (var textureKv in textures) {
                 var name = textureKv.Key;
-                var model = textureKv.Value.Model;
-                var texture = textureKv.Value.Texture;
+                var texture = textureKv.Value;
 
                 if (texture.PixelFormat != TexturePixelFormat.ABGR1555) {
                     skipped++;
@@ -143,20 +138,11 @@ namespace SF3.Models.Files.MPD {
                     // One common texture used for the locked chest is encoded in an ever-so-slightly different way,
                     // so account for that to prevent "IsModified" from always being set.
                     bool applyEndCodesToBorder = true;
-                    var tm = model as TextureModel;
-                    if (tm != null && tm.ID == 0x109 && tm.ChunkIndex == 12)
+                    if (texture != null && texture.ID == 0x109 && texture.ChunkIndex == 12)
                         applyEndCodesToBorder = false;
                     imageData.FixSaturnTransparency(useEndCodes: true, applyEndCodesToBorder);
 
-                    if (tm != null)
-                        tm.ImageData16Bit = imageData;
-                    else if (model is TextureAnimationFrameModel fm) {
-                        var referenceTex = TextureChunks.Where(x => x != null).Select(x => x.TextureTable).SelectMany(x => x).FirstOrDefault(x => x.ID == fm.TextureID);
-                        _ = fm.UpdateTextureABGR1555(Chunk3Frames.First(x => x.Offset == fm.CompressedImageDataOffset).Data.DecompressedData, imageData, referenceTex);
-                    }
-                    else
-                        throw new NotSupportedException("Not sure what this is, but it's not supported here");
-
+                    texture.ImageData16Bit = imageData;
                     succeeded++;
                 }
                 catch {
@@ -173,17 +159,16 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter) {
-            var textures1 = (TextureChunks == null) ? new Dictionary<string, ITextureData>() : TextureChunks
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, TextureStructBase>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .ToDictionary(x => x.ImportExportName, x => (ITextureData) x);
+                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
 
-            var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITextureData>() : TextureAnimations
+            var textures2 = (TextureAnimations == null) ? new Dictionary<string, TextureStructBase>() : TextureAnimations
                 .SelectMany(x => x.TextureAnimationFrameTable)
-                .GroupBy(x => x.CompressedImageDataOffset)
+                .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
-                .Where(x => x.TextureIsLoaded)
-                .ToDictionary(x => x.ImportExportName, x => (ITextureData) x.Texture);
+                .ToDictionary(x => x.ImportExportName, x => (TextureStructBase) x);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 

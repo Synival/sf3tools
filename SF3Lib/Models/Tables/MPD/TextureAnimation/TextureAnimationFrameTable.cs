@@ -21,9 +21,9 @@ namespace SF3.Models.Tables.MPD.TextureAnimation {
         public override bool Load() {
             return Load(
                 (id, address) => new TextureAnimationFrameModel(
-                    Data, id, "TexAnim" + TexAnimID + "_" + (id + 1), address, Is32Bit, TexID, Width, Height, TexAnimID, id + 1, MPD_File
+                    Data, TexID, "TexAnim" + TexAnimID + "_" + (id + 1), address, Is32Bit, Width, Height, TexAnimID, id + 1, MPD_File
                 ),
-                (currentRows, model) => model.CompressedImageDataOffset != _frameEndOffset,
+                (currentRows, model) => (uint) model.ImageDataOffset != _frameEndOffset,
                 false);
         }
 
