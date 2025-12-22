@@ -28,14 +28,14 @@ namespace SF3.Models.Structs.MPD {
             // Determine the number of frames. That will determine the size of this animation.
             var pos = FramesAddress;
 
-            var frames = new List<FrameModel>();
+            var frames = new List<TextureAnimationFrameModel>();
 
             // This happens in Scn2 SARA23.MPD for some reason...
             if (TextureID == _frameEndOffset)
                 pos = Address + _bytesPerProperty;
             else if (TextureID != _textureEndId) {
-                FrameTable = FrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id);
-                pos += FrameTable.SizeInBytesPlusTerminator;
+                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id);
+                pos += TextureAnimationFrameTable.SizeInBytesPlusTerminator;
             }
 
             Size = pos - Address;
@@ -74,10 +74,10 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: null, displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
-        public int NumFrames => FrameTable?.Length ?? 0;
+        public int NumFrames => TextureAnimationFrameTable?.Length ?? 0;
 
         [BulkCopyRecurse]
-        public FrameTable FrameTable { get; } = null;
+        public TextureAnimationFrameTable TextureAnimationFrameTable { get; } = null;
 
         private readonly int _bytesPerProperty;
         private readonly uint _textureEndId;

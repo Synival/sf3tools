@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new TextureAnimFramesView("Frames", Model, ngc));
+            CreateChild(new TextureAnimationFramesView("Frames", Model, ngc));
 
             return Control;
         }

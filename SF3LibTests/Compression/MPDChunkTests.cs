@@ -58,7 +58,7 @@ namespace SF3.Tests.Compression {
 
                 mpdFile.RecompressChunks(onlyModified: false);
                 var allFrames = mpdFile.TextureAnimations
-                    .SelectMany(x => x.FrameTable)
+                    .SelectMany(x => x.TextureAnimationFrameTable)
                     .GroupBy(x => x.CompressedImageDataOffset)
                     .ToDictionary(x => x.Key, x => x.First());
 

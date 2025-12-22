@@ -33,7 +33,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new ModelSwitchGroupsView("Model Switch Groups", Model));
 
             if (Model.TextureAnimations != null) {
-                CreateChild(new TextureAnimFramesView("Texture Animation Frames", Model, ngc));
+                CreateChild(new TextureAnimationFramesView("Texture Animation Frames", Model, ngc));
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
             }
 

@@ -45,7 +45,7 @@ namespace Grayscaler {
                     .ToArray();
 
                 var textures2 = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations
-                    .SelectMany(x => x.FrameTable)
+                    .SelectMany(x => x.TextureAnimationFrameTable)
                     .Where(x => x.FrameNum > 0)
                     .Where(x => x.PixelFormat == TexturePixelFormat.ABGR1555)
                     .ToArray();

@@ -8,11 +8,11 @@ using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
-    public class FrameModel : Struct {
+    public class TextureAnimationFrameModel : Struct {
         private readonly int _compressedTextureOffsetAddr;
         private readonly int _durationAddr;
 
-        public FrameModel(
+        public TextureAnimationFrameModel(
             IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum
         ) : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit          = is32Bit;

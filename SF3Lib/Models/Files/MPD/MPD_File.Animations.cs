@@ -48,7 +48,7 @@ namespace SF3.Models.Files.MPD {
             }
 
             foreach (var anim in TextureAnimations) {
-                foreach (var frame in anim.FrameTable) {
+                foreach (var frame in anim.TextureAnimationFrameTable) {
                     var offset = frame.CompressedImageDataOffset;
                     var existingFrame = Chunk3Frames.FirstOrDefault(x => x.Offset == offset);
 
@@ -99,7 +99,7 @@ namespace SF3.Models.Files.MPD {
                     if (a.Moved) {
                         var newOffset = ((ByteArraySegment) c3frame.Data.Data).Offset;
                         var oldOffset = newOffset - a.OffsetChange;
-                        var affectedFrames = TextureAnimations.SelectMany(x => x.FrameTable).Where(x => x.CompressedImageDataOffset == oldOffset).ToArray();
+                        var affectedFrames = TextureAnimations.SelectMany(x => x.TextureAnimationFrameTable).Where(x => x.CompressedImageDataOffset == oldOffset).ToArray();
                         foreach (var frame in affectedFrames)
                             frame.CompressedImageDataOffset = (uint) newOffset;
                     }
@@ -107,7 +107,7 @@ namespace SF3.Models.Files.MPD {
                 c3frame.Data.DecompressedData.Data.RangeModified += (s, a) => {
                     if (a.Resized || a.Modified) {
                         var offset = ((ByteArraySegment) c3frame.Data.Data).Offset;
-                        var affectedFrames = TextureAnimations.SelectMany(x => x.FrameTable).Where(x => x.CompressedImageDataOffset == offset).ToArray();
+                        var affectedFrames = TextureAnimations.SelectMany(x => x.TextureAnimationFrameTable).Where(x => x.CompressedImageDataOffset == offset).ToArray();
                         foreach (var frame in affectedFrames) {
                             var referenceTex = GetTextureModelByID(frame.TextureID);
                             frame.FetchAndCacheTexture(c3frame.Data.DecompressedData, frame.PixelFormat, GetPalette(frame.PixelFormat), referenceTex);

@@ -32,7 +32,7 @@ namespace SF3.Win.Views.MPD {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
             var anim = (TextureAnimationModel) item?.RowObject;
 
-            var frame = anim?.FrameTable?.FirstOrDefault();
+            var frame = anim?.TextureAnimationFrameTable?.FirstOrDefault();
             TextureView.Image = frame?.Texture?.CreateBitmapARGB1555() ?? null;
 
             _timer.Stop();
@@ -40,7 +40,7 @@ namespace SF3.Win.Views.MPD {
             if (frame != null) {
                 _currentAnimation = anim;
                 _currentFrameNum = 0;
-                _timer.Interval = (int) _currentAnimation.FrameTable[_currentFrameNum].Duration * 1000 / 30;
+                _timer.Interval = (int) _currentAnimation.TextureAnimationFrameTable[_currentFrameNum].Duration * 1000 / 30;
                 _timer.Start();
             }
         }
@@ -65,7 +65,7 @@ namespace SF3.Win.Views.MPD {
             if (_currentAnimation == null)
                 return;
             _currentFrameNum = (_currentFrameNum + 1) % _currentAnimation.NumFrames;
-            var currentFrame = _currentAnimation.FrameTable[_currentFrameNum];
+            var currentFrame = _currentAnimation.TextureAnimationFrameTable[_currentFrameNum];
             TextureView.Image = currentFrame.Texture?.CreateBitmapARGB1555();
             _timer.Interval = (int) currentFrame.Duration * 1000 / 30;
         }
