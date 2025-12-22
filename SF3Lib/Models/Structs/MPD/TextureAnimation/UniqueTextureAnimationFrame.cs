@@ -10,7 +10,10 @@ using SF3.Types;
 namespace SF3.Models.Structs.MPD.TextureAnimation {
     public class UniqueTextureAnimationFrame : TextureStructBase, ITexture {
         public UniqueTextureAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, IMPD_File mpdFile)
-        : base(data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true) {
+        : base(
+            data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555,
+            isCompressed: true, zeroIsTransparent: true
+        ) {
             MPD_File = mpdFile;
             _width   = width;
             _height  = height;

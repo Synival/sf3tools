@@ -11,24 +11,24 @@ namespace SF3.Models.Files.MPD {
     public class TextureChunk : TableFile {
         protected TextureChunk(
             IByteData data, INameGetterContext nameContext, int address, string name,
-            CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
-            int? chunkIndex, int? firstTextureId
+            CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats,
+            int? chunkIndex, int? firstTextureId, IMPD_File mpdFile
         ) : base(data, nameContext) {
             Address      = address;
             Name         = name;
             Collection   = collection;
             PixelFormats = pixelFormats;
-            Palettes     = palettes;
             ChunkIndex   = chunkIndex;
             FirstTextureID = firstTextureId;
+            MPD_File     = mpdFile;
         }
 
         public static TextureChunk Create(
             IByteData data, INameGetterContext nameContext, int address, string name,
-            CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
-            int? chunkIndex, int? firstTextureId
+            CollectionType collection, Dictionary<int, TexturePixelFormat> pixelFormats,
+            int? chunkIndex, int? firstTextureId, IMPD_File mpdFile
         ) {
-            var newFile = new TextureChunk(data, nameContext, address, name, collection, pixelFormats, palettes, chunkIndex, firstTextureId);
+            var newFile = new TextureChunk(data, nameContext, address, name, collection, pixelFormats, chunkIndex, firstTextureId, mpdFile);
             newFile.Init();
             return newFile;
         }
@@ -40,7 +40,7 @@ namespace SF3.Models.Files.MPD {
             var startId = FirstTextureID ?? header.TextureIdStart;
             return new List<ITable>() {
                 TextureHeaderTable,
-                (TextureTable = TextureTable.Create(Data, "Textures", 0x04, Collection, header.NumTextures, startId, PixelFormats, Palettes, ChunkIndex)),
+                (TextureTable = TextureTable.Create(Data, "Textures", 0x04, Collection, header.NumTextures, startId, PixelFormats, ChunkIndex, MPD_File)),
             };
         }
 
@@ -50,10 +50,9 @@ namespace SF3.Models.Files.MPD {
         public int Address { get; }
         public CollectionType Collection { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
-        public Dictionary<TexturePixelFormat, Palette> Palettes { get; }
         public int? ChunkIndex { get; }
         public int? FirstTextureID { get; }
-
+        public IMPD_File MPD_File { get; }
         [BulkCopyRecurse]
         public TextureHeaderTable TextureHeaderTable { get; private set; }
 

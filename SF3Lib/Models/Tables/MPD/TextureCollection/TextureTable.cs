@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Types;
 
@@ -9,24 +10,24 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
     public class TextureTable : FixedSizeTable<TextureModel> {
         protected TextureTable(
             IByteData data, string name, int address,
-            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
-            int? chunkIndex
+            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
+            int? chunkIndex, IMPD_File mpdFile
         ) : base(data, name, address, textureCount) {
             if (textureCount > 255)
                 throw new ArgumentOutOfRangeException(nameof(textureCount));
             Collection   = collection;
             StartID      = startId;
             PixelFormats = pixelFormats;
-            Palettes     = palettes;
             ChunkIndex   = chunkIndex;
+            MPD_File     = mpdFile;
         }
 
         public static TextureTable Create(
             IByteData data, string name, int address,
-            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats, Dictionary<TexturePixelFormat, Palette> palettes,
-            int? chunkIndex
+            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
+            int? chunkIndex, IMPD_File mpdFile
         )
-            => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, palettes, chunkIndex));
+            => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, chunkIndex, mpdFile));
 
         public override bool Load() {
             var size = TextureModel.GlobalSize;
@@ -38,27 +39,9 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
 
                 var texId = StartID + id;
                 return new TextureModel(
-                    Data, Collection, StartID + id, $"Texture{(int) Collection}_{texId:X2}", address,
-                    pixelFormat, GetPalette(pixelFormat), ChunkIndex, nextImageDataOffset
+                    Data, Collection, StartID + id, $"Texture{(int) Collection}_{texId:X2}", address, pixelFormat, ChunkIndex, nextImageDataOffset, MPD_File
                 );
             });
-        }
-
-        private Palette GetPalette(TexturePixelFormat format) {
-            switch (format) {
-                case TexturePixelFormat.UnknownPalette:
-                case TexturePixelFormat.Palette1: {
-                    return Palettes.TryGetValue(TexturePixelFormat.Palette1, out var outPalette) ? outPalette : null;
-                }
-                case TexturePixelFormat.Palette2: {
-                    return Palettes.TryGetValue(TexturePixelFormat.Palette2, out var outPalette) ? outPalette : null;
-                }
-                case TexturePixelFormat.Palette3: {
-                    return Palettes.TryGetValue(TexturePixelFormat.Palette3, out var outPalette) ? outPalette : null;
-                }
-                default:
-                    return null;
-            }
         }
 
         public CollectionType Collection { get; }
@@ -66,5 +49,6 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
         public Dictionary<TexturePixelFormat, Palette> Palettes { get; }
         public int? ChunkIndex { get; }
+        public IMPD_File MPD_File { get; }
     }
 }

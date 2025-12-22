@@ -5,6 +5,7 @@ using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Images;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
 
@@ -16,8 +17,11 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public TextureModel(
             IByteData data, CollectionType collection, int id, string name, int address,
-            TexturePixelFormat pixelFormat, Palette palette, int? chunkIndex, int? nextImageDataOffset
-        ) : base(data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset), false, true) {
+            TexturePixelFormat pixelFormat, int? chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
+        ) : base(
+            data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset),
+            isCompressed: false, zeroIsTransparent: true
+        ) {
             Collection       = collection;
             ChunkIndex       = chunkIndex;
             ImportExportName = "Texture_" + ((collection == CollectionType.Primary) ? "" : $"{collection}_") + $"{id:X2}";
@@ -27,7 +31,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             _imageDataOffsetAddr = Address + 2; // 2 bytes
 
             PixelFormatKnown = pixelFormat != TexturePixelFormat.Unknown;
-            Palette = palette;
+            MPD_File = mpdFile;
         }
 
         private static TexturePixelFormat GuessPixelFormat(TexturePixelFormat inputFormat, IByteData data, int address, int? nextImageDataOffset) {
@@ -103,8 +107,12 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
         public bool PixelFormatKnown { get; }
+        public IMPD_File MPD_File { get; }
 
-        public override Palette Palette { get; protected set; }
+        public override Palette Palette {
+            get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2);
+            protected set {}
+        }
 
         [TableViewModelColumn(addressField: null, displayName: "Tags", displayOrder: 5, minWidth: 200)]
         public string TagsStr => (Tags == null) ? "" : string.Join(", ", Tags.Select(x => x.Key + "|" + x.Value));

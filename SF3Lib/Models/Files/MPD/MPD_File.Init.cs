@@ -442,7 +442,7 @@ namespace SF3.Models.Files.MPD {
                 try {
                     var texCol = TextureChunk.Create(
                         chunk.DecompressedData, NameGetterContext, 0x00, "TextureCollection" + index,
-                        collection, pixelFormats[collection], palettes, chunk.Index, startId
+                        collection, pixelFormats[collection], chunk.Index, startId, this
                     );
                     if (texCol.TextureTable != null) {
                         if (isHeaderModel)
