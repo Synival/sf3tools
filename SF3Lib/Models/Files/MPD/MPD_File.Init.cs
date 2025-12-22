@@ -7,6 +7,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.MPD.TextureAnimation;
 using SF3.MPD;
 using SF3.Types;
 
@@ -468,8 +469,15 @@ namespace SF3.Models.Files.MPD {
             // Now that textures are loaded, build the texture animation frame data.
             // TODO: Only use this one!!
             if (chunkDatas[3] != null) {
-                // TODO: Supply known texture data.
-                TextureAnimationFrameChunk = TextureAnimationFrameChunk.Create(chunkDatas[3], NameGetterContext, 0, nameof(TextureAnimationFrameChunk), this);
+                var infoByOffset = TextureAnimations
+                    .SelectMany(x => x.TextureAnimationFrameTable)
+                    .GroupBy(x => (int) x.CompressedImageDataOffset)
+                    .ToDictionary(x => x.Key, x => {
+                        var frame = x.First();
+                        return new UniqueTextureAnimationFrameInfo(frame.Width, frame.Height, frame.PixelFormat != TexturePixelFormat.ABGR1555);
+                    });
+
+                TextureAnimationFrameChunk = TextureAnimationFrameChunk.Create(chunkDatas[3], NameGetterContext, 0, nameof(TextureAnimationFrameChunk), infoByOffset, this);
                 tables.AddRange(TextureAnimationFrameChunk.Tables);
             }
 

@@ -9,7 +9,7 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
     public class UniqueTextureAnimationFrame : TextureStructBase, ITexture {
-        public UniqueTextureAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, IMPD_File mpdFile)
+        public UniqueTextureAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, bool isReferenced, IMPD_File mpdFile)
         : base(
             data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555,
             isCompressed: true, zeroIsTransparent: true
@@ -17,6 +17,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             MPD_File = mpdFile;
             _width   = width;
             _height  = height;
+            IsReferenced = isReferenced;
             LoadImageData();
         }
 
@@ -27,6 +28,8 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public override int Width { get => _width; set {} }
 
         private int _height;
+
+
         [TableViewModelColumn(displayOrder: 1)]
         public override int Height { get => _height; set {} }
 
@@ -34,10 +37,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public override int ImageDataOffset { get => Address; set {} }
 
         [TableViewModelColumn(displayOrder: 2.1f)]
-        public bool DimensionsKnown => false;
-
-        [TableViewModelColumn(displayOrder: 2.2f)]
-        public bool PixelFormatKnown => false;
+        public bool IsReferenced { get; }
 
         public override bool HasImage => true;
         public override bool CanLoadImage => false;

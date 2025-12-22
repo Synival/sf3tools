@@ -235,7 +235,7 @@ namespace MPD_Analyzer {
                         missingTextureIds.Add(entry.TextureID);
 
             return missingTextureIds.Select(x => $"0x{x:X2}").ToArray();
-#elif true
+#elif false
             var usedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].ModelInstances
                 .Where(x => x.PositionX >= -0x800 && x.PositionX <= 0x1000)
                 .Where(x => x.PositionY >= -0x100 && x.PositionY <= 0x100)
@@ -252,6 +252,13 @@ namespace MPD_Analyzer {
                 .ToHashSet();
 
             return unusedModelIDs.Select(x => $"Model0x{x:X2}").ToArray();
+#elif true
+            if (mpdFile.TextureAnimationFrameChunk == null)
+                return null;
+            var unreferencedFrames = mpdFile.TextureAnimationFrameChunk.UniqueTextureAnimationFrameTable
+                .Where(x => x.IsReferenced == false)
+                .ToArray();
+            return unreferencedFrames.Select(x => $"Offset=0x{x.Address:X4}").ToArray();
 #else
             if (!mpdFile.Surface.HasModel)
                 return null;
