@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.TextureAnimation;
 using SF3.Models.Tables.MPD.TextureAnimation;
 
@@ -11,9 +12,10 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _heightAddr;
         private readonly int _frameTimerStartAddr;
 
-        public TextureAnimationModel(IByteData data, int id, string name, int address, bool is32Bit)
+        public TextureAnimationModel(IByteData data, int id, string name, int address, bool is32Bit, IMPD_File mpdFile)
         : base(data, id, name, address, 0x0A) {
-            Is32Bit = is32Bit;
+            Is32Bit  = is32Bit;
+            MPD_File = mpdFile;
 
             _bytesPerProperty    = Is32Bit ? 0x04 : 0x02;
             _textureEndId        = Is32Bit ? 0xFFFF_FFFF : 0xFFFF;
@@ -34,7 +36,7 @@ namespace SF3.Models.Structs.MPD {
             if (TextureID == _frameEndOffset)
                 pos = Address + _bytesPerProperty;
             else if (TextureID != _textureEndId) {
-                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id);
+                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id, MPD_File);
                 pos += TextureAnimationFrameTable.SizeInBytesPlusTerminator;
             }
 
@@ -42,6 +44,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public bool Is32Bit { get; }
+        public IMPD_File MPD_File { get; }
         public int FramesAddress { get; }
 
         [BulkCopy]

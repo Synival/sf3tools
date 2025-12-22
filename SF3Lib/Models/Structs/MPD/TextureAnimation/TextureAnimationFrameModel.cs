@@ -5,6 +5,7 @@ using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Images;
+using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureAnimation {
@@ -13,7 +14,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _durationAddr;
 
         public TextureAnimationFrameModel(
-            IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum
+            IByteData data, int id, string name, int address, bool is32Bit, int texId, int width, int height, int texAnimId, int frameNum, IMPD_File mpdFile
         ) : base(data, id, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit          = is32Bit;
             TextureID        = texId;
@@ -22,6 +23,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             texAnimID        = texAnimId;
             FrameNum         = frameNum;
             ImportExportName = $"Texture_{texId:X2}_Frame_{(frameNum):X2}";
+            MPD_File         = mpdFile;
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
 
@@ -29,11 +31,11 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             _durationAddr                = Address + 1 * _bytesPerProperty;
         }
 
-        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, Palette palette, ITexture referenceTexture) {
+        public void FetchAndCacheTexture(IByteData data, TexturePixelFormat pixelFormat, ITexture referenceTexture) {
             if (pixelFormat == TexturePixelFormat.ABGR1555)
                 FetchAndCacheTextureABGR1555(data, referenceTexture);
             else
-                FetchAndCacheTextureIndexed(data, pixelFormat, palette, referenceTexture);
+                FetchAndCacheTextureIndexed(data, pixelFormat, MPD_File.CreatePalette(2), referenceTexture);
         }
 
         private void FetchAndCacheTextureABGR1555(IByteData data, ITexture referenceTexture) {
@@ -138,5 +140,6 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public ITexture Texture { get; private set; }
 
         public string ImportExportName { get; }
+        public IMPD_File MPD_File { get; }
     }
 }

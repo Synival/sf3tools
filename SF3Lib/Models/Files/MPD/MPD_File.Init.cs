@@ -106,7 +106,7 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetTextureAnimations != 0) {
                 try {
-                    tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - RamAddress, areAnimatedTextures32Bit));
+                    tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, "TextureAnimations", header.OffsetTextureAnimations - RamAddress, areAnimatedTextures32Bit, this));
                 }
                 catch {
                     // TODO: what to do here??
@@ -415,8 +415,6 @@ namespace SF3.Models.Files.MPD {
                     primaryPixelFormats[tex.TextureID] = TexturePixelFormat.Palette3;
 
             // Gather palettes.
-            var palettes = CreatePalettesForTextures();
-
             var texColList = new List<TextureChunk>();
             var texChunks = ChunkLocations
                 .Where(x => x.Exists && x.ChunkType == ChunkType.Textures)
@@ -496,19 +494,6 @@ namespace SF3.Models.Files.MPD {
             Collisions = new MPD_Collisions(this);
 
             return tables.ToArray();
-        }
-
-        private Dictionary<TexturePixelFormat, Palette> CreatePalettesForTextures() {
-            var palettes = new Dictionary<TexturePixelFormat, Palette>();
-            if (PaletteTables != null) {
-                if (PaletteTables.Length >= 1 && PaletteTables[0] != null)
-                    palettes[TexturePixelFormat.Palette1] = new Palette(PaletteTables[0].Select(x => x.ColorABGR1555).ToArray());
-                if (PaletteTables.Length >= 2 && PaletteTables[1] != null)
-                    palettes[TexturePixelFormat.Palette2] = new Palette(PaletteTables[1].Select(x => x.ColorABGR1555).ToArray());
-                if (PaletteTables.Length >= 3 && PaletteTables[2] != null)
-                    palettes[TexturePixelFormat.Palette3] = new Palette(PaletteTables[2].Select(x => x.ColorABGR1555).ToArray());
-            }
-            return palettes;
         }
 
         private void WireChildDataModifiedEvents() {
