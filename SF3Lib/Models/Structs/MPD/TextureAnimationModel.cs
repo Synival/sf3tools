@@ -33,10 +33,11 @@ namespace SF3.Models.Structs.MPD {
             var frames = new List<TextureAnimationFrameModel>();
 
             // This happens in Scn2 SARA23.MPD for some reason...
-            if (TextureID == _frameEndOffset)
+            if (TextureIDRaw == _frameEndOffset)
                 pos = Address + _bytesPerProperty;
-            else if (TextureID != _textureEndId) {
-                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id, MPD_File);
+            else if (TextureIDRaw != _textureEndId) {
+                TextureAnimationFrameTable = TextureAnimationFrameTable.Create(
+                    data, "TexAnimFrames_" + id, pos, is32Bit, (int) TextureID, (int) Width, (int) Height, id, IsIndexed, MPD_File);
                 pos += TextureAnimationFrameTable.SizeInBytesPlusTerminator;
             }
 
@@ -47,11 +48,23 @@ namespace SF3.Models.Structs.MPD {
         public IMPD_File MPD_File { get; }
         public int FramesAddress { get; }
 
+        public uint TextureIDRaw {
+            get => Data.GetData(_textureIdAddr, _bytesPerProperty);
+            set => Data.SetData(_textureIdAddr, value, _bytesPerProperty);
+        }
+
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public uint TextureID {
-            get => Data.GetData(_textureIdAddr, _bytesPerProperty);
-            set => Data.SetData(_textureIdAddr, value, _bytesPerProperty);
+            get => TextureIDRaw & 0xFF;
+            set => TextureIDRaw = (TextureIDRaw & ~0xFFu) | (value & 0xFF);
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayOrder: 0.1f)]
+        public bool IsIndexed {
+            get => (TextureIDRaw & 0x100) == 0x100;
+            set => TextureIDRaw = (TextureIDRaw & ~0x100u) | (value ? 0x100u : 0);
         }
 
         [BulkCopy]

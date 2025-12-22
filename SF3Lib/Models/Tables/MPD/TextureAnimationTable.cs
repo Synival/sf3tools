@@ -24,7 +24,7 @@ namespace SF3.Models.Tables.MPD {
                     var atEnd = textureId == FrameEndId || textureId == TextureEndId;
                     return new TextureAnimationModel(Data, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit, MPD_File);
                 },
-                (currentRows, model) => model.TextureID != FrameEndId && model.TextureID != TextureEndId, addEndModel: false);
+                (currentRows, model) => model.TextureIDRaw != FrameEndId && model.TextureIDRaw != TextureEndId, addEndModel: false);
         }
 
         public bool Is32Bit { get; }

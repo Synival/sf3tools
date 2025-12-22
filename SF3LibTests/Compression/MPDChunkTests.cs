@@ -2,7 +2,6 @@
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using CommonLib.Tests;
-using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.Types;

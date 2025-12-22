@@ -14,9 +14,9 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         private readonly int _durationAddr;
 
         public TextureAnimationFrameModel(
-            IByteData data, int id, string name, int address, bool is32Bit, int width, int height, int texAnimId, int frameNum, IMPD_File mpdFile
+            IByteData data, int id, string name, int address, bool is32Bit, int width, int height, int texAnimId, int frameNum, bool isIndexed, IMPD_File mpdFile
         ) : base(
-            data, mpdFile.ChunkData[3], id, name, address, is32Bit ? 0x08 : 0x04, (id & 0x100) == 0x100 ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
+            data, mpdFile.ChunkData[3], id, name, address, is32Bit ? 0x08 : 0x04, isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555, true, true, chunkIndex: 3
         ) {
             Is32Bit          = is32Bit;
             _width           = width;
@@ -24,6 +24,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
             TexAnimID        = texAnimId;
             Frame            = frameNum;
             ImportExportName = $"Texture_{ID:X2}_Frame_{(frameNum):X2}";
+            IsIndexed        = isIndexed;
             MPD_File         = mpdFile;
 
             _bytesPerProperty = is32Bit ? 0x04 : 0x02;
@@ -77,6 +78,7 @@ namespace SF3.Models.Structs.MPD.TextureAnimation {
         public Dictionary<TagKey, TagValue> Tags => null;
 
         public string ImportExportName { get; }
+        public bool IsIndexed { get; }
         public IMPD_File MPD_File { get; }
     }
 }
