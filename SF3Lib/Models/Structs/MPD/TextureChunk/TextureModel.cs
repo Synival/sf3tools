@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public TextureModel(
             IByteData data, CollectionType collection, int id, string name, int address,
             TexturePixelFormat pixelFormat, Palette palette, int? chunkIndex, int? nextImageDataOffset
-        ) : base(data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset), false, false) {
+        ) : base(data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset), false, true) {
             Collection       = collection;
             ChunkIndex       = chunkIndex;
             ImportExportName = "Texture_" + ((collection == CollectionType.Primary) ? "" : $"{collection}_") + $"{id:X2}";
