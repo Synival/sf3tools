@@ -101,7 +101,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             }
         }
 
-        [TableViewModelColumn(addressField: null, displayName: "Pixel Format Known", displayOrder: 2.5f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
         public bool PixelFormatKnown { get; }
 
         public override Palette Palette { get; protected set; }
