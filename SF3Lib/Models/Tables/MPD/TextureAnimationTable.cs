@@ -3,7 +3,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class TextureAnimationTable : TerminatedTable<TextureAnimationModel> {
+    public class TextureAnimationTable : TerminatedTable<TextureAnimation> {
         protected TextureAnimationTable(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
         : base(data, name, address, is32Bit ? 8 : 4, null) {
             Is32Bit      = is32Bit;
@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.MPD {
                     // everything else. No clue why, but let's consider that the end as well.
                     var textureId = Data.GetData(address, Is32Bit ? 4 : 2);
                     var atEnd = textureId == FrameEndId || textureId == TextureEndId;
-                    return new TextureAnimationModel(Data, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit, MPD_File);
+                    return new TextureAnimation(Data, id, atEnd ? "--" : "TexAnim" + id, address, Is32Bit, MPD_File);
                 },
                 (currentRows, model) => model.TextureIDRaw != FrameEndId && model.TextureIDRaw != TextureEndId, addEndModel: false);
         }

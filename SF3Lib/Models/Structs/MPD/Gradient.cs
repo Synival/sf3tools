@@ -2,7 +2,7 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD {
-    public class GradientModel : Struct {
+    public class Gradient : Struct {
         private readonly int _startPositionAddr;
         private readonly int _stopPositionAddr;
         private readonly int _startRAddr;
@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _skyBoxOpacityAddr;
         private readonly int _modelsAndTilesOpacityAddr;
 
-        public GradientModel(IByteData data, int id, string name, int address)
+        public Gradient(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x18) {
             _startPositionAddr         = Address + 0x00; // 2 bytes
             _stopPositionAddr          = Address + 0x02; // 2 bytes

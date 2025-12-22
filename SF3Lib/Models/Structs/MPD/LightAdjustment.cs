@@ -3,7 +3,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
-    public class LightAdjustmentModel : Struct {
+    public class LightAdjustment : Struct {
         private readonly int _rAdjustAddr;
         private readonly int _gAdjustAddr;
         private readonly int _bAdjustAddr;
@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _groundBAdjustAddr;
         private readonly int _palette3TransparencyAddr;
 
-        public LightAdjustmentModel(IByteData data, int id, string name, int address, ScenarioType scenario)
+        public LightAdjustment(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, scenario >= ScenarioType.Scenario3 ? 0x0E : 0x06) {
             Scenario = scenario;
 

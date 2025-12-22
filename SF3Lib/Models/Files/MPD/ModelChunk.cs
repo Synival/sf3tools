@@ -90,7 +90,7 @@ namespace SF3.Models.Files.MPD {
             }
             catch {
                 // TODO: what to do on error??
-                PDatasByMemoryAddress = new Dictionary<uint, PDataModel>();
+                PDatasByMemoryAddress = new Dictionary<uint, PDataStruct>();
             }
 
             try {
@@ -278,7 +278,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private Dictionary<int, ISGL_Model> _sglModelsById = new Dictionary<int, ISGL_Model>();
-        private ISGL_Model GetModel(PDataModel pdata) {
+        private ISGL_Model GetModel(PDataStruct pdata) {
             if (pdata == null)
                 return null;
 
@@ -335,7 +335,7 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public PDataTable PDataTable { get; private set; }
 
-        public Dictionary<uint, PDataModel> PDatasByMemoryAddress { get; private set; }
+        public Dictionary<uint, PDataStruct> PDatasByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, VertexTable> VertexTablesByMemoryAddress { get; private set; }

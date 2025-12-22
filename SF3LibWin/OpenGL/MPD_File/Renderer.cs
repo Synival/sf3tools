@@ -60,7 +60,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GroundModelResources groundModel,
             SkyBoxModelResources skyBoxModel,
             GradientResources gradients,
-            LightAdjustmentModel lightAdj,
+            LightAdjustment lightAdj,
             LightingResources lighting,
             BoundaryModelResources boundaryModels,
             CollisionResources collisionModels,
@@ -363,7 +363,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GeneralResources general,
             GroundModelResources groundModel,
             GradientResources gradients,
-            LightAdjustmentModel lightAdj,
+            LightAdjustment lightAdj,
             RendererOptions options,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix

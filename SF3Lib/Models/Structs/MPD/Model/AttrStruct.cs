@@ -5,7 +5,7 @@ using CommonLib.Types;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class AttrModel : Struct, IATTR {
+    public class AttrStruct : Struct, IATTR {
         public int _planeAddr;               // (Uint8) Single/double-sided flag
         public int _sortAndOptionsAddr;      // (Uint8) Options for lighting, has texture, sorting
         public int _textureNoAddr;           // (Uint16) Texture number
@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public int _gouraudShadingTableAddr; // (Uint16) Gouraud shading table
         public int _dirAddr;                 // (Uint16) Texture inversion and function number
 
-        public AttrModel(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
+        public AttrStruct(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
             _planeAddr               = Address + 0x00; // 1 byte
             _sortAndOptionsAddr      = Address + 0x01; // 1 byte
             _textureNoAddr           = Address + 0x02; // 2 bytes

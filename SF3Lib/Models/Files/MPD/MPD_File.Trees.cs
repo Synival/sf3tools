@@ -98,7 +98,7 @@ namespace SF3.Models.Files.MPD {
                     fileTile.TreeModelID = null;
         }
 
-        public PDataModel GetTreePData0() {
+        public PDataStruct GetTreePData0() {
             var mc = ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
             if (mc == null)
                 return null;

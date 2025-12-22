@@ -7,7 +7,7 @@ using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
-    public class TextureTable : FixedSizeTable<TextureModel> {
+    public class TextureTable : FixedSizeTable<TextureStruct> {
         protected TextureTable(
             IByteData data, string name, int address,
             CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
@@ -30,7 +30,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, chunkIndex, mpdFile));
 
         public override bool Load() {
-            var size = TextureModel.GlobalSize;
+            var size = TextureStruct.GlobalSize;
             return Load((id, address) => {
                 var pixelFormat =
                     (Collection != CollectionType.Primary) ? TexturePixelFormat.ABGR1555 :
@@ -42,7 +42,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
                     : Data.GetWord(address + size + 2);
 
                 var texId = StartID + id;
-                return new TextureModel(
+                return new TextureStruct(
                     Data, Collection, StartID + id, $"Texture{(int) Collection}_{texId:X2}", address, pixelFormat, ChunkIndex, nextImageDataOffset, MPD_File
                 );
             });

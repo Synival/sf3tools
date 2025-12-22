@@ -3,7 +3,7 @@ using CommonLib.SGL;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class PolygonModel : Struct {
+    public class PolygonStruct : Struct {
         private readonly int _normalXAddr;
         private readonly int _normalYAddr;
         private readonly int _normalZAddr;
@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _vertex3Addr;
         private readonly int _vertex4Addr;
 
-        public PolygonModel(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x14) {
+        public PolygonStruct(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x14) {
             _normalXAddr = Address + 0x00; // 4 bytes
             _normalYAddr = Address + 0x04; // 4 bytes
             _normalZAddr = Address + 0x08; // 4 bytes

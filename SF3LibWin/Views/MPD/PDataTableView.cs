@@ -9,7 +9,7 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
     public class PDataTableView : ControlSpaceView {
-        public PDataTableView(string name, IMPD_File mpdFile, ITable<PDataModel> model, INameGetterContext ngc) : base(name) {
+        public PDataTableView(string name, IMPD_File mpdFile, ITable<PDataStruct> model, INameGetterContext ngc) : base(name) {
             Model = model;
             TableView = new TableView("PDATAs", model, ngc);
             ModelView = new PData3DView("Model", mpdFile);
@@ -39,7 +39,7 @@ namespace SF3.Win.Views.MPD {
 
         private void OnModelChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            ModelView.PData = (PDataModel) item?.RowObject;
+            ModelView.PData = (PDataStruct) item?.RowObject;
         }
 
         public override void Destroy() {
@@ -54,7 +54,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public ITable<PDataModel> Model { get; }
+        public ITable<PDataStruct> Model { get; }
         public TableView TableView { get; }
         public PData3DView ModelView { get; }
 

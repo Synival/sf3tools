@@ -40,16 +40,16 @@ namespace SF3.Models.Files.MPD {
             return tables;
         }
 
-        private MPD_HeaderModel MakeHeader() {
+        private MPD_Header MakeHeader() {
             var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
             var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
-            MPDHeader = new MPD_HeaderModel(Data, 0, "MPDHeader", headerAddr, Scenario);
+            MPDHeader = new MPD_Header(Data, 0, "MPDHeader", headerAddr, Scenario);
             Flags     = new MPD_FlagsFromHeader(MPDHeader);
             Settings  = new MPD_Settings(this);
             return MPDHeader;
         }
 
-        private ITable[] MakeHeaderTables(MPD_HeaderModel header, bool areAnimatedTextures32Bit) {
+        private ITable[] MakeHeaderTables(MPD_Header header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
             tables.AddRange(MakeLightingTables(header));
@@ -70,7 +70,7 @@ namespace SF3.Models.Files.MPD {
         private ChunkLocationTable MakeChunkHeaderTable()
             => ChunkLocations = ChunkLocationTable.Create(Data, "ChunkHeader", 0x2000);
 
-        private ITable[] MakeTexturePaletteTables(MPD_HeaderModel header) {
+        private ITable[] MakeTexturePaletteTables(MPD_Header header) {
             PaletteTables = new ColorTable[3];
             var headerRamAddr = header.Address + RamAddress;
 
@@ -87,7 +87,7 @@ namespace SF3.Models.Files.MPD {
             return PaletteTables.Where(x => x != null).ToArray();
         }
 
-        private ITable[] MakeLightingTables(MPD_HeaderModel header) {
+        private ITable[] MakeLightingTables(MPD_Header header) {
             var tables = new List<ITable>();
 
             if (header.OffsetLightPalette != 0)
@@ -95,7 +95,7 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetLightPosition != 0)
                 LightPosition = new LightPosition(Data, 0, "LightPositions", header.OffsetLightPosition - RamAddress);
             if (header.OffsetLightAdjustment != 0)
-                LightAdjustment = new LightAdjustmentModel(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - RamAddress, Scenario);
+                LightAdjustment = new LightAdjustment(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - RamAddress, Scenario);
 
             if (header.OffsetGradient != 0)
                 tables.Add(GradientTable = GradientTable.Create(Data, "Gradients", header.OffsetGradient - RamAddress));
@@ -103,7 +103,7 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ITable[] MakeTextureAnimationTables(MPD_HeaderModel header, bool areAnimatedTextures32Bit) {
+        private ITable[] MakeTextureAnimationTables(MPD_Header header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
             if (header.OffsetTextureAnimations != 0) {
@@ -127,7 +127,7 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ITable[] MakeHeaderModelCollections(MPD_HeaderModel header) {
+        private ITable[] MakeHeaderModelCollections(MPD_Header header) {
             var tables = new List<ITable>();
             var offsets = new int[] { header.OffsetChestModel, header.OffsetLockedChestModel, header.OffsetBarrelModel };
 
@@ -151,7 +151,7 @@ namespace SF3.Models.Files.MPD {
             return newChunk;
         }
 
-        private ITable[] MakeUnknownTables(MPD_HeaderModel header) {
+        private ITable[] MakeUnknownTables(MPD_Header header) {
             var tables = new List<ITable>();
 
             // TODO: put somewhere else!!
@@ -220,7 +220,7 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ITable[] CreateUnreferencedTables(MPD_HeaderModel header, IEnumerable<ITable> existingTables) {
+        private ITable[] CreateUnreferencedTables(MPD_Header header, IEnumerable<ITable> existingTables) {
             var newTables = new List<ITable>();
 
             var usedSpace = GetUsedHeaderSpace(header, existingTables);

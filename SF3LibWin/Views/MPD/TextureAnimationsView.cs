@@ -30,7 +30,7 @@ namespace SF3.Win.Views.MPD {
 
         void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            var anim = (TextureAnimationModel) item?.RowObject;
+            var anim = (TextureAnimation) item?.RowObject;
 
             var frame = anim?.TextureAnimationFrameTable?.FirstOrDefault();
             TextureView.Image = frame?.CreateBitmapARGB1555() ?? null;
@@ -74,7 +74,7 @@ namespace SF3.Win.Views.MPD {
         public TableView TableView { get; private set; }
         public ImageView TextureView { get; private set; }
 
-        private TextureAnimationModel _currentAnimation = null;
+        private TextureAnimation _currentAnimation = null;
         private int _currentFrameNum = 0;
         private Timer _timer = null;
     }

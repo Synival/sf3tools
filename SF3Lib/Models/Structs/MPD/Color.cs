@@ -4,10 +4,10 @@ using SF3.ByteData;
 using static CommonLib.Imaging.PixelConversion;
 
 namespace SF3.Models.Structs.MPD {
-    public class ColorModel : Struct {
+    public class Color : Struct {
         private readonly int _colorABGR1555Addr;
 
-        public ColorModel(IByteData data, int id, string name, int address)
+        public Color(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 2) {
             _colorABGR1555Addr = Address + 0x00; // 2 bytes
         }

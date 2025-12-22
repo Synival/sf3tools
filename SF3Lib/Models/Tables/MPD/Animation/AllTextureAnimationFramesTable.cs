@@ -6,11 +6,11 @@ using SF3.Models.Structs.MPD.Animation;
 
 namespace SF3.Models.Tables.MPD.Animation {
     public class AllTextureAnimationFramesTable : Table<TextureAnimationFrame> {
-        protected AllTextureAnimationFramesTable(IByteData data, string name, int address, IEnumerable<TextureAnimationModel> animations) : base(data, name, address) {
+        protected AllTextureAnimationFramesTable(IByteData data, string name, int address, IEnumerable<TextureAnimation> animations) : base(data, name, address) {
             Animations = animations;
         }
 
-        public static AllTextureAnimationFramesTable Create(IByteData data, string name, int address, IEnumerable<TextureAnimationModel> animations)
+        public static AllTextureAnimationFramesTable Create(IByteData data, string name, int address, IEnumerable<TextureAnimation> animations)
             => Create(() => new AllTextureAnimationFramesTable(data, name, address, animations));
 
         public override bool Load() {
@@ -18,7 +18,7 @@ namespace SF3.Models.Tables.MPD.Animation {
             return true;
         }
 
-        public IEnumerable<TextureAnimationModel> Animations { get; }
+        public IEnumerable<TextureAnimation> Animations { get; }
         public override int TerminatorSize => 0;
         public override bool IsContiguous => false;
     }

@@ -4,11 +4,11 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
     public partial class MPD_FlagsFromHeader : IMPD_AllFlags {
-        public MPD_FlagsFromHeader(MPD_HeaderModel header) {
+        public MPD_FlagsFromHeader(MPD_Header header) {
             Header = header;
         }
 
-        public MPD_HeaderModel Header { get; }
+        public MPD_Header Header { get; }
 
         private ushort MapFlags {
             get => Header.MapFlags;

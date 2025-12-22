@@ -60,7 +60,7 @@ namespace SF3.Models.Files.MPD {
         /// Fetches the PDataModel for a PDATA that looks like a tree, if one could be found.
         /// </summary>
         /// <returns>A PDataModel reference if one with matching criteria was found. Otherwise, 'null'.</returns>
-        PDataModel GetTreePData0();
+        PDataStruct GetTreePData0();
 
         /// <summary>
         /// Replaces a set of textures based on appropriately named files (e.g, Texture_0A.png).
@@ -101,12 +101,12 @@ namespace SF3.Models.Files.MPD {
         IChunkData[] ForegroundTileChunkDatas { get; }
         IChunkData ForegroundTileAssignmentChunkData { get; }
 
-        MPD_HeaderModel MPDHeader { get; }
+        MPD_Header MPDHeader { get; }
         ChunkLocationTable ChunkLocations { get; }
         ColorTable LightPalette { get; }
         LightPosition LightPosition { get; }
         UnknownUInt16Table Unknown1Table { get; }
-        LightAdjustmentModel LightAdjustment { get; }
+        LightAdjustment LightAdjustment { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOffByAddr { get; }
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; }

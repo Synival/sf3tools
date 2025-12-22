@@ -2,7 +2,7 @@
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class VertexTable : FixedSizeTable<VertexModel> {
+    public class VertexTable : FixedSizeTable<VertexStruct> {
         protected VertexTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {
         }
 
@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.MPD.Model {
             => Create(() => new VertexTable(data, name, address, size));
 
         public override bool Load()
-            => Load((id, address) => new VertexModel(Data, id, "VERTEX" + id.ToString("D4"), address));
+            => Load((id, address) => new VertexStruct(Data, id, "VERTEX" + id.ToString("D4"), address));
     }
 }

@@ -2,10 +2,10 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD {
-    public class TextureIDModel : Struct {
+    public class TextureIDStruct : Struct {
         private readonly int _textureIdAddr;
 
-        public TextureIDModel(IByteData data, int id, string name, int address)
+        public TextureIDStruct(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x02) {
             _textureIdAddr = Address; // 2 bytes
         }

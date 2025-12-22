@@ -3,14 +3,14 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class PDataModel : Struct {
+    public class PDataStruct : Struct {
         public readonly int _verticesOffsetAddr;
         public readonly int _vertexCountAddr;
         public readonly int _polygonsOffsetAddr;
         public readonly int _polygonCountAddr;
         public readonly int _attributesOffsetAddr;
 
-        public PDataModel(IByteData data, int id, string name, int address,
+        public PDataStruct(IByteData data, int id, string name, int address,
             CollectionType collection, int? chunkIndex, int index, int refs
         ) : base(data, id, name, address, 0x14) {
             Collection = collection;

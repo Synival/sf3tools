@@ -4,7 +4,7 @@ using SF3.Models.Structs.MPD.Model;
 using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class PDataTable : AddressedTable<PDataModel> {
+    public class PDataTable : AddressedTable<PDataStruct> {
         public struct PDataRef {
             public int Address;
             public CollectionType Collection;
@@ -21,7 +21,7 @@ namespace SF3.Models.Tables.MPD.Model {
             => Create(() => new PDataTable(data, name, refs));
 
         public override bool Load() {
-            return Load((id, address) => new PDataModel(
+            return Load((id, address) => new PDataStruct(
                 Data, id, "PDATA_" + Refs[id].Collection.ToString() + "_" + id.ToString("D4"), address,
                 Refs[id].Collection, Refs[id].ChunkIndex, Refs[id].Index, Refs[id].RefCount
             ));

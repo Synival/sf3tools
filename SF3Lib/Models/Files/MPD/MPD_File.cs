@@ -81,7 +81,7 @@ namespace SF3.Models.Files.MPD {
         public IMPD_Collisions Collisions { get; private set; }
 
         [BulkCopyRecurse]
-        public MPD_HeaderModel MPDHeader { get; private set; }
+        public MPD_Header MPDHeader { get; private set; }
 
         [BulkCopyRecurse]
         public ChunkLocationTable ChunkLocations { get; private set; }
@@ -96,7 +96,7 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt16Table Unknown1Table { get; private set; }
 
         [BulkCopyRecurse]
-        public LightAdjustmentModel LightAdjustment { get; private set; }
+        public LightAdjustment LightAdjustment { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }

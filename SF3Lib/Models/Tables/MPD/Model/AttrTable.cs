@@ -2,7 +2,7 @@
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class AttrTable : FixedSizeTable<AttrModel> {
+    public class AttrTable : FixedSizeTable<AttrStruct> {
         protected AttrTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {
         }
 
@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.MPD.Model {
             => Create(() => new AttrTable(data, name, address, size));
 
         public override bool Load()
-            => Load((id, address) => new AttrModel(Data, id, "ATTR" + id.ToString("D4"), address));
+            => Load((id, address) => new AttrStruct(Data, id, "ATTR" + id.ToString("D4"), address));
     }
 }

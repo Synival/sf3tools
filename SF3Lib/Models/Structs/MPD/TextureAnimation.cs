@@ -6,13 +6,13 @@ using SF3.Models.Structs.MPD.Animation;
 using SF3.Models.Tables.MPD.Animation;
 
 namespace SF3.Models.Structs.MPD {
-    public class TextureAnimationModel : Struct {
+    public class TextureAnimation : Struct {
         private readonly int _textureIdAddr;
         private readonly int _widthAddr;
         private readonly int _heightAddr;
         private readonly int _frameTimerStartAddr;
 
-        public TextureAnimationModel(IByteData data, int id, string name, int address, bool is32Bit, IMPD_File mpdFile)
+        public TextureAnimation(IByteData data, int id, string name, int address, bool is32Bit, IMPD_File mpdFile)
         : base(data, id, name, address, 0x0A) {
             Is32Bit  = is32Bit;
             MPD_File = mpdFile;

@@ -3,12 +3,12 @@ using CommonLib.SGL;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class VertexModel : Struct {
+    public class VertexStruct : Struct {
         private readonly int _xAddr;
         private readonly int _yAddr;
         private readonly int _zAddr;
 
-        public VertexModel(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
+        public VertexStruct(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0C) {
             _xAddr = Address + 0x00; // 4 bytes
             _yAddr = Address + 0x04; // 4 bytes
             _zAddr = Address + 0x08; // 4 bytes

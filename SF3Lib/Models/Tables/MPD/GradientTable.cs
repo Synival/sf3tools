@@ -2,7 +2,7 @@
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables.MPD {
-    public class GradientTable : TerminatedTable<GradientModel> {
+    public class GradientTable : TerminatedTable<Gradient> {
         protected GradientTable(IByteData data, string name, int address) : base(data, name, address, 2, null) { }
 
         public static GradientTable Create(IByteData data, string name, int address)
@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.MPD {
 
         public override bool Load() {
             return Load(
-                (id, address) => new GradientModel(Data, id, "Gradient" + id.ToString("D2"), address),
+                (id, address) => new Gradient(Data, id, "Gradient" + id.ToString("D2"), address),
                 (rows, lastRow) => lastRow.StartPosition != 0xFFFF,
                 addEndModel: false
             );

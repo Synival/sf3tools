@@ -4,7 +4,7 @@ using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
-    public class AllPDatasTable : Table<PDataModel> {
+    public class AllPDatasTable : Table<PDataStruct> {
         // TODO: We need a kind of "non-addressed" table here that doesn't have its own data or address!
         //       Using base(null, 0) is a horrible hack :( :( :(
         protected AllPDatasTable(string name, IEnumerable<PDataTable> modelTables) : base(null, name, 0) {
@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             return true;
         }
 
-        public PDataModel[] Models { get; }
+        public PDataStruct[] Models { get; }
         public override int TerminatorSize => 0;
         public override bool IsContiguous => false;
     }

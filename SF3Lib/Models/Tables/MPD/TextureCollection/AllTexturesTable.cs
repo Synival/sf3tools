@@ -3,7 +3,7 @@ using System.Linq;
 using SF3.Models.Structs.MPD.TextureChunk;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
-    public class AllTexturesTable : Table<TextureModel> {
+    public class AllTexturesTable : Table<TextureStruct> {
         // TODO: We need a kind of "non-addressed" table here that doesn't have its own data or address!
         //       Using base(null, 0) is a horrible hack :( :( :(
         protected AllTexturesTable(string name, IEnumerable<TextureTable> textureTables) : base(null, name, 0) {
@@ -18,7 +18,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             return true;
         }
 
-        public TextureModel[] Textures { get; }
+        public TextureStruct[] Textures { get; }
         public override int TerminatorSize => 0;
         public override bool IsContiguous => false;
     }

@@ -10,12 +10,12 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
-    public class TextureModel : TextureStructBase, ITexture {
+    public class TextureStruct : TextureStructBase, ITexture {
         private readonly int _widthAddr;
         private readonly int _heightAddr;
         private readonly int _imageDataOffsetAddr;
 
-        public TextureModel(
+        public TextureStruct(
             IByteData data, CollectionType collection, int id, string name, int address,
             TexturePixelFormat pixelFormat, int? chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
         ) : base(

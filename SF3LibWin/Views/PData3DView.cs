@@ -12,7 +12,7 @@ namespace SF3.Win.Views {
             MPD_File = mpdFile;
         }
 
-        public PData3DView(string name, IMPD_File mpdFile, PDataModel pdata) : base(name) {
+        public PData3DView(string name, IMPD_File mpdFile, PDataStruct pdata) : base(name) {
             MPD_File = mpdFile;
             _pdata = pdata;
             UpdateSGLModel();
@@ -42,8 +42,8 @@ namespace SF3.Win.Views {
 
         public IMPD_File MPD_File { get; }
 
-        private PDataModel _pdata = null;
-        public PDataModel PData {
+        private PDataStruct _pdata = null;
+        public PDataStruct PData {
             get => _pdata;
             set {
                 if (value != _pdata) {

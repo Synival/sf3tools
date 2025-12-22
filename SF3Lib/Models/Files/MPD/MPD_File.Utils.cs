@@ -208,7 +208,7 @@ namespace SF3.Models.Files.MPD {
         }
 
 
-        private bool[] GetUsedHeaderSpace(MPD_HeaderModel header, IEnumerable<ITable> existingTables) {
+        private bool[] GetUsedHeaderSpace(MPD_Header header, IEnumerable<ITable> existingTables) {
             var usedSpace = new bool[0x2000];
 
             // Mark '**header', '*header', and 'header'.
