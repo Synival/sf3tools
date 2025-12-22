@@ -36,8 +36,8 @@ namespace SF3.Models.Tables.DAT {
             => Create(() => new ItemCG_TextureTable(data, name, address, nameGetterContext));
 
         public override bool Load() {
-            var rowDict = new Dictionary<int, ItemCG_TextureModel>();
-            var rows = new List<ItemCG_TextureModel>();
+            var rowDict = new Dictionary<int, ItemCG_Texture>();
+            var rows = new List<ItemCG_Texture>();
 
             try {
                 var address = Address;
@@ -55,7 +55,7 @@ namespace SF3.Models.Tables.DAT {
                     if (itemsStart.HasValue)
                         ngcName = NameGetterContext.GetName(null, null, id - itemsStart.Value, new object[] { NamedValueType.Spell });
 
-                    var newModel = new ItemCG_TextureModel(Data, id, ngcName, address, ItemSpellPalette);
+                    var newModel = new ItemCG_Texture(Data, id, ngcName, address, ItemSpellPalette);
 
                     rowDict[id] = newModel;
                     rows.Add(newModel);

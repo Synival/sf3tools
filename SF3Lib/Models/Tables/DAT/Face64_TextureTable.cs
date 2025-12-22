@@ -14,7 +14,7 @@ namespace SF3.Models.Tables.DAT {
             => Create(() => new Face64_TextureTable(data, name, address, nameGetterContext));
 
         public override bool Load()
-            => Load((id, addr) => new Face64_TextureModel(Data, id, $"FaceTexture_{id:D3}", addr));
+            => Load((id, addr) => new Face64_Texture(Data, id, $"FaceTexture_{id:D3}", addr));
 
         public INameGetterContext NameGetterContext { get; }
     }

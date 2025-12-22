@@ -32,7 +32,7 @@ namespace SF3.Models.Tables.DAT {
                     break;
                 }
             }
-            return Load((id, addr) => new Face32_TextureModel(Data, id, $"FaceTexture_{id:D3}", addr, Palette, IsCompressed.Value));
+            return Load((id, addr) => new Face32_Texture(Data, id, $"FaceTexture_{id:D3}", addr, Palette, IsCompressed.Value));
         }
 
         public INameGetterContext NameGetterContext { get; }

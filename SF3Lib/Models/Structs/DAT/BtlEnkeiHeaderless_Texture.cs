@@ -1,8 +1,8 @@
 ﻿using SF3.ByteData;
 
 namespace SF3.Models.Structs.DAT {
-    public class BtlEnkeiHeaderless_TextureModel : BtlEnkei_TextureModelBase {
-        public BtlEnkeiHeaderless_TextureModel(IByteData data, int id, string name, int address)
+    public class BtlEnkeiHeaderless_Texture : BtlEnkei_TextureBase {
+        public BtlEnkeiHeaderless_Texture(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0, address) {
             LoadImageData();
         }

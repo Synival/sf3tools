@@ -5,8 +5,8 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public class ItemCG_TextureModel : FixedSizeTextureStructBase {
-        public ItemCG_TextureModel(IByteData data, int id, string name, int address, Palette palette)
+    public class ItemCG_Texture : FixedSizeTextureStructBase {
+        public ItemCG_Texture(IByteData data, int id, string name, int address, Palette palette)
         : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Palette1, true, false) {
             _palette = palette;
             LoadImageData();

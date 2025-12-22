@@ -18,14 +18,14 @@ namespace SF3.Models.Tables.DAT {
             if (Headerless) {
                 const int span = 0x10000;
                 return Load(
-                    (id, addr) => (id * span + Address < Data.Length) ? new BtlEnkeiHeaderless_TextureModel(Data, id, $"BattleTexture_{id:D3}", id * span + Address) : null,
+                    (id, addr) => (id * span + Address < Data.Length) ? new BtlEnkeiHeaderless_Texture(Data, id, $"BattleTexture_{id:D3}", id * span + Address) : null,
                     (rows, last) => last?.HasImage == true,
                     false
                 );
             }
             else {
                 return Load(
-                    (id, addr) => new BtlEnkei_TextureModel(Data, id, $"BattleTexture_{id:D3}", addr),
+                    (id, addr) => new BtlEnkei_Texture(Data, id, $"BattleTexture_{id:D3}", addr),
                     (rows, last) => last?.HasImage == true,
                     false
                 );

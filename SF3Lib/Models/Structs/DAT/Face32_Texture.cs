@@ -5,10 +5,10 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
-    public class Face32_TextureModel : FixedSizeTextureStructBase {
+    public class Face32_Texture : FixedSizeTextureStructBase {
         private readonly int _imageDataOffsetAddr;
 
-        public Face32_TextureModel(IByteData data, int id, string name, int address, Palette palette, bool isCompressed)
+        public Face32_Texture(IByteData data, int id, string name, int address, Palette palette, bool isCompressed)
         : base(data, id, name, address, 4, 32, 32, TexturePixelFormat.Palette1, isCompressed, false) {
             _palette = palette;
             _imageDataOffsetAddr = address + 0;

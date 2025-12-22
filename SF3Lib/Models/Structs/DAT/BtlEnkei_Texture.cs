@@ -2,13 +2,13 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.DAT {
-    public class BtlEnkei_TextureModel : BtlEnkei_TextureModelBase {
+    public class BtlEnkei_Texture : BtlEnkei_TextureBase {
         private readonly int _paletteImageOffsetAddr;
         private readonly int _paletteImageSizeAddr;
         private readonly int _loadSizeAddr;
         private readonly int _paddingAddr;
 
-        public BtlEnkei_TextureModel(IByteData data, int id, string name, int address)
+        public BtlEnkei_Texture(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10, data.GetDouble(address)
         ) {
             _paletteImageOffsetAddr = Address + 0x00; // 4 bytes
