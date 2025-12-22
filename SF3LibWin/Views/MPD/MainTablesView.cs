@@ -32,8 +32,10 @@ namespace SF3.Win.Views.MPD {
             if (Model.ModelSwitchGroupsTable != null)
                 CreateChild(new ModelSwitchGroupsView("Model Switch Groups", Model));
 
-            if (Model.TextureAnimations != null)
+            if (Model.TextureAnimations != null) {
+                CreateChild(new TextureAnimFramesView("Texture Animation Frames", Model, ngc));
                 CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
+            }
 
             if (Model.Unknown2Table != null)
                 CreateChild(new TableView("Unknown 2", Model.Unknown2Table, ngc));
