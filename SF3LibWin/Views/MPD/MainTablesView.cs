@@ -66,10 +66,10 @@ namespace SF3.Win.Views.MPD {
                     CreateChild(new ColorTableView("Palette " + (i + 1).ToString(), Model.PaletteTables[i], Model.NameGetterContext));
 
             if (Model.IndexedTextureTable != null)
-                CreateChild(new TableView("Indexed Textures",  Model.IndexedTextureTable, ngc));
+                CreateChild(new TextureIDTableView("Indexed Textures",  Model.IndexedTextureTable, ngc, Model.ModelCollections[CollectionType.Primary]));
 
             if (Model.TextureAnimationsAlt != null)
-                CreateChild(new TableView("Texture Animations (Alt)", Model.TextureAnimationsAlt, ngc));
+                CreateChild(new TextureIDTableView("Texture Animations (Alt)", Model.TextureAnimationsAlt, ngc, Model.ModelCollections[CollectionType.Primary]));
 
             if (Model.BoundariesTable != null)
                 CreateChild(new TableView("Boundaries", Model.BoundariesTable, ngc));
