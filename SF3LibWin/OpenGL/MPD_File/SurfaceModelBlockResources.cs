@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
@@ -45,15 +44,21 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Update(IMPD_File mpdFile) {
             Reset();
 
+            var skippedTextures =
+                (mpdFile.SkipTextures == null) ? []
+                : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
+
             var texturesById = mpdFile.TextureChunks != null ? mpdFile.TextureChunks
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == CollectionType.Primary)
                 .SelectMany(x => x.TextureTable)
+                .Where(x => !skippedTextures.Contains(x.ID))
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x)
                 : [];
 
             var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations
+                .Where(x => !skippedTextures.Contains(x.ID))
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.TextureAnimationFrameTable.OrderBy(x => x.Frame).ToArray(), x.FrameTimerStart })

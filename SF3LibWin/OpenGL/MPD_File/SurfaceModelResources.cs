@@ -1,6 +1,4 @@
-﻿using System;
-using CommonLib;
-using OpenTK.Mathematics;
+﻿using CommonLib;
 using SF3.Models.Files.MPD;
 using SF3.Win.Properties;
 
