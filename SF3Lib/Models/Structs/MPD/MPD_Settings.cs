@@ -61,7 +61,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public bool LongEmptyAltAnimationTable {
-            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetPal1 - MPD_File.MPDHeader.OffsetTextureAnimAlt == 0x04;
+            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetPal1 - MPD_File.MPDHeader.OffsetSkipTextures == 0x04;
             set {}
         }
     }

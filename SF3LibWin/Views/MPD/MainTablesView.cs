@@ -33,8 +33,8 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new ModelSwitchGroupsView("Model Switch Groups", Model));
 
             if (Model.TextureAnimations != null) {
-                CreateChild(new TextureAnimationFramesView("Texture Animation Frames", Model, ngc));
-                CreateChild(new TextureAnimationsView("Texture Animations", Model.TextureAnimations, ngc));
+                CreateChild(new TextureAnimationsView("Animations", Model.TextureAnimations, ngc));
+                CreateChild(new TextureAnimationFramesView("Animation Frames", Model, ngc));
             }
 
             if (Model.Unknown2Table != null)
@@ -68,8 +68,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.IndexedTextureTable != null)
                 CreateChild(new TextureIDTableView("Indexed Textures",  Model.IndexedTextureTable, ngc, Model.ModelCollections[CollectionType.Primary]));
 
-            if (Model.TextureAnimationsAlt != null)
-                CreateChild(new TextureIDTableView("Texture Animations (Alt)", Model.TextureAnimationsAlt, ngc, Model.ModelCollections[CollectionType.Primary]));
+            if (Model.SkipTextures != null)
+                CreateChild(new TextureIDTableView("Skip Textures", Model.SkipTextures, ngc, Model.ModelCollections[CollectionType.Primary]));
 
             if (Model.BoundariesTable != null)
                 CreateChild(new TableView("Boundaries", Model.BoundariesTable, ngc));

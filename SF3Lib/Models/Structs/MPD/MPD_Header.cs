@@ -26,7 +26,7 @@ namespace SF3.Models.Structs.MPD {
         private readonly int _modelsViewAngleMinAddr;      // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
         private readonly int _padding3Addr;                // int16  Always zero
-        private readonly int _offsetTextureAnimAltAddr;    // int32  Pointer to a list of texture indices. These textures are the same images as the "real" texture animations, but these textures are from the normal texture block (and doesn't seems to be used). See (#texture-animation-alternatives)
+        private readonly int _offsetSkipTexturesAddr;      // int32  Pointer to a list of texture indices. The textures here are skipped when loading the texture chunk.
         private readonly int _offsetPal1Addr;              // int32  Pointer to 256 rgb16 colors. May be null.
         private readonly int _offsetPal2Addr;              // int32  Pointer to 256 rgb16 colors. May be null.
 
@@ -103,7 +103,7 @@ namespace SF3.Models.Structs.MPD {
                 _modelsViewAngleMinAddr   = addressNext + 0x02; // 2 bytes
                 _modelsViewAngleMaxAddr   = addressNext + 0x04; // 2 bytes
                 _padding3Addr             = addressNext + 0x06; // 2 bytes
-                _offsetTextureAnimAltAddr = addressNext + 0x08; // 4 bytes
+                _offsetSkipTexturesAddr   = addressNext + 0x08; // 4 bytes
                 addressNext += 0x0C;
             }
             else {
@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.MPD {
                 _modelsViewAngleMinAddr   = -1;
                 _modelsViewAngleMaxAddr   = -1;
                 _padding3Addr             = -1;
-                _offsetTextureAnimAltAddr = -1;
+                _offsetSkipTexturesAddr   = -1;
                 // TODO: missing 4-byte value
                 addressNext += 0x04;
             }
@@ -331,13 +331,12 @@ namespace SF3.Models.Structs.MPD {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetTextureAnimAltAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
-        public int OffsetTextureAnimAlt {
-            // TODO: Create HasOffsetTexturesAnimAlt for this case
-            get => HasModelsInfo ? Data.GetDouble(_offsetTextureAnimAltAddr) : 0;
+        [TableViewModelColumn(addressField: nameof(_offsetSkipTexturesAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        public int OffsetSkipTextures {
+            get => HasModelsInfo ? Data.GetDouble(_offsetSkipTexturesAddr) : 0;
             set {
                 if (HasModelsInfo)
-                    Data.SetDouble(_offsetTextureAnimAltAddr, value);
+                    Data.SetDouble(_offsetSkipTexturesAddr, value);
             }
         }
 

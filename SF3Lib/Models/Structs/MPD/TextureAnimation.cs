@@ -54,9 +54,9 @@ namespace SF3.Models.Structs.MPD {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
-        public uint TextureID {
-            get => TextureIDRaw & 0xFF;
-            set => TextureIDRaw = (TextureIDRaw & ~0xFFu) | (value & 0xFF);
+        public int TextureID {
+            get => (int) (TextureIDRaw & 0xFF);
+            set => TextureIDRaw = (TextureIDRaw & ~0xFFu) | ((uint) value & 0xFF);
         }
 
         [BulkCopy]

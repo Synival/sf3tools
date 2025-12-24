@@ -156,7 +156,7 @@ namespace SF3.Models.Structs.Shared {
         public bool ZeroIsTransparent { get; }
 
         private string _hash = null;
-        [TableViewModelColumn(addressField: null, displayName: "Internal Hash", displayOrder: 4, minWidth: 225)]
+        [TableViewModelColumn(addressField: null, displayOrder: 4, minWidth: 225)]
         public string Hash {
             get {
                 if (_hash == null) {

@@ -17,7 +17,7 @@ namespace SF3.MPD {
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
-            var textureAnimAltPos    = WriteTableOrNull(mpd.TextureAnimationsAlt, mpd.Settings);
+            var skipTexturesPos      = WriteTableOrNull(mpd.SkipTextures, mpd.Settings);
             var palette1Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 1 ? mpd.PaletteTables[0] : null);
             var palette2Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
 
@@ -35,7 +35,7 @@ namespace SF3.MPD {
                 textureAnimationsPos,
                 unknown2Pos,
                 groundAnimationPos,
-                textureAnimAltPos,
+                skipTexturesPos,
                 palette1Pos,
                 palette2Pos,
                 boundariesPos,
@@ -80,7 +80,7 @@ namespace SF3.MPD {
             uint? textureAnimationsPos,
             uint? unknown2Pos,
             uint? groundAnimationPos,
-            uint? textureAnimAltPos,
+            uint? skipTexturesPos,
             uint? palette1Pos,
             uint? palette2Pos,
             uint? boundariesPos,
@@ -112,7 +112,7 @@ namespace SF3.MPD {
             WriteShort(new CompressedFIXED(settings.ModelsYRotation / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
-            WriteMPDPointer(textureAnimAltPos);
+            WriteMPDPointer(skipTexturesPos);
             WriteMPDPointer(palette1Pos ?? headerAddr);
             WriteMPDPointer(palette2Pos ?? headerAddr);
             WriteShort(planes.GroundX);

@@ -111,7 +111,7 @@ namespace SF3.Models.Files.MPD {
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOffByAddr { get; }
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; }
         UnknownUInt8Table GroundAnimationTable { get; }
-        TextureIDTable TextureAnimationsAlt { get; }
+        TextureIDTable SkipTextures { get; }
         ColorTable[] PaletteTables { get; }
         TextureIDTable IndexedTextureTable { get; }
         TextureAnimationTable TextureAnimations { get; }

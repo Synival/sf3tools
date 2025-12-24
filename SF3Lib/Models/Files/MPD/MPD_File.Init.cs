@@ -115,9 +115,9 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (header.OffsetTextureAnimAlt != 0) {
+            if (header.OffsetSkipTextures != 0) {
                 try {
-                    tables.Add(TextureAnimationsAlt = TextureIDTable.Create(Data, nameof(TextureAnimationsAlt), "TexAnimAlt", header.OffsetTextureAnimAlt - RamAddress, 2, 0x100));
+                    tables.Add(SkipTextures = TextureIDTable.Create(Data, nameof(SkipTextures), "SkipTex", header.OffsetSkipTextures - RamAddress, 2, 0x100));
                 }
                 catch {
                     // TODO: what to do here??
@@ -406,9 +406,9 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            // Textures in the alt animation frames table are ABGR1555.
-            if (TextureAnimationsAlt != null)
-                foreach (var tex in TextureAnimationsAlt)
+            // Textures in the "skip textures" table are ABGR1555.
+            if (SkipTextures != null)
+                foreach (var tex in SkipTextures)
                     primaryPixelFormats[tex.TextureID] = TexturePixelFormat.ABGR1555;
 
             // If the indexed textures table is present (Scenario 3 + PD only), assume Palette3.
