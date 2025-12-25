@@ -1,6 +1,7 @@
 ﻿using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Images;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.NamedValues;
@@ -54,15 +55,10 @@ namespace MPD_Analyzer {
             ]}
         };
 
-        // Dictionary<earlierHash, laterHash>
-#if false
-        private static readonly Dictionary<string, HashSet<string>> s_textureHashRelationships = [];
-
         private static readonly Dictionary<string, HashSet<(string Hash, int ID)>> s_texturesByFile = [];
         private static readonly Dictionary<string, HashSet<(string Hash, int ID)>> s_referencedTexturesByFile = [];
         private static readonly Dictionary<string, HashSet<(string Hash, int ID)>> s_unreferencedTexturesByFile = [];
         private static string[,]? s_bochiTextureHashes = null;
-#endif
 
         private static string[]? MPD_MatchFunc(IMPD_File mpdFile, ScenarioType scenario, string filename) {
             // Gotta have the model collection!
@@ -75,245 +71,322 @@ namespace MPD_Analyzer {
             var texturesById = mpdFile.ModelCollections[CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
             var modelsById = mpdFile.ModelCollections[CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 
-#if true
-            var duplicatedTextures = mpdFile.ModelCollections[CollectionType.Primary].Textures.GroupBy(x => x.Hash).Where(x => x.Count() > 1).Select(x => x.ToArray()).ToArray();
-            if (duplicatedTextures.Length == 0)
-                return null;
-            return duplicatedTextures.Select(x => x[0].Hash + ": " + string.Join(", ", x.Select(y => $"0x{y.ID:X2}"))).ToArray();
-#elif false
-            var allModelsWithDuplicateTexturesInternally = modelsById
-                .ToDictionary(x => x.Value, x => x.Value.Faces
-                    .Select((x, i) => (Face: x, FaceIndex: i))
-                    .Where(y => y.Face.Attributes.UseTexture)
-                    .GroupBy(y => y.Face.Attributes.TextureNo)
-                    .ToDictionary(y => y.Key, y => y.Select(z => (z.Face, z.FaceIndex, Texture: texturesById[z.Face.Attributes.TextureNo])).ToArray())
-                    .GroupBy(y => y.Value.First().Texture.Hash)
-                    .Where(y => y.Count() > 1)
-                    .ToDictionary(y => y.Key, y => y.ToDictionary())
-                )
-                .Where(x => x.Value.Count > 0)
-                .ToDictionary();
+            string[]? GetDuplicatedTextures() {
+                var duplicatedTextures = mpdFile.ModelCollections[CollectionType.Primary].Textures.GroupBy(x => x.Hash).Where(x => x.Count() > 1).Select(x => x.ToArray()).ToArray();
+                if (duplicatedTextures.Length == 0)
+                    return null;
+                return duplicatedTextures.Select(x => x[0].Hash + ": " + string.Join(", ", x.Select(y => $"0x{y.ID:X2}"))).ToArray();
+            }
 
-            if (allModelsWithDuplicateTexturesInternally.Count == 0)
-                return null;
-            return allModelsWithDuplicateTexturesInternally
-                .Select(x => $"Model 0x{x.Key.ID:X2}:\r\n  " + string.Join("\r\n  ", x.Value
-                    .Select(y => $"{y.Key}: " + string.Join("; ", y.Value
-                        .Select(z => $"Tex0x{z.Key:X2} (Faces: " + string.Join(",", z.Value.Select(a => $"0x{a.FaceIndex:X2}")) + ")")
-                    ))
-                )).ToArray();
-#elif false
-            var texturesUsedByModel = modelsById.Values
-                .ToDictionary(x => x.ID, x => x.Faces
-                    .Where(x => x.Attributes.UseTexture)
-                    .Select(x => x.Attributes.TextureNo)
+            string[]? GetAnimationsWithDifferentFirstFrameThanAssignedTexture() {
+                if (mpdFile.Animations == null)
+                    return null;
+                if (mpdFile.Animations.GroupBy(x => x.TextureID).Any(x => x.Count() > 1))
+                    return ["Has duplicate animations!!"];
+
+                var firstFrameByTexId = mpdFile.Animations.Where(x => x.NumFrames > 0).ToDictionary(x => x.TextureID, x => (ITextureData) x.AnimationFrameTable.First());
+                var nonMatchingTextures = texturesById.Values.Where(x => firstFrameByTexId.ContainsKey(x.ID) && x.Hash != firstFrameByTexId[x.ID].Hash).ToArray();
+                return nonMatchingTextures.Select(x => $"Tex0x{x.ID:X2}: Expected '{texturesById[x.ID].Hash}', was '{firstFrameByTexId[x.ID].Hash}'").ToArray();
+            }
+
+            string[]? GetAnimationsWithAssignedTextureMissingFromAnimation() {
+                if (mpdFile.Animations == null)
+                    return null;
+                if (mpdFile.Animations.GroupBy(x => x.TextureID).Any(x => x.Count() > 1))
+                    return ["Has duplicate animations!!"];
+
+                var framesByTexId = mpdFile.Animations.ToDictionary(x => x.TextureID, x => (ITextureData[]) x.AnimationFrameTable.ToArray());
+                var nonMatchingTextures = texturesById.Values.Where(x => framesByTexId.ContainsKey(x.ID) && !framesByTexId[x.ID].Any(y => y.Hash == x.Hash)).ToArray();
+                return nonMatchingTextures.Select(x => $"Tex0x{x.ID:X2}: Expected '{texturesById[x.ID].Hash}' to be in animation").ToArray();
+            }
+
+            string[]? GetModelsWithDuplicateInternalTextures() {
+                var allModelsWithDuplicateTexturesInternally = modelsById
+                    .ToDictionary(x => x.Value, x => x.Value.Faces
+                        .Select((x, i) => (Face: x, FaceIndex: i))
+                        .Where(y => y.Face.Attributes.UseTexture)
+                        .GroupBy(y => y.Face.Attributes.TextureNo)
+                        .ToDictionary(y => y.Key, y => y.Select(z => (z.Face, z.FaceIndex, Texture: texturesById[z.Face.Attributes.TextureNo])).ToArray())
+                        .GroupBy(y => y.Value.First().Texture.Hash)
+                        .Where(y => y.Count() > 1)
+                        .ToDictionary(y => y.Key, y => y.ToDictionary())
+                    )
+                    .Where(x => x.Value.Count > 0)
+                    .ToDictionary();
+
+                if (allModelsWithDuplicateTexturesInternally.Count == 0)
+                    return null;
+
+                return allModelsWithDuplicateTexturesInternally
+                    .Select(x => $"Model 0x{x.Key.ID:X2}:\r\n  " + string.Join("\r\n  ", x.Value
+                        .Select(y => $"{y.Key}: " + string.Join("; ", y.Value
+                            .Select(z => $"Tex0x{z.Key:X2} (Faces: " + string.Join(",", z.Value.Select(a => $"0x{a.FaceIndex:X2}")) + ")")
+                        ))
+                    )).ToArray();
+            }
+
+            string[]? GetTexturesSharedBetweenModels() {
+                var texturesUsedByModel = modelsById.Values
+                    .ToDictionary(x => x.ID, x => x.Faces
+                        .Where(x => x.Attributes.UseTexture)
+                        .Select(x => x.Attributes.TextureNo)
+                        .Distinct()
+                        .ToHashSet()
+                );
+                var allTexturesUsedInModels = texturesUsedByModel.SelectMany(x => x.Value).Distinct().ToHashSet();
+
+                var texturesSharedBetweenModels = allTexturesUsedInModels
+                    .ToDictionary(x => x, x => texturesUsedByModel.Where(y => y.Value.Contains(x)).Select(y => modelsById[y.Key]).ToArray())
+                    .Where(x => x.Value.Length > 1)
+                    .ToDictionary();
+
+                if (texturesSharedBetweenModels.Count == 0)
+                    return null;
+                return texturesSharedBetweenModels.Select(x => $"Tex0x{x.Key:X2}: " + string.Join(", ", x.Value.Select(y => $"Model0x{y.ID:X2}"))).ToArray();
+            }
+
+            string[]? GetTexturesUsedInBothModelsAndSurfaceModel() {
+                if (!mpdFile.Surface.HasModel)
+                    return null;
+                var surfaceMapTextures = mpdFile.Surface.GetAllTiles().Select(x => (int) x.TextureID).Distinct().Where(x => x != 0xFF).ToHashSet();
+                var modelTextures = mpdFile.ModelCollections[CollectionType.Primary].Models.SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
+
+                var texturesInBoth = surfaceMapTextures.Where(modelTextures.Contains).Select(x => texturesById[x]).ToArray();
+                if (texturesInBoth.Length == 0)
+                    return null;
+                return texturesInBoth.Select(x => x.Hash + $": 0x{x.ID:X2}").ToArray();
+            }
+
+            string[]? GetDifferentTexturesBetweenBochiAndBochiM() {
+                if (filename != "BOCHI" && filename != "BOCHIM")
+                    return null;
+
+                bool setting = s_bochiTextureHashes == null;
+                if (s_bochiTextureHashes == null)
+                    s_bochiTextureHashes = new string[64, 64];
+
+                var results = new List<string>();
+                foreach (var tile in mpdFile.Surface.GetAllTiles()) {
+                    var texture = (tile.TextureID == 0xFF) ? null : texturesById[tile.TextureID];
+                    var hash = texture?.Hash ?? "(none)";
+                    if (setting)
+                        s_bochiTextureHashes[tile.X, tile.Y] = hash;
+                    else if (s_bochiTextureHashes[tile.X, tile.Y] != hash)
+                        results.Add($"Different texture at ({tile.X}, {tile.Y})");
+                }
+
+                return results.ToArray();
+            }
+
+            string[]? GetAllTextureSurfaceTileAppearances() {
+                if (!mpdFile.Surface.HasModel)
+                    return null;
+                var surfaceMapTextures = mpdFile.Surface
+                    .GetAllTiles()
+                    .Where(x => x.TextureID != 0xFF)
+                    .GroupBy(x => x.TextureID)
+                    .OrderBy(x => x.Key)
+                    .ToDictionary(x => x.Key, x => x.OrderBy(y => y.X).ThenBy(y => y.Y).ToArray());
+
+                return surfaceMapTextures
+                    .Select(x => $"Tex0x{x.Key:X2} ({texturesById[x.Key].Hash}): " + string.Join(", ", x.Value.Select(y => $"({y.X},{y.Y})"))).ToArray();
+            }
+
+            string[]? GetAllUnusedTextures() {
+                var textureIdsFromModels = modelsById.Values
+                    .SelectMany(x => x.Faces.Where(y => y.Attributes.UseTexture).Select(y => (int) y.Attributes.TextureNo))
                     .Distinct()
-                    .ToHashSet()
-            );
-            var allTexturesUsedInModels = texturesUsedByModel.SelectMany(x => x.Value).Distinct().ToHashSet();
+                    .ToHashSet();
 
-            var texturesSharedBetweenModels = allTexturesUsedInModels
-                .ToDictionary(x => x, x => texturesUsedByModel.Where(y => y.Value.Contains(x)).Select(y => modelsById[y.Key]).ToArray())
-                .Where(x => x.Value.Length > 1)
-                .ToDictionary();
+                var textureIdsFromSurfaceMap = (!mpdFile.Surface.HasModel) ? [] : mpdFile.Surface.GetAllTiles()
+                    .Where(x => x.TextureID != 0xFF)
+                    .Select(x => (int) x.TextureID)
+                    .Distinct()
+                    .ToHashSet();
 
-            if (texturesSharedBetweenModels.Count == 0)
-                return null;
-            return texturesSharedBetweenModels.Select(x => $"Tex0x{x.Key:X2}: " + string.Join(", ", x.Value.Select(y => $"Model0x{y.ID:X2}"))).ToArray();
-#elif false
-            if (!mpdFile.Surface.HasModel)
-                return null;
-            var surfaceMapTextures = mpdFile.Surface.GetAllTiles().Select(x => (int) x.TextureID).Distinct().Where(x => x != 0xFF).ToHashSet();
-            var modelTextures = mpdFile.ModelCollections[CollectionType.Primary].Models.SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
+                var usedTextureIds = new HashSet<int>();
+                foreach (var id in textureIdsFromModels)
+                    usedTextureIds.Add(id);
+                foreach (var id in textureIdsFromSurfaceMap)
+                    usedTextureIds.Add(id);
 
-            var texturesInBoth = surfaceMapTextures.Where(modelTextures.Contains).Select(x => texturesById[x]).ToArray();
-            if (texturesInBoth.Length == 0)
-                return null;
-            return texturesInBoth.Select(x => x.Hash + $": 0x{x.ID:X2}").ToArray();
-#elif false
-            bool setting = s_bochiTextureHashes == null;
-            if (s_bochiTextureHashes == null)
-                s_bochiTextureHashes = new string[64, 64];
+                // (count the animation frames as used textures, since they're still referenced and *probably* used)
+                if (mpdFile.SkipTextures != null)
+                    foreach (var entry in mpdFile.SkipTextures)
+                        usedTextureIds.Add(entry.TextureID);
 
-            var results = new List<string>();
-            foreach (var tile in mpdFile.Surface.GetAllTiles()) {
-                var texture = (tile.TextureID == 0xFF) ? null : texturesById[tile.TextureID];
-                var hash = texture?.Hash ?? "(none)";
-                if (setting)
-                    s_bochiTextureHashes[tile.X, tile.Y] = hash;
-                else if (s_bochiTextureHashes[tile.X, tile.Y] != hash)
-                    results.Add($"Different texture at ({tile.X}, {tile.Y})");
-            }
+                var usedTextures = usedTextureIds
+                    .OrderBy(x => x)
+                    .Where(texturesById.ContainsKey)
+                    .Select(x => texturesById[x])
+                    .ToArray();
+                var unusedTextures = texturesById
+                    .Where(x => !usedTextureIds.Contains(x.Key))
+                    .OrderBy(x => x.Key)
+                    .Select(x => x.Value)
+                    .ToArray();
 
-            return results.ToArray();
-#elif false
-            if (!mpdFile.Surface.HasModel)
-                return null;
-            var surfaceMapTextures = mpdFile.Surface
-                .GetAllTiles()
-                .Where(x => x.TextureID != 0xFF)
-                .GroupBy(x => x.TextureID)
-                .OrderBy(x => x.Key)
-                .ToDictionary(x => x.Key, x => x.OrderBy(y => y.X).ThenBy(y => y.Y).ToArray());
-
-            return surfaceMapTextures
-                .Select(x => $"Tex0x{x.Key:X2} ({texturesById[x.Key].Hash}): " + string.Join(", ", x.Value.Select(y => $"({y.X},{y.Y})"))).ToArray();
-#elif false
-            var textureIdsFromModels = modelsById.Values
-                .SelectMany(x => x.Faces.Where(y => y.Attributes.UseTexture).Select(y => (int) y.Attributes.TextureNo))
-                .Distinct()
-                .ToHashSet();
-
-            var textureIdsFromSurfaceMap = (!mpdFile.Surface.HasModel) ? [] : mpdFile.Surface.GetAllTiles()
-                .Where(x => x.TextureID != 0xFF)
-                .Select(x => (int) x.TextureID)
-                .Distinct()
-                .ToHashSet();
-
-            var usedTextureIds = new HashSet<int>();
-            foreach (var id in textureIdsFromModels)
-                usedTextureIds.Add(id);
-            foreach (var id in textureIdsFromSurfaceMap)
-                usedTextureIds.Add(id);
-
-            // (count the animation frames as used textures, since they're still referenced and *probably* used)
-            if (mpdFile.SkipTextures != null)
-                foreach (var entry in mpdFile.SkipTextures)
-                    usedTextureIds.Add(entry.TextureID);
-
-            var usedTextures = usedTextureIds
-                .OrderBy(x => x)
-                .Where(texturesById.ContainsKey)
-                .Select(x => texturesById[x])
-                .ToArray();
-            var unusedTextures = texturesById
-                .Where(x => !usedTextureIds.Contains(x.Key))
-                .OrderBy(x => x.Key)
-                .Select(x => x.Value)
-                .ToArray();
-
-            string GetShortScenarioName() {
-                switch (scenario) {
-                    case ScenarioType.Scenario1:   return "S1";
-                    case ScenarioType.Scenario2:   return "S2";
-                    case ScenarioType.Scenario3:   return "S3";
-                    case ScenarioType.PremiumDisk: return "PD";
-                    default:                       return "??";
+                string GetShortScenarioName() {
+                    switch (scenario) {
+                        case ScenarioType.Scenario1:   return "S1";
+                        case ScenarioType.Scenario2:   return "S2";
+                        case ScenarioType.Scenario3:   return "S3";
+                        case ScenarioType.PremiumDisk: return "PD";
+                        default:                       return "??";
+                    }
                 }
-            }
-            var fileKey = $"{GetShortScenarioName()}|{filename}";
-            s_texturesByFile[fileKey] = texturesById.Values.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
-            s_referencedTexturesByFile[fileKey] = usedTextures.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
-            s_unreferencedTexturesByFile[fileKey] = unusedTextures.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
+                var fileKey = $"{GetShortScenarioName()}|{filename}";
+                s_texturesByFile[fileKey] = texturesById.Values.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
+                s_referencedTexturesByFile[fileKey] = usedTextures.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
+                s_unreferencedTexturesByFile[fileKey] = unusedTextures.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
 
-            return []; //unusedTextures.Select(x => $"Tex0x{x.ID:X2} ({x.Hash})").ToArray();
-#elif false
-            var lastTexture = texturesById.Max(x => x.Key);
-
-            var missingTextureIdsFromModels = modelsById.Values
-                .SelectMany(x => x.Faces.Where(y => y.Attributes.UseTexture).Select(y => (int) y.Attributes.TextureNo))
-                .Distinct()
-                .Where(x => x > lastTexture)
-                .ToHashSet();
-
-            var missingTextureIdsFromSurfaceMap = (!mpdFile.Surface.HasModel) ? [] : mpdFile.Surface.GetAllTiles()
-                .Where(x => x.TextureID != 0xFF)
-                .Select(x => (int) x.TextureID)
-                .Distinct()
-                .Where(x => x > lastTexture)
-                .ToHashSet();
-
-            var missingTextureIds = new HashSet<int>();
-            foreach (var id in missingTextureIdsFromModels)
-                missingTextureIds.Add(id);
-            foreach (var id in missingTextureIdsFromSurfaceMap)
-                missingTextureIds.Add(id);
-
-            if (mpdFile.SkipTextures != null)
-                foreach (var entry in mpdFile.SkipTextures.OrderBy(x => x.TextureID))
-                    if (entry.TextureID > lastTexture)
-                        missingTextureIds.Add(entry.TextureID);
-
-            return missingTextureIds.Select(x => $"0x{x:X2}").ToArray();
-#elif false
-            var usedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].ModelInstances
-                .Where(x => x.PositionX >= -0x800 && x.PositionX <= 0x1000)
-                .Where(x => x.PositionY >= -0x100 && x.PositionY <= 0x100)
-                .Where(x => x.PositionZ >= -0x800 && x.PositionZ <= 0x1000)
-                .Select(x => x.ModelID)
-                .Distinct()
-                .Order()
-                .ToHashSet();
-
-            var unusedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].Models
-                .Select(x => x.ID)
-                .Where(x => !usedModelIDs.Contains(x))
-                .Order()
-                .ToHashSet();
-
-            return unusedModelIDs.Select(x => $"Model0x{x:X2}").ToArray();
-#elif false
-            var surfaceTexturesInUse = mpdFile.Surface.HasModel ? mpdFile.Surface.GetAllTiles().Where(x => x.TextureID != 0xFF).Select(x => (int) x.TextureID).Distinct().ToArray() : [];
-            var modelTexturesInUse = mpdFile.ModelCollections[CollectionType.Primary].Models.SelectMany(x => x.Faces).Where(x => x.Attributes.UseTexture).Select(x => (int) x.Attributes.TextureNo).Distinct().ToArray();
-            var texturesInUse = mpdFile.Animations.Select(x => x.TextureID).Concat(surfaceTexturesInUse).Concat(modelTexturesInUse).Order().ToHashSet();
-            var hashes = mpdFile.Animations.SelectMany(x => x.AnimationFrameTable).Select(x => x.Hash).ToHashSet();
-            var correspondingTextureIDs = hashes.SelectMany(x => texturesById.Values.Where(y => y.Hash == x)).Select(x => x.ID).ToHashSet();
-
-            var expectedSkipTextureIDs = correspondingTextureIDs.Where(x => !texturesInUse.Contains(x)).OrderBy(x => x).ToHashSet();
-            var actualSkipTextureIDs = mpdFile.SkipTextures.Select(x => (int) x.TextureID).OrderBy(x => x).ToHashSet();
-
-            if (!expectedSkipTextureIDs.SequenceEqual(actualSkipTextureIDs))
-                ;
-            //return expectedSkipTextureIDs.SequenceEqual(actualSkipTextureIDs) ? [] : ["Nope"];
-
-            return actualSkipTextureIDs.Where(texturesInUse.Contains).Select(x => $"Tex0x{x:X2}").ToArray();
-#elif false
-            if (mpdFile.AnimationFrameChunk == null)
-                return null;
-
-            var output = new List<string>();
-            foreach (var frame in mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable) {
-                var correspondingTexture = texturesById.Values.FirstOrDefault(x => x.Hash == frame.Hash);
-                if (correspondingTexture == null)
-                    output.Add($"Tex@{frame.ImageDataOffset:X4}");
+                return []; //unusedTextures.Select(x => $"Tex0x{x.ID:X2} ({x.Hash})").ToArray();
             }
 
-            return output.ToArray();
-#else
-            if (!mpdFile.Surface.HasModel)
-                return null;
-            var surfaceMapTextures = mpdFile.Surface
-                .GetAllTiles()
-                .Where(x => x.TextureID != 0xFF)
-                .Select(x => (Tile: x, Texture: texturesById[x.TextureID]))
-                .GroupBy(x => x.Texture.Hash)
-                .ToDictionary(x => x.Key, x => x.ToArray());
+            string[]? GetAllMissingTextures() {
+                var lastTexture = texturesById.Max(x => x.Key);
 
-            var textures = surfaceMapTextures
-                .ToDictionary(x => x.Key, x => x.Value.Select(y => y.Texture.ID).Distinct().ToArray())
-                .Where(x => x.Value.Length == 1)
-                .Select(x => texturesById[x.Value[0]])
-                .OrderBy(x => x.ID)
-                .ToArray();
+                var missingTextureIdsFromModels = modelsById.Values
+                    .SelectMany(x => x.Faces.Where(y => y.Attributes.UseTexture).Select(y => (int) y.Attributes.TextureNo))
+                    .Distinct()
+                    .Where(x => x > lastTexture)
+                    .ToHashSet();
 
-            foreach (var x in textures)
-                if (!s_textureHashRelationships.ContainsKey(x.Hash))
-                    s_textureHashRelationships.Add(x.Hash, new HashSet<string>());
+                var missingTextureIdsFromSurfaceMap = (!mpdFile.Surface.HasModel) ? [] : mpdFile.Surface.GetAllTiles()
+                    .Where(x => x.TextureID != 0xFF)
+                    .Select(x => (int) x.TextureID)
+                    .Distinct()
+                    .Where(x => x > lastTexture)
+                    .ToHashSet();
 
-            var badResults = new HashSet<string>();
-            for (int i = 0; i < textures.Length; i++) {
-                var earlierHash = textures[i].Hash;
-                for (int j = i + 1; j < textures.Length; j++) {
-                    var laterHash = textures[j].Hash;
-                    if (s_textureHashRelationships[laterHash].Contains(earlierHash))
-                        badResults.Add($"Inconsistency: {laterHash} < {earlierHash}");
-                    else
-                        s_textureHashRelationships[earlierHash].Add(laterHash);
+                var missingTextureIds = new HashSet<int>();
+                foreach (var id in missingTextureIdsFromModels)
+                    missingTextureIds.Add(id);
+                foreach (var id in missingTextureIdsFromSurfaceMap)
+                    missingTextureIds.Add(id);
+
+                if (mpdFile.SkipTextures != null)
+                    foreach (var entry in mpdFile.SkipTextures.OrderBy(x => x.TextureID))
+                        if (entry.TextureID > lastTexture)
+                            missingTextureIds.Add(entry.TextureID);
+
+                return missingTextureIds.Select(x => $"0x{x:X2}").ToArray();
+            }
+
+            string[]? GetAllUnusedModels() {
+                var usedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].ModelInstances
+                    .Where(x => x.PositionX >= -0x800 && x.PositionX <= 0x1000)
+                    .Where(x => x.PositionY >= -0x100 && x.PositionY <= 0x100)
+                    .Where(x => x.PositionZ >= -0x800 && x.PositionZ <= 0x1000)
+                    .Select(x => x.ModelID)
+                    .Distinct()
+                    .Order()
+                    .ToHashSet();
+
+                var unusedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].Models
+                    .Select(x => x.ID)
+                    .Where(x => !usedModelIDs.Contains(x))
+                    .Order()
+                    .ToHashSet();
+
+                return unusedModelIDs.Select(x => $"Model0x{x:X2}").ToArray();
+            }
+
+            string[]? GetUniqueAnimationFramesMissingFromTextureChunks() {
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null)
+                    return null;
+
+                var output = new List<string>();
+                foreach (var frame in mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable) {
+                    var correspondingTexture = texturesById.Values.FirstOrDefault(x => x.Hash == frame.Hash);
+                    if (correspondingTexture == null)
+                        output.Add($"Tex@{frame.ImageDataOffset:X4}");
                 }
+
+                return output.ToArray();
             }
 
-            return badResults.ToArray();
-#endif
+            string[]? GetSkippedTexturesMissingFromUniqueAnimationFrames() {
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.SkipTextures == null)
+                    return null;
+                var skippedTexturesNotInFrames = mpdFile.SkipTextures
+                    .Select(x => texturesById[x.TextureID])
+                    .Where(x => !mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable.Any(y => y.Hash == x.Hash))
+                    .ToArray();
+                return skippedTexturesNotInFrames.Select(x => $"Tex0x{x.ID}: Skipped, but not in Chunk[3]").ToArray();
+            }
+
+            string[]? GetUniqueAnimationFramesWithMatchingTexturesButNotSkipped() {
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.SkipTextures == null)
+                    return null;
+                var nonSkippedChunk3Textures = mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable
+                    .Where(x => !mpdFile.SkipTextures.Any(y => texturesById[y.TextureID].Hash == x.Hash))
+                    .ToArray();
+                return nonSkippedChunk3Textures.Select(x => $"Chunk[3] Tex0x{x.ID:X2}: In Chunk[3], but not skipped").ToArray();
+            }
+
+            string[]? IsUniqueAnimationFrameOrderDifferentFromUniqueAssignedFrameOrder() {
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
+                    return null;
+                var frameOffsets  = mpdFile.Animations.SelectMany(x => x.AnimationFrameTable).Select(x => x.ImageDataOffset).Distinct().ToArray();
+                var chunk3Offsets = mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable.Select(x => x.ImageDataOffset).ToArray();
+                return Enumerable.SequenceEqual(frameOffsets, chunk3Offsets) ? [] : ["Order is different"];
+            }
+
+            string[]? GetOutOfOrderAssignedFrames() {
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
+                    return null;
+                var firstCorrespondingAnimationFrames = mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable
+                    .ToDictionary(x => x.ID, x => mpdFile.Animations
+                        .SelectMany(y => y.AnimationFrameTable)
+                        .First(y => y.ImageDataOffset == x.ImageDataOffset)
+                    )
+                    .ToDictionary(x => x.Key, x => {
+                        var texId = texturesById.Values.First(y => y.Hash == x.Value.Hash).ID;
+                        return (
+                            AnimID:    x.Value.TexAnimID,
+                            Frame:     x.Value.Frame,
+                            TextureID: texId,
+                            SkipID:    mpdFile.SkipTextures.FirstOrDefault(x => x.TextureID == texId)?.ID
+                        );
+                    });
+
+                var outOfOrderDictionary = firstCorrespondingAnimationFrames
+                    .ToDictionary(x => x.Key, x => {
+                        if (x.Key == 0)
+                            return false;
+                        if (!firstCorrespondingAnimationFrames.ContainsKey(x.Key - 1))
+                            return true;
+
+                        var prev = firstCorrespondingAnimationFrames[x.Key - 1];
+                        if (prev.AnimID > x.Value.AnimID)
+                            return true;
+                        if (prev.AnimID == x.Value.AnimID && prev.Frame > x.Value.Frame)
+                            return true;
+
+                        return false;
+                    });
+
+                var outOfOrder = outOfOrderDictionary.Any(x => x.Value == true);
+                return (outOfOrder || true) ? firstCorrespondingAnimationFrames
+                    .Select(x =>
+                        (outOfOrderDictionary[x.Key] ? "!! " : "   ") +
+                        $"Chunk[3] Tex0x{x.Key:X2}: Anim0x{x.Value.AnimID:X2}_{x.Value.Frame:X2} (TexID = 0x{x.Value.TextureID:X2}, SkipID = " +
+                        (x.Value.SkipID.HasValue ? $"0x{x.Value.SkipID:X2}" : "(none)") + ")")
+                    .ToArray() : [];
+            }
+
+            string[]? GetOutOfOrderSkippedTextures() {
+                if (mpdFile.SkipTextures == null)
+                    return null;
+                var outOfOrderArray = mpdFile.SkipTextures
+                    .Select((x, i) => (i == 0) ? false : mpdFile.SkipTextures[i - 1].TextureID >= x.TextureID)
+                    .ToArray();
+                var outOfOrder = outOfOrderArray.Any(x => x == true);
+                return outOfOrder ? mpdFile.SkipTextures.Select((x, i) => (outOfOrderArray[i] ? "!! " : "   ") + $"0x{x.ID:X2}: Tex0x{x.TextureID:X2}").ToArray() : [];
+            }
+
+            return GetOutOfOrderSkippedTextures();
         }
 
         public static void Main(string[] args) {
@@ -350,11 +423,11 @@ namespace MPD_Analyzer {
 
                 foreach (var file in filesKv.Value) {
                     var filename = Path.GetFileNameWithoutExtension(file);
-/*
+
                     // Skip maps that aren't used at all.
                     if (unusedMaps.Contains(filename))
                         continue;
-*/
+
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
 
@@ -495,76 +568,76 @@ namespace MPD_Analyzer {
                 Console.WriteLine("  Never:    " + string.Join(", ", nomatchChunksNever.Order().ToArray()));
             }
 
-#if false
-            Console.WriteLine("");
-            Console.WriteLine("===================================================");
-            Console.WriteLine("| TEXTURE ORIGINS                                 |");
-            Console.WriteLine("===================================================");
+            if (s_referencedTexturesByFile.Count > 0) {
+                Console.WriteLine("");
+                Console.WriteLine("===================================================");
+                Console.WriteLine("| TEXTURE ORIGINS                                 |");
+                Console.WriteLine("===================================================");
 
-            var refsByHash = s_referencedTexturesByFile
-                .SelectMany(x => x.Value.Select(y => (File: x.Key, y.ID, y.Hash)))
-                .GroupBy(x => x.Hash)
-                .ToDictionary(x => x.Key, x => x
-                    .Select(y => (y.File, y.ID))
-                    .Distinct()
-                    .OrderBy(x => x.File)
-                    .ThenBy(x => x.ID)
-                    .ToHashSet()
-                );
+                var refsByHash = s_referencedTexturesByFile
+                    .SelectMany(x => x.Value.Select(y => (File: x.Key, y.ID, y.Hash)))
+                    .GroupBy(x => x.Hash)
+                    .ToDictionary(x => x.Key, x => x
+                        .Select(y => (y.File, y.ID))
+                        .Distinct()
+                        .OrderBy(x => x.File)
+                        .ThenBy(x => x.ID)
+                        .ToHashSet()
+                    );
 
-            var texsByHash = s_texturesByFile
-                .SelectMany(x => x.Value.Select(y => (File: x.Key, y.ID, y.Hash)))
-                .GroupBy(x => x.Hash)
-                .ToDictionary(x => x.Key, x => x
-                    .Select(y => (y.File, y.ID))
-                    .Distinct()
-                    .OrderBy(x => x.File)
-                    .ThenBy(x => x.ID)
-                    .ToHashSet()
-                );
+                var texsByHash = s_texturesByFile
+                    .SelectMany(x => x.Value.Select(y => (File: x.Key, y.ID, y.Hash)))
+                    .GroupBy(x => x.Hash)
+                    .ToDictionary(x => x.Key, x => x
+                        .Select(y => (y.File, y.ID))
+                        .Distinct()
+                        .OrderBy(x => x.File)
+                        .ThenBy(x => x.ID)
+                        .ToHashSet()
+                    );
 
-            using (var fileOut = new StreamWriter(new FileStream("TextureOrigins.txt", FileMode.Create))) {
-                void ConsoleFileWriteLine(string str) {
-                    Console.WriteLine(str);
-                    fileOut.WriteLine(str);
-                }
+                using (var fileOut = new StreamWriter(new FileStream("TextureOrigins.txt", FileMode.Create))) {
+                    void ConsoleFileWriteLine(string str) {
+                        Console.WriteLine(str);
+                        fileOut.WriteLine(str);
+                    }
 
-                string NiceTexList(Dictionary<string, (string File, int ID)[]> refsByFile) {
-                    return string.Join("; ", refsByFile
-                        .Select(x => $"{x.Key} [" + string.Join(", ", x.Value.Select(y => $"0x:{y.ID:X2}")) + "]"));
-                }
+                    string NiceTexList(Dictionary<string, (string File, int ID)[]> refsByFile) {
+                        return string.Join("; ", refsByFile
+                            .Select(x => $"{x.Key} [" + string.Join(", ", x.Value.Select(y => $"0x:{y.ID:X2}")) + "]"));
+                    }
 
-                foreach (var fileKv in s_unreferencedTexturesByFile) {
-                    if (fileKv.Value.Count == 0)
-                        continue;
+                    foreach (var fileKv in s_unreferencedTexturesByFile) {
+                        if (fileKv.Value.Count == 0)
+                            continue;
  
-                    var file = fileKv.Key;
-                    ConsoleFileWriteLine($"{file}:");
+                        var file = fileKv.Key;
+                        ConsoleFileWriteLine($"{file}:");
 
-                    foreach (var hashId in fileKv.Value) {
-                        var hash = hashId.Hash;
-                        var texId = hashId.ID;
-                        var keyStr = $"0x{texId:X2} ({hash})";
+                        foreach (var hashId in fileKv.Value) {
+                            var hash = hashId.Hash;
+                            var texId = hashId.ID;
+                            var keyStr = $"0x{texId:X2} ({hash})";
 
-                        if (!refsByHash.ContainsKey(hash)) {
-                            if (texsByHash[hash].Count == 1)
-                                ConsoleFileWriteLine($" !! {keyStr}: Never referenced, only here!");
+                            if (!refsByHash.ContainsKey(hash)) {
+                                if (texsByHash[hash].Count == 1)
+                                    ConsoleFileWriteLine($" !! {keyStr}: Never referenced, only here!");
+                                else {
+                                    var all = texsByHash[hash].Where(x => x.File != file).ToArray();
+                                    var allByFile = all.GroupBy(x => x.File).ToDictionary(x => x.Key, x => x.OrderBy(y => y.ID).ToArray());
+                                    ConsoleFileWriteLine($" -- {keyStr}: Never referenced, but available: " + NiceTexList(allByFile));
+                                }
+                            }
                             else {
-                                var all = texsByHash[hash].Where(x => x.File != file).ToArray();
-                                var allByFile = all.GroupBy(x => x.File).ToDictionary(x => x.Key, x => x.OrderBy(y => y.ID).ToArray());
-                                ConsoleFileWriteLine($" -- {keyStr}: Never referenced, but available: " + NiceTexList(allByFile));
+                                var refs = refsByHash[hash];
+                                var refsByFile = refs.GroupBy(x => x.File).ToDictionary(x => x.Key, x => x.OrderBy(y => y.ID).ToArray());
+                                ConsoleFileWriteLine($"    {keyStr}: " + NiceTexList(refsByFile));
                             }
                         }
-                        else {
-                            var refs = refsByHash[hash];
-                            var refsByFile = refs.GroupBy(x => x.File).ToDictionary(x => x.Key, x => x.OrderBy(y => y.ID).ToArray());
-                            ConsoleFileWriteLine($"    {keyStr}: " + NiceTexList(refsByFile));
-                        }
+                        ConsoleFileWriteLine("");
                     }
-                    ConsoleFileWriteLine("");
                 }
             }
-#endif
         }
 
         private static string BitString(ushort bits) {
