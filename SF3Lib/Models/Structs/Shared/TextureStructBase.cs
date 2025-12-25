@@ -45,58 +45,44 @@ namespace SF3.Models.Structs.Shared {
         public int StoredImageDataSize { get; private set; }
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
-
-        private byte[] _bitmapDataARGB1555          = null;
-        private byte[] _bitmapDataARGB1555_Endcodes = null;
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
             if (BytesPerPixel == 1) {
-                if (_bitmapDataARGB1555 == null)
-                    _bitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-                return _bitmapDataARGB1555;
+                if (_textureDataBuffer.BitmapDataARGB1555 == null)
+                    _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
+                return _textureDataBuffer.BitmapDataARGB1555;
             }
             else if (highlightEndcodes) {
-                if (_bitmapDataARGB1555_Endcodes == null)
-                    _bitmapDataARGB1555_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true);
-                return _bitmapDataARGB1555_Endcodes;
+                if (_textureDataBuffer.BitmapDataARGB1555_Endcodes == null)
+                    _textureDataBuffer.BitmapDataARGB1555_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true);
+                return _textureDataBuffer.BitmapDataARGB1555_Endcodes;
             }
             else {
-                if (_bitmapDataARGB1555 == null)
-                    _bitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false);
-                return _bitmapDataARGB1555;
+                if (_textureDataBuffer.BitmapDataARGB1555 == null)
+                    _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false);
+                return _textureDataBuffer.BitmapDataARGB1555;
             }
         }
 
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
-
-        private byte[] _bitmapDataARGB8888          = null;
-        private byte[] _bitmapDataARGB8888_Endcodes = null;
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
             if (BytesPerPixel == 1) {
-                if (_bitmapDataARGB8888 == null)
-                    _bitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-                return _bitmapDataARGB8888;
+                if (_textureDataBuffer.BitmapDataARGB8888 == null)
+                    _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
+                return _textureDataBuffer.BitmapDataARGB8888;
             }
             else if (highlightEndcodes) {
-                if (_bitmapDataARGB8888_Endcodes == null)
-                    _bitmapDataARGB8888_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true);
-                return _bitmapDataARGB8888_Endcodes;
+                if (_textureDataBuffer.BitmapDataARGB8888_Endcodes == null)
+                    _textureDataBuffer.BitmapDataARGB8888_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true);
+                return _textureDataBuffer.BitmapDataARGB8888_Endcodes;
             }
             else {
-                if (_bitmapDataARGB8888 == null)
-                    _bitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false);
-                return _bitmapDataARGB8888;
+                if (_textureDataBuffer.BitmapDataARGB8888 == null)
+                    _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false);
+                return _textureDataBuffer.BitmapDataARGB8888;
             }
         }
 
-        public virtual void InvalidateImage() {
-            _hash                        = null;
-            _imageData8Bit               = null;
-            _imageData16Bit              = null;
-            _bitmapDataARGB1555          = null;
-            _bitmapDataARGB1555_Endcodes = null;
-            _bitmapDataARGB8888          = null;
-            _bitmapDataARGB8888_Endcodes = null;
-        }
+        public virtual void InvalidateImage() => _textureDataBuffer.Invalidate();
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
             var error = Validate8BitImageData(data, palette);
@@ -122,7 +108,7 @@ namespace SF3.Models.Structs.Shared {
                 Data.Data.SetDataAtTo(ImageDataOffset, rawData.Length, rawData);
 
             InvalidateImage();
-            _imageData8Bit = data;
+            _textureDataBuffer.ImageData8Bit = data;
             Palette = palette;
             OnSetImageData();
         }
@@ -157,23 +143,21 @@ namespace SF3.Models.Structs.Shared {
         public bool IsCompressed { get; }
         public bool ZeroIsTransparent { get; }
 
-        private string _hash = null;
         [TableViewModelColumn(addressField: null, displayOrder: 4, minWidth: 225)]
         public string Hash {
             get {
-                if (_hash == null) {
+                if (_textureDataBuffer.Hash == null) {
                     using (var md5 = MD5.Create())
-                        _hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
+                        _textureDataBuffer.Hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
                 }
-                return _hash;
+                return _textureDataBuffer.Hash;
             }
         }
 
-        private byte[,] _imageData8Bit = null;
         public byte[,] ImageData8Bit {
             get {
-                if (_imageData8Bit != null)
-                    return _imageData8Bit;
+                if (_textureDataBuffer.ImageData8Bit != null)
+                    return _textureDataBuffer.ImageData8Bit;
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
 
@@ -192,16 +176,15 @@ namespace SF3.Models.Structs.Shared {
                 }
 
                 StoredImageDataSize = storedSize;
-                _imageData8Bit = outputData;
+                _textureDataBuffer.ImageData8Bit = outputData;
                 return outputData;
             }
         }
 
-        private ushort[,] _imageData16Bit = null;
         public ushort[,] ImageData16Bit {
             get {
-                if (_imageData16Bit != null)
-                    return _imageData16Bit;
+                if (_textureDataBuffer.ImageData16Bit != null)
+                    return _textureDataBuffer.ImageData16Bit;
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
 
@@ -222,7 +205,7 @@ namespace SF3.Models.Structs.Shared {
                 }
 
                 StoredImageDataSize = storedSize;
-                _imageData16Bit = outputData;
+                _textureDataBuffer.ImageData16Bit = outputData;
                 return outputData;
             }
             set {
@@ -241,7 +224,7 @@ namespace SF3.Models.Structs.Shared {
                 ImageData.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopyOrReference());
 
                 InvalidateImage();
-                _imageData16Bit = value;
+                _textureDataBuffer.ImageData16Bit = value;
                 OnSetImageData();
             }
         }
@@ -253,5 +236,7 @@ namespace SF3.Models.Structs.Shared {
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
         public abstract Palette Palette { get; protected set; }
+
+        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
     }
 }
