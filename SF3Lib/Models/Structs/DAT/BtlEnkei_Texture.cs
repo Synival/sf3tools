@@ -19,6 +19,11 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
+        protected override void OnSetImageData() {
+            PaletteImageSize = 0x200 + StoredImageDataSize;
+            LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
+        }
+
         public override int ImageDataOffset { get => HasImage ? (PaletteImageOffset + 0x200) : 0; set {} }
         public override bool HasImage => PaletteImageOffset != 0;
         public override bool CanLoadImage => HasImage;
@@ -46,11 +51,6 @@ namespace SF3.Models.Structs.DAT {
         public int Padding {
             get => Data.GetDouble(_paddingAddr);
             set => Data.SetDouble(_paddingAddr, value);
-        }
-
-        public override void OnSetImageData() {
-            PaletteImageSize = 0x200 + StoredImageDataSize;
-            LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
         }
     }
 }

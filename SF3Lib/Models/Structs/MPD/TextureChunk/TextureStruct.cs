@@ -60,7 +60,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             return TexturePixelFormat.ABGR1555;
         }
 
-        public override void OnSetImageData() {}
+        protected override void OnSetImageData() {}
 
         public static int GlobalSize => 0x04;
 

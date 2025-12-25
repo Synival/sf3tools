@@ -25,6 +25,16 @@ namespace SF3.Models.Structs.Shared {
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : this(data, data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
 
+        public void LoadImageData() {
+            // Accessing the getter performs loading.
+            if (BytesPerPixel == 1)
+                _ = ImageData8Bit;
+            else
+                _ = ImageData16Bit;
+        }
+
+        protected abstract void OnSetImageData();
+
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
         public abstract int Width { get; set; }
 
@@ -33,14 +43,6 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int StoredImageDataSize { get; private set; }
-
-        public void LoadImageData() {
-            // Accessing the getter performs loading.
-            if (BytesPerPixel == 1)
-                _ = ImageData8Bit;
-            else
-                _ = ImageData16Bit;
-        }
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
 
@@ -246,8 +248,6 @@ namespace SF3.Models.Structs.Shared {
 
         public bool CanSetImageData8Bit => BytesPerPixel == 1 && CanLoadImage;
         public bool CanSetImageData16Bit => BytesPerPixel == 2 && CanLoadImage;
-
-        public abstract void OnSetImageData();
 
         public abstract int ImageDataOffset { get; set; }
         public abstract bool HasImage { get; }

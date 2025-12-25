@@ -15,6 +15,8 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
+        protected override void OnSetImageData() {}
+
         public override int ImageDataOffset {
             get => Data.GetDouble(_imageDataOffsetAddr);
             set {
@@ -31,8 +33,6 @@ namespace SF3.Models.Structs.DAT {
             get => ImageDataOffset;
             set => Data.SetWord(_imageDataOffsetAddr, value);
         }
-
-        public override void OnSetImageData() {}
 
         private readonly Palette _palette;
         public override Palette Palette { get => _palette; protected set {} }

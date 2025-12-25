@@ -21,6 +21,8 @@ namespace SF3.Models.Structs.MPD.Animation {
             LoadImageData();
         }
 
+        protected override void OnSetImageData() => throw new System.NotImplementedException();
+
         public IMPD_File MPD_File { get; }
 
         private int _width;
@@ -44,7 +46,5 @@ namespace SF3.Models.Structs.MPD.Animation {
         public int Frame => 0;
         public int Duration => 0;
         public Dictionary<TagKey, TagValue> Tags => null;
-
-        public override void OnSetImageData() => throw new System.NotImplementedException();
     }
 }

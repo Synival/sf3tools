@@ -11,14 +11,14 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
+        protected override void OnSetImageData() {}
+
         public override int ImageDataOffset { get => Address; set {} }
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffsetViewable => ImageDataOffset;
-
-        public override void OnSetImageData() {}
 
         public override Palette Palette { get => null; protected set {} }
     }

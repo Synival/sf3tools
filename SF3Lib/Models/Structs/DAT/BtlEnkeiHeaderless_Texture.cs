@@ -7,11 +7,11 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
+        protected override void OnSetImageData() {}
+
         public override int ImageDataOffset { get => Address + 0x200; set {} }
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
         public override int PaletteOffset => Address;
-
-        public override void OnSetImageData() {}
     }
 }
