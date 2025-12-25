@@ -1,7 +1,7 @@
 ﻿using SF3.ByteData;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 
-namespace SF3.Models.Tables.MPD {
+namespace SF3.Models.Tables.MPD.Main {
     public class GradientTable : TerminatedTable<Gradient> {
         protected GradientTable(IByteData data, string name, int address) : base(data, name, address, 2, null) { }
 

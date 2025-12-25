@@ -1,9 +1,12 @@
 ﻿using System;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.MPD.Animation;
+using SF3.Models.Tables.MPD.Main;
+using SF3.Models.Tables.Shared;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {

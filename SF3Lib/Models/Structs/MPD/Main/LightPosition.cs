@@ -2,7 +2,7 @@
 using CommonLib.SGL;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public class LightPosition : Struct {
         private readonly int _pitchAddr;
         private readonly int _yawAddr;

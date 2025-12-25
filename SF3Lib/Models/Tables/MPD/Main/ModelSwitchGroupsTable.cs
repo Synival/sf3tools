@@ -1,7 +1,7 @@
 ﻿using SF3.ByteData;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 
-namespace SF3.Models.Tables.MPD {
+namespace SF3.Models.Tables.MPD.Main {
     public class ModelSwitchGroupsTable : TerminatedTable<ModelSwitchGroup> {
         protected ModelSwitchGroupsTable(IByteData data, string name, int address) : base(data, name, address, 4, null) {
         }

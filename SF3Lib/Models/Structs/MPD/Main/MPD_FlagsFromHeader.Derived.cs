@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader {
         [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelChunkIndex), displayGroup: "Flags")]
         public int? ModelChunkIndex {

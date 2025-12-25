@@ -1,5 +1,5 @@
 ﻿using CommonLib.Arrays;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.Types;
 
 namespace SF3.Tests.Models.Structs {

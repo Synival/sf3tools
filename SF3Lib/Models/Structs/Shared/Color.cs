@@ -3,7 +3,7 @@ using CommonLib.Imaging;
 using SF3.ByteData;
 using static CommonLib.Imaging.PixelConversion;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.Shared {
     public class Color : Struct {
         private readonly int _colorABGR1555Addr;
 

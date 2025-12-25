@@ -1,7 +1,7 @@
 ﻿using SF3.ByteData;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.Shared;
 
-namespace SF3.Models.Tables.MPD {
+namespace SF3.Models.Tables.Shared {
     public class ColorTable : FixedSizeTable<Color> {
         protected ColorTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {}
 

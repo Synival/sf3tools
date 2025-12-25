@@ -2,10 +2,9 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Animation;
 using SF3.Models.Tables.MPD.Animation;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Animation {
     public class TextureAnimation : Struct {
         private readonly int _textureIdAddr;
         private readonly int _widthAddr;
@@ -56,14 +55,14 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public int TextureID {
             get => (int) (TextureIDRaw & 0xFF);
-            set => TextureIDRaw = (TextureIDRaw & ~0xFFu) | ((uint) value & 0xFF);
+            set => TextureIDRaw = TextureIDRaw & ~0xFFu | (uint) value & 0xFF;
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayOrder: 0.1f)]
         public bool IsIndexed {
             get => (TextureIDRaw & 0x100) == 0x100;
-            set => TextureIDRaw = (TextureIDRaw & ~0x100u) | (value ? 0x100u : 0);
+            set => TextureIDRaw = TextureIDRaw & ~0x100u | (value ? 0x100u : 0);
         }
 
         [BulkCopy]

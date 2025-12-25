@@ -4,12 +4,15 @@ using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
-using SF3.Models.Structs.MPD;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Types;
 using SF3.NamedValues;
 using SF3.MPD;
+using SF3.Models.Structs.MPD.Main;
+using SF3.Models.Tables.Shared;
+using SF3.Models.Tables.MPD.Main;
+using SF3.Models.Tables.MPD.Animation;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {

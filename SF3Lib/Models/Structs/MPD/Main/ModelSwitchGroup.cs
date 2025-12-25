@@ -2,7 +2,7 @@
 using SF3.ByteData;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public class ModelSwitchGroup : Struct {
         private readonly int _flagAddr;
         private readonly int _visibleModelsWhenFlagOffOffsetAddr;

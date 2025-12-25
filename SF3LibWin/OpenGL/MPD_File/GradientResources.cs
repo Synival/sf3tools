@@ -6,7 +6,7 @@ using CommonLib.Extensions;
 using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class GradientResources : ResourcesBase, IMPD_Resources {

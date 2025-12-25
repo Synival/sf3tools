@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public class Boundary : Struct {
         private readonly int _x1Addr;
         private readonly int _z1Addr;

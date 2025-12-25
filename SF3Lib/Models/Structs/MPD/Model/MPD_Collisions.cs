@@ -3,7 +3,7 @@ using System.Linq;
 using SF3.Models.Files.MPD;
 using SF3.MPD;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Model {
     public class MPD_Collisions : IMPD_Collisions {
         public MPD_Collisions(IMPD_File mpdFile) {
             MPD_File = mpdFile;

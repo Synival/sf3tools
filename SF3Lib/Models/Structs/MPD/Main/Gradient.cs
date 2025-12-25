@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public class Gradient : Struct {
         private readonly int _startPositionAddr;
         private readonly int _stopPositionAddr;
@@ -98,19 +98,19 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: null, displayOrder: 8.1f)]
         public bool AffectsGround {
             get => (PartsAffectedBits & 0x01) == 0x01;
-            set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x01) | (value ? 0x01 : 0x00));
+            set => PartsAffectedBits = (ushort) (PartsAffectedBits & ~0x01 | (value ? 0x01 : 0x00));
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 8.2f)]
         public bool AffectsSkyBox {
             get => (PartsAffectedBits & 0x02) == 0x02;
-            set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x02) | (value ? 0x02 : 0x00));
+            set => PartsAffectedBits = (ushort) (PartsAffectedBits & ~0x02 | (value ? 0x02 : 0x00));
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 8.3f)]
         public bool AffectsModelsAndTiles {
             get => (PartsAffectedBits & 0x04) == 0x04;
-            set => PartsAffectedBits = (ushort) ((PartsAffectedBits & ~0x04) | (value ? 0x04 : 0x00));
+            set => PartsAffectedBits = (ushort) (PartsAffectedBits & ~0x04 | (value ? 0x04 : 0x00));
         }
 
         [BulkCopy]

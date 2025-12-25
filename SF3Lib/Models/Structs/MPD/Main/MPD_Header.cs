@@ -3,7 +3,7 @@ using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public class MPD_Header : Struct {
         private readonly int _mapFlagsAddr;                // int16  Unknown. Might be map id.
         private readonly int _padding1Addr;                // int16  Always zero
@@ -145,7 +145,7 @@ namespace SF3.Models.Structs.MPD {
             _padding4Addr         = addressNext + 0x0E; // 2 bytes
             _offsetBoundariesAddr = addressNext + 0x10; // 4 bytes
 
-            Size = (_offsetBoundariesAddr - Address) + 0x04;
+            Size = _offsetBoundariesAddr - Address + 0x04;
         }
 
         public ScenarioType Scenario { get; }

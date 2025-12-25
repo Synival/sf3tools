@@ -2,7 +2,7 @@
 using SF3.ByteData;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public class LightAdjustment : Struct {
         private readonly int _rAdjustAddr;
         private readonly int _gAdjustAddr;
@@ -19,10 +19,10 @@ namespace SF3.Models.Structs.MPD {
             _rAdjustAddr               = Address + 0x00; // 2 bytes
             _gAdjustAddr               = Address + 0x02; // 2 bytes
             _bAdjustAddr               = Address + 0x04; // 2 bytes
-            _groundRAdjustAddr         = (scenario >= ScenarioType.Scenario3) ? Address + 0x06 : -1; // 2 bytes
-            _groundGAdjustAddr         = (scenario >= ScenarioType.Scenario3) ? Address + 0x08 : -1; // 2 bytes
-            _groundBAdjustAddr         = (scenario >= ScenarioType.Scenario3) ? Address + 0x0A : -1; // 2 bytes
-            _palette3TransparencyAddr  = (scenario >= ScenarioType.Scenario3) ? Address + 0x0C : -1; // 2 bytes
+            _groundRAdjustAddr         = scenario >= ScenarioType.Scenario3 ? Address + 0x06 : -1; // 2 bytes
+            _groundGAdjustAddr         = scenario >= ScenarioType.Scenario3 ? Address + 0x08 : -1; // 2 bytes
+            _groundBAdjustAddr         = scenario >= ScenarioType.Scenario3 ? Address + 0x0A : -1; // 2 bytes
+            _palette3TransparencyAddr  = scenario >= ScenarioType.Scenario3 ? Address + 0x0C : -1; // 2 bytes
         }
 
         public ScenarioType Scenario { get; }

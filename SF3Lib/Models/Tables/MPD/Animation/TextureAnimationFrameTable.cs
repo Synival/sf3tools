@@ -1,6 +1,5 @@
 ﻿using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.Animation;
 
 namespace SF3.Models.Tables.MPD.Animation {

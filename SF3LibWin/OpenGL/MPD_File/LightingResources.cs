@@ -4,8 +4,8 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Utils;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
-using SF3.Models.Tables.MPD;
+using SF3.Models.Structs.MPD.Main;
+using SF3.Models.Tables.Shared;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class LightingResources : ResourcesBase, IMPD_Resources {

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using SF3.Models.Structs.MPD;
-using SF3.Models.Tables.MPD;
+using SF3.Models.Structs.MPD.Animation;
+using SF3.Models.Tables.MPD.Animation;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {

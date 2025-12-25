@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.NamedValues;
-using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.Shared;
 
 namespace SF3.Win.Views {
     public class ColorTableView : ControlSpaceView {

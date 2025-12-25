@@ -4,7 +4,7 @@ using System.Linq;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Types;

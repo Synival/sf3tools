@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.MPD.Animation;
+using SF3.Models.Tables.MPD.Main;
+using SF3.Models.Tables.Shared;
 using SF3.MPD;
 
 namespace SF3.Models.Files.MPD {

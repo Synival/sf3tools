@@ -8,7 +8,7 @@ using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Models.Tables.MPD;
+using SF3.Models.Tables.Shared;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;

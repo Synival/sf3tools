@@ -1,8 +1,8 @@
 ﻿using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Animation;
 
-namespace SF3.Models.Tables.MPD {
+namespace SF3.Models.Tables.MPD.Animation {
     public class TextureAnimationTable : TerminatedTable<TextureAnimation> {
         protected TextureAnimationTable(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
         : base(data, name, address, is32Bit ? 8 : 4, null) {

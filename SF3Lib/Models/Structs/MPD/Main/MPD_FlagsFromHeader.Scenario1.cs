@@ -1,6 +1,6 @@
 ﻿using CommonLib.Attributes;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader {
         private bool IsScenario1OrEarlier => Header.IsScenario1OrEarlier;
 

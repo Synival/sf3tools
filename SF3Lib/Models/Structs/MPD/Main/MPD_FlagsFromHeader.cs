@@ -1,8 +1,9 @@
 ﻿using System;
+using SF3.Models.Structs.MPD.Main;
 using SF3.MPD;
 using SF3.Types;
 
-namespace SF3.Models.Structs.MPD {
+namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader : IMPD_AllFlags {
         public MPD_FlagsFromHeader(MPD_Header header) {
             Header = header;

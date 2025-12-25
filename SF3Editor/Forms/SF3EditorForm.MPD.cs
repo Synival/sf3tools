@@ -11,7 +11,7 @@ using CommonLib.Utils;
 using CommonLib.Win;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.Types;
 using SF3.Win.Types;
 using SF3.Win.Views.MPD;
