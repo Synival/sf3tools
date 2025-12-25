@@ -8,8 +8,8 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 
 namespace SF3.Models.Tables.MPD.Animation {
-    public readonly struct UniqueTextureAnimationFrameInfo {
-        public UniqueTextureAnimationFrameInfo(int width, int height, bool isIndexed) {
+    public readonly struct UniqueAnimationFrameInfo {
+        public UniqueAnimationFrameInfo(int width, int height, bool isIndexed) {
             Width     = width;
             Height    = height;
             IsIndexed = isIndexed;
@@ -20,8 +20,8 @@ namespace SF3.Models.Tables.MPD.Animation {
         public readonly bool IsIndexed;
     }
 
-    public class UniqueTextureAnimationFrameTable : Table<UniqueTextureAnimationFrame> {
-        protected UniqueTextureAnimationFrameTable(IByteData data, string name, int address, Dictionary<int, UniqueTextureAnimationFrameInfo> infoByOffset, IMPD_File mpdFile)
+    public class UniqueAnimationFrameTable : Table<UniqueAnimationFrame> {
+        protected UniqueAnimationFrameTable(IByteData data, string name, int address, Dictionary<int, UniqueAnimationFrameInfo> infoByOffset, IMPD_File mpdFile)
         : base(data, name, address) {
             InfoByOffset = infoByOffset;
             MPD_File = mpdFile;
@@ -30,12 +30,12 @@ namespace SF3.Models.Tables.MPD.Animation {
         public override int TerminatorSize => 0;
         public override bool IsContiguous => true;
 
-        public static UniqueTextureAnimationFrameTable Create(IByteData data, string name, int address, Dictionary<int, UniqueTextureAnimationFrameInfo> infoByOffset, IMPD_File mpdFile)
-            => Create(() => new UniqueTextureAnimationFrameTable(data, name, address, infoByOffset, mpdFile));
+        public static UniqueAnimationFrameTable Create(IByteData data, string name, int address, Dictionary<int, UniqueAnimationFrameInfo> infoByOffset, IMPD_File mpdFile)
+            => Create(() => new UniqueAnimationFrameTable(data, name, address, infoByOffset, mpdFile));
 
         public override bool Load() {
-            var rowDict = new Dictionary<int, UniqueTextureAnimationFrame>();
-            var rows = new List<UniqueTextureAnimationFrame>();
+            var rowDict = new Dictionary<int, UniqueAnimationFrame>();
+            var rows = new List<UniqueAnimationFrame>();
 
             try {
                 var address = Address;
@@ -58,7 +58,7 @@ namespace SF3.Models.Tables.MPD.Animation {
                     // Otherwise, make a big, stupid guess.
                         (width, height, isIndexed) = GuessDimensions(size);
 
-                    var newModel = new UniqueTextureAnimationFrame(Data, id, $"TexAnimFrame_{id:D3}", address, width, height, isIndexed, isKnown, MPD_File);
+                    var newModel = new UniqueAnimationFrame(Data, id, $"TexAnimFrame_{id:D3}", address, width, height, isIndexed, isKnown, MPD_File);
 
                     rowDict[id] = newModel;
                     rows.Add(newModel);
@@ -111,8 +111,8 @@ namespace SF3.Models.Tables.MPD.Animation {
         public ITexture AtOffset(int offset)
             => (FrameByOffset?.TryGetValue(offset, out var frame) == true) ? frame : null;
 
-        public Dictionary<int, UniqueTextureAnimationFrameInfo> InfoByOffset { get; }
-        public Dictionary<int, UniqueTextureAnimationFrame> FrameByOffset { get; private set; }
+        public Dictionary<int, UniqueAnimationFrameInfo> InfoByOffset { get; }
+        public Dictionary<int, UniqueAnimationFrame> FrameByOffset { get; private set; }
         public IMPD_File MPD_File { get; }
     }
 }

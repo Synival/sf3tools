@@ -19,8 +19,8 @@ namespace SF3.Win.OpenGL {
             // Create a texture atlas for this model and generate a texture for it.
             // TODO: let QuadModels share TextureAtlas' + Textures
             var textures = quads
-                .Where(x => x.TextureAnim != null)
-                .SelectMany(x => x.TextureAnim.Frames)
+                .Where(x => x.Animation != null)
+                .SelectMany(x => x.Animation.Frames)
                 .Distinct()
                 .ToArray();
 
@@ -150,7 +150,7 @@ namespace SF3.Win.OpenGL {
             var modified = false;
 
             foreach (var quad in Quads) {
-                var frame = quad.TextureAnim?.GetFrame(_frame);
+                var frame = quad.Animation?.GetFrame(_frame);
                 var texCoords = (frame != null)
                     ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(
                         frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,

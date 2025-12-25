@@ -75,7 +75,7 @@ namespace MPD_Analyzer {
             var texturesById = mpdFile.ModelCollections[CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
             var modelsById = mpdFile.ModelCollections[CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 
-#if false
+#if true
             var duplicatedTextures = mpdFile.ModelCollections[CollectionType.Primary].Textures.GroupBy(x => x.Hash).Where(x => x.Count() > 1).Select(x => x.ToArray()).ToArray();
             if (duplicatedTextures.Length == 0)
                 return null;
@@ -177,8 +177,8 @@ namespace MPD_Analyzer {
                 usedTextureIds.Add(id);
 
             // (count the animation frames as used textures, since they're still referenced and *probably* used)
-            if (mpdFile.TextureAnimationsAlt != null)
-                foreach (var entry in mpdFile.TextureAnimationsAlt)
+            if (mpdFile.SkipTextures != null)
+                foreach (var entry in mpdFile.SkipTextures)
                     usedTextureIds.Add(entry.TextureID);
 
             var usedTextures = usedTextureIds
@@ -229,8 +229,8 @@ namespace MPD_Analyzer {
             foreach (var id in missingTextureIdsFromSurfaceMap)
                 missingTextureIds.Add(id);
 
-            if (mpdFile.TextureAnimationsAlt != null)
-                foreach (var entry in mpdFile.TextureAnimationsAlt.OrderBy(x => x.TextureID))
+            if (mpdFile.SkipTextures != null)
+                foreach (var entry in mpdFile.SkipTextures.OrderBy(x => x.TextureID))
                     if (entry.TextureID > lastTexture)
                         missingTextureIds.Add(entry.TextureID);
 
@@ -252,13 +252,33 @@ namespace MPD_Analyzer {
                 .ToHashSet();
 
             return unusedModelIDs.Select(x => $"Model0x{x:X2}").ToArray();
-#elif true
-            if (mpdFile.TextureAnimationFrameChunk == null)
+#elif false
+            var surfaceTexturesInUse = mpdFile.Surface.HasModel ? mpdFile.Surface.GetAllTiles().Where(x => x.TextureID != 0xFF).Select(x => (int) x.TextureID).Distinct().ToArray() : [];
+            var modelTexturesInUse = mpdFile.ModelCollections[CollectionType.Primary].Models.SelectMany(x => x.Faces).Where(x => x.Attributes.UseTexture).Select(x => (int) x.Attributes.TextureNo).Distinct().ToArray();
+            var texturesInUse = mpdFile.Animations.Select(x => x.TextureID).Concat(surfaceTexturesInUse).Concat(modelTexturesInUse).Order().ToHashSet();
+            var hashes = mpdFile.Animations.SelectMany(x => x.AnimationFrameTable).Select(x => x.Hash).ToHashSet();
+            var correspondingTextureIDs = hashes.SelectMany(x => texturesById.Values.Where(y => y.Hash == x)).Select(x => x.ID).ToHashSet();
+
+            var expectedSkipTextureIDs = correspondingTextureIDs.Where(x => !texturesInUse.Contains(x)).OrderBy(x => x).ToHashSet();
+            var actualSkipTextureIDs = mpdFile.SkipTextures.Select(x => (int) x.TextureID).OrderBy(x => x).ToHashSet();
+
+            if (!expectedSkipTextureIDs.SequenceEqual(actualSkipTextureIDs))
+                ;
+            //return expectedSkipTextureIDs.SequenceEqual(actualSkipTextureIDs) ? [] : ["Nope"];
+
+            return actualSkipTextureIDs.Where(texturesInUse.Contains).Select(x => $"Tex0x{x:X2}").ToArray();
+#elif false
+            if (mpdFile.AnimationFrameChunk == null)
                 return null;
-            var unreferencedFrames = mpdFile.TextureAnimationFrameChunk.UniqueTextureAnimationFrameTable
-                .Where(x => x.IsReferenced == false)
-                .ToArray();
-            return unreferencedFrames.Select(x => $"Offset=0x{x.Address:X4}").ToArray();
+
+            var output = new List<string>();
+            foreach (var frame in mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable) {
+                var correspondingTexture = texturesById.Values.FirstOrDefault(x => x.Hash == frame.Hash);
+                if (correspondingTexture == null)
+                    output.Add($"Tex@{frame.ImageDataOffset:X4}");
+            }
+
+            return output.ToArray();
 #else
             if (!mpdFile.Surface.HasModel)
                 return null;
@@ -330,11 +350,11 @@ namespace MPD_Analyzer {
 
                 foreach (var file in filesKv.Value) {
                     var filename = Path.GetFileNameWithoutExtension(file);
-
+/*
                     // Skip maps that aren't used at all.
                     if (unusedMaps.Contains(filename))
                         continue;
-
+*/
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
 

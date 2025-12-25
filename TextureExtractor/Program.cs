@@ -107,8 +107,8 @@ namespace TextureExtractor {
                                 .Where(x => tileSurfaceCharacterIDs.Contains(x.ID) && x.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
                                 .ToArray();
 
-                            var frames = (mpdFile.TextureAnimations == null) ? [] : mpdFile.TextureAnimations
-                                .SelectMany(x => x.TextureAnimationFrameTable)
+                            var frames = (mpdFile.Animations == null) ? [] : mpdFile.Animations
+                                .SelectMany(x => x.AnimationFrameTable)
                                 .Where(x => tileSurfaceCharacterIDs.Contains(x.ID) && x.PixelFormat == TexturePixelFormat.ABGR1555 && x.Width % 2 == 0 && x.Height % 2 == 0)
                                 .ToArray();
 

@@ -57,8 +57,8 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             tables.AddRange(MakeLightingTables(header));
-            tables.AddRange(MakeTexturePaletteTables(header));
-            tables.AddRange(MakeTextureAnimationTables(header, areAnimatedTextures32Bit));
+            tables.AddRange(MakePaletteTables(header));
+            tables.AddRange(MakeAnimationTables(header, areAnimatedTextures32Bit));
             tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceUtils.ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
             tables.AddRange(MakeHeaderModelCollections(header));
             tables.AddRange(MakeUnknownTables(header));
@@ -74,7 +74,7 @@ namespace SF3.Models.Files.MPD {
         private ChunkLocationTable MakeChunkHeaderTable()
             => ChunkLocations = ChunkLocationTable.Create(Data, "ChunkHeader", 0x2000);
 
-        private ITable[] MakeTexturePaletteTables(MPD_Header header) {
+        private ITable[] MakePaletteTables(MPD_Header header) {
             PaletteTables = new ColorTable[3];
             var headerRamAddr = header.Address + RamAddress;
 
@@ -107,12 +107,12 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ITable[] MakeTextureAnimationTables(MPD_Header header, bool areAnimatedTextures32Bit) {
+        private ITable[] MakeAnimationTables(MPD_Header header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
-            if (header.OffsetTextureAnimations != 0) {
+            if (header.OffsetAnimations != 0) {
                 try {
-                    tables.Add(TextureAnimations = TextureAnimationTable.Create(Data, nameof(TextureAnimations), header.OffsetTextureAnimations - RamAddress, areAnimatedTextures32Bit, this));
+                    tables.Add(Animations = AnimationTable.Create(Data, nameof(Animations), header.OffsetAnimations - RamAddress, areAnimatedTextures32Bit, this));
                 }
                 catch {
                     // TODO: what to do here??
@@ -205,7 +205,7 @@ namespace SF3.Models.Files.MPD {
                     updateLowest((int) msg.VisibleModelsWhenFlagOnOffset);
                     updateLowest((int) msg.VisibleModelsWhenFlagOffOffset);
                 }
-                updateLowest(header.OffsetTextureAnimations);
+                updateLowest(header.OffsetAnimations);
                 updateLowest(header.OffsetUnknown2);
 
                 // We have our best guess for the size. Add the table!
@@ -467,18 +467,18 @@ namespace SF3.Models.Files.MPD {
 
             TextureChunks = texColList.ToArray();
 
-            // Now that textures are loaded, build the texture animation frame data.
+            // Now that textures are loaded, build the animation frame data.
             if (chunkDatas[3] != null) {
-                var infoByOffset = TextureAnimations
-                    .SelectMany(x => x.TextureAnimationFrameTable.Select(y => (Anim: x, Frame: y)))
+                var infoByOffset = Animations
+                    .SelectMany(x => x.AnimationFrameTable.Select(y => (Anim: x, Frame: y)))
                     .GroupBy(x => x.Frame.ImageDataOffset)
                     .ToDictionary(x => x.Key, x => {
                         var anim = x.First().Anim;
-                        return new UniqueTextureAnimationFrameInfo((int) anim.Width, (int) anim.Height, anim.IsIndexed);
+                        return new UniqueAnimationFrameInfo((int) anim.Width, (int) anim.Height, anim.IsIndexed);
                     });
 
-                TextureAnimationFrameChunk = TextureAnimationFrameChunk.Create(chunkDatas[3], NameGetterContext, 0, nameof(TextureAnimationFrameChunk), infoByOffset, this);
-                tables.AddRange(TextureAnimationFrameChunk.Tables);
+                AnimationFrameChunk = AnimationFrameChunk.Create(chunkDatas[3], NameGetterContext, 0, nameof(AnimationFrameChunk), infoByOffset, this);
+                tables.AddRange(AnimationFrameChunk.Tables);
             }
 
             // Add chunks with tables for ground plane tile assignment.

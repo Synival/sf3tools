@@ -179,7 +179,7 @@ namespace SF3.Win {
         public event EventHandler ViewerDrawSkyBoxChanged;
 
         /// <summary>
-        /// When enabled, texture animations will run in the MPD Viewer.
+        /// When enabled, animations will run in the MPD Viewer.
         /// </summary>
         public bool ViewerRunAnimations {
             get => _viewerRunAnimations;

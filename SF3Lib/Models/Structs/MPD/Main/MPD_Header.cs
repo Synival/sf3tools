@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _viewDistanceAddr;            // int16  Something like a view distance for meshes from the models chunk.
         private readonly int _padding2Addr;                // int16  Always zero
         private readonly int _offsetModelSwitchGroupsAddr; // int32  Pointer to model switch group list.
-        private readonly int _offsetTextureAnimationsAddr; // int32 Offset to list of texture groups. See (#texture-groups)
+        private readonly int _offsetAnimationsAddr;        // int32 Offset to list of texture groups. See (#texture-groups)
         private readonly int _offsetUnknown2Addr;          // int32  Pointer to unknown list. Only used in RAIL1.MPD. 5 values.
         private readonly int _offsetGradientAddr;          // int32  Pointer to gradient table that replaces Scenario 1 "unknown2" table.
         private readonly int _offsetGroundAnimationAddr;   // int32  Pointer to list of KA table for ground model animation.
@@ -66,7 +66,7 @@ namespace SF3.Models.Structs.MPD.Main {
             _viewDistanceAddr            = Address + 0x10; // 2 bytes
             _padding2Addr                = Address + 0x12; // 2 bytes
             _offsetModelSwitchGroupsAddr = Address + 0x14; // 4 bytes
-            _offsetTextureAnimationsAddr = Address + 0x18; // 4 bytes
+            _offsetAnimationsAddr        = Address + 0x18; // 4 bytes
 
             if (Scenario >= ScenarioType.Scenario2) {
                 _offsetGradientAddr = Address + 0x1C; // 4 bytes
@@ -234,10 +234,10 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetTextureAnimationsAddr), displayOrder: 8, isPointer: true, displayGroup: "Main")]
-        public int OffsetTextureAnimations {
-            get => Data.GetDouble(_offsetTextureAnimationsAddr);
-            set => Data.SetDouble(_offsetTextureAnimationsAddr, value);
+        [TableViewModelColumn(addressField: nameof(_offsetAnimationsAddr), displayOrder: 8, isPointer: true, displayGroup: "Main")]
+        public int OffsetAnimations {
+            get => Data.GetDouble(_offsetAnimationsAddr);
+            set => Data.SetDouble(_offsetAnimationsAddr, value);
         }
 
         [BulkCopy]

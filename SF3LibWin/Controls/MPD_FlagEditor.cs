@@ -42,6 +42,10 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cb0x0008_KeepTexturelessFlatTiles,
                     nameof(IMPD_AllFlags.Bit_0x0008_KeepTexturelessFlatTiles),
                     nameof(IMPD_AllFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
+            cb0x0010_HasTileBasedForegroundImage.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0010_HasTileBasedForegroundImage,
+                    nameof(IMPD_AllFlags.Bit_0x0010_HasTileBasedForegroundImage),
+                    nameof(IMPD_AllFlags.CanSet_0x0010_HasTileBasedForegroundImage));
             cb0x0020_Unknown.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0020_Unknown,
                     nameof(IMPD_AllFlags.Bit_0x0020_Unknown),
@@ -78,8 +82,8 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cb0x0800_HasCutsceneSkyBox,
                     nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
                     nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
-            cb0x1000_HasTileBasedBackgroundImage.CheckedChanged += (s, e)
-                => TrySetProperty(cb0x1000_HasTileBasedBackgroundImage,
+            cb0x1000_HasTileBasedGroundImage.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x1000_HasTileBasedGroundImage,
                     nameof(IMPD_AllFlags.Bit_0x1000_HasTileBasedGroundImage),
                     nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
             cb0x2000_HasBattleSkyBox.CheckedChanged += (s, e)
@@ -169,7 +173,7 @@ namespace SF3.Win.Controls {
             SetControlState(cb0x0800_HasCutsceneSkyBox,
                 nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
                 nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
-            SetControlState(cb0x1000_HasTileBasedBackgroundImage,
+            SetControlState(cb0x1000_HasTileBasedGroundImage,
                 nameof(IMPD_AllFlags.Bit_0x1000_HasTileBasedGroundImage),
                 nameof(IMPD_AllFlags.CanSet_0x1000_HasTileBasedGroundImage));
             SetControlState(cb0x2000_HasBattleSkyBox,

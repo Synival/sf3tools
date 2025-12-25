@@ -8,8 +8,8 @@ using SF3.Models.Tables.MPD.Animation;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.Views.MPD {
-    public class TextureAnimationsView : ControlSpaceView {
-        public TextureAnimationsView(string name, TextureAnimationTable model, INameGetterContext nameGetterContext) : base(name) {
+    public class AnimationsView : ControlSpaceView {
+        public AnimationsView(string name, AnimationTable model, INameGetterContext nameGetterContext) : base(name) {
             Model       = model;
             TableView   = new TableView("Animations", model, nameGetterContext);
             TextureView = new ImageView("Texture");
@@ -30,9 +30,9 @@ namespace SF3.Win.Views.MPD {
 
         void OnTextureChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            var anim = (TextureAnimation) item?.RowObject;
+            var anim = (AnimationStruct) item?.RowObject;
 
-            var frame = anim?.TextureAnimationFrameTable?.FirstOrDefault();
+            var frame = anim?.AnimationFrameTable?.FirstOrDefault();
             TextureView.Image = frame?.CreateBitmapARGB1555() ?? null;
 
             _timer.Stop();
@@ -40,7 +40,7 @@ namespace SF3.Win.Views.MPD {
             if (frame != null) {
                 _currentAnimation = anim;
                 _currentFrameNum = 0;
-                _timer.Interval = (int) _currentAnimation.TextureAnimationFrameTable[_currentFrameNum].Duration * 1000 / 30;
+                _timer.Interval = (int) _currentAnimation.AnimationFrameTable[_currentFrameNum].Duration * 1000 / 30;
                 _timer.Start();
             }
         }
@@ -65,16 +65,16 @@ namespace SF3.Win.Views.MPD {
             if (_currentAnimation == null)
                 return;
             _currentFrameNum = (_currentFrameNum + 1) % _currentAnimation.NumFrames;
-            var currentFrame = _currentAnimation.TextureAnimationFrameTable[_currentFrameNum];
+            var currentFrame = _currentAnimation.AnimationFrameTable[_currentFrameNum];
             TextureView.Image = currentFrame.CreateBitmapARGB1555();
             _timer.Interval = (int) currentFrame.Duration * 1000 / 30;
         }
 
-        public TextureAnimationTable Model { get; }
+        public AnimationTable Model { get; }
         public TableView TableView { get; private set; }
         public ImageView TextureView { get; private set; }
 
-        private TextureAnimation _currentAnimation = null;
+        private AnimationStruct _currentAnimation = null;
         private int _currentFrameNum = 0;
         private Timer _timer = null;
     }

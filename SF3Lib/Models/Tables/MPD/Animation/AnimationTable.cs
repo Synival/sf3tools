@@ -3,8 +3,8 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 
 namespace SF3.Models.Tables.MPD.Animation {
-    public class TextureAnimationTable : TerminatedTable<TextureAnimation> {
-        protected TextureAnimationTable(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
+    public class AnimationTable : TerminatedTable<Structs.MPD.Animation.AnimationStruct> {
+        protected AnimationTable(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
         : base(data, name, address, is32Bit ? 8 : 4, null) {
             Is32Bit      = is32Bit;
             MPD_File     = mpdFile;
@@ -12,8 +12,8 @@ namespace SF3.Models.Tables.MPD.Animation {
             TextureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;
         }
 
-        public static TextureAnimationTable Create(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
-            => Create(() => new TextureAnimationTable(data, name, address, is32Bit, mpdFile));
+        public static AnimationTable Create(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
+            => Create(() => new AnimationTable(data, name, address, is32Bit, mpdFile));
 
         public override bool Load() {
             return Load(
@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.MPD.Animation {
                     // everything else. No clue why, but let's consider that the end as well.
                     var textureId = Data.GetData(address, Is32Bit ? 4 : 2);
                     var atEnd = textureId == FrameEndId || textureId == TextureEndId;
-                    return new TextureAnimation(Data, id, atEnd ? "--" : $"TexAnim{id:D2}", address, Is32Bit, MPD_File);
+                    return new Structs.MPD.Animation.AnimationStruct(Data, id, atEnd ? "--" : $"TexAnim{id:D2}", address, Is32Bit, MPD_File);
                 },
                 (currentRows, model) => model.TextureIDRaw != FrameEndId && model.TextureIDRaw != TextureEndId, addEndModel: false);
         }

@@ -2,8 +2,6 @@
 using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
-using CommonLib.Utils;
-using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {

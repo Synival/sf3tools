@@ -8,8 +8,8 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class UniqueTextureAnimationFrame : TextureStructBase, ITexture {
-        public UniqueTextureAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, bool isReferenced, IMPD_File mpdFile)
+    public class UniqueAnimationFrame : TextureStructBase, ITexture {
+        public UniqueAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, bool isReferenced, IMPD_File mpdFile)
         : base(
             data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555,
             isCompressed: true, zeroIsTransparent: true

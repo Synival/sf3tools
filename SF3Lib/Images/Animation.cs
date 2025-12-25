@@ -3,8 +3,8 @@ using System.Linq;
 using CommonLib.Utils;
 
 namespace SF3.Images {
-    public class TextureAnimation {
-        public TextureAnimation(int id, ITexture[] frames, int frameTimerStart) {
+    public class Animation {
+        public Animation(int id, ITexture[] frames, int frameTimerStart) {
             if (frames == null)
                 throw new ArgumentNullException(nameof(frames));
             if (!frames.Where(x => x != null).All(x => x.ID == id) || frames.Length == 0)

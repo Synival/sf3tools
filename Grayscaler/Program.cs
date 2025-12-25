@@ -46,7 +46,7 @@ namespace Grayscaler {
                     .Cast<TextureStructBase>()
                     .ToArray();
 
-                var textures2 = (mpdFile.TextureAnimationFrameChunk?.UniqueTextureAnimationFrameTable == null) ? [] : mpdFile.TextureAnimationFrameChunk.UniqueTextureAnimationFrameTable
+                var textures2 = (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null) ? [] : mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable
                     .Where(x => x.PixelFormat == TexturePixelFormat.ABGR1555)
                     .Cast<TextureStructBase>()
                     .ToArray();

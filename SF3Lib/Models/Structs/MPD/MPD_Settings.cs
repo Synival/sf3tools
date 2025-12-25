@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public bool ShortEmptyAnimationTable {
-            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetUnknown2 - MPD_File.MPDHeader.OffsetTextureAnimations == 0x02;
+            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetUnknown2 - MPD_File.MPDHeader.OffsetAnimations == 0x02;
             set {}
         }
 

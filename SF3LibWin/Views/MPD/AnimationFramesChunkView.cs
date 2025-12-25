@@ -2,8 +2,8 @@
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.Views.MPD {
-    public class TextureAnimationFramesChunkView : TabView {
-        public TextureAnimationFramesChunkView(string name, IMPD_File model) : base(name) {
+    public class AnimationFramesChunkView : TabView {
+        public AnimationFramesChunkView(string name, IMPD_File model) : base(name) {
             Model = model;
         }
 
@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new TextureAnimationFramesView("Frames", Model, ngc));
+            CreateChild(new AnimationFramesView("Frames", Model, ngc));
 
             return Control;
         }

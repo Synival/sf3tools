@@ -120,7 +120,7 @@ namespace SF3.Models.Files.MPD {
         public TextureIDTable IndexedTextureTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureAnimationTable TextureAnimations { get; private set; }
+        public AnimationTable Animations { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt16Table Unknown2Table { get; private set; }
@@ -138,7 +138,7 @@ namespace SF3.Models.Files.MPD {
 
         public int[] ModelChunkIndices { get; private set; } = null;
 
-        public TextureAnimationFrameChunk TextureAnimationFrameChunk { get; private set; }
+        public AnimationFrameChunk AnimationFrameChunk { get; private set; }
 
         [BulkCopyRecurse]
         public SurfaceDataChunk SurfaceDataChunk { get; private set; }

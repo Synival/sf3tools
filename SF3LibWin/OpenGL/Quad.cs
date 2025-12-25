@@ -15,18 +15,18 @@ namespace SF3.Win.OpenGL {
         public Quad(Vector3[] vertices) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, c_white) { }
         public Quad(Vector3[] vertices, Vector4 color) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, [color, color, color, color]) { }
         public Quad(Vector3[] vertices, Vector4[] colors) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, colors) { }
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, TextureRotateType rotate, TextureFlipType flip)
-            : this(vertices, textureAnim, rotate, flip, c_allWhite) { }
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, TextureRotateType rotate, TextureFlipType flip, Vector4 color)
-            : this(vertices, textureAnim, rotate, flip, [color, color, color, color]) { }
+        public Quad(Vector3[] vertices, Animation animation, TextureRotateType rotate, TextureFlipType flip)
+            : this(vertices, animation, rotate, flip, c_allWhite) { }
+        public Quad(Vector3[] vertices, Animation animation, TextureRotateType rotate, TextureFlipType flip, Vector4 color)
+            : this(vertices, animation, rotate, flip, [color, color, color, color]) { }
 
-        public Quad(Vector3[] vertices, TextureAnimation textureAnim, TextureRotateType rotate, TextureFlipType flip, Vector4[] colors) {
+        public Quad(Vector3[] vertices, Animation animation, TextureRotateType rotate, TextureFlipType flip, Vector4[] colors) {
             if (vertices == null || vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));
             if (colors == null || colors.Length != 4)
                 throw new ArgumentException(nameof(colors));
 
-            TextureAnim   = textureAnim;
+            Animation     = animation;
             TextureRotate = rotate;
             TextureFlip   = flip;
             Center = vertices.Aggregate((a, b) => a + b) / vertices.Length;
@@ -111,7 +111,7 @@ namespace SF3.Win.OpenGL {
         public List<PolyAttribute> Attributes { get; }
         private Dictionary<string, PolyAttribute> _attributesByName = [];
 
-        public TextureAnimation TextureAnim { get; }
+        public Animation Animation { get; }
 
         public TextureRotateType TextureRotate { get; }
         public TextureFlipType TextureFlip { get; }

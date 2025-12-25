@@ -59,19 +59,19 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
-            if (modelCollection.Collection != CollectionType.Primary || mpdFile.TextureAnimations == null)
+            if (modelCollection.Collection != CollectionType.Primary || mpdFile.Animations == null)
                 return [];
 
             var skippedTextures =
                 (mpdFile.SkipTextures == null) ? []
                 : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
 
-            return mpdFile.TextureAnimations
+            return mpdFile.Animations
                 .Where(x => !skippedTextures.Contains(x.ID))
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => new ModelAnimationInfo {
-                    Textures = x.TextureAnimationFrameTable.OrderBy(x => x.Frame).ToArray(),
+                    Textures = x.AnimationFrameTable.OrderBy(x => x.Frame).ToArray(),
                     FrameTimerStart = x.FrameTimerStart
                 });
         }
@@ -206,7 +206,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 var color = new Vector4(1);
                 bool useTexture = attr.UseTexture;
-                TextureAnimation anim = null;
+                Animation anim = null;
                 bool isSemiTransparent = false;
                 TextureFlipType flip = TextureFlipType.NoFlip;
 
@@ -241,10 +241,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     else {
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                                anim = new Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
                             else if (texturesById.ContainsKey(textureId)) {
                                 var tex = texturesById[textureId];
-                                anim = new TextureAnimation(tex.ID, [tex], 0);
+                                anim = new Animation(tex.ID, [tex], 0);
                             }
                         }
 

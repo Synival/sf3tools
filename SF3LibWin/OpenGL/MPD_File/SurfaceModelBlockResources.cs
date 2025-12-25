@@ -57,11 +57,11 @@ namespace SF3.Win.OpenGL.MPD_File {
                 .ToDictionary(x => x.ID, x => x)
                 : [];
 
-            var animationsById = mpdFile.TextureAnimations != null ? mpdFile.TextureAnimations
+            var animationsById = mpdFile.Animations != null ? mpdFile.Animations
                 .Where(x => !skippedTextures.Contains(x.ID))
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
-                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.TextureAnimationFrameTable.OrderBy(x => x.Frame).ToArray(), x.FrameTimerStart })
+                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.AnimationFrameTable.OrderBy(x => x.Frame).ToArray(), x.FrameTimerStart })
                 : [];
 
             var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
@@ -77,7 +77,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Surface.GetTile(x, y);
 
-                    TextureAnimation  anim   = null;
+                    Animation  anim   = null;
                     TextureRotateType rotate = TextureRotateType.NoRotation;
                     TextureFlipType   flip   = TextureFlipType.NoFlip;
 
@@ -89,9 +89,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new TextureAnimation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                                anim = new Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
                             else if (texturesById.ContainsKey(textureId))
-                                anim = new TextureAnimation(textureId, [texturesById[textureId]], 0);
+                                anim = new Animation(textureId, [texturesById[textureId]], 0);
                         }
                     }
 

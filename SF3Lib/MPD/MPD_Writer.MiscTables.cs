@@ -22,7 +22,7 @@ namespace SF3.MPD {
                 case UnknownUInt16Table ui16:    WriteUInt16Table(ui16);       break;
                 case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);         break;
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
-                case TextureAnimationTable ta:   WriteTextureAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
+                case AnimationTable ta:          WriteAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case BoundaryTable bt:           WriteBoundaries(bt);          break;
                 case TextureIDTable tid:         WriteTextureIDs(tid, settings?.LongEmptyAltAnimationTable ?? false); break;
                 case MissingModelChunk mmc:      return null;
@@ -71,16 +71,16 @@ namespace SF3.MPD {
             WriteUInt(0xFFFFFFFF);
         }
 
-        public void WriteTextureAnimations(TextureAnimationTable textureAnimations, bool shortEmptyTable) {
+        public void WriteAnimations(AnimationTable animations, bool shortEmptyTable) {
             // TODO: Write the things
             if (shortEmptyTable)
                 WriteUShort(0xFFFF);
             else {
                 for (int i = 0; i < 2; i++) {
-                    if (textureAnimations.Is32Bit)
-                        WriteUInt(textureAnimations.TextureEndId);
+                    if (animations.Is32Bit)
+                        WriteUInt(animations.TextureEndId);
                     else
-                        WriteUShort((ushort) textureAnimations.TextureEndId);
+                        WriteUShort((ushort) animations.TextureEndId);
                 }
             }
         }

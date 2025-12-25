@@ -12,7 +12,7 @@ namespace SF3.MPD {
             var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
-            var textureAnimationsPos = WriteTableOrNull(mpd.TextureAnimations, mpd.Settings);
+            var animationsPos        = WriteTableOrNull(mpd.Animations, mpd.Settings);
             var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
@@ -32,7 +32,7 @@ namespace SF3.MPD {
                 lightPositionPos,
                 unknown1Pos,
                 modelSwitchGroupsPos,
-                textureAnimationsPos,
+                animationsPos,
                 unknown2Pos,
                 groundAnimationPos,
                 skipTexturesPos,
@@ -77,7 +77,7 @@ namespace SF3.MPD {
             uint? lightPositionPos,
             uint? unknown1Pos,
             uint? modelSwitchGroupsPos,
-            uint? textureAnimationsPos,
+            uint? animationsPos,
             uint? unknown2Pos,
             uint? groundAnimationPos,
             uint? skipTexturesPos,
@@ -97,7 +97,7 @@ namespace SF3.MPD {
             WriteMPDPointer(unknown1Pos);
             WriteUShort(settings.ModelsViewDistance);
             WriteMPDPointer(modelSwitchGroupsPos);
-            WriteMPDPointer(textureAnimationsPos);
+            WriteMPDPointer(animationsPos);
             WriteMPDPointer(unknown2Pos);
             WriteMPDPointer(groundAnimationPos);
 

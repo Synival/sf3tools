@@ -90,8 +90,8 @@ namespace SF3.Models.Files.MPD {
                 .SelectMany(x => x.TextureTable)
                 .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
 
-            var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
-                .SelectMany(x => x.TextureAnimationFrameTable)
+            var textures2 = (Animations == null) ? new Dictionary<string, ITexture>() : Animations
+                .SelectMany(x => x.AnimationFrameTable)
                 .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
@@ -163,8 +163,8 @@ namespace SF3.Models.Files.MPD {
                 .SelectMany(x => x.TextureTable)
                 .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
 
-            var textures2 = (TextureAnimations == null) ? new Dictionary<string, ITexture>() : TextureAnimations
-                .SelectMany(x => x.TextureAnimationFrameTable)
+            var textures2 = (Animations == null) ? new Dictionary<string, ITexture>() : Animations
+                .SelectMany(x => x.AnimationFrameTable)
                 .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ImportExportName, x => (ITexture) x);

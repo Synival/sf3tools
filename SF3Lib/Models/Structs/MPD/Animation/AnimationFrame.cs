@@ -7,13 +7,13 @@ using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class TextureAnimationFrame : Struct, ITexture {
+    public class AnimationFrame : Struct, ITexture {
         private readonly int _bytesPerProperty;
         private readonly int _imageDataOffsetAddr;
         private readonly int _durationAddr;
 
-        public TextureAnimationFrame(
-            IByteData data, string name, int address, bool is32Bit, int frameNum, IMPD_File mpdFile, TextureAnimation animation
+        public AnimationFrame(
+            IByteData data, string name, int address, bool is32Bit, int frameNum, IMPD_File mpdFile, AnimationStruct animation
         ) : base(data, (int) animation.TextureID, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit          = is32Bit;
             Frame            = frameNum;
@@ -34,7 +34,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public string Validate16BitImageData(ushort[,] data) => Chunk3Texture?.Validate16BitImageData(data);
 
         private ITexture Chunk3Texture
-            => MPD_File?.TextureAnimationFrameChunk?.UniqueTextureAnimationFrameTable?.AtOffset(ImageDataOffset);
+            => MPD_File?.AnimationFrameChunk?.UniqueAnimationFrameTable?.AtOffset(ImageDataOffset);
 
         public bool Is32Bit { get; }
 
@@ -67,7 +67,7 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         public string ImportExportName { get; }
         public IMPD_File MPD_File { get; }
-        public TextureAnimation Animation { get; }
+        public AnimationStruct Animation { get; }
 
         public CollectionType Collection => Chunk3Texture?.Collection ?? (CollectionType) (-1);
         public Dictionary<TagKey, TagValue> Tags => Chunk3Texture?.Tags;

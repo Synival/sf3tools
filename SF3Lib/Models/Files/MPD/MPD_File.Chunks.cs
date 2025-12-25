@@ -140,26 +140,42 @@ namespace SF3.Models.Files.MPD {
                 ((Scenario >= ScenarioType.Other) ? 4 : 3);
 
             MeshTextureChunksFirstIndex = PrimaryTextureChunksLastIndex + 1;
-            MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
-                ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
 
-            GroundImageChunk1Index = MeshTextureChunksLastIndex + 1;
-            GroundImageChunk2Index = MeshTextureChunksLastIndex + 2;
+            // Ship2 chunks are in a very order.
+            if (Scenario <= ScenarioType.Ship2) {
+                MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex;
 
-            GroundTilesetChunk1Index        = MeshTextureChunksLastIndex + 1;
-            GroundTilesetChunk2Index        = MeshTextureChunksLastIndex + 2;
-            GroundTileAssignmentChunk1Index = GroundImageChunk2Index + 1;
-            GroundTileAssignmentChunk2Index = GroundImageChunk2Index + 4;
+                GroundImageChunk1Index = 12;
+                GroundImageChunk2Index = 13;
 
-            SkyBoxChunk1Index = GroundImageChunk2Index + 2;
-            SkyBoxChunk2Index = GroundImageChunk2Index + 3;
+                ForegroundTilesetChunk1Index = 15;
+                ForegroundTilesetChunk2Index = 16;
 
-            BackgroundChunk1Index = MeshTextureChunksLastIndex + 1;
-            BackgroundChunk2Index = MeshTextureChunksLastIndex + 2;
+                // TODO: This isn't quite right for Ship2
+                ForegroundTileAssignmentChunkIndex = 17;
+            }
+            else {
+                MeshTextureChunksLastIndex = MeshTextureChunksFirstIndex +
+                    ((Scenario >= ScenarioType.Scenario1) ? 2 : 1);
 
-            ForegroundTilesetChunk1Index = BackgroundChunk2Index + 2;
-            ForegroundTilesetChunk2Index = BackgroundChunk2Index + 3;
-            ForegroundTileAssignmentChunkIndex   = BackgroundChunk2Index + 4;
+                GroundImageChunk1Index = MeshTextureChunksLastIndex + 1;
+                GroundImageChunk2Index = MeshTextureChunksLastIndex + 2;
+
+                GroundTilesetChunk1Index        = MeshTextureChunksLastIndex + 1;
+                GroundTilesetChunk2Index        = MeshTextureChunksLastIndex + 2;
+                GroundTileAssignmentChunk1Index = GroundImageChunk2Index + 1;
+                GroundTileAssignmentChunk2Index = GroundImageChunk2Index + 4;
+
+                SkyBoxChunk1Index = GroundImageChunk2Index + 2;
+                SkyBoxChunk2Index = GroundImageChunk2Index + 3;
+
+                BackgroundChunk1Index = MeshTextureChunksLastIndex + 1;
+                BackgroundChunk2Index = MeshTextureChunksLastIndex + 2;
+
+                ForegroundTilesetChunk1Index = BackgroundChunk2Index + 2;
+                ForegroundTilesetChunk2Index = BackgroundChunk2Index + 3;
+                ForegroundTileAssignmentChunkIndex   = BackgroundChunk2Index + 4;
+            }
         }
 
         private IChunkData[] MakeChunkDatas(ChunkLocation[] chunks) {

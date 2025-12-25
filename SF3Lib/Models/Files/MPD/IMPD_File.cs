@@ -117,7 +117,7 @@ namespace SF3.Models.Files.MPD {
         TextureIDTable SkipTextures { get; }
         ColorTable[] PaletteTables { get; }
         TextureIDTable IndexedTextureTable { get; }
-        TextureAnimationTable TextureAnimations { get; }
+        AnimationTable Animations { get; }
         UnknownUInt16Table Unknown2Table { get; }
         GradientTable GradientTable { get; }
         BoundaryTable BoundariesTable { get; }
@@ -127,7 +127,7 @@ namespace SF3.Models.Files.MPD {
 
         int[] ModelChunkIndices { get; }
 
-        TextureAnimationFrameChunk TextureAnimationFrameChunk { get; }
+        AnimationFrameChunk AnimationFrameChunk { get; }
         SurfaceDataChunk SurfaceDataChunk { get; }
 
         int PrimaryTextureChunksFirstIndex { get; }

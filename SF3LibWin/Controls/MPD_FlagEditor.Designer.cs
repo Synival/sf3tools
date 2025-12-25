@@ -55,7 +55,7 @@
             cb0x0400_HasGroundImage = new CommonLib.Win.Controls.DarkModeCheckBox();
             label0x0800 = new CommonLib.Win.Controls.DarkModeLabel();
             label0x1000 = new CommonLib.Win.Controls.DarkModeLabel();
-            cb0x1000_HasTileBasedBackgroundImage = new CommonLib.Win.Controls.DarkModeCheckBox();
+            cb0x1000_HasTileBasedGroundImage = new CommonLib.Win.Controls.DarkModeCheckBox();
             label0x2000 = new CommonLib.Win.Controls.DarkModeLabel();
             label0x4000 = new CommonLib.Win.Controls.DarkModeLabel();
             cb0x4000_Unused = new CommonLib.Win.Controls.DarkModeCheckBox();
@@ -410,13 +410,13 @@
             // 
             // cb0x1000_HasTileBasedBackgroundImage
             // 
-            cb0x1000_HasTileBasedBackgroundImage.AutoSize = true;
-            cb0x1000_HasTileBasedBackgroundImage.Location = new System.Drawing.Point(54, 351);
-            cb0x1000_HasTileBasedBackgroundImage.Name = "cb0x1000_HasTileBasedBackgroundImage";
-            cb0x1000_HasTileBasedBackgroundImage.Size = new System.Drawing.Size(207, 19);
-            cb0x1000_HasTileBasedBackgroundImage.TabIndex = 15;
-            cb0x1000_HasTileBasedBackgroundImage.Text = "Has Tile-Based Background Image";
-            cb0x1000_HasTileBasedBackgroundImage.UseVisualStyleBackColor = true;
+            cb0x1000_HasTileBasedGroundImage.AutoSize = true;
+            cb0x1000_HasTileBasedGroundImage.Location = new System.Drawing.Point(54, 351);
+            cb0x1000_HasTileBasedGroundImage.Name = "cb0x1000_HasTileBasedGroundImage";
+            cb0x1000_HasTileBasedGroundImage.Size = new System.Drawing.Size(207, 19);
+            cb0x1000_HasTileBasedGroundImage.TabIndex = 15;
+            cb0x1000_HasTileBasedGroundImage.Text = "Has Tile-Based Ground Image";
+            cb0x1000_HasTileBasedGroundImage.UseVisualStyleBackColor = true;
             // 
             // label0x2000
             // 
@@ -478,7 +478,7 @@
             Controls.Add(label0x1000);
             Controls.Add(cb0x2000_NarrowAngleBasedLightmap);
             Controls.Add(cb0x2000_HasBattleSkyBox);
-            Controls.Add(cb0x1000_HasTileBasedBackgroundImage);
+            Controls.Add(cb0x1000_HasTileBasedGroundImage);
             Controls.Add(label0x0800);
             Controls.Add(label0x0400);
             Controls.Add(cb0x0400_HasGroundImage);
@@ -544,7 +544,7 @@
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x0400_HasGroundImage;
         private CommonLib.Win.Controls.DarkModeLabel label0x0800;
         private CommonLib.Win.Controls.DarkModeLabel label0x1000;
-        private CommonLib.Win.Controls.DarkModeCheckBox cb0x1000_HasTileBasedBackgroundImage;
+        private CommonLib.Win.Controls.DarkModeCheckBox cb0x1000_HasTileBasedGroundImage;
         private CommonLib.Win.Controls.DarkModeLabel label0x2000;
         private CommonLib.Win.Controls.DarkModeLabel label0x4000;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x4000_Unused;
