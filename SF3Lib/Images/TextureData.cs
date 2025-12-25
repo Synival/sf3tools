@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Security.Cryptography;
 using CommonLib;
+using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Utils;
-using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Images {
     public class TextureData : ITextureData {
         public TextureData(
-            IByteData data, int address,
-            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent
+            IByteArray data, int address,
+            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
         ) {
             _data              = data;
             _address           = address;
@@ -21,10 +21,11 @@ namespace SF3.Images {
             _palette           = palette;
             _isCompressed      = isCompressed;
             _zeroIsTransparent = zeroIsTransparent;
+            CanSetImage        = canSetImage;
         }
 
-        private IByteData _data;
-        public IByteData Data {
+        private IByteArray _data;
+        public IByteArray Data {
             get => _data;
             set {
                 if (_data != value) {
@@ -115,8 +116,9 @@ namespace SF3.Images {
         public int StoredImageDataSize { get; private set; }
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
-        public virtual bool CanSetImageData8Bit => true;
-        public virtual bool CanSetImageData16Bit => true;
+        public virtual bool CanSetImageData8Bit => CanSetImage;
+        public virtual bool CanSetImageData16Bit => CanSetImage;
+        public virtual bool CanSetImage { get; set; }
 
         public void LoadImageData() {
             // Accessing the getter performs loading.
@@ -238,10 +240,10 @@ namespace SF3.Images {
 
             if (IsCompressed) {
                 var compressedData = Compression.CompressLZSS(newData);
-                Data.Data.SetDataAtTo(Address, compressedData.Length, compressedData);
+                Data.SetDataAtTo(Address, compressedData.Length, compressedData);
             }
             else
-                Data.Data.SetDataAtTo(Address, newData.Length, newData);
+                Data.SetDataAtTo(Address, newData.Length, newData);
 
             Invalidate();
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
@@ -297,7 +299,7 @@ namespace SF3.Images {
                         newData[off++] = (byte) val;
                     }
                 }
-                Data.Data.SetDataAtTo(Address, newData.Length, newData);
+                Data.SetDataAtTo(Address, newData.Length, newData);
 
                 Invalidate();
                 _textureDataBuffer.ImageData16Bit = value;

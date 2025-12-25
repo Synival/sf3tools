@@ -114,7 +114,7 @@ namespace SF3.Models.Structs.CHR {
                 .Where(x => x.ID >= frameMin && x.ID < frameMax)
                 .Select(x => x.Texture)
                 .ToArray();
-            tex = TextureUtils.StackTextures(0, 0, 0, 0, frames);
+            tex = TextureUtils.StackTextures(frames, canSetImage: false);
             _texturesByFrameCount[frameCount] = tex;
 
             var frameTableCount = FrameTable.Length;

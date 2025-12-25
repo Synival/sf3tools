@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Linq;
+using CommonLib.Arrays;
+using CommonLib.Extensions;
+using CommonLib.Utils;
 using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Utils {
     public static class TextureUtils {
-        public static ITextureData StackTextures(CollectionType collection, int id, int frame, int duration, ITextureData[] textures) {
+        public static ITextureData StackTextures(ITextureData[] textures, bool canSetImage) {
             if (textures.Length == 0)
                 return null;
 
@@ -15,13 +18,13 @@ namespace SF3.Utils {
 
             switch (expectedFormat) {
                 case TexturePixelFormat.ABGR1555:
-                    return StackTexturesABGR1555(collection, id, frame, duration, textures);
+                    return StackTexturesABGR1555(textures, canSetImage: canSetImage);
                 default:
                     throw new ArgumentException($"TexturePixelFormat '{expectedFormat}' not supported");
             }
         }
 
-        private static ITextureData StackTexturesABGR1555(CollectionType collection, int id, int frame, int duration, ITextureData[] textures) {
+        private static ITextureData StackTexturesABGR1555(ITextureData[] textures, bool canSetImage) {
             var frameDatas = textures.Select(x => x.ImageData16Bit).ToArray();
             var allData = new ushort[frameDatas.Max(x => x.GetLength(0)), frameDatas.Sum(x => x.GetLength(1))];
 
@@ -33,7 +36,10 @@ namespace SF3.Utils {
                         allData[x, row] = data[x, y];
             }
 
-            return new TextureABGR1555(collection, id, frame, duration, allData);
+            return new TextureData(
+                new ByteArray(allData.To1DArrayTransposed().ToByteArray()), 0, allData.GetLength(0), allData.GetLength(1),
+                TexturePixelFormat.ABGR1555, null, isCompressed: false, zeroIsTransparent: false, canSetImage: canSetImage
+            );
         }
     }
 }

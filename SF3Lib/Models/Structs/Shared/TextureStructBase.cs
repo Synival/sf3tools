@@ -1,4 +1,5 @@
-﻿using CommonLib.Attributes;
+﻿using CommonLib.Arrays;
+using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Images;
@@ -6,7 +7,7 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData {
-        public TextureStructBase(IByteData data, IByteData imageData, int id, string name, int address, int size,
+        public TextureStructBase(IByteData data, IByteArray imageData, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
             _textureData = new TextureStructData(imageData, pixelFormat, isCompressed, zeroIsTransparent, this);
@@ -15,7 +16,7 @@ namespace SF3.Models.Structs.Shared {
 
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
-        : this(data, data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
+        : this(data, data.Data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
 
         public void LoadImageData() => _textureData.LoadImageData();
 

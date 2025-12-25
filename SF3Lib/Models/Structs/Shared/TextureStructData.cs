@@ -1,14 +1,14 @@
-﻿using CommonLib.Imaging;
-using SF3.ByteData;
+﻿using CommonLib.Arrays;
+using CommonLib.Imaging;
 using SF3.Images;
 using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public class TextureStructData : TextureData {
         public TextureStructData(
-            IByteData data, TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent,
+            IByteArray data, TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent,
             TextureStructBase @struct
-        ) : base(data, 0, 0, 0, pixelFormat, null, isCompressed, zeroIsTransparent) {
+        ) : base(data, 0, 0, 0, pixelFormat, null, isCompressed, zeroIsTransparent, true) {
             Struct = @struct;
         }
 
