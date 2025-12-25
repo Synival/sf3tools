@@ -31,10 +31,10 @@ namespace SF3.Models.Structs.DAT {
         [TableViewModelColumn(addressField: null, displayName: nameof(ImageDataOffset), displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffsetViewable {
             get => ImageDataOffset;
-            set => Data.SetWord(_imageDataOffsetAddr, value);
+            set => ImageDataOffset = value;
         }
 
         private readonly Palette _palette;
-        public override Palette Palette { get => _palette; protected set {} }
+        public override Palette Palette { get => _palette; set {} }
     }
 }

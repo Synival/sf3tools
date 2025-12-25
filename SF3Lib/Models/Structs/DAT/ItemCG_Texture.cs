@@ -22,6 +22,6 @@ namespace SF3.Models.Structs.DAT {
         public int ImageDataOffsetView => ImageDataOffset;
 
         private readonly Palette _palette;
-        public override Palette Palette { get => _palette; protected set {} }
+        public override Palette Palette { get => _palette; set {} }
     }
 }

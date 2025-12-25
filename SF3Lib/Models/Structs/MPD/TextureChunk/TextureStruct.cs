@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public override Palette Palette {
             get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2);
-            protected set {}
+            set {}
         }
 
         [TableViewModelColumn(addressField: null, displayName: "Tags", displayOrder: 5, minWidth: 200)]

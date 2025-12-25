@@ -1,10 +1,5 @@
-﻿using System;
-using System.Security.Cryptography;
-using CommonLib.Arrays;
-using CommonLib.Attributes;
-using CommonLib.Extensions;
+﻿using CommonLib.Attributes;
 using CommonLib.Imaging;
-using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Images;
 using SF3.Types;
@@ -14,26 +9,38 @@ namespace SF3.Models.Structs.Shared {
         public TextureStructBase(IByteData data, IByteData imageData, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
-            ImageData         = imageData;
-            PixelFormat       = pixelFormat;
-            BytesPerPixel     = PixelFormat.BytesPerPixel();
-            IsCompressed      = isCompressed;
-            ZeroIsTransparent = zeroIsTransparent;
+            _textureData = new TextureStructData(imageData, pixelFormat, isCompressed, zeroIsTransparent, this);
+            _textureData.ImageDataSet += (s, e) => OnSetImageData();
         }
 
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : this(data, data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
 
-        public void LoadImageData() {
-            // Accessing the getter performs loading.
-            if (BytesPerPixel == 1)
-                _ = ImageData8Bit;
-            else
-                _ = ImageData16Bit;
+        public void LoadImageData() => _textureData.LoadImageData();
+
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB1555(highlightEndcodes);
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB8888(highlightEndcodes);
+        public void InvalidateImage() => _textureData.Invalidate();
+        public string Validate8BitImageData(byte[,] data, Palette palette) => _textureData.Validate8BitImageData(data, palette);
+        public string Validate16BitImageData(ushort[,] data) => _textureData.Validate16BitImageData(data);
+
+        public byte[] BitmapDataARGB1555 => _textureData.BitmapDataARGB1555;
+        public byte[] BitmapDataARGB8888 => _textureData.BitmapDataARGB8888;
+        public int BytesPerPixel => _textureData.BytesPerPixel;
+        public bool IsCompressed => _textureData.IsCompressed;
+        public bool ZeroIsTransparent => _textureData.ZeroIsTransparent;
+
+        public byte[,] ImageData8Bit => _textureData.ImageData8Bit;
+        public void SetImageData8Bit(byte[,] data, Palette palette) => _textureData.SetImageData8Bit(data, palette);
+
+        public ushort[,] ImageData16Bit {
+            get => _textureData.ImageData16Bit;
+            set => _textureData.ImageData16Bit = value;
         }
 
-        protected abstract void OnSetImageData();
+        public bool CanSetImageData8Bit => _textureData.CanSetImageData8Bit;
+        public bool CanSetImageData16Bit => _textureData.CanSetImageData16Bit;
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
         public abstract int Width { get; set; }
@@ -42,201 +49,28 @@ namespace SF3.Models.Structs.Shared {
         public abstract int Height { get; set; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
-        public int StoredImageDataSize { get; private set; }
-
-        public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
-        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
-            if (BytesPerPixel == 1) {
-                if (_textureDataBuffer.BitmapDataARGB1555 == null)
-                    _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-                return _textureDataBuffer.BitmapDataARGB1555;
-            }
-            else if (highlightEndcodes) {
-                if (_textureDataBuffer.BitmapDataARGB1555_Endcodes == null)
-                    _textureDataBuffer.BitmapDataARGB1555_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true);
-                return _textureDataBuffer.BitmapDataARGB1555_Endcodes;
-            }
-            else {
-                if (_textureDataBuffer.BitmapDataARGB1555 == null)
-                    _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false);
-                return _textureDataBuffer.BitmapDataARGB1555;
-            }
-        }
-
-        public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
-        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
-            if (BytesPerPixel == 1) {
-                if (_textureDataBuffer.BitmapDataARGB8888 == null)
-                    _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-                return _textureDataBuffer.BitmapDataARGB8888;
-            }
-            else if (highlightEndcodes) {
-                if (_textureDataBuffer.BitmapDataARGB8888_Endcodes == null)
-                    _textureDataBuffer.BitmapDataARGB8888_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true);
-                return _textureDataBuffer.BitmapDataARGB8888_Endcodes;
-            }
-            else {
-                if (_textureDataBuffer.BitmapDataARGB8888 == null)
-                    _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false);
-                return _textureDataBuffer.BitmapDataARGB8888;
-            }
-        }
-
-        public virtual void InvalidateImage() => _textureDataBuffer.Invalidate();
-
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette);
-            if (error != null)
-                throw new ArgumentException(error);
-
-            if (BytesPerPixel != 1)
-                throw new InvalidOperationException("Incoming texture must be 1 byte-per-pixel");
-            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                throw new ArgumentException("Incoming data dimensions must match specified width/height");
-
-            var rawData = new byte[Width * Height];
-            var off = 0;
-            for (var y = 0; y < Height; y++)
-                for (var x = 0; x < Width; x++)
-                    rawData[off++] = data[x, y];
-
-            if (IsCompressed) {
-                var compressedData = Compression.CompressLZSS(rawData);
-                Data.Data.SetDataAtTo(ImageDataOffset, compressedData.Length, compressedData);
-            }
-            else
-                Data.Data.SetDataAtTo(ImageDataOffset, rawData.Length, rawData);
-
-            InvalidateImage();
-            _textureDataBuffer.ImageData8Bit = data;
-            Palette = palette;
-            OnSetImageData();
-        }
-
-        public string Validate8BitImageData(byte[,] data, Palette palette) {
-            if (!CanSetImageData8Bit)
-                return "Not supported";
-            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
-            return null;
-        }
-
-        public string Validate16BitImageData(ushort[,] data) {
-            if (!CanSetImageData16Bit)
-                return "Not supported";
-            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
-            if (IsCompressed)
-                return "Changing compressed images is not yet supported";
-            return null;
-        }
-
-        public IByteData ImageData { get; }
+        public int StoredImageDataSize => _textureData.StoredImageDataSize;
 
         [TableViewModelColumn(addressField: null, displayOrder: 3, displayFormat: "X4")]
-        public int ImageDataSize => Width * Height * BytesPerPixel;
+        public int ImageDataSize => _textureData.ImageDataSize;
 
         [TableViewModelColumn(addressField: null, displayName: "Pixel Format", displayOrder: 4)]
-        public TexturePixelFormat PixelFormat { get; }
+        public TexturePixelFormat PixelFormat => _textureData.PixelFormat;
 
-        public int BytesPerPixel { get; }
-        public bool IsCompressed { get; }
-        public bool ZeroIsTransparent { get; }
+        [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 225)]
+        public string Hash => _textureData.Hash;
 
-        [TableViewModelColumn(addressField: null, displayOrder: 4, minWidth: 225)]
-        public string Hash {
-            get {
-                if (_textureDataBuffer.Hash == null) {
-                    using (var md5 = MD5.Create())
-                        _textureDataBuffer.Hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
-                }
-                return _textureDataBuffer.Hash;
-            }
+        public virtual int ImageDataOffset {
+            get => _textureData.Address;
+            set => _textureData.Address = value;
         }
 
-        public byte[,] ImageData8Bit {
-            get {
-                if (_textureDataBuffer.ImageData8Bit != null)
-                    return _textureDataBuffer.ImageData8Bit;
-                if (BytesPerPixel != 1)
-                    throw new InvalidOperationException();
+        protected abstract void OnSetImageData();
 
-                var storedSize = ImageDataSize;
-                var inputData = IsCompressed
-                    ? Compression.DecompressLZSS(ImageData.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                    : ImageData.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, ImageData.Length - ImageDataOffset));
-                var outputData = new byte[Width, Height];
-
-                var off = 0;
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
-                        var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
-                        outputData[x, y] = texPixel;
-                    }
-                }
-
-                StoredImageDataSize = storedSize;
-                _textureDataBuffer.ImageData8Bit = outputData;
-                return outputData;
-            }
-        }
-
-        public ushort[,] ImageData16Bit {
-            get {
-                if (_textureDataBuffer.ImageData16Bit != null)
-                    return _textureDataBuffer.ImageData16Bit;
-                if (BytesPerPixel != 2)
-                    throw new InvalidOperationException();
-
-                var storedSize = ImageDataSize;
-                var inputData = (IsCompressed
-                    ? Compression.DecompressLZSS(ImageData.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                    : ImageData.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, ImageData.Length - ImageDataOffset)))
-                    .ToUShorts();
-
-                var outputData = new ushort[Width, Height];
-
-                var off = 0;
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
-                        var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
-                        outputData[x, y] = texPixel;
-                    }
-                }
-
-                StoredImageDataSize = storedSize;
-                _textureDataBuffer.ImageData16Bit = outputData;
-                return outputData;
-            }
-            set {
-                var error = Validate16BitImageData(value);
-                if (error != null)
-                    throw new ArgumentException(error);
-
-                var off = 0;
-                var newData = new ByteData.ByteData(new ByteArray(Width * Height * 2));
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
-                        newData.SetWord(off, value[x, y]);
-                        off += 2;
-                    }
-                }
-                ImageData.Data.SetDataAtTo(ImageDataOffset, newData.Length, newData.GetDataCopyOrReference());
-
-                InvalidateImage();
-                _textureDataBuffer.ImageData16Bit = value;
-                OnSetImageData();
-            }
-        }
-
-        public bool CanSetImageData8Bit => BytesPerPixel == 1 && CanLoadImage;
-        public bool CanSetImageData16Bit => BytesPerPixel == 2 && CanLoadImage;
-
-        public abstract int ImageDataOffset { get; set; }
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
-        public abstract Palette Palette { get; protected set; }
+        public abstract Palette Palette { get; set; }
 
-        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
+        protected TextureStructData _textureData;
     }
 }

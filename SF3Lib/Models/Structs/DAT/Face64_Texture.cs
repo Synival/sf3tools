@@ -20,6 +20,6 @@ namespace SF3.Models.Structs.DAT {
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffsetViewable => ImageDataOffset;
 
-        public override Palette Palette { get => null; protected set {} }
+        public override Palette Palette { get => null; set {} }
     }
 }
