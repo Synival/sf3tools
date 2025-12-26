@@ -21,7 +21,7 @@ namespace SF3.Models.Structs.Shared {
         : this(data, data.Data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
 
         public void LoadImageData() {
-            _textureData.Address = StructImageDataOffset;
+            _textureData.ImageDataOffset = StructImageDataOffset;
             _textureData.Width   = StructWidth;
             _textureData.Height  = StructHeight;
             _textureData.Palette = StructPalette;
@@ -75,7 +75,7 @@ namespace SF3.Models.Structs.Shared {
             get => StructImageDataOffset;
             set {
                 StructImageDataOffset = value;
-                _textureData.Address = StructImageDataOffset;
+                _textureData.ImageDataOffset = StructImageDataOffset;
             }
         }
 

@@ -10,11 +10,11 @@ using SF3.Types;
 namespace SF3.Images {
     public class TextureData : ITextureData {
         public TextureData(
-            IByteArray data, int address,
+            IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
         ) {
             _data              = data;
-            _address           = address;
+            _imageDataOffset   = imageDataOffset;
             _width             = width;
             _height            = height;
             _pixelFormat       = pixelFormat;
@@ -35,12 +35,12 @@ namespace SF3.Images {
             }
         }
 
-        private int _address;
-        public virtual int Address {
-            get => _address;
+        private int _imageDataOffset;
+        public virtual int ImageDataOffset {
+            get => _imageDataOffset;
             set {
-                if (_address != value) {
-                    _address = value;
+                if (_imageDataOffset != value) {
+                    _imageDataOffset = value;
                     Invalidate();
                 }
             }
@@ -201,13 +201,13 @@ namespace SF3.Images {
                     return _textureDataBuffer.ImageData8Bit;
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
-                if (Address < 0 || (!IsCompressed && Address + ImageDataSize > Data.Length))
+                if (ImageDataOffset < 0 || (!IsCompressed && ImageDataOffset + ImageDataSize > Data.Length))
                     return null;
 
                 var storedSize = ImageDataSize;
                 var inputData = IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), Address, null, out storedSize, out var _)
-                    : Data.GetDataCopyAt(Address, Math.Min(storedSize, Data.Length - Address));
+                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                    : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
                 var outputData = new byte[Width, Height];
 
                 var off = 0;
@@ -242,10 +242,10 @@ namespace SF3.Images {
 
             if (IsCompressed) {
                 var compressedData = Compression.CompressLZSS(newData);
-                Data.SetDataAtTo(Address, compressedData.Length, compressedData);
+                Data.SetDataAtTo(ImageDataOffset, compressedData.Length, compressedData);
             }
             else
-                Data.SetDataAtTo(Address, newData.Length, newData);
+                Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
 
             Invalidate();
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
@@ -262,13 +262,13 @@ namespace SF3.Images {
                     return _textureDataBuffer.ImageData16Bit;
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
-                if (Address < 0 || (!IsCompressed && Address + ImageDataSize > Data.Length))
+                if (ImageDataOffset < 0 || (!IsCompressed && ImageDataOffset + ImageDataSize > Data.Length))
                     return null;
 
                 var storedSize = ImageDataSize;
                 var inputData = (IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), Address, null, out storedSize, out var _)
-                    : Data.GetDataCopyAt(Address, Math.Min(storedSize, Data.Length - Address)))
+                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                    : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
                     .ToUShorts();
 
                 var outputData = new ushort[Width, Height];
@@ -303,7 +303,7 @@ namespace SF3.Images {
                         newData[off++] = (byte) val;
                     }
                 }
-                Data.SetDataAtTo(Address, newData.Length, newData);
+                Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
 
                 Invalidate();
                 _textureDataBuffer.ImageData16Bit = value;
