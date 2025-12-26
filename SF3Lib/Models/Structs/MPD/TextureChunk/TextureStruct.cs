@@ -32,6 +32,8 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
             PixelFormatKnown = pixelFormat != TexturePixelFormat.Unknown;
             MPD_File = mpdFile;
+
+            LoadImageData();
         }
 
         private static TexturePixelFormat GuessPixelFormat(TexturePixelFormat inputFormat, IByteData data, int address, int? nextImageDataOffset) {
@@ -76,40 +78,28 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public int ChunkIndex { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 0)]
-        public override int Width {
+        protected override int StructWidth {
             get => Data.GetByte(_widthAddr);
-            set {
-                Data.SetByte(_widthAddr, (byte) value);
-                InvalidateImage();
-            }
+            set => Data.SetByte(_widthAddr, (byte) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_heightAddr), displayOrder: 1)]
-        public override int Height {
+        protected override int StructHeight {
             get => Data.GetByte(_heightAddr);
-            set {
-                Data.SetByte(_heightAddr, (byte) value);
-                InvalidateImage();
-            }
+            set => Data.SetByte(_heightAddr, (byte) value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_imageDataOffsetAddr), displayOrder: 2, displayFormat: "X4")]
-        public override int ImageDataOffset {
+        protected override int StructImageDataOffset {
             get => Data.GetWord(_imageDataOffsetAddr);
-            set {
-                Data.SetWord(_imageDataOffsetAddr, value);
-                InvalidateImage();
-            }
+            set => Data.SetWord(_imageDataOffsetAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
         public bool PixelFormatKnown { get; }
         public IMPD_File MPD_File { get; }
 
-        public override Palette Palette {
+        protected override Palette StructPalette {
             get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2);
             set {}
         }

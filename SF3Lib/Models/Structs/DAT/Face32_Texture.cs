@@ -1,5 +1,4 @@
-﻿using CommonLib.Attributes;
-using CommonLib.Imaging;
+﻿using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
@@ -17,24 +16,15 @@ namespace SF3.Models.Structs.DAT {
 
         protected override void OnSetImageData() {}
 
-        public override int ImageDataOffset {
+        protected override int StructImageDataOffset {
             get => Data.GetDouble(_imageDataOffsetAddr);
-            set {
-                Data.SetDouble(_imageDataOffsetAddr, value);
-                InvalidateImage();
-            }
+            set => Data.SetDouble(_imageDataOffsetAddr, value);
         }
 
         public override bool HasImage => ImageDataOffset != -1;
         public override bool CanLoadImage => HasImage && !IsCompressed;
 
-        [TableViewModelColumn(addressField: null, displayName: nameof(ImageDataOffset), displayOrder: 2, displayFormat: "X4")]
-        public int ImageDataOffsetViewable {
-            get => ImageDataOffset;
-            set => ImageDataOffset = value;
-        }
-
         private readonly Palette _palette;
-        public override Palette Palette { get => _palette; set {} }
+        protected override Palette StructPalette { get => _palette; set {} }
     }
 }

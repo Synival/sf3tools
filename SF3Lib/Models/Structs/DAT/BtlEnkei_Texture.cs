@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.DAT {
             LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
         }
 
-        public override int ImageDataOffset { get => HasImage ? (PaletteImageOffset + 0x200) : 0; set {} }
+        protected override int StructImageDataOffset { get => HasImage ? (PaletteImageOffset + 0x200) : 0; set {} }
         public override bool HasImage => PaletteImageOffset != 0;
         public override bool CanLoadImage => HasImage;
         public override int PaletteOffset => PaletteImageOffset;

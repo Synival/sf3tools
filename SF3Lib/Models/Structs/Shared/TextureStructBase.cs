@@ -1,4 +1,5 @@
-﻿using CommonLib.Arrays;
+﻿using System;
+using CommonLib.Arrays;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
@@ -10,7 +11,8 @@ namespace SF3.Models.Structs.Shared {
         public TextureStructBase(IByteData data, IByteArray imageData, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
-            _textureData = new TextureStructData(imageData, pixelFormat, isCompressed, zeroIsTransparent, this);
+            _textureData = new TextureData(imageData, 0, 0, 0, pixelFormat, null,
+                isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true);
             _textureData.ImageDataSet += (s, e) => OnSetImageData();
         }
 
@@ -18,13 +20,35 @@ namespace SF3.Models.Structs.Shared {
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : this(data, data.Data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
 
-        public void LoadImageData() => _textureData.LoadImageData();
+        public void LoadImageData() {
+            _textureData.Address = StructImageDataOffset;
+            _textureData.Width   = StructWidth;
+            _textureData.Height  = StructHeight;
+            _textureData.Palette = StructPalette;
+            _textureData.LoadImageData();
+        }
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB8888(highlightEndcodes);
         public void InvalidateImage() => _textureData.Invalidate();
-        public string Validate8BitImageData(byte[,] data, Palette palette) => _textureData.Validate8BitImageData(data, palette);
-        public string Validate16BitImageData(ushort[,] data) => _textureData.Validate16BitImageData(data);
+
+        public string Validate8BitImageData(byte[,] data, Palette palette) {
+            var error = _textureData.Validate8BitImageData(data, palette);
+            if (error != null)
+                return error;
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
+            return null;
+        }
+
+        public string Validate16BitImageData(ushort[,] data) {
+            var error = _textureData.Validate16BitImageData(data);
+            if (error != null)
+                return error;
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
+            return null;
+        }
 
         public byte[] BitmapDataARGB1555 => _textureData.BitmapDataARGB1555;
         public byte[] BitmapDataARGB8888 => _textureData.BitmapDataARGB8888;
@@ -33,21 +57,51 @@ namespace SF3.Models.Structs.Shared {
         public bool ZeroIsTransparent => _textureData.ZeroIsTransparent;
 
         public byte[,] ImageData8Bit => _textureData.ImageData8Bit;
-        public void SetImageData8Bit(byte[,] data, Palette palette) => _textureData.SetImageData8Bit(data, palette);
+        public void SetImageData8Bit(byte[,] data, Palette palette) {
+            _textureData.SetImageData8Bit(data, palette);
+            StructPalette = palette;
+        }
 
         public ushort[,] ImageData16Bit {
             get => _textureData.ImageData16Bit;
             set => _textureData.ImageData16Bit = value;
         }
 
-        public bool CanSetImageData8Bit => _textureData.CanSetImageData8Bit;
-        public bool CanSetImageData16Bit => _textureData.CanSetImageData16Bit;
+        public bool CanSetImageData8Bit => _textureData.CanSetImageData8Bit && BytesPerPixel == 1 && CanLoadImage && HasImage;
+        public bool CanSetImageData16Bit => _textureData.CanSetImageData16Bit && BytesPerPixel == 2 && CanLoadImage && HasImage;
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0)]
-        public abstract int Width { get; set; }
+        [TableViewModelColumn(addressField: null, displayOrder: 0.5f, displayFormat: "X4")]
+        public int ImageDataOffset {
+            get => StructImageDataOffset;
+            set {
+                StructImageDataOffset = value;
+                _textureData.Address = StructImageDataOffset;
+            }
+        }
+
+        protected abstract int StructImageDataOffset { get; set; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: 0.5f)]
+        public int Width {
+            get => StructWidth;
+            set {
+                StructWidth = value;
+                _textureData.Width = StructWidth;
+            }
+        }
+
+        protected abstract int StructWidth { get; set; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 1)]
-        public abstract int Height { get; set; }
+        public int Height {
+            get => StructHeight;
+            set {
+                StructHeight = value;
+                _textureData.Height = StructHeight;
+            }
+        }
+
+        protected abstract int StructHeight { get; set; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
         public int StoredImageDataSize => _textureData.StoredImageDataSize;
@@ -61,17 +115,21 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 225)]
         public string Hash => _textureData.Hash;
 
-        public virtual int ImageDataOffset {
-            get => _textureData.Address;
-            set => _textureData.Address = value;
-        }
-
         protected abstract void OnSetImageData();
 
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
-        public abstract Palette Palette { get; set; }
 
-        protected TextureStructData _textureData;
+        public Palette Palette {
+            get => StructPalette;
+            set {
+                StructPalette = value;
+                _textureData.Palette = StructPalette;
+            }
+        }
+
+        protected abstract Palette StructPalette { get; set; }
+
+        protected TextureData _textureData;
     }
 }

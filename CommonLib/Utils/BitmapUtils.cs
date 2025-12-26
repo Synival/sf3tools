@@ -7,6 +7,9 @@ using static CommonLib.Imaging.PixelConversion;
 namespace CommonLib.Utils {
     public static class BitmapUtils {
         public static byte[] ConvertABGR1555DataToARGB1555BitmapData(ushort[,] imageData, bool highlightEndcodes = false) {
+            if (imageData == null)
+                return null;
+
             var imageDataBytes = new byte[imageData.GetLength(0) * imageData.GetLength(1) * 2];
             var pos = 0;
 
@@ -34,6 +37,9 @@ namespace CommonLib.Utils {
         }
 
         public static byte[] ConvertABGR1555DataToARGB8888BitmapData(ushort[,] imageData, bool highlightEndcodes = false) {
+            if (imageData == null)
+                return null;
+
             var imageDataBytes = new byte[imageData.GetLength(0) * imageData.GetLength(1) * 4];
             var pos = 0;
 
@@ -66,6 +72,9 @@ namespace CommonLib.Utils {
         }
 
         public static byte[] ConvertIndexedDataToARGB1555BitmapData(byte[,] imageData, Palette palette, bool zeroIsTransparent) {
+            if (imageData == null)
+                return null;
+
             var imageDataBytes = new byte[imageData.GetLength(0) * imageData.GetLength(1) * 2];
             var pos = 0;
             for (var y = 0; y < imageData.GetLength(1); y++) {
@@ -79,6 +88,9 @@ namespace CommonLib.Utils {
         }
 
         public static byte[] ConvertIndexedDataToARGB8888BitmapData(byte[,] imageData, Palette palette, bool zeroIsTransparent) {
+            if (imageData == null)
+                return null;
+
             var imageDataBytes = new byte[imageData.GetLength(0) * imageData.GetLength(1) * 4];
             var pos = 0;
             for (var y = 0; y < imageData.GetLength(1); y++) {

@@ -18,6 +18,7 @@ namespace SF3.Models.Structs.MPD.Animation {
             _width   = width;
             _height  = height;
             IsReferenced = isReferenced;
+
             LoadImageData();
         }
 
@@ -26,22 +27,19 @@ namespace SF3.Models.Structs.MPD.Animation {
         public IMPD_File MPD_File { get; }
 
         private int _width;
-        [TableViewModelColumn(displayOrder: 0)]
-        public override int Width { get => _width; set {} }
+        protected override int StructWidth { get => _width; set {} }
 
         private int _height;
-        [TableViewModelColumn(displayOrder: 1)]
-        public override int Height { get => _height; set {} }
+        protected override int StructHeight { get => _height; set {} }
 
-        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4", isReadOnly: true)]
-        public override int ImageDataOffset { get => Address; set {} }
+        protected override int StructImageDataOffset { get => Address; set {} }
 
         [TableViewModelColumn(displayOrder: 2.1f)]
         public bool IsReferenced { get; }
 
         public override bool HasImage => true;
         public override bool CanLoadImage => false;
-        public override Palette Palette { get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2); set {} }
+        protected override Palette StructPalette { get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2); set {} }
         public CollectionType Collection => CollectionType.Primary;
         public int Frame => 0;
         public int Duration => 0;

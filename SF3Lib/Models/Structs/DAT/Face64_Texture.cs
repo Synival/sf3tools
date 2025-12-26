@@ -1,5 +1,4 @@
-﻿using CommonLib.Attributes;
-using CommonLib.Imaging;
+﻿using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
@@ -13,13 +12,10 @@ namespace SF3.Models.Structs.DAT {
 
         protected override void OnSetImageData() {}
 
-        public override int ImageDataOffset { get => Address; set {} }
+        protected override int StructImageDataOffset { get => Address; set {} }
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
 
-        [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
-        public int ImageDataOffsetViewable => ImageDataOffset;
-
-        public override Palette Palette { get => null; set {} }
+        protected override Palette StructPalette { get => null; set {} }
     }
 }

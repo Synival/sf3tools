@@ -187,7 +187,7 @@ namespace SF3.Images {
 
         public string Hash {
             get {
-                if (_textureDataBuffer.Hash == null) {
+                if (_textureDataBuffer.Hash == null && BitmapDataARGB1555 != null) {
                     using (var md5 = MD5.Create())
                         _textureDataBuffer.Hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
                 }
@@ -201,6 +201,8 @@ namespace SF3.Images {
                     return _textureDataBuffer.ImageData8Bit;
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
+                if (Address < 0 || (!IsCompressed && Address + ImageDataSize > Data.Length))
+                    return null;
 
                 var storedSize = ImageDataSize;
                 var inputData = IsCompressed
@@ -260,6 +262,8 @@ namespace SF3.Images {
                     return _textureDataBuffer.ImageData16Bit;
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
+                if (Address < 0 || (!IsCompressed && Address + ImageDataSize > Data.Length))
+                    return null;
 
                 var storedSize = ImageDataSize;
                 var inputData = (IsCompressed

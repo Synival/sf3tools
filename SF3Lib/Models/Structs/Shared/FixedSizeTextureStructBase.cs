@@ -1,5 +1,4 @@
-﻿using CommonLib.Attributes;
-using SF3.ByteData;
+﻿using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
@@ -12,11 +11,9 @@ namespace SF3.Models.Structs.Shared {
         }
 
         private int _width;
-        [TableViewModelColumn(addressField: null, displayOrder: 0)]
-        public override int Width { get => _width; set {} }
+        protected override int StructWidth { get => _width; set {} }
 
         private int _height;
-        [TableViewModelColumn(addressField: null, displayOrder: 1)]
-        public override int Height { get => _height; set {} }
+        protected override int StructHeight { get => _height; set {} }
     }
 }
