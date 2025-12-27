@@ -93,14 +93,18 @@ namespace SF3.Images {
         /// </summary>
         /// <param name="data">8-bit data to check for validity.</param>
         /// <param name="palette">Palette for 8-bit data to set.</param>
+        /// <param name="oldStoredSize">The size of the image data currently stored in the texture.</param>
+        /// <param name="newStoredSize">The new size of the image data to store in the texture.</param>
         /// <returns>Returns 'null' if 'data' and 'palette' is valid, or a string with an error if not.</returns>
-        string Validate8BitImageData(byte[,] data, Palette palette);
+        string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize);
 
         /// <summary>
         /// Checks 'data' to see if it's valid to be set for 'ImageData16Bit'. Returns a non-null value if 'data' is invalid.
         /// </summary>
         /// <param name="data">16-bit data to check for validity.</param>
+        /// <param name="oldStoredSize">The size of the image data currently stored in the texture.</param>
+        /// <param name="newStoredSize">The new size of the image data to store in the texture.</param>
         /// <returns>Returns 'null' if the data is valid, or a string with an error if not.</returns>
-        string Validate16BitImageData(ushort[,] data);
+        string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize);
     }
 }

@@ -13,6 +13,19 @@ namespace SF3.Models.Structs.Shared {
         : base(data, id, name, address, size) {
             _textureData = new TextureData(imageData, 0, 0, 0, pixelFormat, null,
                 isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true);
+
+            _textureData.Add8BitValidator((texData, _1, _2, _3) => {
+                return (texData.GetLength(0) != Width || texData.GetLength(1) != Height)
+                    ? $"Incoming texture height ({texData.GetLength(0)}x{texData.GetLength(1)}) should be {Width}x{Height}"
+                    : null;
+            });
+
+            _textureData.Add16BitValidator((texData, _1, _2) => {
+                return (texData.GetLength(0) != Width || texData.GetLength(1) != Height)
+                    ? $"Incoming texture height ({texData.GetLength(0)}x{texData.GetLength(1)}) should be {Width}x{Height}"
+                    : null;
+            });
+
             _textureData.ImageDataSet += (s, e) => OnSetImageData();
         }
 
@@ -32,23 +45,11 @@ namespace SF3.Models.Structs.Shared {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB8888(highlightEndcodes);
         public void InvalidateImage() => _textureData.Invalidate();
 
-        public string Validate8BitImageData(byte[,] data, Palette palette) {
-            var error = _textureData.Validate8BitImageData(data, palette);
-            if (error != null)
-                return error;
-            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
-            return null;
-        }
+        public virtual string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+            => _textureData.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
 
-        public string Validate16BitImageData(ushort[,] data) {
-            var error = _textureData.Validate16BitImageData(data);
-            if (error != null)
-                return error;
-            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
-            return null;
-        }
+        public virtual string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+            => _textureData.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
         public byte[] BitmapDataARGB1555 => _textureData.BitmapDataARGB1555;
         public byte[] BitmapDataARGB8888 => _textureData.BitmapDataARGB8888;

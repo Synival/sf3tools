@@ -53,7 +53,7 @@ namespace SF3.Images {
             if (_data == data)
                 return;
 
-            var error = Validate8BitImageData(data, palette);
+            var error = Validate8BitImageData(data, palette, Width * Height, data.GetLength(0) * data.GetLength(1));
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -86,8 +86,11 @@ namespace SF3.Images {
             return _bitmapDataARGB8888;
         }
 
-        public string Validate8BitImageData(byte[,] data, Palette palette) => CanSetImageData8Bit ? ReplaceValidator(data, palette) : " Not supported";
-        public string Validate16BitImageData(ushort[,] data) => "Not applicable; 8-bit images cannot be set with 16-bit ABGR data";
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+            => CanSetImageData8Bit ? ReplaceValidator(data, palette) : " Not supported";
+
+        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+            => "Not applicable; 8-bit images cannot be set with 16-bit ABGR data";
 
         private string _hash = null;
         private readonly string _hashPrefix;

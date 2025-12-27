@@ -19,10 +19,23 @@ namespace SF3.Models.Structs.MPD.Animation {
             _height  = height;
             IsReferenced = isReferenced;
 
+            _textureData.Add8BitValidator((_1, _2, _3, newStoredSize) => {
+                return (newStoredSize > _originalStoredSize)
+                    ? $"New stored image size ({newStoredSize} / 0x{newStoredSize:X2}) cannot be larger than existing stored image size ({_originalStoredSize} / 0x{_originalStoredSize:X2})"
+                    : null;
+            });
+
+            _textureData.Add16BitValidator((_1, _2, newStoredSize) => {
+                return (newStoredSize > _originalStoredSize)
+                    ? $"New stored image size ({newStoredSize} / 0x{newStoredSize:X2}) cannot be larger than existing stored image size ({_originalStoredSize} / 0x{_originalStoredSize:X2})"
+                    : null;
+            });
+
             LoadImageData();
+            _originalStoredSize = StoredImageDataSize;
         }
 
-        protected override void OnSetImageData() => throw new System.NotImplementedException();
+        protected override void OnSetImageData() {}
 
         public IMPD_File MPD_File { get; }
 
@@ -38,11 +51,13 @@ namespace SF3.Models.Structs.MPD.Animation {
         public bool IsReferenced { get; }
 
         public override bool HasImage => true;
-        public override bool CanLoadImage => false;
+        public override bool CanLoadImage => true;
         protected override Palette StructPalette { get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.CreatePalette(2); set {} }
         public CollectionType Collection => CollectionType.Primary;
         public int Frame => 0;
         public int Duration => 0;
         public Dictionary<TagKey, TagValue> Tags => null;
+
+        private readonly int _originalStoredSize;
     }
 }

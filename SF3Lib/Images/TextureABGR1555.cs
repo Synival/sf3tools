@@ -54,7 +54,7 @@ namespace SF3.Images {
                 if (_data == value)
                     return;
 
-                var error = Validate16BitImageData(value);
+                var error = Validate16BitImageData(value, Width * Height * 2, value.GetLength(0) * value.GetLength(1) * 2);
                 if (error != null)
                     throw new ArgumentException(error);
 
@@ -98,8 +98,11 @@ namespace SF3.Images {
             }
         }
 
-        public string Validate8BitImageData(byte[,] data, Palette palette) => "Not applicable; 16-bit images cannot be set with 8-bit indexed data";
-        public string Validate16BitImageData(ushort[,] data) => CanSetImageData16Bit ? ReplaceValidator(data) : "Not supported";
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+            => "Not applicable; 16-bit images cannot be set with 8-bit indexed data";
+
+        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+            => CanSetImageData16Bit ? ReplaceValidator(data) : "Not supported";
 
         private string _hash = null;
         private readonly string _hashPrefix;

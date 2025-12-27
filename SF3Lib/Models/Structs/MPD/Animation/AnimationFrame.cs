@@ -30,8 +30,12 @@ namespace SF3.Models.Structs.MPD.Animation {
         public void SetImageData8Bit(byte[,] data, Palette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB8888(highlightEndcodes);
-        public string Validate8BitImageData(byte[,] data, Palette palette) => Chunk3Texture?.Validate8BitImageData(data, palette);
-        public string Validate16BitImageData(ushort[,] data) => Chunk3Texture?.Validate16BitImageData(data);
+
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+            => Chunk3Texture?.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
+
+        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+            => Chunk3Texture?.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
         private ITexture Chunk3Texture
             => MPD_File?.AnimationFrameChunk?.UniqueAnimationFrameTable?.AtOffset(ImageDataOffset);

@@ -74,8 +74,8 @@ namespace SF3.Win.Views {
             => Image.Save(filename, format);
 
         public virtual void LoadImage(string filename) {
-            var image = Image.FromFile(filename);
-            LoadImageAction?.Invoke(image, filename);
+            using (var image = Image.FromFile(filename))
+                LoadImageAction?.Invoke(image, filename);
         }
 
         public override void RefreshContent() {

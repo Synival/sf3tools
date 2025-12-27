@@ -53,39 +53,25 @@ namespace SF3.Win.Views {
                 var bitmap = image.CreateIndexedBitmap();
                 var data = bitmap.Get2DDataIndexed();
                 var palette = bitmap.GetPalette();
-                var validatorResult = _texture.Validate8BitImageData(data, palette);
 
-                if (validatorResult == null) {
-                    try {
-                        _texture.SetImageData8Bit(data, palette);
-                    }
-                    catch (Exception e) {
-                        Logger.LogException(e);
-                        validatorResult = e.Message;
-                    }
+                try {
+                    _texture.SetImageData8Bit(data, palette);
                 }
-
-                if (validatorResult != null) {
-                    MessageUtils.ErrorMessage(validatorResult);
+                catch (Exception e) {
+                    Logger.LogException(e);
+                    MessageUtils.ErrorMessage(e.Message);
                     return;
                 }
             }
             else if (canReplaceTexture16Bit) {
                 var data = image.Get2DDataABGR1555();
-                var validatorResult = _texture.Validate16BitImageData(data);
 
-                if (validatorResult == null) {
-                    try {
-                        _texture.ImageData16Bit = data;
-                    }
-                    catch (Exception e) {
-                        Logger.LogException(e);
-                        validatorResult = e.Message;
-                    }
+                try {
+                    _texture.ImageData16Bit = data;
                 }
-
-                if (validatorResult != null) {
-                    MessageUtils.ErrorMessage(validatorResult);
+                catch (Exception e) {
+                    Logger.LogException(e);
+                    MessageUtils.ErrorMessage(e.Message);
                     return;
                 }
             }
