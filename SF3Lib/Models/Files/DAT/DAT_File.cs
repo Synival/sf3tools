@@ -24,7 +24,7 @@ namespace SF3.Models.Files.DAT {
         public static DAT_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType scenario, DAT_FileType fileType) {
             var newFile = new DAT_File(data, nameGetterContext, scenario, fileType);
             if (!newFile.Init())
-                throw new InvalidOperationException("Couldn't initialize CHR_File");
+                throw new InvalidOperationException("Couldn't initialize " + newFile.GetType().Name);
             return newFile;
         }
 

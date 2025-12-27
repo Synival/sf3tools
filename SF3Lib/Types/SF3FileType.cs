@@ -22,8 +22,8 @@ namespace SF3.Types {
         CHP,
         DAT_FACE32,
         DAT_FACE64,
-        //DAT_KAO,
         DAT_ITEM_CG,
         DAT_BTLENKEI,
+        KAO,
     }
 }

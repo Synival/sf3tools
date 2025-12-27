@@ -9,6 +9,7 @@ using SF3.Models.Files;
 using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.Models.Files.DAT;
+using SF3.Models.Files.KAO;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
@@ -94,12 +95,12 @@ namespace SF3.Utils {
                     return SF3FileType.DAT_FACE32;
                 if (filenameUpper.Contains("FACE64"))
                     return SF3FileType.DAT_FACE64;
-                //if (filenameUpper.Contains("KAO"))
-                //    return SF3FileType.DAT_KAO;
                 if (filenameUpper.Contains("ITEM_CG"))
                     return SF3FileType.DAT_ITEM_CG;
                 if (filenameUpper.Contains("BTLENKEI"))
                     return SF3FileType.DAT_BTLENKEI;
+                if (filenameUpper.Contains("KAO"))
+                    return SF3FileType.KAO;
             }
 
             // Couldn't figure it out; it's unknown.
@@ -199,9 +200,9 @@ namespace SF3.Utils {
                 case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
                 case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);
                 case SF3FileType.DAT_FACE64:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE64);
-                //case SF3FileType.DAT_KAO:     return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.KAO);
                 case SF3FileType.DAT_ITEM_CG: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.ITEM_CG);
                 case SF3FileType.DAT_BTLENKEI: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.BTLENKEI);
+                case SF3FileType.KAO:     return KAO_File.Create(byteData, ngc, scenario);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
@@ -231,9 +232,9 @@ namespace SF3.Utils {
                 case SF3FileType.CHP:     return "CHP Files";
                 case SF3FileType.DAT_FACE32:  return "FACE32*.DAT Files";
                 case SF3FileType.DAT_FACE64:  return "FACE64*.DAT Files";
-                //case SF3FileType.DAT_KAO:     return "KAO*.DAT Files";
                 case SF3FileType.DAT_ITEM_CG: return "ITEM_CG.DAT File";
                 case SF3FileType.DAT_BTLENKEI: return "BTLENKEI.DAT File";
+                case SF3FileType.KAO:     return "KAO*.DAT Files";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -263,9 +264,9 @@ namespace SF3.Utils {
                 case SF3FileType.CHP:     return "*.CHP";
                 case SF3FileType.DAT_FACE32:  return "*FACE32*.DAT";
                 case SF3FileType.DAT_FACE64:  return "*FACE64*.DAT";
-                //case SF3FileType.DAT_KAO:     return "*KAO*.DAT";
                 case SF3FileType.DAT_ITEM_CG: return "*ITEM_CG*.DAT";
                 case SF3FileType.DAT_BTLENKEI: return "*BTLENKEI*.DAT";
+                case SF3FileType.KAO:     return "*KAO*.DAT";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -295,9 +296,9 @@ namespace SF3.Utils {
                 case "*.CHP":         return new SF3FileType[] { SF3FileType.CHP };
                 case "*FACE32*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE32 };
                 case "*FACE64*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE64 };
-                //case "*KAO*.DAT":     return new SF3FileType[] { SF3FileType.DAT_KAO };
                 case "*ITEM_CG*.DAT": return new SF3FileType[] { SF3FileType.DAT_ITEM_CG };
                 case "*BTLENKEI*.DAT": return new SF3FileType[] { SF3FileType.DAT_BTLENKEI };
+                case "*KAO*.DAT":     return new SF3FileType[] { SF3FileType.KAO };
                 default:
                     return new SF3FileType[] {};
             }
