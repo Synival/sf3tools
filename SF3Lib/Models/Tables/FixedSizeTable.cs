@@ -15,7 +15,7 @@ namespace SF3.Models.Tables {
         /// <summary>
         /// Loads all rows until Size is reached.
         /// </summary>
-        /// <param name="makeTFunc">Factory function to make the model.</param>
+        /// <param name="makeTFunc">Factory function to make the model with parameters 'id' and 'address'.</param>
         /// <returns>'true' on success, 'false' if any or exception occurred during reading.</returns>
         public bool Load(Func<int, int, T> makeTFunc) {
             _rows = new T[Size];
