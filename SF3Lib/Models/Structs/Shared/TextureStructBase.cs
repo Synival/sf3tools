@@ -71,7 +71,7 @@ namespace SF3.Models.Structs.Shared {
         public bool CanSetImageData8Bit => _textureData.CanSetImageData8Bit && BytesPerPixel == 1 && CanLoadImage && HasImage;
         public bool CanSetImageData16Bit => _textureData.CanSetImageData16Bit && BytesPerPixel == 2 && CanLoadImage && HasImage;
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0.5f, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: null, displayOrder: 0.5f, displayFormat: "-X4")]
         public int ImageDataOffset {
             get => StructImageDataOffset;
             set {
