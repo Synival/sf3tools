@@ -54,9 +54,12 @@ namespace SF3.Models.Tables.MPD.Animation {
                         (width, height, isIndexed) = (infoOut.Width, infoOut.Height, infoOut.IsIndexed);
                         isKnown = true;
                     }
-                    else
-                    // Otherwise, make a big, stupid guess.
-                        (width, height, isIndexed) = GuessDimensions(size);
+                    else {
+                        // Otherwise, make a big, stupid guess.
+                        int bytesPerPixel;
+                        (width, height, bytesPerPixel) = MathHelpers.GuessImageDimensions(size, canBe8Bit: true, canBe16Bit: true);
+                        isIndexed = bytesPerPixel == 1;
+                    }
 
                     var newModel = new UniqueAnimationFrame(Data, id, $"TexAnimFrame_{id:D3}", address, width, height, isIndexed, isKnown, MPD_File);
 
@@ -79,33 +82,6 @@ namespace SF3.Models.Tables.MPD.Animation {
                 FrameByOffset = _rows.ToDictionary(x => x.ImageDataOffset, x => x);
 
             return true;
-        }
-
-        private (int Width, int Height, bool IsIndexed) GuessDimensions(int size) {
-            if (size % 2 == 0) {
-                var size2 = size / 2;
-                var divisor = (int) Math.Sqrt(size2);
-                while (divisor > 1) {
-                    var quotient = size2 / (double) divisor;
-                    if (quotient == (int) quotient)
-                        return (divisor, (int) quotient, false);
-                    divisor--;
-                }
-            }
-            else {
-                var divisor = (int) Math.Sqrt(size);
-                while (divisor > 1) {
-                    var quotient = size / (double) divisor;
-                    if (quotient == (int) quotient)
-                        return (divisor, (int) quotient, true);
-                    divisor--;
-                }
-            }
-
-            if (size % 2 == 0)
-                return (1, size / 2, false);
-            else
-                return (1, size, true);
         }
 
         public ITexture AtOffset(int offset)
