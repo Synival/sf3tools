@@ -1,24 +1,31 @@
-﻿using System.Windows.Forms;
+﻿using System;
 using SF3.Models.Files.KAO;
 using SF3.Models.Structs.KAO;
-using SF3.Models.Tables.KAO;
 
 namespace SF3.Win.Views.KAO {
-    public class KAO_View : TabView {
-        public KAO_View(string name, IKAO_File file) : base(name) {
+    public class KAO_View : ArrayView<FaceChunk, FaceChunkView> {
+        public KAO_View(string name, IKAO_File file) : base(
+            name, file?.FaceChunkTable?.Rows, nameof(FaceChunk.Name),
+            new FaceChunkView("Faces", null, file.NameGetterContext)
+        ) {
             File = file;
         }
 
-        public override Control Create() {
-            if (base.Create() == null)
-                return null;
-
-            var ngc = File.NameGetterContext;
-            CreateChild(new TextureDataTableView<FaceChunk, FaceChunkTable>("Faces", File.FaceChunkTable, ngc));
-
-            return Control;
+        protected override void OnSelectValue(object sender, EventArgs args) {
+            var selectedChunk = (FaceChunk) DropdownList.SelectedValue;
+            ElementView.Chunk = selectedChunk;
         }
 
-        public IKAO_File File { get; }
+        private IKAO_File _file = null;
+        public IKAO_File File {
+            get => _file;
+            set {
+                if (_file != value) {
+                    _file = value;
+                    Elements = value?.FaceChunkTable?.Rows;
+                }
+            }
+        }
+
     }
 }

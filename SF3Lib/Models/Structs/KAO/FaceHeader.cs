@@ -55,25 +55,47 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public short GetLayerOffset(int layer, int index) {
-            if (layer < 0 || layer > 2)
+            if (layer < 0 || layer > 3)
                 throw new ArgumentOutOfRangeException(nameof(layer));
-            if (index < 0 || (layer == 0 && index > 3) || (layer == 1 && index > 6))
+            if (index < 0 || (layer == 0 && index != 0) || (layer == 1 && index > 3) || (layer == 2 && index > 6))
                 throw new ArgumentOutOfRangeException(nameof(index));
-            return (short) Data.GetWord(layer * 0x06 + index * 0x02 + _layer1Offset1Addr);
+            return (layer == 0) ? (short) 0 : (short) Data.GetWord((layer - 1) * 0x06 + index * 0x02 + _layer1Offset1Addr);
         }
 
-        public short[] GetAllLayerOffsets() {
-            return new short[] {
-                (short) Data.GetWord(_layer1Offset1Addr + 0x00),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x02),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x04),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x06),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x08),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x0A),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x0C),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x0E),
-                (short) Data.GetWord(_layer1Offset1Addr + 0x10),
-            };
+        public void SetLayerOffset(int layer, int index, short value) {
+            if (layer < 1 || layer > 3)
+                throw new ArgumentOutOfRangeException(nameof(layer));
+            if (index < 1 || (layer == 1 && index > 3) || (layer == 2 && index > 6))
+                throw new ArgumentOutOfRangeException(nameof(index));
+            Data.SetWord((layer - 1) * 0x06 + index * 0x02 + _layer1Offset1Addr, value);
+        }
+
+        public int GetLayerWidth(int layer)
+            => (layer == 0) ? Width : (layer == 1) ? Layer1Width : (layer == 2) ? Layer2Width : throw new ArgumentOutOfRangeException(nameof(layer));
+
+        public void SetLayerWidth(int layer, int value) {
+            if (layer == 0)
+                Width = value;
+            else if (layer == 1)
+                Layer1Width = (ushort) value;
+            else if (layer == 2)
+                Layer2Width = (ushort) value;
+            else
+                throw new ArgumentOutOfRangeException(nameof(layer));
+        }
+
+        public int GetLayerHeight(int layer)
+            => (layer == 0) ? Height : (layer == 1) ? Layer1Height : (layer == 2) ? Layer2Height : throw new ArgumentOutOfRangeException(nameof(layer));
+
+        public void SetLayerHeight(int layer, int value) {
+            if (layer == 0)
+                Height = value;
+            else if (layer == 1)
+                Layer1Height = (ushort) value;
+            else if (layer == 2)
+                Layer2Height = (ushort) value;
+            else
+                throw new ArgumentOutOfRangeException(nameof(layer));
         }
 
         [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 1)]
