@@ -9188,8 +9188,19 @@ namespace BrightIdeasSoftware
             string fmt = this.AspectToStringFormat;
             if (String.IsNullOrEmpty(fmt))
                 return value.ToString();
-            else
-                return String.Format(fmt, value);
+            else {
+                if (fmt.StartsWith("{0:-X")) {
+                    var subFmt = "{0:X" + fmt.Substring(5);
+                    switch (value) {
+                        case sbyte sb: return (sb < 0) ? "-" + String.Format(subFmt, -sb) : String.Format(subFmt, sb);
+                        case short s:  return (s  < 0) ? "-" + String.Format(subFmt, -s)  : String.Format(subFmt, s);
+                        case int   i:  return (i  < 0) ? "-" + String.Format(subFmt, -i)  : String.Format(subFmt, i);
+                        default: return String.Format(subFmt, Convert.ToInt32(value));
+                    }
+                }
+                else
+                    return String.Format(fmt, value);
+            }
         }
 
         #endregion

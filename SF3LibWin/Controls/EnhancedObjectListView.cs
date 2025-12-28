@@ -325,7 +325,8 @@ namespace SF3.Win.Controls {
                 control.Font = EnhancedOLVRenderer.GetCellFont(e.Column.AspectToStringFormat ?? "");
 
                 // Ensure that strings displayed in hex format are edited in hex format.
-                if (e.Column.AspectToStringFormat?.StartsWith("{0:X") == true)
+                var format = e.Column.AspectToStringFormat ?? "";
+                if (format.StartsWith("{0:X") || format.StartsWith("{0:-X"))
                     control.Hexadecimal = true;
             }
         }

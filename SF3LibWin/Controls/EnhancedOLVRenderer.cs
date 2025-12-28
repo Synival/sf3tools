@@ -9,15 +9,13 @@ namespace SF3.Win.Controls {
     public class EnhancedOLVRenderer : BaseRenderer {
         public static readonly EnhancedOLVRenderer Instance = new EnhancedOLVRenderer();
         public static readonly Font HexFont = new Font("Courier New", Control.DefaultFont.Size);
-
-        private static readonly Color _readOnlyColor = Color.FromArgb(96, 96, 96);
         private static readonly Font _defaultFont = Control.DefaultFont;
 
         private Font _currentRenderFont = Control.DefaultFont;
         private Color _currentRenderColor = Color.Black;
 
         public static Font GetCellFont(string formatString)
-            => formatString.StartsWith("{0:X") ? HexFont : _defaultFont;
+            => (formatString.StartsWith("{0:X") || formatString.StartsWith("{0:-X")) ? HexFont : _defaultFont;
 
         public override bool RenderSubItem(DrawListViewSubItemEventArgs e, Graphics g, Rectangle cellBounds, object rowObject) {
             var eolv = (EnhancedObjectListView) e.Item.ListView;
