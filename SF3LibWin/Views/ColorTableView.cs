@@ -9,9 +9,9 @@ using SF3.Models.Tables.Shared;
 namespace SF3.Win.Views {
     public class ColorTableView : ControlSpaceView {
         public ColorTableView(string name, ColorTable table, INameGetterContext nameGetterContext) : base(name) {
-            Table     = table;
-            TableView = new TableView("Table", table, nameGetterContext);
+            TableView   = new TableView("Table", table, nameGetterContext, typeof(Models.Structs.Shared.Color));
             PaletteView = new PaletteView("Texture");
+            Table       = table;
 
             PaletteView.ImportPalette += (s, colors) => {
                 int max = Math.Min(Table.Length, colors.Length);
@@ -44,15 +44,23 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateBitmap() {
-            var colors = Table.Select(x => x.ColorABGR1555).ToArray();
+            var colors = Table?.Select(x => x.ColorABGR1555)?.ToArray() ?? [0x0000];
             PaletteView.SetColors(colors);
         }
 
-        public readonly ColorTable Table = null;
         public readonly TableView TableView = null;
         public readonly PaletteView PaletteView = null;
 
-        public Bitmap PaletteBitmap => PaletteView.PaletteBitmap;
+        public ColorTable Table {
+            get => (ColorTable) TableView.Table;
+            set {
+                if (TableView.Table != value) {
+                    TableView.Table = value;
+                    UpdateBitmap();
+                }
+            }
+        }
 
+        public Bitmap PaletteBitmap => PaletteView.PaletteBitmap;
     }
 }
