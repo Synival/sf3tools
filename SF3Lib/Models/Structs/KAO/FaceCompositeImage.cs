@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
@@ -22,11 +23,44 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: -2.8f, displayGroup: "Metadata")]
         public int Index { get; }
 
+        [TableViewModelColumn(displayOrder: 0, displayGroup: "Metadata")]
+        public bool HasImage => Header.GetLayerOffset(Layer, Index) > 0;
+
         public FaceChunk Chunk { get; }
         public FaceHeader Header => Chunk.Header;
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            // TODO: Fancy composite setting thing
+            var error = Validate8BitImageData(data, palette, 0, 0);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            var baseImage = Chunk.ImageTable[0];
+            var layerImage = Chunk.ImageTable.FirstOrDefault(x => x.Layer == Layer && x.Index == Index);
+            if (baseImage?.ImageData8Bit == null || layerImage?.ImageData8Bit == null)
+                throw new InvalidOperationException("Cannot set empty image");
+
+            var baseWidth   = baseImage.Width;
+            var baseHeight  = baseImage.Width;
+            var layerWidth  = layerImage.Width;
+            var layerHeight = layerImage.Height;
+
+            var baseData = baseImage.ImageData8Bit;
+            var newData  = new byte[layerWidth, layerHeight];
+
+            // Only set differences
+            var (offsetX, offsetY) = GetFaceImageOffset(baseWidth, baseHeight, layerImage);
+            var (compareX, compareY) = (0, offsetY);
+            for (int toY = 0; toY < layerHeight; toY++, compareY++) {
+                compareX = offsetX;
+                for (int toX = 0; toX < layerWidth; toX++, compareX++) {
+                    if (compareX >= 0 && compareX < baseWidth && compareY >= 0 && compareY < baseHeight) {
+                        if (data[compareX, compareY] != baseData[compareX, compareY])
+                            newData[toX, toY] = data[compareX, compareY];
+                    }
+                }
+            }
+
+            layerImage.SetImageData8Bit(newData, layerImage.Palette);
             Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
@@ -36,43 +70,64 @@ namespace SF3.Models.Structs.KAO {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true);
 
-        // TODO: Implement!
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
-            => "Not implemented";
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+            if (!HasImage)
+                return "No image available";
+            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
+            return null;
+        }
 
-        // TODO: Implement!
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
-            => "Not implemented";
+            => "Image must be in 8-bit indexed format";
 
         private byte[,] GetCompositeImageData() {
             var baseImage = Chunk.ImageTable[0];
-
-            var baseImageData = baseImage.ImageData8Bit;
-            var baseWidth  = baseImageData.GetLength(0);
-            var baseHeight = baseImageData.GetLength(1);
-
-            var compositeImageData = baseImageData.Clone() as byte[,];
+            if (baseImage?.ImageData8Bit == null)
+                return null;
 
             var addImage = Chunk.ImageTable.FirstOrDefault(x => x.Layer == Layer && x.Index == Index);
-            var dataToAdd = addImage?.ImageData8Bit;
-            if (dataToAdd != null) {
-                var addWidth  = dataToAdd.GetLength(0);
-                var addHeight = dataToAdd.GetLength(1);
+            if (addImage?.ImageData8Bit == null)
+                return null;
 
-                var offsetX = baseWidth / 2  - addWidth / 2  + addImage.X;
-                var offsetY = baseHeight / 2 - addHeight / 2 + addImage.Y;
+            return CreateCompositeImageData(baseImage, new FaceImage[] { addImage });
+        }
 
-                var toY = offsetY;
-                for (int fromY = 0; fromY < addHeight; fromY++, toY++) {
-                    var toX = offsetX;
-                    for (int fromX = 0; fromX < addWidth; fromX++, toX++) {
-                        if (dataToAdd[fromX, fromY] != 0)
-                            compositeImageData[toX, toY] = dataToAdd[fromX, fromY];
-                    }
+        public static byte[,] CreateCompositeImageData(FaceImage baseImage, IEnumerable<FaceImage> addImages) {
+            var compositeImageData = baseImage.ImageData8Bit.Clone() as byte[,];
+            foreach (var addImage in addImages)
+                AddFaceImageToData(compositeImageData, addImage);
+            return compositeImageData;
+        }
+
+        public static (int X, int Y) GetFaceImageOffset(int baseWidth, int baseHeight, FaceImage addImage) {
+            var addData   = addImage?.ImageData8Bit;
+            var addWidth  = addData.GetLength(0);
+            var addHeight = addData.GetLength(1);
+
+            var offsetX = baseWidth / 2  - addWidth / 2  + addImage.X;
+            var offsetY = baseHeight / 2 - addHeight / 2 + addImage.Y;
+
+            return (offsetX, offsetY);
+       }
+
+        public static void AddFaceImageToData(byte[,] data, FaceImage image) {
+            var width  = data.GetLength(0);
+            var height = data.GetLength(1);
+
+            var addData   = image?.ImageData8Bit;
+            var addWidth  = addData.GetLength(0);
+            var addHeight = addData.GetLength(1);
+
+            var (offsetX, offsetY) = GetFaceImageOffset(width, height, image);
+            var toY = offsetY;
+            for (int fromY = 0; fromY < addHeight; fromY++, toY++) {
+                var toX = offsetX;
+                for (int fromX = 0; fromX < addWidth; fromX++, toX++) {
+                    if (addData[fromX, fromY] != 0 && toX >= 0 && toX < width && toY >= 0 && toX < height)
+                        data[toX, toY] = addData[fromX, fromY];
                 }
             }
-
-            return compositeImageData;
         }
 
         public int BytesPerPixel => 1;
@@ -91,7 +146,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(highlightEndcodes: false);
         public string Hash => "Not Implemented";
         public Palette Palette => Chunk.Palette;
-        public bool CanSetImageData8Bit => true;
+        public bool CanSetImageData8Bit => HasImage;
         public bool CanSetImageData16Bit => false;
         public bool ZeroIsTransparent => true;
 

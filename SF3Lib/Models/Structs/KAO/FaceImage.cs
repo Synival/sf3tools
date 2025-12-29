@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public override bool CanLoadImage => HasImage;
-        public override bool HasImage => Header.GetLayerOffset(Layer, Index) >= 0;
+        public override bool HasImage => Header.GetLayerOffset(Layer, Index) > 0;
 
         protected override int StructImageDataOffset {
             get {

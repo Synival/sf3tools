@@ -18,7 +18,7 @@ namespace SF3.Models.Tables.MPD.Animation {
             return Load((id, address) => {
                 var layer = (id < 3) ? 1 : 2;
                 var index = (id < 3) ? id : (id - 3);
-                return new FaceCompositeImage(Data, id, layer, index, $"{nameof(FaceCompositeImage)}_{layer}_{index}", Chunk);
+                return new FaceCompositeImage(Data, id, layer, index, $"FaceImage_{layer}_{index}", Chunk);
             });
         }
 

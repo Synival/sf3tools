@@ -9,7 +9,7 @@ namespace SF3.Win.Views.KAO {
             Chunk = chunk;
             NameGetterContext = ngc;
 
-            HeaderView     = new DataModelView("Header", Chunk?.Header, ngc, typeof(FaceHeader));
+            HeaderView     = new FaceHeaderView("Header", Chunk, ngc);
             PaletteView    = new ColorTableView("Palette", Chunk?.PaletteTable, NameGetterContext);
             ImageTableView = new TextureDataTableView<FaceImage, FaceImageTable>("Images", Chunk?.ImageTable, ngc);
             CompositeImageTableView = new TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable>("Composite Images", Chunk?.CompositeImageTable, ngc);
@@ -34,7 +34,7 @@ namespace SF3.Win.Views.KAO {
                 if (_chunk != value) {
                     _chunk = value;
 
-                    HeaderView.Model     = _chunk?.Header;
+                    HeaderView.Chunk     = _chunk;
                     PaletteView.Table    = _chunk?.PaletteTable;
                     ImageTableView.Table = _chunk?.ImageTable;
                     CompositeImageTableView.Table = _chunk?.CompositeImageTable;
@@ -43,7 +43,7 @@ namespace SF3.Win.Views.KAO {
         }
 
         public INameGetterContext NameGetterContext { get; }
-        public DataModelView HeaderView { get; }
+        public FaceHeaderView HeaderView { get; }
         public ColorTableView PaletteView { get; }
         public TextureDataTableView<FaceImage, FaceImageTable> ImageTableView { get; }
         public TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable> CompositeImageTableView { get; }

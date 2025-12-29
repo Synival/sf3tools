@@ -50,6 +50,5 @@ namespace SF3.Models.Structs.KAO {
                     image.InvalidateImage();
             }
         }
-
     }
 }

@@ -31,7 +31,7 @@ namespace SF3.Win.Extensions {
         /// <returns>A bitmap image for the texture.</returns>
         public static Bitmap CreateBitmapIndexed(this ITextureData texture) {
             var texBitmapData = texture.ImageData8Bit?.To1DArrayTransposed();
-            if (texBitmapData == null)
+            if (texBitmapData == null || texture.Width < 1 || texture.Height < 1)
                 return null;
 
             var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format8bppIndexed);
@@ -52,7 +52,7 @@ namespace SF3.Win.Extensions {
         /// <returns>A bitmap image for the texture.</returns>
         public static Bitmap CreateBitmapARGB1555(this ITextureData texture, bool highlightEndcodes = false) {
             var texBitmapData = texture.GetBitmapDataARGB1555(highlightEndcodes);
-            if (texBitmapData == null)
+            if (texBitmapData == null || texture.Width < 1 || texture.Height < 1)
                 return null;
 
             var bitmap = new Bitmap(texture.Width, texture.Height, PixelFormat.Format16bppArgb1555);
