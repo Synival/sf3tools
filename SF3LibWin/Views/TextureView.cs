@@ -18,13 +18,19 @@ namespace SF3.Win.Views {
         public override void SaveImage(string filename, ImageFormat format)
             => _texture?.CreateBitmap()?.Save(filename, format);
 
+        public void ReloadImage()
+            => SetImageFromTexture();
+
+        private void SetImageFromTexture()
+            => Image = Texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
+
         private ITextureData _texture = null;
         public ITextureData Texture {
             get => _texture;
             set {
                 if (value != _texture) {
                     _texture = value;
-                    Image = value?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
+                    SetImageFromTexture();
                 }
             }
         }

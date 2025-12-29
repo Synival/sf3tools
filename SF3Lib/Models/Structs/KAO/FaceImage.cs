@@ -43,6 +43,9 @@ namespace SF3.Models.Structs.KAO {
                 return offset >= 0 ? (offset + 0x222) : offset;
             }
             set {
+                if (Layer == 0)
+                    return;
+
                 // Unapply the 0x222 for offsets when setting them.
                 // If the range set is in range (0, 0x221), it's invalid; just use zero.
                 // Negative offsets -- which are functional values -- stay as they are.
@@ -56,6 +59,6 @@ namespace SF3.Models.Structs.KAO {
             set {}
         }
 
-        protected override void OnSetImageData() {}
+        protected override void OnImageUpdated() {}
     }
 }

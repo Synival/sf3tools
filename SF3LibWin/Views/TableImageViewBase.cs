@@ -33,7 +33,7 @@ namespace SF3.Win.Views {
             => UpdateImage();
 
         public void UpdateImage() {
-            var item = (OLVListItem) TableView.OLVControl.SelectedItem;
+            var item = (OLVListItem) TableView.OLVControl?.SelectedItem;
             var frame = (TTableItem) item?.RowObject;
             SetImage(frame);
         }
@@ -57,7 +57,12 @@ namespace SF3.Win.Views {
 
         public TTable Table {
             get => (TTable) TableView.Table;
-            set => TableView.Table = value;
+            set {
+                if (value != TableView.Table) {
+                    TableView.Table = value;
+                    UpdateImage();
+                }
+            }
         }
 
         public TableView TableView { get; }

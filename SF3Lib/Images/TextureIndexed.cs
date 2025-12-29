@@ -128,5 +128,7 @@ namespace SF3.Images {
         /// <param name="palette">Palette to set. Set to 'null' to leave unchanged.</param>
         /// </summary>
         public virtual void ReplaceAction(byte[,] data, Palette palette) => throw new NotImplementedException();
+
+        public event EventHandler Invalidated;
     }
 }

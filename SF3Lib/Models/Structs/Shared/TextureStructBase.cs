@@ -25,8 +25,12 @@ namespace SF3.Models.Structs.Shared {
                     ? $"Incoming texture height ({texData.GetLength(0)}x{texData.GetLength(1)}) should be {Width}x{Height}"
                     : null;
             });
+    
+            // Forward "Invalidated" events from the wrapped _textureData to our own event handler.
+            _textureData.Invalidated += (s, e) => this.Invalidated?.Invoke(this, e);
 
-            _textureData.ImageDataSet += (s, e) => OnSetImageData();
+            // On invalidation, update the image.
+            Invalidated += (s, e) => OnImageUpdated();
         }
 
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
@@ -116,7 +120,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 225)]
         public string Hash => _textureData.Hash;
 
-        protected abstract void OnSetImageData();
+        protected abstract void OnImageUpdated();
 
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
@@ -128,6 +132,8 @@ namespace SF3.Models.Structs.Shared {
                 _textureData.Palette = StructPalette;
             }
         }
+
+        public event EventHandler Invalidated;
 
         protected abstract Palette StructPalette { get; set; }
 

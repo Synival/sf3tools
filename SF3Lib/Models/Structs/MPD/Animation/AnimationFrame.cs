@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
@@ -93,5 +94,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public Palette Palette => Chunk3Texture?.Palette;
         public bool CanSetImageData8Bit => Chunk3Texture?.CanSetImageData8Bit ?? false;
         public bool CanSetImageData16Bit => Chunk3Texture?.CanSetImageData16Bit ?? false;
+
+        public event EventHandler Invalidated;
     }
 }

@@ -135,5 +135,7 @@ namespace SF3.Images {
         /// <param name="data">Data to set.</param>
         /// </summary>
         public virtual void ReplaceAction(ushort[,] data) => throw new NotImplementedException();
+
+        public event EventHandler Invalidated;
     }
 }

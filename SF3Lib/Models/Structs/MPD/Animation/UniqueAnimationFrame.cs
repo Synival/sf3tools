@@ -35,7 +35,7 @@ namespace SF3.Models.Structs.MPD.Animation {
             _originalStoredSize = StoredImageDataSize;
         }
 
-        protected override void OnSetImageData() {}
+        protected override void OnImageUpdated() {}
 
         public IMPD_File MPD_File { get; }
 

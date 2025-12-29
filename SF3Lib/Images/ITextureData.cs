@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using System;
+using CommonLib.Imaging;
 using SF3.Types;
 
 namespace SF3.Images {
@@ -106,5 +107,10 @@ namespace SF3.Images {
         /// <param name="newStoredSize">The new size of the image data to store in the texture.</param>
         /// <returns>Returns 'null' if the data is valid, or a string with an error if not.</returns>
         string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize);
+
+        /// <summary>
+        /// Signal triggered when Invalidated() is run. Listen to this to react to image updates.
+        /// </summary>
+        event EventHandler Invalidated;
     }
 }

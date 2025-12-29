@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.DAT {
             _originalStoredSize = StoredImageDataSize;
         }
 
-        protected override void OnSetImageData() {}
+        protected override void OnImageUpdated() {}
 
         protected override int StructImageDataOffset {
             get => Data.GetDouble(_imageDataOffsetAddr);

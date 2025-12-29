@@ -19,7 +19,7 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
-        protected override void OnSetImageData() {
+        protected override void OnImageUpdated() {
             PaletteImageSize = 0x200 + StoredImageDataSize;
             LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
         }

@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
-        protected override void OnSetImageData() {}
+        protected override void OnImageUpdated() {}
 
         protected override int StructImageDataOffset { get => Address; set {} }
         public override bool HasImage => true;

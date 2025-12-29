@@ -72,9 +72,13 @@ namespace SF3.Images {
             }
         }
 
-        public void Invalidate() {
-            if (_invalidateGuard == 0)
-                _textureDataBuffer.Invalidate();
+        public void Invalidate(bool sendEvent = true) {
+            if (_invalidateGuard > 0)
+                return;
+
+            _textureDataBuffer.Invalidate();
+            if (sendEvent)
+                Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
         public virtual string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
@@ -261,14 +265,14 @@ namespace SF3.Images {
             _height = data.GetLength(1);
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
 
-            Invalidate();
+            Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
                 _textureDataBuffer.ImageData8Bit = data;
                 Palette = palette;
                 StoredImageDataSize = newStoredData.Length;
             }
 
-            ImageDataSet?.Invoke(this, EventArgs.Empty);
+            Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
         public ushort[,] ImageData16Bit {
@@ -322,13 +326,13 @@ namespace SF3.Images {
                 Height = value.GetLength(1);
                 Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
 
-                Invalidate();
+                Invalidate(sendEvent: false);
                 using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
                     _textureDataBuffer.ImageData16Bit = value;
                     StoredImageDataSize = newStoredData.Length;
                 }
 
-                ImageDataSet?.Invoke(this, EventArgs.Empty);
+                Invalidated?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -337,6 +341,6 @@ namespace SF3.Images {
         private List<Validator8Bit> _validators8Bit = new List<Validator8Bit>();
         private List<Validator16Bit> _validators16Bit = new List<Validator16Bit>();
 
-        public event EventHandler ImageDataSet;
+        public event EventHandler Invalidated;
     }
 }
