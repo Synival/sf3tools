@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
+using CommonLib.Extensions;
 using CommonLib.Win.DarkMode;
 
 namespace SF3.Win.Controls {
@@ -33,7 +35,11 @@ namespace SF3.Win.Controls {
                 var h = (int) (_image.Height * imageScale);
                 using (var pen = new Pen(DarkModeContext.Enabled ? DarkModeColors.BorderColor : Color.Black))
                     e.Graphics.DrawRectangle(pen, new Rectangle(1, 1, w + 1, h + 1));
-                e.Graphics.DrawImage(Image, 1, 1, w, h);
+
+                if (ZeroIsTransparent && _image.PixelFormat == PixelFormat.Format8bppIndexed)
+                    e.Graphics.DrawImage(_image.CreateARGB8888Bitmap(zeroIsTransparent: true), 1, 1, w, h);
+                else
+                    e.Graphics.DrawImage(_image, 1, 1, w, h);
             }
         }
 
@@ -70,6 +76,10 @@ namespace SF3.Win.Controls {
                 }
             }
         }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ZeroIsTransparent { get; set; }
 
         private DarkModeControlContext<ImageControl> DarkModeContext { get; set; }
     }

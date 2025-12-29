@@ -34,7 +34,14 @@ namespace SF3.Win.Controls {
             set => imageControl.ImageScale = value;
         }
 
-        [Browsable(true)]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool ZeroIsTransparent {
+            get => imageControl.ZeroIsTransparent;
+            set => imageControl.ZeroIsTransparent = value;
+        }
+
+        [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image Image {
             get => imageControl.Image;
