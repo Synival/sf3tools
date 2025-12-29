@@ -79,6 +79,11 @@ namespace SF3.Images {
         Palette Palette { get; }
 
         /// <summary>
+        /// When true, 8-bit indexed textures have a transparent pixel for value 0.
+        /// </summary>
+        bool ZeroIsTransparent { get; }
+
+        /// <summary>
         /// When 'true', the variable 'ImageData8Bit' can be set.
         /// </summary>
         bool CanSetImageData8Bit { get; }

@@ -93,6 +93,7 @@ namespace SF3.Models.Structs.KAO {
         public Palette Palette => Chunk.Palette;
         public bool CanSetImageData8Bit => true;
         public bool CanSetImageData16Bit => false;
+        public bool ZeroIsTransparent => true;
 
         public event EventHandler Invalidated;
     }

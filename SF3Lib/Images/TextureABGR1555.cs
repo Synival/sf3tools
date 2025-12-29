@@ -122,6 +122,7 @@ namespace SF3.Images {
 
         public bool CanSetImageData8Bit => false;
         public virtual bool CanSetImageData16Bit => false;
+        public bool ZeroIsTransparent => false;
 
         /// <summary>
         /// Checker to see if 16-bit ABGR1555 data can be set/imported.
