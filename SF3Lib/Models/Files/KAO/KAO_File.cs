@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
@@ -25,9 +26,14 @@ namespace SF3.Models.Files.KAO {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var tables = new ITable[] {
+            var tables = new List<ITable> {
                 (FaceChunkTable = FaceChunkTable.Create(Data, nameof(FaceChunkTable), 0))
             };
+            foreach (var chunk in FaceChunkTable) {
+                tables.Add(chunk.PaletteTable);
+                tables.Add(chunk.ImageTable);
+                tables.Add(chunk.CompositeImageTable);
+            }
 
             foreach (var face in FaceChunkTable) {
                 face.Data.IsModifiedChanged += (s, e) => {
@@ -36,7 +42,7 @@ namespace SF3.Models.Files.KAO {
                 };
             }
 
-            return tables;
+            return tables.ToArray();
         }
 
         public override bool OnFinish() {

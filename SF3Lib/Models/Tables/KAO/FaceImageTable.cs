@@ -9,7 +9,7 @@ namespace SF3.Models.Tables.MPD.Animation {
         }
 
         public override int TerminatorSize => 0;
-        public override bool IsContiguous => true;
+        public override bool IsContiguous => false;
 
         public static FaceImageTable Create(IByteData data, string name, FaceChunk chunk)
             => Create(() => new FaceImageTable(data, name, chunk));

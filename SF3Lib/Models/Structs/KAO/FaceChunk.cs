@@ -12,9 +12,10 @@ namespace SF3.Models.Structs.KAO {
             ActualAddress      = actualAddress;
             CompressedData     = compressedData;
 
-            Header = new FaceHeader(data, 0, nameof(FaceHeader), 0);
-            PaletteTable = ColorTable.Create(Data, "Palette", 0x22, 0x100);
-            ImageTable = FaceImageTable.Create(Data, nameof(FaceImageTable), this);
+            Header              = new FaceHeader(data, 0, nameof(FaceHeader), 0);
+            PaletteTable        = ColorTable.Create(Data, "Palette", 0x22, 0x100);
+            ImageTable          = FaceImageTable.Create(Data, nameof(FaceImageTable), this);
+            CompositeImageTable = FaceCompositeImageTable.Create(Data, nameof(FaceCompositeImageTable), this);
 
             Header.OnDimensionsChanged += (s, e) => {
                 ImageTable[0].InvalidateImage();
@@ -24,6 +25,7 @@ namespace SF3.Models.Structs.KAO {
         public FaceHeader Header { get; }
         public ColorTable PaletteTable { get; }
         public FaceImageTable ImageTable { get; }
+        public FaceCompositeImageTable CompositeImageTable { get; }
 
         [TableViewModelColumn(displayOrder: -1.5f, displayFormat: "X4", displayGroup: "Metadata")]
         public int ActualAddress { get; }

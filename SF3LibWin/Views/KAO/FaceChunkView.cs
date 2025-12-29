@@ -12,6 +12,7 @@ namespace SF3.Win.Views.KAO {
             HeaderView     = new DataModelView("Header", Chunk?.Header, ngc, typeof(FaceHeader));
             PaletteView    = new ColorTableView("Palette", Chunk?.PaletteTable, NameGetterContext);
             ImageTableView = new TextureDataTableView<FaceImage, FaceImageTable>("Images", Chunk?.ImageTable, ngc);
+            CompositeImageTableView = new TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable>("Composite Images", Chunk?.CompositeImageTable, ngc);
         }
 
         public override Control Create() {
@@ -21,6 +22,7 @@ namespace SF3.Win.Views.KAO {
             CreateChild(HeaderView);
             CreateChild(PaletteView);
             CreateChild(ImageTableView);
+            CreateChild(CompositeImageTableView);
 
             return Control;
         }
@@ -35,6 +37,7 @@ namespace SF3.Win.Views.KAO {
                     HeaderView.Model     = _chunk?.Header;
                     PaletteView.Table    = _chunk?.PaletteTable;
                     ImageTableView.Table = _chunk?.ImageTable;
+                    CompositeImageTableView.Table = _chunk?.CompositeImageTable;
                 }
             }
         }
@@ -43,5 +46,6 @@ namespace SF3.Win.Views.KAO {
         public DataModelView HeaderView { get; }
         public ColorTableView PaletteView { get; }
         public TextureDataTableView<FaceImage, FaceImageTable> ImageTableView { get; }
+        public TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable> CompositeImageTableView { get; }
     }
 }

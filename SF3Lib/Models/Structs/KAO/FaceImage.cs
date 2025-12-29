@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Attributes;
+using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
@@ -30,6 +31,24 @@ namespace SF3.Models.Structs.KAO {
         protected override int StructHeight {
             get => Header.GetLayerHeight(Layer);
             set => Header.SetLayerHeight(Layer, (ushort) value);
+        }
+
+        [TableViewModelColumn(displayOrder: 10, minWidth: 50)]
+        public int X {
+            get => Header.GetLayerX(Layer);
+            set {
+                if (Layer != 0)
+                    Header.SetLayerX(Layer, value);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 11, minWidth: 50)]
+        public int Y {
+            get => Header.GetLayerY(Layer);
+            set {
+                if (Layer != 0)
+                    Header.SetLayerY(Layer, value);
+            }
         }
 
         public override bool CanLoadImage => HasImage;

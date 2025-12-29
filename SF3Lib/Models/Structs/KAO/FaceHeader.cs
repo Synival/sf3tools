@@ -98,6 +98,30 @@ namespace SF3.Models.Structs.KAO {
                 throw new ArgumentOutOfRangeException(nameof(layer));
         }
 
+        public int GetLayerX(int layer) 
+            => (layer == 0) ? 0 : (layer == 1) ? Layer1X : (layer == 2) ? Layer2X : throw new ArgumentOutOfRangeException(nameof(layer));
+
+        public void SetLayerX(int layer, int value) {
+            if (layer == 1)
+                Layer1X = (sbyte) value;
+            else if (layer == 2)
+                Layer2X = (sbyte) value;
+            else
+                throw new ArgumentOutOfRangeException(nameof(layer));
+        }
+
+        public int GetLayerY(int layer) 
+            => (layer == 0) ? 0 : (layer == 1) ? Layer1Y : (layer == 2) ? Layer2Y : throw new ArgumentOutOfRangeException(nameof(layer));
+
+        public void SetLayerY(int layer, int value) {
+            if (layer == 1)
+                Layer1Y = (sbyte) value;
+            else if (layer == 2)
+                Layer2Y = (sbyte) value;
+            else
+                throw new ArgumentOutOfRangeException(nameof(layer));
+        }
+
         [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 1)]
         [BulkCopy]
         public int Width {
