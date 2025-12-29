@@ -71,6 +71,20 @@ namespace CommonLib.Utils {
             return imageDataBytes;
         }
 
+        public static byte[] ConvertIndexedDataToARGB1555BitmapData(byte[] imageData, Palette palette, bool zeroIsTransparent) {
+            if (imageData == null)
+                return null;
+
+            var imageDataBytes = new byte[imageData.Length * 2];
+            var pos = 0;
+            for (var i = 0; i < imageData.Length; i++) {
+                var newBits = IndexedToARGB1555(imageData[i], palette, zeroIsTransparent);
+                imageDataBytes[pos++] = (byte) ((newBits >> 0) & 0xFF);
+                imageDataBytes[pos++] = (byte) ((newBits >> 8) & 0xFF);
+            }
+            return imageDataBytes;
+        }
+
         public static byte[] ConvertIndexedDataToARGB1555BitmapData(byte[,] imageData, Palette palette, bool zeroIsTransparent) {
             if (imageData == null)
                 return null;
@@ -83,6 +97,22 @@ namespace CommonLib.Utils {
                     imageDataBytes[pos++] = (byte) ((newBits >> 0) & 0xFF);
                     imageDataBytes[pos++] = (byte) ((newBits >> 8) & 0xFF);
                 }
+            }
+            return imageDataBytes;
+        }
+
+        public static byte[] ConvertIndexedDataToARGB8888BitmapData(byte[] imageData, Palette palette, bool zeroIsTransparent) {
+            if (imageData == null)
+                return null;
+
+            var imageDataBytes = new byte[imageData.Length * 4];
+            int pos = 0;
+            for (var i = 0; i < imageData.Length; i++) {
+                var newBits = IndexedToARGB8888(imageData[i], palette, zeroIsTransparent);
+                imageDataBytes[pos++] = (byte) ((newBits >>  0) & 0xFF);
+                imageDataBytes[pos++] = (byte) ((newBits >>  8) & 0xFF);
+                imageDataBytes[pos++] = (byte) ((newBits >> 16) & 0xFF);
+                imageDataBytes[pos++] = (byte) ((newBits >> 24) & 0xFF);
             }
             return imageDataBytes;
         }

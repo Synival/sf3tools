@@ -127,9 +127,9 @@ namespace CommonLib.Extensions {
             return readBytes;
         }
 
-        public static byte[] GetBitmapDataBGRA8888(this Bitmap bitmap) {
+        public static byte[] GetBitmapDataBGRA8888(this Bitmap bitmap, bool zeroIsTransparent = false) {
             if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
-                using (bitmap = bitmap.CreateARGB8888Bitmap())
+                using (bitmap = bitmap.CreateARGB8888Bitmap(zeroIsTransparent))
                     return GetBitmapDataBGRA8888(bitmap);
 
             var readBytes = new byte[bitmap.Width * bitmap.Height * 4];
@@ -140,9 +140,9 @@ namespace CommonLib.Extensions {
             return readBytes;
         }
 
-        public static ushort[] GetDataABGR1555(this Bitmap bitmap) {
+        public static ushort[] GetDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
             var outputData = new ushort[bitmap.Width * bitmap.Height];
-            var inputData = bitmap.GetBitmapDataBGRA8888();
+            var inputData = bitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
 
             int pos = 0, outPos = 0;
             for (var y = 0; y < bitmap.Height; y++) {
@@ -169,9 +169,9 @@ namespace CommonLib.Extensions {
         public static byte[,] Get2DDataIndexed(this Bitmap bitmap)
             => bitmap.GetDataIndexed().To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
 
-        public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap) {
+        public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
             var outputData = new ushort[bitmap.Width, bitmap.Height];
-            var inputData = bitmap.GetBitmapDataBGRA8888();
+            var inputData = bitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
 
             int pos = 0;
             for (var y = 0; y < bitmap.Height; y++) {

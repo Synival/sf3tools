@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 
 namespace CommonLib.Extensions {
     public static class ImageExtensions {
@@ -20,21 +21,42 @@ namespace CommonLib.Extensions {
             return bitmap;
         }
 
-        public static Bitmap CreateARGB8888Bitmap(this Image image) {
+        public static Bitmap CreateARGB8888Bitmap(this Image image, bool zeroIsTransparent = false) {
             var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb);
-            using (var graphics = Graphics.FromImage(bitmap)) {
-                graphics.DrawImage(image, 0, 0);
-                graphics.Flush();
+
+            // Try to get raw data if possible.
+            byte[] newData = null;
+            if (image is Bitmap imageAsBitmap) {
+                switch (imageAsBitmap.PixelFormat) {
+                    case PixelFormat.Format8bppIndexed:
+                        newData = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(imageAsBitmap.GetBitmapDataIndexed(), imageAsBitmap.GetPalette(), zeroIsTransparent);
+                        break;
+                }
             }
+
+            // We found data -- copy it in.
+            if (newData != null) {
+                BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                Marshal.Copy(newData, 0, bitmapData.Scan0, bitmap.Width * bitmap.Height * 4);
+                bitmap.UnlockBits(bitmapData);
+            }
+            // As a fallback, use Graphics.DrawImage().
+            else {
+                using (var graphics = Graphics.FromImage(bitmap)) {
+                    graphics.DrawImage(image, 0, 0);
+                    graphics.Flush();
+                }
+            }
+
             return bitmap;
         }
 
-        public static byte[] GetBitmapDataBGRA8888(this Image image) {
+        public static byte[] GetBitmapDataBGRA8888(this Image image, bool zeroIsTransparent = false) {
             if (image is Bitmap bitmap)
-                return BitmapExtensions.GetBitmapDataBGRA8888(bitmap);
+                return BitmapExtensions.GetBitmapDataBGRA8888(bitmap, zeroIsTransparent);
             else {
                 using (bitmap = image.CreateARGB8888Bitmap())
-                    return BitmapExtensions.GetBitmapDataBGRA8888(bitmap);
+                    return BitmapExtensions.GetBitmapDataBGRA8888(bitmap, zeroIsTransparent);
             }
         }
 
@@ -56,21 +78,21 @@ namespace CommonLib.Extensions {
             }
         }
 
-        public static ushort[] GetDataABGR1555(this Image image) {
+        public static ushort[] GetDataABGR1555(this Image image, bool zeroIsTransparent = false) {
             if (image is Bitmap bitmap)
-                return BitmapExtensions.GetDataABGR1555(bitmap);
+                return BitmapExtensions.GetDataABGR1555(bitmap, zeroIsTransparent);
             else {
-                using (bitmap = image.CreateARGB8888Bitmap())
-                    return BitmapExtensions.GetDataABGR1555(bitmap);
+                using (bitmap = image.CreateARGB8888Bitmap(zeroIsTransparent))
+                    return BitmapExtensions.GetDataABGR1555(bitmap, zeroIsTransparent);
             }
         }
 
-        public static ushort[,] Get2DDataABGR1555(this Image image) {
+        public static ushort[,] Get2DDataABGR1555(this Image image, bool zeroIsTransparent = false) {
             if (image is Bitmap bitmap)
-                return BitmapExtensions.Get2DDataABGR1555(bitmap);
+                return BitmapExtensions.Get2DDataABGR1555(bitmap, zeroIsTransparent);
             else {
-                using (bitmap = image.CreateARGB8888Bitmap())
-                    return BitmapExtensions.Get2DDataABGR1555(bitmap);
+                using (bitmap = image.CreateARGB8888Bitmap(zeroIsTransparent))
+                    return BitmapExtensions.Get2DDataABGR1555(bitmap, zeroIsTransparent);
             }
         }
 
