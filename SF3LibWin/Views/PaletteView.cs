@@ -71,7 +71,7 @@ namespace SF3.Win.Views {
         }
 
         private void OnLoadImage(Image image, string filename) {
-            var colors = image.GetDataABGR1555();
+            var colors = image.Get1DDataABGR1555();
             for (int i = 0; i < colors.Length; i++)
                 colors[i] &= 0x7FFF;
 

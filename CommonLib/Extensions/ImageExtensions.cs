@@ -11,11 +11,17 @@ namespace CommonLib.Extensions {
             if (image.PixelFormat != PixelFormat.Format8bppIndexed)
                 throw new ArgumentException($"Bitmap pixel format ({image.PixelFormat}) should be 'Format8bppIndexed'");
 
+            // For now, only bitmaps are supported, which is incredibly stupid because we're just duplicating a bitmap here...
+            // ...but I can't find any reasonable way to get the 8-bit image data from anything other than a Bitmap.
+            var imageAsBitmap = image as Bitmap;
+            if (imageAsBitmap == null)
+                throw new ArgumentException("Only bitmaps are supported");
+
             var bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format8bppIndexed);
             bitmap.SetPalette(image.GetPalette());
 
             BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
-            Marshal.Copy(image.GetDataIndexed(), 0, bitmapData.Scan0, bitmap.Width * bitmap.Height);
+            Marshal.Copy(imageAsBitmap.GetBitmapDataIndexed(), 0, bitmapData.Scan0, bitmap.Width * bitmap.Height);
             bitmap.UnlockBits(bitmapData);
 
             return bitmap;
@@ -30,6 +36,10 @@ namespace CommonLib.Extensions {
                 switch (imageAsBitmap.PixelFormat) {
                     case PixelFormat.Format8bppIndexed:
                         newData = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(imageAsBitmap.GetBitmapDataIndexed(), imageAsBitmap.GetPalette(), zeroIsTransparent);
+                        break;
+
+                    case PixelFormat.Format32bppArgb:
+                        newData = imageAsBitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
                         break;
                 }
             }
@@ -51,6 +61,9 @@ namespace CommonLib.Extensions {
             return bitmap;
         }
 
+        public static byte[] GetBitmapDataIndexed(this Image image)
+            => Get1DDataIndexed(image);
+
         public static byte[] GetBitmapDataBGRA8888(this Image image, bool zeroIsTransparent = false) {
             if (image is Bitmap bitmap)
                 return BitmapExtensions.GetBitmapDataBGRA8888(bitmap, zeroIsTransparent);
@@ -60,12 +73,12 @@ namespace CommonLib.Extensions {
             }
         }
 
-        public static byte[] GetDataIndexed(this Image image) {
+        public static byte[] Get1DDataIndexed(this Image image) {
             if (image is Bitmap bitmap)
-                return BitmapExtensions.GetDataIndexed(bitmap);
+                return BitmapExtensions.Get1DDataIndexed(bitmap);
             else {
                 using (bitmap = image.CreateIndexedBitmap())
-                    return BitmapExtensions.GetDataIndexed(bitmap);
+                    return BitmapExtensions.Get1DDataIndexed(bitmap);
             }
         }
 
@@ -78,12 +91,12 @@ namespace CommonLib.Extensions {
             }
         }
 
-        public static ushort[] GetDataABGR1555(this Image image, bool zeroIsTransparent = false) {
+        public static ushort[] Get1DDataABGR1555(this Image image, bool zeroIsTransparent = false) {
             if (image is Bitmap bitmap)
-                return BitmapExtensions.GetDataABGR1555(bitmap, zeroIsTransparent);
+                return BitmapExtensions.Get1DDataABGR1555(bitmap, zeroIsTransparent);
             else {
                 using (bitmap = image.CreateARGB8888Bitmap(zeroIsTransparent))
-                    return BitmapExtensions.GetDataABGR1555(bitmap, zeroIsTransparent);
+                    return BitmapExtensions.Get1DDataABGR1555(bitmap, zeroIsTransparent);
             }
         }
 
@@ -96,19 +109,19 @@ namespace CommonLib.Extensions {
             }
         }
 
-        public static void SetPalette(this Image bitmap, Palette palette) {
-            var outputPalette = bitmap.Palette;
+        public static void SetPalette(this Image image, Palette palette) {
+            var outputPalette = image.Palette;
             var palLen = Math.Min(256, palette.Channels.Length);
 
             for (int i = 0; i < palLen; ++i) {
                 var inputColor = palette[i];
                 outputPalette.Entries[i] = Color.FromArgb(inputColor.r, inputColor.g, inputColor.b);
             }
-            bitmap.Palette = outputPalette;
+            image.Palette = outputPalette;
         }
 
-        public static Palette GetPalette(this Image bitmap) {
-            var inputPalette = bitmap.Palette;
+        public static Palette GetPalette(this Image image) {
+            var inputPalette = image.Palette;
             var outputColors = new ushort[inputPalette.Entries.Length];
 
             for (int i = 0; i < outputColors.Length; ++i) {

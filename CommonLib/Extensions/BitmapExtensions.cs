@@ -101,20 +101,6 @@ namespace CommonLib.Extensions {
             return true;
         }
 
-        /// <summary>
-        /// Draws a bitmap onto another bitmap without using Graphics.FromImage(), which can throw 'OutOfMemoryException'
-        /// due to GDI+ implementation bugs.
-        /// </summary>
-        /// <param name="to">The bitmap to copy an image to.</param>
-        /// <param name="from">The bitmap to copy to an image.</param>
-        /// <param name="x">X coordinate of 'to' to copy to.</param>
-        /// <param name="y">Y coordinate of 'to' to copy to.</param>
-        public static void SafeDrawImage(this Bitmap to, Bitmap from, int x, int y) {
-            for (var iy = Math.Max(-y, 0); iy < from.Height && iy + y < to.Height; iy++)
-                for (var ix = Math.Max(-x, 0); ix < from.Width && ix + x < to.Width; ix++)
-                    to.SetPixel(ix + x, iy + y, from.GetPixel(ix, iy));
-        }
-
         public static byte[] GetBitmapDataIndexed(this Bitmap bitmap) {
             if (bitmap.PixelFormat != PixelFormat.Format8bppIndexed)
                 throw new ArgumentException($"Bitmap pixel format ({bitmap.PixelFormat}) should be 'Format8bppIndexed'");
@@ -140,7 +126,7 @@ namespace CommonLib.Extensions {
             return readBytes;
         }
 
-        public static ushort[] GetDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
+        public static ushort[] Get1DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
             var outputData = new ushort[bitmap.Width * bitmap.Height];
             var inputData = bitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
 
@@ -160,14 +146,14 @@ namespace CommonLib.Extensions {
             return outputData;
         }
 
-        public static byte[] GetDataIndexed(this Bitmap bitmap) {
+        public static byte[] Get1DDataIndexed(this Bitmap bitmap) {
             if (bitmap.PixelFormat != PixelFormat.Format8bppIndexed)
                 throw new ArgumentException($"Bitmap pixel format ({bitmap.PixelFormat}) should be 'Format8bppIndexed'");
             return bitmap.GetBitmapDataIndexed();
         }
 
         public static byte[,] Get2DDataIndexed(this Bitmap bitmap)
-            => bitmap.GetDataIndexed().To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
+            => bitmap.Get1DDataIndexed().To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
 
         public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
             var outputData = new ushort[bitmap.Width, bitmap.Height];

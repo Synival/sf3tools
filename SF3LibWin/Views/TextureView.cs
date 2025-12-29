@@ -58,8 +58,8 @@ namespace SF3.Win.Views {
             var canReplaceTexture16Bit = _texture.CanSetImageData16Bit;
 
             if (image.PixelFormat == PixelFormat.Format8bppIndexed && canReplaceTexture8Bit) {
-                var bitmap = image.CreateIndexedBitmap();
-                var data = bitmap.Get2DDataIndexed();
+                var bitmap  = image.CreateIndexedBitmap();
+                var data    = bitmap.Get2DDataIndexed();
                 var palette = bitmap.GetPalette();
 
                 try {
