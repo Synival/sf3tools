@@ -18,8 +18,12 @@ namespace SF3.Models.Structs.KAO {
             LoadImageData();
         }
 
+        [TableViewModelColumn(displayOrder: -2.9f, displayGroup: "Metadata")]
         public int Layer { get; }
+
+        [TableViewModelColumn(displayOrder: -2.8f, displayGroup: "Metadata")]
         public int Index { get; }
+
         public FaceChunk Chunk { get; }
         public FaceHeader Header => Chunk.Header;
 
