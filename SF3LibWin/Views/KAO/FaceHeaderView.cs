@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
 
         public override void Destroy() {
             if (Chunk != null)
-                Chunk.ImageTable[0].Invalidated -= OnUpdateImage;
+                Chunk.CompositeImageTable[8].Invalidated -= OnUpdateImage;
             base.Destroy();
         }
 
@@ -36,12 +36,12 @@ namespace SF3.Win.Views {
             set {
                 if (value != _chunk) {
                     if (_chunk != null)
-                        _chunk.ImageTable[0].Invalidated -= OnUpdateImage;
+                        _chunk.CompositeImageTable[8].Invalidated -= OnUpdateImage;
 
                     _chunk = value;
                     HeaderView.Model = _chunk?.Header;
 
-                    var tex = _chunk?.ImageTable?[0];
+                    var tex = _chunk?.CompositeImageTable?[8];
                     TextureView.Texture = tex;
                     if (tex != null)
                         tex.Invalidated += OnUpdateImage;
