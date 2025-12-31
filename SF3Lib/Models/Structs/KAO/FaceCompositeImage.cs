@@ -47,6 +47,10 @@ namespace SF3.Models.Structs.KAO {
             var baseData = baseImage.ImageData8Bit;
             var newData  = new byte[layerWidth, layerHeight];
 
+            // The input data cannot have any zeroes, which represent transparency. If they exist, they're probably
+            // intended to be black. Find the darkest color in the palette to use as a replacement.
+            data = ImageUtils.Create8BitImageDataWithoutTransparency(data, Chunk.Palette);
+
             // Only set differences
             var (offsetX, offsetY) = GetFaceImageOffset(baseWidth, baseHeight, layerImage);
             var (compareX, compareY) = (0, offsetY);
