@@ -27,12 +27,15 @@ namespace SF3.Win.Views {
             // Set _image with the setter so we get the side-effects.
             var controlImage = _image;
             _image = null;
-            Image = controlImage;
 
+            PreImageSet();
+            Image = controlImage;
             OnImageSet();
+
             return rval;
         }
 
+        protected virtual void PreImageSet() {}
         protected virtual void OnImageSet() {}
 
         public void ExportImageDialog() {
@@ -93,6 +96,7 @@ namespace SF3.Win.Views {
             set {
                 if (value != _image) {
                     _image = value;
+                    PreImageSet();
                     if (Control != null) {
                         Control.Image = value;
                         Control.ExportAction = (value == null) ? null : ExportImageDialog;

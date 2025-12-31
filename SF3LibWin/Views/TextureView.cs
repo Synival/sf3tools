@@ -21,10 +21,8 @@ namespace SF3.Win.Views {
         public void ReloadImage()
             => SetImageFromTexture();
 
-        private void SetImageFromTexture() {
-            Control.ZeroIsTransparent = Texture?.ZeroIsTransparent ?? false;
-            Image = Texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
-        }
+        private void SetImageFromTexture()
+            => Image = Texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
 
         private ITextureData _texture = null;
         public ITextureData Texture {
@@ -37,17 +35,17 @@ namespace SF3.Win.Views {
             }
         }
 
+        protected override void PreImageSet() {
+            if (Control != null)
+                Control.ZeroIsTransparent = _texture?.ZeroIsTransparent ?? false;
+        }
+
         protected override void OnImageSet() {
-            if (_texture != null && (_texture.CanSetImageData8Bit || _texture.CanSetImageData16Bit)) {
-                if (Control != null)
-                    Control.ImportAction = ImportImageDialog;
-                LoadImageAction = LoadImage;
-            }
-            else {
-                if (Control != null)
-                    Control.ImportAction = null;
-                LoadImageAction = null;
-            }
+            var canImport = (_texture != null) && (_texture.CanSetImageData8Bit || _texture.CanSetImageData16Bit);
+
+            if (Control != null)
+                Control.ImportAction = canImport ? ImportImageDialog : null;
+            LoadImageAction = canImport ? LoadImage : null;
         }
 
         private void LoadImage(Image image, string filename) {
