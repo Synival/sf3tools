@@ -10,11 +10,13 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.KAO {
     public class FaceCompositeImage : Struct, ITextureData {
-        public FaceCompositeImage(IByteData data, int id, int layer, int index, string name, FaceChunk chunk)
-        : base(data, id, name, 0 /* not applicable */, 0 /* not applicable */) {
+        public FaceCompositeImage(IByteData data, int id, int layer, int index, FaceChunk chunk)
+        : base(data, id, "", 0 /* not applicable */, 0 /* not applicable */) {
             Layer = layer;
             Index = index;
             Chunk = chunk;
+            LayerImage = Chunk.ImageTable.First(x => x.Layer == layer && x.Index == index);
+            Name = LayerImage.Name;
         }
 
         [TableViewModelColumn(displayOrder: -2.9f, displayGroup: "Metadata")]
@@ -23,11 +25,18 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: -2.8f, displayGroup: "Metadata")]
         public int Index { get; }
 
+        [TableViewModelColumn(displayOrder: -2.7f, displayGroup: "Metadata")]
+        public int? FrameRef => LayerImage.FrameRef;
+
+        [TableViewModelColumn(displayOrder: -2.6f, displayGroup: "Metadata")]
+        public int? SubstituteFrameRef => LayerImage.SubstituteFrameRef;
+
         [TableViewModelColumn(displayOrder: 0, displayGroup: "Metadata")]
         public bool HasImage => Header.GetLayerOffset(Layer, Index) > 0;
 
         public FaceChunk Chunk { get; }
         public FaceHeader Header => Chunk.Header;
+        public FaceImage LayerImage { get; }
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
             var error = Validate8BitImageData(data, palette, 0, 0);
@@ -35,7 +44,7 @@ namespace SF3.Models.Structs.KAO {
                 throw new ArgumentException(error);
 
             var baseImage = Chunk.ImageTable[0];
-            var layerImage = Chunk.ImageTable.FirstOrDefault(x => x.Layer == Layer && x.Index == Index);
+            var layerImage = LayerImage;
             if (baseImage?.ImageData8Bit == null || layerImage?.ImageData8Bit == null)
                 throw new InvalidOperationException("Cannot set empty image");
 
@@ -90,7 +99,7 @@ namespace SF3.Models.Structs.KAO {
             if (baseImage?.ImageData8Bit == null)
                 return null;
 
-            var addImage = Chunk.ImageTable.FirstOrDefault(x => x.Layer == Layer && x.Index == Index);
+            var addImage = LayerImage;
             if (addImage?.ImageData8Bit == null)
                 return null;
 

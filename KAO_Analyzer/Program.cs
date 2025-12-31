@@ -3,6 +3,7 @@ using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.KAO;
+using SF3.Models.Structs.KAO;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -17,15 +18,12 @@ namespace MPD_Analyzer {
             { ScenarioType.PremiumDisk, "G:/" },
         };
 
-        private static string[]? KAO_MatchFunc(IKAO_File kaoFile, string filename) {
-            var matches = new List<string>();
-            foreach (var face in kaoFile.FaceChunkTable) {
-                var baseImageData = face.ImageTable[0].ImageData8Bit;
-                var zeroCount = baseImageData.To1DArray().Count(x => x == 0);
-                if (zeroCount > 0)
-                    matches.Add($"Face[{face.ID}]: {zeroCount} zero pixel(s)");
-            }
-            return matches.ToArray();
+        private static string[]? KAO_MatchFunc(FaceChunk face, string filename) {
+            if (!face.CompositeImageTable[0].FrameRef.HasValue)
+                return [];
+            if (Enumerable.SequenceEqual(face.ImageTable[0].ImageData8Bit.To1DArray(),face.CompositeImageTable[0].ImageData8Bit.To1DArray()))
+                return [];
+            return ["Eyes are different"];
         }
 
         public static void Main(string[] args) {
@@ -54,25 +52,26 @@ namespace MPD_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var kaoFile = KAO_File.Create(byteData, nameGetter, scenario)) {
-                            // Condition for match checks here
-                            var matchReports = KAO_MatchFunc(kaoFile, filename);
-                            if (matchReports == null)
-                                continue;
+                            foreach (var face in kaoFile.FaceChunkTable) {
+                                // Condition for match checks here
+                                var matchReports = KAO_MatchFunc(face, filename);
+                                if (matchReports == null)
+                                    continue;
 
-                            bool match = matchReports.Length > 0;
-                            var fileStr = GetFileString(scenario, file, kaoFile);
-                            Console.WriteLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
-                            if (matchReports.Length > 0) {
-                                foreach (var r in matchReports)
-                                    Console.WriteLine("    " + filename.PadLeft(8) + " | " + r);
-                                Console.WriteLine();
+                                bool match = matchReports.Length > 0;
+                                var fileStr = GetFileString(scenario, file, kaoFile, face);
+                                Console.WriteLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
+                                if (matchReports.Length > 0) {
+                                    foreach (var r in matchReports)
+                                        Console.WriteLine("    " + filename.PadLeft(8) + " | " + r);
+                                    Console.WriteLine();
+                                }
+
+                                if (match)
+                                    matchSet.Add(fileStr);
+                                else
+                                    nomatchSet.Add(fileStr);
                             }
-
-                            if (match)
-                                matchSet.Add(fileStr);
-                            else
-                                nomatchSet.Add(fileStr);
-
                             ScanForErrorsAndReport(scenario, kaoFile);
                         }
                     }
@@ -99,9 +98,8 @@ namespace MPD_Analyzer {
                 Console.WriteLine("  " + str);
         }
 
-        private static string GetFileString(ScenarioType inputScenario, string filename, KAO_File kaoFile) {
-            return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
-                + " | " + kaoFile.FaceChunkTable.Length + " face(s)";
+        private static string GetFileString(ScenarioType inputScenario, string filename, KAO_File kaoFile, FaceChunk face) {
+            return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12) + "[" + face.ID + "]";
         }
 
         private static void ScanForErrorsAndReport(ScenarioType inputScenario, KAO_File kaoFile) {

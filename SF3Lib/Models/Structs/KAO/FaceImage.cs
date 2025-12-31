@@ -24,6 +24,17 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: -2.8f, displayGroup: "Metadata")]
         public int Index { get; }
 
+        [TableViewModelColumn(displayOrder: -2.7f, displayGroup: "Metadata")]
+        public int? FrameRef => (Header.GetLayerOffset(Layer, Index) > 0) ? (int?) -ID : null;
+
+        [TableViewModelColumn(displayOrder: -2.6f, displayGroup: "Metadata")]
+        public int? SubstituteFrameRef {
+            get {
+                var offset = Header.GetLayerOffset(Layer, Index);
+                return offset < 0 ? (int?) offset : null;
+            }
+        }
+
         public FaceChunk Chunk { get; }
         public FaceHeader Header => Chunk.Header;
 
