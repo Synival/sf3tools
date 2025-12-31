@@ -38,7 +38,8 @@ namespace SF3.Editor.Forms {
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
         public LoadedFile? OpenFileDialog() {
             var openfile = new OpenFileDialog {
-                Filter = OpenDialogFilter
+                Filter = OpenDialogFilter,
+                Title = "Open (" + (OpenScenario.HasValue ? OpenScenario.Value.ToString() : "Auto-Detect Scenario") + ")"
             };
             if (openfile.ShowDialog() != DialogResult.OK)
                 return null;
