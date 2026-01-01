@@ -18,7 +18,7 @@ namespace SF3.Win.Views {
         public override void SaveImage(string filename, ImageFormat format)
             => _texture?.CreateBitmap()?.Save(filename, format);
 
-        public void ReloadImage()
+        public virtual void ReloadImage()
             => SetImageFromTexture();
 
         private void SetImageFromTexture()
