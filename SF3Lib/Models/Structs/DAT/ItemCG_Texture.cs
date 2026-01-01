@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Attributes;
+using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
@@ -10,14 +11,16 @@ namespace SF3.Models.Structs.DAT {
             _palette = palette;
 
             _textureData.Add8BitValidator((_1, _2, _3, newStoredSize) => {
-                return (newStoredSize > _originalStoredSize)
-                    ? $"New stored image size ({newStoredSize} / 0x{newStoredSize:X2}) cannot be larger than existing stored image size ({_originalStoredSize} / 0x{_originalStoredSize:X2})"
+                return (MaxStoredImageSize.HasValue && newStoredSize > MaxStoredImageSize.Value)
+                    ? $"New stored image size ({newStoredSize} / 0x{newStoredSize:X2}) cannot be larger than existing stored image size ({MaxStoredImageSize.Value} / 0x{MaxStoredImageSize.Value:X2})"
                     : null;
             });
 
             LoadImageData();
-            _originalStoredSize = StoredImageDataSize;
         }
+
+        [TableViewModelColumn(displayOrder: 2.1f, displayFormat: "X4", isReadOnly: true, displayGroup: "Metadata")]
+        public int? MaxStoredImageSize { get; set; }
 
         protected override void OnImageUpdated() {}
 
@@ -26,7 +29,6 @@ namespace SF3.Models.Structs.DAT {
         public override bool CanLoadImage => true;
 
         private readonly Palette _palette;
-        private readonly int _originalStoredSize;
         protected override Palette StructPalette { get => _palette; set {} }
     }
 }

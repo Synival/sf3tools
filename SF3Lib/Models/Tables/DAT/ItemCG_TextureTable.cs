@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Structs.Shared;
@@ -44,8 +45,17 @@ namespace SF3.Models.Tables.DAT {
                 var rawData = Data.GetDataCopyOrReference();
 
                 int? itemsStart = null;
-                for (var id = 0; id < 0x1000; ++id) {
+                int id = 0;
+                ItemCG_Texture lastModel = null;
+
+                while (address + (24 * 24) <= rawData.Length) {
                     string ngcName = null;
+
+                    var decompressedData = Compression.DecompressLZSS(rawData, address, 24 * 24, out var _, out var endDataFound);
+                    if (decompressedData.Length != 24 * 24 || !endDataFound) {
+                        address += 2;
+                        continue;
+                    }
 
                     if (!itemsStart.HasValue) {
                         ngcName = NameGetterContext.GetName(null, null, id, new object[] { NamedValueType.Item });
@@ -56,13 +66,13 @@ namespace SF3.Models.Tables.DAT {
                         ngcName = NameGetterContext.GetName(null, null, id - itemsStart.Value, new object[] { NamedValueType.Spell });
 
                     var newModel = new ItemCG_Texture(Data, id, ngcName, address, ItemSpellPalette);
+                    if (lastModel != null)
+                        lastModel.MaxStoredImageSize = address - lastModel.Address;
+                    lastModel = newModel;
 
-                    rowDict[id] = newModel;
+                    rowDict[id++] = newModel;
                     rows.Add(newModel);
                     address += newModel.StoredImageDataSize;
-
-                    if (address >= rawData.Length)
-                        break;
                 }
             }
             catch {
