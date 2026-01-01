@@ -19,9 +19,13 @@ namespace MPD_Analyzer {
         };
 
         private static string[]? KAO_MatchFunc(FaceChunk face, string filename) {
-            if (!face.CompositeImageTable[0].FrameRef.HasValue)
-                return [];
-            if (Enumerable.SequenceEqual(face.ImageTable[0].ImageData8Bit.To1DArray(),face.CompositeImageTable[0].ImageData8Bit.To1DArray()))
+            var image = face.CompositeImageTable[0];
+            var frameRef = image.FrameRef ?? image.SubstituteFrameRef;
+            if (!frameRef.HasValue)
+                return null;
+
+            image = face.CompositeImageTable[frameRef.Value];
+            if (Enumerable.SequenceEqual(face.ImageTable[0].ImageData8Bit.To1DArray(), image.ImageData8Bit.To1DArray()))
                 return [];
             return ["Eyes are different"];
         }

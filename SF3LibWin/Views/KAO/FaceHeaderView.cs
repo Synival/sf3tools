@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CommonLib.NamedValues;
+using SF3.Images;
 using SF3.Models.Structs.KAO;
 
 namespace SF3.Win.Views {
@@ -22,8 +23,11 @@ namespace SF3.Win.Views {
         }
 
         public override void Destroy() {
-            if (Chunk != null)
-                Chunk.CompositeImageTable[8].Invalidated -= OnUpdateImage;
+            if (Chunk != null) {
+                Chunk.ImageTable[0].Invalidated -= OnUpdateImage;
+                Chunk.ImageTable[1].Invalidated -= OnUpdateImage;
+                Chunk.ImageTable[9].Invalidated -= OnUpdateImage;
+            }
             base.Destroy();
         }
 
@@ -35,16 +39,38 @@ namespace SF3.Win.Views {
             get => _chunk;
             set {
                 if (value != _chunk) {
-                    if (_chunk != null)
-                        _chunk.CompositeImageTable[8].Invalidated -= OnUpdateImage;
+                    if (_chunk != null) {
+                        _chunk.ImageTable[0].Invalidated -= OnUpdateImage;
+                        _chunk.ImageTable[1].Invalidated -= OnUpdateImage;
+                        _chunk.ImageTable[9].Invalidated -= OnUpdateImage;
+                    }
 
                     _chunk = value;
                     HeaderView.Model = _chunk?.Header;
 
-                    var tex = _chunk?.CompositeImageTable?[8];
-                    TextureView.Texture = tex;
-                    if (tex != null)
-                        tex.Invalidated += OnUpdateImage;
+                    if (_chunk != null) {
+                        _chunk.ImageTable[0].Invalidated += OnUpdateImage;
+                        _chunk.ImageTable[1].Invalidated += OnUpdateImage;
+                        _chunk.ImageTable[9].Invalidated += OnUpdateImage;
+
+                        var newData  = _chunk.ImageTable[0].ImageData8Bit.Clone() as byte[,];
+
+                        var blinkRef = _chunk.ImageTable[1].FrameRef ?? _chunk.ImageTable[1].SubstituteFrameRef;
+                        if (blinkRef.HasValue)
+                            FaceCompositeImage.AddFaceImageToData(newData, _chunk.ImageTable[blinkRef.Value]);
+
+                        var talkRef  = _chunk.ImageTable[9].FrameRef ?? _chunk.ImageTable[9].SubstituteFrameRef;
+                        if (talkRef.HasValue)
+                            FaceCompositeImage.AddFaceImageToData(newData, _chunk.ImageTable[talkRef.Value]);
+
+                        TextureView.Texture = new TextureIndexed(
+                            SF3.Types.CollectionType.Primary, 0, 0, 0, newData,
+                            SF3.Types.TexturePixelFormat.Palette1, _chunk.Palette, true
+                        );
+                    }
+                    else {
+                        TextureView.Texture = null;
+                    }
                 }
             }
         }

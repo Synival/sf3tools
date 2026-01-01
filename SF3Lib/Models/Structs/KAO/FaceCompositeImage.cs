@@ -100,7 +100,7 @@ namespace SF3.Models.Structs.KAO {
                 return null;
 
             var addImage = LayerImage;
-            if (addImage?.ImageData8Bit == null)
+            if (addImage.ImageDataOffset <= 0 || addImage?.ImageData8Bit == null)
                 return null;
 
             return CreateCompositeImageData(baseImage, new FaceImage[] { addImage });
