@@ -40,6 +40,7 @@ namespace SF3.Models.Files.KAO {
                     if (face.Data.IsModified)
                         Data.IsModified = true;
                 };
+                tables.AddRange(face.Tables);
             }
 
             return tables.ToArray();

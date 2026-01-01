@@ -1,12 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
+using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Animation;
 using SF3.Models.Tables.Shared;
 
 namespace SF3.Models.Structs.KAO {
-    public class FaceChunk : Struct {
+    public class FaceChunk : Struct, ITableContainer {
         public FaceChunk(IByteData data, int id, string name, int address, int actualAddress, CompressedData compressedData)
         : base(data, id, name, address, 0x22) {
             ActualAddress      = actualAddress;
@@ -19,6 +21,12 @@ namespace SF3.Models.Structs.KAO {
 
             Header.OnDimensionsChanged += (s, e) => {
                 ImageTable[0].InvalidateImage();
+            };
+
+            Tables = new ITable[] {
+                PaletteTable,
+                ImageTable,
+                CompositeImageTable
             };
         }
 
@@ -50,5 +58,7 @@ namespace SF3.Models.Structs.KAO {
                     image.InvalidateImage();
             }
         }
+
+        public IEnumerable<ITable> Tables { get; }
     }
 }
