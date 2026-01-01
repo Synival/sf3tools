@@ -300,6 +300,9 @@ namespace SF3.Images {
                     }
                 }
 
+                // Add transparency end codes to the texture.
+                outputData.FixSaturnTransparency(useEndCodes: true);
+
                 StoredImageDataSize = storedSize;
                 _textureDataBuffer.ImageData16Bit = outputData;
                 return outputData;
