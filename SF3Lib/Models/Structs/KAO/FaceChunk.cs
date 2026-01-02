@@ -18,6 +18,7 @@ namespace SF3.Models.Structs.KAO {
             PaletteTable        = ColorTable.Create(Data, "Palette", 0x22, 0x100);
             ImageTable          = FaceImageTable.Create(Data, nameof(FaceImageTable), this);
             CompositeImageTable = FaceCompositeImageTable.Create(Data, nameof(FaceCompositeImageTable), this);
+            Spritesheet         = new FaceSpritesheet(this);
 
             Header.OnDimensionsChanged += (s, e) => {
                 ImageTable[0].InvalidateImage();
@@ -34,6 +35,7 @@ namespace SF3.Models.Structs.KAO {
         public ColorTable PaletteTable { get; }
         public FaceImageTable ImageTable { get; }
         public FaceCompositeImageTable CompositeImageTable { get; }
+        public FaceSpritesheet Spritesheet { get; }
 
         [TableViewModelColumn(displayOrder: -1.5f, displayFormat: "X4", displayGroup: "Metadata")]
         public int ActualAddress { get; }

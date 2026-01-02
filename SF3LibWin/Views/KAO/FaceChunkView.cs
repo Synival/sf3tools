@@ -9,9 +9,10 @@ namespace SF3.Win.Views.KAO {
             Chunk = chunk;
             NameGetterContext = ngc;
 
-            HeaderView     = new FaceHeaderView("Header", Chunk, ngc);
-            PaletteView    = new ColorTableView("Palette", Chunk?.PaletteTable, NameGetterContext);
-            ImageTableView = new TextureDataTableView<FaceImage, FaceImageTable>("Images", Chunk?.ImageTable, ngc);
+            HeaderView      = new FaceHeaderView("Header", Chunk, ngc);
+            SpritesheetView = new TextureView("Spritesheet", imageScale: 1.0f);
+            PaletteView     = new ColorTableView("Palette", Chunk?.PaletteTable, NameGetterContext);
+            ImageTableView  = new TextureDataTableView<FaceImage, FaceImageTable>("Images", Chunk?.ImageTable, ngc);
             CompositeImageTableView = new TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable>("Composite Images", Chunk?.CompositeImageTable, ngc);
         }
 
@@ -20,6 +21,7 @@ namespace SF3.Win.Views.KAO {
                 return null;
 
             CreateChild(HeaderView);
+            CreateChild(SpritesheetView);
             CreateChild(PaletteView);
             CreateChild(ImageTableView);
             CreateChild(CompositeImageTableView);
@@ -34,9 +36,10 @@ namespace SF3.Win.Views.KAO {
                 if (_chunk != value) {
                     _chunk = value;
 
-                    HeaderView.Chunk     = _chunk;
-                    PaletteView.Table    = _chunk?.PaletteTable;
-                    ImageTableView.Table = _chunk?.ImageTable;
+                    HeaderView.Chunk        = _chunk;
+                    SpritesheetView.Texture = _chunk.Spritesheet;
+                    PaletteView.Table       = _chunk?.PaletteTable;
+                    ImageTableView.Table    = _chunk?.ImageTable;
                     CompositeImageTableView.Table = _chunk?.CompositeImageTable;
                 }
             }
@@ -44,6 +47,7 @@ namespace SF3.Win.Views.KAO {
 
         public INameGetterContext NameGetterContext { get; }
         public FaceHeaderView HeaderView { get; }
+        public TextureView SpritesheetView { get; }
         public ColorTableView PaletteView { get; }
         public TextureDataTableView<FaceImage, FaceImageTable> ImageTableView { get; }
         public TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable> CompositeImageTableView { get; }
