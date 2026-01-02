@@ -101,7 +101,7 @@ namespace SF3.Models.Structs.KAO {
                 int count = imageStopIndex - imageStartIndex;
 
                 for (int i = 0; i < count; ++i) {
-                    var image = Face.ImageTable[i + imageStartIndex];
+                    var image = Face.CompositeImageTable[i + imageStartIndex];
                     var col = columnStart + i;
 
                     // For "substitute" frame references, make an image where the number of pixels represents the reference value.
@@ -113,21 +113,18 @@ namespace SF3.Models.Structs.KAO {
                     }
 
                     // Get the actual image used here. If there truly is none, do nothing.
-                    var actualImage = image.ActualImage;
-                    if (actualImage == null)
+                    if (!image.HasImage)
                         continue;
-
-                    frameData[col, row] = ImageUtils.Create8BitImageDataWithoutTransparency(baseImage.Clone() as byte[,], palette);
-                    FaceCompositeImage.AddFaceImageToData(frameData[col, row], actualImage);
+                    frameData[col, row] = image.ImageData8Bit;
                 }
             }
 
             // Add base image.
-            frameData[0, 0] = baseImage.Clone() as byte[,];
+            frameData[0, 0] = baseImage;
 
             // Build blinking and talking images.
-            BuildImageRow(1,  4, 3, 0);
-            BuildImageRow(4, 10, 0, 1);
+            BuildImageRow(0, 3, 3, 0);
+            BuildImageRow(3, 9, 0, 1);
 
             // Copy images into one big image.
             var completeData = new byte[width * 6, height * 2];
