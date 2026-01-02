@@ -11,21 +11,7 @@ namespace CommonLib.Utils {
         /// <param name="palette">The color palette used for the 8-bit indexed image data.</param>
         /// <returns>A new byte[,] with a copy of input 'data' without any transparent pixels.</returns>
         public static byte[,] Create8BitImageDataWithoutTransparency(byte[,] data, Palette palette) {
-            byte darkestIndex = 0;
-            int darkestValue = -1;
-
-            for (int i = 1; i < 0x100; i++) {
-                var color = palette.Channels[i];
-                var value = Math.Max(color.r, Math.Max(color.g, color.b));
-                if (darkestIndex == 0 || value < darkestValue) {
-                    darkestValue = value;
-                    darkestIndex = (byte) i;
-                }
-
-                // Stop if we've found true black.
-                if (value == 0)
-                    break;
-            }
+            byte darkestIndex = (byte) palette.GetDarkestIndex(zeroIsTransparent: true);
 
             var width = data.GetLength(0);
             var height = data.GetLength(1);
