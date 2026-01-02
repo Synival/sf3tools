@@ -8,7 +8,7 @@ namespace SF3.Win.Views {
         public AnimatedTextureView(string name, ITextureData firstTexture, float imageScale = 0) : base(name, firstTexture, imageScale) {}
 
         private void OnTick(object sender, EventArgs e) {
-            if (!Animating)
+            if (!Animating || Control == null || !Control.Visible)
                 return;
 
             FrameCounter--;
