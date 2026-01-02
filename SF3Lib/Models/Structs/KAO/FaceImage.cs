@@ -16,6 +16,10 @@ namespace SF3.Models.Structs.KAO {
             Chunk = chunk;
 
             LoadImageData();
+
+            // Force an update if the data was ever modified.
+            // TODO: This is a bit aggressive... maybe only update on relevant data changes?
+            chunk.Data.Data.RangeModified += (s, e) => InvalidateImage();
         }
 
         [TableViewModelColumn(displayOrder: -2.9f, displayGroup: "Metadata")]

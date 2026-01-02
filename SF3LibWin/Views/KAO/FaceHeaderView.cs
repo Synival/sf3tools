@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.KAO;
 
@@ -27,7 +27,7 @@ namespace SF3.Win.Views.KAO {
             base.Destroy();
         }
 
-        private void OnUpdateImage(object sender, EventArgs ags)
+        private void OnChunkModified(object sender, ByteArrayRangeModifiedArgs args)
             => TextureView.StartAnimation(_chunk);
 
         private FaceChunk _chunk;
@@ -50,13 +50,12 @@ namespace SF3.Win.Views.KAO {
         }
 
         private void AttachInvalidatedEvents(FaceChunk chunk) {
-            foreach (var image in chunk.ImageTable)
-                image.Invalidated += OnUpdateImage;
+            chunk.Data.Data.RangeModified += OnChunkModified;
         }
 
         private void DetachInvalidatedEvents(FaceChunk chunk) {
-            foreach (var image in chunk.ImageTable)
-                image.Invalidated -= OnUpdateImage;
+            // Invalidate this image if ANY data has changed.
+            chunk.Data.Data.RangeModified -= OnChunkModified;
         }
 
         public FaceHeader Header => Chunk?.Header;
