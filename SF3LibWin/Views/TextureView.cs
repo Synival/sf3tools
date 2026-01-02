@@ -45,50 +45,49 @@ namespace SF3.Win.Views {
             return canImport ? ImportImageDialog : null;
         }
 
-        protected override void OnImportImage(Image image, string filename) {
-            if (image == null)
-                return;
+        public override void ImportImage(string filename) {
+            using (var image = Image.FromFile(filename)) {
+                var canReplaceTexture8Bit  = _texture.CanSetImageData8Bit;
+                var canReplaceTexture16Bit = _texture.CanSetImageData16Bit;
 
-            var canReplaceTexture8Bit  = _texture.CanSetImageData8Bit;
-            var canReplaceTexture16Bit = _texture.CanSetImageData16Bit;
+                if (image.PixelFormat == PixelFormat.Format8bppIndexed && canReplaceTexture8Bit) {
+                    var bitmap  = image.CreateIndexedBitmap();
+                    var data    = bitmap.Get2DDataIndexed();
+                    var palette = bitmap.GetPalette();
 
-            if (image.PixelFormat == PixelFormat.Format8bppIndexed && canReplaceTexture8Bit) {
-                var bitmap  = image.CreateIndexedBitmap();
-                var data    = bitmap.Get2DDataIndexed();
-                var palette = bitmap.GetPalette();
-
-                try {
-                    _texture.SetImageData8Bit(data, palette);
+                    try {
+                        _texture.SetImageData8Bit(data, palette);
+                    }
+                    catch (Exception e) {
+                        Logger.LogException(e);
+                        MessageUtils.ErrorMessage(e.Message);
+                        return;
+                    }
                 }
-                catch (Exception e) {
-                    Logger.LogException(e);
-                    MessageUtils.ErrorMessage(e.Message);
+                else if (canReplaceTexture16Bit) {
+                    var data = image.Get2DDataABGR1555();
+
+                    try {
+                        _texture.ImageData16Bit = data;
+                    }
+                    catch (Exception e) {
+                        Logger.LogException(e);
+                        MessageUtils.ErrorMessage(e.Message);
+                        return;
+                    }
+                }
+                else {
+                    if (canReplaceTexture16Bit)
+                        MessageUtils.ErrorMessage("Image is not compatible with 16-bit ABGR format");
+                    else if (canReplaceTexture8Bit)
+                        MessageUtils.ErrorMessage("Image must be in 8-bit indexed format");
+                    else
+                        MessageUtils.ErrorMessage("Image format is invalid");
                     return;
                 }
-            }
-            else if (canReplaceTexture16Bit) {
-                var data = image.Get2DDataABGR1555();
 
-                try {
-                    _texture.ImageData16Bit = data;
-                }
-                catch (Exception e) {
-                    Logger.LogException(e);
-                    MessageUtils.ErrorMessage(e.Message);
-                    return;
-                }
+                Image = _texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
             }
-            else {
-                if (canReplaceTexture16Bit)
-                    MessageUtils.ErrorMessage("Image is not compatible with 16-bit ABGR format");
-                else if (canReplaceTexture8Bit)
-                    MessageUtils.ErrorMessage("Image must be in 8-bit indexed format");
-                else
-                    MessageUtils.ErrorMessage("Image format is invalid");
-                return;
-            }
-
-            Image = _texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using SF3.Images;
 
@@ -81,8 +81,9 @@ namespace SF3.Win.Views {
         }
 
         protected override Action GetImportImageAction() => null;
-        protected override void OnImportImage(Image image, string filename) => throw new NotImplementedException();
+        public override void ImportImage(string filename) => throw new NotImplementedException();
         protected override Action GetExportImageAction() => null;
+        public override void ExportImage(string filename, ImageFormat format) => throw new NotImplementedException();
 
         public bool Animating => _timer != null;
         public bool Paused => _timer?.Enabled == false;

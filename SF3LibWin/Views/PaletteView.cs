@@ -68,12 +68,14 @@ namespace SF3.Win.Views {
 
         protected override Action GetImportImageAction() => ImportImageDialog;
 
-        protected override void OnImportImage(Image image, string filename) {
-            var colors = image.Get1DDataABGR1555();
-            for (int i = 0; i < colors.Length; i++)
-                colors[i] &= 0x7FFF;
+        public override void ImportImage(string filename) {
+            using (var image = Image.FromFile(filename)) {
+                var colors = image.Get1DDataABGR1555();
+                for (int i = 0; i < colors.Length; i++)
+                    colors[i] &= 0x7FFF;
 
-            ImportPalette?.Invoke(this, colors);
+                ImportPalette?.Invoke(this, colors);
+            }
         }
 
         public Bitmap PaletteBitmap { get; private set; } = null;

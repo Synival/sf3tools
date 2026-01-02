@@ -73,14 +73,6 @@ namespace SF3.Win.Views {
             }
         }
 
-        public virtual void ImportImage(string filename) {
-            using (var image = Image.FromFile(filename))
-                OnImportImage(image, filename);
-        }
-
-        public virtual void ExportImage(string filename, ImageFormat format)
-            => Image.Save(filename, format);
-
         public override void RefreshContent() {
             if (!IsCreated)
                 return;
@@ -108,10 +100,12 @@ namespace SF3.Win.Views {
         }
 
         protected virtual Action GetImportImageAction() => null;
-        protected virtual void OnImportImage(Image image, string filename) => throw new NotImplementedException();
+        public virtual void ImportImage(string filename) => throw new NotImplementedException();
 
         protected virtual Action GetExportImageAction()
             => (_image == null) ? null : ExportImageDialog;
+        public virtual void ExportImage(string filename, ImageFormat format)
+            => Image.Save(filename, format);
 
         private float _imageScale = 0;
         public float ImageScale {

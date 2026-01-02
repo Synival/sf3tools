@@ -100,7 +100,7 @@ namespace SF3.Win.Views {
             return null;
         }
 
-        protected override void OnImportImage(Image image, string filename) {
+        public override void ImportImage(string filename) {
             // TODO: Importing
         }
 
