@@ -28,7 +28,7 @@ namespace SF3.Win.Views.MPD {
                     if (modelControl != null) {
                         modelControl.Dock = DockStyle.Right;
                         tableParent.Controls.Add(modelControl);
-                        tableControl.ItemSelectionChanged += OnModelChanged;
+                        tableControl.SelectionChanged += OnModelChanged;
                     }
                 }
             });
@@ -48,7 +48,7 @@ namespace SF3.Win.Views.MPD {
 
             Control?.Hide();
             if (TableView.OLVControl != null)
-                TableView.OLVControl.ItemSelectionChanged -= OnModelChanged;
+                TableView.OLVControl.SelectionChanged -= OnModelChanged;
             TableView.Destroy();
 
             base.Destroy();

@@ -35,7 +35,7 @@ namespace SF3.Win.Views.CHR {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(TableView, (c) => ((ObjectListView) c).ItemSelectionChanged += OnAnimationChanged);
+            CreateChild(TableView, (c) => ((ObjectListView) c).SelectionChanged += OnAnimationChanged);
             CreateChild(TextureView, (c) => c.Dock = DockStyle.Right, autoFill: false);
 
             return Control;
@@ -58,7 +58,7 @@ namespace SF3.Win.Views.CHR {
             Control?.Hide();
 
             if (TableView.OLVControl != null)
-                TableView.OLVControl.ItemSelectionChanged -= OnAnimationChanged;
+                TableView.OLVControl.SelectionChanged -= OnAnimationChanged;
 
             TableView.Destroy();
             TextureView.Destroy();

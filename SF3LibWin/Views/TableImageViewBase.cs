@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(TableView, (c) => ((ObjectListView) c).ItemSelectionChanged += OnModelChanged);
+            CreateChild(TableView, (c) => ((ObjectListView) c).SelectionChanged += OnModelChanged);
             CreateChild(ImageView, (c) => c.Dock = DockStyle.Right, autoFill: false);
 
             return Control;
@@ -47,7 +47,7 @@ namespace SF3.Win.Views {
             Control?.Hide();
 
             if (TableView.OLVControl != null)
-                TableView.OLVControl.ItemSelectionChanged -= OnModelChanged;
+                TableView.OLVControl.SelectionChanged -= OnModelChanged;
 
             TableView.Destroy();
             ImageView.Destroy();
