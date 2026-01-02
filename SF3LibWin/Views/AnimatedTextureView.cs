@@ -4,16 +4,30 @@ using SF3.Images;
 
 namespace SF3.Win.Views {
     public abstract class AnimatedTextureView : TextureView {
+        private const int c_framesPerSecond = 30;
+        private const int c_msPerFrame = 1000 / c_framesPerSecond;
+
         public AnimatedTextureView(string name, float imageScale = 0) : base(name, imageScale) {}
         public AnimatedTextureView(string name, ITextureData firstTexture, float imageScale = 0) : base(name, firstTexture, imageScale) {}
 
         private void OnTick(object sender, EventArgs e) {
-            if (!Animating || Control == null || !Control.Visible)
-                return;
+            var currentTimeMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
 
-            FrameCounter--;
-            if (FrameCounter <= 0)
-                OnFrameCompleted();
+            if (!Animating || Control == null || !Control.Visible) {
+                _lastTickMs = currentTimeMs;
+                return;
+            }
+
+            var timeElapsed = (int) (currentTimeMs - _lastTickMs);
+            _lastTickMs = currentTimeMs;
+
+            _nextFrameInMs -= timeElapsed;
+            while (_nextFrameInMs <= 0) {
+                _nextFrameInMs += c_msPerFrame;
+                FrameCounter--;
+                if (FrameCounter <= 0)
+                    OnFrameCompleted();
+            }
         }
 
         public void ClearAnimation() {
@@ -31,9 +45,11 @@ namespace SF3.Win.Views {
 
         public void SetFrame(ITextureData texture, int index, int duration) {
             if (!Animating) {
-                _timer = new Timer() { Interval = 1000 / 30 };
+                _timer = new Timer() { Interval = 1000 / 60 };
                 _timer.Tick += OnTick;
                 _timer.Start();
+                _lastTickMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                _nextFrameInMs = c_msPerFrame;
             }
             if (Paused)
                 ResumeAnimation();
@@ -46,8 +62,15 @@ namespace SF3.Win.Views {
                 OnFrameCompleted();
         }
 
-        public void PauseAnimation() => _timer?.Stop();
-        public void ResumeAnimation() => _timer?.Start();
+        public void PauseAnimation() {
+            _timer?.Stop();
+        }
+
+        public void ResumeAnimation() {
+            _timer?.Start();
+            _lastTickMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            _nextFrameInMs = c_msPerFrame;
+        }
 
         protected abstract void OnFrameCompleted();
 
@@ -62,6 +85,9 @@ namespace SF3.Win.Views {
         public bool Paused => _timer?.Enabled == false;
         public int FrameIndex { get; private set; } = 0;
         public int FrameCounter { get; private set; } = 0;
+
         private Timer _timer = null;
+        private int _nextFrameInMs = 0;
+        private long _lastTickMs = 0;
     }
 }
