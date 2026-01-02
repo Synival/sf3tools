@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
 using SF3.ByteData;
 using SF3.Images;
 using SF3.Models.Tables.CHR;
@@ -122,8 +123,8 @@ namespace SF3.Models.Structs.CHR {
                 .Select(x => (x < frameTableCount) ? FrameTable[x] : null)
                 .Select(x => (x?.Texture != null) ? $"({x.Texture.Hash})" : "()")
                 .Aggregate((a, b) => a + b);
-            using (var md5 = MD5.Create())
-                _textureHashByFrameCount.Add(frameCount, BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(frameHash))).Replace("-", "").ToLower());
+
+            _textureHashByFrameCount.Add(frameCount, Encoding.ASCII.GetBytes(frameHash).CreateTextureHash());
 
             return tex;
         }

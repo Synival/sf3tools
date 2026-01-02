@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Images;
@@ -52,10 +53,8 @@ namespace SF3.Models.Structs.KAO {
 
         public string Hash {
             get {
-                if (_textureDataBuffer.Hash == null && BitmapDataARGB1555 != null) {
-                    using (var md5 = MD5.Create())
-                        _textureDataBuffer.Hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
-                }
+                if (_textureDataBuffer.Hash == null && BitmapDataARGB1555 != null)
+                    _textureDataBuffer.Hash = BitmapDataARGB1555.CreateTextureHash();
                 return _textureDataBuffer.Hash;
             }
         }

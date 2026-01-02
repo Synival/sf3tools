@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Types;
@@ -96,10 +97,8 @@ namespace SF3.Images {
         private readonly string _hashPrefix;
         public string Hash {
             get {
-                if (_hash == null) {
-                    using (var md5 = MD5.Create())
-                        _hash = (_hashPrefix == "" ? "" : _hashPrefix + "-") + BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
-                }
+                if (_hash == null)
+                    _hash = BitmapDataARGB1555.CreateTextureHash(_hashPrefix);
                 return _hash;
             }
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 
 namespace CommonLib.Extensions {
     public static class ArrayExtensions {
@@ -316,6 +317,20 @@ namespace CommonLib.Extensions {
                 if (lastSolid <= lastEncodingPixel)
                     frameImage[lastSolid + 1, y] = 0x7FFF;
             }
+        }
+
+        /// <summary>
+        /// Generates an MD5 hash for data with an optional prefix. The format is intended for texture identification.
+        /// </summary>
+        /// <param name="data">Data to generate a hash from.</param>
+        /// <param name="hashPrefix">Optional prefix for the hash.</param>
+        /// <returns>An MD5 string with dashes removed, and the optional "prefix_" prepended if it exists.
+        /// If 'data' is null, then null is returned.</returns>
+        public static string CreateTextureHash(this byte[] data, string hashPrefix = null) {
+            if (data == null)
+                return null;
+            using (var md5 = MD5.Create())
+                return (((hashPrefix ?? "") == "") ? "" : hashPrefix + "-") + BitConverter.ToString(md5.ComputeHash(data)).Replace("-", "").ToLower();
         }
     }
 }

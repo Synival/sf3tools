@@ -503,15 +503,15 @@ namespace SF3.Sprites {
                         }
                     }
 
-                    using (var md5 = MD5.Create())
-                        hashes = BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashes))).Replace("-", "").ToLower();
+                    // Generate a hash based on all other hashes.
+                    var compositeHash = Encoding.ASCII.GetBytes(hashes).CreateTextureHash();
 
                     return new AnimationHashCommand() {
                         Command    = x.Command,
                         Parameter  = x.Parameter,
                         FrameID    = -1,
                         Directions = directions,
-                        ImageHash  = hashes,
+                        ImageHash  = compositeHash,
                         FramesMissing = nullCount
                     };
                 })
@@ -553,8 +553,7 @@ namespace SF3.Sprites {
                 }
             }
 
-            using (var md5 = MD5.Create())
-                return BitConverter.ToString(md5.ComputeHash(Encoding.ASCII.GetBytes(hashStr))).Replace("-", "").ToLower();
+            return Encoding.ASCII.GetBytes(hashStr).CreateTextureHash();
         }
     }
 }
