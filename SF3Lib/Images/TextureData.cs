@@ -251,8 +251,8 @@ namespace SF3.Images {
             var newWidth = data.GetLength(0);
             var newHeight = data.GetLength(1);
             var newData = new byte[newWidth * newHeight];
-            for (var y = 0; y < newWidth; y++)
-                for (var x = 0; x < newHeight; x++)
+            for (var y = 0; y < newHeight; y++)
+                for (var x = 0; x < newWidth; x++)
                     newData[off++] = data[x, y];
 
             var newStoredData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
@@ -314,8 +314,8 @@ namespace SF3.Images {
                 var newWidth = value.GetLength(0);
                 var newHeight = value.GetLength(1);
                 var newData = new byte[newWidth * newHeight * 2];
-                for (var y = 0; y < newWidth; y++) {
-                    for (var x = 0; x < newHeight; x++) {
+                for (var y = 0; y < newHeight; y++) {
+                    for (var x = 0; x < newWidth; x++) {
                         var val = value[x, y];
                         newData[off++] = (byte) (val >> 8);
                         newData[off++] = (byte) val;
