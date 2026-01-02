@@ -46,7 +46,7 @@ namespace SF3.Win.Views {
 
         public void SetFrame(ITextureData texture, int index, int duration) {
             if (!Animating) {
-                _timer = new Timer() { Interval = 1000 / 60 };
+                _timer = new Timer() { Interval = 10 };
                 _timer.Tick += OnTick;
                 _timer.Start();
                 _lastTickMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;

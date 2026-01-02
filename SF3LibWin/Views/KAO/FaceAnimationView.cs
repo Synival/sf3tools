@@ -6,7 +6,7 @@ using SF3.Types;
 
 namespace SF3.Win.Views.KAO {
     public class FaceAnimationView : AnimatedTextureView {
-        private static int c_totalFrames = 90;
+        private static int c_totalFrames = 240;
 
         public FaceAnimationView(string name, FaceChunk face, float imageScale = 0) : base(name, imageScale) {
             StartAnimation(face);
@@ -60,18 +60,18 @@ namespace SF3.Win.Views.KAO {
         }
 
         private int GetBlinkingImage(int frame) {
-            frame %= 30;
-            if (frame == 27 || frame == 29)
+            frame %= 80;
+            if (frame == 39 || frame == 41)
                 return 2;
-            else if (frame == 28)
+            else if (frame == 40)
                 return 3;
             else
                 return 1;
         }
 
         private int GetTalkingImage(int frame) {
-            frame %= 45;
-            if (frame >= 12 && frame < 36)
+            frame %= 60;
+            if (frame >= 30)
                 return (frame % 6) + 4;
             else
                 return 9;
