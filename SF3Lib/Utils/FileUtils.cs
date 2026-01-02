@@ -161,6 +161,11 @@ namespace SF3.Utils {
                 }
             }
 
+            // For some file types, it doesn't matter; just return Scenario 1.
+            // TODO: We really need an "any" type!
+            if (fileType == SF3FileType.KAO)
+                return ScenarioType.Scenario1;
+
             // Couldn't figure it out; it's unknown.
             return null;
         }
