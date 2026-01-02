@@ -21,7 +21,7 @@ namespace SF3.Win.Views.MPD {
             var ngc = Model.NameGetterContext;
             CreateChild(new TextureTableView("Textures", AllTexturesTable, ngc));
             if (Model.Animations != null) {
-                CreateChild(new AnimationsView("Animations", Model.Animations, ngc));
+                CreateChild(new AnimationTableView("Animations", Model.Animations, ngc));
                 CreateChild(new AnimationFramesView("Animation Frames", Model, ngc));
             }
 

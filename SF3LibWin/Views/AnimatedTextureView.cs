@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using SF3.Images;
 
@@ -7,8 +8,8 @@ namespace SF3.Win.Views {
         private const int c_framesPerSecond = 30;
         private const int c_msPerFrame = 1000 / c_framesPerSecond;
 
-        public AnimatedTextureView(string name, float imageScale = 0) : base(name, imageScale) {}
-        public AnimatedTextureView(string name, ITextureData firstTexture, float imageScale = 0) : base(name, firstTexture, imageScale) {}
+        public AnimatedTextureView(string name, float? imageScale = null) : base(name, imageScale) {}
+        public AnimatedTextureView(string name, ITextureData firstTexture, float? imageScale = null) : base(name, firstTexture, imageScale) {}
 
         private void OnTick(object sender, EventArgs e) {
             var currentTimeMs = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
@@ -79,6 +80,8 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
+        protected override Action GetImportImageAction() => null;
+        protected override void OnImportImage(Image image, string filename) => throw new NotImplementedException();
         protected override Action GetExportImageAction() => null;
 
         public bool Animating => _timer != null;
