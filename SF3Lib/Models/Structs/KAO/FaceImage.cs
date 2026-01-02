@@ -100,10 +100,13 @@ namespace SF3.Models.Structs.KAO {
 
         protected override int StructImageDataOffset {
             get {
+                if (Layer == 0)
+                    return 0x222;
+
                 // Real offsets (0 or higher) need 0x222 added to them.
                 // Negative offsets -- which are functional values -- stay as they are.
                 var offset = Header.GetLayerOffset(Layer, Index);
-                return offset >= 0 ? (offset + 0x222) : offset;
+                return offset > 0 ? (offset + 0x222) : offset;
             }
             set {
                 if (Layer == 0)
@@ -112,7 +115,7 @@ namespace SF3.Models.Structs.KAO {
                 // Unapply the 0x222 for offsets when setting them.
                 // If the range set is in range (0, 0x221), it's invalid; just use zero.
                 // Negative offsets -- which are functional values -- stay as they are.
-                var newOffset = (value >= 0x222) ? (value - 0x222) : (value > 0) ? 0 : value;
+                var newOffset = (value > 0x222) ? (value - 0x222) : (value > 0) ? 0 : value;
                 Header.SetLayerOffset(Layer, Index, (short) newOffset);
             }
         }
