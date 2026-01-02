@@ -17,6 +17,10 @@ namespace SF3.Models.Structs.KAO {
             Chunk = chunk;
             LayerImage = Chunk.ImageTable.First(x => x.Layer == layer && x.Index == index);
             Name = LayerImage.Name;
+
+            // Force an update if the data was ever modified.
+            // TODO: This is a bit aggressive... maybe only update on relevant data changes?
+            chunk.Data.Data.RangeModified += (s, e) => Invalidate();
         }
 
         [TableViewModelColumn(displayOrder: -2.9f, displayGroup: "Metadata")]
@@ -38,50 +42,22 @@ namespace SF3.Models.Structs.KAO {
         public FaceHeader Header => Chunk.Header;
         public FaceImage LayerImage { get; }
 
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette, 0, 0);
-            if (error != null)
-                throw new ArgumentException(error);
-
-            var baseImage = Chunk.ImageTable[0];
-            var layerImage = LayerImage;
-            if (baseImage?.ImageData8Bit == null || layerImage?.ImageData8Bit == null)
-                throw new InvalidOperationException("Cannot set empty image");
-
-            var baseWidth   = baseImage.Width;
-            var baseHeight  = baseImage.Width;
-            var layerWidth  = layerImage.Width;
-            var layerHeight = layerImage.Height;
-
-            var baseData = baseImage.ImageData8Bit;
-            var newData  = new byte[layerWidth, layerHeight];
-
-            // The input data cannot have any zeroes, which represent transparency. If they exist, they're probably
-            // intended to be black. Find the darkest color in the palette to use as a replacement.
-            data = ImageUtils.Create8BitImageDataWithoutTransparency(data, Chunk.Palette);
-
-            // Only set differences
-            var (offsetX, offsetY) = GetFaceImageOffset(baseWidth, baseHeight, layerImage);
-            var (compareX, compareY) = (0, offsetY);
-            for (int toY = 0; toY < layerHeight; toY++, compareY++) {
-                compareX = offsetX;
-                for (int toX = 0; toX < layerWidth; toX++, compareX++) {
-                    if (compareX >= 0 && compareX < baseWidth && compareY >= 0 && compareY < baseHeight) {
-                        if (data[compareX, compareY] != baseData[compareX, compareY])
-                            newData[toX, toY] = data[compareX, compareY];
-                    }
-                }
-            }
-
-            layerImage.SetImageData8Bit(newData, layerImage.Palette);
+        public void Invalidate() {
+            _textureDataBuffer.Invalidate();
             Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
-        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
-            => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, true);
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
+            if (_textureDataBuffer.BitmapDataARGB1555 == null)
+                _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, true);
+            return _textureDataBuffer.BitmapDataARGB1555;
+        }
 
-        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
-            => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true);
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
+            if (_textureDataBuffer.BitmapDataARGB8888 == null)
+                _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true);
+            return _textureDataBuffer.BitmapDataARGB8888;
+        }
 
         public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
             if (!HasImage)
@@ -151,11 +127,56 @@ namespace SF3.Models.Structs.KAO {
         public int Width => Header.Width;
         public int Height => Header.Height;
 
-        public byte[,] ImageData8Bit => GetCompositeImageData();
+        public byte[,] ImageData8Bit {
+            get {
+                if (_textureDataBuffer.ImageData8Bit == null)
+                    _textureDataBuffer.ImageData8Bit = GetCompositeImageData();
+                return _textureDataBuffer.ImageData8Bit;
+            }
+        }
+
+        public void SetImageData8Bit(byte[,] data, Palette palette) {
+            var error = Validate8BitImageData(data, palette, 0, 0);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            var baseImage = Chunk.ImageTable[0];
+            var layerImage = LayerImage;
+            if (baseImage?.ImageData8Bit == null || layerImage?.ImageData8Bit == null)
+                throw new InvalidOperationException("Cannot set empty image");
+
+            var baseWidth   = baseImage.Width;
+            var baseHeight  = baseImage.Width;
+            var layerWidth  = layerImage.Width;
+            var layerHeight = layerImage.Height;
+
+            var baseData = baseImage.ImageData8Bit;
+            var newData  = new byte[layerWidth, layerHeight];
+
+            // The input data cannot have any zeroes, which represent transparency. If they exist, they're probably
+            // intended to be black. Find the darkest color in the palette to use as a replacement.
+            data = ImageUtils.Create8BitImageDataWithoutTransparency(data, Chunk.Palette);
+
+            // Only set differences
+            var (offsetX, offsetY) = GetFaceImageOffset(baseWidth, baseHeight, layerImage);
+            var (compareX, compareY) = (0, offsetY);
+            for (int toY = 0; toY < layerHeight; toY++, compareY++) {
+                compareX = offsetX;
+                for (int toX = 0; toX < layerWidth; toX++, compareX++) {
+                    if (compareX >= 0 && compareX < baseWidth && compareY >= 0 && compareY < baseHeight) {
+                        if (data[compareX, compareY] != baseData[compareX, compareY])
+                            newData[toX, toY] = data[compareX, compareY];
+                    }
+                }
+            }
+
+            layerImage.SetImageData8Bit(newData, layerImage.Palette);
+            Invalidate();
+        }
 
         public ushort[,] ImageData16Bit {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
         }
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(highlightEndcodes: false);
@@ -167,5 +188,7 @@ namespace SF3.Models.Structs.KAO {
         public bool ZeroIsTransparent => true;
 
         public event EventHandler Invalidated;
+
+        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
     }
 }
