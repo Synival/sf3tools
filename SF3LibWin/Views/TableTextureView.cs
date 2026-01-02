@@ -19,22 +19,8 @@ namespace SF3.Win.Views {
             var tex = GetTextureFromModel(item);
             if (ImageView.Texture == tex)
                 return;
-
-            if (ImageView.Texture != null)
-                ImageView.Texture.Invalidated -= OnInvalidated;
             ImageView.Texture = tex;
-            if (tex != null)
-                tex.Invalidated += OnInvalidated;
         }
-
-        public override void Destroy() {
-            if (ImageView.Texture != null)
-                ImageView.Texture.Invalidated -= OnInvalidated;
-            base.Destroy();
-        }
-
-        private void OnInvalidated(object sender, EventArgs eventArgs)
-            => ImageView.ReloadImage();
 
         protected abstract ITextureData GetTextureFromModel(TTableItem item);
     }

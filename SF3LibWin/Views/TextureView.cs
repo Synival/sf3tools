@@ -15,11 +15,17 @@ namespace SF3.Win.Views {
             Texture = texture;
         }
 
+        public override void Destroy() {
+            if (_texture != null)
+                _texture.Invalidated -= OnTextureInvalidated;
+            base.Destroy();
+        }
+
         public override void ExportImage(string filename, ImageFormat format)
             => _texture?.CreateBitmap()?.Save(filename, format);
 
-        public virtual void ReloadImage()
-            => SetImageFromTexture();
+        public virtual void ReloadImage() => SetImageFromTexture();
+        private void OnTextureInvalidated(object sender, EventArgs ags) => ReloadImage();
 
         private void SetImageFromTexture()
             => Image = Texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
@@ -29,7 +35,12 @@ namespace SF3.Win.Views {
             get => _texture;
             set {
                 if (value != _texture) {
+                    if (_texture != null)
+                        _texture.Invalidated -= OnTextureInvalidated;
                     _texture = value;
+                    if (value != null)
+                        value.Invalidated += OnTextureInvalidated;
+
                     SetImageFromTexture();
                 }
             }
