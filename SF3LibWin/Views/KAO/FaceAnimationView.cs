@@ -40,19 +40,19 @@ namespace SF3.Win.Views.KAO {
             var blinkingImage = GetBlinkingImage(frame);
             var talkingImage  = GetTalkingImage(frame);
 
-            var blinkRef = Face.ImageTable[blinkingImage].FrameRef ?? Face.ImageTable[blinkingImage].SubstituteFrameRef ?? 0;
-            var talkRef  = Face.ImageTable[talkingImage].FrameRef  ?? Face.ImageTable[talkingImage].SubstituteFrameRef  ?? 0;
+            var blinkImage = Face.ImageTable[blinkingImage].ActualImage;
+            var talkImage  = Face.ImageTable[talkingImage].ActualImage;
 
             // Don't bother updating the image if the frames are the same.
+            int blinkRef = blinkImage?.FrameRef ?? 0;
+            int talkRef  = talkImage?.FrameRef  ?? 0;
             if (blinkRef == _lastBlinkingFrame && talkRef == _lastTalkingFrame)
                 return;
 
             // Generate the new image data.
             var newData  = Face.ImageTable[0].ImageData8Bit.Clone() as byte[,];
-            if (blinkRef > 0)
-                FaceCompositeImage.AddFaceImageToData(newData, Face.ImageTable[blinkRef]);
-            if (talkRef > 0)
-                FaceCompositeImage.AddFaceImageToData(newData, Face.ImageTable[talkRef]);
+            FaceCompositeImage.AddFaceImageToData(newData, blinkImage);
+            FaceCompositeImage.AddFaceImageToData(newData, talkImage);
 
             // Generate a texture for it.
             _faceTexture = new TextureData(new ByteArray(newData.To1DArrayTransposed()), 0, Face.Header.Width, Face.Header.Height,

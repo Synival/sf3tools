@@ -125,6 +125,9 @@ namespace SF3.Models.Structs.KAO {
        }
 
         public static void AddFaceImageToData(byte[,] data, FaceImage image) {
+            if (image == null)
+                return;
+
             var width  = data.GetLength(0);
             var height = data.GetLength(1);
 

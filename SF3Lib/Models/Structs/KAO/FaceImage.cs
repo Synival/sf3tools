@@ -35,6 +35,35 @@ namespace SF3.Models.Structs.KAO {
             }
         }
 
+        public FaceImage ActualImage {
+            get {
+                // The base image is always itself.
+                if (Layer == 0)
+                    return this;
+
+                // Positive offsets are itself, zero offsets are 'no image'.
+                var offset = ImageDataOffset;
+                if (offset > 0)
+                    return this;
+                else if (offset == 0)
+                    return null;
+
+                // Negative offsets reference a different layer.
+                // The frame referenced must be between (1, 9) inclusive and cannot reference the same frame.
+                // If the frame referenced is *also* a referencing frame, it's not valid.
+                var frameRef = -offset;
+                var sameFrameRef = Layer * 3 + Index + 1;
+                if (frameRef >= 1 && frameRef <= 9 && frameRef != sameFrameRef) {
+                    var otherImage = Chunk.ImageTable[frameRef];
+                    if (otherImage.ImageDataOffset > 0)
+                        return otherImage;
+                }
+
+                // No valid image.
+                return null;
+            }
+        }
+
         public FaceChunk Chunk { get; }
         public FaceHeader Header => Chunk.Header;
 
