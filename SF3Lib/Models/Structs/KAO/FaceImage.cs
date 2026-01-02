@@ -1,5 +1,7 @@
-﻿using CommonLib.Attributes;
+﻿using System.Linq;
+using CommonLib.Attributes;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
@@ -133,5 +135,15 @@ namespace SF3.Models.Structs.KAO {
         }
 
         protected override void OnImageUpdated() {}
+
+        protected override (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) {
+            (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
+
+            // Replace the transparent color with the best match
+            newData = ImageUtils.Create8BitImageDataWithoutTransparency(newData, palette);
+
+            // Return our new data + palette pair.
+            return (newData, palette);
+        }
     }
 }

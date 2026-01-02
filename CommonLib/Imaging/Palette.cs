@@ -31,48 +31,28 @@ namespace CommonLib.Imaging {
             set => Channels[index] = value;
         }
 
-        public int GetDarkestIndex(bool zeroIsTransparent) {
-            int darkestIndex = 0;
-            int darkestValue = -1;
+        public int GetClosestIndex(bool zeroIsTransparent, Func<PixelChannels, int> scoreFunc) {
+            int bestIndex = -1;
+            int bestScore = 0;
 
             var max = Channels.Length;
             for (int i = zeroIsTransparent ? 1 : 0; i < max; i++) {
                 var color = Channels[i];
-                var value = Math.Max(color.r, Math.Max(color.g, color.b));
+                var score = scoreFunc(color);
 
-                // Stop if we've found true black.
-                if (value == 0)
-                    return i;
-
-                if (darkestIndex == 0 || value < darkestValue) {
-                    darkestValue = value;
-                    darkestIndex = i;
+                if (bestIndex == -1 || score > bestScore) {
+                    bestIndex = i;
+                    bestScore = score;
                 }
             }
 
-            return darkestIndex;
+            return bestIndex;
         }
 
-        public int GetLightestIndex(bool zeroIsTransparent) {
-            int lightestIndex = 0;
-            int lightestValue = -1;
+        public int GetDarkestIndex(bool zeroIsTransparent)
+            => GetClosestIndex(zeroIsTransparent, color => 0x100 - Math.Max(color.r, Math.Max(color.g, color.b)));
 
-            var max = Channels.Length;
-            for (int i = zeroIsTransparent ? 1 : 0; i < max; i++) {
-                var color = Channels[i];
-                var value = Math.Max(color.r, Math.Max(color.g, color.b));
-
-                // Stop if we've found true white.
-                if (value == 0xFF)
-                    return i;
-
-                if (lightestIndex == 0 || value > lightestValue) {
-                    lightestValue = value;
-                    lightestIndex = i;
-                }
-            }
-
-            return lightestIndex;
-        }
+        public int GetLightestIndex(bool zeroIsTransparent)
+            => GetClosestIndex(zeroIsTransparent, color => Math.Max(color.r, Math.Max(color.g, color.b)));
     }
 }

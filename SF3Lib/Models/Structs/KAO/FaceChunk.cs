@@ -59,9 +59,12 @@ namespace SF3.Models.Structs.KAO {
                 if (value == null)
                     return;
                 var paletteMax = Math.Min(0x100, value.Channels.Length);
+
                 var newData = new ushort[paletteMax];
-                for (int i = 0; i < paletteMax; i++)
-                    newData[i] = value[i].ToABGR1555();
+                newData[0] = 0x8000;
+                for (int i = 1; i < paletteMax; i++)
+                    newData[i] = (ushort) (value[i].ToABGR1555() | 0x8000);
+
                 Data.Data.SetDataAtTo(0x22, paletteMax * 2, newData.ToByteArray());
             }
         }
