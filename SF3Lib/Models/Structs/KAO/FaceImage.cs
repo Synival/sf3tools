@@ -100,7 +100,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public override bool CanLoadImage => HasImage;
-        public override bool HasImage => Header.GetLayerOffset(Layer, Index) > 0;
+        public override bool HasImage => Layer == 0 || Header.GetLayerOffset(Layer, Index) > 0;
 
         protected override int StructImageDataOffset {
             get {
@@ -126,7 +126,10 @@ namespace SF3.Models.Structs.KAO {
 
         protected override Palette StructPalette {
             get => Chunk.Palette;
-            set {}
+            set {
+                if (Layer == 0)
+                    Chunk.Palette = value;
+            }
         }
 
         protected override void OnImageUpdated() {}

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Animation;
@@ -54,10 +56,13 @@ namespace SF3.Models.Structs.KAO {
         public Palette Palette {
             get => new Palette(PaletteTable.Select(x => x.ColorABGR1555).ToArray());
             set {
-                for (int i = 0; i < 0x100; i++)
-                    PaletteTable[i].ColorABGR1555 = value[i].ToARGB1555();
-                foreach (var image in ImageTable)
-                    image.InvalidateImage();
+                if (value == null)
+                    return;
+                var paletteMax = Math.Min(0x100, value.Channels.Length);
+                var newData = new ushort[paletteMax];
+                for (int i = 0; i < paletteMax; i++)
+                    newData[i] = value[i].ToABGR1555();
+                Data.Data.SetDataAtTo(0x22, paletteMax * 2, newData.ToByteArray());
             }
         }
 
