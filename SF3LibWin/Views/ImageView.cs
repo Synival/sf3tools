@@ -99,12 +99,15 @@ namespace SF3.Win.Views {
                     PreImageSet();
                     if (Control != null) {
                         Control.Image = value;
-                        Control.ExportAction = (value == null) ? null : ExportImageDialog;
+                        Control.ExportAction = GetExportImageAction();
                     }
                     OnImageSet();
                 }
             }
         }
+
+        protected virtual Action GetExportImageAction()
+            => (_image == null) ? null : ExportImageDialog;
 
         private float _imageScale = 0;
         public float ImageScale {

@@ -56,6 +56,8 @@ namespace SF3.Win.Views {
             base.Destroy();
         }
 
+        protected override Action GetExportImageAction() => null;
+
         public bool Animating => _timer != null;
         public bool Paused => _timer?.Enabled == false;
         public int FrameIndex { get; private set; } = 0;
