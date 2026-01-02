@@ -25,14 +25,14 @@ namespace SF3.Win.Views.KAO {
                 _lastBlinkingFrame = -1;
                 _lastTalkingFrame  = -1;
                 UpdateTexture(0);
-                SetFrame(_faceTexture, 0, 1);
+                SetFrame(_faceTexture, 0, 2);
             }
         }
 
         protected override void OnFrameCompleted() {
             var newFrame = (FrameIndex + 1) % c_totalFrames;
             UpdateTexture(newFrame);
-            SetFrame(_faceTexture, newFrame, 1);
+            SetFrame(_faceTexture, newFrame, 2);
         }
 
         private void UpdateTexture(int frame) {
@@ -61,9 +61,9 @@ namespace SF3.Win.Views.KAO {
 
         private int GetBlinkingImage(int frame) {
             frame %= 80;
-            if (frame == 39 || frame == 41)
+            if (frame == 12 || frame == 16)
                 return 2;
-            else if (frame == 40)
+            else if (frame >= 13 && frame <= 15)
                 return 3;
             else
                 return 1;
