@@ -9,16 +9,19 @@ namespace SF3.Models.Structs.KAO {
     public class FaceSpritesheet : ITextureData {
         public FaceSpritesheet(FaceChunk face) {
             Face = face;
-            UpdateImage();
 
             // Invalidate this image if ANY data has changed.
-            face.Data.Data.RangeModified += (s, e) => UpdateImage();
+            face.Data.Data.RangeModified += (s, e) => Invalidate();
+        }
+
+        public void Invalidate() {
+            _textureDataBuffer.Invalidate();
+            Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
         public FaceChunk Face { get; }
         public FaceHeader Header => Face.Header;
         public Palette Palette => Face.Palette;
-        private byte[,] ImageData;
 
         public int BytesPerPixel => 1;
         public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
@@ -28,7 +31,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[,] ImageData8Bit {
             get {
                 if (_textureDataBuffer.ImageData8Bit == null)
-                    _textureDataBuffer.ImageData8Bit = ImageData;
+                    _textureDataBuffer.ImageData8Bit = GetImageData();
                 return _textureDataBuffer.ImageData8Bit;
             }
         }
@@ -82,7 +85,7 @@ namespace SF3.Models.Structs.KAO {
 
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) => "Not supported";
 
-        private void UpdateImage() {
+        private byte[,] GetImageData() {
             int width  = Header.Width;
             int height = Header.Height;
 
@@ -139,9 +142,7 @@ namespace SF3.Models.Structs.KAO {
                 }
             }
 
-            ImageData = completeData;
-            _textureDataBuffer.Invalidate();
-            Invalidated?.Invoke(this, EventArgs.Empty);
+            return completeData;
         }
 
         public event EventHandler Invalidated;
