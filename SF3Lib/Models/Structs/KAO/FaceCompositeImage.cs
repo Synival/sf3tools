@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using CommonLib.Utils;
@@ -37,6 +38,17 @@ namespace SF3.Models.Structs.KAO {
 
         [TableViewModelColumn(displayOrder: 0, displayGroup: "Metadata")]
         public bool HasImage => Header.GetLayerOffset(Layer, Index) > 0;
+
+        [TableViewModelColumn(displayOrder: 1, minWidth: 225)]
+        public string Hash {
+            get {
+                if (_textureDataBuffer.Hash == null && BitmapDataARGB1555 != null) {
+                    using (var md5 = MD5.Create())
+                        _textureDataBuffer.Hash = BitConverter.ToString(md5.ComputeHash(BitmapDataARGB1555)).Replace("-", "").ToLower();
+                }
+                return _textureDataBuffer.Hash;
+            }
+        }
 
         public FaceChunk Chunk { get; }
         public FaceHeader Header => Chunk.Header;
@@ -181,7 +193,7 @@ namespace SF3.Models.Structs.KAO {
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(highlightEndcodes: false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(highlightEndcodes: false);
-        public string Hash => "Not Implemented";
+
         public Palette Palette => Chunk.Palette;
         public bool CanSetImageData8Bit => HasImage;
         public bool CanSetImageData16Bit => false;
