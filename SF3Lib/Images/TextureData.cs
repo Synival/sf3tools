@@ -247,10 +247,12 @@ namespace SF3.Images {
         }
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var newData = new byte[Width * Height];
             var off = 0;
-            for (var y = 0; y < Height; y++)
-                for (var x = 0; x < Width; x++)
+            var newWidth = data.GetLength(0);
+            var newHeight = data.GetLength(1);
+            var newData = new byte[newWidth * newHeight];
+            for (var y = 0; y < newWidth; y++)
+                for (var x = 0; x < newHeight; x++)
                     newData[off++] = data[x, y];
 
             var newStoredData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
@@ -261,8 +263,8 @@ namespace SF3.Images {
 
             if (_pixelFormat.BytesPerPixel() != 1)
                 _pixelFormat = TexturePixelFormat.UnknownPalette;
-            _width  = data.GetLength(0);
-            _height = data.GetLength(1);
+            _width  = newWidth;
+            _height = newHeight;
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
 
             Invalidate(sendEvent: false);
@@ -309,9 +311,11 @@ namespace SF3.Images {
             }
             set {
                 var off = 0;
-                var newData = new byte[Width * Height * 2];
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
+                var newWidth = value.GetLength(0);
+                var newHeight = value.GetLength(1);
+                var newData = new byte[newWidth * newHeight * 2];
+                for (var y = 0; y < newWidth; y++) {
+                    for (var x = 0; x < newHeight; x++) {
                         var val = value[x, y];
                         newData[off++] = (byte) (val >> 8);
                         newData[off++] = (byte) val;
@@ -325,8 +329,8 @@ namespace SF3.Images {
                     throw new ArgumentException(error);
 
                 PixelFormat = TexturePixelFormat.ABGR1555;
-                Width  = value.GetLength(0);
-                Height = value.GetLength(1);
+                Width  = newWidth;
+                Height = newHeight;
                 Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
 
                 Invalidate(sendEvent: false);
