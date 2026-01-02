@@ -19,7 +19,9 @@ namespace SF3.Win.Views {
                 return;
             }
 
-            var timeElapsed = (int) (currentTimeMs - _lastTickMs);
+            // Get the time elapsed, but don't let it exceed a certain amount, otherwise animations could go for a
+            // long, long time after sleeping or busy.
+            var timeElapsed = Math.Min((int) (currentTimeMs - _lastTickMs), 100);
             _lastTickMs = currentTimeMs;
 
             _nextFrameInMs -= timeElapsed;

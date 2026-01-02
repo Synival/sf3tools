@@ -24,7 +24,7 @@ namespace MPD_Analyzer {
             if (face.Header.Layer1Height % 2 == 1) results.Add("Layer1Height is odd");
             if (face.Header.Layer2Width  % 2 == 1) results.Add("Layer2Width is odd");
             if (face.Header.Layer2Height % 2 == 1) results.Add("Layer2Height is odd");
-            return results.Count > 0 ? results.ToArray() : null;
+            return results.Count > 0 ? results.ToArray() : [];
         }
 
         public static void Main(string[] args) {
@@ -46,6 +46,10 @@ namespace MPD_Analyzer {
 
                 foreach (var file in filesKv.Value) {
                     var filename = Path.GetFileNameWithoutExtension(file);
+                    var indexPart = int.Parse(filename.Substring(3, 3));
+                    var maxChars = (scenario == ScenarioType.Scenario1) ? 20 : (scenario == ScenarioType.Scenario2) ? 40 : 60;
+                    if (indexPart < maxChars)
+                        continue;
 
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
@@ -53,6 +57,9 @@ namespace MPD_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var kaoFile = KAO_File.Create(byteData, nameGetter, scenario)) {
+                            if (kaoFile.FaceChunkTable.Length == 1)
+                                continue;
+
                             foreach (var face in kaoFile.FaceChunkTable) {
                                 // Condition for match checks here
                                 var matchReports = KAO_MatchFunc(face, filename);
