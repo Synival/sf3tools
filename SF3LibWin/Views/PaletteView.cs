@@ -13,10 +13,6 @@ namespace SF3.Win.Views {
         public override Control Create() {
             if (base.Create() == null)
                 return null;
-
-            Control.ImportAction = ImportImageDialog;
-            LoadImageAction = OnLoadImage;
-
             return Control;
         }
 
@@ -70,7 +66,9 @@ namespace SF3.Win.Views {
             return (width, height);
         }
 
-        private void OnLoadImage(Image image, string filename) {
+        protected override Action GetImportImageAction() => ImportImageDialog;
+
+        protected override void OnImportImage(Image image, string filename) {
             var colors = image.Get1DDataABGR1555();
             for (int i = 0; i < colors.Length; i++)
                 colors[i] &= 0x7FFF;

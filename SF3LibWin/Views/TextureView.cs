@@ -15,7 +15,7 @@ namespace SF3.Win.Views {
             Texture = texture;
         }
 
-        public override void SaveImage(string filename, ImageFormat format)
+        public override void ExportImage(string filename, ImageFormat format)
             => _texture?.CreateBitmap()?.Save(filename, format);
 
         public virtual void ReloadImage()
@@ -40,15 +40,12 @@ namespace SF3.Win.Views {
                 Control.ZeroIsTransparent = _texture?.ZeroIsTransparent ?? false;
         }
 
-        protected override void OnImageSet() {
+        protected override Action GetImportImageAction() {
             var canImport = (_texture != null) && (_texture.CanSetImageData8Bit || _texture.CanSetImageData16Bit);
-
-            if (Control != null)
-                Control.ImportAction = canImport ? ImportImageDialog : null;
-            LoadImageAction = canImport ? LoadImage : null;
+            return canImport ? ImportImageDialog : null;
         }
 
-        private void LoadImage(Image image, string filename) {
+        protected override void OnImportImage(Image image, string filename) {
             if (image == null)
                 return;
 

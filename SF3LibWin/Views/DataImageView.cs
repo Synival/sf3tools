@@ -95,6 +95,15 @@ namespace SF3.Win.Views {
             Image = bitmap;
         }
 
+        protected override Action GetImportImageAction() {
+            // TODO: Importing
+            return null;
+        }
+
+        protected override void OnImportImage(Image image, string filename) {
+            // TODO: Importing
+        }
+
         public IByteArray[] Datas { get; }
         public Palette[] Palettes { get; }
         public DataImageViewMode ViewMode { get; }

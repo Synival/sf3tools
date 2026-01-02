@@ -48,7 +48,7 @@ namespace SF3.Win.Views {
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            SaveImage(dialog.FileName, GetImageFormatFromFilename(dialog.FileName));
+            ExportImage(dialog.FileName, GetImageFormatFromFilename(dialog.FileName));
         }
 
         public void ImportImageDialog() {
@@ -58,7 +58,7 @@ namespace SF3.Win.Views {
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            LoadImage(dialog.FileName);
+            ImportImage(dialog.FileName);
         }
 
         private ImageFormat GetImageFormatFromFilename(string filename) {
@@ -73,13 +73,13 @@ namespace SF3.Win.Views {
             }
         }
 
-        public virtual void SaveImage(string filename, ImageFormat format)
-            => Image.Save(filename, format);
-
-        public virtual void LoadImage(string filename) {
+        public virtual void ImportImage(string filename) {
             using (var image = Image.FromFile(filename))
-                LoadImageAction?.Invoke(image, filename);
+                OnImportImage(image, filename);
         }
+
+        public virtual void ExportImage(string filename, ImageFormat format)
+            => Image.Save(filename, format);
 
         public override void RefreshContent() {
             if (!IsCreated)
@@ -99,12 +99,16 @@ namespace SF3.Win.Views {
                     PreImageSet();
                     if (Control != null) {
                         Control.Image = value;
+                        Control.ImportAction = GetImportImageAction();
                         Control.ExportAction = GetExportImageAction();
                     }
                     OnImageSet();
                 }
             }
         }
+
+        protected virtual Action GetImportImageAction() => null;
+        protected virtual void OnImportImage(Image image, string filename) => throw new NotImplementedException();
 
         protected virtual Action GetExportImageAction()
             => (_image == null) ? null : ExportImageDialog;
@@ -120,7 +124,5 @@ namespace SF3.Win.Views {
                 }
             }
         }
-
-        protected Action<Image /*image*/, string /*filename*/> LoadImageAction { get; set; } = null;
     }
 }
