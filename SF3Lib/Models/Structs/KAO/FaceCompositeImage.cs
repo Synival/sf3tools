@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.KAO {
        }
 
         public static void AddFaceImageToData(byte[,] data, FaceImage image) {
-            if (image == null)
+            if (image?.ImageData8Bit == null)
                 return;
 
             var width  = data.GetLength(0);
@@ -164,7 +164,7 @@ namespace SF3.Models.Structs.KAO {
             var newData  = new byte[layerWidth, layerHeight];
 
             // The input data cannot have any zeroes, which represent transparency. If they exist, they're probably
-            // intended to be black. Find the darkest color in the palette to use as a replacement.
+            // intended to be black. Find the closest color in the palette to Color[0] to use as a replacement.
             data = ImageUtils.Create8BitImageDataWithoutTransparency(data, Chunk.Palette);
 
             // Only set differences
