@@ -46,13 +46,12 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public void SetImageData8Bit(byte[,] sheetData, Palette palette) {
+            var error = Validate8BitImageData(sheetData, palette, 0 /* irrelevant */, 0 /* irrelevant */);
+            if (error != null)
+                throw new ArgumentException(error);
+
             var sheetWidth  = sheetData.GetLength(0);
             var sheetHeight = sheetData.GetLength(1);
-
-            if (sheetWidth % 6 != 0)
-                throw new ArgumentException($"Sheet width ({sheetWidth}) must be divisible by 6");
-            if (sheetHeight % 2 != 0)
-                throw new ArgumentException($"Sheet width ({sheetHeight}) must be divisible by 2");
 
             var width  = sheetWidth / 6;
             var height = sheetHeight / 2;
@@ -307,7 +306,14 @@ namespace SF3.Models.Structs.KAO {
             => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
         public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
-            // TODO: proper validation!
+            var sheetWidth  = data.GetLength(0);
+            var sheetHeight = data.GetLength(1);
+
+            if (sheetWidth % 6 != 0)
+                return $"Sheet width ({sheetWidth}) must be divisible by 6";
+            if (sheetHeight % 2 != 0)
+                return $"Sheet width ({sheetHeight}) must be divisible by 2";
+
             return null;
         }
 

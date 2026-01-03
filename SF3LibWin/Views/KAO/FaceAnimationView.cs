@@ -40,8 +40,8 @@ namespace SF3.Win.Views.KAO {
             var blinkingImage = GetBlinkingImage(frame);
             var talkingImage  = GetTalkingImage(frame);
 
-            var blinkImage = Face.ImageTable[blinkingImage].ActualImage;
-            var talkImage  = Face.ImageTable[talkingImage].ActualImage;
+            var blinkImage = Face.ImageTable[blinkingImage].GetActualImage();
+            var talkImage  = Face.ImageTable[talkingImage].GetActualImage();
 
             // Don't bother updating the image if the frames are the same.
             int blinkRef = blinkImage?.FrameRef ?? 0;

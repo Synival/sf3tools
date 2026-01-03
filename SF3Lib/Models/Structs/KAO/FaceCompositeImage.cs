@@ -30,16 +30,16 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: -2.8f, displayGroup: "Metadata")]
         public int Index { get; }
 
-        [TableViewModelColumn(displayOrder: -2.7f, displayGroup: "Metadata")]
-        public int? FrameRef => LayerImage.FrameRef;
-
-        [TableViewModelColumn(displayOrder: -2.6f, displayGroup: "Metadata")]
-        public int? SubstituteFrameRef => LayerImage.SubstituteFrameRef;
-
         [TableViewModelColumn(displayOrder: 0, displayGroup: "Metadata")]
         public bool HasImage => Header.GetLayerOffset(Layer, Index) > 0;
 
-        [TableViewModelColumn(displayOrder: 1, minWidth: 225)]
+        [TableViewModelColumn(displayOrder: 1)]
+        public int? FrameRef => LayerImage.FrameRef;
+
+        [TableViewModelColumn(displayOrder: 2)]
+        public int? SubstituteFrameRef => LayerImage.SubstituteFrameRef;
+
+        [TableViewModelColumn(displayOrder: 3, minWidth: 225)]
         public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public FaceChunk Chunk { get; }
