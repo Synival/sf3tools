@@ -46,6 +46,9 @@ namespace SF3.Models.Files.KAO {
         }
 
         public override bool OnFinish() {
+            // Make sure each face's data is recompressed.
+            // TODO: Make this a separate function that can be accessed from the menu, similar to how MPDs work.
+            // TODO: Saving should report errors if they're not recompressed.
             foreach (var face in FaceChunkTable) {
                 var data = face.CompressedData;
                 if (data.NeedsRecompression) {
@@ -62,6 +65,11 @@ namespace SF3.Models.Files.KAO {
                     Data.Data.SetDataAtTo(face.ActualAddress, newBytes.Length, newBytes);
                 }
             }
+
+            // Make sure the length of the data is a multiple of 0x800.
+            if (Data.Length % 0x800 != 0)
+                Data.Data.Resize(((Data.Length + 0x7FF) / 0x800) * 0x800);
+
             return true;
         }
 
