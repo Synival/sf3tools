@@ -10,7 +10,7 @@ namespace SF3.Win.Views.KAO {
             NameGetterContext = ngc;
 
             HeaderView      = new FaceHeaderView("Header", Chunk, ngc);
-            SpritesheetView = new TextureView("Spritesheet", imageScale: 1.0f);
+            SpritesheetView = new TextureView("Spritesheet", imageScale: 2.0f);
             PaletteView     = new ColorTableView("Palette", Chunk?.PaletteTable, NameGetterContext);
             ImageTableView  = new TextureDataTableView<FaceImage, FaceImageTable>("Images", Chunk?.ImageTable, ngc);
             CompositeImageTableView = new TextureDataTableView<FaceCompositeImage, FaceCompositeImageTable>("Composite Images", Chunk?.CompositeImageTable, ngc);
