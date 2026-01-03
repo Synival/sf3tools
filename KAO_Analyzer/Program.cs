@@ -1,5 +1,4 @@
 ﻿using CommonLib.Arrays;
-using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.KAO;
@@ -20,11 +19,9 @@ namespace MPD_Analyzer {
 
         private static string[]? KAO_MatchFunc(FaceChunk face, string filename) {
             var results = new List<string>();
-            if (face.Header.Layer1Width  % 2 == 1) results.Add("Layer1Width is odd");
-            if (face.Header.Layer1Height % 2 == 1) results.Add("Layer1Height is odd");
-            if (face.Header.Layer2Width  % 2 == 1) results.Add("Layer2Width is odd");
-            if (face.Header.Layer2Height % 2 == 1) results.Add("Layer2Height is odd");
-            return results.Count > 0 ? results.ToArray() : [];
+            if (face.Header.Layer1Width % 8 != 0) results.Add("Layer1Width isn't divisible by 8");
+            if (face.Header.Layer2Width % 8 != 0) results.Add("Layer2Width isn't divisible by 8");
+            return results.Count > 0 ? results.ToArray() : null;
         }
 
         public static void Main(string[] args) {
@@ -57,9 +54,6 @@ namespace MPD_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         using (var kaoFile = KAO_File.Create(byteData, nameGetter, scenario)) {
-                            if (kaoFile.FaceChunkTable.Length == 1)
-                                continue;
-
                             foreach (var face in kaoFile.FaceChunkTable) {
                                 // Condition for match checks here
                                 var matchReports = KAO_MatchFunc(face, filename);

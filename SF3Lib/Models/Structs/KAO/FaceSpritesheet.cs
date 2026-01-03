@@ -190,20 +190,35 @@ namespace SF3.Models.Structs.KAO {
                 if (x1 == -1)
                     return null;
 
-                // Don't allow odd widths.
-                if ((x2 - x1) % 2 == 1) {
-                    if (x2 == width)
-                        x1--;
-                    else
-                        x2++;
+                // Width must be a multiple of 8.
+                if ((x2 - x1) % 8 != 0) {
+                    var diff = 8 - ((x2 - x1) % 8);
+
+                    // Expand on both sides to make up for 
+                    var diff2 = diff / 2;
+                    x1 -= diff2;
+                    x2 += (diff - diff2);
+
+                    // (Don't exceed image boundaries)
+                    var adj = 0;
+                    if (x1 < 0)
+                        adj = -x1;
+                    else if (x2 > width)
+                        adj = width - x2;
+
+                    x1 += adj;
+                    x2 += adj;
                 }
 
-                // Don't allow odd heights.
-                if ((y2 - y1) % 2 == 1) {
-                    if (y2 == height)
+                // Height must be a multiple of 2.
+                if ((y2 - y1) % 2 != 0) {
+                    y2++;
+
+                    // (Don't exceed image boundaries)
+                    if (y2 > height) {
                         y1--;
-                    else
-                        y2++;
+                        y2 = height;
+                    }
                 }
 
                 return new DecomposedImageBoundary(x1, y1, x2, y2);
