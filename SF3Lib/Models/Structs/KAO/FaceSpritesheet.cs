@@ -30,13 +30,7 @@ namespace SF3.Models.Structs.KAO {
         public int Width => Header.Width * 6;
         public int Height => Header.Height * 2;
 
-        public byte[,] ImageData8Bit {
-            get {
-                if (_textureDataBuffer.ImageData8Bit == null)
-                    _textureDataBuffer.ImageData8Bit = GetImageData();
-                return _textureDataBuffer.ImageData8Bit;
-            }
-        }
+        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => GetImageData());
 
         private class DecomposedImageBoundary {
             public DecomposedImageBoundary(int x1, int y1, int x2, int y2) {
@@ -299,30 +293,18 @@ namespace SF3.Models.Structs.KAO {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
-        public string Hash {
-            get {
-                if (_textureDataBuffer.Hash == null && BitmapDataARGB1555 != null)
-                    _textureDataBuffer.Hash = BitmapDataARGB1555.CreateTextureHash();
-                return _textureDataBuffer.Hash;
-            }
-        }
+        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public bool ZeroIsTransparent => true;
 
         public bool CanSetImageData8Bit => true;
         public bool CanSetImageData16Bit => false;
 
-        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
-            if (_textureDataBuffer.BitmapDataARGB1555 == null)
-                _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-            return _textureDataBuffer.BitmapDataARGB1555;
-        }
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
+            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
-        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
-            if (_textureDataBuffer.BitmapDataARGB8888 == null)
-                _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-            return _textureDataBuffer.BitmapDataARGB8888;
-        }
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
+            => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
         public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
             // TODO: proper validation!

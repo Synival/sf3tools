@@ -37,39 +37,21 @@ namespace SF3.Images {
         }
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
-            if (BytesPerPixel == 1) {
-                if (_textureDataBuffer.BitmapDataARGB1555 == null)
-                    _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-                return _textureDataBuffer.BitmapDataARGB1555;
-            }
-            else if (highlightEndcodes) {
-                if (_textureDataBuffer.BitmapDataARGB1555_Endcodes == null)
-                    _textureDataBuffer.BitmapDataARGB1555_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true);
-                return _textureDataBuffer.BitmapDataARGB1555_Endcodes;
-            }
-            else {
-                if (_textureDataBuffer.BitmapDataARGB1555 == null)
-                    _textureDataBuffer.BitmapDataARGB1555 = BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false);
-                return _textureDataBuffer.BitmapDataARGB1555;
-            }
+            if (BytesPerPixel == 1)
+                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+            else if (highlightEndcodes)
+                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true));
+            else
+                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false));
         }
 
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
-            if (BytesPerPixel == 1) {
-                if (_textureDataBuffer.BitmapDataARGB8888 == null)
-                    _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent);
-                return _textureDataBuffer.BitmapDataARGB8888;
-            }
-            else if (highlightEndcodes) {
-                if (_textureDataBuffer.BitmapDataARGB8888_Endcodes == null)
-                    _textureDataBuffer.BitmapDataARGB8888_Endcodes = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true);
-                return _textureDataBuffer.BitmapDataARGB8888_Endcodes;
-            }
-            else {
-                if (_textureDataBuffer.BitmapDataARGB8888 == null)
-                    _textureDataBuffer.BitmapDataARGB8888 = BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false);
-                return _textureDataBuffer.BitmapDataARGB8888;
-            }
+            if (BytesPerPixel == 1)
+                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+            else if (highlightEndcodes)
+                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true));
+            else
+                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false));
         }
 
         public void Invalidate(bool sendEvent = true) {
@@ -207,18 +189,10 @@ namespace SF3.Images {
 
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        public string Hash {
-            get {
-                if (_textureDataBuffer.Hash == null && BitmapDataARGB1555 != null)
-                    _textureDataBuffer.Hash = BitmapDataARGB1555.CreateTextureHash();
-                return _textureDataBuffer.Hash;
-            }
-        }
+        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public byte[,] ImageData8Bit {
-            get {
-                if (_textureDataBuffer.ImageData8Bit != null)
-                    return _textureDataBuffer.ImageData8Bit;
+            get => _textureDataBuffer.GetOrCacheImageData8Bit(() => {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
                 if (ImageDataOffset < 0 || (!IsCompressed && ImageDataOffset + ImageDataSize > Data.Length))
@@ -239,9 +213,8 @@ namespace SF3.Images {
                 }
 
                 StoredImageDataSize = storedSize;
-                _textureDataBuffer.ImageData8Bit = outputData;
                 return outputData;
-            }
+            });
         }
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
@@ -267,7 +240,7 @@ namespace SF3.Images {
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                _textureDataBuffer.ImageData8Bit = data;
+                _textureDataBuffer.SetImageData8Bit(data);
                 Palette = palette;
                 StoredImageDataSize = newStoredData.Length;
             }
@@ -276,9 +249,7 @@ namespace SF3.Images {
         }
 
         public ushort[,] ImageData16Bit {
-            get {
-                if (_textureDataBuffer.ImageData16Bit != null)
-                    return _textureDataBuffer.ImageData16Bit;
+            get => _textureDataBuffer.GetOrCacheImageData16Bit(() => {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
                 if (ImageDataOffset < 0 || (!IsCompressed && ImageDataOffset + ImageDataSize > Data.Length))
@@ -304,9 +275,8 @@ namespace SF3.Images {
                 outputData.FixSaturnTransparency(useEndCodes: true);
 
                 StoredImageDataSize = storedSize;
-                _textureDataBuffer.ImageData16Bit = outputData;
                 return outputData;
-            }
+            });
             set {
                 var off = 0;
                 var newWidth = value.GetLength(0);
@@ -333,7 +303,7 @@ namespace SF3.Images {
 
                 Invalidate(sendEvent: false);
                 using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                    _textureDataBuffer.ImageData16Bit = value;
+                    _textureDataBuffer.SetImageData16Bit(value);
                     StoredImageDataSize = newStoredData.Length;
                 }
 
