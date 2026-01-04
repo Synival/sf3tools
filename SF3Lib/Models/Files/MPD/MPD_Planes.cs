@@ -16,7 +16,7 @@ namespace SF3.Models.Files.MPD {
             ITextureData groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 try {
-                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
+                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, () => MPD_File.CreatePalette(0));
                 }
                 catch {
                     // TODO: what to do here??
@@ -53,7 +53,7 @@ namespace SF3.Models.Files.MPD {
             ITextureData backgroundImage = null;
             if (MPD_File.BackgroundChunkDatas?.Any() == true) {
                 try {
-                    backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, MPD_File.CreatePalette(0));
+                    backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, () => MPD_File.CreatePalette(0));
                 }
                 catch {
                     // TODO: what to do here??
@@ -65,7 +65,7 @@ namespace SF3.Models.Files.MPD {
             ITextureData skyBoxImage = null;
             if (MPD_File.SkyBoxChunkDatas?.Any() == true) {
                 try {
-                    skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, MPD_File.CreatePalette(1));
+                    skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, () => MPD_File.CreatePalette(1));
                 }
                 catch {
                     // TODO: what to do here??

@@ -18,9 +18,8 @@ namespace SF3.Models.Structs.MPD.Plane {
         }
 
         public void UpdateImages() {
-            var palette = PaletteGetter();
-            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, palette, true);
-            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteType, palette, zeroIsTransparent: false, canSetImage: false);
+            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, true);
+            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteType, PaletteGetter(), zeroIsTransparent: false, canSetImage: false);
         }
 
         private byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {

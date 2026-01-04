@@ -10,9 +10,10 @@ namespace SF3.Models.Files.MPD {
     public class MultiChunkTextureIndexed : TextureData {
         public const int c_width = 512;
 
-        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Palette palette, bool isTiled = false)
-        : base(FetchTextureData(datas, isTiled), format, palette, zeroIsTransparent: false, canSetImage: false)
-        {
+        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, bool isTiled = false)
+        : base(FetchTextureData(datas, isTiled), format, paletteGetter(), zeroIsTransparent: false, canSetImage: true) {
+            Datas = datas;
+            PaletteGetter = paletteGetter;
             IsTiled = isTiled;
         }
 
@@ -34,6 +35,30 @@ namespace SF3.Models.Files.MPD {
             return isTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
         }
 
+        public override string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+            var error = base.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
+            if (error != null)
+                return error;
+
+            return (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                ? $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}"
+                : null;
+        }
+
+        public override void SetImageData8Bit(byte[,] data, Palette palette) {
+            // TODO: do it!
+            throw new NotImplementedException();
+
+            base.SetImageData8Bit(data, palette);
+            // TODO: set the data
+            // TODO: set the palette
+        }
+
+        public override bool CanSetImageData8Bit => !IsTiled;
+        public override bool CanSetImageData16Bit => false;
+
+        public IByteData[] Datas { get; }
+        public Func<Palette> PaletteGetter { get; }
         public bool IsTiled { get; }
     }
 }
