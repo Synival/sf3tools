@@ -76,7 +76,7 @@ namespace SF3.Editor.Forms {
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
         public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, bool addToRecentFiles) {
             try {
-                using ( var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                     return LoadFile(filename, scenario, fileType, stream, addToRecentFiles);
             }
             catch (Exception ex) {

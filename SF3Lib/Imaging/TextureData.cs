@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
@@ -9,10 +7,7 @@ using CommonLib.Utils;
 using SF3.Types;
 
 namespace SF3.Imaging {
-    public class TextureData : ITextureData {
-        public delegate string Validator8Bit(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize);
-        public delegate string Validator16Bit(ushort[,] data, int oldStoredSize, int newStoredSize);
-
+    public class TextureData : TextureDataBase, ITextureData {
         public TextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
@@ -35,61 +30,6 @@ namespace SF3.Imaging {
             else
                 _ = ImageData16Bit;
         }
-
-        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
-            if (BytesPerPixel == 1)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
-            else if (highlightEndcodes)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true));
-            else
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false));
-        }
-
-        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
-            if (BytesPerPixel == 1)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
-            else if (highlightEndcodes)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true));
-            else
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false));
-        }
-
-        public void Invalidate(bool sendEvent = true) {
-            if (_invalidateGuard > 0)
-                return;
-
-            _textureDataBuffer.Invalidate();
-            if (sendEvent)
-                Invalidated?.Invoke(this, EventArgs.Empty);
-        }
-
-        public virtual string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
-            if (!CanSetImageData8Bit)
-                return "Not supported";
-            foreach (var validator in _validators8Bit) {
-                var error = validator(data, palette, oldStoredSize, newStoredSize);
-                if (error != null)                
-                    return error;
-            }
-            return null;
-        }
-
-        public virtual string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
-            if (!CanSetImageData16Bit)
-                return "Not supported";
-            foreach (var validator in _validators16Bit) {
-                var error = validator(data, oldStoredSize, newStoredSize);
-                if (error != null)                
-                    return error;
-            }
-            return null;
-        }
-
-        public void Add8BitValidator(Validator8Bit v)
-            => _validators8Bit.Add(v);
-
-        public void Add16BitValidator(Validator16Bit v)
-            => _validators16Bit.Add(v);
 
         private IByteArray _data;
         public IByteArray Data {
@@ -114,7 +54,7 @@ namespace SF3.Imaging {
         }
 
         private int _width;
-        public virtual int Width {
+        public override int Width {
             get => _width;
             set {
                 if (_width != value) {
@@ -125,7 +65,7 @@ namespace SF3.Imaging {
         }
 
         private int _height;
-        public virtual int Height {
+        public override int Height {
             get => _height;
             set {
                 if (_height != value) {
@@ -136,7 +76,7 @@ namespace SF3.Imaging {
         }
 
         private TexturePixelFormat _pixelFormat;
-        public TexturePixelFormat PixelFormat {
+        public override TexturePixelFormat PixelFormat {
             get => _pixelFormat;
             set {
                 if (_pixelFormat != value) {
@@ -147,7 +87,7 @@ namespace SF3.Imaging {
         }
 
         private Palette _palette;
-        public virtual Palette Palette {
+        public override Palette Palette {
             get => _palette;
             set {
                 if (_palette != value) {
@@ -169,7 +109,7 @@ namespace SF3.Imaging {
         }
 
         private bool _zeroIsTransparent;
-        public bool ZeroIsTransparent {
+        public override bool ZeroIsTransparent {
             get => _zeroIsTransparent;
             set {
                 if (_zeroIsTransparent != value) {
@@ -179,45 +119,38 @@ namespace SF3.Imaging {
             }
         }
 
-        public int BytesPerPixel => PixelFormat.BytesPerPixel();
         public int StoredImageDataSize { get; private set; }
-        public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
-        public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
-        public virtual bool CanSetImageData8Bit => CanSetImage;
-        public virtual bool CanSetImageData16Bit => CanSetImage;
+        public override bool CanSetImageData8Bit => CanSetImage;
+        public override bool CanSetImageData16Bit => CanSetImage;
         public virtual bool CanSetImage { get; set; }
 
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
+        protected override byte[,] GetImageData8Bit() {
+            if (BytesPerPixel != 1)
+                throw new InvalidOperationException();
+            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
+                return null;
 
-        public byte[,] ImageData8Bit {
-            get => _textureDataBuffer.GetOrCacheImageData8Bit(() => {
-                if (BytesPerPixel != 1)
-                    throw new InvalidOperationException();
-                if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
-                    return null;
+            var storedSize = ImageDataSize;
+            var inputData = IsCompressed
+                ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
+            var outputData = new byte[Width, Height];
 
-                var storedSize = ImageDataSize;
-                var inputData = IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                    : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
-                var outputData = new byte[Width, Height];
-
-                var off = 0;
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
-                        var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
-                        outputData[x, y] = texPixel;
-                    }
+            var off = 0;
+            for (var y = 0; y < Height; y++) {
+                for (var x = 0; x < Width; x++) {
+                    var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
+                    outputData[x, y] = texPixel;
                 }
+            }
 
-                StoredImageDataSize = storedSize;
-                return outputData;
-            });
+            StoredImageDataSize = storedSize;
+            return outputData;
         }
 
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
+        public override void SetImageData8Bit(byte[,] data, Palette palette) {
             var off = 0;
             var newWidth = data.GetLength(0);
             var newHeight = data.GetLength(1);
@@ -240,82 +173,74 @@ namespace SF3.Imaging {
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                _textureDataBuffer.SetImageData8Bit(data);
+                _ = _textureDataBuffer.SetImageData8Bit(data);
                 Palette = palette;
                 StoredImageDataSize = newStoredData.Length;
             }
 
-            Invalidated?.Invoke(this, EventArgs.Empty);
+            InvokeInvalidatedEvent();
         }
 
-        public ushort[,] ImageData16Bit {
-            get => _textureDataBuffer.GetOrCacheImageData16Bit(() => {
-                if (BytesPerPixel != 2)
-                    throw new InvalidOperationException();
-                if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
-                    return null;
+        protected override ushort[,] GetImageData16Bit() {
+            if (BytesPerPixel != 2)
+                throw new InvalidOperationException();
+            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
+                return null;
 
-                var storedSize = ImageDataSize;
-                var inputData = (IsCompressed
-                    ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                    : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
-                    .ToUShorts();
+            var storedSize = ImageDataSize;
+            var inputData = (IsCompressed
+                ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
+                : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
+                .ToUShorts();
 
-                var outputData = new ushort[Width, Height];
+            var outputData = new ushort[Width, Height];
 
-                var off = 0;
-                for (var y = 0; y < Height; y++) {
-                    for (var x = 0; x < Width; x++) {
-                        var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
-                        outputData[x, y] = texPixel;
-                    }
+            var off = 0;
+            for (var y = 0; y < Height; y++) {
+                for (var x = 0; x < Width; x++) {
+                    var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
+                    outputData[x, y] = texPixel;
                 }
-
-                // Add transparency end codes to the texture.
-                outputData.FixSaturnTransparency(useEndCodes: true);
-
-                StoredImageDataSize = storedSize;
-                return outputData;
-            });
-            set {
-                var off = 0;
-                var newWidth = value.GetLength(0);
-                var newHeight = value.GetLength(1);
-                var newData = new byte[newWidth * newHeight * 2];
-                for (var y = 0; y < newHeight; y++) {
-                    for (var x = 0; x < newWidth; x++) {
-                        var val = value[x, y];
-                        newData[off++] = (byte) (val >> 8);
-                        newData[off++] = (byte) val;
-                    }
-                }
-
-                var newStoredData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
-
-                var error = Validate16BitImageData(value, StoredImageDataSize, newStoredData.Length);
-                if (error != null)
-                    throw new ArgumentException(error);
-
-                PixelFormat = TexturePixelFormat.ABGR1555;
-                Width  = newWidth;
-                Height = newHeight;
-                Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
-
-                Invalidate(sendEvent: false);
-                using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                    _textureDataBuffer.SetImageData16Bit(value);
-                    StoredImageDataSize = newStoredData.Length;
-                }
-
-                Invalidated?.Invoke(this, EventArgs.Empty);
             }
+
+            // Add transparency end codes to the texture.
+            outputData.FixSaturnTransparency(useEndCodes: true);
+
+            StoredImageDataSize = storedSize;
+            return outputData;
         }
 
-        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
-        private int _invalidateGuard = 0;
-        private List<Validator8Bit> _validators8Bit = new List<Validator8Bit>();
-        private List<Validator16Bit> _validators16Bit = new List<Validator16Bit>();
+        protected override void SetImageData16Bit(ushort[,] data) {
+            var off = 0;
+            var newWidth = data.GetLength(0);
+            var newHeight = data.GetLength(1);
+            var newData = new byte[newWidth * newHeight * 2];
+            for (var y = 0; y < newHeight; y++) {
+                for (var x = 0; x < newWidth; x++) {
+                    var val = data[x, y];
+                    newData[off++] = (byte) (val >> 8);
+                    newData[off++] = (byte) val;
+                }
+            }
 
-        public event EventHandler Invalidated;
+            var newStoredData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
+
+            var error = Validate16BitImageData(data, StoredImageDataSize, newStoredData.Length);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            PixelFormat = TexturePixelFormat.ABGR1555;
+            Width  = newWidth;
+            Height = newHeight;
+            Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
+
+            Invalidate(sendEvent: false);
+            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+                _textureDataBuffer.SetImageData16Bit(data);
+                StoredImageDataSize = newStoredData.Length;
+            }
+
+            InvokeInvalidatedEvent();
+        }
     }
 }
