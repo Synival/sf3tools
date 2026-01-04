@@ -1,6 +1,6 @@
 ﻿using CommonLib.Arrays;
 using CommonLib.Extensions;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Models.Structs.KAO;
 using SF3.Types;
 

@@ -5,7 +5,7 @@ using CommonLib.Logging;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 

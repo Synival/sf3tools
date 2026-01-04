@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.Types;

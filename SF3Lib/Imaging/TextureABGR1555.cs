@@ -7,7 +7,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Types;
 
-namespace SF3.Images {
+namespace SF3.Imaging {
     public class TextureABGR1555 : ITexture {
         public TextureABGR1555(
             CollectionType collection,

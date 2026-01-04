@@ -7,7 +7,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Types;
 
-namespace SF3.Images {
+namespace SF3.Imaging {
     public class TextureIndexed : ITexture {
         public TextureIndexed(
             CollectionType collection,

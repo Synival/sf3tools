@@ -10,7 +10,7 @@ using SF3.Models.Tables.MPD.Model;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Extensions;
-using SF3.Images;
+using SF3.Imaging;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {

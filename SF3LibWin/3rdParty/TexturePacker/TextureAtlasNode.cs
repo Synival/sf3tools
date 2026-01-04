@@ -4,7 +4,7 @@
 
 using System;
 using System.Drawing;
-using SF3.Images;
+using SF3.Imaging;
 
 namespace SF3.Win.ThirdParty.TexturePacker {
     public class TextureAtlasNode : IDisposable {

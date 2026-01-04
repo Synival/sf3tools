@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.SGL;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.MPD;
 using SF3.Types;
 

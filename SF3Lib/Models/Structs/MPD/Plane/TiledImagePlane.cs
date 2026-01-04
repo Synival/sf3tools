@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib.Imaging;
 using SF3.ByteData;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.MPD;
 using SF3.Types;

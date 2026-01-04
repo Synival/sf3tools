@@ -1,5 +1,5 @@
 using CommonLib.NamedValues;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 using SF3.Models.Tables.MPD.Animation;

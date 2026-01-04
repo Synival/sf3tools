@@ -10,7 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using CommonLib.Types;
 using OpenTK.Mathematics;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Types;
 using static CommonLib.Types.CornerTypeConsts;
 

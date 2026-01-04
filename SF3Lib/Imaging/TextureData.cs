@@ -8,7 +8,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Types;
 
-namespace SF3.Images {
+namespace SF3.Imaging {
     public class TextureData : ITextureData {
         public delegate string Validator8Bit(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize);
         public delegate string Validator16Bit(ushort[,] data, int oldStoredSize, int newStoredSize);
@@ -195,7 +195,7 @@ namespace SF3.Images {
             get => _textureDataBuffer.GetOrCacheImageData8Bit(() => {
                 if (BytesPerPixel != 1)
                     throw new InvalidOperationException();
-                if (ImageDataOffset < 0 || (!IsCompressed && ImageDataOffset + ImageDataSize > Data.Length))
+                if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
                     return null;
 
                 var storedSize = ImageDataSize;
@@ -252,7 +252,7 @@ namespace SF3.Images {
             get => _textureDataBuffer.GetOrCacheImageData16Bit(() => {
                 if (BytesPerPixel != 2)
                     throw new InvalidOperationException();
-                if (ImageDataOffset < 0 || (!IsCompressed && ImageDataOffset + ImageDataSize > Data.Length))
+                if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
                     return null;
 
                 var storedSize = ImageDataSize;

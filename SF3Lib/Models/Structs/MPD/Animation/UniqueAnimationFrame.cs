@@ -2,7 +2,7 @@
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.Shared;
 using SF3.Types;

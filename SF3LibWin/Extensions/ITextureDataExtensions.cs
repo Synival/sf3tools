@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Extensions;
-using SF3.Images;
+using SF3.Imaging;
 
 namespace SF3.Win.Extensions {
     public static class ITextureDataExtensions {

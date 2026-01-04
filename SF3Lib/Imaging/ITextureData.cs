@@ -2,7 +2,7 @@
 using CommonLib.Imaging;
 using SF3.Types;
 
-namespace SF3.Images {
+namespace SF3.Imaging {
     /// <summary>
     /// Abstract representation of image data alone.
     /// </summary>

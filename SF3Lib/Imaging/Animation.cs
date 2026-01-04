@@ -2,7 +2,7 @@
 using System.Linq;
 using CommonLib.Utils;
 
-namespace SF3.Images {
+namespace SF3.Imaging {
     public class Animation {
         public Animation(int id, ITexture[] frames, int frameTimerStart) {
             if (frames == null)

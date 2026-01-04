@@ -4,7 +4,7 @@ using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.ByteData;
-using SF3.Images;
+using SF3.Imaging;
 using SF3.Sprites;
 using SF3.Types;
 

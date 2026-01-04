@@ -1,4 +1,4 @@
-﻿using SF3.Images;
+﻿using SF3.Imaging;
 
 namespace SF3.MPD {
     /// <summary>
