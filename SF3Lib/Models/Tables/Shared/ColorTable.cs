@@ -1,14 +1,139 @@
-﻿using SF3.ByteData;
+﻿using System;
+using System.Linq;
+using CommonLib.Extensions;
+using CommonLib.Imaging;
+using CommonLib.Utils;
+using SF3.ByteData;
+using SF3.Imaging;
 using SF3.Models.Structs.Shared;
+using SF3.Types;
 
 namespace SF3.Models.Tables.Shared {
-    public class ColorTable : FixedSizeTable<Color> {
-        protected ColorTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {}
+    public class ColorTable : FixedSizeTable<Color>, ITextureData {
+        protected ColorTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {
+            (Width, Height) = ImageUtils.GetPaletteImageDimensions(size);
+            ImageDataSize = Width * Height;
+
+            // 8-bit data is just a sequence.
+            var data8Bit = new byte[Width, Height];
+            int index = 0;
+            for (int y = 0; y < Height; y++) {
+                for (int x = 0; x < Width; x++) {
+                    data8Bit[x, y] = (byte) index;
+                    if (index < 0xFF)
+                        index++;
+                }
+            }
+            ImageData8Bit = data8Bit;
+
+            // Invalidate the image whenever the colors have been modified.
+            data.Data.RangeModified += (s, eventData) => {
+                // Check for an interval intersection.
+                var maxStart = Math.Max(Address, eventData.Offset);
+                var minEnd = Math.Min(Address + SizeInBytes, eventData.Offset + eventData.Length);
+                if (maxStart < minEnd)
+                    Invalidate();
+            };
+        }
+
+        public void Invalidate(bool sendEvent = true) {
+            _textureDataBuffer.Invalidate();
+            if (sendEvent)
+                Invalidated?.Invoke(this, EventArgs.Empty);
+        }
 
         public static ColorTable Create(IByteData data, string name, int address, int size)
             => Create(() => new ColorTable(data, name, address, size));
 
         public override bool Load()
             => Load((id, address) => new Color(Data, id, "Color" + id.ToString("D3"), address));
+
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
+
+        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
+            return (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                ? $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}"
+                : null;
+        }
+
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+            return (data.GetLength(0) != Width || data.GetLength(1) != Height)
+                ? $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}"
+                : null;
+        }
+
+        public int BytesPerPixel => 1;
+        public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public int ImageDataSize { get; private set; }
+
+        public byte[,] ImageData8Bit { get; private set; }
+        public void SetImageData8Bit(byte[,] data, Palette palette) {
+            var error = Validate8BitImageData(data, palette, 0, 0);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            var dataWidth  = data.GetLength(0);
+            var dataHeight = data.GetLength(1);
+
+            var newColors = new ushort[Size];
+            int pos = 0;
+            for (int y = 0; y < dataHeight && pos < newColors.Length; y++)
+                for (int x = 0; x < dataWidth && pos < newColors.Length; x++)
+                    newColors[pos++] = (ushort) (palette.Channels[data[x, y]].ToABGR1555() & 0x7FFF);
+
+            Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToByteArray());
+        }
+
+        public ushort[,] ImageData16Bit {
+            get => throw new NotSupportedException();
+            set {
+                var error = Validate16BitImageData(value, 0, 0);
+                if (error != null)
+                    throw new ArgumentException(error);
+
+                var dataWidth  = value.GetLength(0);
+                var dataHeight = value.GetLength(1);
+
+                var newColors = new ushort[Size];
+                int pos = 0;
+                for (int y = 0; y < dataHeight && pos < newColors.Length; y++)
+                    for (int x = 0; x < dataWidth && pos < newColors.Length; x++)
+                        newColors[pos++] = (ushort) (value[x, y] & 0x7FFF);
+
+                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToByteArray());
+            }
+        }
+
+        public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
+        public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
+        public string Hash => BitmapDataARGB1555.CreateTextureHash();
+
+        public Palette Palette {
+            get {
+                // TODO: caching somehow would be good!
+                return new Palette(Rows.Select(x => x.ColorABGR1555).ToArray());
+            }
+            set {
+                if (value == null)
+                    return;
+                var newColors = new ushort[Size];
+                for (int i = 0; i < Size && i < value.Channels.Length; i++)
+                    newColors[i] = (ushort) (value.Channels[i].ToABGR1555() & 0x7FFF);
+
+                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToByteArray());
+            }
+        }
+
+        public bool ZeroIsTransparent => false;
+        public bool CanSetImageData8Bit => true;
+        public bool CanSetImageData16Bit => true;
+
+
+        public event EventHandler Invalidated;
+
+        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
     }
 }
