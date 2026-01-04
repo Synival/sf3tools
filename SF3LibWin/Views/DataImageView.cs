@@ -18,7 +18,7 @@ namespace SF3.Win.Views {
 
         public DataImageView(string name, IByteArray[] datas, Palette palette, DataImageViewMode viewMode) : this(name, datas, [palette], viewMode) { }
 
-        public DataImageView(string name, IByteArray[] datas, Palette[] palettes, DataImageViewMode viewMode = DataImageViewMode.ColumnMajor) : base(name, 2) {
+        public DataImageView(string name, IByteArray[] datas, Palette[] palettes, DataImageViewMode viewMode = DataImageViewMode.ColumnMajor) : base(name, imageScale: 1) {
             Datas    = datas;
             Palettes = palettes;
             ViewMode = viewMode;
