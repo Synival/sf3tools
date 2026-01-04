@@ -51,17 +51,11 @@ namespace SF3.Models.Tables.Shared {
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
-            return (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                ? $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}"
-                : null;
-        }
+        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+            => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
-            return (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                ? $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}"
-                : null;
-        }
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+            => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
         public int BytesPerPixel => 1;
         public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;

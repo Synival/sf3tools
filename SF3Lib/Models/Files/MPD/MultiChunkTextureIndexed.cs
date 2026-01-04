@@ -36,13 +36,9 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
-            var error = base.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
-            if (error != null)
-                return error;
-
-            return (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                ? $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}"
-                : null;
+            return
+                base.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize) ??
+                TextureDataValidators.IsSameDimensions(data, Width, Height);
         }
 
         public override void SetImageData8Bit(byte[,] data, Palette palette) {

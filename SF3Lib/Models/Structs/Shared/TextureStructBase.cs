@@ -14,17 +14,8 @@ namespace SF3.Models.Structs.Shared {
             _textureData = new InPlaceTextureData(imageData, 0, 0, 0, pixelFormat, null,
                 isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true);
 
-            _textureData.Add8BitValidator((texData, _1, _2, _3) => {
-                return (texData.GetLength(0) != Width || texData.GetLength(1) != Height)
-                    ? $"Incoming texture height ({texData.GetLength(0)}x{texData.GetLength(1)}) should be {Width}x{Height}"
-                    : null;
-            });
-
-            _textureData.Add16BitValidator((texData, _1, _2) => {
-                return (texData.GetLength(0) != Width || texData.GetLength(1) != Height)
-                    ? $"Incoming texture height ({texData.GetLength(0)}x{texData.GetLength(1)}) should be {Width}x{Height}"
-                    : null;
-            });
+            _textureData.Add8BitValidator((texData, _1, _2, _3) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
+            _textureData.Add16BitValidator((texData, _1, _2) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
     
             // Forward "Invalidated" events from the wrapped _textureData to our own event handler.
             _textureData.Invalidated += (s, e) => this.Invalidated?.Invoke(this, e);

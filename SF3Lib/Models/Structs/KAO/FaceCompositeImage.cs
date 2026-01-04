@@ -60,9 +60,7 @@ namespace SF3.Models.Structs.KAO {
         public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
             if (!HasImage)
                 return "No image available";
-            if (data.GetLength(0) != Width || data.GetLength(1) != Height)
-                return $"Incoming texture height ({data.GetLength(0)}x{data.GetLength(1)}) should be {Width}x{Height}";
-            return null;
+            return TextureDataValidators.IsSameDimensions(data, Width, Height);
         }
 
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
