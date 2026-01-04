@@ -7,22 +7,28 @@ using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public class MultiChunkTextureIndexed : TextureData {
+    public class MultiChunkTextureIndexed : TextureDataBase {
         public const int c_width = 512;
 
-        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, bool isTiled = false)
-        : base(FetchTextureData(datas, isTiled), format, paletteGetter(), zeroIsTransparent: false, canSetImage: true) {
-            Datas = datas;
+        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, bool isTiled = false) {
+            if (datas != null) {
+                for (int i = 0; i < datas.Length; i++)
+                    if (datas[i].Length % c_width != 0)
+                        throw new ArgumentException($"{nameof(datas)}[{i}] height is not divisible by 512");
+            }
+
+            Datas         = datas;
+            _height       = (datas == null) ? 0 : datas.Select(x => x.Length / c_width).Sum();
+            _pixelFormat  = format;
             PaletteGetter = paletteGetter;
-            IsTiled = isTiled;
+            IsTiled       = isTiled;
         }
 
-        private static byte[,] FetchTextureData(IByteData[] datas, bool isTiled) {
-            for (int i = 0; i < datas.Length; i++)
-                if (datas[i].Length % c_width != 0)
-                    throw new ArgumentException($"{nameof(datas)}[{i}] height is not divisible by 512");
+        protected override byte[,] FetchImageData8Bit() {
+            if (Datas == null)
+                return null;
 
-            var dataBytes = datas.Select(x => x.GetDataCopy()).ToArray();
+            var dataBytes = Datas.Select(x => x.GetDataCopy()).ToArray();
             var fullDataHeight = dataBytes.Select(x => x.Length / c_width).Sum();
             var fullDataBytes = new byte[c_width * fullDataHeight];
 
@@ -32,7 +38,7 @@ namespace SF3.Models.Files.MPD {
                 pos += data.Length;
             }
 
-            return isTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
+            return IsTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
         }
 
         public override string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
@@ -42,14 +48,33 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
-            // TODO: do it!
-            throw new NotImplementedException();
+            var error = Validate8BitImageData(data, palette, 0, 0);
+            if (error != null)
+                throw new ArgumentException(error);
 
-            base.SetImageData8Bit(data, palette);
+            // TODO: do it!
             // TODO: set the data
             // TODO: set the palette
+            throw new NotImplementedException();
         }
 
+        protected override ushort[,] FetchImageData16Bit() => throw new NotSupportedException();
+        protected override void SetImageData16Bit(ushort[,] data) => throw new NotSupportedException();
+
+        private TexturePixelFormat _pixelFormat;
+        public override TexturePixelFormat PixelFormat { get => _pixelFormat; set {} }
+
+        public override int Width { get => c_width; set {} }
+
+        private int _height;
+        public override int Height { get => _height; set {} }
+
+        public override Palette Palette {
+            get => PaletteGetter();
+            set { /* TODO: PaletteSetter() */ }
+        }
+
+        public override bool ZeroIsTransparent { get => false; set {} }
         public override bool CanSetImageData8Bit => !IsTiled;
         public override bool CanSetImageData16Bit => false;
 
