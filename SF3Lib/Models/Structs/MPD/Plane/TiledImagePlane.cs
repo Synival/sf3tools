@@ -14,20 +14,22 @@ namespace SF3.Models.Structs.MPD.Plane {
             IMPD_PlaneTileAssignment tileAssignment,
             TexturePixelFormat paletteType,
             Func<Palette> paletteGetter,
-            Action<Palette> paletteSetter
+            Action<Palette> paletteSetter,
+            bool zeroIsTransparent
         ) {
             TilesetDatas   = new IByteData[] { tilesetData1, tilesetData2 };
             TileAssignment = tileAssignment;
             PaletteType    = paletteType;
             PaletteGetter  = paletteGetter;
             PaletteSetter  = paletteSetter;
+            ZeroIsTransparent = zeroIsTransparent;
 
             UpdateImages();
         }
 
         public void UpdateImages() {
-            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, PaletteSetter, true);
-            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteType, PaletteGetter(), zeroIsTransparent: false, canSetImage: false);
+            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, PaletteSetter, zeroIsTransparent: ZeroIsTransparent, isTiled: true);
+            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteType, PaletteGetter(), zeroIsTransparent: ZeroIsTransparent, canSetImage: false);
         }
 
         private byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
@@ -60,5 +62,6 @@ namespace SF3.Models.Structs.MPD.Plane {
         public TexturePixelFormat PaletteType { get; }
         public Func<Palette> PaletteGetter { get; }
         public Action<Palette> PaletteSetter { get; }
+        public bool ZeroIsTransparent { get; }
     }
 }
