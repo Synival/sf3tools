@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using SF3.ByteData;
@@ -13,12 +14,12 @@ namespace SF3.Models.Files.MPD {
         public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, Action<Palette> paletteSetter, bool isTiled = false) {
             if (datas != null) {
                 for (int i = 0; i < datas.Length; i++)
-                    if (datas[i].Length % c_width != 0)
+                    if (datas[i] != null && datas[i].Length % c_width != 0)
                         throw new ArgumentException($"{nameof(datas)}[{i}] height is not divisible by 512");
             }
 
             Datas         = datas;
-            _height       = (datas == null) ? 0 : datas.Select(x => x.Length / c_width).Sum();
+            _height       = (datas == null) ? 0 : datas.Select(x => (x?.Length ?? 0) / c_width).Sum();
             _pixelFormat  = format;
             PaletteGetter = paletteGetter;
             PaletteSetter = paletteSetter;
@@ -29,7 +30,7 @@ namespace SF3.Models.Files.MPD {
             if (Datas == null)
                 return null;
 
-            var dataBytes = Datas.Select(x => x.GetDataCopy()).ToArray();
+            var dataBytes = Datas.Where(x => x != null).Select(x => x.GetDataCopyOrReference()).ToArray();
             var fullDataHeight = dataBytes.Select(x => x.Length / c_width).Sum();
             var fullDataBytes = new byte[c_width * fullDataHeight];
 
@@ -53,9 +54,23 @@ namespace SF3.Models.Files.MPD {
             if (error != null)
                 throw new ArgumentException(error);
 
-            // TODO: set the data
+            Invalidate(sendEvent: false);
+            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+                var toDatas = Datas?.Where(x => x != null)?.ToArray() ?? new IByteData[0];
+                var fromData = data.To1DArrayTransposed();
+                int fromDataPos = 0;
 
-            PaletteSetter?.Invoke(palette);
+                foreach (var toData in toDatas) {
+                    var newData = new byte[toData.Length];
+                    for (int i = 0; i < toData.Length; i++)
+                        newData[i] = fromData[fromDataPos++];
+                    toData.Data.SetDataTo(newData);
+                }
+
+                _textureDataBuffer.SetImageData8Bit(data);
+                PaletteSetter?.Invoke(palette);
+            }
+            InvokeInvalidatedEvent();
         }
 
         protected override ushort[,] FetchImageData16Bit() => throw new NotSupportedException();
@@ -70,8 +85,8 @@ namespace SF3.Models.Files.MPD {
         public override int Height { get => _height; set {} }
 
         public override Palette Palette {
-            get => PaletteGetter();
-            set { /* TODO: PaletteSetter() */ }
+            get => PaletteGetter?.Invoke();
+            set => PaletteSetter?.Invoke(value);
         }
 
         public override bool ZeroIsTransparent { get => false; set {} }
