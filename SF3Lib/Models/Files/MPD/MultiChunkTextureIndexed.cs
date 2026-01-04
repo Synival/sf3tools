@@ -57,7 +57,7 @@ namespace SF3.Models.Files.MPD {
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
                 var toDatas = Datas?.Where(x => x != null)?.ToArray() ?? new IByteData[0];
-                var fromData = data.To1DArrayTransposed();
+                var fromData = IsTiled ? data.FromTiles(8, 8) : data.To1DArrayTransposed();
                 int fromDataPos = 0;
 
                 foreach (var toData in toDatas) {
@@ -90,7 +90,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public override bool ZeroIsTransparent { get => false; set {} }
-        public override bool CanSetImageData8Bit => !IsTiled;
+        public override bool CanSetImageData8Bit => true;
         public override bool CanSetImageData16Bit => false;
 
         public IByteData[] Datas { get; }
