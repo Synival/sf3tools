@@ -5,20 +5,24 @@ using SF3.Types;
 
 namespace SF3.Imaging {
     public class TextureData : TextureDataBase, ITextureData {
-        public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
+        public TextureData(byte[,] data, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             if (data != null) {
                 _width  = data.GetLength(0);
                 _height = data.GetLength(1);
                 _textureDataBuffer.SetImageData8Bit(data);
             }
 
-            _pixelFormat = TexturePixelFormat.Palette1;
+            if (pixelFormat >= TexturePixelFormat.Palette1 && pixelFormat <= TexturePixelFormat.Palette3)
+                _pixelFormat = TexturePixelFormat.Palette1;
+            else
+                _pixelFormat = TexturePixelFormat.UnknownPalette;
+
             _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
         }
 
-        public TextureData(ushort[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
+        public TextureData(ushort[,] data, bool canSetImage) {
             if (data != null) {
                 _width       = data.GetLength(0);
                 _height      = data.GetLength(1);
@@ -26,8 +30,6 @@ namespace SF3.Imaging {
             }
 
             _pixelFormat       = TexturePixelFormat.ABGR1555;
-            _palette           = palette;
-            _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
         }
 

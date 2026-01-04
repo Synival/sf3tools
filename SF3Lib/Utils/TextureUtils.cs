@@ -36,7 +36,7 @@ namespace SF3.Utils {
                         allData[x, row] = data[x, y];
             }
 
-            return new TextureData(allData, null, zeroIsTransparent: false, canSetImage: canSetImage);
+            return new TextureData(allData, canSetImage: canSetImage);
         }
     }
 }

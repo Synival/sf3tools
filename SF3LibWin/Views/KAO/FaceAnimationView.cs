@@ -1,5 +1,6 @@
 ﻿using SF3.Imaging;
 using SF3.Models.Structs.KAO;
+using SF3.Types;
 
 namespace SF3.Win.Views.KAO {
     public class FaceAnimationView : AnimatedTextureView {
@@ -51,7 +52,7 @@ namespace SF3.Win.Views.KAO {
             FaceCompositeImage.AddFaceImageToData(newData, talkImage);
 
             // Generate a texture for it.
-            _faceTexture = new TextureData(newData, Face.Palette, zeroIsTransparent: true, canSetImage: false);
+            _faceTexture = new TextureData(newData, TexturePixelFormat.Palette1, Face.Palette, zeroIsTransparent: true, canSetImage: false);
         }
 
         private int GetBlinkingImage(int frame) {
