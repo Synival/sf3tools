@@ -89,14 +89,5 @@ namespace SF3.Tests.CHR
             for (int i = 0; i < 16; i++)
                 Assert.AreEqual(0u, chrFile.SpriteTable[1].AnimationOffsetTable[i].Offset);
         }
-
-        [TestMethod]
-        public void Compile_LookoverChurchCHRs_CompiledCHRsHaveSameFramesAndAnimations() {
-            var chrDefWithFrames    = CHR_Def.FromJSON(TestCHRs.LookoverChurchCHR);
-            var chrDefWithoutFrames = CHR_Def.FromJSON(TestCHRs.LookoverChurchCHR_WithoutFrames);
-
-            // TODO: finish this thing!
-            throw new NotImplementedException();
-        }
     }
 }

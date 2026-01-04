@@ -83,9 +83,9 @@ namespace SF3.Win.Views {
         }
 
         protected override Action GetImportImageAction() => null;
-        public override void ImportImage(string filename) => throw new NotImplementedException();
+        public override void ImportImage(string filename) => throw new NotSupportedException();
         protected override Action GetExportImageAction() => null;
-        public override void ExportImage(string filename, ImageFormat format) => throw new NotImplementedException();
+        public override void ExportImage(string filename, ImageFormat format) => throw new NotSupportedException();
 
         public bool Animating => _timer != null;
         public bool Paused => _timer?.Enabled == false;

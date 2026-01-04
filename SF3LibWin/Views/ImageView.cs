@@ -100,7 +100,7 @@ namespace SF3.Win.Views {
         }
 
         protected virtual Action GetImportImageAction() => null;
-        public virtual void ImportImage(string filename) => throw new NotImplementedException();
+        public virtual void ImportImage(string filename) => throw new NotSupportedException();
 
         protected virtual Action GetExportImageAction()
             => (_image == null) ? null : ExportImageDialog;
