@@ -1,8 +1,5 @@
-﻿using CommonLib.Arrays;
-using CommonLib.Extensions;
-using SF3.Imaging;
+﻿using SF3.Imaging;
 using SF3.Models.Structs.KAO;
-using SF3.Types;
 
 namespace SF3.Win.Views.KAO {
     public class FaceAnimationView : AnimatedTextureView {
@@ -13,7 +10,6 @@ namespace SF3.Win.Views.KAO {
         }
 
         public FaceChunk Face { get; private set; }
-        private ITextureData _faceTexture = null;
 
         public void StartAnimation(FaceChunk face) {
             Face = face;
@@ -55,8 +51,7 @@ namespace SF3.Win.Views.KAO {
             FaceCompositeImage.AddFaceImageToData(newData, talkImage);
 
             // Generate a texture for it.
-            _faceTexture = new TextureData(new ByteArray(newData.To1DArrayTransposed()), 0, Face.Header.Width, Face.Header.Height,
-                TexturePixelFormat.Palette1, Face.Palette, false, false, false);
+            _faceTexture = new NotInPlaceTextureData(newData, Face.Palette, zeroIsTransparent: true, canSetImage: false);
         }
 
         private int GetBlinkingImage(int frame) {
@@ -79,5 +74,6 @@ namespace SF3.Win.Views.KAO {
 
         private int _lastBlinkingFrame = -1;
         private int _lastTalkingFrame = -1;
+        private NotInPlaceTextureData _faceTexture = null;
     }
 }

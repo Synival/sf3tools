@@ -70,9 +70,9 @@ namespace SF3.Imaging {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
-        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(GetImageData8Bit);
+        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(FetchImageData8Bit);
         public ushort[,] ImageData16Bit { 
-            get => _textureDataBuffer.GetOrCacheImageData16Bit(GetImageData16Bit);
+            get => _textureDataBuffer.GetOrCacheImageData16Bit(FetchImageData16Bit);
             set => SetImageData16Bit(value);
         }
 
@@ -87,9 +87,9 @@ namespace SF3.Imaging {
         public abstract bool CanSetImageData8Bit { get; }
         public abstract bool CanSetImageData16Bit { get; }
 
-        protected abstract byte[,] GetImageData8Bit();
+        protected abstract byte[,] FetchImageData8Bit();
         public abstract void SetImageData8Bit(byte[,] data, Palette palette);
-        protected abstract ushort[,] GetImageData16Bit();
+        protected abstract ushort[,] FetchImageData16Bit();
         protected abstract void SetImageData16Bit(ushort[,] data);
 
         protected int _invalidateGuard = 0;

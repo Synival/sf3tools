@@ -24,7 +24,7 @@ namespace SF3.Utils {
             }
         }
 
-        private static ITextureData StackTexturesABGR1555(ITextureData[] textures, bool canSetImage) {
+        private static NotInPlaceTextureData StackTexturesABGR1555(ITextureData[] textures, bool canSetImage) {
             var frameDatas = textures.Select(x => x.ImageData16Bit).ToArray();
             var allData = new ushort[frameDatas.Max(x => x.GetLength(0)), frameDatas.Sum(x => x.GetLength(1))];
 
@@ -36,10 +36,7 @@ namespace SF3.Utils {
                         allData[x, row] = data[x, y];
             }
 
-            return new TextureData(
-                new ByteArray(allData.To1DArrayTransposed().ToByteArray()), 0, allData.GetLength(0), allData.GetLength(1),
-                TexturePixelFormat.ABGR1555, null, isCompressed: false, zeroIsTransparent: false, canSetImage: canSetImage
-            );
+            return new NotInPlaceTextureData(allData, null, zeroIsTransparent: false, canSetImage: canSetImage);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.Shared {
         public TextureStructBase(IByteData data, IByteArray imageData, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
-            _textureData = new TextureData(imageData, 0, 0, 0, pixelFormat, null,
+            _textureData = new InPlaceTextureData(imageData, 0, 0, 0, pixelFormat, null,
                 isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true);
 
             _textureData.Add8BitValidator((texData, _1, _2, _3) => {
@@ -142,6 +142,6 @@ namespace SF3.Models.Structs.Shared {
 
         protected abstract Palette StructPalette { get; set; }
 
-        protected TextureData _textureData;
+        protected InPlaceTextureData _textureData;
     }
 }

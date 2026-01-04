@@ -7,8 +7,8 @@ using CommonLib.Utils;
 using SF3.Types;
 
 namespace SF3.Imaging {
-    public class TextureData : TextureDataBase, ITextureData {
-        public TextureData(
+    public class InPlaceTextureData : TextureDataBase, ITextureData {
+        public InPlaceTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
         ) {
@@ -126,7 +126,7 @@ namespace SF3.Imaging {
 
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        protected override byte[,] GetImageData8Bit() {
+        protected override byte[,] FetchImageData8Bit() {
             if (BytesPerPixel != 1)
                 throw new InvalidOperationException();
             if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
@@ -181,7 +181,7 @@ namespace SF3.Imaging {
             InvokeInvalidatedEvent();
         }
 
-        protected override ushort[,] GetImageData16Bit() {
+        protected override ushort[,] FetchImageData16Bit() {
             if (BytesPerPixel != 2)
                 throw new InvalidOperationException();
             if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
