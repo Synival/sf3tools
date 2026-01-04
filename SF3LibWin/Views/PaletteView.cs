@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 
 namespace SF3.Win.Views {
     public class PaletteView : ImageView {
@@ -23,7 +24,7 @@ namespace SF3.Win.Views {
                 return;
             }
 
-            var (width, height) = GetImageDimensions(colors.Length);
+            var (width, height) = ImageUtils.GetPaletteImageDimensions(colors.Length);
 
             PaletteBitmap = new Bitmap(width, height, PixelFormat.Format32bppArgb);
             int y = 0, x = 0;
@@ -44,26 +45,6 @@ namespace SF3.Win.Views {
 
             ImageScale = (int) Math.Ceiling(128.0f / PaletteBitmap.Width);
             Image = PaletteBitmap;
-        }
-
-        /// <summary>
-        /// Returns the width and height of an image to be used for a color palette based on the number of colors in the palette.
-        /// The image width is the square root of the color count rounded down (must be at least 1) and the height is the count
-        /// necessary to meet or exceed the color count.
-        /// </summary>
-        /// <param name="colorCount">The number of colors in the palette for which an image will be generated.</param>
-        /// <returns>A tuple with width and height.</returns>
-        public (int Width, int Height) GetImageDimensions(int colorCount) {
-            var width = (int) Math.Ceiling(Math.Sqrt(colorCount));
-
-            var nextPow = 1;
-            while (width > nextPow)
-                nextPow *= 2;
-            width = nextPow;
-
-            var height = (int) Math.Ceiling(colorCount / (float) width);
-
-            return (width, height);
         }
 
         protected override Action GetImportImageAction() => ImportImageDialog;

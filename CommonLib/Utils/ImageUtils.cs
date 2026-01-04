@@ -32,5 +32,25 @@ namespace CommonLib.Utils {
 
             return newData;
         }
+
+        /// <summary>
+        /// Returns the width and height of an image to be used for a color palette based on the number of colors in the palette.
+        /// The image width is the square root of the color count rounded down (must be at least 1) and the height is the count
+        /// necessary to meet or exceed the color count.
+        /// </summary>
+        /// <param name="colorCount">The number of colors in the palette for which an image will be generated.</param>
+        /// <returns>A tuple with width and height.</returns>
+        public static (int Width, int Height) GetPaletteImageDimensions(int colorCount) {
+            var width = (int) Math.Ceiling(Math.Sqrt(colorCount));
+
+            var nextPow = 1;
+            while (width > nextPow)
+                nextPow *= 2;
+            width = nextPow;
+
+            var height = (int) Math.Ceiling(colorCount / (float) width);
+
+            return (width, height);
+        }
     }
 }
