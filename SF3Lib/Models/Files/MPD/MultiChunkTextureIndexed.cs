@@ -10,7 +10,7 @@ namespace SF3.Models.Files.MPD {
     public class MultiChunkTextureIndexed : TextureDataBase {
         public const int c_width = 512;
 
-        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, bool isTiled = false) {
+        public MultiChunkTextureIndexed(IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, Action<Palette> paletteSetter, bool isTiled = false) {
             if (datas != null) {
                 for (int i = 0; i < datas.Length; i++)
                     if (datas[i].Length % c_width != 0)
@@ -21,6 +21,7 @@ namespace SF3.Models.Files.MPD {
             _height       = (datas == null) ? 0 : datas.Select(x => x.Length / c_width).Sum();
             _pixelFormat  = format;
             PaletteGetter = paletteGetter;
+            PaletteSetter = paletteSetter;
             IsTiled       = isTiled;
         }
 
@@ -52,10 +53,9 @@ namespace SF3.Models.Files.MPD {
             if (error != null)
                 throw new ArgumentException(error);
 
-            // TODO: do it!
             // TODO: set the data
-            // TODO: set the palette
-            throw new NotImplementedException();
+
+            PaletteSetter?.Invoke(palette);
         }
 
         protected override ushort[,] FetchImageData16Bit() => throw new NotSupportedException();
@@ -80,6 +80,7 @@ namespace SF3.Models.Files.MPD {
 
         public IByteData[] Datas { get; }
         public Func<Palette> PaletteGetter { get; }
+        public Action<Palette> PaletteSetter { get; }
         public bool IsTiled { get; }
     }
 }

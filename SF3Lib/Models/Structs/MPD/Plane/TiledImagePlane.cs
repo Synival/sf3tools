@@ -8,17 +8,25 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Plane {
     public class TiledImagePlane : IMPD_TiledPlane {
-        public TiledImagePlane(IByteData tilesetData1, IByteData tilesetData2, IMPD_PlaneTileAssignment tileAssignment, TexturePixelFormat paletteType, Func<Palette> paletteGetter) {
+        public TiledImagePlane(
+            IByteData tilesetData1,
+            IByteData tilesetData2,
+            IMPD_PlaneTileAssignment tileAssignment,
+            TexturePixelFormat paletteType,
+            Func<Palette> paletteGetter,
+            Action<Palette> paletteSetter
+        ) {
             TilesetDatas   = new IByteData[] { tilesetData1, tilesetData2 };
             TileAssignment = tileAssignment;
             PaletteType    = paletteType;
             PaletteGetter  = paletteGetter;
+            PaletteSetter  = paletteSetter;
 
             UpdateImages();
         }
 
         public void UpdateImages() {
-            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, true);
+            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, PaletteSetter, true);
             TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteType, PaletteGetter(), zeroIsTransparent: false, canSetImage: false);
         }
 
@@ -51,5 +59,6 @@ namespace SF3.Models.Structs.MPD.Plane {
         public IByteData[] TilesetDatas { get; }
         public TexturePixelFormat PaletteType { get; }
         public Func<Palette> PaletteGetter { get; }
+        public Action<Palette> PaletteSetter { get; }
     }
 }

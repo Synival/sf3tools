@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CommonLib.Imaging;
 using SF3.Imaging;
 using SF3.Models.Structs.MPD.Plane;
 using SF3.MPD;
@@ -6,6 +7,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_Planes : IMPD_Planes {
+        private static readonly Palette c_fakePalette = new Palette(0x100);
+
         public MPD_Planes(IMPD_File mpdFile) {
             MPD_File = mpdFile;
             UpdateImages();
@@ -16,7 +19,12 @@ namespace SF3.Models.Files.MPD {
             ITextureData groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 try {
-                    groundImage = new MultiChunkTextureIndexed(MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, () => MPD_File.CreatePalette(0));
+                    groundImage = new MultiChunkTextureIndexed(
+                        MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                        TexturePixelFormat.Palette1,
+                        () => TryGetPalette(TexturePixelFormat.Palette1) ?? c_fakePalette,
+                        palette => TrySetPalette(TexturePixelFormat.Palette1, palette)
+                    );
                 }
                 catch {
                     // TODO: what to do here??
@@ -39,7 +47,8 @@ namespace SF3.Models.Files.MPD {
                                 MPD_File.GroundTileAssignmentChunks[1].PlaneTileTextureRowTable
                             ),
                             TexturePixelFormat.Palette1,
-                            () => MPD_File.CreatePalette(0)
+                            () => TryGetPalette(TexturePixelFormat.Palette1) ?? c_fakePalette,
+                            palette => TrySetPalette(TexturePixelFormat.Palette1, palette)
                         );
                     }
                     catch {
@@ -53,7 +62,12 @@ namespace SF3.Models.Files.MPD {
             ITextureData backgroundImage = null;
             if (MPD_File.BackgroundChunkDatas?.Any() == true) {
                 try {
-                    backgroundImage = new MultiChunkTextureIndexed(MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette1, () => MPD_File.CreatePalette(0));
+                    backgroundImage = new MultiChunkTextureIndexed(
+                        MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                        TexturePixelFormat.Palette1,
+                        () => TryGetPalette(TexturePixelFormat.Palette1) ?? c_fakePalette,
+                        palette => TrySetPalette(TexturePixelFormat.Palette1, palette)
+                    );
                 }
                 catch {
                     // TODO: what to do here??
@@ -65,7 +79,12 @@ namespace SF3.Models.Files.MPD {
             ITextureData skyBoxImage = null;
             if (MPD_File.SkyBoxChunkDatas?.Any() == true) {
                 try {
-                    skyBoxImage = new MultiChunkTextureIndexed(MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(), TexturePixelFormat.Palette2, () => MPD_File.CreatePalette(1));
+                    skyBoxImage = new MultiChunkTextureIndexed(
+                        MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                        TexturePixelFormat.Palette2,
+                        () => TryGetPalette(TexturePixelFormat.Palette2) ?? c_fakePalette,
+                        palette => TrySetPalette(TexturePixelFormat.Palette2, palette)
+                    );
                 }
                 catch {
                     // TODO: what to do here??
@@ -85,7 +104,8 @@ namespace SF3.Models.Files.MPD {
                             MPD_File.ForegroundTileChunkDatas[1].DecompressedData,
                             new MPD_ForegroundPlaneTileAssignment(MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable),
                             TexturePixelFormat.Palette2,
-                            () => MPD_File.CreatePalette(1)
+                            () => TryGetPalette(TexturePixelFormat.Palette2) ?? c_fakePalette,
+                            palette => TrySetPalette(TexturePixelFormat.Palette2, palette)
                         );
                     }
                     catch {
@@ -94,6 +114,21 @@ namespace SF3.Models.Files.MPD {
                 }
             }
             ForegroundTiledImage = foregroundTiledImage;
+        }
+
+        private Palette TryGetPalette(TexturePixelFormat pixelFormat) {
+            var index = pixelFormat - TexturePixelFormat.Palette1;
+            if (index < 0 || index > 2 || !(index < MPD_File.PaletteTables?.Length) || MPD_File.PaletteTables[index] == null)
+                return null;
+            return MPD_File.PaletteTables[index].Palette;
+        }
+
+        private bool TrySetPalette(TexturePixelFormat pixelFormat, Palette palette) {
+            var index = pixelFormat - TexturePixelFormat.Palette1;
+            if (index < 0 || index > 2 || !(index < MPD_File.PaletteTables?.Length) || MPD_File.PaletteTables[index] == null)
+                return false;
+            MPD_File.PaletteTables[index].Palette = palette;
+            return true;
         }
 
         public IMPD_File MPD_File { get; }
