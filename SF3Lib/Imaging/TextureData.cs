@@ -4,8 +4,8 @@ using CommonLib.Imaging;
 using SF3.Types;
 
 namespace SF3.Imaging {
-    public class NotInPlaceTextureData : TextureDataBase, ITextureData {
-        public NotInPlaceTextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
+    public class TextureData : TextureDataBase, ITextureData {
+        public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             if (data != null) {
                 _width  = data.GetLength(0);
                 _height = data.GetLength(1);
@@ -18,7 +18,7 @@ namespace SF3.Imaging {
             CanSetImage        = canSetImage;
         }
 
-        public NotInPlaceTextureData(ushort[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
+        public TextureData(ushort[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             if (data != null) {
                 _width       = data.GetLength(0);
                 _height      = data.GetLength(1);
@@ -31,7 +31,7 @@ namespace SF3.Imaging {
             CanSetImage        = canSetImage;
         }
 
-        public NotInPlaceTextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage) {
+        public TextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             _width             = width;
             _height            = height;
             _pixelFormat       = pixelFormat;
