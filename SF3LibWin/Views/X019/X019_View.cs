@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X019;
-using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X019 {
     public class X019_View : TabView {

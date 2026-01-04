@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using SF3.Models.Files.X027;
 using SF3.Models.Tables.Shared;
-using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views.X027 {
     public class X027_View : TabView {

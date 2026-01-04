@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using CommonLib.Types;
 using SF3.Models.Files;
 
-namespace SF3.Win.Views.X1 {
+namespace SF3.Win.Views {
     public class TechnicalView : TabView {
         public TechnicalView(string name, IScenarioTableFile model) : base(name) {
             Model = model;
