@@ -29,6 +29,7 @@ namespace SF3.Models.Structs.KAO {
         public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
         public int Width => Header.Width * 6;
         public int Height => Header.Height * 2;
+        public int ImageDataSize => Width * Height * BytesPerPixel;
 
         public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => GetImageData());
 

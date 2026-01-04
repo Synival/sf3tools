@@ -84,7 +84,7 @@ namespace SF3.Models.Tables.MPD.Animation {
             return true;
         }
 
-        public ITexture AtOffset(int offset)
+        public UniqueAnimationFrame AtOffset(int offset)
             => (FrameByOffset?.TryGetValue(offset, out var frame) == true) ? frame : null;
 
         public Dictionary<int, UniqueAnimationFrameInfo> InfoByOffset { get; }

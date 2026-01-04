@@ -74,7 +74,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
-        public int ImageStorageSize => Width * Height;
+        public int ImageDataSize => Width * Height * BytesPerPixel;
 
         [TableViewModelColumn(displayOrder: 3, minWidth: 50)]
         public int X {
@@ -156,8 +156,7 @@ namespace SF3.Models.Structs.KAO {
             => _textureDataBuffer.GetOrCacheImageData8Bit(() => HasImage ? Data.GetDataCopyAt(ImageDataOffset, Width * Height).To2DArrayColumnMajor(Width, Height) : null);
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var storageSize = ImageStorageSize;
-            var error = Validate8BitImageData(data, palette, storageSize, data.GetLength(0) * data.GetLength(1));
+            var error = Validate8BitImageData(data, palette, ImageDataSize, data.GetLength(0) * data.GetLength(1));
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -168,7 +167,7 @@ namespace SF3.Models.Structs.KAO {
             }
 
             _textureDataBuffer.Invalidate();
-            Data.Data.SetDataAtTo(ImageDataOffset, storageSize, data.To1DArrayTransposed());
+            Data.Data.SetDataAtTo(ImageDataOffset, data.GetLength(0) * data.GetLength(1), data.To1DArrayTransposed());
             _textureDataBuffer.SetImageData8Bit(data);
             Invalidated?.Invoke(this, EventArgs.Empty);
         }

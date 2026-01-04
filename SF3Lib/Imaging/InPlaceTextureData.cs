@@ -124,8 +124,6 @@ namespace SF3.Imaging {
         public override bool CanSetImageData16Bit => CanSetImage;
         public virtual bool CanSetImage { get; set; }
 
-        public int ImageDataSize => Width * Height * BytesPerPixel;
-
         protected override byte[,] FetchImageData8Bit() {
             if (BytesPerPixel != 1)
                 throw new InvalidOperationException();

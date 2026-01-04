@@ -28,6 +28,11 @@ namespace SF3.Imaging {
         int Height { get; }
 
         /// <summary>
+        /// Equal to Width * Height * BytesPerPixel.
+        /// </summary>
+        int ImageDataSize { get; }
+
+        /// <summary>
         /// Raw 8-bit image data in [x, y] order. Only usable when BytesPerPixel is 1.
         /// </summary>
         byte[,] ImageData8Bit { get; }

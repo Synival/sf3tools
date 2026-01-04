@@ -113,14 +113,14 @@ namespace SF3.Models.Structs.Shared {
 
         protected abstract int StructHeight { get; set; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 2, displayFormat: "X4")]
-        public int StoredImageDataSize => _textureData.StoredImageDataSize;
+        [TableViewModelColumn(addressField: null, displayName: "Pixel Format", displayOrder: 2)]
+        public TexturePixelFormat PixelFormat => _textureData.PixelFormat;
 
         [TableViewModelColumn(addressField: null, displayOrder: 3, displayFormat: "X4")]
         public int ImageDataSize => _textureData.ImageDataSize;
 
-        [TableViewModelColumn(addressField: null, displayName: "Pixel Format", displayOrder: 4)]
-        public TexturePixelFormat PixelFormat => _textureData.PixelFormat;
+        [TableViewModelColumn(addressField: null, displayOrder: 4, displayFormat: "X4")]
+        public int StoredImageDataSize => _textureData.StoredImageDataSize;
 
         [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 225)]
         public string Hash => _textureData.Hash;

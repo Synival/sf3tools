@@ -112,6 +112,7 @@ namespace SF3.Imaging {
 
         public virtual bool CanSetImageData8Bit => false;
         public bool CanSetImageData16Bit => false;
+        public int ImageDataSize => Width * Height * BytesPerPixel;
 
         /// <summary>
         /// Checker to see if 8-bit indexed data can be set/imported.

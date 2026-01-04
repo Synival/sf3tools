@@ -77,8 +77,9 @@ namespace SF3.Imaging {
         }
 
         public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
-
         public int BytesPerPixel => PixelFormat.BytesPerPixel();
+        public int ImageDataSize => Width * Height * BytesPerPixel;
+
         public abstract TexturePixelFormat PixelFormat { get; set; }
         public abstract int Width { get; set; }
         public abstract int Height { get; set; }

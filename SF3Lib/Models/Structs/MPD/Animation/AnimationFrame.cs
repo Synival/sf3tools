@@ -38,36 +38,45 @@ namespace SF3.Models.Structs.MPD.Animation {
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
             => Chunk3Texture?.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
-        private ITexture Chunk3Texture
+        private UniqueAnimationFrame Chunk3Texture
             => MPD_File?.AnimationFrameChunk?.UniqueAnimationFrameTable?.AtOffset(ImageDataOffset);
 
         public bool Is32Bit { get; }
 
-        [TableViewModelColumn(displayOrder: 0.0f)]
+        [TableViewModelColumn(displayOrder: 0, displayGroup: "Metadata")]
         public int TexAnimID => Animation.ID;
 
-        [TableViewModelColumn(displayOrder: 1.0f)]
-        public int Width => Chunk3Texture?.Width ?? 0;
+        [TableViewModelColumn(displayOrder: 1, displayGroup: "Metadata")]
+        public int Frame { get; }
 
-        [TableViewModelColumn(displayOrder: 1.1f)]
-        public int Height => Chunk3Texture?.Height ?? 0;
-
-        [TableViewModelColumn(displayOrder: 2.0f, displayFormat: "X4")]
+        [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
         public int ImageDataOffset {
             get => (int) Data.GetData(_imageDataOffsetAddr, _bytesPerProperty);
             set => Data.SetData(_imageDataOffsetAddr, (uint) value, _bytesPerProperty);
         }
 
-        [TableViewModelColumn(displayOrder: 2.1f)]
+        [TableViewModelColumn(displayOrder: 3)]
         public int Duration {
             get => (int) Data.GetData(_durationAddr, _bytesPerProperty);
             set => Data.SetData(_durationAddr, (uint) value, _bytesPerProperty);
         }
 
-        [TableViewModelColumn(displayOrder: 2.2f)]
-        public int Frame { get; }
+        [TableViewModelColumn(displayOrder: 4)]
+        public int Width => Chunk3Texture?.Width ?? 0;
 
-        [TableViewModelColumn(displayOrder: 3f)]
+        [TableViewModelColumn(displayOrder: 5)]
+        public int Height => Chunk3Texture?.Height ?? 0;
+
+        [TableViewModelColumn(displayOrder: 6)]
+        public TexturePixelFormat PixelFormat => Chunk3Texture?.PixelFormat ?? TexturePixelFormat.Unknown;
+
+        [TableViewModelColumn(displayOrder: 7, displayFormat: "X4")]
+        public int ImageDataSize => Chunk3Texture.ImageDataSize;
+
+        [TableViewModelColumn(displayOrder: 8, displayFormat: "X4")]
+        public int StoredImageDataSize => Chunk3Texture.StoredImageDataSize;
+
+        [TableViewModelColumn(displayOrder: 9, minWidth: 225)]
         public string Hash => Chunk3Texture?.Hash;
 
         public string ImportExportName { get; }
@@ -77,7 +86,6 @@ namespace SF3.Models.Structs.MPD.Animation {
         public CollectionType Collection => Chunk3Texture?.Collection ?? (CollectionType) (-1);
         public Dictionary<TagKey, TagValue> Tags => Chunk3Texture?.Tags;
         public int BytesPerPixel => Chunk3Texture?.BytesPerPixel ?? 0;
-        public TexturePixelFormat PixelFormat => Chunk3Texture?.PixelFormat ?? TexturePixelFormat.Unknown;
         public byte[,] ImageData8Bit => Chunk3Texture?.ImageData8Bit;
 
         public ushort[,] ImageData16Bit {
