@@ -8,7 +8,7 @@ namespace SF3.Models.Structs.DAT {
         private readonly int _imageDataOffsetAddr;
 
         public Face32_Texture(IByteData data, int id, string name, int address, Palette palette, bool isCompressed)
-        : base(data, id, name, address, 4, 32, 32, TexturePixelFormat.Palette1, isCompressed, false) {
+        : base(data, id, name, address, 4, 32, 32, TexturePixelFormat.Indexed8Bit, isCompressed, false) {
             _palette = palette;
             _imageDataOffsetAddr = address + 0;
 

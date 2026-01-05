@@ -1,13 +1,7 @@
-﻿using System;
-
-namespace SF3.Types {
+﻿namespace SF3.Types {
     public enum TexturePixelFormat {
-        Unknown,
-        ABGR1555,
-        UnknownPalette,
-        Palette1,
-        Palette2,
-        Palette3
+        ABGR1555    = 0,
+        Indexed8Bit = 1
     }
 
     public static class TexturePixelFormatExtensions {

@@ -8,7 +8,7 @@ using SF3.Types;
 namespace SF3.Models.Structs.DAT {
     public abstract class BtlEnkei_TextureBase : FixedSizeTextureStructBase {
         protected BtlEnkei_TextureBase(IByteData data, int id, string name, int address, int size, int paletteOffset)
-        : base(data, id, name, address, size, 512, 256, TexturePixelFormat.Palette1, true, false) {}
+        : base(data, id, name, address, size, 512, 256, TexturePixelFormat.Indexed8Bit, true, false) {}
 
         public abstract int PaletteOffset { get; }
 

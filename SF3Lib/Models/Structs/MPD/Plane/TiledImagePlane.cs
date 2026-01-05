@@ -29,7 +29,7 @@ namespace SF3.Models.Structs.MPD.Plane {
 
         public void UpdateImages() {
             Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, PaletteSetter, zeroIsTransparent: ZeroIsTransparent, isTiled: true);
-            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteType, PaletteGetter(), zeroIsTransparent: ZeroIsTransparent, canSetImage: false);
+            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteGetter(), zeroIsTransparent: ZeroIsTransparent, canSetImage: false);
         }
 
         private byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {

@@ -415,10 +415,10 @@ namespace SF3.Models.Files.MPD {
                 foreach (var tex in SkipTextures)
                     primaryPixelFormats[tex.TextureID] = TexturePixelFormat.ABGR1555;
 
-            // If the indexed textures table is present (Scenario 3 + PD only), assume Palette3.
+            // Mark indexed textures as such.
             if (IndexedTextureTable != null)
                 foreach (var tex in IndexedTextureTable)
-                    primaryPixelFormats[tex.TextureID] = TexturePixelFormat.Palette3;
+                    primaryPixelFormats[tex.TextureID] = TexturePixelFormat.Indexed8Bit;
 
             // Gather palettes.
             var texColList = new List<TextureChunk>();

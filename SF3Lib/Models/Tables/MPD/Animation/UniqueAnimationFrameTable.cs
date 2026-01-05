@@ -6,6 +6,7 @@ using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
+using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.Animation {
     public readonly struct UniqueAnimationFrameInfo {
@@ -61,7 +62,11 @@ namespace SF3.Models.Tables.MPD.Animation {
                         isIndexed = bytesPerPixel == 1;
                     }
 
-                    var newModel = new UniqueAnimationFrame(Data, id, $"TexAnimFrame_{id:D3}", address, width, height, isIndexed, isKnown, MPD_File);
+                    var newModel = new UniqueAnimationFrame(
+                        Data, id, $"TexAnimFrame_{id:D3}", address, width, height,
+                        isKnown ? (isIndexed ? TexturePixelFormat.Indexed8Bit : TexturePixelFormat.ABGR1555) : (TexturePixelFormat?) null,
+                        isKnown, MPD_File
+                    );
 
                     rowDict[id] = newModel;
                     rows.Add(newModel);

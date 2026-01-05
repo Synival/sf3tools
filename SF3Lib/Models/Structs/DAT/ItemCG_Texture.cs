@@ -7,7 +7,7 @@ using SF3.Types;
 namespace SF3.Models.Structs.DAT {
     public class ItemCG_Texture : FixedSizeTextureStructBase {
         public ItemCG_Texture(IByteData data, int id, string name, int address, Palette palette)
-        : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Palette1, true, false) {
+        : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Indexed8Bit, true, false) {
             _palette = palette;
 
             _textureData.Add8BitValidator((_1, _2, _3, newStoredSize) => {

@@ -61,7 +61,7 @@ namespace SF3.Models.Tables.Shared {
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
         public int BytesPerPixel => 1;
-        public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
+        public TexturePixelFormat PixelFormat => TexturePixelFormat.Indexed8Bit;
         public int Width { get; private set; }
         public int Height { get; private set; }
         public int ImageDataSize { get; private set; }

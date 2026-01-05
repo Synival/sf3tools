@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public TextureStruct(
             IByteData data, CollectionType collection, int id, string name, int address,
-            TexturePixelFormat pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
+            TexturePixelFormat? pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
         ) : base(
             data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset),
             isCompressed: false, zeroIsTransparent: true
@@ -30,15 +30,15 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             _heightAddr          = Address + 1; // 1 byte
             _imageDataOffsetAddr = Address + 2; // 2 bytes
 
-            PixelFormatKnown = pixelFormat != TexturePixelFormat.Unknown;
+            PixelFormatKnown = pixelFormat.HasValue;
             MPD_File = mpdFile;
 
             LoadImageData();
         }
 
-        private static TexturePixelFormat GuessPixelFormat(TexturePixelFormat inputFormat, IByteData data, int address, int? nextImageDataOffset) {
-            if (inputFormat != TexturePixelFormat.Unknown || !nextImageDataOffset.HasValue)
-                return inputFormat;
+        private static TexturePixelFormat GuessPixelFormat(TexturePixelFormat? inputFormat, IByteData data, int address, int? nextImageDataOffset) {
+            if (inputFormat.HasValue || !nextImageDataOffset.HasValue)
+                return inputFormat ?? TexturePixelFormat.ABGR1555;
 
             var width  = data.GetByte(address + 0);
             var height = data.GetByte(address + 1);
@@ -50,7 +50,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
                 if (bytesPerPixel == 2.00)
                     return TexturePixelFormat.ABGR1555;
                 else if (bytesPerPixel == 1.00)
-                    return TexturePixelFormat.UnknownPalette;
+                    return TexturePixelFormat.Indexed8Bit;
                 else {
                     try {
                         throw new ArgumentException("Unhandled bytes per pixel: " + bytesPerPixel.ToString());
@@ -97,6 +97,8 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
         public bool PixelFormatKnown { get; }
+
+        public MPD_PaletteType? PaletteType => MPD_PaletteType.TexturePalette;
         public IMPD_File MPD_File { get; }
 
         protected override Palette StructPalette {

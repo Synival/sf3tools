@@ -5,18 +5,14 @@ using SF3.Types;
 
 namespace SF3.Imaging {
     public class TextureData : TextureDataBase, ITextureData {
-        public TextureData(byte[,] data, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage) {
+        public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             if (data != null) {
                 _width  = data.GetLength(0);
                 _height = data.GetLength(1);
                 _textureDataBuffer.SetImageData8Bit(data);
             }
 
-            if (pixelFormat >= TexturePixelFormat.Palette1 && pixelFormat <= TexturePixelFormat.Palette3)
-                _pixelFormat = TexturePixelFormat.Palette1;
-            else
-                _pixelFormat = TexturePixelFormat.UnknownPalette;
-
+            _pixelFormat       = TexturePixelFormat.Indexed8Bit;
             _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
@@ -125,8 +121,7 @@ namespace SF3.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            if (_pixelFormat.BytesPerPixel() != 1)
-                _pixelFormat = TexturePixelFormat.UnknownPalette;
+            _pixelFormat = TexturePixelFormat.Indexed8Bit;
             _width  = newWidth;
             _height = newHeight;
 

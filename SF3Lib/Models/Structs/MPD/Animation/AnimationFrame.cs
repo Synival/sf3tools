@@ -68,7 +68,10 @@ namespace SF3.Models.Structs.MPD.Animation {
         public int Height => Chunk3Texture?.Height ?? 0;
 
         [TableViewModelColumn(displayOrder: 6)]
-        public TexturePixelFormat PixelFormat => Chunk3Texture?.PixelFormat ?? TexturePixelFormat.Unknown;
+        public TexturePixelFormat PixelFormat => Chunk3Texture?.PixelFormat ?? TexturePixelFormat.ABGR1555;
+
+        [TableViewModelColumn(displayOrder: 6.5f)]
+        public bool PixelFormatKnown => Chunk3Texture?.PixelFormatKnown ?? false;
 
         [TableViewModelColumn(displayOrder: 7, displayFormat: "X4")]
         public int ImageDataSize => Chunk3Texture.ImageDataSize;
@@ -103,6 +106,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public bool CanSetImageData8Bit => Chunk3Texture?.CanSetImageData8Bit ?? false;
         public bool CanSetImageData16Bit => Chunk3Texture?.CanSetImageData16Bit ?? false;
         public bool ZeroIsTransparent => false;
+        public MPD_PaletteType? PaletteType => Chunk3Texture?.PaletteType;
 
         public event EventHandler Invalidated;
     }

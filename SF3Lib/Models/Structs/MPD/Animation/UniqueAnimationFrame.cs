@@ -9,15 +9,16 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
     public class UniqueAnimationFrame : TextureStructBase, ITexture {
-        public UniqueAnimationFrame(IByteData data, int id, string name, int address, int width, int height, bool isIndexed, bool isReferenced, IMPD_File mpdFile)
+        public UniqueAnimationFrame(IByteData data, int id, string name, int address, int width, int height, TexturePixelFormat? pixelFormat, bool isReferenced, IMPD_File mpdFile)
         : base(
-            data, id, name, address, width * height * (isIndexed ? 1 : 2), isIndexed ? TexturePixelFormat.Palette3 : TexturePixelFormat.ABGR1555,
+            data, id, name, address, width * height * (pixelFormat ?? TexturePixelFormat.ABGR1555).BytesPerPixel(), pixelFormat ?? TexturePixelFormat.ABGR1555,
             isCompressed: true, zeroIsTransparent: true
         ) {
             MPD_File = mpdFile;
             _width   = width;
             _height  = height;
             IsReferenced = isReferenced;
+            PixelFormatKnown = pixelFormat.HasValue;
 
             _textureData.Add8BitValidator((_1, _2, _3, newStoredSize) => {
                 return (newStoredSize > _originalStoredSize)
@@ -47,6 +48,9 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         protected override int StructImageDataOffset { get => Address; set {} }
 
+        [TableViewModelColumn(displayOrder: 2.5f)]
+        public bool PixelFormatKnown { get; }
+
         [TableViewModelColumn(displayOrder: 2.1f)]
         public bool IsReferenced { get; }
 
@@ -57,6 +61,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public int Frame => 0;
         public int Duration => 0;
         public Dictionary<TagKey, TagValue> Tags => null;
+        public MPD_PaletteType? PaletteType => PixelFormat == TexturePixelFormat.Indexed8Bit ? MPD_PaletteType.TexturePalette : (MPD_PaletteType?) null;
 
         private readonly int _originalStoredSize;
     }

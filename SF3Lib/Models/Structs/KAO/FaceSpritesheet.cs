@@ -26,7 +26,7 @@ namespace SF3.Models.Structs.KAO {
         public Palette Palette => Face.Palette;
 
         public int BytesPerPixel => 1;
-        public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
+        public TexturePixelFormat PixelFormat => TexturePixelFormat.Indexed8Bit;
         public int Width => Header.Width * 6;
         public int Height => Header.Height * 2;
         public int ImageDataSize => Width * Height * BytesPerPixel;

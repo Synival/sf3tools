@@ -56,9 +56,9 @@ namespace SF3.Models.Files.MPD {
         /// <summary>
         /// Gets a reference to a palette based the palette type. If a palette does not exist, 'null' is returned.
         /// </summary>
-        /// <param name="format">Format which indicates the palette to use.</param>
+        /// <param name="paletteType">Identifier for which palette to use.</param>
         /// <returns>A 256-color palette for the requested format, or 'null' if it doesn't exist.</returns>
-        Palette GetPalette(TexturePixelFormat format);
+        Palette GetPalette(MPD_PaletteType paletteType);
 
         /// <summary>
         /// Fetches the PDataModel for a PDATA that looks like a tree, if one could be found.

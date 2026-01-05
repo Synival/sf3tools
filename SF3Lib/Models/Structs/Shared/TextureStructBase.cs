@@ -104,7 +104,7 @@ namespace SF3.Models.Structs.Shared {
 
         protected abstract int StructHeight { get; set; }
 
-        [TableViewModelColumn(addressField: null, displayName: "Pixel Format", displayOrder: 2)]
+        [TableViewModelColumn(addressField: null, displayOrder: 2)]
         public TexturePixelFormat PixelFormat => _textureData.PixelFormat;
 
         [TableViewModelColumn(addressField: null, displayOrder: 3, displayFormat: "X4")]

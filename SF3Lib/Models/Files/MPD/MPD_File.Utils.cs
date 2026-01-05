@@ -49,9 +49,9 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public Palette CreatePalette(TexturePixelFormat format, int adjR, int adjG, int adjB) {
+        public Palette CreatePalette(MPD_PaletteType paletteType, int adjR, int adjG, int adjB) {
             // Make a copy of the palette.
-            var palette = GetPalette(format);
+            var palette = GetPalette(paletteType);
             palette = (palette != null) ? new Palette(palette) : new Palette(0x100);
 
             if (adjR != 0 || adjG != 0 || adjB != 0) {
@@ -69,12 +69,12 @@ namespace SF3.Models.Files.MPD {
             return palette;
         }
 
-        public Palette GetPalette(TexturePixelFormat format) {
-            switch (format) {
-                case TexturePixelFormat.Palette1: return Planes?.GroundPalette;
-                case TexturePixelFormat.Palette2: return Planes?.SkyPalette;
-                case TexturePixelFormat.Palette3: return TexturePalette;
-                default:                          return null;
+        public Palette GetPalette(MPD_PaletteType paletteType) {
+            switch (paletteType) {
+                case MPD_PaletteType.GroundPalette:  return Planes?.GroundPalette;
+                case MPD_PaletteType.SkyPalette:     return Planes?.SkyPalette;
+                case MPD_PaletteType.TexturePalette: return TexturePalette;
+                default:                             return null;
             }
         }
 

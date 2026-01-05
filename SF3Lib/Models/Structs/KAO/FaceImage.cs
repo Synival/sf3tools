@@ -147,7 +147,7 @@ namespace SF3.Models.Structs.KAO {
             => throw new NotSupportedException();
 
         public int BytesPerPixel => 1;
-        public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
+        public TexturePixelFormat PixelFormat => TexturePixelFormat.Indexed8Bit;
 
         public byte[,] ImageData8Bit
             => _textureDataBuffer.GetOrCacheImageData8Bit(() => HasImage ? Data.GetDataCopyAt(ImageDataOffset, Width * Height).To2DArrayColumnMajor(Width, Height) : null);

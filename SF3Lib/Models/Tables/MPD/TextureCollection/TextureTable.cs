@@ -34,8 +34,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             return Load((id, address) => {
                 var pixelFormat =
                     (Collection != CollectionType.Primary) ? TexturePixelFormat.ABGR1555 :
-                    PixelFormats.TryGetValue(StartID + id, out var pixelFormatOut) ? pixelFormatOut :
-                    TexturePixelFormat.Unknown;
+                    PixelFormats.TryGetValue(StartID + id, out var pixelFormatOut) ? pixelFormatOut : (TexturePixelFormat?) null;
 
                 var nextImageDataOffset = id + 1 >= Size
                     ? Data.Length

@@ -119,7 +119,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public int BytesPerPixel => 1;
-        public TexturePixelFormat PixelFormat => TexturePixelFormat.Palette1;
+        public TexturePixelFormat PixelFormat => TexturePixelFormat.Indexed8Bit;
         public int Width => Header.Width;
         public int Height => Header.Height;
         public int ImageDataSize => Width * Height * BytesPerPixel;

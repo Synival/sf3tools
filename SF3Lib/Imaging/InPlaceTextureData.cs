@@ -163,8 +163,7 @@ namespace SF3.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            if (_pixelFormat.BytesPerPixel() != 1)
-                _pixelFormat = TexturePixelFormat.UnknownPalette;
+            _pixelFormat = TexturePixelFormat.Indexed8Bit;
             _width  = newWidth;
             _height = newHeight;
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
