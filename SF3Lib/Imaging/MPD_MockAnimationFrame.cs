@@ -31,7 +31,6 @@ namespace SF3.Imaging {
 
         public MPD_CollectionType Collection => _texture.Collection;
         public int ID => _texture.ID;
-        public MPD_PaletteType? PaletteType => _texture.PaletteType;
         public Dictionary<TagKey, TagValue> Tags => _texture.Tags;
         public int BytesPerPixel => _texture.BytesPerPixel;
         public TexturePixelFormat PixelFormat => _texture.PixelFormat;

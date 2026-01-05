@@ -34,11 +34,6 @@ namespace SF3.Imaging {
         int ID { get; }
 
         /// <summary>
-        /// Palette identifier for 8-bit textures in an MPD file.
-        /// </summary>
-        MPD_PaletteType? PaletteType { get; }
-
-        /// <summary>
         /// Tags for identifying textures with the same Hash.
         /// </summary>
         Dictionary<TagKey, TagValue> Tags { get; }
