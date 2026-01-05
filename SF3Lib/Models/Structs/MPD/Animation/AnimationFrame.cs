@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq;
-using CommonLib.Arrays;
-using CommonLib.Extensions;
-using CommonLib.Utils;
+using CommonLib.Types;
 using SF3.Imaging;
-using SF3.Types;
 
 namespace SF3.Utils {
     public static class TextureUtils {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.TextureChunk;

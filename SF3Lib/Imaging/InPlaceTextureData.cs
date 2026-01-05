@@ -3,8 +3,8 @@ using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using CommonLib.Utils;
-using SF3.Types;
 
 namespace SF3.Imaging {
     public class InPlaceTextureData : TextureDataBase, ITextureData {

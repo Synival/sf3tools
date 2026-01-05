@@ -1,5 +1,5 @@
-﻿using SF3.ByteData;
-using SF3.Types;
+﻿using CommonLib.Types;
+using SF3.ByteData;
 
 namespace SF3.Models.Structs.Shared {
     public abstract class FixedSizeTextureStructBase : TextureStructBase {

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Imaging;

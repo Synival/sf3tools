@@ -1,10 +1,10 @@
 ﻿using System;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.MPD;
-using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Plane {
     public class TiledImagePlane : IMPD_TiledPlane {

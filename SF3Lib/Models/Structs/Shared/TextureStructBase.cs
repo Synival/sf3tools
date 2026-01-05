@@ -2,9 +2,9 @@
 using CommonLib.Arrays;
 using CommonLib.Attributes;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Imaging;
-using SF3.Types;
 
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData {

@@ -2,10 +2,10 @@
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Imaging;
-using SF3.Types;
 
 namespace SF3.Models.Structs.KAO {
     public class FaceImage : Struct, ITextureData {

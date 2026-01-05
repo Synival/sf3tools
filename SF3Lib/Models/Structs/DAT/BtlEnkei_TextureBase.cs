@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
-using SF3.Types;
 
 namespace SF3.Models.Structs.DAT {
     public abstract class BtlEnkei_TextureBase : FixedSizeTextureStructBase {

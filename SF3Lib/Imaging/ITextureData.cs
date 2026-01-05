@@ -1,6 +1,6 @@
 ﻿using System;
 using CommonLib.Imaging;
-using SF3.Types;
+using CommonLib.Types;
 
 namespace SF3.Imaging {
     /// <summary>

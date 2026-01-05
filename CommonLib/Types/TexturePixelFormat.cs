@@ -1,4 +1,4 @@
-﻿namespace SF3.Types {
+﻿namespace CommonLib.Types {
     public enum TexturePixelFormat {
         ABGR1555    = 0,
         Indexed8Bit = 1

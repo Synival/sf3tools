@@ -3,9 +3,9 @@ using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Imaging;
-using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class MultiChunkTextureIndexed : TextureDataBase {

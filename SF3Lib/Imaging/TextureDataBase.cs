@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using CommonLib.Utils;
-using SF3.Types;
 
 namespace SF3.Imaging {
     public abstract class TextureDataBase : ITextureData {
