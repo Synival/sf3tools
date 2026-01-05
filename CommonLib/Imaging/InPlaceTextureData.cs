@@ -1,12 +1,10 @@
 ﻿using System;
-using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
-using CommonLib.Imaging;
 using CommonLib.Types;
 using CommonLib.Utils;
 
-namespace SF3.Imaging {
+namespace CommonLib.Imaging {
     public class InPlaceTextureData : TextureDataBase, ITextureData {
         public InPlaceTextureData(
             IByteArray data, int imageDataOffset,

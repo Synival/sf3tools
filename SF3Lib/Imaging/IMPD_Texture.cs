@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CommonLib.Imaging;
 using SF3.Types;
 
 namespace SF3.Imaging {

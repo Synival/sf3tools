@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommonLib.Extensions;
-using CommonLib.Imaging;
 using CommonLib.Types;
 using CommonLib.Utils;
 
-namespace SF3.Imaging {
+namespace CommonLib.Imaging {
     public abstract class TextureDataBase : ITextureData {
         public delegate string Validator8Bit(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize);
         public delegate string Validator16Bit(ushort[,] data, int oldStoredSize, int newStoredSize);

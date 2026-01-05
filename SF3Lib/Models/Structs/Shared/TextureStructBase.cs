@@ -4,7 +4,6 @@ using CommonLib.Attributes;
 using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.ByteData;
-using SF3.Imaging;
 
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData {

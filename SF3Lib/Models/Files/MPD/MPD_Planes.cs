@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using CommonLib.Imaging;
 using CommonLib.Types;
-using SF3.Imaging;
 using SF3.Models.Structs.MPD.Plane;
 using SF3.Models.Tables.Shared;
 using SF3.MPD;

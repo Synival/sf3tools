@@ -1,6 +1,5 @@
-﻿using SF3.Imaging;
+﻿using CommonLib.Imaging;
 using SF3.Models.Structs.KAO;
-using SF3.Types;
 
 namespace SF3.Win.Views.KAO {
     public class FaceAnimationView : AnimatedTextureView {

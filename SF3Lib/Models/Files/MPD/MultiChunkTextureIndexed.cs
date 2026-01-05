@@ -5,7 +5,6 @@ using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.ByteData;
-using SF3.Imaging;
 
 namespace SF3.Models.Files.MPD {
     public class MultiChunkTextureIndexed : TextureDataBase {

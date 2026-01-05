@@ -1,5 +1,5 @@
+using CommonLib.Imaging;
 using CommonLib.NamedValues;
-using SF3.Imaging;
 using SF3.Models.Structs.CHR;
 using SF3.Models.Tables.CHR;
 

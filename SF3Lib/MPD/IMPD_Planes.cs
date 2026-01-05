@@ -1,5 +1,4 @@
 ﻿using CommonLib.Imaging;
-using SF3.Imaging;
 
 namespace SF3.MPD {
     /// <summary>

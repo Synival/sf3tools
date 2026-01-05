@@ -1,9 +1,7 @@
 ﻿using System;
-using CommonLib;
-using CommonLib.Imaging;
 using CommonLib.Types;
 
-namespace SF3.Imaging {
+namespace CommonLib.Imaging {
     public class TextureData : TextureDataBase, ITextureData {
         public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             if (data != null) {

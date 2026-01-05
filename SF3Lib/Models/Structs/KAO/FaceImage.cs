@@ -5,7 +5,6 @@ using CommonLib.Imaging;
 using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
-using SF3.Imaging;
 
 namespace SF3.Models.Structs.KAO {
     public class FaceImage : Struct, ITextureData {

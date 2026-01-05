@@ -1,7 +1,7 @@
 using System;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using SF3.Imaging;
+using CommonLib.Imaging;
 
 namespace SF3.Win.Views {
     public abstract class AnimatedTextureView : TextureView {

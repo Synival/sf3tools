@@ -16,7 +16,6 @@ using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.Logging;
 using CommonLib.Types;
-using SF3.Imaging;
 
 namespace CHRTool {
     public static class ExtractSheets {

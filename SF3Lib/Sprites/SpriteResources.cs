@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using CommonLib.Logging;
 using CommonLib.Types;
 using Newtonsoft.Json;

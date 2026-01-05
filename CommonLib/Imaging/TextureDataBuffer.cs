@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF3.Imaging {
+namespace CommonLib.Imaging {
     public class TextureDataBuffer {
         public string SetHash(string value) => _hash = value;
         public string GetOrCacheHash(Func<string> getter) => _hash ?? (_hash = getter());

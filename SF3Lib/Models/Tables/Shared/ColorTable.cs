@@ -4,7 +4,6 @@ using CommonLib.Imaging;
 using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
-using SF3.Imaging;
 using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.Shared {
