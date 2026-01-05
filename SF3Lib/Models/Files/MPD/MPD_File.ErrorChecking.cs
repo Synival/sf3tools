@@ -52,12 +52,12 @@ namespace SF3.Models.Files.MPD {
 
             // If the disc is Scenario 3, all palettes should be present.
             if (Scenario >= ScenarioType.Scenario3) {
-                if (PaletteTables[0] == null)
-                    errors.Add("Palette1 is required for Scenario 3 and above but it is missing");
-                if (PaletteTables[1] == null)
-                    errors.Add("Palette2 is required for Scenario 3 and above but it is missing");
-                if (PaletteTables[2] == null)
-                    errors.Add("Palette3 is required for Scenario 3 and above but it is missing");
+                if (Planes?.GroundPalette == null)
+                    errors.Add("GroundPalette is required for Scenario 3 and above but it is missing");
+                if (Planes?.SkyPalette == null)
+                    errors.Add("SkyPalette is required for Scenario 3 and above but it is missing");
+                if (TexturePalette == null)
+                    errors.Add("TexturePalette is required for Scenario 3 and above but it is missing");
             }
 
             return errors.ToArray();

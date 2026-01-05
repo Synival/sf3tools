@@ -1,4 +1,5 @@
-﻿using SF3.Imaging;
+﻿using CommonLib.Imaging;
+using SF3.Imaging;
 
 namespace SF3.MPD {
     /// <summary>
@@ -63,5 +64,15 @@ namespace SF3.MPD {
         /// Screen Y position of the sky (in pixels), repeating every 256.
         /// </summary>
         short BackgroundY { get; set; }
+
+        /// <summary>
+        /// Palette used for ground and background planes.
+        /// </summary>
+        Palette GroundPalette { get; }
+
+        /// <summary>
+        /// Palette used for sky and foreground planes.
+        /// </summary>
+        Palette SkyPalette { get; }
     }
 }

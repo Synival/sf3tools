@@ -50,8 +50,11 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public Palette CreatePalette(int index, int adjR, int adjG, int adjB) {
-            var palette = CreatePalette(index);
+        public Palette CreatePalette(TexturePixelFormat format, int adjR, int adjG, int adjB) {
+            // Make a copy of the palette.
+            var palette = GetPalette(format);
+            palette = (palette != null) ? new Palette(palette) : new Palette(0x100);
+
             if (adjR != 0 || adjG != 0 || adjB != 0) {
                 adjR = adjR * 255 / 31;
                 adjG = adjG * 255 / 31;
@@ -67,21 +70,13 @@ namespace SF3.Models.Files.MPD {
             return palette;
         }
 
-        public Palette CreatePalette(int index) {
-            if (index < 0 || index > 2)
-                throw new ArgumentOutOfRangeException(nameof(index));
-
-            if (PaletteTables == null || index >= PaletteTables.Length)
-                return new Palette(256);
-
-            var paletteTable = PaletteTables[index];
-            if (paletteTable == null)
-                return new Palette(256);
-
-            if (paletteTable.Length != 256)
-                throw new InvalidOperationException($"PaletteTable[{index}] should be 256 colors, instead it's {paletteTable.Length}");
-
-            return new Palette(paletteTable.Select(x => x.ColorABGR1555).ToArray());
+        public Palette GetPalette(TexturePixelFormat format) {
+            switch (format) {
+                case TexturePixelFormat.Palette1: return Planes?.GroundPalette;
+                case TexturePixelFormat.Palette2: return Planes?.SkyPalette;
+                case TexturePixelFormat.Palette3: return TexturePalette;
+                default:                          return null;
+            }
         }
 
         public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader) {

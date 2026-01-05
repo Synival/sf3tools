@@ -57,10 +57,13 @@ namespace SF3.Win.Views.MPD {
                 AddChunkView(fgChunk.ChunkIndex, "ForegroundTileAssignment", (name) => new PlaneTileAssignmentChunkView(name, fgChunk));
             }
 
-            var palettes = Model.PaletteTables
-                .Take(Model.MPDHeader.HasPalette3 ? 3 : 2)
-                .Select(x => x != null ? new Palette(x.Select(x => x.ColorABGR1555).ToArray()) : new Palette(256))
-                .ToArray();
+            var paletteList = new List<Palette>() {
+                Model.GroundPaletteColorTable?.Palette ?? new Palette(0x100),
+                Model.SkyPaletteColorTable?.Palette ?? new Palette(0x100),
+            };
+            if (Model.MPDHeader.HasPalette3)
+                paletteList.Add(Model.TexturePaletteColorTable?.Palette ?? new Palette(0x100));
+            var palettes = paletteList.ToArray();
 
             foreach (var chunk in Model.ChunkData) {
                 if (chunk == null || chunkViews.ContainsKey(chunk.Index))

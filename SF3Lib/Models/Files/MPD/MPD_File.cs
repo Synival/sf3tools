@@ -13,6 +13,7 @@ using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.MPD.Main;
 using SF3.Models.Tables.MPD.Animation;
+using CommonLib.Imaging;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -80,6 +81,8 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<CollectionType, IMPD_ModelCollection>();
 
+        public Palette TexturePalette => TexturePaletteColorTable?.Palette;
+
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
 
@@ -114,7 +117,13 @@ namespace SF3.Models.Files.MPD {
         public TextureIDTable SkipTextures { get; private set; }
 
         [BulkCopyRecurse]
-        public ColorTable[] PaletteTables { get; private set; }
+        public ColorTable GroundPaletteColorTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public ColorTable SkyPaletteColorTable { get; private set; }
+
+        [BulkCopyRecurse]
+        public ColorTable TexturePaletteColorTable { get; private set; }
 
         [BulkCopyRecurse]
         public TextureIDTable IndexedTextureTable { get; private set; }

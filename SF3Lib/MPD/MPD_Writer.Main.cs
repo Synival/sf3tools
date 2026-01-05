@@ -18,8 +18,8 @@ namespace SF3.MPD {
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
             var skipTexturesPos      = WriteTableOrNull(mpd.SkipTextures, mpd.Settings);
-            var palette1Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 1 ? mpd.PaletteTables[0] : null);
-            var palette2Pos          = WriteTableOrNull(mpd.PaletteTables?.Length >= 2 ? mpd.PaletteTables[1] : null);
+            var palette1Pos          = WriteTableOrNull(mpd.GroundPaletteColorTable?.Length >= 1 ? mpd.GroundPaletteColorTable : null);
+            var palette2Pos          = WriteTableOrNull(mpd.SkyPaletteColorTable?.Length >= 2 ? mpd.SkyPaletteColorTable : null);
 
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;

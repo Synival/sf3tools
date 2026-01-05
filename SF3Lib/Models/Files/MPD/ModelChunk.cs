@@ -11,6 +11,7 @@ using SF3.MPD;
 using SF3.Types;
 using SF3.Extensions;
 using SF3.Imaging;
+using CommonLib.Imaging;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {

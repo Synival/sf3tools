@@ -61,9 +61,14 @@ namespace SF3.Win.Views.MPD {
                 }
             }
 
-            for (var i = 0; i < Model.PaletteTables.Length; i++)
-                if (Model.PaletteTables[i] != null)
-                    CreateChild(new ColorTableView("Palette " + (i + 1).ToString(), Model.PaletteTables[i], Model.NameGetterContext));
+            if (Model.GroundPaletteColorTable != null)
+                CreateChild(new ColorTableView("Ground Palette", Model.GroundPaletteColorTable, Model.NameGetterContext));
+
+            if (Model.SkyPaletteColorTable != null)
+                CreateChild(new ColorTableView("Sky Palette", Model.SkyPaletteColorTable, Model.NameGetterContext));
+
+            if (Model.TexturePaletteColorTable != null)
+                CreateChild(new ColorTableView("Texture Palette", Model.TexturePaletteColorTable, Model.NameGetterContext));
 
             if (Model.IndexedTextureTable != null)
                 CreateChild(new TextureIDTableView("Indexed Textures",  Model.IndexedTextureTable, ngc, Model.ModelCollections[CollectionType.Primary]));

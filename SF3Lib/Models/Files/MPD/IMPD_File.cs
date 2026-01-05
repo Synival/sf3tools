@@ -10,6 +10,7 @@ using SF3.Models.Tables.MPD.Animation;
 using SF3.Models.Tables.MPD.Main;
 using SF3.Models.Tables.Shared;
 using SF3.MPD;
+using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public struct ReplaceTexturesFromFilesResult {
@@ -53,11 +54,11 @@ namespace SF3.Models.Files.MPD {
         void ResetTileTrees();
 
         /// <summary>
-        /// Creates a palette using PaletteTable[index]. If a palette does not exist, a 256 grayscale palette is returned.
+        /// Gets a reference to a palette based the palette type. If a palette does not exist, 'null' is returned.
         /// </summary>
-        /// <param name="index">Corresponding zero-indexed palette number, with 0 as Palette1.</param>
-        /// <returns>A 256-color palette for the requested index.</returns>
-        Palette CreatePalette(int index);
+        /// <param name="format">Format which indicates the palette to use.</param>
+        /// <returns>A 256-color palette for the requested format, or 'null' if it doesn't exist.</returns>
+        Palette GetPalette(TexturePixelFormat format);
 
         /// <summary>
         /// Fetches the PDataModel for a PDATA that looks like a tree, if one could be found.
@@ -115,7 +116,9 @@ namespace SF3.Models.Files.MPD {
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; }
         UnknownUInt8Table GroundAnimationTable { get; }
         TextureIDTable SkipTextures { get; }
-        ColorTable[] PaletteTables { get; }
+        ColorTable GroundPaletteColorTable { get; }
+        ColorTable SkyPaletteColorTable { get; }
+        ColorTable TexturePaletteColorTable { get; }
         TextureIDTable IndexedTextureTable { get; }
         AnimationTable Animations { get; }
         UnknownUInt16Table Unknown2Table { get; }

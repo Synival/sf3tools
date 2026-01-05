@@ -75,20 +75,20 @@ namespace SF3.Models.Files.MPD {
             => ChunkLocations = ChunkLocationTable.Create(Data, "ChunkHeader", 0x2000);
 
         private ITable[] MakePaletteTables(MPD_Header header) {
-            PaletteTables = new ColorTable[3];
+            var tables = new List<ITable>();
             var headerRamAddr = header.Address + RamAddress;
 
             // Sometimes palette addresses are placed in an odd place at or just before the header actually begins.
             // This is most likely an error in the MPD file; it results in garbage data.
             // Don't load the palettes in these cases.
             if (header.OffsetPal1 >= RamAddress && (headerRamAddr - header.OffsetPal1) / 2 >= 256)
-                PaletteTables[0] = ColorTable.Create(Data, "TexturePalette1", header.OffsetPal1 - RamAddress, 256);
+                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, "GroundPalette", header.OffsetPal1 - RamAddress, 256));
             if (header.OffsetPal2 >= RamAddress && (headerRamAddr - header.OffsetPal2) / 2 >= 256)
-                PaletteTables[1] = ColorTable.Create(Data, "TexturePalette2", header.OffsetPal2 - RamAddress, 256);
+                tables.Add(SkyPaletteColorTable = ColorTable.Create(Data, "SkyPalette", header.OffsetPal2 - RamAddress, 256));
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= RamAddress && (headerRamAddr - header.OffsetPal3) / 2 >= 256)
-                PaletteTables[2] = ColorTable.Create(Data, "TexturePalette3", header.OffsetPal3 - RamAddress, 256);
+                tables.Add(TexturePaletteColorTable = ColorTable.Create(Data, "TexturePalette", header.OffsetPal3 - RamAddress, 256));
 
-            return PaletteTables.Where(x => x != null).ToArray();
+            return tables.ToArray();
         }
 
         private ITable[] MakeLightingTables(MPD_Header header) {

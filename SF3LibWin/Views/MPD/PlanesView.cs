@@ -26,6 +26,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TextureView("Foreground Tileset", Planes.ForegroundTiledImage.Tileset, 1));
             if (Planes.ForegroundTiledImage?.TiledImage != null)
                 CreateChild(new TextureView("Foreground (Tiled Image)", Planes.ForegroundTiledImage.TiledImage, 1));
+            // TODO: Palette views
 
             return Control;
         }

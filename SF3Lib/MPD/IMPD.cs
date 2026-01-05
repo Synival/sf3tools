@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CommonLib.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD {
@@ -27,6 +28,11 @@ namespace SF3.MPD {
         /// All models that exist in this MPD, sorted by their collection (model+surface, chests+barrel, extra model).
         /// </summary>
         Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; }
+
+        /// <summary>
+        /// Palette used for 8-bit textures on models and the surface model.
+        /// </summary>
+        Palette TexturePalette { get; }
 
         /// <summary>
         /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).

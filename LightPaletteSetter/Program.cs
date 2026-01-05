@@ -2,6 +2,7 @@
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
+using SF3.Models.Tables.Shared;
 using SF3.NamedValues;
 using SF3.Types;
 using static CommonLib.Imaging.PixelConversion;
@@ -83,7 +84,8 @@ namespace LightPaletteSetter {
                     lightingPalette[i].ColorABGR1555 = c_lighting.Palette[i];
 
                 // Update palette tables.
-                var palettes = mpdFile.PaletteTables
+                var paletteFormats = new ColorTable[] { mpdFile.GroundPaletteColorTable, mpdFile.SkyPaletteColorTable, mpdFile.TexturePaletteColorTable };
+                var palettes = paletteFormats
                     .Select((x, i) => new { Obj = x, Index = i })
                     .Where(x => x.Obj != null)
                     .GroupBy(x => x.Obj.Address)
