@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Utils;
@@ -34,10 +33,14 @@ namespace SF3.Models.Tables.Shared {
                 if (maxStart < minEnd)
                     Invalidate();
             };
+
+            // Store one single palette that will be updated upon invalidation.
+            _palette = new Palette(size);
         }
 
         public void Invalidate(bool sendEvent = true) {
             _textureDataBuffer.Invalidate();
+            _updatePalette = true;
             if (sendEvent)
                 Invalidated?.Invoke(this, EventArgs.Empty);
         }
@@ -105,10 +108,16 @@ namespace SF3.Models.Tables.Shared {
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
         public string Hash => BitmapDataARGB1555.CreateTextureHash();
 
+        private bool _updatePalette = true;
+        private readonly Palette _palette;
         public Palette Palette {
             get {
-                // TODO: caching somehow would be good!
-                return new Palette(Rows.Select(x => x.ColorABGR1555).ToArray());
+                if (_updatePalette) {
+                    for (int i = 0; i < Size; ++i)
+                        _palette.Channels[i] = PixelConversion.ABGR1555toChannels(Rows[i].ColorABGR1555);
+                    _updatePalette = false;
+                }
+                return _palette;
             }
             set {
                 if (value == null)

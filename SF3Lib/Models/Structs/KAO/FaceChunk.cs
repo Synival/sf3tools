@@ -54,7 +54,7 @@ namespace SF3.Models.Structs.KAO {
         public int DecompressedSize => Data.Length;
 
         public Palette Palette {
-            get => new Palette(PaletteTable.Select(x => x.ColorABGR1555).ToArray());
+            get => PaletteTable.Palette;
             set {
                 if (value == null)
                     return;
