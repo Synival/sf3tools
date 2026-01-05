@@ -35,6 +35,11 @@ namespace SF3.MPD {
         Palette TexturePalette { get; }
 
         /// <summary>
+        /// Palette used for lighting models and the surface model.
+        /// </summary>
+        Palette LightPalette { get; }
+
+        /// <summary>
         /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).
         /// </summary>
         IMPD_Planes Planes { get; }

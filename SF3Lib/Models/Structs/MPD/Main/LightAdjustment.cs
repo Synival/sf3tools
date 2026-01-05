@@ -10,19 +10,19 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _groundRAdjustAddr;
         private readonly int _groundGAdjustAddr;
         private readonly int _groundBAdjustAddr;
-        private readonly int _palette3TransparencyAddr;
+        private readonly int _shadowTransparencyAddr;
 
         public LightAdjustment(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, scenario >= ScenarioType.Scenario3 ? 0x0E : 0x06) {
             Scenario = scenario;
 
-            _rAdjustAddr               = Address + 0x00; // 2 bytes
-            _gAdjustAddr               = Address + 0x02; // 2 bytes
-            _bAdjustAddr               = Address + 0x04; // 2 bytes
-            _groundRAdjustAddr         = scenario >= ScenarioType.Scenario3 ? Address + 0x06 : -1; // 2 bytes
-            _groundGAdjustAddr         = scenario >= ScenarioType.Scenario3 ? Address + 0x08 : -1; // 2 bytes
-            _groundBAdjustAddr         = scenario >= ScenarioType.Scenario3 ? Address + 0x0A : -1; // 2 bytes
-            _palette3TransparencyAddr  = scenario >= ScenarioType.Scenario3 ? Address + 0x0C : -1; // 2 bytes
+            _rAdjustAddr            = Address + 0x00; // 2 bytes
+            _gAdjustAddr            = Address + 0x02; // 2 bytes
+            _bAdjustAddr            = Address + 0x04; // 2 bytes
+            _groundRAdjustAddr      = scenario >= ScenarioType.Scenario3 ? Address + 0x06 : -1; // 2 bytes
+            _groundGAdjustAddr      = scenario >= ScenarioType.Scenario3 ? Address + 0x08 : -1; // 2 bytes
+            _groundBAdjustAddr      = scenario >= ScenarioType.Scenario3 ? Address + 0x0A : -1; // 2 bytes
+            _shadowTransparencyAddr = scenario >= ScenarioType.Scenario3 ? Address + 0x0C : -1; // 2 bytes
         }
 
         public ScenarioType Scenario { get; }
@@ -81,12 +81,12 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_palette3TransparencyAddr), displayOrder: 6, displayFormat: "X2", displayName: "Shadow Transparency (Scn3+)", visibilityProperty: nameof(HasShadowTransparency))]
+        [TableViewModelColumn(addressField: nameof(_shadowTransparencyAddr), displayOrder: 6, displayFormat: "X2", displayName: "Shadow Transparency (Scn3+)", visibilityProperty: nameof(HasShadowTransparency))]
         public ushort ShadowTransparency {
-            get => HasShadowTransparency ? (ushort) Data.GetWord(_palette3TransparencyAddr) : (ushort) 0;
+            get => HasShadowTransparency ? (ushort) Data.GetWord(_shadowTransparencyAddr) : (ushort) 0;
             set {
                 if (HasShadowTransparency)
-                    Data.SetWord(_palette3TransparencyAddr, value);
+                    Data.SetWord(_shadowTransparencyAddr, value);
             }
         }
     }

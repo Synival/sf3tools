@@ -21,6 +21,14 @@ namespace CommonLib.Imaging {
         }
 
         /// <summary>
+        /// Creates a new palette with a copy of pixel channels provided.
+        /// </summary>
+        /// <param name="channels">Color channels to copy.</param>
+        public Palette(PixelChannels[] channels) {
+            Channels = channels.Clone() as PixelChannels[];
+        }
+
+        /// <summary>
         /// Creates an empty palette with a set number of colors, grayscale by default.
         /// </summary>
         /// <param name="colorCount">The number of colors.</param>

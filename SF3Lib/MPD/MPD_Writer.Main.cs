@@ -8,7 +8,7 @@ namespace SF3.MPD {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
-            var lightPalettePos      = WriteTableOrNull(mpd.LightPalette);
+            var lightPalettePos      = WriteTableOrNull(mpd.LightPaletteColorTable);
             var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
@@ -18,8 +18,8 @@ namespace SF3.MPD {
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
             var skipTexturesPos      = WriteTableOrNull(mpd.SkipTextures, mpd.Settings);
-            var palette1Pos          = WriteTableOrNull(mpd.GroundPaletteColorTable?.Length >= 1 ? mpd.GroundPaletteColorTable : null);
-            var palette2Pos          = WriteTableOrNull(mpd.SkyPaletteColorTable?.Length >= 2 ? mpd.SkyPaletteColorTable : null);
+            var groundPalettePos     = WriteTableOrNull(mpd.GroundPaletteColorTable?.Length >= 1 ? mpd.GroundPaletteColorTable : null);
+            var skyPalettePos        = WriteTableOrNull(mpd.SkyPaletteColorTable?.Length >= 2 ? mpd.SkyPaletteColorTable : null);
 
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;
@@ -36,8 +36,8 @@ namespace SF3.MPD {
                 unknown2Pos,
                 groundAnimationPos,
                 skipTexturesPos,
-                palette1Pos,
-                palette2Pos,
+                groundPalettePos,
+                skyPalettePos,
                 boundariesPos,
                 out var chestModelsPosPtr,
                 out var lockedChestModelsPosPtr,
@@ -81,8 +81,8 @@ namespace SF3.MPD {
             uint? unknown2Pos,
             uint? groundAnimationPos,
             uint? skipTexturesPos,
-            uint? palette1Pos,
-            uint? palette2Pos,
+            uint? groundPalettePos,
+            uint? skyPalettePos,
             uint? boundariesPos,
             out uint chestModelsPosPtr,
             out uint lockedChestModelsPosPtr,
@@ -113,8 +113,8 @@ namespace SF3.MPD {
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WriteMPDPointer(skipTexturesPos);
-            WriteMPDPointer(palette1Pos ?? headerAddr);
-            WriteMPDPointer(palette2Pos ?? headerAddr);
+            WriteMPDPointer(groundPalettePos ?? headerAddr);
+            WriteMPDPointer(skyPalettePos ?? headerAddr);
             WriteShort(planes.GroundX);
             WriteShort(planes.GroundY);
             WriteShort(planes.GroundZ);

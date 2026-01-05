@@ -45,17 +45,19 @@ namespace SF3.Win.Controls {
             if (MPD_File != null && Models != null && _sglModel != null)
                 _models.Update(MPD_File, Models, _sglModel);
 
-            var lighting = ColorTable.Create(new ByteData.ByteData(new ByteArray(256)), "Colors", 0, 32);
-            for (int i = 0; i < 32; i++) {
-                var level = i / 31f;
-                var channels = new PixelChannels() {
-                    a = 255,
-                    r = (byte) ((level * 0.75f  + 0.125f) * 255),
-                    g = (byte) ((level * 0.50f +  0.25f)  * 255),
-                    b = (byte) ((level * 0.25f  + 0.375f) * 255)
-                };
-                lighting[i].ColorABGR1555 = channels.ToABGR1555();
-            }
+            var lighting = new Palette(Enumerable.Range(0, 32)
+                .Select(i => {
+                    var level = i / 31f;
+                    return new PixelChannels() {
+                        a = 255,
+                        r = (byte) ((level * 0.75f  + 0.125f) * 255),
+                        g = (byte) ((level * 0.50f +  0.25f)  * 255),
+                        b = (byte) ((level * 0.25f  + 0.375f) * 255)
+                    };
+                })
+                .ToArray()
+            );
+
             _lighting.Update(lighting, null);
 
             UpdateLightPos();

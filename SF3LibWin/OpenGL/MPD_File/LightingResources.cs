@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
@@ -33,7 +34,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
-        public void Update(ColorTable lightPal, LightAdjustment lightAdjustment) {
+        public void Update(Palette lightPal, LightAdjustment lightAdjustment) {
             using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdjustment))
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
@@ -41,27 +42,26 @@ namespace SF3.Win.OpenGL.MPD_File {
         private Bitmap CreateLightPaletteBitmap(IMPD_File mpdFile)
             => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.LightAdjustment);
 
-        private Bitmap CreateLightPaletteBitmap(ColorTable lightPal, LightAdjustment lightAdjustment) {
+        private Bitmap CreateLightPaletteBitmap(Palette lightPal, LightAdjustment lightAdjustment) {
             if (lightPal == null)
                 return null;
 
-            var adjR = lightAdjustment?.RAdjustment ?? 0;
-            var adjG = lightAdjustment?.GAdjustment ?? 0;
-            var adjB = lightAdjustment?.BAdjustment ?? 0;
+            var adjR = (lightAdjustment?.RAdjustment ?? 0) * 255 / 31;
+            var adjG = (lightAdjustment?.GAdjustment ?? 0) * 255 / 31;
+            var adjB = (lightAdjustment?.BAdjustment ?? 0) * 255 / 31;
 
-            var numColors = lightPal.Length;
+            var numColors = lightPal.Channels.Length;
 
             var colorData = new byte[numColors * 4];
             int pos = 0;
-            foreach (var color in lightPal) {
-                var colorValue = color.ColorABGR1555;
-                var colorR = MathHelpers.Clamp((short) ((colorValue >>  0) & 0x1F) + adjR, 0x00, 0x1F);
-                var colorG = MathHelpers.Clamp((short) ((colorValue >>  5) & 0x1F) + adjG, 0x00, 0x1F);
-                var colorB = MathHelpers.Clamp((short) ((colorValue >> 10) & 0x1F) + adjB, 0x00, 0x1F);
+            foreach (var color in lightPal.Channels) {
+                var colorR = (byte) MathHelpers.Clamp(color.r + adjR, 0x00, 0xFF);
+                var colorG = (byte) MathHelpers.Clamp(color.g + adjG, 0x00, 0xFF);
+                var colorB = (byte) MathHelpers.Clamp(color.b + adjB, 0x00, 0xFF);
 
-                colorData[pos++] = (byte) (colorB * 255 / 31);
-                colorData[pos++] = (byte) (colorG * 255 / 31);
-                colorData[pos++] = (byte) (colorR * 255 / 31);
+                colorData[pos++] = colorB;
+                colorData[pos++] = colorG;
+                colorData[pos++] = colorR;
                 colorData[pos++] = 255;
             }
 

@@ -82,6 +82,7 @@ namespace SF3.Models.Files.MPD {
         public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
 
         public Palette TexturePalette => TexturePaletteColorTable?.Palette;
+        public Palette LightPalette => LightPaletteColorTable?.Palette;
 
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
@@ -93,7 +94,7 @@ namespace SF3.Models.Files.MPD {
         public ChunkLocationTable ChunkLocations { get; private set; }
 
         [BulkCopyRecurse]
-        public ColorTable LightPalette { get; private set; }
+        public ColorTable LightPaletteColorTable { get; private set; }
 
         [BulkCopyRecurse]
         public LightPosition LightPosition { get; private set; }

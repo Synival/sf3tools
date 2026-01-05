@@ -96,7 +96,7 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetLightPalette != 0)
-                tables.Add(LightPalette = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - RamAddress, 32));
+                tables.Add(LightPaletteColorTable = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - RamAddress, 32));
             if (header.OffsetLightPosition != 0)
                 LightPosition = new LightPosition(Data, 0, "LightPositions", header.OffsetLightPosition - RamAddress);
             if (header.OffsetLightAdjustment != 0)

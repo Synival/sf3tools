@@ -79,7 +79,7 @@ namespace LightPaletteSetter {
                 var mpdFile = MPD_File.Create(byteData, nameGetters, scenario);
 
                 // Update light palette.
-                var lightingPalette = mpdFile.LightPalette;
+                var lightingPalette = mpdFile.LightPaletteColorTable;
                 for (var i = 0; i < 32; i++)
                     lightingPalette[i].ColorABGR1555 = c_lighting.Palette[i];
 

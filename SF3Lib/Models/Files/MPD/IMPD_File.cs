@@ -107,7 +107,7 @@ namespace SF3.Models.Files.MPD {
 
         MPD_Header MPDHeader { get; }
         ChunkLocationTable ChunkLocations { get; }
-        ColorTable LightPalette { get; }
+        ColorTable LightPaletteColorTable { get; }
         LightPosition LightPosition { get; }
         UnknownUInt16Table Unknown1Table { get; }
         LightAdjustment LightAdjustment { get; }
