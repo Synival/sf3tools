@@ -115,7 +115,7 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt8Table GroundAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureIDTable SkipTextures { get; private set; }
+        public IgnoredTextureTable IgnoredTextureTable { get; private set; }
 
         [BulkCopyRecurse]
         public ColorTable GroundPaletteColorTable { get; private set; }
@@ -127,7 +127,7 @@ namespace SF3.Models.Files.MPD {
         public ColorTable TexturePaletteColorTable { get; private set; }
 
         [BulkCopyRecurse]
-        public TextureIDTable IndexedTextureTable { get; private set; }
+        public IndexedTextureTable IndexedTextureTable { get; private set; }
 
         [BulkCopyRecurse]
         public AnimationTable Animations { get; private set; }

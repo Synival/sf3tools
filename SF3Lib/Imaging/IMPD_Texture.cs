@@ -37,5 +37,10 @@ namespace SF3.Imaging {
         /// Tags for identifying textures with the same Hash.
         /// </summary>
         Dictionary<TagKey, TagValue> Tags { get; }
+
+        /// <summary>
+        /// When 'true', this texture is not allocated in VRAM and should not be used.
+        /// </summary>
+        bool IsIgnored { get; }
     }
 }

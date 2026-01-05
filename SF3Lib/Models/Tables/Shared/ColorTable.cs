@@ -26,10 +26,7 @@ namespace SF3.Models.Tables.Shared {
 
             // Invalidate the image whenever the colors have been modified.
             data.Data.RangeModified += (s, eventData) => {
-                // Check for an interval intersection.
-                var maxStart = Math.Max(Address, eventData.Offset);
-                var minEnd = Math.Min(Address + SizeInBytes, eventData.Offset + eventData.Length);
-                if (maxStart < minEnd)
+                if (eventData.IntersectsWithRange(Address, Address + SizeInBytes))
                     Invalidate();
             };
 

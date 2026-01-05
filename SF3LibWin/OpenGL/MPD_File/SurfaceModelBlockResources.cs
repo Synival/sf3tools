@@ -45,8 +45,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             Reset();
 
             var skippedTextures =
-                (mpdFile.SkipTextures == null) ? []
-                : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
+                (mpdFile.IgnoredTextureTable == null) ? []
+                : mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToHashSet();
 
             var texturesById = mpdFile.TextureChunks != null ? mpdFile.TextureChunks
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == MPD_CollectionType.Primary)

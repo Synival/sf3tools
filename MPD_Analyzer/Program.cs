@@ -212,8 +212,8 @@ namespace MPD_Analyzer {
                     usedTextureIds.Add(id);
 
                 // (count the animation frames as used textures, since they're still referenced and *probably* used)
-                if (mpdFile.SkipTextures != null)
-                    foreach (var entry in mpdFile.SkipTextures)
+                if (mpdFile.IgnoredTextureTable != null)
+                    foreach (var entry in mpdFile.IgnoredTextureTable)
                         usedTextureIds.Add(entry.TextureID);
 
                 var usedTextures = usedTextureIds
@@ -266,8 +266,8 @@ namespace MPD_Analyzer {
                 foreach (var id in missingTextureIdsFromSurfaceMap)
                     missingTextureIds.Add(id);
 
-                if (mpdFile.SkipTextures != null)
-                    foreach (var entry in mpdFile.SkipTextures.OrderBy(x => x.TextureID))
+                if (mpdFile.IgnoredTextureTable != null)
+                    foreach (var entry in mpdFile.IgnoredTextureTable.OrderBy(x => x.TextureID))
                         if (entry.TextureID > lastTexture)
                             missingTextureIds.Add(entry.TextureID);
 
@@ -308,9 +308,9 @@ namespace MPD_Analyzer {
             }
 
             string[]? GetSkippedTexturesMissingFromUniqueAnimationFrames() {
-                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.SkipTextures == null)
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.IgnoredTextureTable == null)
                     return null;
-                var skippedTexturesNotInFrames = mpdFile.SkipTextures
+                var skippedTexturesNotInFrames = mpdFile.IgnoredTextureTable
                     .Select(x => texturesById[x.TextureID])
                     .Where(x => !mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable.Any(y => y.Hash == x.Hash))
                     .ToArray();
@@ -318,10 +318,10 @@ namespace MPD_Analyzer {
             }
 
             string[]? GetUniqueAnimationFramesWithMatchingTexturesButNotSkipped() {
-                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.SkipTextures == null)
+                if (mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.IgnoredTextureTable == null)
                     return null;
                 var nonSkippedChunk3Textures = mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable
-                    .Where(x => !mpdFile.SkipTextures.Any(y => texturesById[y.TextureID].Hash == x.Hash))
+                    .Where(x => !mpdFile.IgnoredTextureTable.Any(y => texturesById[y.TextureID].Hash == x.Hash))
                     .ToArray();
                 return nonSkippedChunk3Textures.Select(x => $"Chunk[3] Tex0x{x.ID:X2}: In Chunk[3], but not skipped").ToArray();
             }
@@ -348,7 +348,7 @@ namespace MPD_Analyzer {
                             AnimID:    x.Value.TexAnimID,
                             Frame:     x.Value.Frame,
                             TextureID: texId,
-                            SkipID:    mpdFile.SkipTextures.FirstOrDefault(x => x.TextureID == texId)?.ID
+                            SkipID:    mpdFile.IgnoredTextureTable.FirstOrDefault(x => x.TextureID == texId)?.ID
                         );
                     });
 
@@ -378,17 +378,17 @@ namespace MPD_Analyzer {
             }
 
             string[]? GetOutOfOrderSkippedTextures() {
-                if (mpdFile.SkipTextures == null)
+                if (mpdFile.IgnoredTextureTable == null)
                     return null;
-                var outOfOrderArray = mpdFile.SkipTextures
-                    .Select((x, i) => (i == 0) ? false : mpdFile.SkipTextures[i - 1].TextureID >= x.TextureID)
+                var outOfOrderArray = mpdFile.IgnoredTextureTable
+                    .Select((x, i) => (i == 0) ? false : mpdFile.IgnoredTextureTable[i - 1].TextureID >= x.TextureID)
                     .ToArray();
                 var outOfOrder = outOfOrderArray.Any(x => x == true);
-                return outOfOrder ? mpdFile.SkipTextures.Select((x, i) => (outOfOrderArray[i] ? "!! " : "   ") + $"0x{x.ID:X2}: Tex0x{x.TextureID:X2}").ToArray() : [];
+                return outOfOrder ? mpdFile.IgnoredTextureTable.Select((x, i) => (outOfOrderArray[i] ? "!! " : "   ") + $"0x{x.ID:X2}: Tex0x{x.TextureID:X2}").ToArray() : [];
             }
 
             string[]? GetUniqueAnimationFramesInDifferentOrderThanAssignmentOrder() {
-                if (mpdFile.SkipTextures == null || mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
+                if (mpdFile.IgnoredTextureTable == null || mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
                     return null;
 
                 var frames = mpdFile.Animations
@@ -419,7 +419,7 @@ namespace MPD_Analyzer {
             }
 
             string[]? GetExpectedSkipTexturesTable() {
-                if (mpdFile.SkipTextures == null || mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
+                if (mpdFile.IgnoredTextureTable == null || mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
                     return null;
 
                 var textureIdsFromModels = modelsById.Values
@@ -446,7 +446,7 @@ namespace MPD_Analyzer {
                     .ToArray();
 
                 var expectedSkipTexturesList = definiteSkippedAnimationFrames.Select(x => x.ID).Order().ToArray();
-                var actualSkipTexturesList = mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToArray();
+                var actualSkipTexturesList = mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToArray();
 
                 return !Enumerable.SequenceEqual(expectedSkipTexturesList, actualSkipTexturesList)
                     ? ["Expected: [" + string.Join(", ", expectedSkipTexturesList.Select(x => $"0x{x:X2}")) + "]",

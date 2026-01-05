@@ -122,7 +122,7 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetSkipTextures != 0) {
                 try {
-                    tables.Add(SkipTextures = TextureIDTable.Create(Data, nameof(SkipTextures), "SkipTex", header.OffsetSkipTextures - RamAddress, 2, 0x100));
+                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetSkipTextures - RamAddress, 2, 0x100));
                 }
                 catch {
                     // TODO: what to do here??
@@ -187,7 +187,7 @@ namespace SF3.Models.Files.MPD {
 
             // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures != 0)
-                tables.Add(IndexedTextureTable = TextureIDTable.Create(Data, "IndexedTextures", "IndexedTexture", header.OffsetIndexedTextures - RamAddress, 4, 0x100));
+                tables.Add(IndexedTextureTable = IndexedTextureTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - RamAddress, 4, 0x100));
 
             // This table is only present before Scenario 2 and is always 32 bytes if it exists.
             if (header.OffsetUnknown1 != 0) {
@@ -412,8 +412,8 @@ namespace SF3.Models.Files.MPD {
             }
 
             // Textures in the "skip textures" table are ABGR1555.
-            if (SkipTextures != null)
-                foreach (var tex in SkipTextures)
+            if (IgnoredTextureTable != null)
+                foreach (var tex in IgnoredTextureTable)
                     primaryPixelFormats[tex.TextureID] = TexturePixelFormat.ABGR1555;
 
             // Mark indexed textures as such.

@@ -17,6 +17,13 @@ namespace CommonLib.Arrays {
         public int LengthChange { get; }
         public bool Resized => LengthChange != 0;
         public bool Modified { get; }
+
+        public bool IntersectsWithRange(int start, int stop) {
+            // Check for an interval intersection.
+            var maxStart = Math.Max(start, Offset);
+            var minEnd   = Math.Min(stop, Offset + Length);
+            return maxStart < minEnd;
+        }
     }
 
     public delegate void ByteArrayRangeModifiedHandler(object sender, ByteArrayRangeModifiedArgs args);

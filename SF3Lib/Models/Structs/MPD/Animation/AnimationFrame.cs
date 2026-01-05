@@ -107,6 +107,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public bool CanSetImageData8Bit => Chunk3Texture?.CanSetImageData8Bit ?? false;
         public bool CanSetImageData16Bit => Chunk3Texture?.CanSetImageData16Bit ?? false;
         public bool ZeroIsTransparent => false;
+        public bool IsIgnored => false;
 
         public event EventHandler Invalidated;
     }

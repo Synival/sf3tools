@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
@@ -23,7 +24,7 @@ namespace SF3.MPD {
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
                 case AnimationTable ta:          WriteAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case BoundaryTable bt:           WriteBoundaries(bt);          break;
-                case TextureIDTable tid:         WriteTextureIDs(tid, settings?.LongEmptyAltAnimationTable ?? false); break;
+                case IgnoredTextureTable tid:    WriteTextureIDs(tid, settings?.LongEmptyAltAnimationTable ?? false); break;
                 case MissingModelChunk mmc:      return null;
                 case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
                 default:
@@ -93,7 +94,7 @@ namespace SF3.MPD {
             }
         }
 
-        public void WriteTextureIDs(TextureIDTable textureIds, bool writeLongEmptyData) {
+        public void WriteTextureIDs(ITable<TextureIDStruct> textureIds, bool writeLongEmptyData) {
             foreach (var textureId in textureIds)
                 WriteUShort(textureId.TextureID);
 

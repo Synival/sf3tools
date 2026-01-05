@@ -50,8 +50,8 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private Dictionary<int, IMPD_Texture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
             var skippedTextures = 
-                (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.SkipTextures == null) ? []
-                : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
+                (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.IgnoredTextureTable == null) ? []
+                : mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToHashSet();
 
             return modelCollection.Textures
                 .Where(x => !skippedTextures.Contains(x.ID))
@@ -63,8 +63,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return [];
 
             var skippedTextures =
-                (mpdFile.SkipTextures == null) ? []
-                : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
+                (mpdFile.IgnoredTextureTable == null) ? []
+                : mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToHashSet();
 
             return mpdFile.Animations
                 .Where(x => !skippedTextures.Contains(x.ID))

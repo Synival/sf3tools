@@ -62,6 +62,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public int Frame => 0;
         public int Duration => 0;
         public Dictionary<TagKey, TagValue> Tags => null;
+        public bool IsIgnored => false;
 
         private readonly int _originalStoredSize;
     }

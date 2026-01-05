@@ -18,7 +18,7 @@ namespace SF3.MPD {
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
-            var skipTexturesPos      = WriteTableOrNull(mpd.SkipTextures, mpd.Settings);
+            var skipTexturesPos      = WriteTableOrNull(mpd.IgnoredTextureTable, mpd.Settings);
             var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
             var skyPalettePos        = WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1    ? mpd.Planes.SkyPalette    : null);
 
