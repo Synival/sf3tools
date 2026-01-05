@@ -1,4 +1,5 @@
-﻿using CommonLib.SGL;
+﻿using CommonLib.Imaging;
+using CommonLib.SGL;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 
@@ -8,7 +9,7 @@ namespace SF3.MPD {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
-            var lightPalettePos      = WriteTableOrNull(mpd.LightPaletteColorTable);
+            var lightPalettePos      = WritePaletteOrNull(mpd.LightPalette);
             var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
@@ -18,8 +19,8 @@ namespace SF3.MPD {
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
             var skipTexturesPos      = WriteTableOrNull(mpd.SkipTextures, mpd.Settings);
-            var groundPalettePos     = WriteTableOrNull(mpd.GroundPaletteColorTable?.Length >= 1 ? mpd.GroundPaletteColorTable : null);
-            var skyPalettePos        = WriteTableOrNull(mpd.SkyPaletteColorTable?.Length >= 2 ? mpd.SkyPaletteColorTable : null);
+            var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
+            var skyPalettePos        = WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1    ? mpd.Planes.SkyPalette    : null);
 
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;
@@ -123,6 +124,20 @@ namespace SF3.MPD {
             WriteShort(planes.BackgroundX);
             WriteShort(planes.BackgroundY);
             WriteMPDPointer(boundariesPos);
+        }
+
+        public uint? WritePaletteOrNull(Palette palette) {
+            if (palette == null)
+                return null;
+            var pos = (uint) CurrentOffset;
+
+            WritePalette(palette);
+            return pos;
+        }
+
+        public void WritePalette(Palette palette) {
+            foreach (var channel in palette.Channels)
+                WriteUShort(channel.ToABGR1555());
         }
     }
 }

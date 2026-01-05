@@ -16,7 +16,6 @@ namespace SF3.MPD {
             var pos = (uint) CurrentOffset;
 
             switch (data) {
-                case ColorTable ct:              WriteColorTable(ct);          break;
                 case LightPosition lp:           WriteLightPosition(lp);       break;
                 case UnknownUInt32Table ui32:    WriteUInt32Table(ui32);       break;
                 case UnknownUInt16Table ui16:    WriteUInt16Table(ui16);       break;
