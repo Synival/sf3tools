@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonLib.Extensions;
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
@@ -153,8 +154,11 @@ namespace CommonLib.Imaging {
             Height = newHeight;
 
             Invalidate(sendEvent: false);
-            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--))
-                _ = _textureDataBuffer.SetImageData16Bit(data);
+            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+                var newData = data.Clone() as ushort[,];
+                newData.FixSaturnTransparency(useEndCodes: true);
+                _ = _textureDataBuffer.SetImageData16Bit(newData);
+            }
 
             InvokeInvalidatedEvent();
         }

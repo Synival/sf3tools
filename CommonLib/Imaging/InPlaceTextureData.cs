@@ -198,9 +198,6 @@ namespace CommonLib.Imaging {
                 }
             }
 
-            // Add transparency end codes to the texture.
-            outputData.FixSaturnTransparency(useEndCodes: true);
-
             StoredImageDataSize = storedSize;
             return outputData;
         }
@@ -209,16 +206,20 @@ namespace CommonLib.Imaging {
             var off = 0;
             var newWidth = data.GetLength(0);
             var newHeight = data.GetLength(1);
-            var newData = new byte[newWidth * newHeight * 2];
+
+            var newData = data.Clone() as ushort[,];
+            newData.FixSaturnTransparency(useEndCodes: true);
+            var newData1D = new byte[newWidth * newHeight * 2];
+
             for (var y = 0; y < newHeight; y++) {
                 for (var x = 0; x < newWidth; x++) {
-                    var val = data[x, y];
-                    newData[off++] = (byte) (val >> 8);
-                    newData[off++] = (byte) val;
+                    var val = newData[x, y];
+                    newData1D[off++] = (byte) (val >> 8);
+                    newData1D[off++] = (byte) val;
                 }
             }
 
-            var newStoredData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
+            var newStoredData = IsCompressed ? Compression.CompressLZSS(newData1D) : newData1D;
 
             var error = Validate16BitImageData(data, StoredImageDataSize, newStoredData.Length);
             if (error != null)
@@ -227,11 +228,11 @@ namespace CommonLib.Imaging {
             PixelFormat = TexturePixelFormat.ABGR1555;
             Width  = newWidth;
             Height = newHeight;
-            Data.SetDataAtTo(ImageDataOffset, newData.Length, newData);
+            Data.SetDataAtTo(ImageDataOffset, newData1D.Length, newData1D);
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                _textureDataBuffer.SetImageData16Bit(data);
+                _textureDataBuffer.SetImageData16Bit(newData);
                 StoredImageDataSize = newStoredData.Length;
             }
 
