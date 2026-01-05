@@ -11,20 +11,20 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
-    public class TextureStruct : TextureStructBase, ITexture {
+    public class TextureStruct : TextureStructBase, IMPD_Texture {
         private readonly int _widthAddr;
         private readonly int _heightAddr;
         private readonly int _imageDataOffsetAddr;
 
         public TextureStruct(
-            IByteData data, CollectionType collection, int id, string name, int address,
+            IByteData data, MPD_CollectionType collection, int id, string name, int address,
             TexturePixelFormat? pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
         ) : base(
             data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset),
             isCompressed: false, zeroIsTransparent: true
         ) {
             Collection       = collection;
-            ImportExportName = "Texture_" + ((collection == CollectionType.Primary) ? "" : $"{collection}_") + $"{id:X2}";
+            ImportExportName = "Texture_" + ((collection == MPD_CollectionType.Primary) ? "" : $"{collection}_") + $"{id:X2}";
             ChunkIndex       = chunkIndex;
 
             _widthAddr           = Address;     // 1 byte
@@ -67,13 +67,10 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public static int GlobalSize => 0x04;
 
-        public int Frame => 0;
-        public int Duration => 0;
-
         public Dictionary<TagKey, TagValue> Tags { get; set; } = null;
 
         [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 130)]
-        public CollectionType Collection { get; }
+        public MPD_CollectionType Collection { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
         public int ChunkIndex { get; }

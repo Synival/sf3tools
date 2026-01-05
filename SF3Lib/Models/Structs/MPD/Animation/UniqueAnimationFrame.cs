@@ -9,7 +9,7 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class UniqueAnimationFrame : TextureStructBase, ITexture {
+    public class UniqueAnimationFrame : TextureStructBase, IMPD_AnimationFrame {
         public UniqueAnimationFrame(IByteData data, int id, string name, int address, int width, int height, TexturePixelFormat? pixelFormat, bool isReferenced, IMPD_File mpdFile)
         : base(
             data, id, name, address, width * height * (pixelFormat ?? TexturePixelFormat.ABGR1555).BytesPerPixel(), pixelFormat ?? TexturePixelFormat.ABGR1555,
@@ -58,7 +58,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
         protected override Palette StructPalette { get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.TexturePalette; set {} }
-        public CollectionType Collection => CollectionType.Primary;
+        public MPD_CollectionType Collection => MPD_CollectionType.Primary;
         public int Frame => 0;
         public int Duration => 0;
         public Dictionary<TagKey, TagValue> Tags => null;

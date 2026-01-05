@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CommonLib.Imaging;
 using CommonLib.SGL;
 using SF3.Imaging;
 using SF3.Types;
@@ -9,7 +8,7 @@ namespace SF3.MPD {
         /// <summary>
         /// Identifier for this collection of models.
         /// </summary>
-        CollectionType Collection { get; }
+        MPD_CollectionType Collection { get; }
 
         /// <summary>
         /// Fetches a single model belonging to this collection by ID.
@@ -33,7 +32,7 @@ namespace SF3.MPD {
         /// <summary>
         /// All textures associated with this collection.
         /// </summary>
-        IEnumerable<ITexture> Textures { get; }
+        IEnumerable<IMPD_Texture> Textures { get; }
 
         /// <summary>
         /// When 'true', this model is serialized but not referenced in the MPD header.

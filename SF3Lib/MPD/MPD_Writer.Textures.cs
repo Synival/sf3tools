@@ -6,7 +6,7 @@ using SF3.Imaging;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteTextureChunks(IEnumerable<ITexture> textures, int chunkCount, int startID) {
+        public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID) {
             var sortedTextures = textures
                 .OrderBy(x => x.ID)
                 .ToArray();

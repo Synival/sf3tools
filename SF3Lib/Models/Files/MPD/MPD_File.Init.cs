@@ -65,7 +65,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeUnknownTables(header));
             tables.AddRange(CreateUnreferencedTables(header, tables));
 
-            foreach (var collection in ((CollectionType[]) Enum.GetValues(typeof(CollectionType))).Where(x => x.IsHeaderModelCollection()).ToArray())
+            foreach (var collection in ((MPD_CollectionType[]) Enum.GetValues(typeof(MPD_CollectionType))).Where(x => x.IsHeaderModelCollection()).ToArray())
                 if (!ModelCollections.ContainsKey(collection))
                     ModelCollections[collection] = new MissingModelChunk(this, collection);
 
@@ -138,7 +138,7 @@ namespace SF3.Models.Files.MPD {
 
             for (int i = 0; i < 3; i++) {
                 var offset = offsets[i];
-                var collection = CollectionType.Chest + i;
+                var collection = MPD_CollectionType.Chest + i;
 
                 if (offset != 0) {
                     ModelCollections[collection] = MakeHeaderModelCollection(offset - RamAddress, collection, out var newTables);
@@ -149,7 +149,7 @@ namespace SF3.Models.Files.MPD {
             return tables.ToArray();
         }
 
-        private ModelChunk MakeHeaderModelCollection(int offset, CollectionType collection, out ITable[] tablesOut, bool isUnreferenced = false) {
+        private ModelChunk MakeHeaderModelCollection(int offset, MPD_CollectionType collection, out ITable[] tablesOut, bool isUnreferenced = false) {
             var name = collection.ToString() + "Model";
             var newChunk = ModelChunk.Create(this, Data, NameGetterContext, offset, name, null, collection, isUnreferenced);
             tablesOut = newChunk.Tables.ToArray();
@@ -249,10 +249,10 @@ namespace SF3.Models.Files.MPD {
         private bool TryMakeUnreferencedHeaderModelCollection(bool[] usedSpace, ushort[] contiguousUnusedSpace, out ITable[] newTablesOut) {
             // See if there are any header model collections not yet used.
             var unusedModelChunks =
-                new CollectionType?[] {
-                    CollectionType.Chest,
-                    CollectionType.LockedChest,
-                    CollectionType.Barrel,
+                new MPD_CollectionType?[] {
+                    MPD_CollectionType.Chest,
+                    MPD_CollectionType.LockedChest,
+                    MPD_CollectionType.Barrel,
                 }
                 .FirstOrDefault(x => !ModelCollections.ContainsKey(x.Value));
 
@@ -337,19 +337,19 @@ namespace SF3.Models.Files.MPD {
         }
 
         private ITable[] MakeChunkTables(ChunkLocation[] chunkHeaders, IChunkData[] chunkDatas, IChunkData[] modelChunks, IChunkData surfaceModelChunk) {
-            CollectionType TextureCollectionForChunkIndex(int chunkIndex) {
+            MPD_CollectionType TextureCollectionForChunkIndex(int chunkIndex) {
                 if (chunkIndex == 10 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
-                    return CollectionType.ExtraModels;
+                    return MPD_CollectionType.ExtraModels;
                 else if (chunkIndex == 21)
-                    return CollectionType.ExtraModels;
+                    return MPD_CollectionType.ExtraModels;
                 else if (chunkIndex >= PrimaryTextureChunksFirstIndex && chunkIndex <= PrimaryTextureChunksLastIndex)
-                    return CollectionType.Primary;
+                    return MPD_CollectionType.Primary;
                 else if (chunkIndex == MeshTextureChunksFirstIndex + 0 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return CollectionType.Chest;
+                    return MPD_CollectionType.Chest;
                 else if (chunkIndex == MeshTextureChunksFirstIndex + 1 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return CollectionType.LockedChest;
+                    return MPD_CollectionType.LockedChest;
                 else if (chunkIndex == MeshTextureChunksFirstIndex + 2 && chunkIndex <= MeshTextureChunksLastIndex)
-                    return CollectionType.Barrel;
+                    return MPD_CollectionType.Barrel;
 
                 throw new Exception("Can't determine texture collection based on chunk index");
             }
@@ -358,9 +358,9 @@ namespace SF3.Models.Files.MPD {
 
             foreach (var mc in modelChunks) {
                 var collection =
-                    (mc.Index == 19 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) ? CollectionType.ExtraModels :
-                    (chunkDatas[21] != null && mc.Index == 1) ? CollectionType.ExtraModels :
-                    CollectionType.Primary;
+                    (mc.Index == 19 && Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) ? MPD_CollectionType.ExtraModels :
+                    (chunkDatas[21] != null && mc.Index == 1) ? MPD_CollectionType.ExtraModels :
+                    MPD_CollectionType.Primary;
 
                 var newChunk = ModelChunk.Create(this, mc.DecompressedData, NameGetterContext, 0x00, "Models" + mc.Index, mc.Index, collection);
                 ModelCollections[collection] = newChunk;
@@ -379,10 +379,10 @@ namespace SF3.Models.Files.MPD {
 
             // Gather all information about texture picture formats from existing data.
             // Each texture collection needs its own info.
-            var pixelFormats = new Dictionary<CollectionType, Dictionary<int, TexturePixelFormat>>();
-            foreach (var texCollection in (CollectionType[]) Enum.GetValues(typeof(CollectionType)))
+            var pixelFormats = new Dictionary<MPD_CollectionType, Dictionary<int, TexturePixelFormat>>();
+            foreach (var texCollection in (MPD_CollectionType[]) Enum.GetValues(typeof(MPD_CollectionType)))
                 pixelFormats[texCollection] = new Dictionary<int, TexturePixelFormat>();
-            var primaryPixelFormats = pixelFormats[CollectionType.Primary];
+            var primaryPixelFormats = pixelFormats[MPD_CollectionType.Primary];
 
             // Always ABGR1555 for surface tiles.
             if (SurfaceModelChunk != null) {
@@ -439,9 +439,9 @@ namespace SF3.Models.Files.MPD {
                 int? startId = null;
                 if (isHeaderModel)
                     startId = nextModelCollectionStartId;
-                else if (collection == CollectionType.Primary)
+                else if (collection == MPD_CollectionType.Primary)
                     startId = nextPrimaryCollectionStartId;
-                else if (collection == CollectionType.ExtraModels)
+                else if (collection == MPD_CollectionType.ExtraModels)
                     startId = 0;
 
                 try {
@@ -452,7 +452,7 @@ namespace SF3.Models.Files.MPD {
                     if (texCol.TextureTable != null) {
                         if (isHeaderModel)
                             nextModelCollectionStartId += texCol.TextureTable.Length;
-                        else if (collection == CollectionType.Primary)
+                        else if (collection == MPD_CollectionType.Primary)
                             nextPrimaryCollectionStartId += texCol.TextureTable.Length;
 
                         texColList.Add(texCol);

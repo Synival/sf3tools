@@ -3,8 +3,8 @@ using System.Linq;
 using CommonLib.Utils;
 
 namespace SF3.Imaging {
-    public class Animation {
-        public Animation(int id, ITexture[] frames, int frameTimerStart) {
+    public class MPD_Animation : IMPD_Animation {
+        public MPD_Animation(int id, IMPD_AnimationFrame[] frames, int frameTimerStart) {
             if (frames == null)
                 throw new ArgumentNullException(nameof(frames));
             if (!frames.Where(x => x != null).All(x => x.ID == id) || frames.Length == 0)
@@ -14,7 +14,7 @@ namespace SF3.Imaging {
             FrameTimerStart = frameTimerStart;
             Frames = frames.Where(x => x != null).OrderBy(x => x.Frame).ToArray();
 
-            _frameByTimeFrame = new ITexture[Frames.Sum(x => Math.Max(0, x.Duration))];
+            _frameByTimeFrame = new IMPD_AnimationFrame[Frames.Sum(x => Math.Max(0, x.Duration))];
             var pos = 0;
             foreach (var frame in Frames) {
                 for (var i = 0; i < frame.Duration; i++)
@@ -22,12 +22,13 @@ namespace SF3.Imaging {
             }
         }
 
-        public ITexture GetFrame(int timeFrame)
+        public IMPD_AnimationFrame GetFrame(int timeFrame)
             => _frameByTimeFrame.Length == 0 ? Frames[0] : _frameByTimeFrame[MathHelpers.ActualMod(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
 
-        public int ID { get; set; }
-        public int FrameTimerStart { get; set; }
-        public ITexture[] Frames { get; }
-        public readonly ITexture[] _frameByTimeFrame;
+        public int ID { get; }
+        public int FrameTimerStart { get; }
+        public IMPD_AnimationFrame[] Frames { get; }
+
+        private readonly IMPD_AnimationFrame[] _frameByTimeFrame;
     }
 }

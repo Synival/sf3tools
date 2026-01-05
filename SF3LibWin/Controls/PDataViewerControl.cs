@@ -176,7 +176,7 @@ namespace SF3.Win.Controls {
 
             MPD_File = mpdFile;
             _sglModel = sglModel;
-            var collection = (CollectionType?) sglModel?.Collection;
+            var collection = (MPD_CollectionType?) sglModel?.Collection;
             Models = (sglModel == null || collection == null) ? null
                 : mpdFile.ModelCollections.TryGetValue(collection.Value, out var mcOut)
                 ? mcOut : null;

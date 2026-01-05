@@ -80,16 +80,16 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ReplaceTexturesFromFilesResult ReplaceTexturesFromFiles(string[] files, Func<string, ushort[,]> abgr1555ImageDataLoader) {
-            var textures1 = (TextureChunks == null) ? new Dictionary<string, ITexture>() : TextureChunks
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, IMPD_Texture>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
+                .ToDictionary(x => x.ImportExportName, x => (IMPD_Texture) x);
 
-            var textures2 = (Animations == null) ? new Dictionary<string, ITexture>() : Animations
+            var textures2 = (Animations == null) ? new Dictionary<string, IMPD_Texture>() : Animations
                 .SelectMany(x => x.AnimationFrameTable)
                 .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
+                .ToDictionary(x => x.ImportExportName, x => (IMPD_Texture) x);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 
@@ -153,16 +153,16 @@ namespace SF3.Models.Files.MPD {
         }
 
         public ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter) {
-            var textures1 = (TextureChunks == null) ? new Dictionary<string, ITexture>() : TextureChunks
+            var textures1 = (TextureChunks == null) ? new Dictionary<string, IMPD_Texture>() : TextureChunks
                 .Where(x => x != null && x.TextureTable != null)
                 .SelectMany(x => x.TextureTable)
-                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
+                .ToDictionary(x => x.ImportExportName, x => (IMPD_Texture) x);
 
-            var textures2 = (Animations == null) ? new Dictionary<string, ITexture>() : Animations
+            var textures2 = (Animations == null) ? new Dictionary<string, IMPD_Texture>() : Animations
                 .SelectMany(x => x.AnimationFrameTable)
                 .GroupBy(x => x.ImageDataOffset)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ImportExportName, x => (ITexture) x);
+                .ToDictionary(x => x.ImportExportName, x => (IMPD_Texture) x);
 
             var textures = textures1.Concat(textures2).ToDictionary(x => x.Key, x => x.Value);
 

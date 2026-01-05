@@ -14,10 +14,10 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             TryRotate = tryRotate;
         }
 
-        public TextureAtlasNode Insert(ITexture tex)
+        public TextureAtlasNode Insert(IMPD_AnimationFrame tex)
             => Insert(tex, false, TryRotate);
 
-        private TextureAtlasNode Insert(ITexture tex, bool rotated, bool tryRotate) {
+        private TextureAtlasNode Insert(IMPD_AnimationFrame tex, bool rotated, bool tryRotate) {
             var width  = rotated ? tex.Height : tex.Width;
             var height = rotated ? tex.Width  : tex.Height;
 
@@ -94,7 +94,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         public TextureAtlasNode Right { get; private set; } = null;
         public Rectangle Rect { get; private set; }
         public bool Rotated { get; private set; } = false;
-        public ITexture Texture { get; private set; } = null;
+        public IMPD_AnimationFrame Texture { get; private set; } = null;
 
         public int Padding { get; }
         public bool TryRotate { get; }

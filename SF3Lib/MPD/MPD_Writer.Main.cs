@@ -53,9 +53,9 @@ namespace SF3.MPD {
             IMPD_ModelCollection lockedChestChunk = null;
             IMPD_ModelCollection barrelChunk      = null;
 
-            var chestModelsPos       = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Chest,       out chestChunk)       == true) ? chestChunk       : null);
-            var lockedChestModelsPos = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.LockedChest, out lockedChestChunk) == true) ? lockedChestChunk : null);
-            var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(CollectionType.Barrel,      out barrelChunk)      == true) ? barrelChunk      : null);
+            var chestModelsPos       = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Chest,       out chestChunk)       == true) ? chestChunk       : null);
+            var lockedChestModelsPos = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.LockedChest, out lockedChestChunk) == true) ? lockedChestChunk : null);
+            var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Barrel,      out barrelChunk)      == true) ? barrelChunk      : null);
 
             if (chestModelsPos.HasValue && chestChunk?.IsUnreferenced != true)
                 AtOffset(chestModelsPosPtr, _ => WriteUInt(chestModelsPos.Value + 0x290000));

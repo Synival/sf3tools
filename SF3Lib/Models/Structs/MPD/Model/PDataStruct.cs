@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public readonly int _attributesOffsetAddr;
 
         public PDataStruct(IByteData data, int id, string name, int address,
-            CollectionType collection, int? chunkIndex, int index, int refs
+            MPD_CollectionType collection, int? chunkIndex, int index, int refs
         ) : base(data, id, name, address, 0x14) {
             Collection = collection;
             ChunkIndex = chunkIndex;
@@ -26,7 +26,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
-        public CollectionType Collection { get; }
+        public MPD_CollectionType Collection { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
         public int? ChunkIndex { get; }

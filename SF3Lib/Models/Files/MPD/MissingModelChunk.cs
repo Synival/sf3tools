@@ -8,12 +8,12 @@ using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class MissingModelChunk : IMPD_ModelCollection {
-        public MissingModelChunk(IMPD_File mpdFile, CollectionType collection) {
+        public MissingModelChunk(IMPD_File mpdFile, MPD_CollectionType collection) {
             MPD_File = mpdFile;
             Collection = collection;
         }
 
-        public CollectionType Collection { get; }
+        public MPD_CollectionType Collection { get; }
 
         public IEnumerable<ISGL_Model> Models => new ISGL_Model[0];
 
@@ -21,8 +21,8 @@ namespace SF3.Models.Files.MPD {
 
         public ISGL_Model GetModel(int id) => null;
 
-        private ITexture[] _textures = null;
-        public IEnumerable<ITexture> Textures {
+        private IMPD_Texture[] _textures = null;
+        public IEnumerable<IMPD_Texture> Textures {
             get {
                 if (_textures == null) {
                     _textures = MPD_File.TextureChunks

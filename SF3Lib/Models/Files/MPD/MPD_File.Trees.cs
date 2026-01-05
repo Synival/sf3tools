@@ -99,7 +99,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public PDataStruct GetTreePData0() {
-            var mc = ModelCollections.TryGetValue(CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
+            var mc = ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
             if (mc == null)
                 return null;
 

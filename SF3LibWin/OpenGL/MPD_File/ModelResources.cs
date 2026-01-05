@@ -35,7 +35,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelInstances = null;
         }
 
-        private void InitDictsForType(CollectionType collection) {
+        private void InitDictsForType(MPD_CollectionType collection) {
             // TODO: Just have one structure with all this info!
             if (!ModelsByIDByCollection.ContainsKey(collection))
                 ModelsByIDByCollection[collection] = [];
@@ -44,13 +44,13 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         public struct ModelAnimationInfo {
-            public ITexture[] Textures;
+            public IMPD_AnimationFrame[] Textures;
             public int FrameTimerStart;
         }
 
-        private Dictionary<int, ITexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
+        private Dictionary<int, IMPD_Texture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
             var skippedTextures = 
-                (modelCollection.Collection != CollectionType.Primary || mpdFile.SkipTextures == null) ? []
+                (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.SkipTextures == null) ? []
                 : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
 
             return modelCollection.Textures
@@ -59,7 +59,7 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
-            if (modelCollection.Collection != CollectionType.Primary || mpdFile.Animations == null)
+            if (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.Animations == null)
                 return [];
 
             var skippedTextures =
@@ -179,9 +179,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private void CreateAndAddQuadModels(
             IMPD_File mpdFile,
-            CollectionType modelCollection,
+            MPD_CollectionType modelCollection,
             ISGL_Model sglModel,
-            Dictionary<int, ITexture> texturesById,
+            Dictionary<int, IMPD_Texture> texturesById,
             Dictionary<int, ModelAnimationInfo> animationsById,
             bool forceSemiTransparent,
             bool isHideMesh
@@ -206,7 +206,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                 var color = new Vector4(1);
                 bool useTexture = attr.UseTexture;
-                Animation anim = null;
+                IMPD_Animation anim = null;
                 bool isSemiTransparent = false;
                 TextureFlipType flip = TextureFlipType.NoFlip;
 
@@ -241,10 +241,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                     else {
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
                             else if (texturesById.ContainsKey(textureId)) {
                                 var tex = texturesById[textureId];
-                                anim = new Animation(tex.ID, [tex], 0);
+                                anim = new MPD_MockAnimation(tex);
                             }
                         }
 
@@ -356,8 +356,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public Dictionary<CollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
-        public Dictionary<CollectionType, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
+        public Dictionary<MPD_CollectionType, Dictionary<int, ModelGroup>> ModelsByIDByCollection { get; } = [];
+        public Dictionary<MPD_CollectionType, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
         public IMPD_ModelInstance[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;

@@ -9,7 +9,7 @@ using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class AnimationFrame : Struct, ITexture {
+    public class AnimationFrame : Struct, IMPD_AnimationFrame {
         private readonly int _bytesPerProperty;
         private readonly int _imageDataOffsetAddr;
         private readonly int _durationAddr;
@@ -87,7 +87,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public IMPD_File MPD_File { get; }
         public AnimationStruct Animation { get; }
 
-        public CollectionType Collection => Chunk3Texture?.Collection ?? (CollectionType) (-1);
+        public MPD_CollectionType Collection => Chunk3Texture?.Collection ?? (MPD_CollectionType) (-1);
         public Dictionary<TagKey, TagValue> Tags => Chunk3Texture?.Tags;
         public int BytesPerPixel => Chunk3Texture?.BytesPerPixel ?? 0;
         public byte[,] ImageData8Bit => Chunk3Texture?.ImageData8Bit;

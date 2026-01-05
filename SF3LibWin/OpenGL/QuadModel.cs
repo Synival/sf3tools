@@ -21,7 +21,8 @@ namespace SF3.Win.OpenGL {
             var textures = quads
                 .Where(x => x.Animation != null)
                 .SelectMany(x => x.Animation.Frames)
-                .Distinct()
+                .GroupBy(x => (x.ID, x.Frame))
+                .Select(x => x.First())
                 .ToArray();
 
             if (textures.Length > 0) {

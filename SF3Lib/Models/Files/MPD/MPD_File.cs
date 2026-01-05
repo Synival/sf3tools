@@ -79,7 +79,7 @@ namespace SF3.Models.Files.MPD {
         public IMPD_Surface Surface { get; private set; }
 
         [BulkCopyRecurse]
-        public Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<CollectionType, IMPD_ModelCollection>();
+        public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
 
         public Palette TexturePalette => TexturePaletteColorTable?.Palette;
 

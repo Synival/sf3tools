@@ -1,5 +1,5 @@
 ﻿namespace SF3.Types {
-    public enum CollectionType {
+    public enum MPD_CollectionType {
         Primary     = 0,
         Chest       = 1,
         LockedChest = 2,
@@ -8,7 +8,7 @@
     }
 
     public static class CollectionTypeExtensions {
-        public static bool IsHeaderModelCollection(this CollectionType collection)
-            => collection == CollectionType.Chest || collection == CollectionType.LockedChest || collection == CollectionType.Barrel;
+        public static bool IsHeaderModelCollection(this MPD_CollectionType collection)
+            => collection == MPD_CollectionType.Chest || collection == MPD_CollectionType.LockedChest || collection == MPD_CollectionType.Barrel;
     }
 }

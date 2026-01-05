@@ -22,7 +22,7 @@ namespace SF3.Models.Files.MPD {
             int address,
             string name,
             int? chunkIndex,
-            CollectionType collection,
+            MPD_CollectionType collection,
             bool isUnreferenced = false
         ) : base(data, nameContext)
         {
@@ -36,7 +36,7 @@ namespace SF3.Models.Files.MPD {
 
         public static ModelChunk Create(
             IMPD_File mpdFile, IByteData data, INameGetterContext nameContext, int address, string name,
-            int? chunkIndex, CollectionType modelCollection, bool isUnreferenced = false
+            int? chunkIndex, MPD_CollectionType modelCollection, bool isUnreferenced = false
         ) {
             var newFile = new ModelChunk(mpdFile, data, nameContext, address, name, chunkIndex, modelCollection, isUnreferenced);
             newFile.Init();
@@ -320,7 +320,7 @@ namespace SF3.Models.Files.MPD {
         public string Name { get; }
         public ScenarioType Scenario => MPD_File.Scenario;
         public IMPD_File MPD_File { get; }
-        public CollectionType Collection { get; }
+        public MPD_CollectionType Collection { get; }
         public int Address { get; }
         public int? ChunkIndex { get; }
 
@@ -362,8 +362,8 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Dictionary<int, CollisionLineIndexTable> CollisionLineIndexTablesByBlock { get; private set; }
 
-        private ITexture[] _textures = null;
-        public IEnumerable<ITexture> Textures {
+        private IMPD_Texture[] _textures = null;
+        public IEnumerable<IMPD_Texture> Textures {
             get {
                 if (_textures == null) {
                     _textures = MPD_File.TextureChunks

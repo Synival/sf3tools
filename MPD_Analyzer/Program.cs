@@ -62,18 +62,18 @@ namespace MPD_Analyzer {
 
         private static string[]? MPD_MatchFunc(IMPD_File mpdFile, ScenarioType scenario, string filename) {
             // Gotta have the model collection!
-            if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(CollectionType.Primary))
+            if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(MPD_CollectionType.Primary))
                 return null;
             // Gotta have textures!
-            if (!(mpdFile.ModelCollections[CollectionType.Primary]?.Textures?.Count() >= 1))
+            if (!(mpdFile.ModelCollections[MPD_CollectionType.Primary]?.Textures?.Count() >= 1))
                 return null;
 
-            var texturesById = mpdFile.ModelCollections[CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
-            var modelsById = mpdFile.ModelCollections[CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
+            var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
+            var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 
 #pragma warning disable CS8321 // Local function is declared but never used
             string[]? GetDuplicatedTextures() {
-                var duplicatedTextures = mpdFile.ModelCollections[CollectionType.Primary].Textures.GroupBy(x => x.Hash).Where(x => x.Count() > 1).Select(x => x.ToArray()).ToArray();
+                var duplicatedTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.GroupBy(x => x.Hash).Where(x => x.Count() > 1).Select(x => x.ToArray()).ToArray();
                 if (duplicatedTextures.Length == 0)
                     return null;
                 return duplicatedTextures.Select(x => x[0].Hash + ": " + string.Join(", ", x.Select(y => $"0x{y.ID:X2}"))).ToArray();
@@ -150,7 +150,7 @@ namespace MPD_Analyzer {
                 if (!mpdFile.Surface.HasModel)
                     return null;
                 var surfaceMapTextures = mpdFile.Surface.GetAllTiles().Select(x => (int) x.TextureID).Distinct().Where(x => x != 0xFF).ToHashSet();
-                var modelTextures = mpdFile.ModelCollections[CollectionType.Primary].Models.SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
+                var modelTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
 
                 var texturesInBoth = surfaceMapTextures.Where(modelTextures.Contains).Select(x => texturesById[x]).ToArray();
                 if (texturesInBoth.Length == 0)
@@ -275,7 +275,7 @@ namespace MPD_Analyzer {
             }
 
             string[]? GetAllUnusedModels() {
-                var usedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].ModelInstances
+                var usedModelIDs = mpdFile.ModelCollections[MPD_CollectionType.Primary].ModelInstances
                     .Where(x => x.PositionX >= -0x800 && x.PositionX <= 0x1000)
                     .Where(x => x.PositionY >= -0x100 && x.PositionY <= 0x100)
                     .Where(x => x.PositionZ >= -0x800 && x.PositionZ <= 0x1000)
@@ -284,7 +284,7 @@ namespace MPD_Analyzer {
                     .Order()
                     .ToHashSet();
 
-                var unusedModelIDs = mpdFile.ModelCollections[CollectionType.Primary].Models
+                var unusedModelIDs = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models
                     .Select(x => x.ID)
                     .Where(x => !usedModelIDs.Contains(x))
                     .Order()

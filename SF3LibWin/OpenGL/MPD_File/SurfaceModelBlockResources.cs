@@ -49,7 +49,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 : mpdFile.SkipTextures.Select(x => (int) x.TextureID).ToHashSet();
 
             var texturesById = mpdFile.TextureChunks != null ? mpdFile.TextureChunks
-                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == CollectionType.Primary)
+                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == MPD_CollectionType.Primary)
                 .SelectMany(x => x.TextureTable)
                 .Where(x => !skippedTextures.Contains(x.ID))
                 .GroupBy(x => x.ID)
@@ -77,7 +77,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Surface.GetTile(x, y);
 
-                    Animation  anim   = null;
+                    IMPD_Animation    anim   = null;
                     TextureRotateType rotate = TextureRotateType.NoRotation;
                     TextureFlipType   flip   = TextureFlipType.NoFlip;
 
@@ -89,9 +89,9 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
                             else if (texturesById.ContainsKey(textureId))
-                                anim = new Animation(textureId, [texturesById[textureId]], 0);
+                                anim = new MPD_MockAnimation(texturesById[textureId]);
                         }
                     }
 

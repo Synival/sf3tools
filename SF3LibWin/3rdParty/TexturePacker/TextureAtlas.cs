@@ -24,7 +24,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             _rootNode = new TextureAtlasNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate);
         }
 
-        public TextureAtlas(IEnumerable<ITexture> textures, int padding, bool tryRotate) {
+        public TextureAtlas(IEnumerable<IMPD_AnimationFrame> textures, int padding, bool tryRotate) {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
@@ -51,7 +51,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                 _ = Insert(tex);
         }
 
-        public TextureAtlasNode Insert(ITexture tex) {
+        public TextureAtlasNode Insert(IMPD_AnimationFrame tex) {
             if (_nodeByTextureIDFrame.ContainsKey((tex.ID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 

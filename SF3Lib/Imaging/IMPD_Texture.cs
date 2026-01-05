@@ -21,26 +21,16 @@ namespace SF3.Imaging {
     /// <summary>
     /// Interface for any object that contains texture data.
     /// </summary>
-    public interface ITexture : ITextureData {
+    public interface IMPD_Texture : ITextureData {
         /// <summary>
         /// Collection to which this texture belongs.
         /// </summary>
-        CollectionType Collection { get; }
+        MPD_CollectionType Collection { get; }
 
         /// <summary>
         /// ID for texture.
         /// </summary>
         int ID { get; }
-
-        /// <summary>
-        /// Frame index of this texture.
-        /// </summary>
-        int Frame { get; }
-
-        /// <summary>
-        /// Length of time in 1/30 seconds that this frame is active.
-        /// </summary>
-        int Duration { get; }
 
         /// <summary>
         /// Palette identifier for 8-bit textures in an MPD file.

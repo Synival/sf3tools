@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
     public class TextureTable : FixedSizeTable<TextureStruct> {
         protected TextureTable(
             IByteData data, string name, int address,
-            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
+            MPD_CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
             int chunkIndex, IMPD_File mpdFile
         ) : base(data, name, address, textureCount) {
             if (textureCount > 255)
@@ -25,7 +25,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
 
         public static TextureTable Create(
             IByteData data, string name, int address,
-            CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
+            MPD_CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
             int chunkIndex, IMPD_File mpdFile
         )
             => Create(() => new TextureTable(data, name, address, collection, textureCount, startId, pixelFormats, chunkIndex, mpdFile));
@@ -34,7 +34,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             var size = TextureStruct.GlobalSize;
             return Load((id, address) => {
                 var pixelFormat =
-                    (Collection != CollectionType.Primary) ? TexturePixelFormat.ABGR1555 :
+                    (Collection != MPD_CollectionType.Primary) ? TexturePixelFormat.ABGR1555 :
                     PixelFormats.TryGetValue(StartID + id, out var pixelFormatOut) ? pixelFormatOut : (TexturePixelFormat?) null;
 
                 var nextImageDataOffset = id + 1 >= Size
@@ -48,7 +48,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             });
         }
 
-        public CollectionType Collection { get; }
+        public MPD_CollectionType Collection { get; }
         public int StartID { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
         public Dictionary<TexturePixelFormat, Palette> Palettes { get; }

@@ -7,7 +7,7 @@ namespace SF3.Models.Tables.MPD.Model {
     public class PDataTable : AddressedTable<PDataStruct> {
         public struct PDataRef {
             public int Address;
-            public CollectionType Collection;
+            public MPD_CollectionType Collection;
             public int? ChunkIndex;
             public int Index;
             public int RefCount;
