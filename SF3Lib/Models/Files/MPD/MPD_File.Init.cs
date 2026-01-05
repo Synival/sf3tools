@@ -81,12 +81,12 @@ namespace SF3.Models.Files.MPD {
             // Sometimes palette addresses are placed in an odd place at or just before the header actually begins.
             // This is most likely an error in the MPD file; it results in garbage data.
             // Don't load the palettes in these cases.
-            if (header.OffsetPal1 >= RamAddress && (headerRamAddr - header.OffsetPal1) / 2 >= 256)
-                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, "GroundPalette", header.OffsetPal1 - RamAddress, 256));
-            if (header.OffsetPal2 >= RamAddress && (headerRamAddr - header.OffsetPal2) / 2 >= 256)
-                tables.Add(SkyPaletteColorTable = ColorTable.Create(Data, "SkyPalette", header.OffsetPal2 - RamAddress, 256));
-            if (Scenario >= ScenarioType.Scenario3 && header.OffsetPal3 >= RamAddress && (headerRamAddr - header.OffsetPal3) / 2 >= 256)
-                tables.Add(TexturePaletteColorTable = ColorTable.Create(Data, "TexturePalette", header.OffsetPal3 - RamAddress, 256));
+            if (header.OffseGroundPalette >= RamAddress && (headerRamAddr - header.OffseGroundPalette) / 2 >= 256)
+                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, "GroundPalette", header.OffseGroundPalette - RamAddress, 256));
+            if (header.OffsetSkyPalette >= RamAddress && (headerRamAddr - header.OffsetSkyPalette) / 2 >= 256)
+                tables.Add(SkyPaletteColorTable = ColorTable.Create(Data, "SkyPalette", header.OffsetSkyPalette - RamAddress, 256));
+            if (Scenario >= ScenarioType.Scenario3 && header.OffsetTexturePalette >= RamAddress && (headerRamAddr - header.OffsetTexturePalette) / 2 >= 256)
+                tables.Add(TexturePaletteColorTable = ColorTable.Create(Data, "TexturePalette", header.OffsetTexturePalette - RamAddress, 256));
 
             return tables.ToArray();
         }

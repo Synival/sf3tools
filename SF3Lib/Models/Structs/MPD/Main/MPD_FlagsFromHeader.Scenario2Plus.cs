@@ -4,12 +4,12 @@ namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader {
         private bool IsScenario2OrLater   => Header.IsScenario2OrLater;
 
-        public bool CanSet_0x0080_SetMSBForPalette1 => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0081f, displayName: "(0x0080) SetMSBForPalette1 (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
-        public bool Bit_0x0080_SetMSBForPalette1 {
-            get => CanSet_0x0080_SetMSBForPalette1 && (MapFlags & 0x0080) == 0x0080;
+        public bool CanSet_0x0080_SetMSBForGroundPalette => IsScenario2OrLater;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0081f, displayName: "(0x0080) SetMSBForGroundPalette (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Bit_0x0080_SetMSBForGroundPalette {
+            get => CanSet_0x0080_SetMSBForGroundPalette && (MapFlags & 0x0080) == 0x0080;
             set {
-                if (CanSet_0x0080_SetMSBForPalette1)
+                if (CanSet_0x0080_SetMSBForGroundPalette)
                     MapFlags = value ? (ushort) (MapFlags | 0x0080) : (ushort) (MapFlags & ~0x0080);
             }
         }

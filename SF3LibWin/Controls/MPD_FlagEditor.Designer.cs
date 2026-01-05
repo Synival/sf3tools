@@ -47,7 +47,7 @@
             label0x0040 = new CommonLib.Win.Controls.DarkModeLabel();
             cb0x0040_HasBackgroundImage = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0800_Unused = new CommonLib.Win.Controls.DarkModeCheckBox();
-            cb0x0080_SetMSBForPalette1 = new CommonLib.Win.Controls.DarkModeCheckBox();
+            cb0x0080_SetMSBForGroundPalette = new CommonLib.Win.Controls.DarkModeCheckBox();
             label0x0080 = new CommonLib.Win.Controls.DarkModeLabel();
             label0x0100 = new CommonLib.Win.Controls.DarkModeLabel();
             label0x0200 = new CommonLib.Win.Controls.DarkModeLabel();
@@ -316,15 +316,15 @@
             cb0x0800_Unused.Text = "Unused (Scn1)";
             cb0x0800_Unused.UseVisualStyleBackColor = true;
             // 
-            // cb0x0080_SetMSBForPalette1
+            // cb0x0080_SetMSBForGroundPalette
             // 
-            cb0x0080_SetMSBForPalette1.AutoSize = true;
-            cb0x0080_SetMSBForPalette1.Location = new System.Drawing.Point(54, 209);
-            cb0x0080_SetMSBForPalette1.Name = "cb0x0080_SetMSBForPalette1";
-            cb0x0080_SetMSBForPalette1.Size = new System.Drawing.Size(179, 19);
-            cb0x0080_SetMSBForPalette1.TabIndex = 9;
-            cb0x0080_SetMSBForPalette1.Text = "Set MSB for Palette 1 (Scn2+)";
-            cb0x0080_SetMSBForPalette1.UseVisualStyleBackColor = true;
+            cb0x0080_SetMSBForGroundPalette.AutoSize = true;
+            cb0x0080_SetMSBForGroundPalette.Location = new System.Drawing.Point(54, 209);
+            cb0x0080_SetMSBForGroundPalette.Name = "cb0x0080_SetMSBForGroundPalette";
+            cb0x0080_SetMSBForGroundPalette.Size = new System.Drawing.Size(179, 19);
+            cb0x0080_SetMSBForGroundPalette.TabIndex = 9;
+            cb0x0080_SetMSBForGroundPalette.Text = "Set MSB for Ground Palette (Scn2+)";
+            cb0x0080_SetMSBForGroundPalette.UseVisualStyleBackColor = true;
             // 
             // label0x0080
             // 
@@ -488,7 +488,7 @@
             Controls.Add(cb0x0800_Unused);
             Controls.Add(cb0x0200_HasSurfaceModel);
             Controls.Add(cb0x0100_HasModels);
-            Controls.Add(cb0x0080_SetMSBForPalette1);
+            Controls.Add(cb0x0080_SetMSBForGroundPalette);
             Controls.Add(label0x0080);
             Controls.Add(label0x0040);
             Controls.Add(cb0x0040_HasBackgroundImage);
@@ -536,7 +536,7 @@
         private CommonLib.Win.Controls.DarkModeLabel label0x0040;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x0040_HasBackgroundImage;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x0800_Unused;
-        private CommonLib.Win.Controls.DarkModeCheckBox cb0x0080_SetMSBForPalette1;
+        private CommonLib.Win.Controls.DarkModeCheckBox cb0x0080_SetMSBForGroundPalette;
         private CommonLib.Win.Controls.DarkModeLabel label0x0080;
         private CommonLib.Win.Controls.DarkModeLabel label0x0100;
         private CommonLib.Win.Controls.DarkModeLabel label0x0200;

@@ -1,10 +1,10 @@
 ﻿namespace SF3.MPD {
     public interface IMPD_Scenario2PlusFlags {
         /// <summary>
-        /// When set, the MSB for all values in Palette1 will be turned on.
+        /// When set, the MSB for all values in the ground palette will be turned on.
         /// (See 'IMPD_Settings.NarrowAngleBasedLightmap' for details.)
         /// </summary>
-        bool Bit_0x0080_SetMSBForPalette1 { get; set; }
+        bool Bit_0x0080_SetMSBForGroundPalette { get; set; }
 
         /// <summary>
         /// When set, there are chunks with data for a sky image that is displayed outside of battle.

@@ -27,11 +27,11 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
         private readonly int _padding3Addr;                // int16  Always zero
         private readonly int _offsetSkipTexturesAddr;      // int32  Pointer to a list of texture indices. The textures here are skipped when loading the texture chunk.
-        private readonly int _offsetPal1Addr;              // int32  Pointer to 256 rgb16 colors. May be null.
-        private readonly int _offsetPal2Addr;              // int32  Pointer to 256 rgb16 colors. May be null.
+        private readonly int _offsetGroundPaletteAddr;     // int32  Pointer to 256 rgb16 colors. May be null.
+        private readonly int _offsetSkyPaletteAddr;        // int32  Pointer to 256 rgb16 colors. May be null.
 
         // vvv Screnario 3+ only
-        private readonly int _offsetPal3Addr;              // (scn3+pd) int32  Pointer to 256 rgb16 colors. May be null.
+        private readonly int _offsetTexturePaletteAddr;    // (scn3+pd) int32  Pointer to 256 rgb16 colors. May be null.
         private readonly int _offsetIndexedTexturesAddr;   // (scn3+pd) int32  Pointer to unknown data.
         // ^^^ Screnario 3+ only
 
@@ -116,15 +116,15 @@ namespace SF3.Models.Structs.MPD.Main {
                 addressNext += 0x04;
             }
 
-            _offsetPal1Addr = addressNext + 0x00; // 4 bytes
-            _offsetPal2Addr = addressNext + 0x04; // 4 bytes
+            _offsetGroundPaletteAddr = addressNext + 0x00; // 4 bytes
+            _offsetSkyPaletteAddr    = addressNext + 0x04; // 4 bytes
 
-            if (HasPalette3) {
-                _offsetPal3Addr = addressNext + 0x08; // 4 bytes
+            if (HasTexturePalette) {
+                _offsetTexturePaletteAddr = addressNext + 0x08; // 4 bytes
                 addressNext += 0x0C;
             }
             else {
-                _offsetPal3Addr = -1;
+                _offsetTexturePaletteAddr = -1;
                 addressNext += 0x08;
             }
 
@@ -163,7 +163,7 @@ namespace SF3.Models.Structs.MPD.Main {
         public bool HasGradientTable => IsScenario2OrLater;
         public bool HasMesh3 => IsScenario1OrLater;
         public bool HasModelsInfo => Scenario != ScenarioType.Other;
-        public bool HasPalette3 => IsScenario3OrLater || Scenario == ScenarioType.Other;
+        public bool HasTexturePalette => IsScenario3OrLater || Scenario == ScenarioType.Other;
         public bool HasIndexedTextures => IsScenario3OrLater;
 
         [BulkCopy]
@@ -341,26 +341,26 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetPal1Addr), displayOrder: 17, isPointer: true, displayGroup: "Main")]
-        public int OffsetPal1 {
-            get => Data.GetDouble(_offsetPal1Addr);
-            set => Data.SetDouble(_offsetPal1Addr, value);
+        [TableViewModelColumn(addressField: nameof(_offsetGroundPaletteAddr), displayOrder: 17, isPointer: true, displayGroup: "Main")]
+        public int OffseGroundPalette {
+            get => Data.GetDouble(_offsetGroundPaletteAddr);
+            set => Data.SetDouble(_offsetGroundPaletteAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetPal2Addr), displayOrder: 18, isPointer: true, displayGroup: "Main")]
-        public int OffsetPal2 {
-            get => Data.GetDouble(_offsetPal2Addr);
-            set => Data.SetDouble(_offsetPal2Addr, value);
+        [TableViewModelColumn(addressField: nameof(_offsetSkyPaletteAddr), displayOrder: 18, isPointer: true, displayGroup: "Main")]
+        public int OffsetSkyPalette {
+            get => Data.GetDouble(_offsetSkyPaletteAddr);
+            set => Data.SetDouble(_offsetSkyPaletteAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetPal3Addr), displayName: nameof(OffsetPal3) + " (Scn3+)", displayOrder: 19, isPointer: true, visibilityProperty: nameof(HasPalette3), displayGroup: "Main")]
-        public int OffsetPal3 {
-            get => HasPalette3 ? Data.GetDouble(_offsetPal3Addr) : 0;
+        [TableViewModelColumn(addressField: nameof(_offsetTexturePaletteAddr), displayName: nameof(OffsetTexturePalette) + " (Scn3+)", displayOrder: 19, isPointer: true, visibilityProperty: nameof(HasTexturePalette), displayGroup: "Main")]
+        public int OffsetTexturePalette {
+            get => HasTexturePalette ? Data.GetDouble(_offsetTexturePaletteAddr) : 0;
             set {
-                if (HasPalette3)
-                    Data.SetDouble(_offsetPal3Addr, value);
+                if (HasTexturePalette)
+                    Data.SetDouble(_offsetTexturePaletteAddr, value);
             }
         }
 

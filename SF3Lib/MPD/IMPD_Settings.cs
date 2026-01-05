@@ -35,11 +35,11 @@
         bool NarrowAngleBasedLightmap { get; set; }
 
         /// <summary>
-        /// When set, the MSB for all values in Palette1 will be turned on. This seems to be important for maps with a
+        /// When set, the MSB for all values for the ground palette will be turned on. This seems to be important for maps with a
         /// gradient, but seems redundant because the code that activates the gradient turns this on anyway. Could be
         /// useful for forcing it if a gradient is not immediately present.
         /// </summary>
-        bool SetMSBForPalette1 { get; set; }
+        bool SetMSBForGroundPalette { get; set; }
 
         /// <summary>
         /// When set, tiles' textures can be rotated as well as flipped. The surface model should be in Chunk[2] if

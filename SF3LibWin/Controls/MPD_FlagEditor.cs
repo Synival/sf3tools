@@ -58,10 +58,10 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cb0x0080_HasChunk19ModelWithChunk21Textures,
                     nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
                     nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
-            cb0x0080_SetMSBForPalette1.CheckedChanged += (s, e)
-                => TrySetProperty(cb0x0080_SetMSBForPalette1,
-                    nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
-                    nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
+            cb0x0080_SetMSBForGroundPalette.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0080_SetMSBForGroundPalette,
+                    nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForGroundPalette),
+                    nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForGroundPalette));
             cb0x0100_HasModels.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0100_HasModels,
                     nameof(IMPD_AllFlags.Bit_0x0100_HasModels),
@@ -155,9 +155,9 @@ namespace SF3.Win.Controls {
             SetControlState(cb0x0080_HasChunk19ModelWithChunk21Textures,
                 nameof(IMPD_AllFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
                 nameof(IMPD_AllFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
-            SetControlState(cb0x0080_SetMSBForPalette1,
-                nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForPalette1),
-                nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForPalette1));
+            SetControlState(cb0x0080_SetMSBForGroundPalette,
+                nameof(IMPD_AllFlags.Bit_0x0080_SetMSBForGroundPalette),
+                nameof(IMPD_AllFlags.CanSet_0x0080_SetMSBForGroundPalette));
             SetControlState(cb0x0100_HasModels,
                 nameof(IMPD_AllFlags.Bit_0x0100_HasModels),
                 nameof(IMPD_AllFlags.CanSet_0x0100_HasModels));

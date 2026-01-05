@@ -61,7 +61,7 @@ namespace SF3.Win.Views.MPD {
                 Model.GroundPaletteColorTable?.Palette ?? new Palette(0x100),
                 Model.SkyPaletteColorTable?.Palette ?? new Palette(0x100),
             };
-            if (Model.MPDHeader.HasPalette3)
+            if (Model.MPDHeader.HasTexturePalette)
                 paletteList.Add(Model.TexturePaletteColorTable?.Palette ?? new Palette(0x100));
             var palettes = paletteList.ToArray();
 
@@ -73,11 +73,11 @@ namespace SF3.Win.Views.MPD {
                 var name = header.ChunkType.ToString();
 
                 switch (header.ChunkType) {
-                    case ChunkType.Palette1Image:
+                    case ChunkType.GroundPaletteImage:
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[0], Types.DataImageViewMode.ColumnMajor));
                         break;
 
-                    case ChunkType.Palette2Image:
+                    case ChunkType.SkyPaletteImage:
                         AddChunkView(chunk.Index, name, (name) => new DataImageView(name, chunk.DecompressedData.Data, palettes[1], Types.DataImageViewMode.ColumnMajor));
                         break;
 

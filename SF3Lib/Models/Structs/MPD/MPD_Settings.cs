@@ -20,9 +20,9 @@ namespace SF3.Models.Structs.MPD {
             set => MPD_File.Flags.Bit_0x2000_NarrowAngleBasedLightmap = value;
         }
 
-        public bool SetMSBForPalette1 {
-            get => MPD_File.Flags.Bit_0x0080_SetMSBForPalette1;
-            set => MPD_File.Flags.Bit_0x0080_SetMSBForPalette1 = value;
+        public bool SetMSBForGroundPalette {
+            get => MPD_File.Flags.Bit_0x0080_SetMSBForGroundPalette;
+            set => MPD_File.Flags.Bit_0x0080_SetMSBForGroundPalette = value;
         }
 
         public bool HasSurfaceTextureRotation {
@@ -61,7 +61,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public bool LongEmptyAltAnimationTable {
-            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetPal1 - MPD_File.MPDHeader.OffsetSkipTextures == 0x04;
+            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffseGroundPalette - MPD_File.MPDHeader.OffsetSkipTextures == 0x04;
             set {}
         }
     }

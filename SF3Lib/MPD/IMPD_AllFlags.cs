@@ -24,7 +24,7 @@ namespace SF3.MPD {
         bool CanSet_0x0020_Unknown { get; }
         bool CanSet_0x0040_HasBackgroundImage { get; }
         bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures { get; }
-        bool CanSet_0x0080_SetMSBForPalette1 { get; }
+        bool CanSet_0x0080_SetMSBForGroundPalette { get; }
         bool CanSet_0x0100_HasModels { get; }
         bool CanSet_0x0200_HasSurfaceModel { get; }
         bool CanSet_0x0400_HasGroundImage { get; }
