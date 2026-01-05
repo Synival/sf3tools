@@ -9,7 +9,7 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;
             tsmiView_MPD_DrawModels.Checked              = _appState.ViewerDrawModels;
             tsmiView_MPD_DrawGround.Checked              = _appState.ViewerDrawGround;
-            tsmiView_MPD_DrawSkyBox.Checked              = _appState.ViewerDrawSkyBox;
+            tsmiView_MPD_DrawSky.Checked                 = _appState.ViewerDrawSky;
             tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;
             tsmiView_MPD_ApplyLighting.Checked           = _appState.ViewerApplyLighting;
             tsmiView_MPD_DrawGradients.Checked           = _appState.ViewerDrawGradients;
@@ -42,8 +42,8 @@ namespace SF3.Editor.Forms {
                 => { tsmiView_MPD_DrawModels.Checked = _appState.ViewerDrawModels; _appState.Serialize(); };
             _appState.ViewerDrawGroundChanged += (s, e)
                 => { tsmiView_MPD_DrawGround.Checked = _appState.ViewerDrawGround; _appState.Serialize(); };
-            _appState.ViewerDrawSkyBoxChanged += (s, e)
-                => { tsmiView_MPD_DrawSkyBox.Checked = _appState.ViewerDrawSkyBox; _appState.Serialize(); };
+            _appState.ViewerDrawSkyChanged += (s, e)
+                => { tsmiView_MPD_DrawSky.Checked = _appState.ViewerDrawSky; _appState.Serialize(); };
             _appState.ViewerRunAnimationsChanged += (s, e)
                 => { tsmiView_MPD_RunAnimations.Checked = _appState.ViewerRunAnimations; _appState.Serialize(); };
             _appState.ViewerApplyLightingChanged += (s, e)
@@ -93,8 +93,8 @@ namespace SF3.Editor.Forms {
             => _appState.ViewerDrawModels = !_appState.ViewerDrawModels;
         private void tsmiView_MPD_DrawGround_Click(object sender, EventArgs e)
             => _appState.ViewerDrawGround = !_appState.ViewerDrawGround;
-        private void tsmiView_MPD_DrawSkyBox_Click(object sender, EventArgs e)
-            => _appState.ViewerDrawSkyBox = !_appState.ViewerDrawSkyBox;
+        private void tsmiView_MPD_DrawSky_Click(object sender, EventArgs e)
+            => _appState.ViewerDrawSky = !_appState.ViewerDrawSky;
         private void tsmiView_MPD_RunAnimations_Click(object sender, EventArgs e)
             => _appState.ViewerRunAnimations = !_appState.ViewerRunAnimations;
         private void tsmiView_MPD_ApplyLighting_Click(object sender, EventArgs e)

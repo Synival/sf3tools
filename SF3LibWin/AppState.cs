@@ -169,14 +169,14 @@ namespace SF3.Win {
         public event EventHandler ViewerDrawGroundChanged;
 
         /// <summary>
-        /// When enabled, the MPD Viewer will draw the skyboxes present in Scenario 2 MPD files onward.
+        /// When enabled, the MPD Viewer will draw the sky present in Scenario 2 MPD files onward.
         /// </summary>
-        public bool ViewerDrawSkyBox {
-            get => _viewerDrawSkyBox;
-            set => SetValue(ref _viewerDrawSkyBox, value, ViewerDrawSkyBoxChanged);
+        public bool ViewerDrawSky {
+            get => _viewerDrawSky;
+            set => SetValue(ref _viewerDrawSky, value, ViewerDrawSkyChanged);
         }
-        private bool _viewerDrawSkyBox = true;
-        public event EventHandler ViewerDrawSkyBoxChanged;
+        private bool _viewerDrawSky = true;
+        public event EventHandler ViewerDrawSkyChanged;
 
         /// <summary>
         /// When enabled, animations will run in the MPD Viewer.

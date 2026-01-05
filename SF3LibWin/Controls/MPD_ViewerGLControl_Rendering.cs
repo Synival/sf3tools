@@ -22,7 +22,7 @@ namespace SF3.Win.Controls {
             _appState.ViewerDrawSurfaceModelChanged   += (s, e) => Invalidate();
             _appState.ViewerDrawModelsChanged         += (s, e) => Invalidate();
             _appState.ViewerDrawGroundChanged         += (s, e) => Invalidate();
-            _appState.ViewerDrawSkyBoxChanged         += (s, e) => Invalidate();
+            _appState.ViewerDrawSkyChanged            += (s, e) => Invalidate();
             _appState.ViewerRunAnimationsChanged      += (s, e) => Invalidate();
             _appState.ViewerApplyLightingChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawGradientsChanged      += (s, e) => Invalidate();
@@ -96,7 +96,7 @@ namespace SF3.Win.Controls {
             _models          = new ModelResources(_appState.ViewerApplyShadowTags, _appState.ViewerApplyHideTags);
             _surfaceModel    = new SurfaceModelResources();
             _groundModel     = new GroundModelResources();
-            _skyBoxModel     = new SkyBoxModelResources();
+            _skyModel        = new SkyModelResources();
             _collisionModels = new CollisionResources();
             _surfaceEditor   = new SurfaceEditorResources();
             _gradients       = new GradientResources();
@@ -109,7 +109,7 @@ namespace SF3.Win.Controls {
             _models.Init();
             _surfaceModel.Init();
             _groundModel.Init();
-            _skyBoxModel.Init();
+            _skyModel.Init();
             _collisionModels.Init();
             _surfaceEditor.Init();
             _gradients.Init();
@@ -137,7 +137,7 @@ namespace SF3.Win.Controls {
             _models?.Dispose();
             _surfaceModel?.Dispose();
             _groundModel?.Dispose();
-            _skyBoxModel?.Dispose();
+            _skyModel?.Dispose();
             _collisionModels?.Dispose();
             _surfaceEditor?.Dispose();
             _gradients?.Dispose();
@@ -150,7 +150,7 @@ namespace SF3.Win.Controls {
             _models            = null;
             _surfaceModel      = null;
             _groundModel       = null;
-            _skyBoxModel       = null;
+            _skyModel          = null;
             _collisionModels   = null;
             _surfaceEditor     = null;
             _gradients         = null;
@@ -218,7 +218,7 @@ namespace SF3.Win.Controls {
                 ?.ToHashSet() ?? [];
 
             _renderer.DrawScene(
-                _general, _models, _surfaceModel, _groundModel, _skyBoxModel,
+                _general, _models, _surfaceModel, _groundModel, _skyModel,
                 _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels, _collisionModels,
                 _surfaceEditor,
                 // TODO: these options should be cached!!!
@@ -226,7 +226,7 @@ namespace SF3.Win.Controls {
                     DrawModels = DrawModels,
                     DrawSurfaceModel = DrawSurfaceModel,
                     DrawGround = DrawGround,
-                    DrawSkyBox = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSkyBox == true && DrawSkyBox,
+                    DrawSky = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSky == true && DrawSky,
                     DrawGradients = DrawGradients,
                     ApplyLighting = ApplyLighting,
 
@@ -281,7 +281,7 @@ namespace SF3.Win.Controls {
             _models?.Update(MPD_File);
             _surfaceModel?.Update(MPD_File);
             _groundModel?.Update(MPD_File);
-            _skyBoxModel?.Update(MPD_File);
+            _skyModel?.Update(MPD_File);
             _gradients?.Update(MPD_File);
             _boundaryModels?.Update(MPD_File);
             _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
@@ -398,9 +398,9 @@ namespace SF3.Win.Controls {
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool DrawSkyBox {
-            get => AppState.ViewerDrawSkyBox;
-            set => UpdateAppState(nameof(AppState.ViewerDrawSkyBox), value);
+        public bool DrawSky {
+            get => AppState.ViewerDrawSky;
+            set => UpdateAppState(nameof(AppState.ViewerDrawSky), value);
         }
 
         [Browsable(false)]
@@ -517,7 +517,7 @@ namespace SF3.Win.Controls {
         private ModelResources _models = null;
         private SurfaceModelResources _surfaceModel = null;
         private GroundModelResources _groundModel = null;
-        private SkyBoxModelResources _skyBoxModel = null;
+        private SkyModelResources _skyModel = null;
         private CollisionResources _collisionModels = null;
         private SurfaceEditorResources _surfaceEditor = null;
         private GradientResources _gradients = null;

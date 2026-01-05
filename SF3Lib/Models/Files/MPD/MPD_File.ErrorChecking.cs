@@ -242,8 +242,8 @@ namespace SF3.Models.Files.MPD {
                 { 14, "GroundImageTop[Tiles]" },
                 { 15, "GroundImageBottom[Tiles]" },
                 { 16, "GroundImageTopTileMap" },
-                { 17, "SkyBoxImageTop" },
-                { 18, "SkyBoxImageBottom" },
+                { 17, "SkyImageTop" },
+                { 18, "SkyImageBottom" },
                 { 19, "GroundImageBottomTileMap" },
             };
 
@@ -259,9 +259,9 @@ namespace SF3.Models.Files.MPD {
                 chunkUses[19].Add("GroundImageBottomTileMap");
             }
 
-            if (flags.HasAnySkyBox) {
-                chunkUses[17].Add("SkyBoxImageTop");
-                chunkUses[18].Add("SkyBoxImageBottom");
+            if (flags.HasAnySky) {
+                chunkUses[17].Add("SkyImageTop");
+                chunkUses[18].Add("SkyImageBottom");
             }
 
             if (flags.Bit_0x0040_HasBackgroundImage) {
@@ -289,8 +289,8 @@ namespace SF3.Models.Files.MPD {
                         errors.Add($"Image Chunk[{cu.Key}] has multiple uses indicated: {usesStr}");
 
                     if (!chunkHeaders[cu.Key].Exists) {
-                        // The skybox is allowed to be missing from Scenario2 onward.
-                        if (!(usesStr.StartsWith("SkyBoxImage") && Scenario >= ScenarioType.Scenario2))
+                        // The sky is allowed to be missing from Scenario 2 onward.
+                        if (!(usesStr.StartsWith("SkyImage") && Scenario >= ScenarioType.Scenario2))
                             errors.Add($"{usesStr} Chunk[{cu.Key}] is missing");
                     }
                 }

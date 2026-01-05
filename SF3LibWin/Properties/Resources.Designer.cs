@@ -397,9 +397,9 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ShowSkyBoxBmp {
+        internal static System.Drawing.Bitmap ShowSkyBmp {
             get {
-                object obj = ResourceManager.GetObject("ShowSkyBoxBmp", resourceCulture);
+                object obj = ResourceManager.GetObject("ShowSkyBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

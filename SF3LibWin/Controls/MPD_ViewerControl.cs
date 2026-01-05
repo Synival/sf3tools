@@ -22,7 +22,7 @@ namespace SF3.Win.Controls {
             tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel;
             tsbDrawModels.Checked        = GLControl.DrawModels;
             tsbDrawGround.Checked        = GLControl.DrawGround;
-            tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox;
+            tsbDrawSky.Checked           = GLControl.DrawSky;
             tsbRunAnimations.Checked     = GLControl.RunAnimations;
             tsbApplyLighting.Checked     = GLControl.ApplyLighting;
             tsbDrawGradients.Checked     = GLControl.DrawGradients;
@@ -47,7 +47,7 @@ namespace SF3.Win.Controls {
             appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appState.ViewerDrawSurfaceModel; };
             appState.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appState.ViewerDrawModels; };
             appState.ViewerDrawGroundChanged         += (s, e) => { tsbDrawGround.Checked        = appState.ViewerDrawGround; };
-            appState.ViewerDrawSkyBoxChanged         += (s, e) => { tsbDrawSkyBox.Checked        = appState.ViewerDrawSkyBox; };
+            appState.ViewerDrawSkyChanged            += (s, e) => { tsbDrawSky.Checked        = appState.ViewerDrawSky; };
             appState.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appState.ViewerRunAnimations; };
             appState.ViewerApplyLightingChanged      += (s, e) => { tsbApplyLighting.Checked     = appState.ViewerApplyLighting; };
             appState.ViewerDrawGradientsChanged      += (s, e) => { tsbDrawGradients.Checked     = appState.ViewerDrawGradients; };
@@ -136,7 +136,7 @@ namespace SF3.Win.Controls {
         private void tsbDrawSurfaceModel_Click (object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
         private void tsbDrawModels_Click       (object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
         private void tsbDrawGround_Click       (object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
-        private void tsbDrawSkyBox_Click       (object sender, EventArgs e) => tsbDrawSkyBox.Checked        = GLControl.DrawSkyBox       = !GLControl.DrawSkyBox;
+        private void tsbDrawSky_Click          (object sender, EventArgs e) => tsbDrawSky.Checked           = GLControl.DrawSky          = !GLControl.DrawSky;
         private void tsbRunAnimations_Click    (object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
         private void tsbApplyLighting_Click    (object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
         private void tsbDrawGradients_Click    (object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;

@@ -7,9 +7,9 @@
         bool Bit_0x0080_SetMSBForPalette1 { get; set; }
 
         /// <summary>
-        /// When set, there are chunks with data for a skybox image that is displayed outside of battle.
+        /// When set, there are chunks with data for a sky image that is displayed outside of battle.
         /// </summary>
-        bool Bit_0x0800_HasCutsceneSkyBox { get; set; }
+        bool Bit_0x0800_HasCutsceneSky { get; set; }
 
         /// <summary>
         /// When set, the lightmap index for the surface has an additional calculation step that converts the dot

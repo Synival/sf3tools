@@ -29,7 +29,7 @@ namespace SF3.MPD {
         Dictionary<CollectionType, IMPD_ModelCollection> ModelCollections { get; }
 
         /// <summary>
-        /// Collection of specific plane types (ground, tiled ground, battle skybox, scene skybox, background, foreground).
+        /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).
         /// </summary>
         IMPD_Planes Planes { get; }
 

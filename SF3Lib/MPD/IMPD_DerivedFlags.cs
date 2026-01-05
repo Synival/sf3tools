@@ -18,9 +18,9 @@ namespace SF3.MPD {
         int? SurfaceModelChunkIndex { get; }
 
         /// <summary>
-        /// When set, a skybox chunk is present for either battles (Scenario 1) or cutscenes (Scenario 2+).
+        /// When set, a sky chunk is present for either battles (Scenario 1) or cutscenes (Scenario 2+).
         /// </summary>
-        bool HasAnySkyBox { get; }
+        bool HasAnySky { get; }
 
         /// <summary>
         /// When set, specifies the type of chunk located in Chunk[1] (should always be 'Models' if non-null).

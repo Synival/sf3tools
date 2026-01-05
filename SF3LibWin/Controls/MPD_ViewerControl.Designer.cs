@@ -33,7 +33,7 @@ namespace SF3.Win.Controls {
             tsbDrawSurfaceModel = new System.Windows.Forms.ToolStripButton();
             tsbDrawModels = new System.Windows.Forms.ToolStripButton();
             tsbDrawGround = new System.Windows.Forms.ToolStripButton();
-            tsbDrawSkyBox = new System.Windows.Forms.ToolStripButton();
+            tsbDrawSky = new System.Windows.Forms.ToolStripButton();
             tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
             tsbApplyLighting = new System.Windows.Forms.ToolStripButton();
             tsbDrawGradients = new System.Windows.Forms.ToolStripButton();
@@ -80,7 +80,7 @@ namespace SF3.Win.Controls {
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSkyBox, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter, toolStripSeparator3, tsbToggleHelp });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -148,16 +148,16 @@ namespace SF3.Win.Controls {
             tsbDrawGround.ToolTipText = "Draw Ground";
             tsbDrawGround.Click += tsbDrawGround_Click;
             // 
-            // tsbDrawSkyBox
+            // tsbDrawSky
             // 
-            tsbDrawSkyBox.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawSkyBox.Image = Properties.Resources.ShowSkyBoxBmp;
-            tsbDrawSkyBox.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbDrawSkyBox.Name = "tsbDrawSkyBox";
-            tsbDrawSkyBox.Size = new System.Drawing.Size(28, 28);
-            tsbDrawSkyBox.Text = "Draw Sky Box";
-            tsbDrawSkyBox.ToolTipText = "Draw Sky Box";
-            tsbDrawSkyBox.Click += tsbDrawSkyBox_Click;
+            tsbDrawSky.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawSky.Image = Properties.Resources.ShowSkyBmp;
+            tsbDrawSky.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawSky.Name = "tsbDrawSky";
+            tsbDrawSky.Size = new System.Drawing.Size(28, 28);
+            tsbDrawSky.Text = "Draw Sky";
+            tsbDrawSky.ToolTipText = "Draw Sky";
+            tsbDrawSky.Click += tsbDrawSky_Click;
             // 
             // tsbRunAnimations
             // 
@@ -582,7 +582,7 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbDrawSurfaceModel;
         private System.Windows.Forms.ToolStripButton tsbDrawModels;
         private System.Windows.Forms.ToolStripButton tsbDrawGround;
-        private System.Windows.Forms.ToolStripButton tsbDrawSkyBox;
+        private System.Windows.Forms.ToolStripButton tsbDrawSky;
         private System.Windows.Forms.ToolStripButton tsbDrawGradients;
         private System.Windows.Forms.ToolStripButton tsbRunAnimations;
         private System.Windows.Forms.ToolStripButton tsbRotateSpritesUp;

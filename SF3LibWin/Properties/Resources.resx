@@ -166,8 +166,8 @@
   <data name="TileSelectedBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\TileSelected.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ShowSkyBoxBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\ShowSkyBox.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ShowSkyBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\ShowSky.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SolidFrag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Shaders\Solid.frag;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

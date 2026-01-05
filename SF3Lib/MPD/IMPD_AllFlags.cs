@@ -29,9 +29,9 @@ namespace SF3.MPD {
         bool CanSet_0x0200_HasSurfaceModel { get; }
         bool CanSet_0x0400_HasGroundImage { get; }
         bool CanSet_0x0800_Unused { get; }
-        bool CanSet_0x0800_HasCutsceneSkyBox { get; }
+        bool CanSet_0x0800_HasCutsceneSky { get; }
         bool CanSet_0x1000_HasTileBasedGroundImage { get; }
-        bool CanSet_0x2000_HasBattleSkyBox { get; }
+        bool CanSet_0x2000_HasBattleSky { get; }
         bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
         bool CanSet_0x4000_Unused { get; }
         bool CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures { get; }

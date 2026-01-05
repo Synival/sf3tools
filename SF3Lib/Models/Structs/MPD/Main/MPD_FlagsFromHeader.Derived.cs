@@ -27,8 +27,8 @@ namespace SF3.Models.Structs.MPD.Main {
             }
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 1.0002f, displayName: "(Derived) " + nameof(HasAnySkyBox), displayGroup: "Flags")]
-        public bool HasAnySkyBox => Bit_0x0800_HasCutsceneSkyBox || Bit_0x2000_HasBattleSkyBox;
+        [TableViewModelColumn(addressField: null, displayOrder: 1.0002f, displayName: "(Derived) " + nameof(HasAnySky), displayGroup: "Flags")]
+        public bool HasAnySky => Bit_0x0800_HasCutsceneSky || Bit_0x2000_HasBattleSky;
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0003f, displayName: "(Derived) " + nameof(Chunk1Type), displayGroup: "Flags")]
         public ChunkType Chunk1Type {

@@ -6,7 +6,7 @@ namespace SF3.Models.Structs.X014 {
     public class MPDBattleSceneInfo : Struct {
         private readonly int _mpdFileIdAddr;
         private readonly int _battleSceneFileIdAddr;
-        private readonly int _skyBoxIdAddr;
+        private readonly int _skyIdAddr;
         private readonly int _lightingStyleAddr;
         private readonly int _fogStyleAddr;
         private readonly int _ffffAddr;
@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.X014 {
         public MPDBattleSceneInfo(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x10) {
             _mpdFileIdAddr         = Address + 0x00;
             _battleSceneFileIdAddr = Address + 0x04;
-            _skyBoxIdAddr          = Address + 0x08;
+            _skyIdAddr             = Address + 0x08;
             _lightingStyleAddr     = Address + 0x0A;
             _fogStyleAddr          = Address + 0x0C;
             _ffffAddr              = Address + 0x0E;
@@ -36,11 +36,11 @@ namespace SF3.Models.Structs.X014 {
             set => Data.SetDouble(_battleSceneFileIdAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_skyBoxIdAddr), displayOrder: 2, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_skyIdAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public ushort SkyBoxID {
-            get => (ushort) Data.GetWord(_skyBoxIdAddr);
-            set => Data.SetWord(_skyBoxIdAddr, value);
+        public ushort SkyID {
+            get => (ushort) Data.GetWord(_skyIdAddr);
+            set => Data.SetWord(_skyIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_lightingStyleAddr), displayOrder: 3, minWidth: 150)]

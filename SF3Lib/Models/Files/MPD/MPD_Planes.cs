@@ -78,12 +78,12 @@ namespace SF3.Models.Files.MPD {
             }
             BackgroundImage = backgroundImage;
 
-            // Set the cutscene/battle skybox.
-            ITextureData skyBoxImage = null;
-            if (MPD_File.SkyBoxChunkDatas?.Any() == true) {
+            // Set the cutscene/battle sky.
+            ITextureData skyImage = null;
+            if (MPD_File.SkyChunkDatas?.Any() == true) {
                 try {
-                    skyBoxImage = new MultiChunkTextureIndexed(
-                        MPD_File.SkyBoxChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                    skyImage = new MultiChunkTextureIndexed(
+                        MPD_File.SkyChunkDatas.Select(x => x.DecompressedData).ToArray(),
                         TexturePixelFormat.Palette2,
                         () => TryGetPalette(TexturePixelFormat.Palette2) ?? c_fakePalette,
                         palette => TrySetPalette(TexturePixelFormat.Palette2, palette),
@@ -94,7 +94,7 @@ namespace SF3.Models.Files.MPD {
                     // TODO: what to do here??
                 }
             }
-            SkyBoxImage = skyBoxImage;
+            SkyImage = skyImage;
 
             // Set the foreground image (Ishahakat).
             IMPD_TiledPlane foregroundTiledImage = null;
@@ -142,7 +142,7 @@ namespace SF3.Models.Files.MPD {
         public IMPD_TiledPlane GroundTiledImage { get; private set; }
         public ITextureData BackgroundImage { get; private set; }
 
-        public ITextureData SkyBoxImage { get; private set; }
+        public ITextureData SkyImage { get; private set; }
         public IMPD_TiledPlane ForegroundTiledImage { get; private set; }
 
         public short GroundX {

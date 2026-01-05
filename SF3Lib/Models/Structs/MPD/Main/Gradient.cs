@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _stopBAddr;
         private readonly int _partsAffectedBitsAddr;
         private readonly int _groundOpacityAddr;
-        private readonly int _skyBoxOpacityAddr;
+        private readonly int _skyOpacityAddr;
         private readonly int _modelsAndTilesOpacityAddr;
 
         public Gradient(IByteData data, int id, string name, int address)
@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.MPD.Main {
             _stopBAddr                 = Address + 0x0E; // 2 bytes
             _partsAffectedBitsAddr     = Address + 0x10; // 2 bytes
             _groundOpacityAddr         = Address + 0x12; // 2 bytes
-            _skyBoxOpacityAddr         = Address + 0x14; // 2 bytes
+            _skyOpacityAddr            = Address + 0x14; // 2 bytes
             _modelsAndTilesOpacityAddr = Address + 0x16; // 2 bytes
         }
 
@@ -102,7 +102,7 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 8.2f)]
-        public bool AffectsSkyBox {
+        public bool AffectsSky {
             get => (PartsAffectedBits & 0x02) == 0x02;
             set => PartsAffectedBits = (ushort) (PartsAffectedBits & ~0x02 | (value ? 0x02 : 0x00));
         }
@@ -121,10 +121,10 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_skyBoxOpacityAddr), displayOrder: 10, displayFormat: "X2")]
-        public ushort SkyBoxOpacity {
-            get => (ushort) Data.GetWord(_skyBoxOpacityAddr);
-            set => Data.SetWord(_skyBoxOpacityAddr, value);
+        [TableViewModelColumn(addressField: nameof(_skyOpacityAddr), displayOrder: 10, displayFormat: "X2")]
+        public ushort SkyOpacity {
+            get => (ushort) Data.GetWord(_skyOpacityAddr);
+            set => Data.SetWord(_skyOpacityAddr, value);
         }
 
         [BulkCopy]

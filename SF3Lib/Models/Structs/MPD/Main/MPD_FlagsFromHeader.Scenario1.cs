@@ -24,12 +24,12 @@ namespace SF3.Models.Structs.MPD.Main {
             }
         }
 
-        public bool CanSet_0x2000_HasBattleSkyBox => IsScenario1OrEarlier;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.2000f, displayName: "(0x2000) HasBattleSkyBox (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
-        public bool Bit_0x2000_HasBattleSkyBox {
-            get => CanSet_0x2000_HasBattleSkyBox ? (MapFlags & 0x2000) == 0x2000 : false;
+        public bool CanSet_0x2000_HasBattleSky => IsScenario1OrEarlier;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.2000f, displayName: "(0x2000) HasBattleSky (Scn1)", visibilityProperty: nameof(IsScenario1OrEarlier), displayGroup: "Flags")]
+        public bool Bit_0x2000_HasBattleSky {
+            get => CanSet_0x2000_HasBattleSky ? (MapFlags & 0x2000) == 0x2000 : false;
             set {
-                if (CanSet_0x2000_HasBattleSkyBox)
+                if (CanSet_0x2000_HasBattleSky)
                     MapFlags = value ? (ushort) (MapFlags | 0x2000) : (ushort) (MapFlags & ~0x2000);
             }
         }

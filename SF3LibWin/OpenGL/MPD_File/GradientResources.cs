@@ -17,7 +17,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models?.Dispose();
 
             GroundGradientModel = null;
-            SkyBoxGradientModel = null;
+            SkyGradientModel    = null;
             ModelsGradientModel = null;
 
             Models = null;
@@ -46,12 +46,12 @@ namespace SF3.Win.OpenGL.MPD_File {
                     Math.Clamp(gradient.StopB / (float) 0x1f, 0.00f, 1.00f)
                 ),
                 gradient.AffectsGround ? (gradient.GroundOpacity / (float) 0x1f) : 0,
-                gradient.AffectsSkyBox ? (gradient.SkyBoxOpacity / (float) 0x1f) : 0,
+                gradient.AffectsSky ? (gradient.SkyOpacity / (float) 0x1f) : 0,
                 gradient.AffectsModelsAndTiles ? (gradient.ModelsAndTilesOpacity / (float) 0x1f) : 0
             );
         }
 
-        public void Update(float posTop, float posBottom, Vector3 colorTop, Vector3 colorBottom, float groundOpacity, float skyBoxOpacity, float modelsOpacity) {
+        public void Update(float posTop, float posBottom, Vector3 colorTop, Vector3 colorBottom, float groundOpacity, float skyOpacity, float modelsOpacity) {
             Reset();
 
             var corners = Enum.GetValues<CornerType>();
@@ -85,17 +85,17 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
 
             GroundGradientModel = MakeModel(groundOpacity);
-            SkyBoxGradientModel = MakeModel(skyBoxOpacity);
+            SkyGradientModel = MakeModel(skyOpacity);
             ModelsGradientModel = MakeModel(modelsOpacity);
 
             Models?.Dispose();
             Models = new DisposableList<QuadModel>
-                (new QuadModel[] { GroundGradientModel, SkyBoxGradientModel, ModelsGradientModel }.Where(x => x != null).ToArray()
+                (new QuadModel[] { GroundGradientModel, SkyGradientModel, ModelsGradientModel }.Where(x => x != null).ToArray()
             );
         }
 
         public QuadModel GroundGradientModel { get; private set; } = null;
-        public QuadModel SkyBoxGradientModel { get; private set; } = null;
+        public QuadModel SkyGradientModel { get; private set; } = null;
         public QuadModel ModelsGradientModel { get; private set; } = null;
 
         public DisposableList<QuadModel> Models { get; private set; } = null;

@@ -15,7 +15,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             public bool DrawModels;
             public bool DrawSurfaceModel;
             public bool DrawGround;
-            public bool DrawSkyBox;
+            public bool DrawSky;
             public bool DrawGradients;
 
             public bool DrawNormals;
@@ -58,7 +58,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ModelResources models,
             SurfaceModelResources surfaceModel,
             GroundModelResources groundModel,
-            SkyBoxModelResources skyBoxModel,
+            SkyModelResources skyModel,
             GradientResources gradients,
             LightAdjustment lightAdj,
             LightingResources lighting,
@@ -81,8 +81,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Enable(EnableCap.StencilTest);
             GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
-            if (options.DrawSkyBox)
-                DrawSceneSkyBox(general, skyBoxModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
+            if (options.DrawSky)
+                DrawSceneSky(general, skyModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
             if (options.DrawGround)
                 DrawSceneGround(general, groundModel, gradients, lightAdj, options, ref projectionMatrix, ref viewMatrix);
 
@@ -312,9 +312,9 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        public void DrawSceneSkyBox(
+        public void DrawSceneSky(
             GeneralResources general,
-            SkyBoxModelResources skyBoxModel,
+            SkyModelResources skyModel,
             GradientResources gradients,
             RendererOptions options,
             float cameraYaw,
@@ -322,7 +322,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
         ) {
-            if (skyBoxModel?.Model == null)
+            if (skyModel?.Model == null)
                 return;
 
             GL.Disable(EnableCap.DepthTest);
@@ -346,11 +346,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.StencilFunc(StencilFunction.Always, 2, 0x02);
             GL.StencilMask(0x02);
 
-            using (skyBoxModel.Texture.Use(TextureUnit.Texture0))
-                skyBoxModel.Model.Draw(general.TextureShader, null);
+            using (skyModel.Texture.Use(TextureUnit.Texture0))
+                skyModel.Model.Draw(general.TextureShader, null);
 
             if (options.DrawGradients)
-                DrawSceneGradient(general, gradients?.SkyBoxGradientModel, 0x02, false, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGradient(general, gradients?.SkyGradientModel, 0x02, false, ref projectionMatrix, ref viewMatrix);
 
             general.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
             general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);

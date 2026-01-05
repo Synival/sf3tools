@@ -2,7 +2,7 @@
 
 namespace SF3.MPD {
     /// <summary>
-    /// Collection of specific plane types used in an MPD (ground, tiled ground, battle skybox, scene skybox,
+    /// Collection of specific plane types used in an MPD (ground, tiled ground, battle sky, scene sky,
     /// background, foreground).
     /// </summary>
     public interface IMPD_Planes {
@@ -23,9 +23,9 @@ namespace SF3.MPD {
         ITextureData BackgroundImage { get; }
 
         /// <summary>
-        /// Image used for the skybox plane. Must be 512x256 and 8-bit indexed.
+        /// Image used for the sky plane. Must be 512x256 and 8-bit indexed.
         /// </summary>
-        ITextureData SkyBoxImage { get; }
+        ITextureData SkyImage { get; }
 
         /// <summary>
         /// Tiled image used for foregrounds (Ishahakat). Resulting image is 512x256 with a 64x32 tile assignment map.
@@ -55,12 +55,12 @@ namespace SF3.MPD {
         float GroundXRotation { get; set; }
 
         /// <summary>
-        /// Screen X position of the skybox (in pixels), repeating every 512.
+        /// Screen X position of the sky (in pixels), repeating every 512.
         /// </summary>
         short BackgroundX { get; set; }
 
         /// <summary>
-        /// Screen Y position of the skybox (in pixels), repeating every 256.
+        /// Screen Y position of the sky (in pixels), repeating every 256.
         /// </summary>
         short BackgroundY { get; set; }
     }

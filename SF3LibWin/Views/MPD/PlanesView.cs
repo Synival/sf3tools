@@ -18,8 +18,8 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TextureView("Ground Tileset", Planes.GroundTiledImage.Tileset, 1));
             if (Planes.GroundTiledImage?.TiledImage != null)
                 CreateChild(new TextureView("Ground (Tiled Image)", Planes.GroundTiledImage.TiledImage, 0.50f));
-            if (Planes.SkyBoxImage != null)
-                CreateChild(new TextureView("Sky Box", Planes.SkyBoxImage, 1));
+            if (Planes.SkyImage != null)
+                CreateChild(new TextureView("Sky", Planes.SkyImage, 1));
             if (Planes.BackgroundImage != null)
                 CreateChild(new TextureView("Background", Planes.BackgroundImage, 1));
             if (Planes.ForegroundTiledImage?.Tileset != null)

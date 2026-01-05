@@ -18,9 +18,9 @@
         bool Bit_0x0800_Unused { get; set; }
 
         /// <summary>
-        /// When set, there are chunks with data for a skybox image that is displayed during battle.
+        /// When set, there are chunks with data for a sky image that is displayed during battle.
         /// </summary>
-        bool Bit_0x2000_HasBattleSkyBox { get; set; }
+        bool Bit_0x2000_HasBattleSky { get; set; }
 
         /// <summary>
         /// Unused flag.

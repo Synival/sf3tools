@@ -22,7 +22,7 @@
         /// When set, there are three chunks in total that are:
         ///   Foreground image tileset (2 chunks)
         ///   Fileground image tile assignment (1 chunk)
-        /// This is used in BLACK.MPD (Ishahakat). This uses the same chunks as the battle skybox image; they are
+        /// This is used in BLACK.MPD (Ishahakat). This uses the same chunks as the battle sky image; they are
         /// mutually exclusive.
         /// </summary>
         bool Bit_0x0010_HasTileBasedForegroundImage { get; set; }

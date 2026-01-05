@@ -82,7 +82,7 @@ namespace SF3.Models.Files.MPD {
         ExportTexturesToPathResult ExportTexturesToPath(string path, Action<string, ushort[,]> abgr1555ImageDataWriter);
 
         /// <summary>
-        /// Sets images used for rendering the ground, skybox, and background planes.
+        /// Sets images used for rendering the ground, sky, background, and foreground planes.
         /// </summary>
         void UpdatePlaneImages();
 
@@ -100,7 +100,7 @@ namespace SF3.Models.Files.MPD {
         IChunkData[] GroundTileAssignmentChunkDatas { get; }
         IChunkData[] BackgroundChunkDatas { get; }
 
-        IChunkData[] SkyBoxChunkDatas { get; }
+        IChunkData[] SkyChunkDatas { get; }
         IChunkData[] ForegroundTileChunkDatas { get; }
         IChunkData ForegroundTileAssignmentChunkData { get; }
 
@@ -148,8 +148,8 @@ namespace SF3.Models.Files.MPD {
         int BackgroundChunk1Index { get; }
         int BackgroundChunk2Index { get; }
 
-        int SkyBoxChunk1Index { get; }
-        int SkyBoxChunk2Index { get; }
+        int SkyChunk1Index { get; }
+        int SkyChunk2Index { get; }
         int ForegroundTilesetChunk1Index { get; }
         int ForegroundTilesetChunk2Index { get; }
 

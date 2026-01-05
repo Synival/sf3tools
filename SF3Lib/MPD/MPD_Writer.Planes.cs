@@ -23,7 +23,7 @@ namespace SF3.MPD {
                 WriteEmptyChunk();
 
             // Write the background image.
-            var fgImage = planes.SkyBoxImage ?? planes.ForegroundTiledImage?.Tileset;
+            var fgImage = planes.SkyImage ?? planes.ForegroundTiledImage?.Tileset;
             if (fgImage != null && fgImage.Width == 512 && fgImage.Height == 256 && fgImage.BytesPerPixel == 1) {
                 var data = (fgImage == planes.ForegroundTiledImage?.Tileset) ? fgImage.ImageData8Bit.FromTiles(8, 8) : fgImage.ImageData8Bit.To1DArrayTransposed();
                 WriteCompressedChunk(writer => writer.WriteBytes(data, 0x00000, 0x10000));

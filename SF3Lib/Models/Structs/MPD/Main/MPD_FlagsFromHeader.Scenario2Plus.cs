@@ -14,12 +14,12 @@ namespace SF3.Models.Structs.MPD.Main {
             }
         }
 
-        public bool CanSet_0x0800_HasCutsceneSkyBox => IsScenario2OrLater;
-        [TableViewModelColumn(addressField: null, displayOrder: 0.0801f, displayName: "(0x0800) HasCutsceneSkyBox (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
-        public bool Bit_0x0800_HasCutsceneSkyBox {
-            get => CanSet_0x0800_HasCutsceneSkyBox ? (MapFlags & 0x0800) == 0x0800 : false;
+        public bool CanSet_0x0800_HasCutsceneSky => IsScenario2OrLater;
+        [TableViewModelColumn(addressField: null, displayOrder: 0.0801f, displayName: "(0x0800) HasCutsceneSky (Scn2+)", visibilityProperty: nameof(IsScenario2OrLater), displayGroup: "Flags")]
+        public bool Bit_0x0800_HasCutsceneSky {
+            get => CanSet_0x0800_HasCutsceneSky ? (MapFlags & 0x0800) == 0x0800 : false;
             set {
-                if (CanSet_0x0800_HasCutsceneSkyBox)
+                if (CanSet_0x0800_HasCutsceneSky)
                     MapFlags = value ? (ushort) (MapFlags | 0x0800) : (ushort) (MapFlags & ~0x0800);
             }
         }

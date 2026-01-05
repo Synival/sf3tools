@@ -78,18 +78,18 @@ namespace SF3.Win.Controls {
                 => TrySetProperty(cb0x0800_Unused,
                     nameof(IMPD_AllFlags.Bit_0x0800_Unused),
                     nameof(IMPD_AllFlags.CanSet_0x0800_Unused));
-            cb0x0800_HasCutsceneSkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cb0x0800_HasCutsceneSkyBox,
-                    nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
-                    nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
+            cb0x0800_HasCutsceneSky.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x0800_HasCutsceneSky,
+                    nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSky),
+                    nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSky));
             cb0x1000_HasTileBasedGroundImage.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x1000_HasTileBasedGroundImage,
                     nameof(IMPD_AllFlags.Bit_0x1000_HasTileBasedGroundImage),
-                    nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
-            cb0x2000_HasBattleSkyBox.CheckedChanged += (s, e)
-                => TrySetProperty(cb0x2000_HasBattleSkyBox,
-                    nameof(IMPD_AllFlags.Bit_0x2000_HasBattleSkyBox),
-                    nameof(IMPD_AllFlags.CanSet_0x2000_HasBattleSkyBox));
+                    nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSky));
+            cb0x2000_HasBattleSky.CheckedChanged += (s, e)
+                => TrySetProperty(cb0x2000_HasBattleSky,
+                    nameof(IMPD_AllFlags.Bit_0x2000_HasBattleSky),
+                    nameof(IMPD_AllFlags.CanSet_0x2000_HasBattleSky));
             cb0x2000_NarrowAngleBasedLightmap.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x2000_NarrowAngleBasedLightmap,
                     nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
@@ -170,15 +170,15 @@ namespace SF3.Win.Controls {
             SetControlState(cb0x0800_Unused,
                 nameof(IMPD_AllFlags.Bit_0x0800_Unused),
                 nameof(IMPD_AllFlags.CanSet_0x0800_Unused));
-            SetControlState(cb0x0800_HasCutsceneSkyBox,
-                nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSkyBox),
-                nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSkyBox));
+            SetControlState(cb0x0800_HasCutsceneSky,
+                nameof(IMPD_AllFlags.Bit_0x0800_HasCutsceneSky),
+                nameof(IMPD_AllFlags.CanSet_0x0800_HasCutsceneSky));
             SetControlState(cb0x1000_HasTileBasedGroundImage,
                 nameof(IMPD_AllFlags.Bit_0x1000_HasTileBasedGroundImage),
                 nameof(IMPD_AllFlags.CanSet_0x1000_HasTileBasedGroundImage));
-            SetControlState(cb0x2000_HasBattleSkyBox,
-                nameof(IMPD_AllFlags.Bit_0x2000_HasBattleSkyBox),
-                nameof(IMPD_AllFlags.CanSet_0x2000_HasBattleSkyBox));
+            SetControlState(cb0x2000_HasBattleSky,
+                nameof(IMPD_AllFlags.Bit_0x2000_HasBattleSky),
+                nameof(IMPD_AllFlags.CanSet_0x2000_HasBattleSky));
             SetControlState(cb0x2000_NarrowAngleBasedLightmap,
                 nameof(IMPD_AllFlags.Bit_0x2000_NarrowAngleBasedLightmap),
                 nameof(IMPD_AllFlags.CanSet_0x2000_NarrowAngleBasedLightmap));

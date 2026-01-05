@@ -28,8 +28,8 @@
             cb0x0020_Unknown = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0080_HasChunk19ModelWithChunk21Textures = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0100_HasModels = new CommonLib.Win.Controls.DarkModeCheckBox();
-            cb0x0800_HasCutsceneSkyBox = new CommonLib.Win.Controls.DarkModeCheckBox();
-            cb0x2000_HasBattleSkyBox = new CommonLib.Win.Controls.DarkModeCheckBox();
+            cb0x0800_HasCutsceneSky = new CommonLib.Win.Controls.DarkModeCheckBox();
+            cb0x2000_HasBattleSky = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x4000_HasExtraChunk1ModelWithChunk21Textures = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel = new CommonLib.Win.Controls.DarkModeCheckBox();
             cb0x0002_HasSurfaceTextureRotation = new CommonLib.Win.Controls.DarkModeCheckBox();
@@ -112,25 +112,25 @@
             cb0x0100_HasModels.Text = "Has Models";
             cb0x0100_HasModels.UseVisualStyleBackColor = true;
             // 
-            // cb0x0800_HasCutsceneSkyBox
+            // cb0x0800_HasCutsceneSky
             // 
-            cb0x0800_HasCutsceneSkyBox.AutoSize = true;
-            cb0x0800_HasCutsceneSkyBox.Location = new System.Drawing.Point(54, 326);
-            cb0x0800_HasCutsceneSkyBox.Name = "cb0x0800_HasCutsceneSkyBox";
-            cb0x0800_HasCutsceneSkyBox.Size = new System.Drawing.Size(185, 19);
-            cb0x0800_HasCutsceneSkyBox.TabIndex = 14;
-            cb0x0800_HasCutsceneSkyBox.Text = "Has Cutscene Sky Box (Scn2+)";
-            cb0x0800_HasCutsceneSkyBox.UseVisualStyleBackColor = true;
+            cb0x0800_HasCutsceneSky.AutoSize = true;
+            cb0x0800_HasCutsceneSky.Location = new System.Drawing.Point(54, 326);
+            cb0x0800_HasCutsceneSky.Name = "cb0x0800_HasCutsceneSky";
+            cb0x0800_HasCutsceneSky.Size = new System.Drawing.Size(185, 19);
+            cb0x0800_HasCutsceneSky.TabIndex = 14;
+            cb0x0800_HasCutsceneSky.Text = "Has Cutscene Sky (Scn2+)";
+            cb0x0800_HasCutsceneSky.UseVisualStyleBackColor = true;
             // 
-            // cb0x2000_HasBattleSkyBox
+            // cb0x2000_HasBattleSky
             // 
-            cb0x2000_HasBattleSkyBox.AutoSize = true;
-            cb0x2000_HasBattleSkyBox.Location = new System.Drawing.Point(54, 376);
-            cb0x2000_HasBattleSkyBox.Name = "cb0x2000_HasBattleSkyBox";
-            cb0x2000_HasBattleSkyBox.Size = new System.Drawing.Size(158, 19);
-            cb0x2000_HasBattleSkyBox.TabIndex = 16;
-            cb0x2000_HasBattleSkyBox.Text = "Has Battle Sky Box (Scn1)";
-            cb0x2000_HasBattleSkyBox.UseVisualStyleBackColor = true;
+            cb0x2000_HasBattleSky.AutoSize = true;
+            cb0x2000_HasBattleSky.Location = new System.Drawing.Point(54, 376);
+            cb0x2000_HasBattleSky.Name = "cb0x2000_HasBattleSky";
+            cb0x2000_HasBattleSky.Size = new System.Drawing.Size(158, 19);
+            cb0x2000_HasBattleSky.TabIndex = 16;
+            cb0x2000_HasBattleSky.Text = "Has Battle Sky (Scn1)";
+            cb0x2000_HasBattleSky.UseVisualStyleBackColor = true;
             // 
             // cb0x4000_HasExtraChunk1ModelWithChunk21Textures
             // 
@@ -477,12 +477,12 @@
             Controls.Add(label0x2000);
             Controls.Add(label0x1000);
             Controls.Add(cb0x2000_NarrowAngleBasedLightmap);
-            Controls.Add(cb0x2000_HasBattleSkyBox);
+            Controls.Add(cb0x2000_HasBattleSky);
             Controls.Add(cb0x1000_HasTileBasedGroundImage);
             Controls.Add(label0x0800);
             Controls.Add(label0x0400);
             Controls.Add(cb0x0400_HasGroundImage);
-            Controls.Add(cb0x0800_HasCutsceneSkyBox);
+            Controls.Add(cb0x0800_HasCutsceneSky);
             Controls.Add(label0x0200);
             Controls.Add(label0x0100);
             Controls.Add(cb0x0800_Unused);
@@ -521,8 +521,8 @@
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x0080_HasChunk19ModelWithChunk21Textures;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x0100_HasModels;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x0200_HasSurfaceModel;
-        private CommonLib.Win.Controls.DarkModeCheckBox cb0x0800_HasCutsceneSkyBox;
-        private CommonLib.Win.Controls.DarkModeCheckBox cb0x2000_HasBattleSkyBox;
+        private CommonLib.Win.Controls.DarkModeCheckBox cb0x0800_HasCutsceneSky;
+        private CommonLib.Win.Controls.DarkModeCheckBox cb0x2000_HasBattleSky;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x2000_NarrowAngleBasedLightmap;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x4000_HasExtraChunk1ModelWithChunk21Textures;
         private CommonLib.Win.Controls.DarkModeCheckBox cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel;

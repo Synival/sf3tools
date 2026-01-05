@@ -71,7 +71,7 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawSurfaceModel = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawModels = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawGround = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiView_MPD_DrawSkyBox = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawSky = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_RunAnimations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_ApplyLighting = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawGradients = new System.Windows.Forms.ToolStripMenuItem();
@@ -421,7 +421,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiView_MPD
             // 
-            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSkyBox, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
+            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
             tsmiView_MPD.Size = new Size(265, 22);
             tsmiView_MPD.Text = "&MPD";
@@ -447,12 +447,12 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawGround.Text = "Draw Ground/Water";
             tsmiView_MPD_DrawGround.Click += tsmiView_MPD_DrawGround_Click;
             // 
-            // tsmiView_MPD_DrawSkyBox
+            // tsmiView_MPD_DrawSky
             // 
-            tsmiView_MPD_DrawSkyBox.Name = "tsmiView_MPD_DrawSkyBox";
-            tsmiView_MPD_DrawSkyBox.Size = new Size(384, 22);
-            tsmiView_MPD_DrawSkyBox.Text = "Draw Sky Box";
-            tsmiView_MPD_DrawSkyBox.Click += tsmiView_MPD_DrawSkyBox_Click;
+            tsmiView_MPD_DrawSky.Name = "tsmiView_MPD_DrawSky";
+            tsmiView_MPD_DrawSky.Size = new Size(384, 22);
+            tsmiView_MPD_DrawSky.Text = "Draw Sky";
+            tsmiView_MPD_DrawSky.Click += tsmiView_MPD_DrawSky_Click;
             // 
             // tsmiView_MPD_RunAnimations
             // 
@@ -940,7 +940,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawSurfaceModel;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawModels;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawGround;
-        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawSkyBox;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawSky;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RunAnimations;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_ApplyLighting;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawGradients;
