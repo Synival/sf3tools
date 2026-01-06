@@ -9,7 +9,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class GradientResources : ResourcesBase, IMPD_Resources {
+    public class GradientResources : ResourcesBase, IMPD_FileResources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 

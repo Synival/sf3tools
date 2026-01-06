@@ -10,7 +10,7 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class GroundModelResources : ResourcesBase, IMPD_Resources {
+    public class GroundModelResources : ResourcesBase, IMPD_FileResources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 

@@ -12,7 +12,7 @@ using SF3.Win.Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
+    public class SurfaceModelBlockResources : ResourcesBase, IMPD_FileResources {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
             TileX1 = (blockNum % 16) * 4;

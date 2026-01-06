@@ -14,7 +14,7 @@ using SF3.Extensions;
 using SF3.Imaging;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class ModelResources : ResourcesBase, IMPD_Resources {
+    public class ModelResources : ResourcesBase, IMPD_FileResources {
         public ModelResources(bool applyShadowTags, bool applyHideTags) : base() {
             ApplyShadowTags = applyShadowTags;
             ApplyHideTags   = applyHideTags;

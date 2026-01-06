@@ -9,7 +9,7 @@ using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables.Shared;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class LightingResources : ResourcesBase, IMPD_Resources {
+    public class LightingResources : ResourcesBase, IMPD_FileResources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 

@@ -2,7 +2,7 @@
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public interface IMPD_Resources : IResources {
+    public interface IMPD_FileResources : IResources {
         /// <summary>
         /// Updates resources based on the MPD file given.
         /// </summary>

@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class BoundaryModelResources : ResourcesBase, IMPD_Resources {
+    public class BoundaryModelResources : ResourcesBase, IMPD_FileResources {
         protected override void PerformInit() {
             Models = [];
         }
