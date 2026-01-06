@@ -80,9 +80,9 @@
         bool ShortEmptyAnimationTable { get; set; }
 
         /// <summary>
-        /// Technical setting. When 'true', an empty "alt" animation table is written as 'FFFFFFFF' instead of the
+        /// Technical setting. When 'true', an empty "ignored texture" table is written as 'FFFFFFFF' instead of the
         /// typical 'FFFF'. (This is likely a holdover from older MPDs.)
         /// </summary>
-        bool LongEmptyAltAnimationTable { get; set; }
+        bool LongEmptyIgnoredTextureTable { get; set; }
     }
 }

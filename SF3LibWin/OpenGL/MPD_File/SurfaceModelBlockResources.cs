@@ -44,21 +44,21 @@ namespace SF3.Win.OpenGL.MPD_File {
         public void Update(IMPD_File mpdFile) {
             Reset();
 
-            var skippedTextures =
+            var ignoredTextures =
                 (mpdFile.IgnoredTextureTable == null) ? []
                 : mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToHashSet();
 
             var texturesById = mpdFile.TextureChunks != null ? mpdFile.TextureChunks
                 .Where(x => x?.TextureTable != null && x.TextureTable.Collection == MPD_CollectionType.Primary)
                 .SelectMany(x => x.TextureTable)
-                .Where(x => !skippedTextures.Contains(x.ID))
+                .Where(x => !ignoredTextures.Contains(x.ID))
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x)
                 : [];
 
             var animationsById = mpdFile.Animations != null ? mpdFile.Animations
-                .Where(x => !skippedTextures.Contains(x.ID))
+                .Where(x => !ignoredTextures.Contains(x.ID))
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.AnimationFrameTable.OrderBy(x => x.Frame).ToArray(), x.FrameTimerStart })

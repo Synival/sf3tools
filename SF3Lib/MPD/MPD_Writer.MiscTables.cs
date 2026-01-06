@@ -24,7 +24,7 @@ namespace SF3.MPD {
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
                 case AnimationTable ta:          WriteAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case BoundaryTable bt:           WriteBoundaries(bt);          break;
-                case IgnoredTextureTable tid:    WriteTextureIDs(tid, settings?.LongEmptyAltAnimationTable ?? false); break;
+                case IgnoredTextureTable tid:    WriteTextureIDs(tid, settings?.LongEmptyIgnoredTextureTable ?? false); break;
                 case MissingModelChunk mmc:      return null;
                 case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
                 default:

@@ -26,7 +26,7 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _modelsViewAngleMinAddr;      // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
         private readonly int _padding3Addr;                // int16  Always zero
-        private readonly int _offsetSkipTexturesAddr;      // int32  Pointer to a list of texture indices. The textures here are skipped when loading the texture chunk.
+        private readonly int _offsetIgnoredTexturesAddr;   // int32  Pointer to a list of texture indices. The textures here are skipped when loading the texture chunk.
         private readonly int _offsetGroundPaletteAddr;     // int32  Pointer to 256 rgb16 colors. May be null.
         private readonly int _offsetSkyPaletteAddr;        // int32  Pointer to 256 rgb16 colors. May be null.
 
@@ -99,19 +99,19 @@ namespace SF3.Models.Structs.MPD.Main {
             }
 
             if (Scenario != ScenarioType.Other) {
-                _modelsYRotationAddr      = addressNext + 0x00; // 2 bytes
-                _modelsViewAngleMinAddr   = addressNext + 0x02; // 2 bytes
-                _modelsViewAngleMaxAddr   = addressNext + 0x04; // 2 bytes
-                _padding3Addr             = addressNext + 0x06; // 2 bytes
-                _offsetSkipTexturesAddr   = addressNext + 0x08; // 4 bytes
+                _modelsYRotationAddr       = addressNext + 0x00; // 2 bytes
+                _modelsViewAngleMinAddr    = addressNext + 0x02; // 2 bytes
+                _modelsViewAngleMaxAddr    = addressNext + 0x04; // 2 bytes
+                _padding3Addr              = addressNext + 0x06; // 2 bytes
+                _offsetIgnoredTexturesAddr = addressNext + 0x08; // 4 bytes
                 addressNext += 0x0C;
             }
             else {
-                _modelsYRotationAddr      = -1;
-                _modelsViewAngleMinAddr   = -1;
-                _modelsViewAngleMaxAddr   = -1;
-                _padding3Addr             = -1;
-                _offsetSkipTexturesAddr   = -1;
+                _modelsYRotationAddr       = -1;
+                _modelsViewAngleMinAddr    = -1;
+                _modelsViewAngleMaxAddr    = -1;
+                _padding3Addr              = -1;
+                _offsetIgnoredTexturesAddr = -1;
                 // TODO: missing 4-byte value
                 addressNext += 0x04;
             }
@@ -331,18 +331,18 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetSkipTexturesAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
-        public int OffsetSkipTextures {
-            get => HasModelsInfo ? Data.GetDouble(_offsetSkipTexturesAddr) : 0;
+        [TableViewModelColumn(addressField: nameof(_offsetIgnoredTexturesAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        public int OffsetIgnoredTextures {
+            get => HasModelsInfo ? Data.GetDouble(_offsetIgnoredTexturesAddr) : 0;
             set {
                 if (HasModelsInfo)
-                    Data.SetDouble(_offsetSkipTexturesAddr, value);
+                    Data.SetDouble(_offsetIgnoredTexturesAddr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetGroundPaletteAddr), displayOrder: 17, isPointer: true, displayGroup: "Main")]
-        public int OffseGroundPalette {
+        public int OffsetGroundPalette {
             get => Data.GetDouble(_offsetGroundPaletteAddr);
             set => Data.SetDouble(_offsetGroundPaletteAddr, value);
         }

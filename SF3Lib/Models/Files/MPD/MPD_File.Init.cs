@@ -82,8 +82,8 @@ namespace SF3.Models.Files.MPD {
             // Sometimes palette addresses are placed in an odd place at or just before the header actually begins.
             // This is most likely an error in the MPD file; it results in garbage data.
             // Don't load the palettes in these cases.
-            if (header.OffseGroundPalette >= RamAddress && (headerRamAddr - header.OffseGroundPalette) / 2 >= 256)
-                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, "GroundPalette", header.OffseGroundPalette - RamAddress, 256));
+            if (header.OffsetGroundPalette >= RamAddress && (headerRamAddr - header.OffsetGroundPalette) / 2 >= 256)
+                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, "GroundPalette", header.OffsetGroundPalette - RamAddress, 256));
             if (header.OffsetSkyPalette >= RamAddress && (headerRamAddr - header.OffsetSkyPalette) / 2 >= 256)
                 tables.Add(SkyPaletteColorTable = ColorTable.Create(Data, "SkyPalette", header.OffsetSkyPalette - RamAddress, 256));
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetTexturePalette >= RamAddress && (headerRamAddr - header.OffsetTexturePalette) / 2 >= 256)
@@ -120,9 +120,9 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (header.OffsetSkipTextures != 0) {
+            if (header.OffsetIgnoredTextures != 0) {
                 try {
-                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetSkipTextures - RamAddress, 2, 0x100));
+                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetIgnoredTextures - RamAddress, 2, 0x100));
                 }
                 catch {
                     // TODO: what to do here??
