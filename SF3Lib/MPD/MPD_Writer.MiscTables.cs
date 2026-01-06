@@ -21,7 +21,6 @@ namespace SF3.MPD {
                 case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);         break;
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
                 case AnimationTable ta:          WriteAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
-                case BoundaryTable bt:           WriteBoundaries(bt);          break;
                 case MissingModelChunk mmc:      return null;
                 case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
                 default:
@@ -79,15 +78,6 @@ namespace SF3.MPD {
                     else
                         WriteUShort((ushort) animations.TextureEndId);
                 }
-            }
-        }
-
-        public void WriteBoundaries(BoundaryTable boundaries) {
-            foreach (var boundary in boundaries) {
-                WriteShort(boundary.X1);
-                WriteShort(boundary.Y1);
-                WriteShort(boundary.X2);
-                WriteShort(boundary.Y2);
             }
         }
     }

@@ -36,12 +36,12 @@ namespace SF3.MPD {
         private void WriteMPDPointer(uint? offset)
             => WriteUInt(offset.HasValue ? (offset.Value + 0x290000) : 0);
 
-        private uint? WriteObjectOrNull<T>(T obj, Action<T> writer) where T : class {
-            if (obj == null)
+        private uint? WriteObjectOrNull(Func<bool> condition, Action writer) {
+            if (!condition())
                 return null;
             var pos = (uint) CurrentOffset;
 
-            writer(obj);
+            writer();
             return pos;
         }
 

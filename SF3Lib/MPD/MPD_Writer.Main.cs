@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CommonLib.Geometry;
 using CommonLib.Imaging;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
@@ -21,7 +22,7 @@ namespace SF3.MPD {
             var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
-            var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
+            var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
             var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.LongEmptyIgnoredTextureTable);
             var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
             var skyPalettePos        = WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1    ? mpd.Planes.SkyPalette    : null);
@@ -131,7 +132,7 @@ namespace SF3.MPD {
         }
 
         public uint? WritePaletteOrNull(Palette palette)
-            => WriteObjectOrNull(palette, p => WritePalette(p));
+            => WriteObjectOrNull(() => palette != null, () => WritePalette(palette));
 
         public void WritePalette(Palette palette) {
             foreach (var channel in palette.Channels)
@@ -139,7 +140,7 @@ namespace SF3.MPD {
         }
 
         public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool writeLongEmptyData)
-            => WriteObjectOrNull(textureIds, p => WriteIgnoredTexturesTable(textureIds, writeLongEmptyData));
+            => WriteObjectOrNull(() => textureIds != null, () => WriteIgnoredTexturesTable(textureIds, writeLongEmptyData));
 
         public void WriteIgnoredTexturesTable(ushort[] textureIds, bool writeLongEmptyData) {
             foreach (var textureId in textureIds.OrderBy(x => x).ToArray())
@@ -151,6 +152,21 @@ namespace SF3.MPD {
             }
             else
                 WriteUShort(0xFFFF);
+        }
+
+        public uint? WriteBoundariesTableOrNull(IRectangleShort cameraBoundaries, IRectangleShort battleBoundaries)  
+            => WriteObjectOrNull(() => cameraBoundaries != null && battleBoundaries != null, () => WriteBoundariesTable(cameraBoundaries, battleBoundaries));
+
+        public void WriteBoundariesTable(IRectangleShort cameraBoundaries, IRectangleShort battleBoundaries) {
+            WriteShort(cameraBoundaries.X1);
+            WriteShort(cameraBoundaries.Y1);
+            WriteShort(cameraBoundaries.X2);
+            WriteShort(cameraBoundaries.Y2);
+
+            WriteShort(battleBoundaries.X1);
+            WriteShort(battleBoundaries.Y1);
+            WriteShort(battleBoundaries.X2);
+            WriteShort(battleBoundaries.Y2);
         }
     }
 }
