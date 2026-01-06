@@ -6,14 +6,14 @@ using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Imaging;
-using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelBlockResources : ResourcesBase, IMPD_FileResources {
+    public class SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
             TileX1 = (blockNum % 16) * 4;
@@ -42,24 +42,15 @@ namespace SF3.Win.OpenGL.MPD_File {
 
         private readonly float[,] _applyLightingVboData = new float[,] {{1}, {1}, {1}, {1}};
 
-        public void Update(IMPD_File mpdFile) {
+        public void Update(IMPD mpdFile) {
             Reset();
 
-            var texturesById = mpdFile.TextureChunks != null ? mpdFile.TextureChunks
-                .Where(x => x?.TextureTable != null && x.TextureTable.Collection == MPD_CollectionType.Primary)
-                .SelectMany(x => x.TextureTable)
+            var hasModel = mpdFile.Surface.HasModel;
+            var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures
                 .Where(x => !x.IsIgnored)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ID, x => x)
-                : [];
-
-            var animationsById = mpdFile.Animations != null ? mpdFile.Animations
-                .Where(x => !x.IsIgnored)
-                .GroupBy(x => x.TextureID)
-                .Select(x => x.First())
-                .ToDictionary(x => (int) x.TextureID, x => new { Textures = x.AnimationFrameTable.OrderBy(x => x.Frame).ToArray(), x.FrameTimerStart })
-                : [];
+                .ToDictionary(x => x.ID, x => x);
 
             var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
             var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventIDs);
@@ -69,7 +60,6 @@ namespace SF3.Win.OpenGL.MPD_File {
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
 
-            var textureData = mpdFile.SurfaceModelChunk?.TileTextureRowTable?.Make2DTextureData();
             for (var y = TileY1; y < TileY2; y++) {
                 for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Surface.GetTile(x, y);
@@ -78,7 +68,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     TextureRotateType rotate = TextureRotateType.NoRotation;
                     TextureFlipType   flip   = TextureFlipType.NoFlip;
 
-                    if (textureData != null) {
+                    if (hasModel) {
                         // Get texture. Fetch animated textures if possible.
                         var textureId = tile.TextureID;
                         rotate = tile.TextureRotate;
@@ -147,7 +137,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                         AddAttributes(newQuad);
                         surfaceQuads.Add(newQuad);
                     }
-                    else if (textureData != null && tile.TextureID != 0xFF) {
+                    else if (hasModel && tile.TextureID != 0xFF) {
                         var newQuad = new Quad(vertices, new Vector4(1f, 0f, 0f, 1f));
                         AddAttributes(newQuad);
                         missingSurfaceQuads.Add(newQuad);

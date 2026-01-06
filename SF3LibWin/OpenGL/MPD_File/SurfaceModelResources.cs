@@ -1,9 +1,11 @@
 ﻿using CommonLib;
 using SF3.Models.Files.MPD;
+using SF3.MPD;
+using SF3.Win.OpenGL.MPD;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD_File {
-    public class SurfaceModelResources : ResourcesBase, IMPD_FileResources {
+    public class SurfaceModelResources : ResourcesBase, IMPD_Resources {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 
@@ -39,7 +41,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 block.Reset();
         }
 
-        public void Update(IMPD_File mpdFile) {
+        public void Update(IMPD mpdFile) {
             foreach (var block in Blocks)
                 block.Update(mpdFile);
         }
