@@ -1,12 +1,12 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Win.Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 using static SF3.Win.OpenGL.Shader;
 
-namespace SF3.Win.OpenGL.MPD_File {
-    public class SkyModelResources : ResourcesBase, IMPD_FileResources {
+namespace SF3.Win.OpenGL.MPD {
+    public class SkyModelResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 
@@ -32,7 +32,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             { Corner4UVX * 2, Corner4UVY * 2 }
         };
 
-        public void Update(IMPD_File mpdFile) {
+        public void Update(IMPD mpdFile) {
             Reset();
             if (mpdFile?.Planes?.SkyImage == null || mpdFile?.Flags?.Bit_0x0800_HasCutsceneSky != true)
                 return;

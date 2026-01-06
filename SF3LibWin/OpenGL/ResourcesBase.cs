@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL {
     public abstract class ResourcesBase : IResources {
         private bool disposed = false;
 

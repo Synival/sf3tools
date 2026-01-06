@@ -7,6 +7,7 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.Win.OpenGL;
+using SF3.Win.OpenGL.MPD;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
 

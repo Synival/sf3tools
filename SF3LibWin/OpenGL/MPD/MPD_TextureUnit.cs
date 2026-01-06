@@ -1,6 +1,6 @@
 ﻿using OpenTK.Graphics.OpenGL;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL.MPD {
     public enum MPD_TextureUnit {
         TextureAtlas        = TextureUnit.Texture4,
         TextureTerrainTypes = TextureUnit.Texture5,

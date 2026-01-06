@@ -7,8 +7,9 @@ using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.MPD;
 using SF3.Win.Extensions;
+using SF3.Win.OpenGL.MPD_File;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL.MPD {
     public class CollisionResources : ResourcesBase {
         protected override void PerformInit() { }
 
@@ -52,10 +53,10 @@ namespace SF3.Win.OpenGL.MPD_File {
             float? bottomY = null;
             var zf = y / -32.0f - GeneralResources.ModelOffsetZ;
 
-            for (int ty = -1; ty <= 1; ty++) {
-                for (int tx = -1; tx <= 1; tx++) {
-                    var surfaceX = xf + 32f + (tx * 0.5f);
-                    var surfaceY = -zf + 32f + (ty * 0.5f);
+            for (var ty = -1; ty <= 1; ty++) {
+                for (var tx = -1; tx <= 1; tx++) {
+                    var surfaceX = xf + 32f + tx * 0.5f;
+                    var surfaceY = -zf + 32f + ty * 0.5f;
 
                     var tileX = (int) surfaceX;
                     var tileY = (int) surfaceY;
@@ -69,8 +70,8 @@ namespace SF3.Win.OpenGL.MPD_File {
                         var heights2 = tile.GetVertexHeight(CornerType.TopLeft)    * xInTile + tile.GetVertexHeight(CornerType.TopRight)    * (1.0f - xInTile);
                         var height = heights1 * yInTile + heights2 * (1.0f - yInTile);
 
-                        topY    = (topY == null) ? height + 1.0f : Math.Max(topY.Value, height + 1.0f);
-                        bottomY = (bottomY == null) ? height : Math.Min(bottomY.Value, height);
+                        topY    = topY == null ? height + 1.0f : Math.Max(topY.Value, height + 1.0f);
+                        bottomY = bottomY == null ? height : Math.Min(bottomY.Value, height);
                     }
                 }
             }
@@ -99,7 +100,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 // Highlight special line segments magenta/orange.
                 var color = new Vector3(
                     absSin * 0.25f + 0.75f,
-                    (!line.FlagToDisable.HasValue) ? 0.75f : 0.25f,
+                    !line.FlagToDisable.HasValue ? 0.75f : 0.25f,
                     absCos * 0.25f + 0.75f
                 );
                 var colors = new Vector3[] {
@@ -172,7 +173,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     new([polyPoints[7], polyPoints[6], polyPoints[5], polyPoints[4]]),
                 };
 
-                bool hasLines = pointsInUse.Contains(point);
+                var hasLines = pointsInUse.Contains(point);
                 var indivColors = hasLines ? indivWhiteColors : fullWhiteColors;
                 var fullColors  = hasLines ? fullWhiteColors  : fullRedColors;
 

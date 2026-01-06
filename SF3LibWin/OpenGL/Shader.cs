@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Win.OpenGL.MPD_File;
+using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL {

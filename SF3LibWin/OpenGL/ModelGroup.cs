@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL {
     public class ModelGroup : IDisposable {
         public ModelGroup(
             QuadModel solidTexturedModel,

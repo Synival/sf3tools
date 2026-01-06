@@ -9,6 +9,7 @@ using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
+using SF3.Win.OpenGL.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.MPD_File {

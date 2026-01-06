@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL {
     public interface IResources : IDisposable {
         /// <summary>
         /// Performs any one-time initialization necessary after instantiation.

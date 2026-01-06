@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Win.OpenGL.MPD_File;
+using SF3.Win.OpenGL.MPD;
 using SF3.Win.ThirdParty.TexturePacker;
 using static CommonLib.Types.CornerTypeConsts;
 
@@ -232,7 +232,7 @@ namespace SF3.Win.OpenGL {
             using (_vao.Use())
                 shader.AssignAttributes(_vbo);
 
-            using ((textureAtlas != null) ? textureAtlas.Use(MPD_File.MPD_TextureUnit.TextureAtlas) : null)
+            using ((textureAtlas != null) ? textureAtlas.Use(MPD_TextureUnit.TextureAtlas) : null)
             using (_vao.Use())
             using (_ebo.Use(BufferTarget.ElementArrayBuffer))
             using (shader.Use())

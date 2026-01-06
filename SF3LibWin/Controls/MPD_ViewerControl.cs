@@ -3,9 +3,9 @@ using System.Linq;
 using System.Windows.Forms;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
 using System.ComponentModel;
+using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
