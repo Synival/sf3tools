@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using System.Linq;
+using CommonLib.Imaging;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
 using SF3.Types;
@@ -9,6 +10,9 @@ namespace SF3.MPD {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
+            var ignoredTextureIds = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var pmc)
+                ? (pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.ID)?.ToArray() ?? null) : null;
+
             var lightPalettePos      = WritePaletteOrNull(mpd.LightPalette);
             var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
@@ -18,7 +22,7 @@ namespace SF3.MPD {
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteTableOrNull(mpd.BoundariesTable);
-            var ignoredTexturesPos   = WriteTableOrNull(mpd.IgnoredTextureTable, mpd.Settings);
+            var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.LongEmptyIgnoredTextureTable);
             var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
             var skyPalettePos        = WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1    ? mpd.Planes.SkyPalette    : null);
 
@@ -126,18 +130,27 @@ namespace SF3.MPD {
             WriteMPDPointer(boundariesPos);
         }
 
-        public uint? WritePaletteOrNull(Palette palette) {
-            if (palette == null)
-                return null;
-            var pos = (uint) CurrentOffset;
-
-            WritePalette(palette);
-            return pos;
-        }
+        public uint? WritePaletteOrNull(Palette palette)
+            => WriteObjectOrNull(palette, p => WritePalette(p));
 
         public void WritePalette(Palette palette) {
             foreach (var channel in palette.Channels)
                 WriteUShort(channel.ToABGR1555());
+        }
+
+        public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool writeLongEmptyData)
+            => WriteObjectOrNull(textureIds, p => WriteIgnoredTexturesTable(textureIds, writeLongEmptyData));
+
+        public void WriteIgnoredTexturesTable(ushort[] textureIds, bool writeLongEmptyData) {
+            foreach (var textureId in textureIds.OrderBy(x => x).ToArray())
+                WriteUShort(textureId);
+
+            if (writeLongEmptyData && textureIds.Length == 0) {
+                WriteUShort(0xFFFF);
+                WriteUShort(0xFFFF);
+            }
+            else
+                WriteUShort(0xFFFF);
         }
     }
 }

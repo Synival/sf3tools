@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using SF3.Files;
 using SF3.Models.Files.MPD;
@@ -34,6 +35,15 @@ namespace SF3.MPD {
 
         private void WriteMPDPointer(uint? offset)
             => WriteUInt(offset.HasValue ? (offset.Value + 0x290000) : 0);
+
+        private uint? WriteObjectOrNull<T>(T obj, Action<T> writer) where T : class {
+            if (obj == null)
+                return null;
+            var pos = (uint) CurrentOffset;
+
+            writer(obj);
+            return pos;
+        }
 
         public ScenarioType Scenario { get; }
     }
