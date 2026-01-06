@@ -85,9 +85,9 @@ namespace SF3.MPD {
         public void WriteBoundaries(BoundaryTable boundaries) {
             foreach (var boundary in boundaries) {
                 WriteShort(boundary.X1);
-                WriteShort(boundary.Z1);
+                WriteShort(boundary.Y1);
                 WriteShort(boundary.X2);
-                WriteShort(boundary.Z2);
+                WriteShort(boundary.Y2);
             }
         }
     }

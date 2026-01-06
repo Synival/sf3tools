@@ -6,6 +6,7 @@ using SF3.Models.Files.MPD;
 using SF3.Win.Types;
 using System.ComponentModel;
 using SF3.Win.OpenGL.MPD_File;
+using CommonLib.Geometry;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -184,12 +185,19 @@ namespace SF3.Win.Controls {
             float groundY = 0.0f;
             float centerZ = 0.0f;
 
-            if (MPD_File?.BoundariesTable?.Length >= 2) {
-                var bounds = MPD_File.BoundariesTable;
-                var x1 = bounds.Min(x => x.X1);
-                var z1 = bounds.Min(x => x.Z1);
-                var x2 = bounds.Max(x => x.X2);
-                var z2 = bounds.Max(x => x.Z2);
+            var boundaries =
+                new IRectangleShort[] {
+                    MPD_File.CameraBoundaries,
+                    MPD_File.BattleCursorBoundaries
+                }
+                .Where(x => x != null)
+                .ToArray();
+
+            if (boundaries.Length > 0) {
+                var x1 = boundaries.Min(x => x.X1);
+                var z1 = boundaries.Min(x => x.Y1);
+                var x2 = boundaries.Max(x => x.X2);
+                var z2 = boundaries.Max(x => x.Y2);
 
                 width   = (x2 - x1) / 32.00f;
                 depth   = (z2 - z1) / 32.00f;

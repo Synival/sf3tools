@@ -14,6 +14,7 @@ using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.MPD.Main;
 using SF3.Models.Tables.MPD.Animation;
 using CommonLib.Imaging;
+using CommonLib.Geometry;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -83,6 +84,8 @@ namespace SF3.Models.Files.MPD {
 
         public Palette TexturePalette => TexturePaletteColorTable?.Palette;
         public Palette LightPalette => LightPaletteColorTable?.Palette;
+        public IRectangleShort CameraBoundaries => (BoundariesTable?.Length >= 1) ? BoundariesTable[0] : null;
+        public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
 
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }

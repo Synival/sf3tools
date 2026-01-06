@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CommonLib.Geometry;
 using CommonLib.Imaging;
 using SF3.Types;
 
@@ -48,5 +49,15 @@ namespace SF3.MPD {
         /// Collection of all collision lines in the MPD.
         /// </summary>
         IMPD_Collisions Collisions { get; }
+
+        /// <summary>
+        /// 2D boundary box that the game camera will force itself into.
+        /// </summary>
+        IRectangleShort CameraBoundaries { get; }
+
+        /// <summary>
+        /// 2D boundary box that the free-movable cursor in battle will force itself into.
+        /// </summary>
+        IRectangleShort BattleCursorBoundaries { get; }
     }
 }

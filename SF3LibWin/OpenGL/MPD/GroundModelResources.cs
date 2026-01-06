@@ -6,11 +6,11 @@ using CommonLib.Logging;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Win.Extensions;
 
-namespace SF3.Win.OpenGL.MPD_File {
-    public class GroundModelResources : ResourcesBase, IMPD_FileResources {
+namespace SF3.Win.OpenGL.MPD {
+    public class GroundModelResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 
@@ -22,7 +22,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             Texture = null;
         }
 
-        public void Update(IMPD_File mpdFile) {
+        public void Update(IMPD mpdFile) {
             Reset();
             if (mpdFile?.Planes?.GroundImage != null && mpdFile.Flags.Bit_0x0400_HasGroundImage) {
                 try {
@@ -42,7 +42,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             }
         }
 
-        private void CreateGroundImageModel(IMPD_File mpdFile, ITextureData texture, float size) {
+        private void CreateGroundImageModel(IMPD mpdFile, ITextureData texture, float size) {
             Texture = new Texture(texture.CreateBitmapARGB8888(), clampToEdge: false);
 
             var planes = mpdFile.Planes;
@@ -98,16 +98,16 @@ namespace SF3.Win.OpenGL.MPD_File {
             Model = new QuadModel([quad]);
         }
 
-        private void MoveToMostIdealCameraBoundaries(IMPD_File mpdFile, ref Vector3 position) {
-            if (mpdFile.BoundariesTable?.Length == 0)
+        private void MoveToMostIdealCameraBoundaries(IMPD mpdFile, ref Vector3 position) {
+            var cameraBoundaries = mpdFile.CameraBoundaries;
+            if (cameraBoundaries == null)
                 return;
-            var cameraBoundaries = mpdFile.BoundariesTable[0];
 
-            float centerX = 0.0f;
-            float centerZ = 0.0f;
+            var centerX = 0.0f;
+            var centerZ = 0.0f;
             try {
-                centerX =   (cameraBoundaries.X1 + cameraBoundaries.X2) / 2.0f / 32.0f - 32.0f;
-                centerZ = -((cameraBoundaries.Z1 + cameraBoundaries.Z2) / 2.0f / 32.0f - 32.0f);
+                centerX =   cameraBoundaries.Width  / 2.0f / 32.0f - 32.0f;
+                centerZ = -(cameraBoundaries.Height / 2.0f / 32.0f - 32.0f);
             }
             catch {
                 // TODO: some error when reading camera bounds. What to do here???
