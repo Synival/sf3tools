@@ -97,7 +97,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public bool PixelFormatKnown { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.75f)]
-        public bool IsIgnored => MPD_File.IgnoredTextureTable?.ContainsTextureID(ID) ?? false;
+        public bool IsIgnored => Collection == MPD_CollectionType.Primary && (MPD_File.IgnoredTextureTable?.ContainsTextureID(ID) ?? false);
 
         public IMPD_File MPD_File { get; }
 
