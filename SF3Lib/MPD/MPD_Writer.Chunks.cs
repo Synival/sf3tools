@@ -36,10 +36,10 @@ namespace SF3.MPD {
             WriteSurfaceDataChunk(mpd.Surface);
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
-            IEnumerable<IMPD_Texture> GetTexturesForCollection(MPD_CollectionType collection) {
+            IEnumerable<IMPD_AnimatableTexture> GetTexturesForCollection(MPD_CollectionType collection) {
                 if (!mpd.ModelCollections.TryGetValue(collection, out mc))
-                    return new IMPD_AnimationFrame[0];
-                return mc.Textures ?? new IMPD_AnimationFrame[0];
+                    return new IMPD_AnimatableTexture[0];
+                return mc.Textures ?? new IMPD_AnimatableTexture[0];
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.

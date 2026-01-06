@@ -32,7 +32,7 @@ namespace SF3.MPD {
         /// <summary>
         /// All textures associated with this collection.
         /// </summary>
-        IEnumerable<IMPD_Texture> Textures { get; }
+        IEnumerable<IMPD_AnimatableTexture> Textures { get; }
 
         /// <summary>
         /// When 'true', this model is serialized but not referenced in the MPD header.

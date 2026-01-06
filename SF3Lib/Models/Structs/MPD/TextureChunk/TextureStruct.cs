@@ -11,7 +11,7 @@ using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.TextureChunk {
-    public class TextureStruct : TextureStructBase, IMPD_Texture {
+    public class TextureStruct : TextureStructBase, IMPD_AnimatableTexture {
         private readonly int _widthAddr;
         private readonly int _heightAddr;
         private readonly int _imageDataOffsetAddr;
@@ -99,6 +99,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [TableViewModelColumn(addressField: null, displayOrder: 2.75f)]
         public bool IsIgnored => Collection == MPD_CollectionType.Primary && (MPD_File.IgnoredTextureTable?.ContainsTextureID(ID) ?? false);
 
+        [TableViewModelColumn(addressField: null, displayOrder: 10)]
+        public bool HasAnimation => Animation != null;
+
         public IMPD_File MPD_File { get; }
 
         protected override Palette StructPalette {
@@ -114,5 +117,18 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public string ImportExportName { get; }
 
         public override bool CanLoadImage => true;
+
+        public IMPD_Animation Animation {
+            get {
+                if (Collection != MPD_CollectionType.Primary)
+                    return null;
+
+                // TODO: cache this, omg
+                var animations = MPD_File.Animations;
+                if (animations == null)
+                    return null;
+                return animations.FirstOrDefault(x => x.TextureID == ID);
+            }
+        }
     }
 }

@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
+using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.Animation;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class AnimationStruct : Struct {
+    public class AnimationStruct : Struct, IMPD_Animation {
         private readonly int _textureIdAddr;
         private readonly int _widthAddr;
         private readonly int _heightAddr;
@@ -40,11 +44,31 @@ namespace SF3.Models.Structs.MPD.Animation {
             }
 
             Size = pos - Address;
+
+            if (AnimationFrameTable == null)
+                _frameByTimeFrame = new IMPD_AnimationFrame[0];
+            else {
+                _frameByTimeFrame = new IMPD_AnimationFrame[AnimationFrameTable.Sum(x => Math.Max(0, x.Duration))];
+                var frameCounter = 0;
+                foreach (var frame in AnimationFrameTable) {
+                    for (var i = 0; i < frame.Duration; i++)
+                        _frameByTimeFrame[frameCounter++] = frame;
+                }
+            }
         }
 
         public bool Is32Bit { get; }
         public IMPD_File MPD_File { get; }
         public int FramesAddress { get; }
+
+        public IMPD_AnimationFrame GetFrame(int timeFrame) {
+            return
+                AnimationFrameTable.Length == 0 ? null :
+                _frameByTimeFrame.Length == 0 ? AnimationFrameTable[0] :
+                _frameByTimeFrame[MathHelpers.ActualMod(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
+        }
+
+        public IMPD_AnimationFrame[] Frames => AnimationFrameTable.Rows;
 
         public uint TextureIDRaw {
             get => Data.GetData(_textureIdAddr, _bytesPerProperty);
@@ -100,5 +124,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         private readonly int _bytesPerProperty;
         private readonly uint _textureEndId;
         private readonly uint _frameEndOffset;
+
+        private readonly IMPD_AnimationFrame[] _frameByTimeFrame;
     }
 }

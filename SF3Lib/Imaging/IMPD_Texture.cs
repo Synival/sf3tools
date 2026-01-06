@@ -20,7 +20,7 @@ namespace SF3.Imaging {
     }
 
     /// <summary>
-    /// Interface for any object that contains texture data.
+    /// Interface for textures stored in an MPD.
     /// </summary>
     public interface IMPD_Texture : ITextureData {
         /// <summary>

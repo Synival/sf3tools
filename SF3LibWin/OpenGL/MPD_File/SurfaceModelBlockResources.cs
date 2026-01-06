@@ -84,12 +84,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                         rotate = tile.TextureRotate;
                         flip = tile.TextureFlip;
 
-                        if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
-                            if (animationsById.ContainsKey(textureId))
-                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart, mpdFile);
-                            else if (texturesById.ContainsKey(textureId))
-                                anim = new MPD_MockAnimation(texturesById[textureId]);
-                        }
+                        if (textureId != 0xFF && texturesById.ContainsKey(textureId))
+                            if (texturesById.TryGetValue(textureId, out var tex))
+                                anim = tex.Animation ?? new MPD_MockAnimation(texturesById[textureId]);
                     }
 
                     var vertexNormals = tile.GetVector3Normals();

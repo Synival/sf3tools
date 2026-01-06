@@ -21,8 +21,8 @@ namespace SF3.Models.Files.MPD {
 
         public ISGL_Model GetModel(int id) => null;
 
-        private IMPD_Texture[] _textures = null;
-        public IEnumerable<IMPD_Texture> Textures {
+        private IMPD_AnimatableTexture[] _textures = null;
+        public IEnumerable<IMPD_AnimatableTexture> Textures {
             get {
                 if (_textures == null) {
                     _textures = MPD_File.TextureChunks

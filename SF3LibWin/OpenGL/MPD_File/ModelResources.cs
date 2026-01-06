@@ -42,29 +42,10 @@ namespace SF3.Win.OpenGL.MPD_File {
                 SGL_ModelsByIDByCollection[collection] = [];
         }
 
-        public struct ModelAnimationInfo {
-            public IMPD_AnimationFrame[] Textures;
-            public int FrameTimerStart;
-        }
-
-        private Dictionary<int, IMPD_Texture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
+        private Dictionary<int, IMPD_AnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
             return modelCollection.Textures
                 .Where(x => !x.IsIgnored)
                 .ToDictionary(x => x.ID, x => x);
-        }
-
-        private Dictionary<int, ModelAnimationInfo> GetAnimationDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
-            if (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.Animations == null)
-                return [];
-
-            return mpdFile.Animations
-                .Where(x => !x.IsIgnored)
-                .GroupBy(x => x.TextureID)
-                .Select(x => x.First())
-                .ToDictionary(x => (int) x.TextureID, x => new ModelAnimationInfo {
-                    Textures = x.AnimationFrameTable.OrderBy(x => x.Frame).ToArray(),
-                    FrameTimerStart = x.FrameTimerStart
-                });
         }
 
         public void Update(IMPD_File mpdFile) {
@@ -110,7 +91,6 @@ namespace SF3.Win.OpenGL.MPD_File {
                     .ToArray();
 
                 var texturesById = GetTextureDictionaryByCollection(mc, mpdFile);
-                var animationsById = GetAnimationDictionaryByCollection(mc, mpdFile);
 
                 foreach (var id in uniqueModelIDs) {
                     if (id == -1)
@@ -126,7 +106,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     if (!mc.IsHeaderModelCollection()) {
                         bool isForcedSemiTransparent = modelsWith2000Tag.Contains(id);
                         bool isHideMesh = modelsWith3000Tag.Contains(id);
-                        CreateAndAddQuadModels(mpdFile, mc.Collection, sglModel, texturesById, animationsById, isForcedSemiTransparent, isHideMesh);
+                        CreateAndAddQuadModels(mpdFile, mc.Collection, sglModel, texturesById, isForcedSemiTransparent, isHideMesh);
                     }
                 }
             }
@@ -147,9 +127,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             SGL_ModelsByIDByCollection[models.Collection][sglModel.ID] = sglModel;
 
             var texturesById = GetTextureDictionaryByCollection(models, mpdFile);
-            var animationsById = GetAnimationDictionaryByCollection(models, mpdFile);
-
-            CreateAndAddQuadModels(mpdFile, models.Collection, sglModel, texturesById, animationsById, forceSemiTransparent, isHideMesh);
+            CreateAndAddQuadModels(mpdFile, models.Collection, sglModel, texturesById, forceSemiTransparent, isHideMesh);
 
             var modelInstance = new MPD_ModelInstance() {
                 Collection = models.Collection,
@@ -172,8 +150,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             IMPD_File mpdFile,
             MPD_CollectionType modelCollection,
             ISGL_Model sglModel,
-            Dictionary<int, IMPD_Texture> texturesById,
-            Dictionary<int, ModelAnimationInfo> animationsById,
+            Dictionary<int, IMPD_AnimatableTexture> texturesById,
             bool forceSemiTransparent,
             bool isHideMesh
         ) {
@@ -230,14 +207,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                         color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
                     }
                     else {
-                        if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
-                            if (animationsById.ContainsKey(textureId))
-                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart, mpdFile);
-                            else if (texturesById.ContainsKey(textureId)) {
-                                var tex = texturesById[textureId];
-                                anim = new MPD_MockAnimation(tex);
-                            }
-                        }
+                        if (textureId != 0xFF && texturesById.ContainsKey(textureId))
+                            if (texturesById.TryGetValue(textureId, out var tex))
+                                anim = tex.Animation ?? new MPD_MockAnimation(tex);
 
                         // If the texture is missing, mark this polygon bright red.
                         if (anim == null) {
