@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
@@ -48,7 +47,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             public int FrameTimerStart;
         }
 
-        private Dictionary<int, IMPD_Texture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
+        private Dictionary<int, IMPD_Texture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
             return modelCollection.Textures
                 .Where(x => !x.IsIgnored)
                 .ToDictionary(x => x.ID, x => x);

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using CommonLib;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Win.Extensions;
 using SF3.Win.Properties;
 using static CommonLib.Types.CornerTypeConsts;
@@ -48,27 +48,27 @@ namespace SF3.Win.OpenGL.MPD_File {
             // Nothing loaded dynamically, so nothing to reset.
         }
 
-        public void UpdateTileHoverModel(IMPD_File mpdFile, GeneralResources world, Point? tilePos) {
+        public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, Point? tilePos) {
             TileHoverModel?.Dispose();
             if (TileHoverModel != null)
                 Models.Remove(TileHoverModel);
             TileHoverModel = null;
 
             if (tilePos != null) {
-                var tile = mpdFile.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
+                var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
                 var quad = new Quad(tile.GetVector3Vertices());
                 Models.Add(TileHoverModel = new QuadModel([quad]));
             }
         }
 
-        public void UpdateTileSelectedModel(IMPD_File mpdFile, GeneralResources world, Point? tilePos) {
+        public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, Point? tilePos) {
             TileSelectedModel?.Dispose();
             if (TileSelectedModel != null)
                 Models.Remove(TileSelectedModel);
             TileSelectedModel = null;
 
             if (tilePos != null) {
-                var tile = mpdFile.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
+                var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
                 var quad = new Quad(tile.GetVector3Vertices(2.00f));
                 Models.Add(TileSelectedModel = new QuadModel([quad]));
             }
