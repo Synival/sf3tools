@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             IByteData data, MPD_CollectionType collection, int id, string name, int address,
             TexturePixelFormat? pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
         ) : base(
-            data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset),
+            data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset ?? data.Length),
             isCompressed: false, zeroIsTransparent: true
         ) {
             Collection       = collection;
@@ -97,7 +97,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         public bool PixelFormatKnown { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.75f)]
-        public bool IsIgnored => MPD_File.IgnoredTextureTable.ContainsTextureID(ID);
+        public bool IsIgnored => MPD_File.IgnoredTextureTable?.ContainsTextureID(ID) ?? false;
 
         public IMPD_File MPD_File { get; }
 

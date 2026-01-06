@@ -24,5 +24,10 @@ namespace SF3.Imaging {
         /// Collection of all frames contained in the animation.
         /// </summary>
         IMPD_AnimationFrame[] Frames { get; }
+
+        /// <summary>
+        /// When 'true', the texture for this animation is not allocated in VRAM and should not be used.
+        /// </summary>
+        bool IsIgnored { get; }
     }
 }

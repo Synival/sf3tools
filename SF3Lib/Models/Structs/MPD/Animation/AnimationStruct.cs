@@ -90,6 +90,10 @@ namespace SF3.Models.Structs.MPD.Animation {
         [TableViewModelColumn(addressField: null, displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
         public int NumFrames => AnimationFrameTable?.Length ?? 0;
 
+        [BulkCopy]
+        [TableViewModelColumn(displayOrder: 5)]
+        public bool IsIgnored => MPD_File.IgnoredTextureTable?.ContainsTextureID(TextureID) ?? false;
+
         [BulkCopyRecurse]
         public AnimationFrameTable AnimationFrameTable { get; } = null;
 

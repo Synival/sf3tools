@@ -49,12 +49,8 @@ namespace SF3.Win.OpenGL.MPD_File {
         }
 
         private Dictionary<int, IMPD_Texture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD_File mpdFile) {
-            var skippedTextures = 
-                (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.IgnoredTextureTable == null) ? []
-                : mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToHashSet();
-
             return modelCollection.Textures
-                .Where(x => !skippedTextures.Contains(x.ID))
+                .Where(x => !x.IsIgnored)
                 .ToDictionary(x => x.ID, x => x);
         }
 
@@ -62,12 +58,8 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (modelCollection.Collection != MPD_CollectionType.Primary || mpdFile.Animations == null)
                 return [];
 
-            var skippedTextures =
-                (mpdFile.IgnoredTextureTable == null) ? []
-                : mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToHashSet();
-
             return mpdFile.Animations
-                .Where(x => !skippedTextures.Contains(x.ID))
+                .Where(x => !x.IsIgnored)
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
                 .ToDictionary(x => (int) x.TextureID, x => new ModelAnimationInfo {
@@ -241,7 +233,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                     else {
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart, mpdFile);
                             else if (texturesById.ContainsKey(textureId)) {
                                 var tex = texturesById[textureId];
                                 anim = new MPD_MockAnimation(tex);

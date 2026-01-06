@@ -89,7 +89,7 @@ namespace SF3.Win.OpenGL.MPD_File {
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId)) {
                             if (animationsById.ContainsKey(textureId))
-                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart);
+                                anim = new MPD_Animation(textureId, animationsById[textureId].Textures, animationsById[textureId].FrameTimerStart, mpdFile);
                             else if (texturesById.ContainsKey(textureId))
                                 anim = new MPD_MockAnimation(texturesById[textureId]);
                         }

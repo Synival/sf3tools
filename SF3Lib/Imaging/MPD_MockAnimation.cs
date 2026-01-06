@@ -14,5 +14,6 @@ namespace SF3.Imaging {
         public int FrameTimerStart => 0;
 
         public IMPD_AnimationFrame[] Frames { get; }
+        public bool IsIgnored => Frames[0].IsIgnored;
     }
 }
