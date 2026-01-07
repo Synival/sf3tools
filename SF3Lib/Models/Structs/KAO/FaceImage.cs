@@ -75,7 +75,25 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        [TableViewModelColumn(displayOrder: 3, minWidth: 50)]
+        [TableViewModelColumn(displayOrder: 3, displayName: "RelX", minWidth: 50)]
+        public int RelativeX {
+            get => Header.GetLayerRelativeX(Layer);
+            set {
+                if (Layer != 0)
+                    Header.SetLayerRelativeX(Layer, value);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 4, displayName: "RelY", minWidth: 50)]
+        public int RelativeY {
+            get => Header.GetLayerRelativeY(Layer);
+            set {
+                if (Layer != 0)
+                    Header.SetLayerRelativeY(Layer, value);
+            }
+        }
+
+        [TableViewModelColumn(displayOrder: 4.1f, minWidth: 50)]
         public int X {
             get => Header.GetLayerX(Layer);
             set {
@@ -84,7 +102,7 @@ namespace SF3.Models.Structs.KAO {
             }
         }
 
-        [TableViewModelColumn(displayOrder: 4, minWidth: 50)]
+        [TableViewModelColumn(displayOrder: 4.2f, minWidth: 50)]
         public int Y {
             get => Header.GetLayerY(Layer);
             set {

@@ -84,17 +84,6 @@ namespace SF3.Models.Structs.KAO {
             return compositeImageData;
         }
 
-        public static (int X, int Y) GetFaceImageOffset(int baseWidth, int baseHeight, FaceImage addImage) {
-            var addData   = addImage?.ImageData8Bit;
-            var addWidth  = addData.GetLength(0);
-            var addHeight = addData.GetLength(1);
-
-            var offsetX = baseWidth / 2  - addWidth / 2  + addImage.X;
-            var offsetY = baseHeight / 2 - addHeight / 2 + addImage.Y;
-
-            return (offsetX, offsetY);
-       }
-
         public static void AddFaceImageToData(byte[,] data, FaceImage image) {
             if (image?.ImageData8Bit == null)
                 return;
@@ -106,7 +95,7 @@ namespace SF3.Models.Structs.KAO {
             var addWidth  = addData.GetLength(0);
             var addHeight = addData.GetLength(1);
 
-            var (offsetX, offsetY) = GetFaceImageOffset(width, height, image);
+            var (offsetX, offsetY) = (image.X, image.Y);
             var toY = offsetY;
             for (int fromY = 0; fromY < addHeight; fromY++, toY++) {
                 var toX = offsetX;
@@ -148,7 +137,7 @@ namespace SF3.Models.Structs.KAO {
             data = ImageUtils.Create8BitImageDataWithoutTransparency(data, Chunk.Palette);
 
             // Only set differences
-            var (offsetX, offsetY) = GetFaceImageOffset(baseWidth, baseHeight, layerImage);
+            var (offsetX, offsetY) = (layerImage.X, layerImage.Y);
             var (compareX, compareY) = (0, offsetY);
             for (int toY = 0; toY < layerHeight; toY++, compareY++) {
                 compareX = offsetX;

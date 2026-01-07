@@ -23,10 +23,10 @@ namespace SF3.Models.Structs.KAO {
         private readonly int _layer2WidthAddr;
         private readonly int _layer2HeightAddr;
 
-        private readonly int _layer1XAddr;
-        private readonly int _layer1YAddr;
-        private readonly int _layer2XAddr;
-        private readonly int _layer2YAddr;
+        private readonly int _layer1RelativeXAddr;
+        private readonly int _layer1RelativeYAddr;
+        private readonly int _layer2RelativeXAddr;
+        private readonly int _layer2RelativeYAddr;
 
         public FaceHeader(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x22) {
             _widthAddr         = Address + 0x00; // 2 bytes
@@ -48,10 +48,10 @@ namespace SF3.Models.Structs.KAO {
             _layer2WidthAddr   = Address + 0x1A; // 2 bytes
             _layer2HeightAddr  = Address + 0x1C; // 2 bytes
 
-            _layer1XAddr       = Address + 0x1E; // 1 byte
-            _layer1YAddr       = Address + 0x1F; // 1 byte
-            _layer2XAddr       = Address + 0x20; // 1 byte
-            _layer2YAddr       = Address + 0x21; // 1 byte
+            _layer1RelativeXAddr = Address + 0x1E; // 1 byte
+            _layer1RelativeYAddr = Address + 0x1F; // 1 byte
+            _layer2RelativeXAddr = Address + 0x20; // 1 byte
+            _layer2RelativeYAddr = Address + 0x21; // 1 byte
         }
 
         public short GetLayerOffset(int layer, int index) {
@@ -94,6 +94,30 @@ namespace SF3.Models.Structs.KAO {
                 Layer1Height = (ushort) value;
             else if (layer == 2)
                 Layer2Height = (ushort) value;
+            else
+                throw new ArgumentOutOfRangeException(nameof(layer));
+        }
+
+        public int GetLayerRelativeX(int layer) 
+            => (layer == 0) ? 0 : (layer == 1) ? Layer1RelativeX : (layer == 2) ? Layer2RelativeX : throw new ArgumentOutOfRangeException(nameof(layer));
+
+        public void SetLayerRelativeX(int layer, int value) {
+            if (layer == 1)
+                Layer1RelativeX = (sbyte) value;
+            else if (layer == 2)
+                Layer2RelativeX = (sbyte) value;
+            else
+                throw new ArgumentOutOfRangeException(nameof(layer));
+        }
+
+        public int GetLayerRelativeY(int layer) 
+            => (layer == 0) ? 0 : (layer == 1) ? Layer1RelativeY : (layer == 2) ? Layer2RelativeY : throw new ArgumentOutOfRangeException(nameof(layer));
+
+        public void SetLayerRelativeY(int layer, int value) {
+            if (layer == 1)
+                Layer1RelativeY = (sbyte) value;
+            else if (layer == 2)
+                Layer2RelativeY = (sbyte) value;
             else
                 throw new ArgumentOutOfRangeException(nameof(layer));
         }
@@ -238,32 +262,56 @@ namespace SF3.Models.Structs.KAO {
             set => Data.SetWord(_layer2HeightAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_layer1XAddr), displayOrder: 16, displayName: "L1_X")]
+        [TableViewModelColumn(addressField: nameof(_layer1RelativeXAddr), displayOrder: 16, displayName: "L1_RelX")]
         [BulkCopy]
+        public sbyte Layer1RelativeX {
+            get => (sbyte) Data.GetByte(_layer1RelativeXAddr);
+            set => Data.SetByte(_layer1RelativeXAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_layer1RelativeYAddr), displayOrder: 17, displayName: "L1_RelY")]
+        [BulkCopy]
+        public sbyte Layer1RelativeY {
+            get => (sbyte) Data.GetByte(_layer1RelativeYAddr);
+            set => Data.SetByte(_layer1RelativeYAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_layer2RelativeXAddr), displayOrder: 18, displayName: "L2_RelX")]
+        [BulkCopy]
+        public sbyte Layer2RelativeX {
+            get => (sbyte) Data.GetByte(_layer2RelativeXAddr);
+            set => Data.SetByte(_layer2RelativeXAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 19, displayName: "L2_RelY")]
+        [BulkCopy]
+        public sbyte Layer2RelativeY {
+            get => (sbyte) Data.GetByte(_layer2RelativeYAddr);
+            set => Data.SetByte(_layer2RelativeYAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 20, displayName: "L1_X")]
         public sbyte Layer1X {
-            get => (sbyte) Data.GetByte(_layer1XAddr);
-            set => Data.SetByte(_layer1XAddr, (byte) value);
+            get => (sbyte) ((Width - Layer1Width) / 2 + Layer1RelativeX);
+            set => Layer1RelativeX = (sbyte) (value - (Width - Layer1Width) / 2);
         }
 
-        [TableViewModelColumn(addressField: nameof(_layer1YAddr), displayOrder: 17, displayName: "L1_Y")]
-        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 21, displayName: "L1_Y")]
         public sbyte Layer1Y {
-            get => (sbyte) Data.GetByte(_layer1YAddr);
-            set => Data.SetByte(_layer1YAddr, (byte) value);
+            get => (sbyte) ((Height - Layer1Height) / 2 + Layer1RelativeY);
+            set => Layer1RelativeY = (sbyte) (value - (Height - Layer1Height) / 2);
         }
 
-        [TableViewModelColumn(addressField: nameof(_layer2XAddr), displayOrder: 18, displayName: "L2_X")]
-        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 22, displayName: "L2_X")]
         public sbyte Layer2X {
-            get => (sbyte) Data.GetByte(_layer2XAddr);
-            set => Data.SetByte(_layer2XAddr, (byte) value);
+            get => (sbyte) ((Width - Layer2Width) / 2 + Layer2RelativeX);
+            set => Layer2RelativeX = (sbyte) (value - (Width - Layer2Width) / 2);
         }
 
-        [TableViewModelColumn(addressField: nameof(_layer2YAddr), displayOrder: 19, displayName: "L2_Y")]
-        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 23, displayName: "L2_Y")]
         public sbyte Layer2Y {
-            get => (sbyte) Data.GetByte(_layer2YAddr);
-            set => Data.SetByte(_layer2YAddr, (byte) value);
+            get => (sbyte) ((Height - Layer2Height) / 2 + Layer2RelativeY);
+            set => Layer2RelativeY = (sbyte) (value - (Height - Layer2Height) / 2);
         }
 
         public EventHandler OnDimensionsChanged;
