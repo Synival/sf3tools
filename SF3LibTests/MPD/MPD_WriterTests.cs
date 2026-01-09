@@ -1,4 +1,5 @@
-﻿using SF3.Models.Files.MPD;
+﻿using CommonLib.Arrays;
+using SF3.Models.Files.MPD;
 using SF3.MPD;
 using SF3.Types;
 using static SF3.Tests.Utils.DataUtils;
@@ -36,6 +37,9 @@ namespace SF3.Tests.MPD {
                 // Insignificant texture Chunk[18] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x1EDE6, Size = 1 },
             ]);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile);
         }
 
         [TestMethod]
@@ -61,6 +65,9 @@ namespace SF3.Tests.MPD {
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
             ]);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile);
         }
 
         [TestMethod]
@@ -97,6 +104,9 @@ namespace SF3.Tests.MPD {
                 new ByteComparisonSkipRegion { Offset = 0x18DDD, Size = 2 },
                 new ByteComparisonSkipRegion { Offset = 0x18DF2, Size = 2 },
             ]);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile);
         }
 
         [TestMethod]
@@ -132,6 +142,11 @@ namespace SF3.Tests.MPD {
                 // Image data LZSS issue
                 new ByteComparisonSkipRegion { Offset = 0x24515, Size = 1 },
             ]);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile, new Dictionary<int, ByteComparisonSkipRegion[]> {
+                {2, [new ByteComparisonSkipRegion { Offset = 0x134B7, Size = 0x500 }]}
+            });
         }
 
         [TestMethod]
@@ -161,6 +176,9 @@ namespace SF3.Tests.MPD {
                 new ByteComparisonSkipRegion { Offset = 0x2042C, Size = 2 },
                 new ByteComparisonSkipRegion { Offset = 0x21560, Size = 2 },
             ]);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile);
         }
 
         [TestMethod]
@@ -182,8 +200,16 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes("BAL_3_Test.MPD", outputData);
 
-            AssertMPDByteComparison(file, outputData, [
-            ]);
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+                { 1, new ByteComparisonSkipRegion[] {
+                    // There's exactly one more collision line that screws up the table...
+                    new ByteComparisonSkipRegion() { Offset = 0x1442C, Size = 0x1C0 },
+
+                    // ...and here it is.
+                    new ByteComparisonSkipRegion() { Offset = 0x14A0C, Size = 2, ActualDataExtraBytes = 2 },
+                }}
+            });
         }
 
         [Ignore("Works great but takes too long!")]

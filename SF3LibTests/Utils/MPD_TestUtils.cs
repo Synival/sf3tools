@@ -24,16 +24,6 @@ namespace SF3.Tests.Utils {
             AssertByteComparison(file.Data.GetDataCopyOrReference(), outputData, skipRegions, acceptablePercentage);
         }
 
-        public static void AssertByteComparison(byte[] fileData, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
-            var errors = ByteComparisonErrors(fileData, outputData, out var percentageCorrect, skipRegions) ?? [];
-            if (percentageCorrect >= acceptablePercentage) {
-                foreach (var error in errors)
-                    System.Diagnostics.Debug.WriteLine(error);
-            }
-            else if (errors.Count > 0)
-                Assert.Fail(string.Join("\r\n", errors));
-        }
-
         /// <summary>
         /// There are several specific things that the MPD_Writer can't get right, 99% of which are extremely minor
         /// inconsistencies in LZSS compression. This will fetch them so they don't have to be added manually every
@@ -89,6 +79,82 @@ namespace SF3.Tests.Utils {
                 var mpd = MakeMPD_File(scenario, testCase.Filename);
                 action(mpd);
             });
+        }
+
+        public static void AssertMPD_FilesHaveSameContent(MPD_File expectedFile, MPD_File actualFile, Dictionary<int, ByteComparisonSkipRegion[]> skipRegionsByChunk = null) {
+            var exceptionsCaught = new List<Exception>();
+            void CollectException(Action action) {
+                try {
+                    action();
+                }
+                catch (Exception ex) {
+                    exceptionsCaught.Add(ex);
+                }
+            }
+
+            ByteComparisonSkipRegion[]? GetSkipRegions(int chunk) {
+                if (skipRegionsByChunk == null)
+                    return null;
+                return skipRegionsByChunk.TryGetValue(chunk, out var bcsr) ? bcsr : null;
+            }
+
+            // Main/header content from 0x0000 - 0x2000 should be identical.
+            CollectException(() => AssertByteComparison(
+                expectedFile.Data.GetDataCopyAt(0, 0x2000),
+                actualFile.Data.GetDataCopyAt(0, 0x2000),
+                0, "Main/Header Region",
+                GetSkipRegions(-1) // Chunk -1 is a big dumb hack for the main/header area.
+            ));
+
+            // Scenario should be the same.
+            CollectException(() => Assert.AreEqual(expectedFile.Scenario, actualFile.Scenario, $"Scenario is different: expected={expectedFile.Scenario}, actual={actualFile.Scenario}"));
+
+            // Go chunk by chunk.
+            var expectedChunkCount = expectedFile.ChunkData.Length;
+            var actualChunkCount   = actualFile.ChunkData.Length;
+            CollectException(() => Assert.AreEqual(expectedChunkCount, actualChunkCount, $"ChunkData.Length's are different: should be {expectedChunkCount}, is {actualChunkCount}"));
+
+            for (int i = 0; i < expectedChunkCount; i++) {
+                var expectedChunkInfo = expectedFile.ChunkLocations[i];
+                var actualChunkInfo   = actualFile.ChunkLocations[i];
+
+                CollectException(() => Assert.AreEqual(expectedChunkInfo.Exists, actualChunkInfo.Exists, $"Inconsistent Chunk[{i}].Exists: expected={expectedChunkInfo.Exists}, actual={actualChunkInfo.Exists}"));
+                if (!expectedChunkInfo.Exists && actualChunkInfo.Exists == false)
+                    continue;
+
+                CollectException(() => Assert.AreEqual(expectedChunkInfo.ChunkType, actualChunkInfo.ChunkType, $"Inconsistent Chunk[{i}].ChunkType: expected={expectedChunkInfo.ChunkType}, actual={actualChunkInfo.ChunkType}"));
+
+                var skipRegions = GetSkipRegions(i);
+                var expectedSize = expectedChunkInfo.DecompressedSize + ((skipRegions != null) ? skipRegions.Sum(x => x.ActualDataExtraBytes) : 0);
+                var actualSize   = actualChunkInfo.DecompressedSize;
+
+                CollectException(() => Assert.AreEqual(expectedSize, actualSize,
+                    $"Inconsistent Chunk[{i}].DecompressedSize: expected={expectedSize} ({expectedSize:X4}), actual={actualSize} ({actualSize:X4})"));
+
+                var expectedChunkData = expectedFile.ChunkData[i];
+                var actualChunkData   = actualFile.ChunkData[i];
+                Assert.IsNotNull(expectedChunkData, $"Internal logic error: {nameof(expectedChunkData)} should not be null!");
+                Assert.IsNotNull(actualChunkData,   $"Internal logic error: {nameof(actualChunkData)} should not be null!");
+
+                var expectedChunkByteData = expectedChunkData.DecompressedData.Data.GetDataCopyOrReference();
+                var actualChunkByteData   = actualChunkData.DecompressedData.Data.GetDataCopyOrReference();
+                var reportOffset = actualChunkData.IsCompressed ? 0 : actualChunkInfo.ChunkFileAddress;
+                var reportInfo = actualChunkData.IsCompressed
+                    ? $"Chunk[{i}] (compressed data)"
+                    : $"Chunk[{i}] (uncompressed data -- actual offset is 0x{reportOffset:X4}";
+
+                CollectException(() => AssertByteComparison(
+                    expectedChunkByteData,
+                    actualChunkByteData,
+                    reportOffset, reportInfo,
+                    skipRegions
+                ));
+            }
+
+            if (exceptionsCaught.Count == 1)
+                throw exceptionsCaught[0];
+            else if (exceptionsCaught.Count > 1)
+                throw new AggregateException(string.Join("\r\n", exceptionsCaught.Select(x => x.Message)));
         }
     }
 }
