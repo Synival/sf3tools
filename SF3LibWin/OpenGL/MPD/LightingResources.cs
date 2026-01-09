@@ -43,9 +43,15 @@ namespace SF3.Win.OpenGL.MPD {
             if (lightPal == null)
                 return null;
 
-            var adjR = (paletteAdjustment?.LightRAdjustment ?? 0) * 255 / 31;
-            var adjG = (paletteAdjustment?.LightGAdjustment ?? 0) * 255 / 31;
-            var adjB = (paletteAdjustment?.LightBAdjustment ?? 0) * 255 / 31;
+            var adjR = 0;
+            var adjG = 0;
+            var adjB = 0;
+
+            if (paletteAdjustment?.HasLightAdjustment == true) {
+                adjR = paletteAdjustment.LightRAdjustment * 255 / 31;
+                adjG = paletteAdjustment.LightGAdjustment * 255 / 31;
+                adjB = paletteAdjustment.LightBAdjustment * 255 / 31;
+            }
 
             var numColors = lightPal.Channels.Length;
 
