@@ -179,6 +179,8 @@ namespace SF3.Models.Structs.KAO {
                 data = ImageUtils.Create8BitImageDataWithoutTransparency(data, palette);
                 Palette = palette;
             }
+            else
+                data = ImageUtils.GetImageDataConformingToPalette(data, palette, Palette);
 
             _textureDataBuffer.Invalidate();
             Data.Data.SetDataAtTo(ImageDataOffset, data.GetLength(0) * data.GetLength(1), data.To1DArrayTransposed());
