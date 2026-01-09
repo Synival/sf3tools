@@ -64,5 +64,65 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetGroundPalette - MPD_File.MPDHeader.OffsetIgnoredTextures == 0x04;
             set {}
         }
+
+        public bool HasLightAdjustment => MPD_File.PaletteAdjustment?.HasLightAdjustment ?? false;
+        public bool HasGroundAdjustment => MPD_File.PaletteAdjustment?.HasGroundAdjustment ?? false;
+        public bool HasShadowTransparency => MPD_File.PaletteAdjustment?.HasShadowTransparency ?? false;
+
+        public short LightRAdjustment {
+            get => MPD_File.PaletteAdjustment?.LightRAdjustment ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasLightAdjustment == true)
+                    MPD_File.PaletteAdjustment.LightRAdjustment = value;
+            }
+        }
+
+        public short LightGAdjustment {
+            get => MPD_File.PaletteAdjustment?.LightGAdjustment ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasLightAdjustment == true)
+                    MPD_File.PaletteAdjustment.LightGAdjustment = value;
+            }
+        }
+
+        public short LightBAdjustment {
+            get => MPD_File.PaletteAdjustment?.LightBAdjustment ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasLightAdjustment == true)
+                    MPD_File.PaletteAdjustment.LightBAdjustment = value;
+            }
+        }
+
+        public short GroundRAdjustment {
+            get => MPD_File.PaletteAdjustment?.GroundRAdjustment ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
+                    MPD_File.PaletteAdjustment.GroundRAdjustment = value;
+            }
+        }
+
+        public short GroundGAdjustment {
+            get => MPD_File.PaletteAdjustment?.GroundGAdjustment ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
+                    MPD_File.PaletteAdjustment.GroundGAdjustment = value;
+            }
+        }
+
+        public short GroundBAdjustment {
+            get => MPD_File.PaletteAdjustment?.GroundBAdjustment ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
+                    MPD_File.PaletteAdjustment.GroundBAdjustment = value;
+            }
+        }
+
+        public ushort ShadowTransparency {
+            get => MPD_File.PaletteAdjustment?.ShadowTransparency ?? 0;
+            set {
+                if (MPD_File.PaletteAdjustment?.HasShadowTransparency == true)
+                    MPD_File.PaletteAdjustment.ShadowTransparency = value;
+            }
+        }
     }
 }

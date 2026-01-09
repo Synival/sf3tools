@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _offsetLightPaletteAddr;      // int32  Always 0x0c. Pointer to 32 values for light palette. See (#header-offset-1).
         private readonly int _offsetLightPosAddr;          // int32  Always 0x4c. Pointer to light position. See (#header-offset-2).
         private readonly int _offsetUnknown1Addr;          // int32  Always 0x50. pointer to 0x20 unknown int16s at the start of the file. Mostly zero or 0x8000. (#header-offset-3)
-        private readonly int _offsetLightAdjustmentAddr;   // int32  Always 0x50. Replaces Scenario1 'unknown 1' table. A single structure with adjustments to overall lighting.
+        private readonly int _offsetPaletteAdjustmentAddr; // int32  Always 0x50. Replaces Scenario1 'unknown 1' table. A single structure with adjustments to overall lighting.
         private readonly int _viewDistanceAddr;            // int16  Something like a view distance for meshes from the models chunk.
         private readonly int _padding2Addr;                // int16  Always zero
         private readonly int _offsetModelSwitchGroupsAddr; // int32  Pointer to model switch group list.
@@ -55,12 +55,12 @@ namespace SF3.Models.Structs.MPD.Main {
             _offsetLightPosAddr     = Address + 0x08; // 4 bytes
 
             if (Scenario >= ScenarioType.Scenario2) {
-                _offsetUnknown1Addr        = -1;
-                _offsetLightAdjustmentAddr = Address + 0x0C; // 4 bytes
+                _offsetUnknown1Addr = -1;
+                _offsetPaletteAdjustmentAddr = Address + 0x0C; // 4 bytes
             }
             else {
-                _offsetUnknown1Addr        = Address + 0x0C; // 4 bytes
-                _offsetLightAdjustmentAddr = -1;
+                _offsetUnknown1Addr = Address + 0x0C; // 4 bytes
+                _offsetPaletteAdjustmentAddr = -1;
             }
 
             _viewDistanceAddr            = Address + 0x10; // 2 bytes
@@ -158,7 +158,7 @@ namespace SF3.Models.Structs.MPD.Main {
         public bool IsScenario3OrLater => Scenario >= ScenarioType.Scenario3;
 
         public bool HasUnknown1Table => IsScenario1OrEarlier;
-        public bool HasLightAdjustmentTable => IsScenario2OrLater;
+        public bool HasPaletteAdjustmentTable => IsScenario2OrLater;
         public bool HasUnknown2Table => IsScenario1OrEarlier;
         public bool HasGradientTable => IsScenario2OrLater;
         public bool HasMesh3 => IsScenario1OrLater;
@@ -204,12 +204,12 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetLightAdjustmentAddr), displayOrder: 4, isPointer: true, displayName: nameof(OffsetLightAdjustment) + " (Scn2+)", visibilityProperty: nameof(HasLightAdjustmentTable), displayGroup: "Main")]
-        public int OffsetLightAdjustment {
-            get => HasLightAdjustmentTable ? Data.GetDouble(_offsetLightAdjustmentAddr) : 0;
+        [TableViewModelColumn(addressField: nameof(_offsetPaletteAdjustmentAddr), displayOrder: 4, isPointer: true, displayName: nameof(OffsetPaletteAdjustment) + " (Scn2+)", visibilityProperty: nameof(HasPaletteAdjustmentTable), displayGroup: "Main")]
+        public int OffsetPaletteAdjustment {
+            get => HasPaletteAdjustmentTable ? Data.GetDouble(_offsetPaletteAdjustmentAddr) : 0;
             set {
-                if (HasLightAdjustmentTable)
-                    Data.SetDouble(_offsetLightAdjustmentAddr, value);
+                if (HasPaletteAdjustmentTable)
+                    Data.SetDouble(_offsetPaletteAdjustmentAddr, value);
             }
         }
 

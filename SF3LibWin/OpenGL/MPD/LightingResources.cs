@@ -1,15 +1,12 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Imaging;
 using CommonLib.Utils;
-using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Main;
-using SF3.Models.Tables.Shared;
+using SF3.MPD;
 
-namespace SF3.Win.OpenGL.MPD_File {
-    public class LightingResources : ResourcesBase, IMPD_FileResources {
+namespace SF3.Win.OpenGL.MPD {
+    public class LightingResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 
@@ -29,31 +26,31 @@ namespace SF3.Win.OpenGL.MPD_File {
             LightingTexture = texture;
         }
 
-        public void Update(IMPD_File mpdFile) {
+        public void Update(IMPD mpdFile) {
             using (var textureBitmap = CreateLightPaletteBitmap(mpdFile))
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
-        public void Update(Palette lightPal, LightAdjustment lightAdjustment) {
-            using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdjustment))
+        public void Update(Palette lightPal, IMPD_PaletteAdjustment paletteAdjustment) {
+            using (var textureBitmap = CreateLightPaletteBitmap(lightPal, paletteAdjustment))
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
-        private Bitmap CreateLightPaletteBitmap(IMPD_File mpdFile)
-            => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.LightAdjustment);
+        private Bitmap CreateLightPaletteBitmap(IMPD mpdFile)
+            => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.Settings);
 
-        private Bitmap CreateLightPaletteBitmap(Palette lightPal, LightAdjustment lightAdjustment) {
+        private Bitmap CreateLightPaletteBitmap(Palette lightPal, IMPD_PaletteAdjustment paletteAdjustment) {
             if (lightPal == null)
                 return null;
 
-            var adjR = (lightAdjustment?.RAdjustment ?? 0) * 255 / 31;
-            var adjG = (lightAdjustment?.GAdjustment ?? 0) * 255 / 31;
-            var adjB = (lightAdjustment?.BAdjustment ?? 0) * 255 / 31;
+            var adjR = (paletteAdjustment?.LightRAdjustment ?? 0) * 255 / 31;
+            var adjG = (paletteAdjustment?.LightGAdjustment ?? 0) * 255 / 31;
+            var adjB = (paletteAdjustment?.LightBAdjustment ?? 0) * 255 / 31;
 
             var numColors = lightPal.Channels.Length;
 
             var colorData = new byte[numColors * 4];
-            int pos = 0;
+            var pos = 0;
             foreach (var color in lightPal.Channels) {
                 var colorR = (byte) MathHelpers.Clamp(color.r + adjR, 0x00, 0xFF);
                 var colorG = (byte) MathHelpers.Clamp(color.g + adjG, 0x00, 0xFF);

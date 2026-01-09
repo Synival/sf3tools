@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using CommonLib.Arrays;
 using CommonLib.Imaging;
 using CommonLib.SGL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
-using SF3.Models.Tables.Shared;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
+using SF3.Win.OpenGL.MPD;
 using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
 
@@ -163,13 +161,13 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        public IMPD_File MPD_File { get; private set; } = null;
+        public IMPD MPD_File { get; private set; } = null;
         public IMPD_ModelCollection Models { get; private set; } = null;
 
         private ISGL_Model _sglModel = null;
 
         public void Update(
-            IMPD_File mpdFile, ISGL_Model sglModel,
+            IMPD mpdFile, ISGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {

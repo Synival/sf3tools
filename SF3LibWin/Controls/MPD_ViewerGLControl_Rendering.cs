@@ -220,7 +220,7 @@ namespace SF3.Win.Controls {
 
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel,
-                _gradients, MPD_File?.LightAdjustment, _lighting, _boundaryModels, _collisionModels,
+                _gradients, MPD_File?.PaletteAdjustment, _lighting, _boundaryModels, _collisionModels,
                 _surfaceEditor,
                 // TODO: these options should be cached!!!
                 new Renderer.RendererOptions() {

@@ -110,7 +110,7 @@ namespace SF3.Models.Files.MPD {
         ColorTable LightPaletteColorTable { get; }
         LightPosition LightPosition { get; }
         UnknownUInt16Table Unknown1Table { get; }
-        LightAdjustment LightAdjustment { get; }
+        PaletteAdjustment PaletteAdjustment { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOffByAddr { get; }
         Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; }

@@ -48,7 +48,7 @@ namespace SF3.Models.Files.MPD {
         private MPD_Header MakeHeader() {
             var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
             var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
-            MPDHeader = new MPD_Header(Data, 0, "MPDHeader", headerAddr, Scenario);
+            MPDHeader = new MPD_Header(Data, 0, nameof(MPDHeader), headerAddr, Scenario);
             Flags     = new MPD_FlagsFromHeader(MPDHeader);
             Settings  = new MPD_Settings(this);
             return MPDHeader;
@@ -60,7 +60,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakePaletteTables(header));
             tables.AddRange(MakeAnimationTables(header, areAnimatedTextures32Bit));
-            tables.Add(BoundariesTable = BoundaryTable.Create(Data, "Boundaries", ResourceUtils.ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
+            tables.Add(BoundariesTable = BoundaryTable.Create(Data, nameof(BoundariesTable), ResourceUtils.ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
             tables.AddRange(MakeHeaderModelCollections(header));
             tables.AddRange(MakeUnknownTables(header));
             tables.AddRange(CreateUnreferencedTables(header, tables));
@@ -73,7 +73,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private ChunkLocationTable MakeChunkHeaderTable()
-            => ChunkLocations = ChunkLocationTable.Create(Data, "ChunkHeader", 0x2000);
+            => ChunkLocations = ChunkLocationTable.Create(Data, nameof(ChunkLocations), 0x2000);
 
         private ITable[] MakePaletteTables(MPD_Header header) {
             var tables = new List<ITable>();
@@ -83,11 +83,11 @@ namespace SF3.Models.Files.MPD {
             // This is most likely an error in the MPD file; it results in garbage data.
             // Don't load the palettes in these cases.
             if (header.OffsetGroundPalette >= RamAddress && (headerRamAddr - header.OffsetGroundPalette) / 2 >= 256)
-                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, "GroundPalette", header.OffsetGroundPalette - RamAddress, 256));
+                tables.Add(GroundPaletteColorTable = ColorTable.Create(Data, nameof(GroundPaletteColorTable), header.OffsetGroundPalette - RamAddress, 256));
             if (header.OffsetSkyPalette >= RamAddress && (headerRamAddr - header.OffsetSkyPalette) / 2 >= 256)
-                tables.Add(SkyPaletteColorTable = ColorTable.Create(Data, "SkyPalette", header.OffsetSkyPalette - RamAddress, 256));
+                tables.Add(SkyPaletteColorTable = ColorTable.Create(Data, nameof(SkyPaletteColorTable), header.OffsetSkyPalette - RamAddress, 256));
             if (Scenario >= ScenarioType.Scenario3 && header.OffsetTexturePalette >= RamAddress && (headerRamAddr - header.OffsetTexturePalette) / 2 >= 256)
-                tables.Add(TexturePaletteColorTable = ColorTable.Create(Data, "TexturePalette", header.OffsetTexturePalette - RamAddress, 256));
+                tables.Add(TexturePaletteColorTable = ColorTable.Create(Data,  nameof(TexturePaletteColorTable), header.OffsetTexturePalette - RamAddress, 256));
 
             return tables.ToArray();
         }
@@ -96,14 +96,14 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             if (header.OffsetLightPalette != 0)
-                tables.Add(LightPaletteColorTable = ColorTable.Create(Data, "LightPalette", header.OffsetLightPalette - RamAddress, 32));
+                tables.Add(LightPaletteColorTable = ColorTable.Create(Data, nameof(LightPaletteColorTable), header.OffsetLightPalette - RamAddress, 32));
             if (header.OffsetLightPosition != 0)
-                LightPosition = new LightPosition(Data, 0, "LightPositions", header.OffsetLightPosition - RamAddress);
-            if (header.OffsetLightAdjustment != 0)
-                LightAdjustment = new LightAdjustment(Data, 0, "LightAdjustment", header.OffsetLightAdjustment - RamAddress, Scenario);
+                LightPosition = new LightPosition(Data, 0, nameof(LightPosition), header.OffsetLightPosition - RamAddress);
+            if (header.OffsetPaletteAdjustment != 0)
+                PaletteAdjustment = new PaletteAdjustment(Data, 0, nameof(PaletteAdjustment), header.OffsetPaletteAdjustment - RamAddress, Scenario);
 
             if (header.OffsetGradient != 0)
-                tables.Add(GradientTable = GradientTable.Create(Data, "Gradients", header.OffsetGradient - RamAddress));
+                tables.Add(GradientTable = GradientTable.Create(Data, nameof(GradientTable), header.OffsetGradient - RamAddress));
 
             return tables.ToArray();
         }

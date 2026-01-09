@@ -106,7 +106,7 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt16Table Unknown1Table { get; private set; }
 
         [BulkCopyRecurse]
-        public LightAdjustment LightAdjustment { get; private set; }
+        public PaletteAdjustment PaletteAdjustment { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }

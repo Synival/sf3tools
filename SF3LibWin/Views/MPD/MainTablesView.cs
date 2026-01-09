@@ -26,8 +26,8 @@ namespace SF3.Win.Views.MPD {
             if (Model.Unknown1Table != null)
                 CreateChild(new TableView("Unknown 1", Model.Unknown1Table, ngc));
 
-            if (Model.LightAdjustment != null)
-                CreateChild(new DataModelView("Light Adjustment", Model.LightAdjustment, ngc));
+            if (Model.PaletteAdjustment != null)
+                CreateChild(new DataModelView("Palette Adjustment", Model.PaletteAdjustment, ngc));
 
             if (Model.ModelSwitchGroupsTable != null)
                 CreateChild(new ModelSwitchGroupsView("Model Switch Groups", Model));

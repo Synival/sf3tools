@@ -120,7 +120,7 @@ namespace MPD_DataSearcher {
                                 new List<IStruct>() {
                                     mpdFile?.MPDHeader!,
                                     mpdFile?.LightPosition!,
-                                    mpdFile?.LightAdjustment!,
+                                    mpdFile?.PaletteAdjustment!,
                                 }
                                 .Where(x => x != null)
                                 .Select(x => new DataRange(mpdFileData, x.Name, x.Address, x.Address + x.Size))

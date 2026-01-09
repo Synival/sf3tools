@@ -1,5 +1,5 @@
 ﻿namespace SF3.MPD {
-    public interface IMPD_Settings {
+    public interface IMPD_Settings : IMPD_PaletteAdjustment {
         /// <summary>
         /// When set, models are accessed from low memory (0x00292100) rather than high memory (0x060A0000).
         /// </summary>

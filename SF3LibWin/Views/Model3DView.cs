@@ -1,17 +1,17 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using CommonLib.SGL;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Model;
+using SF3.MPD;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class Model3DView : ControlView<PDataViewerControl> {
-        public Model3DView(string name, IMPD_File mpdFile) : base(name) {
+        public Model3DView(string name, IMPD mpdFile) : base(name) {
             MPD_File = mpdFile;
         }
 
-        public Model3DView(string name, IMPD_File mpdFile, ModelInstanceBase modelInstance) : base(name) {
+        public Model3DView(string name, IMPD mpdFile, ModelInstanceBase modelInstance) : base(name) {
             MPD_File = mpdFile;
             _modelInstance = modelInstance;
             UpdateSGL_Model();
@@ -31,7 +31,7 @@ namespace SF3.Win.Views {
             UpdateViewerControl();
         }
 
-        public IMPD_File MPD_File { get; }
+        public IMPD MPD_File { get; }
 
         private ModelInstanceBase _modelInstance = null;
         public ModelInstanceBase Model {

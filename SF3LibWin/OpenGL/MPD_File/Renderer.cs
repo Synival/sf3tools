@@ -4,7 +4,6 @@ using System.Linq;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Models.Structs.MPD.Main;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Win.OpenGL.MPD;
@@ -61,7 +60,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GroundModelResources groundModel,
             SkyModelResources skyModel,
             GradientResources gradients,
-            LightAdjustment lightAdj,
+            IMPD_PaletteAdjustment paletteAdj,
             LightingResources lighting,
             BoundaryModelResources boundaryModels,
             CollisionResources collisionModels,
@@ -85,7 +84,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (options.DrawSky)
                 DrawSceneSky(general, skyModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
             if (options.DrawGround)
-                DrawSceneGround(general, groundModel, gradients, lightAdj, options, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGround(general, groundModel, gradients, paletteAdj, options, ref projectionMatrix, ref viewMatrix);
 
             // Determine which models are facing the camera and should be displayed.
             var showModelsInAllDirections = !options.HideModelsNotFacingCamera;
@@ -364,7 +363,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GeneralResources general,
             GroundModelResources groundModel,
             GradientResources gradients,
-            LightAdjustment lightAdj,
+            IMPD_PaletteAdjustment paletteAdj,
             RendererOptions options,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
@@ -376,11 +375,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.DepthMask(false);
 
             Vector3 glow = Vector3.Zero;
-            if (options.ApplyLighting && lightAdj != null) {
+            if (options.ApplyLighting && paletteAdj != null) {
                 glow = new Vector3(
-                    lightAdj.GroundRAdjustment / (float) 0x1F, 
-                    lightAdj.GroundGAdjustment / (float) 0x1F, 
-                    lightAdj.GroundBAdjustment / (float) 0x1F
+                    paletteAdj.GroundRAdjustment / (float) 0x1F, 
+                    paletteAdj.GroundGAdjustment / (float) 0x1F, 
+                    paletteAdj.GroundBAdjustment / (float) 0x1F
                 );
             }
             general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, ref glow);
