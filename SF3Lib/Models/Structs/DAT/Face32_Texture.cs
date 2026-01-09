@@ -1,5 +1,6 @@
 ﻿using CommonLib.Imaging;
 using CommonLib.Types;
+using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
@@ -20,6 +21,11 @@ namespace SF3.Models.Structs.DAT {
 
             LoadImageData();
             _originalStoredSize = StoredImageDataSize;
+        }
+
+        protected override (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) {
+            (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
+            return (ImageUtils.GetImageDataConformingToPalette(newData, palette, _palette), _palette);
         }
 
         protected override void OnImageUpdated() {}

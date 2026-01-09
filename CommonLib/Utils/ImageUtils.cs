@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommonLib.Imaging;
 
 namespace CommonLib.Utils {
@@ -12,8 +13,8 @@ namespace CommonLib.Utils {
         /// <returns>A new byte[,] with a copy of input 'data' without any transparent pixels.</returns>
         public static byte[,] Create8BitImageDataWithoutTransparency(byte[,] data, Palette palette) {
             var transparentColor = palette.Channels[0];
-            byte closestToTransparentIndex = (byte) palette.GetClosestIndex(
-                zeroIsTransparent: true,
+            byte closestToTransparentIndex = (byte) palette.GetHighestScoringIndex(
+                ignoreColorZero: true,
                 color => {
                     var rDiff = Math.Abs(color.r - transparentColor.r);
                     var gDiff = Math.Abs(color.g - transparentColor.g);
@@ -51,6 +52,29 @@ namespace CommonLib.Utils {
             var height = (int) Math.Ceiling(colorCount / (float) width);
 
             return (width, height);
+        }
+
+        /// <summary>
+        /// Converts 8-bit indexed color data to conform to a different palette and returns it as new data.
+        /// Colors are matched using a distance check between two RGB vectors.
+        /// </summary>
+        /// <param name="newData">8-bit indexed color data to convert.</param>
+        /// <param name="newPalette">Original palette belonging to the 8-bit indexed color data.</param>
+        /// <param name="toPalette">Color palette that the 8-bit indexed color data should be updated to conform to.</param>
+        /// <returns>A new byte[,] with 8-bit indexed color data.</returns>
+        public static byte[,] GetImageDataConformingToPalette(byte[,] newData, Palette newPalette, Palette toPalette) {
+            // For each color in newPalette, find the closest match in toPalette.
+            var conversionMap = newPalette.Channels
+                .Select(x => (byte) toPalette.GetClosestIndex(ignoreColorZero: false, x))
+                .ToArray();
+
+            // Create new data with the updated colors.
+            var updatedData = new byte[newData.GetLength(0), newData.GetLength(1)];
+            for (int y = 0; y < newData.GetLength(1); y++)
+                for (int x = 0; x < newData.GetLength(0); x++)
+                    updatedData[x, y] = conversionMap[newData[x, y]];
+
+            return updatedData;
         }
     }
 }

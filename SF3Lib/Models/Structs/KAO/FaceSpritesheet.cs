@@ -343,7 +343,7 @@ namespace SF3.Models.Structs.KAO {
             var baseImage = Face.ImageTable[0].ImageData8Bit;
 
             var palette = Face.Palette;
-            var lightestColor = (byte) palette.GetLightestIndex(zeroIsTransparent: true);
+            var lightestColor = (byte) palette.GetLightestIndex(ignoreColorZero: true);
 
             // Build blink frames (top 3 images).
             void BuildImageRow(int imageStartIndex, int imageStopIndex, int columnStart, int row) {

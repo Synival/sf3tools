@@ -47,12 +47,12 @@ namespace CommonLib.Imaging {
             set => Channels[index] = value;
         }
 
-        public int GetClosestIndex(bool zeroIsTransparent, Func<PixelChannels, int> scoreFunc) {
+        public int GetHighestScoringIndex(bool ignoreColorZero, Func<PixelChannels, int> scoreFunc) {
             int bestIndex = -1;
             int bestScore = 0;
 
             var max = Channels.Length;
-            for (int i = zeroIsTransparent ? 1 : 0; i < max; i++) {
+            for (int i = ignoreColorZero ? 1 : 0; i < max; i++) {
                 var color = Channels[i];
                 var score = scoreFunc(color);
 
@@ -65,10 +65,16 @@ namespace CommonLib.Imaging {
             return bestIndex;
         }
 
-        public int GetDarkestIndex(bool zeroIsTransparent)
-            => GetClosestIndex(zeroIsTransparent, color => 0x100 - Math.Max(color.r, Math.Max(color.g, color.b)));
+        public int GetDarkestIndex(bool ignoreColorZero)
+            => GetHighestScoringIndex(ignoreColorZero, color => 0x100 - Math.Max(color.r, Math.Max(color.g, color.b)));
 
-        public int GetLightestIndex(bool zeroIsTransparent)
-            => GetClosestIndex(zeroIsTransparent, color => Math.Max(color.r, Math.Max(color.g, color.b)));
+        public int GetLightestIndex(bool ignoreColorZero)
+            => GetHighestScoringIndex(ignoreColorZero, color => Math.Max(color.r, Math.Max(color.g, color.b)));
+
+        public int GetClosestIndex(bool ignoreColorZero, PixelChannels matchToColor) {
+            return GetHighestScoringIndex(ignoreColorZero, color => {
+                return -(Math.Abs(matchToColor.r - color.r) + Math.Abs(matchToColor.g - color.g) + Math.Abs(matchToColor.b - color.b));
+            });
+        }
     }
 }
