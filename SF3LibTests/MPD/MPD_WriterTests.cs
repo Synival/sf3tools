@@ -1,27 +1,21 @@
-﻿using CommonLib.Arrays;
-using SF3.Models.Files.MPD;
+﻿using SF3.Models.Files.MPD;
 using SF3.MPD;
-using SF3.NamedValues;
 using SF3.Types;
+using static SF3.Tests.Utils.DataUtils;
+using static SF3.Tests.Utils.MPD_TestUtils;
 
 namespace SF3.Tests.MPD {
     [TestClass]
     public class MPD_WriterTests {
-        private static MPD_File MakeFile(ScenarioType scenario, string filename) {
-            var filePath = TestDataPaths.ResourcePath(scenario, Path.GetFileName(filename))!;
-            var fileData = File.ReadAllBytes(filePath);
-            return MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(fileData)), new NameGetterContext(scenario), scenario);
-        }
-
         [TestMethod]
         public void WriteMPD_WithScenario1_TESMAP_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "TESMAP.MPD");
-            _ = RecreateMPD(originalFile);
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "TESMAP.MPD");
+            _ = RecreateMPD_File(originalFile);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_TESMAP_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "TESMAP.MPD");
+            var file = MakeMPD_File(ScenarioType.Scenario1, "TESMAP.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -46,13 +40,13 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_VOID_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "VOID.MPD");
-            _ = RecreateMPD(originalFile);
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "VOID.MPD");
+            _ = RecreateMPD_File(originalFile);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_VOID_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "VOID.MPD");
+            var file = MakeMPD_File(ScenarioType.Scenario1, "VOID.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -71,13 +65,13 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BLACK_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "BLACK.MPD");
-            _ = RecreateMPD(originalFile);
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "BLACK.MPD");
+            _ = RecreateMPD_File(originalFile);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BLACK_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "BLACK.MPD");
+            var file = MakeMPD_File(ScenarioType.Scenario1, "BLACK.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -107,13 +101,13 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_FURAIN_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "FURAIN.MPD");
-            _ = RecreateMPD(originalFile);
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "FURAIN.MPD");
+            _ = RecreateMPD_File(originalFile);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_FURAIN_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "FURAIN.MPD");
+            var file = MakeMPD_File(ScenarioType.Scenario1, "FURAIN.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -142,13 +136,13 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_HONJIN_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "HONJIN.MPD");
-            _ = RecreateMPD(originalFile);
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "HONJIN.MPD");
+            _ = RecreateMPD_File(originalFile);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_HONJIN_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "HONJIN.MPD");
+            var file = MakeMPD_File(ScenarioType.Scenario1, "HONJIN.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -171,13 +165,13 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BAL_3_CanBeLoaded() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "BAL_3.MPD");
-            _ = RecreateMPD(originalFile);
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "BAL_3.MPD");
+            _ = RecreateMPD_File(originalFile);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BAL_3_ProducesSameData() {
-            var file = MakeFile(ScenarioType.Scenario1, "BAL_3.MPD");
+            var file = MakeMPD_File(ScenarioType.Scenario1, "BAL_3.MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
@@ -195,25 +189,25 @@ namespace SF3.Tests.MPD {
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
-            ForEachMPD(ScenarioType.Scenario1, originalFile => {
+            ForEachMPD_File(ScenarioType.Scenario1, originalFile => {
                 TestMPDTextures(originalFile, MPD_CollectionType.Primary);
             });
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_HasCorrectPrimaryTextures() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "Z_AS.MPD");
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "Z_AS.MPD");
             TestMPDTextures(originalFile, MPD_CollectionType.Primary);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_HasCorrectExtraTextures() {
-            var originalFile = MakeFile(ScenarioType.Scenario1, "Z_AS.MPD");
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "Z_AS.MPD");
             TestMPDTextures(originalFile, MPD_CollectionType.ExtraModels);
         }
 
         private void TestMPDTextures(IMPD_File originalFile, MPD_CollectionType collection) {
-            var newFile = RecreateMPD(originalFile);
+            var newFile = RecreateMPD_File(originalFile);
 
             var primaryTextureCollections = originalFile.TextureChunks
                 .Where(x => x != null && x.Collection == collection)
@@ -251,134 +245,6 @@ namespace SF3.Tests.MPD {
 
             if (errors.Count > 0)
                 Assert.Fail(string.Join("\r\n", errors));
-        }
-
-        private struct ByteComparisonSkipRegion {
-            public int Offset;
-            public int Size;
-            public int ActualDataExtraBytes;
-        }
-
-        private void AssertMPDByteComparison(MPD_File file, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
-            skipRegions = GetKnownAcceptableInconsistenciesForMPD(file)
-                .Concat(skipRegions ?? [])
-                .OrderBy(x => x.Offset)
-                .GroupBy(x => x.Offset)
-                .Select(x => x.First())
-                .ToArray();
-
-            AssertByteComparison(file.Data.GetDataCopyOrReference(), outputData, skipRegions, acceptablePercentage);
-        }
-
-        private void AssertByteComparison(byte[] fileData, byte[] outputData, ByteComparisonSkipRegion[]? skipRegions = null, float acceptablePercentage = 100.0f) {
-            var errors = ByteComparisonErrors(fileData, outputData, out var percentageCorrect, skipRegions) ?? [];
-            if (percentageCorrect >= acceptablePercentage) {
-                foreach (var error in errors)
-                    System.Diagnostics.Debug.WriteLine(error);
-            }
-            else if (errors.Count > 0)
-                Assert.Fail(string.Join("\r\n", errors));
-        }
-
-        private List<string> ByteComparisonErrors(byte[] expected, byte[] actual, out float percentageCorrect, ByteComparisonSkipRegion[]? skipRegions = null) {
-            var errors = new List<string>();
-
-            if (expected.Length != actual.Length)
-                errors.Add($"Length is wrong: should be {expected.Length} (0x{expected.Length:X5}), is {actual.Length} (0x{actual.Length:X5})");
-            (uint ExpectedOffset, uint ActualOffset)? firstWrongByte = null;
-            int wrongBytes = 0;
-            int bytesToCompare = Math.Min(expected.Length, actual.Length);
-
-            // Sort the skip regions.
-            skipRegions = (skipRegions ?? []).OrderBy(x => x.Offset).ToArray();
-            int skipRegionIndex = 0;
-            var skipRegion = skipRegions.Length > skipRegionIndex ? skipRegions[skipRegionIndex] : (ByteComparisonSkipRegion?) null;
-
-            for (int i = 0, j = 0; i < expected.Length && j < actual.Length; i++, j++) {
-                if (i == skipRegion?.Offset) {
-                    i += skipRegion.Value.Size - 1;
-                    j += skipRegion.Value.Size - 1;
-                    i += skipRegion.Value.ActualDataExtraBytes;
-                    skipRegionIndex++;
-                    skipRegion = skipRegions.Length > skipRegionIndex ? skipRegions[skipRegionIndex] : (ByteComparisonSkipRegion?) null;
-                    continue;
-                }
-
-                if (expected[i] != actual[j]) {
-                    if (!firstWrongByte.HasValue)
-                        firstWrongByte = ((uint) i, (uint) j);
-                    wrongBytes++;
-                }
-            }
-
-            percentageCorrect = (float) Math.Floor((float) (bytesToCompare - wrongBytes) / bytesToCompare * 10000.0f) / 100.0f;
-            if (wrongBytes > 0) {
-                errors.Add($"Comparable data is wrong: {percentageCorrect:0.00}% accurate ({wrongBytes} wrong bytes)");
-
-                var rightByte = expected[firstWrongByte!.Value.ExpectedOffset];
-                var wrongByte = actual[firstWrongByte!.Value.ActualOffset];
-                errors.Add($"First wrong byte is at {firstWrongByte!.Value.ExpectedOffset} (0x{firstWrongByte!.Value.ExpectedOffset:X4}):");
-                errors.Add($"  Should be {rightByte} (0x{rightByte:X2}), is {wrongByte} (0x{wrongByte:X2})");
-            }
-
-            return errors;
-        }
-
-        /// <summary>
-        /// There are several specific things that the MPD_Writer can't get right, 99% of which are extremely minor
-        /// inconsistencies in LZSS compression. This will fetch them so they don't have to be added manually every
-        /// time.
-        /// </summary>
-        private ByteComparisonSkipRegion[] GetKnownAcceptableInconsistenciesForMPD(IMPD_File file) {
-            var muhSize = file.ChunkLocations[13].ChunkSize;
-
-            ByteComparisonSkipRegion[] chunk13Errors = [];
-            var chunk13Info = file.ChunkLocations[13];
-            if (chunk13Info.Exists && chunk13Info.ChunkSize == 0x494) {
-                var fileAddr = chunk13Info.ChunkFileAddress;
-                chunk13Errors = [
-                    // Header: Insignificant texture Chunk[13] size difference (2 bytes) due to LZSS compression differences
-                    new ByteComparisonSkipRegion { Offset = 0x206F, Size = 1 },
-
-                    // Insignificant texture Chunk[13] difference due to LZSS compression differences
-                    new ByteComparisonSkipRegion { Offset = fileAddr + 0x484, Size = 1 },
-                    new ByteComparisonSkipRegion { Offset = fileAddr + 0x48e, Size = 4 },
-                ];
-            }
-
-            return chunk13Errors;
-        }
-
-        private IMPD_File RecreateMPD(IMPD_File mpd) {
-            byte[]? outputData = null;
-            using (var memoryStream = new MemoryStream()) {
-                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
-                writer.WriteMPD(mpd);
-                outputData = memoryStream.ToArray();
-            }
-
-            return MPD_File.Create(
-                new SF3.ByteData.ByteData(new ByteArray(outputData)),
-                mpd.NameGetterContext,
-                mpd.Scenario
-            );
-        }
-
-        private void ForEachMPD(ScenarioType scenario, Action<IMPD_File> action) {
-            var path = TestDataPaths.ScenarioDataPaths[scenario];
-            var mpdFiles = Directory
-                .GetFiles(path, "*.MPD")
-                .Select(x => Path.GetFileName(x))
-                .Where(x => x != "SHIP2.MPD")
-                .ToArray();
-            var testCases = mpdFiles
-                .Select(x => new SF3FileTestCase(scenario, x))
-                .ToArray();
-
-            SF3FileTestCase.Run(testCases, testCase => {
-                var mpd = MakeFile(scenario, testCase.Filename);
-                action(mpd);
-            });
         }
     }
 }
