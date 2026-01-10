@@ -36,9 +36,9 @@ namespace SF3.MPD {
         Palette TexturePalette { get; }
 
         /// <summary>
-        /// Palette used for lighting models and the surface model.
+        /// Palette and direction for lighting models and the surface model.
         /// </summary>
-        Palette LightPalette { get; }
+        IMPD_Lighting Lighting { get; }
 
         /// <summary>
         /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).

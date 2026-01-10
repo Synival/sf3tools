@@ -14,7 +14,7 @@ namespace SF3.MPD {
             var ignoredTextureIds = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var pmc)
                 ? (pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.ID)?.ToArray() ?? null) : null;
 
-            var lightPalettePos      = WritePaletteOrNull(mpd.LightPalette);
+            var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
             var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);

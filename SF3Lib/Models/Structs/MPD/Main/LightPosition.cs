@@ -26,5 +26,17 @@ namespace SF3.Models.Structs.MPD.Main {
             get => Data.GetCompressedFIXED(_yawAddr).Float * 180.0f;
             set => Data.SetCompressedFIXED(_yawAddr, new CompressedFIXED(value / 180.0f, 0));
         }
+
+        public VECTOR Direction {
+            get {
+                // TODO: Determine direction
+                return new VECTOR(0, 1, 0);
+            }
+            set {
+                if (value != null) {
+                    // TODO: Determine pitch/yaw
+                }
+            }
+        }
     }
 }

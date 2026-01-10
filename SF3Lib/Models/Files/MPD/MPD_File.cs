@@ -15,6 +15,7 @@ using SF3.Models.Tables.MPD.Main;
 using SF3.Models.Tables.MPD.Animation;
 using CommonLib.Imaging;
 using CommonLib.Geometry;
+using CommonLib.SGL;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -26,6 +27,7 @@ namespace SF3.Models.Files.MPD {
         protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType? fallbackScenario = null)
         : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other], DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other) {
             DetermineChunkIndices();
+            Lighting = new LightingClass(this);
         }
 
         public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType fallbackScenario)
@@ -83,7 +85,27 @@ namespace SF3.Models.Files.MPD {
         public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
 
         public Palette TexturePalette => TexturePaletteColorTable?.Palette;
-        public Palette LightPalette => LightPaletteColorTable?.Palette;
+
+        private class LightingClass : IMPD_Lighting {
+            public LightingClass(MPD_File mpdFile) {
+                MPD_File = mpdFile;
+            }
+
+            public Palette Palette => MPD_File.LightPaletteColorTable?.Palette;
+
+            public VECTOR Direction {
+                get => MPD_File.LightPosition?.Direction ?? new VECTOR(0, 1, 0);
+                set {
+                    if (MPD_File.LightPosition != null && value != null)
+                        MPD_File.LightPosition.Direction = value;
+                }
+            }
+
+            public MPD_File MPD_File { get; }
+        }
+
+        public IMPD_Lighting Lighting { get; }
+
         public IRectangleShort CameraBoundaries => (BoundariesTable?.Length >= 1) ? BoundariesTable[0] : null;
         public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
 

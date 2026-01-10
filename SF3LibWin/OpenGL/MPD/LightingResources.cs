@@ -37,7 +37,7 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         private Bitmap CreateLightPaletteBitmap(IMPD mpdFile)
-            => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.Settings?.LightPaletteAdjustment);
+            => CreateLightPaletteBitmap(mpdFile?.Lighting?.Palette, mpdFile?.Settings?.LightPaletteAdjustment);
 
         private Bitmap CreateLightPaletteBitmap(Palette lightPal, IColorAdjustRGB555 lightAdj) {
             if (lightPal == null)
