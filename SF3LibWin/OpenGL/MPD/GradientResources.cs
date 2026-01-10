@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
-using CommonLib.Imaging;
 using CommonLib.Types;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Main;
+using SF3.MPD;
 
-namespace SF3.Win.OpenGL.MPD_File {
-    public class GradientResources : ResourcesBase, IMPD_FileResources {
+namespace SF3.Win.OpenGL.MPD {
+    public class GradientResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 
@@ -24,40 +22,43 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = null;
         }
 
-        public void Update(IMPD_File mpdFile) {
-            Update(
-                (mpdFile?.GradientTable?.Length > 0) ? mpdFile.GradientTable[0] : null,
-                mpdFile?.Settings?.GradientTopColor,
-                mpdFile?.Settings?.GradientBottomColor
-            );
-        }
+        public void Update(IMPD mpdFile)
+            => Update(mpdFile?.Gradient);
 
-        public void Update(Gradient gradient, IColorRGB555 topColor, IColorRGB555 bottomColor) {
-            if (gradient == null || topColor == null || bottomColor == null) {
+        public void Update(IMPD_Gradient gradient) {
+            if (gradient == null) {
                 Reset();
                 return;
             }
 
             Update(
-                gradient.StartPosition / 255f,
-                gradient.StopPosition  / 255f,
+                gradient.TopPosition,
+                gradient.BottomPosition,
                 new Vector3(
-                    Math.Clamp(topColor.R / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(topColor.G / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(topColor.B / (float) 0x1f, 0.00f, 1.00f)
+                    Math.Clamp(gradient.TopColor.R / (float) 0x1F, 0.00f, 1.00f),
+                    Math.Clamp(gradient.TopColor.G / (float) 0x1F, 0.00f, 1.00f),
+                    Math.Clamp(gradient.TopColor.B / (float) 0x1F, 0.00f, 1.00f)
                 ),
                 new Vector3(
-                    Math.Clamp(bottomColor.R / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(bottomColor.G / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(bottomColor.B / (float) 0x1f, 0.00f, 1.00f)
+                    Math.Clamp(gradient.BottomColor.R / (float) 0x1F, 0.00f, 1.00f),
+                    Math.Clamp(gradient.BottomColor.G / (float) 0x1F, 0.00f, 1.00f),
+                    Math.Clamp(gradient.BottomColor.B / (float) 0x1F, 0.00f, 1.00f)
                 ),
-                gradient.AffectsGround ? (gradient.GroundOpacity / (float) 0x1f) : 0,
-                gradient.AffectsSky ? (gradient.SkyOpacity / (float) 0x1f) : 0,
-                gradient.AffectsModelsAndTiles ? (gradient.ModelsAndTilesOpacity / (float) 0x1f) : 0
+                gradient.AffectsGround           ? gradient.GroundIntensity : 0,
+                gradient.AffectsSky              ? gradient.SkyIntensity : 0,
+                gradient.AffectsModelsAndSurface ? gradient.ModelsAndSurfaceIntensity : 0
             );
         }
 
-        public void Update(float posTop, float posBottom, Vector3 colorTop, Vector3 colorBottom, float groundOpacity, float skyOpacity, float modelsOpacity) {
+        public void Update(
+            float posTop,
+            float posBottom,
+            Vector3 colorTop,
+            Vector3 colorBottom,
+            float groundIntensity,
+            float skyIntensity,
+            float modelsIntensity
+        ) {
             Reset();
 
             var corners = Enum.GetValues<CornerType>();
@@ -90,9 +91,9 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return new QuadModel(quads.ToArray());
             }
 
-            GroundGradientModel = MakeModel(groundOpacity);
-            SkyGradientModel = MakeModel(skyOpacity);
-            ModelsGradientModel = MakeModel(modelsOpacity);
+            GroundGradientModel = MakeModel(groundIntensity);
+            SkyGradientModel = MakeModel(skyIntensity);
+            ModelsGradientModel = MakeModel(modelsIntensity);
 
             Models?.Dispose();
             Models = new DisposableList<QuadModel>

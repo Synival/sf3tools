@@ -59,5 +59,11 @@ namespace SF3.MPD {
         /// 2D boundary box that the free-movable cursor in battle will force itself into.
         /// </summary>
         IRectangleShort BattleCursorBoundaries { get; }
+
+        /// <summary>
+        /// Color gradient applied to the ground, sky, and models + surface model at different configurable
+        /// intensities. Only present in Scenario 2+.
+        /// </summary>
+        IMPD_Gradient Gradient { get; }
     }
 }

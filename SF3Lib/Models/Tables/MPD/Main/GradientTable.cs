@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.MPD.Main {
         public override bool Load() {
             return Load(
                 (id, address) => new Gradient(Data, id, "Gradient" + id.ToString("D2"), address),
-                (rows, lastRow) => lastRow.StartPosition != 0xFFFF,
+                (rows, lastRow) => lastRow.TopPositionRaw != 0xFFFF,
                 addEndModel: false
             );
         }

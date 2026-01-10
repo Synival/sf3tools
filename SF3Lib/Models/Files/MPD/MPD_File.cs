@@ -90,6 +90,8 @@ namespace SF3.Models.Files.MPD {
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
 
+        public IMPD_Gradient Gradient => (GradientTable?.Length > 0) ? GradientTable[0] : null;
+
         [BulkCopyRecurse]
         public MPD_Header MPDHeader { get; private set; }
 

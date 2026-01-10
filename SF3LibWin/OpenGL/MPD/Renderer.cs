@@ -7,10 +7,10 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.MPD;
 using SF3.Types;
-using SF3.Win.OpenGL.MPD;
+using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL.MPD {
     public class Renderer {
         public class RendererOptions {
             public bool DrawModels;
@@ -93,7 +93,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             bool WithinAngleRange(ModelDirectionType dir) {
                 if (showModelsInAllDirections)
                     return true;
-                var angle = 540 - (45 * (int) dir) % 360;
+                var angle = 540 - 45 * (int) dir % 360;
                 var angleDiff = MathHelpers.ActualMod(cameraYaw - angle, 360.0f);
                 if (angleDiff > 180.0f)
                     angleDiff -= 360.0f;
@@ -277,7 +277,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 return;
 
             var modelsWithGroups = models.ModelInstances
-                .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out ModelGroup pd) ? pd : null })
+                .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null })
                 .Where(x => x.ModelGroup != null)
                 .Where(x => {
                     var direction = x.Model.OnlyVisibleFromDirection;
@@ -375,7 +375,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
 
-            Vector3 glow = Vector3.Zero;
+            var glow = Vector3.Zero;
             if (options.ApplyLighting && groundAdj != null) {
                 glow = new Vector3(
                     groundAdj.R / (float) 0x1F, 
@@ -417,14 +417,14 @@ namespace SF3.Win.OpenGL.MPD_File {
             general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
 
             var lightingTexture = lighting.LightingTexture ?? general.WhiteTexture;
-            bool usedSolidShader = false;
+            var usedSolidShader = false;
 
             using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
             using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
             using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
             using (general.ObjectShader.Use()) {
                 var modelsWithGroups = models.ModelInstances
-                    .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out ModelGroup pd) ? pd : null })
+                    .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null })
                     .Where(x => x.ModelGroup != null)
                     .Where(x => {
                         var direction = x.Model.OnlyVisibleFromDirection;
@@ -511,7 +511,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.Enable(EnableCap.PolygonOffsetFill);
             GL.PolygonOffset(-1.0f, -1.0f);
 
-            general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? (options.UseOutsideLighting ? 2 : 1) : 0);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? options.UseOutsideLighting ? 2 : 1 : 0);
             general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
 
             using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
@@ -588,7 +588,7 @@ namespace SF3.Win.OpenGL.MPD_File {
                 if (options.ModelsToHide?.Contains(model.ID) == true)
                     continue;
 
-                var modelGroup = models.ModelsByIDByCollection[model.Collection].TryGetValue(model.ModelID, out ModelGroup pd) ? pd : null;
+                var modelGroup = models.ModelsByIDByCollection[model.Collection].TryGetValue(model.ModelID, out var pd) ? pd : null;
                 if (modelGroup != null) {
                     SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch);
                     modelGroup.SolidTexturedModel?.Draw(general.WireframeShader);

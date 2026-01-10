@@ -461,20 +461,20 @@ namespace MPD_Analyzer {
 
                 var errors = new List<string>();
 
-                if (!gradient.AffectsGround && gradient.GroundOpacity > 0)
-                    errors.Add($"Ground OFF: 0x{gradient.GroundOpacity:X2}");
-                if (gradient.AffectsGround && gradient.GroundOpacity == 0)
-                    errors.Add($"Ground ON: 0x{gradient.GroundOpacity:X2}");
+                if (!gradient.AffectsGround && gradient.GroundIntensityRaw > 0)
+                    errors.Add($"Ground OFF: 0x{gradient.GroundIntensityRaw:X2}");
+                if (gradient.AffectsGround && gradient.GroundIntensityRaw == 0)
+                    errors.Add($"Ground ON: 0x{gradient.GroundIntensityRaw:X2}");
 
-                if (!gradient.AffectsSky && gradient.SkyOpacity > 0)
-                    errors.Add($"Sky OFF: 0x{gradient.SkyOpacity:X2}");
-                if (gradient.AffectsSky && gradient.SkyOpacity == 0)
-                    errors.Add($"Sky ON: 0x{gradient.SkyOpacity:X2}");
+                if (!gradient.AffectsSky && gradient.SkyIntensityRaw > 0)
+                    errors.Add($"Sky OFF: 0x{gradient.SkyIntensityRaw:X2}");
+                if (gradient.AffectsSky && gradient.SkyIntensityRaw == 0)
+                    errors.Add($"Sky ON: 0x{gradient.SkyIntensityRaw:X2}");
 
-                if (!gradient.AffectsModelsAndTiles && gradient.ModelsAndTilesOpacity > 0)
-                    errors.Add($"Models OFF: 0x{gradient.ModelsAndTilesOpacity:X2}");
-                if (gradient.AffectsModelsAndTiles && gradient.ModelsAndTilesOpacity == 0)
-                    errors.Add($"Models ON: 0x{gradient.ModelsAndTilesOpacity:X2}");
+                if (!gradient.AffectsModelsAndSurface && gradient.ModelsAndSurfaceIntensityRaw > 0)
+                    errors.Add($"Models OFF: 0x{gradient.ModelsAndSurfaceIntensityRaw:X2}");
+                if (gradient.AffectsModelsAndSurface && gradient.ModelsAndSurfaceIntensityRaw == 0)
+                    errors.Add($"Models ON: 0x{gradient.ModelsAndSurfaceIntensityRaw:X2}");
 
                 return errors.ToArray();
             }
