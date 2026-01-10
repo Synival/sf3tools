@@ -12,56 +12,56 @@ namespace CommonLib.Imaging {
 
         public static PixelChannels ABGR1555toChannels(ushort input) {
             return new PixelChannels {
-                a = (input & 0x8000) != 0 ? (byte) 255 : (byte) 0,
-                r = (byte) ((input >> 0  & 0x1F) * 255 / 31),
-                g = (byte) ((input >> 5  & 0x1F) * 255 / 31),
-                b = (byte) ((input >> 10 & 0x1F) * 255 / 31),
+                A = (input & 0x8000) != 0 ? (byte) 255 : (byte) 0,
+                R = (byte) ((input >> 0  & 0x1F) * 255 / 31),
+                G = (byte) ((input >> 5  & 0x1F) * 255 / 31),
+                B = (byte) ((input >> 10 & 0x1F) * 255 / 31),
             };
         }
 
         public static PixelChannels ARGB1555toChannels(ushort input) {
             return new PixelChannels {
-                a = (input & 0x8000) != 0 ? (byte) 255 : (byte) 0,
-                r = (byte) ((input >> 10 & 0x1F) * 255 / 31),
-                g = (byte) ((input >> 5  & 0x1F) * 255 / 31),
-                b = (byte) ((input >> 0  & 0x1F) * 255 / 31),
+                A = (input & 0x8000) != 0 ? (byte) 255 : (byte) 0,
+                R = (byte) ((input >> 10 & 0x1F) * 255 / 31),
+                G = (byte) ((input >> 5  & 0x1F) * 255 / 31),
+                B = (byte) ((input >> 0  & 0x1F) * 255 / 31),
             };
         }
 
         public static PixelChannels ABGR8888toChannels(uint input) {
             return new PixelChannels {
-                a = (byte) (input >> 24 & 0xFF),
-                r = (byte) (input >> 0  & 0xFF),
-                g = (byte) (input >> 16 & 0xFF),
-                b = (byte) (input >> 24 & 0xFF),
+                A = (byte) (input >> 24 & 0xFF),
+                R = (byte) (input >> 0  & 0xFF),
+                G = (byte) (input >> 16 & 0xFF),
+                B = (byte) (input >> 24 & 0xFF),
             };
         }
 
         public static PixelChannels ARGB8888toChannels(uint input) {
             return new PixelChannels {
-                a = (byte) (input >> 24 & 0xFF),
-                r = (byte) (input >> 16 & 0xFF),
-                g = (byte) (input >> 8  & 0xFF),
-                b = (byte) (input >> 0  & 0xFF),
+                A = (byte) (input >> 24 & 0xFF),
+                R = (byte) (input >> 16 & 0xFF),
+                G = (byte) (input >> 8  & 0xFF),
+                B = (byte) (input >> 0  & 0xFF),
             };
         }
 
         public static PixelChannels BGRA8888toChannels(uint input) {
             return new PixelChannels {
-                a = (byte) (input >> 0  & 0xFF),
-                r = (byte) (input >> 8  & 0xFF),
-                g = (byte) (input >> 16 & 0xFF),
-                b = (byte) (input >> 24 & 0xFF),
+                A = (byte) (input >> 0  & 0xFF),
+                R = (byte) (input >> 8  & 0xFF),
+                G = (byte) (input >> 16 & 0xFF),
+                B = (byte) (input >> 24 & 0xFF),
             };
         }
 
         public static PixelChannels IndexedToChannels(byte input, Palette palette, bool zeroIsTransparent) {
             var color = palette[input];
             return new PixelChannels {
-                a = (byte) ((zeroIsTransparent && input == 0) ? 0 : 255),
-                r = color.r,
-                g = color.g,
-                b = color.b
+                A = (byte) ((zeroIsTransparent && input == 0) ? 0 : 255),
+                R = color.R,
+                G = color.G,
+                B = color.B
             };
         }
 

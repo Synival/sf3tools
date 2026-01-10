@@ -58,9 +58,9 @@ namespace SF3.Win.OpenGL.MPD {
             var colorData = new byte[numColors * 4];
             var pos = 0;
             foreach (var color in lightPal.Channels) {
-                var colorR = (byte) MathHelpers.Clamp(color.r + adjR, 0x00, 0xFF);
-                var colorG = (byte) MathHelpers.Clamp(color.g + adjG, 0x00, 0xFF);
-                var colorB = (byte) MathHelpers.Clamp(color.b + adjB, 0x00, 0xFF);
+                var colorR = (byte) MathHelpers.Clamp(color.R + adjR, 0x00, 0xFF);
+                var colorG = (byte) MathHelpers.Clamp(color.G + adjG, 0x00, 0xFF);
+                var colorB = (byte) MathHelpers.Clamp(color.B + adjB, 0x00, 0xFF);
 
                 colorData[pos++] = colorB;
                 colorData[pos++] = colorG;

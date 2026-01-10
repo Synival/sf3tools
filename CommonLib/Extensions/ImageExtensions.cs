@@ -115,7 +115,7 @@ namespace CommonLib.Extensions {
 
             for (int i = 0; i < palLen; ++i) {
                 var inputColor = palette[i];
-                outputPalette.Entries[i] = Color.FromArgb(inputColor.r, inputColor.g, inputColor.b);
+                outputPalette.Entries[i] = Color.FromArgb(inputColor.R, inputColor.G, inputColor.B);
             }
             image.Palette = outputPalette;
         }
@@ -126,7 +126,7 @@ namespace CommonLib.Extensions {
 
             for (int i = 0; i < outputColors.Length; ++i) {
                 var inputColor = inputPalette.Entries[i];
-                outputColors[i] = new PixelChannels { r = inputColor.R, g = inputColor.G, b = inputColor.B, a = inputColor.A }.ToABGR1555();
+                outputColors[i] = new PixelChannels { R = inputColor.R, G = inputColor.G, B = inputColor.B, A = inputColor.A }.ToABGR1555();
             }
 
             return new Palette(outputColors);

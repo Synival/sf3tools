@@ -134,10 +134,10 @@ namespace CommonLib.Extensions {
             for (var y = 0; y < bitmap.Height; y++) {
                 for (var x = 0; x < bitmap.Width; x++) {
                     var channels = new PixelChannels() {
-                        b = inputData[pos++],
-                        g = inputData[pos++],
-                        r = inputData[pos++],
-                        a = inputData[pos++]
+                        B = inputData[pos++],
+                        G = inputData[pos++],
+                        R = inputData[pos++],
+                        A = inputData[pos++]
                     };
                     outputData[outPos++] = channels.ToABGR1555();
                 }
@@ -163,10 +163,10 @@ namespace CommonLib.Extensions {
             for (var y = 0; y < bitmap.Height; y++) {
                 for (var x = 0; x < bitmap.Width; x++) {
                     var channels = new PixelChannels() {
-                        b = inputData[pos++],
-                        g = inputData[pos++],
-                        r = inputData[pos++],
-                        a = inputData[pos++]
+                        B = inputData[pos++],
+                        G = inputData[pos++],
+                        R = inputData[pos++],
+                        A = inputData[pos++]
                     };
                     outputData[x, y] = channels.ToABGR1555();
                 }

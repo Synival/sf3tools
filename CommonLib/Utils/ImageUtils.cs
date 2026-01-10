@@ -16,9 +16,9 @@ namespace CommonLib.Utils {
             byte closestToTransparentIndex = (byte) palette.GetHighestScoringIndex(
                 ignoreColorZero: true,
                 color => {
-                    var rDiff = Math.Abs(color.r - transparentColor.r);
-                    var gDiff = Math.Abs(color.g - transparentColor.g);
-                    var bDiff = Math.Abs(color.b - transparentColor.b);
+                    var rDiff = Math.Abs(color.R - transparentColor.R);
+                    var gDiff = Math.Abs(color.G - transparentColor.G);
+                    var bDiff = Math.Abs(color.B - transparentColor.B);
                     return 0x300 - (rDiff + gDiff + bDiff);
                 }
             );

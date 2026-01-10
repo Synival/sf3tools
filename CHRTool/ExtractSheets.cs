@@ -282,8 +282,8 @@ namespace CHRTool {
 
                     // Build a red, non-filled rectangle with lines 3 pixels wide.
                     var box = new ushort[frameWidth, frameHeight];
-                    var redColor    = new PixelChannels() { a = 255, r = 255, g = 0,   b = 0 }.ToABGR1555();
-                    var orangeColor = new PixelChannels() { a = 255, r = 255, g = 127, b = 0 }.ToABGR1555();
+                    var redColor    = new PixelChannels() { A = 255, R = 255, G = 0,   B = 0 }.ToABGR1555();
+                    var orangeColor = new PixelChannels() { A = 255, R = 255, G = 127, B = 0 }.ToABGR1555();
 
                     for (int i = 0; i < 3; i++) {
                         if (i < frameHeight) {

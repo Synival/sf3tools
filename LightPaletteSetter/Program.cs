@@ -106,11 +106,11 @@ namespace LightPaletteSetter {
                             break;
 
                         var channels = ABGR1555toChannels(row.ColorABGR1555);
-                        var max = Math.Max(channels.r, Math.Max(channels.g, channels.b));
+                        var max = Math.Max(channels.R, Math.Max(channels.G, channels.B));
 
-                        channels.r = (byte) Math.Round(channels.r * 0.375f);
-                        channels.g = (byte) Math.Round(channels.g * 0.375f + max * 0.125f);
-                        channels.b = (byte) Math.Round(channels.b * 0.375f + max * 0.25f);
+                        channels.R = (byte) Math.Round(channels.R * 0.375f);
+                        channels.G = (byte) Math.Round(channels.G * 0.375f + max * 0.125f);
+                        channels.B = (byte) Math.Round(channels.B * 0.375f + max * 0.25f);
                         row.ColorABGR1555 = channels.ToABGR1555();
                     }
                 }

@@ -36,7 +36,7 @@ namespace CommonLib.Imaging {
             Channels = new PixelChannels[colorCount];
             for (var i = 0; i < colorCount; i++) {
                 var color = (byte) ((255 * i) / colorCount);
-                Channels[i] = new PixelChannels() { a = 255, r = color, g = color, b = color };
+                Channels[i] = new PixelChannels() { A = 255, R = color, G = color, B = color };
             }
         }
 
@@ -66,14 +66,14 @@ namespace CommonLib.Imaging {
         }
 
         public int GetDarkestIndex(bool ignoreColorZero)
-            => GetHighestScoringIndex(ignoreColorZero, color => 0x100 - Math.Max(color.r, Math.Max(color.g, color.b)));
+            => GetHighestScoringIndex(ignoreColorZero, color => 0x100 - Math.Max(color.R, Math.Max(color.G, color.B)));
 
         public int GetLightestIndex(bool ignoreColorZero)
-            => GetHighestScoringIndex(ignoreColorZero, color => Math.Max(color.r, Math.Max(color.g, color.b)));
+            => GetHighestScoringIndex(ignoreColorZero, color => Math.Max(color.R, Math.Max(color.G, color.B)));
 
         public int GetClosestIndex(bool ignoreColorZero, PixelChannels matchToColor) {
             return GetHighestScoringIndex(ignoreColorZero, color => {
-                return -(Math.Abs(matchToColor.r - color.r) + Math.Abs(matchToColor.g - color.g) + Math.Abs(matchToColor.b - color.b));
+                return -(Math.Abs(matchToColor.R - color.R) + Math.Abs(matchToColor.G - color.G) + Math.Abs(matchToColor.B - color.B));
             });
         }
     }

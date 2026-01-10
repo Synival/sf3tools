@@ -203,7 +203,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                     if (!useTexture) {
                         var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
-                        color = new Vector4(colorChannels.r / 255.0f, colorChannels.g / 255.0f, colorChannels.b / 255.0f, 1.0f);
+                        color = new Vector4(colorChannels.R / 255.0f, colorChannels.G / 255.0f, colorChannels.B / 255.0f, 1.0f);
                     }
                     else {
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId))

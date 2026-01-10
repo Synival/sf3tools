@@ -47,10 +47,10 @@ namespace SF3.Win.Controls {
                 .Select(i => {
                     var level = i / 31f;
                     return new PixelChannels() {
-                        a = 255,
-                        r = (byte) ((level * 0.75f  + 0.125f) * 255),
-                        g = (byte) ((level * 0.50f +  0.25f)  * 255),
-                        b = (byte) ((level * 0.25f  + 0.375f) * 255)
+                        A = 255,
+                        R = (byte) ((level * 0.75f  + 0.125f) * 255),
+                        G = (byte) ((level * 0.50f +  0.25f)  * 255),
+                        B = (byte) ((level * 0.25f  + 0.375f) * 255)
                     };
                 })
                 .ToArray()

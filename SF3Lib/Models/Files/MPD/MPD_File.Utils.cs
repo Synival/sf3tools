@@ -62,9 +62,9 @@ namespace SF3.Models.Files.MPD {
 
                 for (int i = 0; i < palette.Channels.Length; i++) {
                     ref var ch = ref palette.Channels[i];
-                    ch.r = (byte) MathHelpers.Clamp(ch.r + adjR, 0, 255);
-                    ch.g = (byte) MathHelpers.Clamp(ch.g + adjG, 0, 255);
-                    ch.b = (byte) MathHelpers.Clamp(ch.b + adjB, 0, 255);
+                    ch.R = (byte) MathHelpers.Clamp(ch.R + adjR, 0, 255);
+                    ch.G = (byte) MathHelpers.Clamp(ch.G + adjG, 0, 255);
+                    ch.B = (byte) MathHelpers.Clamp(ch.B + adjB, 0, 255);
                 }
             }
             return palette;
