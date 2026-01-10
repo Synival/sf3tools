@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Imaging;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -60,7 +61,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GroundModelResources groundModel,
             SkyModelResources skyModel,
             GradientResources gradients,
-            IMPD_PaletteAdjustColor groundAdj,
+            IColorAdjustRGB555 groundAdj,
             LightingResources lighting,
             BoundaryModelResources boundaryModels,
             CollisionResources collisionModels,
@@ -363,7 +364,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GeneralResources general,
             GroundModelResources groundModel,
             GradientResources gradients,
-            IMPD_PaletteAdjustColor groundAdj,
+            IColorAdjustRGB555 groundAdj,
             RendererOptions options,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix

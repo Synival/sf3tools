@@ -91,27 +91,27 @@ namespace SF3.MPD {
         /// The color 
         /// Only supported in Scenario 2+. If unsupported, all channels are locked at 0x00.
         /// </summary>
-        IMPD_GradientColor GradientTopColor { get; set; }
+        IColorRGB555 GradientTopColor { get; set; }
 
         /// <summary>
         /// The color here is added to every color in the ground palette.
         /// Only supported in Scenario 3+ and only selectively applied, depending on the X1???.BIN file.
         /// If unsupported, all channels are locked at 0x00.
         /// </summary>
-        IMPD_GradientColor GradientBottomColor { get; set; }
+        IColorRGB555 GradientBottomColor { get; set; }
 
         /// <summary>
         /// The color here is added to every color in the light palette.
         /// Only supported in Scenario 2+. If unsupported, all channels are locked at 0x00.
         /// </summary>
-        IMPD_PaletteAdjustColor LightPaletteAdjustment { get; set; }
+        IColorAdjustRGB555 LightPaletteAdjustment { get; set; }
 
         /// <summary>
         /// The color here is added to every color in the ground palette.
         /// Only supported in Scenario 3+ and only selectively applied, depending on the X1???.BIN file.
         /// If unsupported, all channels are locked at 0x00.
         /// </summary>
-        IMPD_PaletteAdjustColor GroundPaletteAdjustment { get; set; }
+        IColorAdjustRGB555 GroundPaletteAdjustment { get; set; }
 
         /// <summary>
         /// The transparency level for models tagged as transparent (tag 2000 (decimal) in any model instance).

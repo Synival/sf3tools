@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
-using SF3.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class GradientResources : ResourcesBase, IMPD_FileResources {
@@ -32,7 +32,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             );
         }
 
-        public void Update(Gradient gradient, IMPD_GradientColor topColor, IMPD_GradientColor bottomColor) {
+        public void Update(Gradient gradient, IColorRGB555 topColor, IColorRGB555 bottomColor) {
             if (gradient == null || topColor == null || bottomColor == null) {
                 Reset();
                 return;

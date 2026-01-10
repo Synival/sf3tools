@@ -1,4 +1,5 @@
-﻿using SF3.Models.Files.MPD;
+﻿using CommonLib.Imaging;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
 using SF3.MPD;
 using SF3.Types;
@@ -70,7 +71,7 @@ namespace SF3.Models.Structs.MPD {
             set {}
         }
 
-        private class GradientTopColorClass : IMPD_GradientColor {
+        private class GradientTopColorClass : IColorRGB555 {
             public GradientTopColorClass(IMPD_File file) {
                 MPD_File = file;
             }
@@ -96,7 +97,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         private GradientTopColorClass _gradientTopColor;
-        public IMPD_GradientColor GradientTopColor {
+        public IColorRGB555 GradientTopColor {
             get => _gradientTopColor;
             set {
                 if (value != null) {
@@ -107,7 +108,7 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        private class GradientBottomColorClass : IMPD_GradientColor {
+        private class GradientBottomColorClass : IColorRGB555 {
             public GradientBottomColorClass(IMPD_File file) {
                 MPD_File = file;
             }
@@ -133,7 +134,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         private GradientBottomColorClass _gradientBottomColor;
-        public IMPD_GradientColor GradientBottomColor {
+        public IColorRGB555 GradientBottomColor {
             get => _gradientBottomColor;
             set {
                 if (value != null) {
@@ -144,7 +145,7 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        private class LightAdjustmentColor : IMPD_PaletteAdjustColor {
+        private class LightAdjustmentColor : IColorAdjustRGB555 {
             public LightAdjustmentColor(IMPD_File file) {
                 MPD_File = file;
             }
@@ -168,7 +169,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         private LightAdjustmentColor _lightPaletteAdjustment;
-        public IMPD_PaletteAdjustColor LightPaletteAdjustment {
+        public IColorAdjustRGB555 LightPaletteAdjustment {
             get => _lightPaletteAdjustment;
             set {
                 if (value != null) {
@@ -179,7 +180,7 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
-        private class GroundAdjustmentColor : IMPD_PaletteAdjustColor {
+        private class GroundAdjustmentColor : IColorAdjustRGB555 {
             public GroundAdjustmentColor(IMPD_File file) {
                 MPD_File = file;
             }
@@ -203,7 +204,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         private GroundAdjustmentColor _groundPaletteAdjustment;
-        public IMPD_PaletteAdjustColor GroundPaletteAdjustment {
+        public IColorAdjustRGB555 GroundPaletteAdjustment {
             get => _groundPaletteAdjustment;
             set {
                 if (value != null) {

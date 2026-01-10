@@ -31,7 +31,7 @@ namespace SF3.Win.OpenGL.MPD {
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
-        public void Update(Palette lightPal, IMPD_PaletteAdjustColor lightAdj) {
+        public void Update(Palette lightPal, IColorAdjustRGB555 lightAdj) {
             using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdj))
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
@@ -39,7 +39,7 @@ namespace SF3.Win.OpenGL.MPD {
         private Bitmap CreateLightPaletteBitmap(IMPD mpdFile)
             => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.Settings?.LightPaletteAdjustment);
 
-        private Bitmap CreateLightPaletteBitmap(Palette lightPal, IMPD_PaletteAdjustColor lightAdj) {
+        private Bitmap CreateLightPaletteBitmap(Palette lightPal, IColorAdjustRGB555 lightAdj) {
             if (lightPal == null)
                 return null;
 
