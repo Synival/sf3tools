@@ -5,12 +5,12 @@ namespace SF3.Models.Structs.MPD.Main {
     public class Gradient : Struct {
         private readonly int _startPositionAddr;
         private readonly int _stopPositionAddr;
-        private readonly int _startRAddr;
-        private readonly int _startGAddr;
-        private readonly int _startBAddr;
-        private readonly int _stopRAddr;
-        private readonly int _stopGAddr;
-        private readonly int _stopBAddr;
+        private readonly int _topRAddr;
+        private readonly int _topGAddr;
+        private readonly int _topBAddr;
+        private readonly int _bottomRAddr;
+        private readonly int _bottomGAddr;
+        private readonly int _bottomBAddr;
         private readonly int _partsAffectedBitsAddr;
         private readonly int _groundOpacityAddr;
         private readonly int _skyOpacityAddr;
@@ -20,12 +20,12 @@ namespace SF3.Models.Structs.MPD.Main {
         : base(data, id, name, address, 0x18) {
             _startPositionAddr         = Address + 0x00; // 2 bytes
             _stopPositionAddr          = Address + 0x02; // 2 bytes
-            _startRAddr                = Address + 0x04; // 2 bytes
-            _startGAddr                = Address + 0x06; // 2 bytes
-            _startBAddr                = Address + 0x08; // 2 bytes
-            _stopRAddr                 = Address + 0x0A; // 2 bytes
-            _stopGAddr                 = Address + 0x0C; // 2 bytes
-            _stopBAddr                 = Address + 0x0E; // 2 bytes
+            _topRAddr                  = Address + 0x04; // 2 bytes
+            _topGAddr                  = Address + 0x06; // 2 bytes
+            _topBAddr                  = Address + 0x08; // 2 bytes
+            _bottomRAddr               = Address + 0x0A; // 2 bytes
+            _bottomGAddr               = Address + 0x0C; // 2 bytes
+            _bottomBAddr               = Address + 0x0E; // 2 bytes
             _partsAffectedBitsAddr     = Address + 0x10; // 2 bytes
             _groundOpacityAddr         = Address + 0x12; // 2 bytes
             _skyOpacityAddr            = Address + 0x14; // 2 bytes
@@ -47,45 +47,45 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_startRAddr), displayOrder: 2, displayFormat: "X2")]
-        public ushort StartR {
-            get => (ushort) Data.GetWord(_startRAddr);
-            set => Data.SetWord(_startRAddr, value);
+        [TableViewModelColumn(addressField: nameof(_topRAddr), displayOrder: 2, displayFormat: "X2")]
+        public ushort TopR {
+            get => (ushort) Data.GetWord(_topRAddr);
+            set => Data.SetWord(_topRAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_startGAddr), displayOrder: 3, displayFormat: "X2")]
-        public ushort StartG {
-            get => (ushort) Data.GetWord(_startGAddr);
-            set => Data.SetWord(_startGAddr, value);
+        [TableViewModelColumn(addressField: nameof(_topGAddr), displayOrder: 3, displayFormat: "X2")]
+        public ushort TopG {
+            get => (ushort) Data.GetWord(_topGAddr);
+            set => Data.SetWord(_topGAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_startBAddr), displayOrder: 4, displayFormat: "X2")]
-        public ushort StartB {
-            get => (ushort) Data.GetWord(_startBAddr);
-            set => Data.SetWord(_startBAddr, value);
+        [TableViewModelColumn(addressField: nameof(_topBAddr), displayOrder: 4, displayFormat: "X2")]
+        public ushort TopB {
+            get => (ushort) Data.GetWord(_topBAddr);
+            set => Data.SetWord(_topBAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_stopRAddr), displayOrder: 5, displayFormat: "X2")]
-        public ushort StopR {
-            get => (ushort) Data.GetWord(_stopRAddr);
-            set => Data.SetWord(_stopRAddr, value);
+        [TableViewModelColumn(addressField: nameof(_bottomRAddr), displayOrder: 5, displayFormat: "X2")]
+        public ushort BottomR {
+            get => (ushort) Data.GetWord(_bottomRAddr);
+            set => Data.SetWord(_bottomRAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_stopGAddr), displayOrder: 6, displayFormat: "X2")]
-        public ushort StopG {
-            get => (ushort) Data.GetWord(_stopGAddr);
-            set => Data.SetWord(_stopGAddr, value);
+        [TableViewModelColumn(addressField: nameof(_bottomGAddr), displayOrder: 6, displayFormat: "X2")]
+        public ushort BottomG {
+            get => (ushort) Data.GetWord(_bottomGAddr);
+            set => Data.SetWord(_bottomGAddr, value);
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_stopBAddr), displayOrder: 7, displayFormat: "X2")]
-        public ushort StopB {
-            get => (ushort) Data.GetWord(_stopBAddr);
-            set => Data.SetWord(_stopBAddr, value);
+        [TableViewModelColumn(addressField: nameof(_bottomBAddr), displayOrder: 7, displayFormat: "X2")]
+        public ushort BottomB {
+            get => (ushort) Data.GetWord(_bottomBAddr);
+            set => Data.SetWord(_bottomBAddr, value);
         }
 
         [BulkCopy]

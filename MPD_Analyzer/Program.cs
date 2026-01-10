@@ -12,7 +12,7 @@ namespace MPD_Analyzer {
         // ,--- Enter the paths for all your MPD files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
-            { ScenarioType.Scenario1,   "D:/" },
+            //{ ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
             { ScenarioType.PremiumDisk, "G:/" },
@@ -453,9 +453,34 @@ namespace MPD_Analyzer {
                        "  Actual: [" + string.Join(", ", actualIgnoredTextureList.Select(x => $"0x{x:X2}")) + "]"]
                     : [];
             }
+
+            string[]? HasBigDumbGradients() {
+                if (!(mpdFile.GradientTable?.Length >= 1))
+                    return null;
+                var gradient = mpdFile.GradientTable[0];
+
+                var errors = new List<string>();
+
+                if (!gradient.AffectsGround && gradient.GroundOpacity > 0)
+                    errors.Add($"Ground OFF: 0x{gradient.GroundOpacity:X2}");
+                if (gradient.AffectsGround && gradient.GroundOpacity == 0)
+                    errors.Add($"Ground ON: 0x{gradient.GroundOpacity:X2}");
+
+                if (!gradient.AffectsSky && gradient.SkyOpacity > 0)
+                    errors.Add($"Sky OFF: 0x{gradient.SkyOpacity:X2}");
+                if (gradient.AffectsSky && gradient.SkyOpacity == 0)
+                    errors.Add($"Sky ON: 0x{gradient.SkyOpacity:X2}");
+
+                if (!gradient.AffectsModelsAndTiles && gradient.ModelsAndTilesOpacity > 0)
+                    errors.Add($"Models OFF: 0x{gradient.ModelsAndTilesOpacity:X2}");
+                if (gradient.AffectsModelsAndTiles && gradient.ModelsAndTilesOpacity == 0)
+                    errors.Add($"Models ON: 0x{gradient.ModelsAndTilesOpacity:X2}");
+
+                return errors.ToArray();
+            }
 #pragma warning restore CS8321 // Local function is declared but never used
 
-            return GetExpectedIgnoredTextureTable();
+            return HasBigDumbGradients();
         }
 
         public static void Main(string[] args) {

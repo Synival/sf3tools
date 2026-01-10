@@ -7,6 +7,7 @@ using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
+using SF3.MPD;
 
 namespace SF3.Win.OpenGL.MPD_File {
     public class GradientResources : ResourcesBase, IMPD_FileResources {
@@ -23,11 +24,16 @@ namespace SF3.Win.OpenGL.MPD_File {
             Models = null;
         }
 
-        public void Update(IMPD_File mpdFile)
-            => Update((mpdFile?.GradientTable?.Length > 0) ? mpdFile.GradientTable[0] : null);
+        public void Update(IMPD_File mpdFile) {
+            Update(
+                (mpdFile?.GradientTable?.Length > 0) ? mpdFile.GradientTable[0] : null,
+                mpdFile?.Settings?.GradientTopColor,
+                mpdFile?.Settings?.GradientBottomColor
+            );
+        }
 
-        public void Update(Gradient gradient) {
-            if (gradient == null) {
+        public void Update(Gradient gradient, IMPD_GradientColor topColor, IMPD_GradientColor bottomColor) {
+            if (gradient == null || topColor == null || bottomColor == null) {
                 Reset();
                 return;
             }
@@ -36,14 +42,14 @@ namespace SF3.Win.OpenGL.MPD_File {
                 gradient.StartPosition / 255f,
                 gradient.StopPosition  / 255f,
                 new Vector3(
-                    Math.Clamp(gradient.StartR / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(gradient.StartG / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(gradient.StartB / (float) 0x1f, 0.00f, 1.00f)
+                    Math.Clamp(topColor.R / (float) 0x1f, 0.00f, 1.00f),
+                    Math.Clamp(topColor.G / (float) 0x1f, 0.00f, 1.00f),
+                    Math.Clamp(topColor.B / (float) 0x1f, 0.00f, 1.00f)
                 ),
                 new Vector3(
-                    Math.Clamp(gradient.StopR / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(gradient.StopG / (float) 0x1f, 0.00f, 1.00f),
-                    Math.Clamp(gradient.StopB / (float) 0x1f, 0.00f, 1.00f)
+                    Math.Clamp(bottomColor.R / (float) 0x1f, 0.00f, 1.00f),
+                    Math.Clamp(bottomColor.G / (float) 0x1f, 0.00f, 1.00f),
+                    Math.Clamp(bottomColor.B / (float) 0x1f, 0.00f, 1.00f)
                 ),
                 gradient.AffectsGround ? (gradient.GroundOpacity / (float) 0x1f) : 0,
                 gradient.AffectsSky ? (gradient.SkyOpacity / (float) 0x1f) : 0,

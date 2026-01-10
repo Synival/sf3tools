@@ -1,4 +1,5 @@
 ﻿using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.MPD;
 using SF3.Types;
 
@@ -8,6 +9,8 @@ namespace SF3.Models.Structs.MPD {
             MPD_File = file;
             _lightPaletteAdjustment  = new LightAdjustmentColor(file);
             _groundPaletteAdjustment = new GroundAdjustmentColor(file);
+            _gradientTopColor        = new GradientTopColorClass(file);
+            _gradientBottomColor     = new GradientBottomColorClass(file);
         }
 
         public IMPD_File MPD_File { get; }
@@ -67,6 +70,80 @@ namespace SF3.Models.Structs.MPD {
             set {}
         }
 
+        private class GradientTopColorClass : IMPD_GradientColor {
+            public GradientTopColorClass(IMPD_File file) {
+                MPD_File = file;
+            }
+
+            public Gradient Gradient => (MPD_File.GradientTable?.Length >= 1) ? MPD_File.GradientTable[0] : null;
+
+            public byte R {
+                get => (byte) (Gradient?.TopR ?? 0);
+                set { if (Gradient != null) Gradient.TopR = value; }
+            }
+
+            public byte G {
+                get => (byte) (Gradient?.TopG ?? 0);
+                set { if (Gradient != null) Gradient.TopG = value; }
+            }
+
+            public byte B {
+                get => (byte) (Gradient?.TopB ?? 0);
+                set { if (Gradient != null) Gradient.TopB = value; }
+            }
+
+            public IMPD_File MPD_File { get; }
+        }
+
+        private GradientTopColorClass _gradientTopColor;
+        public IMPD_GradientColor GradientTopColor {
+            get => _gradientTopColor;
+            set {
+                if (value != null) {
+                    _gradientTopColor.R = value.R;
+                    _gradientTopColor.G = value.G;
+                    _gradientTopColor.B = value.B;
+                }
+            }
+        }
+
+        private class GradientBottomColorClass : IMPD_GradientColor {
+            public GradientBottomColorClass(IMPD_File file) {
+                MPD_File = file;
+            }
+
+            public Gradient Gradient => (MPD_File.GradientTable?.Length >= 1) ? MPD_File.GradientTable[0] : null;
+
+            public byte R {
+                get => (byte) (Gradient?.BottomR ?? 0);
+                set { if (Gradient != null) Gradient.BottomR = value; }
+            }
+
+            public byte G {
+                get => (byte) (Gradient?.BottomG ?? 0);
+                set { if (Gradient != null) Gradient.BottomG = value; }
+            }
+
+            public byte B {
+                get => (byte) (Gradient?.BottomB ?? 0);
+                set { if (Gradient != null) Gradient.BottomB = value; }
+            }
+
+            public IMPD_File MPD_File { get; }
+        }
+
+        private GradientBottomColorClass _gradientBottomColor;
+        public IMPD_GradientColor GradientBottomColor {
+            get => _gradientBottomColor;
+            set {
+                if (value != null) {
+                    _gradientBottomColor.R = value.R;
+                    _gradientBottomColor.G = value.G;
+                    _gradientBottomColor.B = value.B;
+                }
+            }
+        }
+
         private class LightAdjustmentColor : IMPD_PaletteAdjustColor {
             public LightAdjustmentColor(IMPD_File file) {
                 MPD_File = file;
@@ -74,58 +151,17 @@ namespace SF3.Models.Structs.MPD {
 
             public sbyte R {
                 get => (sbyte) (MPD_File.PaletteAdjustment?.LightRAdjustment ?? 0);
-                set {
-                    if (MPD_File.PaletteAdjustment != null)
-                        MPD_File.PaletteAdjustment.LightRAdjustment = value;
-                }
+                set { if (MPD_File.PaletteAdjustment != null) MPD_File.PaletteAdjustment.LightRAdjustment = value; }
             }
 
             public sbyte G {
                 get => (sbyte) (MPD_File.PaletteAdjustment?.LightGAdjustment ?? 0);
-                set {
-                    if (MPD_File.PaletteAdjustment != null)
-                        MPD_File.PaletteAdjustment.LightGAdjustment = value;
-                }
+                set { if (MPD_File.PaletteAdjustment != null) MPD_File.PaletteAdjustment.LightGAdjustment = value; }
             }
 
             public sbyte B {
                 get => (sbyte) (MPD_File.PaletteAdjustment?.LightBAdjustment ?? 0);
-                set {
-                    if (MPD_File.PaletteAdjustment != null)
-                        MPD_File.PaletteAdjustment.LightBAdjustment = value;
-                }
-            }
-
-            public IMPD_File MPD_File { get; }
-        }
-
-        private class GroundAdjustmentColor : IMPD_PaletteAdjustColor {
-            public GroundAdjustmentColor(IMPD_File file) {
-                MPD_File = file;
-            }
-
-            public sbyte R {
-                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundRAdjustment ?? 0);
-                set {
-                    if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
-                        MPD_File.PaletteAdjustment.GroundRAdjustment = value;
-                }
-            }
-
-            public sbyte G {
-                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundGAdjustment ?? 0);
-                set {
-                    if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
-                        MPD_File.PaletteAdjustment.GroundGAdjustment = value;
-                }
-            }
-
-            public sbyte B {
-                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundBAdjustment ?? 0);
-                set {
-                    if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
-                        MPD_File.PaletteAdjustment.GroundBAdjustment = value;
-                }
+                set { if (MPD_File.PaletteAdjustment != null) MPD_File.PaletteAdjustment.LightBAdjustment = value; }
             }
 
             public IMPD_File MPD_File { get; }
@@ -141,6 +177,29 @@ namespace SF3.Models.Structs.MPD {
                     _lightPaletteAdjustment.B = value.B;
                 }
             }
+        }
+
+        private class GroundAdjustmentColor : IMPD_PaletteAdjustColor {
+            public GroundAdjustmentColor(IMPD_File file) {
+                MPD_File = file;
+            }
+
+            public sbyte R {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundRAdjustment ?? 0);
+                set { if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)  MPD_File.PaletteAdjustment.GroundRAdjustment = value; }
+            }
+
+            public sbyte G {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundGAdjustment ?? 0);
+                set { if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true) MPD_File.PaletteAdjustment.GroundGAdjustment = value; }
+            }
+
+            public sbyte B {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundBAdjustment ?? 0);
+                set { if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true) MPD_File.PaletteAdjustment.GroundBAdjustment = value; }
+            }
+
+            public IMPD_File MPD_File { get; }
         }
 
         private GroundAdjustmentColor _groundPaletteAdjustment;
