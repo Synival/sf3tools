@@ -31,15 +31,15 @@ namespace SF3.Win.OpenGL.MPD {
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
-        public void Update(Palette lightPal, IMPD_PaletteAdjustment paletteAdjustment) {
-            using (var textureBitmap = CreateLightPaletteBitmap(lightPal, paletteAdjustment))
+        public void Update(Palette lightPal, IMPD_PaletteAdjustColor lightAdj) {
+            using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdj))
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
         private Bitmap CreateLightPaletteBitmap(IMPD mpdFile)
-            => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.Settings);
+            => CreateLightPaletteBitmap(mpdFile?.LightPalette, mpdFile?.Settings?.LightPaletteAdjustment);
 
-        private Bitmap CreateLightPaletteBitmap(Palette lightPal, IMPD_PaletteAdjustment paletteAdjustment) {
+        private Bitmap CreateLightPaletteBitmap(Palette lightPal, IMPD_PaletteAdjustColor lightAdj) {
             if (lightPal == null)
                 return null;
 
@@ -47,10 +47,10 @@ namespace SF3.Win.OpenGL.MPD {
             var adjG = 0;
             var adjB = 0;
 
-            if (paletteAdjustment?.HasLightAdjustment == true) {
-                adjR = paletteAdjustment.LightRAdjustment * 255 / 31;
-                adjG = paletteAdjustment.LightGAdjustment * 255 / 31;
-                adjB = paletteAdjustment.LightBAdjustment * 255 / 31;
+            if (lightAdj != null) {
+                adjR = lightAdj.R * 255 / 31;
+                adjG = lightAdj.G * 255 / 31;
+                adjB = lightAdj.B * 255 / 31;
             }
 
             var numColors = lightPal.Channels.Length;

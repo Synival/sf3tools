@@ -1,10 +1,9 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
-using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {
-    public class PaletteAdjustment : Struct, IMPD_PaletteAdjustment {
+    public class PaletteAdjustment : Struct {
         private readonly int _lightRAdjustAddr;
         private readonly int _lightGAdjustAddr;
         private readonly int _lightBAdjustAddr;
@@ -27,7 +26,6 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         public ScenarioType Scenario { get; }
-        public bool HasLightAdjustment => Scenario >= ScenarioType.Scenario2;
         public bool HasGroundAdjustment => Scenario >= ScenarioType.Scenario3;
         public bool HasShadowTransparency => Scenario >= ScenarioType.Scenario3;
 

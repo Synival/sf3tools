@@ -1,5 +1,7 @@
-﻿namespace SF3.MPD {
-    public interface IMPD_Settings : IMPD_PaletteAdjustment {
+﻿using CommonLib.Imaging;
+
+namespace SF3.MPD {
+    public interface IMPD_Settings {
         /// <summary>
         /// When set, models are accessed from low memory (0x00292100) rather than high memory (0x060A0000).
         /// </summary>
@@ -84,5 +86,25 @@
         /// typical 'FFFF'. (This is likely a holdover from older MPDs.)
         /// </summary>
         bool LongEmptyIgnoredTextureTable { get; set; }
+
+        /// <summary>
+        /// The color here is added to every color in the light palette.
+        /// Only supported in Scenario 2+. If unsupported, all channels are locked at 0x00.
+        /// </summary>
+        IMPD_PaletteAdjustColor LightPaletteAdjustment { get; set; }
+
+        /// <summary>
+        /// The color here is added to every color in the ground palette.
+        /// Only supported in Scenario 3+ and only selectively applied, depending on the X1???.BIN file.
+        /// If unsupported, all channels are locked at 0x00.
+        /// </summary>
+        IMPD_PaletteAdjustColor GroundPaletteAdjustment { get; set; }
+
+        /// <summary>
+        /// The transparency level for models tagged as transparent (tag 2000 (decimal) in any model instance).
+        /// Valid range is (0x00 ... 0x1F).
+        /// Only supported in Scenario 3+. If unsupported, this is locked at 0x0F.
+        /// </summary>
+        byte ShadowTransparency { get; set; }
     }
 }

@@ -6,6 +6,8 @@ namespace SF3.Models.Structs.MPD {
     public class MPD_Settings : IMPD_Settings {
         public MPD_Settings(IMPD_File file) {
             MPD_File = file;
+            _lightPaletteAdjustment  = new LightAdjustmentColor(file);
+            _groundPaletteAdjustment = new GroundAdjustmentColor(file);
         }
 
         public IMPD_File MPD_File { get; }
@@ -65,60 +67,96 @@ namespace SF3.Models.Structs.MPD {
             set {}
         }
 
-        public bool HasLightAdjustment => MPD_File.PaletteAdjustment?.HasLightAdjustment ?? false;
-        public bool HasGroundAdjustment => MPD_File.PaletteAdjustment?.HasGroundAdjustment ?? false;
-        public bool HasShadowTransparency => MPD_File.PaletteAdjustment?.HasShadowTransparency ?? false;
+        private class LightAdjustmentColor : IMPD_PaletteAdjustColor {
+            public LightAdjustmentColor(IMPD_File file) {
+                MPD_File = file;
+            }
 
-        public short LightRAdjustment {
-            get => MPD_File.PaletteAdjustment?.LightRAdjustment ?? 0;
+            public sbyte R {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.LightRAdjustment ?? 0);
+                set {
+                    if (MPD_File.PaletteAdjustment != null)
+                        MPD_File.PaletteAdjustment.LightRAdjustment = value;
+                }
+            }
+
+            public sbyte G {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.LightGAdjustment ?? 0);
+                set {
+                    if (MPD_File.PaletteAdjustment != null)
+                        MPD_File.PaletteAdjustment.LightGAdjustment = value;
+                }
+            }
+
+            public sbyte B {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.LightBAdjustment ?? 0);
+                set {
+                    if (MPD_File.PaletteAdjustment != null)
+                        MPD_File.PaletteAdjustment.LightBAdjustment = value;
+                }
+            }
+
+            public IMPD_File MPD_File { get; }
+        }
+
+        private class GroundAdjustmentColor : IMPD_PaletteAdjustColor {
+            public GroundAdjustmentColor(IMPD_File file) {
+                MPD_File = file;
+            }
+
+            public sbyte R {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundRAdjustment ?? 0);
+                set {
+                    if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
+                        MPD_File.PaletteAdjustment.GroundRAdjustment = value;
+                }
+            }
+
+            public sbyte G {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundGAdjustment ?? 0);
+                set {
+                    if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
+                        MPD_File.PaletteAdjustment.GroundGAdjustment = value;
+                }
+            }
+
+            public sbyte B {
+                get => (sbyte) (MPD_File.PaletteAdjustment?.GroundBAdjustment ?? 0);
+                set {
+                    if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
+                        MPD_File.PaletteAdjustment.GroundBAdjustment = value;
+                }
+            }
+
+            public IMPD_File MPD_File { get; }
+        }
+
+        private LightAdjustmentColor _lightPaletteAdjustment;
+        public IMPD_PaletteAdjustColor LightPaletteAdjustment {
+            get => _lightPaletteAdjustment;
             set {
-                if (MPD_File.PaletteAdjustment?.HasLightAdjustment == true)
-                    MPD_File.PaletteAdjustment.LightRAdjustment = value;
+                if (value != null) {
+                    _lightPaletteAdjustment.R = value.R;
+                    _lightPaletteAdjustment.G = value.G;
+                    _lightPaletteAdjustment.B = value.B;
+                }
             }
         }
 
-        public short LightGAdjustment {
-            get => MPD_File.PaletteAdjustment?.LightGAdjustment ?? 0;
+        private GroundAdjustmentColor _groundPaletteAdjustment;
+        public IMPD_PaletteAdjustColor GroundPaletteAdjustment {
+            get => _groundPaletteAdjustment;
             set {
-                if (MPD_File.PaletteAdjustment?.HasLightAdjustment == true)
-                    MPD_File.PaletteAdjustment.LightGAdjustment = value;
+                if (value != null) {
+                    _groundPaletteAdjustment.R = value.R;
+                    _groundPaletteAdjustment.G = value.G;
+                    _groundPaletteAdjustment.B = value.B;
+                }
             }
         }
 
-        public short LightBAdjustment {
-            get => MPD_File.PaletteAdjustment?.LightBAdjustment ?? 0;
-            set {
-                if (MPD_File.PaletteAdjustment?.HasLightAdjustment == true)
-                    MPD_File.PaletteAdjustment.LightBAdjustment = value;
-            }
-        }
-
-        public short GroundRAdjustment {
-            get => MPD_File.PaletteAdjustment?.GroundRAdjustment ?? 0;
-            set {
-                if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
-                    MPD_File.PaletteAdjustment.GroundRAdjustment = value;
-            }
-        }
-
-        public short GroundGAdjustment {
-            get => MPD_File.PaletteAdjustment?.GroundGAdjustment ?? 0;
-            set {
-                if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
-                    MPD_File.PaletteAdjustment.GroundGAdjustment = value;
-            }
-        }
-
-        public short GroundBAdjustment {
-            get => MPD_File.PaletteAdjustment?.GroundBAdjustment ?? 0;
-            set {
-                if (MPD_File.PaletteAdjustment?.HasGroundAdjustment == true)
-                    MPD_File.PaletteAdjustment.GroundBAdjustment = value;
-            }
-        }
-
-        public ushort ShadowTransparency {
-            get => MPD_File.PaletteAdjustment?.ShadowTransparency ?? 0;
+        public byte ShadowTransparency {
+            get => (byte) (MPD_File.PaletteAdjustment?.ShadowTransparency ?? 0x0F);
             set {
                 if (MPD_File.PaletteAdjustment?.HasShadowTransparency == true)
                     MPD_File.PaletteAdjustment.ShadowTransparency = value;

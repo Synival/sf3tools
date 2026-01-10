@@ -60,7 +60,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GroundModelResources groundModel,
             SkyModelResources skyModel,
             GradientResources gradients,
-            IMPD_PaletteAdjustment paletteAdj,
+            IMPD_PaletteAdjustColor groundAdj,
             LightingResources lighting,
             BoundaryModelResources boundaryModels,
             CollisionResources collisionModels,
@@ -84,7 +84,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             if (options.DrawSky)
                 DrawSceneSky(general, skyModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
             if (options.DrawGround)
-                DrawSceneGround(general, groundModel, gradients, paletteAdj, options, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGround(general, groundModel, gradients, groundAdj, options, ref projectionMatrix, ref viewMatrix);
 
             // Determine which models are facing the camera and should be displayed.
             var showModelsInAllDirections = !options.HideModelsNotFacingCamera;
@@ -363,7 +363,7 @@ namespace SF3.Win.OpenGL.MPD_File {
             GeneralResources general,
             GroundModelResources groundModel,
             GradientResources gradients,
-            IMPD_PaletteAdjustment paletteAdj,
+            IMPD_PaletteAdjustColor groundAdj,
             RendererOptions options,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix
@@ -375,11 +375,11 @@ namespace SF3.Win.OpenGL.MPD_File {
             GL.DepthMask(false);
 
             Vector3 glow = Vector3.Zero;
-            if (options.ApplyLighting && paletteAdj != null) {
+            if (options.ApplyLighting && groundAdj != null) {
                 glow = new Vector3(
-                    paletteAdj.GroundRAdjustment / (float) 0x1F, 
-                    paletteAdj.GroundGAdjustment / (float) 0x1F, 
-                    paletteAdj.GroundBAdjustment / (float) 0x1F
+                    groundAdj.R / (float) 0x1F, 
+                    groundAdj.G / (float) 0x1F, 
+                    groundAdj.B / (float) 0x1F
                 );
             }
             general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, ref glow);

@@ -192,12 +192,10 @@ namespace SF3.Win.OpenGL.MPD {
 
                     if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow)
                         transparency *= 0.5f;
-                    else if (forceSemiTransparent) {
-                        var paletteAdjTransparency = mpdFile.Settings?.HasShadowTransparency == true
-                            ? (mpdFile.Settings.ShadowTransparency & 0x1F) / (float) 0x1F
-                            : 0.5f;
-                        transparency *= 1.0f - paletteAdjTransparency;
-                    }
+                    else if (forceSemiTransparent)
+                        transparency *= 1.0f - (mpdFile.Settings.ShadowTransparency / (float) 0x1F);
+
+                    // TODO: Would be cool if the shader somehow did the MESH effect!
                     if (attr.Mode_MESHon)
                         transparency *= 0.5f;
 
