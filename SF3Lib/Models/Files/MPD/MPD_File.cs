@@ -16,6 +16,7 @@ using SF3.Models.Tables.MPD.Animation;
 using CommonLib.Imaging;
 using CommonLib.Geometry;
 using CommonLib.SGL;
+using CommonLib.Utils;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -93,11 +94,19 @@ namespace SF3.Models.Files.MPD {
 
             public Palette Palette => MPD_File.LightPaletteColorTable?.Palette;
 
-            public VECTOR Direction {
-                get => MPD_File.LightPosition?.Direction ?? new VECTOR(0, 1, 0);
+            public float Pitch {
+                get => MathHelpers.ActualMod((MPD_File.LightPosition?.Pitch ?? 0) + 180.0f, 360.0f) - 180.0f;
                 set {
-                    if (MPD_File.LightPosition != null && value != null)
-                        MPD_File.LightPosition.Direction = value;
+                    if (MPD_File.LightPosition != null)
+                        MPD_File.LightPosition.Pitch = MathHelpers.ActualMod(value + 180.0f, 360.0f) - 180.0f;
+                }
+            }
+
+            public float Yaw {
+                get => MathHelpers.ActualMod((MPD_File.LightPosition?.Yaw ?? 0) + 180.0f, 360.0f) - 180.0f;
+                set {
+                    if (MPD_File.LightPosition != null)
+                        MPD_File.LightPosition.Yaw = MathHelpers.ActualMod(value + 180.0f, 360.0f) - 180.0f;
                 }
             }
 

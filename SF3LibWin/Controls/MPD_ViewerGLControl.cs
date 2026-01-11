@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using OpenTK.GLControl;
 using SF3.Models.Files.MPD;
+using SF3.MPD;
 using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
@@ -101,7 +102,7 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        private void AttachListeners(IMPD_File mpdFile) {
+        private void AttachListeners(IMPD mpdFile) {
             var maxX = mpdFile.Surface.Width;
             var maxY = mpdFile.Surface.Height;
             for (var x = 0; x < maxX; x++)
@@ -110,7 +111,7 @@ namespace SF3.Win.Controls {
             mpdFile.ModelsUpdated += OnModelsUpdated;
         }
 
-        private void DetachListeners(IMPD_File mpdFile) {
+        private void DetachListeners(IMPD mpdFile) {
             var maxX = mpdFile.Surface.Width;
             var maxY = mpdFile.Surface.Height;
             for (var x = 0; x < maxX; x++)

@@ -15,7 +15,7 @@ namespace SF3.MPD {
                 ? (pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.ID)?.ToArray() ?? null) : null;
 
             var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
-            var lightPositionPos     = WriteTableOrNull(mpd.LightPosition);
+            var lightPositionPos     = WriteLightPosition(mpd.Lighting);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
             var animationsPos        = WriteTableOrNull(mpd.Animations, mpd.Settings);
@@ -137,6 +137,16 @@ namespace SF3.MPD {
         public void WritePalette(Palette palette) {
             foreach (var channel in palette.Channels)
                 WriteUShort(channel.ToABGR1555());
+        }
+
+        public uint WriteLightPosition(IMPD_Lighting lighting) {
+            WriteToAlignTo(2);
+            var pos = (uint) CurrentOffset;
+
+            WriteShort(new CompressedFIXED(lighting.Pitch / 180.0f, 0).RawShort);
+            WriteShort(new CompressedFIXED(lighting.Yaw / 180.0f, 0).RawShort);
+
+            return pos;
         }
 
         public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool writeLongEmptyData)

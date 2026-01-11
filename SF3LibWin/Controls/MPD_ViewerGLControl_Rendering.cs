@@ -318,13 +318,13 @@ namespace SF3.Win.Controls {
             if (MPD_File == null)
                 return new Vector3(0, -1, 0);
 
-            var lightPos = MPD_File.LightPosition;
+            var lighting = MPD_File.Lighting;
 
-            var pitchInRadians = lightPos.Pitch / 180.0f * Math.PI;
+            var pitchInRadians = lighting.Pitch / 180.0f * Math.PI;
             var pitchSin = -Math.Sin(pitchInRadians);
             var pitchCos = Math.Cos(pitchInRadians);
 
-            var yawInRadians = lightPos.Yaw / 180.0f * Math.PI;
+            var yawInRadians = lighting.Yaw / 180.0f * Math.PI;
             var x = -Math.Sin(yawInRadians) * pitchCos;
             var y = pitchSin;
             var z = Math.Cos(yawInRadians) * pitchCos;

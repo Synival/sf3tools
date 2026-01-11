@@ -15,7 +15,6 @@ namespace SF3.MPD {
             var pos = (uint) CurrentOffset;
 
             switch (data) {
-                case LightPosition lp:           WriteLightPosition(lp);       break;
                 case UnknownUInt32Table ui32:    WriteUInt32Table(ui32);       break;
                 case UnknownUInt16Table ui16:    WriteUInt16Table(ui16);       break;
                 case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);         break;
@@ -29,16 +28,6 @@ namespace SF3.MPD {
 
             WriteToAlignTo(2);
             return pos;
-        }
-
-        public void WriteColorTable(ColorTable colorTable) {
-            foreach (var color in colorTable)
-                WriteUShort(color.ColorABGR1555);
-        }
-
-        public void WriteLightPosition(LightPosition lightPosition) {
-            WriteShort(new CompressedFIXED(lightPosition.Pitch / 180.0f, 0).RawShort);
-            WriteShort(new CompressedFIXED(lightPosition.Yaw / 180.0f, 0).RawShort);
         }
 
         public void WriteUInt8Table(UnknownUInt8Table table) {

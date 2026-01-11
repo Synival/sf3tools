@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
 using SF3.Types;
@@ -65,5 +66,10 @@ namespace SF3.MPD {
         /// intensities. Only present in Scenario 2+.
         /// </summary>
         IMPD_Gradient Gradient { get; }
+
+        /// <summary>
+        /// Triggered when models have been updated and something needs to be informed, like a viewer.
+        /// </summary>
+        EventHandler ModelsUpdated { get; set; }
     }
 }

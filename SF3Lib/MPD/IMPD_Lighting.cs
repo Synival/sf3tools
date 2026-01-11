@@ -13,8 +13,13 @@ namespace SF3.MPD {
         Palette Palette { get; }
 
         /// <summary>
-        /// Directional vector for lighting.
+        /// Pitch (X/Z-rotation) of light direction in degrees with range (-180.0, 180.0].
         /// </summary>
-        VECTOR Direction { get; }
+        float Pitch { get; set; }
+
+        /// <summary>
+        /// Yaw (Y-rotation) of light direction in degrees with range (-180.0, 180.0].
+        /// </summary>
+        float Yaw { get; set; }
     }
 }

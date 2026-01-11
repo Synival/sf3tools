@@ -155,10 +155,5 @@ namespace SF3.Models.Files.MPD {
         int SkyChunk2Index { get; }
         int ForegroundTilesetChunk1Index { get; }
         int ForegroundTilesetChunk2Index { get; }
-
-        /// <summary>
-        /// Triggered when models have been updated and something needs to be informed, like a viewer.
-        /// </summary>
-        EventHandler ModelsUpdated { get; set; }
     }
 }
