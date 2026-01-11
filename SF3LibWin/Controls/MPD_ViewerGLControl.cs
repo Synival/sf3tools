@@ -17,7 +17,7 @@ namespace SF3.Win.Controls {
 
             _appState = AppState.RetrieveAppState();
 
-            _timer = new Timer() { Interval = 1000 / 60 };
+            _timer = new Timer() { Interval = 10 };
             _timer.Tick += (s, a) => IncrementFrame();
             Disposed += (s, a) => {
                 _timer?.Dispose();
