@@ -7,7 +7,7 @@ using SF3.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteChunks(IMPD mpd) {
+        public void WriteChunks(IMPD mpd, byte[] chunk3Data) {
             // Chunk[0] is always empty.
             WriteEmptyChunk();
 
@@ -26,8 +26,11 @@ namespace SF3.MPD {
             else
                 WriteEmptyChunk();
 
-            // TODO: Chunk[3] (animated texture frames)
-            WriteEmptyChunk();
+            // Chunk[3] has animated texture frames, built earlier when building the table.
+            if (chunk3Data != null)
+                WriteDataChunk(chunk3Data);
+            else
+                WriteEmptyChunk();
 
             // Chunk[4] is always empty.
             WriteEmptyChunk();
@@ -72,6 +75,9 @@ namespace SF3.MPD {
 
         public void WriteEmptyChunk()
             => WriteUncompressedChunk(_ => {});
+
+        public void WriteDataChunk(byte[] data)
+            => WriteUncompressedChunk(_ => WriteBytes(data));
 
         private void WriteUncompressedChunk(Action<MPD_Writer> writerFunc) {
             // Write the address of this chunk in the chunk table.

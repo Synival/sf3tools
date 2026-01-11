@@ -1,11 +1,8 @@
 ﻿using System;
-using CommonLib.SGL;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Animation;
 using SF3.Models.Tables.MPD.Main;
-using SF3.Models.Tables.Shared;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
@@ -19,7 +16,6 @@ namespace SF3.MPD {
                 case UnknownUInt16Table ui16:    WriteUInt16Table(ui16);       break;
                 case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);         break;
                 case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
-                case AnimationTable ta:          WriteAnimations(ta, settings?.ShortEmptyAnimationTable ?? false); break;
                 case MissingModelChunk mmc:      return null;
                 case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
                 default:
@@ -54,20 +50,6 @@ namespace SF3.MPD {
         public void WriteModelSwitchGroups(ModelSwitchGroupsTable modelSwitchGroups) {
             // TODO: Write the things
             WriteUInt(0xFFFFFFFF);
-        }
-
-        public void WriteAnimations(AnimationTable animations, bool shortEmptyTable) {
-            // TODO: Write the things
-            if (shortEmptyTable)
-                WriteUShort(0xFFFF);
-            else {
-                for (int i = 0; i < 2; i++) {
-                    if (animations.Is32Bit)
-                        WriteUInt(animations.TextureEndId);
-                    else
-                        WriteUShort((ushort) animations.TextureEndId);
-                }
-            }
         }
     }
 }

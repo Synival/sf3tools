@@ -4,6 +4,7 @@ using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Animation;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -12,7 +13,7 @@ namespace MPD_Analyzer {
         // ,--- Enter the paths for all your MPD files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
-            //{ ScenarioType.Scenario1,   "D:/" },
+            { ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
             { ScenarioType.PremiumDisk, "G:/" },
@@ -64,9 +65,11 @@ namespace MPD_Analyzer {
             // Gotta have the model collection!
             if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(MPD_CollectionType.Primary))
                 return null;
+/*
             // Gotta have textures!
             if (!(mpdFile.ModelCollections[MPD_CollectionType.Primary]?.Textures?.Count() >= 1))
                 return null;
+*/
 
             var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
             var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
@@ -478,9 +481,15 @@ namespace MPD_Analyzer {
 
                 return errors.ToArray();
             }
+
+            string[]? HasMismatchedAnimationDimensions() {
+                var anims = texturesById.Values.Where(x => x.Animation != null && !x.IsIgnored && !x.Animation.IsIgnored).ToDictionary(x => x, x => (AnimationStruct) x.Animation);
+                var mismatches = anims.Where(x => x.Key.Width != x.Value.Width || x.Key.Height != x.Value.Height).ToDictionary();
+                return mismatches.Select(x => $"0x{x.Key.ID:X2}: ({x.Key.Width}x{x.Key.Height}) => ({x.Value.Width}x{x.Value.Height})").ToArray();
+            }
 #pragma warning restore CS8321 // Local function is declared but never used
 
-            return HasBigDumbGradients();
+            return HasMismatchedAnimationDimensions();
         }
 
         public static void Main(string[] args) {

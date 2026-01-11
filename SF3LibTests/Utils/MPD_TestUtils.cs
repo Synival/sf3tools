@@ -107,28 +107,28 @@ namespace SF3.Tests.Utils {
             ));
 
             // Scenario should be the same.
-            CollectException(() => Assert.AreEqual(expectedFile.Scenario, actualFile.Scenario, $"Scenario is different: expected={expectedFile.Scenario}, actual={actualFile.Scenario}"));
+            CollectException(() => Assert.IsTrue(expectedFile.Scenario == actualFile.Scenario, $"Scenario is different: expected={expectedFile.Scenario}, actual={actualFile.Scenario}"));
 
             // Go chunk by chunk.
             var expectedChunkCount = expectedFile.ChunkData.Length;
             var actualChunkCount   = actualFile.ChunkData.Length;
-            CollectException(() => Assert.AreEqual(expectedChunkCount, actualChunkCount, $"ChunkData.Length's are different: should be {expectedChunkCount}, is {actualChunkCount}"));
+            CollectException(() => Assert.IsTrue(expectedChunkCount == actualChunkCount, $"ChunkData.Length's are different: should be {expectedChunkCount}, is {actualChunkCount}"));
 
             for (int i = 0; i < expectedChunkCount; i++) {
                 var expectedChunkInfo = expectedFile.ChunkLocations[i];
                 var actualChunkInfo   = actualFile.ChunkLocations[i];
 
-                CollectException(() => Assert.AreEqual(expectedChunkInfo.Exists, actualChunkInfo.Exists, $"Inconsistent Chunk[{i}].Exists: expected={expectedChunkInfo.Exists}, actual={actualChunkInfo.Exists}"));
-                if (!expectedChunkInfo.Exists && actualChunkInfo.Exists == false)
+                CollectException(() => Assert.IsTrue(expectedChunkInfo.Exists == actualChunkInfo.Exists, $"Inconsistent Chunk[{i}].Exists: expected={expectedChunkInfo.Exists}, actual={actualChunkInfo.Exists}"));
+                if (!expectedChunkInfo.Exists || actualChunkInfo.Exists == false)
                     continue;
 
-                CollectException(() => Assert.AreEqual(expectedChunkInfo.ChunkType, actualChunkInfo.ChunkType, $"Inconsistent Chunk[{i}].ChunkType: expected={expectedChunkInfo.ChunkType}, actual={actualChunkInfo.ChunkType}"));
+                CollectException(() => Assert.IsTrue(expectedChunkInfo.ChunkType == actualChunkInfo.ChunkType, $"Inconsistent Chunk[{i}].ChunkType: expected={expectedChunkInfo.ChunkType}, actual={actualChunkInfo.ChunkType}"));
 
                 var skipRegions = GetSkipRegions(i);
                 var expectedSize = expectedChunkInfo.DecompressedSize + ((skipRegions != null) ? skipRegions.Sum(x => x.ActualDataExtraBytes) : 0);
                 var actualSize   = actualChunkInfo.DecompressedSize;
 
-                CollectException(() => Assert.AreEqual(expectedSize, actualSize,
+                CollectException(() => Assert.IsTrue(expectedSize == actualSize,
                     $"Inconsistent Chunk[{i}].DecompressedSize: expected={expectedSize} ({expectedSize:X4}), actual={actualSize} ({actualSize:X4})"));
 
                 var expectedChunkData = expectedFile.ChunkData[i];
@@ -154,7 +154,7 @@ namespace SF3.Tests.Utils {
             if (exceptionsCaught.Count == 1)
                 throw exceptionsCaught[0];
             else if (exceptionsCaught.Count > 1)
-                throw new AggregateException(string.Join("\r\n", exceptionsCaught.Select(x => x.Message)));
+                throw new AggregateException("\r\n" + string.Join("\r\n", exceptionsCaught.Select(x => x.Message)));
         }
     }
 }

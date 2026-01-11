@@ -11,11 +11,6 @@ namespace SF3.Imaging {
         IMPD_AnimationFrame GetFrame(int frameCounter);
 
         /// <summary>
-        /// ID of the texture this animation is assigned to.
-        /// </summary>
-        int ID { get; }
-
-        /// <summary>
         /// Initial internal frame counter value of the animation.
         /// </summary>
         int FrameTimerStart { get; }

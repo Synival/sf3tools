@@ -1,24 +1,29 @@
 ﻿using System.Linq;
+using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
 using CommonLib.SGL;
+using CommonLib.Utils;
+using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteMain(ScenarioType scenario, IMPD_File mpd) {
+        public void WriteMain(ScenarioType scenario, IMPD_File mpd, out byte[] chunk3Data) {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
-            var ignoredTextureIds = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var pmc)
-                ? (pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.ID)?.ToArray() ?? null) : null;
+            _ = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var pmc);
+            var animations = pmc?.Textures?.Where(x => x.Animation != null && !x.Animation.IsIgnored)?.ToArray();
+            var ignoredTextureIds = pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.ID)?.ToArray() ?? null;
 
             var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
             var lightPositionPos     = WriteLightPosition(mpd.Lighting);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
             var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
-            var animationsPos        = WriteTableOrNull(mpd.Animations, mpd.Settings);
+            var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data);
             var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
@@ -120,7 +125,7 @@ namespace SF3.MPD {
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WriteMPDPointer(ignoredTexturesPos);
             WriteMPDPointer(groundPalettePos ?? headerAddr);
-            WriteMPDPointer(skyPalettePos ?? headerAddr);
+            WriteMPDPointer(skyPalettePos ?? (groundPalettePos.HasValue ? groundPalettePos.Value + 0x200 : headerAddr));
             WriteShort(planes.GroundX);
             WriteShort(planes.GroundY);
             WriteShort(planes.GroundZ);
@@ -145,6 +150,50 @@ namespace SF3.MPD {
 
             WriteShort(new CompressedFIXED(lighting.Pitch / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(lighting.Yaw / 180.0f, 0).RawShort);
+
+            return pos;
+        }
+
+        public uint WriteAnimations(IMPD_AnimatableTexture[] textures, bool shortEmptyTable, out byte[] chunk3Data) {
+            var pos = (uint) CurrentOffset;
+            textures = (textures ?? new IMPD_AnimatableTexture[0]).Where(x => x.Animation != null && !x.IsIgnored).ToArray();
+
+            var chunk3DataArray = textures.Length > 0 ? new ByteArray(0x1000) : null;
+            var chunk3BytesWritten = 0;
+
+            // Special case for a few very specific files.
+            foreach (var tex in textures) {
+                WriteUShort((ushort) tex.ID);
+                WriteUShort((ushort) tex.Width);
+                WriteUShort((ushort) tex.Height);
+                WriteUShort((ushort) tex.Animation.FrameTimerStart);
+
+                foreach (var frame in tex.Animation.Frames) {
+                    var compressedTexture = Compression.CompressLZSS(frame.ImageData16Bit.To1DArrayTransposed().ToByteArray());
+                    var chunk3WritePos = chunk3BytesWritten;
+                    chunk3BytesWritten += compressedTexture.Length;
+                    if (chunk3BytesWritten > chunk3DataArray.Length)
+                        chunk3DataArray.Resize(chunk3DataArray.Length + 0x1000);
+                    chunk3DataArray.SetDataAtTo(chunk3WritePos, compressedTexture.Length, compressedTexture);
+
+                    WriteUShort((ushort) chunk3WritePos);
+                    WriteUShort((ushort) frame.Duration);
+                }
+
+                WriteUShort(0xFFFE);
+            }
+
+            WriteUShort(0xFFFF);
+            if (!shortEmptyTable)
+                WriteUShort(0xFFFF);
+
+            if (chunk3DataArray == null)
+                chunk3Data = null;
+            else {
+                if (chunk3BytesWritten % 4 != 0)
+                    chunk3BytesWritten += 4 - (chunk3BytesWritten % 4);
+                chunk3Data = chunk3DataArray.GetDataCopyAt(0, chunk3BytesWritten);
+            }
 
             return pos;
         }
