@@ -68,6 +68,14 @@ namespace SF3.Win.Controls {
                 shader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
             }
 
+            if (_globalTimer == null) {
+                // TODO: use good timer code from ViewerGLControl
+                // TODO: get this rendering at 60fps
+                _globalTimer = new Timer() { Interval = 1000 / 45 };
+                _globalTimer.Tick += (s, a) => Yaw = (Yaw + 1.0f) % 360f;
+                _globalTimer.Start();
+            }
+
             // TODO: use good timer code from ViewerGLControl
             // TODO: get this rendering at 60fps
             _timer = new Timer() { Interval = 1000 / 45 };
@@ -229,8 +237,6 @@ namespace SF3.Win.Controls {
             if (!Visible)
                 return;
 
-            Yaw = (Yaw + 1.0f) % 360f;
-
             // TODO: this doesn't update at 30fps, please fix!
             if (_models != null && Models != null)
                 foreach (var modelGroup in _models.ModelsByIDByCollection[Models.Collection].Values)
@@ -241,7 +247,7 @@ namespace SF3.Win.Controls {
         }
 
         public Vector3 Position { get; private set; }
-        public float Yaw { get; private set; }
+        public static float Yaw { get; private set; }
         public float Pitch { get; private set; }
 
         private float _minX = 0f;
@@ -270,5 +276,7 @@ namespace SF3.Win.Controls {
 
         private Renderer _renderer = null;
         private Timer _timer = null;
+
+        private static Timer _globalTimer = null;
     }
 }
