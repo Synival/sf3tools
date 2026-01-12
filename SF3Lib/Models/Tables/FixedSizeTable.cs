@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
