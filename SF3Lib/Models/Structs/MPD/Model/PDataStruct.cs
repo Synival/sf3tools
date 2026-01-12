@@ -46,8 +46,8 @@ namespace SF3.Models.Structs.MPD.Model {
         private ModelChunk _modelChunk = null;
         public ModelChunk Chunk {
             get {
-                if (_modelChunk == null && ChunkIndex.HasValue)
-                    _modelChunk = (ModelChunk) MPD_File.ModelCollections?.Values?.FirstOrDefault(x => x is ModelChunk mc && mc.ChunkIndex == ChunkIndex);
+                if (_modelChunk == null)
+                    _modelChunk = (ModelChunk) MPD_File.ModelCollections?.Values?.FirstOrDefault(x => x is ModelChunk mc && mc.Collection == Collection);
                 return _modelChunk;
             }
         }
