@@ -105,7 +105,7 @@ namespace SF3.Models.Files.MPD {
 
             // Look for the first PDATA with one polygon that uses the tree texture (usually 0, but not always).
             return mc.PDataTable.FirstOrDefault(x => {
-                if (x.PolygonCount != 1)
+                if (x.FaceCount != 1)
                     return false;
 
                 var attr = mc.AttrTablesByMemoryAddress[x.AttributesOffset][0];

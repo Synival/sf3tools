@@ -119,7 +119,7 @@ namespace SF3.Models.Files.MPD {
 
             try {
                 PolygonTablesByMemoryAddress = PDataTable
-                    .Select(x => new ModelElementKey { AddressInMemory = x.PolygonsOffset, Count = x.PolygonCount })
+                    .Select(x => new ModelElementKey { AddressInMemory = x.PolygonsOffset, Count = x.FaceCount })
                     .Where(x => x.AddressInMemory != 0)
                     .GroupBy(x => x.AddressInMemory)
                     .Select(x => {
@@ -141,7 +141,7 @@ namespace SF3.Models.Files.MPD {
 
             try {
                 AttrTablesByMemoryAddress = PDataTable
-                    .Select(x => new ModelElementKey { AddressInMemory = x.AttributesOffset, Count = x.PolygonCount })
+                    .Select(x => new ModelElementKey { AddressInMemory = x.AttributesOffset, Count = x.FaceCount })
                     .Where(x => x.AddressInMemory != 0)
                     .GroupBy(x => x.AddressInMemory)
                     .Select(x => {

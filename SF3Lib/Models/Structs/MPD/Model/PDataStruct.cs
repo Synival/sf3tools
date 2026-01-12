@@ -7,7 +7,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public readonly int _verticesOffsetAddr;
         public readonly int _vertexCountAddr;
         public readonly int _polygonsOffsetAddr;
-        public readonly int _polygonCountAddr;
+        public readonly int _faceCountAddr;
         public readonly int _attributesOffsetAddr;
 
         public PDataStruct(IByteData data, int id, string name, int address,
@@ -21,7 +21,7 @@ namespace SF3.Models.Structs.MPD.Model {
             _verticesOffsetAddr   = Address + 0x00; // 4 bytes
             _vertexCountAddr      = Address + 0x04; // 4 bytes
             _polygonsOffsetAddr   = Address + 0x08; // 4 bytes
-            _polygonCountAddr     = Address + 0x0C; // 4 bytes
+            _faceCountAddr        = Address + 0x0C; // 4 bytes
             _attributesOffsetAddr = Address + 0x10; // 4 bytes
         }
 
@@ -62,10 +62,10 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_polygonCountAddr), displayOrder: 3)]
-        public int PolygonCount {
-            get => Data.GetDouble(_polygonCountAddr);
-            set => Data.SetDouble(_polygonCountAddr, value);
+        [TableViewModelColumn(addressField: nameof(_faceCountAddr), displayOrder: 3)]
+        public int FaceCount {
+            get => Data.GetDouble(_faceCountAddr);
+            set => Data.SetDouble(_faceCountAddr, value);
         }
 
         [BulkCopy]
