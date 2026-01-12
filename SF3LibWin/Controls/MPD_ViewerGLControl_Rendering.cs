@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD;
 using SF3.Win.OpenGL.MPD_File;
@@ -203,20 +201,37 @@ namespace SF3.Win.Controls {
             GL.StencilMask(0xFF);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
-            int[] GetModelsToHide(bool flagIsOn, IEnumerable<ModelIDStruct> showWhenOff, IEnumerable<ModelIDStruct> showWhenOn) {
-                var modelIDs = flagIsOn ? showWhenOff.Select(x => (int) x.ModelID).ToArray() : showWhenOn.Select(x => (int) x.ModelID).ToArray();
-                return modelIDs;
-            }
+            // Determine which models to hide based on flags.
+            // TODO: Cache all this!!
+            // TODO: This isn't how it actually works; it's very non-deterministic.
+            //   Models appear to be hidden by default if they're in any "VisibleModelsWhenFlagOn" table.
+            //   Their visibility is toggled on/off when the flag is toggled.
+            //   If a model is present in multiple switches (as is the case in IWAOKA.MPD) then the visibility
+            //      of the model depends on the order in which the flags were toggled.
+            var modelsToHide = new HashSet<int>();
+            if (MPD_File?.ModelSwitchGroupsTable != null) {
+                // Assume everything is hidden by default.
+                if (MPD_File.VisibleModelsWhenFlagOnByAddr != null)
+                    foreach (var table in MPD_File.VisibleModelsWhenFlagOnByAddr.Values)
+                        foreach (var row in table)
+                            modelsToHide.Add(row.ModelID);
 
-            // TODO: cache this!!
-            var allModelsToHide = MPD_File?.ModelSwitchGroupsTable
-                ?.SelectMany(x => GetModelsToHide(
-                    x.StateInEditor,
-                    MPD_File.VisibleModelsWhenFlagOffByAddr.TryGetValue((int) x.VisibleModelsWhenFlagOffOffset, out var arr1) ? arr1 : [],
-                    MPD_File.VisibleModelsWhenFlagOnByAddr .TryGetValue((int) x.VisibleModelsWhenFlagOnOffset,  out var arr2) ? arr2 : []
-                ))
-                ?.Distinct()
-                ?.ToHashSet() ?? [];
+                if (MPD_File.VisibleModelsWhenFlagOffByAddr != null)
+                    foreach (var table in MPD_File.VisibleModelsWhenFlagOffByAddr.Values)
+                        foreach (var row in table)
+                            modelsToHide.Add(row.ModelID);
+
+                // Enable models selectively based on flags.
+                foreach (var msg in MPD_File.ModelSwitchGroupsTable) {
+                    var turnOnTable = msg.StateInEditor
+                        ? MPD_File.VisibleModelsWhenFlagOnByAddr .TryGetValue((int) msg.VisibleModelsWhenFlagOnOffset , out var onTable)  ? onTable  : null
+                        : MPD_File.VisibleModelsWhenFlagOffByAddr.TryGetValue((int) msg.VisibleModelsWhenFlagOffOffset, out var offTable) ? offTable : null;
+
+                    if (turnOnTable != null)
+                        foreach (var row in turnOnTable)
+                            modelsToHide.Remove(row.ModelID);
+                }
+            }
 
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel,
@@ -252,7 +267,7 @@ namespace SF3.Win.Controls {
 
                     UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
-                    ModelsToHide = allModelsToHide,
+                    ModelsToHide = modelsToHide,
                 },
                 Yaw, Pitch, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix

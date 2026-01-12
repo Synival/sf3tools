@@ -487,9 +487,34 @@ namespace MPD_Analyzer {
                 var mismatches = anims.Where(x => x.Key.Width != x.Value.Width || x.Key.Height != x.Value.Height).ToDictionary();
                 return mismatches.Select(x => $"0x{x.Key.ID:X2}: ({x.Key.Width}x{x.Key.Height}) => ({x.Value.Width}x{x.Value.Height})").ToArray();
             }
+
+            string[]? GetMultiReferenceModelSwitchGroups() {
+                if (!(mpdFile.ModelSwitchGroupsTable?.Length > 0))
+                    return null;
+
+                var errors = new List<string>();
+
+                var offTables      = mpdFile.VisibleModelsWhenFlagOffByAddr.Values.ToArray();
+                var offModelCount  = offTables.SelectMany(x => x.Rows).Select(x => x.ModelID).GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+                var multiOffModels = offModelCount.Where(x => x.Value > 1).ToDictionary();
+                errors.AddRange(multiOffModels.Select(x => $"Off:  0x{x.Key:X2} x{x.Value}"));
+
+                var onTables      = mpdFile.VisibleModelsWhenFlagOnByAddr.Values.ToArray();
+                var onModelCount  = onTables.SelectMany(x => x.Rows).Select(x => x.ModelID).GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+                var multiOnModels = onModelCount.Where(x => x.Value > 1).ToDictionary();
+                errors.AddRange(multiOnModels.Select(x => $"On:   0x{x.Key:X2} x{x.Value}"));
+
+                var offModels  = offModelCount.Keys.ToHashSet();
+                var onModels   = onModelCount.Keys.ToHashSet();
+                var bothModels = offModels.Where(onModels.Contains).ToHashSet();
+                errors.AddRange(bothModels.Select(x => $"Both: 0x{x:X2}"));
+
+                return errors.ToArray();
+            }
+
 #pragma warning restore CS8321 // Local function is declared but never used
 
-            return HasMismatchedAnimationDimensions();
+            return GetMultiReferenceModelSwitchGroups();
         }
 
         public static void Main(string[] args) {
