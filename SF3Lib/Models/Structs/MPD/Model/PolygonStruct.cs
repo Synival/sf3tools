@@ -1,4 +1,8 @@
-﻿using CommonLib.Attributes;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using CommonLib;
+using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 
@@ -20,6 +24,8 @@ namespace SF3.Models.Structs.MPD.Model {
             _vertex2Addr = Address + 0x0E; // 2 bytes
             _vertex3Addr = Address + 0x10; // 2 bytes
             _vertex4Addr = Address + 0x12; // 2 bytes
+
+            Vertices = new MockVertices(this);
         }
 
         [BulkCopy]
@@ -70,5 +76,37 @@ namespace SF3.Models.Structs.MPD.Model {
             get => (ushort) Data.GetWord(_vertex4Addr);
             set => Data.SetWord(_vertex4Addr, value);
         }
+
+        private class MockVertices : IIndexedEnumerableWithLength<int> {
+            public MockVertices(PolygonStruct polygon) {
+                Polygon = polygon;
+            }
+
+            public PolygonStruct Polygon { get; }
+
+            public int Length => 4;
+            public int this[int index] {
+                get {
+                    switch (index) {
+                        case 0: return Polygon.Vertex1;
+                        case 1: return Polygon.Vertex2;
+                        case 2: return Polygon.Vertex3;
+                        case 3: return Polygon.Vertex4;
+                        default: throw new IndexOutOfRangeException(nameof(index));
+                    }
+                }
+            }
+
+            public IEnumerator<int> GetEnumerator() {
+                yield return Polygon.Vertex1;
+                yield return Polygon.Vertex2;
+                yield return Polygon.Vertex3;
+                yield return Polygon.Vertex4;
+            }
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        }
+
+        public IIndexedEnumerableWithLength<int> Vertices { get; }
     }
 }

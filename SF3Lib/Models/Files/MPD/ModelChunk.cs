@@ -2,7 +2,6 @@
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
-using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
@@ -81,7 +80,7 @@ namespace SF3.Models.Files.MPD {
                 })
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, "PDATAs", pdataRefs);
+            PDataTable = PDataTable.Create(Data, "PDATAs", MPD_File, pdataRefs);
 
             try {
                 PDatasByMemoryAddress = PDataTable
@@ -273,36 +272,8 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public IMPD_Model GetModel(int id) {
-            return GetModel(PDatasByMemoryAddress.Values.FirstOrDefault(
-                x => x.Collection == Collection && x.ID == id && x.Index == 0
-            ));
-        }
-
-        private Dictionary<int, IMPD_Model> _mpdModelsById = new Dictionary<int, IMPD_Model>();
-        private IMPD_Model GetModel(PDataStruct pdata) {
-            if (pdata == null)
-                return null;
-
-            if (!_mpdModelsById.ContainsKey(pdata.ID)) {
-                var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
-                    .Select(x => x.Vector)
-                    .ToArray();
-
-                var attrTable = AttrTablesByMemoryAddress[pdata.AttributesOffset];
-                var faces = PolygonTablesByMemoryAddress[pdata.PolygonsOffset]
-                    .Select((x, i) => new SGL_ModelFace(
-                        new int[] { x.Vertex1, x.Vertex2, x.Vertex3, x.Vertex4 },
-                        new VECTOR(x.NormalX, x.NormalY, x.NormalZ),
-                        new ATTR(attrTable[i])
-                    ))
-                    .ToArray();
-
-                _mpdModelsById[pdata.ID] = new MPD_Model(pdata.Collection, pdata.ID, vertices, faces);
-            }
-
-            return _mpdModelsById[pdata.ID];
-        }
+        public IMPD_Model GetModel(int id)
+            => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ID == id && x.Index == 0);
 
         private IEnumerableWithLength<IMPD_Model> _mpdModels;
         public IEnumerableWithLength<IMPD_Model> Models {
@@ -310,7 +281,7 @@ namespace SF3.Models.Files.MPD {
                 if (_mpdModels == null) {
                     _mpdModels = PDatasByMemoryAddress.Values
                         .Where(x => x.Index == 0)
-                        .Select(x => GetModel(x))
+                        .Cast<IMPD_Model>()
                         .ToArray()
                         .ToEnumerableWithLength();
                 }
