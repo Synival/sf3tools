@@ -88,10 +88,10 @@ namespace SF3.MPD {
                 // Write placeholders for the tables to write and their counts.
                 pointsPtrs[i] = CurrentOffset;
                 WriteMPDPointer(null);
-                WriteInt(model.Vertices.Count);
+                WriteInt(model.Vertices.Length);
                 polygonsPtrs[i] = CurrentOffset;
                 WriteMPDPointer(null);
-                WriteInt(model.Faces.Count);
+                WriteInt(model.Faces.Length);
                 attrsPtrs[i] = CurrentOffset;
                 WriteMPDPointer(null);
             }
@@ -134,9 +134,9 @@ namespace SF3.MPD {
                 // Now write the PDATA
                 pdataPosByInstanceIndex[instance.ID] = (uint) CurrentOffset;
                 WriteMPDPointer(verticesPos);
-                WriteInt(model.Vertices.Count);
+                WriteInt(model.Vertices.Length);
                 WriteMPDPointer(polygonsPos);
-                WriteInt(model.Faces.Count);
+                WriteInt(model.Faces.Length);
                 WriteMPDPointer(attributesPos);
             }
 

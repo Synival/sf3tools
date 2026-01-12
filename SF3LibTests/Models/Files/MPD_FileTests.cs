@@ -308,8 +308,8 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(14, models.Length);
 
             var sarabandModel = models[7];
-            Assert.AreEqual(289, sarabandModel.Vertices.Count);
-            Assert.AreEqual(193, sarabandModel.Faces.Count);
+            Assert.AreEqual(289, sarabandModel.Vertices.Length);
+            Assert.AreEqual(193, sarabandModel.Faces.Length);
         }
     }
 }

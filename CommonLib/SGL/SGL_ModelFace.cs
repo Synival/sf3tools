@@ -1,9 +1,10 @@
 ﻿using System;
+using CommonLib.Extensions;
 
 namespace CommonLib.SGL {
     public class SGL_ModelFace : ISGL_ModelFace {
         public SGL_ModelFace() {
-            VertexIndices = new int[4];
+            VertexIndices = new int[4].ToEnumerableWithLength();
             Normal        = new VECTOR(0, 0, 0);
             Attributes    = new ATTR();
         }
@@ -16,12 +17,12 @@ namespace CommonLib.SGL {
             if (attributes == null)
                 throw new ArgumentNullException(nameof(attributes));
 
-            VertexIndices = vertexIndices;
+            VertexIndices = vertexIndices.ToEnumerableWithLength();
             Normal        = normal;
             Attributes    = attributes;
         }
 
-        public int[] VertexIndices { get; }
+        public IIndexedEnumerableWithLength<int> VertexIndices { get; }
         public VECTOR Normal { get; set; }
         public IATTR Attributes { get; set; }
     }
