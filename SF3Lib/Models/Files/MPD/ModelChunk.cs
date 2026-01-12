@@ -11,6 +11,8 @@ using SF3.MPD;
 using SF3.Types;
 using SF3.Extensions;
 using SF3.Imaging;
+using CommonLib;
+using CommonLib.Extensions;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {
@@ -242,8 +244,8 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        private IMPD_ModelInstance[] _mpdModelInstances;
-        public IEnumerable<IMPD_ModelInstance> ModelInstances {
+        private IEnumerableWithLength<IMPD_ModelInstance> _mpdModelInstances;
+        public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances {
             get {
                 if (_mpdModelInstances == null) {
                     var instances = new List<IMPD_ModelInstance>();
@@ -255,7 +257,7 @@ namespace SF3.Models.Files.MPD {
                         foreach (var mi in HeaderModelInstanceTable)
                             instances.Add(mi);
 
-                    _mpdModelInstances = instances.ToArray();
+                    _mpdModelInstances = instances.ToArray().ToEnumerableWithLength();
                 }
 
                 UpdateModelInstanceIDs();
@@ -302,14 +304,15 @@ namespace SF3.Models.Files.MPD {
             return _mpdModelsById[pdata.ID];
         }
 
-        private IMPD_Model[] _mpdModels;
-        public IEnumerable<IMPD_Model> Models {
+        private IEnumerableWithLength<IMPD_Model> _mpdModels;
+        public IEnumerableWithLength<IMPD_Model> Models {
             get {
                 if (_mpdModels == null) {
                     _mpdModels = PDatasByMemoryAddress.Values
                         .Where(x => x.Index == 0)
                         .Select(x => GetModel(x))
-                        .ToArray();
+                        .ToArray()
+                        .ToEnumerableWithLength();
                 }
                 return _mpdModels;
             }
@@ -361,15 +364,17 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Dictionary<int, CollisionLineIndexTable> CollisionLineIndexTablesByBlock { get; private set; }
 
-        private IMPD_AnimatableTexture[] _textures = null;
-        public IEnumerable<IMPD_AnimatableTexture> Textures {
+        private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;
+        public IEnumerableWithLength<IMPD_AnimatableTexture> Textures {
             get {
                 if (_textures == null) {
                     _textures = MPD_File.TextureChunks
                         .Where(x => x.Collection == Collection)
                         .Select(x => x.TextureTable)
                         .SelectMany(x => x)
-                        .ToArray();
+                        .Cast<IMPD_AnimatableTexture>()
+                        .ToArray()
+                        .ToEnumerableWithLength();
                 }
                 return _textures;
             }

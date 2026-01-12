@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using CommonLib;
 using SF3.Imaging;
 using SF3.Types;
 
@@ -20,18 +20,18 @@ namespace SF3.MPD {
         /// All models that belong to this collection.
         /// </summary>
         /// <returns>Several models in a structure compatible with SGL.</returns>
-        IEnumerable<IMPD_Model> Models { get; }
+        IEnumerableWithLength<IMPD_Model> Models { get; }
 
         /// <summary>
         /// All instances of models that belong to this collection.
         /// </summary>
         /// <returns>Several instances of models in a structure compatible with SGL.</returns>
-        IEnumerable<IMPD_ModelInstance> ModelInstances { get; }
+        IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
 
         /// <summary>
         /// All textures associated with this collection.
         /// </summary>
-        IEnumerable<IMPD_AnimatableTexture> Textures { get; }
+        IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
 
         /// <summary>
         /// When 'true', this model is serialized but not referenced in the MPD header.

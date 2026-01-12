@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using CommonLib;
+using CommonLib.Extensions;
 using SF3.Imaging;
 using SF3.MPD;
 using SF3.Types;
@@ -13,21 +14,23 @@ namespace SF3.Models.Files.MPD {
 
         public MPD_CollectionType Collection { get; }
 
-        public IEnumerable<IMPD_Model> Models => new IMPD_Model[0];
+        public IEnumerableWithLength<IMPD_Model> Models => new IMPD_Model[0].ToEnumerableWithLength();
 
-        public IEnumerable<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0];
+        public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0].ToEnumerableWithLength();
 
         public IMPD_Model GetModel(int id) => null;
 
-        private IMPD_AnimatableTexture[] _textures = null;
-        public IEnumerable<IMPD_AnimatableTexture> Textures {
+        private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;
+        public IEnumerableWithLength<IMPD_AnimatableTexture> Textures {
             get {
                 if (_textures == null) {
                     _textures = MPD_File.TextureChunks
                         .Where(x => x.Collection == Collection)
                         .Select(x => x.TextureTable)
                         .SelectMany(x => x)
-                        .ToArray();
+                        .Cast<IMPD_AnimatableTexture>()
+                        .ToArray()
+                        .ToEnumerableWithLength();
                 }
                 return _textures;
             }

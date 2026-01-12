@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.Imaging;
 using SF3.Types;
@@ -42,7 +43,7 @@ namespace SF3.MPD {
             IEnumerable<IMPD_AnimatableTexture> GetTexturesForCollection(MPD_CollectionType collection) {
                 if (!mpd.ModelCollections.TryGetValue(collection, out mc))
                     return new IMPD_AnimatableTexture[0];
-                return mc.Textures ?? new IMPD_AnimatableTexture[0];
+                return mc.Textures ?? new IMPD_AnimatableTexture[0].ToEnumerableWithLength();
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
