@@ -1,8 +1,6 @@
 ﻿using System;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables;
-using SF3.Models.Tables.MPD.Animation;
-using SF3.Models.Tables.MPD.Main;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
@@ -15,7 +13,6 @@ namespace SF3.MPD {
                 case UnknownUInt32Table ui32:    WriteUInt32Table(ui32);       break;
                 case UnknownUInt16Table ui16:    WriteUInt16Table(ui16);       break;
                 case UnknownUInt8Table ui8:      WriteUInt8Table(ui8);         break;
-                case ModelSwitchGroupsTable msg: WriteModelSwitchGroups(msg);  break;
                 case MissingModelChunk mmc:      return null;
                 case ModelChunk mc:              WriteHeaderModels(mc.Models, mc.ModelInstances, out pos); break;
                 default:
@@ -45,11 +42,6 @@ namespace SF3.MPD {
                 WriteUInt(value.Value);
             if (table.ReadUntil.HasValue)
                 WriteInt(table.ReadUntil.Value);
-        }
-
-        public void WriteModelSwitchGroups(ModelSwitchGroupsTable modelSwitchGroups) {
-            // TODO: Write the things
-            WriteUInt(0xFFFFFFFF);
         }
     }
 }

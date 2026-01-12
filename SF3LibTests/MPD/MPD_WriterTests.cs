@@ -243,6 +243,38 @@ namespace SF3.Tests.MPD {
             });
         }
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_DAM_CanBeLoaded() {
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "DAM.MPD");
+            _ = RecreateMPD_File(originalFile);
+        }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_DAM_ProducesSameData() {
+            var file = MakeMPD_File(ScenarioType.Scenario1, "DAM.MPD");
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(file);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("DAM.MPD", outputData);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+                { 2, new ByteComparisonSkipRegion[] {
+                    // TODO: The normals aren't quite right. Gotta fix that!
+/*
+                    // Bogus surface models heights
+                    // TODO: fix these!!!
+                    new ByteComparisonSkipRegion() { Offset = 0x222D9, Size = 0x10000 },
+*/
+                }
+            }});
+        }
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {

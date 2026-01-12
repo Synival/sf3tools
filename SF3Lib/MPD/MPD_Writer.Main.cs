@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Geometry;
@@ -22,7 +24,7 @@ namespace SF3.MPD {
             var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
             var lightPositionPos     = WriteLightPosition(mpd.Lighting);
             var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
-            var modelSwitchGroupsPos = WriteTableOrNull(mpd.ModelSwitchGroupsTable);
+            var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
             var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data);
             var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
             WriteToAlignTo(4);
@@ -57,7 +59,7 @@ namespace SF3.MPD {
 
             // Write a pointer to the header.
             var headerPtrPos = CurrentOffset;
-            WriteUInt((uint) (headerPos + 0x290000));
+            WriteMPDPointer((int) headerPos);
 
             // Write the chest/barrel models, if available, and update the main header pointers.
             IMPD_ModelCollection chestChunk       = null;
@@ -69,14 +71,14 @@ namespace SF3.MPD {
             var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Barrel,      out barrelChunk)      == true) ? barrelChunk      : null);
 
             if (chestModelsPos.HasValue && chestChunk?.IsUnreferenced != true)
-                AtOffset(chestModelsPosPtr, _ => WriteUInt(chestModelsPos.Value + 0x290000));
+                AtOffset(chestModelsPosPtr, _ => WriteMPDPointer(chestModelsPos.Value));
             if (lockedChestModelsPos.HasValue && lockedChestChunk?.IsUnreferenced != true)
-                AtOffset(lockedChestModelsPosPtr, _ => WriteUInt(lockedChestModelsPos.Value + 0x290000));
+                AtOffset(lockedChestModelsPosPtr, _ => WriteMPDPointer(lockedChestModelsPos.Value));
             if (barrelModelsPos.HasValue && barrelChunk?.IsUnreferenced != true)
-                AtOffset(barrelModelsPosPtr, _ => WriteUInt(barrelModelsPos.Value + 0x290000));
+                AtOffset(barrelModelsPosPtr, _ => WriteMPDPointer(barrelModelsPos.Value));
 
             // Write a *double pointer* to the header at the start of the file.
-            AtOffset(0, _ => WriteUInt((uint) (headerPtrPos + 0x290000)));
+            AtOffset(0, _ => WriteMPDPointer((int) headerPtrPos));
         }
 
         public void WriteHeader(
@@ -150,6 +152,44 @@ namespace SF3.MPD {
 
             WriteShort(new CompressedFIXED(lighting.Pitch / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(lighting.Yaw / 180.0f, 0).RawShort);
+
+            return pos;
+        }
+
+        public uint? WriteModelSwitchGroupsOrNull(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
+            if (switchGroups == null)
+                return null;
+            return WriteModelSwitchGroups(switchGroups);
+        }
+
+        public uint WriteModelSwitchGroups(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
+            var offPositions = new uint[switchGroups.Length];
+            var onPositions = new uint[switchGroups.Length];
+
+            for (int i = 0; i < switchGroups.Length; i++) {
+                var switchGroup = switchGroups[i];
+
+                offPositions[i] = (uint) CurrentOffset;
+                foreach (var modelId in switchGroup.ModelInstancesVisibleWhenOff)
+                    WriteUShort((ushort) modelId);
+                WriteUShort(0xFFFF);
+
+                onPositions[i] = (uint) CurrentOffset;
+                foreach (var modelId in switchGroup.ModelInstancesVisibleWhenOn)
+                    WriteUShort((ushort) modelId);
+                WriteUShort(0xFFFF);
+            }
+
+            WriteToAlignTo(4);
+            var pos = (uint) CurrentOffset;
+            for (int i = 0; i < switchGroups.Length; i++) {
+                var switchGroup = switchGroups[i];
+                WriteUInt((uint) switchGroup.Flag);
+                WriteMPDPointer(offPositions[i]);
+                WriteMPDPointer(onPositions[i]);
+                WriteUInt(0);
+            }
+            WriteUInt(0xFFFFFFFF);
 
             return pos;
         }

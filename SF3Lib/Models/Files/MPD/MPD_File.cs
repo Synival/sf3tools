@@ -115,7 +115,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public IMPD_Lighting Lighting { get; }
-        public IEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups => ModelSwitchGroupsTable;
+        public IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups => ModelSwitchGroupsTable;
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
         public IRectangleShort CameraBoundaries => (BoundariesTable?.Length >= 1) ? BoundariesTable[0] : null;

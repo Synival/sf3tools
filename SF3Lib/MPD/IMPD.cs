@@ -45,7 +45,7 @@ namespace SF3.MPD {
         /// <summary>
         /// Collection of model switch groups.
         /// </summary>
-        IEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; }
+        IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; }
 
         /// <summary>
         /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).
