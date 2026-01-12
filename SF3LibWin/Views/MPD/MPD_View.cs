@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using SF3.Models.Files.MPD;
+using SF3.MPD;
 
 namespace SF3.Win.Views.MPD {
     public class MPD_View : TabView {
-        public MPD_View(string name, IMPD_File model) : base(name) {
+        public MPD_View(string name, IMPD model) : base(name) {
             Model = model;
             ViewerView = new MPD_ViewerView("Main Viewer", Model);
         }
@@ -21,12 +22,15 @@ namespace SF3.Win.Views.MPD {
             TabControl.Selected += UpdateViewerMapEvent;
 
             CreateChild(new MPD_FlagsView("Flags", Model.Flags));
-            CreateChild(new LightingView("Lighting", Model));
-            CreateChild(new TableView("Boundaries", Model.BoundariesTable, Model.NameGetterContext));
-            CreateChild(new ModelsTabView("Models", Model));
-            CreateChild(new TexturesView("Textures", Model));
             CreateChild(new PlanesView("Planes", Model.Planes));
-            CreateChild(new DataView("Data (advanced)", Model));
+
+            if (Model is IMPD_File mpdFile) {
+                CreateChild(new LightingView("Lighting", mpdFile));
+                CreateChild(new TableView("Boundaries", mpdFile.BoundariesTable, mpdFile.NameGetterContext));
+                CreateChild(new ModelsTabView("Models", mpdFile));
+                CreateChild(new TexturesView("Textures", mpdFile));
+                CreateChild(new DataView("Data (advanced)", mpdFile));
+            }
 
             return Control;
         }
@@ -54,7 +58,7 @@ namespace SF3.Win.Views.MPD {
             base.Destroy();
         }
 
-        public IMPD_File Model { get; }
+        public IMPD Model { get; }
         public MPD_ViewerView ViewerView { get; }
     }
 }
