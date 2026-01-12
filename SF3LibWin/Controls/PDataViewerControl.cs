@@ -2,12 +2,10 @@
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Imaging;
-using CommonLib.SGL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.MPD;
-using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
