@@ -85,6 +85,5 @@ namespace SF3.Win.Views.MPD {
 
         public TableView TableView { get; }
         public Model3DView ModelView { get; }
-
     }
 }

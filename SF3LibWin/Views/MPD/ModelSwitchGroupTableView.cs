@@ -9,7 +9,7 @@ namespace SF3.Win.Views.MPD {
     public class ModelSwitchGroupTableView : ArrayView<ModelSwitchGroup, ModelSwitchGroupView> {
         public ModelSwitchGroupTableView(string name, IMPD_File mpdFile, ModelSwitchGroupsTable table, INameGetterContext nameGetterContext) : base(
             name,
-            table?.ToArray() ?? [],
+            table?.Rows?.ToArray() ?? [],
             "DropdownName",
             new ModelSwitchGroupView(nameof(ModelSwitchGroup), mpdFile, null, nameGetterContext)
         ) {
@@ -27,7 +27,7 @@ namespace SF3.Win.Views.MPD {
             set {
                 if (_table != value) {
                     _table = value;
-                    Elements = value?.ToArray() ?? [];
+                    Elements = value?.Rows?.ToArray() ?? [];
                     ElementView.SwitchGroup = null;
                 }
             }

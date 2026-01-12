@@ -7,7 +7,6 @@ using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.MPD;
 using SF3.Win.Extensions;
-using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.OpenGL.MPD {
     public class CollisionResources : ResourcesBase {

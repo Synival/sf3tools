@@ -1,7 +1,6 @@
 ﻿using CommonLib;
 using OpenTK.Mathematics;
 using SF3.MPD;
-using SF3.Win.OpenGL.MPD_File;
 
 namespace SF3.Win.OpenGL.MPD {
     public class BoundaryModelResources : ResourcesBase, IMPD_Resources {

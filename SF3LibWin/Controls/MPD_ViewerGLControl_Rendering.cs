@@ -6,7 +6,6 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD;
-using SF3.Win.OpenGL.MPD_File;
 using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
@@ -209,24 +208,24 @@ namespace SF3.Win.Controls {
             //   If a model is present in multiple switches (as is the case in IWAOKA.MPD) then the visibility
             //      of the model depends on the order in which the flags were toggled.
             var modelsToHide = new HashSet<int>();
-            if (MPD_File?.ModelSwitchGroupsTable != null) {
+            if (MPD_File?.ModelSwitchGroups != null) {
                 // Assume everything is hidden by default.
-                foreach (var switchGroup in MPD_File.ModelSwitchGroupsTable) {
-                    if (switchGroup.ModelsVisibleWhenOn != null)
-                        foreach (var row in switchGroup.ModelsVisibleWhenOn)
-                            modelsToHide.Add(row.ModelID);
+                foreach (var switchGroup in MPD_File.ModelSwitchGroups) {
+                    if (switchGroup.ModelInstancesVisibleWhenOn != null)
+                        foreach (var modelInstId in switchGroup.ModelInstancesVisibleWhenOn)
+                            modelsToHide.Add(modelInstId);
 
-                    if (switchGroup.ModelsVisibleWhenOff != null)
-                        foreach (var row in switchGroup.ModelsVisibleWhenOff)
-                            modelsToHide.Add(row.ModelID);
+                    if (switchGroup.ModelInstancesVisibleWhenOff != null)
+                        foreach (var modelInstId in switchGroup.ModelInstancesVisibleWhenOff)
+                            modelsToHide.Add(modelInstId);
                 }
 
                 // Enable models selectively based on flags.
-                foreach (var switchGroup in MPD_File.ModelSwitchGroupsTable) {
-                    var turnOnTable = switchGroup.StateInEditor ? switchGroup.ModelsVisibleWhenOn : switchGroup.ModelsVisibleWhenOff;
-                    if (turnOnTable != null)
-                        foreach (var row in turnOnTable)
-                            modelsToHide.Remove(row.ModelID);
+                foreach (var switchGroup in MPD_File.ModelSwitchGroups) {
+                    var turnOnList = switchGroup.StateInEditor ? switchGroup.ModelInstancesVisibleWhenOn : switchGroup.ModelInstancesVisibleWhenOff;
+                    if (turnOnList != null)
+                        foreach (var modelInstId in turnOnList)
+                            modelsToHide.Remove(modelInstId);
                 }
             }
 

@@ -1,9 +1,12 @@
-﻿using CommonLib.NamedValues;
+﻿using System.Collections.Generic;
+using CommonLib;
+using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Main;
+using SF3.MPD;
 
 namespace SF3.Models.Tables.MPD.Main {
-    public class ModelSwitchGroupsTable : TerminatedTable<ModelSwitchGroup> {
+    public class ModelSwitchGroupsTable : TerminatedTable<ModelSwitchGroup>, IEnumerableWithLength<IMPD_ModelSwitchGroup> {
         protected ModelSwitchGroupsTable(IByteData data, string name, int address, INameGetterContext nameGetterContext) : base(data, name, address, 4, null) {
             NameGetterContext = nameGetterContext;
         }
@@ -17,6 +20,8 @@ namespace SF3.Models.Tables.MPD.Main {
                 (currentRows, model) => model.Flag != -1,
                 false);
         }
+
+        IEnumerator<IMPD_ModelSwitchGroup> IEnumerable<IMPD_ModelSwitchGroup>.GetEnumerator() => GetEnumerator();
 
         public INameGetterContext NameGetterContext { get; }
     }

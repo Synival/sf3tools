@@ -9,10 +9,9 @@ using SF3.Imaging;
 using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
-using SF3.Win.OpenGL.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 
-namespace SF3.Win.OpenGL.MPD_File {
+namespace SF3.Win.OpenGL.MPD {
     public class SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;

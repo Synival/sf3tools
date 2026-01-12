@@ -120,11 +120,11 @@ namespace SF3.Win.Controls {
             mpdFile.ModelsUpdated -= OnModelsUpdated;
         }
 
-        private IMPD_File _mpdFile = null;
+        private IMPD _mpdFile = null;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IMPD_File MPD_File {
+        public IMPD MPD_File {
             get => _mpdFile;
             set {
                 if (_mpdFile == value)

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using CommonLib;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
@@ -7,7 +6,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for any table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable : IEnumerable {
+    public interface ITable : IEnumerableWithLength {
         /// <summary>
         /// Loads all rows of the table.
         /// </summary>
@@ -74,7 +73,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable<T> : ITable, IEnumerable<T> where T : class, IStruct {
+    public interface ITable<T> : ITable, IEnumerableWithLength<T> where T : class, IStruct {
         /// <summary>
         /// A mutable array of rows of type T.
         /// </summary>

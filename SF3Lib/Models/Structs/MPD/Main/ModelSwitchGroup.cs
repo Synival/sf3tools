@@ -1,11 +1,13 @@
-﻿using CommonLib.Attributes;
+﻿using CommonLib;
+using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {
-    public class ModelSwitchGroup : Struct {
+    public class ModelSwitchGroup : Struct, IMPD_ModelSwitchGroup {
         private readonly int _flagAddr;
         private readonly int _visibleModelsWhenFlagOffOffsetAddr;
         private readonly int _visibleModelsWhenFlagOnOffsetAddr;
@@ -23,11 +25,11 @@ namespace SF3.Models.Structs.MPD.Main {
             if (Flag != -1) {
                 var offOffset = VisibleModelsWhenFlagOffOffset;
                 if (offOffset >= 0x00290000u)
-                     ModelsVisibleWhenOff = ModelIDTable.Create(data, nameof(ModelsVisibleWhenOff), (int) (offOffset - 0x00290000u));
+                     ModelInstancesVisibleWhenOffTable = ModelIDTable.Create(data, nameof(ModelInstancesVisibleWhenOffTable), (int) (offOffset - 0x00290000u));
 
                 var onOffset = VisibleModelsWhenFlagOnOffset;
                 if (onOffset >= 0x00290000u)
-                     ModelsVisibleWhenOn = ModelIDTable.Create(data, nameof(ModelsVisibleWhenOn), (int) (onOffset - 0x00290000u));
+                     ModelInstancesVisibleWhenOnTable = ModelIDTable.Create(data, nameof(ModelInstancesVisibleWhenOnTable), (int) (onOffset - 0x00290000u));
             }
         }
 
@@ -65,8 +67,8 @@ namespace SF3.Models.Structs.MPD.Main {
         [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "State (in editor)")]
         public bool StateInEditor { get; set; }
 
-        public ModelIDTable ModelsVisibleWhenOff { get; }
-        public ModelIDTable ModelsVisibleWhenOn { get; }
+        public ModelIDTable ModelInstancesVisibleWhenOffTable { get; }
+        public ModelIDTable ModelInstancesVisibleWhenOnTable { get; }
 
         public string DropdownName {
             get {
@@ -74,5 +76,8 @@ namespace SF3.Models.Structs.MPD.Main {
                 return $"{Name}: Flag {Flag:X3} ({flagName})";
             }
         }
+
+        public IEnumerableWithLength<int> ModelInstancesVisibleWhenOff => ModelInstancesVisibleWhenOffTable;
+        public IEnumerableWithLength<int> ModelInstancesVisibleWhenOn => ModelInstancesVisibleWhenOnTable;
     }
 }

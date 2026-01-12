@@ -1,8 +1,10 @@
-﻿using SF3.ByteData;
+﻿using System.Collections.Generic;
+using CommonLib;
+using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 
 namespace SF3.Models.Tables {
-    public class ModelIDTable : TerminatedTable<ModelIDStruct> {
+    public class ModelIDTable : TerminatedTable<ModelIDStruct>, IEnumerableWithLength<int> {
         protected ModelIDTable(IByteData data, string name, int address)
         : base(data, name, address, 2, null) {
         }
@@ -14,5 +16,10 @@ namespace SF3.Models.Tables {
             return Load((id, address) => new ModelIDStruct(Data, id, "ModelID" + id.ToString("D2"), address),
                 (rows, newModel) => newModel.ModelID != 0xFFFF, false);
         }
+
+        IEnumerator<int> IEnumerable<int>.GetEnumerator() {
+            foreach (var row in Rows)
+                yield return row.ModelID;
+        }
     }
-}
+} 

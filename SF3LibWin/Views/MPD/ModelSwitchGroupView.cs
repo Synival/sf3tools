@@ -11,8 +11,8 @@ namespace SF3.Win.Views.MPD {
             NameGetterContext = nameGetterContext;
 
             HeaderView = new DataModelView("Header", switchGroup, nameGetterContext, typeof(ModelSwitchGroup));
-            ModelsVisibleWhenFlagOffView = new ModelIDTableView("Models Visible when Flag Off", MPD_File, switchGroup?.ModelsVisibleWhenOff, nameGetterContext);
-            ModelsVisibleWhenFlagOnView = new ModelIDTableView("Models Visible when Flag On", MPD_File, switchGroup?.ModelsVisibleWhenOn,  nameGetterContext);
+            ModelsVisibleWhenFlagOffView = new ModelIDTableView("Models Visible when Flag Off", MPD_File, switchGroup?.ModelInstancesVisibleWhenOffTable, nameGetterContext);
+            ModelsVisibleWhenFlagOnView = new ModelIDTableView("Models Visible when Flag On", MPD_File, switchGroup?.ModelInstancesVisibleWhenOnTable,  nameGetterContext);
         }
 
         public override Control Create() {
@@ -37,8 +37,8 @@ namespace SF3.Win.Views.MPD {
                 if (_switchGroup != value) {
                     _switchGroup = value;
                     HeaderView.Model = _switchGroup;
-                    ModelsVisibleWhenFlagOffView.Table = _switchGroup?.ModelsVisibleWhenOff;
-                    ModelsVisibleWhenFlagOnView.Table = _switchGroup?.ModelsVisibleWhenOn;
+                    ModelsVisibleWhenFlagOffView.Table = _switchGroup?.ModelInstancesVisibleWhenOffTable;
+                    ModelsVisibleWhenFlagOnView.Table = _switchGroup?.ModelInstancesVisibleWhenOnTable;
                 }
             }
         }

@@ -2,7 +2,7 @@ using System.Linq;
 using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.MPD;
-using SF3.Win.OpenGL.MPD_File;
+using SF3.Win.OpenGL.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {

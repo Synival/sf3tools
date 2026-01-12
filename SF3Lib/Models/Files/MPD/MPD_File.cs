@@ -15,8 +15,8 @@ using SF3.Models.Tables.MPD.Main;
 using SF3.Models.Tables.MPD.Animation;
 using CommonLib.Imaging;
 using CommonLib.Geometry;
-using CommonLib.SGL;
 using CommonLib.Utils;
+using CommonLib;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -67,6 +67,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        // TODO: UpdatePlaneImages() shouldn't be necessary!!
         public void UpdatePlaneImages() => ((MPD_Planes) Planes).UpdateImages();
 
         public override bool IsModified {
@@ -114,13 +115,11 @@ namespace SF3.Models.Files.MPD {
         }
 
         public IMPD_Lighting Lighting { get; }
-
-        public IRectangleShort CameraBoundaries => (BoundariesTable?.Length >= 1) ? BoundariesTable[0] : null;
-        public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
-
+        public IEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups => ModelSwitchGroupsTable;
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
-
+        public IRectangleShort CameraBoundaries => (BoundariesTable?.Length >= 1) ? BoundariesTable[0] : null;
+        public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
         public IMPD_Gradient Gradient => (GradientTable?.Length > 0) ? GradientTable[0] : null;
 
         [BulkCopyRecurse]

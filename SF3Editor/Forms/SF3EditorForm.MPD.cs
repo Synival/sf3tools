@@ -11,7 +11,7 @@ using CommonLib.Utils;
 using CommonLib.Win;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Main;
+using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Types;
 using SF3.Win.Views.MPD;
@@ -260,9 +260,9 @@ namespace SF3.Editor.Forms {
 
             items.Clear();
             int itemIndex = 1;
-            if (mpdFile?.ModelSwitchGroupsTable?.Rows?.Length > 0) {
+            if (mpdFile?.ModelSwitchGroups?.Length > 0) {
                 var ngc = mpdFile.NameGetterContext;
-                foreach (var msg in mpdFile.ModelSwitchGroupsTable) {
+                foreach (var msg in mpdFile.ModelSwitchGroups) {
                     var flag = msg.Flag;
                     var flagName = ngc.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
 
@@ -284,7 +284,7 @@ namespace SF3.Editor.Forms {
             tsmiMPD_ModelSwitchGroups.Enabled = items.Count > 0;
         }
 
-        private void ToggleModelSwitchGroup(IMPD_File mpdFile, ModelSwitchGroup msg, ToolStripMenuItem item) {
+        private void ToggleModelSwitchGroup(IMPD_File mpdFile, IMPD_ModelSwitchGroup msg, ToolStripMenuItem item) {
             item.Checked = msg.StateInEditor = !msg.StateInEditor;
             if (SelectedFile?.View?.ActualView is MPD_View mpdView && mpdView.Model == mpdFile)
                 mpdView.UpdateViewerMap();

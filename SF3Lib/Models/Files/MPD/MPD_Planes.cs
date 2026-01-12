@@ -15,6 +15,7 @@ namespace SF3.Models.Files.MPD {
             UpdateImages();
         }
 
+        // TODO: UpdateImages() shouldn't be necessary!!
         public void UpdateImages() {
             // Set the ground plane.
             ITextureData groundImage = null;

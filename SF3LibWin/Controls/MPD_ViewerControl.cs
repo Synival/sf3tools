@@ -5,8 +5,9 @@ using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.Types;
 using System.ComponentModel;
-using SF3.Win.OpenGL.MPD_File;
 using CommonLib.Geometry;
+using SF3.Win.OpenGL.MPD;
+using SF3.MPD;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -118,11 +119,11 @@ namespace SF3.Win.Controls {
             tsbDrawNoEntry.Checked       = cursorMode == ViewerCursorMode.DrawNoEntry;
         }
 
-        private IMPD_File _mpdFile = null;
+        private IMPD _mpdFile = null;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IMPD_File MPD_File {
+        public IMPD MPD_File {
             get => _mpdFile;
             set {
                 if (value != _mpdFile) {
@@ -166,8 +167,11 @@ namespace SF3.Win.Controls {
 
         public void UpdateModels() {
             if (MPD_File != null) {
-                MPD_File.AssociateTilesWithTrees();
-                MPD_File.UpdatePlaneImages();
+                if (MPD_File is IMPD_File mpdFile) {
+                    mpdFile.AssociateTilesWithTrees();
+                    // TODO: UpdatePlaneImages() shouldn't be necessary!!
+                    mpdFile.UpdatePlaneImages();
+                }
                 GLControl.UpdateModels();
             }
         }
@@ -203,7 +207,7 @@ namespace SF3.Win.Controls {
                 depth   = (z2 - z1) / 32.00f;
                 centerX = (x1 + x2) / 2.0f /  32.00f + GeneralResources.ModelOffsetX;
                 centerZ = (z1 + z2) / 2.0f / -32.00f + GeneralResources.ModelOffsetZ + 64.00f;
-                groundY = (MPD_File?.MPDHeader?.GroundY ?? 0) / -32.0f;
+                groundY = (MPD_File?.Planes?.GroundY ?? 0) / -32.0f;
             }
 
             return new CameraRefs {

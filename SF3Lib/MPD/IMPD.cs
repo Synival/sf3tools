@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CommonLib;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
 using SF3.Types;
@@ -40,6 +41,11 @@ namespace SF3.MPD {
         /// Palette and direction for lighting models and the surface model.
         /// </summary>
         IMPD_Lighting Lighting { get; }
+
+        /// <summary>
+        /// Collection of model switch groups.
+        /// </summary>
+        IEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; }
 
         /// <summary>
         /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).

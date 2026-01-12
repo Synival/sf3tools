@@ -163,10 +163,10 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetModelSwitchGroups != 0) {
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress, NameGetterContext));
                 foreach (var switchGroup in ModelSwitchGroupsTable) {
-                    if (switchGroup.ModelsVisibleWhenOff != null)
-                        tables.Add(switchGroup.ModelsVisibleWhenOff);
-                    if (switchGroup.ModelsVisibleWhenOn != null)
-                        tables.Add(switchGroup.ModelsVisibleWhenOn);
+                    if (switchGroup.ModelInstancesVisibleWhenOffTable != null)
+                        tables.Add(switchGroup.ModelInstancesVisibleWhenOffTable);
+                    if (switchGroup.ModelInstancesVisibleWhenOnTable != null)
+                        tables.Add(switchGroup.ModelInstancesVisibleWhenOnTable);
                 }
             }
 
