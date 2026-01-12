@@ -39,8 +39,8 @@ namespace SF3.Win.Controls {
 
             _renderer = new Renderer();
 
-            if (MPD_File != null && Models != null && _sglModel != null)
-                _models.Update(MPD_File, Models, _sglModel);
+            if (MPD_File != null && Models != null && _mpdModel != null)
+                _models.Update(MPD_File, Models, _mpdModel);
 
             var lighting = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
@@ -171,20 +171,20 @@ namespace SF3.Win.Controls {
         public IMPD MPD_File { get; private set; } = null;
         public IMPD_ModelCollection Models { get; private set; } = null;
 
-        private ISGL_Model _sglModel = null;
+        private IMPD_Model _mpdModel = null;
 
         public void Update(
-            IMPD mpdFile, ISGL_Model sglModel,
+            IMPD mpdFile, IMPD_Model mpdModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
-            if (_sglModel == sglModel)
+            if (_mpdModel == mpdModel)
                 return;
 
             MPD_File = mpdFile;
-            _sglModel = sglModel;
-            var collection = (MPD_CollectionType?) sglModel?.Collection;
-            Models = (sglModel == null || collection == null) ? null
+            _mpdModel = mpdModel;
+            var collection = mpdModel?.Collection;
+            Models = (mpdModel == null || collection == null) ? null
                 : mpdFile.ModelCollections.TryGetValue(collection.Value, out var mcOut)
                 ? mcOut : null;
             _vertices = null;
@@ -195,8 +195,8 @@ namespace SF3.Win.Controls {
 
             if (_models != null) {
                 _models.Reset();
-                if (MPD_File != null && Models != null && sglModel != null) {
-                    _models.Update(MPD_File, Models, sglModel, forceSemiTransparent: false, isHideMesh: false,
+                if (MPD_File != null && Models != null && mpdModel != null) {
+                    _models.Update(MPD_File, Models, mpdModel, forceSemiTransparent: false, isHideMesh: false,
                         rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
 
                     var verticesMatrix =
@@ -205,7 +205,7 @@ namespace SF3.Win.Controls {
                         Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
                         Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
 
-                    _vertices = sglModel.Vertices.Select(x => x.ToVector3() * verticesMatrix).ToArray();
+                    _vertices = mpdModel.Vertices.Select(x => x.ToVector3() * verticesMatrix).ToArray();
 
                     _minX = _vertices.Min(x => x.X) / 32.0f;
                     _minY = _vertices.Min(x => x.Y) / 32.0f;

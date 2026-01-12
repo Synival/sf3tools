@@ -11,7 +11,6 @@ using SF3.MPD;
 using SF3.Types;
 using SF3.Extensions;
 using SF3.Imaging;
-using CommonLib.Imaging;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {
@@ -243,10 +242,10 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        private IMPD_ModelInstance[] _sglModelInstances;
+        private IMPD_ModelInstance[] _mpdModelInstances;
         public IEnumerable<IMPD_ModelInstance> ModelInstances {
             get {
-                if (_sglModelInstances == null) {
+                if (_mpdModelInstances == null) {
                     var instances = new List<IMPD_ModelInstance>();
 
                     if (ModelInstanceTable != null)
@@ -256,34 +255,34 @@ namespace SF3.Models.Files.MPD {
                         foreach (var mi in HeaderModelInstanceTable)
                             instances.Add(mi);
 
-                    _sglModelInstances = instances.ToArray();
+                    _mpdModelInstances = instances.ToArray();
                 }
 
                 UpdateModelInstanceIDs();
-                return _sglModelInstances;
+                return _mpdModelInstances;
             }
         }
 
         private void UpdateModelInstanceIDs() {
-            var instances = _sglModelInstances;
+            var instances = _mpdModelInstances;
             foreach (var inst in instances) {
                 var fileInst = (ModelInstanceBase) inst;
                 inst.ModelID = PDatasByMemoryAddress.TryGetValue(fileInst.PData0, out var pdata) ? pdata.ID : -1;
             }
         }
 
-        public ISGL_Model GetModel(int id) {
+        public IMPD_Model GetModel(int id) {
             return GetModel(PDatasByMemoryAddress.Values.FirstOrDefault(
                 x => x.Collection == Collection && x.ID == id && x.Index == 0
             ));
         }
 
-        private Dictionary<int, ISGL_Model> _sglModelsById = new Dictionary<int, ISGL_Model>();
-        private ISGL_Model GetModel(PDataStruct pdata) {
+        private Dictionary<int, IMPD_Model> _mpdModelsById = new Dictionary<int, IMPD_Model>();
+        private IMPD_Model GetModel(PDataStruct pdata) {
             if (pdata == null)
                 return null;
 
-            if (!_sglModelsById.ContainsKey(pdata.ID)) {
+            if (!_mpdModelsById.ContainsKey(pdata.ID)) {
                 var vertices = VertexTablesByMemoryAddress[pdata.VerticesOffset]
                     .Select(x => x.Vector)
                     .ToArray();
@@ -297,22 +296,22 @@ namespace SF3.Models.Files.MPD {
                     ))
                     .ToArray();
 
-                _sglModelsById[pdata.ID] = new SGL_Model((int) pdata.Collection, pdata.ID, vertices, faces);
+                _mpdModelsById[pdata.ID] = new MPD_Model(pdata.Collection, pdata.ID, vertices, faces);
             }
 
-            return _sglModelsById[pdata.ID];
+            return _mpdModelsById[pdata.ID];
         }
 
-        private ISGL_Model[] _sglModels;
-        public IEnumerable<ISGL_Model> Models {
+        private IMPD_Model[] _mpdModels;
+        public IEnumerable<IMPD_Model> Models {
             get {
-                if (_sglModels == null) {
-                    _sglModels = PDatasByMemoryAddress.Values
+                if (_mpdModels == null) {
+                    _mpdModels = PDatasByMemoryAddress.Values
                         .Where(x => x.Index == 0)
                         .Select(x => GetModel(x))
                         .ToArray();
                 }
-                return _sglModels;
+                return _mpdModels;
             }
         }
 

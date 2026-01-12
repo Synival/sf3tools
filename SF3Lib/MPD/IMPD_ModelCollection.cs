@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using CommonLib.SGL;
 using SF3.Imaging;
 using SF3.Types;
 
@@ -15,13 +14,13 @@ namespace SF3.MPD {
         /// </summary>
         /// <param name="id">ID of the model to fetch.</param>
         /// <returns>A model in a structure compatible with SGL.</returns>
-        ISGL_Model GetModel(int id);
+        IMPD_Model GetModel(int id);
 
         /// <summary>
         /// All models that belong to this collection.
         /// </summary>
         /// <returns>Several models in a structure compatible with SGL.</returns>
-        IEnumerable<ISGL_Model> Models { get; }
+        IEnumerable<IMPD_Model> Models { get; }
 
         /// <summary>
         /// All instances of models that belong to this collection.

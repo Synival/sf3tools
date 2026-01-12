@@ -14,7 +14,7 @@ namespace SF3.Win.Views {
         public Model3DView(string name, IMPD mpdFile, ModelInstanceBase modelInstance) : base(name) {
             MPD_File = mpdFile;
             _modelInstance = modelInstance;
-            UpdateSGL_Model();
+            UpdateMPD_Model();
         }
 
         public override Control Create() {
@@ -39,7 +39,7 @@ namespace SF3.Win.Views {
             set {
                 if (value != _modelInstance) {
                     _modelInstance = value;
-                    UpdateSGL_Model();
+                    UpdateMPD_Model();
 
                     if (Control != null)
                         UpdateViewerControl();
@@ -47,26 +47,26 @@ namespace SF3.Win.Views {
             }
         }
 
-        private void UpdateSGL_Model() {
+        private void UpdateMPD_Model() {
             var mc = (_modelInstance == null)
                 ? null 
                 : (MPD_File?.ModelCollections?.TryGetValue(_modelInstance.Collection, out var mcOut) == true) ? mcOut as ModelChunk : null;
             var pdata = (mc?.PDatasByMemoryAddress?.TryGetValue(_modelInstance.PData0, out var pdataOut) == true) ? pdataOut : null;
             if (pdata == null) {
-                _sglModel = null;
+                _mpdModel = null;
                 return;
             }
 
-            _sglModel = mc?.GetModel(pdata.ID);
+            _mpdModel = mc?.GetModel(pdata.ID);
         }
 
-        private ISGL_Model _sglModel = null;
+        private IMPD_Model _mpdModel = null;
 
         private void UpdateViewerControl() {
             if (_modelInstance == null)
-                Control.Update(MPD_File, _sglModel);
+                Control.Update(MPD_File, _mpdModel);
             else
-                Control.Update(MPD_File, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
+                Control.Update(MPD_File, _mpdModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
         }
     }
 }

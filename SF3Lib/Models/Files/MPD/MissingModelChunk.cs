@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CommonLib.Imaging;
-using CommonLib.SGL;
 using SF3.Imaging;
 using SF3.MPD;
 using SF3.Types;
@@ -15,11 +13,11 @@ namespace SF3.Models.Files.MPD {
 
         public MPD_CollectionType Collection { get; }
 
-        public IEnumerable<ISGL_Model> Models => new ISGL_Model[0];
+        public IEnumerable<IMPD_Model> Models => new IMPD_Model[0];
 
         public IEnumerable<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0];
 
-        public ISGL_Model GetModel(int id) => null;
+        public IMPD_Model GetModel(int id) => null;
 
         private IMPD_AnimatableTexture[] _textures = null;
         public IEnumerable<IMPD_AnimatableTexture> Textures {
