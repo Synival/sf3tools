@@ -1,5 +1,7 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Tables;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {
@@ -9,13 +11,27 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _visibleModelsWhenFlagOnOffsetAddr;
         private readonly int _stateAddr;
 
-        public ModelSwitchGroup(IByteData data, int id, string name, int address)
+        public ModelSwitchGroup(IByteData data, int id, string name, int address, INameGetterContext nameGetterContext)
         : base(data, id, name, address, 0x10) {
+            NameGetterContext = nameGetterContext;
+
             _flagAddr                           = Address + 0x00; // 4 bytes
             _visibleModelsWhenFlagOffOffsetAddr = Address + 0x04; // 4 bytes
             _visibleModelsWhenFlagOnOffsetAddr  = Address + 0x08; // 4 bytes
             _stateAddr                          = Address + 0x0C; // 4 bytes
+
+            if (Flag != -1) {
+                var offOffset = VisibleModelsWhenFlagOffOffset;
+                if (offOffset >= 0x00290000u)
+                     ModelsVisibleWhenOff = ModelIDTable.Create(data, nameof(ModelsVisibleWhenOff), (int) (offOffset - 0x00290000u));
+
+                var onOffset = VisibleModelsWhenFlagOnOffset;
+                if (onOffset >= 0x00290000u)
+                     ModelsVisibleWhenOn = ModelIDTable.Create(data, nameof(ModelsVisibleWhenOn), (int) (onOffset - 0x00290000u));
+            }
         }
+
+        public INameGetterContext NameGetterContext { get; }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_flagAddr), displayOrder: 0, displayFormat: "X3", minWidth: 200)]
@@ -48,5 +64,15 @@ namespace SF3.Models.Structs.MPD.Main {
 
         [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "State (in editor)")]
         public bool StateInEditor { get; set; }
+
+        public ModelIDTable ModelsVisibleWhenOff { get; }
+        public ModelIDTable ModelsVisibleWhenOn { get; }
+
+        public string DropdownName {
+            get {
+                var flagName = NameGetterContext.GetName(this, null, Flag, new object[] { NamedValueType.GameFlag });
+                return $"{Name}: Flag {Flag:X3} ({flagName})";
+            }
+        }
     }
 }

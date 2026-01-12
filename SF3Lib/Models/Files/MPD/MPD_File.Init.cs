@@ -161,24 +161,13 @@ namespace SF3.Models.Files.MPD {
 
             // TODO: put somewhere else!!
             if (header.OffsetModelSwitchGroups != 0) {
-                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress));
-
-                VisibleModelsWhenFlagOffByAddr = ModelSwitchGroupsTable
-                    .Where(x => x.VisibleModelsWhenFlagOffOffset > 0)
-                    .ToDictionary(
-                        x => (int) x.VisibleModelsWhenFlagOffOffset,
-                        x => ModelIDTable.Create(Data, x.Name + "_FlagOffIDs (0x" + x.VisibleModelsWhenFlagOffOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOffOffset - RamAddress)
-                    );
-
-                VisibleModelsWhenFlagOnByAddr = ModelSwitchGroupsTable
-                    .Where(x => x.VisibleModelsWhenFlagOnOffset > 0)
-                    .ToDictionary(
-                        x => (int) x.VisibleModelsWhenFlagOnOffset,
-                        x => ModelIDTable.Create(Data, x.Name + "_FlagOnIDs (0x" + x.VisibleModelsWhenFlagOnOffset.ToString("X") + ")", (int) x.VisibleModelsWhenFlagOnOffset - RamAddress)
-                    );
-
-                tables.AddRange(VisibleModelsWhenFlagOffByAddr.Values);
-                tables.AddRange(VisibleModelsWhenFlagOnByAddr.Values);
+                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress, NameGetterContext));
+                foreach (var switchGroup in ModelSwitchGroupsTable) {
+                    if (switchGroup.ModelsVisibleWhenOff != null)
+                        tables.Add(switchGroup.ModelsVisibleWhenOff);
+                    if (switchGroup.ModelsVisibleWhenOn != null)
+                        tables.Add(switchGroup.ModelsVisibleWhenOn);
+                }
             }
 
             // TODO: put somewhere else!!

@@ -144,9 +144,6 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
 
-        public Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOffByAddr { get; private set; }
-        public Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; private set; }
-
         [BulkCopyRecurse]
         public UnknownUInt8Table GroundAnimationTable { get; private set; }
 

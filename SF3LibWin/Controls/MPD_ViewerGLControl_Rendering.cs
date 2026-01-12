@@ -211,22 +211,19 @@ namespace SF3.Win.Controls {
             var modelsToHide = new HashSet<int>();
             if (MPD_File?.ModelSwitchGroupsTable != null) {
                 // Assume everything is hidden by default.
-                if (MPD_File.VisibleModelsWhenFlagOnByAddr != null)
-                    foreach (var table in MPD_File.VisibleModelsWhenFlagOnByAddr.Values)
-                        foreach (var row in table)
+                foreach (var switchGroup in MPD_File.ModelSwitchGroupsTable) {
+                    if (switchGroup.ModelsVisibleWhenOn != null)
+                        foreach (var row in switchGroup.ModelsVisibleWhenOn)
                             modelsToHide.Add(row.ModelID);
 
-                if (MPD_File.VisibleModelsWhenFlagOffByAddr != null)
-                    foreach (var table in MPD_File.VisibleModelsWhenFlagOffByAddr.Values)
-                        foreach (var row in table)
+                    if (switchGroup.ModelsVisibleWhenOff != null)
+                        foreach (var row in switchGroup.ModelsVisibleWhenOff)
                             modelsToHide.Add(row.ModelID);
+                }
 
                 // Enable models selectively based on flags.
-                foreach (var msg in MPD_File.ModelSwitchGroupsTable) {
-                    var turnOnTable = msg.StateInEditor
-                        ? MPD_File.VisibleModelsWhenFlagOnByAddr .TryGetValue((int) msg.VisibleModelsWhenFlagOnOffset , out var onTable)  ? onTable  : null
-                        : MPD_File.VisibleModelsWhenFlagOffByAddr.TryGetValue((int) msg.VisibleModelsWhenFlagOffOffset, out var offTable) ? offTable : null;
-
+                foreach (var switchGroup in MPD_File.ModelSwitchGroupsTable) {
+                    var turnOnTable = switchGroup.StateInEditor ? switchGroup.ModelsVisibleWhenOn : switchGroup.ModelsVisibleWhenOff;
                     if (turnOnTable != null)
                         foreach (var row in turnOnTable)
                             modelsToHide.Remove(row.ModelID);

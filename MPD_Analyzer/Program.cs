@@ -494,12 +494,12 @@ namespace MPD_Analyzer {
 
                 var errors = new List<string>();
 
-                var offTables      = mpdFile.VisibleModelsWhenFlagOffByAddr.Values.ToArray();
+                var offTables      = mpdFile.ModelSwitchGroupsTable.Select(x => x.ModelsVisibleWhenOff).ToArray();
                 var offModelCount  = offTables.SelectMany(x => x.Rows).Select(x => x.ModelID).GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
                 var multiOffModels = offModelCount.Where(x => x.Value > 1).ToDictionary();
                 errors.AddRange(multiOffModels.Select(x => $"Off:  0x{x.Key:X2} x{x.Value}"));
 
-                var onTables      = mpdFile.VisibleModelsWhenFlagOnByAddr.Values.ToArray();
+                var onTables      = mpdFile.ModelSwitchGroupsTable.Select(x => x.ModelsVisibleWhenOn).ToArray();
                 var onModelCount  = onTables.SelectMany(x => x.Rows).Select(x => x.ModelID).GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
                 var multiOnModels = onModelCount.Where(x => x.Value > 1).ToDictionary();
                 errors.AddRange(multiOnModels.Select(x => $"On:   0x{x.Key:X2} x{x.Value}"));

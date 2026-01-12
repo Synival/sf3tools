@@ -112,8 +112,6 @@ namespace SF3.Models.Files.MPD {
         UnknownUInt16Table Unknown1Table { get; }
         PaletteAdjustment PaletteAdjustment { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
-        Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOffByAddr { get; }
-        Dictionary<int, ModelIDTable> VisibleModelsWhenFlagOnByAddr { get; }
         UnknownUInt8Table GroundAnimationTable { get; }
         IgnoredTextureTable IgnoredTextureTable { get; }
         ColorTable GroundPaletteColorTable { get; }
