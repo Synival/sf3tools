@@ -30,7 +30,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataModelView("Palette Adjustment", Model.PaletteAdjustment, ngc));
 
             if (Model.ModelSwitchGroupsTable != null)
-                CreateChild(new ModelSwitchGroupTableView("Model Switch Groups", Model.ModelSwitchGroupsTable, ngc));
+                CreateChild(new ModelSwitchGroupTableView("Model Switch Groups", Model, Model.ModelSwitchGroupsTable, ngc));
 
             if (Model.Animations != null) {
                 CreateChild(new AnimationTableView("Animations", Model.Animations, ngc));

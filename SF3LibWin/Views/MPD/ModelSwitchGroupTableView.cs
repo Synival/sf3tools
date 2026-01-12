@@ -1,16 +1,17 @@
 using System;
 using System.Linq;
 using CommonLib.NamedValues;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables.MPD.Main;
 
 namespace SF3.Win.Views.MPD {
     public class ModelSwitchGroupTableView : ArrayView<ModelSwitchGroup, ModelSwitchGroupView> {
-        public ModelSwitchGroupTableView(string name, ModelSwitchGroupsTable table, INameGetterContext nameGetterContext) : base(
+        public ModelSwitchGroupTableView(string name, IMPD_File mpdFile, ModelSwitchGroupsTable table, INameGetterContext nameGetterContext) : base(
             name,
             table?.ToArray() ?? [],
             "DropdownName",
-            new ModelSwitchGroupView(nameof(ModelSwitchGroup), null, nameGetterContext)
+            new ModelSwitchGroupView(nameof(ModelSwitchGroup), mpdFile, null, nameGetterContext)
         ) {
             _table = table;
         }

@@ -1,17 +1,18 @@
 ﻿using System.Windows.Forms;
 using CommonLib.NamedValues;
-using SF3.Models.Structs.MPD;
+using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
 
 namespace SF3.Win.Views.MPD {
     public class ModelSwitchGroupView : TabView {
-        public ModelSwitchGroupView(string name, ModelSwitchGroup switchGroup, INameGetterContext nameGetterContext) : base(name) {
+        public ModelSwitchGroupView(string name, IMPD_File mpdFile, ModelSwitchGroup switchGroup, INameGetterContext nameGetterContext) : base(name) {
+            MPD_File = mpdFile;
             _switchGroup = switchGroup;
             NameGetterContext = nameGetterContext;
 
             HeaderView = new DataModelView("Header", switchGroup, nameGetterContext, typeof(ModelSwitchGroup));
-            ModelsVisibleWhenFlagOffView = new TableView("Models Visible when Flag Off", switchGroup?.ModelsVisibleWhenOff, nameGetterContext, typeof(ModelIDStruct));
-            ModelsVisibleWhenFlagOnView = new TableView("Models Visible when Flag On",  switchGroup?.ModelsVisibleWhenOn,  nameGetterContext, typeof(ModelIDStruct));
+            ModelsVisibleWhenFlagOffView = new ModelIDTableView("Models Visible when Flag Off", MPD_File, switchGroup?.ModelsVisibleWhenOff, nameGetterContext);
+            ModelsVisibleWhenFlagOnView = new ModelIDTableView("Models Visible when Flag On", MPD_File, switchGroup?.ModelsVisibleWhenOn,  nameGetterContext);
         }
 
         public override Control Create() {
@@ -26,6 +27,9 @@ namespace SF3.Win.Views.MPD {
             return Control;
         }
 
+        public IMPD_File MPD_File { get; }
+        public INameGetterContext NameGetterContext { get; }
+
         private ModelSwitchGroup _switchGroup = null;
         public ModelSwitchGroup SwitchGroup {
             get => _switchGroup;
@@ -38,10 +42,9 @@ namespace SF3.Win.Views.MPD {
                 }
             }
         }
-        public INameGetterContext NameGetterContext { get; }
 
         public DataModelView HeaderView { get; }
-        public TableView ModelsVisibleWhenFlagOffView { get; }
-        public TableView ModelsVisibleWhenFlagOnView { get; }
+        public ModelIDTableView ModelsVisibleWhenFlagOffView { get; }
+        public ModelIDTableView ModelsVisibleWhenFlagOnView { get; }
     }
 }
