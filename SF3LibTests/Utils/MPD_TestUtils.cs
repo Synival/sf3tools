@@ -86,7 +86,7 @@ namespace SF3.Tests.Utils {
             public readonly int Index = index;
         }
 
-        public static void AssertMPD_FilesHaveSameContent(MPD_File expectedFile, MPD_File actualFile, Dictionary<int, ByteComparisonSkipRegion[]> skipRegionsByChunk = null) {
+        public static void AssertMPD_FilesHaveSameContent(MPD_File expectedFile, MPD_File actualFile, Dictionary<int, ByteComparisonSkipRegion[]>? skipRegionsByChunk = null) {
             var exceptionsCaught = new List<Exception>();
             void CollectException(Action action) {
                 try {
