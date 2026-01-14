@@ -59,7 +59,7 @@ namespace SF3.MPD {
                 }
                 else {
                     WriteUShort(0);
-                    WriteUShort(0);
+                    WriteUShort(1);
                     WriteUShort(0);
                 }
             });
