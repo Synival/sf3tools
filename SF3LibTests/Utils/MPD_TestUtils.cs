@@ -81,6 +81,11 @@ namespace SF3.Tests.Utils {
             });
         }
 
+        private class TextureDataWithIndex(byte[] data, int index) {
+            public readonly byte[] Data  = data;
+            public readonly int Index = index;
+        }
+
         public static void AssertMPD_FilesHaveSameContent(MPD_File expectedFile, MPD_File actualFile, Dictionary<int, ByteComparisonSkipRegion[]> skipRegionsByChunk = null) {
             var exceptionsCaught = new List<Exception>();
             void CollectException(Action action) {
@@ -92,10 +97,18 @@ namespace SF3.Tests.Utils {
                 }
             }
 
-            ByteComparisonSkipRegion[]? GetSkipRegions(int chunk) {
+            ByteComparisonSkipRegion[] GetSkipRegions(int chunk) {
                 if (skipRegionsByChunk == null)
-                    return null;
-                return skipRegionsByChunk.TryGetValue(chunk, out var bcsr) ? bcsr : null;
+                    return [];
+
+                var regionList = skipRegionsByChunk.TryGetValue(chunk, out var bcsr) ? bcsr.ToList() : [];
+                if (chunk == -1) {
+                    var anims = expectedFile.Animations;
+                    if (anims != null)
+                        regionList.Add(new ByteComparisonSkipRegion() { Offset = anims.Address, Size = anims.SizeInBytes });
+                }
+
+                return regionList.ToArray();
             }
 
             // Main/header content from 0x0000 - 0x2000 should be identical.
@@ -124,31 +137,83 @@ namespace SF3.Tests.Utils {
 
                 CollectException(() => Assert.IsTrue(expectedChunkInfo.ChunkType == actualChunkInfo.ChunkType, $"Inconsistent Chunk[{i}].ChunkType: expected={expectedChunkInfo.ChunkType}, actual={actualChunkInfo.ChunkType}"));
 
-                var skipRegions = GetSkipRegions(i);
-                var expectedSize = expectedChunkInfo.DecompressedSize + ((skipRegions != null) ? skipRegions.Sum(x => x.ActualDataExtraBytes) : 0);
-                var actualSize   = actualChunkInfo.DecompressedSize;
-
-                CollectException(() => Assert.IsTrue(expectedSize == actualSize,
-                    $"Inconsistent Chunk[{i}].DecompressedSize: expected={expectedSize} ({expectedSize:X4}), actual={actualSize} ({actualSize:X4})"));
-
                 var expectedChunkData = expectedFile.ChunkData[i];
                 var actualChunkData   = actualFile.ChunkData[i];
-                Assert.IsNotNull(expectedChunkData, $"Internal logic error: {nameof(expectedChunkData)} should not be null!");
-                Assert.IsNotNull(actualChunkData,   $"Internal logic error: {nameof(actualChunkData)} should not be null!");
+                CollectException(() => Assert.IsNotNull(expectedChunkData, $"Internal logic error: {nameof(expectedChunkData)} should not be null!"));
+                CollectException(() => Assert.IsNotNull(actualChunkData,   $"Internal logic error: {nameof(actualChunkData)} should not be null!"));
+                if (expectedChunkData == null || actualChunkData == null)
+                    continue;
 
                 var expectedChunkByteData = expectedChunkData.DecompressedData.Data.GetDataCopyOrReference();
                 var actualChunkByteData   = actualChunkData.DecompressedData.Data.GetDataCopyOrReference();
-                var reportOffset = actualChunkData.IsCompressed ? 0 : actualChunkInfo.ChunkFileAddress;
-                var reportInfo = actualChunkData.IsCompressed
-                    ? $"Chunk[{i}] (compressed data)"
-                    : $"Chunk[{i}] (uncompressed data -- actual offset is 0x{reportOffset:X4}";
 
-                CollectException(() => AssertByteComparison(
-                    expectedChunkByteData,
-                    actualChunkByteData,
-                    reportOffset, reportInfo,
-                    skipRegions
-                ));
+                // Chunk[3] is special; it has *individually compressed* images. Compare image-by-image.
+                if (i == 3) {
+                    // Textures aren't necessarily in the same order; just make sure they're all present.
+                    var expectedTextures = new List<TextureDataWithIndex>();
+                    var actualTextures   = new List<TextureDataWithIndex>();
+
+                    // Get expected textures.
+                    int pos = 0;
+                    for (int index = 0; pos < expectedChunkByteData.Length - 2; index++) {
+                        var textureData = CommonLib.Utils.Compression.DecompressLZSS(expectedChunkByteData, pos, null, out var bytesRead, out var endDataFound);
+                        CollectException(() => Assert.IsTrue(endDataFound, $"Existing MPD error: Chunk[3] expected texture 0x{index:X2} error: {nameof(endDataFound)} == false"));
+                        actualTextures.Add(new(textureData, index));
+
+                        pos += bytesRead;
+                        if ((pos % 4) != 0)
+                            pos += (4 - (pos % 4));
+                    }
+
+                    // Get actual textures.
+                    pos = 0;
+                    for (int index = 0; pos < actualChunkByteData.Length - 2; index++) {
+                        var textureData = CommonLib.Utils.Compression.DecompressLZSS(actualChunkByteData, pos, null, out var bytesRead, out var endDataFound);
+                        CollectException(() => Assert.IsTrue(endDataFound, $"Chunk[3] actual texture 0x{index:X2} error: {nameof(endDataFound)} == false"));
+                        expectedTextures.Add(new(textureData, index));
+
+                        pos += bytesRead;
+                        if ((pos % 4) != 0)
+                            pos += (4 - (pos % 4));
+                    }
+
+                    // Find textures that are contained in 'actualTextures' but not 'expectedTextures' and vice-versa.
+                    var extraTextures   = new List<TextureDataWithIndex>();
+                    var missingTextures = new List<TextureDataWithIndex>(expectedTextures);
+                    foreach (var actualTexture in actualTextures) {
+                        var matchingTexture = missingTextures.FirstOrDefault(x => Enumerable.SequenceEqual(actualTexture.Data, x.Data));
+                        if (matchingTexture != null)
+                            missingTextures.Remove(matchingTexture);
+                        else
+                            extraTextures.Add(actualTexture);
+                    }
+
+                    foreach (var tex in extraTextures)
+                        CollectException(() => Assert.Fail($"Chunk[3] actual texture 0x{tex.Index:X2} error: extra texture not found in actual MPD"));
+                    foreach (var tex in missingTextures)
+                        CollectException(() => Assert.Fail($"Chunk[3] expected texture 0x{tex.Index:X2} error: missing not found in expected MPD"));
+                }
+                // For other chunks, just compare the decompressed data.
+                else {
+                    var skipRegions = GetSkipRegions(i);
+                    var expectedSize = expectedChunkInfo.DecompressedSize + ((skipRegions != null) ? skipRegions.Sum(x => x.ActualDataExtraBytes) : 0);
+                    var actualSize   = actualChunkInfo.DecompressedSize;
+
+                    CollectException(() => Assert.IsTrue(expectedSize == actualSize,
+                        $"Inconsistent Chunk[{i}].DecompressedSize: expected={expectedSize} ({expectedSize:X4}), actual={actualSize} ({actualSize:X4})"));
+
+                    var reportOffset = actualChunkData.IsCompressed ? 0 : actualChunkInfo.ChunkFileAddress;
+                    var reportInfo = actualChunkData.IsCompressed
+                        ? $"Chunk[{i}] (compressed data)"
+                        : $"Chunk[{i}] (uncompressed data -- actual offset is 0x{reportOffset:X4}";
+
+                    CollectException(() => AssertByteComparison(
+                        expectedChunkByteData,
+                        actualChunkByteData,
+                        reportOffset, reportInfo,
+                        skipRegions
+                    ));
+                }
             }
 
             if (exceptionsCaught.Count == 1)
