@@ -198,8 +198,8 @@ namespace SF3.MPD {
             var pos = (uint) CurrentOffset;
             textures = (textures ?? new IMPD_AnimatableTexture[0]).Where(x => x.Animation != null && !x.IsIgnored).ToArray();
 
-            var chunk3DataArray = textures.Length > 0 ? new ByteArray(0x1000) : null;
-            var chunk3BytesWritten = 0;
+            var chunk3DataArray = textures.Length > 0 ? new ByteArray(0x10000) : null;
+            var chunk3Size = 0;
 
             // Special case for a few very specific files.
             foreach (var tex in textures) {
@@ -209,12 +209,17 @@ namespace SF3.MPD {
                 WriteUShort((ushort) tex.Animation.FrameTimerStart);
 
                 foreach (var frame in tex.Animation.Frames) {
-                    var compressedTexture = Compression.CompressLZSS(frame.ImageData16Bit.To1DArrayTransposed().ToByteArray());
-                    var chunk3WritePos = chunk3BytesWritten;
-                    chunk3BytesWritten += compressedTexture.Length;
-                    if (chunk3BytesWritten > chunk3DataArray.Length)
-                        chunk3DataArray.Resize(chunk3DataArray.Length + 0x1000);
-                    chunk3DataArray.SetDataAtTo(chunk3WritePos, compressedTexture.Length, compressedTexture);
+                    var compressedTextureData = Compression.CompressLZSS(frame.ImageData16Bit.To1DArrayTransposed().ToByteArray());
+
+                    var chunk3WritePos = chunk3Size;
+                    chunk3Size = chunk3WritePos + compressedTextureData.Length;
+                    if (chunk3Size % 4 != 0)
+                        chunk3Size += 4 - (chunk3Size % 4);
+
+                    while (chunk3Size > chunk3DataArray.Length)
+                        chunk3DataArray.Resize(chunk3Size + 0x10000);
+
+                    chunk3DataArray.SetDataAtTo(chunk3WritePos, compressedTextureData.Length, compressedTextureData);
 
                     WriteUShort((ushort) chunk3WritePos);
                     WriteUShort((ushort) frame.Duration);
@@ -230,9 +235,9 @@ namespace SF3.MPD {
             if (chunk3DataArray == null)
                 chunk3Data = null;
             else {
-                if (chunk3BytesWritten % 4 != 0)
-                    chunk3BytesWritten += 4 - (chunk3BytesWritten % 4);
-                chunk3Data = chunk3DataArray.GetDataCopyAt(0, chunk3BytesWritten);
+                if (chunk3Size % 4 != 0)
+                    chunk3Size += 4 - (chunk3Size % 4);
+                chunk3Data = chunk3DataArray.GetDataCopyAt(0, chunk3Size);
             }
 
             return pos;
