@@ -207,8 +207,8 @@ namespace SF3.Models.Files.MPD {
             }
 
             if (header.OffsetUnknown2 != 0) {
-                var maxSize = (header.OffsetGroundAnimation != 0) ? (header.OffsetGroundAnimation - header.OffsetUnknown2 - 2) : 32;
-                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, maxSize, 0xFFFF));
+                var maxSize = (header.OffsetGroundAnimation != 0) ? ((header.OffsetGroundAnimation - header.OffsetUnknown2) / 2) : 32;
+                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, maxSize, null));
             }
 
             return tables.ToArray();
