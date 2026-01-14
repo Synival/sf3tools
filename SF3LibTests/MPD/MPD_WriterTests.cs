@@ -338,6 +338,42 @@ namespace SF3.Tests.MPD {
             });
         }
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_BTL02_CanBeLoaded() {
+            var originalFile = MakeMPD_File(ScenarioType.Scenario1, "BTL02.MPD");
+            _ = RecreateMPD_File(originalFile);
+        }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_BTL02_ProducesSameData() {
+            var file = MakeMPD_File(ScenarioType.Scenario1, "BTL02.MPD");
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(file);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("BTL02_Test.MPD", outputData);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
+            AssertMPD_FilesHaveSameContent(file, newFile, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+                {
+                    1, new ByteComparisonSkipRegion[] {
+                        // Collision lines are inconsistent
+                        new ByteComparisonSkipRegion() { Offset = 0x1105A, Size = 0x2DA },
+                        new ByteComparisonSkipRegion() { Offset = 0x1151A, Size = 2, ActualDataExtraBytes = 2 },
+                        new ByteComparisonSkipRegion() { Offset = 0x115C6, Size = 2, ActualDataExtraBytes = 2 },
+                        new ByteComparisonSkipRegion() { Offset = 0x11696, Size = 2, ActualDataExtraBytes = 2 },
+                        new ByteComparisonSkipRegion() { Offset = 0x11720, Size = 2, ActualDataExtraBytes = 2 },
+                        new ByteComparisonSkipRegion() { Offset = 0x119A8, Size = 2, ActualDataExtraBytes = 2 },
+                        new ByteComparisonSkipRegion() { Offset = 0x119B4, Size = 2, ActualDataExtraBytes = 2 },
+                    }
+                }
+            });
+        }
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {

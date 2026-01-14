@@ -201,6 +201,29 @@ namespace SF3.MPD {
             var chunk3DataArray = textures.Length > 0 ? new ByteArray(0x10000) : null;
             var chunk3Size = 0;
 
+            var textureDataByPos = new Dictionary<ushort, byte[]>();
+
+            ushort AddTextureToChunk3(byte[] textureData) {
+                var existingEntry = textureDataByPos.FirstOrDefault(x => Enumerable.SequenceEqual(textureData, x.Value));
+                if (existingEntry.Value != null)
+                    return existingEntry.Key;
+
+                var compressedTextureData = Compression.CompressLZSS(textureData);
+
+                var chunk3WritePos = (ushort) chunk3Size;
+                chunk3Size = chunk3WritePos + compressedTextureData.Length;
+                if (chunk3Size % 4 != 0)
+                    chunk3Size += 4 - (chunk3Size % 4);
+
+                while (chunk3Size > chunk3DataArray.Length)
+                    chunk3DataArray.Resize(chunk3Size + 0x10000);
+
+                chunk3DataArray.SetDataAtTo(chunk3WritePos, compressedTextureData.Length, compressedTextureData);
+                textureDataByPos.Add(chunk3WritePos, textureData);
+
+                return chunk3WritePos;
+            }
+
             // Special case for a few very specific files.
             foreach (var tex in textures) {
                 WriteUShort((ushort) tex.ID);
@@ -209,19 +232,8 @@ namespace SF3.MPD {
                 WriteUShort((ushort) tex.Animation.FrameTimerStart);
 
                 foreach (var frame in tex.Animation.Frames) {
-                    var compressedTextureData = Compression.CompressLZSS(frame.ImageData16Bit.To1DArrayTransposed().ToByteArray());
-
-                    var chunk3WritePos = chunk3Size;
-                    chunk3Size = chunk3WritePos + compressedTextureData.Length;
-                    if (chunk3Size % 4 != 0)
-                        chunk3Size += 4 - (chunk3Size % 4);
-
-                    while (chunk3Size > chunk3DataArray.Length)
-                        chunk3DataArray.Resize(chunk3Size + 0x10000);
-
-                    chunk3DataArray.SetDataAtTo(chunk3WritePos, compressedTextureData.Length, compressedTextureData);
-
-                    WriteUShort((ushort) chunk3WritePos);
+                    var chunk3FramePos = AddTextureToChunk3(frame.ImageData16Bit.To1DArrayTransposed().ToByteArray());
+                    WriteUShort((ushort) chunk3FramePos);
                     WriteUShort((ushort) frame.Duration);
                 }
 

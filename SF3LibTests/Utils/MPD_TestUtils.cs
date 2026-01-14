@@ -158,7 +158,7 @@ namespace SF3.Tests.Utils {
                     for (int index = 0; pos < expectedChunkByteData.Length - 2; index++) {
                         var textureData = CommonLib.Utils.Compression.DecompressLZSS(expectedChunkByteData, pos, null, out var bytesRead, out var endDataFound);
                         CollectException(() => Assert.IsTrue(endDataFound, $"Existing MPD error: Chunk[3] expected texture 0x{index:X2} error: {nameof(endDataFound)} == false"));
-                        actualTextures.Add(new(textureData, index));
+                        expectedTextures.Add(new(textureData, index));
 
                         pos += bytesRead;
                         if ((pos % 4) != 0)
@@ -170,7 +170,7 @@ namespace SF3.Tests.Utils {
                     for (int index = 0; pos < actualChunkByteData.Length - 2; index++) {
                         var textureData = CommonLib.Utils.Compression.DecompressLZSS(actualChunkByteData, pos, null, out var bytesRead, out var endDataFound);
                         CollectException(() => Assert.IsTrue(endDataFound, $"Chunk[3] actual texture 0x{index:X2} error: {nameof(endDataFound)} == false"));
-                        expectedTextures.Add(new(textureData, index));
+                        actualTextures.Add(new(textureData, index));
 
                         pos += bytesRead;
                         if ((pos % 4) != 0)
@@ -189,9 +189,9 @@ namespace SF3.Tests.Utils {
                     }
 
                     foreach (var tex in extraTextures)
-                        CollectException(() => Assert.Fail($"Chunk[3] actual texture 0x{tex.Index:X2} error: extra texture not found in actual MPD"));
+                        CollectException(() => Assert.Fail($"Chunk[3] actual texture 0x{tex.Index:X2} is extra (not found in expected MPD)"));
                     foreach (var tex in missingTextures)
-                        CollectException(() => Assert.Fail($"Chunk[3] expected texture 0x{tex.Index:X2} error: missing not found in expected MPD"));
+                        CollectException(() => Assert.Fail($"Chunk[3] expected texture 0x{tex.Index:X2} missing (not found in actual MPD)"));
                 }
                 // For other chunks, just compare the decompressed data.
                 else {
