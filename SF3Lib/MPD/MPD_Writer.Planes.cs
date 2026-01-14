@@ -3,7 +3,7 @@ using CommonLib.Extensions;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WritePlaneChunks(IMPD_Planes planes) {
+        public void WritePlaneChunks(IMPD_Planes planes, bool lastChunkIsReservedForModels) {
             // Write the background image.
             var bgImage = planes.GroundImage ?? planes.GroundTiledImage?.Tileset ?? planes.BackgroundImage;
             if (bgImage != null && bgImage.Width == 512 && bgImage.Height == 256 && bgImage.BytesPerPixel == 1) {
@@ -34,14 +34,17 @@ namespace SF3.MPD {
                 WriteEmptyChunk();
             }
 
-            // 2/2 of ground tile assignments are written here.
-            if (planes.GroundTiledImage?.TileAssignment != null)
-                WriteTileAssignmentChunk(planes.GroundTiledImage.TileAssignment, startBlock: 8, 16);
-            // Foreground tile assignment shares the same chunk.
-            else if (planes.ForegroundTiledImage?.TileAssignment != null)
-                WriteTileAssignmentChunk(planes.ForegroundTiledImage.TileAssignment, startBlock: 0, 1);
-            else
-                WriteEmptyChunk();
+            // TODO: This incredibly stupid scenario should be checked for. Maybe we throw if this ever happens?
+            if (!lastChunkIsReservedForModels) {
+                // 2/2 of ground tile assignments are written here.
+                if (planes.GroundTiledImage?.TileAssignment != null)
+                    WriteTileAssignmentChunk(planes.GroundTiledImage.TileAssignment, startBlock: 8, 16);
+                // Foreground tile assignment shares the same chunk.
+                else if (planes.ForegroundTiledImage?.TileAssignment != null)
+                    WriteTileAssignmentChunk(planes.ForegroundTiledImage.TileAssignment, startBlock: 0, 1);
+                else
+                    WriteEmptyChunk();
+            }
         }
 
         public void WriteTileAssignmentChunk(IMPD_PlaneTileAssignment tileAssignment, int startBlock, int stopBlock)

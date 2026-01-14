@@ -202,8 +202,7 @@ namespace SF3.Models.Files.MPD {
                 var lengthInBytes = ((int) lowestOffset - header.OffsetUnknown1);
                 var size = Math.Min(32, lengthInBytes / 2);
 
-                if (size > 0)
-                    tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - RamAddress, size, null));
+                tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - RamAddress, size, null));
             }
 
             if (header.OffsetUnknown2 != 0) {

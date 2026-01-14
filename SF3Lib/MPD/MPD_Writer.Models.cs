@@ -24,16 +24,18 @@ namespace SF3.MPD {
             // Last part of the header: the number of model instances.
             WriteUShort((ushort) (instances?.Count() ?? 0));
 
+            var pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();
+
             // Model instances immediately follow the header.
             if (instances != null)
                 foreach (var inst in instances)
-                    WriteModelChunkInstance(inst);
+                    WriteModelChunkInstance(inst, pdataIdToOffsetPtrMap);
             WriteUInt(0);
 
             // PDATAs, POINTs, POLYGONs, and ATTRs follow after that.
             if (models != null)
                 foreach (var model in models)
-                    WriteModelChunkModel(model, fileChunkAddr, ramChunkAddr);
+                    WriteModelChunkModel(model, fileChunkAddr, ramChunkAddr, pdataIdToOffsetPtrMap);
 
             // The collision data is at the end.
             AtOffset(collisionLinesHeaderOffset, pos => WriteUInt((uint) (pos - fileChunkAddr + ramChunkAddr)));
@@ -42,13 +44,13 @@ namespace SF3.MPD {
             WriteCollisionBlocks(linesWritten, fileChunkAddr, ramChunkAddr);
         }
 
-        public void WriteModelChunkInstance(IMPD_ModelInstance instance) {
+        public void WriteModelChunkInstance(IMPD_ModelInstance instance, Dictionary<int, List<long>> pdataIdToOffsetPtrMap) {
             // Placeholder pointers to be populated later.
             for (int i = 0; i < 8; i++) {
                 int pdataId = instance.ModelID + i;
-                if (!_pdataIdToOffsetPtrMap.ContainsKey(pdataId))
-                    _pdataIdToOffsetPtrMap.Add(pdataId, new List<long>());
-                _pdataIdToOffsetPtrMap[pdataId].Add(CurrentOffset);
+                if (!pdataIdToOffsetPtrMap.ContainsKey(pdataId))
+                    pdataIdToOffsetPtrMap.Add(pdataId, new List<long>());
+                pdataIdToOffsetPtrMap[pdataId].Add(CurrentOffset);
                 WriteMPDPointer(null);
             }
 
@@ -68,7 +70,7 @@ namespace SF3.MPD {
             WriteUShort(instance.Flags);
         }
 
-        public void WriteModelChunkModel(ISGL_Model model, int fileChunkAddr, int ramChunkAddr) {
+        public void WriteModelChunkModel(ISGL_Model model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<long>> pdataIdToOffsetPtrMap) {
             const int c_pdataCount = 8;
 
             // Track where the pointers to the various tables will be.
@@ -80,7 +82,7 @@ namespace SF3.MPD {
             uint addr;
             for (int i = 0; i < c_pdataCount; i++) {
                 var pdataId = model.ID + i;
-                if (_pdataIdToOffsetPtrMap.TryGetValue(pdataId, out var ptrs)) {
+                if (pdataIdToOffsetPtrMap.TryGetValue(pdataId, out var ptrs)) {
                     addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
                     AtOffsets(ptrs.ToArray(), _ => WriteUInt(addr));
                 }
@@ -213,7 +215,9 @@ namespace SF3.MPD {
         public void WriteCollisionLinesSection(IMPD_Collisions collisions, int fileChunkAddr, int ramChunkAddr, out IMPD_CollisionLine[] linesWritten) {
             // Write a header. The points come first, then the lines.
             // If there are no points or lines, just write zeroes.
-            if (collisions.Points.Count() == 0 && collisions.Lines.Count() == 0) {
+            if (collisions == null || collisions.Points == null || collisions.Lines == null ||
+                collisions.Points.Count() == 0 && collisions.Lines.Count() == 0
+            ) {
                 WriteUInt(0);
                 WriteUInt(0);
                 linesWritten = new IMPD_CollisionLine[0];
@@ -293,7 +297,5 @@ namespace SF3.MPD {
                 WriteUShort(0xFFFF);
             }
         }
-
-        private Dictionary<int, List<long>> _pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();
     }
 }

@@ -65,9 +65,15 @@ namespace SF3.MPD {
             WriteTextureChunk(barrelTextures, 0, out _);
 
             // Ground + sky chunks.
-            WritePlaneChunks(mpd.Planes);
+            WritePlaneChunks(mpd.Planes, mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures);
 
-            // TODO: Chunk[19] for the Titan
+            // In Scenario 1, Chunk[19] is the Titan model used in Z_AS.MPD.
+            if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
+                if (mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out var extraModels))
+                    WriteModelChunk(extraModels.Models, extraModels.ModelInstances, null, isHighMemory: true);
+                else
+                    WriteEmptyChunk();
+            }
 
             // TODO: actual chunks!!
             while (_currentChunks < 20)
