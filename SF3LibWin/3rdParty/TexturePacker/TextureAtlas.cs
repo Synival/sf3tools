@@ -162,7 +162,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             if (node == null)
                 return;
 
-            if (node.Texture != null) {
+            if (node.Texture != null && node.Texture.BitmapDataARGB8888 != null) {
                 void CopyImage() {
                     // Should never happen, but in case it does, fail instead of crashing really hard due to memcpy().
                     if (atlas.PixelFormat != PixelFormat.Format32bppArgb)
