@@ -132,10 +132,6 @@ namespace SF3.Tests.MPD {
                 // Header: Insignificant texture Chunk[5] size difference (2 bytes) due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2037, Size = 1 },
 
-                // Chunk[2]: Some inconsequential heightmap differences caused by *not* ignoring neighbor tiles in other blocks when flat.
-                // TODO: we should be able to fix this one!!
-                new ByteComparisonSkipRegion { Offset = 0x134B7, Size = 0x500 },
-
                 // Texture compression nonsense
                 new ByteComparisonSkipRegion { Offset = 0x1AA81, Size = 0x19 },
 
@@ -263,16 +259,7 @@ namespace SF3.Tests.MPD {
             File.WriteAllBytes("DAM_Test.MPD", outputData);
 
             var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), file.NameGetterContext, file.Scenario);
-            AssertMPD_FilesHaveSameContent(file, newFile, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 2, new ByteComparisonSkipRegion[] {
-                    // TODO: The normals aren't quite right. Gotta fix that!
-/*
-                    // Bogus surface models heights
-                    // TODO: fix these!!!
-                    new ByteComparisonSkipRegion() { Offset = 0x222D9, Size = 0x10000 },
-*/
-                }
-            }});
+            AssertMPD_FilesHaveSameContent(file, newFile);
         }
 
         [TestMethod]
