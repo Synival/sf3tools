@@ -203,6 +203,39 @@ namespace SF3.Editor.Forms {
             return true;
         }
 
+        /// <summary>
+        /// Opens a dialog to export the currently loaded MPD to a new MPD for any scenario.
+        /// </summary>
+        /// <param name="mpd">The MPD file to convert.</param>
+        /// <param name="toScenario">The scenario for the exported MPD file.</param>
+        /// <param name="filename">Default name of the MPD to save.</param>
+        /// <returns>'true' if an export was successful, otherwise 'false'.</returns>
+        public bool ExportMPDDialog(IMPD mpd, ScenarioType toScenario, string filename) {
+            using (var dialog = new SaveFileDialog() {
+                Title = $"Export to {toScenario} MPD",
+                Filter = "MPD Files (*.MPD)|*.MPD|All Files (*.*)|*.*"
+            }) {
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return false;
+
+                var path = dialog.FileName;
+
+                try {
+                    using (var outStream = new FileStream(path, FileMode.Create)) {
+                        var writer = new MPD_Writer(outStream, toScenario);
+                        writer.WriteMPD(mpd);
+                    }
+                    InfoMessage("Export successful.");
+                }
+                catch (Exception ex) {
+                    ErrorMessage("Error while exporting:\r\n\r\n" + ex.Message);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private void tsmiMPD_Textures_ImportAll_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
                 ImportAllMPDTexturesDialog((IMPD_File) SelectedFile.Loader.Model);
@@ -253,6 +286,11 @@ namespace SF3.Editor.Forms {
         private void tsmiMPD_Chunks_RebuildChunkTable_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
                 ((IMPD_File) SelectedFile.Loader.Model).RebuildChunkTable();
+        }
+
+        private void mpdTSMI_Export_ToScenario1MPD_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD)
+                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario1, SelectedFile.Loader.ShortFilename);
         }
 
         private void UpdateMPD_ModelSwitchGroupsMenu(IMPD_File? mpdFile) {
