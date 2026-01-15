@@ -18,7 +18,7 @@ namespace SF3.MPD {
         /// <param name="mpd">The MPD_File to write to the stream.</param>
         public void WriteMPD(IMPD mpd) {
             // Write the main section of the MPD (0x0000 - 0x2000).
-            WriteMain(Scenario, mpd, out var chunk3Data);
+            WriteMain(mpd, out var chunk3Data);
 
             // Write zeroes up until 0x2000 (empty space before the chunk table) and all the way through 0x2100,
             // which writes all zeroes for the chunk table. The chunk table's actual entries will be written as

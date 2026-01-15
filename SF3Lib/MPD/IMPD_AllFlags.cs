@@ -1,19 +1,10 @@
-﻿using SF3.Types;
-
-namespace SF3.MPD {
+﻿namespace SF3.MPD {
     public interface IMPD_AllFlags :
         IMPD_Scenario1Flags,
         IMPD_Scenario2Flags,
         IMPD_Scenario3Flags,
         IMPD_PremiumDiskFlags
     {
-        /// <summary>
-        /// Gets flags that correspond to a specific scenario.
-        /// </summary>
-        /// <param name="scenario"></param>
-        /// <returns></returns>
-        ushort GetHeaderFlags(ScenarioType scenario);
-
         // Properties to indicate whether or not this flag can be set
         bool CanSet_0x0001_Unknown { get; }
         bool CanSet_0x0002_Unknown { get; }

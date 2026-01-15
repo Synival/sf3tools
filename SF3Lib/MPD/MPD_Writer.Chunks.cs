@@ -18,7 +18,7 @@ namespace SF3.MPD {
             if (!mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mc))
                 WriteEmptyChunk();
             else
-                WriteModelChunk(mc.Models, mc.ModelInstances, mpd.Collisions, mpd.Flags.Chunk1PointersMemoryLocation == MemoryLocationType.HighMemory);
+                WriteModelChunk(mc.Models, mc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
 
             // Chunk[2] is the surface model.
             // TODO: In Scenario 2+, this could be Chunk[20].

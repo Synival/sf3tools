@@ -9,16 +9,17 @@ namespace SF3.Tests.MPD {
     [TestClass]
     public class MPD_WriterTests {
         private void ProducesSameLoadableDataTestBase(
+            ScenarioType scenario,
             string mpdName,
             bool performByteComparison,
             ByteComparisonSkipRegion[]? rawDataSkipRegions = null,
             Dictionary<int, ByteComparisonSkipRegion[]>? chunkSkipRegions = null
         ) {
-            var mpdFile = MakeMPD_File(ScenarioType.Scenario1, mpdName + ".MPD");
+            var mpdFile = MakeMPD_File(scenario, mpdName + ".MPD");
 
             byte[]? outputData = null;
             using (var memoryStream = new MemoryStream()) {
-                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                var writer = new MPD_Writer(memoryStream, scenario);
                 writer.WriteMPD(mpdFile);
                 outputData = memoryStream.ToArray();
             }
@@ -28,13 +29,13 @@ namespace SF3.Tests.MPD {
             if (performByteComparison)
                 AssertMPDByteComparison(mpdFile, outputData, rawDataSkipRegions);
 
-            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), mpdFile.NameGetterContext, mpdFile.Scenario);
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), mpdFile.NameGetterContext, scenario);
             AssertMPD_FilesHaveSameContent(mpdFile, newFile, chunkSkipRegions);
         }
 
         [TestMethod]
         public void WriteMPD_WithScenario1_TESMAP_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("TESMAP", performByteComparison: true, [
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "TESMAP", performByteComparison: true, [
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0xFB36, Size = 2 },
 
@@ -48,7 +49,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_VOID_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("VOID", performByteComparison: true, [
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "VOID", performByteComparison: true, [
                 // Insignificant surface data Chunk[5] difference due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
             ]);
@@ -56,7 +57,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BLACK_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("BLACK", performByteComparison: true, [
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BLACK", performByteComparison: true, [
                 // PDATA's have the wrong addresses in the original file!! Just skip it!!
                 new ByteComparisonSkipRegion { Offset = 0x2100, Size = 0x798 },
 
@@ -75,7 +76,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_FURAIN_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("FURAIN", performByteComparison: true, [
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "FURAIN", performByteComparison: true, [
                 // Header: Insignificant texture Chunk[5] size difference (2 bytes) due to LZSS compression differences
                 new ByteComparisonSkipRegion { Offset = 0x2037, Size = 1 },
 
@@ -92,7 +93,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_HONJIN_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("HONJIN", performByteComparison: true, [
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "HONJIN", performByteComparison: true, [
                 // Texture compression nonsense
                 new ByteComparisonSkipRegion { Offset = 0x7E9A, Size = 2 },
 
@@ -104,7 +105,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BAL_3_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("BAL_3", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BAL_3", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
                 { 1, new ByteComparisonSkipRegion[] {
                     // There's exactly one more collision line that screws up the table...
                     new ByteComparisonSkipRegion() { Offset = 0x1442C, Size = 0x1C0 },
@@ -117,7 +118,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BALSA_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("BALSA", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BALSA", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
                 { 1, new ByteComparisonSkipRegion[] {
                     // There's exactly one more collision line that screws up the table...
                     new ByteComparisonSkipRegion() { Offset = 0x1EC20, Size = 0x2A4 },
@@ -130,11 +131,11 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_DAM_ProducesSameLoadableData()
-            => ProducesSameLoadableDataTestBase("DAM", performByteComparison: false);
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "DAM", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_MUCHUR_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("MUCHUR", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MUCHUR", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
                 { 1, new ByteComparisonSkipRegion[] {
                     // Collision lines are inconsistent
                     new ByteComparisonSkipRegion() { Offset = 0xD14E, Size = 0x0152 },
@@ -148,7 +149,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BTL03_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase("BTL03", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL03", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
                 { 1, new ByteComparisonSkipRegion[] {
                     // Collision lines are inconsistent
                     new ByteComparisonSkipRegion() { Offset = 0x5203, Size = 0x31E },
@@ -170,7 +171,7 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_BTL02_CanBeLoaded() {
-            ProducesSameLoadableDataTestBase("BTL02", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
+            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL02", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
                 { 1, new ByteComparisonSkipRegion[] {
                     // Collision lines are inconsistent
                     new ByteComparisonSkipRegion() { Offset = 0x1105A, Size = 0x2DA },
@@ -186,23 +187,42 @@ namespace SF3.Tests.MPD {
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_ProducesSameData()
-            => ProducesSameLoadableDataTestBase("Z_AS", performByteComparison: false);
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "Z_AS", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_CHOU00_ProducesSameData()
-            => ProducesSameLoadableDataTestBase("CHOU00", performByteComparison: false);
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "CHOU00", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_GDI_ProducesSameData()
-            => ProducesSameLoadableDataTestBase("GDI", performByteComparison: false);
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "GDI", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_MGMA00_ProducesSameData()
-            => ProducesSameLoadableDataTestBase("MGMA00", performByteComparison: false);
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MGMA00", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_MGMA01_ProducesSameData()
-            => ProducesSameLoadableDataTestBase("MGMA01", performByteComparison: false);
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MGMA01", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_Scenario2ToScenario1_BTL43_ProducesExpectedMPD() {
+            var mpdFile = MakeMPD_File(ScenarioType.Scenario2, "BTL47.MPD");
+
+            byte[]? outputData = null;
+            using (var memoryStream = new MemoryStream()) {
+                var writer = new MPD_Writer(memoryStream, ScenarioType.Scenario1);
+                writer.WriteMPD(mpdFile);
+                outputData = memoryStream.ToArray();
+            }
+
+            File.WriteAllBytes("BTL47_Scn1_Test.MPD", outputData);
+
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), mpdFile.NameGetterContext, ScenarioType.Scenario1);
+
+            // TODO: Check a whole buncha stuff!
+            Assert.Fail();
+        }
 
         [Ignore("Works great but takes too long!")]
         [TestMethod]

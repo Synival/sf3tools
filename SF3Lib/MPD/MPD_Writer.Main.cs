@@ -7,12 +7,13 @@ using CommonLib.Geometry;
 using CommonLib.Imaging;
 using CommonLib.SGL;
 using CommonLib.Utils;
+using SF3.Extensions;
 using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteMain(ScenarioType scenario, IMPD mpd, out byte[] chunk3Data) {
+        public void WriteMain(IMPD mpd, out byte[] chunk3Data) {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
@@ -36,10 +37,7 @@ namespace SF3.MPD {
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;
             WriteHeader(
-                scenario,
-                mpd.Settings,
-                mpd.Flags,
-                mpd.Planes,
+                mpd,
                 lightPalettePos,
                 lightPositionPos,
                 unknown1Pos,
@@ -81,10 +79,7 @@ namespace SF3.MPD {
         }
 
         public void WriteHeader(
-            ScenarioType scenario,
-            IMPD_Settings settings,
-            IMPD_AllFlags flags,
-            IMPD_Planes planes,
+            IMPD mpd,
             uint? lightPalettePos,
             uint? lightPositionPos,
             uint? unknown1Pos,
@@ -100,10 +95,12 @@ namespace SF3.MPD {
             out uint lockedChestModelsPosPtr,
             out uint barrelModelsPosPtr
         ) {
+            var settings = mpd.Settings;
+            var planes   = mpd.Planes;
+
             var headerAddr = (uint) CurrentOffset;
 
-            // TODO: determine proper map flags
-            WriteUShort(flags.GetHeaderFlags(scenario));
+            WriteUShort(mpd.GetHeaderFlags(Scenario));
             WriteMPDPointer(lightPalettePos);
             WriteMPDPointer(lightPositionPos);
             WriteMPDPointer(unknown1Pos);
