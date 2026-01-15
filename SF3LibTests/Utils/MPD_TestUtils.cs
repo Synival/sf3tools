@@ -97,10 +97,10 @@ namespace SF3.Tests.Utils {
                 }
             }
 
-            ByteComparisonSkipRegion[] GetSkipRegions(int chunk) {
-                if (skipRegionsByChunk == null)
-                    return [];
+            if (skipRegionsByChunk == null)
+                skipRegionsByChunk = [];
 
+            ByteComparisonSkipRegion[] GetSkipRegions(int chunk) {
                 var regionList = skipRegionsByChunk.TryGetValue(chunk, out var bcsr) ? bcsr.ToList() : [];
                 if (chunk == -1) {
                     var anims = expectedFile.Animations;

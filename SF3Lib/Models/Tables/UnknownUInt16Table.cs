@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using CommonLib;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
 namespace SF3.Models.Tables {
-    public class UnknownUInt16Table : TerminatedTable<UnknownUInt16Struct> {
+    public class UnknownUInt16Table : TerminatedTable<UnknownUInt16Struct>, IIndexedEnumerableWithLength<ushort> {
         protected UnknownUInt16Table(IByteData data, string name, int address, int? count, ushort? readUntil)
         : base(data, name, address, readUntil.HasValue ? 2 : 0, count) {
             if (!count.HasValue && !readUntil.HasValue)
@@ -27,5 +28,12 @@ namespace SF3.Models.Tables {
 
         public ushort? ReadUntil { get; }
         private string FormatString { get; }
+
+        ushort IIndexedEnumerableWithLength<ushort>.this[int index] => Rows[index].Value;
+
+        IEnumerator<ushort> IEnumerable<ushort>.GetEnumerator() {
+            foreach (var row in Rows)
+                yield return row.Value;
+        }
     }
 }

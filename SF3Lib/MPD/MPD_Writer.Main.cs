@@ -23,10 +23,10 @@ namespace SF3.MPD {
 
             var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
             var lightPositionPos     = WriteLightPosition(mpd.Lighting);
-            var unknown1Pos          = WriteTableOrNull(mpd.Unknown1Table);
+            var unknown1Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1);
             var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
             var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data);
-            var unknown2Pos          = WriteTableOrNull(mpd.Unknown2Table);
+            var unknown2Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2);
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
@@ -154,6 +154,14 @@ namespace SF3.MPD {
             WriteShort(new CompressedFIXED(lighting.Yaw / 180.0f, 0).RawShort);
 
             return pos;
+        }
+
+        public uint? WriteUnknownUInt16TableOrNull(IEnumerable<ushort> table)
+            => WriteObjectOrNull(() => table != null, () => WriteUnknownUInt16Table(table));
+
+        public void WriteUnknownUInt16Table(IEnumerable<ushort> table) {
+            foreach (var value in table)
+                WriteUShort(value);
         }
 
         public uint? WriteModelSwitchGroupsOrNull(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {

@@ -1,6 +1,5 @@
 ﻿using CommonLib.Imaging;
 using SF3.Models.Files.MPD;
-using SF3.Models.Structs.MPD.Main;
 using SF3.MPD;
 using SF3.Types;
 

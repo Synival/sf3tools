@@ -122,6 +122,9 @@ namespace SF3.Models.Files.MPD {
         public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
         public IMPD_Gradient Gradient => (GradientTable?.Length > 0) ? GradientTable[0] : null;
 
+        public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 => Unknown1Table;
+        public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 => Unknown2Table;
+
         [BulkCopyRecurse]
         public MPD_Header MPDHeader { get; private set; }
 

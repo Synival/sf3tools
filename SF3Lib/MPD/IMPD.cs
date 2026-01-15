@@ -77,5 +77,15 @@ namespace SF3.MPD {
         /// Triggered when models have been updated and something needs to be informed, like a viewer.
         /// </summary>
         EventHandler ModelsUpdated { get; set; }
+
+        /// <summary>
+        /// First unknown Scenario 1 0xFFFF-terminated table.
+        /// </summary>
+        IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 { get; }
+
+        /// <summary>
+        /// Second unknown Scenario 1 0xFFFF-terminated table.
+        /// </summary>
+        IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; }
     }
 }
