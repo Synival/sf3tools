@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using SF3.Files;
-using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.MPD {
@@ -17,9 +16,9 @@ namespace SF3.MPD {
         /// Writes an entire MPD_File's contents to the stream.
         /// </summary>
         /// <param name="mpd">The MPD_File to write to the stream.</param>
-        public void WriteMPD(IMPD_File mpd) {
+        public void WriteMPD(IMPD mpd) {
             // Write the main section of the MPD (0x0000 - 0x2000).
-            WriteMain(mpd.Scenario, mpd, out var chunk3Data);
+            WriteMain(Scenario, mpd, out var chunk3Data);
 
             // Write zeroes up until 0x2000 (empty space before the chunk table) and all the way through 0x2100,
             // which writes all zeroes for the chunk table. The chunk table's actual entries will be written as

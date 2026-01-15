@@ -352,5 +352,6 @@ namespace SF3.Models.Files.MPD {
         }
 
         public bool IsUnreferenced { get; set; }
+        public bool HasMissingModels => false;
     }
 }

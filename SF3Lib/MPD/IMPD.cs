@@ -79,6 +79,12 @@ namespace SF3.MPD {
         EventHandler ModelsUpdated { get; set; }
 
         /// <summary>
+        /// Table used to animate the ground plane, corresponding to the SGL sl1MapRA() function.
+        /// (Not currently supported)
+        /// </summary>
+        IIndexedEnumerableWithLength<byte> GroundAnimation { get; }
+
+        /// <summary>
         /// First unknown Scenario 1 0xFFFF-terminated table.
         /// </summary>
         IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 { get; }

@@ -64,7 +64,10 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public bool LongEmptyIgnoredTextureTable {
-            get => MPD_File.Scenario == ScenarioType.Scenario1 && MPD_File.MPDHeader.OffsetGroundPalette - MPD_File.MPDHeader.OffsetIgnoredTextures == 0x04;
+            get =>
+                MPD_File.Scenario == ScenarioType.Scenario1 &&
+                MPD_File.MPDHeader.OffsetGroundPalette - MPD_File.MPDHeader.OffsetIgnoredTextures == 0x04 &&
+                (MPD_File as MPD_File)?.Data?.GetWord(MPD_File.MPDHeader.OffsetIgnoredTextures - 0x290000) == 0xFFFF;
             set {}
         }
 

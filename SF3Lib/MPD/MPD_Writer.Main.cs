@@ -8,12 +8,11 @@ using CommonLib.Imaging;
 using CommonLib.SGL;
 using CommonLib.Utils;
 using SF3.Imaging;
-using SF3.Models.Files.MPD;
 using SF3.Types;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteMain(ScenarioType scenario, IMPD_File mpd, out byte[] chunk3Data) {
+        public void WriteMain(ScenarioType scenario, IMPD mpd, out byte[] chunk3Data) {
             // Placeholder for a pointer to the header with 8 bytes of padding.
             WriteBytes(new byte[0x0C]);
 
@@ -28,7 +27,7 @@ namespace SF3.MPD {
             var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data);
             var unknown2Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2);
             WriteToAlignTo(4);
-            var groundAnimationPos   = WriteTableOrNull(mpd.GroundAnimationTable);
+            var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
             var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.LongEmptyIgnoredTextureTable);
             var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
@@ -66,9 +65,9 @@ namespace SF3.MPD {
             IMPD_ModelCollection lockedChestChunk = null;
             IMPD_ModelCollection barrelChunk      = null;
 
-            var chestModelsPos       = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Chest,       out chestChunk)       == true) ? chestChunk       : null);
-            var lockedChestModelsPos = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.LockedChest, out lockedChestChunk) == true) ? lockedChestChunk : null);
-            var barrelModelsPos      = WriteTableOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Barrel,      out barrelChunk)      == true) ? barrelChunk      : null);
+            var chestModelsPos       = WriteHeaderModelsOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Chest,       out chestChunk)       == true) ? chestChunk       : null);
+            var lockedChestModelsPos = WriteHeaderModelsOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.LockedChest, out lockedChestChunk) == true) ? lockedChestChunk : null);
+            var barrelModelsPos      = WriteHeaderModelsOrNull((mpd.ModelCollections?.TryGetValue(MPD_CollectionType.Barrel,      out barrelChunk)      == true) ? barrelChunk      : null);
 
             if (chestModelsPos.HasValue && chestChunk?.IsUnreferenced != true)
                 AtOffset(chestModelsPosPtr, _ => WriteMPDPointer(chestModelsPos.Value));
@@ -154,6 +153,15 @@ namespace SF3.MPD {
             WriteShort(new CompressedFIXED(lighting.Yaw / 180.0f, 0).RawShort);
 
             return pos;
+        }
+
+        public uint? WriteGroundAnimationOrNull(IEnumerable<byte> table)
+            => WriteObjectOrNull(() => table != null, () => WriteGroundAnimation(table));
+
+        public void WriteGroundAnimation(IEnumerable<byte> table) {
+            foreach (var value in table)
+                WriteByte(value);
+            WriteUShort(0xFF00);
         }
 
         public uint? WriteUnknownUInt16TableOrNull(IEnumerable<ushort> table)

@@ -113,6 +113,14 @@ namespace SF3.MPD {
             }
         }
 
+        public uint? WriteHeaderModelsOrNull(IMPD_ModelCollection collection) {
+            uint outPos = 0;
+            if (WriteObjectOrNull(() => collection != null && !collection.HasMissingModels, () => WriteHeaderModels(collection.Models, collection.ModelInstances, out outPos)).HasValue)
+                return outPos;
+            else
+                return null;
+        }
+
         public void WriteHeaderModels(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, out uint instanceTableOffset) {
             var pdataPosByInstanceIndex = new Dictionary<int, uint>();
             int index = -1;
@@ -153,6 +161,7 @@ namespace SF3.MPD {
 
             // Terminate with -- for some reason -- 28 empty bytes.
             WriteBytes(new byte[0x1B]);
+            WriteToAlignTo(2);
         }
 
         public void WriteHeaderModelInstance(IMPD_ModelInstance instance, uint pdataOffset) {

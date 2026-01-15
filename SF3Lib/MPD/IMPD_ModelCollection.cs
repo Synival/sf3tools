@@ -37,5 +37,10 @@ namespace SF3.MPD {
         /// When 'true', this model is serialized but not referenced in the MPD header.
         /// </summary>
         bool IsUnreferenced { get; set; }
+
+        /// <summary>
+        /// When true, textures exist for this model collection, but not models.
+        /// </summary>
+        bool HasMissingModels { get; }
     }
 }
