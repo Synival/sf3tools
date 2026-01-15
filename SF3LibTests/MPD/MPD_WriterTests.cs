@@ -185,15 +185,24 @@ namespace SF3.Tests.MPD {
         }
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_Z_AS_ProducesSameData() {
-            ProducesSameLoadableDataTestBase("Z_AS", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 1, new ByteComparisonSkipRegion[] {
-                    // Collision lines are inconsistent
-                    new ByteComparisonSkipRegion() { Offset = 0x210C, Size = 0x098 },
-                    //new ByteComparisonSkipRegion() { Offset = 0x22B0, Size = 2, ActualDataExtraBytes = -2 },
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario1_Z_AS_ProducesSameData()
+            => ProducesSameLoadableDataTestBase("Z_AS", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_CHOU00_ProducesSameData()
+            => ProducesSameLoadableDataTestBase("CHOU00", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_GDI_ProducesSameData()
+            => ProducesSameLoadableDataTestBase("GDI", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_MGMA00_ProducesSameData()
+            => ProducesSameLoadableDataTestBase("MGMA00", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_MGMA01_ProducesSameData()
+            => ProducesSameLoadableDataTestBase("MGMA01", performByteComparison: false);
 
         [Ignore("Works great but takes too long!")]
         [TestMethod]
