@@ -38,7 +38,11 @@ namespace SF3.MPD {
                 WriteBytes(mpd.UnreferencedDataAfterPaletteAdjustment.ToArray());
 
             var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
-            var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data, is32Bit: Scenario >= ScenarioType.Scenario3);
+
+            var animationsPos = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data,
+                is32Bit: Scenario >= ScenarioType.Scenario3,
+                allowIndexed: Scenario >= ScenarioType.Scenario3
+            );
 
             // An "unknown 2" table in Scenario 1 was replaced with a "gradient" struct in Scenario 2+.
             uint? unknown2OrGradientPos = null;
@@ -288,7 +292,7 @@ namespace SF3.MPD {
             return pos;
         }
 
-        public uint WriteAnimations(IMPD_AnimatableTexture[] textures, bool shortEmptyTable, out byte[] chunk3Data, bool is32Bit) {
+        public uint WriteAnimations(IMPD_AnimatableTexture[] textures, bool shortEmptyTable, out byte[] chunk3Data, bool is32Bit, bool allowIndexed) {
             var pos = (uint) CurrentOffset;
             textures = (textures ?? new IMPD_AnimatableTexture[0]).Where(x => x.Animation != null && !x.IsIgnored).ToArray();
 
@@ -321,7 +325,7 @@ namespace SF3.MPD {
             // Special case for a few very specific files.
             foreach (var tex in textures) {
                 if (is32Bit) {
-                    WriteUInt((uint) tex.ID);
+                    WriteUInt((uint) (tex.ID | ((allowIndexed && tex.BytesPerPixel == 1) ? 0x100 : 0)));
                     WriteUInt((uint) tex.Width);
                     WriteUInt((uint) tex.Height);
                     WriteUInt((uint) tex.Animation.FrameTimerStart);
@@ -338,7 +342,7 @@ namespace SF3.MPD {
                         ? frame.ImageData16Bit.To1DArrayTransposed().ToByteArray()
                         : frame.ImageData8Bit.To1DArrayTransposed();
 
-                    if (frame.BytesPerPixel == 1)
+                    if (frame.BytesPerPixel == 1 && !allowIndexed)
                         imageData = imageData.ConvertIndexedToABGR1555(frame.Palette).ToByteArray();
 
                     var chunk3FramePos = AddTextureToChunk3(imageData);

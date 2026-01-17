@@ -9,6 +9,8 @@ using SF3.Types;
 namespace SF3.MPD {
     public partial class MPD_Writer {
         public void WriteChunks(IMPD mpd, byte[] chunk3Data) {
+            bool allowIndexedTextures = Scenario >= ScenarioType.Scenario3;
+
             // Chunk[0] is always empty.
             WriteEmptyChunk();
 
@@ -50,11 +52,11 @@ namespace SF3.MPD {
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0);
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0, allowIndexed: allowIndexedTextures);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0, allowIndexed: false);
             }
             else
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 5, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 5, startID: 0, allowIndexed: allowIndexedTextures);
 
             // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
             // (it's so silly that it works this way, lol)
@@ -62,9 +64,9 @@ namespace SF3.MPD {
             var chest2Textures = GetTexturesForCollection(MPD_CollectionType.LockedChest);
             var barrelTextures = GetTexturesForCollection(MPD_CollectionType.Barrel);
 
-            WriteTextureChunk(chest1Textures, 0, out _);
-            WriteTextureChunk(chest2Textures, 0, out _);
-            WriteTextureChunk(barrelTextures, 0, out _);
+            WriteTextureChunk(chest1Textures, 0, out _, allowIndexed: false);
+            WriteTextureChunk(chest2Textures, 0, out _, allowIndexed: false);
+            WriteTextureChunk(barrelTextures, 0, out _, allowIndexed: false);
 
             // Ground + sky chunks.
             WritePlaneChunks(mpd.Planes, mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures);
@@ -88,7 +90,7 @@ namespace SF3.MPD {
 
                 if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures) {
                     var extraTextures = GetTexturesForCollection(MPD_CollectionType.ExtraModels);
-                    WriteTextureChunk(extraTextures, 0, out _);
+                    WriteTextureChunk(extraTextures, 0, out _, allowIndexed: allowIndexedTextures);
                 }
                 else
                     WriteEmptyChunk();

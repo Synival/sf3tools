@@ -7,24 +7,24 @@ using SF3.Imaging;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID) {
+        public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID, bool allowIndexed) {
             var sortedTextures = textures
                 .OrderBy(x => x.ID)
                 .ToArray();
 
             for (int i = 0; i < chunkCount; i++) {
-                WriteTextureChunk(sortedTextures, startID, out var textureCount);
+                WriteTextureChunk(sortedTextures, startID, out var textureCount, allowIndexed);
                 startID += textureCount;
             }
         }
 
-        public void WriteTextureChunk(IEnumerable<ITextureData> sortedTextures, int startID, out int textureCount) {
+        public void WriteTextureChunk(IEnumerable<ITextureData> sortedTextures, int startID, out int textureCount, bool allowIndexed) {
             int textureCountBigDumbLocal = 0;
-            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal));
+            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal, allowIndexed));
             textureCount = textureCountBigDumbLocal;
         }
 
-        public void WriteTextureChunkContent(ITextureData[] sortedTextures, int startID, out int textureCount) {
+        public void WriteTextureChunkContent(ITextureData[] sortedTextures, int startID, out int textureCount, bool allowIndexed) {
             // Figure out how many textures we can write here. Enforce a limit 0x10000 bytes worth of texture data.
             textureCount = 0;
             int totalTextureDataSize = 0;
@@ -34,8 +34,7 @@ namespace SF3.MPD {
 
                 // Size of texture, also accounting for its entry in the table.
                 // (Based on MPD analysis, this appears to be the limit.)
-                // TODO: allow indexed textures
-                var textureDataSize = 0x04 + texture.Width * texture.Height * 2;
+                var textureDataSize = 0x04 + texture.Width * texture.Height * (allowIndexed ? texture.BytesPerPixel : 2);
 
                 if (totalTextureDataSize + textureDataSize >= 0x10000)
                     break;
@@ -65,19 +64,27 @@ namespace SF3.MPD {
                 WriteByte((byte) texture.Height);
                 WriteUShort(curTexOffset);
 
-                // TODO: allow indexed textures
-                curTexOffset += (ushort) (texture.Width * texture.Height * 2);
+                curTexOffset += (ushort) (texture.Width * texture.Height * (allowIndexed ? texture.BytesPerPixel : 2));
             }
 
             // Write texture data.
-            for (int i = startID; i < endID; i++) {
-                var texture = sortedTextures[i];
-
-                // TODO: allow indexed textures
-                var imageData = (texture.BytesPerPixel == 1)
-                    ? texture.ImageData8Bit.To1DArrayTransposed().ConvertIndexedToABGR1555(texture.Palette)
-                    : texture.ImageData16Bit.To1DArrayTransposed();
-                WriteBytes(imageData.ToByteArray());
+            if (allowIndexed) {
+                for (int i = startID; i < endID; i++) {
+                    var texture = sortedTextures[i];
+                    var imageData = (texture.BytesPerPixel == 1)
+                        ? texture.ImageData8Bit.To1DArrayTransposed()
+                        : texture.ImageData16Bit.To1DArrayTransposed().ToByteArray();
+                    WriteBytes(imageData);
+                }
+            }
+            else {
+                for (int i = startID; i < endID; i++) {
+                    var texture = sortedTextures[i];
+                    var imageData = (texture.BytesPerPixel == 1)
+                        ? texture.ImageData8Bit.To1DArrayTransposed().ConvertIndexedToABGR1555(texture.Palette)
+                        : texture.ImageData16Bit.To1DArrayTransposed();
+                    WriteBytes(imageData.ToByteArray());
+                }
             }
         }
     }
