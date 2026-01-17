@@ -25,7 +25,7 @@ namespace SF3.MPD {
             var lightPositionPos     = WriteLightPosition(mpd.Lighting);
             var unknown1Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1);
             var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
-            var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data);
+            var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data, is32Bit: Scenario >= ScenarioType.Scenario3);
             var unknown2Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2);
             WriteToAlignTo(4);
             var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
@@ -207,7 +207,7 @@ namespace SF3.MPD {
             return pos;
         }
 
-        public uint WriteAnimations(IMPD_AnimatableTexture[] textures, bool shortEmptyTable, out byte[] chunk3Data) {
+        public uint WriteAnimations(IMPD_AnimatableTexture[] textures, bool shortEmptyTable, out byte[] chunk3Data, bool is32Bit) {
             var pos = (uint) CurrentOffset;
             textures = (textures ?? new IMPD_AnimatableTexture[0]).Where(x => x.Animation != null && !x.IsIgnored).ToArray();
 
@@ -239,10 +239,18 @@ namespace SF3.MPD {
 
             // Special case for a few very specific files.
             foreach (var tex in textures) {
-                WriteUShort((ushort) tex.ID);
-                WriteUShort((ushort) tex.Width);
-                WriteUShort((ushort) tex.Height);
-                WriteUShort((ushort) tex.Animation.FrameTimerStart);
+                if (is32Bit) {
+                    WriteUInt((uint) tex.ID);
+                    WriteUInt((uint) tex.Width);
+                    WriteUInt((uint) tex.Height);
+                    WriteUInt((uint) tex.Animation.FrameTimerStart);
+                }
+                else {
+                    WriteUShort((ushort) tex.ID);
+                    WriteUShort((ushort) tex.Width);
+                    WriteUShort((ushort) tex.Height);
+                    WriteUShort((ushort) tex.Animation.FrameTimerStart);
+                }
 
                 foreach (var frame in tex.Animation.Frames) {
                     var imageData = (frame.BytesPerPixel == 2)
@@ -253,16 +261,30 @@ namespace SF3.MPD {
                         imageData = imageData.ConvertIndexedToABGR1555(frame.Palette).ToByteArray();
 
                     var chunk3FramePos = AddTextureToChunk3(imageData);
-                    WriteUShort((ushort) chunk3FramePos);
-                    WriteUShort((ushort) frame.Duration);
+
+                    if (is32Bit) {
+                        WriteUInt((uint) chunk3FramePos);
+                        WriteUInt((uint) frame.Duration);
+                    }
+                    else {
+                        WriteUShort((ushort) chunk3FramePos);
+                        WriteUShort((ushort) frame.Duration);
+                    }
                 }
 
-                WriteUShort(0xFFFE);
+                if (is32Bit)
+                    WriteUInt(0xFFFFFFFE);
+                else
+                    WriteUShort(0xFFFE);
             }
 
-            WriteUShort(0xFFFF);
-            if (!shortEmptyTable)
+            if (is32Bit)
+                WriteUInt(0xFFFFFFFF);
+            else {
                 WriteUShort(0xFFFF);
+                if (!shortEmptyTable)
+                    WriteUShort(0xFFFF);
+            }
 
             if (chunk3DataArray == null)
                 chunk3Data = null;
