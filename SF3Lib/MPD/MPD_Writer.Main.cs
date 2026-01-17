@@ -57,9 +57,36 @@ namespace SF3.MPD {
             var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
             var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.LongEmptyIgnoredTextureTable);
-            var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
 
-            var skyPalettePos        = WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1    ? mpd.Planes.SkyPalette    : null);
+            uint? groundPalettePos   = null;
+            uint? skyPalettePos      = null;
+            uint? texturePalettePos  = null;
+            uint? indexedTexturesPos = null;
+
+            // Scenario 2- has two palettes that may or may not exist (and the logic for placing them is weird).
+            if (Scenario < ScenarioType.Scenario3) {
+                groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
+
+                skyPalettePos = mpd.Settings.SkyPaletteSharesGroundPalette
+                    ? groundPalettePos
+                    : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1 ? mpd.Planes.SkyPalette : null);
+            }
+            // Scenario 3+ has three palettes with different placement logic and an extra table.
+            // All three palettes are guaranteed to exist in Scenario 3.
+            else {
+                groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null) ?? (uint) CurrentOffset;
+
+                skyPalettePos = mpd.Settings.SkyPaletteSharesGroundPalette
+                    ? groundPalettePos
+                    : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1 ? mpd.Planes.SkyPalette : null) ?? groundPalettePos;
+
+                texturePalettePos = mpd.Settings.TexturePaletteSharesSkyPalette
+                    ? skyPalettePos
+                    : WritePaletteOrNull(mpd.TexturePalette?.Channels?.Length >= 1 ? mpd.TexturePalette : null) ?? skyPalettePos;
+
+                var indexedTextureIds = pmc?.Textures?.Where(x => x.BytesPerPixel == 1).Select(x => (ushort) x.ID)?.ToArray() ?? null;
+                indexedTexturesPos = WriteIndexedTexturesTableOrNull(indexedTextureIds);
+            }
 
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;
@@ -75,6 +102,8 @@ namespace SF3.MPD {
                 ignoredTexturesPos,
                 groundPalettePos,
                 skyPalettePos,
+                texturePalettePos,
+                indexedTexturesPos,
                 boundariesPos,
                 out var chestModelsPosPtr,
                 out var lockedChestModelsPosPtr,
@@ -117,6 +146,8 @@ namespace SF3.MPD {
             uint? ignoredTexturesPos,
             uint? groundPalettePos,
             uint? skyPalettePos,
+            uint? texturePalettePos,
+            uint? indexedTexturesPos,
             uint? boundariesPos,
             out uint chestModelsPosPtr,
             out uint lockedChestModelsPosPtr,
@@ -151,6 +182,13 @@ namespace SF3.MPD {
             WriteMPDPointer(ignoredTexturesPos);
             WriteMPDPointer(groundPalettePos ?? headerAddr);
             WriteMPDPointer(skyPalettePos ?? (groundPalettePos.HasValue ? groundPalettePos.Value + 0x200 : headerAddr));
+
+            // Scenario 3+ has extra tables.
+            if (Scenario >= ScenarioType.Scenario3) {
+                WriteMPDPointer(texturePalettePos);
+                WriteMPDPointer(indexedTexturesPos);
+            }
+
             WriteShort(planes.GroundX);
             WriteShort(planes.GroundY);
             WriteShort(planes.GroundZ);
@@ -200,9 +238,16 @@ namespace SF3.MPD {
             => WriteObjectOrNull(() => settings.LightPaletteAdjustment != null, () => WritePaletteAdjustment(settings));
 
         public void WritePaletteAdjustment(IMPD_Settings settings) {
-            WriteShort(settings.LightPaletteAdjustment.R);
-            WriteShort(settings.LightPaletteAdjustment.G);
-            WriteShort(settings.LightPaletteAdjustment.B);
+            WriteShort(settings.LightPaletteAdjustment?.R ?? 0);
+            WriteShort(settings.LightPaletteAdjustment?.G ?? 0);
+            WriteShort(settings.LightPaletteAdjustment?.B ?? 0);
+
+            if (Scenario >= ScenarioType.Scenario3 && !settings.PaletteAdjustmentIsTruncated) {
+                WriteShort(settings.GroundPaletteAdjustment?.R ?? 0);
+                WriteShort(settings.GroundPaletteAdjustment?.G ?? 0);
+                WriteShort(settings.GroundPaletteAdjustment?.B ?? 0);
+                WriteShort(settings.ShadowTransparency);
+            }
         }
 
         public uint? WriteModelSwitchGroupsOrNull(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
@@ -376,6 +421,15 @@ namespace SF3.MPD {
             }
             else
                 WriteUShort(0xFFFF);
+        }
+
+        public uint? WriteIndexedTexturesTableOrNull(ushort[] textureIds)
+            => WriteObjectOrNull(() => textureIds != null, () => WriteIndexedTexturesTable(textureIds));
+
+        public void WriteIndexedTexturesTable(ushort[] textureIds) {
+            foreach (var textureId in textureIds.OrderBy(x => x).ToArray())
+                WriteUShort(textureId);
+            WriteUInt(0xFFFFFFFF);
         }
 
         public uint? WriteBoundariesTableOrNull(IRectangleShort cameraBoundaries, IRectangleShort battleBoundaries)  
