@@ -190,11 +190,7 @@ namespace SF3.Models.Files.MPD {
 
                 // The offset model switch groups usually (always?) occupy some space before its address.
                 // Make sure this table doesn't occupy that space.
-                updateLowest(header.OffsetModelSwitchGroups);
-                foreach (var msg in ModelSwitchGroupsTable) {
-                    updateLowest((int) msg.VisibleModelsWhenFlagOnOffset);
-                    updateLowest((int) msg.VisibleModelsWhenFlagOffOffset);
-                }
+                updateLowest((int) (ModelSwitchGroupsTable?.GetEarliestRamAddress() ?? 0));
                 updateLowest(header.OffsetAnimations);
                 updateLowest(header.OffsetUnknown2);
 

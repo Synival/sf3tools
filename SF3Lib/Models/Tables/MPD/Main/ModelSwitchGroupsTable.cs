@@ -21,6 +21,24 @@ namespace SF3.Models.Tables.MPD.Main {
                 false);
         }
 
+        public uint GetEarliestRamAddress() {
+            var lowest = (uint) Address + 0x290000;
+
+            void updateLowest(uint addr) {
+                if (addr < 0x290000)
+                    return;
+                if (addr < lowest)
+                    lowest = addr;
+            }
+
+            foreach (var msg in Rows) {
+                updateLowest(msg.VisibleModelsWhenFlagOnOffset);
+                updateLowest(msg.VisibleModelsWhenFlagOffOffset);
+            }
+
+            return lowest;
+        }
+
         IEnumerator<IMPD_ModelSwitchGroup> IEnumerable<IMPD_ModelSwitchGroup>.GetEnumerator() => GetEnumerator();
         IMPD_ModelSwitchGroup IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup>.this[int index] => Rows[index];
 
