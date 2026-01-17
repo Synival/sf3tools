@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Main;
@@ -111,6 +110,7 @@ namespace SF3.Models.Files.MPD {
         LightPosition LightPosition { get; }
         UnknownUInt16Table Unknown1Table { get; }
         PaletteAdjustment PaletteAdjustment { get; }
+        UnknownUInt8Table UnreferencedDataAfterPaletteAdjustmentTable { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
         UnknownUInt8Table GroundAnimationTable { get; }
         IgnoredTextureTable IgnoredTextureTable { get; }

@@ -219,6 +219,18 @@ namespace SF3.Models.Files.MPD {
             // Look for chest/barrel models that sometimes exist but are unreferenced.
             newTables.AddRange(MakeUnreferencedHeaderModelCollections(usedSpace, contiguousUnusedSpace));
 
+            // For Scenario2+, look for any dummy data that may exist after the PaletteAdjustment table.
+            if (Scenario >= ScenarioType.Scenario2 && PaletteAdjustment != null) {
+                var pos = PaletteAdjustment.Address + PaletteAdjustment.Size;
+                if (pos % 4 != 0)
+                    pos += 4 - (pos % 4);
+                var size = contiguousUnusedSpace[pos];
+                if (size > 0) {
+                    newTables.Add(UnreferencedDataAfterPaletteAdjustmentTable = UnknownUInt8Table.Create(
+                        Data, nameof(UnreferencedDataAfterPaletteAdjustmentTable), pos, size, null
+                    ));
+                }
+            }
 
             return newTables.ToArray();
         }

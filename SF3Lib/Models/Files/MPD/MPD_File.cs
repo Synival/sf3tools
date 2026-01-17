@@ -125,6 +125,7 @@ namespace SF3.Models.Files.MPD {
         public IIndexedEnumerableWithLength<byte> GroundAnimation => GroundAnimationTable;
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 => Unknown1Table;
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 => Unknown2Table;
+        public IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustment => UnreferencedDataAfterPaletteAdjustmentTable;
 
         [BulkCopyRecurse]
         public MPD_Header MPDHeader { get; private set; }
@@ -143,6 +144,9 @@ namespace SF3.Models.Files.MPD {
 
         [BulkCopyRecurse]
         public PaletteAdjustment PaletteAdjustment { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt8Table UnreferencedDataAfterPaletteAdjustmentTable { get; private set; }
 
         [BulkCopyRecurse]
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }

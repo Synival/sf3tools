@@ -29,6 +29,9 @@ namespace SF3.Win.Views.MPD {
             if (Model.PaletteAdjustment != null)
                 CreateChild(new DataModelView("Palette Adjustment", Model.PaletteAdjustment, ngc));
 
+            if (Model.UnreferencedDataAfterPaletteAdjustmentTable != null)
+                CreateChild(new TableView("Junk After Palette Adjustment", Model.UnreferencedDataAfterPaletteAdjustmentTable, ngc));
+
             if (Model.ModelSwitchGroupsTable != null)
                 CreateChild(new ModelSwitchGroupTableView("Model Switch Groups", Model, Model.ModelSwitchGroupsTable, ngc));
 
