@@ -196,7 +196,7 @@ namespace SF3.Models.Files.MPD {
         private void MarkAllocatedSpace(bool[] usedSpace, int start, int stop) {
             if (stop > usedSpace.Length)
                 stop = usedSpace.Length;
-            for (int i = 0; i < stop; ++i)
+            for (int i = start; i < stop; ++i)
                 usedSpace[i] = true;
         }
 

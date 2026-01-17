@@ -216,9 +216,11 @@ namespace SF3.Models.Files.MPD {
         private ITable[] CreateUnreferencedTables(MPD_Header header, IEnumerable<ITable> existingTables) {
             var newTables = new List<ITable>();
 
+            // Create a map of unused space. We're going to use that to determine where unreferenced data could be.
             var usedSpace = GetUsedHeaderSpace(header, existingTables);
             var contiguousUnusedSpace = GetContiguousUnusedHeaderSpace(usedSpace);
 
+            // Look for chest/barrel models that sometimes exist but are unreferenced.
             newTables.AddRange(MakeUnreferencedHeaderModelCollections(usedSpace, contiguousUnusedSpace));
 
 
