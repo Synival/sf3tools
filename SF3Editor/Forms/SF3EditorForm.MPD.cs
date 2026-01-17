@@ -221,9 +221,11 @@ namespace SF3.Editor.Forms {
                 var path = dialog.FileName;
 
                 try {
-                    using (var outStream = new FileStream(path, FileMode.Create)) {
-                        var writer = new MPD_Writer(outStream, toScenario);
-                        writer.WriteMPD(mpd);
+                    using (new CursorWait()) {
+                        using (var outStream = new FileStream(path, FileMode.Create)) {
+                            var writer = new MPD_Writer(outStream, toScenario);
+                            writer.WriteMPD(mpd);
+                        }
                     }
                     InfoMessage("Export successful.");
                 }
