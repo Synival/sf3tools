@@ -13,7 +13,7 @@ namespace MPD_Analyzer {
         // ,--- Enter the paths for all your MPD files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
-            { ScenarioType.Scenario1,   "D:/" },
+            //{ ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
             { ScenarioType.PremiumDisk, "G:/" },
@@ -512,9 +512,27 @@ namespace MPD_Analyzer {
                 return errors.ToArray();
             }
 
+            string[]? DoesntHaveGradientTableOffset()
+                => mpdFile.MPDHeader.OffsetGradient == 0 ? ["Yes"] : [];
+
+            string[]? HasWeirdGradients() {
+                if (mpdFile.GradientTable == null)
+                    return null;
+
+                var errors = new List<string>();
+                if (mpdFile.GradientTable.Length > 1)
+                    errors.Add($"{mpdFile.GradientTable.Length} tables!!");
+
+                foreach (var table in mpdFile.GradientTable)
+                    if (table.IsDummiedOut)
+                        errors.Add($"{table.Name} is dummied-out");
+
+                return errors.ToArray();
+            }
+
 #pragma warning restore CS8321 // Local function is declared but never used
 
-            return GetMultiReferenceModelSwitchGroups();
+            return HasWeirdGradients();
         }
 
         public static void Main(string[] args) {
