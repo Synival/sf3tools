@@ -158,5 +158,15 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.PaletteAdjustment?.IsTruncated ?? false;
             set {}
         }
+
+        public bool SkyPaletteSharesGroundPalette {
+            get => MPD_File.MPDHeader.OffsetSkyPalette == MPD_File.MPDHeader.OffsetGroundPalette;
+            set {}
+        }
+
+        public bool TexturePaletteSharesSkyPalette {
+            get => MPD_File.MPDHeader.OffsetTexturePalette == MPD_File.MPDHeader.OffsetSkyPalette;
+            set {}
+        }
     }
 }

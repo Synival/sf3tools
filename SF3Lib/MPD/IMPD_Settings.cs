@@ -112,5 +112,15 @@ namespace SF3.MPD {
         /// extra Scenario 3 fields. This is present in a lot of Scenario 3 MPDs and may be a bug.
         /// </summary>
         bool PaletteAdjustmentIsTruncated { get; set; }
+
+        /// <summary>
+        /// Technical flag. When set, the sky palette occupies the same space as the ground palette.
+        /// </summary>
+        bool SkyPaletteSharesGroundPalette { get; set; }
+
+        /// <summary>
+        /// Technical flag. When set, the texture palette occupies the same space as the sky palette.
+        /// </summary>
+        bool TexturePaletteSharesSkyPalette { get; set; }
     }
 }
