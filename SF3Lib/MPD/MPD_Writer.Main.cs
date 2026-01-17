@@ -314,8 +314,10 @@ namespace SF3.MPD {
                     WriteUShort(0xFFFE);
             }
 
-            if (is32Bit)
+            if (is32Bit) {
                 WriteUInt(0xFFFFFFFF);
+                WriteUInt(0xFFFFFFFF);
+            }
             else {
                 WriteUShort(0xFFFF);
                 if (!shortEmptyTable)
