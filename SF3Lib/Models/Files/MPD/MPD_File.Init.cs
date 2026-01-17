@@ -62,6 +62,7 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(MakeAnimationTables(header, areAnimatedTextures32Bit));
             tables.Add(BoundariesTable = BoundaryTable.Create(Data, nameof(BoundariesTable), ResourceUtils.ResourceFile("BoundaryList.xml"), header.OffsetBoundaries - RamAddress));
             tables.AddRange(MakeHeaderModelCollections(header));
+            tables.AddRange(MakeOtherTables(header));
             tables.AddRange(MakeUnknownTables(header));
             tables.AddRange(CreateUnreferencedTables(header, tables));
 
@@ -158,7 +159,7 @@ namespace SF3.Models.Files.MPD {
             return newChunk;
         }
 
-        private ITable[] MakeUnknownTables(MPD_Header header) {
+        private ITable[] MakeOtherTables(MPD_Header header) {
             var tables = new List<ITable>();
 
             // TODO: put somewhere else!!
@@ -179,6 +180,12 @@ namespace SF3.Models.Files.MPD {
             // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures != 0)
                 tables.Add(IndexedTextureTable = IndexedTextureTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - RamAddress, 4, 0x100));
+
+            return tables.ToArray();
+        }
+
+        private ITable[] MakeUnknownTables(MPD_Header header) {
+            var tables = new List<ITable>();
 
             // This table is only present before Scenario 2 and is always 32 bytes if it exists.
             if (header.OffsetUnknown1 != 0) {
@@ -203,6 +210,7 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(Unknown1Table = UnknownUInt16Table.Create(Data, "Unknown1", header.OffsetUnknown1 - RamAddress, size, null));
             }
 
+            // This table is only present before Scenario 2 and varies in size.
             if (header.OffsetUnknown2 != 0) {
                 var maxSize = (header.OffsetGroundAnimation != 0) ? ((header.OffsetGroundAnimation - header.OffsetUnknown2) / 2) : 32;
                 tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, maxSize, null));
