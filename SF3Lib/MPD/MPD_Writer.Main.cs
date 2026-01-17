@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.Arrays;
@@ -333,7 +334,28 @@ namespace SF3.MPD {
         }
 
         public void WriteGradient(IMPD_Gradient gradient) {
-            // TODO: write the gradient!
+            WriteUShort((ushort) Math.Round(gradient.TopPosition * 255.00f));
+            WriteUShort((ushort) Math.Round(gradient.BottomPosition * 255.00f));
+
+            WriteUShort(gradient.TopColor.R);
+            WriteUShort(gradient.TopColor.G);
+            WriteUShort(gradient.TopColor.B);
+
+            WriteUShort(gradient.BottomColor.R);
+            WriteUShort(gradient.BottomColor.G);
+            WriteUShort(gradient.BottomColor.B);
+
+            var partsAffectedBits = (ushort) (
+                (gradient.AffectsGround           ? 0x01 : 0) |
+                (gradient.AffectsSky              ? 0x02 : 0) |
+                (gradient.AffectsModelsAndSurface ? 0x04 : 0)
+            );
+
+            WriteUShort(partsAffectedBits);
+
+            WriteUShort((ushort) Math.Round(gradient.GroundIntensity * 0x1F));
+            WriteUShort((ushort) Math.Round(gradient.SkyIntensity * 0x1F));
+            WriteUShort((ushort) Math.Round(gradient.ModelsAndSurfaceIntensity * 0x1F));
         }
 
         public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool writeLongEmptyData)
