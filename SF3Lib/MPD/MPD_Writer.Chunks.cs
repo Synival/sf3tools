@@ -12,17 +12,19 @@ namespace SF3.MPD {
             // Chunk[0] is always empty.
             WriteEmptyChunk();
 
-            // TODO: check for this, and get memory mapping stuff!!
-            // Chunk[1] is always models if it exists.
-            // TODO: In Scenario 2+, this could be Chunk[20].
-            if (!mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mc))
-                WriteEmptyChunk();
-            else
-                WriteModelChunk(mc.Models, mc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
+            // Chunk[1] is always models for Scenario 1, but only low-memory models for Scenario 2+.
+            var primaryMc = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut : null;
+            var extraMc   = mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out mcOut) ? mcOut : null;
 
-            // Chunk[2] is the surface model.
-            // TODO: In Scenario 2+, this could be Chunk[20].
-            if (mpd.Surface.HasModel)
+            if (primaryMc != null && mpd.Flags.ModelChunkIndex == 1)
+                WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
+            else if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
+                WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: false);
+            else
+                WriteEmptyChunk();
+
+            // Chunk[2] is the surface model, but sometimes Chunk[20] for Scenario 2+.
+            if (mpd.Surface.HasModel && mpd.Flags.SurfaceModelChunkIndex == 2)
                 WriteSurfaceModelChunk(mpd.Surface);
             else
                 WriteEmptyChunk();
@@ -41,14 +43,14 @@ namespace SF3.MPD {
 
             // Chunk[6, 7, 8, 9, 10] are all textures.
             IEnumerable<IMPD_AnimatableTexture> GetTexturesForCollection(MPD_CollectionType collection) {
-                if (!mpd.ModelCollections.TryGetValue(collection, out mc))
+                if (!mpd.ModelCollections.TryGetValue(collection, out primaryMc))
                     return new IMPD_AnimatableTexture[0];
-                return mc.Textures ?? new IMPD_AnimatableTexture[0].ToEnumerableWithLength();
+                return primaryMc.Textures ?? new IMPD_AnimatableTexture[0].ToEnumerableWithLength();
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 4, startID: 0);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0);
                 WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0);
             }
             else
@@ -75,9 +77,22 @@ namespace SF3.MPD {
                     WriteEmptyChunk();
             }
 
-            // TODO: actual chunks!!
-            while (_currentChunks < 20)
-                WriteEmptyChunk();
+            // Scenario 2+ has two more chunks.
+            if (Scenario >= ScenarioType.Scenario2) {
+                if (primaryMc != null && mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory)
+                    WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: true);
+                else if (mpd.Surface.HasModel && mpd.Flags.SurfaceModelChunkIndex == 20)
+                    WriteSurfaceModelChunk(mpd.Surface);
+                else
+                    WriteEmptyChunk();
+
+                if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures) {
+                    var extraTextures = GetTexturesForCollection(MPD_CollectionType.ExtraModels);
+                    WriteTextureChunk(extraTextures, 0, out _);
+                }
+                else
+                    WriteEmptyChunk();
+            }
         }
 
         public void WriteEmptyChunk()

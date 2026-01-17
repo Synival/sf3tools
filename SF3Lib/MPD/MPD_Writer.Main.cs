@@ -23,15 +23,41 @@ namespace SF3.MPD {
 
             var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
             var lightPositionPos     = WriteLightPosition(mpd.Lighting);
-            var unknown1Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1);
+
+            // An "unknown 1" table in Scenario 1 was replaced with a "palette adjustment" struct in Scenario 2+.
+            uint? unknown1OrPaletteAdjustPos = null;
+            if (Scenario < ScenarioType.Scenario2)
+                unknown1OrPaletteAdjustPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1);
+            else
+                unknown1OrPaletteAdjustPos = WritePaletteAdjustmentOrNull(mpd.Settings);
+            WriteToAlignTo(2);
+
+            // Some Scenario 2 maps have some junk after the "palette adjustment" struct.
+            if (mpd.UnreferencedDataAfterPaletteAdjustment != null)
+                WriteBytes(mpd.UnreferencedDataAfterPaletteAdjustment.ToArray());
+
             var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
             var animationsPos        = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data, is32Bit: Scenario >= ScenarioType.Scenario3);
-            var unknown2Pos          = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2);
+
+            // An "unknown 2" table in Scenario 1 was replaced with a "gradient" struct in Scenario 2+.
+            uint? unknown2OrGradientPos = null;
+            if (Scenario < ScenarioType.Scenario2)
+                unknown2OrGradientPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2);
+            else {
+                // Always set, whether it exists or not. It's structured like a table for some reason.
+                unknown2OrGradientPos = (uint) CurrentOffset;
+                if (mpd.Gradient != null)
+                    WriteGradient(mpd.Gradient);
+                WriteUShort(0xFFFF);
+            }
+
             WriteToAlignTo(4);
+
             var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
             var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.LongEmptyIgnoredTextureTable);
             var groundPalettePos     = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
+
             var skyPalettePos        = WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1    ? mpd.Planes.SkyPalette    : null);
 
             WriteToAlignTo(4);
@@ -40,10 +66,10 @@ namespace SF3.MPD {
                 mpd,
                 lightPalettePos,
                 lightPositionPos,
-                unknown1Pos,
+                unknown1OrPaletteAdjustPos,
                 modelSwitchGroupsPos,
                 animationsPos,
-                unknown2Pos,
+                unknown2OrGradientPos,
                 groundAnimationPos,
                 ignoredTexturesPos,
                 groundPalettePos,
@@ -82,10 +108,10 @@ namespace SF3.MPD {
             IMPD mpd,
             uint? lightPalettePos,
             uint? lightPositionPos,
-            uint? unknown1Pos,
+            uint? unknown1OrPaletteAdjustPos,
             uint? modelSwitchGroupsPos,
             uint? animationsPos,
-            uint? unknown2Pos,
+            uint? unknown2OrGradientPos,
             uint? groundAnimationPos,
             uint? ignoredTexturesPos,
             uint? groundPalettePos,
@@ -103,11 +129,11 @@ namespace SF3.MPD {
             WriteUShort(mpd.GetHeaderFlags(Scenario));
             WriteMPDPointer(lightPalettePos);
             WriteMPDPointer(lightPositionPos);
-            WriteMPDPointer(unknown1Pos);
+            WriteMPDPointer(unknown1OrPaletteAdjustPos);
             WriteUShort(settings.ModelsViewDistance);
             WriteMPDPointer(modelSwitchGroupsPos);
             WriteMPDPointer(animationsPos);
-            WriteMPDPointer(unknown2Pos);
+            WriteMPDPointer(unknown2OrGradientPos);
             WriteMPDPointer(groundAnimationPos);
 
             // These are written afterwards; provide the pointer address so it can be updated
@@ -167,6 +193,15 @@ namespace SF3.MPD {
         public void WriteUnknownUInt16Table(IEnumerable<ushort> table) {
             foreach (var value in table)
                 WriteUShort(value);
+        }
+
+        public uint? WritePaletteAdjustmentOrNull(IMPD_Settings settings)
+            => WriteObjectOrNull(() => settings.LightPaletteAdjustment != null, () => WritePaletteAdjustment(settings));
+
+        public void WritePaletteAdjustment(IMPD_Settings settings) {
+            WriteShort(settings.LightPaletteAdjustment.R);
+            WriteShort(settings.LightPaletteAdjustment.G);
+            WriteShort(settings.LightPaletteAdjustment.B);
         }
 
         public uint? WriteModelSwitchGroupsOrNull(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
@@ -295,6 +330,10 @@ namespace SF3.MPD {
             }
 
             return pos;
+        }
+
+        public void WriteGradient(IMPD_Gradient gradient) {
+            // TODO: write the gradient!
         }
 
         public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool writeLongEmptyData)
