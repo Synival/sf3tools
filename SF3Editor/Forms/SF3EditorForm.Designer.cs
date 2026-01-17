@@ -104,6 +104,9 @@ namespace SF3.Editor.Forms {
             tsmiX019_UnapplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
             tsmiX019_ApplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Export = new System.Windows.Forms.ToolStripMenuItem();
+            mpdTSMI_Export_ToScenario1MPD = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_Chunks = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ImportChunk = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ExportChunk = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,7 +119,7 @@ namespace SF3.Editor.Forms {
             tsmiMPD_Textures_ImportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Textures_ExportAll = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_ModelSwitchGroups = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiMPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_RecalculateSurfaceModelNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,9 +134,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Export = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
-            mpdTSMI_Export_ToScenario1MPD = new System.Windows.Forms.ToolStripMenuItem();
+            mpdTSMI_Export_ToScenario2MPD = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -681,6 +682,25 @@ namespace SF3.Editor.Forms {
             tsmiMPD.Text = "&MPD";
             tsmiMPD.Visible = false;
             // 
+            // tsmiMPD_Export
+            // 
+            tsmiMPD_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { mpdTSMI_Export_ToScenario1MPD, mpdTSMI_Export_ToScenario2MPD });
+            tsmiMPD_Export.Name = "tsmiMPD_Export";
+            tsmiMPD_Export.Size = new Size(261, 22);
+            tsmiMPD_Export.Text = "&Export";
+            // 
+            // mpdTSMI_Export_ToScenario1MPD
+            // 
+            mpdTSMI_Export_ToScenario1MPD.Name = "mpdTSMI_Export_ToScenario1MPD";
+            mpdTSMI_Export_ToScenario1MPD.Size = new Size(216, 22);
+            mpdTSMI_Export_ToScenario1MPD.Text = "Export to Scenario &1 MPD...";
+            mpdTSMI_Export_ToScenario1MPD.Click += mpdTSMI_Export_ToScenario1MPD_Click;
+            // 
+            // tsmiMPD_Sep1
+            // 
+            tsmiMPD_Sep1.Name = "tsmiMPD_Sep1";
+            tsmiMPD_Sep1.Size = new Size(258, 6);
+            // 
             // tsmiMPD_Chunks
             // 
             tsmiMPD_Chunks.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Chunks_ImportChunk, tsmiMPD_Chunks_ExportChunk, tsmiMPD_Chunks_DeleteChunk, toolStripSeparator1, tsmiMPD_Chunks_RecompressModifiedChunks, tsmiMPD_Chunks_RecompressAllChunks, tsmiMPD_Chunks_RebuildChunkTable });
@@ -763,10 +783,10 @@ namespace SF3.Editor.Forms {
             tsmiMPD_ModelSwitchGroups.Size = new Size(261, 22);
             tsmiMPD_ModelSwitchGroups.Text = "Model &Switch Groups";
             // 
-            // tsmiMPD_Sep1
+            // tsmiMPD_Sep2
             // 
-            tsmiMPD_Sep1.Name = "tsmiMPD_Sep1";
-            tsmiMPD_Sep1.Size = new Size(258, 6);
+            tsmiMPD_Sep2.Name = "tsmiMPD_Sep2";
+            tsmiMPD_Sep2.Size = new Size(258, 6);
             // 
             // tsmiMPD_RecalculateSurfaceModelNormals
             // 
@@ -864,24 +884,12 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // tsmiMPD_Export
+            // mpdTSMI_Export_ToScenario2MPD
             // 
-            tsmiMPD_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { mpdTSMI_Export_ToScenario1MPD });
-            tsmiMPD_Export.Name = "tsmiMPD_Export";
-            tsmiMPD_Export.Size = new Size(261, 22);
-            tsmiMPD_Export.Text = "&Export";
-            // 
-            // tsmiMPD_Sep2
-            // 
-            tsmiMPD_Sep2.Name = "tsmiMPD_Sep2";
-            tsmiMPD_Sep2.Size = new Size(258, 6);
-            // 
-            // mpdTSMI_Export_ToScenario1MPD
-            // 
-            mpdTSMI_Export_ToScenario1MPD.Name = "mpdTSMI_Export_ToScenario1MPD";
-            mpdTSMI_Export_ToScenario1MPD.Size = new Size(216, 22);
-            mpdTSMI_Export_ToScenario1MPD.Text = "Export to Scenario &1 MPD...";
-            mpdTSMI_Export_ToScenario1MPD.Click += mpdTSMI_Export_ToScenario1MPD_Click;
+            mpdTSMI_Export_ToScenario2MPD.Name = "mpdTSMI_Export_ToScenario2MPD";
+            mpdTSMI_Export_ToScenario2MPD.Size = new Size(216, 22);
+            mpdTSMI_Export_ToScenario2MPD.Text = "Export to Scenario &2 MPD...";
+            mpdTSMI_Export_ToScenario2MPD.Click += mpdTSMI_Export_ToScenario2MPD_Click;
             // 
             // SF3EditorForm
             // 
@@ -1008,5 +1016,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Export;
         private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep2;
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToScenario1MPD;
+        private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToScenario2MPD;
     }
 }
