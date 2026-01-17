@@ -245,7 +245,14 @@ namespace SF3.MPD {
                 WriteUShort((ushort) tex.Animation.FrameTimerStart);
 
                 foreach (var frame in tex.Animation.Frames) {
-                    var chunk3FramePos = AddTextureToChunk3(frame.ImageData16Bit.To1DArrayTransposed().ToByteArray());
+                    var imageData = (frame.BytesPerPixel == 2)
+                        ? frame.ImageData16Bit.To1DArrayTransposed().ToByteArray()
+                        : frame.ImageData8Bit.To1DArrayTransposed();
+
+                    if (frame.BytesPerPixel == 1)
+                        imageData = imageData.ConvertIndexedToABGR1555(frame.Palette).ToByteArray();
+
+                    var chunk3FramePos = AddTextureToChunk3(imageData);
                     WriteUShort((ushort) chunk3FramePos);
                     WriteUShort((ushort) frame.Duration);
                 }

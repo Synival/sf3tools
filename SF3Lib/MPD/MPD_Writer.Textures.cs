@@ -34,7 +34,8 @@ namespace SF3.MPD {
 
                 // Size of texture, also accounting for its entry in the table.
                 // (Based on MPD analysis, this appears to be the limit.)
-                var textureDataSize = 0x04 + texture.Width * texture.Height * texture.BytesPerPixel;
+                // TODO: allow indexed textures
+                var textureDataSize = 0x04 + texture.Width * texture.Height * 2;
 
                 if (totalTextureDataSize + textureDataSize >= 0x10000)
                     break;
@@ -64,16 +65,19 @@ namespace SF3.MPD {
                 WriteByte((byte) texture.Height);
                 WriteUShort(curTexOffset);
 
-                curTexOffset += (ushort) (texture.Width * texture.Height * texture.BytesPerPixel);
+                // TODO: allow indexed textures
+                curTexOffset += (ushort) (texture.Width * texture.Height * 2);
             }
 
             // Write texture data.
             for (int i = startID; i < endID; i++) {
                 var texture = sortedTextures[i];
-                if (texture.BytesPerPixel == 1)
-                    WriteBytes(texture.ImageData8Bit.To1DArrayTransposed());
-                else
-                    WriteBytes(texture.ImageData16Bit.To1DArrayTransposed().SelectMany(x => x.ToByteArray()).ToArray());
+
+                // TODO: allow indexed textures
+                var imageData = (texture.BytesPerPixel == 1)
+                    ? texture.ImageData8Bit.To1DArrayTransposed().ConvertIndexedToABGR1555(texture.Palette)
+                    : texture.ImageData16Bit.To1DArrayTransposed();
+                WriteBytes(imageData.ToByteArray());
             }
         }
     }

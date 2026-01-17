@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using CommonLib.Imaging;
 
 namespace CommonLib.Extensions {
     public static class ArrayExtensions {
@@ -19,8 +20,8 @@ namespace CommonLib.Extensions {
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-            public static IIndexedEnumerableWithLength<T> ToEnumerableWithLength<T>(this T[] array)
-                => new ArrayWithLength<T>(array);
+        public static IIndexedEnumerableWithLength<T> ToEnumerableWithLength<T>(this T[] array)
+            => new ArrayWithLength<T>(array);
 
         /// <summary>
         /// Returns a copy of an array with an additional element 'newValue' tacked on the end.
@@ -350,6 +351,22 @@ namespace CommonLib.Extensions {
                 return null;
             using (var md5 = MD5.Create())
                 return (((hashPrefix ?? "") == "") ? "" : hashPrefix + "-") + BitConverter.ToString(md5.ComputeHash(data)).Replace("-", "").ToLower();
+        }
+
+        /// <summary>
+        /// Converts a 1D array of indexed image data to a 1D array of ABGR1555 image data.
+        /// </summary>
+        /// <param name="imageData">Indexed image data to convert.</param>
+        /// <param name="palette">Palette to use for image data.</param>
+        /// <returns>If 'imageData' is non-null, a ushort[] of the same data in imageData[] in ABGR1555 format. Otherwise, returns 'null'.</returns>
+        public static ushort[] ConvertIndexedToABGR1555(this byte[] imageData, Palette palette) {
+            if (imageData == null)
+                return null;
+
+            var output = new ushort[imageData.Length];
+            for (int pos = 0; pos < imageData.Length; pos++)
+                output[pos] = PixelConversion.IndexedToABGR1555(imageData[pos], palette, zeroIsTransparent: true);
+            return output;
         }
     }
 }
