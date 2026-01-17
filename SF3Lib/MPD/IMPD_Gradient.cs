@@ -56,5 +56,11 @@ namespace SF3.MPD {
         /// Only active when 'AffectsSky' is also on.
         /// </summary>
         float SkyIntensity { get; set; }
+
+        /// <summary>
+        /// Technical flag. When true, the gradient is serialized, but "dummied-out" with a preceeding
+        /// 0xFFFF that prevents it from loading.
+        /// </summary>
+        bool IsDummiedOut { get; set; }
     }
 }

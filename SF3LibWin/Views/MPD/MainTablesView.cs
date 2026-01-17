@@ -45,7 +45,7 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.GradientTable != null) {
                 if (Model.GradientTable.Length == 1)
-                    CreateChild(new DataModelView("Gradient", Model.GradientTable[0], ngc));
+                    CreateChild(new DataModelView("Gradient" + (Model.GradientTable[0].IsDummiedOut ? " (Dummied Out)" : ""), Model.GradientTable[0], ngc));
                 else
                     CreateChild(new TableView("Gradients", Model.GradientTable, ngc));
             }

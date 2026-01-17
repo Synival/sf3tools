@@ -102,8 +102,10 @@ namespace SF3.Models.Files.MPD {
             if (header.OffsetPaletteAdjustment != 0)
                 PaletteAdjustment = new PaletteAdjustment(Data, 0, nameof(PaletteAdjustment), header.OffsetPaletteAdjustment - RamAddress, Scenario);
 
-            if (header.OffsetGradient != 0)
-                tables.Add(GradientTable = GradientTable.Create(Data, nameof(GradientTable), header.OffsetGradient - RamAddress));
+            if (header.OffsetGradient != 0) {
+                var readUntil = (header.OffsetGroundAnimation == 0) ? (int?) null : (header.OffsetGroundAnimation - 0x290000);
+                tables.Add(GradientTable = GradientTable.Create(Data, nameof(GradientTable), header.OffsetGradient - RamAddress, readUntil));
+            }
 
             return tables.ToArray();
         }

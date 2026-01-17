@@ -19,8 +19,10 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _skyIntensityAddr;
         private readonly int _modelsAndSurfaceIntensityAddr;
 
-        public Gradient(IByteData data, int id, string name, int address)
+        public Gradient(IByteData data, int id, string name, int address, bool isDummiedOut)
         : base(data, id, name, address, 0x18) {
+            _isDummiedOut = isDummiedOut;
+
             _topPositionAddr           = Address + 0x00; // 2 bytes
             _bottomPositionAddr        = Address + 0x02; // 2 bytes
             _topRAddr                  = Address + 0x04; // 2 bytes
@@ -38,8 +40,12 @@ namespace SF3.Models.Structs.MPD.Main {
             _gradientBottomColor     = new GradientBottomColorClass(this);
         }
 
+        private bool _isDummiedOut = false;
+        [TableViewModelColumn(displayOrder: 0)]
+        public bool IsDummiedOut { get => _isDummiedOut; set {} }
+
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_topPositionAddr), displayName: "TopPosition", displayOrder: 0, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_topPositionAddr), displayName: "TopPosition", displayOrder: 0.1f, displayFormat: "X2")]
         public ushort TopPositionRaw {
             get => (ushort) Data.GetWord(_topPositionAddr);
             set => Data.SetWord(_topPositionAddr, value);

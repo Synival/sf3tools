@@ -26,7 +26,7 @@ namespace SF3.Win.OpenGL.MPD {
             => Update(mpdFile?.Gradient);
 
         public void Update(IMPD_Gradient gradient) {
-            if (gradient == null) {
+            if (gradient == null || gradient.IsDummiedOut) {
                 Reset();
                 return;
             }

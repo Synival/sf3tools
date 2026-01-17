@@ -334,6 +334,9 @@ namespace SF3.MPD {
         }
 
         public void WriteGradient(IMPD_Gradient gradient) {
+            if (gradient.IsDummiedOut)
+                WriteUShort(0xFFFF);
+
             WriteUShort((ushort) Math.Round(gradient.TopPosition * 255.00f));
             WriteUShort((ushort) Math.Round(gradient.BottomPosition * 255.00f));
 
