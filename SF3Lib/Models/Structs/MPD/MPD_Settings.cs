@@ -153,5 +153,10 @@ namespace SF3.Models.Structs.MPD {
                     MPD_File.PaletteAdjustment.ShadowTransparency = value;
             }
         }
+
+        public bool PaletteAdjustmentIsTruncated {
+            get => MPD_File.PaletteAdjustment?.IsTruncated ?? false;
+            set {}
+        }
     }
 }

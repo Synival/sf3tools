@@ -229,10 +229,13 @@ namespace SF3.Win.Controls {
                 }
             }
 
+            var truncatedPaletteAdjustments = MPD_File?.Settings?.PaletteAdjustmentIsTruncated == true;
+
             _renderer.DrawScene(
-                _general, _models, _surfaceModel, _groundModel, _skyModel,
-                _gradients, MPD_File?.Settings?.GroundPaletteAdjustment, _lighting, _boundaryModels, _collisionModels,
-                _surfaceEditor,
+                _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
+                truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
+                _lighting, _boundaryModels, _collisionModels, _surfaceEditor,
+
                 // TODO: these options should be cached!!!
                 new Renderer.RendererOptions() {
                     DrawModels = DrawModels,

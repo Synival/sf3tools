@@ -12,25 +12,29 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _groundBAdjustAddr;
         private readonly int _shadowTransparencyAddr;
 
-        public PaletteAdjustment(IByteData data, int id, string name, int address, ScenarioType scenario)
-        : base(data, id, name, address, scenario >= ScenarioType.Scenario3 ? 0x0E : 0x06) {
-            Scenario = scenario;
+        public PaletteAdjustment(IByteData data, int id, string name, int address, bool hasGroundAndShadow, bool isTruncated)
+        : base(data, id, name, address, hasGroundAndShadow ? 0x0E : 0x06) {
+            HasGroundAdjustment   = hasGroundAndShadow;
+            HasShadowTransparency = hasGroundAndShadow; 
+            IsTruncated           = isTruncated;
 
             _lightRAdjustAddr       = Address + 0x00; // 2 bytes
             _lightGAdjustAddr       = Address + 0x02; // 2 bytes
             _lightBAdjustAddr       = Address + 0x04; // 2 bytes
-            _groundRAdjustAddr      = scenario >= ScenarioType.Scenario3 ? Address + 0x06 : -1; // 2 bytes
-            _groundGAdjustAddr      = scenario >= ScenarioType.Scenario3 ? Address + 0x08 : -1; // 2 bytes
-            _groundBAdjustAddr      = scenario >= ScenarioType.Scenario3 ? Address + 0x0A : -1; // 2 bytes
-            _shadowTransparencyAddr = scenario >= ScenarioType.Scenario3 ? Address + 0x0C : -1; // 2 bytes
+            _groundRAdjustAddr      = hasGroundAndShadow ? Address + 0x06 : -1; // 2 bytes
+            _groundGAdjustAddr      = hasGroundAndShadow ? Address + 0x08 : -1; // 2 bytes
+            _groundBAdjustAddr      = hasGroundAndShadow ? Address + 0x0A : -1; // 2 bytes
+            _shadowTransparencyAddr = hasGroundAndShadow ? Address + 0x0C : -1; // 2 bytes
         }
 
-        public ScenarioType Scenario { get; }
-        public bool HasGroundAdjustment => Scenario >= ScenarioType.Scenario3;
-        public bool HasShadowTransparency => Scenario >= ScenarioType.Scenario3;
+        public bool HasGroundAdjustment { get; }
+        public bool HasShadowTransparency { get; }
+
+        [TableViewModelColumn(displayOrder: 0, displayName: "Is Truncated", visibilityProperty: nameof(HasGroundAdjustment))]
+        public bool IsTruncated { get; }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_lightRAdjustAddr), displayOrder: 0, displayName: "LightR +/-", displayFormat: "-X2")]
+        [TableViewModelColumn(addressField: nameof(_lightRAdjustAddr), displayOrder: 0.1f, displayName: "LightR +/-", displayFormat: "-X2")]
         public short LightRAdjustment {
             get => (short) Data.GetWord(_lightRAdjustAddr);
             set => Data.SetWord(_lightRAdjustAddr, value);

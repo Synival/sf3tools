@@ -27,7 +27,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new TableView("Unknown 1", Model.Unknown1Table, ngc));
 
             if (Model.PaletteAdjustment != null)
-                CreateChild(new DataModelView("Palette Adjustment", Model.PaletteAdjustment, ngc));
+                CreateChild(new DataModelView("Palette Adjustment" + (Model.PaletteAdjustment.IsTruncated ? " (Truncated)" : ""), Model.PaletteAdjustment, ngc));
 
             if (Model.UnreferencedDataAfterPaletteAdjustmentTable != null)
                 CreateChild(new TableView("Junk After Palette Adjustment", Model.UnreferencedDataAfterPaletteAdjustmentTable, ngc));

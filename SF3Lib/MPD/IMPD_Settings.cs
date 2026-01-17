@@ -106,5 +106,11 @@ namespace SF3.MPD {
         /// Only supported in Scenario 3+. If unsupported, this is locked at 0x0F.
         /// </summary>
         byte ShadowTransparency { get; set; }
+
+        /// <summary>
+        /// Technical flag. When set, Scenario 3 MPDs will have a truncated LightAdjustment struct without the
+        /// extra Scenario 3 fields. This is present in a lot of Scenario 3 MPDs and may be a bug.
+        /// </summary>
+        bool PaletteAdjustmentIsTruncated { get; set; }
     }
 }

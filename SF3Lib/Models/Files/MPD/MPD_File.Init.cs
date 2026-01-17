@@ -57,6 +57,18 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeHeaderTables(MPD_Header header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
+            // This is referenced when determining the length of other tables, so make it early.
+            // TODO: put somewhere else!!
+            if (header.OffsetModelSwitchGroups != 0) {
+                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress, NameGetterContext));
+                foreach (var switchGroup in ModelSwitchGroupsTable) {
+                    if (switchGroup.ModelInstancesVisibleWhenOffTable != null)
+                        tables.Add(switchGroup.ModelInstancesVisibleWhenOffTable);
+                    if (switchGroup.ModelInstancesVisibleWhenOnTable != null)
+                        tables.Add(switchGroup.ModelInstancesVisibleWhenOnTable);
+                }
+            }
+
             tables.AddRange(MakeLightingTables(header));
             tables.AddRange(MakePaletteTables(header));
             tables.AddRange(MakeAnimationTables(header, areAnimatedTextures32Bit));
@@ -100,8 +112,14 @@ namespace SF3.Models.Files.MPD {
                 tables.Add(LightPaletteColorTable = ColorTable.Create(Data, nameof(LightPaletteColorTable), header.OffsetLightPalette - RamAddress, 32));
             if (header.OffsetLightPosition != 0)
                 LightPosition = new LightPosition(Data, 0, nameof(LightPosition), header.OffsetLightPosition - RamAddress);
-            if (header.OffsetPaletteAdjustment != 0)
-                PaletteAdjustment = new PaletteAdjustment(Data, 0, nameof(PaletteAdjustment), header.OffsetPaletteAdjustment - RamAddress, Scenario);
+
+            if (header.OffsetPaletteAdjustment != 0) {
+                var msgAddr = ModelSwitchGroupsTable?.GetEarliestRamAddress() ?? 0;
+                var diff = msgAddr - (uint) header.OffsetPaletteAdjustment;
+                var isTruncated = (Scenario >= ScenarioType.Scenario3) && (msgAddr != 0 && diff < 0x0E);
+
+                PaletteAdjustment = new PaletteAdjustment(Data, 0, nameof(PaletteAdjustment), header.OffsetPaletteAdjustment - RamAddress, Scenario >= ScenarioType.Scenario3, isTruncated);
+            }
 
             if (header.OffsetGradient != 0) {
                 var readUntil = (header.OffsetGroundAnimation == 0) ? (int?) null : (header.OffsetGroundAnimation - 0x290000);
@@ -161,17 +179,6 @@ namespace SF3.Models.Files.MPD {
 
         private ITable[] MakeOtherTables(MPD_Header header) {
             var tables = new List<ITable>();
-
-            // TODO: put somewhere else!!
-            if (header.OffsetModelSwitchGroups != 0) {
-                tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress, NameGetterContext));
-                foreach (var switchGroup in ModelSwitchGroupsTable) {
-                    if (switchGroup.ModelInstancesVisibleWhenOffTable != null)
-                        tables.Add(switchGroup.ModelInstancesVisibleWhenOffTable);
-                    if (switchGroup.ModelInstancesVisibleWhenOnTable != null)
-                        tables.Add(switchGroup.ModelInstancesVisibleWhenOnTable);
-                }
-            }
 
             // TODO: put somewhere else!!
             if (header.OffsetGroundAnimation != 0)
