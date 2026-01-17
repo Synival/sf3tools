@@ -83,7 +83,7 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_shadowTransparencyAddr), displayOrder: 6, displayName: "Shadow Transparency (Scn3+)", displayFormat: "X2", visibilityProperty: nameof(HasShadowTransparency))]
         public ushort ShadowTransparency {
-            get => HasShadowTransparency ? (ushort) Data.GetWord(_shadowTransparencyAddr) : (ushort) 0;
+            get => HasShadowTransparency ? (ushort) Data.GetWord(_shadowTransparencyAddr) : (ushort) 0x0F;
             set {
                 if (HasShadowTransparency)
                     Data.SetWord(_shadowTransparencyAddr, value);
