@@ -106,6 +106,8 @@ namespace SF3.Editor.Forms {
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Export = new System.Windows.Forms.ToolStripMenuItem();
             mpdTSMI_Export_ToScenario1MPD = new System.Windows.Forms.ToolStripMenuItem();
+            mpdTSMI_Export_ToScenario2MPD = new System.Windows.Forms.ToolStripMenuItem();
+            mpdTSMI_Export_ToScenario3MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_Chunks = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ImportChunk = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,7 +136,6 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            mpdTSMI_Export_ToScenario2MPD = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -684,7 +685,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiMPD_Export
             // 
-            tsmiMPD_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { mpdTSMI_Export_ToScenario1MPD, mpdTSMI_Export_ToScenario2MPD });
+            tsmiMPD_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { mpdTSMI_Export_ToScenario1MPD, mpdTSMI_Export_ToScenario2MPD, mpdTSMI_Export_ToScenario3MPD });
             tsmiMPD_Export.Name = "tsmiMPD_Export";
             tsmiMPD_Export.Size = new Size(261, 22);
             tsmiMPD_Export.Text = "&Export";
@@ -692,9 +693,23 @@ namespace SF3.Editor.Forms {
             // mpdTSMI_Export_ToScenario1MPD
             // 
             mpdTSMI_Export_ToScenario1MPD.Name = "mpdTSMI_Export_ToScenario1MPD";
-            mpdTSMI_Export_ToScenario1MPD.Size = new Size(216, 22);
+            mpdTSMI_Export_ToScenario1MPD.Size = new Size(242, 22);
             mpdTSMI_Export_ToScenario1MPD.Text = "Export to Scenario &1 MPD...";
             mpdTSMI_Export_ToScenario1MPD.Click += mpdTSMI_Export_ToScenario1MPD_Click;
+            // 
+            // mpdTSMI_Export_ToScenario2MPD
+            // 
+            mpdTSMI_Export_ToScenario2MPD.Name = "mpdTSMI_Export_ToScenario2MPD";
+            mpdTSMI_Export_ToScenario2MPD.Size = new Size(242, 22);
+            mpdTSMI_Export_ToScenario2MPD.Text = "Export to Scenario &2 MPD...";
+            mpdTSMI_Export_ToScenario2MPD.Click += mpdTSMI_Export_ToScenario2MPD_Click;
+            // 
+            // mpdTSMI_Export_ToScenario3MPD
+            // 
+            mpdTSMI_Export_ToScenario3MPD.Name = "mpdTSMI_Export_ToScenario3MPD";
+            mpdTSMI_Export_ToScenario3MPD.Size = new Size(242, 22);
+            mpdTSMI_Export_ToScenario3MPD.Text = "Export to Scenario &3 / PD MPD...";
+            mpdTSMI_Export_ToScenario3MPD.Click += mpdTSMI_Export_ToScenario3MPD_Click;
             // 
             // tsmiMPD_Sep1
             // 
@@ -884,13 +899,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // mpdTSMI_Export_ToScenario2MPD
-            // 
-            mpdTSMI_Export_ToScenario2MPD.Name = "mpdTSMI_Export_ToScenario2MPD";
-            mpdTSMI_Export_ToScenario2MPD.Size = new Size(216, 22);
-            mpdTSMI_Export_ToScenario2MPD.Text = "Export to Scenario &2 MPD...";
-            mpdTSMI_Export_ToScenario2MPD.Click += mpdTSMI_Export_ToScenario2MPD_Click;
-            // 
             // SF3EditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1017,5 +1025,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripSeparator tsmiMPD_Sep2;
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToScenario1MPD;
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToScenario2MPD;
+        private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToScenario3MPD;
     }
 }

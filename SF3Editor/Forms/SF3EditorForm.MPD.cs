@@ -298,6 +298,11 @@ namespace SF3.Editor.Forms {
                 ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario2, SelectedFile.Loader.ShortFilename);
         }
 
+        private void mpdTSMI_Export_ToScenario3MPD_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD)
+                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario3, SelectedFile.Loader.ShortFilename);
+        }
+
         private void UpdateMPD_ModelSwitchGroupsMenu(IMPD_File? mpdFile) {
             var items = tsmiMPD_ModelSwitchGroups.DropDown.Items;
 
