@@ -24,7 +24,12 @@ namespace SF3.Tests.MPD {
                 outputData = memoryStream.ToArray();
             }
 
-            File.WriteAllBytes(mpdName + "_Test.MPD", outputData);
+            var scenarioPrefix =
+                (scenario == ScenarioType.Scenario1) ? "S1_" :
+                (scenario == ScenarioType.Scenario2) ? "S2_" :
+                                                       "S3_";
+
+            File.WriteAllBytes($"{scenarioPrefix}{mpdName}_Test.MPD", outputData);
 
             if (performByteComparison)
                 AssertMPDByteComparison(mpdFile, outputData, rawDataSkipRegions);

@@ -33,5 +33,12 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario2_SNIOKI_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "SNIOKI", performByteComparison: false);
-    }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_BTL43_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "BTL43", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_AIRO_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "AIRO", performByteComparison: false);    }
 }
