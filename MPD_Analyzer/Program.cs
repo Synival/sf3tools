@@ -11,7 +11,7 @@ namespace MPD_Analyzer {
         // ,--- Enter the paths for all your MPD files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
-            //{ ScenarioType.Scenario1,   "D:/" },
+            { ScenarioType.Scenario1,   "D:/" },
             { ScenarioType.Scenario2,   "E:/" },
             { ScenarioType.Scenario3,   "F:/" },
             { ScenarioType.PremiumDisk, "G:/" },
@@ -58,16 +58,17 @@ namespace MPD_Analyzer {
             // Gotta have the model collection!
             if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(MPD_CollectionType.Primary))
                 return null;
-/*
+
+#if false
             // Gotta have textures!
             if (!(mpdFile.ModelCollections[MPD_CollectionType.Primary]?.Textures?.Count() >= 1))
                 return null;
-*/
 
             var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
             var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
+#endif
 
-            return MatchFuncs.HasWeirdGradients(mpdFile);
+            return MatchFuncs.DoubleSerializeIsIdentical(mpdFile);
         }
 
         public static void Main(string[] args) {

@@ -1,9 +1,12 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Arrays;
+using CommonLib.Imaging;
+using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 using SF3.MPD;
 using SF3.Types;
+using SF3.Utils;
 
 namespace MPD_Analyzer {
     public static class MatchFuncs {
@@ -465,6 +468,26 @@ namespace MPD_Analyzer {
                     errors.Add($"{table.Name} is dummied-out");
 
             return errors.ToArray();
+        }
+
+        public static string[]? DoubleSerializeIsIdentical(MPD_File mpdFile) {
+            byte[] bytes1;
+            byte[] bytes2;
+
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                writer.WriteMPD(mpdFile);
+                bytes1 = stream.ToArray();
+            }
+
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                var mpd = MPD_File.Create(new ByteData(new ByteArray(bytes1)), mpdFile.NameGetterContext, mpdFile.Scenario);
+                writer.WriteMPD(mpdFile);
+                bytes2 = stream.ToArray();
+            }
+
+            return AnalysisUtils.GetByteComparisonErrors(bytes1, bytes2);
         }
     }
 }
