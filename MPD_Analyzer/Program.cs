@@ -1,4 +1,6 @@
-﻿using CommonLib.Arrays;
+﻿using System.Collections.Concurrent;
+using System.Text;
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
@@ -103,12 +105,16 @@ namespace MPD_Analyzer {
                 var nameGetter = nameGetterContexts[scenario];
                 var unusedMaps = UnusedMaps.TryGetValue(scenario, out var val) ? val : [];
 
-                foreach (var file in filesKv.Value) {
+                var parallelOptions = new ParallelOptions() {
+                    MaxDegreeOfParallelism = -1
+                };
+
+                Parallel.ForEach(Partitioner.Create(filesKv.Value), parallelOptions, file => {
                     var filename = Path.GetFileNameWithoutExtension(file);
 
                     // Skip maps that aren't used at all.
                     if (unusedMaps.Contains(filename))
-                        continue;
+                        return;
 
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
@@ -123,15 +129,18 @@ namespace MPD_Analyzer {
                             // Condition for match checks here
                             var matchReports = MPD_MatchFunc(mpdFile, scenario, filename);
                             if (matchReports == null)
-                                continue;
+                                return;
 
                             bool match = matchReports.Length > 0;
                             var fileStr = GetFileString(scenario, file, mpdFile);
-                            Console.WriteLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
+
+                            var stringBuilder = new StringBuilder();
+
+                            stringBuilder.AppendLine(fileStr + " | " + (match ? "Match  " : "NoMatch"));
                             if (matchReports.Length > 0) {
                                 foreach (var r in matchReports)
-                                    Console.WriteLine("    " + filename.PadLeft(8) + " | " + r);
-                                Console.WriteLine();
+                                    stringBuilder.AppendLine("    " + filename.PadLeft(8) + " | " + r);
+                                stringBuilder.AppendLine();
                             }
 
                             if (match) {
@@ -170,12 +179,13 @@ namespace MPD_Analyzer {
                             }
 
                             //ScanForErrorsAndReport(scenario, mpdFile);
+                            Console.Write(stringBuilder.ToString());
                         }
                     }
                     catch (Exception e) {
                         Console.WriteLine("  !!! Exception for '" + filename + "': '" + e.Message + "'. Skipping!");
                     }
-                }
+                });
             }
 
             var totalCount = matchSet.Count + nomatchSet.Count;
