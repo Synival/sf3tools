@@ -10,5 +10,13 @@ namespace SF3.Tests.MPD {
                 new ByteComparisonSkipRegion { Offset = 0x2C36, Size = 2 },
             ]);
         }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_AHIRU_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "AHIRU", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_AHIRU2_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "AHIRU2", performByteComparison: false);
     }
 }
