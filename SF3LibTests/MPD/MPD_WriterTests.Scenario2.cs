@@ -31,13 +31,7 @@ namespace SF3.Tests.MPD {
         }
 
         [TestMethod]
-        public void WriteMPD_WithScenario2_SNIOKI_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "SNIOKI", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 20, new ByteComparisonSkipRegion[] {
-                    // The same old collision block stuff.
-                    new ByteComparisonSkipRegion { Offset = 0x3A47B, Size = 0x1000, ActualDataExtraBytes = 22 }
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario2_SNIOKI_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "SNIOKI", performByteComparison: false);
     }
 }

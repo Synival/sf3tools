@@ -97,15 +97,44 @@ namespace SF3.Tests.Utils {
                 }
             }
 
-            if (skipRegionsByChunk == null)
-                skipRegionsByChunk = [];
+            skipRegionsByChunk ??= [];
+
+            var expectedPrimaryChunk = expectedFile.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcExpOut) ? mcExpOut as ModelChunk : null;
+            var actualPrimaryChunk   = actualFile  .ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcActOut) ? mcActOut as ModelChunk : null;
 
             ByteComparisonSkipRegion[] GetSkipRegions(int chunk) {
                 var regionList = skipRegionsByChunk.TryGetValue(chunk, out var bcsr) ? bcsr.ToList() : [];
+
                 if (chunk == -1) {
                     var anims = expectedFile.Animations;
                     if (anims != null)
                         regionList.Add(new ByteComparisonSkipRegion() { Offset = anims.Address, Size = anims.SizeInBytes });
+                }
+
+                // If checking the primary chunk, skip the collision tables.
+                // They're not quite accurate (and probably can't ever be), and confirmed elsewhere that they're good.
+                if (chunk == expectedPrimaryChunk?.ChunkIndex && chunk == actualPrimaryChunk?.ChunkIndex) {
+                    var collisionBlocksActual = actualPrimaryChunk?.ModelsHeader.CollisionBlocksOffset;
+                    if (collisionBlocksActual > 0) {
+                        var expectedSize = expectedFile.ChunkLocations[chunk].ChunkSize;
+
+                        var actualAddr   = actualFile.ChunkLocations[chunk].ChunkFileAddress;
+                        var actualSize   = actualFile.ChunkLocations[chunk].ChunkSize;
+
+                        var actualFileRamAddition = expectedFile.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory
+                            ? (0x60A0000 - actualAddr)
+                            : 0x0290000;
+                        var collisionBlocksStart = collisionBlocksActual.Value - actualFileRamAddition;
+                        var collisionBlocksSize = actualAddr + actualSize - collisionBlocksStart;
+
+                        var newRegion = new ByteComparisonSkipRegion() {
+                            Offset = (int) collisionBlocksStart,
+                            Size   = (int) collisionBlocksSize,
+                            ActualDataExtraBytes = actualSize - expectedSize
+                        };
+
+                        regionList.Add(newRegion);
+                    }
                 }
 
                 return regionList.ToArray();

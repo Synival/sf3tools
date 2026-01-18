@@ -56,10 +56,7 @@ namespace SF3.Tests.MPD {
 
                 // Image data LZSS issue
                 new ByteComparisonSkipRegion { Offset = 0x24515, Size = 1 },
-            ],
-            new Dictionary<int, ByteComparisonSkipRegion[]> {
-                {2, [new ByteComparisonSkipRegion { Offset = 0x134B7, Size = 0x500 }]}
-            });
+            ]);
         }
 
         [TestMethod]
@@ -75,86 +72,28 @@ namespace SF3.Tests.MPD {
         }
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_BAL_3_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BAL_3", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 1, new ByteComparisonSkipRegion[] {
-                    // There's exactly one more collision line that screws up the table...
-                    new ByteComparisonSkipRegion() { Offset = 0x1442C, Size = 0x1C0 },
-
-                    // ...and here it is.
-                    new ByteComparisonSkipRegion() { Offset = 0x14A0C, Size = 2, ActualDataExtraBytes = 2 },
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario1_BAL_3_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BAL_3", performByteComparison: false, null);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_BALSA_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BALSA", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 1, new ByteComparisonSkipRegion[] {
-                    // There's exactly one more collision line that screws up the table...
-                    new ByteComparisonSkipRegion() { Offset = 0x1EC20, Size = 0x2A4 },
-
-                    // ...and here it is.
-                    new ByteComparisonSkipRegion() { Offset = 0x1F16A, Size = 2, ActualDataExtraBytes = 2 },
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario1_BALSA_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BALSA", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_DAM_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "DAM", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_MUCHUR_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MUCHUR", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 1, new ByteComparisonSkipRegion[] {
-                    // Collision lines are inconsistent
-                    new ByteComparisonSkipRegion() { Offset = 0xD14E, Size = 0x0152 },
-                    new ByteComparisonSkipRegion() { Offset = 0xD51E, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0xD570, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0xD654, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0xD670, Size = 2, ActualDataExtraBytes = 2 },
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario1_MUCHUR_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MUCHUR", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_BTL03_ProducesSameLoadableData() {
-            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL03", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 1, new ByteComparisonSkipRegion[] {
-                    // Collision lines are inconsistent
-                    new ByteComparisonSkipRegion() { Offset = 0x5203, Size = 0x31E },
-                    new ByteComparisonSkipRegion() { Offset = 0x559C, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x5610, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x562C, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x56C6, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x5724, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x5792, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x57C8, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x57FE, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x580E, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x5910, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x5B24, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x5B36, Size = 2, ActualDataExtraBytes = 2 },
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario1_BTL03_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL03", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_BTL02_CanBeLoaded() {
-            ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL02", performByteComparison: false, null, new Dictionary<int, ByteComparisonSkipRegion[]>() {
-                { 1, new ByteComparisonSkipRegion[] {
-                    // Collision lines are inconsistent
-                    new ByteComparisonSkipRegion() { Offset = 0x1105A, Size = 0x2DA },
-                    new ByteComparisonSkipRegion() { Offset = 0x1151A, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x115C6, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x11696, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x11720, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x119A8, Size = 2, ActualDataExtraBytes = 2 },
-                    new ByteComparisonSkipRegion() { Offset = 0x119B4, Size = 2, ActualDataExtraBytes = 2 },
-                }}
-            });
-        }
+        public void WriteMPD_WithScenario1_BTL02_CanBeLoaded()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL02", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_ProducesSameData()
