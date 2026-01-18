@@ -1,8 +1,9 @@
 ﻿using CommonLib.Arrays;
+using SF3.Analysis;
 using SF3.Models.Files.MPD;
 using SF3.MPD;
 using SF3.Types;
-using static SF3.Tests.Utils.DataUtils;
+using SF3.Utils;
 using static SF3.Tests.Utils.MPD_TestUtils;
 
 namespace SF3.Tests.MPD {
@@ -31,11 +32,15 @@ namespace SF3.Tests.MPD {
 
             File.WriteAllBytes($"{scenarioPrefix}{mpdName}_Test.MPD", outputData);
 
+            var errors = new List<string>();
             if (performByteComparison)
-                AssertMPDByteComparison(mpdFile, outputData, rawDataSkipRegions);
+                errors.AddRange(AnalysisUtils.GetByteComparisonErrors(mpdFile, outputData, rawDataSkipRegions));
 
             var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), mpdFile.NameGetterContext, scenario);
-            AssertMPD_FilesHaveSameContent(mpdFile, newFile, chunkSkipRegions);
+            errors.AddRange(AnalysisUtils.GetMPDContentComparisonErrors(mpdFile, newFile, chunkSkipRegions));
+
+            if (errors.Count > 0)
+                Assert.Fail("\r\n=================================================\r\n" + string.Join("\r\n", errors));
         }
 
         private void TestMPDTextures(IMPD_File originalFile, MPD_CollectionType collection) {

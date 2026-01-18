@@ -1,5 +1,5 @@
-﻿using SF3.Types;
-using static SF3.Tests.Utils.DataUtils;
+﻿using SF3.Analysis;
+using SF3.Types;
 using static SF3.Tests.Utils.MPD_TestUtils;
 
 namespace SF3.Tests.MPD {

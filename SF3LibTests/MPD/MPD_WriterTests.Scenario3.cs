@@ -1,5 +1,5 @@
-﻿using SF3.Types;
-using static SF3.Tests.Utils.DataUtils;
+﻿using SF3.Analysis;
+using SF3.Types;
 
 namespace SF3.Tests.MPD {
     public partial class MPD_WriterTests {
@@ -18,5 +18,29 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario3_AHIRU2_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "AHIRU2", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_BLACK3_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "BLACK3", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_BTL95_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "BTL95", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_BEER_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "BEER", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_FEDEND_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "FEDEND", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_IWAOKA_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "IWAOKA", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_HNSNOP_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "HNSNOP", performByteComparison: false);
     }
 }
