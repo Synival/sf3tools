@@ -21,7 +21,7 @@ namespace SF3.MPD {
             if (primaryMc != null && mpd.Flags.ModelChunkIndex == 1)
                 WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
             else if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
-                WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: false);
+                WriteModelChunk(extraMc.Models, extraMc.ModelInstances, null, isHighMemory: false);
             else
                 WriteEmptyChunk();
 
