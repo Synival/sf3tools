@@ -70,7 +70,7 @@ namespace MPD_Analyzer {
             var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 #endif
 
-            return MatchFuncs.DoubleSerializeIsIdentical(mpdFile);
+            return MatchFuncs.SerializeIsIdentical(mpdFile);
         }
 
         public static void Main(string[] args) {
@@ -187,6 +187,11 @@ namespace MPD_Analyzer {
                     }
                 });
             }
+
+            // Sort sets, which are in a somewhat random order.
+            string MatchSorter(string str) => (str.StartsWith("Premium") ? "Z" : "") + str.Replace(" ", "");
+            matchSet   = matchSet  .OrderBy(MatchSorter).ToList();
+            nomatchSet = nomatchSet.OrderBy(MatchSorter).ToList();
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 

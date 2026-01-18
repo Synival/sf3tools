@@ -470,16 +470,28 @@ namespace MPD_Analyzer {
             return errors.ToArray();
         }
 
+        public static string[]? SerializeIsIdentical(MPD_File mpdFile) {
+            var bytes1 = mpdFile.Data.GetDataCopyOrReference();
+
+            byte[] bytes2;
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                writer.WriteMPD(mpdFile);
+                bytes2 = stream.ToArray();
+            }
+
+            return AnalysisUtils.GetByteComparisonErrors(bytes1, bytes2);
+        }
+
         public static string[]? DoubleSerializeIsIdentical(MPD_File mpdFile) {
             byte[] bytes1;
-            byte[] bytes2;
-
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, mpdFile.Scenario);
                 writer.WriteMPD(mpdFile);
                 bytes1 = stream.ToArray();
             }
 
+            byte[] bytes2;
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, mpdFile.Scenario);
                 var mpd = MPD_File.Create(new ByteData(new ByteArray(bytes1)), mpdFile.NameGetterContext, mpdFile.Scenario);
