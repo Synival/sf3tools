@@ -7,15 +7,15 @@ using SF3.Types;
 
 namespace SF3.Utils {
     public static class AnalysisUtils {
-        public static string[] GetByteComparisonErrors(MPD_File file, byte[] outputData, ByteComparisonSkipRegion[] skipRegions = null, float acceptablePercentage = 100.0f) {
-            skipRegions = GetKnownAcceptableInconsistenciesForMPD_File(file)
+        public static string[] GetByteComparisonErrors(MPD_File expectedMpd, byte[] actualMpdData, ByteComparisonSkipRegion[] skipRegions = null, float acceptablePercentage = 100.0f) {
+            skipRegions = GetKnownAcceptableInconsistenciesForMPD_File(expectedMpd)
                 .Concat(skipRegions ?? new ByteComparisonSkipRegion[0])
                 .OrderBy(x => x.Offset)
                 .GroupBy(x => x.Offset)
                 .Select(x => x.First())
                 .ToArray();
 
-            return GetByteComparisonErrors(file.Data.GetDataCopyOrReference(), outputData, skipRegions, acceptablePercentage);
+            return GetByteComparisonErrors(expectedMpd.Data.GetDataCopyOrReference(), actualMpdData, skipRegions, acceptablePercentage);
         }
 
         /// <summary>
