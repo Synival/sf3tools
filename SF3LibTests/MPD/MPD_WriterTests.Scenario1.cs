@@ -115,6 +115,10 @@ namespace SF3.Tests.MPD {
         public void WriteMPD_WithScenario1_MGMA01_ProducesSameData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MGMA01", performByteComparison: false);
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_JOUSAI_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "JOUSAI", performByteComparison: false, null);
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {

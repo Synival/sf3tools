@@ -1,6 +1,9 @@
 ﻿using SF3.Types;
 
 namespace SF3.MPD {
+    /// <summary>
+    /// Interface for an instance of an IMPD_Model.
+    /// </summary>
     public interface IMPD_ModelInstance {
         MPD_CollectionType Collection { get; }
         int ID { get; }
@@ -18,5 +21,10 @@ namespace SF3.MPD {
         ushort Flags { get; set; }
         bool AlwaysFacesCamera { get; set; }
         ModelDirectionType OnlyVisibleFromDirection { get; set; }
+
+        /// <summary>
+        /// Number of levels of detail. 99.9% of the time, this is 8. Mostly under-utilized.
+        /// </summary>
+        int LevelsOfDetail { get; set; }
     }
 }

@@ -26,5 +26,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => ModelDirectionType.Unset;
             set {}
         }
+
+        public override int LevelsOfDetail { get => 1; set {} }
     }
 }

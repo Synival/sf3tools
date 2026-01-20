@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Types;
@@ -156,6 +157,11 @@ namespace SF3.Models.Structs.MPD.Model {
         public override ModelDirectionType OnlyVisibleFromDirection {
             get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
             set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));
+        }
+
+        public override int LevelsOfDetail {
+            get => PDatas.FirstOrDefault(x => x.Value == 0)?.Index ?? 8;
+            set {}
         }
     }
 }

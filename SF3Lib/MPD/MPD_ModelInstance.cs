@@ -47,5 +47,7 @@ namespace SF3.MPD {
             get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
             set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));
         }
+
+        public int LevelsOfDetail { get; set; }
     }
 }

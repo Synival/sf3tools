@@ -21,16 +21,16 @@ namespace SF3.Models.Structs.MPD.Model {
         : base(data, id, name, address, size) {
             Collection = collection;
 
-            _pdata0Address = Address + 0x00; // 4 bytes
-            _positionXAddress   = Address + positionXOffset + 0x00; // 2 bytes
-            _positionYAddress   = Address + positionXOffset + 0x02; // 2 bytes
-            _positionZAddress   = Address + positionXOffset + 0x04; // 2 bytes
-            _angleXAddress      = Address + positionXOffset + 0x06; // 2 bytes
-            _angleYAddress      = Address + positionXOffset + 0x08; // 2 bytes
-            _angleZAddress      = Address + positionXOffset + 0x0A; // 2 bytes
-            _scaleXAddress      = Address + positionXOffset + 0x0C; // 4 bytes
-            _scaleYAddress      = Address + positionXOffset + 0x10; // 4 bytes
-            _scaleZAddress      = Address + positionXOffset + 0x14; // 4 bytes
+            _pdata0Address    = Address + 0x00;                   // 4 bytes
+            _positionXAddress = Address + positionXOffset + 0x00; // 2 bytes
+            _positionYAddress = Address + positionXOffset + 0x02; // 2 bytes
+            _positionZAddress = Address + positionXOffset + 0x04; // 2 bytes
+            _angleXAddress    = Address + positionXOffset + 0x06; // 2 bytes
+            _angleYAddress    = Address + positionXOffset + 0x08; // 2 bytes
+            _angleZAddress    = Address + positionXOffset + 0x0A; // 2 bytes
+            _scaleXAddress    = Address + positionXOffset + 0x0C; // 4 bytes
+            _scaleYAddress    = Address + positionXOffset + 0x10; // 4 bytes
+            _scaleZAddress    = Address + positionXOffset + 0x14; // 4 bytes
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: -0.5f, minWidth: 120)]
@@ -113,5 +113,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public abstract ushort Flags { get; set; }
         public abstract bool AlwaysFacesCamera { get; set; }
         public abstract ModelDirectionType OnlyVisibleFromDirection { get; set; }
+
+        public abstract int LevelsOfDetail { get; set; }
     }
 }

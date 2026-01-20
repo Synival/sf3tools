@@ -24,7 +24,7 @@ namespace SF3.MPD {
             // Last part of the header: the number of model instances.
             WriteUShort((ushort) (instances?.Count() ?? 0));
 
-            var pdataIdToOffsetPtrMap = new Dictionary<int, List<long>>();
+            var pdataIdToOffsetPtrMap = new Dictionary<int, List<List<long>>>();
 
             // Model instances immediately follow the header.
             if (instances != null)
@@ -44,13 +44,19 @@ namespace SF3.MPD {
             WriteCollisionBlocks(linesWritten, fileChunkAddr, ramChunkAddr);
         }
 
-        public void WriteModelChunkInstance(IMPD_ModelInstance instance, Dictionary<int, List<long>> pdataIdToOffsetPtrMap) {
+        public void WriteModelChunkInstance(IMPD_ModelInstance instance, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {            var modelId = instance.ModelID;
+            if (!pdataIdToOffsetPtrMap.ContainsKey(modelId))
+                pdataIdToOffsetPtrMap.Add(modelId, new List<List<long>>());
+            var offsetPtrMap = pdataIdToOffsetPtrMap[modelId];
+
             // Placeholder pointers to be populated later.
+            var levelsOfDetail = instance.LevelsOfDetail;
             for (int i = 0; i < 8; i++) {
-                int pdataId = instance.ModelID + i;
-                if (!pdataIdToOffsetPtrMap.ContainsKey(pdataId))
-                    pdataIdToOffsetPtrMap.Add(pdataId, new List<long>());
-                pdataIdToOffsetPtrMap[pdataId].Add(CurrentOffset);
+                if (i < levelsOfDetail) {
+                    while (offsetPtrMap.Count <= i)
+                        offsetPtrMap.Add(new List<long>());
+                    offsetPtrMap[i].Add(CurrentOffset);
+                }
                 WriteMPDPointer(null);
             }
 
@@ -70,32 +76,39 @@ namespace SF3.MPD {
             WriteUShort(instance.Flags);
         }
 
-        public void WriteModelChunkModel(ISGL_Model model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<long>> pdataIdToOffsetPtrMap) {
-            const int c_pdataCount = 8;
+        public void WriteModelChunkModel(ISGL_Model model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {
+            // Don't write models that don't have instances.
+            // (This matches SF3's own MPD files)
+            var offsetPtrMap = pdataIdToOffsetPtrMap.TryGetValue(model.ID, out var offsetPtrMapVal) ? offsetPtrMapVal : null;
+            if (offsetPtrMap == null || offsetPtrMap.Count == 0)
+                return;
 
             // Track where the pointers to the various tables will be.
-            var pointsPtrs   = new long[c_pdataCount];
-            var polygonsPtrs = new long[c_pdataCount];
-            var attrsPtrs    = new long[c_pdataCount];
+            var pdataCount   = offsetPtrMap.Count;
+            var pointsPtrs   = new long[pdataCount];
+            var polygonsPtrs = new long[pdataCount];
+            var attrsPtrs    = new long[pdataCount];
 
             // Write PDATAs.
             uint addr;
-            for (int i = 0; i < c_pdataCount; i++) {
-                var pdataId = model.ID + i;
-                if (pdataIdToOffsetPtrMap.TryGetValue(pdataId, out var ptrs)) {
+            for (int i = 0; i < 8; i++) {
+                if (i < offsetPtrMap.Count) {
+                    var ptrs = offsetPtrMap[i];
                     addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
                     AtOffsets(ptrs.ToArray(), _ => WriteUInt(addr));
-                }
 
-                // Write placeholders for the tables to write and their counts.
-                pointsPtrs[i] = CurrentOffset;
-                WriteMPDPointer(null);
-                WriteInt(model.Vertices.Length);
-                polygonsPtrs[i] = CurrentOffset;
-                WriteMPDPointer(null);
-                WriteInt(model.Faces.Length);
-                attrsPtrs[i] = CurrentOffset;
-                WriteMPDPointer(null);
+                    // Write placeholders for the tables to write and their counts.
+                    pointsPtrs[i] = CurrentOffset;
+                    WriteMPDPointer(null);
+                    WriteInt(model.Vertices.Length);
+                    polygonsPtrs[i] = CurrentOffset;
+                    WriteMPDPointer(null);
+                    WriteInt(model.Faces.Length);
+                    attrsPtrs[i] = CurrentOffset;
+                    WriteMPDPointer(null);
+                }
+                else
+                    WriteBytes(new byte[0x14]);
             }
 
             addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
@@ -106,7 +119,7 @@ namespace SF3.MPD {
             AtOffsets(polygonsPtrs, _ => WriteUInt(addr));
             WritePOLYGONs(model);
 
-            for (var i = 0; i < c_pdataCount; i++) {
+            for (var i = 0; i < pdataCount; i++) {
                 addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
                 AtOffset(attrsPtrs[i], _ => WriteUInt(addr));
                 WriteATTRs(model, i);
