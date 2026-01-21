@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 using SF3.Analysis;
 using SF3.Models.Files.MPD;
 using SF3.Types;
@@ -234,10 +235,14 @@ namespace SF3.Utils {
                     // Find textures that are contained in 'actualTextures' but not 'expectedTextures' and vice-versa.
                     var extraTextures   = new List<TextureDataWithIndex>();
                     var missingTextures = new List<TextureDataWithIndex>(expectedTextures);
-                    foreach (var actualTexture in actualTextures) {
-                        var matchingTexture = missingTextures.FirstOrDefault(x => Enumerable.SequenceEqual(actualTexture.Data, x.Data));
-                        if (matchingTexture != null)
-                            missingTextures.Remove(matchingTexture);
+                    var uniqueActualTextures = actualTextures.GroupBy(x => x.Data.CreateTextureHash()).Select(x => x.First()).ToArray();
+
+                    foreach (var actualTexture in uniqueActualTextures) {
+                        var matchingTexturesFound = missingTextures.Where(x => Enumerable.SequenceEqual(actualTexture.Data, x.Data)).ToArray();
+                        if (matchingTexturesFound.Length > 0) {
+                            foreach (var tex in matchingTexturesFound)
+                                missingTextures.Remove(tex);
+                        }
                         else
                             extraTextures.Add(actualTexture);
                     }
