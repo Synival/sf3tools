@@ -60,7 +60,10 @@ namespace SF3.MPD {
 
             var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
-            var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.AreIgnoredTexturesDummiedOut);
+
+            var ignoredTexturesPos = mpd.BinaryReproductionFlags.EmptyUnterminatedIgnoredTexturesTable
+                ? (uint) CurrentOffset
+                : WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.AreIgnoredTexturesDummiedOut);
 
             uint? groundPalettePos   = null;
             uint? skyPalettePos      = null;

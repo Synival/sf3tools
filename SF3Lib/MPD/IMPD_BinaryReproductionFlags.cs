@@ -24,5 +24,11 @@
         /// When set, the texture palette occupies the same space as the sky palette.
         /// </summary>
         bool TexturePaletteSharesSkyPalette { get; set; }
+
+        /// <summary>
+        /// When set, the "ignore texture" table is 0 bytes and the terminator is missing, so it's at the same address as the ground palette.
+        /// This happens only in BAKA2.MPD.
+        /// </summary>
+        bool EmptyUnterminatedIgnoredTexturesTable { get; set; }
     }
 }

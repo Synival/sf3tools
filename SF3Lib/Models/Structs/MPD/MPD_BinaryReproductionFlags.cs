@@ -34,5 +34,10 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.MPDHeader.OffsetTexturePalette == MPD_File.MPDHeader.OffsetSkyPalette;
             set {}
         }
+
+        public bool EmptyUnterminatedIgnoredTexturesTable {
+            get => MPD_File.MPDHeader.OffsetIgnoredTextures == MPD_File.MPDHeader.OffsetGroundPalette;
+            set {}
+        }
     }
 }
