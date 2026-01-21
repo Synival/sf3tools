@@ -116,7 +116,7 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 5)]
-        public bool IsIgnored => MPD_File.IgnoredTextureTable?.ContainsTextureID(TextureID) ?? false;
+        public bool IsIgnored => MPD_File.IgnoredTextureTable?.ContainsTextureID(TextureID) == true;
 
         [BulkCopyRecurse]
         public AnimationFrameTable AnimationFrameTable { get; } = null;

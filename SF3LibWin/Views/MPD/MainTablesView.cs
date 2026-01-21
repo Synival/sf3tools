@@ -76,8 +76,10 @@ namespace SF3.Win.Views.MPD {
             if (Model.IndexedTextureTable != null)
                 CreateChild(new IndexedTextureTableView("Indexed Textures",  Model.IndexedTextureTable, ngc, Model.ModelCollections[MPD_CollectionType.Primary]));
 
-            if (Model.IgnoredTextureTable != null)
-                CreateChild(new IgnoredTextureTableView("Ignored Textures", Model.IgnoredTextureTable, ngc, Model.ModelCollections[MPD_CollectionType.Primary]));
+            if (Model.IgnoredTextureTable != null) {
+                var name = "Ignored Textures" + (Model.IgnoredTextureTable.IsDummiedOut ? " (Dummied Out)" : "");
+                CreateChild(new IgnoredTextureTableView(name, Model.IgnoredTextureTable, ngc, Model.ModelCollections[MPD_CollectionType.Primary]));
+            }
 
             if (Model.BoundariesTable != null)
                 CreateChild(new TableView("Boundaries", Model.BoundariesTable, ngc));

@@ -144,7 +144,9 @@ namespace SF3.Models.Files.MPD {
 
             if (header.OffsetIgnoredTextures != 0) {
                 try {
-                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetIgnoredTextures - RamAddress, 2, 0x100));
+                    var groundPaletteOffset = header.OffsetGroundPalette;
+                    var readUntil = (groundPaletteOffset != 0) ? (int?) groundPaletteOffset - 0x290000 : null;
+                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetIgnoredTextures - RamAddress, 2, readUntil: readUntil, maxSize: 0x100));
                 }
                 catch {
                     // TODO: what to do here??

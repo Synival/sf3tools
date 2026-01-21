@@ -52,7 +52,7 @@ namespace SF3.MPD {
                 // Always set, whether it exists or not. It's structured like a table for some reason.
                 unknown2OrGradientPos = (uint) CurrentOffset;
                 if (mpd.Gradient != null)
-                    WriteGradient(mpd.Gradient);
+                    WriteGradient(mpd.Gradient, mpd.Settings);
                 WriteUShort(0xFFFF);
             }
 
@@ -60,7 +60,7 @@ namespace SF3.MPD {
 
             var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
-            var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.BinaryReproductionFlags.LongEmptyIgnoredTextureTable);
+            var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.AreIgnoredTexturesDummiedOut);
 
             uint? groundPalettePos   = null;
             uint? skyPalettePos      = null;
@@ -384,8 +384,8 @@ namespace SF3.MPD {
             return pos;
         }
 
-        public void WriteGradient(IMPD_Gradient gradient) {
-            if (gradient.IsDummiedOut)
+        public void WriteGradient(IMPD_Gradient gradient, IMPD_Settings settings) {
+            if (settings.IsGradientDummiedOut)
                 WriteUShort(0xFFFF);
 
             WriteUShort((ushort) Math.Round(gradient.TopPosition * 255.00f));
@@ -412,19 +412,16 @@ namespace SF3.MPD {
             WriteUShort((ushort) Math.Round(gradient.ModelsAndSurfaceIntensity * 0x1F));
         }
 
-        public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool writeLongEmptyData)
-            => WriteObjectOrNull(() => textureIds != null, () => WriteIgnoredTexturesTable(textureIds, writeLongEmptyData));
+        public uint? WriteIgnoredTexturesTableOrNull(ushort[] textureIds, bool isDummiedOut)
+            => WriteObjectOrNull(() => textureIds != null, () => WriteIgnoredTexturesTable(textureIds, isDummiedOut));
 
-        public void WriteIgnoredTexturesTable(ushort[] textureIds, bool writeLongEmptyData) {
+        public void WriteIgnoredTexturesTable(ushort[] textureIds, bool isDummiedOut) {
+            if (isDummiedOut)
+                WriteUShort(0xFFFF);
+
             foreach (var textureId in textureIds.OrderBy(x => x).ToArray())
                 WriteUShort(textureId);
-
-            if (writeLongEmptyData && textureIds.Length == 0) {
-                WriteUShort(0xFFFF);
-                WriteUShort(0xFFFF);
-            }
-            else
-                WriteUShort(0xFFFF);
+            WriteUShort(0xFFFF);
         }
 
         public uint? WriteIndexedTexturesTableOrNull(ushort[] textureIds)

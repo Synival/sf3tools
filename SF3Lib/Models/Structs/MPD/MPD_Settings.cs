@@ -134,5 +134,15 @@ namespace SF3.Models.Structs.MPD {
                     MPD_File.PaletteAdjustment.ShadowTransparency = value;
             }
         }
+
+        public bool IsGradientDummiedOut {
+            get => (MPD_File.GradientTable?.Length == 1) && MPD_File.GradientTable[0].IsDummiedOut;
+            set {}
+        }
+
+        public bool AreIgnoredTexturesDummiedOut {
+            get => MPD_File.IgnoredTextureTable?.IsDummiedOut == true;
+            set {}
+        }
     }
 }

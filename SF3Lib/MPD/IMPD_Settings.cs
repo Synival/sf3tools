@@ -94,5 +94,15 @@ namespace SF3.MPD {
         /// Only supported in Scenario 3+. If unsupported, this is locked at 0x0F.
         /// </summary>
         byte ShadowTransparency { get; set; }
+
+        /// <summary>
+        /// When set, the gradient exists, but is serialized with 'FFFF' before it and unused.
+        /// </summary>
+        bool IsGradientDummiedOut { get; set; }
+
+        /// <summary>
+        /// When set, the table with ignored textures exists, but is serialized with 'FFFF' before it and unused.
+        /// </summary>
+        bool AreIgnoredTexturesDummiedOut { get; set; }
     }
 }

@@ -45,8 +45,9 @@ namespace SF3.Win.OpenGL.MPD {
             Reset();
 
             var hasModel = mpdFile.Surface.HasModel;
+            var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
             var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures
-                .Where(x => !x.IsIgnored)
+                .Where(x => !hasIgnored || !x.IsIgnored)
                 .GroupBy(x => x.ID)
                 .Select(x => x.First())
                 .ToDictionary(x => x.ID, x => x);

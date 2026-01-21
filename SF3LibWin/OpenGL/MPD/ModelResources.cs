@@ -42,8 +42,9 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         private Dictionary<int, IMPD_AnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
+            var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
             return modelCollection.Textures
-                .Where(x => !x.IsIgnored)
+                .Where(x => !hasIgnored || !x.IsIgnored)
                 .ToDictionary(x => x.ID, x => x);
         }
 

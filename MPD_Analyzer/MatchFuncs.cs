@@ -506,5 +506,8 @@ namespace MPD_Analyzer {
                 .Select(x => $"0x{x.ID:X3} (ModelID=0x{x.ModelID:X03})")
                 .ToArray();
         }
+
+        public static string[]? HasDummiedOutIgnoredTexturesTable(MPD_File mpdFile)
+            => mpdFile.IgnoredTextureTable?.IsDummiedOut == true ? ["Yes"] : [];
     }
 }

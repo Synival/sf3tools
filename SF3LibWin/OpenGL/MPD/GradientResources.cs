@@ -23,10 +23,10 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public void Update(IMPD mpdFile)
-            => Update(mpdFile?.Gradient);
+            => Update(mpdFile?.Gradient, mpdFile?.Settings);
 
-        public void Update(IMPD_Gradient gradient) {
-            if (gradient == null || gradient.IsDummiedOut) {
+        public void Update(IMPD_Gradient gradient, IMPD_Settings settings) {
+            if (gradient == null || settings.IsGradientDummiedOut) {
                 Reset();
                 return;
             }

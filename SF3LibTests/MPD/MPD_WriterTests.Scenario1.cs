@@ -131,6 +131,10 @@ namespace SF3.Tests.MPD {
         public void WriteMPD_WithScenario1_SARA04_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "SARA04", performByteComparison: false);
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_FED06_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "FED06", performByteComparison: false);
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
