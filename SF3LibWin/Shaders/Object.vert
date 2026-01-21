@@ -19,10 +19,12 @@ layout (location = 5) in vec2 texCoordTerrainTypes;
 layout (location = 6) in vec2 texCoordEventIDs;
 
 layout (location = 7) in float applyLighting;
+layout (location = 8) in float mesh;
 
 out vec4 colorFrag;
 out vec3 glowFrag;
 out vec4 lightColorFrag;
+out float meshFrag;
 
 out vec2 texCoordAtlasFrag;
 out vec2 texCoordTerrainTypesFrag;
@@ -32,6 +34,7 @@ void main() {
     gl_Position   = projection * view * model * vec4(position, 1.0);
     colorFrag     = color;
     glowFrag      = glow;
+    meshFrag      = mesh;
 
     // Modify the normal based on the normal matrix.
     // Preserve the length of the normal for in-game accuracy.

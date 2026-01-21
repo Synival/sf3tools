@@ -195,10 +195,6 @@ namespace SF3.Win.OpenGL.MPD {
                     else if (forceSemiTransparent)
                         transparency *= 1.0f - (mpdFile.BinaryReproductionFlags.PaletteAdjustmentIsTruncated ? 0x0F : mpdFile.Settings.ShadowTransparency / (float) 0x1F);
 
-                    // TODO: Would be cool if the shader somehow did the MESH effect!
-                    if (attr.Mode_MESHon)
-                        transparency *= 0.5f;
-
                     if (!useTexture) {
                         var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
                         color = new Vector4(colorChannels.R / 255.0f, colorChannels.G / 255.0f, colorChannels.B / 255.0f, 1.0f);
@@ -252,6 +248,9 @@ namespace SF3.Win.OpenGL.MPD {
                 var applyLighting = (attr.UseLight || anim == null) && !useGouraud ? 1.0f : 0.0f;
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
+                var mesh = attr.Mode_MESHon ? 1.00f : 0.00f;
+                var meshVboData = new float[,] {{mesh}, {mesh}, {mesh}, {mesh}};
+
                 void AddQuad() {
                     var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
 
@@ -260,6 +259,8 @@ namespace SF3.Win.OpenGL.MPD {
                     else {
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "normal", 4, normalVboData));
                         newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "applyLighting", 4, applyLightingVboData));
+                        newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "mesh", 4, meshVboData));
+
                         if (isSemiTransparent) {
                             if (anim != null)
                                 semiTransparentTexturedQuads.Add(newQuad);
