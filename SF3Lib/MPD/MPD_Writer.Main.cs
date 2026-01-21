@@ -92,10 +92,12 @@ namespace SF3.MPD {
                 indexedTexturesPos = WriteIndexedTexturesTableOrNull(indexedTextureIds);
             }
 
+            var afterDataPos = (uint) CurrentOffset;
             WriteToAlignTo(4);
             var headerPos = CurrentOffset;
             WriteHeader(
                 mpd,
+                afterDataPos,
                 lightPalettePos,
                 lightPositionPos,
                 unknown1OrPaletteAdjustPos,
@@ -140,6 +142,7 @@ namespace SF3.MPD {
 
         public void WriteHeader(
             IMPD mpd,
+            uint afterDataPos,
             uint? lightPalettePos,
             uint? lightPositionPos,
             uint? unknown1OrPaletteAdjustPos,
@@ -160,6 +163,7 @@ namespace SF3.MPD {
             var settings = mpd.Settings;
             var planes   = mpd.Planes;
 
+            WriteToAlignTo(2);
             var headerAddr = (uint) CurrentOffset;
 
             WriteUShort(mpd.GetHeaderFlags(Scenario));
@@ -184,8 +188,8 @@ namespace SF3.MPD {
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
             WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WriteMPDPointer(ignoredTexturesPos);
-            WriteMPDPointer(groundPalettePos ?? headerAddr);
-            WriteMPDPointer(skyPalettePos ?? (groundPalettePos.HasValue ? groundPalettePos.Value + 0x200 : headerAddr));
+            WriteMPDPointer(groundPalettePos ?? afterDataPos);
+            WriteMPDPointer(skyPalettePos ?? (groundPalettePos.HasValue ? groundPalettePos.Value + 0x200 : afterDataPos));
 
             // Scenario 3+ has extra tables.
             if (Scenario >= ScenarioType.Scenario3) {

@@ -70,7 +70,7 @@ namespace MPD_Analyzer {
             var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 #endif
 
-            return MatchFuncs.HasDummiedOutIgnoredTexturesTable(mpdFile);
+            return MatchFuncs.SerializedContentIsIdentical(mpdFile);
         }
 
         public static void Main(string[] args) {
