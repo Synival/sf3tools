@@ -23,6 +23,11 @@ namespace SF3.MPD {
         IMPD_Settings Settings { get; }
 
         /// <summary>
+        /// Settings that don't affect gameplay but are necessary for byte-for-byte reproduction of MPD files.
+        /// </summary>
+        IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; }
+
+        /// <summary>
         /// The "Surface" which contains the grid. Used for actor heights, battle grid data, and event IDs.
         /// </summary>
         IMPD_Surface Surface { get; }

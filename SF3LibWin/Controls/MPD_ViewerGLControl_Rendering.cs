@@ -229,7 +229,7 @@ namespace SF3.Win.Controls {
                 }
             }
 
-            var truncatedPaletteAdjustments = MPD_File?.Settings?.PaletteAdjustmentIsTruncated == true;
+            var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
 
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,

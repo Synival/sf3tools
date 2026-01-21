@@ -51,6 +51,7 @@ namespace SF3.Models.Files.MPD {
             MPDHeader = new MPD_Header(Data, 0, nameof(MPDHeader), headerAddr, Scenario);
             Flags     = new MPD_FlagsFromHeader(MPDHeader);
             Settings  = new MPD_Settings(this);
+            BinaryReproductionFlags = new MPD_BinaryReproductionFlags(this);
             return MPDHeader;
         }
 

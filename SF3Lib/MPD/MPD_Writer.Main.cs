@@ -30,7 +30,7 @@ namespace SF3.MPD {
             if (Scenario < ScenarioType.Scenario2)
                 unknown1OrPaletteAdjustPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1);
             else
-                unknown1OrPaletteAdjustPos = WritePaletteAdjustmentOrNull(mpd.Settings);
+                unknown1OrPaletteAdjustPos = WritePaletteAdjustmentOrNull(mpd.Settings, mpd.BinaryReproductionFlags);
             WriteToAlignTo(2);
 
             // Some Scenario 2 maps have some junk after the "palette adjustment" struct.
@@ -39,7 +39,7 @@ namespace SF3.MPD {
 
             var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
 
-            var animationsPos = WriteAnimations(animations, mpd.Settings.ShortEmptyAnimationTable, out chunk3Data,
+            var animationsPos = WriteAnimations(animations, mpd.BinaryReproductionFlags.ShortEmptyAnimationTable, out chunk3Data,
                 is32Bit: Scenario >= ScenarioType.Scenario3,
                 allowIndexed: Scenario >= ScenarioType.Scenario3
             );
@@ -60,7 +60,7 @@ namespace SF3.MPD {
 
             var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
             var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
-            var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.Settings.LongEmptyIgnoredTextureTable);
+            var ignoredTexturesPos   = WriteIgnoredTexturesTableOrNull(ignoredTextureIds, mpd.BinaryReproductionFlags.LongEmptyIgnoredTextureTable);
 
             uint? groundPalettePos   = null;
             uint? skyPalettePos      = null;
@@ -71,7 +71,7 @@ namespace SF3.MPD {
             if (Scenario < ScenarioType.Scenario3) {
                 groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
 
-                skyPalettePos = mpd.Settings.SkyPaletteSharesGroundPalette
+                skyPalettePos = mpd.BinaryReproductionFlags.SkyPaletteSharesGroundPalette
                     ? groundPalettePos
                     : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1 ? mpd.Planes.SkyPalette : null);
             }
@@ -80,11 +80,11 @@ namespace SF3.MPD {
             else {
                 groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null) ?? (uint) CurrentOffset;
 
-                skyPalettePos = mpd.Settings.SkyPaletteSharesGroundPalette
+                skyPalettePos = mpd.BinaryReproductionFlags.SkyPaletteSharesGroundPalette
                     ? groundPalettePos
                     : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1 ? mpd.Planes.SkyPalette : null) ?? groundPalettePos;
 
-                texturePalettePos = mpd.Settings.TexturePaletteSharesSkyPalette
+                texturePalettePos = mpd.BinaryReproductionFlags.TexturePaletteSharesSkyPalette
                     ? skyPalettePos
                     : WritePaletteOrNull(mpd.TexturePalette?.Channels?.Length >= 1 ? mpd.TexturePalette : null) ?? skyPalettePos;
 
@@ -238,15 +238,15 @@ namespace SF3.MPD {
                 WriteUShort(value);
         }
 
-        public uint? WritePaletteAdjustmentOrNull(IMPD_Settings settings)
-            => WriteObjectOrNull(() => settings.LightPaletteAdjustment != null, () => WritePaletteAdjustment(settings));
+        public uint? WritePaletteAdjustmentOrNull(IMPD_Settings settings, IMPD_BinaryReproductionFlags binaryFlags)
+            => WriteObjectOrNull(() => settings.LightPaletteAdjustment != null, () => WritePaletteAdjustment(settings, binaryFlags));
 
-        public void WritePaletteAdjustment(IMPD_Settings settings) {
+        public void WritePaletteAdjustment(IMPD_Settings settings, IMPD_BinaryReproductionFlags binaryFlags) {
             WriteShort(settings.LightPaletteAdjustment?.R ?? 0);
             WriteShort(settings.LightPaletteAdjustment?.G ?? 0);
             WriteShort(settings.LightPaletteAdjustment?.B ?? 0);
 
-            if (Scenario >= ScenarioType.Scenario3 && !settings.PaletteAdjustmentIsTruncated) {
+            if (Scenario >= ScenarioType.Scenario3 && !binaryFlags.PaletteAdjustmentIsTruncated) {
                 WriteShort(settings.GroundPaletteAdjustment?.R ?? 0);
                 WriteShort(settings.GroundPaletteAdjustment?.G ?? 0);
                 WriteShort(settings.GroundPaletteAdjustment?.B ?? 0);
