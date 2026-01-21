@@ -46,17 +46,17 @@ namespace SF3.MPD {
             // Chunk[6, 7, 8, 9, 10] are all textures.
             IEnumerable<IMPD_AnimatableTexture> GetTexturesForCollection(MPD_CollectionType collection) {
                 if (!mpd.ModelCollections.TryGetValue(collection, out var mc))
-                    return new IMPD_AnimatableTexture[0];
-                return mc.Textures ?? new IMPD_AnimatableTexture[0].ToEnumerableWithLength();
+                    return null;
+                return mc.Textures;
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0, allowIndexed: allowIndexedTextures);
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0, allowIndexed: false);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0, allowIndexed: allowIndexedTextures, alwaysWriteIfNull: true);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0, allowIndexed: false,                alwaysWriteIfNull: true);
             }
             else
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 5, startID: 0, allowIndexed: allowIndexedTextures);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 5, startID: 0, allowIndexed: allowIndexedTextures, alwaysWriteIfNull: true);
 
             // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
             // (it's so silly that it works this way, lol)

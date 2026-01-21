@@ -119,6 +119,18 @@ namespace SF3.Tests.MPD {
         public void WriteMPD_WithScenario1_JOUSAI_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "JOUSAI", performByteComparison: false, null);
 
+        [TestMethod]
+        public void WriteMPD_WithScenario1_YAKA3_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "YAKA3", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_SARA03_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "SARA03", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario1_SARA04_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "SARA04", performByteComparison: false);
+
         [Ignore("Works great but takes too long!")]
         [TestMethod]
         public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {

@@ -8,6 +8,9 @@ using SF3.Imaging;
 namespace SF3.MPD {
     public partial class MPD_Writer {
         public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID, bool allowIndexed) {
+            if (textures == null)
+                textures = new IMPD_Texture[0];
+
             var sortedTextures = textures
                 .OrderBy(x => x.ID)
                 .ToArray();
@@ -19,6 +22,12 @@ namespace SF3.MPD {
         }
 
         public void WriteTextureChunk(IEnumerable<ITextureData> sortedTextures, int startID, out int textureCount, bool allowIndexed) {
+            if (sortedTextures == null) {
+                WriteEmptyChunk();
+                textureCount = 0;
+                return;
+            }
+
             int textureCountBigDumbLocal = 0;
             WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal, allowIndexed));
             textureCount = textureCountBigDumbLocal;

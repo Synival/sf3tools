@@ -20,17 +20,23 @@ namespace SF3.Models.Files.MPD {
 
         public IMPD_Model GetModel(int id) => null;
 
+        private bool _gotTextures = false;
         private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;
         public IEnumerableWithLength<IMPD_AnimatableTexture> Textures {
             get {
-                if (_textures == null) {
-                    _textures = MPD_File.TextureChunks
+                if (!_gotTextures) {
+                    var textureChunks = MPD_File.TextureChunks
                         .Where(x => x.Collection == Collection)
-                        .Select(x => x.TextureTable)
-                        .SelectMany(x => x)
-                        .Cast<IMPD_AnimatableTexture>()
-                        .ToArray()
-                        .ToEnumerableWithLength();
+                        .ToArray();
+
+                    if (textureChunks.Length > 0) {
+                        _textures = textureChunks
+                            .SelectMany(x => x.TextureTable.Rows)
+                            .Cast<IMPD_AnimatableTexture>()
+                            .ToArray()
+                            .ToEnumerableWithLength();
+                    }
+                    _gotTextures = true;
                 }
                 return _textures;
             }
