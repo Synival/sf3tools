@@ -26,6 +26,7 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _modelsViewAngleMinAddr;      // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
         private readonly int _padding3Addr;                // int16  Always zero
+        private readonly int _offsetUnknown3Addr;          // int16  Pointer to unknown data it prototype MPDs.
         private readonly int _offsetIgnoredTexturesAddr;   // int32  Pointer to a list of texture indices. The textures here are skipped when loading the texture chunk.
         private readonly int _offsetGroundPaletteAddr;     // int32  Pointer to 256 rgb16 colors. May be null.
         private readonly int _offsetSkyPaletteAddr;        // int32  Pointer to 256 rgb16 colors. May be null.
@@ -98,22 +99,32 @@ namespace SF3.Models.Structs.MPD.Main {
                 addressNext = Address + 0x2C;
             }
 
-            if (Scenario != ScenarioType.Other) {
+            if (Scenario <= ScenarioType.Ship2) {
                 _modelsYRotationAddr       = addressNext + 0x00; // 2 bytes
                 _modelsViewAngleMinAddr    = addressNext + 0x02; // 2 bytes
                 _modelsViewAngleMaxAddr    = addressNext + 0x04; // 2 bytes
                 _padding3Addr              = addressNext + 0x06; // 2 bytes
-                _offsetIgnoredTexturesAddr = addressNext + 0x08; // 4 bytes
+                _offsetIgnoredTexturesAddr = -1;
+                _offsetUnknown3Addr        = addressNext + 0x08; // 4 bytes
                 addressNext += 0x0C;
             }
-            else {
+            else if (Scenario == ScenarioType.Other) {
                 _modelsYRotationAddr       = -1;
                 _modelsViewAngleMinAddr    = -1;
                 _modelsViewAngleMaxAddr    = -1;
                 _padding3Addr              = -1;
                 _offsetIgnoredTexturesAddr = -1;
                 // TODO: missing 4-byte value
-                addressNext += 0x04;
+                _offsetUnknown3Addr        = addressNext + 0x04; // 4 bytes
+                addressNext += 0x08;
+            }
+            else {
+                _modelsYRotationAddr       = addressNext + 0x00; // 2 bytes
+                _modelsViewAngleMinAddr    = addressNext + 0x02; // 2 bytes
+                _modelsViewAngleMaxAddr    = addressNext + 0x04; // 2 bytes
+                _padding3Addr              = addressNext + 0x06; // 2 bytes
+                _offsetIgnoredTexturesAddr = addressNext + 0x08; // 4 bytes
+                addressNext += 0x0C;
             }
 
             _offsetGroundPaletteAddr = addressNext + 0x00; // 4 bytes
@@ -150,6 +161,9 @@ namespace SF3.Models.Structs.MPD.Main {
 
         public ScenarioType Scenario { get; }
 
+        public bool IsShip2 => Scenario == ScenarioType.Ship2;
+        public bool IsOther => Scenario == ScenarioType.Other;
+        public bool IsOtherOrLater => Scenario >= ScenarioType.Other;
         public bool IsScenario1 => Scenario == ScenarioType.Scenario1;
         public bool IsScenario1OrEarlier => Scenario <= ScenarioType.Scenario1;
         public bool IsScenario1OrLater => Scenario >= ScenarioType.Scenario1;
@@ -163,7 +177,9 @@ namespace SF3.Models.Structs.MPD.Main {
         public bool HasGradientTable => IsScenario2OrLater;
         public bool HasMesh3 => IsScenario1OrLater;
         public bool HasModelsInfo => Scenario != ScenarioType.Other;
-        public bool HasTexturePalette => IsScenario3OrLater || Scenario == ScenarioType.Other;
+        public bool HasUnknown3Table => IsShip2 || IsOther;
+        public bool HasTexturePalette => IsScenario3OrLater;
+        public bool HasIgnoredTextures => IsScenario1OrLater;
         public bool HasIndexedTextures => IsScenario3OrLater;
 
         [BulkCopy]
@@ -331,12 +347,22 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetIgnoredTexturesAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        [TableViewModelColumn(addressField: nameof(_offsetIgnoredTexturesAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasIgnoredTextures), displayGroup: "Main")]
         public int OffsetIgnoredTextures {
-            get => HasModelsInfo ? Data.GetDouble(_offsetIgnoredTexturesAddr) : 0;
+            get => HasIgnoredTextures ? Data.GetDouble(_offsetIgnoredTexturesAddr) : 0;
             set {
-                if (HasModelsInfo)
+                if (HasIgnoredTextures)
                     Data.SetDouble(_offsetIgnoredTexturesAddr, value);
+            }
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_offsetUnknown3Addr), displayOrder: 16.5f, isPointer: true, displayName: nameof(OffsetUnknown3) + " (Other)", visibilityProperty: nameof(HasUnknown3Table), displayGroup: "Main")]
+        public int OffsetUnknown3 {
+            get => HasUnknown3Table ? Data.GetDouble(_offsetUnknown3Addr) : 0;
+            set {
+                if (HasUnknown3Table)
+                    Data.SetDouble(_offsetUnknown3Addr, value);
             }
         }
 
