@@ -20,13 +20,13 @@ namespace SF3.Models.Structs.MPD.Main {
         private readonly int _offsetGroundAnimationAddr;   // int32  Pointer to list of KA table for ground model animation.
         private readonly int _offsetChestModelAddr;        // int32  Pointer to list of 3 movable/interactable mesh. may be null.
         private readonly int _offsetLockedChestAddr;       // int32  Pointer to list of 3 movable/interactable mesh. may be null.
-        private readonly int _otherUnknownAddr;            // int32  Unknown value only present in 'Other' MPD files
         private readonly int _offsetBarrelModelAddr;       // int32  Pointer to list of 3 movable/interactable mesh. may be null.
         private readonly int _modelsYRotationAddr;         // ANGLE  mostly 0x8000. The meshes from the models chunk are pre-rotated by this angle.
         private readonly int _modelsViewAngleMinAddr;      // ANGLE  mostly 0xb334. Has something to do with the view angle. more research necessary.
         private readonly int _modelsViewAngleMaxAddr;      // ANGLE  mostly 0x4ccc. Has something to do with the view angle. more research necessary.
         private readonly int _padding3Addr;                // int16  Always zero
-        private readonly int _offsetUnknown3Addr;          // int16  Pointer to unknown data it prototype MPDs.
+        private readonly int _offsetUnknown3Addr;          // int16  Pointer to unknown data in SHIP2.
+        private readonly int _offsetUnknown4Addr;          // int16  Pointer to unknown data in prototype MPDs.
         private readonly int _offsetIgnoredTexturesAddr;   // int32  Pointer to a list of texture indices. The textures here are skipped when loading the texture chunk.
         private readonly int _offsetGroundPaletteAddr;     // int32  Pointer to 256 rgb16 colors. May be null.
         private readonly int _offsetSkyPaletteAddr;        // int32  Pointer to 256 rgb16 colors. May be null.
@@ -55,13 +55,13 @@ namespace SF3.Models.Structs.MPD.Main {
             _offsetLightPaletteAddr = Address + 0x04; // 4 bytes
             _offsetLightPosAddr     = Address + 0x08; // 4 bytes
 
-            if (Scenario >= ScenarioType.Scenario2) {
-                _offsetUnknown1Addr = -1;
-                _offsetPaletteAdjustmentAddr = Address + 0x0C; // 4 bytes
-            }
-            else {
+            if (Scenario < ScenarioType.Scenario2) {
                 _offsetUnknown1Addr = Address + 0x0C; // 4 bytes
                 _offsetPaletteAdjustmentAddr = -1;
+            }
+            else {
+                _offsetUnknown1Addr = -1;
+                _offsetPaletteAdjustmentAddr = Address + 0x0C; // 4 bytes
             }
 
             _viewDistanceAddr            = Address + 0x10; // 2 bytes
@@ -69,13 +69,13 @@ namespace SF3.Models.Structs.MPD.Main {
             _offsetModelSwitchGroupsAddr = Address + 0x14; // 4 bytes
             _offsetAnimationsAddr        = Address + 0x18; // 4 bytes
 
-            if (Scenario >= ScenarioType.Scenario2) {
-                _offsetGradientAddr = Address + 0x1C; // 4 bytes
-                _offsetUnknown2Addr = -1;
-            }
-            else {
+            if (Scenario < ScenarioType.Scenario2) {
                 _offsetGradientAddr = -1;
                 _offsetUnknown2Addr = Address + 0x1C; // 4 bytes
+            }
+            else {
+                _offsetGradientAddr = Address + 0x1C; // 4 bytes
+                _offsetUnknown2Addr = -1;
             }
 
             _offsetGroundAnimationAddr = Address + 0x20; // 4 bytes
@@ -83,48 +83,50 @@ namespace SF3.Models.Structs.MPD.Main {
             _offsetLockedChestAddr     = Address + 0x28; // 4 bytes
 
             int addressNext;
-            if (Scenario == ScenarioType.Prototype) {
-                _offsetBarrelModelAddr = -1;
-                _otherUnknownAddr = Address + 0x2C; // 4 bytes
-                addressNext = Address + 0x30;
-            }
-            else if (Scenario >= ScenarioType.Scenario1) {
-                _offsetBarrelModelAddr = Address + 0x2C; // 4 bytes
-                _otherUnknownAddr = -1;
-                addressNext = Address + 0x30;
-            }
-            else {
-                _otherUnknownAddr = -1;
+            if (Scenario <= ScenarioType.Ship2) {
                 _offsetBarrelModelAddr = -1;
                 addressNext = Address + 0x2C;
             }
-
-            if (Scenario <= ScenarioType.Ship2) {
-                _modelsYRotationAddr       = addressNext + 0x00; // 2 bytes
-                _modelsViewAngleMinAddr    = addressNext + 0x02; // 2 bytes
-                _modelsViewAngleMaxAddr    = addressNext + 0x04; // 2 bytes
-                _padding3Addr              = addressNext + 0x06; // 2 bytes
-                _offsetIgnoredTexturesAddr = -1;
-                _offsetUnknown3Addr        = addressNext + 0x08; // 4 bytes
-                addressNext += 0x0C;
-            }
             else if (Scenario == ScenarioType.Prototype) {
-                _modelsYRotationAddr       = -1;
-                _modelsViewAngleMinAddr    = -1;
-                _modelsViewAngleMaxAddr    = -1;
-                _padding3Addr              = -1;
-                _offsetIgnoredTexturesAddr = -1;
-                // TODO: missing 4-byte value
-                _offsetUnknown3Addr        = addressNext + 0x04; // 4 bytes
-                addressNext += 0x08;
+                _offsetBarrelModelAddr = -1;
+                addressNext = Address + 0x2C;
             }
             else {
-                _modelsYRotationAddr       = addressNext + 0x00; // 2 bytes
-                _modelsViewAngleMinAddr    = addressNext + 0x02; // 2 bytes
-                _modelsViewAngleMaxAddr    = addressNext + 0x04; // 2 bytes
-                _padding3Addr              = addressNext + 0x06; // 2 bytes
-                _offsetIgnoredTexturesAddr = addressNext + 0x08; // 4 bytes
-                addressNext += 0x0C;
+                _offsetBarrelModelAddr = Address + 0x2C; // 4 bytes
+                addressNext = Address + 0x30;
+            }
+
+            _modelsYRotationAddr = addressNext + 0x00; // 2 bytes
+
+            if (Scenario < ScenarioType.Prototype) {
+                _modelsViewAngleMinAddr = -1;
+                _modelsViewAngleMaxAddr = -1;
+                _padding3Addr           = addressNext + 0x02; // 2 bytes
+                addressNext += 0x04;
+            }
+            else {
+                _modelsViewAngleMinAddr = addressNext + 0x02; // 2 bytes
+                _modelsViewAngleMaxAddr = addressNext + 0x04; // 2 bytes
+                _padding3Addr           = addressNext + 0x06; // 2 bytes
+                addressNext += 0x08;
+            }
+
+            if (Scenario <= ScenarioType.Ship2) {
+                _offsetIgnoredTexturesAddr = -1;
+                _offsetUnknown3Addr        = addressNext + 0x00; // 4 bytes
+                _offsetUnknown4Addr        = addressNext + 0x04; // 4 bytes
+                addressNext += 0x08;
+            }
+            else if (Scenario == ScenarioType.Prototype) {
+                _offsetIgnoredTexturesAddr = -1;
+                _offsetUnknown3Addr        = -1;
+                _offsetUnknown4Addr        = addressNext + 0x00; // 4 bytes
+                addressNext += 0x04;
+            }
+            else {
+                _offsetIgnoredTexturesAddr = addressNext + 0x00; // 4 bytes
+                _offsetUnknown3Addr        = -1;
+                addressNext += 0x04;
             }
 
             _offsetGroundPaletteAddr = addressNext + 0x00; // 4 bytes
@@ -176,8 +178,9 @@ namespace SF3.Models.Structs.MPD.Main {
         public bool HasUnknown2Table => IsScenario1OrEarlier;
         public bool HasGradientTable => IsScenario2OrLater;
         public bool HasMesh3 => IsScenario1OrLater;
-        public bool HasModelsInfo => Scenario != ScenarioType.Prototype;
-        public bool HasUnknown3Table => IsShip2 || IsPrototype;
+        public bool HasMinMaxAngle => IsPrototypeOrLater;
+        public bool HasUnknown3Table => IsShip2;
+        public bool HasUnknown4Table => IsShip2 || IsPrototype;
         public bool HasTexturePalette => IsScenario3OrLater;
         public bool HasIgnoredTextures => IsScenario1OrLater;
         public bool HasIndexedTextures => IsScenario3OrLater;
@@ -190,6 +193,7 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_padding1Addr), displayOrder: 1, isPointer: true, displayName: "(" + nameof(Padding1) + ")", displayGroup: "Main")]
         public ushort Padding1 {
             get => (ushort) Data.GetWord(_padding1Addr);
             set => Data.SetWord(_padding1Addr, value);
@@ -237,6 +241,7 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_padding2Addr), displayOrder: 6, isPointer: true, displayName: "(" + nameof(Padding2) + ")", displayGroup: "Main")]
         public ushort Padding2 {
             get => (ushort) Data.GetWord(_padding2Addr);
             set => Data.SetWord(_padding2Addr, value);
@@ -308,42 +313,37 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_modelsYRotationAddr), displayOrder: 14, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        [TableViewModelColumn(addressField: nameof(_modelsYRotationAddr), displayOrder: 14, displayGroup: "Main")]
         public float ModelsYRotation {
-            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsYRotationAddr).Float : -1) * 180.0f;
-            set {
-                if (HasModelsInfo)
-                    Data.SetCompressedFIXED(_modelsYRotationAddr, new CompressedFIXED(value / 180.0f, 0));
-            }
+            get => Data.GetCompressedFIXED(_modelsYRotationAddr).Float * 180.0f;
+            set => Data.SetCompressedFIXED(_modelsYRotationAddr, new CompressedFIXED(value / 180.0f, 0));
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_modelsViewAngleMinAddr), displayOrder: 14.5f, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        [TableViewModelColumn(addressField: nameof(_modelsViewAngleMinAddr), displayOrder: 14.5f, visibilityProperty: nameof(HasMinMaxAngle), displayGroup: "Main")]
         public float ModelsViewAngleMin {
-            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsViewAngleMinAddr).Float : -0.6f) * 180.0f;
+            get => (HasMinMaxAngle ? Data.GetCompressedFIXED(_modelsViewAngleMinAddr).Float : -0.6f) * 180.0f;
             set {
-                if (HasModelsInfo)
+                if (HasMinMaxAngle)
                     Data.SetCompressedFIXED(_modelsViewAngleMinAddr, new CompressedFIXED(value / 180.0f, 0));
             }
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_modelsViewAngleMaxAddr), displayOrder: 15, visibilityProperty: nameof(HasModelsInfo), displayGroup: "Main")]
+        [TableViewModelColumn(addressField: nameof(_modelsViewAngleMaxAddr), displayOrder: 15, visibilityProperty: nameof(HasMinMaxAngle), displayGroup: "Main")]
         public float ModelsViewAngleMax {
-            get => (HasModelsInfo ? Data.GetCompressedFIXED(_modelsViewAngleMaxAddr).Float : 0.6f) * 180.0f;
+            get => (HasMinMaxAngle ? Data.GetCompressedFIXED(_modelsViewAngleMaxAddr).Float : 0.6f) * 180.0f;
             set {
-                if (HasModelsInfo)
+                if (HasMinMaxAngle)
                     Data.SetCompressedFIXED(_modelsViewAngleMaxAddr, new CompressedFIXED(value / 180.0f, 0));
             }
         }
 
         [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_padding3Addr), displayOrder: 15.5f, isPointer: true, displayName: "(" + nameof(Padding3) + ")", displayGroup: "Main")]
         public ushort Padding3 {
-            get => HasModelsInfo ? (ushort) Data.GetWord(_padding3Addr) : (ushort) 0;
-            set {
-                if (HasModelsInfo)
-                    Data.SetWord(_padding3Addr, value);
-            }
+            get => (ushort) Data.GetWord(_padding3Addr);
+            set => Data.SetWord(_padding3Addr, value);
         }
 
         [BulkCopy]
@@ -357,12 +357,22 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_offsetUnknown3Addr), displayOrder: 16.5f, isPointer: true, displayName: nameof(OffsetUnknown3) + " (Other)", visibilityProperty: nameof(HasUnknown3Table), displayGroup: "Main")]
+        [TableViewModelColumn(addressField: nameof(_offsetUnknown3Addr), displayOrder: 16.5f, isPointer: true, displayName: nameof(OffsetUnknown3) + " (Ship2)", visibilityProperty: nameof(HasUnknown3Table), displayGroup: "Main")]
         public int OffsetUnknown3 {
             get => HasUnknown3Table ? Data.GetDouble(_offsetUnknown3Addr) : 0;
             set {
                 if (HasUnknown3Table)
                     Data.SetDouble(_offsetUnknown3Addr, value);
+            }
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_offsetUnknown4Addr), displayOrder: 16.6f, isPointer: true, displayName: nameof(OffsetUnknown4) + " (Prototype)", visibilityProperty: nameof(HasUnknown4Table), displayGroup: "Main")]
+        public int OffsetUnknown4 {
+            get => HasUnknown4Table ? Data.GetDouble(_offsetUnknown4Addr) : 0;
+            set {
+                if (HasUnknown3Table)
+                    Data.SetDouble(_offsetUnknown4Addr, value);
             }
         }
 
@@ -449,6 +459,7 @@ namespace SF3.Models.Structs.MPD.Main {
         }
 
         [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_padding4Addr), displayOrder: 23.5f, isPointer: true, displayName: "(" + nameof(Padding4) + ")", displayGroup: "Main")]
         public ushort Padding4 {
             get => (ushort) Data.GetWord(_padding4Addr);
             set => Data.SetWord(_padding4Addr, value);
