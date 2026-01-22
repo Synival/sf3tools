@@ -43,6 +43,12 @@ namespace SF3.Win.Views.MPD {
             if (Model.Unknown2Table != null)
                 CreateChild(new TableView("Unknown 2", Model.Unknown2Table, ngc));
 
+            if (Model.Unknown3Table != null)
+                CreateChild(new TableView("Unknown 3 (Ship2)", Model.Unknown3Table, ngc));
+
+            if (Model.Unknown4Table != null)
+                CreateChild(new TableView("Unknown 4 (Prototype)", Model.Unknown4Table, ngc));
+
             if (Model.GradientTable != null) {
                 if (Model.GradientTable.Length == 1)
                     CreateChild(new DataModelView("Gradient" + (Model.GradientTable[0].IsDummiedOut ? " (Dummied Out)" : ""), Model.GradientTable[0], ngc));

@@ -177,6 +177,12 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt16Table Unknown2Table { get; private set; }
 
         [BulkCopyRecurse]
+        public UnknownUInt16Table Unknown3Table { get; private set; }
+
+        [BulkCopyRecurse]
+        public UnknownUInt16Table Unknown4Table { get; private set; }
+
+        [BulkCopyRecurse]
         public GradientTable GradientTable { get; private set; }
 
         [BulkCopyRecurse]

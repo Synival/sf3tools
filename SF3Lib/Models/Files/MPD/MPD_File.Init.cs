@@ -60,7 +60,7 @@ namespace SF3.Models.Files.MPD {
 
             // This is referenced when determining the length of other tables, so make it early.
             // TODO: put somewhere else!!
-            if (header.OffsetModelSwitchGroups != 0) {
+            if (header.OffsetModelSwitchGroups > 0) {
                 tables.Add(ModelSwitchGroupsTable = ModelSwitchGroupsTable.Create(Data, "ModelSwitchGroups", header.OffsetModelSwitchGroups - RamAddress, NameGetterContext));
                 foreach (var switchGroup in ModelSwitchGroupsTable) {
                     if (switchGroup.ModelInstancesVisibleWhenOffTable != null)
@@ -109,12 +109,12 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeLightingTables(MPD_Header header) {
             var tables = new List<ITable>();
 
-            if (header.OffsetLightPalette != 0)
+            if (header.OffsetLightPalette > 0)
                 tables.Add(LightPaletteColorTable = ColorTable.Create(Data, nameof(LightPaletteColorTable), header.OffsetLightPalette - RamAddress, 32));
-            if (header.OffsetLightPosition != 0)
+            if (header.OffsetLightPosition > 0)
                 LightPosition = new LightPosition(Data, 0, nameof(LightPosition), header.OffsetLightPosition - RamAddress);
 
-            if (header.OffsetPaletteAdjustment != 0) {
+            if (header.OffsetPaletteAdjustment > 0) {
                 var msgAddr = ModelSwitchGroupsTable?.GetEarliestRamAddress() ?? 0;
                 var diff = msgAddr - (uint) header.OffsetPaletteAdjustment;
                 var isTruncated = (Scenario >= ScenarioType.Scenario3) && (msgAddr != 0 && diff < 0x0E);
@@ -122,7 +122,7 @@ namespace SF3.Models.Files.MPD {
                 PaletteAdjustment = new PaletteAdjustment(Data, 0, nameof(PaletteAdjustment), header.OffsetPaletteAdjustment - RamAddress, Scenario >= ScenarioType.Scenario3, isTruncated);
             }
 
-            if (header.OffsetGradient != 0) {
+            if (header.OffsetGradient > 0) {
                 var readUntil = (header.OffsetGroundAnimation == 0) ? (int?) null : (header.OffsetGroundAnimation - 0x290000);
                 tables.Add(GradientTable = GradientTable.Create(Data, nameof(GradientTable), header.OffsetGradient - RamAddress, readUntil));
             }
@@ -133,7 +133,7 @@ namespace SF3.Models.Files.MPD {
         private ITable[] MakeAnimationTables(MPD_Header header, bool areAnimatedTextures32Bit) {
             var tables = new List<ITable>();
 
-            if (header.OffsetAnimations != 0) {
+            if (header.OffsetAnimations > 0) {
                 try {
                     tables.Add(Animations = AnimationTable.Create(Data, nameof(Animations), header.OffsetAnimations - RamAddress, areAnimatedTextures32Bit, this));
                 }
@@ -142,10 +142,10 @@ namespace SF3.Models.Files.MPD {
                 }
             }
 
-            if (header.OffsetIgnoredTextures != 0) {
+            if (header.OffsetIgnoredTextures > 0) {
                 try {
                     var groundPaletteOffset = header.OffsetGroundPalette;
-                    var readUntil = (groundPaletteOffset != 0) ? (int?) groundPaletteOffset - 0x290000 : null;
+                    var readUntil = (groundPaletteOffset > 0) ? (int?) groundPaletteOffset - 0x290000 : null;
                     tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetIgnoredTextures - RamAddress, 2, readUntil: readUntil, maxSize: 0x100));
                 }
                 catch {
@@ -164,7 +164,7 @@ namespace SF3.Models.Files.MPD {
                 var offset = offsets[i];
                 var collection = MPD_CollectionType.Chest + i;
 
-                if (offset != 0) {
+                if (offset > 0) {
                     ModelCollections[collection] = MakeHeaderModelCollection(offset - RamAddress, collection, out var newTables);
                     tables.AddRange(newTables);
                 }
@@ -184,11 +184,11 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             // TODO: put somewhere else!!
-            if (header.OffsetGroundAnimation != 0)
+            if (header.OffsetGroundAnimation > 0)
                 tables.Add(GroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetGroundAnimation - RamAddress, null, 0xFF));
 
             // TODO: put somewhere else!!
-            if (header.OffsetIndexedTextures != 0)
+            if (header.OffsetIndexedTextures > 0)
                 tables.Add(IndexedTextureTable = IndexedTextureTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - RamAddress, 4, 0x100));
 
             return tables.ToArray();
@@ -198,7 +198,7 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             // This table is only present before Scenario 2 and is always 32 bytes if it exists.
-            if (header.OffsetUnknown1 != 0) {
+            if (header.OffsetUnknown1 > 0) {
                 // Use at most 0x20 2-byte values (0x40 bytes total).
                 int lowestOffset = header.OffsetUnknown1 + 0x40;
 
@@ -221,9 +221,24 @@ namespace SF3.Models.Files.MPD {
             }
 
             // This table is only present before Scenario 2 and varies in size.
-            if (header.OffsetUnknown2 != 0) {
-                var maxSize = (header.OffsetGroundAnimation != 0) ? ((header.OffsetGroundAnimation - header.OffsetUnknown2) / 2) : 32;
-                tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, maxSize, null));
+            if (header.OffsetUnknown2 > 0) {
+                var maxSize = (header.OffsetGroundAnimation > 0) ? ((header.OffsetGroundAnimation - header.OffsetUnknown2) / 2) : 0;
+                if (maxSize > 0)
+                    tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, maxSize, null));
+            }
+
+            // This table is only present in SHIP2.
+            if (header.OffsetUnknown3 > 0) {
+                var maxSize = (header.OffsetUnknown4 > 0) ? ((header.OffsetUnknown4 - header.OffsetUnknown3) / 2) : 0;
+                if (maxSize > 0)
+                    tables.Add(Unknown3Table = UnknownUInt16Table.Create(Data, "Unknown3", header.OffsetUnknown3 - RamAddress, maxSize, null));
+            }
+
+            // This table is only present in SHIP2 and Prototype maps.
+            if (header.OffsetUnknown4 > 0) {
+                var maxSize = (header.OffsetGroundPalette > 0) ? ((header.OffsetGroundPalette - header.OffsetUnknown4) / 2) : 0;
+                if (maxSize > 0)
+                    tables.Add(Unknown4Table = UnknownUInt16Table.Create(Data, "Unknown4", header.OffsetUnknown4 - RamAddress, maxSize, null));
             }
 
             return tables.ToArray();
