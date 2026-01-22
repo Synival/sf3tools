@@ -7,7 +7,7 @@ using SF3.Imaging;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID, bool allowIndexed) {
+        public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID, bool allowIndexed, int? chunkSizeLimit = null) {
             if (textures == null)
                 textures = new IMPD_Texture[0];
 
@@ -16,12 +16,12 @@ namespace SF3.MPD {
                 .ToArray();
 
             for (int i = 0; i < chunkCount; i++) {
-                WriteTextureChunk(sortedTextures, startID, out var textureCount, allowIndexed);
+                WriteTextureChunk(sortedTextures, startID, out var textureCount, allowIndexed, chunkSizeLimit);
                 startID += textureCount;
             }
         }
 
-        public void WriteTextureChunk(IEnumerable<ITextureData> sortedTextures, int startID, out int textureCount, bool allowIndexed) {
+        public void WriteTextureChunk(IEnumerable<ITextureData> sortedTextures, int startID, out int textureCount, bool allowIndexed, int? chunkSizeLimit = null) {
             if (sortedTextures == null) {
                 WriteEmptyChunk();
                 textureCount = 0;
@@ -29,14 +29,17 @@ namespace SF3.MPD {
             }
 
             int textureCountBigDumbLocal = 0;
-            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal, allowIndexed));
+            WriteCompressedChunk(writer => writer.WriteTextureChunkContent(sortedTextures.ToArray(), startID, out textureCountBigDumbLocal, allowIndexed, chunkSizeLimit));
             textureCount = textureCountBigDumbLocal;
         }
 
-        public void WriteTextureChunkContent(ITextureData[] sortedTextures, int startID, out int textureCount, bool allowIndexed) {
-            // Figure out how many textures we can write here. Enforce a limit 0x10000 bytes worth of texture data.
+        public void WriteTextureChunkContent(ITextureData[] sortedTextures, int startID, out int textureCount, bool allowIndexed, int? chunkSizeLimit = null) {
+            // Figure out how many textures we can write here. Enforce a default limit 0xFFFF bytes worth of texture data.
             textureCount = 0;
-            int totalTextureDataSize = 0;
+            chunkSizeLimit = chunkSizeLimit ?? 0xFFFF;
+
+            // (4 bytes for the initial header)
+            int totalTextureDataSize = 0x04;
 
             for (int id = startID; id < sortedTextures.Count(); id++) {
                 var texture = sortedTextures[id];
@@ -45,14 +48,14 @@ namespace SF3.MPD {
                 // (Based on MPD analysis, this appears to be the limit.)
                 var textureDataSize = 0x04 + texture.Width * texture.Height * (allowIndexed ? texture.BytesPerPixel : 2);
 
-                if (totalTextureDataSize + textureDataSize >= 0x10000)
+                if (totalTextureDataSize + textureDataSize > chunkSizeLimit)
                     break;
 
                 totalTextureDataSize += textureDataSize;
                 textureCount++;
 
-                // Stop here if the next texture's offset would be >= 0x10000, because that can't be stored in the table.
-                if (totalTextureDataSize >= 0x10000)
+                // Stop here if the next texture's offset would be >= 0xFFFF, because that can't be stored in the table.
+                if (totalTextureDataSize > chunkSizeLimit)
                     break;
             }
 

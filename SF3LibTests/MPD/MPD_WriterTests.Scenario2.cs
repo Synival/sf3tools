@@ -45,5 +45,13 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario2_SARA23_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "SARA23", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_BTL42_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "BTL42", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_MITI00_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "MITI00", performByteComparison: false);
     }
 }

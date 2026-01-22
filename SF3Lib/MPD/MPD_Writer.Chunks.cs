@@ -51,12 +51,13 @@ namespace SF3.MPD {
             }
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
+            var primaryTextureMaxSize = mpd.BinaryReproductionFlags.NonStandardTextureChunkDecompressedSizeLimit;
             if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0, allowIndexed: allowIndexedTextures);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0, allowIndexed: allowIndexedTextures, primaryTextureMaxSize);
                 WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0, allowIndexed: false);
             }
             else
-                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 5, startID: 0, allowIndexed: allowIndexedTextures);
+                WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary), chunkCount: 5, startID: 0, allowIndexed: allowIndexedTextures, primaryTextureMaxSize);
 
             // Chunk[11, 12, 13] are textures for Chest1, Chest2, and Barrel.
             // (it's so silly that it works this way, lol)

@@ -1,4 +1,5 @@
-﻿using SF3.Models.Files.MPD;
+﻿using System.Linq;
+using SF3.Models.Files.MPD;
 using SF3.MPD;
 using SF3.Types;
 
@@ -37,6 +38,14 @@ namespace SF3.Models.Structs.MPD {
 
         public bool EmptyUnterminatedIgnoredTexturesTable {
             get => MPD_File.MPDHeader.OffsetIgnoredTextures == MPD_File.MPDHeader.OffsetGroundPalette;
+            set {}
+        }
+
+        public int? NonStandardTextureChunkDecompressedSizeLimit {
+            get {
+                var max = MPD_File.TextureChunks.Max(x => x.Data.Length);
+                return max > 0xFFFF ? max : (int?) null;
+            }
             set {}
         }
     }

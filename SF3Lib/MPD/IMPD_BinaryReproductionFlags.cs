@@ -30,5 +30,11 @@
         /// This happens only in BAKA2.MPD.
         /// </summary>
         bool EmptyUnterminatedIgnoredTexturesTable { get; set; }
+
+        /// <summary>
+        /// When set, this is the maximum size a texture chunk can be before textures are placed in the next chunk.
+        /// Occurs in BTL42 and MITI00.
+        /// </summary>
+        int? NonStandardTextureChunkDecompressedSizeLimit { get; set; }
     }
 }
