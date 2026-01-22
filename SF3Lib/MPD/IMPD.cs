@@ -87,7 +87,7 @@ namespace SF3.MPD {
         /// Table used to animate the ground plane, corresponding to the SGL sl1MapRA() function.
         /// (Not currently supported)
         /// </summary>
-        IIndexedEnumerableWithLength<byte> GroundAnimation { get; }
+        IIndexedEnumerableWithLength<byte> GroundAnimationData { get; }
 
         /// <summary>
         /// First unknown Scenario 1 0xFFFF-terminated table.

@@ -136,7 +136,7 @@ namespace SF3.Models.Files.MPD {
         public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
         public IMPD_Gradient Gradient => (GradientTable?.Length > 0) ? GradientTable[0] : null;
 
-        public IIndexedEnumerableWithLength<byte> GroundAnimation => GroundAnimationTable;
+        public IIndexedEnumerableWithLength<byte> GroundAnimationData => GroundAnimationTable;
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 => Unknown1Table;
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 => Unknown2Table;
         public IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustment => UnreferencedDataAfterPaletteAdjustmentTable;
@@ -166,7 +166,7 @@ namespace SF3.Models.Files.MPD {
         public ModelSwitchGroupsTable ModelSwitchGroupsTable { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt8Table GroundAnimationTable { get; private set; }
+        public GroundAnimationTable GroundAnimationTable { get; private set; }
 
         [BulkCopyRecurse]
         public IgnoredTextureTable IgnoredTextureTable { get; private set; }

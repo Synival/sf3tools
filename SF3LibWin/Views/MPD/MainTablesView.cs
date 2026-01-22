@@ -56,8 +56,10 @@ namespace SF3.Win.Views.MPD {
                     CreateChild(new TableView("Gradients", Model.GradientTable, ngc));
             }
 
-            if (Model.GroundAnimationTable != null)
-                CreateChild(new TableView("Ground Animation", Model.GroundAnimationTable, ngc));
+            if (Model.GroundAnimationTable != null) {
+                var name = "Ground Animation" + (Model.GroundAnimationTable.IsDummiedOut ? " (Dummied Out)" : "");
+                CreateChild(new TableView(name, Model.GroundAnimationTable, ngc));
+            }
 
             if (Model.ModelCollections != null) {
                 foreach (var models in Model.ModelCollections.Values) {

@@ -135,6 +135,11 @@ namespace SF3.Models.Structs.MPD {
             }
         }
 
+        public bool AreGroundAnimationsDummiedOut {
+            get => MPD_File.GroundAnimationTable?.IsDummiedOut == true;
+            set {}
+        }
+
         public bool IsGradientDummiedOut {
             get => (MPD_File.GradientTable?.Length == 1) && MPD_File.GradientTable[0].IsDummiedOut;
             set {}

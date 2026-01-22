@@ -52,14 +52,16 @@ namespace SF3.MPD {
                 // Always set, whether it exists or not. It's structured like a table for some reason.
                 unknown2OrGradientPos = (uint) CurrentOffset;
                 if (mpd.Gradient != null)
-                    WriteGradient(mpd.Gradient, mpd.Settings);
+                    WriteGradient(mpd.Gradient, mpd.Settings.IsGradientDummiedOut);
                 WriteUShort(0xFFFF);
             }
 
             WriteToAlignTo(4);
 
-            var groundAnimationPos   = WriteGroundAnimationOrNull(mpd.GroundAnimation);
-            var boundariesPos        = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
+            var groundAnimationPos = WriteGroundDataAnimationOrNull(mpd.GroundAnimationData, mpd.Settings.AreGroundAnimationsDummiedOut);
+            WriteToAlignTo(2);
+
+            var boundariesPos = WriteBoundariesTableOrNull(mpd.CameraBoundaries, mpd.BattleCursorBoundaries);
 
             var ignoredTexturesPos = mpd.BinaryReproductionFlags.EmptyUnterminatedIgnoredTexturesTable
                 ? (uint) CurrentOffset
@@ -228,13 +230,15 @@ namespace SF3.MPD {
             return pos;
         }
 
-        public uint? WriteGroundAnimationOrNull(IEnumerable<byte> table)
-            => WriteObjectOrNull(() => table != null, () => WriteGroundAnimation(table));
+        public uint? WriteGroundDataAnimationOrNull(IEnumerable<byte> table, bool isDummiedOut)
+            => WriteObjectOrNull(() => table != null, () => WriteGroundAnimationData(table, isDummiedOut));
 
-        public void WriteGroundAnimation(IEnumerable<byte> table) {
+        public void WriteGroundAnimationData(IEnumerable<byte> table, bool isDummiedOut) {
+            if (isDummiedOut)
+                WriteByte(0xFF);
             foreach (var value in table)
                 WriteByte(value);
-            WriteUShort(0xFF00);
+            WriteByte(0xFF);
         }
 
         public uint? WriteUnknownUInt16TableOrNull(IEnumerable<ushort> table)
@@ -391,8 +395,8 @@ namespace SF3.MPD {
             return pos;
         }
 
-        public void WriteGradient(IMPD_Gradient gradient, IMPD_Settings settings) {
-            if (settings.IsGradientDummiedOut)
+        public void WriteGradient(IMPD_Gradient gradient, bool isDummiedOut) {
+            if (isDummiedOut)
                 WriteUShort(0xFFFF);
 
             WriteUShort((ushort) Math.Round(gradient.TopPosition * 255.00f));

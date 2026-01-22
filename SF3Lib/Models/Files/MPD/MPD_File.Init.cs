@@ -146,7 +146,7 @@ namespace SF3.Models.Files.MPD {
                 try {
                     var groundPaletteOffset = header.OffsetGroundPalette;
                     var readUntil = (groundPaletteOffset > 0) ? (int?) groundPaletteOffset - 0x290000 : null;
-                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetIgnoredTextures - RamAddress, 2, readUntil: readUntil, maxSize: 0x100));
+                    tables.Add(IgnoredTextureTable = IgnoredTextureTable.Create(Data, nameof(IgnoredTextureTable), header.OffsetIgnoredTextures - RamAddress, readUntil: readUntil, maxSize: 0x100));
                 }
                 catch {
                     // TODO: what to do here??
@@ -184,12 +184,14 @@ namespace SF3.Models.Files.MPD {
             var tables = new List<ITable>();
 
             // TODO: put somewhere else!!
-            if (header.OffsetGroundAnimation > 0)
-                tables.Add(GroundAnimationTable = UnknownUInt8Table.Create(Data, "ScrollScreenAnimations", header.OffsetGroundAnimation - RamAddress, null, 0xFF));
+            if (header.OffsetGroundAnimation > 0) {
+                var readUntil = (header.OffsetBoundaries > 0) ? (header.OffsetBoundaries - 0x290000) : (int?) null;
+                tables.Add(GroundAnimationTable = GroundAnimationTable.Create(Data, nameof(GroundAnimationTable), header.OffsetGroundAnimation - RamAddress, readUntil, null));
+            }
 
             // TODO: put somewhere else!!
             if (header.OffsetIndexedTextures > 0)
-                tables.Add(IndexedTextureTable = IndexedTextureTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - RamAddress, 4, 0x100));
+                tables.Add(IndexedTextureTable = IndexedTextureTable.Create(Data, "IndexedTextures", header.OffsetIndexedTextures - RamAddress, 0x100));
 
             return tables.ToArray();
         }

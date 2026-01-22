@@ -113,7 +113,7 @@ namespace SF3.Models.Files.MPD {
         PaletteAdjustment PaletteAdjustment { get; }
         UnknownUInt8Table UnreferencedDataAfterPaletteAdjustmentTable { get; }
         ModelSwitchGroupsTable ModelSwitchGroupsTable { get; }
-        UnknownUInt8Table GroundAnimationTable { get; }
+        GroundAnimationTable GroundAnimationTable { get; }
         IgnoredTextureTable IgnoredTextureTable { get; }
         ColorTable GroundPaletteColorTable { get; }
         ColorTable SkyPaletteColorTable { get; }

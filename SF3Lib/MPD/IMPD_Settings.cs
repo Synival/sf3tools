@@ -96,6 +96,11 @@ namespace SF3.MPD {
         byte ShadowTransparency { get; set; }
 
         /// <summary>
+        /// When set, the ground animation table exists, but is serialized with 'FF' before it and unused.
+        /// </summary>
+        bool AreGroundAnimationsDummiedOut { get; set; }
+
+        /// <summary>
         /// When set, the gradient exists, but is serialized with 'FFFF' before it and unused.
         /// </summary>
         bool IsGradientDummiedOut { get; set; }

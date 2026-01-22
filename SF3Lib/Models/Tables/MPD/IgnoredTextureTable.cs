@@ -2,8 +2,8 @@
 
 namespace SF3.Models.Tables.MPD {
     public class IgnoredTextureTable : TextureIDTable {
-        protected IgnoredTextureTable(IByteData data, string name, int address, int terminatorSize, int? readUntil, int? maxSize)
-        : base(data, name, "IgnoreTex", GetRealAddress(data, address, readUntil), terminatorSize, maxSize) {
+        protected IgnoredTextureTable(IByteData data, string name, int address, int? readUntil, int? maxSize)
+        : base(data, name, "IgnoreTex", GetRealAddress(data, address, readUntil), 2, maxSize) {
             IsDummiedOut = Address != address;
         }
 
@@ -12,8 +12,8 @@ namespace SF3.Models.Tables.MPD {
                 ? address + 2 : address;
         }
 
-        public static IgnoredTextureTable Create(IByteData data, string name, int address, int terminatorSize, int? readUntil, int? maxSize)
-            => Create(() => new IgnoredTextureTable(data, name, address, terminatorSize, readUntil, maxSize));
+        public static IgnoredTextureTable Create(IByteData data, string name, int address, int? readUntil, int? maxSize)
+            => Create(() => new IgnoredTextureTable(data, name, address, readUntil, maxSize));
 
         /// <summary>
         /// When true, the gradient is serialized, but "dummied-out" with a preceeding
