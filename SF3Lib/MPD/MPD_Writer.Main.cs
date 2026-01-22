@@ -437,7 +437,8 @@ namespace SF3.MPD {
         public void WriteIndexedTexturesTable(ushort[] textureIds) {
             foreach (var textureId in textureIds.OrderBy(x => x).ToArray())
                 WriteUShort(textureId);
-            WriteUInt(0xFFFFFFFF);
+            WriteUShort(0xFFFF);
+            WriteUShort(0xFFFF);
         }
 
         public uint? WriteBoundariesTableOrNull(IRectangleShort cameraBoundaries, IRectangleShort battleBoundaries)  
