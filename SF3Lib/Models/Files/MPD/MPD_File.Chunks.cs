@@ -192,18 +192,30 @@ namespace SF3.Models.Files.MPD {
         private IChunkData[] MakeChunkDatas(ChunkLocation[] chunks) {
             ChunkData = new IChunkData[chunks.Length];
 
-            // Surface model chunk
-            SurfaceModelChunkIndex = GetSurfaceModelChunkIndex(chunks);
-            if (SurfaceModelChunkIndex != null)
-                _ = MakeChunkData(SurfaceModelChunkIndex.Value, ChunkType.SurfaceModel, CompressionType.Uncompressed);
-
             // All model chunks
             ModelChunkIndices = GetModelChunkIndices(chunks);
             var modelChunksList = new List<IChunkData>();
-            foreach (var i in ModelChunkIndices) {
-                _ = MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed);
-                modelChunksList.Add(ChunkData[i]);
+            foreach (var i in ModelChunkIndices)
+                modelChunksList.Add(MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed));
+
+            // Surface model chunk
+            var smci = Flags.SurfaceModelChunkIndex;
+            if (smci < chunks.Length && smci >= 0 && chunks[smci].ChunkSize == 0xCF00)
+                SurfaceModelChunkData = MakeChunkData(smci, ChunkType.SurfaceModel, CompressionType.Uncompressed);
+            else if (ChunkData[2] == null && chunks[2].ChunkSize == 0xCF00)
+                SurfaceModelChunkData = MakeChunkData(2, ChunkType.SurfaceModel, CompressionType.Uncompressed);
+            else if (ChunkData[20] == null && chunks[20].ChunkSize == 0xCF00)
+                SurfaceModelChunkData = MakeChunkData(20, ChunkType.SurfaceModel, CompressionType.Uncompressed);
+
+            // Sometimes we didn't find a models chunk at all (MOVESEL.MPD). Make sure we have one.
+            var modelsChunk = modelChunksList.FirstOrDefault(x => (x as ModelChunk)?.Collection == MPD_CollectionType.Primary);
+            if (modelsChunk == null) {
+                if (ChunkData[20] == null && chunks[20].Exists)
+                    modelChunksList.Add(MakeChunkData(20, ChunkType.Models, CompressionType.Uncompressed));
+                else if (ChunkData[1] == null && chunks[1].Exists)
+                    modelChunksList.Add(MakeChunkData(20, ChunkType.Models, CompressionType.Uncompressed));
             }
+
             ModelChunkDatas = modelChunksList.ToArray();
 
             // Animated textures chunk
@@ -307,9 +319,9 @@ namespace SF3.Models.Files.MPD {
             return ChunkData;
         }
 
-        private int[] GetModelChunkIndices(ChunkLocation[] chunks) {
+        private HashSet<int> GetModelChunkIndices(ChunkLocation[] chunks) {
             var flags = Flags;
-            var indices = new List<int>();
+            var indices = new HashSet<int>();
 
             if (chunks[1].Exists && flags.Chunk1Type == ChunkType.Models)
                 indices.Add(1);
@@ -318,12 +330,7 @@ namespace SF3.Models.Files.MPD {
             if (chunks[19].Exists && flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
                 indices.Add(19);
 
-            return indices.ToArray();
-        }
-
-        private int? GetSurfaceModelChunkIndex(ChunkLocation[] chunks) {
-            var smci = Flags.SurfaceModelChunkIndex;
-            return (smci.HasValue && chunks[smci.Value].Exists) ? smci : null;
+            return indices;
         }
 
         public int PrimaryTextureChunksFirstIndex { get; private set; }
@@ -354,7 +361,7 @@ namespace SF3.Models.Files.MPD {
 
         public IChunkData[] ModelChunkDatas { get; private set; }
 
-        public IChunkData SurfaceChunkData => (SurfaceModelChunkIndex.HasValue) ? ChunkData[SurfaceModelChunkIndex.Value] : null;
+        public IChunkData SurfaceModelChunkData { get; private set; }
 
         public IChunkData[] GroundImageChunkDatas { get; private set; }
         public IChunkData[] GroundTilesetChunkDatas { get; private set; }

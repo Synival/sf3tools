@@ -36,5 +36,15 @@
         /// Occurs in BTL42 and MITI00.
         /// </summary>
         int? NonStandardTextureChunkDecompressedSizeLimit { get; set; }
+
+        /// <summary>
+        /// When set, this is the index the models chunk can be found in, which is unexpected from logic.
+        /// </summary>
+        int? MisplacedModelsChunkIndex { get; set; }
+
+        /// <summary>
+        /// When set, this is the index the surface model chunk can be found in, which is unexpected from logic.
+        /// </summary>
+        int? MisplacedSurfaceModelChunkIndex { get; set; }
     }
 }

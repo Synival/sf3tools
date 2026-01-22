@@ -27,8 +27,15 @@ namespace SF3.Win.Views.MPD {
                 chunkViews.Add(chunkIndex.Value, newView);
             }
 
-            if (Model.SurfaceModelChunk != null)
-                AddChunkView(Model.SurfaceModelChunk.ChunkIndex, "Surface Model", (name) => new SurfaceModelChunkView(name, Model.SurfaceModelChunk));
+            if (Model.SurfaceModelChunk != null) {
+                var name = "Surface Model";
+                if (Model.Flags.Bit_0x0200_HasSurfaceModel)
+                    name += " (Disabled)";
+                if (Model.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex.HasValue)
+                    name += " (Misplaced)";
+                AddChunkView(Model.SurfaceModelChunk.ChunkIndex, name, (name) => new SurfaceModelChunkView(name, Model.SurfaceModelChunk));
+            }
+
             if (Model.AnimationFrameChunk != null)
                 AddChunkView(3, "Animation Frames", (name) => new AnimationFrameChunkView(name, Model.AnimationFrameChunk));
             if (Model.SurfaceDataChunk != null)
@@ -37,8 +44,21 @@ namespace SF3.Win.Views.MPD {
             if (Model.ModelCollections != null) {
                 foreach (var iModelCollection in Model.ModelCollections.Values) {
                     var modelCollection = iModelCollection as ModelChunk;
-                    if (modelCollection != null && modelCollection.ChunkIndex.HasValue)
-                        AddChunkView(modelCollection.ChunkIndex, "Models", (name) => new ModelChunkView(name, Model, modelCollection));
+                    if (modelCollection != null && modelCollection.ChunkIndex.HasValue) {
+                        string name = "Models (Unknown)";
+
+                        if (modelCollection.Collection == MPD_CollectionType.Primary) {
+                            name = "Models";
+                            if (!Model.Flags.Bit_0x0100_HasModels)
+                                name += " (Disabled)";
+                            if (Model.BinaryReproductionFlags.MisplacedModelsChunkIndex.HasValue)
+                                name += " (Misplaced)";
+                        }
+                        else if (modelCollection.Collection == MPD_CollectionType.ExtraModels)
+                            name = "Extra Models";
+
+                        AddChunkView(modelCollection.ChunkIndex, name, (name) => new ModelChunkView(name, Model, modelCollection));
+                    }
                 }
             }
 

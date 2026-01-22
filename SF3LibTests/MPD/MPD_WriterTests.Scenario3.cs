@@ -32,6 +32,10 @@ namespace SF3.Tests.MPD {
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "BEER", performByteComparison: false);
 
         [TestMethod]
+        public void WriteMPD_WithScenario3_B_KOYA_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "B_KOYA", performByteComparison: false);
+
+        [TestMethod]
         public void WriteMPD_WithScenario3_FEDEND_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "FEDEND", performByteComparison: false);
 

@@ -44,7 +44,7 @@ namespace SF3.Win.OpenGL.MPD {
         public void Update(IMPD mpdFile) {
             Reset();
 
-            var hasModel = mpdFile.Surface.HasModel;
+            var hasModel = mpdFile.Surface.HasModel && mpdFile.Flags.Bit_0x0200_HasSurfaceModel;
             var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
             var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures
                 .Where(x => !hasIgnored || !x.IsIgnored)

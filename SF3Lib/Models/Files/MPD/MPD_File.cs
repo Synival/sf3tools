@@ -188,12 +188,10 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public BoundaryTable BoundariesTable { get; private set; }
 
-        public int? SurfaceModelChunkIndex { get; private set; } = null;
-
         [BulkCopyRecurse]
         public SurfaceModelChunk SurfaceModelChunk { get; private set; }
 
-        public int[] ModelChunkIndices { get; private set; } = null;
+        public HashSet<int> ModelChunkIndices { get; private set; } = null;
 
         public AnimationFrameChunk AnimationFrameChunk { get; private set; }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Main;
@@ -93,7 +94,7 @@ namespace SF3.Models.Files.MPD {
 
         IChunkData[] ModelChunkDatas { get; }
 
-        IChunkData SurfaceChunkData { get; }
+        IChunkData SurfaceModelChunkData { get; }
 
         IChunkData[] GroundImageChunkDatas { get; }
         IChunkData[] GroundTilesetChunkDatas { get; }
@@ -125,10 +126,8 @@ namespace SF3.Models.Files.MPD {
         GradientTable GradientTable { get; }
         BoundaryTable BoundariesTable { get; }
 
-        int? SurfaceModelChunkIndex { get; }
+        HashSet<int> ModelChunkIndices { get; }
         SurfaceModelChunk SurfaceModelChunk { get; }
-
-        int[] ModelChunkIndices { get; }
 
         AnimationFrameChunk AnimationFrameChunk { get; }
         SurfaceDataChunk SurfaceDataChunk { get; }

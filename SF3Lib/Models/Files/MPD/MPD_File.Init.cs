@@ -29,7 +29,7 @@ namespace SF3.Models.Files.MPD {
 
             // Load header and chunk tables
             var headerTables = MakeHeaderTables(header, areAnimatedTextures32Bit);
-            var chunkTables = MakeChunkTables(chunks, chunkDatas, ModelChunkDatas, SurfaceChunkData);
+            var chunkTables = MakeChunkTables(chunks, chunkDatas, ModelChunkDatas, SurfaceModelChunkData);
 
             // Add two-way communication between 'Modified' events from the root IByteData and its children.
             WireChildDataModifiedEvents();

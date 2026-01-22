@@ -146,10 +146,10 @@ namespace SF3.Models.Files.MPD {
             if (flags.Chunk20Type != chunkHeaders[20].ChunkType)
                 errors.Add($"Chunk[20] type should be '{flags.Chunk20Type}', but is '{chunkHeaders[20].ChunkType}'");
 
-            if (flags.ModelChunkIndex.HasValue && chunkHeaders[flags.ModelChunkIndex.Value].ChunkType != ChunkType.Models)
-                errors.Add($"Model chunk ({flags.ModelChunkIndex}) type should be 'Models' but is '{chunkHeaders[flags.ModelChunkIndex.Value].ChunkType}'");
-            if (flags.SurfaceModelChunkIndex.HasValue && chunkHeaders[flags.SurfaceModelChunkIndex.Value].ChunkType != ChunkType.SurfaceModel)
-                errors.Add($"Surface model chunk ({flags.SurfaceModelChunkIndex}) type should be 'SurfaceModel' but is '{chunkHeaders[flags.SurfaceModelChunkIndex.Value].ChunkType}'");
+            if (flags.Bit_0x0100_HasModels && chunkHeaders[flags.ModelsChunkIndex].ChunkType != ChunkType.Models)
+                errors.Add($"Model chunk ({flags.ModelsChunkIndex}) type should be 'Models' but is '{chunkHeaders[flags.ModelsChunkIndex].ChunkType}'");
+            if (flags.Bit_0x0200_HasSurfaceModel && chunkHeaders[flags.SurfaceModelChunkIndex].ChunkType != ChunkType.SurfaceModel)
+                errors.Add($"Surface model chunk ({flags.SurfaceModelChunkIndex}) type should be 'SurfaceModel' but is '{chunkHeaders[flags.SurfaceModelChunkIndex].ChunkType}'");
 
             return errors.ToArray();
         }
@@ -206,10 +206,10 @@ namespace SF3.Models.Files.MPD {
                     if (chunk20LooksLikeSurfaceChunk)
                         errors.Add($"  (Chunk[20] (expected={expectedIndex}) looks like one -- this could be an SF3Lib error)");
                 }
-                else if (SurfaceModelChunkIndex != expectedIndex)
-                    errors.Add($"(Maybe not an error?) SurfaceModel in unexpected index. Expected in Chunk[{expectedIndex}] but found at Chunk[{SurfaceModelChunkIndex}]");
+                else if (Flags.SurfaceModelChunkIndex != expectedIndex)
+                    errors.Add($"(Maybe not an error?) SurfaceModel in unexpected index. Expected in Chunk[{expectedIndex}] but found at Chunk[{Flags.SurfaceModelChunkIndex}]");
             }
-            else if (!flags.Bit_0x0200_HasSurfaceModel) {
+            else {
                 if (flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
                     errors.Add("HasSurfaceModel flag is unset but Chunk20IsSurfaceModelIfExists flag is set");
                 if (chunk2LooksLikeSurfaceChunk)

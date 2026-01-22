@@ -48,5 +48,21 @@ namespace SF3.Models.Structs.MPD {
             }
             set {}
         }
+
+        public int? MisplacedModelsChunkIndex {
+            get {
+                var index = ((ModelChunk) MPD_File.ModelCollections.Values.FirstOrDefault(x => (x as ModelChunk)?.Collection == MPD_CollectionType.Primary))?.ChunkIndex;
+                return (index != MPD_File.Flags.ModelsChunkIndex) ? index : null;
+            }
+            set {}
+        }
+
+        public int? MisplacedSurfaceModelChunkIndex {
+            get {
+                var index = MPD_File.SurfaceModelChunkData?.Index;
+                return (index != MPD_File.Flags.SurfaceModelChunkIndex) ? index : null;
+            }
+            set {}
+        }
     }
 }

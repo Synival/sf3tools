@@ -18,7 +18,7 @@ namespace SF3.MPD {
             var primaryMc = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut : null;
             var extraMc   = mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out mcOut) ? mcOut : null;
 
-            if (primaryMc != null && mpd.Flags.ModelChunkIndex == 1)
+            if (primaryMc != null && mpd.Flags.ModelsChunkIndex == 1)
                 WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
             else if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
                 WriteModelChunk(extraMc.Models, extraMc.ModelInstances, null, isHighMemory: false);
@@ -26,7 +26,8 @@ namespace SF3.MPD {
                 WriteEmptyChunk();
 
             // Chunk[2] is the surface model, but sometimes Chunk[20] for Scenario 2+.
-            if (mpd.Surface.HasModel && mpd.Flags.SurfaceModelChunkIndex == 2)
+            var surfaceModelChunkIndex = mpd.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex ?? mpd.Flags.SurfaceModelChunkIndex;
+            if (mpd.Surface.HasModel && surfaceModelChunkIndex == 2)
                 WriteSurfaceModelChunk(mpd.Surface);
             else
                 WriteEmptyChunk();
@@ -84,7 +85,7 @@ namespace SF3.MPD {
             if (Scenario >= ScenarioType.Scenario2) {
                 if (primaryMc != null && mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory)
                     WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: true);
-                else if (mpd.Surface.HasModel && mpd.Flags.SurfaceModelChunkIndex == 20)
+                else if (mpd.Surface.HasModel && surfaceModelChunkIndex == 20)
                     WriteSurfaceModelChunk(mpd.Surface);
                 else
                     WriteEmptyChunk();

@@ -509,5 +509,11 @@ namespace MPD_Analyzer {
 
         public static string[]? HasDummiedOutIgnoredTexturesTable(MPD_File mpdFile)
             => mpdFile.IgnoredTextureTable?.IsDummiedOut == true ? ["Yes"] : [];
+
+        public static string[]? HasMisplacedChunks(MPD_File mpdFile) {
+            string[] misplaced1 = mpdFile.BinaryReproductionFlags.MisplacedModelsChunkIndex.HasValue ? ["Misplaced Models"] : [];
+            string[] misplaced2 = mpdFile.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex.HasValue ? ["Misplaced Surface Model"] : [];
+            return [.. misplaced1, .. misplaced2];
+        }
     }
 }

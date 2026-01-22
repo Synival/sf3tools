@@ -3,19 +3,24 @@
 namespace SF3.MPD {
     public interface IMPD_DerivedFlags {
         /// <summary>
-        /// When set, specifies the chunk in which models should be located (either 1 or 20).
+        /// Specifies the chunk in which models would be located (either 1 or 20).
         /// </summary>
-        int? ModelChunkIndex { get; }
+        int ModelsChunkIndex { get; }
 
         /// <summary>
-        /// When set, specifies the area of memory (low or high) in which it is accessed.
+        /// Specifies the area of memory (low or high) from which models would be accessed.
         /// </summary>
-        MemoryLocationType? ModelsMemoryLocation { get; }
+        MemoryLocationType ModelsMemoryLocation { get; }
 
         /// <summary>
-        /// When set, specifies the chunk in which the surface model is located (either 2 or 20).
+        /// Specifies the chunk in which the surface model would be located (either 2 or 20).
         /// </summary>
-        int? SurfaceModelChunkIndex { get; }
+        int SurfaceModelChunkIndex { get; }
+
+        /// <summary>
+        /// Specifies the area of memory (low or high) from which the surface model would be accessed.
+        /// </summary>
+        MemoryLocationType SurfaceModelMemoryLocation { get; }
 
         /// <summary>
         /// When set, a sky chunk is present for either battles (Scenario 1) or cutscenes (Scenario 2+).
