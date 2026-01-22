@@ -26,9 +26,22 @@ namespace SF3.Models.Files.MPD {
         private const int c_RamAddress = 0x00290000;
 
         protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType? fallbackScenario = null)
-        : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Prototype], DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Prototype) {
+        : base(data, GetNameGetterContext(nameContexts, DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Prototype), DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Prototype) {
             DetermineChunkIndices();
             Lighting = new LightingClass(this);
+        }
+
+        private static INameGetterContext GetNameGetterContext(Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType scenario) {
+            if (nameContexts == null)
+                return null;
+            else if (nameContexts.Count == 1)
+                return nameContexts.Values.First();
+            else if (scenario == ScenarioType.Scenario3 && nameContexts.ContainsKey(ScenarioType.PremiumDisk))
+                return nameContexts[ScenarioType.PremiumDisk];
+            else if (nameContexts.ContainsKey(scenario))
+                return nameContexts[scenario];
+            else
+                return null;
         }
 
         public static MPD_File Create(IByteData data, INameGetterContext nameContext, ScenarioType fallbackScenario)

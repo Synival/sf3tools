@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using CommonLib.Extensions;
 using CommonLib.Utils;
 using SF3.Imaging;
 using SF3.Types;
@@ -18,7 +17,8 @@ namespace SF3.MPD {
             var primaryMc = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut : null;
             var extraMc   = mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out mcOut) ? mcOut : null;
 
-            if (primaryMc != null && mpd.Flags.ModelsChunkIndex == 1)
+            var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? mpd.Flags.ModelsChunkIndex;
+            if (primaryMc != null && modelsChunkIndex == 1)
                 WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
             else if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
                 WriteModelChunk(extraMc.Models, extraMc.ModelInstances, null, isHighMemory: false);
@@ -83,8 +83,8 @@ namespace SF3.MPD {
 
             // Scenario 2+ has two more chunks.
             if (Scenario >= ScenarioType.Scenario2) {
-                if (primaryMc != null && mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory)
-                    WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: true);
+                if (primaryMc != null && modelsChunkIndex == 20)
+                    WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory);
                 else if (mpd.Surface.HasModel && surfaceModelChunkIndex == 20)
                     WriteSurfaceModelChunk(mpd.Surface);
                 else

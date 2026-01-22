@@ -13,7 +13,7 @@ namespace SF3.MPD {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
-            var ramChunkAddr = (isHighMemory) ? 0x060A0000 : (0x00290000 + fileChunkAddr);
+            var ramChunkAddr = (isHighMemory) ? 0x060A0000 : 0x00292100;
 
             // Write header. Collision-related offsets will be written later.
             var collisionLinesHeaderOffset = CurrentOffset;
