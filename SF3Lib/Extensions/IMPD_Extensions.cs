@@ -7,7 +7,7 @@ namespace SF3.Extensions {
         public static ushort GetHeaderFlags(this IMPD mpd, ScenarioType scenario) {
             switch (scenario) {
                 case ScenarioType.Ship2:
-                case ScenarioType.Other:
+                case ScenarioType.Prototype:
                 case ScenarioType.Scenario1:
                     return GetScenario1HeaderFlags(mpd);
 

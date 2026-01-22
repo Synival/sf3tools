@@ -54,7 +54,7 @@ namespace SF3.Models.Files.MPD {
                 HeaderModelInstanceTable = HeaderModelInstanceTable.Create(Data, Collection, nameof(HeaderModelInstanceTable), Address);
             else {
                 ModelsHeader = new ModelsHeader(Data, 0, nameof(ModelsHeader), Address + 0x0000);
-                ModelInstanceTable = ModelInstanceTable.Create(Data, Collection, nameof(ModelInstanceTable), Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Other);
+                ModelInstanceTable = ModelInstanceTable.Create(Data, Collection, nameof(ModelInstanceTable), Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Prototype);
             }
 
             var pdataAddressesPre =

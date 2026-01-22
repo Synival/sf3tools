@@ -41,7 +41,7 @@ namespace SF3.Models.Files.MPD {
                 else if (hasChunk19)
                     return ScenarioType.Scenario1;
                 else if (hasChunk18)
-                    return ScenarioType.Other;
+                    return ScenarioType.Prototype;
                 else
                     return ScenarioType.Ship2;
             }

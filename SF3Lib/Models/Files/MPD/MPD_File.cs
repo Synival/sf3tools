@@ -26,7 +26,7 @@ namespace SF3.Models.Files.MPD {
         private const int c_RamAddress = 0x00290000;
 
         protected MPD_File(IByteData data, Dictionary<ScenarioType, INameGetterContext> nameContexts, ScenarioType? fallbackScenario = null)
-        : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other], DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Other) {
+        : base(data, nameContexts?[DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Prototype], DetectScenario(data) ?? fallbackScenario ?? ScenarioType.Prototype) {
             DetermineChunkIndices();
             Lighting = new LightingClass(this);
         }

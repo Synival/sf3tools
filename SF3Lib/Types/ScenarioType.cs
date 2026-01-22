@@ -1,7 +1,7 @@
 namespace SF3.Types {
     public enum ScenarioType {
         Ship2 = -1,
-        Other = 0,
+        Prototype = 0,
         Scenario1 = 1,
         Scenario2 = 2,
         Scenario3 = 3,

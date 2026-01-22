@@ -137,7 +137,7 @@ namespace SF3.Models.Files.MPD {
         private void DetermineChunkIndices() {
             PrimaryTextureChunksFirstIndex = 6;
             PrimaryTextureChunksLastIndex  = PrimaryTextureChunksFirstIndex +
-                ((Scenario >= ScenarioType.Other) ? 4 : 3);
+                ((Scenario >= ScenarioType.Prototype) ? 4 : 3);
 
             MeshTextureChunksFirstIndex = PrimaryTextureChunksLastIndex + 1;
 

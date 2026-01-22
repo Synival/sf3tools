@@ -83,14 +83,14 @@ namespace SF3.Models.Structs.MPD.Main {
             _offsetLockedChestAddr     = Address + 0x28; // 4 bytes
 
             int addressNext;
-            if (Scenario >= ScenarioType.Scenario1) {
-                _offsetBarrelModelAddr = Address + 0x2C; // 4 bytes
-                _otherUnknownAddr = -1;
-                addressNext = Address + 0x30;
-            }
-            else if (Scenario == ScenarioType.Other) {
+            if (Scenario == ScenarioType.Prototype) {
                 _offsetBarrelModelAddr = -1;
                 _otherUnknownAddr = Address + 0x2C; // 4 bytes
+                addressNext = Address + 0x30;
+            }
+            else if (Scenario >= ScenarioType.Scenario1) {
+                _offsetBarrelModelAddr = Address + 0x2C; // 4 bytes
+                _otherUnknownAddr = -1;
                 addressNext = Address + 0x30;
             }
             else {
@@ -108,7 +108,7 @@ namespace SF3.Models.Structs.MPD.Main {
                 _offsetUnknown3Addr        = addressNext + 0x08; // 4 bytes
                 addressNext += 0x0C;
             }
-            else if (Scenario == ScenarioType.Other) {
+            else if (Scenario == ScenarioType.Prototype) {
                 _modelsYRotationAddr       = -1;
                 _modelsViewAngleMinAddr    = -1;
                 _modelsViewAngleMaxAddr    = -1;
@@ -162,8 +162,8 @@ namespace SF3.Models.Structs.MPD.Main {
         public ScenarioType Scenario { get; }
 
         public bool IsShip2 => Scenario == ScenarioType.Ship2;
-        public bool IsOther => Scenario == ScenarioType.Other;
-        public bool IsOtherOrLater => Scenario >= ScenarioType.Other;
+        public bool IsPrototype => Scenario == ScenarioType.Prototype;
+        public bool IsPrototypeOrLater => Scenario >= ScenarioType.Prototype;
         public bool IsScenario1 => Scenario == ScenarioType.Scenario1;
         public bool IsScenario1OrEarlier => Scenario <= ScenarioType.Scenario1;
         public bool IsScenario1OrLater => Scenario >= ScenarioType.Scenario1;
@@ -176,8 +176,8 @@ namespace SF3.Models.Structs.MPD.Main {
         public bool HasUnknown2Table => IsScenario1OrEarlier;
         public bool HasGradientTable => IsScenario2OrLater;
         public bool HasMesh3 => IsScenario1OrLater;
-        public bool HasModelsInfo => Scenario != ScenarioType.Other;
-        public bool HasUnknown3Table => IsShip2 || IsOther;
+        public bool HasModelsInfo => Scenario != ScenarioType.Prototype;
+        public bool HasUnknown3Table => IsShip2 || IsPrototype;
         public bool HasTexturePalette => IsScenario3OrLater;
         public bool HasIgnoredTextures => IsScenario1OrLater;
         public bool HasIndexedTextures => IsScenario3OrLater;
