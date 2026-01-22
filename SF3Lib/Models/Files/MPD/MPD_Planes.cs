@@ -37,14 +37,25 @@ namespace SF3.Models.Files.MPD {
 
             // Set the tiled ground plane.
             IMPD_TiledPlane groundTiledImage = null;
-            if (MPD_File.GroundTilesetChunkDatas?.Any() == true && MPD_File.GroundTileAssignmentChunks?.Length == 2) {
+            if (MPD_File.GroundTileAssignmentChunks?.Length == 2) {
                 if ((groundTiledImage = GroundTiledImage) != null)
                     ((TiledImagePlane) GroundTiledImage).UpdateImages();
                 else {
                     try {
+                        // Get tileset chunks, accounting for maps that mistakenly have tileset maps but are actually using 512x256 images.
+                        var tilesetChunk1 =
+                            (MPD_File.GroundTilesetChunkDatas?.Length >= 1) ? MPD_File.GroundTilesetChunkDatas[0] :
+                            (MPD_File.GroundImageChunkDatas?.Length   >= 1) ? MPD_File.GroundImageChunkDatas[0]   :
+                            null;
+
+                        var tilesetChunk2 =
+                            (MPD_File.GroundTilesetChunkDatas?.Length >= 2) ? MPD_File.GroundTilesetChunkDatas[1] :
+                            (MPD_File.GroundImageChunkDatas?.Length   >= 2) ? MPD_File.GroundImageChunkDatas[1]   :
+                            null;
+
                         groundTiledImage = new TiledImagePlane(
-                            MPD_File.GroundTilesetChunkDatas[0].DecompressedData,
-                            MPD_File.GroundTilesetChunkDatas[1].DecompressedData,
+                            tilesetChunk1?.DecompressedData,
+                            tilesetChunk2?.DecompressedData,
                             new MPD_GroundPlaneTileAssignment(
                                 MPD_File.GroundTileAssignmentChunks[0].PlaneTileTextureRowTable,
                                 MPD_File.GroundTileAssignmentChunks[1].PlaneTileTextureRowTable

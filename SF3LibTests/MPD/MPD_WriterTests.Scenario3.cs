@@ -42,5 +42,9 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario3_HNSNOP_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "HNSNOP", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario3_SNRK00_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario3, "SNRK00", performByteComparison: false);
     }
 }

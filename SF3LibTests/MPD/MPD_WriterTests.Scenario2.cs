@@ -51,7 +51,15 @@ namespace SF3.Tests.MPD {
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "BTL42", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario2_MITI00_ProducesSameLoadableData()
-            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "MITI00", performByteComparison: false);
+        public void WriteMPD_WithScenario2_FUNE_T_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "FUNE_T", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_STAMP2_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "STAMP2", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_STAMP3_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "STAMP3", performByteComparison: false);
     }
 }
