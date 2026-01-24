@@ -395,10 +395,11 @@ namespace SF3.Editor.Forms {
 
             SelectedFile = file;
             Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
-
             var fileType = file?.FileType;
-            tsmiMonsters.Visible = tsmiMonsters.Enabled = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;
-            tsmiMPD.Visible      = tsmiMPD.Enabled      = hasFile && (fileType == SF3FileType.MPD);
+
+            tsmiMonsters.Visible   = tsmiMonsters.Enabled   = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;
+            tsmiBlacksmith.Visible = tsmiBlacksmith.Enabled = hasFile && (file?.Loader?.Model as IBlacksmithTableFile)?.BlacksmithTables?.Any() == true;
+            tsmiMPD.Visible        = tsmiMPD.Enabled        = hasFile && (fileType == SF3FileType.MPD);
 
             var mpdFile = (fileType == SF3FileType.MPD && file?.Loader?.Model != null) ? (IMPD_File) file.Loader.Model : null;
             UpdateMPD_ModelSwitchGroupsMenu(mpdFile);

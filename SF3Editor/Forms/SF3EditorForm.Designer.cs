@@ -103,6 +103,8 @@ namespace SF3.Editor.Forms {
             tsmiMonsters = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMonsters_UnapplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMonsters_ApplyMonsterEq = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiBlacksmith = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiBlacksmith_Sort = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Export = new System.Windows.Forms.ToolStripMenuItem();
             mpdTSMI_Export_ToScenario1MPD = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,8 +138,6 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiBlacksmith = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiBlacksmith_Sort = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -676,6 +676,22 @@ namespace SF3.Editor.Forms {
             tsmiMonsters_ApplyMonsterEq.Text = "&Apply Monster Equipment Stats...";
             tsmiMonsters_ApplyMonsterEq.Click += tsmiMonsters_ApplyMonsterEq_Click;
             // 
+            // tsmiBlacksmith
+            // 
+            tsmiBlacksmith.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiBlacksmith_Sort });
+            tsmiBlacksmith.Enabled = false;
+            tsmiBlacksmith.Name = "tsmiBlacksmith";
+            tsmiBlacksmith.Size = new Size(77, 20);
+            tsmiBlacksmith.Text = "&Blacksmith";
+            tsmiBlacksmith.Visible = false;
+            // 
+            // tsmiBlacksmith_Sort
+            // 
+            tsmiBlacksmith_Sort.Name = "tsmiBlacksmith_Sort";
+            tsmiBlacksmith_Sort.Size = new Size(192, 22);
+            tsmiBlacksmith_Sort.Text = "&Sort Blacksmith Tables";
+            tsmiBlacksmith_Sort.Click += tsmiBlacksmith_Sort_Click;
+            // 
             // tsmiMPD
             // 
             tsmiMPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiMPD_Export, tsmiMPD_Sep1, tsmiMPD_Chunks, tsmiMPD_Textures, tsmiMPD_ModelSwitchGroups, tsmiMPD_Sep2, tsmiMPD_RecalculateSurfaceModelNormals });
@@ -900,21 +916,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiBlacksmith
-            // 
-            tsmiBlacksmith.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiBlacksmith_Sort });
-            tsmiBlacksmith.Enabled = false;
-            tsmiBlacksmith.Name = "tsmiBlacksmith";
-            tsmiBlacksmith.Size = new Size(77, 20);
-            tsmiBlacksmith.Text = "&Blacksmith";
-            tsmiBlacksmith.Visible = false;
-            // 
-            // tsmiBlacksmith_Sort
-            // 
-            tsmiBlacksmith_Sort.Name = "tsmiBlacksmith_Sort";
-            tsmiBlacksmith_Sort.Size = new Size(192, 22);
-            tsmiBlacksmith_Sort.Text = "&Sort Blacksmith Tables";
             // 
             // SF3EditorForm
             // 

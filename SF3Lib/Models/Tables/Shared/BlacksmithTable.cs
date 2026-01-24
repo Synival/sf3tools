@@ -1,3 +1,5 @@
+using System.Linq;
+using CommonLib.Arrays;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
@@ -16,6 +18,20 @@ namespace SF3.Models.Tables.Shared {
                 (rows, prevRow) => prevRow.MaterialItem != 0xFFFF,
                 false
             );
+        }
+
+        public void SortByMaterialAndItemType() {
+            var sortedRows = Rows.OrderBy(x => x.MaterialItem).ThenBy(x => x.RequestItemType).ToArray();
+
+            var craftData = new ByteArray(0x28 * sortedRows.Length);
+            var pos = 0;
+            foreach (var row in sortedRows) {
+                var rowData = row.Data.GetDataCopyAt(row.Address, row.Size);
+                craftData.SetDataAtTo(pos, rowData.Length, rowData);
+                pos += row.Size;
+            }
+
+            Data.Data.SetDataAtTo(Address, craftData.Length, craftData.GetDataCopyOrReference());
         }
     }
 }
