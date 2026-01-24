@@ -128,13 +128,24 @@ namespace SF3.Utils {
             var expectedPrimaryChunk = expectedFile.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcExpOut) ? mcExpOut as ModelChunk : null;
             var actualPrimaryChunk   = actualFile  .ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcActOut) ? mcActOut as ModelChunk : null;
 
+            var eitt = expectedFile.IndexedTextureTable;
+            var aitt = actualFile.IndexedTextureTable;
+            var eanims = expectedFile.Animations;
+            var aanims = actualFile.Animations;
+
+            var animTablesOccupySameSpace = eanims != null && aanims != null && eanims.Address == aanims.Address && eanims.SizeInBytes == aanims.SizeInBytes;
+            var indexedTexturesTablesOccupySameSpace = eitt != null && aitt != null && eitt.Address == aitt.Address && eitt.SizeInBytes == aitt.SizeInBytes;
+
             ByteComparisonSkipRegion[] GetSkipRegions(int chunk) {
                 var regionList = skipRegionsByChunk.TryGetValue(chunk, out var bcsr) ? bcsr.ToList() : new List<ByteComparisonSkipRegion>();
 
+                // Chunk -1 is the "main" region from 0x0000 - 0x2000.
                 if (chunk == -1) {
-                    var anims = expectedFile.Animations;
-                    if (anims != null)
-                        regionList.Add(new ByteComparisonSkipRegion() { Offset = anims.Address, Size = anims.SizeInBytes });
+                    // Skip byte-for-byte comparisons of texture-related tables that aren't going to be in the same, somewhat arbitrary order.
+                    if (animTablesOccupySameSpace)
+                        regionList.Add(new ByteComparisonSkipRegion() { Offset = eanims.Address, Size = eanims.SizeInBytes });
+                    if (indexedTexturesTablesOccupySameSpace)
+                        regionList.Add(new ByteComparisonSkipRegion() { Offset = eitt.Address, Size = eitt.SizeInBytes });
                 }
 
                 // If checking the primary chunk, skip the collision tables.
@@ -166,6 +177,9 @@ namespace SF3.Utils {
                 return regionList.ToArray();
             }
 
+            // Scenario should be the same.
+            Assert(expectedFile.Scenario == actualFile.Scenario, $"Scenario is different: expected={expectedFile.Scenario}, actual={actualFile.Scenario}");
+
             // Main/header content from 0x0000 - 0x2000 should be identical.
             errors.AddRange(AnalysisUtils.GetByteComparisonErrors(
                 expectedFile.Data.GetDataCopyAt(0, 0x2000),
@@ -174,8 +188,19 @@ namespace SF3.Utils {
                 GetSkipRegions(-1) // Chunk -1 is a big dumb hack for the main/header area.
             ));
 
-            // Scenario should be the same.
-            Assert(expectedFile.Scenario == actualFile.Scenario, $"Scenario is different: expected={expectedFile.Scenario}, actual={actualFile.Scenario}");
+            // Compare animated textures table.
+            if (indexedTexturesTablesOccupySameSpace) {
+                var expectedAnimatedTextures = eanims.Select(x => x.TextureID).OrderBy(x => x).ToArray();
+                var actualAnimatedTextures   = aanims.Select(x => x.TextureID).OrderBy(x => x).ToArray();
+                // TODO: Actually compare the things!!
+            }
+
+            // Compare indexed textures table.
+            if (indexedTexturesTablesOccupySameSpace) {
+                var expectedOrderedTextures = eitt.Select(x => x.TextureID).OrderBy(x => x).ToArray();
+                var actualOrderedTextures   = aitt.Select(x => x.TextureID).OrderBy(x => x).ToArray();
+                Assert(Enumerable.SequenceEqual(expectedOrderedTextures, actualOrderedTextures), "Indexed texture tables are different");
+            }
 
             // Go chunk by chunk.
             var expectedChunkCount = expectedFile.ChunkData.Length;
