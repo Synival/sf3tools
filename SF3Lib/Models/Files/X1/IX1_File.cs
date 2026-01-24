@@ -7,7 +7,7 @@ using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
-    public interface IX1_File : IScenarioTableFile {
+    public interface IX1_File : IScenarioTableFile, IBlacksmithTableFile {
         bool IsBTL99 { get; }
         bool IsBattle { get; }
 
@@ -27,7 +27,6 @@ namespace SF3.Models.Files.X1 {
         Dictionary<uint, ModelInstanceTable> ModelInstanceTablesByAddress { get; }
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }
         MapUpdateFuncTable MapUpdateFuncTable { get; }
-        BlacksmithTable[] BlacksmithTables { get; }
         BattleTalkTable BattleTalkTable { get; }
     }
 }

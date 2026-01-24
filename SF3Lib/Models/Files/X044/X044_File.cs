@@ -37,13 +37,19 @@ namespace SF3.Models.Files.X044 {
             int monsterTableAddress = GetMonsterTableAddress();
             var tables = new List<ITable>();
 
-            if (monsterTableAddress > 0)
+            if (monsterTableAddress > 0) {
                 tables.Add(MonsterTable = MonsterTable.Create(Data, "Monsters", ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress));
+                MonsterTables = new MonsterTable[] { MonsterTable };
+            }
+            else
+                MonsterTables = new MonsterTable[0];
 
             return tables;
         }
 
         [BulkCopyRecurse]
         public MonsterTable MonsterTable { get; private set; }
+
+        public IEnumerable<MonsterTable> MonsterTables { get; private set; }
     }
 }

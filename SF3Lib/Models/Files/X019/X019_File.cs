@@ -40,12 +40,18 @@ namespace SF3.Models.Files.X019 {
 
         public override IEnumerable<ITable> MakeTables() {
             int monsterTableAddress = GetMonsterTableAddress();
-            return new List<ITable>() {
+
+            var lists = new List<ITable>() {
                 (MonsterTable = MonsterTable.Create(Data, "Monsters", ResourceFileForScenario(Scenario, "Monsters.xml"), monsterTableAddress))
             };
+            MonsterTables = new MonsterTable[] { MonsterTable };
+
+            return lists;
         }
 
         [BulkCopyRecurse]
         public MonsterTable MonsterTable { get; private set; }
+
+        public IEnumerable<MonsterTable> MonsterTables { get; private set; }
     }
 }

@@ -208,7 +208,13 @@ namespace SF3.Models.Files.X1 {
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
             DiscoverFunctions(searchData);
-            tables.AddRange(DiscoverData(tables, searchData));
+            DiscoverData(tables, searchData, out var blacksmithTables);
+
+            if (blacksmithTables != null) {
+                BlacksmithTables = blacksmithTables.ToArray();
+                tables.AddRange(blacksmithTables);
+            }
+
             tables.AddRange(PopulateMapUpdateFuncTables());
             tables.AddRange(PopulateModelInstanceTables());
             PopulateScripts();
@@ -289,7 +295,7 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
-        private ITable[] DiscoverData(IEnumerable<ITable> table, byte[] data) {
+        private void DiscoverData(IEnumerable<ITable> table, byte[] data, out IEnumerable<BlacksmithTable> blacksmithTables) {
             foreach (var t in table) {
                 if (t.IsContiguous) {
                     var type = t.GetType();
@@ -300,7 +306,7 @@ namespace SF3.Models.Files.X1 {
 
             DiscoverModelInstantiateData(data);
             DiscoverRenderThinkFuncsData(data);
-            return DiscoverBlacksmithData(data);
+            blacksmithTables = DiscoverBlacksmithData(data);
         }
 
         private void DiscoverModelInstantiateData(byte[] data) {
@@ -365,14 +371,14 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
-        private ITable[] DiscoverBlacksmithData(byte[] data) {
+        private IEnumerable<BlacksmithTable> DiscoverBlacksmithData(byte[] data) {
             // The blacksmith functions are too huge to look for, so let's just look for small branches in them.
             var blacksmithBranches = Discoveries.GetFunctions()
                 .Where(x => x.TypeName.StartsWith("BlacksmithFunction"))
                 .ToArray();
 
             if (blacksmithBranches.Length == 0)
-                return new ITable[0];
+                return new BlacksmithTable[0];
 
             int GetFuncOffset(string name) {
                 switch (name.Replace("()", "")) {
@@ -761,7 +767,7 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public MapUpdateFuncTable MapUpdateFuncTable { get; private set; }
         [BulkCopyRecurse]
-        public BlacksmithTable[] BlacksmithTables { get; private set; }
+        public IEnumerable<BlacksmithTable> BlacksmithTables { get; private set; }
         [BulkCopyRecurse]
         public BattleTalkTable BattleTalkTable { get; private set; }
     }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using SF3.Models.Files.X027;
 using SF3.Models.Tables.Shared;
 
@@ -13,8 +14,8 @@ namespace SF3.Win.Views.X027 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            if (Model.BlacksmithTables?.Length > 0)
-                CreateChild(new TableArrayView<BlacksmithTable>("Blacksmith", Model.BlacksmithTables, ngc));
+            if (Model.BlacksmithTables?.Any() == true)
+                CreateChild(new TableArrayView<BlacksmithTable>("Blacksmith", Model.BlacksmithTables.ToArray(), ngc));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 

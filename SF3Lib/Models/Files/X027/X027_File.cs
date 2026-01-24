@@ -57,6 +57,6 @@ namespace SF3.Models.Files.X027 {
             return tables;
         }
 
-        public BlacksmithTable[] BlacksmithTables { get; private set; }
+        public IEnumerable<BlacksmithTable> BlacksmithTables { get; private set; }
     }
 }

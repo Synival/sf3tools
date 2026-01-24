@@ -113,8 +113,12 @@ namespace SF3.Models.Files.X023 {
             }
 
             var blacksmithAddr = GetBlacksmithTableAddr();
-            if (blacksmithAddr > 0)
+            if (blacksmithAddr > 0) {
                 tables.Add(BlacksmithTable = BlacksmithTable.Create(Data, nameof(BlacksmithTable), blacksmithAddr));
+                BlacksmithTables = new BlacksmithTable[] { BlacksmithTable };
+            }
+            else
+                BlacksmithTables = new BlacksmithTable[0];
 
             return tables;
         }
@@ -126,5 +130,6 @@ namespace SF3.Models.Files.X023 {
         public ShopHagglesPointerTable ShopHagglesPointerTable { get; private set; }
         public Dictionary<int, ShopHaggleTable> ShopHaggleTablesByAddress { get; private set; }
         public BlacksmithTable BlacksmithTable { get; private set; }
+        public IEnumerable<BlacksmithTable> BlacksmithTables { get; private set; }
     }
 }

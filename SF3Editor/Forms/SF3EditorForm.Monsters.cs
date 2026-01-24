@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
+using SF3.Models.Files;
 using SF3.Models.Files.X002;
-using SF3.Models.Files.X019;
 using SF3.Models.Tables.Shared;
 using SF3.NamedValues;
 using SF3.Types;
@@ -13,27 +15,29 @@ using static CommonLib.Win.Utils.MessageUtils;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
-        private void tsmiX019_UnapplyMonsterEq_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.X019 || SelectedFile?.FileType == SF3FileType.X044)
-                if (ApplyMonsterEquipmentStatsDialog((SelectedFile.Loader.Model as IX019_File)!.MonsterTable, SelectedFile.Scenario, /* apply */ false))
+        private void tsmiMonsters_UnapplyMonsterEq_Click(object sender, EventArgs e) {
+            var mtf = SelectedFile?.Loader?.Model as IMonsterTableFile;
+            if (mtf?.MonsterTables?.Any() == true)
+                if (ApplyMonsterEquipmentStatsDialog(mtf.MonsterTables, SelectedFile!.Scenario, /* apply */ false))
                     SelectedFile.View.RefreshContent();
         }
 
-        private void tsmiX019_ApplyMonsterEq_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.X019 || SelectedFile?.FileType == SF3FileType.X044)
-                if (ApplyMonsterEquipmentStatsDialog((SelectedFile.Loader.Model as IX019_File)!.MonsterTable, SelectedFile.Scenario, /* apply */ true))
+        private void tsmiMonsters_ApplyMonsterEq_Click(object sender, EventArgs e) {
+            var mtf = SelectedFile?.Loader?.Model as IMonsterTableFile;
+            if (mtf?.MonsterTables?.Any() == true)
+                if (ApplyMonsterEquipmentStatsDialog(mtf.MonsterTables, SelectedFile!.Scenario, /* apply */ true))
                     SelectedFile.View.RefreshContent();
         }
 
         /// <summary>
         /// Prompts the user for an X002 file and, if found, attempts to apply/unapply stat changes in the file's ItemTable to all monsters in s MonsterTable.
         /// </summary>
-        /// <param name="monsterTable">The table with monsters to be affected.</param>
+        /// <param name="monsterTables">The tables with monsters to be affected.</param>
         /// <param name="scenario">The scenario to which the X002 file should belong.</param>
         /// <param name="apply">When true, stat changes are applied. When false, stat changes are unapplied.</param>
         /// <returns>Returns 'true' if successful and not cancelled, otherwise 'false'.</returns>
-        public bool ApplyMonsterEquipmentStatsDialog(MonsterTable monsterTable, ScenarioType scenario, bool apply) {
-            if (monsterTable == null)
+        public bool ApplyMonsterEquipmentStatsDialog(IEnumerable<MonsterTable> monsterTables, ScenarioType scenario, bool apply) {
+            if (monsterTables == null || !monsterTables.Any())
                 return false;
 
             // Fetch a filename for an X002 file, allowing for 'Cancel'.
@@ -66,7 +70,8 @@ namespace SF3.Editor.Forms {
             var monstersAffected = 0;
             var itemsApplied = 0;
             try {
-                (monstersAffected, itemsApplied) = monsterTable.ApplyEquipmentStats(x002File.ItemTable, apply);
+                foreach (var monsterTable in monsterTables)
+                    (monstersAffected, itemsApplied) = monsterTable.ApplyEquipmentStats(x002File.ItemTable, apply);
             }
             catch (Exception e) {
                 ErrorMessage($"Couldn't apply items:\n\r\n{e.GetTypeAndMessage()}");

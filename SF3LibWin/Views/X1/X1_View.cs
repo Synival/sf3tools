@@ -39,8 +39,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<ModelInstanceTable>("Model Instances", Model.ModelInstanceTablesByAddress.Values.ToArray(), ngc));
             if (Model.MapUpdateFuncTable != null)
                 CreateChild(new TableView("Map Update Functions", Model.MapUpdateFuncTable, ngc));
-            if (Model.BlacksmithTables?.Length > 0)
-                CreateChild(new TableArrayView<BlacksmithTable>("Blacksmith", Model.BlacksmithTables, ngc));
+            if (Model.BlacksmithTables?.Any() == true)
+                CreateChild(new TableArrayView<BlacksmithTable>("Blacksmith", Model.BlacksmithTables.ToArray(), ngc));
             if (Model.BattleTalkTable != null)
                 CreateChild(new TableView("Battle Talk", Model.BattleTalkTable, ngc));
 
