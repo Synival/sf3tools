@@ -87,6 +87,27 @@ namespace SF3.Tests.MPD {
         }
 
         [TestMethod]
+        public void WriteMPD_WithScenario2_MUBAR2_ProducesVerySpecificDifferences() {
+            try {
+                // This file has a vestigial dummied-out Scenario 1 "Unknown 2" table instead of a gradient.
+                // The effect in-game is the same (the pointer points to 0xFFFF, which means 'no table' in both
+                // Scenario 1 and Scenario 2), but the data is bogus. We're not going to bother reproducing
+                // this error.
+                ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "MUBAR2", performByteComparison: false);
+            }
+            catch (Exception ex) {
+                Assert.AreEqual(
+                    "Assert.Fail failed. \r\n" +
+                    "=================================================\r\n" +
+                    "Main/Header Region:\r\n" +
+                    "  Comparable data is wrong: 79.06% accurate (1715 wrong bytes)\r\n" +
+                    "  First wrong byte is at 3 (0x0003):\r\n" +
+                    "    Should be 68 (0x44), is 56 (0x38)",
+                    ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void WriteMPD_WithScenario2_BTL42_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "BTL42", performByteComparison: false);
 
