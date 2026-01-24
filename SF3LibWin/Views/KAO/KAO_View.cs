@@ -26,6 +26,5 @@ namespace SF3.Win.Views.KAO {
                 }
             }
         }
-
     }
 }

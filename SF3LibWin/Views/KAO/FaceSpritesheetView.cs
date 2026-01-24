@@ -4,9 +4,9 @@ using CommonLib.NamedValues;
 using SF3.Models.Structs.KAO;
 
 namespace SF3.Win.Views.KAO {
-    public class FaceHeaderView : ControlSpaceView {
-        public FaceHeaderView(string name, FaceChunk chunk, INameGetterContext nameGetterContext) : base(name) {
-            HeaderView  = new DataModelView("Header", Header, nameGetterContext, typeof(FaceHeader));
+    public class FaceSpritesheetView : ControlSpaceView {
+        public FaceSpritesheetView(string name, FaceChunk chunk, INameGetterContext nameGetterContext) : base(name) {
+            SpritesheetView = new TextureView("Spritesheet", Spritesheet, imageScale: 2.0f);
             TextureView = new FaceAnimationView("FaceAnimation", chunk);
             Chunk       = chunk;
         }
@@ -15,7 +15,7 @@ namespace SF3.Win.Views.KAO {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(HeaderView, null);
+            CreateChild(SpritesheetView, null);
             CreateChild(TextureView, (c) => c.Dock = DockStyle.Right, autoFill: false);
 
             return Control;
@@ -39,7 +39,7 @@ namespace SF3.Win.Views.KAO {
                         DetachInvalidatedEvents(_chunk);
 
                     _chunk = value;
-                    HeaderView.Model = _chunk?.Header;
+                    SpritesheetView.Texture = _chunk?.Spritesheet;
 
                     if (_chunk != null)
                         AttachInvalidatedEvents(_chunk);
@@ -58,9 +58,9 @@ namespace SF3.Win.Views.KAO {
             chunk.Data.Data.RangeModified -= OnChunkModified;
         }
 
-        public FaceHeader Header => Chunk?.Header;
+        public FaceSpritesheet Spritesheet => Chunk?.Spritesheet;
 
-        public DataModelView HeaderView { get; }
+        public TextureView SpritesheetView { get; }
         public FaceAnimationView TextureView { get; }
     }
 }
