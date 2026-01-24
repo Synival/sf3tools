@@ -36,6 +36,7 @@ namespace SF3.Models.Structs.MPD.Animation {
             var frames = new List<AnimationFrame>();
 
             // This happens in Scn2 SARA23.MPD for some reason...
+            // (It's totally a mistake in the file. The game crashes if you let it run for about 36 minutes!!)
             if (TextureIDRaw == _frameEndOffset)
                 pos = Address + _bytesPerProperty;
             else if (TextureIDRaw != _textureEndId) {
