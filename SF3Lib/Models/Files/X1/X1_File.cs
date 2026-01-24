@@ -375,7 +375,7 @@ namespace SF3.Models.Files.X1 {
                 return new ITable[0];
 
             int GetFuncOffset(string name) {
-                switch (name) {
+                switch (name.Replace("()", "")) {
                     case "blacksmithRelatedBranchScn1":
                         return 0x48;
                     case "blacksmithRelatedBranchScn2+":
