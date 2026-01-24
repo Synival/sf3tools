@@ -98,10 +98,5 @@ namespace SF3.MPD {
         /// Second unknown Scenario 1 0xFFFF-terminated table.
         /// </summary>
         IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; }
-
-        /// <summary>
-        /// Technical setting. This is set if there's data in between the PaletteAdjustment data and the ModelSwitchGroup data.
-        /// </summary>
-        IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustment { get; }
     }
 }

@@ -34,8 +34,8 @@ namespace SF3.MPD {
             WriteToAlignTo(2);
 
             // Some Scenario 2 maps have some junk after the "palette adjustment" struct.
-            if (mpd.UnreferencedDataAfterPaletteAdjustment != null)
-                WriteBytes(mpd.UnreferencedDataAfterPaletteAdjustment.ToArray());
+            if (mpd.BinaryReproductionFlags.UnreferencedDataAfterPaletteAdjustmentTable != null)
+                WriteBytes(mpd.BinaryReproductionFlags.UnreferencedDataAfterPaletteAdjustmentTable.ToArray());
 
             var modelSwitchGroupsPos = WriteModelSwitchGroupsOrNull(mpd.ModelSwitchGroups);
 

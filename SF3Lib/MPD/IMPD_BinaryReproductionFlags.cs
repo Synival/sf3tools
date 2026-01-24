@@ -1,4 +1,6 @@
-﻿namespace SF3.MPD {
+﻿using CommonLib;
+
+namespace SF3.MPD {
     /// <summary>
     /// Interface for settings that don't affect gameplay but are necessary for byte-for-byte reproduction of MPD files.
     /// </summary>
@@ -46,5 +48,10 @@
         /// When set, this is the index the surface model chunk can be found in, which is unexpected from logic.
         /// </summary>
         int? MisplacedSurfaceModelChunkIndex { get; set; }
+
+        /// <summary>
+        /// When set, this junk data is written after the "palette adjustment" table.
+        /// </summary>
+        IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustmentTable { get; set; }
     }
 }

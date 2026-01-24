@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CommonLib;
 using SF3.Models.Files.MPD;
 using SF3.MPD;
 using SF3.Types;
@@ -62,6 +63,11 @@ namespace SF3.Models.Structs.MPD {
                 var index = MPD_File.SurfaceModelChunkData?.Index;
                 return (index != MPD_File.Flags.SurfaceModelChunkIndex) ? index : null;
             }
+            set {}
+        }
+
+        public IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustmentTable {
+            get => MPD_File.UnreferencedDataAfterPaletteAdjustmentTable;
             set {}
         }
     }
