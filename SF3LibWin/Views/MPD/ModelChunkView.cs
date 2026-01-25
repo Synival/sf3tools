@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
+using CommonLib.Arrays;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.Model;
 using SF3.Types;
@@ -26,6 +27,13 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.HeaderModelInstanceTable != null)
                 CreateChild(new TableView("Model Instances", Model.HeaderModelInstanceTable, ngc));
+
+            if (Model.DataAfterInstancesTable != null) {
+                // TODO: Would be cool if you could edit this!
+                var model = Model.DataAfterInstancesTable;
+                // 0x0C is usually what we want to see, because it's the length of ATTR's.
+                CreateChild(new DataHexView("Data After Instances", new ByteArray(model.Data.GetDataCopyAt(model.Address, model.SizeInBytesPlusTerminator)), 0x0C));
+            }
 
             CreateChild(new PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));

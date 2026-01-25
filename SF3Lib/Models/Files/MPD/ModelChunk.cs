@@ -206,6 +206,15 @@ namespace SF3.Models.Files.MPD {
                         // TODO: what to do here?
                     }
                 }
+
+                // ATBTL, ELINB, and ATBTL2 have some additional data (ATTRs) in between the model instance table and the PDATA's referenced.
+                if (ModelInstanceTable?.Length > 0 && PDatasByMemoryAddress?.Count > 0) {
+                    var endOfInstanceTable = ModelInstanceTable.Address + ModelInstanceTable.SizeInBytesPlusTerminator;
+                    var startOfPDatas = PDatasByMemoryAddress.Values.First().Address;
+                    var diff = startOfPDatas - endOfInstanceTable;
+                    if (diff > 0)
+                        DataAfterInstancesTable = UnknownUInt8Table.Create(Data, nameof(DataAfterInstances), endOfInstanceTable, diff, readUntil: null);
+                }
             }
 
             var tables =
@@ -226,6 +235,8 @@ namespace SF3.Models.Files.MPD {
 
             if (CollisionLineIndexTablesByBlock != null)
                 tables.AddRange(CollisionLineIndexTablesByBlock.Values);
+            if (DataAfterInstancesTable != null)
+                tables.Add(DataAfterInstancesTable);
 
             return tables;
         }
@@ -335,6 +346,9 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Dictionary<int, CollisionLineIndexTable> CollisionLineIndexTablesByBlock { get; private set; }
 
+        [BulkCopyRecurse]
+        public UnknownUInt8Table DataAfterInstancesTable { get; private set; }
+
         private bool _gotTextures = false;
         private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;
         public IEnumerableWithLength<IMPD_AnimatableTexture> Textures {
@@ -355,6 +369,11 @@ namespace SF3.Models.Files.MPD {
                 }
                 return _textures;
             }
+        }
+
+        public IIndexedEnumerableWithLength<byte> DataAfterInstances {
+            get => DataAfterInstancesTable;
+            set {}
         }
 
         public bool IsUnreferenced { get; set; }

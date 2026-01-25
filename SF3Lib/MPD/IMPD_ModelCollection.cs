@@ -34,6 +34,12 @@ namespace SF3.MPD {
         IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
 
         /// <summary>
+        /// Optional data that exists after the model instance table but before PDATAs.
+        /// This appears in ATBTL, ELINB, and ATBTL2.
+        /// </summary>
+        IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
+
+        /// <summary>
         /// When 'true', this model is serialized but not referenced in the MPD header.
         /// </summary>
         bool IsUnreferenced { get; set; }

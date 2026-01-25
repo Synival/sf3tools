@@ -122,5 +122,9 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario2_STAMP3_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "STAMP3", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_ELINB_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "ELINB", performByteComparison: false);
     }
 }

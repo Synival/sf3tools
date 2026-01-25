@@ -17,5 +17,6 @@ namespace SF3.Models.Tables.MPD.Model {
 
         public MPD_CollectionType Collection { get; }
         public bool HasTagsAndFlags { get; }
+        public override int TerminatorSize => 4;
     }
 }

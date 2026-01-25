@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
 using CommonLib.SGL;
 using SF3.Extensions;
 
 namespace SF3.MPD {
     public partial class MPD_Writer {
-        public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory)
-            => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, collisions, isHighMemory));
+        public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances)
+            => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, collisions, isHighMemory, dataAfterInstances));
 
-        public void WriteModelChunkContent(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory) {
+        public void WriteModelChunkContent(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -31,6 +32,10 @@ namespace SF3.MPD {
                 foreach (var inst in instances)
                     WriteModelChunkInstance(inst, pdataIdToOffsetPtrMap);
             WriteUInt(0);
+
+            if (dataAfterInstances != null)
+                WriteBytes(dataAfterInstances.ToArray());
+            WriteToAlignTo(4);
 
             // PDATAs, POINTs, POLYGONs, and ATTRs follow after that.
             if (models != null)
