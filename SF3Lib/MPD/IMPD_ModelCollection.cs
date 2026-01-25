@@ -35,7 +35,7 @@ namespace SF3.MPD {
 
         /// <summary>
         /// Optional data that exists after the model instance table but before PDATAs.
-        /// This appears in ATBTL, ELINB, and ATBTL2.
+        /// This appears in ATBTL2 (S2), ELINB, and ATBTL2 (S3).
         /// </summary>
         IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
 

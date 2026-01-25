@@ -207,7 +207,7 @@ namespace SF3.Models.Files.MPD {
                     }
                 }
 
-                // ATBTL, ELINB, and ATBTL2 have some additional data (ATTRs) in between the model instance table and the PDATA's referenced.
+                // ATBTL2 (S2), ELINB, and ATBTL2 (S3) have some additional data (ATTRs) in between the model instance table and the PDATA's referenced.
                 if (ModelInstanceTable?.Length > 0 && PDatasByMemoryAddress?.Count > 0) {
                     var endOfInstanceTable = ModelInstanceTable.Address + ModelInstanceTable.SizeInBytesPlusTerminator;
                     var startOfPDatas = PDatasByMemoryAddress.Values.First().Address;

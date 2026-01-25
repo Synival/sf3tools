@@ -92,5 +92,28 @@ namespace SF3.Tests.MPD {
         [TestMethod]
         public void WriteMPD_WithScenario2_ELINB_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "ELINB", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_ATBTL2_ProducesSameLoadableData() {
+            try {
+                // This map is funny -- it's the only time the LoD feature is actually put into use, but not for what
+                // it was likely intended for. There are floor polys that only appear when very distant, at a distance
+                // when the surface model is not visible. The floor polys match the surface model, so they're used to
+                // make sure the long road is always visible.
+                ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "ATBTL2", performByteComparison: false);
+            }
+            catch (Exception ex) {
+                Assert.AreEqual(
+                    "Assert.Fail failed. \r\n" +
+                    "=================================================\r\n" +
+                    "Chunk[20] (uncompressed data -- actual offset is 0x39894:\r\n" +
+                    "  Length is wrong: should be 45310 (0x0B0FE), is 45426 (0x0B172)\r\n" +
+                    "  Comparable data is wrong: 91.31% accurate (3942 wrong bytes)\r\n" +
+                    "  First wrong byte is at 235671 (0x39897):\r\n" +
+                    "    Should be 112 (0x70), is 184 (0xB8)",
+                    ex.Message);
+
+            }
+        }
     }
 }
