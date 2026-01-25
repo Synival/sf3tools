@@ -35,6 +35,25 @@ namespace SF3.Models.Tables.MPD.Main {
                     if (ReadUntil.HasValue && addr + 0x18 > ReadUntil.Value)
                         break;
 
+                    // If we're looking at a dummied-out gradient, make sure it really looks like one.
+                    if (isDummiedOut) {
+                        if (Data.GetWord(addr + 0x00) > 0xFF ||
+                            Data.GetWord(addr + 0x02) > 0xFF ||
+                            Data.GetWord(addr + 0x04) > 0x1F ||
+                            Data.GetWord(addr + 0x06) > 0x1F ||
+                            Data.GetWord(addr + 0x08) > 0x1F ||
+                            Data.GetWord(addr + 0x0A) > 0x1F ||
+                            Data.GetWord(addr + 0x0C) > 0x1F ||
+                            Data.GetWord(addr + 0x0E) > 0x1F ||
+                            Data.GetWord(addr + 0x10) > 0x07 ||
+                            Data.GetWord(addr + 0x12) > 0x1F ||
+                            Data.GetWord(addr + 0x14) > 0x1F ||
+                            Data.GetWord(addr + 0X16) > 0x1F)
+                        {
+                            break;
+                        }
+                    }
+
                     rows.Add(new Gradient(Data, nextId, $"Gradient_{nextId}", addr, isDummiedOut));
                     nextId++;
                     addr += 0x18;
