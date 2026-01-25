@@ -284,7 +284,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public IMPD_Model GetModel(int id)
-            => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ID == id && x.Index == 0);
+            => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ID == id);
 
         private IEnumerableWithLength<IMPD_Model> _mpdModels;
         public IEnumerableWithLength<IMPD_Model> Models {
