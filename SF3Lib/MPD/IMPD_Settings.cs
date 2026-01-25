@@ -106,6 +106,13 @@ namespace SF3.MPD {
         bool IsGradientDummiedOut { get; set; }
 
         /// <summary>
+        /// When true, an Unknown2 table exists, but is dummied out with a preceeding 0xFFFF.
+        /// This occurs in some Scenario 2 maps (MUBAR2, SARA22), where they just added 0xFFF to the front
+        /// and didn't bother with a gradient.
+        /// </summary>
+        bool IsUnknown2TableDummiedOut { get; set; }
+
+        /// <summary>
         /// When set, the table with ignored textures exists, but is serialized with 'FFFF' before it and unused.
         /// </summary>
         bool AreIgnoredTexturesDummiedOut { get; set; }

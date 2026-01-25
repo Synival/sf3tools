@@ -28,7 +28,7 @@ namespace SF3.MPD {
             // An "unknown 1" table in Scenario 1 was replaced with a "palette adjustment" struct in Scenario 2+.
             uint? unknown1OrPaletteAdjustPos = null;
             if (Scenario < ScenarioType.Scenario2)
-                unknown1OrPaletteAdjustPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1);
+                unknown1OrPaletteAdjustPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable1, false);
             else
                 unknown1OrPaletteAdjustPos = WritePaletteAdjustmentOrNull(mpd.Settings, mpd.BinaryReproductionFlags);
             WriteToAlignTo(2);
@@ -47,7 +47,7 @@ namespace SF3.MPD {
             // An "unknown 2" table in Scenario 1 was replaced with a "gradient" struct in Scenario 2+.
             uint? unknown2OrGradientPos = null;
             if (Scenario < ScenarioType.Scenario2)
-                unknown2OrGradientPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2);
+                unknown2OrGradientPos = WriteUnknownUInt16TableOrNull(mpd.Scenario1UnknownTable2, mpd.Settings.IsUnknown2TableDummiedOut);
             else {
                 // Always set, whether it exists or not. It's structured like a table for some reason.
                 unknown2OrGradientPos = (uint) CurrentOffset;
@@ -241,10 +241,12 @@ namespace SF3.MPD {
             WriteByte(0xFF);
         }
 
-        public uint? WriteUnknownUInt16TableOrNull(IEnumerable<ushort> table)
-            => WriteObjectOrNull(() => table != null, () => WriteUnknownUInt16Table(table));
+        public uint? WriteUnknownUInt16TableOrNull(IEnumerable<ushort> table, bool isDummiedOut)
+            => WriteObjectOrNull(() => table != null, () => WriteUnknownUInt16Table(table, isDummiedOut));
 
-        public void WriteUnknownUInt16Table(IEnumerable<ushort> table) {
+        public void WriteUnknownUInt16Table(IEnumerable<ushort> table, bool isDummiedOut) {
+            if (isDummiedOut)
+                WriteUShort(0xFFFF);
             foreach (var value in table)
                 WriteUShort(value);
         }

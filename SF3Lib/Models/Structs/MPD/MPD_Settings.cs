@@ -145,6 +145,11 @@ namespace SF3.Models.Structs.MPD {
             set {}
         }
 
+        public bool IsUnknown2TableDummiedOut {
+            get => MPD_File.Unknown2Table?.IsDummiedOut == true;
+            set {}
+        }
+
         public bool AreIgnoredTexturesDummiedOut {
             get => MPD_File.IgnoredTextureTable?.IsDummiedOut == true;
             set {}

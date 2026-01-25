@@ -40,21 +40,23 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new AnimationFramesView("Animation Frames", Model, ngc));
             }
 
-            if (Model.Unknown2Table != null)
-                CreateChild(new TableView("Unknown 2", Model.Unknown2Table, ngc));
+            if (Model.GradientTable != null) {
+                if (Model.GradientTable.Length == 1)
+                    CreateChild(new DataModelView("Gradient" + (Model.GradientTable[0].IsDummiedOut ? " (Dummied Out)" : ""), Model.GradientTable[0], ngc));
+                else if (Model.GradientTable.Length > 0)
+                    CreateChild(new TableView("Gradients", Model.GradientTable, ngc));
+            }
+
+            if (Model.Unknown2Table != null) {
+                var name = "Unknown 2" + (Model.Unknown2Table.IsDummiedOut ? " (Dummied Out)" : "");
+                CreateChild(new TableView(name, Model.Unknown2Table, ngc));
+            }
 
             if (Model.Unknown3Table != null)
                 CreateChild(new TableView("Unknown 3 (Ship2)", Model.Unknown3Table, ngc));
 
             if (Model.Unknown4Table != null)
                 CreateChild(new TableView("Unknown 4 (Prototype)", Model.Unknown4Table, ngc));
-
-            if (Model.GradientTable != null) {
-                if (Model.GradientTable.Length == 1)
-                    CreateChild(new DataModelView("Gradient" + (Model.GradientTable[0].IsDummiedOut ? " (Dummied Out)" : ""), Model.GradientTable[0], ngc));
-                else
-                    CreateChild(new TableView("Gradients", Model.GradientTable, ngc));
-            }
 
             if (Model.GroundAnimationTable != null) {
                 var name = "Ground Animation" + (Model.GroundAnimationTable.IsDummiedOut ? " (Dummied Out)" : "");

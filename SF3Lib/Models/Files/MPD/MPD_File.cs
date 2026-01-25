@@ -187,7 +187,7 @@ namespace SF3.Models.Files.MPD {
         public AnimationTable Animations { get; private set; }
 
         [BulkCopyRecurse]
-        public UnknownUInt16Table Unknown2Table { get; private set; }
+        public Unknown2Table Unknown2Table { get; private set; }
 
         [BulkCopyRecurse]
         public UnknownUInt16Table Unknown3Table { get; private set; }

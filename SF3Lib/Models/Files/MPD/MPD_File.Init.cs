@@ -223,10 +223,18 @@ namespace SF3.Models.Files.MPD {
             }
 
             // This table is only present before Scenario 2 and varies in size.
-            if (header.OffsetUnknown2 > 0) {
-                var maxSize = (header.OffsetGroundAnimation > 0) ? ((header.OffsetGroundAnimation - header.OffsetUnknown2) / 2) : 0;
-                if (maxSize > 0)
-                    tables.Add(Unknown2Table = UnknownUInt16Table.Create(Data, "Unknown2", header.OffsetUnknown2 - RamAddress, maxSize, null));
+            if (header.OffsetUnknown2 > 0 && header.OffsetGroundAnimation > 0) {
+                var size = (header.OffsetGroundAnimation - header.OffsetUnknown2) / 2;
+                if (size > 0) {
+                    var addr = header.OffsetUnknown2 - RamAddress;
+                    bool isDummiedOut = false;
+                    if (Data.GetWord(addr) == 0xFFFF && size > 1) {
+                        addr += 2;
+                        isDummiedOut = true;
+                        size--;
+                    }
+                    tables.Add(Unknown2Table = Unknown2Table.Create(Data, "Unknown2", addr, size, isDummiedOut));
+                }
             }
 
             // This table is only present in SHIP2.

@@ -120,7 +120,7 @@ namespace SF3.Models.Files.MPD {
         ColorTable TexturePaletteColorTable { get; }
         IndexedTextureTable IndexedTextureTable { get; }
         AnimationTable Animations { get; }
-        UnknownUInt16Table Unknown2Table { get; }
+        Unknown2Table Unknown2Table { get; }
         UnknownUInt16Table Unknown3Table { get; }
         UnknownUInt16Table Unknown4Table { get; }
         GradientTable GradientTable { get; }
