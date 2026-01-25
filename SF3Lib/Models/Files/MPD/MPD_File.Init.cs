@@ -236,6 +236,15 @@ namespace SF3.Models.Files.MPD {
                     tables.Add(Unknown2Table = Unknown2Table.Create(Data, "Unknown2", addr, size, isDummiedOut));
                 }
             }
+            // Some files have an old, dummied out Unknown 2 (MUBAR, SARA22). Let's load them, just for fun.
+            else if (header.OffsetGradient > 0 && header.OffsetGroundAnimation > 0) {
+                var gradient = (GradientTable.Length > 0) ? GradientTable.Last() : null;
+                var start = (gradient == null) ? header.OffsetGradient + 0x02 : (gradient.Address + gradient.Size + 0x02 + RamAddress);
+
+                var size = (header.OffsetGroundAnimation - start) / 2;
+                if (size > 1)
+                    tables.Add(Unknown2Table = Unknown2Table.Create(Data, "Unknown2", start - RamAddress, size, true));
+            }
 
             // This table is only present in SHIP2.
             if (header.OffsetUnknown3 > 0) {

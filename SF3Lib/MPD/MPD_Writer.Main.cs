@@ -54,6 +54,8 @@ namespace SF3.MPD {
                 if (mpd.Gradient != null)
                     WriteGradient(mpd.Gradient, mpd.Settings.IsGradientDummiedOut);
                 WriteUShort(0xFFFF);
+                if (mpd.Settings.IsUnknown2TableDummiedOut && mpd.Scenario1UnknownTable2 != null)
+                    WriteUnknownUInt16Table(mpd.Scenario1UnknownTable2, false);
             }
 
             WriteToAlignTo(4);
