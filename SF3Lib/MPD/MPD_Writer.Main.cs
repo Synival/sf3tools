@@ -312,26 +312,26 @@ namespace SF3.MPD {
             textures = (textures ?? new IMPD_AnimatableTexture[0]).Where(x => x.Animation != null && !x.IsIgnored).ToArray();
 
             var chunk3DataArray = textures.Length > 0 ? new ByteArray(0x10000) : null;
-            var chunk3Size = 0;
+            var chunk3Size = 0u;
 
-            var textureDataByPos = new Dictionary<ushort, byte[]>();
+            var textureDataByPos = new Dictionary<uint, byte[]>();
 
-            ushort AddTextureToChunk3(byte[] textureData) {
+            uint AddTextureToChunk3(byte[] textureData) {
                 var existingEntry = textureDataByPos.FirstOrDefault(x => Enumerable.SequenceEqual(textureData, x.Value));
                 if (existingEntry.Value != null)
                     return existingEntry.Key;
 
                 var compressedTextureData = Compression.CompressLZSS(textureData);
 
-                var chunk3WritePos = (ushort) chunk3Size;
-                chunk3Size = chunk3WritePos + compressedTextureData.Length;
+                var chunk3WritePos = (uint) chunk3Size;
+                chunk3Size = (uint) (chunk3WritePos + compressedTextureData.Length);
                 if (chunk3Size % 4 != 0)
                     chunk3Size += 4 - (chunk3Size % 4);
 
                 while (chunk3Size > chunk3DataArray.Length)
-                    chunk3DataArray.Resize(chunk3Size + 0x10000);
+                    chunk3DataArray.Resize((int) (chunk3Size + 0x10000u));
 
-                chunk3DataArray.SetDataAtTo(chunk3WritePos, compressedTextureData.Length, compressedTextureData);
+                chunk3DataArray.SetDataAtTo((int) chunk3WritePos, compressedTextureData.Length, compressedTextureData);
                 textureDataByPos.Add(chunk3WritePos, textureData);
 
                 return chunk3WritePos;
@@ -393,7 +393,7 @@ namespace SF3.MPD {
             else {
                 if (chunk3Size % 4 != 0)
                     chunk3Size += 4 - (chunk3Size % 4);
-                chunk3Data = chunk3DataArray.GetDataCopyAt(0, chunk3Size);
+                chunk3Data = chunk3DataArray.GetDataCopyAt(0, (int) chunk3Size);
             }
 
             return pos;
