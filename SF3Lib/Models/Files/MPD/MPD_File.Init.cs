@@ -329,7 +329,7 @@ namespace SF3.Models.Files.MPD {
                     return false;
                 var dataRef = Data.GetDataCopyOrReference();
                 for (int i = 0; i < count; i++)
-                    if (dataRef[address + count] != 0)
+                    if (dataRef[address + i] != 0)
                         return false;
                 return true;
             }
