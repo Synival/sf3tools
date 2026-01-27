@@ -52,5 +52,29 @@ namespace SF3.MPD {
                 ? MemoryLocationType.LowMemory
                 : MemoryLocationType.HighMemory;
         }
+
+        /// <summary>
+        /// When set, specifies the type of chunk located in Chunk[20] (either 'Models' or 'SurfaceModel').
+        /// </summary>
+        public static ChunkType GetChunk2Type(IMPD_AllFlags flags, ScenarioType scenario) {
+            return flags.Bit_0x0200_HasSurfaceModel && GetSurfaceModelChunkIndex(flags, scenario) == 2
+                ? ChunkType.SurfaceModel
+                : ChunkType.Unset;
+        }
+
+        /// <summary>
+        /// When set, specifies the type of chunk located in Chunk[20] (either 'Models' or 'SurfaceModel').
+        /// </summary>
+        public static ChunkType GetChunk20Type(IMPD_AllFlags flags, ScenarioType scenario) {
+            if (scenario < ScenarioType.Scenario1)
+                return ChunkType.Unset;
+            else if (flags.Bit_0x0100_HasModels && GetModelsChunkIndex(flags, scenario) == 20)
+                return ChunkType.Models;
+            else if (flags.Bit_0x0200_HasSurfaceModel && GetSurfaceModelChunkIndex(flags, scenario) == 20)
+                return ChunkType.SurfaceModel;
+            else
+                return ChunkType.Unset;
+        }
+
     }
 }

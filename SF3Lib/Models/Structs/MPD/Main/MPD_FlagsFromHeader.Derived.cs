@@ -23,27 +23,10 @@ namespace SF3.Models.Structs.MPD.Main {
         public MemoryLocationType? Chunk1PointersMemoryLocation => MPD_ChunkLogic.GetChunk1PointersMemoryLocation(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0005f, displayName: "(Derived) " + nameof(Chunk2Type), displayGroup: "Flags")]
-        public ChunkType Chunk2Type {
-            get {
-                return Bit_0x0200_HasSurfaceModel && SurfaceModelChunkIndex == 2
-                    ? ChunkType.SurfaceModel
-                    : ChunkType.Unset;
-            }
-        }
+        public ChunkType Chunk2Type => MPD_ChunkLogic.GetChunk2Type(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0006f, displayName: "(Derived) " + nameof(Chunk20Type) + " (Scn2+)", displayGroup: "Flags")]
-        public ChunkType Chunk20Type {
-            get {
-                if (!IsScenario2OrLater)
-                    return ChunkType.Unset;
-                else if (Bit_0x0100_HasModels && ModelsChunkIndex == 20)
-                    return ChunkType.Models;
-                else if (Bit_0x0200_HasSurfaceModel && SurfaceModelChunkIndex == 20)
-                    return ChunkType.SurfaceModel;
-                else
-                    return ChunkType.Unset;
-            }
-        }
+        public ChunkType Chunk20Type => MPD_ChunkLogic.GetChunk20Type(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0007f, displayName: "(Derived) " + nameof(ModelsMemoryLocation), displayGroup: "Flags")]
         public MemoryLocationType ModelsMemoryLocation => (ModelsChunkIndex == 1) ? Chunk1PointersMemoryLocation.Value : MemoryLocationType.HighMemory;
