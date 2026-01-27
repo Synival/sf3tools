@@ -57,35 +57,20 @@ namespace SF3.MPD.Project {
         }
 
         public IMPD_EditableFlags Flags { get; }
-
         public IMPD_Settings Settings { get; }
-
         public IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; }
-
         public IMPD_Surface Surface { get; }
-
         public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; }
-
         public Palette TexturePalette { get; set; }
-
         public IMPD_Lighting Lighting { get; set; }
-
         public IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; set; }
-
         public IMPD_Planes Planes { get; set; }
-
         public IMPD_Collisions Collisions { get; set; }
-
         public IRectangleShort CameraBoundaries { get; set; }
-
         public IRectangleShort BattleCursorBoundaries { get; set; }
-
         public IMPD_Gradient Gradient { get; set; }
-
         public IIndexedEnumerableWithLength<byte> GroundAnimationData { get; set; }
-
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 { get; set; }
-
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; set; }
 
         public EventHandler ModelsUpdated { get; set; }

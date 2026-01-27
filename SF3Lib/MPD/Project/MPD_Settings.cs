@@ -17,8 +17,12 @@ namespace SF3.MPD.Project {
             ModelsViewAngleMin            = original.ModelsViewAngleMin;
             ModelsViewAngleMax            = original.ModelsViewAngleMax;
             UnknownHeaderSetting          = original.UnknownHeaderSetting;
-            // TODO: LightPaletteAdjustment
-            // TODO: LightPaletteAdjustment
+
+            if (original.LightPaletteAdjustment != null)
+                LightPaletteAdjustment = new ColorAdjustRGB555(original.LightPaletteAdjustment);
+            if (original.GroundPaletteAdjustment != null)
+                GroundPaletteAdjustment = new ColorAdjustRGB555(original.LightPaletteAdjustment);
+
             ShadowTransparency            = original.ShadowTransparency;
             AreGroundAnimationsDummiedOut = original.AreGroundAnimationsDummiedOut;
             IsGradientDummiedOut          = original.IsGradientDummiedOut;
