@@ -50,6 +50,11 @@ namespace SF3.MPD.Interfaces {
         TextureRotateType TextureRotate { get; set; }
 
         /// <summary>
+        /// Texture flags that are set but are likely invalid.
+        /// </summary>
+        byte UnknownTextureFlags { get; set; }
+
+        /// <summary>
         /// When set, the tile is flat and independent from the surface model mesh. Only 150 of this tiles can exist
         /// in any one MPD, excluding flat tiles with no texture (unless the 'Bit_0x0008_KeepTexturelessFlatTiles' MPD flag is on).
         /// Setting this from 'false' to 'true' will automatically update heights to their lowest point and update the

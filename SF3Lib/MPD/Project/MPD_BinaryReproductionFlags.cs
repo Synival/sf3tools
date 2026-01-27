@@ -17,7 +17,7 @@ namespace SF3.MPD.Project {
             MisplacedSurfaceModelChunkIndex              = original.MisplacedSurfaceModelChunkIndex;
 
             if (original.UnreferencedDataAfterPaletteAdjustmentTable != null)
-                UnreferencedDataAfterPaletteAdjustmentTable = ((byte[]) (UnreferencedDataAfterPaletteAdjustmentTable.AsArray().Clone())).ToEnumerableWithLength();
+                UnreferencedDataAfterPaletteAdjustmentTable = ((byte[]) (original.UnreferencedDataAfterPaletteAdjustmentTable.AsArray().Clone())).ToEnumerableWithLength();
         }
 
         public bool ShortEmptyAnimationTable { get; set; }

@@ -26,6 +26,7 @@ namespace SF3.MPD.Project {
             TextureID     = original.TextureID;
             TextureFlip   = original.TextureFlip;
             TextureRotate = original.TextureRotate;
+            UnknownTextureFlags = original.UnknownTextureFlags;
             IsFlat        = original.IsFlat;
 
             TerrainType   = original.TerrainType;
@@ -47,6 +48,8 @@ namespace SF3.MPD.Project {
             get => (byte) ((byte) TextureFlip | (byte) TextureRotate | (IsFlat ? 0x80 : 0));
             set {}
         }
+
+        public byte UnknownTextureFlags { get; set; }
 
         public byte TextureID { get; set; }
         public TextureFlipType TextureFlip { get; set; }

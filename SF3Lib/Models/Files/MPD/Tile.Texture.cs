@@ -34,5 +34,16 @@ namespace SF3.Models.Files.MPD {
                 Modified?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        public byte UnknownTextureFlags {
+            get {
+                var row = MPD_File.SurfaceModelChunk.TileTextureRowTable[Y];
+                var hasRotate = row.HasRotation;
+                var flags = row.GetTextureFlags(X);
+
+                return (byte) (flags & ~(hasRotate ? 0xB3 : 0xB0));
+            }
+            set {}
+        }
     }
 }

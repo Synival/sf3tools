@@ -93,5 +93,9 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario1_BAKA2_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BAKA2");
+
+        [TestMethod]
+        public void Copy_WithScenario1_HRRAIL_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "HRRAIL");
     }
 }

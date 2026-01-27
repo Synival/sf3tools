@@ -38,13 +38,29 @@ namespace SF3.MPD.Writer {
                 });
             }
 
+            // Only serialize applicable texture flags.
+            var validSourceTextureFlags  = surface.HasRotatableTextures ? 0xB3 : 0xB0;
+            var validTargetTextureFlags = Scenario >= Types.ScenarioType.Scenario3 ? 0xB3 : 0xB0;
+            var transferrableFlags = validSourceTextureFlags & validTargetTextureFlags;
+
             // 0x10 words (2 bytes each) for 0x100 blocks.
             // 0x2000 bytes total.
             ForEachBlockTile((blockX, blockY, inBlockX, inBlockY) => {
                 int tileX = blockX * c_surfaceModelBlockTilesWidth + inBlockX;
                 int tileY = blockY * c_surfaceModelBlockTilesHeight + inBlockY;
                 var tile = surface.GetTile(tileX, tileY);
-                WriteUShort((ushort) ((tile.TextureFlags << 8) | tile.TextureID));
+
+                // Texture flags to output are a combination of:
+                //    1) flags that are valid for both the source *and* the target, and
+                //    2) unknown flags that still aren't valid for the target
+                //      ^ (we want to include the unknown flags, but not if they suddenly have meaning!)
+                var textureFlags = (byte) (
+                    (tile.TextureFlags & transferrableFlags) |
+                    (tile.UnknownTextureFlags & ~validTargetTextureFlags)
+                );
+
+                WriteByte(textureFlags);
+                WriteByte(tile.TextureID);
             });
 
             // 0x03 "weird" compressed fixed decimal values (2 bytes each) per vertex in a 5x5 mesh for 0x100 blocks.

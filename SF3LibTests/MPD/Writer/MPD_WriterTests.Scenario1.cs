@@ -139,13 +139,9 @@ namespace SF3.Tests.MPD.Writer {
         public void WriteMPD_WithScenario1_BAKA2_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BAKA2", performByteComparison: false);
 
-        [Ignore("Works great but takes too long!")]
         [TestMethod]
-        public void WriteMPD_WithAllScenario1MPDs_HasSamePrimaryTextureChunks() {
-            ForEachMPD_File(ScenarioType.Scenario1, originalFile => {
-                TestMPDTextures(originalFile, MPD_CollectionType.Primary);
-            });
-        }
+        public void WriteMPD_WithScenario1_HRRAIL_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "HRRAIL", performByteComparison: false);
 
         [TestMethod]
         public void WriteMPD_WithScenario1_Z_AS_HasCorrectPrimaryTextures() {
