@@ -170,8 +170,23 @@ namespace SF3.Models.Structs.MPD {
             set {}
         }
 
+        public bool IgnoreGroundTiledImage {
+            get => !MPD_File.Flags.Bit_0x1000_HasTileBasedGroundImage && MPD_File.Planes?.GroundTiledImage != null;
+            set {}
+        }
+
         public bool IgnoreSkyImage {
             get => !MPD_File.Flags.HasAnySky && MPD_File.Planes?.SkyImage != null;
+            set {}
+        }
+
+        public bool IgnoreBackgroundImage {
+            get => !MPD_File.Flags.Bit_0x0040_HasBackgroundImage && MPD_File.Planes?.BackgroundImage != null;
+            set {}
+        }
+
+        public bool IgnoreForegroundTiledImage {
+            get => !MPD_File.Flags.Bit_0x0010_HasTileBasedForegroundImage && MPD_File.Planes?.ForegroundTiledImage != null;
             set {}
         }
 

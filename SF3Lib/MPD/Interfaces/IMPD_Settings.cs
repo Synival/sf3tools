@@ -136,9 +136,24 @@ namespace SF3.MPD.Interfaces {
         bool IgnoreGroundImage { get; set; }
 
         /// <summary>
+        /// When set, any tile-based ground image present is ignored when exporting MPD flags.
+        /// </summary>
+        bool IgnoreGroundTiledImage { get; }
+
+        /// <summary>
         /// When set, any sky plane that exists will be ignored when exporting MPD flags.
         /// </summary>
         bool IgnoreSkyImage { get; set; }
+
+        /// <summary>
+        /// When set, any background image present is ignored when exporting MPD flags.
+        /// </summary>
+        bool IgnoreBackgroundImage { get; }
+
+        /// <summary>
+        /// When set, any tile-based foreground image present is ignored when exporting MPD flags.
+        /// </summary>
+        bool IgnoreForegroundTiledImage { get; }
 
         /// <summary>
         /// When set, an image should be loaded when a battle occurs with this MPD. This should always be set for any

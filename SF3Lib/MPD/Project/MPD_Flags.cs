@@ -37,9 +37,9 @@ namespace SF3.MPD.Project {
         public bool Bit_0x0002_HasSurfaceTextureRotation { get => MPD.Settings.HasSurfaceTextureRotation; set {} }
         public bool Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap { get => MPD.Settings.AddDotProductBasedNoiseToStandardLightmap; set {} }
         public bool Bit_0x0008_KeepTexturelessFlatTiles { get => false; set {} }
-        public bool Bit_0x0010_HasTileBasedForegroundImage { get => MPD.Planes.ForegroundTiledImage != null; set {} }
+        public bool Bit_0x0010_HasTileBasedForegroundImage { get => !MPD.Settings.IgnoreForegroundTiledImage && MPD.Planes.ForegroundTiledImage?.TiledImage != null; set {} }
         public bool Bit_0x0020_Unknown { get => false; set {} }
-        public bool Bit_0x0040_HasBackgroundImage { get => MPD.Planes.BackgroundImage != null; set {} }
+        public bool Bit_0x0040_HasBackgroundImage { get => !MPD.Settings.IgnoreBackgroundImage && MPD.Planes.BackgroundImage != null; set {} }
         public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures { get => HasExtraModel; set => HasExtraModel = value; }
         public bool Bit_0x0080_SetMSBForGroundPalette { get => MPD.Settings.SetMSBForGroundPalette; set {} }
         public bool Bit_0x0100_HasModels { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.Primary); set {} }
@@ -47,7 +47,7 @@ namespace SF3.MPD.Project {
         public bool Bit_0x0400_HasGroundImage { get => !MPD.Settings.IgnoreGroundImage && MPD.Planes.GroundImage != null; set {} }
         public bool Bit_0x0800_Unused { get => false; set {} }
         public bool Bit_0x0800_HasCutsceneSky { get => !MPD.Settings.IgnoreSkyImage && (MPD.Settings.HasBattleBackground || MPD.Settings.HasBattleBackground); set {} }
-        public bool Bit_0x1000_HasTileBasedGroundImage { get => MPD.Planes.GroundTiledImage != null; set {} }
+        public bool Bit_0x1000_HasTileBasedGroundImage { get => !MPD.Settings.IgnoreGroundTiledImage && MPD.Planes.GroundTiledImage?.TiledImage != null; set {} }
         public bool Bit_0x2000_HasBattleSky { get => !MPD.Settings.IgnoreSkyImage && MPD.Planes.SkyImage != null; set {} }
         public bool Bit_0x2000_NarrowAngleBasedLightmap { get => MPD.Settings.NarrowAngleBasedLightmap; set {} }
         public bool Bit_0x4000_Unused { get => false; set {} }

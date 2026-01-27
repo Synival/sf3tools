@@ -29,7 +29,10 @@ namespace SF3.MPD.Project {
             IsUnknown2TableDummiedOut     = original.IsUnknown2TableDummiedOut;
             AreIgnoredTexturesDummiedOut  = original.AreIgnoredTexturesDummiedOut;
             IgnoreGroundImage             = original.IgnoreGroundImage;
+            IgnoreGroundTiledImage        = original.IgnoreGroundTiledImage;
             IgnoreSkyImage                = original.IgnoreSkyImage;
+            IgnoreBackgroundImage         = original.IgnoreBackgroundImage;
+            IgnoreForegroundTiledImage    = original.IgnoreForegroundTiledImage;
             HasBattleBackground           = original.HasBattleBackground;
         }
 
@@ -52,7 +55,10 @@ namespace SF3.MPD.Project {
         public bool IsUnknown2TableDummiedOut { get; set; }
         public bool AreIgnoredTexturesDummiedOut { get; set; }
         public bool IgnoreGroundImage { get; set; }
+        public bool IgnoreGroundTiledImage { get; set; }
         public bool IgnoreSkyImage { get; set; }
+        public bool IgnoreBackgroundImage { get; set; }
+        public bool IgnoreForegroundTiledImage { get; set; }
         public bool HasBattleBackground { get; set; }
     }
 }
