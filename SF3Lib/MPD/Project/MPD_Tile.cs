@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
@@ -22,19 +23,19 @@ namespace SF3.MPD.Project {
             Y           = y;
             RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
 
-            TextureFlags  = 0; // TODO: these should be derived!
             TextureID     = original.TextureID;
             TextureFlip   = original.TextureFlip;
             TextureRotate = original.TextureRotate;
             IsFlat        = original.IsFlat;
 
             TerrainType   = original.TerrainType;
-            TerrainFlags  = 0; // TODO: these should be derived!
-
+            TerrainFlags  = original.TerrainFlags;
             EventID       = original.EventID;
 
             _vertexHeights = (float[]) (original.GetVertexHeights().Clone());
             _vertexNormals = (VECTOR[]) (original.GetVertexNormals().Clone());
+
+            CenterHeight = _vertexHeights.Average();
         }
 
         public IMPD_Surface Surface { get; }
@@ -42,16 +43,21 @@ namespace SF3.MPD.Project {
         public int Y { get; }
         public int RandomSeed { get; }
 
-        public byte TextureFlags { get; set; }
+        public byte TextureFlags {
+            get => (byte) ((byte) TextureFlip | (byte) TextureRotate | (IsFlat ? 0x80 : 0));
+            set {}
+        }
+
         public byte TextureID { get; set; }
         public TextureFlipType TextureFlip { get; set; }
         public TextureRotateType TextureRotate { get; set; }
         public bool IsFlat { get; set; }
 
-        public float CenterHeight => 0;
+        public float CenterHeight { get; private set; }
 
         public TerrainType TerrainType { get; set; }
         public TerrainFlags TerrainFlags { get; set; }
+
         public byte EventID { get; set; }
 
         public float GetVertexHeight(CornerType corner) {
@@ -76,6 +82,7 @@ namespace SF3.MPD.Project {
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
             _vertexHeights[cornerInt] = value;
+            CenterHeight = _vertexHeights.Average();
         }
 
         public void SetVertexHeights(float[] values) {
@@ -84,6 +91,7 @@ namespace SF3.MPD.Project {
             if (values.Length != 4)
                 throw new ArgumentOutOfRangeException(nameof(values) + ": Should have size of 4");
             _vertexHeights = values;
+            CenterHeight = _vertexHeights.Average();
         }
 
         private float[] _vertexHeights = new float[4];
