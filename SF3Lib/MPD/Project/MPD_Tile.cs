@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
@@ -33,6 +32,9 @@ namespace SF3.MPD.Project {
             TerrainFlags  = 0; // TODO: these should be derived!
 
             EventID       = original.EventID;
+
+            _vertexHeights = (float[]) (original.GetVertexHeights().Clone());
+            _vertexNormals = (VECTOR[]) (original.GetVertexNormals().Clone());
         }
 
         public IMPD_Surface Surface { get; }
@@ -52,17 +54,40 @@ namespace SF3.MPD.Project {
         public TerrainFlags TerrainFlags { get; set; }
         public byte EventID { get; set; }
 
-        public float GetVertexHeight(CornerType corner) => 0;
-        public float[] GetVertexHeights() => new float[] { 0, 0, 0, 0 };
-        public VECTOR GetVertexNormal(CornerType corner) => new VECTOR(0, 1, 0);
-        public VECTOR[] GetVertexNormals() {
-            return ((CornerType[]) Enum.GetValues(typeof(CornerType)))
-                .Select(c => GetVertexNormal(c)).ToArray();
+        public float GetVertexHeight(CornerType corner) {
+            int cornerInt = (int) corner;
+            if (cornerInt < 0 || cornerInt > 3)
+                throw new ArgumentOutOfRangeException(nameof(corner));
+            return _vertexHeights[cornerInt];
         }
 
-        public void SetVertexHeight(CornerType corner, float value) {}
-        public void SetVertexHeights(float[] values) {}
+        public VECTOR GetVertexNormal(CornerType corner) {
+            int cornerInt = (int) corner;
+            if (cornerInt < 0 || cornerInt > 3)
+                throw new ArgumentOutOfRangeException(nameof(corner));
+            return _vertexNormals[cornerInt];
+        }
 
+        public float[] GetVertexHeights() => (float[]) (_vertexHeights.Clone());
+        public VECTOR[] GetVertexNormals() => (VECTOR[]) (_vertexNormals.Clone());
+
+        public void SetVertexHeight(CornerType corner, float value) {
+            int cornerInt = (int) corner;
+            if (cornerInt < 0 || cornerInt > 3)
+                throw new ArgumentOutOfRangeException(nameof(corner));
+            _vertexHeights[cornerInt] = value;
+        }
+
+        public void SetVertexHeights(float[] values) {
+            if (values == null)
+                throw new ArgumentNullException(nameof(values));
+            if (values.Length != 4)
+                throw new ArgumentOutOfRangeException(nameof(values) + ": Should have size of 4");
+            _vertexHeights = values;
+        }
+
+        private float[] _vertexHeights = new float[4];
+        private VECTOR[] _vertexNormals = new VECTOR[4];
 
         public event EventHandler Modified;
     }
