@@ -13,15 +13,22 @@ namespace SF3.MPD.Project {
             BackgroundX     = original.BackgroundX;
             BackgroundY     = original.BackgroundY;
 
+            if (original.GroundImage != null)
+                GroundImage = new TextureData(original.GroundImage);
+            if (original.GroundTiledImage != null)
+                GroundTiledImage = new MPD_TiledPlane(original.GroundTiledImage);
+            if (original.BackgroundImage != null)
+                BackgroundImage = new TextureData(original.BackgroundImage);
+            if (original.SkyImage != null)
+                SkyImage = new TextureData(original.SkyImage);
+            if (original.ForegroundTiledImage != null)
+                ForegroundTiledImage = new MPD_TiledPlane(original.ForegroundTiledImage);
+
             if (original.GroundPalette != null)
                 GroundPalette = new Palette(original.GroundPalette);
             if (original.SkyPalette != null)
                 SkyPalette = new Palette(original.SkyPalette);
 
-            if (original.GroundImage != null)
-                GroundImage = new TextureData(original.GroundImage);
-            if (original.SkyImage != null)
-                SkyImage = new TextureData(original.SkyImage);
         }
 
         public ITextureData GroundImage { get; }
