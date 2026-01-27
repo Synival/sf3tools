@@ -9,10 +9,11 @@ using SF3.Types;
 namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteChunks(IMPD mpd, byte[] chunk3Data) {
-            bool allowIndexedTextures = Scenario >= ScenarioType.Scenario3;
-            bool hasExtraModel = mpd.Flags.HasExtraModel;
-            bool hasScenario1ExtraModel = Scenario <= ScenarioType.Scenario1 && hasExtraModel;
-            bool hasScenario2ExtraModel = Scenario >= ScenarioType.Scenario2 && hasExtraModel;
+            var allowIndexedTextures = Scenario >= ScenarioType.Scenario3;
+            var hasExtraModel = mpd.Flags.HasExtraModel;
+            var hasScenario1ExtraModel = Scenario <= ScenarioType.Scenario1 && hasExtraModel;
+            var hasScenario2ExtraModel = Scenario >= ScenarioType.Scenario2 && hasExtraModel;
+            var modelsMemoryLocation = MPD_ChunkLogic.GetModelsMemoryLocation(mpd.Flags, Scenario);
 
             // Chunk[0] is always empty.
             WriteEmptyChunk();
@@ -23,7 +24,7 @@ namespace SF3.MPD.Writer {
 
             var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? MPD_ChunkLogic.GetModelsChunkIndex(mpd.Flags, Scenario);
             if (primaryMc != null && modelsChunkIndex == 1)
-                WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
+                WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
             else if (extraMc != null && hasScenario2ExtraModel)
                 WriteModelChunk(extraMc.Models, extraMc.ModelInstances, null, isHighMemory: false, extraMc.DataAfterInstances);
             else
@@ -88,7 +89,7 @@ namespace SF3.MPD.Writer {
             // Scenario 2+ has two more chunks.
             if (Scenario >= ScenarioType.Scenario2) {
                 if (primaryMc != null && modelsChunkIndex == 20)
-                    WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
+                    WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
                 else if (mpd.Surface.HasModel && surfaceModelChunkIndex == 20)
                     WriteSurfaceModelChunk(mpd.Surface);
                 else

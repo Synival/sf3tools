@@ -4,6 +4,7 @@ using System.Linq;
 using CommonLib.Extensions;
 using SF3.Analysis;
 using SF3.Models.Files.MPD;
+using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Utils {
@@ -158,7 +159,8 @@ namespace SF3.Utils {
                         var actualAddr   = actualFile.ChunkLocations[chunk].ChunkFileAddress;
                         var actualSize   = actualFile.ChunkLocations[chunk].ChunkSize;
 
-                        var actualFileRamAddition = expectedFile.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory
+                        var modelsMemoryLocation = MPD_ChunkLogic.GetModelsMemoryLocation(expectedFile.Flags, expectedFile.Scenario);
+                        var actualFileRamAddition = modelsMemoryLocation == MemoryLocationType.HighMemory
                             ? (0x60A0000 - actualAddr)
                             : 0x0290000;
                         var collisionBlocksStart = collisionBlocksActual.Value - actualFileRamAddition;

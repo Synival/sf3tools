@@ -76,5 +76,22 @@ namespace SF3.MPD {
                 return ChunkType.Unset;
         }
 
+        /// <summary>
+        /// Specifies the area of memory (low or high) from which models would be accessed.
+        /// </summary>
+        public static MemoryLocationType GetModelsMemoryLocation(IMPD_AllFlags flags, ScenarioType scenario) {
+            return (GetModelsChunkIndex(flags, scenario) == 1)
+                ? GetChunk1PointersMemoryLocation(flags, scenario).Value
+                : MemoryLocationType.HighMemory;
+        }
+
+        /// <summary>
+        /// Specifies the area of memory (low or high) from which the surface model would be accessed.
+        /// </summary>
+        public static MemoryLocationType GetSurfaceModelMemoryLocation(IMPD_AllFlags flags, ScenarioType scenario) {
+            return (scenario >= ScenarioType.Scenario2 && flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel && !flags.Bit_0x0002_HasSurfaceTextureRotation)
+                ? MemoryLocationType.HighMemory
+                : MemoryLocationType.LowMemory;
+        }
     }
 }

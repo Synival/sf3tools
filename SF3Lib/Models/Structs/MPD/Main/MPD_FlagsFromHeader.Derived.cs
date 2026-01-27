@@ -29,10 +29,9 @@ namespace SF3.Models.Structs.MPD.Main {
         public ChunkType Chunk20Type => MPD_ChunkLogic.GetChunk20Type(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0007f, displayName: "(Derived) " + nameof(ModelsMemoryLocation), displayGroup: "Flags")]
-        public MemoryLocationType ModelsMemoryLocation => (ModelsChunkIndex == 1) ? Chunk1PointersMemoryLocation.Value : MemoryLocationType.HighMemory;
+        public MemoryLocationType ModelsMemoryLocation => MPD_ChunkLogic.GetModelsMemoryLocation(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0008f, displayName: "(Derived) " + nameof(SurfaceModelMemoryLocation), displayGroup: "Flags")]
-        public MemoryLocationType SurfaceModelMemoryLocation
-            => (IsScenario2OrLater && Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel && !Bit_0x0002_HasSurfaceTextureRotation) ? MemoryLocationType.HighMemory : MemoryLocationType.LowMemory;
-}
+        public MemoryLocationType SurfaceModelMemoryLocation => MPD_ChunkLogic.GetSurfaceModelMemoryLocation(this, Scenario);
+    }
 }
