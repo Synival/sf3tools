@@ -35,7 +35,7 @@ namespace SF3.MPD.Project {
             _vertexHeights = (float[]) (original.GetVertexHeights().Clone());
             _vertexNormals = (VECTOR[]) (original.GetVertexNormals().Clone());
 
-            CenterHeight = _vertexHeights.Average();
+            UpdateCenterHeight();
         }
 
         public IMPD_Surface Surface { get; }
@@ -82,7 +82,7 @@ namespace SF3.MPD.Project {
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
             _vertexHeights[cornerInt] = value;
-            CenterHeight = _vertexHeights.Average();
+            UpdateCenterHeight();
         }
 
         public void SetVertexHeights(float[] values) {
@@ -91,7 +91,19 @@ namespace SF3.MPD.Project {
             if (values.Length != 4)
                 throw new ArgumentOutOfRangeException(nameof(values) + ": Should have size of 4");
             _vertexHeights = values;
-            CenterHeight = _vertexHeights.Average();
+            UpdateCenterHeight();
+        }
+
+        private void UpdateCenterHeight() {
+            var values = new int[] {
+                (int) Math.Round(_vertexHeights[0] * 16),
+                (int) Math.Round(_vertexHeights[1] * 16),
+                (int) Math.Round(_vertexHeights[2] * 16),
+                (int) Math.Round(_vertexHeights[3] * 16)
+            };
+            var sum = values[0] + values[1] + values[2] + values[3];
+
+            CenterHeight = (float) Math.Floor(sum / 4f) / 16f;
         }
 
         private float[] _vertexHeights = new float[4];
