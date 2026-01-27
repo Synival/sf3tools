@@ -20,15 +20,7 @@ namespace SF3.Models.Structs.MPD.Main {
         public ChunkType Chunk1Type => MPD_ChunkLogic.GetChunk1Type(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0004f, displayName: "(Derived) " + nameof(Chunk1PointersMemoryLocation), displayGroup: "Flags")]
-        public MemoryLocationType? Chunk1PointersMemoryLocation {
-            get {
-                if (Chunk1Type != ChunkType.Models)
-                    return null;
-                return (IsScenario2OrLater || !Bit_0x0200_HasSurfaceModel || Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
-                    ? MemoryLocationType.LowMemory
-                    : MemoryLocationType.HighMemory;
-            }
-        }
+        public MemoryLocationType? Chunk1PointersMemoryLocation => MPD_ChunkLogic.GetChunk1PointersMemoryLocation(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0005f, displayName: "(Derived) " + nameof(Chunk2Type), displayGroup: "Flags")]
         public ChunkType Chunk2Type {

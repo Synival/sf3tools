@@ -166,7 +166,7 @@ namespace SF3.Models.Files.MPD {
                         : MemoryLocationType.LowMemory;
             }
 
-            var flags = Flags;
+            var flags = (MPD_FlagsFromHeader) Flags;
             var errors = new List<string>();
 
             var modelChunks = ModelCollections.Values.Select(x => x as ModelChunk).Where(x => x != null).ToArray();

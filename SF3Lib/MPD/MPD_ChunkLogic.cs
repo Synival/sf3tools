@@ -40,5 +40,17 @@ namespace SF3.MPD {
             else
                 return ChunkType.Unset;
         }
+
+        /// <summary>
+        /// When set, specifies the area of memory (low or high) the pointers the models in Chunk[1] should be
+        /// pointing to (either 'Low' or 'High').
+        /// </summary>
+        public static MemoryLocationType? GetChunk1PointersMemoryLocation(IMPD_AllFlags flags, ScenarioType scenario) {
+            if (GetChunk1Type(flags, scenario) != ChunkType.Models)
+                return null;
+            return (scenario >= ScenarioType.Scenario2 || !flags.Bit_0x0200_HasSurfaceModel || flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
+                ? MemoryLocationType.LowMemory
+                : MemoryLocationType.HighMemory;
+        }
     }
 }
