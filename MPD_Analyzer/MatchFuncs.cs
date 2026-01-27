@@ -475,7 +475,7 @@ namespace MPD_Analyzer {
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, mpdFile.Scenario);
                 var mpd = MPD_File.Create(new ByteData(new ByteArray(bytes1)), mpdFile.NameGetterContext, mpdFile.Scenario);
-                writer.WriteMPD(mpdFile);
+                writer.WriteMPD(mpd);
                 bytes2 = stream.ToArray();
             }
 
