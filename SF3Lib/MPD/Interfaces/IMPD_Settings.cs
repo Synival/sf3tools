@@ -3,6 +3,12 @@
 namespace SF3.MPD.Interfaces {
     public interface IMPD_Settings {
         /// <summary>
+        /// When set, the surface is visible with textures and meshes. When unset, surface model tile heights
+        /// can be set independently of their neighbors.
+        /// </summary>
+        bool HasSurfaceModel { get; set; }
+
+        /// <summary>
         /// When set, models are accessed from low memory (0x00292100) rather than high memory (0x060A0000).
         /// </summary>
         bool ForceLowMemoryModels { get; set; }

@@ -79,11 +79,6 @@ namespace SF3.MPD.Interfaces {
         IMPD_Gradient Gradient { get; }
 
         /// <summary>
-        /// Triggered when models have been updated and something needs to be informed, like a viewer.
-        /// </summary>
-        EventHandler ModelsUpdated { get; set; }
-
-        /// <summary>
         /// Table used to animate the ground plane, corresponding to the SGL sl1MapRA() function.
         /// (Not currently supported)
         /// </summary>
@@ -98,5 +93,10 @@ namespace SF3.MPD.Interfaces {
         /// Second unknown Scenario 1 0xFFFF-terminated table.
         /// </summary>
         IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; }
+
+        /// <summary>
+        /// Triggered when models have been updated and something needs to be informed, like a viewer.
+        /// </summary>
+        EventHandler ModelsUpdated { get; set; }
     }
 }

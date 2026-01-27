@@ -5,6 +5,34 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_Surface : IMPD_Surface {
+        public MPD_Surface(IMPD_Settings settings) {
+            _settings = settings;
+
+            Width  = 64;
+            Height = 64;
+
+            _tiles = new IMPD_Tile[Width, Height];
+            for (int y = 0; y < Width; y++)
+                for (int x = 0; x < Height; x++)
+                    _tiles[x, y] = new MPD_Tile(this, x, y);
+
+            _hasModelGetter = () => _settings.HasSurfaceModel;
+        }
+
+        public MPD_Surface(IMPD_Settings settings, IMPD_Surface original) {
+            _settings = settings;
+
+            Width  = original.Width;
+            Height = original.Height;
+
+            _tiles = new IMPD_Tile[Width, Height];
+            for (int y = 0; y < Width; y++)
+                for (int x = 0; x < Height; x++)
+                    _tiles[x, y] = new MPD_Tile(this, original.GetTile(x, y), x, y);
+
+           _hasModelGetter = () => _settings.HasSurfaceModel;
+         }
+
         public MPD_Surface(IMPD_Settings settings, IMPD_Tile[,] tiles, Func<bool> hasModelGetter) {
             _settings = settings;
             _tiles = tiles;

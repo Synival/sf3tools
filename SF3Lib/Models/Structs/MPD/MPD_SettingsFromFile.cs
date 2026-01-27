@@ -12,6 +12,11 @@ namespace SF3.Models.Structs.MPD {
 
         public IMPD_File MPD_File { get; }
 
+        public bool HasSurfaceModel {
+            get => MPD_File.Flags.Bit_0x0200_HasSurfaceModel;
+            set => MPD_File.Flags.Bit_0x0200_HasSurfaceModel = value;
+        }
+
         public bool ForceLowMemoryModels {
             get => MPD_File.Flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel;
             set => MPD_File.Flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel = value;
