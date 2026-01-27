@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.MPD {
         public IMPD_File MPD_File { get; }
 
         public bool HasSurfaceModel {
-            get => MPD_File.Flags.Bit_0x0200_HasSurfaceModel;
-            set => MPD_File.Flags.Bit_0x0200_HasSurfaceModel = value;
+            get => MPD_File.SurfaceModelChunk != null;
+            set {}
         }
 
         public bool ForceLowMemoryModels {
@@ -202,6 +202,11 @@ namespace SF3.Models.Structs.MPD {
 
         public bool HasBattleBackground {
             get => MPD_File.Flags.HasAnySky;
+            set {}
+        }
+
+        public bool IgnoreSurfaceModel {
+            get => !MPD_File.Flags.Bit_0x0200_HasSurfaceModel && MPD_File.SurfaceModelChunk != null;
             set {}
         }
     }

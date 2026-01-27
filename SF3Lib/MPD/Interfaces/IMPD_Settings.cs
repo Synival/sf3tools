@@ -173,5 +173,10 @@ namespace SF3.MPD.Interfaces {
         /// sky plane is for cutscenes only and the battle background is loaded from elsewhere.
         /// </summary>
         bool HasBattleBackground { get; set; }
+
+        /// <summary>
+        /// When set, any surface model that exists will be ignored when exporting MPD flags.
+        /// </summary>
+        bool IgnoreSurfaceModel { get; set; }
     }
 }

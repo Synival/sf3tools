@@ -21,7 +21,7 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario3_BTL95_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "BTL95");
-/*
+
         [TestMethod]
         public void Copy_WithScenario3_BEER_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "BEER");
@@ -29,7 +29,7 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario3_B_KOYA_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "B_KOYA");
-*/
+
         [TestMethod]
         public void Copy_WithScenario3_FEDEND_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "FEDEND");

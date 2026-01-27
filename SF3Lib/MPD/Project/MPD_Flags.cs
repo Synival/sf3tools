@@ -43,7 +43,7 @@ namespace SF3.MPD.Project {
         public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures { get => HasExtraModel; set => HasExtraModel = value; }
         public bool Bit_0x0080_SetMSBForGroundPalette { get => MPD.Settings.SetMSBForGroundPalette; set {} }
         public bool Bit_0x0100_HasModels { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.Primary); set {} }
-        public bool Bit_0x0200_HasSurfaceModel { get => MPD.Settings.HasSurfaceModel; set {} }
+        public bool Bit_0x0200_HasSurfaceModel { get => !MPD.Settings.IgnoreSurfaceModel && MPD.Settings.HasSurfaceModel; set {} }
         public bool Bit_0x0400_HasGroundImage { get => !MPD.Settings.IgnoreGroundImage && MPD.Planes.GroundImage != null; set {} }
         public bool Bit_0x0800_Unused { get => false; set {} }
         public bool Bit_0x0800_HasCutsceneSky { get => !MPD.Settings.IgnoreSkyImage && (MPD.Settings.HasBattleBackground || MPD.Settings.HasBattleBackground); set {} }

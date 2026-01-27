@@ -37,6 +37,7 @@ namespace SF3.MPD.Project {
             IgnoreBackgroundImage         = original.IgnoreBackgroundImage;
             IgnoreForegroundTiledImage    = original.IgnoreForegroundTiledImage;
             HasBattleBackground           = original.HasBattleBackground;
+            IgnoreSurfaceModel            = original.IgnoreSurfaceModel;
         }
 
         public bool HasSurfaceModel { get; set; }
@@ -65,5 +66,6 @@ namespace SF3.MPD.Project {
         public bool IgnoreBackgroundImage { get; set; }
         public bool IgnoreForegroundTiledImage { get; set; }
         public bool HasBattleBackground { get; set; }
+        public bool IgnoreSurfaceModel { get; set; }
     }
 }
