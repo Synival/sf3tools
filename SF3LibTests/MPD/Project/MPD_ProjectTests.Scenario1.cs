@@ -41,7 +41,7 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario1_MUCHUR_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "MUCHUR");
-/*
+
         [TestMethod]
         public void Copy_WithScenario1_BTL03_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BTL03");
@@ -49,7 +49,7 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario1_BTL02_CanBeLoaded()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BTL02");
-*/
+
         [TestMethod]
         public void Copy_WithScenario1_Z_AS_ProducesSameData()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "Z_AS");
@@ -85,11 +85,11 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario1_SARA04_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "SARA04");
-/*
+
         [TestMethod]
         public void Copy_WithScenario1_FED06_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "FED06");
-*/
+
         [TestMethod]
         public void Copy_WithScenario1_BAKA2_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BAKA2");

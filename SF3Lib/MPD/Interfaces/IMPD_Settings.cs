@@ -56,6 +56,13 @@ namespace SF3.MPD.Interfaces {
         bool HasSurfaceTextureRotation { get; set; }
 
         /// <summary>
+        /// When set, the 0x01 bit of the lightmap indices for surface model tile vertices are XOR'ed based on the value of the
+        /// dot product of the tile's normal and the light direct vector. /// This is used for outdoor maps that need to appear
+        /// noisier. Does not apply to maps with 'NarrowAngleBasedLightmap' on.
+        /// </summary>
+        bool AddDotProductBasedNoiseToStandardLightmap { get; set; }
+
+        /// <summary>
         /// Y-axis rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
         /// facing the wrong way.
         /// </summary>

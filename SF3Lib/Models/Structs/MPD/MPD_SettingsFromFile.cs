@@ -37,6 +37,11 @@ namespace SF3.Models.Structs.MPD {
             set => MPD_File.Flags.Bit_0x0002_HasSurfaceTextureRotation = value;
         }
 
+        public bool AddDotProductBasedNoiseToStandardLightmap {
+            get => MPD_File.Flags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap;
+            set => MPD_File.Flags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap = value;
+        }
+
         public float ModelsYRotation {
             get => MPD_File.MPDHeader.ModelsYRotation;
             set => MPD_File.MPDHeader.ModelsYRotation = value;
