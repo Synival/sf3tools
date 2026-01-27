@@ -54,6 +54,8 @@ namespace SF3.MPD.Project {
 
             if (original.Collisions != null)
                 Collisions = new MPD_Collisions(original.Collisions);
+            if (original.Gradient != null)
+                Gradient = new MPD_Gradient(original.Gradient);
         }
 
         public IMPD_EditableFlags Flags { get; }
