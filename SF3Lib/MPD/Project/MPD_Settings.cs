@@ -24,7 +24,7 @@ namespace SF3.MPD.Project {
             if (original.LightPaletteAdjustment != null)
                 LightPaletteAdjustment = new ColorAdjustRGB555(original.LightPaletteAdjustment);
             if (original.GroundPaletteAdjustment != null)
-                GroundPaletteAdjustment = new ColorAdjustRGB555(original.LightPaletteAdjustment);
+                GroundPaletteAdjustment = new ColorAdjustRGB555(original.GroundPaletteAdjustment);
 
             ShadowTransparency            = original.ShadowTransparency;
             AreGroundAnimationsDummiedOut = original.AreGroundAnimationsDummiedOut;
