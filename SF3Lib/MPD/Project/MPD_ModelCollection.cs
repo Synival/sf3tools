@@ -21,7 +21,7 @@ namespace SF3.MPD.Project {
                 DataAfterInstances = ((byte[]) (original.DataAfterInstances.AsArray().Clone())).ToEnumerableWithLength();
         }
 
-        public IMPD_Model GetModel(int id) => Models?.FirstOrDefault(x => x.ID == id);
+        public IMPD_Model GetModel(int id, int lod) => Models?.FirstOrDefault(x => x.ModelID == id && x.LevelOfDetail == lod);
 
         public MPD_CollectionType Collection { get; }
         public bool IsUnreferenced { get; set; }

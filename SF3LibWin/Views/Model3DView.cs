@@ -56,7 +56,7 @@ namespace SF3.Win.Views {
                 return;
             }
 
-            _mpdModel = mc?.GetModel(pdata.ID);
+            _mpdModel = mc?.GetModel(pdata.ModelID, pdata.LevelOfDetail);
         }
 
         private IMPD_Model _mpdModel = null;

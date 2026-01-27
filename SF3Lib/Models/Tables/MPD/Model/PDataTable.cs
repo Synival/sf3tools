@@ -10,7 +10,8 @@ namespace SF3.Models.Tables.MPD.Model {
             public int Address;
             public MPD_CollectionType Collection;
             public int? ChunkIndex;
-            public int Index;
+            public int ModelID;
+            public int LevelOfDetail;
             public int RefCount;
         }
 
@@ -28,7 +29,7 @@ namespace SF3.Models.Tables.MPD.Model {
                 var r = Refs[id];
                 return new PDataStruct(
                     Data, id, "PDATA_" + r.Collection.ToString() + "_" + id.ToString("D4"), address,
-                    r.Collection, MPD_File, r.ChunkIndex, r.Index, r.RefCount
+                    r.Collection, MPD_File, r.ChunkIndex, r.ModelID, r.LevelOfDetail, r.RefCount
                );
             });
         }

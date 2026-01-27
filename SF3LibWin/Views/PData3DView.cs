@@ -34,7 +34,7 @@ namespace SF3.Win.Views {
 
         private void UpdateMPDModel() {
             _models   = (_pdata == null) ? null : MPD_File.ModelCollections.TryGetValue(_pdata.Collection, out var mcOut) ? mcOut : null;
-            _mpdModel = (_pdata == null) ? null : _models?.GetModel(_pdata.ID);
+            _mpdModel = (_pdata == null) ? null : _models?.GetModel(_pdata.ModelID, _pdata.LevelOfDetail);
         }
 
         public IMPD MPD_File { get; }

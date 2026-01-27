@@ -13,5 +13,9 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario1_BLACK_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BLACK");
+
+        [TestMethod]
+        public void Copy_WithScenario1_CHOU00_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "CHOU00");
     }
 }

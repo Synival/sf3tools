@@ -8,10 +8,10 @@ using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
-        public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances)
+        public void WriteModelChunk(IEnumerable<IMPD_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances)
             => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, collisions, isHighMemory, dataAfterInstances));
 
-        public void WriteModelChunkContent(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances) {
+        public void WriteModelChunkContent(IEnumerable<IMPD_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -82,10 +82,10 @@ namespace SF3.MPD.Writer {
             WriteUShort(instance.Flags);
         }
 
-        public void WriteModelChunkModel(ISGL_Model model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {
+        public void WriteModelChunkModel(IMPD_Model model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {
             // Don't write models that don't have instances.
             // (This matches SF3's own MPD files)
-            var offsetPtrMap = pdataIdToOffsetPtrMap.TryGetValue(model.ID, out var offsetPtrMapVal) ? offsetPtrMapVal : null;
+            var offsetPtrMap = pdataIdToOffsetPtrMap.TryGetValue(model.ModelID, out var offsetPtrMapVal) ? offsetPtrMapVal : null;
             if (offsetPtrMap == null || offsetPtrMap.Count == 0)
                 return;
 
@@ -140,7 +140,7 @@ namespace SF3.MPD.Writer {
                 return null;
         }
 
-        public void WriteHeaderModels(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, out uint instanceTableOffset) {
+        public void WriteHeaderModels(IEnumerable<IMPD_Model> models, IEnumerable<IMPD_ModelInstance> instances, out uint instanceTableOffset) {
             var pdataPosByInstanceIndex = new Dictionary<int, uint>();
             int index = -1;
 
@@ -148,7 +148,7 @@ namespace SF3.MPD.Writer {
             // TODO: (It doesn't really need to be 1:1 models to instances)
             foreach (var instance in instances) {
                 index++;
-                var model = models.FirstOrDefault(x => x.ID == instance.ModelID);
+                var model = models.FirstOrDefault(x => x.ModelID == instance.ModelID);
                 if (model == null)
                     continue;
 

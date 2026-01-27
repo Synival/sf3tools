@@ -59,24 +59,31 @@ namespace SF3.Models.Files.MPD {
 
             var pdataAddressesPre =
                 (ModelInstanceTable != null) ? ModelInstanceTable
-                    .SelectMany(x => x.PDatas.Select((y, i) => new { PDataAddress = y.Value, Index = i }))
+                    .SelectMany(x => x.PDatas.Select((y, i) => new { PData0 = x.PDatas[0], PDataAddress = y.Value, LevelOfDetail = i }))
                 : HeaderModelInstanceTable
-                    .Select(x => new { PDataAddress = x.PData0, Index = 0 });
+                    .Select((x, i) => new { PData0 = x.PData0, PDataAddress = x.PData0, LevelOfDetail = 0 });
+
+            var pdata0ToModelIdMap = pdataAddressesPre
+                .GroupBy(x => x.PData0)
+                .Select((x, i) => new { Addr = x.Key, ModelID = i })
+                .ToDictionary(x => x.Addr, y => y.ModelID);
 
             var pdataAddresses = pdataAddressesPre
                 .Where(x => x.PDataAddress != 0)
                 .GroupBy(x => x.PDataAddress)
-                .Select(x => new { AddressInMemory = x.Key, x.First().Index, Count = x.Count() })
+                .Select(x => new { AddressInMemory = x.Key, First = x.First(), Count = x.Count() })
+                .Select(x => new { x.AddressInMemory, ModelID = pdata0ToModelIdMap[x.First.PData0], x.First.LevelOfDetail, x.Count })
                 .OrderBy(x => x.AddressInMemory)
                 .ToArray();
 
             var pdataRefs = pdataAddresses
                 .Select(x => new PDataTable.PDataRef() {
-                    Address    = (int) GetOffsetInChunk(x.AddressInMemory),
-                    Collection = Collection,
-                    ChunkIndex = ChunkIndex,
-                    Index      = x.Index,
-                    RefCount   = x.Count
+                    Address       = (int) GetOffsetInChunk(x.AddressInMemory),
+                    Collection    = Collection,
+                    ChunkIndex    = ChunkIndex,
+                    ModelID       = x.ModelID,
+                    LevelOfDetail = x.LevelOfDetail,
+                    RefCount      = x.Count
                 })
                 .ToArray();
 
@@ -279,19 +286,19 @@ namespace SF3.Models.Files.MPD {
             var instances = _mpdModelInstances;
             foreach (var inst in instances) {
                 var fileInst = (ModelInstanceBase) inst;
-                inst.ModelID = PDatasByMemoryAddress.TryGetValue(fileInst.PData0, out var pdata) ? pdata.ID : -1;
+                inst.ModelID = PDatasByMemoryAddress.TryGetValue(fileInst.PData0, out var pdata) ? pdata.ModelID : -1;
             }
         }
 
-        public IMPD_Model GetModel(int id)
-            => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ID == id);
+        public IMPD_Model GetModel(int id, int lod)
+            => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ModelID == id && x.LevelOfDetail == lod);
 
         private IEnumerableWithLength<IMPD_Model> _mpdModels;
         public IEnumerableWithLength<IMPD_Model> Models {
             get {
                 if (_mpdModels == null) {
                     _mpdModels = PDatasByMemoryAddress.Values
-                        .Where(x => x.Index == 0)
+                        .Where(x => x.LevelOfDetail == 0)
                         .Cast<IMPD_Model>()
                         .ToArray()
                         .ToEnumerableWithLength();

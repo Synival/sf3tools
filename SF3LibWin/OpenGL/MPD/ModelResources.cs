@@ -99,7 +99,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                     var mpdModel = mpdModelsByID.TryGetValue(id, out var mpdModelOut) ? mpdModelOut : null;
                     if (mpdModel == null)
-                        mpdModelsByID[id] = mpdModel = mc.GetModel(id);
+                        mpdModelsByID[id] = mpdModel = mc.GetModel(id, 0);
                     if (mpdModel == null)
                         continue;
 
@@ -125,7 +125,7 @@ namespace SF3.Win.OpenGL.MPD {
                 return;
 
             InitDictsForType(models.Collection);
-            MPD_ModelsByIDByCollection[models.Collection][mpdModel.ID] = mpdModel;
+            MPD_ModelsByIDByCollection[models.Collection][mpdModel.ModelID] = mpdModel;
 
             var texturesById = GetTextureDictionaryByCollection(models, mpdFile);
             CreateAndAddQuadModels(mpdFile, models.Collection, mpdModel, texturesById, forceSemiTransparent, isHideMesh);
@@ -133,7 +133,7 @@ namespace SF3.Win.OpenGL.MPD {
             var modelInstance = new MPD_ModelInstance() {
                 Collection = models.Collection,
                 ID = 0,
-                ModelID = mpdModel.ID,
+                ModelID = mpdModel.ModelID,
                 PositionX = 32 * 32,
                 PositionZ = 32 * 32,
                 AngleX = rotX,
@@ -309,7 +309,7 @@ namespace SF3.Win.OpenGL.MPD {
             var semiTransparentUntexturedModel = semiTransparentUntexturedQuads.Count > 0 ? new QuadModel(semiTransparentUntexturedQuads.ToArray()) : null;
 
             if (modelExists) {
-                ModelsByIDByCollection[modelCollection][mpdModel.ID] = new ModelGroup(
+                ModelsByIDByCollection[modelCollection][mpdModel.ModelID] = new ModelGroup(
                     solidTexturedModel,
                     solidUntexturedModel,
                     semiTransparentTexturedModel,

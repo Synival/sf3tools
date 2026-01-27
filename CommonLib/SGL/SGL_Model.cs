@@ -17,18 +17,15 @@ namespace CommonLib.SGL {
                 Faces = original.Faces.Select(x => (ISGL_ModelFace) (new SGL_ModelFace(x))).ToArray().ToEnumerableWithLength();
         }
 
-        public SGL_Model(int id, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces) {
+        public SGL_Model(IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces) {
             if (vertices == null)
                 throw new ArgumentNullException(nameof(vertices));
             if (faces == null)
                 throw new ArgumentNullException(nameof(faces));
 
-            ID       = id;
             Vertices = vertices.ToArray().ToEnumerableWithLength();
             Faces    = faces.ToArray().ToEnumerableWithLength();
         }
-
-        public int ID { get; set; }
 
         public IIndexedEnumerableWithLength<VECTOR> Vertices { get; }
         public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }

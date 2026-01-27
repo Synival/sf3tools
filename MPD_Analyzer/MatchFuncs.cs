@@ -63,7 +63,7 @@ namespace MPD_Analyzer {
                 return null;
 
             return allModelsWithDuplicateTexturesInternally
-                .Select(x => $"Model 0x{x.Key.ID:X2}:\r\n  " + string.Join("\r\n  ", x.Value
+                .Select(x => $"Model 0x{x.Key.ModelID:X2}:\r\n  " + string.Join("\r\n  ", x.Value
                     .Select(y => $"{y.Key}: " + string.Join("; ", y.Value
                         .Select(z => $"Tex0x{z.Key:X2} (Faces: " + string.Join(",", z.Value.Select(a => $"0x{a.FaceIndex:X2}")) + ")")
                     ))
@@ -72,7 +72,7 @@ namespace MPD_Analyzer {
 
         public static string[]? GetTexturesSharedBetweenModels(Dictionary<int, IMPD_Model> modelsById) {
             var texturesUsedByModel = modelsById.Values
-                .ToDictionary(x => x.ID, x => x.Faces
+                .ToDictionary(x => x.ModelID, x => x.Faces
                     .Where(x => x.Attributes.UseTexture)
                     .Select(x => x.Attributes.TextureNo)
                     .Distinct()
@@ -87,7 +87,7 @@ namespace MPD_Analyzer {
 
             if (texturesSharedBetweenModels.Count == 0)
                 return null;
-            return texturesSharedBetweenModels.Select(x => $"Tex0x{x.Key:X2}: " + string.Join(", ", x.Value.Select(y => $"Model0x{y.ID:X2}"))).ToArray();
+            return texturesSharedBetweenModels.Select(x => $"Tex0x{x.Key:X2}: " + string.Join(", ", x.Value.Select(y => $"Model0x{y.ModelID:X2}"))).ToArray();
         }
 
         public static string[]? GetTexturesUsedInBothModelsAndSurfaceModel(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById) {
@@ -216,25 +216,6 @@ namespace MPD_Analyzer {
                         missingTextureIds.Add(entry.TextureID);
 
             return missingTextureIds.Select(x => $"0x{x:X2}").ToArray();
-        }
-
-        public static string[]? GetAllUnusedModels(MPD_File mpdFile) {
-            var usedModelIDs = mpdFile.ModelCollections[MPD_CollectionType.Primary].ModelInstances
-                .Where(x => x.PositionX >= -0x800 && x.PositionX <= 0x1000)
-                .Where(x => x.PositionY >= -0x100 && x.PositionY <= 0x100)
-                .Where(x => x.PositionZ >= -0x800 && x.PositionZ <= 0x1000)
-                .Select(x => x.ModelID)
-                .Distinct()
-                .Order()
-                .ToHashSet();
-
-            var unusedModelIDs = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models
-                .Select(x => x.ID)
-                .Where(x => !usedModelIDs.Contains(x))
-                .Order()
-                .ToHashSet();
-
-            return unusedModelIDs.Select(x => $"Model0x{x:X2}").ToArray();
         }
 
         public static string[]? GetUniqueAnimationFramesMissingFromTextureChunks(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById) {

@@ -18,7 +18,7 @@ namespace SF3.Models.Files.MPD {
 
         public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0].ToEnumerableWithLength();
 
-        public IMPD_Model GetModel(int id) => null;
+        public IMPD_Model GetModel(int id, int lod) => null;
 
         private bool _gotTextures = false;
         private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;

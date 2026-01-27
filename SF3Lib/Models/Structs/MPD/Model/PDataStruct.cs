@@ -19,12 +19,13 @@ namespace SF3.Models.Structs.MPD.Model {
         public readonly int _attributesOffsetAddr;
 
         public PDataStruct(IByteData data, int id, string name, int address,
-            MPD_CollectionType collection, IMPD_File mpdFile, int? chunkIndex, int index, int refs
+            MPD_CollectionType collection, IMPD_File mpdFile, int? chunkIndex, int modelId, int lod, int refs
         ) : base(data, id, name, address, 0x14) {
             Collection = collection;
             MPD_File   = mpdFile;
             ChunkIndex = chunkIndex;
-            Index      = index;
+            ModelID    = modelId;
+            LevelOfDetail = lod;
             Refs       = refs;
 
             _verticesOffsetAddr   = Address + 0x00; // 4 bytes
@@ -55,8 +56,11 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: -2.33f, displayName: "Chunk #")]
         public int? ChunkIndex { get; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: -2.15f, displayName: "Index")]
-        public int Index { get; }
+        [TableViewModelColumn(addressField: null, displayOrder: -2.15f, displayFormat: "X2")]
+        public int ModelID { get; }
+
+        [TableViewModelColumn(addressField: null, displayOrder: -2.14f)]
+        public int LevelOfDetail { get; }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0)]
         public int Refs { get; }

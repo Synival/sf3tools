@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         protected AllPDatasTable(string name, IEnumerable<PDataTable> modelTables) : base(null, name, 0) {
             Models = modelTables
                 .SelectMany(x => x)
-                .Where(x => x.Index == 0)
+                .Where(x => x.LevelOfDetail == 0)
                 .OrderBy(x => x.ID).ToArray();
         }
 
