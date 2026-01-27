@@ -12,6 +12,7 @@ namespace SF3.MPD.Project {
             SetMSBForGroundPalette        = original.SetMSBForGroundPalette;
             HasSurfaceTextureRotation     = original.HasSurfaceTextureRotation;
             AddDotProductBasedNoiseToStandardLightmap = original.AddDotProductBasedNoiseToStandardLightmap;
+            KeepTexturelessFlatTiles      = original.KeepTexturelessFlatTiles;
             ModelsYRotation               = original.ModelsYRotation;
             ModelsViewDistance            = original.ModelsViewDistance;
             ModelsViewAngleMin            = original.ModelsViewAngleMin;
@@ -42,6 +43,7 @@ namespace SF3.MPD.Project {
         public bool SetMSBForGroundPalette { get; set; }
         public bool HasSurfaceTextureRotation { get; set; }
         public bool AddDotProductBasedNoiseToStandardLightmap { get; set; }
+        public bool KeepTexturelessFlatTiles { get; set; }
         public float ModelsYRotation { get; set; }
         public ushort ModelsViewDistance { get; set; }
         public float ModelsViewAngleMin { get; set; }

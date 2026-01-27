@@ -42,6 +42,11 @@ namespace SF3.Models.Structs.MPD {
             set => MPD_File.Flags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap = value;
         }
 
+        public bool KeepTexturelessFlatTiles {
+            get => MPD_File.Flags.Bit_0x0008_KeepTexturelessFlatTiles;
+            set => MPD_File.Flags.Bit_0x0008_KeepTexturelessFlatTiles = value;
+        }
+
         public float ModelsYRotation {
             get => MPD_File.MPDHeader.ModelsYRotation;
             set => MPD_File.MPDHeader.ModelsYRotation = value;

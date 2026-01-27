@@ -57,10 +57,17 @@ namespace SF3.MPD.Interfaces {
 
         /// <summary>
         /// When set, the 0x01 bit of the lightmap indices for surface model tile vertices are XOR'ed based on the value of the
-        /// dot product of the tile's normal and the light direct vector. /// This is used for outdoor maps that need to appear
+        /// dot product of the tile's normal and the light direct vector. This is used for outdoor maps that need to appear
         /// noisier. Does not apply to maps with 'NarrowAngleBasedLightmap' on.
         /// </summary>
         bool AddDotProductBasedNoiseToStandardLightmap { get; set; }
+
+        /// <summary>
+        /// Normally, tiles marked as "flat" that have no texture are skipped over. When this is set, they are not skipped over,
+        /// and exist for the purpose of highlights for movement or targetting during battle. When this is not set, any flat
+        /// tile without a texture will not show a highlight at all during battle.
+        /// </summary>
+        bool KeepTexturelessFlatTiles { get; set; }
 
         /// <summary>
         /// Y-axis rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
