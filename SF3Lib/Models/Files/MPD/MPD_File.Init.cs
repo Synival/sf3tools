@@ -12,7 +12,7 @@ using SF3.Models.Tables.MPD;
 using SF3.Models.Tables.MPD.Animation;
 using SF3.Models.Tables.MPD.Main;
 using SF3.Models.Tables.Shared;
-using SF3.MPD;
+using SF3.MPD.Project;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {

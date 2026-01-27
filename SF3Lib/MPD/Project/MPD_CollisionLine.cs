@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SF3.MPD.Interfaces;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Project {
     /// <summary>
     /// A single line connected by two MPD_CollisionPoint's in an MPD.
     /// </summary>

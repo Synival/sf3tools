@@ -3,7 +3,7 @@ using CommonLib.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Project {
     public class MPD_Surface : IMPD_Surface {
         public MPD_Surface(IMPD_Settings settings, IMPD_Tile[,] tiles, Func<bool> hasModelGetter) {
             _settings = settings;

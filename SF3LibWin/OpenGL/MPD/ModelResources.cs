@@ -6,12 +6,12 @@ using CommonLib.SGL;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.MPD;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Extensions;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
+using SF3.MPD.Project;
 
 namespace SF3.Win.OpenGL.MPD {
     public class ModelResources : ResourcesBase, IMPD_Resources {

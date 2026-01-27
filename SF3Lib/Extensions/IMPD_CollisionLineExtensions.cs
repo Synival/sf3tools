@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using SF3.MPD;
 using SF3.MPD.Interfaces;
+using SF3.MPD.Project;
 
 namespace SF3.Extensions {
     public static class IMPD_CollisionLineExtensions {

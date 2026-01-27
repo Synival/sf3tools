@@ -1,7 +1,7 @@
 ﻿using SF3.MPD.Interfaces;
 using SF3.Types;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Project {
     public class MPD_ModelInstance : IMPD_ModelInstance {
         public MPD_ModelInstance() {
             OnlyVisibleFromDirection = ModelDirectionType.Unset;
@@ -41,12 +41,12 @@ namespace SF3.MPD {
 
         public bool AlwaysFacesCamera {
             get => (Flags & 0x08) == 0x08;
-            set => Flags = (ushort) ((Flags & ~0x08) | (value ? 0x08 : 0x00));
+            set => Flags = (ushort) (Flags & ~0x08 | (value ? 0x08 : 0x00));
         }
 
         public ModelDirectionType OnlyVisibleFromDirection {
-            get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
-            set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));
+            get => (Flags & 0x10) == 0x10 ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
+            set => Flags = (ushort) (Flags & 0x07 | (((short) value & 0x07) == (short) ModelDirectionType.Unset ? 0 : (ushort) value & 0x07));
         }
 
         public int LevelsOfDetail { get; set; }
