@@ -25,7 +25,7 @@ namespace SF3.MPD.Project {
 
         public MPD_CollectionType Collection { get; }
         public bool IsUnreferenced { get; set; }
-        public bool HasMissingModels => Models != null;
+        public bool HasMissingModels => Models == null;
 
         public IEnumerableWithLength<IMPD_Model> Models { get; }
         public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
