@@ -53,15 +53,7 @@ namespace SF3.MPD.Project {
         public bool Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures { get => HasExtraModel; set => HasExtraModel = value; }
         public bool Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel { get => MPD.Settings.ForceLowMemoryModels; set {} }
 
-        public int ModelsChunkIndex => 1;
-        public MemoryLocationType ModelsMemoryLocation => MemoryLocationType.LowMemory;
-        public int SurfaceModelChunkIndex => 2;
-        public MemoryLocationType SurfaceModelMemoryLocation => MemoryLocationType.HighMemory;
         public bool HasAnySky => false;
         public bool HasExtraModel { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.ExtraModels); set {} }
-        public ChunkType Chunk1Type => ChunkType.Models;
-        public MemoryLocationType? Chunk1PointersMemoryLocation => MemoryLocationType.LowMemory;
-        public ChunkType Chunk2Type => ChunkType.SurfaceModel;
-        public ChunkType Chunk20Type => ChunkType.Unset;
     }
 }

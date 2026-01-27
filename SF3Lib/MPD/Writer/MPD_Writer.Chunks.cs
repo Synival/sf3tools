@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using CommonLib.Utils;
+using SF3.Extensions;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -13,7 +14,7 @@ namespace SF3.MPD.Writer {
             var hasExtraModel = mpd.Flags.HasExtraModel;
             var hasScenario1ExtraModel = Scenario <= ScenarioType.Scenario1 && hasExtraModel;
             var hasScenario2ExtraModel = Scenario >= ScenarioType.Scenario2 && hasExtraModel;
-            var modelsMemoryLocation = MPD_ChunkLogic.GetModelsMemoryLocation(mpd.Flags, Scenario);
+            var modelsMemoryLocation = mpd.Flags.GetModelsMemoryLocation(Scenario);
 
             // Chunk[0] is always empty.
             WriteEmptyChunk();
@@ -22,7 +23,7 @@ namespace SF3.MPD.Writer {
             var primaryMc = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut : null;
             var extraMc   = mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out mcOut) ? mcOut : null;
 
-            var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? MPD_ChunkLogic.GetModelsChunkIndex(mpd.Flags, Scenario);
+            var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? mpd.Flags.GetModelsChunkIndex(Scenario);
             if (primaryMc != null && modelsChunkIndex == 1)
                 WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
             else if (extraMc != null && hasScenario2ExtraModel)
@@ -31,7 +32,7 @@ namespace SF3.MPD.Writer {
                 WriteEmptyChunk();
 
             // Chunk[2] is the surface model, but sometimes Chunk[20] for Scenario 2+.
-            var surfaceModelChunkIndex = mpd.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex ?? MPD_ChunkLogic.GetSurfaceModelChunkIndex(mpd.Flags, Scenario);
+            var surfaceModelChunkIndex = mpd.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex ?? mpd.Flags.GetSurfaceModelChunkIndex(Scenario);
             if (mpd.Surface.HasModel && surfaceModelChunkIndex == 2)
                 WriteSurfaceModelChunk(mpd.Surface);
             else
