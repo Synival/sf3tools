@@ -159,5 +159,15 @@ namespace SF3.Models.Structs.MPD {
             get => MPD_File.IgnoredTextureTable?.IsDummiedOut == true;
             set {}
         }
+
+        public bool IgnoreGroundImage {
+            get => !MPD_File.Flags.Bit_0x0400_HasGroundImage && MPD_File.Planes?.GroundImage != null;
+            set {}
+        }
+
+        public bool IgnoreSkyImage {
+            get => !MPD_File.Flags.HasAnySky && MPD_File.Planes?.SkyImage != null;
+            set {}
+        }
     }
 }

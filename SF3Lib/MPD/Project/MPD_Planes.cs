@@ -17,6 +17,11 @@ namespace SF3.MPD.Project {
                 GroundPalette = new Palette(original.GroundPalette);
             if (original.SkyPalette != null)
                 SkyPalette = new Palette(original.SkyPalette);
+
+            if (original.GroundImage != null)
+                GroundImage = new TextureData(original.GroundImage);
+            if (original.SkyImage != null)
+                SkyImage = new TextureData(original.SkyImage);
         }
 
         public ITextureData GroundImage { get; }

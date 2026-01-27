@@ -22,6 +22,8 @@ namespace SF3.MPD.Project {
             AreGroundAnimationsDummiedOut = original.AreGroundAnimationsDummiedOut;
             IsGradientDummiedOut          = original.IsGradientDummiedOut;
             IsUnknown2TableDummiedOut     = original.IsUnknown2TableDummiedOut;
+            IgnoreGroundImage             = original.IgnoreGroundImage;
+            IgnoreSkyImage                = original.IgnoreSkyImage;
         }
 
         public bool HasSurfaceModel { get; set; }
@@ -41,5 +43,7 @@ namespace SF3.MPD.Project {
         public bool IsGradientDummiedOut { get; set; }
         public bool IsUnknown2TableDummiedOut { get; set; }
         public bool AreIgnoredTexturesDummiedOut { get; set; }
+        public bool IgnoreGroundImage { get; set; }
+        public bool IgnoreSkyImage { get; set; }
     }
 }

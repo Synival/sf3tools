@@ -122,5 +122,15 @@ namespace SF3.MPD.Interfaces {
         /// When set, the table with ignored textures exists, but is serialized with 'FFFF' before it and unused.
         /// </summary>
         bool AreIgnoredTexturesDummiedOut { get; set; }
+
+        /// <summary>
+        /// When set, any ground plane that exists will be ignored when exporting MPD flags.
+        /// </summary>
+        bool IgnoreGroundImage { get; set; }
+
+        /// <summary>
+        /// When set, any sky plane that exists will be ignored when exporting MPD flags.
+        /// </summary>
+        bool IgnoreSkyImage { get; set; }
     }
 }
