@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
 using CommonLib.Utils;
+using SF3.MPD;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile : IMPD_Tile {
-        private static int[,] s_tileSeeds = null;
-
         public Tile(IMPD_File file, int x, int y) {
             MPD_File = file;
             X = x;
@@ -24,10 +23,7 @@ namespace SF3.Models.Files.MPD {
             _sharedBlockVertexLocations = allCorners
                 .ToDictionary(c => c, c => BlockHelpers.GetVertexBlockLocations(X, Y, c, onlyInBlock: false));
 
-            if (s_tileSeeds == null)
-                GenerateTileSeeds();
-
-            RandomSeed = s_tileSeeds[x, y];
+            RandomSeed = TileSeeds.GetTileSeed(x, y);
         }
 
         public IMPD_File MPD_File { get; }

@@ -6,20 +6,6 @@ using CommonLib.Utils;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
-        private static void GenerateTileSeeds() {
-            s_tileSeeds = new int[64, 64];
-            for (int x = 0; x < 64; x++) {
-                for (int y = 0; y < 64; y++) {
-                    var seed = 2166136261;
-                    seed += (uint) x;
-                    seed *= 16777619;
-                    seed += (uint) y;
-                    seed *= 16777619;
-                    s_tileSeeds[x, y] = (int) seed;
-                }
-            }
-        }
-
         private TileAndCorner[] GetSharedTilesAtCorner(CornerType corner) {
             TileAndCorner[] GetUnfiltered() {
                 switch (corner) {
