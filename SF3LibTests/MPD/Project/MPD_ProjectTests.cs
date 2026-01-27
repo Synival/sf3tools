@@ -1,4 +1,6 @@
-﻿using SF3.MPD.Project;
+﻿using CommonLib.Arrays;
+using SF3.Models.Files.MPD;
+using SF3.MPD.Project;
 using SF3.MPD.Writer;
 using SF3.Types;
 using SF3.Utils;
@@ -34,9 +36,20 @@ namespace SF3.Tests.MPD.Project {
 
             File.WriteAllBytes($"Project_{scenarioPrefix}_{file}_Test.MPD", exportCopy);
 
-            var errors = AnalysisUtils.GetByteComparisonErrors(exportOriginal, exportCopy);
-            if (errors?.Length > 0)
-                Assert.Fail("\r\n============================================\r\n" + string.Join("\r\n", errors));
+            var byteErrors = AnalysisUtils.GetByteComparisonErrors(exportOriginal, exportCopy);
+            if (!(byteErrors?.Length > 0))
+                return;
+
+            var errorMsg = "\r\n============================================\r\n" + string.Join("\r\n", byteErrors);
+
+            var mpdFileOriginal = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(exportOriginal)), mpdOriginal.NameGetterContext, mpdOriginal.Scenario);
+            var mpdFileCopy     = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(exportCopy)), mpdOriginal.NameGetterContext, mpdOriginal.Scenario);
+
+            var mpdErrors = AnalysisUtils.GetMPDContentComparisonErrors(mpdFileOriginal, mpdFileCopy);
+            if (mpdErrors?.Length > 0)
+                errorMsg += "\r\n============================================\r\n" + string.Join("\r\n", mpdErrors);
+
+            Assert.Fail(errorMsg);
         }
     }
 }
