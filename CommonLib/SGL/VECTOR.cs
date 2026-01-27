@@ -20,6 +20,12 @@ namespace CommonLib.SGL {
             Z = new FIXED(z, 0);
         }
 
+        public VECTOR(VECTOR original) {
+            X = original.X;
+            Y = original.Y;
+            Z = original.Z;
+        }
+
         public FIXED X;
         public FIXED Y;
         public FIXED Z;

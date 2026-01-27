@@ -4,6 +4,22 @@ using CommonLib.Types;
 
 namespace CommonLib.Imaging {
     public class TextureData : TextureDataBase, ITextureData {
+        public TextureData(ITextureData original) {
+            _width             = original.Width;
+            _height            = original.Height;
+            _pixelFormat       = original.PixelFormat;
+            _zeroIsTransparent = original.ZeroIsTransparent;
+            CanSetImage        = original.CanSetImageData8Bit || original.CanSetImageData16Bit;
+
+            if (original.Palette != null)
+                Palette = new Palette(original.Palette);
+
+            if (_pixelFormat == TexturePixelFormat.Indexed8Bit)
+                _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
+            if (_pixelFormat == TexturePixelFormat.ABGR1555)
+                _textureDataBuffer.SetImageData16Bit(original.ImageData16Bit);
+        }
+
         public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage) {
             if (data != null) {
                 _width  = data.GetLength(0);

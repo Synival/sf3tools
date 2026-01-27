@@ -10,6 +10,13 @@ namespace CommonLib.SGL {
             Faces    = new ISGL_ModelFace[0].ToEnumerableWithLength();
         }
 
+        public SGL_Model(ISGL_Model original) {
+            if (original.Vertices != null)
+                Vertices = original.Vertices.Select(x => new VECTOR(x)).ToArray().ToEnumerableWithLength();
+            if (original.Faces != null)
+                Faces = original.Faces.Select(x => (ISGL_ModelFace) (new SGL_ModelFace(x))).ToArray().ToEnumerableWithLength();
+        }
+
         public SGL_Model(int id, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces) {
             if (vertices == null)
                 throw new ArgumentNullException(nameof(vertices));
@@ -22,6 +29,7 @@ namespace CommonLib.SGL {
         }
 
         public int ID { get; set; }
+
         public IIndexedEnumerableWithLength<VECTOR> Vertices { get; }
         public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }
     }
