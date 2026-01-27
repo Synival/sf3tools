@@ -7,9 +7,9 @@ namespace SF3.MPD.Project {
     public class MPD_ModelSwitchGroup : IMPD_ModelSwitchGroup {
         public MPD_ModelSwitchGroup(IMPD_ModelSwitchGroup original) {
             Flag = original.Flag;
-            if (ModelInstancesVisibleWhenOff != null)
+            if (original.ModelInstancesVisibleWhenOff != null)
                 ModelInstancesVisibleWhenOff = original.ModelInstancesVisibleWhenOff.ToArray().ToEnumerableWithLength();
-            if (ModelInstancesVisibleWhenOn != null)
+            if (original.ModelInstancesVisibleWhenOn != null)
                 ModelInstancesVisibleWhenOn = original.ModelInstancesVisibleWhenOn.ToArray().ToEnumerableWithLength();
         }
 
