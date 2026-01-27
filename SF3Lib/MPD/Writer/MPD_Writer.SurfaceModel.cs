@@ -3,7 +3,7 @@ using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         private const int c_surfaceModelBlockCount          = 0x100;
         private const int c_surfaceModelBlockTilesWidth     = 4;

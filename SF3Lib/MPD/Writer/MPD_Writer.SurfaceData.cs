@@ -2,7 +2,7 @@
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteSurfaceDataChunk(IMPD_Surface surface)
             => WriteCompressedChunk(writer => writer.WriteSurfaceDataChunkContent(surface));

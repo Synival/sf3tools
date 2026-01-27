@@ -13,7 +13,7 @@ using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteMain(IMPD mpd, out byte[] chunk3Data) {
             // Placeholder for a pointer to the header with 8 bytes of padding.

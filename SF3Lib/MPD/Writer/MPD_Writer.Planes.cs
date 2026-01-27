@@ -2,7 +2,7 @@
 using CommonLib.Extensions;
 using SF3.MPD.Interfaces;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WritePlaneChunks(IMPD_Planes planes, bool lastChunkIsReservedForModels) {
             // Write the background image.

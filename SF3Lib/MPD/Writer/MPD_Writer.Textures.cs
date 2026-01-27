@@ -5,7 +5,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.Imaging;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteTextureChunks(IEnumerable<IMPD_Texture> textures, int chunkCount, int startID, bool allowIndexed, int? chunkSizeLimit = null) {
             if (textures == null)

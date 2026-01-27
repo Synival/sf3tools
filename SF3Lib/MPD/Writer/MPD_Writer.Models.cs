@@ -6,7 +6,7 @@ using CommonLib.SGL;
 using SF3.Extensions;
 using SF3.MPD.Interfaces;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteModelChunk(IEnumerable<ISGL_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances)
             => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, collisions, isHighMemory, dataAfterInstances));

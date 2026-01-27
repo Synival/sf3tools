@@ -1,7 +1,7 @@
 ﻿using CommonLib.Arrays;
 using SF3.Analysis;
 using SF3.Models.Files.MPD;
-using SF3.MPD;
+using SF3.MPD.Writer;
 using SF3.Types;
 using SF3.Utils;
 using static SF3.Tests.Utils.MPD_TestUtils;

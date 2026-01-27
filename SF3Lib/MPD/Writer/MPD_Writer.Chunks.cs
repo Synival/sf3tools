@@ -6,7 +6,7 @@ using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
-namespace SF3.MPD {
+namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteChunks(IMPD mpd, byte[] chunk3Data) {
             bool allowIndexedTextures = Scenario >= ScenarioType.Scenario3;

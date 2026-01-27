@@ -4,8 +4,8 @@ using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
-using SF3.MPD;
 using SF3.MPD.Interfaces;
+using SF3.MPD.Writer;
 using SF3.Types;
 using SF3.Utils;
 
