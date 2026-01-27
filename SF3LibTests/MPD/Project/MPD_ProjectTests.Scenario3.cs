@@ -13,11 +13,11 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario3_AHIRU2_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "AHIRU2");
-/*
+
         [TestMethod]
         public void Copy_WithScenario3_BLACK3_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "BLACK3");
-*/
+
         [TestMethod]
         public void Copy_WithScenario3_BTL95_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "BTL95");
@@ -29,7 +29,7 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario3_B_KOYA_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "B_KOYA");
-
+*/
         [TestMethod]
         public void Copy_WithScenario3_FEDEND_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "FEDEND");
@@ -41,15 +41,15 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario3_HNSNOP_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "HNSNOP");
-*/
+
         [TestMethod]
         public void Copy_WithScenario3_SNRK00_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "SNRK00");
-/*
+
         [TestMethod]
         public void Copy_WithScenario3_DAIDAI_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "DAIDAI");
-*/
+
         [TestMethod]
         public void Copy_WithScenario3_ATBTL2_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "ATBTL2");
