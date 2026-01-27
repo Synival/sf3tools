@@ -1,7 +1,7 @@
 ﻿using SF3.Analysis;
 using SF3.Types;
 
-namespace SF3.Tests.MPD {
+namespace SF3.Tests.MPD.Writer {
     public partial class MPD_WriterTests {
         [TestMethod]
         public void WriteMPD_WithScenario3_VOID3_ProducesSameLoadableData() {

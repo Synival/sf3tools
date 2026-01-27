@@ -2,7 +2,7 @@
 using SF3.Types;
 using static SF3.Tests.Utils.MPD_TestUtils;
 
-namespace SF3.Tests.MPD {
+namespace SF3.Tests.MPD.Writer {
     public partial class MPD_WriterTests {
         [TestMethod]
         public void WriteMPD_WithScenario1_TESMAP_ProducesSameLoadableData() {

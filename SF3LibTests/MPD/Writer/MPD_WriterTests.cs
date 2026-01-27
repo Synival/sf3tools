@@ -6,7 +6,7 @@ using SF3.Types;
 using SF3.Utils;
 using static SF3.Tests.Utils.MPD_TestUtils;
 
-namespace SF3.Tests.MPD {
+namespace SF3.Tests.MPD.Writer {
     [TestClass]
     public partial class MPD_WriterTests {
         private void ProducesSameLoadableDataTestBase(
@@ -28,7 +28,9 @@ namespace SF3.Tests.MPD {
             var scenarioPrefix =
                 (scenario == ScenarioType.Scenario1) ? "S1_" :
                 (scenario == ScenarioType.Scenario2) ? "S2_" :
-                                                       "S3_";
+                (scenario == ScenarioType.Scenario3) ? "S3_" :
+                (scenario == ScenarioType.Scenario3) ? "PD_" :
+                                                       "Unknown_";
 
             File.WriteAllBytes($"{scenarioPrefix}{mpdName}_Test.MPD", outputData);
 
