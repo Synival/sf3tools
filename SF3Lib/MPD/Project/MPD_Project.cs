@@ -52,7 +52,7 @@ namespace SF3.MPD.Project {
                 BattleCursorBoundaries = new RectangleShort() { P1 = original.BattleCursorBoundaries.P1, P2 = original.BattleCursorBoundaries.P2 };
         }
 
-        public IMPD_AllFlags Flags { get; }
+        public IMPD_AllFlagsForEditing Flags { get; }
 
         public IMPD_Settings Settings { get; }
 

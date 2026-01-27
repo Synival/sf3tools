@@ -2,7 +2,7 @@
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {
-    public partial class MPD_FlagsFromHeader : IMPD_AllFlags {
+    public partial class MPD_FlagsFromHeader : IMPD_AllFlagsForEditing {
         public MPD_FlagsFromHeader(MPD_Header header) {
             Header = header;
         }

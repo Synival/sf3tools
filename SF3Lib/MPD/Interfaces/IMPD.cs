@@ -15,7 +15,7 @@ namespace SF3.MPD.Interfaces {
         /// The flags for the MPD. Mostly technical information that should only be modified directly if you know what
         /// you're doing.
         /// </summary>
-        IMPD_AllFlags Flags { get; }
+        IMPD_AllFlagsForEditing Flags { get; }
 
         /// <summary>
         /// The settings for the MPD. Contains various visual settings and determines what internal flags to set.

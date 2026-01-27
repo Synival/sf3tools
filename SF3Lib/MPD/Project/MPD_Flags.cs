@@ -2,7 +2,7 @@
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_Flags : IMPD_AllFlags {
+    public class MPD_Flags : IMPD_AllFlagsForEditing {
         public MPD_Flags(IMPD mpd) {
             MPD = mpd;
         }
