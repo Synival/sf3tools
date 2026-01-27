@@ -1,17 +1,12 @@
-﻿using System.Collections.Generic;
-using CommonLib.Imaging;
-using SF3.Imaging;
-using SF3.Types;
+﻿using SF3.Imaging;
 
 namespace SF3.MPD.Project {
-    public class MPD_AnimatableTexture : TextureData, IMPD_AnimatableTexture {
+    public class MPD_AnimatableTexture : MPD_Texture, IMPD_AnimatableTexture {
         public MPD_AnimatableTexture(IMPD_AnimatableTexture original) : base(original) {
+            if (original.Animation != null)
+                Animation = new MPD_Animation(this, original.Animation);
         }
 
-        public IMPD_Animation Animation => null;
-        public MPD_CollectionType Collection { get; }
-        public int ID { get; }
-        public Dictionary<TagKey, TagValue> Tags => null;
-        public bool IsIgnored { get; set; }
+        public IMPD_Animation Animation { get; }
     }
 }
