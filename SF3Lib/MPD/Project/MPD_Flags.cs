@@ -38,7 +38,7 @@ namespace SF3.MPD.Project {
         public bool Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap { get => MPD.Settings.AddDotProductBasedNoiseToStandardLightmap; set {} }
         public bool Bit_0x0008_KeepTexturelessFlatTiles { get => MPD.Settings.KeepTexturelessFlatTiles; set {} }
         public bool Bit_0x0010_HasTileBasedForegroundImage { get => !MPD.Settings.IgnoreForegroundTiledImage && MPD.Planes.ForegroundTiledImage?.TiledImage != null; set {} }
-        public bool Bit_0x0020_Unknown { get => false; set {} }
+        public bool Bit_0x0020_Unknown { get => MPD.Settings.UnknownHeaderFlag; set {} }
         public bool Bit_0x0040_HasBackgroundImage { get => !MPD.Settings.IgnoreBackgroundImage && MPD.Planes.BackgroundImage != null; set {} }
         public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures { get => HasExtraModel; set => HasExtraModel = value; }
         public bool Bit_0x0080_SetMSBForGroundPalette { get => MPD.Settings.SetMSBForGroundPalette; set {} }

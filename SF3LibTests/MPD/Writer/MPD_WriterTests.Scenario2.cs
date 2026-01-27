@@ -94,6 +94,18 @@ namespace SF3.Tests.MPD.Writer {
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "ELINB", performByteComparison: false);
 
         [TestMethod]
+        public void WriteMPD_WithScenario2_HNSN00_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "HNSN00", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_HNSN01_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "HNSN01", performByteComparison: false);
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_HNSN02_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "HNSN02", performByteComparison: false);
+
+        [TestMethod]
         public void WriteMPD_WithScenario2_ATBTL2_ProducesSameLoadableData() {
             try {
                 // This map is funny -- it's the only time the LoD feature is actually put into use, but not for what
@@ -115,5 +127,9 @@ namespace SF3.Tests.MPD.Writer {
 
             }
         }
+
+        [TestMethod]
+        public void WriteMPD_WithScenario2_B4_DAS_ProducesSameLoadableData()
+            => ProducesSameLoadableDataTestBase(ScenarioType.Scenario2, "B4_DAS", performByteComparison: false);
     }
 }

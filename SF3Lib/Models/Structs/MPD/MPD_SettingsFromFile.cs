@@ -47,6 +47,11 @@ namespace SF3.Models.Structs.MPD {
             set => MPD_File.Flags.Bit_0x0008_KeepTexturelessFlatTiles = value;
         }
 
+        public bool UnknownHeaderFlag {
+            get => MPD_File.Flags.Bit_0x0020_Unknown;
+            set => MPD_File.Flags.Bit_0x0020_Unknown = value;
+        }
+
         public float ModelsYRotation {
             get => MPD_File.MPDHeader.ModelsYRotation;
             set => MPD_File.MPDHeader.ModelsYRotation = value;

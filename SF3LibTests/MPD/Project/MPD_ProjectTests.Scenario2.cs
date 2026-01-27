@@ -57,5 +57,21 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario2_ATBTL2_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "ATBTL2");
+
+        [TestMethod]
+        public void Copy_WithScenario2_B4_DAS_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "B4_DAS");
+
+        [TestMethod]
+        public void Copy_WithScenario2_HNSN00_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "HNSN00");
+
+        [TestMethod]
+        public void Copy_WithScenario2_HNSN01_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "HNSN01");
+
+        [TestMethod]
+        public void Copy_WithScenario2_HNSN02_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "HNSN02");
     }
 }

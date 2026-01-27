@@ -70,6 +70,11 @@ namespace SF3.MPD.Interfaces {
         bool KeepTexturelessFlatTiles { get; set; }
 
         /// <summary>
+        /// Unknown MPD header flag 0x0020. Present in Scenario 2 HNSN00, HNSN01, and HNSN02.
+        /// </summary>
+        bool UnknownHeaderFlag { get; }
+
+        /// <summary>
         /// Y-axis rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
         /// facing the wrong way.
         /// </summary>
