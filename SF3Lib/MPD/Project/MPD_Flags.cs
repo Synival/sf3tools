@@ -3,7 +3,7 @@ using SF3.MPD.Interfaces.Flags;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_Flags : IMPD_AllFlagsForEditing {
+    public class MPD_Flags : IMPD_EditableFlags {
         public MPD_Flags(IMPD mpd) {
             MPD = mpd;
         }

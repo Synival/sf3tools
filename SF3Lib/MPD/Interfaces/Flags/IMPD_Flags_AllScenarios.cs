@@ -1,5 +1,5 @@
 ﻿namespace SF3.MPD.Interfaces.Flags {
-    public interface IMPD_AllScenarioFlags {
+    public interface IMPD_Flags_AllScenarios {
         /// <summary>
         /// Always on for all MPDs across all four scenarios. Not known if this is read anywhere and must be set.
         /// </summary>

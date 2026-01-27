@@ -93,7 +93,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public IMPD_AllFlagsForEditing Flags { get; private set; }
+        public IMPD_EditableFlags Flags { get; private set; }
         public IMPD_Settings Settings { get; private set; }
         public IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; private set; }
         public IMPD_Surface Surface { get; private set; }

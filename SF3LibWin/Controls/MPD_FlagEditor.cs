@@ -24,94 +24,94 @@ namespace SF3.Win.Controls {
 
             cb0x0001_Unknown.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0001_Unknown,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0001_Unknown),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0001_Unknown));
+                    nameof(IMPD_EditableFlags.Bit_0x0001_Unknown),
+                    nameof(IMPD_EditableFlags.CanSet_0x0001_Unknown));
             cb0x0002_Unknown.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0002_Unknown,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0002_Unknown),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0002_Unknown));
+                    nameof(IMPD_EditableFlags.Bit_0x0002_Unknown),
+                    nameof(IMPD_EditableFlags.CanSet_0x0002_Unknown));
             cb0x0002_HasSurfaceTextureRotation.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0002_HasSurfaceTextureRotation,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0002_HasSurfaceTextureRotation),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0002_HasSurfaceTextureRotation));
+                    nameof(IMPD_EditableFlags.Bit_0x0002_HasSurfaceTextureRotation),
+                    nameof(IMPD_EditableFlags.CanSet_0x0002_HasSurfaceTextureRotation));
             cb0x0004_AddDotProductBasedNoiseToStandardLightmap.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0004_AddDotProductBasedNoiseToStandardLightmap,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
+                    nameof(IMPD_EditableFlags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
+                    nameof(IMPD_EditableFlags.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
             cb0x0008_KeepTexturelessFlatTiles.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0008_KeepTexturelessFlatTiles,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0008_KeepTexturelessFlatTiles),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0008_KeepTexturelessFlatTiles));
+                    nameof(IMPD_EditableFlags.Bit_0x0008_KeepTexturelessFlatTiles),
+                    nameof(IMPD_EditableFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
             cb0x0010_HasTileBasedForegroundImage.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0010_HasTileBasedForegroundImage,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0010_HasTileBasedForegroundImage),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0010_HasTileBasedForegroundImage));
+                    nameof(IMPD_EditableFlags.Bit_0x0010_HasTileBasedForegroundImage),
+                    nameof(IMPD_EditableFlags.CanSet_0x0010_HasTileBasedForegroundImage));
             cb0x0020_Unknown.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0020_Unknown,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0020_Unknown),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0020_Unknown));
+                    nameof(IMPD_EditableFlags.Bit_0x0020_Unknown),
+                    nameof(IMPD_EditableFlags.CanSet_0x0020_Unknown));
             cb0x0040_HasBackgroundImage.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0040_HasBackgroundImage,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0040_HasBackgroundImage),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0040_HasBackgroundImage));
+                    nameof(IMPD_EditableFlags.Bit_0x0040_HasBackgroundImage),
+                    nameof(IMPD_EditableFlags.CanSet_0x0040_HasBackgroundImage));
             cb0x0080_HasChunk19ModelWithChunk21Textures.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0080_HasChunk19ModelWithChunk21Textures,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
+                    nameof(IMPD_EditableFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
+                    nameof(IMPD_EditableFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
             cb0x0080_SetMSBForGroundPalette.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0080_SetMSBForGroundPalette,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0080_SetMSBForGroundPalette),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0080_SetMSBForGroundPalette));
+                    nameof(IMPD_EditableFlags.Bit_0x0080_SetMSBForGroundPalette),
+                    nameof(IMPD_EditableFlags.CanSet_0x0080_SetMSBForGroundPalette));
             cb0x0100_HasModels.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0100_HasModels,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0100_HasModels),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0100_HasModels));
+                    nameof(IMPD_EditableFlags.Bit_0x0100_HasModels),
+                    nameof(IMPD_EditableFlags.CanSet_0x0100_HasModels));
             cb0x0200_HasSurfaceModel.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0200_HasSurfaceModel,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0200_HasSurfaceModel),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0200_HasSurfaceModel));
+                    nameof(IMPD_EditableFlags.Bit_0x0200_HasSurfaceModel),
+                    nameof(IMPD_EditableFlags.CanSet_0x0200_HasSurfaceModel));
             cb0x0400_HasGroundImage.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0400_HasGroundImage,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0400_HasGroundImage),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0400_HasGroundImage));
+                    nameof(IMPD_EditableFlags.Bit_0x0400_HasGroundImage),
+                    nameof(IMPD_EditableFlags.CanSet_0x0400_HasGroundImage));
             cb0x0800_Unused.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0800_Unused,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0800_Unused),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0800_Unused));
+                    nameof(IMPD_EditableFlags.Bit_0x0800_Unused),
+                    nameof(IMPD_EditableFlags.CanSet_0x0800_Unused));
             cb0x0800_HasCutsceneSky.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x0800_HasCutsceneSky,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x0800_HasCutsceneSky),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0800_HasCutsceneSky));
+                    nameof(IMPD_EditableFlags.Bit_0x0800_HasCutsceneSky),
+                    nameof(IMPD_EditableFlags.CanSet_0x0800_HasCutsceneSky));
             cb0x1000_HasTileBasedGroundImage.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x1000_HasTileBasedGroundImage,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x1000_HasTileBasedGroundImage),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x0800_HasCutsceneSky));
+                    nameof(IMPD_EditableFlags.Bit_0x1000_HasTileBasedGroundImage),
+                    nameof(IMPD_EditableFlags.CanSet_0x0800_HasCutsceneSky));
             cb0x2000_HasBattleSky.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x2000_HasBattleSky,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x2000_HasBattleSky),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x2000_HasBattleSky));
+                    nameof(IMPD_EditableFlags.Bit_0x2000_HasBattleSky),
+                    nameof(IMPD_EditableFlags.CanSet_0x2000_HasBattleSky));
             cb0x2000_NarrowAngleBasedLightmap.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x2000_NarrowAngleBasedLightmap,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x2000_NarrowAngleBasedLightmap),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x2000_NarrowAngleBasedLightmap));
+                    nameof(IMPD_EditableFlags.Bit_0x2000_NarrowAngleBasedLightmap),
+                    nameof(IMPD_EditableFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
             cb0x4000_Unused.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x4000_Unused,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x4000_Unused),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x4000_Unused));
+                    nameof(IMPD_EditableFlags.Bit_0x4000_Unused),
+                    nameof(IMPD_EditableFlags.CanSet_0x4000_Unused));
             cb0x4000_HasExtraChunk1ModelWithChunk21Textures.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x4000_HasExtraChunk1ModelWithChunk21Textures,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
+                    nameof(IMPD_EditableFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
+                    nameof(IMPD_EditableFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
             cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel.CheckedChanged += (s, e)
                 => TrySetProperty(cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel,
-                    nameof(IMPD_AllFlagsForEditing.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel),
-                    nameof(IMPD_AllFlagsForEditing.CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel));
+                    nameof(IMPD_EditableFlags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel),
+                    nameof(IMPD_EditableFlags.CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel));
 
             ResumeLayout();
         }
 
-        private IMPD_AllFlagsForEditing _flagsSource = null;
-        public IMPD_AllFlagsForEditing FlagsSource {
+        private IMPD_EditableFlags _flagsSource = null;
+        public IMPD_EditableFlags FlagsSource {
             get => _flagsSource;
             set {
                 if (_flagsSource != value) {
@@ -129,68 +129,68 @@ namespace SF3.Win.Controls {
             _inUpdateFlagsFromSource = true;
 
             SetControlState(cb0x0001_Unknown,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0001_Unknown),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0001_Unknown));
+                nameof(IMPD_EditableFlags.Bit_0x0001_Unknown),
+                nameof(IMPD_EditableFlags.CanSet_0x0001_Unknown));
             SetControlState(cb0x0002_Unknown,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0002_Unknown),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0002_Unknown));
+                nameof(IMPD_EditableFlags.Bit_0x0002_Unknown),
+                nameof(IMPD_EditableFlags.CanSet_0x0002_Unknown));
             SetControlState(cb0x0002_HasSurfaceTextureRotation,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0002_HasSurfaceTextureRotation),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0002_HasSurfaceTextureRotation));
+                nameof(IMPD_EditableFlags.Bit_0x0002_HasSurfaceTextureRotation),
+                nameof(IMPD_EditableFlags.CanSet_0x0002_HasSurfaceTextureRotation));
             SetControlState(cb0x0004_AddDotProductBasedNoiseToStandardLightmap,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
+                nameof(IMPD_EditableFlags.Bit_0x0004_AddDotProductBasedNoiseToStandardLightmap),
+                nameof(IMPD_EditableFlags.CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap));
             SetControlState(cb0x0008_KeepTexturelessFlatTiles,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0008_KeepTexturelessFlatTiles),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0008_KeepTexturelessFlatTiles));
+                nameof(IMPD_EditableFlags.Bit_0x0008_KeepTexturelessFlatTiles),
+                nameof(IMPD_EditableFlags.CanSet_0x0008_KeepTexturelessFlatTiles));
             SetControlState(cb0x0010_HasTileBasedForegroundImage,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0010_HasTileBasedForegroundImage),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0010_HasTileBasedForegroundImage));
+                nameof(IMPD_EditableFlags.Bit_0x0010_HasTileBasedForegroundImage),
+                nameof(IMPD_EditableFlags.CanSet_0x0010_HasTileBasedForegroundImage));
             SetControlState(cb0x0020_Unknown,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0020_Unknown),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0020_Unknown));
+                nameof(IMPD_EditableFlags.Bit_0x0020_Unknown),
+                nameof(IMPD_EditableFlags.CanSet_0x0020_Unknown));
             SetControlState(cb0x0040_HasBackgroundImage,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0040_HasBackgroundImage),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0040_HasBackgroundImage));
+                nameof(IMPD_EditableFlags.Bit_0x0040_HasBackgroundImage),
+                nameof(IMPD_EditableFlags.CanSet_0x0040_HasBackgroundImage));
             SetControlState(cb0x0080_HasChunk19ModelWithChunk21Textures,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
+                nameof(IMPD_EditableFlags.Bit_0x0080_HasChunk19ModelWithChunk10Textures),
+                nameof(IMPD_EditableFlags.CanSet_0x0080_HasChunk19ModelWithChunk10Textures));
             SetControlState(cb0x0080_SetMSBForGroundPalette,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0080_SetMSBForGroundPalette),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0080_SetMSBForGroundPalette));
+                nameof(IMPD_EditableFlags.Bit_0x0080_SetMSBForGroundPalette),
+                nameof(IMPD_EditableFlags.CanSet_0x0080_SetMSBForGroundPalette));
             SetControlState(cb0x0100_HasModels,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0100_HasModels),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0100_HasModels));
+                nameof(IMPD_EditableFlags.Bit_0x0100_HasModels),
+                nameof(IMPD_EditableFlags.CanSet_0x0100_HasModels));
             SetControlState(cb0x0200_HasSurfaceModel,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0200_HasSurfaceModel),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0200_HasSurfaceModel));
+                nameof(IMPD_EditableFlags.Bit_0x0200_HasSurfaceModel),
+                nameof(IMPD_EditableFlags.CanSet_0x0200_HasSurfaceModel));
             SetControlState(cb0x0400_HasGroundImage,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0400_HasGroundImage),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0400_HasGroundImage));
+                nameof(IMPD_EditableFlags.Bit_0x0400_HasGroundImage),
+                nameof(IMPD_EditableFlags.CanSet_0x0400_HasGroundImage));
             SetControlState(cb0x0800_Unused,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0800_Unused),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0800_Unused));
+                nameof(IMPD_EditableFlags.Bit_0x0800_Unused),
+                nameof(IMPD_EditableFlags.CanSet_0x0800_Unused));
             SetControlState(cb0x0800_HasCutsceneSky,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x0800_HasCutsceneSky),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x0800_HasCutsceneSky));
+                nameof(IMPD_EditableFlags.Bit_0x0800_HasCutsceneSky),
+                nameof(IMPD_EditableFlags.CanSet_0x0800_HasCutsceneSky));
             SetControlState(cb0x1000_HasTileBasedGroundImage,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x1000_HasTileBasedGroundImage),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x1000_HasTileBasedGroundImage));
+                nameof(IMPD_EditableFlags.Bit_0x1000_HasTileBasedGroundImage),
+                nameof(IMPD_EditableFlags.CanSet_0x1000_HasTileBasedGroundImage));
             SetControlState(cb0x2000_HasBattleSky,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x2000_HasBattleSky),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x2000_HasBattleSky));
+                nameof(IMPD_EditableFlags.Bit_0x2000_HasBattleSky),
+                nameof(IMPD_EditableFlags.CanSet_0x2000_HasBattleSky));
             SetControlState(cb0x2000_NarrowAngleBasedLightmap,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x2000_NarrowAngleBasedLightmap),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x2000_NarrowAngleBasedLightmap));
+                nameof(IMPD_EditableFlags.Bit_0x2000_NarrowAngleBasedLightmap),
+                nameof(IMPD_EditableFlags.CanSet_0x2000_NarrowAngleBasedLightmap));
             SetControlState(cb0x4000_Unused,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x4000_Unused),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x4000_Unused));
+                nameof(IMPD_EditableFlags.Bit_0x4000_Unused),
+                nameof(IMPD_EditableFlags.CanSet_0x4000_Unused));
             SetControlState(cb0x4000_HasExtraChunk1ModelWithChunk21Textures,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
+                nameof(IMPD_EditableFlags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures),
+                nameof(IMPD_EditableFlags.CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures));
             SetControlState(cb0x8000_ModelsAreStillLowMemoryWithSurfaceModel,
-                nameof(IMPD_AllFlagsForEditing.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel),
-                nameof(IMPD_AllFlagsForEditing.CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel));
+                nameof(IMPD_EditableFlags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel),
+                nameof(IMPD_EditableFlags.CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel));
 
             _inUpdateFlagsFromSource = false;
         }

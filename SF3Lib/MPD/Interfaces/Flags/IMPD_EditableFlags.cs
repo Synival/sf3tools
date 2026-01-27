@@ -1,5 +1,5 @@
 ﻿namespace SF3.MPD.Interfaces.Flags {
-    public interface IMPD_AllFlagsForEditing : IMPD_AllFlags {
+    public interface IMPD_EditableFlags : IMPD_Flags {
         // Properties to indicate whether or not this flag can be set
         bool CanSet_0x0001_Unknown { get; }
         bool CanSet_0x0002_Unknown { get; }

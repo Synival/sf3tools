@@ -1,5 +1,5 @@
 ﻿namespace SF3.MPD.Interfaces.Flags {
-    public interface IMPD_Scenario2PlusFlags {
+    public interface IMPD_Flags_Scenario2Plus {
         /// <summary>
         /// When set, the MSB for all values in the ground palette will be turned on.
         /// (See 'IMPD_Settings.NarrowAngleBasedLightmap' for details.)
