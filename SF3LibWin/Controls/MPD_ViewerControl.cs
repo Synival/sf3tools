@@ -7,7 +7,7 @@ using SF3.Win.Types;
 using System.ComponentModel;
 using CommonLib.Geometry;
 using SF3.Win.OpenGL.MPD;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {

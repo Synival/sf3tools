@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
 using CommonLib.Utils;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
     public partial class Tile : IMPD_Tile {

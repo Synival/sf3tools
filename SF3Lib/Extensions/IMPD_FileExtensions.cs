@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CommonLib.Types;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Extensions {
     public static class IMPD_FileExtensions {

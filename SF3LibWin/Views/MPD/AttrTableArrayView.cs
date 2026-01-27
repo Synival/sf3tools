@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib.NamedValues;
 using SF3.Models.Tables.MPD.Model;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Win.Views.MPD {
     public class AttrTableArrayView : ArrayView<AttrTable, AttrTableView> {

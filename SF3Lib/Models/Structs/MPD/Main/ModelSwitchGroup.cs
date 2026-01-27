@@ -3,7 +3,7 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {

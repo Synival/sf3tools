@@ -1,6 +1,6 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class CollisionPoint : Struct, IMPD_CollisionPoint {

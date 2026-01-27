@@ -1,4 +1,6 @@
-﻿namespace SF3.MPD {
+﻿using SF3.MPD.Interfaces;
+
+namespace SF3.MPD {
     /// <summary>
     /// A single point from which MPD collision lines can be connected.
     /// </summary>

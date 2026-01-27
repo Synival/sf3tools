@@ -3,7 +3,7 @@ using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.Models.Structs.MPD.Plane;
 using SF3.Models.Tables.Shared;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {

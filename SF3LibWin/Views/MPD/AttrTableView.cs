@@ -3,7 +3,7 @@ using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Win.Views.MPD {
     public class AttrTableView : TableTextureView<AttrStruct, Table<AttrStruct>> {

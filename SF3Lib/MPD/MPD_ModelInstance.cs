@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using SF3.MPD.Interfaces;
+using SF3.Types;
 
 namespace SF3.MPD {
     public class MPD_ModelInstance : IMPD_ModelInstance {

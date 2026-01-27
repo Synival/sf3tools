@@ -2,7 +2,7 @@
 using CommonLib.Attributes;
 using CommonLib.Imaging;
 using SF3.ByteData;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD.Main {
     public class Gradient : Struct, IMPD_Gradient {

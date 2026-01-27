@@ -1,4 +1,4 @@
-﻿using SF3.MPD;
+﻿using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader : IMPD_AllFlags {

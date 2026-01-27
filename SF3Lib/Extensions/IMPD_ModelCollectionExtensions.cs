@@ -1,4 +1,4 @@
-﻿using SF3.MPD;
+﻿using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Extensions {

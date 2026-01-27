@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SF3.Models.Files.MPD;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class MPD_Collisions : IMPD_Collisions {

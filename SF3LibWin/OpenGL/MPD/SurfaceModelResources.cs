@@ -1,5 +1,5 @@
 ﻿using CommonLib;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD {

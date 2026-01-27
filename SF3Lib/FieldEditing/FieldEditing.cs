@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 using static SF3.FieldEditing.Constants;
 

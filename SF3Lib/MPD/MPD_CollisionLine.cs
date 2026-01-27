@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SF3.MPD.Interfaces;
 
 namespace SF3.MPD {
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿using CommonLib.Imaging;
 using SF3.Models.Files.MPD;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD {
     public class MPD_Settings : IMPD_Settings {

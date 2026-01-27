@@ -1,4 +1,4 @@
-﻿using SF3.MPD;
+﻿using SF3.MPD.Interfaces;
 
 namespace SF3.Win.OpenGL.MPD {
     public interface IMPD_Resources : IResources {

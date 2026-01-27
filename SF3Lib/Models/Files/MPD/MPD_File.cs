@@ -8,7 +8,6 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD;
 using SF3.Types;
 using SF3.NamedValues;
-using SF3.MPD;
 using SF3.Models.Structs.MPD.Main;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.MPD.Main;
@@ -17,6 +16,7 @@ using CommonLib.Imaging;
 using CommonLib.Geometry;
 using CommonLib.Utils;
 using CommonLib;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {

@@ -1,7 +1,7 @@
 using System.Linq;
 using CommonLib.Types;
 using OpenTK.Mathematics;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Win.OpenGL.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 

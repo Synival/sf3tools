@@ -3,7 +3,7 @@ using CommonLib;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Main;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Tables.MPD.Main {
     public class ModelSwitchGroupsTable : TerminatedTable<ModelSwitchGroup>, IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> {

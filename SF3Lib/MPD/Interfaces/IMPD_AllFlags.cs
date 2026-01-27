@@ -1,0 +1,31 @@
+﻿namespace SF3.MPD.Interfaces {
+    public interface IMPD_AllFlags :
+        IMPD_Scenario1Flags,
+        IMPD_Scenario2Flags,
+        IMPD_Scenario3Flags,
+        IMPD_PremiumDiskFlags
+    {
+        // Properties to indicate whether or not this flag can be set
+        bool CanSet_0x0001_Unknown { get; }
+        bool CanSet_0x0002_Unknown { get; }
+        bool CanSet_0x0002_HasSurfaceTextureRotation { get; }
+        bool CanSet_0x0004_AddDotProductBasedNoiseToStandardLightmap { get; }
+        bool CanSet_0x0008_KeepTexturelessFlatTiles { get; }
+        bool CanSet_0x0010_HasTileBasedForegroundImage { get; }
+        bool CanSet_0x0020_Unknown { get; }
+        bool CanSet_0x0040_HasBackgroundImage { get; }
+        bool CanSet_0x0080_HasChunk19ModelWithChunk10Textures { get; }
+        bool CanSet_0x0080_SetMSBForGroundPalette { get; }
+        bool CanSet_0x0100_HasModels { get; }
+        bool CanSet_0x0200_HasSurfaceModel { get; }
+        bool CanSet_0x0400_HasGroundImage { get; }
+        bool CanSet_0x0800_Unused { get; }
+        bool CanSet_0x0800_HasCutsceneSky { get; }
+        bool CanSet_0x1000_HasTileBasedGroundImage { get; }
+        bool CanSet_0x2000_HasBattleSky { get; }
+        bool CanSet_0x2000_NarrowAngleBasedLightmap { get; }
+        bool CanSet_0x4000_Unused { get; }
+        bool CanSet_0x4000_HasExtraChunk1ModelWithChunk21Textures { get; }
+        bool CanSet_0x8000_ModelsAreStillLowMemoryWithSurfaceModel { get; }
+    }
+}

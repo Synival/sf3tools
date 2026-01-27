@@ -6,12 +6,12 @@ using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
-using SF3.MPD;
 using SF3.Types;
 using SF3.Extensions;
 using SF3.Imaging;
 using CommonLib;
 using CommonLib.Extensions;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {

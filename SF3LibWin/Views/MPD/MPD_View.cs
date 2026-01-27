@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using SF3.Models.Files.MPD;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Win.Views.MPD {
     public class MPD_View : TabView {

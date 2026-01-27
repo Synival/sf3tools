@@ -1,4 +1,4 @@
-﻿using SF3.MPD;
+﻿using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
     public abstract class MPD_PlaneTileAssignmentBase : IMPD_PlaneTileAssignment {

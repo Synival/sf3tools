@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Win.Views.MPD {
     public class PlanesView : TabView {

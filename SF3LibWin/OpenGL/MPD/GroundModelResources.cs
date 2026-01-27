@@ -6,7 +6,7 @@ using CommonLib.Logging;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD {

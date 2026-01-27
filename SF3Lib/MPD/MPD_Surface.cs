@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib.Extensions;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD {
