@@ -29,7 +29,7 @@ namespace SF3.Win.Views.MPD {
 
             if (Model.SurfaceModelChunk != null) {
                 var name = "Surface Model";
-                if (Model.Flags.Bit_0x0200_HasSurfaceModel)
+                if (!Model.Flags.Bit_0x0200_HasSurfaceModel)
                     name += " (Disabled)";
                 if (Model.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex.HasValue)
                     name += " (Misplaced)";
