@@ -22,6 +22,7 @@ namespace SF3.MPD.Project {
             AreGroundAnimationsDummiedOut = original.AreGroundAnimationsDummiedOut;
             IsGradientDummiedOut          = original.IsGradientDummiedOut;
             IsUnknown2TableDummiedOut     = original.IsUnknown2TableDummiedOut;
+            AreIgnoredTexturesDummiedOut  = original.AreIgnoredTexturesDummiedOut;
             IgnoreGroundImage             = original.IgnoreGroundImage;
             IgnoreSkyImage                = original.IgnoreSkyImage;
         }
