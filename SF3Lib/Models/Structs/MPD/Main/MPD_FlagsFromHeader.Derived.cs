@@ -17,14 +17,7 @@ namespace SF3.Models.Structs.MPD.Main {
         public bool HasExtraModel => Bit_0x0080_HasChunk19ModelWithChunk10Textures || Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures;
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0003f, displayName: "(Derived) " + nameof(Chunk1Type), displayGroup: "Flags")]
-        public ChunkType Chunk1Type {
-            get {
-                if ((Scenario >= ScenarioType.Scenario2 && HasExtraModel) || (Bit_0x0100_HasModels && ModelsChunkIndex == 1))
-                    return ChunkType.Models;
-                else
-                    return ChunkType.Unset;
-            }
-        }
+        public ChunkType Chunk1Type => MPD_ChunkLogic.GetChunk1Type(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0004f, displayName: "(Derived) " + nameof(Chunk1PointersMemoryLocation), displayGroup: "Flags")]
         public MemoryLocationType? Chunk1PointersMemoryLocation {

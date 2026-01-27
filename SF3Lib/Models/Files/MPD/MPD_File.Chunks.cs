@@ -321,7 +321,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private HashSet<int> GetModelChunkIndices(ChunkLocation[] chunks) {
-            var flags = Flags;
+            var flags = (MPD_FlagsFromHeader) Flags;
             var indices = new HashSet<int>();
 
             if (chunks[1].Exists && flags.Chunk1Type == ChunkType.Models)

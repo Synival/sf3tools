@@ -23,11 +23,6 @@ namespace SF3.MPD.Interfaces {
         bool HasExtraModel { get; }
 
         /// <summary>
-        /// When set, specifies the type of chunk located in Chunk[1] (should always be 'Models' if non-null).
-        /// </summary>
-        ChunkType Chunk1Type { get; }
-
-        /// <summary>
         /// When set, specifies the area of memory (low or high) the pointers the models in Chunk[1] should be
         /// pointing to (either 'Low' or 'High').
         /// </summary>

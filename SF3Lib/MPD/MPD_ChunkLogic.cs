@@ -30,5 +30,15 @@ namespace SF3.MPD {
             else
                 return 20;
         }
+
+        /// <summary>
+        /// When set, specifies the type of chunk located in Chunk[1] (should always be 'Models' if non-null).
+        /// </summary>
+        public static ChunkType GetChunk1Type(IMPD_AllFlags flags, ScenarioType scenario) {
+            if ((scenario >= ScenarioType.Scenario2 && flags.HasExtraModel) || (flags.Bit_0x0100_HasModels && GetModelsChunkIndex(flags, scenario) == 1))
+                return ChunkType.Models;
+            else
+                return ChunkType.Unset;
+        }
     }
 }
