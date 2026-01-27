@@ -1,4 +1,5 @@
 ﻿using SF3.MPD.Interfaces;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader : IMPD_AllFlags {
@@ -12,5 +13,7 @@ namespace SF3.Models.Structs.MPD.Main {
             get => Header.MapFlags;
             set => Header.MapFlags = value;
         }
+
+        private ScenarioType Scenario => Header.Scenario;
     }
 }

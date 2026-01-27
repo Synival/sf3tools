@@ -3,11 +3,6 @@
 namespace SF3.MPD.Interfaces {
     public interface IMPD_DerivedFlags {
         /// <summary>
-        /// Specifies the chunk in which models would be located (either 1 or 20).
-        /// </summary>
-        int ModelsChunkIndex { get; }
-
-        /// <summary>
         /// Specifies the area of memory (low or high) from which models would be accessed.
         /// </summary>
         MemoryLocationType ModelsMemoryLocation { get; }

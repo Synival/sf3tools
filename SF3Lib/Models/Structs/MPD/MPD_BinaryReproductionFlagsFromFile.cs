@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CommonLib;
 using SF3.Models.Files.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -52,8 +53,9 @@ namespace SF3.Models.Structs.MPD {
 
         public int? MisplacedModelsChunkIndex {
             get {
+                var flags = (MPD_FlagsFromHeader) MPD_File.Flags;
                 var index = ((ModelChunk) MPD_File.ModelCollections.Values.FirstOrDefault(x => (x as ModelChunk)?.Collection == MPD_CollectionType.Primary))?.ChunkIndex;
-                return (index != MPD_File.Flags.ModelsChunkIndex) ? index : null;
+                return (index != flags.ModelsChunkIndex) ? index : null;
             }
             set {}
         }

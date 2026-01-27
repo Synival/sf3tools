@@ -1,5 +1,5 @@
 ﻿namespace SF3.MPD {
-    public class TileSeeds {
+    public class MPD_TileSeeds {
         private static int[,] s_tileSeeds = null;
 
         public static void GenerateTileSeeds() {

@@ -11,7 +11,7 @@ namespace SF3.MPD.Project {
             Surface     = surface;
             X           = x;
             Y           = y;
-            RandomSeed  = TileSeeds.GetTileSeed(x, y);
+            RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
 
             TextureID   = 0xFF;
             TerrainType = TerrainType.NoEntry;
@@ -21,7 +21,7 @@ namespace SF3.MPD.Project {
             Surface     = surface;
             X           = x;
             Y           = y;
-            RandomSeed  = TileSeeds.GetTileSeed(x, y);
+            RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
 
             TextureFlags  = 0; // TODO: these should be derived!
             TextureID     = original.TextureID;

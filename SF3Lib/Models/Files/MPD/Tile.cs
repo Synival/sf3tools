@@ -23,7 +23,7 @@ namespace SF3.Models.Files.MPD {
             _sharedBlockVertexLocations = allCorners
                 .ToDictionary(c => c, c => BlockHelpers.GetVertexBlockLocations(X, Y, c, onlyInBlock: false));
 
-            RandomSeed = TileSeeds.GetTileSeed(x, y);
+            RandomSeed = MPD_TileSeeds.GetTileSeed(x, y);
         }
 
         public IMPD_File MPD_File { get; }

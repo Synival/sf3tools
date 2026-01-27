@@ -18,7 +18,7 @@ namespace SF3.MPD.Writer {
             var primaryMc = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut : null;
             var extraMc   = mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out mcOut) ? mcOut : null;
 
-            var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? mpd.Flags.ModelsChunkIndex;
+            var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? MPD_ChunkLogic.GetModelsChunkIndex(mpd.Flags, Scenario);
             if (primaryMc != null && modelsChunkIndex == 1)
                 WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
             else if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)

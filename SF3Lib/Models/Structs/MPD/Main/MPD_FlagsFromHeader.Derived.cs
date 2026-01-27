@@ -1,21 +1,11 @@
 ﻿using CommonLib.Attributes;
+using SF3.MPD;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {
     public partial class MPD_FlagsFromHeader {
         [TableViewModelColumn(addressField: null, displayOrder: 1.0000f, displayName: "(Derived) " + nameof(ModelsChunkIndex), displayGroup: "Flags")]
-        public int ModelsChunkIndex {
-            get {
-                if (IsScenario1OrEarlier)
-                    return 1;
-                else if (Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
-                    return 20;
-                else if (Bit_0x0200_HasSurfaceModel && !Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
-                    return 20;
-                else
-                    return 1;
-            }
-        }
+        public int ModelsChunkIndex => MPD_ChunkLogic.GetModelsChunkIndex(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0001f, displayName: "(Derived) " + nameof(SurfaceModelChunkIndex), displayGroup: "Flags")]
         public int SurfaceModelChunkIndex {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
@@ -138,7 +139,7 @@ namespace SF3.Models.Files.MPD {
                 errors.Add("Chunk[21] errors: ShouldHave=" + shouldHaveChunk20_21 + ", DoesHave=" + hasChunk21);
 
             // Make sure the header indicates the correct chunks.
-            var flags = Flags;
+            var flags = (MPD_FlagsFromHeader) Flags;
             if (flags.Chunk1Type != chunkHeaders[1].ChunkType)
                 errors.Add($"Chunk[1] type should be '{flags.Chunk1Type}', but is '{chunkHeaders[1].ChunkType}'");
             if (flags.Chunk2Type != chunkHeaders[2].ChunkType)
