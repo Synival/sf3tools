@@ -7,9 +7,9 @@ namespace SF3.MPD.Project {
             Height = original.Height;
             _assignments = new (byte X, byte Y)[Width, Height];
 
-            for (byte y = 0; y < Height; y++)
-                for (byte x = 0; x < Width; x++)
-                    _assignments[x, y] = original[x, y];
+            for (int y = 0; y < Height; y++)
+                for (int x = 0; x < Width; x++)
+                    _assignments[x, y] = original[(byte) x, (byte) y];
         }
 
         private (byte X, byte Y)[,] _assignments;
