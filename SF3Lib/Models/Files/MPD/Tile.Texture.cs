@@ -37,6 +37,9 @@ namespace SF3.Models.Files.MPD {
 
         public byte UnknownTextureFlags {
             get {
+                if (MPD_File.SurfaceModelChunk == null)
+                    return 0;
+
                 var row = MPD_File.SurfaceModelChunk.TileTextureRowTable[Y];
                 var hasRotate = row.HasRotation;
                 var flags = row.GetTextureFlags(X);
