@@ -7,21 +7,22 @@ namespace SF3.MPD.Project {
             OnlyVisibleFromDirection = ModelDirectionType.Unset;
         }
 
-        public MPD_ModelInstance(IMPD_ModelInstance mi) {
-            Collection = mi.Collection;
-            ID = mi.ID;
-            ModelID = mi.ModelID;
-            PositionX = mi.PositionX;
-            PositionY = mi.PositionY;
-            PositionZ = mi.PositionZ;
-            AngleX = mi.AngleX;
-            AngleY = mi.AngleY;
-            AngleZ = mi.AngleZ;
-            ScaleX = mi.ScaleX;
-            ScaleY = mi.ScaleY;
-            ScaleZ = mi.ScaleZ;
-            Tag = mi.Tag;
-            Flags = mi.Flags;
+        public MPD_ModelInstance(IMPD_ModelInstance original) {
+            Collection = original.Collection;
+            ID        = original.ID;
+            ModelID   = original.ModelID;
+            PositionX = original.PositionX;
+            PositionY = original.PositionY;
+            PositionZ = original.PositionZ;
+            AngleX    = original.AngleX;
+            AngleY    = original.AngleY;
+            AngleZ    = original.AngleZ;
+            ScaleX    = original.ScaleX;
+            ScaleY    = original.ScaleY;
+            ScaleZ    = original.ScaleZ;
+            Tag       = original.Tag;
+            Flags     = original.Flags;
+            LevelsOfDetail = original.LevelsOfDetail;
         }
 
         public MPD_CollectionType Collection { get; set; }
