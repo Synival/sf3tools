@@ -72,7 +72,7 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Unknown MPD header flag 0x0020. Present in Scenario 2 HNSN00, HNSN01, and HNSN02.
         /// </summary>
-        bool UnknownHeaderFlag { get; }
+        bool UnknownHeaderFlag { get; set; }
 
         /// <summary>
         /// Y-axis rotation of the entire scene (in degrees), but just the models. Always set to 0x8000, otherwise sprites are
@@ -132,8 +132,6 @@ namespace SF3.MPD.Interfaces {
 
         /// <summary>
         /// When true, an Unknown2 table exists, but is dummied out with a preceeding 0xFFFF.
-        /// This occurs in some Scenario 2 maps (MUBAR2, SARA22), where they just added 0xFFF to the front
-        /// and didn't bother with a gradient.
         /// </summary>
         bool IsUnknown2TableDummiedOut { get; set; }
 
@@ -150,7 +148,7 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// When set, any tile-based ground image present is ignored when exporting MPD flags.
         /// </summary>
-        bool IgnoreGroundTiledImage { get; }
+        bool IgnoreGroundTiledImage { get; set; }
 
         /// <summary>
         /// When set, any sky plane that exists will be ignored when exporting MPD flags.
@@ -160,12 +158,12 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// When set, any background image present is ignored when exporting MPD flags.
         /// </summary>
-        bool IgnoreBackgroundImage { get; }
+        bool IgnoreBackgroundImage { get; set; }
 
         /// <summary>
         /// When set, any tile-based foreground image present is ignored when exporting MPD flags.
         /// </summary>
-        bool IgnoreForegroundTiledImage { get; }
+        bool IgnoreForegroundTiledImage { get; set; }
 
         /// <summary>
         /// When set, an image should be loaded when a battle occurs with this MPD. This should always be set for any
@@ -178,5 +176,12 @@ namespace SF3.MPD.Interfaces {
         /// When set, any surface model that exists will be ignored when exporting MPD flags.
         /// </summary>
         bool IgnoreSurfaceModel { get; set; }
+
+        /// <summary>
+        /// When set, an unreferenced Unknown2Table is placed after the gradient in Scenario 2+ MPDs.
+        /// This occurs in some Scenario 2 maps (MUBAR2, SARA22), where they just added 0xFFF to the front
+        /// and didn't bother with a gradient.
+        /// </summary>
+        bool IsUnknown2InLaterFileAfterGradient { get; set; }
     }
 }

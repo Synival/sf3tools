@@ -209,5 +209,10 @@ namespace SF3.Models.Structs.MPD {
             get => !MPD_File.Flags.Bit_0x0200_HasSurfaceModel && MPD_File.SurfaceModelChunk != null;
             set {}
         }
+
+        public bool IsUnknown2InLaterFileAfterGradient {
+            get => MPD_File.Scenario >= Types.ScenarioType.Scenario2 && MPD_File.Unknown2Table?.IsDummiedOut == true;
+            set {}
+        }
     }
 }

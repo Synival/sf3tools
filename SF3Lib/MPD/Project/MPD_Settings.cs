@@ -38,6 +38,7 @@ namespace SF3.MPD.Project {
             IgnoreForegroundTiledImage    = original.IgnoreForegroundTiledImage;
             HasBattleBackground           = original.HasBattleBackground;
             IgnoreSurfaceModel            = original.IgnoreSurfaceModel;
+            IsUnknown2InLaterFileAfterGradient = original.IsUnknown2InLaterFileAfterGradient;
         }
 
         public bool HasSurfaceModel { get; set; }
@@ -67,5 +68,6 @@ namespace SF3.MPD.Project {
         public bool IgnoreForegroundTiledImage { get; set; }
         public bool HasBattleBackground { get; set; }
         public bool IgnoreSurfaceModel { get; set; }
+        public bool IsUnknown2InLaterFileAfterGradient { get; set; }
     }
 }
