@@ -3,8 +3,8 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD {
-    public class MPD_Settings : IMPD_Settings {
-        public MPD_Settings(IMPD_File file) {
+    public class MPD_SettingsFromFile : IMPD_Settings {
+        public MPD_SettingsFromFile(IMPD_File file) {
             MPD_File = file;
             _lightPaletteAdjustment  = new LightAdjustmentColor(file);
             _groundPaletteAdjustment = new GroundAdjustmentColor(file);

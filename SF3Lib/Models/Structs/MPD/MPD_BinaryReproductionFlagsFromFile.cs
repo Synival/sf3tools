@@ -5,8 +5,8 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD {
-    public class MPD_BinaryReproductionFlags : IMPD_BinaryReproductionFlags {
-        public MPD_BinaryReproductionFlags(IMPD_File file) {
+    public class MPD_BinaryReproductionFlagsFromFile : IMPD_BinaryReproductionFlags {
+        public MPD_BinaryReproductionFlagsFromFile(IMPD_File file) {
             MPD_File = file;
         }
 

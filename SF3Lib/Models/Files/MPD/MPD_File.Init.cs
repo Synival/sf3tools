@@ -50,8 +50,8 @@ namespace SF3.Models.Files.MPD {
             var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
             MPDHeader = new MPD_Header(Data, 0, nameof(MPDHeader), headerAddr, Scenario);
             Flags     = new MPD_FlagsFromHeader(MPDHeader);
-            Settings  = new MPD_Settings(this);
-            BinaryReproductionFlags = new MPD_BinaryReproductionFlags(this);
+            Settings  = new MPD_SettingsFromFile(this);
+            BinaryReproductionFlags = new MPD_BinaryReproductionFlagsFromFile(this);
             return MPDHeader;
         }
 
