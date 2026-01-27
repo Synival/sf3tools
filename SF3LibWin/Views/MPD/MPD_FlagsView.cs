@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.MPD.Interfaces;
+using SF3.MPD.Interfaces.Flags;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {

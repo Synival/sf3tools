@@ -1,4 +1,4 @@
-﻿namespace SF3.MPD.Interfaces {
+﻿namespace SF3.MPD.Interfaces.Flags {
     public interface IMPD_Scenario2PlusFlags {
         /// <summary>
         /// When set, the MSB for all values in the ground palette will be turned on.

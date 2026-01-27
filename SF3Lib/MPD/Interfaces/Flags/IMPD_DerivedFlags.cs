@@ -1,4 +1,4 @@
-﻿namespace SF3.MPD.Interfaces {
+﻿namespace SF3.MPD.Interfaces.Flags {
     public interface IMPD_DerivedFlags {
         /// <summary>
         /// When set, a sky chunk is present for either battles (Scenario 1) or cutscenes (Scenario 2+).

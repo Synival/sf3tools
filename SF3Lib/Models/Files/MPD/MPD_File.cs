@@ -17,6 +17,7 @@ using CommonLib.Geometry;
 using CommonLib.Utils;
 using CommonLib;
 using SF3.MPD.Interfaces;
+using SF3.MPD.Interfaces.Flags;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
+using SF3.MPD.Interfaces.Flags;
 using SF3.Types;
 
 namespace SF3.MPD.Interfaces {

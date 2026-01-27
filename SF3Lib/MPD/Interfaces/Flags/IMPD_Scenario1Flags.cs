@@ -1,4 +1,4 @@
-﻿namespace SF3.MPD.Interfaces {
+﻿namespace SF3.MPD.Interfaces.Flags {
     public interface IMPD_Scenario1Flags : IMPD_AllScenarioFlags, IMPD_Scenario1and2Flags, IMPD_DerivedFlags {
         /// <summary>
         /// When set, Chunk[19] is an additional model (used for the Titan in Z_AS.MPD) and texture Chunk[10] is for

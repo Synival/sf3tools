@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Win.Controls;
-using SF3.MPD.Interfaces;
+using SF3.MPD.Interfaces.Flags;
 
 namespace SF3.Win.Controls {
     public partial class MPD_FlagEditor : DarkModeUserControl {
