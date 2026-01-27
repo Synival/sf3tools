@@ -1,36 +1,13 @@
-﻿using SF3.MPD.Project;
-using SF3.MPD.Writer;
-using SF3.Types;
-using SF3.Utils;
-using static SF3.Tests.Utils.MPD_TestUtils;
+﻿using SF3.Types;
 
 namespace SF3.Tests.MPD.Project {
-    [TestClass]
-    public class MPD_ProjectTests {
+    public partial class MPD_ProjectTests {
         [TestMethod]
-        public void Copy_WithScenario1_VOID_ProducesSameMPDAsOriginal() {
-            var mpdOriginal = MakeMPD_File(ScenarioType.Scenario1, "VOID.MPD");
-            var mpdCopy = new MPD_Project(mpdOriginal);
+        public void Copy_WithScenario1_VOID_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "VOID");
 
-            byte[] exportOriginal;
-            using (var stream = new MemoryStream()) {
-                var writer = new MPD_Writer(stream, ScenarioType.Scenario1);
-                writer.WriteMPD(mpdOriginal);
-                exportOriginal = stream.ToArray();
-            }
-
-            byte[] exportCopy;
-            using (var stream = new MemoryStream()) {
-                var writer = new MPD_Writer(stream, ScenarioType.Scenario1);
-                writer.WriteMPD(mpdCopy);
-                exportCopy = stream.ToArray();
-            }
-
-            File.WriteAllBytes($"Project_S1_VOID_Test.MPD", exportCopy);
-
-            var errors = AnalysisUtils.GetByteComparisonErrors(exportOriginal, exportCopy);
-            if (errors?.Length > 0)
-                Assert.Fail("\r\n============================================\r\n" + string.Join("\r\n", errors));
-        }
+        [TestMethod]
+        public void Copy_WithScenario1_TESMAP_ProducesSameMPDAsOriginal()
+            => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "TESMAP");
     }
 }
