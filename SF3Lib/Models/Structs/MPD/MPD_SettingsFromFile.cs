@@ -174,5 +174,10 @@ namespace SF3.Models.Structs.MPD {
             get => !MPD_File.Flags.HasAnySky && MPD_File.Planes?.SkyImage != null;
             set {}
         }
+
+        public bool HasBattleBackground {
+            get => MPD_File.Flags.HasAnySky;
+            set {}
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace SF3.MPD.Project {
             AreIgnoredTexturesDummiedOut  = original.AreIgnoredTexturesDummiedOut;
             IgnoreGroundImage             = original.IgnoreGroundImage;
             IgnoreSkyImage                = original.IgnoreSkyImage;
+            HasBattleBackground           = original.HasBattleBackground;
         }
 
         public bool HasSurfaceModel { get; set; }
@@ -52,5 +53,6 @@ namespace SF3.MPD.Project {
         public bool AreIgnoredTexturesDummiedOut { get; set; }
         public bool IgnoreGroundImage { get; set; }
         public bool IgnoreSkyImage { get; set; }
+        public bool HasBattleBackground { get; set; }
     }
 }

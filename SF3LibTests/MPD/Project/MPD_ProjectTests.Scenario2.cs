@@ -13,11 +13,11 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario2_SNIOKI_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "SNIOKI");
-/*
+
         [TestMethod]
         public void Copy_WithScenario2_BTL43_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "BTL43");
-*/
+
         [TestMethod]
         public void Copy_WithScenario2_AIRO_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "AIRO");
@@ -49,7 +49,7 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario2_STAMP3_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "STAMP3");
-
+*/
         [TestMethod]
         public void Copy_WithScenario2_ELINB_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "ELINB");
@@ -57,6 +57,5 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void Copy_WithScenario2_ATBTL2_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario2, "ATBTL2");
-*/
     }
 }

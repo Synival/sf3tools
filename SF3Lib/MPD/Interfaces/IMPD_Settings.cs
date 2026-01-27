@@ -139,5 +139,12 @@ namespace SF3.MPD.Interfaces {
         /// When set, any sky plane that exists will be ignored when exporting MPD flags.
         /// </summary>
         bool IgnoreSkyImage { get; set; }
+
+        /// <summary>
+        /// When set, an image should be loaded when a battle occurs with this MPD. This should always be set for any
+        /// MPD that is expected to have a battle. In Scenario 1, a sky plane should be present. In Scenario 2+, the
+        /// sky plane is for cutscenes only and the battle background is loaded from elsewhere.
+        /// </summary>
+        bool HasBattleBackground { get; set; }
     }
 }
