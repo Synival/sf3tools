@@ -157,6 +157,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
             public int Length => Faces.Length;
             public ISGL_ModelFace this[int index] => Faces[index];
+            public ISGL_ModelFace[] AsArray() => Faces;
 
             public IEnumerator<ISGL_ModelFace> GetEnumerator() => ((IEnumerable<ISGL_ModelFace>) Faces).GetEnumerator();
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

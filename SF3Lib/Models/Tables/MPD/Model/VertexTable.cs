@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -21,5 +22,6 @@ namespace SF3.Models.Tables.MPD.Model {
         }
 
         VECTOR IIndexedEnumerableWithLength<VECTOR>.this[int index] => Rows[index].Vector;
+        VECTOR[] IIndexedEnumerableWithLength<VECTOR>.AsArray() => ((IEnumerable<VECTOR>) this).ToArray();
     }
 }

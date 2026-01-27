@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using SF3.ByteData;
 using SF3.Models.Structs;
@@ -30,6 +31,8 @@ namespace SF3.Models.Tables.MPD {
             foreach (var row in Rows)
                 yield return row.Value;
         }
+
+        byte[] IIndexedEnumerableWithLength<byte>.AsArray() => ((IEnumerable<byte>) this).ToArray();
 
         /// <summary>
         /// When true, the ground animation table is serialized, but "dummied-out" with a preceeding 0xFF that prevents it from loading.

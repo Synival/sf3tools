@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using SF3.ByteData;
 using SF3.Models.Structs;
@@ -35,5 +36,7 @@ namespace SF3.Models.Tables {
             foreach (var row in Rows)
                 yield return row.Value;
         }
+
+        byte[] IIndexedEnumerableWithLength<byte>.AsArray() => ((IEnumerable<byte>) this).ToArray();
     }
 }

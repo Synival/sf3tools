@@ -15,6 +15,7 @@ namespace CommonLib.Extensions {
 
             public int Length => Array.Length;
             public T this[int index] => Array[index];
+            public T[] AsArray() => Array;
 
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>) Array).GetEnumerator();
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

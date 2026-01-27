@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using CommonLib.NamedValues;
 using SF3.ByteData;
@@ -41,6 +42,7 @@ namespace SF3.Models.Tables.MPD.Main {
 
         IEnumerator<IMPD_ModelSwitchGroup> IEnumerable<IMPD_ModelSwitchGroup>.GetEnumerator() => GetEnumerator();
         IMPD_ModelSwitchGroup IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup>.this[int index] => Rows[index];
+        IMPD_ModelSwitchGroup[] IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup>.AsArray() => ((IEnumerable<IMPD_ModelSwitchGroup>) this).ToArray();
 
         public INameGetterContext NameGetterContext { get; }
     }

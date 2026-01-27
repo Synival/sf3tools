@@ -68,5 +68,6 @@ namespace SF3.Models.Tables {
 
         IEnumerator IEnumerable.GetEnumerator() => RowObjs.GetEnumerator();
         public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>) _rows).GetEnumerator();
+        public T[] AsArray() => Rows;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.SGL;
@@ -96,6 +97,8 @@ namespace SF3.Models.Structs.MPD.Model {
                     }
                 }
             }
+
+            public int[] AsArray() => this.ToArray();
 
             public IEnumerator<int> GetEnumerator() {
                 yield return Polygon.Vertex1;
