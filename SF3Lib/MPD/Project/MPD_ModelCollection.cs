@@ -1,0 +1,35 @@
+﻿using System.Linq;
+using CommonLib;
+using CommonLib.Extensions;
+using SF3.Imaging;
+using SF3.MPD.Interfaces;
+using SF3.Types;
+
+namespace SF3.MPD.Project {
+    public class MPD_ModelCollection : IMPD_ModelCollection {
+        public MPD_ModelCollection(IMPD_ModelCollection original) {
+            Collection = original.Collection;
+            IsUnreferenced = original.IsUnreferenced;
+
+            if (original.Models != null)
+                Models = new MPD_ModelCollectionModels(original.Models);
+            if (original.ModelInstances != null)
+                ModelInstances = new MPD_ModelCollectionModelInstances(original.ModelInstances);
+            if (original.Textures != null)
+                Textures = new MPD_ModelCollectionTextures(original.Textures);
+            if (original.DataAfterInstances != null)
+                DataAfterInstances = ((byte[]) (original.DataAfterInstances.AsArray().Clone())).ToEnumerableWithLength();
+        }
+
+        public IMPD_Model GetModel(int id) => Models?.FirstOrDefault(x => x.ID == id);
+
+        public MPD_CollectionType Collection { get; }
+        public bool IsUnreferenced { get; set; }
+        public bool HasMissingModels => Models != null;
+
+        public IEnumerableWithLength<IMPD_Model> Models { get; }
+        public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
+        public IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
+        public IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
+    }
+}
