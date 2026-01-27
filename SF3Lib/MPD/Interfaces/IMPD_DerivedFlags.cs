@@ -18,6 +18,11 @@ namespace SF3.MPD.Interfaces {
         bool HasAnySky { get; }
 
         /// <summary>
+        /// When set, an extra model is present like the Titan (Scenario 1) or the Kraken (Scenario 2+).
+        /// </summary>
+        bool HasExtraModel { get; }
+
+        /// <summary>
         /// When set, specifies the type of chunk located in Chunk[1] (should always be 'Models' if non-null).
         /// </summary>
         ChunkType Chunk1Type { get; }

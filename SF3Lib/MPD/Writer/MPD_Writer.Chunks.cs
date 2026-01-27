@@ -10,6 +10,9 @@ namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
         public void WriteChunks(IMPD mpd, byte[] chunk3Data) {
             bool allowIndexedTextures = Scenario >= ScenarioType.Scenario3;
+            bool hasExtraModel = mpd.Flags.HasExtraModel;
+            bool hasScenario1ExtraModel = Scenario <= ScenarioType.Scenario1 && hasExtraModel;
+            bool hasScenario2ExtraModel = Scenario >= ScenarioType.Scenario2 && hasExtraModel;
 
             // Chunk[0] is always empty.
             WriteEmptyChunk();
@@ -21,7 +24,7 @@ namespace SF3.MPD.Writer {
             var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? MPD_ChunkLogic.GetModelsChunkIndex(mpd.Flags, Scenario);
             if (primaryMc != null && modelsChunkIndex == 1)
                 WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, mpd.Flags.ModelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
-            else if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
+            else if (extraMc != null && hasScenario2ExtraModel)
                 WriteModelChunk(extraMc.Models, extraMc.ModelInstances, null, isHighMemory: false, extraMc.DataAfterInstances);
             else
                 WriteEmptyChunk();
@@ -54,7 +57,7 @@ namespace SF3.MPD.Writer {
 
             // In Scenario 1, Chunk[10] belongs to a different collection of textures. This is used for the Titan in Z_AS.MPD.
             var primaryTextureMaxSize = mpd.BinaryReproductionFlags.NonStandardTextureChunkDecompressedSizeLimit;
-            if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
+            if (hasScenario1ExtraModel) {
                 WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.Primary),     chunkCount: 4, startID: 0, allowIndexed: allowIndexedTextures, primaryTextureMaxSize);
                 WriteTextureChunks(GetTexturesForCollection(MPD_CollectionType.ExtraModels), chunkCount: 1, startID: 0, allowIndexed: false);
             }
@@ -72,10 +75,10 @@ namespace SF3.MPD.Writer {
             WriteTextureChunk(barrelTextures, 0, out _, allowIndexed: false);
 
             // Ground + sky chunks.
-            WritePlaneChunks(mpd.Planes, mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures);
+            WritePlaneChunks(mpd.Planes, hasScenario1ExtraModel);
 
             // In Scenario 1, Chunk[19] is the Titan model used in Z_AS.MPD.
-            if (mpd.Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures) {
+            if (hasScenario1ExtraModel) {
                 if (mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out var extraModels))
                     WriteModelChunk(extraModels.Models, extraModels.ModelInstances, null, isHighMemory: true, extraModels.DataAfterInstances);
                 else
@@ -91,7 +94,7 @@ namespace SF3.MPD.Writer {
                 else
                     WriteEmptyChunk();
 
-                if (extraMc != null && mpd.Flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures) {
+                if (extraMc != null && hasScenario2ExtraModel) {
                     var extraTextures = GetTexturesForCollection(MPD_CollectionType.ExtraModels);
                     WriteTextureChunk(extraTextures, 0, out _, allowIndexed: allowIndexedTextures);
                 }

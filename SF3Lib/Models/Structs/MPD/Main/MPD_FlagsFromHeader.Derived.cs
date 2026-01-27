@@ -13,11 +13,16 @@ namespace SF3.Models.Structs.MPD.Main {
         [TableViewModelColumn(addressField: null, displayOrder: 1.0002f, displayName: "(Derived) " + nameof(HasAnySky), displayGroup: "Flags")]
         public bool HasAnySky => Bit_0x0800_HasCutsceneSky || Bit_0x2000_HasBattleSky;
 
+        [TableViewModelColumn(addressField: null, displayOrder: 1.00025f, displayName: "(Derived) " + nameof(HasExtraModel), displayGroup: "Flags")]
+        public bool HasExtraModel => Bit_0x0080_HasChunk19ModelWithChunk10Textures || Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures;
+
         [TableViewModelColumn(addressField: null, displayOrder: 1.0003f, displayName: "(Derived) " + nameof(Chunk1Type), displayGroup: "Flags")]
         public ChunkType Chunk1Type {
             get {
-                return Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures || (Bit_0x0100_HasModels && ModelsChunkIndex == 1)
-                    ? ChunkType.Models : ChunkType.Unset;
+                if ((Scenario >= ScenarioType.Scenario2 && HasExtraModel) || (Bit_0x0100_HasModels && ModelsChunkIndex == 1))
+                    return ChunkType.Models;
+                else
+                    return ChunkType.Unset;
             }
         }
 

@@ -9,7 +9,7 @@ namespace SF3.MPD {
         public static int GetModelsChunkIndex(IMPD_AllFlags flags, ScenarioType scenario) {
             if (scenario <= ScenarioType.Scenario1)
                 return 1;
-            else if (flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures)
+            else if (flags.HasExtraModel)
                 return 20;
             else if (flags.Bit_0x0200_HasSurfaceModel && !flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
                 return 20;

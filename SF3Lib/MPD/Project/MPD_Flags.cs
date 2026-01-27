@@ -39,7 +39,7 @@ namespace SF3.MPD.Project {
         public bool Bit_0x0010_HasTileBasedForegroundImage { get => MPD.Planes.ForegroundTiledImage != null; set {} }
         public bool Bit_0x0020_Unknown { get => false; set {} }
         public bool Bit_0x0040_HasBackgroundImage { get => MPD.Planes.BackgroundImage != null; set {} }
-        public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.ExtraModels); set {} }
+        public bool Bit_0x0080_HasChunk19ModelWithChunk10Textures { get => HasExtraModel; set => HasExtraModel = value; }
         public bool Bit_0x0080_SetMSBForGroundPalette { get => MPD.Settings.SetMSBForGroundPalette; set {} }
         public bool Bit_0x0100_HasModels { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.Primary); set {} }
         public bool Bit_0x0200_HasSurfaceModel { get => MPD.Settings.HasSurfaceModel; set {} }
@@ -50,7 +50,7 @@ namespace SF3.MPD.Project {
         public bool Bit_0x2000_HasBattleSky { get => MPD.Planes.SkyImage != null; set {} }
         public bool Bit_0x2000_NarrowAngleBasedLightmap { get => MPD.Settings.NarrowAngleBasedLightmap; set {} }
         public bool Bit_0x4000_Unused { get => false; set {} }
-        public bool Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.ExtraModels); set {} }
+        public bool Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures { get => HasExtraModel; set => HasExtraModel = value; }
         public bool Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel { get => MPD.Settings.ForceLowMemoryModels; set {} }
 
         public int ModelsChunkIndex => 1;
@@ -58,6 +58,7 @@ namespace SF3.MPD.Project {
         public int SurfaceModelChunkIndex => 2;
         public MemoryLocationType SurfaceModelMemoryLocation => MemoryLocationType.HighMemory;
         public bool HasAnySky => false;
+        public bool HasExtraModel { get => MPD.ModelCollections.ContainsKey(MPD_CollectionType.ExtraModels); set {} }
         public ChunkType Chunk1Type => ChunkType.Models;
         public MemoryLocationType? Chunk1PointersMemoryLocation => MemoryLocationType.LowMemory;
         public ChunkType Chunk2Type => ChunkType.SurfaceModel;
