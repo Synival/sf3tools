@@ -8,12 +8,20 @@ namespace SF3.Imaging {
             BitFlags = bitFlags;
         }
 
+        public TagKey(TagKey original) {
+            BitFlags = original.BitFlags;
+        }
+
         public byte BitFlags { get; }
     };
 
     public class TagValue {
         public TagValue(string name) {
             Name = name;
+        }
+
+        public TagValue(TagValue original) {
+            Name = original.Name;
         }
 
         public string Name { get; }
