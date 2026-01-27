@@ -553,7 +553,7 @@ namespace SF3.Models.Files.MPD {
             Planes = new MPD_Planes(this);
 
             // Add an abstract representation of collision lines.
-            Collisions = new MPD_Collisions(this);
+            Collisions = new MPD_CollisionsFromFile(this);
 
             return tables.ToArray();
         }

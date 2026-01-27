@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -7,9 +9,25 @@ namespace SF3.MPD.Project {
     /// </summary>
     public class MPD_CollisionLine : IMPD_CollisionLine {
         public MPD_CollisionLine(IMPD_CollisionPoint point1, IMPD_CollisionPoint point2) {
-            // TODO: Enforce non-null assignment.
+            if (point1 == null)
+                throw new ArgumentNullException(nameof(point1));
+            if (point2 == null)
+                throw new ArgumentNullException(nameof(point2));
+
             Point1 = point1;
             Point2 = point2;
+        }
+
+        public MPD_CollisionLine(IMPD_CollisionLine original, IEnumerable<IMPD_CollisionPoint> points) {
+            var point1id = original.Point1.ID;
+            var point2id = original.Point2.ID;
+
+            Point1 = points.First(x => x.ID == point1id);
+            Point2 = points.First(x => x.ID == point2id);
+
+            Angle         = original.Angle;
+            FlagToDisable = original.FlagToDisable;
+            Tag           = original.Tag;
         }
 
         // TODO: Enforce non-null assignment.
@@ -54,7 +72,7 @@ namespace SF3.MPD.Project {
         }
 
         // TODO: Calculate angle properly
-        public float Angle => 0.00f;
+        public float Angle { get; private set; }
 
         // TODO: Restict between 0x201 and 0x2FF (inclusive).
         public int? FlagToDisable { get; set; }

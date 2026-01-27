@@ -26,10 +26,10 @@ namespace SF3.Extensions {
             if ((line.Y1 < minY && line.Y2 < minY) || (line.Y1 > maxY && line.Y2 > maxY))
                 return false;
 
-            var sqP1 = new MPD_CollisionPoint(minX, minY);
-            var sqP2 = new MPD_CollisionPoint(maxX, minY);
-            var sqP3 = new MPD_CollisionPoint(maxX, maxY);
-            var sqP4 = new MPD_CollisionPoint(minX, maxY);
+            var sqP1 = new MPD_CollisionPoint(0, minX, minY);
+            var sqP2 = new MPD_CollisionPoint(1, maxX, minY);
+            var sqP3 = new MPD_CollisionPoint(2, maxX, maxY);
+            var sqP4 = new MPD_CollisionPoint(3, minX, maxY);
 
             var sqL1 = new MPD_CollisionLine(sqP1, sqP2);
             var sqL2 = new MPD_CollisionLine(sqP2, sqP3);
@@ -51,8 +51,9 @@ namespace SF3.Extensions {
                         return 0; // Collinear
                     return (val > 0) ? 1 : 2; // Clockwise or Counterclockwise
                 }
-                int o1 = Orientation(line.Point1, line.Point2, other.Point1);
-                int o2 = Orientation(line.Point1, line.Point2, other.Point2);
+
+                int o1 = Orientation(line.Point1,  line.Point2,  other.Point1);
+                int o2 = Orientation(line.Point1,  line.Point2,  other.Point2);
                 int o3 = Orientation(other.Point1, other.Point2, line.Point1);
                 int o4 = Orientation(other.Point1, other.Point2, line.Point2);
 

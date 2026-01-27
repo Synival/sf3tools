@@ -4,8 +4,8 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class MPD_Collisions : IMPD_Collisions {
-        public MPD_Collisions(IMPD_File mpdFile) {
+    public class MPD_CollisionsFromFile : IMPD_Collisions {
+        public MPD_CollisionsFromFile(IMPD_File mpdFile) {
             MPD_File = mpdFile;
 
             var modelsChunk = mpdFile.ModelCollections != null

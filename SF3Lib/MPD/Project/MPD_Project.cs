@@ -51,6 +51,9 @@ namespace SF3.MPD.Project {
                 CameraBoundaries = new RectangleShort() { P1 = original.CameraBoundaries.P1, P2 = original.CameraBoundaries.P2 };
             if (original.BattleCursorBoundaries != null)
                 BattleCursorBoundaries = new RectangleShort() { P1 = original.BattleCursorBoundaries.P1, P2 = original.BattleCursorBoundaries.P2 };
+
+            if (original.Collisions != null)
+                Collisions = new MPD_Collisions(original.Collisions);
         }
 
         public IMPD_EditableFlags Flags { get; }
