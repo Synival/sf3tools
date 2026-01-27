@@ -16,5 +16,19 @@ namespace SF3.MPD {
             else
                 return 1;
         }
+
+        /// <summary>
+        /// Specifies the chunk in which the surface model would be located (either 2 or 20).
+        /// </summary>
+        public static int GetSurfaceModelChunkIndex(IMPD_AllFlags flags, ScenarioType scenario) {
+            if (scenario <= ScenarioType.Scenario1)
+                return 2;
+            else if (flags.Bit_0x0002_HasSurfaceTextureRotation)
+                return 2;
+            else if (GetModelsChunkIndex(flags, scenario) == 20)
+                return 2;
+            else
+                return 20;
+        }
     }
 }

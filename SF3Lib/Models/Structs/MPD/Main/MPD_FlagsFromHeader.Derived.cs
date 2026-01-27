@@ -8,18 +8,7 @@ namespace SF3.Models.Structs.MPD.Main {
         public int ModelsChunkIndex => MPD_ChunkLogic.GetModelsChunkIndex(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0001f, displayName: "(Derived) " + nameof(SurfaceModelChunkIndex), displayGroup: "Flags")]
-        public int SurfaceModelChunkIndex {
-            get {
-                if (IsScenario1OrEarlier)
-                    return 2;
-                else if (Bit_0x0002_HasSurfaceTextureRotation)
-                    return 2;
-                else if (ModelsChunkIndex == 20)
-                    return 2;
-                else
-                    return 20;
-            }
-        }
+        public int SurfaceModelChunkIndex => MPD_ChunkLogic.GetSurfaceModelChunkIndex(this, Scenario);
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.0002f, displayName: "(Derived) " + nameof(HasAnySky), displayGroup: "Flags")]
         public bool HasAnySky => Bit_0x0800_HasCutsceneSky || Bit_0x2000_HasBattleSky;

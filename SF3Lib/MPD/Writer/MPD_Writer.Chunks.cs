@@ -27,7 +27,7 @@ namespace SF3.MPD.Writer {
                 WriteEmptyChunk();
 
             // Chunk[2] is the surface model, but sometimes Chunk[20] for Scenario 2+.
-            var surfaceModelChunkIndex = mpd.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex ?? mpd.Flags.SurfaceModelChunkIndex;
+            var surfaceModelChunkIndex = mpd.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex ?? MPD_ChunkLogic.GetSurfaceModelChunkIndex(mpd.Flags, Scenario);
             if (mpd.Surface.HasModel && surfaceModelChunkIndex == 2)
                 WriteSurfaceModelChunk(mpd.Surface);
             else

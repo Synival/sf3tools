@@ -8,11 +8,6 @@ namespace SF3.MPD.Interfaces {
         MemoryLocationType ModelsMemoryLocation { get; }
 
         /// <summary>
-        /// Specifies the chunk in which the surface model would be located (either 2 or 20).
-        /// </summary>
-        int SurfaceModelChunkIndex { get; }
-
-        /// <summary>
         /// Specifies the area of memory (low or high) from which the surface model would be accessed.
         /// </summary>
         MemoryLocationType SurfaceModelMemoryLocation { get; }

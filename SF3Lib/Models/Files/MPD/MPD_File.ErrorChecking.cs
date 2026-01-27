@@ -191,7 +191,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private string[] GetSurfaceChunkErrors() {
-            var flags = Flags;
+            var flags = (MPD_FlagsFromHeader) Flags;
             var chunkHeaders = ChunkLocations;
             var errors = new List<string>();
 
@@ -207,8 +207,8 @@ namespace SF3.Models.Files.MPD {
                     if (chunk20LooksLikeSurfaceChunk)
                         errors.Add($"  (Chunk[20] (expected={expectedIndex}) looks like one -- this could be an SF3Lib error)");
                 }
-                else if (Flags.SurfaceModelChunkIndex != expectedIndex)
-                    errors.Add($"(Maybe not an error?) SurfaceModel in unexpected index. Expected in Chunk[{expectedIndex}] but found at Chunk[{Flags.SurfaceModelChunkIndex}]");
+                else if (flags.SurfaceModelChunkIndex != expectedIndex)
+                    errors.Add($"(Maybe not an error?) SurfaceModel in unexpected index. Expected in Chunk[{expectedIndex}] but found at Chunk[{flags.SurfaceModelChunkIndex}]");
             }
             else {
                 if (flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)

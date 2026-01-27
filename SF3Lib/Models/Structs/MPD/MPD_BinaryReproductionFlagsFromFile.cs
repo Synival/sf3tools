@@ -62,8 +62,9 @@ namespace SF3.Models.Structs.MPD {
 
         public int? MisplacedSurfaceModelChunkIndex {
             get {
+                var flags = (MPD_FlagsFromHeader) MPD_File.Flags;
                 var index = MPD_File.SurfaceModelChunkData?.Index;
-                return (index != MPD_File.Flags.SurfaceModelChunkIndex) ? index : null;
+                return (index != flags.SurfaceModelChunkIndex) ? index : null;
             }
             set {}
         }

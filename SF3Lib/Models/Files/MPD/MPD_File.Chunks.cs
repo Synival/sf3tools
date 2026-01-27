@@ -4,6 +4,7 @@ using System.Linq;
 using CommonLib.Arrays;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
+using SF3.Models.Structs.MPD.Main;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
@@ -199,7 +200,7 @@ namespace SF3.Models.Files.MPD {
                 modelChunksList.Add(MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed));
 
             // Surface model chunk
-            var smci = Flags.SurfaceModelChunkIndex;
+            var smci = ((MPD_FlagsFromHeader) Flags).SurfaceModelChunkIndex;
             if (smci < chunks.Length && smci >= 0 && chunks[smci].ChunkSize == 0xCF00)
                 SurfaceModelChunkData = MakeChunkData(smci, ChunkType.SurfaceModel, CompressionType.Uncompressed);
             else if (ChunkData[2] == null && chunks[2].ChunkSize == 0xCF00)
