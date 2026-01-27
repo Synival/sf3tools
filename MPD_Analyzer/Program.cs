@@ -70,7 +70,7 @@ namespace MPD_Analyzer {
             var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 #endif
 
-            return MatchFuncs.SerializedContentIsIdentical(mpdFile);
+            return MatchFuncs.ProjectCopyProducesSameMPDAsOriginal(mpdFile);
         }
 
         public static void Main(string[] args) {

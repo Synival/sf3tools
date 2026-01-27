@@ -5,6 +5,7 @@ using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 using SF3.MPD.Interfaces;
+using SF3.MPD.Project;
 using SF3.MPD.Writer;
 using SF3.Types;
 using SF3.Utils;
@@ -496,6 +497,25 @@ namespace MPD_Analyzer {
             string[] misplaced1 = mpdFile.BinaryReproductionFlags.MisplacedModelsChunkIndex.HasValue ? ["Misplaced Models"] : [];
             string[] misplaced2 = mpdFile.BinaryReproductionFlags.MisplacedSurfaceModelChunkIndex.HasValue ? ["Misplaced Surface Model"] : [];
             return [.. misplaced1, .. misplaced2];
+        }
+
+        public static string[]? ProjectCopyProducesSameMPDAsOriginal(MPD_File mpdFile) {
+            byte[] bytes1;
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                writer.WriteMPD(mpdFile);
+                bytes1 = stream.ToArray();
+            }
+
+            byte[] bytes2;
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                var mpdProject = new MPD_Project(mpdFile);
+                writer.WriteMPD(mpdProject);
+                bytes2 = stream.ToArray();
+            }
+
+            return AnalysisUtils.GetByteComparisonErrors(bytes1, bytes2);
         }
     }
 }
