@@ -7,7 +7,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_Gradient gradient)
             => gradient.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_Gradient gradient) {
+        public static JToken ToJToken(this IMPD_Gradient gradient) => gradient.ToJObject();
+        public static JObject ToJObject(this IMPD_Gradient gradient) {
             return null;
         }
     }

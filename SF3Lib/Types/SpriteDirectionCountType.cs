@@ -20,7 +20,8 @@ namespace SF3.Types {
         public static string ToSerializedString(this SpriteDirectionCountType type)
             => type.ShouldSerializeAsNumber() ? ((int) type).ToString() : type.ToString();
 
-        public static JToken ToJToken(this SpriteDirectionCountType type)
+        public static JToken ToJToken(this SpriteDirectionCountType type) => type.ToJValue();
+        public static JValue ToJValue(this SpriteDirectionCountType type)
             => type.ShouldSerializeAsNumber() ? new JValue((int) type) : new JValue(type.ToString());
 
         public static SpriteDirectionCountType FromSerializedString(string str)

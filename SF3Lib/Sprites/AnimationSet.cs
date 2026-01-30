@@ -54,8 +54,9 @@ namespace SF3.Sprites {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken()
-            => AnimationsByName != null ? JToken.FromObject(AnimationsByName.ToDictionary(x => x.Key, x => x.Value.ToJToken())) : null;
+        public JToken ToJToken() => ToJObject();
+        public JObject ToJObject()
+            => AnimationsByName != null ? JObject.FromObject(AnimationsByName.ToDictionary(x => x.Key, x => x.Value.ToJToken())) : null;
 
         public override string ToString() => string.Join(", ", AnimationsByName.Keys.Select(x => x.ToString()));
 

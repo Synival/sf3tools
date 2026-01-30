@@ -12,7 +12,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_ModelCollection mc)
             => mc.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_ModelCollection mc) {
+        public static JToken ToJToken(this IMPD_ModelCollection mc) => mc.ToJObject();
+        public static JObject ToJObject(this IMPD_ModelCollection mc) {
             return null;
         }
     }

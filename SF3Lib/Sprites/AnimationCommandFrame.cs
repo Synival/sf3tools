@@ -52,7 +52,8 @@ namespace SF3.Sprites {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken() {
+        public JToken ToJToken() => ToJObject();
+        public JObject ToJObject () {
             return new JObject {
                 { "Frame", new JValue(FrameGroup) },
                 { "Direction", new JValue(Direction.ToString()) }

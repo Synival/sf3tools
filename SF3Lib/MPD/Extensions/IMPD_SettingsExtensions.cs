@@ -8,7 +8,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_Settings settings)
             => settings.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_Settings settings) {
+        public static JToken ToJToken(this IMPD_Settings settings) => settings.ToJObject();
+        public static JObject ToJObject(this IMPD_Settings settings) {
             return new JObject {
                 { "HasSurfaceModel",                           new JValue(settings.HasSurfaceModel) },
                 { "ForceLowMemoryModels",                      new JValue(settings.ForceLowMemoryModels) },

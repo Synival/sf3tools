@@ -7,7 +7,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_Planes plane)
             => plane.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_Planes plane) {
+        public static JToken ToJToken(this IMPD_Planes plane) => plane.ToJObject();
+        public static JObject ToJObject(this IMPD_Planes plane) {
             return null;
         }
     }

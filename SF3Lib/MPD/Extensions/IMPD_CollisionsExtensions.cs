@@ -7,7 +7,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_Collisions collisions)
             => collisions.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_Collisions collisions) {
+        public static JToken ToJToken(this IMPD_Collisions collisions) => collisions.ToJObject();
+        public static JObject ToJObject(this IMPD_Collisions collisions) {
             return null;
         }
     }

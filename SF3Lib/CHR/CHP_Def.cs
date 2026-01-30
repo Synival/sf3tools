@@ -63,7 +63,8 @@ namespace SF3.CHR {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken() {
+        public JToken ToJToken() => ToJObject();
+        public JObject ToJObject() {
             var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             return new JObject {

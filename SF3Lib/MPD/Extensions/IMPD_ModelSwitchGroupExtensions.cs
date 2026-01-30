@@ -7,7 +7,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_ModelSwitchGroup msg)
             => msg.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_ModelSwitchGroup msg) {
+        public static JToken ToJToken(this IMPD_ModelSwitchGroup msg) => msg.ToJObject();
+        public static JObject ToJObject(this IMPD_ModelSwitchGroup msg) {
             return null;
         }
     }

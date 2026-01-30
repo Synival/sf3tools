@@ -54,8 +54,9 @@ namespace SF3.Sprites {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken()
-            => JToken.FromObject(AnimationCommands.Select(x => x.ToJToken()).ToArray());
+        public JToken ToJToken() => ToJArray();
+        public JArray ToJArray()
+            => JArray.FromObject(AnimationCommands.Select(x => x.ToJToken()).ToArray());
 
         /// <summary>
         /// Returns 'true' if all of the animation commands with frames have no 'null' entries.

@@ -7,7 +7,8 @@ namespace CommonLib.Extensions {
         public static string ToJSON_String(this IRectangleShort rect)
             => rect.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IRectangleShort rect) {
+        public static JToken ToJToken(this IRectangleShort rect) => rect.ToJObject();
+        public static JObject ToJObject(this IRectangleShort rect) {
             return new JObject {
                 { "X1", new JValue(rect.X1) },
                 { "Y1", new JValue(rect.Y1) },

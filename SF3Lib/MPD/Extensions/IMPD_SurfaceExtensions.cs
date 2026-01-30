@@ -7,7 +7,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_Surface surface)
             => surface.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_Surface surface) {
+        public static JToken ToJToken(this IMPD_Surface surface) => surface.ToJObject();
+        public static JObject ToJObject(this IMPD_Surface surface) {
             return null;
         }
     }

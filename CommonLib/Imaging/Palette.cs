@@ -82,7 +82,8 @@ namespace CommonLib.Imaging {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken() {
+        public JToken ToJToken() => ToJObject();
+        public JObject ToJObject() {
             return null;
         }
     }

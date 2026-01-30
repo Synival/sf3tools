@@ -7,7 +7,8 @@ namespace CommonLib.Extensions {
         public static string ToJSON_String(this IColorAdjustRGB555 color)
             => color.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IColorAdjustRGB555 color) {
+        public static JToken ToJToken(this IColorAdjustRGB555 color) => ToJObject(color);
+        public static JObject ToJObject(this IColorAdjustRGB555 color) {
             return new JObject {
                 { "R", new JValue(color.R) },
                 { "G", new JValue(color.G) },

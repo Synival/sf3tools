@@ -7,7 +7,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD_Lighting lighting)
             => lighting.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD_Lighting lighting) {
+        public static JToken ToJToken(this IMPD_Lighting lighting) => lighting.ToJObject();
+        public static JObject ToJObject(this IMPD_Lighting lighting) {
             return null;
         }
     }

@@ -102,7 +102,8 @@ namespace SF3.MPD.Extensions {
         public static string ToJSON_String(this IMPD project)
             => project.ToJToken().ToString(Formatting.Indented);
 
-        public static JToken ToJToken(this IMPD project) {
+        public static JToken ToJToken(this IMPD project) => project.ToJObject();
+        public static JObject ToJObject(this IMPD project) {
             JToken JTokenIfExists(object obj) => obj != null ? JToken.FromObject(obj) : null;
             return new JObject {
                 { "Settings",                project.Settings?.ToJToken() ?? JToken.FromObject(null) },

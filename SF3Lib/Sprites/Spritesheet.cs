@@ -71,7 +71,8 @@ namespace SF3.Sprites {
         public string ToJSON_String(int frameHeight)
             => ToJToken(frameHeight).ToString(Formatting.Indented);
 
-        public JToken ToJToken(int frameHeight) {
+        public JToken ToJToken(int frameHeight) => ToJObject(frameHeight);
+        public JObject ToJObject(int frameHeight) {
             var jObj = new JObject {
                 { "SpriteID",       new JValue(SpriteID) },
                 { "VerticalOffset", new JValue(VerticalOffset) },
