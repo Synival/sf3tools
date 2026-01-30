@@ -5,6 +5,8 @@ using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
+using Newtonsoft.Json.Linq;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
 using SF3.Types;
@@ -13,7 +15,7 @@ namespace SF3.MPD.Project {
     /// <summary>
     /// Abstracted, editable MPD file.
     /// </summary>
-    public class MPD_Project : IMPD {
+    public class MPD_Project : IMPD, IJsonResource {
         /// <summary>
         /// Makes a copy of an existing IMPD as an IMPD_Project.
         /// </summary>
@@ -70,9 +72,29 @@ namespace SF3.MPD.Project {
         public static MPD_Project FromJSON(string jsonStr)
             => new MPD_Project(jsonStr);
 
-        private MPD_Project(string jsonStr) {
+        /// <summary>
+        /// Creates a new project from JSON object. The JSON expected is the same produced as the IMPD.ToJObject()
+        /// extension method.
+        /// </summary>
+        /// <param name="jobj">JSON object containing the entire MPD_Project.</param>
+        /// <returns>A newly constructed MPD_Project.</returns>
+        public static MPD_Project FromJSON(JObject jObject)
+            => new MPD_Project(jObject);
+
+        private MPD_Project(string jsonStr) : this(JObject.Parse(jsonStr)) { }
+        private MPD_Project(JObject jObject) {
             Flags = new MPD_Flags(this);
+            AssignFromJObject(jObject);
         }
+
+        public bool AssignFromJSON_String(string json) => AssignFromJObject(JObject.Parse(json));
+        public bool AssignFromJToken(JToken jToken) => AssignFromJObject((JObject) jToken);
+        public bool AssignFromJObject(JObject jObject) {
+            return true;
+        }
+
+        public string ToJSON_String() => IMPD_Extensions.ToJSON_String(this);
+        public JToken ToJToken() => IMPD_Extensions.ToJObject(this);
 
         public IMPD_EditableFlags Flags { get; }
         public IMPD_Settings Settings { get; }
