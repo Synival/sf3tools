@@ -2,9 +2,9 @@
 using SF3.Types;
 using static SF3.Tests.Utils.MPD_TestUtils;
 
-namespace SF3.Tests.MPD.Extensions {
+namespace SF3.Tests.MPD.Serialization {
     [TestClass]
-    public class IMPD_SettingsExtensionsTests {
+    public class IMPD_SettingsSerializationTests {
         [TestMethod]
         public void ToJSON_String_WithScenario1MPD_ReturnsAllVariables() {
             var mpdFile = MakeMPD_File(ScenarioType.Scenario1, "BALSA.MPD");
