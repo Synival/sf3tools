@@ -1,5 +1,6 @@
 ﻿using CommonLib.Arrays;
 using SF3.Models.Files.MPD;
+using SF3.MPD.Extensions;
 using SF3.MPD.Project;
 using SF3.MPD.Writer;
 using SF3.Types;
@@ -8,22 +9,24 @@ using static SF3.Tests.Utils.MPD_TestUtils;
 
 namespace SF3.Tests.MPD.Project {
     [TestClass]
-    public partial class MPD_ProjectTests_Copy {
-        private void ProducesSameMPDAsOriginal(ScenarioType scenario, string file) {
+    public partial class MPD_ProjectTests_FromJSON {
+        public void ProducesSameMPDAsProjectCopyTestBase(ScenarioType scenario, string file) {
             var mpdOriginal = MakeMPD_File(scenario, file + ".MPD");
-            var mpdCopy = new MPD_Project(mpdOriginal);
-
+            var mpdProject = new MPD_Project(mpdOriginal);
             byte[] exportOriginal;
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, scenario);
-                writer.WriteMPD(mpdOriginal);
+                writer.WriteMPD(mpdProject);
                 exportOriginal = stream.ToArray();
             }
+
+            var mpdProjectJsonStr = mpdProject.ToJSON_String();
+            var mpdNewProject = MPD_Project.FromJSON(mpdProjectJsonStr);
 
             byte[] exportCopy;
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, scenario);
-                writer.WriteMPD(mpdCopy);
+                writer.WriteMPD(mpdNewProject);
                 exportCopy = stream.ToArray();
             }
 
@@ -34,7 +37,7 @@ namespace SF3.Tests.MPD.Project {
                 (scenario == ScenarioType.Scenario3) ? "PD" :
                                                        "Unknown";
 
-            File.WriteAllBytes($"MPDProject_Copy_{scenarioPrefix}_{file}_Test.MPD", exportCopy);
+            File.WriteAllBytes($"MPDProject_FromJSON_{scenarioPrefix}_{file}_Test.MPD", exportCopy);
 
             var byteErrors = AnalysisUtils.GetByteComparisonErrors(exportOriginal, exportCopy);
             if (!(byteErrors?.Length > 0))
@@ -49,7 +52,6 @@ namespace SF3.Tests.MPD.Project {
             if (mpdErrors?.Length > 0)
                 errorMsg += "\r\n============================================\r\n" + string.Join("\r\n", mpdErrors);
 
-            Assert.Fail(errorMsg);
-        }
+            Assert.Fail(errorMsg);        }
     }
 }

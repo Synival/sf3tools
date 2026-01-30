@@ -5,8 +5,6 @@ using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
 using SF3.Types;
@@ -61,6 +59,19 @@ namespace SF3.MPD.Project {
 
             if (original.TexturePalette != null)
                 TexturePalette = new Palette(original.TexturePalette);
+        }
+
+        /// <summary>
+        /// Creates a new project from a string in JSON format. The JSON expected is the same produced as the
+        /// IMPD.ToJSON_String() extension method.
+        /// </summary>
+        /// <param name="jsonStr">Input string containing the entire MPD_Project in JSON format.</param>
+        /// <returns>A newly constructed MPD_Project.</returns>
+        public static MPD_Project FromJSON(string jsonStr)
+            => new MPD_Project(jsonStr);
+
+        private MPD_Project(string jsonStr) {
+            Flags = new MPD_Flags(this);
         }
 
         public IMPD_EditableFlags Flags { get; }

@@ -26,13 +26,13 @@ namespace SF3.Tests.MPD.Writer {
             }
 
             var scenarioPrefix =
-                (scenario == ScenarioType.Scenario1) ? "S1_" :
-                (scenario == ScenarioType.Scenario2) ? "S2_" :
-                (scenario == ScenarioType.Scenario3) ? "S3_" :
-                (scenario == ScenarioType.Scenario3) ? "PD_" :
-                                                       "Unknown_";
+                (scenario == ScenarioType.Scenario1) ? "S1" :
+                (scenario == ScenarioType.Scenario2) ? "S2" :
+                (scenario == ScenarioType.Scenario3) ? "S3" :
+                (scenario == ScenarioType.Scenario3) ? "PD" :
+                                                       "Unknown";
 
-            File.WriteAllBytes($"{scenarioPrefix}{mpdName}_Test.MPD", outputData);
+            File.WriteAllBytes($"MPDWriter_{scenarioPrefix}_{mpdName}_Test.MPD", outputData);
 
             var errors = new List<string>();
             if (performByteComparison)
