@@ -9,7 +9,18 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_BinaryReproductionFlags flags) => flags.ToJObject();
         public static JObject ToJObject(this IMPD_BinaryReproductionFlags flags) {
-            return null;
+            JToken JTokenIfExists(object obj) => obj != null ? JToken.FromObject(obj) : null;
+            return new JObject(
+                new JProperty("ShortEmptyAnimationTable",                     flags.ShortEmptyAnimationTable),
+                new JProperty("PaletteAdjustmentIsTruncated",                 flags.PaletteAdjustmentIsTruncated),
+                new JProperty("SkyPaletteSharesGroundPalette",                flags.SkyPaletteSharesGroundPalette),
+                new JProperty("TexturePaletteSharesSkyPalette",               flags.TexturePaletteSharesSkyPalette),
+                new JProperty("EmptyUnterminatedIgnoredTexturesTable",        flags.EmptyUnterminatedIgnoredTexturesTable),
+                new JProperty("NonStandardTextureChunkDecompressedSizeLimit", flags.NonStandardTextureChunkDecompressedSizeLimit),
+                new JProperty("MisplacedModelsChunkIndex",                    flags.MisplacedModelsChunkIndex),
+                new JProperty("MisplacedSurfaceModelChunkIndex",              flags.MisplacedSurfaceModelChunkIndex),
+                new JProperty("UnreferencedDataAfterPaletteAdjustmentTable",  JTokenIfExists(flags.UnreferencedDataAfterPaletteAdjustmentTable?.AsArray()))
+            );
         }
     }
 }

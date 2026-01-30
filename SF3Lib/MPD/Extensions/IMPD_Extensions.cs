@@ -120,7 +120,7 @@ namespace SF3.MPD.Extensions {
                 { "Gradient",                project.Gradient?.ToJToken() },
                 { "GroundAnimationData",     JTokenIfExists(project.GroundAnimationData?.AsArray()) },
                 { "Scenario1UnknownTable1",  JTokenIfExists(project.Scenario1UnknownTable1?.AsArray()) },
-                { "Scenario1UnknownTable2",  JTokenIfExists(project.Scenario1UnknownTable2?.AsArray()) },
+                { "Scenario1UnknownTable2",  JTokenIfExists(project.Scenario1UnknownTable2?.AsArray()?.Select(x => (short) x)?.ToArray()) },
             };
         }
     }

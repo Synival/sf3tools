@@ -42,6 +42,12 @@ namespace CommonLib.Imaging {
             }
         }
 
+        public static Palette FromJToken(JToken token) => new Palette(token);
+        private Palette(JToken token) {
+            var jArray = (JArray) token;
+            Channels = jArray.Select(x => PixelChannels.FromHtmlColor((string) x, (byte) 0)).ToArray();
+        }
+
         public readonly PixelChannels[] Channels = null;
 
         public PixelChannels this[int index] {
@@ -82,9 +88,7 @@ namespace CommonLib.Imaging {
         public string ToJSON_String()
             => ToJToken().ToString(Formatting.Indented);
 
-        public JToken ToJToken() => ToJObject();
-        public JObject ToJObject() {
-            return null;
-        }
+        public JToken ToJToken() => ToJArray();
+        public JArray ToJArray() => new JArray(Channels.Select(x => x.ToHtmlColor()).ToArray());
     }
 }

@@ -90,6 +90,45 @@ namespace SF3.MPD.Project {
         public bool AssignFromJSON_String(string json) => AssignFromJObject(JObject.Parse(json));
         public bool AssignFromJToken(JToken jToken) => AssignFromJObject((JObject) jToken);
         public bool AssignFromJObject(JObject jObject) {
+            if (jObject.TryGetValue("Settings", out var settingsJToken))
+                Settings = null; // MPD_Settings.FromJToken(settingsJToken);
+            if (jObject.TryGetValue("BinaryReproductionFlags", out var binaryReproductionFlagsToken))
+                BinaryReproductionFlags = MPD_BinaryReproductionFlags.FromJToken(binaryReproductionFlagsToken);
+            if (jObject.TryGetValue("Lighting", out var lightingToken))
+                Lighting = MPD_Lighting.FromJToken(lightingToken);
+            if (jObject.TryGetValue("Surface", out var surfaceToken))
+                Surface = null; // .FromJToken()
+            if (jObject.TryGetValue("Planes", out var planesToken))
+                Planes = null; // .FromJToken()
+
+            ModelCollections = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
+            if (jObject.TryGetValue("ModelCollections", out var modelCollectionsToken))
+                foreach (var modelCollectionJObj in ((JObject) modelCollectionsToken).Properties())
+                    ModelCollections.Add((MPD_CollectionType) Enum.Parse(typeof(MPD_CollectionType), modelCollectionJObj.Name), null); // .FromJToken()
+
+            if (jObject.TryGetValue("ModelSwitchGroups", out var modelSwitchGroupsToken))
+                ModelSwitchGroups = null; // .FromJToken()
+
+            if (jObject.TryGetValue("Scenario1UnknownTable1", out var scenario1UnknownTable1Token))
+                Scenario1UnknownTable1 = null; // .FromJToken()
+            if (jObject.TryGetValue("Scenario1UnknownTable2", out var scenario1UnknownTable2Token))
+                Scenario1UnknownTable2 = null; // .FromJToken()
+            if (jObject.TryGetValue("GroundAnimationData", out var groundAnimationDataToken))
+                GroundAnimationData = null; // .FromJToken()
+
+            if (jObject.TryGetValue("CameraBoundaries", out var cameraBoundariesToken))
+                CameraBoundaries = null; // .FromJToken()
+            if (jObject.TryGetValue("BattleCursorBoundaries", out var battleCursorBoundariesToken))
+                BattleCursorBoundaries = null; // .FromJToken()
+
+            if (jObject.TryGetValue("Collisions", out var collisionsToken))
+                Collisions = null; // .FromJToken()
+            if (jObject.TryGetValue("Gradient", out var gradientToken))
+                Gradient = null; // .FromJToken()
+
+            if (jObject.TryGetValue("TexturePalette", out var texturePaletteToken))
+                TexturePalette = null; // .FromJToken()
+
             return true;
         }
 
@@ -97,10 +136,10 @@ namespace SF3.MPD.Project {
         public JToken ToJToken() => IMPD_Extensions.ToJObject(this);
 
         public IMPD_EditableFlags Flags { get; }
-        public IMPD_Settings Settings { get; }
-        public IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; }
-        public IMPD_Surface Surface { get; }
-        public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; }
+        public IMPD_Settings Settings { get; private set; }
+        public IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; private set; }
+        public IMPD_Surface Surface { get; private set; }
+        public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; private set; }
         public Palette TexturePalette { get; set; }
         public IMPD_Lighting Lighting { get; set; }
         public IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; set; }

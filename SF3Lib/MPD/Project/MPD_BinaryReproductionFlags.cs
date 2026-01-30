@@ -1,5 +1,7 @@
-﻿using CommonLib;
+﻿using System.Linq;
+using CommonLib;
 using CommonLib.Extensions;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -18,6 +20,24 @@ namespace SF3.MPD.Project {
 
             if (original.UnreferencedDataAfterPaletteAdjustmentTable != null)
                 UnreferencedDataAfterPaletteAdjustmentTable = ((byte[]) (original.UnreferencedDataAfterPaletteAdjustmentTable.AsArray().Clone())).ToEnumerableWithLength();
+        }
+
+        public static MPD_BinaryReproductionFlags FromJToken(JToken token) => new MPD_BinaryReproductionFlags(token);
+        private MPD_BinaryReproductionFlags(JToken token) {
+            var jObject = (JObject) token;
+
+            ShortEmptyAnimationTable                     = (bool) jObject["ShortEmptyAnimationTable"];
+            PaletteAdjustmentIsTruncated                 = (bool) jObject["PaletteAdjustmentIsTruncated"];
+            SkyPaletteSharesGroundPalette                = (bool) jObject["SkyPaletteSharesGroundPalette"];
+            TexturePaletteSharesSkyPalette               = (bool) jObject["TexturePaletteSharesSkyPalette"];
+            EmptyUnterminatedIgnoredTexturesTable        = (bool) jObject["EmptyUnterminatedIgnoredTexturesTable"];
+            NonStandardTextureChunkDecompressedSizeLimit = (int?) jObject["NonStandardTextureChunkDecompressedSizeLimit"];
+            MisplacedModelsChunkIndex                    = (int?) jObject["MisplacedModelsChunkIndex"];
+            MisplacedSurfaceModelChunkIndex              = (int?) jObject["MisplacedSurfaceModelChunkIndex"];
+
+            var unreferencedData = jObject.GetValueIfExists("UnreferencedDataAfterPaletteAdjustmentTable");
+            if (unreferencedData != null)
+                UnreferencedDataAfterPaletteAdjustmentTable = ((JArray) unreferencedData).Select(x => (byte) x).ToArray().ToEnumerableWithLength();
         }
 
         public bool ShortEmptyAnimationTable { get; set; }
