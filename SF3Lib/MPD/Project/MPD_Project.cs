@@ -114,10 +114,8 @@ namespace SF3.MPD.Project {
             if (jObject.TryGetValue("GroundAnimationData", out var groundAnimationDataToken))
                 GroundAnimationData = null; // .FromJToken()
 
-            if (jObject.TryGetValue("CameraBoundaries", out var cameraBoundariesToken))
-                CameraBoundaries = null; // .FromJToken()
-            if (jObject.TryGetValue("BattleCursorBoundaries", out var battleCursorBoundariesToken))
-                BattleCursorBoundaries = null; // .FromJToken()
+            CameraBoundaries       = jObject.GetValueIfExists("CameraBoundaries",       t => RectangleShort.FromJToken(t));
+            BattleCursorBoundaries = jObject.GetValueIfExists("BattleCursorBoundaries", t => RectangleShort.FromJToken(t));
 
             if (jObject.TryGetValue("Collisions", out var collisionsToken))
                 Collisions = null; // .FromJToken()

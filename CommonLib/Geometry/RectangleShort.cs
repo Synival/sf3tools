@@ -1,5 +1,16 @@
-﻿namespace CommonLib.Geometry {
+﻿using System;
+using Newtonsoft.Json.Linq;
+
+namespace CommonLib.Geometry {
     public struct RectangleShort : IRectangleShort {
+        public static IRectangleShort FromJToken(JToken token) {
+            var jObject = (JObject) token;
+            return new RectangleShort {
+                P1 = new PointShort { X = (short) jObject["X1"], Y = (short) jObject["Y1"] },
+                P2 = new PointShort { X = (short) jObject["X2"], Y = (short) jObject["Y2"] },
+            };
+        }
+
         public IPointShort P1 { get; set; }
         public IPointShort P2 { get; set; }
 
