@@ -8,7 +8,7 @@ using static SF3.Tests.Utils.MPD_TestUtils;
 
 namespace SF3.Tests.MPD.Project {
     [TestClass]
-    public partial class MPD_ProjectTests {
+    public partial class MPD_ProjectTests_Copy {
         private void ProducesSameMPDAsOriginal(ScenarioType scenario, string file) {
             var mpdOriginal = MakeMPD_File(scenario, file + ".MPD");
             var mpdCopy = new MPD_Project(mpdOriginal);

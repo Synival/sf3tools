@@ -1,7 +1,7 @@
 ﻿using SF3.Types;
 
 namespace SF3.Tests.MPD.Project {
-    public partial class MPD_ProjectTests {
+    public partial class MPD_ProjectTests_Copy {
         [TestMethod]
         public void Copy_WithPremiumDisk_MOVSEL_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.PremiumDisk, "MOVSEL");

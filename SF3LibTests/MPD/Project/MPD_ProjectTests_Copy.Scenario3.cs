@@ -1,7 +1,7 @@
 ﻿using SF3.Types;
 
 namespace SF3.Tests.MPD.Project {
-    public partial class MPD_ProjectTests {
+    public partial class MPD_ProjectTests_Copy {
         [TestMethod]
         public void Copy_WithScenario3_VOID3_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario3, "VOID3");
