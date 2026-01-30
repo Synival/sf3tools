@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 
-namespace SF3.Extensions {
+namespace SF3.MPD.Extensions {
     public static class IMPD_CollisionLineExtensions {
         public static bool BlockShouldCheck(this IMPD_CollisionLine line, int blockX, int blockY) {
             const short padding = 63;
 
             // Determine the boundaries of the block.
-            short minX = (short) (blockX * 0x80 - padding);
-            short maxX = (short) (blockX * 0x80 + 0x80 + padding);
-            short minY = (short) (blockY * 0x80 - padding);
-            short maxY = (short) (blockY * 0x80 + 0x80 + padding);
+            var minX = (short) (blockX * 0x80 - padding);
+            var maxX = (short) (blockX * 0x80 + 0x80 + padding);
+            var minY = (short) (blockY * 0x80 - padding);
+            var maxY = (short) (blockY * 0x80 + 0x80 + padding);
 
             // These bogus corrections brings accuracy waaaay up. No rational reason why.
             if (line.X1 == line.X2 && line.X1 % 0x80 == 0x40)
@@ -21,9 +21,9 @@ namespace SF3.Extensions {
                 maxY += 1;
 
             // Return 'false' early if the line is out of bounds of any axis.
-            if ((line.X1 < minX && line.X2 < minX) || (line.X1 > maxX && line.X2 > maxX))
+            if (line.X1 < minX && line.X2 < minX || line.X1 > maxX && line.X2 > maxX)
                 return false;
-            if ((line.Y1 < minY && line.Y2 < minY) || (line.Y1 > maxY && line.Y2 > maxY))
+            if (line.Y1 < minY && line.Y2 < minY || line.Y1 > maxY && line.Y2 > maxY)
                 return false;
 
             var sqP1 = new MPD_CollisionPoint(0, minX, minY);
@@ -46,16 +46,16 @@ namespace SF3.Extensions {
                 // Find the four orientations needed for general and special cases
                 int Orientation(IMPD_CollisionPoint a, IMPD_CollisionPoint b, IMPD_CollisionPoint c)
                 {
-                    long val = (long) (b.Y - a.Y) * (c.X - b.X) - (b.X - a.X) * (c.Y - b.Y);
+                    var val = (long) (b.Y - a.Y) * (c.X - b.X) - (b.X - a.X) * (c.Y - b.Y);
                     if (val == 0)
                         return 0; // Collinear
-                    return (val > 0) ? 1 : 2; // Clockwise or Counterclockwise
+                    return val > 0 ? 1 : 2; // Clockwise or Counterclockwise
                 }
 
-                int o1 = Orientation(line.Point1,  line.Point2,  other.Point1);
-                int o2 = Orientation(line.Point1,  line.Point2,  other.Point2);
-                int o3 = Orientation(other.Point1, other.Point2, line.Point1);
-                int o4 = Orientation(other.Point1, other.Point2, line.Point2);
+                var o1 = Orientation(line.Point1,  line.Point2,  other.Point1);
+                var o2 = Orientation(line.Point1,  line.Point2,  other.Point2);
+                var o3 = Orientation(other.Point1, other.Point2, line.Point1);
+                var o4 = Orientation(other.Point1, other.Point2, line.Point2);
 
                 // General case
                 if (o1 != o2 && o3 != o4)
@@ -66,10 +66,10 @@ namespace SF3.Extensions {
                     return b.X <= Math.Max(a.X, c.X) && b.X >= Math.Min(a.X, c.X) &&
                            b.Y <= Math.Max(a.Y, c.Y) && b.Y >= Math.Min(a.Y, c.Y);
                 }
-                return (o1 == 0 && OnSegment(line.Point1, other.Point1, line.Point2)) ||
-                       (o2 == 0 && OnSegment(line.Point1, other.Point2, line.Point2)) ||
-                       (o3 == 0 && OnSegment(other.Point1, line.Point1, other.Point2)) ||
-                       (o4 == 0 && OnSegment(other.Point1, line.Point2, other.Point2));
+                return o1 == 0 && OnSegment(line.Point1, other.Point1, line.Point2) ||
+                       o2 == 0 && OnSegment(line.Point1, other.Point2, line.Point2) ||
+                       o3 == 0 && OnSegment(other.Point1, line.Point1, other.Point2) ||
+                       o4 == 0 && OnSegment(other.Point1, line.Point2, other.Point2);
             }
 
             return IsPointInsideSquare(line.Point1) ||
@@ -82,8 +82,8 @@ namespace SF3.Extensions {
 
         public static HashSet<(int X, int Y)> GetBlocksForChecking(this IMPD_CollisionLine line) {
             var blocks = new List<(int X, int Y)>();
-            for (int y = 0; y < 16; y++)
-                for (int x = 0; x < 16; x++)
+            for (var y = 0; y < 16; y++)
+                for (var x = 0; x < 16; x++)
                     if (line.BlockShouldCheck(x, y))
                         blocks.Add((x, y));
             return new HashSet<(int X, int y)>(blocks);

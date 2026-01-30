@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
 using SF3.Analysis;
-using SF3.Extensions;
 using SF3.Models.Files.MPD;
+using SF3.MPD.Extensions;
 using SF3.Types;
 
 namespace SF3.Utils {

@@ -1,5 +1,5 @@
 ﻿using CommonLib.Attributes;
-using SF3.Extensions;
+using SF3.MPD.Extensions;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Main {

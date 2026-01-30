@@ -1,7 +1,8 @@
-﻿using SF3.MPD.Interfaces;
+﻿using SF3.MPD.Extensions;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
-namespace SF3.Extensions {
+namespace SF3.MPD.Extensions {
     public static class IMPD_ModelCollectionExtensions {
         public static bool IsHeaderModelCollection(this IMPD_ModelCollection mc)
             => mc.Collection.IsHeaderModelCollection();

@@ -1,7 +1,7 @@
 ﻿using SF3.MPD.Interfaces.Flags;
 using SF3.Types;
 
-namespace SF3.Extensions {
+namespace SF3.MPD.Extensions {
     public static class IMPD_AllFlagsExtensions {
         /// <summary>
         /// Specifies the chunk in which models would be located (either 1 or 20).
@@ -25,7 +25,7 @@ namespace SF3.Extensions {
                 return 2;
             else if (flags.Bit_0x0002_HasSurfaceTextureRotation)
                 return 2;
-            else if (GetModelsChunkIndex(flags, scenario) == 20)
+            else if (flags.GetModelsChunkIndex(scenario) == 20)
                 return 2;
             else
                 return 20;
@@ -35,7 +35,7 @@ namespace SF3.Extensions {
         /// When set, specifies the type of chunk located in Chunk[1] (should always be 'Models' if non-null).
         /// </summary>
         public static ChunkType GetChunk1Type(this IMPD_Flags flags, ScenarioType scenario) {
-            if (scenario >= ScenarioType.Scenario2 && flags.HasExtraModel || flags.Bit_0x0100_HasModels && GetModelsChunkIndex(flags, scenario) == 1)
+            if (scenario >= ScenarioType.Scenario2 && flags.HasExtraModel || flags.Bit_0x0100_HasModels && flags.GetModelsChunkIndex(scenario) == 1)
                 return ChunkType.Models;
             else
                 return ChunkType.Unset;
@@ -46,7 +46,7 @@ namespace SF3.Extensions {
         /// pointing to (either 'Low' or 'High').
         /// </summary>
         public static MemoryLocationType? GetChunk1PointersMemoryLocation(this IMPD_Flags flags, ScenarioType scenario) {
-            if (GetChunk1Type(flags, scenario) != ChunkType.Models)
+            if (flags.GetChunk1Type(scenario) != ChunkType.Models)
                 return null;
             return scenario >= ScenarioType.Scenario2 || !flags.Bit_0x0200_HasSurfaceModel || flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel
                 ? MemoryLocationType.LowMemory
@@ -57,7 +57,7 @@ namespace SF3.Extensions {
         /// When set, specifies the type of chunk located in Chunk[20] (either 'Models' or 'SurfaceModel').
         /// </summary>
         public static ChunkType GetChunk2Type(this IMPD_Flags flags, ScenarioType scenario) {
-            return flags.Bit_0x0200_HasSurfaceModel && GetSurfaceModelChunkIndex(flags, scenario) == 2
+            return flags.Bit_0x0200_HasSurfaceModel && flags.GetSurfaceModelChunkIndex(scenario) == 2
                 ? ChunkType.SurfaceModel
                 : ChunkType.Unset;
         }
@@ -68,9 +68,9 @@ namespace SF3.Extensions {
         public static ChunkType GetChunk20Type(this IMPD_Flags flags, ScenarioType scenario) {
             if (scenario < ScenarioType.Scenario1)
                 return ChunkType.Unset;
-            else if (flags.Bit_0x0100_HasModels && GetModelsChunkIndex(flags, scenario) == 20)
+            else if (flags.Bit_0x0100_HasModels && flags.GetModelsChunkIndex(scenario) == 20)
                 return ChunkType.Models;
-            else if (flags.Bit_0x0200_HasSurfaceModel && GetSurfaceModelChunkIndex(flags, scenario) == 20)
+            else if (flags.Bit_0x0200_HasSurfaceModel && flags.GetSurfaceModelChunkIndex(scenario) == 20)
                 return ChunkType.SurfaceModel;
             else
                 return ChunkType.Unset;
@@ -80,8 +80,8 @@ namespace SF3.Extensions {
         /// Specifies the area of memory (low or high) from which models would be accessed.
         /// </summary>
         public static MemoryLocationType GetModelsMemoryLocation(this IMPD_Flags flags, ScenarioType scenario) {
-            return GetModelsChunkIndex(flags, scenario) == 1
-                ? GetChunk1PointersMemoryLocation(flags, scenario).Value
+            return flags.GetModelsChunkIndex(scenario) == 1
+                ? flags.GetChunk1PointersMemoryLocation(scenario).Value
                 : MemoryLocationType.HighMemory;
         }
 

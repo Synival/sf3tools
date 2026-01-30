@@ -5,6 +5,8 @@ using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
 using SF3.Types;

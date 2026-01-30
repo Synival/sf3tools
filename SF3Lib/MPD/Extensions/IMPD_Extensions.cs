@@ -1,24 +1,27 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
-namespace SF3.Extensions {
+namespace SF3.MPD.Extensions {
     public static class IMPD_Extensions {
         public static ushort GetHeaderFlags(this IMPD mpd, ScenarioType scenario) {
             switch (scenario) {
                 case ScenarioType.Ship2:
                 case ScenarioType.Prototype:
                 case ScenarioType.Scenario1:
-                    return GetScenario1HeaderFlags(mpd);
+                    return mpd.GetScenario1HeaderFlags();
 
                 case ScenarioType.Scenario2:
-                    return GetScenario2HeaderFlags(mpd);
+                    return mpd.GetScenario2HeaderFlags();
 
                 case ScenarioType.Scenario3:
-                    return GetScenario3HeaderFlags(mpd);
+                    return mpd.GetScenario3HeaderFlags();
 
                 case ScenarioType.PremiumDisk:
-                    return GetPremiumDiskHeaderFlags(mpd);
+                    return mpd.GetPremiumDiskHeaderFlags();
 
                 default:
                     throw new ArgumentException($"Unhandled scenario '{scenario}'");
@@ -44,7 +47,7 @@ namespace SF3.Extensions {
               | F(0x0800, mpd.Flags.Bit_0x0800_Unused)
               | F(0x1000, mpd.Flags.Bit_0x1000_HasTileBasedGroundImage)
               | F(0x2000, mpd.Flags.Bit_0x2000_HasBattleSky ||
-                    (mpd.Flags.Bit_0x0800_HasCutsceneSky && mpd.Planes.SkyImage != null))
+                    mpd.Flags.Bit_0x0800_HasCutsceneSky && mpd.Planes.SkyImage != null)
               | F(0x4000, mpd.Flags.Bit_0x4000_Unused)
               | F(0x8000, mpd.Flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel)
             );
@@ -93,6 +96,16 @@ namespace SF3.Extensions {
         }
 
         // Flags are the same as Scenario 3.
-        public static ushort GetPremiumDiskHeaderFlags(this IMPD mpd) => GetScenario3HeaderFlags(mpd);
+        public static ushort GetPremiumDiskHeaderFlags(this IMPD mpd) => mpd.GetScenario3HeaderFlags();
+
+        public static string ToJSON_String(this IMPD project)
+            => project.ToJToken().ToString(Formatting.Indented);
+
+        public static JToken ToJToken(this IMPD project) {
+            var jsonSettings = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
+            return new JObject {
+                { "Settings", project.Settings?.ToJToken() }
+            };
+        }
     }
 }

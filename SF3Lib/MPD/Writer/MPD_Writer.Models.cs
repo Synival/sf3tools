@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib;
 using CommonLib.SGL;
-using SF3.Extensions;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Writer {
