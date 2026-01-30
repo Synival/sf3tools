@@ -118,7 +118,7 @@ namespace SF3.MPD.Extensions {
                 { "CameraBoundaries",        project.CameraBoundaries?.ToJToken() },
                 { "BattleCursorBoundaries",  project.BattleCursorBoundaries?.ToJToken() },
                 { "Gradient",                project.Gradient?.ToJToken() },
-                { "GroundAnimationData",     JTokenIfExists(project.GroundAnimationData?.AsArray()) },
+                { "GroundAnimationData",     JTokenIfExists(project.GroundAnimationData?.Cast<int>().ToArray()) },
                 { "Scenario1UnknownTable1",  JTokenIfExists(project.Scenario1UnknownTable1?.AsArray()) },
                 { "Scenario1UnknownTable2",  JTokenIfExists(project.Scenario1UnknownTable2?.AsArray()?.Select(x => (short) x)?.ToArray()) },
             };

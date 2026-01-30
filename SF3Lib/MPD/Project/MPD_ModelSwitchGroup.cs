@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -11,6 +12,15 @@ namespace SF3.MPD.Project {
                 ModelInstancesVisibleWhenOff = original.ModelInstancesVisibleWhenOff.ToArray().ToEnumerableWithLength();
             if (original.ModelInstancesVisibleWhenOn != null)
                 ModelInstancesVisibleWhenOn = original.ModelInstancesVisibleWhenOn.ToArray().ToEnumerableWithLength();
+        }
+
+        public static MPD_ModelSwitchGroup FromJToken(JToken token) => new MPD_ModelSwitchGroup(token);
+        private MPD_ModelSwitchGroup(JToken token) {
+            var jObject = (JObject) token;
+
+            Flag = (int) jObject["Flag"];
+            ModelInstancesVisibleWhenOff = jObject.GetValueIfExists("ModelInstancesVisibleWhenOff", t => ((JArray) t).Select(x => (int) x).ToArray().ToEnumerableWithLength());
+            ModelInstancesVisibleWhenOn  = jObject.GetValueIfExists("ModelInstancesVisibleWhenOn",  t => ((JArray) t).Select(x => (int) x).ToArray().ToEnumerableWithLength());
         }
 
         public int Flag { get; set; }

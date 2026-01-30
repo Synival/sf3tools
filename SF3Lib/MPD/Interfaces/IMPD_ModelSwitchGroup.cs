@@ -25,7 +25,6 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// This is the state of the toggle when editing. Only relevant to SF3Editor.
         /// </summary>
-        [JsonIgnore]
         bool StateInEditor { get; set; }
     }
 }

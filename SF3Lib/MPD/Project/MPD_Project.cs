@@ -104,15 +104,16 @@ namespace SF3.MPD.Project {
                 }
             }
 
-            if (jObject.TryGetValue("ModelSwitchGroups", out var modelSwitchGroupsToken))
-                ModelSwitchGroups = null; // .FromJToken()
+            ModelSwitchGroups = jObject.GetValueIfExists("ModelSwitchGroups",
+                t => ((JArray) t)
+                    .Select(x => (IMPD_ModelSwitchGroup) MPD_ModelSwitchGroup.FromJToken(t))
+                    .ToArray()
+                    .ToEnumerableWithLength()
+                );
 
-            if (jObject.TryGetValue("Scenario1UnknownTable1", out var scenario1UnknownTable1Token))
-                Scenario1UnknownTable1 = null; // .FromJToken()
-            if (jObject.TryGetValue("Scenario1UnknownTable2", out var scenario1UnknownTable2Token))
-                Scenario1UnknownTable2 = null; // .FromJToken()
-            if (jObject.TryGetValue("GroundAnimationData", out var groundAnimationDataToken))
-                GroundAnimationData = null; // .FromJToken()
+            Scenario1UnknownTable1 = jObject.GetValueIfExists("Scenario1UnknownTable1", t => ((JArray) t).Select(x => (ushort) (short) x).ToArray().ToEnumerableWithLength());
+            Scenario1UnknownTable2 = jObject.GetValueIfExists("Scenario1UnknownTable2", t => ((JArray) t).Select(x => (ushort) (short) x).ToArray().ToEnumerableWithLength());
+            GroundAnimationData    = jObject.GetValueIfExists("GroundAnimationData",    t => ((JArray) t).Select(x => (byte) x).ToArray().ToEnumerableWithLength());
 
             CameraBoundaries       = jObject.GetValueIfExists("CameraBoundaries",       t => RectangleShort.FromJToken(t));
             BattleCursorBoundaries = jObject.GetValueIfExists("BattleCursorBoundaries", t => RectangleShort.FromJToken(t));
