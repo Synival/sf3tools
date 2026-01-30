@@ -34,10 +34,8 @@ namespace SF3.MPD.Project {
             NonStandardTextureChunkDecompressedSizeLimit = (int?) jObject["NonStandardTextureChunkDecompressedSizeLimit"];
             MisplacedModelsChunkIndex                    = (int?) jObject["MisplacedModelsChunkIndex"];
             MisplacedSurfaceModelChunkIndex              = (int?) jObject["MisplacedSurfaceModelChunkIndex"];
-
-            var unreferencedData = jObject.GetValueIfExists("UnreferencedDataAfterPaletteAdjustmentTable");
-            if (unreferencedData != null)
-                UnreferencedDataAfterPaletteAdjustmentTable = ((JArray) unreferencedData).Select(x => (byte) x).ToArray().ToEnumerableWithLength();
+            UnreferencedDataAfterPaletteAdjustmentTable  = jObject.GetValueIfExists("UnreferencedDataAfterPaletteAdjustmentTable",
+                t => ((JArray) t).Select(x => (byte) x).ToArray().ToEnumerableWithLength());
         }
 
         public bool ShortEmptyAnimationTable { get; set; }

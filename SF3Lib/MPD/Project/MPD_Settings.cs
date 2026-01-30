@@ -1,4 +1,5 @@
 ﻿using CommonLib.Imaging;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -39,6 +40,40 @@ namespace SF3.MPD.Project {
             HasBattleBackground           = original.HasBattleBackground;
             IgnoreSurfaceModel            = original.IgnoreSurfaceModel;
             IsUnknown2InLaterFileAfterGradient = original.IsUnknown2InLaterFileAfterGradient;
+        }
+
+        public static MPD_Settings FromJToken(JToken token) => new MPD_Settings(token);
+        private MPD_Settings(JToken token) {
+            var jObject = (JObject) token;
+
+            HasSurfaceModel                           = (bool) jObject["HasSurfaceModel"];
+            ForceLowMemoryModels                      = (bool) jObject["ForceLowMemoryModels"];
+            NarrowAngleBasedLightmap                  = (bool) jObject["NarrowAngleBasedLightmap"];
+            SetMSBForGroundPalette                    = (bool) jObject["SetMSBForGroundPalette"];
+            HasSurfaceTextureRotation                 = (bool) jObject["HasSurfaceTextureRotation"];
+            AddDotProductBasedNoiseToStandardLightmap = (bool) jObject["AddDotProductBasedNoiseToStandardLightmap"];
+            KeepTexturelessFlatTiles                  = (bool) jObject["KeepTexturelessFlatTiles"];
+            UnknownHeaderFlag                         = (bool) jObject["UnknownHeaderFlag"];
+            ModelsYRotation                           = (float) jObject["ModelsYRotation"];
+            ModelsViewDistance                        = (ushort) jObject["ModelsViewDistance"];
+            ModelsViewAngleMin                        = (float) jObject["ModelsViewAngleMin"];
+            ModelsViewAngleMax                        = (float) jObject["ModelsViewAngleMax"];
+            UnknownHeaderSetting                      = (short) jObject["UnknownHeaderSetting"];
+            LightPaletteAdjustment                    = ColorAdjustRGB555.FromJToken(jObject["LightPaletteAdjustment"]);
+            GroundPaletteAdjustment                   = ColorAdjustRGB555.FromJToken(jObject["GroundPaletteAdjustment"]);
+            ShadowTransparency                        = (byte) jObject["ShadowTransparency"];
+            AreGroundAnimationsDummiedOut             = (bool) jObject["AreGroundAnimationsDummiedOut"];
+            IsGradientDummiedOut                      = (bool) jObject["IsGradientDummiedOut"];
+            IsUnknown2TableDummiedOut                 = (bool) jObject["IsUnknown2TableDummiedOut"];
+            AreIgnoredTexturesDummiedOut              = (bool) jObject["AreIgnoredTexturesDummiedOut"];
+            IgnoreGroundImage                         = (bool) jObject["IgnoreGroundImage"];
+            IgnoreGroundTiledImage                    = (bool) jObject["IgnoreGroundTiledImage"];
+            IgnoreSkyImage                            = (bool) jObject["IgnoreSkyImage"];
+            IgnoreBackgroundImage                     = (bool) jObject["IgnoreBackgroundImage"];
+            IgnoreForegroundTiledImage                = (bool) jObject["IgnoreForegroundTiledImage"];
+            HasBattleBackground                       = (bool) jObject["HasBattleBackground"];
+            IgnoreSurfaceModel                        = (bool) jObject["IgnoreSurfaceModel"];
+            IsUnknown2InLaterFileAfterGradient        = (bool) jObject["IsUnknown2InLaterFileAfterGradient"];
         }
 
         public bool HasSurfaceModel { get; set; }

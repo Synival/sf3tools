@@ -91,7 +91,7 @@ namespace SF3.MPD.Project {
         public bool AssignFromJToken(JToken jToken) => AssignFromJObject((JObject) jToken);
         public bool AssignFromJObject(JObject jObject) {
             if (jObject.TryGetValue("Settings", out var settingsJToken))
-                Settings = null; // MPD_Settings.FromJToken(settingsJToken);
+                Settings = MPD_Settings.FromJToken(settingsJToken);
             if (jObject.TryGetValue("BinaryReproductionFlags", out var binaryReproductionFlagsToken))
                 BinaryReproductionFlags = MPD_BinaryReproductionFlags.FromJToken(binaryReproductionFlagsToken);
             if (jObject.TryGetValue("Lighting", out var lightingToken))
@@ -99,7 +99,7 @@ namespace SF3.MPD.Project {
             if (jObject.TryGetValue("Surface", out var surfaceToken))
                 Surface = null; // .FromJToken()
             if (jObject.TryGetValue("Planes", out var planesToken))
-                Planes = null; // .FromJToken()
+                Planes = MPD_Planes.FromJToken(planesToken);
 
             ModelCollections = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
             if (jObject.TryGetValue("ModelCollections", out var modelCollectionsToken))

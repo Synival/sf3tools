@@ -1,4 +1,6 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Extensions;
+using CommonLib.Imaging;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -28,7 +30,29 @@ namespace SF3.MPD.Project {
                 GroundPalette = new Palette(original.GroundPalette);
             if (original.SkyPalette != null)
                 SkyPalette = new Palette(original.SkyPalette);
+        }
 
+        public static MPD_Planes FromJToken(JToken token) => new MPD_Planes(token);
+        private MPD_Planes(JToken token) {
+            var jObject = (JObject) token;
+
+            /* TODO:
+                public ITextureData GroundImage { get; }
+                public IMPD_TiledPlane GroundTiledImage { get; }
+                public ITextureData BackgroundImage { get; }
+                public ITextureData SkyImage { get; }
+                public IMPD_TiledPlane ForegroundTiledImage { get; }
+            */
+
+            GroundX         = (short) jObject["GroundX"];
+            GroundY         = (short) jObject["GroundY"];
+            GroundZ         = (short) jObject["GroundZ"];
+            GroundXRotation = (float) jObject["GroundXRotation"];
+            BackgroundX     = (short) jObject["BackgroundX"];
+            BackgroundY     = (short) jObject["BackgroundY"];
+
+            GroundPalette   = jObject.GetValueIfExists("GroundPalette", t => Palette.FromJToken(t));
+            SkyPalette      = jObject.GetValueIfExists("SkyPalette", t => Palette.FromJToken(t));
         }
 
         public ITextureData GroundImage { get; }
