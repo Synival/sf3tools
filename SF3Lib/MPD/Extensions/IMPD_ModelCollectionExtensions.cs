@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
@@ -14,7 +16,20 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_ModelCollection mc) => mc.ToJObject();
         public static JObject ToJObject(this IMPD_ModelCollection mc) {
-            return null;
+            // "Collection" and "HasMissingModels" are not serialized.
+            // "IsUnreferences" is only applicable to main/header models.
+
+            var properties = new List<JProperty>() {
+                new JProperty("Models",             new JArray(0)), // TODO
+                new JProperty("ModelInstances",     new JArray(0)), // TODO
+                new JProperty("Textures",           new JArray(0)), // TODO
+                new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()),
+            };
+
+            if (mc.Collection.IsHeaderModelCollection())
+                properties.Add(new JProperty("IsUnreferenced", mc.IsUnreferenced));
+
+            return new JObject(properties.ToArray());
         }
     }
 }

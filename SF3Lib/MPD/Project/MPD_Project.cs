@@ -90,21 +90,19 @@ namespace SF3.MPD.Project {
         public bool AssignFromJSON_String(string json) => AssignFromJObject(JObject.Parse(json));
         public bool AssignFromJToken(JToken jToken) => AssignFromJObject((JObject) jToken);
         public bool AssignFromJObject(JObject jObject) {
-            if (jObject.TryGetValue("Settings", out var settingsJToken))
-                Settings = MPD_Settings.FromJToken(settingsJToken);
-            if (jObject.TryGetValue("BinaryReproductionFlags", out var binaryReproductionFlagsToken))
-                BinaryReproductionFlags = MPD_BinaryReproductionFlags.FromJToken(binaryReproductionFlagsToken);
-            if (jObject.TryGetValue("Lighting", out var lightingToken))
-                Lighting = MPD_Lighting.FromJToken(lightingToken);
-            if (jObject.TryGetValue("Surface", out var surfaceToken))
-                Surface = null; // .FromJToken()
-            if (jObject.TryGetValue("Planes", out var planesToken))
-                Planes = MPD_Planes.FromJToken(planesToken);
+            Settings = jObject.GetValueIfExists("Settings", t => MPD_Settings.FromJToken(t));
+            BinaryReproductionFlags = jObject.GetValueIfExists("BinaryReproductionFlags", t => MPD_BinaryReproductionFlags.FromJToken(t));
+            Lighting = jObject.GetValueIfExists("Lighting", t => MPD_Lighting.FromJToken(t));
+            Surface  = jObject.GetValueIfExists("Surface",  t => MPD_Surface.FromJToken(Settings, t));
+            Planes   = jObject.GetValueIfExists("Planes",   t => MPD_Planes.FromJToken(t));
 
             ModelCollections = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
-            if (jObject.TryGetValue("ModelCollections", out var modelCollectionsToken))
-                foreach (var modelCollectionJObj in ((JObject) modelCollectionsToken).Properties())
-                    ModelCollections.Add((MPD_CollectionType) Enum.Parse(typeof(MPD_CollectionType), modelCollectionJObj.Name), null); // .FromJToken()
+            if (jObject.TryGetValue("ModelCollections", out var modelCollectionsToken)) {
+                foreach (var modelCollectionJObj in ((JObject) modelCollectionsToken).Properties()) {
+                    var collectionType = (MPD_CollectionType) Enum.Parse(typeof(MPD_CollectionType), modelCollectionJObj.Name);
+                    ModelCollections.Add(collectionType, MPD_ModelCollection.FromJToken(modelCollectionJObj.Value, collectionType));
+                }
+            }
 
             if (jObject.TryGetValue("ModelSwitchGroups", out var modelSwitchGroupsToken))
                 ModelSwitchGroups = null; // .FromJToken()
@@ -126,8 +124,7 @@ namespace SF3.MPD.Project {
             if (jObject.TryGetValue("Gradient", out var gradientToken))
                 Gradient = null; // .FromJToken()
 
-            if (jObject.TryGetValue("TexturePalette", out var texturePaletteToken))
-                TexturePalette = null; // .FromJToken()
+            TexturePalette = jObject.GetValueIfExists("TexturePalette", t => Palette.FromJToken(t));
 
             return true;
         }

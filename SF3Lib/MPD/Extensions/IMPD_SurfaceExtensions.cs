@@ -9,7 +9,8 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_Surface surface) => surface.ToJObject();
         public static JObject ToJObject(this IMPD_Surface surface) {
-            return null;
+            // TODO: do the thing!
+            return new JObject();
         }
     }
 }

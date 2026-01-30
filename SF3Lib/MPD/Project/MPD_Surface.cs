@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib.Extensions;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -39,6 +40,24 @@ namespace SF3.MPD.Project {
             Width  = tiles.GetLength(0);
             Height = tiles.GetLength(0);
             _hasModelGetter = hasModelGetter ?? (() => true);
+        }
+
+        public static MPD_Surface FromJToken(IMPD_Settings settings, JToken token) => new MPD_Surface(settings, token);
+        private MPD_Surface(IMPD_Settings settings, JToken token) {
+            _settings = settings;
+
+            var jObject = (JObject) token;
+
+            // TODO: actually do the thing!!
+            Width  = 64;
+            Height = 64;
+
+            _tiles = new IMPD_Tile[Width, Height];
+            for (int y = 0; y < Width; y++)
+                for (int x = 0; x < Height; x++)
+                    _tiles[x, y] = new MPD_Tile(this, x, y);
+
+           _hasModelGetter = () => _settings.HasSurfaceModel;
         }
 
         public IMPD_Tile GetTile(int x, int y) => _tiles[x, y];
