@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using static CommonLib.Imaging.PixelConversion;
 
 namespace CommonLib.Imaging {
@@ -75,6 +77,13 @@ namespace CommonLib.Imaging {
             return GetHighestScoringIndex(ignoreColorZero, color => {
                 return -(Math.Abs(matchToColor.R - color.R) + Math.Abs(matchToColor.G - color.G) + Math.Abs(matchToColor.B - color.B));
             });
+        }
+
+        public string ToJSON_String()
+            => ToJToken().ToString(Formatting.Indented);
+
+        public JToken ToJToken() {
+            return null;
         }
     }
 }
