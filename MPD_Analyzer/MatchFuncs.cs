@@ -46,7 +46,7 @@ namespace MPD_Analyzer {
             return nonMatchingTextures.Select(x => $"Tex0x{x.ID:X2}: Expected '{texturesById[x.ID].Hash}' to be in animation").ToArray();
         }
 
-        public static string[]? GetModelsWithDuplicateInternalTextures(Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_Model> modelsById) {
+        public static string[]? GetModelsWithDuplicateInternalTextures(Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_ModelLoD> modelsById) {
             var allModelsWithDuplicateTexturesInternally = modelsById
                 .ToDictionary(x => x.Value, x => x.Value.Faces
                     .Select((x, i) => (Face: x, FaceIndex: i))
@@ -71,7 +71,7 @@ namespace MPD_Analyzer {
                 )).ToArray();
         }
 
-        public static string[]? GetTexturesSharedBetweenModels(Dictionary<int, IMPD_Model> modelsById) {
+        public static string[]? GetTexturesSharedBetweenModels(Dictionary<int, IMPD_ModelLoD> modelsById) {
             var texturesUsedByModel = modelsById.Values
                 .ToDictionary(x => x.ModelID, x => x.Faces
                     .Where(x => x.Attributes.UseTexture)
@@ -95,7 +95,7 @@ namespace MPD_Analyzer {
             if (!mpdFile.Surface.HasModel)
                 return null;
             var surfaceMapTextures = mpdFile.Surface.GetAllTiles().Select(x => (int) x.TextureID).Distinct().Where(x => x != 0xFF).ToHashSet();
-            var modelTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].ModelsWithLoD.SelectMany(x => x.Models).SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
+            var modelTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.SelectMany(x => x.ModelLoDs).SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
 
             var texturesInBoth = surfaceMapTextures.Where(modelTextures.Contains).Select(x => texturesById[x]).ToArray();
             if (texturesInBoth.Length == 0)
@@ -138,7 +138,7 @@ namespace MPD_Analyzer {
                 .Select(x => $"Tex0x{x.Key:X2} ({texturesById[x.Key].Hash}): " + string.Join(", ", x.Value.Select(y => $"({y.X},{y.Y})"))).ToArray();
         }
 
-        public static string[]? GetAllUnusedTextures(MPD_File mpdFile, string filename, Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_Model> modelsById) {
+        public static string[]? GetAllUnusedTextures(MPD_File mpdFile, string filename, Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_ModelLoD> modelsById) {
             var textureIdsFromModels = modelsById.Values
                 .SelectMany(x => x.Faces.Where(y => y.Attributes.UseTexture).Select(y => (int) y.Attributes.TextureNo))
                 .Distinct()
@@ -189,7 +189,7 @@ namespace MPD_Analyzer {
             return []; //unusedTextures.Select(x => $"Tex0x{x.ID:X2} ({x.Hash})").ToArray();
         }
 
-        public static string[]? GetAllMissingTextures(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_Model> modelsById) {
+        public static string[]? GetAllMissingTextures(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_ModelLoD> modelsById) {
             var lastTexture = texturesById.Max(x => x.Key);
 
             var missingTextureIdsFromModels = modelsById.Values
@@ -344,7 +344,7 @@ namespace MPD_Analyzer {
                 : [];
         }
 
-        public static string[]? GetExpectedIgnoredTextureTable(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_Model> modelsById) {
+        public static string[]? GetExpectedIgnoredTextureTable(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_ModelLoD> modelsById) {
             if (mpdFile.IgnoredTextureTable == null || mpdFile.AnimationFrameChunk?.UniqueAnimationFrameTable == null || mpdFile.Animations == null)
                 return null;
 

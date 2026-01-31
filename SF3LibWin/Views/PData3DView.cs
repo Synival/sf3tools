@@ -16,7 +16,7 @@ namespace SF3.Win.Views {
         }
 
         private IMPD_ModelCollection _models = null;
-        private IMPD_Model _mpdModel = null;
+        private IMPD_ModelLoD _mpdModel = null;
 
         public override Control Create() {
             var rval = base.Create();

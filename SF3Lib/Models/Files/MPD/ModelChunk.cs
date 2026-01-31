@@ -289,30 +289,30 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public IMPD_Model GetModel(int id, int lod)
+        public IMPD_ModelLoD GetModel(int id, int lod)
             => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ModelID == id && x.LevelOfDetail == lod);
 
-        private class ModelWithLoD : IMPD_ModelWithLoD {
-            public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_Model[] models) {
+        private class ModelWithLoD : IMPD_Model {
+            public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_ModelLoD[] models) {
                 Collection = collection;
                 ModelID    = modelID;
-                Models     = models.ToEnumerableWithLength();
-                LevelsOfDetail = Models.Max(x => x.LevelOfDetail) + 1;
+                ModelLoDs     = models.ToEnumerableWithLength();
+                LevelsOfDetail = ModelLoDs.Max(x => x.LevelOfDetail) + 1;
             }
 
             public MPD_CollectionType Collection { get; }
             public int ModelID { get; }
             public int LevelsOfDetail { get; }
-            public IIndexedEnumerableWithLength<IMPD_Model> Models { get; }
+            public IIndexedEnumerableWithLength<IMPD_ModelLoD> ModelLoDs { get; }
         }
 
-        private IEnumerableWithLength<IMPD_ModelWithLoD> _mpdModelsWithLoD;
-        public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD {
+        private IEnumerableWithLength<IMPD_Model> _mpdModelsWithLoD;
+        public IEnumerableWithLength<IMPD_Model> Models {
             get {
                 if (_mpdModelsWithLoD == null) {
                     _mpdModelsWithLoD = PDataTable
                         .GroupBy(x => x.ModelID)
-                        .Select(x => (IMPD_ModelWithLoD) new ModelWithLoD(Collection, x.Key, x.ToArray()))
+                        .Select(x => (IMPD_Model) new ModelWithLoD(Collection, x.Key, x.ToArray()))
                         .ToArray()
                         .ToEnumerableWithLength();
                 }

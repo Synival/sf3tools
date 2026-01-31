@@ -13,8 +13,8 @@ namespace SF3.MPD.Project {
             Collection = original.Collection;
             IsUnreferenced = original.IsUnreferenced;
 
-            if (original.ModelsWithLoD != null)
-                ModelsWithLoD = new MPD_ModelCollectionModelsWithLoD(original.ModelsWithLoD);
+            if (original.Models != null)
+                Models = new MPD_ModelCollectionModels(original.Models);
             if (original.ModelInstances != null)
                 ModelInstances = new MPD_ModelCollectionModelInstances(original.ModelInstances);
             if (original.Textures != null)
@@ -39,20 +39,20 @@ namespace SF3.MPD.Project {
                 IsUnreferenced = (bool) jObject["IsUnreferenced"];
         }
 
-        public IMPD_Model GetModel(int id, int lod) {
-            var model = ModelsWithLoD.FirstOrDefault(x => x.ModelID == id);
+        public IMPD_ModelLoD GetModel(int id, int lod) {
+            var model = Models.FirstOrDefault(x => x.ModelID == id);
             if (model == null || lod < 0 || lod >= model.LevelsOfDetail)
                 return null;
-            return model.Models[lod];
+            return model.ModelLoDs[lod];
         }
 
         public MPD_CollectionType Collection { get; }
         public bool IsUnreferenced { get; set; }
-        public bool HasMissingModels => ModelsWithLoD == null;
+        public bool HasMissingModels => Models == null;
 
         public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
         public IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
         public IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
-        public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD { get; }
+        public IEnumerableWithLength<IMPD_Model> Models { get; }
     }
 }

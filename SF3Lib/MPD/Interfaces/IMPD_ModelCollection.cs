@@ -15,13 +15,13 @@ namespace SF3.MPD.Interfaces {
         /// <param name="id">ID of the model to fetch.</param>
         /// <param name="lod">Level-of-detail index.</param>
         /// <returns>A model in a structure compatible with SGL.</returns>
-        IMPD_Model GetModel(int id, int lod);
+        IMPD_ModelLoD GetModel(int id, int lod);
 
         /// <summary>
         /// All models that belong to this collection.
         /// </summary>
         /// <returns>Several models in a structure compatible with SGL.</returns>
-        IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD { get; }
+        IEnumerableWithLength<IMPD_Model> Models { get; }
 
         /// <summary>
         /// All instances of models that belong to this collection.

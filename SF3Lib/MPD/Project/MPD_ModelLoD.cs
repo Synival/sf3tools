@@ -9,7 +9,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_ModelLoD : IMPD_Model {
+    public class MPD_ModelLoD : IMPD_ModelLoD {
         public MPD_ModelLoD(ISGL_Model model, MPD_CollectionType collection, int modelId, int lod) {
             _actualModel  = model;
 

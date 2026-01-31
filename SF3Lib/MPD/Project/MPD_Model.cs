@@ -7,21 +7,21 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_ModelWithLoD : IMPD_ModelWithLoD {
-        public MPD_ModelWithLoD(MPD_CollectionType collection, int modelID, int levelsOfDetail, ISGL_Model actualModel) {
+    public class MPD_Model : IMPD_Model {
+        public MPD_Model(MPD_CollectionType collection, int modelID, int levelsOfDetail, ISGL_Model actualModel) {
             Collection     = collection;
             ModelID        = modelID;
             LevelsOfDetail = levelsOfDetail;
             _actualModel   = new SGL_Model(actualModel);
-            Models         = new ModelRetriever(this);
+            ModelLoDs         = new ModelRetriever(this);
         }
 
-        public MPD_ModelWithLoD(IMPD_ModelWithLoD original) {
+        public MPD_Model(IMPD_Model original) {
             Collection     = original.Collection;
             ModelID        = original.ModelID;
             LevelsOfDetail = original.LevelsOfDetail;
-            _actualModel   = new SGL_Model(original.Models[0]);
-            Models         = new ModelRetriever(this);
+            _actualModel   = new SGL_Model(original.ModelLoDs[0]);
+            ModelLoDs         = new ModelRetriever(this);
         }
 
         public MPD_CollectionType Collection { get; }
@@ -31,12 +31,12 @@ namespace SF3.MPD.Project {
 
         private SGL_Model _actualModel { get; }
 
-        private class ModelRetriever : IIndexedEnumerableWithLength<IMPD_Model> {
-            public ModelRetriever(MPD_ModelWithLoD modelWithLoD) {
+        private class ModelRetriever : IIndexedEnumerableWithLength<IMPD_ModelLoD> {
+            public ModelRetriever(MPD_Model modelWithLoD) {
                 ModelWithLoD = modelWithLoD;
             }
 
-            public IMPD_Model this[int index] {
+            public IMPD_ModelLoD this[int index] {
                 get {
                     if (index < 0 || index >= Length)
                         throw new ArgumentOutOfRangeException(nameof(index));
@@ -48,9 +48,9 @@ namespace SF3.MPD.Project {
 
             public int Length => ModelWithLoD.LevelsOfDetail;
 
-            public IMPD_Model[] AsArray() => throw new System.NotImplementedException();
+            public IMPD_ModelLoD[] AsArray() => throw new System.NotImplementedException();
 
-            public IEnumerator<IMPD_Model> GetEnumerator() {
+            public IEnumerator<IMPD_ModelLoD> GetEnumerator() {
                 var levelsOfDetail = Length;
                 for (int i = 0; i < levelsOfDetail; i++)
                     yield return this[i];
@@ -58,10 +58,10 @@ namespace SF3.MPD.Project {
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public MPD_ModelWithLoD ModelWithLoD { get; }
-            private Dictionary<int, IMPD_Model> _models = new Dictionary<int, IMPD_Model>();
+            public MPD_Model ModelWithLoD { get; }
+            private Dictionary<int, IMPD_ModelLoD> _models = new Dictionary<int, IMPD_ModelLoD>();
         }
 
-        public IIndexedEnumerableWithLength<IMPD_Model> Models { get; }
+        public IIndexedEnumerableWithLength<IMPD_ModelLoD> ModelLoDs { get; }
     }
 }

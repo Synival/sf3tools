@@ -14,11 +14,11 @@ namespace SF3.Models.Files.MPD {
 
         public MPD_CollectionType Collection { get; }
 
-        public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD => new IMPD_ModelWithLoD[0].ToEnumerableWithLength();
+        public IEnumerableWithLength<IMPD_Model> Models => new IMPD_Model[0].ToEnumerableWithLength();
 
         public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0].ToEnumerableWithLength();
 
-        public IMPD_Model GetModel(int id, int lod) => null;
+        public IMPD_ModelLoD GetModel(int id, int lod) => null;
 
         private bool _gotTextures = false;
         private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;

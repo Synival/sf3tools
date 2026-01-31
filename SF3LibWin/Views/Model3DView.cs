@@ -59,7 +59,7 @@ namespace SF3.Win.Views {
             _mpdModel = mc?.GetModel(pdata.ModelID, pdata.LevelOfDetail);
         }
 
-        private IMPD_Model _mpdModel = null;
+        private IMPD_ModelLoD _mpdModel = null;
 
         private void UpdateViewerControl() {
             if (_modelInstance == null)

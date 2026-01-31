@@ -25,9 +25,9 @@ namespace SF3.MPD.Writer {
 
             var modelsChunkIndex = mpd.BinaryReproductionFlags.MisplacedModelsChunkIndex ?? mpd.Flags.GetModelsChunkIndex(Scenario);
             if (primaryMc != null && modelsChunkIndex == 1)
-                WriteModelChunk(primaryMc.ModelsWithLoD, primaryMc.ModelInstances, mpd.Collisions, modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
+                WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
             else if (extraMc != null && hasScenario2ExtraModel)
-                WriteModelChunk(extraMc.ModelsWithLoD, extraMc.ModelInstances, null, isHighMemory: false, extraMc.DataAfterInstances);
+                WriteModelChunk(extraMc.Models, extraMc.ModelInstances, null, isHighMemory: false, extraMc.DataAfterInstances);
             else
                 WriteEmptyChunk();
 
@@ -82,7 +82,7 @@ namespace SF3.MPD.Writer {
             // In Scenario 1, Chunk[19] is the Titan model used in Z_AS.MPD.
             if (hasScenario1ExtraModel) {
                 if (mpd.ModelCollections.TryGetValue(MPD_CollectionType.ExtraModels, out var extraModels))
-                    WriteModelChunk(extraModels.ModelsWithLoD, extraModels.ModelInstances, null, isHighMemory: true, extraModels.DataAfterInstances);
+                    WriteModelChunk(extraModels.Models, extraModels.ModelInstances, null, isHighMemory: true, extraModels.DataAfterInstances);
                 else
                     WriteEmptyChunk();
             }
@@ -90,7 +90,7 @@ namespace SF3.MPD.Writer {
             // Scenario 2+ has two more chunks.
             if (Scenario >= ScenarioType.Scenario2) {
                 if (primaryMc != null && modelsChunkIndex == 20)
-                    WriteModelChunk(primaryMc.ModelsWithLoD, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
+                    WriteModelChunk(primaryMc.Models, primaryMc.ModelInstances, mpd.Collisions, isHighMemory: modelsMemoryLocation == MemoryLocationType.HighMemory, primaryMc.DataAfterInstances);
                 else if (mpd.Surface.HasModel && surfaceModelChunkIndex == 20)
                     WriteSurfaceModelChunk(mpd.Surface);
                 else

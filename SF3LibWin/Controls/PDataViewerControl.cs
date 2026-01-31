@@ -169,10 +169,10 @@ namespace SF3.Win.Controls {
         public IMPD MPD_File { get; private set; } = null;
         public IMPD_ModelCollection Models { get; private set; } = null;
 
-        private IMPD_Model _mpdModel = null;
+        private IMPD_ModelLoD _mpdModel = null;
 
         public void Update(
-            IMPD mpdFile, IMPD_Model mpdModel,
+            IMPD mpdFile, IMPD_ModelLoD mpdModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {

@@ -11,7 +11,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class PDataStruct : Struct, IMPD_Model {
+    public class PDataStruct : Struct, IMPD_ModelLoD {
         public readonly int _verticesOffsetAddr;
         public readonly int _vertexCountAddr;
         public readonly int _polygonsOffsetAddr;
