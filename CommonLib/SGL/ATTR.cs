@@ -1,5 +1,7 @@
-﻿using CommonLib.Imaging;
+﻿using System;
+using CommonLib.Imaging;
 using CommonLib.Types;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public class ATTR : IATTR {
@@ -13,6 +15,19 @@ namespace CommonLib.SGL {
             ColorNo             = attr.ColorNo;
             GouraudShadingTable = attr.GouraudShadingTable;
             Dir                 = attr.Dir;
+        }
+
+        public static ATTR FromJToken(JToken token) => new ATTR(token);
+        private ATTR(JToken token) {
+            var jObject = (JObject) token;
+
+            Plane          = (byte) jObject["Plane"];
+            SortAndOptions = (byte) jObject["SortAndOptions"];
+            TextureNo      = (ushort) jObject["TextureNo"];
+            Mode           = (ushort) jObject["Mode"];
+            ColorNo        = (ushort) jObject["ColorNo"];
+            GouraudShadingTable = (ushort) jObject["GouraudShadingTable"];
+            Dir            = (ushort) jObject["Dir"];
         }
 
         public byte Plane { get; set; }

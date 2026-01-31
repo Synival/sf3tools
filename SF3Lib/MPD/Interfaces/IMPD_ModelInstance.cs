@@ -23,7 +23,8 @@ namespace SF3.MPD.Interfaces {
         ModelDirectionType OnlyVisibleFromDirection { get; set; }
 
         /// <summary>
-        /// Number of levels of detail. 99.9% of the time, this is 8. Mostly under-utilized.
+        /// Number of levels of detail. This is always 8 except for, like, 3 times, and they're dumb.
+        /// Mostly under-utilized.
         /// </summary>
         int LevelsOfDetail { get; set; }
     }

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using CommonLib.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public class SGL_ModelFace : ISGL_ModelFace {
@@ -27,6 +30,18 @@ namespace CommonLib.SGL {
             VertexIndices = vertexIndices.ToEnumerableWithLength();
             Normal        = normal;
             Attributes    = attributes;
+        }
+
+        public static SGL_ModelFace FromJToken(JToken token) => new SGL_ModelFace(token);
+        private SGL_ModelFace(JToken token) {
+            var jObject = (JObject) token;
+
+            VertexIndices = jObject.GetValueIfExists("VertexIndices", t => ((JArray) t).Select(x => (int) x).ToArray().ToEnumerableWithLength());
+            if (VertexIndices == null || VertexIndices.Length != 4)
+                throw new JsonSerializationException("VertexIndices must exist and have exactly 4 integers");
+
+            Normal     = VECTOR.FromJToken(jObject["Normal"]);
+            Attributes = ATTR.FromJToken(jObject["Attributes"]);
         }
 
         public IIndexedEnumerableWithLength<int> VertexIndices { get; }

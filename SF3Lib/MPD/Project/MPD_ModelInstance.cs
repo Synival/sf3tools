@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -27,8 +26,29 @@ namespace SF3.MPD.Project {
             LevelsOfDetail = original.LevelsOfDetail;
         }
 
-        public static MPD_ModelInstance FromJToken(JToken token) => new MPD_ModelInstance(token);
-        private MPD_ModelInstance(JToken token) {
+        public static MPD_ModelInstance FromJToken(JToken token, MPD_CollectionType collection) => new MPD_ModelInstance(token, collection);
+        private MPD_ModelInstance(JToken token, MPD_CollectionType collection) {
+            Collection = collection;
+
+            var jObject = (JObject) token;
+
+            ID        =    (int) jObject["ID"];
+            ModelID   =    (int) jObject["ModelID"];
+            PositionX =  (short) jObject["PositionX"];
+            PositionY =  (short) jObject["PositionY"];
+            PositionZ =  (short) jObject["PositionZ"];
+            AngleX    =  (float) jObject["AngleX"];
+            AngleY    =  (float) jObject["AngleY"];
+            AngleZ    =  (float) jObject["AngleZ"];
+            ScaleX    =  (float) jObject["ScaleX"];
+            ScaleY    =  (float) jObject["ScaleY"];
+            ScaleZ    =  (float) jObject["ScaleZ"];
+
+            if (Collection == MPD_CollectionType.Primary) {
+                Tag   = (ushort) jObject["Tag"];
+                Flags = (ushort) jObject["Flags"];
+                LevelsOfDetail = (int) jObject["LevelsOfDetail"];
+            }
         }
 
         public MPD_CollectionType Collection { get; set; }

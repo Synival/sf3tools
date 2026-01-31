@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public class SGL_Model : ISGL_Model {
@@ -25,6 +26,13 @@ namespace CommonLib.SGL {
 
             Vertices = vertices.ToArray().ToEnumerableWithLength();
             Faces    = faces.ToArray().ToEnumerableWithLength();
+        }
+
+        public SGL_Model(JToken token) {
+            var jObject = (JObject) token;
+
+            Vertices = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray().ToEnumerableWithLength());
+            Faces    = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray().ToEnumerableWithLength());
         }
 
         public IIndexedEnumerableWithLength<VECTOR> Vertices { get; }

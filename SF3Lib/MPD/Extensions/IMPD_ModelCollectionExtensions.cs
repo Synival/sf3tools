@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
-using CommonLib.Imaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Extensions;

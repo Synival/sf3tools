@@ -1,5 +1,4 @@
-﻿using System;
-using CommonLib.SGL;
+﻿using CommonLib.SGL;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -12,8 +11,16 @@ namespace SF3.MPD.Project {
             Collection    = original.Collection;
         }
 
-        public static MPD_Model FromJToken(JToken token) => new MPD_Model(token);
-        private MPD_Model(JToken token) {
+        public static MPD_Model FromJToken(JToken token, MPD_CollectionType collection) => new MPD_Model(token, collection);
+        private MPD_Model(JToken token, MPD_CollectionType collection)
+        : base(token) {
+            Collection = collection;
+
+            var jObject = (JObject) token;
+
+            ModelID = (int) jObject["ID"];
+            if (Collection == MPD_CollectionType.Primary)
+                LevelOfDetail = (int) jObject["LevelOfDetail"];
         }
 
         public int ModelID { get; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public struct VECTOR {
@@ -24,6 +25,14 @@ namespace CommonLib.SGL {
             X = original.X;
             Y = original.Y;
             Z = original.Z;
+        }
+
+        public static VECTOR FromJToken(JToken token) => new VECTOR(token);
+        private VECTOR(JToken token) {
+            var jObject = (JObject) token;
+            X = new FIXED((float) jObject["X"], 0);
+            Y = new FIXED((float) jObject["Y"], 0);
+            Z = new FIXED((float) jObject["Z"], 0);
         }
 
         public FIXED X;
@@ -86,6 +95,14 @@ namespace CommonLib.SGL {
         public VECTOR Normalized() {
             var length = GetLength();
             return (length == 0) ? this : this / length;
+        }
+
+        public JObject ToJObject() {
+            return new JObject {
+                { "X", X.Float },
+                { "Y", Y.Float },
+                { "Z", Z.Float },
+            };
         }
     }
 }
