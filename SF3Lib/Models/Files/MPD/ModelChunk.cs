@@ -7,7 +7,6 @@ using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
 using SF3.Types;
-using SF3.Extensions;
 using SF3.Imaging;
 using CommonLib;
 using CommonLib.Extensions;
@@ -304,6 +303,34 @@ namespace SF3.Models.Files.MPD {
                         .ToEnumerableWithLength();
                 }
                 return _mpdModels;
+            }
+        }
+
+        private class ModelWithLoD : IMPD_ModelWithLoD {
+            public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_Model[] models) {
+                Collection = collection;
+                ModelID    = modelID;
+                Models     = models.ToEnumerableWithLength();
+                LevelsOfDetail = Models.Max(x => x.LevelOfDetail) + 1;
+            }
+
+            public MPD_CollectionType Collection { get; }
+            public int ModelID { get; }
+            public int LevelsOfDetail { get; }
+            public IIndexedEnumerableWithLength<IMPD_Model> Models { get; }
+        }
+
+        private IEnumerableWithLength<IMPD_ModelWithLoD> _mpdModelsWithLoD;
+        public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD {
+            get {
+                if (_mpdModelsWithLoD == null) {
+                    _mpdModelsWithLoD = Models
+                        .GroupBy(x => x.ModelID)
+                        .Select(x => (IMPD_ModelWithLoD) new ModelWithLoD(Collection, x.Key, x.ToArray()))
+                        .ToArray()
+                        .ToEnumerableWithLength();
+                }
+                return _mpdModelsWithLoD;
             }
         }
 
