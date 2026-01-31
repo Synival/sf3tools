@@ -21,9 +21,9 @@ namespace SF3.MPD.Extensions {
             // "IsUnreferences" is only applicable to main/header models.
 
             var properties = new List<JProperty>() {
-                new JProperty("Models",             new JArray(0)), // TODO
-                new JProperty("ModelInstances",     new JArray(0)), // TODO
-                new JProperty("Textures",           new JArray(0)), // TODO
+                new JProperty("Models",             mc.Models?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
+                new JProperty("ModelInstances",     mc.ModelInstances?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
+                new JProperty("Textures",           mc.Textures?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()?.ToJArray()),
             };
 
