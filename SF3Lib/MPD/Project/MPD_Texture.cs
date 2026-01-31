@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Imaging;
+using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;
 
@@ -16,6 +17,18 @@ namespace SF3.MPD.Project {
                     .Select(x => new KeyValuePair<TagKey, TagValue>(new TagKey(x.Key), new TagValue(x.Value)))
                     .ToDictionary(x => x.Key, x => x.Value);
             }
+        }
+
+        protected MPD_Texture(JObject jObject, MPD_CollectionType collection, Palette palette)
+        : base(jObject, zeroIsTransparent: true, palette, canSetImage: true) {
+            ID         = (int) jObject["ID"];
+            Collection = collection;
+
+            // 'IsIgnored' is only serialized for the primary collection.
+            if (collection == MPD_CollectionType.Primary)
+                IsIgnored  = (bool) jObject["IsIgnored"];
+
+            // Tags are not serialized.
         }
 
         public int ID { get; }

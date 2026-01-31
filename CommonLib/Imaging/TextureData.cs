@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonLib.Extensions;
 using CommonLib.Types;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.Imaging {
     public class TextureData : TextureDataBase, ITextureData {
@@ -51,6 +52,23 @@ namespace CommonLib.Imaging {
             _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
+        }
+
+        protected TextureData(JObject jObject, bool zeroIsTransparent, Palette palette, bool canSetImage) {
+            _width             = (int) jObject["Width"];
+            _height            = (int) jObject["Height"];
+            _pixelFormat       = (TexturePixelFormat) Enum.Parse(typeof(TexturePixelFormat), (string) jObject["PixelFormat"]);
+            _palette           = palette;
+            _zeroIsTransparent = zeroIsTransparent;
+            CanSetImage        = canSetImage;
+
+            var imageDataBase64 = (string) jObject["ImageData"];
+            if (_pixelFormat == TexturePixelFormat.ABGR1555)
+                _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(_width, _height));
+            else {
+                _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(_width, _height));
+                _palette = Palette;
+            }
         }
 
         public void LoadImageData() {

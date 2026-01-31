@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
@@ -24,16 +23,16 @@ namespace SF3.MPD.Project {
                 DataAfterInstances = ((byte[]) (original.DataAfterInstances.AsArray().Clone())).ToEnumerableWithLength();
         }
 
-        public static IMPD_ModelCollection FromJToken(JToken token, MPD_CollectionType collection)
-            => new MPD_ModelCollection(token, collection);
-        public MPD_ModelCollection(JToken token, MPD_CollectionType collection) {
+        public static IMPD_ModelCollection FromJToken(JToken token, MPD_CollectionType collection, Palette indexedTexturePalette)
+            => new MPD_ModelCollection(token, collection, indexedTexturePalette);
+        public MPD_ModelCollection(JToken token, MPD_CollectionType collection, Palette indexedTexturePalette) {
             Collection = collection;
 
             var jObject = (JObject) token;
 
-            Models             = jObject.GetValueIfExists("Models",             t => new IMPD_Model[0].ToEnumerableWithLength());
-            ModelInstances     = jObject.GetValueIfExists("ModelInstances",     t => new IMPD_ModelInstance[0].ToEnumerableWithLength());
-            Textures           = jObject.GetValueIfExists("Textures",           t => new IMPD_AnimatableTexture[0].ToEnumerableWithLength());
+            Models             = jObject.GetValueIfExists("Models",             t => t.Select(x => (IMPD_Model) MPD_Model.FromJToken(x)).ToArray().ToEnumerableWithLength());
+            ModelInstances     = jObject.GetValueIfExists("ModelInstances",     t => t.Select(x => (IMPD_ModelInstance) MPD_ModelInstance.FromJToken(x)).ToArray().ToEnumerableWithLength());
+            Textures           = jObject.GetValueIfExists("Textures",           t => t.Select(x => (IMPD_AnimatableTexture) MPD_AnimatableTexture.FromJToken(x, collection, indexedTexturePalette)).ToArray().ToEnumerableWithLength());
             DataAfterInstances = jObject.GetValueIfExists("DataAfterInstances", t => t.Select(x => (byte) x).ToArray().ToEnumerableWithLength());
 
             if (Collection.IsHeaderModelCollection())

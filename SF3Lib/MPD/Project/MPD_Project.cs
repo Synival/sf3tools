@@ -96,11 +96,13 @@ namespace SF3.MPD.Project {
             Surface  = jObject.GetValueIfExists("Surface",  t => MPD_Surface.FromJToken(Settings, t));
             Planes   = jObject.GetValueIfExists("Planes",   t => MPD_Planes.FromJToken(t));
 
+            TexturePalette = jObject.GetValueIfExists("TexturePalette", t => Palette.FromJToken(t));
+
             ModelCollections = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
             if (jObject.TryGetValue("ModelCollections", out var modelCollectionsToken)) {
                 foreach (var modelCollectionJObj in ((JObject) modelCollectionsToken).Properties()) {
                     var collectionType = (MPD_CollectionType) Enum.Parse(typeof(MPD_CollectionType), modelCollectionJObj.Name);
-                    ModelCollections.Add(collectionType, MPD_ModelCollection.FromJToken(modelCollectionJObj.Value, collectionType));
+                    ModelCollections.Add(collectionType, MPD_ModelCollection.FromJToken(modelCollectionJObj.Value, collectionType, TexturePalette));
                 }
             }
 
@@ -122,8 +124,6 @@ namespace SF3.MPD.Project {
                 Collisions = null; // .FromJToken()
             if (jObject.TryGetValue("Gradient", out var gradientToken))
                 Gradient = null; // .FromJToken()
-
-            TexturePalette = jObject.GetValueIfExists("TexturePalette", t => Palette.FromJToken(t));
 
             return true;
         }

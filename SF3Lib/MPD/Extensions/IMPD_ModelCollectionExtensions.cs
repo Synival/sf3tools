@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Extensions;
@@ -19,7 +20,6 @@ namespace SF3.MPD.Extensions {
         public static JObject ToJObject(this IMPD_ModelCollection mc) {
             // "Collection" and "HasMissingModels" are not serialized.
             // "IsUnreferences" is only applicable to main/header models.
-
             var properties = new List<JProperty>() {
                 new JProperty("Models",             mc.Models?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("ModelInstances",     mc.ModelInstances?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),

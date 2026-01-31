@@ -1,4 +1,6 @@
-﻿using SF3.MPD.Interfaces;
+﻿using System;
+using Newtonsoft.Json.Linq;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
@@ -23,6 +25,10 @@ namespace SF3.MPD.Project {
             Tag       = original.Tag;
             Flags     = original.Flags;
             LevelsOfDetail = original.LevelsOfDetail;
+        }
+
+        public static MPD_ModelInstance FromJToken(JToken token) => new MPD_ModelInstance(token);
+        private MPD_ModelInstance(JToken token) {
         }
 
         public MPD_CollectionType Collection { get; set; }
