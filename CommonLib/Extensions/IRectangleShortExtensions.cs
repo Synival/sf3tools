@@ -10,10 +10,10 @@ namespace CommonLib.Extensions {
         public static JToken ToJToken(this IRectangleShort rect) => rect.ToJObject();
         public static JObject ToJObject(this IRectangleShort rect) {
             return new JObject {
-                { "X1", new JValue(rect.X1) },
-                { "Y1", new JValue(rect.Y1) },
-                { "X2", new JValue(rect.X2) },
-                { "Y2", new JValue(rect.Y2) },
+                { "X1", rect.X1 },
+                { "Y1", rect.Y1 },
+                { "X2", rect.X2 },
+                { "Y2", rect.Y2 },
             };
         }
     }

@@ -9,7 +9,7 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_Planes plane) => plane.ToJObject();
         public static JObject ToJObject(this IMPD_Planes plane) {
-            return new JObject(
+            return new JObject {
                 /* TODO:
                     ITextureData GroundImage { get; }
                     IMPD_TiledPlane GroundTiledImage { get; }
@@ -18,16 +18,16 @@ namespace SF3.MPD.Extensions {
                     IMPD_TiledPlane ForegroundTiledImage { get; }
                 */
 
-                new JProperty("GroundX",         plane.GroundX),
-                new JProperty("GroundY",         plane.GroundY),
-                new JProperty("GroundZ",         plane.GroundZ),
-                new JProperty("GroundXRotation", plane.GroundXRotation),
-                new JProperty("BackgroundX",     plane.BackgroundX),
-                new JProperty("BackgroundY",     plane.BackgroundY),
+                { "GroundX",         plane.GroundX },
+                { "GroundY",         plane.GroundY },
+                { "GroundZ",         plane.GroundZ },
+                { "GroundXRotation", plane.GroundXRotation },
+                { "BackgroundX",     plane.BackgroundX },
+                { "BackgroundY",     plane.BackgroundY },
 
-                new JProperty("GroundPalette",   plane.GroundPalette?.ToJToken()),
-                new JProperty("SkyPalette",      plane.SkyPalette?.ToJToken())
-            );
+                { "GroundPalette",   plane.GroundPalette?.ToJArray() },
+                { "SkyPalette",      plane.SkyPalette?.ToJArray() },
+            };
         }
     }
 }

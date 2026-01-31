@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using CommonLib.Imaging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.Extensions {
     public static class ArrayExtensions {
@@ -369,5 +371,10 @@ namespace CommonLib.Extensions {
                 output[pos] = PixelConversion.IndexedToABGR1555(imageData[pos], palette, zeroIsTransparent: true);
             return output;
         }
+
+        public static JArray ToJArray<T>(this T[] array)
+            => JArray.FromObject(array);
+        public static JArray ToJArray<T>(this T[] array, JsonSerializer serializer)
+            => JArray.FromObject(array, serializer);
     }
 }

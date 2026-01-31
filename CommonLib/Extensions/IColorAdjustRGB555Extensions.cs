@@ -10,9 +10,9 @@ namespace CommonLib.Extensions {
         public static JToken ToJToken(this IColorAdjustRGB555 color) => ToJObject(color);
         public static JObject ToJObject(this IColorAdjustRGB555 color) {
             return new JObject {
-                { "R", new JValue(color.R) },
-                { "G", new JValue(color.G) },
-                { "B", new JValue(color.B) },
+                { "R", color.R },
+                { "G", color.G },
+                { "B", color.B },
             };
         }
     }

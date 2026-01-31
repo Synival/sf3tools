@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CommonLib.Extensions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
@@ -9,18 +10,17 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_BinaryReproductionFlags flags) => flags.ToJObject();
         public static JObject ToJObject(this IMPD_BinaryReproductionFlags flags) {
-            JToken JTokenIfExists(object obj) => obj != null ? JToken.FromObject(obj) : null;
-            return new JObject(
-                new JProperty("ShortEmptyAnimationTable",                     flags.ShortEmptyAnimationTable),
-                new JProperty("PaletteAdjustmentIsTruncated",                 flags.PaletteAdjustmentIsTruncated),
-                new JProperty("SkyPaletteSharesGroundPalette",                flags.SkyPaletteSharesGroundPalette),
-                new JProperty("TexturePaletteSharesSkyPalette",               flags.TexturePaletteSharesSkyPalette),
-                new JProperty("EmptyUnterminatedIgnoredTexturesTable",        flags.EmptyUnterminatedIgnoredTexturesTable),
-                new JProperty("NonStandardTextureChunkDecompressedSizeLimit", flags.NonStandardTextureChunkDecompressedSizeLimit),
-                new JProperty("MisplacedModelsChunkIndex",                    flags.MisplacedModelsChunkIndex),
-                new JProperty("MisplacedSurfaceModelChunkIndex",              flags.MisplacedSurfaceModelChunkIndex),
-                new JProperty("UnreferencedDataAfterPaletteAdjustmentTable",  JTokenIfExists(flags.UnreferencedDataAfterPaletteAdjustmentTable?.AsArray()))
-            );
+            return new JObject {
+                { "ShortEmptyAnimationTable",                     flags.ShortEmptyAnimationTable },
+                { "PaletteAdjustmentIsTruncated",                 flags.PaletteAdjustmentIsTruncated },
+                { "SkyPaletteSharesGroundPalette",                flags.SkyPaletteSharesGroundPalette },
+                { "TexturePaletteSharesSkyPalette",               flags.TexturePaletteSharesSkyPalette },
+                { "EmptyUnterminatedIgnoredTexturesTable",        flags.EmptyUnterminatedIgnoredTexturesTable },
+                { "NonStandardTextureChunkDecompressedSizeLimit", flags.NonStandardTextureChunkDecompressedSizeLimit },
+                { "MisplacedModelsChunkIndex",                    flags.MisplacedModelsChunkIndex },
+                { "MisplacedSurfaceModelChunkIndex",              flags.MisplacedSurfaceModelChunkIndex },
+                { "UnreferencedDataAfterPaletteAdjustmentTable",  flags.UnreferencedDataAfterPaletteAdjustmentTable?.AsArray()?.ToJArray() },
+            };
         }
     }
 }

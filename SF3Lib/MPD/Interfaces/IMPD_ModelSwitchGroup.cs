@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using CommonLib;
-using Newtonsoft.Json;
+﻿using CommonLib;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>

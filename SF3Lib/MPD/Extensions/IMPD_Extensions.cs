@@ -104,23 +104,22 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD project) => project.ToJObject();
         public static JObject ToJObject(this IMPD project) {
-            JToken JTokenIfExists(object obj) => obj != null ? JToken.FromObject(obj) : null;
             return new JObject {
-                { "Settings",                project.Settings?.ToJToken() ?? JToken.FromObject(null) },
+                { "Settings",                project.Settings?.ToJToken() },
                 { "BinaryReproductionFlags", project.BinaryReproductionFlags?.ToJToken() },
                 { "Surface",                 project.Surface?.ToJToken() },
-                { "ModelCollections",        JTokenIfExists(project.ModelCollections?.ToDictionary(x => x.Key.ToString(), x => x.Value?.ToJToken())) },
+                { "ModelCollections",        project.ModelCollections?.ToDictionary(x => x.Key.ToString(), x => x.Value?.ToJToken())?.ToJObject() },
                 { "TexturePalette",          project.TexturePalette?.ToJToken() },
                 { "Lighting",                project.Lighting?.ToJToken() },
-                { "ModelSwitchGroups",       JTokenIfExists(project.ModelSwitchGroups?.Select(x => x?.ToJToken())?.ToArray()) },
+                { "ModelSwitchGroups",       project.ModelSwitchGroups?.Select(x => x?.ToJToken())?.ToArray()?.ToJArray() },
                 { "Planes",                  project.Planes?.ToJToken() },
                 { "Collisions",              project.Collisions?.ToJToken() },
                 { "CameraBoundaries",        project.CameraBoundaries?.ToJToken() },
                 { "BattleCursorBoundaries",  project.BattleCursorBoundaries?.ToJToken() },
                 { "Gradient",                project.Gradient?.ToJToken() },
-                { "GroundAnimationData",     JTokenIfExists(project.GroundAnimationData?.Cast<int>().ToArray()) },
-                { "Scenario1UnknownTable1",  JTokenIfExists(project.Scenario1UnknownTable1?.AsArray()) },
-                { "Scenario1UnknownTable2",  JTokenIfExists(project.Scenario1UnknownTable2?.AsArray()?.Select(x => (short) x)?.ToArray()) },
+                { "GroundAnimationData",     project.GroundAnimationData?.Cast<int>()?.ToArray()?.ToJArray() },
+                { "Scenario1UnknownTable1",  project.Scenario1UnknownTable1?.AsArray()?.ToJArray() },
+                { "Scenario1UnknownTable2",  project.Scenario1UnknownTable2?.AsArray()?.Select(x => (short) x)?.ToArray()?.ToJArray() },
             };
         }
     }

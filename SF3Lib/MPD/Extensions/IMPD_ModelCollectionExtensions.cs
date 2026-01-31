@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Extensions;
@@ -23,7 +24,7 @@ namespace SF3.MPD.Extensions {
                 new JProperty("Models",             new JArray(0)), // TODO
                 new JProperty("ModelInstances",     new JArray(0)), // TODO
                 new JProperty("Textures",           new JArray(0)), // TODO
-                new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()),
+                new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()?.ToJArray()),
             };
 
             if (mc.Collection.IsHeaderModelCollection())

@@ -1,7 +1,8 @@
-﻿using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using CommonLib.Extensions;
 using SF3.MPD.Interfaces;
+using System.Linq;
 
 namespace SF3.MPD.Extensions {
     public static class IMPD_ModelSwitchGroupExtensions {
@@ -10,11 +11,11 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_ModelSwitchGroup msg) => msg.ToJObject();
         public static JObject ToJObject(this IMPD_ModelSwitchGroup msg) {
-            return new JObject(
-                new JProperty("Flag", msg.Flag),
-                new JProperty("ModelInstancesVisibleWhenOff", msg.ModelInstancesVisibleWhenOff?.ToArray()),
-                new JProperty("ModelInstancesVisibleWhenOn",  msg.ModelInstancesVisibleWhenOn?.ToArray())
-            );
+            return new JObject {
+                { "Flag", msg.Flag },
+                { "ModelInstancesVisibleWhenOff", msg.ModelInstancesVisibleWhenOff?.ToArray()?.ToJArray() },
+                { "ModelInstancesVisibleWhenOn",  msg.ModelInstancesVisibleWhenOn?.ToArray()?.ToJArray() }
+            };
         }
     }
 }
