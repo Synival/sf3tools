@@ -28,9 +28,9 @@ namespace CommonLib.SGL {
             Faces    = faces.ToArray().ToEnumerableWithLength();
         }
 
-        public SGL_Model(JToken token) {
-            var jObject = (JObject) token;
-
+        public static SGL_Model FromJToken(JToken token) => new SGL_Model((JObject) token);
+        public static SGL_Model FromJObject(JObject jObject) => new SGL_Model(jObject);
+        private SGL_Model(JObject jObject) {
             Vertices = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray().ToEnumerableWithLength());
             Faces    = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray().ToEnumerableWithLength());
         }

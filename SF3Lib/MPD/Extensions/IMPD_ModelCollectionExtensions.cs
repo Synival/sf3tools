@@ -20,7 +20,7 @@ namespace SF3.MPD.Extensions {
             // "Collection" and "HasMissingModels" are not serialized.
             // "IsUnreferences" is only applicable to main/header models.
             var properties = new List<JProperty>() {
-                // ModelsWithLoD
+                new JProperty("Models",             mc.Models?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("ModelInstances",     mc.ModelInstances?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("Textures",           mc.Textures?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()?.ToJArray()),

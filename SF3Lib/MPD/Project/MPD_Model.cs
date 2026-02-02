@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CommonLib;
 using CommonLib.SGL;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -13,7 +14,8 @@ namespace SF3.MPD.Project {
             ModelID        = modelID;
             LevelsOfDetail = levelsOfDetail;
             _actualModel   = new SGL_Model(actualModel);
-            ModelLoDs         = new ModelRetriever(this);
+
+            ModelLoDs      = new ModelRetriever(this);
         }
 
         public MPD_Model(IMPD_Model original) {
@@ -21,7 +23,21 @@ namespace SF3.MPD.Project {
             ModelID        = original.ModelID;
             LevelsOfDetail = original.LevelsOfDetail;
             _actualModel   = new SGL_Model(original.ModelLoDs[0]);
-            ModelLoDs         = new ModelRetriever(this);
+
+            ModelLoDs      = new ModelRetriever(this);
+        }
+
+        public static MPD_Model FromJToken(JToken token, MPD_CollectionType collection) => new MPD_Model(token, collection);
+        private MPD_Model(JToken token, MPD_CollectionType collection) {
+            Collection = collection;
+
+            var jObject = (JObject) token;
+
+            ModelID        = (int) jObject["ID"];
+            LevelsOfDetail = (int) jObject["LevelsOfDetail"];
+            _actualModel   = SGL_Model.FromJObject(jObject);
+
+            ModelLoDs      = new ModelRetriever(this);
         }
 
         public MPD_CollectionType Collection { get; }
