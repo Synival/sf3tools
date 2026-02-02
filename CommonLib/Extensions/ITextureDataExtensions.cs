@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace CommonLib.Extensions {
     public static class ITextureDataExtensions {
-        public static JToken ToJToken(this ITextureData texture, bool includePalette) => texture.ToJObject(includePalette);
         public static JObject ToJObject(this ITextureData texture, bool includePalette) {
             var imageData = (texture.PixelFormat == TexturePixelFormat.ABGR1555)
                 ? texture.ImageData16Bit.To1DArrayTransposed().ToByteArray()
@@ -24,6 +23,14 @@ namespace CommonLib.Extensions {
                 properties.Add(new JProperty("Palette", texture.Palette?.ToJArray()));
 
             return new JObject(properties.ToArray());
+        }
+
+        public static JValue ToJValue(this ITextureData texture) {
+            var imageData = (texture.PixelFormat == TexturePixelFormat.ABGR1555)
+                ? texture.ImageData16Bit.To1DArrayTransposed().ToByteArray()
+                : texture.ImageData8Bit.To1DArrayTransposed();
+
+            return new JValue(Convert.ToBase64String(imageData));
         }
     }
 }

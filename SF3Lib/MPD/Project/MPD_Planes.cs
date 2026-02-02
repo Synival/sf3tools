@@ -1,5 +1,6 @@
 ﻿using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
@@ -36,14 +37,6 @@ namespace SF3.MPD.Project {
         private MPD_Planes(JToken token) {
             var jObject = (JObject) token;
 
-            /* TODO:
-                public ITextureData GroundImage { get; }
-                public IMPD_TiledPlane GroundTiledImage { get; }
-                public ITextureData BackgroundImage { get; }
-                public ITextureData SkyImage { get; }
-                public IMPD_TiledPlane ForegroundTiledImage { get; }
-            */
-
             GroundX         = (short) jObject["GroundX"];
             GroundY         = (short) jObject["GroundY"];
             GroundZ         = (short) jObject["GroundZ"];
@@ -53,6 +46,16 @@ namespace SF3.MPD.Project {
 
             GroundPalette   = jObject.GetValueIfExists("GroundPalette", t => Palette.FromJToken(t));
             SkyPalette      = jObject.GetValueIfExists("SkyPalette", t => Palette.FromJToken(t));
+
+            GroundImage = jObject.GetValueIfExists("GroundImage",
+                t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
+            SkyImage = jObject.GetValueIfExists("SkyImage",
+                t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
+            //public IMPD_TiledPlane GroundTiledImage { get; }
+
+            BackgroundImage = jObject.GetValueIfExists("BackgroundImage",
+                t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
+            //public IMPD_TiledPlane ForegroundTiledImage { get; }
         }
 
         public ITextureData GroundImage { get; }

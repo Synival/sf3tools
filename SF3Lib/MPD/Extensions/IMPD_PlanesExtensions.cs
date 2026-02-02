@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CommonLib.Extensions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
@@ -10,14 +11,6 @@ namespace SF3.MPD.Extensions {
         public static JToken ToJToken(this IMPD_Planes plane) => plane.ToJObject();
         public static JObject ToJObject(this IMPD_Planes plane) {
             return new JObject {
-                /* TODO:
-                    ITextureData GroundImage { get; }
-                    IMPD_TiledPlane GroundTiledImage { get; }
-                    ITextureData BackgroundImage { get; }
-                    ITextureData SkyImage { get; }
-                    IMPD_TiledPlane ForegroundTiledImage { get; }
-                */
-
                 { "GroundX",         plane.GroundX },
                 { "GroundY",         plane.GroundY },
                 { "GroundZ",         plane.GroundZ },
@@ -27,6 +20,12 @@ namespace SF3.MPD.Extensions {
 
                 { "GroundPalette",   plane.GroundPalette?.ToJArray() },
                 { "SkyPalette",      plane.SkyPalette?.ToJArray() },
+
+                { "GroundImage",     plane.GroundImage?.ToJValue() },
+                //IMPD_TiledPlane GroundTiledImage { get; }
+                { "SkyImage",        plane.SkyImage?.ToJValue() },
+                { "BackgroundImage", plane.BackgroundImage?.ToJValue() },
+                //IMPD_TiledPlane ForegroundTiledImage { get; }
             };
         }
     }
