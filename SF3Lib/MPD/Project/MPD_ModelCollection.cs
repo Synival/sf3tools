@@ -15,6 +15,8 @@ namespace SF3.MPD.Project {
 
             if (original.Models != null)
                 Models = new MPD_ModelCollectionModels(original.Models);
+            if (original.ModelsWithLoD != null)
+                ModelsWithLoD = new MPD_ModelCollectionModelsWithLoD(original.ModelsWithLoD);
             if (original.ModelInstances != null)
                 ModelInstances = new MPD_ModelCollectionModelInstances(original.ModelInstances);
             if (original.Textures != null)
@@ -39,43 +41,21 @@ namespace SF3.MPD.Project {
                 IsUnreferenced = (bool) jObject["IsUnreferenced"];
         }
 
-        public IMPD_Model GetModel(int id, int lod) => Models?.FirstOrDefault(x => x.ModelID == id && x.LevelOfDetail == lod);
+        public IMPD_Model GetModel(int id, int lod) {
+            var model = ModelsWithLoD.FirstOrDefault(x => x.ModelID == id);
+            if (model == null || lod < 0 || lod >= model.LevelsOfDetail)
+                return null;
+            return model.Models[lod];
+        }
 
         public MPD_CollectionType Collection { get; }
         public bool IsUnreferenced { get; set; }
-        public bool HasMissingModels => Models == null;
+        public bool HasMissingModels => ModelsWithLoD == null;
 
         public IEnumerableWithLength<IMPD_Model> Models { get; }
         public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
         public IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
         public IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
-
-        private class ModelWithLoD : IMPD_ModelWithLoD {
-            public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_Model[] models) {
-                Collection = collection;
-                ModelID    = modelID;
-                Models     = models.ToEnumerableWithLength();
-                LevelsOfDetail = Models.Max(x => x.LevelOfDetail) + 1;
-            }
-
-            public MPD_CollectionType Collection { get; }
-            public int ModelID { get; }
-            public int LevelsOfDetail { get; }
-            public IIndexedEnumerableWithLength<IMPD_Model> Models { get; }
-        }
-
-        private IEnumerableWithLength<IMPD_ModelWithLoD> _mpdModelsWithLoD;
-        public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD {
-            get {
-                if (_mpdModelsWithLoD == null) {
-                    _mpdModelsWithLoD = Models
-                        .GroupBy(x => x.ModelID)
-                        .Select(x => (IMPD_ModelWithLoD) new ModelWithLoD(Collection, x.Key, x.ToArray()))
-                        .ToArray()
-                        .ToEnumerableWithLength();
-                }
-                return _mpdModelsWithLoD;
-            }
-        }
+        public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD { get; }
     }
 }

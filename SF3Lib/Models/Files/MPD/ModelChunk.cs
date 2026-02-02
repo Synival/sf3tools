@@ -324,7 +324,7 @@ namespace SF3.Models.Files.MPD {
         public IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD {
             get {
                 if (_mpdModelsWithLoD == null) {
-                    _mpdModelsWithLoD = Models
+                    _mpdModelsWithLoD = PDataTable
                         .GroupBy(x => x.ModelID)
                         .Select(x => (IMPD_ModelWithLoD) new ModelWithLoD(Collection, x.Key, x.ToArray()))
                         .ToArray()

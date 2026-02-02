@@ -22,7 +22,7 @@ namespace SF3.MPD.Interfaces {
         MPD_CollectionType Collection { get; }
 
         /// <summary>
-        /// Set of models used for reach level-of-detail.
+        /// Set of models used for each level-of-detail.
         /// </summary>
         IIndexedEnumerableWithLength<IMPD_Model> Models { get; }
     }

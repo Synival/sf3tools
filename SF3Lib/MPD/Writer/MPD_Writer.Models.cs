@@ -8,10 +8,10 @@ using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Writer {
     public partial class MPD_Writer {
-        public void WriteModelChunk(IEnumerable<IMPD_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances)
+        public void WriteModelChunk(IEnumerable<IMPD_ModelWithLoD> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances)
             => WriteUncompressedChunk(writer => writer.WriteModelChunkContent(models, instances, collisions, isHighMemory, dataAfterInstances));
 
-        public void WriteModelChunkContent(IEnumerable<IMPD_Model> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances) {
+        public void WriteModelChunkContent(IEnumerable<IMPD_ModelWithLoD> models, IEnumerable<IMPD_ModelInstance> instances, IMPD_Collisions collisions, bool isHighMemory, IIndexedEnumerableWithLength<byte> dataAfterInstances) {
             // Chunks are stored either in low memory (current offset + 0x290000) or high memory (0x060A000 - chunk start).
             // We'll need to pass this information along to the writers so they write the pointers correctly.
             var fileChunkAddr = (int) CurrentOffset;
@@ -50,7 +50,8 @@ namespace SF3.MPD.Writer {
             WriteCollisionBlocks(linesWritten, fileChunkAddr, ramChunkAddr);
         }
 
-        public void WriteModelChunkInstance(IMPD_ModelInstance instance, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {            var modelId = instance.ModelID;
+        public void WriteModelChunkInstance(IMPD_ModelInstance instance, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {
+            var modelId = instance.ModelID;
             if (!pdataIdToOffsetPtrMap.ContainsKey(modelId))
                 pdataIdToOffsetPtrMap.Add(modelId, new List<List<long>>());
             var offsetPtrMap = pdataIdToOffsetPtrMap[modelId];
@@ -82,7 +83,7 @@ namespace SF3.MPD.Writer {
             WriteUShort(instance.Flags);
         }
 
-        public void WriteModelChunkModel(IMPD_Model model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {
+        public void WriteModelChunkModel(IMPD_ModelWithLoD model, int fileChunkAddr, int ramChunkAddr, Dictionary<int, List<List<long>>> pdataIdToOffsetPtrMap) {
             // Don't write models that don't have instances.
             // (This matches SF3's own MPD files)
             var offsetPtrMap = pdataIdToOffsetPtrMap.TryGetValue(model.ModelID, out var offsetPtrMapVal) ? offsetPtrMapVal : null;
@@ -90,15 +91,17 @@ namespace SF3.MPD.Writer {
                 return;
 
             // Track where the pointers to the various tables will be.
-            var pdataCount   = offsetPtrMap.Count;
-            var pointsPtrs   = new long[pdataCount];
-            var polygonsPtrs = new long[pdataCount];
-            var attrsPtrs    = new long[pdataCount];
+            var levelsOfDetail = model.LevelsOfDetail;
+            var pointsPtrs   = new long[levelsOfDetail];
+            var polygonsPtrs = new long[levelsOfDetail];
+            var attrsPtrs    = new long[levelsOfDetail];
 
             // Write PDATAs.
             uint addr;
             for (int i = 0; i < 8; i++) {
-                if (i < offsetPtrMap.Count) {
+                if (i < levelsOfDetail) {
+                    var modelLoD = model.Models[i];
+
                     var ptrs = offsetPtrMap[i];
                     addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
                     AtOffsets(ptrs.ToArray(), _ => WriteUInt(addr));
@@ -106,10 +109,10 @@ namespace SF3.MPD.Writer {
                     // Write placeholders for the tables to write and their counts.
                     pointsPtrs[i] = CurrentOffset;
                     WriteMPDPointer(null);
-                    WriteInt(model.Vertices.Length);
+                    WriteInt(modelLoD.Vertices.Length);
                     polygonsPtrs[i] = CurrentOffset;
                     WriteMPDPointer(null);
-                    WriteInt(model.Faces.Length);
+                    WriteInt(modelLoD.Faces.Length);
                     attrsPtrs[i] = CurrentOffset;
                     WriteMPDPointer(null);
                 }
@@ -117,30 +120,32 @@ namespace SF3.MPD.Writer {
                     WriteBytes(new byte[0x14]);
             }
 
+            var modelLoD0 = model.Models[0];
+
             addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
             AtOffsets(pointsPtrs, _ => WriteUInt(addr));
-            WritePOINTs(model);
+            WritePOINTs(modelLoD0);
 
             addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
             AtOffsets(polygonsPtrs, _ => WriteUInt(addr));
-            WritePOLYGONs(model);
+            WritePOLYGONs(modelLoD0);
 
-            for (var i = 0; i < pdataCount; i++) {
+            for (var i = 0; i < levelsOfDetail; i++) {
                 addr = (uint) (CurrentOffset - fileChunkAddr + ramChunkAddr);
                 AtOffset(attrsPtrs[i], _ => WriteUInt(addr));
-                WriteATTRs(model, i);
+                WriteATTRs(model.Models[i]);
             }
         }
 
         public uint? WriteHeaderModelsOrNull(IMPD_ModelCollection collection) {
             uint outPos = 0;
-            if (WriteObjectOrNull(() => collection != null && !collection.HasMissingModels, () => WriteHeaderModels(collection.Models, collection.ModelInstances, out outPos)).HasValue)
+            if (WriteObjectOrNull(() => collection != null && !collection.HasMissingModels, () => WriteHeaderModels(collection.ModelsWithLoD, collection.ModelInstances, out outPos)).HasValue)
                 return outPos;
             else
                 return null;
         }
 
-        public void WriteHeaderModels(IEnumerable<IMPD_Model> models, IEnumerable<IMPD_ModelInstance> instances, out uint instanceTableOffset) {
+        public void WriteHeaderModels(IEnumerable<IMPD_ModelWithLoD> models, IEnumerable<IMPD_ModelInstance> instances, out uint instanceTableOffset) {
             var pdataPosByInstanceIndex = new Dictionary<int, uint>();
             int index = -1;
 
@@ -148,9 +153,10 @@ namespace SF3.MPD.Writer {
             // TODO: (It doesn't really need to be 1:1 models to instances)
             foreach (var instance in instances) {
                 index++;
-                var model = models.FirstOrDefault(x => x.ModelID == instance.ModelID);
-                if (model == null)
+                var modelSet = models.FirstOrDefault(x => x.ModelID == instance.ModelID);
+                if (modelSet == null || modelSet.LevelsOfDetail < 1)
                     continue;
+                var model = modelSet.Models[0];
 
                 // Write tables necessary for the PDATA
                 var verticesPos = (int) CurrentOffset;
@@ -158,7 +164,7 @@ namespace SF3.MPD.Writer {
                 var polygonsPos = (int) CurrentOffset;
                 WritePOLYGONs(model);
                 var attributesPos = (int) CurrentOffset;
-                WriteATTRs(model, 0);
+                WriteATTRs(model);
 
                 // Now write the PDATA
                 pdataPosByInstanceIndex[instance.ID] = (uint) CurrentOffset;
@@ -225,18 +231,18 @@ namespace SF3.MPD.Writer {
             WriteUShort((ushort) face.VertexIndices[3]);
         }
 
-        public void WriteATTRs(ISGL_Model model, int lodIndex) {
+        public void WriteATTRs(ISGL_Model model) {
             foreach (var face in model.Faces)
-                WriteATTR(face.Attributes, lodIndex);
+                WriteATTR(face.Attributes);
         }
 
-        public void WriteATTR(IATTR attr, int lodIndex) {
+        public void WriteATTR(IATTR attr) {
             WriteByte(attr.Plane);
             WriteByte(attr.SortAndOptions);
             WriteUShort(attr.TextureNo);
-            WriteUShort((ushort) (attr.Mode | ((lodIndex > 0) ? 0x1000 : 0x0000)));
+            WriteUShort(attr.Mode);
             WriteUShort(attr.ColorNo);
-            WriteUShort((ushort) (attr.GouraudShadingTable + lodIndex));
+            WriteUShort(attr.GouraudShadingTable);
             WriteUShort(attr.Dir);
         }
 
