@@ -4,7 +4,7 @@ using SF3.Types;
 namespace SF3.Models.Files.MPD {
     public partial class Tile {
         public byte TextureID {
-            get => (MPD_File.SurfaceModelChunk != null) ? MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].GetTextureID(X) : (byte) 0;
+            get => (MPD_File.SurfaceModelChunk != null) ? MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].GetTextureID(X) : (byte) 0xFF;
             set {
                 MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetTextureID(X, value);
                 Modified?.Invoke(this, EventArgs.Empty);
