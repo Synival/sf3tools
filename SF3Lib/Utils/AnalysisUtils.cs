@@ -84,9 +84,14 @@ namespace SF3.Utils {
                 var rightByte = expected[firstWrongByte.Value.ExpectedOffset];
                 var wrongByte = actual[firstWrongByte.Value.ActualOffset];
 
-                var fwbOffset = firstWrongByte.Value.ExpectedOffset + reportingOffset;
+                var fwbOffset1 = firstWrongByte.Value.ExpectedOffset;
+                var fwbOffset2 = firstWrongByte.Value.ExpectedOffset + reportingOffset;
 
-                errors.Add($"First wrong byte is at {fwbOffset} (0x{fwbOffset:X4}):");
+                if (fwbOffset1 != fwbOffset2)
+                    errors.Add($"First wrong byte is at {fwbOffset1} (0x{fwbOffset1:X4}) (in file: {fwbOffset2} (0x{fwbOffset2:X4})):");
+                else
+                    errors.Add($"First wrong byte is at {fwbOffset1} (0x{fwbOffset1:X4}):");
+
                 errors.Add($"  Should be {rightByte} (0x{rightByte:X2}), is {wrongByte} (0x{wrongByte:X2})");
             }
 
