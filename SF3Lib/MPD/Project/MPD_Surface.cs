@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommonLib.Extensions;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
@@ -48,14 +49,35 @@ namespace SF3.MPD.Project {
 
             var jObject = (JObject) token;
 
-            // TODO: actually do the thing!!
             Width  = 64;
             Height = 64;
+
+            byte[,] PopulateByteTable(string propertyName, byte emptyValue) {
+                var rows = ((JArray) jObject[propertyName])
+                    .Select(x => (string) x)
+                    .ToArray();
+
+                var table = new byte[Width, Height];
+                for (int y = 0; y < rows.Length && y < table.GetLength(1); y++) {
+                    var row = rows[y];
+                    for (int x = 0; x * 2 < row.Length - 1 && x < table.GetLength(0); x++) {
+                        var valueStr = row.Substring(x * 2, 2);
+                        table[x, y] = valueStr == "  "
+                            ? emptyValue
+                            : byte.Parse(valueStr, System.Globalization.NumberStyles.HexNumber);
+                    }
+                }
+
+                return table;
+            }
+
+            var textureIds = PopulateByteTable("TextureIDs", 0xFF);
+            var eventIds   = PopulateByteTable("EventIDs", 0);
 
             _tiles = new IMPD_Tile[Width, Height];
             for (int y = 0; y < Width; y++)
                 for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_Tile(this, x, y);
+                    _tiles[x, y] = new MPD_Tile(this, x, y, textureIds[x, y], eventIds[x, y]);
 
            _hasModelGetter = () => _settings.HasSurfaceModel;
         }
