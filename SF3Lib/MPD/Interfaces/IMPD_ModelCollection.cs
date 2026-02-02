@@ -21,12 +21,6 @@ namespace SF3.MPD.Interfaces {
         /// All models that belong to this collection.
         /// </summary>
         /// <returns>Several models in a structure compatible with SGL.</returns>
-        IEnumerableWithLength<IMPD_Model> Models { get; }
-
-        /// <summary>
-        /// All models that belong to this collection.
-        /// </summary>
-        /// <returns>Several models in a structure compatible with SGL.</returns>
         IEnumerableWithLength<IMPD_ModelWithLoD> ModelsWithLoD { get; }
 
         /// <summary>

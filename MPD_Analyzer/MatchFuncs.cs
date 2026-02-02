@@ -95,7 +95,7 @@ namespace MPD_Analyzer {
             if (!mpdFile.Surface.HasModel)
                 return null;
             var surfaceMapTextures = mpdFile.Surface.GetAllTiles().Select(x => (int) x.TextureID).Distinct().Where(x => x != 0xFF).ToHashSet();
-            var modelTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
+            var modelTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].ModelsWithLoD.SelectMany(x => x.Models).SelectMany(x => x.Faces.Select(y => (int) y.Attributes.TextureNo)).Distinct().ToHashSet();
 
             var texturesInBoth = surfaceMapTextures.Where(modelTextures.Contains).Select(x => texturesById[x]).ToArray();
             if (texturesInBoth.Length == 0)

@@ -303,7 +303,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void Models_HasExpectedCounts() {
             var data = MakeFile();
-            var models = data.ModelCollections[MPD_CollectionType.Primary].Models.ToArray();
+            var models = data.ModelCollections[MPD_CollectionType.Primary].ModelsWithLoD.SelectMany(x => x.Models).ToArray();
 
             Assert.AreEqual(14, models.Length);
 

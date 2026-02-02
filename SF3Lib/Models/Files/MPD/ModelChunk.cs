@@ -292,20 +292,6 @@ namespace SF3.Models.Files.MPD {
         public IMPD_Model GetModel(int id, int lod)
             => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ModelID == id && x.LevelOfDetail == lod);
 
-        private IEnumerableWithLength<IMPD_Model> _mpdModels;
-        public IEnumerableWithLength<IMPD_Model> Models {
-            get {
-                if (_mpdModels == null) {
-                    _mpdModels = PDatasByMemoryAddress.Values
-                        .Where(x => x.LevelOfDetail == 0)
-                        .Cast<IMPD_Model>()
-                        .ToArray()
-                        .ToEnumerableWithLength();
-                }
-                return _mpdModels;
-            }
-        }
-
         private class ModelWithLoD : IMPD_ModelWithLoD {
             public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_Model[] models) {
                 Collection = collection;

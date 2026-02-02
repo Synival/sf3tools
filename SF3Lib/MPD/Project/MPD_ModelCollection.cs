@@ -13,8 +13,6 @@ namespace SF3.MPD.Project {
             Collection = original.Collection;
             IsUnreferenced = original.IsUnreferenced;
 
-            if (original.Models != null)
-                Models = new MPD_ModelCollectionModels(original.Models);
             if (original.ModelsWithLoD != null)
                 ModelsWithLoD = new MPD_ModelCollectionModelsWithLoD(original.ModelsWithLoD);
             if (original.ModelInstances != null)
@@ -32,7 +30,7 @@ namespace SF3.MPD.Project {
 
             var jObject = (JObject) token;
 
-            Models             = jObject.GetValueIfExists("Models",             t => t.Select(x => (IMPD_Model) MPD_Model.FromJToken(x, collection)).ToArray().ToEnumerableWithLength());
+            // ModelsWithLoD
             ModelInstances     = jObject.GetValueIfExists("ModelInstances",     t => t.Select(x => (IMPD_ModelInstance) MPD_ModelInstance.FromJToken(x, collection)).ToArray().ToEnumerableWithLength());
             Textures           = jObject.GetValueIfExists("Textures",           t => t.Select(x => (IMPD_AnimatableTexture) MPD_AnimatableTexture.FromJToken(x, collection, indexedTexturePalette)).ToArray().ToEnumerableWithLength());
             DataAfterInstances = jObject.GetValueIfExists("DataAfterInstances", t => t.Select(x => (byte) x).ToArray().ToEnumerableWithLength());
@@ -52,7 +50,6 @@ namespace SF3.MPD.Project {
         public bool IsUnreferenced { get; set; }
         public bool HasMissingModels => ModelsWithLoD == null;
 
-        public IEnumerableWithLength<IMPD_Model> Models { get; }
         public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
         public IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
         public IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
