@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
@@ -7,13 +6,21 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_Tile : IMPD_Tile {
-        public MPD_Tile(IMPD_Surface surface, int x, int y) {
+        public MPD_Tile(IMPD_Surface surface, int x, int y, byte textureId = 0xFF, byte eventId = 0) {
             Surface     = surface;
             X           = x;
             Y           = y;
             RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
 
-            TextureID   = 0xFF;
+            TextureID   = textureId;
+            _vertexNormals = new VECTOR[] {
+                new VECTOR(0, -1, 0),
+                new VECTOR(0, -1, 0),
+                new VECTOR(0, -1, 0),
+                new VECTOR(0, -1, 0),
+            };
+
+            EventID     = eventId;
             TerrainType = TerrainType.NoEntry;
         }
 
