@@ -108,7 +108,7 @@ namespace SF3.MPD.Project {
 
             ModelSwitchGroups = jObject.GetValueIfExists("ModelSwitchGroups",
                 t => ((JArray) t)
-                    .Select(x => (IMPD_ModelSwitchGroup) MPD_ModelSwitchGroup.FromJToken(t))
+                    .Select(x => (IMPD_ModelSwitchGroup) MPD_ModelSwitchGroup.FromJToken(x))
                     .ToArray()
                     .ToEnumerableWithLength()
                 );

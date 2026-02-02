@@ -33,11 +33,13 @@ namespace SF3.MPD.Project {
 
             var jObject = (JObject) token;
 
-            ModelID        = (int) jObject["ID"];
-            LevelsOfDetail = (int) jObject["LevelsOfDetail"];
-            _actualModel   = SGL_Model.FromJObject(jObject);
+            ModelID      = (int) jObject["ID"];
+            _actualModel = SGL_Model.FromJObject(jObject);
 
-            ModelLoDs      = new ModelRetriever(this);
+            if (!Collection.IsHeaderModelCollection())
+                LevelsOfDetail = (int) jObject["LevelsOfDetail"];
+
+            ModelLoDs = new ModelRetriever(this);
         }
 
         public MPD_CollectionType Collection { get; }
