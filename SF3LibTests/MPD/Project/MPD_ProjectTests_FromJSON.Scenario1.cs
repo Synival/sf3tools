@@ -9,5 +9,9 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void FromJSON_WithScenario1_TESMAP_ProducesSameMPDAsProjectCopy()
             => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "TESMAP");
+
+        [TestMethod]
+        public void FromJSON_WithScenario1_BLACK_ProducesSameMPDAsProjectCopy()
+            => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "BLACK");
     }
 }

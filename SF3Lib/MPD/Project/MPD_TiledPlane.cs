@@ -1,4 +1,7 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Extensions;
+using CommonLib.Imaging;
+using CommonLib.Types;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -10,6 +13,42 @@ namespace SF3.MPD.Project {
                 TileAssignment = new MPD_PlaneTileAssignment(original.TileAssignment);
             if (original.TiledImage != null)
                 TiledImage = new TextureData(original.TiledImage);
+        }
+
+        public static MPD_TiledPlane FromJToken(JToken token, Palette palette, int tilesWidth, int tilesHeight)
+            => new MPD_TiledPlane(token, palette, tilesWidth, tilesHeight);
+        private MPD_TiledPlane(JToken token, Palette palette, int tilesWidth, int tilesHeight) {
+            var jObject = (JObject) token;
+
+            Tileset = jObject.GetValueIfExists("Tileset",
+                t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, palette, true));
+            TileAssignment = jObject.GetValueIfExists("TileAssignment",
+                t => MPD_PlaneTileAssignment.FromJToken(t, tilesWidth, tilesHeight));
+
+            if (Tileset != null && TileAssignment != null)
+                TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), palette, zeroIsTransparent: false, canSetImage: false);
+        }
+
+        public static byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
+            var outputImageData = new byte[tileAssignment.Width * 8, tileAssignment.Height * 8];
+            var inputImageData  = tilesetImage.ImageData8Bit;
+
+            for (int tileY = 0; tileY < tileAssignment.Height; tileY++) {
+                var outputY = tileY * 8;
+                for (int tileX = 0; tileX < tileAssignment.Width; tileX++) {
+                    var outputX = tileX * 8;
+
+                    var tilesetCoords = tileAssignment[(byte) tileX, (byte) tileY];
+                    var inputX = tilesetCoords.X * 8;
+                    var inputY = tilesetCoords.Y * 8;
+
+                    for (int y = 0; y < 8; y++)
+                        for (int x = 0; x < 8; x++)
+                            outputImageData[outputX + x, outputY + y] = inputImageData[inputX + x, inputY + y];
+                }
+            }
+
+            return outputImageData;
         }
 
         public ITextureData Tileset { get; set; }

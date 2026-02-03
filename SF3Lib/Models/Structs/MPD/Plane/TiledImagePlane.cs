@@ -4,6 +4,7 @@ using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
+using SF3.MPD.Project;
 
 namespace SF3.Models.Structs.MPD.Plane {
     public class TiledImagePlane : IMPD_TiledPlane {
@@ -28,29 +29,7 @@ namespace SF3.Models.Structs.MPD.Plane {
 
         public void UpdateImages() {
             Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, PaletteSetter, zeroIsTransparent: ZeroIsTransparent, isTiled: true);
-            TiledImage = new TextureData(CreateTiledImageData(Tileset, TileAssignment), PaletteGetter(), zeroIsTransparent: ZeroIsTransparent, canSetImage: false);
-        }
-
-        private byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
-            var outputImageData = new byte[tileAssignment.Width * 8, tileAssignment.Height * 8];
-            var inputImageData  = tilesetImage.ImageData8Bit;
-
-            for (int tileY = 0; tileY < tileAssignment.Height; tileY++) {
-                var outputY = tileY * 8;
-                for (int tileX = 0; tileX < tileAssignment.Width; tileX++) {
-                    var outputX = tileX * 8;
-
-                    var tilesetCoords = tileAssignment[(byte) tileX, (byte) tileY];
-                    var inputX = tilesetCoords.X * 8;
-                    var inputY = tilesetCoords.Y * 8;
-
-                    for (int y = 0; y < 8; y++)
-                        for (int x = 0; x < 8; x++)
-                            outputImageData[outputX + x, outputY + y] = inputImageData[inputX + x, inputY + y];
-                }
-            }
-
-            return outputImageData;
+            TiledImage = new TextureData(MPD_TiledPlane.CreateTiledImageData(Tileset, TileAssignment), PaletteGetter(), zeroIsTransparent: ZeroIsTransparent, canSetImage: false);
         }
 
         public ITextureData Tileset { get; private set; }

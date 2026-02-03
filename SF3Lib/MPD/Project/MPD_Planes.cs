@@ -49,13 +49,14 @@ namespace SF3.MPD.Project {
 
             GroundImage = jObject.GetValueIfExists("GroundImage",
                 t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
+            GroundTiledImage = jObject.GetValueIfExists("GroundTiledImage",
+                t => MPD_TiledPlane.FromJToken(t, GroundPalette, 256, 256));
             SkyImage = jObject.GetValueIfExists("SkyImage",
-                t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
-            //public IMPD_TiledPlane GroundTiledImage { get; }
-
+                t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, SkyPalette, true));
             BackgroundImage = jObject.GetValueIfExists("BackgroundImage",
                 t => TextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
-            //public IMPD_TiledPlane ForegroundTiledImage { get; }
+            ForegroundTiledImage = jObject.GetValueIfExists("ForegroundTiledImage",
+                t => MPD_TiledPlane.FromJToken(t, SkyPalette, 64, 32));
         }
 
         public ITextureData GroundImage { get; }

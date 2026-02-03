@@ -22,10 +22,10 @@ namespace SF3.MPD.Extensions {
                 { "SkyPalette",      plane.SkyPalette?.ToJArray() },
 
                 { "GroundImage",     plane.GroundImage?.ToJValue() },
-                //IMPD_TiledPlane GroundTiledImage { get; }
+                { "GroundTiledImage", plane.GroundTiledImage?.ToJObject() },
                 { "SkyImage",        plane.SkyImage?.ToJValue() },
                 { "BackgroundImage", plane.BackgroundImage?.ToJValue() },
-                //IMPD_TiledPlane ForegroundTiledImage { get; }
+                { "ForegroundTiledImage", plane.ForegroundTiledImage?.ToJObject() },
             };
         }
     }
