@@ -100,6 +100,8 @@ namespace MPD_Analyzer {
             HashSet<int> nomatchChunksAlways   = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
             HashSet<int> nomatchChunksNever    = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
+            var mutex = new Mutex();
+
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
                 var nameGetter = nameGetterContexts[scenario];
@@ -143,39 +145,45 @@ namespace MPD_Analyzer {
                                 stringBuilder.AppendLine();
                             }
 
-                            if (match) {
-                                matchSet.Add(fileStr);
+                            mutex.WaitOne();
+                            try {
+                                if (match) {
+                                    matchSet.Add(fileStr);
 
-                                matchFlagsPossible |= mapFlags;
-                                matchFlagsAlways &= mapFlags;
-                                matchFlagsNever  &= (ushort) ~mapFlags;
-                                matchFlagsSet.Add(mapFlags);
+                                    matchFlagsPossible |= mapFlags;
+                                    matchFlagsAlways &= mapFlags;
+                                    matchFlagsNever  &= (ushort) ~mapFlags;
+                                    matchFlagsSet.Add(mapFlags);
 
-                                foreach (var ch in chunkHeaders) {
-                                    if (ch.Exists) {
-                                        matchChunksPossible.Add(ch.ID);
-                                        matchChunksNever.Remove(ch.ID);
+                                    foreach (var ch in chunkHeaders) {
+                                        if (ch.Exists) {
+                                            matchChunksPossible.Add(ch.ID);
+                                            matchChunksNever.Remove(ch.ID);
+                                        }
+                                        else
+                                            matchChunksAlways.Remove(ch.ID);
                                     }
-                                    else
-                                        matchChunksAlways.Remove(ch.ID);
+                                }
+                                else {
+                                    nomatchSet.Add(fileStr);
+
+                                    nomatchFlagsPossible |= mapFlags;
+                                    nomatchFlagsAlways &= mapFlags;
+                                    nomatchFlagsNever &= (ushort) ~mapFlags;
+                                    nomatchFlagsSet.Add(mapFlags);
+
+                                    foreach (var ch in chunkHeaders) {
+                                        if (ch.Exists) {
+                                            nomatchChunksPossible.Add(ch.ID);
+                                            nomatchChunksNever.Remove(ch.ID);
+                                        }
+                                        else
+                                            nomatchChunksAlways.Remove(ch.ID);
+                                    }
                                 }
                             }
-                            else {
-                                nomatchSet.Add(fileStr);
-
-                                nomatchFlagsPossible |= mapFlags;
-                                nomatchFlagsAlways &= mapFlags;
-                                nomatchFlagsNever &= (ushort) ~mapFlags;
-                                nomatchFlagsSet.Add(mapFlags);
-
-                                foreach (var ch in chunkHeaders) {
-                                    if (ch.Exists) {
-                                        nomatchChunksPossible.Add(ch.ID);
-                                        nomatchChunksNever.Remove(ch.ID);
-                                    }
-                                    else
-                                        nomatchChunksAlways.Remove(ch.ID);
-                                }
+                            finally {
+                                mutex.ReleaseMutex();
                             }
 
                             //ScanForErrorsAndReport(scenario, mpdFile);
