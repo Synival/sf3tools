@@ -44,16 +44,16 @@ namespace SF3.Models.Tables.MPD.Surface {
             var sumNormals = new List<VECTOR>();
 
             // SF3 intentionally cuts quad height by half when calculating surface vertex normals.
-            var quadHeightPercent = settings.HalfHeight ? 0.5f : 1.0f;
+            var quadHeightFactor = (settings.HalfHeight ? 0.5f : 1.0f) / 16.0f;
 
             void TryAddQuadNormal(int vx, int vy) {
                 if (vx >= 0 && vy >= 0 && vx <= 63 && vy <= 63) {
-                    var heights = Rows[vy].GetQuadHeights(vx);
+                    var heights = Rows[vy].GetHeights(vx);
                     var quad = new POLYGON(new VECTOR[] {
-                        new VECTOR(Corner1X, heights[0] * quadHeightPercent, Corner1Z),
-                        new VECTOR(Corner2X, heights[1] * quadHeightPercent, Corner2Z),
-                        new VECTOR(Corner3X, heights[2] * quadHeightPercent, Corner3Z),
-                        new VECTOR(Corner4X, heights[3] * quadHeightPercent, Corner4Z)
+                        new VECTOR(Corner1X, heights[0] * quadHeightFactor, Corner1Z),
+                        new VECTOR(Corner2X, heights[1] * quadHeightFactor, Corner2Z),
+                        new VECTOR(Corner3X, heights[2] * quadHeightFactor, Corner3Z),
+                        new VECTOR(Corner4X, heights[3] * quadHeightFactor, Corner4Z)
                     });
                     sumNormals.Add(quad.GetNormal(settings.CalculationMethod));
                 }

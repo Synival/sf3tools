@@ -76,41 +76,39 @@ namespace SF3.MPD.Interfaces {
         VECTOR[] GetVertexNormals();
 
         /// <summary>
-        /// Gets the height of a corner of a tile for display. The height returned is relative to the
-        /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
+        /// Gets the height of a corner of a tile for display.
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
-        /// <returns>A height value for the tile's corner with a scale where 1 = width/height of tile.</returns>
-        float GetVertexHeight(CornerType corner);
+        /// <returns>A height value for the tile's corner.</returns>
+        byte GetVertexHeight(CornerType corner);
 
         /// <summary>
         /// Gets the heights of all corners of a tile for display. The heights returned are relative to the
         /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
         /// </summary>
-        /// <returns>A height value for every corner of the tile with a scale where 1 = width/height of tile.</returns>
-        float[] GetVertexHeights();
+        /// <returns>A height value for every corner of the tile.</returns>
+        byte[] GetVertexHeights();
 
         /// <summary>
-        /// Sets the height of a corner of a tile for display. The height to set is relative to the
-        /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
+        /// Sets the height of a corner of a tile for display.
         /// The tile center, adjacent tiles, and all impacted normals are updated as required.
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be modified.</param>
         /// <param name="value">The new height of the tile corner.</param>
-        void SetVertexHeight(CornerType corner, float value);
+        void SetVertexHeight(CornerType corner, byte value);
 
         /// <summary>
-        /// Sets the height of all corners of a tile for display. The heights set are relative to the
-        /// size of a tile (i.e, a height difference between "0" and "1" is equal to the width/height of a tile).
+        /// Sets the height of all corners of a tile for display.
         /// The tile center, adjacent tiles, and all impacted normals are updated as required.
-        /// <param name="value">The new heights of all tile corners.</param>
+        /// <param name="values">The new heights of all tile corners.</param>
         /// </summary>
-        void SetVertexHeights(float[] values);
+        void SetVertexHeights(byte[] values);
 
         /// <summary>
-        /// The height of the tile's center. The center is always be an average of the four corner vertex heights.
+        /// The height of the tile's center. The center is always an average of the four corner vertex heights
+        /// rounded down.
         /// </summary>
-        float CenterHeight { get; }
+        byte CenterHeight { get; }
 
         /// <summary>
         /// Type of terrain during battle. Used for movement and land effect calculations.

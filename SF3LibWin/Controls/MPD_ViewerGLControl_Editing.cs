@@ -171,20 +171,23 @@ namespace SF3.Win.Controls {
             float GetRandomRange(float min, float max)
                 => ((float) random.NextDouble() * (max - min)) + min;
 
-            float GetHeightBonusForTileType(TileType tileType, int atVertexCount, int nearbyCount) {
-                switch (tileType) {
-                    case TileType.Grass:     return GetRandomRange(0.0625f, 0.1875f) + ((nearbyCount - 1) * 0.025f);
-                    case TileType.Dirt:      return 0f;
-                    case TileType.DarkGrass: return atVertexCount * 0.03125f;
-                    case TileType.Hill:      return atVertexCount == 4f ? 0.75f : 0f;
-                    case TileType.Mountain:  return atVertexCount == 4f ? GetRandomRange(0.5f, 0.75f) + GetRandomRange(0.75f, 1.25f) * ((nearbyCount - 4) * 0.0625f) : 0f;
-                    case TileType.Peak:      return atVertexCount == 4f ? 0.75f + ((nearbyCount - 4) * 0.125f) : 0f;
-                    case TileType.Desert:    return (nearbyCount - 1) * -0.025f;
-                    case TileType.River:     return GetRandomRange(0.00f, 0.0625f) + (atVertexCount - 1) * 0.05f;
-                    case TileType.Bridge:    return 0.0625f;
-                    case TileType.Water:     return 6.25f;
-                    default:                 return 6.25f;
+            int GetHeightBonusForTileType(TileType tileType, int atVertexCount, int nearbyCount) {
+                float GetFloatValue() {
+                    switch (tileType) {
+                        case TileType.Grass:     return GetRandomRange(0.0625f, 0.1875f) + ((nearbyCount - 1) * 0.025f);
+                        case TileType.Dirt:      return 0f;
+                        case TileType.DarkGrass: return atVertexCount * 0.03125f;
+                        case TileType.Hill:      return atVertexCount == 4f ? 0.75f : 0f;
+                        case TileType.Mountain:  return atVertexCount == 4f ? GetRandomRange(0.5f, 0.75f) + GetRandomRange(0.75f, 1.25f) * ((nearbyCount - 4) * 0.0625f) : 0f;
+                        case TileType.Peak:      return atVertexCount == 4f ? 0.75f + ((nearbyCount - 4) * 0.125f) : 0f;
+                        case TileType.Desert:    return (nearbyCount - 1) * -0.025f;
+                        case TileType.River:     return GetRandomRange(0.00f, 0.0625f) + (atVertexCount - 1) * 0.05f;
+                        case TileType.Bridge:    return 0.0625f;
+                        case TileType.Water:     return 6.25f;
+                        default:                 return 6.25f;
+                    }
                 }
+                return (int) (GetFloatValue() * 16);
             }
 
             var tileType    = GetTileTypeForCursorMode();
@@ -229,10 +232,10 @@ namespace SF3.Win.Controls {
                             }
                         }
 
-                        var vertexHeight = 0.00f;
+                        int vertexHeight = 0;
                         foreach (var kv in layersAtVertex)
                             vertexHeight += GetHeightBonusForTileType(kv.Key, kv.Value, layersNearby[kv.Key]);
-                        affectedTile.SetVertexHeight(corner, vertexHeight);
+                        affectedTile.SetVertexHeight(corner, (byte) Math.Clamp(vertexHeight, 0, 255));
                     }
                 }
             }

@@ -26,10 +26,10 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             set => Data.SetByte(heightAddresses[x, y], value);
         }
 
-        public float GetHeight(int x, int y)
-            => this[x, y] / 16.0f;
-        public void SetHeight(int x, int y, float value)
-            => this[x, y] = (byte) Math.Max(0, Math.Min(255, Math.Round(value * 16.0f)));
+        public byte GetHeight(int x, int y)
+            => this[x, y];
+        public void SetHeight(int x, int y, byte value)
+            => this[x, y] = value;
 
         public int BlockNum => ID;
 

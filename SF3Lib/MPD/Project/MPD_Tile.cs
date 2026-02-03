@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
@@ -40,7 +41,7 @@ namespace SF3.MPD.Project {
             TerrainFlags  = original.TerrainFlags;
             EventID       = original.EventID;
 
-            _vertexHeights = (float[]) (original.GetVertexHeights().Clone());
+            _vertexHeights = (byte[]) (original.GetVertexHeights().Clone());
             _vertexNormals = (VECTOR[]) (original.GetVertexNormals().Clone());
 
             UpdateCenterHeight();
@@ -63,14 +64,14 @@ namespace SF3.MPD.Project {
         public TextureRotateType TextureRotate { get; set; }
         public bool IsFlat { get; set; }
 
-        public float CenterHeight { get; private set; }
+        public byte CenterHeight { get; private set; }
 
         public TerrainType TerrainType { get; set; }
         public TerrainFlags TerrainFlags { get; set; }
 
         public byte EventID { get; set; }
 
-        public float GetVertexHeight(CornerType corner) {
+        public byte GetVertexHeight(CornerType corner) {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
@@ -84,10 +85,10 @@ namespace SF3.MPD.Project {
             return _vertexNormals[cornerInt];
         }
 
-        public float[] GetVertexHeights() => (float[]) (_vertexHeights.Clone());
+        public byte[] GetVertexHeights() => (byte[]) (_vertexHeights.Clone());
         public VECTOR[] GetVertexNormals() => (VECTOR[]) (_vertexNormals.Clone());
 
-        public void SetVertexHeight(CornerType corner, float value) {
+        public void SetVertexHeight(CornerType corner, byte value) {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
@@ -95,7 +96,7 @@ namespace SF3.MPD.Project {
             UpdateCenterHeight();
         }
 
-        public void SetVertexHeights(float[] values) {
+        public void SetVertexHeights(byte[] values) {
             if (values == null)
                 throw new ArgumentNullException(nameof(values));
             if (values.Length != 4)
@@ -105,18 +106,10 @@ namespace SF3.MPD.Project {
         }
 
         private void UpdateCenterHeight() {
-            var values = new int[] {
-                (int) Math.Round(_vertexHeights[0] * 16),
-                (int) Math.Round(_vertexHeights[1] * 16),
-                (int) Math.Round(_vertexHeights[2] * 16),
-                (int) Math.Round(_vertexHeights[3] * 16)
-            };
-            var sum = values[0] + values[1] + values[2] + values[3];
-
-            CenterHeight = (float) Math.Floor(sum / 4f) / 16f;
+            CenterHeight = (byte) ((_vertexHeights[0] + _vertexHeights[1] + _vertexHeights[2] + _vertexHeights[3]) / 4);
         }
 
-        private float[] _vertexHeights = new float[4];
+        private byte[] _vertexHeights = new byte[4];
         private VECTOR[] _vertexNormals = new VECTOR[4];
 
         public event EventHandler Modified;

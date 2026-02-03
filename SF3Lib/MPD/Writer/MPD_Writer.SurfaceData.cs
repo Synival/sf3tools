@@ -19,16 +19,16 @@ namespace SF3.MPD.Writer {
 
             // Tile corner heights: 0x4000 bytes (64x64x4)
             ForEachTile(tile => {
-                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.BottomRight) * 16.0f));
-                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.BottomLeft) * 16.0f));
-                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.TopLeft) * 16.0f));
-                WriteByte((byte) Math.Round(tile.GetVertexHeight(CornerType.TopRight) * 16.0f));
+                WriteByte(tile.GetVertexHeight(CornerType.BottomRight));
+                WriteByte(tile.GetVertexHeight(CornerType.BottomLeft));
+                WriteByte(tile.GetVertexHeight(CornerType.TopLeft));
+                WriteByte(tile.GetVertexHeight(CornerType.TopRight));
             });
 
             // Tile center heights + terrain: 0x2000 bytes (64x64x2)
             ForEachTile(tile => {
                 ushort word = (ushort) (
-                    ((byte) Math.Round(tile.CenterHeight * 16.0f) << 8) |
+                    (tile.CenterHeight << 8) |
                     (((byte) tile.TerrainFlags & 0x0F) << 4) |
                     ((byte) tile.TerrainType & 0x0F)
                 );

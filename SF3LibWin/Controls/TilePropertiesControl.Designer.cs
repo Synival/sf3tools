@@ -93,50 +93,50 @@ namespace SF3.Win.Controls {
             // 
             // nudMoveHeightmapBR
             // 
-            nudMoveHeightmapBR.DecimalPlaces = 4;
-            nudMoveHeightmapBR.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
+            nudMoveHeightmapBR.DecimalPlaces = 0;
+            nudMoveHeightmapBR.Increment = 1;
             nudMoveHeightmapBR.Location = new System.Drawing.Point(105, 159);
-            nudMoveHeightmapBR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
+            nudMoveHeightmapBR.Maximum = 255;
             nudMoveHeightmapBR.Name = "nudMoveHeightmapBR";
             nudMoveHeightmapBR.Size = new System.Drawing.Size(88, 23);
             nudMoveHeightmapBR.TabIndex = 6;
             // 
             // nudMoveHeightmapBL
             // 
-            nudMoveHeightmapBL.DecimalPlaces = 4;
-            nudMoveHeightmapBL.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
+            nudMoveHeightmapBL.DecimalPlaces = 0;
+            nudMoveHeightmapBL.Increment = 1;
             nudMoveHeightmapBL.Location = new System.Drawing.Point(6, 159);
-            nudMoveHeightmapBL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
+            nudMoveHeightmapBL.Maximum = 255;
             nudMoveHeightmapBL.Name = "nudMoveHeightmapBL";
             nudMoveHeightmapBL.Size = new System.Drawing.Size(88, 23);
             nudMoveHeightmapBL.TabIndex = 5;
             // 
             // nudMoveHeightmapTR
             // 
-            nudMoveHeightmapTR.DecimalPlaces = 4;
-            nudMoveHeightmapTR.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
+            nudMoveHeightmapTR.DecimalPlaces = 0;
+            nudMoveHeightmapTR.Increment = 1;
             nudMoveHeightmapTR.Location = new System.Drawing.Point(106, 130);
-            nudMoveHeightmapTR.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
+            nudMoveHeightmapTR.Maximum = 255;
             nudMoveHeightmapTR.Name = "nudMoveHeightmapTR";
             nudMoveHeightmapTR.Size = new System.Drawing.Size(88, 23);
             nudMoveHeightmapTR.TabIndex = 4;
             // 
             // nudMoveHeightmapTL
             // 
-            nudMoveHeightmapTL.DecimalPlaces = 4;
-            nudMoveHeightmapTL.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
+            nudMoveHeightmapTL.DecimalPlaces = 0;
+            nudMoveHeightmapTL.Increment = 1;
             nudMoveHeightmapTL.Location = new System.Drawing.Point(6, 130);
-            nudMoveHeightmapTL.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
+            nudMoveHeightmapTL.Maximum = 255;
             nudMoveHeightmapTL.Name = "nudMoveHeightmapTL";
             nudMoveHeightmapTL.Size = new System.Drawing.Size(88, 23);
             nudMoveHeightmapTL.TabIndex = 3;
             // 
             // nudMoveCenterHeight
             // 
-            nudMoveCenterHeight.DecimalPlaces = 4;
-            nudMoveCenterHeight.Increment = new decimal(new int[] { 625, 0, 0, 262144 });
+            nudMoveCenterHeight.DecimalPlaces = 0;
+            nudMoveCenterHeight.Increment = 1;
             nudMoveCenterHeight.Location = new System.Drawing.Point(105, 52);
-            nudMoveCenterHeight.Maximum = new decimal(new int[] { 159375, 0, 0, 262144 });
+            nudMoveCenterHeight.Maximum = 255;
             nudMoveCenterHeight.Name = "nudMoveCenterHeight";
             nudMoveCenterHeight.Size = new System.Drawing.Size(88, 23);
             nudMoveCenterHeight.TabIndex = 1;

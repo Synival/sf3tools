@@ -41,11 +41,11 @@ namespace SF3.Win.Controls {
 
             // Event handling for 'Movement' group.
             cbMoveTerrain.SelectedValueChanged += (s, e) => DoIfUserInput(() => _tile.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
-            nudMoveCenterHeight.ValueChanged   += (s, e) => UserSetCenterHeight((float) nudMoveCenterHeight.Value);
+            nudMoveCenterHeight.ValueChanged   += (s, e) => UserSetCenterHeight((byte) nudMoveCenterHeight.Value);
             cbMoveSlope.CheckedChanged         += (s, e) => DoIfUserInput(() => _tile.TerrainFlags ^= TerrainFlags.SteepSlope);
 
             foreach (var nud in _nudVertexHeights)
-                nud.Value.ValueChanged += (s, e) => UserSetVertexHeight(nud.Key, (float) nud.Value.Value);
+                nud.Value.ValueChanged += (s, e) => UserSetVertexHeight(nud.Key, (byte) nud.Value.Value);
 
             // Event handling for 'Event' group.
             nudEventID.ValueChanged += (s, e) => DoIfUserInput(() => _tile.EventID = (byte) nudEventID.Value);
@@ -242,14 +242,14 @@ namespace SF3.Win.Controls {
             action();
         }
 
-        private void UserSetCenterHeight(float value) {
+        private void UserSetCenterHeight(byte value) {
             if (_nonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
                 var diff = value - _tile.CenterHeight;
                 var heights = _tile.GetVertexHeights()
-                    .Select(x => Math.Clamp(x + diff, 0.00f, 15.9375f))
+                    .Select(x => (byte) Math.Clamp(x + diff, 0, 255))
                     .ToArray();
 
                 _tile.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
@@ -258,12 +258,11 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void UserSetVertexHeight(CornerType corner, float value) {
+        private void UserSetVertexHeight(CornerType corner, byte value) {
             if (_nonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
-                value = Math.Clamp(value, 0.00f, 15.9375f);
                 _tile.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
                 _tile.SetVertexHeight(corner, value);
                 UpdateVertexHeights();

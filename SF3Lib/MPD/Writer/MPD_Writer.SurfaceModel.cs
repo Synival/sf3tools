@@ -85,7 +85,7 @@ namespace SF3.MPD.Writer {
             ForEachBlockVertex((blockX, blockY, inBlockX, inBlockY) => {
                 var (tile, corner) = GetNonFlatTileAtVertex(surface, blockX, blockY, inBlockX, inBlockY, mustBeInBlock: true);
                 if (tile != null)
-                    WriteByte((byte) Math.Round(tile.GetVertexHeight(corner) * 16.00f));
+                    WriteByte(tile.GetVertexHeight(corner));
                 else
                     WriteByte(0);
             });

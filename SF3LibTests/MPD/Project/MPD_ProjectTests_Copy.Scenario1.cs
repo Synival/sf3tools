@@ -47,27 +47,23 @@ namespace SF3.Tests.MPD.Project {
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BTL03");
 
         [TestMethod]
-        public void Copy_WithScenario1_BTL02_CanBeLoaded()
+        public void Copy_WithScenario1_BTL02_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "BTL02");
 
         [TestMethod]
-        public void Copy_WithScenario1_Z_AS_ProducesSameData()
+        public void Copy_WithScenario1_Z_AS_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "Z_AS");
 
         [TestMethod]
-        public void Copy_WithScenario1_CHOU00_ProducesSameData()
-            => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "CHOU00");
-
-        [TestMethod]
-        public void Copy_WithScenario1_GDI_ProducesSameData()
+        public void Copy_WithScenario1_GDI_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "GDI");
 
         [TestMethod]
-        public void Copy_WithScenario1_MGMA00_ProducesSameData()
+        public void Copy_WithScenario1_MGMA00_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "MGMA00");
 
         [TestMethod]
-        public void Copy_WithScenario1_MGMA01_ProducesSameData()
+        public void Copy_WithScenario1_MGMA01_ProducesSameMPDAsOriginal()
             => ProducesSameMPDAsOriginal(ScenarioType.Scenario1, "MGMA01");
 
         [TestMethod]

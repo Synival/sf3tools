@@ -18,71 +18,71 @@ namespace SF3.Models.Structs.MPD.Surface {
             set => Data.SetDouble(xAddress[index], (int) value);
         }
 
-        public float GetHeight(int x, CornerType corner) {
+        public byte GetHeight(int x, CornerType corner) {
             // Heights are clockwise from bottom-right.
             switch (corner) {
                 case CornerType.BottomRight:
-                    return Data.GetByte(xAddress[x] + 0) / 16.0f;
+                    return (byte) Data.GetByte(xAddress[x] + 0);
                 case CornerType.BottomLeft:
-                    return Data.GetByte(xAddress[x] + 1) / 16.0f;
+                    return (byte) Data.GetByte(xAddress[x] + 1);
                 case CornerType.TopLeft:
-                    return Data.GetByte(xAddress[x] + 2) / 16.0f;
+                    return (byte) Data.GetByte(xAddress[x] + 2);
                 case CornerType.TopRight:
-                    return Data.GetByte(xAddress[x] + 3) / 16.0f;
+                    return (byte) Data.GetByte(xAddress[x] + 3);
                 default:
                     throw new ArgumentException(nameof(corner));
             }
         }
 
-        public void SetHeight(int x, CornerType corner, float value) {
+        public void SetHeight(int x, CornerType corner, byte value) {
             // Heights are clockwise from bottom-right.
             switch (corner) {
                 case CornerType.BottomRight:
-                    Data.SetByte(xAddress[x] + 0, (byte) Math.Round(value * 16f));
+                    Data.SetByte(xAddress[x] + 0, value);
                     break;
                 case CornerType.BottomLeft:
-                    Data.SetByte(xAddress[x] + 1, (byte) Math.Round(value * 16f));
+                    Data.SetByte(xAddress[x] + 1, value);
                     break;
                 case CornerType.TopLeft:
-                    Data.SetByte(xAddress[x] + 2, (byte) Math.Round(value * 16f));
+                    Data.SetByte(xAddress[x] + 2, value);
                     break;
                 case CornerType.TopRight:
-                    Data.SetByte(xAddress[x] + 3, (byte) Math.Round(value * 16f));
+                    Data.SetByte(xAddress[x] + 3, value);
                     break;
                 default:
                     throw new ArgumentException(nameof(corner));
             }
         }
 
-        public float[] GetQuadHeights(int x)
-            => ConvertQuadHeightsToFloatArray(this[x]);
+        public byte[] GetHeights(int x)
+            => ConvertHeightsToByteArray(this[x]);
 
-        public void SetQuadHeights(int x, float[] heights) {
+        public void SetHeights(int x, byte[] heights) {
             if (heights.Length != 4)
                 throw new ArgumentException(nameof(heights));
-            this[x] = ConvertFloatArrayToQuadHeights(heights);
+            this[x] = ConvertByteArrayHeights(heights);
         }
 
-        public static float[] ConvertQuadHeightsToFloatArray(uint heights) {
+        public static byte[] ConvertHeightsToByteArray(uint heights) {
             // Heights are clockwise from bottom-right.
-            var floatHeights = new float[4];
-            floatHeights[(int) CornerType.BottomRight] = ((heights >> 24) & 0xFF) / 16f;
-            floatHeights[(int) CornerType.BottomLeft]  = ((heights >> 16) & 0xFF) / 16f;
-            floatHeights[(int) CornerType.TopLeft]     = ((heights >>  8) & 0xFF) / 16f;
-            floatHeights[(int) CornerType.TopRight]    = ((heights >>  0) & 0xFF) / 16f;
-            return floatHeights;
+            var byteHeights = new byte[4];
+            byteHeights[(int) CornerType.BottomRight] = (byte) ((heights >> 24) & 0xFF);
+            byteHeights[(int) CornerType.BottomLeft]  = (byte) ((heights >> 16) & 0xFF);
+            byteHeights[(int) CornerType.TopLeft]     = (byte) ((heights >>  8) & 0xFF);
+            byteHeights[(int) CornerType.TopRight]    = (byte) ((heights >>  0) & 0xFF);
+            return byteHeights;
         }
 
-        public static uint ConvertFloatArrayToQuadHeights(float[] heights) {
+        public static uint ConvertByteArrayHeights(byte[] heights) {
             if (heights.Length != 4)
                 throw new ArgumentException(nameof(heights));
 
             // Heights are clockwise from bottom-right.
             return
-                ((((uint) (heights[(int) CornerType.BottomRight] * 16f)) & 0xFF) << 24) +
-                ((((uint) (heights[(int) CornerType.BottomLeft]  * 16f)) & 0xFF) << 16) +
-                ((((uint) (heights[(int) CornerType.TopLeft]     * 16f)) & 0xFF) <<  8) +
-                ((((uint) (heights[(int) CornerType.TopRight]    * 16f)) & 0xFF) <<  0);
+                (((uint) heights[(int) CornerType.BottomRight]) << 24) +
+                (((uint) heights[(int) CornerType.BottomLeft])  << 16) +
+                (((uint) heights[(int) CornerType.TopLeft])     <<  8) +
+                (((uint) heights[(int) CornerType.TopRight])    <<  0);
         }
 
         private class TileMetadataAttribute : TableViewModelColumnAttribute {
