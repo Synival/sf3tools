@@ -9,6 +9,12 @@ namespace CommonLib.SGL {
             Z = z;
         }
 
+        public VECTOR(int x, int y, int z, bool isRaw) {
+            X = new FIXED(x, isRaw);
+            Y = new FIXED(y, isRaw);
+            Z = new FIXED(z, isRaw);
+        }
+
         public VECTOR(short x, short y, short z) {
             X = new FIXED(x, false);
             Y = new FIXED(y, false);

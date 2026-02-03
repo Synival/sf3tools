@@ -25,7 +25,7 @@ namespace CommonLib.SGL {
         public VECTOR GetNormal(POLYGON_NormalCalculationMethod calculationMethod) {
             // Shortcut for very common flat polygons.
             var height = Vertices[0].Y;
-            if (Vertices.Skip(1).All(x => x.Y == height))
+            if (Vertices[1].Y == height && Vertices[2].Y == height && Vertices[3].Y == height)
                 return new VECTOR(0, -1, 0);
 
             switch (calculationMethod) {

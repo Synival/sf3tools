@@ -68,18 +68,19 @@ namespace SF3.Models.Tables.MPD.Surface {
             TryAddQuadNormal(vertexX - 1, vertexY - 0);
 
             // Return the average of each normal (normalized) for Gouraud shading.
-            var components = new float[3];
+            var components = new int[3];
             foreach (var normal in sumNormals) {
-                components[0] += normal.X.Float;
-                components[1] += normal.Y.Float;
-                components[2] += normal.Z.Float;
+                components[0] += normal.X.RawInt;
+                components[1] += normal.Y.RawInt;
+                components[2] += normal.Z.RawInt;
             }
 
             var count = sumNormals.Count;
             var vec = new VECTOR(
-                components[0] / count,
-                components[1] / count,
-                components[2] / count
+                components[0],
+                components[1],
+                components[2],
+                isRaw: true
             ).Normalized();
 
             if (settings.FixOverflowUnderflowErrors) {
