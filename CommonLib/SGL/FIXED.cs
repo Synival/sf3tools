@@ -45,7 +45,7 @@
 
         // Comparisons / operators
         public static bool operator ==(FIXED lhs, FIXED rhs) => lhs.RawInt == rhs.RawInt;
-        public static bool operator !=(FIXED lhs, FIXED rhs) => lhs.RawInt == rhs.RawInt;
+        public static bool operator !=(FIXED lhs, FIXED rhs) => lhs.RawInt != rhs.RawInt;
         public static bool operator <(FIXED lhs, FIXED rhs) => lhs.RawInt < rhs.RawInt;
         public static bool operator >(FIXED lhs, FIXED rhs) => lhs.RawInt > rhs.RawInt;
         public static bool operator <=(FIXED lhs, FIXED rhs) => lhs.RawInt <= rhs.RawInt;
@@ -56,7 +56,7 @@
 
         // Short comparisons / operators (RHS)
         public static bool operator ==(FIXED lhs, short rhs) => lhs.RawInt == rhs;
-        public static bool operator !=(FIXED lhs, short rhs) => lhs.RawInt == rhs;
+        public static bool operator !=(FIXED lhs, short rhs) => lhs.RawInt != rhs;
         public static bool operator <(FIXED lhs, short rhs) => lhs.RawInt < rhs;
         public static bool operator >(FIXED lhs, short rhs) => lhs.RawInt > rhs;
         public static bool operator <=(FIXED lhs, short rhs) => lhs.RawInt <= rhs;
@@ -67,7 +67,7 @@
 
         // Short comparisons / operators (LHS)
         public static bool operator ==(short lhs, FIXED rhs) => lhs == rhs.RawInt;
-        public static bool operator !=(short lhs, FIXED rhs) => lhs == rhs.RawInt;
+        public static bool operator !=(short lhs, FIXED rhs) => lhs != rhs.RawInt;
         public static bool operator <(short lhs, FIXED rhs) => lhs < rhs.RawInt;
         public static bool operator >(short lhs, FIXED rhs) => lhs > rhs.RawInt;
         public static bool operator <=(short lhs, FIXED rhs) => lhs <= rhs.RawInt;
@@ -78,7 +78,7 @@
 
         // Float comparisons / operators (RHS)
         public static bool operator ==(FIXED lhs, float rhs) => lhs.Float == rhs;
-        public static bool operator !=(FIXED lhs, float rhs) => lhs.Float == rhs;
+        public static bool operator !=(FIXED lhs, float rhs) => lhs.Float != rhs;
         public static bool operator <(FIXED lhs, float rhs) => lhs.Float < rhs;
         public static bool operator >(FIXED lhs, float rhs) => lhs.Float > rhs;
         public static bool operator <=(FIXED lhs, float rhs) => lhs.Float <= rhs;
@@ -89,7 +89,7 @@
 
         // Float comparisons / operators (LHS)
         public static bool operator ==(float lhs, FIXED rhs) => lhs == rhs.Float;
-        public static bool operator !=(float lhs, FIXED rhs) => lhs == rhs.Float;
+        public static bool operator !=(float lhs, FIXED rhs) => lhs != rhs.Float;
         public static bool operator <(float lhs, FIXED rhs) => lhs < rhs.Float;
         public static bool operator >(float lhs, FIXED rhs) => lhs > rhs.Float;
         public static bool operator <=(float lhs, FIXED rhs) => lhs <= rhs.Float;
