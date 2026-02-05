@@ -92,27 +92,27 @@ namespace SF3.Tests.MPD.Writer {
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL03", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_BTL02_CanBeLoaded()
+        public void WriteMPD_WithScenario1_BTL02_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "BTL02", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_Z_AS_ProducesSameData()
+        public void WriteMPD_WithScenario1_Z_AS_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "Z_AS", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_CHOU00_ProducesSameData()
+        public void WriteMPD_WithScenario1_CHOU00_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "CHOU00", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_GDI_ProducesSameData()
+        public void WriteMPD_WithScenario1_GDI_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "GDI", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_MGMA00_ProducesSameData()
+        public void WriteMPD_WithScenario1_MGMA00_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MGMA00", performByteComparison: false);
 
         [TestMethod]
-        public void WriteMPD_WithScenario1_MGMA01_ProducesSameData()
+        public void WriteMPD_WithScenario1_MGMA01_ProducesSameLoadableData()
             => ProducesSameLoadableDataTestBase(ScenarioType.Scenario1, "MGMA01", performByteComparison: false);
 
         [TestMethod]
