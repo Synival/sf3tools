@@ -186,7 +186,13 @@ namespace SF3.MPD.Extensions {
                 components[1] += normal.Y.RawInt;
                 components[2] += normal.Z.RawInt;
             }
+
             var vec = new VECTOR(components[0], components[1], components[2], isRaw: true).Normalized();
+
+            // Normal vectors are actually CompressedFIXED, so account for the lower decimal resolution.
+            vec.X.RawInt = (vec.X.RawInt / 2) * 2;
+            vec.Y.RawInt = (vec.Y.RawInt / 2) * 2;
+            vec.Z.RawInt = (vec.Z.RawInt / 2) * 2;
 
             // Correct for some vanilla bugs if set.
             if (settings.FixOverflowUnderflowErrors)
