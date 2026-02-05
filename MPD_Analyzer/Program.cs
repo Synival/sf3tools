@@ -1,12 +1,17 @@
 ﻿using System.Collections.Concurrent;
 using System.Text;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
+using CommonLib.SGL;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
+using SF3.MPD.Extensions;
 using SF3.NamedValues;
 using SF3.Types;
+using static CommonLib.Types.CornerTypeConsts;
 
 namespace MPD_Analyzer {
     public class Program {
@@ -56,7 +61,87 @@ namespace MPD_Analyzer {
             ]}
         };
 
+        private struct NormalMesh {
+            public NormalMesh(byte[,] heights, VECTOR normal) {
+                Heights = heights;
+                Normal  = normal;
+            }
+
+            public byte[,] Heights;
+            public VECTOR Normal;
+
+            public override bool Equals(object? obj) {
+                return obj is NormalMesh mesh &&
+                    Normal == mesh.Normal &&
+                    Heights[0, 0] == mesh.Heights[0, 0] &&
+                    Heights[1, 0] == mesh.Heights[1, 0] &&
+                    Heights[2, 0] == mesh.Heights[2, 0] &&
+                    Heights[0, 1] == mesh.Heights[0, 1] &&
+                    Heights[1, 1] == mesh.Heights[1, 1] &&
+                    Heights[2, 1] == mesh.Heights[2, 1] &&
+                    Heights[0, 2] == mesh.Heights[0, 2] &&
+                    Heights[1, 2] == mesh.Heights[1, 2] &&
+                    Heights[2, 2] == mesh.Heights[2, 2];
+            }
+
+            public override int GetHashCode() {
+                var hashCode = Normal.GetHashCode();
+                for (int y = 0; y < 3; y++)
+                    for (int x = 0; x < 3; x++)
+                        hashCode = hashCode * -1521134295 + Heights[x, y];
+                return hashCode;
+            }
+        }
+
+        private static HashSet<NormalMesh> s_normalMeshes = new HashSet<NormalMesh>();
+        private static HashSet<NormalMesh> s_skippedMeshes = new HashSet<NormalMesh>();
+        private static Mutex s_mutex = new Mutex();
+
         private static string[]? MPD_MatchFunc(MPD_File mpdFile, ScenarioType scenario, string filename) {
+            if (mpdFile.Surface?.HasModel != true)
+                return null;
+            mpdFile.Surface.NormalSettings = new NormalCalculationSettings(
+                POLYGON_NormalCalculationMethod.TopRightTriangle, true, false
+            );
+
+            int added = 0;
+            int skipped = 0;
+
+            for (int vy = 0; vy < 65; vy++) {
+                for (int vx = 0; vx < 65; vx++) {
+                    var heights = mpdFile.Surface.GetVertexHeightMeshForNormalCalculation(vx, vy);
+
+                    var min = heights.To1DArray().Select(x => x ?? (byte) 0xFF).Min();
+                    var newHeights = new byte[3, 3];
+                    for (int sy = 0; sy < 3; sy++)
+                        for (int sx = 0; sx < 3; sx++)
+                            newHeights[sx, sy] = (byte) ((heights[sx, sy] ?? min) - min);
+
+                    if (newHeights.To1DArray().All(x => x == 0))
+                        continue;
+
+                    var originalNormal = mpdFile.Surface.GetVertex(vx, vy).Normal;
+                    var newNormal = mpdFile.Surface.CalculateVertexNormal(vx, vy);
+
+                    var mesh = new NormalMesh(newHeights, originalNormal);
+
+                    s_mutex.WaitOne();
+                    try {
+                        if (originalNormal != newNormal) {
+                            if (s_normalMeshes.Add(mesh))
+                                added++;
+                        }
+                        else if (s_skippedMeshes.Add(mesh))
+                            skipped++;
+                    }
+                    finally {
+                        s_mutex.ReleaseMutex();
+                    }
+                }
+            }
+
+            return (added > 0 || skipped > 0) ? [$"{added} added, {skipped} ignored)"] : [];
+#if false
             // Gotta have the model collection!
             if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(MPD_CollectionType.Primary))
                 return null;
@@ -71,6 +156,7 @@ namespace MPD_Analyzer {
 #endif
 
             return MatchFuncs.ProjectCopyProducesSameMPDAsOriginal(mpdFile);
+#endif
         }
 
         public static void Main(string[] args) {
@@ -342,6 +428,38 @@ namespace MPD_Analyzer {
                         ConsoleFileWriteLine("");
                     }
                 }
+            }
+
+            if (s_normalMeshes.Count > 0 || s_skippedMeshes.Count > 0) {
+                Console.WriteLine("");
+                Console.WriteLine("===================================================");
+                Console.WriteLine("| NORMAL MESHES                                   |");
+                Console.WriteLine("===================================================");
+
+                var sortedMeshes = s_normalMeshes
+                    .OrderBy(x => x.Normal.Y.RawInt)
+                    .ThenBy (x => (x.Heights[0, 0] << 16) + (x.Heights[1, 0] << 8) + x.Heights[2, 0])
+                    .ThenBy (x => (x.Heights[0, 1] << 16) + (x.Heights[1, 1] << 8) + x.Heights[2, 1])
+                    .ThenBy (x => (x.Heights[0, 2] << 16) + (x.Heights[1, 2] << 8) + x.Heights[2, 2])
+                    .ToArray();
+
+                using (var fileOut = new StreamWriter(new FileStream("StandardNormals.txt", FileMode.Create))) {
+                    void ConsoleFileWriteLine(string str) {
+                        //Console.WriteLine(str);
+                        fileOut.WriteLine(str);
+                    }
+                    foreach (var sm in sortedMeshes) {
+                        var h = sm.Heights;
+                        var str =
+                            $"[[{h[0,0]:X2}, {h[1,0]:X2}, {h[2,0]:X2}], " +
+                             $"[{h[0,1]:X2}, {h[1,1]:X2}, {h[2,1]:X2}], " +
+                             $"[{h[0,2]:X2}, {h[1,2]:X2}, {h[2,2]:X2}]] = {sm.Normal.ToString()}";
+                        ConsoleFileWriteLine(str);
+                    }
+                }
+
+                Console.WriteLine($"{sortedMeshes.Length} unique normals.");
+                Console.WriteLine($"{s_skippedMeshes.Count} skipped.");
             }
         }
 

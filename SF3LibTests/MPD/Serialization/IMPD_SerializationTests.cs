@@ -8,7 +8,7 @@ namespace SF3.Tests.MPD.Serialization {
     public class IMPD_SerializationTests {
         [TestMethod]
         public void ToJSON_String_WithScenario1MPD_ProducesSomething() {
-            var mpdFile = MakeMPD_File(ScenarioType.Scenario1, "BALSA.MPD");
+            var mpdFile = MakeMPD_File(ScenarioType.Scenario1, "BTL02.MPD");
 
             var mpdJsonStr = mpdFile.ToJSON_String();
             Assert.IsNotNull(mpdJsonStr);

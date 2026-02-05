@@ -83,7 +83,7 @@ namespace SF3.MPD.Project {
                 throw new ArgumentOutOfRangeException(nameof(corner));
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
-            return Surface.GetVertexNormal(vx, vy);
+            return Surface.GetVertex(vx, vy).Normal;
         }
 
         public byte[] GetVertexHeights() => (byte[]) (_vertexHeights.Clone());
@@ -92,10 +92,10 @@ namespace SF3.MPD.Project {
             var x = X;
             var y = Y;
             return new VECTOR[] {
-                Surface.GetVertexNormal(x + 1, y + 1),
-                Surface.GetVertexNormal(x + 0, y + 1),
-                Surface.GetVertexNormal(x + 0, y + 0),
-                Surface.GetVertexNormal(x + 1, y + 0),
+                Surface.GetVertex(x + 1, y + 1).Normal,
+                Surface.GetVertex(x + 0, y + 1).Normal,
+                Surface.GetVertex(x + 0, y + 0).Normal,
+                Surface.GetVertex(x + 1, y + 0).Normal,
             };
         }
 
@@ -118,7 +118,7 @@ namespace SF3.MPD.Project {
                 throw new ArgumentOutOfRangeException(nameof(corner));
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
-            Surface.SetVertexNormal(vx, vy, normal);
+            Surface.GetVertex(vx, vy).Normal = normal;
         }
 
         public void SetVertexHeights(byte[] values) {

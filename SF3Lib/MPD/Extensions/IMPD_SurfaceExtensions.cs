@@ -92,7 +92,7 @@ namespace SF3.MPD.Extensions {
                 { "TextureIDs", MakeByteTable((x, y) => surface.GetTile(x, y).TextureID, 0xFF) },
                 { "EventIDs",   MakeByteTable((x, y) => surface.GetTile(x, y).EventID, 0) },
                 { "Heights",    MakeHeightTable((x, y) => surface.GetTile(x, y).GetVertexHeights()) },
-                { "Normals",    MakeNormalTable((x, y) => surface.GetVertexNormal(x, y)) },
+                { "Normals",    MakeNormalTable((x, y) => surface.GetVertex(x, y).Normal) },
             };
         }
 

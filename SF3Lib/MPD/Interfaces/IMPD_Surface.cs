@@ -29,21 +29,6 @@ namespace SF3.MPD.Interfaces {
         IMPD_SurfaceTile[] GetAllTiles();
 
         /// <summary>
-        /// Sets the normal for vertex on the surface model.
-        /// </summary>
-        /// <param name="vx">Vertex X</param>
-        /// <param name="vy">Vertex Y</param>
-        /// <param name="normal">Normal to set</param>
-        void SetVertexNormal(int vx, int vy, VECTOR normal);
-
-        /// <summary>
-        /// Gets the normal for vertex on the surface model.
-        /// </summary>
-        /// <param name="vx">Vertex X</param>
-        /// <param name="vy">Vertex Y</param>
-        VECTOR GetVertexNormal(int vx, int vy);
-
-        /// <summary>
         /// Updates a vertex normal.
         /// </summary>
         /// <param name="vx">X coordinate of the vertex to update.</param>

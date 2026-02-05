@@ -24,7 +24,7 @@ namespace SF3.MPD.Project {
             _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
             for (int vy = 0; vy < Height; vy++)
                 for (int vx = 0; vx < Width; vx++)
-                    _vertices[vx, vy] = new MPD_SurfaceVertex(this, vx, vy);
+                    _vertices[vx, vy] = new MPD_SurfaceVertex(this, vx, vy, new VECTOR(0, -1, 0));
 
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
@@ -36,9 +36,14 @@ namespace SF3.MPD.Project {
             Height = original.Height;
 
             _tiles = new IMPD_SurfaceTile[Width, Height];
-            for (int y = 0; y < Width; y++)
-                for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_SurfaceTile(this, original.GetTile(x, y), x, y);
+            for (int ty = 0; ty < Width; ty++)
+                for (int tx = 0; tx < Height; tx++)
+                    _tiles[tx, ty] = new MPD_SurfaceTile(this, original.GetTile(tx, ty), tx, ty);
+
+            _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
+            for (int vy = 0; vy < Width + 1; vy++)
+                for (int vx = 0; vx < Height + 1; vx++)
+                    _vertices[vx, vy] = new MPD_SurfaceVertex(this, original.GetVertex(vx, vy), vx, vy);
 
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
@@ -105,14 +110,51 @@ namespace SF3.MPD.Project {
                 return table;
             }
 
+            VECTOR[,] FetchNormalTable(string propertyName) {
+                var rows = ((JArray) jObject.GetValueIfExists(propertyName))
+                    ?.Select(x => (string) x)
+                    ?.ToArray();
+
+                var table = new VECTOR[Width + 1, Height + 1];
+                var rowCount = rows?.Length ?? 0;
+
+                for (int y = 0; y < rowCount && y < table.GetLength(1); y++) {
+                    var row = rows[y];
+                    for (int x = 0; x * 9 < row.Length - 7 && x < table.GetLength(0); x++) {
+                        var pos = x * 9;
+                        var str = row.Substring(pos, 8);
+                        if (str == "        ")
+                            table[x, y] = new VECTOR(0, -1, 0);
+                        else {
+                            var base64Bytes = Convert.FromBase64String(str);
+                            var components = base64Bytes.ToUShorts();
+                            table[x, y] = new VECTOR(
+                                components[0] * 2,
+                                components[1] * 2,
+                                components[2] * 2,
+                                isRaw: true
+                            );
+                        }
+                    }
+                }
+
+                return table;
+            }
+
             var textureIds = FetchByteTable("TextureIDs", 0xFF);
             var eventIds   = FetchByteTable("EventIDs", 0);
             var heights    = FetchHeightTable("Heights");
+            var normals    = FetchNormalTable("Normals");
 
             _tiles = new IMPD_SurfaceTile[Width, Height];
             for (int y = 0; y < Width; y++)
                 for (int x = 0; x < Height; x++)
                     _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], eventIds[x, y], heights[x, y]);
+
+            _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
+            for (int y = 0; y < Width + 1; y++)
+                for (int x = 0; x < Height + 1; x++)
+                    _vertices[x, y] = new MPD_SurfaceVertex(this, x, y, normals[x, y]);
 
            _hasModelGetter = () => _settings.HasSurfaceModel;
         }
@@ -132,11 +174,8 @@ namespace SF3.MPD.Project {
             var verticesHeight = Height + 1;
             for (int vy = 0; vy < verticesHeight; vy++)
                 for (int vx = 0; vx < verticesWidth; vx++)
-                    SetVertexNormal(vx, vy, this.CalculateVertexNormal(vx, vy, heightmap, vx1 - 1, vy1 - 1));
+                    _vertices[vx, vy].Normal = this.CalculateVertexNormal(vx, vy, heightmap, vx1 - 1, vy1 - 1);
         }
-
-        public abstract void SetVertexNormal(int vx, int vy, VECTOR normal);
-        public abstract VECTOR GetVertexNormal(int vx, int vy);
 
         public int Width { get; }
         public int Height { get; }
