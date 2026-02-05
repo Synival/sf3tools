@@ -6,7 +6,8 @@ using SF3.MPD.Project;
 
 namespace SF3.Models.Files.MPD {
     public class Surface : MPD_SurfaceBase {
-        public Surface(IMPD_File mpdFile, Func<bool> hasModelGetter) : base(mpdFile.Settings, MakeTiles(mpdFile), hasModelGetter) {
+        public Surface(IMPD_File mpdFile, Func<bool> hasModelGetter)
+        : base(mpdFile.Settings, MakeTiles(mpdFile), MakeVertices(mpdFile), hasModelGetter) {
             MPD_File = mpdFile;
         }
 
@@ -16,6 +17,14 @@ namespace SF3.Models.Files.MPD {
                 for (var y = 0; y < 64; y++)
                     tiles[x, y] = new SurfaceTile(file, x, y);
             return tiles;
+        }
+
+        private static IMPD_SurfaceVertex[,] MakeVertices(IMPD_File file) {
+            var vertices = new SurfaceVertex[65, 65];
+            for (var x = 0; x < 65; x++)
+                for (var y = 0; y < 65; y++)
+                    vertices[x, y] = new SurfaceVertex(file, x, y);
+            return vertices;
         }
 
         public IMPD_File MPD_File { get; }

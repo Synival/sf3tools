@@ -9,7 +9,18 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Fetches an individual tile on the surface.
         /// </summary>
+        /// <param name="x">X coordinate of the tile.</param>
+        /// <param name="y">Y coordinate of the tile.</param>
+        /// <returns>An abstract representation of a tile in the surface.</returns>
         IMPD_SurfaceTile GetTile(int x, int y);
+
+        /// <summary>
+        /// Fetches an individual vertex on the surface mesh.
+        /// </summary>
+        /// <param name="vx">X coordinate of the vertex.</param>
+        /// <param name="vy">Y coordinate of the vertex.</param>
+        /// <returns>An abstract representation of a vertex in the surface.</returns>
+        IMPD_SurfaceVertex GetVertex(int vx, int vy);
 
         /// <summary>
         /// Fetches all tiles as a 1D array in row-major order.

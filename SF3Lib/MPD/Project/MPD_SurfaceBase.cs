@@ -17,9 +17,14 @@ namespace SF3.MPD.Project {
             Height = 64;
 
             _tiles = new IMPD_SurfaceTile[Width, Height];
-            for (int y = 0; y < Width; y++)
-                for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y);
+            for (int ty = 0; ty < Height; ty++)
+                for (int tx = 0; tx < Width; tx++)
+                    _tiles[tx, ty] = new MPD_SurfaceTile(this, tx, ty);
+
+            _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
+            for (int vy = 0; vy < Height; vy++)
+                for (int vx = 0; vx < Width; vx++)
+                    _vertices[vx, vy] = new MPD_SurfaceVertex(this, vx, vy);
 
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
@@ -38,9 +43,10 @@ namespace SF3.MPD.Project {
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
 
-        protected MPD_SurfaceBase(IMPD_Settings settings, IMPD_SurfaceTile[,] tiles, Func<bool> hasModelGetter) {
+        protected MPD_SurfaceBase(IMPD_Settings settings, IMPD_SurfaceTile[,] tiles, IMPD_SurfaceVertex[,] vertices, Func<bool> hasModelGetter) {
             _settings = settings;
             _tiles = tiles;
+            _vertices = vertices;
             Width  = tiles.GetLength(0);
             Height = tiles.GetLength(0);
             _hasModelGetter = hasModelGetter ?? (() => true);
@@ -112,6 +118,7 @@ namespace SF3.MPD.Project {
         }
 
         public IMPD_SurfaceTile GetTile(int x, int y) => _tiles[x, y];
+        public IMPD_SurfaceVertex GetVertex(int vx, int vy) => _vertices[vx, vy];
         public IMPD_SurfaceTile[] GetAllTiles() => _tiles.To1DArrayTransposed();
 
         public void UpdateVertexNormal(int vx, int vy)
@@ -143,5 +150,6 @@ namespace SF3.MPD.Project {
 
         protected IMPD_Settings _settings;
         protected IMPD_SurfaceTile[,] _tiles;
+        protected IMPD_SurfaceVertex[,] _vertices;
     }
 }
