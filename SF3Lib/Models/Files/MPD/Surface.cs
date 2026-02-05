@@ -6,8 +6,16 @@ using SF3.MPD.Project;
 
 namespace SF3.Models.Files.MPD {
     public class Surface : MPD_SurfaceBase {
-        public Surface(IMPD_File mpdFile, IMPD_SurfaceTile[,] tiles, Func<bool> hasModelGetter) : base(mpdFile.Settings, tiles, hasModelGetter) {
+        public Surface(IMPD_File mpdFile, Func<bool> hasModelGetter) : base(mpdFile.Settings, MakeTiles(mpdFile), hasModelGetter) {
             MPD_File = mpdFile;
+        }
+
+        private static IMPD_SurfaceTile[,] MakeTiles(IMPD_File file) {
+            var tiles = new SurfaceTile[64, 64];
+            for (var x = 0; x < 64; x++)
+                for (var y = 0; y < 64; y++)
+                    tiles[x, y] = new SurfaceTile(file, x, y);
+            return tiles;
         }
 
         public IMPD_File MPD_File { get; }

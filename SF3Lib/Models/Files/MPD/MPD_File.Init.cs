@@ -41,7 +41,8 @@ namespace SF3.Models.Files.MPD {
             tables.AddRange(headerTables);
             tables.AddRange(chunkTables);
 
-            InitTiles();
+            Surface = new Surface(this, () => SurfaceModelChunk != null);
+
             return tables;
         }
 
@@ -571,15 +572,6 @@ namespace SF3.Models.Files.MPD {
                 // If any of the child data is marked as modified, mark the parent data as modified as well.
                 d.IsModifiedChanged += (s, e) => Data.IsModified |= d.IsModified;
             }
-        }
-
-        private void InitTiles() {
-            var tiles = new SurfaceTile[64, 64];
-            for (var x = 0; x < 64; x++)
-                for (var y = 0; y < 64; y++)
-                    tiles[x, y] = new SurfaceTile(this, x, y);
-
-            Surface = new Surface(this, tiles, () => this.SurfaceModelChunk != null);
         }
     }
 }
