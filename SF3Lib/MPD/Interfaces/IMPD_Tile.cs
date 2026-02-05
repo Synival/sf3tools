@@ -90,6 +90,13 @@ namespace SF3.MPD.Interfaces {
         byte[] GetVertexHeights();
 
         /// <summary>
+        /// Sets the normal vector of the tile for the specified corner.
+        /// </summary>
+        /// <param name="corner">The corner of the tile whose normal vector should be set.</param>
+        /// <returns>A normal VECTOR.</returns>
+        void SetVertexNormal(CornerType corner, VECTOR normal);
+
+        /// <summary>
         /// Sets the height of a corner of a tile for display.
         /// The tile center, adjacent tiles, and all impacted normals are updated as required.
         /// </summary>

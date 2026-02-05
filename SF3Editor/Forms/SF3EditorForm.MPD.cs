@@ -11,6 +11,7 @@ using CommonLib.Utils;
 using CommonLib.Win;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SF3.Models.Files.MPD;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Writer;
 using SF3.Types;
@@ -266,8 +267,9 @@ namespace SF3.Editor.Forms {
 
         private void tsmiMPD_RecalculateSurfaceModelNormals_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD) {
-                var mpdFile           = (IMPD_File) SelectedFile.Loader.Model;
-                mpdFile.SurfaceModelChunk?.UpdateVertexNormals(mpdFile.SurfaceDataChunk?.HeightmapRowTable, _appState.MakeNormalCalculationSettings());
+                var mpdFile = (IMPD_File) SelectedFile.Loader.Model;
+                mpdFile.Surface.NormalSettings = _appState.MakeNormalCalculationSettings();
+                mpdFile.Surface.UpdateVertexNormals();
 
                 var mpdView = (MPD_View) (SelectedFile.View.ActualView);
                 mpdView.UpdateViewerMap();

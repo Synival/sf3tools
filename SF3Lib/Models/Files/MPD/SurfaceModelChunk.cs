@@ -6,8 +6,9 @@ using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Tables;
-using SF3.Models.Tables.MPD.Surface;
 using SF3.Models.Tables.MPD.SurfaceModel;
+using SF3.MPD.Extensions;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
 
@@ -40,22 +41,21 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="corner">Corner of the tile to update.</param>
-        /// <param name="settings">Settings for normal calculations.</param>
-        public void UpdateVertexNormal(int tileX, int tileY, CornerType corner, HeightmapRowTable heightmap, NormalCalculationSettings settings)
-            => UpdateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), heightmap, settings);
+        /// <param name="surface">Surface, which handles normal calculations.</param>
+        public void UpdateVertexNormal(int tileX, int tileY, CornerType corner, IMPD_Surface surface)
+            => UpdateVertexNormal(TileToVertexX(tileX, corner), TileToVertexY(tileY, corner), surface);
 
         /// <summary>
         /// Updates the vertex normal for a specific vertex in the vertex mesh.
         /// </summary>
         /// <param name="vertexX">X coordinate of the vertex.</param>
         /// <param name="vertexY">Y coordinate of the vertex.</param>
-        /// <param name="settings">Settings for normal calculations.</param>
-        public void UpdateVertexNormal(int vertexX, int vertexY, HeightmapRowTable heightmap, NormalCalculationSettings settings) {
-            if (heightmap == null || vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
+        /// <param name="surface">Surface, which handles normal calculations.</param>
+        public void UpdateVertexNormal(int vertexX, int vertexY, IMPD_Surface surface) {
+            if (surface == null || vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
                 return;
 
-            var normal = heightmap.CalculateVertexNormal(vertexX, vertexY, settings);
+            var normal = surface.CalculateVertexNormal(vertexX, vertexY);
             var locations = GetVertexBlockLocations(vertexX, vertexY);
             UpdateVertexNormals(locations, normal);
         }
@@ -76,25 +76,24 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         /// <param name="tileX">X coordinate of the tile.</param>
         /// <param name="tileY">Y coordinate of the tile.</param>
-        /// <param name="settings">Settings for normal calculations.</param>
-        public void UpdateVertexNormals(int tileX, int tileY, HeightmapRowTable heightmap, NormalCalculationSettings settings) {
-            if (heightmap == null)
+        /// <param name="surface">Surface, which handles normal calculations.</param>
+        public void UpdateVertexNormals(int tileX, int tileY, IMPD_Surface surface) {
+            if (surface == null)
                 return;
             foreach (var c in (CornerType[]) Enum.GetValues(typeof(CornerType)))
-                UpdateVertexNormal(tileX, tileY, c, heightmap, settings);
+                UpdateVertexNormal(tileX, tileY, c, surface);
         }
 
         /// <summary>
         /// Recalculates all vertex "normals" for all tiles.
         /// </summary>
-        /// <param name="heightmap">The heightmap table to recalculate.</param>
-        /// <param name="settings">Settings for normal calculations.</param>
-        public void UpdateVertexNormals(HeightmapRowTable heightmap, NormalCalculationSettings settings) {
-            if (heightmap == null)
+        /// <param name="surface">Surface, which handles normal calculations.</param>
+        public void UpdateVertexNormals(IMPD_Surface surface) {
+            if (surface == null)
                 return;
             for (var y = 0; y < 65; y++)
                 for (var x = 0; x < 65; x++)
-                    UpdateVertexNormal(x, y, heightmap, settings);
+                    UpdateVertexNormal(x, y, surface);
         }
 
         [BulkCopyRowName]

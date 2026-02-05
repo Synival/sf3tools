@@ -62,13 +62,12 @@ namespace SF3.Models.Files.MPD {
             var vyCenter = BlockHelpers.TileToVertexY(Y, corner);
 
             // Normals need to be updated in a 3x3 grid.
-            var heightmapRowTable = MPD_File.SurfaceDataChunk.HeightmapRowTable;
             for (var x = -1; x <= 1; x++) {
                 for (var y = -1; y <= 1; y++) {
                     var vx = x + vxCenter;
                     var vy = y + vyCenter;
                     if (vx >= 0 && vy >= 0 && vx < 65 && vy < 65)
-                        surfaceModel.UpdateVertexNormal(vx, vy, heightmapRowTable, Surface.NormalSettings);
+                        surfaceModel.UpdateVertexNormal(vx, vy, Surface);
                 }
             }
 

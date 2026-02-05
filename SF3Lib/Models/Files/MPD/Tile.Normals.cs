@@ -17,5 +17,14 @@ namespace SF3.Models.Files.MPD {
             return ((CornerType[]) Enum.GetValues(typeof(CornerType)))
                 .Select(c => GetVertexNormal(c)).ToArray();
         }
+
+        public void SetVertexNormal(CornerType corner, VECTOR normal) {
+            if (MPD_File.SurfaceModelChunk?.VertexNormalBlockTable == null)
+                return;
+
+            var bls = _sharedBlockVertexLocations[corner];
+            foreach (var bl in bls)
+                MPD_File.SurfaceModelChunk.VertexNormalBlockTable[bl.Num][bl.X, bl.Y] = normal;
+        }
     }
 }

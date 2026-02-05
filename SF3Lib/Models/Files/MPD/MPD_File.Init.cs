@@ -579,7 +579,7 @@ namespace SF3.Models.Files.MPD {
                 for (var y = 0; y < 64; y++)
                     tiles[x, y] = new Tile(this, x, y);
 
-            Surface = new MPD_Surface(Settings, tiles, () => this.SurfaceModelChunk != null);
+            Surface = new Surface(this, tiles, () => this.SurfaceModelChunk != null);
         }
     }
 }

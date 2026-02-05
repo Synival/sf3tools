@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
+using CommonLib.Utils;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -14,15 +15,11 @@ namespace SF3.MPD.Project {
             RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
 
             TextureID   = textureId;
-            _vertexNormals = new VECTOR[] {
-                new VECTOR(0, -1, 0),
-                new VECTOR(0, -1, 0),
-                new VECTOR(0, -1, 0),
-                new VECTOR(0, -1, 0),
-            };
 
             EventID     = eventId;
             TerrainType = TerrainType.NoEntry;
+
+            UpdateCenterHeight();
         }
 
         public MPD_Tile(IMPD_Surface surface, IMPD_Tile original, int x, int y) {
@@ -42,7 +39,6 @@ namespace SF3.MPD.Project {
             EventID       = original.EventID;
 
             _vertexHeights = (byte[]) (original.GetVertexHeights().Clone());
-            _vertexNormals = (VECTOR[]) (original.GetVertexNormals().Clone());
 
             UpdateCenterHeight();
         }
@@ -82,18 +78,44 @@ namespace SF3.MPD.Project {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
-            return _vertexNormals[cornerInt];
+            var vx = BlockHelpers.TileToVertexX(X, corner);
+            var vy = BlockHelpers.TileToVertexY(Y, corner);
+            return Surface.GetVertexNormal(vx, vy);
         }
 
         public byte[] GetVertexHeights() => (byte[]) (_vertexHeights.Clone());
-        public VECTOR[] GetVertexNormals() => (VECTOR[]) (_vertexNormals.Clone());
+
+        public VECTOR[] GetVertexNormals() {
+            var x = X;
+            var y = Y;
+            return new VECTOR[] {
+                Surface.GetVertexNormal(x + 1, y + 1),
+                Surface.GetVertexNormal(x + 0, y + 1),
+                Surface.GetVertexNormal(x + 0, y + 0),
+                Surface.GetVertexNormal(x + 1, y + 0),
+            };
+        }
 
         public void SetVertexHeight(CornerType corner, byte value) {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
             _vertexHeights[cornerInt] = value;
+
             UpdateCenterHeight();
+
+            var vx = BlockHelpers.TileToVertexX(X, corner);
+            var vy = BlockHelpers.TileToVertexY(Y, corner);
+            Surface.UpdateVertexNormalsInvolvingVertex(vx, vy);
+        }
+
+        public void SetVertexNormal(CornerType corner, VECTOR normal) {
+            int cornerInt = (int) corner;
+            if (cornerInt < 0 || cornerInt > 3)
+                throw new ArgumentOutOfRangeException(nameof(corner));
+            var vx = BlockHelpers.TileToVertexX(X, corner);
+            var vy = BlockHelpers.TileToVertexY(Y, corner);
+            Surface.SetVertexNormal(vx, vy, normal);
         }
 
         public void SetVertexHeights(byte[] values) {
@@ -102,7 +124,12 @@ namespace SF3.MPD.Project {
             if (values.Length != 4)
                 throw new ArgumentOutOfRangeException(nameof(values) + ": Should have size of 4");
             _vertexHeights = values;
+
             UpdateCenterHeight();
+
+            var x = X;
+            var y = Y;
+            Surface.UpdateVertexNormalsInvolvingVertices(x, y, x + 1, y + 1);
         }
 
         private void UpdateCenterHeight() {
@@ -110,7 +137,6 @@ namespace SF3.MPD.Project {
         }
 
         private byte[] _vertexHeights = new byte[4];
-        private VECTOR[] _vertexNormals = new VECTOR[4];
 
         public event EventHandler Modified;
     }

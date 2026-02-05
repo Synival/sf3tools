@@ -1,4 +1,5 @@
-﻿using SF3.Types;
+﻿using CommonLib.SGL;
+using SF3.Types;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -15,6 +16,37 @@ namespace SF3.MPD.Interfaces {
         /// </summary>
         /// <returns></returns>
         IMPD_Tile[] GetAllTiles();
+
+        /// <summary>
+        /// Sets the normal for vertex on the surface model.
+        /// </summary>
+        /// <param name="vx">Vertex X</param>
+        /// <param name="vy">Vertex Y</param>
+        /// <param name="normal">Normal to set</param>
+        void SetVertexNormal(int vx, int vy, VECTOR normal);
+
+        /// <summary>
+        /// Gets the normal for vertex on the surface model.
+        /// </summary>
+        /// <param name="vx">Vertex X</param>
+        /// <param name="vy">Vertex Y</param>
+        VECTOR GetVertexNormal(int vx, int vy);
+
+        /// <summary>
+        /// Updates a vertex normal.
+        /// </summary>
+        /// <param name="vx">X coordinate of the vertex to update.</param>
+        /// <param name="vy">Y coordinate of the vertex to update.</param>
+        void UpdateVertexNormal(int vx, int vy);
+
+        /// <summary>
+        /// Updates all vertex normals in a range.
+        /// </summary>
+        /// <param name="vx1">Lowest X coordinate of the vertices to update.</param>
+        /// <param name="vy1">Lowest Y coordinate of the vertices to update.</param>
+        /// <param name="vx2">Highest X coordinate of the vertices to update.</param>
+        /// <param name="vy2">Highest Y coordinate of the vertices to update.</param>
+        void UpdateVertexNormals(int vx1, int vy1, int vx2, int vy2);
 
         /// <summary>
         /// The width of the surface (in tiles).
