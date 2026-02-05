@@ -109,7 +109,7 @@ namespace SF3.MPD.Project {
 
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
-            Surface.UpdateVertexNormalsInvolvingVertex(vx, vy);
+            Surface.GetVertex(vx, vy).UpdateNormalsInvolvingVertex();
         }
 
         public void SetVertexNormal(CornerType corner, VECTOR normal) {

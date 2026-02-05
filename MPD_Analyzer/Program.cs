@@ -109,7 +109,8 @@ namespace MPD_Analyzer {
 
             for (int vy = 0; vy < 65; vy++) {
                 for (int vx = 0; vx < 65; vx++) {
-                    var heights = mpdFile.Surface.GetVertexHeightMeshForNormalCalculation(vx, vy);
+                    var vertex = mpdFile.Surface.GetVertex(vx, vy);
+                    var heights = vertex.GetHeightMeshForNormalCalculation();
 
                     var min = heights.To1DArray().Select(x => x ?? (byte) 0xFF).Min();
                     var newHeights = new byte[3, 3];
@@ -120,8 +121,8 @@ namespace MPD_Analyzer {
                     if (newHeights.To1DArray().All(x => x == 0))
                         continue;
 
-                    var originalNormal = mpdFile.Surface.GetVertex(vx, vy).Normal;
-                    var newNormal = mpdFile.Surface.CalculateVertexNormal(vx, vy);
+                    var originalNormal = vertex.Normal;
+                    var newNormal      = vertex.CalculateNormal();
 
                     var mesh = new NormalMesh(newHeights, originalNormal);
 

@@ -55,7 +55,7 @@ namespace SF3.Models.Files.MPD {
             if (surface == null || vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
                 return;
 
-            var normal = surface.CalculateVertexNormal(vertexX, vertexY);
+            var normal = surface.GetVertex(vertexX, vertexY).CalculateNormal();
             var locations = GetVertexBlockLocations(vertexX, vertexY);
             UpdateVertexNormals(locations, normal);
         }

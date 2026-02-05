@@ -174,7 +174,7 @@ namespace SF3.MPD.Project {
             var verticesHeight = Height + 1;
             for (int vy = 0; vy < verticesHeight; vy++)
                 for (int vx = 0; vx < verticesWidth; vx++)
-                    _vertices[vx, vy].Normal = this.CalculateVertexNormal(vx, vy, heightmap, vx1 - 1, vy1 - 1);
+                    _vertices[vx, vy].Normal = _vertices[vx, vy].CalculateNormal(heightmap, vx1 - 1, vy1 - 1);
         }
 
         public int Width { get; }
