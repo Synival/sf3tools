@@ -36,14 +36,19 @@ namespace SF3.MPD.Project {
                     var row = rows[y];
                     for (int x = 0; x * 9 < row.Length - 7 && x < table.GetLength(0); x++) {
                         var pos = x * 9;
-                        var base64Bytes = Convert.FromBase64String(row.Substring(pos, 8));
-                        var components = base64Bytes.ToUShorts();
-                        table[x, y] = new VECTOR(
-                            components[0] * 2,
-                            components[1] * 2,
-                            components[2] * 2,
-                            isRaw: true
-                        );
+                        var str = row.Substring(pos, 8);
+                        if (str == "        ")
+                            table[x, y] = new VECTOR(0, -1, 0);
+                        else {
+                            var base64Bytes = Convert.FromBase64String(str);
+                            var components = base64Bytes.ToUShorts();
+                            table[x, y] = new VECTOR(
+                                components[0] * 2,
+                                components[1] * 2,
+                                components[2] * 2,
+                                isRaw: true
+                            );
+                        }
                     }
                 }
 

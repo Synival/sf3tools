@@ -55,6 +55,9 @@ namespace SF3.MPD.Extensions {
                 var height = surface.Height + 1;
 
                 string VectorsToBase64(VECTOR vec) {
+                    if (vec.X.RawInt == 0 && vec.Y.RawInt == -65536 && vec.Z.RawInt == 0)
+                        return "        ";
+
                     var bytes = new byte[6];
                     var pos = 0;
 
