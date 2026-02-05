@@ -33,9 +33,63 @@ namespace SF3.MPD.Extensions {
                 return jArray;
             };
 
+            JArray MakeHeightTable(Func<int, int, byte[]> fetcher) {
+                var width  = surface.Width;
+                var height = surface.Height;
+
+                var jArray = new JArray();
+                for (int y = 0; y < height; y++) {
+                    var str = new StringBuilder();
+                    for (int x = 0; x < width; x++) {
+                        var values = fetcher(x, y);
+                        str.Append(((x != 0) ? " " : "") + values[0].ToString("X2") + values[1].ToString("X2") + values[2].ToString("X2") + values[3].ToString("X2"));
+                    }
+                    jArray.Add(str.ToString());
+                }
+
+                return jArray;
+            };
+
+            JArray MakeNormalTable(Func<int, int, VECTOR> fetcher) {
+                var width  = surface.Width + 1;
+                var height = surface.Height + 1;
+
+                string VectorsToBase64(VECTOR vec) {
+                    var bytes = new byte[6];
+                    var pos = 0;
+
+                    var x = (ushort) (((uint) vec.X.RawInt) / 2);
+                    var y = (ushort) (((uint) vec.Y.RawInt) / 2);
+                    var z = (ushort) (((uint) vec.Z.RawInt) / 2);
+
+                    bytes[pos++] = (byte) (x >> 8);
+                    bytes[pos++] = (byte) (x >> 0);
+                    bytes[pos++] = (byte) (y >> 8);
+                    bytes[pos++] = (byte) (y >> 0);
+                    bytes[pos++] = (byte) (z >> 8);
+                    bytes[pos++] = (byte) (z >> 0);
+
+                    return Convert.ToBase64String(bytes);
+                }
+
+                var jArray = new JArray();
+                for (int y = 0; y < height; y++) {
+                    var str = new StringBuilder();
+                    for (int x = 0; x < width; x++) {
+                        var value = fetcher(x, y);
+                        str.Append(((x != 0) ? " " : "") + VectorsToBase64(value));
+                    }
+                    jArray.Add(str.ToString());
+                }
+
+                return jArray;
+            };
+
             return new JObject {
                 { "TextureIDs", MakeByteTable((x, y) => surface.GetTile(x, y).TextureID, 0xFF) },
                 { "EventIDs",   MakeByteTable((x, y) => surface.GetTile(x, y).EventID, 0) },
+                { "Heights",    MakeHeightTable((x, y) => surface.GetTile(x, y).GetVertexHeights()) },
+                { "Normals",    MakeNormalTable((x, y) => surface.GetVertexNormal(x, y)) },
             };
         }
 

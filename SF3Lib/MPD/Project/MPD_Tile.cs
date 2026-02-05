@@ -8,7 +8,7 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_Tile : IMPD_Tile {
-        public MPD_Tile(IMPD_Surface surface, int x, int y, byte textureId = 0xFF, byte eventId = 0) {
+        public MPD_Tile(IMPD_Surface surface, int x, int y, byte textureId = 0xFF, byte eventId = 0, byte[] heights = null) {
             Surface     = surface;
             X           = x;
             Y           = y;
@@ -18,6 +18,9 @@ namespace SF3.MPD.Project {
 
             EventID     = eventId;
             TerrainType = TerrainType.NoEntry;
+
+            if (heights != null && heights.Length == 4)
+                _vertexHeights = heights;
 
             UpdateCenterHeight();
         }
