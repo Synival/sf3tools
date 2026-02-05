@@ -14,8 +14,8 @@ using SF3.Win.Extensions;
 using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
-    public partial class TilePropertiesControl : UserControl {
-        public TilePropertiesControl() {
+    public partial class SurfaceTilePropertiesControl : UserControl {
+        public SurfaceTilePropertiesControl() {
             InitializeComponent();
 
             _nudVertexHeights = new Dictionary<CornerType, NumericUpDown>() {
@@ -139,7 +139,7 @@ namespace SF3.Win.Controls {
                     }
                 }
                 else {
-                    var fileTile = _tile as Tile;
+                    var fileTile = _tile as SurfaceTile;
 
                     InitNUD(nudModelTextureID, _tile.TextureID);
                     cbModelHasTree.Checked = fileTile?.TreeModelID != null;
@@ -287,7 +287,7 @@ namespace SF3.Win.Controls {
 
             using (IncrementNonUserInputGuard()) {
                 // This only really applies to MPD_File tiles. We have a better way otherwise.
-                var fileTile = _tile as Tile;
+                var fileTile = _tile as SurfaceTile;
                 if (fileTile == null)
                     return;
 
@@ -323,11 +323,11 @@ namespace SF3.Win.Controls {
                 _nudVertexHeights[corner].Enabled = !isFlat;
         }
 
-        private IMPD_Tile _tile = null;
+        private IMPD_SurfaceTile _tile = null;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IMPD_Tile Tile {
+        public IMPD_SurfaceTile Tile {
             get => _tile;
             set {
                 if (value == _tile)

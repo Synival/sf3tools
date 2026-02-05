@@ -309,7 +309,7 @@ namespace SF3.Models.Files.MPD {
             var corners = (CornerType[]) Enum.GetValues(typeof(CornerType));
 
             foreach (var tile in Surface.GetAllTiles()) {
-                if (tile is Tile fileTile) {
+                if (tile is SurfaceTile fileTile) {
                     // Report irregularities in the heightmap.
                     var dataHeights = corners.ToDictionary(c => c, fileTile.GetSurfaceDataVertexHeight);
                     if (tile.IsFlat) {

@@ -11,7 +11,7 @@ namespace SF3.MPD.Writer {
             var tilesWidth  = surface.Width;
             var tilesHeight = surface.Height;
 
-            void ForEachTile(Action<IMPD_Tile> action) {
+            void ForEachTile(Action<IMPD_SurfaceTile> action) {
                 for (int y = 0; y < tilesHeight; y++)
                     for (int x = 0; x < tilesWidth; x++)
                         action(surface.GetTile(x, y));

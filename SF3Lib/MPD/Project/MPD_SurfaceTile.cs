@@ -7,8 +7,8 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_Tile : IMPD_Tile {
-        public MPD_Tile(IMPD_Surface surface, int x, int y, byte textureId = 0xFF, byte eventId = 0, byte[] heights = null) {
+    public class MPD_SurfaceTile : IMPD_SurfaceTile {
+        public MPD_SurfaceTile(IMPD_Surface surface, int x, int y, byte textureId = 0xFF, byte eventId = 0, byte[] heights = null) {
             Surface     = surface;
             X           = x;
             Y           = y;
@@ -25,7 +25,7 @@ namespace SF3.MPD.Project {
             UpdateCenterHeight();
         }
 
-        public MPD_Tile(IMPD_Surface surface, IMPD_Tile original, int x, int y) {
+        public MPD_SurfaceTile(IMPD_Surface surface, IMPD_SurfaceTile original, int x, int y) {
             Surface     = surface;
             X           = x;
             Y           = y;

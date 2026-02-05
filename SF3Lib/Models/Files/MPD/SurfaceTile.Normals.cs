@@ -4,7 +4,7 @@ using CommonLib.SGL;
 using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
-    public partial class Tile {
+    public partial class SurfaceTile {
         public VECTOR GetVertexNormal(CornerType corner) {
             if (MPD_File.SurfaceModelChunk?.VertexNormalBlockTable == null)
                 return new VECTOR(0f, 1f, 0f);

@@ -9,13 +9,13 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Fetches an individual tile on the surface.
         /// </summary>
-        IMPD_Tile GetTile(int x, int y);
+        IMPD_SurfaceTile GetTile(int x, int y);
 
         /// <summary>
         /// Fetches all tiles as a 1D array in row-major order.
         /// </summary>
         /// <returns></returns>
-        IMPD_Tile[] GetAllTiles();
+        IMPD_SurfaceTile[] GetAllTiles();
 
         /// <summary>
         /// Sets the normal for vertex on the surface model.

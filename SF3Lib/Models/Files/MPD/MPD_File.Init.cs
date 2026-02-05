@@ -574,10 +574,10 @@ namespace SF3.Models.Files.MPD {
         }
 
         private void InitTiles() {
-            var tiles = new Tile[64, 64];
+            var tiles = new SurfaceTile[64, 64];
             for (var x = 0; x < 64; x++)
                 for (var y = 0; y < 64; y++)
-                    tiles[x, y] = new Tile(this, x, y);
+                    tiles[x, y] = new SurfaceTile(this, x, y);
 
             Surface = new Surface(this, tiles, () => this.SurfaceModelChunk != null);
         }

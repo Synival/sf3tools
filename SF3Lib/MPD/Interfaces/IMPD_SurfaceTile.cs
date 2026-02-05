@@ -8,7 +8,7 @@ namespace SF3.MPD.Interfaces {
     /// Abstract implementation of a tile that belongs to an MPD's surface. Includes the surface heightmap, event IDs,
     /// and model info like textures and texture flags.
     /// </summary>
-    public interface IMPD_Tile {
+    public interface IMPD_SurfaceTile {
         /// <summary>
         /// The surface to which this tile belongs.
         /// </summary>

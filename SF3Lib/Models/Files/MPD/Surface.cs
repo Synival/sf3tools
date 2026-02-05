@@ -6,7 +6,7 @@ using SF3.MPD.Project;
 
 namespace SF3.Models.Files.MPD {
     public class Surface : MPD_SurfaceBase {
-        public Surface(IMPD_File mpdFile, IMPD_Tile[,] tiles, Func<bool> hasModelGetter) : base(mpdFile.Settings, tiles, hasModelGetter) {
+        public Surface(IMPD_File mpdFile, IMPD_SurfaceTile[,] tiles, Func<bool> hasModelGetter) : base(mpdFile.Settings, tiles, hasModelGetter) {
             MPD_File = mpdFile;
         }
 

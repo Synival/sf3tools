@@ -2,7 +2,7 @@
 using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
-    public partial class Tile {
+    public partial class SurfaceTile {
         public float GetSurfaceDataVertexHeight(CornerType corner)
             => MPD_File.SurfaceDataChunk?.HeightmapRowTable?[Y]?.GetHeight(X, corner) ?? 0.0f;
         public float GetSurfaceModelVertexHeight(CornerType corner) {

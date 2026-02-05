@@ -12,7 +12,7 @@ namespace SF3.Models.Files.MPD {
             public ModelChunk ModelCollection;
             public ModelInstance ModelInstance;
             public VECTOR TilePosition;
-            public Tile Tile;
+            public SurfaceTile Tile;
             public float Distance;
         }
 
@@ -53,7 +53,7 @@ namespace SF3.Models.Files.MPD {
                         if (tileX < 0 || tileX >= 64 || tileZ < 0 || tileZ >= 64)
                             continue;
 
-                        var tile = Surface.GetTile(tileX, tileZ) as Tile;
+                        var tile = Surface.GetTile(tileX, tileZ) as SurfaceTile;
                         if (tile == null)
                             continue;
                         var tileY = tile.GetAverageVertexHeight();
@@ -94,7 +94,7 @@ namespace SF3.Models.Files.MPD {
 
         public void ResetTileTrees() {
             foreach (var tile in Surface.GetAllTiles())
-                if (tile is Tile fileTile)
+                if (tile is SurfaceTile fileTile)
                     fileTile.TreeModelID = null;
         }
 

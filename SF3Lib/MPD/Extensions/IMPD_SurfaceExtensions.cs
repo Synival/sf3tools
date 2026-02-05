@@ -137,21 +137,21 @@ namespace SF3.MPD.Extensions {
             // for each normal we want to calculate.
             int surfaceWidth  = surface.Width;
             int surfaceHeight = surface.Height;
-            IMPD_Tile GetTileIfExists(int tx, int ty)
+            IMPD_SurfaceTile GetTileIfExists(int tx, int ty)
                 => (tx >= 0 && ty >= 0 && tx < surfaceWidth && ty < surfaceHeight) ? surface.GetTile(tx, ty) : null;
 
             var tilemapWidth  = heightmapWidth + 1;
             var tilemapHeight = heightmapHeight + 1;
-            var tiles = new IMPD_Tile[tilemapWidth, tilemapHeight];
+            var tiles = new IMPD_SurfaceTile[tilemapWidth, tilemapHeight];
             for (int y = 0; y < tilemapWidth; y++)
                 for (int x = 0; x < tilemapHeight; x++)
                     tiles[x, y] = GetTileIfExists(vx1 + x - 2, vy1 + y - 2);
 
             // Function to fetch a set of tiles to consider for fetching vertex heights for a given vertex.
-            (IMPD_Tile Tile, CornerType Corner)[] GetPossibleTiles(int vx, int vy) {
+            (IMPD_SurfaceTile Tile, CornerType Corner)[] GetPossibleTiles(int vx, int vy) {
                 // Function to add a tile if it's considerable for vertex normal calculation.
                 // It must be a tile that exists 
-                var possibleTiles = new List<(IMPD_Tile Tile, CornerType Corner)>();
+                var possibleTiles = new List<(IMPD_SurfaceTile Tile, CornerType Corner)>();
                 void AddTileAndCornerIfValid(int tx, int ty, CornerType corner) {
                     if (tx < 0 || ty < 0 || tx >= tilemapWidth || ty >= tilemapHeight)
                         throw new InvalidOperationException("Internal error; we shouldn't call this function on this condition!");

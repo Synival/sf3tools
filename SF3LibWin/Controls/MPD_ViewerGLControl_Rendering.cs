@@ -281,7 +281,7 @@ namespace SF3.Win.Controls {
         }
 
         private void OnTileModifiedRendering(object sender) {
-            var tile = (Tile) sender;
+            var tile = (SurfaceTile) sender;
             if (_surfaceModel != null) {
                 _surfaceModel.Blocks[tile.BlockLocation.Num].Invalidate();
                 _tileSelectedNeedsUpdate = true;

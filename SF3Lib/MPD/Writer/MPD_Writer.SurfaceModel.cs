@@ -98,7 +98,7 @@ namespace SF3.MPD.Writer {
             ( 0,  0, CornerType.BottomLeft),
         };
 
-        private (IMPD_Tile Tile, CornerType ConnectedCorner) GetNonFlatTileAtVertex(IMPD_Surface surface, int blockX, int blockY, int inBlockVertexX, int inBlockVertexY, bool mustBeInBlock) {
+        private (IMPD_SurfaceTile Tile, CornerType ConnectedCorner) GetNonFlatTileAtVertex(IMPD_Surface surface, int blockX, int blockY, int inBlockVertexX, int inBlockVertexY, bool mustBeInBlock) {
             var tilesWidth  = surface.Width;
             var tilesHeight = surface.Height;
 

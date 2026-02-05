@@ -4,7 +4,7 @@ using System.Linq;
 using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
-    public partial class Tile {
+    public partial class SurfaceTile {
         public byte GetVertexHeight(CornerType corner) {
             // For any tile whose character/texture ID has flag 0x80, the bottom-right corner of the walking heightmap is used.
             if (MPD_File.SurfaceDataChunk?.HeightmapRowTable != null && MPD_File.SurfaceModelChunk?.TileTextureRowTable != null && IsFlat)
@@ -52,9 +52,9 @@ namespace SF3.Models.Files.MPD {
                 t.Modified?.Invoke(t, EventArgs.Empty);
         }
 
-        private void SetVertexHeight(CornerType corner, byte value, out HashSet<Tile> tilesModified) {
+        private void SetVertexHeight(CornerType corner, byte value, out HashSet<SurfaceTile> tilesModified) {
             // Track tiles updated so they can be informed of updates afterwards, without redundancy.
-            tilesModified = new HashSet<Tile>();
+            tilesModified = new HashSet<SurfaceTile>();
 
             // Update positions in the SurfaceData tables.
             if (MPD_File.SurfaceDataChunk != null) {
@@ -63,7 +63,7 @@ namespace SF3.Models.Files.MPD {
                     : _sharedTileLocations[corner];
 
                 foreach (var stl in tilesToUpdate) {
-                    var tile = (Tile) Surface.GetTile(stl.X, stl.Y);
+                    var tile = (SurfaceTile) Surface.GetTile(stl.X, stl.Y);
                     if (tile != this && tile.IsFlat)
                         continue;
 
@@ -91,7 +91,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         public void SetVertexHeights(byte[] values) {
-            var tilesModified = new HashSet<Tile>();
+            var tilesModified = new HashSet<SurfaceTile>();
 
             foreach (var corner in (CornerType[]) Enum.GetValues(typeof(CornerType))) {
                 SetVertexHeight(corner, values[(int) corner], out var tilesModifiedHere);

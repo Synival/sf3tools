@@ -56,7 +56,7 @@ namespace SF3.Win.Controls {
             tsbCameraLookAtCenter = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleHelp = new System.Windows.Forms.ToolStripButton();
-            tilePropertyControl1 = new TilePropertiesControl();
+            tilePropertyControl1 = new SurfaceTilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
             toolStrip2 = new DarkModeToolStrip();
             tsbDrawGrassland = new System.Windows.Forms.ToolStripButton();
@@ -574,7 +574,7 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbToggleNormals;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private TilePropertiesControl tilePropertyControl1;
+        private SurfaceTilePropertiesControl tilePropertyControl1;
         private MPD_ViewerGLControl mpdViewerGLControl1;
         private System.Windows.Forms.ToolStripButton tsbToggleTerrainType;
         private System.Windows.Forms.ToolStripButton tsbToggleEventID;

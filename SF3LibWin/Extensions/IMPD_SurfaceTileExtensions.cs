@@ -6,8 +6,8 @@ using SF3.Win.OpenGL.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {
-    public static class IMPD_TileExtensions {
-        public static Vector3[] GetVector3Vertices(this IMPD_Tile tile, float scale = 1.00f) {
+    public static class IMPD_SurfaceTileExtensions {
+        public static Vector3[] GetVector3Vertices(this IMPD_SurfaceTile tile, float scale = 1.00f) {
             var xzOff = scale * 0.5f;
 
             var heights = tile.GetVertexHeights().Select(x => x / 16.0f).ToArray();
@@ -38,10 +38,10 @@ namespace SF3.Win.Extensions {
             ];
         }
 
-        public static Vector3 GetVector3Normal(this IMPD_Tile tile, CornerType corner)
+        public static Vector3 GetVector3Normal(this IMPD_SurfaceTile tile, CornerType corner)
             => tile.GetVertexNormal(corner).ToVector3();
 
-        public static Vector3[] GetVector3Normals(this IMPD_Tile tile)
+        public static Vector3[] GetVector3Normals(this IMPD_SurfaceTile tile)
             => tile.GetVertexNormals().Select(x => x.ToVector3()).ToArray();
     }
 }

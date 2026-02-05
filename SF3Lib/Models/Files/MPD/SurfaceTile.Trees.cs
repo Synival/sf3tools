@@ -5,7 +5,7 @@ using SF3.Extensions;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public partial class Tile {
+    public partial class SurfaceTile {
 
         /// <summary>
         /// If a tree is assigned, it's placed very far off the camera screen and
@@ -47,7 +47,7 @@ namespace SF3.Models.Files.MPD {
 
             // Do nothing unless the IMPD_File's tiles are file-based tiles.
             // (We have better methods otherwise)
-            if (MPD_File.Surface == null || !(MPD_File.Surface.GetTile(0, 0) is Tile))
+            if (MPD_File.Surface == null || !(MPD_File.Surface.GetTile(0, 0) is SurfaceTile))
                 return false;
 
             // Get a list of all currently associated trees.
@@ -56,7 +56,7 @@ namespace SF3.Models.Files.MPD {
                 return false;
 
             var associatedModelsList = MPD_File.Surface.GetAllTiles()
-                .Cast<Tile>()
+                .Cast<SurfaceTile>()
                 .Where(x => x.TreeModelID.HasValue)
                 .Select(x => x.TreeModelID.Value)
                 .ToList();

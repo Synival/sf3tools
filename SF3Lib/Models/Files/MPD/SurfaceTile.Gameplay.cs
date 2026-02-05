@@ -2,7 +2,7 @@
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
-    public partial class Tile {
+    public partial class SurfaceTile {
         public TerrainType TerrainType {
             get => (MPD_File.SurfaceDataChunk != null) ? MPD_File.SurfaceDataChunk.HeightTerrainRowTable[Y].GetTerrainType(X) : 0;
             set {

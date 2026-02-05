@@ -7,8 +7,8 @@ using SF3.MPD;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
-    public partial class Tile : IMPD_Tile {
-        public Tile(IMPD_File file, int x, int y) {
+    public partial class SurfaceTile : IMPD_SurfaceTile {
+        public SurfaceTile(IMPD_File file, int x, int y) {
             MPD_File = file;
             X = x;
             Y = y;

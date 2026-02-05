@@ -16,10 +16,10 @@ namespace SF3.MPD.Project {
             Width  = 64;
             Height = 64;
 
-            _tiles = new IMPD_Tile[Width, Height];
+            _tiles = new IMPD_SurfaceTile[Width, Height];
             for (int y = 0; y < Width; y++)
                 for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_Tile(this, x, y);
+                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y);
 
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
@@ -30,15 +30,15 @@ namespace SF3.MPD.Project {
             Width  = original.Width;
             Height = original.Height;
 
-            _tiles = new IMPD_Tile[Width, Height];
+            _tiles = new IMPD_SurfaceTile[Width, Height];
             for (int y = 0; y < Width; y++)
                 for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_Tile(this, original.GetTile(x, y), x, y);
+                    _tiles[x, y] = new MPD_SurfaceTile(this, original.GetTile(x, y), x, y);
 
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
 
-        protected MPD_SurfaceBase(IMPD_Settings settings, IMPD_Tile[,] tiles, Func<bool> hasModelGetter) {
+        protected MPD_SurfaceBase(IMPD_Settings settings, IMPD_SurfaceTile[,] tiles, Func<bool> hasModelGetter) {
             _settings = settings;
             _tiles = tiles;
             Width  = tiles.GetLength(0);
@@ -103,16 +103,16 @@ namespace SF3.MPD.Project {
             var eventIds   = FetchByteTable("EventIDs", 0);
             var heights    = FetchHeightTable("Heights");
 
-            _tiles = new IMPD_Tile[Width, Height];
+            _tiles = new IMPD_SurfaceTile[Width, Height];
             for (int y = 0; y < Width; y++)
                 for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_Tile(this, x, y, textureIds[x, y], eventIds[x, y], heights[x, y]);
+                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], eventIds[x, y], heights[x, y]);
 
            _hasModelGetter = () => _settings.HasSurfaceModel;
         }
 
-        public IMPD_Tile GetTile(int x, int y) => _tiles[x, y];
-        public IMPD_Tile[] GetAllTiles() => _tiles.To1DArrayTransposed();
+        public IMPD_SurfaceTile GetTile(int x, int y) => _tiles[x, y];
+        public IMPD_SurfaceTile[] GetAllTiles() => _tiles.To1DArrayTransposed();
 
         public void UpdateVertexNormal(int vx, int vy)
             => UpdateVertexNormals(vx, vy, vx, vy);
@@ -142,6 +142,6 @@ namespace SF3.MPD.Project {
         public NormalCalculationSettings NormalSettings { get; set; } = new NormalCalculationSettings();
 
         protected IMPD_Settings _settings;
-        protected IMPD_Tile[,] _tiles;
+        protected IMPD_SurfaceTile[,] _tiles;
     }
 }

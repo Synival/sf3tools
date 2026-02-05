@@ -21,13 +21,13 @@ namespace SF3.FieldEditing {
                     UpdateTileTexture(surface.GetTile(ix, iy), setDefaultIfNothingFound);
         }
 
-        public static void UpdateTileTexture(IMPD_Tile tile, bool setDefaultIfNothingFound) {
+        public static void UpdateTileTexture(IMPD_SurfaceTile tile, bool setDefaultIfNothingFound) {
             var tileType = GetTileTypeByTexID(tile.TextureID);
             if (tileType.HasValue)
                 SetTileTexture(tile, tileType.Value, setDefaultIfNothingFound);
         }
 
-        public static void SetTileTexture(IMPD_Tile tile, TileType tileType, bool setDefaultIfNothingFound) {
+        public static void SetTileTexture(IMPD_SurfaceTile tile, TileType tileType, bool setDefaultIfNothingFound) {
             var surface = tile.Surface;
             var gridTileTypes = new TileType[3, 3];
             var defaultTexId = GetDefaultTexIdByTileType(tileType);

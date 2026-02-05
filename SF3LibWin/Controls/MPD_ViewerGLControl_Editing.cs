@@ -245,7 +245,7 @@ namespace SF3.Win.Controls {
                     if (tx >= 0 && ty >= 0 && tx < 64 && ty < 64)
                         FieldEditing.FieldEditing.UpdateTileTexture(MPD_File.Surface.GetTile(tx, ty), true);
 
-            if (thisTile is Tile fileTile) {
+            if (thisTile is SurfaceTile fileTile) {
                 bool modelsChanged = false;
                 if (thisTile.TerrainType == TerrainType.Forest)
                     modelsChanged = fileTile.AdoptTree();
@@ -264,6 +264,6 @@ namespace SF3.Win.Controls {
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public TilePropertiesControl TilePropertiesControl { get; set; } = null;
+        public SurfaceTilePropertiesControl TilePropertiesControl { get; set; } = null;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using CommonLib.Win.Controls;
 
 namespace SF3.Win.Controls {
-    partial class TilePropertiesControl {
+    partial class SurfaceTilePropertiesControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
