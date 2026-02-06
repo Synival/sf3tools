@@ -13,5 +13,13 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void FromJSON_WithScenario1_BLACK_ProducesSameMPDAsProjectCopy()
             => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "BLACK");
+
+        [TestMethod]
+        public void FromJSON_WithScenario1_FURAIN_ProducesSameMPDAsProjectCopy()
+            => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "FURAIN");
+
+        [TestMethod]
+        public void FromJSON_WithScenario1_CHOU00_ProducesSameMPDAsProjectCopy()
+            => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "CHOU00");
     }
 }

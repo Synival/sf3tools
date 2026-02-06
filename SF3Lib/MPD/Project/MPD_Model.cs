@@ -35,9 +35,7 @@ namespace SF3.MPD.Project {
 
             ModelID      = (int) jObject["ID"];
             _actualModel = SGL_Model.FromJObject(jObject);
-
-            if (!Collection.IsHeaderModelCollection())
-                LevelsOfDetail = (int) jObject["LevelsOfDetail"];
+            LevelsOfDetail = Collection.IsHeaderModelCollection() ? 1 : (int) jObject["LevelsOfDetail"];
 
             ModelLoDs = new ModelRetriever(this);
         }
