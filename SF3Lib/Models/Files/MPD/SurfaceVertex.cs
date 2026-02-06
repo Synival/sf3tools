@@ -1,5 +1,5 @@
 ﻿using CommonLib.SGL;
-using CommonLib.Types;
+using CommonLib.Utils;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
@@ -8,7 +8,7 @@ namespace SF3.Models.Files.MPD {
             MPD_File = mpdFile;
             X = x;
             Y = y;
-            (NormalTile, NormalTileCorner) = GetTile(tiles);
+            _sharedBlockVertexLocations = BlockHelpers.GetVertexBlockLocations(X, Y);
         }
 
         public IMPD_File MPD_File { get; }
@@ -17,22 +17,19 @@ namespace SF3.Models.Files.MPD {
         public int Y { get; }
 
         public VECTOR Normal {
-            get => NormalTile.GetVertexNormal(NormalTileCorner);
-            set => NormalTile.SetVertexNormal(NormalTileCorner, value);
+            get {
+                if (MPD_File.SurfaceModelChunk?.VertexNormalBlockTable == null)
+                    return new VECTOR(0f, 1f, 0f);
+                var bl = _sharedBlockVertexLocations[0];
+                return MPD_File.SurfaceModelChunk.VertexNormalBlockTable[bl.Num][bl.X, bl.Y];
+            }
+            set {
+                if (MPD_File.SurfaceModelChunk?.VertexNormalBlockTable != null)
+                    foreach (var bl in _sharedBlockVertexLocations)
+                        MPD_File.SurfaceModelChunk.VertexNormalBlockTable[bl.Num][bl.X, bl.Y] = value;
+            }
         }
 
-        private (IMPD_SurfaceTile tile, CornerType Corner) GetTile(IMPD_SurfaceTile[,] tiles) {
-            if (X < 63 && Y < 63)
-                return (tiles[X, Y], CornerType.BottomLeft);
-            else if (X < 63)
-                return (tiles[X, Y - 1], CornerType.TopLeft);
-            else if (Y < 63)
-                return (tiles[X - 1, Y], CornerType.BottomRight);
-            else
-                return (tiles[X - 1, Y - 1], CornerType.TopRight);
-        }
-
-        private IMPD_SurfaceTile NormalTile { get; }
-        private CornerType NormalTileCorner { get; }
+        private readonly BlockHelpers.BlockVertexLocation[] _sharedBlockVertexLocations;
     }
 }

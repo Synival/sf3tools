@@ -63,19 +63,6 @@ namespace SF3.MPD.Interfaces {
         bool IsFlat { get; set; }
 
         /// <summary>
-        /// Gets the normal vector of the tile for the specified corner.
-        /// </summary>
-        /// <param name="corner">The corner of the tile whose normal vector should be retrieved.</param>
-        /// <returns>A normal VECTOR.</returns>
-        VECTOR GetVertexNormal(CornerType corner);
-
-        /// <summary>
-        /// Gets normal vectors for all corners of the tile.
-        /// </summary>
-        /// <returns>A normal VECTOR for every corner of the tile.</returns>
-        VECTOR[] GetVertexNormals();
-
-        /// <summary>
         /// Gets the height of a corner of a tile for display.
         /// </summary>
         /// <param name="corner">The corner of the tile whose height should be retrieved.</param>
@@ -88,13 +75,6 @@ namespace SF3.MPD.Interfaces {
         /// </summary>
         /// <returns>A height value for every corner of the tile.</returns>
         byte[] GetVertexHeights();
-
-        /// <summary>
-        /// Sets the normal vector of the tile for the specified corner.
-        /// </summary>
-        /// <param name="corner">The corner of the tile whose normal vector should be set.</param>
-        /// <returns>A normal VECTOR.</returns>
-        void SetVertexNormal(CornerType corner, VECTOR normal);
 
         /// <summary>
         /// Sets the height of a corner of a tile for display.

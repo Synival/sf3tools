@@ -77,27 +77,7 @@ namespace SF3.MPD.Project {
             return _vertexHeights[cornerInt];
         }
 
-        public VECTOR GetVertexNormal(CornerType corner) {
-            int cornerInt = (int) corner;
-            if (cornerInt < 0 || cornerInt > 3)
-                throw new ArgumentOutOfRangeException(nameof(corner));
-            var vx = BlockHelpers.TileToVertexX(X, corner);
-            var vy = BlockHelpers.TileToVertexY(Y, corner);
-            return Surface.GetVertex(vx, vy).Normal;
-        }
-
         public byte[] GetVertexHeights() => (byte[]) (_vertexHeights.Clone());
-
-        public VECTOR[] GetVertexNormals() {
-            var x = X;
-            var y = Y;
-            return new VECTOR[] {
-                Surface.GetVertex(x + 1, y + 1).Normal,
-                Surface.GetVertex(x + 0, y + 1).Normal,
-                Surface.GetVertex(x + 0, y + 0).Normal,
-                Surface.GetVertex(x + 1, y + 0).Normal,
-            };
-        }
 
         public void SetVertexHeight(CornerType corner, byte value) {
             int cornerInt = (int) corner;
@@ -110,15 +90,6 @@ namespace SF3.MPD.Project {
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
             Surface.GetVertex(vx, vy).UpdateNormalsInvolvingVertex();
-        }
-
-        public void SetVertexNormal(CornerType corner, VECTOR normal) {
-            int cornerInt = (int) corner;
-            if (cornerInt < 0 || cornerInt > 3)
-                throw new ArgumentOutOfRangeException(nameof(corner));
-            var vx = BlockHelpers.TileToVertexX(X, corner);
-            var vy = BlockHelpers.TileToVertexY(Y, corner);
-            Surface.GetVertex(vx, vy).Normal = normal;
         }
 
         public void SetVertexHeights(byte[] values) {

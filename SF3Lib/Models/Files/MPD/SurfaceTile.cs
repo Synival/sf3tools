@@ -5,6 +5,7 @@ using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.MPD;
 using SF3.MPD.Interfaces;
+using static SF3.Utils.SurfaceUtils;
 
 namespace SF3.Models.Files.MPD {
     public partial class SurfaceTile : IMPD_SurfaceTile {
@@ -17,7 +18,7 @@ namespace SF3.Models.Files.MPD {
             BlockLocation = BlockHelpers.GetTileBlockLocation(x, y);
 
             _sharedTileLocations = allCorners
-                .ToDictionary(c => c, GetSharedTilesAtCorner);
+                .ToDictionary(c => c, c => GetSharedTilesAtCorner(X, Y, c));
             _blockVertexLocations = allCorners
                 .ToDictionary(c => c, c => BlockHelpers.GetVertexBlockLocations(X, Y, c, onlyInBlock: true)[0]);
             _sharedBlockVertexLocations = allCorners
@@ -34,12 +35,6 @@ namespace SF3.Models.Files.MPD {
         public BlockHelpers.BlockTileLocation BlockLocation { get; }
 
         public event EventHandler Modified;
-
-        private struct TileAndCorner {
-            public int X;
-            public int Y;
-            public CornerType Corner;
-        }
 
         private Dictionary<CornerType, TileAndCorner[]> _sharedTileLocations { get; }
         private Dictionary<CornerType, BlockHelpers.BlockVertexLocation> _blockVertexLocations { get; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonLib.SGL;
 using CommonLib.Types;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Writer {

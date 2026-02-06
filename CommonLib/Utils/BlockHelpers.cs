@@ -111,8 +111,9 @@ namespace CommonLib.Utils {
         /// <summary>
         /// Converts a vertex position to a set of shared block locations.
         /// </summary>
-        /// <param name="tileX">X coordinate of a vertex.</param>
-        /// <param name="tileY">Y coordinate of a vertex.</param>
+        /// <param name="vertexX">X coordinate of a vertex.</param>
+        /// <param name="vertexY">Y coordinate of a vertex.</param>
+        /// <param name="onlyInBlockNum">When set, only a the block with the matching block number is returned if found.</param>
         /// <returns>A set of shared block vertex locations for the vertex.</returns>
         public static BlockVertexLocation[] GetVertexBlockLocations(int vertexX, int vertexY, int? onlyInBlockNum = null) {
             if (vertexX < 0 || vertexY < 0 || vertexX > 64 || vertexY > 64)
