@@ -1,5 +1,4 @@
 ﻿using System;
-using CommonLib.SGL;
 using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.MPD.Extensions;
@@ -8,16 +7,28 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_SurfaceTile : IMPD_SurfaceTile {
-        public MPD_SurfaceTile(IMPD_Surface surface, int x, int y, byte textureId = 0xFF, byte eventId = 0, byte[] heights = null) {
-            Surface     = surface;
-            X           = x;
-            Y           = y;
-            RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
+        public MPD_SurfaceTile(
+            IMPD_Surface surface,
+            int x,
+            int y,
+            byte textureId = 0xFF,
+            byte textureFlags = 0x00,
+            byte eventId = 0,
+            TerrainType terrainType = TerrainType.NoEntry,
+            TerrainFlags terrainFlags = 0,
+            byte[] heights = null
+        ) {
+            Surface      = surface;
+            X            = x;
+            Y            = y;
+            RandomSeed   = MPD_TileSeeds.GetTileSeed(x, y);
 
-            TextureID   = textureId;
+            TextureID    = textureId;
+            TextureFlags = textureFlags;
 
-            EventID     = eventId;
-            TerrainType = TerrainType.NoEntry;
+            TerrainType  = terrainType;
+            TerrainFlags = terrainFlags;
+            EventID      = eventId;
 
             if (heights != null && heights.Length == 4)
                 _vertexHeights = heights;
@@ -53,7 +64,11 @@ namespace SF3.MPD.Project {
 
         public byte TextureFlags {
             get => (byte) ((byte) TextureFlip | (byte) TextureRotate | (IsFlat ? 0x80 : 0));
-            set {}
+            set {
+                TextureFlip   = (TextureFlipType)   (value & 0x30);
+                TextureRotate = (TextureRotateType) (value & 0x03);
+                IsFlat        = (value & 0x80) == 0x80;
+            }
         }
 
         public byte UnknownTextureFlags { get; set; }

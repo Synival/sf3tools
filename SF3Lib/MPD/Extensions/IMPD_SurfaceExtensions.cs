@@ -88,10 +88,18 @@ namespace SF3.MPD.Extensions {
             };
 
             return new JObject {
-                { "TextureIDs", MakeByteTable((x, y) => surface.GetTile(x, y).TextureID, 0xFF) },
-                { "EventIDs",   MakeByteTable((x, y) => surface.GetTile(x, y).EventID, 0) },
-                { "Heights",    MakeHeightTable((x, y) => surface.GetTile(x, y).GetVertexHeights()) },
-                { "Normals",    MakeNormalTable((x, y) => surface.GetVertex(x, y).Normal) },
+                { "TextureIDs",   MakeByteTable  ((x, y) => surface.GetTile(x, y).TextureID,    0xFF) },
+                { "TextureFlags", MakeByteTable  ((x, y) => surface.GetTile(x, y).TextureFlags, 0x00) },
+                { "EventIDs",     MakeByteTable  ((x, y) => surface.GetTile(x, y).EventID,      0x00) },
+                { "Terrain",      MakeByteTable(
+                    (x, y) => {
+                        var tile = surface.GetTile(x, y);
+                        return (byte) ((byte) (tile.TerrainType) | ((byte) (tile.TerrainFlags) << 4));
+                    },
+                    0x00)
+                },
+                { "Heights",      MakeHeightTable((x, y) => surface.GetTile(x, y).GetVertexHeights()) },
+                { "Normals",      MakeNormalTable((x, y) => surface.GetVertex(x, y).Normal) },
             };
         }
 

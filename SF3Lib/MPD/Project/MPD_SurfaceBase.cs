@@ -57,6 +57,30 @@ namespace SF3.MPD.Project {
             _hasModelGetter = hasModelGetter ?? (() => true);
         }
 
+        private T[,] FetchTable<T>(JObject jObject, string propertyName, int width, int height, int strlen, bool spaceBetween, Func<string, T> fetcher, T emptyValue) {
+            var rows = ((JArray) jObject.GetValueIfExists(propertyName))
+                ?.Select(x => (string) x)
+                ?.ToArray();
+
+            var table = new T[width, height];
+            var rowCount = rows?.Length ?? 0;
+
+            var span = strlen + (spaceBetween ? 1 : 0);
+            var emptyStr = new string(' ', strlen);
+
+            for (int y = 0; y < rowCount && y < table.GetLength(1); y++) {
+                var row = rows[y];
+                var maxlen = row.Length - strlen + 1;
+
+                for (int x = 0; x * span < maxlen && x < table.GetLength(0); x++) {
+                    var valueStr = row.Substring(x * span, strlen);
+                    table[x, y] = valueStr == emptyStr ? emptyValue : fetcher(valueStr);
+                }
+            }
+
+            return table;
+        }
+
         protected MPD_SurfaceBase(IMPD_Settings settings, JToken token) {
             _settings = settings;
 
@@ -65,91 +89,54 @@ namespace SF3.MPD.Project {
             Width  = 64;
             Height = 64;
 
-            byte[,] FetchByteTable(string propertyName, byte emptyValue) {
-                var rows = ((JArray) jObject.GetValueIfExists(propertyName))
-                    ?.Select(x => (string) x)
-                    ?.ToArray();
-
-                var table = new byte[Width, Height];
-                var rowCount = rows?.Length ?? 0;
-
-                for (int y = 0; y < rowCount && y < table.GetLength(1); y++) {
-                    var row = rows[y];
-                    for (int x = 0; x * 2 < row.Length - 1 && x < table.GetLength(0); x++) {
-                        var valueStr = row.Substring(x * 2, 2);
-                        table[x, y] = valueStr == "  "
-                            ? emptyValue
-                            : byte.Parse(valueStr, NumberStyles.HexNumber);
-                    }
-                }
-
-                return table;
-            }
+            byte[,] FetchByteTable(string propertyName, byte emptyValue)
+                => FetchTable(jObject, propertyName, Width, Height, 2, false, s => byte.Parse(s, NumberStyles.HexNumber), emptyValue);
 
             byte[,][] FetchHeightTable(string propertyName) {
-                var rows = ((JArray) jObject.GetValueIfExists(propertyName))
-                    ?.Select(x => (string) x)
-                    ?.ToArray();
-
-                var table = new byte[Width, Height][];
-                var rowCount = rows?.Length ?? 0;
-
-                for (int y = 0; y < rowCount && y < table.GetLength(1); y++) {
-                    var row = rows[y];
-                    for (int x = 0; x * 9 < row.Length - 7 && x < table.GetLength(0); x++) {
-                        var pos = x * 9;
-                        table[x, y] = new byte[] {
-                            byte.Parse(row.Substring(pos + 0, 2), NumberStyles.HexNumber),
-                            byte.Parse(row.Substring(pos + 2, 2), NumberStyles.HexNumber),
-                            byte.Parse(row.Substring(pos + 4, 2), NumberStyles.HexNumber),
-                            byte.Parse(row.Substring(pos + 6, 2), NumberStyles.HexNumber),
-                        };
-                    }
-                }
-
-                return table;
+                return FetchTable(
+                    jObject, propertyName, Width, Height, 8, true,
+                    s => new byte[] {
+                        byte.Parse(s.Substring(0, 2), NumberStyles.HexNumber),
+                        byte.Parse(s.Substring(2, 2), NumberStyles.HexNumber),
+                        byte.Parse(s.Substring(4, 2), NumberStyles.HexNumber),
+                        byte.Parse(s.Substring(6, 2), NumberStyles.HexNumber),
+                    },
+                    new byte[4]
+                );
             }
 
             VECTOR[,] FetchNormalTable(string propertyName) {
-                var rows = ((JArray) jObject.GetValueIfExists(propertyName))
-                    ?.Select(x => (string) x)
-                    ?.ToArray();
-
-                var table = new VECTOR[Width + 1, Height + 1];
-                var rowCount = rows?.Length ?? 0;
-
-                for (int y = 0; y < rowCount && y < table.GetLength(1); y++) {
-                    var row = rows[y];
-                    for (int x = 0; x * 9 < row.Length - 7 && x < table.GetLength(0); x++) {
-                        var pos = x * 9;
-                        var str = row.Substring(pos, 8);
-                        if (str == "        ")
-                            table[x, y] = new VECTOR(0, -1, 0);
-                        else {
-                            var base64Bytes = Convert.FromBase64String(str);
-                            var components = base64Bytes.ToUShorts();
-                            table[x, y] = new VECTOR(
-                                components[0] * 2,
-                                components[1] * 2,
-                                components[2] * 2,
-                                isRaw: true
-                            );
-                        }
-                    }
-                }
-
-                return table;
+                return FetchTable(
+                    jObject, propertyName, Width + 1, Height + 1, 8, true,
+                    s => {
+                        var base64Bytes = Convert.FromBase64String(s);
+                        var components = base64Bytes.ToUShorts();
+                        return new VECTOR(
+                            components[0] * 2,
+                            components[1] * 2,
+                            components[2] * 2,
+                            isRaw: true
+                        );
+                    },
+                    new VECTOR(0, -1, 0)
+                );
             }
 
-            var textureIds = FetchByteTable("TextureIDs", 0xFF);
-            var eventIds   = FetchByteTable("EventIDs", 0);
-            var heights    = FetchHeightTable("Heights");
-            var normals    = FetchNormalTable("Normals");
+            var textureIds   = FetchByteTable("TextureIDs", 0xFF);
+            var textureFlags = FetchByteTable("TextureFlags", 0x00);
+            var eventIds     = FetchByteTable("EventIDs", 0);
+            var terrainWithFlags = FetchByteTable("Terrain", 0x00);
+            var heights      = FetchHeightTable("Heights");
+            var normals      = FetchNormalTable("Normals");
 
             _tiles = new IMPD_SurfaceTile[Width, Height];
-            for (int y = 0; y < Width; y++)
-                for (int x = 0; x < Height; x++)
-                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], eventIds[x, y], heights[x, y]);
+            for (int y = 0; y < Width; y++) {
+                for (int x = 0; x < Height; x++) {
+                    var terrain = (TerrainType) (terrainWithFlags[x, y] & 0x0F);
+                    var terrainFlags = (TerrainFlags) ((terrainWithFlags[x, y] & 0xF0) >> 4);
+                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], textureFlags[x, y], eventIds[x, y], terrain, terrainFlags, heights[x, y]);
+                }
+            }
 
             _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
             for (int y = 0; y < Width + 1; y++)
