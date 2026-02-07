@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using SF3.Imaging;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD.Extensions {
@@ -9,7 +10,7 @@ namespace SF3.MPD.Extensions {
             var jObject = IMPD_TextureExtensions.ToJObject(texture);
 
             if (texture.Collection == MPD_CollectionType.Primary)
-                jObject.Add("Animation", null); // TODO: animations
+                jObject.Add("Animation", texture.Animation?.ToJObject());
 
             return jObject;
         }

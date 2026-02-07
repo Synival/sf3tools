@@ -29,5 +29,13 @@ namespace SF3.Tests.MPD.Project {
         [TestMethod]
         public void FromJSON_WithScenario1_BAL_3_ProducesSameMPDAsProjectCopy()
             => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "BAL_3");
+
+        [TestMethod]
+        public void FromJSON_WithScenario1_BALSA_ProducesSameMPDAsProjectCopy()
+            => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "BALSA");
+
+        [TestMethod]
+        public void FromJSON_WithScenario1_BTL02_ProducesSameMPDAsProjectCopy()
+            => ProducesSameMPDAsProjectCopyTestBase(ScenarioType.Scenario1, "BTL02");
     }
 }

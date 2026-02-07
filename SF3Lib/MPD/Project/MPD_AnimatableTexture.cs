@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Extensions;
+using CommonLib.Imaging;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;
@@ -16,7 +17,9 @@ namespace SF3.MPD.Project {
             => new MPD_AnimatableTexture(token, collection, palette);
         private MPD_AnimatableTexture(JToken token, MPD_CollectionType collection, Palette palette)
         : base((JObject) token, collection, palette) {
-            // TODO: animation, *only for the primary collection*.
+            var jObject = (JObject) token;
+            if (collection == MPD_CollectionType.Primary)
+                Animation = jObject.GetValueIfExists("Animation", t => MPD_Animation.FromJToken(t, this, palette));
         }
     }
 }

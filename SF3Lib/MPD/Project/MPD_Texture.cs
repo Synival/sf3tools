@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;
@@ -27,6 +28,15 @@ namespace SF3.MPD.Project {
             // 'IsIgnored' is only serialized for the primary collection.
             if (collection == MPD_CollectionType.Primary)
                 IsIgnored  = (bool) jObject["IsIgnored"];
+
+            // Tags are not serialized.
+        }
+
+        protected MPD_Texture(JToken token, IMPD_Texture texture)
+        : base(token, texture.Width, texture.Height, texture.PixelFormat, true, texture.Palette, true) {
+            ID         = texture.ID;
+            Collection = texture.Collection;
+            IsIgnored  = texture.IsIgnored;
 
             // Tags are not serialized.
         }

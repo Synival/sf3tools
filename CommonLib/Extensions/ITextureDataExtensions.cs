@@ -16,7 +16,7 @@ namespace CommonLib.Extensions {
                 new JProperty("PixelFormat", texture.PixelFormat.ToString()),
                 new JProperty("Width",       texture.Width),
                 new JProperty("Height",      texture.Height),
-                new JProperty("ImageData", Convert.ToBase64String(imageData)),
+                new JProperty("ImageData",   Convert.ToBase64String(imageData)),
             };
 
             if (includePalette)
