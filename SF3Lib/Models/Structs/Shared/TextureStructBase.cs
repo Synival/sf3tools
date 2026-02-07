@@ -51,8 +51,8 @@ namespace SF3.Models.Structs.Shared {
         public bool IsCompressed => _textureData.IsCompressed;
         public bool ZeroIsTransparent => _textureData.ZeroIsTransparent;
 
-        public byte[,] ImageData8Bit => _textureData.ImageData8Bit;
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
+        public virtual byte[,] ImageData8Bit => _textureData.ImageData8Bit;
+        public virtual void SetImageData8Bit(byte[,] data, Palette palette) {
             (data, palette) = PreProcessIncomingImageData8Bit(data, palette);
             _textureData.SetImageData8Bit(data, palette);
             StructPalette = palette;
@@ -60,7 +60,7 @@ namespace SF3.Models.Structs.Shared {
 
         protected virtual (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) => (newData, palette);
 
-        public ushort[,] ImageData16Bit {
+        public virtual ushort[,] ImageData16Bit {
             get => _textureData.ImageData16Bit;
             set => _textureData.ImageData16Bit = PreProcessIncomingImageData16Bit(value);
         }

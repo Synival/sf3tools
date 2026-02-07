@@ -30,6 +30,16 @@ namespace SF3.Models.Structs.DAT {
 
         protected override void OnImageUpdated() {}
 
+        public override void SetImageData8Bit(byte[,] data, Palette palette) {
+            base.SetImageData8Bit(data, palette);
+
+            // Zero-out unused data.
+            var maxSize = MaxStoredImageSize ?? (Data.Length - Address);
+            var remainder = maxSize - StoredImageDataSize;
+            if (remainder > 0)
+                Data.Data.SetDataAtTo(Address + StoredImageDataSize, remainder, new byte[remainder]);
+        }
+
         protected override int StructImageDataOffset { get => Address; set {} }
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
