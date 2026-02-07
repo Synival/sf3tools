@@ -1,4 +1,5 @@
-﻿using SF3.MPD.Interfaces;
+﻿using Newtonsoft.Json.Linq;
+using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
     /// <summary>
@@ -15,6 +16,14 @@ namespace SF3.MPD.Project {
             ID = original.ID;
             X  = original.X;
             Y  = original.Y;
+        }
+
+        public static MPD_CollisionPoint FromJToken(JToken token) => new MPD_CollisionPoint(token);
+        private MPD_CollisionPoint(JToken token) {
+            var jObject = (JObject) token;
+            ID =   (int) jObject["ID"];
+            X  = (short) jObject["X"];
+            Y  = (short) jObject["Y"];
         }
 
         public int ID { get; }

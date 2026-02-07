@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -28,6 +29,17 @@ namespace SF3.MPD.Project {
             Angle         = original.Angle;
             FlagToDisable = original.FlagToDisable;
             Tag           = original.Tag;
+        }
+
+        public static MPD_CollisionLine FromJToken(JToken token, Dictionary<int, IMPD_CollisionPoint> pointsById) => new MPD_CollisionLine(token, pointsById);
+        private MPD_CollisionLine(JToken token, Dictionary<int, IMPD_CollisionPoint> pointsById) {
+            var jObject = (JObject) token;
+
+            Point1        = pointsById[(int) jObject["Point1ID"]];
+            Point2        = pointsById[(int) jObject["Point2ID"]];
+            Angle         = (float) jObject["Angle"];
+            FlagToDisable = (int?) jObject["FlagToDisable"];
+            Tag           = (byte) jObject["Tag"];
         }
 
         // TODO: Enforce non-null assignment.

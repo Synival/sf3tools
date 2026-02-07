@@ -121,7 +121,7 @@ namespace SF3.MPD.Project {
             BattleCursorBoundaries = jObject.GetValueIfExists("BattleCursorBoundaries", t => RectangleShort.FromJToken(t));
 
             if (jObject.TryGetValue("Collisions", out var collisionsToken))
-                Collisions = null; // .FromJToken()
+                Collisions = MPD_Collisions.FromJToken(collisionsToken);
             if (jObject.TryGetValue("Gradient", out var gradientToken))
                 Gradient = null; // .FromJToken()
 

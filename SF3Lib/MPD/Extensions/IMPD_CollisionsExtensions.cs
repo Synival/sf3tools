@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
@@ -9,7 +10,10 @@ namespace SF3.MPD.Extensions {
 
         public static JToken ToJToken(this IMPD_Collisions collisions) => collisions.ToJObject();
         public static JObject ToJObject(this IMPD_Collisions collisions) {
-            return null;
+            return new JObject {
+                { "Points", JArray.FromObject(collisions.Points?.Select(x => x.ToJObject())?.ToArray()) },
+                { "Lines",  JArray.FromObject(collisions.Lines?.Select(x => x.ToJObject())?.ToArray()) },
+            };
         }
     }
 }

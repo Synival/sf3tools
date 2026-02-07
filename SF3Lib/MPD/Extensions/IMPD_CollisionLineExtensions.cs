@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 
@@ -87,6 +88,16 @@ namespace SF3.MPD.Extensions {
                     if (line.BlockShouldCheck(x, y))
                         blocks.Add((x, y));
             return new HashSet<(int X, int y)>(blocks);
+        }
+
+        public static JObject ToJObject(this IMPD_CollisionLine line) {
+            return new JObject {
+                { "Point1ID",      line.Point1.ID },
+                { "Point2ID",      line.Point2.ID },
+                { "Angle",         line.Angle },
+                { "Tag",           line.Tag },
+                { "FlagToDisable", line.FlagToDisable },
+            };
         }
     }
 }
