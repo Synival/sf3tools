@@ -133,7 +133,9 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_ImprovedNormalCalculations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_UseFullHeightForNormals = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MPD_Separator = new System.Windows.Forms.ToolStripSeparator();
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -863,7 +865,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiSettings_MPD
             // 
-            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors, tsmiSettings_MPD_UpdateChunkTableOnChunkResize, tsmiSettings_MPD_AutoRebuildMPDChunkTable });
+            tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors, tsmiSettings_MPD_Separator, tsmiSettings_MPD_UpdateChunkTableOnChunkResize, tsmiSettings_MPD_AutoRebuildMPDChunkTable });
             tsmiSettings_MPD.Name = "tsmiSettings_MPD";
             tsmiSettings_MPD.Size = new Size(253, 22);
             tsmiSettings_MPD.Text = "&MPD";
@@ -882,12 +884,24 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Surface Map Tile Normal Calculations";
             tsmiSettings_MPD_UseFullHeightForNormals.Click += tsmiSettings_MPD_UseFullHeightForNormals_Click;
             // 
+            // tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals
+            // 
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Name = "tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals";
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Size = new Size(454, 22);
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Text = "Ignore Blank Tiles for Surface Map Normal Calculations";
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Click += tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals_Click;
+            // 
             // tsmiSettings_MPD_FixNormalOverflowUnderflowErrors
             // 
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Name = "tsmiSettings_MPD_FixNormalOverflowUnderflowErrors";
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Size = new Size(454, 22);
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
+            // 
+            // tsmiSettings_MPD_Separator
+            // 
+            tsmiSettings_MPD_Separator.Name = "tsmiSettings_MPD_Separator";
+            tsmiSettings_MPD_Separator.Size = new Size(451, 6);
             // 
             // tsmiSettings_MPD_UpdateChunkTableOnChunkResize
             // 
@@ -1046,5 +1060,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToScenario3MPD;
         private System.Windows.Forms.ToolStripMenuItem tsmiBlacksmith;
         private System.Windows.Forms.ToolStripMenuItem tsmiBlacksmith_Sort;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals;
+        private System.Windows.Forms.ToolStripSeparator tsmiSettings_MPD_Separator;
     }
 }

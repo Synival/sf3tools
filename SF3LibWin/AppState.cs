@@ -98,7 +98,8 @@ namespace SF3.Win {
             return new NormalCalculationSettings(
                 UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.AdjacentTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle,
                 UseVanillaHalfHeightForSurfaceNormalCalculations,
-                FixSurfaceMapTileNormalOverflowUnderflowErrors
+                FixSurfaceMapTileNormalOverflowUnderflowErrors,
+                IgnoreBlankTilesForSurfaceNormalCalculations
             );
         }
 
@@ -382,6 +383,18 @@ namespace SF3.Win {
         }
         private bool _useVanillaHalfHeightForSurfaceNormalCalculations = true;
         public event EventHandler UseVanillaHalfHeightForSurfaceNormalCalculationsChanged;
+
+        /// <summary>
+        /// When enabled, non-vanilla normal calculation behavior is used to ignore blank tiles (texture of 0xFF) when
+        /// calculating normals. This produces better results on the edges of tiles that connect to empty space that
+        /// has a slope.
+        /// </summary>
+        public bool IgnoreBlankTilesForSurfaceNormalCalculations {
+            get => _ignoreBlankTilesForSurfaceNormalCalculations;
+            set => SetValue(ref _ignoreBlankTilesForSurfaceNormalCalculations, value, IgnoreBlankTilesForSurfaceNormalCalculationsChanged);
+        }
+        private bool _ignoreBlankTilesForSurfaceNormalCalculations = true;
+        public event EventHandler IgnoreBlankTilesForSurfaceNormalCalculationsChanged;
 
         /// <summary>
         /// Enables experimental map editing features that only work on a modified version of FIELD.MPD for the Premium Disk.

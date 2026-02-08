@@ -526,7 +526,7 @@ namespace MPD_Analyzer {
             if (mpdFile.Surface?.HasModel != true)
                 return null;
             mpdFile.Surface.NormalSettings = new NormalCalculationSettings(
-                POLYGON_NormalCalculationMethod.TopRightTriangle, true, false
+                POLYGON_NormalCalculationMethod.TopRightTriangle, true, false, false
             );
 
             int added = 0;

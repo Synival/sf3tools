@@ -12,6 +12,7 @@ namespace SF3.Editor.Forms {
 
             tsmiSettings_MPD_ImprovedNormalCalculations.Checked       = _appState.UseImprovedNormalCalculations;
             tsmiSettings_MPD_UseFullHeightForNormals.Checked          = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Checked = _appState.IgnoreBlankTilesForSurfaceNormalCalculations;
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Checked = _appState.FixSurfaceMapTileNormalOverflowUnderflowErrors;
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Checked    = _appState.AutoUpdateMPDChunkTableOnChunkResize;
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Checked         = _appState.AutoRebuildMPDChunkTableOnSave;
@@ -34,6 +35,8 @@ namespace SF3.Editor.Forms {
                 => { tsmiSettings_MPD_ImprovedNormalCalculations.Checked = _appState.UseImprovedNormalCalculations; _appState.Serialize(); };
             _appState.UseVanillaHalfHeightForSurfaceNormalCalculationsChanged += (s, e)
                 => { tsmiSettings_MPD_UseFullHeightForNormals.Checked = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations; _appState.Serialize(); };
+            _appState.IgnoreBlankTilesForSurfaceNormalCalculationsChanged += (s, e)
+                => { tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Checked = _appState.IgnoreBlankTilesForSurfaceNormalCalculations; _appState.Serialize(); };
             _appState.FixSurfaceMapTileNormalOverflowUnderflowErrorsChanged += (s, e)
                 => { tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Checked = _appState.FixSurfaceMapTileNormalOverflowUnderflowErrors; _appState.Serialize(); };
 
@@ -61,6 +64,8 @@ namespace SF3.Editor.Forms {
             => _appState.UseImprovedNormalCalculations = !_appState.UseImprovedNormalCalculations;
         private void tsmiSettings_MPD_UseFullHeightForNormals_Click(object sender, EventArgs e)
             => _appState.UseVanillaHalfHeightForSurfaceNormalCalculations = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
+        private void tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals_Click(object sender, EventArgs e)
+            => _appState.IgnoreBlankTilesForSurfaceNormalCalculations = !_appState.IgnoreBlankTilesForSurfaceNormalCalculations;
         private void tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click(object sender, EventArgs e)
             => _appState.FixSurfaceMapTileNormalOverflowUnderflowErrors = !_appState.FixSurfaceMapTileNormalOverflowUnderflowErrors;
         private void tsmiSettings_MPD_UpdateChunkTableOnChunkResize_Click(object sender, EventArgs e)
