@@ -68,8 +68,9 @@ namespace SF3.MPD.Project {
             var span = strlen + (spaceBetween ? 1 : 0);
             var emptyStr = new string(' ', strlen);
 
-            for (int y = 0; y < height; y++) {// y < rowCount && y < table.GetLength(1); y++) {
-                var row = y < rowCount ? rows[y] : null;
+            for (int y = 0; y < height; y++) {
+                var rowY = height - y - 1;
+                var row = (rowY < rowCount && rowY >= 0) ? rows[rowY] : null;
                 var maxlen = (row == null) ? 0 : (row.Length - strlen + 1);
 
                 for (int x = 0; x < width; x++) {
@@ -135,8 +136,8 @@ namespace SF3.MPD.Project {
             var normals      = FetchNormalTable("Normals");
 
             _tiles = new IMPD_SurfaceTile[Width, Height];
-            for (int y = 0; y < Width; y++) {
-                for (int x = 0; x < Height; x++) {
+            for (int y = 0; y < Height; y++) {
+                for (int x = 0; x < Width; x++) {
                     var terrain = (TerrainType) (terrainWithFlags[x, y] & 0x0F);
                     var terrainFlags = (TerrainFlags) ((terrainWithFlags[x, y] & 0xF0) >> 4);
                     _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], textureFlags[x, y], unknownTextureFlags[x, y], eventIds[x, y], terrain, terrainFlags, heights[x, y]);
@@ -144,8 +145,8 @@ namespace SF3.MPD.Project {
             }
 
             _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
-            for (int y = 0; y < Width + 1; y++)
-                for (int x = 0; x < Height + 1; x++)
+            for (int y = 0; y < Height + 1; y++)
+                for (int x = 0; x < Width + 1; x++)
                     _vertices[x, y] = new MPD_SurfaceVertex(this, x, y, normals[x, y]);
 
            _hasModelGetter = () => _settings.HasSurfaceModel;

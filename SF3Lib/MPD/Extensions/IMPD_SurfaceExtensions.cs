@@ -21,7 +21,7 @@ namespace SF3.MPD.Extensions {
 
                 var jArray = new JArray();
                 int count = 0;
-                for (int y = 0; y < height; y++) {
+                for (int y = height - 1; y >= 0; y--) {
                     var str = new StringBuilder();
                     for (int x = 0; x < width; x++) {
                         var value = fetcher(x, y);
@@ -41,7 +41,7 @@ namespace SF3.MPD.Extensions {
 
                 var jArray = new JArray();
                 var count = 0;
-                for (int y = 0; y < height; y++) {
+                for (int y = height - 1; y >= 0; y--) {
                     var str = new StringBuilder();
                     for (int x = 0; x < width; x++) {
                         var values = fetcher(x, y);
@@ -83,7 +83,7 @@ namespace SF3.MPD.Extensions {
                 }
 
                 var jArray = new JArray();
-                for (int y = 0; y < height; y++) {
+                for (int y = height - 1; y >= 0; y--) {
                     var str = new StringBuilder();
                     for (int x = 0; x < width; x++) {
                         var value = fetcher(x, y);
