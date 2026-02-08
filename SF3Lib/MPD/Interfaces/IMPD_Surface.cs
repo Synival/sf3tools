@@ -7,6 +7,11 @@ namespace SF3.MPD.Interfaces {
     /// </summary>
     public interface IMPD_Surface {
         /// <summary>
+        /// MPD to which this surface belongs.
+        /// </summary>
+        IMPD MPD { get; }
+
+        /// <summary>
         /// Fetches an individual tile on the surface.
         /// </summary>
         /// <param name="x">X coordinate of the tile.</param>

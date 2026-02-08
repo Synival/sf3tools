@@ -9,8 +9,7 @@ namespace SF3.Models.Files.MPD {
         }
 
         private Surface(IMPD_File mpdFile, Func<bool> hasModelGetter, IMPD_SurfaceTile[,] tiles)
-        : base(mpdFile.Settings, tiles, MakeVertices(mpdFile, tiles), hasModelGetter) {
-            MPD_File = mpdFile;
+        : base(mpdFile, mpdFile.Settings, tiles, MakeVertices(mpdFile, tiles), hasModelGetter) {
         }
 
         private static IMPD_SurfaceTile[,] MakeTiles(IMPD_File file) {
@@ -28,7 +27,5 @@ namespace SF3.Models.Files.MPD {
                     vertices[x, y] = new SurfaceVertex(file, tiles, x, y);
             return vertices;
         }
-
-        public IMPD_File MPD_File { get; }
     }
 }

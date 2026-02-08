@@ -10,7 +10,8 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public abstract class MPD_SurfaceBase : IMPD_Surface {
-        protected MPD_SurfaceBase(IMPD_Settings settings) {
+        protected MPD_SurfaceBase(IMPD mpd, IMPD_Settings settings) {
+            MPD = mpd;
             _settings = settings;
 
             Width  = 64;
@@ -29,7 +30,8 @@ namespace SF3.MPD.Project {
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
 
-        protected MPD_SurfaceBase(IMPD_Settings settings, IMPD_Surface original) {
+        protected MPD_SurfaceBase(IMPD mpd, IMPD_Settings settings, IMPD_Surface original) {
+            MPD = mpd;
             _settings = settings;
 
             Width  = original.Width;
@@ -48,7 +50,8 @@ namespace SF3.MPD.Project {
             _hasModelGetter = () => _settings.HasSurfaceModel;
         }
 
-        protected MPD_SurfaceBase(IMPD_Settings settings, IMPD_SurfaceTile[,] tiles, IMPD_SurfaceVertex[,] vertices, Func<bool> hasModelGetter) {
+        protected MPD_SurfaceBase(IMPD mpd, IMPD_Settings settings, IMPD_SurfaceTile[,] tiles, IMPD_SurfaceVertex[,] vertices, Func<bool> hasModelGetter) {
+            MPD = mpd;
             _settings = settings;
             _tiles = tiles;
             _vertices = vertices;
@@ -86,7 +89,8 @@ namespace SF3.MPD.Project {
             return table;
         }
 
-        protected MPD_SurfaceBase(IMPD_Settings settings, JToken token) {
+        protected MPD_SurfaceBase(IMPD mpd, IMPD_Settings settings, JToken token) {
+            MPD = mpd;
             _settings = settings;
 
             var jObject = (JObject) token;
@@ -169,6 +173,8 @@ namespace SF3.MPD.Project {
                 for (int vx = 0; vx < verticesWidth; vx++)
                     _vertices[vx, vy].Normal = _vertices[vx, vy].CalculateNormal(heightmap, vx1 - 1, vy1 - 1);
         }
+
+        public IMPD MPD { get; }
 
         public int Width { get; }
         public int Height { get; }

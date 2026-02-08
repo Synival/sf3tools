@@ -881,7 +881,7 @@ namespace SF3.Editor.Forms {
             // 
             tsmiSettings_MPD_UseFullHeightForNormals.Name = "tsmiSettings_MPD_UseFullHeightForNormals";
             tsmiSettings_MPD_UseFullHeightForNormals.Size = new Size(454, 22);
-            tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Surface Map Tile Normal Calculations";
+            tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Surface Map Tile Normal Calculations (Not for Angle-Based Lighting)";
             tsmiSettings_MPD_UseFullHeightForNormals.Click += tsmiSettings_MPD_UseFullHeightForNormals_Click;
             // 
             // tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals

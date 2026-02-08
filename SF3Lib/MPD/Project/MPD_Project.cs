@@ -30,7 +30,7 @@ namespace SF3.MPD.Project {
             if (original.Lighting != null)
                 Lighting = new MPD_Lighting(original.Lighting);
             if (original.Surface != null)
-                Surface = new MPD_Surface(Settings, original.Surface);
+                Surface = new MPD_Surface(this, Settings, original.Surface);
             if (original.Planes != null)
                 Planes = new MPD_Planes(original.Planes);
 
@@ -93,7 +93,7 @@ namespace SF3.MPD.Project {
             Settings = jObject.GetValueIfExists("Settings", t => MPD_Settings.FromJToken(t));
             BinaryReproductionFlags = jObject.GetValueIfExists("BinaryReproductionFlags", t => MPD_BinaryReproductionFlags.FromJToken(t));
             Lighting = jObject.GetValueIfExists("Lighting", t => MPD_Lighting.FromJToken(t));
-            Surface  = jObject.GetValueIfExists("Surface",  t => MPD_Surface.FromJToken(Settings, t));
+            Surface  = jObject.GetValueIfExists("Surface",  t => MPD_Surface.FromJToken(this, Settings, t));
             Planes   = jObject.GetValueIfExists("Planes",   t => MPD_Planes.FromJToken(t));
 
             TexturePalette = jObject.GetValueIfExists("TexturePalette", t => Palette.FromJToken(t));

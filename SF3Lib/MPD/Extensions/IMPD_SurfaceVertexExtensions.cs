@@ -40,7 +40,7 @@ namespace SF3.MPD.Extensions {
         public static VECTOR CalculateNormal(this IMPD_SurfaceVertex vertex, byte?[,] heights, int heightsStartVX, int heightsStartVY) {
             var settings = vertex.Surface.NormalSettings;
 
-            var quadHeightFactor = (settings.HalfHeight ? 0.5f : 1.0f) / 16.0f;
+            var quadHeightFactor = ((settings.HalfHeight || vertex.Surface.MPD.Settings.NarrowAngleBasedLightmap) ? 0.5f : 1.0f) / 16.0f;
             var sumNormals = new List<VECTOR>();
             void TryAddQuadNormal(int tx, int ty, CornerType corner) {
                 if (tx >= 0 && tx < 64 && ty >= 0 && ty < 64) {
