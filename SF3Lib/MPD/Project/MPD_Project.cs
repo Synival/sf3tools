@@ -113,8 +113,8 @@ namespace SF3.MPD.Project {
                     .ToEnumerableWithLength()
                 );
 
-            Scenario1UnknownTable1 = jObject.GetValueIfExists("Scenario1UnknownTable1", t => ((JArray) t).Select(x => (ushort) (short) x).ToArray().ToEnumerableWithLength());
-            Scenario1UnknownTable2 = jObject.GetValueIfExists("Scenario1UnknownTable2", t => ((JArray) t).Select(x => (ushort) (short) x).ToArray().ToEnumerableWithLength());
+            Scenario1UnknownTable1 = jObject.GetValueIfExists("Scenario1UnknownTable1", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray().ToEnumerableWithLength());
+            Scenario1UnknownTable2 = jObject.GetValueIfExists("Scenario1UnknownTable2", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray().ToEnumerableWithLength());
             GroundAnimationData    = jObject.GetValueIfExists("GroundAnimationData",    t => ((JArray) t).Select(x => (byte) x).ToArray().ToEnumerableWithLength());
 
             CameraBoundaries       = jObject.GetValueIfExists("CameraBoundaries",       t => RectangleShort.FromJToken(t));
