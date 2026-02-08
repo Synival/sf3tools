@@ -23,7 +23,7 @@ namespace SF3.MPD.Extensions {
                 new JProperty("Models",             mc.Models?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("ModelInstances",     mc.ModelInstances?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
                 new JProperty("Textures",           mc.Textures?.Select(x => x.ToJObject())?.ToArray()?.ToJArray()),
-                new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()?.ToJArray()),
+                new JProperty("DataAfterInstances", mc.DataAfterInstances?.ToArray()?.Select(x => (int) x).ToArray().ToJArray()),
             };
 
             if (mc.Collection.IsHeaderModelCollection())

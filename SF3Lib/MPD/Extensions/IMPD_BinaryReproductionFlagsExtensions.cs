@@ -1,4 +1,5 @@
-﻿using CommonLib.Extensions;
+﻿using System.Linq;
+using CommonLib.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
@@ -19,7 +20,7 @@ namespace SF3.MPD.Extensions {
                 { "NonStandardTextureChunkDecompressedSizeLimit", flags.NonStandardTextureChunkDecompressedSizeLimit },
                 { "MisplacedModelsChunkIndex",                    flags.MisplacedModelsChunkIndex },
                 { "MisplacedSurfaceModelChunkIndex",              flags.MisplacedSurfaceModelChunkIndex },
-                { "UnreferencedDataAfterPaletteAdjustmentTable",  flags.UnreferencedDataAfterPaletteAdjustmentTable?.AsArray()?.ToJArray() },
+                { "UnreferencedDataAfterPaletteAdjustmentTable",  flags.UnreferencedDataAfterPaletteAdjustmentTable?.AsArray()?.Select(x => (int) x)?.ToArray().ToJArray() },
             };
         }
     }

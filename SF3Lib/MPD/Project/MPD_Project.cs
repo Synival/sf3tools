@@ -116,14 +116,10 @@ namespace SF3.MPD.Project {
             Scenario1UnknownTable1 = jObject.GetValueIfExists("Scenario1UnknownTable1", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray().ToEnumerableWithLength());
             Scenario1UnknownTable2 = jObject.GetValueIfExists("Scenario1UnknownTable2", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray().ToEnumerableWithLength());
             GroundAnimationData    = jObject.GetValueIfExists("GroundAnimationData",    t => ((JArray) t).Select(x => (byte) x).ToArray().ToEnumerableWithLength());
-
             CameraBoundaries       = jObject.GetValueIfExists("CameraBoundaries",       t => RectangleShort.FromJToken(t));
             BattleCursorBoundaries = jObject.GetValueIfExists("BattleCursorBoundaries", t => RectangleShort.FromJToken(t));
-
-            if (jObject.TryGetValue("Collisions", out var collisionsToken))
-                Collisions = MPD_Collisions.FromJToken(collisionsToken);
-            if (jObject.TryGetValue("Gradient", out var gradientToken))
-                Gradient = null; // .FromJToken()
+            Collisions             = jObject.GetValueIfExists("Collisions",             t => MPD_Collisions.FromJToken(t));
+            Gradient               = jObject.GetValueIfExists("Gradient",               t => MPD_Gradient.FromJToken(t));
 
             return true;
         }

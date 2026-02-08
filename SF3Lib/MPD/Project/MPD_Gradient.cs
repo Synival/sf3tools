@@ -1,4 +1,6 @@
-﻿using CommonLib.Imaging;
+﻿using System;
+using CommonLib.Imaging;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
@@ -18,6 +20,22 @@ namespace SF3.MPD.Project {
             if (original.BottomColor != null)
                 BottomColor = new ColorRGB555(original.BottomColor);
 
+        }
+
+        public static IMPD_Gradient FromJToken(JToken token) => new MPD_Gradient(token);
+        private MPD_Gradient(JToken token) {
+            var jObject = (JObject) token;
+
+            TopPosition               = (float) token["TopPosition"];
+            BottomPosition            = (float) token["BottomPosition"];
+            TopColor                  = ColorRGB555.FromJToken(token["TopColor"]);
+            BottomColor               = ColorRGB555.FromJToken(token["BottomColor"]);
+            AffectsModelsAndSurface   =  (bool) token["AffectsModelsAndSurface"];
+            ModelsAndSurfaceIntensity = (float) token["ModelsAndSurfaceIntensity"];
+            AffectsGround             =  (bool) token["AffectsGround"];
+            GroundIntensity           = (float) token["GroundIntensity"];
+            AffectsSky                =  (bool) token["AffectsSky"];
+            SkyIntensity              = (float) token["SkyIntensity"];
         }
 
         public float TopPosition { get; set; }
