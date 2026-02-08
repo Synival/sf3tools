@@ -11,18 +11,19 @@ namespace CommonLib.SGL {
         }
 
         public VECTOR GetCornerNormal(CornerType corner) {
-            // Not sure why the components need to be flipped in every permutation of this function,
-            // but that's how it appears to be...
-            int cornerV = (int) corner;
-            var vec = VECTOR.Cross(
-                Vertices[(3 + cornerV) % 4] - Vertices[(0 + cornerV) % 4],
-                Vertices[(1 + cornerV) % 4] - Vertices[(0 + cornerV) % 4]
-            ).Normalized();
-            vec.X = -vec.X;
-            return vec;
+            // Swap order of 'corner' to match what's seen on surface meshes (BottomRight going clockwise).
+            int vertex = (4 - (int) corner) % 4;
+            return GetVertexNormal(vertex);
         }
 
-        public VECTOR GetNormal(POLYGON_NormalCalculationMethod calculationMethod) {
+        public VECTOR GetVertexNormal(int vertex) {
+            return VECTOR.Cross(
+                Vertices[(0 + vertex) % 4] - Vertices[(2 + vertex) % 4],
+                Vertices[(3 + vertex) % 4] - Vertices[(2 + vertex) % 4]
+            ).Normalized();
+        }
+
+        public VECTOR GetMeshNormalComponent(CornerType vertexCorner, POLYGON_NormalCalculationMethod calculationMethod) {
             // Shortcut for very common flat polygons.
             var height = Vertices[0].Y;
             if (Vertices[1].Y == height && Vertices[2].Y == height && Vertices[3].Y == height)
@@ -31,6 +32,9 @@ namespace CommonLib.SGL {
             switch (calculationMethod) {
                 case POLYGON_NormalCalculationMethod.TopRightTriangle:
                     return GetCornerNormal(CornerType.TopRight);
+
+                case POLYGON_NormalCalculationMethod.AdjacentTriangles:
+                    return GetCornerNormal(vertexCorner);
 
                 case POLYGON_NormalCalculationMethod.AverageOfAllTriangles:
                 case POLYGON_NormalCalculationMethod.MostExtremeVerticalTriangle:

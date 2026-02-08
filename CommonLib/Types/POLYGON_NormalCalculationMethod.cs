@@ -21,6 +21,11 @@
         /// <summary>
         /// Gathers all corner triangles, weights them by the 1.01 - abs(Y), and normalizes them.
         /// </summary>
-        WeightedVerticalTriangles
+        WeightedVerticalTriangles,
+
+        /// <summary>
+        /// Calculates the normal for each vertex using the triangle of each quad connected to it.
+        /// </summary>
+        AdjacentTriangles,
     }
 }

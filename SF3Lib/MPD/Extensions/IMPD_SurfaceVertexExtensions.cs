@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using CommonLib.SGL;
+using CommonLib.Types;
 using SF3.MPD.Interfaces;
 using SF3.Utils;
-using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.MPD.Extensions {
     public static class IMPD_SurfaceVertexExtensions {
@@ -42,21 +42,23 @@ namespace SF3.MPD.Extensions {
 
             var quadHeightFactor = (settings.HalfHeight ? 0.5f : 1.0f) / 16.0f;
             var sumNormals = new List<VECTOR>();
-            void TryAddQuadNormal(int tx, int ty) {
+            void TryAddQuadNormal(int tx, int ty, CornerType corner) {
                 var vx = tx - heightsStartVX;
                 var vy = ty - heightsStartVY;
 
                 if (!heights[vx, vy].HasValue || !heights[vx + 1, vy].HasValue || !heights[vx, vy + 1].HasValue || !heights[vx + 1, vy + 1].HasValue)
                     return;
 
+                // Normal calculation methods requie a quad starting from the bottom-right corner in clockwise order.
+                // Heights are stored with higher values being higher, but SF3's 3D space is the opposite, so flip the height.
                 var quad = new POLYGON(new VECTOR[] {
-                    new VECTOR(Corner1X, heights[vx + 1, vy + 1].Value * quadHeightFactor, Corner1Z),
-                    new VECTOR(Corner2X, heights[vx + 0, vy + 1].Value * quadHeightFactor, Corner2Z),
-                    new VECTOR(Corner3X, heights[vx + 0, vy + 0].Value * quadHeightFactor, Corner3Z),
-                    new VECTOR(Corner4X, heights[vx + 1, vy + 0].Value * quadHeightFactor, Corner4Z)
+                    new VECTOR(1, heights[vx + 1, vy + 0].Value * -quadHeightFactor, 0),
+                    new VECTOR(0, heights[vx + 0, vy + 0].Value * -quadHeightFactor, 0),
+                    new VECTOR(0, heights[vx + 0, vy + 1].Value * -quadHeightFactor, 1),
+                    new VECTOR(1, heights[vx + 1, vy + 1].Value * -quadHeightFactor, 1),
                 });
 
-                sumNormals.Add(quad.GetNormal(settings.CalculationMethod));
+                sumNormals.Add(quad.GetMeshNormalComponent(corner, settings.CalculationMethod));
             }
 
             // Gather a list of all quad normals to use for averaging the vertex normal.
@@ -64,10 +66,10 @@ namespace SF3.MPD.Extensions {
             // so only add normals if they exist.
             var vertexX = vertex.X;
             var vertexY = vertex.Y;
-            TryAddQuadNormal(vertexX + 0, vertexY + 0);
-            TryAddQuadNormal(vertexX - 1, vertexY + 0);
-            TryAddQuadNormal(vertexX - 1, vertexY - 1);
-            TryAddQuadNormal(vertexX + 0, vertexY - 1);
+            TryAddQuadNormal(vertexX + 0, vertexY - 1, CornerType.TopLeft);
+            TryAddQuadNormal(vertexX - 1, vertexY - 1, CornerType.TopRight);
+            TryAddQuadNormal(vertexX - 1, vertexY + 0, CornerType.BottomRight);
+            TryAddQuadNormal(vertexX + 0, vertexY + 0, CornerType.BottomLeft);
 
             if (sumNormals.Count == 0)
                 return new VECTOR(0, -1, 0);

@@ -96,7 +96,7 @@ namespace SF3.Win {
         /// <returns>A new NormalCalculationSettings instance.</returns>
         public NormalCalculationSettings MakeNormalCalculationSettings() {
             return new NormalCalculationSettings(
-                UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.WeightedVerticalTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle,
+                UseImprovedNormalCalculations ? POLYGON_NormalCalculationMethod.AdjacentTriangles : POLYGON_NormalCalculationMethod.TopRightTriangle,
                 UseVanillaHalfHeightForSurfaceNormalCalculations,
                 FixSurfaceMapTileNormalOverflowUnderflowErrors
             );
