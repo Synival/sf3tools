@@ -1,17 +1,13 @@
 ﻿using System.Collections.Concurrent;
 using System.Text;
 using CommonLib.Arrays;
-using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
-using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
-using SF3.MPD.Extensions;
 using SF3.NamedValues;
 using SF3.Types;
-using static CommonLib.Types.CornerTypeConsts;
 
 namespace MPD_Analyzer {
     public class Program {
@@ -61,7 +57,7 @@ namespace MPD_Analyzer {
             ]}
         };
 
-        private struct NormalMesh {
+        public struct NormalMesh {
             public NormalMesh(byte[,] heights, VECTOR normal) {
                 Heights = heights;
                 Normal  = normal;
@@ -93,55 +89,11 @@ namespace MPD_Analyzer {
             }
         }
 
-        private static HashSet<NormalMesh> s_normalMeshes = new HashSet<NormalMesh>();
-        private static HashSet<NormalMesh> s_skippedMeshes = new HashSet<NormalMesh>();
-        private static Mutex s_mutex = new Mutex();
+        public static HashSet<NormalMesh> s_normalMeshes = new HashSet<NormalMesh>();
+        public static HashSet<NormalMesh> s_skippedMeshes = new HashSet<NormalMesh>();
+        public static Mutex s_meshesMutex = new Mutex();
 
         private static string[]? MPD_MatchFunc(MPD_File mpdFile, ScenarioType scenario, string filename) {
-            if (mpdFile.Surface?.HasModel != true)
-                return null;
-            mpdFile.Surface.NormalSettings = new NormalCalculationSettings(
-                POLYGON_NormalCalculationMethod.TopRightTriangle, true, false
-            );
-
-            int added = 0;
-            int skipped = 0;
-
-            for (int vy = 0; vy < 65; vy++) {
-                for (int vx = 0; vx < 65; vx++) {
-                    var vertex = mpdFile.Surface.GetVertex(vx, vy);
-                    var heights = vertex.GetHeightMeshForNormalCalculation();
-
-                    var min = heights.To1DArray().Select(x => x ?? (byte) 0xFF).Min();
-                    var newHeights = new byte[3, 3];
-                    for (int sy = 0; sy < 3; sy++)
-                        for (int sx = 0; sx < 3; sx++)
-                            newHeights[sx, sy] = (byte) ((heights[sx, sy] ?? min) - min);
-
-                    if (newHeights.To1DArray().All(x => x == 0))
-                        continue;
-
-                    var originalNormal = vertex.Normal;
-                    var newNormal      = vertex.CalculateNormal();
-
-                    var mesh = new NormalMesh(newHeights, originalNormal);
-
-                    s_mutex.WaitOne();
-                    try {
-                        if (originalNormal != newNormal) {
-                            if (s_normalMeshes.Add(mesh))
-                                added++;
-                        }
-                        else if (s_skippedMeshes.Add(mesh))
-                            skipped++;
-                    }
-                    finally {
-                        s_mutex.ReleaseMutex();
-                    }
-                }
-            }
-
-            return (added > 0 || skipped > 0) ? [$"{added} added, {skipped} ignored)"] : [];
 #if false
             // Gotta have the model collection!
             if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(MPD_CollectionType.Primary))
@@ -155,9 +107,9 @@ namespace MPD_Analyzer {
             var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
             var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
 #endif
-
-            return MatchFuncs.ProjectCopyProducesSameMPDAsOriginal(mpdFile);
 #endif
+
+            return MatchFuncs.ProjectCopyFromJSONProducesSameMPDAsCopy(mpdFile);
         }
 
         public static void Main(string[] args) {

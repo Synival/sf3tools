@@ -1,14 +1,18 @@
 ﻿using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 using SF3.MPD.Writer;
 using SF3.Types;
 using SF3.Utils;
+using static MPD_Analyzer.Program;
 
 namespace MPD_Analyzer {
     public static class MatchFuncs {
@@ -512,6 +516,73 @@ namespace MPD_Analyzer {
                 var writer = new MPD_Writer(stream, mpdFile.Scenario);
                 var mpdProject = new MPD_Project(mpdFile);
                 writer.WriteMPD(mpdProject);
+                bytes2 = stream.ToArray();
+            }
+
+            return AnalysisUtils.GetByteComparisonErrors(bytes1, bytes2);
+        }
+
+        public static string[]? GatherInaccuratelyCalculatedNormals(MPD_File mpdFile) {
+            if (mpdFile.Surface?.HasModel != true)
+                return null;
+            mpdFile.Surface.NormalSettings = new NormalCalculationSettings(
+                POLYGON_NormalCalculationMethod.TopRightTriangle, true, false
+            );
+
+            int added = 0;
+            int skipped = 0;
+
+            for (int vy = 0; vy < 65; vy++) {
+                for (int vx = 0; vx < 65; vx++) {
+                    var vertex = mpdFile.Surface.GetVertex(vx, vy);
+                    var heights = vertex.GetHeightMeshForNormalCalculation();
+
+                    var min = heights.To1DArray().Select(x => x ?? (byte) 0xFF).Min();
+                    var newHeights = new byte[3, 3];
+                    for (int sy = 0; sy < 3; sy++)
+                        for (int sx = 0; sx < 3; sx++)
+                            newHeights[sx, sy] = (byte) ((heights[sx, sy] ?? min) - min);
+
+                    if (newHeights.To1DArray().All(x => x == 0))
+                        continue;
+
+                    var originalNormal = vertex.Normal;
+                    var newNormal      = vertex.CalculateNormal();
+
+                    var mesh = new NormalMesh(newHeights, originalNormal);
+
+                    s_meshesMutex.WaitOne();
+                    try {
+                        if (originalNormal != newNormal) {
+                            if (s_normalMeshes.Add(mesh))
+                                added++;
+                        }
+                        else if (s_skippedMeshes.Add(mesh))
+                            skipped++;
+                    }
+                    finally {
+                        s_meshesMutex.ReleaseMutex();
+                    }
+                }
+            }
+
+            return (added > 0 || skipped > 0) ? [$"{added} added, {skipped} ignored)"] : [];
+        }
+
+        public static string[]? ProjectCopyFromJSONProducesSameMPDAsCopy(MPD_File mpdFile) {
+            var mpdProjectCopy = new MPD_Project(mpdFile);
+            byte[] bytes1;
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                writer.WriteMPD(mpdProjectCopy);
+                bytes1 = stream.ToArray();
+            }
+
+            var mpdProjectFromJSON = MPD_Project.FromJSON(mpdProjectCopy.ToJObject());
+            byte[] bytes2;
+            using (var stream = new MemoryStream()) {
+                var writer = new MPD_Writer(stream, mpdFile.Scenario);
+                writer.WriteMPD(mpdProjectFromJSON);
                 bytes2 = stream.ToArray();
             }
 
