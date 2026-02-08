@@ -322,7 +322,7 @@ namespace SF3.Models.Files.MPD {
                         }
                     }
                     else {
-                        var modelHeights = corners.ToDictionary(c => c, fileTile.GetSurfaceModelVertexHeight);
+                        var modelHeights = corners.ToDictionary(c => c, x => fileTile.GetSurfaceModelVertexHeight(x) * 16.0f);
                         foreach (var c in corners) {
                             if (dataHeights[c] != modelHeights[c])
                                 errors.Add($"Non-flat tile ({tile.X}, {tile.Y}) corner '{c}' height ({dataHeights[c]}) doesn't match surface model height ({modelHeights[c]})");
