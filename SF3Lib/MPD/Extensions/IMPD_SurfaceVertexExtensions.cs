@@ -43,6 +43,11 @@ namespace SF3.MPD.Extensions {
             var quadHeightFactor = (settings.HalfHeight ? 0.5f : 1.0f) / 16.0f;
             var sumNormals = new List<VECTOR>();
             void TryAddQuadNormal(int tx, int ty, CornerType corner) {
+                if (tx >= 0 && tx < 64 && ty >= 0 && ty < 64 && vertex.Surface.GetTile(tx, ty).IsFlat) {
+                    sumNormals.Add(new VECTOR(0, -1, 0));
+                    return;
+                }
+
                 var vx = tx - heightsStartVX;
                 var vy = ty - heightsStartVY;
 
