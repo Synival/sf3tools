@@ -22,7 +22,7 @@ namespace SF3.MPD.Extensions {
                 new JProperty("ScaleZ",    instance.ScaleZ),
             };
 
-            if (instance.Collection == MPD_CollectionType.Primary) {
+            if (!instance.Collection.IsHeaderModelCollection()) {
                 properties.Add(new JProperty("Tag",   instance.Tag));
                 properties.Add(new JProperty("Flags", instance.Flags));
                 properties.Add(new JProperty("LevelsOfDetail", instance.LevelsOfDetail));

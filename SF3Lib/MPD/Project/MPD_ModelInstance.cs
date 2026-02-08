@@ -44,7 +44,7 @@ namespace SF3.MPD.Project {
             ScaleY    =  (float) jObject["ScaleY"];
             ScaleZ    =  (float) jObject["ScaleZ"];
 
-            if (Collection == MPD_CollectionType.Primary) {
+            if (!Collection.IsHeaderModelCollection()) {
                 Tag   = (ushort) jObject["Tag"];
                 Flags = (ushort) jObject["Flags"];
                 LevelsOfDetail = (int) jObject["LevelsOfDetail"];
