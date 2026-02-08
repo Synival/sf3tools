@@ -68,13 +68,17 @@ namespace SF3.MPD.Project {
             var span = strlen + (spaceBetween ? 1 : 0);
             var emptyStr = new string(' ', strlen);
 
-            for (int y = 0; y < rowCount && y < table.GetLength(1); y++) {
-                var row = rows[y];
-                var maxlen = row.Length - strlen + 1;
+            for (int y = 0; y < height; y++) {// y < rowCount && y < table.GetLength(1); y++) {
+                var row = y < rowCount ? rows[y] : null;
+                var maxlen = (row == null) ? 0 : (row.Length - strlen + 1);
 
-                for (int x = 0; x * span < maxlen && x < table.GetLength(0); x++) {
-                    var valueStr = row.Substring(x * span, strlen);
-                    table[x, y] = valueStr == emptyStr ? emptyValue : fetcher(valueStr);
+                for (int x = 0; x < width; x++) {
+                    if (x * span < maxlen) {
+                        var valueStr = row.Substring(x * span, strlen);
+                        table[x, y] = valueStr == emptyStr ? emptyValue : fetcher(valueStr);
+                    }
+                    else
+                        table[x, y] = emptyValue;
                 }
             }
 
@@ -124,6 +128,7 @@ namespace SF3.MPD.Project {
 
             var textureIds   = FetchByteTable("TextureIDs", 0xFF);
             var textureFlags = FetchByteTable("TextureFlags", 0x00);
+            var unknownTextureFlags = FetchByteTable("UnknownTextureFlags", 0x00);
             var eventIds     = FetchByteTable("EventIDs", 0);
             var terrainWithFlags = FetchByteTable("Terrain", 0x00);
             var heights      = FetchHeightTable("Heights");
@@ -134,7 +139,7 @@ namespace SF3.MPD.Project {
                 for (int x = 0; x < Height; x++) {
                     var terrain = (TerrainType) (terrainWithFlags[x, y] & 0x0F);
                     var terrainFlags = (TerrainFlags) ((terrainWithFlags[x, y] & 0xF0) >> 4);
-                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], textureFlags[x, y], eventIds[x, y], terrain, terrainFlags, heights[x, y]);
+                    _tiles[x, y] = new MPD_SurfaceTile(this, x, y, textureIds[x, y], textureFlags[x, y], unknownTextureFlags[x, y], eventIds[x, y], terrain, terrainFlags, heights[x, y]);
                 }
             }
 

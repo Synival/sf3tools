@@ -13,6 +13,7 @@ namespace SF3.MPD.Project {
             int y,
             byte textureId = 0xFF,
             byte textureFlags = 0x00,
+            byte unknownTextureFlags = 0x00,
             byte eventId = 0,
             TerrainType terrainType = TerrainType.NoEntry,
             TerrainFlags terrainFlags = 0,
@@ -25,6 +26,7 @@ namespace SF3.MPD.Project {
 
             TextureID    = textureId;
             TextureFlags = textureFlags;
+            UnknownTextureFlags = unknownTextureFlags;
 
             TerrainType  = terrainType;
             TerrainFlags = terrainFlags;
