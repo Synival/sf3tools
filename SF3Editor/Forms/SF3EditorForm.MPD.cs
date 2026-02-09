@@ -212,10 +212,14 @@ namespace SF3.Editor.Forms {
         /// <param name="toScenario">The scenario for the exported MPD file.</param>
         /// <param name="filename">Default name of the MPD to save.</param>
         /// <returns>'true' if an export was successful, otherwise 'false'.</returns>
-        public bool ExportMPDDialog(IMPD mpd, ScenarioType toScenario, string filename) {
+        public bool ExportMPDDialog(IMPD mpd, ScenarioType? toScenario, string filename) {
             using (var dialog = new SaveFileDialog() {
-                Title = $"Export to {toScenario} MPD",
-                Filter = "MPD Files (*.MPD)|*.MPD|All Files (*.*)|*.*"
+                Title  = toScenario.HasValue
+                    ? $"Export to {toScenario} MPD"
+                    : $"Export to MPD Project",
+                Filter = toScenario.HasValue
+                    ? "MPD Files (*.MPD)|*.MPD|All Files (*.*)|*.*"
+                    : "MPD Project Files (*.SF3MPD)|*.SF3MPD|All Files (*.*)|*.*"
             }) {
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return false;
@@ -225,8 +229,17 @@ namespace SF3.Editor.Forms {
                 try {
                     using (new CursorWait()) {
                         using (var outStream = new FileStream(path, FileMode.Create)) {
-                            var writer = new MPD_Writer(outStream, toScenario);
-                            writer.WriteMPD(mpd);
+                            if (toScenario.HasValue) {
+                                var writer = new MPD_Writer(outStream, toScenario.Value);
+                                writer.WriteMPD(mpd);
+                            }
+                            else {
+                                var serializedMPD = mpd.ToJSON_String();
+                                using (var writer = new StreamWriter(outStream)) {
+                                    writer.NewLine = "\n";
+                                    writer.Write(serializedMPD);
+                                }
+                            }
                         }
                     }
                     InfoMessage("Export successful.");
@@ -306,6 +319,11 @@ namespace SF3.Editor.Forms {
         private void mpdTSMI_Export_ToScenario3MPD_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD)
                 ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario3, SelectedFile.Loader.ShortFilename);
+        }
+
+        private void mpdTSMI_Export_ToMPDProject_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD)
+                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, null, SelectedFile.Loader.ShortFilename);
         }
 
         private void UpdateMPD_ModelSwitchGroupsMenu(IMPD_File? mpdFile) {

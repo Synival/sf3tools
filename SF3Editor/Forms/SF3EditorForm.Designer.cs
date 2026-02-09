@@ -110,6 +110,7 @@ namespace SF3.Editor.Forms {
             mpdTSMI_Export_ToScenario1MPD = new System.Windows.Forms.ToolStripMenuItem();
             mpdTSMI_Export_ToScenario2MPD = new System.Windows.Forms.ToolStripMenuItem();
             mpdTSMI_Export_ToScenario3MPD = new System.Windows.Forms.ToolStripMenuItem();
+            mpdTSMI_Export_ToMPDProject = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_Chunks = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Chunks_ImportChunk = new System.Windows.Forms.ToolStripMenuItem();
@@ -705,7 +706,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiMPD_Export
             // 
-            tsmiMPD_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { mpdTSMI_Export_ToScenario1MPD, mpdTSMI_Export_ToScenario2MPD, mpdTSMI_Export_ToScenario3MPD });
+            tsmiMPD_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { mpdTSMI_Export_ToScenario1MPD, mpdTSMI_Export_ToScenario2MPD, mpdTSMI_Export_ToScenario3MPD, mpdTSMI_Export_ToMPDProject });
             tsmiMPD_Export.Name = "tsmiMPD_Export";
             tsmiMPD_Export.Size = new Size(261, 22);
             tsmiMPD_Export.Text = "&Export";
@@ -730,6 +731,13 @@ namespace SF3.Editor.Forms {
             mpdTSMI_Export_ToScenario3MPD.Size = new Size(242, 22);
             mpdTSMI_Export_ToScenario3MPD.Text = "Export to Scenario &3 / PD MPD...";
             mpdTSMI_Export_ToScenario3MPD.Click += mpdTSMI_Export_ToScenario3MPD_Click;
+            // 
+            // mpdTSMI_Export_ToMPDProject
+            // 
+            mpdTSMI_Export_ToMPDProject.Name = "mpdTSMI_Export_ToMPDProject";
+            mpdTSMI_Export_ToMPDProject.Size = new Size(242, 22);
+            mpdTSMI_Export_ToMPDProject.Text = "Export to &MPD Project...";
+            mpdTSMI_Export_ToMPDProject.Click += mpdTSMI_Export_ToMPDProject_Click;
             // 
             // tsmiMPD_Sep1
             // 
@@ -873,47 +881,47 @@ namespace SF3.Editor.Forms {
             // tsmiSettings_MPD_ImprovedNormalCalculations
             // 
             tsmiSettings_MPD_ImprovedNormalCalculations.Name = "tsmiSettings_MPD_ImprovedNormalCalculations";
-            tsmiSettings_MPD_ImprovedNormalCalculations.Size = new Size(454, 22);
+            tsmiSettings_MPD_ImprovedNormalCalculations.Size = new Size(620, 22);
             tsmiSettings_MPD_ImprovedNormalCalculations.Text = "Use Improved Surface Map Tile Normal Calculation Function";
             tsmiSettings_MPD_ImprovedNormalCalculations.Click += tsmiSettings_MPD_ImprovedNormalCalculations_Click;
             // 
             // tsmiSettings_MPD_UseFullHeightForNormals
             // 
             tsmiSettings_MPD_UseFullHeightForNormals.Name = "tsmiSettings_MPD_UseFullHeightForNormals";
-            tsmiSettings_MPD_UseFullHeightForNormals.Size = new Size(454, 22);
+            tsmiSettings_MPD_UseFullHeightForNormals.Size = new Size(620, 22);
             tsmiSettings_MPD_UseFullHeightForNormals.Text = "Use Full Instead of Half Height for Surface Map Tile Normal Calculations (Not for Angle-Based Lighting)";
             tsmiSettings_MPD_UseFullHeightForNormals.Click += tsmiSettings_MPD_UseFullHeightForNormals_Click;
             // 
             // tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals
             // 
             tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Name = "tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals";
-            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Size = new Size(454, 22);
+            tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Size = new Size(620, 22);
             tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Text = "Ignore Blank Tiles for Surface Map Normal Calculations";
             tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals.Click += tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals_Click;
             // 
             // tsmiSettings_MPD_FixNormalOverflowUnderflowErrors
             // 
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Name = "tsmiSettings_MPD_FixNormalOverflowUnderflowErrors";
-            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Size = new Size(454, 22);
+            tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Size = new Size(620, 22);
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Text = "Fix Surface Map Tile Normal Overflow/Underflow Errors";
             tsmiSettings_MPD_FixNormalOverflowUnderflowErrors.Click += tsmiSettings_MPD_FixNormalOverflowUnderflowErrors_Click;
             // 
             // tsmiSettings_MPD_Separator
             // 
             tsmiSettings_MPD_Separator.Name = "tsmiSettings_MPD_Separator";
-            tsmiSettings_MPD_Separator.Size = new Size(451, 6);
+            tsmiSettings_MPD_Separator.Size = new Size(617, 6);
             // 
             // tsmiSettings_MPD_UpdateChunkTableOnChunkResize
             // 
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Name = "tsmiSettings_MPD_UpdateChunkTableOnChunkResize";
-            tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Size = new Size(454, 22);
+            tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Size = new Size(620, 22);
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Text = "Update Chunk Table on Chunk Resize";
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Click += tsmiSettings_MPD_UpdateChunkTableOnChunkResize_Click;
             // 
             // tsmiSettings_MPD_AutoRebuildMPDChunkTable
             // 
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Name = "tsmiSettings_MPD_AutoRebuildMPDChunkTable";
-            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Size = new Size(454, 22);
+            tsmiSettings_MPD_AutoRebuildMPDChunkTable.Size = new Size(620, 22);
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Text = "Rebuild Chunk Table on Save";
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Click += tsmiSettings_MPD_AutoRebuildMPDChunkTable_Click;
             // 
@@ -1062,5 +1070,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiBlacksmith_Sort;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals;
         private System.Windows.Forms.ToolStripSeparator tsmiSettings_MPD_Separator;
+        private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToMPDProject;
     }
 }
