@@ -51,6 +51,14 @@ namespace SF3.Models.Tables.DAT {
                 while (address < rawData.Length) {
                     string ngcName = null;
 
+                    // It's EXTREMELY unlikely that this file will start with 0x00000000. If it does, it's zeroed-out
+                    // data, and we should skip it.
+                    if (address < rawData.Length - 3 && (uint) Data.GetDouble(address) == 0x00000000) {
+                        address += 2;
+                        continue;
+                    }
+
+                    // Read the data, expecting a 24x24 image with a terminator.
                     var decompressedData = Compression.DecompressLZSS(rawData, address, 24 * 24, out var _, out var endDataFound);
                     if (decompressedData.Length != 24 * 24 || !endDataFound) {
                         address += 2;
@@ -80,6 +88,10 @@ namespace SF3.Models.Tables.DAT {
             }
             finally {
                 _rows = rows.ToArray();
+                if (_rows.Length > 0) {
+                    var lastModel = ((ItemCG_Texture) _rows[rows.Count - 1]);
+                    lastModel.MaxStoredImageSize = Data.Length - lastModel.Address;
+                }
             }
             return true;
         }
