@@ -48,7 +48,7 @@ namespace SF3.Models.Tables.DAT {
                 int id = 0;
                 ItemCG_Texture lastModel = null;
 
-                while (address + (24 * 24) <= rawData.Length) {
+                while (address < rawData.Length) {
                     string ngcName = null;
 
                     var decompressedData = Compression.DecompressLZSS(rawData, address, 24 * 24, out var _, out var endDataFound);
