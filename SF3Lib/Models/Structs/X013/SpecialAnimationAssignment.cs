@@ -18,7 +18,7 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_specialIdAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
-        public int SpecialId {
+        public int SpecialID {
             get => Data.GetWord(_specialIdAddr);
             set => Data.SetWord(_specialIdAddr, value);
         }
@@ -33,7 +33,7 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_animationIdAddr), displayOrder: 2, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.SpecialAnimation)]
         [BulkCopy]
-        public int AnimationId {
+        public int AnimationID {
             get => Data.GetByte(_animationIdAddr);
             set => Data.SetByte(_animationIdAddr, (byte) value);
         }

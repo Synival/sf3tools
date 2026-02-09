@@ -13,6 +13,7 @@ namespace SF3.Models.Files.X013 {
         CritrateTable CritrateTable { get; }
         WeaponSpellRankTable WeaponSpellRankTable { get; }
         StatusEffectTable StatusEffectTable { get; }
+        SpellAnimationSubstitutionTable SpellAnimationSubstitution { get; }
         SpecialAnimationAssignmentTable SpecialAnimationAssignmentTable { get; }
     }
 }
