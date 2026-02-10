@@ -5,7 +5,9 @@ using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
+using CommonLib.NamedValues;
 using Newtonsoft.Json.Linq;
+using SF3.Models.Files;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
@@ -15,7 +17,7 @@ namespace SF3.MPD.Project {
     /// <summary>
     /// Abstracted, editable MPD file.
     /// </summary>
-    public class MPD_Project : IMPD, IJsonResource {
+    public class MPD_Project : IMPD, IJsonResource, IBaseFile {
         /// <summary>
         /// Makes a copy of an existing IMPD as an IMPD_Project.
         /// </summary>
@@ -127,6 +129,12 @@ namespace SF3.MPD.Project {
         public string ToJSON_String() => IMPD_Extensions.ToJSON_String(this);
         public JToken ToJToken() => IMPD_Extensions.ToJObject(this);
 
+        // TODO: Implement these!
+        public string[] GetErrors() => new string[0];
+        public bool Finish() => true;
+        public ScopeGuard IsModifiedChangeBlocker() => new ScopeGuard(() => {}, () => {});
+        public void Dispose() {}
+
         public IMPD_EditableFlags Flags { get; }
         public IMPD_Settings Settings { get; private set; }
         public IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; private set; }
@@ -144,6 +152,12 @@ namespace SF3.MPD.Project {
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 { get; set; }
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; set; }
 
+        public INameGetterContext NameGetterContext => null;
+        public string Title => "";
+        public bool IsModified { get; set; }
+
         public EventHandler ModelsUpdated { get; set; }
+        public event EventHandler Finished;
+        public event EventHandler IsModifiedChanged;
     }
 }

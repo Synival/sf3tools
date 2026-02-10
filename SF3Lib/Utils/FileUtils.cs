@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CommonLib.Logging;
+using CommonLib.Extensions;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files;
@@ -32,6 +32,7 @@ using SF3.Models.Files.X033;
 using SF3.Models.Files.X035;
 using SF3.Models.Files.X044;
 using SF3.Models.Files.X1;
+using SF3.MPD.Project;
 using SF3.Types;
 
 namespace SF3.Utils {
@@ -72,6 +73,8 @@ namespace SF3.Utils {
             var preExtension = Path.GetFileNameWithoutExtension(filenameUpper);
             if (filenameUpper.Contains(".MPD"))
                 return SF3FileType.MPD;
+            else if (filenameUpper.Contains(".SF3MPD"))
+                return SF3FileType.MPD_Project;
             else if (filenameUpper.Contains(".CHR"))
                 return SF3FileType.CHR;
             else if (filenameUpper.Contains(".CHP"))
@@ -120,6 +123,7 @@ namespace SF3.Utils {
         public static bool FileTypeNeedsScenario(SF3FileType? fileType = null) {
             switch (fileType) {
                 case SF3FileType.MPD:
+                case SF3FileType.MPD_Project:
                 case SF3FileType.KAO:
                 case SF3FileType.CHR:
                 case SF3FileType.CHP:
@@ -139,8 +143,8 @@ namespace SF3.Utils {
         /// <param name="fileType">The type of file, if available. Some files, like MPD files, are detectable.</param>
         /// <returns>A scenario if it could be determined. Otherwise 'null'.</returns>
         public static ScenarioType? DetermineScenario(string filename, SF3FileType? fileType = null) {
-            // MPD's are automatically detected.
-            if (fileType == SF3FileType.MPD)
+            // MPD's are automatically detected and MPD_Project files are irrelevant.
+            if (fileType == SF3FileType.MPD || fileType == SF3FileType.MPD_Project)
                 return null;
 
             if (filename == null)
@@ -226,6 +230,7 @@ namespace SF3.Utils {
                 case SF3FileType.X035:    return X035_File.Create(byteData, ngc, scenario.Value);
                 case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario.Value);
                 case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts, scenario);
+                case SF3FileType.MPD_Project: return MPD_Project.FromJSON(byteData.GetDataCopyOrReference().AsTXTFileString());
                 case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                 case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
                 case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);
@@ -263,6 +268,7 @@ namespace SF3.Utils {
                 case SF3FileType.X035:    return "X035 File";
                 case SF3FileType.X044:    return "X044 File";
                 case SF3FileType.MPD:     return "MPD Files";
+                case SF3FileType.MPD_Project: return "MPD Project Files";
                 case SF3FileType.CHR:     return "CHR Files";
                 case SF3FileType.CHP:     return "CHP Files";
                 case SF3FileType.DAT_FACE32:  return "FACE32*.DAT Files";
@@ -300,6 +306,7 @@ namespace SF3.Utils {
                 case SF3FileType.X035:    return "*X035*.BIN";
                 case SF3FileType.X044:    return "*X044*.BIN";
                 case SF3FileType.MPD:     return "*.MPD";
+                case SF3FileType.MPD_Project: return "*.SF3MPD";
                 case SF3FileType.CHR:     return "*.CHR";
                 case SF3FileType.CHP:     return "*.CHP";
                 case SF3FileType.DAT_FACE32:  return "*FACE32*.DAT";
@@ -337,6 +344,7 @@ namespace SF3.Utils {
                 case "*X035*.BIN":    return new SF3FileType[] { SF3FileType.X035 };
                 case "*X044*.BIN":    return new SF3FileType[] { SF3FileType.X044 };
                 case "*.MPD":         return new SF3FileType[] { SF3FileType.MPD };
+                case "*.SF3MPD":      return new SF3FileType[] { SF3FileType.MPD_Project };
                 case "*.CHR":         return new SF3FileType[] { SF3FileType.CHR };
                 case "*.CHP":         return new SF3FileType[] { SF3FileType.CHP };
                 case "*FACE32*.DAT":  return new SF3FileType[] { SF3FileType.DAT_FACE32 };

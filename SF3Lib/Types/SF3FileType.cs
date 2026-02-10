@@ -23,6 +23,7 @@ namespace SF3.Types {
         X035         = 29,
         X044         = 16,
         MPD          = 17,
+        MPD_Project  = 30,
         CHR          = 18,
         CHP          = 19,
         DAT_FACE32   = 20,

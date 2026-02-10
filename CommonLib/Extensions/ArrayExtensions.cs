@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using CommonLib.Imaging;
 using Newtonsoft.Json;
@@ -376,5 +377,11 @@ namespace CommonLib.Extensions {
             => JArray.FromObject(array);
         public static JArray ToJArray<T>(this T[] array, JsonSerializer serializer)
             => JArray.FromObject(array, serializer);
+
+        public static string AsTXTFileString(this byte[] array) {
+            using (var ms = new MemoryStream(array))
+            using (var reader = new StreamReader(ms, detectEncodingFromByteOrderMarks: true))
+                return reader.ReadToEnd();
+        }
     }
 }
