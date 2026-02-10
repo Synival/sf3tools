@@ -170,7 +170,7 @@ namespace SF3.Editor.Forms {
             fileLoader.TitleChanged += (s, e) => {
                 tabPage.Text = fileLoader.Title;
                 if (SelectedFile?.Loader == fileLoader)
-                    Text = fileLoader.ModelTitle(_versionTitle);
+                    UpdateTitle();
             };
 
             // Add this file to the 'Recent Files' menu.
@@ -390,7 +390,7 @@ namespace SF3.Editor.Forms {
             tsmiTools_InsertData.Enabled  = tsmiTools_MovePostEOFData.Enabled;
 
             SelectedFile = file;
-            Text = file == null ? _versionTitle : file.Loader.ModelTitle(_versionTitle);
+            UpdateTitle();
             var fileType = file?.FileType;
 
             tsmiMonsters.Visible   = tsmiMonsters.Enabled   = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;

@@ -43,7 +43,8 @@ namespace SF3.Editor.Forms {
             // Store the original title in a few different forms. It's going to be changing around.
             _baseTitle = Text;
             _versionTitle = _baseTitle + " v" + Version;
-            Text = _versionTitle;
+            _appState.OpenScenarioChanged += (s, e) => UpdateTitle();
+            UpdateTitle();
 
             // Initialize menu states and set up events.
             InitFileMenu();
@@ -57,6 +58,22 @@ namespace SF3.Editor.Forms {
             if (!CloseAllFiles())
                 e.Cancel = true;
             base.OnFormClosing(e);
+        }
+
+        protected void UpdateTitle() {
+            string GetBaseTitle() {
+                switch (_appState.OpenScenario) {
+                    case -1: return _versionTitle + " (Detect Scenario)";
+                    case  1: return _versionTitle + " (Open as Scenario 1)";
+                    case  2: return _versionTitle + " (Open as Scenario 2)";
+                    case  3: return _versionTitle + " (Open as Scenario 3)";
+                    case  4: return _versionTitle + " (Open as Premium Disk)";
+                    default: return _versionTitle + " (Unknown Open Method)";
+                }
+            }
+
+            var baseTitle = GetBaseTitle();
+            Text = SelectedFile == null ? baseTitle : SelectedFile.Loader.ModelTitle(baseTitle);
         }
 
         /// <summary>
