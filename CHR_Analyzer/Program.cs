@@ -204,7 +204,7 @@ namespace CHR_Analyzer {
                     // Create a CHR file that works with our new ByteData.
                     try {
                         bool isChr = file.EndsWith(".CHR");
-                        using (ScenarioTableFile chrChpFile = isChr
+                        using (GameTableFile chrChpFile = isChr
                             ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario)
                             : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario)
                         ) {
@@ -328,11 +328,11 @@ namespace CHR_Analyzer {
             Console.WriteLine($"Each animation is used {avgUsagesPerAnimation} times on average.");
         }
 
-        private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
+        private static string GetFileString(ScenarioType inputScenario, string filename, IGameTableFile chrChpFile) {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12);
         }
 
-        private static void ScanForErrorsAndReport(ScenarioType inputScenario, ScenarioTableFile chrChpFile) {
+        private static void ScanForErrorsAndReport(ScenarioType inputScenario, IGameTableFile chrChpFile) {
             var totalErrors = new List<string>();
 
             // TODO: scan for errors

@@ -90,7 +90,7 @@ namespace CHR_Extractor {
                     // Create a CHR/CHP file that works with our new ByteData.
                     try {
                         bool isChr = file.EndsWith(".CHR");
-                        using (ScenarioTableFile chrChpFile = isChr
+                        using (GameTableFile chrChpFile = isChr
                             ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario)
                             : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario)
                         ) {
@@ -330,7 +330,7 @@ namespace CHR_Extractor {
             Console.WriteLine($"Accuracy rate by file: {totalAccurateFileCount * 100f / totalFileCount}%");
         }
 
-        private static string GetFileString(ScenarioType inputScenario, string filename, ScenarioTableFile chrChpFile) {
+        private static string GetFileString(ScenarioType inputScenario, string filename, IGameTableFile chrChpFile) {
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12);
         }
     }

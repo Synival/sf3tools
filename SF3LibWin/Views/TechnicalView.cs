@@ -5,7 +5,7 @@ using SF3.Models.Files;
 
 namespace SF3.Win.Views {
     public class TechnicalView : TabView {
-        public TechnicalView(string name, IScenarioTableFile model) : base(name) {
+        public TechnicalView(string name, IGameFile model) : base(name) {
             Model = model;
         }
 
@@ -50,6 +50,6 @@ namespace SF3.Win.Views {
             return Control;
         }
 
-        public IScenarioTableFile Model { get; }
+        public IGameFile Model { get; }
     }
 }

@@ -10,14 +10,14 @@ using SF3.Models.Tables;
 using SF3.Types;
 
 namespace SF3.Models.Files.CHP {
-    public class CHP_File : ScenarioTableFile, ICHP_File {
+    public class CHP_File : GameTableFile, ICHP_File {
         public override int RamAddress => 0x002E8000;
         public override int RamAddressLimit => 0x00300000;
 
-        protected CHP_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected CHP_File(IByteData data, INameGetterContext nameContext, ScenarioType? scenario) : base(data, nameContext, scenario) {
         }
 
-        public static CHP_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
+        public static CHP_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario) {
             var newFile = new CHP_File(data, nameContext, scenario);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize CHP_File");

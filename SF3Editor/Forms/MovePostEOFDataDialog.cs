@@ -11,7 +11,7 @@ using SF3.Win.Forms;
 
 namespace SF3.Editor.Forms {
     public partial class MovePostEOFDataDialog : DarkModeForm {
-        public MovePostEOFDataDialog(ScenarioTableFile file, DiscoveredData[] discoveriesAfterEOF) {
+        public MovePostEOFDataDialog(IGameFile file, DiscoveredData[] discoveriesAfterEOF) {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
             if (discoveriesAfterEOF == null || discoveriesAfterEOF.Length == 0)
@@ -174,7 +174,7 @@ namespace SF3.Editor.Forms {
                 MoveBy = FreeSpaceBeforeLimit - value;
         }
 
-        public ScenarioTableFile File { get; }
+        public IGameFile File { get; }
 
         private int _moveBy = 0;
 

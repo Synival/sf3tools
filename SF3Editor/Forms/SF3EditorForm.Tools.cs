@@ -183,7 +183,7 @@ namespace SF3.Editor.Forms {
             }
         }
 
-        private void RunMovePostEOFPointersDialog(LoadedFile loadedFile, ScenarioTableFile file, DiscoveredData[] postEOFData) {
+        private void RunMovePostEOFPointersDialog(LoadedFile loadedFile, IGameFile file, DiscoveredData[] postEOFData) {
             var dialog = new MovePostEOFDataDialog(file, postEOFData);
             var result = dialog.ShowDialog();
             if (result != DialogResult.OK || dialog.MoveBy == 0)
@@ -195,7 +195,7 @@ namespace SF3.Editor.Forms {
             ReloadFile(loadedFile, file.Data.GetDataCopy());
         }
 
-        private void RunInsertDataDialog(LoadedFile loadedFile, ScenarioTableFile file) {
+        private void RunInsertDataDialog(LoadedFile loadedFile, IGameFile file) {
             var dialog = new InsertDataDialog(file);
             var result = dialog.ShowDialog();
 
@@ -225,7 +225,7 @@ namespace SF3.Editor.Forms {
             ReloadFile(loadedFile, newData);
         }
 
-        private int MovePointersToAddressRange(ScenarioTableFile file, int ptrValueFrom, int ptrValueTo, int moveBy) {
+        private int MovePointersToAddressRange(IGameFile file, int ptrValueFrom, int ptrValueTo, int moveBy) {
             var fileFrom = file.RamAddress;
             var fileTo   = fileFrom + file.Data.Length;
 
@@ -294,7 +294,7 @@ namespace SF3.Editor.Forms {
         }
 
         private void tsmiTools_MovePostEOFData_Click(object sender, EventArgs e) {
-            var file = SelectedFile?.Loader?.Model as ScenarioTableFile;
+            var file = SelectedFile?.Loader?.Model as IGameFile;
             if (SelectedFile == null || file == null)
                 return;
 
@@ -309,7 +309,7 @@ namespace SF3.Editor.Forms {
         }
 
         private void tsmiTools_InsertData_Click(object sender, EventArgs e) {
-            var file = SelectedFile?.Loader?.Model as ScenarioTableFile;
+            var file = SelectedFile?.Loader?.Model as IGameFile;
             if (SelectedFile != null && file != null)
                 RunInsertDataDialog(SelectedFile, file);
         }

@@ -375,7 +375,7 @@ namespace SF3.Editor.Forms {
                 return;
 
             var hasFile = file != null;
-            var scenarioTableFile = file?.Loader?.Model as ScenarioTableFile;
+            var gameFile = file?.Loader?.Model as IGameFile;
 
             tsmiFile_Save.Enabled         = hasFile;
             tsmiFile_SaveAs.Enabled       = hasFile;
@@ -390,7 +390,7 @@ namespace SF3.Editor.Forms {
             tsmiTools_CreateDFR.Enabled   = hasFile;
             tsmiTools_ImportTable.Enabled = hasFile;
             tsmiTools_ExportTable.Enabled = hasFile;
-            tsmiTools_MovePostEOFData.Enabled = hasFile && scenarioTableFile?.Discoveries != null;
+            tsmiTools_MovePostEOFData.Enabled = hasFile && gameFile?.Discoveries != null;
             tsmiTools_InsertData.Enabled  = tsmiTools_MovePostEOFData.Enabled;
 
             SelectedFile = file;

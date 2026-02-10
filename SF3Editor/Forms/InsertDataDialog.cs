@@ -12,7 +12,7 @@ using SF3.Win.Forms;
 
 namespace SF3.Editor.Forms {
     public partial class InsertDataDialog : DarkModeForm {
-        public InsertDataDialog(ScenarioTableFile file) {
+        public InsertDataDialog(IGameFile file) {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
             var discoveries = file.Discoveries?.GetAllOrdered() ?? [];
@@ -247,7 +247,7 @@ namespace SF3.Editor.Forms {
                 UpdateSizeTextBoxes();
         }
 
-        public ScenarioTableFile File { get; }
+        public IGameFile File { get; }
 
         private int _insertAddrFile = 0;
 
