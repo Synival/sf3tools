@@ -17,15 +17,15 @@ namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
         private void tsmiMonsters_UnapplyMonsterEq_Click(object sender, EventArgs e) {
             var mtf = SelectedFile?.Loader?.Model as IMonsterTableFile;
-            if (mtf?.MonsterTables?.Any() == true)
-                if (ApplyMonsterEquipmentStatsDialog(mtf.MonsterTables, SelectedFile!.Scenario, /* apply */ false))
+            if (mtf?.MonsterTables?.Any() == true && SelectedFile != null && SelectedFile.Scenario.HasValue)
+                if (ApplyMonsterEquipmentStatsDialog(mtf.MonsterTables, SelectedFile.Scenario.Value, /* apply */ false))
                     SelectedFile.View.RefreshContent();
         }
 
         private void tsmiMonsters_ApplyMonsterEq_Click(object sender, EventArgs e) {
             var mtf = SelectedFile?.Loader?.Model as IMonsterTableFile;
-            if (mtf?.MonsterTables?.Any() == true)
-                if (ApplyMonsterEquipmentStatsDialog(mtf.MonsterTables, SelectedFile!.Scenario, /* apply */ true))
+            if (mtf?.MonsterTables?.Any() == true && SelectedFile != null && SelectedFile.Scenario.HasValue)
+                if (ApplyMonsterEquipmentStatsDialog(mtf.MonsterTables, SelectedFile.Scenario.Value, /* apply */ true))
                     SelectedFile.View.RefreshContent();
         }
 

@@ -63,7 +63,7 @@ namespace SF3.Editor.Forms {
         /// Information about a file loaded into the SF3Editor, including UI object references.
         /// </summary>
         public class LoadedFile {
-            public LoadedFile(ModelFileLoader loader, ScenarioType scenario, SF3FileType fileType, TabPage tabPage, FileView view) {
+            public LoadedFile(ModelFileLoader loader, ScenarioType? scenario, SF3FileType fileType, TabPage tabPage, FileView view) {
                 Loader   = loader;
                 Scenario = scenario;
                 FileType = fileType;
@@ -72,7 +72,7 @@ namespace SF3.Editor.Forms {
             }
 
             public readonly ModelFileLoader Loader;
-            public readonly ScenarioType Scenario;
+            public readonly ScenarioType? Scenario;
             public readonly SF3FileType FileType;
             public readonly TabPage TabPage;
             public readonly FileView View;

@@ -81,7 +81,7 @@ namespace SF3.Win {
         /// </summary>
         /// <param name="file">The new file to add at index 0.</param>
         /// <param name="max">The maximum number of files to keep in the 'RecentFiles' array.</param>
-        public void PushRecentFile(string filename, ScenarioType scenario, SF3FileType fileType, int max = 10) {
+        public void PushRecentFile(string filename, ScenarioType? scenario, SF3FileType fileType, int max = 10) {
             RecentFiles = new RecentFile[] { new RecentFile { Filename = filename, Scenario = scenario, FileType = fileType } }
                 .Concat(RecentFiles
                     .Where(x => x.Filename != filename)
@@ -474,7 +474,7 @@ namespace SF3.Win {
 
         public struct RecentFile {
             public string Filename { get; set; }
-            public ScenarioType Scenario { get; set; }
+            public ScenarioType? Scenario { get; set; }
             public SF3FileType FileType { get; set; }
         }
 

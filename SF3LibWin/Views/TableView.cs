@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
         }
 
         private string GetCacheKey()
-            => "TableView_" + ModelType.FullName + "_" + NameGetterContext.Name + "_" + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
+            => "TableView_" + ModelType.FullName + "_" + (NameGetterContext?.Name ?? "None") + "_" + (DisplayGroups != null ? ("_" + string.Join("_", DisplayGroups)) : "");
 
         private EnhancedObjectListView PopCachedOLV()
             => ObjectListViewUtils.PopCachedOLV(GetCacheKey());

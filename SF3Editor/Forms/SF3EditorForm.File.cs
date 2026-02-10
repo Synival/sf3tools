@@ -53,18 +53,14 @@ namespace SF3.Editor.Forms {
 
             // If we don't know the scenario, we can't load it.
             var scenario = OpenScenario ?? DetermineScenario(openfile.FileName, fileType);
-            if (!scenario.HasValue) {
+            if (FileTypeNeedsScenario(fileType) && !scenario.HasValue) {
                 // CHR's / CHP's are valid for any scenario, so just default to Scenario 1.
-                if (fileType == SF3FileType.CHR || fileType == SF3FileType.CHP)
-                    scenario = ScenarioType.Scenario1;
-                else {
-                    ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
-                    return null;
-                }
+                ErrorMessage("Can't determine scenario for '" + openfile.FileName + "'.");
+                return null;
             }
 
             // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
-            return LoadFile(openfile.FileName, scenario.Value, fileType.Value, true);
+            return LoadFile(openfile.FileName, scenario, fileType.Value, true);
         }
 
         /// <summary>
@@ -74,7 +70,7 @@ namespace SF3.Editor.Forms {
         /// <param name="scenario">Scenario for the file to open.</param>
         /// <param name="fileType">Type of the file to open.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, bool addToRecentFiles) {
+        public LoadedFile? LoadFile(string filename, ScenarioType? scenario, SF3FileType fileType, bool addToRecentFiles) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                     return LoadFile(filename, scenario, fileType, stream, addToRecentFiles);
@@ -95,7 +91,7 @@ namespace SF3.Editor.Forms {
         /// <param name="fileType">Type of the file to open.</param>
         /// <param name="stream">Stream from which the input data comes.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile? LoadFile(string filename, ScenarioType scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
+        public LoadedFile? LoadFile(string filename, ScenarioType? scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
             using (new CursorWait()) {
 
             // Attempt to the load the file.
@@ -433,7 +429,7 @@ namespace SF3.Editor.Forms {
             return result;
         }
 
-        private LoadedFile? SwapToFile(LoadedFile file, string filename, ScenarioType scenario, SF3FileType fileType) {
+        private LoadedFile? SwapToFile(LoadedFile file, string filename, ScenarioType? scenario, SF3FileType fileType) {
             // TODO: The tab should be at the same index.
 
             var newLoadedFile = LoadFile(filename, scenario, fileType, true);
@@ -453,7 +449,7 @@ namespace SF3.Editor.Forms {
         private struct FileInDirectory {
             public string Filename;
             public SF3FileType FileType;
-            public ScenarioType Scenario;
+            public ScenarioType? Scenario;
         };
 
         private FileInDirectory[] GetOtherFilesAtDirectoryForOpenFilter(LoadedFile file) {
