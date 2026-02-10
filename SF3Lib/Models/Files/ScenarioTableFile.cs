@@ -8,11 +8,12 @@ namespace SF3.Models.Files {
     /// Table data that also has a Scenario associated with it. Seems like overkill, but this is so frequent,
     /// we might as well have it to avoid lots of code duplication.
     /// </summary>
-    public abstract class ScenarioTableFile : TableFile, IScenarioFile {
+    public abstract class ScenarioTableFile : TableFile, IScenarioTableFile {
         protected ScenarioTableFile(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext) {
             Scenario = scenario;
         }
 
+        ScenarioType? IGameFile.Scenario => Scenario;
         public ScenarioType Scenario { get; }
         public abstract int RamAddress { get; }
         public abstract int RamAddressLimit { get; }

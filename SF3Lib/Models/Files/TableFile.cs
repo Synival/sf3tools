@@ -83,9 +83,6 @@ namespace SF3.Models.Files {
 
         public virtual void Dispose() => Data.Dispose();
 
-        /// <summary>
-        /// The underlying data for this table file. Don't modify this directly!!
-        /// </summary>
         public IByteData Data { get; }
 
         public INameGetterContext NameGetterContext { get; }
