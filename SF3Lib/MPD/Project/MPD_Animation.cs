@@ -2,6 +2,7 @@
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Utils;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 
@@ -35,8 +36,23 @@ namespace SF3.MPD.Project {
         }
 
         public IMPD_AnimationFrame GetFrame(int frameCounter) {
-            // TODO: animate!!
-            return null;
+            if (Frames.Length == 0)
+                return null;
+            if (Frames.Length == 1)
+                return Frames[0];
+
+            var totalFrameTime = 0;
+            foreach (var frame in Frames)
+                totalFrameTime += frame.Duration;
+            var framePos = MathHelpers.ActualMod(frameCounter + FrameTimerStart, totalFrameTime);
+
+            foreach (var frame in Frames) {
+                framePos -= frame.Duration;
+                if (framePos < 0)
+                    return frame;
+            }
+
+            return Frames[0];
         }
 
         public IMPD_AnimatableTexture Texture { get; }
