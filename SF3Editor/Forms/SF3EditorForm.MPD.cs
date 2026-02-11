@@ -14,6 +14,7 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Writer;
+using SF3.NamedValues;
 using SF3.Types;
 using SF3.Win.Types;
 using SF3.Win.Views.MPD;
@@ -279,8 +280,8 @@ namespace SF3.Editor.Forms {
         }
 
         private void tsmiMPD_RecalculateSurfaceModelNormals_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.MPD) {
-                var mpdFile = (IMPD_File) SelectedFile.Loader.Model;
+            if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project) {
+                var mpdFile = (IMPD) SelectedFile.Loader.Model;
                 mpdFile.Surface.NormalSettings = _appState.MakeNormalCalculationSettings();
                 mpdFile.Surface.UpdateVertexNormals();
 
@@ -307,32 +308,32 @@ namespace SF3.Editor.Forms {
         }
 
         private void mpdTSMI_Export_ToScenario1MPD_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.MPD)
-                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario1, SelectedFile.Loader.ShortFilename);
+            if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project)
+                ExportMPDDialog((IMPD) SelectedFile.Loader.Model, ScenarioType.Scenario1, SelectedFile.Loader.ShortFilename);
         }
 
         private void mpdTSMI_Export_ToScenario2MPD_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.MPD)
-                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario2, SelectedFile.Loader.ShortFilename);
+            if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project)
+                ExportMPDDialog((IMPD) SelectedFile.Loader.Model, ScenarioType.Scenario2, SelectedFile.Loader.ShortFilename);
         }
 
         private void mpdTSMI_Export_ToScenario3MPD_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.MPD)
-                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, ScenarioType.Scenario3, SelectedFile.Loader.ShortFilename);
+            if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project)
+                ExportMPDDialog((IMPD) SelectedFile.Loader.Model, ScenarioType.Scenario3, SelectedFile.Loader.ShortFilename);
         }
 
         private void mpdTSMI_Export_ToMPDProject_Click(object sender, EventArgs e) {
-            if (SelectedFile?.FileType == SF3FileType.MPD)
-                ExportMPDDialog((IMPD_File) SelectedFile.Loader.Model, null, SelectedFile.Loader.ShortFilename);
+            if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project)
+                ExportMPDDialog((IMPD) SelectedFile.Loader.Model, null, SelectedFile.Loader.ShortFilename);
         }
 
-        private void UpdateMPD_ModelSwitchGroupsMenu(IMPD_File? mpdFile) {
+        private void UpdateMPD_ModelSwitchGroupsMenu(IMPD? mpdFile) {
             var items = tsmiMPD_ModelSwitchGroups.DropDown.Items;
 
             items.Clear();
             int itemIndex = 1;
             if (mpdFile?.ModelSwitchGroups?.Length > 0) {
-                var ngc = mpdFile.NameGetterContext;
+                var ngc = new NameGetterContext(ScenarioType.PremiumDisk);
                 foreach (var msg in mpdFile.ModelSwitchGroups) {
                     var flag = msg.Flag;
                     var flagName = ngc.GetName(null, null, msg.Flag, [NamedValueType.GameFlag]) ?? "";
@@ -355,7 +356,7 @@ namespace SF3.Editor.Forms {
             tsmiMPD_ModelSwitchGroups.Enabled = items.Count > 0;
         }
 
-        private void ToggleModelSwitchGroup(IMPD_File mpdFile, IMPD_ModelSwitchGroup msg, ToolStripMenuItem item) {
+        private void ToggleModelSwitchGroup(IMPD mpdFile, IMPD_ModelSwitchGroup msg, ToolStripMenuItem item) {
             item.Checked = msg.StateInEditor = !msg.StateInEditor;
             if (SelectedFile?.View?.ActualView is MPD_View mpdView && mpdView.Model == mpdFile)
                 mpdView.UpdateViewerMap();

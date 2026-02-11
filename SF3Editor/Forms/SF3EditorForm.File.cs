@@ -14,6 +14,7 @@ using SF3.Win.ModelLoader;
 using CommonLib.Win;
 using SF3.MPD.Project;
 using System.Text;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -396,12 +397,16 @@ namespace SF3.Editor.Forms {
             SelectedFile = file;
             UpdateTitle();
             var fileType = file?.FileType;
+            var isIMPD = (fileType == SF3FileType.MPD) || (fileType == SF3FileType.MPD_Project);
 
             tsmiMonsters.Visible   = tsmiMonsters.Enabled   = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;
             tsmiBlacksmith.Visible = tsmiBlacksmith.Enabled = hasFile && (file?.Loader?.Model as IBlacksmithTableFile)?.BlacksmithTables?.Any() == true;
-            tsmiMPD.Visible        = tsmiMPD.Enabled        = hasFile && (fileType == SF3FileType.MPD);
+            tsmiMPD.Visible        = tsmiMPD.Enabled        = hasFile && isIMPD;
 
-            var mpdFile = (fileType == SF3FileType.MPD && file?.Loader?.Model != null) ? (IMPD_File) file.Loader.Model : null;
+            var mpdFile = (isIMPD && file?.Loader?.Model != null) ? (IMPD) file.Loader.Model : null;
+            tsmiMPD_Textures.Enabled = (fileType == SF3FileType.MPD);
+            tsmiMPD_Chunks.Enabled   = (fileType == SF3FileType.MPD);
+
             UpdateMPD_ModelSwitchGroupsMenu(mpdFile);
         }
 
