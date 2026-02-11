@@ -33,7 +33,7 @@ namespace SF3.MPD.Project {
             EventID      = eventId;
 
             if (heights != null && heights.Length == 4)
-                _vertexHeights = heights;
+                _vertexHeights = (byte[]) (heights.Clone());
 
             UpdateCenterHeight();
         }

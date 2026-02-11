@@ -166,11 +166,8 @@ namespace SF3.MPD.Project {
         public void UpdateVertexNormals(int vx1, int vy1, int vx2, int vy2) {
             // Generate a heightmap for the vertices to update.
             var heightmap = this.GetVertexHeightMeshForNormalCalculation(vx1, vy1, vx2, vy2);
-
-            var verticesWidth  = Width  + 1;
-            var verticesHeight = Height + 1;
-            for (int vy = 0; vy < verticesHeight; vy++)
-                for (int vx = 0; vx < verticesWidth; vx++)
+            for (int vy = vy1; vy <= vy2; vy++)
+                for (int vx = vx1; vx <= vx2; vx++)
                     _vertices[vx, vy].Normal = _vertices[vx, vy].CalculateNormal(heightmap, vx1 - 1, vy1 - 1);
         }
 
