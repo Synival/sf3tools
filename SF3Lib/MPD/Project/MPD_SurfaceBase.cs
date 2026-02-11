@@ -121,9 +121,9 @@ namespace SF3.MPD.Project {
                         var base64Bytes = Convert.FromBase64String(s);
                         var components = base64Bytes.ToUShorts();
                         return new VECTOR(
-                            components[0] * 2,
-                            components[1] * 2,
-                            components[2] * 2,
+                            ((int) ((short) components[0])) * 2,
+                            ((int) ((short) components[1])) * 2,
+                            ((int) ((short) components[2])) * 2,
                             isRaw: true
                         );
                     },

@@ -67,9 +67,9 @@ namespace SF3.MPD.Extensions {
                     var bytes = new byte[6];
                     var pos = 0;
 
-                    var x = (ushort) (((uint) vec.X.RawInt) / 2);
-                    var y = (ushort) (((uint) vec.Y.RawInt) / 2);
-                    var z = (ushort) (((uint) vec.Z.RawInt) / 2);
+                    var x = (ushort) ((short) (vec.X.RawInt / 2));
+                    var y = (ushort) ((short) (vec.Y.RawInt / 2));
+                    var z = (ushort) ((short) (vec.Z.RawInt / 2));
 
                     bytes[pos++] = (byte) (x >> 8);
                     bytes[pos++] = (byte) (x >> 0);
