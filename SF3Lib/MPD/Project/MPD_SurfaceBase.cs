@@ -23,8 +23,8 @@ namespace SF3.MPD.Project {
                     _tiles[tx, ty] = new MPD_SurfaceTile(this, tx, ty);
 
             _vertices = new IMPD_SurfaceVertex[Width + 1, Height + 1];
-            for (int vy = 0; vy < Height; vy++)
-                for (int vx = 0; vx < Width; vx++)
+            for (int vy = 0; vy < Height + 1; vy++)
+                for (int vx = 0; vx < Width + 1; vx++)
                     _vertices[vx, vy] = new MPD_SurfaceVertex(this, vx, vy, new VECTOR(0, -1, 0));
 
             _hasModelGetter = () => _settings.HasSurfaceModel;

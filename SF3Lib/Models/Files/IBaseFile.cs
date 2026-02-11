@@ -19,6 +19,12 @@ namespace SF3.Models.Files {
         bool Finish();
 
         /// <summary>
+        /// Saves the file to a file.
+        /// </summary>
+        /// <param name="filename">File to save to.</param>
+        void Save(string filename);
+
+        /// <summary>
         /// The context for fetching named values.
         /// </summary>
         INameGetterContext NameGetterContext { get; }

@@ -1,10 +1,14 @@
-﻿using CommonLib.Imaging;
+﻿using CommonLib.Extensions;
+using CommonLib.Imaging;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
     public class MPD_Settings : IMPD_Settings {
-        public MPD_Settings() { }
+        public MPD_Settings() {
+            LightPaletteAdjustment  = new ColorAdjustRGB555();
+            GroundPaletteAdjustment = new ColorAdjustRGB555();
+        }
 
         public MPD_Settings(IMPD_Settings original) {
             HasSurfaceModel               = original.HasSurfaceModel;
@@ -59,8 +63,8 @@ namespace SF3.MPD.Project {
             ModelsViewAngleMin                        = (float) jObject["ModelsViewAngleMin"];
             ModelsViewAngleMax                        = (float) jObject["ModelsViewAngleMax"];
             UnknownHeaderSetting                      = (short) jObject["UnknownHeaderSetting"];
-            LightPaletteAdjustment                    = ColorAdjustRGB555.FromJToken(jObject["LightPaletteAdjustment"]);
-            GroundPaletteAdjustment                   = ColorAdjustRGB555.FromJToken(jObject["GroundPaletteAdjustment"]);
+            LightPaletteAdjustment                    = jObject.GetValueIfExists("LightPaletteAdjustment", t => ColorAdjustRGB555.FromJToken(t));
+            GroundPaletteAdjustment                   = jObject.GetValueIfExists("GroundPaletteAdjustment", t => ColorAdjustRGB555.FromJToken(t));
             ShadowTransparency                        = (byte) jObject["ShadowTransparency"];
             AreGroundAnimationsDummiedOut             = (bool) jObject["AreGroundAnimationsDummiedOut"];
             IsGradientDummiedOut                      = (bool) jObject["IsGradientDummiedOut"];

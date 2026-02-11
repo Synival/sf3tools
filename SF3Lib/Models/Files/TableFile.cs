@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using CommonLib;
 using CommonLib.Logging;
@@ -20,6 +21,9 @@ namespace SF3.Models.Files {
             Data.IsModifiedChanged += (s, e) => IsModifiedChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public virtual void Save(string filename)
+            => File.WriteAllBytes(filename, Data.GetDataCopyOrReference());
+
         public virtual string[] GetErrors() {
             return new string[0];
         }
@@ -28,7 +32,10 @@ namespace SF3.Models.Files {
 
         public virtual bool IsModified {
             get => Data.IsModified;
-            set => Data.IsModified = value;
+            set {
+                if (_isModifiedGuard == 0) 
+                    Data.IsModified = value;
+            }
         }
 
         public ScopeGuard IsModifiedChangeBlocker()

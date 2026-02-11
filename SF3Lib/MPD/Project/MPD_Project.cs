@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
@@ -18,6 +19,32 @@ namespace SF3.MPD.Project {
     /// Abstracted, editable MPD file.
     /// </summary>
     public class MPD_Project : IMPD, IJsonResource, IBaseFile {
+        /// <summary>
+        /// Creates a brand new MPD_Project.
+        /// </summary>
+        public MPD_Project() {
+            Flags    = new MPD_Flags(this);
+            Settings = new MPD_Settings();
+            BinaryReproductionFlags = new MPD_BinaryReproductionFlags();
+            Lighting = new MPD_Lighting();
+            Surface  = new MPD_Surface(this, Settings);
+            Planes   = new MPD_Planes();
+
+            ModelCollections = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>() {
+                { MPD_CollectionType.Primary, new MPD_ModelCollection(MPD_CollectionType.Primary) }
+            };
+
+            CameraBoundaries = new RectangleShort() {
+                P1 = new PointShort(64, 64),
+                P2 = new PointShort(1984, 1984),
+            };
+
+            BattleCursorBoundaries = new RectangleShort() {
+                P1 = new PointShort(0, 0),
+                P2 = new PointShort(2048, 2048),
+            };
+        }
+
         /// <summary>
         /// Makes a copy of an existing IMPD as an IMPD_Project.
         /// </summary>
@@ -128,6 +155,15 @@ namespace SF3.MPD.Project {
 
         public string ToJSON_String() => IMPD_Extensions.ToJSON_String(this);
         public JToken ToJToken() => IMPD_Extensions.ToJObject(this);
+
+        public virtual void Save(string filename) {
+            var serializedMPD = ToJSON_String();
+            using (var stream = new FileStream(filename, FileMode.Create))
+            using (var writer = new StreamWriter(stream)) {
+                writer.NewLine = "\n";
+                writer.Write(serializedMPD);
+            }
+        }
 
         // TODO: Implement these!
         public string[] GetErrors() => new string[0];

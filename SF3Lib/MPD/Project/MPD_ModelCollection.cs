@@ -9,6 +9,15 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_ModelCollection : IMPD_ModelCollection {
+        public MPD_ModelCollection(MPD_CollectionType collection) {
+            Collection = collection;
+            IsUnreferenced = false;
+
+            Models         = new MPD_ModelCollectionModels();
+            ModelInstances = new MPD_ModelCollectionModelInstances();
+            Textures       = new MPD_ModelCollectionTextures();
+        }
+
         public MPD_ModelCollection(IMPD_ModelCollection original) {
             Collection = original.Collection;
             IsUnreferenced = original.IsUnreferenced;

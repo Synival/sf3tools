@@ -63,12 +63,18 @@ namespace SF3.Editor.Forms {
         protected void UpdateTitle() {
             string GetBaseTitle() {
                 switch (_appState.OpenScenario) {
-                    case -1: return _versionTitle + " (Detect Scenario)";
-                    case  1: return _versionTitle + " (Open as Scenario 1)";
-                    case  2: return _versionTitle + " (Open as Scenario 2)";
-                    case  3: return _versionTitle + " (Open as Scenario 3)";
-                    case  4: return _versionTitle + " (Open as Premium Disk)";
-                    default: return _versionTitle + " (Unknown Open Method)";
+                    case -1:
+                        return _versionTitle + " (Detect Scenario)";
+                    case 1:
+                        return _versionTitle + " (Open as Scenario 1)";
+                    case 2:
+                        return _versionTitle + " (Open as Scenario 2)";
+                    case 3:
+                        return _versionTitle + " (Open as Scenario 3)";
+                    case 4:
+                        return _versionTitle + " (Open as Premium Disk)";
+                    default:
+                        return _versionTitle + " (Unknown Open Method)";
                 }
             }
 

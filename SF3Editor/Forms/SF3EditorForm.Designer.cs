@@ -30,6 +30,8 @@ namespace SF3.Editor.Forms {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(SF3EditorForm));
             menuStrip1 = new DarkModeMenuStrip();
             tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_New = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_New_MPDProject = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Open = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_OpenScenario = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_OpenScenario_Detect = new System.Windows.Forms.ToolStripMenuItem();
@@ -155,10 +157,24 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiFile
             // 
-            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_SaveAll, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_CloseAll, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_ScanForErrors, tsmiFile_Sep4, tsmiFile_RecentFiles, tsmiFile_Sep5, tsmiFile_Exit });
+            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_New, tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_SaveAll, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_CloseAll, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_ScanForErrors, tsmiFile_Sep4, tsmiFile_RecentFiles, tsmiFile_Sep5, tsmiFile_Exit });
             tsmiFile.Name = "tsmiFile";
             tsmiFile.Size = new Size(37, 20);
             tsmiFile.Text = "&File";
+            // 
+            // tsmiFile_New
+            // 
+            tsmiFile_New.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_New_MPDProject });
+            tsmiFile_New.Name = "tsmiFile_New";
+            tsmiFile_New.Size = new Size(259, 22);
+            tsmiFile_New.Text = "&New";
+            // 
+            // tsmiFile_New_MPDProject
+            // 
+            tsmiFile_New_MPDProject.Name = "tsmiFile_New_MPDProject";
+            tsmiFile_New_MPDProject.Size = new Size(180, 22);
+            tsmiFile_New_MPDProject.Text = "&MPD Project";
+            tsmiFile_New_MPDProject.Click += tsmiFile_New_MPDProject_Click;
             // 
             // tsmiFile_Open
             // 
@@ -173,7 +189,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_OpenScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_OpenScenario_Detect, tsmiFile_OpenScenario_Sep1, tsmiFile_OpenScenario_Scenario1, tsmiFile_OpenScenario_Scenario2, tsmiFile_OpenScenario_Scenario3, tsmiFile_OpenScenario_PremiumDisk });
             tsmiFile_OpenScenario.Name = "tsmiFile_OpenScenario";
             tsmiFile_OpenScenario.Size = new Size(259, 22);
-            tsmiFile_OpenScenario.Text = "Open Sce&nario";
+            tsmiFile_OpenScenario.Text = "Open Scenar&io";
             // 
             // tsmiFile_OpenScenario_Detect
             // 
@@ -1071,5 +1087,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals;
         private System.Windows.Forms.ToolStripSeparator tsmiSettings_MPD_Separator;
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToMPDProject;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_New;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_New_MPDProject;
     }
 }

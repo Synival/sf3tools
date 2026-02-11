@@ -12,6 +12,8 @@ using SF3.Models.Files;
 using CommonLib.Logging;
 using SF3.Win.ModelLoader;
 using CommonLib.Win;
+using SF3.MPD.Project;
+using System.Text;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -60,7 +62,7 @@ namespace SF3.Editor.Forms {
             }
 
             // Attempt to load the file. Use an explicitly specificed scenario and file type if provided.
-            return LoadFile(openfile.FileName, scenario, fileType.Value, true);
+            return LoadFile(openfile.FileName, scenario, fileType.Value);
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace SF3.Editor.Forms {
         /// <param name="scenario">Scenario for the file to open.</param>
         /// <param name="fileType">Type of the file to open.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile? LoadFile(string filename, ScenarioType? scenario, SF3FileType fileType, bool addToRecentFiles) {
+        public LoadedFile? LoadFile(string filename, ScenarioType? scenario, SF3FileType fileType, bool addToRecentFiles = true) {
             try {
                 using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
                     return LoadFile(filename, scenario, fileType, stream, addToRecentFiles);
@@ -91,7 +93,7 @@ namespace SF3.Editor.Forms {
         /// <param name="fileType">Type of the file to open.</param>
         /// <param name="stream">Stream from which the input data comes.</param>
         /// <returns>A record for the file loaded, or 'null' on failure/cancel.</returns>
-        public LoadedFile? LoadFile(string filename, ScenarioType? scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles) {
+        public LoadedFile? LoadFile(string filename, ScenarioType? scenario, SF3FileType fileType, Stream stream, bool addToRecentFiles = true) {
             using (new CursorWait()) {
 
             // Attempt to the load the file.
@@ -203,8 +205,12 @@ namespace SF3.Editor.Forms {
         /// </summary>
         /// <param name="file">The loaded file to save.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        public bool SaveFile(LoadedFile file, bool addToRecentFiles)
-            => SaveFile(file, file.Loader.Filename, addToRecentFiles);
+        public bool SaveFile(LoadedFile file) {
+            if ((file.Loader.Filename ?? "") == "")
+                return SaveFileAsDialog(file);
+            else
+                return SaveFile(file, file.Loader.Filename!);
+        }
 
         /// <summary>
         /// Saves a file to a given path/filename.
@@ -212,7 +218,7 @@ namespace SF3.Editor.Forms {
         /// <param name="file">The loaded file to save.</param>
         /// <param name="filename">The filename to save the file as.</param>
         /// <returns>'true' if a file was saved successfully. Otherwise, 'false'.</returns>
-        public bool SaveFile(LoadedFile file, string filename, bool addToRecentFiles) {
+        public bool SaveFile(LoadedFile file, string filename) {
             try {
                 using (new CursorWait())
                     if (!file.Loader.SaveFile(filename))
@@ -224,10 +230,8 @@ namespace SF3.Editor.Forms {
                 return false;
             }
 
-            if (addToRecentFiles) {
-                _appState.PushRecentFile(filename, file.Scenario, file.FileType);
-                _appState.Serialize();
-            }
+            _appState.PushRecentFile(filename, file.Scenario, file.FileType);
+            _appState.Serialize();
 
             return true;
         }
@@ -245,7 +249,7 @@ namespace SF3.Editor.Forms {
             if (savefile.ShowDialog() != DialogResult.OK)
                 return false;
 
-            return SaveFile(file, savefile.FileName, true);
+            return SaveFile(file, savefile.FileName);
         }
 
         /// <summary>
@@ -259,7 +263,7 @@ namespace SF3.Editor.Forms {
             bool saveHappened = false;
             foreach (var loadedFile in _loadedFiles)
                 if (loadedFile.Loader?.Model?.IsModified == true)
-                    saveHappened |= SaveFile(loadedFile, true);
+                    saveHappened |= SaveFile(loadedFile);
             return saveHappened;
         }
 
@@ -351,7 +355,7 @@ namespace SF3.Editor.Forms {
                 return null;
 
             var recentItem = recentItems[index];
-            return LoadFile(recentItem.Filename, recentItem.Scenario, recentItem.FileType, true);
+            return LoadFile(recentItem.Filename, recentItem.Scenario, recentItem.FileType);
         }
 
         /// <summary>
@@ -423,7 +427,7 @@ namespace SF3.Editor.Forms {
                 return result;
             }
             else if (result == DialogResult.Yes)
-                if (!SaveFile(file, true))
+                if (!SaveFile(file))
                     return DialogResult.Cancel;
 
             return result;
@@ -432,7 +436,7 @@ namespace SF3.Editor.Forms {
         private LoadedFile? SwapToFile(LoadedFile file, string filename, ScenarioType? scenario, SF3FileType fileType) {
             // TODO: The tab should be at the same index.
 
-            var newLoadedFile = LoadFile(filename, scenario, fileType, true);
+            var newLoadedFile = LoadFile(filename, scenario, fileType);
             if (newLoadedFile == null) {
                 ErrorMessage($"Couldn't open {fileType} file '{filename}'");
                 return null;
@@ -510,6 +514,14 @@ namespace SF3.Editor.Forms {
             }
         }
 
+        private void tsmiFile_New_MPDProject_Click(object sender, EventArgs e) {
+            using (new CursorWait()) {
+                var mpdProject = new MPD_Project();
+                using (var stream = new MemoryStream(Encoding.ASCII.GetBytes(mpdProject.ToJSON_String())))
+                    LoadFile(null, null, SF3FileType.MPD_Project, stream, addToRecentFiles: false);
+            }
+        }
+
         private void tsmiFile_Open_Click(object sender, EventArgs e)
             => OpenFileDialog();
 
@@ -530,7 +542,7 @@ namespace SF3.Editor.Forms {
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
             if (SelectedFile != null)
-                _ = SaveFile(SelectedFile, true);
+                _ = SaveFile(SelectedFile);
         }
 
         private void tsmiFile_SaveAs_Click(object sender, EventArgs e) {
@@ -590,7 +602,6 @@ namespace SF3.Editor.Forms {
             => OpenRecentFile(9);
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
-
 
         private void tsmiFile_ScanForErrors_Click(object sender, EventArgs e) {
             if (SelectedFile != null) {

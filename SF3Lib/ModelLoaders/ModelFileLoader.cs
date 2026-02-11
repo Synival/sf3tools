@@ -34,7 +34,7 @@ namespace SF3.ModelLoaders {
             if (!IsLoaded)
                 throw new Exception("Nothing is loaded");
             return PerformSave(() => {
-                 File.WriteAllBytes(filename, ByteData.GetDataCopyOrReference());
+                Model.Save(filename);
                 Filename = filename;
                 return true;
             });
@@ -54,11 +54,11 @@ namespace SF3.ModelLoaders {
         public string Filename {
             get => _filename;
             private set {
-                if (_filename != value) {
+                if (_filename != value || (_shortFilename == null && value == null)) {
                     _filename = value;
 
                     if (_filename == null)
-                        ShortFilename = null;
+                        ShortFilename = "(New MPD Project)"; // TODO: what if it's not an MPD, omg
                     else {
                         var words = Filename.Split('\\');
                         ShortFilename = words[Math.Max(0, words.Length - 1)];
