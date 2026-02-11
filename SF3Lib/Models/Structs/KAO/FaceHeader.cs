@@ -314,6 +314,6 @@ namespace SF3.Models.Structs.KAO {
             set => Layer2RelativeY = (sbyte) (value - (Height - Layer2Height) / 2);
         }
 
-        public EventHandler OnDimensionsChanged;
+        public event EventHandler OnDimensionsChanged;
     }
 }

@@ -192,7 +192,7 @@ namespace SF3.MPD.Project {
         public string Title => "";
         public bool IsModified { get; set; }
 
-        public EventHandler ModelsUpdated { get; set; }
+        public event EventHandler ModelsUpdated;
         public event EventHandler Finished;
         public event EventHandler IsModifiedChanged;
     }

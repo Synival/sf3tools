@@ -88,6 +88,11 @@ namespace SF3.Models.Files.MPD {
         void UpdatePlaneImages();
 
         /// <summary>
+        /// Causes the 'EventUpdated' event to fire.
+        /// </summary>
+        void TriggerModelsUpdated();
+
+        /// <summary>
         /// Byte data for (de)compressed data for chunks
         /// </summary>
         IChunkData[] ChunkData { get; }

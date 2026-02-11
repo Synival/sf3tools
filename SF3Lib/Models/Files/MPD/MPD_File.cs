@@ -84,6 +84,8 @@ namespace SF3.Models.Files.MPD {
         // TODO: UpdatePlaneImages() shouldn't be necessary!!
         public void UpdatePlaneImages() => ((MPD_Planes) Planes).UpdateImages();
 
+        public void TriggerModelsUpdated() => ModelsUpdated?.Invoke(this, EventArgs.Empty);
+
         public override bool IsModified {
             get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);
             set {
@@ -224,6 +226,6 @@ namespace SF3.Models.Files.MPD {
         public static bool UpdateChunkTableOnChunkResize { get; set; } = true;
         public static bool RebuildChunkTableOnFinish { get; set; } = true;
 
-        public EventHandler ModelsUpdated { get; set; }
+        public event EventHandler ModelsUpdated;
     }
 }

@@ -98,6 +98,6 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Triggered when models have been updated and something needs to be informed, like a viewer.
         /// </summary>
-        EventHandler ModelsUpdated { get; set; }
+        event EventHandler ModelsUpdated;
     }
 }

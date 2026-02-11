@@ -296,13 +296,13 @@ namespace SF3.Win.Controls {
                         if (!fileTile.AdoptTree())
                             cbModelHasTree.Checked = false;
                         else
-                            fileTile.MPD_File.ModelsUpdated?.Invoke(fileTile.MPD_File, EventArgs.Empty);
+                            fileTile.MPD_File.TriggerModelsUpdated();
                     }
                     else {
                         if (!fileTile.OrphanTree())
                             cbModelHasTree.Checked = true;
                         else
-                            fileTile.MPD_File.ModelsUpdated?.Invoke(fileTile.MPD_File, EventArgs.Empty);
+                            fileTile.MPD_File.TriggerModelsUpdated();
                     }
                 }
             }
