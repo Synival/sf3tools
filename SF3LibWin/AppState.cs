@@ -291,16 +291,6 @@ namespace SF3.Win {
         public event EventHandler RenderOnBlackBackgroundChanged;
 
         /// <summary>
-        /// When enabled, the MPD Viewer will display a small 'Help' cheat sheet in the lower-right corner.
-        /// </summary>
-        public bool ViewerDrawHelp {
-            get => _viewerDrawHelp;
-            set => SetValue(ref _viewerDrawHelp, value, ViewerDrawHelpChanged);
-        }
-        private bool _viewerDrawHelp = true;
-        public event EventHandler ViewerDrawHelpChanged;
-
-        /// <summary>
         /// When enabled, models that are only visible from certain camera directions are not rendered.
         /// </summary>
         public bool HideModelsNotFacingCamera {

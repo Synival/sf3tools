@@ -26,8 +26,6 @@ namespace SF3.Win.OpenGL.MPD {
             public bool DrawBoundaries;
             public bool DrawCollisionLines;
 
-            public bool DrawHelp;
-
             public bool ApplyLighting;
 
             public bool HideModelsNotFacingCamera;
@@ -258,9 +256,6 @@ namespace SF3.Win.OpenGL.MPD {
             using (general.TextureShader.Use()) {
                 DrawSurfaceEditorTileSelected(general, surfaceEditor);
                 DrawSurfaceEditorTileHover(general, surfaceEditor);
-
-                if (options.DrawHelp)
-                    DrawEditorHelp(general, surfaceEditor, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
             }
         }
 
@@ -638,36 +633,6 @@ namespace SF3.Win.OpenGL.MPD {
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
         }
-
-        public void DrawEditorHelp(
-            GeneralResources general,
-            SurfaceEditorResources surfaceEditor,
-            int screenWidth,
-            int screenHeight,
-            ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix
-        ) {
-            if (surfaceEditor?.HelpModel == null)
-                return;
-
-            const float c_viewSize = 0.40f;
-
-            var viewportRatio = (float) screenWidth / screenHeight;
-            var textureRatio = (float) surfaceEditor.HelpTexture.Width / surfaceEditor.HelpTexture.Height;
-
-            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix,
-                Matrix4.CreateScale(2f / viewportRatio * textureRatio * c_viewSize, 2f * c_viewSize, 2f * c_viewSize) *
-                Matrix4.CreateTranslation(1, -1, 0) *
-                projectionMatrix.Inverted());
-
-            GL.Disable(EnableCap.DepthTest);
-            using (surfaceEditor.HelpTexture.Use())
-                surfaceEditor.HelpModel.Draw(general.TextureShader);
-            GL.Enable(EnableCap.DepthTest);
-
-            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
-        }
-
 
         private Dictionary<IMPD_ModelInstance, Matrix4?> _modelMatricesByModel = [];
         private Dictionary<IMPD_ModelInstance, Matrix3?> _normalMatricesByModel = [];

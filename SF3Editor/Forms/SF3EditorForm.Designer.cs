@@ -90,8 +90,6 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawNormalMap = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiView_MPD_ShowHelp = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiView_MPD_Sep3 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,7 +170,7 @@ namespace SF3.Editor.Forms {
             // tsmiFile_New_MPDProject
             // 
             tsmiFile_New_MPDProject.Name = "tsmiFile_New_MPDProject";
-            tsmiFile_New_MPDProject.Size = new Size(180, 22);
+            tsmiFile_New_MPDProject.Size = new Size(140, 22);
             tsmiFile_New_MPDProject.Text = "&MPD Project";
             tsmiFile_New_MPDProject.Click += tsmiFile_New_MPDProject_Click;
             // 
@@ -447,7 +445,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiView_MPD
             // 
-            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_ShowHelp, tsmiView_MPD_Sep3, tsmiView_MPD_EnableBlankFieldV2Controls });
+            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
             tsmiView_MPD.Size = new Size(265, 22);
             tsmiView_MPD.Text = "&MPD";
@@ -587,18 +585,6 @@ namespace SF3.Editor.Forms {
             // 
             tsmiView_MPD_Sep2.Name = "tsmiView_MPD_Sep2";
             tsmiView_MPD_Sep2.Size = new Size(381, 6);
-            // 
-            // tsmiView_MPD_ShowHelp
-            // 
-            tsmiView_MPD_ShowHelp.Name = "tsmiView_MPD_ShowHelp";
-            tsmiView_MPD_ShowHelp.Size = new Size(384, 22);
-            tsmiView_MPD_ShowHelp.Text = "Show Help";
-            tsmiView_MPD_ShowHelp.Click += tsmiView_MPD_ShowHelp_Click;
-            // 
-            // tsmiView_MPD_Sep3
-            // 
-            tsmiView_MPD_Sep3.Name = "tsmiView_MPD_Sep3";
-            tsmiView_MPD_Sep3.Size = new Size(381, 6);
             // 
             // tsmiView_MPD_EnableBlankFieldV2Controls
             // 
@@ -1048,8 +1034,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_RotateSpritesUpToCamera;
         private System.Windows.Forms.ToolStripSeparator tsmiView_MPD_Sep2;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_EnableBlankFieldV2Controls;
-        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_ShowHelp;
-        private System.Windows.Forms.ToolStripSeparator tsmiView_MPD_Sep3;
         private System.Windows.Forms.ToolStripSeparator tsmiSettings_Sep1;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_ImprovedNormalCalculations;

@@ -153,16 +153,6 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap IconHelpBmp {
-            get {
-                object obj = ResourceManager.GetObject("IconHelpBmp", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap IconWireframeBmp {
             get {
                 object obj = ResourceManager.GetObject("IconWireframeBmp", resourceCulture);
@@ -257,6 +247,7 @@ namespace SF3.Win.Properties {
         ///in vec4 colorFrag;
         ///in vec3 glowFrag;
         ///in vec4 lightColorFrag;
+        ///in float meshFrag;
         ///
         ///in vec2 texCoordAtlasFrag;
         ///in vec2 texCoordTerrainTypesFrag;
@@ -265,11 +256,10 @@ namespace SF3.Win.Properties {
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    vec4 surfaceTex = (texture(textureAtlas, texCoordAtlasFrag) + lightColorFrag);
-        ///    surfaceTex = surfaceTex * colorFrag + vec4(glowFrag, 0.0);
+        ///    if (meshFrag &gt; 0 &amp;&amp; (int(gl_FragCoord.x / 2) + int(gl_FragCoord.y / 2)) % 2 == 0)
+        ///        discard;
         ///
-        ///    vec4 overlayTex =
-        ///        [rest of string was truncated]&quot;;.
+        ///    vec4 surfaceTex = (texture(textureAtlas, texCoord [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -648,16 +638,6 @@ namespace SF3.Win.Properties {
         internal static string TwoTextureVert {
             get {
                 return ResourceManager.GetString("TwoTextureVert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ViewerHelpBmp {
-            get {
-                object obj = ResourceManager.GetObject("ViewerHelpBmp", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

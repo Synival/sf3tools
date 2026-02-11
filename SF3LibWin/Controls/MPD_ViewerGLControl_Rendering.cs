@@ -53,8 +53,6 @@ namespace SF3.Win.Controls {
             _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
             _appState.ViewerRotateSpritesUpChanged    += (s, e) => Invalidate();
 
-            _appState.ViewerDrawHelpChanged           += (s, e) => Invalidate();
-
             _appState.ViewerRotateSpritesUpChanged += (s, e) => _renderer.InvalidateSpriteMatrices(_models);
         }
 
@@ -261,8 +259,6 @@ namespace SF3.Win.Controls {
 
                     BackgroundX = MPD_File?.Planes?.BackgroundX ?? 0,
                     BackgroundY = MPD_File?.Planes?.BackgroundY ?? 0,
-
-                    DrawHelp = DrawHelp,
 
                     UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
@@ -514,13 +510,6 @@ namespace SF3.Win.Controls {
         public bool RotateSpritesUp {
             get => AppState.ViewerRotateSpritesUp;
             set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool DrawHelp {
-            get => AppState.ViewerDrawHelp;
-            set => UpdateAppState(nameof(AppState.ViewerDrawHelp), value);
         }
 
         private bool _tileSelectedNeedsUpdate = false;

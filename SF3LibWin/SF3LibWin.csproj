@@ -11,7 +11,6 @@
     <Version>0.2.0</Version>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Images\IconHelp.bmp" />
     <None Remove="Images\IconWireframe.bmp" />
     <None Remove="Images\LightingNew.bmp" />
     <None Remove="Images\LightingOld.bmp" />
@@ -23,7 +22,6 @@
     <None Remove="Images\TileWireframe.bmp" />
     <None Remove="Images\TransparentBlack.bmp" />
     <None Remove="Images\TransparentWhite.bmp" />
-    <None Remove="Images\ViewerHelp.bmp" />
     <None Remove="Images\White.bmp" />
     <None Remove="Shaders\Normals.frag" />
     <None Remove="Shaders\Normals.vert" />
@@ -39,7 +37,6 @@
     <None Remove="Shaders\Wireframe.vert" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Images\IconHelp.bmp" />
     <EmbeddedResource Include="Images\IconWireframe.bmp" />
     <EmbeddedResource Include="Images\LightingNew.bmp" />
     <EmbeddedResource Include="Images\LightingOld.bmp" />
@@ -51,7 +48,6 @@
     <EmbeddedResource Include="Images\TileWireframe.bmp" />
     <EmbeddedResource Include="Images\TransparentBlack.bmp" />
     <EmbeddedResource Include="Images\TransparentWhite.bmp" />
-    <EmbeddedResource Include="Images\ViewerHelp.bmp" />
     <EmbeddedResource Include="Images\White.bmp" />
     <EmbeddedResource Include="Shaders\Normals.frag">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using OpenTK.GLControl;
-using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using static SF3.Win.Utils.EventHandlers;
 

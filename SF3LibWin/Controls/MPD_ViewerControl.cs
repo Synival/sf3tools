@@ -42,8 +42,6 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
 
-            tsbToggleHelp.Checked        = GLControl.DrawHelp;
-
             var appState = AppState.RetrieveAppState();
 
             appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appState.ViewerDrawSurfaceModel; };
@@ -66,8 +64,6 @@ namespace SF3.Win.Controls {
             appState.RenderOnBlackBackgroundChanged  += (s, e) => { tsbRenderOnBlackBackground.Checked = appState.RenderOnBlackBackground; };
             appState.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appState.ViewerDrawNormals; };
             appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appState.ViewerRotateSpritesUp; };
-
-            appState.ViewerDrawHelpChanged           += (s, e) => { tsbToggleHelp.Checked        = appState.ViewerDrawHelp; };
 
             // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
             toolStrip2.Visible = appState.EnableExperimentalBlankFieldV2Brushes;
@@ -155,8 +151,6 @@ namespace SF3.Win.Controls {
         private void tsbRenderOnBlackBackground_Click(object sender, EventArgs e) => tsbRenderOnBlackBackground.Checked = GLControl.RenderOnBlackBackground = !GLControl.RenderOnBlackBackground;
         private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
         private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
-
-        private void tsbToggleHelp_Click       (object sender, EventArgs e) => tsbToggleHelp.Checked        = GLControl.DrawHelp         = !GLControl.DrawHelp;
 
         public void UpdateLighting() {
             if (MPD_File != null) {

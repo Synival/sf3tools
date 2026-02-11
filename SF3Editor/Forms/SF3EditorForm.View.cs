@@ -27,8 +27,6 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp;
             tsmiView_MPD_RenderOnBlackBackground.Checked = _appState.RenderOnBlackBackground;
 
-            tsmiView_MPD_ShowHelp.Checked                = _appState.ViewerDrawHelp;
-
             tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes;
 
             _appState.DarkModeChanged += (s, e)
@@ -74,9 +72,6 @@ namespace SF3.Editor.Forms {
                 => { tsmiView_MPD_RotateSpritesUpToCamera.Checked = _appState.ViewerRotateSpritesUp; _appState.Serialize(); };
             _appState.RenderOnBlackBackgroundChanged  += (s, e)
                 => { tsmiView_MPD_RenderOnBlackBackground.Checked = _appState.RenderOnBlackBackground; _appState.Serialize(); };
-
-            _appState.ViewerDrawHelpChanged += (s, e)
-                => { tsmiView_MPD_ShowHelp.Checked = _appState.ViewerDrawHelp; _appState.Serialize(); };
 
             _appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e)
                 => { tsmiView_MPD_EnableBlankFieldV2Controls.Checked = _appState.EnableExperimentalBlankFieldV2Brushes; _appState.Serialize(); };
@@ -125,9 +120,6 @@ namespace SF3.Editor.Forms {
 
         private void tsmiView_MPD_RenderOnBlackBackground_Click(object sender, EventArgs e)
             => _appState.RenderOnBlackBackground = ! _appState.RenderOnBlackBackground;
-
-        private void tsmiView_MPD_ShowHelp_Click(object sender, EventArgs e)
-            => _appState.ViewerDrawHelp = !_appState.ViewerDrawHelp;
 
         private void tsmiView_MPD_EnableBlankFieldV2Controls_Click(object sender, EventArgs e)
             => _appState.EnableExperimentalBlankFieldV2Brushes = !_appState.EnableExperimentalBlankFieldV2Brushes;
