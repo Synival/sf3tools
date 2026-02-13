@@ -13,6 +13,9 @@ namespace SF3.Win.Views.DAT {
             if (base.Create() == null)
                 return null;
 
+            if (Model.TextureTable != null)
+                CreateChild(new TextureView("Spritesheet", Model.Spritesheet, 1));
+
             if (Model.TextureTable != null) {
                 CreateChild(new TextureDataTableView<FixedSizeTextureStructBase, Table<FixedSizeTextureStructBase>>(
                     "Textures", Model.TextureTable, Model.NameGetterContext, Model.TextureViewerScale));

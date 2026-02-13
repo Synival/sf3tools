@@ -35,6 +35,7 @@ namespace SF3.Models.Files.DAT {
                 case DAT_FileType.FACE64:
                     tables.Add(TextureTable = Face64_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext));
                     TextureViewerScale = 2;
+                    Spritesheet = new TexturesAsSpritesheet(this, false, 64, 64, 8);
                     break;
 
                 case DAT_FileType.FACE32: {
@@ -58,17 +59,20 @@ namespace SF3.Models.Files.DAT {
                         TextureTable = Face32_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext, faceCount, palette)
                     );
                     TextureViewerScale = 4;
+                    Spritesheet = new TexturesAsSpritesheet(this, palette, false, 32, 32, 16);
                     break;
                 }
 
                 case DAT_FileType.ITEM_CG:
                     tables.Add(TextureTable = ItemCG_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext));
                     TextureViewerScale = 4;
+                    Spritesheet = new TexturesAsSpritesheet(this, ItemCG_TextureTable.ItemSpellPalette, true, 24, 24, 24);
                     break;
 
                 case DAT_FileType.BTLENKEI:
                     tables.Add(TextureTable = BtlEnkei_TextureTable.Create(Data, nameof(BtlEnkei_TextureTable), 0, NameGetterContext, headerless: Scenario >= ScenarioType.Scenario3));
                     TextureViewerScale = 1;
+                    Spritesheet = new TexturesAsSpritesheet(this, false, 512, 256, 1);
                     break;
             }
 
@@ -78,5 +82,6 @@ namespace SF3.Models.Files.DAT {
         public DAT_FileType FileType { get; }
         public Table<FixedSizeTextureStructBase> TextureTable { get; private set; }
         public int TextureViewerScale { get; set; } = 0;
+        public TexturesAsSpritesheet Spritesheet { get; private set; }
     }
 }
