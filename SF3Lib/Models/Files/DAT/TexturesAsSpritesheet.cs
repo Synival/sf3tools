@@ -16,14 +16,14 @@ namespace SF3.Models.Files.DAT {
             DAT_File       = file;
             WidthPerImage  = widthPerImage;
             HeightPerImage = heightPerImage;
+            ImagesPerRow   = imagesPerRow;
 
             PixelFormat    = pixelFormat;
             Palette        = palette;
             Width          = imagesPerRow * widthPerImage;
             ZeroIsTransparent = zeroIsTransparent;
 
-            // TODO: This should be dynamic
-            Height         = (int) (Math.Ceiling(file.TextureTable.Length / (float) imagesPerRow) * heightPerImage);
+            UpdateHeight();
 
             // Invalidate this image if ANY data has changed.
             file.Data.Data.RangeModified += (s, e) => Invalidate();
@@ -37,16 +37,16 @@ namespace SF3.Models.Files.DAT {
         public IDAT_File DAT_File { get; }
         public int WidthPerImage { get; }
         public int HeightPerImage { get; }
-
+        public int ImagesPerRow { get; }
         public TexturePixelFormat PixelFormat { get; }
         public Palette Palette { get; }
         public int Width { get; }
-        public int Height { get; }
+        public int Height { get; private set; }
         public int ImageDataSize => Width * Height * BytesPerPixel;
         public int BytesPerPixel => PixelFormat.BytesPerPixel();
         public bool ZeroIsTransparent { get; }
 
-        public byte[,] ImageData8Bit    => _textureDataBuffer.GetOrCacheImageData8Bit (() => Create8BitImageData());
+        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => Create8BitImageData());
 
         // TODO: make settable!
         public void SetImageData8Bit(byte[,] data, Palette palette) {}
@@ -68,7 +68,7 @@ namespace SF3.Models.Files.DAT {
         public bool CanSetImageData16Bit => false;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit));
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
@@ -78,14 +78,58 @@ namespace SF3.Models.Files.DAT {
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) => "Not supported";
 
         private byte[,] Create8BitImageData() {
-            // TODO: create image data!
-            return new byte[Width, Height];
+            var data = new byte[Width, Height];
+
+            int count = 0;
+            foreach (var row in DAT_File.TextureTable) {
+                var imageX = (count % ImagesPerRow) * WidthPerImage;
+                var imageY = (count / ImagesPerRow) * HeightPerImage;
+
+                var imageData = row.ImageData8Bit;
+                if (imageData != null) {
+                    var imageWidth  = row.Width;
+                    var imageHeight = row.Height;
+
+                    for (int y = 0; y < imageHeight && y < HeightPerImage; y++)
+                        for (int x = 0; x < imageWidth && x < WidthPerImage; x++)
+                            data[x + imageX, y + imageY] = imageData[x, y];
+                }
+
+                count++;
+            }
+
+            return data;
         }
 
         private ushort[,] Create16BitImageData() {
-            // TODO: create image data!
-            return new ushort[Width, Height];
+            var data = new ushort[Width, Height];
+
+            int count = 0;
+            foreach (var row in DAT_File.TextureTable) {
+                var imageX = (count % ImagesPerRow) * WidthPerImage;
+                var imageY = (count / ImagesPerRow) * HeightPerImage;
+
+                var imageData = row.PixelFormat == TexturePixelFormat.ABGR1555
+                    ? row.ImageData16Bit
+                    : (row.ImageData8Bit?.To1DArray()?.ConvertIndexedToABGR1555(row.Palette)?.To2DArray(row.Width, row.Height));
+
+                if (imageData != null) {
+                    var imageWidth  = row.Width;
+                    var imageHeight = row.Height;
+
+                    for (int y = 0; y < imageHeight && y < HeightPerImage; y++)
+                        for (int x = 0; x < imageWidth && x < WidthPerImage; x++)
+                            data[x + imageX, y + imageY] = imageData[x, y];
+                }
+
+                count++;
+            }
+
+            return data;
         }
+
+        private void UpdateHeight()
+            => Height = (int) (Math.Ceiling(DAT_File.TextureTable.Length / (float) ImagesPerRow) * HeightPerImage);
 
         public event EventHandler Invalidated;
 

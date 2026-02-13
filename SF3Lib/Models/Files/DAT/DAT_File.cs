@@ -35,7 +35,7 @@ namespace SF3.Models.Files.DAT {
                 case DAT_FileType.FACE64:
                     tables.Add(TextureTable = Face64_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext));
                     TextureViewerScale = 2;
-                    Spritesheet = new TexturesAsSpritesheet(this, false, 64, 64, 8);
+                    Spritesheet = new TexturesAsSpritesheet(this, false, 64, 64, 12);
                     break;
 
                 case DAT_FileType.FACE32: {
@@ -59,14 +59,14 @@ namespace SF3.Models.Files.DAT {
                         TextureTable = Face32_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext, faceCount, palette)
                     );
                     TextureViewerScale = 4;
-                    Spritesheet = new TexturesAsSpritesheet(this, palette, false, 32, 32, 16);
+                    Spritesheet = new TexturesAsSpritesheet(this, palette, false, 32, 32, 24);
                     break;
                 }
 
                 case DAT_FileType.ITEM_CG:
                     tables.Add(TextureTable = ItemCG_TextureTable.Create(Data, nameof(TextureTable), 0, NameGetterContext));
                     TextureViewerScale = 4;
-                    Spritesheet = new TexturesAsSpritesheet(this, ItemCG_TextureTable.ItemSpellPalette, true, 24, 24, 24);
+                    Spritesheet = new TexturesAsSpritesheet(this, ItemCG_TextureTable.ItemSpellPalette, true, 24, 24, 32);
                     break;
 
                 case DAT_FileType.BTLENKEI:
