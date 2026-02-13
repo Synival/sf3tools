@@ -33,7 +33,6 @@ namespace SF3.Win.Controls {
             // imageControl
             // 
             imageControl.BackColor = System.Drawing.Color.Transparent;
-            imageControl.Image = null;
             imageControl.ImageScale = 4F;
             imageControl.Location = new System.Drawing.Point(4, 26);
             imageControl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -43,6 +42,7 @@ namespace SF3.Win.Controls {
             // 
             // btnExport
             // 
+            btnExport.DisabledForeColor = System.Drawing.Color.Empty;
             btnExport.Location = new System.Drawing.Point(74, 0);
             btnExport.Name = "btnExport";
             btnExport.Size = new System.Drawing.Size(64, 23);
@@ -53,6 +53,7 @@ namespace SF3.Win.Controls {
             // 
             // btnImport
             // 
+            btnImport.DisabledForeColor = System.Drawing.Color.Empty;
             btnImport.Location = new System.Drawing.Point(4, 0);
             btnImport.Name = "btnImport";
             btnImport.Size = new System.Drawing.Size(64, 23);
@@ -65,6 +66,7 @@ namespace SF3.Win.Controls {
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScroll = true;
             Controls.Add(btnImport);
             Controls.Add(btnExport);
             Controls.Add(imageControl);
