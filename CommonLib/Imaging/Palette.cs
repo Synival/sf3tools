@@ -74,15 +74,19 @@ namespace CommonLib.Imaging {
         }
 
         public int GetDarkestIndex(bool ignoreColorZero)
-            => GetHighestScoringIndex(ignoreColorZero, color => 0x100 - Math.Max(color.R, Math.Max(color.G, color.B)));
+            => GetHighestScoringIndex(ignoreColorZero, color => 0x200 - (int) (0.25 * color.R + 0.625 * color.G + 0.125 * color.B));
 
         public int GetLightestIndex(bool ignoreColorZero)
-            => GetHighestScoringIndex(ignoreColorZero, color => Math.Max(color.R, Math.Max(color.G, color.B)));
+            => GetHighestScoringIndex(ignoreColorZero, color => (int) (0.25 * color.R + 0.625 * color.G + 0.125 * color.B));
 
         public int GetClosestIndex(bool ignoreColorZero, PixelChannels matchToColor) {
-            return GetHighestScoringIndex(ignoreColorZero, color => {
-                return -(Math.Abs(matchToColor.R - color.R) + Math.Abs(matchToColor.G - color.G) + Math.Abs(matchToColor.B - color.B));
-            });
+            return GetHighestScoringIndex(ignoreColorZero, color =>
+                0x1000 - (int) (
+                    0.25  * Math.Abs(matchToColor.R - color.R) +
+                    0.625 * Math.Abs(matchToColor.G - color.G) +
+                    0.125 * Math.Abs(matchToColor.B - color.B)
+                )
+            );
         }
 
         public string ToJSON_String()
