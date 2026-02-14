@@ -71,7 +71,7 @@ namespace SF3.Tests.MPD.Writer {
                     "Chunk[20] (uncompressed data -- actual offset is 0x39894:\r\n" +
                     "  Length is wrong: should be 45310 (0x0B0FE), is 45426 (0x0B172)\r\n" +
                     "  Comparable data is wrong: 91.31% accurate (3942 wrong bytes)\r\n" +
-                    "  First wrong byte is at 235671 (0x39897):\r\n" +
+                    "  First wrong byte is at 3 (0x0003) (in file: 235671 (0x39897)):\r\n" +
                     "    Should be 112 (0x70), is 184 (0xB8)",
                     ex.Message);
 
