@@ -194,7 +194,8 @@ namespace SF3.Models.Files.MPD {
             ChunkData = new IChunkData[chunks.Length];
 
             // All model chunks
-            ModelChunkIndices = GetModelChunkIndices(chunks);
+            var modelChunkDescriptors = GetModelChunkDescriptors(chunks);
+            ModelChunkIndices = new HashSet<int>(modelChunkDescriptors.Select(x => x.Index).ToArray());
             var modelChunksList = new List<IChunkData>();
             foreach (var i in ModelChunkIndices)
                 modelChunksList.Add(MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed));
@@ -209,12 +210,12 @@ namespace SF3.Models.Files.MPD {
                 SurfaceModelChunkData = MakeChunkData(20, ChunkType.SurfaceModel, CompressionType.Uncompressed);
 
             // Sometimes we didn't find a models chunk at all (MOVESEL.MPD). Make sure we have one.
-            var modelsChunk = modelChunksList.FirstOrDefault(x => (x as ModelChunk)?.Collection == MPD_CollectionType.Primary);
+            var modelsChunk = modelChunkDescriptors.FirstOrDefault(x => x.Collection == MPD_CollectionType.Primary);
             if (modelsChunk == null) {
                 if (ChunkData[20] == null && chunks[20].Exists)
                     modelChunksList.Add(MakeChunkData(20, ChunkType.Models, CompressionType.Uncompressed));
                 else if (ChunkData[1] == null && chunks[1].Exists)
-                    modelChunksList.Add(MakeChunkData(20, ChunkType.Models, CompressionType.Uncompressed));
+                    modelChunksList.Add(MakeChunkData(1, ChunkType.Models, CompressionType.Uncompressed));
             }
 
             ModelChunkDatas = modelChunksList.ToArray();
@@ -320,16 +321,23 @@ namespace SF3.Models.Files.MPD {
             return ChunkData;
         }
 
-        private HashSet<int> GetModelChunkIndices(ChunkLocation[] chunks) {
+        private class ModelChunkDescriptor {
+            public int Index;
+            public MPD_CollectionType Collection;
+        };
+
+        private HashSet<ModelChunkDescriptor> GetModelChunkDescriptors(ChunkLocation[] chunks) {
             var flags = (MPD_FlagsFromHeader) Flags;
-            var indices = new HashSet<int>();
+            var indices = new HashSet<ModelChunkDescriptor>();
+
+            var primaryModelChunk = flags.ModelsChunkIndex;
 
             if (chunks[1].Exists && flags.Chunk1Type == ChunkType.Models)
-                indices.Add(1);
+                indices.Add(new ModelChunkDescriptor { Index = 1, Collection = primaryModelChunk == 1 ? MPD_CollectionType.Primary : MPD_CollectionType.ExtraModels });
             if (chunks[20].Exists && flags.Chunk20Type == ChunkType.Models)
-                indices.Add(20);
+                indices.Add(new ModelChunkDescriptor { Index = 20, Collection = primaryModelChunk == 20 ? MPD_CollectionType.Primary : MPD_CollectionType.ExtraModels });
             if (chunks[19].Exists && flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
-                indices.Add(19);
+                indices.Add(new ModelChunkDescriptor { Index = 19, Collection = MPD_CollectionType.ExtraModels });
 
             return indices;
         }
