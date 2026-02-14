@@ -156,10 +156,19 @@ namespace SF3.Models.Structs.X1.Battle {
         public int BattleIDEnemyCounter
             => PrevSlot == null ? 0x80 : PrevSlot.BattleIDEnemyCounter + (PrevSlot.IsEnemy ? 1 : 0);
 
+        public int SpriteID {
+            get => IsEnemy ? EnemyID + 0xC8 : (EnemyID == 0x5B) ? CharacterPlus : -1;
+            set {}
+        }
+
         public int BattleID =>
             IsEnemy ? BattleIDEnemyCounter : (EnemyID == 0x5B) ? CharacterPlus : -1;
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0.7f, displayName: "Battle ID", displayGroup: "Metadata", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: null, displayOrder: 0.5f, displayName: nameof(SpriteID), displayGroup: "Metadata", displayFormat: "X2")]
+        public string SpriteIDStr =>
+            (SpriteID < 0) ? "--" : SpriteID.ToString("X2");
+
+        [TableViewModelColumn(addressField: null, displayOrder: 0.7f, displayName: nameof(BattleID), displayGroup: "Metadata", displayFormat: "X2")]
         public string BattleIDStr =>
             (BattleID < 0) ? "--" : BattleID.ToString("X2");
 
