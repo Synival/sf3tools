@@ -68,9 +68,16 @@ namespace SF3.Models.Files.DAT {
         public bool CanSetImageData16Bit => false;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit));
+            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
+                ? BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent)
+                : BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit)
+            );
+
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+            => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
+                ? BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent)
+                : BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit)
+            );
 
         // TODO: support!
         public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) => "Not supported";

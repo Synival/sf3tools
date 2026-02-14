@@ -360,7 +360,7 @@ namespace SF3.MPD.Writer {
                         : frame.ImageData8Bit.To1DArrayTransposed();
 
                     if (frame.BytesPerPixel == 1 && !allowIndexed)
-                        imageData = imageData.ConvertIndexedToABGR1555(frame.Palette).ToByteArray();
+                        imageData = imageData.ConvertIndexedToABGR1555(frame.Palette, zeroIsTransparent: true).ToByteArray();
 
                     var chunk3FramePos = AddTextureToChunk3(imageData);
 

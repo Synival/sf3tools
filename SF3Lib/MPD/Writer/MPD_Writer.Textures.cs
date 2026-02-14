@@ -93,7 +93,7 @@ namespace SF3.MPD.Writer {
                 for (int i = startID; i < endID; i++) {
                     var texture = sortedTextures[i];
                     var imageData = (texture.BytesPerPixel == 1)
-                        ? texture.ImageData8Bit.To1DArrayTransposed().ConvertIndexedToABGR1555(texture.Palette)
+                        ? texture.ImageData8Bit.To1DArrayTransposed().ConvertIndexedToABGR1555(texture.Palette, zeroIsTransparent: true)
                         : texture.ImageData16Bit.To1DArrayTransposed();
                     WriteBytes(imageData.ToByteArray());
                 }
