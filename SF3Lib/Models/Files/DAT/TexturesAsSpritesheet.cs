@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Types;
@@ -85,54 +86,157 @@ namespace SF3.Models.Files.DAT {
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) => "Not supported";
 
         private byte[,] Create8BitImageData() {
-            var data = new byte[Width, Height];
+            var imageData = new byte[Width, Height];
+            var widthPerImage  = WidthPerImage;
+            var heightPerImage = HeightPerImage;
 
             int count = 0;
-            foreach (var row in DAT_File.TextureTable) {
-                var imageX = (count % ImagesPerRow) * WidthPerImage;
-                var imageY = (count / ImagesPerRow) * HeightPerImage;
+            int rowMax = (int) (Math.Ceiling((float) DAT_File.TextureTable.Length / ImagesPerRow) * ImagesPerRow);
+            var backColor = ZeroIsTransparent ? (byte) 0 : (byte) Palette.GetClosestIndex(false, new PixelChannels() { R = 64, G = 64, B = 64 });
+            var foreColor = (byte) Palette.GetClosestIndex(ZeroIsTransparent, new PixelChannels() { R = 128, G = 128, B = 128 });
 
-                var imageData = row.ImageData8Bit;
-                if (imageData != null) {
-                    var imageWidth  = row.Width;
-                    var imageHeight = row.Height;
+            for (int i = 0; i < rowMax; i++) {
+                var imageX = (count % ImagesPerRow) * widthPerImage;
+                var imageY = (count / ImagesPerRow) * heightPerImage;
 
-                    for (int y = 0; y < imageHeight && y < HeightPerImage; y++)
-                        for (int x = 0; x < imageWidth && x < WidthPerImage; x++)
-                            data[x + imageX, y + imageY] = imageData[x, y];
+                var item = (i < DAT_File.TextureTable.Length) ? DAT_File.TextureTable[i] : null;
+                var itemImageData = item?.ImageData8Bit;
+
+                // Copy images that exist to the spritesheet.
+                if (itemImageData != null) {
+                    var imageWidth  = item.Width;
+                    var imageHeight = item.Height;
+
+                    for (int y = 0; y < imageHeight && y < heightPerImage; y++)
+                        for (int x = 0; x < imageWidth && x < widthPerImage; x++)
+                            imageData[x + imageX, y + imageY] = itemImageData[x, y];
+                }
+                // Otherwise, use special images to denote some meaning of why there isn't an image there.
+                else {
+                    var drawRect = new Rectangle(imageX, imageY, widthPerImage - 1, heightPerImage - 1);
+
+                    // Mark non-existant images with a big X
+                    if (item != null) {
+                        if (!ZeroIsTransparent)
+                            FillBox(imageData, backColor, drawRect);
+                        DrawX(imageData, foreColor, drawRect);
+                    }
+                    // Mark images out of range with a cross-hatch pattern
+                    else
+                        DrawCrossHatch(imageData, foreColor, backColor, drawRect);
+
+                    // Draw a box around these special squares.
+                    DrawBox(imageData, foreColor, drawRect);
                 }
 
                 count++;
             }
 
-            return data;
+            return imageData;
         }
 
         private ushort[,] Create16BitImageData() {
-            var data = new ushort[Width, Height];
+            var imageData = new ushort[Width, Height];
+            var widthPerImage  = WidthPerImage;
+            var heightPerImage = HeightPerImage;
 
             int count = 0;
-            foreach (var row in DAT_File.TextureTable) {
-                var imageX = (count % ImagesPerRow) * WidthPerImage;
-                var imageY = (count / ImagesPerRow) * HeightPerImage;
+            int rowMax = (int) (Math.Ceiling((float) DAT_File.TextureTable.Length / ImagesPerRow) * ImagesPerRow);
+            var backColor = new PixelChannels() { R =  64, G =  64, B =  64, A = 255 }.ToABGR1555();
+            var foreColor = new PixelChannels() { R = 128, G = 128, B = 128, A = 255 }.ToABGR1555();
 
-                var imageData = row.PixelFormat == TexturePixelFormat.ABGR1555
-                    ? row.ImageData16Bit
-                    : (row.ImageData8Bit?.To1DArray()?.ConvertIndexedToABGR1555(row.Palette)?.To2DArray(row.Width, row.Height));
+            for (int i = 0; i < rowMax; i++) {
+                var imageX = (count % ImagesPerRow) * widthPerImage;
+                var imageY = (count / ImagesPerRow) * heightPerImage;
 
-                if (imageData != null) {
-                    var imageWidth  = row.Width;
-                    var imageHeight = row.Height;
+                var item = (i < DAT_File.TextureTable.Length) ? DAT_File.TextureTable[i] : null;
+                var itemImageData = (item?.PixelFormat == TexturePixelFormat.ABGR1555)
+                    ? item?.ImageData16Bit
+                    : (item?.ImageData8Bit?.To1DArray()?.ConvertIndexedToABGR1555(item.Palette, ZeroIsTransparent)?.To2DArray(item.Width, item.Height));
 
-                    for (int y = 0; y < imageHeight && y < HeightPerImage; y++)
-                        for (int x = 0; x < imageWidth && x < WidthPerImage; x++)
-                            data[x + imageX, y + imageY] = imageData[x, y];
+                // Copy images that exist to the spritesheet.
+                if (itemImageData != null) {
+                    var imageWidth  = item.Width;
+                    var imageHeight = item.Height;
+
+                    for (int y = 0; y < imageHeight && y < heightPerImage; y++)
+                        for (int x = 0; x < imageWidth && x < widthPerImage; x++)
+                            imageData[x + imageX, y + imageY] = itemImageData[x, y];
+                }
+                // Otherwise, use special images to denote some meaning of why there isn't an image there.
+                else {
+                    var drawRect = new Rectangle(imageX, imageY, widthPerImage - 1, heightPerImage - 1);
+
+                    // Mark non-existant images with a big X
+                    if (item != null)
+                        DrawX(imageData, foreColor, drawRect);
+                    // Mark images out of range with a cross-hatch pattern
+                    else
+                        DrawCrossHatch(imageData, foreColor, backColor, drawRect);
+
+                    // Draw a box around these special squares.
+                    DrawBox(imageData, foreColor, drawRect);
                 }
 
                 count++;
             }
 
-            return data;
+            return imageData;
+        }
+
+        private void FillBox<T>(T[,] imageData, T color, Rectangle rect) {
+            for (int y = 0; y <= rect.Height; y++)
+                for (int x = 0; x <= rect.Width; x++)
+                    imageData[rect.X + x, rect.Y + y] = color;
+        }
+
+        private void DrawX<T>(T[,] imageData, T color, Rectangle rect) {
+            DrawLine(imageData, color, rect.Left,  rect.Top, rect.Right, rect.Bottom);
+            DrawLine(imageData, color, rect.Right, rect.Top, rect.Left,  rect.Bottom); 
+        }
+
+        private void DrawLine<T>(T[,] imageData, T color, int x1, int y1, int x2, int y2) {
+            int sign = 1;
+            if (x1 > x2) {
+                (x1, x2) = (x2, x1);
+                sign = -sign;
+            }
+            if (y1 > y2) {
+                (y1, y2) = (y2, y1);
+                sign = -sign;
+            }
+            var width  = x2 - x1;
+            var height = y2 - y1;
+
+            if (width > height) {
+                var yStep = height / width * sign;
+                var yTop = (sign == 1) ? y1 : y2;
+                for (int x = 0; x <= width; x++)
+                    imageData[x + x1, (int) Math.Round((float) x * yStep + yTop)] = color;
+            }
+            else {
+                var xStep = width / height * sign;
+                var xTop = (sign == 1) ? x1 : x2;
+                for (int y = 0; y <= height; y++)
+                    imageData[(int) Math.Round((float) y * xStep) + xTop, y + y1] = color;
+            }
+        }
+
+        private void DrawCrossHatch<T>(T[,] imageData, T color1, T color2, Rectangle rect) {
+            for (int y = 0; y <= rect.Height; y++)
+                for (int x = 0; x <= rect.Width; x++)
+                    imageData[rect.X + x, rect.Y + y] = ((x + y) % 2 == 0) ? color1 : color2;
+        }
+
+        private void DrawBox<T>(T[,] imageData, T color, Rectangle rect) {
+            for (int y = 0; y <= rect.Height; y++) {
+                imageData[rect.Left,  rect.Y + y] = color;
+                imageData[rect.Right, rect.Y + y] = color;
+            }
+            for (int x = 0; x <= rect.Width; x++) {
+                imageData[rect.X + x, rect.Top]    = color;
+                imageData[rect.X + x, rect.Bottom] = color;
+            }
         }
 
         private void UpdateHeight()
