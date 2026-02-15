@@ -16,37 +16,67 @@ namespace SF3.Win.Views.X1 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            if (Model.InteractableTables?.Any() == true)
-                CreateChild(new TableArrayView<InteractableTable>("Interactables", Model.InteractableTables.ToArray(), ngc));
+            if (Model.InteractableTables?.Any() == true) {
+                var count = Model.InteractableTables.Count();
+                var countStr = (count > 1) ? $" ({count})" : "";
+                CreateChild(new TableArrayView<InteractableTable>("Interactables" + countStr, Model.InteractableTables.ToArray(), ngc));
+            }
+
             if (Model.BattlePointersTable != null)
                 CreateChild(new TableView("Battle Pointers", Model.BattlePointersTable, ngc));
-            if (Model.NpcTables?.Any() == true)
-                CreateChild(new TableArrayView<NpcTable>("NPCs", Model.NpcTables.ToArray(), ngc));
+
+            if (Model.NpcTables?.Any() == true) {
+                var count = Model.NpcTables.Count();
+                var countStr = (count > 1) ? $" ({count})" : "";
+                CreateChild(new TableArrayView<NpcTable>("NPCs" + countStr, Model.NpcTables.ToArray(), ngc));
+            }
+
             if (Model.EnterTable != null)
                 CreateChild(new TableView("Non-Battle Enter", Model.EnterTable, ngc));
+
             if (Model.WarpTable != null)
                 CreateChild(new TableView("Warp Table (Scn2+)", Model.WarpTable, ngc));
+
             if (Model.ArrowTable != null)
                 CreateChild(new TableView("Arrows (Scn2+)", Model.ArrowTable, ngc));
+
             if (Model.TileMovementTable != null)
                 CreateChild(new TableView("Tile Data (Scn2+)", Model.TileMovementTable, ngc));
+
             if (Model.CharacterTargetPriorityTables != null)
                 CreateChild(new TableArrayView<CharacterTargetPriorityTable>("Character Target Priorities", Model.CharacterTargetPriorityTables, ngc));
+
             if (Model.CharacterTargetUnknownTables != null)
                 CreateChild(new TableArrayView<CharacterTargetUnknownTable>("Unknown 16 Tables", Model.CharacterTargetUnknownTables, ngc));
-            if (Model.ModelInstanceGroupTablesByAddress?.Count > 0)
-                CreateChild(new TableArrayView<ModelInstanceGroupTable>("Model Instance Groups", Model.ModelInstanceGroupTablesByAddress.Values.ToArray(), ngc));
-            if (Model.ModelInstanceTablesByAddress?.Count > 0)
-                CreateChild(new TableArrayView<ModelInstanceTable>("Model Instances", Model.ModelInstanceTablesByAddress.Values.ToArray(), ngc));
+
+            if (Model.ModelInstanceGroupTablesByAddress?.Count > 0) {
+                var count = Model.ModelInstanceGroupTablesByAddress.Count;
+                var countStr = (count > 1) ? $" ({count})" : "";
+                CreateChild(new TableArrayView<ModelInstanceGroupTable>("Model Instance Groups" + countStr, Model.ModelInstanceGroupTablesByAddress.Values.ToArray(), ngc));
+            }
+
+            if (Model.ModelInstanceTablesByAddress?.Count > 0) {
+                var count = Model.ModelInstanceTablesByAddress.Count;
+                var countStr = (count > 1) ? $" ({count})" : "";
+                CreateChild(new TableArrayView<ModelInstanceTable>("Model Instances" + countStr, Model.ModelInstanceTablesByAddress.Values.ToArray(), ngc));
+            }
+
             if (Model.MapUpdateFuncTable != null)
                 CreateChild(new TableView("Map Update Functions", Model.MapUpdateFuncTable, ngc));
-            if (Model.BlacksmithTables?.Any() == true)
-                CreateChild(new TableArrayView<BlacksmithTable>("Blacksmith", Model.BlacksmithTables.ToArray(), ngc));
+
+            if (Model.BlacksmithTables?.Any() == true) {
+                var count = Model.BlacksmithTables.Count();
+                var countStr = (count > 1) ? $" ({count})" : "";
+                CreateChild(new TableArrayView<BlacksmithTable>("Blacksmith" + countStr, Model.BlacksmithTables.ToArray(), ngc));
+            }
+
             if (Model.BattleTalkTable != null)
                 CreateChild(new TableView("Battle Talk", Model.BattleTalkTable, ngc));
 
             if (Model.ScriptsByAddress?.Count > 0) {
-                CreateChild(new TextArrayView("Scripts",
+                var count = Model.ScriptsByAddress.Count;
+                var countStr = (count > 1) ? $" ({count})" : "";
+                CreateChild(new TextArrayView("Scripts" + countStr,
                     Model.ScriptsByAddress.ToDictionary(
                         x =>
                             $"0x{x.Key.ToString("X8")}" +
