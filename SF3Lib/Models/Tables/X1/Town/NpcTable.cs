@@ -14,8 +14,12 @@ namespace SF3.Models.Tables.X1.Town {
             => Create(() => new NpcTable(data, name, address, actorScripts));
 
         public override bool Load() {
+            Npc lastNewNPC = null;
             return Load(
-                (id, address) => new Npc(Data, id, "Npc" + id.ToString("D2"), address, ActorScripts),
+                (id, address) => {
+                    lastNewNPC = new Npc(Data, id, "Npc" + id.ToString("D2"), address, ActorScripts, lastNewNPC);
+                    return lastNewNPC;
+                },
                 (rows, model) => model.SpriteID != 0xFFFF,
                 false);
         }

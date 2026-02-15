@@ -16,9 +16,10 @@ namespace SF3.Models.Structs.X1.Town {
         private readonly int _interactDirectionBehaviorAddr;
         private readonly int _paddingAddr;
 
-        public Npc(IByteData data, int id, string name, int address, Dictionary<uint, ActorScript> actorScripts)
+        public Npc(IByteData data, int id, string name, int address, Dictionary<uint, ActorScript> actorScripts, Npc lastNpc)
         : base(data, id, name, address, 0x18) {
             ActorScripts = actorScripts;
+            LastNPC      = lastNpc;
 
             _spriteIDAddr      = Address + 0x00; // 2 bytes. how is searched. second by being 0x13 is a treasure. if this is 0xffff terminate 
             _flagAddr          = Address + 0x02; // 2 bytes
@@ -32,6 +33,7 @@ namespace SF3.Models.Structs.X1.Town {
         }
 
         public Dictionary<uint, ActorScript> ActorScripts { get; set; }
+        public Npc LastNPC { get; set; }
 
         [TableViewModelColumn(addressField: nameof(_spriteIDAddr), displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [BulkCopy]
@@ -131,11 +133,19 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetByte(_paddingAddr, value);
         }
 
+        private int InteractableTieInCounter {
+            get {
+                var lastId = (LastNPC == null) ? 0x3C : LastNPC.InteractableTieInCounter;
+                var spriteId = SpriteID;
+                return (spriteId >= 0x3C /*60*/ && spriteId != 0xFFFF) ? (lastId + 1) : lastId;
+            }
+        }
+
         [TableViewModelColumn(addressField: null, displayOrder: 11, displayName: "Interactable Tie-in", displayFormat: "X2")]
         public int? InteractableTieIn {
             get {
                 var spriteId = SpriteID;
-                return (spriteId > 0x0f && spriteId != 0xffff) ? (ID + 0x3D) : (int?) null;
+                return (spriteId > 0x3C /*60*/ && spriteId != 0xFFFF) ? InteractableTieInCounter : SpriteID;
             }
         }
     }
