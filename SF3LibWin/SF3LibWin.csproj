@@ -61,6 +61,8 @@
     <EmbeddedResource Include="Shaders\Object.vert">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\Sprite.frag" />
+    <EmbeddedResource Include="Shaders\Sprite.vert" />
     <EmbeddedResource Include="Shaders\Solid.frag">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

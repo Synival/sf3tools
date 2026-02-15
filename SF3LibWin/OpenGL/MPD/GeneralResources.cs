@@ -14,6 +14,7 @@ namespace SF3.Win.OpenGL.MPD {
                 (NormalsShader    = new Shader(Resources.NormalsVert,    Resources.NormalsFrag)),
                 (WireframeShader  = new Shader(Resources.WireframeVert,  Resources.WireframeFrag)),
                 (ObjectShader     = new Shader(Resources.ObjectVert,     Resources.ObjectFrag)),
+                (SpriteShader     = new Shader(Resources.SpriteVert,     Resources.SpriteFrag)),
             ];
 
             Textures = [
@@ -34,6 +35,7 @@ namespace SF3.Win.OpenGL.MPD {
             NormalsShader    = null;
             WireframeShader  = null;
             ObjectShader     = null;
+            SpriteShader     = null;
 
             WhiteTexture            = null;
             TransparentWhiteTexture = null;
@@ -54,6 +56,7 @@ namespace SF3.Win.OpenGL.MPD {
         public Shader NormalsShader { get; private set; } = null;
         public Shader WireframeShader { get; private set; } = null;
         public Shader ObjectShader { get; private set; } = null;
+        public Shader SpriteShader { get; private set; } = null;
 
         public Texture TileWireframeTexture { get; private set; } = null;
         public Texture WhiteTexture { get; private set; } = null;

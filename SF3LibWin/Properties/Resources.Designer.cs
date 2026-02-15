@@ -456,12 +456,65 @@ namespace SF3.Win.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform sampler2D texture0;
+        ///
+        ///in vec4 colorFrag;
+        ///in vec2 texCoord0Frag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    vec4 texColor = texture(texture0, texCoord0Frag) * colorFrag;
+        ///    if (texColor.a &lt; 0.001)
+        ///        discard;
+        ///
+        ///    FragColor = texColor;
+        ///}
+        ///.
+        /// </summary>
+        internal static string SpriteFrag {
+            get {
+                return ResourceManager.GetString("SpriteFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap SpritesPointingUpBmp {
             get {
                 object obj = ResourceManager.GetObject("SpritesPointingUpBmp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec2 texCoord0;
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec4 color;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec4 colorFrag;
+        ///out vec2 texCoord0Frag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    colorFrag = color;
+        ///    texCoord0Frag = texCoord0;
+        ///}
+        ///.
+        /// </summary>
+        internal static string SpriteVert {
+            get {
+                return ResourceManager.GetString("SpriteVert", resourceCulture);
             }
         }
         
@@ -638,6 +691,16 @@ namespace SF3.Win.Properties {
         internal static string TwoTextureVert {
             get {
                 return ResourceManager.GetString("TwoTextureVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UnknownSpriteBmp {
+            get {
+                object obj = ResourceManager.GetObject("UnknownSpriteBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -253,4 +253,13 @@
   <data name="ApplyHideTagsBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ApplyHideTags.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SpriteFrag" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Shaders\Sprite.frag;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SpriteVert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Shaders\Sprite.vert;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="UnknownSpriteBmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\UnknownSprite.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
