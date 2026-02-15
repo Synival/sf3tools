@@ -6,7 +6,7 @@ using CommonLib.Win.DarkMode;
 using Newtonsoft.Json;
 using SF3.Types;
 
-namespace SF3.Win {
+namespace SF3.Win.App {
     public class AppState : IDarkModeObservable {
         private static AppState _globalAppState = null;
 

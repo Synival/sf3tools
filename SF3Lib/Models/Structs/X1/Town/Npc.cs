@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
+using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Town {
-    public class Npc : Struct {
+    public class Npc : Struct, IActor {
         private readonly int _spriteIDAddr;
         private readonly int _flagAddr;
         private readonly int _scriptOffsetAddr;
@@ -91,23 +92,25 @@ namespace SF3.Models.Structs.X1.Town {
             set => Data.SetDouble(_zPosAddr, (int) value);
         }
 
+        public bool HasActorY => true;
+
         [TableViewModelColumn(addressField: nameof(_xPosAddr), displayOrder: 6, displayName: "xPos (dec)")]
         [BulkCopy]
-        public float XPosDec {
+        public float ActorX {
             get => XPos / 65536.0f;
             set => XPos = (uint) value * 65536;
         }
 
         [TableViewModelColumn(addressField: nameof(_yPosAddr), displayOrder: 7, displayName: "yPos (dec)")]
         [BulkCopy]
-        public float YPosDec {
+        public float ActorY {
             get => YPos / 65536.0f;
             set => YPos = (uint) value * 65536;
         }
 
         [TableViewModelColumn(addressField: nameof(_zPosAddr), displayOrder: 8, displayName: "zPos (dec)")]
         [BulkCopy]
-        public float ZPosDec {
+        public float ActorZ {
             get => ZPos / 65536.0f;
             set => ZPos = (uint) value * 65536;
         }

@@ -2,7 +2,7 @@ using System;
 using System.Windows.Forms;
 using CommonLib.Win.DarkMode;
 using SF3.Editor.Forms;
-using SF3.Win;
+using SF3.Win.App;
 using static SF3.Win.Utils.ObjectListViewUtils;
 
 namespace SF3.Editor {

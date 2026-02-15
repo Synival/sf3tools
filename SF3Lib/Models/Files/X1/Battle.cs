@@ -38,7 +38,7 @@ namespace SF3.Models.Files.X1 {
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
             return new List<ITable>() {
-                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, PrevBattle?.SlotTable.Last())),
+                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, PrevBattle?.SlotTable?.Rows?.Last())),
                 (SpawnZoneTable        = SpawnZoneTable.Create       (Data, "SpawnZones",     spawnZoneAddress)),
                 (AITargetPositionTable = AITargetPositionTable.Create(Data, "AI",             aiAddress)),
                 (ScriptedMovementTable = ScriptedMovementTable.Create(Data, "CustomMovement", customMovementAddress)),

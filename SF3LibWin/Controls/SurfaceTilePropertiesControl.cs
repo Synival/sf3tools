@@ -10,6 +10,7 @@ using SF3.Extensions;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
+using SF3.Win.App;
 using SF3.Win.Extensions;
 using static SF3.Win.Utils.EventHandlers;
 

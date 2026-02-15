@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using OpenTK.GLControl;
 using SF3.MPD.Interfaces;
+using SF3.Win.App;
 using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {

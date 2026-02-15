@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using CommonLib;
+using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class NpcTable : TerminatedTable<Npc> {
+    public class NpcTable : TerminatedTable<Npc>, IActorCollection {
         protected NpcTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts)
         : base(data, name, address, 2, 100) {
             ActorScripts = actorScripts;
@@ -24,6 +26,9 @@ namespace SF3.Models.Tables.X1.Town {
                 false);
         }
 
+        IActor[] IIndexedEnumerableWithLength<IActor>.AsArray() => Rows;
+        IEnumerator<IActor> IEnumerable<IActor>.GetEnumerator() => GetEnumerator();
+
         private Dictionary<uint, ActorScript> _actorScripts;
         public Dictionary<uint, ActorScript> ActorScripts {
             get => _actorScripts;
@@ -35,5 +40,8 @@ namespace SF3.Models.Tables.X1.Town {
                 }
             }
         }
+
+        public bool IsBattle => false;
+        IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
     }
 }

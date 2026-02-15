@@ -7,7 +7,7 @@ using SF3.Models.Tables.X1.Town;
 using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
-    public interface IX1_File : IScenarioTableFile, IBlacksmithTableFile {
+    public interface IX1_File : IScenarioTableFile, IBlacksmithTableFile, IActorCollectionFile {
         bool IsBTL99 { get; }
         bool IsBattle { get; }
 

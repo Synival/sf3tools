@@ -1,9 +1,11 @@
+using System;
 using CommonLib.Attributes;
+using SF3.Actors;
 using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class Slot : Struct {
+    public class Slot : Struct, IActor {
         private readonly int _battleAddrEnemyBase;
         private readonly int _battleAddrPlayerBase;
 
@@ -608,5 +610,10 @@ namespace SF3.Models.Structs.X1.Battle {
             get => Data.GetWord(_flagTieInAddr);
             set => Data.SetWord(_flagTieInAddr, value);
         }
+
+        public bool HasActorY => false;
+        public float ActorX { get => X * 32 + 16; set => X = (int) Math.Round((value - 16) / 32); }
+        public float ActorY { get => 0; set {} }
+        public float ActorZ { get => Z * 32 + 16; set => Z = (int) Math.Round((value - 16) / 32); }
     }
 }

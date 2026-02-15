@@ -36,7 +36,7 @@ namespace X1_Analyzer {
             var battles = x1File.Battles ?? [];
             var allEnemies = battles.Values
                 .SelectMany(x =>
-                    x.SlotTable
+                    x.SlotTable.Rows
                         .Where(y => y.EnemyID != 0x00)
                         .Select(y => new {
                             BattleName = x.Name,

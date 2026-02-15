@@ -243,6 +243,13 @@ namespace SF3.Models.Files.X1 {
             // Add references to the scripts for several tables so we can have nice dropdowns.
             AssociateScriptsWithRelevantTables();
 
+            var actorCollections = new List<IActorCollection>();
+            if (Battles != null)
+                actorCollections.AddRange(Battles.Values.Select(x => x.SlotTable));
+            if (NpcTables != null)
+                actorCollections.AddRange(NpcTables);
+            ActorCollections = actorCollections;
+
             return tables;
         }
 
@@ -635,7 +642,7 @@ namespace SF3.Models.Files.X1 {
 
             // Add known references to scripts from the NpcTable
             foreach (var nTable in NpcTables) {
-                var ramAddrs = nTable
+                var ramAddrs = nTable.Rows
                     .Select(x => (uint) (x.ScriptOffset))
                     .Where(x => x >= 0)
                     .OrderBy(x => x)
@@ -875,5 +882,7 @@ namespace SF3.Models.Files.X1 {
         public IEnumerable<BlacksmithTable> BlacksmithTables { get; private set; }
         [BulkCopyRecurse]
         public BattleTalkTable BattleTalkTable { get; private set; }
+
+        public IEnumerable<IActorCollection> ActorCollections { get; private set; }
     }
 }

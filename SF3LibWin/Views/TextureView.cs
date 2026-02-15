@@ -6,6 +6,7 @@ using CommonLib.Win.Utils;
 using CommonLib.Extensions;
 using SF3.Win.Extensions;
 using CommonLib.Imaging;
+using SF3.Win.App;
 
 namespace SF3.Win.Views {
     public class TextureView : ImageView {

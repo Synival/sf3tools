@@ -236,7 +236,7 @@ namespace SF3.Models.Structs.X1 {
                 return NameGetterContext.GetName(null, null, tieInId, new object[] { NamedValueType.Character });
 
             var npcName = $"NPC 0x{(tieInId - 61):X2}";
-            var npc = NpcTable?.FirstOrDefault(x => x.InteractableTieIn == tieInId);
+            var npc = NpcTable?.Rows?.FirstOrDefault(x => x.InteractableTieIn == tieInId);
             if (npc != null) {
                 var npcRealName = NameGetterContext.GetName(null, null, npc.SpriteID, new object[] { NamedValueType.Sprite });
                 if (npcRealName != null)

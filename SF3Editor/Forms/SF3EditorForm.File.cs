@@ -6,8 +6,6 @@ using static SF3.Utils.FileUtils;
 using static CommonLib.Win.Utils.MessageUtils;
 using System.IO;
 using SF3.Win.Views;
-using SF3.Win;
-using SF3.Models.Files.MPD;
 using SF3.Models.Files;
 using CommonLib.Logging;
 using SF3.Win.ModelLoader;
@@ -15,6 +13,7 @@ using CommonLib.Win;
 using SF3.MPD.Project;
 using System.Text;
 using SF3.MPD.Interfaces;
+using SF3.Win.App;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -150,6 +149,12 @@ namespace SF3.Editor.Forms {
                 return null;
             }
 
+            // Register any important app-wide tables.
+            var acf = fileLoader.Model as IActorCollectionFile;
+            if (acf != null)
+                foreach (var ac in acf.ActorCollections ?? [])
+                    AppResources.RetrieveAppState().RegisterActorCollection(ac);
+
             // Focus the tab itself.
             var tabPage = (TabPage) newControl.Parent!;
             var loadedFile = new LoadedFile(fileLoader, scenario, fileType, tabPage, view);
@@ -168,6 +173,11 @@ namespace SF3.Editor.Forms {
                 var lf = _loadedFiles.FirstOrDefault(x => x.Loader == fileLoader);
                 if (lf != null)
                     _loadedFiles.Remove(lf);
+
+                // Unregister any important app-wide tables.
+                if (acf != null)
+                    foreach (var ac in acf.ActorCollections ?? [])
+                        AppResources.RetrieveAppState().UnregisterActorCollection(ac);
             };
 
             fileLoader.TitleChanged += (s, e) => {

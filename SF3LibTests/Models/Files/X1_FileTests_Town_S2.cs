@@ -42,12 +42,12 @@ namespace SF3.Tests.Models.Files {
             var table = file.NpcTables.First();
 
             Assert.AreEqual(0x45, table[0].SpriteID);
-            Assert.AreEqual(784, table[0].XPosDec);
-            Assert.AreEqual(272, table[0].ZPosDec);
+            Assert.AreEqual(784, table[0].ActorX);
+            Assert.AreEqual(272, table[0].ActorZ);
 
             Assert.AreEqual(0x5F, table[1].SpriteID);
-            Assert.AreEqual(496, table[1].XPosDec);
-            Assert.AreEqual(272, table[1].ZPosDec);
+            Assert.AreEqual(496, table[1].ActorX);
+            Assert.AreEqual(272, table[1].ActorZ);
 
             Assert.AreEqual(23, table.Length);
         }
