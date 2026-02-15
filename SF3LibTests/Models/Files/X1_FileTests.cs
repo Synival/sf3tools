@@ -46,7 +46,7 @@ namespace SF3.Tests.Models.Files {
 
                 Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNotNull(file.BattlePointersTable);
-                Assert.IsNull(file.NpcTable);
+                Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNull(file.EnterTable);
                 Assert.IsNull(file.ArrowTable);
 
@@ -82,7 +82,7 @@ namespace SF3.Tests.Models.Files {
 
                 Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNull(file.BattlePointersTable);
-                Assert.IsNotNull(file.NpcTable);
+                Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNotNull(file.EnterTable);
 
                 Assert.IsNull(file.Battles);

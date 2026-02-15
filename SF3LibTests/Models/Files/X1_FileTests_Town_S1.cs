@@ -39,7 +39,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void NpcTable_HasExpectedData() {
             var file = TestCase.Create();
-            var table = file.NpcTable;
+            var table = file.NpcTables.First();
 
             Assert.AreEqual(0x42, table[0].SpriteID);
             Assert.AreEqual(1592, table[0].XPosDec);

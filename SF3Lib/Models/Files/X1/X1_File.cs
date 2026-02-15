@@ -163,22 +163,26 @@ namespace SF3.Models.Files.X1 {
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
             var interactableTables = new List<InteractableTable>();
+            var npcTables          = new List<NpcTable>();
 
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
             if (battlePointersAddress >= 0)
                 tables.Add(BattlePointersTable);
             if (npcAddress >= 0)
-                tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress, null));
+                npcTables.Add(NpcTable.Create(Data, $"{nameof(NpcTable)}01 (@0x{npcAddress + RamAddress:X8}) (Default)", npcAddress, null));
             if (treasureAddress >= 0)
-                interactableTables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}01 (@0x{treasureAddress + RamAddress:X8})", treasureAddress, NameGetterContext, NpcTable, Discoveries));
+                interactableTables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}01 (@0x{treasureAddress + RamAddress:X8}) (Default)", treasureAddress, NameGetterContext, npcTables.FirstOrDefault(), Discoveries));
             if (enterAddress >= 0)
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
                 tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", arrowAddress));
 
             tables.AddRange(interactableTables);
+            tables.AddRange(npcTables);
+
             InteractableTables = interactableTables;
+            NpcTables = npcTables;
 
             if (characterTargetPriorityTablesAddresses >= 0) {
                 CharacterTargetPriorityTables = new CharacterTargetPriorityTable[16];
@@ -444,7 +448,7 @@ namespace SF3.Models.Files.X1 {
                     var addr = (uint) (ramAddr - RamAddress);
                     if (ramAddr >= RamAddress && ramAddr < RamAddressLimit && LooksLikeInteractableTable(addr)) {
                         int count = InteractableTables.Count() + tables.Count;
-                        tables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}{count + 1:D2} (@0x{ramAddr:X8})", (int) addr, NameGetterContext, NpcTable, Discoveries));
+                        tables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}{count + 1:D2} (@0x{ramAddr:X8})", (int) addr, NameGetterContext, NpcTables.FirstOrDefault(), Discoveries));
                     }
                     else
                         break;
@@ -570,8 +574,8 @@ namespace SF3.Models.Files.X1 {
             }
 
             // Add known references to scripts from the NpcTable
-            if (NpcTable != null) {
-                var ramAddrs = NpcTable
+            foreach (var nTable in NpcTables) {
+                var ramAddrs = nTable
                     .Select(x => (uint) (x.ScriptOffset))
                     .Where(x => x >= 0)
                     .OrderBy(x => x)
@@ -753,8 +757,8 @@ namespace SF3.Models.Files.X1 {
         }
 
         private void AssociateScriptsWithRelevantTables() {
-            if (NpcTable != null)
-                foreach (var npc in NpcTable)
+            foreach (var nTable in NpcTables)
+                foreach (var npc in nTable)
                     npc.ActorScripts = ScriptsByAddress;
 
             if (ModelInstanceTablesByAddress != null)
@@ -782,7 +786,7 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public BattlePointersTable BattlePointersTable { get; private set; }
         [BulkCopyRecurse]
-        public NpcTable NpcTable { get; private set; }
+        public IEnumerable<NpcTable> NpcTables { get; private set; }
         [BulkCopyRecurse]
         public EnterTable EnterTable { get; private set; }
         [BulkCopyRecurse]
