@@ -150,7 +150,7 @@
     <item value="0xC4" name="" />
     <item value="0xC5" name="Blacksmith" />
     <item value="0xC6" name="Church Priest" />
-    <item value="0xC7" name="(Unknown 0xC7)" />
+    <item value="0xC7" name="(Technical Placeholder)"/>
 
     <!-- 0xC8 through 0x185 are monsters -->
 
