@@ -174,7 +174,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
 
             // TODO: make this an option!
-            DrawActors(general, actors);
+            DrawActors(general, actors, cameraYaw, cameraPitch);
 
             if (options.DrawModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: true);
@@ -539,10 +539,16 @@ namespace SF3.Win.OpenGL.MPD {
 
         public void DrawActors(
             GeneralResources general,
-            ActorResources actors
+            ActorResources actors,
+            float cameraYaw,
+            float cameraPitch
         ) {
             if (actors == null || actors.ModelsBySpriteID == null || actors.ModelsBySpriteID.Count == 0)
                 return;
+
+            var baseMatrix =
+                Matrix4.CreateRotationX(cameraPitch / 180.0f * (float) Math.PI) *
+                Matrix4.CreateRotationY(cameraYaw   / 180.0f * (float) Math.PI);
 
             var shader = general.SpriteShader;
             using (shader.Use())
@@ -552,7 +558,7 @@ namespace SF3.Win.OpenGL.MPD {
                     var model = actors.ModelsBySpriteID[spriteId];
 
                     foreach (var actor in actorGroup.Value) {
-                        var translationMatix = Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
+                        var translationMatix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
                         _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, translationMatix);
                         model.Draw(shader);
                     }
