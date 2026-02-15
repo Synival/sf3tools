@@ -152,7 +152,7 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.DrawScene(
-                _general, _models, null, null, null, null, null, _lighting, null, null, null,
+                _general, _models, null, null, null, null, null, _lighting, null, null, null, null,
                 new Renderer.RendererOptions() {
                     DrawModels     = true,
                     ApplyLighting  = true,

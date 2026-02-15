@@ -98,6 +98,7 @@ namespace SF3.Win.Controls {
             _gradients       = new GradientResources();
             _lighting        = new LightingResources();
             _boundaryModels  = new BoundaryModelResources();
+            _actorResources  = new ActorResources();
 
             _renderer = new Renderer();
 
@@ -111,6 +112,7 @@ namespace SF3.Win.Controls {
             _gradients.Init();
             _lighting.Init();
             _boundaryModels.Init();
+            _actorResources.Init();
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
@@ -139,6 +141,7 @@ namespace SF3.Win.Controls {
             _gradients?.Dispose();
             _lighting?.Dispose();
             _boundaryModels?.Dispose();
+            _actorResources?.Dispose();
 
             _selectFramebuffer?.Dispose();
 
@@ -152,6 +155,7 @@ namespace SF3.Win.Controls {
             _gradients         = null;
             _lighting          = null;
             _boundaryModels    = null;
+            _actorResources    = null;
 
             _selectFramebuffer = null;
         }
@@ -232,7 +236,7 @@ namespace SF3.Win.Controls {
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
                 truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
-                _lighting, _boundaryModels, _collisionModels, _surfaceEditor,
+                _lighting, _boundaryModels, _collisionModels, _actorResources, _surfaceEditor,
 
                 // TODO: these options should be cached!!!
                 new Renderer.RendererOptions() {
@@ -296,6 +300,7 @@ namespace SF3.Win.Controls {
             _gradients?.Update(MPD_File);
             _boundaryModels?.Update(MPD_File);
             _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
+            _actorResources?.Update(MPD_File);
 
             Invalidate();
         }
@@ -527,6 +532,7 @@ namespace SF3.Win.Controls {
         private GradientResources _gradients = null;
         private LightingResources _lighting = null;
         private BoundaryModelResources _boundaryModels = null;
+        private ActorResources _actorResources = null;
 
         private Renderer _renderer = null;
 

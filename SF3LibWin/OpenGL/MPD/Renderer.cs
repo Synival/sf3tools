@@ -62,6 +62,7 @@ namespace SF3.Win.OpenGL.MPD {
             LightingResources lighting,
             BoundaryModelResources boundaryModels,
             CollisionResources collisionModels,
+            ActorResources actors,
             SurfaceEditorResources surfaceEditor,
             RendererOptions options,
             float cameraYaw,
@@ -112,7 +113,7 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawNormals)
                 DrawSceneObjectNormals(general, models, surfaceModel, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(general, models, surfaceModel, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix, modelDirectionsFacingCamera);
+                DrawSceneObjects(general, models, surfaceModel, actors, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix, modelDirectionsFacingCamera);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
@@ -153,6 +154,7 @@ namespace SF3.Win.OpenGL.MPD {
             GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
+            ActorResources actors,
             GradientResources gradients,
             LightingResources lighting,
             RendererOptions options,
@@ -170,6 +172,9 @@ namespace SF3.Win.OpenGL.MPD {
 
             if (options.WillDrawSurfaceModel)
                 DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
+
+            // TODO: make this an option!
+            DrawActors(general, actors);
 
             if (options.DrawModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: true);
@@ -530,6 +535,30 @@ namespace SF3.Win.OpenGL.MPD {
             }
 
             GL.Disable(EnableCap.PolygonOffsetFill);
+        }
+
+        public void DrawActors(
+            GeneralResources general,
+            ActorResources actors
+        ) {
+            if (actors == null || actors.ModelsBySpriteID == null || actors.ModelsBySpriteID.Count == 0)
+                return;
+
+            var shader = general.SolidShader;
+
+            using (shader.Use()) {
+                foreach (var actorGroup in actors.ActorsBySpriteID) {
+                    var spriteId = actorGroup.Key;
+                    var model = actors.ModelsBySpriteID[spriteId];
+
+                    foreach (var actor in actorGroup.Value) {
+                        var translationMatix = Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
+                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, translationMatix);
+                        model.Draw(shader);
+                    }
+                }
+                _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+            }
         }
 
         public void DrawSceneGradient(
