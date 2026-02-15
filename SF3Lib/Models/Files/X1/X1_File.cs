@@ -224,6 +224,8 @@ namespace SF3.Models.Files.X1 {
             );
 
             interactableTables.AddRange(discoveredInteractableTables);
+            DiscoverInteractableFunctions();
+
             npcTables.AddRange(discoveredNpcTables);
 
             tables.AddRange(discoveredInteractableTables);
@@ -273,7 +275,9 @@ namespace SF3.Models.Files.X1 {
                     func.Name = $"run_{param2Func.Name}_with0x{param1:X2}()";
                 }
             }
+        }
 
+        private void DiscoverInteractableFunctions() {
             // Add functions in the interactable table.
             foreach (var iTable in InteractableTables) {
                 var iFuncs = iTable
@@ -287,7 +291,14 @@ namespace SF3.Models.Files.X1 {
                     var d = Discoveries.GetDiscoveryAt(funcPtr);
                     if (d == null || d.Type == DiscoveredDataType.Unknown) {
                         var ids = string.Join("_", kv.Value.Select(x => ngc.GetName(x, null, x.TriggerType, new object[] { NamedValueType.EventTriggerType }) + x.ID.ToString("X2")));
-                        Discoveries.AddFunction(funcPtr, "InteractableFunction", $"interactableFuncFor{ids}()", null);
+                        var funcNameBase = $"interactableFuncFor{ids}";
+
+                        var funcName = funcNameBase + "()";
+                        int count = 1;
+                        while (Discoveries.GetFunctions().Any(x => x.Name == funcName))
+                            funcName = $"{funcNameBase}_{count++}()";
+
+                        Discoveries.AddFunction(funcPtr, "InteractableFunction", funcName, null);
                     }
                 }
             }
