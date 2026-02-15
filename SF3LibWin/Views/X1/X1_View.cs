@@ -15,8 +15,8 @@ namespace SF3.Win.Views.X1 {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            if (Model.InteractableTable != null)
-                CreateChild(new TableView("Interactables", Model.InteractableTable, ngc));
+            if (Model.InteractableTables?.Any() == true)
+                CreateChild(new TableArrayView<InteractableTable>("Interactables", Model.InteractableTables.ToArray(), ngc));
             if (Model.BattlePointersTable != null)
                 CreateChild(new TableView("Battle Pointers", Model.BattlePointersTable, ngc));
             if (Model.NpcTable != null)

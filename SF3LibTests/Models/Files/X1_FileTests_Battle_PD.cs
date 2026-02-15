@@ -116,7 +116,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
             var file = TestCase.Create();
-            var table = file.InteractableTable;
+            var table = file.InteractableTables.First();
 
             // No treasure to be found in PD, as far as I know.
             Assert.AreEqual(0, table.Length);

@@ -117,7 +117,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void TreasureTable_HasExpectedData() {
             var file = TestCase2.Create();
-            var table = file.InteractableTable;
+            var table = file.InteractableTables.First();
 
             Assert.AreEqual(    0x0013,  table[0].Trigger);
             Assert.AreEqual(      0x00,  table[0].TriggerFlags);

@@ -162,6 +162,8 @@ namespace SF3.Models.Files.X1 {
 
             // Add tables present outside of the battle tables.
             var tables = new List<ITable>();
+            var interactableTables = new List<InteractableTable>();
+
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
             if (battlePointersAddress >= 0)
@@ -169,11 +171,14 @@ namespace SF3.Models.Files.X1 {
             if (npcAddress >= 0)
                 tables.Add(NpcTable = NpcTable.Create(Data, "NPCs", npcAddress, null));
             if (treasureAddress >= 0)
-                tables.Add(InteractableTable = InteractableTable.Create(Data, "Interactables", treasureAddress, NameGetterContext, NpcTable, Discoveries));
+                interactableTables.Add(InteractableTable.Create(Data, "Default Interactables", treasureAddress, NameGetterContext, NpcTable, Discoveries));
             if (enterAddress >= 0)
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
                 tables.Add(ArrowTable = ArrowTable.Create(Data, "Arrows", arrowAddress));
+
+            tables.AddRange(interactableTables);
+            InteractableTables = interactableTables;
 
             if (characterTargetPriorityTablesAddresses >= 0) {
                 CharacterTargetPriorityTables = new CharacterTargetPriorityTable[16];
@@ -256,8 +261,8 @@ namespace SF3.Models.Files.X1 {
             }
 
             // Add functions in the interactable table.
-            if (InteractableTable != null) {
-                var iFuncs = InteractableTable
+            foreach (var iTable in InteractableTables) {
+                var iFuncs = iTable
                     .Where(x => x.Action >= RamAddress && x.Action < RamAddress + Data.Length - 3)
                     .GroupBy(x => x.Action)
                     .ToDictionary(x => x.Key, x => x.ToArray());
@@ -735,7 +740,7 @@ namespace SF3.Models.Files.X1 {
         public bool IsBattle { get; private set; }
 
         [BulkCopyRecurse]
-        public InteractableTable InteractableTable { get; private set; }
+        public IEnumerable<InteractableTable> InteractableTables { get; private set; }
         [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
         [BulkCopyRecurse]

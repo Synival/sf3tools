@@ -44,7 +44,7 @@ namespace SF3.Tests.Models.Files {
             TestCase.Run(BattleTestCases, testCase => {
                 var file = testCase.Create();
 
-                Assert.IsNotNull(file.InteractableTable);
+                Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNotNull(file.BattlePointersTable);
                 Assert.IsNull(file.NpcTable);
                 Assert.IsNull(file.EnterTable);
@@ -80,7 +80,7 @@ namespace SF3.Tests.Models.Files {
             TestCase.Run(TownTestCases, testCase => {
                 var file = testCase.Create();
 
-                Assert.IsNotNull(file.InteractableTable);
+                Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNull(file.BattlePointersTable);
                 Assert.IsNotNull(file.NpcTable);
                 Assert.IsNotNull(file.EnterTable);
