@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using SF3.Actors;
 using SF3.Win.App;
 
 namespace SF3.Editor.Forms {
@@ -11,17 +10,17 @@ namespace SF3.Editor.Forms {
             int itemIndex = 1;
 
             var registeredActorCollections = AppResources.Get().ActorCollections;
-            var activeActors = AppResources.Get().ActiveActorCollection;
+            var activeRegistration = AppResources.Get().ActiveActorCollection;
 
             foreach (var actors in registeredActorCollections) {
                 var newItem = new ToolStripMenuItem(
-                    $"&{itemIndex} - ({(actors.IsBattle ? "Battle" : "Town/Scene")}) (no name yet)",
+                    $"&{itemIndex} - {actors.File} - {actors.Actors.ActorCollectionName}",
                     null,
                     null,
                     $"tsmiResources_Actors_Item{itemIndex}"
                 );
 
-                newItem.Checked = (actors == activeActors);
+                newItem.Checked = (actors == activeRegistration);
                 newItem.Click += (s, e) => SetActiveActorsCollection(actors, newItem);
 
                 _ = items.Add(newItem);
@@ -32,7 +31,7 @@ namespace SF3.Editor.Forms {
             tsmiResources_Actors.Enabled = items.Count > 0;
         }
 
-        private void SetActiveActorsCollection(IActorCollection actors, ToolStripMenuItem item) {
+        private void SetActiveActorsCollection(AppResources.ActorCollectionRegistration actors, ToolStripMenuItem item) {
             AppResources.Get().ActiveActorCollection = actors;
 
             foreach (var iObj in tsmiResources_Actors.DropDown.Items) {

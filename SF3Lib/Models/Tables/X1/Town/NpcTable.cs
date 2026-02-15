@@ -42,6 +42,7 @@ namespace SF3.Models.Tables.X1.Town {
         }
 
         public bool IsBattle => false;
+        public string ActorCollectionName => Name;
         IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
     }
 }

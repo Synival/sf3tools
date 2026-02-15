@@ -49,7 +49,7 @@ namespace SF3.Win.OpenGL.MPD {
             if (currentActorCollection == null)
                 return;
 
-            var actorsGrouped = currentActorCollection.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
+            var actorsGrouped = currentActorCollection.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
             ModelsBySpriteID = new Dictionary<int, QuadModel>();
             ActorsBySpriteID = new Dictionary<int, ActorModelInstance[]>();
 

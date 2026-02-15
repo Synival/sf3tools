@@ -153,7 +153,7 @@ namespace SF3.Editor.Forms {
             var acf = fileLoader.Model as IActorCollectionFile;
             if (acf?.ActorCollections?.Any() == true) {
                 foreach (var ac in acf.ActorCollections)
-                    AppResources.Get().RegisterActorCollection(ac);
+                    AppResources.Get().RegisterActorCollection(fileLoader.ShortFilename, ac);
                 UpdateResourcesMenuActorCollections();
             }
 

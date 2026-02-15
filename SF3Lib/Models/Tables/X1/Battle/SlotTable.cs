@@ -7,13 +7,15 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class SlotTable : FixedSizeTable<Slot>, IActorCollection {
-        protected SlotTable(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot) : base(data, name, address, size) {
+        protected SlotTable(IByteData data, string name, int address, int size, ScenarioType scenario, MapLeaderType leader, Slot prevSlot) : base(data, name, address, size) {
             Scenario = scenario;
+            Leader   = leader;
             PrevSlot = prevSlot;
+            ActorCollectionName = $"Battle ({leader})";
         }
 
-        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, Slot prevSlot)
-            => Create(() => new SlotTable(data, name, address, size, scenario, prevSlot));
+        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, MapLeaderType leader, Slot prevSlot)
+            => Create(() => new SlotTable(data, name, address, size, scenario, leader, prevSlot));
 
         public override bool Load() {
             return Load((id, address) => {
@@ -27,9 +29,11 @@ namespace SF3.Models.Tables.X1.Battle {
         IEnumerator<IActor> IEnumerable<IActor>.GetEnumerator() => GetEnumerator();
 
         public ScenarioType Scenario { get; }
+        public MapLeaderType Leader { get; }
         public Slot PrevSlot { get; private set; }
 
         public bool IsBattle => true;
+        public string ActorCollectionName { get; }
         IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
     }
 }
