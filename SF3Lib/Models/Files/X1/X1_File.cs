@@ -217,9 +217,17 @@ namespace SF3.Models.Files.X1 {
             // Locate difficult-to-find common functions/data that are shared between X1 files.
             var searchData = Data.GetDataCopy();
             DiscoverFunctions(searchData);
-            DiscoverData(tables, searchData, out var blacksmithTables, out var discoverredInteractableTables);
-            interactableTables.AddRange(discoverredInteractableTables);
-            tables.AddRange(discoverredInteractableTables);
+            DiscoverData(tables, searchData,
+                out var blacksmithTables,
+                out var discoveredInteractableTables,
+                out var discoveredNpcTables
+            );
+
+            interactableTables.AddRange(discoveredInteractableTables);
+            npcTables.AddRange(discoveredNpcTables);
+
+            tables.AddRange(discoveredInteractableTables);
+            tables.AddRange(discoveredNpcTables);
 
             if (blacksmithTables != null) {
                 BlacksmithTables = blacksmithTables.ToArray();
@@ -306,7 +314,11 @@ namespace SF3.Models.Files.X1 {
             }
         }
 
-        private void DiscoverData(IEnumerable<ITable> table, byte[] data, out IEnumerable<BlacksmithTable> blacksmithTables, out IEnumerable<InteractableTable> interactableTables) {
+        private void DiscoverData(IEnumerable<ITable> table, byte[] data,
+            out IEnumerable<BlacksmithTable> blacksmithTables,
+            out IEnumerable<InteractableTable> interactableTables,
+            out IEnumerable<NpcTable> npcTables
+        ) {
             foreach (var t in table) {
                 if (t.IsContiguous) {
                     var type = t.GetType();
@@ -317,8 +329,9 @@ namespace SF3.Models.Files.X1 {
 
             DiscoverModelInstantiateData(data);
             DiscoverRenderThinkFuncsData(data);
-            blacksmithTables = DiscoverBlacksmithData(data);
+            blacksmithTables   = DiscoverBlacksmithData(data);
             interactableTables = DiscoverInteractableTables(data);
+            npcTables          = DiscoverNpcTables(data);
         }
 
         private void DiscoverModelInstantiateData(byte[] data) {
@@ -425,13 +438,13 @@ namespace SF3.Models.Files.X1 {
             return BlacksmithTables;
         }
 
-        private IEnumerable<InteractableTable> DiscoverInteractableTables(byte[] data) {
+        private IEnumerable<T> DiscoverTablesBeforeFunction<T>(byte[] data, int functionAddr, int startCount, Func<int /*index*/, int /*addr*/, T> tableCreator) {
             var setInteractableTableFuncPointers = new List<uint>();
             for (uint i = 0; i < data.Length - 3; i += 4)
-                if (Data.GetDouble((int) i) == 0x06070078)
+                if (Data.GetDouble((int) i) == functionAddr)
                     setInteractableTableFuncPointers.Add(i);
 
-            var tables = new List<InteractableTable>();
+            var tables = new List<T>();
 
             bool LooksLikeInteractableTable(uint offset) {
                 // Filter out any functions, pointers, etc.
@@ -447,8 +460,8 @@ namespace SF3.Models.Files.X1 {
                     var ramAddr = (uint) Data.GetDouble((int) offset);
                     var addr = (uint) (ramAddr - RamAddress);
                     if (ramAddr >= RamAddress && ramAddr < RamAddressLimit && LooksLikeInteractableTable(addr)) {
-                        int count = InteractableTables.Count() + tables.Count;
-                        tables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}{count + 1:D2} (@0x{ramAddr:X8})", (int) addr, NameGetterContext, NpcTables.FirstOrDefault(), Discoveries));
+                        int count = startCount + tables.Count;
+                        tables.Add(tableCreator(count, (int) addr));
                     }
                     else
                         break;
@@ -456,6 +469,16 @@ namespace SF3.Models.Files.X1 {
             }
 
             return tables;
+        }
+
+        private IEnumerable<InteractableTable> DiscoverInteractableTables(byte[] data) {
+            return DiscoverTablesBeforeFunction(data, 0x06070078, InteractableTables.Count(), (index, addr) =>
+                InteractableTable.Create(Data, $"{nameof(InteractableTable)}{index + 1:D2} (@0x{(addr + RamAddress):X8})", (int) addr, NameGetterContext, NpcTables.FirstOrDefault(), Discoveries));
+        }
+
+        private IEnumerable<NpcTable> DiscoverNpcTables(byte[] data) {
+            return DiscoverTablesBeforeFunction(data, 0x06070060, NpcTables.Count(), (index, addr) =>
+                NpcTable.Create(Data, $"{nameof(NpcTable)}{index + 1:D2} (@0x{(addr + RamAddress):X8})", (int) addr, null));
         }
 
         private ITable[] PopulateMapUpdateFuncTables() {
