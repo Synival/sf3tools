@@ -151,9 +151,11 @@ namespace SF3.Editor.Forms {
 
             // Register any important app-wide tables.
             var acf = fileLoader.Model as IActorCollectionFile;
-            if (acf != null)
-                foreach (var ac in acf.ActorCollections ?? [])
-                    AppResources.RetrieveAppState().RegisterActorCollection(ac);
+            if (acf?.ActorCollections?.Any() == true) {
+                foreach (var ac in acf.ActorCollections)
+                    AppResources.Get().RegisterActorCollection(ac);
+                UpdateResourcesMenuActorCollections();
+            }
 
             // Focus the tab itself.
             var tabPage = (TabPage) newControl.Parent!;
@@ -175,9 +177,11 @@ namespace SF3.Editor.Forms {
                     _loadedFiles.Remove(lf);
 
                 // Unregister any important app-wide tables.
-                if (acf != null)
-                    foreach (var ac in acf.ActorCollections ?? [])
-                        AppResources.RetrieveAppState().UnregisterActorCollection(ac);
+                if (acf?.ActorCollections?.Any() == true) {
+                    foreach (var ac in acf.ActorCollections)
+                        AppResources.Get().UnregisterActorCollection(ac);
+                    UpdateResourcesMenuActorCollections();
+                }
             };
 
             fileLoader.TitleChanged += (s, e) => {

@@ -91,6 +91,8 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiResources = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiResources_Actors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -146,7 +148,7 @@ namespace SF3.Editor.Forms {
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiResources, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -592,6 +594,20 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_EnableBlankFieldV2Controls.Size = new Size(384, 22);
             tsmiView_MPD_EnableBlankFieldV2Controls.Text = "E&XPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
             tsmiView_MPD_EnableBlankFieldV2Controls.Click += tsmiView_MPD_EnableBlankFieldV2Controls_Click;
+            // 
+            // tsmiResources
+            // 
+            tsmiResources.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiResources_Actors });
+            tsmiResources.Name = "tsmiResources";
+            tsmiResources.Size = new Size(72, 20);
+            tsmiResources.Text = "&Resources";
+            // 
+            // tsmiResources_Actors
+            // 
+            tsmiResources_Actors.Enabled = false;
+            tsmiResources_Actors.Name = "tsmiResources_Actors";
+            tsmiResources_Actors.Size = new Size(180, 22);
+            tsmiResources_Actors.Text = "Active &Actors";
             // 
             // tsmiTools
             // 
@@ -1073,5 +1089,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToMPDProject;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New_MPDProject;
+        private System.Windows.Forms.ToolStripMenuItem tsmiResources;
+        private System.Windows.Forms.ToolStripMenuItem tsmiResources_Actors;
     }
 }

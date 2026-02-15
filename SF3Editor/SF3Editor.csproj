@@ -51,6 +51,9 @@
     <Compile Update="Forms\SF3EditorForm.Help.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Update="Forms\SF3EditorForm.Resources.cs">
+      <DependentUpon>SF3EditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\ManipulateChunkDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -45,7 +45,7 @@ namespace SF3.Win.OpenGL.MPD {
         public void Update(IMPD mpdFile) {
             Reset();
 
-            var currentActorCollection = AppResources.RetrieveAppState().ActiveActorCollection;
+            var currentActorCollection = AppResources.Get().ActiveActorCollection;
             if (currentActorCollection == null)
                 return;
 
