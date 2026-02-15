@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CommonLib.SGL;
 using CommonLib.Types;
+using CommonLib.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
@@ -191,6 +192,7 @@ namespace SF3.MPD.Extensions {
         /// <summary>
         /// Updates all vertex normals whose calculation depends on a given range of vertices.
         /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
         /// <param name="vx1">Lowest X coordinate of the vertices involved in calculations.</param>
         /// <param name="vy1">Lowest Y coordinate of the vertices involved in calculations.</param>
         /// <param name="vx2">Highest X coordinate of the vertices involved in calculations.</param>
@@ -211,5 +213,37 @@ namespace SF3.MPD.Extensions {
         /// <param name="surface">Surface to operate on.</param>
         public static void UpdateVertexNormals(this IMPD_Surface surface)
             => surface.UpdateVertexNormals(0, 0, surface.Width, surface.Height);
+
+        /// <summary>
+        /// Fetches the heightmap position at a coordinate in range [0, 2048) x [0, 2048).
+        /// Input coordinates are mod'ed to simulate in-game behavior.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="x">X coordinate of height to fetch, in range [0, 2048).</param>
+        /// <param name="y">Y coordinate of height to fetch, in range [0, 2048).</param>
+        /// <returns></returns>
+        public static float GetHeightAt(this IMPD_Surface surface, float x, float y) {
+            x = MathHelpers.ActualMod(x, 2048);
+            y = MathHelpers.ActualMod(y, 2048);
+
+            var tileX = (int) (x / 32);
+            var tileY = (int) (y / 32);
+
+            var tile = surface.GetTile(tileX, tileY);
+
+            var xt = MathHelpers.ActualMod(x, 32) / 32.0f;
+            var yt = MathHelpers.ActualMod(y, 32) / 32.0f;
+
+            var hBL = tile.GetVertexHeight(CornerType.BottomLeft);
+            var hBR = tile.GetVertexHeight(CornerType.BottomRight);
+            var hTL = tile.GetVertexHeight(CornerType.TopLeft);
+            var hTR = tile.GetVertexHeight(CornerType.TopRight);
+
+            var hT = (1 - xt) * hBL + xt * hBR;
+            var hB = (1 - xt) * hTL + xt * hTR;
+            var h  = (1 - yt) * hB  + yt * hT;
+
+            return h;
+        }
     }
 }
