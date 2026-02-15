@@ -1,17 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using SF3.Actors;
+using SF3.Models.Files.CHR;
 
 namespace SF3.Win.App {
     public class AppResources {
-        public class ActorCollectionRegistration {
+        public interface IResource {
+            string DisplayName { get; }
+        }
+
+        public class ActorCollectionRegistration : IResource {
             public ActorCollectionRegistration(string file, IActorCollection actors) {
                 File   = file;
                 Actors = actors;
+                DisplayName = $"{File} - {Actors.ActorCollectionName}";
             }
 
             public readonly string File;
             public readonly IActorCollection Actors;
+            public string DisplayName { get; }
+        }
+
+        public class CHR_Registration : IResource {
+            public CHR_Registration(string file, ICHR_File chr) {
+                File = file;
+                CHR  = chr;
+            }
+
+            public readonly string File;
+            public readonly ICHR_File CHR;
+            public string DisplayName => File;
         }
 
         private static AppResources _globalAppResources = null;
@@ -42,8 +60,30 @@ namespace SF3.Win.App {
                 ActiveActorCollection = (_actorCollections.Count == 0) ? null : _actorCollections[0];
         }
 
+        public void RegisterCHR(string file, ICHR_File chr) {
+            ArgumentNullException.ThrowIfNull(chr, nameof(chr));
+            var newRegistrartion = new CHR_Registration(file, chr);
+            _chrs.Add(newRegistrartion);
+            ActiveCHR ??= newRegistrartion;
+        }
+
+        public void UnregisterCHR(ICHR_File chr) {
+            ArgumentNullException.ThrowIfNull(chr, nameof(chr));
+            var index = _chrs.FindIndex(x => x.CHR == chr);
+            if (index == -1)
+                return;
+
+            _chrs.RemoveAt(index);
+            if (ActiveCHR.CHR == chr)
+                ActiveCHR = (_chrs.Count == 0) ? null : _chrs[0];
+        }
+
         private List<ActorCollectionRegistration> _actorCollections = new List<ActorCollectionRegistration>();
         public IEnumerable<ActorCollectionRegistration> ActorCollections => _actorCollections;
         public ActorCollectionRegistration ActiveActorCollection { get; set; }
+
+        private List<CHR_Registration> _chrs = new List<CHR_Registration>();
+        public IEnumerable<CHR_Registration> CHRs => _chrs;
+        public CHR_Registration ActiveCHR { get; set; }
     }
 }

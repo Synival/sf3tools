@@ -1,40 +1,59 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using SF3.Win.App;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
         private void UpdateResourcesMenuActorCollections() {
-            var items = tsmiResources_Actors.DropDown.Items;
+            UpdateResourcesMenuSubmenu(tsmiResources_Actors, ar => ar.ActorCollections, ar => ar.ActiveActorCollection, (actors, item) => {
+                AppResources.Get().ActiveActorCollection = actors;
+                UpdateResourcesMenuSubmenuChecks(tsmiResources_Actors, item);
+            });
+        }
+
+        private void UpdateResourcesMenuCHRs() {
+            UpdateResourcesMenuSubmenu(tsmiResources_ActiveCHR, ar => ar.CHRs, ar => ar.ActiveCHR, (chr, item) => {
+                AppResources.Get().ActiveCHR = chr;
+                UpdateResourcesMenuSubmenuChecks(tsmiResources_ActiveCHR, item);
+            });
+        }
+
+        private void UpdateResourcesMenuSubmenu<T>(
+            ToolStripMenuItem parentItem,
+            Func<AppResources, IEnumerable<T>> allGetter,
+            Func<AppResources, T> activeGetter,
+            Action<T, ToolStripMenuItem> onClick
+        ) where T : class, AppResources.IResource {
+            var items = parentItem.DropDown.Items;
 
             items.Clear();
             int itemIndex = 1;
 
-            var registeredActorCollections = AppResources.Get().ActorCollections;
-            var activeRegistration = AppResources.Get().ActiveActorCollection;
+            var allResources = allGetter(AppResources.Get());
+            var activeResource = activeGetter(AppResources.Get());
 
-            foreach (var actors in registeredActorCollections) {
+            foreach (var resource in allResources) {
                 var newItem = new ToolStripMenuItem(
-                    $"&{itemIndex} - {actors.File} - {actors.Actors.ActorCollectionName}",
+                    $"&{itemIndex} - {resource.DisplayName}",
                     null,
                     null,
-                    $"tsmiResources_Actors_Item{itemIndex}"
+                    $"{parentItem.Name}_Item{itemIndex}"
                 );
 
-                newItem.Checked = (actors == activeRegistration);
-                newItem.Click += (s, e) => SetActiveActorsCollection(actors, newItem);
+                newItem.Checked = (resource == activeResource);
+                newItem.Click += (s, e) => onClick(resource, newItem);
 
                 _ = items.Add(newItem);
 
                 itemIndex++;
             }
 
-            tsmiResources_Actors.Enabled = items.Count > 0;
+            parentItem.Enabled = items.Count > 0;
         }
 
-        private void SetActiveActorsCollection(AppResources.ActorCollectionRegistration actors, ToolStripMenuItem item) {
-            AppResources.Get().ActiveActorCollection = actors;
-
-            foreach (var iObj in tsmiResources_Actors.DropDown.Items) {
+        private void UpdateResourcesMenuSubmenuChecks(ToolStripMenuItem parentItem, ToolStripMenuItem item) {
+            foreach (var iObj in parentItem.DropDown.Items) {
                 var i = (ToolStripMenuItem) iObj;
                 i.Checked = i == item;
             }

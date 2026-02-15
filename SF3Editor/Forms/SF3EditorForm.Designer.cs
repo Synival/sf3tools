@@ -143,6 +143,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiResources_ActiveCHR = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -597,7 +598,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiResources
             // 
-            tsmiResources.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiResources_Actors });
+            tsmiResources.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiResources_Actors, tsmiResources_ActiveCHR });
             tsmiResources.Name = "tsmiResources";
             tsmiResources.Size = new Size(72, 20);
             tsmiResources.Text = "&Resources";
@@ -957,6 +958,13 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiResources_ActiveCHR
+            // 
+            tsmiResources_ActiveCHR.Enabled = false;
+            tsmiResources_ActiveCHR.Name = "tsmiResources_ActiveCHR";
+            tsmiResources_ActiveCHR.Size = new Size(180, 22);
+            tsmiResources_ActiveCHR.Text = "Active &CHR";
+            // 
             // SF3EditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1091,5 +1099,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New_MPDProject;
         private System.Windows.Forms.ToolStripMenuItem tsmiResources;
         private System.Windows.Forms.ToolStripMenuItem tsmiResources_Actors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiResources_ActiveCHR;
     }
 }

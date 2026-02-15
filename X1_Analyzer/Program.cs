@@ -27,7 +27,8 @@ namespace X1_Analyzer {
         /// </summary>
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
-        private static string[] X1_Match_Func(string filename, IX1_File x1File) {
+        private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
+#if false
             var matchReports = new List<string>();
 
             var ramOffset = (x1File.Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
@@ -216,6 +217,9 @@ namespace X1_Analyzer {
 #endif
 
             return matchReports.ToArray();
+#endif
+
+            return x1File.NpcTables.Any(x => x.Rows.Any(y => y.SpriteID == 0x0C7 && (y.ActorX != 0 || y.ActorZ != 0))) ? [""] : null;
         }
 
         public static void Main(string[] args) {

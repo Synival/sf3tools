@@ -14,6 +14,7 @@ using SF3.MPD.Project;
 using System.Text;
 using SF3.MPD.Interfaces;
 using SF3.Win.App;
+using SF3.Models.Files.CHR;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -157,6 +158,12 @@ namespace SF3.Editor.Forms {
                 UpdateResourcesMenuActorCollections();
             }
 
+            var chr = fileLoader.Model as ICHR_File;
+            if (chr != null) {
+                AppResources.Get().RegisterCHR(fileLoader.ShortFilename, chr);
+                UpdateResourcesMenuCHRs();
+            }
+
             // Focus the tab itself.
             var tabPage = (TabPage) newControl.Parent!;
             var loadedFile = new LoadedFile(fileLoader, scenario, fileType, tabPage, view);
@@ -181,6 +188,11 @@ namespace SF3.Editor.Forms {
                     foreach (var ac in acf.ActorCollections)
                         AppResources.Get().UnregisterActorCollection(ac);
                     UpdateResourcesMenuActorCollections();
+                }
+
+                if (chr != null) {
+                    AppResources.Get().UnregisterCHR(chr);
+                    UpdateResourcesMenuCHRs();
                 }
             };
 
