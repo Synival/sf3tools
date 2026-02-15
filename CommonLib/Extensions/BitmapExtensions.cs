@@ -113,10 +113,10 @@ namespace CommonLib.Extensions {
             return readBytes;
         }
 
-        public static byte[] GetBitmapDataBGRA8888(this Bitmap bitmap, bool zeroIsTransparent = false) {
+        public static byte[] GetBitmapDataARGB8888(this Bitmap bitmap, bool zeroIsTransparent = false) {
             if (bitmap.PixelFormat != PixelFormat.Format32bppArgb)
                 using (bitmap = bitmap.CreateARGB8888Bitmap(zeroIsTransparent))
-                    return GetBitmapDataBGRA8888(bitmap);
+                    return GetBitmapDataARGB8888(bitmap);
 
             var readBytes = new byte[bitmap.Width * bitmap.Height * 4];
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
@@ -128,7 +128,7 @@ namespace CommonLib.Extensions {
 
         public static ushort[] Get1DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
             var outputData = new ushort[bitmap.Width * bitmap.Height];
-            var inputData = bitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
+            var inputData = bitmap.GetBitmapDataARGB8888(zeroIsTransparent);
 
             int pos = 0, outPos = 0;
             for (var y = 0; y < bitmap.Height; y++) {
@@ -155,24 +155,8 @@ namespace CommonLib.Extensions {
         public static byte[,] Get2DDataIndexed(this Bitmap bitmap)
             => bitmap.Get1DDataIndexed().To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
 
-        public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false) {
-            var outputData = new ushort[bitmap.Width, bitmap.Height];
-            var inputData = bitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
+        public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false)
+            => bitmap.Get1DDataABGR1555(zeroIsTransparent).To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
 
-            int pos = 0;
-            for (var y = 0; y < bitmap.Height; y++) {
-                for (var x = 0; x < bitmap.Width; x++) {
-                    var channels = new PixelChannels() {
-                        B = inputData[pos++],
-                        G = inputData[pos++],
-                        R = inputData[pos++],
-                        A = inputData[pos++]
-                    };
-                    outputData[x, y] = channels.ToABGR1555();
-                }
-            }
-
-            return outputData;
-        }
     }
 }

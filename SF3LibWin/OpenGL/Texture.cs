@@ -29,7 +29,7 @@ namespace SF3.Win.OpenGL {
             Update(image);
         }
 
-        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, bool minNearest = false, bool magNearest = true, bool clampToEdge = true) {
+        public Texture(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, bool minNearest = false, bool magNearest = true, bool clampToEdge = true, byte[] imageData = null) {
             Handle = GL.GenTexture();
             Width  = width;
             Height = height;
@@ -42,7 +42,7 @@ namespace SF3.Win.OpenGL {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) (magNearest ? TextureMagFilter.Nearest : TextureMagFilter.Linear));
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) (clampToEdge ? TextureWrapMode.ClampToEdge : TextureWrapMode.Repeat));
-                Update(width, height, internalFormat, format, pixelType);
+                Update(width, height, internalFormat, format, pixelType, imageData);
             }
         }
 
@@ -61,10 +61,20 @@ namespace SF3.Win.OpenGL {
             }
         }
 
-        public void Update(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType) {
+        public void Update(int width, int height, PixelInternalFormat internalFormat, OpenTK.Graphics.OpenGL.PixelFormat format, PixelType pixelType, byte[] imageData = null) {
             Width  = width;
             Height = height;
-            GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
+
+            using (Use()) {
+                if (imageData != null && pixelType == PixelType.UnsignedByte) {
+                    unsafe {
+                        fixed (byte* imageDataPtr = imageData)
+                            GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, PixelType.UnsignedByte, (nint) imageDataPtr);
+                    }
+                }
+                else
+                    GL.TexImage2D(TextureTarget.Texture2D, 0, internalFormat, width, height, 0, format, pixelType, 0);
+            }
         }
 
         public StackElement Use(MPD_TextureUnit activeTexture)

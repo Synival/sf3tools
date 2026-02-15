@@ -39,7 +39,7 @@ namespace CommonLib.Extensions {
                         break;
 
                     case PixelFormat.Format32bppArgb:
-                        newData = imageAsBitmap.GetBitmapDataBGRA8888(zeroIsTransparent);
+                        newData = imageAsBitmap.GetBitmapDataARGB8888(zeroIsTransparent);
                         break;
                 }
             }
@@ -64,12 +64,12 @@ namespace CommonLib.Extensions {
         public static byte[] GetBitmapDataIndexed(this Image image)
             => Get1DDataIndexed(image);
 
-        public static byte[] GetBitmapDataBGRA8888(this Image image, bool zeroIsTransparent = false) {
+        public static byte[] GetBitmapDataARGB8888(this Image image, bool zeroIsTransparent = false) {
             if (image is Bitmap bitmap)
-                return BitmapExtensions.GetBitmapDataBGRA8888(bitmap, zeroIsTransparent);
+                return BitmapExtensions.GetBitmapDataARGB8888(bitmap, zeroIsTransparent);
             else {
                 using (bitmap = image.CreateARGB8888Bitmap())
-                    return BitmapExtensions.GetBitmapDataBGRA8888(bitmap, zeroIsTransparent);
+                    return BitmapExtensions.GetBitmapDataARGB8888(bitmap, zeroIsTransparent);
             }
         }
 

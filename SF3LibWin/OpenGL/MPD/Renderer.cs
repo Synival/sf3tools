@@ -554,7 +554,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             var shader = general.SpriteShader;
             using (shader.Use())
-            using (actors.UnknownSpriteTexture.Use()) {
+            using (actors.Texture.Use()) {
                 foreach (var actorGroup in actors.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
                     var model  = actors.ModelsBySpriteID[spriteId];
