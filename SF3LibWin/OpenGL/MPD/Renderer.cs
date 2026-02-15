@@ -546,7 +546,9 @@ namespace SF3.Win.OpenGL.MPD {
             if (actors == null || actors.ModelsBySpriteID == null || actors.ModelsBySpriteID.Count == 0)
                 return;
 
-            var baseMatrix =
+            var baseMatrix = Matrix4.CreateScale(0.75f);
+
+            var baseRotationMatrix = baseMatrix *
                 Matrix4.CreateRotationX(cameraPitch / 180.0f * (float) Math.PI) *
                 Matrix4.CreateRotationY(cameraYaw   / 180.0f * (float) Math.PI);
 
@@ -555,11 +557,16 @@ namespace SF3.Win.OpenGL.MPD {
             using (actors.UnknownSpriteTexture.Use()) {
                 foreach (var actorGroup in actors.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
-                    var model = actors.ModelsBySpriteID[spriteId];
+                    var model  = actors.ModelsBySpriteID[spriteId];
+                    var shadow = actors.ShadowsBySpriteID[spriteId];
 
                     foreach (var actor in actorGroup.Value) {
-                        var translationMatix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
-                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, translationMatix);
+                        var modelMatrix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + 0.04f, actor.Z));
+                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
+                        shadow.Draw(shader);
+
+                        modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + 0.04f, actor.Z));
+                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
                         model.Draw(shader);
                     }
                 }

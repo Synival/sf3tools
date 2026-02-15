@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -32,20 +31,34 @@ namespace SF3.Win.OpenGL.MPD {
                 ModelsBySpriteID = null;
             }
 
+            if (ShadowsBySpriteID != null) {
+                foreach (var shadow in ShadowsBySpriteID)
+                    shadow.Value.Dispose();
+                ShadowsBySpriteID.Clear();
+                ShadowsBySpriteID = null;
+            }
+
             if (ActorsBySpriteID != null) {
                 ActorsBySpriteID.Clear();
                 ActorsBySpriteID = null;
             }
         }
 
-        private readonly Vector3[] _vertexData = [
-            new Vector3( 0.4f,  0.0f,  0.0f),
-            new Vector3( 0.4f,  0.8f,  0.0f),
-            new Vector3(-0.4f,  0.8f,  0.0f),
-            new Vector3(-0.4f,  0.0f,  0.0f),
+        private static readonly Vector3[] s_vertexData = [
+            new Vector3( 0.5f,  0.0f,  0.0f),
+            new Vector3( 0.5f,  1.0f,  0.0f),
+            new Vector3(-0.5f,  1.0f,  0.0f),
+            new Vector3(-0.5f,  0.0f,  0.0f),
         ];
 
-        private readonly float[,] s_texCoords = {
+        private static readonly Vector3[] s_shadowVertexData = [
+            new Vector3( 0.25f,  0.0f,  0.25f),
+            new Vector3( 0.25f,  0.0f, -0.25f),
+            new Vector3(-0.25f,  0.0f, -0.25f),
+            new Vector3(-0.25f,  0.0f,  0.25f),
+        ];
+
+        private static readonly float[,] s_texCoords = {
             { 1.0f, 1.0f },
             { 1.0f, 0.0f },
             { 0.0f, 0.0f },
@@ -65,26 +78,30 @@ namespace SF3.Win.OpenGL.MPD {
             var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
             var actorsGrouped = currentActorCollection.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
 
-            ModelsBySpriteID = new Dictionary<int, QuadModel>();
-            ActorsBySpriteID = new Dictionary<int, ActorModelInstance[]>();
+            ModelsBySpriteID  = new Dictionary<int, QuadModel>();
+            ShadowsBySpriteID = new Dictionary<int, QuadModel>();
+            ActorsBySpriteID  = new Dictionary<int, ActorModelInstance[]>();
 
             foreach (var actors in actorsGrouped) {
                 var spriteId = actors.Key;
-                var newQuad = new Quad(_vertexData, (spriteId < 0xC8 || spriteId > 0x185) ? _friendlyColor : _enemyColor);
-                newQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, s_texCoords));
 
-                ModelsBySpriteID[spriteId] = new QuadModel([newQuad]);
+                var spriteQuad = new Quad(s_vertexData, (spriteId < 0xC8 || spriteId > 0x185) ? _friendlyColor : _enemyColor);
+                spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, s_texCoords));
+
+                var shadowQuad = new Quad(s_shadowVertexData, new Vector4(0, 0, 0, 1));
+                shadowQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, s_texCoords));
+
+                ModelsBySpriteID[spriteId] = new QuadModel([spriteQuad]);
+                ShadowsBySpriteID[spriteId] = new QuadModel([shadowQuad]);
+
                 ActorsBySpriteID[spriteId] = actors
                     .Select(x => {
                         var actorX = x.ActorX;
-                        var actorY = x.ActorY;
                         var actorZ = x.ActorZ;
-
-                        var surfaceY = (int) mpdFile?.Surface?.GetHeightAt(actorX, actorZ) * 2;
 
                         return new ActorModelInstance() {
                             X = actorX /  32.0f + GeneralResources.ModelOffsetX,
-                            Y = Math.Max(-actorY, surfaceY) / 32.0f,
+                            Y = (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
                             Z = actorZ / -32.0f - GeneralResources.ModelOffsetZ
                         };
                     })
@@ -101,5 +118,6 @@ namespace SF3.Win.OpenGL.MPD {
 
         public Dictionary<int, ActorModelInstance[]> ActorsBySpriteID { get; private set; } = null;
         public Dictionary<int, QuadModel> ModelsBySpriteID { get; private set; } = null;
+        public Dictionary<int, QuadModel> ShadowsBySpriteID { get; private set; } = null;
     }
 }
