@@ -449,7 +449,12 @@ namespace SF3.Models.Files.X1 {
             return BlacksmithTables;
         }
 
-        private IEnumerable<T> DiscoverTablesBeforeFunction<T>(byte[] data, int functionAddr, int startCount, Func<int /*index*/, int /*addr*/, T> tableCreator) {
+        private IEnumerable<T> DiscoverTablesBeforeFunction<T>(
+            byte[] data, int functionAddr, int startCount,
+            Func<int /*index*/, int /*addr*/, T> tableCreator,
+            Predicate<uint> checker,
+            int tableItemLen
+        ) {
             var setInteractableTableFuncPointers = new List<uint>();
             for (uint i = 0; i < data.Length - 3; i += 4)
                 if (Data.GetDouble((int) i) == functionAddr)
@@ -457,20 +462,20 @@ namespace SF3.Models.Files.X1 {
 
             var tables = new List<T>();
 
-            bool LooksLikeInteractableTable(uint offset) {
+            bool LooksLikeTable(uint offset) {
                 // Filter out any functions, pointers, etc.
                 if (Discoveries.HasDiscoveryAt(offset))
                     return false;
 
-                // TODO: actually check this!!
-                return true;
+                return checker(offset);
             }
 
+            var ramAddressLimit = RamAddress + Data.Length - tableItemLen;
             foreach (var pointer in setInteractableTableFuncPointers) {
                 for (var offset = pointer - 4; offset >= 0; offset -= 4) {
                     var ramAddr = (uint) Data.GetDouble((int) offset);
                     var addr = (uint) (ramAddr - RamAddress);
-                    if (ramAddr >= RamAddress && ramAddr < RamAddressLimit && LooksLikeInteractableTable(addr)) {
+                    if (ramAddr >= RamAddress && ramAddr < ramAddressLimit && LooksLikeTable(addr)) {
                         int count = startCount + tables.Count;
                         tables.Add(tableCreator(count, (int) addr));
                     }
@@ -483,13 +488,34 @@ namespace SF3.Models.Files.X1 {
         }
 
         private IEnumerable<InteractableTable> DiscoverInteractableTables(byte[] data) {
-            return DiscoverTablesBeforeFunction(data, 0x06070078, InteractableTables.Count(), (index, addr) =>
-                InteractableTable.Create(Data, $"{nameof(InteractableTable)}{index + 1:D2} (@0x{(addr + RamAddress):X8})", (int) addr, NameGetterContext, NpcTables.FirstOrDefault(), Discoveries));
+            return DiscoverTablesBeforeFunction(data, 0x06070078, InteractableTables.Count(),
+                (index, addr) => InteractableTable.Create(Data, $"{nameof(InteractableTable)}{index + 1:D2} (@0x{(addr + RamAddress):X8})", (int) addr, NameGetterContext, NpcTables.FirstOrDefault(), Discoveries),
+                offset => {
+                    // Padding must be 0x0000.
+                    if (Data.GetWord((int) offset + 0x06) != 0)
+                        return false;
+                    return true;
+                },
+                0x0C
+            );
         }
 
         private IEnumerable<NpcTable> DiscoverNpcTables(byte[] data) {
-            return DiscoverTablesBeforeFunction(data, 0x06070060, NpcTables.Count(), (index, addr) =>
-                NpcTable.Create(Data, $"{nameof(NpcTable)}{index + 1:D2} (@0x{(addr + RamAddress):X8})", (int) addr, null));
+            return DiscoverTablesBeforeFunction(data, 0x06070060, NpcTables.Count(),
+                (index, addr) => NpcTable.Create(Data, $"{nameof(NpcTable)}{index + 1:D2} (@0x{(addr + RamAddress):X8})", (int) addr, null),
+                offset => {
+                    // Padding must be 0x00.
+                    if (Data.GetByte((int) offset + 0x17) != 0)
+                        return false;
+
+                    // Must be a valid sprite ID.
+                    if ((ushort) Data.GetWord((int) offset) >= 0x300)
+                        return false;
+
+                    return true;
+                },
+                0x18
+            );
         }
 
         private ITable[] PopulateMapUpdateFuncTables() {
