@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CommonLib.Attributes;
+using CommonLib.SGL;
 using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
@@ -115,11 +116,11 @@ namespace SF3.Models.Structs.X1.Town {
             set => ZPos = (uint) value * 65536;
         }
 
-        [TableViewModelColumn(addressField: nameof(_directionAddr), displayOrder: 9, displayName: "Direction", displayFormat: "X4")]
+        [TableViewModelColumn(addressField: nameof(_directionAddr), displayOrder: 9, displayName: "Direction")]
         [BulkCopy]
-        public int Direction {
-            get => Data.GetWord(_directionAddr);
-            set => Data.SetWord(_directionAddr, value);
+        public float ActorDirection {
+            get => Data.GetCompressedFIXED(_directionAddr).Float * 180.0f;
+            set => Data.SetCompressedFIXED(_directionAddr, new CompressedFIXED(value / 180.0f, 0));
         }
 
         [TableViewModelColumn(addressField: nameof(_interactDirectionBehaviorAddr), displayOrder: 10, displayFormat: "X2")]

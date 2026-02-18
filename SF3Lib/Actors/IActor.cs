@@ -29,5 +29,10 @@
         /// Z component of the actor position in game coordinates.
         /// </summary>
         float ActorZ { get; set; }
+
+        /// <summary>
+        /// The direction the actor is facing in degrees in range [-180, 180).
+        /// </summary>
+        float ActorDirection { get; set; }
     }
 }

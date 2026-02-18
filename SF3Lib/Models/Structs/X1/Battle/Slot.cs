@@ -1,5 +1,6 @@
 using System;
 using CommonLib.Attributes;
+using CommonLib.Utils;
 using SF3.Actors;
 using SF3.ByteData;
 using SF3.Types;
@@ -624,5 +625,33 @@ namespace SF3.Models.Structs.X1.Battle {
         public float ActorX { get => X * 32 + 16; set => X = (int) Math.Round((value - 16) / 32); }
         public float ActorY { get => 0; set {} }
         public float ActorZ { get => Z * 32 + 16; set => Z = (int) Math.Round((value - 16) / 32); }
+
+        public float ActorDirection {
+            get {
+                switch (Facing) {
+                    case SlotFacingType.South:     return -180.0f;
+                    case SlotFacingType.SouthWest: return -135.0f;
+                    case SlotFacingType.West:      return  -90.0f;
+                    case SlotFacingType.NorthWest: return  -45.0f;
+                    case SlotFacingType.North:     return    0.0f;
+                    case SlotFacingType.NorthEast: return   45.0f;
+                    case SlotFacingType.East:      return   90.0f;
+                    case SlotFacingType.SouthEast: return  135.0f;
+                    default:                       return    0.0f;
+                }
+            }
+            set {
+                value = MathHelpers.ActualMod(value + 180.0f, 360.0f) - 180.0f;
+                     if (value < -157.5f) Facing = SlotFacingType.South;
+                else if (value < -112.5f) Facing = SlotFacingType.SouthWest;
+                else if (value <  -67.5f) Facing = SlotFacingType.West;
+                else if (value <  -22.5f) Facing = SlotFacingType.NorthWest;
+                else if (value <   22.5f) Facing = SlotFacingType.North;
+                else if (value <   67.5f) Facing = SlotFacingType.NorthEast;
+                else if (value <  112.5f) Facing = SlotFacingType.East;
+                else if (value <  157.5f) Facing = SlotFacingType.SouthEast;
+                else                      Facing = SlotFacingType.South;
+            }
+        }
     }
 }
