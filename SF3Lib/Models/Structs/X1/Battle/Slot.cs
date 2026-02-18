@@ -283,9 +283,9 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetBit(_facingIsBossAddr, 5, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 12.5f, displayName: "Unknown Flag 0x40", displayGroup: "Page2")]
+        [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 12.5f, displayGroup: "Page2")]
         [BulkCopy]
-        public bool UnknownFacingFlag0x40 {
+        public bool ArrivesLater {
             get => Data.GetBit(_facingIsBossAddr, 3);
             set => Data.SetBit(_facingIsBossAddr, 3, value);
         }
