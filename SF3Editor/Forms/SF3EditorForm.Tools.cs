@@ -16,7 +16,6 @@ using static SF3.Utils.FileUtils;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
-
         /// <summary>
         /// Creates an "Open" dialog and, if a DFR file was chosen, does the following:
         /// 1. Create a ByteDiff() from the DFR file

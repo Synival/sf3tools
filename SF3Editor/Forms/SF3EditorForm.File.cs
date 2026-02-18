@@ -15,6 +15,7 @@ using System.Text;
 using SF3.MPD.Interfaces;
 using SF3.Win.App;
 using SF3.Models.Files.CHR;
+using SF3.Win.Views.MPD;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -172,7 +173,7 @@ namespace SF3.Editor.Forms {
             if (_fileContainerView.TabControl.SelectedTab != tabPage)
                 _fileContainerView.TabControl.SelectedTab = tabPage;
             else
-                FocusFileTab(tabPage);
+                OnFocusFileTab(tabPage);
 
             // Wire the view up to the file loader so it reacts to closing, OnModified changes, etc.
             fileLoader.Closed += (s, e) => {
@@ -396,7 +397,7 @@ namespace SF3.Editor.Forms {
         }
         private ScenarioType? _openScenario = null;
 
-        private void FocusFileTab(TabPage? tabPage) {
+        private void OnFocusFileTab(TabPage? tabPage) {
             var file = (tabPage == null) ? null : _loadedFiles.FirstOrDefault(x => x.TabPage == tabPage);
             if (SelectedFile == file)
                 return;
@@ -432,6 +433,9 @@ namespace SF3.Editor.Forms {
             var mpdFile = (isIMPD && file?.Loader?.Model != null) ? (IMPD) file.Loader.Model : null;
             tsmiMPD_Textures.Enabled = (fileType == SF3FileType.MPD);
             tsmiMPD_Chunks.Enabled   = (fileType == SF3FileType.MPD);
+
+            // Little hack to force the MPD_View to update actors wheneve we change files.
+            (file?.View?.ActualView as MPD_View)?.ViewerView?.ViewerGLControl?.InvalidateActors();
 
             UpdateMPD_ModelSwitchGroupsMenu(mpdFile);
         }

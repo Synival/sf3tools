@@ -48,9 +48,7 @@ namespace SF3.Win.Controls {
 
             _appState.RenderOnBlackBackgroundChanged  += (s, e) => Invalidate();
             _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
-            _appState.ViewerRotateSpritesUpChanged    += (s, e) => Invalidate();
-
-            _appState.ViewerRotateSpritesUpChanged += (s, e) => _renderer.InvalidateSpriteMatrices(_models);
+            _appState.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); Invalidate(); };
 
             var resources = AppResources.Get();
             resources.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };

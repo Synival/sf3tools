@@ -38,7 +38,7 @@ namespace SF3.Editor.Forms {
             Controls.Add(fileContainerControl);
             fileContainerControl.Dock = DockStyle.Fill;
             fileContainerControl.BringToFront(); // If this isn't in the front, the menu is placed behind it (eep)
-            fileContainerControl.Selected += (s, e) => FocusFileTab(e.TabPage);
+            fileContainerControl.Selected += (s, e) => OnFocusFileTab(e.TabPage);
 
             // Store the original title in a few different forms. It's going to be changing around.
             _baseTitle = Text;
