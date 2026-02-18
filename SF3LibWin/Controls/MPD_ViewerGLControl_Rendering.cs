@@ -553,11 +553,11 @@ namespace SF3.Win.Controls {
             set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
         }
 
-        private bool _tileSelectedNeedsUpdate = false;
-        private bool _actorsNeedUpdate = false;
-        private bool _lightingTextureNeedsUpdate = false;
-        private bool _lightPositionNeedsUpdate = false;
-        private bool _modelsNeedUpdate  = false;
+        private bool _tileSelectedNeedsUpdate    = false;
+        private bool _actorsNeedUpdate           = true;
+        private bool _lightingTextureNeedsUpdate = true;
+        private bool _lightPositionNeedsUpdate   = true;
+        private bool _modelsNeedUpdate           = true;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
