@@ -558,6 +558,7 @@ namespace SF3.Win.OpenGL.MPD {
             using (actors.Texture.Use()) {
                 // Render shadows first.
                 _ = shader.UpdateUniform("direction", 0.0f);
+                _ = shader.UpdateUniform("cameraDistAdjust", 0.25f);
                 foreach (var actorGroup in actors.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
                     var shadow = actors.ShadowsBySpriteID[spriteId];
@@ -570,12 +571,13 @@ namespace SF3.Win.OpenGL.MPD {
                 }
 
                 // Now render sprites.
+                _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
                 foreach (var actorGroup in actors.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
                     var model  = actors.ModelsBySpriteID[spriteId];
 
                     foreach (var actor in actorGroup.Value) {
-                        var modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
+                        var modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + actor.VerticalOffset, actor.Z));
                         _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
                         // Convert facing direction (0=north, 90=east, ...) to shader direction (0=south, 0.25=east, ...)
                         _ = shader.UpdateUniform("direction", MathHelpers.ActualMod((180.0f - actor.Direction - cameraYaw) / 360.0f, 1.0f));

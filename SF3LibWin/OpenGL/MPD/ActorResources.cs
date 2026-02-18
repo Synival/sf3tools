@@ -136,6 +136,7 @@ namespace SF3.Win.OpenGL.MPD {
                             x: actorX /  32.0f + GeneralResources.ModelOffsetX,
                             y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
                             z: actorZ / -32.0f - GeneralResources.ModelOffsetZ,
+                            verticalOffset: spriteTexInfo.VerticalOffset,
                             x.ActorDirection
                         );
                     })
@@ -152,7 +153,7 @@ namespace SF3.Win.OpenGL.MPD {
             };
 
             TexInfoBySpriteID = new Dictionary<int, SpriteTexInfo>() {
-                { -1, new SpriteTexInfo(0, 0, unknownImage.Width, unknownImage.Height, SpriteDirectionCountType.OneNoFlip, 1, 1, 1) }
+                { -1, new SpriteTexInfo(0, 0, unknownImage.Width, unknownImage.Height, SpriteDirectionCountType.OneNoFlip, 1, 1, 1, 0.1f) }
             };
 
             // Build a texture atlas with all frames.
@@ -206,7 +207,8 @@ namespace SF3.Win.OpenGL.MPD {
                     TexInfoBySpriteID[spriteId] = new SpriteTexInfo(0, offsetY, frameWidth, frameHeight, aniCommand.Directions,
                         frameWidth  / 32.0f * sprite.Header.Scale / 0x10000,
                         frameHeight / 32.0f * sprite.Header.Scale / 0x10000,
-                        sprite.Header.CollisionShadowDiameter / 32.0f
+                        sprite.Header.CollisionShadowDiameter / 32.0f,
+                        sprite.Header.VerticalOffset / -32.0f
                     );
 
                     offsetY += frameHeight;
@@ -245,19 +247,21 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public class ActorModelInstance {
-            public ActorModelInstance(float x, float y, float z, float direction) {
+            public ActorModelInstance(float x, float y, float z, float verticalOffset, float direction) {
                 X = x;
                 Y = y;
                 Z = z;
+                VerticalOffset = verticalOffset;
                 Direction = direction;
             }
 
             public readonly float X, Y, Z;
+            public readonly float VerticalOffset;
             public readonly float Direction;
         }
 
         public class SpriteTexInfo {
-            public SpriteTexInfo(float u, float v, float width, float height, SpriteDirectionCountType directions, float scaleWidth, float scaleHeight, float collision) {
+            public SpriteTexInfo(float u, float v, float width, float height, SpriteDirectionCountType directions, float scaleWidth, float scaleHeight, float collision, float verticalOffset) {
                 U = u;
                 V = v;
                 Width  = width;
@@ -266,12 +270,14 @@ namespace SF3.Win.OpenGL.MPD {
                 ScaleWidth  = scaleWidth;
                 ScaleHeight = scaleHeight;
                 CollisionShadowSize = collision;
+                VerticalOffset = verticalOffset;
             }
 
             public float U, V;
             public float Width, Height;
             public SpriteDirectionCountType Directions;
             public float ScaleWidth, ScaleHeight, CollisionShadowSize;
+            public float VerticalOffset;
         }
 
         public Texture Texture { get; private set; }

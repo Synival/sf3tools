@@ -12,6 +12,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 uniform float direction;
+uniform float cameraDistAdjust;
 
 out vec4 colorFrag;
 out vec2 texCoord0Frag;
@@ -20,7 +21,7 @@ void main() {
     // Render the sprite as if it's closer to the camera by 0.5 units.
     // This will appear in the same place, but write to the depth buffer differently.
     vec4 viewPos = view * model * vec4(position, 1.0);
-    viewPos.z += 0.5;
+    viewPos.z += cameraDistAdjust;
     gl_Position = projection * viewPos;
 
     colorFrag = color;
