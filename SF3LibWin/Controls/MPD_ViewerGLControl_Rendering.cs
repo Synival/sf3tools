@@ -50,9 +50,9 @@ namespace SF3.Win.Controls {
             _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
             _appState.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); Invalidate(); };
 
-            var resources = AppResources.Get();
-            resources.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };
-            resources.ActiveCHRChanged             += (s, e) => { InvalidateActors(); };
+            var scene = AppScene.Get();
+            scene.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };
+            scene.ActiveCHRChanged             += (s, e) => { InvalidateActors(); };
         }
 
         /// <summary>

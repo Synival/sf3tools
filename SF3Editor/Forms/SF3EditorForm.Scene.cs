@@ -5,33 +5,33 @@ using SF3.Win.App;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
-        private void UpdateResourcesMenuActorCollections() {
-            UpdateResourcesMenuSubmenu(tsmiResources_Actors, ar => ar.ActorCollections, ar => ar.ActiveActorCollection, (actors, item) => {
-                AppResources.Get().ActiveActorCollection = actors;
-                UpdateResourcesMenuSubmenuChecks(tsmiResources_Actors, item);
+        private void UpdateSceneMenuActorCollections() {
+            UpdateSceneMenuSubmenu(tsmiScene_Actors, ar => ar.ActorCollections, ar => ar.ActiveActorCollection, (actors, item) => {
+                AppScene.Get().ActiveActorCollection = actors;
+                UpdateSceneMenuSubmenuChecks(tsmiScene_Actors, item);
             });
         }
 
-        private void UpdateResourcesMenuCHRs() {
-            UpdateResourcesMenuSubmenu(tsmiResources_ActiveCHR, ar => ar.CHRs, ar => ar.ActiveCHR, (chr, item) => {
-                AppResources.Get().ActiveCHR = chr;
-                UpdateResourcesMenuSubmenuChecks(tsmiResources_ActiveCHR, item);
+        private void UpdateSceneMenuCHRs() {
+            UpdateSceneMenuSubmenu(tsmiScene_ActiveCHR, ar => ar.CHRs, ar => ar.ActiveCHR, (chr, item) => {
+                AppScene.Get().ActiveCHR = chr;
+                UpdateSceneMenuSubmenuChecks(tsmiScene_ActiveCHR, item);
             });
         }
 
-        private void UpdateResourcesMenuSubmenu<T>(
+        private void UpdateSceneMenuSubmenu<T>(
             ToolStripMenuItem parentItem,
-            Func<AppResources, IEnumerable<T>> allGetter,
-            Func<AppResources, T> activeGetter,
+            Func<AppScene, IEnumerable<T>> allGetter,
+            Func<AppScene, T> activeGetter,
             Action<T, ToolStripMenuItem> onClick
-        ) where T : class, AppResources.IResource {
+        ) where T : class, AppScene.IResource {
             var items = parentItem.DropDown.Items;
 
             items.Clear();
             int itemIndex = 1;
 
-            var allResources = allGetter(AppResources.Get());
-            var activeResource = activeGetter(AppResources.Get());
+            var allResources = allGetter(AppScene.Get());
+            var activeResource = activeGetter(AppScene.Get());
 
             foreach (var resource in allResources) {
                 var newItem = new ToolStripMenuItem(
@@ -52,7 +52,7 @@ namespace SF3.Editor.Forms {
             parentItem.Enabled = items.Count > 0;
         }
 
-        private void UpdateResourcesMenuSubmenuChecks(ToolStripMenuItem parentItem, ToolStripMenuItem item) {
+        private void UpdateSceneMenuSubmenuChecks(ToolStripMenuItem parentItem, ToolStripMenuItem item) {
             foreach (var iObj in parentItem.DropDown.Items) {
                 var i = (ToolStripMenuItem) iObj;
                 i.Checked = i == item;

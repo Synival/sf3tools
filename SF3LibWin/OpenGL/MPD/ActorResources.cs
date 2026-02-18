@@ -66,7 +66,7 @@ namespace SF3.Win.OpenGL.MPD {
         public void Update(IMPD mpdFile) {
             Reset();
 
-            var currentActorCollection = AppResources.Get().ActiveActorCollection;
+            var currentActorCollection = AppScene.Get().ActiveActorCollection;
             if (currentActorCollection == null)
                 return;
 
@@ -156,7 +156,7 @@ namespace SF3.Win.OpenGL.MPD {
             };
 
             // Build a texture atlas with all frames.
-            var sprites = AppResources.Get().ActiveCHR?.CHR?.SpriteTable;
+            var sprites = AppScene.Get().ActiveCHR?.CHR?.SpriteTable;
             int offsetY = unknownImage.Height;
             if (sprites != null) {
                 foreach (var spriteId in spriteIds) {

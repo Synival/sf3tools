@@ -4,7 +4,7 @@ using SF3.Actors;
 using SF3.Models.Files.CHR;
 
 namespace SF3.Win.App {
-    public class AppResources {
+    public class AppScene {
         public interface IResource {
             string DisplayName { get; }
         }
@@ -32,15 +32,15 @@ namespace SF3.Win.App {
             public string DisplayName => File;
         }
 
-        private static AppResources _globalAppResources = null;
+        private static AppScene _globalAppResources = null;
 
-        public static AppResources Get() {
+        public static AppScene Get() {
             if (_globalAppResources == null)
-                _globalAppResources = new AppResources();
+                _globalAppResources = new AppScene();
             return _globalAppResources;
         }
 
-        private AppResources() {}
+        private AppScene() {}
 
         public void RegisterActorCollection(string file, IActorCollection actors) {
             ArgumentNullException.ThrowIfNull(actors, nameof(actors));

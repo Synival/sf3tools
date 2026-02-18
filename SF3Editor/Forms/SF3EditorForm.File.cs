@@ -155,14 +155,14 @@ namespace SF3.Editor.Forms {
             var acf = fileLoader.Model as IActorCollectionFile;
             if (acf?.ActorCollections?.Any() == true) {
                 foreach (var ac in acf.ActorCollections)
-                    AppResources.Get().RegisterActorCollection(fileLoader.ShortFilename, ac);
-                UpdateResourcesMenuActorCollections();
+                    AppScene.Get().RegisterActorCollection(fileLoader.ShortFilename, ac);
+                UpdateSceneMenuActorCollections();
             }
 
             var chr = fileLoader.Model as ICHR_File;
             if (chr != null) {
-                AppResources.Get().RegisterCHR(fileLoader.ShortFilename, chr);
-                UpdateResourcesMenuCHRs();
+                AppScene.Get().RegisterCHR(fileLoader.ShortFilename, chr);
+                UpdateSceneMenuCHRs();
             }
 
             // Focus the tab itself.
@@ -187,13 +187,13 @@ namespace SF3.Editor.Forms {
                 // Unregister any important app-wide tables.
                 if (acf?.ActorCollections?.Any() == true) {
                     foreach (var ac in acf.ActorCollections)
-                        AppResources.Get().UnregisterActorCollection(ac);
-                    UpdateResourcesMenuActorCollections();
+                        AppScene.Get().UnregisterActorCollection(ac);
+                    UpdateSceneMenuActorCollections();
                 }
 
                 if (chr != null) {
-                    AppResources.Get().UnregisterCHR(chr);
-                    UpdateResourcesMenuCHRs();
+                    AppScene.Get().UnregisterCHR(chr);
+                    UpdateSceneMenuCHRs();
                 }
             };
 
