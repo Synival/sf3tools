@@ -139,9 +139,7 @@ namespace SF3.Win.Controls {
                     _surfaceModel?.Invalidate();
                 }
 
-                InvalidateLightPosition(invalidatePainter: false);
-                InvalidateLightingTexture(invalidatePainter: false);
-                Invalidate();
+                InvalidateAllResources();
             }
         }
 

@@ -35,19 +35,15 @@ namespace SF3.Win.Controls {
 
             _appState.ViewerApplyShadowTagsChanged += (s, e) => {
                 if (_models != null) {
-                    MakeCurrent();
                     _models.ApplyShadowTags = _appState.ViewerApplyShadowTags;
-                    _models.Update(MPD_File);
+                    InvalidateModels();
                 }
-                Invalidate();
             };
             _appState.ViewerApplyHideTagsChanged += (s, e) => {
                 if (_models != null) {
-                    MakeCurrent();
                     _models.ApplyHideTags = _appState.ViewerApplyHideTags;
-                    _models.Update(MPD_File);
+                    InvalidateModels();
                 }
-                Invalidate();
             };
 
             _appState.RenderOnBlackBackgroundChanged  += (s, e) => Invalidate();
@@ -107,9 +103,7 @@ namespace SF3.Win.Controls {
 
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
-
-            InvalidateLightingTexture(invalidatePainter: false);
-            InvalidateLightPosition(invalidatePainter: false);
+            UpdateProjectionMatrices();
 
             using (_general.ObjectShader.Use()) {
                 _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
@@ -122,6 +116,8 @@ namespace SF3.Win.Controls {
                     shader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
                 }
             }
+
+            UpdateInvalidatedResources();
         }
 
         private void OnDisposeRendering() {
@@ -265,10 +261,6 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateInvalidatedResources() {
-            foreach (var block in _surfaceModel.Blocks)
-                if (block.NeedsUpdate)
-                    block.Update(MPD_File);
-
             if (_tileSelectedNeedsUpdate) {
                 _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
                 _tileSelectedNeedsUpdate = false;
@@ -307,6 +299,10 @@ namespace SF3.Win.Controls {
                 _surfaceModel?.Update(MPD_File);
                 _surfaceModelNeedsUpdate = false;
             }
+
+            foreach (var block in _surfaceModel.Blocks)
+                if (block.NeedsUpdate)
+                    block.Update(MPD_File);
 
             if (_planesNeedUpdate) {
                 _groundModel?.Update(MPD_File);
@@ -433,6 +429,7 @@ namespace SF3.Win.Controls {
             InvalidateLightingTexture(false);
             InvalidateLightPosition(false);
             InvalidateModels(false);
+            InvalidateSurfaceModel(false);
             InvalidatePlanes(false);
 
             if (invalidatePainter)
