@@ -39,9 +39,11 @@ namespace SF3.Win.OpenGL.MPD {
             Texture?.Dispose();
             Texture = null;
 
+            TexInfoBySpriteID?.Clear();
+            TexInfoBySpriteID = null;
         }
 
-        private static readonly Vector3[] s_vertexData = [
+        private static readonly Vector3[] c_spriteVertexData = [
             new Vector3( 0.5f,  0.0f,  0.0f),
             new Vector3( 0.5f,  1.0f,  0.0f),
             new Vector3(-0.5f,  1.0f,  0.0f),
@@ -54,13 +56,6 @@ namespace SF3.Win.OpenGL.MPD {
             new Vector3(-0.25f,  0.0f, -0.25f),
             new Vector3(-0.25f,  0.0f,  0.25f),
         ];
-
-        private static readonly float[,] c_texCoords = {
-            { 1.0f, 1.0f },
-            { 1.0f, 0.0f },
-            { 0.0f, 0.0f },
-            { 0.0f, 1.0f },
-        };
 
         private static readonly Vector4 c_enemyColor    = new(1, 0, 0, 1);
         private static readonly Vector4 c_friendlyColor = new(0, 1, 0, 1);
@@ -83,14 +78,38 @@ namespace SF3.Win.OpenGL.MPD {
             ShadowsBySpriteID = new Dictionary<int, QuadModel>();
             ActorsBySpriteID  = new Dictionary<int, ActorModelInstance[]>();
 
+            var unknownTexInfo = TexInfoBySpriteID[-1];
+            var shadowTexCoords = new float[,] {
+                { unknownTexInfo.U + unknownTexInfo.Width, unknownTexInfo.V + unknownTexInfo.Height },
+                { unknownTexInfo.U + unknownTexInfo.Width, unknownTexInfo.V                         },
+                { unknownTexInfo.U,                        unknownTexInfo.V                         },
+                { unknownTexInfo.U,                        unknownTexInfo.V + unknownTexInfo.Height },
+            };
+
             foreach (var actors in actorsGrouped) {
                 var spriteId = actors.Key;
+                var spriteTexInfo = TexInfoBySpriteID.TryGetValue(spriteId, out var texInfoOut) ? texInfoOut : TexInfoBySpriteID[-1];
 
-                var spriteQuad = new Quad(s_vertexData, c_white); // (spriteId < 0xC8 || spriteId > 0x185) ? c_friendlyColor : c_enemyColor);
-                spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, c_texCoords));
+                var spriteQuad = new Quad(c_spriteVertexData
+                    .Select(x => new Vector3(
+                        x.X * spriteTexInfo.ScaleWidth,
+                        x.Y * spriteTexInfo.ScaleHeight,
+                        x.Z * spriteTexInfo.ScaleWidth
+                    )).ToArray(),
+                    c_white
+                );
 
-                var shadowQuad = new Quad(c_shadowVertexData, new Vector4(0, 0, 0, 1));
-                shadowQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, c_texCoords));
+                var spriteTexCoords = new float[,] {
+                    { spriteTexInfo.U + spriteTexInfo.Width, spriteTexInfo.V + spriteTexInfo.Height },
+                    { spriteTexInfo.U + spriteTexInfo.Width, spriteTexInfo.V                        },
+                    { spriteTexInfo.U,                       spriteTexInfo.V                        },
+                    { spriteTexInfo.U,                       spriteTexInfo.V + spriteTexInfo.Height },
+                };
+
+                spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, spriteTexCoords));
+
+                var shadowQuad = new Quad(c_shadowVertexData.Select(x => x * spriteTexInfo.CollisionShadowSize).ToArray(), new Vector4(0, 0, 0, 1));
+                shadowQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, shadowTexCoords));
 
                 ModelsBySpriteID[spriteId] = new QuadModel([spriteQuad]);
                 ShadowsBySpriteID[spriteId] = new QuadModel([shadowQuad]);
@@ -100,11 +119,11 @@ namespace SF3.Win.OpenGL.MPD {
                         var actorX = x.ActorX;
                         var actorZ = x.ActorZ;
 
-                        return new ActorModelInstance() {
-                            X = actorX /  32.0f + GeneralResources.ModelOffsetX,
-                            Y = (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
-                            Z = actorZ / -32.0f - GeneralResources.ModelOffsetZ
-                        };
+                        return new ActorModelInstance(
+                            x: actorX /  32.0f + GeneralResources.ModelOffsetX,
+                            y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
+                            z: actorZ / -32.0f - GeneralResources.ModelOffsetZ
+                        );
                     })
                     .ToArray();
             }
@@ -113,12 +132,18 @@ namespace SF3.Win.OpenGL.MPD {
         private void BuildTexture(int[] spriteIds) {
             // Always include the 'unknown sprite' image.
             var unknownImage = Resources.UnknownSpriteBmp;
+
             var texBuffers = new List<uint[,]> {
-                Resources.UnknownSpriteBmp.GetBitmapDataARGB8888().ToUInts().To2DArrayColumnMajor(unknownImage.Width, unknownImage.Height)
+                unknownImage.GetBitmapDataARGB8888().ToUInts().To2DArrayColumnMajor(unknownImage.Width, unknownImage.Height)
+            };
+
+            TexInfoBySpriteID = new Dictionary<int, SpriteTexInfo>() {
+                { -1, new SpriteTexInfo(0, 0, unknownImage.Width, unknownImage.Height, SpriteDirectionCountType.OneNoFlip, 1, 1, 1) }
             };
 
             // Build a texture atlas with all frames.
             var sprites = AppResources.Get().ActiveCHR?.CHR?.SpriteTable;
+            int offsetY = unknownImage.Height;
             if (sprites != null) {
                 foreach (var spriteId in spriteIds) {
                     var sprite = sprites.FirstOrDefault(x => x.Header.SpriteID == spriteId);
@@ -138,7 +163,7 @@ namespace SF3.Win.OpenGL.MPD {
                         continue;
 
                     // Get the frame used for that command.
-                    var firstFrameIndex = aniCommand.Parameter;
+                    var firstFrameIndex = aniCommand.Command;
                     if (firstFrameIndex >= sprite.FrameTable.Length)
                         continue;
 
@@ -163,14 +188,29 @@ namespace SF3.Win.OpenGL.MPD {
                     }
 
                     texBuffers.Add(texBuf);
+
+                    TexInfoBySpriteID[spriteId] = new SpriteTexInfo(0, offsetY, frameWidth, frameHeight, aniCommand.Directions,
+                        frameWidth  / 32.0f * sprite.Header.Scale / 0x10000,
+                        frameHeight / 32.0f * sprite.Header.Scale / 0x10000,
+                        sprite.Header.CollisionShadowDiameter / 32.0f
+                    );
+
+                    offsetY += frameHeight;
                 }
             }
 
             var width  = texBuffers.Max(x => x.GetLength(0));
             var height = texBuffers.Sum(x => x.GetLength(1));
 
+            foreach (var texInfo in TexInfoBySpriteID.Values) {
+                texInfo.U /= width;
+                texInfo.V /= height;
+                texInfo.Width /= width;
+                texInfo.Height /= height;
+            }
+
             var textureData = new byte[width * height * 4];
-            int offsetY = 0;
+            offsetY = 0;
             foreach (var texBuf in texBuffers) {
                 var bufWidth  = texBuf.GetLength(0);
                 var bufHeight = texBuf.GetLength(1);
@@ -190,11 +230,36 @@ namespace SF3.Win.OpenGL.MPD {
             Texture = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Bgra, PixelType.UnsignedByte, imageData: textureData);
         }
 
-        public struct ActorModelInstance {
-            public float X, Y, Z;
+        public class ActorModelInstance {
+            public ActorModelInstance(float x, float y, float z) {
+                X = x;
+                Y = y;
+                Z = z;
+            }
+
+            public readonly float X, Y, Z;
+        }
+
+        public class SpriteTexInfo {
+            public SpriteTexInfo(float u, float v, float width, float height, SpriteDirectionCountType directions, float scaleWidth, float scaleHeight, float collision) {
+                U = u;
+                V = v;
+                Width  = width;
+                Height = height;
+                Directions = directions;
+                ScaleWidth  = scaleWidth;
+                ScaleHeight = scaleHeight;
+                CollisionShadowSize = collision;
+            }
+
+            public float U, V;
+            public float Width, Height;
+            public SpriteDirectionCountType Directions;
+            public float ScaleWidth, ScaleHeight, CollisionShadowSize;
         }
 
         public Texture Texture { get; private set; }
+        private Dictionary<int, SpriteTexInfo> TexInfoBySpriteID = null;
 
         public Dictionary<int, ActorModelInstance[]> ActorsBySpriteID { get; private set; } = null;
         public Dictionary<int, QuadModel> ModelsBySpriteID { get; private set; } = null;
