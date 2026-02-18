@@ -274,9 +274,9 @@ namespace SF3.Win.Controls {
                 _tileSelectedNeedsUpdate = false;
             }
 
-            if (_actorsNeedsUpdate) {
+            if (_actorsNeedUpdate) {
                 _actorResources.Update(MPD_File);
-                _actorsNeedsUpdate = false;
+                _actorsNeedUpdate = false;
             }
 
             if (_lightingTextureNeedsUpdate) {
@@ -292,6 +292,18 @@ namespace SF3.Win.Controls {
                 }
                 _lightPositionNeedsUpdate = false;
             }
+
+            if (_modelsNeedUpdate) {
+                _models?.Update(MPD_File);
+                _surfaceModel?.Update(MPD_File);
+                _groundModel?.Update(MPD_File);
+                _skyModel?.Update(MPD_File);
+                _gradients?.Update(MPD_File);
+                _boundaryModels?.Update(MPD_File);
+                _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
+
+                _modelsNeedUpdate = false;
+            }
         }
 
         private void OnFrameTickRendering(float deltaInMs) {
@@ -306,24 +318,6 @@ namespace SF3.Win.Controls {
                 _tileSelectedNeedsUpdate = true;
                 Invalidate();
             }
-        }
-
-        public void UpdateModels() {
-            _renderer.InvalidateModelMatrices();
-
-            MakeCurrent();
-            _models?.Update(MPD_File);
-            _surfaceModel?.Update(MPD_File);
-            _groundModel?.Update(MPD_File);
-            _skyModel?.Update(MPD_File);
-            _gradients?.Update(MPD_File);
-            _boundaryModels?.Update(MPD_File);
-            _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
-            _actorResources?.Update(MPD_File);
-
-            _actorsNeedsUpdate = false;
-
-            Invalidate();
         }
 
         private void UpdateSelectFramebuffer() {
@@ -418,9 +412,20 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
-        public void InvalidateActors         (bool invalidatePainter = true) => InvalidateResource(ref _actorsNeedsUpdate,          invalidatePainter);
+        public void InvalidateActors         (bool invalidatePainter = true) => InvalidateResource(ref _actorsNeedUpdate,          invalidatePainter);
         public void InvalidateLightingTexture(bool invalidatePainter = true) => InvalidateResource(ref _lightingTextureNeedsUpdate, invalidatePainter);
         public void InvalidateLightPosition  (bool invalidatePainter = true) => InvalidateResource(ref _lightPositionNeedsUpdate,   invalidatePainter);
+
+        public void InvalidateModels(bool invalidatePainter = true) {
+            _renderer.InvalidateModelMatrices();
+            _modelsNeedUpdate = true;
+
+            // TODO: we really shouldn't do this here, but at the moment, this method is a catch-all to invalidate the entire scene.
+            InvalidateActors(invalidatePainter: false);
+
+            if (invalidatePainter)
+                Invalidate();
+        }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -549,9 +554,10 @@ namespace SF3.Win.Controls {
         }
 
         private bool _tileSelectedNeedsUpdate = false;
-        private bool _actorsNeedsUpdate = false;
+        private bool _actorsNeedUpdate = false;
         private bool _lightingTextureNeedsUpdate = false;
         private bool _lightPositionNeedsUpdate = false;
+        private bool _modelsNeedUpdate  = false;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;

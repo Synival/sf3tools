@@ -169,7 +169,7 @@ namespace SF3.Win.Controls {
                     // TODO: UpdatePlaneImages() shouldn't be necessary!!
                     mpdFile.UpdatePlaneImages();
                 }
-                GLControl.UpdateModels();
+                GLControl.InvalidateModels();
             }
         }
 
@@ -258,9 +258,10 @@ namespace SF3.Win.Controls {
 
         // TODO: big dumb hack!!!
         private void tsbFixTiles_Click(object sender, EventArgs e) {
-            if (MPD_File != null)
+            if (MPD_File != null) {
                 FieldEditing.FieldEditing.UpdateTileTextures(MPD_File.Surface, true);
-            GLControl.UpdateModels();
+                GLControl.InvalidateModels();
+            }
         }
     }
 }
