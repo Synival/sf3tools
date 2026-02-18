@@ -285,7 +285,7 @@ namespace SF3.Editor.Forms {
                 mpdFile.Surface.UpdateVertexNormals();
 
                 var mpdView = (MPD_View) (SelectedFile.View.ActualView);
-                mpdView.ViewerView?.ViewerGLControl?.InvalidateModels();
+                mpdView.ViewerView?.ViewerGLControl?.InvalidateSurfaceModel();
             }
         }
 

@@ -294,15 +294,24 @@ namespace SF3.Win.Controls {
             }
 
             if (_modelsNeedUpdate) {
+                _renderer.InvalidateModelMatrices();
                 _models?.Update(MPD_File);
-                _surfaceModel?.Update(MPD_File);
-                _groundModel?.Update(MPD_File);
-                _skyModel?.Update(MPD_File);
                 _gradients?.Update(MPD_File);
                 _boundaryModels?.Update(MPD_File);
                 _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
 
                 _modelsNeedUpdate = false;
+            }
+
+            if (_surfaceModelNeedsUpdate) {
+                _surfaceModel?.Update(MPD_File);
+                _surfaceModelNeedsUpdate = false;
+            }
+
+            if (_planesNeedUpdate) {
+                _groundModel?.Update(MPD_File);
+                _skyModel?.Update(MPD_File);
+                _planesNeedUpdate = false;
             }
         }
 
@@ -412,26 +421,22 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
-        public void InvalidateActors         (bool invalidatePainter = true) => InvalidateResource(ref _actorsNeedUpdate,          invalidatePainter);
+        public void InvalidateActors         (bool invalidatePainter = true) => InvalidateResource(ref _actorsNeedUpdate,           invalidatePainter);
         public void InvalidateLightingTexture(bool invalidatePainter = true) => InvalidateResource(ref _lightingTextureNeedsUpdate, invalidatePainter);
         public void InvalidateLightPosition  (bool invalidatePainter = true) => InvalidateResource(ref _lightPositionNeedsUpdate,   invalidatePainter);
-
-        public void InvalidateModels(bool invalidatePainter = true) {
-            _renderer.InvalidateModelMatrices();
-            _modelsNeedUpdate = true;
-
-            // TODO: we really shouldn't do this here, but at the moment, this method is a catch-all to invalidate the entire scene.
-            InvalidateActors(invalidatePainter: false);
-
-            if (invalidatePainter)
-                Invalidate();
-        }
+        public void InvalidateModels         (bool invalidatePainter = true) => InvalidateResource(ref _modelsNeedUpdate,           invalidatePainter);
+        public void InvalidateSurfaceModel   (bool invalidatePainter = true) => InvalidateResource(ref _surfaceModelNeedsUpdate,    invalidatePainter);
+        public void InvalidatePlanes         (bool invalidatePainter = true) => InvalidateResource(ref _planesNeedUpdate,           invalidatePainter);
 
         public void InvalidateAllResources(bool invalidatePainter = true) {
             InvalidateActors(false);
             InvalidateLightingTexture(false);
             InvalidateLightPosition(false);
             InvalidateModels(false);
+            InvalidatePlanes(false);
+
+            if (invalidatePainter)
+                Invalidate();
         }
 
         [Browsable(false)]
@@ -565,21 +570,23 @@ namespace SF3.Win.Controls {
         private bool _lightingTextureNeedsUpdate = true;
         private bool _lightPositionNeedsUpdate   = true;
         private bool _modelsNeedUpdate           = true;
+        private bool _surfaceModelNeedsUpdate    = true;
+        private bool _planesNeedUpdate           = true;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
 
-        private GeneralResources _general = null;
-        private ModelResources _models = null;
-        private SurfaceModelResources _surfaceModel = null;
-        private GroundModelResources _groundModel = null;
-        private SkyModelResources _skyModel = null;
-        private CollisionResources _collisionModels = null;
-        private SurfaceEditorResources _surfaceEditor = null;
-        private GradientResources _gradients = null;
-        private LightingResources _lighting = null;
-        private BoundaryModelResources _boundaryModels = null;
-        private ActorResources _actorResources = null;
+        private GeneralResources       _general         = null;
+        private ModelResources         _models          = null;
+        private SurfaceModelResources  _surfaceModel    = null;
+        private GroundModelResources   _groundModel     = null;
+        private SkyModelResources      _skyModel        = null;
+        private CollisionResources     _collisionModels = null;
+        private SurfaceEditorResources _surfaceEditor   = null;
+        private GradientResources      _gradients       = null;
+        private LightingResources      _lighting        = null;
+        private BoundaryModelResources _boundaryModels  = null;
+        private ActorResources         _actorResources  = null;
 
         private Renderer _renderer = null;
 
