@@ -4,6 +4,9 @@ layout (location = 0) in vec3 position;
 layout (location = 1) in vec4 color;
 layout (location = 2) in vec2 texCoord0;
 layout (location = 3) in float width;
+layout (location = 4) in float isRightVertex;
+layout (location = 5) in float directions;
+layout (location = 6) in float isFlippable;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -17,23 +20,28 @@ void main() {
     gl_Position = projection * view * model * vec4(position, 1.0);
     colorFrag = color;
 
-    // Resulting angle: 0.00=south, 0.25=east, 0.50=north, 0.75=west
-    float angle = direction;
+    // Conversions for simpler math.
+    int directionsInt = int(round(directions));
+    bool flippable    = (isFlippable >= 0.5f);
+    bool rightVertex  = (isRightVertex >= 0.5f);
 
-    // Assume 8 directions, non-flippable.
-    // Target angles:
-    //     0.0625: south-southeast
-    //     0.1875: east-southeast
-    //     0.3125: east-northeast
-    //     0.4375: north-northeast
-    //     0.5625: north-northwest
-    //     0.6875: west-northwest
-    //     0.8125: west-southwest
-    //     0.9375: south-southwest
+    // Determine if the sprite will need to be flipped, which is if it's 'north' or beyond.
+    // (Direction is 0.00=south, 0.25=east, 0.50=north, 0.75=west)
+    bool flipped = flippable ? (direction >= 0.5f) : false;
 
     // Adjust angle to snap to 22.5 degree orientations.
-    angle = mod(angle - 0.0625f, 1.0f);
+    float angleSnap =
+        (directionsInt ==  8) ? -0.0625f :
+        (directionsInt == 10) ? -0.0500f : 0.00f;
 
-    float direction = mod(round(angle * 8.0f), 8.0f);
-    texCoord0Frag = texCoord0 + vec2(direction, 0) * width;
+    // Determine the frame to use based on the angle, number of directions, and flippability.
+    // Flippable sprites have half as many frames, so account for that.
+    int numFrames = flippable ? (directionsInt / 2) : directionsInt;
+    int frame = int(clamp(round(((flipped ? (1.0f - direction) : direction) + angleSnap) * directionsInt), 0, numFrames - 1));
+
+    // Determine final U coordinate based on which vertex this is and the 'flipped' state.
+    int uOffset = (flipped ^^ rightVertex) ? 1 : 0;
+
+    // Calculations complete -- finally output the texture coordinate.
+    texCoord0Frag = texCoord0 + vec2((frame + uOffset) * width, 0);
 }

@@ -41,6 +41,19 @@ namespace SF3.Types {
             }
         }
 
+        public static bool IsFlippable(this SpriteDirectionCountType directions) {
+            switch (directions) {
+                case SpriteDirectionCountType.OneFlippable:
+                case SpriteDirectionCountType.Four:
+                case SpriteDirectionCountType.Five:
+                case SpriteDirectionCountType.Six:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         public static SpriteFrameDirection[] ToAnimationFrameDirections(this SpriteDirectionCountType directions)
             => CHR_Utils.GetFrameGroupDirections(directions.GetAnimationFrameCount());
 

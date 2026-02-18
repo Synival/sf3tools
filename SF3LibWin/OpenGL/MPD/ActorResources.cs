@@ -57,6 +57,8 @@ namespace SF3.Win.OpenGL.MPD {
             new Vector3(-0.25f,  0.0f,  0.25f),
         ];
 
+        private static readonly float[,] c_isRightVertex = { {1}, {1}, {0}, {0} };
+
         private static readonly Vector4 c_enemyColor    = new(1, 0, 0, 1);
         private static readonly Vector4 c_friendlyColor = new(0, 1, 0, 1);
         private static readonly Vector4 c_white         = new(1, 1, 1, 1);
@@ -99,18 +101,24 @@ namespace SF3.Win.OpenGL.MPD {
                     c_white
                 );
 
+                // ('U' component offset by width is calculated in the shader depending on flip.)
                 var spriteTexCoords = new float[,] {
-                    { spriteTexInfo.U + spriteTexInfo.Width, spriteTexInfo.V + spriteTexInfo.Height },
-                    { spriteTexInfo.U + spriteTexInfo.Width, spriteTexInfo.V                        },
-                    { spriteTexInfo.U,                       spriteTexInfo.V                        },
-                    { spriteTexInfo.U,                       spriteTexInfo.V + spriteTexInfo.Height },
+                    { spriteTexInfo.U, spriteTexInfo.V + spriteTexInfo.Height },
+                    { spriteTexInfo.U, spriteTexInfo.V                        },
+                    { spriteTexInfo.U, spriteTexInfo.V                        },
+                    { spriteTexInfo.U, spriteTexInfo.V + spriteTexInfo.Height },
                 };
-
-                spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, spriteTexCoords));
 
                 {
                     var w = spriteTexInfo.Width;
-                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "width", 4, new float[,] { {w}, {w}, {w}, {w} }));
+                    var f = spriteTexInfo.Directions.IsFlippable() ? 1.0f : 0.0f;
+                    var d = spriteTexInfo.Directions.GetAnimationFrameCount() * (f + 1.0f);
+
+                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, spriteTexCoords));
+                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "isRightVertex", 4, c_isRightVertex));
+                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "width",         4, new float[,] { {w}, {w}, {w}, {w} }));
+                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "directions",    4, new float[,] { {d}, {d}, {d}, {d} }));
+                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "isFlippable",   4, new float[,] { {f}, {f}, {f}, {f} }));
                 }
 
                 var shadowQuad = new Quad(c_shadowVertexData.Select(x => x * spriteTexInfo.CollisionShadowSize).ToArray(), new Vector4(0, 0, 0, 1));
