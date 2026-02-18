@@ -57,11 +57,19 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_spellTargetAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellTypeAddr), displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellTypeAddr), displayOrder: 1, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
+        [NameGetter(NamedValueType.SpellType)]
         public int SpellType {
-            get => Data.GetByte(_spellTypeAddr);
-            set => Data.SetByte(_spellTypeAddr, (byte) value);
+            get => Data.GetByte(_spellTypeAddr) & 0x7F;
+            set => Data.SetByte(_spellTypeAddr, (byte) (value & 0x7F | (FieldSpell ? 0x80 : 0)));
+        }
+
+        [TableViewModelColumn(addressField: nameof(_spellTypeAddr), displayOrder: 1.5f)]
+        [BulkCopy]
+        public bool FieldSpell {
+            get => Data.GetBit(_spellTypeAddr, 8);
+            set => Data.SetBit(_spellTypeAddr, 8, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_elementAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
