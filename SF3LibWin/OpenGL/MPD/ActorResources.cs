@@ -108,6 +108,11 @@ namespace SF3.Win.OpenGL.MPD {
 
                 spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, spriteTexCoords));
 
+                {
+                    var w = spriteTexInfo.Width;
+                    spriteQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.Float, "width", 4, new float[,] { {w}, {w}, {w}, {w} }));
+                }
+
                 var shadowQuad = new Quad(c_shadowVertexData.Select(x => x * spriteTexInfo.CollisionShadowSize).ToArray(), new Vector4(0, 0, 0, 1));
                 shadowQuad.AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec2, texInfo.TexCoordName, 4, shadowTexCoords));
 
@@ -122,7 +127,8 @@ namespace SF3.Win.OpenGL.MPD {
                         return new ActorModelInstance(
                             x: actorX /  32.0f + GeneralResources.ModelOffsetX,
                             y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
-                            z: actorZ / -32.0f - GeneralResources.ModelOffsetZ
+                            z: actorZ / -32.0f - GeneralResources.ModelOffsetZ,
+                            x.ActorDirection
                         );
                     })
                     .ToArray();
@@ -231,13 +237,15 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public class ActorModelInstance {
-            public ActorModelInstance(float x, float y, float z) {
+            public ActorModelInstance(float x, float y, float z, float direction) {
                 X = x;
                 Y = y;
                 Z = z;
+                Direction = direction;
             }
 
             public readonly float X, Y, Z;
+            public readonly float Direction;
         }
 
         public class SpriteTexInfo {

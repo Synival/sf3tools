@@ -171,6 +171,18 @@ namespace SF3.Win.OpenGL {
             return true;
         }
 
+        public bool UpdateUniform(ShaderUniformType uniformType, float value)
+            => UpdateUniform(UniformNames[uniformType], value);
+
+        public bool UpdateUniform(string uniformName, float value) {
+            var handle = GL.GetUniformLocation(Handle, uniformName);
+            if (handle < 0)
+                return false;
+            using (Use())
+                GL.Uniform1(handle, value);
+            return true;
+        }
+
         public bool UpdateUniform(ShaderUniformType uniformType, Vector2 vec)
             => UpdateUniform(UniformNames[uniformType], ref vec);
 
