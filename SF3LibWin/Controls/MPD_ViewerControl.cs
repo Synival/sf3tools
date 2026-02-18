@@ -153,10 +153,12 @@ namespace SF3.Win.Controls {
         private void tsbToggleNormals_Click    (object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
         private void tsbRotateSpritesUp_Click  (object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
-        public void UpdateLighting() {
+        public void InvalidateLighting(bool invalidatePainter = true) {
             if (MPD_File != null) {
-                GLControl.UpdateLightPosition();
-                GLControl.UpdateLightingTexture();
+                GLControl.InvalidateLightPosition(invalidatePainter: false);
+                GLControl.InvalidateLightingTexture(invalidatePainter: false);
+                if (invalidatePainter)
+                    GLControl.Invalidate();
             }
         }
 

@@ -70,20 +70,6 @@ namespace SF3.Win.Controls {
             base.OnHandleDestroyed(e);
         }
 
-        public void UpdateLightingTexture() {
-            MakeCurrent();
-            _lighting.Update(MPD_File);
-        }
-
-        public void UpdateLightPosition() {
-            MakeCurrent();
-            var lightPos = GetLightPosition();
-            foreach (var shader in _general.Shaders) {
-                using (shader.Use())
-                    shader.UpdateUniform(ShaderUniformType.LightPosition, ref lightPos);
-            }
-        }
-
         private void OnLoadRendering() {
             MakeCurrent();
 
@@ -122,8 +108,8 @@ namespace SF3.Win.Controls {
             SetInitialCameraPosition();
             UpdateSelectFramebuffer();
 
-            UpdateLightingTexture();
-            UpdateLightPosition();
+            InvalidateLightingTexture(invalidatePainter: false);
+            InvalidateLightPosition(invalidatePainter: false);
 
             using (_general.ObjectShader.Use()) {
                 _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
@@ -185,19 +171,7 @@ namespace SF3.Win.Controls {
         private void OnPaintRendering() {
             MakeCurrent();
 
-            foreach (var block in _surfaceModel.Blocks)
-                if (block.NeedsUpdate)
-                    block.Update(MPD_File);
-
-            if (_tileSelectedNeedsUpdate) {
-                _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
-                _tileSelectedNeedsUpdate = false;
-            }
-
-            if (_actorsNeedsUpdate) {
-                _actorResources.Update(MPD_File);
-                _actorsNeedsUpdate = false;
-            }
+            UpdateInvalidatedResources();
 
             UpdateViewMatrix();
             foreach (var shader in _general.Shaders)
@@ -288,6 +262,36 @@ namespace SF3.Win.Controls {
             );
 
             SwapBuffers();
+        }
+
+        private void UpdateInvalidatedResources() {
+            foreach (var block in _surfaceModel.Blocks)
+                if (block.NeedsUpdate)
+                    block.Update(MPD_File);
+
+            if (_tileSelectedNeedsUpdate) {
+                _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
+                _tileSelectedNeedsUpdate = false;
+            }
+
+            if (_actorsNeedsUpdate) {
+                _actorResources.Update(MPD_File);
+                _actorsNeedsUpdate = false;
+            }
+
+            if (_lightingTextureNeedsUpdate) {
+                _lighting.Update(MPD_File);
+                _lightingTextureNeedsUpdate = false;
+            }
+
+            if (_lightPositionNeedsUpdate) {
+                var lightPos = GetLightPosition();
+                foreach (var shader in _general.Shaders) {
+                    using (shader.Use())
+                        shader.UpdateUniform(ShaderUniformType.LightPosition, ref lightPos);
+                }
+                _lightPositionNeedsUpdate = false;
+            }
         }
 
         private void OnFrameTickRendering(float deltaInMs) {
@@ -408,10 +412,15 @@ namespace SF3.Win.Controls {
             return true;
         }
 
-        public void InvalidateActors() {
-            _actorsNeedsUpdate = true;
-            Invalidate();
+        private void InvalidateResource(ref bool flag, bool invalidatePainter = true) {
+            flag = true;
+            if (invalidatePainter)
+                Invalidate();
         }
+
+        public void InvalidateActors         (bool invalidatePainter = true) => InvalidateResource(ref _actorsNeedsUpdate,          invalidatePainter);
+        public void InvalidateLightingTexture(bool invalidatePainter = true) => InvalidateResource(ref _lightingTextureNeedsUpdate, invalidatePainter);
+        public void InvalidateLightPosition  (bool invalidatePainter = true) => InvalidateResource(ref _lightPositionNeedsUpdate,   invalidatePainter);
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -541,6 +550,8 @@ namespace SF3.Win.Controls {
 
         private bool _tileSelectedNeedsUpdate = false;
         private bool _actorsNeedsUpdate = false;
+        private bool _lightingTextureNeedsUpdate = false;
+        private bool _lightPositionNeedsUpdate = false;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;

@@ -23,7 +23,7 @@ namespace SF3.Win.Views.MPD {
         }
 
         public void UpdateMap() {
-            ViewerControl.UpdateLighting();
+            ViewerControl.InvalidateLighting();
             ViewerControl.UpdateModels();
         }
 
