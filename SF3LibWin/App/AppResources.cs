@@ -80,10 +80,32 @@ namespace SF3.Win.App {
 
         private List<ActorCollectionRegistration> _actorCollections = new List<ActorCollectionRegistration>();
         public IEnumerable<ActorCollectionRegistration> ActorCollections => _actorCollections;
-        public ActorCollectionRegistration ActiveActorCollection { get; set; }
+
+        private ActorCollectionRegistration _activeActorCollection = null;
+        public ActorCollectionRegistration ActiveActorCollection {
+            get => _activeActorCollection;
+            set {
+                if (_activeActorCollection != value) {
+                    _activeActorCollection = value;
+                    ActiveActorCollectionChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler ActiveActorCollectionChanged;
 
         private List<CHR_Registration> _chrs = new List<CHR_Registration>();
         public IEnumerable<CHR_Registration> CHRs => _chrs;
-        public CHR_Registration ActiveCHR { get; set; }
+
+        private CHR_Registration _activeCHR = null;
+        public CHR_Registration ActiveCHR {
+            get => _activeCHR;
+            set {
+                if (_activeCHR != value) {
+                    _activeCHR = value;
+                    ActiveCHRChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler ActiveCHRChanged;
     }
 }

@@ -219,7 +219,9 @@ namespace X1_Analyzer {
             return matchReports.ToArray();
 #endif
 
-            return x1File.NpcTables.Any(x => x.Rows.Any(y => y.SpriteID == 0x0C7 && (y.ActorX != 0 || y.ActorZ != 0))) ? [""] : null;
+            if (x1File.Battles?.Any() != true)
+                return null;
+            return x1File.Battles.SelectMany(x => x.Value.SlotTable.Rows.Where(y => (y.FacingIsBoss & 0x0B) != 0).Select(y => $"{x.Key}: 0x{y.ID:X2}")).ToArray();
         }
 
         public static void Main(string[] args) {

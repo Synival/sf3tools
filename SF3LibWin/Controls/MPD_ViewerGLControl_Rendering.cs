@@ -4,6 +4,7 @@ using System.ComponentModel;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
+using SF3.Win.App;
 using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
@@ -54,6 +55,10 @@ namespace SF3.Win.Controls {
             _appState.ViewerRotateSpritesUpChanged    += (s, e) => Invalidate();
 
             _appState.ViewerRotateSpritesUpChanged += (s, e) => _renderer.InvalidateSpriteMatrices(_models);
+
+            var resources = AppResources.Get();
+            resources.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };
+            resources.ActiveCHRChanged             += (s, e) => { InvalidateActors(); };
         }
 
         /// <summary>
@@ -119,12 +124,17 @@ namespace SF3.Win.Controls {
 
             UpdateLightingTexture();
             UpdateLightPosition();
-            _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
-            _general.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
+
+            using (_general.ObjectShader.Use()) {
+                _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
+                _general.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
+            }
 
             foreach (var shader in _general.Shaders) {
-                shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
-                shader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
+                using (shader.Use()) {
+                    shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+                    shader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
+                }
             }
         }
 
@@ -182,6 +192,11 @@ namespace SF3.Win.Controls {
             if (_tileSelectedNeedsUpdate) {
                 _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
                 _tileSelectedNeedsUpdate = false;
+            }
+
+            if (_actorsNeedsUpdate) {
+                _actorResources.Update(MPD_File);
+                _actorsNeedsUpdate = false;
             }
 
             UpdateViewMatrix();
@@ -302,6 +317,8 @@ namespace SF3.Win.Controls {
             _collisionModels?.Update(MPD_File.Collisions, MPD_File.Surface, MPD_File.Planes.GroundY);
             _actorResources?.Update(MPD_File);
 
+            _actorsNeedsUpdate = false;
+
             Invalidate();
         }
 
@@ -389,6 +406,11 @@ namespace SF3.Win.Controls {
 
             property.SetValue(AppState, value);
             return true;
+        }
+
+        public void InvalidateActors() {
+            _actorsNeedsUpdate = true;
+            Invalidate();
         }
 
         [Browsable(false)]
@@ -518,6 +540,7 @@ namespace SF3.Win.Controls {
         }
 
         private bool _tileSelectedNeedsUpdate = false;
+        private bool _actorsNeedsUpdate = false;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
