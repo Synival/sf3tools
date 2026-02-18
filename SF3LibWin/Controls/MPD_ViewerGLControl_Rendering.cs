@@ -25,6 +25,7 @@ namespace SF3.Win.Controls {
             _appState.ViewerRunAnimationsChanged      += (s, e) => Invalidate();
             _appState.ViewerApplyLightingChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawGradientsChanged      += (s, e) => Invalidate();
+            _appState.ViewerDrawActorsChanged         += (s, e) => Invalidate();
 
             _appState.ViewerDrawWireframeChanged      += (s, e) => Invalidate();
             _appState.ViewerDrawBoundariesChanged     += (s, e) => Invalidate();
@@ -223,33 +224,34 @@ namespace SF3.Win.Controls {
 
                 // TODO: these options should be cached!!!
                 new Renderer.RendererOptions() {
-                    DrawModels = DrawModels,
-                    DrawSurfaceModel = DrawSurfaceModel,
-                    DrawGround = DrawGround,
-                    DrawSky = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSky == true && DrawSky,
-                    DrawGradients = DrawGradients,
-                    ApplyLighting = ApplyLighting,
+                    DrawModels         = DrawModels,
+                    DrawSurfaceModel   = DrawSurfaceModel,
+                    DrawGround         = DrawGround,
+                    DrawSky            = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSky == true && DrawSky,
+                    DrawGradients      = DrawGradients,
+                    DrawActors         = DrawActors,
+                    ApplyLighting      = ApplyLighting,
 
                     HideModelsNotFacingCamera = HideModelsNotFacingCamera,
-                    ModelsYRotation = MPD_File?.Settings?.ModelsYRotation ?? 180.0f,
+                    ModelsYRotation    = MPD_File?.Settings?.ModelsYRotation ?? 180.0f,
                     ModelsViewAngleMin = MPD_File?.Settings?.ModelsViewAngleMin ?? 0,
                     ModelsViewAngleMax = MPD_File?.Settings?.ModelsViewAngleMax ?? 0,
 
-                    DrawNormals = DrawNormals,
-                    DrawWireframe = DrawWireframe,
-                    RotateSpritesUp = RotateSpritesUp,
+                    DrawNormals        = DrawNormals,
+                    DrawWireframe      = DrawWireframe,
+                    RotateSpritesUp    = RotateSpritesUp,
 
-                    DrawTerrainTypes = DrawTerrainTypes,
-                    DrawEventIDs = DrawEventIDs,
-                    DrawBoundaries = DrawBoundaries,
+                    DrawTerrainTypes   = DrawTerrainTypes,
+                    DrawEventIDs       = DrawEventIDs,
+                    DrawBoundaries     = DrawBoundaries,
                     DrawCollisionLines = DrawCollisionLines,
 
-                    BackgroundX = MPD_File?.Planes?.BackgroundX ?? 0,
-                    BackgroundY = MPD_File?.Planes?.BackgroundY ?? 0,
+                    BackgroundX        = MPD_File?.Planes?.BackgroundX ?? 0,
+                    BackgroundY        = MPD_File?.Planes?.BackgroundY ?? 0,
 
                     UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
-                    ModelsToHide = modelsToHide,
+                    ModelsToHide       = modelsToHide,
                 },
                 Yaw, Pitch, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix
@@ -481,6 +483,13 @@ namespace SF3.Win.Controls {
         public bool DrawGradients {
             get => AppState.ViewerDrawGradients;
             set => UpdateAppState(nameof(AppState.ViewerDrawGradients), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawActors {
+            get => AppState.ViewerDrawActors;
+            set => UpdateAppState(nameof(AppState.ViewerDrawActors), value);
         }
 
         [Browsable(false)]

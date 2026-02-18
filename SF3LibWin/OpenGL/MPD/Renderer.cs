@@ -17,6 +17,7 @@ namespace SF3.Win.OpenGL.MPD {
             public bool DrawGround;
             public bool DrawSky;
             public bool DrawGradients;
+            public bool DrawActors;
 
             public bool DrawNormals;
             public bool DrawWireframe;
@@ -173,8 +174,8 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.WillDrawSurfaceModel)
                 DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
 
-            // TODO: make this an option!
-            DrawActors(general, actors, cameraYaw, cameraPitch);
+            if (options.DrawActors)
+                DrawActors(general, actors, cameraYaw, cameraPitch);
 
             if (options.DrawModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: true);

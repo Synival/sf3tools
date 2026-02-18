@@ -317,6 +317,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ShowActorsBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowActorsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShowCameraBoundariesBmp {
             get {
                 object obj = ResourceManager.GetObject("ShowCameraBoundariesBmp", resourceCulture);
@@ -493,24 +503,24 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///layout (location = 0) in vec2 texCoord0;
-        ///
         ///layout (location = 0) in vec3 position;
         ///layout (location = 1) in vec4 color;
+        ///layout (location = 2) in vec2 texCoord0;
+        ///layout (location = 3) in float width;
+        ///layout (location = 4) in float isRightVertex;
+        ///layout (location = 5) in float directions;
+        ///layout (location = 6) in float isFlippable;
         ///
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
+        ///uniform float direction;
         ///
         ///out vec4 colorFrag;
         ///out vec2 texCoord0Frag;
         ///
         ///void main() {
-        ///    gl_Position = projection * view * model * vec4(position, 1.0);
-        ///    colorFrag = color;
-        ///    texCoord0Frag = texCoord0;
-        ///}
-        ///.
+        ///    gl_Position = projection * view * model * vec4(pos [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SpriteVert {
             get {

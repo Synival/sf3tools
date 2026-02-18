@@ -210,6 +210,16 @@ namespace SF3.Win.App {
         public event EventHandler ViewerDrawGradientsChanged;
 
         /// <summary>
+        /// When enabled, the MPD Viewer will render actors from X1 files if they're available.
+        /// </summary>
+        public bool ViewerDrawActors {
+            get => _viewerDrawActors;
+            set => SetValue(ref _viewerDrawActors, value, ViewerDrawActorsChanged);
+        }
+        private bool _viewerDrawActors = true;
+        public event EventHandler ViewerDrawActorsChanged;
+
+        /// <summary>
         /// When enabled, the MPD Viewer will draw wireframes on models and the surface model.
         /// </summary>
         public bool ViewerDrawWireframe {

@@ -37,6 +37,7 @@ namespace SF3.Win.Controls {
             tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
             tsbApplyLighting = new System.Windows.Forms.ToolStripButton();
             tsbDrawGradients = new System.Windows.Forms.ToolStripButton();
+            tsbDrawActors = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
@@ -79,7 +80,7 @@ namespace SF3.Win.Controls {
             // 
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -187,6 +188,17 @@ namespace SF3.Win.Controls {
             tsbDrawGradients.Text = "Draw Gradients";
             tsbDrawGradients.ToolTipText = "Draw Gradients";
             tsbDrawGradients.Click += tsbDrawGradients_Click;
+            // 
+            // tsbDrawActors
+            // 
+            tsbDrawActors.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawActors.Image = Properties.Resources.ShowActorsBmp;
+            tsbDrawActors.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawActors.Name = "tsbDrawActors";
+            tsbDrawActors.Size = new System.Drawing.Size(28, 28);
+            tsbDrawActors.Text = "Draw Actors";
+            tsbDrawActors.ToolTipText = "Draw Actors";
+            tsbDrawActors.Click += tsbDrawActors_Click;
             // 
             // toolStripSeparator2
             // 
@@ -595,5 +607,6 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton tsbApplyShadowTags;
         private System.Windows.Forms.ToolStripButton tsbApplyHideTags;
+        private System.Windows.Forms.ToolStripButton tsbDrawActors;
     }
 }

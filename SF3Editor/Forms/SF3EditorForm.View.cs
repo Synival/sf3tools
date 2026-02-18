@@ -13,6 +13,7 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;
             tsmiView_MPD_ApplyLighting.Checked           = _appState.ViewerApplyLighting;
             tsmiView_MPD_DrawGradients.Checked           = _appState.ViewerDrawGradients;
+            tsmiView_MPD_DrawActors.Checked              = _appState.ViewerDrawActors;
 
             tsmiView_MPD_DrawWireframes.Checked          = _appState.ViewerDrawWireframe;
             tsmiView_MPD_DrawBoundaries.Checked          = _appState.ViewerDrawBoundaries;
@@ -48,6 +49,8 @@ namespace SF3.Editor.Forms {
                 => { tsmiView_MPD_ApplyLighting.Checked = _appState.ViewerApplyLighting; _appState.Serialize(); };
             _appState.ViewerDrawGradientsChanged += (s, e)
                 => { tsmiView_MPD_DrawGradients.Checked = _appState.ViewerDrawGradients; _appState.Serialize(); };
+            _appState.ViewerDrawActorsChanged += (s, e)
+                => { tsmiView_MPD_DrawActors.Checked = _appState.ViewerDrawActors; _appState.Serialize(); };
 
             _appState.ViewerDrawWireframeChanged += (s, e)
                 => { tsmiView_MPD_DrawWireframes.Checked = _appState.ViewerDrawWireframe; _appState.Serialize(); };
@@ -96,6 +99,8 @@ namespace SF3.Editor.Forms {
             => _appState.ViewerApplyLighting = !_appState.ViewerApplyLighting;
         private void tsmiView_MPD_DrawGradients_Click(object sender, EventArgs e)
             => _appState.ViewerDrawGradients = !_appState.ViewerDrawGradients;
+        private void tsmiView_MPD_DrawActors_Click(object sender, EventArgs e)
+            => _appState.ViewerDrawActors = !_appState.ViewerDrawActors;
         private void tsmiView_MPD_HideModelsNotFacingCamera_Click(object sender, EventArgs e)
             => _appState.HideModelsNotFacingCamera = !_appState.HideModelsNotFacingCamera;
         private void tsmiView_MPD_ApplyShadowTags_Click(object sender, EventArgs e)
