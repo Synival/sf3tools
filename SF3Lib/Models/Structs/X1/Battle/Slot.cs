@@ -285,7 +285,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 12.5f, displayGroup: "Page2")]
         [BulkCopy]
-        public bool ArrivesLater {
+        public bool UnknownFlag {
             get => Data.GetBit(_facingIsBossAddr, 3);
             set => Data.SetBit(_facingIsBossAddr, 3, value);
         }
