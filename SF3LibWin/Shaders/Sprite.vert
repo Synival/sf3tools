@@ -17,7 +17,12 @@ out vec4 colorFrag;
 out vec2 texCoord0Frag;
 
 void main() {
-    gl_Position = projection * view * model * vec4(position, 1.0);
+    // Render the sprite as if it's closer to the camera by 0.5 units.
+    // This will appear in the same place, but write to the depth buffer differently.
+    vec4 viewPos = view * model * vec4(position, 1.0);
+    viewPos.z += 0.5;
+    gl_Position = projection * viewPos;
+
     colorFrag = color;
 
     // Conversions for simpler math.

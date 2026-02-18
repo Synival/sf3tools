@@ -556,20 +556,26 @@ namespace SF3.Win.OpenGL.MPD {
             var shader = general.SpriteShader;
             using (shader.Use())
             using (actors.Texture.Use()) {
+                // Render shadows first.
+                _ = shader.UpdateUniform("direction", 0.0f);
                 foreach (var actorGroup in actors.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
-                    var model  = actors.ModelsBySpriteID[spriteId];
                     var shadow = actors.ShadowsBySpriteID[spriteId];
 
                     foreach (var actor in actorGroup.Value) {
-                        // Draw shadow.
-                        var modelMatrix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + 0.04f, actor.Z));
+                        var modelMatrix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
                         _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
-                        _ = shader.UpdateUniform("direction", 0.0f);
                         shadow.Draw(shader);
+                    }
+                }
 
-                        // Draw sprite.
-                        modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + 0.04f, actor.Z));
+                // Now render sprites.
+                foreach (var actorGroup in actors.ActorsBySpriteID) {
+                    var spriteId = actorGroup.Key;
+                    var model  = actors.ModelsBySpriteID[spriteId];
+
+                    foreach (var actor in actorGroup.Value) {
+                        var modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
                         _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
                         // Convert facing direction (0=north, 90=east, ...) to shader direction (0=south, 0.25=east, ...)
                         _ = shader.UpdateUniform("direction", MathHelpers.ActualMod((180.0f - actor.Direction - cameraYaw) / 360.0f, 1.0f));
