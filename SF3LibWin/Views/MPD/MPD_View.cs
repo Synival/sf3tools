@@ -14,13 +14,7 @@ namespace SF3.Win.Views.MPD {
             if (base.Create() == null)
                 return null;
 
-            CreateChild(ViewerView, (c) => {
-                _viewerTab = (TabPage) c.Parent;
-                ViewerView.UpdateMap();
-            }, autoFill: true);
-
-            TabControl.Selected += UpdateViewerMapEvent;
-
+            CreateChild(ViewerView, (c) => _viewerTab = (TabPage) c.Parent, autoFill: true);
             CreateChild(new MPD_FlagsView("Flags", Model.Flags));
             CreateChild(new PlanesView("Planes", Model.Planes));
 
@@ -32,17 +26,17 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataView("Data (advanced)", mpdFile));
             }
 
+            // Update *ALL* MPD resources whenever we reselect the viewer tab.
+            TabControl.Selected += InvalidateEntireMapEvent;
+
             return Control;
         }
 
         private TabPage _viewerTab = null;
 
-        void UpdateViewerMapEvent(object sender, EventArgs eventArgs)
-            => UpdateViewerMap();
-
-        public void UpdateViewerMap() {
+        private void InvalidateEntireMapEvent(object sender, EventArgs eventArgs) {
             if (TabControl.SelectedTab == _viewerTab)
-                ViewerView?.UpdateMap();
+                ViewerView?.ViewerGLControl?.InvalidateAllResources();
         }
 
         public override void Destroy() {
@@ -50,7 +44,7 @@ namespace SF3.Win.Views.MPD {
                 return;
 
             if (TabControl != null)
-                TabControl.Selected -= UpdateViewerMapEvent;
+                TabControl.Selected -= InvalidateEntireMapEvent;
 
             ViewerView.Destroy();
             _viewerTab = null;

@@ -22,11 +22,6 @@ namespace SF3.Win.Views.MPD {
             // TODO: how to refresh???
         }
 
-        public void UpdateMap() {
-            ViewerControl.InvalidateLighting();
-            ViewerControl.UpdateModels();
-        }
-
         public IMPD Model { get; }
 
         public MPD_ViewerControl ViewerControl => (MPD_ViewerControl) Control;

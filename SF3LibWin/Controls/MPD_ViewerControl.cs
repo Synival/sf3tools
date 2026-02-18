@@ -162,14 +162,14 @@ namespace SF3.Win.Controls {
             }
         }
 
-        public void UpdateModels() {
+        public void InvalidateMPDResources() {
             if (MPD_File != null) {
                 if (MPD_File is IMPD_File mpdFile) {
                     mpdFile.AssociateTilesWithTrees();
                     // TODO: UpdatePlaneImages() shouldn't be necessary!!
                     mpdFile.UpdatePlaneImages();
                 }
-                GLControl.InvalidateModels();
+                GLControl.InvalidateAllResources();
             }
         }
 

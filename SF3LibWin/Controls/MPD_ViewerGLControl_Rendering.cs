@@ -427,6 +427,13 @@ namespace SF3.Win.Controls {
                 Invalidate();
         }
 
+        public void InvalidateAllResources(bool invalidatePainter = true) {
+            InvalidateActors(false);
+            InvalidateLightingTexture(false);
+            InvalidateLightPosition(false);
+            InvalidateModels(false);
+        }
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawSurfaceModel {

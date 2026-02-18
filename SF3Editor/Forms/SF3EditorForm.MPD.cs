@@ -285,7 +285,7 @@ namespace SF3.Editor.Forms {
                 mpdFile.Surface.UpdateVertexNormals();
 
                 var mpdView = (MPD_View) (SelectedFile.View.ActualView);
-                mpdView.UpdateViewerMap();
+                mpdView.ViewerView?.ViewerGLControl?.InvalidateModels();
             }
         }
 
@@ -358,7 +358,7 @@ namespace SF3.Editor.Forms {
         private void ToggleModelSwitchGroup(IMPD mpdFile, IMPD_ModelSwitchGroup msg, ToolStripMenuItem item) {
             item.Checked = msg.StateInEditor = !msg.StateInEditor;
             if (SelectedFile?.View?.ActualView is MPD_View mpdView && mpdView.Model == mpdFile)
-                mpdView.UpdateViewerMap();
+                mpdView.ViewerView?.ViewerGLControl?.InvalidateModels();
         }
     }
 }
