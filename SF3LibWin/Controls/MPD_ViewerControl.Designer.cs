@@ -55,7 +55,6 @@ namespace SF3.Win.Controls {
             tsbCameraReset = new System.Windows.Forms.ToolStripButton();
             tsbCameraTopView = new System.Windows.Forms.ToolStripButton();
             tsbCameraLookAtCenter = new System.Windows.Forms.ToolStripButton();
-            tilePropertyControl1 = new SurfaceTilePropertiesControl();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
             toolStrip2 = new DarkModeToolStrip();
             tsbDrawGrassland = new System.Windows.Forms.ToolStripButton();
@@ -72,8 +71,11 @@ namespace SF3.Win.Controls {
             tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
+            selectionPanel = new System.Windows.Forms.Panel();
+            tilePropertyControl1 = new SurfaceTilePropertiesControl();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
+            selectionPanel.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -357,16 +359,6 @@ namespace SF3.Win.Controls {
             tsbCameraLookAtCenter.Text = "Look at Map Center";
             tsbCameraLookAtCenter.Click += tsbCameraLookAtCenter_Click;
             // 
-            // tilePropertyControl1
-            // 
-            tilePropertyControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            tilePropertyControl1.Location = new System.Drawing.Point(582, 62);
-            tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
-            tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
-            tilePropertyControl1.Name = "tilePropertyControl1";
-            tilePropertyControl1.Size = new System.Drawing.Size(207, 514);
-            tilePropertyControl1.TabIndex = 2;
-            // 
             // mpdViewerGLControl1
             // 
             mpdViewerGLControl1.API = OpenTK.Windowing.Common.ContextAPI.OpenGL;
@@ -542,12 +534,30 @@ namespace SF3.Win.Controls {
             tsbFixTiles.Text = "Fix All Tile Textures Based on Neighbors\n(You'll probably want to save first!!)";
             tsbFixTiles.Click += tsbFixTiles_Click;
             // 
+            // selectionPanel
+            // 
+            selectionPanel.Controls.Add(tilePropertyControl1);
+            selectionPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            selectionPanel.Location = new System.Drawing.Point(582, 62);
+            selectionPanel.Name = "selectionPanel";
+            selectionPanel.Size = new System.Drawing.Size(207, 514);
+            selectionPanel.TabIndex = 4;
+            // 
+            // tilePropertyControl1
+            // 
+            tilePropertyControl1.Location = new System.Drawing.Point(0, 0);
+            tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
+            tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
+            tilePropertyControl1.Name = "tilePropertyControl1";
+            tilePropertyControl1.Size = new System.Drawing.Size(207, 514);
+            tilePropertyControl1.TabIndex = 3;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(mpdViewerGLControl1);
-            Controls.Add(tilePropertyControl1);
+            Controls.Add(selectionPanel);
             Controls.Add(toolStrip2);
             Controls.Add(toolStrip1);
             Name = "MPD_ViewerControl";
@@ -556,6 +566,7 @@ namespace SF3.Win.Controls {
             toolStrip1.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            selectionPanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -566,7 +577,6 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbToggleWireframe;
         private System.Windows.Forms.ToolStripButton tsbToggleNormals;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private SurfaceTilePropertiesControl tilePropertyControl1;
         private MPD_ViewerGLControl mpdViewerGLControl1;
         private System.Windows.Forms.ToolStripButton tsbToggleTerrainType;
         private System.Windows.Forms.ToolStripButton tsbToggleEventID;
@@ -608,5 +618,7 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbApplyShadowTags;
         private System.Windows.Forms.ToolStripButton tsbApplyHideTags;
         private System.Windows.Forms.ToolStripButton tsbDrawActors;
+        private System.Windows.Forms.Panel selectionPanel;
+        private SurfaceTilePropertiesControl tilePropertyControl1;
     }
 }
