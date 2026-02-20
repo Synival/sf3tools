@@ -147,6 +147,15 @@ namespace SF3.Win.Controls {
             // Show or hide the panel depending on if a control exists.
             selectionPanel.Visible = (control != null);
 
+            // Shift the projection matrix over if the panel is visible. This is a flicker-free alternative to
+            // resizing the thing.
+            var visibilityChanged = (control == null) ^ (_currentSideEditorControl == null);
+            if (visibilityChanged) {
+                GLControl.ProjectionXAdjustment = (control == null) ? 0 : -selectionPanel.Width / 2;
+                GLControl.UpdateProjectionMatrices(GLControl.ClientSize.Width, GLControl.ClientSize.Height);
+                GLControl.RenderFrame();
+            }
+
             ResumeLayout(true);
             control?.Show();
 

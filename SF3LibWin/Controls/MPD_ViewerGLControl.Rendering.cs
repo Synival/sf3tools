@@ -101,8 +101,8 @@ namespace SF3.Win.Controls {
             _actorResources.Init();
 
             SetInitialCameraPosition();
-            UpdateSelectFramebuffer();
-            UpdateProjectionMatrices();
+            UpdateSelectFramebuffer(ClientSize.Width, ClientSize.Height);
+            UpdateProjectionMatrices(ClientSize.Width, ClientSize.Height);
 
             using (_general.ObjectShader.Use()) {
                 _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
@@ -153,14 +153,27 @@ namespace SF3.Win.Controls {
 
         private void OnResizeRendering() => UpdateViewport(ClientSize.Width, ClientSize.Height);
 
+        private int _lastViewportWidth  = 0;
+        private int _lastViewportHeight = 0;
+
         public void UpdateViewport(int width, int height) {
+            // Prevent some bogus dimensions.
+            width  = Math.Max(100, width);
+            height = Math.Max(100, height);
+
+            if (_lastViewportWidth == width && _lastViewportHeight == height)
+                return;
+
+            _lastViewportWidth  = width;
+            _lastViewportHeight = height;
+
             MakeCurrent();
 
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, width, height);
 
-            UpdateSelectFramebuffer();
-            UpdateProjectionMatrices();
+            UpdateSelectFramebuffer(width, height);
+            UpdateProjectionMatrices(width, height);
 
             Invalidate();
         }
@@ -182,13 +195,7 @@ namespace SF3.Win.Controls {
             }
             UpdateTilePosition();
 
-            if (RenderOnBlackBackground)
-                GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            else
-                GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
-            GL.StencilMask(0xFF);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+            PerformClear();
 
             // Determine which models to hide based on flags.
             // TODO: Cache all this!!
@@ -264,6 +271,22 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
+        public void Clear() {
+            MakeCurrent();
+            PerformClear();
+            SwapBuffers();
+        }
+
+        private void PerformClear() {
+            if (RenderOnBlackBackground)
+                GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            else
+                GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+            GL.StencilMask(0xFF);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
+        }
+
         private void UpdateInvalidatedResources() {
             if (_tileSelectedNeedsUpdate) {
                 _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
@@ -329,19 +352,19 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void UpdateSelectFramebuffer() {
+        private void UpdateSelectFramebuffer(int width, int height) {
             _selectFramebuffer?.Dispose();
-            _selectFramebuffer = new Framebuffer(Width, Height);
+            _selectFramebuffer = new Framebuffer(width, height);
         }
 
-        private void UpdateProjectionMatrix() {
+        private void UpdateProjectionMatrix(int width, int height) {
             _projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
-                MathHelper.DegreesToRadians(22.50f), (float) ClientSize.Width / ClientSize.Height,
-                0.05f, 65536.0f);
+                MathHelper.DegreesToRadians(22.50f), (float) width / height,
+                0.05f, 65536.0f) * Matrix4.CreateTranslation((float) (ProjectionXAdjustment * 2) / (float) ClientSize.Width, 0, 0);
         }
 
-        private void UpdateProjectionMatrices() {
-            UpdateProjectionMatrix();
+        public void UpdateProjectionMatrices(int width, int height) {
+            UpdateProjectionMatrix(width, height);
             if (_general?.Shaders?.Count > 0)
                 foreach (var shader in _general.Shaders)
                     shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
@@ -572,6 +595,8 @@ namespace SF3.Win.Controls {
             get => AppState.ViewerRotateSpritesUp;
             set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
         }
+
+        public int ProjectionXAdjustment { get; set; }
 
         private bool _tileSelectedNeedsUpdate    = false;
         private bool _actorsNeedUpdate           = true;

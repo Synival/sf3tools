@@ -371,7 +371,7 @@ namespace SF3.Win.Controls {
             mpdViewerGLControl1.Name = "mpdViewerGLControl1";
             mpdViewerGLControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
             mpdViewerGLControl1.SharedContext = null;
-            mpdViewerGLControl1.Size = new System.Drawing.Size(582, 514);
+            mpdViewerGLControl1.Size = new System.Drawing.Size(789, 514);
             mpdViewerGLControl1.TabIndex = 1;
             // 
             // toolStrip2
@@ -544,8 +544,8 @@ namespace SF3.Win.Controls {
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(mpdViewerGLControl1);
             Controls.Add(selectionPanel);
+            Controls.Add(mpdViewerGLControl1);
             Controls.Add(toolStrip2);
             Controls.Add(toolStrip1);
             Name = "MPD_ViewerControl";
