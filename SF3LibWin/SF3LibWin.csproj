@@ -102,9 +102,6 @@
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Controls\MPD_ViewerGLControl_MouseControls.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="Controls\ImageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,6 +110,24 @@
     </Compile>
     <Compile Update="Controls\MPD_ViewerGLControl.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Controls\MPD_ViewerGLControl.Camera.cs">
+      <DependentUpon>MPD_ViewerGLControl.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MPD_ViewerGLControl.Editing.cs">
+      <DependentUpon>MPD_ViewerGLControl.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MPD_ViewerGLControl.KeyboardControls.cs">
+      <DependentUpon>MPD_ViewerGLControl.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MPD_ViewerGLControl.MouseControls.cs">
+      <DependentUpon>MPD_ViewerGLControl.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MPD_ViewerGLControl.Rendering.cs">
+      <DependentUpon>MPD_ViewerGLControl.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\EnhancedObjectListView.Header.cs">
+      <DependentUpon>EnhancedObjectListView.cs</DependentUpon>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
