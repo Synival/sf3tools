@@ -151,11 +151,13 @@ namespace SF3.Win.Controls {
             _selectFramebuffer = null;
         }
 
-        private void OnResizeRendering() {
+        private void OnResizeRendering() => UpdateViewport(ClientSize.Width, ClientSize.Height);
+
+        public void UpdateViewport(int width, int height) {
             MakeCurrent();
 
             // Update OpenGL on the new size of the control.
-            GL.Viewport(0, 0, ClientSize.Width, ClientSize.Height);
+            GL.Viewport(0, 0, width, height);
 
             UpdateSelectFramebuffer();
             UpdateProjectionMatrices();
@@ -163,7 +165,9 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        private void OnPaintRendering() {
+        private void OnPaintRendering() => RenderFrame();
+
+        public void RenderFrame() {
             MakeCurrent();
 
             UpdateInvalidatedResources();

@@ -13,9 +13,11 @@ using SF3.Win.App;
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
         public MPD_ViewerControl() {
+            SuspendLayout();
             InitializeComponent();
+            selectionPanel.Hide();
+            ResumeLayout();
 
-            GLControl.TilePropertiesControl = tilePropertyControl1;
             Disposed += (s, e) => GLControl.Dispose();
 
             var cursorMode = GLControl.CursorMode;
@@ -77,8 +79,29 @@ namespace SF3.Win.Controls {
                     GLControl.CursorMode = ViewerCursorMode.Select;
             };
 
+            // Activate tile editor when an editor is clicked.
+            GLControl.TileSelected += (s, tile) => {
+                if (tile != null)
+                    SwitchToTileEditor(tile);
+                else
+                    SetSideEditorControl(null);
+            };
+        }
+
+        private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile) {
+            if (_currentSideEditorControl is SurfaceTilePropertiesControl tilePropertyControl)
+                return tilePropertyControl;
+
+            if (_surfaceTilePropertiesControl != null) {
+                SetSideEditorControl(_surfaceTilePropertiesControl, c => c.Tile = tile);
+                return _surfaceTilePropertiesControl;
+            }
+
+            _surfaceTilePropertiesControl = new SurfaceTilePropertiesControl();
+            SetSideEditorControl(_surfaceTilePropertiesControl, c => c.Tile = tile);
+
             // Make sure certain key events make it to the GLControl.
-            tilePropertyControl1.CmdKey += (object sender, ref Message msg, Keys keyData, ref bool wasProcessed) => {
+            _surfaceTilePropertiesControl.CmdKey += (object sender, ref Message msg, Keys keyData, ref bool wasProcessed) => {
                 if (wasProcessed)
                     return;
 
@@ -98,6 +121,36 @@ namespace SF3.Win.Controls {
                 if (sendToGLControl)
                     GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
             };
+
+            return _surfaceTilePropertiesControl;
+        }
+
+        private void SetSideEditorControl(Control control)
+            => SetSideEditorControl<Control>(control, null);
+
+        private void SetSideEditorControl<T>(T control, Action<T> init) where T : Control {
+            // Do nothing if we're already using that control.
+            if (_currentSideEditorControl == control)
+                return;
+
+            SuspendLayout();
+
+            // Replace the control with a new one. Keep it hidden for now until the layout is completed.
+            if (_currentSideEditorControl != null)
+                selectionPanel.Controls.Remove(_currentSideEditorControl);
+            if (control != null) {
+                control.Hide();
+                init?.Invoke(control);
+                selectionPanel.Controls.Add(control);
+            }
+
+            // Show or hide the panel depending on if a control exists.
+            selectionPanel.Visible = (control != null);
+
+            ResumeLayout(true);
+            control?.Show();
+
+            _currentSideEditorControl = control;
         }
 
         private void UpdatedSelectedCursorModeButton() {
@@ -266,5 +319,9 @@ namespace SF3.Win.Controls {
                 GLControl.InvalidateModels();
             }
         }
+
+        private Control _currentSideEditorControl = null;
+
+        private SurfaceTilePropertiesControl _surfaceTilePropertiesControl = null;
     }
 }

@@ -72,10 +72,8 @@ namespace SF3.Win.Controls {
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
             selectionPanel = new System.Windows.Forms.Panel();
-            tilePropertyControl1 = new SurfaceTilePropertiesControl();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
-            selectionPanel.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -536,21 +534,11 @@ namespace SF3.Win.Controls {
             // 
             // selectionPanel
             // 
-            selectionPanel.Controls.Add(tilePropertyControl1);
             selectionPanel.Dock = System.Windows.Forms.DockStyle.Right;
             selectionPanel.Location = new System.Drawing.Point(582, 62);
             selectionPanel.Name = "selectionPanel";
             selectionPanel.Size = new System.Drawing.Size(207, 514);
             selectionPanel.TabIndex = 4;
-            // 
-            // tilePropertyControl1
-            // 
-            tilePropertyControl1.Location = new System.Drawing.Point(0, 0);
-            tilePropertyControl1.MaximumSize = new System.Drawing.Size(207, 10000);
-            tilePropertyControl1.MinimumSize = new System.Drawing.Size(207, 446);
-            tilePropertyControl1.Name = "tilePropertyControl1";
-            tilePropertyControl1.Size = new System.Drawing.Size(207, 514);
-            tilePropertyControl1.TabIndex = 3;
             // 
             // MPD_ViewerControl
             // 
@@ -566,7 +554,6 @@ namespace SF3.Win.Controls {
             toolStrip1.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
-            selectionPanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -619,6 +606,5 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbApplyHideTags;
         private System.Windows.Forms.ToolStripButton tsbDrawActors;
         private System.Windows.Forms.Panel selectionPanel;
-        private SurfaceTilePropertiesControl tilePropertyControl1;
     }
 }

@@ -111,7 +111,7 @@ namespace SF3.Win.Controls {
         }
 
         public bool ChangeFocusedTile(int xDir, int yDir) {
-            var currentTile = TilePropertiesControl.Tile;
+            var currentTile = _selectedTile;
             if (currentTile == null)
                 return false;
 

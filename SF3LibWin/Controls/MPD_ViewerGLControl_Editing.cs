@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using SF3.FieldEditing;
 using SF3.Models.Files.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
@@ -50,7 +50,8 @@ namespace SF3.Win.Controls {
 
             _tileSelectedPos = tilePos;
             var tile = (_tileSelectedPos == null) ? null : MPD_File.Surface.GetTile(_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y);
-            TilePropertiesControl.Tile = tile;
+            _selectedTile = tile;
+            TileSelected?.Invoke(this, tile);
             _tileSelectedNeedsUpdate = true;
 
             Invalidate();
@@ -262,8 +263,9 @@ namespace SF3.Win.Controls {
         private Point? _tileSelectedPos = null;
         private Point? _lastTileEdited = null;
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SurfaceTilePropertiesControl TilePropertiesControl { get; set; } = null;
+        private IMPD_SurfaceTile _selectedTile = null;
+
+        public delegate void TileSelectedEventHandler(object sender, IMPD_SurfaceTile tile);
+        public event TileSelectedEventHandler TileSelected;
     }
 }

@@ -10,6 +10,7 @@ namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl : GLControl {
         public MPD_ViewerGLControl() {
             InitializeComponent();
+            ResizeRedraw = true;
 
             // Big dumb hack to prevent this from crashing in the designer view.
             if (!AppState.Initialized)
