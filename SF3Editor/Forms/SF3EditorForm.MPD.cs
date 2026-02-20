@@ -326,6 +326,13 @@ namespace SF3.Editor.Forms {
                 ExportMPDDialog((IMPD) SelectedFile.Loader.Model, null, SelectedFile.Loader.ShortFilename);
         }
 
+        private void tsmiMPD_DeselectAll_Click(object sender, EventArgs e) {
+            if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project) {
+                var view = ((MPD_View) SelectedFile.View.ActualView);
+                view.ViewerView.Control.GLControl.SelectTile(null);
+            }
+        }
+
         private void UpdateMPD_ModelSwitchGroupsMenu(IMPD? mpdFile) {
             var items = tsmiMPD_ModelSwitchGroups.DropDown.Items;
 
