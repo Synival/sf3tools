@@ -3,15 +3,26 @@ using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class Framebuffer : IDisposable {
-        public Framebuffer(int width, int height) {
+        public Framebuffer(int width, int height, RenderbufferStorage? depthStencilRenderBufferType) {
             ColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
-            DepthStencilBuffer = new Renderbuffer(width, height);
+
+            if (depthStencilRenderBufferType.HasValue)
+                DepthStencilBuffer = new Renderbuffer(depthStencilRenderBufferType.Value, width, height);
+
             Handle = GL.GenFramebuffer();
 
             // Attach the textures to the framebuffer.
             using (Use()) {
                 GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, ColorTexture.Handle, 0);
-                GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthStencilAttachment, RenderbufferTarget.Renderbuffer, DepthStencilBuffer.Handle);
+
+                if (depthStencilRenderBufferType.HasValue) {
+                    if (depthStencilRenderBufferType.Value == RenderbufferStorage.DepthComponent)
+                        GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthAttachment, RenderbufferTarget.Renderbuffer, DepthStencilBuffer.Handle);
+                    else if (depthStencilRenderBufferType.Value == RenderbufferStorage.DepthStencil)
+                        GL.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthStencilAttachment, RenderbufferTarget.Renderbuffer, DepthStencilBuffer.Handle);
+                    else
+                        throw new ArgumentException($"{nameof(depthStencilRenderBufferType)} should be DepthComponent or DepthStencil");
+                }
             }
         }
 
@@ -40,9 +51,12 @@ namespace SF3.Win.OpenGL {
                 return;
 
             if (disposing) {
-                ColorTexture.Dispose();
-                DepthStencilBuffer.Dispose();
+                ColorTexture?.Dispose();
+                DepthStencilBuffer?.Dispose();
                 GL.DeleteFramebuffer(Handle);
+
+                ColorTexture = null;
+                DepthStencilBuffer = null;
             }
 
             disposed = true;
@@ -61,7 +75,7 @@ namespace SF3.Win.OpenGL {
 
         public int Handle { get; }
 
-        private Texture ColorTexture { get; }
-        public Renderbuffer DepthStencilBuffer { get; }
+        private Texture ColorTexture { get; set; }
+        private Renderbuffer DepthStencilBuffer { get; set; }
     }
 }

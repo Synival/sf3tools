@@ -3,10 +3,10 @@ using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class Renderbuffer : IDisposable {
-        public Renderbuffer(int width, int height) {
+        public Renderbuffer(RenderbufferStorage internalFormat, int width, int height) {
             Handle = GL.GenRenderbuffer();
             using (Use())
-                GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, RenderbufferStorage.DepthStencil, width, height);
+                GL.RenderbufferStorage(RenderbufferTarget.Renderbuffer, internalFormat, width, height);
         }
 
         public StackElement Use() {
