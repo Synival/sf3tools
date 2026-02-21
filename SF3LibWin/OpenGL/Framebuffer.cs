@@ -3,8 +3,15 @@ using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class Framebuffer : IDisposable {
-        public Framebuffer(int width, int height, RenderbufferStorage? depthStencilRenderBufferType) {
-            ColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
+        public Framebuffer(int width, int height, int colorBpp, RenderbufferStorage? depthStencilRenderBufferType) {
+            if (colorBpp == 4)
+                ColorTexture = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Rgba, PixelType.UnsignedByte);
+            else if (colorBpp == 3)
+                ColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
+            else if (colorBpp == 1)
+                ColorTexture = new Texture(width, height, PixelInternalFormat.R8, PixelFormat.Red, PixelType.UnsignedByte);
+            else
+                throw new ArgumentException($"{nameof(colorBpp)} should be 1, 3, or 4");
 
             if (depthStencilRenderBufferType.HasValue)
                 DepthStencilBuffer = new Renderbuffer(depthStencilRenderBufferType.Value, width, height);

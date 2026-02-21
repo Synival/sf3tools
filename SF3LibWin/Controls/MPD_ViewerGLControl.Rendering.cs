@@ -354,7 +354,7 @@ namespace SF3.Win.Controls {
 
         private void UpdateSelectFramebuffer(int width, int height) {
             _selectFramebuffer?.Dispose();
-            _selectFramebuffer = new Framebuffer(width, height, RenderbufferStorage.DepthComponent);
+            _selectFramebuffer = new Framebuffer(width, height, 3, RenderbufferStorage.DepthComponent);
         }
 
         private void UpdateProjectionMatrix(int width, int height) {
