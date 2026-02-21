@@ -25,6 +25,7 @@ namespace SF3.Win.OpenGL {
         public Dictionary<TextureUnit, int> TextureHandles { get; } = new Dictionary<TextureUnit, int>();
         // TODO: needs separate stats per framebuffer target!!
         public int FramebufferHandle { get; set; } = 0;
+        public int RenderbufferHandle { get; set; } = 0;
         public Dictionary<BufferTarget, int> BufferHandles { get; } = new Dictionary<BufferTarget, int>();
         public int VertexArrayHandle { get; set; } = 0;
     }
