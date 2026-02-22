@@ -4,6 +4,9 @@ using OpenTK.Graphics.OpenGL;
 namespace SF3.Win.OpenGL {
     public class Framebuffer : IDisposable {
         public Framebuffer(int width, int height, int colorBpp, RenderbufferStorage? depthStencilRenderBufferType) {
+            Width  = width;
+            Height = height;
+
             if (colorBpp == 4)
                 ColorTexture = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Rgba, PixelType.UnsignedByte);
             else if (colorBpp == 3)
@@ -126,6 +129,8 @@ namespace SF3.Win.OpenGL {
             Dispose(false);
         }
 
+        public int Width { get; }
+        public int Height { get; }
         public int Handle { get; }
 
         private Texture ColorTexture { get; set; }
