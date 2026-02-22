@@ -8,5 +8,7 @@ out vec4 FragColor;
 
 void main() {
     vec4 color = texture(texture0, texCoord0Frag);
-    FragColor = vec4(color.rgb, pow(color.a, 0.25f));
+    float adjustedAlpha = pow(color.a, 0.50f);
+    float adjustedIntensity = adjustedAlpha / color.a;
+    FragColor = vec4(color.rgb * adjustedIntensity, adjustedAlpha);
 }
