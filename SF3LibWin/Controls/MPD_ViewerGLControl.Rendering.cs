@@ -135,6 +135,8 @@ namespace SF3.Win.Controls {
             _actorResources?.Dispose();
 
             _selectFramebuffer?.Dispose();
+            _outlineFramebuffer1?.Dispose();
+            _outlineFramebuffer2?.Dispose();
 
             _general           = null;
             _models            = null;
@@ -148,7 +150,9 @@ namespace SF3.Win.Controls {
             _boundaryModels    = null;
             _actorResources    = null;
 
-            _selectFramebuffer = null;
+            _selectFramebuffer   = null;
+            _outlineFramebuffer1 = null;
+            _outlineFramebuffer2 = null;
         }
 
         private void OnResizeRendering() => UpdateViewport(ClientSize.Width, ClientSize.Height);
@@ -355,6 +359,12 @@ namespace SF3.Win.Controls {
         private void UpdateSelectFramebuffer(int width, int height) {
             _selectFramebuffer?.Dispose();
             _selectFramebuffer = new Framebuffer(width, height, 3, RenderbufferStorage.DepthComponent);
+
+            // Create two framebuffers for outlines to account for the 2 blur passes.
+            _outlineFramebuffer1?.Dispose();
+            _outlineFramebuffer2?.Dispose();
+            _outlineFramebuffer1 = new Framebuffer(width, height, 4, null);
+            _outlineFramebuffer2 = new Framebuffer(width, height, 4, null);
         }
 
         private void UpdateProjectionMatrix(int width, int height) {
@@ -624,5 +634,7 @@ namespace SF3.Win.Controls {
         private Renderer _renderer = null;
 
         private Framebuffer _selectFramebuffer;
+        private Framebuffer _outlineFramebuffer1;
+        private Framebuffer _outlineFramebuffer2;
     }
 }
