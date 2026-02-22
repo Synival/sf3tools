@@ -189,7 +189,7 @@ namespace SF3.Win.Controls {
             foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
-            using (_selectFramebuffer.Use()) {
+            using (_selectFramebuffer.UseDraw()) {
                 GL.ClearColor(1, 1, 1, 1);
                 DrawSelectionScene();
             }

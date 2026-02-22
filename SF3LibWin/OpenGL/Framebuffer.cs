@@ -35,18 +35,64 @@ namespace SF3.Win.OpenGL {
 
         public StackElement Use() {
             var state = State.GetCurrentState();
-            if (state.FramebufferHandle == Handle)
+            if (state.FramebufferReadHandle == Handle && state.FramebufferDrawHandle == Handle)
                 return new StackElement();
 
-            var lastHandle = state.FramebufferHandle;
+            var lastReadHandle = state.FramebufferReadHandle;
+            var lastDrawHandle = state.FramebufferDrawHandle;
+
             return new StackElement(
                 () => {
                     GL.BindFramebuffer(FramebufferTarget.Framebuffer, Handle);
-                    state.FramebufferHandle = Handle;
+                    state.FramebufferReadHandle = Handle;
+                    state.FramebufferDrawHandle = Handle;
                 },
                 () => {
-                    GL.BindFramebuffer(FramebufferTarget.Framebuffer, lastHandle);
-                    state.FramebufferHandle = lastHandle;
+                    if (lastDrawHandle == lastReadHandle)
+                        GL.BindFramebuffer(FramebufferTarget.Framebuffer, lastReadHandle);
+                    else if (lastDrawHandle != state.FramebufferReadHandle)
+                        GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, lastReadHandle);
+                    else
+                        GL.BindFramebuffer(FramebufferTarget.DrawFramebuffer, lastDrawHandle);
+
+                    state.FramebufferReadHandle = lastReadHandle;
+                    state.FramebufferDrawHandle = lastDrawHandle;
+                }
+            );
+        }
+
+        public StackElement UseRead() {
+            var state = State.GetCurrentState();
+            if (state.FramebufferReadHandle == Handle)
+                return new StackElement();
+
+            var lastReadHandle = state.FramebufferReadHandle;
+            return new StackElement(
+                () => {
+                    GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, Handle);
+                    state.FramebufferReadHandle = Handle;
+                },
+                () => {
+                    GL.BindFramebuffer(FramebufferTarget.ReadFramebuffer, lastReadHandle);
+                    state.FramebufferReadHandle = lastReadHandle;
+                }
+            );
+        }
+
+        public StackElement UseDraw() {
+            var state = State.GetCurrentState();
+            if (state.FramebufferDrawHandle == Handle)
+                return new StackElement();
+
+            var lastDrawHandle = state.FramebufferDrawHandle;
+            return new StackElement(
+                () => {
+                    GL.BindFramebuffer(FramebufferTarget.DrawFramebuffer, Handle);
+                    state.FramebufferDrawHandle = Handle;
+                },
+                () => {
+                    GL.BindFramebuffer(FramebufferTarget.DrawFramebuffer, lastDrawHandle);
+                    state.FramebufferDrawHandle = lastDrawHandle;
                 }
             );
         }
