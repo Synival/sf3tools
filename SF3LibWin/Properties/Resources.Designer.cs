@@ -295,6 +295,47 @@ namespace SF3.Win.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///in vec4 colorFrag;
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor = colorFrag;
+        ///}
+        ///.
+        /// </summary>
+        internal static string OutlineFrag {
+            get {
+                return ResourceManager.GetString("OutlineFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec4 color;
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///out vec4 colorFrag;
+        ///
+        ///void main() {
+        ///    gl_Position = projection * view * model * vec4(position, 1.0);
+        ///    colorFrag = color;
+        ///}
+        ///.
+        /// </summary>
+        internal static string OutlineVert {
+            get {
+                return ResourceManager.GetString("OutlineVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap RenderOnBlackBackgroundBmp {
@@ -515,12 +556,13 @@ namespace SF3.Win.Properties {
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///uniform float direction;
+        ///uniform float cameraDistAdjust;
         ///
         ///out vec4 colorFrag;
         ///out vec2 texCoord0Frag;
         ///
         ///void main() {
-        ///    gl_Position = projection * view * model * vec4(pos [rest of string was truncated]&quot;;.
+        ///    // Render the spri [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SpriteVert {
             get {
