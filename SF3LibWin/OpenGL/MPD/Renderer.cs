@@ -661,6 +661,7 @@ namespace SF3.Win.OpenGL.MPD {
         ) {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
+            general.OutlineShader.UpdateUniform("alwaysShow", true);
 
             void DrawOutlinedModels() {
                 general.OutlineShader.UpdateUniform("color", new Vector3(0, 0.5f, 0.5f));
@@ -693,11 +694,8 @@ namespace SF3.Win.OpenGL.MPD {
                 GL.Clear(ClearBufferMask.ColorBufferBit);
 
                 // Now start producing the outline by first rendering the visible models to a framebuffer.
-                using (general.OutlineShader.Use()) {
-                    general.OutlineShader.UpdateUniform("alwaysShow", true);
+                using (general.OutlineShader.Use())
                     DrawOutlinedModels();
-                    general.OutlineShader.UpdateUniform("alwaysShow", false);
-                }
             }
 
             GL.Disable(EnableCap.Blend);
