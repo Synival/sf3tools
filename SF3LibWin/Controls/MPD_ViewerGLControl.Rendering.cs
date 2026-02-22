@@ -101,7 +101,7 @@ namespace SF3.Win.Controls {
             _actorResources.Init();
 
             SetInitialCameraPosition();
-            UpdateSelectFramebuffer(ClientSize.Width, ClientSize.Height);
+            UpdateFramebuffers(ClientSize.Width, ClientSize.Height);
             UpdateProjectionMatrices(ClientSize.Width, ClientSize.Height);
 
             using (_general.ObjectShader.Use()) {
@@ -176,7 +176,7 @@ namespace SF3.Win.Controls {
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, width, height);
 
-            UpdateSelectFramebuffer(width, height);
+            UpdateFramebuffers(width, height);
             UpdateProjectionMatrices(width, height);
 
             Invalidate();
@@ -357,15 +357,30 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private void UpdateSelectFramebuffer(int width, int height) {
+        private void UpdateFramebuffers(int width, int height) {
+            const int c_outlinePixelCount = 400 * 400;
+
             _selectFramebuffer?.Dispose();
             _selectFramebuffer = new Framebuffer(width, height, 3, RenderbufferStorage.DepthComponent);
 
             // Create two framebuffers for outlines to account for the 2 blur passes.
+            // Make the size of the framebuffer no larger than 160,000 pixels (400x400), with the same width:height ratio as the viewport.
+            // This is so make the outlines appear bigger without the need for more complicated gaussian blur passes.
+            int outlineWidth, outlineHeight;
+            if (width * height > c_outlinePixelCount) {
+                var ratio = (float) width / height;
+                outlineWidth  = (int) Math.Sqrt(c_outlinePixelCount * ratio);
+                outlineHeight = c_outlinePixelCount / outlineWidth;
+            }
+            else {
+                outlineWidth = width;
+                outlineHeight = height;
+            }
+
             _outlineFramebuffer1?.Dispose();
             _outlineFramebuffer2?.Dispose();
-            _outlineFramebuffer1 = new Framebuffer(width, height, 4, null);
-            _outlineFramebuffer2 = new Framebuffer(width, height, 4, null);
+            _outlineFramebuffer1 = new Framebuffer(outlineWidth, outlineHeight, 4, null, false, false);
+            _outlineFramebuffer2 = new Framebuffer(outlineWidth, outlineHeight, 4, null, false, false);
         }
 
         private void UpdateProjectionMatrix(int width, int height) {

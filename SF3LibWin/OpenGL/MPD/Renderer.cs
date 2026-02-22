@@ -136,7 +136,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneBoundaries(general, boundaryModels);
 
             if (outlineFramebuffer1 != null && outlineFramebuffer2 != null)
-                DrawSelectionOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2);
+                DrawSelectionOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2, screenWidth, screenHeight);
         }
 
         public void DrawSceneObjectNormals(
@@ -651,7 +651,14 @@ namespace SF3.Win.OpenGL.MPD {
             }
         }
 
-        public void DrawSelectionOutlines(GeneralResources general, SurfaceEditorResources surfaceEditor, Framebuffer outlineFramebuffer1, Framebuffer outlineFramebuffer2) {
+        public void DrawSelectionOutlines(
+            GeneralResources general,
+            SurfaceEditorResources surfaceEditor,
+            Framebuffer outlineFramebuffer1,
+            Framebuffer outlineFramebuffer2,
+            int screenWidth,
+            int screenHeight
+        ) {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
 
@@ -680,6 +687,7 @@ namespace SF3.Win.OpenGL.MPD {
                 GL.ColorMask(true, true, true, true);
             }
 
+            GL.Viewport(0, 0, outlineFramebuffer1.Width, outlineFramebuffer1.Height);
             using (outlineFramebuffer1.UseDraw()) {
                 GL.ClearColor(0, 0, 0, 0);
                 GL.Clear(ClearBufferMask.ColorBufferBit);
@@ -709,6 +717,7 @@ namespace SF3.Win.OpenGL.MPD {
                 }
             }
             GL.Enable(EnableCap.Blend);
+            GL.Viewport(0, 0, screenWidth, screenHeight);
 
             using (general.OutlineToScreenShader.Use())
             using (outlineFramebuffer1.ColorTexture.Use()) {
