@@ -133,7 +133,7 @@ namespace SF3.Win.OpenGL {
         public int Height { get; }
         public int Handle { get; }
 
-        private Texture ColorTexture { get; set; }
+        public Texture ColorTexture { get; private set; }
         private Renderbuffer DepthStencilBuffer { get; set; }
     }
 }

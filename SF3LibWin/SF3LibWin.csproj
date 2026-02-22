@@ -17,8 +17,6 @@
     <None Remove="Images\Normals.bmp" />
     <None Remove="Images\TerrainTypes.bmp" />
     <None Remove="Images\TerrainTypes.xcf" />
-    <None Remove="Images\TileHover.bmp" />
-    <None Remove="Images\TileSelected.bmp" />
     <None Remove="Images\TileWireframe.bmp" />
     <None Remove="Images\TransparentBlack.bmp" />
     <None Remove="Images\TransparentWhite.bmp" />
@@ -43,8 +41,6 @@
     <EmbeddedResource Include="Images\Normals.bmp" />
     <EmbeddedResource Include="Images\TerrainTypes.bmp" />
     <EmbeddedResource Include="Images\TerrainTypes.xcf" />
-    <EmbeddedResource Include="Images\TileHover.bmp" />
-    <EmbeddedResource Include="Images\TileSelected.bmp" />
     <EmbeddedResource Include="Images\TileWireframe.bmp" />
     <EmbeddedResource Include="Images\TransparentBlack.bmp" />
     <EmbeddedResource Include="Images\TransparentWhite.bmp" />

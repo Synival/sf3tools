@@ -269,7 +269,8 @@ namespace SF3.Win.Controls {
                     ModelsToHide       = modelsToHide,
                 },
                 Yaw, Pitch, Width, Height,
-                ref _projectionMatrix, ref _viewMatrix
+                ref _projectionMatrix, ref _viewMatrix,
+                _outlineFramebuffer1, _outlineFramebuffer2
             );
 
             SwapBuffers();

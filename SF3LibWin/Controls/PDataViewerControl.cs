@@ -160,7 +160,8 @@ namespace SF3.Win.Controls {
                     SmoothLighting = true,
                 },
                 Yaw, Pitch, ClientSize.Width, ClientSize.Height,
-                ref _projectionMatrix, ref _viewMatrix
+                ref _projectionMatrix, ref _viewMatrix,
+                null, null
             );
 
             SwapBuffers();

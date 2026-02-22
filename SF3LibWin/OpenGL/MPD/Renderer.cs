@@ -71,7 +71,10 @@ namespace SF3.Win.OpenGL.MPD {
             int screenWidth,
             int screenHeight,
             ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix
+            ref Matrix4 viewMatrix,
+            // TODO: Put these into resources possibly?
+            Framebuffer outlineFramebuffer1,
+            Framebuffer outlineFramebuffer2
         ) {
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
             if (!options.ForceTwoSidedTextures)
@@ -132,7 +135,8 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
 
-            DrawEditorElements(general, surfaceEditor, options, screenWidth, screenHeight, ref projectionMatrix, ref viewMatrix);
+            if (outlineFramebuffer1 != null && outlineFramebuffer2 != null)
+                DrawSelectionOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2);
         }
 
         public void DrawSceneObjectNormals(
@@ -165,7 +169,7 @@ namespace SF3.Win.OpenGL.MPD {
             ref Matrix4 viewMatrix,
             bool[] modelDirectionsFacingCamera
         ) {
-            GL.StencilFunc(StencilFunction.Always, 4, 0x04);
+            GL.StencilFunc(StencilFunction.Always, 0x04, 0x04);
             GL.StencilMask(0x04);
 
             if (options.DrawModels)
@@ -250,21 +254,6 @@ namespace SF3.Win.OpenGL.MPD {
             }
         }
 
-        public void DrawEditorElements(
-            GeneralResources general,
-            SurfaceEditorResources surfaceEditor,
-            RendererOptions options,
-            int screenWidth,
-            int screenHeight,
-            ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix
-        ) {
-            using (general.TextureShader.Use()) {
-                DrawSurfaceEditorTileSelected(general, surfaceEditor);
-                DrawSurfaceEditorTileHover(general, surfaceEditor);
-            }
-        }
-
         public void DrawSceneModelsNormals(
             GeneralResources general,
             ModelResources models,
@@ -344,7 +333,7 @@ namespace SF3.Win.OpenGL.MPD {
                 Matrix4.CreateTranslation(xOffset, yOffset, 0)
             );
 
-            GL.StencilFunc(StencilFunction.Always, 2, 0x02);
+            GL.StencilFunc(StencilFunction.Always, 0x02, 0x02);
             GL.StencilMask(0x02);
 
             using (skyModel.Texture.Use(TextureUnit.Texture0))
@@ -385,7 +374,7 @@ namespace SF3.Win.OpenGL.MPD {
             }
             general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, ref glow);
 
-            GL.StencilFunc(StencilFunction.Always, 1, 0x01);
+            GL.StencilFunc(StencilFunction.Always, 0x01, 0x01);
             GL.StencilMask(0x01);
 
             using (groundModel.Texture.Use(TextureUnit.Texture0))
@@ -662,29 +651,77 @@ namespace SF3.Win.OpenGL.MPD {
             }
         }
 
-        public void DrawSurfaceEditorTileSelected(GeneralResources general, SurfaceEditorResources surfaceEditor) {
-            if (surfaceEditor?.TileSelectedModel == null)
-                return;
-
+        public void DrawSelectionOutlines(GeneralResources general, SurfaceEditorResources surfaceEditor, Framebuffer outlineFramebuffer1, Framebuffer outlineFramebuffer2) {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
 
-            using (surfaceEditor.TileSelectedTexture.Use())
-                surfaceEditor.TileSelectedModel.Draw(general.TextureShader);
+            void DrawOutlinedModels() {
+                general.OutlineShader.UpdateUniform("color", new Vector3(0, 0.5f, 0.5f));
+                if (surfaceEditor.TileHoverModel != null)
+                    using ((surfaceEditor.TileHoverTexture ?? general.TransparentWhiteTexture).Use())
+                        surfaceEditor.TileHoverModel.Draw(general.OutlineShader);
 
-            GL.DepthMask(true);
-            GL.Enable(EnableCap.DepthTest);
-        }
+                general.OutlineShader.UpdateUniform("color", new Vector3(0, 1.0f, 1.0f));
+                if (surfaceEditor.TileSelectedModel != null)
+                    using ((surfaceEditor.TileSelectedTexture ?? general.TransparentWhiteTexture).Use())
+                        surfaceEditor.TileSelectedModel.Draw(general.OutlineShader);
+            }
 
-        public void DrawSurfaceEditorTileHover(GeneralResources general, SurfaceEditorResources surfaceEditor) {
-            if (surfaceEditor?.TileHoverModel == null)
-                return;
+            // Draw the visible models that need outlines on the screen's stencil buffer *only*.
+            using (general.OutlineShader.Use()) {
+                GL.ColorMask(false, false, false, false);
+                GL.Enable(EnableCap.StencilTest);
+                GL.StencilFunc(StencilFunction.Always, 0x08, 0x08);
+                GL.StencilMask(0x08);
 
-            GL.Disable(EnableCap.DepthTest);
-            GL.DepthMask(false);
+                DrawOutlinedModels();
 
-            using (surfaceEditor.TileHoverTexture.Use())
-                surfaceEditor.TileHoverModel.Draw(general.TextureShader);
+                GL.Disable(EnableCap.StencilTest);
+                GL.ColorMask(true, true, true, true);
+            }
+
+            using (outlineFramebuffer1.UseDraw()) {
+                GL.ClearColor(0, 0, 0, 0);
+                GL.Clear(ClearBufferMask.ColorBufferBit);
+
+                // Now start producing the outline by first rendering the visible models to a framebuffer.
+                using (general.OutlineShader.Use()) {
+                    general.OutlineShader.UpdateUniform("alwaysShow", true);
+                    DrawOutlinedModels();
+                    general.OutlineShader.UpdateUniform("alwaysShow", false);
+                }
+            }
+
+            GL.Disable(EnableCap.Blend);
+            using (general.OutlineBlurPassShader.Use()) {
+                general.OutlineBlurPassShader.UpdateUniform("texelSize", new Vector2(1.0f / outlineFramebuffer1.Width, 1.0f / outlineFramebuffer1.Height));
+
+                using (outlineFramebuffer1.ColorTexture.Use())
+                using (outlineFramebuffer2.UseDraw()) {
+                    general.OutlineBlurPassShader.UpdateUniform("blurDirectionVector", new Vector2(1.0f, 0.0f));
+                    general.FullScreenQuad.Draw(general.OutlineBlurPassShader);
+                }
+
+                using (outlineFramebuffer2.ColorTexture.Use())
+                using (outlineFramebuffer1.UseDraw()) {
+                    general.OutlineBlurPassShader.UpdateUniform("blurDirectionVector", new Vector2(0.0f, 1.0f));
+                    general.FullScreenQuad.Draw(general.OutlineBlurPassShader);
+                }
+            }
+            GL.Enable(EnableCap.Blend);
+
+            using (general.OutlineToScreenShader.Use())
+            using (outlineFramebuffer1.ColorTexture.Use()) {
+                GL.Enable(EnableCap.StencilTest);
+                GL.StencilFunc(StencilFunction.Notequal, 0x08, 0x08);
+                GL.StencilMask(0x00);
+
+                GL.BlendFunc(BlendingFactor.One, BlendingFactor.One);
+                general.FullScreenQuad.Draw(general.OutlineToScreenShader);
+                GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+                GL.Disable(EnableCap.StencilTest);
+            }
 
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);

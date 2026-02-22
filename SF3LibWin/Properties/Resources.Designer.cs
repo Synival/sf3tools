@@ -297,11 +297,71 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///in vec4 colorFrag;
+        ///uniform sampler2D texture0;
+        ///uniform vec2 texelSize;
+        ///uniform vec2 blurDirectionVector;
+        ///
+        ///in vec2 texCoord0Frag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///const float weight[5] = float[5](
+        ///    0.2270270,
+        ///    0.1945946,
+        ///    0.1216216,
+        ///    0.0540541,
+        ///    0.0162162
+        ///);
+        ///
+        ///void main() {
+        ///    vec4 result = texture(texture0, texCoord0Frag) * weight[0];
+        ///
+        ///    for(int i = 1; i &lt; 5; ++i) {
+        ///        result += texture(texture0, texCoord0Frag + texelSize * i * blurDirectionVector) * weight[i];
+        ///        resu [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OutlineBlurPassFrag {
+            get {
+                return ResourceManager.GetString("OutlineBlurPassFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec2 texCoord0;
+        ///
+        ///out vec2 texCoord0Frag;
+        ///
+        ///void main() {
+        ///    gl_Position = vec4(position, 1.0);
+        ///    texCoord0Frag = texCoord0;
+        ///}
+        ///.
+        /// </summary>
+        internal static string OutlineBlurPassVert {
+            get {
+                return ResourceManager.GetString("OutlineBlurPassVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform sampler2D texture0;
+        ///uniform vec3 color;
+        ///uniform bool alwaysShow;
+        ///
+        ///in vec2 texCoord0Frag;
+        ///
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    FragColor = colorFrag;
+        ///    if (!alwaysShow &amp;&amp; texture(texture0, texCoord0Frag).a &lt; 0.001)
+        ///        discard;
+        ///
+        ///    FragColor = vec4(color, 1);
         ///}
         ///.
         /// </summary>
@@ -314,18 +374,61 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
+        ///uniform sampler2D texture0;
+        ///
+        ///in vec2 texCoord0Frag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    vec4 color = texture(texture0, texCoord0Frag);
+        ///    FragColor = vec4(color.rgb, pow(color.a, 0.25f));
+        ///}
+        ///.
+        /// </summary>
+        internal static string OutlineToScreenFrag {
+            get {
+                return ResourceManager.GetString("OutlineToScreenFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec4 color;
+        ///layout (location = 1) in vec2 texCoord0;
+        ///
+        ///uniform mat4 view;
+        ///
+        ///out vec2 texCoord0Frag;
+        ///
+        ///void main() {
+        ///    gl_Position = vec4(position, 1.0);
+        ///    texCoord0Frag = texCoord0;
+        ///}
+        ///.
+        /// </summary>
+        internal static string OutlineToScreenVert {
+            get {
+                return ResourceManager.GetString("OutlineToScreenVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec2 texCoord0;
         ///
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///
-        ///out vec4 colorFrag;
+        ///out vec2 texCoord0Frag;
         ///
         ///void main() {
         ///    gl_Position = projection * view * model * vec4(position, 1.0);
-        ///    colorFrag = color;
+        ///    texCoord0Frag = texCoord0;
         ///}
         ///.
         /// </summary>
@@ -634,26 +737,6 @@ namespace SF3.Win.Properties {
         internal static string TextureVert {
             get {
                 return ResourceManager.GetString("TextureVert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TileHoverBmp {
-            get {
-                object obj = ResourceManager.GetObject("TileHoverBmp", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TileSelectedBmp {
-            get {
-                object obj = ResourceManager.GetObject("TileSelectedBmp", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

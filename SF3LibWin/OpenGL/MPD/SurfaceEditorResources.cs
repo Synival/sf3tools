@@ -1,17 +1,14 @@
 ﻿using System.Drawing;
+using System.Linq;
 using CommonLib;
 using SF3.MPD.Interfaces;
+using SF3.Types;
 using SF3.Win.Extensions;
-using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD {
     public class SurfaceEditorResources : ResourcesBase {
         protected override void PerformInit() {
-            Textures = [
-                (TileHoverTexture    = new Texture(Resources.TileHoverBmp)),
-                (TileSelectedTexture = new Texture(Resources.TileSelectedBmp)),
-            ];
-
+            Textures = [];
             Models = [];
         }
 
@@ -34,27 +31,53 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, Point? tilePos) {
-            TileHoverModel?.Dispose();
-            if (TileHoverModel != null)
+            if (TileHoverModel != null) {
+                TileHoverModel?.Dispose();
                 Models.Remove(TileHoverModel);
-            TileHoverModel = null;
+                TileHoverModel = null;
+            }
+
+            if (TileHoverTexture != null) {
+                TileHoverTexture?.Dispose();
+                Textures.Remove(TileHoverTexture);
+                TileHoverTexture = null;
+            }
 
             if (tilePos != null) {
                 var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
+
+                var texId = tile.TextureID;
+                var texture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
+                if (texture != null) 
+                    Textures.Add(TileHoverTexture = new Texture(texture.CreateBitmapARGB8888()));
+
                 var quad = new Quad(tile.GetVector3Vertices());
                 Models.Add(TileHoverModel = new QuadModel([quad]));
             }
         }
 
         public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, Point? tilePos) {
-            TileSelectedModel?.Dispose();
-            if (TileSelectedModel != null)
+            if (TileSelectedModel != null) {
+                TileSelectedModel.Dispose();
                 Models.Remove(TileSelectedModel);
-            TileSelectedModel = null;
+                TileSelectedModel = null;
+            }
+
+            if (TileSelectedTexture != null) {
+                TileSelectedTexture.Dispose();
+                Textures.Remove(TileSelectedTexture);
+                TileSelectedTexture = null;
+            }
 
             if (tilePos != null) {
                 var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
-                var quad = new Quad(tile.GetVector3Vertices(2.00f));
+
+                var texId = tile.TextureID;
+                var texture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
+                if (texture != null) 
+                    Textures.Add(TileSelectedTexture = new Texture(texture.CreateBitmapARGB8888()));
+
+                var quad = new Quad(tile.GetVector3Vertices());
                 Models.Add(TileSelectedModel = new QuadModel([quad]));
             }
         }
