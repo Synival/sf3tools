@@ -3,16 +3,16 @@ using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class Framebuffer : IDisposable {
-        public Framebuffer(int width, int height, int colorBpp, RenderbufferStorage? depthStencilRenderBufferType) {
+        public Framebuffer(int width, int height, int colorBpp, RenderbufferStorage? depthStencilRenderBufferType, bool minNearest = false, bool magNearest = true) {
             Width  = width;
             Height = height;
 
             if (colorBpp == 4)
-                ColorTexture = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Rgba, PixelType.UnsignedByte);
+                ColorTexture = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Rgba, PixelType.UnsignedByte, minNearest, magNearest);
             else if (colorBpp == 3)
-                ColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte);
+                ColorTexture = new Texture(width, height, PixelInternalFormat.Rgb, PixelFormat.Rgb, PixelType.UnsignedByte, minNearest, magNearest);
             else if (colorBpp == 1)
-                ColorTexture = new Texture(width, height, PixelInternalFormat.R8, PixelFormat.Red, PixelType.UnsignedByte);
+                ColorTexture = new Texture(width, height, PixelInternalFormat.R8, PixelFormat.Red, PixelType.UnsignedByte, minNearest, magNearest);
             else
                 throw new ArgumentException($"{nameof(colorBpp)} should be 1, 3, or 4");
 
