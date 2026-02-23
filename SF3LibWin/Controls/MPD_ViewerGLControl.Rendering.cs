@@ -187,20 +187,6 @@ namespace SF3.Win.Controls {
         public void RenderFrame() {
             MakeCurrent();
 
-            UpdateInvalidatedResources();
-
-            UpdateViewMatrix();
-            foreach (var shader in _general.Shaders)
-                shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
-
-            using (_selectFramebuffer.UseDraw()) {
-                GL.ClearColor(1, 1, 1, 1);
-                DrawSelectionScene();
-            }
-            UpdateTilePosition();
-
-            PerformClear();
-
             // Determine which models to hide based on flags.
             // TODO: Cache all this!!
             // TODO: This isn't how it actually works; it's very non-deterministic.
@@ -232,43 +218,58 @@ namespace SF3.Win.Controls {
 
             var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
 
+            // TODO: these options should be cached!!!
+            var renderOptions = new Renderer.RendererOptions() {
+                DrawModels         = DrawModels,
+                DrawSurfaceModel   = DrawSurfaceModel,
+                DrawGround         = DrawGround,
+                DrawSky            = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSky == true && DrawSky,
+                DrawGradients      = DrawGradients,
+                DrawActors         = DrawActors,
+                ApplyLighting      = ApplyLighting,
+
+                HideModelsNotFacingCamera = HideModelsNotFacingCamera,
+                ModelsYRotation    = MPD_File?.Settings?.ModelsYRotation ?? 180.0f,
+                ModelsViewAngleMin = MPD_File?.Settings?.ModelsViewAngleMin ?? 0,
+                ModelsViewAngleMax = MPD_File?.Settings?.ModelsViewAngleMax ?? 0,
+
+                DrawNormals        = DrawNormals,
+                DrawWireframe      = DrawWireframe,
+                RotateSpritesUp    = RotateSpritesUp,
+                DrawOutlines       = true,
+
+                DrawTerrainTypes   = DrawTerrainTypes,
+                DrawEventIDs       = DrawEventIDs,
+                DrawBoundaries     = DrawBoundaries,
+                DrawCollisionLines = DrawCollisionLines,
+
+                BackgroundX        = MPD_File?.Planes?.BackgroundX ?? 0,
+                BackgroundY        = MPD_File?.Planes?.BackgroundY ?? 0,
+
+                UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
+
+                ModelsToHide       = modelsToHide,
+            };
+
+            UpdateInvalidatedResources();
+
+            UpdateViewMatrix();
+            foreach (var shader in _general.Shaders)
+                shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
+
+            using (_selectFramebuffer.UseDraw()) {
+                GL.ClearColor(1, 1, 1, 1);
+                DrawSelectionScene(renderOptions);
+            }
+            UpdateTilePosition();
+
+            PerformClear();
+
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
                 truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
                 _lighting, _boundaryModels, _collisionModels, _actorResources, _surfaceEditor,
-
-                // TODO: these options should be cached!!!
-                new Renderer.RendererOptions() {
-                    DrawModels         = DrawModels,
-                    DrawSurfaceModel   = DrawSurfaceModel,
-                    DrawGround         = DrawGround,
-                    DrawSky            = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSky == true && DrawSky,
-                    DrawGradients      = DrawGradients,
-                    DrawActors         = DrawActors,
-                    ApplyLighting      = ApplyLighting,
-
-                    HideModelsNotFacingCamera = HideModelsNotFacingCamera,
-                    ModelsYRotation    = MPD_File?.Settings?.ModelsYRotation ?? 180.0f,
-                    ModelsViewAngleMin = MPD_File?.Settings?.ModelsViewAngleMin ?? 0,
-                    ModelsViewAngleMax = MPD_File?.Settings?.ModelsViewAngleMax ?? 0,
-
-                    DrawNormals        = DrawNormals,
-                    DrawWireframe      = DrawWireframe,
-                    RotateSpritesUp    = RotateSpritesUp,
-                    DrawOutlines       = true,
-
-                    DrawTerrainTypes   = DrawTerrainTypes,
-                    DrawEventIDs       = DrawEventIDs,
-                    DrawBoundaries     = DrawBoundaries,
-                    DrawCollisionLines = DrawCollisionLines,
-
-                    BackgroundX        = MPD_File?.Planes?.BackgroundX ?? 0,
-                    BackgroundY        = MPD_File?.Planes?.BackgroundY ?? 0,
-
-                    UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
-
-                    ModelsToHide       = modelsToHide,
-                },
+                renderOptions,
                 Yaw, Pitch, Width, Height,
                 ref _projectionMatrix, ref _viewMatrix,
                 _outlineFramebuffer1, _outlineFramebuffer2
@@ -421,16 +422,23 @@ namespace SF3.Win.Controls {
             return new Vector3((float) x, (float) y, (float) z);
         }
 
-        private void DrawSelectionScene() {
+        private void DrawSelectionScene(Renderer.RendererOptions options) {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            if (_surfaceModel?.Blocks == null)
-                return;
 
-            using (_general.SolidShader.Use()) {
-                foreach (var block in _surfaceModel.Blocks)
-                    if (block.SelectionModel != null)
-                        block.SelectionModel.Draw(_general.SolidShader);
+            var modelDirectionsFacingCamera = Renderer.GetModelDirectionsFacingCamera(options, _yaw);
+            if (options.DrawModels)
+                _renderer.DrawSceneModels(_general, _models, null, options, _yaw, _pitch, modelDirectionsFacingCamera, transparentPass: false, selectionColors: true);
+
+            if (options.DrawSurfaceModel && _surfaceModel?.Blocks != null) {
+                using (_general.SolidShader.Use()) {
+                    foreach (var block in _surfaceModel.Blocks)
+                        if (block.SelectionModel != null)
+                            block.SelectionModel.Draw(_general.SolidShader);
+                }
             }
+
+            if (options.DrawModels)
+                _renderer.DrawSceneModels(_general, _models, null, options, _yaw, _pitch, modelDirectionsFacingCamera, transparentPass: true, selectionColors:  true);
         }
 
         private float _frameDeltaTimeInMs = 0;

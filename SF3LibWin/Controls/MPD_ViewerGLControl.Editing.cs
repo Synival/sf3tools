@@ -71,13 +71,15 @@ namespace SF3.Win.Controls {
             using (_selectFramebuffer.UseRead())
                 GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
 
-            if (pixel[2] == 255)
-                UpdateTilePosition(null);
-            else {
+            if (pixel[2] < 2) {
                 UpdateTilePosition(new Point(
                     (int) Math.Round(pixel[0] / (255.0f / SurfaceModelResources.WidthInTiles)),
                     (int) Math.Round(pixel[1] / (255.0f / SurfaceModelResources.HeightInTiles))
                 ));
+            }
+            // TODO: if (pixel[2] < 6) for models
+            else {
+                UpdateTilePosition(null);
             }
         }
 
