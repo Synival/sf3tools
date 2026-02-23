@@ -365,7 +365,7 @@ namespace SF3.Editor.Forms {
         private void ToggleModelSwitchGroup(IMPD mpdFile, IMPD_ModelSwitchGroup msg, ToolStripMenuItem item) {
             item.Checked = msg.StateInEditor = !msg.StateInEditor;
             if (SelectedFile?.View?.ActualView is MPD_View mpdView && mpdView.Model == mpdFile)
-                mpdView.ViewerView?.ViewerGLControl?.InvalidateModels();
+                mpdView.ViewerView?.ViewerGLControl?.InvalidateModelInstancesToHide();
         }
     }
 }

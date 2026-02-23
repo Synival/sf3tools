@@ -186,37 +186,7 @@ namespace SF3.Win.Controls {
 
         public void RenderFrame() {
             MakeCurrent();
-
-            // Determine which models to hide based on flags.
-            // TODO: Cache all this!!
-            // TODO: This isn't how it actually works; it's very non-deterministic.
-            //   Models appear to be hidden by default if they're in any "VisibleModelsWhenFlagOn" table.
-            //   Their visibility is toggled on/off when the flag is toggled.
-            //   If a model is present in multiple switches (as is the case in IWAOKA.MPD) then the visibility
-            //      of the model depends on the order in which the flags were toggled.
-            var modelsToHide = new HashSet<int>();
-            if (MPD_File?.ModelSwitchGroups != null) {
-                // Assume everything is hidden by default.
-                foreach (var switchGroup in MPD_File.ModelSwitchGroups) {
-                    if (switchGroup.ModelInstancesVisibleWhenOn != null)
-                        foreach (var modelInstId in switchGroup.ModelInstancesVisibleWhenOn)
-                            modelsToHide.Add(modelInstId);
-
-                    if (switchGroup.ModelInstancesVisibleWhenOff != null)
-                        foreach (var modelInstId in switchGroup.ModelInstancesVisibleWhenOff)
-                            modelsToHide.Add(modelInstId);
-                }
-
-                // Enable models selectively based on flags.
-                foreach (var switchGroup in MPD_File.ModelSwitchGroups) {
-                    var turnOnList = switchGroup.StateInEditor ? switchGroup.ModelInstancesVisibleWhenOn : switchGroup.ModelInstancesVisibleWhenOff;
-                    if (turnOnList != null)
-                        foreach (var modelInstId in turnOnList)
-                            modelsToHide.Remove(modelInstId);
-                }
-            }
-
-            var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
+            UpdateInvalidatedResources();
 
             // TODO: these options should be cached!!!
             var renderOptions = new Renderer.RendererOptions() {
@@ -248,7 +218,7 @@ namespace SF3.Win.Controls {
 
                 UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
-                ModelsToHide       = modelsToHide,
+                ModelsToHide       = _modelInstancesToHide,
             };
 
             var renderState = new Renderer.RendererState() {
@@ -259,8 +229,6 @@ namespace SF3.Win.Controls {
                 ProjectionMatrix = _projectionMatrix,
                 ViewMatrix       = _viewMatrix
             };
-
-            UpdateInvalidatedResources();
 
             UpdateViewMatrix();
             foreach (var shader in _general.Shaders)
@@ -273,6 +241,7 @@ namespace SF3.Win.Controls {
 
             PerformClear();
 
+            var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
                 truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
@@ -349,6 +318,11 @@ namespace SF3.Win.Controls {
                 _skyModel?.Update(MPD_File);
                 _planesNeedUpdate = false;
             }
+
+            if (_modelInstancesToHideNeedsUpdate) {
+                UpdateModelInstancesToHide();
+                _modelInstancesToHideNeedsUpdate = false;
+            }
         }
 
         private void OnFrameTickRendering(float deltaInMs) {
@@ -408,6 +382,38 @@ namespace SF3.Win.Controls {
             _viewMatrix = Matrix4.CreateTranslation(-Position)
                 * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
+        }
+
+        private void UpdateModelInstancesToHide() {
+            // Determine which models to hide based on flags.
+            // TODO: This isn't how it actually works; it's very non-deterministic.
+            //   Models appear to be hidden by default if they're in any "VisibleModelsWhenFlagOn" table.
+            //   Their visibility is toggled on/off when the flag is toggled.
+            //   If a model is present in multiple switches (as is the case in IWAOKA.MPD) then the visibility
+            //      of the model depends on the order in which the flags were toggled.
+            var modelsToHide = new HashSet<int>();
+            if (MPD_File?.ModelSwitchGroups != null) {
+                // Assume everything is hidden by default.
+                foreach (var switchGroup in MPD_File.ModelSwitchGroups) {
+                    if (switchGroup.ModelInstancesVisibleWhenOn != null)
+                        foreach (var modelInstId in switchGroup.ModelInstancesVisibleWhenOn)
+                            modelsToHide.Add(modelInstId);
+
+                    if (switchGroup.ModelInstancesVisibleWhenOff != null)
+                        foreach (var modelInstId in switchGroup.ModelInstancesVisibleWhenOff)
+                            modelsToHide.Add(modelInstId);
+                }
+
+                // Enable models selectively based on flags.
+                foreach (var switchGroup in MPD_File.ModelSwitchGroups) {
+                    var turnOnList = switchGroup.StateInEditor ? switchGroup.ModelInstancesVisibleWhenOn : switchGroup.ModelInstancesVisibleWhenOff;
+                    if (turnOnList != null)
+                        foreach (var modelInstId in turnOnList)
+                            modelsToHide.Remove(modelInstId);
+                }
+            }
+
+            _modelInstancesToHide = modelsToHide;
         }
 
         private Vector3 GetLightPosition() {
@@ -474,6 +480,7 @@ namespace SF3.Win.Controls {
         public void InvalidateModels         (bool invalidatePainter = true) => InvalidateResource(ref _modelsNeedUpdate,           invalidatePainter);
         public void InvalidateSurfaceModel   (bool invalidatePainter = true) => InvalidateResource(ref _surfaceModelNeedsUpdate,    invalidatePainter);
         public void InvalidatePlanes         (bool invalidatePainter = true) => InvalidateResource(ref _planesNeedUpdate,           invalidatePainter);
+        public void InvalidateModelInstancesToHide(bool invalidatePainter = true) => InvalidateResource(ref _modelInstancesToHideNeedsUpdate, invalidatePainter);
 
         public void InvalidateAllResources(bool invalidatePainter = true) {
             InvalidateActors(false);
@@ -482,6 +489,7 @@ namespace SF3.Win.Controls {
             InvalidateModels(false);
             InvalidateSurfaceModel(false);
             InvalidatePlanes(false);
+            InvalidateModelInstancesToHide(false);
 
             if (invalidatePainter)
                 Invalidate();
@@ -629,6 +637,7 @@ namespace SF3.Win.Controls {
         private bool _modelsNeedUpdate           = true;
         private bool _surfaceModelNeedsUpdate    = true;
         private bool _planesNeedUpdate           = true;
+        private bool _modelInstancesToHideNeedsUpdate = true;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
@@ -644,6 +653,7 @@ namespace SF3.Win.Controls {
         private LightingResources      _lighting        = null;
         private BoundaryModelResources _boundaryModels  = null;
         private ActorResources         _actorResources  = null;
+        private HashSet<int>           _modelInstancesToHide = null;
 
         private Renderer _renderer = null;
 
