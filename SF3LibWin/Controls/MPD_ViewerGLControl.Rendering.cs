@@ -255,6 +255,7 @@ namespace SF3.Win.Controls {
                     DrawNormals        = DrawNormals,
                     DrawWireframe      = DrawWireframe,
                     RotateSpritesUp    = RotateSpritesUp,
+                    DrawOutlines       = true,
 
                     DrawTerrainTypes   = DrawTerrainTypes,
                     DrawEventIDs       = DrawEventIDs,
@@ -424,10 +425,12 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             if (_surfaceModel?.Blocks == null)
                 return;
-            using (_general.SolidShader.Use())
+
+            using (_general.SolidShader.Use()) {
                 foreach (var block in _surfaceModel.Blocks)
                     if (block.SelectionModel != null)
                         block.SelectionModel.Draw(_general.SolidShader);
+            }
         }
 
         private float _frameDeltaTimeInMs = 0;

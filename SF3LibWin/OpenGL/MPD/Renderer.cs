@@ -21,6 +21,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             public bool DrawNormals;
             public bool DrawWireframe;
+            public bool DrawOutlines;
 
             public bool DrawTerrainTypes;
             public bool DrawEventIDs;
@@ -135,7 +136,7 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
 
-            if (outlineFramebuffer1 != null && outlineFramebuffer2 != null)
+            if (options.DrawOutlines && outlineFramebuffer1 != null && outlineFramebuffer2 != null)
                 DrawOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2, screenWidth, screenHeight);
         }
 
@@ -661,11 +662,11 @@ namespace SF3.Win.OpenGL.MPD {
         ) {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
-            general.OutlineShader.UpdateUniform("alwaysShow", true);
+            general.ColorizeShader.UpdateUniform("alwaysShow", true);
 
             void RenderOutlinesFor(Action renderAction) {
                 // Draw the visible models that need outlines on the screen's stencil buffer *only*.
-                using (general.OutlineShader.Use()) {
+                using (general.ColorizeShader.Use()) {
                     GL.ColorMask(false, false, false, false);
                     GL.Enable(EnableCap.StencilTest);
                     GL.StencilFunc(StencilFunction.Always, 0x08, 0x08);
@@ -684,7 +685,7 @@ namespace SF3.Win.OpenGL.MPD {
                     GL.Clear(ClearBufferMask.ColorBufferBit);
 
                     // Now start producing the outline by first rendering the visible models to a framebuffer.
-                    using (general.OutlineShader.Use())
+                    using (general.ColorizeShader.Use())
                         renderAction();
                 }
 
@@ -723,17 +724,17 @@ namespace SF3.Win.OpenGL.MPD {
 
             if (surfaceEditor.TileHoverModel != null) {
                 RenderOutlinesFor(() => {
-                    general.OutlineShader.UpdateUniform("color", new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
+                    general.ColorizeShader.UpdateUniform("color", new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
                     using ((surfaceEditor.TileHoverTexture ?? general.TransparentWhiteTexture).Use())
-                        surfaceEditor.TileHoverModel.Draw(general.OutlineShader);
+                        surfaceEditor.TileHoverModel.Draw(general.ColorizeShader);
                 });
             }
 
             if (surfaceEditor.TileSelectedModel != null) {
                 RenderOutlinesFor(() => {
-                    general.OutlineShader.UpdateUniform("color", new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
+                    general.ColorizeShader.UpdateUniform("color", new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
                     using ((surfaceEditor.TileSelectedTexture ?? general.TransparentWhiteTexture).Use())
-                        surfaceEditor.TileSelectedModel.Draw(general.OutlineShader);
+                        surfaceEditor.TileSelectedModel.Draw(general.ColorizeShader);
                 });
             }
 

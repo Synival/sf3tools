@@ -16,8 +16,8 @@ namespace SF3.Win.OpenGL.MPD {
                 (WireframeShader         = new Shader(Resources.WireframeVert,       Resources.WireframeFrag)),
                 (ObjectShader            = new Shader(Resources.ObjectVert,          Resources.ObjectFrag)),
                 (SpriteShader            = new Shader(Resources.SpriteVert,          Resources.SpriteFrag)),
+                (ColorizeShader          = new Shader(Resources.ColorizeVert,        Resources.ColorizeFrag)),
 
-                (OutlineShader           = new Shader(Resources.OutlineVert,         Resources.OutlineFrag)),
                 (OutlineBlurPassShader   = new Shader(Resources.OutlineBlurPassVert, Resources.OutlineBlurPassFrag)),
                 (OutlineToScreenShader   = new Shader(Resources.OutlineToScreenVert, Resources.OutlineToScreenFrag)),
             ];
@@ -51,8 +51,8 @@ namespace SF3.Win.OpenGL.MPD {
             WireframeShader         = null;
             ObjectShader            = null;
             SpriteShader            = null;
+            ColorizeShader          = null;
 
-            OutlineShader           = null;
             OutlineBlurPassShader   = null;
             OutlineToScreenShader   = null;
 
@@ -79,8 +79,8 @@ namespace SF3.Win.OpenGL.MPD {
         public Shader WireframeShader { get; private set; } = null;
         public Shader ObjectShader { get; private set; } = null;
         public Shader SpriteShader { get; private set; } = null;
+        public Shader ColorizeShader { get; private set; } = null;
 
-        public Shader OutlineShader { get; private set; } = null;
         public Shader OutlineBlurPassShader { get; private set; } = null;
         public Shader OutlineToScreenShader { get; private set; } = null;
 
