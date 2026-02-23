@@ -251,16 +251,24 @@ namespace SF3.Win.Controls {
                 ModelsToHide       = modelsToHide,
             };
 
+            var renderState = new Renderer.RendererState() {
+                CameraYaw        = Yaw,
+                CameraPitch      = Pitch,
+                ScreenWidth      = ClientSize.Width,
+                ScreenHeight     = ClientSize.Height,
+                ProjectionMatrix = _projectionMatrix,
+                ViewMatrix       = _viewMatrix
+            };
+
             UpdateInvalidatedResources();
 
             UpdateViewMatrix();
             foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
-            using (_selectFramebuffer.UseDraw()) {
-                GL.ClearColor(1, 1, 1, 1);
+            using (_selectFramebuffer.UseDraw())
                 DrawSelectionScene(renderOptions);
-            }
+
             UpdateTilePosition();
 
             PerformClear();
@@ -269,9 +277,7 @@ namespace SF3.Win.Controls {
                 _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
                 truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
                 _lighting, _boundaryModels, _collisionModels, _actorResources, _surfaceEditor,
-                renderOptions,
-                Yaw, Pitch, Width, Height,
-                ref _projectionMatrix, ref _viewMatrix,
+                renderOptions, renderState,
                 _outlineFramebuffer1, _outlineFramebuffer2
             );
 
@@ -423,6 +429,7 @@ namespace SF3.Win.Controls {
         }
 
         private void DrawSelectionScene(Renderer.RendererOptions options) {
+            GL.ClearColor(1, 1, 1, 1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             var modelDirectionsFacingCamera = Renderer.GetModelDirectionsFacingCamera(options, _yaw);

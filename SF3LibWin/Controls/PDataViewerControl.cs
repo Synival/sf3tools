@@ -159,8 +159,14 @@ namespace SF3.Win.Controls {
                     DrawWireframe  = true,
                     SmoothLighting = true,
                 },
-                Yaw, Pitch, ClientSize.Width, ClientSize.Height,
-                ref _projectionMatrix, ref _viewMatrix,
+                new Renderer.RendererState() {
+                    CameraYaw        = Yaw,
+                    CameraPitch      = Pitch,
+                    ScreenWidth      = ClientSize.Width,
+                    ScreenHeight     = ClientSize.Height,
+                    ProjectionMatrix = _projectionMatrix,
+                    ViewMatrix       = _viewMatrix,
+                },
                 null, null
             );
 

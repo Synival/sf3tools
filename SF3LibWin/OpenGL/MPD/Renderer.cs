@@ -53,6 +53,15 @@ namespace SF3.Win.OpenGL.MPD {
                 => DrawWireframe && !DrawNormals && (DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs);
         }
 
+        public class RendererState {
+            public float CameraYaw;
+            public float CameraPitch;
+            public int ScreenWidth;
+            public int ScreenHeight;
+            public Matrix4 ProjectionMatrix;
+            public Matrix4 ViewMatrix;
+        }
+
         public void DrawScene(
             GeneralResources general,
             ModelResources models,
@@ -67,12 +76,7 @@ namespace SF3.Win.OpenGL.MPD {
             ActorResources actors,
             SurfaceEditorResources surfaceEditor,
             RendererOptions options,
-            float cameraYaw,
-            float cameraPitch,
-            int screenWidth,
-            int screenHeight,
-            ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix,
+            RendererState state,
             // TODO: Put these into resources possibly?
             Framebuffer outlineFramebuffer1,
             Framebuffer outlineFramebuffer2
@@ -86,17 +90,17 @@ namespace SF3.Win.OpenGL.MPD {
             GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
             if (options.DrawSky)
-                DrawSceneSky(general, skyModel, gradients, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix);
+                DrawSceneSky(general, skyModel, gradients, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix);
             if (options.DrawGround)
-                DrawSceneGround(general, groundModel, gradients, groundAdj, options, ref projectionMatrix, ref viewMatrix);
+                DrawSceneGround(general, groundModel, gradients, groundAdj, options, ref state.ProjectionMatrix, ref state.ViewMatrix);
 
             // Determine which models are facing the camera and should be displayed.
-            var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options, cameraYaw);
+            var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options, state.CameraYaw);
 
             if (options.DrawNormals)
-                DrawSceneObjectNormals(general, models, surfaceModel, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                DrawSceneObjectNormals(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(general, models, surfaceModel, actors, gradients, lighting, options, cameraYaw, cameraPitch, ref projectionMatrix, ref viewMatrix, modelDirectionsFacingCamera);
+                DrawSceneObjects(general, models, surfaceModel, actors, gradients, lighting, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix, modelDirectionsFacingCamera);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
@@ -106,16 +110,16 @@ namespace SF3.Win.OpenGL.MPD {
                 GL.Disable(EnableCap.CullFace);
 
             if (options.DrawCollisionLines)
-                DrawSceneCollisionLines(general, collisionModels, cameraYaw);
+                DrawSceneCollisionLines(general, collisionModels, state.CameraYaw);
 
             if (options.DrawWireframe)
-                DrawSceneWireframes(general, models, surfaceModel, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                DrawSceneWireframes(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera);
 
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
 
             if (options.DrawOutlines && outlineFramebuffer1 != null && outlineFramebuffer2 != null)
-                DrawOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2, screenWidth, screenHeight);
+                DrawOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
         }
 
         public static bool[] GetModelDirectionsFacingCamera(RendererOptions options, float cameraYaw) {
