@@ -723,7 +723,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             if (surfaceEditor.TileHoverModel != null) {
                 RenderOutlinesFor(() => {
-                    general.OutlineShader.UpdateUniform("color", new Vector3(0.25f, 0.5f, 0.5f));
+                    general.OutlineShader.UpdateUniform("color", new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
                     using ((surfaceEditor.TileHoverTexture ?? general.TransparentWhiteTexture).Use())
                         surfaceEditor.TileHoverModel.Draw(general.OutlineShader);
                 });
@@ -731,7 +731,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             if (surfaceEditor.TileSelectedModel != null) {
                 RenderOutlinesFor(() => {
-                    general.OutlineShader.UpdateUniform("color", new Vector3(0.5f, 1.0f, 1.0f));
+                    general.OutlineShader.UpdateUniform("color", new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
                     using ((surfaceEditor.TileSelectedTexture ?? general.TransparentWhiteTexture).Use())
                         surfaceEditor.TileSelectedModel.Draw(general.OutlineShader);
                 });
