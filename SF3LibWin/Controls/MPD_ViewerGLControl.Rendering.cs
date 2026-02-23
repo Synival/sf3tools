@@ -267,7 +267,7 @@ namespace SF3.Win.Controls {
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
             using (_selectFramebuffer.UseDraw())
-                DrawSelectionScene(renderOptions);
+                _renderer.DrawSelectionScene(_general, _models, _surfaceModel, renderOptions, renderState);
 
             UpdateTilePosition();
 
@@ -426,26 +426,6 @@ namespace SF3.Win.Controls {
             var z = Math.Cos(yawInRadians) * pitchCos;
 
             return new Vector3((float) x, (float) y, (float) z);
-        }
-
-        private void DrawSelectionScene(Renderer.RendererOptions options) {
-            GL.ClearColor(1, 1, 1, 1);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            var modelDirectionsFacingCamera = Renderer.GetModelDirectionsFacingCamera(options, _yaw);
-            if (options.DrawModels)
-                _renderer.DrawSceneModels(_general, _models, null, options, _yaw, _pitch, modelDirectionsFacingCamera, transparentPass: false, selectionColors: true);
-
-            if (options.DrawSurfaceModel && _surfaceModel?.Blocks != null) {
-                using (_general.SolidShader.Use()) {
-                    foreach (var block in _surfaceModel.Blocks)
-                        if (block.SelectionModel != null)
-                            block.SelectionModel.Draw(_general.SolidShader);
-                }
-            }
-
-            if (options.DrawModels)
-                _renderer.DrawSceneModels(_general, _models, null, options, _yaw, _pitch, modelDirectionsFacingCamera, transparentPass: true, selectionColors:  true);
         }
 
         private float _frameDeltaTimeInMs = 0;

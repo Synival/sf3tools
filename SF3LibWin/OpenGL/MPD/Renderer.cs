@@ -122,7 +122,41 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
         }
 
-        public static bool[] GetModelDirectionsFacingCamera(RendererOptions options, float cameraYaw) {
+        public void DrawSelectionScene(
+            GeneralResources general,
+            ModelResources models,
+            SurfaceModelResources surfaceModel,
+            RendererOptions options,
+            RendererState state
+        ) {
+            // Enable 'CullFace' to draw everything single-sided (as the game actually is)
+            if (!options.ForceTwoSidedTextures)
+                GL.Enable(EnableCap.CullFace);
+
+            GL.ClearColor(1, 1, 1, 1);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options, state.CameraYaw);
+            if (options.DrawModels)
+                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera, transparentPass: false, selectionColors: true);
+
+            if (options.DrawSurfaceModel && surfaceModel?.Blocks != null) {
+                using (general.SolidShader.Use()) {
+                    foreach (var block in surfaceModel.Blocks)
+                        if (block.SelectionModel != null)
+                            block.SelectionModel.Draw(general.SolidShader);
+                }
+            }
+
+            if (options.DrawModels)
+                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera, transparentPass: true, selectionColors:  true);
+
+            // Enable 'CullFace' to draw everything single-sided (as the game actually is)
+            if (!options.ForceTwoSidedTextures)
+                GL.Disable(EnableCap.CullFace);
+        }
+
+        private static bool[] GetModelDirectionsFacingCamera(RendererOptions options, float cameraYaw) {
             var showModelsInAllDirections = !options.HideModelsNotFacingCamera;
 
             bool WithinAngleRange(ModelDirectionType dir) {
