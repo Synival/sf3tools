@@ -16,13 +16,13 @@ namespace SF3.Win.OpenGL.MPD {
             Models?.Dispose();
             Textures?.Dispose();
 
-            _tileHoverModel      = null;
-            _tileSelectedModel   = null;
+            _mouseoverTileModel   = null;
+            _selectedTileModel    = null;
 
-            _tileHoverTexture    = null;
-            _tileSelectedTexture = null;
+            _mouseoverTileTexture = null;
+            _selectedTileTexture  = null;
 
-            Models = null;
+            Models   = null;
             Textures = null;
         }
 
@@ -30,11 +30,15 @@ namespace SF3.Win.OpenGL.MPD {
             // Nothing loaded dynamically, so nothing to reset.
         }
 
-        public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, SelectableTile tile)
-            => ReplaceTileModelAndTexture(mpd, world, tile, ref _tileHoverModel, ref _tileHoverTexture);
+        public void UpdateMouseoverObject(IMPD mpd, GeneralResources world, ISelectableObject obj) {
+            ReplaceTileModelAndTexture(mpd, world, obj as SelectableTile, ref _mouseoverTileModel, ref _mouseoverTileTexture);
+            MouseoverObject = obj;
+        }
 
-        public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, SelectableTile tile)
-            => ReplaceTileModelAndTexture(mpd, world, tile, ref _tileSelectedModel, ref _tileSelectedTexture);
+        public void UpdateSelectedObject(IMPD mpd, GeneralResources world, ISelectableObject obj) {
+            ReplaceTileModelAndTexture(mpd, world, obj as SelectableTile, ref _selectedTileModel, ref _selectedTileTexture);
+            SelectedObject = obj;
+        }
 
         private void ReplaceTileModelAndTexture(IMPD mpd, GeneralResources world, SelectableTile selectableTile, ref QuadModel model, ref Texture texture) {
             if (model != null) {
@@ -62,15 +66,18 @@ namespace SF3.Win.OpenGL.MPD {
             }
         }
 
-        private QuadModel _tileHoverModel = null;
-        private Texture _tileHoverTexture = null;
-        public QuadModel TileHoverModel => _tileHoverModel;
-        public Texture TileHoverTexture => _tileHoverTexture;
+        private QuadModel _mouseoverTileModel = null;
+        private Texture _mouseoverTileTexture = null;
+        public QuadModel MouseoverTileModel => _mouseoverTileModel;
+        public Texture MouseoverTileTexture => _mouseoverTileTexture;
 
-        private QuadModel _tileSelectedModel = null;
-        private Texture _tileSelectedTexture = null;
-        public QuadModel TileSelectedModel => _tileSelectedModel;
-        public Texture TileSelectedTexture => _tileSelectedTexture;
+        private QuadModel _selectedTileModel = null;
+        private Texture _selectedTileTexture = null;
+        public QuadModel SelectedTileModel => _selectedTileModel;
+        public Texture SelectedTileTexture => _selectedTileTexture;
+
+        public ISelectableObject MouseoverObject { get; private set; }
+        public ISelectableObject SelectedObject { get; private set; }
 
         public DisposableList<QuadModel> Models { get; private set; } = null;
         public DisposableList<Texture> Textures { get; private set; } = null;

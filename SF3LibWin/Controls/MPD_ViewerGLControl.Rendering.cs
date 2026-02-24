@@ -357,8 +357,8 @@ namespace SF3.Win.Controls {
 
         private void UpdateEditorResources() {
             if (_editorNeedsUpdate) {
-                _editor.UpdateTileHoverModel(MPD_File, _general, _mouseoverObject as SelectableTile);
-                _editor.UpdateTileSelectedModel(MPD_File, _general, _selectedObject as SelectableTile);
+                _editor.UpdateMouseoverObject(MPD_File, _general, _mouseoverObject);
+                _editor.UpdateSelectedObject(MPD_File, _general, _selectedObject);
                 _editorNeedsUpdate = false;
             }
         }

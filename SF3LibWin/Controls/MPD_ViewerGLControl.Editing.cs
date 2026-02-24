@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
@@ -36,17 +35,13 @@ namespace SF3.Win.Controls {
             if (e.Button != MouseButtons.Left)
                 return;
 
-            if (_mouseoverObject is SelectableTile tile) {
-                var cursorMode = CursorMode;
-                if (cursorMode == ViewerCursorMode.Select)
-                    SelectObject(tile);
-                else if (cursorMode.IsDrawingMode()) {
-                    DrawMouseoverTile();
-                    _lastMouseoverTileEdited = tile;
-                }
+            var cursorMode = CursorMode;
+            if (cursorMode == ViewerCursorMode.Select)
+                SelectObject(_mouseoverObject);
+            else if (_mouseoverObject is SelectableTile tile && cursorMode.IsDrawingMode()) {
+                DrawMouseoverTile();
+                _lastMouseoverTileEdited = tile;
             }
-            else
-                SelectObject(null);
         }
 
         private void OnMouseUpEditing(MouseEventArgs e) =>
@@ -89,19 +84,18 @@ namespace SF3.Win.Controls {
             }
 
             var pixel = new byte[3];
-            using (_selectFramebuffer.UseRead())
+            using (_selectFramebuffer.UseRead()) {
                 GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
+                for (int i = 0; i < 3; i++)
+                    pixel[i] = (byte) Math.Round(pixel[i] / (255f / 64f));
+            }
 
-            if (pixel[2] < 2) {
-                UpdateMouseoverObject(new SelectableTile(
-                    (int) Math.Round(pixel[0] / (255.0f / SurfaceModelResources.WidthInTiles)),
-                    (int) Math.Round(pixel[1] / (255.0f / SurfaceModelResources.HeightInTiles))
-                ));
-            }
-            // TODO: if (pixel[2] < 6) for models
-            else {
+            if (pixel[2] == 0)
+                UpdateMouseoverObject(new SelectableTile(pixel[0], pixel[1]));
+            else if (pixel[2] == 1)
+                UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.Primary, pixel[0] + pixel[1] * 64));
+            else
                 UpdateMouseoverObject(null);
-            }
         }
 
         private void UpdateMouseoverObject(ISelectableObject obj) {

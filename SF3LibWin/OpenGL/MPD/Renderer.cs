@@ -8,6 +8,7 @@ using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Types;
+using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.MPD {
     public class Renderer {
@@ -173,7 +174,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneBoundaries(resources.General, resources.BoundaryModels);
 
             if (options.DrawOutlines && resources.OutlineFramebuffer1 != null && resources.OutlineFramebuffer2 != null)
-                DrawOutlines(resources.General, resources.Editor, resources.OutlineFramebuffer1, resources.OutlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
+                DrawOutlines(resources.General, resources.Models, resources.Editor, options, state.CameraYaw, state.CameraPitch, resources.OutlineFramebuffer1, resources.OutlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
         }
 
         public void DrawSelectionScene(
@@ -716,7 +717,11 @@ namespace SF3.Win.OpenGL.MPD {
 
         public void DrawOutlines(
             GeneralResources general,
+            ModelResources models,
             EditorResources editor,
+            RendererOptions options,
+            float cameraYaw,
+            float cameraPitch,
             Framebuffer outlineFramebuffer1,
             Framebuffer outlineFramebuffer2,
             int screenWidth,
@@ -724,7 +729,6 @@ namespace SF3.Win.OpenGL.MPD {
         ) {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
-            general.ColorizeShader.UpdateUniform("alwaysShow", true);
 
             void RenderOutlinesFor(Action renderAction) {
                 // Draw the visible models that need outlines on the screen's stencil buffer *only*.
@@ -784,21 +788,59 @@ namespace SF3.Win.OpenGL.MPD {
                 }
             }
 
-            if (editor.TileHoverModel != null) {
+            void RenderTile(QuadModel model, Texture texture, Vector4 color) {
                 RenderOutlinesFor(() => {
-                    general.ColorizeShader.UpdateUniform("color", new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
-                    using ((editor.TileHoverTexture ?? general.TransparentWhiteTexture).Use())
-                        editor.TileHoverModel.Draw(general.ColorizeShader);
+                    general.ColorizeShader.UpdateUniform("color", color);
+                    general.ColorizeShader.UpdateUniform("alwaysShow", true);
+
+                    using ((texture ?? general.TransparentWhiteTexture).Use())
+                        model.Draw(general.ColorizeShader);
                 });
             }
 
-            if (editor.TileSelectedModel != null) {
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup) GetModelInstance(SelectableModel selectableModel) {
+                var modelGroups = models.ModelsByIDByCollection.TryGetValue(selectableModel.Collection, out var collectionObj) ? collectionObj : null;
+                if (modelGroups == null)
+                    return (null, null);
+
+                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ID == selectableModel.InstanceID);
+                if (modelInstance == null)
+                    return (null, null);
+
+                var modelGroup = modelGroups.TryGetValue(modelInstance.ModelID, out var modelGroupObj) ? modelGroupObj : null;
+                if (modelGroup == null)
+                    return (null, null);
+
+                return (modelInstance, modelGroup);
+            };
+
+            void RenderModel(SelectableModel selectableModel, Vector4 color) {
+                var mwg = GetModelInstance(selectableModel);
+                if (mwg.Model == null || mwg.ModelGroup == null)
+                    return;
+
                 RenderOutlinesFor(() => {
-                    general.ColorizeShader.UpdateUniform("color", new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
-                    using ((editor.TileSelectedTexture ?? general.TransparentWhiteTexture).Use())
-                        editor.TileSelectedModel.Draw(general.ColorizeShader);
+                    general.ColorizeShader.UpdateUniform("color", color);
+                    general.ColorizeShader.UpdateUniform("alwaysShow", false);
+
+                    SetModelAndNormalMatricesForModel(models, mwg.Model, general.ColorizeShader, options, cameraYaw, cameraPitch);
+                    mwg.ModelGroup.SolidTexturedModel?.Draw(general.ColorizeShader);
+                    mwg.ModelGroup.SolidUntexturedModel?.Draw(general.ColorizeShader);
+                    mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(general.ColorizeShader);
+                    mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(general.ColorizeShader);
+
+                    general.ColorizeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
                 });
             }
+
+            if (editor.MouseoverTileModel != null)
+                RenderTile(editor.MouseoverTileModel, editor.MouseoverTileTexture, new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
+            if (editor.SelectedTileModel != null)
+                RenderTile(editor.SelectedTileModel, editor.SelectedTileTexture, new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
+            if (editor.MouseoverObject is SelectableModel mouseoverModel)
+                RenderModel(mouseoverModel, new Vector4(0.5f, 0.375f, 0.25f, 1.0f));
+            if (editor.SelectedObject is SelectableModel selectedModel)
+                RenderModel(selectedModel, new Vector4(1.0f, 0.5f, 0.0f, 1.0f));
 
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
