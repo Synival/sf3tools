@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
@@ -62,12 +63,33 @@ namespace SF3.Win.Controls {
             var oldTile = _selectedObject as SelectableTile;
             var newTile = obj as SelectableTile;
 
+            var oldModel = _selectedObject as SelectableModel;
+            var newModel = obj as SelectableModel;
+
+            object newEventObject = null;
+
             _selectedObject = obj;
 
             if (oldTile != newTile) {
                 var surfaceTile = (newTile == null) ? null : MPD_File.Surface.GetTile(newTile.X, newTile.Y);
                 _selectedTile = surfaceTile;
-                TileSelected?.Invoke(this, surfaceTile);
+                if (surfaceTile != null)
+                    newEventObject = surfaceTile;
+            }
+
+            if (oldModel != newModel) {
+                IMPD_ModelInstance modelInstance = null;
+                if (newModel != null) {
+                    var collection = (MPD_File.ModelCollections?.TryGetValue(newModel.Collection, out var collectionObj) == true) ? collectionObj : null;
+                    modelInstance = collection?.ModelInstances?.FirstOrDefault(x => x.ID == newModel.InstanceID);
+                }
+                if (modelInstance != null)
+                    newEventObject = modelInstance;
+            }
+
+            if (_objectSelectedEventObject != newEventObject) {
+                ObjectSelected?.Invoke(this, newEventObject);
+                _objectSelectedEventObject = newEventObject;
             }
 
             InvalidateEditor();
@@ -283,7 +305,9 @@ namespace SF3.Win.Controls {
         private SelectableTile _lastMouseoverTileEdited = null;
         private IMPD_SurfaceTile _selectedTile = null;
 
-        public delegate void TileSelectedEventHandler(object sender, IMPD_SurfaceTile tile);
-        public event TileSelectedEventHandler TileSelected;
+        private object _objectSelectedEventObject = null;
+
+        public delegate void ObjectSelectedEventHandler(object sender, object obj);
+        public event ObjectSelectedEventHandler ObjectSelected;
     }
 }

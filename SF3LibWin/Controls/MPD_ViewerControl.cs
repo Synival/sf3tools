@@ -80,49 +80,68 @@ namespace SF3.Win.Controls {
             };
 
             // Activate tile editor when an editor is clicked.
-            GLControl.TileSelected += (s, tile) => {
-                if (tile != null)
+            GLControl.ObjectSelected += (s, obj) => {
+                if (obj is IMPD_SurfaceTile tile)
                     SwitchToTileEditor(tile);
+                else if (obj is IMPD_ModelInstance modelInstance)
+                    SwitchToModelInstanceEditor(modelInstance);
                 else
                     SetSideEditorControl(null);
             };
         }
 
         private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile) {
-            if (_currentSideEditorControl is SurfaceTilePropertiesControl tilePropertyControl)
-                return tilePropertyControl;
+            return SetSideEditorControl(
+                tile, ref _surfaceTilePropertiesControl, 
+                c => c.CmdKey += SideEditorCmdKeyHandler,
+                c => c.Tile = tile
+            );
+        }
 
-            if (_surfaceTilePropertiesControl != null) {
-                SetSideEditorControl(_surfaceTilePropertiesControl, c => c.Tile = tile);
-                return _surfaceTilePropertiesControl;
+        private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance) {
+            return SetSideEditorControl(
+                modelInstance, ref _modelInstancePropertiesControl, 
+                c => c.CmdKey += SideEditorCmdKeyHandler,
+                c => { /* TODO: actually set the thing to edit! */ }
+            );
+        }
+
+        private void SideEditorCmdKeyHandler(object sender, ref Message msg, Keys keyData, ref bool wasProcessed) {
+            if (wasProcessed)
+                return;
+
+            bool sendToGLControl = false;
+
+            var keyPressed = (Keys) ((int) keyData & 0xFFFF);
+            switch (keyPressed) {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    if (keyData.HasFlag(Keys.Control))
+                        sendToGLControl = true;
+                    break;
             }
 
-            _surfaceTilePropertiesControl = new SurfaceTilePropertiesControl();
-            SetSideEditorControl(_surfaceTilePropertiesControl, c => c.Tile = tile);
+            if (sendToGLControl)
+                GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
+        }
 
-            // Make sure certain key events make it to the GLControl.
-            _surfaceTilePropertiesControl.CmdKey += (object sender, ref Message msg, Keys keyData, ref bool wasProcessed) => {
-                if (wasProcessed)
-                    return;
+        private TControl SetSideEditorControl<TObj, TControl>(TObj obj, ref TControl control, Action<TControl> controlInitFunc, Action<TControl> controlActivateFunc)
+        where TControl : Control, new() {
+            if (_currentSideEditorControl is TControl tControl)
+                return tControl;
 
-                bool sendToGLControl = false;
+            if (control != null) {
+                SetSideEditorControl(control, controlActivateFunc);
+                return control;
+            }
 
-                var keyPressed = (Keys) ((int) keyData & 0xFFFF);
-                switch (keyPressed) {
-                    case Keys.Up:
-                    case Keys.Down:
-                    case Keys.Left:
-                    case Keys.Right:
-                        if (keyData.HasFlag(Keys.Control))
-                            sendToGLControl = true;
-                        break;
-                }
+            control = new TControl();
+            controlInitFunc(control);
+            SetSideEditorControl(control, controlActivateFunc);
 
-                if (sendToGLControl)
-                    GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
-            };
-
-            return _surfaceTilePropertiesControl;
+            return control;
         }
 
         private void SetSideEditorControl(Control control)
@@ -334,6 +353,7 @@ namespace SF3.Win.Controls {
 
         private Control _currentSideEditorControl = null;
 
-        private SurfaceTilePropertiesControl _surfaceTilePropertiesControl = null;
+        private SurfaceTilePropertiesControl   _surfaceTilePropertiesControl   = null;
+        private ModelInstancePropertiesControl _modelInstancePropertiesControl = null;
     }
 }

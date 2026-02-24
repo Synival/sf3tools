@@ -64,6 +64,10 @@ namespace SF3.Win.Controls {
                     tileVertices.Select(x => x.Y).Average(),
                     (63 - tileObj.Y) + GeneralResources.ModelOffsetZ + 0.5f);
             }
+            else if (obj is SelectableModel modelObj) {
+                // TODO: actually get the thing!!
+                target = new Vector3(0, 0, 0);
+            }
 
             if (!target.HasValue)
                 return null;

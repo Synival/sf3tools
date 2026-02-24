@@ -125,6 +125,9 @@
     <Compile Update="Controls\EnhancedObjectListView.Header.cs">
       <DependentUpon>EnhancedObjectListView.cs</DependentUpon>
     </Compile>
+    <Compile Update="Controls\ModelInstancePropertiesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -132,6 +135,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Controls\ModelInstancePropertiesControl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
