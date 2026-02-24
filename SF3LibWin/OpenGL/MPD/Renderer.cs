@@ -474,7 +474,7 @@ namespace SF3.Win.OpenGL.MPD {
             Vector4 ModelSelectionColor(IMPD_ModelInstance model) {
                 var r = (model.ID % 64) / 64.0f;
                 var g = (model.ID / 64) / 64.0f;
-                return new Vector4(r, g, 1.0f / 64.0f, 1.0f);
+                return new Vector4(r, g, (model.Collection == MPD_CollectionType.Primary ? 1 : 2) * (1.0f / 64.0f), 1.0f);
             }
 
             var lightingTexture = selectionColors ? null : (lighting.LightingTexture ?? general.WhiteTexture);
@@ -803,7 +803,7 @@ namespace SF3.Win.OpenGL.MPD {
                 if (modelGroups == null)
                     return (null, null);
 
-                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ID == selectableModel.InstanceID);
+                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ID == selectableModel.InstanceID && x.Collection == selectableModel.Collection);
                 if (modelInstance == null)
                     return (null, null);
 

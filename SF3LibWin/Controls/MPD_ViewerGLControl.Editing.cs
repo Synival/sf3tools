@@ -115,6 +115,8 @@ namespace SF3.Win.Controls {
                 UpdateMouseoverObject(new SelectableTile(pixel[0], pixel[1]));
             else if (pixel[2] == 1)
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.Primary, pixel[0] + pixel[1] * 64));
+            else if (pixel[2] == 2)
+                UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.ExtraModels, pixel[0] + pixel[1] * 64));
             else
                 UpdateMouseoverObject(null);
         }
