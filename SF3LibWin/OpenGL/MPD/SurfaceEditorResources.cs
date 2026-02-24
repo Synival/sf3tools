@@ -16,11 +16,11 @@ namespace SF3.Win.OpenGL.MPD {
             Models?.Dispose();
             Textures?.Dispose();
 
-            TileHoverModel = null;
-            TileSelectedModel = null;
+            _tileHoverModel      = null;
+            _tileSelectedModel   = null;
 
-            TileHoverTexture = null;
-            TileSelectedTexture = null;
+            _tileHoverTexture    = null;
+            _tileSelectedTexture = null;
 
             Models = null;
             Textures = null;
@@ -30,63 +30,47 @@ namespace SF3.Win.OpenGL.MPD {
             // Nothing loaded dynamically, so nothing to reset.
         }
 
-        public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, Point? tilePos) {
-            if (TileHoverModel != null) {
-                TileHoverModel?.Dispose();
-                Models.Remove(TileHoverModel);
-                TileHoverModel = null;
+        public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, Point? tilePos)
+            => ReplaceTileModelAndTexture(mpd, world, tilePos, ref _tileHoverModel, ref _tileHoverTexture);
+
+        public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, Point? tilePos)
+            => ReplaceTileModelAndTexture(mpd, world, tilePos, ref _tileSelectedModel, ref _tileSelectedTexture);
+
+        private void ReplaceTileModelAndTexture(IMPD mpd, GeneralResources world, Point? tilePos, ref QuadModel model, ref Texture texture) {
+            if (model != null) {
+                model.Dispose();
+                Models.Remove(model);
+                model = null;
             }
 
-            if (TileHoverTexture != null) {
-                TileHoverTexture?.Dispose();
-                Textures.Remove(TileHoverTexture);
-                TileHoverTexture = null;
-            }
-
-            if (tilePos != null) {
-                var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
-
-                var texId = tile.TextureID;
-                var texture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
-                if (texture != null) 
-                    Textures.Add(TileHoverTexture = new Texture(texture.CreateBitmapARGB8888()));
-
-                var quad = new Quad(tile.GetVector3Vertices());
-                Models.Add(TileHoverModel = new QuadModel([quad]));
-            }
-        }
-
-        public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, Point? tilePos) {
-            if (TileSelectedModel != null) {
-                TileSelectedModel.Dispose();
-                Models.Remove(TileSelectedModel);
-                TileSelectedModel = null;
-            }
-
-            if (TileSelectedTexture != null) {
-                TileSelectedTexture.Dispose();
-                Textures.Remove(TileSelectedTexture);
-                TileSelectedTexture = null;
+            if (texture != null) {
+                texture.Dispose();
+                Textures.Remove(texture);
+                texture = null;
             }
 
             if (tilePos != null) {
                 var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
 
                 var texId = tile.TextureID;
-                var texture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
-                if (texture != null) 
-                    Textures.Add(TileSelectedTexture = new Texture(texture.CreateBitmapARGB8888()));
+                var tileTexture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
+                if (tileTexture != null) 
+                    Textures.Add(texture = new Texture(tileTexture.CreateBitmapARGB8888()));
 
                 var quad = new Quad(tile.GetVector3Vertices());
-                Models.Add(TileSelectedModel = new QuadModel([quad]));
+                Models.Add(model = new QuadModel([quad]));
             }
         }
 
-        public QuadModel TileHoverModel { get; private set; } = null;
-        public QuadModel TileSelectedModel { get; private set; } = null;
+        private QuadModel _tileHoverModel = null;
+        private Texture _tileHoverTexture = null;
+        public QuadModel TileHoverModel => _tileHoverModel;
+        public Texture TileHoverTexture => _tileHoverTexture;
 
-        public Texture TileHoverTexture { get; private set; } = null;
-        public Texture TileSelectedTexture { get; private set; } = null;
+        private QuadModel _tileSelectedModel = null;
+        private Texture _tileSelectedTexture = null;
+        public QuadModel TileSelectedModel => _tileSelectedModel;
+        public Texture TileSelectedTexture => _tileSelectedTexture;
 
         public DisposableList<QuadModel> Models { get; private set; } = null;
         public DisposableList<Texture> Textures { get; private set; } = null;
