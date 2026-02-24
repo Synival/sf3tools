@@ -196,9 +196,6 @@ namespace SF3.Win.Controls {
         }
 
         public void RenderFrame() {
-            if (_inPaintCounter != 1)
-                ;
-
             MakeCurrent();
 
             // Update models, textures, model switch groups, etc. that have been modified since the last frame.
