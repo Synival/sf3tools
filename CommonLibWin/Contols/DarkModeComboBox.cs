@@ -30,7 +30,7 @@ namespace CommonLib.Win.Controls {
         protected override void WndProc(ref Message m) {
             switch (m.Msg) {
                 case 0x000F /* WM_PAINT */:
-                    if (Text != "" && Handle != IntPtr.Zero && SelectionLength > 0 && !Focused)
+                    if (Handle != IntPtr.Zero && SelectionLength > 0 && !Focused && Text != "")
                         SelectionLength = 0;
 
                     base.WndProc(ref m);
@@ -52,7 +52,8 @@ namespace CommonLib.Win.Controls {
                 }
 
                 default:
-                    base.WndProc(ref m);
+                    try { base.WndProc(ref m); }
+                    catch {}
                     break;
             }
         }
