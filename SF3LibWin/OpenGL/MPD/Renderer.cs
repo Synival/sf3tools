@@ -11,6 +11,23 @@ using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL.MPD {
     public class Renderer {
+        public class RendererResources {
+            public GeneralResources General;
+            public ModelResources Models;
+            public SurfaceModelResources SurfaceModel;
+            public GroundModelResources GroundModel;
+            public SkyModelResources SkyModel;
+            public GradientResources Gradients;
+            public LightingResources Lighting;
+            public BoundaryModelResources BoundaryModels;
+            public CollisionResources CollisionModels;
+            public ActorResources Actors;
+            public EditorResources Editor;
+
+            public Framebuffer OutlineFramebuffer1;
+            public Framebuffer OutlineFramebuffer2;
+        }
+
         public class RendererOptions {
             public bool DrawModels;
             public bool DrawSurfaceModel;
@@ -42,6 +59,8 @@ namespace SF3.Win.OpenGL.MPD {
 
             public float BackgroundX = 0.00f;
             public float BackgroundY = 0.00f;
+
+            public IColorAdjustRGB555 GroundAdj;
 
             public HashSet<int> ModelsToHide;
 
@@ -114,23 +133,9 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public void DrawScene(
-            GeneralResources general,
-            ModelResources models,
-            SurfaceModelResources surfaceModel,
-            GroundModelResources groundModel,
-            SkyModelResources skyModel,
-            GradientResources gradients,
-            IColorAdjustRGB555 groundAdj,
-            LightingResources lighting,
-            BoundaryModelResources boundaryModels,
-            CollisionResources collisionModels,
-            ActorResources actors,
-            EditorResources editor,
+            RendererResources resources,
             RendererOptions options,
-            RendererState state,
-            // TODO: Put these into resources possibly?
-            Framebuffer outlineFramebuffer1,
-            Framebuffer outlineFramebuffer2
+            RendererState state
         ) {
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
             if (!options.ForceTwoSidedTextures)
@@ -141,15 +146,15 @@ namespace SF3.Win.OpenGL.MPD {
             GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
             if (options.DrawSky)
-                DrawSceneSky(general, skyModel, gradients, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix);
+                DrawSceneSky(resources.General, resources.SkyModel, resources.Gradients, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix);
             if (options.DrawGround)
-                DrawSceneGround(general, groundModel, gradients, groundAdj, options, ref state.ProjectionMatrix, ref state.ViewMatrix);
+                DrawSceneGround(resources.General, resources.GroundModel, resources.Gradients, options.GroundAdj, options, ref state.ProjectionMatrix, ref state.ViewMatrix);
 
-            var modelsWithGroups = state.GetModelsWithGroups(models, options);
+            var modelsWithGroups = state.GetModelsWithGroups(resources.Models, options);
             if (options.DrawNormals)
-                DrawSceneObjectNormals(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
+                DrawSceneObjectNormals(resources.General, resources.Models, resources.SurfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(general, models, surfaceModel, actors, gradients, lighting, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix, modelsWithGroups);
+                DrawSceneObjects(resources.General, resources.Models, resources.SurfaceModel, resources.Actors, resources.Gradients, resources.Lighting, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix, modelsWithGroups);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
@@ -159,22 +164,20 @@ namespace SF3.Win.OpenGL.MPD {
                 GL.Disable(EnableCap.CullFace);
 
             if (options.DrawCollisionLines)
-                DrawSceneCollisionLines(general, collisionModels, state.CameraYaw);
+                DrawSceneCollisionLines(resources.General, resources.CollisionModels, state.CameraYaw);
 
             if (options.DrawWireframe)
-                DrawSceneWireframes(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
+                DrawSceneWireframes(resources.General, resources.Models, resources.SurfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
 
             if (options.DrawBoundaries)
-                DrawSceneBoundaries(general, boundaryModels);
+                DrawSceneBoundaries(resources.General, resources.BoundaryModels);
 
-            if (options.DrawOutlines && outlineFramebuffer1 != null && outlineFramebuffer2 != null)
-                DrawOutlines(general, editor, outlineFramebuffer1, outlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
+            if (options.DrawOutlines && resources.OutlineFramebuffer1 != null && resources.OutlineFramebuffer2 != null)
+                DrawOutlines(resources.General, resources.Editor, resources.OutlineFramebuffer1, resources.OutlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
         }
 
         public void DrawSelectionScene(
-            GeneralResources general,
-            ModelResources models,
-            SurfaceModelResources surfaceModel,
+            RendererResources resources,
             RendererOptions options,
             RendererState state
         ) {
@@ -185,20 +188,20 @@ namespace SF3.Win.OpenGL.MPD {
             GL.ClearColor(1, 1, 1, 1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            var modelsWithGroups = state.GetModelsWithGroups(models, options);
+            var modelsWithGroups = state.GetModelsWithGroups(resources.Models, options);
             if (options.DrawModels)
-                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: false, selectionColors: true);
+                DrawSceneModels(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: false, selectionColors: true);
 
-            if (options.DrawSurfaceModel && surfaceModel?.Blocks != null) {
-                using (general.SolidShader.Use()) {
-                    foreach (var block in surfaceModel.Blocks)
+            if (options.DrawSurfaceModel && resources.SurfaceModel?.Blocks != null) {
+                using (resources.General.SolidShader.Use()) {
+                    foreach (var block in resources.SurfaceModel.Blocks)
                         if (block.SelectionModel != null)
-                            block.SelectionModel.Draw(general.SolidShader);
+                            block.SelectionModel.Draw(resources.General.SolidShader);
                 }
             }
 
             if (options.DrawModels)
-                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
+                DrawSceneModels(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
 
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
             if (!options.ForceTwoSidedTextures)

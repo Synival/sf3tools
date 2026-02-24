@@ -186,10 +186,31 @@ namespace SF3.Win.Controls {
 
         public void RenderFrame() {
             MakeCurrent();
+
+            // Update models, textures, model switch groups, etc. that have been modified since the last frame.
             UpdateInvalidatedResources();
 
+            var resources = new Renderer.RendererResources() {
+                General         = _general,
+                Models          = _models,
+                SurfaceModel    = _surfaceModel,
+                GroundModel     = _groundModel,
+                SkyModel        = _skyModel,
+                Gradients       = _gradients,
+                Lighting        = _lighting,
+                BoundaryModels  = _boundaryModels,
+                CollisionModels = _collisionModels,
+                Actors          = _actorResources,
+                Editor          = _editor,
+
+                OutlineFramebuffer1 = _outlineFramebuffer1,
+                OutlineFramebuffer2 = _outlineFramebuffer2,
+
+            };
+
             // TODO: these options should be cached!!!
-            var renderOptions = new Renderer.RendererOptions() {
+            var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
+            var options = new Renderer.RendererOptions() {
                 DrawModels         = DrawModels,
                 DrawSurfaceModel   = DrawSurfaceModel,
                 DrawGround         = DrawGround,
@@ -216,12 +237,14 @@ namespace SF3.Win.Controls {
                 BackgroundX        = MPD_File?.Planes?.BackgroundX ?? 0,
                 BackgroundY        = MPD_File?.Planes?.BackgroundY ?? 0,
 
+                GroundAdj          = truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
+
                 UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
                 ModelsToHide       = _modelInstancesToHide,
             };
 
-            var renderState = new Renderer.RendererState() {
+            var state = new Renderer.RendererState() {
                 CameraYaw        = Yaw,
                 CameraPitch      = Pitch,
                 ScreenWidth      = ClientSize.Width,
@@ -230,25 +253,22 @@ namespace SF3.Win.Controls {
                 ViewMatrix       = _viewMatrix
             };
 
+            // Make sure every shader has the latest view matrix.
+            // TODO: Perhaps an update isn't necessary if nothing changed?
             UpdateViewMatrix();
             foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
+            // Render the invisible scene used for mouse selection
             using (_selectFramebuffer.UseDraw())
-                _renderer.DrawSelectionScene(_general, _models, _surfaceModel, renderOptions, renderState);
+                _renderer.DrawSelectionScene(resources, options, state);
 
+            // Determine what's under the mouse. This will be fed into the final scene render.
             UpdateTilePosition();
 
+            // Render the final scene.
             PerformClear();
-
-            var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
-            _renderer.DrawScene(
-                _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
-                truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
-                _lighting, _boundaryModels, _collisionModels, _actorResources, _editor,
-                renderOptions, renderState,
-                _outlineFramebuffer1, _outlineFramebuffer2
-            );
+            _renderer.DrawScene(resources, options, state);
 
             SwapBuffers();
         }
