@@ -6,7 +6,7 @@ using SF3.Types;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.MPD {
-    public class SurfaceEditorResources : ResourcesBase {
+    public class EditorResources : ResourcesBase {
         protected override void PerformInit() {
             Textures = [];
             Models = [];

@@ -80,7 +80,7 @@ namespace SF3.Win.Controls {
             _groundModel     = new GroundModelResources();
             _skyModel        = new SkyModelResources();
             _collisionModels = new CollisionResources();
-            _surfaceEditor   = new SurfaceEditorResources();
+            _editor          = new EditorResources();
             _gradients       = new GradientResources();
             _lighting        = new LightingResources();
             _boundaryModels  = new BoundaryModelResources();
@@ -94,7 +94,7 @@ namespace SF3.Win.Controls {
             _groundModel.Init();
             _skyModel.Init();
             _collisionModels.Init();
-            _surfaceEditor.Init();
+            _editor.Init();
             _gradients.Init();
             _lighting.Init();
             _boundaryModels.Init();
@@ -128,7 +128,7 @@ namespace SF3.Win.Controls {
             _groundModel?.Dispose();
             _skyModel?.Dispose();
             _collisionModels?.Dispose();
-            _surfaceEditor?.Dispose();
+            _editor?.Dispose();
             _gradients?.Dispose();
             _lighting?.Dispose();
             _boundaryModels?.Dispose();
@@ -144,7 +144,7 @@ namespace SF3.Win.Controls {
             _groundModel       = null;
             _skyModel          = null;
             _collisionModels   = null;
-            _surfaceEditor     = null;
+            _editor            = null;
             _gradients         = null;
             _lighting          = null;
             _boundaryModels    = null;
@@ -245,7 +245,7 @@ namespace SF3.Win.Controls {
             _renderer.DrawScene(
                 _general, _models, _surfaceModel, _groundModel, _skyModel, _gradients,
                 truncatedPaletteAdjustments ? null : MPD_File?.Settings?.GroundPaletteAdjustment,
-                _lighting, _boundaryModels, _collisionModels, _actorResources, _surfaceEditor,
+                _lighting, _boundaryModels, _collisionModels, _actorResources, _editor,
                 renderOptions, renderState,
                 _outlineFramebuffer1, _outlineFramebuffer2
             );
@@ -271,7 +271,7 @@ namespace SF3.Win.Controls {
 
         private void UpdateInvalidatedResources() {
             if (_tileSelectedNeedsUpdate) {
-                _surfaceEditor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
+                _editor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
                 _tileSelectedNeedsUpdate = false;
             }
 
@@ -648,7 +648,7 @@ namespace SF3.Win.Controls {
         private GroundModelResources   _groundModel     = null;
         private SkyModelResources      _skyModel        = null;
         private CollisionResources     _collisionModels = null;
-        private SurfaceEditorResources _surfaceEditor   = null;
+        private EditorResources        _editor          = null;
         private GradientResources      _gradients       = null;
         private LightingResources      _lighting        = null;
         private BoundaryModelResources _boundaryModels  = null;

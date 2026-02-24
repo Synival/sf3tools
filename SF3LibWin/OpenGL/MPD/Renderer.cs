@@ -125,7 +125,7 @@ namespace SF3.Win.OpenGL.MPD {
             BoundaryModelResources boundaryModels,
             CollisionResources collisionModels,
             ActorResources actors,
-            SurfaceEditorResources surfaceEditor,
+            EditorResources editor,
             RendererOptions options,
             RendererState state,
             // TODO: Put these into resources possibly?
@@ -168,7 +168,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneBoundaries(general, boundaryModels);
 
             if (options.DrawOutlines && outlineFramebuffer1 != null && outlineFramebuffer2 != null)
-                DrawOutlines(general, surfaceEditor, outlineFramebuffer1, outlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
+                DrawOutlines(general, editor, outlineFramebuffer1, outlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
         }
 
         public void DrawSelectionScene(
@@ -713,7 +713,7 @@ namespace SF3.Win.OpenGL.MPD {
 
         public void DrawOutlines(
             GeneralResources general,
-            SurfaceEditorResources surfaceEditor,
+            EditorResources editor,
             Framebuffer outlineFramebuffer1,
             Framebuffer outlineFramebuffer2,
             int screenWidth,
@@ -781,19 +781,19 @@ namespace SF3.Win.OpenGL.MPD {
                 }
             }
 
-            if (surfaceEditor.TileHoverModel != null) {
+            if (editor.TileHoverModel != null) {
                 RenderOutlinesFor(() => {
                     general.ColorizeShader.UpdateUniform("color", new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
-                    using ((surfaceEditor.TileHoverTexture ?? general.TransparentWhiteTexture).Use())
-                        surfaceEditor.TileHoverModel.Draw(general.ColorizeShader);
+                    using ((editor.TileHoverTexture ?? general.TransparentWhiteTexture).Use())
+                        editor.TileHoverModel.Draw(general.ColorizeShader);
                 });
             }
 
-            if (surfaceEditor.TileSelectedModel != null) {
+            if (editor.TileSelectedModel != null) {
                 RenderOutlinesFor(() => {
                     general.ColorizeShader.UpdateUniform("color", new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
-                    using ((surfaceEditor.TileSelectedTexture ?? general.TransparentWhiteTexture).Use())
-                        surfaceEditor.TileSelectedModel.Draw(general.ColorizeShader);
+                    using ((editor.TileSelectedTexture ?? general.TransparentWhiteTexture).Use())
+                        editor.TileSelectedModel.Draw(general.ColorizeShader);
                 });
             }
 
