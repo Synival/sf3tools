@@ -255,6 +255,12 @@ namespace SF3.Win.Controls {
                 ModelsToHide       = _modelInstancesToHide,
             };
 
+            // Make sure every shader has the latest view matrix.
+            // TODO: Perhaps an update isn't necessary if nothing changed?
+            UpdateViewMatrix();
+            foreach (var shader in _general.Shaders)
+                shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
+
             var state = new Renderer.RendererState() {
                 CameraYaw        = Yaw,
                 CameraPitch      = Pitch,
@@ -263,12 +269,6 @@ namespace SF3.Win.Controls {
                 ProjectionMatrix = _projectionMatrix,
                 ViewMatrix       = _viewMatrix
             };
-
-            // Make sure every shader has the latest view matrix.
-            // TODO: Perhaps an update isn't necessary if nothing changed?
-            UpdateViewMatrix();
-            foreach (var shader in _general.Shaders)
-                shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
             // Render the invisible scene used for mouse selection
             using (_selectFramebuffer.UseDraw())
