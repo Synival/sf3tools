@@ -25,27 +25,27 @@ namespace SF3.Win.Controls {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            labelTileEdited = new DarkModeLabel();
+            labelModelInstanceEdited = new DarkModeLabel();
             SuspendLayout();
             // 
-            // labelTileEdited
+            // labelModelInstanceEdited
             // 
-            labelTileEdited.AutoSize = true;
-            labelTileEdited.DisabledColor = System.Drawing.Color.Empty;
-            labelTileEdited.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point,  0);
-            labelTileEdited.IsSeparator = false;
-            labelTileEdited.Location = new System.Drawing.Point(5, 5);
-            labelTileEdited.Name = "labelTileEdited";
-            labelTileEdited.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
-            labelTileEdited.Size = new System.Drawing.Size(92, 15);
-            labelTileEdited.TabIndex = 3;
-            labelTileEdited.Text = "Model Instance";
+            labelModelInstanceEdited.AutoSize = true;
+            labelModelInstanceEdited.DisabledColor = System.Drawing.Color.Empty;
+            labelModelInstanceEdited.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point,  0);
+            labelModelInstanceEdited.IsSeparator = false;
+            labelModelInstanceEdited.Location = new System.Drawing.Point(5, 5);
+            labelModelInstanceEdited.Name = "labelModelInstanceEdited";
+            labelModelInstanceEdited.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelModelInstanceEdited.Size = new System.Drawing.Size(134, 15);
+            labelModelInstanceEdited.TabIndex = 3;
+            labelModelInstanceEdited.Text = "Model Instance: (none)";
             // 
             // ModelInstancePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(labelTileEdited);
+            Controls.Add(labelModelInstanceEdited);
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 50);
             Name = "ModelInstancePropertiesControl";
@@ -55,6 +55,6 @@ namespace SF3.Win.Controls {
         }
 
         #endregion
-        private DarkModeLabel labelTileEdited;
+        private DarkModeLabel labelModelInstanceEdited;
     }
 }

@@ -8,7 +8,6 @@ using SF3.FieldEditing;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
-using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
 using static SF3.FieldEditing.Constants;
 

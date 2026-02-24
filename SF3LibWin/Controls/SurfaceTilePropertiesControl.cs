@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
 using CommonLib.Types;
-using SF3.Extensions;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;

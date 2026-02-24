@@ -102,7 +102,7 @@ namespace SF3.Win.Controls {
             return SetSideEditorControl(
                 modelInstance, ref _modelInstancePropertiesControl, 
                 c => c.CmdKey += SideEditorCmdKeyHandler,
-                c => { /* TODO: actually set the thing to edit! */ }
+                c => { c.ModelInstance = modelInstance; }
             );
         }
 
@@ -129,8 +129,11 @@ namespace SF3.Win.Controls {
 
         private TControl SetSideEditorControl<TObj, TControl>(TObj obj, ref TControl control, Action<TControl> controlInitFunc, Action<TControl> controlActivateFunc)
         where TControl : Control, new() {
-            if (_currentSideEditorControl is TControl tControl)
-                return tControl;
+            if (_currentSideEditorControl is TControl existingControl) {
+                if (existingControl != null)
+                    controlActivateFunc(existingControl);
+                return existingControl;
+            }
 
             if (control != null) {
                 SetSideEditorControl(control, controlActivateFunc);
