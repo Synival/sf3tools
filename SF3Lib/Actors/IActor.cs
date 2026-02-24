@@ -4,6 +4,11 @@
     /// </summary>
     public interface IActor {
         /// <summary>
+        /// Unique ID for the actor.
+        /// </summary>
+        int ID { get; }
+
+        /// <summary>
         /// ID of the sprite used for display purposes.
         /// </summary>
         int SpriteID { get; set; }

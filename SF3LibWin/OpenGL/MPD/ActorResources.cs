@@ -133,6 +133,7 @@ namespace SF3.Win.OpenGL.MPD {
                         var actorZ = x.ActorZ;
 
                         return new ActorModelInstance(
+                            id: x.ID,
                             x: actorX /  32.0f + GeneralResources.ModelOffsetX,
                             y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
                             z: actorZ / -32.0f - GeneralResources.ModelOffsetZ,
@@ -247,7 +248,8 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public class ActorModelInstance {
-            public ActorModelInstance(float x, float y, float z, float verticalOffset, float direction) {
+            public ActorModelInstance(int id, float x, float y, float z, float verticalOffset, float direction) {
+                ID = id;
                 X = x;
                 Y = y;
                 Z = z;
@@ -255,6 +257,7 @@ namespace SF3.Win.OpenGL.MPD {
                 Direction = direction;
             }
 
+            public int ID;
             public readonly float X, Y, Z;
             public readonly float VerticalOffset;
             public readonly float Direction;

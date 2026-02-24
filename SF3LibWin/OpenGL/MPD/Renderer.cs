@@ -204,6 +204,9 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawModels)
                 DrawSceneModels(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
 
+            if (options.DrawActors)
+                DrawActors(resources.General, resources.Actors, state.CameraYaw, state.CameraPitch, selectionColors: true);
+
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
             if (!options.ForceTwoSidedTextures)
                 GL.Disable(EnableCap.CullFace);
@@ -249,7 +252,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
 
             if (options.DrawActors)
-                DrawActors(general, actors, cameraYaw, cameraPitch);
+                DrawActors(general, actors, cameraYaw, cameraPitch, selectionColors: false);
 
             if (options.DrawModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: true, selectionColors: false);
@@ -604,10 +607,17 @@ namespace SF3.Win.OpenGL.MPD {
             GeneralResources general,
             ActorResources actors,
             float cameraYaw,
-            float cameraPitch
+            float cameraPitch,
+            bool selectionColors
         ) {
             if (actors == null || actors.ModelsBySpriteID == null || actors.ModelsBySpriteID.Count == 0)
                 return;
+
+            Vector4 ModelSelectionColor(ActorResources.ActorModelInstance actor) {
+                var r = (actor.ID % 64) / 64.0f;
+                var g = (actor.ID / 64) / 64.0f;
+                return new Vector4(r, g, 3.0f / 64.0f, 1.0f);
+            }
 
             var baseMatrix = Matrix4.CreateScale(0.75f);
 
@@ -618,17 +628,21 @@ namespace SF3.Win.OpenGL.MPD {
             var shader = general.SpriteShader;
             using (shader.Use())
             using (actors.Texture.Use()) {
-                // Render shadows first.
-                _ = shader.UpdateUniform("direction", 0.0f);
-                _ = shader.UpdateUniform("cameraDistAdjust", 0.25f);
-                foreach (var actorGroup in actors.ActorsBySpriteID) {
-                    var spriteId = actorGroup.Key;
-                    var shadow = actors.ShadowsBySpriteID[spriteId];
+                _ = shader.UpdateUniform("colorize", selectionColors);
 
-                    foreach (var actor in actorGroup.Value) {
-                        var modelMatrix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
-                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
-                        shadow.Draw(shader);
+                if (!selectionColors) {
+                    // Render shadows first.
+                    _ = shader.UpdateUniform("direction", 0.0f);
+                    _ = shader.UpdateUniform("cameraDistAdjust", 0.25f);
+                    foreach (var actorGroup in actors.ActorsBySpriteID) {
+                        var spriteId = actorGroup.Key;
+                        var shadow = actors.ShadowsBySpriteID[spriteId];
+
+                        foreach (var actor in actorGroup.Value) {
+                            var modelMatrix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
+                            _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
+                            shadow.Draw(shader);
+                        }
                     }
                 }
 
@@ -636,13 +650,17 @@ namespace SF3.Win.OpenGL.MPD {
                 _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
                 foreach (var actorGroup in actors.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
-                    var model  = actors.ModelsBySpriteID[spriteId];
+                    var model    = actors.ModelsBySpriteID[spriteId];
 
                     foreach (var actor in actorGroup.Value) {
                         var modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + actor.VerticalOffset, actor.Z));
+
                         _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
                         // Convert facing direction (0=north, 90=east, ...) to shader direction (0=south, 0.25=east, ...)
                         _ = shader.UpdateUniform("direction", MathHelpers.ActualMod((180.0f - actor.Direction - cameraYaw) / 360.0f, 1.0f));
+                        if (selectionColors)
+                            _ = shader.UpdateUniform("color", ModelSelectionColor(actor));
+
                         model.Draw(shader);
                     }
                 }

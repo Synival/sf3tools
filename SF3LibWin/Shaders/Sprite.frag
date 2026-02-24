@@ -1,6 +1,8 @@
 #version 330 core
 
 uniform sampler2D texture0;
+uniform bool colorize;
+uniform vec4 color;
 
 in vec4 colorFrag;
 in vec2 texCoord0Frag;
@@ -12,5 +14,5 @@ void main() {
     if (texColor.a < 0.001)
         discard;
 
-    FragColor = texColor;
+    FragColor = colorize ? color : texColor;
 }
