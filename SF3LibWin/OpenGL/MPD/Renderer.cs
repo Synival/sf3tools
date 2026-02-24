@@ -60,6 +60,57 @@ namespace SF3.Win.OpenGL.MPD {
             public int ScreenHeight;
             public Matrix4 ProjectionMatrix;
             public Matrix4 ViewMatrix;
+
+            public (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] GetModelsWithGroups(ModelResources models, RendererOptions options) {
+                if (_modelsWithGroups != null)
+                    return _modelsWithGroups;
+
+                var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options);
+
+                _modelsWithGroups = models.ModelInstances
+                    .Select(x => (Model: x, ModelGroup: models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
+                    .Where(x => x.ModelGroup != null)
+                    .Where(x => {
+                        var direction = x.Model.OnlyVisibleFromDirection;
+                        return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
+                    })
+                    .Where(x => options?.ModelsToHide?.Contains(x.Model.ID) != true)
+                    .ToArray();
+
+                return _modelsWithGroups;
+            }
+
+            private bool[] GetModelDirectionsFacingCamera(RendererOptions options) {
+                if (_modelDirectionsFacingCamera != null)
+                    return _modelDirectionsFacingCamera;
+
+                var showModelsInAllDirections = !options.HideModelsNotFacingCamera;
+
+                bool WithinAngleRange(ModelDirectionType dir) {
+                    if (showModelsInAllDirections)
+                        return true;
+                    var angle = 540 - 45 * (int) dir % 360;
+                    var angleDiff = MathHelpers.ActualMod(CameraYaw - angle, 360.0f);
+                    if (angleDiff > 180.0f)
+                        angleDiff -= 360.0f;
+
+                    return angleDiff > options.ModelsViewAngleMin && angleDiff < options.ModelsViewAngleMax;
+                }
+
+                return [
+                    WithinAngleRange(ModelDirectionType.North),
+                    WithinAngleRange(ModelDirectionType.Northeast),
+                    WithinAngleRange(ModelDirectionType.East),
+                    WithinAngleRange(ModelDirectionType.Southeast),
+                    WithinAngleRange(ModelDirectionType.South),
+                    WithinAngleRange(ModelDirectionType.Southwest),
+                    WithinAngleRange(ModelDirectionType.West),
+                    WithinAngleRange(ModelDirectionType.Northwest),
+                ];
+            }
+
+            private (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] _modelsWithGroups;
+            private bool[] _modelDirectionsFacingCamera;
         }
 
         public void DrawScene(
@@ -94,13 +145,11 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawGround)
                 DrawSceneGround(general, groundModel, gradients, groundAdj, options, ref state.ProjectionMatrix, ref state.ViewMatrix);
 
-            // Determine which models are facing the camera and should be displayed.
-            var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options, state.CameraYaw);
-
+            var modelsWithGroups = state.GetModelsWithGroups(models, options);
             if (options.DrawNormals)
-                DrawSceneObjectNormals(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera);
+                DrawSceneObjectNormals(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
             else if (options.WillDrawAnyObjects)
-                DrawSceneObjects(general, models, surfaceModel, actors, gradients, lighting, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix, modelDirectionsFacingCamera);
+                DrawSceneObjects(general, models, surfaceModel, actors, gradients, lighting, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix, modelsWithGroups);
 
             // Done rendering gradients; disable the stencil test.
             GL.Disable(EnableCap.StencilTest);
@@ -113,7 +162,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneCollisionLines(general, collisionModels, state.CameraYaw);
 
             if (options.DrawWireframe)
-                DrawSceneWireframes(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera);
+                DrawSceneWireframes(general, models, surfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
 
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(general, boundaryModels);
@@ -136,9 +185,9 @@ namespace SF3.Win.OpenGL.MPD {
             GL.ClearColor(1, 1, 1, 1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options, state.CameraYaw);
+            var modelsWithGroups = state.GetModelsWithGroups(models, options);
             if (options.DrawModels)
-                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera, transparentPass: false, selectionColors: true);
+                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: false, selectionColors: true);
 
             if (options.DrawSurfaceModel && surfaceModel?.Blocks != null) {
                 using (general.SolidShader.Use()) {
@@ -149,37 +198,11 @@ namespace SF3.Win.OpenGL.MPD {
             }
 
             if (options.DrawModels)
-                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelDirectionsFacingCamera, transparentPass: true, selectionColors:  true);
+                DrawSceneModels(general, models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
 
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
             if (!options.ForceTwoSidedTextures)
                 GL.Disable(EnableCap.CullFace);
-        }
-
-        private static bool[] GetModelDirectionsFacingCamera(RendererOptions options, float cameraYaw) {
-            var showModelsInAllDirections = !options.HideModelsNotFacingCamera;
-
-            bool WithinAngleRange(ModelDirectionType dir) {
-                if (showModelsInAllDirections)
-                    return true;
-                var angle = 540 - 45 * (int) dir % 360;
-                var angleDiff = MathHelpers.ActualMod(cameraYaw - angle, 360.0f);
-                if (angleDiff > 180.0f)
-                    angleDiff -= 360.0f;
-
-                return angleDiff > options.ModelsViewAngleMin && angleDiff < options.ModelsViewAngleMax;
-            }
-
-            return [
-                WithinAngleRange(ModelDirectionType.North),
-                WithinAngleRange(ModelDirectionType.Northeast),
-                WithinAngleRange(ModelDirectionType.East),
-                WithinAngleRange(ModelDirectionType.Southeast),
-                WithinAngleRange(ModelDirectionType.South),
-                WithinAngleRange(ModelDirectionType.Southwest),
-                WithinAngleRange(ModelDirectionType.West),
-                WithinAngleRange(ModelDirectionType.Northwest),
-            ];
         }
 
         public void DrawSceneObjectNormals(
@@ -189,10 +212,10 @@ namespace SF3.Win.OpenGL.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            bool[] modelDirectionsFacingCamera
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             if (options.DrawModels)
-                DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
 
             if (options.DrawSurfaceModel)
                 DrawSceneSurfaceModelNormals(general, surfaceModel);
@@ -210,13 +233,13 @@ namespace SF3.Win.OpenGL.MPD {
             float cameraPitch,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix,
-            bool[] modelDirectionsFacingCamera
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             GL.StencilFunc(StencilFunction.Always, 0x04, 0x04);
             GL.StencilMask(0x04);
 
             if (options.DrawModels)
-                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: false, selectionColors: false);
+                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: false, selectionColors: false);
 
             if (options.WillDrawSurfaceModel)
                 DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
@@ -225,7 +248,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawActors(general, actors, cameraYaw, cameraPitch);
 
             if (options.DrawModels)
-                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera, transparentPass: true, selectionColors: false);
+                DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: true, selectionColors: false);
 
             if (options.DrawGradients)
                 DrawSceneGradient(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
@@ -266,7 +289,7 @@ namespace SF3.Win.OpenGL.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            bool[] modelDirectionsFacingCamera
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Enable(EnableCap.PolygonOffsetLine);
@@ -275,7 +298,7 @@ namespace SF3.Win.OpenGL.MPD {
             using (general.WireframeShader.Use())
             using (general.TileWireframeTexture.Use(TextureUnit.Texture1)) {
                 if (options.DrawModels)
-                    DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch, modelDirectionsFacingCamera);
+                    DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
 
                 if (options.WillDrawSurfaceModelWireframe)
                     DrawSceneSurfaceModelWireframe(general, surfaceModel);
@@ -303,20 +326,10 @@ namespace SF3.Win.OpenGL.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            bool[] modelDirectionsFacingCamera
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             if (models?.ModelsByIDByCollection == null)
                 return;
-
-            var modelsWithGroups = models.ModelInstances
-                .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null })
-                .Where(x => x.ModelGroup != null)
-                .Where(x => {
-                    var direction = x.Model.OnlyVisibleFromDirection;
-                    return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
-                })
-                .Where(x => options.ModelsToHide?.Contains(x.Model.ID) != true)
-                .ToArray();
 
             foreach (var mwg in modelsWithGroups) {
                 SetModelAndNormalMatricesForModel(models, mwg.Model, general.NormalsShader, options, cameraYaw, cameraPitch);
@@ -439,7 +452,7 @@ namespace SF3.Win.OpenGL.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            bool[] modelDirectionsFacingCamera,
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups,
             bool transparentPass,
             bool selectionColors
         ) {
@@ -468,16 +481,6 @@ namespace SF3.Win.OpenGL.MPD {
             using (selectionColors ? null : lightingTexture.Use(MPD_TextureUnit.TextureLighting))
             using (selectionColors ? general.TransparentBlackTexture.Use() : null)
             using (shader.Use()) {
-                var modelsWithGroups = models.ModelInstances
-                    .Select(x => new { Model = x, ModelGroup = models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null })
-                    .Where(x => x.ModelGroup != null)
-                    .Where(x => {
-                        var direction = x.Model.OnlyVisibleFromDirection;
-                        return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
-                    })
-                    .Where(x => options?.ModelsToHide?.Contains(x.Model.ID) != true)
-                    .ToArray();
-
                 if (!transparentPass) {
                     if (!selectionColors) {
                         // Pass 1: Stencil
@@ -681,26 +684,17 @@ namespace SF3.Win.OpenGL.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            bool[] modelDirectionsFacingCamera
+            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             if (models?.ModelInstances == null)
                 return;
 
-            foreach (var model in models.ModelInstances) {
-                var direction = model.OnlyVisibleFromDirection;
-                if (!(direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction]))
-                    continue;
-                if (options.ModelsToHide?.Contains(model.ID) == true)
-                    continue;
-
-                var modelGroup = models.ModelsByIDByCollection[model.Collection].TryGetValue(model.ModelID, out var pd) ? pd : null;
-                if (modelGroup != null) {
-                    SetModelAndNormalMatricesForModel(models, model, general.WireframeShader, options, cameraYaw, cameraPitch);
-                    modelGroup.SolidTexturedModel?.Draw(general.WireframeShader);
-                    modelGroup.SolidUntexturedModel?.Draw(general.WireframeShader);
-                    modelGroup.SemiTransparentTexturedModel?.Draw(general.WireframeShader);
-                    modelGroup.SemiTransparentUntexturedModel?.Draw(general.WireframeShader);
-                }
+            foreach (var mwg in modelsWithGroups) {
+                SetModelAndNormalMatricesForModel(models, mwg.Model, general.WireframeShader, options, cameraYaw, cameraPitch);
+                mwg.ModelGroup.SolidTexturedModel?.Draw(general.WireframeShader);
+                mwg.ModelGroup.SolidUntexturedModel?.Draw(general.WireframeShader);
+                mwg.ModelGroup.SemiTransparentTexturedModel?.Draw(general.WireframeShader);
+                mwg.ModelGroup.SemiTransparentUntexturedModel?.Draw(general.WireframeShader);
             }
 
             general.WireframeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
