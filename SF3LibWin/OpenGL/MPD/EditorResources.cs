@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.Linq;
+﻿using System.Linq;
 using CommonLib;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
+using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.MPD {
     public class EditorResources : ResourcesBase {
@@ -30,13 +30,13 @@ namespace SF3.Win.OpenGL.MPD {
             // Nothing loaded dynamically, so nothing to reset.
         }
 
-        public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, Point? tilePos)
-            => ReplaceTileModelAndTexture(mpd, world, tilePos, ref _tileHoverModel, ref _tileHoverTexture);
+        public void UpdateTileHoverModel(IMPD mpd, GeneralResources world, SelectableTile tile)
+            => ReplaceTileModelAndTexture(mpd, world, tile, ref _tileHoverModel, ref _tileHoverTexture);
 
-        public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, Point? tilePos)
-            => ReplaceTileModelAndTexture(mpd, world, tilePos, ref _tileSelectedModel, ref _tileSelectedTexture);
+        public void UpdateTileSelectedModel(IMPD mpd, GeneralResources world, SelectableTile tile)
+            => ReplaceTileModelAndTexture(mpd, world, tile, ref _tileSelectedModel, ref _tileSelectedTexture);
 
-        private void ReplaceTileModelAndTexture(IMPD mpd, GeneralResources world, Point? tilePos, ref QuadModel model, ref Texture texture) {
+        private void ReplaceTileModelAndTexture(IMPD mpd, GeneralResources world, SelectableTile selectableTile, ref QuadModel model, ref Texture texture) {
             if (model != null) {
                 model.Dispose();
                 Models.Remove(model);
@@ -49,8 +49,8 @@ namespace SF3.Win.OpenGL.MPD {
                 texture = null;
             }
 
-            if (tilePos != null) {
-                var tile = mpd.Surface.GetTile(tilePos.Value.X, tilePos.Value.Y);
+            if (selectableTile != null) {
+                var tile = mpd.Surface.GetTile(selectableTile.X, selectableTile.Y);
 
                 var texId = tile.TextureID;
                 var tileTexture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);

@@ -14,6 +14,18 @@ using static SF3.FieldEditing.Constants;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {
+        public interface ISelectableObject {}
+
+        public class SelectableTile(int x, int y) : ISelectableObject {
+            public int X = x;
+            public int Y = y;
+        }
+
+        public class SelectableModel(MPD_CollectionType collection, int instanceId) : ISelectableObject {
+            public MPD_CollectionType Collection = collection;
+            public int InstanceID = instanceId;
+        }
+
         private void InitEditing() {
             MouseDown += (s, e) => OnMouseDownEditing(e);
             MouseUp   += (s, e) => OnMouseUpEditing(e);
@@ -24,45 +36,55 @@ namespace SF3.Win.Controls {
             if (e.Button != MouseButtons.Left)
                 return;
 
-            var cursorMode = CursorMode;
-            if (cursorMode == ViewerCursorMode.Select)
-                SelectTile(_tileHoverPos);
-            else if (cursorMode.IsDrawingMode()) {
-                DrawTileAtCursor();
-                _lastTileEdited = _tileHoverPos;
+            if (_mouseoverObject is SelectableTile tile) {
+                var cursorMode = CursorMode;
+                if (cursorMode == ViewerCursorMode.Select)
+                    SelectObject(tile);
+                else if (cursorMode.IsDrawingMode()) {
+                    DrawMouseoverTile();
+                    _lastMouseoverTileEdited = tile;
+                }
             }
+            else
+                SelectObject(null);
         }
 
         private void OnMouseUpEditing(MouseEventArgs e) =>
-            _lastTileEdited = null;
+            _lastMouseoverTileEdited = null;
 
         private void OnMouseMoveEditing(MouseEventArgs e) {
             var cursorMode = CursorMode;
-            if (_mouseButtons == MouseButtons.Left && CursorMode.IsDrawingMode() && _lastTileEdited != _tileHoverPos) {
-                DrawTileAtCursor();
-                _lastTileEdited = _tileHoverPos;
+            if (_mouseButtons == MouseButtons.Left && CursorMode.IsDrawingMode() && _lastMouseoverTileEdited != _mouseoverObject && _mouseoverObject is SelectableTile tile) {
+                DrawMouseoverTile();
+                _lastMouseoverTileEdited = tile;
             }
         }
 
-        public void SelectTile(Point? tilePos) {
-            if (_tileSelectedPos == tilePos)
+        public void SelectObject(ISelectableObject obj) {
+            if (_selectedObject == obj)
                 return;
 
-            _tileSelectedPos = tilePos;
-            var tile = (_tileSelectedPos == null) ? null : MPD_File.Surface.GetTile(_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y);
-            _selectedTile = tile;
-            TileSelected?.Invoke(this, tile);
+            var oldTile = _selectedObject as SelectableTile;
+            var newTile = obj as SelectableTile;
+
+            _selectedObject = obj;
+
+            if (oldTile != newTile) {
+                var surfaceTile = (newTile == null) ? null : MPD_File.Surface.GetTile(newTile.X, newTile.Y);
+                _selectedTile = surfaceTile;
+                TileSelected?.Invoke(this, surfaceTile);
+            }
 
             InvalidateEditor();
         }
 
-        private void UpdateTilePosition() {
+        private void UpdateMouseoverObject() {
             // Don't allow changing tiles while the mouse is down.
             if (!(_mouseButtons == 0 || CursorMode.IsDrawingMode()))
                 return;
 
             if (_mousePos == null) {
-                UpdateTilePosition(null);
+                UpdateMouseoverObject(null);
                 return;
             }
 
@@ -71,34 +93,37 @@ namespace SF3.Win.Controls {
                 GL.ReadPixels(_mousePos.Value.X, Height - _mousePos.Value.Y - 1, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
 
             if (pixel[2] < 2) {
-                UpdateTilePosition(new Point(
+                UpdateMouseoverObject(new SelectableTile(
                     (int) Math.Round(pixel[0] / (255.0f / SurfaceModelResources.WidthInTiles)),
                     (int) Math.Round(pixel[1] / (255.0f / SurfaceModelResources.HeightInTiles))
                 ));
             }
             // TODO: if (pixel[2] < 6) for models
             else {
-                UpdateTilePosition(null);
+                UpdateMouseoverObject(null);
             }
         }
 
-        private void UpdateTilePosition(Point? pos) {
-            // All invalid tile values should be 'null'.
-            if (pos.HasValue && (pos.Value.X < 0 || pos.Value.Y < 0 || pos.Value.X > 63 || pos.Value.Y > 63))
-                pos = null;
+        private void UpdateMouseoverObject(ISelectableObject obj) {
+            if (obj is SelectableTile tile) {
+                // All invalid tile values should be 'null'.
+                if (tile.X < 0 || tile.Y < 0 || tile.X > 63 || tile.Y > 63)
+                    obj = null;
+            }
 
             // Early exit if no change is necessary.
-            if (_tileHoverPos == pos)
+            if (_mouseoverObject == obj)
                 return;
 
-            _tileHoverPos = pos;
+            _mouseoverObject = obj;
             InvalidateEditor();
         }
 
-        private void DrawTileAtCursor() {
-            if (_tileHoverPos == null)
+        private void DrawMouseoverTile() {
+            var tile = _mouseoverObject as SelectableTile;
+            if (tile == null)
                 return;
-            DrawTileAt(_tileHoverPos.Value.X, _tileHoverPos.Value.Y);
+            DrawTileAt(tile.X, tile.Y);
         }
 
         private void DrawTileAt(int x, int y) {
@@ -258,10 +283,10 @@ namespace SF3.Win.Controls {
             InvalidateFrame();
         }
 
-        private Point? _tileHoverPos = null;
-        private Point? _tileSelectedPos = null;
-        private Point? _lastTileEdited = null;
+        private ISelectableObject _mouseoverObject = null;
+        private ISelectableObject _selectedObject  = null;
 
+        private SelectableTile _lastMouseoverTileEdited = null;
         private IMPD_SurfaceTile _selectedTile = null;
 
         public delegate void TileSelectedEventHandler(object sender, IMPD_SurfaceTile tile);

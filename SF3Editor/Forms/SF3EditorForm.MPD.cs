@@ -329,7 +329,7 @@ namespace SF3.Editor.Forms {
         private void tsmiMPD_DeselectAll_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project) {
                 var view = ((MPD_View) SelectedFile.View.ActualView);
-                view.ViewerView.Control.GLControl.SelectTile(null);
+                view.ViewerView.Control.GLControl.SelectObject(null);
             }
         }
 

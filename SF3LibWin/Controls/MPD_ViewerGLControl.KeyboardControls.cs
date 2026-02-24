@@ -120,7 +120,7 @@ namespace SF3.Win.Controls {
             if (newTileX < 0 || newTileY < 0 || newTileX > 63 || newTileY > 63)
                 return false;
 
-            SelectTile(new Point(newTileX, newTileY));
+            SelectObject(new SelectableTile(newTileX, newTileY));
             return true;
         }
 

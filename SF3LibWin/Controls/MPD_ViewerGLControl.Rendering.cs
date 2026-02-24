@@ -276,7 +276,7 @@ namespace SF3.Win.Controls {
 
             // Determine what's under the mouse. This will be fed into the final scene render.
             // This may have invalidated some resources, so update them.
-            UpdateTilePosition();
+            UpdateMouseoverObject();
             UpdateEditorResources();
 
             // Render the final scene.
@@ -357,8 +357,8 @@ namespace SF3.Win.Controls {
 
         private void UpdateEditorResources() {
             if (_editorNeedsUpdate) {
-                _editor.UpdateTileHoverModel(MPD_File, _general, _tileHoverPos);
-                _editor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
+                _editor.UpdateTileHoverModel(MPD_File, _general, _mouseoverObject as SelectableTile);
+                _editor.UpdateTileSelectedModel(MPD_File, _general, _selectedObject as SelectableTile);
                 _editorNeedsUpdate = false;
             }
         }

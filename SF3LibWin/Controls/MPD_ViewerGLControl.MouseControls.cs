@@ -33,11 +33,11 @@ namespace SF3.Win.Controls {
                 var deltaX = (e.X - _lastMousePos.Value.X) * shiftFactor;
                 var deltaY = (e.Y - _lastMousePos.Value.Y) * shiftFactor;
 
-                // For middle+right drag, rotate around, keeping the tile over the mouse in place.
-                if ((dragMouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _tileHoverPos.HasValue) {
+                // For middle+right drag, rotate around, keeping the object over the mouse in place.
+                if ((dragMouseButtons & c_MouseMiddleRight) == c_MouseMiddleRight && _mouseoverObject != null) {
                     // TODO: SIMPLYIFY ALL THIS, AND IMPROVE IT!!!
 
-                    var targetDist = GetCurrentTileTargetAndDistance().Value;
+                    var targetDist = GetSelectableObjectTargetAndDistance(_mouseoverObject).Value;
                     var distVec = new Vector3(0, 0, targetDist.Distance);
 
                     var distForward = -distVec
@@ -88,7 +88,7 @@ namespace SF3.Win.Controls {
             if (_mousePos != null)
                 UpdateMousePosition((Point?) null);
             else
-                UpdateTilePosition(null);
+                UpdateMouseoverObject(null);
         }
 
         private void OnMouseLeaveMouseControls() {
@@ -102,7 +102,7 @@ namespace SF3.Win.Controls {
             if (_mousePos != null)
                 UpdateMousePosition((Point?) null);
             else
-                UpdateTilePosition(null);
+                UpdateMouseoverObject(null);
         }
 
         private void OnMouseDownMouseControls(MouseEventArgs e)
@@ -118,7 +118,7 @@ namespace SF3.Win.Controls {
                     OnMouseLeaveMouseControls();
                 else {
                     UpdateMousePosition(e);
-                    UpdateTilePosition();
+                    UpdateMouseoverObject();
                 }
             }
         }
@@ -135,10 +135,10 @@ namespace SF3.Win.Controls {
             => MoveCameraForward(e.Delta / -50 * GetShiftFactor());
 
         private void OnRightDoubleClickMouseControls()
-            => LookAtCurrentTileTarget();
+            => LookAtSelectableObject(_mouseoverObject);
 
         private void OnMiddleDoubleClickMouseControls()
-            => PanToCurrentTileTarget();
+            => PanToSelectableObject(_mouseoverObject);
 
         private void OnLostFocusMouseControls() {
             _mouseButtons = MouseButtons.None;
@@ -152,7 +152,7 @@ namespace SF3.Win.Controls {
 
             var cursorMode = CursorMode;
             if (_mouseButtons == 0 || cursorMode.IsDrawingMode())
-                UpdateTilePosition();
+                UpdateMouseoverObject();
         }
 
         [Browsable(false)]

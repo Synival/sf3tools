@@ -18,8 +18,8 @@ namespace SF3.Win.Controls {
             Yaw   =  MathHelper.RadiansToDegrees((float) Math.Atan2(posMinusTarget.X, posMinusTarget.Z));
         }
 
-        public void LookAtCurrentTileTarget() {
-            var targetDist = GetCurrentTileTargetAndDistance();
+        public void LookAtSelectableObject(ISelectableObject obj) {
+            var targetDist = GetSelectableObjectTargetAndDistance(obj);
             if (!targetDist.HasValue)
                 return;
 
@@ -27,8 +27,8 @@ namespace SF3.Win.Controls {
             InvalidateFrame();
         }
 
-        public void PanToCurrentTileTarget() {
-            var targetDist = GetCurrentTileTargetAndDistance();
+        public void PanToSelectableObject(ISelectableObject obj) {
+            var targetDist = GetSelectableObjectTargetAndDistance(obj);
             if (!targetDist.HasValue)
                 return;
 
@@ -53,24 +53,28 @@ namespace SF3.Win.Controls {
             public float Distance;
         }
 
-        public TargetAndDistance? GetCurrentTileTargetAndDistance() {
-            if (!_tileHoverPos.HasValue)
+        public TargetAndDistance? GetSelectableObjectTargetAndDistance(ISelectableObject obj) {
+            Vector3? target = null;
+
+            if (obj is SelectableTile tileObj) {
+                var tile = MPD_File.Surface.GetTile(tileObj.X, tileObj.Y);
+                var tileVertices = tile.GetVector3Vertices();
+                target = new Vector3(
+                    tileObj.X + GeneralResources.ModelOffsetX + 0.5f,
+                    tileVertices.Select(x => x.Y).Average(),
+                    (63 - tileObj.Y) + GeneralResources.ModelOffsetZ + 0.5f);
+            }
+
+            if (!target.HasValue)
                 return null;
 
-            var tile = MPD_File.Surface.GetTile(_tileHoverPos.Value.X, _tileHoverPos.Value.Y);
-            var tileVertices = tile.GetVector3Vertices();
-            var target = new Vector3(
-                _tileHoverPos.Value.X + GeneralResources.ModelOffsetX + 0.5f,
-                tileVertices.Select(x => x.Y).Average(),
-                (63 - _tileHoverPos.Value.Y) + GeneralResources.ModelOffsetZ + 0.5f);
-
             var dist = (float) Math.Sqrt(
-                Math.Pow(target.X - Position.X, 2) +
-                Math.Pow(target.Y - Position.Y, 2) +
-                Math.Pow(target.Z - Position.Z, 2)
+                Math.Pow(target.Value.X - Position.X, 2) +
+                Math.Pow(target.Value.Y - Position.Y, 2) +
+                Math.Pow(target.Value.Z - Position.Z, 2)
             );
 
-            return new TargetAndDistance { Target = target, Distance = dist };
+            return new TargetAndDistance { Target = target.Value, Distance = dist };
         }
 
         public void ResetCamera()
