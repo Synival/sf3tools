@@ -98,7 +98,13 @@
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\ActorNPCPropertiesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Controls\ImageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ActorBattlePropertiesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Controls\MPD_ViewerControl.cs">
@@ -135,6 +141,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Controls\ActorNPCPropertiesControl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\ActorBattlePropertiesControl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\ModelInstancePropertiesControl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -9,6 +9,9 @@ using CommonLib.Geometry;
 using SF3.Win.OpenGL.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Win.App;
+using SF3.Actors;
+using SF3.Models.Structs.X1.Battle;
+using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -85,6 +88,14 @@ namespace SF3.Win.Controls {
                     SwitchToTileEditor(tile);
                 else if (obj is IMPD_ModelInstance modelInstance)
                     SwitchToModelInstanceEditor(modelInstance);
+                else if (obj is IActor actor) {
+                    if (actor is Slot slot)
+                        SwitchToActorBattleInstanceEditor(slot);
+                    else if (actor is Npc npc)
+                        SwitchToActorNPCInstanceEditor(npc);
+                    else
+                        SetSideEditorControl(null);
+                }
                 else
                     SetSideEditorControl(null);
             };
@@ -103,6 +114,22 @@ namespace SF3.Win.Controls {
                 modelInstance, ref _modelInstancePropertiesControl, 
                 c => c.CmdKey += SideEditorCmdKeyHandler,
                 c => { c.ModelInstance = modelInstance; }
+            );
+        }
+
+        private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Slot actor) {
+            return SetSideEditorControl(
+                actor, ref _actorBattlePropertiesControl, 
+                c => c.CmdKey += SideEditorCmdKeyHandler,
+                c => { c.Actor = actor; }
+            );
+        }
+
+        private ActorNPCPropertiesControl SwitchToActorNPCInstanceEditor(Npc actor) {
+            return SetSideEditorControl(
+                actor, ref _actorNPCPropertiesControl, 
+                c => c.CmdKey += SideEditorCmdKeyHandler,
+                c => { c.Actor = actor; }
             );
         }
 
@@ -358,5 +385,7 @@ namespace SF3.Win.Controls {
 
         private SurfaceTilePropertiesControl   _surfaceTilePropertiesControl   = null;
         private ModelInstancePropertiesControl _modelInstancePropertiesControl = null;
+        private ActorBattlePropertiesControl   _actorBattlePropertiesControl   = null;
+        private ActorNPCPropertiesControl      _actorNPCPropertiesControl      = null;
     }
 }

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
+using SF3.Actors;
 using SF3.FieldEditing;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
+using SF3.Win.App;
 using SF3.Win.Types;
 using static SF3.FieldEditing.Constants;
 
@@ -69,6 +71,9 @@ namespace SF3.Win.Controls {
             var oldModel = _selectedObject as SelectableModel;
             var newModel = obj as SelectableModel;
 
+            var oldActor = _selectedObject as SelectableActor;
+            var newActor = obj as SelectableActor;
+
             object newEventObject = null;
 
             _selectedObject = obj;
@@ -88,6 +93,17 @@ namespace SF3.Win.Controls {
                 }
                 if (modelInstance != null)
                     newEventObject = modelInstance;
+            }
+
+            if (oldActor != newActor) {
+                IActor actor = null;
+                if (newActor != null) {
+                    var actors = AppScene.Get().ActiveActorCollection?.Actors;
+                    if (actors != null)
+                        actor = actors.FirstOrDefault(x => x.ID == newActor.ID);
+                }
+                if (actor != null)
+                    newEventObject = actor;
             }
 
             if (_objectSelectedEventObject != newEventObject) {
