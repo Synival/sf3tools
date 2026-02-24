@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using OpenTK.Mathematics;
+using SF3.Win.App;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD;
 
@@ -65,8 +66,29 @@ namespace SF3.Win.Controls {
                     (63 - tileObj.Y) + GeneralResources.ModelOffsetZ + 0.5f);
             }
             else if (obj is SelectableModel modelObj) {
-                // TODO: actually get the thing!!
-                target = new Vector3(0, 0, 0);
+                if (MPD_File.ModelCollections.TryGetValue(modelObj.Collection, out var collection)) {
+                    var modelInstance = collection.ModelInstances.FirstOrDefault(x => x.ID == modelObj.InstanceID);
+                    if (modelInstance != null) {
+                        target =
+                            new Vector3(
+                                modelInstance.PositionX /  32.0f,
+                                modelInstance.PositionY / -32.0f,
+                                modelInstance.PositionZ / -32.0f
+                            )
+                            * Matrix3.CreateRotationY(MPD_File.Settings.ModelsYRotation / -180.0f * (float) Math.PI)
+                            + new Vector3(GeneralResources.ModelOffsetX, 0, -GeneralResources.ModelOffsetZ);
+                    }
+                }
+            }
+            else if (obj is SelectableActor actorObj) {
+                var actor = AppScene.Get().ActiveActorCollection?.Actors?.FirstOrDefault(x => x.ID == actorObj.ID);
+                if (actor != null) {
+                    target = new Vector3(
+                        actor.ActorX /  32.0f + GeneralResources.ModelOffsetX,
+                        actor.ActorY / -32.0f,
+                        actor.ActorZ / -32.0f - GeneralResources.ModelOffsetZ
+                    );
+                }
             }
 
             if (!target.HasValue)
