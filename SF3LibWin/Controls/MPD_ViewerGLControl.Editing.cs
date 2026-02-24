@@ -25,6 +25,10 @@ namespace SF3.Win.Controls {
             public int InstanceID = instanceId;
         }
 
+        public class SelectableActor(int id) : ISelectableObject {
+            public int ID = id;
+        }
+
         private void InitEditing() {
             MouseDown += (s, e) => OnMouseDownEditing(e);
             MouseUp   += (s, e) => OnMouseUpEditing(e);
@@ -117,6 +121,8 @@ namespace SF3.Win.Controls {
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.Primary, pixel[0] + pixel[1] * 64));
             else if (pixel[2] == 2)
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.ExtraModels, pixel[0] + pixel[1] * 64));
+            else if (pixel[2] == 3)
+                UpdateMouseoverObject(new SelectableActor(pixel[0] + pixel[1] * 64));
             else
                 UpdateMouseoverObject(null);
         }

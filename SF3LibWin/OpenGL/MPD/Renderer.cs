@@ -174,7 +174,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneBoundaries(resources.General, resources.BoundaryModels);
 
             if (options.DrawOutlines && resources.OutlineFramebuffer1 != null && resources.OutlineFramebuffer2 != null)
-                DrawOutlines(resources.General, resources.Models, resources.Editor, options, state.CameraYaw, state.CameraPitch, resources.OutlineFramebuffer1, resources.OutlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
+                DrawOutlines(resources.General, resources.Models, resources.Actors, resources.Editor, options, state.CameraYaw, state.CameraPitch, resources.OutlineFramebuffer1, resources.OutlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
         }
 
         public void DrawSelectionScene(
@@ -619,11 +619,7 @@ namespace SF3.Win.OpenGL.MPD {
                 return new Vector4(r, g, 3.0f / 64.0f, 1.0f);
             }
 
-            var baseMatrix = Matrix4.CreateScale(0.75f);
-
-            var baseRotationMatrix = baseMatrix *
-                Matrix4.CreateRotationX(cameraPitch / 180.0f * (float) Math.PI) *
-                Matrix4.CreateRotationY(cameraYaw   / 180.0f * (float) Math.PI);
+            var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
 
             var shader = general.SpriteShader;
             using (shader.Use())
@@ -653,19 +649,33 @@ namespace SF3.Win.OpenGL.MPD {
                     var model    = actors.ModelsBySpriteID[spriteId];
 
                     foreach (var actor in actorGroup.Value) {
-                        var modelMatrix = baseRotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + actor.VerticalOffset, actor.Z));
-
-                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
-                        // Convert facing direction (0=north, 90=east, ...) to shader direction (0=south, 0.25=east, ...)
-                        _ = shader.UpdateUniform("direction", MathHelpers.ActualMod((180.0f - actor.Direction - cameraYaw) / 360.0f, 1.0f));
-                        if (selectionColors)
-                            _ = shader.UpdateUniform("color", ModelSelectionColor(actor));
-
+                        SetupSpriteShaderUniforms(shader, baseRotationMatrix, actor, cameraYaw, selectionColors ? ModelSelectionColor(actor) : null);
                         model.Draw(shader);
                     }
                 }
                 _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
             }
+        }
+
+        private void SetupSpriteShaderUniforms(Shader shader, Matrix4 rotationMatrix, ActorResources.ActorModelInstance actor, float cameraYaw, Vector4? color) {
+            var modelMatrix = rotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + actor.VerticalOffset, actor.Z));
+            _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
+
+            // Convert facing direction (0=north, 90=east, ...) to shader direction (0=south, 0.25=east, ...)
+            _ = shader.UpdateUniform("direction", MathHelpers.ActualMod((180.0f - actor.Direction - cameraYaw) / 360.0f, 1.0f));
+
+            if (color.HasValue)
+                _ = shader.UpdateUniform("color", color.Value);
+        }
+
+        private (Matrix4 BaseMatrix, Matrix4 BaseRotationMatrix) GetSpriteDrawMatrices(float cameraYaw, float cameraPitch) {
+            var baseMatrix = Matrix4.CreateScale(0.75f);
+
+            var baseRotationMatrix = baseMatrix *
+                Matrix4.CreateRotationX(cameraPitch / 180.0f * (float) Math.PI) *
+                Matrix4.CreateRotationY(cameraYaw   / 180.0f * (float) Math.PI);
+
+            return (baseMatrix, baseRotationMatrix);
         }
 
         public void DrawSceneGradient(
@@ -736,6 +746,7 @@ namespace SF3.Win.OpenGL.MPD {
         public void DrawOutlines(
             GeneralResources general,
             ModelResources models,
+            ActorResources actors,
             EditorResources editor,
             RendererOptions options,
             float cameraYaw,
@@ -748,9 +759,9 @@ namespace SF3.Win.OpenGL.MPD {
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
 
-            void RenderOutlinesFor(Action renderAction) {
+            void RenderOutlinesFor(Action renderAction, Shader shader = null) {
                 // Draw the visible models that need outlines on the screen's stencil buffer *only*.
-                using (general.ColorizeShader.Use()) {
+                using ((shader ?? general.ColorizeShader).Use()) {
                     GL.ColorMask(false, false, false, false);
                     GL.Enable(EnableCap.StencilTest);
                     GL.StencilFunc(StencilFunction.Always, 0x08, 0x08);
@@ -851,14 +862,45 @@ namespace SF3.Win.OpenGL.MPD {
                 });
             }
 
+            void RenderActor(SelectableActor selectableActor, Vector4 color) {
+                var actor = actors.ActorsBySpriteID.Values.SelectMany(x => x).FirstOrDefault(x => x.ID == selectableActor.ID);
+                if (actor == null)
+                    return;
+
+                var spriteId = actor.SpriteID;
+                var model    = actors.ModelsBySpriteID.TryGetValue(spriteId, out var modelObj) ? modelObj : null;
+                if (model == null)
+                    return;
+
+                RenderOutlinesFor(() => {
+                    var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
+
+                    var shader = general.SpriteShader;
+                    using (actors.Texture.Use()) {
+                        _ = shader.UpdateUniform("colorize", true);
+                        _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
+
+                        SetupSpriteShaderUniforms(shader, baseRotationMatrix, actor, cameraYaw, color);
+                        model.Draw(shader);
+
+                        _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+                    }
+                }, general.SpriteShader);
+            }
+
             if (editor.MouseoverTileModel != null)
                 RenderTile(editor.MouseoverTileModel, editor.MouseoverTileTexture, new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
+            if (editor.MouseoverObject is SelectableModel mouseoverModel)
+                RenderModel(mouseoverModel, new Vector4(0.5f, 0.375f, 0.25f, 0.5f));
+            if (editor.MouseoverObject is SelectableActor mouseoverActor)
+                RenderActor(mouseoverActor, new Vector4(0.25f, 0.25f + (0.25f / 4), 0.5f, 0.5f));
+
             if (editor.SelectedTileModel != null)
                 RenderTile(editor.SelectedTileModel, editor.SelectedTileTexture, new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
-            if (editor.MouseoverObject is SelectableModel mouseoverModel)
-                RenderModel(mouseoverModel, new Vector4(0.5f, 0.375f, 0.25f, 1.0f));
             if (editor.SelectedObject is SelectableModel selectedModel)
                 RenderModel(selectedModel, new Vector4(1.0f, 0.5f, 0.0f, 1.0f));
+            if (editor.SelectedObject is SelectableActor selectedActor)
+                RenderActor(selectedActor, new Vector4(0.0f, 0.25f, 1.0f, 1.0f));
 
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
