@@ -87,6 +87,11 @@ namespace SF3.Win.OpenGL.MPD {
 
                 var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options);
 
+                if (models.ModelInstances == null) {
+                    _modelsWithGroups = [];
+                    return _modelsWithGroups;
+                }
+
                 _modelsWithGroups = models.ModelInstances
                     .Select(x => (Model: x, ModelGroup: models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
                     .Where(x => x.ModelGroup != null)
