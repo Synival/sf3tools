@@ -184,8 +184,15 @@ namespace SF3.Win.Controls {
         }
 
         private void OnPaintRendering() {
-            using (new ScopeGuard(() => _inPaintCounter++, () => _inPaintCounter--))
+            using (new ScopeGuard(() => _inPaintCounter++, () => _inPaintCounter--)) {
+                // Too many paint events can cause the frame ticks to get dropped.
+                // Let's force them to happen if we exceed 1/60th of a second.
+                var frameTime = GetNow() - _lastTimeInMs;
+                if (frameTime > 16)
+                    IncrementFrame();
+
                 RenderFrame();
+            }
         }
 
         public void RenderFrame() {
@@ -471,7 +478,6 @@ namespace SF3.Win.Controls {
         private float _frameDeltaTimeInMs = 0;
 
         private void UpdateAnimatedTextures(float deltaInMs) {
-
             const float c_frameDurationInMs = (1000.0f / 30.0f);
 
             _frameDeltaTimeInMs += deltaInMs;

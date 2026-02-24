@@ -74,10 +74,7 @@ namespace SF3.Win.Controls {
         private long _lastTimeInMs = 0;
         private float _lastDeltaInMs = 0.0f;
 
-        private void IncrementFrame() {
-            if (!Visible)
-                return;
-
+        private long GetNow() {
             var now = DateTimeOffset.Now.ToUnixTimeMilliseconds() - _startTimeInMs;
             if (_startTimeInMs == 0) {
                 _startTimeInMs = now;
@@ -86,8 +83,19 @@ namespace SF3.Win.Controls {
                 _lastDeltaInMs = now - _lastDeltaInMs;
             }
 
+            return now;
+        }
+
+        private void IncrementFrame() {
+            if (!Visible)
+                return;
+
+            // Get the currrent timestamp.
+            var now = GetNow();
+
             // Frame delta is an average of this frame and the last to reduce some jittering.
             var deltaInMs = now - _lastTimeInMs;
+
             FrameTick?.Invoke(this, (_lastDeltaInMs + deltaInMs) / 2);
 
             _lastTimeInMs = now;
