@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using CommonLib;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
@@ -18,21 +19,21 @@ namespace SF3.Win.Controls {
             FrameTick += (s, deltaInMs) => OnFrameTickRendering(deltaInMs);
             TileModified += (s, e) => OnTileModifiedRendering(s);
 
-            _appState.ViewerDrawSurfaceModelChanged   += (s, e) => Invalidate();
-            _appState.ViewerDrawModelsChanged         += (s, e) => Invalidate();
-            _appState.ViewerDrawGroundChanged         += (s, e) => Invalidate();
-            _appState.ViewerDrawSkyChanged            += (s, e) => Invalidate();
-            _appState.ViewerRunAnimationsChanged      += (s, e) => Invalidate();
-            _appState.ViewerApplyLightingChanged      += (s, e) => Invalidate();
-            _appState.ViewerDrawGradientsChanged      += (s, e) => Invalidate();
-            _appState.ViewerDrawActorsChanged         += (s, e) => Invalidate();
+            _appState.ViewerDrawSurfaceModelChanged   += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawModelsChanged         += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawGroundChanged         += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawSkyChanged            += (s, e) => InvalidateFrame();
+            _appState.ViewerRunAnimationsChanged      += (s, e) => InvalidateFrame();
+            _appState.ViewerApplyLightingChanged      += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawGradientsChanged      += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawActorsChanged         += (s, e) => InvalidateFrame();
 
-            _appState.ViewerDrawWireframeChanged      += (s, e) => Invalidate();
-            _appState.ViewerDrawBoundariesChanged     += (s, e) => Invalidate();
-            _appState.ViewerDrawTerrainTypesChanged   += (s, e) => Invalidate();
-            _appState.ViewerDrawEventIDsChanged       += (s, e) => Invalidate();
-            _appState.ViewerDrawCollisionLinesChanged += (s, e) => Invalidate();
-            _appState.HideModelsNotFacingCameraChanged += (s, e) => Invalidate();
+            _appState.ViewerDrawWireframeChanged      += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawBoundariesChanged     += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawTerrainTypesChanged   += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawEventIDsChanged       += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawCollisionLinesChanged += (s, e) => InvalidateFrame();
+            _appState.HideModelsNotFacingCameraChanged += (s, e) => InvalidateFrame();
 
             _appState.ViewerApplyShadowTagsChanged += (s, e) => {
                 if (_models != null) {
@@ -47,9 +48,9 @@ namespace SF3.Win.Controls {
                 }
             };
 
-            _appState.RenderOnBlackBackgroundChanged  += (s, e) => Invalidate();
-            _appState.ViewerDrawNormalsChanged        += (s, e) => Invalidate();
-            _appState.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); Invalidate(); };
+            _appState.RenderOnBlackBackgroundChanged  += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawNormalsChanged        += (s, e) => InvalidateFrame();
+            _appState.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); InvalidateFrame(); };
 
             var scene = AppScene.Get();
             scene.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };
@@ -179,12 +180,18 @@ namespace SF3.Win.Controls {
             UpdateFramebuffers(width, height);
             UpdateProjectionMatrices(width, height);
 
-            Invalidate();
+            InvalidateFrame();
         }
 
-        private void OnPaintRendering() => RenderFrame();
+        private void OnPaintRendering() {
+            using (new ScopeGuard(() => _inPaintCounter++, () => _inPaintCounter--))
+                RenderFrame();
+        }
 
         public void RenderFrame() {
+            if (_inPaintCounter != 1)
+                ;
+
             MakeCurrent();
 
             // Update models, textures, model switch groups, etc. that have been modified since the last frame.
@@ -264,7 +271,9 @@ namespace SF3.Win.Controls {
                 _renderer.DrawSelectionScene(resources, options, state);
 
             // Determine what's under the mouse. This will be fed into the final scene render.
+            // This may have invalidated some resources, so update them.
             UpdateTilePosition();
+            UpdateEditorResources();
 
             // Render the final scene.
             PerformClear();
@@ -290,10 +299,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateInvalidatedResources() {
-            if (_tileSelectedNeedsUpdate) {
-                _editor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
-                _tileSelectedNeedsUpdate = false;
-            }
+            UpdateEditorResources();
 
             if (_actorsNeedUpdate) {
                 _actorResources.Update(MPD_File);
@@ -345,6 +351,14 @@ namespace SF3.Win.Controls {
             }
         }
 
+        private void UpdateEditorResources() {
+            if (_editorNeedsUpdate) {
+                _editor.UpdateTileHoverModel(MPD_File, _general, _tileHoverPos);
+                _editor.UpdateTileSelectedModel(MPD_File, _general, _tileSelectedPos);
+                _editorNeedsUpdate = false;
+            }
+        }
+
         private void OnFrameTickRendering(float deltaInMs) {
             if (RunAnimations)
                 UpdateAnimatedTextures(deltaInMs);
@@ -354,8 +368,8 @@ namespace SF3.Win.Controls {
             var tile = (SurfaceTile) sender;
             if (_surfaceModel != null) {
                 _surfaceModel.Blocks[tile.BlockLocation.Num].Invalidate();
-                _tileSelectedNeedsUpdate = true;
-                Invalidate();
+                _editorNeedsUpdate = true;
+                InvalidateFrame();
             }
         }
 
@@ -468,14 +482,14 @@ namespace SF3.Win.Controls {
                 if (_surfaceModel?.Blocks != null)
                     foreach (var block in _surfaceModel.Blocks)
                         if (block.Model?.UpdateAnimatedTextures() == true)
-                            Invalidate();
+                            InvalidateFrame();
 
                 if (_models?.ModelsByIDByCollection != null)
                     foreach (var mc in _models.ModelsByIDByCollection.Values)
                         foreach (var modelGroup in mc.Values)
                             foreach (var model in modelGroup.Models)
                                 if (model.UpdateAnimatedTextures() == true)
-                                    Invalidate();
+                                    InvalidateFrame();
             }
         }
 
@@ -491,9 +505,15 @@ namespace SF3.Win.Controls {
         private void InvalidateResource(ref bool flag, bool invalidatePainter = true) {
             flag = true;
             if (invalidatePainter)
+                InvalidateFrame();
+        }
+
+        public void InvalidateFrame() {
+            if (_inPaintCounter == 0)
                 Invalidate();
         }
 
+        public void InvalidateEditor         (bool invalidatePainter = true) => InvalidateResource(ref _editorNeedsUpdate,          invalidatePainter);
         public void InvalidateActors         (bool invalidatePainter = true) => InvalidateResource(ref _actorsNeedUpdate,           invalidatePainter);
         public void InvalidateLightingTexture(bool invalidatePainter = true) => InvalidateResource(ref _lightingTextureNeedsUpdate, invalidatePainter);
         public void InvalidateLightPosition  (bool invalidatePainter = true) => InvalidateResource(ref _lightPositionNeedsUpdate,   invalidatePainter);
@@ -503,6 +523,7 @@ namespace SF3.Win.Controls {
         public void InvalidateModelInstancesToHide(bool invalidatePainter = true) => InvalidateResource(ref _modelInstancesToHideNeedsUpdate, invalidatePainter);
 
         public void InvalidateAllResources(bool invalidatePainter = true) {
+            InvalidateEditor(false);
             InvalidateActors(false);
             InvalidateLightingTexture(false);
             InvalidateLightPosition(false);
@@ -512,7 +533,7 @@ namespace SF3.Win.Controls {
             InvalidateModelInstancesToHide(false);
 
             if (invalidatePainter)
-                Invalidate();
+                InvalidateFrame();
         }
 
         [Browsable(false)]
@@ -650,7 +671,7 @@ namespace SF3.Win.Controls {
 
         public int ProjectionXAdjustment { get; set; }
 
-        private bool _tileSelectedNeedsUpdate    = false;
+        private bool _editorNeedsUpdate          = false;
         private bool _actorsNeedUpdate           = true;
         private bool _lightingTextureNeedsUpdate = true;
         private bool _lightPositionNeedsUpdate   = true;
@@ -676,6 +697,7 @@ namespace SF3.Win.Controls {
         private HashSet<int>           _modelInstancesToHide = null;
 
         private Renderer _renderer = null;
+        private int _inPaintCounter = 0;
 
         private Framebuffer _selectFramebuffer;
         private Framebuffer _outlineFramebuffer1;

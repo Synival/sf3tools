@@ -100,7 +100,7 @@ namespace SF3.Win.Controls {
         private void OnModelsUpdated(object sender, EventArgs e) {
             MakeCurrent();
             _renderer.InvalidateModelMatrices();
-            Invalidate();
+            InvalidateFrame();
         }
 
         private void AttachListeners(IMPD mpdFile) {
@@ -135,10 +135,8 @@ namespace SF3.Win.Controls {
                     DetachListeners(_mpdFile);
 
                 _mpdFile = value;
-                if (_mpdFile != null) {
+                if (_mpdFile != null)
                     AttachListeners(_mpdFile);
-                    _surfaceModel?.Invalidate();
-                }
 
                 InvalidateAllResources();
             }

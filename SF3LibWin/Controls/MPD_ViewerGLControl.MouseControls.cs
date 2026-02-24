@@ -60,20 +60,20 @@ namespace SF3.Win.Controls {
                             * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(deltaYaw))
                         + new Vector3(0, targetBackwardOffset.Y, 0);
 
-                    Invalidate();
+                    InvalidateFrame();
                 }
                 // For middle drag, pan around.
                 else if ((dragMouseButtons & MouseButtons.Middle) != 0) {
                     Position += new Vector3(deltaX / -40.0f, deltaY / 40.0f, 0)
                         * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                         * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
-                    Invalidate();
+                    InvalidateFrame();
                 }
                 // For middle drag, look around.
                 else if ((dragMouseButtons & MouseButtons.Right) != 0) {
                     Yaw   += deltaX / -10.0f;
                     Pitch += deltaY / -10.0f;
-                    Invalidate();
+                    InvalidateFrame();
                 }
             }
 

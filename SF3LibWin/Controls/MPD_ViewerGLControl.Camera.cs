@@ -24,7 +24,7 @@ namespace SF3.Win.Controls {
                 return;
 
             LookAtTarget(targetDist.Value.Target);
-            Invalidate();
+            InvalidateFrame();
         }
 
         public void PanToCurrentTileTarget() {
@@ -38,14 +38,14 @@ namespace SF3.Win.Controls {
                 * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
 
             Position = targetDist.Value.Target - distForward;
-            Invalidate();
+            InvalidateFrame();
         }
 
         public void MoveCameraForward(float amount) {
             Position += new Vector3(0, 0, amount)
                 * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                 * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
-            Invalidate();
+            InvalidateFrame();
         }
 
         public struct TargetAndDistance {

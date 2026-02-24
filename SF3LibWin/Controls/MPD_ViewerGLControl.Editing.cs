@@ -52,9 +52,8 @@ namespace SF3.Win.Controls {
             var tile = (_tileSelectedPos == null) ? null : MPD_File.Surface.GetTile(_tileSelectedPos.Value.X, _tileSelectedPos.Value.Y);
             _selectedTile = tile;
             TileSelected?.Invoke(this, tile);
-            _tileSelectedNeedsUpdate = true;
 
-            Invalidate();
+            InvalidateEditor();
         }
 
         private void UpdateTilePosition() {
@@ -93,9 +92,7 @@ namespace SF3.Win.Controls {
                 return;
 
             _tileHoverPos = pos;
-            _editor.UpdateTileHoverModel(MPD_File, _general, _tileHoverPos);
-
-            Invalidate();
+            InvalidateEditor();
         }
 
         private void DrawTileAtCursor() {
@@ -258,7 +255,7 @@ namespace SF3.Win.Controls {
                     OnModelsUpdated(this, EventArgs.Empty);
             }
 
-            Invalidate();
+            InvalidateFrame();
         }
 
         private Point? _tileHoverPos = null;

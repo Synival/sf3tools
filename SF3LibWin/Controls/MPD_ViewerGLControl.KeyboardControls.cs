@@ -149,7 +149,7 @@ namespace SF3.Win.Controls {
                     * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                     * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
                 Position += move * 0.25f * rate;
-                Invalidate();
+                InvalidateFrame();
             }
 
             var rotateLeftKey  = keysDown.Contains(Keys.Left)  || keysDown.Contains(Keys.NumPad4);
@@ -158,7 +158,7 @@ namespace SF3.Win.Controls {
             int rotateYaw = (rotateLeftKey ? 1 : 0) + (rotateRightKey ? -1 : 0);
             if (rotateYaw != 0) {
                 Yaw += rotateYaw * 1.0f * rate;
-                Invalidate();
+                InvalidateFrame();
             }
 
             var rotateUpKey   = keysDown.Contains(Keys.Up)   || keysDown.Contains(Keys.NumPad8);
@@ -169,7 +169,7 @@ namespace SF3.Win.Controls {
                 var oldPitch = Pitch;
                 Pitch += rotatePitch * 0.5f * rate;
                 if (oldPitch != Pitch)
-                    Invalidate();
+                    InvalidateFrame();
             }
 
             // Keys to adjust lighting

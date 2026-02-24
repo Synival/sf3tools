@@ -226,7 +226,7 @@ namespace SF3.Win.Controls {
                 GLControl.InvalidateLightPosition(invalidatePainter: false);
                 GLControl.InvalidateLightingTexture(invalidatePainter: false);
                 if (invalidatePainter)
-                    GLControl.Invalidate();
+                    GLControl.InvalidateFrame();
             }
         }
 
@@ -286,7 +286,7 @@ namespace SF3.Win.Controls {
             var refs = CreateCameraRefs();
             var size = Math.Max(refs.Width, refs.Height);
             GLControl.ResetCamera(refs.Center + (0, size * 0.071f, 0), size * 2f);
-            GLControl.Invalidate();
+            GLControl.InvalidateFrame();
         }
 
         private void tsbCameraTopView_Click(object sender, EventArgs e) {
@@ -299,13 +299,13 @@ namespace SF3.Win.Controls {
             GLControl.Position = (refs.Center.X, Math.Max(zoomFactorWidth, zoomFactorHeight) * 2.75f + refs.Center.Y, refs.Center.Z);
             GLControl.Pitch    = -90;
             GLControl.Yaw      = 0;
-            GLControl.Invalidate();
+            GLControl.InvalidateFrame();
         }
 
         private void tsbCameraLookAtCenter_Click(object sender, EventArgs e) {
             var refs = CreateCameraRefs();
             GLControl.LookAtTarget(refs.Center);
-            GLControl.Invalidate();
+            GLControl.InvalidateFrame();
         }
 
         private void tsbCursorSelect_Click(object sender, EventArgs e) => GLControl.CursorMode = ViewerCursorMode.Select;
