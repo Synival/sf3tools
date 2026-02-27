@@ -29,22 +29,22 @@ namespace SF3.Win.Controls {
             cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
 
             // Event handling for 'Movement' group.
-            cbMoveTerrain.SelectedValueChanged += (s, e) => DoIfUserInput(() => EditingObject.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
-            nudMoveCenterHeight.ValueChanged   += (s, e) => DoIfUserInput(() => SetCenterHeight((byte) nudMoveCenterHeight.Value));
-            cbMoveSlope.CheckedChanged         += (s, e) => DoIfUserInput(() => EditingObject.TerrainFlags ^= TerrainFlags.SteepSlope);
+            cbMoveTerrain.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
+            nudMoveCenterHeight.ValueChanged   += (s, e) => DoOnlyDirectly(() => SetCenterHeight((byte) nudMoveCenterHeight.Value));
+            cbMoveSlope.CheckedChanged         += (s, e) => DoOnlyDirectly(() => EditingObject.TerrainFlags ^= TerrainFlags.SteepSlope);
 
             foreach (var nud in _nudVertexHeights)
-                nud.Value.ValueChanged += (s, e) => DoIfUserInput(() => SetVertexHeight(nud.Key, (byte) nud.Value.Value));
+                nud.Value.ValueChanged += (s, e) => DoOnlyDirectly(() => SetVertexHeight(nud.Key, (byte) nud.Value.Value));
 
             // Event handling for 'Event' group.
-            nudEventID.ValueChanged += (s, e) => DoIfUserInput(() => EditingObject.EventID = (byte) nudEventID.Value);
+            nudEventID.ValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.EventID = (byte) nudEventID.Value);
 
             // Event handling for 'Model' group.
-            nudModelTextureID.ValueChanged     += (s, e) => DoIfUserInput(() => EditingObject.TextureID = (byte) nudModelTextureID.Value);
-            cbModelRotate.SelectedValueChanged += (s, e) => DoIfUserInput(() => EditingObject.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
-            cbModelFlip.SelectedValueChanged   += (s, e) => DoIfUserInput(() => EditingObject.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
-            cbModelTileIsFlat.CheckedChanged   += (s, e) => DoIfUserInput(() => SetIsFlat(cbModelTileIsFlat.Checked));
-            cbModelHasTree.CheckedChanged      += (s, e) => DoIfUserInput(() => SetHasTree(cbModelHasTree.Checked));
+            nudModelTextureID.ValueChanged     += (s, e) => DoOnlyDirectly(() => EditingObject.TextureID = (byte) nudModelTextureID.Value);
+            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
+            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(() => EditingObject.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
+            cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(() => SetIsFlat(cbModelTileIsFlat.Checked));
+            cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(() => SetHasTree(cbModelHasTree.Checked));
 
             // Update enabled status, visibility, and default values of controls.
             UpdateControls();

@@ -18,20 +18,16 @@ namespace SF3.Win.Controls {
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        protected int NonUserInputGuard { get; private set; } = 0;
-
-        protected ScopeGuard IncrementNonUserInputGuard()
-            => new ScopeGuard(() => NonUserInputGuard++, () => NonUserInputGuard--);
-
-        protected void DoIfUserInput(Action action) {
-            if (NonUserInputGuard > 0)
+        private int _doOnlyDirectlyGuard = 0;
+        protected void DoOnlyDirectly(Action action) {
+            if (_doOnlyDirectlyGuard > 0)
                 return;
-            using (IncrementNonUserInputGuard())
+            using (new ScopeGuard(() => _doOnlyDirectlyGuard++, () => _doOnlyDirectlyGuard--))
                 action();
         }
 
         protected void UpdateControls()
-            => DoIfUserInput(PerformUpdateControls);
+            => DoOnlyDirectly(PerformUpdateControls);
 
         protected abstract void PerformUpdateControls();
 
