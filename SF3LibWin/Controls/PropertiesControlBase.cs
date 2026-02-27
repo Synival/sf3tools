@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using CommonLib;
 using SF3.Win.Extensions;
@@ -25,32 +26,40 @@ namespace SF3.Win.Controls {
                 return;
             action();
         }
-  
-        protected void SetObject<T>(ref T field, T value) where T : class {
-            if (value == field)
-                return;
-
-            Control lastFocused = null;
-            if (ContainsFocus && !Focused) {
-                lastFocused = this.GetFocusedControl();
-                Focus();
-            }
-
-            field = value;
-            UpdateControls();
-
-            if (lastFocused != null) {
-                if (lastFocused is NumericUpDown nud)
-                    nud.Select(0, nud.Text.Length);
-                else if (lastFocused is TextBox tb)
-                    tb.SelectAll();
-                else if (lastFocused is ComboBox cb)
-                    cb.Select(0, cb.Text.Length);
-            }
-        }
 
         protected abstract void UpdateControls();
 
         public event CmdKeyEventHandler CmdKey;
+    }
+
+    public abstract class PropertiesControlBase<T> : PropertiesControlBase where T : class {
+        private T _editingObject = null;
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public T EditingObject {
+            get => _editingObject;
+            set {
+                if (value == _editingObject)
+                    return;
+
+                Control lastFocused = null;
+                if (ContainsFocus && !Focused) {
+                    lastFocused = this.GetFocusedControl();
+                    Focus();
+                }
+
+                _editingObject = value;
+                UpdateControls();
+
+                if (lastFocused != null) {
+                    if (lastFocused is NumericUpDown nud)
+                        nud.Select(0, nud.Text.Length);
+                    else if (lastFocused is TextBox tb)
+                        tb.SelectAll();
+                    else if (lastFocused is ComboBox cb)
+                        cb.Select(0, cb.Text.Length);
+                }
+            }
+        }
     }
 }

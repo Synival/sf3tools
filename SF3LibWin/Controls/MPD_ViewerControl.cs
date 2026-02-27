@@ -104,28 +104,28 @@ namespace SF3.Win.Controls {
         private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile) {
             return SetSideEditorControl(
                 tile, ref _surfaceTilePropertiesControl, 
-                c => c.Tile = tile
+                c => c.EditingObject = tile
             );
         }
 
         private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance) {
             return SetSideEditorControl(
                 modelInstance, ref _modelInstancePropertiesControl, 
-                c => { c.ModelInstance = modelInstance; }
+                c => { c.EditingObject = modelInstance; }
             );
         }
 
         private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Slot actor) {
             return SetSideEditorControl(
                 actor, ref _actorBattlePropertiesControl, 
-                c => { c.Actor = actor; }
+                c => { c.EditingObject = actor; }
             );
         }
 
         private ActorNPCPropertiesControl SwitchToActorNPCInstanceEditor(Npc actor) {
             return SetSideEditorControl(
                 actor, ref _actorNPCPropertiesControl, 
-                c => { c.Actor = actor; }
+                c => { c.EditingObject = actor; }
             );
         }
 
@@ -151,7 +151,8 @@ namespace SF3.Win.Controls {
         }
 
         private TControl SetSideEditorControl<TObj, TControl>(TObj obj, ref TControl control, Action<TControl> controlActivateFunc)
-        where TControl : PropertiesControlBase, new() {
+        where TObj : class
+        where TControl : PropertiesControlBase<TObj>, new() {
             if (_currentSideEditorControl is TControl existingControl) {
                 if (existingControl != null)
                     controlActivateFunc(existingControl);
