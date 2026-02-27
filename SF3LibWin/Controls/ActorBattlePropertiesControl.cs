@@ -1,29 +1,17 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
-using CommonLib;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Win.Extensions;
-using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
-    public partial class ActorBattlePropertiesControl : UserControl {
+    public partial class ActorBattlePropertiesControl : PropertiesControlBase {
         public ActorBattlePropertiesControl() {
             InitializeComponent();
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            bool wasProcessed = false;
-            CmdKey?.Invoke(this, ref msg, keyData, ref wasProcessed);
-            if (wasProcessed)
-                return wasProcessed;
-
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
         private void UpdateControls() {
             // Guard to prevent tiles from being edited while values are being initialized.
-            if (_nonUserInputGuard > 0)
+            if (NonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
@@ -68,18 +56,6 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private int _nonUserInputGuard = 0;
-        private ScopeGuard IncrementNonUserInputGuard()
-            => new ScopeGuard(() => _nonUserInputGuard++, () => _nonUserInputGuard--);
-
-        private void DoIfUserInput(Action action) {
-            if (_nonUserInputGuard > 0)
-                return;
-            action();
-        }
-
         private Slot _actor = null;
-
-        public event CmdKeyEventHandler CmdKey;
     }
 }

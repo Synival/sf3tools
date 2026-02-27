@@ -104,7 +104,6 @@ namespace SF3.Win.Controls {
         private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile) {
             return SetSideEditorControl(
                 tile, ref _surfaceTilePropertiesControl, 
-                c => c.CmdKey += SideEditorCmdKeyHandler,
                 c => c.Tile = tile
             );
         }
@@ -112,7 +111,6 @@ namespace SF3.Win.Controls {
         private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance) {
             return SetSideEditorControl(
                 modelInstance, ref _modelInstancePropertiesControl, 
-                c => c.CmdKey += SideEditorCmdKeyHandler,
                 c => { c.ModelInstance = modelInstance; }
             );
         }
@@ -120,7 +118,6 @@ namespace SF3.Win.Controls {
         private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Slot actor) {
             return SetSideEditorControl(
                 actor, ref _actorBattlePropertiesControl, 
-                c => c.CmdKey += SideEditorCmdKeyHandler,
                 c => { c.Actor = actor; }
             );
         }
@@ -128,7 +125,6 @@ namespace SF3.Win.Controls {
         private ActorNPCPropertiesControl SwitchToActorNPCInstanceEditor(Npc actor) {
             return SetSideEditorControl(
                 actor, ref _actorNPCPropertiesControl, 
-                c => c.CmdKey += SideEditorCmdKeyHandler,
                 c => { c.Actor = actor; }
             );
         }
@@ -154,8 +150,8 @@ namespace SF3.Win.Controls {
                 GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
         }
 
-        private TControl SetSideEditorControl<TObj, TControl>(TObj obj, ref TControl control, Action<TControl> controlInitFunc, Action<TControl> controlActivateFunc)
-        where TControl : Control, new() {
+        private TControl SetSideEditorControl<TObj, TControl>(TObj obj, ref TControl control, Action<TControl> controlActivateFunc)
+        where TControl : PropertiesControlBase, new() {
             if (_currentSideEditorControl is TControl existingControl) {
                 if (existingControl != null)
                     controlActivateFunc(existingControl);
@@ -168,16 +164,16 @@ namespace SF3.Win.Controls {
             }
 
             control = new TControl();
-            controlInitFunc(control);
+            control.CmdKey += SideEditorCmdKeyHandler;
             SetSideEditorControl(control, controlActivateFunc);
 
             return control;
         }
 
-        private void SetSideEditorControl(Control control)
-            => SetSideEditorControl<Control>(control, null);
+        private void SetSideEditorControl(PropertiesControlBase control)
+            => SetSideEditorControl(control, null);
 
-        private void SetSideEditorControl<T>(T control, Action<T> init) where T : Control {
+        private void SetSideEditorControl<T>(T control, Action<T> init) where T : PropertiesControlBase {
             // Do nothing if we're already using that control.
             if (_currentSideEditorControl == control)
                 return;
@@ -381,7 +377,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private Control _currentSideEditorControl = null;
+        private PropertiesControlBase _currentSideEditorControl = null;
 
         private SurfaceTilePropertiesControl   _surfaceTilePropertiesControl   = null;
         private ModelInstancePropertiesControl _modelInstancePropertiesControl = null;

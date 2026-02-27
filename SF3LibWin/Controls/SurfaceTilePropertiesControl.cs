@@ -4,17 +4,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using CommonLib;
 using CommonLib.Types;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
 using SF3.Win.Extensions;
-using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
-    public partial class SurfaceTilePropertiesControl : UserControl {
+    public partial class SurfaceTilePropertiesControl : PropertiesControlBase {
         public SurfaceTilePropertiesControl() {
             InitializeComponent();
 
@@ -61,18 +59,9 @@ namespace SF3.Win.Controls {
             UpdateControls();
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            bool wasProcessed = false;
-            CmdKey?.Invoke(this, ref msg, keyData, ref wasProcessed);
-            if (wasProcessed)
-                return wasProcessed;
-
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
         private void UpdateControls() {
             // Guard to prevent tiles from being edited while values are being initialized.
-            if (_nonUserInputGuard > 0)
+            if (NonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
@@ -232,18 +221,8 @@ namespace SF3.Win.Controls {
             nud.Validating += RoundToNearest16th;
         }
 
-        private int _nonUserInputGuard = 0;
-        private ScopeGuard IncrementNonUserInputGuard()
-            => new ScopeGuard(() => _nonUserInputGuard++, () => _nonUserInputGuard--);
-
-        void DoIfUserInput(Action action) {
-            if (_nonUserInputGuard > 0)
-                return;
-            action();
-        }
-
         private void UserSetCenterHeight(byte value) {
-            if (_nonUserInputGuard > 0)
+            if (NonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
@@ -259,7 +238,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UserSetVertexHeight(CornerType corner, byte value) {
-            if (_nonUserInputGuard > 0)
+            if (NonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
@@ -270,7 +249,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UserSetIsFlat(bool value) {
-            if (_nonUserInputGuard > 0)
+            if (NonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
@@ -282,7 +261,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UserSetHasTree(bool value) {
-            if (_nonUserInputGuard > 0)
+            if (NonUserInputGuard > 0)
                 return;
 
             using (IncrementNonUserInputGuard()) {
@@ -352,8 +331,6 @@ namespace SF3.Win.Controls {
                 }
             }
         }
-
-        public event CmdKeyEventHandler CmdKey;
 
         private readonly Dictionary<CornerType, NumericUpDown> _nudVertexHeights;
     }
