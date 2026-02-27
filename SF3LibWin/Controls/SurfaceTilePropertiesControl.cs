@@ -9,7 +9,6 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
-using SF3.Win.Extensions;
 
 namespace SF3.Win.Controls {
     public partial class SurfaceTilePropertiesControl : PropertiesControlBase {
@@ -59,7 +58,7 @@ namespace SF3.Win.Controls {
             UpdateControls();
         }
 
-        private void UpdateControls() {
+        protected override void UpdateControls() {
             // Guard to prevent tiles from being edited while values are being initialized.
             if (NonUserInputGuard > 0)
                 return;
@@ -308,28 +307,7 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IMPD_SurfaceTile Tile {
             get => _tile;
-            set {
-                if (value == _tile)
-                    return;
-
-                Control lastFocused = null;
-                if (ContainsFocus && !Focused) {
-                    lastFocused = this.GetFocusedControl();
-                    Focus();
-                }
-
-                _tile = value;
-                UpdateControls();
-
-                if (lastFocused != null) {
-                    if (lastFocused is NumericUpDown nud)
-                        nud.Select(0, nud.Text.Length);
-                    else if (lastFocused is TextBox tb)
-                        tb.SelectAll();
-                    else if (lastFocused is ComboBox cb)
-                        cb.Select(0, cb.Text.Length);
-                }
-            }
+            set => SetObject(ref _tile, value);
         }
 
         private readonly Dictionary<CornerType, NumericUpDown> _nudVertexHeights;

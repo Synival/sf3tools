@@ -7,7 +7,7 @@ namespace SF3.Win.Controls {
             InitializeComponent();
         }
 
-        private void UpdateControls() {
+        protected override void UpdateControls() {
             labelActorEdited.Text = "Actor (NPC): " + (_actor == null ? "(none)" : $"0x{_actor.ID:X2}");
         }
 
@@ -15,13 +15,7 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Npc Actor {
             get => _actor;
-            set {
-                if (value == _actor)
-                    return;
-
-                _actor = value;
-                UpdateControls();
-            }
+            set => SetObject(ref _actor, value);
         }
 
         private Npc _actor = null;

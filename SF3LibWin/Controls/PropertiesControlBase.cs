@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CommonLib;
+using SF3.Win.Extensions;
 using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
@@ -25,6 +26,31 @@ namespace SF3.Win.Controls {
             action();
         }
   
+        protected void SetObject<T>(ref T field, T value) where T : class {
+            if (value == field)
+                return;
+
+            Control lastFocused = null;
+            if (ContainsFocus && !Focused) {
+                lastFocused = this.GetFocusedControl();
+                Focus();
+            }
+
+            field = value;
+            UpdateControls();
+
+            if (lastFocused != null) {
+                if (lastFocused is NumericUpDown nud)
+                    nud.Select(0, nud.Text.Length);
+                else if (lastFocused is TextBox tb)
+                    tb.SelectAll();
+                else if (lastFocused is ComboBox cb)
+                    cb.Select(0, cb.Text.Length);
+            }
+        }
+
+        protected abstract void UpdateControls();
+
         public event CmdKeyEventHandler CmdKey;
     }
 }
