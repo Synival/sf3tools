@@ -22,12 +22,6 @@ namespace SF3.Win.Controls {
                 { CornerType.BottomLeft,  nudMoveHeightmapBL },
             };
 
-            // Enforce validation on height-related NumericUpDown's to round to nearest 16th.
-            var heightNumericUpDowns = new List<NumericUpDown>() { nudMoveCenterHeight };
-            heightNumericUpDowns.AddRange(_nudVertexHeights.Select(x => x.Value).ToList());
-            foreach (var nc in heightNumericUpDowns)
-                EnforceRoundingToNearest16th(nc);
-
             // Recursively set behavior for pressing 'Enter'/'Return' on focusable controls, and other things.
             RecursivelyAttachedEventsToControls(this);
 
@@ -203,15 +197,6 @@ namespace SF3.Win.Controls {
                 else
                     RecursivelyAttachedEventsToControls(c);
             }
-        }
-
-        private void RoundToNearest16th(object sender, CancelEventArgs e) {
-            var nudControl = (NumericUpDown) sender;
-            nudControl.Value = Math.Floor(nudControl.Value * 16) / 16;
-        }
-
-        private void EnforceRoundingToNearest16th(NumericUpDown nud) {
-            nud.Validating += RoundToNearest16th;
         }
 
         private void UserSetCenterHeight(byte value) {
