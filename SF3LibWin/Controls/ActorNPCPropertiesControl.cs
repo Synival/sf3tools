@@ -6,7 +6,7 @@ namespace SF3.Win.Controls {
             InitializeComponent();
         }
 
-        protected override void UpdateControls() {
+        protected override void PerformUpdateControls() {
             labelActorEdited.Text = "Actor (NPC): " + (EditingObject == null ? "(none)" : $"0x{EditingObject.ID:X2}");
         }
     }

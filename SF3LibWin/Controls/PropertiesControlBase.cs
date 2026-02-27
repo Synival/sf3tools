@@ -27,7 +27,14 @@ namespace SF3.Win.Controls {
             action();
         }
 
-        protected abstract void UpdateControls();
+        protected void UpdateControls() {
+            if (NonUserInputGuard > 0)
+                return;
+            using (IncrementNonUserInputGuard())
+                PerformUpdateControls();
+        }
+
+        protected abstract void PerformUpdateControls();
 
         public event CmdKeyEventHandler CmdKey;
     }

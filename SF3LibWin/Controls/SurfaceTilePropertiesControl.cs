@@ -58,102 +58,96 @@ namespace SF3.Win.Controls {
             UpdateControls();
         }
 
-        protected override void UpdateControls() {
-            // Guard to prevent tiles from being edited while values are being initialized.
-            if (NonUserInputGuard > 0)
-                return;
+        protected override void PerformUpdateControls() {
+            void InitNUD(NumericUpDown nud, decimal value) {
+                nud.Value = value;
+                nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
+            }
 
-            using (IncrementNonUserInputGuard()) {
-                void InitNUD(NumericUpDown nud, decimal value) {
-                    nud.Value = value;
-                    nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
+            // 'Current Tile' group
+            if (EditingObject == null) {
+                labelTileEdited.Text = "No Tile Selected";
+                labelRealCoordinates.Text = "";
+            }
+            else {
+                labelTileEdited.Text = "Tile: (" + EditingObject.X + ", " + EditingObject.Y + ")\n";
+
+                var heightTerrainAddress = 0x060B6000 + (EditingObject.Y * 64 + EditingObject.X) * 2;
+                var eventIdAddress       = 0x060B8000 + (EditingObject.Y * 64 + EditingObject.X);
+
+                labelRealCoordinates.Text =
+                    "Center Real Coordinates: (" + (EditingObject.X * 32 + 16) + "," + (EditingObject.Y * 32 + 16) + ")\n" +
+                    "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
+                    "Event ID Address: 0x" + eventIdAddress.ToString("X8");
+            }
+
+            // 'Movement' group
+            gbMovement.Enabled = EditingObject != null;
+            if (!gbMovement.Enabled) {
+                cbMoveTerrain.SelectedItem = null;
+                nudMoveCenterHeight.Text = "";
+                cbMoveSlope.Checked = false;
+                foreach (var nud in _nudVertexHeights.Values)
+                    nud.Text = "";
+            }
+            else {
+                cbMoveTerrain.SelectedItem = EditingObject.TerrainType;
+                InitNUD(nudMoveCenterHeight, (decimal) EditingObject.CenterHeight);
+                cbMoveSlope.Checked = ((EditingObject.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
+                foreach (var nud in _nudVertexHeights)
+                    InitNUD(nud.Value, (decimal) EditingObject.GetVertexHeight(nud.Key));
+            }
+
+            // 'Event' group
+            gbEvent.Enabled = EditingObject != null;
+            if (!gbEvent.Enabled)
+                nudEventID.Text = "";
+            else
+                InitNUD(nudEventID, EditingObject.EventID);
+
+            // 'Model' group
+            gbModel.Enabled = EditingObject?.Surface?.HasModel == true;
+            if (!gbModel.Enabled) {
+                nudModelTextureID.Text = "";
+                cbModelHasTree.Checked = false;
+                cbModelHasTree.Enabled = false;
+                cbModelRotate.SelectedItem = null;
+                cbModelRotate.Text = "";
+                cbModelRotate.Enabled = true;
+                cbModelFlip.SelectedItem = null;
+
+                if (cbModelTileIsFlat.Checked != false) {
+                    cbModelTileIsFlat.Checked = false;
+                    UpdateVertexHeightsEnabled();
                 }
+            }
+            else {
+                var fileTile = EditingObject as SurfaceTile;
 
-                // 'Current Tile' group
-                if (EditingObject == null) {
-                    labelTileEdited.Text = "No Tile Selected";
-                    labelRealCoordinates.Text = "";
-                }
-                else {
-                    labelTileEdited.Text = "Tile: (" + EditingObject.X + ", " + EditingObject.Y + ")\n";
+                InitNUD(nudModelTextureID, EditingObject.TextureID);
+                cbModelHasTree.Checked = fileTile?.TreeModelID != null;
+                cbModelHasTree.Enabled = true;
 
-                    var heightTerrainAddress = 0x060B6000 + (EditingObject.Y * 64 + EditingObject.X) * 2;
-                    var eventIdAddress       = 0x060B8000 + (EditingObject.Y * 64 + EditingObject.X);
-
-                    labelRealCoordinates.Text =
-                        "Center Real Coordinates: (" + (EditingObject.X * 32 + 16) + "," + (EditingObject.Y * 32 + 16) + ")\n" +
-                        "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
-                        "Event ID Address: 0x" + eventIdAddress.ToString("X8");
-                }
-
-                // 'Movement' group
-                gbMovement.Enabled = EditingObject != null;
-                if (!gbMovement.Enabled) {
-                    cbMoveTerrain.SelectedItem = null;
-                    nudMoveCenterHeight.Text = "";
-                    cbMoveSlope.Checked = false;
-                    foreach (var nud in _nudVertexHeights.Values)
-                        nud.Text = "";
-                }
-                else {
-                    cbMoveTerrain.SelectedItem = EditingObject.TerrainType;
-                    InitNUD(nudMoveCenterHeight, (decimal) EditingObject.CenterHeight);
-                    cbMoveSlope.Checked = ((EditingObject.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
-                    foreach (var nud in _nudVertexHeights)
-                        InitNUD(nud.Value, (decimal) EditingObject.GetVertexHeight(nud.Key));
-                }
-
-                // 'Event' group
-                gbEvent.Enabled = EditingObject != null;
-                if (!gbEvent.Enabled)
-                    nudEventID.Text = "";
-                else
-                    InitNUD(nudEventID, EditingObject.EventID);
-
-                // 'Model' group
-                gbModel.Enabled = EditingObject?.Surface?.HasModel == true;
-                if (!gbModel.Enabled) {
-                    nudModelTextureID.Text = "";
-                    cbModelHasTree.Checked = false;
-                    cbModelHasTree.Enabled = false;
-                    cbModelRotate.SelectedItem = null;
-                    cbModelRotate.Text = "";
+                if (EditingObject?.Surface?.HasRotatableTextures == true) {
+                    cbModelRotate.SelectedItem = EditingObject.TextureRotate;
                     cbModelRotate.Enabled = true;
-                    cbModelFlip.SelectedItem = null;
-
-                    if (cbModelTileIsFlat.Checked != false) {
-                        cbModelTileIsFlat.Checked = false;
-                        UpdateVertexHeightsEnabled();
-                    }
                 }
                 else {
-                    var fileTile = EditingObject as SurfaceTile;
+                    var disabledMessage =
+                        (fileTile != null && fileTile.MPD_File.Scenario >= ScenarioType.Scenario3) ? "(Enable in header)" :
+                        (fileTile != null && fileTile.MPD_File.Scenario <  ScenarioType.Scenario3) ? "(Scenario 3+ only)" :
+                        "(Disabled)";
 
-                    InitNUD(nudModelTextureID, EditingObject.TextureID);
-                    cbModelHasTree.Checked = fileTile?.TreeModelID != null;
-                    cbModelHasTree.Enabled = true;
+                    cbModelRotate.SelectedItem = -1;
+                    cbModelRotate.Text = disabledMessage;
+                    cbModelRotate.Enabled = false;
+                }
 
-                    if (EditingObject?.Surface?.HasRotatableTextures == true) {
-                        cbModelRotate.SelectedItem = EditingObject.TextureRotate;
-                        cbModelRotate.Enabled = true;
-                    }
-                    else {
-                        var disabledMessage =
-                            (fileTile != null && fileTile.MPD_File.Scenario >= ScenarioType.Scenario3) ? "(Enable in header)" :
-                            (fileTile != null && fileTile.MPD_File.Scenario <  ScenarioType.Scenario3) ? "(Scenario 3+ only)" :
-                            "(Disabled)";
+                cbModelFlip.SelectedItem = EditingObject.TextureFlip;
 
-                        cbModelRotate.SelectedItem = -1;
-                        cbModelRotate.Text = disabledMessage;
-                        cbModelRotate.Enabled = false;
-                    }
-
-                    cbModelFlip.SelectedItem = EditingObject.TextureFlip;
-
-                    if (cbModelTileIsFlat.Checked != EditingObject.IsFlat) {
-                        cbModelTileIsFlat.Checked = EditingObject.IsFlat;
-                        UpdateVertexHeightsEnabled();
-                    }
+                if (cbModelTileIsFlat.Checked != EditingObject.IsFlat) {
+                    cbModelTileIsFlat.Checked = EditingObject.IsFlat;
+                    UpdateVertexHeightsEnabled();
                 }
             }
         }
