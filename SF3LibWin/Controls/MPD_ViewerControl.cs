@@ -94,40 +94,21 @@ namespace SF3.Win.Controls {
                     else if (actor is Npc npc)
                         SwitchToActorNPCInstanceEditor(npc);
                     else
-                        SetSideEditorControl(null);
+                        UnsetSideEditorControl();
                 }
                 else
-                    SetSideEditorControl(null);
+                    UnsetSideEditorControl();
             };
         }
 
-        private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile) {
-            return SetSideEditorControl(
-                tile, ref _surfaceTilePropertiesControl, 
-                c => c.EditingObject = tile
-            );
-        }
-
-        private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance) {
-            return SetSideEditorControl(
-                modelInstance, ref _modelInstancePropertiesControl, 
-                c => { c.EditingObject = modelInstance; }
-            );
-        }
-
-        private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Slot actor) {
-            return SetSideEditorControl(
-                actor, ref _actorBattlePropertiesControl, 
-                c => { c.EditingObject = actor; }
-            );
-        }
-
-        private ActorNPCPropertiesControl SwitchToActorNPCInstanceEditor(Npc actor) {
-            return SetSideEditorControl(
-                actor, ref _actorNPCPropertiesControl, 
-                c => { c.EditingObject = actor; }
-            );
-        }
+        private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile)
+            => SetSideEditorControl(ref _surfaceTilePropertiesControl, tile);
+        private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance)
+            => SetSideEditorControl(ref _modelInstancePropertiesControl, modelInstance);
+        private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Slot actor)
+            => SetSideEditorControl(ref _actorBattlePropertiesControl, actor);
+        private ActorNPCPropertiesControl SwitchToActorNPCInstanceEditor(Npc actor)
+            => SetSideEditorControl(ref _actorNPCPropertiesControl, actor);
 
         private void SideEditorCmdKeyHandler(object sender, ref Message msg, Keys keyData, ref bool wasProcessed) {
             if (wasProcessed)
@@ -150,65 +131,71 @@ namespace SF3.Win.Controls {
                 GLControl.RunCmdKeyEvent(sender, ref msg, keyData, ref wasProcessed);
         }
 
-        private TControl SetSideEditorControl<TObj, TControl>(TObj obj, ref TControl control, Action<TControl> controlActivateFunc)
-        where TObj : class
-        where TControl : PropertiesControlBase<TObj>, new() {
-            if (_currentSideEditorControl is TControl existingControl) {
-                if (existingControl != null)
-                    controlActivateFunc(existingControl);
-                return existingControl;
+        private TControl SetSideEditorControl<TControl, TObj>(ref TControl control, TObj obj)
+        where TControl : PropertiesControlBase<TObj>, new()
+        where TObj : class {
+            // Create the control if it doesn't exist.
+            if (control == null) {
+                control = new TControl();
+                control.CmdKey += SideEditorCmdKeyHandler;
             }
-
-            if (control != null) {
-                SetSideEditorControl(control, controlActivateFunc);
+            // Do nothing if we're already using that control.
+            else if (_currentSideEditorControl == control) {
+                control.EditingObject = obj;
                 return control;
             }
 
-            control = new TControl();
-            control.CmdKey += SideEditorCmdKeyHandler;
-            SetSideEditorControl(control, controlActivateFunc);
+            SuspendLayout();
 
+            if (_currentSideEditorControl != null)
+                selectionPanel.Controls.Remove(_currentSideEditorControl);
+
+            // Hiding this control prevents some ugly rendering...
+            control.Hide();
+
+            control.EditingObject = obj;
+            selectionPanel.Controls.Add(control);
+
+            ShowEditorPanel(true);
+
+            ResumeLayout(true);
+
+            // Show the control now. For some reason, it renders nicely this way.
+            control?.Show();
+
+            _currentSideEditorControl = control;
             return control;
         }
 
-        private void SetSideEditorControl(PropertiesControlBase control)
-            => SetSideEditorControl(control, null);
-
-        private void SetSideEditorControl<T>(T control, Action<T> init) where T : PropertiesControlBase {
-            // Do nothing if we're already using that control.
-            if (_currentSideEditorControl == control)
+        private void UnsetSideEditorControl() {
+            // Do nothing if the editor is already unset.
+            if (_currentSideEditorControl == null)
                 return;
 
             SuspendLayout();
 
-            // Replace the control with a new one. Keep it hidden for now until the layout is completed.
-            if (_currentSideEditorControl != null)
-                selectionPanel.Controls.Remove(_currentSideEditorControl);
-            if (control != null) {
-                control.Hide();
-                init?.Invoke(control);
-                selectionPanel.Controls.Add(control);
-            }
+            selectionPanel.Controls.Remove(_currentSideEditorControl);
+            ShowEditorPanel(false);
 
-            // Show or hide the panel depending on if a control exists.
-            selectionPanel.Visible = (control != null);
+            ResumeLayout(true);
+
+            _currentSideEditorControl = null;
+        }
+
+        private void ShowEditorPanel(bool show) {
+            selectionPanel.Visible = show;
 
             // NOTE: Uncomment to shift 3D viewer contents when the panel is active!
 /*
             // Shift the projection matrix over if the panel is visible. This is a flicker-free alternative to
             // resizing the thing.
-            var visibilityChanged = (control == null) ^ (_currentSideEditorControl == null);
+            var visibilityChanged = !show ^ (_currentSideEditorControl == null);
             if (visibilityChanged) {
-                GLControl.ProjectionXAdjustment = (control == null) ? 0 : -selectionPanel.Width / 2;
+                GLControl.ProjectionXAdjustment = show ? -selectionPanel.Width / 2 : 0;
                 GLControl.UpdateProjectionMatrices(GLControl.ClientSize.Width, GLControl.ClientSize.Height);
                 GLControl.RenderFrame();
             }
 */
-
-            ResumeLayout(true);
-            control?.Show();
-
-            _currentSideEditorControl = control;
         }
 
         private void UpdatedSelectedCursorModeButton() {
