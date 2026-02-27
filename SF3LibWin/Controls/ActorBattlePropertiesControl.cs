@@ -5,6 +5,9 @@ namespace SF3.Win.Controls {
     public partial class ActorBattlePropertiesControl : PropertiesControlBase<Slot> {
         public ActorBattlePropertiesControl() {
             InitializeComponent();
+
+            // Recursively set behavior for pressing 'Enter'/'Return' on focusable controls, and other things.
+            RecursivelyAttachedEventsToControls(this);
         }
 
         protected override void PerformUpdateControls() {

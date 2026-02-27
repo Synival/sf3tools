@@ -4,6 +4,9 @@ namespace SF3.Win.Controls {
     public partial class ActorNPCPropertiesControl : PropertiesControlBase<Npc> {
         public ActorNPCPropertiesControl() {
             InitializeComponent();
+
+            // Recursively set behavior for pressing 'Enter'/'Return' on focusable controls, and other things.
+            RecursivelyAttachedEventsToControls(this);
         }
 
         protected override void PerformUpdateControls() {
