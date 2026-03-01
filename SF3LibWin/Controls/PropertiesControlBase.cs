@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
@@ -93,13 +94,16 @@ namespace SF3.Win.Controls {
     }
 
     public class PropertiesControlBase<T> : PropertiesControlBase where T : class {
-        private T _editingObject = null;
+        private T[] _editingObjects = [];
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public T EditingObject {
-            get => _editingObject;
+        public T[] EditingObjects {
+            get => _editingObjects;
             set {
-                if (value == _editingObject)
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+
+                if (Enumerable.SequenceEqual(value, _editingObjects))
                     return;
 
                 Control lastFocused = null;
@@ -108,7 +112,7 @@ namespace SF3.Win.Controls {
                     Focus();
                 }
 
-                _editingObject = value;
+                _editingObjects = value;
                 UpdateControls();
 
                 if (lastFocused != null) {

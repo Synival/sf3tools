@@ -151,7 +151,7 @@ namespace SF3.Win.Controls {
             }
             // Do nothing if we're already using that control.
             else if (_currentSideEditorControl == control) {
-                control.EditingObject = obj;
+                control.EditingObjects = (obj == null) ? [] : [obj];
                 return control;
             }
 
@@ -163,7 +163,7 @@ namespace SF3.Win.Controls {
             // Hiding this control prevents some ugly rendering...
             control.Hide();
 
-            control.EditingObject = obj;
+            control.EditingObjects = (obj == null) ? [] : [obj];
             selectionPanel.Controls.Add(control);
 
             ShowEditorPanel(true);

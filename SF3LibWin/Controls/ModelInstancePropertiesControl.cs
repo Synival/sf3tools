@@ -18,33 +18,45 @@ namespace SF3.Win.Controls {
             }
 
             nudXWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.PositionX = (short) -nudXWorld.Value;
-                nudX.Value = (decimal) (-((float) EditingObject.PositionX + 16) / 32);
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.PositionX = (short) -nudXWorld.Value;
+                nudX.Value = (decimal) (-((float) eo.PositionX + 16) / 32);
             });
 
             nudYWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.PositionY = (short) -nudYWorld.Value;
-                nudY.Value = (decimal) (-(float) EditingObject.PositionY / 32);
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.PositionY = (short) -nudYWorld.Value;
+                nudY.Value = (decimal) (-(float) eo.PositionY / 32);
             });
 
             nudZWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.PositionZ = (short) -nudZWorld.Value;
-                nudZ.Value = (decimal) (-((float) EditingObject.PositionZ + 16) / 32);
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.PositionZ = (short) -nudZWorld.Value;
+                nudZ.Value = (decimal) (-((float) eo.PositionZ + 16) / 32);
             });
 
             nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.PositionX = (short) -(nudX.Value * 32 + 16);
-                nudXWorld.Value = -EditingObject.PositionX;
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.PositionX = (short) -(nudX.Value * 32 + 16);
+                nudXWorld.Value = -eo.PositionX;
             });
 
             nudY.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.PositionY = (short) -(nudY.Value * 32);
-                nudYWorld.Value = -EditingObject.PositionY;
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.PositionY = (short) -(nudY.Value * 32);
+                nudYWorld.Value = -eo.PositionY;
             });
 
             nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.PositionZ = (short) -(nudZ.Value * 32 + 16);
-                nudZWorld.Value = -EditingObject.PositionZ;
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.PositionZ = (short) -(nudZ.Value * 32 + 16);
+                nudZWorld.Value = -eo.PositionZ;
             });
         }
 
@@ -54,14 +66,17 @@ namespace SF3.Win.Controls {
                 nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
             }
 
-            labelModelInstanceEdited.Text = "Model Instance: " + (EditingObject == null ? "(none)" : $"0x{EditingObject.ID:X3}");
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
 
-            InitNUD(nudXWorld, -EditingObject.PositionX);
-            InitNUD(nudYWorld, -EditingObject.PositionY);
-            InitNUD(nudZWorld, -EditingObject.PositionZ);
-            InitNUD(nudX, (decimal) (-(EditingObject.PositionX + 16) / 32.0f));
-            InitNUD(nudY, (decimal) (-EditingObject.PositionY / 32.0f));
-            InitNUD(nudZ, (decimal) (-(EditingObject.PositionZ + 16) / 32.0f));
+            labelModelInstanceEdited.Text = "Model Instance: " + (eo == null ? "(none)" : $"0x{eo.ID:X3}");
+
+            InitNUD(nudXWorld, -eo.PositionX);
+            InitNUD(nudYWorld, -eo.PositionY);
+            InitNUD(nudZWorld, -eo.PositionZ);
+            InitNUD(nudX, (decimal) (-(eo.PositionX + 16) / 32.0f));
+            InitNUD(nudY, (decimal) (-eo.PositionY / 32.0f));
+            InitNUD(nudZ, (decimal) (-(eo.PositionZ + 16) / 32.0f));
         }
     }
 }

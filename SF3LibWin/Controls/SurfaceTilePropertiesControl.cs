@@ -28,22 +28,52 @@ namespace SF3.Win.Controls {
             cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
 
             // Event handling for 'Movement' group.
-            cbMoveTerrain.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
-            nudMoveCenterHeight.ValueChanged   += (s, e) => DoOnlyDirectly(() => SetCenterHeight((byte) nudMoveCenterHeight.Value));
-            cbMoveSlope.CheckedChanged         += (s, e) => DoOnlyDirectly(() => EditingObject.TerrainFlags ^= TerrainFlags.SteepSlope);
+            cbMoveTerrain.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue;
+            });
+            nudMoveCenterHeight.ValueChanged += (s, e) => DoOnlyDirectly(() => {
+                SetCenterHeight((byte) nudMoveCenterHeight.Value);
+            });
+            cbMoveSlope.CheckedChanged += (s, e) => DoOnlyDirectly(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.TerrainFlags ^= TerrainFlags.SteepSlope;
+            });
 
             foreach (var nud in _nudVertexHeights)
                 nud.Value.ValueChanged += (s, e) => DoOnlyDirectly(() => SetVertexHeight(nud.Key, (byte) nud.Value.Value));
 
             // Event handling for 'Event' group.
-            nudEventID.ValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.EventID = (byte) nudEventID.Value);
+            nudEventID.ValueChanged += (s, e) => DoOnlyDirectly(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.EventID = (byte) nudEventID.Value;
+            });
 
             // Event handling for 'Model' group.
-            nudModelTextureID.ValueChanged     += (s, e) => DoOnlyDirectly(() => EditingObject.TextureID = (byte) nudModelTextureID.Value);
-            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
-            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(() => EditingObject.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
-            cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(() => SetIsFlat(cbModelTileIsFlat.Checked));
-            cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(() => SetHasTree(cbModelHasTree.Checked));
+            nudModelTextureID.ValueChanged     += (s, e) => DoOnlyDirectly(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.TextureID = (byte) nudModelTextureID.Value;
+            });
+            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue;
+            });
+            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue;
+            });
+            cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(() => {
+                SetIsFlat(cbModelTileIsFlat.Checked);
+            });
+            cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(() => {
+                SetHasTree(cbModelHasTree.Checked);
+            });
         }
 
         protected override void PerformUpdateControls() {
@@ -52,29 +82,32 @@ namespace SF3.Win.Controls {
                 nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
             }
 
-            // 'Current Tile' group
-            labelTileEdited.Text = "Tile: (" + EditingObject.X + ", " + EditingObject.Y + ")\n";
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
 
-            var heightTerrainAddress = 0x060B6000 + (EditingObject.Y * 64 + EditingObject.X) * 2;
-            var eventIdAddress       = 0x060B8000 + (EditingObject.Y * 64 + EditingObject.X);
+            // 'Current Tile' group
+            labelTileEdited.Text = "Tile: (" + eo.X + ", " + eo.Y + ")\n";
+
+            var heightTerrainAddress = 0x060B6000 + (eo.Y * 64 + eo.X) * 2;
+            var eventIdAddress       = 0x060B8000 + (eo.Y * 64 + eo.X);
 
             labelRealCoordinates.Text =
-                $"Center World Pos: (0x{(EditingObject.X * 32 + 16):X3}), 0x{(EditingObject.Y * 32 + 16):X3})\n" +
+                $"Center World Pos: (0x{(eo.X * 32 + 16):X3}), 0x{(eo.Y * 32 + 16):X3})\n" +
                 "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
                 "Event ID Address: 0x" + eventIdAddress.ToString("X8");
 
             // 'Movement' group
-            cbMoveTerrain.SelectedItem = EditingObject.TerrainType;
-            InitNUD(nudMoveCenterHeight, (decimal) EditingObject.CenterHeight);
-            cbMoveSlope.Checked = ((EditingObject.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
+            cbMoveTerrain.SelectedItem = eo.TerrainType;
+            InitNUD(nudMoveCenterHeight, (decimal) eo.CenterHeight);
+            cbMoveSlope.Checked = ((eo.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
             foreach (var nud in _nudVertexHeights)
-                InitNUD(nud.Value, (decimal) EditingObject.GetVertexHeight(nud.Key));
+                InitNUD(nud.Value, (decimal) eo.GetVertexHeight(nud.Key));
 
             // 'Event' group
-            InitNUD(nudEventID, EditingObject.EventID);
+            InitNUD(nudEventID, eo.EventID);
 
             // 'Model' group
-            gbModel.Enabled = EditingObject?.Surface?.HasModel == true;
+            gbModel.Enabled = eo?.Surface?.HasModel == true;
             if (!gbModel.Enabled) {
                 nudModelTextureID.Text = "";
                 cbModelHasTree.Checked = false;
@@ -90,14 +123,14 @@ namespace SF3.Win.Controls {
                 }
             }
             else {
-                var fileTile = EditingObject as SurfaceTile;
+                var fileTile = eo as SurfaceTile;
 
-                InitNUD(nudModelTextureID, EditingObject.TextureID);
+                InitNUD(nudModelTextureID, eo.TextureID);
                 cbModelHasTree.Checked = fileTile?.TreeModelID != null;
                 cbModelHasTree.Enabled = true;
 
-                if (EditingObject?.Surface?.HasRotatableTextures == true) {
-                    cbModelRotate.SelectedItem = EditingObject.TextureRotate;
+                if (eo?.Surface?.HasRotatableTextures == true) {
+                    cbModelRotate.SelectedItem = eo.TextureRotate;
                     cbModelRotate.Enabled = true;
                 }
                 else {
@@ -111,42 +144,54 @@ namespace SF3.Win.Controls {
                     cbModelRotate.Enabled = false;
                 }
 
-                cbModelFlip.SelectedItem = EditingObject.TextureFlip;
+                cbModelFlip.SelectedItem = eo.TextureFlip;
 
-                if (cbModelTileIsFlat.Checked != EditingObject.IsFlat) {
-                    cbModelTileIsFlat.Checked = EditingObject.IsFlat;
+                if (cbModelTileIsFlat.Checked != eo.IsFlat) {
+                    cbModelTileIsFlat.Checked = eo.IsFlat;
                     UpdateVertexHeightsEnabled();
                 }
             }
         }
 
         private void SetCenterHeight(byte value) {
-            var diff = value - EditingObject.CenterHeight;
-            var heights = EditingObject.GetVertexHeights()
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
+
+            var diff = value - eo.CenterHeight;
+            var heights = eo.GetVertexHeights()
                 .Select(x => (byte) Math.Clamp(x + diff, 0, 255))
                 .ToArray();
 
-            EditingObject.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
-            EditingObject.SetVertexHeights(heights);
+            eo.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
+            eo.SetVertexHeights(heights);
             UpdateVertexHeights();
         }
 
         private void SetVertexHeight(CornerType corner, byte value) {
-            EditingObject.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
-            EditingObject.SetVertexHeight(corner, value);
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
+
+            eo.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
+            eo.SetVertexHeight(corner, value);
             UpdateVertexHeights();
         }
 
         private void SetIsFlat(bool value) {
-            EditingObject.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
-            EditingObject.IsFlat = cbModelTileIsFlat.Checked;
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
+
+            eo.Surface.NormalSettings = AppState.RetrieveAppState().MakeNormalCalculationSettings();
+            eo.IsFlat = cbModelTileIsFlat.Checked;
             UpdateVertexHeights();
             UpdateVertexHeightsEnabled();
         }
 
         private void SetHasTree(bool value) {
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
+
             // This only really applies to MPD_File tiles. We have a better way otherwise.
-            var fileTile = EditingObject as SurfaceTile;
+            var fileTile = eo as SurfaceTile;
             if (fileTile == null)
                 return;
 
@@ -165,11 +210,14 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateVertexHeights() {
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
+
             foreach (var corner in Enum.GetValues<CornerType>()) {
-                var height = EditingObject.GetVertexHeight(corner);
+                var height = eo.GetVertexHeight(corner);
                 _nudVertexHeights[corner].Value = (decimal) height;
             }
-            nudMoveCenterHeight.Value = (decimal) EditingObject.CenterHeight;
+            nudMoveCenterHeight.Value = (decimal) eo.CenterHeight;
         }
 
         private void UpdateVertexHeightsEnabled() {

@@ -19,30 +19,41 @@ namespace SF3.Win.Controls {
             }
 
             nudXWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.ActorX = (float) nudXWorld.Value;
-                nudX.Value = (decimal) ((EditingObject.ActorX - 16) / 32);
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.ActorX = (float) nudXWorld.Value;
+                nudX.Value = (decimal) ((eo.ActorX - 16) / 32);
             });
 
             nudZWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.ActorZ = (float) nudZWorld.Value;
-                nudZ.Value = (decimal) ((EditingObject.ActorZ - 16) / 32);
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.ActorZ = (float) nudZWorld.Value;
+                nudZ.Value = (decimal) ((eo.ActorZ - 16) / 32);
             });
 
             nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.ActorX = (float) nudX.Value * 32 + 16;
-                nudXWorld.Value = (decimal) EditingObject.ActorX;
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.ActorX = (float) nudX.Value * 32 + 16;
+                nudXWorld.Value = (decimal) eo.ActorX;
             });
 
             nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                EditingObject.ActorZ = (float) nudZ.Value * 32 + 16;
-                nudZWorld.Value = (decimal) EditingObject.ActorZ;
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                eo.ActorZ = (float) nudZ.Value * 32 + 16;
+                nudZWorld.Value = (decimal) eo.ActorZ;
             });
 
             nudDirection.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+
                 var value = MathHelpers.ActualMod((float) nudDirection.Value + 180.0f, 360.0f) - 180.0f;
                 if ((float) nudDirection.Value != value)
                     nudDirection.Value = (decimal) value;
-                EditingObject.ActorDirection = value;
+                eo.ActorDirection = value;
             });
         }
 
@@ -52,14 +63,17 @@ namespace SF3.Win.Controls {
                 nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
             }
 
-            labelActorEdited.Text = "Actor (NPC): " + (EditingObject == null ? "(none)" : $"0x{EditingObject.ID:X2}");
+            // TODO: support multiple selection!
+            var eo = EditingObjects[0];
 
-            InitNUD(nudXWorld, (decimal) EditingObject.ActorX);
-            InitNUD(nudZWorld, (decimal) EditingObject.ActorZ);
-            InitNUD(nudX, (decimal) ((EditingObject.ActorX - 16) / 32.0f));
-            InitNUD(nudZ, (decimal) ((EditingObject.ActorZ - 16) / 32.0f));
+            labelActorEdited.Text = "Actor (NPC): " + (eo == null ? "(none)" : $"0x{eo.ID:X2}");
 
-            InitNUD(nudDirection, (decimal) EditingObject.ActorDirection);
+            InitNUD(nudXWorld, (decimal) eo.ActorX);
+            InitNUD(nudZWorld, (decimal) eo.ActorZ);
+            InitNUD(nudX, (decimal) ((eo.ActorX - 16) / 32.0f));
+            InitNUD(nudZ, (decimal) ((eo.ActorZ - 16) / 32.0f));
+
+            InitNUD(nudDirection, (decimal) eo.ActorDirection);
         }
     }
 }
