@@ -111,7 +111,7 @@ namespace SF3.Win.Controls {
         }
 
         public bool ChangeFocusedTile(int xDir, int yDir) {
-            var currentTile = _selectedTile;
+            var currentTile = _selectedObject as SelectableTile;
             if (currentTile == null)
                 return false;
 

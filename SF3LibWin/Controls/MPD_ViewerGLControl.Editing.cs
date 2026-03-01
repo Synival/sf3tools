@@ -80,7 +80,6 @@ namespace SF3.Win.Controls {
 
             if (oldTile != newTile) {
                 var surfaceTile = (newTile == null) ? null : MPD_File.Surface.GetTile(newTile.X, newTile.Y);
-                _selectedTile = surfaceTile;
                 if (surfaceTile != null)
                     newEventObject = surfaceTile;
             }
@@ -326,7 +325,6 @@ namespace SF3.Win.Controls {
         private ISelectableObject _selectedObject  = null;
 
         private SelectableTile _lastMouseoverTileEdited = null;
-        private IMPD_SurfaceTile _selectedTile = null;
 
         private object _objectSelectedEventObject = null;
 
