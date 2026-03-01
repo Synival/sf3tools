@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
@@ -17,7 +18,7 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _tagAddress;
         private readonly int _flagsAddress;
 
-        public ModelInstance(IByteData data, MPD_CollectionType collection, int id, string name, int address, bool hasTagsAndFlags)
+        public ModelInstance(IByteData data, IMPD_ModelCollection collection, int id, string name, int address, bool hasTagsAndFlags)
         : base(data, collection, id, name, address, 0x20, hasTagsAndFlags ? 0x3C : 0x38) {
             PDatas = new PDataAccessorCollection(this);
             HasTagsAndFlags = hasTagsAndFlags;

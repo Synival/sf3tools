@@ -79,7 +79,7 @@ namespace SF3.Win.Controls {
             gbOrientation.Controls.Add(nudX);
             gbOrientation.Location = new System.Drawing.Point(3, 32);
             gbOrientation.Name = "gbOrientation";
-            gbOrientation.Size = new System.Drawing.Size(200, 157);
+            gbOrientation.Size = new System.Drawing.Size(200, 186);
             gbOrientation.TabIndex = 6;
             gbOrientation.TabStop = false;
             gbOrientation.Text = "Orientation";
@@ -94,7 +94,7 @@ namespace SF3.Win.Controls {
             labelCoordInfo.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelCoordInfo.Size = new System.Drawing.Size(196, 30);
             labelCoordInfo.TabIndex = 21;
-            labelCoordInfo.Text = "* World coordinate signs are flipped\r\n** Grid Y corresponds to heightmap";
+            labelCoordInfo.Text = "* World coordinate signs are flipped\r\n** Grid Y is in heightmap units";
             // 
             // darkModeLabel3
             // 
@@ -113,12 +113,12 @@ namespace SF3.Win.Controls {
             darkModeLabel1.AutoSize = true;
             darkModeLabel1.DisabledColor = System.Drawing.Color.Empty;
             darkModeLabel1.IsSeparator = false;
-            darkModeLabel1.Location = new System.Drawing.Point(50, 69);
+            darkModeLabel1.Location = new System.Drawing.Point(6, 69);
             darkModeLabel1.Name = "darkModeLabel1";
             darkModeLabel1.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
-            darkModeLabel1.Size = new System.Drawing.Size(17, 15);
+            darkModeLabel1.Size = new System.Drawing.Size(60, 15);
             darkModeLabel1.TabIndex = 19;
-            darkModeLabel1.Text = "Y:";
+            darkModeLabel1.Text = "Bottom Y:";
             // 
             // nudZ
             // 
@@ -214,8 +214,7 @@ namespace SF3.Win.Controls {
             // 
             // nudY
             // 
-            nudY.DecimalPlaces = 2;
-            nudY.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            nudY.DecimalPlaces = 1;
             nudY.Location = new System.Drawing.Point(136, 67);
             nudY.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
             nudY.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
@@ -243,7 +242,7 @@ namespace SF3.Win.Controls {
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 50);
             Name = "ModelInstancePropertiesControl";
-            Size = new System.Drawing.Size(207, 193);
+            Size = new System.Drawing.Size(207, 232);
             gbOrientation.ResumeLayout(false);
             gbOrientation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudZ).EndInit();

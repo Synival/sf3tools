@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -8,8 +9,8 @@ namespace SF3.MPD.Project {
             OnlyVisibleFromDirection = ModelDirectionType.Unset;
         }
 
-        public MPD_ModelInstance(IMPD_ModelInstance original) {
-            Collection = original.Collection;
+        public MPD_ModelInstance(IMPD_ModelInstance original, IMPD_ModelCollection newCollection) {
+            Collection = newCollection;
             ID        = original.ID;
             ModelID   = original.ModelID;
             PositionX = original.PositionX;
@@ -26,8 +27,8 @@ namespace SF3.MPD.Project {
             LevelsOfDetail = original.LevelsOfDetail;
         }
 
-        public static MPD_ModelInstance FromJToken(JToken token, MPD_CollectionType collection) => new MPD_ModelInstance(token, collection);
-        private MPD_ModelInstance(JToken token, MPD_CollectionType collection) {
+        public static MPD_ModelInstance FromJToken(JToken token, IMPD_ModelCollection collection) => new MPD_ModelInstance(token, collection);
+        private MPD_ModelInstance(JToken token, IMPD_ModelCollection collection) {
             Collection = collection;
 
             var jObject = (JObject) token;
@@ -51,7 +52,10 @@ namespace SF3.MPD.Project {
             }
         }
 
-        public MPD_CollectionType Collection { get; set; }
+        public IMPD_ModelLoD GetModel(int lod)
+            => Collection.GetModel(ModelID, lod);
+
+        public IMPD_ModelCollection Collection { get; set; }
         public int ID { get; set; }
         public int ModelID { get; set; }
         public short PositionX { get; set; }

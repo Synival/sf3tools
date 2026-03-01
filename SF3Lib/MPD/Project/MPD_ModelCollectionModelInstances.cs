@@ -10,8 +10,8 @@ namespace SF3.MPD.Project {
             _instances = new List<MPD_ModelInstance>();
         }
 
-        public MPD_ModelCollectionModelInstances(IEnumerableWithLength<IMPD_ModelInstance> original) {
-            _instances = original.Select(x => new MPD_ModelInstance(x)).ToList();
+        public MPD_ModelCollectionModelInstances(IEnumerableWithLength<IMPD_ModelInstance> original, IMPD_ModelCollection newCollection) {
+            _instances = original.Select(x => new MPD_ModelInstance(x, newCollection)).ToList();
         }
 
         private List<MPD_ModelInstance> _instances;

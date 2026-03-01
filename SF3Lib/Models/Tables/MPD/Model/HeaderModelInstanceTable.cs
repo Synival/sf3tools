@@ -1,15 +1,15 @@
 ﻿using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
-using SF3.Types;
+using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Tables.MPD.Model {
     public class HeaderModelInstanceTable : TerminatedTable<HeaderModelInstance> {
-        protected HeaderModelInstanceTable(IByteData data, MPD_CollectionType collection, string name, int address)
+        protected HeaderModelInstanceTable(IByteData data, IMPD_ModelCollection collection, string name, int address)
         : base(data, name, address, 4, null) {
             Collection = collection;
         }
 
-        public static HeaderModelInstanceTable Create(IByteData data, MPD_CollectionType collection, string name, int address)
+        public static HeaderModelInstanceTable Create(IByteData data, IMPD_ModelCollection collection, string name, int address)
             => Create(() => new HeaderModelInstanceTable(data, collection, name, address));
 
         public override bool Load() {
@@ -19,6 +19,6 @@ namespace SF3.Models.Tables.MPD.Model {
                 false);
         }
 
-        public MPD_CollectionType Collection { get; }
+        public IMPD_ModelCollection Collection { get; }
     }
 }

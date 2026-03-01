@@ -172,5 +172,6 @@ namespace SF3.Models.Structs.MPD.Model {
 
         public IIndexedEnumerableWithLength<VECTOR> Vertices => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
         public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }
+        public float BottomY => Vertices?.Select(x => x.Y.Float)?.Max() ?? 0;
     }
 }

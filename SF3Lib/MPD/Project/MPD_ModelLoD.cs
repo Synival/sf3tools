@@ -142,5 +142,7 @@ namespace SF3.MPD.Project {
         }
 
         public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }
+
+        public float BottomY => _actualModel.BottomY;
     }
 }

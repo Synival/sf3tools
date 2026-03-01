@@ -46,19 +46,8 @@ namespace SF3.Win.Views {
             }
         }
 
-        private void UpdateMPD_Model() {
-            var mc = (_modelInstance == null)
-                ? null 
-                : (MPD_File?.ModelCollections?.TryGetValue(_modelInstance.Collection, out var mcOut) == true) ? mcOut as ModelChunk : null;
-            var pdata = (mc?.PDatasByMemoryAddress?.TryGetValue(_modelInstance.PData0, out var pdataOut) == true) ? pdataOut : null;
-            if (pdata == null) {
-                _mpdModel = null;
-                return;
-            }
-
-            _mpdModel = mc?.GetModel(pdata.ModelID, pdata.LevelOfDetail);
-        }
-
+        private void UpdateMPD_Model()
+            => _mpdModel = _modelInstance?.GetModel(0);
         private IMPD_ModelLoD _mpdModel = null;
 
         private void UpdateViewerControl() {

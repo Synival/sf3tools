@@ -5,7 +5,7 @@ namespace SF3.MPD.Interfaces {
     /// Interface for an instance of an IMPD_Model.
     /// </summary>
     public interface IMPD_ModelInstance {
-        MPD_CollectionType Collection { get; }
+        IMPD_ModelCollection Collection { get; }
         int ID { get; }
         int ModelID { get; set; }
         short PositionX { get; set; }
@@ -27,5 +27,12 @@ namespace SF3.MPD.Interfaces {
         /// Mostly under-utilized.
         /// </summary>
         int LevelsOfDetail { get; set; }
+
+        /// <summary>
+        /// Fetches the model referenced by this instance at a specific level of detail.
+        /// </summary>
+        /// <param name="lod">Level of detail to fetch.</param>
+        /// <returns>An existing IMPD_ModelLoD if found, otherwise 'null'.</returns>
+        IMPD_ModelLoD GetModel(int lod);
     }
 }

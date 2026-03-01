@@ -1,9 +1,10 @@
 ﻿using SF3.ByteData;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
     public class HeaderModelInstance : ModelInstanceBase {
-        public HeaderModelInstance(IByteData data, MPD_CollectionType collection, int id, string name, int address)
+        public HeaderModelInstance(IByteData data, IMPD_ModelCollection collection, int id, string name, int address)
         : base(data, collection, id, name, address, 0x04, 0x1C) {
         }
 

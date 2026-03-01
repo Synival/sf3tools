@@ -131,7 +131,7 @@ namespace SF3.Win.OpenGL.MPD {
             CreateAndAddQuadModels(mpdFile, models.Collection, mpdModel, texturesById, forceSemiTransparent, isHideMesh);
 
             var modelInstance = new MPD_ModelInstance() {
-                Collection = models.Collection,
+                Collection = models,
                 ID = 0,
                 ModelID = mpdModel.ModelID,
                 PositionX = 32 * 32,

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -29,6 +30,16 @@ namespace SF3.MPD.Extensions {
             }
 
             return new JObject(properties.ToArray());
+        }
+
+        public static float GetBottomY(this IMPD_ModelInstance modelInstance, int lod) {
+            var model = modelInstance.GetModel(lod);
+            if (model == null)
+                return 0f;
+
+            // TODO: this makes a ton of assumptions!
+            // TODO: take multiple angles and model limits into account!!
+            return model.BottomY * (float) Math.Cos(modelInstance.AngleX / 180.0f * Math.PI) * modelInstance.ScaleY;
         }
     }
 }

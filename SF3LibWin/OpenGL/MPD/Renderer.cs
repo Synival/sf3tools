@@ -93,7 +93,7 @@ namespace SF3.Win.OpenGL.MPD {
                 }
 
                 _modelsWithGroups = models.ModelInstances
-                    .Select(x => (Model: x, ModelGroup: models.ModelsByIDByCollection[x.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
+                    .Select(x => (Model: x, ModelGroup: models.ModelsByIDByCollection[x.Collection.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
                     .Where(x => x.ModelGroup != null)
                     .Where(x => {
                         var direction = x.Model.OnlyVisibleFromDirection;
@@ -482,7 +482,7 @@ namespace SF3.Win.OpenGL.MPD {
             Vector4 ModelSelectionColor(IMPD_ModelInstance model) {
                 var r = (model.ID % 64) / 64.0f;
                 var g = (model.ID / 64) / 64.0f;
-                return new Vector4(r, g, (model.Collection == MPD_CollectionType.Primary ? 1 : 2) * (1.0f / 64.0f), 1.0f);
+                return new Vector4(r, g, (model.Collection.Collection == MPD_CollectionType.Primary ? 1 : 2) * (1.0f / 64.0f), 1.0f);
             }
 
             var lightingTexture = selectionColors ? null : (lighting.LightingTexture ?? general.WhiteTexture);
@@ -837,7 +837,7 @@ namespace SF3.Win.OpenGL.MPD {
                 if (modelGroups == null)
                     return (null, null);
 
-                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ID == selectableModel.InstanceID && x.Collection == selectableModel.Collection);
+                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ID == selectableModel.InstanceID && x.Collection.Collection == selectableModel.Collection);
                 if (modelInstance == null)
                     return (null, null);
 
@@ -952,7 +952,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                 if (modelInstance.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var mpdModel = models.MPD_ModelsByIDByCollection[modelInstance.Collection].TryGetValue(modelInstance.ModelID, out var mpdModelOut) ? mpdModelOut : null;
+                    var mpdModel = models.MPD_ModelsByIDByCollection[modelInstance.Collection.Collection].TryGetValue(modelInstance.ModelID, out var mpdModelOut) ? mpdModelOut : null;
 
                     var topY     = mpdModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var bottomY  = mpdModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
