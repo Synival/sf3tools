@@ -1,7 +1,7 @@
 ﻿using SF3.MPD.Interfaces;
 
 namespace SF3.Win.Controls {
-    public partial class ModelInstancePropertiesControl : PropertiesControlBase<IMPD_ModelInstance> {
+    public partial class ModelInstancePropertiesControl : ModelInstancePropertiesControlBase {
         public ModelInstancePropertiesControl() {
             InitializeComponent();
 

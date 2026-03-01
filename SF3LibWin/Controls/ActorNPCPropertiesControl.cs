@@ -1,7 +1,7 @@
 ﻿using SF3.Models.Structs.X1.Town;
 
 namespace SF3.Win.Controls {
-    public partial class ActorNPCPropertiesControl : PropertiesControlBase<Npc> {
+    public partial class ActorNPCPropertiesControl : ActorNPCPropertiesControlBase {
         public ActorNPCPropertiesControl() {
             InitializeComponent();
 

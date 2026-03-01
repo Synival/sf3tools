@@ -4,11 +4,14 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
+using SF3.Models.Structs.X1.Battle;
+using SF3.Models.Structs.X1.Town;
+using SF3.MPD.Interfaces;
 using SF3.Win.Extensions;
 using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
-    public abstract class PropertiesControlBase : UserControl {
+    public class PropertiesControlBase : UserControl {
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             bool wasProcessed = false;
             CmdKey?.Invoke(this, ref msg, keyData, ref wasProcessed);
@@ -29,7 +32,7 @@ namespace SF3.Win.Controls {
         protected void UpdateControls()
             => DoOnlyDirectly(PerformUpdateControls);
 
-        protected abstract void PerformUpdateControls();
+        protected virtual void PerformUpdateControls() => throw new NotImplementedException();
 
         [DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
@@ -87,7 +90,7 @@ namespace SF3.Win.Controls {
         public event CmdKeyEventHandler CmdKey;
     }
 
-    public abstract class PropertiesControlBase<T> : PropertiesControlBase where T : class {
+    public class PropertiesControlBase<T> : PropertiesControlBase where T : class {
         private T _editingObject = null;
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -117,4 +120,9 @@ namespace SF3.Win.Controls {
             }
         }
     }
+
+    public class SurfaceTilePropertiesControlBase   : PropertiesControlBase<IMPD_SurfaceTile> {}
+    public class ActorBattlePropertiesControlBase   : PropertiesControlBase<Slot> {}
+    public class ActorNPCPropertiesControlBase      : PropertiesControlBase<Npc> {}
+    public class ModelInstancePropertiesControlBase : PropertiesControlBase<IMPD_ModelInstance> {}
 }

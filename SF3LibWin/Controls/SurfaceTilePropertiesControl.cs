@@ -4,12 +4,11 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
 using SF3.Models.Files.MPD;
-using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
 
 namespace SF3.Win.Controls {
-    public partial class SurfaceTilePropertiesControl : PropertiesControlBase<IMPD_SurfaceTile> {
+    public partial class SurfaceTilePropertiesControl : SurfaceTilePropertiesControlBase {
         public SurfaceTilePropertiesControl() {
             InitializeComponent();
 
