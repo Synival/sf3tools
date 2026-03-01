@@ -62,21 +62,26 @@ namespace SF3.Win.Controls {
         }
 
         public void SelectObject(ISelectableObject obj) {
-            if (_selectedObject == obj)
+            if ((_selectedObjects.Count == 1 && _selectedObjects[0] == obj) || (_selectedObjects.Count == 0 && obj == null))
                 return;
 
-            var oldTile = _selectedObject as SelectableTile;
+            // TODO: This logic is very wrong for multiple selection.
+            var currentSelectedObject = (_selectedObjects.Count == 1) ? _selectedObjects[0] : null;
+
+            var oldTile = currentSelectedObject as SelectableTile;
             var newTile = obj as SelectableTile;
 
-            var oldModel = _selectedObject as SelectableModel;
+            var oldModel = currentSelectedObject as SelectableModel;
             var newModel = obj as SelectableModel;
 
-            var oldActor = _selectedObject as SelectableActor;
+            var oldActor = currentSelectedObject as SelectableActor;
             var newActor = obj as SelectableActor;
 
             object newEventObject = null;
 
-            _selectedObject = obj;
+            _selectedObjects.Clear();
+            if (obj != null)
+                _selectedObjects.Add(obj);
 
             if (oldTile != newTile) {
                 var surfaceTile = (newTile == null) ? null : MPD_File.Surface.GetTile(newTile.X, newTile.Y);
@@ -322,7 +327,7 @@ namespace SF3.Win.Controls {
         }
 
         private ISelectableObject _mouseoverObject = null;
-        private ISelectableObject _selectedObject  = null;
+        private List<ISelectableObject> _selectedObjects = new List<ISelectableObject>();
 
         private SelectableTile _lastMouseoverTileEdited = null;
 

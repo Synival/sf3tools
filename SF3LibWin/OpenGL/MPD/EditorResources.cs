@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -31,16 +32,17 @@ namespace SF3.Win.OpenGL.MPD {
         }
 
         public void UpdateMouseoverObject(IMPD mpd, GeneralResources world, ISelectableObject obj) {
-            ReplaceTileModelAndTexture(mpd, world, obj as SelectableTile, ref _mouseoverTileModel, ref _mouseoverTileTexture);
+            var tile = obj as SelectableTile;
+            ReplaceTileModelAndTexture(mpd, world, (tile == null) ? [] : [tile], ref _mouseoverTileModel, ref _mouseoverTileTexture);
             MouseoverObject = obj;
         }
 
-        public void UpdateSelectedObject(IMPD mpd, GeneralResources world, ISelectableObject obj) {
-            ReplaceTileModelAndTexture(mpd, world, obj as SelectableTile, ref _selectedTileModel, ref _selectedTileTexture);
-            SelectedObject = obj;
+        public void UpdateSelectedObjects(IMPD mpd, GeneralResources world, List<ISelectableObject> objs) {
+            ReplaceTileModelAndTexture(mpd, world, objs.Select(x => x as SelectableTile).Where(x => x != null).ToArray(), ref _selectedTileModel, ref _selectedTileTexture);
+            SelectedObjects = objs;
         }
 
-        private void ReplaceTileModelAndTexture(IMPD mpd, GeneralResources world, SelectableTile selectableTile, ref QuadModel model, ref Texture texture) {
+        private void ReplaceTileModelAndTexture(IMPD mpd, GeneralResources world, SelectableTile[] selectableTiles, ref QuadModel model, ref Texture texture) {
             if (model != null) {
                 model.Dispose();
                 Models.Remove(model);
@@ -53,16 +55,22 @@ namespace SF3.Win.OpenGL.MPD {
                 texture = null;
             }
 
-            if (selectableTile != null) {
-                var tile = mpd.Surface.GetTile(selectableTile.X, selectableTile.Y);
+            if (selectableTiles?.Length > 0) {
+                var quads = new List<Quad>();
+                foreach (var selectableTile in selectableTiles) {
+                    var tile = mpd.Surface.GetTile(selectableTile.X, selectableTile.Y);
 
-                var texId = tile.TextureID;
-                var tileTexture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
-                if (tileTexture != null) 
-                    Textures.Add(texture = new Texture(tileTexture.CreateBitmapARGB8888()));
+                    // TODO: This is all wrong!! Build a texture atlas and use atlas texture coordinates.
+                    if (texture == null) {
+                        var texId = tile.TextureID;
+                        var tileTexture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
+                        if (tileTexture != null) 
+                            Textures.Add(texture = new Texture(tileTexture.CreateBitmapARGB8888()));
+                    }
 
-                var quad = new Quad(tile.GetVector3Vertices());
-                Models.Add(model = new QuadModel([quad]));
+                    quads.Add(new Quad(tile.GetVector3Vertices()));
+                }
+                Models.Add(model = new QuadModel(quads.ToArray()));
             }
         }
 
@@ -77,7 +85,7 @@ namespace SF3.Win.OpenGL.MPD {
         public Texture SelectedTileTexture => _selectedTileTexture;
 
         public ISelectableObject MouseoverObject { get; private set; }
-        public ISelectableObject SelectedObject { get; private set; }
+        public List<ISelectableObject> SelectedObjects { get; private set; }
 
         public DisposableList<QuadModel> Models { get; private set; } = null;
         public DisposableList<Texture> Textures { get; private set; } = null;

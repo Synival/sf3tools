@@ -358,7 +358,7 @@ namespace SF3.Win.Controls {
         private void UpdateEditorResources() {
             if (_editorNeedsUpdate) {
                 _editor.UpdateMouseoverObject(MPD_File, _general, _mouseoverObject);
-                _editor.UpdateSelectedObject(MPD_File, _general, _selectedObject);
+                _editor.UpdateSelectedObjects(MPD_File, _general, _selectedObjects);
                 _editorNeedsUpdate = false;
             }
         }

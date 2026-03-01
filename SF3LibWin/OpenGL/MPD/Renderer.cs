@@ -895,17 +895,21 @@ namespace SF3.Win.OpenGL.MPD {
 
             if (editor.MouseoverTileModel != null)
                 RenderTile(editor.MouseoverTileModel, editor.MouseoverTileTexture, new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
-            if (editor.MouseoverObject is SelectableModel mouseoverModel)
+            else if (editor.MouseoverObject is SelectableModel mouseoverModel)
                 RenderModel(mouseoverModel, mouseoverModel.Collection == MPD_CollectionType.Primary ? new Vector4(0.5f, 0.375f, 0.25f, 0.5f) : new Vector4(0.5f, 0.25f, 0.25f, 0.5f));
-            if (editor.MouseoverObject is SelectableActor mouseoverActor)
+            else if (editor.MouseoverObject is SelectableActor mouseoverActor)
                 RenderActor(mouseoverActor, new Vector4(0.25f, 0.25f + (0.25f / 4), 0.5f, 0.5f));
 
             if (editor.SelectedTileModel != null)
                 RenderTile(editor.SelectedTileModel, editor.SelectedTileTexture, new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
-            if (editor.SelectedObject is SelectableModel selectedModel)
-                RenderModel(selectedModel, selectedModel.Collection == MPD_CollectionType.Primary ? new Vector4(1.0f, 0.5f, 0.0f, 1.0f) : new Vector4(1.0f, 0.0f, 0.0f, 1.0f));
-            if (editor.SelectedObject is SelectableActor selectedActor)
-                RenderActor(selectedActor, new Vector4(0.0f, 0.25f, 1.0f, 1.0f));
+            else if (editor.SelectedObjects.Count > 0) {
+                foreach (var selectedObject in editor.SelectedObjects) {
+                    if (selectedObject is SelectableModel selectedModel)
+                        RenderModel(selectedModel, selectedModel.Collection == MPD_CollectionType.Primary ? new Vector4(1.0f, 0.5f, 0.0f, 1.0f) : new Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+                    else if (selectedObject is SelectableActor selectedActor)
+                        RenderActor(selectedActor, new Vector4(0.0f, 0.25f, 1.0f, 1.0f));
+                }
+            }
 
             GL.DepthMask(true);
             GL.Enable(EnableCap.DepthTest);
