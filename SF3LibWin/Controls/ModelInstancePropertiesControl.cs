@@ -28,7 +28,7 @@ namespace SF3.Win.Controls {
                 // TODO: support multiple selection!
                 var eo = EditingObjects[0];
                 eo.PositionY = (short) -nudYWorld.Value;
-                nudY.Value = (decimal) (-(float) eo.PositionY / 32);
+                nudY.Value = (decimal) (-(float) eo.PositionY / 2);
             });
 
             nudZWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
@@ -48,7 +48,7 @@ namespace SF3.Win.Controls {
             nudY.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
                 // TODO: support multiple selection!
                 var eo = EditingObjects[0];
-                eo.PositionY = (short) -(nudY.Value * 32);
+                eo.PositionY = (short) -(nudY.Value * 2);
                 nudYWorld.Value = -eo.PositionY;
             });
 
@@ -75,7 +75,7 @@ namespace SF3.Win.Controls {
             InitNUD(nudYWorld, -eo.PositionY);
             InitNUD(nudZWorld, -eo.PositionZ);
             InitNUD(nudX, (decimal) (-(eo.PositionX + 16) / 32.0f));
-            InitNUD(nudY, (decimal) (-eo.PositionY / 32.0f));
+            InitNUD(nudY, (decimal) (-eo.PositionY / 2.0f));
             InitNUD(nudZ, (decimal) (-(eo.PositionZ + 16) / 32.0f));
         }
     }

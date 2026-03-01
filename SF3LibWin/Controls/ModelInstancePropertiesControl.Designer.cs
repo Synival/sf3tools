@@ -27,6 +27,7 @@ namespace SF3.Win.Controls {
         private void InitializeComponent() {
             labelModelInstanceEdited = new DarkModeLabel();
             gbOrientation = new DarkModeGroupBox();
+            labelCoordInfo = new DarkModeLabel();
             darkModeLabel3 = new DarkModeLabel();
             darkModeLabel1 = new DarkModeLabel();
             nudZ = new DarkModeNumericUpDown();
@@ -63,6 +64,7 @@ namespace SF3.Win.Controls {
             // 
             // gbOrientation
             // 
+            gbOrientation.Controls.Add(labelCoordInfo);
             gbOrientation.Controls.Add(darkModeLabel3);
             gbOrientation.Controls.Add(darkModeLabel1);
             gbOrientation.Controls.Add(nudZ);
@@ -77,10 +79,22 @@ namespace SF3.Win.Controls {
             gbOrientation.Controls.Add(nudX);
             gbOrientation.Location = new System.Drawing.Point(3, 32);
             gbOrientation.Name = "gbOrientation";
-            gbOrientation.Size = new System.Drawing.Size(200, 128);
+            gbOrientation.Size = new System.Drawing.Size(200, 157);
             gbOrientation.TabIndex = 6;
             gbOrientation.TabStop = false;
             gbOrientation.Text = "Orientation";
+            // 
+            // labelCoordInfo
+            // 
+            labelCoordInfo.AutoSize = true;
+            labelCoordInfo.DisabledColor = System.Drawing.Color.Empty;
+            labelCoordInfo.IsSeparator = false;
+            labelCoordInfo.Location = new System.Drawing.Point(2, 121);
+            labelCoordInfo.Name = "labelCoordInfo";
+            labelCoordInfo.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelCoordInfo.Size = new System.Drawing.Size(196, 30);
+            labelCoordInfo.TabIndex = 21;
+            labelCoordInfo.Text = "* World coordinate signs are flipped\r\n** Grid Y corresponds to heightmap";
             // 
             // darkModeLabel3
             // 
@@ -170,9 +184,9 @@ namespace SF3.Win.Controls {
             darkModeLabel2.Location = new System.Drawing.Point(136, 20);
             darkModeLabel2.Name = "darkModeLabel2";
             darkModeLabel2.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
-            darkModeLabel2.Size = new System.Drawing.Size(37, 15);
+            darkModeLabel2.Size = new System.Drawing.Size(47, 15);
             darkModeLabel2.TabIndex = 14;
-            darkModeLabel2.Text = "(Grid)";
+            darkModeLabel2.Text = "(Grid**)";
             // 
             // labelPosWorld
             // 
@@ -182,9 +196,9 @@ namespace SF3.Win.Controls {
             labelPosWorld.Location = new System.Drawing.Point(73, 20);
             labelPosWorld.Name = "labelPosWorld";
             labelPosWorld.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
-            labelPosWorld.Size = new System.Drawing.Size(47, 15);
+            labelPosWorld.Size = new System.Drawing.Size(52, 15);
             labelPosWorld.TabIndex = 13;
-            labelPosWorld.Text = "(World)";
+            labelPosWorld.Text = "(World*)";
             // 
             // labelPosition
             // 
@@ -229,7 +243,7 @@ namespace SF3.Win.Controls {
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 50);
             Name = "ModelInstancePropertiesControl";
-            Size = new System.Drawing.Size(207, 163);
+            Size = new System.Drawing.Size(207, 193);
             gbOrientation.ResumeLayout(false);
             gbOrientation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudZ).EndInit();
@@ -258,5 +272,6 @@ namespace SF3.Win.Controls {
         private DarkModeNumericUpDown nudZWorld;
         private DarkModeLabel labelX;
         private DarkModeLabel darkModeLabel3;
+        private DarkModeLabel labelCoordInfo;
     }
 }
