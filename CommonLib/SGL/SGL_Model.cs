@@ -14,7 +14,8 @@ namespace CommonLib.SGL {
         public SGL_Model(ISGL_Model original) {
             if (original.Vertices != null) {
                 Vertices = original.Vertices.Select(x => new VECTOR(x)).ToArray().ToEnumerableWithLength();
-                BottomY = Vertices.Select(x => x.Y.Float).Max();
+                TopY     = Vertices.Select(x => x.Y.Float).Min();
+                BottomY  = Vertices.Select(x => x.Y.Float).Max();
             }
             if (original.Faces != null)
                 Faces = original.Faces.Select(x => (ISGL_ModelFace) (new SGL_ModelFace(x))).ToArray().ToEnumerableWithLength();
@@ -39,6 +40,7 @@ namespace CommonLib.SGL {
 
         public IIndexedEnumerableWithLength<VECTOR> Vertices { get; }
         public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }
+        public float TopY { get; } = 0;
         public float BottomY { get; } = 0;
     }
 }

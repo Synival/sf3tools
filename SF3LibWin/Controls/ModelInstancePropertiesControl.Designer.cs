@@ -27,6 +27,9 @@ namespace SF3.Win.Controls {
         private void InitializeComponent() {
             labelModelInstanceEdited = new DarkModeLabel();
             gbOrientation = new DarkModeGroupBox();
+            nudBottom = new DarkModeNumericUpDown();
+            labelTop = new DarkModeLabel();
+            nudTop = new DarkModeNumericUpDown();
             labelCoordInfo = new DarkModeLabel();
             darkModeLabel3 = new DarkModeLabel();
             darkModeLabel1 = new DarkModeLabel();
@@ -40,7 +43,10 @@ namespace SF3.Win.Controls {
             labelPosition = new DarkModeLabel();
             nudY = new DarkModeNumericUpDown();
             nudX = new DarkModeNumericUpDown();
+            labelBottom = new DarkModeLabel();
             gbOrientation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) nudBottom).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) nudTop).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudZ).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudZWorld).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudYWorld).BeginInit();
@@ -64,6 +70,10 @@ namespace SF3.Win.Controls {
             // 
             // gbOrientation
             // 
+            gbOrientation.Controls.Add(labelBottom);
+            gbOrientation.Controls.Add(nudBottom);
+            gbOrientation.Controls.Add(labelTop);
+            gbOrientation.Controls.Add(nudTop);
             gbOrientation.Controls.Add(labelCoordInfo);
             gbOrientation.Controls.Add(darkModeLabel3);
             gbOrientation.Controls.Add(darkModeLabel1);
@@ -79,17 +89,49 @@ namespace SF3.Win.Controls {
             gbOrientation.Controls.Add(nudX);
             gbOrientation.Location = new System.Drawing.Point(3, 32);
             gbOrientation.Name = "gbOrientation";
-            gbOrientation.Size = new System.Drawing.Size(200, 186);
+            gbOrientation.Size = new System.Drawing.Size(200, 216);
             gbOrientation.TabIndex = 6;
             gbOrientation.TabStop = false;
             gbOrientation.Text = "Orientation";
+            // 
+            // nudBottom
+            // 
+            nudBottom.DecimalPlaces = 1;
+            nudBottom.Location = new System.Drawing.Point(137, 125);
+            nudBottom.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
+            nudBottom.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
+            nudBottom.Name = "nudBottom";
+            nudBottom.Size = new System.Drawing.Size(58, 23);
+            nudBottom.TabIndex = 24;
+            // 
+            // labelTop
+            // 
+            labelTop.AutoSize = true;
+            labelTop.DisabledColor = System.Drawing.Color.Empty;
+            labelTop.IsSeparator = false;
+            labelTop.Location = new System.Drawing.Point(101, 98);
+            labelTop.Name = "labelTop";
+            labelTop.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelTop.Size = new System.Drawing.Size(30, 15);
+            labelTop.TabIndex = 23;
+            labelTop.Text = "Top:";
+            // 
+            // nudTop
+            // 
+            nudTop.DecimalPlaces = 1;
+            nudTop.Location = new System.Drawing.Point(136, 96);
+            nudTop.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
+            nudTop.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
+            nudTop.Name = "nudTop";
+            nudTop.Size = new System.Drawing.Size(58, 23);
+            nudTop.TabIndex = 22;
             // 
             // labelCoordInfo
             // 
             labelCoordInfo.AutoSize = true;
             labelCoordInfo.DisabledColor = System.Drawing.Color.Empty;
             labelCoordInfo.IsSeparator = false;
-            labelCoordInfo.Location = new System.Drawing.Point(2, 121);
+            labelCoordInfo.Location = new System.Drawing.Point(2, 179);
             labelCoordInfo.Name = "labelCoordInfo";
             labelCoordInfo.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelCoordInfo.Size = new System.Drawing.Size(196, 30);
@@ -101,7 +143,7 @@ namespace SF3.Win.Controls {
             darkModeLabel3.AutoSize = true;
             darkModeLabel3.DisabledColor = System.Drawing.Color.Empty;
             darkModeLabel3.IsSeparator = false;
-            darkModeLabel3.Location = new System.Drawing.Point(50, 98);
+            darkModeLabel3.Location = new System.Drawing.Point(51, 155);
             darkModeLabel3.Name = "darkModeLabel3";
             darkModeLabel3.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             darkModeLabel3.Size = new System.Drawing.Size(17, 15);
@@ -113,18 +155,18 @@ namespace SF3.Win.Controls {
             darkModeLabel1.AutoSize = true;
             darkModeLabel1.DisabledColor = System.Drawing.Color.Empty;
             darkModeLabel1.IsSeparator = false;
-            darkModeLabel1.Location = new System.Drawing.Point(6, 69);
+            darkModeLabel1.Location = new System.Drawing.Point(50, 69);
             darkModeLabel1.Name = "darkModeLabel1";
             darkModeLabel1.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
-            darkModeLabel1.Size = new System.Drawing.Size(60, 15);
+            darkModeLabel1.Size = new System.Drawing.Size(17, 15);
             darkModeLabel1.TabIndex = 19;
-            darkModeLabel1.Text = "Bottom Y:";
+            darkModeLabel1.Text = "Y:";
             // 
             // nudZ
             // 
             nudZ.DecimalPlaces = 2;
             nudZ.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
-            nudZ.Location = new System.Drawing.Point(136, 96);
+            nudZ.Location = new System.Drawing.Point(137, 153);
             nudZ.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
             nudZ.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
             nudZ.Name = "nudZ";
@@ -135,7 +177,7 @@ namespace SF3.Win.Controls {
             // 
             nudZWorld.DecimalPlaces = 2;
             nudZWorld.Hexadecimal = true;
-            nudZWorld.Location = new System.Drawing.Point(73, 96);
+            nudZWorld.Location = new System.Drawing.Point(74, 153);
             nudZWorld.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
             nudZWorld.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
             nudZWorld.Name = "nudZWorld";
@@ -233,6 +275,18 @@ namespace SF3.Win.Controls {
             nudX.Size = new System.Drawing.Size(58, 23);
             nudX.TabIndex = 3;
             // 
+            // labelBottom
+            // 
+            labelBottom.AutoSize = true;
+            labelBottom.DisabledColor = System.Drawing.Color.Empty;
+            labelBottom.IsSeparator = false;
+            labelBottom.Location = new System.Drawing.Point(82, 127);
+            labelBottom.Name = "labelBottom";
+            labelBottom.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelBottom.Size = new System.Drawing.Size(50, 15);
+            labelBottom.TabIndex = 25;
+            labelBottom.Text = "Bottom:";
+            // 
             // ModelInstancePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -242,9 +296,11 @@ namespace SF3.Win.Controls {
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 50);
             Name = "ModelInstancePropertiesControl";
-            Size = new System.Drawing.Size(207, 232);
+            Size = new System.Drawing.Size(207, 253);
             gbOrientation.ResumeLayout(false);
             gbOrientation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) nudBottom).EndInit();
+            ((System.ComponentModel.ISupportInitialize) nudTop).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudZ).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudZWorld).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudYWorld).EndInit();
@@ -272,5 +328,9 @@ namespace SF3.Win.Controls {
         private DarkModeLabel labelX;
         private DarkModeLabel darkModeLabel3;
         private DarkModeLabel labelCoordInfo;
+        private DarkModeNumericUpDown nudBottom;
+        private DarkModeLabel labelTop;
+        private DarkModeNumericUpDown nudTop;
+        private DarkModeLabel labelBottom;
     }
 }

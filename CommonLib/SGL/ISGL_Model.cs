@@ -13,6 +13,11 @@
         /// <summary>
         /// Lowest (in visual space) Y component of all vertices.
         /// </summary>
+        float TopY { get; }
+
+        /// <summary>
+        /// Lowest (in visual space) Y component of all vertices.
+        /// </summary>
         float BottomY { get; }
     }
 }
