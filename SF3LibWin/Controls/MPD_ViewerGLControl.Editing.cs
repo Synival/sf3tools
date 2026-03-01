@@ -110,9 +110,11 @@ namespace SF3.Win.Controls {
                     newEventObject = actor;
             }
 
-            if (_objectSelectedEventObject != newEventObject) {
-                ObjectSelected?.Invoke(this, newEventObject);
-                _objectSelectedEventObject = newEventObject;
+            object[] newObjectsSelected = (newEventObject == null) ? [] : [newEventObject];
+
+            if (!Enumerable.SequenceEqual(_objectsSelectedChangedEventObject, newObjectsSelected)) {
+                ObjectsSelectedChanged?.Invoke(this, newObjectsSelected);
+                _objectsSelectedChangedEventObject = newObjectsSelected;
             }
 
             InvalidateEditor();
@@ -331,9 +333,9 @@ namespace SF3.Win.Controls {
 
         private SelectableTile _lastMouseoverTileEdited = null;
 
-        private object _objectSelectedEventObject = null;
+        private object[] _objectsSelectedChangedEventObject = [];
 
-        public delegate void ObjectSelectedEventHandler(object sender, object obj);
-        public event ObjectSelectedEventHandler ObjectSelected;
+        public delegate void ObjectsSelectedChangedEventHandler(object sender, object[] obj);
+        public event ObjectsSelectedChangedEventHandler ObjectsSelectedChanged;
     }
 }

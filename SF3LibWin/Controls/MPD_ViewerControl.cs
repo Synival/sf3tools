@@ -83,21 +83,30 @@ namespace SF3.Win.Controls {
             };
 
             // Activate tile editor when an editor is clicked.
-            GLControl.ObjectSelected += (s, obj) => {
-                if (obj is IMPD_SurfaceTile tile)
-                    SwitchToTileEditor(tile);
-                else if (obj is IMPD_ModelInstance modelInstance)
-                    SwitchToModelInstanceEditor(modelInstance);
-                else if (obj is IActor actor) {
-                    if (actor is Slot slot)
-                        SwitchToActorBattleInstanceEditor(slot);
-                    else if (actor is Npc npc)
-                        SwitchToActorNPCInstanceEditor(npc);
+            GLControl.ObjectsSelectedChanged += (s, objs) => {
+                if (objs.Length == 0)
+                    UnsetSideEditorControl();
+                else {
+                    var firstObj = objs[0];
+                    if (firstObj is IMPD_SurfaceTile) {
+                        // TODO: multiple selection!
+                        SwitchToTileEditor((IMPD_SurfaceTile) objs[0]);
+                    }
+                    else if (firstObj is IMPD_ModelInstance) {
+                        // TODO: multiple selection!
+                        SwitchToModelInstanceEditor((IMPD_ModelInstance) objs[0]);
+                    }
+                    else if (firstObj is Slot) {
+                        // TODO: multiple selection!
+                        SwitchToActorBattleInstanceEditor((Slot) objs[0]);
+                    }
+                    else if (firstObj is Npc) {
+                        // TODO: multiple selection!
+                        SwitchToActorNPCInstanceEditor((Npc) objs[0]);
+                    }
                     else
                         UnsetSideEditorControl();
                 }
-                else
-                    UnsetSideEditorControl();
             };
         }
 
