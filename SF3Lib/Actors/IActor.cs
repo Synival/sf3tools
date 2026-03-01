@@ -20,18 +20,18 @@
         bool HasActorY { get; }
 
         /// <summary>
-        /// X component of the actor position in game coordinates.
+        /// X component of the actor position in world coordinates.
         /// </summary>
         float ActorX { get; set; }
 
         /// <summary>
-        /// Y component of the actor position in game coordinates.
+        /// Y component of the actor position in world coordinates.
         /// If 'HasActorY' is false, this value should not be used.
         /// </summary>
         float ActorY { get; set; }
 
         /// <summary>
-        /// Z component of the actor position in game coordinates.
+        /// Z component of the actor position in world coordinates.
         /// </summary>
         float ActorZ { get; set; }
 

@@ -67,7 +67,7 @@ namespace SF3.Win.Controls {
                 var eventIdAddress       = 0x060B8000 + (EditingObject.Y * 64 + EditingObject.X);
 
                 labelRealCoordinates.Text =
-                    "Center Real Coordinates: (" + (EditingObject.X * 32 + 16) + "," + (EditingObject.Y * 32 + 16) + ")\n" +
+                    $"Center World Pos: (0x{(EditingObject.X * 32 + 16):X3}), 0x{(EditingObject.Y * 32 + 16):X3})\n" +
                     "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
                     "Event ID Address: 0x" + eventIdAddress.ToString("X8");
             }

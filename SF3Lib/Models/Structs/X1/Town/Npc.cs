@@ -99,21 +99,21 @@ namespace SF3.Models.Structs.X1.Town {
         [BulkCopy]
         public float ActorX {
             get => ((int) XPos) / 65536.0f;
-            set => XPos = (uint) value * 65536;
+            set => XPos = (uint) (value * 65536);
         }
 
         [TableViewModelColumn(addressField: nameof(_yPosAddr), displayOrder: 7, displayName: "yPos (dec)")]
         [BulkCopy]
         public float ActorY {
             get => ((int) YPos) / 65536.0f;
-            set => YPos = (uint) value * 65536;
+            set => YPos = (uint) (value * 65536);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPosAddr), displayOrder: 8, displayName: "zPos (dec)")]
         [BulkCopy]
         public float ActorZ {
             get => ((int) ZPos) / 65536.0f;
-            set => ZPos = (uint) value * 65536;
+            set => ZPos = (uint) (value * 65536);
         }
 
         [TableViewModelColumn(addressField: nameof(_directionAddr), displayOrder: 9, displayName: "Direction")]

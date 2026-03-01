@@ -21,8 +21,16 @@ namespace SF3.Win.Controls {
                 });
             }
 
-            nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => EditingObject.X = (int) nudX.Value);
-            nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => EditingObject.Z = (int) nudZ.Value);
+            nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
+                EditingObject.X = (int) nudX.Value;
+                nudXWorld.Value = (decimal) EditingObject.ActorX;
+            });
+
+            nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
+                EditingObject.Z = (int) nudZ.Value;
+                nudZWorld.Value = (decimal) EditingObject.ActorZ;
+            });
+
             cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => EditingObject.Facing = (SlotFacingType) cbDirection.SelectedValue);
         }
 
@@ -34,8 +42,11 @@ namespace SF3.Win.Controls {
 
             labelActorEdited.Text = "Actor (Battle): " + (EditingObject == null ? "(none)" : $"0x{EditingObject.ID:X2}");
 
+            InitNUD(nudXWorld, (decimal) EditingObject.ActorX);
+            InitNUD(nudZWorld, (decimal) EditingObject.ActorZ);
             InitNUD(nudX, EditingObject.X);
             InitNUD(nudZ, EditingObject.Z);
+
             cbDirection.Text = EditingObject.Facing.ToString();
         }
     }
