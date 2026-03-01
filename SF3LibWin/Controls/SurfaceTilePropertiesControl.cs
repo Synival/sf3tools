@@ -44,9 +44,6 @@ namespace SF3.Win.Controls {
             cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(() => EditingObject.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
             cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(() => SetIsFlat(cbModelTileIsFlat.Checked));
             cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(() => SetHasTree(cbModelHasTree.Checked));
-
-            // Update enabled status, visibility, and default values of controls.
-            UpdateControls();
         }
 
         protected override void PerformUpdateControls() {
@@ -56,45 +53,25 @@ namespace SF3.Win.Controls {
             }
 
             // 'Current Tile' group
-            if (EditingObject == null) {
-                labelTileEdited.Text = "No Tile Selected";
-                labelRealCoordinates.Text = "";
-            }
-            else {
-                labelTileEdited.Text = "Tile: (" + EditingObject.X + ", " + EditingObject.Y + ")\n";
+            labelTileEdited.Text = "Tile: (" + EditingObject.X + ", " + EditingObject.Y + ")\n";
 
-                var heightTerrainAddress = 0x060B6000 + (EditingObject.Y * 64 + EditingObject.X) * 2;
-                var eventIdAddress       = 0x060B8000 + (EditingObject.Y * 64 + EditingObject.X);
+            var heightTerrainAddress = 0x060B6000 + (EditingObject.Y * 64 + EditingObject.X) * 2;
+            var eventIdAddress       = 0x060B8000 + (EditingObject.Y * 64 + EditingObject.X);
 
-                labelRealCoordinates.Text =
-                    $"Center World Pos: (0x{(EditingObject.X * 32 + 16):X3}), 0x{(EditingObject.Y * 32 + 16):X3})\n" +
-                    "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
-                    "Event ID Address: 0x" + eventIdAddress.ToString("X8");
-            }
+            labelRealCoordinates.Text =
+                $"Center World Pos: (0x{(EditingObject.X * 32 + 16):X3}), 0x{(EditingObject.Y * 32 + 16):X3})\n" +
+                "Height/Terrain Address: 0x" + heightTerrainAddress.ToString("X8") + "\n" +
+                "Event ID Address: 0x" + eventIdAddress.ToString("X8");
 
             // 'Movement' group
-            gbMovement.Enabled = EditingObject != null;
-            if (!gbMovement.Enabled) {
-                cbMoveTerrain.SelectedItem = null;
-                nudMoveCenterHeight.Text = "";
-                cbMoveSlope.Checked = false;
-                foreach (var nud in _nudVertexHeights.Values)
-                    nud.Text = "";
-            }
-            else {
-                cbMoveTerrain.SelectedItem = EditingObject.TerrainType;
-                InitNUD(nudMoveCenterHeight, (decimal) EditingObject.CenterHeight);
-                cbMoveSlope.Checked = ((EditingObject.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
-                foreach (var nud in _nudVertexHeights)
-                    InitNUD(nud.Value, (decimal) EditingObject.GetVertexHeight(nud.Key));
-            }
+            cbMoveTerrain.SelectedItem = EditingObject.TerrainType;
+            InitNUD(nudMoveCenterHeight, (decimal) EditingObject.CenterHeight);
+            cbMoveSlope.Checked = ((EditingObject.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
+            foreach (var nud in _nudVertexHeights)
+                InitNUD(nud.Value, (decimal) EditingObject.GetVertexHeight(nud.Key));
 
             // 'Event' group
-            gbEvent.Enabled = EditingObject != null;
-            if (!gbEvent.Enabled)
-                nudEventID.Text = "";
-            else
-                InitNUD(nudEventID, EditingObject.EventID);
+            InitNUD(nudEventID, EditingObject.EventID);
 
             // 'Model' group
             gbModel.Enabled = EditingObject?.Surface?.HasModel == true;
