@@ -36,6 +36,8 @@ namespace SF3.Win.Controls {
             nudX = new DarkModeNumericUpDown();
             cbDirection = new DarkModeComboBox();
             labelDirection = new DarkModeLabel();
+            darkModeLabel3 = new DarkModeLabel();
+            labelX = new DarkModeLabel();
             gbOrientation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudZWorld).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudXWorld).BeginInit();
@@ -58,6 +60,8 @@ namespace SF3.Win.Controls {
             // 
             // gbOrientation
             // 
+            gbOrientation.Controls.Add(darkModeLabel3);
+            gbOrientation.Controls.Add(labelX);
             gbOrientation.Controls.Add(nudZWorld);
             gbOrientation.Controls.Add(nudXWorld);
             gbOrientation.Controls.Add(darkModeLabel1);
@@ -78,7 +82,7 @@ namespace SF3.Win.Controls {
             // 
             nudZWorld.Enabled = false;
             nudZWorld.Hexadecimal = true;
-            nudZWorld.Location = new System.Drawing.Point(136, 38);
+            nudZWorld.Location = new System.Drawing.Point(73, 67);
             nudZWorld.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
             nudZWorld.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
             nudZWorld.Name = "nudZWorld";
@@ -101,7 +105,7 @@ namespace SF3.Win.Controls {
             darkModeLabel1.AutoSize = true;
             darkModeLabel1.DisabledColor = System.Drawing.Color.Empty;
             darkModeLabel1.IsSeparator = false;
-            darkModeLabel1.Location = new System.Drawing.Point(28, 69);
+            darkModeLabel1.Location = new System.Drawing.Point(137, 20);
             darkModeLabel1.Name = "darkModeLabel1";
             darkModeLabel1.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             darkModeLabel1.Size = new System.Drawing.Size(40, 15);
@@ -113,7 +117,7 @@ namespace SF3.Win.Controls {
             labelPosWorld.AutoSize = true;
             labelPosWorld.DisabledColor = System.Drawing.Color.Empty;
             labelPosWorld.IsSeparator = false;
-            labelPosWorld.Location = new System.Drawing.Point(18, 40);
+            labelPosWorld.Location = new System.Drawing.Point(73, 20);
             labelPosWorld.Name = "labelPosWorld";
             labelPosWorld.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelPosWorld.Size = new System.Drawing.Size(50, 15);
@@ -142,7 +146,7 @@ namespace SF3.Win.Controls {
             // 
             // nudX
             // 
-            nudX.Location = new System.Drawing.Point(73, 67);
+            nudX.Location = new System.Drawing.Point(136, 38);
             nudX.Maximum = new decimal(new int[] { 63, 0, 0, 0 });
             nudX.Name = "nudX";
             nudX.Size = new System.Drawing.Size(58, 23);
@@ -171,6 +175,30 @@ namespace SF3.Win.Controls {
             labelDirection.Size = new System.Drawing.Size(58, 15);
             labelDirection.TabIndex = 3;
             labelDirection.Text = "Direction:";
+            // 
+            // darkModeLabel3
+            // 
+            darkModeLabel3.AutoSize = true;
+            darkModeLabel3.DisabledColor = System.Drawing.Color.Empty;
+            darkModeLabel3.IsSeparator = false;
+            darkModeLabel3.Location = new System.Drawing.Point(50, 69);
+            darkModeLabel3.Name = "darkModeLabel3";
+            darkModeLabel3.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            darkModeLabel3.Size = new System.Drawing.Size(17, 15);
+            darkModeLabel3.TabIndex = 24;
+            darkModeLabel3.Text = "Z:";
+            // 
+            // labelX
+            // 
+            labelX.AutoSize = true;
+            labelX.DisabledColor = System.Drawing.Color.Empty;
+            labelX.IsSeparator = false;
+            labelX.Location = new System.Drawing.Point(50, 40);
+            labelX.Name = "labelX";
+            labelX.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelX.Size = new System.Drawing.Size(17, 15);
+            labelX.TabIndex = 23;
+            labelX.Text = "X:";
             // 
             // ActorBattlePropertiesControl
             // 
@@ -204,5 +232,7 @@ namespace SF3.Win.Controls {
         private DarkModeLabel labelPosWorld;
         private DarkModeNumericUpDown nudZWorld;
         private DarkModeNumericUpDown nudXWorld;
+        private DarkModeLabel darkModeLabel3;
+        private DarkModeLabel labelX;
     }
 }
