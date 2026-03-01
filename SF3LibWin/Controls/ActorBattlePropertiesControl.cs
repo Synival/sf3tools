@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using SF3.Models.Structs.X1.Battle;
 using SF3.Types;
 
 namespace SF3.Win.Controls {
@@ -15,9 +14,16 @@ namespace SF3.Win.Controls {
             cbDirection.DataSource = Enum.GetValues<SlotFacingType>();
 
             // Event handling for 'Movement' group.
-            nudX.ValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.X = (int) nudX.Value);
-            nudX.ValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.Z = (int) nudY.Value);
-            cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => EditingObject.Facing = (SlotFacingType) cbDirection.SelectedValue);
+            void DoOnlyDirectlyAndInvalidate(Action action) {
+                DoOnlyDirectly(() => {
+                    action();
+                    Viewer?.GLControl?.InvalidateActors();
+                });
+            }
+
+            nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => EditingObject.X = (int) nudX.Value);
+            nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => EditingObject.Z = (int) nudZ.Value);
+            cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => EditingObject.Facing = (SlotFacingType) cbDirection.SelectedValue);
         }
 
         protected override void PerformUpdateControls() {
@@ -29,7 +35,7 @@ namespace SF3.Win.Controls {
             labelActorEdited.Text = "Actor (Battle): " + (EditingObject == null ? "(none)" : $"0x{EditingObject.ID:X2}");
 
             InitNUD(nudX, EditingObject.X);
-            InitNUD(nudY, EditingObject.Z);
+            InitNUD(nudZ, EditingObject.Z);
             cbDirection.Text = EditingObject.Facing.ToString();
         }
     }

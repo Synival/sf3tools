@@ -28,12 +28,12 @@ namespace SF3.Win.Controls {
             labelActorEdited = new DarkModeLabel();
             gbPosition = new DarkModeGroupBox();
             labelPosition = new DarkModeLabel();
-            nudY = new DarkModeNumericUpDown();
+            nudZ = new DarkModeNumericUpDown();
             nudX = new DarkModeNumericUpDown();
             cbDirection = new DarkModeComboBox();
             labelDirection = new DarkModeLabel();
             gbPosition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) nudY).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) nudZ).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudX).BeginInit();
             SuspendLayout();
             // 
@@ -53,7 +53,7 @@ namespace SF3.Win.Controls {
             // gbPosition
             // 
             gbPosition.Controls.Add(labelPosition);
-            gbPosition.Controls.Add(nudY);
+            gbPosition.Controls.Add(nudZ);
             gbPosition.Controls.Add(nudX);
             gbPosition.Controls.Add(cbDirection);
             gbPosition.Controls.Add(labelDirection);
@@ -76,13 +76,13 @@ namespace SF3.Win.Controls {
             labelPosition.TabIndex = 5;
             labelPosition.Text = "Position:";
             // 
-            // nudY
+            // nudZ
             // 
-            nudY.Location = new System.Drawing.Point(136, 23);
-            nudY.Maximum = new decimal(new int[] { 63, 0, 0, 0 });
-            nudY.Name = "nudY";
-            nudY.Size = new System.Drawing.Size(58, 23);
-            nudY.TabIndex = 4;
+            nudZ.Location = new System.Drawing.Point(136, 23);
+            nudZ.Maximum = new decimal(new int[] { 63, 0, 0, 0 });
+            nudZ.Name = "nudZ";
+            nudZ.Size = new System.Drawing.Size(58, 23);
+            nudZ.TabIndex = 4;
             // 
             // nudX
             // 
@@ -128,7 +128,7 @@ namespace SF3.Win.Controls {
             Size = new System.Drawing.Size(207, 119);
             gbPosition.ResumeLayout(false);
             gbPosition.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) nudY).EndInit();
+            ((System.ComponentModel.ISupportInitialize) nudZ).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudX).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -137,7 +137,7 @@ namespace SF3.Win.Controls {
         #endregion
         private DarkModeLabel labelActorEdited;
         private DarkModeGroupBox gbPosition;
-        private DarkModeNumericUpDown nudY;
+        private DarkModeNumericUpDown nudZ;
         private DarkModeNumericUpDown nudX;
         private DarkModeComboBox cbDirection;
         private DarkModeLabel labelDirection;

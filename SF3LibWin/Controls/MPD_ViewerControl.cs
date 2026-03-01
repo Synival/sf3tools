@@ -138,6 +138,7 @@ namespace SF3.Win.Controls {
             if (control == null) {
                 control = new TControl();
                 control.CmdKey += SideEditorCmdKeyHandler;
+                control.Viewer = this;
             }
             // Do nothing if we're already using that control.
             else if (_currentSideEditorControl == control) {

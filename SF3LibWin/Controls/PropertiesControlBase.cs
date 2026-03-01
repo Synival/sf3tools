@@ -85,6 +85,8 @@ namespace SF3.Win.Controls {
             }
         }
 
+        public MPD_ViewerControl Viewer { get; set; }
+
         private Dictionary<NumericUpDown, bool> _nudSelectAll = [];
 
         public event CmdKeyEventHandler CmdKey;
