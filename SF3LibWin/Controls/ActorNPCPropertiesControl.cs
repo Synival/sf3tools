@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using CommonLib.Utils;
 
 namespace SF3.Win.Controls {
@@ -58,11 +57,6 @@ namespace SF3.Win.Controls {
         }
 
         protected override void PerformUpdateControls() {
-            void InitNUD(NumericUpDown nud, decimal value) {
-                nud.Value = value;
-                nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
-            }
-
             // TODO: support multiple selection!
             var eo = EditingObjects[0];
 

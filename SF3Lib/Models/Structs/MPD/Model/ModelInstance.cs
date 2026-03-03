@@ -157,7 +157,11 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: 18.2f, minWidth: 100)]
         public override ModelDirectionType OnlyVisibleFromDirection {
             get => ((Flags & 0x10) == 0x10) ? (ModelDirectionType) (Flags & 0x07) : ModelDirectionType.Unset;
-            set => Flags = (ushort) ((Flags & 0x07) | (((((short) value) & 0x07) == (short) ModelDirectionType.Unset) ? 0 : (((ushort) value) & 0x07)));
+            set {
+                Flags = (value < 0x00 || (ushort) value > 0x07)
+                    ? (ushort) (Flags & ~0x17)
+                    : (ushort) (Flags | 0x10 | ((ushort) value & 0x07));
+            }
         }
 
         public override int LevelsOfDetail {

@@ -630,26 +630,26 @@ namespace SF3.Models.Structs.X1.Battle {
             get {
                 switch (Facing) {
                     case SlotFacingType.South:     return -180.0f;
-                    case SlotFacingType.SouthWest: return -135.0f;
+                    case SlotFacingType.Southwest: return -135.0f;
                     case SlotFacingType.West:      return  -90.0f;
-                    case SlotFacingType.NorthWest: return  -45.0f;
+                    case SlotFacingType.Northwest: return  -45.0f;
                     case SlotFacingType.North:     return    0.0f;
-                    case SlotFacingType.NorthEast: return   45.0f;
+                    case SlotFacingType.Northeast: return   45.0f;
                     case SlotFacingType.East:      return   90.0f;
-                    case SlotFacingType.SouthEast: return  135.0f;
+                    case SlotFacingType.Southeast: return  135.0f;
                     default:                       return    0.0f;
                 }
             }
             set {
                 value = MathHelpers.ActualMod(value + 180.0f, 360.0f) - 180.0f;
                      if (value < -157.5f) Facing = SlotFacingType.South;
-                else if (value < -112.5f) Facing = SlotFacingType.SouthWest;
+                else if (value < -112.5f) Facing = SlotFacingType.Southwest;
                 else if (value <  -67.5f) Facing = SlotFacingType.West;
-                else if (value <  -22.5f) Facing = SlotFacingType.NorthWest;
+                else if (value <  -22.5f) Facing = SlotFacingType.Northwest;
                 else if (value <   22.5f) Facing = SlotFacingType.North;
-                else if (value <   67.5f) Facing = SlotFacingType.NorthEast;
+                else if (value <   67.5f) Facing = SlotFacingType.Northeast;
                 else if (value <  112.5f) Facing = SlotFacingType.East;
-                else if (value <  157.5f) Facing = SlotFacingType.SouthEast;
+                else if (value <  157.5f) Facing = SlotFacingType.Southeast;
                 else                      Facing = SlotFacingType.South;
             }
         }
