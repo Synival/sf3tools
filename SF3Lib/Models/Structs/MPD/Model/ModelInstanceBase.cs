@@ -3,6 +3,7 @@ using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.MPD.Interfaces;
 using SF3.Types;
+using static CommonLib.Extensions.VECTOR_Extensions;
 
 namespace SF3.Models.Structs.MPD.Model {
     public abstract class ModelInstanceBase : Struct, IMPD_ModelInstance {
@@ -69,49 +70,70 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: nameof(_positionZAddress), displayOrder: 10)]
         public short PositionZ {
             get => (short) Data.GetWord(_positionZAddress);
-            set => Data.SetWord(_positionZAddress, value);
+            set {
+                Data.SetWord(_positionZAddress, value);
+                _boundingCube = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleXAddress), displayOrder: 11)]
         public float AngleX {
             get => Data.GetCompressedFIXED(_angleXAddress).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_angleXAddress, new CompressedFIXED(value / 180.0f, 0));
+            set {
+                Data.SetCompressedFIXED(_angleXAddress, new CompressedFIXED(value / 180.0f, 0));
+                _boundingCube = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleYAddress), displayOrder: 12)]
         public float AngleY {
             get => Data.GetCompressedFIXED(_angleYAddress).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_angleYAddress, new CompressedFIXED(value / 180.0f, 0));
+            set {
+                Data.SetCompressedFIXED(_angleYAddress, new CompressedFIXED(value / 180.0f, 0));
+                _boundingCube = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleZAddress), displayOrder: 13)]
         public float AngleZ {
             get => Data.GetCompressedFIXED(_angleZAddress).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_angleZAddress, new CompressedFIXED(value / 180.0f, 0));
+            set {
+                Data.SetCompressedFIXED(_angleZAddress, new CompressedFIXED(value / 180.0f, 0));
+                _boundingCube = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_scaleXAddress), displayOrder: 14)]
         public float ScaleX {
             get => Data.GetFIXED(_scaleXAddress).Float;
-            set => Data.SetFIXED(_scaleXAddress, new FIXED(value, 0));
+            set {
+                Data.SetFIXED(_scaleXAddress, new FIXED(value, 0));
+                _boundingCube = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_scaleYAddress), displayOrder: 15)]
         public float ScaleY {
             get => Data.GetFIXED(_scaleYAddress).Float;
-            set => Data.SetFIXED(_scaleYAddress, new FIXED(value, 0));
+            set {
+                Data.SetFIXED(_scaleYAddress, new FIXED(value, 0));
+                _boundingCube = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_scaleZAddress), displayOrder: 16)]
         public float ScaleZ {
             get => Data.GetFIXED(_scaleZAddress).Float;
-            set => Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
+            set {
+                Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
+                _boundingCube = null;
+            }
         }
 
         public abstract ushort Tag { get; set; }
@@ -120,5 +142,20 @@ namespace SF3.Models.Structs.MPD.Model {
         public abstract ModelDirectionType OnlyVisibleFromDirection { get; set; }
 
         public abstract int LevelsOfDetail { get; set; }
+
+        private BoundingCube? _boundingCube = null;
+        public BoundingCube BoundingCube {
+            get {
+                if (!_boundingCube.HasValue) {
+                    _boundingCube = GetModel(0).Vertices.AsArray()
+                        .CreateBoundingCube()
+                        .ToVECTORs()
+                        .Scale(ScaleX, ScaleY, ScaleZ)
+                        .RotateXYZ(AngleX, AngleY, AngleZ)
+                        .CreateBoundingCube();
+                }
+                return _boundingCube.Value;
+            }
+        }
     }
 }

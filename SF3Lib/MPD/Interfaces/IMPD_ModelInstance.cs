@@ -1,4 +1,5 @@
 ﻿using SF3.Types;
+using static CommonLib.Extensions.VECTOR_Extensions;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -34,5 +35,11 @@ namespace SF3.MPD.Interfaces {
         /// <param name="lod">Level of detail to fetch.</param>
         /// <returns>An existing IMPD_ModelLoD if found, otherwise 'null'.</returns>
         IMPD_ModelLoD GetModel(int lod);
+
+        /// <summary>
+        /// Bounding cube of this model in world space, taking scale and rotation into account.
+        /// Position is ignored; bounding cube is as if the model is placed at (0, 0, 0).
+        /// </summary>
+        BoundingCube BoundingCube { get; }
     }
 }

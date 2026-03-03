@@ -2,6 +2,7 @@
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
+using static CommonLib.Extensions.VECTOR_Extensions;
 
 namespace SF3.MPD.Project {
     public class MPD_ModelInstance : IMPD_ModelInstance {
@@ -61,12 +62,73 @@ namespace SF3.MPD.Project {
         public short PositionX { get; set; }
         public short PositionY { get; set; }
         public short PositionZ { get; set; }
-        public float AngleX { get; set; }
-        public float AngleY { get; set; }
-        public float AngleZ { get; set; }
-        public float ScaleX { get; set; }
-        public float ScaleY { get; set; }
-        public float ScaleZ { get; set; }
+
+        private float _angleX = 0;
+        public float AngleX {
+            get => _angleX;
+            set {
+                if (_angleX != value) {
+                    _angleX = value;
+                    _boundingCube = null;
+                }
+            }
+        }
+
+        private float _angleY = 0;
+        public float AngleY {
+            get => _angleY;
+            set {
+                if (_angleY != value) {
+                    _angleY = value;
+                    _boundingCube = null;
+                }
+            }
+        }
+
+        private float _angleZ = 0;
+        public float AngleZ {
+            get => _angleZ;
+            set {
+                if (_angleZ != value) {
+                    _angleZ = value;
+                    _boundingCube = null;
+                }
+            }
+        }
+
+        private float _scaleX = 0;
+        public float ScaleX {
+            get => _scaleX;
+            set {
+                if (_scaleX != value) {
+                    _scaleX = value;
+                    _boundingCube = null;
+                }
+            }
+        }
+
+        private float _scaleY = 0;
+        public float ScaleY {
+            get => _scaleY;
+            set {
+                if (_scaleY != value) {
+                    _scaleY = value;
+                    _boundingCube = null;
+                }
+            }
+        }
+
+        private float _scaleZ = 0;
+        public float ScaleZ {
+            get => _scaleZ;
+            set {
+                if (_scaleZ != value) {
+                    _scaleZ = value;
+                    _boundingCube = null;
+                }
+            }
+        }
+
         public ushort Tag { get; set; }
         public ushort Flags { get; set; }
 
@@ -81,5 +143,20 @@ namespace SF3.MPD.Project {
         }
 
         public int LevelsOfDetail { get; set; }
+
+        private BoundingCube? _boundingCube = null;
+        public BoundingCube BoundingCube {
+            get {
+                if (!_boundingCube.HasValue) {
+                    _boundingCube = GetModel(0).Vertices.AsArray()
+                        .CreateBoundingCube()
+                        .ToVECTORs()
+                        .Scale(ScaleX, ScaleY, ScaleZ)
+                        .RotateXYZ(AngleX, AngleY, AngleZ)
+                        .CreateBoundingCube();
+                }
+                return _boundingCube.Value;
+            }
+        }
     }
 }

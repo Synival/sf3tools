@@ -20,15 +20,14 @@ namespace SF3.Win.Controls {
 
             void UpdateYValues() {
                 // TODO: support multiple selection!
-                var eo      = EditingObjects[0];
-                var posY    = eo.PositionY;
-                var topY    = eo.GetTopY(0);
-                var bottomY = eo.GetBottomY(0);
+                var eo     = EditingObjects[0];
+                var posY   = eo.PositionY;
+                var bounds = eo.BoundingCube;
 
                 nudYWorld.Value = -posY;
                 nudY.Value      = (decimal) (-posY / 2.0f);
-                nudTop.Value    = (decimal) (-Math.Round(posY + topY) / 2.0f);
-                nudBottom.Value = (decimal) (-Math.Round(posY + bottomY) / 2.0f);
+                nudTop.Value    = (decimal) (-Math.Round(posY + bounds.LeftTopFront.Y.Float)    / 2.0f);
+                nudBottom.Value = (decimal) (-Math.Round(posY + bounds.RightBottomBack.Y.Float) / 2.0f);
             }
 
             nudXWorld.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
@@ -69,16 +68,14 @@ namespace SF3.Win.Controls {
             nudTop.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
                 // TODO: support multiple selection!
                 var eo = EditingObjects[0];
-                var topY = eo.GetTopY(0);
-                eo.PositionY = (short) -Math.Round((float) nudTop.Value * 2 + topY);
+                eo.PositionY = (short) -Math.Round((float) nudTop.Value * 2 + eo.BoundingCube.LeftTopFront.Y.Float);
                 UpdateYValues();
             });
 
             nudBottom.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
                 // TODO: support multiple selection!
                 var eo = EditingObjects[0];
-                var bottomY = eo.GetBottomY(0);
-                eo.PositionY = (short) -Math.Round((float) nudBottom.Value * 2 + bottomY);
+                eo.PositionY = (short) -Math.Round((float) nudBottom.Value * 2 + eo.BoundingCube.RightBottomBack.Y.Float);
                 UpdateYValues();
             });
 
@@ -98,6 +95,7 @@ namespace SF3.Win.Controls {
 
             // TODO: support multiple selection!
             var eo = EditingObjects[0];
+            var boundingCube = eo.BoundingCube;
 
             labelModelInstanceEdited.Text = "Model Instance: " + (eo == null ? "(none)" : $"0x{eo.ID:X3}");
 
@@ -106,8 +104,8 @@ namespace SF3.Win.Controls {
             InitNUD(nudZWorld, -eo.PositionZ);
             InitNUD(nudX,      (decimal) (-(eo.PositionX + 16) / 32.0f));
             InitNUD(nudY,      (decimal) (-eo.PositionY / 2.0f));
-            InitNUD(nudTop,    (decimal) (-Math.Round(eo.PositionY + eo.GetTopY(0)) / 2.0f));
-            InitNUD(nudBottom, (decimal) (-Math.Round(eo.PositionY + eo.GetBottomY(0)) / 2.0f));
+            InitNUD(nudTop,    (decimal) (-Math.Round(eo.PositionY + boundingCube.LeftTopFront.Y.Float)    / 2.0f));
+            InitNUD(nudBottom, (decimal) (-Math.Round(eo.PositionY + boundingCube.RightBottomBack.Y.Float) / 2.0f));
             InitNUD(nudZ,      (decimal) (-(eo.PositionZ + 16) / 32.0f));
         }
     }
