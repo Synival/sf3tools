@@ -51,6 +51,10 @@ namespace SF3.Win.Controls {
             nudTop = new DarkModeNumericUpDown();
             labelCoordInfo = new DarkModeLabel();
             gbBoundingBox = new DarkModeGroupBox();
+            nudSizeZ = new DarkModeNumericUpDown();
+            nudSizeY = new DarkModeNumericUpDown();
+            nudSizeX = new DarkModeNumericUpDown();
+            labelSize = new DarkModeLabel();
             labelWest = new DarkModeLabel();
             labelRight = new DarkModeLabel();
             labelSouth = new DarkModeLabel();
@@ -75,6 +79,9 @@ namespace SF3.Win.Controls {
             ((System.ComponentModel.ISupportInitialize) nudBottom).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudTop).BeginInit();
             gbBoundingBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) nudSizeZ).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) nudSizeY).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) nudSizeX).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudSouth).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudEast).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudWest).BeginInit();
@@ -126,7 +133,7 @@ namespace SF3.Win.Controls {
             nudScaleZ.DecimalPlaces = 1;
             nudScaleZ.Increment = new decimal(new int[] { 5, 0, 0, 0 });
             nudScaleZ.Location = new System.Drawing.Point(136, 185);
-            nudScaleZ.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            nudScaleZ.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudScaleZ.Name = "nudScaleZ";
             nudScaleZ.Size = new System.Drawing.Size(58, 23);
             nudScaleZ.TabIndex = 13;
@@ -306,8 +313,8 @@ namespace SF3.Win.Controls {
             nudY.DecimalPlaces = 1;
             nudY.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
             nudY.Location = new System.Drawing.Point(73, 86);
-            nudY.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
-            nudY.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
+            nudY.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
+            nudY.Minimum = new decimal(new int[] { 16384, 0, 0, int.MinValue });
             nudY.Name = "nudY";
             nudY.Size = new System.Drawing.Size(58, 23);
             nudY.TabIndex = 4;
@@ -340,8 +347,8 @@ namespace SF3.Win.Controls {
             nudBottom.DecimalPlaces = 2;
             nudBottom.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
             nudBottom.Location = new System.Drawing.Point(99, 99);
-            nudBottom.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
-            nudBottom.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
+            nudBottom.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
+            nudBottom.Minimum = new decimal(new int[] { 16384, 0, 0, int.MinValue });
             nudBottom.Name = "nudBottom";
             nudBottom.Size = new System.Drawing.Size(58, 23);
             nudBottom.TabIndex = 25;
@@ -363,8 +370,8 @@ namespace SF3.Win.Controls {
             nudTop.DecimalPlaces = 2;
             nudTop.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
             nudTop.Location = new System.Drawing.Point(102, 40);
-            nudTop.Maximum = new decimal(new int[] { 1024, 0, 0, 0 });
-            nudTop.Minimum = new decimal(new int[] { 1024, 0, 0, int.MinValue });
+            nudTop.Maximum = new decimal(new int[] { 16384, 0, 0, 0 });
+            nudTop.Minimum = new decimal(new int[] { 16384, 0, 0, int.MinValue });
             nudTop.Name = "nudTop";
             nudTop.Size = new System.Drawing.Size(58, 23);
             nudTop.TabIndex = 21;
@@ -374,7 +381,7 @@ namespace SF3.Win.Controls {
             labelCoordInfo.AutoSize = true;
             labelCoordInfo.DisabledColor = System.Drawing.Color.Empty;
             labelCoordInfo.IsSeparator = false;
-            labelCoordInfo.Location = new System.Drawing.Point(5, 441);
+            labelCoordInfo.Location = new System.Drawing.Point(5, 493);
             labelCoordInfo.Name = "labelCoordInfo";
             labelCoordInfo.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelCoordInfo.Size = new System.Drawing.Size(196, 30);
@@ -383,6 +390,10 @@ namespace SF3.Win.Controls {
             // 
             // gbBoundingBox
             // 
+            gbBoundingBox.Controls.Add(nudSizeZ);
+            gbBoundingBox.Controls.Add(nudSizeY);
+            gbBoundingBox.Controls.Add(nudSizeX);
+            gbBoundingBox.Controls.Add(labelSize);
             gbBoundingBox.Controls.Add(labelWest);
             gbBoundingBox.Controls.Add(labelRight);
             gbBoundingBox.Controls.Add(labelSouth);
@@ -397,10 +408,52 @@ namespace SF3.Win.Controls {
             gbBoundingBox.Controls.Add(labelBottom);
             gbBoundingBox.Location = new System.Drawing.Point(3, 289);
             gbBoundingBox.Name = "gbBoundingBox";
-            gbBoundingBox.Size = new System.Drawing.Size(200, 147);
+            gbBoundingBox.Size = new System.Drawing.Size(200, 198);
             gbBoundingBox.TabIndex = 7;
             gbBoundingBox.TabStop = false;
-            gbBoundingBox.Text = "Bounding Box Positions (grid**):";
+            gbBoundingBox.Text = "Bounding Box (grid**):";
+            // 
+            // nudSizeZ
+            // 
+            nudSizeZ.DecimalPlaces = 2;
+            nudSizeZ.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            nudSizeZ.Location = new System.Drawing.Point(136, 168);
+            nudSizeZ.Maximum = new decimal(new int[] { 2048, 0, 0, 0 });
+            nudSizeZ.Name = "nudSizeZ";
+            nudSizeZ.Size = new System.Drawing.Size(58, 23);
+            nudSizeZ.TabIndex = 32;
+            // 
+            // nudSizeY
+            // 
+            nudSizeY.DecimalPlaces = 1;
+            nudSizeY.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            nudSizeY.Location = new System.Drawing.Point(73, 168);
+            nudSizeY.Maximum = new decimal(new int[] { 32768, 0, 0, 0 });
+            nudSizeY.Name = "nudSizeY";
+            nudSizeY.Size = new System.Drawing.Size(58, 23);
+            nudSizeY.TabIndex = 31;
+            // 
+            // nudSizeX
+            // 
+            nudSizeX.DecimalPlaces = 2;
+            nudSizeX.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
+            nudSizeX.Location = new System.Drawing.Point(9, 168);
+            nudSizeX.Maximum = new decimal(new int[] { 2048, 0, 0, 0 });
+            nudSizeX.Name = "nudSizeX";
+            nudSizeX.Size = new System.Drawing.Size(58, 23);
+            nudSizeX.TabIndex = 30;
+            // 
+            // labelSize
+            // 
+            labelSize.AutoSize = true;
+            labelSize.DisabledColor = System.Drawing.Color.Empty;
+            labelSize.IsSeparator = false;
+            labelSize.Location = new System.Drawing.Point(6, 150);
+            labelSize.Name = "labelSize";
+            labelSize.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelSize.Size = new System.Drawing.Size(30, 15);
+            labelSize.TabIndex = 34;
+            labelSize.Text = "Size:";
             // 
             // labelWest
             // 
@@ -505,7 +558,7 @@ namespace SF3.Win.Controls {
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 50);
             Name = "ModelInstancePropertiesControl";
-            Size = new System.Drawing.Size(207, 476);
+            Size = new System.Drawing.Size(207, 528);
             gbOrientation.ResumeLayout(false);
             gbOrientation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudScaleZ).EndInit();
@@ -524,6 +577,9 @@ namespace SF3.Win.Controls {
             ((System.ComponentModel.ISupportInitialize) nudTop).EndInit();
             gbBoundingBox.ResumeLayout(false);
             gbBoundingBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) nudSizeZ).EndInit();
+            ((System.ComponentModel.ISupportInitialize) nudSizeY).EndInit();
+            ((System.ComponentModel.ISupportInitialize) nudSizeX).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudSouth).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudEast).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudWest).EndInit();
@@ -567,5 +623,9 @@ namespace SF3.Win.Controls {
         private DarkModeNumericUpDown nudEast;
         private DarkModeNumericUpDown nudWest;
         private DarkModeNumericUpDown nudNorth;
+        private DarkModeLabel labelSize;
+        private DarkModeNumericUpDown nudSizeZ;
+        private DarkModeNumericUpDown nudSizeY;
+        private DarkModeNumericUpDown nudSizeX;
     }
 }

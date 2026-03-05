@@ -156,7 +156,40 @@ namespace SF3.Win.Controls {
                 eo.PositionZ = (short) -Math.Round((float) nudNorth.Value * 32 + eo.BoundingBox.LeftTopFront.Z.Float);
                 UpdateCoordinateValues(eo);
             });
+
+            // ---------------------------------------
+            // Bounding box size
+            // ---------------------------------------
+
+            void TransformSize(TransformSizeDelegate transformer) {
+                DoOnlyDirectlyAndInvalidate(eo => {
+                    var bounds = eo.BoundingBox;
+                    transformer(ref bounds);
+
+                    var updatedModelBounds = bounds.ToVECTORs().UnrotateXYZ(eo.AngleX, eo.AngleY, eo.AngleZ).CreateBoundingBox();
+                    var originalModelBounds = eo.GetModel(0).Vertices.AsArray().CreateBoundingBox();
+
+                    if (originalModelBounds.Width > 0.01f)
+                        eo.ScaleX = Math.Max(0.01f, updatedModelBounds.Width  / originalModelBounds.Width);
+                    if (originalModelBounds.Height > 0.01f)
+                        eo.ScaleY = Math.Max(0.01f, updatedModelBounds.Height / originalModelBounds.Height);
+                    if (originalModelBounds.Depth > 0.01f)
+                        eo.ScaleZ = Math.Max(0.01f, updatedModelBounds.Depth  / originalModelBounds.Depth);
+
+                    UpdateCoordinateValues(eo);
+                });
+            };
+
+            void TransformSizeX(ref BoundingBox bounds) => bounds.Width  = (float) nudSizeX.Value * 32.0f;
+            void TransformSizeY(ref BoundingBox bounds) => bounds.Height = (float) nudSizeY.Value *  2.0f;
+            void TransformSizeZ(ref BoundingBox bounds) => bounds.Depth  = (float) nudSizeZ.Value * 32.0f;
+
+            nudSizeX.ValueChanged += (s, e) => TransformSize(TransformSizeX);
+            nudSizeY.ValueChanged += (s, e) => TransformSize(TransformSizeY);
+            nudSizeZ.ValueChanged += (s, e) => TransformSize(TransformSizeZ);
         }
+
+        private delegate void TransformSizeDelegate(ref BoundingBox bounds);
 
         private void UpdateCoordinateValues(IMPD_ModelInstance eo) {
             var posX = eo.PositionX;
@@ -188,6 +221,10 @@ namespace SF3.Win.Controls {
             nudBottom.Value = (decimal) (-(posY + bounds.RightBottomBack.Y.Float) /  2.0f);
             nudSouth.Value  = (decimal) (-(posZ + bounds.RightBottomBack.Z.Float) / 32.0f);
             nudNorth.Value  = (decimal) (-(posZ + bounds.LeftTopFront.Z.Float)    / 32.0f);
+
+            nudSizeX.Value = (decimal) (bounds.Width  / 32.0f);
+            nudSizeY.Value = (decimal) (bounds.Height /  2.0f);
+            nudSizeZ.Value = (decimal) (bounds.Depth  / 32.0f);
         }
 
         protected override void PerformUpdateControls() {
@@ -205,9 +242,7 @@ namespace SF3.Win.Controls {
         private string OnlyVisibleFromToString(ModelDirectionType dir)
             => (dir == ModelDirectionType.Unset) ? "(Any Direction)" : dir.ToString();
 
-        private ModelDirectionType? StringToOnlyVisibleFrom(string str) {
-            return (str == "(Any Direction)") ? ModelDirectionType.Unset
-                : (ModelDirectionType?) Enum.Parse<ModelDirectionType>(str);
-        }
+        private ModelDirectionType? StringToOnlyVisibleFrom(string str) 
+            => (str == "(Any Direction)") ? ModelDirectionType.Unset : Enum.Parse<ModelDirectionType>(str);
     }
 }

@@ -19,6 +19,33 @@ namespace CommonLib.Extensions {
 
             public VECTOR LeftTopFront;
             public VECTOR RightBottomBack;
+
+            public float Width {
+                get => RightBottomBack.X.Float - LeftTopFront.X.Float;
+                set {
+                    var percent = value / Width;
+                    RightBottomBack.X.Float *= percent;
+                    LeftTopFront.X.Float    *= percent;
+                }
+            }
+
+            public float Height {
+                get => RightBottomBack.Y.Float - LeftTopFront.Y.Float;
+                set {
+                    var percent = value / Height;
+                    RightBottomBack.Y.Float *= percent;
+                    LeftTopFront.Y.Float    *= percent;
+                }
+            }
+
+            public float Depth {
+                get => RightBottomBack.Z.Float - LeftTopFront.Z.Float;
+                set {
+                    var percent = value / Depth;
+                    RightBottomBack.Z.Float *= percent;
+                    LeftTopFront.Z.Float    *= percent;
+                }
+            }
         }
 
         public static BoundingBox CreateBoundingBox(this VECTOR[] vectors) {
@@ -47,6 +74,14 @@ namespace CommonLib.Extensions {
                 .RotateX(rotateXInDegrees)
                 .RotateY(rotateYInDegrees)
                 .RotateZ(rotateZInDegrees);
+        }
+
+        public static VECTOR[] UnrotateXYZ(this VECTOR[] vectors, float rotateXInDegrees, float rotateYInDegrees, float rotateZInDegrees) {
+            // Opposite rotations to RotateXYZ().
+            return vectors
+                .RotateZ(-rotateZInDegrees)
+                .RotateY(-rotateYInDegrees)
+                .RotateX(-rotateXInDegrees);
         }
 
         public static VECTOR[] RotateX(this VECTOR[] vectors, float rotateXInDegrees) {
