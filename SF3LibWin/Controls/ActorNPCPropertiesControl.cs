@@ -53,12 +53,12 @@ namespace SF3.Win.Controls {
 
             labelActorEdited.Text = "Actor (NPC): " + (eo == null ? "(none)" : $"0x{eo.ID:X2}");
 
-            InitNUD(nudXWorld, (decimal) eo.ActorX);
-            InitNUD(nudZWorld, (decimal) eo.ActorZ);
-            InitNUD(nudX, (decimal) (eo.ActorX / 32.0f));
-            InitNUD(nudZ, (decimal) (eo.ActorZ / 32.0f));
+            SetNudValueAndText(nudXWorld, (decimal) eo.ActorX);
+            SetNudValueAndText(nudZWorld, (decimal) eo.ActorZ);
+            SetNudValueAndText(nudX, (decimal) (eo.ActorX / 32.0f));
+            SetNudValueAndText(nudZ, (decimal) (eo.ActorZ / 32.0f));
 
-            InitNUD(nudDirection, (decimal) eo.ActorDirection);
+            SetNudValueAndText(nudDirection, (decimal) eo.ActorDirection);
         }
     }
 }

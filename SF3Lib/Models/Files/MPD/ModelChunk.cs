@@ -283,9 +283,16 @@ namespace SF3.Models.Files.MPD {
 
         private void UpdateModelInstanceIDs() {
             var instances = _mpdModelInstances;
+
+            Dictionary<(int ModelID, int LoD), uint> pdataAddressesByID;
+            pdataAddressesByID = PDatasByMemoryAddress
+                .ToDictionary(x => (ModelID: x.Value.ModelID, LoD: x.Value.LevelOfDetail), x => x.Key);
+
             foreach (var inst in instances) {
                 var fileInst = (ModelInstanceBase) inst;
+                fileInst.ModelIDToPDataMap = null;
                 inst.ModelID = PDatasByMemoryAddress.TryGetValue(fileInst.PData0, out var pdata) ? pdata.ModelID : -1;
+                fileInst.ModelIDToPDataMap = pdataAddressesByID;
             }
         }
 

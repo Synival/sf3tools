@@ -70,13 +70,13 @@ namespace SF3.Win.Controls {
 
             // 'Movement' group
             cbMoveTerrain.SelectedItem = eo.TerrainType;
-            InitNUD(nudMoveCenterHeight, (decimal) eo.CenterHeight);
+            SetNudValueAndText(nudMoveCenterHeight, (decimal) eo.CenterHeight);
             cbMoveSlope.Checked = ((eo.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
             foreach (var nud in _nudVertexHeights)
-                InitNUD(nud.Value, (decimal) eo.GetVertexHeight(nud.Key));
+                SetNudValueAndText(nud.Value, (decimal) eo.GetVertexHeight(nud.Key));
 
             // 'Event' group
-            InitNUD(nudEventID, eo.EventID);
+            SetNudValueAndText(nudEventID, eo.EventID);
 
             // 'Model' group
             gbModel.Enabled = eo?.Surface?.HasModel == true;
@@ -97,7 +97,7 @@ namespace SF3.Win.Controls {
             else {
                 var fileTile = eo as SurfaceTile;
 
-                InitNUD(nudModelTextureID, eo.TextureID);
+                SetNudValueAndText(nudModelTextureID, eo.TextureID);
                 cbModelHasTree.Checked = fileTile?.TreeModelID != null;
                 cbModelHasTree.Enabled = true;
 

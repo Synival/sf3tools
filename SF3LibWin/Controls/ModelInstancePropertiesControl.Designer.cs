@@ -63,6 +63,9 @@ namespace SF3.Win.Controls {
             nudEast = new DarkModeNumericUpDown();
             nudWest = new DarkModeNumericUpDown();
             nudNorth = new DarkModeNumericUpDown();
+            dbModel = new DarkModeGroupBox();
+            labelModelID = new DarkModeLabel();
+            nudModelID = new DarkModeNumericUpDown();
             gbOrientation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudScaleZ).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudScaleY).BeginInit();
@@ -86,6 +89,8 @@ namespace SF3.Win.Controls {
             ((System.ComponentModel.ISupportInitialize) nudEast).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudWest).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudNorth).BeginInit();
+            dbModel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) nudModelID).BeginInit();
             SuspendLayout();
             // 
             // labelModelInstanceEdited
@@ -381,7 +386,7 @@ namespace SF3.Win.Controls {
             labelCoordInfo.AutoSize = true;
             labelCoordInfo.DisabledColor = System.Drawing.Color.Empty;
             labelCoordInfo.IsSeparator = false;
-            labelCoordInfo.Location = new System.Drawing.Point(5, 493);
+            labelCoordInfo.Location = new System.Drawing.Point(5, 491);
             labelCoordInfo.Name = "labelCoordInfo";
             labelCoordInfo.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelCoordInfo.Size = new System.Drawing.Size(196, 30);
@@ -547,10 +552,43 @@ namespace SF3.Win.Controls {
             nudNorth.Size = new System.Drawing.Size(58, 23);
             nudNorth.TabIndex = 20;
             // 
+            // dbModel
+            // 
+            dbModel.Controls.Add(nudModelID);
+            dbModel.Controls.Add(labelModelID);
+            dbModel.Location = new System.Drawing.Point(3, 531);
+            dbModel.Name = "dbModel";
+            dbModel.Size = new System.Drawing.Size(200, 47);
+            dbModel.TabIndex = 22;
+            dbModel.TabStop = false;
+            dbModel.Text = "Model";
+            // 
+            // labelModelID
+            // 
+            labelModelID.AutoSize = true;
+            labelModelID.DisabledColor = System.Drawing.Color.Empty;
+            labelModelID.IsSeparator = false;
+            labelModelID.Location = new System.Drawing.Point(6, 20);
+            labelModelID.Name = "labelModelID";
+            labelModelID.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelModelID.Size = new System.Drawing.Size(58, 15);
+            labelModelID.TabIndex = 13;
+            labelModelID.Text = "Model ID:";
+            // 
+            // nudModelID
+            // 
+            nudModelID.Hexadecimal = true;
+            nudModelID.Location = new System.Drawing.Point(71, 18);
+            nudModelID.Maximum = new decimal(new int[] { 65536, 0, 0, 0 });
+            nudModelID.Name = "nudModelID";
+            nudModelID.Size = new System.Drawing.Size(58, 23);
+            nudModelID.TabIndex = 40;
+            // 
             // ModelInstancePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(dbModel);
             Controls.Add(gbBoundingBox);
             Controls.Add(gbOrientation);
             Controls.Add(labelModelInstanceEdited);
@@ -558,7 +596,7 @@ namespace SF3.Win.Controls {
             MaximumSize = new System.Drawing.Size(207, 10000);
             MinimumSize = new System.Drawing.Size(207, 50);
             Name = "ModelInstancePropertiesControl";
-            Size = new System.Drawing.Size(207, 528);
+            Size = new System.Drawing.Size(207, 581);
             gbOrientation.ResumeLayout(false);
             gbOrientation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudScaleZ).EndInit();
@@ -584,6 +622,9 @@ namespace SF3.Win.Controls {
             ((System.ComponentModel.ISupportInitialize) nudEast).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudWest).EndInit();
             ((System.ComponentModel.ISupportInitialize) nudNorth).EndInit();
+            dbModel.ResumeLayout(false);
+            dbModel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize) nudModelID).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -627,5 +668,8 @@ namespace SF3.Win.Controls {
         private DarkModeNumericUpDown nudSizeZ;
         private DarkModeNumericUpDown nudSizeY;
         private DarkModeNumericUpDown nudSizeX;
+        private DarkModeGroupBox dbModel;
+        private DarkModeNumericUpDown nudModelID;
+        private DarkModeLabel labelModelID;
     }
 }

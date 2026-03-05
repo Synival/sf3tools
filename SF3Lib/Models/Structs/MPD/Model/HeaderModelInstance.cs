@@ -29,5 +29,11 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public override int LevelsOfDetail { get => 1; set {} }
+
+        protected override void UpdatePDatas() {
+            if (ModelIDToPDataMap == null)
+                return;
+            PData0 = ModelIDToPDataMap.TryGetValue((ModelID, 0), out var addr) ? addr : 0;
+        }
     }
 }

@@ -86,7 +86,7 @@ namespace SF3.Win.Controls {
             }
         }
 
-        protected void InitNUD(NumericUpDown nud, decimal value) {
+        protected void SetNudValueAndText(NumericUpDown nud, decimal value) {
             nud.Value = value;
             nud.Text = (nud.Hexadecimal) ? ((int) value).ToString("X") : value.ToString();
         }

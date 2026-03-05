@@ -42,10 +42,10 @@ namespace SF3.Win.Controls {
 
             labelActorEdited.Text = "Actor (Battle): " + (eo == null ? "(none)" : $"0x{eo.ID:X2}");
 
-            InitNUD(nudXWorld, (decimal) eo.ActorX);
-            InitNUD(nudZWorld, (decimal) eo.ActorZ);
-            InitNUD(nudX, eo.X);
-            InitNUD(nudZ, eo.Z);
+            SetNudValueAndText(nudXWorld, (decimal) eo.ActorX);
+            SetNudValueAndText(nudZWorld, (decimal) eo.ActorZ);
+            SetNudValueAndText(nudX, eo.X);
+            SetNudValueAndText(nudZ, eo.Z);
 
             cbDirection.Text = eo.Facing.ToString();
         }

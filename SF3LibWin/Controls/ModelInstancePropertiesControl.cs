@@ -187,6 +187,28 @@ namespace SF3.Win.Controls {
             nudSizeX.ValueChanged += (s, e) => TransformSize(TransformSizeX);
             nudSizeY.ValueChanged += (s, e) => TransformSize(TransformSizeY);
             nudSizeZ.ValueChanged += (s, e) => TransformSize(TransformSizeZ);
+
+            // ---------------------------------------
+            // Model ID
+            // ---------------------------------------
+
+            nudModelID.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
+                // Try to set the model to a valid one. If this doesn't work, set it back to the original value.
+                IMPD_ModelLoD model = null;
+                try {
+                    eo.ModelID = (int) nudModelID.Value;
+                    model = eo.GetModel(0);
+                }
+                catch {
+                    model = null;
+                }
+                if (model == null) {
+                    SetNudValueAndText(nudModelID, eo.ModelID);
+                    return;
+                }
+
+                UpdateCoordinateValues(eo);
+            });
         }
 
         private delegate void TransformSizeDelegate(ref BoundingBox bounds);
@@ -237,6 +259,8 @@ namespace SF3.Win.Controls {
             cbVisibleFrom.Text = dirStr;
 
             UpdateCoordinateValues(eo);
+
+            SetNudValueAndText(nudModelID, eo.ModelID);
         }
 
         private string OnlyVisibleFromToString(ModelDirectionType dir)

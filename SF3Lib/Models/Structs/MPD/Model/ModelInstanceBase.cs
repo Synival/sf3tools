@@ -1,4 +1,5 @@
-﻿using CommonLib.Attributes;
+﻿using System.Collections.Generic;
+using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.MPD.Interfaces;
@@ -43,7 +44,14 @@ namespace SF3.Models.Structs.MPD.Model {
         public MPD_CollectionType CollectionType => Collection.Collection;
 
         // (Updated elsewhere)
-        public int ModelID { get; set; } = -1;
+        private int _modelId = -1;
+        public int ModelID {
+            get => _modelId;
+            set {
+                _modelId = value;
+                UpdatePDatas();
+            }
+        }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata0Address), displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]
@@ -157,5 +165,8 @@ namespace SF3.Models.Structs.MPD.Model {
                 return _boundingBox.Value;
             }
         }
+
+        protected abstract void UpdatePDatas();
+        public Dictionary<(int ModelID, int LoD), uint> ModelIDToPDataMap { get; set; }
     }
 }

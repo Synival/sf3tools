@@ -168,5 +168,12 @@ namespace SF3.Models.Structs.MPD.Model {
             get => PDatas.FirstOrDefault(x => x.Value == 0)?.Index ?? 8;
             set {}
         }
+
+        protected override void UpdatePDatas() {
+            if (ModelIDToPDataMap == null)
+                return;
+            for (int i = 0; i < 8; i++)
+                PDatas[i] = ModelIDToPDataMap.TryGetValue((ModelID, i), out var addr) ? addr : 0;
+        }
     }
 }
