@@ -1,4 +1,5 @@
 ﻿using System;
+using SF3.Models.Structs.X1.Battle;
 using SF3.Types;
 
 namespace SF3.Win.Controls {
@@ -13,32 +14,26 @@ namespace SF3.Win.Controls {
             cbDirection.DataSource = Enum.GetValues<SlotFacingType>();
 
             // Event handling for 'Movement' group.
-            void DoOnlyDirectlyAndInvalidate(Action action) {
+            void DoOnlyDirectlyAndInvalidate(Action<Slot> action) {
                 DoOnlyDirectly(() => {
-                    action();
+                    // TODO: support multiple selection!
+                    var eo = EditingObjects[0];
+                    action(eo);
                     Viewer?.GLControl?.InvalidateActors();
                 });
             }
 
-            nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
+            nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
                 eo.X = (int) nudX.Value;
                 nudXWorld.Value = (decimal) eo.ActorX;
             });
 
-            nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
+            nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
                 eo.Z = (int) nudZ.Value;
                 nudZWorld.Value = (decimal) eo.ActorZ;
             });
 
-            cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.Facing = (SlotFacingType) cbDirection.SelectedValue;
-            });
+            cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => eo.Facing = (SlotFacingType) cbDirection.SelectedValue);
         }
 
         protected override void PerformUpdateControls() {

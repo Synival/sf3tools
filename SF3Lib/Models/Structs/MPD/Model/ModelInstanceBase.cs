@@ -72,7 +72,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => (short) Data.GetWord(_positionZAddress);
             set {
                 Data.SetWord(_positionZAddress, value);
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -82,7 +82,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetCompressedFIXED(_angleXAddress).Float * 180.0f;
             set {
                 Data.SetCompressedFIXED(_angleXAddress, new CompressedFIXED(value / 180.0f, 0));
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -92,7 +92,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetCompressedFIXED(_angleYAddress).Float * 180.0f;
             set {
                 Data.SetCompressedFIXED(_angleYAddress, new CompressedFIXED(value / 180.0f, 0));
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -102,7 +102,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetCompressedFIXED(_angleZAddress).Float * 180.0f;
             set {
                 Data.SetCompressedFIXED(_angleZAddress, new CompressedFIXED(value / 180.0f, 0));
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -112,7 +112,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetFIXED(_scaleXAddress).Float;
             set {
                 Data.SetFIXED(_scaleXAddress, new FIXED(value, 0));
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -122,7 +122,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetFIXED(_scaleYAddress).Float;
             set {
                 Data.SetFIXED(_scaleYAddress, new FIXED(value, 0));
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -132,7 +132,7 @@ namespace SF3.Models.Structs.MPD.Model {
             get => Data.GetFIXED(_scaleZAddress).Float;
             set {
                 Data.SetFIXED(_scaleZAddress, new FIXED(value, 0));
-                _boundingCube = null;
+                _boundingBox = null;
             }
         }
 
@@ -143,18 +143,18 @@ namespace SF3.Models.Structs.MPD.Model {
 
         public abstract int LevelsOfDetail { get; set; }
 
-        private BoundingCube? _boundingCube = null;
-        public BoundingCube BoundingCube {
+        private BoundingBox? _boundingBox = null;
+        public BoundingBox BoundingBox {
             get {
-                if (!_boundingCube.HasValue) {
-                    _boundingCube = GetModel(0).Vertices.AsArray()
-                        .CreateBoundingCube()
+                if (!_boundingBox.HasValue) {
+                    _boundingBox = GetModel(0).Vertices.AsArray()
+                        .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)
                         .RotateXYZ(AngleX, AngleY, AngleZ)
-                        .CreateBoundingCube();
+                        .CreateBoundingBox();
                 }
-                return _boundingCube.Value;
+                return _boundingBox.Value;
             }
         }
     }

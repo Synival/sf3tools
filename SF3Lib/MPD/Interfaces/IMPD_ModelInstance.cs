@@ -37,9 +37,9 @@ namespace SF3.MPD.Interfaces {
         IMPD_ModelLoD GetModel(int lod);
 
         /// <summary>
-        /// Bounding cube of this model in world space, taking scale and rotation into account.
-        /// Position is ignored; bounding cube is as if the model is placed at (0, 0, 0).
+        /// Bounding box of this model in world space, taking scale and rotation into account.
+        /// Position is ignored; bounding box is as if the model is placed at (0, 0, 0).
         /// </summary>
-        BoundingCube BoundingCube { get; }
+        BoundingBox BoundingBox { get; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Types;
 using SF3.Models.Files.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
 
@@ -27,53 +28,29 @@ namespace SF3.Win.Controls {
             cbModelRotate.DataSource = Enum.GetValues<TextureRotateType>();
             cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
 
+            void DoOnlyDirectly(Action<IMPD_SurfaceTile> action) {
+                // TODO: support multiple selection!
+                var eo = EditingObjects[0];
+                this.DoOnlyDirectly(() => action(eo));
+            }
+
             // Event handling for 'Movement' group.
-            cbMoveTerrain.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue;
-            });
-            nudMoveCenterHeight.ValueChanged += (s, e) => DoOnlyDirectly(() => {
-                SetCenterHeight((byte) nudMoveCenterHeight.Value);
-            });
-            cbMoveSlope.CheckedChanged += (s, e) => DoOnlyDirectly(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.TerrainFlags ^= TerrainFlags.SteepSlope;
-            });
+            cbMoveTerrain.SelectedValueChanged += (s, e) => DoOnlyDirectly(eo => eo.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
+            nudMoveCenterHeight.ValueChanged   += (s, e) => DoOnlyDirectly(eo => SetCenterHeight((byte) nudMoveCenterHeight.Value));
+            cbMoveSlope.CheckedChanged         += (s, e) => DoOnlyDirectly(eo => eo.TerrainFlags ^= TerrainFlags.SteepSlope);
 
             foreach (var nud in _nudVertexHeights)
-                nud.Value.ValueChanged += (s, e) => DoOnlyDirectly(() => SetVertexHeight(nud.Key, (byte) nud.Value.Value));
+                nud.Value.ValueChanged += (s, e) => DoOnlyDirectly(eo => SetVertexHeight(nud.Key, (byte) nud.Value.Value));
 
             // Event handling for 'Event' group.
-            nudEventID.ValueChanged += (s, e) => DoOnlyDirectly(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.EventID = (byte) nudEventID.Value;
-            });
+            nudEventID.ValueChanged            += (s, e) => DoOnlyDirectly(eo => eo.EventID = (byte) nudEventID.Value);
 
             // Event handling for 'Model' group.
-            nudModelTextureID.ValueChanged     += (s, e) => DoOnlyDirectly(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.TextureID = (byte) nudModelTextureID.Value;
-            });
-            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue;
-            });
-            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(() => {
-                // TODO: support multiple selection!
-                var eo = EditingObjects[0];
-                eo.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue;
-            });
-            cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(() => {
-                SetIsFlat(cbModelTileIsFlat.Checked);
-            });
-            cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(() => {
-                SetHasTree(cbModelHasTree.Checked);
-            });
+            nudModelTextureID.ValueChanged     += (s, e) => DoOnlyDirectly(eo => eo.TextureID = (byte) nudModelTextureID.Value);
+            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(eo => eo.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
+            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(eo => eo.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
+            cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(eo => SetIsFlat(cbModelTileIsFlat.Checked));
+            cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(eo => SetHasTree(cbModelHasTree.Checked));
         }
 
         protected override void PerformUpdateControls() {

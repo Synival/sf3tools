@@ -69,7 +69,7 @@ namespace SF3.MPD.Project {
             set {
                 if (_angleX != value) {
                     _angleX = value;
-                    _boundingCube = null;
+                    _boundingBox = null;
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace SF3.MPD.Project {
             set {
                 if (_angleY != value) {
                     _angleY = value;
-                    _boundingCube = null;
+                    _boundingBox = null;
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace SF3.MPD.Project {
             set {
                 if (_angleZ != value) {
                     _angleZ = value;
-                    _boundingCube = null;
+                    _boundingBox = null;
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace SF3.MPD.Project {
             set {
                 if (_scaleX != value) {
                     _scaleX = value;
-                    _boundingCube = null;
+                    _boundingBox = null;
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace SF3.MPD.Project {
             set {
                 if (_scaleY != value) {
                     _scaleY = value;
-                    _boundingCube = null;
+                    _boundingBox = null;
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace SF3.MPD.Project {
             set {
                 if (_scaleZ != value) {
                     _scaleZ = value;
-                    _boundingCube = null;
+                    _boundingBox = null;
                 }
             }
         }
@@ -148,18 +148,18 @@ namespace SF3.MPD.Project {
 
         public int LevelsOfDetail { get; set; }
 
-        private BoundingCube? _boundingCube = null;
-        public BoundingCube BoundingCube {
+        private BoundingBox? _boundingBox = null;
+        public BoundingBox BoundingBox {
             get {
-                if (!_boundingCube.HasValue) {
-                    _boundingCube = GetModel(0).Vertices.AsArray()
-                        .CreateBoundingCube()
+                if (!_boundingBox.HasValue) {
+                    _boundingBox = GetModel(0).Vertices.AsArray()
+                        .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)
                         .RotateXYZ(AngleX, AngleY, AngleZ)
-                        .CreateBoundingCube();
+                        .CreateBoundingBox();
                 }
-                return _boundingCube.Value;
+                return _boundingBox.Value;
             }
         }
     }

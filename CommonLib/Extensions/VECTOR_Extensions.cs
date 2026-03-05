@@ -3,7 +3,7 @@ using CommonLib.SGL;
 
 namespace CommonLib.Extensions {
     public static class VECTOR_Extensions {
-        public struct BoundingCube {
+        public struct BoundingBox {
             public VECTOR[] ToVECTORs() {
                 return new VECTOR[] {
                     new VECTOR(LeftTopFront.X,    LeftTopFront.Y,    LeftTopFront.Z),
@@ -21,9 +21,9 @@ namespace CommonLib.Extensions {
             public VECTOR RightBottomBack;
         }
 
-        public static BoundingCube CreateBoundingCube(this VECTOR[] vectors) {
+        public static BoundingBox CreateBoundingBox(this VECTOR[] vectors) {
             if (vectors == null || vectors.Length == 0)
-                return new BoundingCube { LeftTopFront = new VECTOR(), RightBottomBack = new VECTOR()};
+                return new BoundingBox { LeftTopFront = new VECTOR(), RightBottomBack = new VECTOR()};
 
             var leftTopFront    = new VECTOR(vectors[0].X, vectors[0].Y, vectors[0].Z);
             var rightBottomBack = leftTopFront;
@@ -38,7 +38,7 @@ namespace CommonLib.Extensions {
                 if (vector.Z > rightBottomBack.Z) rightBottomBack.Z = vector.Z;
             }
 
-            return new BoundingCube { LeftTopFront = leftTopFront, RightBottomBack = rightBottomBack };
+            return new BoundingBox { LeftTopFront = leftTopFront, RightBottomBack = rightBottomBack };
         }
 
         public static VECTOR[] RotateXYZ(this VECTOR[] vectors, float rotateXInDegrees, float rotateYInDegrees, float rotateZInDegrees) {
