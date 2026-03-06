@@ -110,6 +110,8 @@ namespace SF3.Editor.Forms {
             tsmiBlacksmith = new System.Windows.Forms.ToolStripMenuItem();
             tsmiBlacksmith_Sort = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiMPD_DeselectAll = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_Export = new System.Windows.Forms.ToolStripMenuItem();
             mpdTSMI_Export_ToScenario1MPD = new System.Windows.Forms.ToolStripMenuItem();
             mpdTSMI_Export_ToScenario2MPD = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,8 +147,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiMPD_DeselectAll = new System.Windows.Forms.ToolStripMenuItem();
-            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiView_MPD_DrawExtraModels = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -451,7 +452,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiView_MPD
             // 
-            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_DrawActors, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_EnableBlankFieldV2Controls });
+            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawExtraModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_DrawActors, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
             tsmiView_MPD.Size = new Size(265, 22);
             tsmiView_MPD.Text = "&MPD";
@@ -617,14 +618,14 @@ namespace SF3.Editor.Forms {
             // 
             tsmiScene_Actors.Enabled = false;
             tsmiScene_Actors.Name = "tsmiScene_Actors";
-            tsmiScene_Actors.Size = new Size(180, 22);
+            tsmiScene_Actors.Size = new Size(144, 22);
             tsmiScene_Actors.Text = "Active &Actors";
             // 
             // tsmiScene_ActiveCHR
             // 
             tsmiScene_ActiveCHR.Enabled = false;
             tsmiScene_ActiveCHR.Name = "tsmiScene_ActiveCHR";
-            tsmiScene_ActiveCHR.Size = new Size(180, 22);
+            tsmiScene_ActiveCHR.Size = new Size(144, 22);
             tsmiScene_ActiveCHR.Text = "Active &CHR";
             // 
             // tsmiTools
@@ -739,6 +740,19 @@ namespace SF3.Editor.Forms {
             tsmiMPD.Size = new Size(45, 20);
             tsmiMPD.Text = "&MPD";
             tsmiMPD.Visible = false;
+            // 
+            // tsmiMPD_DeselectAll
+            // 
+            tsmiMPD_DeselectAll.Name = "tsmiMPD_DeselectAll";
+            tsmiMPD_DeselectAll.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D;
+            tsmiMPD_DeselectAll.Size = new Size(261, 22);
+            tsmiMPD_DeselectAll.Text = "&Deselect All";
+            tsmiMPD_DeselectAll.Click += tsmiMPD_DeselectAll_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(258, 6);
             // 
             // tsmiMPD_Export
             // 
@@ -971,22 +985,16 @@ namespace SF3.Editor.Forms {
             // tsmiHelp_About
             // 
             tsmiHelp_About.Name = "tsmiHelp_About";
-            tsmiHelp_About.Size = new Size(180, 22);
+            tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
-            // tsmiMPD_DeselectAll
+            // tsmiView_MPD_DrawExtraModels
             // 
-            tsmiMPD_DeselectAll.Name = "tsmiMPD_DeselectAll";
-            tsmiMPD_DeselectAll.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D;
-            tsmiMPD_DeselectAll.Size = new Size(261, 22);
-            tsmiMPD_DeselectAll.Text = "&Deselect All";
-            tsmiMPD_DeselectAll.Click += tsmiMPD_DeselectAll_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(258, 6);
+            tsmiView_MPD_DrawExtraModels.Name = "tsmiView_MPD_DrawExtraModels";
+            tsmiView_MPD_DrawExtraModels.Size = new Size(384, 22);
+            tsmiView_MPD_DrawExtraModels.Text = "Draw Extra Models (Titan / Kraken)";
+            tsmiView_MPD_DrawExtraModels.Click += tsmiView_MPD_DrawExtraModels_Click;
             // 
             // SF3EditorForm
             // 
@@ -1126,5 +1134,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawActors;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_DeselectAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawExtraModels;
     }
 }

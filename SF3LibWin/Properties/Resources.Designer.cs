@@ -113,16 +113,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///uniform sampler2D texture0;
+        ///uniform sampler2D textureAtlas;
         ///uniform vec4 color;
         ///uniform bool alwaysShow;
         ///
-        ///in vec2 texCoord0Frag;
+        ///in vec2 texCoordAtlasFrag;
         ///
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    if (!alwaysShow &amp;&amp; texture(texture0, texCoord0Frag).a &lt; 0.001)
+        ///    if (!alwaysShow &amp;&amp; texture(textureAtlas, texCoordAtlasFrag).a &lt; 0.001)
         ///        discard;
         ///
         ///    FragColor = color;
@@ -139,17 +139,17 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec2 texCoord0;
+        ///layout (location = 2) in vec2 texCoordAtlas;
         ///
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///
-        ///out vec2 texCoord0Frag;
+        ///out vec2 texCoordAtlasFrag;
         ///
         ///void main() {
         ///    gl_Position = projection * view * model * vec4(position, 1.0);
-        ///    texCoord0Frag = texCoord0;
+        ///    texCoordAtlasFrag = texCoordAtlas;
         ///}
         ///.
         /// </summary>
@@ -501,6 +501,16 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ShowExtraModelsBmp {
+            get {
+                object obj = ResourceManager.GetObject("ShowExtraModelsBmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShowGradientsBmp {
             get {
                 object obj = ResourceManager.GetObject("ShowGradientsBmp", resourceCulture);
@@ -613,6 +623,8 @@ namespace SF3.Win.Properties {
         ///   Looks up a localized string similar to #version 330 core
         ///
         ///uniform sampler2D texture0;
+        ///uniform bool colorize;
+        ///uniform vec4 color;
         ///
         ///in vec4 colorFrag;
         ///in vec2 texCoord0Frag;
@@ -624,7 +636,7 @@ namespace SF3.Win.Properties {
         ///    if (texColor.a &lt; 0.001)
         ///        discard;
         ///
-        ///    FragColor = texColor;
+        ///    FragColor = colorize ? color : texColor;
         ///}
         ///.
         /// </summary>

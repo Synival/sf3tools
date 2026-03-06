@@ -72,6 +72,7 @@ namespace SF3.Win.Controls {
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
             selectionPanel = new System.Windows.Forms.Panel();
+            tsbDrawExtraModels = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -80,7 +81,7 @@ namespace SF3.Win.Controls {
             // 
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawExtraModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -370,6 +371,7 @@ namespace SF3.Win.Controls {
             mpdViewerGLControl1.MinimumSize = new System.Drawing.Size(320, 240);
             mpdViewerGLControl1.Name = "mpdViewerGLControl1";
             mpdViewerGLControl1.Profile = OpenTK.Windowing.Common.ContextProfile.Core;
+            mpdViewerGLControl1.ProjectionXAdjustment = 0;
             mpdViewerGLControl1.SharedContext = null;
             mpdViewerGLControl1.Size = new System.Drawing.Size(789, 514);
             mpdViewerGLControl1.TabIndex = 1;
@@ -540,6 +542,16 @@ namespace SF3.Win.Controls {
             selectionPanel.Size = new System.Drawing.Size(207, 514);
             selectionPanel.TabIndex = 4;
             // 
+            // tsbDrawExtraModels
+            // 
+            tsbDrawExtraModels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawExtraModels.Image = Properties.Resources.ShowExtraModelsBmp;
+            tsbDrawExtraModels.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawExtraModels.Name = "tsbDrawExtraModels";
+            tsbDrawExtraModels.Size = new System.Drawing.Size(28, 28);
+            tsbDrawExtraModels.Text = "Draw Extra Models (Titan / Kraken)";
+            tsbDrawExtraModels.Click += tsbDrawExtraModels_Click;
+            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -606,5 +618,6 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbApplyHideTags;
         private System.Windows.Forms.ToolStripButton tsbDrawActors;
         private System.Windows.Forms.Panel selectionPanel;
+        private System.Windows.Forms.ToolStripButton tsbDrawExtraModels;
     }
 }

@@ -8,6 +8,7 @@ namespace SF3.Editor.Forms {
 
             tsmiView_MPD_DrawSurfaceModel.Checked        = _appState.ViewerDrawSurfaceModel;
             tsmiView_MPD_DrawModels.Checked              = _appState.ViewerDrawModels;
+            tsmiView_MPD_DrawExtraModels.Checked         = _appState.ViewerDrawExtraModels;
             tsmiView_MPD_DrawGround.Checked              = _appState.ViewerDrawGround;
             tsmiView_MPD_DrawSky.Checked                 = _appState.ViewerDrawSky;
             tsmiView_MPD_RunAnimations.Checked           = _appState.ViewerRunAnimations;
@@ -39,6 +40,8 @@ namespace SF3.Editor.Forms {
                 => { tsmiView_MPD_DrawSurfaceModel.Checked = _appState.ViewerDrawSurfaceModel; _appState.Serialize(); };
             _appState.ViewerDrawModelsChanged += (s, e)
                 => { tsmiView_MPD_DrawModels.Checked = _appState.ViewerDrawModels; _appState.Serialize(); };
+            _appState.ViewerDrawExtraModelsChanged += (s, e)
+                => { tsmiView_MPD_DrawExtraModels.Checked = _appState.ViewerDrawExtraModels; _appState.Serialize(); };
             _appState.ViewerDrawGroundChanged += (s, e)
                 => { tsmiView_MPD_DrawGround.Checked = _appState.ViewerDrawGround; _appState.Serialize(); };
             _appState.ViewerDrawSkyChanged += (s, e)
@@ -89,6 +92,8 @@ namespace SF3.Editor.Forms {
             => _appState.ViewerDrawSurfaceModel = !_appState.ViewerDrawSurfaceModel;
         private void tsmiView_MPD_DrawModels_Click(object sender, EventArgs e)
             => _appState.ViewerDrawModels = !_appState.ViewerDrawModels;
+        private void tsmiView_MPD_DrawExtraModels_Click(object sender, EventArgs e)
+            => _appState.ViewerDrawExtraModels = !_appState.ViewerDrawExtraModels;
         private void tsmiView_MPD_DrawGround_Click(object sender, EventArgs e)
             => _appState.ViewerDrawGround = !_appState.ViewerDrawGround;
         private void tsmiView_MPD_DrawSky_Click(object sender, EventArgs e)

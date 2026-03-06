@@ -21,6 +21,7 @@ namespace SF3.Win.Controls {
 
             _appState.ViewerDrawSurfaceModelChanged   += (s, e) => InvalidateFrame();
             _appState.ViewerDrawModelsChanged         += (s, e) => InvalidateFrame();
+            _appState.ViewerDrawExtraModelsChanged    += (s, e) => InvalidateFrame();
             _appState.ViewerDrawGroundChanged         += (s, e) => InvalidateFrame();
             _appState.ViewerDrawSkyChanged            += (s, e) => InvalidateFrame();
             _appState.ViewerRunAnimationsChanged      += (s, e) => InvalidateFrame();
@@ -551,6 +552,13 @@ namespace SF3.Win.Controls {
         public bool DrawModels {
             get => AppState.ViewerDrawModels;
             set => UpdateAppState(nameof(AppState.ViewerDrawModels), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawExtraModels {
+            get => AppState.ViewerDrawExtraModels;
+            set => UpdateAppState(nameof(AppState.ViewerDrawExtraModels), value);
         }
 
         [Browsable(false)]

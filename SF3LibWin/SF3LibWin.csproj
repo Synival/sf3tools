@@ -11,15 +11,41 @@
     <Version>0.2.0</Version>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Images\ApplyHideTags.bmp" />
+    <None Remove="Images\ApplyShadowTags.bmp" />
+    <None Remove="Images\CameraFromFront.bmp" />
+    <None Remove="Images\CameraFromTop.bmp" />
+    <None Remove="Images\CameraPointToCenter.bmp" />
+    <None Remove="Images\CursorNavigate.bmp" />
+    <None Remove="Images\CursorSelect.bmp" />
+    <None Remove="Images\EventIDs.bmp" />
+    <None Remove="Images\EventIDs.xcf" />
+    <None Remove="Images\HideModelsFacingAway.bmp" />
     <None Remove="Images\IconWireframe.bmp" />
     <None Remove="Images\LightingNew.bmp" />
     <None Remove="Images\LightingOld.bmp" />
     <None Remove="Images\Normals.bmp" />
+    <None Remove="Images\RenderOnBlackBackground.bmp" />
+    <None Remove="Images\RunAnimations.bmp" />
+    <None Remove="Images\ShowActors.bmp" />
+    <None Remove="Images\ShowCameraBoundaries.bmp" />
+    <None Remove="Images\ShowCollisions.bmp" />
+    <None Remove="Images\ShowEventIDs.bmp" />
+    <None Remove="Images\ShowExtraModels.bmp" />
+    <None Remove="Images\ShowGradients.bmp" />
+    <None Remove="Images\ShowGroundWater.bmp" />
+    <None Remove="Images\ShowLighting.bmp" />
+    <None Remove="Images\ShowModels.bmp" />
+    <None Remove="Images\ShowSky.bmp" />
+    <None Remove="Images\ShowSurfaceModel.bmp" />
+    <None Remove="Images\ShowTerrainTypes.bmp" />
+    <None Remove="Images\SpritesPointingUp.bmp" />
     <None Remove="Images\TerrainTypes.bmp" />
     <None Remove="Images\TerrainTypes.xcf" />
     <None Remove="Images\TileWireframe.bmp" />
     <None Remove="Images\TransparentBlack.bmp" />
     <None Remove="Images\TransparentWhite.bmp" />
+    <None Remove="Images\UnknownSprite.bmp" />
     <None Remove="Images\White.bmp" />
     <None Remove="Shaders\Normals.frag" />
     <None Remove="Shaders\Normals.vert" />
@@ -35,15 +61,41 @@
     <None Remove="Shaders\Wireframe.vert" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Images\ApplyHideTags.bmp" />
+    <EmbeddedResource Include="Images\ApplyShadowTags.bmp" />
+    <EmbeddedResource Include="Images\CameraFromFront.bmp" />
+    <EmbeddedResource Include="Images\CameraFromTop.bmp" />
+    <EmbeddedResource Include="Images\CameraPointToCenter.bmp" />
+    <EmbeddedResource Include="Images\CursorNavigate.bmp" />
+    <EmbeddedResource Include="Images\CursorSelect.bmp" />
+    <EmbeddedResource Include="Images\EventIDs.bmp" />
+    <EmbeddedResource Include="Images\EventIDs.xcf" />
+    <EmbeddedResource Include="Images\HideModelsFacingAway.bmp" />
     <EmbeddedResource Include="Images\IconWireframe.bmp" />
     <EmbeddedResource Include="Images\LightingNew.bmp" />
     <EmbeddedResource Include="Images\LightingOld.bmp" />
     <EmbeddedResource Include="Images\Normals.bmp" />
+    <EmbeddedResource Include="Images\RenderOnBlackBackground.bmp" />
+    <EmbeddedResource Include="Images\RunAnimations.bmp" />
+    <EmbeddedResource Include="Images\ShowActors.bmp" />
+    <EmbeddedResource Include="Images\ShowCameraBoundaries.bmp" />
+    <EmbeddedResource Include="Images\ShowCollisions.bmp" />
+    <EmbeddedResource Include="Images\ShowEventIDs.bmp" />
+    <EmbeddedResource Include="Images\ShowExtraModels.bmp" />
+    <EmbeddedResource Include="Images\ShowGradients.bmp" />
+    <EmbeddedResource Include="Images\ShowGroundWater.bmp" />
+    <EmbeddedResource Include="Images\ShowLighting.bmp" />
+    <EmbeddedResource Include="Images\ShowModels.bmp" />
+    <EmbeddedResource Include="Images\ShowSky.bmp" />
+    <EmbeddedResource Include="Images\ShowSurfaceModel.bmp" />
+    <EmbeddedResource Include="Images\ShowTerrainTypes.bmp" />
+    <EmbeddedResource Include="Images\SpritesPointingUp.bmp" />
     <EmbeddedResource Include="Images\TerrainTypes.bmp" />
     <EmbeddedResource Include="Images\TerrainTypes.xcf" />
     <EmbeddedResource Include="Images\TileWireframe.bmp" />
     <EmbeddedResource Include="Images\TransparentBlack.bmp" />
     <EmbeddedResource Include="Images\TransparentWhite.bmp" />
+    <EmbeddedResource Include="Images\UnknownSprite.bmp" />
     <EmbeddedResource Include="Images\White.bmp" />
     <EmbeddedResource Include="Shaders\Normals.frag">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

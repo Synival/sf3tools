@@ -29,6 +29,7 @@ namespace SF3.Win.Controls {
 
             tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel;
             tsbDrawModels.Checked        = GLControl.DrawModels;
+            tsbDrawExtraModels.Checked   = GLControl.DrawExtraModels;
             tsbDrawGround.Checked        = GLControl.DrawGround;
             tsbDrawSky.Checked           = GLControl.DrawSky;
             tsbRunAnimations.Checked     = GLControl.RunAnimations;
@@ -53,6 +54,7 @@ namespace SF3.Win.Controls {
 
             appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appState.ViewerDrawSurfaceModel; };
             appState.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appState.ViewerDrawModels; };
+            appState.ViewerDrawExtraModelsChanged    += (s, e) => { tsbDrawExtraModels.Checked   = appState.ViewerDrawExtraModels; };
             appState.ViewerDrawGroundChanged         += (s, e) => { tsbDrawGround.Checked        = appState.ViewerDrawGround; };
             appState.ViewerDrawSkyChanged            += (s, e) => { tsbDrawSky.Checked           = appState.ViewerDrawSky; };
             appState.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appState.ViewerRunAnimations; };
@@ -244,6 +246,7 @@ namespace SF3.Win.Controls {
 
         private void tsbDrawSurfaceModel_Click(object sender, EventArgs e)  => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
         private void tsbDrawModels_Click(object sender, EventArgs e)        => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
+        private void tsbDrawExtraModels_Click(object sender, EventArgs e)   => tsbDrawExtraModels.Checked   = GLControl.DrawExtraModels  = !GLControl.DrawExtraModels;
         private void tsbDrawGround_Click(object sender, EventArgs e)        => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
         private void tsbDrawSky_Click(object sender, EventArgs e)           => tsbDrawSky.Checked           = GLControl.DrawSky          = !GLControl.DrawSky;
         private void tsbRunAnimations_Click(object sender, EventArgs e)     => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
@@ -261,8 +264,8 @@ namespace SF3.Win.Controls {
         private void tsbApplyHideTags_Click(object sender, EventArgs e)     => tsbApplyHideTags.Checked     = GLControl.ApplyHideTags    = !GLControl.ApplyHideTags;
 
         private void tsbRenderOnBlackBackground_Click(object sender, EventArgs e) => tsbRenderOnBlackBackground.Checked = GLControl.RenderOnBlackBackground = !GLControl.RenderOnBlackBackground;
-        private void tsbToggleNormals_Click(object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
-        private void tsbRotateSpritesUp_Click(object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
+        private void tsbToggleNormals_Click(object sender, EventArgs e)     => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
+        private void tsbRotateSpritesUp_Click(object sender, EventArgs e  ) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
         public void InvalidateLighting(bool invalidatePainter = true) {
             if (MPD_File != null) {

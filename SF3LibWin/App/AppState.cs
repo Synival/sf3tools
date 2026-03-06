@@ -160,6 +160,16 @@ namespace SF3.Win.App {
         public event EventHandler ViewerDrawModelsChanged;
 
         /// <summary>
+        /// When enabled, the MPD Viewer will draw extra models, such as the Titan or Kraken.
+        /// </summary>
+        public bool ViewerDrawExtraModels {
+            get => _viewerDrawExtraModels;
+            set => SetValue(ref _viewerDrawExtraModels, value, ViewerDrawExtraModelsChanged);
+        }
+        private bool _viewerDrawExtraModels = true;
+        public event EventHandler ViewerDrawExtraModelsChanged;
+
+        /// <summary>
         /// When enabled, the MPD Viewer will draw the ground / water layer.
         /// </summary>
         public bool ViewerDrawGround {
