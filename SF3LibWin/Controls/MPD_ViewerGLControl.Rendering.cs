@@ -209,10 +209,7 @@ namespace SF3.Win.Controls {
                 CollisionModels = _collisionModels,
                 Actors          = _actorResources,
                 Editor          = _editor,
-
-                OutlineFramebuffer1 = _screenResources.OutlineFramebuffer1,
-                OutlineFramebuffer2 = _screenResources.OutlineFramebuffer2,
-
+                Screen          = _screenResources,
             };
 
             // TODO: these options should be cached!!!

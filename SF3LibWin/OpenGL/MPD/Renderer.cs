@@ -24,9 +24,7 @@ namespace SF3.Win.OpenGL.MPD {
             public CollisionResources CollisionModels;
             public ActorResources Actors;
             public EditorResources Editor;
-
-            public Framebuffer OutlineFramebuffer1;
-            public Framebuffer OutlineFramebuffer2;
+            public ScreenResources Screen;
         }
 
         public class RendererOptions {
@@ -187,8 +185,8 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(resources.General, resources.BoundaryModels);
 
-            if (options.DrawOutlines && resources.OutlineFramebuffer1 != null && resources.OutlineFramebuffer2 != null)
-                DrawOutlines(resources.General, resources.Models, resources.Actors, resources.Editor, options, state.CameraYaw, state.CameraPitch, resources.OutlineFramebuffer1, resources.OutlineFramebuffer2, state.ScreenWidth, state.ScreenHeight);
+            if (options.DrawOutlines && resources.Screen != null)
+                DrawOutlines(resources.General, resources.Models, resources.Actors, resources.Editor, resources.Screen, options, state.CameraYaw, state.CameraPitch, state.ScreenWidth, state.ScreenHeight);
         }
 
         public void DrawSelectionScene(
@@ -762,14 +760,16 @@ namespace SF3.Win.OpenGL.MPD {
             ModelResources models,
             ActorResources actors,
             EditorResources editor,
+            ScreenResources screen,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            Framebuffer outlineFramebuffer1,
-            Framebuffer outlineFramebuffer2,
             int screenWidth,
             int screenHeight
         ) {
+            var outlineFramebuffer1 = screen.OutlineFramebuffer1;
+            var outlineFramebuffer2 = screen.OutlineFramebuffer2;
+
             GL.Disable(EnableCap.DepthTest);
             GL.DepthMask(false);
 
