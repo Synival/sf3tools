@@ -160,6 +160,43 @@ namespace SF3.Win.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///in vec4 colorFrag;
+        ///out vec4 FragColor;
+        ///
+        ///void main() {
+        ///    FragColor = colorFrag;
+        ///}
+        ///.
+        /// </summary>
+        internal static string ColorToScreenFrag {
+            get {
+                return ResourceManager.GetString("ColorToScreenFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec4 color;
+        ///
+        ///out vec4 colorFrag;
+        ///
+        ///void main() {
+        ///    gl_Position = vec4(position, 1.0);
+        ///    colorFrag = color;
+        ///}
+        ///.
+        /// </summary>
+        internal static string ColorToScreenVert {
+            get {
+                return ResourceManager.GetString("ColorToScreenVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap CursorNavigateBmp {

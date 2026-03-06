@@ -20,6 +20,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                 (OutlineBlurPassShader   = new Shader(Resources.OutlineBlurPassVert, Resources.OutlineBlurPassFrag)),
                 (OutlineToScreenShader   = new Shader(Resources.OutlineToScreenVert, Resources.OutlineToScreenFrag)),
+                (ColorToScreenShader     = new Shader(Resources.ColorToScreenVert,   Resources.ColorToScreenFrag)),
             ];
 
             Textures = [
@@ -55,6 +56,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             OutlineBlurPassShader   = null;
             OutlineToScreenShader   = null;
+            ColorToScreenShader     = null;
 
             WhiteTexture            = null;
             TransparentWhiteTexture = null;
@@ -83,6 +85,7 @@ namespace SF3.Win.OpenGL.MPD {
 
         public Shader OutlineBlurPassShader { get; private set; } = null;
         public Shader OutlineToScreenShader { get; private set; } = null;
+        public Shader ColorToScreenShader { get; private set; } = null;
 
         public Texture TileWireframeTexture { get; private set; } = null;
         public Texture WhiteTexture { get; private set; } = null;

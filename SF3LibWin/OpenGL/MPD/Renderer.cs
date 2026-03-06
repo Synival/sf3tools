@@ -1001,5 +1001,16 @@ namespace SF3.Win.OpenGL.MPD {
             shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix.Value);
             shader.UpdateUniform(ShaderUniformType.NormalMatrix, normalMatrix.Value);
         }
+
+        public void DrawControlFocusedBox(RendererResources resources, RendererOptions options, RendererState state) {
+            GL.Disable(EnableCap.DepthTest);
+            GL.DepthMask(false);
+
+            using (resources.General.ColorToScreenShader.Use())
+                resources.Screen.FocusedBox.Draw(resources.General.ColorToScreenShader);
+
+            GL.Enable(EnableCap.DepthTest);
+            GL.DepthMask(true);
+        }
     }
 }

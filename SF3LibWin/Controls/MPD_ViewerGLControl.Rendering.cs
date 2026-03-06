@@ -17,6 +17,8 @@ namespace SF3.Win.Controls {
             Paint     += (s, e) => OnPaintRendering();
             FrameTick += (s, deltaInMs) => OnFrameTickRendering(deltaInMs);
             TileModified += (s, e) => OnTileModifiedRendering(s);
+            GotFocus  += (s, e) => InvalidateFrame();
+            LostFocus += (s, e) => InvalidateFrame();
 
             _appState.ViewerDrawSurfaceModelChanged   += (s, e) => InvalidateFrame();
             _appState.ViewerDrawModelsChanged         += (s, e) => InvalidateFrame();
@@ -276,6 +278,10 @@ namespace SF3.Win.Controls {
             // Render the final scene.
             PerformClear();
             _renderer.DrawScene(resources, options, state);
+
+            // If we have input focus, draw a box to indicate it.
+            if (Focused)
+                _renderer.DrawControlFocusedBox(resources, options, state);
 
             SwapBuffers();
         }
