@@ -27,6 +27,8 @@ namespace CommonLib.Win.Controls {
         }
 
         private static IntPtr _darkModeDisabledBackColorBrush = CreateSolidBrush(ColorTranslator.ToWin32(DarkModeColors.BackColor));
+        private DrawItemEventArgs _lastDrawItemEventArgs;
+
         protected override void WndProc(ref Message m) {
             switch (m.Msg) {
                 case 0x000F /* WM_PAINT */:
@@ -37,8 +39,22 @@ namespace CommonLib.Win.Controls {
 
                     if (DarkModeContext.Enabled) {
                         using (var g = Graphics.FromHwnd(Handle)) {
-                            using (var brush = new SolidBrush(DarkModeColors.BackColor))
-                                g.FillRectangle(brush, 0, 0, ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth, ClientRectangle.Height);
+                            if (DropDownStyle == ComboBoxStyle.DropDownList && _lastDrawItemEventArgs != null) {
+                                DrawDarkModeItem(this, new DrawItemEventArgs(
+                                    g,
+                                    _lastDrawItemEventArgs.Font,
+                                    _lastDrawItemEventArgs.Bounds,
+                                    _lastDrawItemEventArgs.Index,
+                                    _lastDrawItemEventArgs.State
+                                ));
+                                _lastDrawItemEventArgs = null;
+                            }
+                            else {
+                                var textRect = new Rectangle(0, 0, ClientRectangle.Width - SystemInformation.VerticalScrollBarWidth, ClientRectangle.Height);
+                                using (var brush = new SolidBrush(DarkModeColors.BackColor))
+                                    g.FillRectangle(brush, textRect);
+                            }
+
                             using (var pen = new Pen(DarkModeColors.BorderColor))
                                 g.DrawRectangle(pen, 0, 0, Width - 1, Height - 1);
                         }
@@ -61,6 +77,7 @@ namespace CommonLib.Win.Controls {
         private void DrawDarkModeItem(object sender, DrawItemEventArgs e) {
             Graphics g = e.Graphics;
             Rectangle rect = e.Bounds;
+            _lastDrawItemEventArgs = e;
 
             string label = (e.Index >= 0) ? GetItemText(Items[e.Index]) : string.Empty;
 
