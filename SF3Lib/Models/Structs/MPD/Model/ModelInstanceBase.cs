@@ -45,6 +45,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
         // (Updated elsewhere)
         private int _modelId = -1;
+        [TableViewModelColumn(addressField: nameof(_pdata0Address), displayOrder: -0.1f, displayName: "PDATA*[0]", isPointer: true)]
         public int ModelID {
             get => _modelId;
             set {

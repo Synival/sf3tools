@@ -158,10 +158,11 @@ namespace SF3.Win.Controls {
                     Lighting = _lighting,
                 },
                 new Renderer.RendererOptions() {
-                    DrawModels     = true,
-                    ApplyLighting  = true,
-                    DrawWireframe  = true,
-                    SmoothLighting = true,
+                    DrawModels      = true,
+                    DrawExtraModels = true,
+                    ApplyLighting   = true,
+                    DrawWireframe   = true,
+                    SmoothLighting  = true,
                 },
                 new Renderer.RendererState() {
                     CameraYaw        = Yaw,
