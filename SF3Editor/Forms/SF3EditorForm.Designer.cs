@@ -72,6 +72,7 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawSurfaceModel = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawModels = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawExtraModels = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawGround = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawSky = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_RunAnimations = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,7 +148,6 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiView_MPD_DrawExtraModels = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -173,11 +173,12 @@ namespace SF3.Editor.Forms {
             tsmiFile_New.Name = "tsmiFile_New";
             tsmiFile_New.Size = new Size(259, 22);
             tsmiFile_New.Text = "&New";
+            tsmiFile_New.Visible = false;
             // 
             // tsmiFile_New_MPDProject
             // 
             tsmiFile_New_MPDProject.Name = "tsmiFile_New_MPDProject";
-            tsmiFile_New_MPDProject.Size = new Size(140, 22);
+            tsmiFile_New_MPDProject.Size = new Size(180, 22);
             tsmiFile_New_MPDProject.Text = "&MPD Project";
             tsmiFile_New_MPDProject.Click += tsmiFile_New_MPDProject_Click;
             // 
@@ -470,6 +471,13 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawModels.Size = new Size(384, 22);
             tsmiView_MPD_DrawModels.Text = "Draw Models";
             tsmiView_MPD_DrawModels.Click += tsmiView_MPD_DrawModels_Click;
+            // 
+            // tsmiView_MPD_DrawExtraModels
+            // 
+            tsmiView_MPD_DrawExtraModels.Name = "tsmiView_MPD_DrawExtraModels";
+            tsmiView_MPD_DrawExtraModels.Size = new Size(384, 22);
+            tsmiView_MPD_DrawExtraModels.Text = "Draw Extra Models (Titan / Kraken)";
+            tsmiView_MPD_DrawExtraModels.Click += tsmiView_MPD_DrawExtraModels_Click;
             // 
             // tsmiView_MPD_DrawGround
             // 
@@ -787,6 +795,7 @@ namespace SF3.Editor.Forms {
             mpdTSMI_Export_ToMPDProject.Name = "mpdTSMI_Export_ToMPDProject";
             mpdTSMI_Export_ToMPDProject.Size = new Size(242, 22);
             mpdTSMI_Export_ToMPDProject.Text = "Export to &MPD Project...";
+            mpdTSMI_Export_ToMPDProject.Visible = false;
             mpdTSMI_Export_ToMPDProject.Click += mpdTSMI_Export_ToMPDProject_Click;
             // 
             // tsmiMPD_Sep1
@@ -988,13 +997,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(116, 22);
             tsmiHelp_About.Text = "&About...";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiView_MPD_DrawExtraModels
-            // 
-            tsmiView_MPD_DrawExtraModels.Name = "tsmiView_MPD_DrawExtraModels";
-            tsmiView_MPD_DrawExtraModels.Size = new Size(384, 22);
-            tsmiView_MPD_DrawExtraModels.Text = "Draw Extra Models (Titan / Kraken)";
-            tsmiView_MPD_DrawExtraModels.Click += tsmiView_MPD_DrawExtraModels_Click;
             // 
             // SF3EditorForm
             // 
