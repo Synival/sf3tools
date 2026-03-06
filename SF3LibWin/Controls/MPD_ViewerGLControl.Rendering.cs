@@ -224,6 +224,7 @@ namespace SF3.Win.Controls {
             var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
             var options = new Renderer.RendererOptions() {
                 DrawModels         = DrawModels,
+                DrawExtraModels    = DrawExtraModels,
                 DrawSurfaceModel   = DrawSurfaceModel,
                 DrawGround         = DrawGround,
                 DrawSky            = MPD_File?.Flags?.Bit_0x0800_HasCutsceneSky == true && DrawSky,

@@ -31,6 +31,7 @@ namespace SF3.Win.OpenGL.MPD {
 
         public class RendererOptions {
             public bool DrawModels;
+            public bool DrawExtraModels;
             public bool DrawSurfaceModel;
             public bool DrawGround;
             public bool DrawSky;
@@ -67,8 +68,10 @@ namespace SF3.Win.OpenGL.MPD {
 
             public bool WillDrawSurfaceModel
                 => DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs;
+            public bool WillDrawAnyModels
+                => DrawModels || DrawExtraModels;
             public bool WillDrawAnyObjects
-                => DrawModels || WillDrawSurfaceModel;
+                => WillDrawAnyModels || WillDrawSurfaceModel;
             public bool WillDrawSurfaceModelWireframe
                 => DrawWireframe && !DrawNormals && (DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs);
         }
@@ -92,9 +95,15 @@ namespace SF3.Win.OpenGL.MPD {
                     return _modelsWithGroups;
                 }
 
+                bool IsVisibleCollection(MPD_CollectionType collection) {
+                    return
+                        (collection != MPD_CollectionType.ExtraModels && options.DrawModels) ||
+                        (collection == MPD_CollectionType.ExtraModels && options.DrawExtraModels);
+                }
+
                 _modelsWithGroups = models.ModelInstances
                     .Select(x => (Model: x, ModelGroup: models.ModelsByIDByCollection[x.Collection.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
-                    .Where(x => x.ModelGroup != null)
+                    .Where(x => x.ModelGroup != null && IsVisibleCollection(x.Model.Collection.Collection))
                     .Where(x => {
                         var direction = x.Model.OnlyVisibleFromDirection;
                         return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
@@ -195,7 +204,7 @@ namespace SF3.Win.OpenGL.MPD {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             var modelsWithGroups = state.GetModelsWithGroups(resources.Models, options);
-            if (options.DrawModels)
+            if (options.WillDrawAnyModels)
                 DrawSceneModels(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: false, selectionColors: true);
 
             if (options.DrawSurfaceModel && resources.SurfaceModel?.Blocks != null) {
@@ -206,7 +215,7 @@ namespace SF3.Win.OpenGL.MPD {
                 }
             }
 
-            if (options.DrawModels)
+            if (options.WillDrawAnyModels)
                 DrawSceneModels(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
 
             if (options.DrawActors)
@@ -226,7 +235,7 @@ namespace SF3.Win.OpenGL.MPD {
             float cameraPitch,
             (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
-            if (options.DrawModels)
+            if (options.WillDrawAnyModels)
                 DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
 
             if (options.DrawSurfaceModel)
@@ -250,7 +259,7 @@ namespace SF3.Win.OpenGL.MPD {
             GL.StencilFunc(StencilFunction.Always, 0x04, 0x04);
             GL.StencilMask(0x04);
 
-            if (options.DrawModels)
+            if (options.WillDrawAnyModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: false, selectionColors: false);
 
             if (options.WillDrawSurfaceModel)
@@ -259,7 +268,7 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawActors)
                 DrawActors(general, actors, cameraYaw, cameraPitch, selectionColors: false);
 
-            if (options.DrawModels)
+            if (options.WillDrawAnyModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: true, selectionColors: false);
 
             if (options.DrawGradients)
@@ -309,7 +318,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             using (general.WireframeShader.Use())
             using (general.TileWireframeTexture.Use(TextureUnit.Texture1)) {
-                if (options.DrawModels)
+                if (options.WillDrawAnyModels)
                     DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
 
                 if (options.WillDrawSurfaceModelWireframe)
