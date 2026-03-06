@@ -6,7 +6,6 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.Win.App;
-using SF3.Win.OpenGL;
 using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
 
@@ -87,6 +86,7 @@ namespace SF3.Win.Controls {
             _lighting        = new LightingResources();
             _boundaryModels  = new BoundaryModelResources();
             _actorResources  = new ActorResources();
+            _screenResources = new ScreenResources();
 
             _renderer = new Renderer();
 
@@ -101,9 +101,10 @@ namespace SF3.Win.Controls {
             _lighting.Init();
             _boundaryModels.Init();
             _actorResources.Init();
+            _screenResources.Init();
 
             SetInitialCameraPosition();
-            UpdateFramebuffers(ClientSize.Width, ClientSize.Height);
+            _screenResources.Update(ClientSize.Width, ClientSize.Height);
             UpdateProjectionMatrices(ClientSize.Width, ClientSize.Height);
 
             using (_general.ObjectShader.Use()) {
@@ -135,10 +136,7 @@ namespace SF3.Win.Controls {
             _lighting?.Dispose();
             _boundaryModels?.Dispose();
             _actorResources?.Dispose();
-
-            _selectFramebuffer?.Dispose();
-            _outlineFramebuffer1?.Dispose();
-            _outlineFramebuffer2?.Dispose();
+            _screenResources?.Dispose();
 
             _general           = null;
             _models            = null;
@@ -151,10 +149,7 @@ namespace SF3.Win.Controls {
             _lighting          = null;
             _boundaryModels    = null;
             _actorResources    = null;
-
-            _selectFramebuffer   = null;
-            _outlineFramebuffer1 = null;
-            _outlineFramebuffer2 = null;
+            _screenResources   = null;
         }
 
         private void OnResizeRendering() => UpdateViewport(ClientSize.Width, ClientSize.Height);
@@ -178,7 +173,7 @@ namespace SF3.Win.Controls {
             // Update OpenGL on the new size of the control.
             GL.Viewport(0, 0, width, height);
 
-            UpdateFramebuffers(width, height);
+            _screenResources?.Update(width, height);
             UpdateProjectionMatrices(width, height);
 
             InvalidateFrame();
@@ -215,8 +210,8 @@ namespace SF3.Win.Controls {
                 Actors          = _actorResources,
                 Editor          = _editor,
 
-                OutlineFramebuffer1 = _outlineFramebuffer1,
-                OutlineFramebuffer2 = _outlineFramebuffer2,
+                OutlineFramebuffer1 = _screenResources.OutlineFramebuffer1,
+                OutlineFramebuffer2 = _screenResources.OutlineFramebuffer2,
 
             };
 
@@ -273,7 +268,7 @@ namespace SF3.Win.Controls {
             };
 
             // Render the invisible scene used for mouse selection
-            using (_selectFramebuffer.UseDraw())
+            using (_screenResources.SelectFramebuffer.UseDraw())
                 _renderer.DrawSelectionScene(resources, options, state);
 
             // Determine what's under the mouse. This will be fed into the final scene render.
@@ -377,32 +372,6 @@ namespace SF3.Win.Controls {
                 _editorNeedsUpdate = true;
                 InvalidateFrame();
             }
-        }
-
-        private void UpdateFramebuffers(int width, int height) {
-            const int c_outlinePixelCount = 400 * 400;
-
-            _selectFramebuffer?.Dispose();
-            _selectFramebuffer = new Framebuffer(width, height, 3, RenderbufferStorage.DepthComponent);
-
-            // Create two framebuffers for outlines to account for the 2 blur passes.
-            // Make the size of the framebuffer no larger than 160,000 pixels (400x400), with the same width:height ratio as the viewport.
-            // This is so make the outlines appear bigger without the need for more complicated gaussian blur passes.
-            int outlineWidth, outlineHeight;
-            if (width * height > c_outlinePixelCount) {
-                var ratio = (float) width / height;
-                outlineWidth  = (int) Math.Sqrt(c_outlinePixelCount * ratio);
-                outlineHeight = c_outlinePixelCount / outlineWidth;
-            }
-            else {
-                outlineWidth = width;
-                outlineHeight = height;
-            }
-
-            _outlineFramebuffer1?.Dispose();
-            _outlineFramebuffer2?.Dispose();
-            _outlineFramebuffer1 = new Framebuffer(outlineWidth, outlineHeight, 4, null, false, false);
-            _outlineFramebuffer2 = new Framebuffer(outlineWidth, outlineHeight, 4, null, false, false);
         }
 
         private void UpdateProjectionMatrix(int width, int height) {
@@ -706,13 +675,10 @@ namespace SF3.Win.Controls {
         private LightingResources      _lighting        = null;
         private BoundaryModelResources _boundaryModels  = null;
         private ActorResources         _actorResources  = null;
+        private ScreenResources        _screenResources = null;
         private HashSet<int>           _modelInstancesToHide = null;
 
         private Renderer _renderer = null;
         private int _inPaintCounter = 0;
-
-        private Framebuffer _selectFramebuffer;
-        private Framebuffer _outlineFramebuffer1;
-        private Framebuffer _outlineFramebuffer2;
     }
 }
