@@ -168,7 +168,7 @@ namespace SF3.Editor.Forms {
 
             var itemCG = fileLoader.Model as ITEM_CG_File;
             if (itemCG != null) {
-                _appScene.RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable);
+                _appScene.RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable, itemCG.SpellIconIndex);
                 UpdateSceneMenuIconCollections();
             }
 
@@ -441,7 +441,7 @@ namespace SF3.Editor.Forms {
             tsmiMonsters.Visible    = tsmiMonsters.Enabled    = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;
             tsmiBlacksmith.Visible  = tsmiBlacksmith.Enabled  = hasFile && (file?.Loader?.Model as IBlacksmithTableFile)?.BlacksmithTables?.Any() == true;
             tsmiMPD.Visible         = tsmiMPD.Enabled         = hasFile && isIMPD;
-            tsmiIconOffsets.Visible = tsmiIconOffsets.Enabled = hasFile && file?.Loader?.Model is IIconTableFile;
+            tsmiIconOffsets.Visible = tsmiIconOffsets.Enabled = hasFile && (file?.Loader?.Model is IItemIconTableFile || file?.Loader?.Model is ISpellIconTableFile);
 
             var mpdFile = (isIMPD && file?.Loader?.Model != null) ? (IMPD) file.Loader.Model : null;
             tsmiMPD_Textures.Enabled = (fileType == SF3FileType.MPD);

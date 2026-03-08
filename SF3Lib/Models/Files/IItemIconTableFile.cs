@@ -2,8 +2,8 @@
 using SF3.Types;
 
 namespace SF3.Models.Files {
-    public interface ISpellIconTableFile {
+    public interface IItemIconTableFile {
         ScenarioType Scenario { get; }
-        SpellIconTable SpellIconTable { get; }
+        ItemIconTable ItemIconTable { get; }
     }
 }

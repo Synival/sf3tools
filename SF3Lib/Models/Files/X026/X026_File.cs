@@ -29,31 +29,26 @@ namespace SF3.Models.Files.X026 {
         public override IEnumerable<ITable> MakeTables() {
             int spellIconAddress;
             int itemIconAddress;
-            int spellIconRealOffsetStart;
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
                     spellIconAddress = Data.GetDouble(0x0a30) - RamAddress;
                     itemIconAddress  = Data.GetDouble(0x08f0) - RamAddress;
-                    spellIconRealOffsetStart = 0xFF8E;
                     break;
 
                 case ScenarioType.Scenario2:
                     spellIconAddress = Data.GetDouble(0x0a1c) - RamAddress;
                     itemIconAddress  = Data.GetDouble(0x0a08) - RamAddress;
-                    spellIconRealOffsetStart = 0xFC86;
                     break;
 
                 case ScenarioType.Scenario3:
                     spellIconAddress = Data.GetDouble(0x09cc) - RamAddress;
                     itemIconAddress  = Data.GetDouble(0x09b4) - RamAddress;
-                    spellIconRealOffsetStart = 0x12A48;
                     break;
 
                 case ScenarioType.PremiumDisk:
                     spellIconAddress = Data.GetDouble(0x07a0) - RamAddress;
                     itemIconAddress  = Data.GetDouble(0x072c) - RamAddress;
-                    spellIconRealOffsetStart = 0x12A32;
                     break;
 
                 default:
@@ -62,7 +57,7 @@ namespace SF3.Models.Files.X026 {
 
             var has16BitIconAddr = Scenario == ScenarioType.Scenario1;
             return new List<ITable>() {
-                (SpellIconTable = SpellIconTable.Create(Data, "SpellIcons", ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, has16BitIconAddr, spellIconRealOffsetStart)),
+                (SpellIconTable = SpellIconTable.Create(Data, "SpellIcons", ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, has16BitIconAddr, Scenario)),
                 (ItemIconTable  = ItemIconTable.Create (Data, "ItemIcons",  ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, has16BitIconAddr))
             };
         }

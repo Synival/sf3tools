@@ -12,6 +12,8 @@ namespace SF3.Win.Views.X032 {
                 return null;
 
             var ngc = Model.NameGetterContext;
+            CreateChild(new TableView("Spell Icons", Model.SpellIconTable, ngc));
+
             CreateChild(new TechnicalView("Technical Info", Model));
 
             return Control;

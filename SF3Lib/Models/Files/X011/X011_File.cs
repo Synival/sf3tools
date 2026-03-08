@@ -26,24 +26,12 @@ namespace SF3.Models.Files.X011 {
             return newFile;
         }
 
-        private int GetIconRealOffset() {
-            switch (Scenario) {
-                case ScenarioType.Scenario1:   return 0xFF8E;
-                case ScenarioType.Scenario2:   return 0xFC86;
-                case ScenarioType.Scenario3:   return 0x12A48;
-                case ScenarioType.PremiumDisk: return 0x12A32;
-                default:
-                    throw new ArgumentException(nameof(Scenario));
-            }
-        }
-
         public override IEnumerable<ITable> MakeTables() {
             var spellIconAddress = Data.GetDouble(0x0030) - RamAddress;
             var itemIconAddress  = Data.GetDouble(0x003C) - RamAddress;
-            int spellIconRealOffsetStart = GetIconRealOffset();
 
             return new List<ITable>() {
-                (SpellIconTable = SpellIconTable.Create(Data, "SpellIcons", ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, false, spellIconRealOffsetStart)),
+                (SpellIconTable = SpellIconTable.Create(Data, "SpellIcons", ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, false, Scenario)),
                 (ItemIconTable  = ItemIconTable.Create (Data, "ItemIcons",  ResourceFileForScenario(Scenario, "Items.xml"), itemIconAddress, false))
             };
         }

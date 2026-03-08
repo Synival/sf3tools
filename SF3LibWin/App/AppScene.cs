@@ -42,14 +42,16 @@ namespace SF3.Win.App {
         }
 
         public class IconCollectionRegistration : BaseRegistration {
-            public IconCollectionRegistration(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons)
+            public IconCollectionRegistration(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons, int spellIconIndex)
             : base($"{file} ({scenario})", $"{file} ({scenario})") {
-                Icons = icons;
-                Scenario = scenario;
+                Icons          = icons;
+                Scenario       = scenario;
+                SpellIconIndex = spellIconIndex;
             }
 
             public readonly Table<FixedSizeTextureStructBase> Icons;
             public readonly ScenarioType Scenario;
+            public readonly int SpellIconIndex;
         }
 
         private static AppScene _globalAppResources = null;
@@ -98,9 +100,9 @@ namespace SF3.Win.App {
                 ActiveCHR = (_chrs.Count == 0) ? null : _chrs[0];
         }
 
-        public void RegisterIconCollection(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons) {
+        public void RegisterIconCollection(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons, int spellIconIndex) {
             ArgumentNullException.ThrowIfNull(icons, nameof(icons));
-            var newRegistrartion = new IconCollectionRegistration(file, scenario, icons);
+            var newRegistrartion = new IconCollectionRegistration(file, scenario, icons, spellIconIndex);
             _iconCollections.Add(newRegistrartion);
             ActiveIconCollection ??= newRegistrartion;
         }
