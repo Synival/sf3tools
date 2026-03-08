@@ -17,7 +17,7 @@ namespace SF3.Models.Structs {
         public int ID { get; protected set; }
 
         [TableViewModelColumn(addressField: null, displayOrder: -2, displayFormat: "X4", displayGroup: "Metadata")]
-        public virtual int Address { get; protected set; }
+        public int Address { get; protected set; }
 
         [BulkCopyRowName]
         [TableViewModelColumn(addressField: null, displayOrder: -1, minWidth: 120, displayGroup: "Metadata")]

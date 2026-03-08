@@ -75,12 +75,6 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: 2, displayFormat: "X4")]
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        // Override to remove 'Address' from the table view.
-        public override int Address {
-            get => base.Address;
-            protected set => base.Address = value;
-        }
-
         [TableViewModelColumn(displayOrder: 3, displayName: "RelX", minWidth: 50)]
         public int RelativeX {
             get => Header.GetLayerRelativeX(Layer);
