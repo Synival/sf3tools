@@ -233,10 +233,10 @@ namespace SF3.Utils {
                 case SF3FileType.MPD_Project: return MPD_Project.FromJSON(byteData.GetDataCopyOrReference().AsTXTFileString());
                 case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
                 case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
-                case SF3FileType.DAT_FACE32:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE32);
-                case SF3FileType.DAT_FACE64:  return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.FACE64);
-                case SF3FileType.DAT_ITEM_CG: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.ITEM_CG);
-                case SF3FileType.DAT_BTLENKEI: return DAT_File.Create(byteData, ngc, scenario, DAT_FileType.BTLENKEI);
+                case SF3FileType.DAT_FACE32:   return FACE32_File.Create(byteData, ngc, scenario);
+                case SF3FileType.DAT_FACE64:   return FACE64_File.Create(byteData, ngc, scenario);
+                case SF3FileType.DAT_ITEM_CG:  return ITEM_CG_File.Create(byteData, ngc, scenario);
+                case SF3FileType.DAT_BTLENKEI: return BTLENKEI_File.Create(byteData, ngc, scenario);
                 case SF3FileType.KAO:     return KAO_File.Create(byteData, ngc, scenario);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");

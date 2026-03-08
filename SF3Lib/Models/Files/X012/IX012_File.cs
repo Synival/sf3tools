@@ -1,4 +1,3 @@
-using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X012;
 
