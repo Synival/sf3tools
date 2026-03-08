@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
@@ -50,91 +51,65 @@ namespace SF3.Models.Files.DAT {
         public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => Create8BitImageData());
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            if (PixelFormat != TexturePixelFormat.Indexed8Bit)
-                return;
-
             var error = Validate8BitImageData(data, palette, 0, 0);
             if (error != null)
                 throw new ArgumentException(error);
 
-            int columns = data.GetLength(0) / WidthPerImage;
-            int rows    = data.GetLength(1) / HeightPerImage;
-
-            int imageIndex = 0;
-            for (int y = 0; y < rows; y++) {
-                for (int x = 0; x < columns; x++) {
-                    if (!Process8BitImage(data, palette, imageIndex++, x * WidthPerImage, y * HeightPerImage))
-                        goto doneProcessingImages;
-                }
-            }
-            doneProcessingImages:
-
-            // TODO: actually set the stuff!
-            // TODO: the palette may or may not be settable
-            throw new NotImplementedException();
-        }
-
-        private bool Process8BitImage(byte[,] allData, Palette palette, int imageIndex, int offsetX, int offsetY) {
-            var imageData = new byte[WidthPerImage, HeightPerImage];
-            for (int y = 0; y < HeightPerImage; y++)
-                for (int x = 0; x < WidthPerImage; x++)
-                    imageData[x, y] = allData[x + offsetX, y + offsetY];
-
-            if (ImageIsNull(imageData))
-                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is null.");
-            if (ImageIsOutOfBounds(imageData)) {
-                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is out of bounds.");
-                return false;
-            }
-
-            // TODO: do something with this image!
-
-            return true;
+            var images = ImportSpritesheet(data);
+            DAT_File.ReplaceImages8Bit(images, palette);
         }
 
         public ushort[,] ImageData16Bit {
             get => _textureDataBuffer.GetOrCacheImageData16Bit(() => Create16BitImageData());
             set {
-                if (PixelFormat != TexturePixelFormat.ABGR1555)
-                    return;
-
                 var error = Validate16BitImageData(value, 0, 0);
                 if (error != null)
                     throw new ArgumentException(error);
 
-                int columns = value.GetLength(0) / WidthPerImage;
-                int rows    = value.GetLength(1) / HeightPerImage;
-
-                int imageIndex = 0;
-                for (int y = 0; y < rows; y++) {
-                    for (int x = 0; x < columns; x++) {
-                        if (!Process16BitImage(value, imageIndex++, x * WidthPerImage, y * HeightPerImage))
-                            goto doneProcessingImages;
-                    }
-                }
-                doneProcessingImages:
-
-                // TODO: actually set the stuff!
-                throw new NotImplementedException();
+                var images = ImportSpritesheet(value);
+                DAT_File.ReplaceImages16Bit(images);
             }
         }
 
-        private bool Process16BitImage(ushort[,] allData, int imageIndex, int offsetX, int offsetY) {
-            var imageData = new ushort[WidthPerImage, HeightPerImage];
+        private T[][,] ImportSpritesheet<T>(T[,] data) where T : struct {
+            int columns = data.GetLength(0) / WidthPerImage;
+            int rows    = data.GetLength(1) / HeightPerImage;
+
+            int imageIndex = 0;
+            var imageList = new List<T[,]>();
+            for (int y = 0; y < rows; y++) {
+                for (int x = 0; x < columns; x++) {
+                    if (ProcessImage(data, imageIndex, x * WidthPerImage, y * HeightPerImage, out var image)) {
+                        imageIndex++;
+                        imageList.Add(image);
+                    }
+                }
+            }
+
+            if (imageList.Count != DAT_File.TextureTable.Length)
+                throw new ArgumentException($"Imported spritesheet has {imageList.Count} image(s), but it should have {DAT_File.TextureTable.Length}");
+
+            return imageList.ToArray();
+        }
+
+        private bool ProcessImage<T>(T[,] allData, int imageIndex, int offsetX, int offsetY, out T[,] imageOut) where T : struct {
+            var imageData = new T[WidthPerImage, HeightPerImage];
             for (int y = 0; y < HeightPerImage; y++)
                 for (int x = 0; x < WidthPerImage; x++)
                     imageData[x, y] = allData[x + offsetX, y + offsetY];
 
-            if (ImageIsNull(imageData))
-                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is null.");
-            if (ImageIsOutOfBounds(imageData)) {
-                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is out of bounds.");
+            if (ImageIsNull(imageData)) {
+                imageOut = null;
+                return true;
+            }
+            else if (ImageIsOutOfBounds(imageData)) {
+                imageOut = null;
                 return false;
             }
-
-            // TODO: do something with this image!
-
-            return true;
+            else {
+                imageOut = imageData;
+                return true;
+            }
         }
 
         // Returns 'true' if all the pixels along the edge have the same color value.
@@ -192,8 +167,8 @@ namespace SF3.Models.Files.DAT {
 
         public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
-        public bool CanSetImageData8Bit  => PixelFormat == TexturePixelFormat.Indexed8Bit;
-        public bool CanSetImageData16Bit => PixelFormat == TexturePixelFormat.ABGR1555;
+        public bool CanSetImageData8Bit  => DAT_File.CanReplaceImages8Bit;
+        public bool CanSetImageData16Bit => DAT_File.CanReplaceImages16Bit;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
             => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
@@ -208,28 +183,21 @@ namespace SF3.Models.Files.DAT {
             );
 
         public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
-            if (PixelFormat != TexturePixelFormat.Indexed8Bit)
-                return "Not supported";
-
             if (data.GetLength(0) % WidthPerImage != 0)
-                return $"Image width ({data.GetLength(0)} must be a multiple of {WidthPerImage}";
+                return $"Image width ({data.GetLength(0)}) must be a multiple of {WidthPerImage}";
             if (data.GetLength(1) % HeightPerImage != 0)
-                return $"Image height ({data.GetLength(1)} must be a multiple of {HeightPerImage}";
+                return $"Image height ({data.GetLength(1)}) must be a multiple of {HeightPerImage}";
 
             return null;
         }
 
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
-            if (PixelFormat != TexturePixelFormat.ABGR1555)
-                return "Not supported";
-
             if (data.GetLength(0) % WidthPerImage != 0)
-                return $"Image width ({data.GetLength(0)} must be a multiple of {WidthPerImage}";
+                return $"Image width ({data.GetLength(0)}) must be a multiple of {WidthPerImage}";
             if (data.GetLength(1) % HeightPerImage != 0)
-                return $"Image height ({data.GetLength(1)} must be a multiple of {HeightPerImage}";
+                return $"Image height ({data.GetLength(1)}) must be a multiple of {HeightPerImage}";
 
-            // TODO: support!
-            return "Feature not yet finished!";
+            return null;
         }
 
         private byte[,] Create8BitImageData() {

@@ -1,4 +1,5 @@
-﻿using CommonLib.NamedValues;
+﻿using CommonLib.Imaging;
+using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
@@ -11,9 +12,15 @@ namespace SF3.Models.Files.DAT {
             FileType = fileType;
         }
 
+        public abstract void ReplaceImages8Bit(byte[][,] images, Palette palette);
+        public abstract void ReplaceImages16Bit(ushort[][,] images);
+
         public DAT_FileType FileType { get; }
         public Table<DAT_FileTextureBase> TextureTable { get; protected set; }
         public int TextureViewerScale { get; set; } = 0;
         public TexturesAsSpritesheet Spritesheet { get; protected set; }
+
+        public abstract bool CanReplaceImages8Bit { get; }
+        public abstract bool CanReplaceImages16Bit { get; }
     }
 }

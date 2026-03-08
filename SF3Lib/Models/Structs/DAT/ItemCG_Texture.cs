@@ -19,6 +19,8 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
+        public override bool CanUpdateAddress => true;
+
         [TableViewModelColumn(displayOrder: 2.1f, displayFormat: "X4", isReadOnly: true, displayGroup: "Metadata")]
         public int? MaxStoredImageSize { get; set; }
 

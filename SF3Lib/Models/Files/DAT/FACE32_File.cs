@@ -53,5 +53,13 @@ namespace SF3.Models.Files.DAT {
 
             return tables;
         }
+
+        public override void ReplaceImages8Bit(byte[][,] images, Palette palette)
+            => throw new InvalidOperationException();
+        public override void ReplaceImages16Bit(ushort[][,] images)
+            => throw new InvalidOperationException();
+
+        public override bool CanReplaceImages8Bit => false;
+        public override bool CanReplaceImages16Bit => false;
     }
 }

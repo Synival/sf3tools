@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
@@ -36,6 +37,28 @@ namespace SF3.Models.Files.DAT {
 
             return tables;
         }
+
+        public override void ReplaceImages8Bit(byte[][,] images, Palette palette) {
+            // TODO: force images to existing palette
+            // TODO: pass along to ReplaceImages(byte[][,])
+            throw new ArgumentException("Coming soon!");
+        }
+
+        public override void ReplaceImages16Bit(ushort[][,] images) {
+            // TODO: force images to existing 8-bit indexed color palette
+            // TODO: pass along to ReplaceImages(byte[][,])
+            throw new ArgumentException("Coming soon!");
+        }
+
+        private void ReplaceImages(byte[][,] images) {
+            // TODO: force images to existing palette
+            // TODO: rebuild contents of entire file
+            // TODO: update addresses of all images
+            throw new ArgumentException("Coming soon!");
+        }
+
+        public override bool CanReplaceImages8Bit => true;
+        public override bool CanReplaceImages16Bit => true;
 
         public int SpellIconIndex { get; }
     }

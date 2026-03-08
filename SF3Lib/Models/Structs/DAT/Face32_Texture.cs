@@ -22,6 +22,8 @@ namespace SF3.Models.Structs.DAT {
             _originalStoredSize = StoredImageDataSize;
         }
 
+        public override bool CanUpdateAddress => false;
+
         protected override (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) {
             (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
             return (ImageUtils.GetImageDataConformingToPalette(newData, palette, _palette), _palette);

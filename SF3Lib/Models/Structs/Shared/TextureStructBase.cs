@@ -37,7 +37,7 @@ namespace SF3.Models.Structs.Shared {
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB8888(highlightEndcodes);
-        public void InvalidateImage() => _textureData.Invalidate();
+        public void InvalidateImage() => _textureData?.Invalidate();
 
         public virtual string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
             => _textureData.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);

@@ -7,6 +7,8 @@ namespace SF3.Models.Structs.DAT {
             LoadImageData();
         }
 
+        public override bool CanUpdateAddress => false;
+
         protected override void OnImageUpdated() {}
 
         protected override int StructImageDataOffset { get => Address + 0x200; set {} }
