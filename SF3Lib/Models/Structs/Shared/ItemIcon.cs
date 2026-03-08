@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.Shared {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_theItemIconAddr), displayName: "Icon Offset", displayOrder: 0, displayFormat: "X4")]
-        public int TheItemIcon {
+        public int IconOffset {
             get {
                 return Has16BitIconAddr
                     ? Data.GetWord(_theItemIconAddr)

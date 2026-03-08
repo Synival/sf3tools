@@ -22,8 +22,15 @@ namespace SF3.Models.Structs.Shared {
         public int SpellID => ID;
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_theSpellIconAddr), displayName: "Icon Offset", displayOrder: 1, displayFormat: "X4")]
-        public int TheSpellIcon {
+        [TableViewModelColumn(addressField: null, displayName: "Item Offset (Derived)", displayOrder: 1, displayFormat: "X4")]
+        public int IconOffset {
+            get => IconOffsetAfterItems + RealOffsetStart;
+            set => IconOffsetAfterItems = value - RealOffsetStart;
+        }
+
+        [BulkCopy]
+        [TableViewModelColumn(addressField: nameof(_theSpellIconAddr), displayName: "Icon Offset (After Items)", displayOrder: 2, displayFormat: "X4")]
+        public int IconOffsetAfterItems {
             get {
                 return Has16BitIconAddr
                     ? Data.GetWord(_theSpellIconAddr)
@@ -35,13 +42,6 @@ namespace SF3.Models.Structs.Shared {
                 else
                     Data.SetDouble(_theSpellIconAddr, value);
             }
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: null, displayName: "Offset in File for Viewing", displayOrder: 2, displayFormat: "X4")]
-        public int RealOffset {
-            get => TheSpellIcon + RealOffsetStart;
-            set => TheSpellIcon = value - RealOffsetStart;
         }
     }
 }
