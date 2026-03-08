@@ -138,18 +138,24 @@ namespace SF3.Models.Files.DAT {
         }
 
         // Returns 'true' if all the pixels along the edge have the same color value.
-        private bool ImageHasBorder<T>(T[,] data) {
-            var color = data[0, 0];
+        private bool ImageIsCoded<T>(T[,] data, out int width, out int height, out T color1, out T color2) {
+            width  = data.GetLength(0);
+            height = data.GetLength(1);
+            color1 = data[0, 0];
+            color2 = data[2, 1];
 
-            var width  = data.GetLength(0);
-            var height = data.GetLength(1);
+            // For anything less than 6x6, the encoding can't be distinguished.
+            if (width < 6 || height < 6)
+                return false;
+            if (color1.Equals(color2))
+                return false;
 
             for (int x = 0; x < width; x++)
-                if (!data[x, 0].Equals(color) || !data[x, height - 1].Equals(color))
+                if (!data[x, 0].Equals(color1) || !data[x, height - 1].Equals(color1))
                     return false;
 
             for (int y = 1; y < height - 1; y++)
-                if (!data[0, y].Equals(color) || !data[width - 1, y].Equals(color))
+                if (!data[0, y].Equals(color1) || !data[width - 1, y].Equals(color1))
                     return false;
 
             return true;
@@ -157,20 +163,8 @@ namespace SF3.Models.Files.DAT {
 
         // Returns 'true' if the image has a border and a big X through it.
         private bool ImageIsNull<T>(T[,] data) where T : struct {
-            if (!ImageHasBorder(data))
+            if (!ImageIsCoded(data, out var width, out var height, out var color1, out var color2))
                 return false;
-
-            // We shouldn't ever have images this size; if we do, let's just fail, because otherwise it's tricky to figure some things out.
-            if (data.GetLength(0) < 3 && data.GetLength(1) < 3)
-                return false;
-
-            var color1 = data[0, 0];
-            var color2 = data[2, 1];
-            if (color1.Equals(color2))
-                return false;
-
-            var width  = data.GetLength(0);
-            var height = data.GetLength(1);
 
             for (int y = 1; y < height - 1; y++)
                 for (int x = 1; x < width - 1; x++)
@@ -182,20 +176,8 @@ namespace SF3.Models.Files.DAT {
 
         // Returns 'true' if the image has a border with a cross-hatch pattern inside.
         private bool ImageIsOutOfBounds<T>(T[,] data) where T : struct {
-            if (!ImageHasBorder(data))
+            if (!ImageIsCoded(data, out var width, out var height, out var color1, out var color2))
                 return false;
-
-            // We shouldn't ever have images this size; if we do, let's just fail, because otherwise it's tricky to figure some things out.
-            if (data.GetLength(0) < 3 && data.GetLength(1) < 3)
-                return false;
-
-            var color1 = data[0, 0];
-            var color2 = data[2, 1];
-            if (color1.Equals(color2))
-                return false;
-
-            var width  = data.GetLength(0);
-            var height = data.GetLength(1);
 
             for (int y = 1; y < height - 1; y++)
                 for (int x = 1; x < width - 1; x++)

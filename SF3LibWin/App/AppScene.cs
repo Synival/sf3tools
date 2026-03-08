@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SF3.Actors;
 using SF3.Models.Files.CHR;
-using SF3.Models.Structs.Shared;
+using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
 using SF3.Types;
 
@@ -42,14 +42,14 @@ namespace SF3.Win.App {
         }
 
         public class IconCollectionRegistration : BaseRegistration {
-            public IconCollectionRegistration(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons, int spellIconIndex)
+            public IconCollectionRegistration(string file, ScenarioType scenario, Table<DAT_FileTextureBase> icons, int spellIconIndex)
             : base($"{file} ({scenario})", $"{file} ({scenario})") {
                 Icons          = icons;
                 Scenario       = scenario;
                 SpellIconIndex = spellIconIndex;
             }
 
-            public readonly Table<FixedSizeTextureStructBase> Icons;
+            public readonly Table<DAT_FileTextureBase> Icons;
             public readonly ScenarioType Scenario;
             public readonly int SpellIconIndex;
         }
@@ -100,14 +100,14 @@ namespace SF3.Win.App {
                 ActiveCHR = (_chrs.Count == 0) ? null : _chrs[0];
         }
 
-        public void RegisterIconCollection(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons, int spellIconIndex) {
+        public void RegisterIconCollection(string file, ScenarioType scenario, Table<DAT_FileTextureBase> icons, int spellIconIndex) {
             ArgumentNullException.ThrowIfNull(icons, nameof(icons));
             var newRegistrartion = new IconCollectionRegistration(file, scenario, icons, spellIconIndex);
             _iconCollections.Add(newRegistrartion);
             ActiveIconCollection ??= newRegistrartion;
         }
 
-        public void UnregisterIconCollection(Table<FixedSizeTextureStructBase> icons) {
+        public void UnregisterIconCollection(Table<DAT_FileTextureBase> icons) {
             ArgumentNullException.ThrowIfNull(icons, nameof(icons));
             var index = _iconCollections.FindIndex(x => x.Icons == icons);
             if (index == -1)

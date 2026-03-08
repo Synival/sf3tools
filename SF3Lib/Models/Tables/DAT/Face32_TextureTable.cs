@@ -3,10 +3,9 @@ using CommonLib.NamedValues;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
-using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.DAT {
-    public class Face32_TextureTable : FixedSizeTable<FixedSizeTextureStructBase> {
+    public class Face32_TextureTable : FixedSizeTable<DAT_FileTextureBase> {
         protected Face32_TextureTable(IByteData data, string name, int address, INameGetterContext nameGetterContext,
             int faceCount, Palette palette)
         : base(data, name, address, faceCount) {

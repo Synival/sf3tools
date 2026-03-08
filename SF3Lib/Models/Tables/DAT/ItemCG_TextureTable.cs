@@ -4,11 +4,10 @@ using CommonLib.NamedValues;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
-using SF3.Models.Structs.Shared;
 using SF3.Types;
 
 namespace SF3.Models.Tables.DAT {
-    public class ItemCG_TextureTable : Table<FixedSizeTextureStructBase> {
+    public class ItemCG_TextureTable : Table<DAT_FileTextureBase> {
         public static readonly Palette ItemSpellPalette = new Palette(new ushort[] {
             0x2C64, 0x6C00, 0x043C, 0x443E, 0x0EE4, 0x76A0, 0x07DF, 0x7FFF, 0x0000, 0x01BF, 0x5409, 0x05A0, 0x04CB, 0x1DD2, 0x6318, 0x4210,
             0x2108, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x7FFF, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,

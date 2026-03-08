@@ -2,10 +2,9 @@
 using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
-using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Structs.DAT {
-    public class Face32_Texture : FixedSizeTextureStructBase {
+    public class Face32_Texture : DAT_FileTextureBase {
         private readonly int _imageDataOffsetAddr;
 
         public Face32_Texture(IByteData data, int id, string name, int address, Palette palette, bool isCompressed)

@@ -1,10 +1,9 @@
 ﻿using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
-using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Tables.DAT {
-    public class BtlEnkei_TextureTable : TerminatedTable<FixedSizeTextureStructBase> {
+    public class BtlEnkei_TextureTable : TerminatedTable<DAT_FileTextureBase> {
         protected BtlEnkei_TextureTable(IByteData data, string name, int address, INameGetterContext nameGetterContext, bool headerless)
         : base(data, name, address, 0x10, 100) {
             Headerless = headerless;
