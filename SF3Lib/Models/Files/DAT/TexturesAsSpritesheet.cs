@@ -49,13 +49,32 @@ namespace SF3.Models.Files.DAT {
 
         public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => Create8BitImageData());
 
-        // TODO: make settable!
-        public void SetImageData8Bit(byte[,] data, Palette palette) {}
+        public void SetImageData8Bit(byte[,] data, Palette palette) {
+            if (PixelFormat != TexturePixelFormat.Indexed8Bit)
+                return;
+
+            var error = Validate8BitImageData(data, palette, 0, 0);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            // TODO: actually set the stuff!
+            // TODO: the palette may or may not be settable
+            throw new NotImplementedException();
+        }
 
         public ushort[,] ImageData16Bit {
             get => _textureDataBuffer.GetOrCacheImageData16Bit(() => Create16BitImageData());
-            // TODO: make settable!
-            set {}
+            set {
+                if (PixelFormat != TexturePixelFormat.ABGR1555)
+                    return;
+
+                var error = Validate16BitImageData(value, 0, 0);
+                if (error != null)
+                    throw new ArgumentException(error);
+
+                // TODO: actually set the stuff!
+                throw new NotImplementedException();
+            }
         }
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
@@ -64,9 +83,9 @@ namespace SF3.Models.Files.DAT {
         public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         // TODO: make settable!
-        public bool CanSetImageData8Bit => false;
+        public bool CanSetImageData8Bit => PixelFormat == TexturePixelFormat.Indexed8Bit;
         // TODO: make settable!
-        public bool CanSetImageData16Bit => false;
+        public bool CanSetImageData16Bit => PixelFormat == TexturePixelFormat.ABGR1555;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
             => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
@@ -80,10 +99,21 @@ namespace SF3.Models.Files.DAT {
                 : BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit)
             );
 
-        // TODO: support!
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) => "Not supported";
-        // TODO: support!
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) => "Not supported";
+        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+            if (PixelFormat != TexturePixelFormat.Indexed8Bit)
+                return "Not supported";
+
+            // TODO: support!
+            return "Feature not yet finished!";
+        }
+
+        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
+            if (PixelFormat != TexturePixelFormat.ABGR1555)
+                return "Not supported";
+
+            // TODO: support!
+            return "Feature not yet finished!";
+        }
 
         private byte[,] Create8BitImageData() {
             var imageData = new byte[Width, Height];
