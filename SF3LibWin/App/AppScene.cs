@@ -2,34 +2,54 @@
 using System.Collections.Generic;
 using SF3.Actors;
 using SF3.Models.Files.CHR;
+using SF3.Models.Structs.Shared;
+using SF3.Models.Tables;
+using SF3.Types;
 
 namespace SF3.Win.App {
     public class AppScene {
         public interface IResource {
+            string File { get; }
             string DisplayName { get; }
         }
 
-        public class ActorCollectionRegistration : IResource {
-            public ActorCollectionRegistration(string file, IActorCollection actors) {
-                File   = file;
-                Actors = actors;
-                DisplayName = $"{File} - {Actors.ActorCollectionName}";
+        public abstract class BaseRegistration : IResource {
+            public BaseRegistration(string file, string displayName) {
+                File        = file;
+                DisplayName = displayName;
             }
 
-            public readonly string File;
-            public readonly IActorCollection Actors;
+            public string File { get; }
             public string DisplayName { get; }
         }
 
-        public class CHR_Registration : IResource {
-            public CHR_Registration(string file, ICHR_File chr) {
-                File = file;
+        public class ActorCollectionRegistration : BaseRegistration {
+            public ActorCollectionRegistration(string file, IActorCollection actors)
+            : base(file, $"{file} - {actors.ActorCollectionName}") {
+                Actors = actors;
+            }
+
+            public readonly IActorCollection Actors;
+        }
+
+        public class CHR_Registration : BaseRegistration {
+            public CHR_Registration(string file, ICHR_File chr)
+            : base(file, file) {
                 CHR  = chr;
             }
 
-            public readonly string File;
             public readonly ICHR_File CHR;
-            public string DisplayName => File;
+        }
+
+        public class IconCollectionRegistration : BaseRegistration {
+            public IconCollectionRegistration(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons)
+            : base($"{file} ({scenario})", $"{file} ({scenario})") {
+                Icons = icons;
+                Scenario = scenario;
+            }
+
+            public readonly Table<FixedSizeTextureStructBase> Icons;
+            public readonly ScenarioType Scenario;
         }
 
         private static AppScene _globalAppResources = null;
@@ -78,6 +98,24 @@ namespace SF3.Win.App {
                 ActiveCHR = (_chrs.Count == 0) ? null : _chrs[0];
         }
 
+        public void RegisterIconCollection(string file, ScenarioType scenario, Table<FixedSizeTextureStructBase> icons) {
+            ArgumentNullException.ThrowIfNull(icons, nameof(icons));
+            var newRegistrartion = new IconCollectionRegistration(file, scenario, icons);
+            _iconCollections.Add(newRegistrartion);
+            ActiveIconCollection ??= newRegistrartion;
+        }
+
+        public void UnregisterIconCollection(Table<FixedSizeTextureStructBase> icons) {
+            ArgumentNullException.ThrowIfNull(icons, nameof(icons));
+            var index = _iconCollections.FindIndex(x => x.Icons == icons);
+            if (index == -1)
+                return;
+
+            _iconCollections.RemoveAt(index);
+            if (ActiveIconCollection.Icons == icons)
+                ActiveIconCollection = (_iconCollections.Count == 0) ? null : _iconCollections[0];
+        }
+
         private List<ActorCollectionRegistration> _actorCollections = new List<ActorCollectionRegistration>();
         public IEnumerable<ActorCollectionRegistration> ActorCollections => _actorCollections;
 
@@ -107,5 +145,20 @@ namespace SF3.Win.App {
             }
         }
         public event EventHandler ActiveCHRChanged;
+
+        private List<IconCollectionRegistration> _iconCollections = new List<IconCollectionRegistration>();
+        public IEnumerable<IconCollectionRegistration> IconCollections => _iconCollections;
+
+        private IconCollectionRegistration _activeIconCollection = null;
+        public IconCollectionRegistration ActiveIconCollection {
+            get => _activeIconCollection;
+            set {
+                if (_activeIconCollection != value) {
+                    _activeIconCollection = value;
+                    ActiveIconCollectionChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler ActiveIconCollectionChanged;
     }
 }

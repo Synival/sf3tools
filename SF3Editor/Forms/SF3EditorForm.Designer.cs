@@ -96,6 +96,7 @@ namespace SF3.Editor.Forms {
             tsmiScene = new System.Windows.Forms.ToolStripMenuItem();
             tsmiScene_Actors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiScene_ActiveCHR = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiScene_ActiveIcons = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -178,7 +179,7 @@ namespace SF3.Editor.Forms {
             // tsmiFile_New_MPDProject
             // 
             tsmiFile_New_MPDProject.Name = "tsmiFile_New_MPDProject";
-            tsmiFile_New_MPDProject.Size = new Size(180, 22);
+            tsmiFile_New_MPDProject.Size = new Size(140, 22);
             tsmiFile_New_MPDProject.Text = "&MPD Project";
             tsmiFile_New_MPDProject.Click += tsmiFile_New_MPDProject_Click;
             // 
@@ -617,7 +618,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiScene
             // 
-            tsmiScene.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScene_Actors, tsmiScene_ActiveCHR });
+            tsmiScene.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScene_Actors, tsmiScene_ActiveCHR, tsmiScene_ActiveIcons });
             tsmiScene.Name = "tsmiScene";
             tsmiScene.Size = new Size(50, 20);
             tsmiScene.Text = "S&cene";
@@ -626,15 +627,22 @@ namespace SF3.Editor.Forms {
             // 
             tsmiScene_Actors.Enabled = false;
             tsmiScene_Actors.Name = "tsmiScene_Actors";
-            tsmiScene_Actors.Size = new Size(144, 22);
+            tsmiScene_Actors.Size = new Size(180, 22);
             tsmiScene_Actors.Text = "Active &Actors";
             // 
             // tsmiScene_ActiveCHR
             // 
             tsmiScene_ActiveCHR.Enabled = false;
             tsmiScene_ActiveCHR.Name = "tsmiScene_ActiveCHR";
-            tsmiScene_ActiveCHR.Size = new Size(144, 22);
+            tsmiScene_ActiveCHR.Size = new Size(180, 22);
             tsmiScene_ActiveCHR.Text = "Active &CHR";
+            // 
+            // tsmiScene_ActiveIcons
+            // 
+            tsmiScene_ActiveIcons.Enabled = false;
+            tsmiScene_ActiveIcons.Name = "tsmiScene_ActiveIcons";
+            tsmiScene_ActiveIcons.Size = new Size(180, 22);
+            tsmiScene_ActiveIcons.Text = "Active &Icons";
             // 
             // tsmiTools
             // 
@@ -1137,5 +1145,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_DeselectAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawExtraModels;
+        private System.Windows.Forms.ToolStripMenuItem tsmiScene_ActiveIcons;
     }
 }

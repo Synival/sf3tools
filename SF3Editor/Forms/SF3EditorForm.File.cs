@@ -16,6 +16,7 @@ using SF3.MPD.Interfaces;
 using SF3.Win.App;
 using SF3.Models.Files.CHR;
 using SF3.Win.Views.MPD;
+using SF3.Models.Files.DAT;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -165,6 +166,12 @@ namespace SF3.Editor.Forms {
                 UpdateSceneMenuCHRs();
             }
 
+            var itemCG = fileLoader.Model as ITEM_CG_File;
+            if (itemCG != null) {
+                AppScene.Get().RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable);
+                UpdateSceneMenuIconCollections();
+            }
+
             // Focus the tab itself.
             var tabPage = (TabPage) newControl.Parent!;
             var loadedFile = new LoadedFile(fileLoader, scenario, fileType, tabPage, view);
@@ -194,6 +201,11 @@ namespace SF3.Editor.Forms {
                 if (chr != null) {
                     AppScene.Get().UnregisterCHR(chr);
                     UpdateSceneMenuCHRs();
+                }
+
+                if (itemCG != null) {
+                    AppScene.Get().UnregisterIconCollection(itemCG.TextureTable);
+                    UpdateSceneMenuIconCollections();
                 }
             };
 

@@ -19,6 +19,13 @@ namespace SF3.Editor.Forms {
             });
         }
 
+        private void UpdateSceneMenuIconCollections() {
+            UpdateSceneMenuSubmenu(tsmiScene_ActiveIcons, ar => ar.IconCollections, ar => ar.ActiveIconCollection, (icons, item) => {
+                AppScene.Get().ActiveIconCollection = icons;
+                UpdateSceneMenuSubmenuChecks(tsmiScene_ActiveIcons, item);
+            });
+        }
+
         private void UpdateSceneMenuSubmenu<T>(
             ToolStripMenuItem parentItem,
             Func<AppScene, IEnumerable<T>> allGetter,
