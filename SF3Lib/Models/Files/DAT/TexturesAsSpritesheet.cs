@@ -57,9 +57,39 @@ namespace SF3.Models.Files.DAT {
             if (error != null)
                 throw new ArgumentException(error);
 
+            int columns = data.GetLength(0) / WidthPerImage;
+            int rows    = data.GetLength(1) / HeightPerImage;
+
+            int imageIndex = 0;
+            for (int y = 0; y < rows; y++) {
+                for (int x = 0; x < columns; x++) {
+                    if (!Process8BitImage(data, palette, imageIndex++, x * WidthPerImage, y * HeightPerImage))
+                        goto doneProcessingImages;
+                }
+            }
+            doneProcessingImages:
+
             // TODO: actually set the stuff!
             // TODO: the palette may or may not be settable
             throw new NotImplementedException();
+        }
+
+        private bool Process8BitImage(byte[,] allData, Palette palette, int imageIndex, int offsetX, int offsetY) {
+            var imageData = new byte[WidthPerImage, HeightPerImage];
+            for (int y = 0; y < HeightPerImage; y++)
+                for (int x = 0; x < WidthPerImage; x++)
+                    imageData[x, y] = allData[x + offsetX, y + offsetY];
+
+            if (ImageIsNull(imageData))
+                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is null.");
+            if (ImageIsOutOfBounds(imageData)) {
+                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is out of bounds.");
+                return false;
+            }
+
+            // TODO: do something with this image!
+
+            return true;
         }
 
         public ushort[,] ImageData16Bit {
@@ -72,9 +102,107 @@ namespace SF3.Models.Files.DAT {
                 if (error != null)
                     throw new ArgumentException(error);
 
+                int columns = value.GetLength(0) / WidthPerImage;
+                int rows    = value.GetLength(1) / HeightPerImage;
+
+                int imageIndex = 0;
+                for (int y = 0; y < rows; y++) {
+                    for (int x = 0; x < columns; x++) {
+                        if (!Process16BitImage(value, imageIndex++, x * WidthPerImage, y * HeightPerImage))
+                            goto doneProcessingImages;
+                    }
+                }
+                doneProcessingImages:
+
                 // TODO: actually set the stuff!
                 throw new NotImplementedException();
             }
+        }
+
+        private bool Process16BitImage(ushort[,] allData, int imageIndex, int offsetX, int offsetY) {
+            var imageData = new ushort[WidthPerImage, HeightPerImage];
+            for (int y = 0; y < HeightPerImage; y++)
+                for (int x = 0; x < WidthPerImage; x++)
+                    imageData[x, y] = allData[x + offsetX, y + offsetY];
+
+            if (ImageIsNull(imageData))
+                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is null.");
+            if (ImageIsOutOfBounds(imageData)) {
+                System.Diagnostics.Debug.WriteLine($"Image {imageIndex} ({offsetX}, {offsetY}) is out of bounds.");
+                return false;
+            }
+
+            // TODO: do something with this image!
+
+            return true;
+        }
+
+        // Returns 'true' if all the pixels along the edge have the same color value.
+        private bool ImageHasBorder<T>(T[,] data) {
+            var color = data[0, 0];
+
+            var width  = data.GetLength(0);
+            var height = data.GetLength(1);
+
+            for (int x = 0; x < width; x++)
+                if (!data[x, 0].Equals(color) || !data[x, height - 1].Equals(color))
+                    return false;
+
+            for (int y = 1; y < height - 1; y++)
+                if (!data[0, y].Equals(color) || !data[width - 1, y].Equals(color))
+                    return false;
+
+            return true;
+        }
+
+        // Returns 'true' if the image has a border and a big X through it.
+        private bool ImageIsNull<T>(T[,] data) where T : struct {
+            if (!ImageHasBorder(data))
+                return false;
+
+            // We shouldn't ever have images this size; if we do, let's just fail, because otherwise it's tricky to figure some things out.
+            if (data.GetLength(0) < 3 && data.GetLength(1) < 3)
+                return false;
+
+            var color1 = data[0, 0];
+            var color2 = data[2, 1];
+            if (color1.Equals(color2))
+                return false;
+
+            var width  = data.GetLength(0);
+            var height = data.GetLength(1);
+
+            for (int y = 1; y < height - 1; y++)
+                for (int x = 1; x < width - 1; x++)
+                    if (!data[x, y].Equals((x == y || (width - x - 1) == y) ? color1 : color2))
+                        return false;
+
+            return true;
+        }
+
+        // Returns 'true' if the image has a border with a cross-hatch pattern inside.
+        private bool ImageIsOutOfBounds<T>(T[,] data) where T : struct {
+            if (!ImageHasBorder(data))
+                return false;
+
+            // We shouldn't ever have images this size; if we do, let's just fail, because otherwise it's tricky to figure some things out.
+            if (data.GetLength(0) < 3 && data.GetLength(1) < 3)
+                return false;
+
+            var color1 = data[0, 0];
+            var color2 = data[2, 1];
+            if (color1.Equals(color2))
+                return false;
+
+            var width  = data.GetLength(0);
+            var height = data.GetLength(1);
+
+            for (int y = 1; y < height - 1; y++)
+                for (int x = 1; x < width - 1; x++)
+                    if (!data[x, y].Equals(((x + y) % 2 == 0) ? color1 : color2))
+                        return false;
+
+            return true;
         }
 
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
@@ -82,9 +210,7 @@ namespace SF3.Models.Files.DAT {
 
         public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
-        // TODO: make settable!
-        public bool CanSetImageData8Bit => PixelFormat == TexturePixelFormat.Indexed8Bit;
-        // TODO: make settable!
+        public bool CanSetImageData8Bit  => PixelFormat == TexturePixelFormat.Indexed8Bit;
         public bool CanSetImageData16Bit => PixelFormat == TexturePixelFormat.ABGR1555;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
@@ -103,13 +229,22 @@ namespace SF3.Models.Files.DAT {
             if (PixelFormat != TexturePixelFormat.Indexed8Bit)
                 return "Not supported";
 
-            // TODO: support!
-            return "Feature not yet finished!";
+            if (data.GetLength(0) % WidthPerImage != 0)
+                return $"Image width ({data.GetLength(0)} must be a multiple of {WidthPerImage}";
+            if (data.GetLength(1) % HeightPerImage != 0)
+                return $"Image height ({data.GetLength(1)} must be a multiple of {HeightPerImage}";
+
+            return null;
         }
 
         public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
             if (PixelFormat != TexturePixelFormat.ABGR1555)
                 return "Not supported";
+
+            if (data.GetLength(0) % WidthPerImage != 0)
+                return $"Image width ({data.GetLength(0)} must be a multiple of {WidthPerImage}";
+            if (data.GetLength(1) % HeightPerImage != 0)
+                return $"Image height ({data.GetLength(1)} must be a multiple of {HeightPerImage}";
 
             // TODO: support!
             return "Feature not yet finished!";
