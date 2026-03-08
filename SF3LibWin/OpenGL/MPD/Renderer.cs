@@ -129,7 +129,7 @@ namespace SF3.Win.OpenGL.MPD {
                     return angleDiff > options.ModelsViewAngleMin && angleDiff < options.ModelsViewAngleMax;
                 }
 
-                return [
+                _modelDirectionsFacingCamera = [
                     WithinAngleRange(ModelDirectionType.North),
                     WithinAngleRange(ModelDirectionType.Northeast),
                     WithinAngleRange(ModelDirectionType.East),
@@ -139,6 +139,8 @@ namespace SF3.Win.OpenGL.MPD {
                     WithinAngleRange(ModelDirectionType.West),
                     WithinAngleRange(ModelDirectionType.Northwest),
                 ];
+
+                return _modelDirectionsFacingCamera;
             }
 
             private (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] _modelsWithGroups;
