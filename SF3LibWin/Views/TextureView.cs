@@ -99,7 +99,11 @@ namespace SF3.Win.Views {
                 }
 
                 Image = _texture?.CreateBitmap(AppState.RetrieveAppState().HighlightEndCodesInTextureView);
+
+                ImageImported?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        public event EventHandler ImageImported;
     }
 }
