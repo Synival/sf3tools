@@ -12,7 +12,7 @@
     <item value="0x09" name="Shield STHA" />
     <item value="0x0A" name="Resist" />
     <item value="0x0B" name="Attack" />
-    <item value="0x0C" name="Dispell" />
+    <item value="0x0C" name="Dispel" />
     <item value="0x0D" name="Confuse" />
     <item value="0x0E" name="Sleep" />
     <item value="0x0F" name="Charm" />
