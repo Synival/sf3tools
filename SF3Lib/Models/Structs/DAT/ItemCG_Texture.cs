@@ -41,6 +41,14 @@ namespace SF3.Models.Structs.DAT {
                 Data.Data.SetDataAtTo(Address + StoredImageDataSize, remainder, new byte[remainder]);
         }
 
+        public override void UpdateAddress(int address) {
+            if (address != Address) {
+                base.UpdateAddress(address);
+                ImageDataOffset = address;
+                InvalidateImage();
+            }
+        }
+
         protected override int StructImageDataOffset { get => Address; set {} }
         public override bool HasImage => true;
         public override bool CanLoadImage => true;

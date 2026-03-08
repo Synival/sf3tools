@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.Utils;
 using SF3.ByteData;
+using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
 using SF3.Models.Tables.DAT;
 using SF3.NamedValues;
@@ -39,26 +42,33 @@ namespace SF3.Models.Files.DAT {
         }
 
         public override void ReplaceImages8Bit(byte[][,] images, Palette palette) {
-            // TODO: force images to existing palette
-            // TODO: pass along to ReplaceImages(byte[][,])
-            throw new ArgumentException("Coming soon!");
+            images = images.Select(x => ImageUtils.GetImageDataConformingToPalette(x, palette, ItemCG_TextureTable.ItemSpellPalette)).ToArray();
+            var compressedImages = images.Select(x => Compression.CompressLZSS(x.To1DArrayTransposed())).ToArray();
+
+            var newData = new byte[compressedImages.Sum(x => x.Length)];
+            int newDataPos = 0;
+            foreach (var compressedImage in compressedImages) {
+                for (int imagePos = 0; imagePos < compressedImage.Length; imagePos++)
+                    newData[newDataPos++] = compressedImage[imagePos];
+            }
+
+            Data.SetDataTo(newData);
+
+            for (int imageIndex = 0, imagePos = 0; imageIndex < compressedImages.Length; imagePos += compressedImages[imageIndex].Length, imageIndex++) {
+                var image = (ItemCG_Texture) TextureTable[imageIndex];
+                image.UpdateAddress(imagePos);
+                image.MaxStoredImageSize = compressedImages[imageIndex].Length;
+                image.InvalidateImage();
+            }
+
+            Spritesheet.Invalidate();
         }
 
-        public override void ReplaceImages16Bit(ushort[][,] images) {
-            // TODO: force images to existing 8-bit indexed color palette
-            // TODO: pass along to ReplaceImages(byte[][,])
-            throw new ArgumentException("Coming soon!");
-        }
-
-        private void ReplaceImages(byte[][,] images) {
-            // TODO: force images to existing palette
-            // TODO: rebuild contents of entire file
-            // TODO: update addresses of all images
-            throw new ArgumentException("Coming soon!");
-        }
+        public override void ReplaceImages16Bit(ushort[][,] images)
+            => throw new InvalidOperationException();
 
         public override bool CanReplaceImages8Bit => true;
-        public override bool CanReplaceImages16Bit => true;
+        public override bool CanReplaceImages16Bit => false;
 
         public int SpellIconIndex { get; }
     }
