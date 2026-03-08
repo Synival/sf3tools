@@ -59,12 +59,12 @@ namespace CommonLib.Utils {
         /// Colors are matched using a distance check between two RGB vectors.
         /// </summary>
         /// <param name="newData">8-bit indexed color data to convert.</param>
-        /// <param name="newPalette">Original palette belonging to the 8-bit indexed color data.</param>
+        /// <param name="fromPalette">Original palette belonging to the 8-bit indexed color data.</param>
         /// <param name="toPalette">Color palette that the 8-bit indexed color data should be updated to conform to.</param>
         /// <returns>A new byte[,] with 8-bit indexed color data.</returns>
-        public static byte[,] GetImageDataConformingToPalette(byte[,] newData, Palette newPalette, Palette toPalette) {
+        public static byte[,] GetImageDataConformingToPalette(byte[,] newData, Palette fromPalette, Palette toPalette) {
             // For each color in newPalette, find the closest match in toPalette.
-            var conversionMap = newPalette.Channels
+            var conversionMap = fromPalette.Channels
                 .Select(x => (byte) toPalette.GetClosestIndex(ignoreColorZero: false, x))
                 .ToArray();
 

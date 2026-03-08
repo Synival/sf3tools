@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.Shared {
         public int SpellID => ID;
 
         [BulkCopy]
-        [TableViewModelColumn(addressField: null, displayName: "Item Offset (Derived)", displayOrder: 1, displayFormat: "X4")]
+        [TableViewModelColumn(addressField: null, displayName: "Icon Offset (Derived)", displayOrder: 1, displayFormat: "X4")]
         public int IconOffset {
             get => IconOffsetAfterItems + RealOffsetStart;
             set => IconOffsetAfterItems = value - RealOffsetStart;
