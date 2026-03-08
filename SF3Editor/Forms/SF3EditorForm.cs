@@ -30,6 +30,7 @@ namespace SF3.Editor.Forms {
 
             // The application state should never change for the app's lifetime.
             _appState = AppState.RetrieveAppState();
+            _appScene = AppScene.Get();
 
             // Create a container for all files.
             _fileContainerView = new TabView("File Container", lazyLoad: false);
@@ -45,6 +46,11 @@ namespace SF3.Editor.Forms {
             _versionTitle = _baseTitle + " v" + Version;
             _appState.OpenScenarioChanged += (s, e) => UpdateTitle();
             UpdateTitle();
+
+            // React to some active file changes.
+            _appScene.ActiveIconCollectionChanged += (s, e) => {
+                tsmiIconOffsets_Assign.Enabled = _appScene.ActiveIconCollection != null;
+            };
 
             // Initialize menu states and set up events.
             InitFileMenu();
@@ -122,5 +128,6 @@ namespace SF3.Editor.Forms {
         private readonly string _versionTitle;
         private readonly TabView _fileContainerView;
         private readonly AppState _appState;
+        private readonly AppScene _appScene;
     }
 }

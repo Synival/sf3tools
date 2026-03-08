@@ -156,19 +156,19 @@ namespace SF3.Editor.Forms {
             var acf = fileLoader.Model as IActorCollectionFile;
             if (acf?.ActorCollections?.Any() == true) {
                 foreach (var ac in acf.ActorCollections)
-                    AppScene.Get().RegisterActorCollection(fileLoader.ShortFilename, ac);
+                    _appScene.RegisterActorCollection(fileLoader.ShortFilename, ac);
                 UpdateSceneMenuActorCollections();
             }
 
             var chr = fileLoader.Model as ICHR_File;
             if (chr != null) {
-                AppScene.Get().RegisterCHR(fileLoader.ShortFilename, chr);
+                _appScene.RegisterCHR(fileLoader.ShortFilename, chr);
                 UpdateSceneMenuCHRs();
             }
 
             var itemCG = fileLoader.Model as ITEM_CG_File;
             if (itemCG != null) {
-                AppScene.Get().RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable);
+                _appScene.RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable);
                 UpdateSceneMenuIconCollections();
             }
 
@@ -194,17 +194,17 @@ namespace SF3.Editor.Forms {
                 // Unregister any important app-wide tables.
                 if (acf?.ActorCollections?.Any() == true) {
                     foreach (var ac in acf.ActorCollections)
-                        AppScene.Get().UnregisterActorCollection(ac);
+                        _appScene.UnregisterActorCollection(ac);
                     UpdateSceneMenuActorCollections();
                 }
 
                 if (chr != null) {
-                    AppScene.Get().UnregisterCHR(chr);
+                    _appScene.UnregisterCHR(chr);
                     UpdateSceneMenuCHRs();
                 }
 
                 if (itemCG != null) {
-                    AppScene.Get().UnregisterIconCollection(itemCG.TextureTable);
+                    _appScene.UnregisterIconCollection(itemCG.TextureTable);
                     UpdateSceneMenuIconCollections();
                 }
             };
@@ -438,9 +438,10 @@ namespace SF3.Editor.Forms {
             var fileType = file?.FileType;
             var isIMPD = (fileType == SF3FileType.MPD) || (fileType == SF3FileType.MPD_Project);
 
-            tsmiMonsters.Visible   = tsmiMonsters.Enabled   = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;
-            tsmiBlacksmith.Visible = tsmiBlacksmith.Enabled = hasFile && (file?.Loader?.Model as IBlacksmithTableFile)?.BlacksmithTables?.Any() == true;
-            tsmiMPD.Visible        = tsmiMPD.Enabled        = hasFile && isIMPD;
+            tsmiMonsters.Visible    = tsmiMonsters.Enabled    = hasFile && (file?.Loader?.Model as IMonsterTableFile)?.MonsterTables?.Any() == true;
+            tsmiBlacksmith.Visible  = tsmiBlacksmith.Enabled  = hasFile && (file?.Loader?.Model as IBlacksmithTableFile)?.BlacksmithTables?.Any() == true;
+            tsmiMPD.Visible         = tsmiMPD.Enabled         = hasFile && isIMPD;
+            tsmiIconOffsets.Visible = tsmiIconOffsets.Enabled = hasFile && file?.Loader?.Model is IIconTableFile;
 
             var mpdFile = (isIMPD && file?.Loader?.Model != null) ? (IMPD) file.Loader.Model : null;
             tsmiMPD_Textures.Enabled = (fileType == SF3FileType.MPD);

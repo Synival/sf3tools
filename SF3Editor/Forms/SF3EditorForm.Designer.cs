@@ -134,6 +134,8 @@ namespace SF3.Editor.Forms {
             tsmiMPD_ModelSwitchGroups = new System.Windows.Forms.ToolStripMenuItem();
             tsmiMPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiMPD_RecalculateSurfaceModelNormals = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiIconOffsets = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiIconOffsets_Assign = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -154,7 +156,7 @@ namespace SF3.Editor.Forms {
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiScene, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiScene, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiIconOffsets, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -627,21 +629,21 @@ namespace SF3.Editor.Forms {
             // 
             tsmiScene_Actors.Enabled = false;
             tsmiScene_Actors.Name = "tsmiScene_Actors";
-            tsmiScene_Actors.Size = new Size(180, 22);
+            tsmiScene_Actors.Size = new Size(144, 22);
             tsmiScene_Actors.Text = "Active &Actors";
             // 
             // tsmiScene_ActiveCHR
             // 
             tsmiScene_ActiveCHR.Enabled = false;
             tsmiScene_ActiveCHR.Name = "tsmiScene_ActiveCHR";
-            tsmiScene_ActiveCHR.Size = new Size(180, 22);
+            tsmiScene_ActiveCHR.Size = new Size(144, 22);
             tsmiScene_ActiveCHR.Text = "Active &CHR";
             // 
             // tsmiScene_ActiveIcons
             // 
             tsmiScene_ActiveIcons.Enabled = false;
             tsmiScene_ActiveIcons.Name = "tsmiScene_ActiveIcons";
-            tsmiScene_ActiveIcons.Size = new Size(180, 22);
+            tsmiScene_ActiveIcons.Size = new Size(144, 22);
             tsmiScene_ActiveIcons.Text = "Active &Icons";
             // 
             // tsmiTools
@@ -905,6 +907,23 @@ namespace SF3.Editor.Forms {
             tsmiMPD_RecalculateSurfaceModelNormals.Text = "Recalculate Surface Model &Normals";
             tsmiMPD_RecalculateSurfaceModelNormals.Click += tsmiMPD_RecalculateSurfaceModelNormals_Click;
             // 
+            // tsmiIconOffsets
+            // 
+            tsmiIconOffsets.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiIconOffsets_Assign });
+            tsmiIconOffsets.Enabled = false;
+            tsmiIconOffsets.Name = "tsmiIconOffsets";
+            tsmiIconOffsets.Size = new Size(82, 20);
+            tsmiIconOffsets.Text = "&Icon Offsets";
+            tsmiIconOffsets.Visible = false;
+            // 
+            // tsmiIconOffsets_Assign
+            // 
+            tsmiIconOffsets_Assign.Enabled = false;
+            tsmiIconOffsets_Assign.Name = "tsmiIconOffsets_Assign";
+            tsmiIconOffsets_Assign.Size = new Size(205, 22);
+            tsmiIconOffsets_Assign.Text = "&Assign from Active Icons";
+            tsmiIconOffsets_Assign.Click += tsmiIconOffsets_Assign_Click;
+            // 
             // tsmiSettings
             // 
             tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_ShowErrorsOnFileLoad, tsmiSettings_Sep1, tsmiSettings_MPD });
@@ -1002,8 +1021,8 @@ namespace SF3.Editor.Forms {
             // tsmiHelp_About
             // 
             tsmiHelp_About.Name = "tsmiHelp_About";
-            tsmiHelp_About.Size = new Size(116, 22);
-            tsmiHelp_About.Text = "&About...";
+            tsmiHelp_About.Size = new Size(107, 22);
+            tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
             // SF3EditorForm
@@ -1146,5 +1165,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawExtraModels;
         private System.Windows.Forms.ToolStripMenuItem tsmiScene_ActiveIcons;
+        private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets;
+        private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets_Assign;
     }
 }
