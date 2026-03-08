@@ -33,7 +33,7 @@ namespace SF3.Win.Controls {
             nudXWorld = new DarkModeNumericUpDown();
             labelPosition = new DarkModeLabel();
             nudZ = new DarkModeNumericUpDown();
-            darkModeLabel1 = new DarkModeLabel();
+            labelAngleNotes = new DarkModeLabel();
             nudDirection = new DarkModeNumericUpDown();
             labelDirection = new DarkModeLabel();
             labelPositionGrid = new DarkModeLabel();
@@ -67,7 +67,7 @@ namespace SF3.Win.Controls {
             gbOrientation.Controls.Add(nudXWorld);
             gbOrientation.Controls.Add(labelPosition);
             gbOrientation.Controls.Add(nudZ);
-            gbOrientation.Controls.Add(darkModeLabel1);
+            gbOrientation.Controls.Add(labelAngleNotes);
             gbOrientation.Controls.Add(nudDirection);
             gbOrientation.Controls.Add(labelDirection);
             gbOrientation.Location = new System.Drawing.Point(3, 32);
@@ -145,17 +145,17 @@ namespace SF3.Win.Controls {
             nudZ.Size = new System.Drawing.Size(58, 23);
             nudZ.TabIndex = 3;
             // 
-            // darkModeLabel1
+            // labelAngleNotes
             // 
-            darkModeLabel1.AutoSize = true;
-            darkModeLabel1.DisabledColor = System.Drawing.Color.Empty;
-            darkModeLabel1.IsSeparator = false;
-            darkModeLabel1.Location = new System.Drawing.Point(27, 126);
-            darkModeLabel1.Name = "darkModeLabel1";
-            darkModeLabel1.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
-            darkModeLabel1.Size = new System.Drawing.Size(145, 15);
-            darkModeLabel1.TabIndex = 7;
-            darkModeLabel1.Text = "(NESW = 0, 90, (-)180, -90)";
+            labelAngleNotes.AutoSize = true;
+            labelAngleNotes.DisabledColor = System.Drawing.Color.Empty;
+            labelAngleNotes.IsSeparator = false;
+            labelAngleNotes.Location = new System.Drawing.Point(27, 126);
+            labelAngleNotes.Name = "labelAngleNotes";
+            labelAngleNotes.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
+            labelAngleNotes.Size = new System.Drawing.Size(145, 15);
+            labelAngleNotes.TabIndex = 7;
+            labelAngleNotes.Text = "(NESW = 0, 90, (-)180, -90)";
             // 
             // nudDirection
             // 
@@ -218,14 +218,12 @@ namespace SF3.Win.Controls {
         private DarkModeGroupBox gbOrientation;
         private DarkModeLabel labelDirection;
         private DarkModeNumericUpDown nudDirection;
-        private DarkModeLabel darkModeLabel1;
+        private DarkModeLabel labelAngleNotes;
         private DarkModeNumericUpDown nudZWorld;
         private DarkModeNumericUpDown nudXWorld;
-        private DarkModeLabel darkModeLabel2;
         private DarkModeLabel labelPosition;
         private DarkModeNumericUpDown nudZ;
         private DarkModeNumericUpDown nudX;
-        private DarkModeLabel darkModeLabel3;
         private DarkModeLabel labelPositionWorld;
         private DarkModeLabel labelPositionGrid;
     }
