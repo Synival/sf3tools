@@ -49,7 +49,7 @@ namespace SF3.Editor.Forms {
                     spellOffset.IconOffset = icons.Icons[iconIndex++].Address;
             }
 
-            MessageUtils.InfoMessage("Offsets updated.\r\nNOTE: Make sure that the three files X011.BIN, X021.BIN, X026.BIN, and X032.BIN are all updated");
+            MessageUtils.InfoMessage("Offsets updated.\r\nNOTE: Make sure that the four files X011.BIN, X021.BIN, X026.BIN, and X032.BIN are all updated");
         }
 
         private void tsmiIconOffsets_Assign_Click(object sender, EventArgs e) {
