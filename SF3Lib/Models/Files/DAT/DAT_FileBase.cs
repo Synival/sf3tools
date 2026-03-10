@@ -12,8 +12,8 @@ namespace SF3.Models.Files.DAT {
             FileType = fileType;
         }
 
-        public abstract void ReplaceImages8Bit(byte[][,] images, Palette palette);
-        public abstract void ReplaceImages16Bit(ushort[][,] images);
+        public abstract void ReplaceImages8Bit(byte[][,] images, Palette palette, bool minimalChanges);
+        public abstract void ReplaceImages16Bit(ushort[][,] images, bool minimalChanges);
 
         public DAT_FileType FileType { get; }
         public Table<DAT_FileTextureBase> TextureTable { get; protected set; }

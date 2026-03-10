@@ -482,6 +482,17 @@ namespace SF3.Win.App {
         private bool _showErrorsOnFileLoad = true;
         public event EventHandler ShowErrorsOnFileLoadChanged;
 
+        /// <summary>
+        /// When enabled, importing a spritesheet from a DAT file will try to preserve as much data and offsets as possible.
+        /// (This is a horrible hack! This whole system should be better.)
+        /// </summary>
+        public bool MinimalChangesWhenImportingSpritesheets {
+            get => _minimalChangesWhenImportingSpritesheets;
+            set => SetValue(ref _minimalChangesWhenImportingSpritesheets, value, MinimalChangesWhenImportingSpritesheetsChanged);
+        }
+        private bool _minimalChangesWhenImportingSpritesheets = false;
+        public event EventHandler MinimalChangesWhenImportingSpritesheetsChanged;
+
         public struct RecentFile {
             public string Filename { get; set; }
             public ScenarioType? Scenario { get; set; }
@@ -501,6 +512,7 @@ namespace SF3.Win.App {
                 }
             }
         }
+
         private RecentFile[] _recentFiles = [];
         public event EventHandler RecentFilesChanged;
     }

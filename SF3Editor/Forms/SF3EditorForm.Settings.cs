@@ -9,6 +9,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_UseDropdowns.Checked                         = _appState.UseDropdownsForNamedValues;
             tsmiSettings_EnableDebugSettings.Checked                  = _appState.EnableDebugSettings;
             tsmiSettings_ShowErrorsOnFileLoad.Checked                 = _appState.ShowErrorsOnFileLoad;
+            tsmiSettings_MinimalChanges.Checked                       = _appState.MinimalChangesWhenImportingSpritesheets;
 
             tsmiSettings_MPD_ImprovedNormalCalculations.Checked       = _appState.UseImprovedNormalCalculations;
             tsmiSettings_MPD_UseFullHeightForNormals.Checked          = !_appState.UseVanillaHalfHeightForSurfaceNormalCalculations;
@@ -30,6 +31,8 @@ namespace SF3.Editor.Forms {
             };
             _appState.ShowErrorsOnFileLoadChanged += (s, e)
                 => { tsmiSettings_ShowErrorsOnFileLoad.Checked = _appState.ShowErrorsOnFileLoad; _appState.Serialize(); };
+            _appState.MinimalChangesWhenImportingSpritesheetsChanged += (s, e)
+                => { tsmiSettings_MinimalChanges.Checked = _appState.MinimalChangesWhenImportingSpritesheets; _appState.Serialize(); };
 
             _appState.UseImprovedNormalCalculationsChanged += (s, e)
                 => { tsmiSettings_MPD_ImprovedNormalCalculations.Checked = _appState.UseImprovedNormalCalculations; _appState.Serialize(); };
@@ -59,6 +62,8 @@ namespace SF3.Editor.Forms {
             => _appState.EnableDebugSettings                              = !_appState.EnableDebugSettings;
         private void tsmiSettings_ShowErrorsOnFileLoad_Click(object sender, EventArgs e)
             => _appState.ShowErrorsOnFileLoad = ! _appState.ShowErrorsOnFileLoad;
+        private void tsmiSettings_MinimalChanges_Click(object sender, EventArgs e)
+            => _appState.MinimalChangesWhenImportingSpritesheets = ! _appState.MinimalChangesWhenImportingSpritesheets;
 
         private void tsmiSettings_MPD_ImprovedNormalCalculations_Click(object sender, EventArgs e)
             => _appState.UseImprovedNormalCalculations = !_appState.UseImprovedNormalCalculations;

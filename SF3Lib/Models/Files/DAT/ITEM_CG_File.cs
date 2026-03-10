@@ -41,30 +41,64 @@ namespace SF3.Models.Files.DAT {
             return tables;
         }
 
-        public override void ReplaceImages8Bit(byte[][,] images, Palette palette) {
-            images = images.Select(x => ImageUtils.GetImageDataConformingToPalette(x, palette, ItemCG_TextureTable.ItemSpellPalette)).ToArray();
+        public override void ReplaceImages8Bit(byte[][,] images, Palette incomingPalette, bool minimalChanges) {
+            var realPalette = ItemCG_TextureTable.ItemSpellPalette;
+
+            images = images.Select(x => ImageUtils.GetImageDataConformingToPalette(x, incomingPalette, realPalette)).ToArray();
             var compressedImages = images.Select(x => Compression.CompressLZSS(x.To1DArrayTransposed())).ToArray();
 
-            var newData = new byte[compressedImages.Sum(x => x.Length)];
-            int newDataPos = 0;
-            foreach (var compressedImage in compressedImages) {
-                for (int imagePos = 0; imagePos < compressedImage.Length; imagePos++)
-                    newData[newDataPos++] = compressedImage[imagePos];
+            // Prefer to use original data whenever possible.
+            if (minimalChanges) {
+                for (int i = 0; i < compressedImages.Length; i++) {
+                    // We can't simply check the 8-bit color data because there are duplicate colors in the palette.
+                    // So, apply the palette, and check the 16-bit resulting colors.
+                    var tex = TextureTable[i];
+                    var oldImage = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(tex.ImageData8Bit.To1DArrayTransposed(), realPalette, true);
+                    var newImage = BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(images[i].To1DArrayTransposed(), realPalette, true);
+
+                    // If the 16-bit images are the same, do nothing. 
+                    if (Enumerable.SequenceEqual(oldImage, newImage))
+                        compressedImages[i] = Data.GetDataCopyAt(tex.ImageDataOffset, tex.StoredImageDataSize);
+                    // If the image is reduced in size, pad it with zeroes so later images aren't displaced.
+                    else if (compressedImages[i].Length < tex.StoredImageDataSize) {
+                        var newCompressedImage = new byte[tex.StoredImageDataSize];
+                        for (int j = 0; j < compressedImages[i].Length; j++)
+                            newCompressedImage[j] = compressedImages[i][j];
+                        compressedImages[i] = newCompressedImage;
+                    }
+                }
             }
 
+            // Determine the length of the file's new data.
+            var newDataLength = compressedImages.Sum(x => x.Length);
+            if (minimalChanges && newDataLength < Data.Length)
+                newDataLength = Data.Length;
+
+            // Copy images.
+            var newData = new byte[newDataLength];
+            int newDataPos = 0;
+            foreach (var compressedImage in compressedImages)
+                for (int imagePos = 0; imagePos < compressedImage.Length; imagePos++)
+                    newData[newDataPos++] = compressedImage[imagePos];
+
+            // Don't do anything if the end result is the exact same data.
+            if (Enumerable.SequenceEqual(newData, Data.GetDataCopyOrReference()))
+                return;
+
+            // New data is populated -- set the file's data!
             Data.SetDataTo(newData);
 
+            // Update the texture table and invalidate image data.
             for (int imageIndex = 0, imagePos = 0; imageIndex < compressedImages.Length; imagePos += compressedImages[imageIndex].Length, imageIndex++) {
                 var image = (ItemCG_Texture) TextureTable[imageIndex];
                 image.UpdateAddress(imagePos);
                 image.MaxStoredImageSize = compressedImages[imageIndex].Length;
                 image.InvalidateImage();
             }
-
             Spritesheet.Invalidate();
         }
 
-        public override void ReplaceImages16Bit(ushort[][,] images)
+        public override void ReplaceImages16Bit(ushort[][,] images, bool minimalChanges)
             => throw new InvalidOperationException();
 
         public override bool CanReplaceImages8Bit => true;

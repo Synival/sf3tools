@@ -151,6 +151,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MinimalChanges = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -926,7 +927,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiSettings
             // 
-            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_ShowErrorsOnFileLoad, tsmiSettings_Sep1, tsmiSettings_MPD });
+            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_ShowErrorsOnFileLoad, tsmiSettings_MinimalChanges, tsmiSettings_Sep1, tsmiSettings_MPD });
             tsmiSettings.Name = "tsmiSettings";
             tsmiSettings.Size = new Size(61, 20);
             tsmiSettings.Text = "&Settings";
@@ -934,34 +935,34 @@ namespace SF3.Editor.Forms {
             // tsmiSettings_UseDropdowns
             // 
             tsmiSettings_UseDropdowns.Name = "tsmiSettings_UseDropdowns";
-            tsmiSettings_UseDropdowns.Size = new Size(253, 22);
+            tsmiSettings_UseDropdowns.Size = new Size(321, 22);
             tsmiSettings_UseDropdowns.Text = "Use &Dropdowns for Named Values";
             tsmiSettings_UseDropdowns.Click += tsmiSettings_UseDropdowns_Click;
             // 
             // tsmiSettings_EnableDebugSettings
             // 
             tsmiSettings_EnableDebugSettings.Name = "tsmiSettings_EnableDebugSettings";
-            tsmiSettings_EnableDebugSettings.Size = new Size(253, 22);
+            tsmiSettings_EnableDebugSettings.Size = new Size(321, 22);
             tsmiSettings_EnableDebugSettings.Text = "Show Debu&g Fields";
             tsmiSettings_EnableDebugSettings.Click += tsmiSettings_EnableDebugSettings_Click;
             // 
             // tsmiSettings_ShowErrorsOnFileLoad
             // 
             tsmiSettings_ShowErrorsOnFileLoad.Name = "tsmiSettings_ShowErrorsOnFileLoad";
-            tsmiSettings_ShowErrorsOnFileLoad.Size = new Size(253, 22);
+            tsmiSettings_ShowErrorsOnFileLoad.Size = new Size(321, 22);
             tsmiSettings_ShowErrorsOnFileLoad.Text = "Show &Errors when Loading Files";
             tsmiSettings_ShowErrorsOnFileLoad.Click += tsmiSettings_ShowErrorsOnFileLoad_Click;
             // 
             // tsmiSettings_Sep1
             // 
             tsmiSettings_Sep1.Name = "tsmiSettings_Sep1";
-            tsmiSettings_Sep1.Size = new Size(250, 6);
+            tsmiSettings_Sep1.Size = new Size(318, 6);
             // 
             // tsmiSettings_MPD
             // 
             tsmiSettings_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_MPD_ImprovedNormalCalculations, tsmiSettings_MPD_UseFullHeightForNormals, tsmiSettings_MPD_IgnoreBlankTilesForSurfaceNormals, tsmiSettings_MPD_FixNormalOverflowUnderflowErrors, tsmiSettings_MPD_Separator, tsmiSettings_MPD_UpdateChunkTableOnChunkResize, tsmiSettings_MPD_AutoRebuildMPDChunkTable });
             tsmiSettings_MPD.Name = "tsmiSettings_MPD";
-            tsmiSettings_MPD.Size = new Size(253, 22);
+            tsmiSettings_MPD.Size = new Size(321, 22);
             tsmiSettings_MPD.Text = "&MPD";
             // 
             // tsmiSettings_MPD_ImprovedNormalCalculations
@@ -1024,6 +1025,13 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(107, 22);
             tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
+            // 
+            // tsmiSettings_MinimalChanges
+            // 
+            tsmiSettings_MinimalChanges.Name = "tsmiSettings_MinimalChanges";
+            tsmiSettings_MinimalChanges.Size = new Size(321, 22);
+            tsmiSettings_MinimalChanges.Text = "M&inimal Changes when Importing Spritesheets";
+            tsmiSettings_MinimalChanges.Click += tsmiSettings_MinimalChanges_Click;
             // 
             // SF3EditorForm
             // 
@@ -1167,5 +1175,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiScene_ActiveIcons;
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets;
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets_Assign;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MinimalChanges;
     }
 }

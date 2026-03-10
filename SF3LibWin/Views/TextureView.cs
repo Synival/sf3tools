@@ -58,6 +58,8 @@ namespace SF3.Win.Views {
         }
 
         public override void ImportImage(string filename) {
+            ImagePreImport?.Invoke(this, EventArgs.Empty);
+
             using (var image = Image.FromFile(filename)) {
                 var canReplaceTexture8Bit  = _texture.CanSetImageData8Bit;
                 var canReplaceTexture16Bit = _texture.CanSetImageData16Bit;
@@ -104,6 +106,7 @@ namespace SF3.Win.Views {
             }
         }
 
+        public event EventHandler ImagePreImport;
         public event EventHandler ImageImported;
     }
 }

@@ -3,6 +3,7 @@ using CommonLib.Win.Utils;
 using SF3.Models.Files.DAT;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
+using SF3.Win.App;
 
 namespace SF3.Win.Views.DAT {
     public class DAT_View : TabView {
@@ -16,6 +17,10 @@ namespace SF3.Win.Views.DAT {
 
             if (Model.TextureTable != null) {
                 var textureView = new TextureView("Spritesheet", Model.Spritesheet, 1);
+
+                textureView.ImagePreImport += (s, e) =>
+                    Model.Spritesheet.MinimalChangesWhenSetting = AppState.RetrieveAppState().MinimalChangesWhenImportingSpritesheets;
+
                 textureView.ImageImported += (s, e) => {
                     // TODO: There's a more elegant want to do this for sure!
                     if (Model is ITEM_CG_File) {

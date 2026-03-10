@@ -56,7 +56,7 @@ namespace SF3.Models.Files.DAT {
                 throw new ArgumentException(error);
 
             var images = ImportSpritesheet(data);
-            DAT_File.ReplaceImages8Bit(images, palette);
+            DAT_File.ReplaceImages8Bit(images, palette, MinimalChangesWhenSetting);
         }
 
         public ushort[,] ImageData16Bit {
@@ -67,7 +67,7 @@ namespace SF3.Models.Files.DAT {
                     throw new ArgumentException(error);
 
                 var images = ImportSpritesheet(value);
-                DAT_File.ReplaceImages16Bit(images);
+                DAT_File.ReplaceImages16Bit(images, MinimalChangesWhenSetting);
             }
         }
 
@@ -357,8 +357,10 @@ namespace SF3.Models.Files.DAT {
         private void UpdateHeight()
             => Height = (int) (Math.Ceiling(DAT_File.TextureTable.Length / (float) ImagesPerRow) * HeightPerImage);
 
-        public event EventHandler Invalidated;
+        public bool MinimalChangesWhenSetting { get; set; } = false;
 
         private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
+
+        public event EventHandler Invalidated;
     }
 }
