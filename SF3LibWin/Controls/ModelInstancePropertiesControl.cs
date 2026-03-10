@@ -114,7 +114,9 @@ namespace SF3.Win.Controls {
             // Flags
             // ---------------------------------------
 
-            // Only visible when facing direction
+            cbAlwaysFaceCamera.CheckedChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo =>
+                eo.AlwaysFacesCamera = cbAlwaysFaceCamera.Checked);
+
             cbVisibleFrom.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
                 var dir = StringToOnlyVisibleFrom(cbVisibleFrom.Text);
                 if (!dir.HasValue)
@@ -254,6 +256,8 @@ namespace SF3.Win.Controls {
             var eo = EditingObjects[0];
 
             labelModelInstanceEdited.Text = "Model Instance: " + (eo == null ? "(none)" : $"0x{eo.ID:X3}");
+
+            cbAlwaysFaceCamera.Checked = eo.AlwaysFacesCamera;
 
             var dirStr = OnlyVisibleFromToString(eo.OnlyVisibleFromDirection);
             cbVisibleFrom.Text = dirStr;

@@ -27,6 +27,7 @@ namespace SF3.Win.Controls {
         private void InitializeComponent() {
             labelModelInstanceEdited = new DarkModeLabel();
             gbOrientation = new DarkModeGroupBox();
+            cbAlwaysFaceCamera = new DarkModeCheckBox();
             nudScaleZ = new DarkModeNumericUpDown();
             nudScaleY = new DarkModeNumericUpDown();
             nudScaleX = new DarkModeNumericUpDown();
@@ -64,8 +65,8 @@ namespace SF3.Win.Controls {
             nudWest = new DarkModeNumericUpDown();
             nudNorth = new DarkModeNumericUpDown();
             dbModel = new DarkModeGroupBox();
-            labelModelID = new DarkModeLabel();
             nudModelID = new DarkModeNumericUpDown();
+            labelModelID = new DarkModeLabel();
             gbOrientation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) nudScaleZ).BeginInit();
             ((System.ComponentModel.ISupportInitialize) nudScaleY).BeginInit();
@@ -108,6 +109,7 @@ namespace SF3.Win.Controls {
             // 
             // gbOrientation
             // 
+            gbOrientation.Controls.Add(cbAlwaysFaceCamera);
             gbOrientation.Controls.Add(nudScaleZ);
             gbOrientation.Controls.Add(nudScaleY);
             gbOrientation.Controls.Add(nudScaleX);
@@ -128,10 +130,20 @@ namespace SF3.Win.Controls {
             gbOrientation.Controls.Add(nudX);
             gbOrientation.Location = new System.Drawing.Point(3, 32);
             gbOrientation.Name = "gbOrientation";
-            gbOrientation.Size = new System.Drawing.Size(200, 250);
+            gbOrientation.Size = new System.Drawing.Size(200, 271);
             gbOrientation.TabIndex = 6;
             gbOrientation.TabStop = false;
             gbOrientation.Text = "Orientation";
+            // 
+            // cbAlwaysFaceCamera
+            // 
+            cbAlwaysFaceCamera.AutoSize = true;
+            cbAlwaysFaceCamera.Location = new System.Drawing.Point(6, 220);
+            cbAlwaysFaceCamera.Name = "cbAlwaysFaceCamera";
+            cbAlwaysFaceCamera.Size = new System.Drawing.Size(134, 19);
+            cbAlwaysFaceCamera.TabIndex = 14;
+            cbAlwaysFaceCamera.Text = "Always Face Camera";
+            cbAlwaysFaceCamera.UseVisualStyleBackColor = true;
             // 
             // nudScaleZ
             // 
@@ -214,10 +226,10 @@ namespace SF3.Win.Controls {
             cbVisibleFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             cbVisibleFrom.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             cbVisibleFrom.FormattingEnabled = true;
-            cbVisibleFrom.Location = new System.Drawing.Point(88, 219);
+            cbVisibleFrom.Location = new System.Drawing.Point(85, 241);
             cbVisibleFrom.Name = "cbVisibleFrom";
             cbVisibleFrom.Size = new System.Drawing.Size(109, 24);
-            cbVisibleFrom.TabIndex = 14;
+            cbVisibleFrom.TabIndex = 15;
             cbVisibleFrom.Text = "(Any Direction)";
             cbVisibleFrom.UseWaitCursor = true;
             // 
@@ -238,7 +250,7 @@ namespace SF3.Win.Controls {
             labelVisibleFrom.AutoSize = true;
             labelVisibleFrom.DisabledColor = System.Drawing.Color.Empty;
             labelVisibleFrom.IsSeparator = false;
-            labelVisibleFrom.Location = new System.Drawing.Point(9, 222);
+            labelVisibleFrom.Location = new System.Drawing.Point(6, 244);
             labelVisibleFrom.Name = "labelVisibleFrom";
             labelVisibleFrom.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelVisibleFrom.Size = new System.Drawing.Size(73, 15);
@@ -386,7 +398,7 @@ namespace SF3.Win.Controls {
             labelCoordInfo.AutoSize = true;
             labelCoordInfo.DisabledColor = System.Drawing.Color.Empty;
             labelCoordInfo.IsSeparator = false;
-            labelCoordInfo.Location = new System.Drawing.Point(5, 491);
+            labelCoordInfo.Location = new System.Drawing.Point(5, 511);
             labelCoordInfo.Name = "labelCoordInfo";
             labelCoordInfo.OriginalBorderStyle = System.Windows.Forms.BorderStyle.None;
             labelCoordInfo.Size = new System.Drawing.Size(196, 30);
@@ -411,7 +423,7 @@ namespace SF3.Win.Controls {
             gbBoundingBox.Controls.Add(labelTop);
             gbBoundingBox.Controls.Add(nudBottom);
             gbBoundingBox.Controls.Add(labelBottom);
-            gbBoundingBox.Location = new System.Drawing.Point(3, 289);
+            gbBoundingBox.Location = new System.Drawing.Point(3, 309);
             gbBoundingBox.Name = "gbBoundingBox";
             gbBoundingBox.Size = new System.Drawing.Size(200, 198);
             gbBoundingBox.TabIndex = 7;
@@ -556,12 +568,21 @@ namespace SF3.Win.Controls {
             // 
             dbModel.Controls.Add(nudModelID);
             dbModel.Controls.Add(labelModelID);
-            dbModel.Location = new System.Drawing.Point(3, 531);
+            dbModel.Location = new System.Drawing.Point(3, 551);
             dbModel.Name = "dbModel";
             dbModel.Size = new System.Drawing.Size(200, 47);
             dbModel.TabIndex = 22;
             dbModel.TabStop = false;
             dbModel.Text = "Model";
+            // 
+            // nudModelID
+            // 
+            nudModelID.Hexadecimal = true;
+            nudModelID.Location = new System.Drawing.Point(71, 18);
+            nudModelID.Maximum = new decimal(new int[] { 65536, 0, 0, 0 });
+            nudModelID.Name = "nudModelID";
+            nudModelID.Size = new System.Drawing.Size(58, 23);
+            nudModelID.TabIndex = 40;
             // 
             // labelModelID
             // 
@@ -575,15 +596,6 @@ namespace SF3.Win.Controls {
             labelModelID.TabIndex = 13;
             labelModelID.Text = "Model ID:";
             // 
-            // nudModelID
-            // 
-            nudModelID.Hexadecimal = true;
-            nudModelID.Location = new System.Drawing.Point(71, 18);
-            nudModelID.Maximum = new decimal(new int[] { 65536, 0, 0, 0 });
-            nudModelID.Name = "nudModelID";
-            nudModelID.Size = new System.Drawing.Size(58, 23);
-            nudModelID.TabIndex = 40;
-            // 
             // ModelInstancePropertiesControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -594,9 +606,9 @@ namespace SF3.Win.Controls {
             Controls.Add(labelModelInstanceEdited);
             Controls.Add(labelCoordInfo);
             MaximumSize = new System.Drawing.Size(207, 10000);
-            MinimumSize = new System.Drawing.Size(207, 50);
+            MinimumSize = new System.Drawing.Size(207, 604);
             Name = "ModelInstancePropertiesControl";
-            Size = new System.Drawing.Size(207, 581);
+            Size = new System.Drawing.Size(207, 604);
             gbOrientation.ResumeLayout(false);
             gbOrientation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize) nudScaleZ).EndInit();
@@ -671,5 +683,6 @@ namespace SF3.Win.Controls {
         private DarkModeGroupBox dbModel;
         private DarkModeNumericUpDown nudModelID;
         private DarkModeLabel labelModelID;
+        private DarkModeCheckBox cbAlwaysFaceCamera;
     }
 }
