@@ -14,10 +14,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.DAT {
     public class ITEM_CG_File : DAT_FileBase {
-        // TODO: Where is this loaded?
-        public override int RamAddress => 0x00000000;
-        // TODO: To where is this loaded?
-        public override int RamAddressLimit => 0x00000000;
+        public override int RamAddress => 0x002D0000;
+        public override int RamAddressLimit => 0x002E8000;
 
         protected ITEM_CG_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario)
         : base(data, nameGetterContext, scenario, DAT_FileType.ITEM_CG) {
