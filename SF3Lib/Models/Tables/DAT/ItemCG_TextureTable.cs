@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.Utils;
@@ -58,10 +59,30 @@ namespace SF3.Models.Tables.DAT {
                     }
 
                     // Read the data, expecting a 24x24 image with a terminator.
-                    var decompressedData = Compression.DecompressLZSS(rawData, address, 24 * 24, out var _, out var endDataFound);
+
+                    var decompressedData = Compression.DecompressLZSS(rawData, address, 24 * 24, out var compressedSize, out var endDataFound);
                     if (decompressedData.Length != 24 * 24 || !endDataFound) {
                         address += 2;
                         continue;
+                    }
+
+                    // Recompress the data. If the size of the recompressed version varies by a significant amount, the data is probably bogus.
+                    var recompressedData = Compression.CompressLZSS(decompressedData);
+                    var sizeDiff = recompressedData.Length / (float) compressedSize;
+                    if (sizeDiff < 0.99f || sizeDiff > 1.00f) {
+                        int correctBytes = 0;
+
+                        var compressedData = Data.GetDataCopyAt(address, compressedSize);
+                        var minSize = Math.Min(recompressedData.Length, compressedSize);
+                        for (int i = 0; i < minSize; i++)
+                            if (recompressedData[i] == compressedData[i])
+                                correctBytes++;
+
+                        var correctPercent = correctBytes / (float) minSize;
+                        if (correctPercent < 0.50f) {
+                            address += 2;
+                            continue;
+                        }
                     }
 
                     if (!itemsStart.HasValue) {
