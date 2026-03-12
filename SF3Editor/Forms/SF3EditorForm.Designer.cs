@@ -638,7 +638,7 @@ namespace SF3.Editor.Forms {
             tsmiScene_ActiveCHR.Enabled = false;
             tsmiScene_ActiveCHR.Name = "tsmiScene_ActiveCHR";
             tsmiScene_ActiveCHR.Size = new Size(144, 22);
-            tsmiScene_ActiveCHR.Text = "Active &CHR";
+            tsmiScene_ActiveCHR.Text = "Active &Sprites";
             // 
             // tsmiScene_ActiveIcons
             // 
