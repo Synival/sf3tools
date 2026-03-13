@@ -12,6 +12,8 @@ This project was originally a fork of Rika's Tools for Shining Force III hacking
 
 | ![MPD Editor](Screenshots/v0.3.0%20Map%20Editor.png) | ![X014.BIN](Screenshots/v0.3.0%20X014.png) |
 |---|---|
+| ![Masqurin Sprite](Screenshots/v0.3.0%20MasqurinSprite.gif) | ![Synbios Portrait](Screenshots/v0.3.0%20SynbiosFace.gif) |
+| ![Icons](Screenshots/v0.3.0%20ITEM_CG.png) | |
 
 All of the work done by the editors is performed in a cross-platform backend project called SF3Lib. SF3Lib can
 be used to create small applications that tasks like make bulk changes, randomize data, perform analysis, or anything
