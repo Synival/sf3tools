@@ -1,3 +1,251 @@
+## SF3Tools v0.3.0 (2026-03-13)
+
+This release is another big one!  The goal was to pave the way for major upgrades to the MPD editor -- which
+absolutely happened -- but somewhere along the way, portraits became completely modifiable, along with icons!
+A few new tables are now modifiable, and stability and quality-of-life is improved in general.
+
+Here's a quick summary of the changes:
+
+- Lots of minor fixes and quality of life changes.
+- Portraits/faces can now be modified in full, including animations.
+- Item and spell icons (`ITEM_CG.DAT`) can now be replaced and completely replaced.
+    - NOTE: It's still a bit clunky, and not feature-complete, but you can definitely do it!
+- Scenario 2+ battle scene background images in `BTLENKEI.DAT` can be viewed and modified
+- Many, many new features, upgrades, and fixes to the MPD editor, including:
+    - Actor from battles and scenes can now be viewed and positioned (when linked with `X1*.BIN` file and, optionally, an accompanying `.CHR` file).
+    - Models can be selected, reoriented, and modified.
+    - Textures, animation frames, and plane images can be exported and imported.
+    - MPDs can be converted/exported to any scenario.
+    - Unreferenced data is now loaded.
+    - Rendering is faster, smoother, and more accurate.
+- Some new editable data in `X*.BIN` files along with a few fixes.
+- New tool: `sf3compress.exe`
+- Tons and tons of rewrites, especially for MPDs.
+- Last but not least: The editor is now in **dark mode** and therefore now looks like it belongs in this century!
+
+Have fun, and happy hacking!
+-- Synival
+
+Full changelog:
+
+### General Editor:
+
+- New Features
+    - In the "View" menu, a new setting "Dark Mode" is available. It is on by default.
+    - In the "View" menu, a new setting "Highlight Endcodes in Texture Views" is available. This will highlight the transparent "end code" encoding pixels magenta. It is off by default.
+    - Texture/image views now have "Import" and "Export" buttons:
+       - "Export" is supported for nearly all images. Exported images will be in either RGB or 8-bit indexed color palette format, depending on their source.
+       - "Import" is supported only by specific textures that support them.
+    - Errors detected in files are now reported on load, save, and from the "Scan for Errors" item in the "File" menu.
+    - In the "Settings" menu, a new setting "Show Errors when Loading Files" is available. It is on by default.
+    - "End code" encoding is now automatically applied to all 16-bit imported textures.
+    - Read support for X016.BIN, X017.BIN, X018.BIN, X032.BIN, and X035.BIN files:
+        - Only X032 has tables (Spell Icon Offsets)
+    - Several files can now be selected as "Active" from the new "Scene" menu:
+        - NPC tables (from battles or from scenes)
+        - CHR file
+        - Icons (from ITEM_CG.DAT)
+    - Color palettes can now be exported and imported as images
+
+- Quality of Life
+    - Some tables now show negative hex values when applicable (e.g, -1A instead of FFE6).
+    - Better handling of image updates in image views.
+    - Flicking eliminated when changing rows in tables with texture views
+    - The current scenario setting is now shown in the "Open" dialog.
+    - The current scenario setting is now shown in the application title bar.
+    - Some files with no difference between discs are opened as "scenarioless" and therefore won't fail scenario auto-detection.
+    - Long saving and loading operations now show a "Wait" cursor
+
+- Changes
+    - Removed grid lines from data tables (they look pretty bad in dark mode)
+    - Renamed "Other" scenario (seen in pre-release MPDs) to "Prototype"
+    - Added a few more game flags
+    - Renamed some spells: "Fake Charm" is actually the Golden Beak summon, and "HealHpOrDamageEnemy" is actually "Blessing (Attack)".
+
+- Bugfixes
+    - LZSS (de)compression has been cleaned-up and rewritten to be a lot less error-prone and useful.
+    - Better handling and communication of exceptions when loading files. Files will load much more often.
+    - Animated texture views now have a much more accurate frame rate.
+    - Prevented animations from going forever in the case of recovering from sleep or busy.
+    - Fixes for some column sizes in the data viewer
+
+### Animated Face (`KAO*.DAT`) Files:
+
+These files can now be opened and modified across all four discs.
+The animated faces can now be completely replaced or updated by modifying a single spritesheet.
+The same tab also has a preview of both blinking and talking animations.
+
+To update a face:
+    1. Load the `KAO*.DAT` file
+    2. Using the dropdown on top of the file's tab, select the face to modify
+    3. Navigate to the "Spritesheet" tab (should be the default)
+    4. Click "Export" to export to an image
+    5. Modify the sections of the spritesheet with image data, leaving everything else (special encoding) completely intact.
+    6. Click "Import" to replace the contents of the face with your new image
+    7. Save, and make your mod!
+
+### `FACE*.DAT` Files:
+
+These files can now be opened and modified across all four discs.
+Updating is not as extensive as `KAO*.DAT` and `ITEM_CG.DAT`, but you can replace existing portraits as long as they're the same size when compressed as the original or smaller.
+
+### `ITEM_CG.DAT`:
+
+This file, present on all four discs, contains all of the icons for items and spells. It can now be opened, completely replaced, or have individual icons replaced (with some restrictions).
+
+It works similarly to updating `KAO*.DAT` and `FACE*.DAT`: Individual icons can be replaced as long as they're the same size when compressed as the original or smaller, and the entire "Spritesheet" can be updated at once, replacing the entire contents of the file. When completely replaced, the resulting file is as dense is possible and all of the icon offsets in `X011.BIN`, `X021.BIN`, `X026.BIN`, and `X032.BIN` will need to be updated.
+
+In the future, it would be great to have more customization or settings in how this file is modified. Until there's a better way to modify this file, the new setting "Settings" / "Minimal Changes when Importing Spritesheets" is there as a band-aid; this setting will preserve unchanged images and try to keep offsets what they were originally. It's a bit clunky, but at least it's something!
+
+### `BTLENKEI.DAT`:
+
+This file, present from scenario 2 onward, contains the backgrounds used in 3D battle scenes.
+They can now be viewed, exported, and replaced.
+
+### Map (`*.MPD`) Files:
+
+- New Features (Major)
+    - Actors from battles or scenes in X1 files can now be displayed and selected from the MPD viewer:
+        - To view actors:
+            1. Load the desired `X1*.BIN` file in another tab
+            2. Select the desired table of actors in the "Scene" / "Active Actors" menu
+            3. Load the sprite file associated with this scene. It's usually the same, but replace `X1` with `X` and `.BIN` with `.CHR`. (Ex: `X1BTL101.BIN` uses `XBTL101.CHR`)
+            4. Select the desired sprites in the "Scene" / "Active Sprites" menu (only necessary if you have multiple .CHR files open)
+        - Simply click on an actor to position and rotate it. More editing features will come in a future version.
+    - Model instances can now be selected and modified:
+        - Position can be viewed/set in either world coordinates or grid (surface) coordinates.
+        - Position, scale %, and flags can be modified.
+        - Model can be changed using the "Model ID" field.
+        - Their final bounding box coordinates and dimensions are displayed and can be modified to translate/resize models after they've been rotated. This is particularly useful for setting walls to the corrrect size, position models to take up exactly *n* tiles worth of space, or placing models directly on top of the surface.
+    - .MPD files can now be exported to any scenario from the "MPD" / "Export" menu:
+        - Exporting to an earlier scenario does not export tables that do not apply, such as:
+            - Gradients (Scenario 2+)
+            - Light Adjustment (Scenario 2+)
+            - Ground Palette Adjustment (Scenario 3+, selectively applied)
+            - Indexed textures (Scenario 3+): The 8-bit textures are written as 16-bit textures in this case, and will not be affected by transparency.
+            - Rotatable Tiles (Scenario 3+): The editor doesn't account for this by attempting to add new textures so maps utilizing this feature will need corrections.
+            - Unsupported flags: Newer flags like "Narrow Angle-Based Surface Lightmap" are not accounted for.
+            - (No effect on gameplay) Unused "Unknown 1" and "Unknown 2" tables from scenario 1 are not exported to scenario 2+
+        - Sky planes are exported as-is, which is a bit odd considering that scenario 1 and 2+ use these planes very differently. You'll need to manually make changes depending on what you need.
+    - Plane images can now be updated with the "Import" image button. This applies to simple ground/water planes, sky planes, and tilesets.
+    - Color palettes and light tables can now be exported as images using the "Import" and "Export" image features.
+    - Individual textures and animation frames can now be replaced using the "Import" image button
+    - Chest and barrel models that are present in the .MPD but not referenced in the header are now loaded and editable.
+        - NOTE: Unreferenced chunks, planes, models, and tables are now marked with an "(Unreferenced)" or "(Dummied Out)" tag in their tab name.
+    - In the "Settings" / "MPD" menu, a new setting "Update Chunk Table on Resize" is now available. When set, the sizes and locations of chunks in the chunk table are automatically updated when chunks are moved or resized. This was the default behavior in previous versions, but can now be disabled. It is on by default.
+    - In the "Settings" / "MPD" menu, a new setting "Rebuild Chunk Table on Save" is now available. When set, the sizes and locations of chunks in the chunk table are automatically updated when the MPD file is saved. This was the default behavior in previous versions, but can now be disabled. It is on by default.
+
+- New Features (Minor)
+    - Many vanilla .MPD errors or quirks previously only reported by analysis tools are now reported by the editor.
+    - Collision blocks are now visible in the data viewer
+    - The data viewer for collision lines now displays what blocks they're located in
+    - Texture chunk data viewer now has "IsIgnored" and "HasAnimation" columns, indicating if they're found in these tables.
+    - Models now have "ModelID" and "LevelOfDetail" properties.
+        - NOTE: These are invented by the editor and not present in .MPD files or the game's code. They're very, very useful for our purposes, though!
+
+- Rendering Improvements
+    - Framerate has been increased -- the viewer is now buttery smooth.
+    - Frame render time improved a bit
+    - The "MESH" polygon flag (pixels rendered in a cross-hatch pattern) are now rendered correctly.
+    - In the "View" / "MPD" menu (also the MPD editor toolbar), a new setting "Apply Shadow (2000) Tags" is now available. This will turn models that have model instances with the 2000 tag into semi-transparent shadows. Exact rendering behavior depends on the scenario and is only applied if the X1 file runs the initialization code. It is on by default.
+    - In the "View" / "MPD" menu (also the MPD editor toolbar), a new setting "Apply Hide (3000) Tags" is now available. This will turn models that have model instances with the 3000 tag into invisible walls that block model and sprite rendering behind them. This tag is used for Scenario 3 .MPDs to hide underground models that should appear behind the ground plane. Like shadows, this effect is only applied if the X1 file runs the initialization code. It is on by default.
+    - Missing textures and textures in the (new) "Ignored Texture" table are now rendered bright red to indicate the error. These errors can be seen in Scenario 1 unused maps `NASU00.MPD` and `SHIO00.MPD`, as well as one extremely-hard-to-see polygon in the bottom of a mug in a bar in Dusty.
+    - The "Scene Rotation" angle is now properly accounted for. There shouldn't be a change in scene rendering because this is *always* 180 degrees, but if this were ever changed for some reason, it would work.
+        - PSA: Don't change this. It's indeed a very stupid thing that this exists at all, but literally *every* .MPD has its models flipped 180 degrees for some reason.
+    - The sky plane is now rendered at the correct size and position, taking settings in the .MPD header into account.
+        - NOTE: In maps like HNEND2.MPD and TANK00.MPD their positions seem incorrect, but they are not. The planes' positions are modified in the X1 init code, which the editor can't reproduce.
+    - When viewing collision, collision points are now rendered as large blocks.
+    - Collision points without any connecting lines are rendered red. (A handful of maps have some orphaned unused points, like BTL12.MPD)
+    - Rendering for mouseover and selected tiles (now including actors and models) has been rewritten to use nifty outline effects.
+
+- Changes (Major)
+    - The selected object panel, previously only for tiles, is no longer visible if nothing is selected.
+        - NOTE: Selecting an object now hides the right portion of the map. It's a little annoying, but it turns out it's much less annoying then resizing or moving the viewer!
+    - Selected objects can be deselected with the new "MPD" / "Deselect All" menu item or by pressing Ctrl+D.
+    - The Titan/Kraken models can now be toggled off using the "View" / "MPD" / "Draw Extra Models (Titan / Kraken)" menu item. There is also a toolbar icon for this on the 3D viewer. This is on by default.
+        - NOTE: This is a must for `MITI00.MPD` and `PD_MAP.MPD`. Why is that Kraken model the size of a continent???
+    - The "Help" overlay and its related settings and buttons have been removed. It's an outdated feature and wasn't so helpful.
+    - Height values when editing tiles are now integers (as stored) rather than floats:
+        - The values should make a lot more sense for editing; field maps often use 100 (decimal) for the base ground height and 90 (decimal) for water plane height.
+        - 1 unit for the tile heightmap represents 2 Y units in "world" space and 1/16 the size of a grid X/Z coordinate. In other words:
+            - A tile with height positions of 100 will correspond to a world Y coordinate of -200 (-0xC8) for the purpose of placing models
+            - A max height difference of 16 between corners will produce a tile that is as tall as it is wide
+    - The default "improved" method for calculating surface model normals has been improved.
+    - What was previously known as the "Alt Animation Frame" table has been more accurately identified as the "Ignored Texture" table. Textures in this table do indeed come from animations but, more importantly, completely ignored when loading .MPDs.
+    - .MPD header flag 0x0008 has been identified as "Keep Textureless Flat Tiles". This is used in certain maps to allow grid highlighting on textureless tiles that are marked 'flat', which would normally be ignored when building the surface models/PDATAs.
+
+- Changes (Minor)
+    - "Skybox" has been renamed to "Sky" everywhere because it's not a box, it's a plane.
+    - Models for chests in the "header chunk" have been renamed to "Chest Models", "Locked Chest Models", and "Barrel Models".
+    - Animation frames are now viewable from the "Header" data area (where it is actually located) as well as the "Chunk 3" data viewer.
+    - "Pixel Format Known" field for textures is now more accurate, now that we know more about how the .MPD operates.
+
+- Quality of Life Improvements
+    - A grey box is now drawn around the 3D viewer area when it has keyboard focus.
+    - Flags can now be edited and viewed in a new "Flags" tab. This is a much friendlier alternative to the data editor view.
+    - Planes are now viewable and editable from the "Planes" tab
+    - Textures are now displayed when viewing polygon ATTRs.
+    - Textures are now displayed in the "Ignored Textures" and "Indexed Textures" tables.
+    - All angle values are now displayed in degrees in range [-180, 180).
+    - Models are now displayed in the "Model Switch View" data viewer.
+    - The "Use Full Instead of Half Height for Surface Normal Calculations" setting is now only considered when the "Narrow Angle-Based Surface Lightmap" MPD flag is off. This setting *always* produces undesired results when that MPD flag is on, so you can now leave it on as default behavior without screwing up scenario 2+ field maps.
+    - Keyboard controls for lighting adjustments (',', '.', '[', ']') now change the lighting in increments that are a bit more useful.
+
+- Bugfixes
+    - The 3D viewer now invalidates and updates itself at much more appropriate times.
+    - Tile animations and other tick-based events in the 3D viewer are no longer skipped when frames are rendered very often (e.g, when rotating the camera aggressively)
+    - Resizing the window should produce fewer frames where the 3D viewer is stretched.
+    - Fixed the sizes of the Scenario 1 "Unknown 1" and "Unknown 2" tables.
+    - Changing terrain flags -- there is only one, the "Reduced Height Penalty" flag -- was setting terrain type+flag values incorrectly. This has been fixed.
+    - In the experimental FIELD.MPD tile drawing mode, tiles no longer redraw themselves when they're clicked by right or middle mouse buttons.
+    - Collision line count was incorrect, which affected one (unused) Premium Disk MPD.
+    - Logic fixes for model visibility indicated by "Model Switch Group" flags.
+        - NOTE: The logic still isn't quite accurate. Specifically, IWAOKA.MPD's model switch flags, which determine what rocks are visible in the Scenario 3 Walcuray battle, are programmed in a weird way where the results are different depending on the order in which the flags were toggled. It looks like a bit of a hack on Camelot's part and it doesn't behave properly in the editor.
+    - Prototype and early prototype (SHIP2.MPD) maps are loaded more correctly:
+        - Ground plane palette has been fixed
+        - Header fields have been corrected
+        - New "Unknown 3 (Ship2)" and "Unknown 4 (Prototype)" tables are now loaded
+
+### Battle/scene programming (`X1*.BIN`) Files:
+
+- Fixed broken blacksmith table X1 discovery
+- Updated X1_File to support multiple interactable tables
+- Makeshift loading of extra interactable tables
+- support for multiple NPC tables
+- discovery of additional NPC tables
+- Some corrections to NPC function discovery
+- table count to X1 view
+- Validation for some X1 table discovery
+- NPC table interactable tie-in counter corrections
+- Introduced SpriteID to Slot table
+- Renamed unknown Slot flag to ArrivesLater
+- Renamed flag back to UnknownFlag
+
+### Other Files:
+
+- `X002.BIN`:
+    - Item effective type powers are now in decimal.
+    - Introduced "SpellType" and "FieldSpell" dropdown fields to spell table.
+    - Fix: First warp in a warp table groups had the wrong name.
+    - Fix: Warp table property "RawData" wasn't visible because it was accidentally made `private`.
+- `X013.BIN`: Added "Spell Animation Substitutions" table.
+- `X019.BIN`: Renamed "X019" menu to "Monsters".
+- `X032.BIN`: New file, with "Spell Icon Offset" table.
+- `*.CHP`: Every address/offset field in data views now have an accompanying "in file" field that show the "global" offset in the file, not the relative offset for the specific sprite.
+- Files with blacksmith tables: New "Blacksmith" / "Sort Blacksmith Tables" menu item.
+- Files with item/spell icon offsets: Added "Icon Offsets" / "Assign from Active Icons" menu item.
+
+### New command-line tool: `sf3compress.exe`:
+
+This new tool can compress and decompress data to and from Shining Force 3's LZSS compression format.
+Output can be printed or written to a file. Run `sf3compress.exe --help` for details.
+
+### Analysis Tools:
+
+- MPD_Analyzer:
+    - Analysis of MPDs is now multi-threaded and significantly faster
+    - Reorganized code so tests aren't completely wiped with every new test
+
 ## SF3Tools v0.2.0 (2025-10-31)
 
 This release adds several new features, the most exciting of which is a tool to update Shining Force III's sprites!
