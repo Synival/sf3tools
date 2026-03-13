@@ -8,7 +8,7 @@ using NDesk.Options;
 
 namespace DFRTool {
     internal class Program {
-        private const string c_Version = "1.1.1";
+        private const string c_Version = "1.1.3";
 
         private const string c_VersionString =
             "DFRTool v" + c_Version + "\n";

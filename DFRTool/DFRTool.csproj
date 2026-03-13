@@ -5,10 +5,10 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>dfrtool</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
-    <Copyright>Copyright © Synival 2025</Copyright>
-    <AssemblyVersion>1.1.1</AssemblyVersion>
-    <FileVersion>1.1.1</FileVersion>
-    <Version>1.1.1</Version>
+    <Copyright>Copyright © Synival 2026</Copyright>
+    <AssemblyVersion>1.1.3</AssemblyVersion>
+    <FileVersion>1.1.3</FileVersion>
+    <Version>1.1.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
