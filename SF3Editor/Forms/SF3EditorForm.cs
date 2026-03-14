@@ -29,7 +29,7 @@ namespace SF3.Editor.Forms {
             InitializeComponent();
 
             // The application state should never change for the app's lifetime.
-            _appState = AppState.RetrieveAppState();
+            _appState = AppState.Get();
             _appScene = AppScene.Get();
 
             // Create a container for all files.

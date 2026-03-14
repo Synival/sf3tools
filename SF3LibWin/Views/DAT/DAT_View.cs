@@ -19,7 +19,7 @@ namespace SF3.Win.Views.DAT {
                 var textureView = new TextureView("Spritesheet", Model.Spritesheet, 1);
 
                 textureView.ImagePreImport += (s, e) =>
-                    Model.Spritesheet.MinimalChangesWhenSetting = AppState.RetrieveAppState().MinimalChangesWhenImportingSpritesheets;
+                    Model.Spritesheet.MinimalChangesWhenSetting = AppState.Get().MinimalChangesWhenImportingSpritesheets;
 
                 textureView.ImageImported += (s, e) => {
                     // TODO: There's a more elegant want to do this for sure!

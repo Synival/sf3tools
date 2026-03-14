@@ -50,7 +50,7 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
 
-            var appState = AppState.RetrieveAppState();
+            var appState = AppState.Get();
 
             appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appState.ViewerDrawSurfaceModel; };
             appState.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appState.ViewerDrawModels; };

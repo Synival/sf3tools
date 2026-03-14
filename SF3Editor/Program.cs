@@ -17,7 +17,7 @@ namespace SF3.Editor {
             ApplicationConfiguration.Initialize();
 
             // Fetch saved application state
-            var appState = AppState.RetrieveAppState("SF3 Editor");
+            var appState = AppState.Get("SF3 Editor");
 
             // Supply a state for dark mode support
             DarkModeContext.Observable = appState;

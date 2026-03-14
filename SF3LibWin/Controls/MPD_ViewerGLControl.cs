@@ -16,7 +16,7 @@ namespace SF3.Win.Controls {
             if (!AppState.Initialized)
                 return;
 
-            _appState = AppState.RetrieveAppState();
+            _appState = AppState.Get();
 
             _timer = new Timer() { Interval = 10 };
             _timer.Tick += (s, a) => IncrementFrame();

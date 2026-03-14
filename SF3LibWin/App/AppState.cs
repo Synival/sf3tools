@@ -19,13 +19,13 @@ namespace SF3.Win.App {
 
         public static bool Initialized => _globalAppState != null;
 
-        public static AppState RetrieveAppState() {
+        public static AppState Get() {
             if (_globalAppState == null)
                 _globalAppState = new AppState();
             return _globalAppState;
         }
 
-        public static AppState RetrieveAppState(string appName) {
+        public static AppState Get(string appName) {
             if (_globalAppState == null) {
                 _globalAppState = Deserialize(appName);
                 if (_globalAppState == null) {
