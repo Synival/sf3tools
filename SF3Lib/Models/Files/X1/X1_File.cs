@@ -246,7 +246,7 @@ namespace SF3.Models.Files.X1 {
 
             var scenes = new List<IScene>();
             if (Battles != null)
-                scenes.AddRange(Battles.Values.Select(x => x.SlotTable));
+                scenes.AddRange(Battles.Values);
             if (NpcTables != null)
                 scenes.AddRange(NpcTables);
             Scenes = scenes;

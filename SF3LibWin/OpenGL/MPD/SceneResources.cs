@@ -71,7 +71,7 @@ namespace SF3.Win.OpenGL.MPD {
                 return;
 
             var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
-            var actorsGrouped = currentScene.Scene.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
+            var actorsGrouped = currentScene.Scene.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
 
             var spriteIds = actorsGrouped.Select(x => x.Key).ToArray();
             BuildTexture(spriteIds);

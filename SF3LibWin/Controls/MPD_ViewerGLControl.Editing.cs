@@ -104,7 +104,7 @@ namespace SF3.Win.Controls {
                 if (newActor != null) {
                     var scene = AppResources.Get().ActiveScene?.Scene;
                     if (scene != null)
-                        actor = scene.FirstOrDefault(x => x.ID == newActor.ID);
+                        actor = scene.Actors.FirstOrDefault(x => x.ID == newActor.ID);
                 }
                 if (actor != null)
                     newEventObject = actor;

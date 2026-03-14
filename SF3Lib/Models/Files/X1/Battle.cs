@@ -1,22 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
+using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X1.Battle;
+using SF3.Scenes;
 using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
-    public class Battle : TableFile {
+    public class Battle : TableFile, IScene {
         protected Battle(IByteData data, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, Battle prevBattle)
         : base(data, nameContext) {
-            MapLeader = mapLeader;
-            Address   = address;
+            MapLeader  = mapLeader;
+            Address    = address;
             HasLargeEnemyTable = hasLargeEnemyTable;
-            Scenario = scenario;
+            Scenario   = scenario;
             PrevBattle = prevBattle;
+            SceneName  = $"Battle ({mapLeader})";
         }
 
         public static Battle Create(IByteData data, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, Battle prevBattle) {
@@ -38,7 +42,7 @@ namespace SF3.Models.Files.X1 {
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
             return new List<ITable>() {
-                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, MapLeader, PrevBattle?.SlotTable?.Rows?.Last())),
+                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, PrevBattle?.SlotTable?.Rows?.Last())),
                 (ZoneTable             = ZoneTable.Create            (Data, "Zones",          zoneAddress)),
                 (AITargetPositionTable = AITargetPositionTable.Create(Data, "AI",             aiAddress)),
                 (ScriptedMovementTable = ScriptedMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
@@ -64,5 +68,9 @@ namespace SF3.Models.Files.X1 {
         public AITargetPositionTable AITargetPositionTable { get; private set; }
         [BulkCopyRecurse]
         public ScriptedMovementTable ScriptedMovementTable { get; private set; }
+
+        public bool IsBattle => true;
+        public string SceneName { get; }
+        public IIndexedEnumerableWithLength<IActor> Actors => this.SlotTable;
     }
 }

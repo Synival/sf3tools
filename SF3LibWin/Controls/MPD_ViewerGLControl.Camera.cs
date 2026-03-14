@@ -81,7 +81,7 @@ namespace SF3.Win.Controls {
                 }
             }
             else if (obj is SelectableActor actorObj) {
-                var actor = AppResources.Get().ActiveScene?.Scene?.FirstOrDefault(x => x.ID == actorObj.ID);
+                var actor = AppResources.Get().ActiveScene?.Scene?.Actors?.FirstOrDefault(x => x.ID == actorObj.ID);
                 if (actor != null) {
                     target = new Vector3(
                         actor.ActorX /  32.0f + GeneralResources.ModelOffsetX,

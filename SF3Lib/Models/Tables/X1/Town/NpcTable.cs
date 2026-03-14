@@ -7,7 +7,7 @@ using SF3.Models.Structs.X1.Town;
 using SF3.Scenes;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class NpcTable : TerminatedTable<Npc>, IScene {
+    public class NpcTable : TerminatedTable<Npc>, IScene, IIndexedEnumerableWithLength<IActor> {
         protected NpcTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts)
         : base(data, name, address, 2, 100) {
             ActorScripts = actorScripts;
@@ -29,6 +29,7 @@ namespace SF3.Models.Tables.X1.Town {
 
         IActor[] IIndexedEnumerableWithLength<IActor>.AsArray() => Rows;
         IEnumerator<IActor> IEnumerable<IActor>.GetEnumerator() => GetEnumerator();
+        IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
 
         private Dictionary<uint, ActorScript> _actorScripts;
         public Dictionary<uint, ActorScript> ActorScripts {
@@ -44,6 +45,6 @@ namespace SF3.Models.Tables.X1.Town {
 
         public bool IsBattle => false;
         public string SceneName => Name;
-        IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
+        public IIndexedEnumerableWithLength<IActor> Actors => this;
     }
 }
