@@ -157,19 +157,19 @@ namespace SF3.Editor.Forms {
             if (acf?.ActorCollections?.Any() == true) {
                 foreach (var ac in acf.ActorCollections)
                     _appScene.RegisterActorCollection(fileLoader.ShortFilename, ac);
-                UpdateSceneMenuActorCollections();
+                UpdateActiveResourcesMenuActorCollections();
             }
 
             var chr = fileLoader.Model as ICHR_File;
             if (chr != null) {
                 _appScene.RegisterCHR(fileLoader.ShortFilename, chr);
-                UpdateSceneMenuCHRs();
+                UpdateActiveResourcesMenuCHRs();
             }
 
             var itemCG = fileLoader.Model as ITEM_CG_File;
             if (itemCG != null) {
                 _appScene.RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable, itemCG.SpellIconIndex);
-                UpdateSceneMenuIconCollections();
+                UpdateActiveResourcesMenuIconCollections();
             }
 
             // Focus the tab itself.
@@ -195,17 +195,17 @@ namespace SF3.Editor.Forms {
                 if (acf?.ActorCollections?.Any() == true) {
                     foreach (var ac in acf.ActorCollections)
                         _appScene.UnregisterActorCollection(ac);
-                    UpdateSceneMenuActorCollections();
+                    UpdateActiveResourcesMenuActorCollections();
                 }
 
                 if (chr != null) {
                     _appScene.UnregisterCHR(chr);
-                    UpdateSceneMenuCHRs();
+                    UpdateActiveResourcesMenuCHRs();
                 }
 
                 if (itemCG != null) {
                     _appScene.UnregisterIconCollection(itemCG.TextureTable);
-                    UpdateSceneMenuIconCollections();
+                    UpdateActiveResourcesMenuIconCollections();
                 }
             };
 

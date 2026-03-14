@@ -51,7 +51,7 @@
     <Compile Update="Forms\SF3EditorForm.Help.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Update="Forms\SF3EditorForm.Scene.cs">
+    <Compile Update="Forms\SF3EditorForm.ActiveResources.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Update="Forms\SF3EditorForm.IconOffsets.cs">

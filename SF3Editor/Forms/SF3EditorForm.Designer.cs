@@ -93,10 +93,10 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_RotateSpritesUpToCamera = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScene = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScene_Actors = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScene_ActiveCHR = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiScene_ActiveIcons = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiActiveResources = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiActiveResources_Actors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiActiveResources_ActiveCHR = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiActiveResources_ActiveIcons = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ImportTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools_ExportTable = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,6 +140,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_ShowErrorsOnFileLoad = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_MinimalChanges = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiSettings_MPD = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_ImprovedNormalCalculations = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,13 +152,12 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiSettings_MinimalChanges = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiScene, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiIconOffsets, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiActiveResources, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiIconOffsets, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -619,33 +619,33 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_EnableBlankFieldV2Controls.Text = "E&XPERIMENTAL: Enable tile controls for BlankField_V2.MPD";
             tsmiView_MPD_EnableBlankFieldV2Controls.Click += tsmiView_MPD_EnableBlankFieldV2Controls_Click;
             // 
-            // tsmiScene
+            // tsmiActiveResources
             // 
-            tsmiScene.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiScene_Actors, tsmiScene_ActiveCHR, tsmiScene_ActiveIcons });
-            tsmiScene.Name = "tsmiScene";
-            tsmiScene.Size = new Size(50, 20);
-            tsmiScene.Text = "S&cene";
+            tsmiActiveResources.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiActiveResources_Actors, tsmiActiveResources_ActiveCHR, tsmiActiveResources_ActiveIcons });
+            tsmiActiveResources.Name = "tsmiActiveResources";
+            tsmiActiveResources.Size = new Size(108, 20);
+            tsmiActiveResources.Text = "&Active Resources";
             // 
-            // tsmiScene_Actors
+            // tsmiActiveResources_Actors
             // 
-            tsmiScene_Actors.Enabled = false;
-            tsmiScene_Actors.Name = "tsmiScene_Actors";
-            tsmiScene_Actors.Size = new Size(144, 22);
-            tsmiScene_Actors.Text = "Active &Actors";
+            tsmiActiveResources_Actors.Enabled = false;
+            tsmiActiveResources_Actors.Name = "tsmiActiveResources_Actors";
+            tsmiActiveResources_Actors.Size = new Size(180, 22);
+            tsmiActiveResources_Actors.Text = "Active &Actors";
             // 
-            // tsmiScene_ActiveCHR
+            // tsmiActiveResources_ActiveCHR
             // 
-            tsmiScene_ActiveCHR.Enabled = false;
-            tsmiScene_ActiveCHR.Name = "tsmiScene_ActiveCHR";
-            tsmiScene_ActiveCHR.Size = new Size(144, 22);
-            tsmiScene_ActiveCHR.Text = "Active &Sprites";
+            tsmiActiveResources_ActiveCHR.Enabled = false;
+            tsmiActiveResources_ActiveCHR.Name = "tsmiActiveResources_ActiveCHR";
+            tsmiActiveResources_ActiveCHR.Size = new Size(180, 22);
+            tsmiActiveResources_ActiveCHR.Text = "Active &Sprites";
             // 
-            // tsmiScene_ActiveIcons
+            // tsmiActiveResources_ActiveIcons
             // 
-            tsmiScene_ActiveIcons.Enabled = false;
-            tsmiScene_ActiveIcons.Name = "tsmiScene_ActiveIcons";
-            tsmiScene_ActiveIcons.Size = new Size(144, 22);
-            tsmiScene_ActiveIcons.Text = "Active &Icons";
+            tsmiActiveResources_ActiveIcons.Enabled = false;
+            tsmiActiveResources_ActiveIcons.Name = "tsmiActiveResources_ActiveIcons";
+            tsmiActiveResources_ActiveIcons.Size = new Size(180, 22);
+            tsmiActiveResources_ActiveIcons.Text = "Active &Icons";
             // 
             // tsmiTools
             // 
@@ -953,6 +953,13 @@ namespace SF3.Editor.Forms {
             tsmiSettings_ShowErrorsOnFileLoad.Text = "Show &Errors when Loading Files";
             tsmiSettings_ShowErrorsOnFileLoad.Click += tsmiSettings_ShowErrorsOnFileLoad_Click;
             // 
+            // tsmiSettings_MinimalChanges
+            // 
+            tsmiSettings_MinimalChanges.Name = "tsmiSettings_MinimalChanges";
+            tsmiSettings_MinimalChanges.Size = new Size(321, 22);
+            tsmiSettings_MinimalChanges.Text = "M&inimal Changes when Importing Spritesheets";
+            tsmiSettings_MinimalChanges.Click += tsmiSettings_MinimalChanges_Click;
+            // 
             // tsmiSettings_Sep1
             // 
             tsmiSettings_Sep1.Name = "tsmiSettings_Sep1";
@@ -1025,13 +1032,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(107, 22);
             tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiSettings_MinimalChanges
-            // 
-            tsmiSettings_MinimalChanges.Name = "tsmiSettings_MinimalChanges";
-            tsmiSettings_MinimalChanges.Size = new Size(321, 22);
-            tsmiSettings_MinimalChanges.Text = "M&inimal Changes when Importing Spritesheets";
-            tsmiSettings_MinimalChanges.Click += tsmiSettings_MinimalChanges_Click;
             // 
             // SF3EditorForm
             // 
@@ -1165,14 +1165,14 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem mpdTSMI_Export_ToMPDProject;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New_MPDProject;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScene;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScene_Actors;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScene_ActiveCHR;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources_Actors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources_ActiveCHR;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawActors;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_DeselectAll;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawExtraModels;
-        private System.Windows.Forms.ToolStripMenuItem tsmiScene_ActiveIcons;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources_ActiveIcons;
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets;
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets_Assign;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MinimalChanges;
