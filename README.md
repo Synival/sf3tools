@@ -49,6 +49,19 @@ Features:
 - Normal maps can be recalculated using a better method than used in SF3, fixing some bugs and quirks
 - **Experimental:** The map FIELD.MPD on Scenario 3 and the Premium Disk can be drawn upon using a special set of brush tools enabled in the "View -> MPD" menu. This is designed to work with a modified version of this file with extra textures, but it's mostly functional with the vanilla MPD.
 
+### Faces / Portraits
+
+`KAO*.DAT` and `FACE*.DAT` files can be opened and edited, including the complete replacement of animated portraits.
+
+(More info TBD!)
+
+### Sprites
+
+Sprites are fully modifiable, but there's a catch: although we can view the contents of `.CHR` and `.CHP` files, editing and creating them must be done using the `chrtool.exe` command-line tool, which requires a development environment setup under Windows' Linux Subsystem.
+
+Please check out the "SF3Sprites" project:
+https://github.com/Synival/sf3sprites
+
 ### .BIN Files
 
 Various tables and other bits of data can be modified across a large number of .BIN files:
