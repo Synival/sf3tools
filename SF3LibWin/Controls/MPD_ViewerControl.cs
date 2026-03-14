@@ -9,7 +9,6 @@ using CommonLib.Geometry;
 using SF3.Win.OpenGL.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Win.App;
-using SF3.Actors;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
 

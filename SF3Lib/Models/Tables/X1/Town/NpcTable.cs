@@ -4,9 +4,10 @@ using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 using SF3.Models.Structs.X1.Town;
+using SF3.Scenes;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class NpcTable : TerminatedTable<Npc>, IActorCollection {
+    public class NpcTable : TerminatedTable<Npc>, IScene {
         protected NpcTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts)
         : base(data, name, address, 2, 100) {
             ActorScripts = actorScripts;
@@ -42,7 +43,7 @@ namespace SF3.Models.Tables.X1.Town {
         }
 
         public bool IsBattle => false;
-        public string ActorCollectionName => Name;
+        public string SceneName => Name;
         IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
     }
 }

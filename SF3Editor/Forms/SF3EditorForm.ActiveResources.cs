@@ -5,10 +5,10 @@ using SF3.Win.App;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
-        private void UpdateActiveResourcesMenuActorCollections() {
-            UpdateActiveResourcesMenuSubmenu(tsmiActiveResources_Actors, ar => ar.ActorCollections, ar => ar.ActiveActorCollection, (actors, item) => {
-                _appResources.ActiveActorCollection = actors;
-                UpdateActiveResourcesMenuSubmenuChecks(tsmiActiveResources_Actors, item);
+        private void UpdateActiveResourcesMenuScenes() {
+            UpdateActiveResourcesMenuSubmenu(tsmiActiveResources_Scene, ar => ar.Scenes, ar => ar.ActiveScene, (scene, item) => {
+                _appResources.ActiveScene = scene;
+                UpdateActiveResourcesMenuSubmenuChecks(tsmiActiveResources_Scene, item);
             });
         }
 

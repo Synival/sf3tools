@@ -153,11 +153,11 @@ namespace SF3.Editor.Forms {
             }
 
             // Register any important app-wide tables.
-            var acf = fileLoader.Model as IActorCollectionFile;
-            if (acf?.ActorCollections?.Any() == true) {
-                foreach (var ac in acf.ActorCollections)
-                    _appResources.RegisterActorCollection(fileLoader.ShortFilename, ac);
-                UpdateActiveResourcesMenuActorCollections();
+            var sceneFile = fileLoader.Model as ISceneFile;
+            if (sceneFile?.Scenes?.Any() == true) {
+                foreach (var scene in sceneFile.Scenes)
+                    _appResources.RegisterScene(fileLoader.ShortFilename, scene);
+                UpdateActiveResourcesMenuScenes();
             }
 
             var chr = fileLoader.Model as ICHR_File;
@@ -192,10 +192,10 @@ namespace SF3.Editor.Forms {
                     _loadedFiles.Remove(lf);
 
                 // Unregister any important app-wide tables.
-                if (acf?.ActorCollections?.Any() == true) {
-                    foreach (var ac in acf.ActorCollections)
-                        _appResources.UnregisterActorCollection(ac);
-                    UpdateActiveResourcesMenuActorCollections();
+                if (sceneFile?.Scenes?.Any() == true) {
+                    foreach (var scene in sceneFile.Scenes)
+                        _appResources.UnregisterScene(scene);
+                    UpdateActiveResourcesMenuScenes();
                 }
 
                 if (chr != null) {

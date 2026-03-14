@@ -55,8 +55,8 @@ namespace SF3.Win.Controls {
             _appSettings.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); InvalidateFrame(); };
 
             var scene = AppResources.Get();
-            scene.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };
-            scene.ActiveCHRChanged             += (s, e) => { InvalidateActors(); };
+            scene.ActiveSceneChanged += (s, e) => { InvalidateActors(); };
+            scene.ActiveCHRChanged   += (s, e) => { InvalidateActors(); };
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace SF3.Win.Controls {
             _gradients       = new GradientResources();
             _lighting        = new LightingResources();
             _boundaryModels  = new BoundaryModelResources();
-            _actorResources  = new ActorResources();
+            _sceneResources  = new SceneResources();
             _screenResources = new ScreenResources();
 
             _renderer = new Renderer();
@@ -102,7 +102,7 @@ namespace SF3.Win.Controls {
             _gradients.Init();
             _lighting.Init();
             _boundaryModels.Init();
-            _actorResources.Init();
+            _sceneResources.Init();
             _screenResources.Init();
 
             SetInitialCameraPosition();
@@ -137,7 +137,7 @@ namespace SF3.Win.Controls {
             _gradients?.Dispose();
             _lighting?.Dispose();
             _boundaryModels?.Dispose();
-            _actorResources?.Dispose();
+            _sceneResources?.Dispose();
             _screenResources?.Dispose();
 
             _general           = null;
@@ -150,7 +150,7 @@ namespace SF3.Win.Controls {
             _gradients         = null;
             _lighting          = null;
             _boundaryModels    = null;
-            _actorResources    = null;
+            _sceneResources    = null;
             _screenResources   = null;
         }
 
@@ -209,7 +209,7 @@ namespace SF3.Win.Controls {
                 Lighting        = _lighting,
                 BoundaryModels  = _boundaryModels,
                 CollisionModels = _collisionModels,
-                Actors          = _actorResources,
+                Scene           = _sceneResources,
                 Editor          = _editor,
                 Screen          = _screenResources,
             };
@@ -306,7 +306,7 @@ namespace SF3.Win.Controls {
             UpdateEditorResources();
 
             if (_actorsNeedUpdate) {
-                _actorResources.Update(MPD_File);
+                _sceneResources.Update(MPD_File);
                 _actorsNeedUpdate = false;
             }
 
@@ -677,7 +677,7 @@ namespace SF3.Win.Controls {
         private GradientResources      _gradients       = null;
         private LightingResources      _lighting        = null;
         private BoundaryModelResources _boundaryModels  = null;
-        private ActorResources         _actorResources  = null;
+        private SceneResources         _sceneResources  = null;
         private ScreenResources        _screenResources = null;
         private HashSet<int>           _modelInstancesToHide = null;
 

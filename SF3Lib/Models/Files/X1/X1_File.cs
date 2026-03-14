@@ -18,6 +18,7 @@ using CommonLib.Types;
 using CommonLib.Utils;
 using static CommonLib.Utils.ResourceUtils;
 using CommonLib.Discovery;
+using SF3.Scenes;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
@@ -243,12 +244,12 @@ namespace SF3.Models.Files.X1 {
             // Add references to the scripts for several tables so we can have nice dropdowns.
             AssociateScriptsWithRelevantTables();
 
-            var actorCollections = new List<IActorCollection>();
+            var scenes = new List<IScene>();
             if (Battles != null)
-                actorCollections.AddRange(Battles.Values.Select(x => x.SlotTable));
+                scenes.AddRange(Battles.Values.Select(x => x.SlotTable));
             if (NpcTables != null)
-                actorCollections.AddRange(NpcTables);
-            ActorCollections = actorCollections;
+                scenes.AddRange(NpcTables);
+            Scenes = scenes;
 
             return tables;
         }
@@ -883,6 +884,6 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public BattleTalkTable BattleTalkTable { get; private set; }
 
-        public IEnumerable<IActorCollection> ActorCollections { get; private set; }
+        public IEnumerable<IScene> Scenes { get; private set; }
     }
 }

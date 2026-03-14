@@ -3,15 +3,16 @@ using CommonLib;
 using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.X1.Battle;
+using SF3.Scenes;
 using SF3.Types;
 
 namespace SF3.Models.Tables.X1.Battle {
-    public class SlotTable : FixedSizeTable<Slot>, IActorCollection {
+    public class SlotTable : FixedSizeTable<Slot>, IScene {
         protected SlotTable(IByteData data, string name, int address, int size, ScenarioType scenario, MapLeaderType leader, Slot prevSlot) : base(data, name, address, size) {
             Scenario = scenario;
             Leader   = leader;
             PrevSlot = prevSlot;
-            ActorCollectionName = $"Battle ({leader})";
+            SceneName = $"Battle ({leader})";
         }
 
         public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, MapLeaderType leader, Slot prevSlot)
@@ -33,7 +34,7 @@ namespace SF3.Models.Tables.X1.Battle {
         public Slot PrevSlot { get; private set; }
 
         public bool IsBattle => true;
-        public string ActorCollectionName { get; }
+        public string SceneName { get; }
         IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
     }
 }

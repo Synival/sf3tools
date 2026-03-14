@@ -10,7 +10,7 @@ using SF3.Win.App;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.MPD {
-    public class ActorResources : ResourcesBase, IMPD_Resources {
+    public class SceneResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() {}
         public override void DeInit() {}
 
@@ -66,12 +66,12 @@ namespace SF3.Win.OpenGL.MPD {
         public void Update(IMPD mpdFile) {
             Reset();
 
-            var currentActorCollection = AppResources.Get().ActiveActorCollection;
-            if (currentActorCollection == null)
+            var currentScene = AppResources.Get().ActiveScene;
+            if (currentScene == null)
                 return;
 
             var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
-            var actorsGrouped = currentActorCollection.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
+            var actorsGrouped = currentScene.Scene.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
 
             var spriteIds = actorsGrouped.Select(x => x.Key).ToArray();
             BuildTexture(spriteIds);

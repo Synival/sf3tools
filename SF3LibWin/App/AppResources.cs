@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using SF3.Actors;
 using SF3.Models.Files.CHR;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
+using SF3.Scenes;
 using SF3.Types;
 
 namespace SF3.Win.App {
@@ -23,13 +23,13 @@ namespace SF3.Win.App {
             public string DisplayName { get; }
         }
 
-        public class ActorCollectionRegistration : BaseRegistration {
-            public ActorCollectionRegistration(string file, IActorCollection actors)
-            : base(file, $"{file} - {actors.ActorCollectionName}") {
-                Actors = actors;
+        public class SceneRegistration : BaseRegistration {
+            public SceneRegistration(string file, IScene scene)
+            : base(file, $"{file} - {scene.SceneName}") {
+                Scene = scene;
             }
 
-            public readonly IActorCollection Actors;
+            public readonly IScene Scene;
         }
 
         public class CHR_Registration : BaseRegistration {
@@ -64,22 +64,22 @@ namespace SF3.Win.App {
 
         private AppResources() {}
 
-        public void RegisterActorCollection(string file, IActorCollection actors) {
-            ArgumentNullException.ThrowIfNull(actors, nameof(actors));
-            var newRegistrartion = new ActorCollectionRegistration(file, actors);
-            _actorCollections.Add(newRegistrartion);
-            ActiveActorCollection ??= newRegistrartion;
+        public void RegisterScene(string file, IScene scene) {
+            ArgumentNullException.ThrowIfNull(scene, nameof(scene));
+            var newRegistrartion = new SceneRegistration(file, scene);
+            _scenes.Add(newRegistrartion);
+            ActiveScene ??= newRegistrartion;
         }
 
-        public void UnregisterActorCollection(IActorCollection actors) {
-            ArgumentNullException.ThrowIfNull(actors, nameof(actors));
-            var index = _actorCollections.FindIndex(x => x.Actors == actors);
+        public void UnregisterScene(IScene scene) {
+            ArgumentNullException.ThrowIfNull(scene, nameof(scene));
+            var index = _scenes.FindIndex(x => x.Scene == scene);
             if (index == -1)
                 return;
 
-            _actorCollections.RemoveAt(index);
-            if (ActiveActorCollection.Actors == actors)
-                ActiveActorCollection = (_actorCollections.Count == 0) ? null : _actorCollections[0];
+            _scenes.RemoveAt(index);
+            if (ActiveScene.Scene == scene)
+                ActiveScene = (_scenes.Count == 0) ? null : _scenes[0];
         }
 
         public void RegisterCHR(string file, ICHR_File chr) {
@@ -118,20 +118,20 @@ namespace SF3.Win.App {
                 ActiveIconCollection = (_iconCollections.Count == 0) ? null : _iconCollections[0];
         }
 
-        private List<ActorCollectionRegistration> _actorCollections = new List<ActorCollectionRegistration>();
-        public IEnumerable<ActorCollectionRegistration> ActorCollections => _actorCollections;
+        private List<SceneRegistration> _scenes = new List<SceneRegistration>();
+        public IEnumerable<SceneRegistration> Scenes => _scenes;
 
-        private ActorCollectionRegistration _activeActorCollection = null;
-        public ActorCollectionRegistration ActiveActorCollection {
-            get => _activeActorCollection;
+        private SceneRegistration _activeScene = null;
+        public SceneRegistration ActiveScene {
+            get => _activeScene;
             set {
-                if (_activeActorCollection != value) {
-                    _activeActorCollection = value;
-                    ActiveActorCollectionChanged?.Invoke(this, EventArgs.Empty);
+                if (_activeScene != value) {
+                    _activeScene = value;
+                    ActiveSceneChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
-        public event EventHandler ActiveActorCollectionChanged;
+        public event EventHandler ActiveSceneChanged;
 
         private List<CHR_Registration> _chrs = new List<CHR_Registration>();
         public IEnumerable<CHR_Registration> CHRs => _chrs;

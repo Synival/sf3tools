@@ -94,7 +94,7 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_EnableBlankFieldV2Controls = new System.Windows.Forms.ToolStripMenuItem();
             tsmiActiveResources = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiActiveResources_Actors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiActiveResources_Scene = new System.Windows.Forms.ToolStripMenuItem();
             tsmiActiveResources_ActiveCHR = new System.Windows.Forms.ToolStripMenuItem();
             tsmiActiveResources_ActiveIcons = new System.Windows.Forms.ToolStripMenuItem();
             tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
@@ -621,17 +621,17 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiActiveResources
             // 
-            tsmiActiveResources.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiActiveResources_Actors, tsmiActiveResources_ActiveCHR, tsmiActiveResources_ActiveIcons });
+            tsmiActiveResources.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiActiveResources_Scene, tsmiActiveResources_ActiveCHR, tsmiActiveResources_ActiveIcons });
             tsmiActiveResources.Name = "tsmiActiveResources";
             tsmiActiveResources.Size = new Size(108, 20);
             tsmiActiveResources.Text = "&Active Resources";
             // 
-            // tsmiActiveResources_Actors
+            // tsmiActiveResources_Scene
             // 
-            tsmiActiveResources_Actors.Enabled = false;
-            tsmiActiveResources_Actors.Name = "tsmiActiveResources_Actors";
-            tsmiActiveResources_Actors.Size = new Size(180, 22);
-            tsmiActiveResources_Actors.Text = "Active &Actors";
+            tsmiActiveResources_Scene.Enabled = false;
+            tsmiActiveResources_Scene.Name = "tsmiActiveResources_Scene";
+            tsmiActiveResources_Scene.Size = new Size(180, 22);
+            tsmiActiveResources_Scene.Text = "Active &Scene";
             // 
             // tsmiActiveResources_ActiveCHR
             // 
@@ -1166,7 +1166,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_New_MPDProject;
         private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources;
-        private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources_Actors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources_Scene;
         private System.Windows.Forms.ToolStripMenuItem tsmiActiveResources_ActiveCHR;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawActors;
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_DeselectAll;
