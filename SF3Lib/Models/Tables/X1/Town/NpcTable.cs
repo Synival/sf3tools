@@ -3,6 +3,7 @@ using CommonLib;
 using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
+using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
 using SF3.Scenes;
 
@@ -46,5 +47,7 @@ namespace SF3.Models.Tables.X1.Town {
         public bool IsBattle => false;
         public string SceneName => Name;
         public IIndexedEnumerableWithLength<IActor> Actors => this;
+        public int NumZones => 0;
+        public IIndexedEnumerableWithLength<Zone> Zones => null;
     }
 }

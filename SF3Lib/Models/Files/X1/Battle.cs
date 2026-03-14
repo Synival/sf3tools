@@ -71,6 +71,8 @@ namespace SF3.Models.Files.X1 {
 
         public bool IsBattle => true;
         public string SceneName { get; }
-        public IIndexedEnumerableWithLength<IActor> Actors => this.SlotTable;
+        public IIndexedEnumerableWithLength<IActor> Actors => SlotTable;
+        public int NumZones => BattleHeader.NumZones;
+        public IIndexedEnumerableWithLength<Zone> Zones => ZoneTable;
     }
 }
