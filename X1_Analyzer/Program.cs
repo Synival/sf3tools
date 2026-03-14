@@ -1,4 +1,5 @@
-﻿using CommonLib.Arrays;
+﻿using System.Collections.Concurrent;
+using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.X1;
@@ -16,212 +17,13 @@ namespace X1_Analyzer {
             { ScenarioType.PremiumDisk, "G:/" },
         };
 
-        private static List<int> s_allSpawnTypes = [];
-        private static List<int> s_allUnknown0x0Es = [];
-        private static List<int> s_allAiTags = [];
-        private static List<int> s_allAiTypes = [];
-        private static List<int> s_allAiAggrs = [];
-
         /// <summary>
         /// Check for matching X1 files for certain conditions.
         /// </summary>
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-#if false
-            var matchReports = new List<string>();
-
-            var ramOffset = (x1File.Scenario == ScenarioType.Scenario1) ? 0x0605f000 : 0x0605e000;
-
-            // Gather a list of enemies with their relevant AI-related properties.
-            var battles = x1File.Battles ?? [];
-            var allEnemies = battles.Values
-                .SelectMany(x =>
-                    x.SlotTable.Rows
-                        .Where(y => y.EnemyID != 0x00)
-                        .Select(y => new {
-                            BattleName = x.Name,
-
-                            SlotID = y.ID,
-                            SlotName = y.Name,
-                            y.EnemyID,
-                            y.CreepUpWhenOutOfRange,
-                            y.SpawnType,
-                            y.Unknown0x0E,
-                            Name = x1File.NameGetterContext.GetName(null, null, y.EnemyID, [NamedValueType.MonsterForSlot]),
-
-                            AITags = new int[] {
-                                y.AI1Tag,
-                                y.AI2Tag,
-                                y.AI3Tag,
-                                y.AI4Tag,
-                            },
-
-                            AITypes = new int[] {
-                                y.AI1Type,
-                                y.AI2Type,
-                                y.AI3Type,
-                                y.AI4Type,
-                            },
-
-                            AIAggrs = new int[] {
-                                y.AI1Aggr,
-                                y.AI2Aggr,
-                                y.AI3Aggr,
-                                y.AI4Aggr,
-                            },
-
-                            AI = new int[] {
-                                (y.AI1Tag << 16) | (y.AI1Type << 8) | (y.AI1Aggr),
-                                (y.AI2Tag << 16) | (y.AI2Type << 8) | (y.AI2Aggr),
-                                (y.AI3Tag << 16) | (y.AI3Type << 8) | (y.AI3Aggr),
-                                (y.AI4Tag << 16) | (y.AI4Type << 8) | (y.AI4Aggr),
-                            },
-
-                            AIAddrs = new int[] {
-                                y.Address + 0x23,
-                                y.Address + 0x26,
-                                y.Address + 0x29,
-                                y.Address + 0x2C,
-                            },
-
-                            y.Flags,
-                            y.FlagOrBattleID,
-                        }
-                    )
-                )
-                .ToArray() ?? [];
-
-            // Gather some data for a final report.
-            // (This shouldn't really be in this function, but w/e)
-            s_allAiTags.AddRange(allEnemies.SelectMany(x => x.AITags).ToArray());
-            s_allAiTypes.AddRange(allEnemies.SelectMany(x => x.AITypes).ToArray());
-            s_allAiAggrs.AddRange(allEnemies.SelectMany(x => x.AIAggrs).ToArray());
-            s_allSpawnTypes.AddRange(allEnemies.Select(x => (int) x.SpawnType));
-            s_allUnknown0x0Es.AddRange(allEnemies.Select(x => x.Unknown0x0E));
-
-#if true
-            // Match enemies with any non-default AI.
-            var enemiesWithNonDefaultAI = allEnemies
-                .Where(x => x.AITags.Any(y => y != 0xFF) || x.AITypes.Any(y => y != 0xFF) || x.AIAggrs.Any(y => y != 0xFF))
-                .ToArray();
-            foreach (var enemy in enemiesWithNonDefaultAI) {
-                var aiTypesStr = string.Join(", ", enemy.AITypes.Select(x => x.ToString("X2")));
-                var enemyStr = $"{enemy.SlotName}, {enemy.Name} (0x{enemy.EnemyID:X2}): SpawnType={enemy.SpawnType:X2}, Unknown0x0E={enemy.Unknown0x0E:X2}";
-                for (int i = 0; i < 4; i++) {
-                    if (!(enemy.AITags[i] != 0xFF || enemy.AITags[i] != 0xFF || enemy.AIAggrs[i] != 0x00))
-                        continue;
-
-                    var tag  = enemy.AITags[i];
-                    var type = enemy.AITypes[i];
-
-                    if (tag >= 0x32 && tag < 0x80)
-                        matchReports.Add($"Tag=Location | Type={type:X2} | Func AI[{i}] | {enemyStr}");
-                    else if (tag >= 0x80 && tag < 0xC0)
-                        matchReports.Add($"Tag=Enemy    | Type={type:X2} | Func AI[{i}] | {enemyStr}");
-                    else if (tag >= 0xC0 && tag < 0xFF)
-                        matchReports.Add($"Tag=Path     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
-                    else
-                        matchReports.Add($"Tag=0x{tag:X2}     | Type={type:X2} | Func AI[{i}] | {enemyStr}");
-                }
-            }
-#elif false
-            return (x1File.ArrowTable != null && x1File.ArrowTable.Any(x => x.IfFlagOff != 0xFFFF)) ? true : null;
-#elif false
-            // Match enemies with a team other than 0 or 1.
-            foreach (var battle in x1File.Battles ?? []) {
-                var enemies = battle.Value.SlotTable.Where(x => x.EnemyID != 0).ToArray();
-                foreach (var enemy in enemies.Where(x => x.FlagTieInOrUnknown != 0x00)) {
-                    var realName = x1File.NameGetterContext.GetName(null, null, enemy.EnemyID, [NamedValueType.MonsterForSlot]);
-                    var flagName = x1File.NameGetterContext.GetName(null, null, enemy.FlagTieInOrUnknown, [NamedValueType.GameFlag]);
-                    var itemName = x1File.NameGetterContext.GetName(null, null, enemy.ItemOverride, [NamedValueType.Item]);
-                    if (flagName != "")
-                        continue;
-
-                    var enemyStr = $"{battle.Key.ToString().PadLeft(7)} | {enemy.Name} (0x{enemy.ID:X2}) | {realName} (0x{enemy.EnemyID:X2})";
-                    var flagStr  = $"{flagName.PadLeft(60)} (0x{enemy.FlagTieInOrUnknown:X3})";
-                    var itemStr  = $"{itemName} (0x{enemy.ItemOverride:X2})";
-
-                    matchReports.Add(
-                        enemy.EnemyFlags.ToString("X4") + " | " +
-                        BitString(enemy.EnemyFlags) + " | " +
-                        flagStr + " | " +
-                        enemyStr.PadRight(40) + " | " +
-                        itemStr
-                    );
-                }
-            }
-#elif true
-            // Match 'Interactables' with unknown flags
-            foreach (var i in x1File.InteractableTable?.Rows ?? []) {
-                var actionFlagChecked = i.FlagChecked;
-                var flagName = x1File.NameGetterContext.GetName(null, null, actionFlagChecked, [NamedValueType.GameFlag]) ?? "";
-                if (flagName != "")
-                    continue;
-
-                var itemName = (i.ActionParam3Type == NamedValueType.Item)
-                    ? (x1File.NameGetterContext.GetName(null, null, i.ActionParam3, [NamedValueType.Item]) + $" (0x{i.ActionParam3:X3})")
-                    : "";
-
-                var interactableStr = i.ID.ToString("X2") + " | " + i.Trigger.ToString("X4") + " | " + i.TriggerFlags.ToString("X2") + " | " + i.TriggerTargetID.ToString("X2");
-                var flagStr = $"Flag (0x{i.FlagChecked:X3} == {i.FlagExpectedValue,5})";
-                var itemStr = ((itemName != "") ? (itemName + " ") : "");
-
-                var charName = x1File.NameGetterContext.GetName(null, null, i.TriggerTargetID, [NamedValueType.Character]);
-
-                matchReports.Add("Event | " + interactableStr + " | " + i.TriggerDescription.PadRight(60) + " | " + flagStr + " | " + itemStr);
-            }
-
-            // Match Warps with unknown flags
-            foreach (var i in x1File.WarpTable?.Rows ?? []) {
-                if (i.IfFlagUnsetType != NamedValueType.GameFlag)
-                    continue;
-
-                var warpStr = i.Name.PadLeft(19) + " | " + x1File.NameGetterContext.GetName(null, null, i.LoadID, [NamedValueType.Load]) + $" (0x{i.LoadID:X2}) Location {i.LocationID}";
-
-                var flagName = x1File.NameGetterContext.GetName(null, null, i.IfFlagUnset, [NamedValueType.GameFlag]) ?? "";
-                if (flagName != "")
-                    continue;
-
-                var flagStr = $"Flag (0x{i.IfFlagUnset:X3} == False)";
-                matchReports.Add(" Warp | " + warpStr + " | " + flagStr);
-            }
-
-            // Match enemies with unknown flags
-            foreach (var battle in x1File.Battles ?? []) {
-                var enemies = battle.Value.SlotTable.Where(x => x.EnemyID != 0).ToArray();
-                foreach (var enemy in enemies.Where(x => x.FlagOrBattleID != 0x00)) {
-                    if (enemy.FlagOrBattleIDType != NamedValueType.GameFlag)
-                        continue;
-
-                    var realName = x1File.NameGetterContext.GetName(null, null, enemy.EnemyID, [NamedValueType.MonsterForSlot]);
-                    var flagName = x1File.NameGetterContext.GetName(null, null, enemy.FlagOrBattleID, [NamedValueType.GameFlag]);
-                    var itemName = x1File.NameGetterContext.GetName(null, null, enemy.ItemOverride, [NamedValueType.Item]);
-                    if (flagName != "")
-                        continue;
-
-                    var enemyStr = $"{battle.Key,7} | {enemy.Name} (0x{enemy.ID:X2}) | {realName} (0x{enemy.EnemyID:X2})";
-                    var flagStr  = $"Flag (0x{enemy.FlagOrBattleID:X3})";
-                    var itemStr  = $"{itemName} (0x{enemy.ItemOverride:X2})";
-
-                    matchReports.Add(
-                        "Enemy | " +
-                        enemy.EnemyFlags.ToString("X4") + " | " +
-                        BitString(enemy.EnemyFlags) + " | " +
-                        flagStr + " | " +
-                        enemyStr.PadRight(60) + " | " +
-                        itemStr
-                    );
-                }
-            }
-#endif
-
-            return matchReports.ToArray();
-#endif
-
-            if (x1File.Battles?.Any() != true)
-                return null;
-            return x1File.Battles.SelectMany(x => x.Value.SlotTable.Rows.Where(y => y.UnknownFlag).Select(y => $"{x.Key}: 0x{y.ID:X2}")).ToArray();
+            return MatchFuncs.HasWeirdCondFlags(filename, x1File);
         }
 
         public static void Main(string[] args) {
@@ -311,22 +113,6 @@ namespace X1_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
-
-            Console.WriteLine("");
-            Console.WriteLine("Spawn Types:");
-            Console.WriteLine("    " + string.Join(", ", s_allSpawnTypes.Distinct().OrderBy(x => x).Select(x => x.ToString("X2")).ToArray()));
-
-            Console.WriteLine("Unknown 0x0E's:");
-            Console.WriteLine("    " + string.Join(", ", s_allUnknown0x0Es.Distinct().OrderBy(x => x).Select(x => x.ToString("X2")).ToArray()));
-
-            Console.WriteLine("AI Tags:");
-            Console.WriteLine("    " + string.Join(", ", s_allAiTags.Distinct().OrderBy(x => x).Select(x => x.ToString("X2")).ToArray()));
-
-            Console.WriteLine("AI Flags:");
-            Console.WriteLine("    " + string.Join(", ", s_allAiTypes.Distinct().OrderBy(x => x).Select(x => x.ToString("X2")).ToArray()));
-
-            Console.WriteLine("AI Aggrs:");
-            Console.WriteLine("    " + string.Join(", ", s_allAiAggrs.Distinct().OrderBy(x => x).Select(x => x.ToString("X2")).ToArray()));
         }
 
         private static string BitString(uint bits) {
