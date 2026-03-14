@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class SpawnZone : Struct {
+    public class Zone : Struct {
         private readonly int _numPointsAddr;
         private readonly int _padding0x02Addr;
         private readonly int _x1Addr;
@@ -14,7 +14,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _x4Addr;
         private readonly int _z4Addr;
 
-        public SpawnZone(IByteData data, int id, string name, int address)
+        public Zone(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x12) {
             _numPointsAddr   = Address + 0x00; // 1 byte
             _padding0x02Addr = Address + 0x01; // 1 byte

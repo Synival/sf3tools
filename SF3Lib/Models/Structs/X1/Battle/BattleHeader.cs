@@ -5,7 +5,7 @@ namespace SF3.Models.Structs.X1.Battle {
     public class BattleHeader : Struct {
         private readonly int _numSlotsAddr;
         private readonly int _unknown0x02Addr;
-        private readonly int _numSpawnZonesAddr;
+        private readonly int _numZonesAddr;
         private readonly int _unknown0x04Addr;
         private readonly int _numAITargetsAddr;
         private readonly int _unknown0x06Addr;
@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.X1.Battle {
         : base(data, id, name, address, 0x0A) {
             _numSlotsAddr             = Address + 0x00; // 2 bytes
             _unknown0x02Addr          = Address + 0x02; // 1 byte
-            _numSpawnZonesAddr        = Address + 0x03; // 1 byte
+            _numZonesAddr             = Address + 0x03; // 1 byte
             _unknown0x04Addr          = Address + 0x04; // 1 byte
             _numAITargetsAddr         = Address + 0x05; // 1 byte
             _unknown0x06Addr          = Address + 0x06; // 1 byte
@@ -40,11 +40,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_unknown0x02Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_numSpawnZonesAddr), displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_numZonesAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
-        public int NumSpawnZones {
-            get => Data.GetByte(_numSpawnZonesAddr);
-            set => Data.SetByte(_numSpawnZonesAddr, (byte) value);
+        public int NumZones {
+            get => Data.GetByte(_numZonesAddr);
+            set => Data.SetByte(_numZonesAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x04Addr), displayName: "+0x04", displayOrder: 4, displayFormat: "X2")]

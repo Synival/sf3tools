@@ -26,20 +26,20 @@ namespace SF3.Models.Files.X1 {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var enemySpawnTableSize = HasLargeEnemyTable ? 0xe9a : 0xa8a;
+            var enemyTableSize = HasLargeEnemyTable ? 0xe9a : 0xa8a;
 
             // Determine addresses of sub-tables.
             var headerAddress         = Address;
             var slotAddress           = headerAddress + 0x0a;
-            var spawnZoneAddress      = slotAddress + enemySpawnTableSize + 0x06;
-            var aiAddress             = spawnZoneAddress + 0x120;
+            var zoneAddress           = slotAddress + enemyTableSize + 0x06;
+            var aiAddress             = zoneAddress + 0x120;
             var customMovementAddress = aiAddress + 0x80;
 
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
             return new List<ITable>() {
                 (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, MapLeader, PrevBattle?.SlotTable?.Rows?.Last())),
-                (SpawnZoneTable        = SpawnZoneTable.Create       (Data, "SpawnZones",     spawnZoneAddress)),
+                (ZoneTable             = ZoneTable.Create            (Data, "Zones",          zoneAddress)),
                 (AITargetPositionTable = AITargetPositionTable.Create(Data, "AI",             aiAddress)),
                 (ScriptedMovementTable = ScriptedMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
             };
@@ -59,7 +59,7 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public SlotTable SlotTable { get; private set; }
         [BulkCopyRecurse]
-        public SpawnZoneTable SpawnZoneTable { get; private set; }
+        public ZoneTable ZoneTable { get; private set; }
         [BulkCopyRecurse]
         public AITargetPositionTable AITargetPositionTable { get; private set; }
         [BulkCopyRecurse]

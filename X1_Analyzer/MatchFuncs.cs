@@ -48,8 +48,8 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasWeirdCondZone(string filename, IX1_File x1File) {
-            // NOTE: It looks like the spawn zone can have the 0x80 bit set. What does it mean in that case...?
-            bool isWeirdZone(Battle battle, int zone) => zone != 0xFF && (zone & 0x7F) >= battle.BattleHeader.NumSpawnZones;
+            // NOTE: It looks like the zone can have the 0x80 bit set. What does it mean in that case...?
+            bool isWeirdZone(Battle battle, int zone) => zone != 0xFF && (zone & 0x7F) >= battle.BattleHeader.NumZones;
             bool hasWeirdZone(Battle battle, Slot slot) {
                 return isWeirdZone(battle, slot.Cond1Zone) ||
                        isWeirdZone(battle, slot.Cond2Zone) ||

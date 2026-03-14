@@ -90,10 +90,10 @@ namespace SF3.Tests.Models.Files {
         }
 
         [TestMethod]
-        public void SpawnZoneTable_HasExpectedData() {
+        public void ZoneTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.Battles[MapLeaderType.Synbios];
-            var table = battle.SpawnZoneTable;
+            var table = battle.ZoneTable;
 
             Assert.AreEqual(0x00, table[0].NumPoints);
             Assert.AreEqual(0x00, table[0].Padding0x02);

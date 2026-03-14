@@ -20,8 +20,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableView("Slots 4 (AI)",    Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
                 CreateChild(new TableView("Slots 5 (Flags)", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page5"]));
             }
-            if (Model.SpawnZoneTable != null)
-                CreateChild(new TableView("Spawn Zones", Model.SpawnZoneTable, ngc));
+            if (Model.ZoneTable != null)
+                CreateChild(new TableView("Zones", Model.ZoneTable, ngc));
             if (Model.AITargetPositionTable != null)
                 CreateChild(new TableView("AI Target Position", Model.AITargetPositionTable, ngc));
             if (Model.ScriptedMovementTable != null)
