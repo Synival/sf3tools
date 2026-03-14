@@ -21,29 +21,25 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _spawnTypeAddr;
         private readonly int _eventCallAddr;
         private readonly int _unknown0x0EAddr;
-        private readonly int _creepUpWhenOutOfRangeAddr;
+        private readonly int _defaultAIIndex;
         private readonly int _facingIsBossAddr;
         private readonly int _respawnCountAddr;
         private readonly int _teamIdAddr;
 
         private readonly int _cond1ZoneAddr;
-        private readonly int _cond1MvmtAddr;
-        private readonly int _cond1UnknownAddr;
+        private readonly int _cond1FlagsAddr;
         private readonly int _cond1AIIndexAddr;
 
         private readonly int _cond2ZoneAddr;
-        private readonly int _cond2MvmtAddr;
-        private readonly int _cond2UnknownAddr;
+        private readonly int _cond2FlagsAddr;
         private readonly int _cond2AIIndexAddr;
 
         private readonly int _cond3ZoneAddr;
-        private readonly int _cond3MvmtAddr;
-        private readonly int _cond3UnknownAddr;
+        private readonly int _cond3FlagsAddr;
         private readonly int _cond3AIIndexAddr;
 
         private readonly int _cond4ZoneAddr;
-        private readonly int _cond4MvmtAddr;
-        private readonly int _cond4UnknownAddr;
+        private readonly int _cond4FlagsAddr;
         private readonly int _cond4AIIndexAddr;
 
         private readonly int _ai1TagAddr;
@@ -84,25 +80,21 @@ namespace SF3.Models.Structs.X1.Battle {
             _characterPlusAddr      = Address + 0x0C; // 1 byte
             _spawnTypeAddr          = Address + 0x0D; // 1 byte
             _unknown0x0EAddr        = Address + 0x0E; // 1 byte
-            _creepUpWhenOutOfRangeAddr = Address + 0x0F; // 1 byte
+            _defaultAIIndex         = Address + 0x0F; // 1 byte
             _facingIsBossAddr       = Address + 0x10; // 1 byte
             _teamIdAddr             = Address + 0x11; // 1 byte
             _respawnCountAddr       = Address + 0x12; // 1 byte
             _cond1ZoneAddr          = Address + 0x13; // 1 byte
-            _cond1MvmtAddr          = Address + 0x14; // 1 byte
-            _cond1UnknownAddr       = Address + 0x15; // 1 byte
+            _cond1FlagsAddr         = Address + 0x14; // 2 bytes
             _cond1AIIndexAddr       = Address + 0x16; // 1 byte
             _cond2ZoneAddr          = Address + 0x17; // 1 byte
-            _cond2MvmtAddr          = Address + 0x18; // 1 byte
-            _cond2UnknownAddr       = Address + 0x19; // 1 byte
+            _cond2FlagsAddr         = Address + 0x18; // 2 bytes
             _cond2AIIndexAddr       = Address + 0x1A; // 1 byte
             _cond3ZoneAddr          = Address + 0x1B; // 1 byte
-            _cond3MvmtAddr          = Address + 0x1C; // 1 byte
-            _cond3UnknownAddr       = Address + 0x1D; // 1 byte
+            _cond3FlagsAddr         = Address + 0x1C; // 2 bytes
             _cond3AIIndexAddr       = Address + 0x1E; // 1 byte
             _cond4ZoneAddr          = Address + 0x1F; // 1 byte
-            _cond4MvmtAddr          = Address + 0x20; // 1 byte
-            _cond4UnknownAddr       = Address + 0x21; // 1 byte
+            _cond4FlagsAddr         = Address + 0x20; // 2 bytes
             _cond4AIIndexAddr       = Address + 0x22; // 1 byte
             _ai1TagAddr             = Address + 0x23; // 1 byte
             _ai1TypeAddr            = Address + 0x24; // 1 byte
@@ -257,11 +249,11 @@ namespace SF3.Models.Structs.X1.Battle {
         // Page 2
         // ------------------------------------------------------------------------------------------------------------
 
-        [TableViewModelColumn(addressField: nameof(_creepUpWhenOutOfRangeAddr), displayOrder: 10, displayFormat: "X2", displayGroup: "Page2")]
+        [TableViewModelColumn(addressField: nameof(_defaultAIIndex), displayOrder: 10, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int CreepUpWhenOutOfRange {
-            get => Data.GetByte(_creepUpWhenOutOfRangeAddr);
-            set => Data.SetByte(_creepUpWhenOutOfRangeAddr, (byte) value);
+        public int DefaultAIIndex {
+            get => Data.GetByte(_defaultAIIndex);
+            set => Data.SetByte(_defaultAIIndex, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 11, displayName: "Facing/IsBoss", displayFormat: "X2", displayGroup: "Page2")]
@@ -315,18 +307,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_cond1ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_cond1MvmtAddr), displayOrder: 16, displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(addressField: nameof(_cond1FlagsAddr), displayOrder: 16, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Cond1Mvmt {
-            get => Data.GetByte(_cond1MvmtAddr);
-            set => Data.SetByte(_cond1MvmtAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(addressField: nameof(_cond1UnknownAddr), displayOrder: 17, displayFormat: "X2", displayGroup: "Page3")]
-        [BulkCopy]
-        public int Cond1Unknown {
-            get => Data.GetByte(_cond1UnknownAddr);
-            set => Data.SetByte(_cond1UnknownAddr, (byte) value);
+        public int Cond1Flags {
+            get => Data.GetWord(_cond1FlagsAddr);
+            set => Data.SetWord(_cond1FlagsAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_cond1AIIndexAddr), displayOrder: 18, displayFormat: "X2", displayGroup: "Page3")]
@@ -345,18 +330,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_cond2ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_cond2MvmtAddr), displayOrder: 20, displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(addressField: nameof(_cond2FlagsAddr), displayOrder: 20, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Cond2Mvmt {
-            get => Data.GetByte(_cond2MvmtAddr);
-            set => Data.SetByte(_cond2MvmtAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(addressField: nameof(_cond2UnknownAddr), displayOrder: 21, displayFormat: "X2", displayGroup: "Page3")]
-        [BulkCopy]
-        public int Cond2Unknown {
-            get => Data.GetByte(_cond2UnknownAddr);
-            set => Data.SetByte(_cond2UnknownAddr, (byte) value);
+        public int Cond2Flags {
+            get => Data.GetWord(_cond2FlagsAddr);
+            set => Data.SetWord(_cond2FlagsAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_cond2AIIndexAddr), displayOrder: 22, displayFormat: "X2", displayGroup: "Page3")]
@@ -375,18 +353,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_cond3ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_cond3MvmtAddr), displayOrder: 24, displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(addressField: nameof(_cond3FlagsAddr), displayOrder: 24, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Cond3Mvmt {
-            get => Data.GetByte(_cond3MvmtAddr);
-            set => Data.SetByte(_cond3MvmtAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(addressField: nameof(_cond3UnknownAddr), displayOrder: 25, displayFormat: "X2", displayGroup: "Page3")]
-        [BulkCopy]
-        public int Cond3Unknown {
-            get => Data.GetByte(_cond3UnknownAddr);
-            set => Data.SetByte(_cond3UnknownAddr, (byte) value);
+        public int Cond3Flags {
+            get => Data.GetWord(_cond3FlagsAddr);
+            set => Data.SetWord(_cond3FlagsAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_cond3AIIndexAddr), displayOrder: 26, displayFormat: "X2", displayGroup: "Page3")]
@@ -405,18 +376,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_cond4ZoneAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_cond4MvmtAddr), displayOrder: 28, displayFormat: "X2", displayGroup: "Page3")]
+        [TableViewModelColumn(addressField: nameof(_cond4FlagsAddr), displayOrder: 28, displayFormat: "X2", displayGroup: "Page3")]
         [BulkCopy]
-        public int Cond4Mvmt {
-            get => Data.GetByte(_cond4MvmtAddr);
-            set => Data.SetByte(_cond4MvmtAddr, (byte) value);
-        }
-
-        [TableViewModelColumn(addressField: nameof(_cond4UnknownAddr), displayOrder: 29, displayFormat: "X2", displayGroup: "Page3")]
-        [BulkCopy]
-        public int Cond4Unknown {
-            get => Data.GetByte(_cond4UnknownAddr);
-            set => Data.SetByte(_cond4UnknownAddr, (byte) value);
+        public int Cond4Flags {
+            get => Data.GetWord(_cond4FlagsAddr);
+            set => Data.SetWord(_cond4FlagsAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_cond4AIIndexAddr), displayOrder: 30, displayFormat: "X2", displayGroup: "Page3")]
