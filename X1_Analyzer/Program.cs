@@ -239,11 +239,17 @@ namespace X1_Analyzer {
             var matchSet   = new List<string>();
             var nomatchSet = new List<string>();
 
+            var mutex = new Mutex();
+
             foreach (var filesKv in allFiles) {
                 var scenario = filesKv.Key;
                 var nameGetter = nameGetterContexts[scenario];
 
-                foreach (var file in filesKv.Value) {
+                var parallelOptions = new ParallelOptions() {
+                    MaxDegreeOfParallelism = -1
+                };
+
+                Parallel.ForEach(Partitioner.Create(filesKv.Value), parallelOptions, file => {
                     var filename = Path.GetFileNameWithoutExtension(file);
 
                     // Get a byte data editing context for the file.
@@ -257,18 +263,24 @@ namespace X1_Analyzer {
 
                             // If the match is 'null', that means we're just skipping this file completely.
                             if (matchReports == null)
-                                continue;
+                                return;
 
-                            // List the file and any report we may have from X1_Match_Func().
-                            var fileStr = GetFileString(scenario, file, x1File);
-                            Console.WriteLine(fileStr + " | ");
-                            foreach (var mr in matchReports)
-                                Console.WriteLine("    " + mr);
+                            mutex.WaitOne();
+                            try {
+                                // List the file and any report we may have from X1_Match_Func().
+                                var fileStr = GetFileString(scenario, file, x1File);
+                                Console.WriteLine(fileStr + " | ");
+                                foreach (var mr in matchReports)
+                                    Console.WriteLine("    " + mr);
 
-                            if (matchReports.Length > 0)
-                                matchSet.Add(fileStr);
-                            else
-                                nomatchSet.Add(fileStr);
+                                if (matchReports.Length > 0)
+                                    matchSet.Add(fileStr);
+                                else
+                                    nomatchSet.Add(fileStr);
+                            }
+                            finally {
+                                mutex.ReleaseMutex();
+                            }
 
                             ScanForErrorsAndReport(scenario, x1File);
                         }
@@ -276,8 +288,13 @@ namespace X1_Analyzer {
                     catch (Exception e) {
                         Console.WriteLine("  !!! Exception for '" + filename + "': '" + e.Message + "'. Skipping!");
                     }
-                }
+                });
             }
+
+            // Sort sets, which are in a somewhat random order.
+            string MatchSorter(string str) => (str.StartsWith("Premium") ? "Z" : "") + str.Replace(" ", "");
+            matchSet   = matchSet  .OrderBy(MatchSorter).ToList();
+            nomatchSet = nomatchSet.OrderBy(MatchSorter).ToList();
 
             var totalCount = matchSet.Count + nomatchSet.Count;
 
