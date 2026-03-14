@@ -10,7 +10,7 @@ The featured software suite, SF3Editor, can edit much of the game's data, create
 
 This project was originally a fork of Rika's Tools for Shining Force III hacking, which itself was a hack of BoneIdol's tools.
 
-| ![image](https://github.com/user-attachments/assets/bfc97004-066d-4ea2-b3fc-5704cc797efe) | ![X014.BIN](https://github.com/user-attachments/assets/f38620a8-5f80-4a80-a182-e54dbcd46aea) |
+| ![MPD Editor](Screenshots/v0.3.0%20Map%20Editor.png) | ![X014.BIN](Screenshots/v0.3.0%20X014.png) |
 |---|---|
 
 All of the work done by the editors is performed in a cross-platform backend project called SF3Lib. SF3Lib can
@@ -31,10 +31,10 @@ To edit files, simply:
 
 Can be used to view and modify all .MPD files across all scenarios.
 
-| ![BTL91](https://github.com/user-attachments/assets/bb61fd38-061f-4918-94e3-7d6f7101680c) | ![BTL02 Modified](https://github.com/user-attachments/assets/1594105a-5908-47f8-8ae3-b7fa868acf59) | ![TOMT00.MPD](https://github.com/user-attachments/assets/3bf0b8a2-3ee2-4e67-a8e6-aa7a9ff5b54a) |
+| ![BTL91](Screenshots/v0.3.0%20BTL91.png) | ![BTL02](Screenshots/v0.3.0%20BTL02.png) | ![TOMT00.MPD](Screenshots/v0.3.0%20TOMT00.png) |
 |---|---|---|
-| ![BTL47.MPD](https://github.com/user-attachments/assets/6d1eba16-512e-4273-8b7a-67f1e9dded49) | ![DLMANT.MPD](https://github.com/user-attachments/assets/52e0b556-dbee-4c79-b256-996a98e05bab) | ![HNSNOP.MPD](https://github.com/user-attachments/assets/abea6ffd-2387-4e54-bf60-eeb5279ea930) |
-| ![DAIDAI.MPD](https://github.com/user-attachments/assets/ece14fc0-33a4-402f-978c-f4d181f61b5d) | ![LECHA.MPD](https://github.com/user-attachments/assets/6e1cb86b-a217-4b62-92f6-b6d26c28bc67) | ![Model Viewer](https://github.com/user-attachments/assets/807a45ce-fe25-4c0d-85a0-9776efc74da0) |
+| ![BTL47.MPD](Screenshots/v0.3.0%20BTL47.png) | ![DLMANT.MPD](Screenshots/v0.3.0%20DLMANT.png) | ![TANK00](Screenshots/v0.3.0%20TANK00.gif) |
+| ![DAIDAI.MPD](Screenshots/v0.3.0%20DAIDAI.png) | ![LECHA.MPD](Screenshots/v0.3.0%20LECHA.png) | ![Model Viewer](Screenshots/v0.3.0%20ModelViewer.png) |
 
 Features:
 
