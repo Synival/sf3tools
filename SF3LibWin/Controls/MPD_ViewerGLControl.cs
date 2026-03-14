@@ -13,10 +13,10 @@ namespace SF3.Win.Controls {
             ResizeRedraw = true;
 
             // Big dumb hack to prevent this from crashing in the designer view.
-            if (!AppState.Initialized)
+            if (!AppSettings.Initialized)
                 return;
 
-            _appState = AppState.Get();
+            _appSettings = AppSettings.Get();
 
             _timer = new Timer() { Interval = 10 };
             _timer.Tick += (s, a) => IncrementFrame();
@@ -150,8 +150,8 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private AppState _appState = null;
-        private AppState AppState => _appState;
+        private AppSettings _appSettings = null;
+        private AppSettings AppSettings => _appSettings;
 
         public event EventHandler RightDoubleClick;
         public event EventHandler MiddleDoubleClick;

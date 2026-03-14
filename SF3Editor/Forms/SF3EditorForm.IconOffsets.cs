@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonLib.Win.Utils;
 using SF3.Models.Files;
-using static SF3.Win.App.AppScene;
+using static SF3.Win.App.AppResources;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -56,8 +56,8 @@ namespace SF3.Editor.Forms {
             var itemOffsetFile  = (SelectedFile?.Loader?.Model as IItemIconTableFile);
             var spellOffsetFile = (SelectedFile?.Loader?.Model as ISpellIconTableFile);
 
-            if ((itemOffsetFile != null || spellOffsetFile != null) && _appScene.ActiveIconCollection != null)
-                AssignIconPointerOffsets(itemOffsetFile, spellOffsetFile, _appScene.ActiveIconCollection);
+            if ((itemOffsetFile != null || spellOffsetFile != null) && _appResources.ActiveIconCollection != null)
+                AssignIconPointerOffsets(itemOffsetFile, spellOffsetFile, _appResources.ActiveIconCollection);
         }
     }
 }

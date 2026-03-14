@@ -29,7 +29,7 @@ namespace SF3.Win.Views {
         private void OnTextureInvalidated(object sender, EventArgs ags) => ReloadImage();
 
         private void SetImageFromTexture()
-            => Image = Texture?.CreateBitmap(AppState.Get().HighlightEndCodesInTextureView);
+            => Image = Texture?.CreateBitmap(AppSettings.Get().HighlightEndCodesInTextureView);
 
         private ITextureData _texture = null;
         public ITextureData Texture {
@@ -100,7 +100,7 @@ namespace SF3.Win.Views {
                     return;
                 }
 
-                Image = _texture?.CreateBitmap(AppState.Get().HighlightEndCodesInTextureView);
+                Image = _texture?.CreateBitmap(AppSettings.Get().HighlightEndCodesInTextureView);
 
                 ImageImported?.Invoke(this, EventArgs.Empty);
             }

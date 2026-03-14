@@ -29,8 +29,8 @@ namespace SF3.Editor.Forms {
             InitializeComponent();
 
             // The application state should never change for the app's lifetime.
-            _appState = AppState.Get();
-            _appScene = AppScene.Get();
+            _appSettings = AppSettings.Get();
+            _appResources = AppResources.Get();
 
             // Create a container for all files.
             _fileContainerView = new TabView("File Container", lazyLoad: false);
@@ -44,12 +44,12 @@ namespace SF3.Editor.Forms {
             // Store the original title in a few different forms. It's going to be changing around.
             _baseTitle = Text;
             _versionTitle = _baseTitle + " v" + Version;
-            _appState.OpenScenarioChanged += (s, e) => UpdateTitle();
+            _appSettings.OpenScenarioChanged += (s, e) => UpdateTitle();
             UpdateTitle();
 
             // React to some active file changes.
-            _appScene.ActiveIconCollectionChanged += (s, e) => {
-                tsmiIconOffsets_Assign.Enabled = _appScene.ActiveIconCollection != null;
+            _appResources.ActiveIconCollectionChanged += (s, e) => {
+                tsmiIconOffsets_Assign.Enabled = _appResources.ActiveIconCollection != null;
             };
 
             // Initialize menu states and set up events.
@@ -68,7 +68,7 @@ namespace SF3.Editor.Forms {
 
         protected void UpdateTitle() {
             string GetBaseTitle() {
-                switch (_appState.OpenScenario) {
+                switch (_appSettings.OpenScenario) {
                     case -1:
                         return _versionTitle + " (Detect Scenario)";
                     case 1:
@@ -127,7 +127,7 @@ namespace SF3.Editor.Forms {
         private readonly string _baseTitle;
         private readonly string _versionTitle;
         private readonly TabView _fileContainerView;
-        private readonly AppState _appState;
-        private readonly AppScene _appScene;
+        private readonly AppSettings _appSettings;
+        private readonly AppResources _appResources;
     }
 }

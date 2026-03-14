@@ -102,7 +102,7 @@ namespace SF3.Win.Controls {
             if (oldActor != newActor) {
                 IActor actor = null;
                 if (newActor != null) {
-                    var actors = AppScene.Get().ActiveActorCollection?.Actors;
+                    var actors = AppResources.Get().ActiveActorCollection?.Actors;
                     if (actors != null)
                         actor = actors.FirstOrDefault(x => x.ID == newActor.ID);
                 }
@@ -269,7 +269,7 @@ namespace SF3.Win.Controls {
             thisTile.TerrainType = terrainType;
             var updateSurfaceModel = !thisTile.IsFlat;
 
-            MPD_File.Surface.NormalSettings = _appState.MakeNormalCalculationSettings();
+            MPD_File.Surface.NormalSettings = _appSettings.MakeNormalCalculationSettings();
             for (int x2 = Math.Max(0, x - nearbyRange); x2 <= Math.Min(63, x + nearbyRange); x2++) {
                 for (int y2 = Math.Max(0, y - nearbyRange); y2 <= Math.Min(63, y + nearbyRange); y2++) {
                     var affectedTile = MPD_File.Surface.GetTile(x2, y2);

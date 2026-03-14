@@ -7,7 +7,7 @@ using SF3.Models.Tables;
 using SF3.Types;
 
 namespace SF3.Win.App {
-    public class AppScene {
+    public class AppResources {
         public interface IResource {
             string File { get; }
             string DisplayName { get; }
@@ -54,15 +54,15 @@ namespace SF3.Win.App {
             public readonly int SpellIconIndex;
         }
 
-        private static AppScene _globalAppResources = null;
+        private static AppResources _globalAppResources = null;
 
-        public static AppScene Get() {
+        public static AppResources Get() {
             if (_globalAppResources == null)
-                _globalAppResources = new AppScene();
+                _globalAppResources = new AppResources();
             return _globalAppResources;
         }
 
-        private AppScene() {}
+        private AppResources() {}
 
         public void RegisterActorCollection(string file, IActorCollection actors) {
             ArgumentNullException.ThrowIfNull(actors, nameof(actors));

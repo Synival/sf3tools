@@ -7,38 +7,38 @@ namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
         private void UpdateActiveResourcesMenuActorCollections() {
             UpdateActiveResourcesMenuSubmenu(tsmiActiveResources_Actors, ar => ar.ActorCollections, ar => ar.ActiveActorCollection, (actors, item) => {
-                _appScene.ActiveActorCollection = actors;
+                _appResources.ActiveActorCollection = actors;
                 UpdateActiveResourcesMenuSubmenuChecks(tsmiActiveResources_Actors, item);
             });
         }
 
         private void UpdateActiveResourcesMenuCHRs() {
             UpdateActiveResourcesMenuSubmenu(tsmiActiveResources_ActiveCHR, ar => ar.CHRs, ar => ar.ActiveCHR, (chr, item) => {
-                _appScene.ActiveCHR = chr;
+                _appResources.ActiveCHR = chr;
                 UpdateActiveResourcesMenuSubmenuChecks(tsmiActiveResources_ActiveCHR, item);
             });
         }
 
         private void UpdateActiveResourcesMenuIconCollections() {
             UpdateActiveResourcesMenuSubmenu(tsmiActiveResources_ActiveIcons, ar => ar.IconCollections, ar => ar.ActiveIconCollection, (icons, item) => {
-                _appScene.ActiveIconCollection = icons;
+                _appResources.ActiveIconCollection = icons;
                 UpdateActiveResourcesMenuSubmenuChecks(tsmiActiveResources_ActiveIcons, item);
             });
         }
 
         private void UpdateActiveResourcesMenuSubmenu<T>(
             ToolStripMenuItem parentItem,
-            Func<AppScene, IEnumerable<T>> allGetter,
-            Func<AppScene, T> activeGetter,
+            Func<AppResources, IEnumerable<T>> allGetter,
+            Func<AppResources, T> activeGetter,
             Action<T, ToolStripMenuItem> onClick
-        ) where T : class, AppScene.IResource {
+        ) where T : class, AppResources.IResource {
             var items = parentItem.DropDown.Items;
 
             items.Clear();
             int itemIndex = 1;
 
-            var allResources = allGetter(_appScene);
-            var activeResource = activeGetter(_appScene);
+            var allResources = allGetter(_appResources);
+            var activeResource = activeGetter(_appResources);
 
             foreach (var resource in allResources) {
                 var newItem = new ToolStripMenuItem(

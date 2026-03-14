@@ -50,35 +50,35 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
 
-            var appState = AppState.Get();
+            var appSettings = AppSettings.Get();
 
-            appState.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appState.ViewerDrawSurfaceModel; };
-            appState.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appState.ViewerDrawModels; };
-            appState.ViewerDrawExtraModelsChanged    += (s, e) => { tsbDrawExtraModels.Checked   = appState.ViewerDrawExtraModels; };
-            appState.ViewerDrawGroundChanged         += (s, e) => { tsbDrawGround.Checked        = appState.ViewerDrawGround; };
-            appState.ViewerDrawSkyChanged            += (s, e) => { tsbDrawSky.Checked           = appState.ViewerDrawSky; };
-            appState.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appState.ViewerRunAnimations; };
-            appState.ViewerApplyLightingChanged      += (s, e) => { tsbApplyLighting.Checked     = appState.ViewerApplyLighting; };
-            appState.ViewerDrawGradientsChanged      += (s, e) => { tsbDrawGradients.Checked     = appState.ViewerDrawGradients; };
-            appState.ViewerDrawActorsChanged         += (s, e) => { tsbDrawActors.Checked        = appState.ViewerDrawActors; };
+            appSettings.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appSettings.ViewerDrawSurfaceModel; };
+            appSettings.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appSettings.ViewerDrawModels; };
+            appSettings.ViewerDrawExtraModelsChanged    += (s, e) => { tsbDrawExtraModels.Checked   = appSettings.ViewerDrawExtraModels; };
+            appSettings.ViewerDrawGroundChanged         += (s, e) => { tsbDrawGround.Checked        = appSettings.ViewerDrawGround; };
+            appSettings.ViewerDrawSkyChanged            += (s, e) => { tsbDrawSky.Checked           = appSettings.ViewerDrawSky; };
+            appSettings.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appSettings.ViewerRunAnimations; };
+            appSettings.ViewerApplyLightingChanged      += (s, e) => { tsbApplyLighting.Checked     = appSettings.ViewerApplyLighting; };
+            appSettings.ViewerDrawGradientsChanged      += (s, e) => { tsbDrawGradients.Checked     = appSettings.ViewerDrawGradients; };
+            appSettings.ViewerDrawActorsChanged         += (s, e) => { tsbDrawActors.Checked        = appSettings.ViewerDrawActors; };
 
-            appState.ViewerDrawWireframeChanged      += (s, e) => { tsbToggleWireframe.Checked   = appState.ViewerDrawWireframe; };
-            appState.ViewerDrawBoundariesChanged     += (s, e) => { tsbToggleBoundaries.Checked  = appState.ViewerDrawBoundaries; };
-            appState.ViewerDrawTerrainTypesChanged   += (s, e) => { tsbToggleTerrainType.Checked = appState.ViewerDrawTerrainTypes; };
-            appState.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appState.ViewerDrawEventIDs; };
-            appState.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appState.ViewerDrawCollisionLines; };
-            appState.HideModelsNotFacingCameraChanged += (s, e) => { tsbHideModelsNotFacingCamera.Checked = appState.HideModelsNotFacingCamera; };
-            appState.ViewerApplyShadowTagsChanged    += (s, e) => { tsbApplyShadowTags.Checked   = appState.ViewerApplyShadowTags; };
-            appState.ViewerApplyHideTagsChanged      += (s, e) => { tsbApplyHideTags.Checked     = appState.ViewerApplyHideTags; };
+            appSettings.ViewerDrawWireframeChanged      += (s, e) => { tsbToggleWireframe.Checked   = appSettings.ViewerDrawWireframe; };
+            appSettings.ViewerDrawBoundariesChanged     += (s, e) => { tsbToggleBoundaries.Checked  = appSettings.ViewerDrawBoundaries; };
+            appSettings.ViewerDrawTerrainTypesChanged   += (s, e) => { tsbToggleTerrainType.Checked = appSettings.ViewerDrawTerrainTypes; };
+            appSettings.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appSettings.ViewerDrawEventIDs; };
+            appSettings.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appSettings.ViewerDrawCollisionLines; };
+            appSettings.HideModelsNotFacingCameraChanged += (s, e) => { tsbHideModelsNotFacingCamera.Checked = appSettings.HideModelsNotFacingCamera; };
+            appSettings.ViewerApplyShadowTagsChanged    += (s, e) => { tsbApplyShadowTags.Checked   = appSettings.ViewerApplyShadowTags; };
+            appSettings.ViewerApplyHideTagsChanged      += (s, e) => { tsbApplyHideTags.Checked     = appSettings.ViewerApplyHideTags; };
 
-            appState.RenderOnBlackBackgroundChanged  += (s, e) => { tsbRenderOnBlackBackground.Checked = appState.RenderOnBlackBackground; };
-            appState.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appState.ViewerDrawNormals; };
-            appState.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appState.ViewerRotateSpritesUp; };
+            appSettings.RenderOnBlackBackgroundChanged  += (s, e) => { tsbRenderOnBlackBackground.Checked = appSettings.RenderOnBlackBackground; };
+            appSettings.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appSettings.ViewerDrawNormals; };
+            appSettings.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appSettings.ViewerRotateSpritesUp; };
 
             // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
-            toolStrip2.Visible = appState.EnableExperimentalBlankFieldV2Brushes;
-            appState.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
-                var isEnabled = appState.EnableExperimentalBlankFieldV2Brushes;
+            toolStrip2.Visible = appSettings.EnableExperimentalBlankFieldV2Brushes;
+            appSettings.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
+                var isEnabled = appSettings.EnableExperimentalBlankFieldV2Brushes;
                 toolStrip2.Visible = isEnabled;
                 if (!isEnabled && GLControl.CursorMode.IsDrawingMode())
                     GLControl.CursorMode = ViewerCursorMode.Select;

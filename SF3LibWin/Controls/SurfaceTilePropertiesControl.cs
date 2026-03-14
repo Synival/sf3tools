@@ -134,7 +134,7 @@ namespace SF3.Win.Controls {
                 .Select(x => (byte) Math.Clamp(x + diff, 0, 255))
                 .ToArray();
 
-            eo.Surface.NormalSettings = AppState.Get().MakeNormalCalculationSettings();
+            eo.Surface.NormalSettings = AppSettings.Get().MakeNormalCalculationSettings();
             eo.SetVertexHeights(heights);
             UpdateVertexHeights();
         }
@@ -143,7 +143,7 @@ namespace SF3.Win.Controls {
             // TODO: support multiple selection!
             var eo = EditingObjects[0];
 
-            eo.Surface.NormalSettings = AppState.Get().MakeNormalCalculationSettings();
+            eo.Surface.NormalSettings = AppSettings.Get().MakeNormalCalculationSettings();
             eo.SetVertexHeight(corner, value);
             UpdateVertexHeights();
         }
@@ -152,7 +152,7 @@ namespace SF3.Win.Controls {
             // TODO: support multiple selection!
             var eo = EditingObjects[0];
 
-            eo.Surface.NormalSettings = AppState.Get().MakeNormalCalculationSettings();
+            eo.Surface.NormalSettings = AppSettings.Get().MakeNormalCalculationSettings();
             eo.IsFlat = cbModelTileIsFlat.Checked;
             UpdateVertexHeights();
             UpdateVertexHeightsEnabled();

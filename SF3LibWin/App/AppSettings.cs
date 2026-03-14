@@ -7,33 +7,33 @@ using Newtonsoft.Json;
 using SF3.Types;
 
 namespace SF3.Win.App {
-    public class AppState : IDarkModeObservable {
-        private static AppState _globalAppState = null;
+    public class AppSettings : IDarkModeObservable {
+        private static AppSettings _globalAppSettings = null;
 
-        public AppState() { }
+        public AppSettings() { }
 
-        public AppState(string appName) : base() {
+        public AppSettings(string appName) : base() {
             AppName = appName;
             FileFullPath = GetFileFullPath(appName);
         }
 
-        public static bool Initialized => _globalAppState != null;
+        public static bool Initialized => _globalAppSettings != null;
 
-        public static AppState Get() {
-            if (_globalAppState == null)
-                _globalAppState = new AppState();
-            return _globalAppState;
+        public static AppSettings Get() {
+            if (_globalAppSettings == null)
+                _globalAppSettings = new AppSettings();
+            return _globalAppSettings;
         }
 
-        public static AppState Get(string appName) {
-            if (_globalAppState == null) {
-                _globalAppState = Deserialize(appName);
-                if (_globalAppState == null) {
-                    _globalAppState = new AppState(appName);
-                    _globalAppState.Serialize();
+        public static AppSettings Get(string appName) {
+            if (_globalAppSettings == null) {
+                _globalAppSettings = Deserialize(appName);
+                if (_globalAppSettings == null) {
+                    _globalAppSettings = new AppSettings(appName);
+                    _globalAppSettings.Serialize();
                 }
             }
-            return _globalAppState;
+            return _globalAppSettings;
         }
 
         public string GetFileFullPath()
@@ -46,7 +46,7 @@ namespace SF3.Win.App {
                 return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SF3Tools", appName + " State.json");
         }
 
-        public static AppState Deserialize(string appName) {
+        public static AppSettings Deserialize(string appName) {
             if (appName == null)
                 return null;
 
@@ -56,7 +56,7 @@ namespace SF3.Win.App {
 
             try {
                 var text = File.ReadAllText(fullPath);
-                var newState = JsonConvert.DeserializeObject<AppState>(text);
+                var newState = JsonConvert.DeserializeObject<AppSettings>(text);
                 newState.AppName = appName;
                 newState.FileFullPath = fullPath;
                 newState.ViewerCursorMode = 0; /* 'Select' cursor */
@@ -91,7 +91,7 @@ namespace SF3.Win.App {
         }
 
         /// <summary>
-        /// Creates a NormalCalculationSettings based on settings in the AppState.
+        /// Creates a NormalCalculationSettings based on settings in the AppSettings.
         /// </summary>
         /// <returns>A new NormalCalculationSettings instance.</returns>
         public NormalCalculationSettings MakeNormalCalculationSettings() {
@@ -118,13 +118,13 @@ namespace SF3.Win.App {
         }
 
         /// <summary>
-        /// Name of the application. Should be set when initializing the AppState.
+        /// Name of the application. Should be set when initializing the AppSettings.
         /// </summary>
         [JsonIgnore]
         public string AppName { get; private set; } = null;
 
         /// <summary>
-        /// Filename of the AppState file with its absolute path. Should be set when initializing the AppState.
+        /// Filename of the AppSettings file with its absolute path. Should be set when initializing the AppState.
         /// </summary>
         [JsonIgnore]
         public string FileFullPath { get; private set; } = null;

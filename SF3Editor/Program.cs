@@ -17,10 +17,10 @@ namespace SF3.Editor {
             ApplicationConfiguration.Initialize();
 
             // Fetch saved application state
-            var appState = AppState.Get("SF3 Editor");
+            var appSettings = AppSettings.Get("SF3 Editor");
 
             // Supply a state for dark mode support
-            DarkModeContext.Observable = appState;
+            DarkModeContext.Observable = appSettings;
 
             // Add some special handles types to ObjectListView 
             RegisterNamedValues();

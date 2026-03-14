@@ -23,9 +23,9 @@ namespace SF3.Editor.Forms {
         private void InitFileMenu() {
             // Remember the last Scenario type to open.
             UpdateLocalOpenScenario();
-            _appState.OpenScenarioChanged += (s, e) => {
+            _appSettings.OpenScenarioChanged += (s, e) => {
                 UpdateLocalOpenScenario();
-                _appState.Serialize();
+                _appSettings.Serialize();
             };
 
             tsmiFile_SwapToPrev.ShortcutKeyDisplayString = "Ctrl+Alt+,";
@@ -34,7 +34,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_SwapToNext.ShowShortcutKeys = true;
 
             UpdateRecentFilesMenu();
-            _appState.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();
+            _appSettings.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();
         }
 
         /// <summary>
@@ -156,19 +156,19 @@ namespace SF3.Editor.Forms {
             var acf = fileLoader.Model as IActorCollectionFile;
             if (acf?.ActorCollections?.Any() == true) {
                 foreach (var ac in acf.ActorCollections)
-                    _appScene.RegisterActorCollection(fileLoader.ShortFilename, ac);
+                    _appResources.RegisterActorCollection(fileLoader.ShortFilename, ac);
                 UpdateActiveResourcesMenuActorCollections();
             }
 
             var chr = fileLoader.Model as ICHR_File;
             if (chr != null) {
-                _appScene.RegisterCHR(fileLoader.ShortFilename, chr);
+                _appResources.RegisterCHR(fileLoader.ShortFilename, chr);
                 UpdateActiveResourcesMenuCHRs();
             }
 
             var itemCG = fileLoader.Model as ITEM_CG_File;
             if (itemCG != null) {
-                _appScene.RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable, itemCG.SpellIconIndex);
+                _appResources.RegisterIconCollection(fileLoader.ShortFilename, itemCG.Scenario ?? ScenarioType.Scenario1, itemCG.TextureTable, itemCG.SpellIconIndex);
                 UpdateActiveResourcesMenuIconCollections();
             }
 
@@ -194,17 +194,17 @@ namespace SF3.Editor.Forms {
                 // Unregister any important app-wide tables.
                 if (acf?.ActorCollections?.Any() == true) {
                     foreach (var ac in acf.ActorCollections)
-                        _appScene.UnregisterActorCollection(ac);
+                        _appResources.UnregisterActorCollection(ac);
                     UpdateActiveResourcesMenuActorCollections();
                 }
 
                 if (chr != null) {
-                    _appScene.UnregisterCHR(chr);
+                    _appResources.UnregisterCHR(chr);
                     UpdateActiveResourcesMenuCHRs();
                 }
 
                 if (itemCG != null) {
-                    _appScene.UnregisterIconCollection(itemCG.TextureTable);
+                    _appResources.UnregisterIconCollection(itemCG.TextureTable);
                     UpdateActiveResourcesMenuIconCollections();
                 }
             };
@@ -217,12 +217,12 @@ namespace SF3.Editor.Forms {
 
             // Add this file to the 'Recent Files' menu.
             if (addToRecentFiles) {
-                _appState.PushRecentFile(filename, scenario, fileType);
-                _appState.Serialize();
+                _appSettings.PushRecentFile(filename, scenario, fileType);
+                _appSettings.Serialize();
             }
 
             // Report any known errors in the file.
-            if (_appState.ShowErrorsOnFileLoad) {
+            if (_appSettings.ShowErrorsOnFileLoad) {
                 var errors = loadedFile?.Loader?.Model?.GetErrors() ?? new string[0];
                 if (errors.Length > 0) {
                     if (errors.Length > 50)
@@ -270,8 +270,8 @@ namespace SF3.Editor.Forms {
                 return false;
             }
 
-            _appState.PushRecentFile(filename, file.Scenario, file.FileType);
-            _appState.Serialize();
+            _appSettings.PushRecentFile(filename, file.Scenario, file.FileType);
+            _appSettings.Serialize();
 
             return true;
         }
@@ -390,7 +390,7 @@ namespace SF3.Editor.Forms {
         /// <param name="index">The index of the recent file to open, with '0' being the most recent.</param>
         /// <returns>The new LoadedFile or 'null' if an error occured.</returns>
         public LoadedFile? OpenRecentFile(int index) {
-            var recentItems = _appState.RecentFiles ?? [];
+            var recentItems = _appSettings.RecentFiles ?? [];
             if (index >= recentItems.Length)
                 return null;
 
@@ -404,7 +404,7 @@ namespace SF3.Editor.Forms {
         public ScenarioType? OpenScenario {
             get => _openScenario;
             private set {
-                _appState.OpenScenario = ((int?) value) ?? -1;
+                _appSettings.OpenScenario = ((int?) value) ?? -1;
             }
         }
         private ScenarioType? _openScenario = null;
@@ -454,7 +454,7 @@ namespace SF3.Editor.Forms {
         }
 
         private void UpdateLocalOpenScenario() {
-            var os = _appState.OpenScenario;
+            var os = _appSettings.OpenScenario;
             _openScenario = (os < 0 || !Enum.IsDefined(typeof(ScenarioType), (ScenarioType) os)) ? null : (ScenarioType) os;
 
             tsmiFile_OpenScenario_Detect.Checked      = _openScenario == null;
@@ -552,10 +552,10 @@ namespace SF3.Editor.Forms {
                 ];
             }
 
-            var recentFiles = _appState.RecentFiles ?? [];
+            var recentFiles = _appSettings.RecentFiles ?? [];
             for (int i = 0; i < _recentFileMenuItems.Length; i++) {
                 var menuItem = _recentFileMenuItems[i];
-                var recentFile = (i < recentFiles.Length) ? recentFiles[i] : (AppState.RecentFile?) null;
+                var recentFile = (i < recentFiles.Length) ? recentFiles[i] : (AppSettings.RecentFile?) null;
 
                 menuItem.Enabled = (recentFile != null);
                 menuItem.Text = ((i == 9) ? "1&0" : $"&{i + 1}") + $" - " + (recentFile.HasValue ? recentFile.Value.Filename : "");

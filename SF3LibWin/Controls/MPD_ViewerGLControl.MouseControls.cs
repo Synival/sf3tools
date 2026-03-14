@@ -159,16 +159,16 @@ namespace SF3.Win.Controls {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ViewerCursorMode CursorMode {
             get {
-                var appCursorMode = (ViewerCursorMode) AppState.ViewerCursorMode;
+                var appCursorMode = (ViewerCursorMode) AppSettings.ViewerCursorMode;
                 if (Enum.IsDefined(appCursorMode))
                     return appCursorMode;
                 else
                     return ViewerCursorMode.Select;
             }
             set {
-                if (AppState.ViewerCursorMode != (int) value) {
-                    AppState.ViewerCursorMode = (int) value;
-                    AppState.Serialize();
+                if (AppSettings.ViewerCursorMode != (int) value) {
+                    AppSettings.ViewerCursorMode = (int) value;
+                    AppSettings.Serialize();
                     UpdateCursor();
                     CursorModeChanged?.Invoke(this, EventArgs.Empty);
                 }

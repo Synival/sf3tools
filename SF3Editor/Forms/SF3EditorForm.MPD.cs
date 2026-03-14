@@ -281,7 +281,7 @@ namespace SF3.Editor.Forms {
         private void tsmiMPD_RecalculateSurfaceModelNormals_Click(object sender, EventArgs e) {
             if (SelectedFile?.FileType == SF3FileType.MPD || SelectedFile?.FileType == SF3FileType.MPD_Project) {
                 var mpdFile = (IMPD) SelectedFile.Loader.Model;
-                mpdFile.Surface.NormalSettings = _appState.MakeNormalCalculationSettings();
+                mpdFile.Surface.NormalSettings = _appSettings.MakeNormalCalculationSettings();
                 mpdFile.Surface.UpdateVertexNormals();
 
                 var mpdView = (MPD_View) (SelectedFile.View.ActualView);

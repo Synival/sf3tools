@@ -20,41 +20,41 @@ namespace SF3.Win.Controls {
             GotFocus  += (s, e) => InvalidateFrame();
             LostFocus += (s, e) => InvalidateFrame();
 
-            _appState.ViewerDrawSurfaceModelChanged   += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawModelsChanged         += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawExtraModelsChanged    += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawGroundChanged         += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawSkyChanged            += (s, e) => InvalidateFrame();
-            _appState.ViewerRunAnimationsChanged      += (s, e) => InvalidateFrame();
-            _appState.ViewerApplyLightingChanged      += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawGradientsChanged      += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawActorsChanged         += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawSurfaceModelChanged   += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawModelsChanged         += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawExtraModelsChanged    += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawGroundChanged         += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawSkyChanged            += (s, e) => InvalidateFrame();
+            _appSettings.ViewerRunAnimationsChanged      += (s, e) => InvalidateFrame();
+            _appSettings.ViewerApplyLightingChanged      += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawGradientsChanged      += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawActorsChanged         += (s, e) => InvalidateFrame();
 
-            _appState.ViewerDrawWireframeChanged      += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawBoundariesChanged     += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawTerrainTypesChanged   += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawEventIDsChanged       += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawCollisionLinesChanged += (s, e) => InvalidateFrame();
-            _appState.HideModelsNotFacingCameraChanged += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawWireframeChanged      += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawBoundariesChanged     += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawTerrainTypesChanged   += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawEventIDsChanged       += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawCollisionLinesChanged += (s, e) => InvalidateFrame();
+            _appSettings.HideModelsNotFacingCameraChanged += (s, e) => InvalidateFrame();
 
-            _appState.ViewerApplyShadowTagsChanged += (s, e) => {
+            _appSettings.ViewerApplyShadowTagsChanged += (s, e) => {
                 if (_models != null) {
-                    _models.ApplyShadowTags = _appState.ViewerApplyShadowTags;
+                    _models.ApplyShadowTags = _appSettings.ViewerApplyShadowTags;
                     InvalidateModels();
                 }
             };
-            _appState.ViewerApplyHideTagsChanged += (s, e) => {
+            _appSettings.ViewerApplyHideTagsChanged += (s, e) => {
                 if (_models != null) {
-                    _models.ApplyHideTags = _appState.ViewerApplyHideTags;
+                    _models.ApplyHideTags = _appSettings.ViewerApplyHideTags;
                     InvalidateModels();
                 }
             };
 
-            _appState.RenderOnBlackBackgroundChanged  += (s, e) => InvalidateFrame();
-            _appState.ViewerDrawNormalsChanged        += (s, e) => InvalidateFrame();
-            _appState.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); InvalidateFrame(); };
+            _appSettings.RenderOnBlackBackgroundChanged  += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawNormalsChanged        += (s, e) => InvalidateFrame();
+            _appSettings.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); InvalidateFrame(); };
 
-            var scene = AppScene.Get();
+            var scene = AppResources.Get();
             scene.ActiveActorCollectionChanged += (s, e) => { InvalidateActors(); };
             scene.ActiveCHRChanged             += (s, e) => { InvalidateActors(); };
         }
@@ -78,7 +78,7 @@ namespace SF3.Win.Controls {
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _general         = new GeneralResources();
-            _models          = new ModelResources(_appState.ViewerApplyShadowTags, _appState.ViewerApplyHideTags);
+            _models          = new ModelResources(_appSettings.ViewerApplyShadowTags, _appSettings.ViewerApplyHideTags);
             _surfaceModel    = new SurfaceModelResources();
             _groundModel     = new GroundModelResources();
             _skyModel        = new SkyModelResources();
@@ -470,12 +470,12 @@ namespace SF3.Win.Controls {
             }
         }
 
-        private bool UpdateAppState(string propertyName, bool value) {
-            var property = AppState.GetType().GetProperty(propertyName);
-            if (property == null || (bool) property.GetValue(AppState, null) == value)
+        private bool UpdateAppSetting(string propertyName, bool value) {
+            var property = AppSettings.GetType().GetProperty(propertyName);
+            if (property == null || (bool) property.GetValue(AppSettings, null) == value)
                 return false;
 
-            property.SetValue(AppState, value);
+            property.SetValue(AppSettings, value);
             return true;
         }
 
@@ -516,141 +516,141 @@ namespace SF3.Win.Controls {
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawSurfaceModel {
-            get => AppState.ViewerDrawSurfaceModel;
-            set => UpdateAppState(nameof(AppState.ViewerDrawSurfaceModel), value);
+            get => AppSettings.ViewerDrawSurfaceModel;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawSurfaceModel), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawModels {
-            get => AppState.ViewerDrawModels;
-            set => UpdateAppState(nameof(AppState.ViewerDrawModels), value);
+            get => AppSettings.ViewerDrawModels;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawModels), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawExtraModels {
-            get => AppState.ViewerDrawExtraModels;
-            set => UpdateAppState(nameof(AppState.ViewerDrawExtraModels), value);
+            get => AppSettings.ViewerDrawExtraModels;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawExtraModels), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawGround {
-            get => AppState.ViewerDrawGround;
-            set => UpdateAppState(nameof(AppState.ViewerDrawGround), value);
+            get => AppSettings.ViewerDrawGround;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawGround), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawSky {
-            get => AppState.ViewerDrawSky;
-            set => UpdateAppState(nameof(AppState.ViewerDrawSky), value);
+            get => AppSettings.ViewerDrawSky;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawSky), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RunAnimations {
-            get => AppState.ViewerRunAnimations;
-            set => UpdateAppState(nameof(AppState.ViewerRunAnimations), value);
+            get => AppSettings.ViewerRunAnimations;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerRunAnimations), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ApplyLighting {
-            get => AppState.ViewerApplyLighting;
-            set => UpdateAppState(nameof(AppState.ViewerApplyLighting), value);
+            get => AppSettings.ViewerApplyLighting;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerApplyLighting), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawGradients {
-            get => AppState.ViewerDrawGradients;
-            set => UpdateAppState(nameof(AppState.ViewerDrawGradients), value);
+            get => AppSettings.ViewerDrawGradients;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawGradients), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawActors {
-            get => AppState.ViewerDrawActors;
-            set => UpdateAppState(nameof(AppState.ViewerDrawActors), value);
+            get => AppSettings.ViewerDrawActors;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawActors), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawWireframe {
-            get => AppState.ViewerDrawWireframe;
-            set => UpdateAppState(nameof(AppState.ViewerDrawWireframe), value);
+            get => AppSettings.ViewerDrawWireframe;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawWireframe), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawBoundaries {
-            get => AppState.ViewerDrawBoundaries;
-            set => UpdateAppState(nameof(AppState.ViewerDrawBoundaries), value);
+            get => AppSettings.ViewerDrawBoundaries;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawBoundaries), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawCollisionLines {
-            get => AppState.ViewerDrawCollisionLines;
-            set => UpdateAppState(nameof(AppState.ViewerDrawCollisionLines), value);
+            get => AppSettings.ViewerDrawCollisionLines;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawCollisionLines), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawTerrainTypes {
-            get => AppState.ViewerDrawTerrainTypes;
-            set => UpdateAppState(nameof(AppState.ViewerDrawTerrainTypes), value);
+            get => AppSettings.ViewerDrawTerrainTypes;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawTerrainTypes), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawEventIDs {
-            get => AppState.ViewerDrawEventIDs;
-            set => UpdateAppState(nameof(AppState.ViewerDrawEventIDs), value);
+            get => AppSettings.ViewerDrawEventIDs;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawEventIDs), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HideModelsNotFacingCamera {
-            get => AppState.HideModelsNotFacingCamera;
-            set => UpdateAppState(nameof(AppState.HideModelsNotFacingCamera), value);
+            get => AppSettings.HideModelsNotFacingCamera;
+            set => UpdateAppSetting(nameof(AppSettings.HideModelsNotFacingCamera), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ApplyShadowTags {
-            get => AppState.ViewerApplyShadowTags;
-            set => UpdateAppState(nameof(AppState.ViewerApplyShadowTags), value);
+            get => AppSettings.ViewerApplyShadowTags;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerApplyShadowTags), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ApplyHideTags {
-            get => AppState.ViewerApplyHideTags;
-            set => UpdateAppState(nameof(AppState.ViewerApplyHideTags), value);
+            get => AppSettings.ViewerApplyHideTags;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerApplyHideTags), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RenderOnBlackBackground {
-            get => AppState.RenderOnBlackBackground;
-            set => UpdateAppState(nameof(AppState.RenderOnBlackBackground), value);
+            get => AppSettings.RenderOnBlackBackground;
+            set => UpdateAppSetting(nameof(AppSettings.RenderOnBlackBackground), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool DrawNormals {
-            get => AppState.ViewerDrawNormals;
-            set => UpdateAppState(nameof(AppState.ViewerDrawNormals), value);
+            get => AppSettings.ViewerDrawNormals;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawNormals), value);
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RotateSpritesUp {
-            get => AppState.ViewerRotateSpritesUp;
-            set => UpdateAppState(nameof(AppState.ViewerRotateSpritesUp), value);
+            get => AppSettings.ViewerRotateSpritesUp;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerRotateSpritesUp), value);
         }
 
         public int ProjectionXAdjustment { get; set; }
