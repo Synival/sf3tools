@@ -32,6 +32,7 @@ namespace SF3.Win.Controls {
             toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             tsbDrawSurfaceModel = new System.Windows.Forms.ToolStripButton();
             tsbDrawModels = new System.Windows.Forms.ToolStripButton();
+            tsbDrawExtraModels = new System.Windows.Forms.ToolStripButton();
             tsbDrawGround = new System.Windows.Forms.ToolStripButton();
             tsbDrawSky = new System.Windows.Forms.ToolStripButton();
             tsbRunAnimations = new System.Windows.Forms.ToolStripButton();
@@ -72,7 +73,7 @@ namespace SF3.Win.Controls {
             toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
             selectionPanel = new System.Windows.Forms.Panel();
-            tsbDrawExtraModels = new System.Windows.Forms.ToolStripButton();
+            tsbToggleBattleZones = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
@@ -81,7 +82,7 @@ namespace SF3.Win.Controls {
             // 
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawExtraModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawExtraModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleBattleZones, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(789, 31);
@@ -136,6 +137,16 @@ namespace SF3.Win.Controls {
             tsbDrawModels.Text = "Draw Models";
             tsbDrawModels.ToolTipText = "Draw Models";
             tsbDrawModels.Click += tsbDrawModels_Click;
+            // 
+            // tsbDrawExtraModels
+            // 
+            tsbDrawExtraModels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbDrawExtraModels.Image = Properties.Resources.ShowExtraModelsBmp;
+            tsbDrawExtraModels.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbDrawExtraModels.Name = "tsbDrawExtraModels";
+            tsbDrawExtraModels.Size = new System.Drawing.Size(28, 28);
+            tsbDrawExtraModels.Text = "Draw Extra Models (Titan / Kraken)";
+            tsbDrawExtraModels.Click += tsbDrawExtraModels_Click;
             // 
             // tsbDrawGround
             // 
@@ -542,15 +553,15 @@ namespace SF3.Win.Controls {
             selectionPanel.Size = new System.Drawing.Size(207, 514);
             selectionPanel.TabIndex = 4;
             // 
-            // tsbDrawExtraModels
+            // tsbToggleBattleZones
             // 
-            tsbDrawExtraModels.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbDrawExtraModels.Image = Properties.Resources.ShowExtraModelsBmp;
-            tsbDrawExtraModels.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbDrawExtraModels.Name = "tsbDrawExtraModels";
-            tsbDrawExtraModels.Size = new System.Drawing.Size(28, 28);
-            tsbDrawExtraModels.Text = "Draw Extra Models (Titan / Kraken)";
-            tsbDrawExtraModels.Click += tsbDrawExtraModels_Click;
+            tsbToggleBattleZones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleBattleZones.Image = (System.Drawing.Image) resources.GetObject("tsbToggleBattleZones.Image");
+            tsbToggleBattleZones.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleBattleZones.Name = "tsbToggleBattleZones";
+            tsbToggleBattleZones.Size = new System.Drawing.Size(28, 28);
+            tsbToggleBattleZones.Text = "Draw Battle Zones";
+            tsbToggleBattleZones.Click += tsbToggleBattleZones_Click;
             // 
             // MPD_ViewerControl
             // 
@@ -619,5 +630,6 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbDrawActors;
         private System.Windows.Forms.Panel selectionPanel;
         private System.Windows.Forms.ToolStripButton tsbDrawExtraModels;
+        private System.Windows.Forms.ToolStripButton tsbToggleBattleZones;
     }
 }

@@ -38,6 +38,7 @@ namespace SF3.Win.Controls {
 
             tsbToggleWireframe.Checked   = GLControl.DrawWireframe;
             tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries;
+            tsbToggleBattleZones.Checked = GLControl.DrawBattleZones;
             tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes;
             tsbToggleEventID.Checked     = GLControl.DrawEventIDs;
             tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines;
@@ -63,6 +64,7 @@ namespace SF3.Win.Controls {
 
             appSettings.ViewerDrawWireframeChanged      += (s, e) => { tsbToggleWireframe.Checked   = appSettings.ViewerDrawWireframe; };
             appSettings.ViewerDrawBoundariesChanged     += (s, e) => { tsbToggleBoundaries.Checked  = appSettings.ViewerDrawBoundaries; };
+            appSettings.ViewerDrawBattleZonesChanged    += (s, e) => { tsbToggleBattleZones.Checked = appSettings.ViewerDrawBattleZones; };
             appSettings.ViewerDrawTerrainTypesChanged   += (s, e) => { tsbToggleTerrainType.Checked = appSettings.ViewerDrawTerrainTypes; };
             appSettings.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appSettings.ViewerDrawEventIDs; };
             appSettings.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appSettings.ViewerDrawCollisionLines; };
@@ -255,6 +257,7 @@ namespace SF3.Win.Controls {
 
         private void tsbToggleWireframe_Click(object sender, EventArgs e)   => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
         private void tsbToggleBoundaries_Click(object sender, EventArgs e)  => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
+        private void tsbToggleBattleZones_Click(object sender, EventArgs e) => tsbToggleBattleZones.Checked = GLControl.DrawBattleZones  = !GLControl.DrawBattleZones;
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
         private void tsbToggleEventID_Click(object sender, EventArgs e)     => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
         private void tsbToggleCollisions_Click(object sender, EventArgs e)  => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;

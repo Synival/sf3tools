@@ -18,6 +18,7 @@ namespace SF3.Editor.Forms {
 
             tsmiView_MPD_DrawWireframes.Checked          = _appSettings.ViewerDrawWireframe;
             tsmiView_MPD_DrawBoundaries.Checked          = _appSettings.ViewerDrawBoundaries;
+            tsmiView_MPD_DrawBattleZones.Checked         = _appSettings.ViewerDrawBattleZones;
             tsmiView_MPD_DrawTerrainTypes.Checked        = _appSettings.ViewerDrawTerrainTypes;
             tsmiView_MPD_DrawEventIDs.Checked            = _appSettings.ViewerDrawEventIDs;
             tsmiView_MPD_DrawCollisionLines.Checked      = _appSettings.ViewerDrawCollisionLines;
@@ -59,6 +60,8 @@ namespace SF3.Editor.Forms {
                 => { tsmiView_MPD_DrawWireframes.Checked = _appSettings.ViewerDrawWireframe; _appSettings.Serialize(); };
             _appSettings.ViewerDrawBoundariesChanged += (s, e)
                 => { tsmiView_MPD_DrawBoundaries.Checked = _appSettings.ViewerDrawBoundaries; _appSettings.Serialize(); };
+            _appSettings.ViewerDrawBattleZonesChanged += (s, e)
+                => { tsmiView_MPD_DrawBattleZones.Checked = _appSettings.ViewerDrawBattleZones; _appSettings.Serialize(); };
             _appSettings.ViewerDrawTerrainTypesChanged   += (s, e)
                 => { tsmiView_MPD_DrawTerrainTypes.Checked = _appSettings.ViewerDrawTerrainTypes; _appSettings.Serialize(); };
             _appSettings.ViewerDrawEventIDsChanged += (s, e)
@@ -117,6 +120,8 @@ namespace SF3.Editor.Forms {
             => _appSettings.ViewerDrawWireframe = !_appSettings.ViewerDrawWireframe;
         private void tsmiView_MPD_DrawBoundaries_Click(object sender, EventArgs e)
             => _appSettings.ViewerDrawBoundaries = !_appSettings.ViewerDrawBoundaries;
+        private void tsmiView_MPD_DrawBattleZones_Click(object sender, EventArgs e)
+            => _appSettings.ViewerDrawBattleZones = !_appSettings.ViewerDrawBattleZones;
         private void tsmiView_MPD_DrawTerrainTypes_Click(object sender, EventArgs e)
             => _appSettings.ViewerDrawTerrainTypes = !_appSettings.ViewerDrawTerrainTypes;
         private void tsmiView_MPD_DrawEventIDs_Click(object sender, EventArgs e)

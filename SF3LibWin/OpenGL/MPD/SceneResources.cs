@@ -16,6 +16,7 @@ namespace SF3.Win.OpenGL.MPD {
 
         public override void Reset() {
             ResetActorSprites();
+            ResetZones();
         }
 
         public void ResetActorSprites() {
@@ -36,11 +37,16 @@ namespace SF3.Win.OpenGL.MPD {
             ActorsBySpriteID?.Clear();
             ActorsBySpriteID = null;
 
-            Texture?.Dispose();
-            Texture = null;
+            ActorTextureAtlas?.Dispose();
+            ActorTextureAtlas = null;
 
             TexInfoBySpriteID?.Clear();
             TexInfoBySpriteID = null;
+        }
+
+        public void ResetZones() {
+            ZoneModels?.Clear();
+            ZoneModels = null;
         }
 
         private static readonly Vector3[] c_spriteVertexData = [
@@ -64,17 +70,22 @@ namespace SF3.Win.OpenGL.MPD {
         private static readonly Vector4 c_white         = new(1, 1, 1, 1);
 
         public void Update(IMPD mpdFile) {
-            Reset();
+            UpdateActors(mpdFile);
+            UpdateZones(mpdFile);
+        }
 
-            var currentScene = AppResources.Get().ActiveScene;
+        public void UpdateActors(IMPD mpdFile) {
+            ResetActorSprites();
+
+            var currentScene = AppResources.Get().ActiveScene?.Scene;
             if (currentScene == null)
                 return;
 
             var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
-            var actorsGrouped = currentScene.Scene.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
+            var actorsGrouped = currentScene.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
 
             var spriteIds = actorsGrouped.Select(x => x.Key).ToArray();
-            BuildTexture(spriteIds);
+            BuildActorTextureAtlas(spriteIds);
 
             ModelsBySpriteID  = new Dictionary<int, QuadModel>();
             ShadowsBySpriteID = new Dictionary<int, QuadModel>();
@@ -146,7 +157,50 @@ namespace SF3.Win.OpenGL.MPD {
             }
         }
 
-        private void BuildTexture(int[] spriteIds) {
+        private readonly Vector4[] c_zoneColors = [
+            new Vector4(1.0f, 1.0f, 1.0f, 0.25f),
+            new Vector4(1.0f, 0.5f, 0.5f, 0.25f),
+            new Vector4(1.0f, 1.0f, 0.5f, 0.25f),
+            new Vector4(0.5f, 1.0f, 0.5f, 0.25f),
+            new Vector4(0.5f, 1.0f, 1.0f, 0.25f),
+            new Vector4(0.5f, 0.5f, 1.0f, 0.25f),
+            new Vector4(1.0f, 0.5f, 1.0f, 0.25f)
+        ];
+
+        // NOTE: All of this is just a rough expression that hasn't been thought out!
+        // This should probably be overlayed on tiles or something.
+        public void UpdateZones(IMPD mpdFile) {
+            ResetZones();
+
+            var currentScene = AppResources.Get().ActiveScene?.Scene;
+            if (currentScene == null || currentScene.NumZones == 0 || currentScene.Zones == null)
+                return;
+
+            var zoneY = (mpdFile.Planes?.GroundY ?? 0) / -32.0f - 0.05f;
+            Vector3 ZoneVertex(int x, int z)
+                => new Vector3(0.5f + x + GeneralResources.ModelOffsetX, zoneY, (63.5f - z) + GeneralResources.ModelOffsetZ);
+
+            var newZones = new List<QuadModel>();
+
+            foreach (var zone in currentScene.Zones) {
+                if (zone.ID >= currentScene.NumZones)
+                    break;
+
+                var point1 = ZoneVertex(zone.X1, zone.Z1);
+                var point2 = ZoneVertex(zone.X2, zone.Z2);
+                var point3 = ZoneVertex(zone.X3, zone.Z3);
+                var point4 = ZoneVertex(zone.X4, zone.Z4);
+
+                if (zone.NumPoints == 3)
+                    newZones.Add(new QuadModel([new Quad([point1, point2, point3, point3], c_zoneColors[zone.ID % 7])]));
+                else if (zone.NumPoints == 4)
+                    newZones.Add(new QuadModel([new Quad([point1, point2, point3, point4], c_zoneColors[zone.ID % 7])]));
+            }
+
+            ZoneModels = newZones;
+        }
+
+        private void BuildActorTextureAtlas(int[] spriteIds) {
             // Always include the 'unknown sprite' image.
             var unknownImage = Resources.UnknownSpriteBmp;
 
@@ -245,7 +299,7 @@ namespace SF3.Win.OpenGL.MPD {
                 }
             }
 
-            Texture = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Bgra, PixelType.UnsignedByte, imageData: textureData);
+            ActorTextureAtlas = new Texture(width, height, PixelInternalFormat.Rgba, PixelFormat.Bgra, PixelType.UnsignedByte, imageData: textureData);
         }
 
         public class ActorModelInstance {
@@ -286,11 +340,13 @@ namespace SF3.Win.OpenGL.MPD {
             public float VerticalOffset;
         }
 
-        public Texture Texture { get; private set; }
+        public Texture ActorTextureAtlas { get; private set; }
         private Dictionary<int, SpriteTexInfo> TexInfoBySpriteID = null;
 
         public Dictionary<int, ActorModelInstance[]> ActorsBySpriteID { get; private set; } = null;
         public Dictionary<int, QuadModel> ModelsBySpriteID { get; private set; } = null;
         public Dictionary<int, QuadModel> ShadowsBySpriteID { get; private set; } = null;
+
+        public List<QuadModel> ZoneModels { get; private set; } = null;
     }
 }

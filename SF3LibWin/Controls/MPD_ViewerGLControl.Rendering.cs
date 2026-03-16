@@ -32,6 +32,7 @@ namespace SF3.Win.Controls {
 
             _appSettings.ViewerDrawWireframeChanged      += (s, e) => InvalidateFrame();
             _appSettings.ViewerDrawBoundariesChanged     += (s, e) => InvalidateFrame();
+            _appSettings.ViewerDrawBattleZonesChanged    += (s, e) => InvalidateFrame();
             _appSettings.ViewerDrawTerrainTypesChanged   += (s, e) => InvalidateFrame();
             _appSettings.ViewerDrawEventIDsChanged       += (s, e) => InvalidateFrame();
             _appSettings.ViewerDrawCollisionLinesChanged += (s, e) => InvalidateFrame();
@@ -239,6 +240,7 @@ namespace SF3.Win.Controls {
                 DrawTerrainTypes   = DrawTerrainTypes,
                 DrawEventIDs       = DrawEventIDs,
                 DrawBoundaries     = DrawBoundaries,
+                DrawBattleZones    = DrawBattleZones,
                 DrawCollisionLines = DrawCollisionLines,
 
                 BackgroundX        = MPD_File?.Planes?.BackgroundX ?? 0,
@@ -588,6 +590,13 @@ namespace SF3.Win.Controls {
         public bool DrawBoundaries {
             get => AppSettings.ViewerDrawBoundaries;
             set => UpdateAppSetting(nameof(AppSettings.ViewerDrawBoundaries), value);
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool DrawBattleZones {
+            get => AppSettings.ViewerDrawBattleZones;
+            set => UpdateAppSetting(nameof(AppSettings.ViewerDrawBattleZones), value);
         }
 
         [Browsable(false)]

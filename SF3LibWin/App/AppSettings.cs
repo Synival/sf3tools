@@ -250,6 +250,16 @@ namespace SF3.Win.App {
         public event EventHandler ViewerDrawBoundariesChanged;
 
         /// <summary>
+        /// When enabled, battle zones are overlayed onto surface tiles.
+        /// </summary>
+        public bool ViewerDrawBattleZones {
+            get => _viewerDrawBattleZones;
+            set => SetValue(ref _viewerDrawBattleZones, value, ViewerDrawBattleZonesChanged);
+        }
+        private bool _viewerDrawBattleZones = false;
+        public event EventHandler ViewerDrawBattleZonesChanged;
+
+        /// <summary>
         /// When enabled, the MPD Viewer will draw 2D collision lines that affect movement when freely walking.
         /// </summary>
         public bool ViewerDrawCollisionLines {

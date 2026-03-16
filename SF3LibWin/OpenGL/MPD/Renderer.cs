@@ -43,6 +43,7 @@ namespace SF3.Win.OpenGL.MPD {
             public bool DrawTerrainTypes;
             public bool DrawEventIDs;
             public bool DrawBoundaries;
+            public bool DrawBattleZones;
             public bool DrawCollisionLines;
 
             public bool ApplyLighting;
@@ -186,6 +187,9 @@ namespace SF3.Win.OpenGL.MPD {
 
             if (options.DrawBoundaries)
                 DrawSceneBoundaries(resources.General, resources.BoundaryModels);
+
+            if (options.DrawBattleZones)
+                DrawZones(resources.General, resources.Scene);
 
             if (options.DrawOutlines && resources.Screen != null)
                 DrawOutlines(resources.General, resources.Models, resources.Scene, resources.Editor, resources.Screen, options, state.CameraYaw, state.CameraPitch, state.ScreenWidth, state.ScreenHeight);
@@ -637,7 +641,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             var shader = general.SpriteShader;
             using (shader.Use())
-            using (scene.Texture.Use()) {
+            using (scene.ActorTextureAtlas.Use()) {
                 _ = shader.UpdateUniform("colorize", selectionColors);
 
                 if (!selectionColors) {
@@ -668,6 +672,21 @@ namespace SF3.Win.OpenGL.MPD {
                     }
                 }
                 _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
+            }
+        }
+
+        public void DrawZones(
+            GeneralResources general,
+            SceneResources scene
+        ) {
+            if (scene == null || scene.ZoneModels == null)
+                return;
+
+            using (general.SolidShader.Use()) {
+                GL.Disable(EnableCap.DepthTest);
+                foreach (var zone in scene.ZoneModels)
+                    zone.Draw(general.SolidShader, null);
+                GL.Enable(EnableCap.DepthTest);
             }
         }
 
@@ -892,7 +911,7 @@ namespace SF3.Win.OpenGL.MPD {
                     var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
 
                     var shader = general.SpriteShader;
-                    using (scene.Texture.Use()) {
+                    using (scene.ActorTextureAtlas.Use()) {
                         _ = shader.UpdateUniform("colorize", true);
                         _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
 

@@ -152,6 +152,7 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawBattleZones = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -457,7 +458,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiView_MPD
             // 
-            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawExtraModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_DrawActors, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_EnableBlankFieldV2Controls });
+            tsmiView_MPD.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiView_MPD_DrawSurfaceModel, tsmiView_MPD_DrawModels, tsmiView_MPD_DrawExtraModels, tsmiView_MPD_DrawGround, tsmiView_MPD_DrawSky, tsmiView_MPD_RunAnimations, tsmiView_MPD_ApplyLighting, tsmiView_MPD_DrawGradients, tsmiView_MPD_DrawActors, tsmiView_MPD_Sep1, tsmiView_MPD_DrawWireframes, tsmiView_MPD_DrawBoundaries, tsmiView_MPD_DrawBattleZones, tsmiView_MPD_DrawTerrainTypes, tsmiView_MPD_DrawEventIDs, tsmiView_MPD_DrawCollisionLines, tsmiView_MPD_HideModelsNotFacingCamera, tsmiView_MPD_ApplyShadowTags, tsmiView_MPD_ApplyHideTags, tsmiView_MPD_RenderOnBlackBackground, tsmiView_MPD_DrawNormalMap, tsmiView_MPD_RotateSpritesUpToCamera, tsmiView_MPD_Sep2, tsmiView_MPD_EnableBlankFieldV2Controls });
             tsmiView_MPD.Name = "tsmiView_MPD";
             tsmiView_MPD.Size = new Size(265, 22);
             tsmiView_MPD.Text = "&MPD";
@@ -1033,6 +1034,13 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiView_MPD_DrawBattleZones
+            // 
+            tsmiView_MPD_DrawBattleZones.Name = "tsmiView_MPD_DrawBattleZones";
+            tsmiView_MPD_DrawBattleZones.Size = new Size(384, 22);
+            tsmiView_MPD_DrawBattleZones.Text = "WIP: Draw Battle Zones";
+            tsmiView_MPD_DrawBattleZones.Click += tsmiView_MPD_DrawBattleZones_Click;
+            // 
             // SF3EditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1176,5 +1184,6 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets;
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets_Assign;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MinimalChanges;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawBattleZones;
     }
 }
