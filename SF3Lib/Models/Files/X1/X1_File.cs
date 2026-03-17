@@ -209,6 +209,8 @@ namespace SF3.Models.Files.X1 {
             if (Battles != null) {
                 var battles = Battles.Select(x => x.Value).Where(x => x != null).ToList();
                 tables.AddRange(battles.SelectMany(x => x.Tables));
+                foreach (var battle in battles)
+                    Discoveries.AddStruct((uint) (battle.BattleHeader.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.BattleHeader.Size);
             }
             if (battleTalkAddress >= 0)
                 tables.Add(BattleTalkTable = BattleTalkTable.Create(Data, nameof(BattleTalkTable), battleTalkAddress));

@@ -29,6 +29,10 @@ namespace SF3.Win.Views {
                 if (arrays.Length > 0)
                     CreateChild(new TextView("Arrays", Model.Discoveries.CreateReport(arrays, false)));
 
+                var structs = allDiscoveries.Where(x => x.Type == DiscoveredDataType.Struct).ToArray();
+                if (structs.Length > 0)
+                    CreateChild(new TextView("Structs", Model.Discoveries.CreateReport(structs, false)));
+
                 var pointers = allDiscoveries.Where(x => x.Type == DiscoveredDataType.Pointer).ToArray();
                 if (pointers.Length > 0) {
                     CreateChild(new TextView("Pointers", Model.Discoveries.CreateReport(pointers, false)));

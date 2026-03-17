@@ -90,6 +90,14 @@ namespace CommonLib.Discovery {
             return newData;
         }
 
+        public DiscoveredData AddStruct(uint addr, string typeName, string name, int? size) {
+            // TODO: what if a something is already there?
+            var newData = DiscoveredStructsByAddress[addr] = new DiscoveredData(this, addr, size, DiscoveredDataType.Struct, typeName, name, null);
+            RemoveUnknownsAt(addr);
+            UpdatePointersToDiscoveredData(DiscoveredStructsByAddress[addr]);
+            return newData;
+        }
+
         public DiscoveredData[] GetAllOrdered() {
             var discoveredList = new List<DiscoveredData>();
             discoveredList.AddRange(DiscoveredFunctionsByAddress.Values);
