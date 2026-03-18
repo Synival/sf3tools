@@ -12,11 +12,19 @@ using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.MPD {
     public class Renderer {
-        private const float c_selectionPrimaryModelsB   = 1 * (1.0f / 64.0f);
-        private const float c_selectionExtraModelsB     = 2 * (1.0f / 64.0f);
-        private const float c_selectionActorsB          = 3 * (1.0f / 64.0f);
-        private const float c_selectionCollisionLinesB  = 4 * (1.0f / 64.0f);
-        private const float c_selectionCollisionPointsB = 5 * (1.0f / 64.0f);
+        public const float c_selectionSurfaceTile     = 0;
+        public const float c_selectionPrimaryModels   = 1;
+        public const float c_selectionExtraModels     = 2;
+        public const float c_selectionActors          = 3;
+        public const float c_selectionCollisionLines  = 4;
+        public const float c_selectionCollisionPoints = 5;
+
+        public const float c_selectionSurfaceTileB     = c_selectionSurfaceTile     * (1.0f / 64.0f);
+        public const float c_selectionPrimaryModelsB   = c_selectionPrimaryModels   * (1.0f / 64.0f);
+        public const float c_selectionExtraModelsB     = c_selectionExtraModels     * (1.0f / 64.0f);
+        public const float c_selectionActorsB          = c_selectionActors          * (1.0f / 64.0f);
+        public const float c_selectionCollisionLinesB  = c_selectionCollisionLines  * (1.0f / 64.0f);
+        public const float c_selectionCollisionPointsB = c_selectionCollisionPoints * (1.0f / 64.0f);
 
         public class RendererResources {
             public GeneralResources General;
@@ -197,8 +205,12 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawBattleZones)
                 DrawZones(resources.General, resources.Scene);
 
-            if (options.DrawOutlines && resources.Screen != null)
-                DrawOutlines(resources.General, resources.Models, resources.Scene, resources.Editor, resources.Screen, options, state.CameraYaw, state.CameraPitch, state.ScreenWidth, state.ScreenHeight);
+            if (options.DrawOutlines && resources.Screen != null) {
+                DrawOutlines(
+                    resources.General, resources.Models, resources.Scene, resources.Editor, resources.Screen, resources.CollisionModels,
+                    options, state.CameraYaw, state.CameraPitch, state.ScreenWidth, state.ScreenHeight
+                );
+            }
         }
 
         public void DrawSelectionScene(
@@ -234,7 +246,7 @@ namespace SF3.Win.OpenGL.MPD {
             if (options.DrawCollisionLines)
                 DrawSceneCollisionLines(resources.General, resources.CollisionModels, state.CameraYaw, selectionColors: true);
 
-            // Enable 'CullFace' to draw everything single-sided (as the game actually is)
+            // Disable 'CullFace' if previously enabled
             if (!options.ForceTwoSidedTextures)
                 GL.Disable(EnableCap.CullFace);
         }
@@ -812,6 +824,7 @@ namespace SF3.Win.OpenGL.MPD {
             SceneResources scene,
             EditorResources editor,
             ScreenResources screen,
+            CollisionResources collision,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -886,9 +899,7 @@ namespace SF3.Win.OpenGL.MPD {
                 RenderOutlinesFor(() => {
                     general.ColorizeShader.UpdateUniform("color", color);
                     general.ColorizeShader.UpdateUniform("alwaysShow", true);
-
-                    using ((texture ?? general.TransparentWhiteTexture).Use())
-                        model.Draw(general.ColorizeShader);
+                    model.Draw(general.ColorizeShader);
                 });
             }
 
@@ -953,12 +964,40 @@ namespace SF3.Win.OpenGL.MPD {
                 }, general.SpriteShader);
             }
 
+            void RenderCollisionLine(SelectableCollisionLine line, Vector4 color) {
+                var model = collision.IndividualModels.FirstOrDefault(x => !x.IsPoint && x.ID == line.ID);
+                if (model == null)
+                    return;
+
+                RenderOutlinesFor(() => {
+                    general.ColorizeShader.UpdateUniform("color", color);
+                    general.ColorizeShader.UpdateUniform("alwaysShow", true);
+                    model.Draw(general.ColorizeShader);
+                });
+            }
+
+            void RenderCollisionPoint(SelectableCollisionPoint point, Vector4 color) {
+                var model = collision.IndividualModels.FirstOrDefault(x => x.IsPoint && x.ID == point.ID);
+                if (model == null)
+                    return;
+
+                RenderOutlinesFor(() => {
+                    general.ColorizeShader.UpdateUniform("color", color);
+                    general.ColorizeShader.UpdateUniform("alwaysShow", true);
+                    model.Draw(general.ColorizeShader);
+                });
+            }
+
             if (editor.MouseoverTileModel != null)
                 RenderTile(editor.MouseoverTileModel, editor.MouseoverTileTexture, new Vector4(0.25f, 0.5f, 0.5f, 0.5f));
             else if (editor.MouseoverObject is SelectableModel mouseoverModel)
                 RenderModel(mouseoverModel, mouseoverModel.Collection == MPD_CollectionType.Primary ? new Vector4(0.5f, 0.375f, 0.25f, 0.5f) : new Vector4(0.5f, 0.25f, 0.25f, 0.5f));
             else if (editor.MouseoverObject is SelectableActor mouseoverActor)
                 RenderActor(mouseoverActor, new Vector4(0.25f, 0.25f + (0.25f / 4), 0.5f, 0.5f));
+            else if (editor.MouseoverObject is SelectableCollisionLine mouseoverLine)
+                RenderCollisionLine(mouseoverLine, new Vector4(1, 0.75f, 1, 0.5f));
+            else if (editor.MouseoverObject is SelectableCollisionPoint mouseoverPoint)
+                RenderCollisionPoint(mouseoverPoint, new Vector4(1, 0.75f, 1, 0.5f));
 
             if (editor.SelectedTileModel != null)
                 RenderTile(editor.SelectedTileModel, editor.SelectedTileTexture, new Vector4(0.0f, 1.0f, 1.0f, 1.0f));
@@ -968,6 +1007,10 @@ namespace SF3.Win.OpenGL.MPD {
                         RenderModel(selectedModel, selectedModel.Collection == MPD_CollectionType.Primary ? new Vector4(1.0f, 0.5f, 0.0f, 1.0f) : new Vector4(1.0f, 0.0f, 0.0f, 1.0f));
                     else if (selectedObject is SelectableActor selectedActor)
                         RenderActor(selectedActor, new Vector4(0.0f, 0.25f, 1.0f, 1.0f));
+                    else if (selectedObject is SelectableCollisionLine selectedLine)
+                        RenderCollisionLine(selectedLine, new Vector4(1, 0.5f, 1, 1.0f));
+                    else if (selectedObject is SelectableCollisionPoint selectedPoint)
+                        RenderCollisionPoint(selectedPoint, new Vector4(1, 0.5f, 1, 1.0f));
                 }
             }
 

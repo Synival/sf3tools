@@ -10,6 +10,7 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
+using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
 using static SF3.FieldEditing.Constants;
 
@@ -28,6 +29,14 @@ namespace SF3.Win.Controls {
         }
 
         public class SelectableActor(int id) : ISelectableObject {
+            public int ID = id;
+        }
+
+        public class SelectableCollisionLine(int id) : ISelectableObject {
+            public int ID = id;
+        }
+
+        public class SelectableCollisionPoint(int id) : ISelectableObject {
             public int ID = id;
         }
 
@@ -77,6 +86,12 @@ namespace SF3.Win.Controls {
             var oldActor = currentSelectedObject as SelectableActor;
             var newActor = obj as SelectableActor;
 
+            var oldCollisionLine = currentSelectedObject as SelectableCollisionLine;
+            var newCollisionLine = obj as SelectableCollisionLine;
+
+            var oldCollisionPoint = currentSelectedObject as SelectableCollisionPoint;
+            var newCollisionPoint = obj as SelectableCollisionPoint;
+
             object newEventObject = null;
 
             _selectedObjects.Clear();
@@ -110,6 +125,11 @@ namespace SF3.Win.Controls {
                     newEventObject = actor;
             }
 
+            if (oldCollisionLine != newCollisionLine)
+                newEventObject = newCollisionLine != null ? (MPD_File?.Collisions?.Lines?.FirstOrDefault(x => x.ID == newCollisionLine.ID)) : null;
+            if (oldCollisionPoint != newCollisionPoint)
+                newEventObject = newCollisionPoint != null ? (MPD_File?.Collisions?.Points?.FirstOrDefault(x => x.ID == newCollisionPoint.ID)) : null;
+
             object[] newObjectsSelected = (newEventObject == null) ? [] : [newEventObject];
 
             if (!Enumerable.SequenceEqual(_objectsSelectedChangedEventObject, newObjectsSelected)) {
@@ -137,14 +157,18 @@ namespace SF3.Win.Controls {
                     pixel[i] = (byte) Math.Round(pixel[i] / (255f / 64f));
             }
 
-            if (pixel[2] == 0)
+            if (pixel[2] == Renderer.c_selectionSurfaceTile)
                 UpdateMouseoverObject(new SelectableTile(pixel[0], pixel[1]));
-            else if (pixel[2] == 1)
+            else if (pixel[2] == Renderer.c_selectionPrimaryModels)
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.Primary, pixel[0] + pixel[1] * 64));
-            else if (pixel[2] == 2)
+            else if (pixel[2] == Renderer.c_selectionExtraModels)
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.ExtraModels, pixel[0] + pixel[1] * 64));
-            else if (pixel[2] == 3)
+            else if (pixel[2] == Renderer.c_selectionActors)
                 UpdateMouseoverObject(new SelectableActor(pixel[0] + pixel[1] * 64));
+            else if (pixel[2] == Renderer.c_selectionCollisionLines)
+                UpdateMouseoverObject(new SelectableCollisionLine(pixel[0] + pixel[1] * 64));
+            else if (pixel[2] == Renderer.c_selectionCollisionPoints)
+                UpdateMouseoverObject(new SelectableCollisionPoint(pixel[0] + pixel[1] * 64));
             else
                 UpdateMouseoverObject(null);
         }
