@@ -554,10 +554,10 @@
     <item value="0x0227" name="Load Flag 0x227" />
     <item value="0x0228" name="Load Flag 0x228" />
     <item value="0x0229" name="Load Flag 0x229" />
-    <item value="0x022A" name="Load Flag 0x22A" />
+    <item value="0x022A" name="Load Flag 0x22A (Turns on at start of battles)" />
     <item value="0x022B" name="Load Flag 0x22B" />
     <item value="0x022C" name="Load Flag 0x22C" />
-    <item value="0x022D" name="Load Flag 0x22D (Ruin fight)" />
+    <item value="0x022D" name="Load Flag 0x22D (In battle, this triggers 'switch map' logic at the end of a turn phase.)" />
     <item value="0x022E" name="Load Flag 0x22E" />
     <item value="0x022F" name="Load Flag 0x22F" />
     <item value="0x0230" name="Load Flag 0x230 (Life Ring Ruins 1. Proect Ring ruins 2. Healing Drop ruins 3.)" />
