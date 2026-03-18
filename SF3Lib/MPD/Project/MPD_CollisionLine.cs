@@ -9,12 +9,13 @@ namespace SF3.MPD.Project {
     /// A single line connected by two MPD_CollisionPoint's in an MPD.
     /// </summary>
     public class MPD_CollisionLine : IMPD_CollisionLine {
-        public MPD_CollisionLine(IMPD_CollisionPoint point1, IMPD_CollisionPoint point2) {
+        public MPD_CollisionLine(int id, IMPD_CollisionPoint point1, IMPD_CollisionPoint point2) {
             if (point1 == null)
                 throw new ArgumentNullException(nameof(point1));
             if (point2 == null)
                 throw new ArgumentNullException(nameof(point2));
 
+            ID = id;
             Point1 = point1;
             Point2 = point2;
         }
@@ -23,6 +24,7 @@ namespace SF3.MPD.Project {
             var point1id = original.Point1.ID;
             var point2id = original.Point2.ID;
 
+            ID = original.ID;
             Point1 = points.First(x => x.ID == point1id);
             Point2 = points.First(x => x.ID == point2id);
 
@@ -35,12 +37,15 @@ namespace SF3.MPD.Project {
         private MPD_CollisionLine(JToken token, Dictionary<int, IMPD_CollisionPoint> pointsById) {
             var jObject = (JObject) token;
 
+            ID            = (int) jObject["ID"];
             Point1        = pointsById[(int) jObject["Point1ID"]];
             Point2        = pointsById[(int) jObject["Point2ID"]];
             Angle         = (float) jObject["Angle"];
             FlagToDisable = (int?) jObject["FlagToDisable"];
             Tag           = (byte) jObject["Tag"];
         }
+
+        public int ID { get; }
 
         // TODO: Enforce non-null assignment.
         public IMPD_CollisionPoint Point1 { get; set; }

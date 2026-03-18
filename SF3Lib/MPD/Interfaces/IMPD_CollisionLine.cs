@@ -4,6 +4,11 @@
     /// </summary>
     public interface IMPD_CollisionLine {
         /// <summary>
+        /// Unique identifier for the line.
+        /// </summary>
+        int ID { get; }
+
+        /// <summary>
         /// The first point of the line. Cannot be 'null'.
         /// </summary>
         IMPD_CollisionPoint Point1 { get; set; }

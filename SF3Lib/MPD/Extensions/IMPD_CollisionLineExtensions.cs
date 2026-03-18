@@ -32,10 +32,10 @@ namespace SF3.MPD.Extensions {
             var sqP3 = new MPD_CollisionPoint(2, maxX, maxY);
             var sqP4 = new MPD_CollisionPoint(3, minX, maxY);
 
-            var sqL1 = new MPD_CollisionLine(sqP1, sqP2);
-            var sqL2 = new MPD_CollisionLine(sqP2, sqP3);
-            var sqL3 = new MPD_CollisionLine(sqP3, sqP4);
-            var sqL4 = new MPD_CollisionLine(sqP4, sqP1);
+            var sqL1 = new MPD_CollisionLine(0, sqP1, sqP2);
+            var sqL2 = new MPD_CollisionLine(1, sqP2, sqP3);
+            var sqL3 = new MPD_CollisionLine(2, sqP3, sqP4);
+            var sqL4 = new MPD_CollisionLine(3, sqP4, sqP1);
 
             bool IsPointInsideSquare(IMPD_CollisionPoint p)
                 => p.X >= minX && p.X <= maxX && p.Y >= minY && p.Y <= maxY;
@@ -92,6 +92,7 @@ namespace SF3.MPD.Extensions {
 
         public static JObject ToJObject(this IMPD_CollisionLine line) {
             return new JObject {
+                { "ID",            line.ID },
                 { "Point1ID",      line.Point1.ID },
                 { "Point2ID",      line.Point2.ID },
                 { "Angle",         line.Angle },
