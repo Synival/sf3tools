@@ -114,7 +114,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                 var vertices  = poly.Vertices.Select(x => x.ToVector3()).ToArray();
                 var indivQuad = new Quad(vertices, indivColors);
-                var fullQuad = new Quad(vertices, fullColors);
+                var fullQuad  = new Quad(vertices, fullColors);
 
                 IndividualModels.Add(new CollisionQuadModel([indivQuad], false, line.ID));
                 quads.Add(fullQuad);
@@ -144,7 +144,7 @@ namespace SF3.Win.OpenGL.MPD {
             var indivRedColors = red.Select(x => new Vector4(x, 0.66f)).ToArray();
             var fullRedColors  = red.Select(x => new Vector4(x, 0.25f)).ToArray();
 
-            var quads = new List<Quad>();
+            var fullQuads = new List<Quad>();
             foreach (var point in points) {
                 var pos1 = GetPointPosition(point.X - 2, point.Y - 2, surface, groundY);
                 var pos2 = GetPointPosition(point.X + 2, point.Y + 2, surface, groundY);
@@ -176,17 +176,19 @@ namespace SF3.Win.OpenGL.MPD {
                 var indivColors = hasLines ? indivWhiteColors : fullWhiteColors;
                 var fullColors  = hasLines ? fullWhiteColors  : fullRedColors;
 
+                var indivQuads = new List<Quad>();
                 foreach (var poly in polys) {
                     var vertices  = poly.Vertices.Select(x => x.ToVector3()).ToArray();
                     var indivQuad = new Quad(vertices, indivColors);
                     var fullQuad  = new Quad(vertices, fullColors);
 
-                    IndividualModels.Add(new CollisionQuadModel([indivQuad], true, point.ID));
-                    quads.Add(fullQuad);
+                    indivQuads.Add(indivQuad);
+                    fullQuads.Add(fullQuad);
                 }
+                IndividualModels.Add(new CollisionQuadModel(indivQuads.ToArray(), true, point.ID));
             }
 
-            return quads;
+            return fullQuads;
         }
 
         public class CollisionQuadModel : QuadModel {
