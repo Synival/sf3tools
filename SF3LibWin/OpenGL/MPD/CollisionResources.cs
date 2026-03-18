@@ -116,7 +116,7 @@ namespace SF3.Win.OpenGL.MPD {
                 var indivQuad = new Quad(vertices, indivColors);
                 var fullQuad = new Quad(vertices, fullColors);
 
-                IndividualModels.Add(new QuadModel([indivQuad]));
+                IndividualModels.Add(new CollisionQuadModel([indivQuad], false, line.ID));
                 quads.Add(fullQuad);
             }
 
@@ -181,7 +181,7 @@ namespace SF3.Win.OpenGL.MPD {
                     var indivQuad = new Quad(vertices, indivColors);
                     var fullQuad  = new Quad(vertices, fullColors);
 
-                    IndividualModels.Add(new QuadModel([indivQuad]));
+                    IndividualModels.Add(new CollisionQuadModel([indivQuad], true, point.ID));
                     quads.Add(fullQuad);
                 }
             }
@@ -189,7 +189,17 @@ namespace SF3.Win.OpenGL.MPD {
             return quads;
         }
 
-        public DisposableList<QuadModel> IndividualModels { get; } = [];
+        public class CollisionQuadModel : QuadModel {
+            public CollisionQuadModel(Quad[] quads, bool isPoint, int id) : base(quads) {
+                IsPoint = isPoint;
+                ID = id;
+            }
+
+            public bool IsPoint { get; }
+            public int ID { get; }
+        }
+
+        public DisposableList<CollisionQuadModel> IndividualModels { get; } = [];
         public QuadModel FullModel { get; private set; } = null;
     }
 }
