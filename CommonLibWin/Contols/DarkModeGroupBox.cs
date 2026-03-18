@@ -1,10 +1,58 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using CommonLib.Win.DarkMode;
 
 namespace CommonLib.Win.Controls {
     public class DarkModeGroupBox : GroupBox {
+        public DarkModeGroupBox() {
+            _defaultCursor = Cursor;
+        }
+
+        protected override void OnClick(EventArgs e) {
+            if (!_isMouseOverTitle) {
+                base.OnClick(e);
+                return;
+            }
+
+            if (!IsCollapsed) {
+                _uncollapseHeight = Height;
+                Height = Font.Height + 3;
+                AdjustLowerControlsBy(Height - _uncollapseHeight);
+            }
+            else {
+                AdjustLowerControlsBy(_uncollapseHeight - Height);
+                Height = _uncollapseHeight;
+            }
+
+            IsCollapsed ^= true;
+        }
+
+        private void AdjustLowerControlsBy(int amount) {
+            Parent.SuspendLayout();
+            foreach (var controlObj in Parent.Controls) {
+                var control = controlObj as Control;
+                if (control == this || control == null || control.Parent != Parent || control.Location.Y <= Location.Y)
+                    continue;
+                control.Location = new Point(control.Location.X, control.Location.Y + amount);
+            }
+            Parent.ResumeLayout();
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e) {
+            base.OnMouseEnter(e);
+            _isMouseOverTitle = IsPositionOverTitle(e.Location);
+            Cursor = _isMouseOverTitle ? Cursors.Hand : _defaultCursor;
+        }
+
+        private bool IsPositionOverTitle(Point point) {
+            if (point.Y >= Font.Height)
+                return false;
+            var textWidth = TextRenderer.MeasureText(Text, Font).Width;
+            return (point.X >= 4 && point.X < textWidth);
+        }
+
         protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);
             if (DarkModeContext == null) {
@@ -47,6 +95,14 @@ namespace CommonLib.Win.Controls {
             }
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IsCollapsed { get; set; } = false;
+
         private DarkModeControlContext<DarkModeGroupBox> DarkModeContext { get; set; }
+
+        private Cursor _defaultCursor;
+        private bool _isMouseOverTitle;
+        private int _uncollapseHeight = 0;
     }
 }
