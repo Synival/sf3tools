@@ -82,6 +82,7 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_Sep1 = new System.Windows.Forms.ToolStripSeparator();
             tsmiView_MPD_DrawWireframes = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawBoundaries = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiView_MPD_DrawBattleZones = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawTerrainTypes = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawEventIDs = new System.Windows.Forms.ToolStripMenuItem();
             tsmiView_MPD_DrawCollisionLines = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,7 +153,6 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiView_MPD_DrawBattleZones = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -178,12 +178,11 @@ namespace SF3.Editor.Forms {
             tsmiFile_New.Name = "tsmiFile_New";
             tsmiFile_New.Size = new Size(259, 22);
             tsmiFile_New.Text = "&New";
-            tsmiFile_New.Visible = false;
             // 
             // tsmiFile_New_MPDProject
             // 
             tsmiFile_New_MPDProject.Name = "tsmiFile_New_MPDProject";
-            tsmiFile_New_MPDProject.Size = new Size(140, 22);
+            tsmiFile_New_MPDProject.Size = new Size(180, 22);
             tsmiFile_New_MPDProject.Text = "&MPD Project";
             tsmiFile_New_MPDProject.Click += tsmiFile_New_MPDProject_Click;
             // 
@@ -545,6 +544,13 @@ namespace SF3.Editor.Forms {
             tsmiView_MPD_DrawBoundaries.Text = "Draw Boundaries";
             tsmiView_MPD_DrawBoundaries.Click += tsmiView_MPD_DrawBoundaries_Click;
             // 
+            // tsmiView_MPD_DrawBattleZones
+            // 
+            tsmiView_MPD_DrawBattleZones.Name = "tsmiView_MPD_DrawBattleZones";
+            tsmiView_MPD_DrawBattleZones.Size = new Size(384, 22);
+            tsmiView_MPD_DrawBattleZones.Text = "WIP: Draw Battle Zones";
+            tsmiView_MPD_DrawBattleZones.Click += tsmiView_MPD_DrawBattleZones_Click;
+            // 
             // tsmiView_MPD_DrawTerrainTypes
             // 
             tsmiView_MPD_DrawTerrainTypes.Name = "tsmiView_MPD_DrawTerrainTypes";
@@ -631,21 +637,21 @@ namespace SF3.Editor.Forms {
             // 
             tsmiActiveResources_Scene.Enabled = false;
             tsmiActiveResources_Scene.Name = "tsmiActiveResources_Scene";
-            tsmiActiveResources_Scene.Size = new Size(180, 22);
+            tsmiActiveResources_Scene.Size = new Size(145, 22);
             tsmiActiveResources_Scene.Text = "Active &Scene";
             // 
             // tsmiActiveResources_ActiveCHR
             // 
             tsmiActiveResources_ActiveCHR.Enabled = false;
             tsmiActiveResources_ActiveCHR.Name = "tsmiActiveResources_ActiveCHR";
-            tsmiActiveResources_ActiveCHR.Size = new Size(180, 22);
+            tsmiActiveResources_ActiveCHR.Size = new Size(145, 22);
             tsmiActiveResources_ActiveCHR.Text = "Active &Sprites";
             // 
             // tsmiActiveResources_ActiveIcons
             // 
             tsmiActiveResources_ActiveIcons.Enabled = false;
             tsmiActiveResources_ActiveIcons.Name = "tsmiActiveResources_ActiveIcons";
-            tsmiActiveResources_ActiveIcons.Size = new Size(180, 22);
+            tsmiActiveResources_ActiveIcons.Size = new Size(145, 22);
             tsmiActiveResources_ActiveIcons.Text = "Active &Icons";
             // 
             // tsmiTools
@@ -807,7 +813,6 @@ namespace SF3.Editor.Forms {
             mpdTSMI_Export_ToMPDProject.Name = "mpdTSMI_Export_ToMPDProject";
             mpdTSMI_Export_ToMPDProject.Size = new Size(242, 22);
             mpdTSMI_Export_ToMPDProject.Text = "Export to &MPD Project...";
-            mpdTSMI_Export_ToMPDProject.Visible = false;
             mpdTSMI_Export_ToMPDProject.Click += mpdTSMI_Export_ToMPDProject_Click;
             // 
             // tsmiMPD_Sep1
@@ -1033,13 +1038,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(107, 22);
             tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiView_MPD_DrawBattleZones
-            // 
-            tsmiView_MPD_DrawBattleZones.Name = "tsmiView_MPD_DrawBattleZones";
-            tsmiView_MPD_DrawBattleZones.Size = new Size(384, 22);
-            tsmiView_MPD_DrawBattleZones.Text = "WIP: Draw Battle Zones";
-            tsmiView_MPD_DrawBattleZones.Click += tsmiView_MPD_DrawBattleZones_Click;
             // 
             // SF3EditorForm
             // 
