@@ -939,7 +939,7 @@ namespace SF3.Win.OpenGL.MPD {
             }
 
             void RenderActor(SelectableActor selectableActor, Vector4 color) {
-                var actor = scene.ActorsBySpriteID.Values.SelectMany(x => x).FirstOrDefault(x => x.ID == selectableActor.ID);
+                var actor = scene?.ActorsBySpriteID?.Values?.SelectMany(x => x)?.FirstOrDefault(x => x.ID == selectableActor.ID);
                 if (actor == null)
                     return;
 
