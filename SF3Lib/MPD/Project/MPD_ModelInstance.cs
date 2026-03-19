@@ -12,19 +12,19 @@ namespace SF3.MPD.Project {
 
         public MPD_ModelInstance(IMPD_ModelInstance original, IMPD_ModelCollection newCollection) {
             Collection = newCollection;
-            ID        = original.ID;
-            ModelID   = original.ModelID;
-            PositionX = original.PositionX;
-            PositionY = original.PositionY;
-            PositionZ = original.PositionZ;
-            AngleX    = original.AngleX;
-            AngleY    = original.AngleY;
-            AngleZ    = original.AngleZ;
-            ScaleX    = original.ScaleX;
-            ScaleY    = original.ScaleY;
-            ScaleZ    = original.ScaleZ;
-            Tag       = original.Tag;
-            Flags     = original.Flags;
+            ID         = original.ID;
+            ModelID    = original.ModelID;
+            _positionX = original.PositionX;
+            _positionY = original.PositionY;
+            _positionZ = original.PositionZ;
+            _angleX    = original.AngleX;
+            _angleY    = original.AngleY;
+            _angleZ    = original.AngleZ;
+            _scaleX    = original.ScaleX;
+            _scaleY    = original.ScaleY;
+            _scaleZ    = original.ScaleZ;
+            Tag        = original.Tag;
+            Flags      = original.Flags;
             LevelsOfDetail = original.LevelsOfDetail;
         }
 
@@ -59,9 +59,39 @@ namespace SF3.MPD.Project {
         public IMPD_ModelCollection Collection { get; set; }
         public int ID { get; set; }
         public int ModelID { get; set; }
-        public short PositionX { get; set; }
-        public short PositionY { get; set; }
-        public short PositionZ { get; set; }
+
+        private short _positionX = 0;
+        public short PositionX {
+            get => _positionX;
+            set {
+                if (_positionX != value) {
+                    _positionX = value;
+                    _boundingBox = null;
+                }
+            }
+        }
+
+        private short _positionY = 0;
+        public short PositionY {
+            get => _positionY;
+            set {
+                if (_positionY != value) {
+                    _positionY = value;
+                    _boundingBox = null;
+                }
+            }
+        }
+
+        private short _positionZ = 0;
+        public short PositionZ {
+            get => _positionZ;
+            set {
+                if (_positionZ != value) {
+                    _positionZ = value;
+                    _boundingBox = null;
+                }
+            }
+        }
 
         private float _angleX = 0;
         public float AngleX {
