@@ -123,7 +123,7 @@ namespace SF3.MPD.Project {
 
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
-            Surface.GetVertex(vx, vy).UpdateNormalsInvolvingVertex();
+            Surface.UpdateVertexNormals(Surface.GetNormalVertexRangeAffectedByHeightOf(vx, vy));
         }
 
         public void SetVertexHeights(byte[] values) {
@@ -151,7 +151,7 @@ namespace SF3.MPD.Project {
 
             var x = X;
             var y = Y;
-            Surface.UpdateVertexNormalsInvolvingVertices(x, y, x + 1, y + 1);
+            Surface.UpdateVertexNormals(Surface.GetNormalVertexRangeAffectedByHeightsOf(x, y, x + 1, y + 1));
         }
 
         private void InvalidateCenterHeight() => _centerHeight = null;

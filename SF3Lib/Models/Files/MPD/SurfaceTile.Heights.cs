@@ -100,14 +100,13 @@ namespace SF3.Models.Files.MPD {
                     foreach (var bvl in _sharedBlockVertexLocations[corner])
                         MPD_File.SurfaceModelChunk.VertexHeightBlockTable[bvl.Num].SetHeight(bvl.X, bvl.Y, value);
 
-                Surface.UpdateVertexNormalsInvolvingVertex(X, Y, corner);
+                var normalVertices = Surface.GetNormalVertexRangeAffectedByHeightOf(X, Y, corner);
+                Surface.UpdateVertexNormals(normalVertices);
+                var normalTiles = Surface.GetTileRangeWithVertexRange(normalVertices);
 
-                var vx = BlockHelpers.TileToVertexX(X, corner);
-                var vy = BlockHelpers.TileToVertexY(Y, corner);
-                for (var ty = vy - 2; ty <= vy + 1; ty++)
-                    for (var tx = vx - 2; tx <= vx + 1; tx++)
-                        if (tx >= 0 && tx < Surface.Width && ty >= 0 && ty < Surface.Height)
-                            tilesModified.Add((SurfaceTile) Surface.GetTile(tx, ty));
+                for (var ty = normalTiles.Top; ty <= normalTiles.Bottom; ty++)
+                    for (var tx = normalTiles.Left; tx <= normalTiles.Right; tx++)
+                        tilesModified.Add((SurfaceTile) Surface.GetTile(tx, ty));
             }
         }
 

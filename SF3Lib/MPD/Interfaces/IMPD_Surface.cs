@@ -1,5 +1,4 @@
-﻿using CommonLib.SGL;
-using SF3.Types;
+﻿using SF3.Types;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -41,7 +40,7 @@ namespace SF3.MPD.Interfaces {
         void UpdateVertexNormal(int vx, int vy);
 
         /// <summary>
-        /// Updates all vertex normals in a range.
+        /// Updates all vertex normals in an inclusive range.
         /// </summary>
         /// <param name="vx1">Lowest X coordinate of the vertices to update.</param>
         /// <param name="vy1">Lowest Y coordinate of the vertices to update.</param>

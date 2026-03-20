@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using CommonLib.SGL;
@@ -190,44 +191,151 @@ namespace SF3.MPD.Extensions {
         }
 
         /// <summary>
-        /// Updates all vertex normals that involve a specified vertex.
+        /// Gets a range of vertices that are clamped to (0, 0, Width, Height).
         /// </summary>
         /// <param name="surface">Surface to operate on.</param>
-        /// <param name="tx">Tile X coordinate.</param>
-        /// <param name="ty">Tile Y coordinate.</param>
-        /// <param name="corner">Corner of the tile whose vertex is relevant to the normals to recalculate.</param>
-        public static void UpdateVertexNormalsInvolvingVertex(this IMPD_Surface surface, int tx, int ty, CornerType corner) {
-            var vx = BlockHelpers.TileToVertexX(tx, corner);
-            var vy = BlockHelpers.TileToVertexY(ty, corner);
-            surface.UpdateVertexNormals(vx - 1, vy - 1, vx + 1, vy + 1);
+        /// <param name="rectangle">Range of vertices to clamp.</param>
+        /// <returns>A Rectangle with an inclusive range of vertices.</returns>
+        public static Rectangle GetClampedVertexRange(this IMPD_Surface surface, Rectangle rectangle) {
+            var vx1 = Math.Max(0, Math.Min(rectangle.Left,   surface.Width));
+            var vy1 = Math.Max(0, Math.Min(rectangle.Top,    surface.Height));
+            var vx2 = Math.Max(0, Math.Min(rectangle.Right,  surface.Width));
+            var vy2 = Math.Max(0, Math.Min(rectangle.Bottom, surface.Height));
+
+            return new Rectangle(vx1, vy1, vx2 - vx1, vy2 - vy1);
         }
 
         /// <summary>
-        /// Updates all vertex normals that involve a specified vertex.
+        /// Gets a range of vertices that are clamped to (0, 0, Width, Height).
         /// </summary>
         /// <param name="surface">Surface to operate on.</param>
-        /// <param name="vx">Vertex X coordinate relevant to the normals that require an update.</param>
-        /// <param name="vy">Vertex Y coordinate relevant to the normals that require an update.</param>
-        public static void UpdateVertexNormalsInvolvingVertex(this IMPD_Surface surface, int vx, int vy)
-            => surface.UpdateVertexNormals(vx - 1, vy - 1, vx + 1, vy + 1);
-
-        /// <summary>
-        /// Updates all vertex normals whose calculation depends on a given range of vertices.
-        /// </summary>
-        /// <param name="surface">Surface to operate on.</param>
-        /// <param name="vx1">Lowest X coordinate of the vertices involved in calculations.</param>
-        /// <param name="vy1">Lowest Y coordinate of the vertices involved in calculations.</param>
-        /// <param name="vx2">Highest X coordinate of the vertices involved in calculations.</param>
-        /// <param name="vy2">Highest Y coordinate of the vertices involved in calculations.</param>
-        public static void UpdateVertexNormalsInvolvingVertices(this IMPD_Surface surface, int vx1, int vy1, int vx2, int vy2) {
+        /// <param name="vx1">Lowest X coordinate of the vertex range.</param>
+        /// <param name="vy1">Lowest Y coordinate of the vertex range.</param>
+        /// <param name="vx2">Highest X coordinate of the vertex range.</param>
+        /// <param name="vy2">Highest Y coordinate of the vertex range.</param>
+        /// <returns>A Rectangle with an inclusive range of vertices.</returns>
+        public static Rectangle GetClampedVertexRange(this IMPD_Surface surface, int vx1, int vy1, int vx2, int vy2) {
             // Ensure that vx1 < vx2 and vy1 < vy2
             if (vx1 > vx2)
                 (vx1, vx2) = (vx2, vx1);
             if (vy1 > vy2)
                 (vy1, vy2) = (vy2, vy1);
 
-            surface.UpdateVertexNormals(vx1 - 1, vy1 - 1, vx2 + 1, vy2 + 1);
+            vx1 = Math.Max(0, Math.Min(vx1, surface.Width));
+            vy1 = Math.Max(0, Math.Min(vy1, surface.Height));
+            vx2 = Math.Max(0, Math.Min(vx2, surface.Width));
+            vy2 = Math.Max(0, Math.Min(vy2, surface.Height));
+
+            return new Rectangle(vx1, vy1, vx2 - vx1, vy2 - vy1);
         }
+
+        /// <summary>
+        /// Gets a range of tiles that are clamped to (0, 0, Width - 1, Height - 1).
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="rectangle">Range of tiles to clamp.</param>
+        /// <returns>A Rectangle with an inclusive range of tiles.</returns>
+        public static Rectangle GetClampedTileRange(this IMPD_Surface surface, Rectangle rectangle) {
+            var vx1 = Math.Max(0, Math.Min(rectangle.Left,   surface.Width  - 1));
+            var vy1 = Math.Max(0, Math.Min(rectangle.Top,    surface.Height - 1));
+            var vx2 = Math.Max(0, Math.Min(rectangle.Right,  surface.Width  - 1));
+            var vy2 = Math.Max(0, Math.Min(rectangle.Bottom, surface.Height - 1));
+
+            return new Rectangle(vx1, vy1, vx2 - vx1, vy2 - vy1);
+        }
+
+        /// <summary>
+        /// Gets a range of tiles that are clamped to (0, 0, Width - 1, Height - 1).
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="vx1">Lowest X coordinate of the tiles range.</param>
+        /// <param name="vy1">Lowest Y coordinate of the tiles range.</param>
+        /// <param name="vx2">Highest X coordinate of the tiles range.</param>
+        /// <param name="vy2">Highest Y coordinate of the tiles range.</param>
+        /// <returns>A Rectangle with an inclusive range of tiles.</returns>
+        public static Rectangle GetClampedTileRange(this IMPD_Surface surface, int vx1, int vy1, int vx2, int vy2) {
+            // Ensure that vx1 < vx2 and vy1 < vy2
+            if (vx1 > vx2)
+                (vx1, vx2) = (vx2, vx1);
+            if (vy1 > vy2)
+                (vy1, vy2) = (vy2, vy1);
+
+            vx1 = Math.Max(0, Math.Min(vx1, surface.Width  - 1));
+            vy1 = Math.Max(0, Math.Min(vy1, surface.Height - 1));
+            vx2 = Math.Max(0, Math.Min(vx2, surface.Width  - 1));
+            vy2 = Math.Max(0, Math.Min(vy2, surface.Height - 1));
+
+            return new Rectangle(vx1, vy1, vx2 - vx1, vy2 - vy1);
+        }
+
+        /// <summary>
+        /// Gets all vertices whose normals need to be updated when a specified vertex's height is updated.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="tx">Tile X coordinate.</param>
+        /// <param name="ty">Tile Y coordinate.</param>
+        /// <param name="corner">Corner of the tile whose vertex is relevant to the normals to recalculate.</param>
+        public static Rectangle GetNormalVertexRangeAffectedByHeightOf(this IMPD_Surface surface, int tx, int ty, CornerType corner) {
+            var vx = BlockHelpers.TileToVertexX(tx, corner);
+            var vy = BlockHelpers.TileToVertexY(ty, corner);
+            return surface.GetClampedVertexRange(vx - 1, vy - 1, vx + 1, vy + 1);
+        }
+
+        /// <summary>
+        /// Gets all vertices whose normals need to be updated when a specified vertex's height is updated.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="vx">Vertex X coordinate relevant to the normals that require an update.</param>
+        /// <param name="vy">Vertex Y coordinate relevant to the normals that require an update.</param>
+        public static Rectangle GetNormalVertexRangeAffectedByHeightOf(this IMPD_Surface surface, int vx, int vy)
+            => surface.GetClampedVertexRange(vx - 1, vy - 1, vx + 1, vy + 1);
+
+        /// <summary>
+        /// Gets all vertices whose normals need to be updated when a specified set of vertices' height is updated.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="vx1">Lowest X coordinate of the vertices involved in calculations.</param>
+        /// <param name="vy1">Lowest Y coordinate of the vertices involved in calculations.</param>
+        /// <param name="vx2">Highest X coordinate of the vertices involved in calculations.</param>
+        /// <param name="vy2">Highest Y coordinate of the vertices involved in calculations.</param>
+        public static Rectangle GetNormalVertexRangeAffectedByHeightsOf(this IMPD_Surface surface, int vx1, int vy1, int vx2, int vy2) {
+            // Ensure that vx1 < vx2 and vy1 < vy2
+            if (vx1 > vx2)
+                (vx1, vx2) = (vx2, vx1);
+            if (vy1 > vy2)
+                (vy1, vy2) = (vy2, vy1);
+
+            return surface.GetClampedVertexRange(vx1 - 1, vy1 - 1, vx2 + 1, vy2 + 1);
+        }
+
+        /// <summary>
+        /// Gets all vertices whose normals need to be updated when a specified set of vertices' height is updated.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="rectangle">Rectangle containing the coordinates of vertices whose heights would be modified.</param>
+        public static Rectangle GetNormalVertexRangeAffectedByHeightsOf(this IMPD_Surface surface, Rectangle rectangle)
+            => surface.GetClampedVertexRange(rectangle.Left - 1, rectangle.Top - 1, rectangle.Right + 1, rectangle.Bottom + 1);
+
+        /// <summary>
+        /// Gets a tile range that contain the vertices in a vertex range.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="rectangle">Rectangle containing the vertex range to get a tile range from.</param>
+        /// <returns>A Rectangle that is an inclusive tile range.</returns>
+        public static Rectangle GetTileRangeWithVertexRange(this IMPD_Surface surface, Rectangle rectangle)
+            => surface.GetClampedTileRange(rectangle.Left - 1, rectangle.Top - 1, rectangle.Right, rectangle.Bottom);
+
+        /// <summary>
+        /// Gets a tile range that contain the vertices in a vertex range.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="vx1">Lowest X coordinate of the vertex range contained in the tile range to fetch.</param>
+        /// <param name="vy1">Lowest Y coordinate of the vertex range contained in the tile range to fetch.</param>
+        /// <param name="vx2">Highest X coordinate of the vertex range contained in the tile range to fetch.</param>
+        /// <param name="vy2">Highest Y coordinate of the vertex range contained in the tile range to fetch.</param>
+        /// <returns>A Rectangle that is an inclusive tile range.</returns>
+        public static Rectangle GetTileRangeContainingVertexRange(this IMPD_Surface surface, int vx1, int vy1, int vx2, int vy2)
+            => surface.GetClampedTileRange(vx1 - 1, vy1 - 1, vx2, vy2);
 
         /// <summary>
         /// Updates all vertex normals for a surface.
@@ -235,6 +343,14 @@ namespace SF3.MPD.Extensions {
         /// <param name="surface">Surface to operate on.</param>
         public static void UpdateVertexNormals(this IMPD_Surface surface)
             => surface.UpdateVertexNormals(0, 0, surface.Width, surface.Height);
+
+        /// <summary>
+        /// Updates vertex numbers in an inclusive range.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="rectangle">Range of vertices to update normals for.</param>
+        public static void UpdateVertexNormals(this IMPD_Surface surface, Rectangle rectangle)
+            => surface.UpdateVertexNormals(rectangle.Left, rectangle.Top, rectangle.Right, rectangle.Bottom);
 
         /// <summary>
         /// Fetches the heightmap position at a coordinate in range [0, 2048) x [0, 2048).

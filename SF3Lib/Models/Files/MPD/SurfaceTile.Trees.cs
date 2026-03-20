@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CommonLib.Extensions;
 using SF3.Extensions;
 using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class SurfaceTile {
-
         /// <summary>
         /// If a tree is assigned, it's placed very far off the camera screen and
         /// disassociated with the tile.

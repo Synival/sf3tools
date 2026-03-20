@@ -107,15 +107,5 @@ namespace SF3.MPD.Extensions {
 
             return vec;
         }
-
-        /// <summary>
-        /// Updates all vertex normals whose calculation depends on a given vertex.
-        /// </summary>
-        /// <param name="vertex">Vertex to operate on.</param>
-        public static void UpdateNormalsInvolvingVertex(this IMPD_SurfaceVertex vertex) {
-            var vx = vertex.X;
-            var vy = vertex.Y;
-            vertex.Surface.UpdateVertexNormalsInvolvingVertices(vx, vy, vx, vy);
-        }
     }
 }
