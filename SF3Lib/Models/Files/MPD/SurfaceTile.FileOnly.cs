@@ -1,5 +1,4 @@
-﻿using System;
-using CommonLib.Types;
+﻿using CommonLib.Types;
 
 namespace SF3.Models.Files.MPD {
     public partial class SurfaceTile {

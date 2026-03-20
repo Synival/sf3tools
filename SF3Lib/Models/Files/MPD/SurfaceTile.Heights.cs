@@ -128,35 +128,7 @@ namespace SF3.Models.Files.MPD {
                 if (MPD_File.SurfaceModelChunk == null)
                     return;
                 if (MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].GetIsFlatFlag(X) != value) {
-                    // If flattening the tile, set heights to the lowest value.
-                    if (value) {
-                        var minHeight = GetVertexHeights().Min();
-                        MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetIsFlatFlag(X, true);
-                        SetVertexHeights(new byte[] { minHeight, minHeight, minHeight, minHeight });
-                    }
-                    // If unflattening the tile, update its heights to its neighbors.
-                    else {
-                        // The bottom-right corner of the heightmap table determines the height.
-                        // We're going to use that as a fallback if there's no non-flat tile to fetch here.
-                        var brHeight = MPD_File.SurfaceDataChunk.HeightmapRowTable[Y].GetHeight(X, CornerType.BottomRight);
-                        MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetIsFlatFlag(X, false);
-
-                        foreach (var corner in (CornerType[]) Enum.GetValues(typeof(CornerType))) {
-                            var newHeight = brHeight;
-                            foreach (var stl in _sharedTileLocations[corner]) {
-                                if (stl.X == X && stl.Y == Y)
-                                    continue;
-                                var tile = Surface.GetTile(stl.X, stl.Y);
-                                if (tile.IsFlat)
-                                    continue;
-                                newHeight = tile.GetVertexHeight(stl.Corner);
-                                break;
-                            }
-
-                            SetVertexHeight(corner, newHeight);
-                        }
-                    }
-
+                    this.SetFlatAndUpdateHeights(value, val => MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetIsFlatFlag(X, val));
                     Modified?.Invoke(this, EventArgs.Empty);
                 }
             }
