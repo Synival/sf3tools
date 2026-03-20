@@ -1,7 +1,7 @@
 ﻿using System;
-using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.Types;
+using static SF3.Utils.SurfaceUtils;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -111,6 +111,14 @@ namespace SF3.MPD.Interfaces {
         /// Event ID of the tile that ties in with warps, interactables, searchable items, pre-loading triggers, etc.
         /// </summary>
         byte EventID { get; set; }
+
+        /// <summary>
+        /// Returns the tiles who have vertices with heights that are shared by the vertex indicated by 'corner'.
+        /// The result includes the tile's own vertex.
+        /// </summary>
+        /// <param name="corner">Corner indicating the vertex to use for the shared tile.</param>
+        /// <returns>A set of tile coordinates and corners, including the one requested.</returns>
+        TileAndCorner[] GetSharedVerticesAtCorner(CornerType corner);
 
         /// <summary>
         /// Is invoked when the tile is modified.

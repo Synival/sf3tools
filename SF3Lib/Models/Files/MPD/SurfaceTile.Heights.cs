@@ -53,31 +53,44 @@ namespace SF3.Models.Files.MPD {
                 t.Modified?.Invoke(t, EventArgs.Empty);
         }
 
+        public TileAndCorner[] GetSharedVerticesAtCorner(CornerType corner) {
+            // No height data if there's no surface data (which would be VERY strange!).
+            if (MPD_File.SurfaceDataChunk == null)
+                return new TileAndCorner[0];
+
+            // Flat tiles have nothing linked.
+            if (IsFlat)
+                return new TileAndCorner[] { _sharedTileLocations[corner][0] };
+
+            // Otherwise, this vertex is shared with all other adjacent non-flat tiles.
+            var tiles = new List<TileAndCorner>();
+            foreach (var tile in _sharedTileLocations[corner]) {
+                var tileObj = Surface.GetTile(tile.X, tile.Y);
+                if (tileObj != null && tileObj == this || !tileObj.IsFlat)
+                    tiles.Add(tile);
+            }
+
+            return tiles.ToArray();
+        }
+
         private void SetVertexHeight(CornerType corner, byte value, out HashSet<SurfaceTile> tilesModified) {
             // Track tiles updated so they can be informed of updates afterwards, without redundancy.
             tilesModified = new HashSet<SurfaceTile>();
 
             // Update positions in the SurfaceData tables.
-            if (MPD_File.SurfaceDataChunk != null) {
-                var tilesToUpdate = IsFlat
-                    ? new TileAndCorner[] { _sharedTileLocations[corner][0] }
-                    : _sharedTileLocations[corner];
+            var tilesToUpdate = GetSharedVerticesAtCorner(corner);
+            foreach (var stl in tilesToUpdate) {
+                var tile = (SurfaceTile) Surface.GetTile(stl.X, stl.Y);
 
-                foreach (var stl in tilesToUpdate) {
-                    var tile = (SurfaceTile) Surface.GetTile(stl.X, stl.Y);
-                    if (tile != this && tile.IsFlat)
-                        continue;
+                var rowCorners = MPD_File.SurfaceDataChunk.HeightmapRowTable[tile.Y];
+                var rowCenter = MPD_File.SurfaceDataChunk.HeightTerrainRowTable[tile.Y];
 
-                    var rowCorners = MPD_File.SurfaceDataChunk.HeightmapRowTable[tile.Y];
-                    var rowCenter = MPD_File.SurfaceDataChunk.HeightTerrainRowTable[tile.Y];
+                rowCorners.SetHeight(tile.X, stl.Corner, value);
 
-                    rowCorners.SetHeight(tile.X, stl.Corner, value);
+                var avg = ((CornerType[]) Enum.GetValues(typeof(CornerType))).Select(x => (int) rowCorners.GetHeight(tile.X, x)).Average();
+                rowCenter.SetHeight(tile.X, (byte) avg);
 
-                    var avg = ((CornerType[]) Enum.GetValues(typeof(CornerType))).Select(x => (int) rowCorners.GetHeight(tile.X, x)).Average();
-                    rowCenter.SetHeight(tile.X, (byte) avg);
-
-                    tilesModified.Add(tile);
-                }
+                tilesModified.Add(tile);
             }
 
             if (MPD_File.SurfaceModelChunk != null) {
