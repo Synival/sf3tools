@@ -107,9 +107,16 @@ namespace SF3.MPD.Project {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
-            _vertexHeights[cornerInt] = value;
 
-            UpdateCenterHeight();
+            if (_vertexHeights[cornerInt] == value)
+                return;
+
+            var sharedTiles = GetSharedVerticesAtCorner(corner);
+            foreach (var st in sharedTiles) {
+                var tile = (MPD_SurfaceTile) Surface.GetTile(st.X, st.Y);
+                tile._vertexHeights[(int) st.Corner] = value;
+                tile.UpdateCenterHeight();
+            }
 
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
@@ -121,9 +128,23 @@ namespace SF3.MPD.Project {
                 throw new ArgumentNullException(nameof(values));
             if (values.Length != 4)
                 throw new ArgumentOutOfRangeException(nameof(values) + ": Should have size of 4");
-            _vertexHeights = values;
 
-            UpdateCenterHeight();
+            int updatedCount = 0;
+            for (int i = 0; i < 4; ++i) {
+                var corner = (CornerType) i;
+                if (_vertexHeights[i] == values[i])
+                    continue;
+
+                var sharedTiles = GetSharedVerticesAtCorner(corner);
+                foreach (var st in sharedTiles) {
+                    var tile = (MPD_SurfaceTile) Surface.GetTile(st.X, st.Y);
+                    tile._vertexHeights[(int) st.Corner] = values[i];
+                    tile.UpdateCenterHeight();
+                    updatedCount++;
+                }
+            }
+            if (updatedCount == 0)
+                return;
 
             var x = X;
             var y = Y;
