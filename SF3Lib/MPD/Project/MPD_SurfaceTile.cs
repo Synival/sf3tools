@@ -22,18 +22,18 @@ namespace SF3.MPD.Project {
             TerrainFlags terrainFlags = 0,
             byte[] heights = null
         ) {
-            Surface      = surface;
-            X            = x;
-            Y            = y;
-            RandomSeed   = MPD_TileSeeds.GetTileSeed(x, y);
+            Surface       = surface;
+            X             = x;
+            Y             = y;
+            RandomSeed    = MPD_TileSeeds.GetTileSeed(x, y);
 
-            TextureID    = textureId;
-            TextureFlags = textureFlags;
-            UnknownTextureFlags = unknownTextureFlags;
+            _textureId    = textureId;
+            TextureFlags  = textureFlags;
+            _unknownTextureFlags = unknownTextureFlags;
 
-            TerrainType  = terrainType;
-            TerrainFlags = terrainFlags;
-            EventID      = eventId;
+            _terrainType  = terrainType;
+            _terrainFlags = terrainFlags;
+            _eventId      = eventId;
 
             if (heights != null && heights.Length == 4)
                 _vertexHeights = (byte[]) (heights.Clone());
@@ -44,20 +44,20 @@ namespace SF3.MPD.Project {
         }
 
         public MPD_SurfaceTile(IMPD_Surface surface, IMPD_SurfaceTile original, int x, int y) {
-            Surface     = surface;
-            X           = x;
-            Y           = y;
-            RandomSeed  = MPD_TileSeeds.GetTileSeed(x, y);
+            Surface        = surface;
+            X              = x;
+            Y              = y;
+            RandomSeed     = MPD_TileSeeds.GetTileSeed(x, y);
 
-            TextureID     = original.TextureID;
-            TextureFlip   = original.TextureFlip;
-            TextureRotate = original.TextureRotate;
-            UnknownTextureFlags = original.UnknownTextureFlags;
-            IsFlat        = original.IsFlat;
+            _textureId     = original.TextureID;
+            _textureFlip   = original.TextureFlip;
+            _textureRotate = original.TextureRotate;
+            _unknownTextureFlags = original.UnknownTextureFlags;
+            _isFlat        = original.IsFlat;
 
-            TerrainType   = original.TerrainType;
-            TerrainFlags  = original.TerrainFlags;
-            EventID       = original.EventID;
+            _terrainType   = original.TerrainType;
+            _terrainFlags  = original.TerrainFlags;
+            _eventId       = original.EventID;
 
             _vertexHeights = (byte[]) (original.GetVertexHeights().Clone());
         }
@@ -76,12 +76,60 @@ namespace SF3.MPD.Project {
             }
         }
 
-        public byte UnknownTextureFlags { get; set; }
+        private byte _unknownTextureFlags;
+        public byte UnknownTextureFlags {
+            get => _unknownTextureFlags;
+            set {
+                if (_unknownTextureFlags != value) {
+                    _unknownTextureFlags = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-        public byte TextureID { get; set; }
-        public TextureFlipType TextureFlip { get; set; }
-        public TextureRotateType TextureRotate { get; set; }
-        public bool IsFlat { get; set; }
+        private byte _textureId;
+        public byte TextureID {
+            get => _textureId;
+            set {
+                if (_textureId != value) {
+                    _textureId = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        private TextureFlipType _textureFlip;
+        public TextureFlipType TextureFlip {
+            get => _textureFlip;
+            set {
+                if (_textureFlip != value) {
+                    _textureFlip = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        private TextureRotateType _textureRotate;
+        public TextureRotateType TextureRotate {
+            get => _textureRotate;
+            set {
+                if (_textureRotate != value) {
+                    _textureRotate = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        private bool _isFlat;
+        public bool IsFlat {
+            get => _isFlat;
+            set {
+                if (_isFlat != value) {
+                    _isFlat = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
         private byte? _centerHeight = null;
         public byte CenterHeight {
@@ -92,10 +140,38 @@ namespace SF3.MPD.Project {
             }
         }
 
-        public TerrainType TerrainType { get; set; }
-        public TerrainFlags TerrainFlags { get; set; }
+        private TerrainType _terrainType;
+        public TerrainType TerrainType {
+            get => _terrainType;
+            set {
+                if (_terrainType != value) {
+                    _terrainType = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-        public byte EventID { get; set; }
+        private TerrainFlags _terrainFlags;
+        public TerrainFlags TerrainFlags {
+            get => _terrainFlags;
+            set {
+                if (_terrainFlags != value) {
+                    _terrainFlags = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        private byte _eventId;
+        public byte EventID {
+            get => _eventId;
+            set {
+                if (_eventId != value) {
+                    _eventId = value;
+                    Modified?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
         public byte GetVertexHeight(CornerType corner) {
             int cornerInt = (int) corner;
