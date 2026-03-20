@@ -41,8 +41,6 @@ namespace SF3.MPD.Project {
             var allCorners = (CornerType[]) Enum.GetValues(typeof(CornerType));
             _sharedTileLocations = allCorners
                 .ToDictionary(c => c, c => GetSharedTilesAtCorner(X, Y, c));
-
-            UpdateCenterHeight();
         }
 
         public MPD_SurfaceTile(IMPD_Surface surface, IMPD_SurfaceTile original, int x, int y) {
@@ -62,8 +60,6 @@ namespace SF3.MPD.Project {
             EventID       = original.EventID;
 
             _vertexHeights = (byte[]) (original.GetVertexHeights().Clone());
-
-            UpdateCenterHeight();
         }
 
         public IMPD_Surface Surface { get; }
@@ -87,7 +83,14 @@ namespace SF3.MPD.Project {
         public TextureRotateType TextureRotate { get; set; }
         public bool IsFlat { get; set; }
 
-        public byte CenterHeight { get; private set; }
+        private byte? _centerHeight = null;
+        public byte CenterHeight {
+            get {
+                if (!_centerHeight.HasValue)
+                    _centerHeight = (byte) ((_vertexHeights[0] + _vertexHeights[1] + _vertexHeights[2] + _vertexHeights[3]) / 4);
+                return _centerHeight.Value;
+            }
+        }
 
         public TerrainType TerrainType { get; set; }
         public TerrainFlags TerrainFlags { get; set; }
@@ -115,7 +118,7 @@ namespace SF3.MPD.Project {
             foreach (var st in sharedTiles) {
                 var tile = (MPD_SurfaceTile) Surface.GetTile(st.X, st.Y);
                 tile._vertexHeights[(int) st.Corner] = value;
-                tile.UpdateCenterHeight();
+                tile.InvalidateCenterHeight();
             }
 
             var vx = BlockHelpers.TileToVertexX(X, corner);
@@ -139,7 +142,7 @@ namespace SF3.MPD.Project {
                 foreach (var st in sharedTiles) {
                     var tile = (MPD_SurfaceTile) Surface.GetTile(st.X, st.Y);
                     tile._vertexHeights[(int) st.Corner] = values[i];
-                    tile.UpdateCenterHeight();
+                    tile.InvalidateCenterHeight();
                     updatedCount++;
                 }
             }
@@ -151,9 +154,7 @@ namespace SF3.MPD.Project {
             Surface.UpdateVertexNormalsInvolvingVertices(x, y, x + 1, y + 1);
         }
 
-        private void UpdateCenterHeight() {
-            CenterHeight = (byte) ((_vertexHeights[0] + _vertexHeights[1] + _vertexHeights[2] + _vertexHeights[3]) / 4);
-        }
+        private void InvalidateCenterHeight() => _centerHeight = null;
 
         public TileAndCorner[] GetSharedVerticesAtCorner(CornerType corner) {
             // Flat tiles have nothing linked.
