@@ -190,6 +190,28 @@ namespace SF3.MPD.Extensions {
         }
 
         /// <summary>
+        /// Updates all vertex normals that involve a specified vertex.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="tx">Tile X coordinate.</param>
+        /// <param name="ty">Tile Y coordinate.</param>
+        /// <param name="corner">Corner of the tile whose vertex is relevant to the normals to recalculate.</param>
+        public static void UpdateVertexNormalsInvolvingVertex(this IMPD_Surface surface, int tx, int ty, CornerType corner) {
+            var vx = BlockHelpers.TileToVertexX(tx, corner);
+            var vy = BlockHelpers.TileToVertexY(ty, corner);
+            surface.UpdateVertexNormals(vx - 1, vy - 1, vx + 1, vy + 1);
+        }
+
+        /// <summary>
+        /// Updates all vertex normals that involve a specified vertex.
+        /// </summary>
+        /// <param name="surface">Surface to operate on.</param>
+        /// <param name="vx">Vertex X coordinate relevant to the normals that require an update.</param>
+        /// <param name="vy">Vertex Y coordinate relevant to the normals that require an update.</param>
+        public static void UpdateVertexNormalsInvolvingVertex(this IMPD_Surface surface, int vx, int vy)
+            => surface.UpdateVertexNormals(vx - 1, vy - 1, vx + 1, vy + 1);
+
+        /// <summary>
         /// Updates all vertex normals whose calculation depends on a given range of vertices.
         /// </summary>
         /// <param name="surface">Surface to operate on.</param>

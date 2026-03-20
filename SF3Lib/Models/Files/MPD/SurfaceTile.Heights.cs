@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
+using CommonLib.Utils;
+using SF3.MPD.Extensions;
 using static SF3.Utils.SurfaceUtils;
 
 namespace SF3.Models.Files.MPD {
@@ -98,9 +100,14 @@ namespace SF3.Models.Files.MPD {
                     foreach (var bvl in _sharedBlockVertexLocations[corner])
                         MPD_File.SurfaceModelChunk.VertexHeightBlockTable[bvl.Num].SetHeight(bvl.X, bvl.Y, value);
 
-                UpdateVertexNormals(corner, out var tilesModifiedHere);
-                foreach (var t in tilesModifiedHere)
-                    tilesModified.Add(t);
+                Surface.UpdateVertexNormalsInvolvingVertex(X, Y, corner);
+
+                var vx = BlockHelpers.TileToVertexX(X, corner);
+                var vy = BlockHelpers.TileToVertexY(Y, corner);
+                for (var ty = vy - 2; ty <= vy + 1; ty++)
+                    for (var tx = vx - 2; tx <= vx + 1; tx++)
+                        if (tx >= 0 && tx < Surface.Width && ty >= 0 && ty < Surface.Height)
+                            tilesModified.Add((SurfaceTile) Surface.GetTile(tx, ty));
             }
         }
 
