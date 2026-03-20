@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using CommonLib;
+using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Models.Files.MPD;
+using SF3.MPD.Interfaces;
 using SF3.Win.App;
 using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
@@ -371,9 +372,9 @@ namespace SF3.Win.Controls {
         }
 
         private void OnTileModifiedRendering(object sender) {
-            var tile = (SurfaceTile) sender;
+            var tile = (IMPD_SurfaceTile) sender;
             if (_surfaceModel != null) {
-                _surfaceModel.Blocks[tile.BlockLocation.Num].Invalidate();
+                _surfaceModel.Blocks[BlockHelpers.GetTileBlockLocation(tile.X, tile.Y).Num].Invalidate();
                 _editorNeedsUpdate = true;
                 InvalidateFrame();
             }

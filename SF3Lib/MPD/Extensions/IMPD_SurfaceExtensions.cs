@@ -322,7 +322,7 @@ namespace SF3.MPD.Extensions {
         /// <param name="surface">Surface to operate on.</param>
         /// <param name="rectangle">Rectangle containing the vertex range to get a tile range from.</param>
         /// <returns>A Rectangle that is an inclusive tile range.</returns>
-        public static Rectangle GetTileRangeWithVertexRange(this IMPD_Surface surface, Rectangle rectangle)
+        public static Rectangle GetTileRangeContainingVertexRange(this IMPD_Surface surface, Rectangle rectangle)
             => surface.GetClampedTileRange(rectangle.Left - 1, rectangle.Top - 1, rectangle.Right, rectangle.Bottom);
 
         /// <summary>

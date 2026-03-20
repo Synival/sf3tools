@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
-using CommonLib.Utils;
 using SF3.MPD.Extensions;
 using static SF3.Utils.SurfaceUtils;
 
@@ -102,7 +101,7 @@ namespace SF3.Models.Files.MPD {
 
                 var normalVertices = Surface.GetNormalVertexRangeAffectedByHeightOf(X, Y, corner);
                 Surface.UpdateVertexNormals(normalVertices);
-                var normalTiles = Surface.GetTileRangeWithVertexRange(normalVertices);
+                var normalTiles = Surface.GetTileRangeContainingVertexRange(normalVertices);
 
                 for (var ty = normalTiles.Top; ty <= normalTiles.Bottom; ty++)
                     for (var tx = normalTiles.Left; tx <= normalTiles.Right; tx++)

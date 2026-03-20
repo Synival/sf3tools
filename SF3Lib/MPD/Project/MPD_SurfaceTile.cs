@@ -123,7 +123,16 @@ namespace SF3.MPD.Project {
 
             var vx = BlockHelpers.TileToVertexX(X, corner);
             var vy = BlockHelpers.TileToVertexY(Y, corner);
-            Surface.UpdateVertexNormals(Surface.GetNormalVertexRangeAffectedByHeightOf(vx, vy));
+            var vertexRange = Surface.GetNormalVertexRangeAffectedByHeightOf(vx, vy);
+            Surface.UpdateVertexNormals(vertexRange);
+
+            var tileRange = Surface.GetTileRangeContainingVertexRange(vertexRange);
+            for (int ty = tileRange.Top; ty <= tileRange.Bottom; ty++) {
+                for (int tx = tileRange.Left; tx <= tileRange.Right; tx++) {
+                    var tile = (MPD_SurfaceTile) Surface.GetTile(tx, ty);
+                    tile.Modified?.Invoke(tile, EventArgs.Empty);
+                }
+            }
         }
 
         public void SetVertexHeights(byte[] values) {
@@ -151,7 +160,16 @@ namespace SF3.MPD.Project {
 
             var x = X;
             var y = Y;
-            Surface.UpdateVertexNormals(Surface.GetNormalVertexRangeAffectedByHeightsOf(x, y, x + 1, y + 1));
+            var vertexRange = Surface.GetNormalVertexRangeAffectedByHeightsOf(x, y, x + 1, y + 1);
+            Surface.UpdateVertexNormals(vertexRange);
+
+            var tileRange = Surface.GetTileRangeContainingVertexRange(vertexRange);
+            for (int ty = tileRange.Top; ty <= tileRange.Bottom; ty++) {
+                for (int tx = tileRange.Left; tx <= tileRange.Right; tx++) {
+                    var tile = (MPD_SurfaceTile) Surface.GetTile(tx, ty);
+                    tile.Modified?.Invoke(tile, EventArgs.Empty);
+                }
+            }
         }
 
         private void InvalidateCenterHeight() => _centerHeight = null;
