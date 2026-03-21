@@ -41,7 +41,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[0].ActorZ);
 
             Assert.AreEqual(0xC7, table[1].SpriteID);
-            Assert.AreEqual(65472, table[1].ActorX);
+            Assert.AreEqual(-0x40, table[1].ActorX);
             Assert.AreEqual(0, table[1].ActorZ);
 
             Assert.AreEqual(6, table.Count);

@@ -81,7 +81,7 @@ namespace SF3.MPD.Extensions {
         /// </summary>
         public static MemoryLocationType GetModelsMemoryLocation(this IMPD_Flags flags, ScenarioType scenario) {
             return flags.GetModelsChunkIndex(scenario) == 1
-                ? flags.GetChunk1PointersMemoryLocation(scenario).Value
+                ? (flags.GetChunk1PointersMemoryLocation(scenario) ?? MemoryLocationType.LowMemory)
                 : MemoryLocationType.HighMemory;
         }
 

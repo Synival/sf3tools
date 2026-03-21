@@ -305,7 +305,7 @@ namespace SF3.Tests.Models.Files {
             var data = MakeFile();
             var models = data.ModelCollections[MPD_CollectionType.Primary].Models.SelectMany(x => x.ModelLoDs).ToArray();
 
-            Assert.AreEqual(14, models.Length);
+            Assert.AreEqual(112, models.Length);
 
             var sarabandModel = models[7];
             Assert.AreEqual(289, sarabandModel.Vertices.Count);

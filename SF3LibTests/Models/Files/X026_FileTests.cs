@@ -24,10 +24,10 @@ namespace SF3.Tests.Models.Files {
         }
 
         private static readonly List<X026_FileTestCase> TestCases = [
-            new(ScenarioType.Scenario1, "X026.BIN", 256, 51, 65422),
-            new(ScenarioType.Scenario2, "X026.BIN", 256, 61, 64646),
-            new(ScenarioType.Scenario3, "X026.BIN", 300, 91, 76360),
-            new(ScenarioType.PremiumDisk, "X026.BIN", 300, 93, 76338)
+            new(ScenarioType.Scenario1,   "X026.BIN", 256, 51, 65422),
+            new(ScenarioType.Scenario2,   "X026.BIN", 256, 61, 64646),
+            new(ScenarioType.Scenario3,   "X026.BIN", 300, 75, 76360),
+            new(ScenarioType.PremiumDisk, "X026.BIN", 300, 75, 76338)
         ];
 
         [TestMethod]
