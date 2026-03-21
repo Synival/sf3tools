@@ -27,9 +27,6 @@ namespace SF3.Win.Controls {
         private void InitializeComponent() {
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(MPD_ViewerControl));
             toolStrip1 = new DarkModeToolStrip();
-            tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
-            tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             tsbDrawSurfaceModel = new System.Windows.Forms.ToolStripButton();
             tsbDrawModels = new System.Windows.Forms.ToolStripButton();
             tsbDrawExtraModels = new System.Windows.Forms.ToolStripButton();
@@ -42,6 +39,7 @@ namespace SF3.Win.Controls {
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             tsbToggleWireframe = new System.Windows.Forms.ToolStripButton();
             tsbToggleBoundaries = new System.Windows.Forms.ToolStripButton();
+            tsbToggleBattleZones = new System.Windows.Forms.ToolStripButton();
             tsbToggleTerrainType = new System.Windows.Forms.ToolStripButton();
             tsbToggleEventID = new System.Windows.Forms.ToolStripButton();
             tsbToggleCollisions = new System.Windows.Forms.ToolStripButton();
@@ -58,6 +56,9 @@ namespace SF3.Win.Controls {
             tsbCameraLookAtCenter = new System.Windows.Forms.ToolStripButton();
             mpdViewerGLControl1 = new MPD_ViewerGLControl();
             toolStrip2 = new DarkModeToolStrip();
+            tsbCursorSelect = new System.Windows.Forms.ToolStripButton();
+            tsbCursorNavigate = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             tsbDrawGrassland = new System.Windows.Forms.ToolStripButton();
             tsbDrawDirt = new System.Windows.Forms.ToolStripButton();
             tsbDrawDarkGrass = new System.Windows.Forms.ToolStripButton();
@@ -70,51 +71,26 @@ namespace SF3.Win.Controls {
             tsbDrawBridge = new System.Windows.Forms.ToolStripButton();
             tsbDrawWater = new System.Windows.Forms.ToolStripButton();
             tsbDrawNoEntry = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             tsbFixTiles = new System.Windows.Forms.ToolStripButton();
             selectionPanel = new System.Windows.Forms.Panel();
-            tsbToggleBattleZones = new System.Windows.Forms.ToolStripButton();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator5, tsbDrawSurfaceModel, tsbDrawModels, tsbDrawExtraModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleBattleZones, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawExtraModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, toolStripSeparator2, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleBattleZones, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, toolStripSeparator4, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, toolStripSeparator1, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             toolStrip1.Size = new System.Drawing.Size(789, 31);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
-            // 
-            // tsbCursorSelect
-            // 
-            tsbCursorSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbCursorSelect.Image = Properties.Resources.CursorSelectBmp;
-            tsbCursorSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbCursorSelect.Name = "tsbCursorSelect";
-            tsbCursorSelect.Size = new System.Drawing.Size(28, 28);
-            tsbCursorSelect.Text = "Select";
-            tsbCursorSelect.ToolTipText = "Select (E)";
-            tsbCursorSelect.Click += tsbCursorSelect_Click;
-            // 
-            // tsbCursorNavigate
-            // 
-            tsbCursorNavigate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbCursorNavigate.Image = Properties.Resources.CursorNavigateBmp;
-            tsbCursorNavigate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbCursorNavigate.Name = "tsbCursorNavigate";
-            tsbCursorNavigate.Size = new System.Drawing.Size(28, 28);
-            tsbCursorNavigate.Text = "Navigate";
-            tsbCursorNavigate.ToolTipText = "Navigate (N)";
-            tsbCursorNavigate.Click += tsbCursorNavigate_Click;
-            // 
-            // toolStripSeparator5
-            // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbDrawSurfaceModel
             // 
@@ -237,6 +213,16 @@ namespace SF3.Win.Controls {
             tsbToggleBoundaries.Size = new System.Drawing.Size(28, 28);
             tsbToggleBoundaries.Text = "Draw Boundaries";
             tsbToggleBoundaries.Click += tsbToggleBoundaries_Click;
+            // 
+            // tsbToggleBattleZones
+            // 
+            tsbToggleBattleZones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbToggleBattleZones.Image = (System.Drawing.Image) resources.GetObject("tsbToggleBattleZones.Image");
+            tsbToggleBattleZones.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbToggleBattleZones.Name = "tsbToggleBattleZones";
+            tsbToggleBattleZones.Size = new System.Drawing.Size(28, 28);
+            tsbToggleBattleZones.Text = "Draw Battle Zones";
+            tsbToggleBattleZones.Click += tsbToggleBattleZones_Click;
             // 
             // tsbToggleTerrainType
             // 
@@ -389,14 +375,44 @@ namespace SF3.Win.Controls {
             // 
             // toolStrip2
             // 
+            toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawGrassland, tsbDrawDirt, tsbDrawDarkGrass, tsbDrawForest, tsbDrawBrownMountain, tsbDrawGreyMountain, tsbDrawMountainPeak, tsbDrawDesert, tsbDrawRiver, tsbDrawBridge, tsbDrawWater, tsbDrawNoEntry, toolStripSeparator6, tsbFixTiles });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, toolStripSeparator3, tsbDrawGrassland, tsbDrawDirt, tsbDrawDarkGrass, tsbDrawForest, tsbDrawBrownMountain, tsbDrawGreyMountain, tsbDrawMountainPeak, tsbDrawDesert, tsbDrawRiver, tsbDrawBridge, tsbDrawWater, tsbDrawNoEntry, toolStripSeparator5, tsbFixTiles });
             toolStrip2.Location = new System.Drawing.Point(0, 31);
             toolStrip2.Name = "toolStrip2";
+            toolStrip2.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             toolStrip2.Size = new System.Drawing.Size(789, 31);
             toolStrip2.TabIndex = 3;
             toolStrip2.Text = "toolStrip2";
+            // 
+            // tsbCursorSelect
+            // 
+            tsbCursorSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbCursorSelect.Image = Properties.Resources.CursorSelectBmp;
+            tsbCursorSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbCursorSelect.Name = "tsbCursorSelect";
+            tsbCursorSelect.Size = new System.Drawing.Size(28, 28);
+            tsbCursorSelect.Text = "Select";
+            tsbCursorSelect.ToolTipText = "Select (E)";
+            tsbCursorSelect.Click += tsbCursorSelect_Click;
+            // 
+            // tsbCursorNavigate
+            // 
+            tsbCursorNavigate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            tsbCursorNavigate.Image = Properties.Resources.CursorNavigateBmp;
+            tsbCursorNavigate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            tsbCursorNavigate.Name = "tsbCursorNavigate";
+            tsbCursorNavigate.Size = new System.Drawing.Size(28, 28);
+            tsbCursorNavigate.Text = "Navigate";
+            tsbCursorNavigate.ToolTipText = "Navigate (N)";
+            tsbCursorNavigate.Click += tsbCursorNavigate_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbDrawGrassland
             // 
@@ -530,10 +546,10 @@ namespace SF3.Win.Controls {
             tsbDrawNoEntry.ToolTipText = "Draw NoEntry (=)";
             tsbDrawNoEntry.Click += tsbDrawNoEntry_Click;
             // 
-            // toolStripSeparator6
+            // toolStripSeparator5
             // 
-            toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new System.Drawing.Size(6, 31);
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbFixTiles
             // 
@@ -553,20 +569,11 @@ namespace SF3.Win.Controls {
             selectionPanel.Size = new System.Drawing.Size(207, 514);
             selectionPanel.TabIndex = 4;
             // 
-            // tsbToggleBattleZones
-            // 
-            tsbToggleBattleZones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            tsbToggleBattleZones.Image = (System.Drawing.Image) resources.GetObject("tsbToggleBattleZones.Image");
-            tsbToggleBattleZones.ImageTransparentColor = System.Drawing.Color.Magenta;
-            tsbToggleBattleZones.Name = "tsbToggleBattleZones";
-            tsbToggleBattleZones.Size = new System.Drawing.Size(28, 28);
-            tsbToggleBattleZones.Text = "Draw Battle Zones";
-            tsbToggleBattleZones.Click += tsbToggleBattleZones_Click;
-            // 
             // MPD_ViewerControl
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.Control;
             Controls.Add(selectionPanel);
             Controls.Add(mpdViewerGLControl1);
             Controls.Add(toolStrip2);
@@ -602,9 +609,6 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbCameraReset;
         private System.Windows.Forms.ToolStripButton tsbCameraTopView;
         private System.Windows.Forms.ToolStripButton tsbCameraLookAtCenter;
-        private System.Windows.Forms.ToolStripButton tsbCursorSelect;
-        private System.Windows.Forms.ToolStripButton tsbCursorNavigate;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbApplyLighting;
         private System.Windows.Forms.ToolStripButton tsbToggleCollisions;
         private DarkModeToolStrip toolStrip2;
@@ -620,7 +624,7 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.ToolStripButton tsbDrawMountainPeak;
         private System.Windows.Forms.ToolStripButton tsbDrawDesert;
         private System.Windows.Forms.ToolStripButton tsbDrawBridge;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton tsbFixTiles;
         private System.Windows.Forms.ToolStripButton tsbHideModelsNotFacingCamera;
         private System.Windows.Forms.ToolStripButton tsbRenderOnBlackBackground;
@@ -631,5 +635,8 @@ namespace SF3.Win.Controls {
         private System.Windows.Forms.Panel selectionPanel;
         private System.Windows.Forms.ToolStripButton tsbDrawExtraModels;
         private System.Windows.Forms.ToolStripButton tsbToggleBattleZones;
+        private System.Windows.Forms.ToolStripButton tsbCursorSelect;
+        private System.Windows.Forms.ToolStripButton tsbCursorNavigate;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

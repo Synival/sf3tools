@@ -77,13 +77,31 @@ namespace SF3.Win.Controls {
             appSettings.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appSettings.ViewerRotateSpritesUp; };
 
             // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
-            toolStrip2.Visible = appSettings.EnableExperimentalBlankFieldV2Brushes;
+            void ShowHideExperimentalBrushes(bool value) {
+                toolStripSeparator3.Visible  = value;
+                tsbDrawBridge.Visible        = value;
+                tsbDrawBrownMountain.Visible = value;
+                tsbDrawDarkGrass.Visible     = value;
+                tsbDrawDesert.Visible        = value;
+                tsbDrawDirt.Visible          = value;
+                tsbDrawForest.Visible        = value;
+                tsbDrawGrassland.Visible     = value;
+                tsbDrawGreyMountain.Visible  = value;
+                tsbDrawMountainPeak.Visible  = value;
+                tsbDrawNoEntry.Visible       = value;
+                tsbDrawRiver.Visible         = value;
+                tsbDrawWater.Visible         = value;
+                toolStripSeparator5.Visible  = value;
+                tsbFixTiles.Visible          = value;
+            }
+
             appSettings.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
                 var isEnabled = appSettings.EnableExperimentalBlankFieldV2Brushes;
-                toolStrip2.Visible = isEnabled;
+                ShowHideExperimentalBrushes(isEnabled);
                 if (!isEnabled && GLControl.CursorMode.IsDrawingMode())
                     GLControl.CursorMode = ViewerCursorMode.Select;
             };
+            ShowHideExperimentalBrushes(appSettings.EnableExperimentalBlankFieldV2Brushes);
 
             // Activate tile editor when an editor is clicked.
             GLControl.ObjectsSelectedChanged += (s, objs) => {
@@ -199,16 +217,16 @@ namespace SF3.Win.Controls {
             selectionPanel.Visible = show;
 
             // NOTE: Uncomment to shift 3D viewer contents when the panel is active!
-/*
-            // Shift the projection matrix over if the panel is visible. This is a flicker-free alternative to
-            // resizing the thing.
-            var visibilityChanged = !show ^ (_currentSideEditorControl == null);
-            if (visibilityChanged) {
-                GLControl.ProjectionXAdjustment = show ? -selectionPanel.Width / 2 : 0;
-                GLControl.UpdateProjectionMatrices(GLControl.ClientSize.Width, GLControl.ClientSize.Height);
-                GLControl.RenderFrame();
-            }
-*/
+            /*
+                        // Shift the projection matrix over if the panel is visible. This is a flicker-free alternative to
+                        // resizing the thing.
+                        var visibilityChanged = !show ^ (_currentSideEditorControl == null);
+                        if (visibilityChanged) {
+                            GLControl.ProjectionXAdjustment = show ? -selectionPanel.Width / 2 : 0;
+                            GLControl.UpdateProjectionMatrices(GLControl.ClientSize.Width, GLControl.ClientSize.Height);
+                            GLControl.RenderFrame();
+                        }
+            */
         }
 
         private void UpdatedSelectedCursorModeButton() {
@@ -245,29 +263,29 @@ namespace SF3.Win.Controls {
 
         public MPD_ViewerGLControl GLControl => mpdViewerGLControl1;
 
-        private void tsbDrawSurfaceModel_Click(object sender, EventArgs e)  => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
-        private void tsbDrawModels_Click(object sender, EventArgs e)        => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
-        private void tsbDrawExtraModels_Click(object sender, EventArgs e)   => tsbDrawExtraModels.Checked   = GLControl.DrawExtraModels  = !GLControl.DrawExtraModels;
-        private void tsbDrawGround_Click(object sender, EventArgs e)        => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
-        private void tsbDrawSky_Click(object sender, EventArgs e)           => tsbDrawSky.Checked           = GLControl.DrawSky          = !GLControl.DrawSky;
-        private void tsbRunAnimations_Click(object sender, EventArgs e)     => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
-        private void tsbApplyLighting_Click(object sender, EventArgs e)     => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
-        private void tsbDrawGradients_Click(object sender, EventArgs e)     => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
-        private void tsbDrawActors_Click(object sender, EventArgs e)        => tsbDrawActors.Checked        = GLControl.DrawActors       = !GLControl.DrawActors;
+        private void tsbDrawSurfaceModel_Click(object sender, EventArgs e) => tsbDrawSurfaceModel.Checked  = GLControl.DrawSurfaceModel = !GLControl.DrawSurfaceModel;
+        private void tsbDrawModels_Click(object sender, EventArgs e) => tsbDrawModels.Checked        = GLControl.DrawModels       = !GLControl.DrawModels;
+        private void tsbDrawExtraModels_Click(object sender, EventArgs e) => tsbDrawExtraModels.Checked   = GLControl.DrawExtraModels  = !GLControl.DrawExtraModels;
+        private void tsbDrawGround_Click(object sender, EventArgs e) => tsbDrawGround.Checked        = GLControl.DrawGround       = !GLControl.DrawGround;
+        private void tsbDrawSky_Click(object sender, EventArgs e) => tsbDrawSky.Checked           = GLControl.DrawSky          = !GLControl.DrawSky;
+        private void tsbRunAnimations_Click(object sender, EventArgs e) => tsbRunAnimations.Checked     = GLControl.RunAnimations    = !GLControl.RunAnimations;
+        private void tsbApplyLighting_Click(object sender, EventArgs e) => tsbApplyLighting.Checked     = GLControl.ApplyLighting    = !GLControl.ApplyLighting;
+        private void tsbDrawGradients_Click(object sender, EventArgs e) => tsbDrawGradients.Checked     = GLControl.DrawGradients    = !GLControl.DrawGradients;
+        private void tsbDrawActors_Click(object sender, EventArgs e) => tsbDrawActors.Checked        = GLControl.DrawActors       = !GLControl.DrawActors;
 
-        private void tsbToggleWireframe_Click(object sender, EventArgs e)   => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
-        private void tsbToggleBoundaries_Click(object sender, EventArgs e)  => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
+        private void tsbToggleWireframe_Click(object sender, EventArgs e) => tsbToggleWireframe.Checked   = GLControl.DrawWireframe    = !GLControl.DrawWireframe;
+        private void tsbToggleBoundaries_Click(object sender, EventArgs e) => tsbToggleBoundaries.Checked  = GLControl.DrawBoundaries   = !GLControl.DrawBoundaries;
         private void tsbToggleBattleZones_Click(object sender, EventArgs e) => tsbToggleBattleZones.Checked = GLControl.DrawBattleZones  = !GLControl.DrawBattleZones;
         private void tsbToggleTerrainType_Click(object sender, EventArgs e) => tsbToggleTerrainType.Checked = GLControl.DrawTerrainTypes = !GLControl.DrawTerrainTypes;
-        private void tsbToggleEventID_Click(object sender, EventArgs e)     => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
-        private void tsbToggleCollisions_Click(object sender, EventArgs e)  => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
+        private void tsbToggleEventID_Click(object sender, EventArgs e) => tsbToggleEventID.Checked     = GLControl.DrawEventIDs     = !GLControl.DrawEventIDs;
+        private void tsbToggleCollisions_Click(object sender, EventArgs e) => tsbToggleCollisions.Checked  = GLControl.DrawCollisionLines = !GLControl.DrawCollisionLines;
         private void tsbHideModelsNotFacingCamera_Click(object sender, EventArgs e) => tsbHideModelsNotFacingCamera.Checked = GLControl.HideModelsNotFacingCamera = !GLControl.HideModelsNotFacingCamera;
-        private void tsbApplyShadowTags_Click(object sender, EventArgs e)   => tsbApplyShadowTags.Checked   = GLControl.ApplyShadowTags  = !GLControl.ApplyShadowTags;
-        private void tsbApplyHideTags_Click(object sender, EventArgs e)     => tsbApplyHideTags.Checked     = GLControl.ApplyHideTags    = !GLControl.ApplyHideTags;
+        private void tsbApplyShadowTags_Click(object sender, EventArgs e) => tsbApplyShadowTags.Checked   = GLControl.ApplyShadowTags  = !GLControl.ApplyShadowTags;
+        private void tsbApplyHideTags_Click(object sender, EventArgs e) => tsbApplyHideTags.Checked     = GLControl.ApplyHideTags    = !GLControl.ApplyHideTags;
 
         private void tsbRenderOnBlackBackground_Click(object sender, EventArgs e) => tsbRenderOnBlackBackground.Checked = GLControl.RenderOnBlackBackground = !GLControl.RenderOnBlackBackground;
-        private void tsbToggleNormals_Click(object sender, EventArgs e)     => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
-        private void tsbRotateSpritesUp_Click(object sender, EventArgs e  ) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
+        private void tsbToggleNormals_Click(object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
+        private void tsbRotateSpritesUp_Click(object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
         public void InvalidateLighting(bool invalidatePainter = true) {
             if (MPD_File != null) {
