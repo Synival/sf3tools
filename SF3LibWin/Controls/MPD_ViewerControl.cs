@@ -78,7 +78,7 @@ namespace SF3.Win.Controls {
 
             // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
             void ShowHideExperimentalBrushes(bool value) {
-                toolStripSeparator3.Visible  = value;
+                tsbSeparator4.Visible        = value;
                 tsbDrawBridge.Visible        = value;
                 tsbDrawBrownMountain.Visible = value;
                 tsbDrawDarkGrass.Visible     = value;
@@ -91,7 +91,7 @@ namespace SF3.Win.Controls {
                 tsbDrawNoEntry.Visible       = value;
                 tsbDrawRiver.Visible         = value;
                 tsbDrawWater.Visible         = value;
-                toolStripSeparator5.Visible  = value;
+                tsbSeparator5.Visible        = value;
                 tsbFixTiles.Visible          = value;
             }
 
