@@ -111,5 +111,23 @@ namespace SF3.Utils {
                 .Where(x => x.X >= 0 && x.Y >= 0 && x.X < 64 && x.Y < 64)
                 .ToArray();
         }
+
+        /// <summary>
+        /// Converts a tile X coordinate and corner to a vertex coordinate.
+        /// </summary>
+        /// <param name="tileX">X coordinate of the requested tile.</param>
+        /// <param name="corner">Corner of the tile referenced by 'tileX'.</param>
+        /// <returns>A vertex X coordinate.</returns>
+        public static int TileToVertexX(int tileX, CornerType corner)
+            => tileX + corner.GetVertexOffsetX();
+
+        /// <summary>
+        /// Converts a tile Y coordinate and corner to a vertex coordinate.
+        /// </summary>
+        /// <param name="tileY">Y coordinate of the requested tile.</param>
+        /// <param name="corner">Corner of the tile referenced by 'tileY'.</param>
+        /// <returns>A vertex Y coordinate.</returns>
+        public static int TileToVertexY(int tileY, CornerType corner)
+            => tileY + corner.GetVertexOffsetY();
     }
 }

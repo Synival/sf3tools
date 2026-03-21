@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Types;
-using CommonLib.Utils;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -164,8 +163,8 @@ namespace SF3.MPD.Project {
                 tile.InvalidateCenterHeight();
             }
 
-            var vx = BlockHelpers.TileToVertexX(X, corner);
-            var vy = BlockHelpers.TileToVertexY(Y, corner);
+            var vx = TileToVertexX(X, corner);
+            var vy = TileToVertexY(Y, corner);
             var vertexRange = Surface.GetNormalVertexRangeAffectedByHeightOf(vx, vy);
             Surface.UpdateVertexNormals(vertexRange);
 

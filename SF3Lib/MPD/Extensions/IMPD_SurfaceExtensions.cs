@@ -9,6 +9,7 @@ using CommonLib.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
+using static SF3.Utils.SurfaceUtils;
 
 namespace SF3.MPD.Extensions {
     public static class IMPD_SurfaceExtensions {
@@ -276,8 +277,8 @@ namespace SF3.MPD.Extensions {
         /// <param name="ty">Tile Y coordinate.</param>
         /// <param name="corner">Corner of the tile whose vertex is relevant to the normals to recalculate.</param>
         public static Rectangle GetNormalVertexRangeAffectedByHeightOf(this IMPD_Surface surface, int tx, int ty, CornerType corner) {
-            var vx = BlockHelpers.TileToVertexX(tx, corner);
-            var vy = BlockHelpers.TileToVertexY(ty, corner);
+            var vx = TileToVertexX(tx, corner);
+            var vy = TileToVertexY(ty, corner);
             return surface.GetClampedVertexRange(vx - 1, vy - 1, vx + 1, vy + 1);
         }
 

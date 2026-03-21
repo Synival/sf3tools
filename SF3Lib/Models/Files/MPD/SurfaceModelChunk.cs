@@ -11,6 +11,7 @@ using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using static CommonLib.Utils.BlockHelpers;
+using static SF3.Utils.SurfaceUtils;
 
 namespace SF3.Models.Files.MPD {
     public class SurfaceModelChunk : TableFile {

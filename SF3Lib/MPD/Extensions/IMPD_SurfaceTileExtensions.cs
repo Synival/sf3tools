@@ -2,7 +2,6 @@
 using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
-using CommonLib.Utils;
 using SF3.MPD.Interfaces;
 using static SF3.Utils.SurfaceUtils;
 
@@ -17,8 +16,8 @@ namespace SF3.MPD.Extensions {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
-            var vx = BlockHelpers.TileToVertexX(tile.X, corner);
-            var vy = BlockHelpers.TileToVertexY(tile.Y, corner);
+            var vx = TileToVertexX(tile.X, corner);
+            var vy = TileToVertexY(tile.Y, corner);
             return tile.Surface.GetVertex(vx, vy).Normal;
         }
 
@@ -47,8 +46,8 @@ namespace SF3.MPD.Extensions {
             int cornerInt = (int) corner;
             if (cornerInt < 0 || cornerInt > 3)
                 throw new ArgumentOutOfRangeException(nameof(corner));
-            var vx = BlockHelpers.TileToVertexX(tile.X, corner);
-            var vy = BlockHelpers.TileToVertexY(tile.Y, corner);
+            var vx = TileToVertexX(tile.X, corner);
+            var vy = TileToVertexY(tile.Y, corner);
             tile.Surface.GetVertex(vx, vy).Normal = normal;
         }
 
