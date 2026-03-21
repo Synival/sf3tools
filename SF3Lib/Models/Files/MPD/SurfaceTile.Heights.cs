@@ -128,7 +128,7 @@ namespace SF3.Models.Files.MPD {
                 if (MPD_File.SurfaceModelChunk == null)
                     return;
                 if (MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].GetIsFlatFlag(X) != value) {
-                    this.SetFlatAndUpdateHeights(value, val => MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetIsFlatFlag(X, val));
+                    MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetIsFlatFlag(X, value);
                     Modified?.Invoke(this, EventArgs.Empty);
                 }
             }

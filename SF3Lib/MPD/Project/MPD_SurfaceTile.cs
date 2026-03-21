@@ -125,7 +125,7 @@ namespace SF3.MPD.Project {
             get => _isFlat;
             set {
                 if (_isFlat != value) {
-                    this.SetFlatAndUpdateHeights(value, val => _isFlat = value);
+                    _isFlat = value;
                     Modified?.Invoke(this, EventArgs.Empty);
                 }
             }

@@ -57,12 +57,14 @@ namespace SF3.MPD.Extensions {
         /// </summary>
         /// <param name="tile">Tile to modify.</param>
         /// <param name="value">New 'IsFlat' value.</param>
-        /// <param name="valueSetter">Callback to set the internal 'IsFlat' value.</param>
-        public static void SetFlatAndUpdateHeights(this IMPD_SurfaceTile tile, bool value, Action<bool> valueSetter) {
+        public static void SetFlatAndUpdateHeights(this IMPD_SurfaceTile tile, bool value) {
+            if (tile.IsFlat == value)
+                return;
+
             // If flattening the tile, set heights to the lowest value.
             if (value) {
                 var minHeight = tile.GetVertexHeights().Min();
-                valueSetter(true);
+                tile.IsFlat = true;
                 tile.SetVertexHeights(new byte[] { minHeight, minHeight, minHeight, minHeight });
                 return;
             }
@@ -72,7 +74,7 @@ namespace SF3.MPD.Extensions {
             // We're going to use that as a fallback if there's no non-flat tile to fetch here.
             var brHeight = tile.GetVertexHeight(CornerType.BottomRight);
 
-            valueSetter(false);
+            tile.IsFlat = false;
 
             // Steal heights from now-shared vertices.
             var allCorners = (CornerType[]) Enum.GetValues(typeof(CornerType));

@@ -7,6 +7,7 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
+using SF3.MPD.Extensions;
 
 namespace SF3.Win.Controls {
     public partial class SurfaceTilePropertiesControl : SurfaceTilePropertiesControlBase {
@@ -153,7 +154,7 @@ namespace SF3.Win.Controls {
             var eo = EditingObjects[0];
 
             eo.Surface.NormalSettings = AppSettings.Get().MakeNormalCalculationSettings();
-            eo.IsFlat = cbModelTileIsFlat.Checked;
+            eo.SetFlatAndUpdateHeights(cbModelTileIsFlat.Checked);
             UpdateVertexHeights();
             UpdateVertexHeightsEnabled();
         }
