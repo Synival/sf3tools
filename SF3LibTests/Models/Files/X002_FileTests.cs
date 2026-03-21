@@ -71,7 +71,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0x01, table[2].RangeMin);
                 Assert.AreEqual(7, table[2].Attack);
 
-                Assert.AreEqual(testCase.ExpectedItems, table.Length);
+                Assert.AreEqual(testCase.ExpectedItems, table.Count);
             });
         }
 
@@ -99,7 +99,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0x21, table[2].Lv1Distance);
                 Assert.AreEqual(1, table[2].Lv1Targets);
 
-                Assert.AreEqual(testCase.ExpectedSpells, table.Length);
+                Assert.AreEqual(testCase.ExpectedSpells, table.Count);
             });
         }
 
@@ -127,7 +127,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(2, table[2].WeaponLv2);
                 Assert.AreEqual(2, table[2].WeaponLv3);
 
-                Assert.AreEqual(testCase.ExpectedWeaponSpells, table.Length);
+                Assert.AreEqual(testCase.ExpectedWeaponSpells, table.Count);
             });
         }
 
@@ -146,7 +146,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(3, table[2].SceneID);
                 Assert.AreEqual(testCase.Scenario <= ScenarioType.Scenario2 ? 0 : 12, table[2].Music);
 
-                Assert.AreEqual(testCase.ExpectedLoads, table.Length);
+                Assert.AreEqual(testCase.ExpectedLoads, table.Count);
             });
         }
 
@@ -164,7 +164,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(3, table[5].Stat);
                 Assert.AreEqual(3, table[6].Stat);
 
-                Assert.AreEqual(7, table.Length);
+                Assert.AreEqual(7, table.Count);
             });
         }
 
@@ -179,7 +179,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(7, table[2].Skill2);
                 Assert.AreEqual(15, table[3].Skill3);
 
-                Assert.AreEqual(5, table.Length);
+                Assert.AreEqual(5, table.Count);
             });
         }
 
@@ -221,11 +221,11 @@ namespace SF3.Tests.Models.Files {
 
                     case ScenarioType.PremiumDisk:
                         // No LoadedOverrides. Assert here just to make this test future-proof.
-                        Assert.AreEqual(0, table.Length);
+                        Assert.AreEqual(0, table.Count);
                         break;
                 }
 
-                Assert.AreEqual(testCase.ExpectedLoadedOverrides, table.Length);
+                Assert.AreEqual(testCase.ExpectedLoadedOverrides, table.Count);
             });
         }
 
@@ -251,7 +251,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(1, table[1].WarpTrigger);
                 Assert.AreEqual(0x02, table[1].LoadID);
 
-                Assert.AreEqual(779, table.Length);
+                Assert.AreEqual(779, table.Count);
             });
         }
     }

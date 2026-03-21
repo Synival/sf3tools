@@ -37,7 +37,7 @@ namespace SF3.Tests.Models.Files {
 
                 Assert.AreEqual(0x00, file.ItemIconTable[0].IconOffset);
                 Assert.AreEqual(0x26, file.ItemIconTable[1].IconOffset);
-                Assert.AreEqual(testCase.ExpectedItemIconRows, file.ItemIconTable.Length);
+                Assert.AreEqual(testCase.ExpectedItemIconRows, file.ItemIconTable.Count);
             });
         }
 
@@ -55,7 +55,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0x176, file.SpellIconTable[2].IconOffsetAfterItems);
                 Assert.AreEqual(testCase.ExpectedSpellRealOffsetStart + file.SpellIconTable[2].IconOffsetAfterItems, file.SpellIconTable[2].IconOffset);
 
-                Assert.AreEqual(testCase.ExpectedSpellIconRows, file.SpellIconTable.Length);
+                Assert.AreEqual(testCase.ExpectedSpellIconRows, file.SpellIconTable.Count);
             });
         }
     }

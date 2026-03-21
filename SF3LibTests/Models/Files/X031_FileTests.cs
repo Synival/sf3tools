@@ -53,7 +53,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(9, file.StatsTable[2].HPCurve1);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(testCase.ExpectedStatsRows, file.StatsTable.Length);
+                Assert.AreEqual(testCase.ExpectedStatsRows, file.StatsTable.Count);
             });
         }
 
@@ -85,7 +85,7 @@ namespace SF3.Tests.Models.Files {
                     // TODO: maybe more data?
                 }
 
-                Assert.AreEqual(testCase.ExpectedInitialInfoRows, file.InitialInfoTable.Length);
+                Assert.AreEqual(testCase.ExpectedInitialInfoRows, file.InitialInfoTable.Count);
             });
         }
 

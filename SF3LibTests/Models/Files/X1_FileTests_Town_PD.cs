@@ -28,7 +28,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[0].XPos);
             Assert.AreEqual(0, table[0].ZPos);
 
-            Assert.AreEqual(1, table.Length);
+            Assert.AreEqual(1, table.Count);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(65472, table[1].ActorX);
             Assert.AreEqual(0, table[1].ActorZ);
 
-            Assert.AreEqual(6, table.Length);
+            Assert.AreEqual(6, table.Count);
         }
 
         [TestMethod]
@@ -52,7 +52,7 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.InteractableTables.First();
 
-            Assert.AreEqual(0, table.Length);
+            Assert.AreEqual(0, table.Count);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace SF3.Tests.Models.Files {
             var file = TestCase.Create();
             var table = file.ArrowTable;
 
-            Assert.AreEqual(0, table.Length);
+            Assert.AreEqual(0, table.Count);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(0, table[1].LoadID);
 
-            Assert.AreEqual(6, table.Length);
+            Assert.AreEqual(6, table.Count);
         }
     }
 }

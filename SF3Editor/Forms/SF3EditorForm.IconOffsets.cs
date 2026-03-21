@@ -18,10 +18,10 @@ namespace SF3.Editor.Forms {
             }
 
             var itemIconCount    = icons.SpellIconIndex;
-            var spellIconCount   = icons.Icons.Length - icons.SpellIconIndex;
+            var spellIconCount   = icons.Icons.Count - icons.SpellIconIndex;
             var totalIconCount   = itemIconCount + spellIconCount;
-            var itemOffsetCount  = itemIconOffsets?.ItemIconTable?.Length;
-            var spellOffsetCount = spellIconOffsets?.SpellIconTable?.Length;
+            var itemOffsetCount  = itemIconOffsets?.ItemIconTable?.Count;
+            var spellOffsetCount = spellIconOffsets?.SpellIconTable?.Count;
             var totalOffsetCount = (itemOffsetCount ?? 0) + (spellOffsetCount ?? 0);
 
             if (itemOffsetCount.HasValue && spellOffsetCount.HasValue && totalIconCount != totalOffsetCount) {

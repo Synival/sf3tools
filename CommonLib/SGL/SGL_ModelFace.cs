@@ -37,7 +37,7 @@ namespace CommonLib.SGL {
             var jObject = (JObject) token;
 
             VertexIndices = jObject.GetValueIfExists("VertexIndices", t => ((JArray) t).Select(x => (int) x).ToArray().ToEnumerableWithLength());
-            if (VertexIndices == null || VertexIndices.Length != 4)
+            if (VertexIndices == null || VertexIndices.Count != 4)
                 throw new JsonSerializationException("VertexIndices must exist and have exactly 4 integers");
 
             Normal     = VECTOR.FromJToken(jObject["Normal"]);

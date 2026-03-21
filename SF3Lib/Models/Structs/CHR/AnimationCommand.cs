@@ -93,7 +93,7 @@ namespace SF3.Models.Structs.CHR {
                 return 0;
 
             int expectedFrameCount = directions.GetAnimationFrameCount();
-            return Math.Max(0, Math.Min(FrameTable.Length - Command, expectedFrameCount));
+            return Math.Max(0, Math.Min(FrameTable.Count - Command, expectedFrameCount));
         }
 
         private readonly Dictionary<int, string> _textureHashByFrameCount = new Dictionary<int, string>();
@@ -117,7 +117,7 @@ namespace SF3.Models.Structs.CHR {
             tex = TextureUtils.StackTextures(frames, canSetImage: false);
             _texturesByFrameCount[frameCount] = tex;
 
-            var frameTableCount = FrameTable.Length;
+            var frameTableCount = FrameTable.Count;
             var frameHash = Enumerable.Range(frameMin, frameCount)
                 .Select(x => (x < frameTableCount) ? FrameTable[x] : null)
                 .Select(x => (x?.Texture != null) ? $"({x.Texture.Hash})" : "()")

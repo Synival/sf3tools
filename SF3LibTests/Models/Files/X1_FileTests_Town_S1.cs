@@ -33,7 +33,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1008, table[2].XPos);
             Assert.AreEqual(1184, table[2].ZPos);
 
-            Assert.AreEqual(6, table.Length);
+            Assert.AreEqual(6, table.Count);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1568, table[1].ActorX);
             Assert.AreEqual(448, table[1].ActorZ);
 
-            Assert.AreEqual(24, table.Length);
+            Assert.AreEqual(24, table.Count);
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(      0x00,  table[0].TriggerFlags);
             Assert.AreEqual(0x0605f2d0u, table[0].Action);
 
-            Assert.AreEqual(31, table.Length);
+            Assert.AreEqual(31, table.Count);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace SF3.Models.Structs.CHR {
                     var frames = new List<int>();
                     var frameID = x.Command;
                     for (int i = 0; i < x.Directions.GetAnimationFrameCount(); i++)
-                        if (frameID + i < FrameTable.Length)
+                        if (frameID + i < FrameTable.Count)
                             frames.Add(frameID + i);
                     return frames;
                 })

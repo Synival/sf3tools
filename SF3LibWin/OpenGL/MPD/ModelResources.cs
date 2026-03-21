@@ -169,7 +169,7 @@ namespace SF3.Win.OpenGL.MPD {
             var semiTransparentTexturedQuads   = new List<Quad>();
             var semiTransparentUntexturedQuads = new List<Quad>();
 
-            for (var i = 0; i < faces.Length; i++) {
+            for (var i = 0; i < faces.Count; i++) {
                 var polygon = faces[i];
                 var attr = polygon.Attributes;
 

@@ -53,7 +53,7 @@ namespace SF3.Models.Tables {
         public int Address { get; }
         public bool IsLoaded => _rows != null;
         public IStruct[] RowObjs => _rows;
-        public int Length => RowObjs.Length;
+        public int Count => RowObjs.Length;
         public int SizeInBytes => IsLoaded ? _rows.Sum(x => x.Size) : 0;
         public abstract int TerminatorSize { get; }
         public int SizeInBytesPlusTerminator => SizeInBytes + TerminatorSize;

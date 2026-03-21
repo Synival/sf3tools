@@ -175,7 +175,7 @@ namespace SF3.Models.Files.MPD {
                     CollisionLineIndexTablesByBlock = new Dictionary<int, CollisionLineIndexTable>();
 
                     var pos = 0;
-                    for (var y = 0; y < CollisionBlockTable.Length; y++) {
+                    for (var y = 0; y < CollisionBlockTable.Count; y++) {
                         var row = CollisionBlockTable[y];
                         for (var x = 0; x < row.Length; x++) {
                             try {
@@ -214,7 +214,7 @@ namespace SF3.Models.Files.MPD {
                 }
 
                 // ATBTL2 (S2), ELINB, and ATBTL2 (S3) have some additional data (ATTRs) in between the model instance table and the PDATA's referenced.
-                if (ModelInstanceTable?.Length > 0 && PDatasByMemoryAddress?.Count > 0) {
+                if (ModelInstanceTable?.Count > 0 && PDatasByMemoryAddress?.Count > 0) {
                     var endOfInstanceTable = ModelInstanceTable.Address + ModelInstanceTable.SizeInBytesPlusTerminator;
                     var startOfPDatas = PDatasByMemoryAddress.Values.First().Address;
                     var diff = startOfPDatas - endOfInstanceTable;

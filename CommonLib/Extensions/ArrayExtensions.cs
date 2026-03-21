@@ -16,7 +16,7 @@ namespace CommonLib.Extensions {
 
             public T[] Array { get; }
 
-            public int Length => Array.Length;
+            public int Count => Array.Length;
             public T this[int index] => Array[index];
             public T[] AsArray() => Array;
 

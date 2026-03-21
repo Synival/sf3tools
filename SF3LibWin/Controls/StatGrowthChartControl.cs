@@ -49,7 +49,7 @@ namespace SF3.Win.Controls {
 
         private StatGrowthStatistics GetCurerntGrowthStatistics() {
             var index = cbCurveGraphCharacter.SelectedIndex;
-            return (index >= 0 && index < StatGrowthStatistics.Length) ? StatGrowthStatistics[index] : null;
+            return (index >= 0 && index < StatGrowthStatistics.Count) ? StatGrowthStatistics[index] : null;
         }
 
         private void CurveGraph_MouseMove(object sender, MouseEventArgs e) {
@@ -140,7 +140,7 @@ namespace SF3.Win.Controls {
 
         public void RecalcData() {
             var index = cbCurveGraphCharacter.SelectedIndex;
-            var statistics = (index >= 0 && index < StatGrowthStatistics.Length ? StatGrowthStatistics[index] : null);
+            var statistics = (index >= 0 && index < StatGrowthStatistics.Count ? StatGrowthStatistics[index] : null);
             statistics?.Recalc();
         }
 

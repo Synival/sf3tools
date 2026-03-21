@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
             set {
                 if (_animation != value) {
                     _animation = value;
-                    var aniFrame = (_animation?.AnimationFrameTable?.Length > 0) ? _animation.AnimationFrameTable[0] : null;
+                    var aniFrame = (_animation?.AnimationFrameTable?.Count > 0) ? _animation.AnimationFrameTable[0] : null;
                     if (aniFrame == null) {
                         ClearAnimation();
                         Texture = null;
@@ -24,7 +24,7 @@ namespace SF3.Win.Views.MPD {
         }
 
         protected override void OnFrameCompleted() {
-            var frameIndex = (FrameIndex + 1) % _animation.AnimationFrameTable.Length;
+            var frameIndex = (FrameIndex + 1) % _animation.AnimationFrameTable.Count;
             var aniFrame = _animation.AnimationFrameTable[frameIndex];
             SetFrame(aniFrame, frameIndex, aniFrame.Duration);
         }

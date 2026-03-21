@@ -239,7 +239,7 @@ namespace SF3.Models.Files.MPD {
             }
             // Some files have an old, dummied out Unknown 2 (MUBAR, SARA22). Let's load them, just for fun.
             else if (header.OffsetGradient > 0 && header.OffsetGroundAnimation > 0) {
-                var gradient = (GradientTable.Length > 0) ? GradientTable.Last() : null;
+                var gradient = (GradientTable.Count > 0) ? GradientTable.Last() : null;
                 var start = (gradient == null) ? header.OffsetGradient + 0x02 : (gradient.Address + gradient.Size + 0x02 + RamAddress);
 
                 var size = (header.OffsetGroundAnimation - start) / 2;
@@ -504,9 +504,9 @@ namespace SF3.Models.Files.MPD {
                     );
                     if (texCol.TextureTable != null) {
                         if (isHeaderModel)
-                            nextModelCollectionStartId += texCol.TextureTable.Length;
+                            nextModelCollectionStartId += texCol.TextureTable.Count;
                         else if (collection == MPD_CollectionType.Primary)
-                            nextPrimaryCollectionStartId += texCol.TextureTable.Length;
+                            nextPrimaryCollectionStartId += texCol.TextureTable.Count;
 
                         texColList.Add(texCol);
                         tables.AddRange(texCol.Tables);

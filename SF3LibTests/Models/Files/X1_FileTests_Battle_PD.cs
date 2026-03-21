@@ -31,7 +31,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(7, table[1].TargetX);
             Assert.AreEqual(12, table[1].TargetZ);
 
-            Assert.AreEqual(32, table.Length);
+            Assert.AreEqual(32, table.Count);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[2].Pointer);
             Assert.AreEqual(0, table[3].Pointer);
 
-            Assert.AreEqual(4, table.Length);
+            Assert.AreEqual(4, table.Count);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[1].XPos1);
             Assert.AreEqual(63, table[1].ZPos1);
 
-            Assert.AreEqual(32, table.Length);
+            Assert.AreEqual(32, table.Count);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(8, table[12].X);
             Assert.AreEqual(13, table[12].Z);
 
-            Assert.AreEqual(52, table.Length);
+            Assert.AreEqual(52, table.Count);
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x3F, table[1].Z2);
             Assert.AreEqual(0x00, table[1].X3);
 
-            Assert.AreEqual(16, table.Length);
+            Assert.AreEqual(16, table.Count);
         }
 
         [TestMethod]
@@ -119,7 +119,7 @@ namespace SF3.Tests.Models.Files {
             var table = file.InteractableTables.First();
 
             // No treasure to be found in PD, as far as I know.
-            Assert.AreEqual(0, table.Length);
+            Assert.AreEqual(0, table.Count);
         }
 
         [TestMethod]
@@ -142,7 +142,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x25, table[2].Forest);
             Assert.AreEqual(0xFF, table[2].NoEntry);
 
-            Assert.AreEqual(14, table.Length);
+            Assert.AreEqual(14, table.Count);
         }
 
         [TestMethod]
@@ -160,7 +160,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(9, table[1].LoadID);
 
-            Assert.AreEqual(4, table.Length);
+            Assert.AreEqual(4, table.Count);
         }
     }
 }

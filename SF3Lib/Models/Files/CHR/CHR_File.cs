@@ -55,7 +55,7 @@ namespace SF3.Models.Files.CHR {
             // Let's account for anomalies like that.
             byte[] junkAfterFrameTable = null;
 
-            var firstFrameTableOffset = (SpriteTable != null && SpriteTable.Length > 0)
+            var firstFrameTableOffset = (SpriteTable != null && SpriteTable.Count > 0)
                 ? (int) SpriteTable[0].Header.FrameTableOffset
                 : (int?) null;
 
@@ -88,7 +88,7 @@ namespace SF3.Models.Files.CHR {
         }
 
         public int GetSize() {
-            if (SpriteTable == null || SpriteTable.Length == 0)
+            if (SpriteTable == null || SpriteTable.Count == 0)
                 return 0x18 + 0x04; // Length of zero-sprite header plus EOF padding
 
             var lastImageEndPos = SpriteTable

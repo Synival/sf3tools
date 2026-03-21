@@ -16,7 +16,7 @@ namespace SF3.MPD.Project {
 
         private List<MPD_ModelInstance> _instances;
 
-        public int Length => _instances.Count;
+        public int Count => _instances.Count;
         public IEnumerator<IMPD_ModelInstance> GetEnumerator() => _instances.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

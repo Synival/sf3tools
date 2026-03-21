@@ -588,7 +588,7 @@ namespace SF3.Models.Files.X1 {
 
                 // The second parameter is a pointer to a 'ModelMatrix*'. It should be outside the bounds of the file, but try to mark it in case its not.
                 var matricesRamPtr = group.MatrixTablePtr;
-                Discoveries.AddArray(matricesRamPtr, "ModelMatrix[]", $"modelMatrices{groupLinkIndex:D2}", 0x38 * newTable.Length);
+                Discoveries.AddArray(matricesRamPtr, "ModelMatrix[]", $"modelMatrices{groupLinkIndex:D2}", 0x38 * newTable.Count);
 
                 groupLinkIndex++;
             }

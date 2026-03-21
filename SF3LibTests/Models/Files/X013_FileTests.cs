@@ -81,7 +81,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(50, table[1].FourSpecial);
                 Assert.AreEqual(0, table[1].FiveSpecial);
 
-                Assert.AreEqual(2, table.Length);
+                Assert.AreEqual(2, table.Count);
             });
         }
 
@@ -118,7 +118,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(2, table[2].DarkBonus);
                 Assert.AreEqual(0, table[2].UnknownBonus);
 
-                Assert.AreEqual(testCase.ExpectedMagicBonuses, table.Length);
+                Assert.AreEqual(testCase.ExpectedMagicBonuses, table.Count);
             });
         }
 
@@ -135,7 +135,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(15, table[4].Chance);
                 Assert.AreEqual(5, table[5].Chance);
 
-                Assert.AreEqual(1770, table.Length);
+                Assert.AreEqual(1770, table.Count);
             });
         }
 
@@ -160,7 +160,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0, table[2].MidPow);
                 Assert.AreEqual(0, table[2].MaxPow);
 
-                Assert.AreEqual(testCase.ExpectedSpecials, table.Length);
+                Assert.AreEqual(testCase.ExpectedSpecials, table.Count);
             });
         }
 
@@ -214,7 +214,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0, table[3].Luck8Chance);
                 Assert.AreEqual(0, table[3].Luck9Chance);
 
-                Assert.AreEqual(4, table.Length);
+                Assert.AreEqual(4, table.Count);
             });
         }
 
@@ -234,7 +234,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(20, table[1].SLvlStat3);
                 Assert.AreEqual(25, table[1].SLvlStat4);
 
-                Assert.AreEqual(8, table.Length);
+                Assert.AreEqual(8, table.Count);
             });
         }
 
@@ -253,7 +253,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(3, table[2].SupportA);
                 Assert.AreEqual(0, table[2].SupportB);
 
-                Assert.AreEqual(testCase.ExpectedSupportTypes, table.Length);
+                Assert.AreEqual(testCase.ExpectedSupportTypes, table.Count);
             });
         }
 
@@ -275,7 +275,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(3, table[1].RankA);
                 Assert.AreEqual(4, table[1].RankS);
 
-                Assert.AreEqual(4, table.Length);
+                Assert.AreEqual(4, table.Count);
             });
         }
     }

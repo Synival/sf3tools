@@ -385,7 +385,7 @@ namespace MPD_Analyzer {
         }
 
         public static string[]? HasBigDumbGradients(MPD_File mpdFile) {
-            if (!(mpdFile.GradientTable?.Length >= 1))
+            if (!(mpdFile.GradientTable?.Count >= 1))
                 return null;
             var gradient = mpdFile.GradientTable[0];
 
@@ -416,7 +416,7 @@ namespace MPD_Analyzer {
         }
 
         public static string[]? GetMultiReferenceModelSwitchGroups(MPD_File mpdFile) {
-            if (!(mpdFile.ModelSwitchGroupsTable?.Length > 0))
+            if (!(mpdFile.ModelSwitchGroupsTable?.Count > 0))
                 return null;
 
             var errors = new List<string>();
@@ -447,8 +447,8 @@ namespace MPD_Analyzer {
                 return null;
 
             var errors = new List<string>();
-            if (mpdFile.GradientTable.Length > 1)
-                errors.Add($"{mpdFile.GradientTable.Length} tables!!");
+            if (mpdFile.GradientTable.Count > 1)
+                errors.Add($"{mpdFile.GradientTable.Count} tables!!");
 
             foreach (var table in mpdFile.GradientTable)
                 if (table.IsDummiedOut)

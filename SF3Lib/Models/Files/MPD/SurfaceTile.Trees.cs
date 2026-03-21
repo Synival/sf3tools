@@ -19,7 +19,7 @@ namespace SF3.Models.Files.MPD {
             if (modelCollection == null)
                 return false;
 
-            if (TreeModelID >= modelCollection.ModelInstanceTable.Length)
+            if (TreeModelID >= modelCollection.ModelInstanceTable.Count)
                 return false;
 
             var model = modelCollection.ModelInstanceTable[TreeModelID.Value];
@@ -50,7 +50,7 @@ namespace SF3.Models.Files.MPD {
 
             // Get a list of all currently associated trees.
             var modelCollection = MPD_File.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
-            if (modelCollection == null || modelCollection.PDataTable.Length == 0)
+            if (modelCollection == null || modelCollection.PDataTable.Count == 0)
                 return false;
 
             var associatedModelsList = MPD_File.Surface.GetAllTiles()

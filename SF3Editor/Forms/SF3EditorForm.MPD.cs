@@ -338,7 +338,7 @@ namespace SF3.Editor.Forms {
 
             items.Clear();
             int itemIndex = 1;
-            if (mpdFile?.ModelSwitchGroups?.Length > 0) {
+            if (mpdFile?.ModelSwitchGroups?.Count > 0) {
                 var ngc = new NameGetterContext(ScenarioType.PremiumDisk);
                 foreach (var msg in mpdFile.ModelSwitchGroups) {
                     var flag = msg.Flag;

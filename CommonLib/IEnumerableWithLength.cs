@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CommonLib {
     public interface IEnumerableLength {
-        int Length { get; }
+        int Count { get; }
     }
 
     public interface IEnumerableWithLength : IEnumerable, IEnumerableLength {}

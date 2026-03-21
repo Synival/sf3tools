@@ -30,7 +30,7 @@ namespace SF3.Win.Views.CHR {
             }
 
             _commands = Context.AnimationCommandTablesByIndex[index];
-            if (_commands == null || _commands.Length == 0 || _commands[0].IsEndingCommand) {
+            if (_commands == null || _commands.Count == 0 || _commands[0].IsEndingCommand) {
                 ClearAnimation();
                 _commands = null;
                 return;
@@ -45,10 +45,10 @@ namespace SF3.Win.Views.CHR {
 
         private void GotoCommand(int? lastCommandIndex, int nextCommandIndex) {
             var commandsSeen = new List<AnimationCommand>();
-            if (lastCommandIndex.HasValue && lastCommandIndex >= 0 && lastCommandIndex < _commands.Length)
+            if (lastCommandIndex.HasValue && lastCommandIndex >= 0 && lastCommandIndex < _commands.Count)
                 commandsSeen.Add(_commands[lastCommandIndex.Value]);
 
-            var commandCount = _commands.Length;
+            var commandCount = _commands.Count;
             var nextTexture  = Texture;
 
             while (true) {
@@ -98,7 +98,7 @@ namespace SF3.Win.Views.CHR {
                         break;
 
                     case SpriteAnimationCommandType.GotoCommandOffset:
-                        var isValidParameter = (nextCommand.Parameter % 2 == 0 && (nextCommand.Parameter / 2) < _commands.Length);
+                        var isValidParameter = (nextCommand.Parameter % 2 == 0 && (nextCommand.Parameter / 2) < _commands.Count);
                         if (!isValidParameter) {
                             PauseAnimation();
                             return;

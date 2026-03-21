@@ -16,7 +16,7 @@ namespace SF3.MPD.Project {
 
         private List<MPD_AnimatableTexture> _textures;
 
-        public int Length => _textures.Count;
+        public int Count => _textures.Count;
         public IEnumerator<IMPD_AnimatableTexture> GetEnumerator() => _textures.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _textures.GetEnumerator();
     }

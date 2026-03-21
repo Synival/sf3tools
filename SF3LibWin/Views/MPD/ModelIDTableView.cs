@@ -36,7 +36,7 @@ namespace SF3.Win.Views.MPD {
                     }
                 }
 
-                tableControl.SelectedItem = (_table?.Length >= 1) ? TableView.OLVControl.Items[0] : null;
+                tableControl.SelectedItem = (_table?.Count >= 1) ? TableView.OLVControl.Items[0] : null;
             });
 
             // Return the top-level control.
@@ -78,7 +78,7 @@ namespace SF3.Win.Views.MPD {
                     _table = value;
                     TableView.Table = value;
                     if (TableView.OLVControl != null)
-                        TableView.OLVControl.SelectedItem = (value?.Length >= 1) ? TableView.OLVControl.Items[0] : null;
+                        TableView.OLVControl.SelectedItem = (value?.Count >= 1) ? TableView.OLVControl.Items[0] : null;
                 }
             }
         }

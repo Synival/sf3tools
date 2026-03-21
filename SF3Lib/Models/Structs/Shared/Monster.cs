@@ -165,7 +165,7 @@ namespace SF3.Models.Structs.X019 {
         /// <param name="apply">When true, stat changes are applied. When false, stat changes are unapplied.</param>
         /// <returns>Returns 'true' if an item was found and applied, otherwise 'false'.</returns>
         public bool ApplyItemStats(ItemTable itemTable, int itemId, bool apply) {
-            if (itemId <= 0 || itemId >= itemTable.Length)
+            if (itemId <= 0 || itemId >= itemTable.Count)
                 return false;
             ApplyItemStats(itemTable[itemId], apply);
             return true;

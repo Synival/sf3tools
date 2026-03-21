@@ -259,8 +259,8 @@ namespace CHR_Extractor {
                                                 var newSprite  = newSprites[j];
 
                                                 // Animation names should check out.
-                                                if (origSprite.AnimationTable?.Length == newSprite.AnimationTable?.Length && origSprite.AnimationTable != null) {
-                                                    for (int k = 0; k < newSprite.AnimationTable.Length; k++) {
+                                                if (origSprite.AnimationTable?.Count == newSprite.AnimationTable?.Count && origSprite.AnimationTable != null) {
+                                                    for (int k = 0; k < newSprite.AnimationTable.Count; k++) {
                                                         var origAnim = origSprite.AnimationTable[k];
                                                         var newAnim  = newSprite.AnimationTable[k];
                                                         if (origAnim.AnimationName != newAnim.AnimationName)
@@ -291,8 +291,8 @@ namespace CHR_Extractor {
                                                         var origTable = origTables[k];
                                                         var newTable  = newTables[k];
 
-                                                        if (origTable.Length != newTable.Length)
-                                                            Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Wrong number of elements: {origTable.Length} => {newTable.Length}");
+                                                        if (origTable.Count != newTable.Count)
+                                                            Console.WriteLine($"    [{i:X2}, {origSprite.SpriteName}, {origTable.Name}]: Wrong number of elements: {origTable.Count} => {newTable.Count}");
 
                                                         var origChrData = origTable.Data.GetDataCopyAt(origTable.Address, origTable.SizeInBytesPlusTerminator);
                                                         var newChrData  = newTable .Data.GetDataCopyAt(newTable.Address,  newTable.SizeInBytesPlusTerminator);

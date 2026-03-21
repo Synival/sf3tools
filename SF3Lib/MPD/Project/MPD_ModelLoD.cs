@@ -113,11 +113,11 @@ namespace SF3.MPD.Project {
                 }
             }
 
-            public int Length => _actualFaces.Length;
+            public int Count => _actualFaces.Count;
 
             public ISGL_ModelFace this[int index] {
                 get {
-                    if (index < 0 || index >= Length)
+                    if (index < 0 || index >= Count)
                         throw new ArgumentOutOfRangeException(nameof(index));
                     if (!_faces.ContainsKey(index))
                         _faces.Add(index, new FaceWrapper(_actualFaces[index], LevelOfDetail));
@@ -125,10 +125,10 @@ namespace SF3.MPD.Project {
                 }
             }
 
-            public ISGL_ModelFace[] AsArray() => Enumerable.Range(0, Length).Select(x => this[x]).ToArray();
+            public ISGL_ModelFace[] AsArray() => Enumerable.Range(0, Count).Select(x => this[x]).ToArray();
 
             public IEnumerator<ISGL_ModelFace> GetEnumerator() {
-                int length = Length;
+                int length = Count;
                 for (int i = 0; i < length; i++)
                     yield return this[i];
             }

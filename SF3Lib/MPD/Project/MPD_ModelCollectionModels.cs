@@ -16,7 +16,7 @@ namespace SF3.MPD.Project {
 
         private List<MPD_Model> _models;
 
-        public int Length => _models.Count;
+        public int Count => _models.Count;
         public IEnumerator<IMPD_Model> GetEnumerator() => _models.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _models.GetEnumerator();
     }

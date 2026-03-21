@@ -85,7 +85,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
             public PolygonStruct Polygon { get; }
 
-            public int Length => 4;
+            public int Count => 4;
             public int this[int index] {
                 get {
                     switch (index) {

@@ -218,12 +218,12 @@ namespace SF3.Win.OpenGL.MPD {
             if (sprites != null) {
                 foreach (var spriteId in spriteIds) {
                     var sprite = sprites.FirstOrDefault(x => x.Header.SpriteID == spriteId);
-                    if (sprite == null || !(sprite.AnimationTable?.Length >= 1))
+                    if (sprite == null || !(sprite.AnimationTable?.Count >= 1))
                         continue;
 
                     // Use the idle animation if it exists, otherwise fall back on the still frame.
-                    var anim = (sprite.AnimationTable.Length >= 2) ? sprite.AnimationTable[1] :
-                               (sprite.AnimationTable.Length >= 1) ? sprite.AnimationTable[0] : null;
+                    var anim = (sprite.AnimationTable.Count >= 2) ? sprite.AnimationTable[1] :
+                               (sprite.AnimationTable.Count >= 1) ? sprite.AnimationTable[0] : null;
                     if (anim == null)
                         continue;
 
@@ -235,7 +235,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                     // Get the frame used for that command.
                     var firstFrameIndex = aniCommand.Command;
-                    if (firstFrameIndex >= sprite.FrameTable.Length)
+                    if (firstFrameIndex >= sprite.FrameTable.Count)
                         continue;
 
                     int frameWidth  = sprite.Header.Width;
@@ -248,7 +248,7 @@ namespace SF3.Win.OpenGL.MPD {
                     int offsetX = 0;
                     for (int i = 0; i < dirCount; i++) {
                         var frameIndex = firstFrameIndex + i;
-                        var frame = (frameIndex < sprite.FrameTable.Length) ? sprite.FrameTable[frameIndex] : firstFrame;
+                        var frame = (frameIndex < sprite.FrameTable.Count) ? sprite.FrameTable[frameIndex] : firstFrame;
                         var frameImageData = frame.Texture.GetBitmapDataARGB8888().ToUInts().To2DArrayColumnMajor(frameWidth, frameHeight);
 
                         for (int y = 0; y < frameHeight; y++)

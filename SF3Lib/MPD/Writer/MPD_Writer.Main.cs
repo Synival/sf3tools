@@ -278,10 +278,10 @@ namespace SF3.MPD.Writer {
         }
 
         public uint WriteModelSwitchGroups(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
-            var offPositions = new uint[switchGroups.Length];
-            var onPositions = new uint[switchGroups.Length];
+            var offPositions = new uint[switchGroups.Count];
+            var onPositions = new uint[switchGroups.Count];
 
-            for (int i = 0; i < switchGroups.Length; i++) {
+            for (int i = 0; i < switchGroups.Count; i++) {
                 var switchGroup = switchGroups[i];
 
                 offPositions[i] = (uint) CurrentOffset;
@@ -297,7 +297,7 @@ namespace SF3.MPD.Writer {
 
             WriteToAlignTo(4);
             var pos = (uint) CurrentOffset;
-            for (int i = 0; i < switchGroups.Length; i++) {
+            for (int i = 0; i < switchGroups.Count; i++) {
                 var switchGroup = switchGroups[i];
                 WriteUInt((uint) switchGroup.Flag);
                 WriteMPDPointer(offPositions[i]);

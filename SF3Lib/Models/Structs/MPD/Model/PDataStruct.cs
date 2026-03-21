@@ -148,8 +148,8 @@ namespace SF3.Models.Structs.MPD.Model {
             public readonly PDataStruct PData;
             public readonly int Index;
 
-            public PolygonStruct Polygon => ((Index < PData.Polygons?.Length) == true) ? PData.Polygons[Index] : null;
-            public AttrStruct AttributeStruct => ((Index < PData.Attributes?.Length) == true) ? PData.Attributes[Index] : null;
+            public PolygonStruct Polygon => ((Index < PData.Polygons?.Count) == true) ? PData.Polygons[Index] : null;
+            public AttrStruct AttributeStruct => ((Index < PData.Attributes?.Count) == true) ? PData.Attributes[Index] : null;
         }
 
         private class MockFaceEnumerable : IIndexedEnumerableWithLength<ISGL_ModelFace> {
@@ -159,7 +159,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
             public MockFace[] Faces { get; }
 
-            public int Length => Faces.Length;
+            public int Count => Faces.Length;
             public ISGL_ModelFace this[int index] => Faces[index];
             public ISGL_ModelFace[] AsArray() => Faces;
 

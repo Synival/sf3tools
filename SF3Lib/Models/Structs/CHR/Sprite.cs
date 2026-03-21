@@ -285,7 +285,7 @@ namespace SF3.Models.Structs.CHR {
 
             // We want to add 'null' entries for empty animations, so build an array of animations
             // by AnimationIndex, with 'null' entries for missing indices.
-            var animationArraySize = AnimationTable.Length > 0 ? (AnimationTable.Max(x => x.AnimationIndex) + 1) : 0;
+            var animationArraySize = AnimationTable.Count > 0 ? (AnimationTable.Max(x => x.AnimationIndex) + 1) : 0;
             var animationArray = new Animation[animationArraySize];
             foreach (var animation in AnimationTable)
                 animationArray[animation.AnimationIndex] = animation;

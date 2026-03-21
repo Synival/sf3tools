@@ -64,7 +64,7 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         public IMPD_AnimationFrame GetFrame(int timeFrame) {
             return
-                AnimationFrameTable.Length == 0 ? null :
+                AnimationFrameTable.Count == 0 ? null :
                 _frameByTimeFrame.Length == 0 ? AnimationFrameTable[0] :
                 _frameByTimeFrame[MathHelpers.ActualMod(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
         }
@@ -113,7 +113,7 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: null, displayName: "# Frames", displayOrder: 4, isReadOnly: true)]
-        public int NumFrames => AnimationFrameTable?.Length ?? 0;
+        public int NumFrames => AnimationFrameTable?.Count ?? 0;
 
         [BulkCopy]
         [TableViewModelColumn(displayOrder: 5)]

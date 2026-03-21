@@ -31,7 +31,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(21, table[1].TargetX);
             Assert.AreEqual(21, table[1].TargetZ);
 
-            Assert.AreEqual(32, table.Length);
+            Assert.AreEqual(32, table.Count);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[2].Pointer);
             Assert.AreEqual(0, table[3].Pointer);
 
-            Assert.AreEqual(4, table.Length);
+            Assert.AreEqual(4, table.Count);
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[1].XPos1);
             Assert.AreEqual(63, table[1].ZPos1);
 
-            Assert.AreEqual(32, table.Length);
+            Assert.AreEqual(32, table.Count);
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(26, table[12].X);
             Assert.AreEqual(23, table[12].Z);
 
-            Assert.AreEqual(52, table.Length);
+            Assert.AreEqual(52, table.Count);
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x0B, table[1].Z1);
             Assert.AreEqual(0x1A, table[1].X2);
 
-            Assert.AreEqual(16, table.Length);
+            Assert.AreEqual(16, table.Count);
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(      0x00,  table[0].TriggerFlags);
             Assert.AreEqual(0x01000065u, table[0].Action);
 
-            Assert.AreEqual(2, table.Length);
+            Assert.AreEqual(2, table.Count);
         }
 
         [TestMethod]
@@ -141,7 +141,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0x25, table[2].Forest);
             Assert.AreEqual(0xFF, table[2].NoEntry);
 
-            Assert.AreEqual(14, table.Length);
+            Assert.AreEqual(14, table.Count);
         }
 
         [TestMethod]
@@ -159,7 +159,7 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(1, table[1].WarpTrigger);
             Assert.AreEqual(83, table[1].LoadID);
 
-            Assert.AreEqual(4, table.Length);
+            Assert.AreEqual(4, table.Count);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace SF3.Models.Files.MPD {
                         if (firstAttrAddr == 0 || !mc.AttrTablesByMemoryAddress.ContainsKey(firstAttrAddr))
                             continue;
                         var attr = mc.AttrTablesByMemoryAddress[firstAttrAddr];
-                        if (attr.Length != 1)
+                        if (attr.Count != 1)
                             continue;
 
                         // Get the tile at its location. Skip it if it's out of bounds.

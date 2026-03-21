@@ -86,8 +86,8 @@ namespace SF3.Models.Files.DAT {
                 }
             }
 
-            if (imageList.Count != DAT_File.TextureTable.Length)
-                throw new ArgumentException($"Imported spritesheet has {imageList.Count} image(s), but it should have {DAT_File.TextureTable.Length}");
+            if (imageList.Count != DAT_File.TextureTable.Count)
+                throw new ArgumentException($"Imported spritesheet has {imageList.Count} image(s), but it should have {DAT_File.TextureTable.Count}");
 
             return imageList.ToArray();
         }
@@ -206,7 +206,7 @@ namespace SF3.Models.Files.DAT {
             var heightPerImage = HeightPerImage;
 
             int count = 0;
-            int rowMax = (int) (Math.Ceiling((float) DAT_File.TextureTable.Length / ImagesPerRow) * ImagesPerRow);
+            int rowMax = (int) (Math.Ceiling((float) DAT_File.TextureTable.Count / ImagesPerRow) * ImagesPerRow);
             var backColor = ZeroIsTransparent ? (byte) 0 : (byte) Palette.GetClosestIndex(false, new PixelChannels() { R = 64, G = 64, B = 64 });
             var foreColor = (byte) Palette.GetClosestIndex(ZeroIsTransparent, new PixelChannels() { R = 128, G = 128, B = 128 });
 
@@ -214,7 +214,7 @@ namespace SF3.Models.Files.DAT {
                 var imageX = (count % ImagesPerRow) * widthPerImage;
                 var imageY = (count / ImagesPerRow) * heightPerImage;
 
-                var item = (i < DAT_File.TextureTable.Length) ? DAT_File.TextureTable[i] : null;
+                var item = (i < DAT_File.TextureTable.Count) ? DAT_File.TextureTable[i] : null;
                 var itemImageData = item?.ImageData8Bit;
 
                 // Copy images that exist to the spritesheet.
@@ -256,7 +256,7 @@ namespace SF3.Models.Files.DAT {
             var heightPerImage = HeightPerImage;
 
             int count = 0;
-            int rowMax = (int) (Math.Ceiling((float) DAT_File.TextureTable.Length / ImagesPerRow) * ImagesPerRow);
+            int rowMax = (int) (Math.Ceiling((float) DAT_File.TextureTable.Count / ImagesPerRow) * ImagesPerRow);
             var backColor = new PixelChannels() { R =  64, G =  64, B =  64, A = 255 }.ToABGR1555();
             var foreColor = new PixelChannels() { R = 128, G = 128, B = 128, A = 255 }.ToABGR1555();
 
@@ -264,7 +264,7 @@ namespace SF3.Models.Files.DAT {
                 var imageX = (count % ImagesPerRow) * widthPerImage;
                 var imageY = (count / ImagesPerRow) * heightPerImage;
 
-                var item = (i < DAT_File.TextureTable.Length) ? DAT_File.TextureTable[i] : null;
+                var item = (i < DAT_File.TextureTable.Count) ? DAT_File.TextureTable[i] : null;
                 var itemImageData = (item?.PixelFormat == TexturePixelFormat.ABGR1555)
                     ? item?.ImageData16Bit
                     : (item?.ImageData8Bit?.To1DArray()?.ConvertIndexedToABGR1555(item.Palette, ZeroIsTransparent)?.To2DArray(item.Width, item.Height));
@@ -355,7 +355,7 @@ namespace SF3.Models.Files.DAT {
         }
 
         private void UpdateHeight()
-            => Height = (int) (Math.Ceiling(DAT_File.TextureTable.Length / (float) ImagesPerRow) * HeightPerImage);
+            => Height = (int) (Math.Ceiling(DAT_File.TextureTable.Count / (float) ImagesPerRow) * HeightPerImage);
 
         public bool MinimalChangesWhenSetting { get; set; } = false;
 

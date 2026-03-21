@@ -34,7 +34,7 @@ namespace SF3.Models.Tables.Shared {
 
         public IByteData Data => StatsTable.Data;
         public int Address => StatsTable.Address;
-        public int Length => StatsTable.Length;
+        public int Count => StatsTable.Count;
         public int SizeInBytes => StatsTable.SizeInBytes;
         public int TerminatorSize => StatsTable.TerminatorSize;
         public int SizeInBytesPlusTerminator => StatsTable.SizeInBytesPlusTerminator;

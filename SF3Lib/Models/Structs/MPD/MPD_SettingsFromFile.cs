@@ -161,7 +161,7 @@ namespace SF3.Models.Structs.MPD {
         }
 
         public bool IsGradientDummiedOut {
-            get => (MPD_File.GradientTable?.Length == 1) && MPD_File.GradientTable[0].IsDummiedOut;
+            get => (MPD_File.GradientTable?.Count == 1) && MPD_File.GradientTable[0].IsDummiedOut;
             set {}
         }
 

@@ -38,7 +38,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(12, file.MonsterTable[1].Attack);
                 // TODO: maybe more data?
 
-                Assert.AreEqual(testCase.ExpectedRows, file.MonsterTable.Length);
+                Assert.AreEqual(testCase.ExpectedRows, file.MonsterTable.Count);
             });
         }
     }

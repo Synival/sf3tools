@@ -54,7 +54,7 @@ namespace SF3.MPD.Project {
 
             public IMPD_ModelLoD this[int index] {
                 get {
-                    if (index < 0 || index >= Length)
+                    if (index < 0 || index >= Count)
                         throw new ArgumentOutOfRangeException(nameof(index));
                     if (!_models.ContainsKey(index))
                         _models[index] = new MPD_ModelLoD(ModelWithLoD._actualModel, ModelWithLoD.Collection, ModelWithLoD.ModelID, index);
@@ -62,12 +62,12 @@ namespace SF3.MPD.Project {
                 }
             }
 
-            public int Length => ModelWithLoD.LevelsOfDetail;
+            public int Count => ModelWithLoD.LevelsOfDetail;
 
             public IMPD_ModelLoD[] AsArray() => throw new System.NotImplementedException();
 
             public IEnumerator<IMPD_ModelLoD> GetEnumerator() {
-                var levelsOfDetail = Length;
+                var levelsOfDetail = Count;
                 for (int i = 0; i < levelsOfDetail; i++)
                     yield return this[i];
             }

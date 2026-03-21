@@ -135,9 +135,9 @@ namespace SF3.Models.Files.MPD {
         public IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups => ModelSwitchGroupsTable;
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
-        public IRectangleShort CameraBoundaries => (BoundariesTable?.Length >= 1) ? BoundariesTable[0] : null;
-        public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Length >= 2) ? BoundariesTable[1] : null;
-        public IMPD_Gradient Gradient => (GradientTable?.Length > 0) ? GradientTable[0] : null;
+        public IRectangleShort CameraBoundaries => (BoundariesTable?.Count >= 1) ? BoundariesTable[0] : null;
+        public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Count >= 2) ? BoundariesTable[1] : null;
+        public IMPD_Gradient Gradient => (GradientTable?.Count > 0) ? GradientTable[0] : null;
 
         public IIndexedEnumerableWithLength<byte> GroundAnimationData => GroundAnimationTable;
         public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 => Unknown1Table;

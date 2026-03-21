@@ -10,7 +10,7 @@ namespace CommonLib.Extensions {
 
             public List<T> List { get; }
 
-            public int Length => List.Count;
+            public int Count => List.Count;
             public IEnumerator<T> GetEnumerator() => List.GetEnumerator();
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }

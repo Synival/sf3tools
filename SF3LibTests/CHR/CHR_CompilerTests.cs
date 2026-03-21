@@ -42,7 +42,7 @@ namespace SF3.Tests.CHR
             var compiler = new CHR_Compiler();
             var chrFile  = compiler.Compile(emptyCHR, nameGetterContext, nameGetterContext.Scenario);
 
-            Assert.AreEqual(0, chrFile.SpriteTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable.Count);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace SF3.Tests.CHR
             var compiler = new CHR_Compiler();
             var chrFile  = compiler.Compile(minimalCHR, nameGetterContext, nameGetterContext.Scenario);
 
-            Assert.AreEqual(1, chrFile.SpriteTable.Length);
+            Assert.AreEqual(1, chrFile.SpriteTable.Count);
 
             var sprite = chrFile.SpriteTable[0];
             Assert.AreEqual(0, sprite.Header.SpriteID);
@@ -75,17 +75,17 @@ namespace SF3.Tests.CHR
             var compiler = new CHR_Compiler();
             var chrFile  = compiler.Compile(twoEmptySpriteCHR, nameGetterContext, nameGetterContext.Scenario);
 
-            Assert.AreEqual(2, chrFile.SpriteTable.Length);
+            Assert.AreEqual(2, chrFile.SpriteTable.Count);
 
-            Assert.AreEqual(0, chrFile.SpriteTable[0].FrameTable.Length);
-            Assert.AreEqual(16, chrFile.SpriteTable[0].AnimationOffsetTable.Length);
-            Assert.AreEqual(0, chrFile.SpriteTable[0].AnimationTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable[0].FrameTable.Count);
+            Assert.AreEqual(16, chrFile.SpriteTable[0].AnimationOffsetTable.Count);
+            Assert.AreEqual(0, chrFile.SpriteTable[0].AnimationTable.Count);
             for (int i = 0; i < 16; i++)
                 Assert.AreEqual(0u, chrFile.SpriteTable[0].AnimationOffsetTable[i].Offset);
 
-            Assert.AreEqual(0, chrFile.SpriteTable[1].FrameTable.Length);
-            Assert.AreEqual(16, chrFile.SpriteTable[1].AnimationOffsetTable.Length);
-            Assert.AreEqual(0, chrFile.SpriteTable[1].AnimationTable.Length);
+            Assert.AreEqual(0, chrFile.SpriteTable[1].FrameTable.Count);
+            Assert.AreEqual(16, chrFile.SpriteTable[1].AnimationOffsetTable.Count);
+            Assert.AreEqual(0, chrFile.SpriteTable[1].AnimationTable.Count);
             for (int i = 0; i < 16; i++)
                 Assert.AreEqual(0u, chrFile.SpriteTable[1].AnimationOffsetTable[i].Offset);
         }

@@ -50,7 +50,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public IMPD_CollisionPoint Point1 {
             get {
                 var index = Point1Index;
-                return (index >= 0 && index < PointTable.Length) ? PointTable[index] : null;
+                return (index >= 0 && index < PointTable.Count) ? PointTable[index] : null;
             }
             set => Point1Index = (ushort) ((value as CollisionPoint)?.ID ?? 0);
         }
@@ -58,7 +58,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public IMPD_CollisionPoint Point2 {
             get {
                 var index = Point2Index;
-                return (index >= 0 && index < PointTable.Length) ? PointTable[index] : null;
+                return (index >= 0 && index < PointTable.Count) ? PointTable[index] : null;
             }
             set => Point2Index = (ushort) ((value as CollisionPoint)?.ID ?? 0);
         }

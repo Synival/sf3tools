@@ -100,7 +100,7 @@ namespace CHRTool {
                         else {
                             Logger.WriteLine("Frames:");
                             using (Logger.IndentedSection()) {
-                                var frameCount = sprite.FrameTable.Length;
+                                var frameCount = sprite.FrameTable.Count;
 
                                 // Function to label frames that are in sequence of a frame group.
                                 var dirCounts = new int[frameCount];

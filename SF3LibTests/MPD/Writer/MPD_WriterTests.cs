@@ -77,8 +77,8 @@ namespace SF3.Tests.MPD.Writer {
                 else {
                     if (origTexCollection.TextureHeaderTable[0].TextureIdStart != newTexCollection.TextureHeaderTable[0].TextureIdStart)
                         errors.Add($"Chunk[{chunkIndex}] first ID is wrong: should be 0x{origTexCollection.TextureHeaderTable[0].TextureIdStart:X2}, is 0x{newTexCollection.TextureHeaderTable[0].TextureIdStart:X2}");
-                    if (origTexCollection.TextureTable.Length != newTexCollection.TextureTable.Length)
-                        errors.Add($"Chunk[{chunkIndex}] texture count is wrong: should be {origTexCollection.TextureTable.Length}, is {newTexCollection.TextureTable.Length}");
+                    if (origTexCollection.TextureTable.Count != newTexCollection.TextureTable.Count)
+                        errors.Add($"Chunk[{chunkIndex}] texture count is wrong: should be {origTexCollection.TextureTable.Count}, is {newTexCollection.TextureTable.Count}");
                 }
             }
 
