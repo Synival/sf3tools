@@ -76,59 +76,41 @@ namespace SF3.MPD.Project {
             }
         }
 
+        private void SetAndUpdateModified<T>(ref T field, T newValue) where T : struct {
+            if (field.Equals(newValue))
+                return;
+            field = newValue;
+            Modified?.Invoke(this, EventArgs.Empty);
+        }
+
         private byte _unknownTextureFlags;
         public byte UnknownTextureFlags {
             get => _unknownTextureFlags;
-            set {
-                if (_unknownTextureFlags != value) {
-                    _unknownTextureFlags = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _unknownTextureFlags, value);
         }
 
         private byte _textureId;
         public byte TextureID {
             get => _textureId;
-            set {
-                if (_textureId != value) {
-                    _textureId = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _textureId, value);
         }
 
         private TextureFlipType _textureFlip;
         public TextureFlipType TextureFlip {
             get => _textureFlip;
-            set {
-                if (_textureFlip != value) {
-                    _textureFlip = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _textureFlip, value);
         }
 
         private TextureRotateType _textureRotate;
         public TextureRotateType TextureRotate {
             get => _textureRotate;
-            set {
-                if (_textureRotate != value) {
-                    _textureRotate = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _textureRotate, value);
         }
 
         private bool _isFlat;
         public bool IsFlat {
             get => _isFlat;
-            set {
-                if (_isFlat != value) {
-                    _isFlat = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _isFlat, value);
         }
 
         private byte? _centerHeight = null;
@@ -143,34 +125,19 @@ namespace SF3.MPD.Project {
         private TerrainType _terrainType;
         public TerrainType TerrainType {
             get => _terrainType;
-            set {
-                if (_terrainType != value) {
-                    _terrainType = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _terrainType, value);
         }
 
         private TerrainFlags _terrainFlags;
         public TerrainFlags TerrainFlags {
             get => _terrainFlags;
-            set {
-                if (_terrainFlags != value) {
-                    _terrainFlags = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _terrainFlags, value);
         }
 
         private byte _eventId;
         public byte EventID {
             get => _eventId;
-            set {
-                if (_eventId != value) {
-                    _eventId = value;
-                    Modified?.Invoke(this, EventArgs.Empty);
-                }
-            }
+            set => SetAndUpdateModified(ref _eventId, value);
         }
 
         public byte GetVertexHeight(CornerType corner) {
