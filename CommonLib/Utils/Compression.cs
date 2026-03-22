@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib.Extensions;
 
 namespace CommonLib.Utils {
     /// <summary>
@@ -177,11 +176,20 @@ breakEntireLoop:
             int outPos = 1;
             int controlCounter = 0;
 
+            var head = new int[65536];
+            var chain = new int[inputLen];
+            for (int i = 0; i < 65536; i++)
+                head[i] = -1;
+
             unsafe {
             fixed(ushort* pInput = input, pOutput = output) {
 
-            // Build a hash table for all inputs. This will make longest common prefix lookups *much* faster.
-            var hashIndices = BuildHashIndices(pInput, inputLen);
+            void AdvanceInput(ushort* p) {
+                var hash = (ushort) ((p[inPos] << 16) | p[inPos + 1]);
+                chain[inPos] = head[hash];
+                head[hash] = inPos;
+                inPos++;
+            }
 
             while (inPos < inputLen) {
                 // Initialize "best match" values that indicate "no match found".
@@ -189,43 +197,31 @@ breakEntireLoop:
                 int bestMatchPos = -1;
 
                 if (inPos < inputLen - 1) {
-                    var hash = (uint) (pInput[inPos] << 16) | pInput[inPos + 1];
+                    var hash = (ushort) ((pInput[inPos] << 16) | pInput[inPos + 1]);
 
-                    if (hashIndices.TryGetValue(hash, out var hashMatches)) {
-                        // Look for the largest dictionary match that's occurred so far in the data.
-                        // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
-                        var searchLimit = inPos - windowSize + 1;
-                        for (int searchPosIndex = hashMatches.Length - 1; searchPosIndex >= 0; searchPosIndex--) {
-                            var searchPos = hashMatches[searchPosIndex];
-                            if (searchPos >= inPos)
-                                continue;
-                            if (searchPos < searchLimit)
-                                break;
+                    var searchLimit = Math.Max(-1, inPos - windowSize);
+                    for (var searchPos = head[hash]; searchPos > searchLimit; searchPos = chain[searchPos]) {
+                        // Get the length of matching data for data at this position.
+                        int matchLen = 0;
+                        int currentPosSub = inPos;
+                        int searchPosSub = searchPos;
 
-                            // Get the length of matching data for data at this position.
-                            int matchLen = 0;
-                            {
-                                int currentPosSub = inPos;
-                                int searchPosSub = searchPos;
-
-                                var distToEnd = Math.Min(MAX_COPY_LENGTH, Math.Min(inputLen - currentPosSub, inputLen - searchPosSub));
-                                while (matchLen < distToEnd && pInput[currentPosSub] == pInput[searchPosSub]) {
-                                    currentPosSub++;
-                                    searchPosSub++;
-                                    matchLen++;
-                                }
-                            }
-
-                            // If this is the new best match, take note of the offset and number of matches.
-                            if (matchLen > bestMatchLen) {
-                                bestMatchPos = searchPos;
-                                bestMatchLen = matchLen;
-                            }
-
-                            // If this is the max size for a match, stop searching -- it's impossible to get any better than this.
-                            if (matchLen == MAX_COPY_LENGTH)
-                                break;
+                        var distToEnd = Math.Min(MAX_COPY_LENGTH, Math.Min(inputLen - currentPosSub, inputLen - searchPosSub));
+                        while (matchLen < distToEnd && pInput[currentPosSub] == pInput[searchPosSub]) {
+                            currentPosSub++;
+                            searchPosSub++;
+                            matchLen++;
                         }
+
+                        // If this is the new best match, take note of the offset and number of matches.
+                        if (matchLen > bestMatchLen) {
+                            bestMatchPos = searchPos;
+                            bestMatchLen = matchLen;
+                        }
+
+                        // If this is the max size for a match, stop searching -- it's impossible to get any better than this.
+                        if (matchLen == MAX_COPY_LENGTH)
+                            break;
                     }
                 }
 
@@ -234,11 +230,14 @@ breakEntireLoop:
                     var matchOffset = inPos - bestMatchPos;
                     pOutput[outPos++] = (ushort) ((matchOffset << 5) | ((bestMatchLen - 2) & 0x1F));
                     currentControl |= (ushort) (1 << (15 - controlCounter));
-                    inPos += bestMatchLen;
+                    for (int i = 0; i < bestMatchLen; i++)
+                        AdvanceInput(pInput);
                 }
                 // Otherwise, append a "literal" value.
-                else
-                    pOutput[outPos++] = pInput[inPos++];
+                else {
+                    pOutput[outPos++] = pInput[inPos];
+                    AdvanceInput(pInput);
+                }
 
                 // Move to the next "control" bit.
                 controlCounter++;
@@ -267,33 +266,6 @@ breakEntireLoop:
 
             } // fixed
             } // unsafe
-        }
-
-        private static unsafe Dictionary<uint, int[]> BuildHashIndices(ushort* pInput, int inputLen) {
-            var inputMax = inputLen - 1;
-            var hashIndexCount = new Dictionary<uint, int>(inputLen / 2);
-            for (var i = 0; i < inputMax - 1; i++) {
-                var hash = (uint) (pInput[i] << 16) | pInput[i + 1];
-                if (!hashIndexCount.ContainsKey(hash))
-                    hashIndexCount.Add(hash, 1);
-                else
-                    hashIndexCount[hash]++;
-            }
-
-            var hashIndices = new Dictionary<uint, int[]>(hashIndexCount.Count);
-            for (var i = 0; i < inputMax - 1; i++) {
-                var hash = (uint) (pInput[i] << 16) | pInput[i + 1];
-                var remaining = hashIndexCount[hash];
-                hashIndexCount[hash]--;
-
-                if (!hashIndices.TryGetValue(hash, out var values)) {
-                    values = new int[remaining];
-                    hashIndices[hash] = values;
-                }
-                values[values.Length - remaining] = i;
-            }
-
-            return hashIndices;
         }
 
         /// <summary>
