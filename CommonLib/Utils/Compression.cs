@@ -150,7 +150,7 @@ breakEntireLoop:
         /// <param name="optimize">When true, the maximum allowed window size (0x0800) is used instead of what SF3 appears to use (0x07E0).
         /// This is slightly more optimized for larger files, but produces many more differences and may not be compatible.</param>
         /// <returns>An array of words compressed with LZSS encoding.</returns>
-        public static ushort[] CompressLZSS(ushort[] data, bool optimize = false) {
+        public static ushort[] CompressLZSS(ushort[] input, bool optimize = false) {
             // The "copy length" segment of the data is 5-bits (max value 0x1F). The number of words to copy is:
             //     copyLength + 2
             // ...the max value of which is 0x21 (33).
@@ -158,6 +158,8 @@ breakEntireLoop:
 
             // Copy values must be at least 2 words.
             const int MIN_COPY_LENGTH = 2;
+
+            var inputLen = input.Length;
 
             // Maximum possible value for the copy offset is 0x0800 (11 bits, so 0x01 << 11).
             // However, it looks like the SF3 compression chose 0x07E0 for its max value, for some reason.
@@ -167,39 +169,39 @@ breakEntireLoop:
             // gamble: will we ever end up with that catastrophic state where we compress the file bigger than it originally was?
             // (gamble lost -- for low sizes like 4 bytes, the compressed version is actually larger, by double.
             //  let's add at least 8 bytes.)
-            ushort[] outputArray = new ushort[(int) (data.Length * 1.25) + 8];
+            ushort[] output = new ushort[(int) (inputLen * 1.25) + 8];
 
-            int pos = 0;
+            int inPos = 0;
             ushort currentControl = 0;
             int controlPos = 0;
             int outPos = 1;
             int controlCounter = 0;
 
-            int GetMatchLen(int currentPos, int searchPos) {
-                int currentPosSub = currentPos;
-                int searchPosSub = searchPos;
-                int matchLen = 0;
+            unsafe {
+            fixed(ushort* pInput = input, pOutput = output) {
 
-                while (matchLen < MAX_COPY_LENGTH && currentPosSub < data.Length && searchPosSub < data.Length && data[currentPosSub] == data[searchPosSub]) {
-                    currentPosSub++;
-                    searchPosSub++;
-                    matchLen++;
-                }
-
-                return matchLen;
-            }
-
-            while (pos < data.Length) {
+            while (inPos < inputLen) {
                 // Initialize "best match" values that indicate "no match found".
                 int bestMatchLen = MIN_COPY_LENGTH - 1;
                 int bestMatchPos = -1;
 
                 // Look for the largest dictionary match that's occurred so far in the data.
                 // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
-                var searchLimit = pos - windowSize;
-                for (int searchPos = pos - 1; searchPos >= 0 && searchPos > searchLimit; searchPos--) {
+                var searchLimit = inPos - windowSize;
+                for (int searchPos = inPos - 1; searchPos >= 0 && searchPos > searchLimit; searchPos--) {
                     // Get the length of matching data for data at this position.
-                    var matchLen = GetMatchLen(pos, searchPos);
+                    int matchLen = 0;
+                    {
+                        int currentPosSub = inPos;
+                        int searchPosSub = searchPos;
+
+                        var distToEnd = Math.Min(MAX_COPY_LENGTH, Math.Min(inputLen - currentPosSub, inputLen - searchPosSub));
+                        while (matchLen < distToEnd && pInput[currentPosSub] == pInput[searchPosSub]) {
+                            currentPosSub++;
+                            searchPosSub++;
+                            matchLen++;
+                        }
+                    }
 
                     // If this is the new best match, take note of the offset and number of matches.
                     if (matchLen > bestMatchLen) {
@@ -214,21 +216,21 @@ breakEntireLoop:
 
                 // If a match was found, append a "copy" value.
                 if (bestMatchPos != -1) {
-                    var matchOffset = pos - bestMatchPos;
-                    outputArray[outPos++] = (ushort) ((matchOffset << 5) | ((bestMatchLen - 2) & 0x1F));
+                    var matchOffset = inPos - bestMatchPos;
+                    pOutput[outPos++] = (ushort) ((matchOffset << 5) | ((bestMatchLen - 2) & 0x1F));
                     currentControl |= (ushort) (1 << (15 - controlCounter));
-                    pos += bestMatchLen;
+                    inPos += bestMatchLen;
                 }
                 // Otherwise, append a "literal" value.
                 else
-                    outputArray[outPos++] = data[pos++];
+                    pOutput[outPos++] = pInput[inPos++];
 
                 // Move to the next "control" bit.
                 controlCounter++;
 
                 // If all "control" bits have been filled, commit the "control" value and move to the next one.
                 if (controlCounter == 16) {
-                    outputArray[controlPos] = currentControl;
+                    pOutput[controlPos] = currentControl;
                     controlPos = outPos++;
 
                     currentControl = 0;
@@ -237,18 +239,19 @@ breakEntireLoop:
             }
 
             // Write 0x0000 with a set control bit to indicate end-of-data.
-            outputArray[outPos++] = 0;
+            pOutput[outPos++] = 0;
 
             currentControl |= (ushort) (1 << (15 - controlCounter));
-            outputArray[controlPos] = currentControl;
+            pOutput[controlPos] = currentControl;
 
             var outputTrimmed = new ushort[outPos];
-            unsafe {
-                fixed (void* outputArrayPtr = outputArray, outputTrimmedPtr = outputTrimmed)
-                    Buffer.MemoryCopy(outputArrayPtr, outputTrimmedPtr, outPos * sizeof(ushort), outPos * sizeof(ushort));
-            }
+            fixed (ushort* pOutputTrimmed = outputTrimmed)
+                Buffer.MemoryCopy(pOutput, pOutputTrimmed, outPos * sizeof(ushort), outPos * sizeof(ushort));
 
             return outputTrimmed;
+
+            } // fixed
+            } // unsafe
         }
 
         /// <summary>
