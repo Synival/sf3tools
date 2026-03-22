@@ -109,11 +109,12 @@ namespace CommonLib.Utils {
             int Clamp(int num, int min, int max) => Math.Min(Math.Max(num, min), max);
             int blockNum = (Clamp(vertexY, 0, 63) / 4) * 16 + (Clamp(vertexX, 0, 63) / 4);
 
-            var locations = new List<BlockVertexLocation>();
+            var locations = new BlockVertexLocation[4];
+            int locationIndex = 0;
 
             void AddBlockVertexLocation(int blockNum2, int bx2, int by2) {
                 if (onlyInBlockNum.HasValue ? (blockNum2 == onlyInBlockNum.Value) : true)
-                    locations.Add(new BlockVertexLocation(blockNum2, bx2, by2));
+                    locations[locationIndex++] = new BlockVertexLocation(blockNum2, bx2, by2);
             }
             AddBlockVertexLocation(blockNum, bx, by);
 
@@ -125,7 +126,8 @@ namespace CommonLib.Utils {
             if (bx == 0 && by == 0 && vertexX > 0 && vertexY > 0)
                 AddBlockVertexLocation(blockNum - 17, 4, 4);
 
-            return locations.ToArray();
+            Array.Resize(ref locations, locationIndex);
+            return locations;
         }
     }
 }

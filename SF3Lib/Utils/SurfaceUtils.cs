@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using CommonLib.SGL;
 using CommonLib.Types;
 
@@ -68,48 +67,50 @@ namespace SF3.Utils {
         }
 
         public static TileAndCorner[] GetSharedTilesAtCorner(int tx, int ty, CornerType corner) {
-            TileAndCorner[] GetUnfiltered() {
-                switch (corner) {
-                    case CornerType.TopLeft:
-                        return new TileAndCorner[] {
-                            new TileAndCorner { X = tx,     Y = ty,     Corner = corner },
-                            new TileAndCorner { X = tx - 1, Y = ty + 1, Corner = CornerType.BottomRight },
-                            new TileAndCorner { X = tx - 1, Y = ty + 0, Corner = CornerType.TopRight },
-                            new TileAndCorner { X = tx - 0, Y = ty + 1, Corner = CornerType.BottomLeft },
-                        };
+            var tileAndCorners = new TileAndCorner[4];
+            var index = 0;
 
-                    case CornerType.TopRight:
-                        return new TileAndCorner[] {
-                            new TileAndCorner { X = tx,     Y = ty,     Corner = corner },
-                            new TileAndCorner { X = tx + 1, Y = ty + 1, Corner = CornerType.BottomLeft },
-                            new TileAndCorner { X = tx + 1, Y = ty + 0, Corner = CornerType.TopLeft },
-                            new TileAndCorner { X = tx + 0, Y = ty + 1, Corner = CornerType.BottomRight },
-                        };
-
-                    case CornerType.BottomRight:
-                        return new TileAndCorner[] {
-                            new TileAndCorner { X = tx,     Y = ty,     Corner = corner },
-                            new TileAndCorner { X = tx + 1, Y = ty - 1, Corner = CornerType.TopLeft },
-                            new TileAndCorner { X = tx + 1, Y = ty - 0, Corner = CornerType.BottomLeft },
-                            new TileAndCorner { X = tx + 0, Y = ty - 1, Corner = CornerType.TopRight },
-                        };
-
-                    case CornerType.BottomLeft:
-                        return new TileAndCorner[] {
-                            new TileAndCorner { X = tx,     Y = ty,     Corner = corner },
-                            new TileAndCorner { X = tx - 1, Y = ty - 1, Corner = CornerType.TopRight },
-                            new TileAndCorner { X = tx - 1, Y = ty - 0, Corner = CornerType.BottomRight },
-                            new TileAndCorner { X = tx - 0, Y = ty - 1, Corner = CornerType.TopLeft },
-                        };
-
-                    default:
-                        throw new ArgumentException(nameof(corner));
-                }
+            void AddTileAndCorner(int x, int y, CornerType c) {
+                if (x >= 0 && y >= 0 && x < 64 && y < 64)
+                    tileAndCorners[index++] = new TileAndCorner() { X = x, Y = y, Corner = c };
             }
 
-            return GetUnfiltered()
-                .Where(x => x.X >= 0 && x.Y >= 0 && x.X < 64 && x.Y < 64)
-                .ToArray();
+            switch (corner) {
+                case CornerType.TopLeft:
+                    AddTileAndCorner(tx,     ty,     corner);
+                    AddTileAndCorner(tx - 1, ty + 1, CornerType.BottomRight);
+                    AddTileAndCorner(tx - 1, ty + 0, CornerType.TopRight);
+                    AddTileAndCorner(tx - 0, ty + 1, CornerType.BottomLeft);
+                    break;
+
+                case CornerType.TopRight:
+                    AddTileAndCorner(tx,     ty,     corner);
+                    AddTileAndCorner(tx + 1, ty + 1, CornerType.BottomLeft);
+                    AddTileAndCorner(tx + 1, ty + 0, CornerType.TopLeft);
+                    AddTileAndCorner(tx + 0, ty + 1, CornerType.BottomRight);
+                    break;
+
+                case CornerType.BottomRight:
+                    AddTileAndCorner(tx,     ty,     corner);
+                    AddTileAndCorner(tx + 1, ty - 1, CornerType.TopLeft);
+                    AddTileAndCorner(tx + 1, ty - 0, CornerType.BottomLeft);
+                    AddTileAndCorner(tx + 0, ty - 1, CornerType.TopRight);
+                    break;
+
+                case CornerType.BottomLeft:
+                    AddTileAndCorner(tx,     ty,     corner);
+                    AddTileAndCorner(tx - 1, ty - 1, CornerType.TopRight);
+                    AddTileAndCorner(tx - 1, ty - 0, CornerType.BottomRight);
+                    AddTileAndCorner(tx - 0, ty - 1, CornerType.TopLeft);
+                    break;
+
+                default:
+                    throw new ArgumentException(nameof(corner));
+            }
+
+            if (index != 4)
+                Array.Resize(ref tileAndCorners, index);
+            return tileAndCorners;
         }
 
         /// <summary>
