@@ -80,7 +80,6 @@ namespace SF3.Win.Controls {
             // 
             // toolStrip1
             // 
-            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbDrawSurfaceModel, tsbDrawModels, tsbDrawExtraModels, tsbDrawGround, tsbDrawSky, tsbRunAnimations, tsbApplyLighting, tsbDrawGradients, tsbDrawActors, tsbSeparator1, tsbToggleWireframe, tsbToggleBoundaries, tsbToggleBattleZones, tsbToggleTerrainType, tsbToggleEventID, tsbToggleCollisions, tsbHideModelsNotFacingCamera, tsbApplyShadowTags, tsbApplyHideTags, tsbSeparator2, tsbRenderOnBlackBackground, tsbToggleNormals, tsbRotateSpritesUp, tsbSeparator3, tsbCameraReset, tsbCameraTopView, tsbCameraLookAtCenter });
@@ -375,7 +374,6 @@ namespace SF3.Win.Controls {
             // 
             // toolStrip2
             // 
-            toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
             toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsbCursorSelect, tsbCursorNavigate, tsbSeparator4, tsbDrawGrassland, tsbDrawDirt, tsbDrawDarkGrass, tsbDrawForest, tsbDrawBrownMountain, tsbDrawGreyMountain, tsbDrawMountainPeak, tsbDrawDesert, tsbDrawRiver, tsbDrawBridge, tsbDrawWater, tsbDrawNoEntry, tsbSeparator5, tsbFixTiles });
@@ -573,7 +571,6 @@ namespace SF3.Win.Controls {
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.SystemColors.Control;
             Controls.Add(selectionPanel);
             Controls.Add(mpdViewerGLControl1);
             Controls.Add(toolStrip2);
