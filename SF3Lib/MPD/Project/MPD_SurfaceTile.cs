@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using CommonLib.Types;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
@@ -38,8 +37,9 @@ namespace SF3.MPD.Project {
                 _vertexHeights = (byte[]) (heights.Clone());
 
             var allCorners = (CornerType[]) Enum.GetValues(typeof(CornerType));
-            _sharedTileLocations = allCorners
-                .ToDictionary(c => c, c => GetSharedTilesAtCorner(X, Y, c));
+
+            for (int c = 0; c < 4; ++c)
+                _sharedTileLocations[c] = GetSharedTilesAtCorner(X, Y, (CornerType) c);
         }
 
         public MPD_SurfaceTile(IMPD_Surface surface, IMPD_SurfaceTile original, int x, int y) {
@@ -219,11 +219,11 @@ namespace SF3.MPD.Project {
         public TileAndCorner[] GetSharedVerticesAtCorner(CornerType corner) {
             // Flat tiles have nothing linked.
             if (IsFlat)
-                return new TileAndCorner[] { _sharedTileLocations[corner][0] };
+                return new TileAndCorner[] { _sharedTileLocations[(int) corner][0] };
 
             // Otherwise, this vertex is shared with all other adjacent non-flat tiles.
             var tiles = new List<TileAndCorner>();
-            foreach (var tile in _sharedTileLocations[corner]) {
+            foreach (var tile in _sharedTileLocations[(int) corner]) {
                 var tileObj = Surface.GetTile(tile.X, tile.Y);
                 if (tileObj != null && tileObj == this || !tileObj.IsFlat)
                     tiles.Add(tile);
@@ -233,7 +233,7 @@ namespace SF3.MPD.Project {
         }
 
         private byte[] _vertexHeights = new byte[4];
-        private Dictionary<CornerType, TileAndCorner[]> _sharedTileLocations { get; }
+        private readonly TileAndCorner[][] _sharedTileLocations = new TileAndCorner[4][];
 
         public event EventHandler Modified;
     }

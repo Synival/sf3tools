@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using CommonLib.Types;
-using CommonLib.Utils;
 using SF3.MPD;
 using SF3.MPD.Interfaces;
+using static CommonLib.Utils.BlockHelpers;
 using static SF3.Utils.SurfaceUtils;
 
 namespace SF3.Models.Files.MPD {
@@ -14,15 +12,13 @@ namespace SF3.Models.Files.MPD {
             X = x;
             Y = y;
 
-            var allCorners = (CornerType[]) Enum.GetValues(typeof(CornerType));
-            BlockLocation = BlockHelpers.GetTileBlockLocation(x, y);
+            BlockLocation = GetTileBlockLocation(x, y);
 
-            _sharedTileLocations = allCorners
-                .ToDictionary(c => c, c => GetSharedTilesAtCorner(X, Y, c));
-            _blockVertexLocations = allCorners
-                .ToDictionary(c => c, c => BlockHelpers.GetVertexBlockLocations(X, Y, c, onlyInBlock: true)[0]);
-            _sharedBlockVertexLocations = allCorners
-                .ToDictionary(c => c, c => BlockHelpers.GetVertexBlockLocations(X, Y, c, onlyInBlock: false));
+            for (int c = 0; c < 4; ++c) {
+                _sharedTileLocations[c] = GetSharedTilesAtCorner(X, Y, (CornerType) c);
+                _blockVertexLocations[c] = GetVertexBlockLocations(X, Y, (CornerType) c, onlyInBlock: true)[0];
+                _sharedBlockVertexLocations[c] = GetVertexBlockLocations(X, Y, (CornerType) c, onlyInBlock: false);
+            }
 
             RandomSeed = MPD_TileSeeds.GetTileSeed(x, y);
         }
@@ -32,12 +28,12 @@ namespace SF3.Models.Files.MPD {
         public int X { get; }
         public int Y { get; }
         public int RandomSeed { get; private set; }
-        public BlockHelpers.BlockTileLocation BlockLocation { get; }
+        public BlockTileLocation BlockLocation { get; }
 
         public event EventHandler Modified;
 
-        private Dictionary<CornerType, TileAndCorner[]> _sharedTileLocations { get; }
-        private Dictionary<CornerType, BlockHelpers.BlockVertexLocation> _blockVertexLocations { get; }
-        private Dictionary<CornerType, BlockHelpers.BlockVertexLocation[]> _sharedBlockVertexLocations { get; }
+        private readonly TileAndCorner[][] _sharedTileLocations = new TileAndCorner[4][];
+        private readonly BlockVertexLocation[] _blockVertexLocations = new BlockVertexLocation[4];
+        private readonly BlockVertexLocation[][] _sharedBlockVertexLocations = new BlockVertexLocation[4][];
     }
 }

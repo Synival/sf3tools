@@ -14,7 +14,7 @@ namespace SF3.Models.Files.MPD {
 
             // The model to show should come from the surface model.
             if (MPD_File.SurfaceModelChunk?.VertexHeightBlockTable != null) {
-                var bvl = _blockVertexLocations[corner];
+                var bvl = _blockVertexLocations[(int) corner];
                 return MPD_File.SurfaceModelChunk.VertexHeightBlockTable[bvl.Num][bvl.X, bvl.Y];
             }
 
@@ -35,7 +35,7 @@ namespace SF3.Models.Files.MPD {
 
             // The model to show should come from the surface model.
             if (MPD_File.SurfaceModelChunk?.VertexHeightBlockTable != null) {
-                return _blockVertexLocations.Values
+                return _blockVertexLocations
                     .Select(bvl => MPD_File.SurfaceModelChunk.VertexHeightBlockTable[bvl.Num][bvl.X, bvl.Y])
                     .ToArray();
             }
@@ -61,11 +61,11 @@ namespace SF3.Models.Files.MPD {
 
             // Flat tiles have nothing linked.
             if (IsFlat)
-                return new TileAndCorner[] { _sharedTileLocations[corner][0] };
+                return new TileAndCorner[] { _sharedTileLocations[(int) corner][0] };
 
             // Otherwise, this vertex is shared with all other adjacent non-flat tiles.
             var tiles = new List<TileAndCorner>();
-            foreach (var tile in _sharedTileLocations[corner]) {
+            foreach (var tile in _sharedTileLocations[(int) corner]) {
                 var tileObj = Surface.GetTile(tile.X, tile.Y);
                 if (tileObj != null && tileObj == this || !tileObj.IsFlat)
                     tiles.Add(tile);
@@ -96,7 +96,7 @@ namespace SF3.Models.Files.MPD {
 
             if (MPD_File.SurfaceModelChunk != null) {
                 if (!IsFlat)
-                    foreach (var bvl in _sharedBlockVertexLocations[corner])
+                    foreach (var bvl in _sharedBlockVertexLocations[(int) corner])
                         MPD_File.SurfaceModelChunk.VertexHeightBlockTable[bvl.Num].SetHeight(bvl.X, bvl.Y, value);
 
                 var normalVertices = Surface.GetNormalVertexRangeAffectedByHeightOf(X, Y, corner);
