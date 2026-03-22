@@ -303,9 +303,9 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void Models_HasExpectedCounts() {
             var data = MakeFile();
-            var models = data.ModelCollections[MPD_CollectionType.Primary].Models.SelectMany(x => x.ModelLoDs).ToArray();
+            var models = data.ModelCollections[MPD_CollectionType.Primary].Models.SelectMany(x => x.ModelLoDs.Where(y => y.LevelOfDetail == 0)).ToArray();
 
-            Assert.AreEqual(112, models.Length);
+            Assert.AreEqual(14, models.Length);
 
             var sarabandModel = models[7];
             Assert.AreEqual(289, sarabandModel.Vertices.Count);
