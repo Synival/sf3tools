@@ -270,20 +270,28 @@ breakEntireLoop:
         }
 
         private static unsafe Dictionary<uint, int[]> BuildHashIndices(ushort* pInput, int inputLen) {
-            // Build a hash table for all inputs. This will make longest common prefix lookups *much* faster.
-            var hashIndicesList = new Dictionary<uint, List<int>>(inputLen / 2);
-            for (var i = 0; i < inputLen - 1; i++) {
+            var inputMax = inputLen - 1;
+            var hashIndexCount = new Dictionary<uint, int>(inputLen / 2);
+            for (var i = 0; i < inputMax - 1; i++) {
                 var hash = (uint) (pInput[i] << 16) | pInput[i + 1];
-                if (!hashIndicesList.TryGetValue(hash, out var list))
-                    hashIndicesList.Add(hash, new List<int>() { i });
+                if (!hashIndexCount.ContainsKey(hash))
+                    hashIndexCount.Add(hash, 1);
                 else
-                    list.Add(i);
+                    hashIndexCount[hash]++;
             }
 
-            // Converting from lists to arrays will save a little lookup time.
-            var hashIndices = new Dictionary<uint, int[]>(hashIndicesList.Count);
-            foreach (var hi in hashIndicesList)
-                hashIndices.Add(hi.Key, hi.Value.ToArray());
+            var hashIndices = new Dictionary<uint, int[]>(hashIndexCount.Count);
+            for (var i = 0; i < inputMax - 1; i++) {
+                var hash = (uint) (pInput[i] << 16) | pInput[i + 1];
+                var remaining = hashIndexCount[hash];
+                hashIndexCount[hash]--;
+
+                if (!hashIndices.TryGetValue(hash, out var values)) {
+                    values = new int[remaining];
+                    hashIndices[hash] = values;
+                }
+                values[values.Length - remaining] = i;
+            }
 
             return hashIndices;
         }
