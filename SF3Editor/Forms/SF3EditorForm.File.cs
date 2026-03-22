@@ -602,12 +602,16 @@ namespace SF3.Editor.Forms {
             => SaveAllFiles();
 
         private void tsmiFile_Close_Click(object sender, EventArgs e) {
-            if (SelectedFile != null)
+            if (SelectedFile != null) {
                 _ = CloseFile(SelectedFile);
+                GC.Collect();
+            }
         }
 
-        private void tsmiFile_CloseAll_Click(object sender, EventArgs e)
-            => CloseAllFiles();
+        private void tsmiFile_CloseAll_Click(object sender, EventArgs e) {
+            _ = CloseAllFiles();
+            GC.Collect();
+        }
 
         private void tsmiFile_SwapToPrev_Click(object sender, EventArgs e) {
             if (SelectedFile != null)

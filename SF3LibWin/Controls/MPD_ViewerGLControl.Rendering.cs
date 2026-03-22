@@ -21,44 +21,66 @@ namespace SF3.Win.Controls {
             GotFocus  += (s, e) => InvalidateFrame();
             LostFocus += (s, e) => InvalidateFrame();
 
-            _appSettings.ViewerDrawSurfaceModelChanged   += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawModelsChanged         += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawExtraModelsChanged    += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawGroundChanged         += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawSkyChanged            += (s, e) => InvalidateFrame();
-            _appSettings.ViewerRunAnimationsChanged      += (s, e) => InvalidateFrame();
-            _appSettings.ViewerApplyLightingChanged      += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawGradientsChanged      += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawActorsChanged         += (s, e) => InvalidateFrame();
+            var scene = AppResources.Get();
+            _appSettingsRenderEventHandler  = new DisposableEventHandlerCollection<EventHandler>(_appSettings);
+            _appResourcesRenderEventHandler = new DisposableEventHandlerCollection<EventHandler>(scene);
 
-            _appSettings.ViewerDrawWireframeChanged      += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawBoundariesChanged     += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawBattleZonesChanged    += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawTerrainTypesChanged   += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawEventIDsChanged       += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawCollisionLinesChanged += (s, e) => InvalidateFrame();
-            _appSettings.HideModelsNotFacingCameraChanged += (s, e) => InvalidateFrame();
+            Disposed += (s, e) => {
+                if (_appSettingsRenderEventHandler != null) {
+                    _appSettingsRenderEventHandler.Dispose();
+                    _appResourcesRenderEventHandler.Dispose();
+                    _appSettingsRenderEventHandler  = null;
+                    _appResourcesRenderEventHandler = null;
+                }
+            };
 
-            _appSettings.ViewerApplyShadowTagsChanged += (s, e) => {
+            var sHandler = _appSettingsRenderEventHandler;
+            var invalidateFrameHandler = new EventHandler((s, e) => InvalidateFrame());
+
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawSurfaceModelChanged),    invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawModelsChanged),          invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawExtraModelsChanged),     invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawGroundChanged),          invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawSkyChanged),             invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerRunAnimationsChanged),       invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerApplyLightingChanged),       invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawGradientsChanged),       invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawActorsChanged),          invalidateFrameHandler);
+
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawWireframeChanged),       invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawBoundariesChanged),      invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawBattleZonesChanged),     invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawTerrainTypesChanged),    invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawEventIDsChanged),        invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawCollisionLinesChanged),  invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.HideModelsNotFacingCameraChanged), invalidateFrameHandler);
+
+            sHandler.Subscribe(nameof(_appSettings.ViewerApplyShadowTagsChanged), (s, e) => {
                 if (_models != null) {
                     _models.ApplyShadowTags = _appSettings.ViewerApplyShadowTags;
                     InvalidateModels();
                 }
-            };
-            _appSettings.ViewerApplyHideTagsChanged += (s, e) => {
+            });
+
+            sHandler.Subscribe(nameof(_appSettings.ViewerApplyHideTagsChanged), (s, e) => {
                 if (_models != null) {
                     _models.ApplyHideTags = _appSettings.ViewerApplyHideTags;
                     InvalidateModels();
                 }
-            };
+            });
 
-            _appSettings.RenderOnBlackBackgroundChanged  += (s, e) => InvalidateFrame();
-            _appSettings.ViewerDrawNormalsChanged        += (s, e) => InvalidateFrame();
-            _appSettings.ViewerRotateSpritesUpChanged    += (s, e) => { _renderer.InvalidateSpriteMatrices(_models); InvalidateFrame(); };
+            sHandler.Subscribe(nameof(_appSettings.RenderOnBlackBackgroundChanged), invalidateFrameHandler);
+            sHandler.Subscribe(nameof(_appSettings.ViewerDrawNormalsChanged),       invalidateFrameHandler);
 
-            var scene = AppResources.Get();
-            scene.ActiveSceneChanged += (s, e) => { InvalidateActors(); };
-            scene.ActiveCHRChanged   += (s, e) => { InvalidateActors(); };
+            sHandler.Subscribe(nameof(_appSettings.ViewerRotateSpritesUpChanged), (s, e) => {
+                _renderer.InvalidateSpriteMatrices(_models);
+                InvalidateFrame();
+            });
+
+            var rHandler = _appResourcesRenderEventHandler;
+            var invalidateActorsHandler = new EventHandler((s, e) => { InvalidateActors(); });
+            rHandler.Subscribe(nameof(scene.ActiveSceneChanged), invalidateActorsHandler);
+            rHandler.Subscribe(nameof(scene.ActiveCHRChanged),   invalidateActorsHandler);
         }
 
         /// <summary>
@@ -693,5 +715,8 @@ namespace SF3.Win.Controls {
 
         private Renderer _renderer = null;
         private int _inPaintCounter = 0;
+
+        private DisposableEventHandlerCollection<EventHandler> _appSettingsRenderEventHandler;
+        private DisposableEventHandlerCollection<EventHandler> _appResourcesRenderEventHandler;
     }
 }

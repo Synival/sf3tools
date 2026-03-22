@@ -11,6 +11,7 @@ using SF3.MPD.Interfaces;
 using SF3.Win.App;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
+using CommonLib;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -51,30 +52,40 @@ namespace SF3.Win.Controls {
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
 
             var appSettings = AppSettings.Get();
+            _appSettingsRenderEventHandler = new DisposableEventHandlerCollection<EventHandler>(appSettings);
 
-            appSettings.ViewerDrawSurfaceModelChanged   += (s, e) => { tsbDrawSurfaceModel.Checked  = appSettings.ViewerDrawSurfaceModel; };
-            appSettings.ViewerDrawModelsChanged         += (s, e) => { tsbDrawModels.Checked        = appSettings.ViewerDrawModels; };
-            appSettings.ViewerDrawExtraModelsChanged    += (s, e) => { tsbDrawExtraModels.Checked   = appSettings.ViewerDrawExtraModels; };
-            appSettings.ViewerDrawGroundChanged         += (s, e) => { tsbDrawGround.Checked        = appSettings.ViewerDrawGround; };
-            appSettings.ViewerDrawSkyChanged            += (s, e) => { tsbDrawSky.Checked           = appSettings.ViewerDrawSky; };
-            appSettings.ViewerRunAnimationsChanged      += (s, e) => { tsbRunAnimations.Checked     = appSettings.ViewerRunAnimations; };
-            appSettings.ViewerApplyLightingChanged      += (s, e) => { tsbApplyLighting.Checked     = appSettings.ViewerApplyLighting; };
-            appSettings.ViewerDrawGradientsChanged      += (s, e) => { tsbDrawGradients.Checked     = appSettings.ViewerDrawGradients; };
-            appSettings.ViewerDrawActorsChanged         += (s, e) => { tsbDrawActors.Checked        = appSettings.ViewerDrawActors; };
+            Disposed += (s, e) => {
+                if (_appSettingsRenderEventHandler != null) {
+                    _appSettingsRenderEventHandler.Dispose();
+                    _appSettingsRenderEventHandler = null;
+                }
+            };
 
-            appSettings.ViewerDrawWireframeChanged      += (s, e) => { tsbToggleWireframe.Checked   = appSettings.ViewerDrawWireframe; };
-            appSettings.ViewerDrawBoundariesChanged     += (s, e) => { tsbToggleBoundaries.Checked  = appSettings.ViewerDrawBoundaries; };
-            appSettings.ViewerDrawBattleZonesChanged    += (s, e) => { tsbToggleBattleZones.Checked = appSettings.ViewerDrawBattleZones; };
-            appSettings.ViewerDrawTerrainTypesChanged   += (s, e) => { tsbToggleTerrainType.Checked = appSettings.ViewerDrawTerrainTypes; };
-            appSettings.ViewerDrawEventIDsChanged       += (s, e) => { tsbToggleEventID.Checked     = appSettings.ViewerDrawEventIDs; };
-            appSettings.ViewerDrawCollisionLinesChanged += (s, e) => { tsbToggleCollisions.Checked  = appSettings.ViewerDrawCollisionLines; };
-            appSettings.HideModelsNotFacingCameraChanged += (s, e) => { tsbHideModelsNotFacingCamera.Checked = appSettings.HideModelsNotFacingCamera; };
-            appSettings.ViewerApplyShadowTagsChanged    += (s, e) => { tsbApplyShadowTags.Checked   = appSettings.ViewerApplyShadowTags; };
-            appSettings.ViewerApplyHideTagsChanged      += (s, e) => { tsbApplyHideTags.Checked     = appSettings.ViewerApplyHideTags; };
+            var eHandler = _appSettingsRenderEventHandler;
 
-            appSettings.RenderOnBlackBackgroundChanged  += (s, e) => { tsbRenderOnBlackBackground.Checked = appSettings.RenderOnBlackBackground; };
-            appSettings.ViewerDrawNormalsChanged        += (s, e) => { tsbToggleNormals.Checked     = appSettings.ViewerDrawNormals; };
-            appSettings.ViewerRotateSpritesUpChanged    += (s, e) => { tsbRotateSpritesUp.Checked   = appSettings.ViewerRotateSpritesUp; };
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawSurfaceModelChanged),   (s, e) => { tsbDrawSurfaceModel.Checked  = appSettings.ViewerDrawSurfaceModel; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawModelsChanged),         (s, e) => { tsbDrawModels.Checked        = appSettings.ViewerDrawModels; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawExtraModelsChanged),    (s, e) => { tsbDrawExtraModels.Checked   = appSettings.ViewerDrawExtraModels; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawGroundChanged),         (s, e) => { tsbDrawGround.Checked        = appSettings.ViewerDrawGround; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawSkyChanged),            (s, e) => { tsbDrawSky.Checked           = appSettings.ViewerDrawSky; });
+            eHandler.Subscribe(nameof(appSettings.ViewerRunAnimationsChanged),      (s, e) => { tsbRunAnimations.Checked     = appSettings.ViewerRunAnimations; });
+            eHandler.Subscribe(nameof(appSettings.ViewerApplyLightingChanged),      (s, e) => { tsbApplyLighting.Checked     = appSettings.ViewerApplyLighting; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawGradientsChanged),      (s, e) => { tsbDrawGradients.Checked     = appSettings.ViewerDrawGradients; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawActorsChanged),         (s, e) => { tsbDrawActors.Checked        = appSettings.ViewerDrawActors; });
+
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawWireframeChanged),      (s, e) => { tsbToggleWireframe.Checked   = appSettings.ViewerDrawWireframe; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawBoundariesChanged),     (s, e) => { tsbToggleBoundaries.Checked  = appSettings.ViewerDrawBoundaries; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawBattleZonesChanged),    (s, e) => { tsbToggleBattleZones.Checked = appSettings.ViewerDrawBattleZones; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawTerrainTypesChanged),   (s, e) => { tsbToggleTerrainType.Checked = appSettings.ViewerDrawTerrainTypes; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawEventIDsChanged),       (s, e) => { tsbToggleEventID.Checked     = appSettings.ViewerDrawEventIDs; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawCollisionLinesChanged), (s, e) => { tsbToggleCollisions.Checked  = appSettings.ViewerDrawCollisionLines; });
+            eHandler.Subscribe(nameof(appSettings.HideModelsNotFacingCameraChanged), (s, e) => { tsbHideModelsNotFacingCamera.Checked = appSettings.HideModelsNotFacingCamera; });
+            eHandler.Subscribe(nameof(appSettings.ViewerApplyShadowTagsChanged),    (s, e) => { tsbApplyShadowTags.Checked   = appSettings.ViewerApplyShadowTags; });
+            eHandler.Subscribe(nameof(appSettings.ViewerApplyHideTagsChanged),      (s, e) => { tsbApplyHideTags.Checked     = appSettings.ViewerApplyHideTags; });
+
+            eHandler.Subscribe(nameof(appSettings.RenderOnBlackBackgroundChanged),  (s, e) => { tsbRenderOnBlackBackground.Checked = appSettings.RenderOnBlackBackground; });
+            eHandler.Subscribe(nameof(appSettings.ViewerDrawNormalsChanged),        (s, e) => { tsbToggleNormals.Checked     = appSettings.ViewerDrawNormals; });
+            eHandler.Subscribe(nameof(appSettings.ViewerRotateSpritesUpChanged),    (s, e) => { tsbRotateSpritesUp.Checked   = appSettings.ViewerRotateSpritesUp; });
 
             // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
             void ShowHideExperimentalBrushes(bool value) {
@@ -95,12 +106,12 @@ namespace SF3.Win.Controls {
                 tsbFixTiles.Visible          = value;
             }
 
-            appSettings.EnableExperimentalBlankFieldV2BrushesChanged += (s, e) => {
+            eHandler.Subscribe(nameof(appSettings.EnableExperimentalBlankFieldV2BrushesChanged), (s, e) => {
                 var isEnabled = appSettings.EnableExperimentalBlankFieldV2Brushes;
                 ShowHideExperimentalBrushes(isEnabled);
                 if (!isEnabled && GLControl.CursorMode.IsDrawingMode())
                     GLControl.CursorMode = ViewerCursorMode.Select;
-            };
+            });
             ShowHideExperimentalBrushes(appSettings.EnableExperimentalBlankFieldV2Brushes);
 
             // Activate tile editor when an editor is clicked.
@@ -404,5 +415,7 @@ namespace SF3.Win.Controls {
         private ModelInstancePropertiesControl _modelInstancePropertiesControl = null;
         private ActorBattlePropertiesControl   _actorBattlePropertiesControl   = null;
         private ActorNPCPropertiesControl      _actorNPCPropertiesControl      = null;
+
+        private DisposableEventHandlerCollection<EventHandler> _appSettingsRenderEventHandler;
     }
 }
