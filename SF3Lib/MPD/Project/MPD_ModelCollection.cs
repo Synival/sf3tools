@@ -29,7 +29,7 @@ namespace SF3.MPD.Project {
             if (original.Textures != null)
                 Textures = new MPD_ModelCollectionTextures(original.Textures);
             if (original.DataAfterInstances != null)
-                DataAfterInstances = (byte[]) original.DataAfterInstances.ToArray().Clone();
+                DataAfterInstances = original.DataAfterInstances.ToArray();
         }
 
         public static IMPD_ModelCollection FromJToken(JToken token, MPD_CollectionType collection, Palette indexedTexturePalette)

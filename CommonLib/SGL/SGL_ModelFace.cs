@@ -15,7 +15,7 @@ namespace CommonLib.SGL {
 
         public SGL_ModelFace(ISGL_ModelFace original) {
             if (original.VertexIndices != null)
-                VertexIndices = (int[]) original.VertexIndices.ToArray().Clone();
+                VertexIndices = original.VertexIndices.ToArray();
             Normal = original.Normal;
             Attributes = new ATTR(original.Attributes);
         }

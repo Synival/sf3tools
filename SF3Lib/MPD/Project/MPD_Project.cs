@@ -72,11 +72,11 @@ namespace SF3.MPD.Project {
                 ModelSwitchGroups = original.ModelSwitchGroups.Select(x => (IMPD_ModelSwitchGroup) new MPD_ModelSwitchGroup(x)).ToArray();
 
             if (original.Scenario1UnknownTable1 != null)
-                Scenario1UnknownTable1 = (ushort[]) original.Scenario1UnknownTable1.ToArray().Clone();
+                Scenario1UnknownTable1 = original.Scenario1UnknownTable1.ToArray();
             if (original.Scenario1UnknownTable2 != null)
-                Scenario1UnknownTable2 = (ushort[]) original.Scenario1UnknownTable2.ToArray().Clone();
+                Scenario1UnknownTable2 = original.Scenario1UnknownTable2.ToArray();
             if (original.GroundAnimationData != null)
-                GroundAnimationData = (byte[]) original.GroundAnimationData.ToArray().Clone();
+                GroundAnimationData = original.GroundAnimationData.ToArray();
 
             if (original.CameraBoundaries != null)
                 CameraBoundaries = new RectangleShort() { P1 = original.CameraBoundaries.P1, P2 = original.CameraBoundaries.P2 };
