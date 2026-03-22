@@ -181,14 +181,7 @@ breakEntireLoop:
             fixed(ushort* pInput = input, pOutput = output) {
 
             // Build a hash table for all inputs. This will make longest common prefix lookups *much* faster.
-            var hashIndices = new Dictionary<uint, List<int>>();
-            for (var i = 0; i < inputLen - 1; i++) {
-                var hash = (uint) (pInput[i] << 16) | pInput[i + 1];
-                if (!hashIndices.ContainsKey(hash))
-                    hashIndices.Add(hash, new List<int>() { i });
-                else
-                    hashIndices[hash].Add(i);
-            }
+            var hashIndices = BuildHashIndices(pInput, inputLen);
 
             while (inPos < inputLen) {
                 // Initialize "best match" values that indicate "no match found".
@@ -202,7 +195,7 @@ breakEntireLoop:
                         // Look for the largest dictionary match that's occurred so far in the data.
                         // Allow reading ahead into the future if a match was found -- the decompressor will "copy itself".
                         var searchLimit = inPos - windowSize + 1;
-                        for (int searchPosIndex = hashMatches.Count - 1; searchPosIndex >= 0; searchPosIndex--) {
+                        for (int searchPosIndex = hashMatches.Length - 1; searchPosIndex >= 0; searchPosIndex--) {
                             var searchPos = hashMatches[searchPosIndex];
                             if (searchPos >= inPos)
                                 continue;
@@ -274,6 +267,25 @@ breakEntireLoop:
 
             } // fixed
             } // unsafe
+        }
+
+        private static unsafe Dictionary<uint, int[]> BuildHashIndices(ushort* pInput, int inputLen) {
+            // Build a hash table for all inputs. This will make longest common prefix lookups *much* faster.
+            var hashIndicesList = new Dictionary<uint, List<int>>(inputLen / 2);
+            for (var i = 0; i < inputLen - 1; i++) {
+                var hash = (uint) (pInput[i] << 16) | pInput[i + 1];
+                if (!hashIndicesList.TryGetValue(hash, out var list))
+                    hashIndicesList.Add(hash, new List<int>() { i });
+                else
+                    list.Add(i);
+            }
+
+            // Converting from lists to arrays will save a little lookup time.
+            var hashIndices = new Dictionary<uint, int[]>(hashIndicesList.Count);
+            foreach (var hi in hashIndicesList)
+                hashIndices.Add(hi.Key, hi.Value.ToArray());
+
+            return hashIndices;
         }
 
         /// <summary>
