@@ -209,6 +209,26 @@ namespace CommonLib.Utils {
             return output;
         }
 
+        public static unsafe byte[] ToBytes(this short[] src) {
+            if (src.Length == 0)
+                return new byte[0];
+
+            var output = new byte[src.Length * 2];
+            fixed (short* srcPtrStart = &src[0])
+            fixed (byte* outputPtrStart = &output[0]) {
+                short* srcPtr = srcPtrStart;
+                byte* outputPtr = outputPtrStart;
+
+                for (int i = 0; i < src.Length; i++) {
+                    ushort srcValue = (ushort) *(srcPtr++);
+                    *(outputPtr++) = (byte) (srcValue >> 8);
+                    *(outputPtr++) = (byte) (srcValue);
+                }
+            }
+
+            return output;
+        }
+
         public static unsafe byte[] ToBytes(this uint[] src) {
             var output = new byte[src.Length * 4];
             fixed (uint* srcPtrStart = &src[0])
@@ -218,6 +238,25 @@ namespace CommonLib.Utils {
 
                 for (int i = 0; i < src.Length; i++) {
                     uint srcValue = *(srcPtr++);
+                    *(outputPtr++) = (byte) (srcValue >> 24);
+                    *(outputPtr++) = (byte) (srcValue >> 16);
+                    *(outputPtr++) = (byte) (srcValue >> 8);
+                    *(outputPtr++) = (byte) (srcValue);
+                }
+            }
+
+            return output;
+        }
+
+        public static unsafe byte[] ToBytes(this int[] src) {
+            var output = new byte[src.Length * 4];
+            fixed (int* srcPtrStart = &src[0])
+            fixed (byte* outputPtrStart = &output[0]) {
+                int* srcPtr = srcPtrStart;
+                byte* outputPtr = outputPtrStart;
+
+                for (int i = 0; i < src.Length; i++) {
+                    uint srcValue = (uint) *(srcPtr++);
                     *(outputPtr++) = (byte) (srcValue >> 24);
                     *(outputPtr++) = (byte) (srcValue >> 16);
                     *(outputPtr++) = (byte) (srcValue >> 8);

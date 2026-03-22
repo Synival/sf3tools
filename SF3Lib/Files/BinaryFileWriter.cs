@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using CommonLib.Utils;
 
 namespace SF3.Files {
     /// <summary>
@@ -43,35 +44,30 @@ namespace SF3.Files {
                 BytesWritten += length;
         }
 
-        public void WriteUShorts(ushort[] values) {
-            foreach (var value in values)
-                WriteUShort(value);
-        }
+        public void WriteUShorts(ushort[] values)
+            => WriteBytes(values.ToBytes());
 
-        public void WriteShorts(short[] values) {
-            foreach (var value in values)
-                WriteShort(value);
-        }
+        public void WriteShorts(short[] values)
+            => WriteBytes(values.ToBytes());
 
-        public void WriteUInts(uint[] values) {
-            foreach (var value in values)
-                WriteUInt(value);
-        }
+        public void WriteUInts(uint[] values)
+            => WriteBytes(values.ToBytes());
 
-        public void WriteInts(int[] values) {
-            foreach (var value in values)
-                WriteInt(value);
-        }
+        public void WriteInts(int[] values)
+            => WriteBytes(values.ToBytes());
 
-        public void WriteByte(byte value)
-            => WriteBytes(new byte[] { value });
+        public void WriteByte(byte value) {
+            Stream.WriteByte(value);
+            if (AtEndOfStream)
+                BytesWritten++;
+        }
 
         public void WriteUShort(ushort value) {
             WriteToAlignTo(2);
-            WriteBytes(new byte[] {
-                (byte) (value >> 8),
-                (byte) value
-            });
+            Stream.WriteByte((byte) (value >> 8));
+            Stream.WriteByte((byte) value);
+            if (AtEndOfStream)
+                BytesWritten += 2;
         }
 
         public void WriteShort(short value)
@@ -79,12 +75,12 @@ namespace SF3.Files {
 
         public void WriteUInt(uint value) {
             WriteToAlignTo(4);
-            WriteBytes(new byte[] {
-                (byte) (value >> 24),
-                (byte) (value >> 16),
-                (byte) (value >> 8),
-                (byte) value
-            });
+            Stream.WriteByte((byte) (value >> 24));
+            Stream.WriteByte((byte) (value >> 16));
+            Stream.WriteByte((byte) (value >> 8));
+            Stream.WriteByte((byte) value);
+            if (AtEndOfStream)
+                BytesWritten += 4;
         }
 
         public void WriteInt(int value)
