@@ -1,4 +1,4 @@
-﻿using CommonLib;
+﻿using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.ByteData;
@@ -77,7 +77,7 @@ namespace SF3.Models.Structs.MPD.Main {
             }
         }
 
-        public IEnumerableWithLength<int> ModelInstancesVisibleWhenOff => ModelInstancesVisibleWhenOffTable;
-        public IEnumerableWithLength<int> ModelInstancesVisibleWhenOn => ModelInstancesVisibleWhenOnTable;
+        public IReadOnlyList<int> ModelInstancesVisibleWhenOff => ModelInstancesVisibleWhenOffTable;
+        public IReadOnlyList<int> ModelInstancesVisibleWhenOn => ModelInstancesVisibleWhenOnTable;
     }
 }

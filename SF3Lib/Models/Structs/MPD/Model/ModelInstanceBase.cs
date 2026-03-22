@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -156,7 +157,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public BoundingBox BoundingBox {
             get {
                 if (!_boundingBox.HasValue) {
-                    _boundingBox = GetModel(0).Vertices.AsArray()
+                    _boundingBox = GetModel(0).Vertices.ToArray()
                         .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)

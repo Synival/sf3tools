@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -109,7 +108,7 @@ namespace SF3.Models.Structs.MPD.Model {
                 Index = index;
             }
 
-            public IIndexedEnumerableWithLength<int> VertexIndices => Polygon?.Vertices;
+            public IReadOnlyList<int> VertexIndices => Polygon?.Vertices;
 
             public VECTOR Normal {
                 get {
@@ -152,7 +151,7 @@ namespace SF3.Models.Structs.MPD.Model {
             public AttrStruct AttributeStruct => ((Index < PData.Attributes?.Count) == true) ? PData.Attributes[Index] : null;
         }
 
-        private class MockFaceEnumerable : IIndexedEnumerableWithLength<ISGL_ModelFace> {
+        private class MockFaceEnumerable : IReadOnlyList<ISGL_ModelFace> {
             public MockFaceEnumerable(MockFace[] faces) {
                 Faces = faces;
             }
@@ -170,7 +169,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public PolygonTable Polygons => (Chunk?.PolygonTablesByMemoryAddress?.TryGetValue(PolygonsOffset, out var polygons) == true) ? polygons : null;
         public AttrTable Attributes => (Chunk?.AttrTablesByMemoryAddress?.TryGetValue(AttributesOffset, out var attributes) == true) ? attributes : null;
 
-        public IIndexedEnumerableWithLength<VECTOR> Vertices => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
-        public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }
+        public IReadOnlyList<VECTOR> Vertices => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
+        public IReadOnlyList<ISGL_ModelFace> Faces { get; }
     }
 }

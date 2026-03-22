@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Linq;
+using Newtonsoft.Json.Linq;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -182,7 +183,7 @@ namespace SF3.MPD.Project {
         public BoundingBox BoundingBox {
             get {
                 if (!_boundingBox.HasValue) {
-                    _boundingBox = GetModel(0).Vertices.AsArray()
+                    _boundingBox = GetModel(0).Vertices.ToArray()
                         .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)

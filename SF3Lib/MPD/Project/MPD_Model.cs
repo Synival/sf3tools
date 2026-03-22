@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using CommonLib;
 using CommonLib.SGL;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
@@ -47,7 +46,7 @@ namespace SF3.MPD.Project {
 
         private SGL_Model _actualModel { get; }
 
-        private class ModelRetriever : IIndexedEnumerableWithLength<IMPD_ModelLoD> {
+        private class ModelRetriever : IReadOnlyList<IMPD_ModelLoD> {
             public ModelRetriever(MPD_Model modelWithLoD) {
                 ModelWithLoD = modelWithLoD;
             }
@@ -78,6 +77,6 @@ namespace SF3.MPD.Project {
             private Dictionary<int, IMPD_ModelLoD> _models = new Dictionary<int, IMPD_ModelLoD>();
         }
 
-        public IIndexedEnumerableWithLength<IMPD_ModelLoD> ModelLoDs { get; }
+        public IReadOnlyList<IMPD_ModelLoD> ModelLoDs { get; }
     }
 }

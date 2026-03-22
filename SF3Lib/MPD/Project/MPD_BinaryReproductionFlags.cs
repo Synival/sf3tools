@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using CommonLib;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Extensions;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
@@ -19,7 +19,7 @@ namespace SF3.MPD.Project {
             MisplacedSurfaceModelChunkIndex              = original.MisplacedSurfaceModelChunkIndex;
 
             if (original.UnreferencedDataAfterPaletteAdjustmentTable != null)
-                UnreferencedDataAfterPaletteAdjustmentTable = ((byte[]) (original.UnreferencedDataAfterPaletteAdjustmentTable.AsArray().Clone())).ToEnumerableWithLength();
+                UnreferencedDataAfterPaletteAdjustmentTable = (byte[]) original.UnreferencedDataAfterPaletteAdjustmentTable.ToArray().Clone();
         }
 
         public static MPD_BinaryReproductionFlags FromJToken(JToken token) => new MPD_BinaryReproductionFlags(token);
@@ -35,7 +35,7 @@ namespace SF3.MPD.Project {
             MisplacedModelsChunkIndex                    = (int?) jObject["MisplacedModelsChunkIndex"];
             MisplacedSurfaceModelChunkIndex              = (int?) jObject["MisplacedSurfaceModelChunkIndex"];
             UnreferencedDataAfterPaletteAdjustmentTable  = jObject.GetValueIfExists("UnreferencedDataAfterPaletteAdjustmentTable",
-                t => ((JArray) t).Select(x => (byte) x).ToArray().ToEnumerableWithLength());
+                t => ((JArray) t).Select(x => (byte) x).ToArray());
         }
 
         public bool ShortEmptyAnimationTable { get; set; }
@@ -46,6 +46,6 @@ namespace SF3.MPD.Project {
         public int? NonStandardTextureChunkDecompressedSizeLimit { get; set; }
         public int? MisplacedModelsChunkIndex { get; set; }
         public int? MisplacedSurfaceModelChunkIndex { get; set; }
-        public IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustmentTable { get; set; }
+        public IReadOnlyList<byte> UnreferencedDataAfterPaletteAdjustmentTable { get; set; }
     }
 }

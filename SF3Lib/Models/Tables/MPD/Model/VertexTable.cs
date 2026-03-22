@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using CommonLib;
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Model;
 
 namespace SF3.Models.Tables.MPD.Model {
-    public class VertexTable : FixedSizeTable<VertexStruct>, IIndexedEnumerableWithLength<VECTOR> {
+    public class VertexTable : FixedSizeTable<VertexStruct>, IReadOnlyList<VECTOR> {
         protected VertexTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {
         }
 
@@ -21,7 +19,6 @@ namespace SF3.Models.Tables.MPD.Model {
                 yield return row.Vector;
         }
 
-        VECTOR IIndexedEnumerableWithLength<VECTOR>.this[int index] => Rows[index].Vector;
-        VECTOR[] IIndexedEnumerableWithLength<VECTOR>.AsArray() => ((IEnumerable<VECTOR>) this).ToArray();
+        VECTOR IReadOnlyList<VECTOR>.this[int index] => Rows[index].Vector;
     }
 }

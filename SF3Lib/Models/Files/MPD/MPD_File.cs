@@ -15,7 +15,6 @@ using SF3.Models.Tables.MPD.Animation;
 using CommonLib.Imaging;
 using CommonLib.Geometry;
 using CommonLib.Utils;
-using CommonLib;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
 
@@ -132,17 +131,17 @@ namespace SF3.Models.Files.MPD {
         }
 
         public IMPD_Lighting Lighting { get; }
-        public IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups => ModelSwitchGroupsTable;
+        public IReadOnlyList<IMPD_ModelSwitchGroup> ModelSwitchGroups => ModelSwitchGroupsTable;
         public IMPD_Planes Planes { get; private set; }
         public IMPD_Collisions Collisions { get; private set; }
         public IRectangleShort CameraBoundaries => (BoundariesTable?.Count >= 1) ? BoundariesTable[0] : null;
         public IRectangleShort BattleCursorBoundaries => (BoundariesTable?.Count >= 2) ? BoundariesTable[1] : null;
         public IMPD_Gradient Gradient => (GradientTable?.Count > 0) ? GradientTable[0] : null;
 
-        public IIndexedEnumerableWithLength<byte> GroundAnimationData => GroundAnimationTable;
-        public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 => Unknown1Table;
-        public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 => Unknown2Table;
-        public IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustment => UnreferencedDataAfterPaletteAdjustmentTable;
+        public IReadOnlyList<byte> GroundAnimationData => GroundAnimationTable;
+        public IReadOnlyList<ushort> Scenario1UnknownTable1 => Unknown1Table;
+        public IReadOnlyList<ushort> Scenario1UnknownTable2 => Unknown2Table;
+        public IReadOnlyList<byte> UnreferencedDataAfterPaletteAdjustment => UnreferencedDataAfterPaletteAdjustmentTable;
 
         [BulkCopyRecurse]
         public MPD_Header MPDHeader { get; private set; }

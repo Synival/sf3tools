@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
 using Newtonsoft.Json;
@@ -7,14 +8,14 @@ using Newtonsoft.Json.Linq;
 namespace CommonLib.SGL {
     public class SGL_ModelFace : ISGL_ModelFace {
         public SGL_ModelFace() {
-            VertexIndices = new int[4].ToEnumerableWithLength();
+            VertexIndices = new int[4];
             Normal        = new VECTOR(0, 0, 0);
             Attributes    = new ATTR();
         }
 
         public SGL_ModelFace(ISGL_ModelFace original) {
             if (original.VertexIndices != null)
-                VertexIndices = ((int[]) (original.VertexIndices.AsArray().Clone())).ToEnumerableWithLength();
+                VertexIndices = (int[]) original.VertexIndices.ToArray().Clone();
             Normal = original.Normal;
             Attributes = new ATTR(original.Attributes);
         }
@@ -27,7 +28,7 @@ namespace CommonLib.SGL {
             if (attributes == null)
                 throw new ArgumentNullException(nameof(attributes));
 
-            VertexIndices = vertexIndices.ToEnumerableWithLength();
+            VertexIndices = vertexIndices;
             Normal        = normal;
             Attributes    = attributes;
         }
@@ -36,7 +37,7 @@ namespace CommonLib.SGL {
         private SGL_ModelFace(JToken token) {
             var jObject = (JObject) token;
 
-            VertexIndices = jObject.GetValueIfExists("VertexIndices", t => ((JArray) t).Select(x => (int) x).ToArray().ToEnumerableWithLength());
+            VertexIndices = jObject.GetValueIfExists("VertexIndices", t => ((JArray) t).Select(x => (int) x).ToArray());
             if (VertexIndices == null || VertexIndices.Count != 4)
                 throw new JsonSerializationException("VertexIndices must exist and have exactly 4 integers");
 
@@ -44,7 +45,7 @@ namespace CommonLib.SGL {
             Attributes = ATTR.FromJToken(jObject["Attributes"]);
         }
 
-        public IIndexedEnumerableWithLength<int> VertexIndices { get; }
+        public IReadOnlyList<int> VertexIndices { get; }
         public VECTOR Normal { get; set; }
         public IATTR Attributes { get; set; }
     }

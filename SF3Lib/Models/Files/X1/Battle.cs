@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.Actors;
@@ -71,8 +70,8 @@ namespace SF3.Models.Files.X1 {
 
         public bool IsBattle => true;
         public string SceneName { get; }
-        public IIndexedEnumerableWithLength<IActor> Actors => SlotTable;
+        public IReadOnlyList<IActor> Actors => SlotTable;
         public int NumZones => BattleHeader.NumZones;
-        public IIndexedEnumerableWithLength<Zone> Zones => ZoneTable;
+        public IReadOnlyList<Zone> Zones => ZoneTable;
     }
 }

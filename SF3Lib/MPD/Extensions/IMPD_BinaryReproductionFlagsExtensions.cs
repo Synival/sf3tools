@@ -20,7 +20,7 @@ namespace SF3.MPD.Extensions {
                 { "NonStandardTextureChunkDecompressedSizeLimit", flags.NonStandardTextureChunkDecompressedSizeLimit },
                 { "MisplacedModelsChunkIndex",                    flags.MisplacedModelsChunkIndex },
                 { "MisplacedSurfaceModelChunkIndex",              flags.MisplacedSurfaceModelChunkIndex },
-                { "UnreferencedDataAfterPaletteAdjustmentTable",  flags.UnreferencedDataAfterPaletteAdjustmentTable?.AsArray()?.Select(x => (int) x)?.ToArray().ToJArray() },
+                { "UnreferencedDataAfterPaletteAdjustmentTable",  flags.UnreferencedDataAfterPaletteAdjustmentTable?.Select(x => (int) x)?.ToArray().ToJArray() },
             };
         }
     }

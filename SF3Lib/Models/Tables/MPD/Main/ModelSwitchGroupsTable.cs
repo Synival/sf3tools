@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using CommonLib;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD.Main;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Tables.MPD.Main {
-    public class ModelSwitchGroupsTable : TerminatedTable<ModelSwitchGroup>, IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> {
+    public class ModelSwitchGroupsTable : TerminatedTable<ModelSwitchGroup>, IReadOnlyList<IMPD_ModelSwitchGroup> {
         protected ModelSwitchGroupsTable(IByteData data, string name, int address, INameGetterContext nameGetterContext) : base(data, name, address, 4, null) {
             NameGetterContext = nameGetterContext;
         }
@@ -41,8 +39,7 @@ namespace SF3.Models.Tables.MPD.Main {
         }
 
         IEnumerator<IMPD_ModelSwitchGroup> IEnumerable<IMPD_ModelSwitchGroup>.GetEnumerator() => GetEnumerator();
-        IMPD_ModelSwitchGroup IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup>.this[int index] => Rows[index];
-        IMPD_ModelSwitchGroup[] IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup>.AsArray() => ((IEnumerable<IMPD_ModelSwitchGroup>) this).ToArray();
+        IMPD_ModelSwitchGroup IReadOnlyList<IMPD_ModelSwitchGroup>.this[int index] => Rows[index];
 
         public INameGetterContext NameGetterContext { get; }
     }

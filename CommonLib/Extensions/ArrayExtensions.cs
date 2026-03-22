@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using CommonLib.Imaging;
@@ -9,24 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace CommonLib.Extensions {
     public static class ArrayExtensions {
-        private class ArrayWithLength<T> : IIndexedEnumerableWithLength<T> {
-            public ArrayWithLength(T[] array) {
-                Array = array;
-            }
-
-            public T[] Array { get; }
-
-            public int Count => Array.Length;
-            public T this[int index] => Array[index];
-            public T[] AsArray() => Array;
-
-            public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>) Array).GetEnumerator();
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        }
-
-        public static IIndexedEnumerableWithLength<T> ToEnumerableWithLength<T>(this T[] array)
-            => new ArrayWithLength<T>(array);
-
         /// <summary>
         /// Returns a copy of an array with an additional element 'newValue' tacked on the end.
         /// </summary>

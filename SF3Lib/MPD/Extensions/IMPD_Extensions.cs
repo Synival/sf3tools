@@ -118,8 +118,8 @@ namespace SF3.MPD.Extensions {
                 { "BattleCursorBoundaries",  project.BattleCursorBoundaries?.ToJToken() },
                 { "Gradient",                project.Gradient?.ToJToken() },
                 { "GroundAnimationData",     project.GroundAnimationData?.Select(x => (int) x)?.ToArray()?.ToJArray() },
-                { "Scenario1UnknownTable1",  project.Scenario1UnknownTable1?.AsArray()?.ToJArray() },
-                { "Scenario1UnknownTable2",  project.Scenario1UnknownTable2?.AsArray()?.Select(x => (short) x)?.ToArray()?.ToJArray() },
+                { "Scenario1UnknownTable1",  project.Scenario1UnknownTable1?.ToArray().ToJArray() },
+                { "Scenario1UnknownTable2",  project.Scenario1UnknownTable2?.Select(x => (short) x)?.ToArray()?.ToJArray() },
             };
         }
     }

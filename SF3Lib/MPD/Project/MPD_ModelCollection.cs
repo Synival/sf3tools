@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using CommonLib;
+﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using Newtonsoft.Json.Linq;
@@ -29,7 +29,7 @@ namespace SF3.MPD.Project {
             if (original.Textures != null)
                 Textures = new MPD_ModelCollectionTextures(original.Textures);
             if (original.DataAfterInstances != null)
-                DataAfterInstances = ((byte[]) (original.DataAfterInstances.AsArray().Clone())).ToEnumerableWithLength();
+                DataAfterInstances = (byte[]) original.DataAfterInstances.ToArray().Clone();
         }
 
         public static IMPD_ModelCollection FromJToken(JToken token, MPD_CollectionType collection, Palette indexedTexturePalette)
@@ -39,10 +39,10 @@ namespace SF3.MPD.Project {
 
             var jObject = (JObject) token;
 
-            Models             = jObject.GetValueIfExists("Models",             t => t.Select(x => (IMPD_Model) MPD_Model.FromJToken(x, collection)).ToArray().ToEnumerableWithLength());
-            ModelInstances     = jObject.GetValueIfExists("ModelInstances",     t => t.Select(x => (IMPD_ModelInstance) MPD_ModelInstance.FromJToken(x, this)).ToArray().ToEnumerableWithLength());
-            Textures           = jObject.GetValueIfExists("Textures",           t => t.Select(x => (IMPD_AnimatableTexture) MPD_AnimatableTexture.FromJToken(x, collection, indexedTexturePalette)).ToArray().ToEnumerableWithLength());
-            DataAfterInstances = jObject.GetValueIfExists("DataAfterInstances", t => t.Select(x => (byte) x).ToArray().ToEnumerableWithLength());
+            Models             = jObject.GetValueIfExists("Models",             t => t.Select(x => (IMPD_Model) MPD_Model.FromJToken(x, collection)).ToArray());
+            ModelInstances     = jObject.GetValueIfExists("ModelInstances",     t => t.Select(x => (IMPD_ModelInstance) MPD_ModelInstance.FromJToken(x, this)).ToArray());
+            Textures           = jObject.GetValueIfExists("Textures",           t => t.Select(x => (IMPD_AnimatableTexture) MPD_AnimatableTexture.FromJToken(x, collection, indexedTexturePalette)).ToArray());
+            DataAfterInstances = jObject.GetValueIfExists("DataAfterInstances", t => t.Select(x => (byte) x).ToArray());
 
             if (Collection.IsHeaderModelCollection())
                 IsUnreferenced = (bool) jObject["IsUnreferenced"];
@@ -59,9 +59,9 @@ namespace SF3.MPD.Project {
         public bool IsUnreferenced { get; set; }
         public bool HasMissingModels => Models == null;
 
-        public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
-        public IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
-        public IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
-        public IEnumerableWithLength<IMPD_Model> Models { get; }
+        public IReadOnlyList<IMPD_ModelInstance> ModelInstances { get; }
+        public IReadOnlyList<IMPD_AnimatableTexture> Textures { get; }
+        public IReadOnlyList<byte> DataAfterInstances { get; }
+        public IReadOnlyList<IMPD_Model> Models { get; }
     }
 }

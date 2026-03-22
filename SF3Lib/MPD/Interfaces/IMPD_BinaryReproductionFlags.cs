@@ -1,4 +1,4 @@
-﻿using CommonLib;
+﻿using System.Collections.Generic;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -52,6 +52,6 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// When set, this junk data is written after the "palette adjustment" table.
         /// </summary>
-        IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustmentTable { get; set; }
+        IReadOnlyList<byte> UnreferencedDataAfterPaletteAdjustmentTable { get; set; }
     }
 }

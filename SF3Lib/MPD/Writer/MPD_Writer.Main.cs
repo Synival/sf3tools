@@ -271,13 +271,13 @@ namespace SF3.MPD.Writer {
             }
         }
 
-        public uint? WriteModelSwitchGroupsOrNull(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
+        public uint? WriteModelSwitchGroupsOrNull(IReadOnlyList<IMPD_ModelSwitchGroup> switchGroups) {
             if (switchGroups == null)
                 return null;
             return WriteModelSwitchGroups(switchGroups);
         }
 
-        public uint WriteModelSwitchGroups(IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> switchGroups) {
+        public uint WriteModelSwitchGroups(IReadOnlyList<IMPD_ModelSwitchGroup> switchGroups) {
             var offPositions = new uint[switchGroups.Count];
             var onPositions = new uint[switchGroups.Count];
 

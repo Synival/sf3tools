@@ -8,8 +8,6 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.MPD.Model;
 using SF3.Types;
 using SF3.Imaging;
-using CommonLib;
-using CommonLib.Extensions;
 using SF3.MPD.Interfaces;
 
 namespace SF3.Models.Files.MPD {
@@ -260,8 +258,8 @@ namespace SF3.Models.Files.MPD {
                 return memoryAddress;
         }
 
-        private IEnumerableWithLength<IMPD_ModelInstance> _mpdModelInstances;
-        public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances {
+        private IReadOnlyList<IMPD_ModelInstance> _mpdModelInstances;
+        public IReadOnlyList<IMPD_ModelInstance> ModelInstances {
             get {
                 if (_mpdModelInstances == null) {
                     var instances = new List<IMPD_ModelInstance>();
@@ -273,7 +271,7 @@ namespace SF3.Models.Files.MPD {
                         foreach (var mi in HeaderModelInstanceTable)
                             instances.Add(mi);
 
-                    _mpdModelInstances = instances.ToArray().ToEnumerableWithLength();
+                    _mpdModelInstances = instances.ToArray();
                 }
 
                 UpdateModelInstanceIDs();
@@ -301,27 +299,26 @@ namespace SF3.Models.Files.MPD {
 
         private class ModelWithLoD : IMPD_Model {
             public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_ModelLoD[] models) {
-                Collection = collection;
-                ModelID    = modelID;
-                ModelLoDs     = models.ToEnumerableWithLength();
+                Collection     = collection;
+                ModelID        = modelID;
+                ModelLoDs      = models;
                 LevelsOfDetail = ModelLoDs.Max(x => x.LevelOfDetail) + 1;
             }
 
             public MPD_CollectionType Collection { get; }
             public int ModelID { get; }
             public int LevelsOfDetail { get; }
-            public IIndexedEnumerableWithLength<IMPD_ModelLoD> ModelLoDs { get; }
+            public IReadOnlyList<IMPD_ModelLoD> ModelLoDs { get; }
         }
 
-        private IEnumerableWithLength<IMPD_Model> _mpdModelsWithLoD;
-        public IEnumerableWithLength<IMPD_Model> Models {
+        private IReadOnlyList<IMPD_Model> _mpdModelsWithLoD;
+        public IReadOnlyList<IMPD_Model> Models {
             get {
                 if (_mpdModelsWithLoD == null) {
                     _mpdModelsWithLoD = PDataTable
                         .GroupBy(x => x.ModelID)
                         .Select(x => (IMPD_Model) new ModelWithLoD(Collection, x.Key, x.ToArray()))
-                        .ToArray()
-                        .ToEnumerableWithLength();
+                        .ToArray();
                 }
                 return _mpdModelsWithLoD;
             }
@@ -377,8 +374,8 @@ namespace SF3.Models.Files.MPD {
         public UnknownUInt8Table DataAfterInstancesTable { get; private set; }
 
         private bool _gotTextures = false;
-        private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;
-        public IEnumerableWithLength<IMPD_AnimatableTexture> Textures {
+        private IReadOnlyList<IMPD_AnimatableTexture> _textures = null;
+        public IReadOnlyList<IMPD_AnimatableTexture> Textures {
             get {
                 if (!_gotTextures) {
                     var textureChunks = MPD_File.TextureChunks
@@ -389,8 +386,7 @@ namespace SF3.Models.Files.MPD {
                         _textures = textureChunks
                             .SelectMany(x => x.TextureTable.Rows)
                             .Cast<IMPD_AnimatableTexture>()
-                            .ToArray()
-                            .ToEnumerableWithLength();
+                            .ToArray();
                     }
                     _gotTextures = true;
                 }
@@ -398,7 +394,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public IIndexedEnumerableWithLength<byte> DataAfterInstances {
+        public IReadOnlyList<byte> DataAfterInstances {
             get => DataAfterInstancesTable;
             set {}
         }

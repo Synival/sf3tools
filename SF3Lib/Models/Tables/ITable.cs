@@ -1,4 +1,4 @@
-using CommonLib;
+using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Structs;
 
@@ -6,7 +6,7 @@ namespace SF3.Models.Tables {
     /// <summary>
     /// Interface for any table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable : IEnumerableWithLength {
+    public interface ITable {
         /// <summary>
         /// Loads all rows of the table.
         /// </summary>
@@ -63,15 +63,25 @@ namespace SF3.Models.Tables {
         /// The rows represent a contiguous set of data from Address to Address + SizeInBytesPlusTerminator.
         /// </summary>
         bool IsContiguous { get; }
+
+        /// <summary>
+        /// Number of items in this table.
+        /// </summary>
+        int Count { get; }
     }
 
     /// <summary>
     /// Interface for a specific table of SF3 data that can be modified.
     /// </summary>
-    public interface ITable<T> : ITable, IIndexedEnumerableWithLength<T> where T : class, IStruct {
+    public interface ITable<T> : ITable, IReadOnlyList<T> where T : class, IStruct {
         /// <summary>
         /// A mutable array of rows of type T.
         /// </summary>
         T[] Rows { get; }
+
+        /// <summary>
+        /// Number of items in this table.
+        /// </summary>
+        new int Count { get; }
     }
 }

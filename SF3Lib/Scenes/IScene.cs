@@ -1,4 +1,4 @@
-﻿using CommonLib;
+﻿using System.Collections.Generic;
 using SF3.Actors;
 using SF3.Models.Structs.X1.Battle;
 
@@ -20,7 +20,7 @@ namespace SF3.Scenes {
         /// <summary>
         /// Actors in the scene.
         /// </summary>
-        IIndexedEnumerableWithLength<IActor> Actors { get; }
+        IReadOnlyList<IActor> Actors { get; }
 
         /// <summary>
         /// Number of zones in the scene. Always zero for non-battles.
@@ -30,6 +30,6 @@ namespace SF3.Scenes {
         /// <summary>
         /// Zones for the scene. Always 'null' for non-battles.
         /// </summary>
-        IIndexedEnumerableWithLength<Zone> Zones { get; }
+        IReadOnlyList<Zone> Zones { get; }
     }
 }

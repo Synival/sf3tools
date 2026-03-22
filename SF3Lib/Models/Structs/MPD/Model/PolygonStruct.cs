@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -78,7 +77,7 @@ namespace SF3.Models.Structs.MPD.Model {
             set => Data.SetWord(_vertex4Addr, value);
         }
 
-        private class MockVertices : IIndexedEnumerableWithLength<int> {
+        private class MockVertices : IReadOnlyList<int> {
             public MockVertices(PolygonStruct polygon) {
                 Polygon = polygon;
             }
@@ -110,6 +109,6 @@ namespace SF3.Models.Structs.MPD.Model {
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        public IIndexedEnumerableWithLength<int> Vertices { get; }
+        public IReadOnlyList<int> Vertices { get; }
     }
 }

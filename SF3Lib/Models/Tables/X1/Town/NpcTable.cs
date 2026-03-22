@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CommonLib;
 using SF3.Actors;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared;
@@ -8,7 +7,7 @@ using SF3.Models.Structs.X1.Town;
 using SF3.Scenes;
 
 namespace SF3.Models.Tables.X1.Town {
-    public class NpcTable : TerminatedTable<Npc>, IScene, IIndexedEnumerableWithLength<IActor> {
+    public class NpcTable : TerminatedTable<Npc>, IScene, IReadOnlyList<IActor> {
         protected NpcTable(IByteData data, string name, int address, Dictionary<uint, ActorScript> actorScripts)
         : base(data, name, address, 2, 100) {
             ActorScripts = actorScripts;
@@ -28,9 +27,8 @@ namespace SF3.Models.Tables.X1.Town {
                 false);
         }
 
-        IActor[] IIndexedEnumerableWithLength<IActor>.AsArray() => Rows;
         IEnumerator<IActor> IEnumerable<IActor>.GetEnumerator() => GetEnumerator();
-        IActor IIndexedEnumerableWithLength<IActor>.this[int index] => Rows[index];
+        IActor IReadOnlyList<IActor>.this[int index] => Rows[index];
 
         private Dictionary<uint, ActorScript> _actorScripts;
         public Dictionary<uint, ActorScript> ActorScripts {
@@ -46,8 +44,8 @@ namespace SF3.Models.Tables.X1.Town {
 
         public bool IsBattle => false;
         public string SceneName => Name;
-        public IIndexedEnumerableWithLength<IActor> Actors => this;
+        public IReadOnlyList<IActor> Actors => this;
         public int NumZones => 0;
-        public IIndexedEnumerableWithLength<Zone> Zones => null;
+        public IReadOnlyList<Zone> Zones => null;
     }
 }

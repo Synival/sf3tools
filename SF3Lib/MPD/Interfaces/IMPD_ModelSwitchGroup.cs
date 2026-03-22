@@ -1,4 +1,4 @@
-﻿using CommonLib;
+﻿using System.Collections.Generic;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -13,12 +13,12 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// IDs of model instances that are only visible when 'Flag' is off.
         /// </summary>
-        IEnumerableWithLength<int> ModelInstancesVisibleWhenOff { get; }
+        IReadOnlyList<int> ModelInstancesVisibleWhenOff { get; }
 
         /// <summary>
         /// IDs of model instances that are only visible when 'Flag' is on.
         /// </summary>
-        IEnumerableWithLength<int> ModelInstancesVisibleWhenOn { get; }
+        IReadOnlyList<int> ModelInstancesVisibleWhenOn { get; }
 
         /// <summary>
         /// This is the state of the toggle when editing. Only relevant to SF3Editor.

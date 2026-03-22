@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using CommonLib;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Main;
 using SF3.MPD.Interfaces;
@@ -69,7 +69,7 @@ namespace SF3.Models.Structs.MPD {
             set {}
         }
 
-        public IIndexedEnumerableWithLength<byte> UnreferencedDataAfterPaletteAdjustmentTable {
+        public IReadOnlyList<byte> UnreferencedDataAfterPaletteAdjustmentTable {
             get => MPD_File.UnreferencedDataAfterPaletteAdjustmentTable;
             set {}
         }

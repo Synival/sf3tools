@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using CommonLib;
-using CommonLib.Extensions;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -14,15 +13,15 @@ namespace SF3.Models.Files.MPD {
 
         public MPD_CollectionType Collection { get; }
 
-        public IEnumerableWithLength<IMPD_Model> Models => new IMPD_Model[0].ToEnumerableWithLength();
+        public IReadOnlyList<IMPD_Model> Models => new IMPD_Model[0];
 
-        public IEnumerableWithLength<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0].ToEnumerableWithLength();
+        public IReadOnlyList<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0];
 
         public IMPD_ModelLoD GetModel(int id, int lod) => null;
 
         private bool _gotTextures = false;
-        private IEnumerableWithLength<IMPD_AnimatableTexture> _textures = null;
-        public IEnumerableWithLength<IMPD_AnimatableTexture> Textures {
+        private IReadOnlyList<IMPD_AnimatableTexture> _textures = null;
+        public IReadOnlyList<IMPD_AnimatableTexture> Textures {
             get {
                 if (!_gotTextures) {
                     var textureChunks = MPD_File.TextureChunks
@@ -33,8 +32,7 @@ namespace SF3.Models.Files.MPD {
                         _textures = textureChunks
                             .SelectMany(x => x.TextureTable.Rows)
                             .Cast<IMPD_AnimatableTexture>()
-                            .ToArray()
-                            .ToEnumerableWithLength();
+                            .ToArray();
                     }
                     _gotTextures = true;
                 }
@@ -42,7 +40,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public IIndexedEnumerableWithLength<byte> DataAfterInstances => null;
+        public IReadOnlyList<byte> DataAfterInstances => null;
 
         public IMPD_File MPD_File { get; }
         public bool IsUnreferenced { get; set; } = true;

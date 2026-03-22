@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using CommonLib.SGL;
 using CommonLib.Types;
 using SF3.MPD.Interfaces;
@@ -26,10 +25,10 @@ namespace SF3.MPD.Project {
         public int ModelID { get; }
         public int LevelOfDetail { get; }
 
-        public IIndexedEnumerableWithLength<VECTOR> Vertices => _actualModel.Vertices;
+        public IReadOnlyList<VECTOR> Vertices => _actualModel.Vertices;
 
-        private class FaceCollectionWrapper : IIndexedEnumerableWithLength<ISGL_ModelFace> {
-            public FaceCollectionWrapper(IIndexedEnumerableWithLength<ISGL_ModelFace> faces, int lod) {
+        private class FaceCollectionWrapper : IReadOnlyList<ISGL_ModelFace> {
+            public FaceCollectionWrapper(IReadOnlyList<ISGL_ModelFace> faces, int lod) {
                 _actualFaces = faces;
                 LevelOfDetail = lod;
             }
@@ -42,7 +41,7 @@ namespace SF3.MPD.Project {
 
                 private ISGL_ModelFace _actualFace;
 
-                public IIndexedEnumerableWithLength<int> VertexIndices => _actualFace.VertexIndices;
+                public IReadOnlyList<int> VertexIndices => _actualFace.VertexIndices;
 
                 public VECTOR Normal {
                     get => _actualFace.Normal;
@@ -135,12 +134,12 @@ namespace SF3.MPD.Project {
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            private IIndexedEnumerableWithLength<ISGL_ModelFace> _actualFaces;
+            private IReadOnlyList<ISGL_ModelFace> _actualFaces;
             public int LevelOfDetail { get; }
 
             private Dictionary<int, FaceWrapper> _faces = new Dictionary<int, FaceWrapper>();
         }
 
-        public IIndexedEnumerableWithLength<ISGL_ModelFace> Faces { get; }
+        public IReadOnlyList<ISGL_ModelFace> Faces { get; }
     }
 }

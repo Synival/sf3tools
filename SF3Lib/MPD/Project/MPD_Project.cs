@@ -69,14 +69,14 @@ namespace SF3.MPD.Project {
                     ModelCollections.Add(modelCollection.Key, new MPD_ModelCollection(modelCollection.Value));
 
             if (original.ModelSwitchGroups != null)
-                ModelSwitchGroups = original.ModelSwitchGroups.Select(x => (IMPD_ModelSwitchGroup) new MPD_ModelSwitchGroup(x)).ToArray().ToEnumerableWithLength();
+                ModelSwitchGroups = original.ModelSwitchGroups.Select(x => (IMPD_ModelSwitchGroup) new MPD_ModelSwitchGroup(x)).ToArray();
 
             if (original.Scenario1UnknownTable1 != null)
-                Scenario1UnknownTable1 = ((ushort[]) (original.Scenario1UnknownTable1.AsArray().Clone())).ToEnumerableWithLength();
+                Scenario1UnknownTable1 = (ushort[]) original.Scenario1UnknownTable1.ToArray().Clone();
             if (original.Scenario1UnknownTable2 != null)
-                Scenario1UnknownTable2 = ((ushort[]) (original.Scenario1UnknownTable2.AsArray().Clone())).ToEnumerableWithLength();
+                Scenario1UnknownTable2 = (ushort[]) original.Scenario1UnknownTable2.ToArray().Clone();
             if (original.GroundAnimationData != null)
-                GroundAnimationData = ((byte[]) (original.GroundAnimationData.AsArray().Clone())).ToEnumerableWithLength();
+                GroundAnimationData = (byte[]) original.GroundAnimationData.ToArray().Clone();
 
             if (original.CameraBoundaries != null)
                 CameraBoundaries = new RectangleShort() { P1 = original.CameraBoundaries.P1, P2 = original.CameraBoundaries.P2 };
@@ -139,12 +139,11 @@ namespace SF3.MPD.Project {
                 t => ((JArray) t)
                     .Select(x => (IMPD_ModelSwitchGroup) MPD_ModelSwitchGroup.FromJToken(x))
                     .ToArray()
-                    .ToEnumerableWithLength()
                 );
 
-            Scenario1UnknownTable1 = jObject.GetValueIfExists("Scenario1UnknownTable1", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray().ToEnumerableWithLength());
-            Scenario1UnknownTable2 = jObject.GetValueIfExists("Scenario1UnknownTable2", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray().ToEnumerableWithLength());
-            GroundAnimationData    = jObject.GetValueIfExists("GroundAnimationData",    t => ((JArray) t).Select(x => (byte) x).ToArray().ToEnumerableWithLength());
+            Scenario1UnknownTable1 = jObject.GetValueIfExists("Scenario1UnknownTable1", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray());
+            Scenario1UnknownTable2 = jObject.GetValueIfExists("Scenario1UnknownTable2", t => ((JArray) t).Select(x => (ushort) (int) x).ToArray());
+            GroundAnimationData    = jObject.GetValueIfExists("GroundAnimationData",    t => ((JArray) t).Select(x => (byte) x).ToArray());
             CameraBoundaries       = jObject.GetValueIfExists("CameraBoundaries",       t => RectangleShort.FromJToken(t));
             BattleCursorBoundaries = jObject.GetValueIfExists("BattleCursorBoundaries", t => RectangleShort.FromJToken(t));
             Collisions             = jObject.GetValueIfExists("Collisions",             t => MPD_Collisions.FromJToken(t));
@@ -178,15 +177,15 @@ namespace SF3.MPD.Project {
         public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; private set; }
         public Palette TexturePalette { get; set; }
         public IMPD_Lighting Lighting { get; set; }
-        public IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; set; }
+        public IReadOnlyList<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; set; }
         public IMPD_Planes Planes { get; set; }
         public IMPD_Collisions Collisions { get; set; }
         public IRectangleShort CameraBoundaries { get; set; }
         public IRectangleShort BattleCursorBoundaries { get; set; }
         public IMPD_Gradient Gradient { get; set; }
-        public IIndexedEnumerableWithLength<byte> GroundAnimationData { get; set; }
-        public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 { get; set; }
-        public IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; set; }
+        public IReadOnlyList<byte> GroundAnimationData { get; set; }
+        public IReadOnlyList<ushort> Scenario1UnknownTable1 { get; set; }
+        public IReadOnlyList<ushort> Scenario1UnknownTable2 { get; set; }
 
         public INameGetterContext NameGetterContext => null;
         public string Title => "";

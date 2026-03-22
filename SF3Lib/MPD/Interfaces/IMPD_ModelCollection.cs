@@ -1,4 +1,4 @@
-﻿using CommonLib;
+﻿using System.Collections.Generic;
 using SF3.Imaging;
 using SF3.Types;
 
@@ -21,24 +21,24 @@ namespace SF3.MPD.Interfaces {
         /// All models that belong to this collection.
         /// </summary>
         /// <returns>Several models in a structure compatible with SGL.</returns>
-        IEnumerableWithLength<IMPD_Model> Models { get; }
+        IReadOnlyList<IMPD_Model> Models { get; }
 
         /// <summary>
         /// All instances of models that belong to this collection.
         /// </summary>
         /// <returns>Several instances of models in a structure compatible with SGL.</returns>
-        IEnumerableWithLength<IMPD_ModelInstance> ModelInstances { get; }
+        IReadOnlyList<IMPD_ModelInstance> ModelInstances { get; }
 
         /// <summary>
         /// All textures associated with this collection.
         /// </summary>
-        IEnumerableWithLength<IMPD_AnimatableTexture> Textures { get; }
+        IReadOnlyList<IMPD_AnimatableTexture> Textures { get; }
 
         /// <summary>
         /// Optional data that exists after the model instance table but before PDATAs.
         /// This appears in ATBTL2 (S2), ELINB, and ATBTL2 (S3).
         /// </summary>
-        IIndexedEnumerableWithLength<byte> DataAfterInstances { get; }
+        IReadOnlyList<byte> DataAfterInstances { get; }
 
         /// <summary>
         /// When 'true', this model is serialized but not referenced in the MPD header.

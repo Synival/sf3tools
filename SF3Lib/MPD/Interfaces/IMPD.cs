@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CommonLib;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
 using SF3.MPD.Interfaces.Flags;
@@ -51,7 +50,7 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Collection of model switch groups.
         /// </summary>
-        IIndexedEnumerableWithLength<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; }
+        IReadOnlyList<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; }
 
         /// <summary>
         /// Collection of specific plane types (ground, tiled ground, battle sky, scene sky, background, foreground).
@@ -83,17 +82,17 @@ namespace SF3.MPD.Interfaces {
         /// Table used to animate the ground plane, corresponding to the SGL sl1MapRA() function.
         /// (Not currently supported)
         /// </summary>
-        IIndexedEnumerableWithLength<byte> GroundAnimationData { get; }
+        IReadOnlyList<byte> GroundAnimationData { get; }
 
         /// <summary>
         /// First unknown Scenario 1 0xFFFF-terminated table.
         /// </summary>
-        IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable1 { get; }
+        IReadOnlyList<ushort> Scenario1UnknownTable1 { get; }
 
         /// <summary>
         /// Second unknown Scenario 1 0xFFFF-terminated table.
         /// </summary>
-        IIndexedEnumerableWithLength<ushort> Scenario1UnknownTable2 { get; }
+        IReadOnlyList<ushort> Scenario1UnknownTable2 { get; }
 
         /// <summary>
         /// Triggered when models have been updated and something needs to be informed, like a viewer.

@@ -1,4 +1,4 @@
-﻿using CommonLib;
+﻿using System.Collections.Generic;
 using SF3.Types;
 
 namespace SF3.MPD.Interfaces {
@@ -24,6 +24,6 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Set of models used for each level-of-detail.
         /// </summary>
-        IIndexedEnumerableWithLength<IMPD_ModelLoD> ModelLoDs { get; }
+        IReadOnlyList<IMPD_ModelLoD> ModelLoDs { get; }
     }
 }
