@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Imaging;
-using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;
@@ -41,10 +40,26 @@ namespace SF3.MPD.Project {
             // Tags are not serialized.
         }
 
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                OnDispose(disposing);
+                _disposedValue = true;
+            }
+        }
+
+        protected virtual void OnDispose(bool disposing) {}
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            System.GC.SuppressFinalize(this);
+        }
+
         public int ID { get; }
         public MPD_CollectionType Collection { get; }
         public bool IsIgnored { get; set; }
 
         public Dictionary<TagKey, TagValue> Tags { get; }
+
+        private bool _disposedValue;
     }
 }

@@ -1,15 +1,31 @@
-﻿using SF3.ByteData;
+﻿using System;
+using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD.Animation;
 
 namespace SF3.Models.Tables.MPD.Animation {
-    public class AnimationTable : TerminatedTable<AnimationStruct> {
+    public class AnimationTable : TerminatedTable<AnimationStruct>, IDisposable {
         protected AnimationTable(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
         : base(data, name, address, is32Bit ? 8 : 4, null) {
             Is32Bit      = is32Bit;
             MPD_File     = mpdFile;
             FrameEndId   = is32Bit ? 0xFFFF_FFFE : 0xFFFE;
             TextureEndId = is32Bit ? 0xFFFF_FFFF : 0xFFFF;
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    foreach (var anim in Rows)
+                        anim.Dispose();
+
+                _disposedValue = true;
+            }
         }
 
         public static AnimationTable Create(IByteData data, string name, int address, bool is32Bit, IMPD_File mpdFile)
@@ -31,5 +47,7 @@ namespace SF3.Models.Tables.MPD.Animation {
         public IMPD_File MPD_File { get; }
         public uint FrameEndId { get; }
         public uint TextureEndId { get; }
+
+        private bool _disposedValue;
     }
 }

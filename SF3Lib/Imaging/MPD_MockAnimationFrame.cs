@@ -5,10 +5,27 @@ using CommonLib.Types;
 using SF3.Types;
 
 namespace SF3.Imaging {
-    public class MPD_MockAnimationFrame : IMPD_AnimationFrame {
+    public class MPD_MockAnimationFrame : IMPD_AnimationFrame, IDisposable {
         public MPD_MockAnimationFrame(IMPD_Texture texture) {
             _texture = texture;
-            _texture.Invalidated += (s, e) => this.Invalidated?.Invoke(s, e);
+            _texture.Invalidated += InvalidateSelfHandler;
+        }
+
+        private void InvalidateSelfHandler(object sender, EventArgs args)
+            => this.Invalidated?.Invoke(sender, args);
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    _texture.Invalidated -= InvalidateSelfHandler;
+
+                _disposedValue = true;
+            }
         }
 
         public int Frame => 0;
@@ -49,6 +66,7 @@ namespace SF3.Imaging {
         public bool IsIgnored => false;
 
         private readonly IMPD_Texture _texture;
+        private bool _disposedValue;
 
         public event EventHandler Invalidated;
     }

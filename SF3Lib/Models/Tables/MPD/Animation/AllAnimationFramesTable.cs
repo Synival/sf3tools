@@ -17,7 +17,7 @@ namespace SF3.Models.Tables.MPD.Animation {
             return true;
         }
 
-        public IEnumerable<Structs.MPD.Animation.AnimationStruct> Animations { get; }
+        public IEnumerable<AnimationStruct> Animations { get; }
         public override int TerminatorSize => 0;
         public override bool IsContiguous => false;
     }

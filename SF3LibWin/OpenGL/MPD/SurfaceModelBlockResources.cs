@@ -25,6 +25,10 @@ namespace SF3.Win.OpenGL.MPD {
         public override void DeInit() { }
 
         public override void Reset() {
+            foreach (var anim in _mockAnims)
+                anim.Dispose();
+            _mockAnims.Clear();
+
             Models?.Dispose();
             Models?.Clear();
 
@@ -59,6 +63,7 @@ namespace SF3.Win.OpenGL.MPD {
             var missingSurfaceQuads    = new List<Quad>();
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
+            MPD_MockAnimation mockAnim = null;
 
             for (var y = TileY1; y < TileY2; y++) {
                 for (var x = TileX1; x < TileX2; x++) {
@@ -76,7 +81,7 @@ namespace SF3.Win.OpenGL.MPD {
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId))
                             if (texturesById.TryGetValue(textureId, out var tex))
-                                anim = tex.Animation ?? new MPD_MockAnimation(texturesById[textureId]);
+                                anim = tex.Animation ?? (mockAnim = new MPD_MockAnimation(texturesById[textureId]));
                     }
 
                     var vertexNormals = tile.GetVector3Normals();
@@ -150,6 +155,9 @@ namespace SF3.Win.OpenGL.MPD {
 
                     var selectionColor = new Vector4(x / (float) SurfaceModelResources.WidthInTiles, y / (float) SurfaceModelResources.HeightInTiles, 0, 1);
                     surfaceSelectionQuads.Add(new Quad(vertices, selectionColor));
+
+                    if (mockAnim != null)
+                        _mockAnims.Add(mockAnim);
                 }
             }
 
@@ -193,5 +201,7 @@ namespace SF3.Win.OpenGL.MPD {
         public DisposableList<QuadModel> Models { get; } = [];
 
         public bool NeedsUpdate { get; private set; } = true;
+
+        private List<MPD_MockAnimation> _mockAnims = new List<MPD_MockAnimation>();
     }
 }

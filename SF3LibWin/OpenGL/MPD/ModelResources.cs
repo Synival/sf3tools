@@ -28,6 +28,10 @@ namespace SF3.Win.OpenGL.MPD {
                 foreach (var model in modelsDict.Values)
                     model.Dispose();
 
+            foreach (var anim in _mockAnims)
+                anim.Dispose();
+            _mockAnims.Clear();
+
             ModelsByIDByCollection.Clear();
             MPD_ModelsByIDByCollection.Clear();
 
@@ -178,6 +182,7 @@ namespace SF3.Win.OpenGL.MPD {
                 IMPD_Animation anim = null;
                 var isSemiTransparent = false;
                 var flip = TextureFlipType.NoFlip;
+                MPD_MockAnimation mockAnim = null;
 
                 if (!isHideMesh) {
                     // Get texture. Fetch animated textures if possible.
@@ -204,7 +209,7 @@ namespace SF3.Win.OpenGL.MPD {
                     else {
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId))
                             if (texturesById.TryGetValue(textureId, out var tex))
-                                anim = tex.Animation ?? new MPD_MockAnimation(tex);
+                                anim = tex.Animation ?? (mockAnim = new MPD_MockAnimation(tex));
 
                         // If the texture is missing, mark this polygon bright red.
                         if (anim == null) {
@@ -299,6 +304,10 @@ namespace SF3.Win.OpenGL.MPD {
                     AddQuad();
                 }
 
+                // Clean-up.
+                if (mockAnim != null)
+                    _mockAnims.Add(mockAnim);
+
                 modelExists = true;
             }
 
@@ -325,5 +334,7 @@ namespace SF3.Win.OpenGL.MPD {
 
         public bool ApplyShadowTags { get; set; } = false;
         public bool ApplyHideTags { get; set; } = false;
+
+        private List<MPD_MockAnimation> _mockAnims = new List<MPD_MockAnimation>();
     }
 }

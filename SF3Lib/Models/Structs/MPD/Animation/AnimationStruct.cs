@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.Utils;
@@ -33,8 +32,6 @@ namespace SF3.Models.Structs.MPD.Animation {
             // Determine the number of frames. That will determine the size of this animation.
             var pos = FramesAddress;
 
-            var frames = new List<AnimationFrame>();
-
             // This happens in Scn2 SARA23.MPD for some reason...
             // (It's totally a mistake in the file. The game crashes if you let it run for about 36 minutes!!)
             if (TextureIDRaw == _frameEndOffset)
@@ -55,6 +52,18 @@ namespace SF3.Models.Structs.MPD.Animation {
                     for (var i = 0; i < frame.Duration; i++)
                         _frameByTimeFrame[frameCounter++] = frame;
                 }
+            }
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                AnimationFrameTable?.Dispose();
+                _disposedValue = true;
             }
         }
 
@@ -127,5 +136,6 @@ namespace SF3.Models.Structs.MPD.Animation {
         private readonly uint _frameEndOffset;
 
         private readonly IMPD_AnimationFrame[] _frameByTimeFrame;
+        private bool _disposedValue;
     }
 }

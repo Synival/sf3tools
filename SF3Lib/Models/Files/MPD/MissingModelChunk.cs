@@ -11,6 +11,21 @@ namespace SF3.Models.Files.MPD {
             Collection = collection;
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            System.GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!disposedValue) {
+                if (disposing) {
+                    // Nothing to dispose.
+                }
+
+                disposedValue = true;
+            }
+        }
+
         public MPD_CollectionType Collection { get; }
 
         public IReadOnlyList<IMPD_Model> Models => new IMPD_Model[0];
@@ -21,6 +36,7 @@ namespace SF3.Models.Files.MPD {
 
         private bool _gotTextures = false;
         private IReadOnlyList<IMPD_AnimatableTexture> _textures = null;
+
         public IReadOnlyList<IMPD_AnimatableTexture> Textures {
             get {
                 if (!_gotTextures) {
@@ -45,5 +61,7 @@ namespace SF3.Models.Files.MPD {
         public IMPD_File MPD_File { get; }
         public bool IsUnreferenced { get; set; } = true;
         public bool HasMissingModels => true;
+
+        private bool disposedValue;
     }
 }

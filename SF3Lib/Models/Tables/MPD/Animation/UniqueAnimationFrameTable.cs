@@ -20,11 +20,26 @@ namespace SF3.Models.Tables.MPD.Animation {
         public readonly bool IsIndexed;
     }
 
-    public class UniqueAnimationFrameTable : Table<UniqueAnimationFrame> {
+    public class UniqueAnimationFrameTable : Table<UniqueAnimationFrame>, IDisposable {
         protected UniqueAnimationFrameTable(IByteData data, string name, int address, Dictionary<int, UniqueAnimationFrameInfo> infoByOffset, IMPD_File mpdFile)
         : base(data, name, address) {
             InfoByOffset = infoByOffset;
             MPD_File = mpdFile;
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    foreach (var tex in Rows)
+                        tex.Dispose();
+
+                _disposedValue = true;
+            }
         }
 
         public override int TerminatorSize => 0;
@@ -94,5 +109,7 @@ namespace SF3.Models.Tables.MPD.Animation {
         public Dictionary<int, UniqueAnimationFrameInfo> InfoByOffset { get; }
         public Dictionary<int, UniqueAnimationFrame> FrameByOffset { get; private set; }
         public IMPD_File MPD_File { get; }
+
+        private bool _disposedValue;
     }
 }

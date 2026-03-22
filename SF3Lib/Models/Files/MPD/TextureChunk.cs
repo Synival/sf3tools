@@ -44,6 +44,12 @@ namespace SF3.Models.Files.MPD {
             };
         }
 
+        protected override void OnDispose(bool disposing) {
+            base.OnDispose(disposing);
+            if (disposing)
+                TextureTable?.Dispose();
+        }
+
         [BulkCopyRowName]
         public string Name { get; }
 

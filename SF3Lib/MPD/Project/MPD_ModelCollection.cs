@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
@@ -8,7 +9,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_ModelCollection : IMPD_ModelCollection {
+    public class MPD_ModelCollection : IMPD_ModelCollection, IDisposable {
         public MPD_ModelCollection(MPD_CollectionType collection) {
             Collection = collection;
             IsUnreferenced = false;
@@ -48,6 +49,22 @@ namespace SF3.MPD.Project {
                 IsUnreferenced = (bool) jObject["IsUnreferenced"];
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    if (Textures != null)
+                        foreach (var tex in Textures)
+                            tex.Dispose();
+
+                _disposedValue = true;
+            }
+        }
+
         public IMPD_ModelLoD GetModel(int id, int lod) {
             var model = Models.FirstOrDefault(x => x.ModelID == id);
             if (model == null || lod < 0 || lod >= model.LevelsOfDetail)
@@ -63,5 +80,7 @@ namespace SF3.MPD.Project {
         public IReadOnlyList<IMPD_AnimatableTexture> Textures { get; }
         public IReadOnlyList<byte> DataAfterInstances { get; }
         public IReadOnlyList<IMPD_Model> Models { get; }
+
+        private bool _disposedValue;
     }
 }

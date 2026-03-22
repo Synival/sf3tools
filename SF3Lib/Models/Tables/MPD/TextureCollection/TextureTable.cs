@@ -8,7 +8,7 @@ using SF3.Models.Structs.MPD.TextureChunk;
 using SF3.Types;
 
 namespace SF3.Models.Tables.MPD.TextureCollection {
-    public class TextureTable : FixedSizeTable<TextureStruct> {
+    public class TextureTable : FixedSizeTable<TextureStruct>, IDisposable {
         protected TextureTable(
             IByteData data, string name, int address,
             MPD_CollectionType collection, int textureCount, int startId, Dictionary<int, TexturePixelFormat> pixelFormats,
@@ -21,6 +21,21 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
             PixelFormats = pixelFormats;
             ChunkIndex   = chunkIndex;
             MPD_File     = mpdFile;
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    foreach (var tex in Rows)
+                        tex.Dispose();
+
+                _disposedValue = true;
+            }
         }
 
         public static TextureTable Create(
@@ -54,5 +69,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         public Dictionary<TexturePixelFormat, Palette> Palettes { get; }
         public int ChunkIndex { get; }
         public IMPD_File MPD_File { get; }
+
+        private bool _disposedValue;
     }
 }

@@ -6,7 +6,7 @@ using CommonLib.Types;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.Shared {
-    public abstract class TextureStructBase : Struct, ITextureData {
+    public abstract class TextureStructBase : Struct, ITextureData, IDisposable {
         public TextureStructBase(IByteData data, IByteArray imageData, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
         : base(data, id, name, address, size) {
@@ -20,8 +20,11 @@ namespace SF3.Models.Structs.Shared {
             _textureData.Invalidated += (s, e) => this.Invalidated?.Invoke(this, e);
 
             // On invalidation, update the image.
-            Invalidated += (s, e) => OnImageUpdated();
+            Invalidated += InvalidateHandler;
         }
+
+        private void InvalidateHandler(object sender, EventArgs args)
+            => OnImageUpdated();
 
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
@@ -33,6 +36,20 @@ namespace SF3.Models.Structs.Shared {
             _textureData.Height  = StructHeight;
             _textureData.Palette = StructPalette;
             _textureData.LoadImageData();
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    Invalidated -= InvalidateHandler;
+
+                _disposedValue = true;
+            }
         }
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB1555(highlightEndcodes);
@@ -133,5 +150,7 @@ namespace SF3.Models.Structs.Shared {
         protected abstract Palette StructPalette { get; set; }
 
         protected InPlaceTextureData _textureData;
+
+        private bool _disposedValue;
     }
 }

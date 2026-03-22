@@ -836,11 +836,15 @@ namespace SF3.Models.Files.X1 {
                     table.ActorScripts = ScriptsByAddress;
         }
 
-        public override void Dispose() {
-            if (Battles != null) {
-                foreach (var b in Battles.Where(x => x.Value != null))
-                    b.Value.Dispose();
-                Battles.Clear();
+        protected override void OnDispose(bool disposing) {
+            base.OnDispose(disposing);
+
+            if (disposing) {
+                if (Battles != null) {
+                    foreach (var b in Battles.Where(x => x.Value != null))
+                        b.Value.Dispose();
+                    Battles.Clear();
+                }
             }
         }
 

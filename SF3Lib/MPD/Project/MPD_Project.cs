@@ -116,6 +116,22 @@ namespace SF3.MPD.Project {
             AssignFromJObject(jObject);
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    if (ModelCollections != null)
+                        foreach (var mc in ModelCollections.Values)
+                            mc.Dispose();
+
+                _disposedValue = true;
+            }
+        }
+
         public bool AssignFromJSON_String(string json) => AssignFromJObject(JObject.Parse(json));
         public bool AssignFromJToken(JToken jToken) => AssignFromJObject((JObject) jToken);
         public bool AssignFromJObject(JObject jObject) {
@@ -168,7 +184,6 @@ namespace SF3.MPD.Project {
         public string[] GetErrors() => new string[0];
         public bool Finish() => true;
         public ScopeGuard IsModifiedChangeBlocker() => new ScopeGuard(() => {}, () => {});
-        public void Dispose() {}
 
         public IMPD_EditableFlags Flags { get; }
         public IMPD_Settings Settings { get; private set; }
@@ -190,6 +205,8 @@ namespace SF3.MPD.Project {
         public INameGetterContext NameGetterContext => null;
         public string Title => "";
         public bool IsModified { get; set; }
+
+        private bool _disposedValue;
 
         public event EventHandler ModelsUpdated;
         public event EventHandler Finished;

@@ -21,6 +21,24 @@ namespace SF3.Models.Files {
             Data.IsModifiedChanged += (s, e) => IsModifiedChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing) {
+                    Data.Dispose();
+                    OnDispose(disposing);
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        protected virtual void OnDispose(bool disposing) {}
+
         public virtual void Save(string filename)
             => File.WriteAllBytes(filename, Data.GetDataCopyOrReference());
 
@@ -29,7 +47,6 @@ namespace SF3.Models.Files {
         }
 
         private int _isModifiedGuard = 0;
-
         public virtual bool IsModified {
             get => Data.IsModified;
             set {
@@ -88,15 +105,12 @@ namespace SF3.Models.Files {
             }
         }
 
-        public virtual void Dispose() => Data.Dispose();
-
         public IByteData Data { get; }
-
         public INameGetterContext NameGetterContext { get; }
-
         public IEnumerable<ITable> Tables { get; private set; }
-
         public virtual string Title => "";
+
+        private bool _disposedValue;
 
         public event EventHandler Finished;
     }

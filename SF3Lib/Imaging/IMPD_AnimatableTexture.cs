@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using CommonLib.Imaging;
-using SF3.Types;
-
 namespace SF3.Imaging {
     /// <summary>
     /// Interface for a texture in an MPD that could potentially be replaced with an animation.

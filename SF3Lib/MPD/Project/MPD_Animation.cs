@@ -55,10 +55,27 @@ namespace SF3.MPD.Project {
             return Frames[0];
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    foreach (var frame in Frames)
+                        frame.Dispose();
+
+                _disposedValue = true;
+            }
+        }
+
         public IMPD_AnimatableTexture Texture { get; }
 
         public int FrameTimerStart { get; }
         public IMPD_AnimationFrame[] Frames { get; }
         public bool IsIgnored => Texture.IsIgnored;
+
+        private bool _disposedValue;
     }
 }

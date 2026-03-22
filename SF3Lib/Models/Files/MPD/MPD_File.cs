@@ -72,11 +72,20 @@ namespace SF3.Models.Files.MPD {
             return true;
         }
 
-        public override void Dispose() {
-            base.Dispose();
-            if (ChunkData != null) {
-                foreach (var cd in ChunkData.Where(x => x != null))
-                    cd.Dispose();
+        protected override void OnDispose(bool disposing) {
+            base.OnDispose(disposing);
+
+            if (disposing) {
+                AnimationFrameChunk?.Dispose();
+                if (TextureChunks != null)
+                    foreach (var tc in TextureChunks)
+                        tc?.Dispose();
+
+                if (ChunkData != null)
+                    foreach (var cd in ChunkData)
+                        cd?.Dispose();
+
+                Animations?.Dispose();
             }
         }
 

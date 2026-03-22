@@ -21,5 +21,11 @@ namespace SF3.MPD.Project {
             if (collection == MPD_CollectionType.Primary)
                 Animation = jObject.GetValueIfExists("Animation", t => MPD_Animation.FromJToken(t, this, palette));
         }
+
+        protected override void OnDispose(bool disposing) {
+            base.OnDispose(disposing);
+            if (disposing)
+                Animation?.Dispose();
+        }
     }
 }

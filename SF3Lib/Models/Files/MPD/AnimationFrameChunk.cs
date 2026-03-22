@@ -27,6 +27,12 @@ namespace SF3.Models.Files.MPD {
             };
         }
 
+        protected override void OnDispose(bool disposing) {
+            base.OnDispose(disposing);
+            if (disposing)
+                UniqueAnimationFrameTable?.Dispose();
+        }
+
         [BulkCopyRowName]
         public string Name { get; }
         public Dictionary<int, UniqueAnimationFrameInfo> InfoByOffset { get; }
