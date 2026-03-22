@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Types;
+using CommonLib.Utils;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.DAT {

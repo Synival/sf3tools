@@ -1,5 +1,5 @@
-﻿using static CommonLib.Utils.Compression;
-using static CommonLib.Extensions.ArrayExtensions;
+﻿using CommonLib.Utils;
+using static CommonLib.Utils.Compression;
 
 namespace CommonLib.Tests.Utils {
     [TestClass]

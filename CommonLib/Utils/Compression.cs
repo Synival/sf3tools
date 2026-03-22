@@ -47,7 +47,7 @@ namespace CommonLib.Utils {
             if (offset % 2 == 1)
                 throw new ArgumentException(nameof(offset) + ": must be an even number of bytes");
 
-            var output = DecompressLZSS(data.ToUShorts(), offset / 2, maxOutput * 2, out var wordsRead, out endDataFound).ToByteArray();
+            var output = DecompressLZSS(data.ToUShorts(), offset / 2, maxOutput * 2, out var wordsRead, out endDataFound).ToBytes();
             bytesRead = wordsRead * 2;
             return output;
         }
@@ -139,7 +139,7 @@ breakEntireLoop:
             if (data.Length % 2 == 1)
                 throw new ArgumentException(nameof(data) + ": must be an even number of bytes");
             var compressedData = CompressLZSS(data.ToUShorts());
-            return compressedData.ToByteArray();
+            return compressedData.ToBytes();
         }
 
         /// <summary>

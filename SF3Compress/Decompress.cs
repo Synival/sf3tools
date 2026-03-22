@@ -3,8 +3,8 @@ using System.IO;
 using CommonLib.Logging;
 using CommonLib.Types;
 using NDesk.Options;
-using static CommonLib.Extensions.StringExtensions;
-using static CommonLib.Extensions.ArrayExtensions;
+using CommonLib.Extensions;
+using CommonLib.Utils;
 
 namespace SF3Compress {
     public static class Decompress {

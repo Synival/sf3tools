@@ -9,7 +9,7 @@ namespace SF3.MPD.Interfaces {
     public static class IMPD_AnimationFrameExtensions {
         public static JObject ToJObject(this IMPD_AnimationFrame frame) {
             var imageData = (frame.PixelFormat == TexturePixelFormat.ABGR1555)
-                ? frame.ImageData16Bit.To1DArrayTransposed().ToByteArray()
+                ? frame.ImageData16Bit.To1DArrayTransposed().ToBytes()
                 : frame.ImageData8Bit.To1DArrayTransposed();
 
             return new JObject {

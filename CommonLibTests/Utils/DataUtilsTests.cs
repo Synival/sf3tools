@@ -106,7 +106,7 @@ namespace CommonLib.Tests.Utils {
             ushort[] ushortArray = [ 0xDEAD, 0xBEEF, 0xFEED, 0xDAD0 ];
             byte[] expectedByteArray = [ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED, 0xDA, 0xD0 ];
 
-            var byteArray = ushortArray.ToByteArray();
+            var byteArray = ushortArray.ToBytes();
             Assert.IsTrue(Enumerable.SequenceEqual(byteArray, expectedByteArray));
         }
 
@@ -115,7 +115,7 @@ namespace CommonLib.Tests.Utils {
             uint[] uintArray = [ 0xDEADBEEF, 0xFEEDDAD0 ];
             byte[] expectedByteArray = [ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED, 0xDA, 0xD0 ];
 
-            var byteArray = uintArray.ToByteArray();
+            var byteArray = uintArray.ToBytes();
             Assert.IsTrue(Enumerable.SequenceEqual(byteArray, expectedByteArray));
         }
     }

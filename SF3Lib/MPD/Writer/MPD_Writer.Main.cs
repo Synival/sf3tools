@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Geometry;
@@ -356,11 +355,11 @@ namespace SF3.MPD.Writer {
 
                 foreach (var frame in tex.Animation.Frames) {
                     var imageData = (frame.BytesPerPixel == 2)
-                        ? frame.ImageData16Bit.To1DArrayTransposed().ToByteArray()
+                        ? frame.ImageData16Bit.To1DArrayTransposed().ToBytes()
                         : frame.ImageData8Bit.To1DArrayTransposed();
 
                     if (frame.BytesPerPixel == 1 && !allowIndexed)
-                        imageData = imageData.ConvertIndexedToABGR1555(frame.Palette, zeroIsTransparent: true).ToByteArray();
+                        imageData = imageData.ConvertIndexedToABGR1555(frame.Palette, zeroIsTransparent: true).ToBytes();
 
                     var chunk3FramePos = AddTextureToChunk3(imageData);
 

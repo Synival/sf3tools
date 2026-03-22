@@ -87,8 +87,8 @@ namespace SF3.CHR {
         /// <param name="command">Command or FrameID for this frame.</param>
         /// <param name="parameter">Parameter for this command.</param>
         public void WriteAnimationCommand(int command, int parameter) {
-            WriteBytes(((ushort) command).ToByteArray());
-            WriteBytes(((ushort) parameter).ToByteArray());
+            WriteBytes(((ushort) command).ToBytes());
+            WriteBytes(((ushort) parameter).ToBytes());
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace SF3.CHR {
         public void WriteAnimationTable(int spriteIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
             if (spriteInfo.UnassignedAnimationTablePointerOffset.HasValue) {
-                AtOffset(spriteInfo.UnassignedAnimationTablePointerOffset.Value, (currentPos) => Stream.Write(currentPos.ToByteArray(), 0, 4));
+                AtOffset(spriteInfo.UnassignedAnimationTablePointerOffset.Value, (currentPos) => Stream.Write(currentPos.ToBytes(), 0, 4));
                 spriteInfo.UnassignedAnimationTablePointerOffset = null;
             }
 
@@ -111,7 +111,7 @@ namespace SF3.CHR {
             var animationOffsetTable = spriteInfo.AnimationOffsetTableOffsets;
             for (int i = 0; i < tableSize; i++) {
                 var offset = (int) (animationOffsetTable.ContainsKey(i) ? (animationOffsetTable[i] - StreamStartPosition) : 0);
-                WriteBytes(offset.ToByteArray());
+                WriteBytes(offset.ToBytes());
             }
         }
 
@@ -130,7 +130,7 @@ namespace SF3.CHR {
 
             // Get the frame image offset if it's already been written. Otherwise, write '0' as a placeholder.
             var frameImageOffset = frameImageInfo.Offset ?? 0;
-            WriteBytes(((uint) frameImageOffset).ToByteArray());
+            WriteBytes(((uint) frameImageOffset).ToBytes());
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace SF3.CHR {
             // Update existing pointers to this image.
             var frameImageInfo = GetFrameImageInfo(frameKey);
             if (frameImageInfo.UnassignedPointerOffsets.Count > 0) {
-                AtOffsets(frameImageInfo.UnassignedPointerOffsets.ToArray(), (offset) => Stream.Write(offset.ToByteArray(), 0, 4));
+                AtOffsets(frameImageInfo.UnassignedPointerOffsets.ToArray(), (offset) => Stream.Write(offset.ToBytes(), 0, 4));
                 frameImageInfo.UnassignedPointerOffsets.Clear();
             }
 
@@ -177,7 +177,7 @@ namespace SF3.CHR {
         private void AssignUnassignedFrameTablePointerToCurrentPosition(int spriteIndex) {
             var spriteInfo = GetSpriteInfo(spriteIndex);
             if (spriteInfo.UnassignedFrameTablePointerOffset.HasValue) {
-                AtOffset(spriteInfo.UnassignedFrameTablePointerOffset.Value, (curPosition) => Stream.Write(curPosition.ToByteArray(), 0, 4));
+                AtOffset(spriteInfo.UnassignedFrameTablePointerOffset.Value, (curPosition) => Stream.Write(curPosition.ToBytes(), 0, 4));
                 spriteInfo.UnassignedFrameTablePointerOffset = null;
             }
         }

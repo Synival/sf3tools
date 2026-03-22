@@ -237,48 +237,6 @@ namespace CommonLib.Extensions {
         }
 
         /// <summary>
-        /// Converts an array of bytes to an array of ushorts.
-        /// </summary>
-        /// <param name="bytes">Input array to convert.</param>
-        /// <returns>An array of ushort[] with half the length of 'bytes'.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public static ushort[] ToUShorts(this byte[] bytes) {
-            if (bytes.Length % 2 != 0)
-                throw new ArgumentException($"'{nameof(bytes)}.Length' must be divisible by 2");
-
-            var shorts = new ushort[bytes.Length / 2];
-            int pos = 0;
-            for (int i = 0; i < shorts.Length; i++) {
-                shorts[i] = (ushort) (bytes[pos++] << 8);
-                shorts[i] += bytes[pos++];
-            }
-
-            return shorts;
-        }
-
-        /// <summary>
-        /// Converts an array of bytes to an array of uints.
-        /// </summary>
-        /// <param name="bytes">Input array to convert.</param>
-        /// <returns>An array of uint[] with a quarter the length of 'bytes'.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public static uint[] ToUInts(this byte[] bytes) {
-            if (bytes.Length % 4 != 0)
-                throw new ArgumentException($"'{nameof(bytes)}.Length' must be divisible by 4");
-
-            var ints = new uint[bytes.Length / 4];
-            int pos = 0;
-            for (int i = 0; i < ints.Length; i++) {
-                ints[i]  = (uint) (bytes[pos++] << 24);
-                ints[i] |= (uint) (bytes[pos++] << 16);
-                ints[i] |= (uint) (bytes[pos++] << 8);
-                ints[i] |= bytes[pos++];
-            }
-
-            return ints;
-        }
-
-        /// <summary>
         /// Updates transparency pixels of an image to either by 0x0000 (transparent) or, if end codes are enabled,
         /// 0x7FFF to indicate the start and stop of rows.
         /// </summary>

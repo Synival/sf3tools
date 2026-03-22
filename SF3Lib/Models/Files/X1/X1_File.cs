@@ -261,7 +261,7 @@ namespace SF3.Models.Files.X1 {
 
             // Look for known functions and create corresponding DiscoveredData() entries.
             var funcs = KnownX1Functions.AllKnownFunctions
-                .Select(x => new { Info = x, Size = x.Data.Length * 2, Indices = data.IndicesOfSubset(x.Data.ToByteArray())})
+                .Select(x => new { Info = x, Size = x.Data.Length * 2, Indices = data.IndicesOfSubset(x.Data.ToBytes())})
                 .ToArray();
 
             // TODO: shouldn't be just in X1 file. do this better!!

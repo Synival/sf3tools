@@ -77,7 +77,7 @@ namespace SF3.Models.Tables.Shared {
                 for (int x = 0; x < dataWidth && pos < newColors.Length; x++)
                     newColors[pos++] = (ushort) (palette.Channels[data[x, y]].ToABGR1555() & 0x7FFF);
 
-            Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToByteArray());
+            Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToBytes());
         }
 
         public ushort[,] ImageData16Bit {
@@ -96,7 +96,7 @@ namespace SF3.Models.Tables.Shared {
                     for (int x = 0; x < dataWidth && pos < newColors.Length; x++)
                         newColors[pos++] = (ushort) (value[x, y] & 0x7FFF);
 
-                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToByteArray());
+                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToBytes());
             }
         }
 
@@ -122,7 +122,7 @@ namespace SF3.Models.Tables.Shared {
                 for (int i = 0; i < Size && i < value.Channels.Length; i++)
                     newColors[i] = (ushort) (value.Channels[i].ToABGR1555() & 0x7FFF);
 
-                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToByteArray());
+                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToBytes());
             }
         }
 

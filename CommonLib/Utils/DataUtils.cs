@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -119,16 +120,76 @@ namespace CommonLib.Utils {
             return -1;
         }
 
-        public static unsafe byte[] ToByteArray(this ushort src)
-            => ToByteArray(new ushort[] { src });
+        /// <summary>
+        /// Converts an array of bytes to an array of ushorts.
+        /// </summary>
+        /// <param name="bytes">Input array to convert.</param>
+        /// <returns>An array of ushort[] with half the length of 'bytes'.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static ushort[] ToUShorts(this byte[] bytes) {
+            if (bytes.Length % 2 != 0)
+                throw new ArgumentException($"'{nameof(bytes)}.Length' must be divisible by 2");
 
-        public static unsafe byte[] ToByteArray(this int src)
-            => ToByteArray(new uint[] { (uint) src });
+            int shortsLen = bytes.Length / 2;
+            var shorts = new ushort[shortsLen];
 
-        public static unsafe byte[] ToByteArray(this uint src)
-            => ToByteArray(new uint[] { src });
+            unsafe {
+            fixed(ushort* pShorts = shorts) {
+            fixed(byte* pBytes = bytes) {
 
-        public static unsafe byte[] ToByteArray(this ushort[] src) {
+            for (int inPos = 0, outPos = 0; outPos < shortsLen; inPos += 2, outPos++)
+                pShorts[outPos] = (ushort) ((pBytes[inPos] << 8) | pBytes[inPos + 1]);
+
+            return shorts;
+
+            } // fixed
+            } // fixed
+            } // unsafe
+        }
+
+        /// <summary>
+        /// Converts an array of bytes to an array of uints.
+        /// </summary>
+        /// <param name="bytes">Input array to convert.</param>
+        /// <returns>An array of uint[] with a quarter the length of 'bytes'.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static uint[] ToUInts(this byte[] bytes) {
+            if (bytes.Length % 4 != 0)
+                throw new ArgumentException($"'{nameof(bytes)}.Length' must be divisible by 4");
+
+            int insLen = bytes.Length / 4;
+            var ints = new uint[insLen];
+
+            unsafe {
+            fixed(uint* pInts = ints) {
+            fixed(byte* pBytes = bytes) {
+
+            for (int inPos = 0, outPos = 0; outPos < insLen; inPos += 4, outPos++) {
+                pInts[outPos] = (uint) (
+                    (pBytes[inPos    ] << 24) |
+                    (pBytes[inPos + 1] << 16) |
+                    (pBytes[inPos + 2] <<  8) |
+                     pBytes[inPos + 3]
+                );
+            }
+
+            return ints;
+
+            } // fixed
+            } // fixed
+            } // unsafe
+        }
+
+        public static unsafe byte[] ToBytes(this ushort src)
+            => ToBytes(new ushort[] { src });
+
+        public static unsafe byte[] ToBytes(this int src)
+            => ToBytes(new uint[] { (uint) src });
+
+        public static unsafe byte[] ToBytes(this uint src)
+            => ToBytes(new uint[] { src });
+
+        public static unsafe byte[] ToBytes(this ushort[] src) {
             if (src.Length == 0)
                 return new byte[0];
 
@@ -148,7 +209,7 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static unsafe byte[] ToByteArray(this uint[] src) {
+        public static unsafe byte[] ToBytes(this uint[] src) {
             var output = new byte[src.Length * 4];
             fixed (uint* srcPtrStart = &src[0])
             fixed (byte* outputPtrStart = &output[0]) {
@@ -167,7 +228,7 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static byte?[] ToByteArray(this ushort?[] src) {
+        public static byte?[] ToBytes(this ushort?[] src) {
             var output = new byte?[src.Length * 2];
             var len = src.Length;
             var pos = 0;

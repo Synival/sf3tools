@@ -85,7 +85,7 @@ namespace SF3.MPD.Writer {
                     var texture = sortedTextures[i];
                     var imageData = (texture.BytesPerPixel == 1)
                         ? texture.ImageData8Bit.To1DArrayTransposed()
-                        : texture.ImageData16Bit.To1DArrayTransposed().ToByteArray();
+                        : texture.ImageData16Bit.To1DArrayTransposed().ToBytes();
                     WriteBytes(imageData);
                 }
             }
@@ -95,7 +95,7 @@ namespace SF3.MPD.Writer {
                     var imageData = (texture.BytesPerPixel == 1)
                         ? texture.ImageData8Bit.To1DArrayTransposed().ConvertIndexedToABGR1555(texture.Palette, zeroIsTransparent: true)
                         : texture.ImageData16Bit.To1DArrayTransposed();
-                    WriteBytes(imageData.ToByteArray());
+                    WriteBytes(imageData.ToBytes());
                 }
             }
         }
