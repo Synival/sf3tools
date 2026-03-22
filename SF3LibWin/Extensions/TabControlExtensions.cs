@@ -40,8 +40,10 @@ namespace SF3.Win.Extensions {
                 .Cast<TabPage>()
                 .Intersect(tabPages.Select(x => x.Key))
                 .ToArray();
-            foreach (var tab in tabsToRemove)
+            foreach (var tab in tabsToRemove) {
                 tabControl.TabPages.Remove(tab);
+                tab.Dispose();
+            }
 
             // Add enabled tabs.
             tabsToAdd = tabPages

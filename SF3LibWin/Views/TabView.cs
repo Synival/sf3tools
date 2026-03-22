@@ -112,8 +112,15 @@ namespace SF3.Win.Views {
                 _childViews = null;
             }
 
+            var tabPages = new List<TabPage>();
+            foreach (var tabPage in TabControl.TabPages)
+                tabPages.Add((TabPage) tabPage);
+
             TabControl.TabPages.Clear();
             _tabsForChildren.Clear();
+
+            foreach (var tabPage in tabPages)
+                tabPage.Dispose();
 
             base.Destroy();
         }
@@ -178,12 +185,14 @@ namespace SF3.Win.Views {
             if (!_childViews.Contains(child) || !_tabsForChildren.ContainsKey(child))
                 return false;
 
-            TabControl.TabPages.Remove(_tabsForChildren[child]);
+            var tabPage = _tabsForChildren[child];
+            TabControl.TabPages.Remove(tabPage);
             _tabsForChildren.Remove(child);
 
             child.Destroy();
             _childViews.Remove(child);
 
+            tabPage.Dispose();
             return true;
         }
 
