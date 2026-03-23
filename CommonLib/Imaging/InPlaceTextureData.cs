@@ -9,10 +9,9 @@ namespace CommonLib.Imaging {
         public InPlaceTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
-        ) : base(width, height, pixelFormat, zeroIsTransparent, canSetImage) {
+        ) : base(width, height, pixelFormat, palette, zeroIsTransparent, canSetImage) {
             _data              = data;
             _imageDataOffset   = imageDataOffset;
-            _palette           = palette;
             _isCompressed      = isCompressed;
         }
 
@@ -33,17 +32,6 @@ namespace CommonLib.Imaging {
             set {
                 if (_imageDataOffset != value) {
                     _imageDataOffset = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private Palette _palette;
-        public override Palette Palette {
-            get => _palette;
-            set {
-                if (_palette != value) {
-                    _palette = value;
                     Invalidate();
                 }
             }

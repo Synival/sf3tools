@@ -6,12 +6,14 @@ namespace CommonLib.Imaging {
             int width,
             int height,
             TexturePixelFormat pixelFormat,
+            Palette palette,
             bool zeroIsTransparent,
             bool canSetImage
         ) {
             _width             = width;
             _height            = height;
             _pixelFormat       = pixelFormat;
+            _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
         }
@@ -33,6 +35,15 @@ namespace CommonLib.Imaging {
         protected void SetDimensionsInternal(int width, int height, bool invalidate) {
             _width  = width;
             _height = height;
+            if (invalidate)
+                Invalidate();
+        }
+
+        protected void SetPaletteInternal(Palette palette, bool invalidate) {
+            if (_palette == palette)
+                return;
+            _palette = palette;
+
             if (invalidate)
                 Invalidate();
         }
@@ -68,6 +79,12 @@ namespace CommonLib.Imaging {
                     Invalidate();
                 }
             }
+        }
+
+        private Palette _palette;
+        public override Palette Palette {
+            get => _palette;
+            set => SetPaletteInternal(value, true);
         }
 
         private bool _zeroIsTransparent;
