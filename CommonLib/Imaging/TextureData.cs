@@ -7,9 +7,8 @@ using Newtonsoft.Json.Linq;
 namespace CommonLib.Imaging {
     public class TextureData : TextureDataStandard, ITextureData {
         public TextureData(ITextureData original, Palette palette)
-        : base(original.Width, original.Height) {
+        : base(original.Width, original.Height, original.ZeroIsTransparent) {
             _pixelFormat       = original.PixelFormat;
-            _zeroIsTransparent = original.ZeroIsTransparent;
             CanSetImage        = original.CanSetImageData8Bit || original.CanSetImageData16Bit;
             _palette           = palette;
 
@@ -20,18 +19,17 @@ namespace CommonLib.Imaging {
         }
 
         public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0) {
+        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, zeroIsTransparent) {
             if (data != null)
                 _textureDataBuffer.SetImageData8Bit(data);
 
             _pixelFormat       = TexturePixelFormat.Indexed8Bit;
             _palette           = palette;
-            _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
         }
 
         public TextureData(ushort[,] data, bool canSetImage)
-        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0) {
+        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, zeroIsTransparent: false) {
             if (data != null)
                 _textureDataBuffer.SetImageData16Bit(data);
 
@@ -40,20 +38,18 @@ namespace CommonLib.Imaging {
         }
 
         public TextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(width, height) {
+        : base(width, height, zeroIsTransparent) {
             _pixelFormat       = pixelFormat;
             _palette           = palette;
-            _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
         }
 
         public static TextureData FromJToken(JToken token, bool zeroIsTransparent, Palette palette, bool canSetImage)
             => new TextureData((JObject) token, zeroIsTransparent, palette, canSetImage);
         protected TextureData(JObject jObject, bool zeroIsTransparent, Palette palette, bool canSetImage)
-        : base((int) jObject["Width"], (int) jObject["Height"]) {
+        : base((int) jObject["Width"], (int) jObject["Height"], zeroIsTransparent) {
             _pixelFormat       = (TexturePixelFormat) Enum.Parse(typeof(TexturePixelFormat), (string) jObject["PixelFormat"]);
             _palette           = palette;
-            _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
 
             var imageDataBase64 = (string) jObject["ImageData"];
@@ -68,11 +64,10 @@ namespace CommonLib.Imaging {
         public static TextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
             => new TextureData(token, width, height, pixelFormat, zeroIsTransparent, palette, canSetImage);
         protected TextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
-        : base(width, height) {
-            _pixelFormat       = pixelFormat;
-            _palette           = palette;
-            _zeroIsTransparent = zeroIsTransparent;
-            CanSetImage        = canSetImage;
+        : base(width, height, zeroIsTransparent) {
+            _pixelFormat = pixelFormat;
+            _palette     = palette;
+            CanSetImage  = canSetImage;
 
             var imageDataBase64 = (string) token;
             if (_pixelFormat == TexturePixelFormat.ABGR1555)
@@ -108,17 +103,6 @@ namespace CommonLib.Imaging {
             set {
                 if (SetPalette(value))
                     Invalidate();
-            }
-        }
-
-        private bool _zeroIsTransparent;
-        public override bool ZeroIsTransparent {
-            get => _zeroIsTransparent;
-            set {
-                if (_zeroIsTransparent != value) {
-                    _zeroIsTransparent = value;
-                    Invalidate();
-                }
             }
         }
 
