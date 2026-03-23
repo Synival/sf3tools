@@ -5,15 +5,13 @@ using CommonLib.Types;
 using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
-    public class InPlaceTextureData : TextureDataBase, ITextureData {
+    public class InPlaceTextureData : TextureDataStandard, ITextureData {
         public InPlaceTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
-        ) {
+        ) : base(width, height) {
             _data              = data;
             _imageDataOffset   = imageDataOffset;
-            _width             = width;
-            _height            = height;
             _pixelFormat       = pixelFormat;
             _palette           = palette;
             _isCompressed      = isCompressed;
@@ -46,28 +44,6 @@ namespace CommonLib.Imaging {
             set {
                 if (_imageDataOffset != value) {
                     _imageDataOffset = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private int _width;
-        public override int Width {
-            get => _width;
-            set {
-                if (_width != value) {
-                    _width = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private int _height;
-        public override int Height {
-            get => _height;
-            set {
-                if (_height != value) {
-                    _height = value;
                     Invalidate();
                 }
             }
@@ -162,8 +138,7 @@ namespace CommonLib.Imaging {
                 throw new ArgumentException(error);
 
             _pixelFormat = TexturePixelFormat.Indexed8Bit;
-            _width  = newWidth;
-            _height = newHeight;
+            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
 
             Invalidate(sendEvent: false);
