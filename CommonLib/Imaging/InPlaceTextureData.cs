@@ -9,21 +9,12 @@ namespace CommonLib.Imaging {
         public InPlaceTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
-        ) : base(width, height, zeroIsTransparent) {
+        ) : base(width, height, pixelFormat, zeroIsTransparent) {
             _data              = data;
             _imageDataOffset   = imageDataOffset;
-            _pixelFormat       = pixelFormat;
             _palette           = palette;
             _isCompressed      = isCompressed;
             CanSetImage        = canSetImage;
-        }
-
-        public void LoadImageData() {
-            // Accessing the getter performs loading.
-            if (BytesPerPixel == 1)
-                _ = ImageData8Bit;
-            else
-                _ = ImageData16Bit;
         }
 
         private IByteArray _data;
@@ -43,17 +34,6 @@ namespace CommonLib.Imaging {
             set {
                 if (_imageDataOffset != value) {
                     _imageDataOffset = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private TexturePixelFormat _pixelFormat;
-        public override TexturePixelFormat PixelFormat {
-            get => _pixelFormat;
-            set {
-                if (_pixelFormat != value) {
-                    _pixelFormat = value;
                     Invalidate();
                 }
             }
@@ -125,7 +105,7 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            _pixelFormat = TexturePixelFormat.Indexed8Bit;
+            SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
             SetDimensionsInternal(newWidth, newHeight, invalidate: false);
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
 

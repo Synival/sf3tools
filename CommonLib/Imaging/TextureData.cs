@@ -7,53 +7,53 @@ using Newtonsoft.Json.Linq;
 namespace CommonLib.Imaging {
     public class TextureData : TextureDataStandard, ITextureData {
         public TextureData(ITextureData original, Palette palette)
-        : base(original.Width, original.Height, original.ZeroIsTransparent) {
-            _pixelFormat       = original.PixelFormat;
+        : base(original.Width, original.Height, original.PixelFormat, original.ZeroIsTransparent) {
             CanSetImage        = original.CanSetImageData8Bit || original.CanSetImageData16Bit;
             _palette           = palette;
 
-            if (_pixelFormat == TexturePixelFormat.Indexed8Bit)
+            if (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
-            if (_pixelFormat == TexturePixelFormat.ABGR1555)
+            if (PixelFormat == TexturePixelFormat.ABGR1555)
                 _textureDataBuffer.SetImageData16Bit(original.ImageData16Bit);
         }
 
         public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, zeroIsTransparent) {
+        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, TexturePixelFormat.Indexed8Bit, zeroIsTransparent) {
             if (data != null)
                 _textureDataBuffer.SetImageData8Bit(data);
 
-            _pixelFormat       = TexturePixelFormat.Indexed8Bit;
-            _palette           = palette;
-            CanSetImage        = canSetImage;
+            _palette    = palette;
+            CanSetImage = canSetImage;
         }
 
         public TextureData(ushort[,] data, bool canSetImage)
-        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, zeroIsTransparent: false) {
+        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, TexturePixelFormat.ABGR1555, zeroIsTransparent: false) {
             if (data != null)
                 _textureDataBuffer.SetImageData16Bit(data);
 
-            _pixelFormat       = TexturePixelFormat.ABGR1555;
-            CanSetImage        = canSetImage;
+            CanSetImage = canSetImage;
         }
 
         public TextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(width, height, zeroIsTransparent) {
-            _pixelFormat       = pixelFormat;
-            _palette           = palette;
-            CanSetImage        = canSetImage;
+        : base(width, height, pixelFormat, zeroIsTransparent) {
+            _palette    = palette;
+            CanSetImage = canSetImage;
         }
 
         public static TextureData FromJToken(JToken token, bool zeroIsTransparent, Palette palette, bool canSetImage)
             => new TextureData((JObject) token, zeroIsTransparent, palette, canSetImage);
         protected TextureData(JObject jObject, bool zeroIsTransparent, Palette palette, bool canSetImage)
-        : base((int) jObject["Width"], (int) jObject["Height"], zeroIsTransparent) {
-            _pixelFormat       = (TexturePixelFormat) Enum.Parse(typeof(TexturePixelFormat), (string) jObject["PixelFormat"]);
-            _palette           = palette;
-            CanSetImage        = canSetImage;
+        : base(
+            (int) jObject["Width"],
+            (int) jObject["Height"],
+            (TexturePixelFormat) Enum.Parse(typeof(TexturePixelFormat),
+            (string) jObject["PixelFormat"]), zeroIsTransparent
+        ) {
+            _palette    = palette;
+            CanSetImage = canSetImage;
 
             var imageDataBase64 = (string) jObject["ImageData"];
-            if (_pixelFormat == TexturePixelFormat.ABGR1555)
+            if (PixelFormat == TexturePixelFormat.ABGR1555)
                 _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(Width, Height));
             else {
                 _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
@@ -64,36 +64,16 @@ namespace CommonLib.Imaging {
         public static TextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
             => new TextureData(token, width, height, pixelFormat, zeroIsTransparent, palette, canSetImage);
         protected TextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
-        : base(width, height, zeroIsTransparent) {
-            _pixelFormat = pixelFormat;
-            _palette     = palette;
-            CanSetImage  = canSetImage;
+        : base(width, height, pixelFormat, zeroIsTransparent) {
+            _palette    = palette;
+            CanSetImage = canSetImage;
 
             var imageDataBase64 = (string) token;
-            if (_pixelFormat == TexturePixelFormat.ABGR1555)
+            if (PixelFormat == TexturePixelFormat.ABGR1555)
                 _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(Width, Height));
             else {
                 _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
                 _palette = Palette;
-            }
-        }
-
-        public void LoadImageData() {
-            // Accessing the getter performs loading.
-            if (BytesPerPixel == 1)
-                _ = ImageData8Bit;
-            else
-                _ = ImageData16Bit;
-        }
-
-        private TexturePixelFormat _pixelFormat;
-        public override TexturePixelFormat PixelFormat {
-            get => _pixelFormat;
-            set {
-                if (_pixelFormat != value) {
-                    _pixelFormat = value;
-                    Invalidate();
-                }
             }
         }
 
@@ -126,7 +106,7 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            _pixelFormat = TexturePixelFormat.Indexed8Bit;
+            SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
             SetDimensionsInternal(newWidth, newHeight, invalidate: false);
 
             Invalidate(sendEvent: false);
