@@ -138,10 +138,8 @@ namespace CommonLib.Imaging {
         public override Palette Palette {
             get => _palette;
             set {
-                if (_palette != value) {
-                    _palette = value;
+                if (SetPalette(value))
                     Invalidate();
-                }
             }
         }
 
@@ -183,7 +181,7 @@ namespace CommonLib.Imaging {
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
                 _ = _textureDataBuffer.SetImageData8Bit(data);
-                Palette = palette;
+                SetPalette(palette);
             }
 
             InvokeInvalidatedEvent();
@@ -217,6 +215,13 @@ namespace CommonLib.Imaging {
             }
 
             InvokeInvalidatedEvent();
+        }
+
+        public virtual bool SetPalette(Palette palette) {
+            if (_palette == palette)
+                return false;
+            _palette = palette;
+            return true;
         }
     }
 }
