@@ -2,11 +2,18 @@
 
 namespace CommonLib.Imaging {
     public abstract class TextureDataStandard : TextureDataBase {
-        public TextureDataStandard(int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent) {
-            _width  = width;
-            _height = height;
-            _pixelFormat = pixelFormat;
+        public TextureDataStandard(
+            int width,
+            int height,
+            TexturePixelFormat pixelFormat,
+            bool zeroIsTransparent,
+            bool canSetImage
+        ) {
+            _width             = width;
+            _height            = height;
+            _pixelFormat       = pixelFormat;
             _zeroIsTransparent = zeroIsTransparent;
+            CanSetImage        = canSetImage;
         }
 
         public void LoadImageData() {
@@ -73,5 +80,9 @@ namespace CommonLib.Imaging {
                 }
             }
         }
+
+        public override bool CanSetImageData8Bit => CanSetImage;
+        public override bool CanSetImageData16Bit => CanSetImage;
+        public virtual bool CanSetImage { get; set; }
     }
 }

@@ -7,9 +7,8 @@ using Newtonsoft.Json.Linq;
 namespace CommonLib.Imaging {
     public class TextureData : TextureDataStandard, ITextureData {
         public TextureData(ITextureData original, Palette palette)
-        : base(original.Width, original.Height, original.PixelFormat, original.ZeroIsTransparent) {
-            CanSetImage        = original.CanSetImageData8Bit || original.CanSetImageData16Bit;
-            _palette           = palette;
+        : base(original.Width, original.Height, original.PixelFormat, original.ZeroIsTransparent, original.CanSetImageData8Bit || original.CanSetImageData16Bit) {
+            _palette = palette;
 
             if (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
@@ -18,26 +17,22 @@ namespace CommonLib.Imaging {
         }
 
         public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, TexturePixelFormat.Indexed8Bit, zeroIsTransparent) {
+        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, TexturePixelFormat.Indexed8Bit, zeroIsTransparent, canSetImage) {
             if (data != null)
                 _textureDataBuffer.SetImageData8Bit(data);
 
-            _palette    = palette;
-            CanSetImage = canSetImage;
+            _palette = palette;
         }
 
         public TextureData(ushort[,] data, bool canSetImage)
-        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, TexturePixelFormat.ABGR1555, zeroIsTransparent: false) {
+        : base(data?.GetLength(0) ?? 0, data?.GetLength(1) ?? 0, TexturePixelFormat.ABGR1555, zeroIsTransparent: false, canSetImage) {
             if (data != null)
                 _textureDataBuffer.SetImageData16Bit(data);
-
-            CanSetImage = canSetImage;
         }
 
         public TextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(width, height, pixelFormat, zeroIsTransparent) {
-            _palette    = palette;
-            CanSetImage = canSetImage;
+        : base(width, height, pixelFormat, zeroIsTransparent, canSetImage) {
+            _palette = palette;
         }
 
         public static TextureData FromJToken(JToken token, bool zeroIsTransparent, Palette palette, bool canSetImage)
@@ -47,10 +42,10 @@ namespace CommonLib.Imaging {
             (int) jObject["Width"],
             (int) jObject["Height"],
             (TexturePixelFormat) Enum.Parse(typeof(TexturePixelFormat),
-            (string) jObject["PixelFormat"]), zeroIsTransparent
+            (string) jObject["PixelFormat"]), zeroIsTransparent,
+            canSetImage
         ) {
-            _palette    = palette;
-            CanSetImage = canSetImage;
+            _palette = palette;
 
             var imageDataBase64 = (string) jObject["ImageData"];
             if (PixelFormat == TexturePixelFormat.ABGR1555)
@@ -64,9 +59,8 @@ namespace CommonLib.Imaging {
         public static TextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
             => new TextureData(token, width, height, pixelFormat, zeroIsTransparent, palette, canSetImage);
         protected TextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
-        : base(width, height, pixelFormat, zeroIsTransparent) {
-            _palette    = palette;
-            CanSetImage = canSetImage;
+        : base(width, height, pixelFormat, zeroIsTransparent, canSetImage) {
+            _palette = palette;
 
             var imageDataBase64 = (string) token;
             if (PixelFormat == TexturePixelFormat.ABGR1555)
@@ -85,10 +79,6 @@ namespace CommonLib.Imaging {
                     Invalidate();
             }
         }
-
-        public override bool CanSetImageData8Bit => CanSetImage;
-        public override bool CanSetImageData16Bit => CanSetImage;
-        public virtual bool CanSetImage { get; set; }
 
         protected override byte[,] FetchImageData8Bit() {
             if (BytesPerPixel != 1)

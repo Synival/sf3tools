@@ -9,12 +9,11 @@ namespace CommonLib.Imaging {
         public InPlaceTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
-        ) : base(width, height, pixelFormat, zeroIsTransparent) {
+        ) : base(width, height, pixelFormat, zeroIsTransparent, canSetImage) {
             _data              = data;
             _imageDataOffset   = imageDataOffset;
             _palette           = palette;
             _isCompressed      = isCompressed;
-            CanSetImage        = canSetImage;
         }
 
         private IByteArray _data;
@@ -62,9 +61,6 @@ namespace CommonLib.Imaging {
         }
 
         public int StoredImageDataSize { get; private set; }
-        public override bool CanSetImageData8Bit => CanSetImage;
-        public override bool CanSetImageData16Bit => CanSetImage;
-        public virtual bool CanSetImage { get; set; }
 
         protected override byte[,] FetchImageData8Bit() {
             if (BytesPerPixel != 1)
