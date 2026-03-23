@@ -16,9 +16,9 @@ namespace CommonLib.Imaging {
             original.CanSetImageData8Bit || original.CanSetImageData16Bit
         ) {
             if (PixelFormat == TexturePixelFormat.Indexed8Bit)
-                _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
+                _ = _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
             if (PixelFormat == TexturePixelFormat.ABGR1555)
-                _textureDataBuffer.SetImageData16Bit(original.ImageData16Bit);
+                _ = _textureDataBuffer.SetImageData16Bit(original.ImageData16Bit);
         }
 
         public TextureData(byte[,] data, Palette palette, bool zeroIsTransparent, bool canSetImage)
@@ -31,7 +31,7 @@ namespace CommonLib.Imaging {
             canSetImage
         ) {
             if (data != null)
-                _textureDataBuffer.SetImageData8Bit(data);
+                _ = _textureDataBuffer.SetImageData8Bit(data);
         }
 
         public TextureData(ushort[,] data, bool canSetImage)
@@ -44,7 +44,7 @@ namespace CommonLib.Imaging {
             canSetImage
         ) {
             if (data != null)
-                _textureDataBuffer.SetImageData16Bit(data);
+                _ = _textureDataBuffer.SetImageData16Bit(data);
         }
 
         public TextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage)
@@ -64,9 +64,9 @@ namespace CommonLib.Imaging {
         ) {
             var imageDataBase64 = (string) jObject["ImageData"];
             if (PixelFormat == TexturePixelFormat.ABGR1555)
-                _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(Width, Height));
+                _ = _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(Width, Height));
             else
-                _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
+                _ = _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
         }
 
         public static TextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, Palette palette, bool canSetImage)
@@ -82,9 +82,9 @@ namespace CommonLib.Imaging {
         ) {
             var imageDataBase64 = (string) token;
             if (PixelFormat == TexturePixelFormat.ABGR1555)
-                _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(Width, Height));
+                _ = _textureDataBuffer.SetImageData16Bit(Convert.FromBase64String(imageDataBase64).ToUShorts().To2DArrayColumnMajor(Width, Height));
             else
-                _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
+                _ = _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
         }
 
         protected override byte[,] FetchImageData8Bit() {

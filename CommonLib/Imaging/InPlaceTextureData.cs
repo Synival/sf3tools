@@ -15,41 +15,6 @@ namespace CommonLib.Imaging {
             _isCompressed      = isCompressed;
         }
 
-        private IByteArray _data;
-        public IByteArray Data {
-            get => _data;
-            set {
-                if (_data != value) {
-                    _data = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private int _imageDataOffset;
-        public virtual int ImageDataOffset {
-            get => _imageDataOffset;
-            set {
-                if (_imageDataOffset != value) {
-                    _imageDataOffset = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        private bool _isCompressed;
-        public bool IsCompressed {
-            get => _isCompressed;
-            set {
-                if (_isCompressed != value) {
-                    _isCompressed = value;
-                    Invalidate();
-                }
-            }
-        }
-
-        public int StoredImageDataSize { get; private set; }
-
         protected override byte[,] FetchImageData8Bit() {
             if (BytesPerPixel != 1)
                 throw new InvalidOperationException();
@@ -159,11 +124,46 @@ namespace CommonLib.Imaging {
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                _textureDataBuffer.SetImageData16Bit(newData);
+                _ = _textureDataBuffer.SetImageData16Bit(newData);
                 StoredImageDataSize = newStoredData.Length;
             }
 
             InvokeInvalidatedEvent();
         }
+
+        private IByteArray _data;
+        public IByteArray Data {
+            get => _data;
+            set {
+                if (_data != value) {
+                    _data = value;
+                    Invalidate();
+                }
+            }
+        }
+
+        private int _imageDataOffset;
+        public virtual int ImageDataOffset {
+            get => _imageDataOffset;
+            set {
+                if (_imageDataOffset != value) {
+                    _imageDataOffset = value;
+                    Invalidate();
+                }
+            }
+        }
+
+        private bool _isCompressed;
+        public bool IsCompressed {
+            get => _isCompressed;
+            set {
+                if (_isCompressed != value) {
+                    _isCompressed = value;
+                    Invalidate();
+                }
+            }
+        }
+
+        public int StoredImageDataSize { get; private set; }
     }
 }
