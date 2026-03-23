@@ -6,13 +6,13 @@ using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
     public class MPD_TiledPlane : IMPD_TiledPlane {
-        public MPD_TiledPlane(IMPD_TiledPlane original) {
+        public MPD_TiledPlane(IMPD_TiledPlane original, Palette palette) {
             if (original.Tileset != null)
-                Tileset = new TextureData(original.Tileset);
+                Tileset = new TextureData(original.Tileset, palette);
             if (original.TileAssignment != null)
                 TileAssignment = new MPD_PlaneTileAssignment(original.TileAssignment);
             if (original.TiledImage != null)
-                TiledImage = new TextureData(original.TiledImage);
+                TiledImage = new TextureData(original.TiledImage, palette);
         }
 
         public static MPD_TiledPlane FromJToken(JToken token, Palette palette, int tilesWidth, int tilesHeight)

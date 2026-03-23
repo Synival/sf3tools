@@ -6,15 +6,13 @@ using Newtonsoft.Json.Linq;
 
 namespace CommonLib.Imaging {
     public class TextureData : TextureDataBase, ITextureData {
-        public TextureData(ITextureData original) {
+        public TextureData(ITextureData original, Palette palette) {
             _width             = original.Width;
             _height            = original.Height;
             _pixelFormat       = original.PixelFormat;
             _zeroIsTransparent = original.ZeroIsTransparent;
             CanSetImage        = original.CanSetImageData8Bit || original.CanSetImageData16Bit;
-
-            if (original.Palette != null)
-                Palette = new Palette(original.Palette);
+            _palette           = palette;
 
             if (_pixelFormat == TexturePixelFormat.Indexed8Bit)
                 _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
