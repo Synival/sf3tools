@@ -3,8 +3,8 @@ using CommonLib.Extensions;
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
-    public abstract class TextureDataStandard : TextureDataBase {
-        public TextureDataStandard(
+    public abstract class CachedTextureData : CachedTextureDataBase {
+        public CachedTextureData(
             int width,
             int height,
             TexturePixelFormat pixelFormat,

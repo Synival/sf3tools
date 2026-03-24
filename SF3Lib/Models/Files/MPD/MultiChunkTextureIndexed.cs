@@ -7,7 +7,7 @@ using CommonLib.Types;
 using SF3.ByteData;
 
 namespace SF3.Models.Files.MPD {
-    public class MultiChunkTextureIndexed : TextureDataBase {
+    public class MultiChunkTextureIndexed : CachedTextureDataBase {
         public const int c_width = 512;
 
         public MultiChunkTextureIndexed(

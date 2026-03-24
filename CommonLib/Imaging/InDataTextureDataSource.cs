@@ -4,8 +4,8 @@ using CommonLib.Extensions;
 using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
-    public class ExternalTextureDataSource : ITextureDataSource {
-        public ExternalTextureDataSource(IByteArray data, int imageDataOffset, bool isCompressed) {
+    public class InDataTextureDataSource : ITextureDataSource {
+        public InDataTextureDataSource(IByteArray data, int imageDataOffset, bool isCompressed) {
             Data            = data;
             ImageDataOffset = imageDataOffset;
             IsCompressed    = isCompressed;

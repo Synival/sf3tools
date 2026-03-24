@@ -2,7 +2,7 @@
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
-    public class InDataTextureData : TextureDataStandard, ITextureData {
+    public class InDataTextureData : CachedTextureData, ITextureData {
         public InDataTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
@@ -13,7 +13,7 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new ExternalTextureDataSource(data, imageDataOffset, isCompressed)
+            new InDataTextureDataSource(data, imageDataOffset, isCompressed)
         ) {
         }
 
@@ -49,6 +49,6 @@ namespace CommonLib.Imaging {
 
         public int? StoredImageDataSize => DataSource.StoredImageDataSize;
 
-        protected new ExternalTextureDataSource DataSource => (ExternalTextureDataSource) base.DataSource;
+        protected new InDataTextureDataSource DataSource => (InDataTextureDataSource) base.DataSource;
     }
 }

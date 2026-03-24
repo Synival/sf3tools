@@ -5,7 +5,7 @@ using CommonLib.Types;
 using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
-    public abstract class TextureDataBase : ITextureData {
+    public abstract class CachedTextureDataBase : ITextureData {
         public delegate string Validator8Bit(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize);
         public delegate string Validator16Bit(ushort[,] data, int? oldStoredSize, int? newStoredSize);
 

@@ -5,7 +5,7 @@ using CommonLib.Utils;
 using Newtonsoft.Json.Linq;
 
 namespace CommonLib.Imaging {
-    public class InMemoryTextureData : TextureDataStandard, ITextureData {
+    public class InMemoryTextureData : CachedTextureData, ITextureData {
         public InMemoryTextureData(ITextureData original, Palette palette)
         : base(
             original.Width,
