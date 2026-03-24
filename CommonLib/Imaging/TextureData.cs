@@ -101,18 +101,14 @@ namespace CommonLib.Imaging {
         }
 
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
-            var newWidth = data.GetLength(0);
-            var newHeight = data.GetLength(1);
-
-            var error = Validate8BitImageData(data, palette, ImageDataSize, newWidth * newHeight);
+            var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 
-            SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
-            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
-
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+                SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
+                SetDimensionsInternal(data.GetLength(0), data.GetLength(1), invalidate: false);
                 _ = _textureDataBuffer.SetImageData8Bit(data);
                 SetPaletteInternal(palette, false);
             }
@@ -120,21 +116,18 @@ namespace CommonLib.Imaging {
         }
 
         protected override void SetImageData16Bit(ushort[,] data) {
-            var newWidth = data.GetLength(0);
-            var newHeight = data.GetLength(1);
+            data = data.Clone() as ushort[,];
+            data.FixSaturnTransparency(useEndCodes: true);
 
-            var error = Validate16BitImageData(data, ImageDataSize, newWidth * newHeight * 2);
+            var error = Validate16BitImageData(data, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 
-            SetPixelFormatInternal(TexturePixelFormat.ABGR1555, invalidate: false);
-            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
-
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                var newData = data.Clone() as ushort[,];
-                newData.FixSaturnTransparency(useEndCodes: true);
-                _ = _textureDataBuffer.SetImageData16Bit(newData);
+                SetPixelFormatInternal(TexturePixelFormat.ABGR1555, invalidate: false);
+                SetDimensionsInternal(data.GetLength(0), data.GetLength(1), invalidate: false);
+                _ = _textureDataBuffer.SetImageData16Bit(data);
             }
             InvokeInvalidatedEvent();
         }

@@ -25,18 +25,15 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            var newWidth = data.GetLength(0);
-            var newHeight = data.GetLength(1);
-
-            SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
-            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
+            DataSource.StoredImageDataSize = newStoredData.Length;
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+                SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
+                SetDimensionsInternal(data.GetLength(0), data.GetLength(1), invalidate: false);
                 _ = _textureDataBuffer.SetImageData8Bit(data);
                 Palette = palette;
-                DataSource.StoredImageDataSize = newStoredData.Length;
             }
             InvokeInvalidatedEvent();
         }
@@ -50,17 +47,14 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            var newWidth = data.GetLength(0);
-            var newHeight = data.GetLength(1);
-
-            PixelFormat = TexturePixelFormat.ABGR1555;
-            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
             Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
+            DataSource.StoredImageDataSize = newStoredData.Length;
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+                SetPixelFormatInternal(TexturePixelFormat.ABGR1555, invalidate: false);
+                SetDimensionsInternal(data.GetLength(0), data.GetLength(1), invalidate: false);
                 _ = _textureDataBuffer.SetImageData16Bit(data);
-                DataSource.StoredImageDataSize = newStoredData.Length;
             }
             InvokeInvalidatedEvent();
         }
