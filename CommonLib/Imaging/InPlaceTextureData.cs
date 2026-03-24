@@ -20,30 +20,6 @@ namespace CommonLib.Imaging {
         ) {
         }
 
-        protected override byte[,] FetchImageData8Bit() {
-            if (BytesPerPixel != 1)
-                throw new InvalidOperationException();
-            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
-                return null;
-
-            var storedSize = ImageDataSize;
-            var inputData = IsCompressed
-                ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset));
-            var outputData = new byte[Width, Height];
-
-            var off = 0;
-            for (var y = 0; y < Height; y++) {
-                for (var x = 0; x < Width; x++) {
-                    var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
-                    outputData[x, y] = texPixel;
-                }
-            }
-
-            DataSource.StoredImageDataSize = storedSize;
-            return outputData;
-        }
-
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
             var off = 0;
             var newWidth = data.GetLength(0);
@@ -71,32 +47,6 @@ namespace CommonLib.Imaging {
             }
 
             InvokeInvalidatedEvent();
-        }
-
-        protected override ushort[,] FetchImageData16Bit() {
-            if (BytesPerPixel != 2)
-                throw new InvalidOperationException();
-            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + ImageDataSize > Data.Length)
-                return null;
-
-            var storedSize = ImageDataSize;
-            var inputData = (IsCompressed
-                ? Compression.DecompressLZSS(Data.GetDataCopyOrReference(), ImageDataOffset, null, out storedSize, out var _)
-                : Data.GetDataCopyAt(ImageDataOffset, Math.Min(storedSize, Data.Length - ImageDataOffset)))
-                .ToUShorts();
-
-            var outputData = new ushort[Width, Height];
-
-            var off = 0;
-            for (var y = 0; y < Height; y++) {
-                for (var x = 0; x < Width; x++) {
-                    var texPixel = off < inputData.Length ? inputData[off++] : (byte) 0;
-                    outputData[x, y] = texPixel;
-                }
-            }
-
-            DataSource.StoredImageDataSize = storedSize;
-            return outputData;
         }
 
         protected override void SetImageData16Bit(ushort[,] data) {

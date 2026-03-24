@@ -20,6 +20,9 @@ namespace CommonLib.Imaging {
             DataSource        = dataSource;
         }
 
+        protected override byte[,] FetchImageData8Bit() => DataSource.FetchImageData8Bit(this);
+        protected override ushort[,] FetchImageData16Bit() => DataSource.FetchImageData16Bit(this);
+
         public void LoadImageData() {
             // Accessing the getter performs loading.
             if (BytesPerPixel == 1)

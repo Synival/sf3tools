@@ -100,14 +100,6 @@ namespace CommonLib.Imaging {
                 _ = _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
         }
 
-        protected override byte[,] FetchImageData8Bit() {
-            if (BytesPerPixel != 1)
-                throw new InvalidOperationException();
-
-            // Nothing to fetch; if it's not set, it's not set.
-            return null;
-        }
-
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
             var newWidth = data.GetLength(0);
             var newHeight = data.GetLength(1);
@@ -126,14 +118,6 @@ namespace CommonLib.Imaging {
             }
 
             InvokeInvalidatedEvent();
-        }
-
-        protected override ushort[,] FetchImageData16Bit() {
-            if (BytesPerPixel != 2)
-                throw new InvalidOperationException();
-
-            // Nothing to fetch; if it's not set, it's not set.
-            return null;
         }
 
         protected override void SetImageData16Bit(ushort[,] data) {
