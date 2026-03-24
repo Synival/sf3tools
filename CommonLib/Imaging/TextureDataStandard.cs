@@ -17,7 +17,7 @@ namespace CommonLib.Imaging {
             _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
-            _dataSource        = dataSource;
+            DataSource        = dataSource;
         }
 
         public void LoadImageData() {
@@ -104,6 +104,6 @@ namespace CommonLib.Imaging {
         public override bool CanSetImageData16Bit => CanSetImage;
         public virtual bool CanSetImage { get; set; }
 
-        private ITextureDataSource _dataSource;
+        protected ITextureDataSource DataSource { get; }
     }
 }

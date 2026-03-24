@@ -16,11 +16,8 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new ExternalTextureDataSource()
+            new ExternalTextureDataSource(data, imageDataOffset, isCompressed)
         ) {
-            _data              = data;
-            _imageDataOffset   = imageDataOffset;
-            _isCompressed      = isCompressed;
         }
 
         protected override byte[,] FetchImageData8Bit() {
@@ -43,7 +40,7 @@ namespace CommonLib.Imaging {
                 }
             }
 
-            StoredImageDataSize = storedSize;
+            DataSource.StoredImageDataSize = storedSize;
             return outputData;
         }
 
@@ -70,7 +67,7 @@ namespace CommonLib.Imaging {
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
                 _ = _textureDataBuffer.SetImageData8Bit(data);
                 Palette = palette;
-                StoredImageDataSize = newStoredData.Length;
+                DataSource.StoredImageDataSize = newStoredData.Length;
             }
 
             InvokeInvalidatedEvent();
@@ -98,7 +95,7 @@ namespace CommonLib.Imaging {
                 }
             }
 
-            StoredImageDataSize = storedSize;
+            DataSource.StoredImageDataSize = storedSize;
             return outputData;
         }
 
@@ -132,45 +129,44 @@ namespace CommonLib.Imaging {
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
                 _ = _textureDataBuffer.SetImageData16Bit(newData);
-                StoredImageDataSize = newStoredData.Length;
+                DataSource.StoredImageDataSize = newStoredData.Length;
             }
 
             InvokeInvalidatedEvent();
         }
 
-        private IByteArray _data;
         public IByteArray Data {
-            get => _data;
+            get => DataSource.Data;
             set {
-                if (_data != value) {
-                    _data = value;
+                if (DataSource.Data != value) {
+                    DataSource.Data = value;
                     Invalidate();
                 }
             }
         }
 
-        private int _imageDataOffset;
         public virtual int ImageDataOffset {
-            get => _imageDataOffset;
+            get => DataSource.ImageDataOffset;
             set {
-                if (_imageDataOffset != value) {
-                    _imageDataOffset = value;
+                if (DataSource.ImageDataOffset != value) {
+                    DataSource.ImageDataOffset = value;
                     Invalidate();
                 }
             }
         }
 
-        private bool _isCompressed;
         public bool IsCompressed {
-            get => _isCompressed;
+            get => DataSource.IsCompressed;
             set {
-                if (_isCompressed != value) {
-                    _isCompressed = value;
+                if (DataSource.IsCompressed != value) {
+                    DataSource.IsCompressed = value;
                     Invalidate();
                 }
             }
         }
 
-        public int StoredImageDataSize { get; private set; }
+        public int StoredImageDataSize => DataSource.StoredImageDataSize;
+
+        protected new ExternalTextureDataSource DataSource => (ExternalTextureDataSource) base.DataSource;
     }
 }
