@@ -19,10 +19,12 @@ namespace SF3.Models.Structs.DAT {
             set {
                 var newColors = value.Channels.Select(x => x.ToABGR1555()).ToArray();
                 int pos = PaletteOffset;
-                for (int i = 0; i < 0x100; i++) {
-                    Data.SetWord(pos, (i < newColors.Length) ? newColors[i] : 0x0000);
-                    pos += 2;
+                var newPaletteData = new byte[0x200];
+                for (int inPos = 0, outPos = 0; inPos < 0x100 && inPos < newColors.Length; inPos++) {
+                    newPaletteData[outPos++] = (byte) (newColors[inPos] >> 8);
+                    newPaletteData[outPos++] = (byte) newColors[inPos];
                 }
+                Data.Data.SetDataAtTo(PaletteOffset, 0x200, newPaletteData);
             }
         }
     }
