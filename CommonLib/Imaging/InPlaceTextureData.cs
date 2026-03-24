@@ -1,6 +1,4 @@
-﻿using System;
-using CommonLib.Arrays;
-using CommonLib.Extensions;
+﻿using CommonLib.Arrays;
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
@@ -49,7 +47,7 @@ namespace CommonLib.Imaging {
             }
         }
 
-        public int StoredImageDataSize => DataSource.StoredImageDataSize.Value;
+        public int? StoredImageDataSize => DataSource.StoredImageDataSize;
 
         protected new ExternalTextureDataSource DataSource => (ExternalTextureDataSource) base.DataSource;
     }

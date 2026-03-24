@@ -127,7 +127,7 @@ namespace SF3.Models.Structs.Shared {
         public int ImageDataSize => _textureData.ImageDataSize;
 
         [TableViewModelColumn(addressField: null, displayOrder: 4, displayFormat: "X4")]
-        public int StoredImageDataSize => _textureData.StoredImageDataSize;
+        public int? StoredImageDataSize => _textureData.StoredImageDataSize;
 
         [TableViewModelColumn(addressField: null, displayOrder: 5, minWidth: 225)]
         public string Hash => _textureData.Hash;

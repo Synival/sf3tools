@@ -85,7 +85,7 @@ namespace SF3.Models.Tables.MPD.Animation {
                     rowDict[id] = newModel;
                     rows.Add(newModel);
 
-                    address += newModel.StoredImageDataSize;
+                    address += newModel.StoredImageDataSize.Value;
                     if (address % 4 != 0)
                         address += 4 - address % 4;
                 }

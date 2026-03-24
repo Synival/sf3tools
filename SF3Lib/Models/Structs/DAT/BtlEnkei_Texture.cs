@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.DAT {
         public override bool CanUpdateAddress => false;
 
         protected override void OnImageUpdated() {
-            PaletteImageSize = 0x200 + StoredImageDataSize;
+            PaletteImageSize = 0x200 + StoredImageDataSize.Value;
             LoadSize = ((PaletteImageSize + 0x7FF) / 0x800) * 0x800;
         }
 

@@ -14,8 +14,10 @@ namespace CommonLib.Imaging {
         public byte[,] FetchImageData8Bit(ITextureData tex) {
             if (tex.BytesPerPixel != 1)
                 throw new InvalidOperationException();
-            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + tex.ImageDataSize > Data.Length)
+            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + tex.ImageDataSize > Data.Length) {
+                StoredImageDataSize = null;
                 return null;
+            }
 
             var storedSize = tex.ImageDataSize;
             var inputData = IsCompressed
@@ -38,8 +40,10 @@ namespace CommonLib.Imaging {
         public ushort[,] FetchImageData16Bit(ITextureData tex) {
             if (tex.BytesPerPixel != 2)
                 throw new InvalidOperationException();
-            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + tex.ImageDataSize > Data.Length)
+            if (ImageDataOffset < 0 || !IsCompressed && ImageDataOffset + tex.ImageDataSize > Data.Length) {
+                StoredImageDataSize = null;
                 return null;
+            }
 
             var storedSize = tex.ImageDataSize;
             var inputData = (IsCompressed

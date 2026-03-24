@@ -100,7 +100,7 @@ namespace SF3.Models.Tables.DAT {
 
                     rowDict[id++] = newModel;
                     rows.Add(newModel);
-                    address += newModel.StoredImageDataSize;
+                    address += newModel.StoredImageDataSize.Value;
                 }
             }
             catch {

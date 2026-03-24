@@ -36,9 +36,9 @@ namespace SF3.Models.Structs.DAT {
 
             // Zero-out unused data.
             var maxSize = MaxStoredImageSize ?? (Data.Length - Address);
-            var remainder = maxSize - StoredImageDataSize;
+            var remainder = maxSize - StoredImageDataSize.Value;
             if (remainder > 0)
-                Data.Data.SetDataAtTo(Address + StoredImageDataSize, remainder, new byte[remainder]);
+                Data.Data.SetDataAtTo(Address + StoredImageDataSize.Value, remainder, new byte[remainder]);
         }
 
         public override void UpdateAddress(int address) {

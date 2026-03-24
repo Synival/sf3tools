@@ -93,7 +93,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public int ImageDataSize => Chunk3Texture.ImageDataSize;
 
         [TableViewModelColumn(displayOrder: 8, displayFormat: "X4")]
-        public int StoredImageDataSize => Chunk3Texture.StoredImageDataSize;
+        public int StoredImageDataSize => Chunk3Texture.StoredImageDataSize.Value;
 
         [TableViewModelColumn(displayOrder: 9, minWidth: 225)]
         public string Hash => Chunk3Texture?.Hash;

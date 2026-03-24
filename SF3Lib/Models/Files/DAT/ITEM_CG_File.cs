@@ -56,10 +56,10 @@ namespace SF3.Models.Files.DAT {
 
                     // If the 16-bit images are the same, do nothing. 
                     if (Enumerable.SequenceEqual(oldImage, newImage))
-                        compressedImages[i] = Data.GetDataCopyAt(tex.ImageDataOffset, tex.StoredImageDataSize);
+                        compressedImages[i] = Data.GetDataCopyAt(tex.ImageDataOffset, tex.StoredImageDataSize.Value);
                     // If the image is reduced in size, pad it with zeroes so later images aren't displaced.
                     else if (compressedImages[i].Length < tex.StoredImageDataSize) {
-                        var newCompressedImage = new byte[tex.StoredImageDataSize];
+                        var newCompressedImage = new byte[tex.StoredImageDataSize.Value];
                         for (int j = 0; j < compressedImages[i].Length; j++)
                             newCompressedImage[j] = compressedImages[i][j];
                         compressedImages[i] = newCompressedImage;

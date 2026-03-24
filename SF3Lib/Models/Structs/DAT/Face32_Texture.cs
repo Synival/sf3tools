@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.DAT {
         public override bool CanLoadImage => HasImage;
 
         private readonly Palette _palette;
-        private readonly int _originalStoredSize;
+        private readonly int? _originalStoredSize;
         protected override Palette StructPalette { get => _palette; set {} }
     }
 }
