@@ -66,6 +66,9 @@ namespace CommonLib.Imaging {
         public void Add16BitValidator(Validator16Bit v)
             => _validators16Bit.Add(v);
 
+        public ScopeGuard InvalidateGuard()
+            => new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--);
+
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
@@ -92,7 +95,7 @@ namespace CommonLib.Imaging {
         protected abstract ushort[,] FetchImageData16Bit();
         protected abstract void SetImageData16Bit(ushort[,] data);
 
-        protected int _invalidateGuard = 0;
+        private int _invalidateGuard = 0;
         protected TextureDataBuffer _textureDataBuffer  = new TextureDataBuffer();
         protected List<Validator8Bit> _validators8Bit   = new List<Validator8Bit>();
         protected List<Validator16Bit> _validators16Bit = new List<Validator16Bit>();

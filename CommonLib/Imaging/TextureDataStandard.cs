@@ -31,28 +31,6 @@ namespace CommonLib.Imaging {
                 _ = ImageData16Bit;
         }
 
-        protected void SetPixelFormatInternal(TexturePixelFormat pixelFormat, bool invalidate) {
-            _pixelFormat = pixelFormat;
-            if (invalidate)
-                Invalidate();
-        }
-
-        protected void SetDimensionsInternal(int width, int height, bool invalidate) {
-            _width  = width;
-            _height = height;
-            if (invalidate)
-                Invalidate();
-        }
-
-        protected void SetPaletteInternal(Palette palette, bool invalidate) {
-            if (_palette == palette)
-                return;
-            _palette = palette;
-
-            if (invalidate)
-                Invalidate();
-        }
-
         private int _width;
         public override int Width {
             get => _width;
@@ -89,7 +67,12 @@ namespace CommonLib.Imaging {
         private Palette _palette;
         public override Palette Palette {
             get => _palette;
-            set => SetPaletteInternal(value, true);
+            set {
+                if (_palette != value) {
+                    _palette = value;
+                    Invalidate();
+                }
+            }
         }
 
         private bool _zeroIsTransparent;

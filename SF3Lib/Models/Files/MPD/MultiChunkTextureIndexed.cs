@@ -58,7 +58,7 @@ namespace SF3.Models.Files.MPD {
                 throw new ArgumentException(error);
 
             Invalidate(sendEvent: false);
-            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
+            using (InvalidateGuard()) {
                 var toDatas = Datas?.Where(x => x != null)?.ToArray() ?? new IByteData[0];
                 var fromData = IsTiled ? data.FromTiles(8, 8) : data.To1DArrayTransposed();
                 int fromDataPos = 0;

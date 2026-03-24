@@ -29,9 +29,10 @@ namespace CommonLib.Imaging {
             DataSource.StoredImageDataSize = newStoredData.Length;
 
             Invalidate(sendEvent: false);
-            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                SetPixelFormatInternal(TexturePixelFormat.Indexed8Bit, invalidate: false);
-                SetDimensionsInternal(data.GetLength(0), data.GetLength(1), invalidate: false);
+            using (InvalidateGuard()) {
+                PixelFormat = TexturePixelFormat.Indexed8Bit;
+                Width = data.GetLength(0);
+                Height = data.GetLength(1);
                 _ = _textureDataBuffer.SetImageData8Bit(data);
                 Palette = palette;
             }
@@ -51,9 +52,10 @@ namespace CommonLib.Imaging {
             DataSource.StoredImageDataSize = newStoredData.Length;
 
             Invalidate(sendEvent: false);
-            using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
-                SetPixelFormatInternal(TexturePixelFormat.ABGR1555, invalidate: false);
-                SetDimensionsInternal(data.GetLength(0), data.GetLength(1), invalidate: false);
+            using (InvalidateGuard()) {
+                PixelFormat = TexturePixelFormat.ABGR1555;
+                Width = data.GetLength(0);
+                Height = data.GetLength(1);
                 _ = _textureDataBuffer.SetImageData16Bit(data);
             }
             InvokeInvalidatedEvent();
