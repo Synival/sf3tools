@@ -22,8 +22,17 @@ namespace CommonLib.Imaging {
             DataSource        = dataSource;
         }
 
-        protected override byte[,] FetchImageData8Bit() => DataSource.FetchImageData8Bit(this);
-        protected override ushort[,] FetchImageData16Bit() => DataSource.FetchImageData16Bit(this);
+        protected override byte[,] FetchImageData8Bit() {
+            if (BytesPerPixel != 1)
+                throw new InvalidOperationException();
+            return DataSource.FetchImageData8Bit(this);
+        }
+
+        protected override ushort[,] FetchImageData16Bit() {
+            if (BytesPerPixel != 2)
+                throw new InvalidOperationException();
+            return DataSource.FetchImageData16Bit(this);
+        }
 
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
             var newStoredData = DataSource.ConvertImageDataToStorageData8Bit(this, data, palette);

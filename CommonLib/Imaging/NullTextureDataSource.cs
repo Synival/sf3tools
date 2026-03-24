@@ -3,17 +3,11 @@
 namespace CommonLib.Imaging {
     public class NullTextureDataSource : ITextureDataSource {
         public byte[,] FetchImageData8Bit(ITextureData tex) {
-            if (tex.BytesPerPixel != 1)
-                throw new InvalidOperationException();
-
             // No data to fetch -- it only exists in the buffer.
             return null;
         }
 
         public ushort[,] FetchImageData16Bit(ITextureData tex) {
-            if (tex.BytesPerPixel != 2)
-                throw new InvalidOperationException();
-
             // No data to fetch -- it only exists in the buffer.
             return null;
         }
