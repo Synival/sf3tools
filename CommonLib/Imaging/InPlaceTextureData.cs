@@ -126,8 +126,7 @@ namespace CommonLib.Imaging {
                 throw new ArgumentException(error);
 
             PixelFormat = TexturePixelFormat.ABGR1555;
-            Width  = newWidth;
-            Height = newHeight;
+            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
             Data.SetDataAtTo(ImageDataOffset, newData1D.Length, newData1D);
 
             Invalidate(sendEvent: false);

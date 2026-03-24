@@ -145,8 +145,7 @@ namespace CommonLib.Imaging {
                 throw new ArgumentException(error);
 
             PixelFormat = TexturePixelFormat.ABGR1555;
-            Width  = newWidth;
-            Height = newHeight;
+            SetDimensionsInternal(newWidth, newHeight, invalidate: false);
 
             Invalidate(sendEvent: false);
             using (new ScopeGuard(() => _invalidateGuard++, () => _invalidateGuard--)) {
