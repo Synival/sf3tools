@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace CommonLib.Imaging {
-    public class InternalTextureDataSource : ITextureDataSource {
+    public class NullTextureDataSource : ITextureDataSource {
         public byte[,] FetchImageData8Bit(ITextureData tex) {
             if (tex.BytesPerPixel != 1)
                 throw new InvalidOperationException();
