@@ -25,8 +25,7 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
-            DataSource.StoredImageDataSize = newStoredData.Length;
+            DataSource.StoreImageData(this, newStoredData);
 
             Invalidate(sendEvent: false);
             using (InvalidateGuard()) {
@@ -48,8 +47,7 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            Data.SetDataAtTo(ImageDataOffset, newStoredData.Length, newStoredData);
-            DataSource.StoredImageDataSize = newStoredData.Length;
+            DataSource.StoreImageData(this, newStoredData);
 
             Invalidate(sendEvent: false);
             using (InvalidateGuard()) {

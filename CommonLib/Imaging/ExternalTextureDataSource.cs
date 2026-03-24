@@ -83,6 +83,11 @@ namespace CommonLib.Imaging {
             return IsCompressed ? Compression.CompressLZSS(dataAsBytes) : dataAsBytes;
         }
 
+        public void StoreImageData(ITextureData tex, byte[] storageData) {
+            Data.SetDataAtTo(ImageDataOffset, storageData.Length, storageData);
+            StoredImageDataSize = storageData.Length;
+        }
+
         public IByteArray Data { get; set; }
         public int ImageDataOffset { get; set; }
         public bool IsCompressed { get; set; }

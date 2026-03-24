@@ -6,7 +6,7 @@ namespace CommonLib.Imaging {
             if (tex.BytesPerPixel != 1)
                 throw new InvalidOperationException();
 
-            // Nothing to fetch; if it's not set, it's not set.
+            // No data to fetch -- it only exists in the buffer.
             return null;
         }
 
@@ -14,18 +14,22 @@ namespace CommonLib.Imaging {
             if (tex.BytesPerPixel != 2)
                 throw new InvalidOperationException();
 
-            // Nothing to fetch; if it's not set, it's not set.
+            // No data to fetch -- it only exists in the buffer.
             return null;
         }
 
         public byte[] ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette) {
-            // No data to store.
+            // No data to store -- it only exists in the buffer.
             return null;
         }
 
         public byte[] ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data) {
-            // No data to store.
+            // No data to store -- it only exists in the buffer.
             return null;
+        }
+
+        public void StoreImageData(ITextureData data, byte[] storageData) {
+            // No data to store -- it only exists in the buffer.
         }
     }
 }
