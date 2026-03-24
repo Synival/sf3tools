@@ -34,12 +34,12 @@ namespace SF3.Models.Structs.CHR {
 
             if (TextureOffset != 0) {
                 var texData = GetUncompressedTextureData();
-                Texture = new TextureData(texData, canSetImage: false);
+                Texture = new InMemoryTextureData(texData, canSetImage: false);
                 var hash = Texture.Hash.ToLower();
 
                 // There's one specific Tybalt sprite with some problems.
                 if (ErrorWhileDecompressing != null && s_brokenTybaltHashes.Contains(hash)) {
-                    Texture = new TextureData(texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40), canSetImage: false);
+                    Texture = new InMemoryTextureData(texData.To1DArrayTransposed().To2DArrayColumnMajor(48, 40), canSetImage: false);
                     Width  = Texture.Width;
                     Height = Texture.Height;
                 }

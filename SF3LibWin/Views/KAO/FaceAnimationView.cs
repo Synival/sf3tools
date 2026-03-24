@@ -51,7 +51,7 @@ namespace SF3.Win.Views.KAO {
             FaceCompositeImage.AddFaceImageToData(newData, talkImage);
 
             // Generate a texture for it.
-            _faceTexture = new TextureData(newData, Face.Palette, zeroIsTransparent: true, canSetImage: false);
+            _faceTexture = new InMemoryTextureData(newData, Face.Palette, zeroIsTransparent: true, canSetImage: false);
         }
 
         private int GetBlinkingImage(int frame) {
@@ -74,6 +74,6 @@ namespace SF3.Win.Views.KAO {
 
         private int _lastBlinkingFrame = -1;
         private int _lastTalkingFrame = -1;
-        private TextureData _faceTexture = null;
+        private InMemoryTextureData _faceTexture = null;
     }
 }

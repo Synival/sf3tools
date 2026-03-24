@@ -6,7 +6,7 @@ using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_Texture : TextureData, IMPD_Texture {
+    public class MPD_Texture : InMemoryTextureData, IMPD_Texture {
         public MPD_Texture(IMPD_Texture original) : base(original, null) {
             ID         = original.ID;
             Collection = original.Collection;

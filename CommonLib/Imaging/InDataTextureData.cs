@@ -2,8 +2,8 @@
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
-    public class InPlaceTextureData : TextureDataStandard, ITextureData {
-        public InPlaceTextureData(
+    public class InDataTextureData : TextureDataStandard, ITextureData {
+        public InDataTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
         ) : base(
