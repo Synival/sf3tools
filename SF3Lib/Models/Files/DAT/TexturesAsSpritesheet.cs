@@ -51,7 +51,7 @@ namespace SF3.Models.Files.DAT {
         public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => Create8BitImageData());
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette, 0, 0);
+            var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -62,7 +62,7 @@ namespace SF3.Models.Files.DAT {
         public ushort[,] ImageData16Bit {
             get => _textureDataBuffer.GetOrCacheImageData16Bit(() => Create16BitImageData());
             set {
-                var error = Validate16BitImageData(value, 0, 0);
+                var error = Validate16BitImageData(value, null, null);
                 if (error != null)
                     throw new ArgumentException(error);
 
@@ -182,7 +182,7 @@ namespace SF3.Models.Files.DAT {
                 : BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit)
             );
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
             if (data.GetLength(0) % WidthPerImage != 0)
                 return $"Image width ({data.GetLength(0)}) must be a multiple of {WidthPerImage}";
             if (data.GetLength(1) % HeightPerImage != 0)
@@ -191,7 +191,7 @@ namespace SF3.Models.Files.DAT {
             return null;
         }
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
+        public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize) {
             if (data.GetLength(0) % WidthPerImage != 0)
                 return $"Image width ({data.GetLength(0)}) must be a multiple of {WidthPerImage}";
             if (data.GetLength(1) % HeightPerImage != 0)

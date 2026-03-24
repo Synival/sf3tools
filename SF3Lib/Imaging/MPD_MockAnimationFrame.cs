@@ -40,10 +40,10 @@ namespace SF3.Imaging {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _texture.GetBitmapDataARGB8888(highlightEndcodes);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
             => _texture.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+        public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => _texture.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
         public MPD_CollectionType Collection => _texture.Collection;

@@ -50,10 +50,10 @@ namespace SF3.Models.Tables.Shared {
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+        public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
         public int BytesPerPixel => 1;
@@ -64,7 +64,7 @@ namespace SF3.Models.Tables.Shared {
 
         public byte[,] ImageData8Bit { get; private set; }
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette, 0, 0);
+            var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -83,7 +83,7 @@ namespace SF3.Models.Tables.Shared {
         public ushort[,] ImageData16Bit {
             get => throw new NotSupportedException();
             set {
-                var error = Validate16BitImageData(value, 0, 0);
+                var error = Validate16BitImageData(value, null, null);
                 if (error != null)
                     throw new ArgumentException(error);
 

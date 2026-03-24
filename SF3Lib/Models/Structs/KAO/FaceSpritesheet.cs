@@ -46,7 +46,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public void SetImageData8Bit(byte[,] sheetData, Palette palette) {
-            var error = Validate8BitImageData(sheetData, palette, 0 /* irrelevant */, 0 /* irrelevant */);
+            var error = Validate8BitImageData(sheetData, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -320,7 +320,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
             var sheetWidth  = data.GetLength(0);
             var sheetHeight = data.GetLength(1);
 
@@ -332,7 +332,7 @@ namespace SF3.Models.Structs.KAO {
             return null;
         }
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) => "Not supported";
+        public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize) => "Not supported";
 
         private byte[,] GetImageData() {
             int width  = Header.Width;

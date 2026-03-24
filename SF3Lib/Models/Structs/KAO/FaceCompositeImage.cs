@@ -56,13 +56,13 @@ namespace SF3.Models.Structs.KAO {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true));
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
             if (!HasImage)
                 return "No image available";
             return TextureDataValidators.IsSameDimensions(data, Width, Height);
         }
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+        public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => "Image must be in 8-bit indexed format";
 
         private byte[,] GetCompositeImageData() {
@@ -115,7 +115,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => GetCompositeImageData());
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette, 0, 0);
+            var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 

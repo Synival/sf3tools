@@ -48,10 +48,10 @@ namespace SF3.Models.Structs.MPD.Animation {
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB8888(highlightEndcodes);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize)
+        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
             => Chunk3Texture?.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
 
-        public string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize)
+        public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => Chunk3Texture?.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
         private UniqueAnimationFrame Chunk3Texture

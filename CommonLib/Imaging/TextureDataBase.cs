@@ -6,8 +6,8 @@ using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
     public abstract class TextureDataBase : ITextureData {
-        public delegate string Validator8Bit(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize);
-        public delegate string Validator16Bit(ushort[,] data, int oldStoredSize, int newStoredSize);
+        public delegate string Validator8Bit(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize);
+        public delegate string Validator16Bit(ushort[,] data, int? oldStoredSize, int? newStoredSize);
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
             if (BytesPerPixel == 1)
@@ -38,7 +38,7 @@ namespace CommonLib.Imaging {
         protected void InvokeInvalidatedEvent()
             => Invalidated?.Invoke(this, EventArgs.Empty);
 
-        public virtual string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+        public virtual string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
             if (!CanSetImageData8Bit)
                 return "Not supported";
             foreach (var validator in _validators8Bit) {
@@ -49,7 +49,7 @@ namespace CommonLib.Imaging {
             return null;
         }
 
-        public virtual string Validate16BitImageData(ushort[,] data, int oldStoredSize, int newStoredSize) {
+        public virtual string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize) {
             if (!CanSetImageData16Bit)
                 return "Not supported";
             foreach (var validator in _validators16Bit) {

@@ -46,14 +46,14 @@ namespace SF3.Models.Files.MPD {
             return IsTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
         }
 
-        public override string Validate8BitImageData(byte[,] data, Palette palette, int oldStoredSize, int newStoredSize) {
+        public override string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
             return
                 base.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize) ??
                 TextureDataValidators.IsSameDimensions(data, Width, Height);
         }
 
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette, 0, 0);
+            var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
 
