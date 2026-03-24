@@ -14,7 +14,7 @@ namespace CommonLib.Imaging {
             palette,
             original.ZeroIsTransparent,
             original.CanSetImageData8Bit || original.CanSetImageData16Bit,
-            new TextureData_InternalDataStrategy()
+            new InternalTextureDataSource()
         ) {
             if (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 _ = _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
@@ -30,7 +30,7 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new TextureData_InternalDataStrategy()
+            new InternalTextureDataSource()
         ) {
             if (data != null)
                 _ = _textureDataBuffer.SetImageData8Bit(data);
@@ -44,7 +44,7 @@ namespace CommonLib.Imaging {
             palette: null,
             zeroIsTransparent: false,
             canSetImage,
-            new TextureData_InternalDataStrategy()
+            new InternalTextureDataSource()
         ) {
             if (data != null)
                 _ = _textureDataBuffer.SetImageData16Bit(data);
@@ -58,7 +58,7 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new TextureData_InternalDataStrategy()
+            new InternalTextureDataSource()
         ) {
         }
 
@@ -72,7 +72,7 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new TextureData_InternalDataStrategy()
+            new InternalTextureDataSource()
         ) {
             var imageDataBase64 = (string) jObject["ImageData"];
             if (PixelFormat == TexturePixelFormat.ABGR1555)
@@ -91,7 +91,7 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new TextureData_InternalDataStrategy()
+            new InternalTextureDataSource()
         ) {
             var imageDataBase64 = (string) token;
             if (PixelFormat == TexturePixelFormat.ABGR1555)

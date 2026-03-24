@@ -16,7 +16,7 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new TextureData_ExternalDataStrategy()
+            new ExternalTextureDataSource()
         ) {
             _data              = data;
             _imageDataOffset   = imageDataOffset;
