@@ -5,31 +5,35 @@ using CommonLib.Types;
 using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
+    /// <summary>
+    /// Core functionality of a cached TextureData. How the data itself is retrieved and set is left to the
+    /// implmenetation, but the caching mechanism is still present.
+    /// </summary>
     public abstract class CachedTextureDataBase : ITextureData {
         public delegate string Validator8Bit(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize);
         public delegate string Validator16Bit(ushort[,] data, int? oldStoredSize, int? newStoredSize);
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
             if (BytesPerPixel == 1)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+                return _textureDataCache.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
             else if (highlightEndcodes)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true));
+                return _textureDataCache.GetOrCacheBitmapDataARGB1555_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, true));
             else
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false));
+                return _textureDataCache.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit, false));
         }
 
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) {
             if (BytesPerPixel == 1)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+                return _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
             else if (highlightEndcodes)
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true));
+                return _textureDataCache.GetOrCacheBitmapDataARGB8888_Endcodes(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, true));
             else
-                return _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false));
+                return _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit, false));
         }
 
         public void Invalidate(bool sendEvent = true) {
             if (_invalidateGuard <= 0) {
-                _textureDataBuffer.Invalidate();
+                _textureDataCache.Invalidate();
                 if (sendEvent)
                     Invalidated?.Invoke(this, EventArgs.Empty);
             }
@@ -72,13 +76,13 @@ namespace CommonLib.Imaging {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
-        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(FetchImageData8Bit);
+        public byte[,] ImageData8Bit => _textureDataCache.GetOrCacheImageData8Bit(FetchImageData8Bit);
         public ushort[,] ImageData16Bit { 
-            get => _textureDataBuffer.GetOrCacheImageData16Bit(FetchImageData16Bit);
+            get => _textureDataCache.GetOrCacheImageData16Bit(FetchImageData16Bit);
             set => SetImageData16Bit(value);
         }
 
-        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
+        public string Hash => _textureDataCache.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
         public int BytesPerPixel => PixelFormat.BytesPerPixel();
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
@@ -96,7 +100,7 @@ namespace CommonLib.Imaging {
         protected abstract void SetImageData16Bit(ushort[,] data);
 
         private int _invalidateGuard = 0;
-        protected TextureDataBuffer _textureDataBuffer  = new TextureDataBuffer();
+        protected TextureDataCache _textureDataCache    = new TextureDataCache();
         protected List<Validator8Bit> _validators8Bit   = new List<Validator8Bit>();
         protected List<Validator16Bit> _validators16Bit = new List<Validator16Bit>();
 

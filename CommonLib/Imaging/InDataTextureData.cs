@@ -2,6 +2,9 @@
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
+    /// <summary>
+    /// A texture with caching capabilities whose data is stored in an IByteArray.
+    /// </summary>
     public class InDataTextureData : CachedTextureData, ITextureData {
         public InDataTextureData(
             IByteArray data, int imageDataOffset,

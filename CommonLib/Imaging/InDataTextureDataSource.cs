@@ -4,6 +4,9 @@ using CommonLib.Extensions;
 using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
+    /// <summary>
+    /// Data source that comes directly from an IByteArray.
+    /// </summary>
     public class InDataTextureDataSource : ITextureDataSource {
         public InDataTextureDataSource(IByteArray data, int imageDataOffset, bool isCompressed) {
             Data            = data;
@@ -61,31 +64,36 @@ namespace CommonLib.Imaging {
             return outputData;
         }
 
-        public byte[] ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette) {
+        public object ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette, out int? storageSize) {
             var newData = data.To1DArrayTransposed();
-            return IsCompressed ? Compression.CompressLZSS(newData) : newData;
+            newData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
+            storageSize = newData.Length;
+            return newData;
         }
 
-        public byte[] ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data) {
+        public object ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data, out int? storageSize) {
             var newWidth  = data.GetLength(0);
             var newHeight = data.GetLength(1);
-            var dataAsBytes = new byte[newWidth * newHeight * 2];
+            var newData = new byte[newWidth * newHeight * 2];
 
             int off = 0;
             for (var y = 0; y < newHeight; y++) {
                 for (var x = 0; x < newWidth; x++) {
                     var val = data[x, y];
-                    dataAsBytes[off++] = (byte) (val >> 8);
-                    dataAsBytes[off++] = (byte) val;
+                    newData[off++] = (byte) (val >> 8);
+                    newData[off++] = (byte) val;
                 }
             }
 
-            return IsCompressed ? Compression.CompressLZSS(dataAsBytes) : dataAsBytes;
+            newData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
+            storageSize = newData.Length;
+            return newData;
         }
 
-        public void StoreImageData(ITextureData tex, byte[] storageData) {
-            Data.SetDataAtTo(ImageDataOffset, storageData.Length, storageData);
-            StoredImageDataSize = storageData.Length;
+        public void StoreImageData(ITextureData tex, object storageData) {
+            var storageDataBytes = (byte[]) storageData;
+            Data.SetDataAtTo(ImageDataOffset, storageDataBytes.Length, storageDataBytes);
+            StoredImageDataSize = storageDataBytes.Length;
         }
 
         public IByteArray Data { get; set; }

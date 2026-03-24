@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using CommonLib;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Types;
@@ -70,7 +69,7 @@ namespace SF3.Models.Files.MPD {
                     toData.Data.SetDataTo(newData);
                 }
 
-                _textureDataBuffer.SetImageData8Bit(data);
+                _textureDataCache.SetImageData8Bit(data);
                 PaletteSetter?.Invoke(palette);
             }
             InvokeInvalidatedEvent();

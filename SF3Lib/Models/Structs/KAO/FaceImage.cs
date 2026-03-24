@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public void InvalidateImage() {
-            _textureDataBuffer.Invalidate();
+            _textureDataCache.Invalidate();
             Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
@@ -149,13 +149,13 @@ namespace SF3.Models.Structs.KAO {
         }
 
         [TableViewModelColumn(displayOrder: 9, minWidth: 225)]
-        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
+        public string Hash => _textureDataCache.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, true));
+            => _textureDataCache.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, true));
 
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true));
+            => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true));
 
         public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
@@ -167,7 +167,7 @@ namespace SF3.Models.Structs.KAO {
         public TexturePixelFormat PixelFormat => TexturePixelFormat.Indexed8Bit;
 
         public byte[,] ImageData8Bit
-            => _textureDataBuffer.GetOrCacheImageData8Bit(() => HasImage ? Data.GetDataCopyAt(ImageDataOffset, Width * Height).To2DArrayColumnMajor(Width, Height) : null);
+            => _textureDataCache.GetOrCacheImageData8Bit(() => HasImage ? Data.GetDataCopyAt(ImageDataOffset, Width * Height).To2DArrayColumnMajor(Width, Height) : null);
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
             var error = Validate8BitImageData(data, palette, ImageDataSize, data.GetLength(0) * data.GetLength(1));
@@ -182,9 +182,9 @@ namespace SF3.Models.Structs.KAO {
             else
                 data = ImageUtils.GetImageDataConformingToPalette(data, palette, Palette);
 
-            _textureDataBuffer.Invalidate();
+            _textureDataCache.Invalidate();
             Data.Data.SetDataAtTo(ImageDataOffset, data.GetLength(0) * data.GetLength(1), data.To1DArrayTransposed());
-            _textureDataBuffer.SetImageData8Bit(data);
+            _textureDataCache.SetImageData8Bit(data);
             Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
@@ -208,7 +208,7 @@ namespace SF3.Models.Structs.KAO {
         public bool CanSetImageData8Bit => HasImage;
         public bool CanSetImageData16Bit => false;
 
-        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
+        private TextureDataCache _textureDataCache = new TextureDataCache();
 
         public event EventHandler Invalidated;
     }

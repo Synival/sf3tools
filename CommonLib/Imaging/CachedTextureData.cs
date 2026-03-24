@@ -3,7 +3,11 @@ using CommonLib.Extensions;
 using CommonLib.Types;
 
 namespace CommonLib.Imaging {
-    public abstract class CachedTextureData : CachedTextureDataBase {
+    /// <summary>
+    /// 8-bit indexed or 16-bit texture with a configurable data source and strategy for fetching and assigning
+    /// image and palette data.
+    /// </summary>
+    public class CachedTextureData : CachedTextureDataBase {
         public CachedTextureData(
             int width,
             int height,
@@ -35,8 +39,8 @@ namespace CommonLib.Imaging {
         }
 
         public override void SetImageData8Bit(byte[,] data, Palette palette) {
-            var newStoredData = DataSource.ConvertImageDataToStorageData8Bit(this, data, palette);
-            var error = Validate8BitImageData(data, palette, DataSource.StoredImageDataSize, newStoredData?.Length);
+            var newStoredData = DataSource.ConvertImageDataToStorageData8Bit(this, data, palette, out var newStoredDataSize);
+            var error = Validate8BitImageData(data, palette, DataSource.StoredImageDataSize, newStoredDataSize);
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -47,7 +51,7 @@ namespace CommonLib.Imaging {
                 PixelFormat = TexturePixelFormat.Indexed8Bit;
                 Width = data.GetLength(0);
                 Height = data.GetLength(1);
-                _ = _textureDataBuffer.SetImageData8Bit(data);
+                _ = _textureDataCache.SetImageData8Bit(data);
                 Palette = palette;
             }
             InvokeInvalidatedEvent();
@@ -57,8 +61,8 @@ namespace CommonLib.Imaging {
             data = data.Clone() as ushort[,];
             data.FixSaturnTransparency(useEndCodes: true);
 
-            var newStoredData = DataSource.ConvertImageDataToStorageData16Bit(this, data);
-            var error = Validate16BitImageData(data, DataSource.StoredImageDataSize, newStoredData?.Length);
+            var newStoredData = DataSource.ConvertImageDataToStorageData16Bit(this, data, out var newStoredDataSize);
+            var error = Validate16BitImageData(data, DataSource.StoredImageDataSize, newStoredDataSize);
             if (error != null)
                 throw new ArgumentException(error);
 
@@ -69,7 +73,7 @@ namespace CommonLib.Imaging {
                 PixelFormat = TexturePixelFormat.ABGR1555;
                 Width = data.GetLength(0);
                 Height = data.GetLength(1);
-                _ = _textureDataBuffer.SetImageData16Bit(data);
+                _ = _textureDataCache.SetImageData16Bit(data);
                 Palette = null;
             }
             InvokeInvalidatedEvent();

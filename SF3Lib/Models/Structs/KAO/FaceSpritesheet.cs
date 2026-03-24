@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.KAO {
         }
 
         public void Invalidate() {
-            _textureDataBuffer.Invalidate();
+            _textureDataCache.Invalidate();
             Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
@@ -30,7 +30,7 @@ namespace SF3.Models.Structs.KAO {
         public int Height => Header.Height * 2;
         public int ImageDataSize => Width * Height * BytesPerPixel;
 
-        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => GetImageData());
+        public byte[,] ImageData8Bit => _textureDataCache.GetOrCacheImageData8Bit(() => GetImageData());
 
         private class DecomposedImageBoundary {
             public DecomposedImageBoundary(int x1, int y1, int x2, int y2) {
@@ -307,7 +307,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
-        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
+        public string Hash => _textureDataCache.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public bool ZeroIsTransparent => true;
 
@@ -315,10 +315,10 @@ namespace SF3.Models.Structs.KAO {
         public bool CanSetImageData16Bit => false;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+            => _textureDataCache.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
+            => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
         public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
             var sheetWidth  = data.GetLength(0);
@@ -393,6 +393,6 @@ namespace SF3.Models.Structs.KAO {
 
         public event EventHandler Invalidated;
 
-        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
+        private TextureDataCache _textureDataCache = new TextureDataCache();
     }
 }

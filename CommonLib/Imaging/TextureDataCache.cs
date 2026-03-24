@@ -1,7 +1,10 @@
 ﻿using System;
 
 namespace CommonLib.Imaging {
-    public class TextureDataBuffer {
+    /// <summary>
+    /// A set of buffers that cache important texture data.
+    /// </summary>
+    public class TextureDataCache {
         public string SetHash(string value) => _hash = value;
         public string GetOrCacheHash(Func<string> getter) => _hash ?? (_hash = getter());
 

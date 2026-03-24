@@ -35,7 +35,7 @@ namespace SF3.Models.Tables.Shared {
         }
 
         public void Invalidate(bool sendEvent = true) {
-            _textureDataBuffer.Invalidate();
+            _textureDataCache.Invalidate();
             _updatePalette = true;
             if (sendEvent)
                 Invalidated?.Invoke(this, EventArgs.Empty);
@@ -47,8 +47,8 @@ namespace SF3.Models.Tables.Shared {
         public override bool Load()
             => Load((id, address) => new Color(Data, id, "Color" + id.ToString("D3"), address));
 
-        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
-        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
+        public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => _textureDataCache.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
+        public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, zeroIsTransparent: false));
 
         public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
@@ -133,6 +133,6 @@ namespace SF3.Models.Tables.Shared {
 
         public event EventHandler Invalidated;
 
-        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
+        private TextureDataCache _textureDataCache = new TextureDataCache();
     }
 }

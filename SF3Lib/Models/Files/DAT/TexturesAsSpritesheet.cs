@@ -32,7 +32,7 @@ namespace SF3.Models.Files.DAT {
         }
 
         public void Invalidate() {
-            _textureDataBuffer.Invalidate();
+            _textureDataCache.Invalidate();
             Invalidated?.Invoke(this, EventArgs.Empty);
         }
 
@@ -48,7 +48,7 @@ namespace SF3.Models.Files.DAT {
         public int BytesPerPixel => PixelFormat.BytesPerPixel();
         public bool ZeroIsTransparent { get; }
 
-        public byte[,] ImageData8Bit => _textureDataBuffer.GetOrCacheImageData8Bit(() => Create8BitImageData());
+        public byte[,] ImageData8Bit => _textureDataCache.GetOrCacheImageData8Bit(() => Create8BitImageData());
 
         public void SetImageData8Bit(byte[,] data, Palette palette) {
             var error = Validate8BitImageData(data, palette, null, null);
@@ -60,7 +60,7 @@ namespace SF3.Models.Files.DAT {
         }
 
         public ushort[,] ImageData16Bit {
-            get => _textureDataBuffer.GetOrCacheImageData16Bit(() => Create16BitImageData());
+            get => _textureDataCache.GetOrCacheImageData16Bit(() => Create16BitImageData());
             set {
                 var error = Validate16BitImageData(value, null, null);
                 if (error != null)
@@ -165,19 +165,19 @@ namespace SF3.Models.Files.DAT {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
-        public string Hash => _textureDataBuffer.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
+        public string Hash => _textureDataCache.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public bool CanSetImageData8Bit  => DAT_File.CanReplaceImages8Bit;
         public bool CanSetImageData16Bit => DAT_File.CanReplaceImages16Bit;
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB1555(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
+            => _textureDataCache.GetOrCacheBitmapDataARGB1555(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 ? BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent)
                 : BitmapUtils.ConvertABGR1555DataToARGB1555BitmapData(ImageData16Bit)
             );
 
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
-            => _textureDataBuffer.GetOrCacheBitmapDataARGB8888(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
+            => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 ? BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent)
                 : BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit)
             );
@@ -359,7 +359,7 @@ namespace SF3.Models.Files.DAT {
 
         public bool MinimalChangesWhenSetting { get; set; } = false;
 
-        private TextureDataBuffer _textureDataBuffer = new TextureDataBuffer();
+        private TextureDataCache _textureDataCache = new TextureDataCache();
 
         public event EventHandler Invalidated;
     }
