@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.DAT {
                 return new Palette(colors);
             }
             set {
-                var newColors = value.Channels.Select(x => x.ToABGR1555()).ToArray();
+                var newColors = value.Colors.Select(x => x.ToABGR1555()).ToArray();
                 int pos = PaletteOffset;
                 var newPaletteData = new byte[0x200];
                 for (int inPos = 0, outPos = 0; inPos < 0x100 && inPos < newColors.Length; inPos++) {

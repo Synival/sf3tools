@@ -60,8 +60,8 @@ namespace SF3.Models.Files.MPD {
                 adjG = adjG * 255 / 31;
                 adjB = adjB * 255 / 31;
 
-                for (int i = 0; i < palette.Channels.Length; i++) {
-                    ref var ch = ref palette.Channels[i];
+                for (int i = 0; i < palette.Colors.Length; i++) {
+                    ref var ch = ref palette.Colors[i];
                     ch.R = (byte) MathHelpers.Clamp(ch.R + adjR, 0, 255);
                     ch.G = (byte) MathHelpers.Clamp(ch.G + adjG, 0, 255);
                     ch.B = (byte) MathHelpers.Clamp(ch.B + adjB, 0, 255);

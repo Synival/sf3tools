@@ -75,7 +75,7 @@ namespace SF3.Models.Tables.Shared {
             int pos = 0;
             for (int y = 0; y < dataHeight && pos < newColors.Length; y++)
                 for (int x = 0; x < dataWidth && pos < newColors.Length; x++)
-                    newColors[pos++] = (ushort) (palette.Channels[data[x, y]].ToABGR1555() & 0x7FFF);
+                    newColors[pos++] = (ushort) (palette.Colors[data[x, y]].ToABGR1555() & 0x7FFF);
 
             Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToBytes());
         }
@@ -110,7 +110,7 @@ namespace SF3.Models.Tables.Shared {
             get {
                 if (_updatePalette) {
                     for (int i = 0; i < Size; ++i)
-                        _palette.Channels[i] = PixelConversion.ABGR1555toChannels(Rows[i].ColorABGR1555);
+                        _palette.Colors[i] = PixelConversion.ABGR1555toChannels(Rows[i].ColorABGR1555);
                     _updatePalette = false;
                 }
                 return _palette;
@@ -119,8 +119,8 @@ namespace SF3.Models.Tables.Shared {
                 if (value == null)
                     return;
                 var newColors = new ushort[Size];
-                for (int i = 0; i < Size && i < value.Channels.Length; i++)
-                    newColors[i] = (ushort) (value.Channels[i].ToABGR1555() & 0x7FFF);
+                for (int i = 0; i < Size && i < value.Colors.Length; i++)
+                    newColors[i] = (ushort) (value.Colors[i].ToABGR1555() & 0x7FFF);
 
                 Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToBytes());
             }

@@ -11,7 +11,7 @@
         /// <summary>
         /// Gets a reference to all colors stored in the palette.
         /// </summary>
-        PixelChannels[] Channels { get; }
+        PixelChannels[] Colors { get; }
 
         /// <summary>
         /// Replaces all colors in the palette.

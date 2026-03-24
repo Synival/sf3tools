@@ -10,7 +10,7 @@ namespace CommonLib.Extensions {
             int bestIndex = -1;
             int bestScore = 0;
 
-            var colors = palette.Channels;
+            var colors = palette.Colors;
             var max = colors.Length;
             for (int i = ignoreColorZero ? 1 : 0; i < max; i++) {
                 var color = colors[i];
@@ -45,6 +45,6 @@ namespace CommonLib.Extensions {
             => palette.ToJToken().ToString(Formatting.Indented);
 
         public static JToken ToJToken(this IPalette palette) => palette.ToJArray();
-        public static JArray ToJArray(this IPalette palette) => new JArray(palette.Channels.Select(x => x.ToHtmlColor()).ToArray());
+        public static JArray ToJArray(this IPalette palette) => new JArray(palette.Colors.Select(x => x.ToHtmlColor()).ToArray());
     }
 }

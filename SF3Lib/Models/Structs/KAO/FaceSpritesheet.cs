@@ -266,9 +266,9 @@ namespace SF3.Models.Structs.KAO {
             newData.SetByte(0x20, (byte) ((talkBoundaries  == null) ? 0 : (talkBoundaries.X1  - (width  - talkBoundaries.Width)   / 2)));
             newData.SetByte(0x21, (byte) ((talkBoundaries  == null) ? 0 : (talkBoundaries.Y1  - (height - talkBoundaries.Height)  / 2)));
 
-            var paletteMax = Math.Min(0x100, palette.Channels.Length);
+            var paletteMax = Math.Min(0x100, palette.Colors.Length);
             for (int i = 0; i < paletteMax; i++)
-                newData.SetWord(0x22 + i * 2, palette.Channels[i].ToABGR1555());
+                newData.SetWord(0x22 + i * 2, palette.Colors[i].ToABGR1555());
 
             int imageDataOffset = 0x222;
             void WriteImageData(byte[,] imageData, DecomposedImageBoundary boundary) {

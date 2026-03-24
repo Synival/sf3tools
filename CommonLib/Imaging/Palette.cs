@@ -10,7 +10,7 @@ namespace CommonLib.Imaging {
         /// </summary>
         /// <param name="colors">An array of colors in ABGR1555 format.</param>
         public Palette(ushort[] colors) {
-            Channels = colors.Select(x => ABGR1555toChannels(x)).ToArray();
+            Colors = colors.Select(x => ABGR1555toChannels(x)).ToArray();
         }
 
         /// <summary>
@@ -18,15 +18,15 @@ namespace CommonLib.Imaging {
         /// </summary>
         /// <param name="palette">Palette to copy.</param>
         public Palette(Palette palette) {
-            Channels = palette.Channels.Clone() as PixelChannels[];
+            Colors = palette.Colors.Clone() as PixelChannels[];
         }
 
         /// <summary>
-        /// Creates a new palette with a copy of pixel channels provided.
+        /// Creates a new palette with a copy of PixelChannels provided.
         /// </summary>
         /// <param name="channels">Color channels to copy.</param>
         public Palette(PixelChannels[] channels) {
-            Channels = channels.Clone() as PixelChannels[];
+            Colors = channels.Clone() as PixelChannels[];
         }
 
         /// <summary>
@@ -34,35 +34,35 @@ namespace CommonLib.Imaging {
         /// </summary>
         /// <param name="colorCount">The number of colors.</param>
         public Palette(int colorCount) {
-            Channels = new PixelChannels[colorCount];
+            Colors = new PixelChannels[colorCount];
             for (var i = 0; i < colorCount; i++) {
                 var color = (byte) ((255 * i) / colorCount);
-                Channels[i] = new PixelChannels() { A = 255, R = color, G = color, B = color };
+                Colors[i] = new PixelChannels() { A = 255, R = color, G = color, B = color };
             }
         }
 
         public static Palette FromJToken(JToken token) => new Palette(token);
         private Palette(JToken token) {
             var jArray = (JArray) token;
-            Channels = jArray.Select(x => PixelChannels.FromHtmlColor((string) x, (byte) 0)).ToArray();
+            Colors = jArray.Select(x => PixelChannels.FromHtmlColor((string) x, (byte) 0)).ToArray();
         }
 
-        public int ColorCount => Channels.Length;
+        public int ColorCount => Colors.Length;
 
-        public PixelChannels[] Channels { get; }
+        public PixelChannels[] Colors { get; }
 
         public void Replace(PixelChannels[] colors) {
             if (colors == null)
-                throw new ArgumentNullException(nameof(Channels));
-            if (colors.Length != Channels.Length)
-                throw new ArgumentException($"Wrong length for '{nameof(Channels)}'");
+                throw new ArgumentNullException(nameof(Colors));
+            if (colors.Length != Colors.Length)
+                throw new ArgumentException($"Wrong length for '{nameof(Colors)}'");
             for (int i = 0; i < colors.Length; i++)
-                Channels[i] = colors[i];
+                Colors[i] = colors[i];
         }
 
         public PixelChannels this[int index] {
-            get => Channels[index];
-            set => Channels[index] = value;
+            get => Colors[index];
+            set => Colors[index] = value;
         }
     }
 }

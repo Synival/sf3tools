@@ -77,24 +77,24 @@ namespace SF3.MPD.Writer {
 
             // Scenario 2- has two palettes that may or may not exist (and the logic for placing them is weird).
             if (Scenario < ScenarioType.Scenario3) {
-                groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null);
+                groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Colors?.Length >= 1 ? mpd.Planes.GroundPalette : null);
 
                 skyPalettePos = mpd.BinaryReproductionFlags.SkyPaletteSharesGroundPalette
                     ? groundPalettePos
-                    : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1 ? mpd.Planes.SkyPalette : null);
+                    : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Colors?.Length >= 1 ? mpd.Planes.SkyPalette : null);
             }
             // Scenario 3+ has three palettes with different placement logic and an extra table.
             // All three palettes are guaranteed to exist in Scenario 3.
             else {
-                groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Channels?.Length >= 1 ? mpd.Planes.GroundPalette : null) ?? (uint) CurrentOffset;
+                groundPalettePos = WritePaletteOrNull(mpd.Planes?.GroundPalette?.Colors?.Length >= 1 ? mpd.Planes.GroundPalette : null) ?? (uint) CurrentOffset;
 
                 skyPalettePos = mpd.BinaryReproductionFlags.SkyPaletteSharesGroundPalette
                     ? groundPalettePos
-                    : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Channels?.Length >= 1 ? mpd.Planes.SkyPalette : null) ?? groundPalettePos;
+                    : WritePaletteOrNull(mpd.Planes?.SkyPalette?.Colors?.Length >= 1 ? mpd.Planes.SkyPalette : null) ?? groundPalettePos;
 
                 texturePalettePos = mpd.BinaryReproductionFlags.TexturePaletteSharesSkyPalette
                     ? skyPalettePos
-                    : WritePaletteOrNull(mpd.TexturePalette?.Channels?.Length >= 1 ? mpd.TexturePalette : null) ?? skyPalettePos;
+                    : WritePaletteOrNull(mpd.TexturePalette?.Colors?.Length >= 1 ? mpd.TexturePalette : null) ?? skyPalettePos;
 
                 var indexedTextureIds = pmc?.Textures?.Where(x => x.BytesPerPixel == 1).Select(x => (ushort) x.ID)?.ToArray() ?? null;
                 indexedTexturesPos = WriteIndexedTexturesTableOrNull(indexedTextureIds);
@@ -219,7 +219,7 @@ namespace SF3.MPD.Writer {
             => WriteObjectOrNull(() => palette != null, () => WritePalette(palette));
 
         public void WritePalette(Palette palette) {
-            foreach (var channel in palette.Channels)
+            foreach (var channel in palette.Colors)
                 WriteUShort(channel.ToABGR1555());
         }
 

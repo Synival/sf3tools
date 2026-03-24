@@ -111,7 +111,7 @@ namespace CommonLib.Extensions {
 
         public static void SetPalette(this Image image, Palette palette) {
             var outputPalette = image.Palette;
-            var palLen = Math.Min(256, palette.Channels.Length);
+            var palLen = Math.Min(256, palette.Colors.Length);
 
             for (int i = 0; i < palLen; ++i) {
                 var inputColor = palette[i];

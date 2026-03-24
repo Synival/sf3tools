@@ -53,11 +53,11 @@ namespace SF3.Win.OpenGL.MPD {
                 adjB = lightAdj.B * 255 / 31;
             }
 
-            var numColors = lightPal.Channels.Length;
+            var numColors = lightPal.Colors.Length;
 
             var colorData = new byte[numColors * 4];
             var pos = 0;
-            foreach (var color in lightPal.Channels) {
+            foreach (var color in lightPal.Colors) {
                 var colorR = (byte) MathHelpers.Clamp(color.R + adjR, 0x00, 0xFF);
                 var colorG = (byte) MathHelpers.Clamp(color.G + adjG, 0x00, 0xFF);
                 var colorB = (byte) MathHelpers.Clamp(color.B + adjB, 0x00, 0xFF);

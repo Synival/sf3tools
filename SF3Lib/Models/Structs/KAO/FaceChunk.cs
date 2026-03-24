@@ -57,7 +57,7 @@ namespace SF3.Models.Structs.KAO {
             set {
                 if (value == null)
                     return;
-                var paletteMax = Math.Min(0x100, value.Channels.Length);
+                var paletteMax = Math.Min(0x100, value.Colors.Length);
 
                 var newData = new ushort[paletteMax];
                 newData[0] = 0x8000;

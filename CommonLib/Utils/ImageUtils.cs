@@ -13,7 +13,7 @@ namespace CommonLib.Utils {
         /// <param name="palette">The color palette used for the 8-bit indexed image data.</param>
         /// <returns>A new byte[,] with a copy of input 'data' without any transparent pixels.</returns>
         public static byte[,] Create8BitImageDataWithoutTransparency(byte[,] data, Palette palette) {
-            var transparentColor = palette.Channels[0];
+            var transparentColor = palette.Colors[0];
             byte closestToTransparentIndex = (byte) palette.GetHighestScoringIndex(
                 ignoreColorZero: true,
                 color => {
@@ -65,7 +65,7 @@ namespace CommonLib.Utils {
         /// <returns>A new byte[,] with 8-bit indexed color data.</returns>
         public static byte[,] GetImageDataConformingToPalette(byte[,] newData, Palette fromPalette, Palette toPalette) {
             // For each color in newPalette, find the closest match in toPalette.
-            var conversionMap = fromPalette.Channels
+            var conversionMap = fromPalette.Colors
                 .Select(x => (byte) toPalette.GetClosestIndex(ignoreColorZero: false, x))
                 .ToArray();
 
