@@ -116,7 +116,6 @@ namespace CommonLib.Imaging {
                 _ = _textureDataBuffer.SetImageData8Bit(data);
                 SetPaletteInternal(palette, false);
             }
-
             InvokeInvalidatedEvent();
         }
 
@@ -128,7 +127,7 @@ namespace CommonLib.Imaging {
             if (error != null)
                 throw new ArgumentException(error);
 
-            PixelFormat = TexturePixelFormat.ABGR1555;
+            SetPixelFormatInternal(TexturePixelFormat.ABGR1555, invalidate: false);
             SetDimensionsInternal(newWidth, newHeight, invalidate: false);
 
             Invalidate(sendEvent: false);
@@ -137,7 +136,6 @@ namespace CommonLib.Imaging {
                 newData.FixSaturnTransparency(useEndCodes: true);
                 _ = _textureDataBuffer.SetImageData16Bit(newData);
             }
-
             InvokeInvalidatedEvent();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
@@ -58,6 +59,28 @@ namespace CommonLib.Imaging {
 
             StoredImageDataSize = storedSize;
             return outputData;
+        }
+
+        public byte[] ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette) {
+            var newData = data.To1DArrayTransposed();
+            return IsCompressed ? Compression.CompressLZSS(newData) : newData;
+        }
+
+        public byte[] ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data) {
+            var newWidth  = data.GetLength(0);
+            var newHeight = data.GetLength(1);
+            var dataAsBytes = new byte[newWidth * newHeight * 2];
+
+            int off = 0;
+            for (var y = 0; y < newHeight; y++) {
+                for (var x = 0; x < newWidth; x++) {
+                    var val = data[x, y];
+                    dataAsBytes[off++] = (byte) (val >> 8);
+                    dataAsBytes[off++] = (byte) val;
+                }
+            }
+
+            return IsCompressed ? Compression.CompressLZSS(dataAsBytes) : dataAsBytes;
         }
 
         public IByteArray Data { get; set; }

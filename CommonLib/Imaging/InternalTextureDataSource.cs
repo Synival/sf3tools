@@ -17,5 +17,15 @@ namespace CommonLib.Imaging {
             // Nothing to fetch; if it's not set, it's not set.
             return null;
         }
+
+        public byte[] ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette) {
+            // No data to store.
+            return null;
+        }
+
+        public byte[] ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data) {
+            // No data to store.
+            return null;
+        }
     }
 }
