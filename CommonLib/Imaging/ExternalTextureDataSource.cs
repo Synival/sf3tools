@@ -91,6 +91,6 @@ namespace CommonLib.Imaging {
         public IByteArray Data { get; set; }
         public int ImageDataOffset { get; set; }
         public bool IsCompressed { get; set; }
-        public int StoredImageDataSize { get; set; }
+        public int? StoredImageDataSize { get; private set; }
     }
 }

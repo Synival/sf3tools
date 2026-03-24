@@ -7,5 +7,7 @@
         byte[] ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data);
 
         void StoreImageData(ITextureData data, byte[] storageData);
+
+        int? StoredImageDataSize { get; }
     }
 }

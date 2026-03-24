@@ -99,39 +99,5 @@ namespace CommonLib.Imaging {
             else
                 _ = _textureDataBuffer.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
         }
-
-        public override void SetImageData8Bit(byte[,] data, Palette palette) {
-            var error = Validate8BitImageData(data, palette, null, null);
-            if (error != null)
-                throw new ArgumentException(error);
-
-            Invalidate(sendEvent: false);
-            using (InvalidateGuard()) {
-                PixelFormat = TexturePixelFormat.Indexed8Bit;
-                Width = data.GetLength(0);
-                Height = data.GetLength(1);
-                _ = _textureDataBuffer.SetImageData8Bit(data);
-                Palette = palette;
-            }
-            InvokeInvalidatedEvent();
-        }
-
-        protected override void SetImageData16Bit(ushort[,] data) {
-            data = data.Clone() as ushort[,];
-            data.FixSaturnTransparency(useEndCodes: true);
-
-            var error = Validate16BitImageData(data, null, null);
-            if (error != null)
-                throw new ArgumentException(error);
-
-            Invalidate(sendEvent: false);
-            using (InvalidateGuard()) {
-                PixelFormat = TexturePixelFormat.ABGR1555;
-                Width = data.GetLength(0);
-                Height = data.GetLength(1);
-                _ = _textureDataBuffer.SetImageData16Bit(data);
-            }
-            InvokeInvalidatedEvent();
-        }
     }
 }

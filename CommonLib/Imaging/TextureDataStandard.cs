@@ -1,4 +1,6 @@
-﻿using CommonLib.Types;
+﻿using System;
+using CommonLib.Extensions;
+using CommonLib.Types;
 
 namespace CommonLib.Imaging {
     public abstract class TextureDataStandard : TextureDataBase {
@@ -22,6 +24,47 @@ namespace CommonLib.Imaging {
 
         protected override byte[,] FetchImageData8Bit() => DataSource.FetchImageData8Bit(this);
         protected override ushort[,] FetchImageData16Bit() => DataSource.FetchImageData16Bit(this);
+
+        public override void SetImageData8Bit(byte[,] data, Palette palette) {
+            var newStoredData = DataSource.ConvertImageDataToStorageData8Bit(this, data, palette);
+            var error = Validate8BitImageData(data, palette, DataSource.StoredImageDataSize, newStoredData?.Length);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            DataSource.StoreImageData(this, newStoredData);
+
+            Invalidate(sendEvent: false);
+            using (InvalidateGuard()) {
+                PixelFormat = TexturePixelFormat.Indexed8Bit;
+                Width = data.GetLength(0);
+                Height = data.GetLength(1);
+                _ = _textureDataBuffer.SetImageData8Bit(data);
+                Palette = palette;
+            }
+            InvokeInvalidatedEvent();
+        }
+
+        protected override void SetImageData16Bit(ushort[,] data) {
+            data = data.Clone() as ushort[,];
+            data.FixSaturnTransparency(useEndCodes: true);
+
+            var newStoredData = DataSource.ConvertImageDataToStorageData16Bit(this, data);
+            var error = Validate16BitImageData(data, DataSource.StoredImageDataSize, newStoredData?.Length);
+            if (error != null)
+                throw new ArgumentException(error);
+
+            DataSource.StoreImageData(this, newStoredData);
+
+            Invalidate(sendEvent: false);
+            using (InvalidateGuard()) {
+                PixelFormat = TexturePixelFormat.ABGR1555;
+                Width = data.GetLength(0);
+                Height = data.GetLength(1);
+                _ = _textureDataBuffer.SetImageData16Bit(data);
+                Palette = null;
+            }
+            InvokeInvalidatedEvent();
+        }
 
         public void LoadImageData() {
             // Accessing the getter performs loading.

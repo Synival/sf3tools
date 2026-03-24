@@ -31,5 +31,7 @@ namespace CommonLib.Imaging {
         public void StoreImageData(ITextureData data, byte[] storageData) {
             // No data to store -- it only exists in the buffer.
         }
+
+        public int? StoredImageDataSize => null;
     }
 }
