@@ -13,7 +13,8 @@ namespace CommonLib.Imaging {
             original.PixelFormat,
             palette,
             original.ZeroIsTransparent,
-            original.CanSetImageData8Bit || original.CanSetImageData16Bit
+            original.CanSetImageData8Bit || original.CanSetImageData16Bit,
+            new TextureData_InternalDataStrategy()
         ) {
             if (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 _ = _textureDataBuffer.SetImageData8Bit(original.ImageData8Bit);
@@ -28,7 +29,8 @@ namespace CommonLib.Imaging {
             TexturePixelFormat.Indexed8Bit,
             palette,
             zeroIsTransparent,
-            canSetImage
+            canSetImage,
+            new TextureData_InternalDataStrategy()
         ) {
             if (data != null)
                 _ = _textureDataBuffer.SetImageData8Bit(data);
@@ -41,14 +43,23 @@ namespace CommonLib.Imaging {
             TexturePixelFormat.ABGR1555,
             palette: null,
             zeroIsTransparent: false,
-            canSetImage
+            canSetImage,
+            new TextureData_InternalDataStrategy()
         ) {
             if (data != null)
                 _ = _textureDataBuffer.SetImageData16Bit(data);
         }
 
         public TextureData(int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, bool canSetImage)
-        : base(width, height, pixelFormat, palette, zeroIsTransparent, canSetImage) {
+        : base(
+            width,
+            height,
+            pixelFormat,
+            palette,
+            zeroIsTransparent,
+            canSetImage,
+            new TextureData_InternalDataStrategy()
+        ) {
         }
 
         public static TextureData FromJToken(JToken token, bool zeroIsTransparent, Palette palette, bool canSetImage)
@@ -60,7 +71,8 @@ namespace CommonLib.Imaging {
             (TexturePixelFormat) Enum.Parse(typeof(TexturePixelFormat), (string) jObject["PixelFormat"]),
             palette,
             zeroIsTransparent,
-            canSetImage
+            canSetImage,
+            new TextureData_InternalDataStrategy()
         ) {
             var imageDataBase64 = (string) jObject["ImageData"];
             if (PixelFormat == TexturePixelFormat.ABGR1555)
@@ -78,7 +90,8 @@ namespace CommonLib.Imaging {
             pixelFormat,
             palette,
             zeroIsTransparent,
-            canSetImage
+            canSetImage,
+            new TextureData_InternalDataStrategy()
         ) {
             var imageDataBase64 = (string) token;
             if (PixelFormat == TexturePixelFormat.ABGR1555)

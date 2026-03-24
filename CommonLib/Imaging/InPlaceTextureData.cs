@@ -9,7 +9,15 @@ namespace CommonLib.Imaging {
         public InPlaceTextureData(
             IByteArray data, int imageDataOffset,
             int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
-        ) : base(width, height, pixelFormat, palette, zeroIsTransparent, canSetImage) {
+        ) : base(
+            width,
+            height,
+            pixelFormat,
+            palette,
+            zeroIsTransparent,
+            canSetImage,
+            new TextureData_ExternalDataStrategy()
+        ) {
             _data              = data;
             _imageDataOffset   = imageDataOffset;
             _isCompressed      = isCompressed;

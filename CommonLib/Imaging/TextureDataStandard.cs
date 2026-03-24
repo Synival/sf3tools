@@ -8,7 +8,8 @@ namespace CommonLib.Imaging {
             TexturePixelFormat pixelFormat,
             Palette palette,
             bool zeroIsTransparent,
-            bool canSetImage
+            bool canSetImage,
+            ITextureData_DataStrategy dataStrategy
         ) {
             _width             = width;
             _height            = height;
@@ -16,6 +17,7 @@ namespace CommonLib.Imaging {
             _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
             CanSetImage        = canSetImage;
+            _dataStrategy      = dataStrategy;
         }
 
         public void LoadImageData() {
@@ -101,5 +103,7 @@ namespace CommonLib.Imaging {
         public override bool CanSetImageData8Bit => CanSetImage;
         public override bool CanSetImageData16Bit => CanSetImage;
         public virtual bool CanSetImage { get; set; }
+
+        private ITextureData_DataStrategy _dataStrategy;
     }
 }
