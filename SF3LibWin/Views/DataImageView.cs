@@ -12,13 +12,13 @@ using SF3.Win.Types;
 
 namespace SF3.Win.Views {
     public class DataImageView : ImageView {
-        public DataImageView(string name, IByteArray data, Palette palette, DataImageViewMode viewMode) : this(name, [data], [palette], viewMode) { }
+        public DataImageView(string name, IByteArray data, IPalette palette, DataImageViewMode viewMode) : this(name, [data], [palette], viewMode) { }
 
-        public DataImageView(string name, IByteArray data, Palette[] palettes, DataImageViewMode viewMode) : this(name, [data], palettes, viewMode) { }
+        public DataImageView(string name, IByteArray data, IPalette[] palettes, DataImageViewMode viewMode) : this(name, [data], palettes, viewMode) { }
 
-        public DataImageView(string name, IByteArray[] datas, Palette palette, DataImageViewMode viewMode) : this(name, datas, [palette], viewMode) { }
+        public DataImageView(string name, IByteArray[] datas, IPalette palette, DataImageViewMode viewMode) : this(name, datas, [palette], viewMode) { }
 
-        public DataImageView(string name, IByteArray[] datas, Palette[] palettes, DataImageViewMode viewMode = DataImageViewMode.ColumnMajor) : base(name, imageScale: 1) {
+        public DataImageView(string name, IByteArray[] datas, IPalette[] palettes, DataImageViewMode viewMode = DataImageViewMode.ColumnMajor) : base(name, imageScale: 1) {
             Datas    = datas;
             Palettes = palettes;
             ViewMode = viewMode;
@@ -105,7 +105,7 @@ namespace SF3.Win.Views {
         }
 
         public IByteArray[] Datas { get; }
-        public Palette[] Palettes { get; }
+        public IPalette[] Palettes { get; }
         public DataImageViewMode ViewMode { get; }
     }
 }

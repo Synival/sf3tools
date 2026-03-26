@@ -67,11 +67,11 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Palette used for ground and background planes.
         /// </summary>
-        Palette GroundPalette { get; }
+        IPalette GroundPalette { get; }
 
         /// <summary>
         /// Palette used for sky and foreground planes.
         /// </summary>
-        Palette SkyPalette { get; }
+        IPalette SkyPalette { get; }
     }
 }

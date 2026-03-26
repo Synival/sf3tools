@@ -1,5 +1,4 @@
 ﻿using CommonLib.Imaging;
-using CommonLib.SGL;
 
 namespace SF3.MPD.Interfaces {
     /// <summary>
@@ -10,7 +9,7 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Palette used for lighting models and the surface model.
         /// </summary>
-        Palette Palette { get; }
+        IPalette Palette { get; }
 
         /// <summary>
         /// Pitch (X/Z-rotation) of light direction in degrees with range (-180.0, 180.0].

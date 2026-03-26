@@ -7,7 +7,7 @@ namespace SF3.Models.Structs.DAT {
     public class Face32_Texture : DAT_FileTextureBase {
         private readonly int _imageDataOffsetAddr;
 
-        public Face32_Texture(IByteData data, int id, string name, int address, Palette palette, bool isCompressed)
+        public Face32_Texture(IByteData data, int id, string name, int address, IPalette palette, bool isCompressed)
         : base(data, id, name, address, 4, 32, 32, TexturePixelFormat.Indexed8Bit, isCompressed, false) {
             _palette = palette;
             _imageDataOffsetAddr = address + 0;
@@ -24,7 +24,7 @@ namespace SF3.Models.Structs.DAT {
 
         public override bool CanUpdateAddress => false;
 
-        protected override (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) {
+        protected override (byte[,], IPalette) PreProcessIncomingImageData8Bit(byte[,] newData, IPalette palette) {
             (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
             return (ImageUtils.GetImageDataConformingToPalette(newData, palette, _palette), _palette);
         }
@@ -39,8 +39,8 @@ namespace SF3.Models.Structs.DAT {
         public override bool HasImage => ImageDataOffset != -1;
         public override bool CanLoadImage => HasImage;
 
-        private readonly Palette _palette;
+        private readonly IPalette _palette;
         private readonly int? _originalStoredSize;
-        protected override Palette StructPalette { get => _palette; set {} }
+        protected override IPalette StructPalette { get => _palette; set {} }
     }
 }

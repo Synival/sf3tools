@@ -134,7 +134,7 @@ namespace SF3.Models.Files.MPD {
             ForegroundTiledImage = foregroundTiledImage;
         }
 
-        private bool TrySetPalette(MPD_PaletteType paletteType, Palette palette) {
+        private bool TrySetPalette(MPD_PaletteType paletteType, IPalette palette) {
             ColorTable table = null;
             switch (paletteType) {
                 case MPD_PaletteType.GroundPalette:  table = MPD_File.GroundPaletteColorTable;  break;
@@ -187,7 +187,7 @@ namespace SF3.Models.Files.MPD {
             set => MPD_File.MPDHeader.BackgroundY = value;
         }
 
-        public Palette GroundPalette => MPD_File.GroundPaletteColorTable?.Palette;
-        public Palette SkyPalette => MPD_File.SkyPaletteColorTable?.Palette;
+        public IPalette GroundPalette => MPD_File.GroundPaletteColorTable?.Palette;
+        public IPalette SkyPalette => MPD_File.SkyPaletteColorTable?.Palette;
     }
 }

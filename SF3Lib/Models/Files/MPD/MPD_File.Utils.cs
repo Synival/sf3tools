@@ -52,8 +52,8 @@ namespace SF3.Models.Files.MPD {
 
         public Palette CreatePalette(MPD_PaletteType paletteType, int adjR, int adjG, int adjB) {
             // Make a copy of the palette.
-            var palette = GetPalette(paletteType);
-            palette = (palette != null) ? new Palette(palette) : new Palette(0x100);
+            var paletteRef = GetPalette(paletteType);
+            var palette = (paletteRef != null) ? new Palette(paletteRef) : new Palette(0x100);
 
             if (adjR != 0 || adjG != 0 || adjB != 0) {
                 adjR = adjR * 255 / 31;
@@ -70,7 +70,7 @@ namespace SF3.Models.Files.MPD {
             return palette;
         }
 
-        public Palette GetPalette(MPD_PaletteType paletteType) {
+        public IPalette GetPalette(MPD_PaletteType paletteType) {
             switch (paletteType) {
                 case MPD_PaletteType.GroundPalette:  return Planes?.GroundPalette;
                 case MPD_PaletteType.SkyPalette:     return Planes?.SkyPalette;

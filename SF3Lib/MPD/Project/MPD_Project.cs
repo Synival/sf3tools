@@ -190,7 +190,7 @@ namespace SF3.MPD.Project {
         public IMPD_BinaryReproductionFlags BinaryReproductionFlags { get; private set; }
         public IMPD_Surface Surface { get; private set; }
         public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; private set; }
-        public Palette TexturePalette { get; set; }
+        public IPalette TexturePalette { get; set; }
         public IMPD_Lighting Lighting { get; set; }
         public IReadOnlyList<IMPD_ModelSwitchGroup> ModelSwitchGroups { get; set; }
         public IMPD_Planes Planes { get; set; }

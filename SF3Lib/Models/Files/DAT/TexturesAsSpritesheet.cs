@@ -8,13 +8,13 @@ using CommonLib.Utils;
 
 namespace SF3.Models.Files.DAT {
     public class TexturesAsSpritesheet : ITextureData {
-        public TexturesAsSpritesheet(IDAT_File file, Palette palette, bool zeroIsTransparent, int widthPerImage, int heightPerImage, int imagesPerRow)
+        public TexturesAsSpritesheet(IDAT_File file, IPalette palette, bool zeroIsTransparent, int widthPerImage, int heightPerImage, int imagesPerRow)
             : this(file, TexturePixelFormat.Indexed8Bit, palette, zeroIsTransparent, widthPerImage, heightPerImage, imagesPerRow) {}
 
         public TexturesAsSpritesheet(IDAT_File file, bool zeroIsTransparent, int widthPerImage, int heightPerImage, int imagesPerRow)
             : this(file, TexturePixelFormat.ABGR1555, null, zeroIsTransparent, widthPerImage, heightPerImage, imagesPerRow) {}
 
-        private TexturesAsSpritesheet(IDAT_File file, TexturePixelFormat pixelFormat, Palette palette, bool zeroIsTransparent, int widthPerImage, int heightPerImage, int imagesPerRow) {
+        private TexturesAsSpritesheet(IDAT_File file, TexturePixelFormat pixelFormat, IPalette palette, bool zeroIsTransparent, int widthPerImage, int heightPerImage, int imagesPerRow) {
             DAT_File       = file;
             WidthPerImage  = widthPerImage;
             HeightPerImage = heightPerImage;
@@ -41,7 +41,7 @@ namespace SF3.Models.Files.DAT {
         public int HeightPerImage { get; }
         public int ImagesPerRow { get; }
         public TexturePixelFormat PixelFormat { get; }
-        public Palette Palette { get; }
+        public IPalette Palette { get; }
         public int Width { get; }
         public int Height { get; private set; }
         public int ImageDataSize => Width * Height * BytesPerPixel;
@@ -50,7 +50,7 @@ namespace SF3.Models.Files.DAT {
 
         public byte[,] ImageData8Bit => _textureDataCache.GetOrCacheImageData8Bit(() => Create8BitImageData());
 
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
+        public void SetImageData8Bit(byte[,] data, IPalette palette) {
             var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
@@ -182,7 +182,7 @@ namespace SF3.Models.Files.DAT {
                 : BitmapUtils.ConvertABGR1555DataToARGB8888BitmapData(ImageData16Bit)
             );
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize) {
             if (data.GetLength(0) % WidthPerImage != 0)
                 return $"Image width ({data.GetLength(0)}) must be a multiple of {WidthPerImage}";
             if (data.GetLength(1) % HeightPerImage != 0)

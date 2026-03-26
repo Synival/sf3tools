@@ -77,7 +77,7 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static unsafe byte[] ConvertIndexedDataToARGB1555BitmapData(byte[] input, Palette palette, bool zeroIsTransparent) {
+        public static unsafe byte[] ConvertIndexedDataToARGB1555BitmapData(byte[] input, IPalette palette, bool zeroIsTransparent) {
             if (input == null)
                 return null;
 
@@ -96,7 +96,7 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static unsafe byte[] ConvertIndexedDataToARGB1555BitmapData(byte[,] input, Palette palette, bool zeroIsTransparent) {
+        public static unsafe byte[] ConvertIndexedDataToARGB1555BitmapData(byte[,] input, IPalette palette, bool zeroIsTransparent) {
             if (input == null)
                 return null;
 
@@ -116,7 +116,7 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static unsafe byte[] ConvertIndexedDataToARGB8888BitmapData(byte[] input, Palette palette, bool zeroIsTransparent) {
+        public static unsafe byte[] ConvertIndexedDataToARGB8888BitmapData(byte[] input, IPalette palette, bool zeroIsTransparent) {
             if (input == null)
                 return null;
 
@@ -137,7 +137,7 @@ namespace CommonLib.Utils {
             return output;
         }
 
-        public static unsafe byte[] ConvertIndexedDataToARGB8888BitmapData(byte[,] input, Palette palette, bool zeroIsTransparent) {
+        public static unsafe byte[] ConvertIndexedDataToARGB8888BitmapData(byte[,] input, IPalette palette, bool zeroIsTransparent) {
             if (input == null)
                 return null;
 

@@ -33,9 +33,9 @@ namespace SF3.MPD.Project {
                 DataAfterInstances = original.DataAfterInstances.ToArray();
         }
 
-        public static IMPD_ModelCollection FromJToken(JToken token, MPD_CollectionType collection, Palette indexedTexturePalette)
+        public static IMPD_ModelCollection FromJToken(JToken token, MPD_CollectionType collection, IPalette indexedTexturePalette)
             => new MPD_ModelCollection(token, collection, indexedTexturePalette);
-        public MPD_ModelCollection(JToken token, MPD_CollectionType collection, Palette indexedTexturePalette) {
+        public MPD_ModelCollection(JToken token, MPD_CollectionType collection, IPalette indexedTexturePalette) {
             Collection = collection;
 
             var jObject = (JObject) token;

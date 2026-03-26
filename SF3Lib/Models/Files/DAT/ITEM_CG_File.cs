@@ -39,7 +39,7 @@ namespace SF3.Models.Files.DAT {
             return tables;
         }
 
-        public override void ReplaceImages8Bit(byte[][,] images, Palette incomingPalette, bool minimalChanges) {
+        public override void ReplaceImages8Bit(byte[][,] images, IPalette incomingPalette, bool minimalChanges) {
             var realPalette = ItemCG_TextureTable.ItemSpellPalette;
 
             images = images.Select(x => ImageUtils.GetImageDataConformingToPalette(x, incomingPalette, realPalette)).ToArray();

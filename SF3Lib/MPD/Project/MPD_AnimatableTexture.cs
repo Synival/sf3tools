@@ -13,9 +13,9 @@ namespace SF3.MPD.Project {
 
         public IMPD_Animation Animation { get; }
 
-        public static MPD_AnimatableTexture FromJToken(JToken token, MPD_CollectionType collection, Palette palette)
+        public static MPD_AnimatableTexture FromJToken(JToken token, MPD_CollectionType collection, IPalette palette)
             => new MPD_AnimatableTexture(token, collection, palette);
-        private MPD_AnimatableTexture(JToken token, MPD_CollectionType collection, Palette palette)
+        private MPD_AnimatableTexture(JToken token, MPD_CollectionType collection, IPalette palette)
         : base((JObject) token, collection, palette) {
             var jObject = (JObject) token;
             if (collection == MPD_CollectionType.Primary)

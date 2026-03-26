@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.DAT {
 
         public abstract int PaletteOffset { get; }
 
-        protected override Palette StructPalette {
+        protected override IPalette StructPalette {
             get {
                 var colors = Data.GetDataCopyAt(PaletteOffset, 0x200).ToUShorts();
                 return new Palette(colors);

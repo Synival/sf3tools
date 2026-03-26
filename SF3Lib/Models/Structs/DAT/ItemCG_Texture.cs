@@ -6,7 +6,7 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.DAT {
     public class ItemCG_Texture : DAT_FileTextureBase {
-        public ItemCG_Texture(IByteData data, int id, string name, int address, Palette palette)
+        public ItemCG_Texture(IByteData data, int id, string name, int address, IPalette palette)
         : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Indexed8Bit, true, false) {
             _palette = palette;
 
@@ -24,14 +24,14 @@ namespace SF3.Models.Structs.DAT {
         [TableViewModelColumn(displayOrder: 2.1f, displayFormat: "X4", isReadOnly: true, displayGroup: "Metadata")]
         public int? MaxStoredImageSize { get; set; }
 
-        protected override (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) {
+        protected override (byte[,], IPalette) PreProcessIncomingImageData8Bit(byte[,] newData, IPalette palette) {
             (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
             return (ImageUtils.GetImageDataConformingToPalette(newData, palette, _palette), _palette);
         }
 
         protected override void OnImageUpdated() {}
 
-        public override void SetImageData8Bit(byte[,] data, Palette palette) {
+        public override void SetImageData8Bit(byte[,] data, IPalette palette) {
             base.SetImageData8Bit(data, palette);
 
             // Zero-out unused data.
@@ -53,7 +53,7 @@ namespace SF3.Models.Structs.DAT {
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
 
-        private readonly Palette _palette;
-        protected override Palette StructPalette { get => _palette; set {} }
+        private readonly IPalette _palette;
+        protected override IPalette StructPalette { get => _palette; set {} }
     }
 }

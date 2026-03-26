@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true));
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize) {
             if (!HasImage)
                 return "No image available";
             return TextureDataValidators.IsSameDimensions(data, Width, Height);
@@ -114,7 +114,7 @@ namespace SF3.Models.Structs.KAO {
 
         public byte[,] ImageData8Bit => _textureDataCache.GetOrCacheImageData8Bit(() => GetCompositeImageData());
 
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
+        public void SetImageData8Bit(byte[,] data, IPalette palette) {
             var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
@@ -161,7 +161,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(highlightEndcodes: false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(highlightEndcodes: false);
 
-        public Palette Palette => Chunk.Palette;
+        public IPalette Palette => Chunk.Palette;
         public bool CanSetImageData8Bit => HasImage;
         public bool CanSetImageData16Bit => false;
         public bool ZeroIsTransparent => true;

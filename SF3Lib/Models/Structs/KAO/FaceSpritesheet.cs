@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.KAO {
 
         public FaceChunk Face { get; }
         public FaceHeader Header => Face.Header;
-        public Palette Palette => Face.Palette;
+        public IPalette Palette => Face.Palette;
 
         public int BytesPerPixel => 1;
         public TexturePixelFormat PixelFormat => TexturePixelFormat.Indexed8Bit;
@@ -45,7 +45,7 @@ namespace SF3.Models.Structs.KAO {
             public readonly int X1, Y1, X2, Y2, Width, Height;
         }
 
-        public void SetImageData8Bit(byte[,] sheetData, Palette palette) {
+        public void SetImageData8Bit(byte[,] sheetData, IPalette palette) {
             var error = Validate8BitImageData(sheetData, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
@@ -320,7 +320,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize) {
             var sheetWidth  = data.GetLength(0);
             var sheetHeight = data.GetLength(1);
 

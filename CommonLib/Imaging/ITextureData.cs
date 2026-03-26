@@ -41,7 +41,7 @@ namespace CommonLib.Imaging {
         /// </summary>
         /// <param name="data">Data to set. If 'null', no data will be set.</param>
         /// <param name="palette">Palette to set. If 'null', no palette will be set.</param>
-        void SetImageData8Bit(byte[,] data, Palette palette);
+        void SetImageData8Bit(byte[,] data, IPalette palette);
 
         /// <summary>
         /// Raw 16-bit image data in [x, y] order. Only usable when BytesPerPixel is 2.
@@ -80,7 +80,7 @@ namespace CommonLib.Imaging {
         /// <summary>
         /// The palette used for indexed images. Should be 'null' for non-indexed images.
         /// </summary>
-        Palette Palette { get; }
+        IPalette Palette { get; }
 
         /// <summary>
         /// When true, 8-bit indexed textures have a transparent pixel for value 0.
@@ -106,7 +106,7 @@ namespace CommonLib.Imaging {
         /// <param name="oldStoredSize">The size of the image data currently stored in the texture.</param>
         /// <param name="newStoredSize">The new size of the image data to store in the texture.</param>
         /// <returns>Returns 'null' if 'data' and 'palette' is valid, or a string with an error if not.</returns>
-        string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize);
+        string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize);
 
         /// <summary>
         /// Checks 'data' to see if it's valid to be set for 'ImageData16Bit'. Returns a non-null value if 'data' is invalid.

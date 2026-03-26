@@ -44,11 +44,11 @@ namespace SF3.Models.Structs.MPD.Animation {
             }
         }
 
-        public void SetImageData8Bit(byte[,] data, Palette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);
+        public void SetImageData8Bit(byte[,] data, IPalette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB8888(highlightEndcodes);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize)
             => Chunk3Texture?.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
 
         public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
@@ -118,7 +118,7 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         public byte[] BitmapDataARGB1555 => Chunk3Texture?.BitmapDataARGB1555;
         public byte[] BitmapDataARGB8888 => Chunk3Texture?.BitmapDataARGB8888;
-        public Palette Palette => Chunk3Texture?.Palette;
+        public IPalette Palette => Chunk3Texture?.Palette;
         public bool CanSetImageData8Bit => Chunk3Texture?.CanSetImageData8Bit ?? false;
         public bool CanSetImageData16Bit => Chunk3Texture?.CanSetImageData16Bit ?? false;
         public bool ZeroIsTransparent => false;

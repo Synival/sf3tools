@@ -40,7 +40,7 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Palette used for 8-bit textures on models and the surface model.
         /// </summary>
-        Palette TexturePalette { get; }
+        IPalette TexturePalette { get; }
 
         /// <summary>
         /// Palette and direction for lighting models and the surface model.

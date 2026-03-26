@@ -12,7 +12,7 @@ namespace CommonLib.Imaging {
             int width,
             int height,
             TexturePixelFormat pixelFormat,
-            Palette palette,
+            IPalette palette,
             bool zeroIsTransparent,
             bool canSetImage,
             ITextureDataSource dataSource
@@ -38,7 +38,7 @@ namespace CommonLib.Imaging {
             return DataSource.FetchImageData16Bit(this);
         }
 
-        public override void SetImageData8Bit(byte[,] data, Palette palette) {
+        public override void SetImageData8Bit(byte[,] data, IPalette palette) {
             var newStoredData = DataSource.ConvertImageDataToStorageData8Bit(this, data, palette, out var newStoredDataSize);
             var error = Validate8BitImageData(data, palette, DataSource.StoredImageDataSize, newStoredDataSize);
             if (error != null)
@@ -120,8 +120,8 @@ namespace CommonLib.Imaging {
             }
         }
 
-        private Palette _palette;
-        public override Palette Palette {
+        private IPalette _palette;
+        public override IPalette Palette {
             get => _palette;
             set {
                 if (_palette != value) {

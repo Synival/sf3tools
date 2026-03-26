@@ -58,7 +58,7 @@ namespace SF3.Models.Files.MPD {
         /// </summary>
         /// <param name="paletteType">Identifier for which palette to use.</param>
         /// <returns>A 256-color palette for the requested format, or 'null' if it doesn't exist.</returns>
-        Palette GetPalette(MPD_PaletteType paletteType);
+        IPalette GetPalette(MPD_PaletteType paletteType);
 
         /// <summary>
         /// Fetches the PDataModel for a PDATA that looks like a tree, if one could be found.

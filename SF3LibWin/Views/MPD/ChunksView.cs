@@ -77,7 +77,7 @@ namespace SF3.Win.Views.MPD {
                 AddChunkView(fgChunk.ChunkIndex, "ForegroundTileAssignment", (name) => new PlaneTileAssignmentChunkView(name, fgChunk));
             }
 
-            var paletteList = new List<Palette>() {
+            var paletteList = new List<IPalette>() {
                 Model.GroundPaletteColorTable?.Palette ?? new Palette(0x100),
                 Model.SkyPaletteColorTable?.Palette ?? new Palette(0x100),
             };

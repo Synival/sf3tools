@@ -64,7 +64,7 @@ namespace CommonLib.Imaging {
             return outputData;
         }
 
-        public object ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette, out int? storageSize) {
+        public object ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, IPalette palette, out int? storageSize) {
             var newData = data.To1DArrayTransposed();
             newData = IsCompressed ? Compression.CompressLZSS(newData) : newData;
             storageSize = newData.Length;

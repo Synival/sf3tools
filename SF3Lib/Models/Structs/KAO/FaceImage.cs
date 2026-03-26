@@ -157,7 +157,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _textureDataCache.GetOrCacheBitmapDataARGB8888(() => BitmapUtils.ConvertIndexedDataToARGB8888BitmapData(ImageData8Bit, Palette, true));
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
         public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
@@ -169,7 +169,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[,] ImageData8Bit
             => _textureDataCache.GetOrCacheImageData8Bit(() => HasImage ? Data.GetDataCopyAt(ImageDataOffset, Width * Height).To2DArrayColumnMajor(Width, Height) : null);
 
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
+        public void SetImageData8Bit(byte[,] data, IPalette palette) {
             var error = Validate8BitImageData(data, palette, ImageDataSize, data.GetLength(0) * data.GetLength(1));
             if (error != null)
                 throw new ArgumentException(error);
@@ -196,7 +196,7 @@ namespace SF3.Models.Structs.KAO {
         public byte[] BitmapDataARGB1555 => GetBitmapDataARGB1555(false);
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
 
-        public Palette Palette {
+        public IPalette Palette {
             get => Face.Palette;
             set {
                 if (Layer == 0)

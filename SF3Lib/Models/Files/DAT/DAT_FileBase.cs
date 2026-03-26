@@ -12,7 +12,7 @@ namespace SF3.Models.Files.DAT {
             FileType = fileType;
         }
 
-        public abstract void ReplaceImages8Bit(byte[][,] images, Palette palette, bool minimalChanges);
+        public abstract void ReplaceImages8Bit(byte[][,] images, IPalette palette, bool minimalChanges);
         public abstract void ReplaceImages16Bit(ushort[][,] images, bool minimalChanges);
 
         public DAT_FileType FileType { get; }

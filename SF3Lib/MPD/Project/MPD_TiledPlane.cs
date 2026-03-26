@@ -6,7 +6,7 @@ using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
     public class MPD_TiledPlane : IMPD_TiledPlane {
-        public MPD_TiledPlane(IMPD_TiledPlane original, Palette palette) {
+        public MPD_TiledPlane(IMPD_TiledPlane original, IPalette palette) {
             if (original.Tileset != null)
                 Tileset = new InMemoryTextureData(original.Tileset, palette);
             if (original.TileAssignment != null)
@@ -15,9 +15,9 @@ namespace SF3.MPD.Project {
                 TiledImage = new InMemoryTextureData(original.TiledImage, palette);
         }
 
-        public static MPD_TiledPlane FromJToken(JToken token, Palette palette, int tilesWidth, int tilesHeight)
+        public static MPD_TiledPlane FromJToken(JToken token, IPalette palette, int tilesWidth, int tilesHeight)
             => new MPD_TiledPlane(token, palette, tilesWidth, tilesHeight);
-        private MPD_TiledPlane(JToken token, Palette palette, int tilesWidth, int tilesHeight) {
+        private MPD_TiledPlane(JToken token, IPalette palette, int tilesWidth, int tilesHeight) {
             var jObject = (JObject) token;
 
             Tileset = jObject.GetValueIfExists("Tileset",

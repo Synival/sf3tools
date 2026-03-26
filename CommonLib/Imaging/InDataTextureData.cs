@@ -8,7 +8,7 @@ namespace CommonLib.Imaging {
     public class InDataTextureData : CachedTextureData, ITextureData {
         public InDataTextureData(
             IByteArray data, int imageDataOffset,
-            int width, int height, TexturePixelFormat pixelFormat, Palette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
+            int width, int height, TexturePixelFormat pixelFormat, IPalette palette, bool isCompressed, bool zeroIsTransparent, bool canSetImage
         ) : base(
             width,
             height,

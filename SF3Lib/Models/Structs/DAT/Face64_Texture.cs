@@ -17,6 +17,6 @@ namespace SF3.Models.Structs.DAT {
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
 
-        protected override Palette StructPalette { get => null; set {} }
+        protected override IPalette StructPalette { get => null; set {} }
     }
 }

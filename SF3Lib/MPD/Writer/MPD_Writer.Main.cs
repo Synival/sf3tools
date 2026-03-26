@@ -215,10 +215,10 @@ namespace SF3.MPD.Writer {
             WriteMPDPointer(boundariesPos);
         }
 
-        public uint? WritePaletteOrNull(Palette palette)
+        public uint? WritePaletteOrNull(IPalette palette)
             => WriteObjectOrNull(() => palette != null, () => WritePalette(palette));
 
-        public void WritePalette(Palette palette) {
+        public void WritePalette(IPalette palette) {
             foreach (var channel in palette.Colors)
                 WriteUShort(channel.ToABGR1555());
         }

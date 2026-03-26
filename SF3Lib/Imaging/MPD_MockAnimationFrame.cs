@@ -31,7 +31,7 @@ namespace SF3.Imaging {
         public int Frame => 0;
         public int Duration => 0;
 
-        public void SetImageData8Bit(byte[,] data, Palette palette)
+        public void SetImageData8Bit(byte[,] data, IPalette palette)
             => _texture.SetImageData8Bit(data, palette);
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
@@ -40,7 +40,7 @@ namespace SF3.Imaging {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false)
             => _texture.GetBitmapDataARGB8888(highlightEndcodes);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize)
             => _texture.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
 
         public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
@@ -59,7 +59,7 @@ namespace SF3.Imaging {
         public byte[] BitmapDataARGB1555 => _texture.BitmapDataARGB1555;
         public byte[] BitmapDataARGB8888 => _texture.BitmapDataARGB8888;
         public string Hash => _texture.Hash;
-        public Palette Palette => _texture.Palette;
+        public IPalette Palette => _texture.Palette;
         public bool ZeroIsTransparent => _texture.ZeroIsTransparent;
         public bool CanSetImageData8Bit => _texture.CanSetImageData8Bit;
         public bool CanSetImageData16Bit => _texture.CanSetImageData16Bit;

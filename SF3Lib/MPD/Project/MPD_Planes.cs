@@ -72,7 +72,7 @@ namespace SF3.MPD.Project {
         public short BackgroundX { get; set; }
         public short BackgroundY { get; set; }
 
-        public Palette GroundPalette { get; }
-        public Palette SkyPalette { get; }
+        public IPalette GroundPalette { get; }
+        public IPalette SkyPalette { get; }
     }
 }

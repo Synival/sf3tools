@@ -104,7 +104,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public IMPD_File MPD_File { get; }
 
-        protected override Palette StructPalette {
+        protected override IPalette StructPalette {
             get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.TexturePalette;
             set {}
         }

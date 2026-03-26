@@ -7,14 +7,14 @@ using SF3.Models.Structs.DAT;
 namespace SF3.Models.Tables.DAT {
     public class Face32_TextureTable : FixedSizeTable<DAT_FileTextureBase> {
         protected Face32_TextureTable(IByteData data, string name, int address, INameGetterContext nameGetterContext,
-            int faceCount, Palette palette)
+            int faceCount, IPalette palette)
         : base(data, name, address, faceCount) {
             NameGetterContext = nameGetterContext;
             Palette = palette;
         }
 
         public static Face32_TextureTable Create(IByteData data, string name, int address, INameGetterContext nameGetterContext,
-            int faceCount, Palette palette)
+            int faceCount, IPalette palette)
         {
             return Create(() => new Face32_TextureTable(data, name, address, nameGetterContext, faceCount, palette));
         }
@@ -35,7 +35,7 @@ namespace SF3.Models.Tables.DAT {
         }
 
         public INameGetterContext NameGetterContext { get; }
-        public Palette Palette { get; }
+        public IPalette Palette { get; }
         public bool? IsCompressed { get; private set; }
     }
 }

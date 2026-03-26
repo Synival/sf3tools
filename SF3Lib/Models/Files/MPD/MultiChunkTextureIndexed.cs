@@ -10,7 +10,7 @@ namespace SF3.Models.Files.MPD {
         public const int c_width = 512;
 
         public MultiChunkTextureIndexed(
-            IByteData[] datas, TexturePixelFormat format, Func<Palette> paletteGetter, Action<Palette> paletteSetter,
+            IByteData[] datas, TexturePixelFormat format, Func<IPalette> paletteGetter, Action<IPalette> paletteSetter,
             bool zeroIsTransparent, bool isTiled
         ) {
             if (datas != null) {
@@ -45,13 +45,13 @@ namespace SF3.Models.Files.MPD {
             return IsTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
         }
 
-        public override string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
+        public override string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize) {
             return
                 base.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize) ??
                 TextureDataValidators.IsSameDimensions(data, Width, Height);
         }
 
-        public override void SetImageData8Bit(byte[,] data, Palette palette) {
+        public override void SetImageData8Bit(byte[,] data, IPalette palette) {
             var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
@@ -86,7 +86,7 @@ namespace SF3.Models.Files.MPD {
         private int _height;
         public override int Height { get => _height; set {} }
 
-        public override Palette Palette {
+        public override IPalette Palette {
             get => PaletteGetter?.Invoke();
             set => PaletteSetter?.Invoke(value);
         }
@@ -98,8 +98,8 @@ namespace SF3.Models.Files.MPD {
         public override bool CanSetImageData16Bit => false;
 
         public IByteData[] Datas { get; }
-        public Func<Palette> PaletteGetter { get; }
-        public Action<Palette> PaletteSetter { get; }
+        public Func<IPalette> PaletteGetter { get; }
+        public Action<IPalette> PaletteSetter { get; }
         public bool IsTiled { get; }
     }
 }

@@ -53,7 +53,7 @@ namespace SF3.Models.Tables.Shared {
         public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
-        public string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
+        public string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize)
             => TextureDataValidators.IsSameDimensions(data, Width, Height);
 
         public int BytesPerPixel => 1;
@@ -63,7 +63,7 @@ namespace SF3.Models.Tables.Shared {
         public int ImageDataSize { get; private set; }
 
         public byte[,] ImageData8Bit { get; private set; }
-        public void SetImageData8Bit(byte[,] data, Palette palette) {
+        public void SetImageData8Bit(byte[,] data, IPalette palette) {
             var error = Validate8BitImageData(data, palette, null, null);
             if (error != null)
                 throw new ArgumentException(error);
@@ -105,8 +105,8 @@ namespace SF3.Models.Tables.Shared {
         public string Hash => BitmapDataARGB1555.CreateTextureHash();
 
         private bool _updatePalette = true;
-        private readonly Palette _palette;
-        public Palette Palette {
+        private readonly IPalette _palette;
+        public IPalette Palette {
             get {
                 if (_updatePalette) {
                     for (int i = 0; i < Size; ++i)

@@ -19,9 +19,9 @@ namespace SF3.MPD.Project {
                 Frames = original.Frames.Select(x => new MPD_AnimationFrame(x)).ToArray();
         }
 
-        public static IMPD_Animation FromJToken(JToken token, IMPD_AnimatableTexture texture, Palette indexedPalette)
+        public static IMPD_Animation FromJToken(JToken token, IMPD_AnimatableTexture texture, IPalette indexedPalette)
             => new MPD_Animation(texture, indexedPalette, token);
-        private MPD_Animation(IMPD_AnimatableTexture texture, Palette indexedPalette, JToken token) {
+        private MPD_Animation(IMPD_AnimatableTexture texture, IPalette indexedPalette, JToken token) {
             if (texture == null)
                 throw new ArgumentNullException(nameof(texture));
 

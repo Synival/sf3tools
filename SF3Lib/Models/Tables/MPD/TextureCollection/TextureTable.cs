@@ -66,7 +66,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
         public MPD_CollectionType Collection { get; }
         public int StartID { get; }
         public Dictionary<int, TexturePixelFormat> PixelFormats { get; }
-        public Dictionary<TexturePixelFormat, Palette> Palettes { get; }
+        public Dictionary<TexturePixelFormat, IPalette> Palettes { get; }
         public int ChunkIndex { get; }
         public IMPD_File MPD_File { get; }
 

@@ -10,7 +10,7 @@ namespace CommonLib.Imaging {
     /// implmenetation, but the caching mechanism is still present.
     /// </summary>
     public abstract class CachedTextureDataBase : ITextureData {
-        public delegate string Validator8Bit(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize);
+        public delegate string Validator8Bit(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize);
         public delegate string Validator16Bit(ushort[,] data, int? oldStoredSize, int? newStoredSize);
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) {
@@ -42,7 +42,7 @@ namespace CommonLib.Imaging {
         protected void InvokeInvalidatedEvent()
             => Invalidated?.Invoke(this, EventArgs.Empty);
 
-        public virtual string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize) {
+        public virtual string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize) {
             if (!CanSetImageData8Bit)
                 return "Not supported";
             foreach (var validator in _validators8Bit) {
@@ -89,13 +89,13 @@ namespace CommonLib.Imaging {
         public abstract TexturePixelFormat PixelFormat { get; set; }
         public abstract int Width { get; set; }
         public abstract int Height { get; set; }
-        public abstract Palette Palette { get; set; }
+        public abstract IPalette Palette { get; set; }
         public abstract bool ZeroIsTransparent { get; set; }
         public abstract bool CanSetImageData8Bit { get; }
         public abstract bool CanSetImageData16Bit { get; }
 
         protected abstract byte[,] FetchImageData8Bit();
-        public abstract void SetImageData8Bit(byte[,] data, Palette palette);
+        public abstract void SetImageData8Bit(byte[,] data, IPalette palette);
         protected abstract ushort[,] FetchImageData16Bit();
         protected abstract void SetImageData16Bit(ushort[,] data);
 

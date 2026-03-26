@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.MPD.Plane {
             IByteData tilesetData2,
             IMPD_PlaneTileAssignment tileAssignment,
             TexturePixelFormat paletteType,
-            Func<Palette> paletteGetter,
-            Action<Palette> paletteSetter,
+            Func<IPalette> paletteGetter,
+            Action<IPalette> paletteSetter,
             bool zeroIsTransparent
         ) {
             TilesetDatas   = new IByteData[] { tilesetData1, tilesetData2 };
@@ -38,8 +38,8 @@ namespace SF3.Models.Structs.MPD.Plane {
 
         public IByteData[] TilesetDatas { get; }
         public TexturePixelFormat PaletteType { get; }
-        public Func<Palette> PaletteGetter { get; }
-        public Action<Palette> PaletteSetter { get; }
+        public Func<IPalette> PaletteGetter { get; }
+        public Action<IPalette> PaletteSetter { get; }
         public bool ZeroIsTransparent { get; }
     }
 }

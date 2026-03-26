@@ -19,7 +19,7 @@ namespace SF3.MPD.Project {
             }
         }
 
-        protected MPD_Texture(JObject jObject, MPD_CollectionType collection, Palette palette)
+        protected MPD_Texture(JObject jObject, MPD_CollectionType collection, IPalette palette)
         : base(jObject, zeroIsTransparent: true, palette, canSetImage: true) {
             ID         = (int) jObject["ID"];
             Collection = collection;

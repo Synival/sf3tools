@@ -56,7 +56,7 @@ namespace SF3.Models.Structs.Shared {
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => _textureData.GetBitmapDataARGB8888(highlightEndcodes);
         public void InvalidateImage() => _textureData?.Invalidate();
 
-        public virtual string Validate8BitImageData(byte[,] data, Palette palette, int? oldStoredSize, int? newStoredSize)
+        public virtual string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize)
             => _textureData.Validate8BitImageData(data, palette, oldStoredSize, newStoredSize);
 
         public virtual string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
@@ -69,13 +69,13 @@ namespace SF3.Models.Structs.Shared {
         public bool ZeroIsTransparent => _textureData.ZeroIsTransparent;
 
         public virtual byte[,] ImageData8Bit => _textureData.ImageData8Bit;
-        public virtual void SetImageData8Bit(byte[,] data, Palette palette) {
+        public virtual void SetImageData8Bit(byte[,] data, IPalette palette) {
             (data, palette) = PreProcessIncomingImageData8Bit(data, palette);
             _textureData.SetImageData8Bit(data, palette);
             StructPalette = palette;
         }
 
-        protected virtual (byte[,], Palette) PreProcessIncomingImageData8Bit(byte[,] newData, Palette palette) => (newData, palette);
+        protected virtual (byte[,], IPalette) PreProcessIncomingImageData8Bit(byte[,] newData, IPalette palette) => (newData, palette);
 
         public virtual ushort[,] ImageData16Bit {
             get => _textureData.ImageData16Bit;
@@ -137,7 +137,7 @@ namespace SF3.Models.Structs.Shared {
         public abstract bool HasImage { get; }
         public abstract bool CanLoadImage { get; }
 
-        public Palette Palette {
+        public IPalette Palette {
             get => StructPalette;
             set {
                 StructPalette = value;
@@ -147,7 +147,7 @@ namespace SF3.Models.Structs.Shared {
 
         public event EventHandler Invalidated;
 
-        protected abstract Palette StructPalette { get; set; }
+        protected abstract IPalette StructPalette { get; set; }
 
         protected InDataTextureData _textureData;
 

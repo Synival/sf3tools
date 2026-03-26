@@ -109,7 +109,7 @@ namespace CommonLib.Extensions {
             }
         }
 
-        public static void SetPalette(this Image image, Palette palette) {
+        public static void SetPalette(this Image image, IPalette palette) {
             var outputPalette = image.Palette;
             var palLen = Math.Min(256, palette.Colors.Length);
 

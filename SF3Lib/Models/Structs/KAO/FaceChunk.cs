@@ -52,7 +52,7 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(displayOrder: -1.2f, displayFormat: "X4", displayGroup: "Metadata")]
         public int DecompressedSize => Data.Length;
 
-        public Palette Palette {
+        public IPalette Palette {
             get => PaletteTable.Palette;
             set {
                 if (value == null)

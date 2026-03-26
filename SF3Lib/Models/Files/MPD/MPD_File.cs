@@ -111,14 +111,14 @@ namespace SF3.Models.Files.MPD {
         [BulkCopyRecurse]
         public Dictionary<MPD_CollectionType, IMPD_ModelCollection> ModelCollections { get; } = new Dictionary<MPD_CollectionType, IMPD_ModelCollection>();
 
-        public Palette TexturePalette => TexturePaletteColorTable?.Palette;
+        public IPalette TexturePalette => TexturePaletteColorTable?.Palette;
 
         private class LightingClass : IMPD_Lighting {
             public LightingClass(MPD_File mpdFile) {
                 MPD_File = mpdFile;
             }
 
-            public Palette Palette => MPD_File.LightPaletteColorTable?.Palette;
+            public IPalette Palette => MPD_File.LightPaletteColorTable?.Palette;
 
             public float Pitch {
                 get => MathHelpers.ActualMod((MPD_File.LightPosition?.Pitch ?? 0) + 180.0f, 360.0f) - 180.0f;

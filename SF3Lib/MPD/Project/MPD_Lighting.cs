@@ -18,12 +18,12 @@ namespace SF3.MPD.Project {
         public static MPD_Lighting FromJToken(JToken token) => new MPD_Lighting(token);
         private MPD_Lighting(JToken token) {
             var jObject = (JObject) token;
-            Palette = Palette.FromJToken(jObject["Palette"]);
+            Palette = CommonLib.Imaging.Palette.FromJToken(jObject["Palette"]);
             Pitch   = (float) jObject["Pitch"];
             Yaw     = (float) jObject["Yaw"];
         }
 
-        public Palette Palette { get; }
+        public IPalette Palette { get; }
         public float Pitch { get; set; }
         public float Yaw { get; set; }
     }

@@ -324,7 +324,7 @@ namespace CommonLib.Extensions {
         /// <param name="palette">Palette to use for image data.</param>
         /// <param name="zeroIsTransparent">When true, color index 0 of the palette represents transparency.</param>
         /// <returns>If 'imageData' is non-null, a ushort[] of the same data in imageData[] in ABGR1555 format. Otherwise, returns 'null'.</returns>
-        public static ushort[] ConvertIndexedToABGR1555(this byte[] imageData, Palette palette, bool zeroIsTransparent) {
+        public static ushort[] ConvertIndexedToABGR1555(this byte[] imageData, IPalette palette, bool zeroIsTransparent) {
             if (imageData == null)
                 return null;
 

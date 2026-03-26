@@ -17,7 +17,7 @@ namespace CommonLib.Imaging {
         /// Makes a copy of an existing palette.
         /// </summary>
         /// <param name="palette">Palette to copy.</param>
-        public Palette(Palette palette) {
+        public Palette(IPalette palette) {
             Colors = palette.Colors.Clone() as PixelChannels[];
         }
 

@@ -14,7 +14,7 @@
             return null;
         }
 
-        public object ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, Palette palette, out int? storageSize) {
+        public object ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, IPalette palette, out int? storageSize) {
             // No data to store -- it only exists in the buffer.
             storageSize = null;
             return null;
