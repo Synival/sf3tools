@@ -31,12 +31,12 @@ namespace SF3.Models.Tables.Shared {
             };
 
             // Store one single palette that will be updated upon invalidation.
-            _palette = new Palette(size);
+            _cachedPalette = new CachedInDataPalette(Data.Data, Address, Size);
         }
 
         public void Invalidate(bool sendEvent = true) {
             _textureDataCache.Invalidate();
-            _updatePalette = true;
+            _cachedPalette.Invalidate();
             if (sendEvent)
                 Invalidated?.Invoke(this, EventArgs.Empty);
         }
@@ -104,32 +104,12 @@ namespace SF3.Models.Tables.Shared {
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(false);
         public string Hash => BitmapDataARGB1555.CreateTextureHash();
 
-        private bool _updatePalette = true;
-        private readonly IPalette _palette;
-        public IPalette Palette {
-            get {
-                if (_updatePalette) {
-                    for (int i = 0; i < Size; ++i)
-                        _palette.Colors[i] = PixelConversion.ABGR1555toChannels(Rows[i].ColorABGR1555);
-                    _updatePalette = false;
-                }
-                return _palette;
-            }
-            set {
-                if (value == null)
-                    return;
-                var newColors = new ushort[Size];
-                for (int i = 0; i < Size && i < value.Colors.Length; i++)
-                    newColors[i] = (ushort) (value.Colors[i].ToABGR1555() & 0x7FFF);
-
-                Data.Data.SetDataAtTo(Address, newColors.Length * 2, newColors.ToBytes());
-            }
-        }
+        private readonly CachedInDataPalette _cachedPalette;
+        public IPalette Palette => _cachedPalette;
 
         public bool ZeroIsTransparent => false;
         public bool CanSetImageData8Bit => true;
         public bool CanSetImageData16Bit => true;
-
 
         public event EventHandler Invalidated;
 

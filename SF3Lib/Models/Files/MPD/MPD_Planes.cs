@@ -144,7 +144,7 @@ namespace SF3.Models.Files.MPD {
             if (table == null)
                 return false;
 
-            table.Palette = palette;
+            table.Palette.Replace(palette.Colors);
             return true;
         }
 

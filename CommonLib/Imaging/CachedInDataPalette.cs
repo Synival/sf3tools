@@ -29,11 +29,11 @@ namespace CommonLib.Imaging {
                 return _colors[index];
             }
             set {
-                if (_needsFetch)
-                    FetchColors();
                 if (index < 0 || index >= ColorCount)
                     throw new IndexOutOfRangeException();
 
+                if (_needsFetch)
+                    FetchColors();
                 _colors[index] = value;
                 Data.SetDataAtTo(PaletteOffset + index * 2, 2, value.ToABGR1555().ToBytes());
             }
@@ -62,7 +62,6 @@ namespace CommonLib.Imaging {
 
             var newColors = Colors.Select(x => x.ToABGR1555()).ToArray().ToBytes();
             Data.SetDataAtTo(PaletteOffset, newColors.Length, newColors);
-
         }
 
         private void FetchColors() {
