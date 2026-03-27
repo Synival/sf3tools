@@ -605,11 +605,15 @@ namespace SF3.Editor.Forms {
             if (SelectedFile != null) {
                 _ = CloseFile(SelectedFile);
                 GC.Collect();
+                GC.WaitForPendingFinalizers();
+                GC.Collect();
             }
         }
 
         private void tsmiFile_CloseAll_Click(object sender, EventArgs e) {
             _ = CloseAllFiles();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             GC.Collect();
         }
 
