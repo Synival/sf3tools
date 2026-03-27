@@ -24,6 +24,7 @@ namespace SF3.Win.Controls {
             var scene = AppResources.Get();
 
             _appSettingsRenderEventHandler  = new DisposableEventHandlerCollection<EventHandler>(_appSettings);
+            Disposed += (s, e) => _appSettingsRenderEventHandler.Dispose();
             var sHandler = _appSettingsRenderEventHandler;
 
             sHandler.Subscribe(nameof(_appSettings.ViewerDrawSurfaceModelChanged),    InvalidateFrameHandler);
@@ -57,6 +58,7 @@ namespace SF3.Win.Controls {
             sHandler.Subscribe(nameof(_appSettings.ViewerRotateSpritesUpChanged),   ViewerRotateSpritesUpChangedHandler);
 
             _appResourcesRenderEventHandler = new DisposableEventHandlerCollection<EventHandler>(scene);
+            Disposed += (s, e) => _appResourcesRenderEventHandler.Dispose();
             var rHandler = _appResourcesRenderEventHandler;
 
             rHandler.Subscribe(nameof(scene.ActiveSceneChanged), InvalidateActorsHandler);
