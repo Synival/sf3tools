@@ -23,7 +23,7 @@ namespace SF3.Win.Controls {
 
             var scene = AppResources.Get();
 
-            _appSettingsRenderEventHandler  = new WeakReferenceSubscriber<EventArgs, EventHandler>(_appSettings);
+            _appSettingsRenderEventHandler  = new DisposableEventHandlerCollection<EventHandler>(_appSettings);
             var sHandler = _appSettingsRenderEventHandler;
 
             sHandler.Subscribe(nameof(_appSettings.ViewerDrawSurfaceModelChanged),    InvalidateFrameHandler);
@@ -56,7 +56,7 @@ namespace SF3.Win.Controls {
             sHandler.Subscribe(nameof(_appSettings.ViewerDrawNormalsChanged),       InvalidateFrameHandler);
             sHandler.Subscribe(nameof(_appSettings.ViewerRotateSpritesUpChanged),   ViewerRotateSpritesUpChangedHandler);
 
-            _appResourcesRenderEventHandler = new WeakReferenceSubscriber<EventArgs, EventHandler>(scene);
+            _appResourcesRenderEventHandler = new DisposableEventHandlerCollection<EventHandler>(scene);
             var rHandler = _appResourcesRenderEventHandler;
 
             rHandler.Subscribe(nameof(scene.ActiveSceneChanged), InvalidateActorsHandler);
@@ -711,7 +711,7 @@ namespace SF3.Win.Controls {
         private Renderer _renderer = null;
         private int _inPaintCounter = 0;
 
-        private WeakReferenceSubscriber<EventArgs, EventHandler> _appSettingsRenderEventHandler;
-        private WeakReferenceSubscriber<EventArgs, EventHandler> _appResourcesRenderEventHandler;
+        private DisposableEventHandlerCollection<EventHandler> _appSettingsRenderEventHandler;
+        private DisposableEventHandlerCollection<EventHandler> _appResourcesRenderEventHandler;
     }
 }

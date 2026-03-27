@@ -59,8 +59,9 @@ namespace SF3.Win.Controls {
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
 
             _appSettings = AppSettings.Get();
-            _appSettingsRenderEventHandler = new WeakReferenceSubscriber<EventArgs, EventHandler>(_appSettings);
 
+            _appSettingsRenderEventHandler = new DisposableEventHandlerCollection<EventHandler>(_appSettings);
+            Disposed += (s, e) => _appSettingsRenderEventHandler?.Dispose();
             var eHandler = _appSettingsRenderEventHandler;
 
             eHandler.Subscribe(nameof(_appSettings.ViewerDrawSurfaceModelChanged),   ViewerDrawSurfaceModelChangedHandler);
@@ -91,7 +92,9 @@ namespace SF3.Win.Controls {
             ShowHideExperimentalBrushes(_appSettings.EnableExperimentalBlankFieldV2Brushes);
 
             // Activate tile editor when an editor is clicked.
-            _glControlEventHandler = new WeakReferenceSubscriber<object[], ObjectsSelectedChangedEventHandler>(GLControl);
+            _glControlEventHandler = new DisposableEventHandlerCollection<ObjectsSelectedChangedEventHandler>(GLControl);
+            Disposed += (s, e) => _glControlEventHandler?.Dispose();
+
             _glControlEventHandler.Subscribe(nameof(GLControl.ObjectsSelectedChanged), (s, objs) => {
                 if (objs.Length == 0)
                     UnsetSideEditorControl();
@@ -442,7 +445,7 @@ namespace SF3.Win.Controls {
         private ActorNPCPropertiesControl      _actorNPCPropertiesControl      = null;
 
         private AppSettings _appSettings;
-        private WeakReferenceSubscriber<EventArgs, EventHandler> _appSettingsRenderEventHandler;
-        private WeakReferenceSubscriber<object[], ObjectsSelectedChangedEventHandler> _glControlEventHandler;
+        private DisposableEventHandlerCollection<EventHandler> _appSettingsRenderEventHandler;
+        private DisposableEventHandlerCollection<ObjectsSelectedChangedEventHandler> _glControlEventHandler;
     }
 }
