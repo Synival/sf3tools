@@ -21,7 +21,13 @@ namespace SF3.Win.Controls {
             selectionPanel.Hide();
             ResumeLayout();
 
-            Disposed += (s, e) => GLControl.Dispose();
+            Disposed += (s, e) => {
+                GLControl.Dispose();
+                _surfaceTilePropertiesControl?.Dispose();
+                _modelInstancePropertiesControl?.Dispose();
+                _actorBattlePropertiesControl?.Dispose();
+                _actorNPCPropertiesControl?.Dispose();
+            };
 
             var cursorMode = GLControl.CursorMode;
             GLControl.CursorModeChanged += (s, e) => UpdatedSelectedCursorModeButton();
