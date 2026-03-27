@@ -18,7 +18,7 @@ namespace SF3.MPD.Project {
     /// <summary>
     /// Abstracted, editable MPD file.
     /// </summary>
-    public class MPD_Project : IMPD, IJsonResource, IBaseFile {
+    public class MPD_Project : IMPD, IJsonResource, IBaseFile, IDisposable {
         /// <summary>
         /// Creates a brand new MPD_Project.
         /// </summary>
@@ -126,7 +126,7 @@ namespace SF3.MPD.Project {
                 if (disposing)
                     if (ModelCollections != null)
                         foreach (var mc in ModelCollections.Values)
-                            mc.Dispose();
+                            (mc as IDisposable)?.Dispose();
 
                 _disposedValue = true;
             }

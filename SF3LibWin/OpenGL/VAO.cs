@@ -2,7 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
-    public class VAO {
+    public class VAO : IDisposable {
         /// <summary>
         /// Vertex Array Object.
         /// </summary>

@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 using SF3.Models.Files;
 using SF3.Models.Files.CHP;
@@ -54,10 +55,28 @@ using SF3.Win.Views.X044;
 using SF3.Win.Views.X1;
 
 namespace SF3.Win.Views {
-    public class FileView : IView {
+    public class FileView : IView, IDisposable {
         public FileView(string name, IBaseFile file) {
             Name = name;
             File = file;
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing) {
+                    if (ActualView != null) {
+                        (ActualView as IDisposable)?.Dispose();
+                        ActualView = null;
+                    }
+                }
+
+                _disposedValue = true;
+            }
         }
 
         public Control Create() {
@@ -112,18 +131,13 @@ namespace SF3.Win.Views {
         public void RefreshContent()
             => ActualView?.RefreshContent();
 
-        public void Dispose() {
-            if (ActualView != null) {
-                ActualView.Dispose();
-                ActualView = null;
-            }
-        }
-
         public IBaseFile File { get; }
         public IView ActualView { get; private set; }
 
         public string Name { get; }
         public Control Control => ActualView?.Control;
         public bool IsCreated => ActualView?.IsCreated ?? false;
+
+        private bool _disposedValue;
     }
 }

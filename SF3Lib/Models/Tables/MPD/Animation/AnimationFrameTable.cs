@@ -22,7 +22,7 @@ namespace SF3.Models.Tables.MPD.Animation {
             if (!_disposedValue) {
                 if (disposing)
                     foreach (var frame in Rows)
-                        frame.Dispose();
+                        (frame as IDisposable)?.Dispose();
 
                 _disposedValue = true;
             }

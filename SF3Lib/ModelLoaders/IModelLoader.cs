@@ -6,7 +6,7 @@ namespace SF3.ModelLoaders {
     /// <summary>
     /// Interface for loading models.
     /// </summary>
-    public interface IModelLoader : IModifiable, IDisposable {
+    public interface IModelLoader : IModifiable {
         /// <summary>
         /// Closes a model if opened. Invokes events 'PreClosed' and 'Closed' if an model was closed.
         /// </summary>

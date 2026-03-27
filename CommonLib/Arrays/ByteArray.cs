@@ -195,8 +195,6 @@ namespace CommonLib.Arrays {
             RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, length, 0, data.Length - length, needsModify));
         }
 
-        public void Dispose() { }
-
         public int Length => Bytes.Length;
 
         public byte this[int index] {

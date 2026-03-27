@@ -77,10 +77,10 @@ namespace SF3.ByteData {
             ChildData.Finished -= OnFinished;
             ChildData.IsModifiedChanged -= OnIsModifiedChanged;
 
-            if (CompressedData != null)
-                CompressedData.Dispose();
-            if (ChildData != null && ChildData != CompressedData)
-                ChildData.Dispose();
+            if (CompressedData is IDisposable compressedDataDisposable)
+                compressedDataDisposable.Dispose();
+            if (ChildData != null && ChildData != CompressedData && ChildData is IDisposable childDataDisposable)
+                childDataDisposable.Dispose();
         }
 
         public bool IsCompressed { get; }

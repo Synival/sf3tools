@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace SF3.Win.OpenGL {
-    public abstract class ResourcesBase : IResources {
+    public abstract class ResourcesBase : IResources, IDisposable {
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing) {

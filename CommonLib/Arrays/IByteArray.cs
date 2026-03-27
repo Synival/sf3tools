@@ -28,7 +28,7 @@ namespace CommonLib.Arrays {
 
     public delegate void ByteArrayRangeModifiedHandler(object sender, ByteArrayRangeModifiedArgs args);
 
-    public interface IByteArray : IDisposable {
+    public interface IByteArray {
         /// <summary>
         /// Resizes the byte[] array, adding 0's to the end for additional data or truncating data at the end.
         /// </summary>

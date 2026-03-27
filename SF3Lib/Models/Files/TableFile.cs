@@ -12,7 +12,7 @@ namespace SF3.Models.Files {
     /// <summary>
     /// File for any kind of file that has tables.
     /// </summary>
-    public abstract class TableFile : ITableFile {
+    public abstract class TableFile : ITableFile, IDisposable {
         protected TableFile(IByteData data, INameGetterContext nameContext) {
             Data = data;
             NameGetterContext = nameContext;
@@ -29,10 +29,9 @@ namespace SF3.Models.Files {
         protected virtual void Dispose(bool disposing) {
             if (!_disposedValue) {
                 if (disposing) {
-                    Data.Dispose();
+                    (Data as IDisposable)?.Dispose();
                     OnDispose(disposing);
                 }
-
                 _disposedValue = true;
             }
         }

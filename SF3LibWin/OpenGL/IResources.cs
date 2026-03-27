@@ -1,7 +1,5 @@
-﻿using System;
-
-namespace SF3.Win.OpenGL {
-    public interface IResources : IDisposable {
+﻿namespace SF3.Win.OpenGL {
+    public interface IResources {
         /// <summary>
         /// Performs any one-time initialization necessary after instantiation.
         /// </summary>

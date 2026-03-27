@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 
 namespace SF3.MPD.Project {
-    public class MPD_Animation : IMPD_Animation {
+    public class MPD_Animation : IMPD_Animation, IDisposable {
         public MPD_Animation(IMPD_AnimatableTexture texture, IMPD_Animation original) {
             if (texture == null)
                 throw new ArgumentNullException(nameof(texture));
@@ -64,7 +64,7 @@ namespace SF3.MPD.Project {
             if (!_disposedValue) {
                 if (disposing)
                     foreach (var frame in Frames)
-                        frame.Dispose();
+                        (frame as IDisposable)?.Dispose();
 
                 _disposedValue = true;
             }

@@ -1,7 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SF3.Win.Views {
-    public abstract class ViewBase : IView {
+    public abstract class ViewBase : IView, IDisposable {
         protected ViewBase(string name) {
             Name = name;
         }

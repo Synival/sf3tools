@@ -16,8 +16,7 @@ namespace SF3.Imaging {
         protected void Dispose(bool disposing) {
             if (!_disposedValue) {
                 if (disposing)
-                    Frames[0].Dispose();
-
+                    (Frames[0] as IDisposable)?.Dispose();
                 _disposedValue = true;
             }
         }

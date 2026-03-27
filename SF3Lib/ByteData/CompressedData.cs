@@ -81,8 +81,10 @@ namespace SF3.ByteData {
             return true;
         }
 
-        public override void Dispose() {
-            DecompressedData.Dispose();
+        protected override void Dispose(bool disposing) {
+            if (disposing)
+                (DecompressedData as IDisposable)?.Dispose();
+            base.Dispose(disposing);
         }
 
         public IByteData DecompressedData { get; private set; }

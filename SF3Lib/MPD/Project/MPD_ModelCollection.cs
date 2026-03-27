@@ -59,7 +59,7 @@ namespace SF3.MPD.Project {
                 if (disposing)
                     if (Textures != null)
                         foreach (var tex in Textures)
-                            tex.Dispose();
+                            (tex as IDisposable)?.Dispose();
 
                 _disposedValue = true;
             }

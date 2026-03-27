@@ -1,4 +1,5 @@
-﻿using CommonLib.Extensions;
+﻿using System;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
@@ -25,7 +26,7 @@ namespace SF3.MPD.Project {
         protected override void OnDispose(bool disposing) {
             base.OnDispose(disposing);
             if (disposing)
-                Animation?.Dispose();
+                (Animation as IDisposable)?.Dispose();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace SF3.Models.Files {
     /// <summary>
     /// Any kind of file.
     /// </summary>
-    public interface IBaseFile : IModifiable, IDisposable {
+    public interface IBaseFile : IModifiable {
         /// <summary>
         /// Gets any errors or mistakes that may be present in the file.
         /// </summary>

@@ -2,7 +2,7 @@
 using CommonLib.Exceptions;
 
 namespace CommonLib.Arrays {
-    public class ByteArraySegment : IByteArray {
+    public class ByteArraySegment : IByteArray, IDisposable {
         public ByteArraySegment(IByteArray parentArray, int offset, int length) {
             if (parentArray == null)
                 throw new ArgumentNullException(nameof(parentArray));
@@ -17,6 +17,22 @@ namespace CommonLib.Arrays {
 
             parentArray.PreRangeModified += OnParentPreRangeModified;
             parentArray.RangeModified    += OnParentRangeModified;
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing) {
+                    ParentArray.PreRangeModified -= OnParentPreRangeModified;
+                    ParentArray.RangeModified    -= OnParentRangeModified;
+                }
+
+                _disposedValue = true;
+            }
         }
 
         /// <summary>
@@ -205,14 +221,11 @@ namespace CommonLib.Arrays {
             Length = length;
         }
 
-        public void Dispose() {
-            ParentArray.PreRangeModified -= OnParentPreRangeModified;
-            ParentArray.RangeModified    -= OnParentRangeModified;
-        }
-
         public event ByteArrayRangeModifiedHandler PreRangeModified;
         public event ByteArrayRangeModifiedHandler RangeModified;
 
         private ScopeGuard InsideIncr() => new ScopeGuard(() => _resizingInside++, () => _resizingInside--);
+
+        private bool _disposedValue;
     }
 }

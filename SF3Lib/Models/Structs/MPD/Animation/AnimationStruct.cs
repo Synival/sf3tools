@@ -8,7 +8,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.Animation;
 
 namespace SF3.Models.Structs.MPD.Animation {
-    public class AnimationStruct : Struct, IMPD_Animation {
+    public class AnimationStruct : Struct, IMPD_Animation, IDisposable {
         private readonly int _textureIdAddr;
         private readonly int _widthAddr;
         private readonly int _heightAddr;

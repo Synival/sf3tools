@@ -6,7 +6,7 @@ namespace SF3.ByteData {
     /// <summary>
     /// Helper class for modifying any kind of data blob and tracking whether or not it's been edited.
     /// </summary>
-    public interface IByteData : IModifiable, IDisposable {
+    public interface IByteData : IModifiable {
         /// <summary>
         /// A reference to the underlying ByteArray.
         /// </summary>

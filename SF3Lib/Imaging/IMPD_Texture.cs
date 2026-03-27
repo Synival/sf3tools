@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CommonLib.Imaging;
 using SF3.Types;
@@ -31,7 +30,7 @@ namespace SF3.Imaging {
     /// <summary>
     /// Interface for textures stored in an MPD.
     /// </summary>
-    public interface IMPD_Texture : ITextureData, IDisposable {
+    public interface IMPD_Texture : ITextureData {
         /// <summary>
         /// Collection to which this texture belongs.
         /// </summary>

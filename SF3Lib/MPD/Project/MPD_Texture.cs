@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Imaging;
 using Newtonsoft.Json.Linq;
@@ -6,7 +7,7 @@ using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
-    public class MPD_Texture : InMemoryTextureData, IMPD_Texture {
+    public class MPD_Texture : InMemoryTextureData, IMPD_Texture, IDisposable {
         public MPD_Texture(IMPD_Texture original) : base(original, null) {
             ID         = original.ID;
             Collection = original.Collection;
@@ -40,7 +41,7 @@ namespace SF3.MPD.Project {
             // Tags are not serialized.
         }
 
-        protected void Dispose(bool disposing) {
+        protected virtual void Dispose(bool disposing) {
             if (!_disposedValue) {
                 OnDispose(disposing);
                 _disposedValue = true;

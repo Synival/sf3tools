@@ -83,7 +83,7 @@ namespace SF3.Models.Files.MPD {
 
                 if (ChunkData != null)
                     foreach (var cd in ChunkData)
-                        cd?.Dispose();
+                        (cd as IDisposable)?.Dispose();
 
                 Animations?.Dispose();
             }

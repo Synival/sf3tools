@@ -1,10 +1,8 @@
-using System;
-
 namespace SF3.Imaging {
     /// <summary>
     /// Interface for an animation contained in an MPD.
     /// </summary>
-    public interface IMPD_Animation : IDisposable {
+    public interface IMPD_Animation {
         /// <summary>
         /// Retrieves an animation frame based on an external frame counter.
         /// </summary>

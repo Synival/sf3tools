@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD.Interfaces {
-    public interface IMPD_ModelCollection : IDisposable {
+    public interface IMPD_ModelCollection {
         /// <summary>
         /// Identifier for this collection of models.
         /// </summary>

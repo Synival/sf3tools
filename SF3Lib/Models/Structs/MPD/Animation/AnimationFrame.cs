@@ -29,21 +29,6 @@ namespace SF3.Models.Structs.MPD.Animation {
             _durationAddr        = Address + 1 * _bytesPerProperty;
         }
 
-        public void Dispose() {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing) {
-            if (!_disposedValue) {
-                if (disposing) {
-                    // Nothing to dispose
-                }
-
-                _disposedValue = true;
-            }
-        }
-
         public void SetImageData8Bit(byte[,] data, IPalette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB8888(highlightEndcodes);
@@ -125,7 +110,5 @@ namespace SF3.Models.Structs.MPD.Animation {
         public bool IsIgnored => false;
 
         public event EventHandler Invalidated;
-
-        private bool _disposedValue;
     }
 }

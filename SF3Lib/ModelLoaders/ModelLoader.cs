@@ -4,13 +4,35 @@ using SF3.ByteData;
 using SF3.Models.Files;
 
 namespace SF3.ModelLoaders {
-    public abstract class ModelLoader : IModelLoader {
+    public abstract class ModelLoader : IModelLoader, IDisposable {
         protected ModelLoader() {
             _title = UnloadedTitle;
             _onModifiedChangedDelegate = new EventHandler((o, e) => {
                 IsModifiedChanged?.Invoke(this, EventArgs.Empty);
                 UpdateTitle();
             });
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing) {
+                    // TODO: what to do if close failed? throw or something?
+                    _ = Close();
+
+                    (Model as IDisposable)?.Dispose();
+                    Model = null;
+
+                    (ByteData as IDisposable)?.Dispose();
+                    ByteData = null;
+                }
+
+                _disposedValue = true;
+            }
         }
 
         private readonly EventHandler _onModifiedChangedDelegate;
@@ -88,8 +110,7 @@ namespace SF3.ModelLoaders {
                     var oldModel = _model;
                     _model = value;
 
-                    if (oldModel != null)
-                        oldModel.Dispose();
+                    (oldModel as IDisposable)?.Dispose();
 
                     UpdateTitle();
                 }
@@ -104,8 +125,7 @@ namespace SF3.ModelLoaders {
                     var oldData = _byteData;
                     _byteData = value;
 
-                    if (oldData != null)
-                        oldData.Dispose();
+                    (oldData as IDisposable)?.Dispose();
 
                     UpdateTitle();
                 }
@@ -196,24 +216,13 @@ namespace SF3.ModelLoaders {
             return true;
         }
 
-        public virtual void Dispose() {
-            // TODO: what to do if close failed? throw or something?
-            _ = Close();
-            if (Model != null) {
-                Model.Dispose();
-                Model = null;
-            }
-            if (ByteData != null) {
-                ByteData.Dispose();
-                ByteData = null;
-            }
-        }
-
         /// <summary>
         /// Perfoms on action on the loaded model after finishing but before performing the save action.
         /// </summary>
         /// <returns>Returns 'false' if saving should be aborted for any reason. Otherwise returns 'true'.</returns>
         protected virtual bool OnFinished() => true;
+
+        private bool _disposedValue;
 
         public event EventHandler IsLoadedChanged;
         public event EventHandler PreLoaded;

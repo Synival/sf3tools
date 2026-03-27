@@ -9,7 +9,7 @@ namespace SF3.ByteData {
     /// <summary>
     /// Used for modifying any set of bytes.
     /// </summary>
-    public class ByteData : IByteData {
+    public class ByteData : IByteData, IDisposable {
         public ByteData(IByteArray byteArray) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
@@ -24,6 +24,19 @@ namespace SF3.ByteData {
             // Ignore moving data, which would be a modification for a *parent* byte array,
             // but not the one the ByteData about.
             IsModified = args.Modified || args.Resized;
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    Data.RangeModified -= OnDataRangeModified;
+                _disposedValue = true;
+            }
         }
 
         public IByteArray Data { get; private set; }
@@ -163,10 +176,6 @@ namespace SF3.ByteData {
                 Data[location] &= (byte) ~bitmask;
         }
 
-        public virtual void Dispose() {
-            Data.RangeModified -= OnDataRangeModified;
-        }
-
         public virtual bool OnFinish() => true;
 
         public bool Finish() {
@@ -175,6 +184,8 @@ namespace SF3.ByteData {
             Finished?.Invoke(this, EventArgs.Empty);
             return true;
         }
+
+        private bool _disposedValue;
 
         public event EventHandler Finished;
     }
