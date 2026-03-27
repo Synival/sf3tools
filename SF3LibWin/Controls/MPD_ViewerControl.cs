@@ -12,6 +12,7 @@ using SF3.Win.App;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
 using CommonLib;
+using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -57,71 +58,41 @@ namespace SF3.Win.Controls {
             tsbToggleNormals.Checked     = GLControl.DrawNormals;
             tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp;
 
-            var appSettings = AppSettings.Get();
-            _appSettingsRenderEventHandler = new DisposableEventHandlerCollection<EventHandler>(appSettings);
-
-            Disposed += (s, e) => {
-                if (_appSettingsRenderEventHandler != null) {
-                    _appSettingsRenderEventHandler.Dispose();
-                    _appSettingsRenderEventHandler = null;
-                }
-            };
+            _appSettings = AppSettings.Get();
+            _appSettingsRenderEventHandler = new WeakReferenceSubscriber<EventArgs, EventHandler>(_appSettings);
 
             var eHandler = _appSettingsRenderEventHandler;
 
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawSurfaceModelChanged),   (s, e) => { tsbDrawSurfaceModel.Checked  = appSettings.ViewerDrawSurfaceModel; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawModelsChanged),         (s, e) => { tsbDrawModels.Checked        = appSettings.ViewerDrawModels; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawExtraModelsChanged),    (s, e) => { tsbDrawExtraModels.Checked   = appSettings.ViewerDrawExtraModels; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawGroundChanged),         (s, e) => { tsbDrawGround.Checked        = appSettings.ViewerDrawGround; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawSkyChanged),            (s, e) => { tsbDrawSky.Checked           = appSettings.ViewerDrawSky; });
-            eHandler.Subscribe(nameof(appSettings.ViewerRunAnimationsChanged),      (s, e) => { tsbRunAnimations.Checked     = appSettings.ViewerRunAnimations; });
-            eHandler.Subscribe(nameof(appSettings.ViewerApplyLightingChanged),      (s, e) => { tsbApplyLighting.Checked     = appSettings.ViewerApplyLighting; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawGradientsChanged),      (s, e) => { tsbDrawGradients.Checked     = appSettings.ViewerDrawGradients; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawActorsChanged),         (s, e) => { tsbDrawActors.Checked        = appSettings.ViewerDrawActors; });
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawSurfaceModelChanged),   ViewerDrawSurfaceModelChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawModelsChanged),         ViewerDrawModelsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawExtraModelsChanged),    ViewerDrawExtraModelsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawGroundChanged),         ViewerDrawGroundChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawSkyChanged),            ViewerDrawSkyChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerRunAnimationsChanged),      ViewerRunAnimationsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerApplyLightingChanged),      ViewerApplyLightingChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawGradientsChanged),      ViewerDrawGradientsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawActorsChanged),         ViewerDrawActorsChangedHandler);
 
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawWireframeChanged),      (s, e) => { tsbToggleWireframe.Checked   = appSettings.ViewerDrawWireframe; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawBoundariesChanged),     (s, e) => { tsbToggleBoundaries.Checked  = appSettings.ViewerDrawBoundaries; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawBattleZonesChanged),    (s, e) => { tsbToggleBattleZones.Checked = appSettings.ViewerDrawBattleZones; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawTerrainTypesChanged),   (s, e) => { tsbToggleTerrainType.Checked = appSettings.ViewerDrawTerrainTypes; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawEventIDsChanged),       (s, e) => { tsbToggleEventID.Checked     = appSettings.ViewerDrawEventIDs; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawCollisionLinesChanged), (s, e) => { tsbToggleCollisions.Checked  = appSettings.ViewerDrawCollisionLines; });
-            eHandler.Subscribe(nameof(appSettings.HideModelsNotFacingCameraChanged), (s, e) => { tsbHideModelsNotFacingCamera.Checked = appSettings.HideModelsNotFacingCamera; });
-            eHandler.Subscribe(nameof(appSettings.ViewerApplyShadowTagsChanged),    (s, e) => { tsbApplyShadowTags.Checked   = appSettings.ViewerApplyShadowTags; });
-            eHandler.Subscribe(nameof(appSettings.ViewerApplyHideTagsChanged),      (s, e) => { tsbApplyHideTags.Checked     = appSettings.ViewerApplyHideTags; });
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawWireframeChanged),      ViewerDrawWireframeChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawBoundariesChanged),     ViewerDrawBoundariesChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawBattleZonesChanged),    ViewerDrawBattleZonesChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawTerrainTypesChanged),   ViewerDrawTerrainTypesChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawEventIDsChanged),       ViewerDrawEventIDsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawCollisionLinesChanged), ViewerDrawCollisionLinesChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.HideModelsNotFacingCameraChanged), HideModelsNotFacingCameraChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerApplyShadowTagsChanged),    ViewerApplyShadowTagsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerApplyHideTagsChanged),      ViewerApplyHideTagsChangedHandler);
 
-            eHandler.Subscribe(nameof(appSettings.RenderOnBlackBackgroundChanged),  (s, e) => { tsbRenderOnBlackBackground.Checked = appSettings.RenderOnBlackBackground; });
-            eHandler.Subscribe(nameof(appSettings.ViewerDrawNormalsChanged),        (s, e) => { tsbToggleNormals.Checked     = appSettings.ViewerDrawNormals; });
-            eHandler.Subscribe(nameof(appSettings.ViewerRotateSpritesUpChanged),    (s, e) => { tsbRotateSpritesUp.Checked   = appSettings.ViewerRotateSpritesUp; });
+            eHandler.Subscribe(nameof(_appSettings.RenderOnBlackBackgroundChanged),  RenderOnBlackBackgroundChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerDrawNormalsChanged),        ViewerDrawNormalsChangedHandler);
+            eHandler.Subscribe(nameof(_appSettings.ViewerRotateSpritesUpChanged),    ViewerRotateSpritesUpChangedHandler);
 
-            // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
-            void ShowHideExperimentalBrushes(bool value) {
-                tsbSeparator4.Visible        = value;
-                tsbDrawBridge.Visible        = value;
-                tsbDrawBrownMountain.Visible = value;
-                tsbDrawDarkGrass.Visible     = value;
-                tsbDrawDesert.Visible        = value;
-                tsbDrawDirt.Visible          = value;
-                tsbDrawForest.Visible        = value;
-                tsbDrawGrassland.Visible     = value;
-                tsbDrawGreyMountain.Visible  = value;
-                tsbDrawMountainPeak.Visible  = value;
-                tsbDrawNoEntry.Visible       = value;
-                tsbDrawRiver.Visible         = value;
-                tsbDrawWater.Visible         = value;
-                tsbSeparator5.Visible        = value;
-                tsbFixTiles.Visible          = value;
-            }
-
-            eHandler.Subscribe(nameof(appSettings.EnableExperimentalBlankFieldV2BrushesChanged), (s, e) => {
-                var isEnabled = appSettings.EnableExperimentalBlankFieldV2Brushes;
-                ShowHideExperimentalBrushes(isEnabled);
-                if (!isEnabled && GLControl.CursorMode.IsDrawingMode())
-                    GLControl.CursorMode = ViewerCursorMode.Select;
-            });
-            ShowHideExperimentalBrushes(appSettings.EnableExperimentalBlankFieldV2Brushes);
+            eHandler.Subscribe(nameof(_appSettings.EnableExperimentalBlankFieldV2BrushesChanged), EnableExperimentalBlankFieldV2BrushesChangedHandler);
+            ShowHideExperimentalBrushes(_appSettings.EnableExperimentalBlankFieldV2Brushes);
 
             // Activate tile editor when an editor is clicked.
-            GLControl.ObjectsSelectedChanged += (s, objs) => {
+            _glControlEventHandler = new WeakReferenceSubscriber<object[], ObjectsSelectedChangedEventHandler>(GLControl);
+            _glControlEventHandler.Subscribe(nameof(GLControl.ObjectsSelectedChanged), (s, objs) => {
                 if (objs.Length == 0)
                     UnsetSideEditorControl();
                 else {
@@ -145,7 +116,55 @@ namespace SF3.Win.Controls {
                     else
                         UnsetSideEditorControl();
                 }
-            };
+            });
+        }
+
+        void ViewerDrawSurfaceModelChangedHandler   (object sender, EventArgs args) => tsbDrawSurfaceModel.Checked  = _appSettings.ViewerDrawSurfaceModel;
+        void ViewerDrawModelsChangedHandler         (object sender, EventArgs args) => tsbDrawModels.Checked        = _appSettings.ViewerDrawModels;
+        void ViewerDrawExtraModelsChangedHandler    (object sender, EventArgs args) => tsbDrawExtraModels.Checked   = _appSettings.ViewerDrawExtraModels;
+        void ViewerDrawGroundChangedHandler         (object sender, EventArgs args) => tsbDrawGround.Checked        = _appSettings.ViewerDrawGround;
+        void ViewerDrawSkyChangedHandler            (object sender, EventArgs args) => tsbDrawSky.Checked           = _appSettings.ViewerDrawSky;
+        void ViewerRunAnimationsChangedHandler      (object sender, EventArgs args) => tsbRunAnimations.Checked     = _appSettings.ViewerRunAnimations;
+        void ViewerApplyLightingChangedHandler      (object sender, EventArgs args) => tsbApplyLighting.Checked     = _appSettings.ViewerApplyLighting;
+        void ViewerDrawGradientsChangedHandler      (object sender, EventArgs args) => tsbDrawGradients.Checked     = _appSettings.ViewerDrawGradients;
+        void ViewerDrawActorsChangedHandler         (object sender, EventArgs args) => tsbDrawActors.Checked        = _appSettings.ViewerDrawActors;
+        void ViewerDrawWireframeChangedHandler      (object sender, EventArgs args) => tsbToggleWireframe.Checked   = _appSettings.ViewerDrawWireframe;
+        void ViewerDrawBoundariesChangedHandler     (object sender, EventArgs args) => tsbToggleBoundaries.Checked  = _appSettings.ViewerDrawBoundaries;
+        void ViewerDrawBattleZonesChangedHandler    (object sender, EventArgs args) => tsbToggleBattleZones.Checked = _appSettings.ViewerDrawBattleZones;
+        void ViewerDrawTerrainTypesChangedHandler   (object sender, EventArgs args) => tsbToggleTerrainType.Checked = _appSettings.ViewerDrawTerrainTypes;
+        void ViewerDrawEventIDsChangedHandler       (object sender, EventArgs args) => tsbToggleEventID.Checked     = _appSettings.ViewerDrawEventIDs;
+        void ViewerDrawCollisionLinesChangedHandler (object sender, EventArgs args) => tsbToggleCollisions.Checked  = _appSettings.ViewerDrawCollisionLines;
+        void HideModelsNotFacingCameraChangedHandler(object sender, EventArgs args) => tsbHideModelsNotFacingCamera.Checked = _appSettings.HideModelsNotFacingCamera;
+        void ViewerApplyShadowTagsChangedHandler    (object sender, EventArgs args) => tsbApplyShadowTags.Checked   = _appSettings.ViewerApplyShadowTags;
+        void ViewerApplyHideTagsChangedHandler      (object sender, EventArgs args) => tsbApplyHideTags.Checked     = _appSettings.ViewerApplyHideTags;
+        void RenderOnBlackBackgroundChangedHandler  (object sender, EventArgs args) => tsbRenderOnBlackBackground.Checked = _appSettings.RenderOnBlackBackground;
+        void ViewerDrawNormalsChangedHandler        (object sender, EventArgs args) => tsbToggleNormals.Checked     = _appSettings.ViewerDrawNormals;
+        void ViewerRotateSpritesUpChangedHandler    (object sender, EventArgs args) => tsbRotateSpritesUp.Checked   = _appSettings.ViewerRotateSpritesUp;
+
+        void EnableExperimentalBlankFieldV2BrushesChangedHandler(object sender, EventArgs args) {
+            var isEnabled = _appSettings.EnableExperimentalBlankFieldV2Brushes;
+            ShowHideExperimentalBrushes(isEnabled);
+            if (!isEnabled && GLControl.CursorMode.IsDrawingMode())
+                GLControl.CursorMode = ViewerCursorMode.Select;
+        }
+
+        // Experimental controls that only apply to a modified FIELD.MPD on the PD (BlankField_V2.MPD).
+        private void ShowHideExperimentalBrushes(bool value) {
+            tsbSeparator4.Visible        = value;
+            tsbDrawBridge.Visible        = value;
+            tsbDrawBrownMountain.Visible = value;
+            tsbDrawDarkGrass.Visible     = value;
+            tsbDrawDesert.Visible        = value;
+            tsbDrawDirt.Visible          = value;
+            tsbDrawForest.Visible        = value;
+            tsbDrawGrassland.Visible     = value;
+            tsbDrawGreyMountain.Visible  = value;
+            tsbDrawMountainPeak.Visible  = value;
+            tsbDrawNoEntry.Visible       = value;
+            tsbDrawRiver.Visible         = value;
+            tsbDrawWater.Visible         = value;
+            tsbSeparator5.Visible        = value;
+            tsbFixTiles.Visible          = value;
         }
 
         private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile)
@@ -422,6 +441,8 @@ namespace SF3.Win.Controls {
         private ActorBattlePropertiesControl   _actorBattlePropertiesControl   = null;
         private ActorNPCPropertiesControl      _actorNPCPropertiesControl      = null;
 
-        private DisposableEventHandlerCollection<EventHandler> _appSettingsRenderEventHandler;
+        private AppSettings _appSettings;
+        private WeakReferenceSubscriber<EventArgs, EventHandler> _appSettingsRenderEventHandler;
+        private WeakReferenceSubscriber<object[], ObjectsSelectedChangedEventHandler> _glControlEventHandler;
     }
 }

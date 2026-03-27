@@ -119,5 +119,33 @@ namespace CommonLib.Extensions {
                 context.GetInfo(obj, property, attr.Parameters).FormatString
             );
         }
+
+        public static void SubscribeWithWeakReference<TArgs, TEventHandler>(this object publisher, string eventName, Action<object, TArgs> eventHandler, Type publisherType = null) {
+            var eventInfo = (publisherType ?? publisher.GetType()).GetEvent(eventName);
+            if (eventInfo == null)
+                return;
+
+            // We want a weak reference to the handler target so it will be GC'ed despite it
+            // having subscribed to the publisher.
+            var weakTarget = new WeakReference(eventHandler.Target);
+            var method = eventHandler.Method;
+            eventHandler = null;
+
+            Action<object, TArgs> eventHandlerWrapper = null;
+            Delegate wrappedEventHandler = null;
+
+            eventHandlerWrapper = (s, o) => {
+                var target = weakTarget.Target;
+                if (target == null) {
+                    eventInfo.RemoveEventHandler(publisher, wrappedEventHandler);
+                    return;
+                }
+
+                method.Invoke(target, new[] { s, o });
+            };
+
+            wrappedEventHandler = Delegate.CreateDelegate(typeof(TEventHandler), eventHandlerWrapper.Target, eventHandlerWrapper.Method);
+            eventInfo.AddEventHandler(publisher, wrappedEventHandler);
+        }
     }
 }
