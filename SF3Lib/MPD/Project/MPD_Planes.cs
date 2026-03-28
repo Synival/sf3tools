@@ -22,17 +22,17 @@ namespace SF3.MPD.Project {
                 SkyPalette = new Palette(original.SkyPalette);
 
             if (original.GroundImage != null) {
-                GroundImage = new InMemoryTextureData(original.GroundImage, GroundPalette, IndexedColorUpdateStrategy.UpdateExistingPalette);
+                GroundImage = new InMemoryTextureData(original.GroundImage, GroundPalette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
                 ((InMemoryTextureData) GroundImage).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
             }
             if (original.GroundTiledImage != null)
                 GroundTiledImage = new MPD_TiledPlane(original.GroundTiledImage, GroundPalette);
             if (original.BackgroundImage != null) {
-                BackgroundImage = new InMemoryTextureData(original.BackgroundImage, SkyPalette, IndexedColorUpdateStrategy.UpdateExistingPalette);
+                BackgroundImage = new InMemoryTextureData(original.BackgroundImage, SkyPalette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
                 ((InMemoryTextureData) BackgroundImage).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
             }
             if (original.SkyImage != null) {
-                SkyImage = new InMemoryTextureData(original.SkyImage, SkyPalette, IndexedColorUpdateStrategy.UpdateExistingPalette);
+                SkyImage = new InMemoryTextureData(original.SkyImage, SkyPalette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
                 ((InMemoryTextureData) SkyImage).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
             }
             if (original.ForegroundTiledImage != null)
@@ -54,7 +54,7 @@ namespace SF3.MPD.Project {
             SkyPalette      = jObject.GetValueIfExists("SkyPalette", t => Palette.FromJToken(t));
 
             GroundImage = jObject.GetValueIfExists("GroundImage",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette));
             if (GroundImage != null)
                 ((InMemoryTextureData) GroundImage).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
 
@@ -62,12 +62,12 @@ namespace SF3.MPD.Project {
                 t => MPD_TiledPlane.FromJToken(t, GroundPalette, 256, 256));
 
             SkyImage = jObject.GetValueIfExists("SkyImage",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, SkyPalette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, SkyPalette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette));
             if (SkyImage != null)
                 ((InMemoryTextureData) SkyImage).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
 
             BackgroundImage = jObject.GetValueIfExists("BackgroundImage",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette));
             if (BackgroundImage != null)
                 ((InMemoryTextureData) BackgroundImage).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
 

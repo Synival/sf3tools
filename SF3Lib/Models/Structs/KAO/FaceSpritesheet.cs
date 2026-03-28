@@ -310,9 +310,7 @@ namespace SF3.Models.Structs.KAO {
         public string Hash => _textureDataCache.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
         public bool ZeroIsTransparent => true;
-
-        public bool CanSetImageData8Bit => true;
-        public bool CanSetImageData16Bit => false;
+        public ImageDataCanSet CanSetImageData { get => ImageDataCanSet.CanSet8Bit; set {} }
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
             => _textureDataCache.GetOrCacheBitmapDataARGB1555(() => BitmapUtils.ConvertIndexedDataToARGB1555BitmapData(ImageData8Bit, Palette, ZeroIsTransparent));

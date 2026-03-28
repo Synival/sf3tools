@@ -162,8 +162,12 @@ namespace SF3.Models.Structs.KAO {
         public byte[] BitmapDataARGB8888 => GetBitmapDataARGB8888(highlightEndcodes: false);
 
         public IPalette Palette => Chunk.Palette;
-        public bool CanSetImageData8Bit => HasImage;
-        public bool CanSetImageData16Bit => false;
+
+        public ImageDataCanSet CanSetImageData {
+            get => HasImage ? ImageDataCanSet.CanSet8Bit : ImageDataCanSet.Never;
+            set {}
+        }
+
         public bool ZeroIsTransparent => true;
 
         public event EventHandler Invalidated;

@@ -167,8 +167,7 @@ namespace SF3.Models.Files.DAT {
 
         public string Hash => _textureDataCache.GetOrCacheHash(() => BitmapDataARGB1555.CreateTextureHash());
 
-        public bool CanSetImageData8Bit  => DAT_File.CanReplaceImages8Bit;
-        public bool CanSetImageData16Bit => DAT_File.CanReplaceImages16Bit;
+        public ImageDataCanSet CanSetImageData { get => DAT_File.CanReplaceImages; set {} }
 
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false)
             => _textureDataCache.GetOrCacheBitmapDataARGB1555(() => (PixelFormat == TexturePixelFormat.Indexed8Bit)

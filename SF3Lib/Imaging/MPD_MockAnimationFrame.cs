@@ -61,8 +61,7 @@ namespace SF3.Imaging {
         public string Hash => _texture.Hash;
         public IPalette Palette => _texture.Palette;
         public bool ZeroIsTransparent => _texture.ZeroIsTransparent;
-        public bool CanSetImageData8Bit => _texture.CanSetImageData8Bit;
-        public bool CanSetImageData16Bit => _texture.CanSetImageData16Bit;
+        public ImageDataCanSet CanSetImageData { get => _texture.CanSetImageData; set => _texture.CanSetImageData = value; }
         public bool IsIgnored => false;
 
         private readonly IMPD_Texture _texture;

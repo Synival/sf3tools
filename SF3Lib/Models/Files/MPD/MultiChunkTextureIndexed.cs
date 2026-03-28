@@ -94,8 +94,7 @@ namespace SF3.Models.Files.MPD {
         private bool _zeroIsTransparent;
         public override bool ZeroIsTransparent { get => _zeroIsTransparent; set {} }
 
-        public override bool CanSetImageData8Bit => true;
-        public override bool CanSetImageData16Bit => false;
+        public override ImageDataCanSet CanSetImageData { get => ImageDataCanSet.CanSet8Bit; set {} }
 
         public IByteData[] Datas { get; }
         public Func<IPalette> PaletteGetter { get; }

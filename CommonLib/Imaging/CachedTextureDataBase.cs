@@ -43,7 +43,7 @@ namespace CommonLib.Imaging {
             => Invalidated?.Invoke(this, EventArgs.Empty);
 
         public virtual string Validate8BitImageData(byte[,] data, IPalette palette, int? oldStoredSize, int? newStoredSize) {
-            if (!CanSetImageData8Bit)
+            if (!CanSetImageData.HasFlag(ImageDataCanSet.CanSet8Bit))
                 return "Not supported";
             foreach (var validator in _validators8Bit) {
                 var error = validator(data, palette, oldStoredSize, newStoredSize);
@@ -54,7 +54,7 @@ namespace CommonLib.Imaging {
         }
 
         public virtual string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize) {
-            if (!CanSetImageData16Bit)
+            if (!CanSetImageData.HasFlag(ImageDataCanSet.CanSet16Bit))
                 return "Not supported";
             foreach (var validator in _validators16Bit) {
                 var error = validator(data, oldStoredSize, newStoredSize);
@@ -91,8 +91,7 @@ namespace CommonLib.Imaging {
         public abstract int Height { get; set; }
         public abstract IPalette Palette { get; set; }
         public abstract bool ZeroIsTransparent { get; set; }
-        public abstract bool CanSetImageData8Bit { get; }
-        public abstract bool CanSetImageData16Bit { get; }
+        public abstract ImageDataCanSet CanSetImageData { get; set; }
 
         protected abstract byte[,] FetchImageData8Bit();
         public abstract void SetImageData8Bit(byte[,] data, IPalette palette);

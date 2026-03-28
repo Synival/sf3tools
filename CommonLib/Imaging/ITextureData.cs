@@ -88,14 +88,9 @@ namespace CommonLib.Imaging {
         bool ZeroIsTransparent { get; }
 
         /// <summary>
-        /// When 'true', the variable 'ImageData8Bit' can be set.
+        /// Specifies what kinds of data can be set.
         /// </summary>
-        bool CanSetImageData8Bit { get; }
-
-        /// <summary>
-        /// When 'true', the variable 'ImageData16Bit' can be set.
-        /// </summary>
-        bool CanSetImageData16Bit { get; }
+        ImageDataCanSet CanSetImageData { get; set; }
 
         /// <summary>
         /// Checks 'data' and 'palette' to see if they're valid to be set for 'ImageData8Bit' / 'Palette'.

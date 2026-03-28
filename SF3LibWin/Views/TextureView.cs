@@ -7,6 +7,7 @@ using CommonLib.Extensions;
 using SF3.Win.Extensions;
 using CommonLib.Imaging;
 using SF3.Win.App;
+using CommonLib.Types;
 
 namespace SF3.Win.Views {
     public class TextureView : ImageView {
@@ -53,7 +54,7 @@ namespace SF3.Win.Views {
         }
 
         protected override Action GetImportImageAction() {
-            var canImport = (_texture != null) && (_texture.CanSetImageData8Bit || _texture.CanSetImageData16Bit);
+            var canImport = (_texture != null) && (_texture.CanSetImageData != ImageDataCanSet.Never);
             return canImport ? ImportImageDialog : null;
         }
 
@@ -61,8 +62,8 @@ namespace SF3.Win.Views {
             ImagePreImport?.Invoke(this, EventArgs.Empty);
 
             using (var image = Image.FromFile(filename)) {
-                var canReplaceTexture8Bit  = _texture.CanSetImageData8Bit;
-                var canReplaceTexture16Bit = _texture.CanSetImageData16Bit;
+                var canReplaceTexture8Bit  = _texture.CanSetImageData.HasFlag(ImageDataCanSet.CanSet8Bit);
+                var canReplaceTexture16Bit = _texture.CanSetImageData.HasFlag(ImageDataCanSet.CanSet16Bit);
 
                 if (image.PixelFormat == PixelFormat.Format8bppIndexed && canReplaceTexture8Bit) {
                     var bitmap  = image.CreateIndexedBitmap();

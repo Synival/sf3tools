@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.DAT;
@@ -40,7 +41,6 @@ namespace SF3.Models.Files.DAT {
         public override void ReplaceImages16Bit(ushort[][,] images, bool minimalChanges)
             => throw new InvalidOperationException();
 
-        public override bool CanReplaceImages8Bit => false;
-        public override bool CanReplaceImages16Bit => false;
+        public override ImageDataCanSet CanReplaceImages => ImageDataCanSet.Never;
     }
 }

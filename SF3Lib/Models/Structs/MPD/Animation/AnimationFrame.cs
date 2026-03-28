@@ -104,8 +104,12 @@ namespace SF3.Models.Structs.MPD.Animation {
         public byte[] BitmapDataARGB1555 => Chunk3Texture?.BitmapDataARGB1555;
         public byte[] BitmapDataARGB8888 => Chunk3Texture?.BitmapDataARGB8888;
         public IPalette Palette => Chunk3Texture?.Palette;
-        public bool CanSetImageData8Bit => Chunk3Texture?.CanSetImageData8Bit ?? false;
-        public bool CanSetImageData16Bit => Chunk3Texture?.CanSetImageData16Bit ?? false;
+
+        public ImageDataCanSet CanSetImageData {
+            get => Chunk3Texture?.CanSetImageData ?? ImageDataCanSet.Never;
+            set {}
+        }
+
         public bool ZeroIsTransparent => false;
         public bool IsIgnored => false;
 

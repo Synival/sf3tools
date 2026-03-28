@@ -1,5 +1,6 @@
 ﻿using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
@@ -20,7 +21,6 @@ namespace SF3.Models.Files.DAT {
         public int TextureViewerScale { get; set; } = 0;
         public TexturesAsSpritesheet Spritesheet { get; protected set; }
 
-        public abstract bool CanReplaceImages8Bit { get; }
-        public abstract bool CanReplaceImages16Bit { get; }
+        public abstract ImageDataCanSet CanReplaceImages { get; }
     }
 }

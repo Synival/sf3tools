@@ -15,7 +15,7 @@ namespace CommonLib.Imaging {
             TexturePixelFormat pixelFormat,
             IPalette palette,
             bool zeroIsTransparent,
-            bool canSetImage,
+            ImageDataCanSet canSetImage,
             ITextureDataSource dataSource,
             IndexedColorUpdateStrategy indexedUpdateStrategy
         ) {
@@ -24,8 +24,8 @@ namespace CommonLib.Imaging {
             _pixelFormat       = pixelFormat;
             _palette           = palette;
             _zeroIsTransparent = zeroIsTransparent;
-            CanSetImage        = canSetImage;
-            DataSource        = dataSource;
+            CanSetImageData    = canSetImage;
+            DataSource         = dataSource;
             IndexedColorUpdateStrategy = indexedUpdateStrategy;
         }
 
@@ -150,9 +150,7 @@ namespace CommonLib.Imaging {
             }
         }
 
-        public override bool CanSetImageData8Bit => CanSetImage;
-        public override bool CanSetImageData16Bit => CanSetImage;
-        public virtual bool CanSetImage { get; set; }
+        public override ImageDataCanSet CanSetImageData { get; set; }
         public IndexedColorUpdateStrategy IndexedColorUpdateStrategy { get; }
 
         protected ITextureDataSource DataSource { get; }

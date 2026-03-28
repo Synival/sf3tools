@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.Shared {
             TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(data, id, name, address, size) {
             _textureData = new InDataTextureData(imageData, 0, 0, 0, pixelFormat, null,
-                isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true, indexedUpdateStrategy);
+                isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, ImageDataCanSet.CanSet8Or16Bit, indexedUpdateStrategy);
 
             _textureData.Add8BitValidator((texData, _1, _2, _3) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
             _textureData.Add16BitValidator((texData, _1, _2) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
@@ -79,8 +79,16 @@ namespace SF3.Models.Structs.Shared {
             set => _textureData.ImageData16Bit = value;
         }
 
-        public bool CanSetImageData8Bit => _textureData.CanSetImageData8Bit && BytesPerPixel == 1 && CanLoadImage && HasImage;
-        public bool CanSetImageData16Bit => _textureData.CanSetImageData16Bit && BytesPerPixel == 2 && CanLoadImage && HasImage;
+        public ImageDataCanSet CanSetImageData {
+            get {
+                if (!(CanLoadImage || HasImage))
+                    return ImageDataCanSet.Never;
+                return
+                    ((_textureData.CanSetImageData.HasFlag(ImageDataCanSet.CanSet8Bit)  && BytesPerPixel == 1) ? ImageDataCanSet.CanSet8Bit  : 0) |
+                    ((_textureData.CanSetImageData.HasFlag(ImageDataCanSet.CanSet16Bit) && BytesPerPixel == 2) ? ImageDataCanSet.CanSet16Bit : 0);
+            }
+            set => _textureData.CanSetImageData = value;
+        }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.5f, displayFormat: "-X4")]
         public int ImageDataOffset {

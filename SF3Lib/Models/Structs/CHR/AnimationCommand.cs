@@ -5,6 +5,7 @@ using System.Text;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Tables.CHR;
 using SF3.Types;
@@ -114,7 +115,7 @@ namespace SF3.Models.Structs.CHR {
                 .Where(x => x.ID >= frameMin && x.ID < frameMax)
                 .Select(x => x.Texture)
                 .ToArray();
-            tex = TextureUtils.StackTextures(frames, canSetImage: false);
+            tex = TextureUtils.StackTextures(frames, ImageDataCanSet.Never);
             _texturesByFrameCount[frameCount] = tex;
 
             var frameTableCount = FrameTable.Count;

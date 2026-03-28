@@ -1,4 +1,5 @@
 ﻿using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.Models.Structs.DAT;
 using SF3.Models.Tables;
 using SF3.Types;
@@ -13,7 +14,6 @@ namespace SF3.Models.Files.DAT {
         int TextureViewerScale { get; }
         TexturesAsSpritesheet Spritesheet { get; }
 
-        bool CanReplaceImages8Bit { get; }
-        bool CanReplaceImages16Bit { get; }
+        ImageDataCanSet CanReplaceImages { get; }
     }
 }

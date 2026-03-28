@@ -108,8 +108,7 @@ namespace SF3.Models.Tables.Shared {
         public IPalette Palette => _cachedPalette;
 
         public bool ZeroIsTransparent => false;
-        public bool CanSetImageData8Bit => true;
-        public bool CanSetImageData16Bit => true;
+        public ImageDataCanSet CanSetImageData { get => ImageDataCanSet.CanSet8Or16Bit; set {} }
 
         public event EventHandler Invalidated;
 

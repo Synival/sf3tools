@@ -4,6 +4,7 @@ using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
+using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.DAT;
@@ -99,8 +100,7 @@ namespace SF3.Models.Files.DAT {
         public override void ReplaceImages16Bit(ushort[][,] images, bool minimalChanges)
             => throw new InvalidOperationException();
 
-        public override bool CanReplaceImages8Bit => true;
-        public override bool CanReplaceImages16Bit => false;
+        public override ImageDataCanSet CanReplaceImages => ImageDataCanSet.CanSet8Bit;
 
         public int SpellIconIndex { get; }
     }

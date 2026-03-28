@@ -9,14 +9,14 @@ namespace CommonLib.Imaging {
     /// A texture whose image data exists solely in memory.
     /// </summary>
     public class InMemoryTextureData : CachedTextureData, ITextureData {
-        public InMemoryTextureData(ITextureData original, IPalette palette, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        public InMemoryTextureData(ITextureData original, IPalette palette, ImageDataCanSet canSet, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             original.Width,
             original.Height,
             original.PixelFormat,
             palette,
             original.ZeroIsTransparent,
-            original.CanSetImageData8Bit || original.CanSetImageData16Bit,
+            canSet,
             new DummyTextureDataSource(),
             indexedUpdateStrategy
         ) {
@@ -26,7 +26,7 @@ namespace CommonLib.Imaging {
                 _ = _textureDataCache.SetImageData16Bit(original.ImageData16Bit);
         }
 
-        public InMemoryTextureData(byte[,] data, IPalette palette, bool zeroIsTransparent, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        public InMemoryTextureData(byte[,] data, IPalette palette, bool zeroIsTransparent, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             data?.GetLength(0) ?? 0,
             data?.GetLength(1) ?? 0,
@@ -41,7 +41,7 @@ namespace CommonLib.Imaging {
                 _ = _textureDataCache.SetImageData8Bit(data);
         }
 
-        public InMemoryTextureData(ushort[,] data, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        public InMemoryTextureData(ushort[,] data, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             data?.GetLength(0) ?? 0,
             data?.GetLength(1) ?? 0,
@@ -56,7 +56,7 @@ namespace CommonLib.Imaging {
                 _ = _textureDataCache.SetImageData16Bit(data);
         }
 
-        public InMemoryTextureData(int width, int height, TexturePixelFormat pixelFormat, IPalette palette, bool zeroIsTransparent, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        public InMemoryTextureData(int width, int height, TexturePixelFormat pixelFormat, IPalette palette, bool zeroIsTransparent, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             width,
             height,
@@ -69,9 +69,9 @@ namespace CommonLib.Imaging {
         ) {
         }
 
-        public static InMemoryTextureData FromJToken(JToken token, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy paletteUpdateStrategy)
+        public static InMemoryTextureData FromJToken(JToken token, bool zeroIsTransparent, IPalette palette, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy paletteUpdateStrategy)
             => new InMemoryTextureData((JObject) token, zeroIsTransparent, palette, canSetImage, paletteUpdateStrategy);
-        protected InMemoryTextureData(JObject jObject, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        protected InMemoryTextureData(JObject jObject, bool zeroIsTransparent, IPalette palette, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             (int) jObject["Width"],
             (int) jObject["Height"],
@@ -89,9 +89,9 @@ namespace CommonLib.Imaging {
                 _ = _textureDataCache.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
         }
 
-        public static InMemoryTextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy paletteUpdateStrategy)
+        public static InMemoryTextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy paletteUpdateStrategy)
             => new InMemoryTextureData(token, width, height, pixelFormat, zeroIsTransparent, palette, canSetImage, paletteUpdateStrategy);
-        protected InMemoryTextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        protected InMemoryTextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, ImageDataCanSet canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             width,
             height,

@@ -5,7 +5,7 @@ using CommonLib.Types;
 
 namespace SF3.Utils {
     public static class TextureUtils {
-        public static ITextureData StackTextures(ITextureData[] textures, bool canSetImage) {
+        public static ITextureData StackTextures(ITextureData[] textures, ImageDataCanSet canSetImage) {
             if (textures.Length == 0)
                 return null;
 
@@ -15,13 +15,13 @@ namespace SF3.Utils {
 
             switch (expectedFormat) {
                 case TexturePixelFormat.ABGR1555:
-                    return StackTexturesABGR1555(textures, canSetImage: canSetImage);
+                    return StackTexturesABGR1555(textures, canSetImage);
                 default:
                     throw new ArgumentException($"TexturePixelFormat '{expectedFormat}' not supported");
             }
         }
 
-        private static InMemoryTextureData StackTexturesABGR1555(ITextureData[] textures, bool canSetImage) {
+        private static InMemoryTextureData StackTexturesABGR1555(ITextureData[] textures, ImageDataCanSet canSetImage) {
             var frameDatas = textures.Select(x => x.ImageData16Bit).ToArray();
             var allData = new ushort[frameDatas.Max(x => x.GetLength(0)), frameDatas.Sum(x => x.GetLength(1))];
 
@@ -33,7 +33,7 @@ namespace SF3.Utils {
                         allData[x, row] = data[x, y];
             }
 
-            return new InMemoryTextureData(allData, canSetImage: canSetImage, IndexedColorUpdateStrategy.MatchToExistingPalette);
+            return new InMemoryTextureData(allData, canSetImage, IndexedColorUpdateStrategy.MatchToExistingPalette);
         }
     }
 }
