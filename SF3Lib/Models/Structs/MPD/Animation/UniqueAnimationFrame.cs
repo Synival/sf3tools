@@ -57,7 +57,12 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
-        protected override IPalette StructPalette { get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.TexturePalette; set {} }
+
+        protected override IPalette StructPalette {
+            get => PixelFormat == TexturePixelFormat.ABGR1555 ? null : MPD_File.TexturePalette;
+            set {}
+        }
+
         public MPD_CollectionType Collection => MPD_CollectionType.Primary;
         public int Frame => 0;
         public int Duration => 0;
