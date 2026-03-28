@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_Texture : InMemoryTextureData, IMPD_Texture, IDisposable {
-        public MPD_Texture(IMPD_Texture original) : base(original, null) {
+        public MPD_Texture(IMPD_Texture original) : base(original, null, IndexedColorUpdateStrategy.MatchToExistingPalette) {
             ID         = original.ID;
             Collection = original.Collection;
             IsIgnored  = original.IsIgnored;
@@ -21,7 +22,7 @@ namespace SF3.MPD.Project {
         }
 
         protected MPD_Texture(JObject jObject, MPD_CollectionType collection, IPalette palette)
-        : base(jObject, zeroIsTransparent: true, palette, canSetImage: true) {
+        : base(jObject, zeroIsTransparent: true, palette, canSetImage: true, IndexedColorUpdateStrategy.MatchToExistingPalette) {
             ID         = (int) jObject["ID"];
             Collection = collection;
 
@@ -33,7 +34,7 @@ namespace SF3.MPD.Project {
         }
 
         protected MPD_Texture(JToken token, IMPD_Texture texture)
-        : base(token, texture.Width, texture.Height, texture.PixelFormat, true, texture.Palette, true) {
+        : base(token, texture.Width, texture.Height, texture.PixelFormat, true, texture.Palette, true, IndexedColorUpdateStrategy.MatchToExistingPalette) {
             ID         = texture.ID;
             Collection = texture.Collection;
             IsIgnored  = texture.IsIgnored;

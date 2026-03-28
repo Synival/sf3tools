@@ -8,11 +8,11 @@ namespace SF3.MPD.Project {
     public class MPD_TiledPlane : IMPD_TiledPlane {
         public MPD_TiledPlane(IMPD_TiledPlane original, IPalette palette) {
             if (original.Tileset != null)
-                Tileset = new InMemoryTextureData(original.Tileset, palette);
+                Tileset = new InMemoryTextureData(original.Tileset, palette, IndexedColorUpdateStrategy.UpdateExistingPalette);
             if (original.TileAssignment != null)
                 TileAssignment = new MPD_PlaneTileAssignment(original.TileAssignment);
             if (original.TiledImage != null)
-                TiledImage = new InMemoryTextureData(original.TiledImage, palette);
+                TiledImage = new InMemoryTextureData(original.TiledImage, palette, IndexedColorUpdateStrategy.UpdateExistingPalette);
         }
 
         public static MPD_TiledPlane FromJToken(JToken token, IPalette palette, int tilesWidth, int tilesHeight)
@@ -21,12 +21,12 @@ namespace SF3.MPD.Project {
             var jObject = (JObject) token;
 
             Tileset = jObject.GetValueIfExists("Tileset",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, palette, true));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, palette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
             TileAssignment = jObject.GetValueIfExists("TileAssignment",
                 t => MPD_PlaneTileAssignment.FromJToken(t, tilesWidth, tilesHeight));
 
             if (Tileset != null && TileAssignment != null)
-                TiledImage = new InMemoryTextureData(CreateTiledImageData(Tileset, TileAssignment), palette, zeroIsTransparent: false, canSetImage: false);
+                TiledImage = new InMemoryTextureData(CreateTiledImageData(Tileset, TileAssignment), palette, zeroIsTransparent: false, canSetImage: false, IndexedColorUpdateStrategy.UpdateExistingPalette);
         }
 
         public static byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {

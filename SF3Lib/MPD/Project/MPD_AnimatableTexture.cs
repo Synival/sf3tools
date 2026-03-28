@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;

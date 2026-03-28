@@ -58,7 +58,8 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
 
                 var texId = StartID + id;
                 return new TextureStruct(
-                    Data, Collection, StartID + id, $"Texture{(int) Collection}_{texId:X2}", address, pixelFormat, ChunkIndex, nextImageDataOffset, MPD_File
+                    Data, Collection, StartID + id, $"Texture{(int) Collection}_{texId:X2}", address, pixelFormat, ChunkIndex, nextImageDataOffset, MPD_File,
+                    IndexedColorUpdateStrategy.MatchToExistingPalette
                 );
             });
         }

@@ -18,10 +18,11 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public TextureStruct(
             IByteData data, MPD_CollectionType collection, int id, string name, int address,
-            TexturePixelFormat? pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile
+            TexturePixelFormat? pixelFormat, int chunkIndex, int? nextImageDataOffset, IMPD_File mpdFile,
+            IndexedColorUpdateStrategy indexedUpdateStrategy
         ) : base(
             data, id, name, address, GlobalSize, GuessPixelFormat(pixelFormat, data, address, nextImageDataOffset ?? data.Length),
-            isCompressed: false, zeroIsTransparent: true
+            isCompressed: false, zeroIsTransparent: true, indexedUpdateStrategy
         ) {
             Collection       = collection;
             ImportExportName = "Texture_" + ((collection == MPD_CollectionType.Primary) ? "" : $"{collection}_") + $"{id:X2}";

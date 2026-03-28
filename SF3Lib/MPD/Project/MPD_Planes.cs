@@ -22,13 +22,13 @@ namespace SF3.MPD.Project {
                 SkyPalette = new Palette(original.SkyPalette);
 
             if (original.GroundImage != null)
-                GroundImage = new InMemoryTextureData(original.GroundImage, GroundPalette);
+                GroundImage = new InMemoryTextureData(original.GroundImage, GroundPalette, IndexedColorUpdateStrategy.UpdateExistingPalette);
             if (original.GroundTiledImage != null)
                 GroundTiledImage = new MPD_TiledPlane(original.GroundTiledImage, GroundPalette);
             if (original.BackgroundImage != null)
-                BackgroundImage = new InMemoryTextureData(original.BackgroundImage, SkyPalette);
+                BackgroundImage = new InMemoryTextureData(original.BackgroundImage, SkyPalette, IndexedColorUpdateStrategy.UpdateExistingPalette);
             if (original.SkyImage != null)
-                SkyImage = new InMemoryTextureData(original.SkyImage, SkyPalette);
+                SkyImage = new InMemoryTextureData(original.SkyImage, SkyPalette, IndexedColorUpdateStrategy.UpdateExistingPalette);
             if (original.ForegroundTiledImage != null)
                 ForegroundTiledImage = new MPD_TiledPlane(original.ForegroundTiledImage, SkyPalette);
         }
@@ -48,13 +48,13 @@ namespace SF3.MPD.Project {
             SkyPalette      = jObject.GetValueIfExists("SkyPalette", t => Palette.FromJToken(t));
 
             GroundImage = jObject.GetValueIfExists("GroundImage",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
             GroundTiledImage = jObject.GetValueIfExists("GroundTiledImage",
                 t => MPD_TiledPlane.FromJToken(t, GroundPalette, 256, 256));
             SkyImage = jObject.GetValueIfExists("SkyImage",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, SkyPalette, true));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, SkyPalette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
             BackgroundImage = jObject.GetValueIfExists("BackgroundImage",
-                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true));
+                t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, GroundPalette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
             ForegroundTiledImage = jObject.GetValueIfExists("ForegroundTiledImage",
                 t => MPD_TiledPlane.FromJToken(t, SkyPalette, 64, 32));
         }

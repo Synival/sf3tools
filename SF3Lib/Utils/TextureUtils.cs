@@ -33,7 +33,7 @@ namespace SF3.Utils {
                         allData[x, row] = data[x, y];
             }
 
-            return new InMemoryTextureData(allData, canSetImage: canSetImage);
+            return new InMemoryTextureData(allData, canSetImage: canSetImage, IndexedColorUpdateStrategy.MatchToExistingPalette);
         }
     }
 }

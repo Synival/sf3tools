@@ -1,4 +1,5 @@
 ﻿using CommonLib.Imaging;
+using CommonLib.Types;
 using SF3.Models.Structs.KAO;
 
 namespace SF3.Win.Views.KAO {
@@ -51,7 +52,7 @@ namespace SF3.Win.Views.KAO {
             FaceCompositeImage.AddFaceImageToData(newData, talkImage);
 
             // Generate a texture for it.
-            _faceTexture = new InMemoryTextureData(newData, Face.Palette, zeroIsTransparent: true, canSetImage: false);
+            _faceTexture = new InMemoryTextureData(newData, Face.Palette, zeroIsTransparent: true, canSetImage: false, IndexedColorUpdateStrategy.MatchToExistingPalette);
         }
 
         private int GetBlinkingImage(int frame) {

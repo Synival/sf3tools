@@ -9,7 +9,7 @@ namespace CommonLib.Imaging {
     /// A texture whose image data exists solely in memory.
     /// </summary>
     public class InMemoryTextureData : CachedTextureData, ITextureData {
-        public InMemoryTextureData(ITextureData original, IPalette palette)
+        public InMemoryTextureData(ITextureData original, IPalette palette, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             original.Width,
             original.Height,
@@ -17,7 +17,8 @@ namespace CommonLib.Imaging {
             palette,
             original.ZeroIsTransparent,
             original.CanSetImageData8Bit || original.CanSetImageData16Bit,
-            new DummyTextureDataSource()
+            new DummyTextureDataSource(),
+            indexedUpdateStrategy
         ) {
             if (PixelFormat == TexturePixelFormat.Indexed8Bit)
                 _ = _textureDataCache.SetImageData8Bit(original.ImageData8Bit);
@@ -25,7 +26,7 @@ namespace CommonLib.Imaging {
                 _ = _textureDataCache.SetImageData16Bit(original.ImageData16Bit);
         }
 
-        public InMemoryTextureData(byte[,] data, IPalette palette, bool zeroIsTransparent, bool canSetImage)
+        public InMemoryTextureData(byte[,] data, IPalette palette, bool zeroIsTransparent, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             data?.GetLength(0) ?? 0,
             data?.GetLength(1) ?? 0,
@@ -33,13 +34,14 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new DummyTextureDataSource()
+            new DummyTextureDataSource(),
+            indexedUpdateStrategy
         ) {
             if (data != null)
                 _ = _textureDataCache.SetImageData8Bit(data);
         }
 
-        public InMemoryTextureData(ushort[,] data, bool canSetImage)
+        public InMemoryTextureData(ushort[,] data, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             data?.GetLength(0) ?? 0,
             data?.GetLength(1) ?? 0,
@@ -47,13 +49,14 @@ namespace CommonLib.Imaging {
             palette: null,
             zeroIsTransparent: false,
             canSetImage,
-            new DummyTextureDataSource()
+            new DummyTextureDataSource(),
+            indexedUpdateStrategy
         ) {
             if (data != null)
                 _ = _textureDataCache.SetImageData16Bit(data);
         }
 
-        public InMemoryTextureData(int width, int height, TexturePixelFormat pixelFormat, IPalette palette, bool zeroIsTransparent, bool canSetImage)
+        public InMemoryTextureData(int width, int height, TexturePixelFormat pixelFormat, IPalette palette, bool zeroIsTransparent, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             width,
             height,
@@ -61,13 +64,14 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new DummyTextureDataSource()
+            new DummyTextureDataSource(),
+            indexedUpdateStrategy
         ) {
         }
 
-        public static InMemoryTextureData FromJToken(JToken token, bool zeroIsTransparent, IPalette palette, bool canSetImage)
-            => new InMemoryTextureData((JObject) token, zeroIsTransparent, palette, canSetImage);
-        protected InMemoryTextureData(JObject jObject, bool zeroIsTransparent, IPalette palette, bool canSetImage)
+        public static InMemoryTextureData FromJToken(JToken token, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy paletteUpdateStrategy)
+            => new InMemoryTextureData((JObject) token, zeroIsTransparent, palette, canSetImage, paletteUpdateStrategy);
+        protected InMemoryTextureData(JObject jObject, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             (int) jObject["Width"],
             (int) jObject["Height"],
@@ -75,7 +79,8 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new DummyTextureDataSource()
+            new DummyTextureDataSource(),
+            indexedUpdateStrategy
         ) {
             var imageDataBase64 = (string) jObject["ImageData"];
             if (PixelFormat == TexturePixelFormat.ABGR1555)
@@ -84,9 +89,9 @@ namespace CommonLib.Imaging {
                 _ = _textureDataCache.SetImageData8Bit(Convert.FromBase64String(imageDataBase64).To2DArrayColumnMajor(Width, Height));
         }
 
-        public static InMemoryTextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, bool canSetImage)
-            => new InMemoryTextureData(token, width, height, pixelFormat, zeroIsTransparent, palette, canSetImage);
-        protected InMemoryTextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, bool canSetImage)
+        public static InMemoryTextureData FromJToken(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy paletteUpdateStrategy)
+            => new InMemoryTextureData(token, width, height, pixelFormat, zeroIsTransparent, palette, canSetImage, paletteUpdateStrategy);
+        protected InMemoryTextureData(JToken token, int width, int height, TexturePixelFormat pixelFormat, bool zeroIsTransparent, IPalette palette, bool canSetImage, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(
             width,
             height,
@@ -94,7 +99,8 @@ namespace CommonLib.Imaging {
             palette,
             zeroIsTransparent,
             canSetImage,
-            new DummyTextureDataSource()
+            new DummyTextureDataSource(),
+            indexedUpdateStrategy
         ) {
             var imageDataBase64 = (string) token;
             if (PixelFormat == TexturePixelFormat.ABGR1555)

@@ -8,10 +8,10 @@ using SF3.ByteData;
 namespace SF3.Models.Structs.Shared {
     public abstract class TextureStructBase : Struct, ITextureData, IDisposable {
         public TextureStructBase(IByteData data, IByteArray imageData, int id, string name, int address, int size,
-            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, IndexedColorUpdateStrategy indexedUpdateStrategy)
         : base(data, id, name, address, size) {
             _textureData = new InDataTextureData(imageData, 0, 0, 0, pixelFormat, null,
-                isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true);
+                isCompressed: isCompressed, zeroIsTransparent: zeroIsTransparent, canSetImage: true, indexedUpdateStrategy);
 
             _textureData.Add8BitValidator((texData, _1, _2, _3) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
             _textureData.Add16BitValidator((texData, _1, _2) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
@@ -27,8 +27,8 @@ namespace SF3.Models.Structs.Shared {
             => OnImageUpdated();
 
         public TextureStructBase(IByteData data, int id, string name, int address, int size,
-            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent)
-        : this(data, data.Data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent) {}
+            TexturePixelFormat pixelFormat, bool isCompressed, bool zeroIsTransparent, IndexedColorUpdateStrategy indexedUpdateStrategy)
+        : this(data, data.Data, id, name, address, size, pixelFormat, isCompressed, zeroIsTransparent, indexedUpdateStrategy) {}
 
         public void LoadImageData() {
             _textureData.ImageDataOffset = StructImageDataOffset;

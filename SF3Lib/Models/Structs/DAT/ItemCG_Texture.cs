@@ -7,7 +7,7 @@ using SF3.ByteData;
 namespace SF3.Models.Structs.DAT {
     public class ItemCG_Texture : DAT_FileTextureBase {
         public ItemCG_Texture(IByteData data, int id, string name, int address, IPalette palette)
-        : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Indexed8Bit, true, false) {
+        : base(data, id, name, address, 24 * 24, 24, 24, TexturePixelFormat.Indexed8Bit, true, false, IndexedColorUpdateStrategy.MatchToExistingPalette) {
             _palette = palette;
 
             _textureData.Add8BitValidator((_1, _2, _3, newStoredSize) => {
