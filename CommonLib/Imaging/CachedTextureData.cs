@@ -1,6 +1,7 @@
 ﻿using System;
 using CommonLib.Extensions;
 using CommonLib.Types;
+using CommonLib.Utils;
 
 namespace CommonLib.Imaging {
     /// <summary>
@@ -41,6 +42,9 @@ namespace CommonLib.Imaging {
         }
 
         public override void SetImageData8Bit(byte[,] data, IPalette palette) {
+            if (IndexedColorUpdateStrategy == IndexedColorUpdateStrategy.MatchToExistingPalette)
+                data = ImageUtils.GetImageDataConformingToPalette(data, palette, Palette);
+
             var newStoredData = DataSource.ConvertImageDataToStorageData8Bit(this, data, palette, out var newStoredDataSize);
             var error = Validate8BitImageData(data, palette, DataSource.StoredImageDataSize, newStoredDataSize);
             if (error != null)
@@ -54,7 +58,9 @@ namespace CommonLib.Imaging {
                 Width = data.GetLength(0);
                 Height = data.GetLength(1);
                 _ = _textureDataCache.SetImageData8Bit(data);
-                Palette = palette;
+
+                if (IndexedColorUpdateStrategy == IndexedColorUpdateStrategy.UpdateExistingPalette)
+                    Palette.Replace(palette.Colors);
             }
             InvokeInvalidatedEvent();
         }
