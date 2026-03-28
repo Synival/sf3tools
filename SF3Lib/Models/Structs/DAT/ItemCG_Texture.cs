@@ -24,11 +24,6 @@ namespace SF3.Models.Structs.DAT {
         [TableViewModelColumn(displayOrder: 2.1f, displayFormat: "X4", isReadOnly: true, displayGroup: "Metadata")]
         public int? MaxStoredImageSize { get; set; }
 
-        protected override (byte[,], IPalette) PreProcessIncomingImageData8Bit(byte[,] newData, IPalette palette) {
-            (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
-            return (ImageUtils.GetImageDataConformingToPalette(newData, palette, _palette), _palette);
-        }
-
         protected override void OnImageUpdated() {}
 
         public override void SetImageData8Bit(byte[,] data, IPalette palette) {

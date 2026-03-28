@@ -70,16 +70,13 @@ namespace SF3.Models.Structs.Shared {
 
         public virtual byte[,] ImageData8Bit => _textureData.ImageData8Bit;
         public virtual void SetImageData8Bit(byte[,] data, IPalette palette) {
-            (data, palette) = PreProcessIncomingImageData8Bit(data, palette);
             _textureData.SetImageData8Bit(data, palette);
             StructPalette = palette;
         }
 
-        protected virtual (byte[,], IPalette) PreProcessIncomingImageData8Bit(byte[,] newData, IPalette palette) => (newData, palette);
-
         public virtual ushort[,] ImageData16Bit {
             get => _textureData.ImageData16Bit;
-            set => _textureData.ImageData16Bit = PreProcessIncomingImageData16Bit(value);
+            set => _textureData.ImageData16Bit = value;
         }
 
         public bool CanSetImageData8Bit => _textureData.CanSetImageData8Bit && BytesPerPixel == 1 && CanLoadImage && HasImage;
@@ -93,8 +90,6 @@ namespace SF3.Models.Structs.Shared {
                 _textureData.ImageDataOffset = StructImageDataOffset;
             }
         }
-
-        protected virtual ushort[,] PreProcessIncomingImageData16Bit(ushort[,] newData) => newData;
 
         protected abstract int StructImageDataOffset { get; set; }
 

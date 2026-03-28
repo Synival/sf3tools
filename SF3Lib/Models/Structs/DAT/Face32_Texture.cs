@@ -24,11 +24,6 @@ namespace SF3.Models.Structs.DAT {
 
         public override bool CanUpdateAddress => false;
 
-        protected override (byte[,], IPalette) PreProcessIncomingImageData8Bit(byte[,] newData, IPalette palette) {
-            (newData, palette) = base.PreProcessIncomingImageData8Bit(newData, palette);
-            return (ImageUtils.GetImageDataConformingToPalette(newData, palette, _palette), _palette);
-        }
-
         protected override void OnImageUpdated() {}
 
         protected override int StructImageDataOffset {
