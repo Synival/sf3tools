@@ -7,8 +7,10 @@ using SF3.MPD.Interfaces;
 namespace SF3.MPD.Project {
     public class MPD_TiledPlane : IMPD_TiledPlane {
         public MPD_TiledPlane(IMPD_TiledPlane original, IPalette palette) {
-            if (original.Tileset != null)
+            if (original.Tileset != null) {
                 Tileset = new InMemoryTextureData(original.Tileset, palette, IndexedColorUpdateStrategy.UpdateExistingPalette);
+                ((InMemoryTextureData) Tileset).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
+            }
             if (original.TileAssignment != null)
                 TileAssignment = new MPD_PlaneTileAssignment(original.TileAssignment);
             if (original.TiledImage != null)
@@ -22,6 +24,9 @@ namespace SF3.MPD.Project {
 
             Tileset = jObject.GetValueIfExists("Tileset",
                 t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, palette, true, IndexedColorUpdateStrategy.UpdateExistingPalette));
+            if (Tileset != null)
+                ((InMemoryTextureData) Tileset).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
+
             TileAssignment = jObject.GetValueIfExists("TileAssignment",
                 t => MPD_PlaneTileAssignment.FromJToken(t, tilesWidth, tilesHeight));
 
