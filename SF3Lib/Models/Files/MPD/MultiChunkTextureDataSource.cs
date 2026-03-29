@@ -39,15 +39,11 @@ namespace SF3.Models.Files.MPD {
             return IsTiled ? fullDataBytes.ToTiles(c_width, fullDataHeight, 8, 8) : fullDataBytes.To2DArrayColumnMajor(c_width, fullDataHeight);
         }
 
-        public ushort[,] FetchImageData16Bit(ITextureData tex) => throw new NotImplementedException();
-
         public object ConvertImageDataToStorageData8Bit(ITextureData tex, byte[,] data, IPalette palette, out int? storageSize) {
             var newData = IsTiled ? data.FromTiles(8, 8) : data.To1DArrayTransposed();
             storageSize = newData.Length;
             return newData;
         }
-
-        public object ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data, out int? storageSize) => throw new NotImplementedException();
 
         public void StoreImageData(ITextureData data, object storageData) {
             var toDatas = Datas?.Where(x => x != null)?.ToArray() ?? new IByteData[0];
@@ -61,6 +57,10 @@ namespace SF3.Models.Files.MPD {
                 toData.Data.SetDataTo(newData);
             }
         }
+
+        // 16-bit images not supported.
+        public ushort[,] FetchImageData16Bit(ITextureData tex) => throw new NotSupportedException();
+        public object ConvertImageDataToStorageData16Bit(ITextureData tex, ushort[,] data, out int? storageSize) => throw new NotSupportedException();
 
         public int Width => c_width;
         public int Height { get; }

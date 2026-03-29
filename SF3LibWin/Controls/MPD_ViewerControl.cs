@@ -326,26 +326,6 @@ namespace SF3.Win.Controls {
         private void tsbToggleNormals_Click(object sender, EventArgs e) => tsbToggleNormals.Checked     = GLControl.DrawNormals      = !GLControl.DrawNormals;
         private void tsbRotateSpritesUp_Click(object sender, EventArgs e) => tsbRotateSpritesUp.Checked   = GLControl.RotateSpritesUp  = !GLControl.RotateSpritesUp;
 
-        public void InvalidateLighting(bool invalidatePainter = true) {
-            if (MPD_File != null) {
-                GLControl.InvalidateLightPosition(invalidatePainter: false);
-                GLControl.InvalidateLightingTexture(invalidatePainter: false);
-                if (invalidatePainter)
-                    GLControl.InvalidateFrame();
-            }
-        }
-
-        public void InvalidateMPDResources() {
-            if (MPD_File != null) {
-                if (MPD_File is IMPD_File mpdFile) {
-                    mpdFile.AssociateTilesWithTrees();
-                    // TODO: UpdatePlaneImages() shouldn't be necessary!!
-                    mpdFile.UpdatePlaneImages();
-                }
-                GLControl.InvalidateAllResources();
-            }
-        }
-
         private struct CameraRefs {
             public float Width;
             public float Height;

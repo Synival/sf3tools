@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using System;
+using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
@@ -6,7 +7,7 @@ using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 
 namespace SF3.Models.Structs.MPD.Plane {
-    public class TiledImagePlane : IMPD_TiledPlane {
+    public class TiledImagePlane : IMPD_TiledPlane, IDisposable {
         public TiledImagePlane(
             IByteData tilesetData1,
             IByteData tilesetData2,
@@ -19,13 +20,31 @@ namespace SF3.Models.Structs.MPD.Plane {
             Palette        = palette;
             ZeroIsTransparent = zeroIsTransparent;
 
-            Tileset = new MultiChunkTexture(TilesetDatas, isTiled: true, Palette, ZeroIsTransparent, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
-            TiledImage = new InMemoryTextureData(MPD_TiledPlane.CreateTiledImageData(Tileset, TileAssignment), Palette, ZeroIsTransparent, ImageDataCanSet.Never, IndexedColorUpdateStrategy.MatchToExistingPalette);
+            Tileset = new MultiChunkTextureData(TilesetDatas, isTiled: true, Palette, ZeroIsTransparent, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
+            TiledImage = new MPD_TiledPlaneTextureData(Tileset, TileAssignment, Palette, ZeroIsTransparent);
+
+            Tileset.Invalidated += InvalidateTileset;
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing)
+                    Tileset.Invalidated -= InvalidateTileset;
+                _disposedValue = true;
+            }
+        }
+
+        private void InvalidateTileset(object sender, EventArgs ags)
+            => ((MPD_TiledPlaneTextureData) TiledImage).Invalidate();
+
         public void Invalidate() {
-            ((MultiChunkTexture) Tileset)?.Invalidate();
-            ((InMemoryTextureData) TiledImage)?.Invalidate();
+            ((MultiChunkTextureData) Tileset)?.Invalidate();
+            ((MPD_TiledPlaneTextureData) TiledImage)?.Invalidate();
         }
 
         public IByteData[] TilesetDatas { get; }
@@ -35,5 +54,7 @@ namespace SF3.Models.Structs.MPD.Plane {
 
         public ITextureData Tileset { get; private set; }
         public ITextureData TiledImage { get; private set; }
+
+        private bool _disposedValue;
     }
 }

@@ -5,6 +5,7 @@ using CommonLib;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Win.App;
 using SF3.Win.OpenGL.MPD;
@@ -522,6 +523,12 @@ namespace SF3.Win.Controls {
         public void InvalidateModelInstancesToHide(bool invalidatePainter = true) => InvalidateResource(ref _modelInstancesToHideNeedsUpdate, invalidatePainter);
 
         public void InvalidateAllResources(bool invalidatePainter = true) {
+            // TODO: this absolutely should not be here!
+            if (MPD_File is IMPD_File mpdFile) {
+                mpdFile.AssociateTilesWithTrees();
+                mpdFile.UpdatePlaneImages();
+            }
+
             InvalidateEditor(false);
             InvalidateActors(false);
             InvalidateLightingTexture(false);

@@ -19,10 +19,10 @@ namespace SF3.Models.Files.MPD {
             ITextureData groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 if ((groundImage = GroundImage) != null)
-                    ((MultiChunkTexture) groundImage).Invalidate();
+                    ((MultiChunkTextureData) groundImage).Invalidate();
                 else {
                     try {
-                        groundImage = new MultiChunkTexture(
+                        groundImage = new MultiChunkTextureData(
                             MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(),
                             isTiled: false,
                             GroundPalette ?? c_fakePalette,
@@ -78,10 +78,10 @@ namespace SF3.Models.Files.MPD {
             ITextureData backgroundImage = null;
             if (MPD_File.BackgroundChunkDatas?.Any() == true) {
                 if ((backgroundImage = BackgroundImage) != null)
-                    ((MultiChunkTexture) backgroundImage).Invalidate();
+                    ((MultiChunkTextureData) backgroundImage).Invalidate();
                 else {
                     try {
-                        backgroundImage = new MultiChunkTexture(
+                        backgroundImage = new MultiChunkTextureData(
                             MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(),
                             isTiled: false,
                             GroundPalette,
@@ -101,10 +101,10 @@ namespace SF3.Models.Files.MPD {
             ITextureData skyImage = null;
             if (MPD_File.SkyChunkDatas?.Any() == true) {
                 if ((skyImage = SkyImage) != null)
-                    ((MultiChunkTexture) skyImage).Invalidate();
+                    ((MultiChunkTextureData) skyImage).Invalidate();
                 else {
                     try {
-                        skyImage = new MultiChunkTexture(
+                        skyImage = new MultiChunkTextureData(
                             MPD_File.SkyChunkDatas.Select(x => x.DecompressedData).ToArray(),
                             isTiled: false,
                             SkyPalette,
