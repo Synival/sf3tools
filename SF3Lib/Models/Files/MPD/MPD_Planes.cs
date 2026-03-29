@@ -21,7 +21,7 @@ namespace SF3.Models.Files.MPD {
             ITextureData groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
                 try {
-                    groundImage = new MultiChunkTextureIndexed(
+                    groundImage = new MultiChunkTexture(
                         MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(),
                         isTiled: false,
                         GroundPalette ?? c_fakePalette,
@@ -76,7 +76,7 @@ namespace SF3.Models.Files.MPD {
             ITextureData backgroundImage = null;
             if (MPD_File.BackgroundChunkDatas?.Any() == true) {
                 try {
-                    backgroundImage = new MultiChunkTextureIndexed(
+                    backgroundImage = new MultiChunkTexture(
                         MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(),
                         isTiled: false,
                         GroundPalette,
@@ -95,7 +95,7 @@ namespace SF3.Models.Files.MPD {
             ITextureData skyImage = null;
             if (MPD_File.SkyChunkDatas?.Any() == true) {
                 try {
-                    skyImage = new MultiChunkTextureIndexed(
+                    skyImage = new MultiChunkTexture(
                         MPD_File.SkyChunkDatas.Select(x => x.DecompressedData).ToArray(),
                         isTiled: false,
                         SkyPalette,
