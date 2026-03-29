@@ -2,9 +2,7 @@
 using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.Models.Structs.MPD.Plane;
-using SF3.Models.Tables.Shared;
 using SF3.MPD.Interfaces;
-using SF3.Types;
 
 namespace SF3.Models.Files.MPD {
     public class MPD_Planes : IMPD_Planes {
@@ -20,18 +18,22 @@ namespace SF3.Models.Files.MPD {
             // Set the ground plane.
             ITextureData groundImage = null;
             if (MPD_File.GroundImageChunkDatas?.Any() == true) {
-                try {
-                    groundImage = new MultiChunkTexture(
-                        MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(),
-                        isTiled: false,
-                        GroundPalette ?? c_fakePalette,
-                        zeroIsTransparent: false,
-                        ImageDataCanSet.CanSet8Bit,
-                        IndexedColorUpdateStrategy.UpdateExistingPalette
-                    );
-                }
-                catch {
-                    // TODO: what to do here??
+                if ((groundImage = GroundImage) != null)
+                    ((MultiChunkTexture) groundImage).Invalidate();
+                else {
+                    try {
+                        groundImage = new MultiChunkTexture(
+                            MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                            isTiled: false,
+                            GroundPalette ?? c_fakePalette,
+                            zeroIsTransparent: false,
+                            ImageDataCanSet.CanSet8Bit,
+                            IndexedColorUpdateStrategy.UpdateExistingPalette
+                        );
+                    }
+                    catch {
+                        // TODO: what to do here??
+                    }
                 }
             }
             GroundImage = groundImage;
@@ -40,7 +42,7 @@ namespace SF3.Models.Files.MPD {
             IMPD_TiledPlane groundTiledImage = null;
             if (MPD_File.GroundTileAssignmentChunks?.Length == 2) {
                 if ((groundTiledImage = GroundTiledImage) != null)
-                    ((TiledImagePlane) GroundTiledImage).UpdateImages();
+                    ((TiledImagePlane) groundTiledImage).Invalidate();
                 else {
                     try {
                         // Get tileset chunks, accounting for maps that mistakenly have tileset maps but are actually using 512x256 images.
@@ -75,18 +77,22 @@ namespace SF3.Models.Files.MPD {
             // Set the background image (Ishahakat's room).
             ITextureData backgroundImage = null;
             if (MPD_File.BackgroundChunkDatas?.Any() == true) {
-                try {
-                    backgroundImage = new MultiChunkTexture(
-                        MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(),
-                        isTiled: false,
-                        GroundPalette,
-                        zeroIsTransparent: false,
-                        ImageDataCanSet.CanSet8Bit,
-                        IndexedColorUpdateStrategy.UpdateExistingPalette
-                    );
-                }
-                catch {
-                    // TODO: what to do here??
+                if ((backgroundImage = BackgroundImage) != null)
+                    ((MultiChunkTexture) backgroundImage).Invalidate();
+                else {
+                    try {
+                        backgroundImage = new MultiChunkTexture(
+                            MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                            isTiled: false,
+                            GroundPalette,
+                            zeroIsTransparent: false,
+                            ImageDataCanSet.CanSet8Bit,
+                            IndexedColorUpdateStrategy.UpdateExistingPalette
+                        );
+                    }
+                    catch {
+                        // TODO: what to do here??
+                    }
                 }
             }
             BackgroundImage = backgroundImage;
@@ -94,18 +100,22 @@ namespace SF3.Models.Files.MPD {
             // Set the cutscene/battle sky.
             ITextureData skyImage = null;
             if (MPD_File.SkyChunkDatas?.Any() == true) {
-                try {
-                    skyImage = new MultiChunkTexture(
-                        MPD_File.SkyChunkDatas.Select(x => x.DecompressedData).ToArray(),
-                        isTiled: false,
-                        SkyPalette,
-                        zeroIsTransparent: false,
-                        ImageDataCanSet.CanSet8Bit,
-                        IndexedColorUpdateStrategy.UpdateExistingPalette
-                    );
-                }
-                catch {
-                    // TODO: what to do here??
+                if ((skyImage = SkyImage) != null)
+                    ((MultiChunkTexture) skyImage).Invalidate();
+                else {
+                    try {
+                        skyImage = new MultiChunkTexture(
+                            MPD_File.SkyChunkDatas.Select(x => x.DecompressedData).ToArray(),
+                            isTiled: false,
+                            SkyPalette,
+                            zeroIsTransparent: false,
+                            ImageDataCanSet.CanSet8Bit,
+                            IndexedColorUpdateStrategy.UpdateExistingPalette
+                        );
+                    }
+                    catch {
+                        // TODO: what to do here??
+                    }
                 }
             }
             SkyImage = skyImage;
@@ -114,7 +124,7 @@ namespace SF3.Models.Files.MPD {
             IMPD_TiledPlane foregroundTiledImage = null;
             if (MPD_File.ForegroundTileChunkDatas?.Any() == true && MPD_File.ForegroundTileAssignmentChunk != null) {
                 if ((foregroundTiledImage = ForegroundTiledImage) != null)
-                    ((TiledImagePlane) ForegroundTiledImage).UpdateImages();
+                    ((TiledImagePlane) ForegroundTiledImage).Invalidate();
                 else {
                     try {
                         foregroundTiledImage = new TiledImagePlane(
@@ -131,20 +141,6 @@ namespace SF3.Models.Files.MPD {
                 }
             }
             ForegroundTiledImage = foregroundTiledImage;
-        }
-
-        private bool TrySetPalette(MPD_PaletteType paletteType, IPalette palette) {
-            ColorTable table = null;
-            switch (paletteType) {
-                case MPD_PaletteType.GroundPalette:  table = MPD_File.GroundPaletteColorTable;  break;
-                case MPD_PaletteType.SkyPalette:     table = MPD_File.SkyPaletteColorTable;     break;
-                case MPD_PaletteType.TexturePalette: table = MPD_File.TexturePaletteColorTable; break;
-            }
-            if (table == null)
-                return false;
-
-            table.Palette.Replace(palette.Colors);
-            return true;
         }
 
         public IMPD_File MPD_File { get; }

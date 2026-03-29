@@ -19,12 +19,13 @@ namespace SF3.Models.Structs.MPD.Plane {
             Palette        = palette;
             ZeroIsTransparent = zeroIsTransparent;
 
-            UpdateImages();
-        }
-
-        public void UpdateImages() {
             Tileset = new MultiChunkTexture(TilesetDatas, isTiled: true, Palette, ZeroIsTransparent, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
             TiledImage = new InMemoryTextureData(MPD_TiledPlane.CreateTiledImageData(Tileset, TileAssignment), Palette, ZeroIsTransparent, ImageDataCanSet.Never, IndexedColorUpdateStrategy.MatchToExistingPalette);
+        }
+
+        public void Invalidate() {
+            ((MultiChunkTexture) Tileset)?.Invalidate();
+            ((InMemoryTextureData) TiledImage)?.Invalidate();
         }
 
         public IByteData[] TilesetDatas { get; }
