@@ -150,8 +150,8 @@ namespace SF3.MPD.Extensions {
             var tilemapWidth  = heightmapWidth + 1;
             var tilemapHeight = heightmapHeight + 1;
             var tiles = new IMPD_SurfaceTile[tilemapWidth, tilemapHeight];
-            for (int y = 0; y < tilemapWidth; y++)
-                for (int x = 0; x < tilemapHeight; x++)
+            for (int y = 0; y < tilemapHeight; y++)
+                for (int x = 0; x < tilemapWidth; x++)
                     tiles[x, y] = GetTileIfExists(vx1 + x - 2, vy1 + y - 2);
 
             // Function to fetch a set of tiles to consider for fetching vertex heights for a given vertex.
