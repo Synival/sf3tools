@@ -1,5 +1,4 @@
-﻿using System;
-using CommonLib.Imaging;
+﻿using CommonLib.Imaging;
 using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
@@ -12,34 +11,28 @@ namespace SF3.Models.Structs.MPD.Plane {
             IByteData tilesetData1,
             IByteData tilesetData2,
             IMPD_PlaneTileAssignment tileAssignment,
-            TexturePixelFormat paletteType,
-            Func<IPalette> paletteGetter,
-            Action<IPalette> paletteSetter,
+            IPalette palette,
             bool zeroIsTransparent
         ) {
             TilesetDatas   = new IByteData[] { tilesetData1, tilesetData2 };
             TileAssignment = tileAssignment;
-            PaletteType    = paletteType;
-            PaletteGetter  = paletteGetter;
-            PaletteSetter  = paletteSetter;
+            Palette        = palette;
             ZeroIsTransparent = zeroIsTransparent;
 
             UpdateImages();
         }
 
         public void UpdateImages() {
-            Tileset = new MultiChunkTextureIndexed(TilesetDatas, PaletteType, PaletteGetter, PaletteSetter, zeroIsTransparent: ZeroIsTransparent, isTiled: true);
-            TiledImage = new InMemoryTextureData(MPD_TiledPlane.CreateTiledImageData(Tileset, TileAssignment), PaletteGetter(), zeroIsTransparent: ZeroIsTransparent, ImageDataCanSet.Never, IndexedColorUpdateStrategy.MatchToExistingPalette);
+            Tileset = new MultiChunkTextureIndexed(TilesetDatas, isTiled: true, Palette, ZeroIsTransparent, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
+            TiledImage = new InMemoryTextureData(MPD_TiledPlane.CreateTiledImageData(Tileset, TileAssignment), Palette, ZeroIsTransparent, ImageDataCanSet.Never, IndexedColorUpdateStrategy.MatchToExistingPalette);
         }
 
-        public ITextureData Tileset { get; private set; }
-        public IMPD_PlaneTileAssignment TileAssignment { get; private set; }
-        public ITextureData TiledImage { get; private set; }
-
         public IByteData[] TilesetDatas { get; }
-        public TexturePixelFormat PaletteType { get; }
-        public Func<IPalette> PaletteGetter { get; }
-        public Action<IPalette> PaletteSetter { get; }
+        public IMPD_PlaneTileAssignment TileAssignment { get; private set; }
+        public IPalette Palette { get; }
         public bool ZeroIsTransparent { get; }
+
+        public ITextureData Tileset { get; private set; }
+        public ITextureData TiledImage { get; private set; }
     }
 }

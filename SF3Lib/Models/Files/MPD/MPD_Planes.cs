@@ -23,10 +23,11 @@ namespace SF3.Models.Files.MPD {
                 try {
                     groundImage = new MultiChunkTextureIndexed(
                         MPD_File.GroundImageChunkDatas.Select(x => x.DecompressedData).ToArray(),
-                        TexturePixelFormat.Indexed8Bit,
-                        () => GroundPalette ?? c_fakePalette,
-                        palette => TrySetPalette(MPD_PaletteType.GroundPalette, palette),
-                        zeroIsTransparent: false, isTiled: false
+                        isTiled: false,
+                        GroundPalette ?? c_fakePalette,
+                        zeroIsTransparent: false,
+                        ImageDataCanSet.CanSet8Bit,
+                        IndexedColorUpdateStrategy.UpdateExistingPalette
                     );
                 }
                 catch {
@@ -60,9 +61,7 @@ namespace SF3.Models.Files.MPD {
                                 MPD_File.GroundTileAssignmentChunks[0].PlaneTileTextureRowTable,
                                 MPD_File.GroundTileAssignmentChunks[1].PlaneTileTextureRowTable
                             ),
-                            TexturePixelFormat.Indexed8Bit,
-                            () => GroundPalette ?? c_fakePalette,
-                            palette => TrySetPalette(MPD_PaletteType.GroundPalette, palette),
+                            GroundPalette ?? c_fakePalette,
                             zeroIsTransparent: false
                         );
                     }
@@ -79,10 +78,11 @@ namespace SF3.Models.Files.MPD {
                 try {
                     backgroundImage = new MultiChunkTextureIndexed(
                         MPD_File.BackgroundChunkDatas.Select(x => x.DecompressedData).ToArray(),
-                        TexturePixelFormat.Indexed8Bit,
-                        () => GroundPalette ?? c_fakePalette,
-                        palette => TrySetPalette(MPD_PaletteType.GroundPalette, palette),
-                        zeroIsTransparent: false, isTiled: false
+                        isTiled: false,
+                        GroundPalette,
+                        zeroIsTransparent: false,
+                        ImageDataCanSet.CanSet8Bit,
+                        IndexedColorUpdateStrategy.UpdateExistingPalette
                     );
                 }
                 catch {
@@ -97,10 +97,11 @@ namespace SF3.Models.Files.MPD {
                 try {
                     skyImage = new MultiChunkTextureIndexed(
                         MPD_File.SkyChunkDatas.Select(x => x.DecompressedData).ToArray(),
-                        TexturePixelFormat.Indexed8Bit,
-                        () => SkyPalette ?? c_fakePalette,
-                        palette => TrySetPalette(MPD_PaletteType.SkyPalette, palette),
-                        zeroIsTransparent: false, isTiled: false
+                        isTiled: false,
+                        SkyPalette,
+                        zeroIsTransparent: false,
+                        ImageDataCanSet.CanSet8Bit,
+                        IndexedColorUpdateStrategy.UpdateExistingPalette
                     );
                 }
                 catch {
@@ -120,9 +121,7 @@ namespace SF3.Models.Files.MPD {
                             MPD_File.ForegroundTileChunkDatas[0].DecompressedData,
                             MPD_File.ForegroundTileChunkDatas[1].DecompressedData,
                             new MPD_ForegroundPlaneTileAssignment(MPD_File.ForegroundTileAssignmentChunk.PlaneTileTextureRowTable),
-                            TexturePixelFormat.Indexed8Bit,
-                            () => SkyPalette ?? c_fakePalette,
-                            palette => TrySetPalette(MPD_PaletteType.SkyPalette, palette),
+                            SkyPalette,
                             zeroIsTransparent: true
                         );
                     }
