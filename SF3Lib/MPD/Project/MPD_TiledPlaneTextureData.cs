@@ -9,7 +9,7 @@ namespace SF3.MPD.Project {
         }
 
         private MPD_TiledPlaneTextureData(MPD_TiledPlaneTextureDataSource dataSource, IPalette palette, bool zeroIsTransparent)
-        : base(dataSource.TileAssignment.Width * 8, dataSource.TileAssignment.Height * 8, TexturePixelFormat.Indexed8Bit, palette, zeroIsTransparent, ImageDataCanSet.Never, dataSource, IndexedColorUpdateStrategy.DontUpdate) {
+        : base((dataSource.TileAssignment?.Width ?? 0) * 8, (dataSource.TileAssignment?.Height ?? 0) * 8, TexturePixelFormat.Indexed8Bit, palette, zeroIsTransparent, ImageDataCanSet.Never, dataSource, IndexedColorUpdateStrategy.DontUpdate) {
         }
     }
 }

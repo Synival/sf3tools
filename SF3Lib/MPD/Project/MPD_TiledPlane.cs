@@ -1,20 +1,24 @@
-﻿using CommonLib.Extensions;
+﻿using System;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Interfaces;
 
 namespace SF3.MPD.Project {
-    public class MPD_TiledPlane : IMPD_TiledPlane {
+    public class MPD_TiledPlane : IMPD_TiledPlane, IDisposable {
         public MPD_TiledPlane(IMPD_TiledPlane original, IPalette palette) {
             if (original.Tileset != null) {
                 Tileset = new InMemoryTextureData(original.Tileset, palette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette);
                 ((InMemoryTextureData) Tileset).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
+                Tileset.Invalidated += InvalidateTiledImage;
             }
+
             if (original.TileAssignment != null)
                 TileAssignment = new MPD_PlaneTileAssignment(original.TileAssignment);
+
             if (original.TiledImage != null)
-                TiledImage = new InMemoryTextureData(original.TiledImage, palette, ImageDataCanSet.Never, IndexedColorUpdateStrategy.UpdateExistingPalette);
+                TiledImage = new MPD_TiledPlaneTextureData(original.TiledImage, TileAssignment, palette, original.TiledImage.ZeroIsTransparent);
         }
 
         public static MPD_TiledPlane FromJToken(JToken token, IPalette palette, int tilesWidth, int tilesHeight)
@@ -24,17 +28,38 @@ namespace SF3.MPD.Project {
 
             Tileset = jObject.GetValueIfExists("Tileset",
                 t => InMemoryTextureData.FromJToken(t, 512, 256, TexturePixelFormat.Indexed8Bit, false, palette, ImageDataCanSet.CanSet8Bit, IndexedColorUpdateStrategy.UpdateExistingPalette));
-            if (Tileset != null)
+            if (Tileset != null) {
                 ((InMemoryTextureData) Tileset).Add8BitValidator((data, _, _1, _2) => TextureDataValidators.IsSameDimensions(data, 512, 256));
+                Tileset.Invalidated += InvalidateTiledImage;
+            }
 
             TileAssignment = jObject.GetValueIfExists("TileAssignment",
                 t => MPD_PlaneTileAssignment.FromJToken(t, tilesWidth, tilesHeight));
 
             if (Tileset != null && TileAssignment != null)
-                TiledImage = new InMemoryTextureData(CreateTiledImageData(Tileset, TileAssignment), palette, zeroIsTransparent: false, ImageDataCanSet.Never, IndexedColorUpdateStrategy.UpdateExistingPalette);
+                TiledImage = new MPD_TiledPlaneTextureData(Tileset, TileAssignment, palette, zeroIsTransparent: false);
         }
 
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) {
+            if (!_disposedValue) {
+                if (disposing && Tileset != null)
+                    Tileset.Invalidated -= InvalidateTiledImage;
+                _disposedValue = true;
+            }
+        }
+
+        protected void InvalidateTiledImage(object sender, EventArgs args)
+            => ((MPD_TiledPlaneTextureData) TiledImage)?.Invalidate();
+
         public static byte[,] CreateTiledImageData(ITextureData tilesetImage, IMPD_PlaneTileAssignment tileAssignment) {
+            if (tilesetImage == null || tileAssignment == null)
+                return null;
+
             var outputImageData = new byte[tileAssignment.Width * 8, tileAssignment.Height * 8];
             var inputImageData  = tilesetImage.ImageData8Bit;
 
@@ -59,5 +84,7 @@ namespace SF3.MPD.Project {
         public ITextureData Tileset { get; set; }
         public IMPD_PlaneTileAssignment TileAssignment { get; set; }
         public ITextureData TiledImage { get; set; }
+
+        private bool _disposedValue;
     }
 }
