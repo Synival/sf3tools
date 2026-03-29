@@ -83,7 +83,11 @@ namespace SF3.Win.OpenGL.MPD {
                 return;
 
             var texInfo = Shader.GetTextureInfo(TextureUnit.Texture0);
-            var actorsGrouped = currentScene.Actors.OrderBy(x => x.SpriteID).GroupBy(x => x.SpriteID).ToArray();
+            var actorsGrouped = currentScene.Actors
+                .Take(currentScene.NumActors)
+                .OrderBy(x => x.SpriteID)
+                .GroupBy(x => x.SpriteID)
+                .ToDictionary(x => x.Key, x => x.ToArray());
 
             var spriteIds = actorsGrouped.Select(x => x.Key).ToArray();
             BuildActorTextureAtlas(spriteIds);
@@ -139,7 +143,7 @@ namespace SF3.Win.OpenGL.MPD {
                 ModelsBySpriteID[spriteId] = new QuadModel([spriteQuad]);
                 ShadowsBySpriteID[spriteId] = new QuadModel([shadowQuad]);
 
-                ActorsBySpriteID[spriteId] = actors
+                ActorsBySpriteID[spriteId] = actors.Value
                     .Select(x => {
                         var actorX = x.ActorX;
                         var actorZ = x.ActorZ;

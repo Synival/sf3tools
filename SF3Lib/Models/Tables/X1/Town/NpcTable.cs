@@ -44,6 +44,7 @@ namespace SF3.Models.Tables.X1.Town {
 
         public bool IsBattle => false;
         public string SceneName => Name;
+        public int NumActors => Count;
         public IReadOnlyList<IActor> Actors => this;
         public int NumZones => 0;
         public IReadOnlyList<Zone> Zones => null;

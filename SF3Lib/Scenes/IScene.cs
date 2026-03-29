@@ -18,6 +18,11 @@ namespace SF3.Scenes {
         string SceneName { get; }
 
         /// <summary>
+        /// Number of actors in the scene.
+        /// </summary>
+        int NumActors { get; }
+
+        /// <summary>
         /// Actors in the scene.
         /// </summary>
         IReadOnlyList<IActor> Actors { get; }

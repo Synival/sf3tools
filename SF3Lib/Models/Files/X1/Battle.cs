@@ -70,6 +70,7 @@ namespace SF3.Models.Files.X1 {
 
         public bool IsBattle => true;
         public string SceneName { get; }
+        public int NumActors => BattleHeader.NumSlots;
         public IReadOnlyList<IActor> Actors => SlotTable;
         public int NumZones => BattleHeader.NumZones;
         public IReadOnlyList<Zone> Zones => ZoneTable;
