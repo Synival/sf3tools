@@ -23,7 +23,7 @@ namespace X1_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-            return MatchFuncs.HasWeirdCondFlags(filename, x1File);
+            return MatchFuncs.DumpBattleAIs(filename, x1File);
         }
 
         public static void Main(string[] args) {
@@ -53,6 +53,8 @@ namespace X1_Analyzer {
 
                 Parallel.ForEach(Partitioner.Create(filesKv.Value), parallelOptions, file => {
                     var filename = Path.GetFileNameWithoutExtension(file);
+                    if (filename == "X1SAR_S2")
+                        return;
 
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));

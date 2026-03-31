@@ -1,5 +1,9 @@
 ﻿namespace SF3.Types {
     public enum AITargetType {
+        Special00 = 0x00,
+        Special01 = 0x01,
+        Special02 = 0x02,
+
         Location00 = 0x32,
         Location01 = 0x33,
         Location02 = 0x34,
@@ -16,6 +20,22 @@
         Location0D = 0x3F,
         Location0E = 0x40,
         Location0F = 0x41,
+        Location10 = 0x42,
+        Location11 = 0x43,
+        Location12 = 0x44,
+        Location13 = 0x45,
+        Location14 = 0x46,
+        Location15 = 0x47,
+        Location16 = 0x48,
+        Location17 = 0x49,
+        Location18 = 0x4A,
+        Location19 = 0x4B,
+        Location1A = 0x4C,
+        Location1B = 0x4D,
+        Location1C = 0x4E,
+        Location1D = 0x4F,
+        Location1E = 0x50,
+        Location1F = 0x51,
 
         Enemy80 = 0x80,
         Enemy81 = 0x81,
@@ -81,6 +101,7 @@
         EnemyBD = 0xBD,
         EnemyBE = 0xBE,
         EnemyBF = 0xBF,
+
         Path00  = 0xC0,
         Path01  = 0xC1,
         Path02  = 0xC2,
