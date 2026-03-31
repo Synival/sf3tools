@@ -23,7 +23,44 @@ namespace X1_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-            return MatchFuncs.DumpBattleAIs(filename, x1File);
+            return MatchFuncs.HasWeirdPath(filename, x1File);
+        }
+
+        private static int s_logIndex = 0;
+        private static Dictionary<int, List<string>> s_logQueue = [];
+        private static HashSet<int> s_logsDone = [];
+
+        public static void LogAtIndex(int index, string log) {
+            if (s_logIndex == index) {
+                Console.WriteLine(log);
+                return;
+            }
+
+            if (!s_logQueue.ContainsKey(index))
+                s_logQueue[index] = [log];
+            else
+                s_logQueue[index].Add(log);
+        }
+
+        public static void NextLogIndex() {
+            s_logIndex++;
+            if (s_logQueue.TryGetValue(s_logIndex, out var logs)) {
+                foreach (var log in logs)
+                    Console.WriteLine(log);
+                s_logQueue.Remove(s_logIndex);
+            }
+        }
+
+        public static void DoneWithLogIndex(int index) {
+            s_logsDone.Add(index);
+            while (s_logsDone.Contains(s_logIndex))
+                NextLogIndex();
+        }
+
+        public static void ResetLogging() {
+            s_logIndex = 0;
+            s_logQueue.Clear();
+            s_logsDone.Clear();
         }
 
         public static void Main(string[] args) {
@@ -51,10 +88,18 @@ namespace X1_Analyzer {
                     MaxDegreeOfParallelism = -1
                 };
 
-                Parallel.ForEach(Partitioner.Create(filesKv.Value), parallelOptions, file => {
+                var filenamesWithIndex = filesKv.Value.Select((x, i) => (File: x, Index: i)).ToArray();
+
+                ResetLogging();
+                Parallel.ForEach(Partitioner.Create(filenamesWithIndex), parallelOptions, fileWithIndex => {
+                    var file = fileWithIndex.File;
+                    int fileIndex = fileWithIndex.Index;
+
                     var filename = Path.GetFileNameWithoutExtension(file);
-                    if (filename == "X1SAR_S2")
+                    if (filename == "X1SAR_S2") {
+                        DoneWithLogIndex(fileIndex);
                         return;
+                    }
 
                     // Get a byte data editing context for the file.
                     var byteData = new ByteData(new ByteArray(File.ReadAllBytes(file)));
@@ -66,16 +111,18 @@ namespace X1_Analyzer {
                             var matchReports = X1_Match_Func(filename, x1File);
 
                             // If the match is 'null', that means we're just skipping this file completely.
-                            if (matchReports == null)
+                            if (matchReports == null) {
+                                DoneWithLogIndex(fileIndex);
                                 return;
+                            }
 
                             mutex.WaitOne();
                             try {
                                 // List the file and any report we may have from X1_Match_Func().
                                 var fileStr = GetFileString(scenario, file, x1File);
-                                Console.WriteLine(fileStr + " | ");
+                                LogAtIndex(fileIndex, fileStr + " | ");
                                 foreach (var mr in matchReports)
-                                    Console.WriteLine("    " + mr);
+                                    LogAtIndex(fileIndex, "    " + mr);
 
                                 if (matchReports.Length > 0)
                                     matchSet.Add(fileStr);
@@ -83,10 +130,11 @@ namespace X1_Analyzer {
                                     nomatchSet.Add(fileStr);
                             }
                             finally {
+                                DoneWithLogIndex(fileIndex);
                                 mutex.ReleaseMutex();
                             }
 
-                            ScanForErrorsAndReport(scenario, x1File);
+                            //ScanForErrorsAndReport(scenario, x1File);
                         }
                     }
                     catch (Exception e) {

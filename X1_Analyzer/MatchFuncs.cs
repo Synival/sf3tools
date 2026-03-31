@@ -146,7 +146,7 @@ namespace X1_Analyzer {
         public static string FormatAIRow(string filename, MapLeaderType leader, Battle battle, Slot slot, INameGetterContext ngc) {
             return
                 $"{filename,-8}, {leader,-7}: " +
-                $"{slot.ID:X02} - {slot.EnemyID:X02} ({ngc.GetName(null, null, slot.EnemyID, [NamedValueType.Monster]),-20}) - " +
+                $"{slot.ID:X02} - {slot.EnemyID:X02} ({ngc.GetName(null, null, slot.EnemyID, [NamedValueType.Monster]),-30}) - " +
                 $"{slot.DefaultAIIndex:X02}, " +
                 "AI:[" +
                   $"1:({slot.AI1Tag:X02}{slot.AI1Type:X02}{slot.AI1Aggr:X02}), " +
