@@ -23,7 +23,7 @@ namespace X1_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-            return MatchFuncs.HasWeirdPath(filename, x1File);
+            return MatchFuncs.HasVerySpecialAI(filename, x1File);
         }
 
         private static int s_logIndex = 0;

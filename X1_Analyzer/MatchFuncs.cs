@@ -143,6 +143,12 @@ namespace X1_Analyzer {
             return AISearchBase(filename, x1File, hasWeirdZone);
         }
 
+        public static string[]? HasBattleOrFlagID(string filename, IX1_File x1File)
+            => AISearchBase(filename, x1File, (battle, slot) => slot.EnemyID != 0x5F && slot.FlagOrBattleID != 0);
+
+        public static string[]? HasVerySpecialAI(string filename, IX1_File x1File)
+            => AISearchBase(filename, x1File, (battle, slot) => GetAIs(slot).Any(x => x.IsSpecial && x.Tag >= 0x02));
+
         public static string FormatAIRow(string filename, MapLeaderType leader, Battle battle, Slot slot, INameGetterContext ngc) {
             return
                 $"{filename,-8}, {leader,-7}: " +
@@ -159,7 +165,8 @@ namespace X1_Analyzer {
                   $"2:({slot.Cond2Zone:X02}{slot.Cond2Type:X02}{slot.Cond2AIIndex1:X02}{slot.Cond2AIIndex2:X02}), " +
                   $"3:({slot.Cond3Zone:X02}{slot.Cond3Type:X02}{slot.Cond3AIIndex1:X02}{slot.Cond3AIIndex2:X02}), " +
                   $"4:({slot.Cond4Zone:X02}{slot.Cond4Type:X02}{slot.Cond4AIIndex1:X02}{slot.Cond4AIIndex2:X02})" +
-                "]";
+                "], " +
+                $"{slot.FlagOrBattleID:X2}";
         }
     }
 }
