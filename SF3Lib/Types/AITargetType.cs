@@ -1,7 +1,7 @@
 ﻿namespace SF3.Types {
     public enum AITargetType {
         Leader   = 0x00,
-        Weakest  = 0x01,
+        Closest  = 0x01,
         BattleID = 0x02,
 
         Location00 = 0x32,

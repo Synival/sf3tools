@@ -6,6 +6,7 @@ namespace SF3.Types {
         Synbios = 0x00,
         Medion  = 0x01,
         Julian  = 0x02,
-        Extra   = 0x03
+        Extra   = 0x03,
+        Unknown = 0x04
     }
 }

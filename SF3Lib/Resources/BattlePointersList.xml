@@ -4,4 +4,5 @@
     <item value="0x01" name="Medion" />
     <item value="0x02" name="Julian" />
     <item value="0x03" name="Extra" />
+    <item value="0x04" name="Alt" />
 </items>

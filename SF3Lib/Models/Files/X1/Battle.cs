@@ -29,14 +29,15 @@ namespace SF3.Models.Files.X1 {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var enemyTableSize = HasLargeEnemyTable ? 0xe9a : 0xa8a;
+            var enemyTableSize = HasLargeEnemyTable ? 0xea0 : 0xa90;
 
             // Determine addresses of sub-tables.
             var headerAddress         = Address;
             var slotAddress           = headerAddress + 0x0a;
-            var zoneAddress           = slotAddress + enemyTableSize + 0x06;
+            var zoneAddress           = slotAddress + enemyTableSize;
             var aiAddress             = zoneAddress + 0x120;
             var customMovementAddress = aiAddress + 0x80;
+            var mapMoveCoordsAddr     = customMovementAddress + 0x2C0;
 
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
@@ -45,6 +46,7 @@ namespace SF3.Models.Files.X1 {
                 (ZoneTable             = ZoneTable.Create            (Data, "Zones",          zoneAddress)),
                 (AITargetPositionTable = AITargetPositionTable.Create(Data, "AI",             aiAddress)),
                 (ScriptedMovementTable = ScriptedMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
+                (MapMoveCoordTable     = MapMoveCoordTable.Create    (Data, "MapMoveCoords",  mapMoveCoordsAddr)),
             };
         }
 
@@ -67,6 +69,8 @@ namespace SF3.Models.Files.X1 {
         public AITargetPositionTable AITargetPositionTable { get; private set; }
         [BulkCopyRecurse]
         public ScriptedMovementTable ScriptedMovementTable { get; private set; }
+        [BulkCopyRecurse]
+        public MapMoveCoordTable MapMoveCoordTable { get; private set; }
 
         public bool IsBattle => true;
         public string SceneName { get; }

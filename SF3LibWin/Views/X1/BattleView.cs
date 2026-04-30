@@ -23,9 +23,11 @@ namespace SF3.Win.Views.X1 {
             if (Model.ZoneTable != null)
                 CreateChild(new TableView("Zones", Model.ZoneTable, ngc));
             if (Model.AITargetPositionTable != null)
-                CreateChild(new TableView("AI Target Position", Model.AITargetPositionTable, ngc));
+                CreateChild(new TableView("Locations", Model.AITargetPositionTable, ngc));
             if (Model.ScriptedMovementTable != null)
-                CreateChild(new TableView("Scripted Movement", Model.ScriptedMovementTable, ngc));
+                CreateChild(new TableView("Paths", Model.ScriptedMovementTable, ngc));
+            if (Model.MapMoveCoordTable != null)
+                CreateChild(new TableView("Map Move Coords", Model.MapMoveCoordTable, ngc));
 
             return Control;
         }

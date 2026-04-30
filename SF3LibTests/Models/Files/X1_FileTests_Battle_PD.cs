@@ -25,11 +25,11 @@ namespace SF3.Tests.Models.Files {
             var battle = file.Battles[MapLeaderType.Synbios];
             var table = battle.AITargetPositionTable;
 
-            Assert.AreEqual(8, table[0].TargetX);
-            Assert.AreEqual(13, table[0].TargetZ);
+            Assert.AreEqual(8, table[0].X);
+            Assert.AreEqual(13, table[0].Z);
 
-            Assert.AreEqual(7, table[1].TargetX);
-            Assert.AreEqual(12, table[1].TargetZ);
+            Assert.AreEqual(7, table[1].X);
+            Assert.AreEqual(12, table[1].Z);
 
             Assert.AreEqual(32, table.Count);
         }
