@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.X1.Battle {
             => Create(() => new AITargetPositionTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new AITargetPosition(Data, id, "AITargetPosition" + id.ToString("D2"), address));
+            => Load((id, address) => new AITargetPosition(Data, id, "Position" + id.ToString("D2"), address));
     }
 }

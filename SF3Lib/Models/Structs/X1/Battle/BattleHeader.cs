@@ -5,17 +5,17 @@ namespace SF3.Models.Structs.X1.Battle {
     public class BattleHeader : Struct {
         private readonly int _numSlotsAddr;
         private readonly int _numZonesAddr;
-        private readonly int _numAITargetsAddr;
-        private readonly int _numScriptedMovementsAddr;
+        private readonly int _numPositionsAddr;
+        private readonly int _numPathsAddr;
         private readonly int _numMapMoveCoordsAddr;
 
         public BattleHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x0A) {
-            _numSlotsAddr             = Address + 0x00; // 2 bytes
-            _numZonesAddr             = Address + 0x02; // 2 bytes
-            _numAITargetsAddr         = Address + 0x04; // 2 bytes
-            _numScriptedMovementsAddr = Address + 0x06; // 2 bytes
-            _numMapMoveCoordsAddr     = Address + 0x08; // 2 bytes
+            _numSlotsAddr         = Address + 0x00; // 2 bytes
+            _numZonesAddr         = Address + 0x02; // 2 bytes
+            _numPositionsAddr     = Address + 0x04; // 2 bytes
+            _numPathsAddr         = Address + 0x06; // 2 bytes
+            _numMapMoveCoordsAddr = Address + 0x08; // 2 bytes
         }
 
         [TableViewModelColumn(addressField: nameof(_numSlotsAddr), displayOrder: 1, displayFormat: "X2")]
@@ -32,18 +32,18 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetWord(_numZonesAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_numAITargetsAddr), displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_numPositionsAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
-        public int NumAITargets {
-            get => Data.GetWord(_numAITargetsAddr);
-            set => Data.SetWord(_numAITargetsAddr, value);
+        public int NumPositions {
+            get => Data.GetWord(_numPositionsAddr);
+            set => Data.SetWord(_numPositionsAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_numScriptedMovementsAddr), displayOrder: 7, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_numPathsAddr), displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
-        public int NumScriptedMovements {
-            get => Data.GetWord(_numScriptedMovementsAddr);
-            set => Data.SetWord(_numScriptedMovementsAddr, value);
+        public int NumPaths {
+            get => Data.GetWord(_numPathsAddr);
+            set => Data.SetWord(_numPathsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numMapMoveCoordsAddr), displayOrder: 8, displayFormat: "X2")]

@@ -51,7 +51,7 @@ namespace SF3.Tests.Models.Files {
         public void CustomMovementTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.Battles[MapLeaderType.Synbios];
-            var table = battle.ScriptedMovementTable;
+            var table = battle.AITarrgetPathTable;
 
             Assert.AreEqual(27, table[0].XPos1);
             Assert.AreEqual(41, table[0].ZPos1);

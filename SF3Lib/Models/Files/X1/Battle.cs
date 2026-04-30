@@ -44,8 +44,8 @@ namespace SF3.Models.Files.X1 {
             return new List<ITable>() {
                 (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, PrevBattle?.SlotTable?.Rows?.Last())),
                 (ZoneTable             = ZoneTable.Create            (Data, "Zones",          zoneAddress)),
-                (AITargetPositionTable = AITargetPositionTable.Create(Data, "AI",             aiAddress)),
-                (ScriptedMovementTable = ScriptedMovementTable.Create(Data, "CustomMovement", customMovementAddress)),
+                (AITargetPositionTable = AITargetPositionTable.Create(Data, "Positions",      aiAddress)),
+                (AITarrgetPathTable    = AITargetPathTable.Create    (Data, "Paths",          customMovementAddress)),
                 (MapMoveCoordTable     = MapMoveCoordTable.Create    (Data, "MapMoveCoords",  mapMoveCoordsAddr)),
             };
         }
@@ -68,7 +68,7 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public AITargetPositionTable AITargetPositionTable { get; private set; }
         [BulkCopyRecurse]
-        public ScriptedMovementTable ScriptedMovementTable { get; private set; }
+        public AITargetPathTable AITarrgetPathTable { get; private set; }
         [BulkCopyRecurse]
         public MapMoveCoordTable MapMoveCoordTable { get; private set; }
 

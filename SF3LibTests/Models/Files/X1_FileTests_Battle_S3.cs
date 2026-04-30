@@ -52,7 +52,7 @@ namespace SF3.Tests.Models.Files {
         public void CustomMovementTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.Battles[MapLeaderType.Julian];
-            var table = battle.ScriptedMovementTable;
+            var table = battle.AITarrgetPathTable;
 
             Assert.AreEqual(0, table[0].XPos1);
             Assert.AreEqual(63, table[0].ZPos1);
