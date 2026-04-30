@@ -186,21 +186,21 @@ namespace SF3.Models.Files.X1 {
             NpcTables = npcTables;
 
             if (characterTargetPriorityTablesAddresses >= 0) {
-                CharacterTargetPriorityTables = new CharacterTargetPriorityTable[16];
+                CharacterMoveTargetPriorityTables = new CharacterMoveTargetPriorityTable[16];
                 int tablePointerAddr = characterTargetPriorityTablesAddresses;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetDouble(tablePointerAddr) - (int) RamAddress;
-                    var tableName = "CharacterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
-                    tables.Add(CharacterTargetPriorityTables[i] = CharacterTargetPriorityTable.Create(Data, tableName, tableAddr));
+                    var tableName = "CharacterMoveScoreBonuses 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(CharacterMoveTargetPriorityTables[i] = CharacterMoveTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
                 }
 
-                CharacterTargetUnknownTables = new CharacterTargetUnknownTable[16];
+                CharacterAttackScoreBonusTables = new CharacterAttackScoreBonusTable[16];
                 tablePointerAddr = characterTargetPriorityTablesAddresses + 0x140;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetDouble(tablePointerAddr) - (int) RamAddress;
-                    var tableName = "UnknownTableAfterTargetPriorities 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
-                    tables.Add(CharacterTargetUnknownTables[i] = CharacterTargetUnknownTable.Create(Data, tableName, tableAddr));
+                    var tableName = "CharacterAttackScoreBonuses 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(CharacterAttackScoreBonusTables[i] = CharacterAttackScoreBonusTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
                 }
             }
@@ -872,9 +872,9 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public TileMovementTable TileMovementTable { get; private set; }
         [BulkCopyRecurse]
-        public CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; private set; }
+        public CharacterMoveTargetPriorityTable[] CharacterMoveTargetPriorityTables { get; private set; }
         [BulkCopyRecurse]
-        public CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; private set; }
+        public CharacterAttackScoreBonusTable[] CharacterAttackScoreBonusTables { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, ModelInstanceGroupTable> ModelInstanceGroupTablesByAddress { get; private set; }

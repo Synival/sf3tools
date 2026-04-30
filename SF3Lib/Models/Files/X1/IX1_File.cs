@@ -21,8 +21,8 @@ namespace SF3.Models.Files.X1 {
         Dictionary<MapLeaderType, Battle> Battles { get; }
 
         TileMovementTable TileMovementTable { get; }
-        CharacterTargetPriorityTable[] CharacterTargetPriorityTables { get; }
-        CharacterTargetUnknownTable[] CharacterTargetUnknownTables { get; }
+        CharacterMoveTargetPriorityTable[] CharacterMoveTargetPriorityTables { get; }
+        CharacterAttackScoreBonusTable[] CharacterAttackScoreBonusTables { get; }
         Dictionary<uint, ModelInstanceGroupTable> ModelInstanceGroupTablesByAddress { get; }
         Dictionary<uint, ModelInstanceTable> ModelInstanceTablesByAddress { get; }
         Dictionary<uint, ActorScript> ScriptsByAddress { get; }

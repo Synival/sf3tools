@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using SF3.Models.Files.X1;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
+using SF3.Models.Tables.X1.Battle;
 using SF3.Models.Tables.X1.Town;
 
 namespace SF3.Win.Views.X1 {
@@ -43,11 +44,11 @@ namespace SF3.Win.Views.X1 {
             if (Model.TileMovementTable != null)
                 CreateChild(new TableView("Tile Data (Scn2+)", Model.TileMovementTable, ngc));
 
-            if (Model.CharacterTargetPriorityTables != null)
-                CreateChild(new TableArrayView<CharacterTargetPriorityTable>("Character Target Priorities", Model.CharacterTargetPriorityTables, ngc));
+            if (Model.CharacterMoveTargetPriorityTables != null)
+                CreateChild(new TableArrayView<CharacterMoveTargetPriorityTable>("Character Move Target Priorities", Model.CharacterMoveTargetPriorityTables, ngc));
 
-            if (Model.CharacterTargetUnknownTables != null)
-                CreateChild(new TableArrayView<CharacterTargetUnknownTable>("Unknown 16 Tables", Model.CharacterTargetUnknownTables, ngc));
+            if (Model.CharacterAttackScoreBonusTables != null)
+                CreateChild(new TableArrayView<CharacterAttackScoreBonusTable>("Character Attack Score Bonuses", Model.CharacterAttackScoreBonusTables, ngc));
 
             if (Model.ModelInstanceGroupTablesByAddress?.Count > 0) {
                 var count = Model.ModelInstanceGroupTablesByAddress.Count;
