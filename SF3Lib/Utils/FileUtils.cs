@@ -13,6 +13,7 @@ using SF3.Models.Files.KAO;
 using SF3.Models.Files.MPD;
 using SF3.Models.Files.X002;
 using SF3.Models.Files.X005;
+using SF3.Models.Files.X007;
 using SF3.Models.Files.X011;
 using SF3.Models.Files.X012;
 using SF3.Models.Files.X013;
@@ -84,6 +85,7 @@ namespace SF3.Utils {
                 else if (preExtension.Contains("X1"))      return SF3FileType.X1;
                 else if (preExtension.Contains("X002"))    return SF3FileType.X002;
                 else if (preExtension.Contains("X005"))    return SF3FileType.X005;
+                else if (preExtension.Contains("X007"))    return SF3FileType.X007;
                 else if (preExtension.Contains("X011"))    return SF3FileType.X011;
                 else if (preExtension.Contains("X012"))    return SF3FileType.X012;
                 else if (preExtension.Contains("X013"))    return SF3FileType.X013;
@@ -162,12 +164,16 @@ namespace SF3.Utils {
             switch (paths[paths.Length - 1]) {
                 case "GS-9175":
                 case "MK-81383":
+                case "SCENARIO1":
                     return ScenarioType.Scenario1;
                 case "GS-9188":
+                case "SCENARIO2":
                     return ScenarioType.Scenario2;
                 case "GS-9203":
+                case "SCENARIO3":
                     return ScenarioType.Scenario3;
                 case "6106979":
+                case "PREMIUMDISK":
                     return ScenarioType.PremiumDisk;
             }
 
@@ -211,6 +217,7 @@ namespace SF3.Utils {
                 case SF3FileType.X1BTL99: return X1_File  .Create(byteData, ngc, scenario.Value, true);
                 case SF3FileType.X002:    return X002_File.Create(byteData, ngc, scenario.Value);
                 case SF3FileType.X005:    return X005_File.Create(byteData, ngc, scenario.Value);
+                case SF3FileType.X007:    return X007_File.Create(byteData, ngc, scenario.Value);
                 case SF3FileType.X011:    return X011_File.Create(byteData, ngc, scenario.Value);
                 case SF3FileType.X021:    return X021_File.Create(byteData, ngc, scenario.Value);
                 case SF3FileType.X023:    return X023_File.Create(byteData, ngc, scenario.Value);
@@ -249,6 +256,7 @@ namespace SF3.Utils {
                 case SF3FileType.X1BTL99: return "X1BTL99 File";
                 case SF3FileType.X002:    return "X002 File";
                 case SF3FileType.X005:    return "X005 File";
+                case SF3FileType.X007:    return "X007 File";
                 case SF3FileType.X011:    return "X011 File";
                 case SF3FileType.X012:    return "X012 File";
                 case SF3FileType.X013:    return "X013 File";
@@ -287,6 +295,7 @@ namespace SF3.Utils {
                 case SF3FileType.X1BTL99: return "*X1BTL99*.BIN";
                 case SF3FileType.X002:    return "*X002*.BIN";
                 case SF3FileType.X005:    return "*X005*.BIN";
+                case SF3FileType.X007:    return "*X007*.BIN";
                 case SF3FileType.X011:    return "*X011*.BIN";
                 case SF3FileType.X012:    return "*X012*.BIN";
                 case SF3FileType.X013:    return "*X013*.BIN";
@@ -325,6 +334,7 @@ namespace SF3.Utils {
                 case "*X1*.BIN":      return new SF3FileType[] { SF3FileType.X1 };
                 case "*X002*.BIN":    return new SF3FileType[] { SF3FileType.X002 };
                 case "*X005*.BIN":    return new SF3FileType[] { SF3FileType.X005 };
+                case "*X007*.BIN":    return new SF3FileType[] { SF3FileType.X007 };
                 case "*X011*.BIN":    return new SF3FileType[] { SF3FileType.X011 };
                 case "*X012*.BIN":    return new SF3FileType[] { SF3FileType.X012 };
                 case "*X013*.BIN":    return new SF3FileType[] { SF3FileType.X013 };

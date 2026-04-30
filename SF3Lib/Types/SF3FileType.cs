@@ -4,6 +4,7 @@ namespace SF3.Types {
         X1BTL99      =  1,
         X002         =  2,
         X005         =  3,
+        X007         = 31,
         X011         =  4,
         X012         =  5,
         X013         =  6,
