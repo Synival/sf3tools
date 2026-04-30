@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetByte(_weaponEqTypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_effectsEquipAddr), displayOrder: 25, displayFormat: "X2", displayGroup: "FlagsDebug")]
+        [TableViewModelColumn(addressField: nameof(_effectsEquipAddr), displayOrder: 23, displayFormat: "X2", displayGroup: "Flags")]
         [BulkCopy]
         public int EffectsEquip {
             get => Data.GetByte(_effectsEquipAddr);
@@ -90,7 +90,7 @@ namespace SF3.Models.Structs.X002 {
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 23.3f, displayGroup: "Flags")]
-        public bool HealingItem {
+        public bool Consumable {
             get => Data.GetBit(_effectsEquipAddr, 3);
             set => Data.SetBit(_effectsEquipAddr, 3, value);
         }
@@ -121,7 +121,7 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetBit(_effectsEquipAddr, 7, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_requirementsAddr), displayOrder: 26, displayFormat: "X2", displayGroup: "FlagsDebug")]
+        [TableViewModelColumn(addressField: nameof(_requirementsAddr), displayOrder: 24, displayFormat: "X2", displayGroup: "Flags")]
         [BulkCopy]
         public int Requirements {
             get => Data.GetByte(_requirementsAddr);
