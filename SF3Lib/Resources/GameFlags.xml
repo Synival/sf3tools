@@ -384,70 +384,70 @@
     <item value="0x017D" name="" />
     <item value="0x017E" name="" />
     <item value="0x017F" name="" />
-    <item value="0x0180" name="" />
-    <item value="0x0181" name="" />
-    <item value="0x0182" name="" />
-    <item value="0x0183" name="" />
-    <item value="0x0184" name="" />
-    <item value="0x0185" name="" />
-    <item value="0x0186" name="" />
-    <item value="0x0187" name="" />
-    <item value="0x0188" name="" />
-    <item value="0x0189" name="" />
-    <item value="0x018A" name="" />
-    <item value="0x018B" name="" />
-    <item value="0x018C" name="" />
-    <item value="0x018D" name="" />
-    <item value="0x018E" name="" />
-    <item value="0x018F" name="" />
-    <item value="0x0190" name="" />
-    <item value="0x0191" name="" />
-    <item value="0x0192" name="" />
-    <item value="0x0193" name="" />
-    <item value="0x0194" name="" />
-    <item value="0x0195" name="" />
-    <item value="0x0196" name="" />
-    <item value="0x0197" name="" />
-    <item value="0x0198" name="" />
-    <item value="0x0199" name="" />
-    <item value="0x019A" name="" />
-    <item value="0x019B" name="" />
-    <item value="0x019C" name="" />
-    <item value="0x019D" name="" />
-    <item value="0x019E" name="" />
-    <item value="0x019F" name="" />
-    <item value="0x01A0" name="" />
-    <item value="0x01A1" name="" />
-    <item value="0x01A2" name="" />
-    <item value="0x01A3" name="" />
-    <item value="0x01A4" name="" />
-    <item value="0x01A5" name="" />
-    <item value="0x01A6" name="" />
-    <item value="0x01A7" name="" />
-    <item value="0x01A8" name="" />
-    <item value="0x01A9" name="" />
-    <item value="0x01AA" name="" />
-    <item value="0x01AB" name="" />
-    <item value="0x01AC" name="" />
-    <item value="0x01AD" name="" />
-    <item value="0x01AE" name="" />
-    <item value="0x01AF" name="" />
-    <item value="0x01B0" name="" />
-    <item value="0x01B1" name="" />
-    <item value="0x01B2" name="" />
-    <item value="0x01B3" name="" />
-    <item value="0x01B4" name="" />
-    <item value="0x01B5" name="" />
-    <item value="0x01B6" name="" />
-    <item value="0x01B7" name="" />
-    <item value="0x01B8" name="" />
-    <item value="0x01B9" name="" />
-    <item value="0x01BA" name="" />
-    <item value="0x01BB" name="" />
-    <item value="0x01BC" name="" />
-    <item value="0x01BD" name="" />
-    <item value="0x01BE" name="" />
-    <item value="0x01BF" name="" />
+    <item value="0x0180" name="Medion Monster 1 (1/8)" />
+    <item value="0x0181" name="Medion Monster 1 (2/8)" />
+    <item value="0x0182" name="Medion Monster 1 (3/8)" />
+    <item value="0x0183" name="Medion Monster 1 (4/8)" />
+    <item value="0x0184" name="Medion Monster 1 (5/8)" />
+    <item value="0x0185" name="Medion Monster 1 (6/8)" />
+    <item value="0x0186" name="Medion Monster 1 (7/8)" />
+    <item value="0x0187" name="Medion Monster 1 (8/8)" />
+    <item value="0x0188" name="Medion Monster 2 (1/8)" />
+    <item value="0x0189" name="Medion Monster 2 (2/8)" />
+    <item value="0x018A" name="Medion Monster 2 (3/8)" />
+    <item value="0x018B" name="Medion Monster 2 (4/8)" />
+    <item value="0x018C" name="Medion Monster 2 (5/8)" />
+    <item value="0x018D" name="Medion Monster 2 (6/8)" />
+    <item value="0x018E" name="Medion Monster 2 (7/8)" />
+    <item value="0x018F" name="Medion Monster 2 (8/8)" />
+    <item value="0x0190" name="Medion Monster 3 (1/8)" />
+    <item value="0x0191" name="Medion Monster 3 (2/8)" />
+    <item value="0x0192" name="Medion Monster 3 (3/8)" />
+    <item value="0x0193" name="Medion Monster 3 (4/8)" />
+    <item value="0x0194" name="Medion Monster 3 (5/8)" />
+    <item value="0x0195" name="Medion Monster 3 (6/8)" />
+    <item value="0x0196" name="Medion Monster 3 (7/8)" />
+    <item value="0x0197" name="Medion Monster 3 (8/8)" />
+    <item value="0x0198" name="Medion Monster 4 (1/8)" />
+    <item value="0x0199" name="Medion Monster 4 (2/8)" />
+    <item value="0x019A" name="Medion Monster 4 (3/8)" />
+    <item value="0x019B" name="Medion Monster 4 (4/8)" />
+    <item value="0x019C" name="Medion Monster 4 (5/8)" />
+    <item value="0x019D" name="Medion Monster 4 (6/8)" />
+    <item value="0x019E" name="Medion Monster 4 (7/8)" />
+    <item value="0x019F" name="Medion Monster 4 (8/8)" />
+    <item value="0x01A0" name="Medion Monster 5 (1/8)" />
+    <item value="0x01A1" name="Medion Monster 5 (2/8)" />
+    <item value="0x01A2" name="Medion Monster 5 (3/8)" />
+    <item value="0x01A3" name="Medion Monster 5 (4/8)" />
+    <item value="0x01A4" name="Medion Monster 5 (5/8)" />
+    <item value="0x01A5" name="Medion Monster 5 (6/8)" />
+    <item value="0x01A6" name="Medion Monster 5 (7/8)" />
+    <item value="0x01A7" name="Medion Monster 5 (8/8)" />
+    <item value="0x01A8" name="Medion Monster 6 (1/8)" />
+    <item value="0x01A9" name="Medion Monster 6 (2/8)" />
+    <item value="0x01AA" name="Medion Monster 6 (3/8)" />
+    <item value="0x01AB" name="Medion Monster 6 (4/8)" />
+    <item value="0x01AC" name="Medion Monster 6 (5/8)" />
+    <item value="0x01AD" name="Medion Monster 6 (6/8)" />
+    <item value="0x01AE" name="Medion Monster 6 (7/8)" />
+    <item value="0x01AF" name="Medion Monster 6 (8/8)" />
+    <item value="0x01B0" name="Medion Monster 7 (1/8)" />
+    <item value="0x01B1" name="Medion Monster 7 (2/8)" />
+    <item value="0x01B2" name="Medion Monster 7 (3/8)" />
+    <item value="0x01B3" name="Medion Monster 7 (4/8)" />
+    <item value="0x01B4" name="Medion Monster 7 (5/8)" />
+    <item value="0x01B5" name="Medion Monster 7 (6/8)" />
+    <item value="0x01B6" name="Medion Monster 7 (7/8)" />
+    <item value="0x01B7" name="Medion Monster 7 (8/8)" />
+    <item value="0x01B8" name="Medion Monster 8 (1/8)" />
+    <item value="0x01B9" name="Medion Monster 8 (2/8)" />
+    <item value="0x01BA" name="Medion Monster 8 (3/8)" />
+    <item value="0x01BB" name="Medion Monster 8 (4/8)" />
+    <item value="0x01BC" name="Medion Monster 8 (5/8)" />
+    <item value="0x01BD" name="Medion Monster 8 (6/8)" />
+    <item value="0x01BE" name="Medion Monster 8 (7/8)" />
+    <item value="0x01BF" name="Medion Monster 8 (8/8)" />
     <item value="0x01C0" name="" />
     <item value="0x01C1" name="" />
     <item value="0x01C2" name="" />
@@ -3712,70 +3712,70 @@
     <item value="0x0E7D" name="" />
     <item value="0x0E7E" name="" />
     <item value="0x0E7F" name="" />
-    <item value="0x0E80" name="" />
-    <item value="0x0E81" name="" />
-    <item value="0x0E82" name="" />
-    <item value="0x0E83" name="Left Red Dragon Baersol" />
-    <item value="0x0E84" name="" />
-    <item value="0x0E85" name="" />
-    <item value="0x0E86" name="" />
-    <item value="0x0E87" name="Left Red Dragon Baersol" />
-    <item value="0x0E88" name="" />
-    <item value="0x0E89" name="" />
-    <item value="0x0E8A" name="" />
-    <item value="0x0E8B" name="Right Red Dragon Baersol" />
-    <item value="0x0E8C" name="" />
-    <item value="0x0E8D" name="" />
-    <item value="0x0E8E" name="" />
-    <item value="0x0E8F" name="Right Red Dragon Baersol" />
-    <item value="0x0E90" name="" />
-    <item value="0x0E91" name="" />
-    <item value="0x0E92" name="" />
-    <item value="0x0E93" name="" />
-    <item value="0x0E94" name="" />
-    <item value="0x0E95" name="" />
-    <item value="0x0E96" name="" />
-    <item value="0x0E97" name="" />
-    <item value="0x0E98" name="" />
-    <item value="0x0E99" name="" />
-    <item value="0x0E9A" name="" />
-    <item value="0x0E9B" name="" />
-    <item value="0x0E9C" name="" />
-    <item value="0x0E9D" name="" />
-    <item value="0x0E9E" name="" />
-    <item value="0x0E9F" name="" />
-    <item value="0x0EA0" name="" />
-    <item value="0x0EA1" name="" />
-    <item value="0x0EA2" name="" />
-    <item value="0x0EA3" name="" />
-    <item value="0x0EA4" name="" />
-    <item value="0x0EA5" name="" />
-    <item value="0x0EA6" name="" />
-    <item value="0x0EA7" name="" />
-    <item value="0x0EA8" name="" />
-    <item value="0x0EA9" name="" />
-    <item value="0x0EAA" name="" />
-    <item value="0x0EAB" name="" />
-    <item value="0x0EAC" name="" />
-    <item value="0x0EAD" name="" />
-    <item value="0x0EAE" name="" />
-    <item value="0x0EAF" name="" />
-    <item value="0x0EB0" name="" />
-    <item value="0x0EB1" name="" />
-    <item value="0x0EB2" name="" />
-    <item value="0x0EB3" name="" />
-    <item value="0x0EB4" name="" />
-    <item value="0x0EB5" name="" />
-    <item value="0x0EB6" name="" />
-    <item value="0x0EB7" name="" />
-    <item value="0x0EB8" name="" />
-    <item value="0x0EB9" name="" />
-    <item value="0x0EBA" name="" />
-    <item value="0x0EBB" name="" />
-    <item value="0x0EBC" name="" />
-    <item value="0x0EBD" name="" />
-    <item value="0x0EBE" name="" />
-    <item value="0x0EBF" name="" />
+    <item value="0x0E80" name="Julian Dragon 1 (1/8)" />
+    <item value="0x0E81" name="Julian Dragon 1 (2/8)" />
+    <item value="0x0E82" name="Julian Dragon 1 (3/8)" />
+    <item value="0x0E83" name="Julian Dragon 1 (4/8)" />
+    <item value="0x0E84" name="Julian Dragon 1 (5/8)" />
+    <item value="0x0E85" name="Julian Dragon 1 (6/8)" />
+    <item value="0x0E86" name="Julian Dragon 1 (7/8)" />
+    <item value="0x0E87" name="Julian Dragon 1 (8/8)" />
+    <item value="0x0E88" name="Julian Dragon 2 (1/8)" />
+    <item value="0x0E89" name="Julian Dragon 2 (2/8)" />
+    <item value="0x0E8A" name="Julian Dragon 2 (3/8)" />
+    <item value="0x0E8B" name="Julian Dragon 2 (4/8)" />
+    <item value="0x0E8C" name="Julian Dragon 2 (5/8)" />
+    <item value="0x0E8D" name="Julian Dragon 2 (6/8)" />
+    <item value="0x0E8E" name="Julian Dragon 2 (7/8)" />
+    <item value="0x0E8F" name="Julian Dragon 2 (8/8)" />
+    <item value="0x0E90" name="Julian Dragon 3 (1/8)" />
+    <item value="0x0E91" name="Julian Dragon 3 (2/8)" />
+    <item value="0x0E92" name="Julian Dragon 3 (3/8)" />
+    <item value="0x0E93" name="Julian Dragon 3 (4/8)" />
+    <item value="0x0E94" name="Julian Dragon 3 (5/8)" />
+    <item value="0x0E95" name="Julian Dragon 3 (6/8)" />
+    <item value="0x0E96" name="Julian Dragon 3 (7/8)" />
+    <item value="0x0E97" name="Julian Dragon 3 (8/8)" />
+    <item value="0x0E98" name="Julian Dragon 4 (1/8)" />
+    <item value="0x0E99" name="Julian Dragon 4 (2/8)" />
+    <item value="0x0E9A" name="Julian Dragon 4 (3/8)" />
+    <item value="0x0E9B" name="Julian Dragon 4 (4/8)" />
+    <item value="0x0E9C" name="Julian Dragon 4 (5/8)" />
+    <item value="0x0E9D" name="Julian Dragon 4 (6/8)" />
+    <item value="0x0E9E" name="Julian Dragon 4 (7/8)" />
+    <item value="0x0E9F" name="Julian Dragon 4 (8/8)" />
+    <item value="0x0EA0" name="Julian Dragon 5 (1/8)" />
+    <item value="0x0EA1" name="Julian Dragon 5 (2/8)" />
+    <item value="0x0EA2" name="Julian Dragon 5 (3/8)" />
+    <item value="0x0EA3" name="Julian Dragon 5 (4/8)" />
+    <item value="0x0EA4" name="Julian Dragon 5 (5/8)" />
+    <item value="0x0EA5" name="Julian Dragon 5 (6/8)" />
+    <item value="0x0EA6" name="Julian Dragon 5 (7/8)" />
+    <item value="0x0EA7" name="Julian Dragon 5 (8/8)" />
+    <item value="0x0EA8" name="Julian Dragon 6 (1/8)" />
+    <item value="0x0EA9" name="Julian Dragon 6 (2/8)" />
+    <item value="0x0EAA" name="Julian Dragon 6 (3/8)" />
+    <item value="0x0EAB" name="Julian Dragon 6 (4/8)" />
+    <item value="0x0EAC" name="Julian Dragon 6 (5/8)" />
+    <item value="0x0EAD" name="Julian Dragon 6 (6/8)" />
+    <item value="0x0EAE" name="Julian Dragon 6 (7/8)" />
+    <item value="0x0EAF" name="Julian Dragon 6 (8/8)" />
+    <item value="0x0EB0" name="Julian Dragon 7 (1/8)" />
+    <item value="0x0EB1" name="Julian Dragon 7 (2/8)" />
+    <item value="0x0EB2" name="Julian Dragon 7 (3/8)" />
+    <item value="0x0EB3" name="Julian Dragon 7 (4/8)" />
+    <item value="0x0EB4" name="Julian Dragon 7 (5/8)" />
+    <item value="0x0EB5" name="Julian Dragon 7 (6/8)" />
+    <item value="0x0EB6" name="Julian Dragon 7 (7/8)" />
+    <item value="0x0EB7" name="Julian Dragon 7 (8/8)" />
+    <item value="0x0EB8" name="Julian Dragon 8 (1/8)" />
+    <item value="0x0EB9" name="Julian Dragon 8 (2/8)" />
+    <item value="0x0EBA" name="Julian Dragon 8 (3/8)" />
+    <item value="0x0EBB" name="Julian Dragon 8 (4/8)" />
+    <item value="0x0EBC" name="Julian Dragon 8 (5/8)" />
+    <item value="0x0EBD" name="Julian Dragon 8 (6/8)" />
+    <item value="0x0EBE" name="Julian Dragon 8 (7/8)" />
+    <item value="0x0EBF" name="Julian Dragon 8 (8/8)" />
     <item value="0x0EC0" name="" />
     <item value="0x0EC1" name="" />
     <item value="0x0EC2" name="" />
