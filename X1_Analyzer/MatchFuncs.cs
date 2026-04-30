@@ -18,6 +18,8 @@ namespace X1_Analyzer {
 
         private struct Cond(byte zone, byte type, byte aIIndex1, byte aIIndex2) {
             public byte Zone = zone, Type = type, AIIndex1 = aIIndex1, AIIndex2 = aIIndex2;
+            public readonly bool Exists => Zone != 0xFF;
+            public readonly bool AlwaysCheck => (Zone & 0xF0) == 0x80;
         }
 
         private static AI[] GetAIs(Slot slot) {
@@ -41,7 +43,7 @@ namespace X1_Analyzer {
         public static string[]? HasUnknownBattleFlag(IX1_File x1File) {
             return x1File.Battles?.Any() != true
                 ? null
-                : x1File.Battles.SelectMany(x => x.Value.SlotTable.Rows.Where(y => y.UnknownFlag).Select(y => $"{x.Key}: 0x{y.ID:X2}")).ToArray();
+                : x1File.Battles.SelectMany(x => x.Value.SlotTable.Rows.Where(y => y.IgnoreConditions).Select(y => $"{x.Key}: 0x{y.ID:X2}")).ToArray();
         }
 
         private static string[]? AISearchBase(string filename, IX1_File x1File, Func<Battle, Slot, bool> pred) {
@@ -81,9 +83,19 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasOnlyCond2or3or4(string filename, IX1_File x1File) {
-            bool hasAnyCondFlag0100(Slot slot)
-                => slot.Cond1Type == 0xFF && (slot.Cond2Type != 0xFF || slot.Cond3Type != 0xFF || slot.Cond4Type != 0xFF);
-            return AISearchBase(filename, x1File, (_, slot) => slot.DefaultAIIndex == 0xFF && hasAnyCondFlag0100(slot));
+            bool condsCheck(Slot slot) {
+                var conds = GetConds(slot);
+                return !conds[0].Exists && conds.Skip(1).Any(x => x.Exists);
+            }
+            return AISearchBase(filename, x1File, (_, slot) => condsCheck(slot));
+        }
+
+        public static string[]? HasCond3or4ButNot2(string filename, IX1_File x1File) {
+            bool condsCheck(Slot slot) {
+                var conds = GetConds(slot);
+                return !conds[1].Exists && (conds[2].Exists || conds[3].Exists);
+            }
+            return AISearchBase(filename, x1File, (_, slot) => condsCheck(slot));
         }
 
         public static string[]? HasCondZoneWith0x80(string filename, IX1_File x1File) {
@@ -143,6 +155,60 @@ namespace X1_Analyzer {
             return AISearchBase(filename, x1File, hasWeirdZone);
         }
 
+        public static string[]? HasCond2PlusWithOffConditionBehavior(string filename, IX1_File x1File) {
+            // Filter out the "always check" flag, because in this case, the fallback behavior DOES make sense.
+            bool isWeirdZone(Battle battle, Cond cond) => cond.Type == 0x01 || cond.Type == 0x11 && ((cond.Zone & 0x80) == 0);
+            bool hasWeirdZone(Battle battle, Slot slot) {
+                var conds = GetConds(slot);
+                return // ignore Cond1, because that one is a bit special.
+                       isWeirdZone(battle, conds[1]) ||
+                       isWeirdZone(battle, conds[2]) ||
+                       isWeirdZone(battle, conds[3]);
+            };
+            return AISearchBase(filename, x1File, hasWeirdZone);
+        }
+
+        public static string[]? HasAlwaysCheckWithType00(string filename, IX1_File x1File) {
+            bool isWeirdZone(Battle battle, Cond cond) => ((cond.Zone & 0x80) == 0x80 && cond.Type == 0x00);
+            bool hasWeirdZone(Battle battle, Slot slot) {
+                var conds = GetConds(slot);
+                return conds.Any(x => isWeirdZone(battle, x));
+            };
+            return AISearchBase(filename, x1File, hasWeirdZone);
+        }
+
+        public static string[]? HasCond1With01Or11(string filename, IX1_File x1File) {
+            bool hasWeirdZone(Battle battle, Slot slot) {
+                var conds = GetConds(slot);
+                return ((conds[0].Zone & 0x80) == 0x00) && (conds[0].Type == 0x01 || conds[0].Type == 0x11);
+            };
+            return AISearchBase(filename, x1File, hasWeirdZone);
+        }
+
+        public static string[]? Has0z00(string filename, IX1_File x1File) {
+            bool hasWeirdZone(Battle battle, Slot slot) {
+                var conds = GetConds(slot);
+                return conds.Skip(1).Any(x => !x.AlwaysCheck && x.Type == 0x00);
+            };
+            return AISearchBase(filename, x1File, hasWeirdZone);
+        }
+
+        public static string[]? Has8z00(string filename, IX1_File x1File) {
+            bool hasWeirdZone(Battle battle, Slot slot) {
+                var conds = GetConds(slot);
+                return conds.Skip(1).Any(x => x.AlwaysCheck && x.Type == 0x00);
+            };
+            return AISearchBase(filename, x1File, hasWeirdZone);
+        }
+
+        public static string[]? HasCond0AndMore(string filename, IX1_File x1File) {
+            bool condsCheck(Slot slot) {
+                var conds = GetConds(slot);
+                return conds[0].Exists && conds.Skip(1).Any(x => x.Exists);
+            }
+            return AISearchBase(filename, x1File, (_, slot) => condsCheck(slot));
+        }
+
         public static string[]? HasBattleOrFlagID(string filename, IX1_File x1File)
             => AISearchBase(filename, x1File, (battle, slot) => slot.EnemyID != 0x5F && slot.FlagOrBattleID != 0);
 
@@ -155,16 +221,16 @@ namespace X1_Analyzer {
                 $"{slot.ID:X02} - {slot.EnemyID:X02} ({ngc.GetName(null, null, slot.EnemyID, [NamedValueType.Monster]),-30}) - " +
                 $"{slot.DefaultAIIndex:X02}, " +
                 "AI:[" +
-                  $"1:({slot.AI1Tag:X02}{slot.AI1Type:X02}{slot.AI1Aggr:X02}), " +
-                  $"2:({slot.AI2Tag:X02}{slot.AI2Type:X02}{slot.AI2Aggr:X02}), " +
-                  $"3:({slot.AI3Tag:X02}{slot.AI3Type:X02}{slot.AI3Aggr:X02}), " +
-                  $"4:({slot.AI4Tag:X02}{slot.AI4Type:X02}{slot.AI4Aggr:X02})" +
+                  $"0:({slot.AI1Tag:X02}{slot.AI1Type:X02}{slot.AI1Aggr:X02}), " +
+                  $"1:({slot.AI2Tag:X02}{slot.AI2Type:X02}{slot.AI2Aggr:X02}), " +
+                  $"2:({slot.AI3Tag:X02}{slot.AI3Type:X02}{slot.AI3Aggr:X02}), " +
+                  $"3:({slot.AI4Tag:X02}{slot.AI4Type:X02}{slot.AI4Aggr:X02})" +
                 "], " +
                 "Cond:[" +
-                  $"1:({slot.Cond1Zone:X02}{slot.Cond1Type:X02}{slot.Cond1AIIndex1:X02}{slot.Cond1AIIndex2:X02}), " +
-                  $"2:({slot.Cond2Zone:X02}{slot.Cond2Type:X02}{slot.Cond2AIIndex1:X02}{slot.Cond2AIIndex2:X02}), " +
-                  $"3:({slot.Cond3Zone:X02}{slot.Cond3Type:X02}{slot.Cond3AIIndex1:X02}{slot.Cond3AIIndex2:X02}), " +
-                  $"4:({slot.Cond4Zone:X02}{slot.Cond4Type:X02}{slot.Cond4AIIndex1:X02}{slot.Cond4AIIndex2:X02})" +
+                  $"0:({slot.Cond1Zone:X02}{slot.Cond1Type:X02}{slot.Cond1AIIndex1:X02}{slot.Cond1AIIndex2:X02}), " +
+                  $"1:({slot.Cond2Zone:X02}{slot.Cond2Type:X02}{slot.Cond2AIIndex1:X02}{slot.Cond2AIIndex2:X02}), " +
+                  $"2:({slot.Cond3Zone:X02}{slot.Cond3Type:X02}{slot.Cond3AIIndex1:X02}{slot.Cond3AIIndex2:X02}), " +
+                  $"3:({slot.Cond4Zone:X02}{slot.Cond4Type:X02}{slot.Cond4AIIndex1:X02}{slot.Cond4AIIndex2:X02})" +
                 "], " +
                 $"{slot.FlagOrBattleID:X2}";
         }

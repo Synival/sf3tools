@@ -3,6 +3,8 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class ScriptedMovement : Struct {
+        private readonly int _pathEnds;
+        private readonly int _alwaysFFFF;
         private readonly int _positionCountAddr;
         private readonly int _xPos1Addr;
         private readonly int _zPos1Addr;
@@ -12,13 +14,11 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _zPos3Addr;
         private readonly int _xPos4Addr;
         private readonly int _zPos4Addr;
-        private readonly int _unknown0x00Addr;
-        private readonly int _unknown0x02Addr;
 
         public ScriptedMovement(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x16) {
-            _unknown0x00Addr = Address + 0x00; // 2 bytes
-            _unknown0x02Addr = Address + 0x02; // 2 bytes
+            _pathEnds        = Address + 0x00; // 2 bytes
+            _alwaysFFFF      = Address + 0x02; // 2 bytes
             _positionCountAddr = Address + 0x04; // 2 bytes
             _xPos1Addr       = Address + 0x06; // 2 bytes
             _zPos1Addr       = Address + 0x08; // 2 bytes
@@ -30,18 +30,18 @@ namespace SF3.Models.Structs.X1.Battle {
             _zPos4Addr       = Address + 0x14; // 2 bytes
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x00Addr), displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_pathEnds), displayOrder: 0)]
         [BulkCopy]
-        public int Unknown0x00 {
-            get => Data.GetWord(_unknown0x00Addr);
-            set => Data.SetWord(_unknown0x00Addr, value);
+        public bool PathEnds {
+            get => Data.GetWord(_pathEnds) != 0;
+            set => Data.SetWord(_pathEnds, value ? 1 : 0);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x02Addr), displayOrder: 1, displayName: "+0x02", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_alwaysFFFF), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x02 {
-            get => Data.GetWord(_unknown0x02Addr);
-            set => Data.SetWord(_unknown0x02Addr, value);
+        public int AlwaysFFFF {
+            get => Data.GetWord(_alwaysFFFF);
+            set => Data.SetWord(_alwaysFFFF, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_positionCountAddr), displayOrder: 2, displayFormat: "X2")]

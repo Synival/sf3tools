@@ -534,10 +534,34 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_protectionsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 46, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.1f, displayGroup: "Unknown")]
+        public bool IsThief {
+            get => Data.GetBit(_protectionsAddr, 1);
+            set => Data.SetBit(_protectionsAddr, 1, value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.11f, displayGroup: "Unknown")]
+        public bool MaybeIsBig {
+            get => Data.GetBit(_protectionsAddr, 3);
+            set => Data.SetBit(_protectionsAddr, 3, value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.2f, displayGroup: "Unknown")]
         public bool CantSeeStatus {
             get => Data.GetBit(_protectionsAddr, 4);
             set => Data.SetBit(_protectionsAddr, 4, value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.3f, displayGroup: "Unknown")]
+        public bool MaybeIsVeryBig1 {
+            get => Data.GetBit(_protectionsAddr, 5);
+            set => Data.SetBit(_protectionsAddr, 5, value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.4f, displayGroup: "Unknown")]
+        public bool MaybeIsVeryBig2 {
+            get => Data.GetBit(_protectionsAddr, 6);
+            set => Data.SetBit(_protectionsAddr, 6, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_expIs5Addr), displayOrder: 47, displayGroup: "Unknown", displayFormat: "X2")]

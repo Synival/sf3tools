@@ -11,10 +11,10 @@ namespace X1_Analyzer {
         // ,--- Enter the paths for all your X1 files here!
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
-            { ScenarioType.Scenario1,   "D:/" },
-            { ScenarioType.Scenario2,   "E:/" },
-            { ScenarioType.Scenario3,   "F:/" },
-            { ScenarioType.PremiumDisk, "G:/" },
+            { ScenarioType.Scenario1,   "C:/SF3/Scenario1" },
+            { ScenarioType.Scenario2,   "C:/SF3/Scenario2" },
+            { ScenarioType.Scenario3,   "C:/SF3/Scenario3" },
+            { ScenarioType.PremiumDisk, "C:/SF3/PremiumDisk" },
         };
 
         /// <summary>
@@ -23,7 +23,11 @@ namespace X1_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-            return MatchFuncs.HasVerySpecialAI(filename, x1File);
+            if (x1File.Battles == null)
+                return null;
+
+            var slotsWithFlagsAndAITarget00 = x1File.Battles.Values.Any(y => y.SlotTable.Rows.Any(x => x.IgnoreConditions));
+            return slotsWithFlagsAndAITarget00 ? [] : null;
         }
 
         private static int s_logIndex = 0;

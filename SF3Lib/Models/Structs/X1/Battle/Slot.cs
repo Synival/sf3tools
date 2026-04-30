@@ -285,7 +285,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 12.5f, displayGroup: "Page2")]
         [BulkCopy]
-        public bool UnknownFlag {
+        public bool IgnoreConditions {
             get => Data.GetBit(_facingIsBossAddr, 3);
             set => Data.SetBit(_facingIsBossAddr, 3, value);
         }
@@ -574,7 +574,7 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.32f, displayGroup: "Page5")]
-        public bool UnknownBattleIDFlag0x0200 {
+        public bool PrioritizeHealing {
             get => (Flags & 0x0200) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x0200) : (Flags & ~0x0200));
         }
@@ -602,7 +602,7 @@ namespace SF3.Models.Structs.X1.Battle {
         public NamedValueType? FlagOrBattleIDType {
             get {
                 bool hasFlag = IsBarrel || DontMoveIfFlagOff;
-                bool hasBattleID = PrioritizeTargetSpecified || UnknownBattleIDFlag0x0200 || UnknownBattleIDFlag0x0400 || UnknownBattleIDFlag0x1000;
+                bool hasBattleID = PrioritizeTargetSpecified || PrioritizeHealing || UnknownBattleIDFlag0x0400 || UnknownBattleIDFlag0x1000;
 
                 if (hasFlag && !hasBattleID)
                     return NamedValueType.GameFlag;
