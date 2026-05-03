@@ -107,7 +107,7 @@ namespace SF3.Models.Files.X1 {
                     var mapIndex = (int) mapLeader;
                     var battleTableAddress = BattlePointersTable[mapIndex].Pointer;
                     if (battleTableAddress != 0) {
-                        lastBattle = Battle.Create(Data, NameGetterContext, mapLeader, battleTableAddress - (int) RamAddress, hasLargeEnemyTable, Scenario, lastBattle);
+                        lastBattle = new Battle(Data, (int) mapLeader, $"Battle_{mapLeader}", mapLeader, battleTableAddress - (int) RamAddress, hasLargeEnemyTable, Scenario, lastBattle);
                         Battles.Add(mapLeader, lastBattle);
                     }
                 }
@@ -835,18 +835,6 @@ namespace SF3.Models.Files.X1 {
             if (ModelInstanceTablesByAddress != null)
                 foreach (var table in ModelInstanceTablesByAddress.Values)
                     table.ActorScripts = ScriptsByAddress;
-        }
-
-        protected override void OnDispose(bool disposing) {
-            base.OnDispose(disposing);
-
-            if (disposing) {
-                if (Battles != null) {
-                    foreach (var b in Battles.Where(x => x.Value != null))
-                        b.Value.Dispose();
-                    Battles.Clear();
-                }
-            }
         }
 
         public override string Title => base.Title + " Type: " + (IsBTL99 ? "BTL99" : IsBattle == true ? "Battle" : "Town");

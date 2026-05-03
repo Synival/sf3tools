@@ -94,7 +94,7 @@ namespace SF3.Win.Views.X1 {
 
             if (Model.Battles != null) {
                 foreach (var battleKv in Model.Battles.Where(x => x.Value != null))
-                    CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value));
+                    CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value, ngc));
             }
 
             CreateChild(new TechnicalView("Technical Info", Model));

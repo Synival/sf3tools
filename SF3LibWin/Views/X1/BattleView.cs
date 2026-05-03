@@ -1,16 +1,18 @@
 ﻿using System.Windows.Forms;
+using CommonLib.NamedValues;
 using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Win.Views.X1 {
     public class BattleView : TabView {
-        public BattleView(string name, Battle model) : base(name) {
+        public BattleView(string name, Battle model, INameGetterContext nameGetterContext) : base(name) {
             Model = model;
+            NameGetterContext = nameGetterContext;
         }
 
         public override Control Create() {
             base.Create();
 
-            var ngc = Model.NameGetterContext;
+            var ngc = NameGetterContext;
             if (Model.BattleHeader != null)
                 CreateChild(new DataModelView("Header", Model.BattleHeader, ngc));
             if (Model.SlotTable != null) {
@@ -33,5 +35,6 @@ namespace SF3.Win.Views.X1 {
         }
 
         public Battle Model { get; }
+        public INameGetterContext NameGetterContext { get; }
     }
 }
