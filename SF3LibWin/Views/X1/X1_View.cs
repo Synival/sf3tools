@@ -23,13 +23,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<InteractableTable>("Interactables" + countStr, Model.InteractableTables.ToArray(), ngc));
             }
 
-            if (Model.BattleHeader != null) {
-                CreateChild(new DataModelView("Battle", Model.BattleHeader, ngc));
-
-                // TODO: Make a new view for battles!
-                if (Model.BattleHeader.BattleMapPointerTable != null)
-                    CreateChild(new TableView("Battle Pointers", Model.BattleHeader.BattleMapPointerTable, ngc));
-            }
+            if (Model.BattleHeader != null)
+                CreateChild(new BattleView("Battle", Model.BattleHeader, ngc));
 
             if (Model.NpcTables?.Any() == true) {
                 var count = Model.NpcTables.Count();
@@ -96,9 +91,6 @@ namespace SF3.Win.Views.X1 {
                     )
                 ));
             }
-
-            foreach (var battle in Model.GetBattleMaps().Values)
-                CreateChild(new BattleMapView($"Battle ({battle.MapLeader})", battle, ngc));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 

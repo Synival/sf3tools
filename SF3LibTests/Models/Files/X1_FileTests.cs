@@ -49,7 +49,7 @@ namespace SF3.Tests.Models.Files {
 
                 Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNotNull(file.BattleHeader);
-                Assert.IsNotNull(file.BattleHeader.BattleMapPointerTable);
+                Assert.IsNotNull(file.BattleHeader.MapPointerTable);
                 Assert.AreEqual(testCase.ExpectedNPCTableCount, file.NpcTables.Count());
                 Assert.IsNull(file.EnterTable);
                 Assert.IsNull(file.ArrowTable);

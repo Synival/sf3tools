@@ -155,7 +155,7 @@ namespace SF3.Models.Files.X1 {
                 BattleHeader = new BattleHeader(Data, 0, nameof(BattleHeader), battleHeaderAddress, hasLargeEnemyTable, Scenario, RamAddress);
                 tables.AddRange(BattleHeader.Tables);
 
-                var battles = BattleHeader.BattleMapPointerTable.Select(x => x.BattleMap).Where(x => x != null).ToArray();
+                var battles = BattleHeader.MapPointerTable.Select(x => x.BattleMap).Where(x => x != null).ToArray();
                 foreach (var battle in battles) {
                     tables.AddRange(battle.Tables);
                     Discoveries.AddStruct((uint) (battle.Header.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.Header.Size);
@@ -240,7 +240,7 @@ namespace SF3.Models.Files.X1 {
         }
 
         public Dictionary<MapLeaderType, BattleMap> GetBattleMaps()
-            => BattleHeader?.BattleMapPointerTable?.Select(x => x.BattleMap)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, BattleMap>();
+            => BattleHeader?.MapPointerTable?.Select(x => x.BattleMap)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, BattleMap>();
 
         private void DiscoverFunctions(byte[] data) {
             Discoveries.AddFunction((uint) Data.GetDouble(0x08), "X1InitFunc", "x1Init()", null);
