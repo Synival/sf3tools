@@ -38,7 +38,7 @@ namespace SF3.Tests.Models.Files {
         public void BattlePointersTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.GetBattleMaps()[MapLeaderType.Synbios];
-            var table = file.BattleMetaHeader.BattleMapPointerTable;
+            var table = file.BattleHeader.BattleMapPointerTable;
 
             Assert.AreEqual(0x6061974, table[0].Pointer);
             Assert.AreEqual(0, table[1].Pointer);

@@ -7,14 +7,14 @@ using SF3.Types;
 using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class BattleMetaHeader : Struct, ITableContainer {
+    public class BattleHeader : Struct, ITableContainer {
         private readonly int _battlePointersAddr;
         private readonly int _unknown0x04Addr;
         private readonly int _unknown0x08Addr;
         private readonly int _unknown0x0CAddr;
         private readonly int _unknown0x10Addr;
 
-        public BattleMetaHeader(IByteData data, int id, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, int ramAddress)
+        public BattleHeader(IByteData data, int id, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, int ramAddress)
         : base(data, id, name, address, 0x14) {
             HasLargeEnemyTable = hasLargeEnemyTable;
             Scenario           = scenario;

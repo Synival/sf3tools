@@ -45,8 +45,8 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
 
                 Assert.IsTrue(file.InteractableTables.Any());
-                Assert.IsNotNull(file.BattleMetaHeader);
-                Assert.IsNotNull(file.BattleMetaHeader.BattleMapPointerTable);
+                Assert.IsNotNull(file.BattleHeader);
+                Assert.IsNotNull(file.BattleHeader.BattleMapPointerTable);
                 Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNull(file.EnterTable);
                 Assert.IsNull(file.ArrowTable);
@@ -82,7 +82,7 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
 
                 Assert.IsTrue(file.InteractableTables.Any());
-                Assert.IsNull(file.BattleMetaHeader);
+                Assert.IsNull(file.BattleHeader);
                 Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNotNull(file.EnterTable);
 

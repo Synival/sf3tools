@@ -16,7 +16,6 @@ using SF3.Utils;
 using SF3.Models.Structs.X1;
 using CommonLib.Types;
 using CommonLib.Utils;
-using static CommonLib.Utils.ResourceUtils;
 using CommonLib.Discovery;
 using SF3.Scenes;
 using SF3.Models.Structs.X1.Battle;
@@ -50,7 +49,7 @@ namespace SF3.Models.Files.X1 {
             int interactableAddress;
             int warpAddress;
             int npcAddress;
-            int battleMetaHeaderAddress;
+            int battleHeaderAddress;
             int enterAddress;
             int arrowAddress;
 
@@ -58,22 +57,22 @@ namespace SF3.Models.Files.X1 {
             int characterTargetPriorityTablesAddresses;
             int battleTalkAddress;
 
-            var battleMetaHeaderOrNPCsPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
-            var battleMetaHeaderOrNPCsAddress = Data.GetDouble(battleMetaHeaderOrNPCsPointerAddress) - (int) RamAddress;
+            var battleHeaderOrNPCsPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
+            var battleHeaderOrNPCsAddress = Data.GetDouble(battleHeaderOrNPCsPointerAddress) - (int) RamAddress;
 
             // If the value we see at the value pointed to be 0x0018/24 is a pointer, this is a battle.
             // Otherwise, this is an NPC table.
-            var valueAtBattleMetaHeaderOrNPCsAddress = Data.GetDouble(battleMetaHeaderOrNPCsAddress);
+            var valueAtBattleMetaHeaderOrNPCsAddress = Data.GetDouble(battleHeaderOrNPCsAddress);
             if ((Scenario <= ScenarioType.Scenario1 && valueAtBattleMetaHeaderOrNPCsAddress >= 0x0605F000) ||
                 (Scenario >= ScenarioType.Scenario2 && valueAtBattleMetaHeaderOrNPCsAddress >= 0x0605E000) || IsBTL99
             ) {
-                npcAddress              = -1;
-                battleMetaHeaderAddress = battleMetaHeaderOrNPCsAddress;
+                npcAddress          = -1;
+                battleHeaderAddress = battleHeaderOrNPCsAddress;
                 IsBattle = true;
             }
             else {
-                npcAddress              = battleMetaHeaderOrNPCsAddress;
-                battleMetaHeaderAddress = -1;
+                npcAddress          = battleHeaderOrNPCsAddress;
+                battleHeaderAddress = -1;
                 IsBattle = false;
             }
 
@@ -152,11 +151,11 @@ namespace SF3.Models.Files.X1 {
 
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
-            if (battleMetaHeaderAddress >= 0) {
-                BattleMetaHeader = new BattleMetaHeader(Data, 0, nameof(BattleMetaHeader), battleMetaHeaderAddress, hasLargeEnemyTable, Scenario, RamAddress);
-                tables.AddRange(BattleMetaHeader.Tables);
+            if (battleHeaderAddress >= 0) {
+                BattleHeader = new BattleHeader(Data, 0, nameof(BattleHeader), battleHeaderAddress, hasLargeEnemyTable, Scenario, RamAddress);
+                tables.AddRange(BattleHeader.Tables);
 
-                var battles = BattleMetaHeader.BattleMapPointerTable.Select(x => x.BattleMap).Where(x => x != null).ToArray();
+                var battles = BattleHeader.BattleMapPointerTable.Select(x => x.BattleMap).Where(x => x != null).ToArray();
                 foreach (var battle in battles) {
                     tables.AddRange(battle.Tables);
                     Discoveries.AddStruct((uint) (battle.Header.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.Header.Size);
@@ -241,7 +240,7 @@ namespace SF3.Models.Files.X1 {
         }
 
         public Dictionary<MapLeaderType, BattleMap> GetBattleMaps()
-            => BattleMetaHeader?.BattleMapPointerTable?.Select(x => x.BattleMap)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, BattleMap>();
+            => BattleHeader?.BattleMapPointerTable?.Select(x => x.BattleMap)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, BattleMap>();
 
         private void DiscoverFunctions(byte[] data) {
             Discoveries.AddFunction((uint) Data.GetDouble(0x08), "X1InitFunc", "x1Init()", null);
@@ -833,7 +832,7 @@ namespace SF3.Models.Files.X1 {
         [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
         [BulkCopyRecurse]
-        public BattleMetaHeader BattleMetaHeader { get; private set; }
+        public BattleHeader BattleHeader { get; private set; }
         [BulkCopyRecurse]
         public IEnumerable<NpcTable> NpcTables { get; private set; }
         [BulkCopyRecurse]

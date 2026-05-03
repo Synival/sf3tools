@@ -23,12 +23,12 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<InteractableTable>("Interactables" + countStr, Model.InteractableTables.ToArray(), ngc));
             }
 
-            if (Model.BattleMetaHeader != null) {
-                CreateChild(new DataModelView("Battle", Model.BattleMetaHeader, ngc));
+            if (Model.BattleHeader != null) {
+                CreateChild(new DataModelView("Battle", Model.BattleHeader, ngc));
 
                 // TODO: Make a new view for battles!
-                if (Model.BattleMetaHeader.BattleMapPointerTable != null)
-                    CreateChild(new TableView("Battle Pointers", Model.BattleMetaHeader.BattleMapPointerTable, ngc));
+                if (Model.BattleHeader.BattleMapPointerTable != null)
+                    CreateChild(new TableView("Battle Pointers", Model.BattleHeader.BattleMapPointerTable, ngc));
             }
 
             if (Model.NpcTables?.Any() == true) {
