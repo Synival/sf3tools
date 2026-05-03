@@ -12,31 +12,34 @@ namespace SF3.Tests.Models.Files {
                 ScenarioType scenario,
                 string filename,
                 MapLeaderType? mapLeader,
+                int? expectedNpcTableCount,
                 int? expectedBattleCount)
             : base(scenario, filename) {
                 MapLeader = mapLeader;
-                ExpectedBattleCount = expectedBattleCount;
+                ExpectedNPCTableCount = expectedNpcTableCount;
+                ExpectedBattleCount   = expectedBattleCount;
             }
 
             public X1_File Create()
                 => X1_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario, false);
 
             public MapLeaderType? MapLeader { get; }
+            public int? ExpectedNPCTableCount { get; }
             public int? ExpectedBattleCount { get; }
         }
 
         private static readonly List<X1_TestCase> BattleTestCases = [
-            new(ScenarioType.Scenario1,   "X1BTL104.BIN", MapLeaderType.Synbios, 1),
-            new(ScenarioType.Scenario2,   "X1BTL201.BIN", MapLeaderType.Medion,  1),
-            new(ScenarioType.Scenario3,   "X1BTL301.BIN", MapLeaderType.Julian,  1),
-            new(ScenarioType.PremiumDisk, "X1BTLP01.BIN", MapLeaderType.Synbios, 1),
+            new(ScenarioType.Scenario1,   "X1BTL104.BIN", MapLeaderType.Synbios, 2, 1),
+            new(ScenarioType.Scenario2,   "X1BTL201.BIN", MapLeaderType.Medion,  0, 1),
+            new(ScenarioType.Scenario3,   "X1BTL301.BIN", MapLeaderType.Julian,  0, 1),
+            new(ScenarioType.PremiumDisk, "X1BTLP01.BIN", MapLeaderType.Synbios, 1, 1),
         ];
 
         private static readonly List<X1_TestCase> TownTestCases = [
-            new(ScenarioType.Scenario1,   "X1BAL_3.BIN", null, null),
-            new(ScenarioType.Scenario2,   "X1DUSTY.BIN", null, null),
-            new(ScenarioType.Scenario3,   "X1BEER.BIN",  null, null),
-            new(ScenarioType.PremiumDisk, "X1DREAM.BIN", null, null),
+            new(ScenarioType.Scenario1,   "X1BAL_3.BIN", null, 1, null),
+            new(ScenarioType.Scenario2,   "X1DUSTY.BIN", null, 1, null),
+            new(ScenarioType.Scenario3,   "X1BEER.BIN",  null, 1, null),
+            new(ScenarioType.PremiumDisk, "X1DREAM.BIN", null, 1, null),
         ];
 
         [TestMethod]
@@ -47,7 +50,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNotNull(file.BattleHeader);
                 Assert.IsNotNull(file.BattleHeader.BattleMapPointerTable);
-                Assert.IsTrue(file.NpcTables.Any());
+                Assert.AreEqual(testCase.ExpectedNPCTableCount, file.NpcTables.Count());
                 Assert.IsNull(file.EnterTable);
                 Assert.IsNull(file.ArrowTable);
 
@@ -83,7 +86,7 @@ namespace SF3.Tests.Models.Files {
 
                 Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNull(file.BattleHeader);
-                Assert.IsTrue(file.NpcTables.Any());
+                Assert.AreEqual(testCase.ExpectedNPCTableCount, file.NpcTables.Count());
                 Assert.IsNotNull(file.EnterTable);
 
                 Assert.IsNull(file.TileMovementTable);

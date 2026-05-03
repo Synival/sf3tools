@@ -44,8 +44,9 @@ namespace SF3.Tests.Models.Files {
             Assert.AreEqual(0, table[1].Pointer);
             Assert.AreEqual(0, table[2].Pointer);
             Assert.AreEqual(0, table[3].Pointer);
+            Assert.AreEqual(0, table[4].Pointer);
 
-            Assert.AreEqual(4, table.Count);
+            Assert.AreEqual(5, table.Count);
         }
 
         [TestMethod]
