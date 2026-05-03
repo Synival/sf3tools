@@ -10,13 +10,13 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class Battle : Struct, IScene, ITableContainer {
-        public Battle(IByteData data, int id, string name, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, Battle prevBattle)
+        public Battle(IByteData data, int id, string name, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattlePointerTable battles)
         : base(data, id, name, address, 0x14) {
             MapLeader  = mapLeader;
             Address    = address;
             HasLargeEnemyTable = hasLargeEnemyTable;
             Scenario   = scenario;
-            PrevBattle = prevBattle;
+            Battles    = battles;
             SceneName  = $"Battle ({mapLeader})";
 
             var enemyTableSize = HasLargeEnemyTable ? 0xea0 : 0xa90;
@@ -32,7 +32,7 @@ namespace SF3.Models.Structs.X1.Battle {
             BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
 
             Tables = new List<ITable>() {
-                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, PrevBattle?.SlotTable?.Rows?.Last())),
+                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
                 (ZoneTable             = ZoneTable.Create            (Data, "Zones",          zoneAddress)),
                 (AITargetPositionTable = AITargetPositionTable.Create(Data, "Positions",      aiAddress)),
                 (AITarrgetPathTable    = AITargetPathTable.Create    (Data, "Paths",          customMovementAddress)),
@@ -43,7 +43,7 @@ namespace SF3.Models.Structs.X1.Battle {
         public MapLeaderType MapLeader { get; }
         public bool HasLargeEnemyTable { get; }
         public ScenarioType Scenario { get; }
-        public Battle PrevBattle { get; }
+        public BattlePointerTable Battles { get; }
 
         [BulkCopyRecurse]
         public BattleHeader BattleHeader { get; private set; }

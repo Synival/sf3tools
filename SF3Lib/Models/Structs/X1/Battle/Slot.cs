@@ -3,6 +3,7 @@ using CommonLib.Attributes;
 using CommonLib.Utils;
 using SF3.Actors;
 using SF3.ByteData;
+using SF3.Models.Tables.X1.Battle;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
@@ -67,10 +68,13 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _flagsAddr;
         private readonly int _flagTieInAddr;
 
-        public Slot(IByteData data, int id, string name, int address, ScenarioType scenario, Slot prevSlot)
+        public Slot(IByteData data, int id, string name, int address, ScenarioType scenario, Slot prevSlot, BattlePointerTable battles, MapLeaderType mapLeader)
         : base(data, id, name, address, 0x34) {
-            Scenario = scenario;
-            PrevSlot = prevSlot;
+            Scenario  = scenario;
+            _prevSlot = prevSlot;
+            Battles   = battles;
+            MapLeader = mapLeader;
+
             _battleAddrEnemyBase  = GetBattleAddrBase(scenario);
             _battleAddrPlayerBase = _battleAddrEnemyBase + 0x3C * 0xB0;
 
@@ -137,7 +141,22 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         public ScenarioType Scenario { get; }
-        public Slot PrevSlot { get; }
+        public BattlePointerTable Battles { get; }
+        public MapLeaderType MapLeader { get; }
+
+        public Slot _prevSlot;
+        public Slot PrevSlot {
+            get {
+                if (_prevSlot != null)
+                    return _prevSlot;
+                for (int i = (int) MapLeader - 1; i >= 0; i--) {
+                    var battle = Battles[i].Battle;
+                    if (battle != null)
+                        return battle.SlotTable.Rows[battle.SlotTable.Size - 1];
+                }
+                return null;
+            }
+        }
 
         // ------------------------------------------------------------------------------------------------------------
         // Page 1

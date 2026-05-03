@@ -3,6 +3,7 @@ using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.X1;
+using SF3.Models.Structs.X1.Battle;
 using SF3.NamedValues;
 using SF3.Types;
 
@@ -23,10 +24,15 @@ namespace X1_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-            if (x1File.Battles == null)
+            var battles = x1File.GetBattles().Values.ToArray();
+            if (battles.Length == 0)
                 return null;
 
-            var slotsWithFlagsAndAITarget00 = x1File.Battles.Values.Any(y => y.SlotTable.Rows.Any(x => x.IgnoreConditions));
+            bool hasAnyConditions(Slot slot) {
+                return slot.Cond1Zone != 0xFF || slot.Cond2Zone != 0xFF || slot.Cond3Zone != 0xFF || slot.Cond4Zone != 0xFF;
+            }
+
+            var slotsWithFlagsAndAITarget00 = battles.Any(y => y.SlotTable.Rows.Any(x => x.IgnoreConditions && hasAnyConditions(x)));
             return slotsWithFlagsAndAITarget00 ? [] : null;
         }
 
@@ -190,7 +196,8 @@ namespace X1_Analyzer {
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, IX1_File x1File) {
-            var typeStr = (x1File.IsBattle ? "Battle: " : "Town") + string.Join(", ", x1File.Battles?.Select(x => x.Key.ToString()) ?? [""]);
+            var typeStr = (x1File.IsBattle ? "Battle: " : "Town")
+                + string.Join(", ", x1File.GetBattles().Values.Select(x => x.MapLeader.ToString()) ?? [""]);
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 + " | " + typeStr.PadRight(22)
                 ;

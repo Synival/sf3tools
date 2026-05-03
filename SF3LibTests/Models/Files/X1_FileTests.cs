@@ -45,17 +45,17 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
 
                 Assert.IsTrue(file.InteractableTables.Any());
-                Assert.IsNotNull(file.BattlePointersTable);
+                Assert.IsNotNull(file.BattlePointerTable);
                 Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNull(file.EnterTable);
                 Assert.IsNull(file.ArrowTable);
 
-                Assert.AreEqual(testCase.ExpectedBattleCount, file.Battles?.Count);
+                var battles = file.GetBattles();
+                Assert.AreEqual(testCase.ExpectedBattleCount, battles.Count);
 
                 if (testCase.MapLeader != null) {
-                    Assert.IsNotNull(file.Battles);
-                    Assert.IsTrue(file.Battles.ContainsKey((MapLeaderType) testCase.MapLeader));
-                    var battle = file.Battles[(MapLeaderType) testCase.MapLeader];
+                    Assert.IsTrue(battles.ContainsKey((MapLeaderType) testCase.MapLeader));
+                    var battle = battles[(MapLeaderType) testCase.MapLeader];
 
                     Assert.IsNotNull(battle.BattleHeader);
                     Assert.IsNotNull(battle.SlotTable);
@@ -81,11 +81,9 @@ namespace SF3.Tests.Models.Files {
                 var file = testCase.Create();
 
                 Assert.IsTrue(file.InteractableTables.Any());
-                Assert.IsNull(file.BattlePointersTable);
+                Assert.IsNull(file.BattlePointerTable);
                 Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNotNull(file.EnterTable);
-
-                Assert.IsNull(file.Battles);
 
                 Assert.IsNull(file.TileMovementTable);
 

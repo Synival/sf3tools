@@ -23,7 +23,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void AITable_HasExpectedData() {
             var file = TestCase.Create();
-            var battle = file.Battles[MapLeaderType.Julian];
+            var battle = file.GetBattles()[MapLeaderType.Julian];
             var table = battle.AITargetPositionTable;
 
             Assert.AreEqual(12, table[0].X);
@@ -38,7 +38,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void BattlePointersTable_HasExpectedData() {
             var file = TestCase.Create();
-            var table = file.BattlePointersTable;
+            var table = file.BattlePointerTable;
 
             Assert.AreEqual(0, table[0].Pointer);
             Assert.AreEqual(0, table[1].Pointer);
@@ -51,7 +51,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void CustomMovementTable_HasExpectedData() {
             var file = TestCase.Create();
-            var battle = file.Battles[MapLeaderType.Julian];
+            var battle = file.GetBattles()[MapLeaderType.Julian];
             var table = battle.AITarrgetPathTable;
 
             Assert.AreEqual(0, table[0].XPos1);
@@ -66,7 +66,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void HeaderTable_HasExpectedData() {
             var file = TestCase.Create();
-            var battle = file.Battles[MapLeaderType.Julian];
+            var battle = file.GetBattles()[MapLeaderType.Julian];
             var header = battle.BattleHeader;
 
             Assert.AreEqual(27, header.NumSlots);
@@ -75,7 +75,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void SlotTable_HasExpectedData() {
             var file = TestCase.Create();
-            var battle = file.Battles[MapLeaderType.Julian];
+            var battle = file.GetBattles()[MapLeaderType.Julian];
             var table = battle.SlotTable;
 
             Assert.AreEqual(0xFFFF, table[0].EnemyID);
@@ -92,7 +92,7 @@ namespace SF3.Tests.Models.Files {
         [TestMethod]
         public void ZoneTable_HasExpectedData() {
             var file = TestCase.Create();
-            var battle = file.Battles[MapLeaderType.Julian];
+            var battle = file.GetBattles()[MapLeaderType.Julian];
             var table = battle.ZoneTable;
 
             Assert.AreEqual(0x04, table[0].NumPoints);

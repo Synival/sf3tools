@@ -9,17 +9,17 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
     public interface IX1_File : IScenarioTableFile, IBlacksmithTableFile, ISceneFile {
+        Dictionary<MapLeaderType, Battle> GetBattles();
+
         bool IsBTL99 { get; }
         bool IsBattle { get; }
 
         IEnumerable<InteractableTable> InteractableTables { get; }
         WarpTable WarpTable { get; }
-        BattlePointersTable BattlePointersTable { get; }
+        BattlePointerTable BattlePointerTable { get; }
         IEnumerable<NpcTable> NpcTables { get; }
         EnterTable EnterTable { get; }
         ArrowTable ArrowTable { get; }
-
-        Dictionary<MapLeaderType, Battle> Battles { get; }
 
         TileMovementTable TileMovementTable { get; }
         CharacterMoveTargetPriorityTable[] CharacterMoveTargetPriorityTables { get; }

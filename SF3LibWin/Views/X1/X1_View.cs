@@ -23,8 +23,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<InteractableTable>("Interactables" + countStr, Model.InteractableTables.ToArray(), ngc));
             }
 
-            if (Model.BattlePointersTable != null)
-                CreateChild(new TableView("Battle Pointers", Model.BattlePointersTable, ngc));
+            if (Model.BattlePointerTable != null)
+                CreateChild(new TableView("Battle Pointers", Model.BattlePointerTable, ngc));
 
             if (Model.NpcTables?.Any() == true) {
                 var count = Model.NpcTables.Count();
@@ -92,10 +92,8 @@ namespace SF3.Win.Views.X1 {
                 ));
             }
 
-            if (Model.Battles != null) {
-                foreach (var battleKv in Model.Battles.Where(x => x.Value != null))
-                    CreateChild(new BattleView($"Battle ({battleKv.Key})", battleKv.Value, ngc));
-            }
+            foreach (var battle in Model.GetBattles().Values)
+                CreateChild(new BattleView($"Battle ({battle.MapLeader})", battle, ngc));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 

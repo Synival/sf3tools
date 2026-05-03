@@ -41,19 +41,22 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasUnknownBattleFlag(IX1_File x1File) {
-            return x1File.Battles?.Any() != true
-                ? null
-                : x1File.Battles.SelectMany(x => x.Value.SlotTable.Rows.Where(y => y.IgnoreConditions).Select(y => $"{x.Key}: 0x{y.ID:X2}")).ToArray();
+            var battles = x1File.GetBattles().Values.ToArray();
+            if (battles.Length == 0)
+                return null;
+
+            return battles.SelectMany(x => x.SlotTable.Rows.Where(y => y.IgnoreConditions).Select(y => $"{x.MapLeader}: 0x{y.ID:X2}")).ToArray();
         }
 
         private static string[]? AISearchBase(string filename, IX1_File x1File, Func<Battle, Slot, bool> pred) {
-            if (x1File.Battles?.Any() != true)
+            var battles = x1File.GetBattles().Values.ToArray();
+            if (battles.Length == 0)
                 return null;
 
-            return x1File.Battles
-                .SelectMany(x => x.Value.SlotTable.Rows
-                    .Where(y => y.ID < x.Value.BattleHeader.NumSlots && y.EnemyID != 0 && y.EnemyID < 0x1000 && pred(x.Value, y))
-                    .Select(y => FormatAIRow(filename, x.Key, x.Value, y, x1File.NameGetterContext))
+            return battles
+                .SelectMany(x => x.SlotTable.Rows
+                    .Where(y => y.ID < x.BattleHeader.NumSlots && y.EnemyID != 0 && y.EnemyID < 0x1000 && pred(x, y))
+                    .Select(y => FormatAIRow(filename, x.MapLeader, x, y, x1File.NameGetterContext))
                 )
                 .ToArray();
         }
