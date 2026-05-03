@@ -23,6 +23,9 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new TableArrayView<InteractableTable>("Interactables" + countStr, Model.InteractableTables.ToArray(), ngc));
             }
 
+            if (Model.BattleMetaHeader != null)
+                CreateChild(new DataModelView("Battle", Model.BattleMetaHeader, ngc));
+
             if (Model.BattlePointerTable != null)
                 CreateChild(new TableView("Battle Pointers", Model.BattlePointerTable, ngc));
 

@@ -16,6 +16,7 @@ namespace SF3.Models.Files.X1 {
 
         IEnumerable<InteractableTable> InteractableTables { get; }
         WarpTable WarpTable { get; }
+        BattleMetaHeader BattleMetaHeader { get; }
         BattlePointerTable BattlePointerTable { get; }
         IEnumerable<NpcTable> NpcTables { get; }
         EnterTable EnterTable { get; }

@@ -47,42 +47,46 @@ namespace SF3.Models.Files.X1 {
             var isScn1OrBTL99 = Scenario == ScenarioType.Scenario1 || IsBTL99;
             bool hasLargeEnemyTable;
 
-            int treasureAddress;
+            int interactableAddress;
             int warpAddress;
-            int battlePointersPointerAddress; // the address to the pointer to the table of battle pointers
             int npcAddress;
+            int battleMetaHeaderAddress;
+            int battlePointersAddress;
             int enterAddress;
             int arrowAddress;
 
-            int battlePointersAddress;
             int tileMovementAddress;
             int characterTargetPriorityTablesAddresses;
             int battleTalkAddress;
 
-            var battlePointersPointerPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
+            var battleMetaHeaderOrNPCsPointerAddress = isScn1OrBTL99 ? 0x0018 : 0x0024;
+            var battleMetaHeaderOrNPCsAddress = Data.GetDouble(battleMetaHeaderOrNPCsPointerAddress) - (int) RamAddress;
 
-            battlePointersPointerAddress = Data.GetDouble(battlePointersPointerPointerAddress) - (int) RamAddress;
-            battlePointersAddress = Data.GetDouble(battlePointersPointerAddress);
-
-            // A value higher means a pointer is on the address, meaning we are in a battle. If it is not a
-            // pointer we are at our destination so we know a town is loaded.
-            if (Scenario == ScenarioType.Scenario1 && battlePointersAddress > 0x0605F000 || battlePointersAddress > 0x0605e000) {
-                battlePointersAddress -= (int) RamAddress;
+            // If the value we see at the value pointed to be 0x0018/24 is a pointer, this is a battle.
+            // Otherwise, this is an NPC table.
+            var valueAtBattleMetaHeaderOrNPCsAddress = Data.GetDouble(battleMetaHeaderOrNPCsAddress);
+            if ((Scenario <= ScenarioType.Scenario1 && valueAtBattleMetaHeaderOrNPCsAddress >= 0x0605F000) ||
+                (Scenario >= ScenarioType.Scenario2 && valueAtBattleMetaHeaderOrNPCsAddress >= 0x0605E000) || IsBTL99
+            ) {
+                npcAddress              = -1;
+                battleMetaHeaderAddress = battleMetaHeaderOrNPCsAddress;
+                battlePointersAddress   = valueAtBattleMetaHeaderOrNPCsAddress - (int) RamAddress;
                 IsBattle = true;
             }
             else {
-                battlePointersAddress = -1;
+                npcAddress              = battleMetaHeaderOrNPCsAddress;
+                battleMetaHeaderAddress = -1;
+                battlePointersAddress   = -1;
                 IsBattle = false;
             }
 
-            // The "Treasure" table is the only table present in all X1 files regardless of scenario or town/battle status.
-            treasureAddress = Data.GetDouble(0x000c) - (int) RamAddress;
+            // The "Interactables" table is the only table present in all X1 files regardless of scenario or town/battle status.
+            interactableAddress = Data.GetDouble(0x000c) - (int) RamAddress;
 
             if (isScn1OrBTL99) {
                 hasLargeEnemyTable = true;
 
                 warpAddress          = -1; // X002 file has Scenario1 WarpTable, and provides the address itself.
-                npcAddress           = IsBattle == true ? -1 : battlePointersPointerAddress; // same address
                 enterAddress         = Data.GetDouble(0x0024) - (int) RamAddress;
                 arrowAddress         = -1; // Not present in Scenario1
             }
@@ -90,7 +94,6 @@ namespace SF3.Models.Files.X1 {
                 hasLargeEnemyTable = false;
 
                 warpAddress          = Data.GetDouble(0x0018) - (int) RamAddress;
-                npcAddress           = IsBattle == true ? -1 : battlePointersPointerAddress; // same address
                 enterAddress         = IsBattle == true ? -1 : Data.GetDouble(0x0030) - (int) RamAddress;
                 arrowAddress         = IsBattle == true ? -1 : Data.GetDouble(0x0060) - (int) RamAddress;
             }
@@ -156,12 +159,22 @@ namespace SF3.Models.Files.X1 {
 
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
-            if (battlePointersAddress >= 0)
+            if (battleMetaHeaderAddress >= 0) {
+                BattleMetaHeader = new BattleMetaHeader(Data, 0, nameof(BattleMetaHeader), battleMetaHeaderAddress);
+                tables.AddRange(BattleMetaHeader.Tables);
+            }
+            if (battlePointersAddress >= 0) {
                 tables.Add(BattlePointerTable);
+                var battles = BattlePointerTable.Select(x => x.Battle).Where(x => x != null).ToArray();
+                foreach (var battle in battles) {
+                    tables.AddRange(battle.Tables);
+                    Discoveries.AddStruct((uint) (battle.BattleHeader.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.BattleHeader.Size);
+                }
+            }
             if (npcAddress >= 0)
                 npcTables.Add(NpcTable.Create(Data, $"{nameof(NpcTable)}01 (@0x{npcAddress + RamAddress:X8}) (Default)", npcAddress, null));
-            if (treasureAddress >= 0)
-                interactableTables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}01 (@0x{treasureAddress + RamAddress:X8}) (Default)", treasureAddress, NameGetterContext, npcTables.FirstOrDefault(), Discoveries));
+            if (interactableAddress >= 0)
+                interactableTables.Add(InteractableTable.Create(Data, $"{nameof(InteractableTable)}01 (@0x{interactableAddress + RamAddress:X8}) (Default)", interactableAddress, NameGetterContext, npcTables.FirstOrDefault(), Discoveries));
             if (enterAddress >= 0)
                 tables.Add(EnterTable = EnterTable.Create(Data, "Entrances", enterAddress));
             if (arrowAddress >= 0)
@@ -193,12 +206,6 @@ namespace SF3.Models.Files.X1 {
                 }
             }
 
-            // Add tables for battle tables.
-            var battles = GetBattles();
-            foreach (var battle in battles.Values) {
-                tables.AddRange(battle.Tables);
-                Discoveries.AddStruct((uint) (battle.BattleHeader.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.BattleHeader.Size);
-            }
             if (battleTalkAddress >= 0)
                 tables.Add(BattleTalkTable = BattleTalkTable.Create(Data, nameof(BattleTalkTable), battleTalkAddress));
             if (tileMovementAddress >= 0)
@@ -834,6 +841,8 @@ namespace SF3.Models.Files.X1 {
         public IEnumerable<InteractableTable> InteractableTables { get; private set; }
         [BulkCopyRecurse]
         public WarpTable WarpTable { get; private set; }
+        [BulkCopyRecurse]
+        public BattleMetaHeader BattleMetaHeader { get; private set; }
         [BulkCopyRecurse]
         public BattlePointerTable BattlePointerTable { get; private set; }
         [BulkCopyRecurse]

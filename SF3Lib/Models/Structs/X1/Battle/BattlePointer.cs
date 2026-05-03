@@ -19,7 +19,7 @@ namespace SF3.Models.Structs.X1.Battle {
             UpdateBattle();
         }
 
-        [TableViewModelColumn(addressField: nameof(_pointerAddr), displayOrder: 0, displayName: "Pointer", isPointer: true, minWidth: 100)]
+        [TableViewModelColumn(addressField: nameof(_pointerAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int Pointer {
             get => Data.GetDouble(_pointerAddr);
