@@ -6,14 +6,14 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class SlotTable : FixedSizeTable<Slot>, IReadOnlyList<IActor> {
-        protected SlotTable(IByteData data, string name, int address, int size, ScenarioType scenario, BattlePointerTable battles, MapLeaderType mapLeader)
+        protected SlotTable(IByteData data, string name, int address, int size, ScenarioType scenario, BattleMapPointerTable battles, MapLeaderType mapLeader)
         : base(data, name, address, size) {
             Scenario  = scenario;
             Battles   = battles;
             MapLeader = mapLeader;
         }
 
-        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, BattlePointerTable battles, MapLeaderType mapLeader)
+        public static SlotTable Create(IByteData data, string name, int address, int size, ScenarioType scenario, BattleMapPointerTable battles, MapLeaderType mapLeader)
             => Create(() => new SlotTable(data, name, address, size, scenario, battles, mapLeader));
 
         public override bool Load() {
@@ -26,7 +26,7 @@ namespace SF3.Models.Tables.X1.Battle {
         }
 
         public ScenarioType Scenario { get; }
-        public BattlePointerTable Battles { get; }
+        public BattleMapPointerTable Battles { get; }
         public MapLeaderType MapLeader { get; }
 
         IEnumerator<IActor> IEnumerable<IActor>.GetEnumerator() => GetEnumerator();

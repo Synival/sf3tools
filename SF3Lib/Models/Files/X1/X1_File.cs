@@ -156,10 +156,10 @@ namespace SF3.Models.Files.X1 {
                 BattleMetaHeader = new BattleMetaHeader(Data, 0, nameof(BattleMetaHeader), battleMetaHeaderAddress, hasLargeEnemyTable, Scenario, RamAddress);
                 tables.AddRange(BattleMetaHeader.Tables);
 
-                var battles = BattleMetaHeader.BattlePointerTable.Select(x => x.Battle).Where(x => x != null).ToArray();
+                var battles = BattleMetaHeader.BattleMapPointerTable.Select(x => x.BattleMap).Where(x => x != null).ToArray();
                 foreach (var battle in battles) {
                     tables.AddRange(battle.Tables);
-                    Discoveries.AddStruct((uint) (battle.BattleHeader.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.BattleHeader.Size);
+                    Discoveries.AddStruct((uint) (battle.Header.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.Header.Size);
                 }
             }
             if (npcAddress >= 0)
@@ -232,7 +232,7 @@ namespace SF3.Models.Files.X1 {
             AssociateScriptsWithRelevantTables();
 
             var scenes = new List<IScene>();
-            scenes.AddRange(GetBattles().Values);
+            scenes.AddRange(GetBattleMaps().Values);
             if (NpcTables != null)
                 scenes.AddRange(NpcTables);
             Scenes = scenes;
@@ -240,8 +240,8 @@ namespace SF3.Models.Files.X1 {
             return tables;
         }
 
-        public Dictionary<MapLeaderType, Battle> GetBattles()
-            => BattleMetaHeader?.BattlePointerTable?.Select(x => x.Battle)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, Battle>();
+        public Dictionary<MapLeaderType, BattleMap> GetBattleMaps()
+            => BattleMetaHeader?.BattleMapPointerTable?.Select(x => x.BattleMap)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, BattleMap>();
 
         private void DiscoverFunctions(byte[] data) {
             Discoveries.AddFunction((uint) Data.GetDouble(0x08), "X1InitFunc", "x1Init()", null);

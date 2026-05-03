@@ -46,19 +46,19 @@ namespace SF3.Tests.Models.Files {
 
                 Assert.IsTrue(file.InteractableTables.Any());
                 Assert.IsNotNull(file.BattleMetaHeader);
-                Assert.IsNotNull(file.BattleMetaHeader.BattlePointerTable);
+                Assert.IsNotNull(file.BattleMetaHeader.BattleMapPointerTable);
                 Assert.IsTrue(file.NpcTables.Any());
                 Assert.IsNull(file.EnterTable);
                 Assert.IsNull(file.ArrowTable);
 
-                var battles = file.GetBattles();
+                var battles = file.GetBattleMaps();
                 Assert.AreEqual(testCase.ExpectedBattleCount, battles.Count);
 
                 if (testCase.MapLeader != null) {
                     Assert.IsTrue(battles.ContainsKey((MapLeaderType) testCase.MapLeader));
                     var battle = battles[(MapLeaderType) testCase.MapLeader];
 
-                    Assert.IsNotNull(battle.BattleHeader);
+                    Assert.IsNotNull(battle.Header);
                     Assert.IsNotNull(battle.SlotTable);
                     Assert.IsNotNull(battle.ZoneTable);
                     Assert.IsNotNull(battle.AITargetPositionTable);

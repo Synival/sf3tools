@@ -29,8 +29,8 @@ namespace SF3.Models.Structs.X1.Battle {
             var tableList = new List<ITable>();
 
             if (BattlePointersTableAddress != 0) {
-                tableList.Add(BattlePointerTable = BattlePointerTable.Create(
-                    Data, nameof(BattlePointerTable), ResourceFile("BattlePointersList.xml"), BattlePointersTableAddress - RamAddress,
+                tableList.Add(BattleMapPointerTable = BattleMapPointerTable.Create(
+                    Data, nameof(BattleMapPointerTable), ResourceFile("BattlePointersList.xml"), BattlePointersTableAddress - RamAddress,
                     HasLargeEnemyTable, Scenario, RamAddress
                 ));
             }
@@ -73,7 +73,7 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetDouble(_unknown0x10Addr, value);
         }
 
-        public BattlePointerTable BattlePointerTable { get; }
+        public BattleMapPointerTable BattleMapPointerTable { get; }
 
         public IEnumerable<ITable> Tables { get; }
         public bool HasLargeEnemyTable { get; }

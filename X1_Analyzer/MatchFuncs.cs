@@ -41,21 +41,21 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasUnknownBattleFlag(IX1_File x1File) {
-            var battles = x1File.GetBattles().Values.ToArray();
+            var battles = x1File.GetBattleMaps().Values.ToArray();
             if (battles.Length == 0)
                 return null;
 
             return battles.SelectMany(x => x.SlotTable.Rows.Where(y => y.IgnoreConditions).Select(y => $"{x.MapLeader}: 0x{y.ID:X2}")).ToArray();
         }
 
-        private static string[]? AISearchBase(string filename, IX1_File x1File, Func<Battle, Slot, bool> pred) {
-            var battles = x1File.GetBattles().Values.ToArray();
+        private static string[]? AISearchBase(string filename, IX1_File x1File, Func<BattleMap, Slot, bool> pred) {
+            var battles = x1File.GetBattleMaps().Values.ToArray();
             if (battles.Length == 0)
                 return null;
 
             return battles
                 .SelectMany(x => x.SlotTable.Rows
-                    .Where(y => y.ID < x.BattleHeader.NumSlots && y.EnemyID != 0 && y.EnemyID < 0x1000 && pred(x, y))
+                    .Where(y => y.ID < x.Header.NumSlots && y.EnemyID != 0 && y.EnemyID < 0x1000 && pred(x, y))
                     .Select(y => FormatAIRow(filename, x.MapLeader, x, y, x1File.NameGetterContext))
                 )
                 .ToArray();
@@ -148,8 +148,8 @@ namespace X1_Analyzer {
 
         public static string[]? HasWeirdCondZone(string filename, IX1_File x1File) {
             // NOTE: It looks like the zone can have the 0x80 bit set. What does it mean in that case...?
-            bool isWeirdZone(Battle battle, int zone) => zone != 0xFF && (zone & 0x7F) >= battle.BattleHeader.NumZones;
-            bool hasWeirdZone(Battle battle, Slot slot) {
+            bool isWeirdZone(BattleMap battle, int zone) => zone != 0xFF && (zone & 0x7F) >= battle.Header.NumZones;
+            bool hasWeirdZone(BattleMap battle, Slot slot) {
                 return isWeirdZone(battle, slot.Cond1Zone) ||
                        isWeirdZone(battle, slot.Cond2Zone) ||
                        isWeirdZone(battle, slot.Cond3Zone) ||
@@ -160,8 +160,8 @@ namespace X1_Analyzer {
 
         public static string[]? HasCond2PlusWithOffConditionBehavior(string filename, IX1_File x1File) {
             // Filter out the "always check" flag, because in this case, the fallback behavior DOES make sense.
-            bool isWeirdZone(Battle battle, Cond cond) => cond.Type == 0x01 || cond.Type == 0x11 && ((cond.Zone & 0x80) == 0);
-            bool hasWeirdZone(Battle battle, Slot slot) {
+            bool isWeirdZone(BattleMap battle, Cond cond) => cond.Type == 0x01 || cond.Type == 0x11 && ((cond.Zone & 0x80) == 0);
+            bool hasWeirdZone(BattleMap battle, Slot slot) {
                 var conds = GetConds(slot);
                 return // ignore Cond1, because that one is a bit special.
                        isWeirdZone(battle, conds[1]) ||
@@ -172,8 +172,8 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasAlwaysCheckWithType00(string filename, IX1_File x1File) {
-            bool isWeirdZone(Battle battle, Cond cond) => ((cond.Zone & 0x80) == 0x80 && cond.Type == 0x00);
-            bool hasWeirdZone(Battle battle, Slot slot) {
+            bool isWeirdZone(BattleMap battle, Cond cond) => ((cond.Zone & 0x80) == 0x80 && cond.Type == 0x00);
+            bool hasWeirdZone(BattleMap battle, Slot slot) {
                 var conds = GetConds(slot);
                 return conds.Any(x => isWeirdZone(battle, x));
             };
@@ -181,7 +181,7 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasCond1With01Or11(string filename, IX1_File x1File) {
-            bool hasWeirdZone(Battle battle, Slot slot) {
+            bool hasWeirdZone(BattleMap battle, Slot slot) {
                 var conds = GetConds(slot);
                 return ((conds[0].Zone & 0x80) == 0x00) && (conds[0].Type == 0x01 || conds[0].Type == 0x11);
             };
@@ -189,7 +189,7 @@ namespace X1_Analyzer {
         }
 
         public static string[]? Has0z00(string filename, IX1_File x1File) {
-            bool hasWeirdZone(Battle battle, Slot slot) {
+            bool hasWeirdZone(BattleMap battle, Slot slot) {
                 var conds = GetConds(slot);
                 return conds.Skip(1).Any(x => !x.AlwaysCheck && x.Type == 0x00);
             };
@@ -197,7 +197,7 @@ namespace X1_Analyzer {
         }
 
         public static string[]? Has8z00(string filename, IX1_File x1File) {
-            bool hasWeirdZone(Battle battle, Slot slot) {
+            bool hasWeirdZone(BattleMap battle, Slot slot) {
                 var conds = GetConds(slot);
                 return conds.Skip(1).Any(x => x.AlwaysCheck && x.Type == 0x00);
             };
@@ -218,7 +218,7 @@ namespace X1_Analyzer {
         public static string[]? HasVerySpecialAI(string filename, IX1_File x1File)
             => AISearchBase(filename, x1File, (battle, slot) => GetAIs(slot).Any(x => x.IsSpecial && x.Tag >= 0x02));
 
-        public static string FormatAIRow(string filename, MapLeaderType leader, Battle battle, Slot slot, INameGetterContext ngc) {
+        public static string FormatAIRow(string filename, MapLeaderType leader, BattleMap battle, Slot slot, INameGetterContext ngc) {
             return
                 $"{filename,-8}, {leader,-7}: " +
                 $"{slot.ID:X02} - {slot.EnemyID:X02} ({ngc.GetName(null, null, slot.EnemyID, [NamedValueType.Monster]),-30}) - " +

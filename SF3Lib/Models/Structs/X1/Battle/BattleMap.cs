@@ -8,8 +8,8 @@ using SF3.Scenes;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class Battle : Struct, IScene, ITableContainer {
-        public Battle(IByteData data, int id, string name, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattlePointerTable battles)
+    public class BattleMap : Struct, IScene, ITableContainer {
+        public BattleMap(IByteData data, int id, string name, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattleMapPointerTable battles)
         : base(data, id, name, address, 0x14) {
             MapLeader  = mapLeader;
             Address    = address;
@@ -28,7 +28,7 @@ namespace SF3.Models.Structs.X1.Battle {
             var customMovementAddress = aiAddress + 0x80;
             var mapMoveCoordsAddr     = customMovementAddress + 0x2C0;
 
-            BattleHeader = new BattleHeader(Data, 0, "BattleHeader", headerAddress);
+            Header = new BattleMapHeader(Data, 0, nameof(BattleMapHeader), headerAddress);
 
             Tables = new List<ITable>() {
                 (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
@@ -42,10 +42,10 @@ namespace SF3.Models.Structs.X1.Battle {
         public MapLeaderType MapLeader { get; }
         public bool HasLargeEnemyTable { get; }
         public ScenarioType Scenario { get; }
-        public BattlePointerTable Battles { get; }
+        public BattleMapPointerTable Battles { get; }
 
         [BulkCopyRecurse]
-        public BattleHeader BattleHeader { get; private set; }
+        public BattleMapHeader Header { get; private set; }
         [BulkCopyRecurse]
         public SlotTable SlotTable { get; private set; }
         [BulkCopyRecurse]
@@ -59,9 +59,9 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public bool IsBattle => true;
         public string SceneName { get; }
-        public int NumActors => BattleHeader.NumSlots;
+        public int NumActors => Header.NumSlots;
         public IReadOnlyList<IActor> Actors => SlotTable;
-        public int NumZones => BattleHeader.NumZones;
+        public int NumZones => Header.NumZones;
         public IReadOnlyList<Zone> Zones => ZoneTable;
 
         public IEnumerable<ITable> Tables { get; }

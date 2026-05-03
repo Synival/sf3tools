@@ -27,8 +27,8 @@ namespace SF3.Win.Views.X1 {
                 CreateChild(new DataModelView("Battle", Model.BattleMetaHeader, ngc));
 
                 // TODO: Make a new view for battles!
-                if (Model.BattleMetaHeader.BattlePointerTable != null)
-                    CreateChild(new TableView("Battle Pointers", Model.BattleMetaHeader.BattlePointerTable, ngc));
+                if (Model.BattleMetaHeader.BattleMapPointerTable != null)
+                    CreateChild(new TableView("Battle Pointers", Model.BattleMetaHeader.BattleMapPointerTable, ngc));
             }
 
             if (Model.NpcTables?.Any() == true) {
@@ -97,8 +97,8 @@ namespace SF3.Win.Views.X1 {
                 ));
             }
 
-            foreach (var battle in Model.GetBattles().Values)
-                CreateChild(new BattleView($"Battle ({battle.MapLeader})", battle, ngc));
+            foreach (var battle in Model.GetBattleMaps().Values)
+                CreateChild(new BattleMapView($"Battle ({battle.MapLeader})", battle, ngc));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 

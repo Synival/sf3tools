@@ -9,7 +9,7 @@ using SF3.Types;
 
 namespace SF3.Models.Files.X1 {
     public interface IX1_File : IScenarioTableFile, IBlacksmithTableFile, ISceneFile {
-        Dictionary<MapLeaderType, Battle> GetBattles();
+        Dictionary<MapLeaderType, BattleMap> GetBattleMaps();
 
         bool IsBTL99 { get; }
         bool IsBattle { get; }

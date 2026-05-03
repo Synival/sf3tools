@@ -24,7 +24,7 @@ namespace X1_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X1_Match_Func(string filename, IX1_File x1File) {
-            var battles = x1File.GetBattles().Values.ToArray();
+            var battles = x1File.GetBattleMaps().Values.ToArray();
             if (battles.Length == 0)
                 return null;
 
@@ -197,7 +197,7 @@ namespace X1_Analyzer {
 
         private static string GetFileString(ScenarioType inputScenario, string filename, IX1_File x1File) {
             var typeStr = (x1File.IsBattle ? "Battle: " : "Town")
-                + string.Join(", ", x1File.GetBattles().Values.Select(x => x.MapLeader.ToString()) ?? [""]);
+                + string.Join(", ", x1File.GetBattleMaps().Values.Select(x => x.MapLeader.ToString()) ?? [""]);
             return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
                 + " | " + typeStr.PadRight(22)
                 ;

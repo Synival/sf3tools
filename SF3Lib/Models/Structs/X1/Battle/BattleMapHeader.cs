@@ -2,14 +2,14 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class BattleHeader : Struct {
+    public class BattleMapHeader : Struct {
         private readonly int _numSlotsAddr;
         private readonly int _numZonesAddr;
         private readonly int _numPositionsAddr;
         private readonly int _numPathsAddr;
         private readonly int _numMapMoveCoordsAddr;
 
-        public BattleHeader(IByteData data, int id, string name, int address)
+        public BattleMapHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x0A) {
             _numSlotsAddr         = Address + 0x00; // 2 bytes
             _numZonesAddr         = Address + 0x02; // 2 bytes
