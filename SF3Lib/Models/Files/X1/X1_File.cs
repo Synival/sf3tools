@@ -51,7 +51,6 @@ namespace SF3.Models.Files.X1 {
             int warpAddress;
             int npcAddress;
             int battleMetaHeaderAddress;
-            int battlePointersAddress;
             int enterAddress;
             int arrowAddress;
 
@@ -70,13 +69,11 @@ namespace SF3.Models.Files.X1 {
             ) {
                 npcAddress              = -1;
                 battleMetaHeaderAddress = battleMetaHeaderOrNPCsAddress;
-                battlePointersAddress   = valueAtBattleMetaHeaderOrNPCsAddress - (int) RamAddress;
                 IsBattle = true;
             }
             else {
                 npcAddress              = battleMetaHeaderOrNPCsAddress;
                 battleMetaHeaderAddress = -1;
-                battlePointersAddress   = -1;
                 IsBattle = false;
             }
 
@@ -100,9 +97,6 @@ namespace SF3.Models.Files.X1 {
 
             // If this is a battle, we need to get the addresses for a lot of battle-specific stuff.
             if (IsBattle == true) {
-                // Load the BattlePointersTable early so we can use it to determine the addresses of other tables.
-                BattlePointerTable = BattlePointerTable.Create(Data, "BattlePointers", ResourceFile("BattlePointersList.xml"), battlePointersAddress, hasLargeEnemyTable, Scenario, RamAddress);
-
                 // Get battle talk functions.
                 var talkPtrAddr = isScn1OrBTL99 ? 0xF0 : 0xFC;
                 var talkPtrValue = (uint) Data.GetDouble(talkPtrAddr);
@@ -132,7 +126,7 @@ namespace SF3.Models.Files.X1 {
                         // Is this a valid pointer to memory?
                         if (tileMovementAddress < 0x06070000 && tileMovementAddress > 0)
                             tileMovementAddress -= (int) RamAddress;
-                        // If not, emply the workaround for X1BTL330-339 and X1BTLP05 not being consistant with everything else
+                        // If not, employ the workaround for X1BTL330-339 and X1BTLP05 not being consistant with everything else
                         // and locate the table directly.
                         // TODO: does this pointer exist in other X1BTL* files?
                         else
@@ -146,7 +140,6 @@ namespace SF3.Models.Files.X1 {
             }
             else {
                 // No battle, so none of these tables exist.
-                battlePointersAddress = -1;
                 tileMovementAddress = -1;
                 characterTargetPriorityTablesAddresses = -1;
                 battleTalkAddress = -1;
@@ -160,12 +153,10 @@ namespace SF3.Models.Files.X1 {
             if (warpAddress >= 0)
                 tables.Add(WarpTable = WarpTable.Create(Data, "Warps", warpAddress, IsBattle, NameGetterContext));
             if (battleMetaHeaderAddress >= 0) {
-                BattleMetaHeader = new BattleMetaHeader(Data, 0, nameof(BattleMetaHeader), battleMetaHeaderAddress);
+                BattleMetaHeader = new BattleMetaHeader(Data, 0, nameof(BattleMetaHeader), battleMetaHeaderAddress, hasLargeEnemyTable, Scenario, RamAddress);
                 tables.AddRange(BattleMetaHeader.Tables);
-            }
-            if (battlePointersAddress >= 0) {
-                tables.Add(BattlePointerTable);
-                var battles = BattlePointerTable.Select(x => x.Battle).Where(x => x != null).ToArray();
+
+                var battles = BattleMetaHeader.BattlePointerTable.Select(x => x.Battle).Where(x => x != null).ToArray();
                 foreach (var battle in battles) {
                     tables.AddRange(battle.Tables);
                     Discoveries.AddStruct((uint) (battle.BattleHeader.Address + RamAddress), "BattleHeader", $"Battle_{battle.MapLeader}", battle.BattleHeader.Size);
@@ -250,7 +241,7 @@ namespace SF3.Models.Files.X1 {
         }
 
         public Dictionary<MapLeaderType, Battle> GetBattles()
-            => BattlePointerTable?.Select(x => x.Battle)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, Battle>();
+            => BattleMetaHeader?.BattlePointerTable?.Select(x => x.Battle)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, Battle>();
 
         private void DiscoverFunctions(byte[] data) {
             Discoveries.AddFunction((uint) Data.GetDouble(0x08), "X1InitFunc", "x1Init()", null);
@@ -843,8 +834,6 @@ namespace SF3.Models.Files.X1 {
         public WarpTable WarpTable { get; private set; }
         [BulkCopyRecurse]
         public BattleMetaHeader BattleMetaHeader { get; private set; }
-        [BulkCopyRecurse]
-        public BattlePointerTable BattlePointerTable { get; private set; }
         [BulkCopyRecurse]
         public IEnumerable<NpcTable> NpcTables { get; private set; }
         [BulkCopyRecurse]

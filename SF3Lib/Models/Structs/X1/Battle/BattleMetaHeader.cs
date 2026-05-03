@@ -2,6 +2,9 @@
 using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.Models.Tables.X1.Battle;
+using SF3.Types;
+using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleMetaHeader : Struct, ITableContainer {
@@ -11,22 +14,33 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _unknown0x0CAddr;
         private readonly int _unknown0x10Addr;
 
-        public BattleMetaHeader(IByteData data, int id, string name, int address)
+        public BattleMetaHeader(IByteData data, int id, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, int ramAddress)
         : base(data, id, name, address, 0x14) {
+            HasLargeEnemyTable = hasLargeEnemyTable;
+            Scenario           = scenario;
+            RamAddress         = ramAddress;
+
             _battlePointersAddr = address + 0x00; // 4 bytes
             _unknown0x04Addr    = address + 0x04; // 4 bytes
             _unknown0x08Addr    = address + 0x08; // 4 bytes
             _unknown0x0CAddr    = address + 0x0C; // 4 bytes
             _unknown0x10Addr    = address + 0x10; // 4 bytes
 
-            Tables = new ITable[] {
-                // BattlePointerTable
-            };
+            var tableList = new List<ITable>();
+
+            if (BattlePointersTableAddress != 0) {
+                tableList.Add(BattlePointerTable = BattlePointerTable.Create(
+                    Data, nameof(BattlePointerTable), ResourceFile("BattlePointersList.xml"), BattlePointersTableAddress - RamAddress,
+                    HasLargeEnemyTable, Scenario, RamAddress
+                ));
+            }
+
+            Tables = tableList.ToArray();
         }
 
         [TableViewModelColumn(addressField: nameof(_battlePointersAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
-        public int BattlePointers {
+        public int BattlePointersTableAddress {
             get => Data.GetDouble(_battlePointersAddr);
             set => Data.SetDouble(_battlePointersAddr, value);
         }
@@ -59,6 +73,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetDouble(_unknown0x10Addr, value);
         }
 
+        public BattlePointerTable BattlePointerTable { get; }
+
         public IEnumerable<ITable> Tables { get; }
+        public bool HasLargeEnemyTable { get; }
+        public ScenarioType Scenario { get; }
+        public int RamAddress { get; }
     }
 }
