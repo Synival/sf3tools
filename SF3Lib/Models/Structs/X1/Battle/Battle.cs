@@ -4,13 +4,13 @@ using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using SF3.Actors;
 using SF3.ByteData;
-using SF3.Models.Structs.X1.Battle;
+using SF3.Models.Files;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X1.Battle;
 using SF3.Scenes;
 using SF3.Types;
 
-namespace SF3.Models.Files.X1 {
+namespace SF3.Models.Structs.X1.Battle {
     public class Battle : TableFile, IScene {
         protected Battle(IByteData data, INameGetterContext nameContext, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, Battle prevBattle)
         : base(data, nameContext) {

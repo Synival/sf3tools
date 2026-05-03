@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.X1;
+using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Win.Views.X1 {
     public class BattleView : TabView {

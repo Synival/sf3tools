@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using SF3.Models.Structs.Shared;
+using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X1;
 using SF3.Models.Tables.X1.Battle;

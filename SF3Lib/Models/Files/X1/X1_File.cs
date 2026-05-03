@@ -19,6 +19,7 @@ using CommonLib.Utils;
 using static CommonLib.Utils.ResourceUtils;
 using CommonLib.Discovery;
 using SF3.Scenes;
+using SF3.Models.Structs.X1.Battle;
 
 namespace SF3.Models.Files.X1 {
     public class X1_File : ScenarioTableFile, IX1_File {
