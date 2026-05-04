@@ -105,7 +105,7 @@ namespace X1_Analyzer {
                     var file = fileWithIndex.File;
                     int fileIndex = fileWithIndex.Index;
 
-                    var filename = Path.GetFileNameWithoutExtension(file);
+                    var filename = System.IO.Path.GetFileNameWithoutExtension(file);
                     if (filename == "X1SAR_S2") {
                         DoneWithLogIndex(fileIndex);
                         return;
@@ -198,7 +198,7 @@ namespace X1_Analyzer {
         private static string GetFileString(ScenarioType inputScenario, string filename, IX1_File x1File) {
             var typeStr = (x1File.IsBattle ? "Battle: " : "Town")
                 + string.Join(", ", x1File.GetBattleMaps().Values.Select(x => x.MapLeader.ToString()) ?? [""]);
-            return inputScenario.ToString().PadLeft(11) + ": " + Path.GetFileName(filename).PadLeft(12)
+            return inputScenario.ToString().PadLeft(11) + ": " + System.IO.Path.GetFileName(filename).PadLeft(12)
                 + " | " + typeStr.PadRight(22)
                 ;
         }

@@ -12,7 +12,7 @@ namespace SF3.Models.Tables.X1.Battle {
             => Create(() => new TeamBitmaskTable(data, name, address, itemNamePrefix));
 
         public override bool Load()
-            => Load((id, address) => new TeamBitmask(Data, id, $"{ItemNamePrefix} {id:D2}", address));
+            => Load((id, address) => new TeamBitmask(Data, id, $"{ItemNamePrefix}{id:D2}", address));
 
         public string ItemNamePrefix { get; }
     }

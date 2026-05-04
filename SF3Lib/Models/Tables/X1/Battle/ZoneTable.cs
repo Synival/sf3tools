@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.X1.Battle {
             => Create(() => new ZoneTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new Zone(Data, id, "SpawnZone" + id.ToString("D2"), address));
+            => Load((id, address) => new Zone(Data, id, $"{nameof(Zone)}{id:D2}", address));
     }
 }

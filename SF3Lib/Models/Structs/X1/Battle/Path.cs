@@ -2,7 +2,7 @@ using CommonLib.Attributes;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class AITargetPath : Struct {
+    public class Path : Struct {
         private readonly int _pathEnds;
         private readonly int _alwaysFFFF;
         private readonly int _positionCountAddr;
@@ -15,7 +15,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _xPos4Addr;
         private readonly int _zPos4Addr;
 
-        public AITargetPath(IByteData data, int id, string name, int address)
+        public Path(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x16) {
             _pathEnds        = Address + 0x00; // 2 bytes
             _alwaysFFFF      = Address + 0x02; // 2 bytes
