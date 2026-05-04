@@ -128,9 +128,6 @@
     <Content Include="Resources\EffectiveTypes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\BattlePointersList.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Spritesheets\Frank (U) (40x40).png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

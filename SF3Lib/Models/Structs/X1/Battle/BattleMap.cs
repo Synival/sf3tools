@@ -31,11 +31,11 @@ namespace SF3.Models.Structs.X1.Battle {
             Header = new BattleMapHeader(Data, 0, nameof(BattleMapHeader), headerAddress);
 
             Tables = new List<ITable>() {
-                (SlotTable              = SlotTable.Create            (Data, "Slots",          slotsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
-                (ZoneTable              = ZoneTable.Create            (Data, "Zones",          zonesAddress)),
-                (AITargetLocationsTable = AITargetLocationTable.Create(Data, "Locations",      locationsAddress)),
-                (AITarrgetPathTable     = AITargetPathTable.Create    (Data, "Paths",          pathsAddress)),
-                (MapMoveCoordTable      = MapMoveCoordTable.Create    (Data, "MapMoveCoords",  mapMoveCoordsAddress)),
+                (SlotTable          = SlotTable.Create            (Data, "Slots",         slotsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
+                (ZoneTable          = ZoneTable.Create            (Data, "Zones",         zonesAddress)),
+                (LocationTable      = AITargetLocationTable.Create(Data, "Locations",     locationsAddress)),
+                (PathTable          = AITargetPathTable.Create    (Data, "Paths",         pathsAddress)),
+                (MapMoveTargetTable = MapMoveCoordTable.Create    (Data, "MapMoveCoords", mapMoveCoordsAddress)),
             };
         }
 
@@ -51,11 +51,11 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopyRecurse]
         public ZoneTable ZoneTable { get; private set; }
         [BulkCopyRecurse]
-        public AITargetLocationTable AITargetLocationsTable { get; private set; }
+        public AITargetLocationTable LocationTable { get; private set; }
         [BulkCopyRecurse]
-        public AITargetPathTable AITarrgetPathTable { get; private set; }
+        public AITargetPathTable PathTable { get; private set; }
         [BulkCopyRecurse]
-        public MapMoveCoordTable MapMoveCoordTable { get; private set; }
+        public MapMoveCoordTable MapMoveTargetTable { get; private set; }
 
         public bool IsBattle => true;
         public string SceneName { get; }

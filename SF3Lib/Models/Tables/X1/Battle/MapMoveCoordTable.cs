@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.X1.Battle {
             => Create(() => new MapMoveCoordTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new MapMoveCoord(Data, id, "MapMoveCoord" + id.ToString("D2"), address));
+            => Load((id, address) => new MapMoveCoord(Data, id, $"{nameof(MapMoveCoord)}{id:D2}", address));
     }
 }

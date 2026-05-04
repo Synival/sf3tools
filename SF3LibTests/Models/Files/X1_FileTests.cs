@@ -64,8 +64,8 @@ namespace SF3.Tests.Models.Files {
                     Assert.IsNotNull(battle.Header);
                     Assert.IsNotNull(battle.SlotTable);
                     Assert.IsNotNull(battle.ZoneTable);
-                    Assert.IsNotNull(battle.AITargetLocationsTable);
-                    Assert.IsNotNull(battle.AITarrgetPathTable);
+                    Assert.IsNotNull(battle.LocationTable);
+                    Assert.IsNotNull(battle.PathTable);
                 }
 
                 if (testCase.Scenario == ScenarioType.Scenario1) {
