@@ -21,21 +21,21 @@ namespace SF3.Models.Structs.X1.Battle {
             var enemyTableSize = HasLargeEnemyTable ? 0xea0 : 0xa90;
 
             // Determine addresses of sub-tables.
-            var headerAddress         = Address;
-            var slotAddress           = headerAddress + 0x0a;
-            var zoneAddress           = slotAddress + enemyTableSize;
-            var aiAddress             = zoneAddress + 0x120;
-            var customMovementAddress = aiAddress + 0x80;
-            var mapMoveCoordsAddr     = customMovementAddress + 0x2C0;
+            var headerAddress        = Address;
+            var slotsAddress         = headerAddress    + 0x0a;
+            var zonesAddress         = slotsAddress     + enemyTableSize;
+            var locationsAddress     = zonesAddress     + 0x120;
+            var pathsAddress         = locationsAddress + 0x80;
+            var mapMoveCoordsAddress = pathsAddress     + 0x2C0;
 
             Header = new BattleMapHeader(Data, 0, nameof(BattleMapHeader), headerAddress);
 
             Tables = new List<ITable>() {
-                (SlotTable             = SlotTable.Create            (Data, "Slots",          slotAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
-                (ZoneTable             = ZoneTable.Create            (Data, "Zones",          zoneAddress)),
-                (AITargetPositionTable = AITargetPositionTable.Create(Data, "Positions",      aiAddress)),
-                (AITarrgetPathTable    = AITargetPathTable.Create    (Data, "Paths",          customMovementAddress)),
-                (MapMoveCoordTable     = MapMoveCoordTable.Create    (Data, "MapMoveCoords",  mapMoveCoordsAddr)),
+                (SlotTable              = SlotTable.Create            (Data, "Slots",          slotsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
+                (ZoneTable              = ZoneTable.Create            (Data, "Zones",          zonesAddress)),
+                (AITargetLocationsTable = AITargetLocationTable.Create(Data, "Locations",      locationsAddress)),
+                (AITarrgetPathTable     = AITargetPathTable.Create    (Data, "Paths",          pathsAddress)),
+                (MapMoveCoordTable      = MapMoveCoordTable.Create    (Data, "MapMoveCoords",  mapMoveCoordsAddress)),
             };
         }
 
@@ -51,7 +51,7 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopyRecurse]
         public ZoneTable ZoneTable { get; private set; }
         [BulkCopyRecurse]
-        public AITargetPositionTable AITargetPositionTable { get; private set; }
+        public AITargetLocationTable AITargetLocationsTable { get; private set; }
         [BulkCopyRecurse]
         public AITargetPathTable AITarrgetPathTable { get; private set; }
         [BulkCopyRecurse]

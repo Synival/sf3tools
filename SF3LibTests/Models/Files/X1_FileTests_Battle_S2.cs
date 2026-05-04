@@ -23,7 +23,7 @@ namespace SF3.Tests.Models.Files {
         public void AITable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.GetBattleMaps()[MapLeaderType.Medion];
-            var table = battle.AITargetPositionTable;
+            var table = battle.AITargetLocationsTable;
 
             Assert.AreEqual(30, table[0].X);
             Assert.AreEqual(24, table[0].Z);

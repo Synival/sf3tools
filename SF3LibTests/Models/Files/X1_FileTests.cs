@@ -64,7 +64,7 @@ namespace SF3.Tests.Models.Files {
                     Assert.IsNotNull(battle.Header);
                     Assert.IsNotNull(battle.SlotTable);
                     Assert.IsNotNull(battle.ZoneTable);
-                    Assert.IsNotNull(battle.AITargetPositionTable);
+                    Assert.IsNotNull(battle.AITargetLocationsTable);
                     Assert.IsNotNull(battle.AITarrgetPathTable);
                 }
 

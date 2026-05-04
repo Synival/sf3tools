@@ -5,7 +5,7 @@ namespace SF3.Models.Structs.X1.Battle {
     public class BattleMapHeader : Struct {
         private readonly int _numSlotsAddr;
         private readonly int _numZonesAddr;
-        private readonly int _numPositionsAddr;
+        private readonly int _numLocationsAddr;
         private readonly int _numPathsAddr;
         private readonly int _numMapMoveCoordsAddr;
 
@@ -13,7 +13,7 @@ namespace SF3.Models.Structs.X1.Battle {
         : base(data, id, name, address, 0x0A) {
             _numSlotsAddr         = Address + 0x00; // 2 bytes
             _numZonesAddr         = Address + 0x02; // 2 bytes
-            _numPositionsAddr     = Address + 0x04; // 2 bytes
+            _numLocationsAddr     = Address + 0x04; // 2 bytes
             _numPathsAddr         = Address + 0x06; // 2 bytes
             _numMapMoveCoordsAddr = Address + 0x08; // 2 bytes
         }
@@ -32,11 +32,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetWord(_numZonesAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_numPositionsAddr), displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_numLocationsAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
-        public int NumPositions {
-            get => Data.GetWord(_numPositionsAddr);
-            set => Data.SetWord(_numPositionsAddr, value);
+        public int NumLocations {
+            get => Data.GetWord(_numLocationsAddr);
+            set => Data.SetWord(_numLocationsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numPathsAddr), displayOrder: 7, displayFormat: "X2")]
