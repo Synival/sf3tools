@@ -41,11 +41,11 @@ namespace SF3.Win.Views {
             // Recurses downward from a TabControl to make the "cousin" tab with name tabNameList[0] is selected
             // when generationsDown reaches 0.
             int selectCousinTabs(TabControl ancestorTabControl, List<string> tabNameList, int generationsDown) {
-                if (generationsDown == 0) {
-                    var similarTab = getTabPageByName(ancestorTabControl, tabNameList[generationsDown]);
-                    if (similarTab == null)
-                        return 0;
+                var similarTab = getTabPageByName(ancestorTabControl, tabNameList[generationsDown]);
+                if (similarTab == null)
+                    return 0;
 
+                if (generationsDown == 0) {
                     if (ancestorTabControl.SelectedTab != similarTab)
                         ancestorTabControl.SelectedTab = similarTab;
                     return 1;
