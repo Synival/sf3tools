@@ -18,12 +18,12 @@ namespace SF3.Win.Views {
         public override Control Create() {
             _childViews = new List<IView>();
 
-            var tabControl = new EnhancedTabControl(TabAlignment);
+            var newTabControl = new EnhancedTabControl(TabAlignment);
 
-            tabControl.SuspendLayout();
-            tabControl.Name = "tabsControlView" + (s_controlIndex++);
-            tabControl.TabIndex = 1;
-            tabControl.ResumeLayout();
+            newTabControl.SuspendLayout();
+            newTabControl.Name = "tabsControlView" + (s_controlIndex++);
+            newTabControl.TabIndex = 1;
+            newTabControl.ResumeLayout();
 
             // Helper function to get a tab page with the same name.
             TabPage getTabPageByName(TabControl tabControl, string name) {
@@ -73,13 +73,13 @@ namespace SF3.Win.Views {
             // other files will select the same tab as well automatically. This is useful for comparing one
             // table with another between files.
             // TODO: additional checks to make sure the TabControls are the "same kind of" TabControl
-            tabControl.Selected += (s, e) => {
+            newTabControl.Selected += (s, e) => {
                 if (s_inSelectCousinTabs)
                     return;
                 s_inSelectCousinTabs = true;
 
                 int generationsRemoved = 0;
-                var ancestorTabControlPage = tabControl.SelectedTab;
+                var ancestorTabControlPage = newTabControl.SelectedTab;
                 var tabNameList = new List<string>();
 
                 while (ancestorTabControlPage?.Parent != null) {
@@ -95,8 +95,8 @@ namespace SF3.Win.Views {
                 s_inSelectCousinTabs = false;
             };
 
-            Control = tabControl;
-            return tabControl;
+            Control = newTabControl;
+            return newTabControl;
         }
 
         public override void Destroy() {
