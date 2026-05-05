@@ -109,6 +109,8 @@ namespace SF3.Win.Views {
                 foreach (var c in _childViews)
                     c.Destroy();
                 _childViews.Clear();
+                foreach (var c in _childViews)
+                    c.Parent = null;
                 _childViews = null;
             }
 
@@ -178,6 +180,7 @@ namespace SF3.Win.Views {
                 ChildViewCreate();
 
             _childViews.Add(childView);
+            childView.Parent = this;
             _tabsForChildren[childView] = (TabPage) tabPage;
         }
 
@@ -191,6 +194,7 @@ namespace SF3.Win.Views {
 
             child.Destroy();
             _childViews.Remove(child);
+            child.Parent = null;
 
             tabPage.Dispose();
             return true;
@@ -203,6 +207,9 @@ namespace SF3.Win.Views {
             foreach (var child in ChildViews)
                 child.RefreshContent();
         }
+
+        public IView GetChildViewForTabPage(TabPage page)
+            => _tabsForChildren.FirstOrDefault(x => x.Value == page).Key;
 
         public bool LazyLoad { get; set; }
         public TabAlignment TabAlignment { get; set; }

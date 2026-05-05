@@ -141,6 +141,14 @@ namespace SF3.Win.Views {
         public Control Control => ActualView?.Control;
         public bool IsCreated => ActualView?.IsCreated ?? false;
 
+        public IView Parent {
+            get => ActualView?.Parent;
+            set {
+                if (ActualView != null)
+                    ActualView.Parent = value;
+            }
+        }
+
         private bool _disposedValue;
     }
 }

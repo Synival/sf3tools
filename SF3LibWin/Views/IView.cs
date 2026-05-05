@@ -35,5 +35,10 @@ namespace SF3.Win.Views {
         /// 'True' when Create() has been called successfully.
         /// </summary>
         bool IsCreated { get; }
+
+        /// <summary>
+        /// Parent, if applicable.
+        /// </summary>
+        IView Parent { get; set; }
     }
 }

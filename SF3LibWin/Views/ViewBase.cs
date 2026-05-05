@@ -25,5 +25,6 @@ namespace SF3.Win.Views {
         public string Name { get; }
         public Control Control { get; protected set; } = null;
         public bool IsCreated => Control != null;
+        public IView Parent { get; set; }
     }
 }
