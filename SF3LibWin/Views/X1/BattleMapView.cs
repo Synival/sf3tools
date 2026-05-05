@@ -29,7 +29,7 @@ namespace SF3.Win.Views.X1 {
             if (Model.PathTable != null)
                 CreateChild(new TableView("Paths", Model.PathTable, ngc));
             if (Model.MapMoveTargetTable != null)
-                CreateChild(new TableView("Map Move Coords", Model.MapMoveTargetTable, ngc));
+                CreateChild(new TableView("Map Move Arrival Locations", Model.MapMoveTargetTable, ngc));
 
             return Control;
         }

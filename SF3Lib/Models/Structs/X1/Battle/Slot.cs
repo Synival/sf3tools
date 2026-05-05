@@ -68,12 +68,12 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _flagsAddr;
         private readonly int _flagTieInAddr;
 
-        public Slot(IByteData data, int id, string name, int address, ScenarioType scenario, Slot prevSlot, BattleMapPointerTable battles, MapLeaderType mapLeader)
+        public Slot(IByteData data, int id, string name, int address, ScenarioType scenario, Slot prevSlot, BattleHeader battleHeader, MapLeaderType mapLeader)
         : base(data, id, name, address, 0x34) {
-            Scenario  = scenario;
-            _prevSlot = prevSlot;
-            Battles   = battles;
-            MapLeader = mapLeader;
+            Scenario     = scenario;
+            _prevSlot    = prevSlot;
+            BattleHeader = battleHeader;
+            MapLeader    = mapLeader;
 
             _battleAddrEnemyBase  = GetBattleAddrBase(scenario);
             _battleAddrPlayerBase = _battleAddrEnemyBase + 0x3C * 0xB0;
@@ -141,7 +141,7 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         public ScenarioType Scenario { get; }
-        public BattleMapPointerTable Battles { get; }
+        public BattleHeader BattleHeader { get; }
         public MapLeaderType MapLeader { get; }
 
         public Slot _prevSlot;
@@ -150,7 +150,7 @@ namespace SF3.Models.Structs.X1.Battle {
                 if (_prevSlot != null)
                     return _prevSlot;
                 for (int i = (int) MapLeader - 1; i >= 0; i--) {
-                    var battleMap = Battles[i].BattleMap;
+                    var battleMap = BattleHeader.MapPointerTable[i].BattleMap;
                     if (battleMap != null)
                         return battleMap.SlotTable.Rows[battleMap.SlotTable.Size - 1];
                 }

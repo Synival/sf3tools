@@ -4,21 +4,21 @@ using SF3.Types;
 
 namespace SF3.Models.Tables.X1.Battle {
     public class BattleMapPointerTable : FixedSizeTable<BattleMapPointer> {
-        protected BattleMapPointerTable(IByteData data, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, int ramAddress)
+        protected BattleMapPointerTable(IByteData data, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattleHeader battleHeader)
         : base(data, name, address, 5) {
             HasLargeEnemyTable = hasLargeEnemyTable;
             Scenario           = scenario;
-            RamAddress         = ramAddress;
+            BattleHeader       = battleHeader;
         }
 
-        public static BattleMapPointerTable Create(IByteData data, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, int ramAddress)
-            => Create(() => new BattleMapPointerTable(data, name, address, hasLargeEnemyTable, scenario, ramAddress));
+        public static BattleMapPointerTable Create(IByteData data, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattleHeader battleHeader)
+            => Create(() => new BattleMapPointerTable(data, name, address, hasLargeEnemyTable, scenario, battleHeader));
 
         public override bool Load()
-            => Load((id, address) => new BattleMapPointer(Data, id, $"{(MapLeaderType) id} Map", address, HasLargeEnemyTable, Scenario, (MapLeaderType) id, this));
+            => Load((id, address) => new BattleMapPointer(Data, id, $"{(MapLeaderType) id} Map", address, HasLargeEnemyTable, Scenario, (MapLeaderType) id, BattleHeader));
 
         public bool HasLargeEnemyTable { get; }
         public ScenarioType Scenario { get; }
-        public int RamAddress { get; }
+        public BattleHeader BattleHeader { get; }
     }
 }

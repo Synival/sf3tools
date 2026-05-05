@@ -4,13 +4,12 @@ using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X1.Battle;
 using SF3.Types;
-using static CommonLib.Utils.ResourceUtils;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleHeader : Struct, ITableContainer {
         private readonly int _mapPointersTableAddressAddr;
         private readonly int _unknown0x04Addr;
-        private readonly int _mapMoveCoordFlagsTableAddressAddr;
+        private readonly int _mapMoveCoordFlagsPointerTableAddressAddr;
         private readonly int _teamsCantAttackTableAddressAddr;
         private readonly int _teamsCanSupportTableAddressAddr;
 
@@ -22,7 +21,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
             _mapPointersTableAddressAddr       = address + 0x00; // 4 bytes
             _unknown0x04Addr                   = address + 0x04; // 4 bytes
-            _mapMoveCoordFlagsTableAddressAddr = address + 0x08; // 4 bytes
+            _mapMoveCoordFlagsPointerTableAddressAddr = address + 0x08; // 4 bytes
             _teamsCantAttackTableAddressAddr   = address + 0x0C; // 4 bytes
             _teamsCanSupportTableAddressAddr   = address + 0x10; // 4 bytes
 
@@ -31,12 +30,12 @@ namespace SF3.Models.Structs.X1.Battle {
             if (MapPointersTableAddress != 0) {
                 tableList.Add(MapPointerTable = BattleMapPointerTable.Create(
                     Data, nameof(MapPointerTable), MapPointersTableAddress - RamAddress,
-                    HasLargeEnemyTable, Scenario, RamAddress
+                    HasLargeEnemyTable, Scenario, this
                 ));
             }
 
-            if (MapMoveCoordFlagsTableAddress != 0)
-                tableList.Add(MapMoveCoordFlagsPointerTable = MapMoveCoordFlagsPointerTable.Create(Data, "MapMoveCoordFlags", MapMoveCoordFlagsTableAddress - RamAddress, RamAddress));
+            if (MapMoveCoordFlagsPointerTableAddress != 0)
+                tableList.Add(MapMoveCoordFlagsPointerTable = MapMoveCoordFlagsPointerTable.Create(Data, "MapMoveCoordFlagsPointers", MapMoveCoordFlagsPointerTableAddress - RamAddress, RamAddress));
             if (TeamsCantAttackTableAddress != 0)
                 tableList.Add(TeamsCantAttackTable = TeamBitmaskTable.Create(Data, "TeamCantAttack", TeamsCantAttackTableAddress - RamAddress, "TeamCantAttack"));
             if (TeamsCanSupportTableAddress != 0)
@@ -59,11 +58,11 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetDouble(_unknown0x04Addr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_mapMoveCoordFlagsTableAddressAddr), displayOrder: 2, isPointer: true, minWidth: 80)]
+        [TableViewModelColumn(addressField: nameof(_mapMoveCoordFlagsPointerTableAddressAddr), displayOrder: 2, isPointer: true, minWidth: 80)]
         [BulkCopy]
-        public int MapMoveCoordFlagsTableAddress {
-            get => Data.GetDouble(_mapMoveCoordFlagsTableAddressAddr);
-            set => Data.SetDouble(_mapMoveCoordFlagsTableAddressAddr, value);
+        public int MapMoveCoordFlagsPointerTableAddress {
+            get => Data.GetDouble(_mapMoveCoordFlagsPointerTableAddressAddr);
+            set => Data.SetDouble(_mapMoveCoordFlagsPointerTableAddressAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_teamsCantAttackTableAddressAddr), displayOrder: 3, isPointer: true, minWidth: 80)]

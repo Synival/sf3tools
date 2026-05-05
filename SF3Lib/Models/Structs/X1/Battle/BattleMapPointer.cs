@@ -7,11 +7,11 @@ namespace SF3.Models.Structs.X1.Battle {
     public class BattleMapPointer : Struct {
         private readonly int _pointerAddr;
 
-        public BattleMapPointer(IByteData data, int id, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, MapLeaderType mapLeader, BattleMapPointerTable battles)
+        public BattleMapPointer(IByteData data, int id, string name, int address, bool hasLargeEnemyTable, ScenarioType scenario, MapLeaderType mapLeader, BattleHeader battleHeader)
         : base(data, id, name, address, 0x04) {
             HasLargeEnemyTable = hasLargeEnemyTable;
             Scenario           = scenario;
-            Battles            = battles;
+            BattleHeader       = battleHeader;
             MapLeader          = mapLeader;
 
             _pointerAddr = Address; // 2 bytes
@@ -35,13 +35,13 @@ namespace SF3.Models.Structs.X1.Battle {
             if (_battleMap != null && Pointer == _battleMap.Address)
                 return;
 
-            _battleMap = new BattleMap(Data, ID, $"Battle_{MapLeader}", MapLeader, Pointer - Battles.RamAddress, HasLargeEnemyTable, Scenario, Battles);
+            _battleMap = new BattleMap(Data, ID, $"Battle_{MapLeader}", MapLeader, Pointer - BattleHeader.RamAddress, HasLargeEnemyTable, Scenario, BattleHeader);
         }
 
         public MapLeaderType MapLeader { get; }
         public bool HasLargeEnemyTable { get; }
         public ScenarioType Scenario { get; }
-        public BattleMapPointerTable Battles { get; }
+        public BattleHeader BattleHeader { get; }
 
         private BattleMap _battleMap = null;
         public BattleMap BattleMap => _battleMap;

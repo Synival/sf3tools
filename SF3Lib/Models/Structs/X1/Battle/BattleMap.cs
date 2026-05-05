@@ -9,13 +9,13 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleMap : Struct, IScene, ITableContainer {
-        public BattleMap(IByteData data, int id, string name, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattleMapPointerTable battles)
+        public BattleMap(IByteData data, int id, string name, MapLeaderType mapLeader, int address, bool hasLargeEnemyTable, ScenarioType scenario, BattleHeader battleHeader)
         : base(data, id, name, address, 0x14) {
             MapLeader  = mapLeader;
             Address    = address;
             HasLargeEnemyTable = hasLargeEnemyTable;
             Scenario   = scenario;
-            Battles    = battles;
+            BattleHeader = battleHeader;
             SceneName  = $"Battle ({mapLeader})";
 
             var enemyTableSize = HasLargeEnemyTable ? 0xea0 : 0xa90;
@@ -31,18 +31,18 @@ namespace SF3.Models.Structs.X1.Battle {
             Header = new BattleMapHeader(Data, 0, nameof(BattleMapHeader), headerAddress);
 
             Tables = new List<ITable>() {
-                (SlotTable          = SlotTable.Create        (Data, "Slots",         slotsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, Battles, MapLeader)),
+                (SlotTable          = SlotTable.Create        (Data, "Slots",         slotsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, BattleHeader, MapLeader)),
                 (ZoneTable          = ZoneTable.Create        (Data, "Zones",         zonesAddress)),
                 (LocationTable      = LocationTable.Create    (Data, "Locations",     locationsAddress)),
                 (PathTable          = PathTable.Create        (Data, "Paths",         pathsAddress)),
-                (MapMoveTargetTable = MapMoveCoordTable.Create(Data, "MapMoveCoords", mapMoveCoordsAddress)),
+                (MapMoveTargetTable = MapMoveCoordTable.Create(Data, "MapMoveCoords", mapMoveCoordsAddress, MapLeader, BattleHeader)),
             };
         }
 
         public MapLeaderType MapLeader { get; }
         public bool HasLargeEnemyTable { get; }
         public ScenarioType Scenario { get; }
-        public BattleMapPointerTable Battles { get; }
+        public BattleHeader BattleHeader { get; }
 
         [BulkCopyRecurse]
         public BattleMapHeader Header { get; private set; }
