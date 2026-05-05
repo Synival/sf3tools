@@ -15,12 +15,12 @@ namespace SF3.Win.Views.X1 {
             var ngc = NameGetterContext;
             if (Model.Header != null)
                 CreateChild(new DataModelView("Header", Model.Header, ngc));
-            if (Model.SlotTable != null) {
-                CreateChild(new TableView("Slots 1",              Model.SlotTable, ngc, displayGroups: ["Metadata", "Page1"]));
-                CreateChild(new TableView("Slots 2",              Model.SlotTable, ngc, displayGroups: ["Metadata", "Page2"]));
-                CreateChild(new TableView("Slots 3 (Conditions)", Model.SlotTable, ngc, displayGroups: ["Metadata", "Page3"]));
-                CreateChild(new TableView("Slots 4 (AI)",         Model.SlotTable, ngc, displayGroups: ["Metadata", "Page4"]));
-                CreateChild(new TableView("Slots 5 (Flags)",      Model.SlotTable, ngc, displayGroups: ["Metadata", "Page5"]));
+            if (Model.UnitTable != null) {
+                CreateChild(new TableView("Units 1",              Model.UnitTable, ngc, displayGroups: ["Metadata", "Page1"]));
+                CreateChild(new TableView("Units 2",              Model.UnitTable, ngc, displayGroups: ["Metadata", "Page2"]));
+                CreateChild(new TableView("Units 3 (Conditions)", Model.UnitTable, ngc, displayGroups: ["Metadata", "Page3"]));
+                CreateChild(new TableView("Units 4 (AI)",         Model.UnitTable, ngc, displayGroups: ["Metadata", "Page4"]));
+                CreateChild(new TableView("Units 5 (Flags)",      Model.UnitTable, ngc, displayGroups: ["Metadata", "Page5"]));
             }
             if (Model.ZoneTable != null)
                 CreateChild(new TableView("Zones", Model.ZoneTable, ngc));

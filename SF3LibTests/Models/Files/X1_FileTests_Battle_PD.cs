@@ -70,14 +70,14 @@ namespace SF3.Tests.Models.Files {
             var battle = file.GetBattleMaps()[MapLeaderType.Synbios];
             var header = battle.Header;
 
-            Assert.AreEqual(16, header.NumSlots);
+            Assert.AreEqual(16, header.NumUnits);
         }
 
         [TestMethod]
-        public void SlotTable_HasExpectedData() {
+        public void UnitTable_HasExpectedData() {
             var file = TestCase.Create();
             var battle = file.GetBattleMaps()[MapLeaderType.Synbios];
-            var table = battle.SlotTable;
+            var table = battle.UnitTable;
 
             Assert.AreEqual(0xFFFF, table[0].EnemyID);
             Assert.AreEqual(9, table[0].X);

@@ -28,12 +28,12 @@ namespace X1_Analyzer {
             if (battles.Length == 0)
                 return null;
 
-            bool hasAnyConditions(Slot slot) {
-                return slot.Cond1Zone != 0xFF || slot.Cond2Zone != 0xFF || slot.Cond3Zone != 0xFF || slot.Cond4Zone != 0xFF;
+            bool hasAnyConditions(Unit unit) {
+                return unit.Cond1Zone != 0xFF || unit.Cond2Zone != 0xFF || unit.Cond3Zone != 0xFF || unit.Cond4Zone != 0xFF;
             }
 
-            var slotsWithFlagsAndAITarget00 = battles.Any(y => y.SlotTable.Rows.Any(x => x.IgnoreConditions && hasAnyConditions(x)));
-            return slotsWithFlagsAndAITarget00 ? [] : null;
+            var unitsWithFlagsAndAITarget00 = battles.Any(y => y.UnitTable.Rows.Any(x => x.IgnoreConditions && hasAnyConditions(x)));
+            return unitsWithFlagsAndAITarget00 ? [] : null;
         }
 
         private static int s_logIndex = 0;

@@ -72,7 +72,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.ModelDirection,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ModelDirectionInfo)) },
                 { NamedValueType.ModelInstanceType,   new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.ModelInstanceTypeInfo)) },
                 { NamedValueType.Monster,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterInfo.Info[Scenario])) },
-                { NamedValueType.MonsterForSlot,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForSlotInfo.Info[Scenario])) },
+                { NamedValueType.MonsterForUnit,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForUnitInfo.Info[Scenario])) },
                 { NamedValueType.MovementType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MovementTypeInfo)) },
                 { NamedValueType.Music,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MusicInfo.Info[Scenario])) },
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },

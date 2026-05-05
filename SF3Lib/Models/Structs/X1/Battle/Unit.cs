@@ -3,11 +3,10 @@ using CommonLib.Attributes;
 using CommonLib.Utils;
 using SF3.Actors;
 using SF3.ByteData;
-using SF3.Models.Tables.X1.Battle;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X1.Battle {
-    public class Slot : Struct, IActor {
+    public class Unit : Struct, IActor {
         private readonly int _battleAddrEnemyBase;
         private readonly int _battleAddrPlayerBase;
 
@@ -68,10 +67,10 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _flagsAddr;
         private readonly int _flagTieInAddr;
 
-        public Slot(IByteData data, int id, string name, int address, ScenarioType scenario, Slot prevSlot, BattleHeader battleHeader, MapLeaderType mapLeader)
+        public Unit(IByteData data, int id, string name, int address, ScenarioType scenario, Unit prevUnit, BattleHeader battleHeader, MapLeaderType mapLeader)
         : base(data, id, name, address, 0x34) {
             Scenario     = scenario;
-            _prevSlot    = prevSlot;
+            _prevUnit    = prevUnit;
             BattleHeader = battleHeader;
             MapLeader    = mapLeader;
 
@@ -144,15 +143,15 @@ namespace SF3.Models.Structs.X1.Battle {
         public BattleHeader BattleHeader { get; }
         public MapLeaderType MapLeader { get; }
 
-        public Slot _prevSlot;
-        public Slot PrevSlot {
+        public Unit _prevUnit;
+        public Unit PrevUnit {
             get {
-                if (_prevSlot != null)
-                    return _prevSlot;
+                if (_prevUnit != null)
+                    return _prevUnit;
                 for (int i = (int) MapLeader - 1; i >= 0; i--) {
                     var battleMap = BattleHeader.MapPointerTable[i].BattleMap;
                     if (battleMap != null)
-                        return battleMap.SlotTable.Rows[battleMap.SlotTable.Size - 1];
+                        return battleMap.UnitTable.Rows[battleMap.UnitTable.Size - 1];
                 }
                 return null;
             }
@@ -164,7 +163,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_enemyIDAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2", displayGroup: "Metadata")]
         [BulkCopy]
-        [NameGetter(NamedValueType.MonsterForSlot)]
+        [NameGetter(NamedValueType.MonsterForUnit)]
         public int EnemyID {
             get => Data.GetWord(_enemyIDAddr);
             set => Data.SetWord(_enemyIDAddr, value);
@@ -174,7 +173,7 @@ namespace SF3.Models.Structs.X1.Battle {
             EnemyID >= 0x01 && EnemyID < 0x8000 && EnemyID != 0x5B;
 
         public int BattleIDEnemyCounter
-            => PrevSlot == null ? 0x80 : PrevSlot.BattleIDEnemyCounter + (PrevSlot.IsEnemy ? 1 : 0);
+            => PrevUnit == null ? 0x80 : PrevUnit.BattleIDEnemyCounter + (PrevUnit.IsEnemy ? 1 : 0);
 
         public int SpriteID {
             get => IsEnemy ? EnemyID + 0xC8 : (EnemyID == 0x5B) ? CharacterPlus : -1;
@@ -205,15 +204,15 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 1, displayGroup: "Page1", minWidth: 60)]
         [BulkCopy]
-        public int X {
-            get => Data.GetWord(_xAddr);
+        public short X {
+            get => (short) Data.GetWord(_xAddr);
             set => Data.SetWord(_xAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zAddr), displayOrder: 2, displayGroup: "Page1", minWidth: 60)]
         [BulkCopy]
-        public int Z {
-            get => Data.GetWord(_zAddr);
+        public short Z {
+            get => (short) Data.GetWord(_zAddr);
             set => Data.SetWord(_zAddr, value);
         }
 
@@ -291,8 +290,8 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 11.5f, minWidth: 80, displayGroup: "Page2")]
-        public SlotFacingType Facing {
-            get => (SlotFacingType) (FacingIsBoss & 0xE0);
+        public UnitFacingType Facing {
+            get => (UnitFacingType) (FacingIsBoss & 0xE0);
             set => FacingIsBoss = (FacingIsBoss & ~0xE0) | ((int) value & 0xE0);
         }
 
@@ -641,35 +640,35 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         public bool HasActorY => false;
-        public float ActorX { get => X * 32 + 16; set => X = (int) Math.Round((value - 16) / 32); }
+        public float ActorX { get => X * 32 + 16; set => X = (short) Math.Round((value - 16) / 32); }
         public float ActorY { get => 0; set {} }
-        public float ActorZ { get => Z * 32 + 16; set => Z = (int) Math.Round((value - 16) / 32); }
+        public float ActorZ { get => Z * 32 + 16; set => Z = (short) Math.Round((value - 16) / 32); }
 
         public float ActorDirection {
             get {
                 switch (Facing) {
-                    case SlotFacingType.South:     return -180.0f;
-                    case SlotFacingType.Southwest: return -135.0f;
-                    case SlotFacingType.West:      return  -90.0f;
-                    case SlotFacingType.Northwest: return  -45.0f;
-                    case SlotFacingType.North:     return    0.0f;
-                    case SlotFacingType.Northeast: return   45.0f;
-                    case SlotFacingType.East:      return   90.0f;
-                    case SlotFacingType.Southeast: return  135.0f;
+                    case UnitFacingType.South:     return -180.0f;
+                    case UnitFacingType.Southwest: return -135.0f;
+                    case UnitFacingType.West:      return  -90.0f;
+                    case UnitFacingType.Northwest: return  -45.0f;
+                    case UnitFacingType.North:     return    0.0f;
+                    case UnitFacingType.Northeast: return   45.0f;
+                    case UnitFacingType.East:      return   90.0f;
+                    case UnitFacingType.Southeast: return  135.0f;
                     default:                       return    0.0f;
                 }
             }
             set {
                 value = MathHelpers.ActualMod(value + 180.0f, 360.0f) - 180.0f;
-                     if (value < -157.5f) Facing = SlotFacingType.South;
-                else if (value < -112.5f) Facing = SlotFacingType.Southwest;
-                else if (value <  -67.5f) Facing = SlotFacingType.West;
-                else if (value <  -22.5f) Facing = SlotFacingType.Northwest;
-                else if (value <   22.5f) Facing = SlotFacingType.North;
-                else if (value <   67.5f) Facing = SlotFacingType.Northeast;
-                else if (value <  112.5f) Facing = SlotFacingType.East;
-                else if (value <  157.5f) Facing = SlotFacingType.Southeast;
-                else                      Facing = SlotFacingType.South;
+                     if (value < -157.5f) Facing = UnitFacingType.South;
+                else if (value < -112.5f) Facing = UnitFacingType.Southwest;
+                else if (value <  -67.5f) Facing = UnitFacingType.West;
+                else if (value <  -22.5f) Facing = UnitFacingType.Northwest;
+                else if (value <   22.5f) Facing = UnitFacingType.North;
+                else if (value <   67.5f) Facing = UnitFacingType.Northeast;
+                else if (value <  112.5f) Facing = UnitFacingType.East;
+                else if (value <  157.5f) Facing = UnitFacingType.Southeast;
+                else                      Facing = UnitFacingType.South;
             }
         }
     }

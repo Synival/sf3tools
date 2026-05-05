@@ -4,12 +4,13 @@ using CommonLib.NamedValues;
 using SF3.Types;
 
 namespace SF3.NamedValues {
-    public class MonsterForSlotInfo : INamedValueFromResourceForScenariosInfo {
-        public MonsterForSlotInfo() {
+    public class MonsterForUnitInfo : INamedValueFromResourceForScenariosInfo {
+        public MonsterForUnitInfo() {
             Dictionary<int, string> dictionaryWithSpecialSlots(Dictionary<int, string> values)
                 => new Dictionary<int, string>(values) {
-                    { 0xFFFD, "Unknown BTL328 Slot" },
-                    { 0xFFFF, "Character Slot" }
+                    { 0xFFFD, "Unknown (-3)" },
+                    { 0xFFFE, "Unknown (-2)" },
+                    { 0xFFFF, "Character Unit" }
                 };
 
             Info = ValueNames.MonsterInfo.Info

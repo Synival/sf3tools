@@ -107,9 +107,9 @@ namespace SF3.Win.Controls {
                         // TODO: multiple selection!
                         SwitchToModelInstanceEditor((IMPD_ModelInstance) objs[0]);
                     }
-                    else if (firstObj is Slot) {
+                    else if (firstObj is Unit) {
                         // TODO: multiple selection!
-                        SwitchToActorBattleInstanceEditor((Slot) objs[0]);
+                        SwitchToActorBattleInstanceEditor((Unit) objs[0]);
                     }
                     else if (firstObj is Npc) {
                         // TODO: multiple selection!
@@ -173,7 +173,7 @@ namespace SF3.Win.Controls {
             => SetSideEditorControl(ref _surfaceTilePropertiesControl, tile);
         private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance)
             => SetSideEditorControl(ref _modelInstancePropertiesControl, modelInstance);
-        private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Slot actor)
+        private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Unit actor)
             => SetSideEditorControl(ref _actorBattlePropertiesControl, actor);
         private ActorNPCPropertiesControl SwitchToActorNPCInstanceEditor(Npc actor)
             => SetSideEditorControl(ref _actorNPCPropertiesControl, actor);

@@ -3,7 +3,7 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleMapHeader : Struct {
-        private readonly int _numSlotsAddr;
+        private readonly int _numUnitsAddr;
         private readonly int _numZonesAddr;
         private readonly int _numLocationsAddr;
         private readonly int _numPathsAddr;
@@ -11,18 +11,18 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public BattleMapHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x0A) {
-            _numSlotsAddr         = Address + 0x00; // 2 bytes
+            _numUnitsAddr         = Address + 0x00; // 2 bytes
             _numZonesAddr         = Address + 0x02; // 2 bytes
             _numLocationsAddr     = Address + 0x04; // 2 bytes
             _numPathsAddr         = Address + 0x06; // 2 bytes
             _numMapMoveCoordsAddr = Address + 0x08; // 2 bytes
         }
 
-        [TableViewModelColumn(addressField: nameof(_numSlotsAddr), displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_numUnitsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
-        public int NumSlots {
-            get => Data.GetWord(_numSlotsAddr);
-            set => Data.SetWord(_numSlotsAddr, value);
+        public int NumUnits {
+            get => Data.GetWord(_numUnitsAddr);
+            set => Data.SetWord(_numUnitsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numZonesAddr), displayOrder: 3, displayFormat: "X2")]

@@ -61,8 +61,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromEnum<ModelInstanceType>(minValue: 0, maxValue: 1);
         public static readonly NamedValueFromResourceForScenariosInfo MonsterInfo
             = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
-        public static readonly MonsterForSlotInfo MonsterForSlotInfo
-            = new MonsterForSlotInfo();
+        public static readonly MonsterForUnitInfo MonsterForUnitInfo
+            = new MonsterForUnitInfo();
         public static readonly NamedValueFromEnum<MovementType> MovementTypeInfo
             = new NamedValueFromEnum<MovementType>();
         public static readonly NamedValueFromResourceForScenariosInfo MusicInfo

@@ -22,8 +22,8 @@ namespace SF3.Models.Structs.X1.Battle {
 
             // Determine addresses of sub-tables.
             var headerAddress        = Address;
-            var slotsAddress         = headerAddress    + 0x0a;
-            var zonesAddress         = slotsAddress     + enemyTableSize;
+            var unitsAddress         = headerAddress    + 0x0a;
+            var zonesAddress         = unitsAddress     + enemyTableSize;
             var locationsAddress     = zonesAddress     + 0x120;
             var pathsAddress         = locationsAddress + 0x80;
             var mapMoveCoordsAddress = pathsAddress     + 0x2C0;
@@ -31,7 +31,7 @@ namespace SF3.Models.Structs.X1.Battle {
             Header = new BattleMapHeader(Data, 0, nameof(BattleMapHeader), headerAddress);
 
             Tables = new List<ITable>() {
-                (SlotTable          = SlotTable.Create        (Data, "Slots",         slotsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, BattleHeader, MapLeader)),
+                (UnitTable          = UnitTable.Create        (Data, "Units",         unitsAddress, HasLargeEnemyTable ? 72 : 52, Scenario, BattleHeader, MapLeader)),
                 (ZoneTable          = ZoneTable.Create        (Data, "Zones",         zonesAddress)),
                 (LocationTable      = LocationTable.Create    (Data, "Locations",     locationsAddress)),
                 (PathTable          = PathTable.Create        (Data, "Paths",         pathsAddress)),
@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopyRecurse]
         public BattleMapHeader Header { get; private set; }
         [BulkCopyRecurse]
-        public SlotTable SlotTable { get; private set; }
+        public UnitTable UnitTable { get; private set; }
         [BulkCopyRecurse]
         public ZoneTable ZoneTable { get; private set; }
         [BulkCopyRecurse]
@@ -59,8 +59,8 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public bool IsBattle => true;
         public string SceneName { get; }
-        public int NumActors => Header.NumSlots;
-        public IReadOnlyList<IActor> Actors => SlotTable;
+        public int NumActors => Header.NumUnits;
+        public IReadOnlyList<IActor> Actors => UnitTable;
         public int NumZones => Header.NumZones;
         public IReadOnlyList<Zone> Zones => ZoneTable;
 

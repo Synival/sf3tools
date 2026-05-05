@@ -62,7 +62,7 @@ namespace SF3.Tests.Models.Files {
                     var battle = battles[(MapLeaderType) testCase.MapLeader];
 
                     Assert.IsNotNull(battle.Header);
-                    Assert.IsNotNull(battle.SlotTable);
+                    Assert.IsNotNull(battle.UnitTable);
                     Assert.IsNotNull(battle.ZoneTable);
                     Assert.IsNotNull(battle.LocationTable);
                     Assert.IsNotNull(battle.PathTable);

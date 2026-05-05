@@ -11,10 +11,10 @@ namespace SF3.Win.Controls {
             RecursivelyAttachedEventsToControls(this);
 
             // Set up combo box values.
-            cbDirection.DataSource = Enum.GetValues<SlotFacingType>();
+            cbDirection.DataSource = Enum.GetValues<UnitFacingType>();
 
             // Event handling for 'Movement' group.
-            void DoOnlyDirectlyAndInvalidate(Action<Slot> action) {
+            void DoOnlyDirectlyAndInvalidate(Action<Unit> action) {
                 DoOnlyDirectly(() => {
                     // TODO: support multiple selection!
                     var eo = EditingObjects[0];
@@ -24,16 +24,16 @@ namespace SF3.Win.Controls {
             }
 
             nudX.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
-                eo.X = (int) nudX.Value;
+                eo.X = (short) nudX.Value;
                 nudXWorld.Value = (decimal) eo.ActorX;
             });
 
             nudZ.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
-                eo.Z = (int) nudZ.Value;
+                eo.Z = (short) nudZ.Value;
                 nudZWorld.Value = (decimal) eo.ActorZ;
             });
 
-            cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => eo.Facing = (SlotFacingType) cbDirection.SelectedValue);
+            cbDirection.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => eo.Facing = (UnitFacingType) cbDirection.SelectedValue);
         }
 
         protected override void PerformUpdateControls() {

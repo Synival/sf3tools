@@ -133,7 +133,7 @@ namespace SF3.Win.Controls {
     }
 
     public class SurfaceTilePropertiesControlBase   : PropertiesControlBase<IMPD_SurfaceTile> {}
-    public class ActorBattlePropertiesControlBase   : PropertiesControlBase<Slot> {}
+    public class ActorBattlePropertiesControlBase   : PropertiesControlBase<Unit> {}
     public class ActorNPCPropertiesControlBase      : PropertiesControlBase<Npc> {}
     public class ModelInstancePropertiesControlBase : PropertiesControlBase<IMPD_ModelInstance> {}
 }

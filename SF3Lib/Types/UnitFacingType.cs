@@ -1,5 +1,5 @@
 ﻿namespace SF3.Types {
-    public enum SlotFacingType {
+    public enum UnitFacingType {
         North     = 0x00,
         Northeast = 0x20,
         East      = 0x40,

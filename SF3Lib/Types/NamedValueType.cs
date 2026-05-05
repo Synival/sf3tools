@@ -28,7 +28,7 @@ namespace SF3.Types {
         ModelDirection,
         ModelInstanceType,
         Monster,
-        MonsterForSlot,
+        MonsterForUnit,
         EventTriggerMoveOnTileType,
         EventTriggerUseItemType,
         EventTriggerWarpSound,
