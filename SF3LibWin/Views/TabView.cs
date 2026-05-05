@@ -26,7 +26,11 @@ namespace SF3.Win.Views {
             newTabControl.ResumeLayout();
 
             // Helper function to get a tab page with the same name.
-            TabPage getTabPageByName(TabControl tabControl, string name) {
+            TabPage getTabPageByName(TabView tabView, string name) {
+                var tabControl = tabView?.TabControl;
+                if (tabControl == null)
+                    return null;
+
                 // We can't continue if there are zero tabs with that requested name, or two or more tabs with the same name.
                 var tabsWithName = tabControl.Controls
                     .Cast<object>()
@@ -40,29 +44,31 @@ namespace SF3.Win.Views {
 
             // Recurses downward from a TabControl to make the "cousin" tab with name tabNameList[0] is selected
             // when generationsDown reaches 0.
-            int selectCousinTabs(TabControl ancestorTabControl, List<string> tabNameList, int generationsDown) {
-                var similarTab = getTabPageByName(ancestorTabControl, tabNameList[generationsDown]);
+            int selectCousinTabs(TabView ancestorTabView, List<string> tabNameList, TabView lastTabView, int generationsDown) {
+                var similarTab = getTabPageByName(ancestorTabView, tabNameList[generationsDown]);
                 if (similarTab == null)
                     return 0;
 
+                // TODO: Create it!
+                if (!ancestorTabView.IsCreated)
+                    return 0;
+
                 if (generationsDown == 0) {
-                    if (ancestorTabControl.SelectedTab != similarTab)
-                        ancestorTabControl.SelectedTab = similarTab;
+                    if (ancestorTabView.TabControl.SelectedTab != similarTab)
+                        ancestorTabView.TabControl.SelectedTab = similarTab;
                     return 1;
                 }
                 else {
                     var result = 0;
-                    foreach (var ancestorTabPageObj in ancestorTabControl.Controls) {
-                        var ancestorTabPage = ancestorTabPageObj as TabPage;
-                        if (ancestorTabPage == null)
-                            continue;
+                    foreach (var ancestorChildView in ancestorTabView.ChildViews) {
+                        TabView ancestorChildTabView = null;
+                        if (ancestorChildView is TabView tv)
+                            ancestorChildTabView = tv;
+                        else if (ancestorChildView is FileView fv)
+                            ancestorChildTabView = fv.ActualView as TabView;
 
-                        foreach (var ancestorTabPageControl in ancestorTabPage.Controls) {
-                            var subAncestorTabControl = ancestorTabPageControl as TabControl;
-                            if (subAncestorTabControl == null)
-                                continue;
-                            result += selectCousinTabs(subAncestorTabControl, tabNameList, generationsDown - 1);
-                        }
+                        if (ancestorChildTabView != null && ancestorChildTabView != lastTabView)
+                            result += selectCousinTabs(ancestorChildTabView, tabNameList, ancestorTabView, generationsDown - 1);
                     }
                     return result;
                 }
@@ -72,24 +78,21 @@ namespace SF3.Win.Views {
             // For example, when selecting a specific table in an editor for one file, similar editors for
             // other files will select the same tab as well automatically. This is useful for comparing one
             // table with another between files.
-            // TODO: additional checks to make sure the TabControls are the "same kind of" TabControl
             newTabControl.Selected += (s, e) => {
                 if (s_inSelectCousinTabs)
                     return;
                 s_inSelectCousinTabs = true;
 
                 int generationsRemoved = 0;
-                var ancestorTabControlPage = newTabControl.SelectedTab;
                 var tabNameList = new List<string>();
 
-                while (ancestorTabControlPage?.Parent != null) {
-                    var ancestorTabControl = (TabControl) ancestorTabControlPage.Parent;
-                    tabNameList.Add(ancestorTabControl.SelectedTab.Text);
-
-                    selectCousinTabs(ancestorTabControl, tabNameList, generationsRemoved);
-
+                TabView lastTabView = null;
+                for (var ancestorTabView = this; ancestorTabView?.TabControl?.SelectedTab != null; ancestorTabView = ancestorTabView.Parent as TabView) {
+                    tabNameList.Add(ancestorTabView.TabControl.SelectedTab.Text);
+                    if (generationsRemoved > 0)
+                        selectCousinTabs(ancestorTabView, tabNameList, lastTabView, generationsRemoved);
                     generationsRemoved++;
-                    ancestorTabControlPage = ancestorTabControl.Parent as TabPage;
+                    lastTabView = ancestorTabView;
                 }
 
                 s_inSelectCousinTabs = false;
