@@ -20,19 +20,12 @@ namespace SF3.Win.Views.X1 {
             if (Model.MapPointerTable != null)
                 foreach (var battle in Model.MapPointerTable.Select(x => x.BattleMap).Where(x => x != null).ToArray())
                     CreateChild(new BattleMapView($"Map ({battle.MapLeader})", battle, ngc));
-            if (Model.MapPointerTable != null)
-                CreateChild(new TableView("Map Pointers", Model.MapPointerTable, ngc));
-
-            if (Model.MapMoveCoordFlagsPointerTable != null)
-                CreateChild(new TableView("Map Move Coord Flag Pointers", Model.MapMoveCoordFlagsPointerTable, ngc));
-            if (Model.MapMoveCoordFlagsPointerTable != null)
-                foreach (var warps in Model.MapMoveCoordFlagsPointerTable.Select(x => x.MapMoveCoordFlagsTable).Where(x => x != null).ToArray())
-                    CreateChild(new TableView($"Map Move Coord Flags ({warps.MapLeader})", warps, ngc));
-
             if (Model.TeamsCantAttackTable != null)
                 CreateChild(new TableView("Teams (Can't Attack)", Model.TeamsCantAttackTable, ngc));
             if (Model.TeamsCanSupportTable != null)
                 CreateChild(new TableView("Teams (Can Support)", Model.TeamsCanSupportTable, ngc));
+
+            CreateChild(new BattleTechnicalView("Technical", Model, ngc));
 
             return control;
         }
