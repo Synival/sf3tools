@@ -14,6 +14,7 @@ namespace SF3.Win.Views {
         }
 
         private static bool s_inSelectCousinTabs = false;
+        private static IView s_forceImmediateLoadingOf = null;
 
         public override Control Create() {
             _childViews = new List<IView>();
@@ -26,36 +27,45 @@ namespace SF3.Win.Views {
             newTabControl.ResumeLayout();
 
             // Helper function to get a tab page with the same name.
-            TabPage getTabPageByName(TabView tabView, string name) {
+            TabPage[] getTabPagesByName(TabView tabView, string name) {
                 var tabControl = tabView?.TabControl;
                 if (tabControl == null)
-                    return null;
+                    return [];
 
                 // We can't continue if there are zero tabs with that requested name, or two or more tabs with the same name.
-                var tabsWithName = tabControl.Controls
+                return tabControl.Controls
                     .Cast<object>()
                     .Where(x => x is TabPage)
                     .Cast<TabPage>()
                     .Where(x => x.Text == name)
                     .ToArray();
-
-                return tabsWithName.Length == 1 ? tabsWithName[0] : null;
             };
 
             // Recurses downward from a TabControl to make the "cousin" tab with name tabNameList[0] is selected
             // when generationsDown reaches 0.
             int selectCousinTabs(TabView ancestorTabView, List<string> tabNameList, TabView lastTabView, int generationsDown) {
-                var similarTab = getTabPageByName(ancestorTabView, tabNameList[generationsDown]);
-                if (similarTab == null)
+                var similarTabs = getTabPagesByName(ancestorTabView, tabNameList[generationsDown]);
+                if (similarTabs.Length == 0)
                     return 0;
 
-                // TODO: Create it!
-                if (!ancestorTabView.IsCreated)
+                // For safety. 
+                if (!ancestorTabView.IsCreated) {
+                    try { throw new Exception(); } catch { /* Hmm, not created? Strange! */ };
                     return 0;
+                }
 
                 if (generationsDown == 0) {
-                    if (ancestorTabView.TabControl.SelectedTab != similarTab)
+                    var similarTab = similarTabs.Length == 1 ? similarTabs[0] : null;
+                    if (similarTab != null && ancestorTabView.TabControl.SelectedTab != similarTab) {
+                        // Let's not lazy-load tab views so cousin-selection of nested tabs has something to select.
+                        s_forceImmediateLoadingOf = ancestorTabView.GetChildViewForTabPage(similarTab) as TabView;
+
+                        // Force the tab control to exist so changing 'SelectedTab' has an affect!
+                        _ = ancestorTabView.TabControl.Handle;
+
                         ancestorTabView.TabControl.SelectedTab = similarTab;
+                        s_forceImmediateLoadingOf = null;
+                    }
                     return 1;
                 }
                 else {
@@ -169,7 +179,7 @@ namespace SF3.Win.Views {
 
             if (LazyLoad) {
                 void CreateIfConditionsAreRight() {
-                    if (!childView.IsCreated && TabControl.Visible && TabControl.SelectedTab == tabPage && tabPage.Visible)
+                    if (!childView.IsCreated && ((TabControl.Visible && TabControl.SelectedTab == tabPage && tabPage.Visible) || childView == s_forceImmediateLoadingOf))
                         ChildViewCreate();
                 }
 
