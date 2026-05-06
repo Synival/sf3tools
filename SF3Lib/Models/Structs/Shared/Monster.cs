@@ -65,12 +65,12 @@ namespace SF3.Models.Structs.X019 {
         private readonly int _movementTypeAddr;
         private readonly int _unknown0x42Addr;
         private readonly int _unknown0x43Addr;
-        private readonly int _spellChancePlus1Addr;
-        private readonly int _spellChancePlus2Addr;
-        private readonly int _spellChancePlus3Addr;
-        private readonly int _spellChancePlus4Addr;
-        private readonly int _spellChancePlus5Addr;
-        private readonly int _spellChancePlus6Addr;
+        private readonly int _attackChoice1Addr;
+        private readonly int _attackChoice2Addr;
+        private readonly int _attackChoice3Addr;
+        private readonly int _attackChoice4Addr;
+        private readonly int _attackChoice5Addr;
+        private readonly int _attackChoice6Addr;
         private readonly int _unknown0x4AAddr;
         private readonly int _unknown0x4BAddr;
 
@@ -135,12 +135,12 @@ namespace SF3.Models.Structs.X019 {
             _movementTypeAddr      = Address + 0x41;
             _unknown0x42Addr       = Address + 0x42; // heal when damaged when set?
             _unknown0x43Addr       = Address + 0x43;
-            _spellChancePlus1Addr  = Address + 0x44; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
-            _spellChancePlus2Addr  = Address + 0x45; // what to do on turn2?
-            _spellChancePlus3Addr  = Address + 0x46; // what to do on turn3?
-            _spellChancePlus4Addr  = Address + 0x47; // what to do on turn4?
-            _spellChancePlus5Addr  = Address + 0x48; // what to do on turn5?
-            _spellChancePlus6Addr  = Address + 0x49; // what to do on turn6?
+            _attackChoice1Addr     = Address + 0x44; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
+            _attackChoice2Addr     = Address + 0x45; // what to do on turn2?
+            _attackChoice3Addr     = Address + 0x46; // what to do on turn3?
+            _attackChoice4Addr     = Address + 0x47; // what to do on turn4?
+            _attackChoice5Addr     = Address + 0x48; // what to do on turn5?
+            _attackChoice6Addr     = Address + 0x49; // what to do on turn6?
             _unknown0x4AAddr       = Address + 0x4A;
             _unknown0x4BAddr       = Address + 0x4B;
             SpriteID               = id + 200;
@@ -386,7 +386,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(_weaponAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_accessoryAddr), displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_accessoryAddr), displayOrder: 27.5F, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public int Accessory {
@@ -527,38 +527,38 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_unknown0x34Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 45, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.01f, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
         public int Protections {
             get => Data.GetByte(_protectionsAddr);
             set => Data.SetByte(_protectionsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.1f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.11f, displayGroup: "Unknown")]
         public bool IsThief {
             get => Data.GetBit(_protectionsAddr, 1);
             set => Data.SetBit(_protectionsAddr, 1, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.11f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.13f, displayGroup: "Unknown")]
         public bool MaybeIsBig {
             get => Data.GetBit(_protectionsAddr, 3);
             set => Data.SetBit(_protectionsAddr, 3, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.2f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.14f, displayGroup: "Unknown")]
         public bool CantSeeStatus {
             get => Data.GetBit(_protectionsAddr, 4);
             set => Data.SetBit(_protectionsAddr, 4, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.3f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.15f, displayGroup: "Unknown")]
         public bool MaybeIsVeryBig1 {
             get => Data.GetBit(_protectionsAddr, 5);
             set => Data.SetBit(_protectionsAddr, 5, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.4f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.16f, displayGroup: "Unknown")]
         public bool MaybeIsVeryBig2 {
             get => Data.GetBit(_protectionsAddr, 6);
             set => Data.SetBit(_protectionsAddr, 6, value);
@@ -652,46 +652,46 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_unknown0x43Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellChancePlus1Addr), displayOrder: 58, displayName: "+SpellChance1", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice1Addr), displayOrder: 58, displayName: "+SpellChance1", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int SpellChancePlus1 {
-            get => Data.GetByte(_spellChancePlus1Addr);
-            set => Data.SetByte(_spellChancePlus1Addr, (byte) value);
+        public int AttackChoice1 {
+            get => Data.GetByte(_attackChoice1Addr);
+            set => Data.SetByte(_attackChoice1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellChancePlus2Addr), displayOrder: 59, displayName: "+SpellChance2", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice2Addr), displayOrder: 59, displayName: "+SpellChance2", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int SpellChancePlus2 {
-            get => Data.GetByte(_spellChancePlus2Addr);
-            set => Data.SetByte(_spellChancePlus2Addr, (byte) value);
+        public int AttackChoice2 {
+            get => Data.GetByte(_attackChoice2Addr);
+            set => Data.SetByte(_attackChoice2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellChancePlus3Addr), displayOrder: 60, displayName: "+SpellChance3", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice3Addr), displayOrder: 60, displayName: "+SpellChance3", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int SpellChancePlus3 {
-            get => Data.GetByte(_spellChancePlus3Addr);
-            set => Data.SetByte(_spellChancePlus3Addr, (byte) value);
+        public int AttackChoice3 {
+            get => Data.GetByte(_attackChoice3Addr);
+            set => Data.SetByte(_attackChoice3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellChancePlus4Addr), displayOrder: 61, displayName: "+SpellChance4", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice4Addr), displayOrder: 61, displayName: "+SpellChance4", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int SpellChancePlus4 {
-            get => Data.GetByte(_spellChancePlus4Addr);
-            set => Data.SetByte(_spellChancePlus4Addr, (byte) value);
+        public int AttackChoice4 {
+            get => Data.GetByte(_attackChoice4Addr);
+            set => Data.SetByte(_attackChoice4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellChancePlus5Addr), displayOrder: 62, displayName: "+SpellChance5", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice5Addr), displayOrder: 62, displayName: "+SpellChance5", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int SpellChancePlus5 {
-            get => Data.GetByte(_spellChancePlus5Addr);
-            set => Data.SetByte(_spellChancePlus5Addr, (byte) value);
+        public int AttackChoice5 {
+            get => Data.GetByte(_attackChoice5Addr);
+            set => Data.SetByte(_attackChoice5Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellChancePlus6Addr), displayOrder: 63, displayName: "+SpellChance6", displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice6Addr), displayOrder: 63, displayName: "+SpellChance6", displayGroup: "LastPage", displayFormat: "X2")]
         [BulkCopy]
-        public int SpellChancePlus6 {
-            get => Data.GetByte(_spellChancePlus6Addr);
-            set => Data.SetByte(_spellChancePlus6Addr, (byte) value);
+        public int AttackChoice6 {
+            get => Data.GetByte(_attackChoice6Addr);
+            set => Data.SetByte(_attackChoice6Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x4AAddr), displayOrder: 64, displayGroup: "LastPage", displayFormat: "X2")]
