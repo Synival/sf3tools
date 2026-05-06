@@ -13,11 +13,10 @@ namespace SF3.Win.Views.X1 {
             base.Create();
 
             var ngc = NameGetterContext;
-            CreateChild(new TableView("Page 1",              Model, ngc, displayGroups: ["Metadata", "Page1"]));
-            CreateChild(new TableView("Page 2",              Model, ngc, displayGroups: ["Metadata", "Page2"]));
-            CreateChild(new TableView("Page 3 (Conditions)", Model, ngc, displayGroups: ["Metadata", "Page3"]));
-            CreateChild(new TableView("Page 4 (AI)",         Model, ngc, displayGroups: ["Metadata", "Page4"]));
-            CreateChild(new TableView("Page 5 (Flags)",      Model, ngc, displayGroups: ["Metadata", "Page5"]));
+            CreateChild(new TableView("Page 1",         Model, ngc, displayGroups: ["Metadata", "Page1"]));
+            CreateChild(new TableView("Page 2",         Model, ngc, displayGroups: ["Metadata", "Page2"]));
+            CreateChild(new TableView("Page 3 (AI)",    Model, ngc, displayGroups: ["Metadata", "Page3"]));
+            CreateChild(new TableView("Page 4 (Flags)", Model, ngc, displayGroups: ["Metadata", "Page4"]));
 
             return Control;
         }

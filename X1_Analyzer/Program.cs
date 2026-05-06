@@ -28,12 +28,7 @@ namespace X1_Analyzer {
             if (battles.Length == 0)
                 return null;
 
-            bool hasAnyConditions(Unit unit) {
-                return unit.Cond1Zone != 0xFF || unit.Cond2Zone != 0xFF || unit.Cond3Zone != 0xFF || unit.Cond4Zone != 0xFF;
-            }
-
-            var unitsWithFlagsAndAITarget00 = battles.Any(y => y.UnitTable.Rows.Any(x => x.IgnoreConditions && hasAnyConditions(x)));
-            return unitsWithFlagsAndAITarget00 ? [] : null;
+            return MatchFuncs.HasCondType01(filename, x1File);
         }
 
         private static int s_logIndex = 0;
