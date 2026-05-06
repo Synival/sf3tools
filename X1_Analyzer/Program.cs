@@ -28,7 +28,7 @@ namespace X1_Analyzer {
             if (battles.Length == 0)
                 return null;
 
-            return MatchFuncs.HasCondType01(filename, x1File);
+            return x1File.GetBattleMaps().Any(x => x.Value.UnitTable.Rows.Any(y => y.UnknownFlag0x2000)) ? [] : null;
         }
 
         private static int s_logIndex = 0;

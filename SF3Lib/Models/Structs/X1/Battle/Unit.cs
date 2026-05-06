@@ -371,10 +371,22 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetWord(_flagsAddr, value);
         }
 
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.01f, displayGroup: "Page4")]
+        public bool DontSeekBestTarget {
+            get => (Flags & 0x0001) != 0;
+            set => Flags = (ushort) (value ? (Flags | 0x0001) : (Flags & ~0x0001));
+        }
+
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.1f, displayGroup: "Page4")]
         public bool DontMove {
             get => (Flags & 0x0002) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x0002) : (Flags & ~0x0002));
+        }
+
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.11f, displayName: nameof(PrioritizeLastAttackerUnlessAIBit0x20Set) + " (Unused)", displayGroup: "Page4")]
+        public bool PrioritizeLastAttackerUnlessAIBit0x20Set {
+            get => (Flags & 0x0004) != 0;
+            set => Flags = (ushort) (value ? (Flags | 0x0004) : (Flags & ~0x0004));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.12f, displayGroup: "Page4")]
@@ -384,9 +396,15 @@ namespace SF3.Models.Structs.X1.Battle {
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.15f, displayGroup: "Page4")]
-        public bool PrioritizeTargetSpecified {
+        public bool PrioritizeFlagTarget {
             get => (Flags & 0x0010) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x0010) : (Flags & ~0x0010));
+        }
+
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayName: nameof(UnknownFlag0x0020) + " (Unused)", displayOrder: 45.16f, displayGroup: "Page4")]
+        public bool UnknownFlag0x0020 {
+            get => (Flags & 0x0020) != 0;
+            set => Flags = (ushort) (value ? (Flags | 0x0020) : (Flags & ~0x0020));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.2f, displayGroup: "Page4")]
@@ -401,22 +419,40 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Flags = (ushort) (value ? (Flags | 0x0080) : (Flags & ~0x0080));
         }
 
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayName: nameof(DontSpawnPlayerCharacterIfDead) + " (Unused)", displayOrder: 45.31f, displayGroup: "Page4")]
+        public bool DontSpawnPlayerCharacterIfDead {
+            get => (Flags & 0x0100) != 0;
+            set => Flags = (ushort) (value ? (Flags | 0x0100) : (Flags & ~0x0100));
+        }
+
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.32f, displayGroup: "Page4")]
-        public bool PrioritizeHealing {
+        public bool PrioritizeChoiceThenHealing {
             get => (Flags & 0x0200) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x0200) : (Flags & ~0x0200));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.33f, displayGroup: "Page4")]
-        public bool UnknownBattleIDFlag0x0400 {
+        public bool PrioritizeLastAttackerThenFlagTarget {
             get => (Flags & 0x0400) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x0400) : (Flags & ~0x0400));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.34f, displayGroup: "Page4")]
-        public bool UnknownBattleIDFlag0x1000 {
+        public bool AttackBestTargetIfLocationOrPathIsUnreachable {
+            get => (Flags & 0x0800) != 0;
+            set => Flags = (ushort) (value ? (Flags | 0x0800) : (Flags & ~0x0800));
+        }
+
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.35f, displayGroup: "Page4")]
+        public bool DontInitBaseStats {
             get => (Flags & 0x1000) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x1000) : (Flags & ~0x1000));
+        }
+
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayName: nameof(UnknownFlag0x0020) + " (Unused)", displayOrder: 45.16f, displayGroup: "Page4")]
+        public bool UnknownFlag0x2000 {
+            get => (Flags & 0x2000) != 0;
+            set => Flags = (ushort) (value ? (Flags | 0x2000) : (Flags & ~0x0020));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.4f, displayGroup: "Page4")]
@@ -430,7 +466,7 @@ namespace SF3.Models.Structs.X1.Battle {
         public NamedValueType? FlagOrBattleIDType {
             get {
                 bool hasFlag = IsBarrel || DontMoveIfFlagOff;
-                bool hasBattleID = PrioritizeTargetSpecified || PrioritizeHealing || UnknownBattleIDFlag0x0400 || UnknownBattleIDFlag0x1000;
+                bool hasBattleID = PrioritizeFlagTarget || PrioritizeChoiceThenHealing || PrioritizeLastAttackerThenFlagTarget || DontInitBaseStats;
 
                 if (hasFlag && !hasBattleID)
                     return NamedValueType.GameFlag;
@@ -441,7 +477,7 @@ namespace SF3.Models.Structs.X1.Battle {
             }
         }
 
-        [TableViewModelColumn(addressField: nameof(_flagTieInAddr), displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page5")]
+        [TableViewModelColumn(addressField: nameof(_flagTieInAddr), displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page4")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
         public int FlagOrBattleID {
