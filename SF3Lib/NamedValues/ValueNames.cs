@@ -93,6 +93,8 @@ namespace SF3.NamedValues {
             = new SpriteCharacterMonsterInfo();
         public static readonly NamedValueFromResourceInfo StatTypeInfo
             = new NamedValueFromResourceInfo("StatTypes.xml");
+        public static readonly NamedValueFromEnum<TargetScoreFunc> TargetScoreFuncInfo
+            = new NamedValueFromEnum<TargetScoreFunc>();
         public static readonly NamedValueFromResourceForScenariosInfo WeaponSpellInfo
             = new NamedValueFromResourceForScenariosInfo("WeaponSpells.xml");
         public static readonly NamedValueFromResourceInfo WeaponTypeInfo

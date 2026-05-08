@@ -48,6 +48,7 @@ namespace SF3.Types {
         Sprite,
         SpriteDirectionCount,
         StatType,
+        TargetScoreFunc,
         WeaponSpell,
         WeaponType,
 

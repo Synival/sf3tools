@@ -51,7 +51,7 @@ namespace SF3.Models.Structs.X019 {
         private readonly int _special10Addr; //?
         private readonly int _unknown0x32Addr;
         private readonly int _unknown0x33Addr;
-        private readonly int _intelligence;
+        private readonly int _targetScoreFuncAddr;
         private readonly int _flagsAddr;
         private readonly int _expIs5andCantEvadeAddr;
         private readonly int _timesSpawnedAddr;
@@ -121,7 +121,7 @@ namespace SF3.Models.Structs.X019 {
             _special10Addr         = Address + 0x31; // ?
             _unknown0x32Addr       = Address + 0x32;
             _unknown0x33Addr       = Address + 0x33;
-            _intelligence          = Address + 0x34;
+            _targetScoreFuncAddr   = Address + 0x34;
             _flagsAddr             = Address + 0x35;
             _expIs5andCantEvadeAddr= Address + 0x36;
             _timesSpawnedAddr      = Address + 0x37;
@@ -520,11 +520,12 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_unknown0x33Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_intelligence), displayOrder: 44, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_targetScoreFuncAddr), displayOrder: 44, displayGroup: "Unknown", displayFormat: "X2", minWidth: 325)]
         [BulkCopy]
-        public int Intelligence {
-            get => Data.GetByte(_intelligence);
-            set => Data.SetByte(_intelligence, (byte) value);
+        [NameGetter(NamedValueType.TargetScoreFunc)]
+        public int TargetScoreFunc {
+            get => Data.GetByte(_targetScoreFuncAddr);
+            set => Data.SetByte(_targetScoreFuncAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.01f, displayGroup: "Unknown", displayFormat: "X2")]
@@ -547,7 +548,7 @@ namespace SF3.Models.Structs.X019 {
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.13f, displayGroup: "Unknown")]
-        public bool MaybeIsBig {
+        public bool IsBig3x3 {
             get => Data.GetBit(_flagsAddr, 3);
             set => Data.SetBit(_flagsAddr, 3, value);
         }
@@ -559,13 +560,13 @@ namespace SF3.Models.Structs.X019 {
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.15f, displayGroup: "Unknown")]
-        public bool MaybeIsVeryBig1 {
+        public bool IsBig5x5Broken {
             get => Data.GetBit(_flagsAddr, 5);
             set => Data.SetBit(_flagsAddr, 5, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.16f, displayGroup: "Unknown")]
-        public bool MaybeIsVeryBig2 {
+        public bool IsBig5x5Diamond {
             get => Data.GetBit(_flagsAddr, 6);
             set => Data.SetBit(_flagsAddr, 6, value);
         }
