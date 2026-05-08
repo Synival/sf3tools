@@ -51,20 +51,20 @@ namespace SF3.Models.Structs.X019 {
         private readonly int _special10Addr; //?
         private readonly int _unknown0x32Addr;
         private readonly int _unknown0x33Addr;
-        private readonly int _unknown0x34Addr;
-        private readonly int _protectionsAddr;
-        private readonly int _expIs5Addr;
-        private readonly int _unknown0x37Addr;
+        private readonly int _intelligence;
+        private readonly int _flagsAddr;
+        private readonly int _expIs5andCantEvadeAddr;
+        private readonly int _timesSpawnedAddr;
         private readonly int _goldAddr;
-        private readonly int _dropAddr;
-        private readonly int _unknown0x3CAddr;
-        private readonly int _droprateAddr;
+        private readonly int _dropItemAddr;
+        private readonly int _dropDisableAddr;
+        private readonly int _dropRateAddr;
         private readonly int _slowPlusAddr;
         private readonly int _supportPlusAddr;
         private readonly int _magicBonusIdAddr;
         private readonly int _movementTypeAddr;
-        private readonly int _unknown0x42Addr;
-        private readonly int _unknown0x43Addr;
+        private readonly int _orderMode;
+        private readonly int _attackChoiceMode;
         private readonly int _attackChoice1Addr;
         private readonly int _attackChoice2Addr;
         private readonly int _attackChoice3Addr;
@@ -121,20 +121,20 @@ namespace SF3.Models.Structs.X019 {
             _special10Addr         = Address + 0x31; // ?
             _unknown0x32Addr       = Address + 0x32;
             _unknown0x33Addr       = Address + 0x33;
-            _unknown0x34Addr       = Address + 0x34;
-            _protectionsAddr       = Address + 0x35; // protections? 8 = no crit? 0a = damage immunity?
-            _expIs5Addr            = Address + 0x36;
-            _unknown0x37Addr       = Address + 0x37;
+            _intelligence          = Address + 0x34;
+            _flagsAddr             = Address + 0x35;
+            _expIs5andCantEvadeAddr= Address + 0x36;
+            _timesSpawnedAddr      = Address + 0x37;
             _goldAddr              = Address + 0x38; // 2 bytes
-            _dropAddr              = Address + 0x3A; // 2 bytes
-            _unknown0x3CAddr       = Address + 0x3C;
-            _droprateAddr          = Address + 0x3D; // droprate/drops items when attacked. Set E for thief rules
+            _dropItemAddr          = Address + 0x3A; // 2 bytes
+            _dropDisableAddr       = Address + 0x3C;
+            _dropRateAddr          = Address + 0x3D; // droprate/drops items when attacked. Set E for thief rules
             _slowPlusAddr          = Address + 0x3E;
             _supportPlusAddr       = Address + 0x3F;
             _magicBonusIdAddr      = Address + 0x40;
             _movementTypeAddr      = Address + 0x41;
-            _unknown0x42Addr       = Address + 0x42; // heal when damaged when set?
-            _unknown0x43Addr       = Address + 0x43;
+            _orderMode             = Address + 0x42; // heal when damaged when set?
+            _attackChoiceMode      = Address + 0x43;
             _attackChoice1Addr     = Address + 0x44; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
             _attackChoice2Addr     = Address + 0x45; // what to do on turn2?
             _attackChoice3Addr     = Address + 0x46; // what to do on turn3?
@@ -520,62 +520,74 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_unknown0x33Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x34Addr), displayOrder: 44, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_intelligence), displayOrder: 44, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x34 {
-            get => Data.GetByte(_unknown0x34Addr);
-            set => Data.SetByte(_unknown0x34Addr, (byte) value);
+        public int Intelligence {
+            get => Data.GetByte(_intelligence);
+            set => Data.SetByte(_intelligence, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.01f, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.01f, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Protections {
-            get => Data.GetByte(_protectionsAddr);
-            set => Data.SetByte(_protectionsAddr, (byte) value);
+        public int Flags {
+            get => Data.GetByte(_flagsAddr);
+            set => Data.SetByte(_flagsAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.11f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.11f, displayGroup: "Unknown")]
         public bool IsThief {
-            get => Data.GetBit(_protectionsAddr, 1);
-            set => Data.SetBit(_protectionsAddr, 1, value);
+            get => Data.GetBit(_flagsAddr, 1);
+            set => Data.SetBit(_flagsAddr, 1, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.13f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.12f, displayGroup: "Unknown")]
+        public bool DamageImmune {
+            get => Data.GetBit(_flagsAddr, 2);
+            set => Data.SetBit(_flagsAddr, 2, value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.13f, displayGroup: "Unknown")]
         public bool MaybeIsBig {
-            get => Data.GetBit(_protectionsAddr, 3);
-            set => Data.SetBit(_protectionsAddr, 3, value);
+            get => Data.GetBit(_flagsAddr, 3);
+            set => Data.SetBit(_flagsAddr, 3, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.14f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.14f, displayGroup: "Unknown")]
         public bool CantSeeStatus {
-            get => Data.GetBit(_protectionsAddr, 4);
-            set => Data.SetBit(_protectionsAddr, 4, value);
+            get => Data.GetBit(_flagsAddr, 4);
+            set => Data.SetBit(_flagsAddr, 4, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.15f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.15f, displayGroup: "Unknown")]
         public bool MaybeIsVeryBig1 {
-            get => Data.GetBit(_protectionsAddr, 5);
-            set => Data.SetBit(_protectionsAddr, 5, value);
+            get => Data.GetBit(_flagsAddr, 5);
+            set => Data.SetBit(_flagsAddr, 5, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_protectionsAddr), displayOrder: 44.16f, displayGroup: "Unknown")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.16f, displayGroup: "Unknown")]
         public bool MaybeIsVeryBig2 {
-            get => Data.GetBit(_protectionsAddr, 6);
-            set => Data.SetBit(_protectionsAddr, 6, value);
+            get => Data.GetBit(_flagsAddr, 6);
+            set => Data.SetBit(_flagsAddr, 6, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_expIs5Addr), displayOrder: 47, displayGroup: "Unknown", displayFormat: "X2")]
-        [BulkCopy]
-        public int ExpIs5 {
-            get => Data.GetByte(_expIs5Addr);
-            set => Data.SetByte(_expIs5Addr, (byte) value);
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.17f, displayGroup: "Unknown")]
+        public bool PrioritizeReachingTarget {
+            get => Data.GetBit(_flagsAddr, 7);
+            set => Data.SetBit(_flagsAddr, 7, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x37Addr), displayOrder: 48, displayGroup: "Unknown", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_expIs5andCantEvadeAddr), displayOrder: 47, displayGroup: "Unknown", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x37 {
-            get => Data.GetByte(_unknown0x37Addr);
-            set => Data.SetByte(_unknown0x37Addr, (byte) value);
+        public int ExpIs5AndCantEvade {
+            get => Data.GetByte(_expIs5andCantEvadeAddr);
+            set => Data.SetByte(_expIs5andCantEvadeAddr, (byte) value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_timesSpawnedAddr), displayOrder: 48, displayGroup: "Unknown", displayFormat: "X2", displayName: nameof(TimesSpawned) + " (Placeholder)")]
+        [BulkCopy]
+        public int TimesSpawned {
+            get => Data.GetByte(_timesSpawnedAddr);
+            set => Data.SetByte(_timesSpawnedAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_goldAddr), displayOrder: 49, displayGroup: "Stats2")]
@@ -585,27 +597,27 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetWord(_goldAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_dropAddr), displayOrder: 50, displayGroup: "Stats2", minWidth: 120, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_dropItemAddr), displayOrder: 50, displayGroup: "Stats2", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Drop {
-            get => Data.GetWord(_dropAddr);
-            set => Data.SetWord(_dropAddr, value);
+        public int DropItem {
+            get => Data.GetWord(_dropItemAddr);
+            set => Data.SetWord(_dropItemAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x3CAddr), displayOrder: 51, displayGroup: "Stats2", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_dropDisableAddr), displayOrder: 51, displayGroup: "Stats2", displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x3C {
-            get => Data.GetByte(_unknown0x3CAddr);
-            set => Data.SetByte(_unknown0x3CAddr, (byte) value);
+        public int DropDisable {
+            get => Data.GetByte(_dropDisableAddr);
+            set => Data.SetByte(_dropDisableAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_droprateAddr), displayOrder: 52, displayGroup: "Stats2", minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_dropRateAddr), displayOrder: 52, displayGroup: "Stats2", minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Droprate)]
-        public int Droprate {
-            get => Data.GetByte(_droprateAddr);
-            set => Data.SetByte(_droprateAddr, (byte) value);
+        public int DropRate {
+            get => Data.GetByte(_dropRateAddr);
+            set => Data.SetByte(_dropRateAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_slowPlusAddr), displayOrder: 53, displayGroup: "Stats2")]
@@ -638,18 +650,18 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_movementTypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x42Addr), displayOrder: 56.5f, displayName: "CanHeal", displayGroup: "LastPage")]
+        [TableViewModelColumn(addressField: nameof(_orderMode), displayOrder: 56.5f, displayGroup: "LastPage")]
         [BulkCopy]
-        public int Unknown0x42 {
-            get => Data.GetByte(_unknown0x42Addr);
-            set => Data.SetByte(_unknown0x42Addr, (byte) value);
+        public int OrderMode {
+            get => Data.GetByte(_orderMode);
+            set => Data.SetByte(_orderMode, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x43Addr), displayOrder: 57, displayGroup: "LastPage", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoiceMode), displayOrder: 57, displayFormat: "X2")]
         [BulkCopy]
-        public int Unknown0x43 {
-            get => Data.GetByte(_unknown0x43Addr);
-            set => Data.SetByte(_unknown0x43Addr, (byte) value);
+        public int AttackChoiceMode {
+            get => Data.GetByte(_attackChoiceMode);
+            set => Data.SetByte(_attackChoiceMode, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_attackChoice1Addr), displayOrder: 58, displayName: "+SpellChance1", displayGroup: "LastPage", displayFormat: "X2")]
