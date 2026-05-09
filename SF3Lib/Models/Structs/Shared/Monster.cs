@@ -63,8 +63,8 @@ namespace SF3.Models.Structs.X019 {
         private readonly int _supportPlusAddr;
         private readonly int _magicBonusIdAddr;
         private readonly int _movementTypeAddr;
-        private readonly int _orderMode;
-        private readonly int _attackChoiceMode;
+        private readonly int _orderChoiceOrderAddr;
+        private readonly int _attackChoiceModeAddr;
         private readonly int _attackChoice1Addr;
         private readonly int _attackChoice2Addr;
         private readonly int _attackChoice3Addr;
@@ -133,15 +133,15 @@ namespace SF3.Models.Structs.X019 {
             _supportPlusAddr       = Address + 0x3F;
             _magicBonusIdAddr      = Address + 0x40;
             _movementTypeAddr      = Address + 0x41;
-            _orderMode             = Address + 0x42; // heal when damaged when set?
-            _attackChoiceMode      = Address + 0x43;
+            _orderChoiceOrderAddr  = Address + 0x42; // heal when damaged when set?
+            _attackChoiceModeAddr  = Address + 0x43;
             _attackChoice1Addr     = Address + 0x44; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
             _attackChoice2Addr     = Address + 0x45; // what to do on turn2?
             _attackChoice3Addr     = Address + 0x46; // what to do on turn3?
             _attackChoice4Addr     = Address + 0x47; // what to do on turn4?
             _attackChoice5Addr     = Address + 0x48; // what to do on turn5?
             _attackChoice6Addr     = Address + 0x49; // what to do on turn6?
-            _attackChoiceExtra       = Address + 0x4A;
+            _attackChoiceExtra     = Address + 0x4A;
             _unknown0x4BAddr       = Address + 0x4B;
             SpriteID               = id + 200;
         }
@@ -651,64 +651,73 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetByte(_movementTypeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_orderMode), displayOrder: 56.5f, displayGroup: "AI")]
+        [TableViewModelColumn(addressField: nameof(_orderChoiceOrderAddr), displayOrder: 56.5f, displayGroup: "AI", minWidth: 200)]
         [BulkCopy]
-        public int OrderMode {
-            get => Data.GetByte(_orderMode);
-            set => Data.SetByte(_orderMode, (byte) value);
+        [NameGetter(NamedValueType.OrderChoiceOrder)]
+        public int OrderChoiceOrder {
+            get => Data.GetByte(_orderChoiceOrderAddr);
+            set => Data.SetByte(_orderChoiceOrderAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoiceMode), displayOrder: 57, displayFormat: "X2", displayGroup: "AI")]
+        [TableViewModelColumn(addressField: nameof(_attackChoiceModeAddr), displayOrder: 57, displayFormat: "X2", displayGroup: "AI", minWidth: 200)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoiceMode)]
         public int AttackChoiceMode {
-            get => Data.GetByte(_attackChoiceMode);
-            set => Data.SetByte(_attackChoiceMode, (byte) value);
+            get => Data.GetByte(_attackChoiceModeAddr);
+            set => Data.SetByte(_attackChoiceModeAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoice1Addr), displayOrder: 58, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice1Addr), displayOrder: 58, displayGroup: "AI", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoice1 {
             get => Data.GetByte(_attackChoice1Addr);
             set => Data.SetByte(_attackChoice1Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoice2Addr), displayOrder: 59, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice2Addr), displayOrder: 59, displayGroup: "AI", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoice2 {
             get => Data.GetByte(_attackChoice2Addr);
             set => Data.SetByte(_attackChoice2Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoice3Addr), displayOrder: 60, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice3Addr), displayOrder: 60, displayGroup: "AI", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoice3 {
             get => Data.GetByte(_attackChoice3Addr);
             set => Data.SetByte(_attackChoice3Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoice4Addr), displayOrder: 61, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice4Addr), displayOrder: 61, displayGroup: "AI", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoice4 {
             get => Data.GetByte(_attackChoice4Addr);
             set => Data.SetByte(_attackChoice4Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoice5Addr), displayOrder: 62, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice5Addr), displayOrder: 62, displayGroup: "AI", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoice5 {
             get => Data.GetByte(_attackChoice5Addr);
             set => Data.SetByte(_attackChoice5Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoice6Addr), displayOrder: 63, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoice6Addr), displayOrder: 63, displayGroup: "AI", displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoice6 {
             get => Data.GetByte(_attackChoice6Addr);
             set => Data.SetByte(_attackChoice6Addr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_attackChoiceExtra), displayOrder: 64, displayGroup: "AI", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_attackChoiceExtra), displayOrder: 64, displayGroup: "AI", displayFormat: "X2", minWidth: 140)]
         [BulkCopy]
+        [NameGetter(NamedValueType.AttackChoice)]
         public int AttackChoiceExtra {
             get => Data.GetByte(_attackChoiceExtra);
             set => Data.SetByte(_attackChoiceExtra, (byte) value);

@@ -44,6 +44,8 @@ namespace SF3.NamedValues {
                     ) },
 
                 { NamedValueType.AITargetType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.AITargetTypeInfo)) },
+                { NamedValueType.AttackChoiceMode,    new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.AttackChoiceModeInfo)) },
+                { NamedValueType.AttackChoice,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.AttackChoiceInfo)) },
                 { NamedValueType.BattleSceneById,     new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.BattleSceneByIdInfo)) },
                 { NamedValueType.Character,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterInfo.Info[Scenario])) },
                 { NamedValueType.CharacterClass,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.CharacterClassInfo)) },
@@ -75,6 +77,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.MonsterForUnit,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForUnitInfo.Info[Scenario])) },
                 { NamedValueType.MovementType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MovementTypeInfo)) },
                 { NamedValueType.Music,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MusicInfo.Info[Scenario])) },
+                { NamedValueType.OrderChoiceOrder,    new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.OrderChoiceOrderInfo)) },
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
                 { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },

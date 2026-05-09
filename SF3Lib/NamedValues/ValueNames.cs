@@ -5,6 +5,10 @@ namespace SF3.NamedValues {
     public static class ValueNames {
         public static readonly NamedValueFromEnum<AITargetType> AITargetTypeInfo
             = new NamedValueFromEnum<AITargetType>();
+        public static readonly NamedValueFromEnum<AttackChoiceMode> AttackChoiceModeInfo
+            = new NamedValueFromEnum<AttackChoiceMode>();
+        public static readonly NamedValueFromEnum<AttackChoice> AttackChoiceInfo
+            = new NamedValueFromEnum<AttackChoice>();
         public static readonly BattleSceneByIdInfo BattleSceneByIdInfo
             = new BattleSceneByIdInfo();
         public static readonly NamedValueFromResourceForScenariosInfo CharacterInfo
@@ -63,6 +67,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
         public static readonly MonsterForUnitInfo MonsterForUnitInfo
             = new MonsterForUnitInfo();
+        public static readonly NamedValueFromEnum<OrderChoiceOrder> OrderChoiceOrderInfo
+            = new NamedValueFromEnum<OrderChoiceOrder>();
         public static readonly NamedValueFromEnum<MovementType> MovementTypeInfo
             = new NamedValueFromEnum<MovementType>();
         public static readonly NamedValueFromResourceForScenariosInfo MusicInfo
