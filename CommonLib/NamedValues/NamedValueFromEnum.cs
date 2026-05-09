@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.Extensions;
 
 namespace CommonLib.NamedValues {
     /// <summary>
@@ -14,7 +15,7 @@ namespace CommonLib.NamedValues {
         private static Dictionary<int, string> EnumToNamedValueDictionary() {
             return Enum.GetValues(typeof(T))
                 .Cast<T>()
-                .ToDictionary(x => Convert.ToInt32(x), x => x.ToString());
+                .ToDictionary(x => Convert.ToInt32(x), x => x.GetDisplayName());
         }
     };
 }
