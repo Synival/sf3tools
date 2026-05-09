@@ -20,10 +20,10 @@ namespace SF3.Win.Views {
             CreateChild(new TableView("Magic Res",    Model, NameGetterContext, displayGroups: ["Metadata", "MagicRes"]));
             CreateChild(new TableView("Spells",       Model, NameGetterContext, displayGroups: ["Metadata", "Spells"]));
             CreateChild(new TableView("Eq / Items",   Model, NameGetterContext, displayGroups: ["Metadata", "Items"]));
-            CreateChild(new TableView("(Unknowns 1)", Model, NameGetterContext, displayGroups: ["Metadata", "Unknown"]));
             CreateChild(new TableView("Specials",     Model, NameGetterContext, displayGroups: ["Metadata", "Specials"]));
+            CreateChild(new TableView("Flags",        Model, NameGetterContext, displayGroups: ["Metadata", "Flags"]));
             CreateChild(new TableView("Stats (2/2)",  Model, NameGetterContext, displayGroups: ["Metadata", "Stats2"]));
-            CreateChild(new TableView("(Unknowns 2)", Model, NameGetterContext, displayGroups: ["Metadata", "LastPage"]));
+            CreateChild(new TableView("AI",           Model, NameGetterContext, displayGroups: ["Metadata", "AI"]));
 
             return Control;
         }
