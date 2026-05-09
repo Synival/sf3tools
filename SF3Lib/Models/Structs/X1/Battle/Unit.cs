@@ -199,9 +199,9 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetByte(_dropDisableAddr, (byte) value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_unknown0x09Addr), displayOrder: 5, displayName: "+0x09 (probably drop rate override)", displayFormat: "X2", displayGroup: "Page1")]
+        [TableViewModelColumn(addressField: nameof(_unknown0x09Addr), displayOrder: 5, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        public int Unknown0x09 {
+        public int DropRate {
             get => Data.GetByte(_unknown0x09Addr);
             set => Data.SetByte(_unknown0x09Addr, (byte) value);
         }
@@ -228,8 +228,15 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopy]
         [NameGetter(NamedValueType.SpawnType)]
         public int SpawnType {
-            get => Data.GetByte(_spawnTypeAddr);
-            set => Data.SetByte(_spawnTypeAddr, (byte) value);
+            get => (Data.GetByte(_spawnTypeAddr) & 0x7F);
+            set => Data.SetByte(_spawnTypeAddr, (byte) ((Data.GetByte(_spawnTypeAddr) & 0x80) | value));
+        }
+
+        [TableViewModelColumn(addressField: nameof(_spawnTypeAddr), displayOrder: 8.1f, displayGroup: "Page1")]
+        [BulkCopy]
+        public bool CanSpawnNearby {
+            get => (Data.GetByte(_spawnTypeAddr) & 0x80) == 0x80;
+            set => Data.SetByte(_spawnTypeAddr, (byte) ((Data.GetByte(_spawnTypeAddr) & 0x7F) | (value ? 0x80 : 0x00)));
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x0EAddr), displayOrder: 9, displayName: "+0x0E", displayFormat: "X2", displayGroup: "Page1")]

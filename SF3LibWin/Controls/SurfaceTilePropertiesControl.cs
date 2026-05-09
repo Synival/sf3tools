@@ -38,7 +38,7 @@ namespace SF3.Win.Controls {
             // Event handling for 'Movement' group.
             cbMoveTerrain.SelectedValueChanged += (s, e) => DoOnlyDirectly(eo => eo.TerrainType = (TerrainType) cbMoveTerrain.SelectedValue);
             nudMoveCenterHeight.ValueChanged   += (s, e) => DoOnlyDirectly(eo => SetCenterHeight((byte) nudMoveCenterHeight.Value));
-            cbMoveSlope.CheckedChanged         += (s, e) => DoOnlyDirectly(eo => eo.TerrainFlags ^= TerrainFlags.SteepSlope);
+            cbMoveSlope.CheckedChanged         += (s, e) => DoOnlyDirectly(eo => eo.TerrainFlags ^= TerrainFlags.IgnoreHeightCost);
 
             foreach (var nud in _nudVertexHeights)
                 nud.Value.ValueChanged += (s, e) => DoOnlyDirectly(eo => SetVertexHeight(nud.Key, (byte) nud.Value.Value));
@@ -72,7 +72,7 @@ namespace SF3.Win.Controls {
             // 'Movement' group
             cbMoveTerrain.SelectedItem = eo.TerrainType;
             SetNudValueAndText(nudMoveCenterHeight, (decimal) eo.CenterHeight);
-            cbMoveSlope.Checked = ((eo.TerrainFlags & TerrainFlags.SteepSlope) != 0) ? true : false;
+            cbMoveSlope.Checked = ((eo.TerrainFlags & TerrainFlags.IgnoreHeightCost) != 0) ? true : false;
             foreach (var nud in _nudVertexHeights)
                 SetNudValueAndText(nud.Value, (decimal) eo.GetVertexHeight(nud.Key));
 
