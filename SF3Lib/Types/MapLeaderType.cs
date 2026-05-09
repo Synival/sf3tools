@@ -7,6 +7,6 @@ namespace SF3.Types {
         Medion  = 0x01,
         Julian  = 0x02,
         Extra   = 0x03,
-        Unknown = 0x04
+        Alt     = 0x04
     }
 }

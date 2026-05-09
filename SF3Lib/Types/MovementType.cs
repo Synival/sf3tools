@@ -1,20 +1,22 @@
-﻿namespace SF3.Types {
+﻿using CommonLib.Attributes;
+
+namespace SF3.Types {
     public enum MovementType {
-        Unknown0x0 = 0x00,
-        Normal     = 0x01,
-        Centaur    = 0x02,
-        Beast      = 0x03,
-        Tank       = 0x04,
-        Flying     = 0x05,
-        Floating   = 0x06,
-        Aquatic    = 0x07,
-        Archer     = 0x08,
-        Bowknight  = 0x09,
-        Elf        = 0x0A,
-        Mage       = 0x0B,
-        Healer     = 0x0C,
-        Unknown0xD = 0x0D,
-        Unknown0xE = 0x0E,
-        Unknown0xF = 0x0F,
+        [EnumDisplayName("Unknown 0x0")] Unknown0x0 = 0x00,
+        [EnumDisplayName("Normal")]      Normal     = 0x01,
+        [EnumDisplayName("Centaur")]     Centaur    = 0x02,
+        [EnumDisplayName("Beast")]       Beast      = 0x03,
+        [EnumDisplayName("Tank")]        Tank       = 0x04,
+        [EnumDisplayName("Flying")]      Flying     = 0x05,
+        [EnumDisplayName("Floating")]    Floating   = 0x06,
+        [EnumDisplayName("Aquatic")]     Aquatic    = 0x07,
+        [EnumDisplayName("Archer")]      Archer     = 0x08,
+        [EnumDisplayName("Bowknight")]   Bowknight  = 0x09,
+        [EnumDisplayName("Elf")]         Elf        = 0x0A,
+        [EnumDisplayName("Mage")]        Mage       = 0x0B,
+        [EnumDisplayName("Healer")]      Healer     = 0x0C,
+        [EnumDisplayName("Unknown 0xD")] Unknown0xD = 0x0D,
+        [EnumDisplayName("Unknown 0xE")] Unknown0xE = 0x0E,
+        [EnumDisplayName("Unknown 0xF")] Unknown0xF = 0x0F,
     }
 }

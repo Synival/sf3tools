@@ -1,8 +1,17 @@
-﻿namespace SF3.Types {
+﻿using CommonLib.Attributes;
+
+namespace SF3.Types {
     public enum LightingStyleType {
-        LightIndoors           = 0,
-        DarkIndoors            = 1,
-        LightOutdoors          = 2,
-        DarkOutdoors_Scenario3 = 3
+        [EnumDisplayName("Light, Indoors")]
+        LightIndoors  = 0,
+
+        [EnumDisplayName("Dark, Indoors")]
+        DarkIndoors   = 1,
+
+        [EnumDisplayName("Light, Outdoors")]
+        LightOutdoors = 2,
+
+        [EnumDisplayName("Dark, Outdoors (Scenario 3+)")]
+        DarkOutdoors  = 3
     }
 }

@@ -1,15 +1,29 @@
 ﻿using System;
+using CommonLib.Attributes;
 using Newtonsoft.Json.Linq;
 using SF3.Utils;
 
 namespace SF3.Types {
     public enum SpriteDirectionCountType {
+        [EnumDisplayName("One (No Mirror)")]
         OneNoFlip    = 0x01,
+
+        [EnumDisplayName("Two (No Mirror)")]
         TwoNoFlip    = 0x02,
+
+        [EnumDisplayName("Four (Mirror)")]
         Four         = 0x04,
+
+        [EnumDisplayName("Five (Mirror)")]
         Five         = 0x05,
+
+        [EnumDisplayName("Six (Mirror)")]
         Six          = 0x06,
+
+        [EnumDisplayName("Eight")]
         Eight        = 0x08,
+
+        [EnumDisplayName("One (Mirrorable)")]
         OneFlippable = 0x11,
     }
 
