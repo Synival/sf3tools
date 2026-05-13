@@ -36,10 +36,14 @@ namespace SF3.Win.Views.X014 {
                 CreateChild(new TableView("MPD Battle Scene Info (Scn2+)", Model.MPDBattleSceneInfoTable, ngc));
             if (Model.TerrainBasedBattleSceneTablesByRamAddress != null)
                 CreateChild(new TableArrayView<TerrainBasedBattleSceneTable>("Terrain-Based Battle Scenes", Model.TerrainBasedBattleSceneTablesByRamAddress.Values.ToArray(), ngc));
-            if (Model.SpellAnimationLocationTable != null)
-                CreateChild(new TableView("Spell Animation Locations", Model.SpellAnimationLocationTable, ngc));
-            if (Model.SpecialAnimationLocationTable != null)
-                CreateChild(new TableView("Special Animation Locations", Model.SpecialAnimationLocationTable, ngc));
+            if (Model.SpellEffectLocationTable != null)
+                CreateChild(new TableView("Spell Effect Locations", Model.SpellEffectLocationTable, ngc));
+            if (Model.SpellModelAnimationSubstitutionTable != null)
+                CreateChild(new TableView("Spell Model Animation Substitutions", Model.SpellModelAnimationSubstitutionTable, ngc));
+            if (Model.SpecialEffectLocationTable != null)
+                CreateChild(new TableView("Special Effect Locations", Model.SpecialEffectLocationTable, ngc));
+            if (Model.SpecialModelAnimationSubstitutionTable != null)
+                CreateChild(new TableView("Special Model Animation Substitutions", Model.SpecialModelAnimationSubstitutionTable, ngc));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 

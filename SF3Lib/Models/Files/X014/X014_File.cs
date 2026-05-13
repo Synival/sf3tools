@@ -43,7 +43,7 @@ namespace SF3.Models.Files.X014 {
         private uint GetEnemyBattleModelSc1TableAddr()
             => (Scenario == ScenarioType.Scenario1) ? 0xF848u : 0;
 
-        private uint GetSpellAnimationLocationTableAddr() {
+        private uint GetSpellEffectLocationTableAddr() {
             switch (Scenario) {
                 case ScenarioType.Scenario1:   return 0xFDA8u;
                 case ScenarioType.Scenario2:   return IsScn2V2 ? 0x12920u : 0x12978u;
@@ -53,7 +53,7 @@ namespace SF3.Models.Files.X014 {
             }
         }
 
-        private uint GetSpecialAnimationLocationTableAddr() {
+        private uint GetSpecialEffectLocationTableAddr() {
             switch (Scenario) {
                 case ScenarioType.Scenario1:   return 0xFE7Cu;
                 case ScenarioType.Scenario2:   return IsScn2V2 ? 0x12A18u : 0x12A70u;
@@ -84,28 +84,48 @@ namespace SF3.Models.Files.X014 {
             }
         }
 
+        private uint GetSpecialModelAnimationSubstitutionTableAddr() {
+            switch (Scenario) {
+            // TODO: Scenario 1,2,3?
+            case ScenarioType.PremiumDisk: return 0x12d84;
+            default: return 0;
+            }
+        }
+
+        private uint GetSpellModelAnimationSubstitutionTableAddr() {
+            switch (Scenario) {
+            // TODO: Scenario 1,2,3?
+            case ScenarioType.PremiumDisk: return 0x12f6c;
+            default: return 0;
+            }
+        }
+
         public override IEnumerable<ITable> MakeTables() {
             var characterBattleModelSc1Addr = GetCharacterBattleModelSc1TableAddr();
             var characterBattleModelSc2Addr = GetCharacterBattleModelSc2TableAddr();
             var characterBattleModelSc3Addr = GetCharacterBattleModelSc3TableAddr();
             var enemyBattleModelsSc1Addr    = GetEnemyBattleModelSc1TableAddr();
-            var spellAnimationLocationsAddr = GetSpellAnimationLocationTableAddr();
-            var specialAnimationLocationsAddr = GetSpecialAnimationLocationTableAddr();
+            var spellEffectLocationsAddr    = GetSpellEffectLocationTableAddr();
+            var specialEffectLocationsAddr  = GetSpecialEffectLocationTableAddr();
             var mpdBattleSceneIdsAddr       = (Scenario == ScenarioType.Scenario1) ? 0xFA8Cu : 0;
             var mpdBattleSceneAddr          = GetMPDBattleSceneInfoTableAddr();
+            var specAniSubTableAddr         = GetSpecialModelAnimationSubstitutionTableAddr();
+            var spellAniSubTableAddr        = GetSpellModelAnimationSubstitutionTableAddr();
 
             var tables = new List<ITable>() {
                 (CharacterBattleModelsSc1Table = (characterBattleModelSc1Addr   == 0) ? null : CharacterBattleModelsSc1Table.Create(Data, nameof(CharacterBattleModelsSc1Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc1Addr)),
                 (CharacterBattleModelsSc2Table = (characterBattleModelSc2Addr   == 0) ? null : CharacterBattleModelsSc2Table.Create(Data, nameof(CharacterBattleModelsSc2Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc2Addr)),
                 (CharacterBattleModelsSc3Table = (characterBattleModelSc3Addr   == 0) ? null : CharacterBattleModelsSc3Table.Create(Data, nameof(CharacterBattleModelsSc3Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc3Addr)),
                 (EnemyBattleModelSc1Table      = (enemyBattleModelsSc1Addr      == 0) ? null : FileIdTable                  .Create(Data, nameof(CharacterBattleModelsSc1Table), ResourceFileForScenario(Scenario, "EnemyModels.xml"), (int) enemyBattleModelsSc1Addr)),
-                (SpellAnimationLocationTable   = (spellAnimationLocationsAddr   == 0) ? null : AnimationLocationTable       .Create(Data, nameof(SpellAnimationLocationTable), ResourceFileForScenario(Scenario, "SpellAnimations.xml"), (int) spellAnimationLocationsAddr, Scenario >= ScenarioType.Scenario3)),
-                (SpecialAnimationLocationTable = (specialAnimationLocationsAddr == 0) ? null : AnimationLocationTable       .Create(Data, nameof(SpecialAnimationLocationTable), ResourceFileForScenario(Scenario, "SpecialAnimations.xml"), (int) specialAnimationLocationsAddr, Scenario >= ScenarioType.Scenario3)),
+                (SpellEffectLocationTable      = (spellEffectLocationsAddr      == 0) ? null : EffectLocationTable          .Create(Data, nameof(SpellEffectLocationTable), ResourceFileForScenario(Scenario, "SpellAnimations.xml"), (int) spellEffectLocationsAddr, Scenario >= ScenarioType.Scenario3)),
+                (SpecialEffectLocationTable    = (specialEffectLocationsAddr    == 0) ? null : EffectLocationTable          .Create(Data, nameof(SpecialEffectLocationTable), ResourceFileForScenario(Scenario, "SpecialAnimations.xml"), (int) specialEffectLocationsAddr, Scenario >= ScenarioType.Scenario3)),
                 (MPDBattleSceneIdTable         = (mpdBattleSceneIdsAddr         == 0) ? null : MPDBattleSceneIdTable        .Create(Data, nameof(MPDBattleSceneIdTable), (int) mpdBattleSceneIdsAddr)),
                 (BattleScenesByMapTable        = (Scenario != ScenarioType.Scenario1) ? null : Sc1BattleSceneFileIdTable    .Create(Data, nameof(BattleScenesByMapTable), ResourceFileForScenario(ScenarioType.Scenario1, "BattleScenesByBattle.xml"),  0xFBB0, 30, 0x000)),
                 (BattleScenesByTerrainTable    = (Scenario != ScenarioType.Scenario1) ? null : Sc1BattleSceneFileIdTable    .Create(Data, nameof(BattleScenesByMapTable), ResourceFileForScenario(ScenarioType.Scenario1, "BattleScenesByTerrain.xml"), 0xFC28, 15, null)),
                 (BattleScenesOtherTable        = (Scenario != ScenarioType.Scenario1) ? null : Sc1BattleSceneFileIdTable    .Create(Data, nameof(BattleScenesByMapTable), ResourceFileForScenario(ScenarioType.Scenario1, "OtherBattleScenes.xml"),     0xFC64, 13, 0x100)),
-                (MPDBattleSceneInfoTable       = (mpdBattleSceneAddr            == 0) ? null : MPDBattleSceneInfoTable      .Create(Data, nameof(MPDBattleSceneInfoTable), (int) mpdBattleSceneAddr))
+                (MPDBattleSceneInfoTable       = (mpdBattleSceneAddr            == 0) ? null : MPDBattleSceneInfoTable      .Create(Data, nameof(MPDBattleSceneInfoTable), (int) mpdBattleSceneAddr)),
+                (SpecialModelAnimationSubstitutionTable = (specAniSubTableAddr       == 0) ? null : SpecialModelAnimationSubstitutionTable.Create(Data, nameof(SpecialModelAnimationSubstitutionTable), (int) specAniSubTableAddr)),
+                (SpellModelAnimationSubstitutionTable   = (spellAniSubTableAddr      == 0) ? null : SpellModelAnimationSubstitutionTable.Create(Data, nameof(SpellModelAnimationSubstitutionTable), (int) spellAniSubTableAddr)),
             }.Where(x => x != null).ToList();
 
             if (MPDBattleSceneInfoTable != null) {
@@ -133,13 +153,15 @@ namespace SF3.Models.Files.X014 {
         public CharacterBattleModelsSc2Table CharacterBattleModelsSc2Table { get; private set; } = null;
         public CharacterBattleModelsSc3Table CharacterBattleModelsSc3Table { get; private set; } = null;
         public FileIdTable EnemyBattleModelSc1Table { get; private set; } = null;
-        public AnimationLocationTable SpellAnimationLocationTable { get; private set; } = null;
-        public AnimationLocationTable SpecialAnimationLocationTable { get; private set; } = null;
+        public EffectLocationTable SpellEffectLocationTable { get; private set; } = null;
+        public EffectLocationTable SpecialEffectLocationTable { get; private set; } = null;
         public MPDBattleSceneIdTable MPDBattleSceneIdTable { get; private set; } = null;
         public MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; private set; } = null;
         public Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; private set; } = null;
         public Sc1BattleSceneFileIdTable BattleScenesByMapTable { get; private set; } = null;
         public Sc1BattleSceneFileIdTable BattleScenesByTerrainTable { get; private set; } = null;
         public Sc1BattleSceneFileIdTable BattleScenesOtherTable { get; private set; } = null;
+        public SpecialModelAnimationSubstitutionTable SpecialModelAnimationSubstitutionTable { get; private set; } = null;
+        public SpellModelAnimationSubstitutionTable SpellModelAnimationSubstitutionTable { get; private set; } = null;
     }
 }

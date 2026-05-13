@@ -8,13 +8,15 @@ namespace SF3.Models.Files.X014 {
         CharacterBattleModelsSc2Table CharacterBattleModelsSc2Table { get; }
         CharacterBattleModelsSc3Table CharacterBattleModelsSc3Table { get; }
         FileIdTable EnemyBattleModelSc1Table { get; }
-        AnimationLocationTable SpellAnimationLocationTable { get; }
-        AnimationLocationTable SpecialAnimationLocationTable { get; }
+        EffectLocationTable SpellEffectLocationTable { get; }
+        EffectLocationTable SpecialEffectLocationTable { get; }
         MPDBattleSceneIdTable MPDBattleSceneIdTable { get; }
         MPDBattleSceneInfoTable MPDBattleSceneInfoTable { get; }
         Dictionary<int, TerrainBasedBattleSceneTable> TerrainBasedBattleSceneTablesByRamAddress { get; }
         Sc1BattleSceneFileIdTable BattleScenesByMapTable { get; }
         Sc1BattleSceneFileIdTable BattleScenesByTerrainTable { get; }
         Sc1BattleSceneFileIdTable BattleScenesOtherTable { get; }
+        SpecialModelAnimationSubstitutionTable SpecialModelAnimationSubstitutionTable { get; }
+        SpellModelAnimationSubstitutionTable SpellModelAnimationSubstitutionTable { get; }
     }
 }
