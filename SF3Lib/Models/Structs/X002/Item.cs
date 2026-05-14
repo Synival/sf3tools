@@ -121,6 +121,13 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetBit(_effectsEquipAddr, 7, value);
         }
 
+        [TableViewModelColumn(addressField: null, displayOrder: 23.8f, displayGroup: "Flags")]
+        public bool UnknownEffect0x80
+        {
+            get => Data.GetBit(_effectsEquipAddr, 8);
+            set => Data.SetBit(_effectsEquipAddr, 8, value);
+        }
+
         [TableViewModelColumn(addressField: nameof(_requirementsAddr), displayOrder: 24, displayFormat: "X2", displayGroup: "Flags")]
         [BulkCopy]
         public int Requirements {
@@ -156,6 +163,24 @@ namespace SF3.Models.Structs.X002 {
         public bool FemaleOnly {
             get => Data.GetBit(_requirementsAddr, 5);
             set => Data.SetBit(_requirementsAddr, 5, value);
+        }
+
+        [TableViewModelColumn(addressField: null, displayOrder: 24.6f, displayGroup: "Flags")]
+        public bool UnknownReq0x20 {
+            get => Data.GetBit(_requirementsAddr, 6);
+            set => Data.SetBit(_requirementsAddr, 6, value);
+        }
+
+        [TableViewModelColumn(addressField: null, displayOrder: 24.7f, displayGroup: "Flags")]
+        public bool UnknownReq0x40 {
+            get => Data.GetBit(_requirementsAddr, 7);
+            set => Data.SetBit(_requirementsAddr, 7, value);
+        }
+
+        [TableViewModelColumn(addressField: null, displayOrder: 24.8f, displayGroup: "Flags")]
+        public bool UnknownReq0x80 {
+            get => Data.GetBit(_requirementsAddr, 8);
+            set => Data.SetBit(_requirementsAddr, 8, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_rangeAddr), displayOrder: 4.0f, displayFormat: "X2", displayGroup: "Stats")]

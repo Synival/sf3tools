@@ -6,7 +6,7 @@ namespace SF3.Models.Structs.X002 {
     public class Loading : Struct {
         private readonly int _sceneIDAddr;
         private readonly int _x1Addr;
-        private readonly int _chpAddr;
+        private readonly int _battleNum;
         private readonly int _x5Addr;
         private readonly int _musicAddr;
         private readonly int _mpdAddr;
@@ -17,7 +17,7 @@ namespace SF3.Models.Structs.X002 {
         : base(data, id, name, address, 0x10) {
             _sceneIDAddr     = Address + 0x00; // 2 bytes
             _x1Addr          = Address + 0x02; // 2 bytes
-            _chpAddr         = Address + 0x04; // 2 bytes
+            _battleNum       = Address + 0x04; // 2 bytes
             _x5Addr          = Address + 0x06; // 2 bytes
             _musicAddr       = Address + 0x08; // 2 bytes
             _mpdAddr         = Address + 0x0a; // 2 bytes
@@ -40,11 +40,11 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetWord(_x1Addr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_chpAddr), displayOrder: 2, displayName: "CHP? IsBattle?")]
+        [TableViewModelColumn(addressField: nameof(_battleNum), displayOrder: 2)]
         [BulkCopy]
-        public int CHP {
-            get => Data.GetWord(_chpAddr);
-            set => Data.SetWord(_chpAddr, value);
+        public int BattleNum {
+            get => Data.GetWord(_battleNum);
+            set => Data.SetWord(_battleNum, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x5Addr), displayOrder: 3, minWidth: 140, displayFormat: "X3")]
