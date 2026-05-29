@@ -5,6 +5,7 @@ using SF3.Models.Tables.X014;
 namespace SF3.Models.Files.X014 {
     public interface IX014_File : IScenarioTableFile {
         CharacterBattleModelsSc1Table CharacterBattleModelsSc1Table { get; }
+        ModelAnimLoadInfoSc1Table CharacterBattleModelAnimsSc1Table { get; }
         CharacterBattleModelsSc2Table CharacterBattleModelsSc2Table { get; }
         CharacterBattleModelsSc3Table CharacterBattleModelsSc3Table { get; }
         FileIdTable EnemyBattleModelSc1Table { get; }

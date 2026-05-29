@@ -16,6 +16,8 @@ namespace SF3.Win.Views.X014 {
             var ngc = Model.NameGetterContext;
             if (Model.CharacterBattleModelsSc1Table != null)
                 CreateChild(new TableView("Character Battle Models (Scn1)", Model.CharacterBattleModelsSc1Table, ngc));
+            if (Model.CharacterBattleModelAnimsSc1Table != null)
+                CreateChild(new TableView("Character Battle Animations (Scn1)", Model.CharacterBattleModelAnimsSc1Table, ngc));
             if (Model.CharacterBattleModelsSc2Table != null)
                 CreateChild(new TableView("Character Battle Models (Scn2)", Model.CharacterBattleModelsSc2Table, ngc));
             if (Model.CharacterBattleModelsSc3Table != null)
