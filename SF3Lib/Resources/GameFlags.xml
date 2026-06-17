@@ -328,9 +328,9 @@
     <item value="0x0145" name="" />
     <item value="0x0146" name="" />
     <item value="0x0147" name="" />
-    <item value="0x0148" name="" />
-    <item value="0x0149" name="" />
-    <item value="0x014A" name="" />
+    <item value="0x0148" name="Force Battle Camera 1" />
+    <item value="0x0149" name="Force Battle Camera 2" />
+    <item value="0x014A" name="Force Battle Camera 3" />
     <item value="0x014B" name="" />
     <item value="0x014C" name="" />
     <item value="0x014D" name="" />
@@ -560,7 +560,7 @@
     <item value="0x022D" name="Load Flag 0x22D (In battle, this triggers 'switch map' logic at the end of a turn phase.)" />
     <item value="0x022E" name="Load Flag 0x22E" />
     <item value="0x022F" name="Load Flag 0x22F" />
-    <item value="0x0230" name="Load Flag 0x230 (Life Ring Ruins 1. Proect Ring ruins 2. Healing Drop ruins 3.)" />
+    <item value="0x0230" name="Load Flag 0x230 (Life Ring Ruins 1. Protect Ring ruins 2. Healing Drop ruins 3.)" />
     <item value="0x0231" name="Load Flag 0x231 (Healing Drop Ruins 1. Goddess tear ruins 2. Large Mithril ruins 3.)" />
     <item value="0x0232" name="Load Flag 0x232 (Scn1 Battle 14 Ruins Chest 3 (Light of Hope), Scn1 Battle 17 Ruins Chest 1 (Large Mithril))" />
     <item value="0x0233" name="Load Flag 0x233 (Scn1 Battle 14 Elbesem Statue (Potion), Scn1 Battle 17 Ruins Chest 2 (Fire Axe))" />
