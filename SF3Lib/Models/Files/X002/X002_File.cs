@@ -66,7 +66,7 @@ namespace SF3.Models.Files.X002 {
                     presetAddress         = isOriginalJpVersion ? 0x472c : 0x4738;
                     spellAddress          = isOriginalJpVersion ? 0x431c : 0x4328;
                     statBoostAddress      = isOriginalJpVersion ? 0x452b : 0x4537;
-                    warpAddress           = isOriginalJpVersion ? 0x53c0 : 0x53cc;
+                    warpAddress           = isOriginalJpVersion ? 0x53ac : 0x53b8;
                     weaponRankAddress     = isOriginalJpVersion ? 0x29ec : 0x29f8;
                     break;
 
