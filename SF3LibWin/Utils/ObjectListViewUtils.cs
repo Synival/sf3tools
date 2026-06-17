@@ -57,20 +57,22 @@ namespace SF3.Win.Utils {
                 "creatorMap", BindingFlags.NonPublic | BindingFlags.Instance);
             var creatorMap = (Dictionary<Type, EditorCreatorDelegate>) creatorMapField.GetValue(ObjectListView.EditorRegistry);
 
-            ObjectListView.EditorRegistry.Register(typeof(sbyte), typeof(SByteUpDownControl));
-            ObjectListView.EditorRegistry.Register(typeof(byte), typeof(ByteUpDownControl));
-            ObjectListView.EditorRegistry.Register(typeof(short), typeof(Int16UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(sbyte),  typeof(SByteUpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(byte),   typeof(ByteUpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(short),  typeof(Int16UpDownControl));
             ObjectListView.EditorRegistry.Register(typeof(ushort), typeof(UInt16UpDownControl));
-            ObjectListView.EditorRegistry.Register(typeof(int), typeof(Int32UpDownControl));
-            ObjectListView.EditorRegistry.Register(typeof(uint), typeof(UInt32UpDownControl));
-            ObjectListView.EditorRegistry.Register(typeof(float), typeof(FloatUpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(int),    typeof(Int32UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(uint),   typeof(UInt32UpDownControl));
+            ObjectListView.EditorRegistry.Register(typeof(float),  typeof(FloatUpDownControl));
 
             var typesToHijack = new Type[] {
+                typeof(sbyte),
+                typeof(byte),
                 typeof(short),
-                typeof(int),
-                typeof(long),
                 typeof(ushort),
+                typeof(int),
                 typeof(uint),
+                typeof(long),
                 typeof(ulong),
                 typeof(float)
             };
