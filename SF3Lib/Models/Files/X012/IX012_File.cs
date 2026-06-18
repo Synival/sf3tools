@@ -5,6 +5,6 @@ namespace SF3.Models.Files.X012 {
     public interface IX012_File : IScenarioTableFile {
         TileMovementTable TileMovementTable { get; }
         ClassTargetPriorityTable[] ClassTargetPriorityTables { get; }
-        ClassTargetUnknownTable[] ClassTargetUnknownTables { get; }
+        ClassAttackScoreBonusTable[] ClassAttackScoreBonusTables { get; }
     }
 }

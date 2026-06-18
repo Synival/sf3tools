@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.X1.Battle {
             => Create(() => new CharacterMoveTargetPriorityTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new CharacterMoveTargetPriority(Data, id, "MoveTargetPriority" + id.ToString("D2"), address));
+            => Load((id, address) => new CharacterMoveTargetPriority(Data, id, "CharacterMoveTargetPriority" + id.ToString("D2"), address));
     }
 }

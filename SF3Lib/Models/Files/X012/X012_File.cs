@@ -37,17 +37,17 @@ namespace SF3.Models.Files.X012 {
                 var tablePointerAddr = 0xB7AC;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetDouble(tablePointerAddr) - RamAddress;
-                    var tableName = "CharacterTargetPriorityTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    var tableName = $"{nameof(ClassTargetPriorityTable)} 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(ClassTargetPriorityTables[i] = ClassTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
                 }
 
-                ClassTargetUnknownTables = new ClassTargetUnknownTable[16];
+                ClassAttackScoreBonusTables = new ClassAttackScoreBonusTable[16];
                 tablePointerAddr = 0xB8DC;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetDouble(tablePointerAddr) - RamAddress;
-                    var tableName = "UnknownTable 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
-                    tables.Add(ClassTargetUnknownTables[i] = ClassTargetUnknownTable.Create(Data, tableName, tableAddr));
+                    var tableName = $"{nameof(ClassAttackScoreBonusTable)} 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
+                    tables.Add(ClassAttackScoreBonusTables[i] = ClassAttackScoreBonusTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
                 }
             }
@@ -62,6 +62,6 @@ namespace SF3.Models.Files.X012 {
         public ClassTargetPriorityTable[] ClassTargetPriorityTables { get; private set; }
 
         [BulkCopyRecurse]
-        public ClassTargetUnknownTable[] ClassTargetUnknownTables { get; private set; }
+        public ClassAttackScoreBonusTable[] ClassAttackScoreBonusTables { get; private set; }
     }
 }

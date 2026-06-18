@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.X1.Battle {
             => Create(() => new CharacterAttackScoreBonusTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new CharacterAttackScoreBonus(Data, id, "CharacterAttackScoreBonus" + id.ToString("D2"), address));
+            => Load((id, address) => new CharacterAttackScoreBonus(Data, id, "CharacterAtkScoreBonus" + id.ToString("D2"), address));
     }
 }

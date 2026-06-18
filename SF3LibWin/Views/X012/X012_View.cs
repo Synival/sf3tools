@@ -16,9 +16,9 @@ namespace SF3.Win.Views.X012 {
             if (Model.TileMovementTable != null)
                 CreateChild(new TableView("Tile Data", Model.TileMovementTable, ngc));
             if (Model.ClassTargetPriorityTables != null)
-                CreateChild(new TableArrayView<ClassTargetPriorityTable>("Class Target Priorities", Model.ClassTargetPriorityTables, ngc));
-            if (Model.ClassTargetUnknownTables != null)
-                CreateChild(new TableArrayView<ClassTargetUnknownTable>("Class Unknown Tables", Model.ClassTargetUnknownTables, ngc));
+                CreateChild(new TableArrayView<ClassTargetPriorityTable>("Class Move Target Priorities", Model.ClassTargetPriorityTables, ngc));
+            if (Model.ClassAttackScoreBonusTables != null)
+                CreateChild(new TableArrayView<ClassAttackScoreBonusTable>("Class Attack Score Bonuses", Model.ClassAttackScoreBonusTables, ngc));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 
