@@ -49,32 +49,32 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_characterIdAddr), displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Character)]
-        public int CharacterID {
+        public byte CharacterID {
             get => Data.GetUInt8(_characterIdAddr);
-            set => Data.SetUInt8(_characterIdAddr, (byte) value);
+            set => Data.SetUInt8(_characterIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_characterClassAddr), displayOrder: 1, displayName: "Class", minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
-        public int CharacterClass {
+        public byte CharacterClass {
             get => Data.GetUInt8(_characterClassAddr);
-            set => Data.SetUInt8(_characterClassAddr, (byte) value);
+            set => Data.SetUInt8(_characterClassAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_levelAddr), displayOrder: 2)]
         [BulkCopy]
-        public int Level {
+        public byte Level {
             get => Data.GetUInt8(_levelAddr);
-            set => Data.SetUInt8(_levelAddr, (byte) value);
+            set => Data.SetUInt8(_levelAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sexAddr), displayOrder: 3, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Sex)]
-        public int Sex {
+        public byte Sex {
             get => Data.GetUInt8(_sexAddr);
-            set => Data.SetUInt8(_sexAddr, (byte) value);
+            set => Data.SetUInt8(_sexAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weaponAddr), displayOrder: 4, minWidth: 120, displayFormat: "X2")]
@@ -128,9 +128,9 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_weapon1TypeAddr), displayOrder: 10, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
-        public int Weapon1Type {
+        public byte Weapon1Type {
             get => Data.GetUInt8(_weapon1TypeAddr);
-            set => Data.SetUInt8(_weapon1TypeAddr, (byte) value);
+            set => Data.SetUInt8(_weapon1TypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon1ExpAddr), displayOrder: 11)]
@@ -143,9 +143,9 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_weapon2TypeAddr), displayOrder: 12, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
-        public int Weapon2Type {
+        public byte Weapon2Type {
             get => Data.GetUInt8(_weapon2TypeAddr);
-            set => Data.SetUInt8(_weapon2TypeAddr, (byte) value);
+            set => Data.SetUInt8(_weapon2TypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon2ExpAddr), displayOrder: 13)]
@@ -158,9 +158,9 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_weapon3TypeAddr), displayOrder: 14, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
-        public int Weapon3Type {
+        public byte Weapon3Type {
             get => Data.GetUInt8(_weapon3TypeAddr);
-            set => Data.SetUInt8(_weapon3TypeAddr, (byte) value);
+            set => Data.SetUInt8(_weapon3TypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon3ExpAddr), displayOrder: 15)]
@@ -173,9 +173,9 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_weapon4TypeAddr), displayOrder: 16, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
-        public int Weapon4Type {
+        public byte Weapon4Type {
             get => Data.GetUInt8(_weapon4TypeAddr);
-            set => Data.SetUInt8(_weapon4TypeAddr, (byte) value);
+            set => Data.SetUInt8(_weapon4TypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon4ExpAddr), displayOrder: 17)]

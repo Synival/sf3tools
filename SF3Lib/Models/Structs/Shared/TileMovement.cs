@@ -42,114 +42,114 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_noEntryAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int NoEntry {
+        public byte NoEntry {
             get => Data.GetUInt8(_noEntryAddr);
-            set => Data.SetUInt8(_noEntryAddr, (byte) value);
+            set => Data.SetUInt8(_noEntryAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_airAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
-        public int Air {
+        public byte Air {
             get => Data.GetUInt8(_airAddr);
-            set => Data.SetUInt8(_airAddr, (byte) value);
+            set => Data.SetUInt8(_airAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_grasslandAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public int Grassland {
+        public byte Grassland {
             get => Data.GetUInt8(_grasslandAddr);
-            set => Data.SetUInt8(_grasslandAddr, (byte) value);
+            set => Data.SetUInt8(_grasslandAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_dirtAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
-        public int Dirt {
+        public byte Dirt {
             get => Data.GetUInt8(_dirtAddr);
-            set => Data.SetUInt8(_dirtAddr, (byte) value);
+            set => Data.SetUInt8(_dirtAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_darkGrassAddr), displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
-        public int DarkGrass {
+        public byte DarkGrass {
             get => Data.GetUInt8(_darkGrassAddr);
-            set => Data.SetUInt8(_darkGrassAddr, (byte) value);
+            set => Data.SetUInt8(_darkGrassAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_forestAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
-        public int Forest {
+        public byte Forest {
             get => Data.GetUInt8(_forestAddr);
-            set => Data.SetUInt8(_forestAddr, (byte) value);
+            set => Data.SetUInt8(_forestAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_brownMountainAddr), displayOrder: 6, displayFormat: "X2")]
         [BulkCopy]
-        public int BrownMountain {
+        public byte BrownMountain {
             get => Data.GetUInt8(_brownMountainAddr);
-            set => Data.SetUInt8(_brownMountainAddr, (byte) value);
+            set => Data.SetUInt8(_brownMountainAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_desertAddr), displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
-        public int Desert {
+        public byte Desert {
             get => Data.GetUInt8(_desertAddr);
-            set => Data.SetUInt8(_desertAddr, (byte) value);
+            set => Data.SetUInt8(_desertAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_greyMountainAddr), displayOrder: 8, displayFormat: "X2")]
         [BulkCopy]
-        public int GreyMountain {
+        public byte GreyMountain {
             get => Data.GetUInt8(_greyMountainAddr);
-            set => Data.SetUInt8(_greyMountainAddr, (byte) value);
+            set => Data.SetUInt8(_greyMountainAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_waterAddr), displayOrder: 9, displayFormat: "X2")]
         [BulkCopy]
-        public int Water {
+        public byte Water {
             get => Data.GetUInt8(_waterAddr);
-            set => Data.SetUInt8(_waterAddr, (byte) value);
+            set => Data.SetUInt8(_waterAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_cantStayAddr), displayOrder: 10, displayFormat: "X2")]
         [BulkCopy]
-        public int CantStay {
+        public byte CantStay {
             get => Data.GetUInt8(_cantStayAddr);
-            set => Data.SetUInt8(_cantStayAddr, (byte) value);
+            set => Data.SetUInt8(_cantStayAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sandAddr), displayOrder: 11, displayFormat: "X2")]
         [BulkCopy]
-        public int Sand {
+        public byte Sand {
             get => Data.GetUInt8(_sandAddr);
-            set => Data.SetUInt8(_sandAddr, (byte) value);
+            set => Data.SetUInt8(_sandAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_enemyOnlyAddr), displayOrder: 12, displayFormat: "X2")]
         [BulkCopy]
-        public int EnemyOnly {
+        public byte EnemyOnly {
             get => Data.GetUInt8(_enemyOnlyAddr);
-            set => Data.SetUInt8(_enemyOnlyAddr, (byte) value);
+            set => Data.SetUInt8(_enemyOnlyAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_playerOnlyAddr), displayOrder: 13, displayFormat: "X2")]
         [BulkCopy]
-        public int PlayerOnly {
+        public byte PlayerOnly {
             get => Data.GetUInt8(_playerOnlyAddr);
-            set => Data.SetUInt8(_playerOnlyAddr, (byte) value);
+            set => Data.SetUInt8(_playerOnlyAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0eAddr), displayOrder: 14, displayFormat: "X2")]
         [BulkCopy]
-        public int UnknownE {
+        public byte UnknownE {
             get => Data.GetUInt8(_unknown0eAddr);
-            set => Data.SetUInt8(_unknown0eAddr, (byte) value);
+            set => Data.SetUInt8(_unknown0eAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0fAddr), displayOrder: 15, displayFormat: "X2")]
         [BulkCopy]
-        public int UnknownF {
+        public byte UnknownF {
             get => Data.GetUInt8(_unknown0fAddr);
-            set => Data.SetUInt8(_unknown0fAddr, (byte) value);
+            set => Data.SetUInt8(_unknown0fAddr, value);
         }
     }
 }
