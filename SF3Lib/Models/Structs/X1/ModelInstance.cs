@@ -40,9 +40,9 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [NameGetter(NamedValueType.ModelInstanceType)]
         [BulkCopy]
-        public int Type {
+        public byte Type {
             get => Data.GetUInt8(_typeAddr);
-            set => Data.SetUInt8(_typeAddr, (byte) value);
+            set => Data.SetUInt8(_typeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_scriptAddr), displayOrder: 3, isPointer: true, minWidth: 300)]

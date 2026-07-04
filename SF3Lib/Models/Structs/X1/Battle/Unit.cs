@@ -194,16 +194,16 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_dropDisableAddr), displayOrder: 4, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        public int DropDisable {
+        public byte DropDisable {
             get => Data.GetUInt8(_dropDisableAddr);
-            set => Data.SetUInt8(_dropDisableAddr, (byte) value);
+            set => Data.SetUInt8(_dropDisableAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x09Addr), displayOrder: 5, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        public int DropRate {
+        public byte DropRate {
             get => Data.GetUInt8(_unknown0x09Addr);
-            set => Data.SetUInt8(_unknown0x09Addr, (byte) value);
+            set => Data.SetUInt8(_unknown0x09Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_eventCallAddr), displayOrder: 6, displayFormat: "X2", displayGroup: "Page1")]
@@ -219,16 +219,16 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_characterPlusAddr), displayOrder: 7, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(CharacterPlusType))]
-        public int CharacterPlus {
+        public byte CharacterPlus {
             get => Data.GetUInt8(_characterPlusAddr);
-            set => Data.SetUInt8(_characterPlusAddr, (byte) value);
+            set => Data.SetUInt8(_characterPlusAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_spawnTypeAddr), displayOrder: 8, displayFormat: "X2", minWidth: 230, displayGroup: "Page1")]
         [BulkCopy]
         [NameGetter(NamedValueType.SpawnType)]
-        public int SpawnType {
-            get => (Data.GetUInt8(_spawnTypeAddr) & 0x7F);
+        public byte SpawnType {
+            get => (byte) (Data.GetUInt8(_spawnTypeAddr) & 0x7F);
             set => Data.SetUInt8(_spawnTypeAddr, (byte) ((Data.GetUInt8(_spawnTypeAddr) & 0x80) | value));
         }
 
@@ -241,9 +241,9 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_unknown0x0EAddr), displayOrder: 9, displayName: "+0x0E", displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        public int Unknown0x0E {
+        public byte Unknown0x0E {
             get => Data.GetUInt8(_unknown0x0EAddr);
-            set => Data.SetUInt8(_unknown0x0EAddr, (byte) value);
+            set => Data.SetUInt8(_unknown0x0EAddr, value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -252,22 +252,22 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_defaultAIIndex), displayOrder: 10, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int DefaultAIIndex {
+        public byte DefaultAIIndex {
             get => Data.GetUInt8(_defaultAIIndex);
-            set => Data.SetUInt8(_defaultAIIndex, (byte) value);
+            set => Data.SetUInt8(_defaultAIIndex, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 11, displayName: "Facing/IsBoss", displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int FacingIsBoss {
+        public byte FacingIsBoss {
             get => Data.GetUInt8(_facingIsBossAddr);
-            set => Data.SetUInt8(_facingIsBossAddr, (byte) value);
+            set => Data.SetUInt8(_facingIsBossAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 11.5f, minWidth: 80, displayGroup: "Page2")]
         public UnitFacingType Facing {
             get => (UnitFacingType) (FacingIsBoss & 0xE0);
-            set => FacingIsBoss = (FacingIsBoss & ~0xE0) | ((int) value & 0xE0);
+            set => FacingIsBoss = (byte) ((FacingIsBoss & ~0xE0) | ((int) value & 0xE0));
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 12, displayGroup: "Page2")]
@@ -285,16 +285,16 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_teamIdAddr), displayOrder: 13, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int TeamID {
+        public byte TeamID {
             get => Data.GetUInt8(_teamIdAddr);
-            set => Data.SetUInt8(_teamIdAddr, (byte) value);
+            set => Data.SetUInt8(_teamIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_respawnCountAddr), displayOrder: 14, displayName: "RespawnCount?", displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
-        public int RespawnCount {
+        public byte RespawnCount {
             get => Data.GetUInt8(_respawnCountAddr);
-            set => Data.SetUInt8(_respawnCountAddr, (byte) value);
+            set => Data.SetUInt8(_respawnCountAddr, value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -362,9 +362,9 @@ namespace SF3.Models.Structs.X1.Battle {
         // -----------------------------------------------------------------------------------------------------------
 
         [BulkCopy]
-        public int Padding {
+        public byte Padding {
             get => Data.GetUInt8(_paddingAddr);
-            set => Data.SetUInt8(_paddingAddr, (byte) value);
+            set => Data.SetUInt8(_paddingAddr, value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
