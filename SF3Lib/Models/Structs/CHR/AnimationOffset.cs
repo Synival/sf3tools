@@ -23,8 +23,8 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: nameof(_offsetAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public uint Offset {
-            get => (uint) Data.GetInt32(_offsetAddr);
-            set => Data.SetInt32(_offsetAddr, (int) value);
+            get => Data.GetUInt32(_offsetAddr);
+            set => Data.SetUInt32(_offsetAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 0.1f, displayName: "Offset (In File)", displayFormat: "X2", visibilityProperty: nameof(IsInCHP))]

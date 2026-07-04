@@ -72,14 +72,14 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 1)]
         [BulkCopy]
         public ushort Width {
-            get => (ushort) Data.GetUInt16(_widthAddr);
+            get => Data.GetUInt16(_widthAddr);
             set => Data.SetUInt16(_widthAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_heightAddr), displayOrder: 2)]
         [BulkCopy]
         public ushort Height {
-            get => (ushort) Data.GetUInt16(_heightAddr);
+            get => Data.GetUInt16(_heightAddr);
             set => Data.SetUInt16(_heightAddr, value);
         }
 
@@ -87,57 +87,57 @@ namespace SF3.Models.Structs.CHR {
         [NameGetter(NamedValueType.SpriteDirectionCount)]
         [BulkCopy]
         public byte Directions {
-            get => (byte) Data.GetUInt8(_directionsAddr);
+            get => Data.GetUInt8(_directionsAddr);
             set => Data.SetUInt8(_directionsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_verticalOffsetAddr), displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
         public byte VerticalOffset {
-            get => (byte) Data.GetUInt8(_verticalOffsetAddr);
+            get => Data.GetUInt8(_verticalOffsetAddr);
             set => Data.SetUInt8(_verticalOffsetAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x08Addr), displayOrder: 5, displayName: "+0x08")]
         [BulkCopy]
         public byte Unknown0x08 {
-            get => (byte) Data.GetUInt8(_unknown0x08Addr);
+            get => Data.GetUInt8(_unknown0x08Addr);
             set => Data.SetUInt8(_unknown0x08Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_collisionShadowDiameterAddr), displayOrder: 6, displayName: "Collision/Shadow Diameter")]
         [BulkCopy]
         public byte CollisionShadowDiameter {
-            get => (byte) Data.GetUInt8(_collisionShadowDiameterAddr);
+            get => Data.GetUInt8(_collisionShadowDiameterAddr);
             set => Data.SetUInt8(_collisionShadowDiameterAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_promotionLevelAddr), displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
         public byte PromotionLevel {
-            get => (byte) Data.GetUInt8(_promotionLevelAddr);
+            get => Data.GetUInt8(_promotionLevelAddr);
             set => Data.SetUInt8(_promotionLevelAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_paddingAddr), displayOrder: 8, displayFormat: "X2", displayName: "(Padding?)")]
         [BulkCopy]
         public byte Padding {
-            get => (byte) Data.GetUInt8(_paddingAddr);
+            get => Data.GetUInt8(_paddingAddr);
             set => Data.SetUInt8(_paddingAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_scaleAddr), displayOrder: 9, displayFormat: "X2")]
         [BulkCopy]
         public uint Scale {
-            get => (uint) Data.GetInt32(_scaleAddr);
-            set => Data.SetInt32(_scaleAddr, (int) value);
+            get => Data.GetUInt32(_scaleAddr);
+            set => Data.SetUInt32(_scaleAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_frameTableOffsetAddr), displayOrder: 10, displayFormat: "X2")]
         [BulkCopy]
         public uint FrameTableOffset {
-            get => (uint) Data.GetInt32(_frameTableOffsetAddr);
-            set => Data.SetInt32(_frameTableOffsetAddr, (int) value);
+            get => Data.GetUInt32(_frameTableOffsetAddr);
+            set => Data.SetUInt32(_frameTableOffsetAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 10.1f, displayName: "FrameTableOff (In File)", displayFormat: "X2")]
@@ -149,8 +149,8 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: nameof(_animationTableOffsetAddr), displayOrder: 11, displayFormat: "X2")]
         [BulkCopy]
         public uint AnimationTableOffset {
-            get => (uint) Data.GetInt32(_animationTableOffsetAddr);
-            set => Data.SetInt32(_animationTableOffsetAddr, (int) value);
+            get => Data.GetUInt32(_animationTableOffsetAddr);
+            set => Data.SetUInt32(_animationTableOffsetAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 11.1f, displayName: "AniTableOff (In File)", displayFormat: "X2", visibilityProperty: nameof(IsInCHP))]
