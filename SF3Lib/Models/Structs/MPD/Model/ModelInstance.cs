@@ -37,50 +37,50 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata1Address), displayOrder: 0.1f, displayName: "PDATA*[1]", isPointer: true)]
         public uint PData1 {
-            get => (uint) Data.GetInt32(_pdata1Address);
-            set => Data.SetInt32(_pdata1Address, (int) value);
+            get => Data.GetUInt32(_pdata1Address);
+            set => Data.SetUInt32(_pdata1Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata2Address), displayOrder: 0.2f, displayName: "PDATA*[2]", isPointer: true)]
         public uint PData2 {
-            get => (uint) Data.GetInt32(_pdata2Address);
-            set => Data.SetInt32(_pdata2Address, (int) value);
+            get => Data.GetUInt32(_pdata2Address);
+            set => Data.SetUInt32(_pdata2Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata3Address), displayOrder: 0.3f, displayName: "PDATA*[3]", isPointer: true)]
         public uint PData3 {
-            get => (uint) Data.GetInt32(_pdata3Address);
-            set => Data.SetInt32(_pdata3Address, (int) value);
+            get => Data.GetUInt32(_pdata3Address);
+            set => Data.SetUInt32(_pdata3Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata4Address), displayOrder: 0.4f, displayName: "PDATA*[4]", isPointer: true)]
         public uint PData4 {
-            get => (uint) Data.GetInt32(_pdata4Address);
-            set => Data.SetInt32(_pdata4Address, (int) value);
+            get => Data.GetUInt32(_pdata4Address);
+            set => Data.SetUInt32(_pdata4Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata5Address), displayOrder: 0.5f, displayName: "PDATA*[5]", isPointer: true)]
         public uint PData5 {
-            get => (uint) Data.GetInt32(_pdata5Address);
-            set => Data.SetInt32(_pdata5Address, (int) value);
+            get => Data.GetUInt32(_pdata5Address);
+            set => Data.SetUInt32(_pdata5Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata6Address), displayOrder: 0.6f, displayName: "PDATA*[6]", isPointer: true)]
         public uint PData6 {
-            get => (uint) Data.GetInt32(_pdata6Address);
-            set => Data.SetInt32(_pdata6Address, (int) value);
+            get => Data.GetUInt32(_pdata6Address);
+            set => Data.SetUInt32(_pdata6Address, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata7Address), displayOrder: 0.7f, displayName: "PDATA*[7]", isPointer: true)]
         public uint PData7 {
-            get => (uint) Data.GetInt32(_pdata7Address);
-            set => Data.SetInt32(_pdata7Address, (int) value);
+            get => Data.GetUInt32(_pdata7Address);
+            set => Data.SetUInt32(_pdata7Address, value);
         }
 
         public class PDataAccessor {
@@ -90,8 +90,8 @@ namespace SF3.Models.Structs.MPD.Model {
             }
 
             public uint Value {
-                get => (uint) Model.Data.GetInt32(Model._pdata0Address + Index * 0x04);
-                set => Model.Data.SetInt32(Model._pdata0Address + Index * 0x04, (int) value);
+                get => Model.Data.GetUInt32(Model._pdata0Address + Index * 0x04);
+                set => Model.Data.SetUInt32(Model._pdata0Address + Index * 0x04, value);
             }
 
             public ModelInstance Model { get; }
@@ -131,7 +131,7 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_tagAddress), displayOrder: 17)]
         public override ushort Tag {
-            get => HasTagsAndFlags ? (ushort) Data.GetUInt16(_tagAddress) : (ushort) 0;
+            get => HasTagsAndFlags ? Data.GetUInt16(_tagAddress) : (ushort) 0;
             set {
                 if (HasTagsAndFlags)
                     Data.SetUInt16(_tagAddress, value);
@@ -141,7 +141,7 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_flagsAddress), displayOrder: 18, displayFormat: "X4")]
         public override ushort Flags {
-            get => HasTagsAndFlags ? (ushort) Data.GetUInt16(_flagsAddress) : (ushort) 0;
+            get => HasTagsAndFlags ? Data.GetUInt16(_flagsAddress) : (ushort) 0;
             set {
                 if (HasTagsAndFlags)
                     Data.SetUInt16(_flagsAddress, value);

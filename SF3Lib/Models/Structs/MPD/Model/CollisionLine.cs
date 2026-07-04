@@ -36,14 +36,14 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_point1Addr), displayOrder: 0, displayFormat: "X2")]
         public ushort Point1Index {
-            get => (ushort) Data.GetUInt16(_point1Addr);
+            get => Data.GetUInt16(_point1Addr);
             set => Data.SetUInt16(_point1Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_point2Addr), displayOrder: 1, displayFormat: "X2")]
         public ushort Point2Index {
-            get => (ushort) Data.GetUInt16(_point2Addr);
+            get => Data.GetUInt16(_point2Addr);
             set => Data.SetUInt16(_point2Addr, value);
         }
 
@@ -73,14 +73,14 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_tagAddr), displayOrder: 3, displayFormat: "X2")]
         public byte Tag {
-            get => (byte) Data.GetUInt8(_tagAddr);
+            get => Data.GetUInt8(_tagAddr);
             set => Data.SetUInt8(_tagAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_flag2XXToDisableAddr), displayOrder: 4, displayFormat: "X2")]
         public byte Flag2XXToDisable {
-            get => (byte) Data.GetUInt8(_flag2XXToDisableAddr);
+            get => Data.GetUInt8(_flag2XXToDisableAddr);
             set => Data.SetUInt8(_flag2XXToDisableAddr, value);
         }
 

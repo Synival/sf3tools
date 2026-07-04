@@ -70,8 +70,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_verticesOffsetAddr), displayOrder: 0.5f, isPointer: true)]
         public uint VerticesOffset {
-            get => (uint) Data.GetInt32(_verticesOffsetAddr);
-            set => Data.SetInt32(_verticesOffsetAddr, (int) value);
+            get => Data.GetUInt32(_verticesOffsetAddr);
+            set => Data.SetUInt32(_verticesOffsetAddr, value);
         }
 
         [BulkCopy]
@@ -84,8 +84,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_polygonsOffsetAddr), displayOrder: 2, isPointer: true)]
         public uint PolygonsOffset {
-            get => (uint) Data.GetInt32(_polygonsOffsetAddr);
-            set => Data.SetInt32(_polygonsOffsetAddr, (int) value);
+            get => Data.GetUInt32(_polygonsOffsetAddr);
+            set => Data.SetUInt32(_polygonsOffsetAddr, value);
         }
 
         [BulkCopy]
@@ -98,8 +98,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_attributesOffsetAddr), displayOrder: 4, isPointer: true)]
         public uint AttributesOffset {
-            get => (uint) Data.GetInt32(_attributesOffsetAddr);
-            set => Data.SetInt32(_attributesOffsetAddr, (int) value);
+            get => Data.GetUInt32(_attributesOffsetAddr);
+            set => Data.SetUInt32(_attributesOffsetAddr, value);
         }
 
         private class MockFace : ISGL_ModelFace {

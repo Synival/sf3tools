@@ -58,8 +58,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pdata0Address), displayOrder: 0, displayName: "PDATA*[0]", isPointer: true)]
         public uint PData0 {
-            get => (uint) Data.GetInt32(_pdata0Address);
-            set => Data.SetInt32(_pdata0Address, (int) value);
+            get => Data.GetUInt32(_pdata0Address);
+            set => Data.SetUInt32(_pdata0Address, value);
         }
 
         [BulkCopy]

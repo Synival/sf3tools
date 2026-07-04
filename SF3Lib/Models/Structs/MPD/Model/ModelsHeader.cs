@@ -18,15 +18,15 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_collisionLinesHeaderOffsetAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         public uint CollisionLinesHeaderOffset {
-            get => (uint) Data.GetInt32(_collisionLinesHeaderOffsetAddr);
-            set => Data.SetInt32(_collisionLinesHeaderOffsetAddr, (int) value);
+            get => Data.GetUInt32(_collisionLinesHeaderOffsetAddr);
+            set => Data.SetUInt32(_collisionLinesHeaderOffsetAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_collisionBlocksOffsetAddr), displayOrder: 1, isPointer: true, minWidth: 80)]
         public uint CollisionBlocksOffset {
-            get => (uint) Data.GetInt32(_collisionBlocksOffsetAddr);
-            set => Data.SetInt32(_collisionBlocksOffsetAddr, (int) value);
+            get => Data.GetUInt32(_collisionBlocksOffsetAddr);
+            set => Data.SetUInt32(_collisionBlocksOffsetAddr, value);
         }
 
         [BulkCopy]

@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: nameof(_lineIndexAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public ushort LineIndex {
-            get => (ushort) Data.GetUInt16(_lineIndexAddr);
+            get => Data.GetUInt16(_lineIndexAddr);
             set => Data.SetUInt16(_lineIndexAddr, value);
         }
     }

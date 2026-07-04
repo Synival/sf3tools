@@ -52,28 +52,28 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_vertex1Addr), displayOrder: 3, displayFormat: "X4")]
         public ushort Vertex1 {
-            get => (ushort) Data.GetUInt16(_vertex1Addr);
+            get => Data.GetUInt16(_vertex1Addr);
             set => Data.SetUInt16(_vertex1Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_vertex2Addr), displayOrder: 4, displayFormat: "X4")]
         public ushort Vertex2 {
-            get => (ushort) Data.GetUInt16(_vertex2Addr);
+            get => Data.GetUInt16(_vertex2Addr);
             set => Data.SetUInt16(_vertex2Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_vertex3Addr), displayOrder: 5, displayFormat: "X4")]
         public ushort Vertex3 {
-            get => (ushort) Data.GetUInt16(_vertex3Addr);
+            get => Data.GetUInt16(_vertex3Addr);
             set => Data.SetUInt16(_vertex3Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_vertex4Addr), displayOrder: 6, displayFormat: "X4")]
         public ushort Vertex4 {
-            get => (ushort) Data.GetUInt16(_vertex4Addr);
+            get => Data.GetUInt16(_vertex4Addr);
             set => Data.SetUInt16(_vertex4Addr, value);
         }
 
