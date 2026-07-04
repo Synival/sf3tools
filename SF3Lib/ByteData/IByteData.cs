@@ -54,13 +54,14 @@ namespace SF3.ByteData {
         /// Gets the value of a byte at a location.
         /// </summary>
         /// <param name="offset">The address of the byte.</param>
-        int GetByte(int offset);
+        byte GetByte(int offset);
 
         /// <summary>
         /// Gets the value of a 16-bit integer at a location.
         /// </summary>
         /// <param name="offset">The address of the 16-bit integer.</param>
-        int GetWord(int offset);
+        ushort GetWord(int offset);
+        short GetInt16(int offset);
 
         /// <summary>
         /// Gets the value of a 32-bit integer at a location.
@@ -123,7 +124,8 @@ namespace SF3.ByteData {
         /// </summary>
         /// <param name="offset">The address of the 16-bit integer.</param>
         /// <param name="value">The new value of the 16-bit integer.</param>
-        void SetWord(int offset, int value);
+        void SetWord(int offset, ushort value);
+        void SetInt16(int offset, short value);
 
         /// <summary>
         /// Sets the value of 32-bit integer at a location.

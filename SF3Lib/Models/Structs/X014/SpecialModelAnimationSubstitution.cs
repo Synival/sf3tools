@@ -19,8 +19,8 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.Character)]
         [BulkCopy]
         public short CharacterID {
-            get => (short) Data.GetWord(_characterIdAddr);
-            set => Data.SetWord(_characterIdAddr, value);
+            get => Data.GetInt16(_characterIdAddr);
+            set => Data.SetInt16(_characterIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_specialIdAddr), displayOrder: 1, displayFormat: "X2", minWidth: 200)]

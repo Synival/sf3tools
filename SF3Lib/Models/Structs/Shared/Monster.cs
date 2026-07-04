@@ -187,7 +187,7 @@ namespace SF3.Models.Structs.X019 {
 
         [TableViewModelColumn(addressField: nameof(_maxHPAddr), displayOrder: 0, displayGroup: "Stats1")]
         [BulkCopy]
-        public int MaxHP {
+        public ushort MaxHP {
             get => Data.GetWord(_maxHPAddr);
             set => Data.SetWord(_maxHPAddr, value);
         }
@@ -381,7 +381,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_weaponAddr), displayOrder: 27, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Weapon {
+        public ushort Weapon {
             get => Data.GetWord(_weaponAddr);
             set => Data.SetWord(_weaponAddr, value);
         }
@@ -389,7 +389,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_accessoryAddr), displayOrder: 27.5F, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Accessory {
+        public ushort Accessory {
             get => Data.GetWord(_accessoryAddr);
             set => Data.SetWord(_accessoryAddr, value);
         }
@@ -397,7 +397,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_itemSlot1Addr), displayOrder: 28, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int ItemSlot1 {
+        public ushort ItemSlot1 {
             get => Data.GetWord(_itemSlot1Addr);
             set => Data.SetWord(_itemSlot1Addr, value);
         }
@@ -405,7 +405,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_itemSlot2Addr), displayOrder: 29, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int ItemSlot2 {
+        public ushort ItemSlot2 {
             get => Data.GetWord(_itemSlot2Addr);
             set => Data.SetWord(_itemSlot2Addr, value);
         }
@@ -413,7 +413,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_itemSlot3Addr), displayOrder: 30, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int ItemSlot3 {
+        public ushort ItemSlot3 {
             get => Data.GetWord(_itemSlot3Addr);
             set => Data.SetWord(_itemSlot3Addr, value);
         }
@@ -421,7 +421,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_itemSlot4Addr), displayOrder: 31, displayGroup: "Items", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int ItemSlot4 {
+        public ushort ItemSlot4 {
             get => Data.GetWord(_itemSlot4Addr);
             set => Data.SetWord(_itemSlot4Addr, value);
         }
@@ -593,7 +593,7 @@ namespace SF3.Models.Structs.X019 {
 
         [TableViewModelColumn(addressField: nameof(_goldAddr), displayOrder: 49, displayGroup: "Stats2")]
         [BulkCopy]
-        public int Gold {
+        public ushort Gold {
             get => Data.GetWord(_goldAddr);
             set => Data.SetWord(_goldAddr, value);
         }
@@ -601,7 +601,7 @@ namespace SF3.Models.Structs.X019 {
         [TableViewModelColumn(addressField: nameof(_dropItemAddr), displayOrder: 50, displayGroup: "Stats2", minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int DropItem {
+        public ushort DropItem {
             get => Data.GetWord(_dropItemAddr);
             set => Data.SetWord(_dropItemAddr, value);
         }

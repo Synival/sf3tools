@@ -40,28 +40,28 @@ namespace SF3.Models.Structs.X1.Town {
         [TableViewModelColumn(addressField: nameof(_spriteIDAddr), displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [BulkCopy]
         [NameGetter(NamedValueType.Sprite)]
-        public int SpriteID {
+        public ushort SpriteID {
             get => Data.GetWord(_spriteIDAddr);
             set => Data.SetWord(_spriteIDAddr, value);
         }
 
         [BulkCopy]
-        public int FlagCheckedWithValue {
+        public ushort FlagCheckedWithValue {
             get => Data.GetWord(_flagAddr);
             set => Data.SetWord(_flagAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagAddr), displayOrder: 1.0f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
-        public int FlagChecked {
-            get => FlagCheckedWithValue & 0x0FFF;
-            set => FlagCheckedWithValue = (value == 0xFFF ? 0xFFFF : (FlagCheckedWithValue & ~0xFFF) | (value & 0x0FFF));
+        public ushort FlagChecked {
+            get => (ushort) (FlagCheckedWithValue & 0x0FFF);
+            set => FlagCheckedWithValue = (ushort) (value == 0xFFF ? 0xFFFF : (FlagCheckedWithValue & ~0xFFF) | (value & 0x0FFF));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagAddr), displayOrder: 1.1f)]
         public bool FlagExpectedValue {
             get => (FlagCheckedWithValue & 0x1000) != 0;
-            set => FlagCheckedWithValue = (FlagCheckedWithValue == 0xFFFF ? 0xFFFF : (value ? (FlagCheckedWithValue | ~0x1000) : (FlagCheckedWithValue & ~0x1000)));
+            set => FlagCheckedWithValue = (ushort) (FlagCheckedWithValue == 0xFFFF ? 0xFFFF : (value ? (FlagCheckedWithValue | ~0x1000) : (FlagCheckedWithValue & ~0x1000)));
         }
 
         [TableViewModelColumn(addressField: nameof(_scriptOffsetAddr), displayOrder: 2, isPointer: true, minWidth: 300, displayFormat: "X8")]

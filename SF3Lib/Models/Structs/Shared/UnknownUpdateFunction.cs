@@ -30,8 +30,8 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_unknown0x04Addr), displayOrder: 1, displayName: nameof(Unknown0x04), displayFormat: "X4")]
         public short Unknown0x04 {
-            get => (short) Data.GetWord(_unknown0x04Addr);
-            set => Data.SetWord(_unknown0x04Addr, value);
+            get => Data.GetInt16(_unknown0x04Addr);
+            set => Data.SetInt16(_unknown0x04Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x06Addr), displayOrder: 2, displayName: nameof(Unknown0x06) + " (bool? pre/post indicator?)", displayFormat: "X2")]

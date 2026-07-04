@@ -49,7 +49,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_materialItemAddr), displayOrder: 0, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int MaterialItem {
+        public ushort MaterialItem {
             get => Data.GetWord(_materialItemAddr);
             set => Data.SetWord(_materialItemAddr, value);
         }
@@ -57,7 +57,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_requestItemTypeAddr), displayOrder: 1, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.WeaponType)]
         [BulkCopy]
-        public int RequestItemType {
+        public ushort RequestItemType {
             get => Data.GetWord(_requestItemTypeAddr);
             set => Data.SetWord(_requestItemTypeAddr, value);
         }
@@ -65,14 +65,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result1ItemAddr), displayOrder: 2, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result1Item {
+        public ushort Result1Item {
             get => Data.GetWord(_result1ItemAddr);
             set => Data.SetWord(_result1ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result1ChanceAddr), displayOrder: 3, displayName: "Result1 %Chance")]
         [BulkCopy]
-        public int Result1Chance {
+        public ushort Result1Chance {
             get => Data.GetWord(_result1ChanceAddr);
             set => Data.SetWord(_result1ChanceAddr, value);
         }
@@ -80,14 +80,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result2ItemAddr), displayOrder: 4, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result2Item {
+        public ushort Result2Item {
             get => Data.GetWord(_result2ItemAddr);
             set => Data.SetWord(_result2ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result2ChanceAddr), displayOrder: 5, displayName: "Result2 %Chance")]
         [BulkCopy]
-        public int Result2Chance {
+        public ushort Result2Chance {
             get => Data.GetWord(_result2ChanceAddr);
             set => Data.SetWord(_result2ChanceAddr, value);
         }
@@ -95,14 +95,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result3ItemAddr), displayOrder: 6, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result3Item {
+        public ushort Result3Item {
             get => Data.GetWord(_result3ItemAddr);
             set => Data.SetWord(_result3ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result3ChanceAddr), displayOrder: 7, displayName: "Result3 %Chance")]
         [BulkCopy]
-        public int Result3Chance {
+        public ushort Result3Chance {
             get => Data.GetWord(_result3ChanceAddr);
             set => Data.SetWord(_result3ChanceAddr, value);
         }
@@ -110,14 +110,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result4ItemAddr), displayOrder: 8, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result4Item {
+        public ushort Result4Item {
             get => Data.GetWord(_result4ItemAddr);
             set => Data.SetWord(_result4ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result4ChanceAddr), displayOrder: 9, displayName: "Result4 %Chance")]
         [BulkCopy]
-        public int Result4Chance {
+        public ushort Result4Chance {
             get => Data.GetWord(_result4ChanceAddr);
             set => Data.SetWord(_result4ChanceAddr, value);
         }
@@ -125,14 +125,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result5ItemAddr), displayOrder: 10, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result5Item {
+        public ushort Result5Item {
             get => Data.GetWord(_result5ItemAddr);
             set => Data.SetWord(_result5ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result5ChanceAddr), displayOrder: 11, displayName: "Result5 %Chance")]
         [BulkCopy]
-        public int Result5Chance {
+        public ushort Result5Chance {
             get => Data.GetWord(_result5ChanceAddr);
             set => Data.SetWord(_result5ChanceAddr, value);
         }
@@ -140,14 +140,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result6ItemAddr), displayOrder: 12, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result6Item {
+        public ushort Result6Item {
             get => Data.GetWord(_result6ItemAddr);
             set => Data.SetWord(_result6ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result6ChanceAddr), displayOrder: 13, displayName: "Result6 %Chance")]
         [BulkCopy]
-        public int Result6Chance {
+        public ushort Result6Chance {
             get => Data.GetWord(_result6ChanceAddr);
             set => Data.SetWord(_result6ChanceAddr, value);
         }
@@ -155,14 +155,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result7ItemAddr), displayOrder: 14, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result7Item {
+        public ushort Result7Item {
             get => Data.GetWord(_result7ItemAddr);
             set => Data.SetWord(_result7ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result7ChanceAddr), displayOrder: 15, displayName: "Result7 %Chance")]
         [BulkCopy]
-        public int Result7Chance {
+        public ushort Result7Chance {
             get => Data.GetWord(_result7ChanceAddr);
             set => Data.SetWord(_result7ChanceAddr, value);
         }
@@ -170,14 +170,14 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_result8ItemAddr), displayOrder: 16, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
-        public int Result8Item {
+        public ushort Result8Item {
             get => Data.GetWord(_result8ItemAddr);
             set => Data.SetWord(_result8ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result8ChanceAddr), displayOrder: 17, displayName: "Result8 %Chance")]
         [BulkCopy]
-        public int Result8Chance {
+        public ushort Result8Chance {
             get => Data.GetWord(_result8ChanceAddr);
             set => Data.SetWord(_result8ChanceAddr, value);
         }

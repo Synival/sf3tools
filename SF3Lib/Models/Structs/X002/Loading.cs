@@ -27,7 +27,7 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_sceneIDAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int SceneID {
+        public ushort SceneID {
             get => Data.GetWord(_sceneIDAddr);
             set => Data.SetWord(_sceneIDAddr, value);
         }
@@ -35,14 +35,14 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_x1Addr), displayOrder: 1, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
-        public int X1 {
+        public ushort X1 {
             get => Data.GetWord(_x1Addr);
             set => Data.SetWord(_x1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_battleNum), displayOrder: 2)]
         [BulkCopy]
-        public int BattleNum {
+        public ushort BattleNum {
             get => Data.GetWord(_battleNum);
             set => Data.SetWord(_battleNum, value);
         }
@@ -50,7 +50,7 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_x5Addr), displayOrder: 3, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
-        public int X5 {
+        public ushort X5 {
             get => Data.GetWord(_x5Addr);
             set => Data.SetWord(_x5Addr, value);
         }
@@ -58,7 +58,7 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_musicAddr), displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
-        public int Music {
+        public ushort Music {
             get => Data.GetWord(_musicAddr);
             set => Data.SetWord(_musicAddr, value);
         }
@@ -66,14 +66,14 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_mpdAddr), displayOrder: 5, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
-        public int MPD {
+        public ushort MPD {
             get => Data.GetWord(_mpdAddr);
             set => Data.SetWord(_mpdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x0CAddr), displayOrder: 6, displayName: "# of Maps?")]
         [BulkCopy]
-        public int Unknown0x0C {
+        public ushort Unknown0x0C {
             get => Data.GetWord(_unknown0x0CAddr);
             set => Data.SetWord(_unknown0x0CAddr, value);
         }
@@ -81,7 +81,7 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_chrAddr), displayOrder: 7, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
-        public int CHR {
+        public ushort CHR {
             get => Data.GetWord(_chrAddr);
             set => Data.SetWord(_chrAddr, value);
         }

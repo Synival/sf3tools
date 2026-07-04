@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.Shared {
             get => IsEffectFileIndexes ? Data.GetWord(_locationAddr) : Data.GetDouble(_locationAddr);
             set {
                 if (IsEffectFileIndexes)
-                    Data.SetWord(_locationAddr, value);
+                    Data.SetWord(_locationAddr, (ushort) value);
                 else
                     Data.SetDouble(_locationAddr, value);
             }

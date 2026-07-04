@@ -80,7 +80,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_weaponAddr), displayOrder: 4, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Weapon {
+        public ushort Weapon {
             get => Data.GetWord(_weaponAddr);
             set => Data.SetWord(_weaponAddr, value);
         }
@@ -88,7 +88,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_accessoryAddr), displayOrder: 5, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Accessory {
+        public ushort Accessory {
             get => Data.GetWord(_accessoryAddr);
             set => Data.SetWord(_accessoryAddr, value);
         }
@@ -96,7 +96,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_item1Addr), displayOrder: 6, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Item1 {
+        public ushort Item1 {
             get => Data.GetWord(_item1Addr);
             set => Data.SetWord(_item1Addr, value);
         }
@@ -104,7 +104,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_item2Addr), displayOrder: 7, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Item2 {
+        public ushort Item2 {
             get => Data.GetWord(_item2Addr);
             set => Data.SetWord(_item2Addr, value);
         }
@@ -112,7 +112,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_item3Addr), displayOrder: 8, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Item3 {
+        public ushort Item3 {
             get => Data.GetWord(_item3Addr);
             set => Data.SetWord(_item3Addr, value);
         }
@@ -120,7 +120,7 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_item4Addr), displayOrder: 9, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int Item4 {
+        public ushort Item4 {
             get => Data.GetWord(_item4Addr);
             set => Data.SetWord(_item4Addr, value);
         }
@@ -135,7 +135,7 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_weapon1ExpAddr), displayOrder: 11)]
         [BulkCopy]
-        public int Weapon1Exp {
+        public ushort Weapon1Exp {
             get => Data.GetWord(_weapon1ExpAddr);
             set => Data.SetWord(_weapon1ExpAddr, value);
         }
@@ -150,7 +150,7 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_weapon2ExpAddr), displayOrder: 13)]
         [BulkCopy]
-        public int Weapon2Exp {
+        public ushort Weapon2Exp {
             get => Data.GetWord(_weapon2ExpAddr);
             set => Data.SetWord(_weapon2ExpAddr, value);
         }
@@ -165,7 +165,7 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_weapon3ExpAddr), displayOrder: 15)]
         [BulkCopy]
-        public int Weapon3Exp {
+        public ushort Weapon3Exp {
             get => Data.GetWord(_weapon3ExpAddr);
             set => Data.SetWord(_weapon3ExpAddr, value);
         }
@@ -180,7 +180,7 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_weapon4ExpAddr), displayOrder: 17)]
         [BulkCopy]
-        public int Weapon4Exp {
+        public ushort Weapon4Exp {
             get => Data.GetWord(_weapon4ExpAddr);
             set => Data.SetWord(_weapon4ExpAddr, value);
         }

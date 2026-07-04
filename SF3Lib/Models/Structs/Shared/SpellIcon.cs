@@ -38,7 +38,7 @@ namespace SF3.Models.Structs.Shared {
             }
             set {
                 if (Has16BitIconAddr)
-                    Data.SetWord(_theSpellIconAddr, value);
+                    Data.SetWord(_theSpellIconAddr, (ushort) value);
                 else
                     Data.SetDouble(_theSpellIconAddr, value);
             }

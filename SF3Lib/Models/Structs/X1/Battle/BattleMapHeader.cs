@@ -20,28 +20,28 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_numUnitsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
-        public int NumUnits {
+        public ushort NumUnits {
             get => Data.GetWord(_numUnitsAddr);
             set => Data.SetWord(_numUnitsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numZonesAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
-        public int NumZones {
+        public ushort NumZones {
             get => Data.GetWord(_numZonesAddr);
             set => Data.SetWord(_numZonesAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numLocationsAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
-        public int NumLocations {
+        public ushort NumLocations {
             get => Data.GetWord(_numLocationsAddr);
             set => Data.SetWord(_numLocationsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numPathsAddr), displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
-        public int NumPaths {
+        public ushort NumPaths {
             get => Data.GetWord(_numPathsAddr);
             set => Data.SetWord(_numPathsAddr, value);
         }

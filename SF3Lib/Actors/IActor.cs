@@ -11,7 +11,7 @@
         /// <summary>
         /// ID of the sprite used for display purposes.
         /// </summary>
-        int SpriteID { get; set; }
+        ushort SpriteID { get; set; }
 
         /// <summary>
         /// When set, the Y coordinate is set explicitly. When unset -- as it the case for battles -- the Y coordinate

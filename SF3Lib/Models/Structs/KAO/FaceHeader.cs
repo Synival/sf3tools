@@ -67,19 +67,19 @@ namespace SF3.Models.Structs.KAO {
                 throw new ArgumentOutOfRangeException(nameof(layer));
             if (index < 1 || (layer == 1 && index > 3) || (layer == 2 && index > 6))
                 throw new ArgumentOutOfRangeException(nameof(index));
-            Data.SetWord((layer - 1) * 0x06 + index * 0x02 + _layer1Offset1Addr, value);
+            Data.SetInt16((layer - 1) * 0x06 + index * 0x02 + _layer1Offset1Addr, value);
         }
 
         public int GetLayerWidth(int layer)
             => (layer == 0) ? Width : (layer == 1) ? Layer1Width : (layer == 2) ? Layer2Width : throw new ArgumentOutOfRangeException(nameof(layer));
 
-        public void SetLayerWidth(int layer, int value) {
+        public void SetLayerWidth(int layer, ushort value) {
             if (layer == 0)
                 Width = value;
             else if (layer == 1)
-                Layer1Width = (ushort) value;
+                Layer1Width = value;
             else if (layer == 2)
-                Layer2Width = (ushort) value;
+                Layer2Width = value;
             else
                 throw new ArgumentOutOfRangeException(nameof(layer));
         }
@@ -87,13 +87,13 @@ namespace SF3.Models.Structs.KAO {
         public int GetLayerHeight(int layer)
             => (layer == 0) ? Height : (layer == 1) ? Layer1Height : (layer == 2) ? Layer2Height : throw new ArgumentOutOfRangeException(nameof(layer));
 
-        public void SetLayerHeight(int layer, int value) {
+        public void SetLayerHeight(int layer, ushort value) {
             if (layer == 0)
                 Height = value;
             else if (layer == 1)
-                Layer1Height = (ushort) value;
+                Layer1Height = value;
             else if (layer == 2)
-                Layer2Height = (ushort) value;
+                Layer2Height = value;
             else
                 throw new ArgumentOutOfRangeException(nameof(layer));
         }
@@ -148,8 +148,8 @@ namespace SF3.Models.Structs.KAO {
 
         [TableViewModelColumn(addressField: nameof(_widthAddr), displayOrder: 1)]
         [BulkCopy]
-        public int Width {
-            get => (ushort) Data.GetWord(_widthAddr);
+        public ushort Width {
+            get => Data.GetWord(_widthAddr);
             set {
                 Data.SetWord(_widthAddr, value);
                 if (Data.GetWord(_widthAddr) != value) {
@@ -161,7 +161,7 @@ namespace SF3.Models.Structs.KAO {
 
         [TableViewModelColumn(addressField: nameof(_heightAddr), displayOrder: 2)]
         [BulkCopy]
-        public int Height {
+        public ushort Height {
             get => (ushort) Data.GetWord(_heightAddr);
             set {
                 if (Data.GetWord(_heightAddr) != value) {
@@ -174,64 +174,64 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(addressField: nameof(_layer1Offset1Addr), displayOrder: 3, displayFormat: "-X4", displayName: "L1_Off1")]
         [BulkCopy]
         public short Layer1Offset1 {
-            get => (short) Data.GetWord(_layer1Offset1Addr);
-            set => Data.SetWord(_layer1Offset1Addr, value);
+            get => Data.GetInt16(_layer1Offset1Addr);
+            set => Data.SetInt16(_layer1Offset1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer1Offset2Addr), displayOrder: 4, displayFormat: "-X4", displayName: "L1_Off2")]
         [BulkCopy]
         public short Layer1Offset2 {
-            get => (short) Data.GetWord(_layer1Offset2Addr);
-            set => Data.SetWord(_layer1Offset2Addr, value);
+            get => Data.GetInt16(_layer1Offset2Addr);
+            set => Data.SetInt16(_layer1Offset2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer1Offset3Addr), displayOrder: 5, displayFormat: "-X4", displayName: "L1_Off3")]
         [BulkCopy]
         public short Layer1Offset3 {
-            get => (short) Data.GetWord(_layer1Offset3Addr);
-            set => Data.SetWord(_layer1Offset3Addr, value);
+            get => Data.GetInt16(_layer1Offset3Addr);
+            set => Data.SetInt16(_layer1Offset3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2Offset1Addr), displayOrder: 6, displayFormat: "-X4", displayName: "L2_Off1")]
         [BulkCopy]
         public short Layer2Offset1 {
-            get => (short) Data.GetWord(_layer2Offset1Addr);
-            set => Data.SetWord(_layer2Offset1Addr, value);
+            get => Data.GetInt16(_layer2Offset1Addr);
+            set => Data.SetInt16(_layer2Offset1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2Offset2Addr), displayOrder: 7, displayFormat: "-X4", displayName: "L2_Off2")]
         [BulkCopy]
         public short Layer2Offset2 {
-            get => (short) Data.GetWord(_layer2Offset2Addr);
-            set => Data.SetWord(_layer2Offset2Addr, value);
+            get => Data.GetInt16(_layer2Offset2Addr);
+            set => Data.SetInt16(_layer2Offset2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2Offset3Addr), displayOrder: 8, displayFormat: "-X4", displayName: "L2_Off3")]
         [BulkCopy]
         public short Layer2Offset3 {
-            get => (short) Data.GetWord(_layer2Offset3Addr);
-            set => Data.SetWord(_layer2Offset3Addr, value);
+            get => Data.GetInt16(_layer2Offset3Addr);
+            set => Data.SetInt16(_layer2Offset3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2Offset4Addr), displayOrder: 9, displayFormat: "-X4", displayName: "L2_Off4")]
         [BulkCopy]
         public short Layer2Offset4 {
-            get => (short) Data.GetWord(_layer2Offset4Addr);
-            set => Data.SetWord(_layer2Offset4Addr, value);
+            get => Data.GetInt16(_layer2Offset4Addr);
+            set => Data.SetInt16(_layer2Offset4Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2Offset5Addr), displayOrder: 10, displayFormat: "-X4", displayName: "L2_Off5")]
         [BulkCopy]
         public short Layer2Offset5 {
-            get => (short) Data.GetWord(_layer2Offset5Addr);
-            set => Data.SetWord(_layer2Offset5Addr, value);
+            get => Data.GetInt16(_layer2Offset5Addr);
+            set => Data.SetInt16(_layer2Offset5Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2Offset6Addr), displayOrder: 11, displayFormat: "-X4", displayName: "L2_Off6")]
         [BulkCopy]
         public short Layer2Offset6 {
-            get => (short) Data.GetWord(_layer2Offset6Addr);
-            set => Data.SetWord(_layer2Offset6Addr, value);
+            get => Data.GetInt16(_layer2Offset6Addr);
+            set => Data.SetInt16(_layer2Offset6Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer1WidthAddr), displayOrder: 12, displayName: "L1_Width")]

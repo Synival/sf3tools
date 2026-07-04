@@ -413,21 +413,21 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_groundXAddr), displayOrder: 20, displayGroup: "Main")]
         public short GroundX {
-            get => (short) Data.GetWord(_groundXAddr);
-            set => Data.SetWord(_groundXAddr, value);
+            get => Data.GetInt16(_groundXAddr);
+            set => Data.SetInt16(_groundXAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_groundYAddr), displayOrder: 20.5f, displayGroup: "Main")]
         public short GroundY {
-            get => (short) Data.GetWord(_groundYAddr);
-            set => Data.SetWord(_groundYAddr, value);
+            get => Data.GetInt16(_groundYAddr);
+            set => Data.SetInt16(_groundYAddr, value);
         }
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_groundZAddr), displayOrder: 21, displayGroup: "Main")]
         public short GroundZ {
-            get => (short) Data.GetWord(_groundZAddr);
-            set => Data.SetWord(_groundZAddr, value);
+            get => Data.GetInt16(_groundZAddr);
+            set => Data.SetInt16(_groundZAddr, value);
         }
 
         [BulkCopy]
@@ -440,28 +440,28 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_unknown1Addr), displayOrder: 22, displayGroup: "Main")]
         public short Unknown1 {
-            get => (short) Data.GetWord(_unknown1Addr);
-            set => Data.SetWord(_unknown1Addr, value);
+            get => Data.GetInt16(_unknown1Addr);
+            set => Data.SetInt16(_unknown1Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_backgroundXAddr), displayOrder: 22.5f, displayGroup: "Main")]
         public short BackgroundX {
-            get => (short) Data.GetWord(_backgroundXAddr);
-            set => Data.SetWord(_backgroundXAddr, value);
+            get => Data.GetInt16(_backgroundXAddr);
+            set => Data.SetInt16(_backgroundXAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_backgroundYAddr), displayOrder: 23, displayGroup: "Main")]
         public short BackgroundY {
-            get => (short) Data.GetWord(_backgroundYAddr);
-            set => Data.SetWord(_backgroundYAddr, value);
+            get => Data.GetInt16(_backgroundYAddr);
+            set => Data.SetInt16(_backgroundYAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding4Addr), displayOrder: 23.5f, isPointer: true, displayName: "(" + nameof(Padding4) + ")", displayGroup: "Main")]
         public ushort Padding4 {
-            get => (ushort) Data.GetWord(_padding4Addr);
+            get => Data.GetWord(_padding4Addr);
             set => Data.SetWord(_padding4Addr, value);
         }
 

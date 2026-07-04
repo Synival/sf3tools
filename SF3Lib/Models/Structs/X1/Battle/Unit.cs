@@ -132,7 +132,7 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_enemyIDAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2", displayGroup: "Metadata")]
         [BulkCopy]
         [NameGetter(NamedValueType.MonsterForUnit)]
-        public int EnemyID {
+        public ushort EnemyID {
             get => Data.GetWord(_enemyIDAddr);
             set => Data.SetWord(_enemyIDAddr, value);
         }
@@ -143,8 +143,8 @@ namespace SF3.Models.Structs.X1.Battle {
         public int BattleIDEnemyCounter
             => PrevUnit == null ? 0x80 : PrevUnit.BattleIDEnemyCounter + (PrevUnit.IsEnemy ? 1 : 0);
 
-        public int SpriteID {
-            get => IsEnemy ? EnemyID + 0xC8 : (EnemyID == 0x5B) ? CharacterPlus : -1;
+        public ushort SpriteID {
+            get => (ushort) (IsEnemy ? EnemyID + 0xC8 : (EnemyID == 0x5B) ? CharacterPlus : -1);
             set {}
         }
 
@@ -173,21 +173,21 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 1, displayGroup: "Page1", minWidth: 60)]
         [BulkCopy]
         public short X {
-            get => (short) Data.GetWord(_xAddr);
-            set => Data.SetWord(_xAddr, value);
+            get => Data.GetInt16(_xAddr);
+            set => Data.SetInt16(_xAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zAddr), displayOrder: 2, displayGroup: "Page1", minWidth: 60)]
         [BulkCopy]
         public short Z {
-            get => (short) Data.GetWord(_zAddr);
-            set => Data.SetWord(_zAddr, value);
+            get => Data.GetInt16(_zAddr);
+            set => Data.SetInt16(_zAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_itemOverrideAddr), displayOrder: 3, minWidth: 150, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
-        public int ItemOverride {
+        public ushort ItemOverride {
             get => Data.GetWord(_itemOverrideAddr);
             set => Data.SetWord(_itemOverrideAddr, value);
         }
@@ -208,7 +208,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_eventCallAddr), displayOrder: 6, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
-        public int EventCall {
+        public ushort EventCall {
             get => Data.GetWord(_eventCallAddr);
             set => Data.SetWord(_eventCallAddr, value);
         }
@@ -487,7 +487,7 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_flagTieInAddr), displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page4")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
-        public int FlagOrBattleID {
+        public ushort FlagOrBattleID {
             get => Data.GetWord(_flagTieInAddr);
             set => Data.SetWord(_flagTieInAddr, value);
         }

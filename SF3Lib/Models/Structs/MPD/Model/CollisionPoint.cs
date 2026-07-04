@@ -15,15 +15,15 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 0, minWidth: 40)]
         public short X {
-            get => (short) Data.GetWord(_xAddr);
-            set => Data.SetWord(_xAddr, value);
+            get => Data.GetInt16(_xAddr);
+            set => Data.SetInt16(_xAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_yAddr), displayOrder: 1, minWidth: 40)]
         public short Y {
-            get => (short) Data.GetWord(_yAddr);
-            set => Data.SetWord(_yAddr, value);
+            get => Data.GetInt16(_yAddr);
+            set => Data.SetInt16(_yAddr, value);
         }
     }
 }

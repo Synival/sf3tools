@@ -18,7 +18,7 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_specialIdAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
-        public int SpecialID {
+        public ushort SpecialID {
             get => Data.GetWord(_specialIdAddr);
             set => Data.SetWord(_specialIdAddr, value);
         }

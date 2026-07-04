@@ -26,8 +26,8 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_modelIdAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public short ModelID {
-            get => (short) Data.GetWord(_modelIdAddr);
-            set => Data.SetWord(_modelIdAddr, value);
+            get => Data.GetInt16(_modelIdAddr);
+            set => Data.SetInt16(_modelIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_matrixBasisAddr), displayOrder: 1, displayFormat: "X2")]

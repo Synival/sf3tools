@@ -64,7 +64,7 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: nameof(_spriteIdAddr), displayOrder: 0.1f, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.Sprite)]
         [BulkCopy]
-        public int SpriteID {
+        public ushort SpriteID {
             get => Data.GetWord(_spriteIdAddr);
             set => Data.SetWord(_spriteIdAddr, value);
         }

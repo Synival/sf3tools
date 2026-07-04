@@ -23,29 +23,29 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_x1Addr), displayOrder: 0, minWidth: 60)]
         public short X1 {
-            get => (short) Data.GetWord(_x1Addr);
-            set => Data.SetWord(_x1Addr, value);
+            get => Data.GetInt16(_x1Addr);
+            set => Data.SetInt16(_x1Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_y1Addr), displayOrder: 1, minWidth: 60)]
         public short Y1 {
-            get => (short) Data.GetWord(_y1Addr);
-            set => Data.SetWord(_y1Addr, value);
+            get => Data.GetInt16(_y1Addr);
+            set => Data.SetInt16(_y1Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_x2Addr), displayOrder: 2, minWidth: 60)]
         public short X2 {
-            get => (short) Data.GetWord(_x2Addr);
-            set => Data.SetWord(_x2Addr, value);
+            get => Data.GetInt16(_x2Addr);
+            set => Data.SetInt16(_x2Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_y2Addr), displayOrder: 3, minWidth: 60)]
         public short Y2 {
-            get => (short) Data.GetWord(_y2Addr);
-            set => Data.SetWord(_y2Addr, value);
+            get => Data.GetInt16(_y2Addr);
+            set => Data.SetInt16(_y2Addr, value);
         }
 
         private struct MockPoint : IPointShort {
@@ -56,13 +56,13 @@ namespace SF3.Models.Structs.MPD.Main {
             }
 
             public short X {
-                get => (short) _data.GetWord(_offsetX);
-                set => _data.SetWord(_offsetX, value);
+                get => _data.GetInt16(_offsetX);
+                set => _data.SetInt16(_offsetX, value);
             }
 
             public short Y {
-                get => (short) _data.GetWord(_offsetY);
-                set => _data.SetWord(_offsetY, value);
+                get => _data.GetInt16(_offsetY);
+                set => _data.SetInt16(_offsetY, value);
             }
 
             private readonly IByteData _data;

@@ -43,100 +43,100 @@ namespace SF3.Models.Structs.X007 {
         [BulkCopy]
         [NameGetter(NamedValueType.Character)]
         public short CharacterID {
-            get => (short) Data.GetWord(_characterIdAddr);
-            set => Data.SetWord(_characterIdAddr, value);
+            get => Data.GetInt16(_characterIdAddr);
+            set => Data.SetInt16(_characterIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_chpFileIdAddr), displayOrder: 1, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public short CHPFileId {
-            get => (short) Data.GetWord(_chpFileIdAddr);
-            set => Data.SetWord(_chpFileIdAddr, value);
+            get => Data.GetInt16(_chpFileIdAddr);
+            set => Data.SetInt16(_chpFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_uIdleSectorAddr), displayOrder: 2, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short U_Idle_Sector {
-            get => (short) Data.GetWord(_uIdleSectorAddr);
-            set => Data.SetWord(_uIdleSectorAddr, value);
+            get => Data.GetInt16(_uIdleSectorAddr);
+            set => Data.SetInt16(_uIdleSectorAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_uIdleSizeInIntsAddr), displayOrder: 3, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short U_Idle_SizeInInts {
-            get => (short) Data.GetWord(_uIdleSizeInIntsAddr);
-            set => Data.SetWord(_uIdleSizeInIntsAddr, value);
+            get => Data.GetInt16(_uIdleSizeInIntsAddr);
+            set => Data.SetInt16(_uIdleSizeInIntsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_uActiveSectorAddr), displayOrder: 4, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short U_Active_Sector {
-            get => (short) Data.GetWord(_uActiveSectorAddr);
-            set => Data.SetWord(_uActiveSectorAddr, value);
+            get => Data.GetInt16(_uActiveSectorAddr);
+            set => Data.SetInt16(_uActiveSectorAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_uActiveSizeInIntsAddr), displayOrder: 5, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short U_Active_SizeInInts {
-            get => (short) Data.GetWord(_uActiveSizeInIntsAddr);
-            set => Data.SetWord(_uActiveSizeInIntsAddr, value);
+            get => Data.GetInt16(_uActiveSizeInIntsAddr);
+            set => Data.SetInt16(_uActiveSizeInIntsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p1IdleSectorAddr), displayOrder: 6, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P1_Idle_Sector {
-            get => (short) Data.GetWord(_p1IdleSectorAddr);
-            set => Data.SetWord(_p1IdleSectorAddr, value);
+            get => Data.GetInt16(_p1IdleSectorAddr);
+            set => Data.SetInt16(_p1IdleSectorAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p1IdleSizeInIntsAddr), displayOrder: 7, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P1_Idle_SizeInInts {
-            get => (short) Data.GetWord(_p1IdleSizeInIntsAddr);
-            set => Data.SetWord(_p1IdleSizeInIntsAddr, value);
+            get => Data.GetInt16(_p1IdleSizeInIntsAddr);
+            set => Data.SetInt16(_p1IdleSizeInIntsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p1ActiveSectorAddr), displayOrder: 8, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P1_Active_Sector {
-            get => (short) Data.GetWord(_p1ActiveSectorAddr);
-            set => Data.SetWord(_p1ActiveSectorAddr, value);
+            get => Data.GetInt16(_p1ActiveSectorAddr);
+            set => Data.SetInt16(_p1ActiveSectorAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p1ActiveSizeInIntsAddr), displayOrder: 9, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P1_Active_SizeInInts {
-            get => (short) Data.GetWord(_p1ActiveSizeInIntsAddr);
-            set => Data.SetWord(_p1ActiveSizeInIntsAddr, value);
+            get => Data.GetInt16(_p1ActiveSizeInIntsAddr);
+            set => Data.SetInt16(_p1ActiveSizeInIntsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p2IdeSectorAddr), displayOrder: 10, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P2_Idle_Sector {
-            get => (short) Data.GetWord(_p2IdeSectorAddr);
-            set => Data.SetWord(_p2IdeSectorAddr, value);
+            get => Data.GetInt16(_p2IdeSectorAddr);
+            set => Data.SetInt16(_p2IdeSectorAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p2IdleSizeInIntsAddr), displayOrder: 11, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P2_Idle_SizeInInts {
-            get => (short) Data.GetWord(_p2IdleSizeInIntsAddr);
-            set => Data.SetWord(_p2IdleSizeInIntsAddr, value);
+            get => Data.GetInt16(_p2IdleSizeInIntsAddr);
+            set => Data.SetInt16(_p2IdleSizeInIntsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p2ActiveSectorAddr), displayOrder: 12, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P2_Active_Sector {
-            get => (short) Data.GetWord(_p2ActiveSectorAddr);
-            set => Data.SetWord(_p2ActiveSectorAddr, value);
+            get => Data.GetInt16(_p2ActiveSectorAddr);
+            set => Data.SetInt16(_p2ActiveSectorAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_p2ActiveSizeInIntsAddr), displayOrder: 13, displayFormat: "X2", minWidth: 150)]
         [BulkCopy]
         public short P2_Active_SizeInInts {
-            get => (short) Data.GetWord(_p2ActiveSizeInIntsAddr);
-            set => Data.SetWord(_p2ActiveSizeInIntsAddr, value);
+            get => Data.GetInt16(_p2ActiveSizeInIntsAddr);
+            set => Data.SetInt16(_p2ActiveSizeInIntsAddr, value);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace SF3.Models.Structs.Shared {
             }
             set {
                 if (Has16BitIconAddr)
-                    Data.SetWord(_theItemIconAddr, value);
+                    Data.SetWord(_theItemIconAddr, (ushort) value);
                 else
                     Data.SetDouble(_theItemIconAddr, value);
             }

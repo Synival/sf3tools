@@ -308,26 +308,26 @@ namespace SF3.Models.Structs.X1 {
         }
 
         [BulkCopy]
-        public int FlagCheckedWthExpectedValue {
+        public ushort FlagCheckedWthExpectedValue {
             get => Data.GetWord(_flagCheckedAddr);
             set => Data.SetWord(_flagCheckedAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagCheckedAddr), displayOrder: 2.0f, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
-        public int FlagChecked {
-            get => FlagCheckedWthExpectedValue & 0x0FFF;
-            set => FlagCheckedWthExpectedValue = (FlagCheckedWthExpectedValue & ~0xFFF) | (value & 0x0FFF);
+        public ushort FlagChecked {
+            get => (ushort) (FlagCheckedWthExpectedValue & 0x0FFF);
+            set => FlagCheckedWthExpectedValue = (ushort) ((FlagCheckedWthExpectedValue & ~0xFFF) | (value & 0x0FFF));
         }
 
         [TableViewModelColumn(addressField: nameof(_flagCheckedAddr), displayOrder: 2.1f)]
         public bool FlagExpectedValue {
             get => (FlagCheckedWthExpectedValue & 0x1000) != 0;
-            set => FlagCheckedWthExpectedValue = value ? (FlagCheckedWthExpectedValue | ~0x1000) : (FlagCheckedWthExpectedValue & ~0x1000);
+            set => FlagCheckedWthExpectedValue = (ushort) (value ? (FlagCheckedWthExpectedValue | ~0x1000) : (FlagCheckedWthExpectedValue & ~0x1000));
         }
 
         [BulkCopy]
-        public int Padding0x06 {
+        public ushort Padding0x06 {
             get => Data.GetWord(_padding0x06);
             set => Data.SetWord(_padding0x06, value);
         }

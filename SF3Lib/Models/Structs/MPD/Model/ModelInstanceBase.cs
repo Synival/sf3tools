@@ -65,23 +65,29 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_positionXAddress), displayOrder: 8)]
         public short PositionX {
-            get => (short) Data.GetWord(_positionXAddress);
-            set => Data.SetWord(_positionXAddress, value);
+            get => Data.GetInt16(_positionXAddress);
+            set {
+                Data.SetInt16(_positionXAddress, value);
+                _boundingBox = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_positionYAddress), displayOrder: 9)]
         public short PositionY {
-            get => (short) Data.GetWord(_positionYAddress);
-            set => Data.SetWord(_positionYAddress, value);
+            get => Data.GetInt16(_positionYAddress);
+            set {
+                Data.SetInt16(_positionYAddress, value);
+                _boundingBox = null;
+            }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_positionZAddress), displayOrder: 10)]
         public short PositionZ {
-            get => (short) Data.GetWord(_positionZAddress);
+            get => Data.GetInt16(_positionZAddress);
             set {
-                Data.SetWord(_positionZAddress, value);
+                Data.SetInt16(_positionZAddress, value);
                 _boundingBox = null;
             }
         }

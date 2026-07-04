@@ -15,15 +15,15 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 0, minWidth: 60)]
         [BulkCopy]
         public short X {
-            get => (short) Data.GetWord(_xAddr);
-            set => Data.SetWord(_xAddr, value);
+            get => Data.GetInt16(_xAddr);
+            set => Data.SetInt16(_xAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zAddr), displayOrder: 1, minWidth: 60)]
         [BulkCopy]
         public short Z {
-            get => (short) Data.GetWord(_zAddr);
-            set => Data.SetWord(_zAddr, value);
+            get => Data.GetInt16(_zAddr);
+            set => Data.SetInt16(_zAddr, value);
         }
     }
 }

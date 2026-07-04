@@ -21,8 +21,8 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.Character)]
         [BulkCopy]
         public short CharacterID {
-            get => (short) Data.GetWord(_characterIdAddr);
-            set => Data.SetWord(_characterIdAddr, value);
+            get => Data.GetInt16(_characterIdAddr);
+            set => Data.SetInt16(_characterIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_spellIdAddr), displayOrder: 1, displayFormat: "X2", minWidth: 150)]
@@ -42,8 +42,8 @@ namespace SF3.Models.Structs.X014 {
 
         [TableViewModelColumn(addressField: nameof(_animationIdAddr), displayOrder: 3, displayFormat: "X2")]
         public short AnimationId {
-            get => (short) Data.GetWord(_animationIdAddr);
-            set => Data.SetWord(_animationIdAddr, value);
+            get => Data.GetInt16(_animationIdAddr);
+            set => Data.SetInt16(_animationIdAddr, value);
         }
     }
 }

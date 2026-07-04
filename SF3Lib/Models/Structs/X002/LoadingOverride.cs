@@ -38,7 +38,7 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_mapIDAddr), displayOrder: 0, displayFormat: "X2", minWidth: 120)]
         [BulkCopy]
         [NameGetter(NamedValueType.Load)]
-        public int MapID {
+        public ushort MapID {
             get => Data.GetWord(_mapIDAddr);
             set => Data.SetWord(_mapIDAddr, value);
         }

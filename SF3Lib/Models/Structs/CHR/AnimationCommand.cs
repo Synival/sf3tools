@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(addressField: nameof(_frameIdAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
-        public int Command {
+        public ushort Command {
             get => Data.GetWord(_frameIdAddr);
             set => Data.SetWord(_frameIdAddr, value);
         }
@@ -58,7 +58,7 @@ namespace SF3.Models.Structs.CHR {
 
         [TableViewModelColumn(addressField: nameof(_durationAddr), displayOrder: 1, displayFormat: "X2", displayName: "Parameter/Duration")]
         [BulkCopy]
-        public int Parameter {
+        public ushort Parameter {
             get => Data.GetWord(_durationAddr);
             set => Data.SetWord(_durationAddr, value);
         }

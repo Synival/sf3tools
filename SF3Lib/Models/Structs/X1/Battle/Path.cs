@@ -34,75 +34,75 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopy]
         public bool PathEnds {
             get => Data.GetWord(_pathEnds) != 0;
-            set => Data.SetWord(_pathEnds, value ? 1 : 0);
+            set => Data.SetWord(_pathEnds, (ushort) (value ? 1 : 0));
         }
 
         [TableViewModelColumn(addressField: nameof(_alwaysFFFF), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
-        public int AlwaysFFFF {
+        public ushort AlwaysFFFF {
             get => Data.GetWord(_alwaysFFFF);
             set => Data.SetWord(_alwaysFFFF, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_positionCountAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
-        public int PositionCount {
+        public ushort PositionCount {
             get => Data.GetWord(_positionCountAddr);
             set => Data.SetWord(_positionCountAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_xPos1Addr), displayOrder: 3, displayName: "xPos1")]
         [BulkCopy]
-        public int XPos1 {
+        public ushort XPos1 {
             get => Data.GetWord(_xPos1Addr);
             set => Data.SetWord(_xPos1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPos1Addr), displayOrder: 4, displayName: "zPos1")]
         [BulkCopy]
-        public int ZPos1 {
+        public ushort ZPos1 {
             get => Data.GetWord(_zPos1Addr);
             set => Data.SetWord(_zPos1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_xPos2Addr), displayOrder: 5, displayName: "xPos2")]
         [BulkCopy]
-        public int XPos2 {
+        public ushort XPos2 {
             get => Data.GetWord(_xPos2Addr);
             set => Data.SetWord(_xPos2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPos2Addr), displayOrder: 6, displayName: "zPos2")]
         [BulkCopy]
-        public int ZPos2 {
+        public ushort ZPos2 {
             get => Data.GetWord(_zPos2Addr);
             set => Data.SetWord(_zPos2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_xPos3Addr), displayOrder: 7, displayName: "xPos3")]
         [BulkCopy]
-        public int XPos3 {
+        public ushort XPos3 {
             get => Data.GetWord(_xPos3Addr);
             set => Data.SetWord(_xPos3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPos3Addr), displayOrder: 8, displayName: "zPos3")]
         [BulkCopy]
-        public int ZPos3 {
+        public ushort ZPos3 {
             get => Data.GetWord(_zPos3Addr);
             set => Data.SetWord(_zPos3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_xPos4Addr), displayOrder: 9, displayName: "xPos4")]
         [BulkCopy]
-        public int XPos4 {
+        public ushort XPos4 {
             get => Data.GetWord(_xPos4Addr);
             set => Data.SetWord(_xPos4Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPos4Addr), displayOrder: 10, displayName: "zPos4")]
         [BulkCopy]
-        public int ZPos4 {
+        public ushort ZPos4 {
             get => Data.GetWord(_zPos4Addr);
             set => Data.SetWord(_zPos4Addr, value);
         }

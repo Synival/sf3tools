@@ -251,15 +251,15 @@ namespace SF3.Models.Structs.KAO {
             var newDataBytes = newData.GetDataCopyOrReference();
 
             // Write the header.
-            newData.SetWord(0x00, width);
-            newData.SetWord(0x02, height);
+            newData.SetWord(0x00, (ushort) width);
+            newData.SetWord(0x02, (ushort) height);
 
             // (skip offsets for now)
 
-            newData.SetWord(0x16, (blinkBoundaries == null) ? 0 : blinkBoundaries.Width);
-            newData.SetWord(0x18, (blinkBoundaries == null) ? 0 : blinkBoundaries.Height);
-            newData.SetWord(0x1A, (talkBoundaries  == null) ? 0 : talkBoundaries.Width);
-            newData.SetWord(0x1C, (talkBoundaries  == null) ? 0 : talkBoundaries.Height);
+            newData.SetWord(0x16, (ushort) ((blinkBoundaries == null) ? 0 : blinkBoundaries.Width));
+            newData.SetWord(0x18, (ushort) ((blinkBoundaries == null) ? 0 : blinkBoundaries.Height));
+            newData.SetWord(0x1A, (ushort) ((talkBoundaries  == null) ? 0 : talkBoundaries.Width));
+            newData.SetWord(0x1C, (ushort) ((talkBoundaries  == null) ? 0 : talkBoundaries.Height));
 
             newData.SetByte(0x1E, (byte) ((blinkBoundaries == null) ? 0 : (blinkBoundaries.X1 - (width  - blinkBoundaries.Width)  / 2)));
             newData.SetByte(0x1F, (byte) ((blinkBoundaries == null) ? 0 : (blinkBoundaries.Y1 - (height - blinkBoundaries.Height) / 2)));
@@ -282,9 +282,9 @@ namespace SF3.Models.Structs.KAO {
             int headerOffset = 0x04;
             void WriteLayerImage(byte[,] imageData, int? frameRef, DecomposedImageBoundary boundary) {
                 if (frameRef.HasValue)
-                    newData.SetWord(headerOffset, -frameRef.Value);
+                    newData.SetWord(headerOffset, (ushort) -frameRef.Value);
                 else {
-                    newData.SetWord(headerOffset, imageDataOffset - 0x222);
+                    newData.SetWord(headerOffset, (ushort) (imageDataOffset - 0x222));
                     WriteImageData(imageData, boundary);
                 }
                 headerOffset += 0x02;

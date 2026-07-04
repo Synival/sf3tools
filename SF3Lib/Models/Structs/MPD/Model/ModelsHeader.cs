@@ -31,7 +31,7 @@ namespace SF3.Models.Structs.MPD.Model {
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_numModelsAddress), displayOrder: 2)]
-        public int NumModels {
+        public ushort NumModels {
             get => Data.GetWord(_numModelsAddress);
             set => Data.SetWord(_numModelsAddress, value);
         }

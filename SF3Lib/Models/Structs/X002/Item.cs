@@ -57,7 +57,7 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_priceAddr), displayOrder: 0, displayGroup: "Stats")]
         [BulkCopy]
-        public int Price {
+        public ushort Price {
             get => Data.GetWord(_priceAddr);
             set => Data.SetWord(_priceAddr, value);
         }

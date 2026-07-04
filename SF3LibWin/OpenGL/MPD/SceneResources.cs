@@ -205,7 +205,7 @@ namespace SF3.Win.OpenGL.MPD {
             ZoneModels = newZones;
         }
 
-        private void BuildActorTextureAtlas(int[] spriteIds) {
+        private void BuildActorTextureAtlas(ushort[] spriteIds) {
             // Always include the 'unknown sprite' image.
             var unknownImage = Resources.UnknownSpriteBmp;
 

@@ -29,30 +29,30 @@ namespace SF3.Models.Structs.X014 {
         [TableViewModelColumn(addressField: nameof(_animIdAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public short AnimID {
-            get => (short) Data.GetWord(_animIdAddr);
-            set => Data.SetWord(_animIdAddr, value);
+            get => Data.GetInt16(_animIdAddr);
+            set => Data.SetInt16(_animIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_animFileIdAddr), displayOrder: 2, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public short AnimFileID {
-            get => (short) Data.GetWord(_animFileIdAddr);
-            set => Data.SetWord(_animFileIdAddr, value);
+            get => Data.GetInt16(_animFileIdAddr);
+            set => Data.SetInt16(_animFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_filePosInSectorsAddr), displayOrder: 3, displayFormat: "X4")]
         [BulkCopy]
         public short FilePosInSectors {
-            get => (short) Data.GetWord(_filePosInSectorsAddr);
-            set => Data.SetWord(_filePosInSectorsAddr, value);
+            get => Data.GetInt16(_filePosInSectorsAddr);
+            set => Data.SetInt16(_filePosInSectorsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sizeInSectorsAddr), displayOrder: 4, displayFormat: "X4")]
         [BulkCopy]
         public short sizeInSectors {
-            get => (short) Data.GetWord(_sizeInSectorsAddr);
-            set => Data.SetWord(_sizeInSectorsAddr, value);
+            get => Data.GetInt16(_sizeInSectorsAddr);
+            set => Data.SetInt16(_sizeInSectorsAddr, value);
         }
     }
 }

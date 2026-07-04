@@ -43,56 +43,56 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_x1Addr), displayOrder: 1)]
         [BulkCopy]
-        public int X1 {
+        public ushort X1 {
             get => Data.GetWord(_x1Addr);
             set => Data.SetWord(_x1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z1Addr), displayOrder: 2)]
         [BulkCopy]
-        public int Z1 {
+        public ushort Z1 {
             get => Data.GetWord(_z1Addr);
             set => Data.SetWord(_z1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x2Addr), displayOrder: 3)]
         [BulkCopy]
-        public int X2 {
+        public ushort X2 {
             get => Data.GetWord(_x2Addr);
             set => Data.SetWord(_x2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z2Addr), displayOrder: 4)]
         [BulkCopy]
-        public int Z2 {
+        public ushort Z2 {
             get => Data.GetWord(_z2Addr);
             set => Data.SetWord(_z2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x3Addr), displayOrder: 5)]
         [BulkCopy]
-        public int X3 {
+        public ushort X3 {
             get => Data.GetWord(_x3Addr);
             set => Data.SetWord(_x3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z3Addr), displayOrder: 6)]
         [BulkCopy]
-        public int Z3 {
+        public ushort Z3 {
             get => Data.GetWord(_z3Addr);
             set => Data.SetWord(_z3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x4Addr), displayOrder: 7)]
         [BulkCopy]
-        public int X4 {
+        public ushort X4 {
             get => Data.GetWord(_x4Addr);
             set => Data.SetWord(_x4Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z4Addr), displayOrder: 8)]
         [BulkCopy]
-        public int Z4 {
+        public ushort Z4 {
             get => Data.GetWord(_z4Addr);
             set => Data.SetWord(_z4Addr, value);
         }

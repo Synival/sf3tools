@@ -91,7 +91,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
         [BulkCopy]
         protected override int StructImageDataOffset {
             get => Data.GetWord(_imageDataOffsetAddr);
-            set => Data.SetWord(_imageDataOffsetAddr, value);
+            set => Data.SetWord(_imageDataOffsetAddr, (ushort) value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]
