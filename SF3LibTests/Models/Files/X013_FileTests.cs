@@ -98,7 +98,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(0, table[0].SparkBonus);
                 Assert.AreEqual(0, table[0].LightBonus);
                 Assert.AreEqual(0, table[0].DarkBonus);
-                Assert.AreEqual(0, table[0].UnknownBonus);
+                Assert.AreEqual(0, table[0].UnusedBonus);
 
                 Assert.AreEqual(0, table[1].EarthBonus);
                 Assert.AreEqual(0, table[1].FireBonus);
@@ -107,7 +107,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(1, table[1].SparkBonus);
                 Assert.AreEqual(1, table[1].LightBonus);
                 Assert.AreEqual(0, table[1].DarkBonus);
-                Assert.AreEqual(0, table[1].UnknownBonus);
+                Assert.AreEqual(0, table[1].UnusedBonus);
 
                 Assert.AreEqual(0, table[2].EarthBonus);
                 Assert.AreEqual(2, table[2].FireBonus);
@@ -116,7 +116,7 @@ namespace SF3.Tests.Models.Files {
                 Assert.AreEqual(4, table[2].SparkBonus);
                 Assert.AreEqual(3, table[2].LightBonus);
                 Assert.AreEqual(2, table[2].DarkBonus);
-                Assert.AreEqual(0, table[2].UnknownBonus);
+                Assert.AreEqual(0, table[2].UnusedBonus);
 
                 Assert.AreEqual(testCase.ExpectedMagicBonuses, table.Count);
             });
