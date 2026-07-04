@@ -16,17 +16,17 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_supportAAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
-        public int SupportA {
+        public byte SupportA {
             get => Data.GetUInt8(_supportAAddr);
-            set => Data.SetUInt8(_supportAAddr, (byte) value);
+            set => Data.SetUInt8(_supportAAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_supportBAddr), displayOrder: 1, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
-        public int SupportB {
+        public byte SupportB {
             get => Data.GetUInt8(_supportBAddr);
-            set => Data.SetUInt8(_supportBAddr, (byte) value);
+            set => Data.SetUInt8(_supportBAddr, value);
         }
     }
 }

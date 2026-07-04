@@ -18,30 +18,30 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_sLvlStat1Addr), displayOrder: 0)]
         [BulkCopy]
-        public int SLvlStat1 {
+        public byte SLvlStat1 {
             get => Data.GetUInt8(_sLvlStat1Addr);
-            set => Data.SetUInt8(_sLvlStat1Addr, (byte) value);
+            set => Data.SetUInt8(_sLvlStat1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvlStat2Addr), displayOrder: 1)]
         [BulkCopy]
-        public int SLvlStat2 {
+        public byte SLvlStat2 {
             get => Data.GetUInt8(_sLvlStat2Addr);
-            set => Data.SetUInt8(_sLvlStat2Addr, (byte) value);
+            set => Data.SetUInt8(_sLvlStat2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvlStat3Addr), displayOrder: 2)]
         [BulkCopy]
-        public int SLvlStat3 {
+        public byte SLvlStat3 {
             get => Data.GetUInt8(_sLvlStat3Addr);
-            set => Data.SetUInt8(_sLvlStat3Addr, (byte) value);
+            set => Data.SetUInt8(_sLvlStat3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvlStat4Addr), displayOrder: 3)]
         [BulkCopy]
-        public int SLvlStat4 {
+        public byte SLvlStat4 {
             get => Data.GetUInt8(_sLvlStat4Addr);
-            set => Data.SetUInt8(_sLvlStat4Addr, (byte) value);
+            set => Data.SetUInt8(_sLvlStat4Addr, value);
         }
     }
 }

@@ -20,37 +20,37 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_rankNoneAddr), displayOrder: 0)]
         [BulkCopy]
-        public int RankNone {
+        public byte RankNone {
             get => Data.GetUInt8(_rankNoneAddr);
-            set => Data.SetUInt8(_rankNoneAddr, (byte) value);
+            set => Data.SetUInt8(_rankNoneAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_rankCAddr), displayOrder: 0)]
         [BulkCopy]
-        public int RankC {
+        public byte RankC {
             get => Data.GetUInt8(_rankCAddr);
-            set => Data.SetUInt8(_rankCAddr, (byte) value);
+            set => Data.SetUInt8(_rankCAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_rankBAddr), displayOrder: 1)]
         [BulkCopy]
-        public int RankB {
+        public byte RankB {
             get => Data.GetUInt8(_rankBAddr);
-            set => Data.SetUInt8(_rankBAddr, (byte) value);
+            set => Data.SetUInt8(_rankBAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_rankAAddr), displayOrder: 2)]
         [BulkCopy]
-        public int RankA {
+        public byte RankA {
             get => Data.GetUInt8(_rankAAddr);
-            set => Data.SetUInt8(_rankAAddr, (byte) value);
+            set => Data.SetUInt8(_rankAAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_rankSAddr), displayOrder: 3)]
         [BulkCopy]
-        public int RankS {
+        public byte RankS {
             get => Data.GetUInt8(_rankSAddr);
-            set => Data.SetUInt8(_rankSAddr, (byte) value);
+            set => Data.SetUInt8(_rankSAddr, value);
         }
     }
 }

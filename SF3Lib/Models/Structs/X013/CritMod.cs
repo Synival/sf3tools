@@ -14,16 +14,16 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_advantageAddr), displayOrder: 0)]
         [BulkCopy]
-        public int Advantage {
-            get => (sbyte) Data.GetUInt8(_advantageAddr);
-            set => Data.SetUInt8(_advantageAddr, (byte) value);
+        public sbyte Advantage {
+            get => Data.GetInt8(_advantageAddr);
+            set => Data.SetInt8(_advantageAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_disadvantageAddr), displayOrder: 1)]
         [BulkCopy]
-        public int Disadvantage {
-            get => (sbyte) Data.GetUInt8(_disadvantageAddr);
-            set => Data.SetUInt8(_disadvantageAddr, (byte) value);
+        public sbyte Disadvantage {
+            get => Data.GetInt8(_disadvantageAddr);
+            set => Data.SetInt8(_disadvantageAddr, value);
         }
     }
 }

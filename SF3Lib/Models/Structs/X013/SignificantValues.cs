@@ -31,7 +31,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 0, displayName: "Attack Advantage Crit% Mod")]
         [BulkCopy]
-        public int AttackAdvantageCritMod {
+        public sbyte AttackAdvantageCritMod {
             get => CritMod.Advantage;
             set => CritMod.Advantage = value;
         }
@@ -39,7 +39,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 1, displayName: "Attack Disadvantage Crit% Mod")]
         [BulkCopy]
-        public int AttackDisadvantageCritMod {
+        public sbyte AttackDisadvantageCritMod {
             get => CritMod.Disadvantage;
             set => CritMod.Disadvantage = value;
         }
@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 2, displayName: "Max Exp Checked Value")]
         [BulkCopy]
-        public int MaxExpCheckedValue {
+        public byte MaxExpCheckedValue {
             get => ExpLimit.ExpCheck;
             set => ExpLimit.ExpCheck = value;
         }
@@ -55,7 +55,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 3, displayName: "Max Exp Replacement Value")]
         [BulkCopy]
-        public int MaxExpReplacementValue {
+        public byte MaxExpReplacementValue {
             get => ExpLimit.ExpReplacement;
             set => ExpLimit.ExpReplacement = value;
         }
@@ -63,7 +63,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "Heal Bonus Exp")]
         [BulkCopy]
-        public int HealBonusExp {
+        public byte HealBonusExp {
             get => HealExp.HealBonus;
             set => HealExp.HealBonus = value;
         }
@@ -71,7 +71,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 5, displayName: "Friendship Exp Required for Ally")]
         [BulkCopy]
-        public int FriendshipExp_Lvl0_Ally {
+        public byte FriendshipExp_Lvl0_Ally {
             get => FriendshipExp.SLvl0_Ally;
             set => FriendshipExp.SLvl0_Ally = value;
         }
@@ -79,7 +79,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 6, displayName: "Friendship Exp Required for Partner")]
         [BulkCopy]
-        public int FriendshipExp_Lvl1_Partner {
+        public byte FriendshipExp_Lvl1_Partner {
             get => FriendshipExp.SLvl1_Partner;
             set => FriendshipExp.SLvl1_Partner = value;
         }
@@ -87,7 +87,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 7, displayName: "Friendship Exp Required for Friend")]
         [BulkCopy]
-        public int FriendshipExp_Lvl2_Friend {
+        public byte FriendshipExp_Lvl2_Friend {
             get => FriendshipExp.SLvl2_Friend;
             set => FriendshipExp.SLvl2_Friend = value;
         }
@@ -95,7 +95,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 8, displayName: "Friendship Exp Required for Trusted")]
         [BulkCopy]
-        public int FriendshipExp_Lvl3_Trusted {
+        public byte FriendshipExp_Lvl3_Trusted {
             get => FriendshipExp.SLvl3_Trusted;
             set => FriendshipExp.SLvl3_Trusted = value;
         }
@@ -103,7 +103,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 9, displayName: "Friendship Exp Required for Soulmate")]
         [BulkCopy]
-        public int FriendshipExp_Lvl4_Soulmate {
+        public byte FriendshipExp_Lvl4_Soulmate {
             get => FriendshipExp.SLvl4_Soulmate;
             set => FriendshipExp.SLvl4_Soulmate = value;
         }
@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 10, displayName: "Soulmate Fail Exp Mod")]
         [BulkCopy]
-        public int SoulmateFailExpMod {
+        public sbyte SoulmateFailExpMod {
             get => SoulFail.ExpLost;
             set => SoulFail.ExpLost = value;
         }
@@ -119,7 +119,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 11, displayName: "Special Chances for 2 Specials 2")]
         [BulkCopy]
-        public int SpecialChances2Specials2 {
+        public byte SpecialChances2Specials2 {
             get => SpecialChances.TwoSpecials2;
             set => SpecialChances.TwoSpecials2 = value;
         }
@@ -127,7 +127,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 12, displayName: "Special Chances for 3 Specials 3")]
         [BulkCopy]
-        public int SpecialChances3Specials3 {
+        public byte SpecialChances3Specials3 {
             get => SpecialChances.ThreeSpecials3;
             set => SpecialChances.ThreeSpecials3 = value;
         }
@@ -135,7 +135,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 13, displayName: "Special Chances for 3 Specials 2")]
         [BulkCopy]
-        public int SpecialChances3Specials2 {
+        public byte SpecialChances3Specials2 {
             get => SpecialChances.ThreeSpecials2;
             set => SpecialChances.ThreeSpecials2 = value;
         }
@@ -143,7 +143,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 14, displayName: "Special Chances for 4 Specials 4")]
         [BulkCopy]
-        public int SpecialChances4Specials4 {
+        public byte SpecialChances4Specials4 {
             get => SpecialChances.FourSpecials4;
             set => SpecialChances.FourSpecials4 = value;
         }
@@ -151,7 +151,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 15, displayName: "Special Chances for 4 Specials 4")]
         [BulkCopy]
-        public int SpecialChances4Specials3 {
+        public byte SpecialChances4Specials3 {
             get => SpecialChances.FourSpecials3;
             set => SpecialChances.FourSpecials3 = value;
         }
@@ -159,7 +159,7 @@ namespace SF3.Models.Structs.X013 {
         // TODO: get address!
         [TableViewModelColumn(addressField: null, displayOrder: 16, displayName: "Special Chances for 4 Specials 2")]
         [BulkCopy]
-        public int SpecialChances4Specials2 {
+        public byte SpecialChances4Specials2 {
             get => SpecialChances.FourSpecials2;
             set => SpecialChances.FourSpecials2 = value;
         }

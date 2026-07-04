@@ -20,9 +20,9 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_spellIdAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [NameGetter(NamedValueType.Spell)]
-        public int SpellID {
+        public byte SpellID {
             get => Data.GetUInt8(_spellIdAddr);
-            set => Data.SetUInt8(_spellIdAddr, (byte) value);
+            set => Data.SetUInt8(_spellIdAddr, value);
         }
 
         [BulkCopy]
@@ -42,9 +42,9 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_replacementSpellID), displayOrder: 3, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.Spell)]
-        public int ReplacementSpellID {
+        public byte ReplacementSpellID {
             get => Data.GetUInt8(_replacementSpellID);
-            set => Data.SetUInt8(_replacementSpellID, (byte) value);
+            set => Data.SetUInt8(_replacementSpellID, value);
         }
     }
 }

@@ -22,44 +22,44 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_noSpecialAddr), displayOrder: 0, displayName: "Have 0 Specials")]
         [BulkCopy]
-        public int NoSpecial {
+        public byte NoSpecial {
             get => Data.GetUInt8(_noSpecialAddr);
-            set => Data.SetUInt8(_noSpecialAddr, (byte) value);
+            set => Data.SetUInt8(_noSpecialAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_oneSpecialAddr), displayOrder: 1, displayName: "Have 1 Special")]
         [BulkCopy]
-        public int OneSpecial {
+        public byte OneSpecial {
             get => Data.GetUInt8(_oneSpecialAddr);
-            set => Data.SetUInt8(_oneSpecialAddr, (byte) value);
+            set => Data.SetUInt8(_oneSpecialAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_twoSpecialAddr), displayOrder: 2, displayName: "Have 2 Specials")]
         [BulkCopy]
-        public int TwoSpecial {
+        public byte TwoSpecial {
             get => Data.GetUInt8(_twoSpecialAddr);
-            set => Data.SetUInt8(_twoSpecialAddr, (byte) value);
+            set => Data.SetUInt8(_twoSpecialAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_threeSpecialAddr), displayOrder: 3, displayName: "Have 3 Specials")]
         [BulkCopy]
-        public int ThreeSpecial {
+        public byte ThreeSpecial {
             get => Data.GetUInt8(_threeSpecialAddr);
-            set => Data.SetUInt8(_threeSpecialAddr, (byte) value);
+            set => Data.SetUInt8(_threeSpecialAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_fourSpecialAddr), displayOrder: 4, displayName: "Have 4 Specials")]
         [BulkCopy]
-        public int FourSpecial {
+        public byte FourSpecial {
             get => Data.GetUInt8(_fourSpecialAddr);
-            set => Data.SetUInt8(_fourSpecialAddr, (byte) value);
+            set => Data.SetUInt8(_fourSpecialAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_fiveSpecialAddr), displayOrder: 5, displayName: "Have 5 Specials")]
         [BulkCopy]
-        public int FiveSpecial {
+        public byte FiveSpecial {
             get => Data.GetUInt8(_fiveSpecialAddr);
-            set => Data.SetUInt8(_fiveSpecialAddr, (byte) value);
+            set => Data.SetUInt8(_fiveSpecialAddr, value);
         }
     }
 }

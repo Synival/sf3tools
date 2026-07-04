@@ -32,44 +32,44 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_twoSpecials2Addr), displayOrder: 0)]
         [BulkCopy]
-        public int TwoSpecials2 {
+        public byte TwoSpecials2 {
             get => Data.GetUInt8(_twoSpecials2Addr);
-            set => Data.SetUInt8(_twoSpecials2Addr, (byte) value);
+            set => Data.SetUInt8(_twoSpecials2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_threeSpecials3Addr), displayOrder: 1)]
         [BulkCopy]
-        public int ThreeSpecials3 {
+        public byte ThreeSpecials3 {
             get => Data.GetUInt8(_threeSpecials3Addr);
-            set => Data.SetUInt8(_threeSpecials3Addr, (byte) value);
+            set => Data.SetUInt8(_threeSpecials3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_threeSpecials2Addr), displayOrder: 2)]
         [BulkCopy]
-        public int ThreeSpecials2 {
+        public byte ThreeSpecials2 {
             get => Data.GetUInt8(_threeSpecials2Addr);
-            set => Data.SetUInt8(_threeSpecials2Addr, (byte) value);
+            set => Data.SetUInt8(_threeSpecials2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_fourSpecials4Addr), displayOrder: 3)]
         [BulkCopy]
-        public int FourSpecials4 {
+        public byte FourSpecials4 {
             get => Data.GetUInt8(_fourSpecials4Addr);
-            set => Data.SetUInt8(_fourSpecials4Addr, (byte) value);
+            set => Data.SetUInt8(_fourSpecials4Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_fourSpecials3Addr), displayOrder: 4)]
         [BulkCopy]
-        public int FourSpecials3 {
+        public byte FourSpecials3 {
             get => Data.GetUInt8(_fourSpecials3Addr);
-            set => Data.SetUInt8(_fourSpecials3Addr, (byte) value);
+            set => Data.SetUInt8(_fourSpecials3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_fourSpecials2Addr), displayOrder: 5)]
         [BulkCopy]
-        public int FourSpecials2 {
+        public byte FourSpecials2 {
             get => Data.GetUInt8(_fourSpecials2Addr);
-            set => Data.SetUInt8(_fourSpecials2Addr, (byte) value);
+            set => Data.SetUInt8(_fourSpecials2Addr, value);
         }
     }
 }

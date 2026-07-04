@@ -14,16 +14,16 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_expCheckAddr), displayOrder: 0, displayName: "Checked Value")]
         [BulkCopy]
-        public int ExpCheck {
+        public byte ExpCheck {
             get => Data.GetUInt8(_expCheckAddr);
-            set => Data.SetUInt8(_expCheckAddr, (byte) value);
+            set => Data.SetUInt8(_expCheckAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_expReplacementAddr), displayOrder: 1, displayName: "Replaced Value")]
         [BulkCopy]
-        public int ExpReplacement {
+        public byte ExpReplacement {
             get => Data.GetUInt8(_expReplacementAddr);
-            set => Data.SetUInt8(_expReplacementAddr, (byte) value);
+            set => Data.SetUInt8(_expReplacementAddr, value);
         }
     }
 }

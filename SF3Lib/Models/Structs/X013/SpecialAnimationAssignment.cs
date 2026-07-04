@@ -26,16 +26,16 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_subAnimationAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte SubAnimation {
-            get => (byte) Data.GetUInt8(_subAnimationAddr);
+            get => Data.GetUInt8(_subAnimationAddr);
             set => Data.SetUInt8(_subAnimationAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_animationIdAddr), displayOrder: 2, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.SpecialAnimation)]
         [BulkCopy]
-        public int AnimationID {
+        public byte AnimationID {
             get => Data.GetUInt8(_animationIdAddr);
-            set => Data.SetUInt8(_animationIdAddr, (byte) value);
+            set => Data.SetUInt8(_animationIdAddr, value);
         }
     }
 }

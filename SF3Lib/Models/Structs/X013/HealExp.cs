@@ -12,9 +12,9 @@ namespace SF3.Models.Structs.X013 {
 
         [TableViewModelColumn(addressField: nameof(_healExpAddr), displayOrder: 0, displayName: "Heal Exp Bonus")]
         [BulkCopy]
-        public int HealBonus {
+        public byte HealBonus {
             get => Data.GetUInt8(_healExpAddr);
-            set => Data.SetUInt8(_healExpAddr, (byte) value);
+            set => Data.SetUInt8(_healExpAddr, value);
         }
     }
 }

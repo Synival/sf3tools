@@ -14,9 +14,9 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_specialAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
-        public int Special {
+        public byte Special {
             get => Data.GetUInt8(_specialAddr);
-            set => Data.SetUInt8(_specialAddr, (byte) value);
+            set => Data.SetUInt8(_specialAddr, value);
         }
     }
 }

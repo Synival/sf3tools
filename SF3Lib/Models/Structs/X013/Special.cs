@@ -20,16 +20,16 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 0, displayFormat: "X2", minWidth: 100)]
         [BulkCopy]
         [NameGetter(NamedValueType.SpecialType)]
-        public int Type {
+        public byte Type {
             get => Data.GetUInt8(_typeAddr);
-            set => Data.SetUInt8(_typeAddr, (byte) value);
+            set => Data.SetUInt8(_typeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_lowPowAddr), displayOrder: 1)]
         [BulkCopy]
-        public int LowPow {
+        public byte LowPow {
             get => Data.GetUInt8(_lowPowAddr);
-            set => Data.SetUInt8(_lowPowAddr, (byte) value);
+            set => Data.SetUInt8(_lowPowAddr, value);
         }
 
         public NamedValueType? MidPowType
@@ -38,16 +38,16 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_midPowAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(MidPowType))]
-        public int MidPow {
+        public byte MidPow {
             get => Data.GetUInt8(_midPowAddr);
-            set => Data.SetUInt8(_midPowAddr, (byte) value);
+            set => Data.SetUInt8(_midPowAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_highPowAddr), displayOrder: 3)]
         [BulkCopy]
-        public int MaxPow {
+        public byte MaxPow {
             get => Data.GetUInt8(_highPowAddr);
-            set => Data.SetUInt8(_highPowAddr, (byte) value);
+            set => Data.SetUInt8(_highPowAddr, value);
         }
 
         // Function used for low RNG damage rolls
