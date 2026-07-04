@@ -36,7 +36,7 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
         public ushort Trigger {
-            get => (ushort) Data.GetUInt16(_triggerAddr);
+            get => Data.GetUInt16(_triggerAddr);
             set => Data.SetUInt16(_triggerAddr, value);
         }
 
@@ -210,14 +210,14 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_triggerFlagsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte TriggerFlags {
-            get => (byte) Data.GetUInt8(_triggerFlagsAddr);
+            get => Data.GetUInt8(_triggerFlagsAddr);
             set => Data.SetUInt8(_triggerFlagsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_triggerTargetIdAddr), displayOrder: 1.1f, displayFormat: "X2")]
         [BulkCopy]
         public byte TriggerTargetID {
-            get => (byte) Data.GetUInt8(_triggerTargetIdAddr);
+            get => Data.GetUInt8(_triggerTargetIdAddr);
             set => Data.SetUInt8(_triggerTargetIdAddr, value);
         }
 
@@ -335,8 +335,8 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_actionAddr), displayOrder: 4, displayFormat: "X8")]
         [BulkCopy]
         public uint Action {
-            get => (uint) Data.GetInt32(_actionAddr);
-            set => Data.SetInt32(_actionAddr, (int) value);
+            get => Data.GetUInt32(_actionAddr);
+            set => Data.SetUInt32(_actionAddr, value);
         }
 
         public NamedValueType? ActionParam1Type {

@@ -21,15 +21,15 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_modelInstanceTablePtrAddr), displayOrder: 0, displayName: "ModelsPtr", isPointer: true)]
         [BulkCopy]
         public uint ModelInstanceTablePtr {
-            get => (uint) Data.GetInt32(_modelInstanceTablePtrAddr);
-            set => Data.SetInt32(_modelInstanceTablePtrAddr, (int) value);
+            get => Data.GetUInt32(_modelInstanceTablePtrAddr);
+            set => Data.SetUInt32(_modelInstanceTablePtrAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_matrixTablePtrAddr), displayOrder: 1, displayName: "MatricesPtr", isPointer: true)]
         [BulkCopy]
         public uint MatrixTablePtr {
-            get => (uint) Data.GetInt32(_matrixTablePtrAddr);
-            set => Data.SetInt32(_matrixTablePtrAddr, (int) value);
+            get => Data.GetUInt32(_matrixTablePtrAddr);
+            set => Data.SetUInt32(_matrixTablePtrAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_posXAddr), displayOrder: 2, displayFormat: "X8", minWidth: 75)]
