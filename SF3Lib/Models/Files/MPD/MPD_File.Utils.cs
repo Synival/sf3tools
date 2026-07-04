@@ -212,7 +212,7 @@ namespace SF3.Models.Files.MPD {
 
             // Mark '**header', '*header', and 'header'.
             MarkAllocatedSpace(usedSpace, 0, 4);                                         // double-pointer to header
-            var headerPtr = Data.GetInt32(0) - 0x290000;                                // pointer to...
+            var headerPtr = Data.GetInt32(0) - 0x290000;                                 // pointer to...
             MarkAllocatedSpace(usedSpace, headerPtr, headerPtr + 4);                     //    ...header
             MarkAllocatedSpace(usedSpace, header.Address, header.Address + header.Size); // header
 

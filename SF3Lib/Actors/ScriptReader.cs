@@ -14,7 +14,7 @@ namespace SF3.Actors {
 
         private uint ReadInt() {
             var addr = Address + Position * 4;
-            var i = (addr + 3 >= Data.Length) ? 0xFFFFFFFFu : (uint) Data.GetInt32(addr);
+            var i = (addr + 3 >= Data.Length) ? 0xFFFFFFFFu : Data.GetUInt32(addr);
             Position++;
             ScriptData.Add(i);
             return i;

@@ -106,30 +106,30 @@ namespace SF3.Models.Files.X1 {
                 if (!isScn1OrBTL99) {
                     // First, look inside a function for its address.
                     // The value we want is 0xac bytes later always (except for X1BTL330-339 and X1BTLP05)
-                    var tileMovementAddressPointer = Data.GetInt32(0x000001c4) - (int) RamAddress + 0x00ac;
+                    var tileMovementAddressPointer = Data.GetInt32(0x000001c4) - RamAddress + 0x00ac;
 
                     var priorityTablesOffset =
                         (Scenario == ScenarioType.Scenario2) ? 0x78 :
                         (Scenario == ScenarioType.Scenario3) ? 0x5c :
                                   /*ScenarioType.PremiumDisk*/ 0x5c;
 
-                    var funcAddr = Data.GetInt32(0x01DC) - (int) RamAddress;
-                    characterTargetPriorityTablesAddresses = Data.GetInt32(funcAddr + priorityTablesOffset) - (int) RamAddress;
+                    var funcAddr = Data.GetInt32(0x01DC) - RamAddress;
+                    characterTargetPriorityTablesAddresses = Data.GetInt32(funcAddr + priorityTablesOffset) - RamAddress;
 
                     // No problems with this method in Scenario 2.
                     if (Scenario == ScenarioType.Scenario2)
-                        tileMovementAddress = Data.GetInt32(tileMovementAddressPointer) - (int) RamAddress;
+                        tileMovementAddress = Data.GetInt32(tileMovementAddressPointer) - RamAddress;
                     else {
                         tileMovementAddress = Data.GetInt32(tileMovementAddressPointer);
 
                         // Is this a valid pointer to memory?
                         if (tileMovementAddress < 0x06070000 && tileMovementAddress > 0)
-                            tileMovementAddress -= (int) RamAddress;
+                            tileMovementAddress -= RamAddress;
                         // If not, employ the workaround for X1BTL330-339 and X1BTLP05 not being consistant with everything else
                         // and locate the table directly.
                         // TODO: does this pointer exist in other X1BTL* files?
                         else
-                            tileMovementAddress = Data.GetInt32(0x0024) - (int) RamAddress + 0x14;
+                            tileMovementAddress = Data.GetInt32(0x0024) - RamAddress + 0x14;
                     }
                 }
                 else {
@@ -180,7 +180,7 @@ namespace SF3.Models.Files.X1 {
                 CharacterMoveTargetPriorityTables = new CharacterMoveTargetPriorityTable[16];
                 int tablePointerAddr = characterTargetPriorityTablesAddresses;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetInt32(tablePointerAddr) - (int) RamAddress;
+                    var tableAddr = Data.GetInt32(tablePointerAddr) - RamAddress;
                     var tableName = "CharacterMoveScoreBonuses 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(CharacterMoveTargetPriorityTables[i] = CharacterMoveTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
@@ -189,7 +189,7 @@ namespace SF3.Models.Files.X1 {
                 CharacterAttackScoreBonusTables = new CharacterAttackScoreBonusTable[16];
                 tablePointerAddr = characterTargetPriorityTablesAddresses + 0x140;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetInt32(tablePointerAddr) - (int) RamAddress;
+                    var tableAddr = Data.GetInt32(tablePointerAddr) - RamAddress;
                     var tableName = "CharacterAttackScoreBonuses 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(CharacterAttackScoreBonusTables[i] = CharacterAttackScoreBonusTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
@@ -243,7 +243,7 @@ namespace SF3.Models.Files.X1 {
             => BattleHeader?.MapPointerTable?.Select(x => x.BattleMap)?.Where(x => x != null)?.ToDictionary(x => x.MapLeader, x => x) ?? new Dictionary<MapLeaderType, BattleMap>();
 
         private void DiscoverFunctions(byte[] data) {
-            Discoveries.AddFunction((uint) Data.GetInt32(0x08), "X1InitFunc", "x1Init()", null);
+            Discoveries.AddFunction(Data.GetUInt32(0x08), "X1InitFunc", "x1Init()", null);
 
             // Look for known functions and create corresponding DiscoveredData() entries.
             var funcs = KnownX1Functions.AllKnownFunctions
@@ -382,16 +382,16 @@ namespace SF3.Models.Files.X1 {
             if (setRenderThinkFuncsAddr.HasValue) {
                 var pointers = Discoveries.GetPointersByValue(setRenderThinkFuncsAddr.Value);
                 foreach (var ptr in pointers) {
-                    var tableAddr = (uint) Data.GetInt32((int) (ptr.Address - 0x04 - RamAddress));
+                    var tableAddr = Data.GetUInt32((int) (ptr.Address - 0x04 - RamAddress));
                     Discoveries.AddArray(tableAddr, nameof(MapUpdateFunc) + "[]", "updateFuncTable", null);
 
                     // TODO: acatually add the table maybe?
                     while (true) {
-                        var value1 = (uint) Data.GetInt32((int) (tableAddr - RamAddress + 0x00));
+                        var value1 = Data.GetUInt32((int) (tableAddr - RamAddress + 0x00));
                         if (value1 == 0xFFFFFFFF)
                             break;
 
-                        var value2 = (uint) Data.GetInt32((int) (tableAddr - RamAddress + 0x04));
+                        var value2 = Data.GetUInt32((int) (tableAddr - RamAddress + 0x04));
                         if (!Discoveries.GetFunctions().Any(x => x.Address == value2)) {
                             var funcType = (value1 == 0x03) ? "GroundPlaneTickFunc" : $"Update{value1}Func";
                             Discoveries.AddFunction(value2, funcType, $"unknown{funcType}()", null);
@@ -469,7 +469,7 @@ namespace SF3.Models.Files.X1 {
             var ramAddressLimit = RamAddress + Data.Length - tableItemLen;
             foreach (var pointer in setInteractableTableFuncPointers) {
                 for (var offset = pointer - 4; offset >= 0; offset -= 4) {
-                    var ramAddr = (uint) Data.GetInt32((int) offset);
+                    var ramAddr = Data.GetUInt32((int) offset);
                     var addr = (uint) (ramAddr - RamAddress);
                     if (ramAddr >= RamAddress && ramAddr < ramAddressLimit && LooksLikeTable(addr)) {
                         int count = startCount + tables.Count;
@@ -505,7 +505,7 @@ namespace SF3.Models.Files.X1 {
                         return false;
 
                     // Must be a valid sprite ID.
-                    if ((ushort) Data.GetUInt16((int) offset) >= 0x300)
+                    if (Data.GetUInt16((int) offset) >= 0x300)
                         return false;
 
                     return true;
@@ -614,7 +614,7 @@ namespace SF3.Models.Files.X1 {
             foreach (var disc in discoveredPointersByRamAddr) {
                 var addr = disc.Value.Address;
                 var ramAddr = disc.Key;
-                var potentialScriptRamAddr = (uint) Data.GetInt32((int) (addr - RamAddress));
+                var potentialScriptRamAddr = Data.GetUInt32((int) (addr - RamAddress));
                 var potentialScriptAddr = potentialScriptRamAddr - RamAddress;
 
                 // On the off chance that this was already discovered, add it.
