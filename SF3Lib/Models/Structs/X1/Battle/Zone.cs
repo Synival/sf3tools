@@ -31,13 +31,13 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_numPointsAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public byte NumPoints {
-            get => (byte) Data.GetUInt8(_numPointsAddr);
+            get => Data.GetUInt8(_numPointsAddr);
             set => Data.SetUInt8(_numPointsAddr, value);
         }
 
         [BulkCopy]
         public byte Padding0x02 {
-            get => (byte) Data.GetUInt8(_padding0x02Addr);
+            get => Data.GetUInt8(_padding0x02Addr);
             set => Data.SetUInt8(_padding0x02Addr, value);
         }
 

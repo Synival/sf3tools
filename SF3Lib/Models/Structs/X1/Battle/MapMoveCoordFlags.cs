@@ -10,7 +10,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X2")]
         public byte RawValue {
-            get => (byte) Data.GetUInt8(Address);
+            get => Data.GetUInt8(Address);
             set => Data.SetUInt8(Address, value);
         }
 

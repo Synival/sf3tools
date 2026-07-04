@@ -48,7 +48,7 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [TableViewModelColumn(addressField: nameof(_numMapMoveCoordsAddr), displayOrder: 8, displayFormat: "X2")]
         [BulkCopy]
-        public int NumMapMoveCoords {
+        public ushort NumMapMoveCoords {
             get => Data.GetUInt16(_numMapMoveCoordsAddr);
             set => Data.SetUInt16(_numMapMoveCoordsAddr, (byte) value);
         }

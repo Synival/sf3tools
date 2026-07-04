@@ -19,28 +19,28 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_zoneAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public byte Zone {
-            get => (byte) Data.GetUInt8(_zoneAddr);
+            get => Data.GetUInt8(_zoneAddr);
             set => Data.SetUInt8(_zoneAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte OrderFlags {
-            get => (byte) Data.GetUInt8(_typeAddr);
+            get => Data.GetUInt8(_typeAddr);
             set => Data.SetUInt8(_typeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_offAiIndexAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public byte OffAIIndex {
-            get => (byte) Data.GetUInt8(_offAiIndexAddr);
+            get => Data.GetUInt8(_offAiIndexAddr);
             set => Data.SetUInt8(_offAiIndexAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_onAiIndexAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public byte OnAIIndex {
-            get => (byte) Data.GetUInt8(_onAiIndexAddr);
+            get => Data.GetUInt8(_onAiIndexAddr);
             set => Data.SetUInt8(_onAiIndexAddr, value);
         }
 

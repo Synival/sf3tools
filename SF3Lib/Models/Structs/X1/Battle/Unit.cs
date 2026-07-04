@@ -137,8 +137,8 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetUInt16(_enemyIDAddr, value);
         }
 
-        public bool IsEnemy =>
-            EnemyID >= 0x01 && EnemyID < 0x8000 && EnemyID != 0x5B;
+        public bool IsEnemy
+            => EnemyID >= 0x01 && EnemyID < 0x8000 && EnemyID != 0x5B;
 
         public int BattleIDEnemyCounter
             => PrevUnit == null ? 0x80 : PrevUnit.BattleIDEnemyCounter + (PrevUnit.IsEnemy ? 1 : 0);
@@ -304,29 +304,29 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_aiCond1Addr), displayOrder: 15, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition1 {
-            get => (uint) Data.GetInt32(_aiCond1Addr);
-            set => Data.SetUInt8(_aiCond1Addr, (byte) value);
+            get => Data.GetUInt32(_aiCond1Addr);
+            set => Data.SetUInt32(_aiCond1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aiCond2Addr), displayOrder: 16, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition2 {
-            get => (uint) Data.GetInt32(_aiCond2Addr);
-            set => Data.SetUInt8(_aiCond2Addr, (byte) value);
+            get => Data.GetUInt32(_aiCond2Addr);
+            set => Data.SetUInt32(_aiCond2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aiCond3Addr), displayOrder: 17, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition3 {
-            get => (uint) Data.GetInt32(_aiCond3Addr);
-            set => Data.SetUInt8(_aiCond3Addr, (byte) value);
+            get => Data.GetUInt32(_aiCond3Addr);
+            set => Data.SetUInt32(_aiCond3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aiCond4Addr), displayOrder: 18, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition4 {
-            get => (uint) Data.GetInt32(_aiCond4Addr);
-            set => Data.SetUInt8(_aiCond4Addr, (byte) value);
+            get => Data.GetUInt32(_aiCond4Addr);
+            set => Data.SetUInt32(_aiCond4Addr, value);
         }
 
         // -----------------------------------------------------------------------------------------------------------
@@ -374,7 +374,7 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45, displayName: "EnemyFlags", displayFormat: "X4", displayGroup: "Page4")]
         [BulkCopy]
         public ushort Flags {
-            get => (ushort) Data.GetUInt16(_flagsAddr);
+            get => Data.GetUInt16(_flagsAddr);
             set => Data.SetUInt16(_flagsAddr, value);
         }
 

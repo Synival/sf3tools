@@ -15,15 +15,15 @@ namespace SF3.Models.Tables.MPD.Model {
         [TableViewModelColumn(addressField: nameof(_pointsOffsetAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public uint PointsOffset {
-            get => (uint) Data.GetInt32(_pointsOffsetAddr);
-            set => Data.SetInt32(_pointsOffsetAddr, (int) value);
+            get => Data.GetUInt32(_pointsOffsetAddr);
+            set => Data.SetUInt32(_pointsOffsetAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_linesOffsetAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public uint LinesOffset {
-            get => (uint) Data.GetInt32(_linesOffsetAddr);
-            set => Data.SetInt32(_linesOffsetAddr, (int) value);
+            get => Data.GetUInt32(_linesOffsetAddr);
+            set => Data.SetUInt32(_linesOffsetAddr, value);
         }
     }
 }

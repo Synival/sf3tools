@@ -75,22 +75,22 @@ namespace SF3.Models.Structs.X1.Town {
         [TableViewModelColumn(addressField: nameof(_xPosAddr), displayOrder: 3, displayName: "xPos", displayFormat: "X8")]
         [BulkCopy]
         public uint XPos {
-            get => (uint) Data.GetInt32(_xPosAddr);
-            set => Data.SetInt32(_xPosAddr, (int) value);
+            get => Data.GetUInt32(_xPosAddr);
+            set => Data.SetUInt32(_xPosAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_yPosAddr), displayOrder: 4, displayName: "yPos", displayFormat: "X8")]
         [BulkCopy]
         public uint YPos {
-            get => (uint) Data.GetInt32(_yPosAddr);
-            set => Data.SetInt32(_yPosAddr, (int) value);
+            get => Data.GetUInt32(_yPosAddr);
+            set => Data.SetUInt32(_yPosAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_zPosAddr), displayOrder: 5, displayName: "zPos", displayFormat: "X8")]
         [BulkCopy]
         public uint ZPos {
-            get => (uint) Data.GetInt32(_zPosAddr);
-            set => Data.SetInt32(_zPosAddr, (int) value);
+            get => Data.GetUInt32(_zPosAddr);
+            set => Data.SetUInt32(_zPosAddr, value);
         }
 
         public bool HasActorY => true;
@@ -127,13 +127,13 @@ namespace SF3.Models.Structs.X1.Town {
         [NameGetter(NamedValueType.InteractDirectionBehavior)]
         [BulkCopy]
         public byte InteractDirectionBehavior {
-            get => (byte) Data.GetUInt8(_interactDirectionBehaviorAddr);
+            get => Data.GetUInt8(_interactDirectionBehaviorAddr);
             set => Data.SetUInt8(_interactDirectionBehaviorAddr, value);
         }
 
         [BulkCopy]
         public byte Padding {
-            get => (byte) Data.GetUInt8(_paddingAddr);
+            get => Data.GetUInt8(_paddingAddr);
             set => Data.SetUInt8(_paddingAddr, value);
         }
 
