@@ -12,9 +12,9 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_statAddr), displayOrder: 0, displayName: "Stat Value")]
         [BulkCopy]
-        public int Stat {
+        public byte Stat {
             get => Data.GetUInt8(_statAddr);
-            set => Data.SetUInt8(_statAddr, (byte) value);
+            set => Data.SetUInt8(_statAddr, value);
         }
     }
 }

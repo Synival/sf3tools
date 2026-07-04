@@ -18,30 +18,30 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_skill0Addr), displayOrder: 0, displayName: "Skill0 Atk+")]
         [BulkCopy]
-        public int Skill0 {
+        public byte Skill0 {
             get => Data.GetUInt8(_skill0Addr);
-            set => Data.SetUInt8(_skill0Addr, (byte) value);
+            set => Data.SetUInt8(_skill0Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_skill1Addr), displayOrder: 1, displayName: "Skill1 Atk+")]
         [BulkCopy]
-        public int Skill1 {
+        public byte Skill1 {
             get => Data.GetUInt8(_skill1Addr);
-            set => Data.SetUInt8(_skill1Addr, (byte) value);
+            set => Data.SetUInt8(_skill1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_skill2Addr), displayOrder: 2, displayName: "Skill2 Atk+")]
         [BulkCopy]
-        public int Skill2 {
+        public byte Skill2 {
             get => Data.GetUInt8(_skill2Addr);
-            set => Data.SetUInt8(_skill2Addr, (byte) value);
+            set => Data.SetUInt8(_skill2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_skill3Addr), displayOrder: 0, displayName: "Skill3 Atk+")]
         [BulkCopy]
-        public int Skill3 {
+        public byte Skill3 {
             get => Data.GetUInt8(_skill3Addr);
-            set => Data.SetUInt8(_skill3Addr, (byte) value);
+            set => Data.SetUInt8(_skill3Addr, value);
         }
     }
 }

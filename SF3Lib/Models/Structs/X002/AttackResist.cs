@@ -14,16 +14,16 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_attackAddr), displayOrder: 0, displayName: "Attack Atk+")]
         [BulkCopy]
-        public int Attack {
+        public byte Attack {
             get => Data.GetUInt8(_attackAddr);
-            set => Data.SetUInt8(_attackAddr, (byte) value);
+            set => Data.SetUInt8(_attackAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_resistAddr), displayOrder: 1, displayName: "Resist MDef+")]
         [BulkCopy]
-        public int Resist {
+        public byte Resist {
             get => Data.GetUInt8(_resistAddr);
-            set => Data.SetUInt8(_resistAddr, (byte) value);
+            set => Data.SetUInt8(_resistAddr, value);
         }
     }
 }

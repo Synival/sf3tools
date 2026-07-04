@@ -22,37 +22,37 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_spellAddr), displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int Spell {
+        public byte Spell {
             get => Data.GetUInt8(_spellAddr);
-            set => Data.SetUInt8(_spellAddr, (byte) value);
+            set => Data.SetUInt8(_spellAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weaponLv0Addr), displayOrder: 1)]
         [BulkCopy]
-        public int WeaponLv0 {
+        public byte WeaponLv0 {
             get => Data.GetUInt8(_weaponLv0Addr);
-            set => Data.SetUInt8(_weaponLv0Addr, (byte) value);
+            set => Data.SetUInt8(_weaponLv0Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weaponLv1Addr), displayOrder: 2)]
         [BulkCopy]
-        public int WeaponLv1 {
+        public byte WeaponLv1 {
             get => Data.GetUInt8(_weaponLv1Addr);
-            set => Data.SetUInt8(_weaponLv1Addr, (byte) value);
+            set => Data.SetUInt8(_weaponLv1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weaponLv2Addr), displayOrder: 3)]
         [BulkCopy]
-        public int WeaponLv2 {
+        public byte WeaponLv2 {
             get => Data.GetUInt8(_weaponLv2Addr);
-            set => Data.SetUInt8(_weaponLv2Addr, (byte) value);
+            set => Data.SetUInt8(_weaponLv2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weaponLv3Addr), displayOrder: 4)]
         [BulkCopy]
-        public int WeaponLv3 {
+        public byte WeaponLv3 {
             get => Data.GetUInt8(_weaponLv3Addr);
-            set => Data.SetUInt8(_weaponLv3Addr, (byte) value);
+            set => Data.SetUInt8(_weaponLv3Addr, value);
         }
     }
 }

@@ -46,33 +46,33 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_synMusicAddr), displayOrder: 1, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
-        public int SynMusic {
+        public byte SynMusic {
             get => Data.GetUInt8(_synMusicAddr);
-            set => Data.SetUInt8(_synMusicAddr, (byte) value);
+            set => Data.SetUInt8(_synMusicAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_medMusicAddr), displayOrder: 2, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
-        public int MedMusic {
+        public byte MedMusic {
             get => Data.GetUInt8(_medMusicAddr);
-            set => Data.SetUInt8(_medMusicAddr, (byte) value);
+            set => Data.SetUInt8(_medMusicAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_julMusicAddr), displayOrder: 3, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
-        public int JulMusic {
+        public byte JulMusic {
             get => Data.GetUInt8(_julMusicAddr);
-            set => Data.SetUInt8(_julMusicAddr, (byte) value);
+            set => Data.SetUInt8(_julMusicAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_extraMusicAddr), displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
-        public int ExtraMusic {
+        public byte ExtraMusic {
             get => Data.GetUInt8(_extraMusicAddr);
-            set => Data.SetUInt8(_extraMusicAddr, (byte) value);
+            set => Data.SetUInt8(_extraMusicAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_synMpdAddr), displayOrder: 5, displayFormat: "X3", minWidth: 140)]

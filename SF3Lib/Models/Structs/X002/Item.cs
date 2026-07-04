@@ -65,16 +65,16 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_weaponEqTypeAddr), displayOrder: 1, displayName: "Weapon/Eq Type", minWidth: 120, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
-        public int WeaponEqType {
+        public byte WeaponEqType {
             get => Data.GetUInt8(_weaponEqTypeAddr);
-            set => Data.SetUInt8(_weaponEqTypeAddr, (byte) value);
+            set => Data.SetUInt8(_weaponEqTypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_effectsEquipAddr), displayOrder: 23, displayFormat: "X2", displayGroup: "Flags")]
         [BulkCopy]
-        public int EffectsEquip {
+        public byte EffectsEquip {
             get => Data.GetUInt8(_effectsEquipAddr);
-            set => Data.SetUInt8(_effectsEquipAddr, (byte) value);
+            set => Data.SetUInt8(_effectsEquipAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 23.1f, displayGroup: "Flags")]
@@ -130,9 +130,9 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_requirementsAddr), displayOrder: 24, displayFormat: "X2", displayGroup: "Flags")]
         [BulkCopy]
-        public int Requirements {
+        public byte Requirements {
             get => Data.GetUInt8(_requirementsAddr);
-            set => Data.SetUInt8(_requirementsAddr, (byte) value);
+            set => Data.SetUInt8(_requirementsAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 24.1f, displayGroup: "Flags")]
@@ -186,7 +186,7 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_rangeAddr), displayOrder: 4.0f, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
         public byte Range {
-            get => (byte) Data.GetUInt8(_rangeAddr);
+            get => Data.GetUInt8(_rangeAddr);
             set => Data.SetUInt8(_rangeAddr, value);
         }
 
@@ -204,60 +204,60 @@ namespace SF3.Models.Structs.X002 {
 
         [TableViewModelColumn(addressField: nameof(_attackAddr), displayOrder: 5, displayGroup: "Stats")]
         [BulkCopy]
-        public int Attack {
+        public byte Attack {
             get => Data.GetUInt8(_attackAddr);
-            set => Data.SetUInt8(_attackAddr, (byte) value);
+            set => Data.SetUInt8(_attackAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_defenseAddr), displayOrder: 6, displayGroup: "Stats")]
         [BulkCopy]
-        public int Defense {
+        public byte Defense {
             get => Data.GetUInt8(_defenseAddr);
-            set => Data.SetUInt8(_defenseAddr, (byte) value);
+            set => Data.SetUInt8(_defenseAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_attackRankAddr), displayOrder: 7, displayGroup: "Stats")]
         [BulkCopy]
-        public int AttackRank {
+        public byte AttackRank {
             get => Data.GetUInt8(_attackRankAddr);
-            set => Data.SetUInt8(_attackRankAddr, (byte) value);
+            set => Data.SetUInt8(_attackRankAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_spellRankAddr), displayOrder: 8, displayGroup: "Stats")]
         [BulkCopy]
-        public int SpellRank {
+        public byte SpellRank {
             get => Data.GetUInt8(_spellRankAddr);
-            set => Data.SetUInt8(_spellRankAddr, (byte) value);
+            set => Data.SetUInt8(_spellRankAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_effective1TypeAddr), displayOrder: 9, displayFormat: "X2", minWidth: 110, displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.EffectiveType)]
-        public int Effective1Type {
+        public byte Effective1Type {
             get => Data.GetUInt8(_effective1TypeAddr);
-            set => Data.SetUInt8(_effective1TypeAddr, (byte) value);
+            set => Data.SetUInt8(_effective1TypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_effective1PowAddr), displayOrder: 10, displayGroup: "Stats")]
         [BulkCopy]
-        public int Effective1Pow {
+        public byte Effective1Pow {
             get => Data.GetUInt8(_effective1PowAddr);
-            set => Data.SetUInt8(_effective1PowAddr, (byte) value);
+            set => Data.SetUInt8(_effective1PowAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_effective2TypeAddr), displayOrder: 11, displayFormat: "X2", minWidth: 110, displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.EffectiveType)]
-        public int Effective2Type {
+        public byte Effective2Type {
             get => Data.GetUInt8(_effective2TypeAddr);
-            set => Data.SetUInt8(_effective2TypeAddr, (byte) value);
+            set => Data.SetUInt8(_effective2TypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_effective2PowAddr), displayOrder: 12, displayGroup: "Stats")]
         [BulkCopy]
-        public int Effective2Pow {
+        public byte Effective2Pow {
             get => Data.GetUInt8(_effective2PowAddr);
-            set => Data.SetUInt8(_effective2PowAddr, (byte) value);
+            set => Data.SetUInt8(_effective2PowAddr, value);
         }
 
         private NamedValueType? ValueTypeForStat(int type) {
@@ -277,9 +277,9 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_stat1TypeAddr), displayOrder: 13, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
-        public int Stat1Type {
+        public byte Stat1Type {
             get => Data.GetUInt8(_stat1TypeAddr);
-            set => Data.SetUInt8(_stat1TypeAddr, (byte) value);
+            set => Data.SetUInt8(_stat1TypeAddr, value);
         }
 
         public NamedValueType? Stat1ValueType => ValueTypeForStat(Stat1Type);
@@ -295,9 +295,9 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_stat2TypeAddr), displayOrder: 15, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
-        public int Stat2Type {
+        public byte Stat2Type {
             get => Data.GetUInt8(_stat2TypeAddr);
-            set => Data.SetUInt8(_stat2TypeAddr, (byte) value);
+            set => Data.SetUInt8(_stat2TypeAddr, value);
         }
 
         public NamedValueType? Stat2ValueType => ValueTypeForStat(Stat2Type);
@@ -313,9 +313,9 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_stat3TypeAddr), displayOrder: 17, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
-        public int Stat3Type {
+        public byte Stat3Type {
             get => Data.GetUInt8(_stat3TypeAddr);
-            set => Data.SetUInt8(_stat3TypeAddr, (byte) value);
+            set => Data.SetUInt8(_stat3TypeAddr, value);
         }
 
         public NamedValueType? Stat3ValueType => ValueTypeForStat(Stat3Type);
@@ -331,9 +331,9 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_stat4TypeAddr), displayOrder: 19, minWidth: 90, displayFormat: "X2", displayGroup: "Bonuses")]
         [BulkCopy]
         [NameGetter(NamedValueType.StatType)]
-        public int Stat4Type {
+        public byte Stat4Type {
             get => Data.GetUInt8(_stat4TypeAddr);
-            set => Data.SetUInt8(_stat4TypeAddr, (byte) value);
+            set => Data.SetUInt8(_stat4TypeAddr, value);
         }
 
         public NamedValueType? Stat4ValueType => ValueTypeForStat(Stat4Type);
@@ -349,16 +349,16 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_useSpellAddr), displayOrder: 21, minWidth: 130, displayFormat: "X2", displayGroup: "Stats")]
         [BulkCopy]
         [NameGetter(NamedValueType.Spell)]
-        public int UseSpell {
+        public byte UseSpell {
             get => Data.GetUInt8(_useSpellAddr);
-            set => Data.SetUInt8(_useSpellAddr, (byte) value);
+            set => Data.SetUInt8(_useSpellAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_useSpellLvAddr), displayOrder: 22, displayGroup: "Stats")]
         [BulkCopy]
-        public int UseSpellLv {
+        public byte UseSpellLv {
             get => Data.GetUInt8(_useSpellLvAddr);
-            set => Data.SetUInt8(_useSpellLvAddr, (byte) value);
+            set => Data.SetUInt8(_useSpellLvAddr, value);
         }
     }
 }
