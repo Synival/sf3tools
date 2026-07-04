@@ -92,13 +92,15 @@ namespace SF3.ByteData {
             return value;
         }
 
-        public byte   GetUInt8(int offset)   => (byte)   GetData(offset, 1);
-        public ushort GetUInt16(int offset)   => (ushort) GetData(offset, 2);
-        public short  GetInt16(int offset)  => (short)  GetData(offset, 2);
-        public int    GetInt32(int offset) => (int)    GetData(offset, 4);
+        public byte GetUInt8(int offset)    => (byte)   GetData(offset, 1);
+        public sbyte GetInt8(int offset)    => (sbyte)  GetData(offset, 1);
+        public ushort GetUInt16(int offset) => (ushort) GetData(offset, 2);
+        public short GetInt16(int offset)   => (short)  GetData(offset, 2);
+        public uint GetUInt32(int offset)   => (uint)   GetData(offset, 4);
+        public int GetInt32(int offset)     => (int)    GetData(offset, 4);
 
-        public CompressedFIXED GetCompressedFIXED(int offset) => new CompressedFIXED((short) GetUInt16(offset));
-        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => new CompressedFIXED((ushort) GetUInt16(offset), isWeird: true);
+        public CompressedFIXED GetCompressedFIXED(int offset)      => new CompressedFIXED(GetInt16(offset));
+        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => new CompressedFIXED(GetUInt16(offset), isWeird: true);
 
         public FIXED GetFIXED(int offset) => new FIXED(GetInt32(offset), true);
 
@@ -129,10 +131,12 @@ namespace SF3.ByteData {
             }
         }
 
-        public void SetUInt8(int offset, byte value)   => SetData(offset, value, 1);
-        public void SetUInt16(int offset, ushort value) => SetData(offset, value, 2);
-        public void SetInt16(int offset, short value) => SetData(offset, (uint) value, 2);
-        public void SetInt32(int offset, int value)  => SetData(offset, (uint) value, 4);
+        public void SetUInt8(int offset, byte value)    => SetData(offset, (uint) value, 1);
+        public void SetInt8(int offset, sbyte value)    => SetData(offset, (uint) value, 1);
+        public void SetUInt16(int offset, ushort value) => SetData(offset, (uint) value, 2);
+        public void SetInt16(int offset, short value)   => SetData(offset, (uint) value, 2);
+        public void SetUInt32(int offset, uint value)   => SetData(offset, (uint) value, 4);
+        public void SetInt32(int offset, int value)     => SetData(offset, (uint) value, 4);
 
         public void SetCompressedFIXED(int offset, CompressedFIXED value)      => SetInt16(offset, value.RawShort);
         public void SetWeirdCompressedFIXED(int offset, CompressedFIXED value) => SetUInt16(offset, value.WeirdRawShort);
