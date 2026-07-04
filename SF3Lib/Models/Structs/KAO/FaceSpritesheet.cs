@@ -282,7 +282,7 @@ namespace SF3.Models.Structs.KAO {
             int headerOffset = 0x04;
             void WriteLayerImage(byte[,] imageData, int? frameRef, DecomposedImageBoundary boundary) {
                 if (frameRef.HasValue)
-                    newData.SetUInt16(headerOffset, (ushort) -frameRef.Value);
+                    newData.SetUInt16(headerOffset, (ushort) (-frameRef.Value));
                 else {
                     newData.SetUInt16(headerOffset, (ushort) (imageDataOffset - 0x222));
                     WriteImageData(imageData, boundary);

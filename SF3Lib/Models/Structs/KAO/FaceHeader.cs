@@ -59,7 +59,7 @@ namespace SF3.Models.Structs.KAO {
                 throw new ArgumentOutOfRangeException(nameof(layer));
             if (index < 0 || (layer == 0 && index != 0) || (layer == 1 && index > 3) || (layer == 2 && index > 6))
                 throw new ArgumentOutOfRangeException(nameof(index));
-            return (layer == 0) ? (short) 0 : (short) Data.GetUInt16((layer - 1) * 0x06 + index * 0x02 + _layer1Offset1Addr);
+            return (layer == 0) ? (short) 0 : Data.GetInt16((layer - 1) * 0x06 + index * 0x02 + _layer1Offset1Addr);
         }
 
         public void SetLayerOffset(int layer, int index, short value) {
@@ -162,7 +162,7 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(addressField: nameof(_heightAddr), displayOrder: 2)]
         [BulkCopy]
         public ushort Height {
-            get => (ushort) Data.GetUInt16(_heightAddr);
+            get => Data.GetUInt16(_heightAddr);
             set {
                 if (Data.GetUInt16(_heightAddr) != value) {
                     Data.SetUInt16(_heightAddr, value);
@@ -237,57 +237,57 @@ namespace SF3.Models.Structs.KAO {
         [TableViewModelColumn(addressField: nameof(_layer1WidthAddr), displayOrder: 12, displayName: "L1_Width")]
         [BulkCopy]
         public ushort Layer1Width {
-            get => (ushort) Data.GetUInt16(_layer1WidthAddr);
+            get => Data.GetUInt16(_layer1WidthAddr);
             set => Data.SetUInt16(_layer1WidthAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer1HeightAddr), displayOrder: 13, displayName: "L1_Height")]
         [BulkCopy]
         public ushort Layer1Height {
-            get => (ushort) Data.GetUInt16(_layer1HeightAddr);
+            get => Data.GetUInt16(_layer1HeightAddr);
             set => Data.SetUInt16(_layer1HeightAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2WidthAddr), displayOrder: 14, displayName: "L2_Width")]
         [BulkCopy]
         public ushort Layer2Width {
-            get => (ushort) Data.GetUInt16(_layer2WidthAddr);
+            get => Data.GetUInt16(_layer2WidthAddr);
             set => Data.SetUInt16(_layer2WidthAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2HeightAddr), displayOrder: 15, displayName: "L2_Height")]
         [BulkCopy]
         public ushort Layer2Height {
-            get => (ushort) Data.GetUInt16(_layer2HeightAddr);
+            get => Data.GetUInt16(_layer2HeightAddr);
             set => Data.SetUInt16(_layer2HeightAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer1RelativeXAddr), displayOrder: 16, displayName: "L1_RelX")]
         [BulkCopy]
         public sbyte Layer1RelativeX {
-            get => (sbyte) Data.GetUInt8(_layer1RelativeXAddr);
-            set => Data.SetUInt8(_layer1RelativeXAddr, (byte) value);
+            get => Data.GetInt8(_layer1RelativeXAddr);
+            set => Data.SetInt8(_layer1RelativeXAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer1RelativeYAddr), displayOrder: 17, displayName: "L1_RelY")]
         [BulkCopy]
         public sbyte Layer1RelativeY {
-            get => (sbyte) Data.GetUInt8(_layer1RelativeYAddr);
-            set => Data.SetUInt8(_layer1RelativeYAddr, (byte) value);
+            get => Data.GetInt8(_layer1RelativeYAddr);
+            set => Data.SetInt8(_layer1RelativeYAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2RelativeXAddr), displayOrder: 18, displayName: "L2_RelX")]
         [BulkCopy]
         public sbyte Layer2RelativeX {
-            get => (sbyte) Data.GetUInt8(_layer2RelativeXAddr);
-            set => Data.SetUInt8(_layer2RelativeXAddr, (byte) value);
+            get => Data.GetInt8(_layer2RelativeXAddr);
+            set => Data.SetInt8(_layer2RelativeXAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 19, displayName: "L2_RelY")]
         [BulkCopy]
         public sbyte Layer2RelativeY {
-            get => (sbyte) Data.GetUInt8(_layer2RelativeYAddr);
-            set => Data.SetUInt8(_layer2RelativeYAddr, (byte) value);
+            get => Data.GetInt8(_layer2RelativeYAddr);
+            set => Data.SetInt8(_layer2RelativeYAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_layer2RelativeYAddr), displayOrder: 20, displayName: "L1_X")]
