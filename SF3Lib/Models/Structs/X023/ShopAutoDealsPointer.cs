@@ -20,8 +20,8 @@ namespace SF3.Models.Structs.X023 {
         [TableViewModelColumn(displayOrder: 0, addressField: nameof(_shopAutoDealsAddr), isPointer: true, minWidth: 150)]
         [BulkCopy]
         public uint ShopAutoDeals {
-            get => (uint) Data.GetInt32(_shopAutoDealsAddr);
-            set => Data.SetInt32(_shopAutoDealsAddr, (int) value);
+            get => Data.GetUInt32(_shopAutoDealsAddr);
+            set => Data.SetUInt32(_shopAutoDealsAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 1, addressField: nameof(_flagAddr), displayFormat: "X2", minWidth: 250, visibilityProperty: nameof(HasFlag), displayName: "Flag (Scn3+)")]

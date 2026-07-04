@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X023 {
         [TableViewModelColumn(addressField: nameof(_shopItemsAddr), isPointer: true, minWidth: 150)]
         [BulkCopy]
         public uint ShopItems {
-            get => (uint) Data.GetInt32(_shopItemsAddr);
-            set => Data.SetInt32(_shopItemsAddr, (int) value);
+            get => Data.GetUInt32(_shopItemsAddr);
+            set => Data.SetUInt32(_shopItemsAddr, value);
         }
     }
 }
