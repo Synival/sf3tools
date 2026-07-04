@@ -188,14 +188,14 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_mapFlagsAddr), displayOrder: 0, displayFormat: "X4", displayGroup: "Main")]
         public ushort MapFlags {
-            get => (ushort) Data.GetUInt16(_mapFlagsAddr);
+            get => Data.GetUInt16(_mapFlagsAddr);
             set => Data.SetUInt16(_mapFlagsAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding1Addr), displayOrder: 1, isPointer: true, displayName: "(" + nameof(Padding1) + ")", displayGroup: "Main")]
         public ushort Padding1 {
-            get => (ushort) Data.GetUInt16(_padding1Addr);
+            get => Data.GetUInt16(_padding1Addr);
             set => Data.SetUInt16(_padding1Addr, value);
         }
 
@@ -236,14 +236,14 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_viewDistanceAddr), displayOrder: 5, displayFormat: "X2", displayGroup: "Main")]
         public ushort ModelsViewDistance {
-            get => (ushort) Data.GetUInt16(_viewDistanceAddr);
+            get => Data.GetUInt16(_viewDistanceAddr);
             set => Data.SetUInt16(_viewDistanceAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding2Addr), displayOrder: 6, isPointer: true, displayName: "(" + nameof(Padding2) + ")", displayGroup: "Main")]
         public ushort Padding2 {
-            get => (ushort) Data.GetUInt16(_padding2Addr);
+            get => Data.GetUInt16(_padding2Addr);
             set => Data.SetUInt16(_padding2Addr, value);
         }
 
@@ -342,7 +342,7 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding3Addr), displayOrder: 15.5f, isPointer: true, displayName: "(" + nameof(Padding3) + ")", displayGroup: "Main")]
         public ushort Padding3 {
-            get => (ushort) Data.GetUInt16(_padding3Addr);
+            get => Data.GetUInt16(_padding3Addr);
             set => Data.SetUInt16(_padding3Addr, value);
         }
 

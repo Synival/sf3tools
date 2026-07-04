@@ -46,22 +46,22 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_visibleModelsWhenFlagOffOffsetAddr), displayOrder: 1, displayName: "Visible Models (Flag Off)", isPointer: true)]
         public uint VisibleModelsWhenFlagOffOffset {
-            get => (uint) Data.GetInt32(_visibleModelsWhenFlagOffOffsetAddr);
-            set => Data.SetInt32(_visibleModelsWhenFlagOffOffsetAddr, (int) value);
+            get => Data.GetUInt32(_visibleModelsWhenFlagOffOffsetAddr);
+            set => Data.SetUInt32(_visibleModelsWhenFlagOffOffsetAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_visibleModelsWhenFlagOnOffsetAddr), displayOrder: 2, displayName: "Visible Models (Flag On)", isPointer: true)]
         public uint VisibleModelsWhenFlagOnOffset {
-            get => (uint) Data.GetInt32(_visibleModelsWhenFlagOnOffsetAddr);
-            set => Data.SetInt32(_visibleModelsWhenFlagOnOffsetAddr, (int) value);
+            get => Data.GetUInt32(_visibleModelsWhenFlagOnOffsetAddr);
+            set => Data.SetUInt32(_visibleModelsWhenFlagOnOffsetAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_stateAddr), displayOrder: 3, displayName: "State (set in-game)", displayFormat: "X2")]
         public uint State {
-            get => (uint) Data.GetInt32(_stateAddr);
-            set => Data.SetInt32(_stateAddr, (int) value);
+            get => Data.GetUInt32(_stateAddr);
+            set => Data.SetUInt32(_stateAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "State (in editor)")]
