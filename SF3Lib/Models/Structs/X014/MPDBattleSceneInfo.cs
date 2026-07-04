@@ -39,7 +39,7 @@ namespace SF3.Models.Structs.X014 {
         [TableViewModelColumn(addressField: nameof(_skyIdAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public ushort SkyID {
-            get => (ushort) Data.GetUInt16(_skyIdAddr);
+            get => Data.GetUInt16(_skyIdAddr);
             set => Data.SetUInt16(_skyIdAddr, value);
         }
 
@@ -60,7 +60,7 @@ namespace SF3.Models.Structs.X014 {
         [TableViewModelColumn(addressField: nameof(_ffffAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public ushort FFFF {
-            get => (ushort) Data.GetUInt16(_ffffAddr);
+            get => Data.GetUInt16(_ffffAddr);
             set => Data.SetUInt16(_ffffAddr, value);
         }
     }

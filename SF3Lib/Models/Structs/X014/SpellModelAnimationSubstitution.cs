@@ -29,14 +29,14 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.Spell)]
         [BulkCopy]
         public byte SpellID {
-            get => (byte) Data.GetUInt8(_spellIdAddr);
+            get => Data.GetUInt8(_spellIdAddr);
             set => Data.SetUInt8(_spellIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_spellLvAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public byte SpellLv {
-            get => (byte) Data.GetUInt8(_spellLvAddr);
+            get => Data.GetUInt8(_spellLvAddr);
             set => Data.SetUInt8(_spellLvAddr, value);
         }
 

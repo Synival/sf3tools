@@ -28,14 +28,14 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_spellLevelAddr), displayOrder: 1, displayFormat: "X2")]
         public byte SpellLevel {
-            get => (byte) Data.GetUInt8(_spellLevelAddr);
+            get => Data.GetUInt8(_spellLevelAddr);
             set => Data.SetUInt8(_spellLevelAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_subAnimationAddr), displayOrder: 2, displayFormat: "X2")]
         public byte SubAnimation {
-            get => (byte) Data.GetUInt8(_subAnimationAddr);
+            get => Data.GetUInt8(_subAnimationAddr);
             set => Data.SetUInt8(_subAnimationAddr, value);
         }
 

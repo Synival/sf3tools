@@ -31,8 +31,8 @@ namespace SF3.Models.Structs.X014 {
         [TableViewModelColumn(addressField: nameof(_modelFileUnknownHeaderAddrAddr), displayOrder: 1, displayFormat: "X8", minWidth: 75)]
         [BulkCopy]
         public uint ModelFileUnknownHeaderAddr {
-            get => (uint) Data.GetInt32(_modelFileUnknownHeaderAddrAddr);
-            set => Data.SetInt32(_modelFileUnknownHeaderAddrAddr, (int) value);
+            get => Data.GetUInt32(_modelFileUnknownHeaderAddrAddr);
+            set => Data.SetUInt32(_modelFileUnknownHeaderAddrAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 2)]
