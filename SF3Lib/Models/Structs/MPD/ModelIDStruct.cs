@@ -11,7 +11,7 @@ namespace SF3.Models.Structs.MPD {
 
         [TableViewModelColumn(addressField: nameof(_modelIdAddr), displayOrder: 0, displayName: "ModelID", displayFormat: "X4")]
         public ushort ModelID {
-            get => (ushort) Data.GetUInt16(_modelIdAddr);
+            get => Data.GetUInt16(_modelIdAddr);
             set => Data.SetUInt16(_modelIdAddr, value);
         }
     }

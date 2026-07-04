@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         }
 
         public byte this[int x, int y] {
-            get => (byte) Data.GetUInt8(heightAddresses[x, y]);
+            get => Data.GetUInt8(heightAddresses[x, y]);
             set => Data.SetUInt8(heightAddresses[x, y], value);
         }
 
