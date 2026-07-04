@@ -46,131 +46,131 @@ namespace SF3.ByteData {
         /// <summary>
         /// Gets the value of 1, 2, 3 or 4 contiguous bytes at an address.
         /// </summary>
-        /// <param name="location">The address of the data.</param>
+        /// <param name="offset">The address of the data.</param>
         /// <returns>Sum of all bytes (earlier byte = higher byte).</returns>
-        uint GetData(int location, int bytes);
+        uint GetData(int offset, int bytes);
 
         /// <summary>
         /// Gets the value of a byte at a location.
         /// </summary>
-        /// <param name="location">The address of the byte.</param>
-        int GetByte(int location);
+        /// <param name="offset">The address of the byte.</param>
+        int GetByte(int offset);
 
         /// <summary>
         /// Gets the value of a 16-bit integer at a location.
         /// </summary>
-        /// <param name="location">The address of the 16-bit integer.</param>
-        int GetWord(int location);
+        /// <param name="offset">The address of the 16-bit integer.</param>
+        int GetWord(int offset);
 
         /// <summary>
         /// Gets the value of a 32-bit integer at a location.
         /// </summary>
-        /// <param name="location">The address of the 32-bit integer.</param>
-        int GetDouble(int location);
+        /// <param name="offset">The address of the 32-bit integer.</param>
+        int GetDouble(int offset);
 
         /// <summary>
         /// Gets the value of a 16-bit compressed FIXED at a location.
         /// </summary>
-        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
-        CompressedFIXED GetCompressedFIXED(int location);
+        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
+        CompressedFIXED GetCompressedFIXED(int offset);
 
         /// <summary>
         /// Gets the value of a 16-bit compressed FIXED at a location.
         /// These numbers are 'weird' because the highest bit with the sign is moved
         /// to the *opposite* side.
         /// </summary>
-        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
-        CompressedFIXED GetWeirdCompressedFIXED(int location);
+        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
+        CompressedFIXED GetWeirdCompressedFIXED(int offset);
 
         /// <summary>
         /// Gets the value of a 32-bit FIXED at a location.
         /// </summary>
-        /// <param name="location">The address of the 32-bit FIXED.</param>
-        FIXED GetFIXED(int location);
+        /// <param name="offset">The address of the 32-bit FIXED.</param>
+        FIXED GetFIXED(int offset);
 
         /// <summary>
         /// Returns the value of string data of a specific size at a location.
         /// </summary>
-        /// <param name="location">The address of the string.</param>
+        /// <param name="offset">The address of the string.</param>
         /// <param name="length">The length of the string space.</param>
-        string GetString(int location, int length);
+        string GetString(int offset, int length);
 
         /// <summary>
         /// Returns the value of a single bit of a byte at a location.
         /// </summary>
-        /// <param name="location">The address of the byte containing the bit.</param>
+        /// <param name="offset">The address of the byte containing the bit.</param>
         /// <param name="bit">The position of the bit, in range (1, 8).</param>
         /// <returns>True if the bit is set, false if the bit is unset.</returns>
-        bool GetBit(int location, int bit);
+        bool GetBit(int offset, int bit);
 
         /// <summary>
         /// Sets the value of data with 1, 2, 3, or 4 bytes at an address.
         /// </summary>
-        /// <param name="location">The address of the data.</param>
+        /// <param name="offset">The address of the data.</param>
         /// <param name="value">The new value of the data (sized for the maximum number of bytes).</param>
         /// <param name="bytes">The number of bytes to store.</param>
-        void SetData(int location, uint value, int bytes);
+        void SetData(int offset, uint value, int bytes);
 
         /// <summary>
         /// Sets the value of a byte at a location.
         /// </summary>
-        /// <param name="location">The address of the byte.</param>
+        /// <param name="offset">The address of the byte.</param>
         /// <param name="value">The new value of the byte.</param>
-        void SetByte(int location, byte value);
+        void SetByte(int offset, byte value);
 
         /// <summary>
         /// Sets the value of a 16-bit integer at a location.
         /// </summary>
-        /// <param name="location">The address of the 16-bit integer.</param>
+        /// <param name="offset">The address of the 16-bit integer.</param>
         /// <param name="value">The new value of the 16-bit integer.</param>
-        void SetWord(int location, int value);
+        void SetWord(int offset, int value);
 
         /// <summary>
         /// Sets the value of 32-bit integer at a location.
         /// </summary>
-        /// <param name="location">The address of the 32-bit integer.</param>
+        /// <param name="offset">The address of the 32-bit integer.</param>
         /// <param name="value">The new value of the 32-bit integer.</param>
-        void SetDouble(int location, int value);
+        void SetDouble(int offset, int value);
 
         /// <summary>
         /// Sets the value of a 16-bit compressed FIXED at a location.
         /// </summary>
-        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
+        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
         /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
-        void SetCompressedFIXED(int location, CompressedFIXED value);
+        void SetCompressedFIXED(int offset, CompressedFIXED value);
 
         /// <summary>
         /// Sets the value of a 16-bit compressed FIXED at a location.
         /// These numbers are 'weird' because the highest bit with the sign is moved
         /// to the *opposite* side.
         /// </summary>
-        /// <param name="location">The address of the 16-bit compressed FIXED.</param>
+        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
         /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
-        void SetWeirdCompressedFIXED(int location, CompressedFIXED value);
+        void SetWeirdCompressedFIXED(int offset, CompressedFIXED value);
 
         /// <summary>
         /// Sets the value of a 32-bit FIXED at a location.
         /// </summary>
-        /// <param name="location">The address of the 32-bit FIXED.</param>
+        /// <param name="offset">The address of the 32-bit FIXED.</param>
         /// <param name="value">The new value of the 32-bit FIXED.</param>
-        void SetFIXED(int location, FIXED value);
+        void SetFIXED(int offset, FIXED value);
 
         /// <summary>
         /// Sets the value of string data of a specific size at a location.
         /// Data set will not exceed the length provided, and remaining bytes are automatically filled with zeros.
         /// </summary>
-        /// <param name="location">The address of the string.</param>
+        /// <param name="offset">The address of the string.</param>
         /// <param name="length">The length of the string space.</param>
         /// <param name="value">The new value of the string.</param>
-        void SetString(int location, int length, string value);
+        void SetString(int offset, int length, string value);
 
         /// <summary>
         /// Sets the value of a single bit of a byte at a location.
         /// </summary>
-        /// <param name="location">The address of the byte containing the bit.</param>
+        /// <param name="offset">The address of the byte containing the bit.</param>
         /// <param name="bit">The position of the bit, in range (1, 8).</param>
         /// <param name="value">The new value of the bit.</param>
-        void SetBit(int location, int bit, bool value);
+        void SetBit(int offset, int bit, bool value);
 
         /// <summary>
         /// Makes any pending changes necessary before data should be saved.

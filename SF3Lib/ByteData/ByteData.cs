@@ -78,102 +78,102 @@ namespace SF3.ByteData {
         public byte[] GetDataCopyOrReference() => Data.GetDataCopyOrReference();
         public byte[] GetDataCopyAt(int offset, int length) => Data.GetDataCopyAt(offset, length);
 
-        public uint GetData(int location, int bytes) {
-            if (location < 0)
-                throw new ArgumentOutOfRangeException(nameof(location));
+        public uint GetData(int offset, int bytes) {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (bytes < 1 || bytes > 4)
                 throw new ArgumentOutOfRangeException(nameof(bytes));
-            if (location + bytes > Data.Length)
-                throw new ArgumentOutOfRangeException(nameof(location) + " + " + nameof(bytes));
+            if (offset + bytes > Data.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset) + " + " + nameof(bytes));
 
             uint value = 0;
             for (var i = 0; i < bytes; i++)
-                value += (uint) Data[location + i] << (bytes - i - 1) * 8;
+                value += (uint) Data[offset + i] << (bytes - i - 1) * 8;
             return value;
         }
 
-        public int GetByte(int location) => (int) GetData(location, 1);
-        public int GetWord(int location) => (int) GetData(location, 2);
-        public int GetDouble(int location) => (int) GetData(location, 4);
+        public int GetByte(int offset) => (int) GetData(offset, 1);
+        public int GetWord(int offset) => (int) GetData(offset, 2);
+        public int GetDouble(int offset) => (int) GetData(offset, 4);
 
-        public CompressedFIXED GetCompressedFIXED(int location) => new CompressedFIXED((short) GetWord(location));
-        public CompressedFIXED GetWeirdCompressedFIXED(int location) => new CompressedFIXED((ushort) GetWord(location), isWeird: true);
+        public CompressedFIXED GetCompressedFIXED(int offset) => new CompressedFIXED((short) GetWord(offset));
+        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => new CompressedFIXED((ushort) GetWord(offset), isWeird: true);
 
-        public FIXED GetFIXED(int location) => new FIXED(GetDouble(location), true);
+        public FIXED GetFIXED(int offset) => new FIXED(GetDouble(offset), true);
 
-        public string GetString(int location, int length) {
+        public string GetString(int offset, int length) {
             var value = new byte[length];
             for (var i = 0; i < length; i++) {
-                if (Data[location + i] == 0x0)
+                if (Data[offset + i] == 0x0)
                     break;
-                value[i] = Data[location + i];
+                value[i] = Data[offset + i];
             }
             var InputText = Encoding.GetEncoding("shift-jis");
             return InputText.GetString(value);
         }
 
-        public void SetData(int location, uint value, int bytes) {
-            if (location < 0)
-                throw new ArgumentOutOfRangeException(nameof(location));
+        public void SetData(int offset, uint value, int bytes) {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (bytes < 1 || bytes > 4)
                 throw new ArgumentOutOfRangeException(nameof(bytes));
-            if (location + bytes > Data.Length)
-                throw new ArgumentOutOfRangeException(nameof(location) + " + " + nameof(bytes));
+            if (offset + bytes > Data.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset) + " + " + nameof(bytes));
 
             var converted = BitConverter.GetBytes(value);
 
             for (var i = 0; i < bytes; i++) {
                 var b = converted[bytes - i - 1];
-                Data[location + i] = b;
+                Data[offset + i] = b;
             }
         }
 
-        public void SetByte(int location, byte value) => SetData(location, value, 1);
-        public void SetWord(int location, int value) => SetData(location, (uint) value, 2);
-        public void SetDouble(int location, int value) => SetData(location, (uint) value, 4);
+        public void SetByte(int offset, byte value) => SetData(offset, value, 1);
+        public void SetWord(int offset, int value) => SetData(offset, (uint) value, 2);
+        public void SetDouble(int offset, int value) => SetData(offset, (uint) value, 4);
 
-        public void SetCompressedFIXED(int location, CompressedFIXED value) => SetWord(location, value.RawShort);
-        public void SetWeirdCompressedFIXED(int location, CompressedFIXED value) => SetWord(location, value.WeirdRawShort);
+        public void SetCompressedFIXED(int offset, CompressedFIXED value) => SetWord(offset, value.RawShort);
+        public void SetWeirdCompressedFIXED(int offset, CompressedFIXED value) => SetWord(offset, value.WeirdRawShort);
 
-        public void SetFIXED(int location, FIXED value) => SetDouble(location, value.RawInt);
+        public void SetFIXED(int offset, FIXED value) => SetDouble(offset, value.RawInt);
 
-        public void SetString(int location, int length, string value) {
+        public void SetString(int offset, int length, string value) {
             var encoding = Encoding.GetEncoding("shift-jis");
             var bytes = encoding.GetBytes(value);
 
             for (var i = 0; i < bytes.Length; i++)
-                Data[location + i] = bytes[i];
+                Data[offset + i] = bytes[i];
 
             if (bytes.Length < length)
                 for (var i = bytes.Length; i < length; i++)
-                    Data[location + i] = 0x00;
+                    Data[offset + i] = 0x00;
         }
 
-        public bool GetBit(int location, int bit) {
-            if (location < 0)
-                throw new ArgumentOutOfRangeException(nameof(location));
+        public bool GetBit(int offset, int bit) {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (bit < 1 || bit > 8)
                 throw new ArgumentOutOfRangeException(nameof(bit));
-            if (location >= Data.Length)
-                throw new ArgumentOutOfRangeException(nameof(location));
+            if (offset >= Data.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
 
-            return (Data[location] >> bit - 1 & 0x01) == 1 ? true : false;
+            return (Data[offset] >> bit - 1 & 0x01) == 1 ? true : false;
         }
 
-        public void SetBit(int location, int bit, bool value) {
-            if (location < 0)
-                throw new ArgumentOutOfRangeException(nameof(location));
+        public void SetBit(int offset, int bit, bool value) {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
             if (bit < 1 || bit > 8)
                 throw new ArgumentOutOfRangeException(nameof(bit));
-            if (location >= Data.Length)
-                throw new ArgumentOutOfRangeException(nameof(location));
+            if (offset >= Data.Length)
+                throw new ArgumentOutOfRangeException(nameof(offset));
 
             var bitmask = (byte)(1 << bit - 1);
 
             if (value)
-                Data[location] |= bitmask;
+                Data[offset] |= bitmask;
             else
-                Data[location] &= (byte) ~bitmask;
+                Data[offset] &= (byte) ~bitmask;
         }
 
         public virtual bool OnFinish() => true;
