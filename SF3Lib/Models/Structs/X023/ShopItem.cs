@@ -15,8 +15,8 @@ namespace SF3.Models.Structs.X023 {
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public int Item {
-            get => Data.GetDouble(_itemAddr);
-            set => Data.SetDouble(_itemAddr, value);
+            get => Data.GetInt32(_itemAddr);
+            set => Data.SetInt32(_itemAddr, value);
         }
     }
 }

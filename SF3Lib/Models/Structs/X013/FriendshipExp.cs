@@ -21,36 +21,36 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_sLvl0Addr), displayOrder: 0, displayName: "Ally")]
         [BulkCopy]
         public int SLvl0_Ally {
-            get => Data.GetByte(_sLvl0Addr);
-            set => Data.SetByte(_sLvl0Addr, (byte) value);
+            get => Data.GetUInt8(_sLvl0Addr);
+            set => Data.SetUInt8(_sLvl0Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvl1Addr), displayOrder: 0, displayName: "Partner")]
         [BulkCopy]
         public int SLvl1_Partner {
-            get => Data.GetByte(_sLvl1Addr);
-            set => Data.SetByte(_sLvl1Addr, (byte) value);
+            get => Data.GetUInt8(_sLvl1Addr);
+            set => Data.SetUInt8(_sLvl1Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvl2Addr), displayOrder: 0, displayName: "Friend")]
         [BulkCopy]
         public int SLvl2_Friend {
-            get => Data.GetByte(_sLvl2Addr);
-            set => Data.SetByte(_sLvl2Addr, (byte) value);
+            get => Data.GetUInt8(_sLvl2Addr);
+            set => Data.SetUInt8(_sLvl2Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvl3Addr), displayOrder: 0, displayName: "Trusted")]
         [BulkCopy]
         public int SLvl3_Trusted {
-            get => Data.GetByte(_sLvl3Addr);
-            set => Data.SetByte(_sLvl3Addr, (byte) value);
+            get => Data.GetUInt8(_sLvl3Addr);
+            set => Data.SetUInt8(_sLvl3Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sLvl4Addr), displayOrder: 0, displayName: "Soulmate")]
         [BulkCopy]
         public int SLvl4_Soulmate {
-            get => Data.GetByte(_sLvl4Addr);
-            set => Data.SetByte(_sLvl4Addr, (byte) value);
+            get => Data.GetUInt8(_sLvl4Addr);
+            set => Data.SetUInt8(_sLvl4Addr, (byte) value);
         }
     }
 }

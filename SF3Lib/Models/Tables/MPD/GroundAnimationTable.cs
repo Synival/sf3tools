@@ -10,7 +10,7 @@ namespace SF3.Models.Tables.MPD {
         }
 
         public static int GetRealAddress(IByteData data, int address, int? readUntil) {
-            return (readUntil.HasValue && readUntil - address > 1 && data.GetByte(address) == 0xFF && data.GetByte(readUntil.Value - 1) == 0xFF)
+            return (readUntil.HasValue && readUntil - address > 1 && data.GetUInt8(address) == 0xFF && data.GetUInt8(readUntil.Value - 1) == 0xFF)
                 ? address + 1 : address;
         }
 

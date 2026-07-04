@@ -43,96 +43,96 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_earthBonusAddr), displayOrder: 0)]
         [BulkCopy]
         public int EarthBonus {
-            get => Has32BitValues ? Data.GetDouble(_earthBonusAddr) : (sbyte) Data.GetByte(_earthBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_earthBonusAddr) : (sbyte) Data.GetUInt8(_earthBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_earthBonusAddr, value);
+                    Data.SetInt32(_earthBonusAddr, value);
                 else
-                    Data.SetByte(_earthBonusAddr, (byte) value);
+                    Data.SetUInt8(_earthBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_fireBonusAddr), displayOrder: 1)]
         [BulkCopy]
         public int FireBonus {
-            get => Has32BitValues ? Data.GetDouble(_fireBonusAddr) : (sbyte) Data.GetByte(_fireBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_fireBonusAddr) : (sbyte) Data.GetUInt8(_fireBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_fireBonusAddr, value);
+                    Data.SetInt32(_fireBonusAddr, value);
                 else
-                    Data.SetByte(_fireBonusAddr, (byte) value);
+                    Data.SetUInt8(_fireBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_iceBonusAddr), displayOrder: 2)]
         [BulkCopy]
         public int IceBonus {
-            get => Has32BitValues ? Data.GetDouble(_iceBonusAddr) : (sbyte) Data.GetByte(_iceBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_iceBonusAddr) : (sbyte) Data.GetUInt8(_iceBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_iceBonusAddr, value);
+                    Data.SetInt32(_iceBonusAddr, value);
                 else
-                    Data.SetByte(_iceBonusAddr, (byte) value);
+                    Data.SetUInt8(_iceBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_sparkBonusAddr), displayOrder: 3)]
         [BulkCopy]
         public int SparkBonus {
-            get => Has32BitValues ? Data.GetDouble(_sparkBonusAddr) : (sbyte) Data.GetByte(_sparkBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_sparkBonusAddr) : (sbyte) Data.GetUInt8(_sparkBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_sparkBonusAddr, value);
+                    Data.SetInt32(_sparkBonusAddr, value);
                 else
-                    Data.SetByte(_sparkBonusAddr, (byte) value);
+                    Data.SetUInt8(_sparkBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_windBonusAddr), displayOrder: 4)]
         [BulkCopy]
         public int WindBonus {
-            get => Has32BitValues ? Data.GetDouble(_windBonusAddr) : (sbyte) Data.GetByte(_windBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_windBonusAddr) : (sbyte) Data.GetUInt8(_windBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_windBonusAddr, value);
+                    Data.SetInt32(_windBonusAddr, value);
                 else
-                    Data.SetByte(_windBonusAddr, (byte) value);
+                    Data.SetUInt8(_windBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_lightBonusAddr), displayOrder: 5)]
         [BulkCopy]
         public int LightBonus {
-            get => Has32BitValues ? Data.GetDouble(_lightBonusAddr) : (sbyte) Data.GetByte(_lightBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_lightBonusAddr) : (sbyte) Data.GetUInt8(_lightBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_lightBonusAddr, value);
+                    Data.SetInt32(_lightBonusAddr, value);
                 else
-                    Data.SetByte(_lightBonusAddr, (byte) value);
+                    Data.SetUInt8(_lightBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_darkBonusAddr), displayOrder: 6)]
         [BulkCopy]
         public int DarkBonus {
-            get => Has32BitValues ? Data.GetDouble(_darkBonusAddr) : (sbyte) Data.GetByte(_darkBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_darkBonusAddr) : (sbyte) Data.GetUInt8(_darkBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_darkBonusAddr, value);
+                    Data.SetInt32(_darkBonusAddr, value);
                 else
-                    Data.SetByte(_darkBonusAddr, (byte) value);
+                    Data.SetUInt8(_darkBonusAddr, (byte) value);
             }
         }
 
         [TableViewModelColumn(addressField: nameof(_unknownBonusAddr), displayOrder: 7)]
         [BulkCopy]
         public int UnknownBonus {
-            get => Has32BitValues ? Data.GetDouble(_unknownBonusAddr) : (sbyte) Data.GetByte(_unknownBonusAddr);
+            get => Has32BitValues ? Data.GetInt32(_unknownBonusAddr) : (sbyte) Data.GetUInt8(_unknownBonusAddr);
             set {
                 if (Has32BitValues)
-                    Data.SetDouble(_unknownBonusAddr, value);
+                    Data.SetInt32(_unknownBonusAddr, value);
                 else
-                    Data.SetByte(_unknownBonusAddr, (byte) value);
+                    Data.SetUInt8(_unknownBonusAddr, (byte) value);
             }
         }
     }

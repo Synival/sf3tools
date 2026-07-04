@@ -20,8 +20,8 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_pointerAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int Pointer {
-            get => Data.GetDouble(_pointerAddr);
-            set => Data.SetDouble(_pointerAddr, value);
+            get => Data.GetInt32(_pointerAddr);
+            set => Data.SetInt32(_pointerAddr, value);
         }
 
         private void UpdateWarps() {

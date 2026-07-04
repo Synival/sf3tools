@@ -36,7 +36,7 @@ namespace SF3.Models.Files.X012 {
                 ClassTargetPriorityTables = new ClassTargetPriorityTable[16];
                 var tablePointerAddr = 0xB7AC;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetDouble(tablePointerAddr) - RamAddress;
+                    var tableAddr = Data.GetInt32(tablePointerAddr) - RamAddress;
                     var tableName = $"{nameof(ClassTargetPriorityTable)} 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(ClassTargetPriorityTables[i] = ClassTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
@@ -45,7 +45,7 @@ namespace SF3.Models.Files.X012 {
                 ClassAttackScoreBonusTables = new ClassAttackScoreBonusTable[16];
                 tablePointerAddr = 0xB8DC;
                 for (int i = 0; i < 16; i++) {
-                    var tableAddr = Data.GetDouble(tablePointerAddr) - RamAddress;
+                    var tableAddr = Data.GetInt32(tablePointerAddr) - RamAddress;
                     var tableName = $"{nameof(ClassAttackScoreBonusTable)} 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(ClassAttackScoreBonusTables[i] = ClassAttackScoreBonusTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;

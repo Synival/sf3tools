@@ -50,139 +50,139 @@ namespace SF3.Models.Structs.Shared {
         [BulkCopy]
         [NameGetter(NamedValueType.Character)]
         public int CharacterID {
-            get => Data.GetByte(_characterIdAddr);
-            set => Data.SetByte(_characterIdAddr, (byte) value);
+            get => Data.GetUInt8(_characterIdAddr);
+            set => Data.SetUInt8(_characterIdAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_characterClassAddr), displayOrder: 1, displayName: "Class", minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.CharacterClass)]
         public int CharacterClass {
-            get => Data.GetByte(_characterClassAddr);
-            set => Data.SetByte(_characterClassAddr, (byte) value);
+            get => Data.GetUInt8(_characterClassAddr);
+            set => Data.SetUInt8(_characterClassAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_levelAddr), displayOrder: 2)]
         [BulkCopy]
         public int Level {
-            get => Data.GetByte(_levelAddr);
-            set => Data.SetByte(_levelAddr, (byte) value);
+            get => Data.GetUInt8(_levelAddr);
+            set => Data.SetUInt8(_levelAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_sexAddr), displayOrder: 3, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Sex)]
         public int Sex {
-            get => Data.GetByte(_sexAddr);
-            set => Data.SetByte(_sexAddr, (byte) value);
+            get => Data.GetUInt8(_sexAddr);
+            set => Data.SetUInt8(_sexAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weaponAddr), displayOrder: 4, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort Weapon {
-            get => Data.GetWord(_weaponAddr);
-            set => Data.SetWord(_weaponAddr, value);
+            get => Data.GetUInt16(_weaponAddr);
+            set => Data.SetUInt16(_weaponAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_accessoryAddr), displayOrder: 5, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort Accessory {
-            get => Data.GetWord(_accessoryAddr);
-            set => Data.SetWord(_accessoryAddr, value);
+            get => Data.GetUInt16(_accessoryAddr);
+            set => Data.SetUInt16(_accessoryAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_item1Addr), displayOrder: 6, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort Item1 {
-            get => Data.GetWord(_item1Addr);
-            set => Data.SetWord(_item1Addr, value);
+            get => Data.GetUInt16(_item1Addr);
+            set => Data.SetUInt16(_item1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_item2Addr), displayOrder: 7, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort Item2 {
-            get => Data.GetWord(_item2Addr);
-            set => Data.SetWord(_item2Addr, value);
+            get => Data.GetUInt16(_item2Addr);
+            set => Data.SetUInt16(_item2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_item3Addr), displayOrder: 8, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort Item3 {
-            get => Data.GetWord(_item3Addr);
-            set => Data.SetWord(_item3Addr, value);
+            get => Data.GetUInt16(_item3Addr);
+            set => Data.SetUInt16(_item3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_item4Addr), displayOrder: 9, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort Item4 {
-            get => Data.GetWord(_item4Addr);
-            set => Data.SetWord(_item4Addr, value);
+            get => Data.GetUInt16(_item4Addr);
+            set => Data.SetUInt16(_item4Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon1TypeAddr), displayOrder: 10, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon1Type {
-            get => Data.GetByte(_weapon1TypeAddr);
-            set => Data.SetByte(_weapon1TypeAddr, (byte) value);
+            get => Data.GetUInt8(_weapon1TypeAddr);
+            set => Data.SetUInt8(_weapon1TypeAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon1ExpAddr), displayOrder: 11)]
         [BulkCopy]
         public ushort Weapon1Exp {
-            get => Data.GetWord(_weapon1ExpAddr);
-            set => Data.SetWord(_weapon1ExpAddr, value);
+            get => Data.GetUInt16(_weapon1ExpAddr);
+            set => Data.SetUInt16(_weapon1ExpAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon2TypeAddr), displayOrder: 12, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon2Type {
-            get => Data.GetByte(_weapon2TypeAddr);
-            set => Data.SetByte(_weapon2TypeAddr, (byte) value);
+            get => Data.GetUInt8(_weapon2TypeAddr);
+            set => Data.SetUInt8(_weapon2TypeAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon2ExpAddr), displayOrder: 13)]
         [BulkCopy]
         public ushort Weapon2Exp {
-            get => Data.GetWord(_weapon2ExpAddr);
-            set => Data.SetWord(_weapon2ExpAddr, value);
+            get => Data.GetUInt16(_weapon2ExpAddr);
+            set => Data.SetUInt16(_weapon2ExpAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon3TypeAddr), displayOrder: 14, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon3Type {
-            get => Data.GetByte(_weapon3TypeAddr);
-            set => Data.SetByte(_weapon3TypeAddr, (byte) value);
+            get => Data.GetUInt8(_weapon3TypeAddr);
+            set => Data.SetUInt8(_weapon3TypeAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon3ExpAddr), displayOrder: 15)]
         [BulkCopy]
         public ushort Weapon3Exp {
-            get => Data.GetWord(_weapon3ExpAddr);
-            set => Data.SetWord(_weapon3ExpAddr, value);
+            get => Data.GetUInt16(_weapon3ExpAddr);
+            set => Data.SetUInt16(_weapon3ExpAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon4TypeAddr), displayOrder: 16, minWidth: 120, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.WeaponType)]
         public int Weapon4Type {
-            get => Data.GetByte(_weapon4TypeAddr);
-            set => Data.SetByte(_weapon4TypeAddr, (byte) value);
+            get => Data.GetUInt8(_weapon4TypeAddr);
+            set => Data.SetUInt8(_weapon4TypeAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_weapon4ExpAddr), displayOrder: 17)]
         [BulkCopy]
         public ushort Weapon4Exp {
-            get => Data.GetWord(_weapon4ExpAddr);
-            set => Data.SetWord(_weapon4ExpAddr, value);
+            get => Data.GetUInt16(_weapon4ExpAddr);
+            set => Data.SetUInt16(_weapon4ExpAddr, value);
         }
     }
 }

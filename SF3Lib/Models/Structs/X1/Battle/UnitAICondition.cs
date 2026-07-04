@@ -19,29 +19,29 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_zoneAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public byte Zone {
-            get => (byte) Data.GetByte(_zoneAddr);
-            set => Data.SetByte(_zoneAddr, value);
+            get => (byte) Data.GetUInt8(_zoneAddr);
+            set => Data.SetUInt8(_zoneAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte OrderFlags {
-            get => (byte) Data.GetByte(_typeAddr);
-            set => Data.SetByte(_typeAddr, value);
+            get => (byte) Data.GetUInt8(_typeAddr);
+            set => Data.SetUInt8(_typeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_offAiIndexAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public byte OffAIIndex {
-            get => (byte) Data.GetByte(_offAiIndexAddr);
-            set => Data.SetByte(_offAiIndexAddr, value);
+            get => (byte) Data.GetUInt8(_offAiIndexAddr);
+            set => Data.SetUInt8(_offAiIndexAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_onAiIndexAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public byte OnAIIndex {
-            get => (byte) Data.GetByte(_onAiIndexAddr);
-            set => Data.SetByte(_onAiIndexAddr, value);
+            get => (byte) Data.GetUInt8(_onAiIndexAddr);
+            set => Data.SetUInt8(_onAiIndexAddr, value);
         }
 
         public bool AlwaysCheck => (Zone & 0x80) != 0;

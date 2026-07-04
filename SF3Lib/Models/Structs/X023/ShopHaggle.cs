@@ -17,16 +17,16 @@ namespace SF3.Models.Structs.X023 {
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public int Item {
-            get => Data.GetDouble(_itemAddr);
-            set => Data.SetDouble(_itemAddr, value);
+            get => Data.GetInt32(_itemAddr);
+            set => Data.SetInt32(_itemAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 1, addressField: nameof(_flagAddr), minWidth: 250)]
         [NameGetter(NamedValueType.GameFlag)]
         [BulkCopy]
         public int Flag {
-            get => Data.GetDouble(_flagAddr);
-            set => Data.SetDouble(_flagAddr, value);
+            get => Data.GetInt32(_flagAddr);
+            set => Data.SetInt32(_flagAddr, value);
         }
     }
 }

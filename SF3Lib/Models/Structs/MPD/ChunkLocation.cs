@@ -18,8 +18,8 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_chunkAddressAddr), displayName: "Chunk RAM Address", isPointer: true, displayOrder: 0)]
         public int ChunkRAMAddress {
-            get => Data.GetDouble(_chunkAddressAddr);
-            set => Data.SetDouble(_chunkAddressAddr, value);
+            get => Data.GetInt32(_chunkAddressAddr);
+            set => Data.SetInt32(_chunkAddressAddr, value);
         }
 
         [BulkCopy]
@@ -35,8 +35,8 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_chunkSizeAddr), displayName: "Chunk Size", displayFormat: "X4", displayOrder: 1)]
         public int ChunkSize {
-            get => Data.GetDouble(_chunkSizeAddr);
-            set => Data.SetDouble(_chunkSizeAddr, value);
+            get => Data.GetInt32(_chunkSizeAddr);
+            set => Data.SetInt32(_chunkSizeAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayName: "Exists", displayOrder: 2)]

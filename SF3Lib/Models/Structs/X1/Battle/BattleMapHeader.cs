@@ -21,36 +21,36 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_numUnitsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public ushort NumUnits {
-            get => Data.GetWord(_numUnitsAddr);
-            set => Data.SetWord(_numUnitsAddr, value);
+            get => Data.GetUInt16(_numUnitsAddr);
+            set => Data.SetUInt16(_numUnitsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numZonesAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public ushort NumZones {
-            get => Data.GetWord(_numZonesAddr);
-            set => Data.SetWord(_numZonesAddr, value);
+            get => Data.GetUInt16(_numZonesAddr);
+            set => Data.SetUInt16(_numZonesAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numLocationsAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public ushort NumLocations {
-            get => Data.GetWord(_numLocationsAddr);
-            set => Data.SetWord(_numLocationsAddr, value);
+            get => Data.GetUInt16(_numLocationsAddr);
+            set => Data.SetUInt16(_numLocationsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numPathsAddr), displayOrder: 7, displayFormat: "X2")]
         [BulkCopy]
         public ushort NumPaths {
-            get => Data.GetWord(_numPathsAddr);
-            set => Data.SetWord(_numPathsAddr, value);
+            get => Data.GetUInt16(_numPathsAddr);
+            set => Data.SetUInt16(_numPathsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_numMapMoveCoordsAddr), displayOrder: 8, displayFormat: "X2")]
         [BulkCopy]
         public int NumMapMoveCoords {
-            get => Data.GetWord(_numMapMoveCoordsAddr);
-            set => Data.SetWord(_numMapMoveCoordsAddr, (byte) value);
+            get => Data.GetUInt16(_numMapMoveCoordsAddr);
+            set => Data.SetUInt16(_numMapMoveCoordsAddr, (byte) value);
         }
     }
 }

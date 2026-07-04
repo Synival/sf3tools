@@ -17,8 +17,8 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_valueAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte Value {
-            get => (byte) Data.GetByte(_valueAddr);
-            set => Data.SetByte(_valueAddr, value);
+            get => (byte) Data.GetUInt8(_valueAddr);
+            set => Data.SetUInt8(_valueAddr, value);
         }
     }
 }

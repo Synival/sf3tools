@@ -19,8 +19,8 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [TableViewModelColumn(addressField: nameof(_fileIdAddr), displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         public int FileId {
-            get => Data.GetDouble(_fileIdAddr);
-            set => Data.SetDouble(_fileIdAddr, value);
+            get => Data.GetInt32(_fileIdAddr);
+            set => Data.SetInt32(_fileIdAddr, value);
         }
     }
 }

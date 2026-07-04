@@ -15,15 +15,15 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_expCheckAddr), displayOrder: 0, displayName: "Checked Value")]
         [BulkCopy]
         public int ExpCheck {
-            get => Data.GetByte(_expCheckAddr);
-            set => Data.SetByte(_expCheckAddr, (byte) value);
+            get => Data.GetUInt8(_expCheckAddr);
+            set => Data.SetUInt8(_expCheckAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_expReplacementAddr), displayOrder: 1, displayName: "Replaced Value")]
         [BulkCopy]
         public int ExpReplacement {
-            get => Data.GetByte(_expReplacementAddr);
-            set => Data.SetByte(_expReplacementAddr, (byte) value);
+            get => Data.GetUInt8(_expReplacementAddr);
+            set => Data.SetUInt8(_expReplacementAddr, (byte) value);
         }
     }
 }

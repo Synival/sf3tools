@@ -27,8 +27,8 @@ namespace SF3.Models.Structs.DAT {
         protected override void OnImageUpdated() {}
 
         protected override int StructImageDataOffset {
-            get => Data.GetDouble(_imageDataOffsetAddr);
-            set => Data.SetDouble(_imageDataOffsetAddr, value);
+            get => Data.GetInt32(_imageDataOffsetAddr);
+            set => Data.SetInt32(_imageDataOffsetAddr, value);
         }
 
         public override bool HasImage => ImageDataOffset != -1;

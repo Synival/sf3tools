@@ -20,18 +20,18 @@ namespace SF3.Models.Structs.X023 {
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public int Item {
-            get => Data.GetDouble(_itemAddr);
-            set => Data.SetDouble(_itemAddr, value);
+            get => Data.GetInt32(_itemAddr);
+            set => Data.SetInt32(_itemAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 1, addressField: nameof(_flagAddr), minWidth: 250, visibilityProperty: nameof(HasFlag), displayName: "Flag (Scn1,2)")]
         [NameGetter(NamedValueType.GameFlag)]
         [BulkCopy]
         public int? Flag {
-            get => HasFlag ? (int?) Data.GetDouble(_flagAddr.Value) : null;
+            get => HasFlag ? (int?) Data.GetInt32(_flagAddr.Value) : null;
             set {
                 if (HasFlag && value.HasValue)
-                    Data.SetDouble(_flagAddr.Value, value.Value);
+                    Data.SetInt32(_flagAddr.Value, value.Value);
             }
         }
     }

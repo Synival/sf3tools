@@ -18,13 +18,13 @@ namespace SF3.Models.Files.MPD {
         public static ScenarioType? DetectScenario(IByteData data) {
             try {
                 // Get addresses we need to check.
-                var headerAddrPtr = data.GetDouble(0x0000) - c_RamAddress;
-                var headerAddr    = data.GetDouble(headerAddrPtr) - c_RamAddress;
+                var headerAddrPtr = data.GetInt32(0x0000) - c_RamAddress;
+                var headerAddr    = data.GetInt32(headerAddrPtr) - c_RamAddress;
 
-                var chunk18Addr   = data.GetDouble(0x2090);
-                var chunk19Addr   = data.GetDouble(0x2098);
-                var texturePaletteAddr = data.GetDouble(headerAddr + 0x0044);
-                var chunk21Addr   = data.GetDouble(0x20A8);
+                var chunk18Addr   = data.GetInt32(0x2090);
+                var chunk19Addr   = data.GetInt32(0x2098);
+                var texturePaletteAddr = data.GetInt32(headerAddr + 0x0044);
+                var chunk21Addr   = data.GetInt32(0x20A8);
 
                 // Determine some things about this MPD file.
                 var hasChunk18  = (chunk18Addr > 0);
@@ -212,7 +212,7 @@ namespace SF3.Models.Files.MPD {
 
             // Mark '**header', '*header', and 'header'.
             MarkAllocatedSpace(usedSpace, 0, 4);                                         // double-pointer to header
-            var headerPtr = Data.GetDouble(0) - 0x290000;                                // pointer to...
+            var headerPtr = Data.GetInt32(0) - 0x290000;                                // pointer to...
             MarkAllocatedSpace(usedSpace, headerPtr, headerPtr + 4);                     //    ...header
             MarkAllocatedSpace(usedSpace, header.Address, header.Address + header.Size); // header
 

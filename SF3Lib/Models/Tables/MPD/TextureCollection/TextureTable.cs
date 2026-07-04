@@ -54,7 +54,7 @@ namespace SF3.Models.Tables.MPD.TextureCollection {
 
                 var nextImageDataOffset = id + 1 >= Size
                     ? Data.Length
-                    : Data.GetWord(address + size + 2);
+                    : Data.GetUInt16(address + size + 2);
 
                 var texId = StartID + id;
                 return new TextureStruct(

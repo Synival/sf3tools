@@ -54,20 +54,20 @@ namespace SF3.ByteData {
         /// Gets the value of a byte at a location.
         /// </summary>
         /// <param name="offset">The address of the byte.</param>
-        byte GetByte(int offset);
+        byte GetUInt8(int offset);
 
         /// <summary>
         /// Gets the value of a 16-bit integer at a location.
         /// </summary>
         /// <param name="offset">The address of the 16-bit integer.</param>
-        ushort GetWord(int offset);
+        ushort GetUInt16(int offset);
         short GetInt16(int offset);
 
         /// <summary>
         /// Gets the value of a 32-bit integer at a location.
         /// </summary>
         /// <param name="offset">The address of the 32-bit integer.</param>
-        int GetDouble(int offset);
+        int GetInt32(int offset);
 
         /// <summary>
         /// Gets the value of a 16-bit compressed FIXED at a location.
@@ -117,14 +117,14 @@ namespace SF3.ByteData {
         /// </summary>
         /// <param name="offset">The address of the byte.</param>
         /// <param name="value">The new value of the byte.</param>
-        void SetByte(int offset, byte value);
+        void SetUInt8(int offset, byte value);
 
         /// <summary>
         /// Sets the value of a 16-bit integer at a location.
         /// </summary>
         /// <param name="offset">The address of the 16-bit integer.</param>
         /// <param name="value">The new value of the 16-bit integer.</param>
-        void SetWord(int offset, ushort value);
+        void SetUInt16(int offset, ushort value);
         void SetInt16(int offset, short value);
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace SF3.ByteData {
         /// </summary>
         /// <param name="offset">The address of the 32-bit integer.</param>
         /// <param name="value">The new value of the 32-bit integer.</param>
-        void SetDouble(int offset, int value);
+        void SetInt32(int offset, int value);
 
         /// <summary>
         /// Sets the value of a 16-bit compressed FIXED at a location.

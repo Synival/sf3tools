@@ -251,24 +251,24 @@ namespace SF3.Models.Structs.KAO {
             var newDataBytes = newData.GetDataCopyOrReference();
 
             // Write the header.
-            newData.SetWord(0x00, (ushort) width);
-            newData.SetWord(0x02, (ushort) height);
+            newData.SetUInt16(0x00, (ushort) width);
+            newData.SetUInt16(0x02, (ushort) height);
 
             // (skip offsets for now)
 
-            newData.SetWord(0x16, (ushort) ((blinkBoundaries == null) ? 0 : blinkBoundaries.Width));
-            newData.SetWord(0x18, (ushort) ((blinkBoundaries == null) ? 0 : blinkBoundaries.Height));
-            newData.SetWord(0x1A, (ushort) ((talkBoundaries  == null) ? 0 : talkBoundaries.Width));
-            newData.SetWord(0x1C, (ushort) ((talkBoundaries  == null) ? 0 : talkBoundaries.Height));
+            newData.SetUInt16(0x16, (ushort) ((blinkBoundaries == null) ? 0 : blinkBoundaries.Width));
+            newData.SetUInt16(0x18, (ushort) ((blinkBoundaries == null) ? 0 : blinkBoundaries.Height));
+            newData.SetUInt16(0x1A, (ushort) ((talkBoundaries  == null) ? 0 : talkBoundaries.Width));
+            newData.SetUInt16(0x1C, (ushort) ((talkBoundaries  == null) ? 0 : talkBoundaries.Height));
 
-            newData.SetByte(0x1E, (byte) ((blinkBoundaries == null) ? 0 : (blinkBoundaries.X1 - (width  - blinkBoundaries.Width)  / 2)));
-            newData.SetByte(0x1F, (byte) ((blinkBoundaries == null) ? 0 : (blinkBoundaries.Y1 - (height - blinkBoundaries.Height) / 2)));
-            newData.SetByte(0x20, (byte) ((talkBoundaries  == null) ? 0 : (talkBoundaries.X1  - (width  - talkBoundaries.Width)   / 2)));
-            newData.SetByte(0x21, (byte) ((talkBoundaries  == null) ? 0 : (talkBoundaries.Y1  - (height - talkBoundaries.Height)  / 2)));
+            newData.SetUInt8(0x1E, (byte) ((blinkBoundaries == null) ? 0 : (blinkBoundaries.X1 - (width  - blinkBoundaries.Width)  / 2)));
+            newData.SetUInt8(0x1F, (byte) ((blinkBoundaries == null) ? 0 : (blinkBoundaries.Y1 - (height - blinkBoundaries.Height) / 2)));
+            newData.SetUInt8(0x20, (byte) ((talkBoundaries  == null) ? 0 : (talkBoundaries.X1  - (width  - talkBoundaries.Width)   / 2)));
+            newData.SetUInt8(0x21, (byte) ((talkBoundaries  == null) ? 0 : (talkBoundaries.Y1  - (height - talkBoundaries.Height)  / 2)));
 
             var paletteMax = Math.Min(0x100, palette.Colors.Length);
             for (int i = 0; i < paletteMax; i++)
-                newData.SetWord(0x22 + i * 2, palette.Colors[i].ToABGR1555());
+                newData.SetUInt16(0x22 + i * 2, palette.Colors[i].ToABGR1555());
 
             int imageDataOffset = 0x222;
             void WriteImageData(byte[,] imageData, DecomposedImageBoundary boundary) {
@@ -282,9 +282,9 @@ namespace SF3.Models.Structs.KAO {
             int headerOffset = 0x04;
             void WriteLayerImage(byte[,] imageData, int? frameRef, DecomposedImageBoundary boundary) {
                 if (frameRef.HasValue)
-                    newData.SetWord(headerOffset, (ushort) -frameRef.Value);
+                    newData.SetUInt16(headerOffset, (ushort) -frameRef.Value);
                 else {
-                    newData.SetWord(headerOffset, (ushort) (imageDataOffset - 0x222));
+                    newData.SetUInt16(headerOffset, (ushort) (imageDataOffset - 0x222));
                     WriteImageData(imageData, boundary);
                 }
                 headerOffset += 0x02;

@@ -17,14 +17,14 @@ namespace SF3.Models.Structs.X1 {
         [NameGetter(NamedValueType.MapUpdateFunc)]
         [TableViewModelColumn(addressField: nameof(_updateSlotAddr), displayOrder: 0, displayFormat: "X2", minWidth: 150)]
         public uint UpdateSlot {
-            get => (uint) Data.GetDouble(_updateSlotAddr);
-            set => Data.SetDouble(_updateSlotAddr, (int) value);
+            get => (uint) Data.GetInt32(_updateSlotAddr);
+            set => Data.SetInt32(_updateSlotAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_functionAddr), displayOrder: 1, isPointer: true)]
         public uint Function {
-            get => (uint) Data.GetDouble(_functionAddr);
-            set => Data.SetDouble(_functionAddr, (int) value);
+            get => (uint) Data.GetInt32(_functionAddr);
+            set => Data.SetInt32(_functionAddr, (int) value);
         }
     }
 }

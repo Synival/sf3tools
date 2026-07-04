@@ -24,44 +24,44 @@ namespace SF3.Models.Structs.X1.Town {
         [TableViewModelColumn(addressField: nameof(_unknown0x00Addr), displayOrder: 0, displayName: "+0x00", displayFormat: "X2")]
         [BulkCopy]
         public ushort Unknown0x00 {
-            get => Data.GetWord(_unknown0x00Addr);
-            set => Data.SetWord(_unknown0x00Addr, value);
+            get => Data.GetUInt16(_unknown0x00Addr);
+            set => Data.SetUInt16(_unknown0x00Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_textIDAddr), displayOrder: 1, displayFormat: "X4")]
         [BulkCopy]
         public ushort TextID {
-            get => Data.GetWord(_textIDAddr);
-            set => Data.SetWord(_textIDAddr, value);
+            get => Data.GetUInt16(_textIDAddr);
+            set => Data.SetUInt16(_textIDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_ifFlagOffAddr), displayOrder: 2, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.GameFlag)]
         public ushort IfFlagOff {
-            get => Data.GetWord(_ifFlagOffAddr);
-            set => Data.SetWord(_ifFlagOffAddr, value);
+            get => Data.GetUInt16(_ifFlagOffAddr);
+            set => Data.SetUInt16(_ifFlagOffAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_pointToWarpMPDAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
         public ushort PointToWarpMPD {
-            get => Data.GetWord(_pointToWarpMPDAddr);
-            set => Data.SetWord(_pointToWarpMPDAddr, value);
+            get => Data.GetUInt16(_pointToWarpMPDAddr);
+            set => Data.SetUInt16(_pointToWarpMPDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x08Addr), displayOrder: 4, displayName: "+0x08", displayFormat: "X2")]
         [BulkCopy]
         public ushort Unknown0x08 {
-            get => Data.GetWord(_unknown0x08Addr);
-            set => Data.SetWord(_unknown0x08Addr, value);
+            get => Data.GetUInt16(_unknown0x08Addr);
+            set => Data.SetUInt16(_unknown0x08Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x0AAddr), displayOrder: 5, displayName: "+0x0A", displayFormat: "X2")]
         [BulkCopy]
         public ushort Unknown0x0A {
-            get => Data.GetWord(_unknown0x0AAddr);
-            set => Data.SetWord(_unknown0x0AAddr, value);
+            get => Data.GetUInt16(_unknown0x0AAddr);
+            set => Data.SetUInt16(_unknown0x0AAddr, value);
         }
     }
 }

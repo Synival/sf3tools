@@ -16,16 +16,16 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int MPDFileID {
-            get => Data.GetDouble(_mpdFileIdAddr);
-            set => Data.SetDouble(_mpdFileIdAddr, value);
+            get => Data.GetInt32(_mpdFileIdAddr);
+            set => Data.SetInt32(_mpdFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_battleSceneIdAddr), displayOrder: 1, displayFormat: "X2", minWidth: 240)]
         [NameGetter(NamedValueType.BattleSceneById)]
         [BulkCopy]
         public int BattleSceneID {
-            get => Data.GetDouble(_battleSceneIdAddr);
-            set => Data.SetDouble(_battleSceneIdAddr, value);
+            get => Data.GetInt32(_battleSceneIdAddr);
+            set => Data.SetInt32(_battleSceneIdAddr, value);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace SF3.Models.Structs.Shared {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_colorABGR1555Addr), displayName: "Color (ABGR1555)", displayOrder: 0, displayFormat: "X4")]
         public ushort ColorABGR1555 {
-            get => (ushort) Data.GetWord(_colorABGR1555Addr);
-            set => Data.SetWord(_colorABGR1555Addr, value);
+            get => (ushort) Data.GetUInt16(_colorABGR1555Addr);
+            set => Data.SetUInt16(_colorABGR1555Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_colorABGR1555Addr), displayName: "HTML Color", displayOrder: 1, displayFormat: "X", minWidth: 80)]

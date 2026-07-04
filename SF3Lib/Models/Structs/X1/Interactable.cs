@@ -36,8 +36,8 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
         public ushort Trigger {
-            get => (ushort) Data.GetWord(_triggerAddr);
-            set => Data.SetWord(_triggerAddr, value);
+            get => (ushort) Data.GetUInt16(_triggerAddr);
+            set => Data.SetUInt16(_triggerAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_triggerAddr), displayOrder: 0.1f, minWidth: 100, displayFormat: "X1")]
@@ -210,15 +210,15 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_triggerFlagsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte TriggerFlags {
-            get => (byte) Data.GetByte(_triggerFlagsAddr);
-            set => Data.SetByte(_triggerFlagsAddr, value);
+            get => (byte) Data.GetUInt8(_triggerFlagsAddr);
+            set => Data.SetUInt8(_triggerFlagsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_triggerTargetIdAddr), displayOrder: 1.1f, displayFormat: "X2")]
         [BulkCopy]
         public byte TriggerTargetID {
-            get => (byte) Data.GetByte(_triggerTargetIdAddr);
-            set => Data.SetByte(_triggerTargetIdAddr, value);
+            get => (byte) Data.GetUInt8(_triggerTargetIdAddr);
+            set => Data.SetUInt8(_triggerTargetIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 1.2f, displayName: "Trigger MPD Tie-In", isReadOnly: true, displayFormat: "X2")]
@@ -309,8 +309,8 @@ namespace SF3.Models.Structs.X1 {
 
         [BulkCopy]
         public ushort FlagCheckedWthExpectedValue {
-            get => Data.GetWord(_flagCheckedAddr);
-            set => Data.SetWord(_flagCheckedAddr, value);
+            get => Data.GetUInt16(_flagCheckedAddr);
+            set => Data.SetUInt16(_flagCheckedAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagCheckedAddr), displayOrder: 2.0f, displayFormat: "X3", minWidth: 200)]
@@ -328,15 +328,15 @@ namespace SF3.Models.Structs.X1 {
 
         [BulkCopy]
         public ushort Padding0x06 {
-            get => Data.GetWord(_padding0x06);
-            set => Data.SetWord(_padding0x06, value);
+            get => Data.GetUInt16(_padding0x06);
+            set => Data.SetUInt16(_padding0x06, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_actionAddr), displayOrder: 4, displayFormat: "X8")]
         [BulkCopy]
         public uint Action {
-            get => (uint) Data.GetDouble(_actionAddr);
-            set => Data.SetDouble(_actionAddr, (int) value);
+            get => (uint) Data.GetInt32(_actionAddr);
+            set => Data.SetInt32(_actionAddr, (int) value);
         }
 
         public NamedValueType? ActionParam1Type {

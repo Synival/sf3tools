@@ -15,8 +15,8 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public int Special {
-            get => Data.GetByte(_specialAddr);
-            set => Data.SetByte(_specialAddr, (byte) value);
+            get => Data.GetUInt8(_specialAddr);
+            set => Data.SetUInt8(_specialAddr, (byte) value);
         }
     }
 }

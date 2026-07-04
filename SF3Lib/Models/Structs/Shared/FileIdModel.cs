@@ -14,8 +14,8 @@ namespace SF3.Models.Structs.Shared {
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int FileId {
-            get => Data.GetDouble(_fileIdAddr);
-            set => Data.SetDouble(_fileIdAddr, value);
+            get => Data.GetInt32(_fileIdAddr);
+            set => Data.SetInt32(_fileIdAddr, value);
         }
     }
 }

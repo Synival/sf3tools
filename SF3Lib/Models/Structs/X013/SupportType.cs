@@ -17,16 +17,16 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportA {
-            get => Data.GetByte(_supportAAddr);
-            set => Data.SetByte(_supportAAddr, (byte) value);
+            get => Data.GetUInt8(_supportAAddr);
+            set => Data.SetUInt8(_supportAAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_supportBAddr), displayOrder: 1, minWidth: 150, displayFormat: "X2")]
         [BulkCopy]
         [NameGetter(NamedValueType.FriendshipBonusType)]
         public int SupportB {
-            get => Data.GetByte(_supportBAddr);
-            set => Data.SetByte(_supportBAddr, (byte) value);
+            get => Data.GetUInt8(_supportBAddr);
+            set => Data.SetUInt8(_supportBAddr, (byte) value);
         }
     }
 }

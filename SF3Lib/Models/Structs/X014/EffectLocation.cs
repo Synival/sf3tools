@@ -20,12 +20,12 @@ namespace SF3.Models.Structs.Shared {
         [NameGetter(NamedValueType.ConditionalType, nameof(EffectType))]
         [BulkCopy]
         public int Location {
-            get => IsEffectFileIndexes ? Data.GetWord(_locationAddr) : Data.GetDouble(_locationAddr);
+            get => IsEffectFileIndexes ? Data.GetUInt16(_locationAddr) : Data.GetInt32(_locationAddr);
             set {
                 if (IsEffectFileIndexes)
-                    Data.SetWord(_locationAddr, (ushort) value);
+                    Data.SetUInt16(_locationAddr, (ushort) value);
                 else
-                    Data.SetDouble(_locationAddr, value);
+                    Data.SetInt32(_locationAddr, value);
             }
         }
     }

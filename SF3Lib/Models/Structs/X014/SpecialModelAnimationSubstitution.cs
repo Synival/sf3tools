@@ -27,14 +27,14 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.Special)]
         [BulkCopy]
         public byte SpecialID {
-            get => (byte) Data.GetByte(_specialIdAddr);
-            set => Data.SetByte(_specialIdAddr, value);
+            get => (byte) Data.GetUInt8(_specialIdAddr);
+            set => Data.SetUInt8(_specialIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_animationIdAddr), displayOrder: 2, displayFormat: "X2")]
         public byte AnimationID {
-            get => (byte) Data.GetByte(_animationIdAddr);
-            set => Data.SetByte(_animationIdAddr, value);
+            get => (byte) Data.GetUInt8(_animationIdAddr);
+            set => Data.SetUInt8(_animationIdAddr, value);
         }
     }
 }

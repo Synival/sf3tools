@@ -15,15 +15,15 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_advantageAddr), displayOrder: 0)]
         [BulkCopy]
         public int Advantage {
-            get => (sbyte) Data.GetByte(_advantageAddr);
-            set => Data.SetByte(_advantageAddr, (byte) value);
+            get => (sbyte) Data.GetUInt8(_advantageAddr);
+            set => Data.SetUInt8(_advantageAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_disadvantageAddr), displayOrder: 1)]
         [BulkCopy]
         public int Disadvantage {
-            get => (sbyte) Data.GetByte(_disadvantageAddr);
-            set => Data.SetByte(_disadvantageAddr, (byte) value);
+            get => (sbyte) Data.GetUInt8(_disadvantageAddr);
+            set => Data.SetUInt8(_disadvantageAddr, (byte) value);
         }
     }
 }

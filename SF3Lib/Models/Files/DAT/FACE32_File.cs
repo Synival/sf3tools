@@ -34,7 +34,7 @@ namespace SF3.Models.Files.DAT {
             // The palette will be 0x200 before that.
             var paletteOffset = 0;
             for (var i = 0; i < Data.Length; i += 4) {
-                var imageOffset = Data.GetDouble(i);
+                var imageOffset = Data.GetInt32(i);
                 if (imageOffset != -1) {
                     paletteOffset = imageOffset - 0x200;
                     break;

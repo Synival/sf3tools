@@ -19,23 +19,23 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [NameGetter(NamedValueType.Special)]
         public ushort SpecialID {
-            get => Data.GetWord(_specialIdAddr);
-            set => Data.SetWord(_specialIdAddr, value);
+            get => Data.GetUInt16(_specialIdAddr);
+            set => Data.SetUInt16(_specialIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_subAnimationAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte SubAnimation {
-            get => (byte) Data.GetByte(_subAnimationAddr);
-            set => Data.SetByte(_subAnimationAddr, value);
+            get => (byte) Data.GetUInt8(_subAnimationAddr);
+            set => Data.SetUInt8(_subAnimationAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_animationIdAddr), displayOrder: 2, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.SpecialAnimation)]
         [BulkCopy]
         public int AnimationID {
-            get => Data.GetByte(_animationIdAddr);
-            set => Data.SetByte(_animationIdAddr, (byte) value);
+            get => Data.GetUInt8(_animationIdAddr);
+            set => Data.SetUInt8(_animationIdAddr, (byte) value);
         }
     }
 }

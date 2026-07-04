@@ -21,30 +21,30 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_spellIdAddr), displayOrder: 0, minWidth: 150, displayFormat: "X2")]
         [NameGetter(NamedValueType.Spell)]
         public int SpellID {
-            get => Data.GetByte(_spellIdAddr);
-            set => Data.SetByte(_spellIdAddr, (byte) value);
+            get => Data.GetUInt8(_spellIdAddr);
+            set => Data.SetUInt8(_spellIdAddr, (byte) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_spellLevelAddr), displayOrder: 1, displayFormat: "X2")]
         public byte SpellLevel {
-            get => (byte) Data.GetByte(_spellLevelAddr);
-            set => Data.SetByte(_spellLevelAddr, value);
+            get => (byte) Data.GetUInt8(_spellLevelAddr);
+            set => Data.SetUInt8(_spellLevelAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_subAnimationAddr), displayOrder: 2, displayFormat: "X2")]
         public byte SubAnimation {
-            get => (byte) Data.GetByte(_subAnimationAddr);
-            set => Data.SetByte(_subAnimationAddr, value);
+            get => (byte) Data.GetUInt8(_subAnimationAddr);
+            set => Data.SetUInt8(_subAnimationAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_replacementSpellID), displayOrder: 3, minWidth: 200, displayFormat: "X2")]
         [NameGetter(NamedValueType.Spell)]
         public int ReplacementSpellID {
-            get => Data.GetByte(_replacementSpellID);
-            set => Data.SetByte(_replacementSpellID, (byte) value);
+            get => Data.GetUInt8(_replacementSpellID);
+            set => Data.SetUInt8(_replacementSpellID, (byte) value);
         }
     }
 }

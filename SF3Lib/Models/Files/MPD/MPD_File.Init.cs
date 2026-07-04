@@ -47,8 +47,8 @@ namespace SF3.Models.Files.MPD {
         }
 
         private MPD_Header MakeHeader() {
-            var headerAddrPtr = Data.GetDouble(0x0000) - RamAddress;
-            var headerAddr = Data.GetDouble(headerAddrPtr) - RamAddress;
+            var headerAddrPtr = Data.GetInt32(0x0000) - RamAddress;
+            var headerAddr = Data.GetInt32(headerAddrPtr) - RamAddress;
             MPDHeader = new MPD_Header(Data, 0, nameof(MPDHeader), headerAddr, Scenario);
             Flags     = new MPD_FlagsFromHeader(MPDHeader);
             Settings  = new MPD_SettingsFromFile(this);
@@ -229,7 +229,7 @@ namespace SF3.Models.Files.MPD {
                 if (size > 0) {
                     var addr = header.OffsetUnknown2 - RamAddress;
                     bool isDummiedOut = false;
-                    if (Data.GetWord(addr) == 0xFFFF && size > 1) {
+                    if (Data.GetUInt16(addr) == 0xFFFF && size > 1) {
                         addr += 2;
                         isDummiedOut = true;
                         size--;
@@ -321,7 +321,7 @@ namespace SF3.Models.Files.MPD {
             bool LooksLikeHeaderPointer(int address) {
                 if (address % 4 != 0 && contiguousUnusedSpace[address] < 4)
                     return false;
-                var value = Data.GetDouble(address);
+                var value = Data.GetInt32(address);
                 return value >= 0x290000 && value <= 0x291FFC;
             }
 

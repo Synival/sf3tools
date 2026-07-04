@@ -11,8 +11,8 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
         public ushort Bitmask {
-            get => (ushort) Data.GetWord(Address);
-            set => Data.SetWord(Address, value);
+            get => (ushort) Data.GetUInt16(Address);
+            set => Data.SetUInt16(Address, value);
         }
 
         [TableViewModelColumn(displayOrder: 1, minWidth: 250)]

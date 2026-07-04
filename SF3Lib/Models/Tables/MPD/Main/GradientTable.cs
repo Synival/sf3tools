@@ -21,7 +21,7 @@ namespace SF3.Models.Tables.MPD.Main {
                 while (!ReadUntil.HasValue || addr < ReadUntil.Value) {
                     // If we encounter 0xFFFF, that doesn't necessarily mean we've reached the end.
                     // There's often a hidden unused gradient behind it. Check for it in the next pass.
-                    if (Data.GetWord(addr) == 0xFFFF) {
+                    if (Data.GetUInt16(addr) == 0xFFFF) {
                         addr += 2;
                         if (ReadUntil.HasValue) {
                             isDummiedOut = true;
@@ -37,18 +37,18 @@ namespace SF3.Models.Tables.MPD.Main {
 
                     // If we're looking at a dummied-out gradient, make sure it really looks like one.
                     if (isDummiedOut) {
-                        if (Data.GetWord(addr + 0x00) > 0xFF ||
-                            Data.GetWord(addr + 0x02) > 0xFF ||
-                            Data.GetWord(addr + 0x04) > 0x1F ||
-                            Data.GetWord(addr + 0x06) > 0x1F ||
-                            Data.GetWord(addr + 0x08) > 0x1F ||
-                            Data.GetWord(addr + 0x0A) > 0x1F ||
-                            Data.GetWord(addr + 0x0C) > 0x1F ||
-                            Data.GetWord(addr + 0x0E) > 0x1F ||
-                            Data.GetWord(addr + 0x10) > 0x07 ||
-                            Data.GetWord(addr + 0x12) > 0x1F ||
-                            Data.GetWord(addr + 0x14) > 0x1F ||
-                            Data.GetWord(addr + 0X16) > 0x1F)
+                        if (Data.GetUInt16(addr + 0x00) > 0xFF ||
+                            Data.GetUInt16(addr + 0x02) > 0xFF ||
+                            Data.GetUInt16(addr + 0x04) > 0x1F ||
+                            Data.GetUInt16(addr + 0x06) > 0x1F ||
+                            Data.GetUInt16(addr + 0x08) > 0x1F ||
+                            Data.GetUInt16(addr + 0x0A) > 0x1F ||
+                            Data.GetUInt16(addr + 0x0C) > 0x1F ||
+                            Data.GetUInt16(addr + 0x0E) > 0x1F ||
+                            Data.GetUInt16(addr + 0x10) > 0x07 ||
+                            Data.GetUInt16(addr + 0x12) > 0x1F ||
+                            Data.GetUInt16(addr + 0x14) > 0x1F ||
+                            Data.GetUInt16(addr + 0X16) > 0x1F)
                         {
                             break;
                         }

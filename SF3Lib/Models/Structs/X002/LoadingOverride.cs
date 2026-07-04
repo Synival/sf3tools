@@ -39,104 +39,104 @@ namespace SF3.Models.Structs.X002 {
         [BulkCopy]
         [NameGetter(NamedValueType.Load)]
         public ushort MapID {
-            get => Data.GetWord(_mapIDAddr);
-            set => Data.SetWord(_mapIDAddr, value);
+            get => Data.GetUInt16(_mapIDAddr);
+            set => Data.SetUInt16(_mapIDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_synMusicAddr), displayOrder: 1, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int SynMusic {
-            get => Data.GetByte(_synMusicAddr);
-            set => Data.SetByte(_synMusicAddr, (byte) value);
+            get => Data.GetUInt8(_synMusicAddr);
+            set => Data.SetUInt8(_synMusicAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_medMusicAddr), displayOrder: 2, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int MedMusic {
-            get => Data.GetByte(_medMusicAddr);
-            set => Data.SetByte(_medMusicAddr, (byte) value);
+            get => Data.GetUInt8(_medMusicAddr);
+            set => Data.SetUInt8(_medMusicAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_julMusicAddr), displayOrder: 3, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int JulMusic {
-            get => Data.GetByte(_julMusicAddr);
-            set => Data.SetByte(_julMusicAddr, (byte) value);
+            get => Data.GetUInt8(_julMusicAddr);
+            set => Data.SetUInt8(_julMusicAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_extraMusicAddr), displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public int ExtraMusic {
-            get => Data.GetByte(_extraMusicAddr);
-            set => Data.SetByte(_extraMusicAddr, (byte) value);
+            get => Data.GetUInt8(_extraMusicAddr);
+            set => Data.SetUInt8(_extraMusicAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_synMpdAddr), displayOrder: 5, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynMPD {
-            get => Data.GetDouble(_synMpdAddr);
-            set => Data.SetDouble(_synMpdAddr, value);
+            get => Data.GetInt32(_synMpdAddr);
+            set => Data.SetInt32(_synMpdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_medMPDAddr), displayOrder: 6, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedMPD {
-            get => Data.GetDouble(_medMPDAddr);
-            set => Data.SetDouble(_medMPDAddr, value);
+            get => Data.GetInt32(_medMPDAddr);
+            set => Data.SetInt32(_medMPDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_julMPDAddr), displayOrder: 7, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulMPD {
-            get => Data.GetDouble(_julMPDAddr);
-            set => Data.SetDouble(_julMPDAddr, value);
+            get => Data.GetInt32(_julMPDAddr);
+            set => Data.SetInt32(_julMPDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_extraMPDAddr), displayOrder: 8, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraMPD {
-            get => Data.GetDouble(_extraMPDAddr);
-            set => Data.SetDouble(_extraMPDAddr, value);
+            get => Data.GetInt32(_extraMPDAddr);
+            set => Data.SetInt32(_extraMPDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_synCHRAddr), displayOrder: 9, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int SynCHR {
-            get => Data.GetDouble(_synCHRAddr);
-            set => Data.SetDouble(_synCHRAddr, value);
+            get => Data.GetInt32(_synCHRAddr);
+            set => Data.SetInt32(_synCHRAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_medCHRAddr), displayOrder: 10, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int MedCHR {
-            get => Data.GetDouble(_medCHRAddr);
-            set => Data.SetDouble(_medCHRAddr, value);
+            get => Data.GetInt32(_medCHRAddr);
+            set => Data.SetInt32(_medCHRAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_julCHRAddr), displayOrder: 11, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int JulCHR {
-            get => Data.GetDouble(_julCHRAddr);
-            set => Data.SetDouble(_julCHRAddr, value);
+            get => Data.GetInt32(_julCHRAddr);
+            set => Data.SetInt32(_julCHRAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_extraCHRAddr), displayOrder: 12, displayFormat: "X3", minWidth: 140)]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public int ExtraCHR {
-            get => Data.GetDouble(_extraCHRAddr);
-            set => Data.SetDouble(_extraCHRAddr, value);
+            get => Data.GetInt32(_extraCHRAddr);
+            set => Data.SetInt32(_extraCHRAddr, value);
         }
     }
 }

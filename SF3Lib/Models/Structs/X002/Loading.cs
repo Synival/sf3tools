@@ -28,62 +28,62 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_sceneIDAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public ushort SceneID {
-            get => Data.GetWord(_sceneIDAddr);
-            set => Data.SetWord(_sceneIDAddr, value);
+            get => Data.GetUInt16(_sceneIDAddr);
+            set => Data.SetUInt16(_sceneIDAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x1Addr), displayOrder: 1, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public ushort X1 {
-            get => Data.GetWord(_x1Addr);
-            set => Data.SetWord(_x1Addr, value);
+            get => Data.GetUInt16(_x1Addr);
+            set => Data.SetUInt16(_x1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_battleNum), displayOrder: 2)]
         [BulkCopy]
         public ushort BattleNum {
-            get => Data.GetWord(_battleNum);
-            set => Data.SetWord(_battleNum, value);
+            get => Data.GetUInt16(_battleNum);
+            set => Data.SetUInt16(_battleNum, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x5Addr), displayOrder: 3, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public ushort X5 {
-            get => Data.GetWord(_x5Addr);
-            set => Data.SetWord(_x5Addr, value);
+            get => Data.GetUInt16(_x5Addr);
+            set => Data.SetUInt16(_x5Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_musicAddr), displayOrder: 4, displayFormat: "X2", minWidth: 210)]
         [BulkCopy]
         [NameGetter(NamedValueType.Music)]
         public ushort Music {
-            get => Data.GetWord(_musicAddr);
-            set => Data.SetWord(_musicAddr, value);
+            get => Data.GetUInt16(_musicAddr);
+            set => Data.SetUInt16(_musicAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_mpdAddr), displayOrder: 5, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public ushort MPD {
-            get => Data.GetWord(_mpdAddr);
-            set => Data.SetWord(_mpdAddr, value);
+            get => Data.GetUInt16(_mpdAddr);
+            set => Data.SetUInt16(_mpdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x0CAddr), displayOrder: 6, displayName: "# of Maps?")]
         [BulkCopy]
         public ushort Unknown0x0C {
-            get => Data.GetWord(_unknown0x0CAddr);
-            set => Data.SetWord(_unknown0x0CAddr, value);
+            get => Data.GetUInt16(_unknown0x0CAddr);
+            set => Data.SetUInt16(_unknown0x0CAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_chrAddr), displayOrder: 7, minWidth: 140, displayFormat: "X3")]
         [BulkCopy]
         [NameGetter(NamedValueType.FileIndex)]
         public ushort CHR {
-            get => Data.GetWord(_chrAddr);
-            set => Data.SetWord(_chrAddr, value);
+            get => Data.GetUInt16(_chrAddr);
+            set => Data.SetUInt16(_chrAddr, value);
         }
     }
 }

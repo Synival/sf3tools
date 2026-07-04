@@ -24,7 +24,7 @@ namespace SF3.Models.Tables.DAT {
             IsCompressed = false;
             for (int i = 0; i < Size; i++) {
                 // Test the first image to see if it's compressed.
-                var firstOffset = Data.GetDouble(Address + i * 0x04);
+                var firstOffset = Data.GetInt32(Address + i * 0x04);
                 if (firstOffset != -1) {
                     var decompressedFirstChunk = Compression.DecompressLZSS(Data.GetDataCopyOrReference(), firstOffset, null, out var _bytesRead, out var endDataFound);
                     IsCompressed = decompressedFirstChunk.Length == (32 * 32);

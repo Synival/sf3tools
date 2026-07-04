@@ -13,8 +13,8 @@ namespace SF3.Models.Structs {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_valueAddr), displayName: "UInt16 Value", displayFormat: "X4")]
         public ushort Value {
-            get => (ushort) Data.GetWord(_valueAddr);
-            set => Data.SetWord(_valueAddr, value);
+            get => (ushort) Data.GetUInt16(_valueAddr);
+            set => Data.SetUInt16(_valueAddr, value);
         }
     }
 }

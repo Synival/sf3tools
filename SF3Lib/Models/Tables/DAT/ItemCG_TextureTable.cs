@@ -53,7 +53,7 @@ namespace SF3.Models.Tables.DAT {
 
                     // It's EXTREMELY unlikely that this file will start with 0x00000000. If it does, it's zeroed-out
                     // data, and we should skip it.
-                    if (address < rawData.Length - 3 && (uint) Data.GetDouble(address) == 0x00000000) {
+                    if (address < rawData.Length - 3 && (uint) Data.GetInt32(address) == 0x00000000) {
                         address += 2;
                         continue;
                     }

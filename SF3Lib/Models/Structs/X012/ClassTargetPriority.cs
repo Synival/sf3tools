@@ -14,8 +14,8 @@ namespace SF3.Models.Structs.X012 {
         [NameGetter(NamedValueType.CharacterClass)]
         [BulkCopy]
         public byte ClassID {
-            get => (byte) Data.GetByte(_classIdAddr);
-            set => Data.SetByte(_classIdAddr, value);
+            get => (byte) Data.GetUInt8(_classIdAddr);
+            set => Data.SetUInt8(_classIdAddr, value);
         }
     }
 }

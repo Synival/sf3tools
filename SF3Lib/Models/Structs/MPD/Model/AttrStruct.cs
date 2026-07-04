@@ -27,8 +27,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_planeAddr), displayOrder: 0, displayFormat: "X2")]
         public byte Plane {
-            get => (byte) Data.GetByte(_planeAddr);
-            set => Data.SetByte(_planeAddr, value);
+            get => (byte) Data.GetUInt8(_planeAddr);
+            set => Data.SetUInt8(_planeAddr, value);
         }
 
         [BulkCopy]
@@ -41,8 +41,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_sortAndOptionsAddr), displayOrder: 0.02f, displayFormat: "X2")]
         public byte SortAndOptions {
-            get => (byte) Data.GetByte(_sortAndOptionsAddr);
-            set => Data.SetByte(_sortAndOptionsAddr, value);
+            get => (byte) Data.GetUInt8(_sortAndOptionsAddr);
+            set => Data.SetUInt8(_sortAndOptionsAddr, value);
         }
 
         [BulkCopy]
@@ -69,15 +69,15 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_textureNoAddr), displayOrder: 2, displayFormat: "X4")]
         public ushort TextureNo {
-            get => (ushort) Data.GetWord(_textureNoAddr);
-            set => Data.SetWord(_textureNoAddr, value);
+            get => (ushort) Data.GetUInt16(_textureNoAddr);
+            set => Data.SetUInt16(_textureNoAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modeAddr), displayOrder: 3, displayFormat: "X4")]
         public ushort Mode {
-            get => (ushort) Data.GetWord(_modeAddr);
-            set => Data.SetWord(_modeAddr, value);
+            get => (ushort) Data.GetUInt16(_modeAddr);
+            set => Data.SetUInt16(_modeAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 3.1f, displayName: "MSBon")]
@@ -137,8 +137,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_colorNoAddr), displayOrder: 4, displayFormat: "X4")]
         public ushort ColorNo {
-            get => (ushort) Data.GetWord(_colorNoAddr);
-            set => Data.SetWord(_colorNoAddr, value);
+            get => (ushort) Data.GetUInt16(_colorNoAddr);
+            set => Data.SetUInt16(_colorNoAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_colorNoAddr), displayName: "HTML Color", displayOrder: 4.5f, displayFormat: "X", minWidth: 80)]
@@ -154,15 +154,15 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_gouraudShadingTableAddr), displayOrder: 5, displayFormat: "X4")]
         public ushort GouraudShadingTable {
-            get => (ushort) Data.GetWord(_gouraudShadingTableAddr);
-            set => Data.SetWord(_gouraudShadingTableAddr, value);
+            get => (ushort) Data.GetUInt16(_gouraudShadingTableAddr);
+            set => Data.SetUInt16(_gouraudShadingTableAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_dirAddr), displayOrder: 6, displayFormat: "X4")]
         public ushort Dir {
-            get => (ushort) Data.GetWord(_dirAddr);
-            set => Data.SetWord(_dirAddr, value);
+            get => (ushort) Data.GetUInt16(_dirAddr);
+            set => Data.SetUInt16(_dirAddr, value);
         }
 
         [BulkCopy]

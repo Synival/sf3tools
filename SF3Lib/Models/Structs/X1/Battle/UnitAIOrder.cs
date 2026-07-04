@@ -18,22 +18,22 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_targetAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public byte Target {
-            get => (byte) Data.GetByte(_targetAddr);
-            set => Data.SetByte(_targetAddr, value);
+            get => (byte) Data.GetUInt8(_targetAddr);
+            set => Data.SetUInt8(_targetAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_targetFlagsAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte TargetFlags {
-            get => (byte) Data.GetByte(_targetFlagsAddr);
-            set => Data.SetByte(_targetFlagsAddr, value);
+            get => (byte) Data.GetUInt8(_targetFlagsAddr);
+            set => Data.SetUInt8(_targetFlagsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aggrAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public byte Aggression {
-            get => (byte) Data.GetByte(_aggrAddr);
-            set => Data.SetByte(_aggrAddr, value);
+            get => (byte) Data.GetUInt8(_aggrAddr);
+            set => Data.SetUInt8(_aggrAddr, value);
         }
 
         public AIOrderType Type {

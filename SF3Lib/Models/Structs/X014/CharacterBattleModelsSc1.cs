@@ -28,64 +28,64 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp1FileId {
-            get => Data.GetDouble(_modelUWp1FileIdAddr);
-            set => Data.SetDouble(_modelUWp1FileIdAddr, value);
+            get => Data.GetInt32(_modelUWp1FileIdAddr);
+            set => Data.SetInt32(_modelUWp1FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelUWp2FileIdAddr), displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp2FileId {
-            get => Data.GetDouble(_modelUWp2FileIdAddr);
-            set => Data.SetDouble(_modelUWp2FileIdAddr, value);
+            get => Data.GetInt32(_modelUWp2FileIdAddr);
+            set => Data.SetInt32(_modelUWp2FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelUWp3FileIdAddr), displayOrder: 2, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp3FileId {
-            get => Data.GetDouble(_modelUWp3FileIdAddr);
-            set => Data.SetDouble(_modelUWp3FileIdAddr, value);
+            get => Data.GetInt32(_modelUWp3FileIdAddr);
+            set => Data.SetInt32(_modelUWp3FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelUWp4FileIdAddr), displayOrder: 3, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int UWp4FileId {
-            get => Data.GetDouble(_modelUWp4FileIdAddr);
-            set => Data.SetDouble(_modelUWp4FileIdAddr, value);
+            get => Data.GetInt32(_modelUWp4FileIdAddr);
+            set => Data.SetInt32(_modelUWp4FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelPWp1FileIdAddr), displayOrder: 4, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp1FileId {
-            get => Data.GetDouble(_modelPWp1FileIdAddr);
-            set => Data.SetDouble(_modelPWp1FileIdAddr, value);
+            get => Data.GetInt32(_modelPWp1FileIdAddr);
+            set => Data.SetInt32(_modelPWp1FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelPWp2FileIdAddr), displayOrder: 5, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp2FileId {
-            get => Data.GetDouble(_modelPWp2FileIdAddr);
-            set => Data.SetDouble(_modelPWp2FileIdAddr, value);
+            get => Data.GetInt32(_modelPWp2FileIdAddr);
+            set => Data.SetInt32(_modelPWp2FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelPWp3FileIdAddr), displayOrder: 6, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp3FileId {
-            get => Data.GetDouble(_modelPWp3FileIdAddr);
-            set => Data.SetDouble(_modelPWp3FileIdAddr, value);
+            get => Data.GetInt32(_modelPWp3FileIdAddr);
+            set => Data.SetInt32(_modelPWp3FileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelPWp4FileIdAddr), displayOrder: 7, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndexWithFFFFFFFF)]
         [BulkCopy]
         public int PWp4FileId {
-            get => Data.GetDouble(_modelPWp4FileIdAddr);
-            set => Data.SetDouble(_modelPWp4FileIdAddr, value);
+            get => Data.GetInt32(_modelPWp4FileIdAddr);
+            set => Data.SetInt32(_modelPWp4FileIdAddr, value);
         }
     }
 }

@@ -29,8 +29,8 @@ namespace SF3.Models.Tables.KAO {
             while (address < searchUntil) {
                 FaceChunk newFace = null;
                 try {
-                    var width  = Data.GetWord(address + 0x02);
-                    var height = Data.GetWord(address + 0x04);
+                    var width  = Data.GetUInt16(address + 0x02);
+                    var height = Data.GetUInt16(address + 0x04);
                     if (width < 0x10 || width > 0x200 || height < 0x10 || height > 0x200) {
                         address += 0x800;
                         continue;

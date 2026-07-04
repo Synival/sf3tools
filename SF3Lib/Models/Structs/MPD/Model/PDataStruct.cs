@@ -70,36 +70,36 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_verticesOffsetAddr), displayOrder: 0.5f, isPointer: true)]
         public uint VerticesOffset {
-            get => (uint) Data.GetDouble(_verticesOffsetAddr);
-            set => Data.SetDouble(_verticesOffsetAddr, (int) value);
+            get => (uint) Data.GetInt32(_verticesOffsetAddr);
+            set => Data.SetInt32(_verticesOffsetAddr, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_vertexCountAddr), displayOrder: 1)]
         public int VertexCount {
-            get => Data.GetDouble(_vertexCountAddr);
-            set => Data.SetDouble(_vertexCountAddr, value);
+            get => Data.GetInt32(_vertexCountAddr);
+            set => Data.SetInt32(_vertexCountAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_polygonsOffsetAddr), displayOrder: 2, isPointer: true)]
         public uint PolygonsOffset {
-            get => (uint) Data.GetDouble(_polygonsOffsetAddr);
-            set => Data.SetDouble(_polygonsOffsetAddr, (int) value);
+            get => (uint) Data.GetInt32(_polygonsOffsetAddr);
+            set => Data.SetInt32(_polygonsOffsetAddr, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_faceCountAddr), displayOrder: 3)]
         public int FaceCount {
-            get => Data.GetDouble(_faceCountAddr);
-            set => Data.SetDouble(_faceCountAddr, value);
+            get => Data.GetInt32(_faceCountAddr);
+            set => Data.SetInt32(_faceCountAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_attributesOffsetAddr), displayOrder: 4, isPointer: true)]
         public uint AttributesOffset {
-            get => (uint) Data.GetDouble(_attributesOffsetAddr);
-            set => Data.SetDouble(_attributesOffsetAddr, (int) value);
+            get => (uint) Data.GetInt32(_attributesOffsetAddr);
+            set => Data.SetInt32(_attributesOffsetAddr, (int) value);
         }
 
         private class MockFace : ISGL_ModelFace {

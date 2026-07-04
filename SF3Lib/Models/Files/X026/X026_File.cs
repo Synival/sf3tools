@@ -32,23 +32,23 @@ namespace SF3.Models.Files.X026 {
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:
-                    spellIconAddress = Data.GetDouble(0x0a30) - RamAddress;
-                    itemIconAddress  = Data.GetDouble(0x08f0) - RamAddress;
+                    spellIconAddress = Data.GetInt32(0x0a30) - RamAddress;
+                    itemIconAddress  = Data.GetInt32(0x08f0) - RamAddress;
                     break;
 
                 case ScenarioType.Scenario2:
-                    spellIconAddress = Data.GetDouble(0x0a1c) - RamAddress;
-                    itemIconAddress  = Data.GetDouble(0x0a08) - RamAddress;
+                    spellIconAddress = Data.GetInt32(0x0a1c) - RamAddress;
+                    itemIconAddress  = Data.GetInt32(0x0a08) - RamAddress;
                     break;
 
                 case ScenarioType.Scenario3:
-                    spellIconAddress = Data.GetDouble(0x09cc) - RamAddress;
-                    itemIconAddress  = Data.GetDouble(0x09b4) - RamAddress;
+                    spellIconAddress = Data.GetInt32(0x09cc) - RamAddress;
+                    itemIconAddress  = Data.GetInt32(0x09b4) - RamAddress;
                     break;
 
                 case ScenarioType.PremiumDisk:
-                    spellIconAddress = Data.GetDouble(0x07a0) - RamAddress;
-                    itemIconAddress  = Data.GetDouble(0x072c) - RamAddress;
+                    spellIconAddress = Data.GetInt32(0x07a0) - RamAddress;
+                    itemIconAddress  = Data.GetInt32(0x072c) - RamAddress;
                     break;
 
                 default:

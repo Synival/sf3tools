@@ -181,7 +181,7 @@ namespace SF3.Utils {
 
         public static bool DataLooksLikeBeginningOfScript(IByteData data, uint addr) {
             // Does this look like a script command?
-            var value = (uint) data.GetDouble((int) addr);
+            var value = (uint) data.GetInt32((int) addr);
             if (value >= 0x00000000 && value < 0x0000002E)
                 return true;
 
@@ -190,7 +190,7 @@ namespace SF3.Utils {
                 // It does, but does a script command follow?
                 var nextAddr = addr + 4;
                 if (nextAddr < data.Length - 3) {
-                    value = (uint) data.GetDouble((int) nextAddr);
+                    value = (uint) data.GetInt32((int) nextAddr);
                     if (value >= 0x00000000 && value < 0x0000002E)
                         return true;
                 }

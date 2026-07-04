@@ -47,64 +47,64 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_topPositionAddr), displayName: "TopPosition", displayOrder: 0.1f, displayFormat: "X2")]
         public ushort TopPositionRaw {
-            get => (ushort) Data.GetWord(_topPositionAddr);
-            set => Data.SetWord(_topPositionAddr, value);
+            get => (ushort) Data.GetUInt16(_topPositionAddr);
+            set => Data.SetUInt16(_topPositionAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_bottomPositionAddr), displayName: "BottomPosition", displayOrder: 1, displayFormat: "X2")]
         public ushort BottomPositionRaw {
-            get => (ushort) Data.GetWord(_bottomPositionAddr);
-            set => Data.SetWord(_bottomPositionAddr, value);
+            get => (ushort) Data.GetUInt16(_bottomPositionAddr);
+            set => Data.SetUInt16(_bottomPositionAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_topRAddr), displayOrder: 2, displayFormat: "X2")]
         public ushort TopR {
-            get => (ushort) Data.GetWord(_topRAddr);
-            set => Data.SetWord(_topRAddr, value);
+            get => (ushort) Data.GetUInt16(_topRAddr);
+            set => Data.SetUInt16(_topRAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_topGAddr), displayOrder: 3, displayFormat: "X2")]
         public ushort TopG {
-            get => (ushort) Data.GetWord(_topGAddr);
-            set => Data.SetWord(_topGAddr, value);
+            get => (ushort) Data.GetUInt16(_topGAddr);
+            set => Data.SetUInt16(_topGAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_topBAddr), displayOrder: 4, displayFormat: "X2")]
         public ushort TopB {
-            get => (ushort) Data.GetWord(_topBAddr);
-            set => Data.SetWord(_topBAddr, value);
+            get => (ushort) Data.GetUInt16(_topBAddr);
+            set => Data.SetUInt16(_topBAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_bottomRAddr), displayOrder: 5, displayFormat: "X2")]
         public ushort BottomR {
-            get => (ushort) Data.GetWord(_bottomRAddr);
-            set => Data.SetWord(_bottomRAddr, value);
+            get => (ushort) Data.GetUInt16(_bottomRAddr);
+            set => Data.SetUInt16(_bottomRAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_bottomGAddr), displayOrder: 6, displayFormat: "X2")]
         public ushort BottomG {
-            get => (ushort) Data.GetWord(_bottomGAddr);
-            set => Data.SetWord(_bottomGAddr, value);
+            get => (ushort) Data.GetUInt16(_bottomGAddr);
+            set => Data.SetUInt16(_bottomGAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_bottomBAddr), displayOrder: 7, displayFormat: "X2")]
         public ushort BottomB {
-            get => (ushort) Data.GetWord(_bottomBAddr);
-            set => Data.SetWord(_bottomBAddr, value);
+            get => (ushort) Data.GetUInt16(_bottomBAddr);
+            set => Data.SetUInt16(_bottomBAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_partsAffectedBitsAddr), displayOrder: 8, displayFormat: "X1")]
         public ushort PartsAffectedBits {
-            get => (ushort) Data.GetWord(_partsAffectedBitsAddr);
-            set => Data.SetWord(_partsAffectedBitsAddr, value);
+            get => (ushort) Data.GetUInt16(_partsAffectedBitsAddr);
+            set => Data.SetUInt16(_partsAffectedBitsAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 8.1f)]
@@ -128,22 +128,22 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_groundIntensityAddr), displayName: "GroundItensity", displayOrder: 9, displayFormat: "X2")]
         public ushort GroundIntensityRaw {
-            get => (ushort) Data.GetWord(_groundIntensityAddr);
-            set => Data.SetWord(_groundIntensityAddr, value);
+            get => (ushort) Data.GetUInt16(_groundIntensityAddr);
+            set => Data.SetUInt16(_groundIntensityAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_skyIntensityAddr), displayName: "SkyIntensity", displayOrder: 10, displayFormat: "X2")]
         public ushort SkyIntensityRaw {
-            get => (ushort) Data.GetWord(_skyIntensityAddr);
-            set => Data.SetWord(_skyIntensityAddr, value);
+            get => (ushort) Data.GetUInt16(_skyIntensityAddr);
+            set => Data.SetUInt16(_skyIntensityAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsAndSurfaceIntensityAddr), displayName: "ModelsAndSurfaceIntensity", displayOrder: 11, displayFormat: "X2")]
         public ushort ModelsAndSurfaceIntensityRaw {
-            get => (ushort) Data.GetWord(_modelsAndSurfaceIntensityAddr);
-            set => Data.SetWord(_modelsAndSurfaceIntensityAddr, value);
+            get => (ushort) Data.GetUInt16(_modelsAndSurfaceIntensityAddr);
+            set => Data.SetUInt16(_modelsAndSurfaceIntensityAddr, value);
         }
 
         public float TopPosition {

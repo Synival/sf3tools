@@ -17,7 +17,7 @@ namespace SF3.Models.Files.X014 {
 
         protected X014_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
             if (Scenario == ScenarioType.Scenario2) {
-                var versionCheckValue = data.GetDouble(0x08);
+                var versionCheckValue = data.GetInt32(0x08);
                 if (versionCheckValue == 0x06094A60)
                     IsScn2V2 = false;
                 else if (versionCheckValue == 0x06094A00)

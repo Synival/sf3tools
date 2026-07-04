@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.X013 {
         [TableViewModelColumn(addressField: nameof(_chanceAddr), displayOrder: 0)]
         [BulkCopy]
         public int Chance {
-            get => Data.GetByte(_chanceAddr);
-            set => Data.SetByte(_chanceAddr, (byte) value);
+            get => Data.GetUInt8(_chanceAddr);
+            set => Data.SetUInt8(_chanceAddr, (byte) value);
         }
     }
 }

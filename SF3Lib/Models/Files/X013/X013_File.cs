@@ -49,7 +49,7 @@ namespace SF3.Models.Files.X013 {
             int spellSubstitutions = 10;
             int specialAnimations = 10;
 
-            var checkVersion2 = Data.GetByte(0x000A);
+            var checkVersion2 = Data.GetUInt8(0x000A);
 
             switch (Scenario) {
                 case ScenarioType.Scenario1:

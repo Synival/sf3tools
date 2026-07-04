@@ -44,7 +44,7 @@ namespace SF3.Models.Files.X002 {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var checkVersion2 = Data.GetByte(0x000B);
+            var checkVersion2 = Data.GetUInt8(0x000B);
 
             int attackResistAddress;
             int itemAddress;

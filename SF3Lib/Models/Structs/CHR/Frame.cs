@@ -81,8 +81,8 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(displayOrder: 0.2f, addressField: nameof(_textureOffsetAddr), displayFormat: "X4")]
         [BulkCopy]
         public uint TextureOffset {
-            get => (uint) Data.GetDouble(_textureOffsetAddr);
-            set => Data.SetDouble(_textureOffsetAddr, (int) value);
+            get => (uint) Data.GetInt32(_textureOffsetAddr);
+            set => Data.SetInt32(_textureOffsetAddr, (int) value);
         }
 
         [TableViewModelColumn(displayOrder: 0.21f, displayName: "TexOff (In File)", displayFormat: "X4", visibilityProperty: nameof(IsInCHP))]
@@ -92,10 +92,10 @@ namespace SF3.Models.Structs.CHR {
         }
 
         [TableViewModelColumn(displayOrder: 0.3f, displayFormat: "X4")]
-        public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetDouble((int) TextureOffsetInFile);
+        public uint TextureBitstreamOffset => TextureOffset + (uint) Data.GetInt32((int) TextureOffsetInFile);
 
         [TableViewModelColumn(displayOrder: 0.31f, displayName: "TexBitStreamOff (In File)", displayFormat: "X4", visibilityProperty: nameof(IsInCHP))]
-        public uint TextureBitstreamOffsetInFile => TextureOffset + (uint) (Data.GetDouble((int) TextureOffsetInFile) + DataOffset);
+        public uint TextureBitstreamOffsetInFile => TextureOffset + (uint) (Data.GetInt32((int) TextureOffsetInFile) + DataOffset);
 
         [TableViewModelColumn(displayOrder: 0.4f, displayFormat: "X4")]
         public uint TextureEndOffset => TextureOffset + TextureCompressedSize;

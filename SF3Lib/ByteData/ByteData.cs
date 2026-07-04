@@ -92,15 +92,15 @@ namespace SF3.ByteData {
             return value;
         }
 
-        public byte   GetByte(int offset)   => (byte)   GetData(offset, 1);
-        public ushort GetWord(int offset)   => (ushort) GetData(offset, 2);
+        public byte   GetUInt8(int offset)   => (byte)   GetData(offset, 1);
+        public ushort GetUInt16(int offset)   => (ushort) GetData(offset, 2);
         public short  GetInt16(int offset)  => (short)  GetData(offset, 2);
-        public int    GetDouble(int offset) => (int)    GetData(offset, 4);
+        public int    GetInt32(int offset) => (int)    GetData(offset, 4);
 
-        public CompressedFIXED GetCompressedFIXED(int offset) => new CompressedFIXED((short) GetWord(offset));
-        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => new CompressedFIXED((ushort) GetWord(offset), isWeird: true);
+        public CompressedFIXED GetCompressedFIXED(int offset) => new CompressedFIXED((short) GetUInt16(offset));
+        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => new CompressedFIXED((ushort) GetUInt16(offset), isWeird: true);
 
-        public FIXED GetFIXED(int offset) => new FIXED(GetDouble(offset), true);
+        public FIXED GetFIXED(int offset) => new FIXED(GetInt32(offset), true);
 
         public string GetString(int offset, int length) {
             var value = new byte[length];
@@ -129,15 +129,15 @@ namespace SF3.ByteData {
             }
         }
 
-        public void SetByte(int offset, byte value)   => SetData(offset, value, 1);
-        public void SetWord(int offset, ushort value) => SetData(offset, value, 2);
+        public void SetUInt8(int offset, byte value)   => SetData(offset, value, 1);
+        public void SetUInt16(int offset, ushort value) => SetData(offset, value, 2);
         public void SetInt16(int offset, short value) => SetData(offset, (uint) value, 2);
-        public void SetDouble(int offset, int value)  => SetData(offset, (uint) value, 4);
+        public void SetInt32(int offset, int value)  => SetData(offset, (uint) value, 4);
 
         public void SetCompressedFIXED(int offset, CompressedFIXED value)      => SetInt16(offset, value.RawShort);
-        public void SetWeirdCompressedFIXED(int offset, CompressedFIXED value) => SetWord(offset, value.WeirdRawShort);
+        public void SetWeirdCompressedFIXED(int offset, CompressedFIXED value) => SetUInt16(offset, value.WeirdRawShort);
 
-        public void SetFIXED(int offset, FIXED value) => SetDouble(offset, value.RawInt);
+        public void SetFIXED(int offset, FIXED value) => SetInt32(offset, value.RawInt);
 
         public void SetString(int offset, int length, string value) {
             var encoding = Encoding.GetEncoding("shift-jis");

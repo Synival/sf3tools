@@ -13,8 +13,8 @@ namespace SF3.Models.Structs.MPD {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
         public ushort TextureID {
-            get => (ushort) Data.GetWord(_textureIdAddr);
-            set => Data.SetWord(_textureIdAddr, value);
+            get => (ushort) Data.GetUInt16(_textureIdAddr);
+            set => Data.SetUInt16(_textureIdAddr, value);
         }
     }
 }

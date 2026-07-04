@@ -57,7 +57,7 @@ namespace SF3.Models.Files.X024 {
 
         private int GetBlacksmithTableAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario2: return Data.GetDouble(0x253c) - RamAddress; // Same in both versions
+                case ScenarioType.Scenario2: return Data.GetInt32(0x253c) - RamAddress; // Same in both versions
                 default: return 0;
             }
         }

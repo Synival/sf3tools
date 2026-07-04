@@ -14,8 +14,8 @@ namespace SF3.Models.Structs.X1.Battle {
         [NameGetter(NamedValueType.Character)]
         [BulkCopy]
         public byte CharacterID {
-            get => (byte) Data.GetByte(_characterIdAddr);
-            set => Data.SetByte(_characterIdAddr, value);
+            get => (byte) Data.GetUInt8(_characterIdAddr);
+            set => Data.SetUInt8(_characterIdAddr, value);
         }
     }
 }

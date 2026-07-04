@@ -188,127 +188,127 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_mapFlagsAddr), displayOrder: 0, displayFormat: "X4", displayGroup: "Main")]
         public ushort MapFlags {
-            get => (ushort) Data.GetWord(_mapFlagsAddr);
-            set => Data.SetWord(_mapFlagsAddr, value);
+            get => (ushort) Data.GetUInt16(_mapFlagsAddr);
+            set => Data.SetUInt16(_mapFlagsAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding1Addr), displayOrder: 1, isPointer: true, displayName: "(" + nameof(Padding1) + ")", displayGroup: "Main")]
         public ushort Padding1 {
-            get => (ushort) Data.GetWord(_padding1Addr);
-            set => Data.SetWord(_padding1Addr, value);
+            get => (ushort) Data.GetUInt16(_padding1Addr);
+            set => Data.SetUInt16(_padding1Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetLightPaletteAddr), displayOrder: 2, isPointer: true, displayGroup: "Main")]
         public int OffsetLightPalette {
-            get => Data.GetDouble(_offsetLightPaletteAddr);
-            set => Data.SetDouble(_offsetLightPaletteAddr, value);
+            get => Data.GetInt32(_offsetLightPaletteAddr);
+            set => Data.SetInt32(_offsetLightPaletteAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetLightPosAddr), displayOrder: 3, isPointer: true, displayGroup: "Main")]
         public int OffsetLightPosition {
-            get => Data.GetDouble(_offsetLightPosAddr);
-            set => Data.SetDouble(_offsetLightPosAddr, value);
+            get => Data.GetInt32(_offsetLightPosAddr);
+            set => Data.SetInt32(_offsetLightPosAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetUnknown1Addr), displayOrder: 4, isPointer: true, displayName: nameof(OffsetUnknown1) + " (Scn1)", visibilityProperty: nameof(HasUnknown1Table), displayGroup: "Main")]
         public int OffsetUnknown1 {
-            get => HasUnknown1Table ? Data.GetDouble(_offsetUnknown1Addr) : 0;
+            get => HasUnknown1Table ? Data.GetInt32(_offsetUnknown1Addr) : 0;
             set {
                 if (HasUnknown1Table)
-                    Data.SetDouble(_offsetUnknown1Addr, value);
+                    Data.SetInt32(_offsetUnknown1Addr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetPaletteAdjustmentAddr), displayOrder: 4, isPointer: true, displayName: nameof(OffsetPaletteAdjustment) + " (Scn2+)", visibilityProperty: nameof(HasPaletteAdjustmentTable), displayGroup: "Main")]
         public int OffsetPaletteAdjustment {
-            get => HasPaletteAdjustmentTable ? Data.GetDouble(_offsetPaletteAdjustmentAddr) : 0;
+            get => HasPaletteAdjustmentTable ? Data.GetInt32(_offsetPaletteAdjustmentAddr) : 0;
             set {
                 if (HasPaletteAdjustmentTable)
-                    Data.SetDouble(_offsetPaletteAdjustmentAddr, value);
+                    Data.SetInt32(_offsetPaletteAdjustmentAddr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_viewDistanceAddr), displayOrder: 5, displayFormat: "X2", displayGroup: "Main")]
         public ushort ModelsViewDistance {
-            get => (ushort) Data.GetWord(_viewDistanceAddr);
-            set => Data.SetWord(_viewDistanceAddr, value);
+            get => (ushort) Data.GetUInt16(_viewDistanceAddr);
+            set => Data.SetUInt16(_viewDistanceAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding2Addr), displayOrder: 6, isPointer: true, displayName: "(" + nameof(Padding2) + ")", displayGroup: "Main")]
         public ushort Padding2 {
-            get => (ushort) Data.GetWord(_padding2Addr);
-            set => Data.SetWord(_padding2Addr, value);
+            get => (ushort) Data.GetUInt16(_padding2Addr);
+            set => Data.SetUInt16(_padding2Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetModelSwitchGroupsAddr), displayOrder: 7, isPointer: true, displayGroup: "Main")]
         public int OffsetModelSwitchGroups {
-            get => Data.GetDouble(_offsetModelSwitchGroupsAddr);
-            set => Data.SetDouble(_offsetModelSwitchGroupsAddr, value);
+            get => Data.GetInt32(_offsetModelSwitchGroupsAddr);
+            set => Data.SetInt32(_offsetModelSwitchGroupsAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetAnimationsAddr), displayOrder: 8, isPointer: true, displayGroup: "Main")]
         public int OffsetAnimations {
-            get => Data.GetDouble(_offsetAnimationsAddr);
-            set => Data.SetDouble(_offsetAnimationsAddr, value);
+            get => Data.GetInt32(_offsetAnimationsAddr);
+            set => Data.SetInt32(_offsetAnimationsAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetUnknown2Addr), displayOrder: 9, isPointer: true, displayName: nameof(OffsetUnknown2) + " (Scn1)", visibilityProperty: nameof(HasUnknown2Table), displayGroup: "Main")]
         public int OffsetUnknown2 {
-            get => HasUnknown2Table ? Data.GetDouble(_offsetUnknown2Addr) : 0;
+            get => HasUnknown2Table ? Data.GetInt32(_offsetUnknown2Addr) : 0;
             set {
                 if (HasUnknown2Table)
-                    Data.SetDouble(_offsetUnknown2Addr, value);
+                    Data.SetInt32(_offsetUnknown2Addr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetGradientAddr), displayOrder: 9.5f, isPointer: true, displayName: nameof(OffsetGradient) + " (Scn2+)", visibilityProperty: nameof(HasGradientTable), displayGroup: "Main")]
         public int OffsetGradient {
-            get => HasGradientTable ? Data.GetDouble(_offsetGradientAddr) : 0;
+            get => HasGradientTable ? Data.GetInt32(_offsetGradientAddr) : 0;
             set {
                 if (HasGradientTable)
-                    Data.SetDouble(_offsetGradientAddr, value);
+                    Data.SetInt32(_offsetGradientAddr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetGroundAnimationAddr), displayOrder: 10, isPointer: true, displayGroup: "Main")]
         public int OffsetGroundAnimation {
-            get => Data.GetDouble(_offsetGroundAnimationAddr);
-            set => Data.SetDouble(_offsetGroundAnimationAddr, value);
+            get => Data.GetInt32(_offsetGroundAnimationAddr);
+            set => Data.SetInt32(_offsetGroundAnimationAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetChestModelAddr), displayOrder: 11, isPointer: true, displayGroup: "Main")]
         public int OffsetChestModel {
-            get => Data.GetDouble(_offsetChestModelAddr);
-            set => Data.SetDouble(_offsetChestModelAddr, value);
+            get => Data.GetInt32(_offsetChestModelAddr);
+            set => Data.SetInt32(_offsetChestModelAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetLockedChestAddr), displayOrder: 12, isPointer: true, displayGroup: "Main")]
         public int OffsetLockedChestModel {
-            get => Data.GetDouble(_offsetLockedChestAddr);
-            set => Data.SetDouble(_offsetLockedChestAddr, value);
+            get => Data.GetInt32(_offsetLockedChestAddr);
+            set => Data.SetInt32(_offsetLockedChestAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetBarrelModelAddr), displayOrder: 13, isPointer: true, visibilityProperty: nameof(HasMesh3), displayGroup: "Main")]
         public int OffsetBarrelModel {
-            get => HasMesh3 ? Data.GetDouble(_offsetBarrelModelAddr) : 0;
+            get => HasMesh3 ? Data.GetInt32(_offsetBarrelModelAddr) : 0;
             set {
                 if (HasMesh3)
-                    Data.SetDouble(_offsetBarrelModelAddr, value);
+                    Data.SetInt32(_offsetBarrelModelAddr, value);
             }
         }
 
@@ -342,71 +342,71 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding3Addr), displayOrder: 15.5f, isPointer: true, displayName: "(" + nameof(Padding3) + ")", displayGroup: "Main")]
         public ushort Padding3 {
-            get => (ushort) Data.GetWord(_padding3Addr);
-            set => Data.SetWord(_padding3Addr, value);
+            get => (ushort) Data.GetUInt16(_padding3Addr);
+            set => Data.SetUInt16(_padding3Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetIgnoredTexturesAddr), displayOrder: 16, isPointer: true, visibilityProperty: nameof(HasIgnoredTextures), displayGroup: "Main")]
         public int OffsetIgnoredTextures {
-            get => HasIgnoredTextures ? Data.GetDouble(_offsetIgnoredTexturesAddr) : 0;
+            get => HasIgnoredTextures ? Data.GetInt32(_offsetIgnoredTexturesAddr) : 0;
             set {
                 if (HasIgnoredTextures)
-                    Data.SetDouble(_offsetIgnoredTexturesAddr, value);
+                    Data.SetInt32(_offsetIgnoredTexturesAddr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetUnknown3Addr), displayOrder: 16.5f, isPointer: true, displayName: nameof(OffsetUnknown3) + " (Ship2)", visibilityProperty: nameof(HasUnknown3Table), displayGroup: "Main")]
         public int OffsetUnknown3 {
-            get => HasUnknown3Table ? Data.GetDouble(_offsetUnknown3Addr) : 0;
+            get => HasUnknown3Table ? Data.GetInt32(_offsetUnknown3Addr) : 0;
             set {
                 if (HasUnknown3Table)
-                    Data.SetDouble(_offsetUnknown3Addr, value);
+                    Data.SetInt32(_offsetUnknown3Addr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetUnknown4Addr), displayOrder: 16.6f, isPointer: true, displayName: nameof(OffsetUnknown4) + " (Prototype)", visibilityProperty: nameof(HasUnknown4Table), displayGroup: "Main")]
         public int OffsetUnknown4 {
-            get => HasUnknown4Table ? Data.GetDouble(_offsetUnknown4Addr) : 0;
+            get => HasUnknown4Table ? Data.GetInt32(_offsetUnknown4Addr) : 0;
             set {
                 if (HasUnknown3Table)
-                    Data.SetDouble(_offsetUnknown4Addr, value);
+                    Data.SetInt32(_offsetUnknown4Addr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetGroundPaletteAddr), displayOrder: 17, isPointer: true, displayGroup: "Main")]
         public int OffsetGroundPalette {
-            get => Data.GetDouble(_offsetGroundPaletteAddr);
-            set => Data.SetDouble(_offsetGroundPaletteAddr, value);
+            get => Data.GetInt32(_offsetGroundPaletteAddr);
+            set => Data.SetInt32(_offsetGroundPaletteAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetSkyPaletteAddr), displayOrder: 18, isPointer: true, displayGroup: "Main")]
         public int OffsetSkyPalette {
-            get => Data.GetDouble(_offsetSkyPaletteAddr);
-            set => Data.SetDouble(_offsetSkyPaletteAddr, value);
+            get => Data.GetInt32(_offsetSkyPaletteAddr);
+            set => Data.SetInt32(_offsetSkyPaletteAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetTexturePaletteAddr), displayName: nameof(OffsetTexturePalette) + " (Scn3+)", displayOrder: 19, isPointer: true, visibilityProperty: nameof(HasTexturePalette), displayGroup: "Main")]
         public int OffsetTexturePalette {
-            get => HasTexturePalette ? Data.GetDouble(_offsetTexturePaletteAddr) : 0;
+            get => HasTexturePalette ? Data.GetInt32(_offsetTexturePaletteAddr) : 0;
             set {
                 if (HasTexturePalette)
-                    Data.SetDouble(_offsetTexturePaletteAddr, value);
+                    Data.SetInt32(_offsetTexturePaletteAddr, value);
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetIndexedTexturesAddr), displayName: nameof(OffsetIndexedTextures) + " (Scn3+)", displayOrder: 19.5f, isPointer: true, visibilityProperty: nameof(HasIndexedTextures), displayGroup: "Main")]
         public int OffsetIndexedTextures {
-            get => HasIndexedTextures ? Data.GetDouble(_offsetIndexedTexturesAddr) : 0;
+            get => HasIndexedTextures ? Data.GetInt32(_offsetIndexedTexturesAddr) : 0;
             set {
                 if (HasIndexedTextures)
-                    Data.SetDouble(_offsetIndexedTexturesAddr, value);
+                    Data.SetInt32(_offsetIndexedTexturesAddr, value);
             }
         }
 
@@ -461,15 +461,15 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_padding4Addr), displayOrder: 23.5f, isPointer: true, displayName: "(" + nameof(Padding4) + ")", displayGroup: "Main")]
         public ushort Padding4 {
-            get => Data.GetWord(_padding4Addr);
-            set => Data.SetWord(_padding4Addr, value);
+            get => Data.GetUInt16(_padding4Addr);
+            set => Data.SetUInt16(_padding4Addr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_offsetBoundariesAddr), displayOrder: 24, isPointer: true, displayGroup: "Main")]
         public int OffsetBoundaries {
-            get => Data.GetDouble(_offsetBoundariesAddr);
-            set => Data.SetDouble(_offsetBoundariesAddr, value);
+            get => Data.GetInt32(_offsetBoundariesAddr);
+            set => Data.SetInt32(_offsetBoundariesAddr, value);
         }
     }
 }

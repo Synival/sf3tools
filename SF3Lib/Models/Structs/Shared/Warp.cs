@@ -40,8 +40,8 @@ namespace SF3.Models.Structs.Shared {
 
         [TableViewModelColumn(addressField: nameof(_rawDataAddr), displayOrder: 0, displayFormat: "X8")]
         public uint RawData {
-            get => (uint) Data.GetDouble(_rawDataAddr);
-            set => Data.SetDouble(_rawDataAddr, (int) value);
+            get => (uint) Data.GetInt32(_rawDataAddr);
+            set => Data.SetInt32(_rawDataAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_rawDataAddr), displayOrder: 1, displayFormat: "X2")]

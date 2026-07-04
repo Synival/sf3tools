@@ -39,29 +39,29 @@ namespace SF3.Models.Structs.MPD.Main {
         [TableViewModelColumn(addressField: nameof(_flagAddr), displayOrder: 0, displayFormat: "X3", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         public int Flag {
-            get => Data.GetDouble(_flagAddr);
-            set => Data.SetDouble(_flagAddr, value);
+            get => Data.GetInt32(_flagAddr);
+            set => Data.SetInt32(_flagAddr, value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_visibleModelsWhenFlagOffOffsetAddr), displayOrder: 1, displayName: "Visible Models (Flag Off)", isPointer: true)]
         public uint VisibleModelsWhenFlagOffOffset {
-            get => (uint) Data.GetDouble(_visibleModelsWhenFlagOffOffsetAddr);
-            set => Data.SetDouble(_visibleModelsWhenFlagOffOffsetAddr, (int) value);
+            get => (uint) Data.GetInt32(_visibleModelsWhenFlagOffOffsetAddr);
+            set => Data.SetInt32(_visibleModelsWhenFlagOffOffsetAddr, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_visibleModelsWhenFlagOnOffsetAddr), displayOrder: 2, displayName: "Visible Models (Flag On)", isPointer: true)]
         public uint VisibleModelsWhenFlagOnOffset {
-            get => (uint) Data.GetDouble(_visibleModelsWhenFlagOnOffsetAddr);
-            set => Data.SetDouble(_visibleModelsWhenFlagOnOffsetAddr, (int) value);
+            get => (uint) Data.GetInt32(_visibleModelsWhenFlagOnOffsetAddr);
+            set => Data.SetInt32(_visibleModelsWhenFlagOnOffsetAddr, (int) value);
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_stateAddr), displayOrder: 3, displayName: "State (set in-game)", displayFormat: "X2")]
         public uint State {
-            get => (uint) Data.GetDouble(_stateAddr);
-            set => Data.SetDouble(_stateAddr, (int) value);
+            get => (uint) Data.GetInt32(_stateAddr);
+            set => Data.SetInt32(_stateAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 4, displayName: "State (in editor)")]

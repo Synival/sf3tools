@@ -15,24 +15,24 @@ namespace SF3.Models.Structs.X014 {
         }
 
         private bool GetModelIndexAvailable(int promotionWeaponIndex)
-            => ((Data.GetDouble(_modelIndicesAvailableAddr) >> promotionWeaponIndex) & 0x01) == 0x01;
+            => ((Data.GetInt32(_modelIndicesAvailableAddr) >> promotionWeaponIndex) & 0x01) == 0x01;
 
         private void SetModelIndexAvailable(int promotionWeaponIndex, bool value)
-            => Data.SetDouble(_modelIndicesAvailableAddr, value ? (Data.GetDouble(_modelIndicesAvailableAddr) | (0x01 << promotionWeaponIndex)) : (Data.GetDouble(_modelIndicesAvailableAddr) & ~(0x01 << promotionWeaponIndex)));
+            => Data.SetInt32(_modelIndicesAvailableAddr, value ? (Data.GetInt32(_modelIndicesAvailableAddr) | (0x01 << promotionWeaponIndex)) : (Data.GetInt32(_modelIndicesAvailableAddr) & ~(0x01 << promotionWeaponIndex)));
 
         [TableViewModelColumn(addressField: nameof(_modelFileIdAddr), displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int ModelFileID {
-            get => Data.GetDouble(_modelFileIdAddr);
-            set => Data.SetDouble(_modelFileIdAddr, value);
+            get => Data.GetInt32(_modelFileIdAddr);
+            set => Data.SetInt32(_modelFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelFileUnknownHeaderAddrAddr), displayOrder: 1, displayFormat: "X8", minWidth: 75)]
         [BulkCopy]
         public uint ModelFileUnknownHeaderAddr {
-            get => (uint) Data.GetDouble(_modelFileUnknownHeaderAddrAddr);
-            set => Data.SetDouble(_modelFileUnknownHeaderAddrAddr, (int) value);
+            get => (uint) Data.GetInt32(_modelFileUnknownHeaderAddrAddr);
+            set => Data.SetInt32(_modelFileUnknownHeaderAddrAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelIndicesAvailableAddr), displayOrder: 2)]

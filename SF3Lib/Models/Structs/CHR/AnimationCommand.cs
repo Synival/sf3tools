@@ -48,8 +48,8 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: nameof(_frameIdAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public ushort Command {
-            get => Data.GetWord(_frameIdAddr);
-            set => Data.SetWord(_frameIdAddr, value);
+            get => Data.GetUInt16(_frameIdAddr);
+            set => Data.SetUInt16(_frameIdAddr, value);
         }
 
         [TableViewModelColumn(displayOrder: 0.5f, minWidth: 150)]
@@ -59,8 +59,8 @@ namespace SF3.Models.Structs.CHR {
         [TableViewModelColumn(addressField: nameof(_durationAddr), displayOrder: 1, displayFormat: "X2", displayName: "Parameter/Duration")]
         [BulkCopy]
         public ushort Parameter {
-            get => Data.GetWord(_durationAddr);
-            set => Data.SetWord(_durationAddr, value);
+            get => Data.GetUInt16(_durationAddr);
+            set => Data.SetUInt16(_durationAddr, value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2)]

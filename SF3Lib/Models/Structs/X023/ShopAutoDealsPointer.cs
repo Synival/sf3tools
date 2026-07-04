@@ -20,18 +20,18 @@ namespace SF3.Models.Structs.X023 {
         [TableViewModelColumn(displayOrder: 0, addressField: nameof(_shopAutoDealsAddr), isPointer: true, minWidth: 150)]
         [BulkCopy]
         public uint ShopAutoDeals {
-            get => (uint) Data.GetDouble(_shopAutoDealsAddr);
-            set => Data.SetDouble(_shopAutoDealsAddr, (int) value);
+            get => (uint) Data.GetInt32(_shopAutoDealsAddr);
+            set => Data.SetInt32(_shopAutoDealsAddr, (int) value);
         }
 
         [TableViewModelColumn(displayOrder: 1, addressField: nameof(_flagAddr), displayFormat: "X2", minWidth: 250, visibilityProperty: nameof(HasFlag), displayName: "Flag (Scn3+)")]
         [NameGetter(NamedValueType.GameFlag)]
         [BulkCopy]
         public int? Flag {
-            get => HasFlagOffset.HasValue ? Data.GetDouble((int) ShopAutoDeals - HasFlagOffset.Value) : (int?) null;
+            get => HasFlagOffset.HasValue ? Data.GetInt32((int) ShopAutoDeals - HasFlagOffset.Value) : (int?) null;
             set {
                 if (HasFlagOffset.HasValue)
-                    Data.SetDouble((int) ShopAutoDeals - HasFlagOffset.Value, value.Value);
+                    Data.SetInt32((int) ShopAutoDeals - HasFlagOffset.Value, value.Value);
             }
         }
     }

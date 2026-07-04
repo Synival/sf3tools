@@ -36,21 +36,21 @@ namespace SF3.Models.Structs.CHR {
             );
 
             // It seems that this CHR and *only* this CHR has a bigger animation table than the rest.
-            var nextId = (uint) Data.GetWord(Address + 0x18);
+            var nextId = (uint) Data.GetUInt16(Address + 0x18);
 
             // Determine the size of the animation table, which isn't always 16 (in XOP101.CHR, it's 21).
             int nextAnimationTableOffset;
             if (nextId != 0xFFFF) {
-                nextAnimationTableOffset = Data.GetDouble(Address + 0x18 + 0x14);
-                var nextAnimationTableFirstAnimationOffset = Data.GetDouble((int) DataOffset + nextAnimationTableOffset);
+                nextAnimationTableOffset = Data.GetInt32(Address + 0x18 + 0x14);
+                var nextAnimationTableFirstAnimationOffset = Data.GetInt32((int) DataOffset + nextAnimationTableOffset);
                 // TODO: This will break if the first animation has an offset of 0x00.
                 if (nextAnimationTableFirstAnimationOffset != 0)
                     nextAnimationTableOffset = Math.Min(nextAnimationTableOffset, nextAnimationTableFirstAnimationOffset);
             }
             else {
                 var firstHeaderAddr = Address - 0x18 * IDInGroup;
-                var firstFrameTableOffset = Data.GetDouble(firstHeaderAddr + 0x10);
-                var firstFrameOffset = Data.GetDouble(firstFrameTableOffset + (int) DataOffset);
+                var firstFrameTableOffset = Data.GetInt32(firstHeaderAddr + 0x10);
+                var firstFrameOffset = Data.GetInt32(firstFrameTableOffset + (int) DataOffset);
                 nextAnimationTableOffset = (firstFrameOffset == 0) ? firstFrameTableOffset : Math.Min(firstFrameTableOffset, firstFrameOffset);
             }
             var animationTableSize = Math.Max(16, (nextAnimationTableOffset - (int) Header.AnimationTableOffset) / 4);

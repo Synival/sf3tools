@@ -31,70 +31,70 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_numPointsAddr), displayOrder: 0, displayFormat: "X2")]
         [BulkCopy]
         public byte NumPoints {
-            get => (byte) Data.GetByte(_numPointsAddr);
-            set => Data.SetByte(_numPointsAddr, value);
+            get => (byte) Data.GetUInt8(_numPointsAddr);
+            set => Data.SetUInt8(_numPointsAddr, value);
         }
 
         [BulkCopy]
         public byte Padding0x02 {
-            get => (byte) Data.GetByte(_padding0x02Addr);
-            set => Data.SetByte(_padding0x02Addr, value);
+            get => (byte) Data.GetUInt8(_padding0x02Addr);
+            set => Data.SetUInt8(_padding0x02Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x1Addr), displayOrder: 1)]
         [BulkCopy]
         public ushort X1 {
-            get => Data.GetWord(_x1Addr);
-            set => Data.SetWord(_x1Addr, value);
+            get => Data.GetUInt16(_x1Addr);
+            set => Data.SetUInt16(_x1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z1Addr), displayOrder: 2)]
         [BulkCopy]
         public ushort Z1 {
-            get => Data.GetWord(_z1Addr);
-            set => Data.SetWord(_z1Addr, value);
+            get => Data.GetUInt16(_z1Addr);
+            set => Data.SetUInt16(_z1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x2Addr), displayOrder: 3)]
         [BulkCopy]
         public ushort X2 {
-            get => Data.GetWord(_x2Addr);
-            set => Data.SetWord(_x2Addr, value);
+            get => Data.GetUInt16(_x2Addr);
+            set => Data.SetUInt16(_x2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z2Addr), displayOrder: 4)]
         [BulkCopy]
         public ushort Z2 {
-            get => Data.GetWord(_z2Addr);
-            set => Data.SetWord(_z2Addr, value);
+            get => Data.GetUInt16(_z2Addr);
+            set => Data.SetUInt16(_z2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x3Addr), displayOrder: 5)]
         [BulkCopy]
         public ushort X3 {
-            get => Data.GetWord(_x3Addr);
-            set => Data.SetWord(_x3Addr, value);
+            get => Data.GetUInt16(_x3Addr);
+            set => Data.SetUInt16(_x3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z3Addr), displayOrder: 6)]
         [BulkCopy]
         public ushort Z3 {
-            get => Data.GetWord(_z3Addr);
-            set => Data.SetWord(_z3Addr, value);
+            get => Data.GetUInt16(_z3Addr);
+            set => Data.SetUInt16(_z3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_x4Addr), displayOrder: 7)]
         [BulkCopy]
         public ushort X4 {
-            get => Data.GetWord(_x4Addr);
-            set => Data.SetWord(_x4Addr, value);
+            get => Data.GetUInt16(_x4Addr);
+            set => Data.SetUInt16(_x4Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_z4Addr), displayOrder: 8)]
         [BulkCopy]
         public ushort Z4 {
-            get => Data.GetWord(_z4Addr);
-            set => Data.SetWord(_z4Addr, value);
+            get => Data.GetUInt16(_z4Addr);
+            set => Data.SetUInt16(_z4Addr, value);
         }
     }
 }

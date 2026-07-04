@@ -24,44 +24,44 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int MPDFileID {
-            get => Data.GetDouble(_mpdFileIdAddr);
-            set => Data.SetDouble(_mpdFileIdAddr, value);
+            get => Data.GetInt32(_mpdFileIdAddr);
+            set => Data.SetInt32(_mpdFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_battleSceneFileIdAddr), displayOrder: 1, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int BattleSceneFileID {
-            get => Data.GetDouble(_battleSceneFileIdAddr);
-            set => Data.SetDouble(_battleSceneFileIdAddr, value);
+            get => Data.GetInt32(_battleSceneFileIdAddr);
+            set => Data.SetInt32(_battleSceneFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_skyIdAddr), displayOrder: 2, displayFormat: "X2")]
         [BulkCopy]
         public ushort SkyID {
-            get => (ushort) Data.GetWord(_skyIdAddr);
-            set => Data.SetWord(_skyIdAddr, value);
+            get => (ushort) Data.GetUInt16(_skyIdAddr);
+            set => Data.SetUInt16(_skyIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_lightingStyleAddr), displayOrder: 3, minWidth: 150)]
         [BulkCopy]
         public LightingStyleType LightingStyle {
-            get => (LightingStyleType) Data.GetWord(_lightingStyleAddr);
-            set => Data.SetWord(_lightingStyleAddr, (ushort) value);
+            get => (LightingStyleType) Data.GetUInt16(_lightingStyleAddr);
+            set => Data.SetUInt16(_lightingStyleAddr, (ushort) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_fogStyleAddr), displayOrder: 4, minWidth: 100)]
         [BulkCopy]
         public FogStyleType FogStyle {
-            get => (FogStyleType) Data.GetWord(_fogStyleAddr);
-            set => Data.SetWord(_fogStyleAddr, (ushort) value);
+            get => (FogStyleType) Data.GetUInt16(_fogStyleAddr);
+            set => Data.SetUInt16(_fogStyleAddr, (ushort) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_ffffAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
         public ushort FFFF {
-            get => (ushort) Data.GetWord(_ffffAddr);
-            set => Data.SetWord(_ffffAddr, value);
+            get => (ushort) Data.GetUInt16(_ffffAddr);
+            set => Data.SetUInt16(_ffffAddr, value);
         }
     }
 }

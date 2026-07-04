@@ -31,18 +31,18 @@ namespace SF3.CHR {
         ) {
             // Build the 0x18 bytes for the header entry.
             var outputData = new ByteData.ByteData(new ByteArray(0x18));
-            outputData.SetWord(0x00, spriteId);
-            outputData.SetWord(0x02, width);
-            outputData.SetWord(0x04, height);
-            outputData.SetByte(0x06, directions);
-            outputData.SetByte(0x07, verticalOffset);
-            outputData.SetByte(0x08, unknown0x08);
-            outputData.SetByte(0x09, collisionSize);
-            outputData.SetByte(0x0A, promotionLevel);
+            outputData.SetUInt16(0x00, spriteId);
+            outputData.SetUInt16(0x02, width);
+            outputData.SetUInt16(0x04, height);
+            outputData.SetUInt8(0x06, directions);
+            outputData.SetUInt8(0x07, verticalOffset);
+            outputData.SetUInt8(0x08, unknown0x08);
+            outputData.SetUInt8(0x09, collisionSize);
+            outputData.SetUInt8(0x0A, promotionLevel);
             // (1 byte of padding here)
-            outputData.SetDouble(0x0C, scale);
-            outputData.SetDouble(0x10, 0x00000000); // Frame table offset
-            outputData.SetDouble(0x14, 0x00000000); // Animation table offset
+            outputData.SetInt32(0x0C, scale);
+            outputData.SetInt32(0x10, 0x00000000); // Frame table offset
+            outputData.SetInt32(0x14, 0x00000000); // Animation table offset
 
             // Track the position of the frame table and animation table offsets in the output stream.
             // We'll set them later when we actually write those tables.

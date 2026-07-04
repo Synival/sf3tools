@@ -18,14 +18,14 @@ namespace SF3.Models.Structs.Shared {
         public int IconOffset {
             get {
                 return Has16BitIconAddr
-                    ? Data.GetWord(_theItemIconAddr)
-                    : Data.GetDouble(_theItemIconAddr);
+                    ? Data.GetUInt16(_theItemIconAddr)
+                    : Data.GetInt32(_theItemIconAddr);
             }
             set {
                 if (Has16BitIconAddr)
-                    Data.SetWord(_theItemIconAddr, (ushort) value);
+                    Data.SetUInt16(_theItemIconAddr, (ushort) value);
                 else
-                    Data.SetDouble(_theItemIconAddr, value);
+                    Data.SetInt32(_theItemIconAddr, value);
             }
         }
     }

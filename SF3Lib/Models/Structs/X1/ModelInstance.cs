@@ -33,24 +33,24 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_matrixBasisAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte MatrixBasis {
-            get => (byte) Data.GetByte(_matrixBasisAddr);
-            set => Data.SetByte(_matrixBasisAddr, value);
+            get => (byte) Data.GetUInt8(_matrixBasisAddr);
+            set => Data.SetUInt8(_matrixBasisAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_typeAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
         [NameGetter(NamedValueType.ModelInstanceType)]
         [BulkCopy]
         public int Type {
-            get => Data.GetByte(_typeAddr);
-            set => Data.SetByte(_typeAddr, (byte) value);
+            get => Data.GetUInt8(_typeAddr);
+            set => Data.SetUInt8(_typeAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_scriptAddr), displayOrder: 3, isPointer: true, minWidth: 300)]
         [NameGetter(NamedValueType.ActorScript, nameof(ActorScripts))]
         [BulkCopy]
         public uint ScriptAddr {
-            get => (uint) Data.GetDouble(_scriptAddr);
-            set => Data.SetDouble(_scriptAddr, (int) value);
+            get => (uint) Data.GetInt32(_scriptAddr);
+            set => Data.SetInt32(_scriptAddr, (int) value);
         }
     }
 }

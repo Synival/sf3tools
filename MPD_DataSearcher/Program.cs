@@ -139,7 +139,7 @@ namespace MPD_DataSearcher {
 
                             // Add some extra untracked pointers.
                             dataRanges.Add(new DataRange(mpdFileData, "Header**", 0, 4));
-                            var subPointer = mpdFile.Data.GetDouble(0) - 0x290000;
+                            var subPointer = mpdFile.Data.GetInt32(0) - 0x290000;
                             dataRanges.Add(new DataRange(mpdFileData, "Header*", subPointer, subPointer + 4));
 
                             // Add compressed data as tracked data streams. This will prevent the *compressed data* from being

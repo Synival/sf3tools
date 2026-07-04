@@ -21,36 +21,36 @@ namespace SF3.Models.Structs.X1 {
         [TableViewModelColumn(addressField: nameof(_modelInstanceTablePtrAddr), displayOrder: 0, displayName: "ModelsPtr", isPointer: true)]
         [BulkCopy]
         public uint ModelInstanceTablePtr {
-            get => (uint) Data.GetDouble(_modelInstanceTablePtrAddr);
-            set => Data.SetDouble(_modelInstanceTablePtrAddr, (int) value);
+            get => (uint) Data.GetInt32(_modelInstanceTablePtrAddr);
+            set => Data.SetInt32(_modelInstanceTablePtrAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_matrixTablePtrAddr), displayOrder: 1, displayName: "MatricesPtr", isPointer: true)]
         [BulkCopy]
         public uint MatrixTablePtr {
-            get => (uint) Data.GetDouble(_matrixTablePtrAddr);
-            set => Data.SetDouble(_matrixTablePtrAddr, (int) value);
+            get => (uint) Data.GetInt32(_matrixTablePtrAddr);
+            set => Data.SetInt32(_matrixTablePtrAddr, (int) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_posXAddr), displayOrder: 2, displayFormat: "X8", minWidth: 75)]
         [BulkCopy]
         public int PosX {
-            get => Data.GetDouble(_posXAddr);
-            set => Data.SetDouble(_posXAddr, value);
+            get => Data.GetInt32(_posXAddr);
+            set => Data.SetInt32(_posXAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_posYAddr), displayOrder: 3, displayFormat: "X8", minWidth: 75)]
         [BulkCopy]
         public int PosY {
-            get => Data.GetDouble(_posYAddr);
-            set => Data.SetDouble(_posYAddr, value);
+            get => Data.GetInt32(_posYAddr);
+            set => Data.SetInt32(_posYAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_posZAddr), displayOrder: 4, displayFormat: "X8", minWidth: 75)]
         [BulkCopy]
         public int PosZ {
-            get => Data.GetDouble(_posZAddr);
-            set => Data.SetDouble(_posZAddr, value);
+            get => Data.GetInt32(_posZAddr);
+            set => Data.SetInt32(_posZAddr, value);
         }
     }
 }

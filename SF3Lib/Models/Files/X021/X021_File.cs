@@ -27,8 +27,8 @@ namespace SF3.Models.Files.X021 {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var spellIconAddress = Data.GetDouble(0x0030) - RamAddress;
-            var itemIconAddress  = Data.GetDouble(0x003C) - RamAddress;
+            var spellIconAddress = Data.GetInt32(0x0030) - RamAddress;
+            var itemIconAddress  = Data.GetInt32(0x003C) - RamAddress;
 
             return new List<ITable>() {
                 (SpellIconTable = SpellIconTable.Create(Data, "SpellIcons", ResourceFileForScenario(Scenario, "SpellIcons.xml"), spellIconAddress, false, Scenario)),

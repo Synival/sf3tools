@@ -50,143 +50,143 @@ namespace SF3.Models.Structs.Shared {
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort MaterialItem {
-            get => Data.GetWord(_materialItemAddr);
-            set => Data.SetWord(_materialItemAddr, value);
+            get => Data.GetUInt16(_materialItemAddr);
+            set => Data.SetUInt16(_materialItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_requestItemTypeAddr), displayOrder: 1, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.WeaponType)]
         [BulkCopy]
         public ushort RequestItemType {
-            get => Data.GetWord(_requestItemTypeAddr);
-            set => Data.SetWord(_requestItemTypeAddr, value);
+            get => Data.GetUInt16(_requestItemTypeAddr);
+            set => Data.SetUInt16(_requestItemTypeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result1ItemAddr), displayOrder: 2, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result1Item {
-            get => Data.GetWord(_result1ItemAddr);
-            set => Data.SetWord(_result1ItemAddr, value);
+            get => Data.GetUInt16(_result1ItemAddr);
+            set => Data.SetUInt16(_result1ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result1ChanceAddr), displayOrder: 3, displayName: "Result1 %Chance")]
         [BulkCopy]
         public ushort Result1Chance {
-            get => Data.GetWord(_result1ChanceAddr);
-            set => Data.SetWord(_result1ChanceAddr, value);
+            get => Data.GetUInt16(_result1ChanceAddr);
+            set => Data.SetUInt16(_result1ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result2ItemAddr), displayOrder: 4, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result2Item {
-            get => Data.GetWord(_result2ItemAddr);
-            set => Data.SetWord(_result2ItemAddr, value);
+            get => Data.GetUInt16(_result2ItemAddr);
+            set => Data.SetUInt16(_result2ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result2ChanceAddr), displayOrder: 5, displayName: "Result2 %Chance")]
         [BulkCopy]
         public ushort Result2Chance {
-            get => Data.GetWord(_result2ChanceAddr);
-            set => Data.SetWord(_result2ChanceAddr, value);
+            get => Data.GetUInt16(_result2ChanceAddr);
+            set => Data.SetUInt16(_result2ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result3ItemAddr), displayOrder: 6, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result3Item {
-            get => Data.GetWord(_result3ItemAddr);
-            set => Data.SetWord(_result3ItemAddr, value);
+            get => Data.GetUInt16(_result3ItemAddr);
+            set => Data.SetUInt16(_result3ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result3ChanceAddr), displayOrder: 7, displayName: "Result3 %Chance")]
         [BulkCopy]
         public ushort Result3Chance {
-            get => Data.GetWord(_result3ChanceAddr);
-            set => Data.SetWord(_result3ChanceAddr, value);
+            get => Data.GetUInt16(_result3ChanceAddr);
+            set => Data.SetUInt16(_result3ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result4ItemAddr), displayOrder: 8, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result4Item {
-            get => Data.GetWord(_result4ItemAddr);
-            set => Data.SetWord(_result4ItemAddr, value);
+            get => Data.GetUInt16(_result4ItemAddr);
+            set => Data.SetUInt16(_result4ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result4ChanceAddr), displayOrder: 9, displayName: "Result4 %Chance")]
         [BulkCopy]
         public ushort Result4Chance {
-            get => Data.GetWord(_result4ChanceAddr);
-            set => Data.SetWord(_result4ChanceAddr, value);
+            get => Data.GetUInt16(_result4ChanceAddr);
+            set => Data.SetUInt16(_result4ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result5ItemAddr), displayOrder: 10, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result5Item {
-            get => Data.GetWord(_result5ItemAddr);
-            set => Data.SetWord(_result5ItemAddr, value);
+            get => Data.GetUInt16(_result5ItemAddr);
+            set => Data.SetUInt16(_result5ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result5ChanceAddr), displayOrder: 11, displayName: "Result5 %Chance")]
         [BulkCopy]
         public ushort Result5Chance {
-            get => Data.GetWord(_result5ChanceAddr);
-            set => Data.SetWord(_result5ChanceAddr, value);
+            get => Data.GetUInt16(_result5ChanceAddr);
+            set => Data.SetUInt16(_result5ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result6ItemAddr), displayOrder: 12, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result6Item {
-            get => Data.GetWord(_result6ItemAddr);
-            set => Data.SetWord(_result6ItemAddr, value);
+            get => Data.GetUInt16(_result6ItemAddr);
+            set => Data.SetUInt16(_result6ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result6ChanceAddr), displayOrder: 13, displayName: "Result6 %Chance")]
         [BulkCopy]
         public ushort Result6Chance {
-            get => Data.GetWord(_result6ChanceAddr);
-            set => Data.SetWord(_result6ChanceAddr, value);
+            get => Data.GetUInt16(_result6ChanceAddr);
+            set => Data.SetUInt16(_result6ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result7ItemAddr), displayOrder: 14, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result7Item {
-            get => Data.GetWord(_result7ItemAddr);
-            set => Data.SetWord(_result7ItemAddr, value);
+            get => Data.GetUInt16(_result7ItemAddr);
+            set => Data.SetUInt16(_result7ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result7ChanceAddr), displayOrder: 15, displayName: "Result7 %Chance")]
         [BulkCopy]
         public ushort Result7Chance {
-            get => Data.GetWord(_result7ChanceAddr);
-            set => Data.SetWord(_result7ChanceAddr, value);
+            get => Data.GetUInt16(_result7ChanceAddr);
+            set => Data.SetUInt16(_result7ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result8ItemAddr), displayOrder: 16, displayFormat: "X2", minWidth: 120)]
         [NameGetter(NamedValueType.Item)]
         [BulkCopy]
         public ushort Result8Item {
-            get => Data.GetWord(_result8ItemAddr);
-            set => Data.SetWord(_result8ItemAddr, value);
+            get => Data.GetUInt16(_result8ItemAddr);
+            set => Data.SetUInt16(_result8ItemAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_result8ChanceAddr), displayOrder: 17, displayName: "Result8 %Chance")]
         [BulkCopy]
         public ushort Result8Chance {
-            get => Data.GetWord(_result8ChanceAddr);
-            set => Data.SetWord(_result8ChanceAddr, value);
+            get => Data.GetUInt16(_result8ChanceAddr);
+            set => Data.SetUInt16(_result8ChanceAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_costAddr), displayOrder: 18)]
         [BulkCopy]
         public int Cost {
-            get => Data.GetDouble(_costAddr);
-            set => Data.SetDouble(_costAddr, value);
+            get => Data.GetInt32(_costAddr);
+            set => Data.SetInt32(_costAddr, value);
         }
     }
 }

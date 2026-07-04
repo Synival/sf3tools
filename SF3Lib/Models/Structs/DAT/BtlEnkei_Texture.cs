@@ -9,7 +9,7 @@ namespace SF3.Models.Structs.DAT {
         private readonly int _paddingAddr;
 
         public BtlEnkei_Texture(IByteData data, int id, string name, int address)
-        : base(data, id, name, address, 0x10, data.GetDouble(address)
+        : base(data, id, name, address, 0x10, data.GetInt32(address)
         ) {
             _paletteImageOffsetAddr = Address + 0x00; // 4 bytes
             _paletteImageSizeAddr   = Address + 0x04; // 4 bytes
@@ -34,26 +34,26 @@ namespace SF3.Models.Structs.DAT {
 
         [TableViewModelColumn(addressField: nameof(_paletteImageOffsetAddr), displayOrder: -0.5f, isPointer: true)]
         public int PaletteImageOffset {
-            get => Data.GetDouble(_paletteImageOffsetAddr);
-            set => Data.SetDouble(_paletteImageOffsetAddr, value);
+            get => Data.GetInt32(_paletteImageOffsetAddr);
+            set => Data.SetInt32(_paletteImageOffsetAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_paletteImageSizeAddr), displayOrder: -0.4f, displayName: "Palette+Image Size", displayFormat: "X4")]
         public int PaletteImageSize {
-            get => Data.GetDouble(_paletteImageSizeAddr);
-            set => Data.SetDouble(_paletteImageSizeAddr, value);
+            get => Data.GetInt32(_paletteImageSizeAddr);
+            set => Data.SetInt32(_paletteImageSizeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_loadSizeAddr), displayOrder: -0.3f, displayFormat: "X4")]
         public int LoadSize {
-            get => Data.GetDouble(_loadSizeAddr);
-            set => Data.SetDouble(_loadSizeAddr, value);
+            get => Data.GetInt32(_loadSizeAddr);
+            set => Data.SetInt32(_loadSizeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_paddingAddr), displayOrder: -0.2f, displayFormat: "X4")]
         public int Padding {
-            get => Data.GetDouble(_paddingAddr);
-            set => Data.SetDouble(_paddingAddr, value);
+            get => Data.GetInt32(_paddingAddr);
+            set => Data.SetInt32(_paddingAddr, value);
         }
     }
 }

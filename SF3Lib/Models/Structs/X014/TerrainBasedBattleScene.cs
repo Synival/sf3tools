@@ -17,8 +17,8 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int BattleSceneFileID {
-            get => Data.GetDouble(_battleSceneFileIdAddr);
-            set => Data.SetDouble(_battleSceneFileIdAddr, value);
+            get => Data.GetInt32(_battleSceneFileIdAddr);
+            set => Data.SetInt32(_battleSceneFileIdAddr, value);
         }
     }
 }

@@ -13,17 +13,17 @@ namespace SF3.Models.Structs.X014 {
         }
 
         private byte GetModelIndex(int promotionWeaponIndex)
-            => (byte) ((Data.GetDouble(_modelIndicesAddr) >> (promotionWeaponIndex * 4)) & 0x0F);
+            => (byte) ((Data.GetInt32(_modelIndicesAddr) >> (promotionWeaponIndex * 4)) & 0x0F);
 
         private void SetModelIndex(int promotionWeaponIndex, byte value)
-            => Data.SetDouble(_modelIndicesAddr, Data.GetDouble(_modelIndicesAddr) & ~(0x0F << (promotionWeaponIndex * 4)) | ((value & 0x0F) << (promotionWeaponIndex * 4)));
+            => Data.SetInt32(_modelIndicesAddr, Data.GetInt32(_modelIndicesAddr) & ~(0x0F << (promotionWeaponIndex * 4)) | ((value & 0x0F) << (promotionWeaponIndex * 4)));
 
         [TableViewModelColumn(addressField: nameof(_modelFileIdAddr), displayOrder: 0, displayFormat: "X3", minWidth: 120)]
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int ModelFileID {
-            get => Data.GetDouble(_modelFileIdAddr);
-            set => Data.SetDouble(_modelFileIdAddr, value);
+            get => Data.GetInt32(_modelFileIdAddr);
+            set => Data.SetInt32(_modelFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_modelIndicesAddr), displayOrder: 1, displayFormat: "X1")]

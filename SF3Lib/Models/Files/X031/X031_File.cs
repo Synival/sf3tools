@@ -47,7 +47,7 @@ namespace SF3.Models.Files.X031 {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var checkVersion2 = Data.GetByte(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
+            var checkVersion2 = Data.GetUInt8(0x00000017); //if it's 0x7c we're in a x033.bin version 1.003 scn2
             var isScn2Ver1003  = checkVersion2 == 0x4c;
 
             int statsAddress;

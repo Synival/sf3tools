@@ -133,8 +133,8 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopy]
         [NameGetter(NamedValueType.MonsterForUnit)]
         public ushort EnemyID {
-            get => Data.GetWord(_enemyIDAddr);
-            set => Data.SetWord(_enemyIDAddr, value);
+            get => Data.GetUInt16(_enemyIDAddr);
+            set => Data.SetUInt16(_enemyIDAddr, value);
         }
 
         public bool IsEnemy =>
@@ -188,29 +188,29 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopy]
         [NameGetter(NamedValueType.Item)]
         public ushort ItemOverride {
-            get => Data.GetWord(_itemOverrideAddr);
-            set => Data.SetWord(_itemOverrideAddr, value);
+            get => Data.GetUInt16(_itemOverrideAddr);
+            set => Data.SetUInt16(_itemOverrideAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_dropDisableAddr), displayOrder: 4, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         public int DropDisable {
-            get => Data.GetByte(_dropDisableAddr);
-            set => Data.SetByte(_dropDisableAddr, (byte) value);
+            get => Data.GetUInt8(_dropDisableAddr);
+            set => Data.SetUInt8(_dropDisableAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x09Addr), displayOrder: 5, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         public int DropRate {
-            get => Data.GetByte(_unknown0x09Addr);
-            set => Data.SetByte(_unknown0x09Addr, (byte) value);
+            get => Data.GetUInt8(_unknown0x09Addr);
+            set => Data.SetUInt8(_unknown0x09Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_eventCallAddr), displayOrder: 6, displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         public ushort EventCall {
-            get => Data.GetWord(_eventCallAddr);
-            set => Data.SetWord(_eventCallAddr, value);
+            get => Data.GetUInt16(_eventCallAddr);
+            set => Data.SetUInt16(_eventCallAddr, value);
         }
 
         public NamedValueType? CharacterPlusType
@@ -220,30 +220,30 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(CharacterPlusType))]
         public int CharacterPlus {
-            get => Data.GetByte(_characterPlusAddr);
-            set => Data.SetByte(_characterPlusAddr, (byte) value);
+            get => Data.GetUInt8(_characterPlusAddr);
+            set => Data.SetUInt8(_characterPlusAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_spawnTypeAddr), displayOrder: 8, displayFormat: "X2", minWidth: 230, displayGroup: "Page1")]
         [BulkCopy]
         [NameGetter(NamedValueType.SpawnType)]
         public int SpawnType {
-            get => (Data.GetByte(_spawnTypeAddr) & 0x7F);
-            set => Data.SetByte(_spawnTypeAddr, (byte) ((Data.GetByte(_spawnTypeAddr) & 0x80) | value));
+            get => (Data.GetUInt8(_spawnTypeAddr) & 0x7F);
+            set => Data.SetUInt8(_spawnTypeAddr, (byte) ((Data.GetUInt8(_spawnTypeAddr) & 0x80) | value));
         }
 
         [TableViewModelColumn(addressField: nameof(_spawnTypeAddr), displayOrder: 8.1f, displayGroup: "Page1")]
         [BulkCopy]
         public bool CanSpawnNearby {
-            get => (Data.GetByte(_spawnTypeAddr) & 0x80) == 0x80;
-            set => Data.SetByte(_spawnTypeAddr, (byte) ((Data.GetByte(_spawnTypeAddr) & 0x7F) | (value ? 0x80 : 0x00)));
+            get => (Data.GetUInt8(_spawnTypeAddr) & 0x80) == 0x80;
+            set => Data.SetUInt8(_spawnTypeAddr, (byte) ((Data.GetUInt8(_spawnTypeAddr) & 0x7F) | (value ? 0x80 : 0x00)));
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x0EAddr), displayOrder: 9, displayName: "+0x0E", displayFormat: "X2", displayGroup: "Page1")]
         [BulkCopy]
         public int Unknown0x0E {
-            get => Data.GetByte(_unknown0x0EAddr);
-            set => Data.SetByte(_unknown0x0EAddr, (byte) value);
+            get => Data.GetUInt8(_unknown0x0EAddr);
+            set => Data.SetUInt8(_unknown0x0EAddr, (byte) value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -253,15 +253,15 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_defaultAIIndex), displayOrder: 10, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
         public int DefaultAIIndex {
-            get => Data.GetByte(_defaultAIIndex);
-            set => Data.SetByte(_defaultAIIndex, (byte) value);
+            get => Data.GetUInt8(_defaultAIIndex);
+            set => Data.SetUInt8(_defaultAIIndex, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 11, displayName: "Facing/IsBoss", displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
         public int FacingIsBoss {
-            get => Data.GetByte(_facingIsBossAddr);
-            set => Data.SetByte(_facingIsBossAddr, (byte) value);
+            get => Data.GetUInt8(_facingIsBossAddr);
+            set => Data.SetUInt8(_facingIsBossAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_facingIsBossAddr), displayOrder: 11.5f, minWidth: 80, displayGroup: "Page2")]
@@ -286,15 +286,15 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_teamIdAddr), displayOrder: 13, displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
         public int TeamID {
-            get => Data.GetByte(_teamIdAddr);
-            set => Data.SetByte(_teamIdAddr, (byte) value);
+            get => Data.GetUInt8(_teamIdAddr);
+            set => Data.SetUInt8(_teamIdAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_respawnCountAddr), displayOrder: 14, displayName: "RespawnCount?", displayFormat: "X2", displayGroup: "Page2")]
         [BulkCopy]
         public int RespawnCount {
-            get => Data.GetByte(_respawnCountAddr);
-            set => Data.SetByte(_respawnCountAddr, (byte) value);
+            get => Data.GetUInt8(_respawnCountAddr);
+            set => Data.SetUInt8(_respawnCountAddr, (byte) value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -304,29 +304,29 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_aiCond1Addr), displayOrder: 15, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition1 {
-            get => (uint) Data.GetDouble(_aiCond1Addr);
-            set => Data.SetByte(_aiCond1Addr, (byte) value);
+            get => (uint) Data.GetInt32(_aiCond1Addr);
+            set => Data.SetUInt8(_aiCond1Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aiCond2Addr), displayOrder: 16, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition2 {
-            get => (uint) Data.GetDouble(_aiCond2Addr);
-            set => Data.SetByte(_aiCond2Addr, (byte) value);
+            get => (uint) Data.GetInt32(_aiCond2Addr);
+            set => Data.SetUInt8(_aiCond2Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aiCond3Addr), displayOrder: 17, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition3 {
-            get => (uint) Data.GetDouble(_aiCond3Addr);
-            set => Data.SetByte(_aiCond3Addr, (byte) value);
+            get => (uint) Data.GetInt32(_aiCond3Addr);
+            set => Data.SetUInt8(_aiCond3Addr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_aiCond4Addr), displayOrder: 18, displayFormat: "X8", displayGroup: "Page3")]
         [BulkCopy]
         public uint AICondition4 {
-            get => (uint) Data.GetDouble(_aiCond4Addr);
-            set => Data.SetByte(_aiCond4Addr, (byte) value);
+            get => (uint) Data.GetInt32(_aiCond4Addr);
+            set => Data.SetUInt8(_aiCond4Addr, (byte) value);
         }
 
         // -----------------------------------------------------------------------------------------------------------
@@ -363,8 +363,8 @@ namespace SF3.Models.Structs.X1.Battle {
 
         [BulkCopy]
         public int Padding {
-            get => Data.GetByte(_paddingAddr);
-            set => Data.SetByte(_paddingAddr, (byte) value);
+            get => Data.GetUInt8(_paddingAddr);
+            set => Data.SetUInt8(_paddingAddr, (byte) value);
         }
 
         // ------------------------------------------------------------------------------------------------------------
@@ -374,8 +374,8 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45, displayName: "EnemyFlags", displayFormat: "X4", displayGroup: "Page4")]
         [BulkCopy]
         public ushort Flags {
-            get => (ushort) Data.GetWord(_flagsAddr);
-            set => Data.SetWord(_flagsAddr, value);
+            get => (ushort) Data.GetUInt16(_flagsAddr);
+            set => Data.SetUInt16(_flagsAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 45.01f, displayGroup: "Page4")]
@@ -488,8 +488,8 @@ namespace SF3.Models.Structs.X1.Battle {
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
         public ushort FlagOrBattleID {
-            get => Data.GetWord(_flagTieInAddr);
-            set => Data.SetWord(_flagTieInAddr, value);
+            get => Data.GetUInt16(_flagTieInAddr);
+            set => Data.SetUInt16(_flagTieInAddr, value);
         }
 
         public bool HasActorY => false;

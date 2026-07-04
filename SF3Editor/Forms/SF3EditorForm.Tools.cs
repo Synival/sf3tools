@@ -230,7 +230,7 @@ namespace SF3.Editor.Forms {
 
             var pointersToUpdate = file.Discoveries.GetAllOrdered()
                 .Where(x => x.Type == DiscoveredDataType.Pointer && x.Address >= fileFrom && x.Address < fileTo)
-                .Select(x => new { Pointer = x, Value = file.Data.GetDouble((int) (x.Address - fileFrom)) })
+                .Select(x => new { Pointer = x, Value = file.Data.GetInt32((int) (x.Address - fileFrom)) })
                 .GroupBy(x => x.Pointer.Address)
                 .Select(x => x.First())
                 .Where(x => x.Value >= ptrValueFrom && x.Value < ptrValueTo)
@@ -239,7 +239,7 @@ namespace SF3.Editor.Forms {
             int count = 0;
             foreach (var pointerValue in pointersToUpdate) {
                 var addr = (int) (pointerValue.Pointer.Address - fileFrom);
-                file.Data.SetDouble(addr, pointerValue.Value + moveBy);
+                file.Data.SetInt32(addr, pointerValue.Value + moveBy);
                 count++;
             }
 

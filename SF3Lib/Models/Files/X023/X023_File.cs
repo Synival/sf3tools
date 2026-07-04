@@ -29,39 +29,39 @@ namespace SF3.Models.Files.X023 {
 
         private int GetShopItemPointersAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario1:   return Data.GetDouble(0x2c5c) - RamAddress;
-                case ScenarioType.Scenario2:   return Data.GetDouble(0x2dc0) - RamAddress;
-                case ScenarioType.Scenario3:   return Data.GetDouble(0x2f70) - RamAddress;
-                case ScenarioType.PremiumDisk: return Data.GetDouble(0x2f78) - RamAddress;
+                case ScenarioType.Scenario1:   return Data.GetInt32(0x2c5c) - RamAddress;
+                case ScenarioType.Scenario2:   return Data.GetInt32(0x2dc0) - RamAddress;
+                case ScenarioType.Scenario3:   return Data.GetInt32(0x2f70) - RamAddress;
+                case ScenarioType.PremiumDisk: return Data.GetInt32(0x2f78) - RamAddress;
                 default: return 0;
             }
         }
 
         private int GetShopAutoDealPointersAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario1:   return Data.GetDouble(0x0f68) - RamAddress;
-                case ScenarioType.Scenario2:   return Data.GetDouble(0x0f80) - RamAddress; // Same in both versions
-                case ScenarioType.Scenario3:   return Data.GetDouble(0x10c8) - RamAddress;
-                case ScenarioType.PremiumDisk: return Data.GetDouble(0x10d0) - RamAddress;
+                case ScenarioType.Scenario1:   return Data.GetInt32(0x0f68) - RamAddress;
+                case ScenarioType.Scenario2:   return Data.GetInt32(0x0f80) - RamAddress; // Same in both versions
+                case ScenarioType.Scenario3:   return Data.GetInt32(0x10c8) - RamAddress;
+                case ScenarioType.PremiumDisk: return Data.GetInt32(0x10d0) - RamAddress;
                 default: return 0;
             }
         }
 
         private int GetShopHagglePointersAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario1:   return Data.GetDouble(0x1024) - RamAddress;
-                case ScenarioType.Scenario2:   return Data.GetDouble(0x103c) - RamAddress; // Same in both versions
-                case ScenarioType.Scenario3:   return Data.GetDouble(0x1184) - RamAddress;
-                case ScenarioType.PremiumDisk: return Data.GetDouble(0x118c) - RamAddress;
+                case ScenarioType.Scenario1:   return Data.GetInt32(0x1024) - RamAddress;
+                case ScenarioType.Scenario2:   return Data.GetInt32(0x103c) - RamAddress; // Same in both versions
+                case ScenarioType.Scenario3:   return Data.GetInt32(0x1184) - RamAddress;
+                case ScenarioType.PremiumDisk: return Data.GetInt32(0x118c) - RamAddress;
                 default: return 0;
             }
         }
 
         private int GetBlacksmithTableAddr() {
             switch (Scenario) {
-                case ScenarioType.Scenario2:   return Data.GetDouble(0x4cb4) - RamAddress; // Same in both versions
-                case ScenarioType.Scenario3:   return Data.GetDouble(0x4e24) - RamAddress;
-                case ScenarioType.PremiumDisk: return Data.GetDouble(0x4e2c) - RamAddress;
+                case ScenarioType.Scenario2:   return Data.GetInt32(0x4cb4) - RamAddress; // Same in both versions
+                case ScenarioType.Scenario3:   return Data.GetInt32(0x4e24) - RamAddress;
+                case ScenarioType.PremiumDisk: return Data.GetInt32(0x4e2c) - RamAddress;
                 default: return 0;
             }
         }

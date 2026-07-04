@@ -15,15 +15,15 @@ namespace SF3.Models.Structs.X002 {
         [TableViewModelColumn(addressField: nameof(_attackAddr), displayOrder: 0, displayName: "Attack Atk+")]
         [BulkCopy]
         public int Attack {
-            get => Data.GetByte(_attackAddr);
-            set => Data.SetByte(_attackAddr, (byte) value);
+            get => Data.GetUInt8(_attackAddr);
+            set => Data.SetUInt8(_attackAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_resistAddr), displayOrder: 1, displayName: "Resist MDef+")]
         [BulkCopy]
         public int Resist {
-            get => Data.GetByte(_resistAddr);
-            set => Data.SetByte(_resistAddr, (byte) value);
+            get => Data.GetUInt8(_resistAddr);
+            set => Data.SetUInt8(_resistAddr, (byte) value);
         }
     }
 }

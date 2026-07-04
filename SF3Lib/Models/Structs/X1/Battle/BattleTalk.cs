@@ -21,31 +21,31 @@ namespace SF3.Models.Structs.X1.Battle {
         [NameGetter(NamedValueType.Character)]
         [BulkCopy]
         public int CharacterID {
-            get => Data.GetDouble(_characterId);
-            set => Data.SetDouble(_characterId, value);
+            get => Data.GetInt32(_characterId);
+            set => Data.SetInt32(_characterId, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_battleIdAddr), displayOrder: 1, displayFormat: "X2")]
         [NameGetter(NamedValueType.Character)]
         [BulkCopy]
         public int BattleID {
-            get => Data.GetDouble(_battleIdAddr);
-            set => Data.SetDouble(_battleIdAddr, value);
+            get => Data.GetInt32(_battleIdAddr);
+            set => Data.SetInt32(_battleIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_gameFlagAddr), displayOrder: 2, displayFormat: "X2", minWidth: 200)]
         [NameGetter(NamedValueType.GameFlag)]
         [BulkCopy]
         public int GameFlag {
-            get => Data.GetDouble(_gameFlagAddr);
-            set => Data.SetDouble(_gameFlagAddr, value);
+            get => Data.GetInt32(_gameFlagAddr);
+            set => Data.SetInt32(_gameFlagAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_functionAddr), displayOrder: 3, isPointer: true)]
         [BulkCopy]
         public int Function {
-            get => Data.GetDouble(_functionAddr);
-            set => Data.SetDouble(_functionAddr, value);
+            get => Data.GetInt32(_functionAddr);
+            set => Data.SetInt32(_functionAddr, value);
         }
     }
 }

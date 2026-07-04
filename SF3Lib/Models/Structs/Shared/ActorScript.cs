@@ -44,13 +44,13 @@ namespace SF3.Models.Structs.Shared {
         public uint GetScriptData(int position) {
             return position < 0 || position >= ScriptLength
                 ? throw new ArgumentOutOfRangeException(nameof(position))
-                : (uint) Data.GetDouble(Address + position * 4);
+                : (uint) Data.GetInt32(Address + position * 4);
         }
 
         public void SetScriptData(int position, uint value) {
             if (position < 0 || position >= ScriptLength)
                 throw new ArgumentOutOfRangeException(nameof(position));
-            Data.SetDouble(Address + position * 4, (int) value);
+            Data.SetInt32(Address + position * 4, (int) value);
         }
     }
 }

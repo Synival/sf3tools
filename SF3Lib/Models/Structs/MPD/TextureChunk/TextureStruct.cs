@@ -42,9 +42,9 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             if (inputFormat.HasValue || !nextImageDataOffset.HasValue)
                 return inputFormat ?? TexturePixelFormat.ABGR1555;
 
-            var width  = data.GetByte(address + 0);
-            var height = data.GetByte(address + 1);
-            var offset = data.GetWord(address + 2);
+            var width  = data.GetUInt8(address + 0);
+            var height = data.GetUInt8(address + 1);
+            var offset = data.GetUInt16(address + 2);
 
             if (width > 0 && height > 0) {
                 var imageDataSize = nextImageDataOffset - offset;
@@ -78,20 +78,20 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         [BulkCopy]
         protected override int StructWidth {
-            get => Data.GetByte(_widthAddr);
-            set => Data.SetByte(_widthAddr, (byte) value);
+            get => Data.GetUInt8(_widthAddr);
+            set => Data.SetUInt8(_widthAddr, (byte) value);
         }
 
         [BulkCopy]
         protected override int StructHeight {
-            get => Data.GetByte(_heightAddr);
-            set => Data.SetByte(_heightAddr, (byte) value);
+            get => Data.GetUInt8(_heightAddr);
+            set => Data.SetUInt8(_heightAddr, (byte) value);
         }
 
         [BulkCopy]
         protected override int StructImageDataOffset {
-            get => Data.GetWord(_imageDataOffsetAddr);
-            set => Data.SetWord(_imageDataOffsetAddr, (ushort) value);
+            get => Data.GetUInt16(_imageDataOffsetAddr);
+            set => Data.SetUInt16(_imageDataOffsetAddr, (ushort) value);
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 2.5f)]

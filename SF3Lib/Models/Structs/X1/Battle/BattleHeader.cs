@@ -47,36 +47,36 @@ namespace SF3.Models.Structs.X1.Battle {
         [TableViewModelColumn(addressField: nameof(_mapPointersTableAddressAddr), displayOrder: 0, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int MapPointersTableAddress {
-            get => Data.GetDouble(_mapPointersTableAddressAddr);
-            set => Data.SetDouble(_mapPointersTableAddressAddr, value);
+            get => Data.GetInt32(_mapPointersTableAddressAddr);
+            set => Data.SetInt32(_mapPointersTableAddressAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_unknown0x04Addr), displayOrder: 1, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int Unknown0x04 {
-            get => Data.GetDouble(_unknown0x04Addr);
-            set => Data.SetDouble(_unknown0x04Addr, value);
+            get => Data.GetInt32(_unknown0x04Addr);
+            set => Data.SetInt32(_unknown0x04Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_mapMoveCoordFlagsPointerTableAddressAddr), displayOrder: 2, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int MapMoveCoordFlagsPointerTableAddress {
-            get => Data.GetDouble(_mapMoveCoordFlagsPointerTableAddressAddr);
-            set => Data.SetDouble(_mapMoveCoordFlagsPointerTableAddressAddr, value);
+            get => Data.GetInt32(_mapMoveCoordFlagsPointerTableAddressAddr);
+            set => Data.SetInt32(_mapMoveCoordFlagsPointerTableAddressAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_teamsCantAttackTableAddressAddr), displayOrder: 3, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int TeamsCantAttackTableAddress {
-            get => Data.GetDouble(_teamsCantAttackTableAddressAddr);
-            set => Data.SetDouble(_teamsCantAttackTableAddressAddr, value);
+            get => Data.GetInt32(_teamsCantAttackTableAddressAddr);
+            set => Data.SetInt32(_teamsCantAttackTableAddressAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_teamsCanSupportTableAddressAddr), displayOrder: 4, isPointer: true, minWidth: 80)]
         [BulkCopy]
         public int TeamsCanSupportTableAddress {
-            get => Data.GetDouble(_teamsCanSupportTableAddressAddr);
-            set => Data.SetDouble(_teamsCanSupportTableAddressAddr, value);
+            get => Data.GetInt32(_teamsCanSupportTableAddressAddr);
+            set => Data.SetInt32(_teamsCanSupportTableAddressAddr, value);
         }
 
         public BattleMapPointerTable MapPointerTable { get; }

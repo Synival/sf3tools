@@ -33,14 +33,14 @@ namespace SF3.Models.Structs.Shared {
         public int IconOffsetAfterItems {
             get {
                 return Has16BitIconAddr
-                    ? Data.GetWord(_theSpellIconAddr)
-                    : Data.GetDouble(_theSpellIconAddr);
+                    ? Data.GetUInt16(_theSpellIconAddr)
+                    : Data.GetInt32(_theSpellIconAddr);
             }
             set {
                 if (Has16BitIconAddr)
-                    Data.SetWord(_theSpellIconAddr, (ushort) value);
+                    Data.SetUInt16(_theSpellIconAddr, (ushort) value);
                 else
-                    Data.SetDouble(_theSpellIconAddr, value);
+                    Data.SetInt32(_theSpellIconAddr, value);
             }
         }
     }

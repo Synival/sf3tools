@@ -12,7 +12,7 @@ namespace SF3.Models.Structs.CHR {
             SpriteID = spriteId;
 
             int length = 0;
-            while (Data.GetDouble(address + length * 0x04) != 0x0000)
+            while (Data.GetInt32(address + length * 0x04) != 0x0000)
                 length++;
 
             Length = length;
@@ -29,7 +29,7 @@ namespace SF3.Models.Structs.CHR {
         public int Length { get; }
 
         uint? GetOffset(int index)
-            => (index >= 0 && index < Length) ? (uint) Data.GetDouble(Address + index * 0x04) : (uint?) null;
+            => (index >= 0 && index < Length) ? (uint) Data.GetInt32(Address + index * 0x04) : (uint?) null;
 
         void SetOffset(int index, uint? value) {
             if (value.HasValue && index >= 0 && index < Length)
@@ -39,7 +39,7 @@ namespace SF3.Models.Structs.CHR {
         public IEnumerable<uint> GetOffsets() {
             var offsets = new uint[Length];
             for (int i = 0; i < offsets.Length; i++)
-                offsets[i] = (uint) Data.GetDouble(Address + i * 0x04);
+                offsets[i] = (uint) Data.GetInt32(Address + i * 0x04);
             return offsets;
         }
 

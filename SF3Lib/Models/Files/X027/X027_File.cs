@@ -28,15 +28,15 @@ namespace SF3.Models.Files.X027 {
             switch (Scenario) {
                 case ScenarioType.Scenario3: {
                     return new int[] {
-                        Data.GetDouble(0x34f0) - RamAddress,
-                        Data.GetDouble(0x3e58) - RamAddress
+                        Data.GetInt32(0x34f0) - RamAddress,
+                        Data.GetInt32(0x3e58) - RamAddress
                     };
                 }
 
                 case ScenarioType.PremiumDisk: {
                     return new int[] {
-                        Data.GetDouble(0x34f8) - RamAddress,
-                        Data.GetDouble(0x3e60) - RamAddress
+                        Data.GetInt32(0x34f8) - RamAddress,
+                        Data.GetInt32(0x3e60) - RamAddress
                     };
                 }
 

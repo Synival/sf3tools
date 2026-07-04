@@ -22,7 +22,7 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             // TODO: somehow cache this?
             var tiles = new ushort[64];
             for (var i = 0; i < tiles.Length; i++)
-                tiles[i] = (ushort) Data.GetWord(xAddress[i]);
+                tiles[i] = (ushort) Data.GetUInt16(xAddress[i]);
             return tiles;
         }
 
@@ -54,8 +54,8 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
             => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x80 | (value ? 0x80 : 0x00)));
 
         public ushort this[int index] {
-            get => (ushort) Data.GetWord(xAddress[index]);
-            set => Data.SetWord(xAddress[index], value);
+            get => (ushort) Data.GetUInt16(xAddress[index]);
+            set => Data.SetUInt16(xAddress[index], value);
         }
 
         public bool HasRotation { get; }

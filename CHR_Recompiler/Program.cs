@@ -162,8 +162,8 @@ namespace CHR_Extractor {
                                 var origDataLen = ((CHR_File) chrChpFile).Data.Length;
                                 if (data.Length == origDataLen || (filename == "XBTL127" && data.Length == origDataLen - 0x10)) {
                                     void ChangeByte(int pos, byte from, byte to) {
-                                        if (data.GetByte(pos) == from)
-                                            data.SetByte(pos, to);
+                                        if (data.GetUInt8(pos) == from)
+                                            data.SetUInt8(pos, to);
                                     }
 
                                     if (filename == "XB123MID") {

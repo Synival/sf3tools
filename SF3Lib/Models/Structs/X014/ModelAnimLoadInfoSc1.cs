@@ -22,8 +22,8 @@ namespace SF3.Models.Structs.X014 {
         [NameGetter(NamedValueType.FileIndex)]
         [BulkCopy]
         public int ModelFileID {
-            get => Data.GetDouble(_modelFileIdAddr);
-            set => Data.SetDouble(_modelFileIdAddr, value);
+            get => Data.GetInt32(_modelFileIdAddr);
+            set => Data.SetInt32(_modelFileIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_animIdAddr), displayOrder: 1, displayFormat: "X2")]

@@ -19,29 +19,29 @@ namespace SF3.Models.Structs.Shared {
         [TableViewModelColumn(addressField: nameof(_wlevel1Addr), displayOrder: 0, displayName: "Weapon Level 1 Exp")]
         [BulkCopy]
         public ushort WLevel1 {
-            get => Data.GetWord(_wlevel1Addr);
-            set => Data.SetWord(_wlevel1Addr, value);
+            get => Data.GetUInt16(_wlevel1Addr);
+            set => Data.SetUInt16(_wlevel1Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_wlevel2Addr), displayOrder: 1, displayName: "Weapon Level 2 Exp")]
         [BulkCopy]
         public ushort WLevel2 {
-            get => Data.GetWord(_wlevel2Addr);
-            set => Data.SetWord(_wlevel2Addr, value);
+            get => Data.GetUInt16(_wlevel2Addr);
+            set => Data.SetUInt16(_wlevel2Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_wlevel3Addr), displayOrder: 2, displayName: "Weapon Level 3 Exp")]
         [BulkCopy]
         public ushort WLevel3 {
-            get => Data.GetWord(_wlevel3Addr);
-            set => Data.SetWord(_wlevel3Addr, value);
+            get => Data.GetUInt16(_wlevel3Addr);
+            set => Data.SetUInt16(_wlevel3Addr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_wlevel4Addr), displayOrder: 3, displayName: "Weapon Level 4 Exp")]
         [BulkCopy]
         public ushort WLevel4 {
-            get => Data.GetWord(_wlevel4Addr);
-            set => Data.SetWord(_wlevel4Addr, value);
+            get => Data.GetUInt16(_wlevel4Addr);
+            set => Data.SetUInt16(_wlevel4Addr, value);
         }
     }
 }

@@ -15,8 +15,8 @@ namespace SF3.Models.Structs.MPD.Plane {
         }
 
         public ushort this[int index] {
-            get => (ushort) Data.GetWord(_xAddress[index]);
-            set => Data.SetWord(_xAddress[index], value);
+            get => (ushort) Data.GetUInt16(_xAddress[index]);
+            set => Data.SetUInt16(_xAddress[index], value);
         }
     }
 }

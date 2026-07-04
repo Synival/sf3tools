@@ -21,15 +21,15 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [NameGetter(NamedValueType.SpecialType)]
         public int Type {
-            get => Data.GetByte(_typeAddr);
-            set => Data.SetByte(_typeAddr, (byte) value);
+            get => Data.GetUInt8(_typeAddr);
+            set => Data.SetUInt8(_typeAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_lowPowAddr), displayOrder: 1)]
         [BulkCopy]
         public int LowPow {
-            get => Data.GetByte(_lowPowAddr);
-            set => Data.SetByte(_lowPowAddr, (byte) value);
+            get => Data.GetUInt8(_lowPowAddr);
+            set => Data.SetUInt8(_lowPowAddr, (byte) value);
         }
 
         public NamedValueType? MidPowType
@@ -39,23 +39,23 @@ namespace SF3.Models.Structs.X013 {
         [BulkCopy]
         [NameGetter(NamedValueType.ConditionalType, nameof(MidPowType))]
         public int MidPow {
-            get => Data.GetByte(_midPowAddr);
-            set => Data.SetByte(_midPowAddr, (byte) value);
+            get => Data.GetUInt8(_midPowAddr);
+            set => Data.SetUInt8(_midPowAddr, (byte) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_highPowAddr), displayOrder: 3)]
         [BulkCopy]
         public int MaxPow {
-            get => Data.GetByte(_highPowAddr);
-            set => Data.SetByte(_highPowAddr, (byte) value);
+            get => Data.GetUInt8(_highPowAddr);
+            set => Data.SetUInt8(_highPowAddr, (byte) value);
         }
 
         // Function used for low RNG damage rolls
         private int lowerRngFunc(int randomNumber) {
             int r1, r2, r3, machh;
 
-            r1 = Data.GetByte(_midPowAddr);
-            r1 -= Data.GetByte(_lowPowAddr);
+            r1 = Data.GetUInt8(_midPowAddr);
+            r1 -= Data.GetUInt8(_lowPowAddr);
             r3 = randomNumber;
 
             machh = r1 * r3;
@@ -80,7 +80,7 @@ namespace SF3.Models.Structs.X013 {
             r2 <<= 2;
             r2 -= r2;
             r1 -= r2;
-            r1 += Data.GetByte(_lowPowAddr);
+            r1 += Data.GetUInt8(_lowPowAddr);
 
             return r1;
         }
@@ -89,9 +89,9 @@ namespace SF3.Models.Structs.X013 {
         private int upperRngFunc(int randomNumber) {
             int r1, r2, r3, machh;
 
-            r1 = Data.GetByte(_midPowAddr);
-            r2 = Data.GetByte(_highPowAddr);
-            r2 = Data.GetByte(_midPowAddr) - r2;
+            r1 = Data.GetUInt8(_midPowAddr);
+            r2 = Data.GetUInt8(_highPowAddr);
+            r2 = Data.GetUInt8(_midPowAddr) - r2;
             r3 = randomNumber;
             r1 = r3;
             r1 -= 7;
@@ -109,7 +109,7 @@ namespace SF3.Models.Structs.X013 {
             r2 <<= 2;
             r2 -= r2;
             r1 -= r2;
-            r1 = Data.GetByte(_midPowAddr) + r1;
+            r1 = Data.GetUInt8(_midPowAddr) + r1;
 
             return r1;
         }
