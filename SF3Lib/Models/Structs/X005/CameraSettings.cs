@@ -64,49 +64,49 @@ namespace SF3.Models.Structs.X005 {
         [TableViewModelColumn(addressField: nameof(_setting1DistAddr), displayOrder: 0, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting1Dist {
-            get => (ushort) Data.GetUInt16(_setting1DistAddr);
+            get => Data.GetUInt16(_setting1DistAddr);
             set => Data.SetUInt16(_setting1DistAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_setting2DistAddr), displayOrder: 1, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting2Dist {
-            get => (ushort) Data.GetUInt16(_setting2DistAddr);
+            get => Data.GetUInt16(_setting2DistAddr);
             set => Data.SetUInt16(_setting2DistAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_setting3DistAddr), displayOrder: 2, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting3Dist {
-            get => (ushort) Data.GetUInt16(_setting3DistAddr);
+            get => Data.GetUInt16(_setting3DistAddr);
             set => Data.SetUInt16(_setting3DistAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_setting1AngleAddr), displayOrder: 3, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting1Angle {
-            get => (ushort) Data.GetUInt16(_setting1AngleAddr);
+            get => Data.GetUInt16(_setting1AngleAddr);
             set => Data.SetUInt16(_setting1AngleAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_setting2AngleAdjustAddr), displayOrder: 4, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting2AngleAdjust {
-            get => (ushort) Data.GetUInt16(_setting2AngleAdjustAddr);
+            get => Data.GetUInt16(_setting2AngleAdjustAddr);
             set => Data.SetUInt16(_setting2AngleAdjustAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_setting3AngleAdjustAddr), displayOrder: 5, displayFormat: "X4")]
         [BulkCopy]
         public ushort Setting3AngleAdjust {
-            get => (ushort) Data.GetUInt16(_setting3AngleAdjustAddr);
+            get => Data.GetUInt16(_setting3AngleAdjustAddr);
             set => Data.SetUInt16(_setting3AngleAdjustAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_verticalOffsetAddr), displayOrder: 6, displayFormat: "X4")]
         [BulkCopy]
         public ushort VerticalOffset {
-            get => (ushort) Data.GetUInt16(_verticalOffsetAddr);
+            get => Data.GetUInt16(_verticalOffsetAddr);
             set => Data.SetUInt16(_verticalOffsetAddr, value);
         }
 

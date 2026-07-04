@@ -16,14 +16,14 @@ namespace SF3.Models.Structs.X012 {
         [NameGetter(NamedValueType.CharacterClass)]
         [BulkCopy]
         public byte ClassID {
-            get => (byte) Data.GetUInt8(_classIdAddr);
+            get => Data.GetUInt8(_classIdAddr);
             set => Data.SetUInt8(_classIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_valueAddr), displayOrder: 1, displayFormat: "X2")]
         [BulkCopy]
         public byte Value {
-            get => (byte) Data.GetUInt8(_valueAddr);
+            get => Data.GetUInt8(_valueAddr);
             set => Data.SetUInt8(_valueAddr, value);
         }
     }
