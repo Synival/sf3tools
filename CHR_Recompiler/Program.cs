@@ -21,10 +21,10 @@ namespace CHR_Extractor {
         // v
         private static readonly Dictionary<ScenarioType, string> c_pathsIn = new() {
             { ScenarioType.Prototype,   "../../../../Private/ExtraCHRs" },
-            { ScenarioType.Scenario1,   "D:/" },
-            { ScenarioType.Scenario2,   "E:/" },
-            { ScenarioType.Scenario3,   "F:/" },
-            { ScenarioType.PremiumDisk, "G:/" },
+            { ScenarioType.Scenario1,   "C:/SF3/Scenario1" },
+            { ScenarioType.Scenario2,   "C:/SF3/Scenario2" },
+            { ScenarioType.Scenario3,   "C:/SF3/Scenario3" },
+            { ScenarioType.PremiumDisk, "C:/SF3/PremiumDisk" },
         };
 
         private static readonly Dictionary<ScenarioType, string> c_scenarioPaths = new() {
