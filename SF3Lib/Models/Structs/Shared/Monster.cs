@@ -51,9 +51,9 @@ namespace SF3.Models.Structs.X019 {
         private readonly int _special10Addr; //?
         private readonly int _unknown0x32Addr;
         private readonly int _unknown0x33Addr;
-        private readonly int _targetScoreFuncAddr;
+        private readonly int _intelligence;
         private readonly int _flagsAddr;
-        private readonly int _expIs5andCantEvadeAddr;
+        private readonly int _isObject;
         private readonly int _timesSpawnedAddr;
         private readonly int _goldAddr;
         private readonly int _dropItemAddr;
@@ -121,9 +121,9 @@ namespace SF3.Models.Structs.X019 {
             _special10Addr         = Address + 0x31; // ?
             _unknown0x32Addr       = Address + 0x32;
             _unknown0x33Addr       = Address + 0x33;
-            _targetScoreFuncAddr   = Address + 0x34;
+            _intelligence          = Address + 0x34;
             _flagsAddr             = Address + 0x35;
-            _expIs5andCantEvadeAddr          = Address + 0x36;
+            _isObject              = Address + 0x36;
             _timesSpawnedAddr      = Address + 0x37;
             _goldAddr              = Address + 0x38; // 2 bytes
             _dropItemAddr          = Address + 0x3A; // 2 bytes
@@ -520,12 +520,12 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetUInt8(_unknown0x33Addr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_targetScoreFuncAddr), displayOrder: 44, displayGroup: "Flags", displayFormat: "X2", minWidth: 325)]
+        [TableViewModelColumn(addressField: nameof(_intelligence), displayOrder: 44, displayGroup: "Flags", displayFormat: "X2", minWidth: 400)]
         [BulkCopy]
         [NameGetter(NamedValueType.TargetScoreFunc)]
-        public byte TargetScoreFunc {
-            get => Data.GetUInt8(_targetScoreFuncAddr);
-            set => Data.SetUInt8(_targetScoreFuncAddr, value);
+        public byte Intelligence {
+            get => Data.GetUInt8(_intelligence);
+            set => Data.SetUInt8(_intelligence, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_flagsAddr), displayOrder: 44.01f, displayGroup: "Flags", displayFormat: "X2")]
@@ -577,11 +577,11 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetBit(_flagsAddr, 7, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_expIs5andCantEvadeAddr), displayOrder: 47, displayGroup: "Flags", displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_isObject), displayOrder: 47, displayGroup: "Flags", displayFormat: "X2")]
         [BulkCopy]
-        public byte ExpIs5AndCantEvade {
-            get => Data.GetUInt8(_expIs5andCantEvadeAddr);
-            set => Data.SetUInt8(_expIs5andCantEvadeAddr, value);
+        public byte IsObject {
+            get => Data.GetUInt8(_isObject);
+            set => Data.SetUInt8(_isObject, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_timesSpawnedAddr), displayOrder: 48, displayGroup: "Flags", displayFormat: "X2", displayName: nameof(TimesSpawned) + " (Placeholder)")]

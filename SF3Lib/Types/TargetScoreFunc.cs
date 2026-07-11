@@ -11,12 +11,12 @@ namespace SF3.Types {
         [EnumDisplayName("Will Kill, then Ranking + Is Last Attacked")]
         WillKill_Then_RankingPlusIsLastAttacked = 1,
 
-        [Description("+10 if can kill, +1 if new HP < 33%, +1 if new HP < 20%, +2 if last attacked, +X1 bonus")]
-        [EnumDisplayName("Will Kill, then Ranking + Is Last Attacked + Will Weaken")]
+        [Description("+10 if can kill, +1 if new HP < 33% current HP, +1 if new HP < 20%, +2 if last attacked, +X1 bonus")]
+        [EnumDisplayName("Will Kill, then Ranking + Is Last Attacked + Big Damage + Near Death")]
         WillKill_Then_RankingPlusIsLastAttackedPlusWillWeaken = 2,
 
         [Description("+10 if can kill, +1 if new HP < 20%")]
-        [EnumDisplayName("Will Kill, then Will Weaken")]
+        [EnumDisplayName("Will Kill, then Near Death")]
         WillKill_Then_WillWeaken = 3
     }
 }
