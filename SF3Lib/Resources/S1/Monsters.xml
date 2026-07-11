@@ -79,7 +79,7 @@
     <item value="0x4C" name="Refugee D" />
     <item value="0x4D" name="Refugee E" />
     <item value="0x4E" name="Aspinia Mage" />
-    <item value="0x4F" name="Dark Mage" />
+    <item value="0x4F" name="Dark Mage (1)" />
     <item value="0x50" name="Masked Monk (Weakest Blue)" />
     <item value="0x51" name="Masked Monk (Brown)" />
     <item value="0x52" name="Masked Monk (Purple/Sceptre)" />
@@ -98,7 +98,7 @@
     <item value="0x5F" name="Barrel" />
     <item value="0x60" name="Battalion Leader" />
     <item value="0x61" name="MP Commander" />
-    <item value="0x62" name="Dark Mage" />
+    <item value="0x62" name="Dark Mage (2)" />
     <item value="0x63" name="Shiraf" />
     <item value="0x64" name="Franz" />
     <item value="0x65" name="Garzel" />
