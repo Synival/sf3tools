@@ -33,7 +33,7 @@ namespace SF3.Win.Utils {
                         if (attr != null && nameContext.CanGetInfo(obj, property, attr.Parameters)) {
                             var intValue = Convert.ToInt32(property.GetValue(obj));
                             if (nameContext.CanGetName(obj, property, intValue, attr.Parameters))
-                                return MakeNamedValueComboBox(nameContext.GetInfo(obj, property, attr.Parameters), intValue);
+                                return MakeNamedValueComboBox(nameContext.GetInfo(obj, property, attr.Parameters), intValue, property.PropertyType);
                         }
                     }
                 }
