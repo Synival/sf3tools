@@ -39,7 +39,7 @@ namespace SF3.Models.Structs.X1.Battle {
         private readonly int _paddingAddr;
 
         private readonly int _flagsAddr;
-        private readonly int _flagTieInAddr;
+        private readonly int _flagOrUnitIdAddr;
 
         public Unit(IByteData data, int id, string name, int address, ScenarioType scenario, Unit prevUnit, BattleHeader battleHeader, MapLeaderType mapLeader)
         : base(data, id, name, address, 0x34) {
@@ -75,7 +75,7 @@ namespace SF3.Models.Structs.X1.Battle {
             _aiOrder4Addr           = Address + 0x2C; // 3 bytes
             _paddingAddr            = Address + 0x2F; // 1 byte
             _flagsAddr              = Address + 0x30; // 2 bytes
-            _flagTieInAddr          = Address + 0x32; // 2 bytes
+            _flagOrUnitIdAddr          = Address + 0x32; // 2 bytes
 
             Conditions = new UnitAICondition[] {
                 new UnitAICondition(Data, 0, "Condition1", _aiCond1Addr),
@@ -140,35 +140,35 @@ namespace SF3.Models.Structs.X1.Battle {
         public bool IsEnemy
             => EnemyID >= 0x01 && EnemyID < 0x8000 && EnemyID != 0x5B;
 
-        public int BattleIDEnemyCounter
-            => PrevUnit == null ? 0x80 : PrevUnit.BattleIDEnemyCounter + (PrevUnit.IsEnemy ? 1 : 0);
+        public int UnitIDEnemyCounter
+            => PrevUnit == null ? 0x80 : PrevUnit.UnitIDEnemyCounter + (PrevUnit.IsEnemy ? 1 : 0);
 
         public ushort SpriteID {
             get => (ushort) (IsEnemy ? EnemyID + 0xC8 : (EnemyID == 0x5B) ? CharacterPlus : -1);
             set {}
         }
 
-        public int BattleID =>
-            IsEnemy ? BattleIDEnemyCounter : (EnemyID == 0x5B) ? CharacterPlus : -1;
+        public int UnitID =>
+            IsEnemy ? UnitIDEnemyCounter : (EnemyID == 0x5B) ? CharacterPlus : -1;
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.5f, displayName: nameof(SpriteID), displayGroup: "Metadata", displayFormat: "X2")]
         public string SpriteIDStr =>
             (SpriteID < 0) ? "--" : SpriteID.ToString("X2");
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0.7f, displayName: nameof(BattleID), displayGroup: "Metadata", displayFormat: "X2")]
-        public string BattleIDStr =>
-            (BattleID < 0) ? "--" : BattleID.ToString("X2");
+        [TableViewModelColumn(addressField: null, displayOrder: 0.7f, displayName: nameof(UnitID), displayGroup: "Metadata", displayFormat: "X2")]
+        public string UnitIDStr =>
+            (UnitID < 0) ? "--" : UnitID.ToString("X2");
 
         public int BattleAddress {
             get {
-                var battleId = BattleID;
-                return (battleId < 0) ? 0 : (battleId % 0x80 * 0xB0 + (battleId >= 0x80 ? _battleAddrEnemyBase : _battleAddrPlayerBase));
+                var unitId = UnitID;
+                return (unitId < 0) ? 0 : (unitId % 0x80 * 0xB0 + (unitId >= 0x80 ? _battleAddrEnemyBase : _battleAddrPlayerBase));
             }
         }
 
         [TableViewModelColumn(addressField: null, displayOrder: 0.8f, displayName: "Battle Address", displayGroup: "Metadata", isPointer: true)]
         public string BattleAddressStr =>
-            (BattleID < 0) ? "--" : BattleAddress.ToString("X6");
+            (UnitID < 0) ? "--" : BattleAddress.ToString("X6");
 
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 1, displayGroup: "Page1", minWidth: 60)]
         [BulkCopy]
@@ -456,7 +456,7 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Flags = (ushort) (value ? (Flags | 0x1000) : (Flags & ~0x1000));
         }
 
-        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayName: nameof(UnknownFlag0x0020) + " (Unused)", displayOrder: 45.16f, displayGroup: "Page4")]
+        [TableViewModelColumn(addressField: nameof(_flagsAddr), displayName: nameof(UnknownFlag0x2000) + " (Unused)", displayOrder: 45.16f, displayGroup: "Page4")]
         public bool UnknownFlag0x2000 {
             get => (Flags & 0x2000) != 0;
             set => Flags = (ushort) (value ? (Flags | 0x2000) : (Flags & ~0x0020));
@@ -470,26 +470,26 @@ namespace SF3.Models.Structs.X1.Battle {
 
         public bool IsBarrel => EnemyID == 0x5F;
 
-        public NamedValueType? FlagOrBattleIDType {
+        public NamedValueType? FlagOrUnitIDType {
             get {
                 bool hasFlag = IsBarrel || DontMoveIfFlagOff;
-                bool hasBattleID = PrioritizeFlagTarget || PrioritizeChoiceThenHealing || PrioritizeLastAttackerThenFlagTarget || DontInitBaseStats;
+                bool hasUnitId = PrioritizeFlagTarget || PrioritizeChoiceThenHealing || PrioritizeLastAttackerThenFlagTarget || DontInitBaseStats;
 
-                if (hasFlag && !hasBattleID)
+                if (hasFlag && !hasUnitId)
                     return NamedValueType.GameFlag;
-                else if (!hasFlag && hasBattleID)
+                else if (!hasFlag && hasUnitId)
                     return NamedValueType.Character;
                 else
                     return null;
             }
         }
 
-        [TableViewModelColumn(addressField: nameof(_flagTieInAddr), displayOrder: 46, displayName: "Flag / Battle ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page4")]
+        [TableViewModelColumn(addressField: nameof(_flagOrUnitIdAddr), displayOrder: 46, displayName: "Flag / Unit ID", displayFormat: "X3", minWidth: 200, displayGroup: "Page4")]
         [BulkCopy]
-        [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrBattleIDType))]
-        public ushort FlagOrBattleID {
-            get => Data.GetUInt16(_flagTieInAddr);
-            set => Data.SetUInt16(_flagTieInAddr, value);
+        [NameGetter(NamedValueType.ConditionalType, nameof(FlagOrUnitIDType))]
+        public ushort FlagOrUnitID {
+            get => Data.GetUInt16(_flagOrUnitIdAddr);
+            set => Data.SetUInt16(_flagOrUnitIdAddr, value);
         }
 
         public bool HasActorY => false;

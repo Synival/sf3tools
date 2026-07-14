@@ -5,14 +5,14 @@ using SF3.Types;
 namespace SF3.Models.Structs.X1.Battle {
     public class BattleTalk : Struct {
         private readonly int _characterId;
-        private readonly int _battleIdAddr;
+        private readonly int _unitIdAddr;
         private readonly int _gameFlagAddr;
         private readonly int _functionAddr;
 
         public BattleTalk(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             _characterId  = Address + 0x00; // 4 bytes
-            _battleIdAddr = Address + 0x04; // 4 bytes
+            _unitIdAddr   = Address + 0x04; // 4 bytes
             _gameFlagAddr = Address + 0x08; // 4 bytes
             _functionAddr = Address + 0x0C; // 4 bytes
         }
@@ -25,12 +25,12 @@ namespace SF3.Models.Structs.X1.Battle {
             set => Data.SetInt32(_characterId, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_battleIdAddr), displayOrder: 1, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_unitIdAddr), displayOrder: 1, displayFormat: "X2")]
         [NameGetter(NamedValueType.Character)]
         [BulkCopy]
-        public int BattleID {
-            get => Data.GetInt32(_battleIdAddr);
-            set => Data.SetInt32(_battleIdAddr, value);
+        public int UnitID {
+            get => Data.GetInt32(_unitIdAddr);
+            set => Data.SetInt32(_unitIdAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_gameFlagAddr), displayOrder: 2, displayFormat: "X2", minWidth: 200)]

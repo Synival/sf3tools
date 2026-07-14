@@ -122,7 +122,7 @@ namespace X1_Analyzer {
         }
 
         public static string[]? HasBattleOrFlagID(string filename, IX1_File x1File)
-            => AISearchBase(filename, x1File, (battle, unit) => unit.EnemyID != 0x5F && unit.FlagOrBattleID != 0);
+            => AISearchBase(filename, x1File, (battle, unit) => unit.EnemyID != 0x5F && unit.FlagOrUnitID != 0);
 
         public static string[]? HasInvaildAI(string filename, IX1_File x1File)
             => AISearchBase(filename, x1File, (battle, unit) => unit.Orders.Any(x => x.Type == AIOrderType.Invalid));
@@ -134,7 +134,7 @@ namespace X1_Analyzer {
                 $"{unit.DefaultAIIndex:X02}, " +
                 "Orders:[" + string.Join(",", unit.Orders.Select((x, i) => $"{i}:({x.Target:X02}{x.TargetFlags:X02}{x.Aggression:X02})")) + "], " +
                 "Conds:[" + string.Join(",", unit.Conditions.Select((x, i) => $"{i}:({x.Zone:X02}{x.OrderFlags:X02}{x.OffAIIndex:X02}{x.OnAIIndex:X02})")) + "], " +
-                $"{unit.FlagOrBattleID:X2}";
+                $"{unit.FlagOrUnitID:X2}";
         }
     }
 }
