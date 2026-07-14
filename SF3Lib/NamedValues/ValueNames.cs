@@ -67,8 +67,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
         public static readonly MonsterForUnitInfo MonsterForUnitInfo
             = new MonsterForUnitInfo();
-        public static readonly NamedValueFromEnum<OrderChoiceOrder> OrderChoiceOrderInfo
-            = new NamedValueFromEnum<OrderChoiceOrder>();
+        public static readonly NamedValueFromEnum<OrderChoiceMode> OrderChoiceModeInfo
+            = new NamedValueFromEnum<OrderChoiceMode>();
         public static readonly NamedValueFromEnum<MovementType> MovementTypeInfo
             = new NamedValueFromEnum<MovementType>();
         public static readonly NamedValueFromResourceForScenariosInfo MusicInfo

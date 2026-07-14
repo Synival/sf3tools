@@ -63,7 +63,7 @@ namespace SF3.Models.Structs.X019 {
         private readonly int _supportPlusAddr;
         private readonly int _magicBonusIdAddr;
         private readonly int _movementTypeAddr;
-        private readonly int _orderChoiceOrderAddr;
+        private readonly int _orderChoiceModeAddr;
         private readonly int _attackChoiceModeAddr;
         private readonly int _attackChoice1Addr;
         private readonly int _attackChoice2Addr;
@@ -133,7 +133,7 @@ namespace SF3.Models.Structs.X019 {
             _supportPlusAddr       = Address + 0x3F;
             _magicBonusIdAddr      = Address + 0x40;
             _movementTypeAddr      = Address + 0x41;
-            _orderChoiceOrderAddr  = Address + 0x42; // heal when damaged when set?
+            _orderChoiceModeAddr   = Address + 0x42; // heal when damaged when set?
             _attackChoiceModeAddr  = Address + 0x43;
             _attackChoice1Addr     = Address + 0x44; // what to do on turn1?. 0 = atk. 1 = spell. 4 = use weapon?
             _attackChoice2Addr     = Address + 0x45; // what to do on turn2?
@@ -651,12 +651,12 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetUInt8(_movementTypeAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_orderChoiceOrderAddr), displayOrder: 56.5f, displayGroup: "AI", minWidth: 200)]
+        [TableViewModelColumn(addressField: nameof(_orderChoiceModeAddr), displayOrder: 56.5f, displayGroup: "AI", minWidth: 200)]
         [BulkCopy]
-        [NameGetter(NamedValueType.OrderChoiceOrder)]
-        public byte OrderChoiceOrder {
-            get => Data.GetUInt8(_orderChoiceOrderAddr);
-            set => Data.SetUInt8(_orderChoiceOrderAddr, value);
+        [NameGetter(NamedValueType.OrderChoiceMode)]
+        public byte OrderChoiceMode {
+            get => Data.GetUInt8(_orderChoiceModeAddr);
+            set => Data.SetUInt8(_orderChoiceModeAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_attackChoiceModeAddr), displayOrder: 57, displayFormat: "X2", displayGroup: "AI", minWidth: 200)]

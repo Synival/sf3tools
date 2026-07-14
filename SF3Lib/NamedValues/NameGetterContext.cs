@@ -77,7 +77,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.MonsterForUnit,      new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MonsterForUnitInfo.Info[Scenario])) },
                 { NamedValueType.MovementType,        new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MovementTypeInfo)) },
                 { NamedValueType.Music,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MusicInfo.Info[Scenario])) },
-                { NamedValueType.OrderChoiceOrder,    new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.OrderChoiceOrderInfo)) },
+                { NamedValueType.OrderChoiceMode,    new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.OrderChoiceModeInfo)) },
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
                 { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },

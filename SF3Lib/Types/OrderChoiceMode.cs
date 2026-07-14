@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 
 namespace SF3.Types {
-    public enum OrderChoiceOrder {
+    public enum OrderChoiceMode {
         [EnumDisplayName("Move, Attack, Heal, X1 Func")]
         MoveAttackHealX1 = 0,
 

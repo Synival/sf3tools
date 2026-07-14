@@ -38,7 +38,7 @@ namespace SF3.Types {
         MonsterForUnit,
         MovementType,
         Music,
-        OrderChoiceOrder,
+        OrderChoiceMode,
         Sex,
         SpawnType,
         Special,
