@@ -26,24 +26,51 @@ namespace SF3.Models.Files.X012 {
             return newFile;
         }
 
+        private static int? GetTileMovementTableAddress(ScenarioType scenario) {
+            switch (scenario) {
+                case ScenarioType.Scenario1: return 0xB65C;
+                default:                     return null;
+            }
+        }
+
+        private static int? GetTargetPriorityTablesAddress(ScenarioType scenario) {
+            switch (scenario) {
+                case ScenarioType.Scenario1: return 0xB7AC;
+                default:                     return null;
+            }
+        }
+
+        private static int? GetClassAttackScoreBonusTablesAddress(ScenarioType scenario) {
+            switch (scenario) {
+                case ScenarioType.Scenario1: return 0xB8DC;
+                default:                     return null;
+            }
+        }
+
         public override IEnumerable<ITable> MakeTables() {
-            var tables = new List<ITable>() {
-            };
+            var tables = new List<ITable>();
 
-            if (Scenario == ScenarioType.Scenario1) {
-                TileMovementTable = TileMovementTable.Create(Data, "TileMovement", 0xB65C, false);
+            var tileMovementTableAddr           = GetTileMovementTableAddress(Scenario);
+            var targetPriorityTablesAddr        = GetTargetPriorityTablesAddress(Scenario);
+            var classAttackScoreBonusTablesAddr = GetClassAttackScoreBonusTablesAddress(Scenario);
 
+            if (tileMovementTableAddr.HasValue)
+                tables.Add(TileMovementTable = TileMovementTable.Create(Data, "TileMovement", tileMovementTableAddr.Value, false));
+
+            if (targetPriorityTablesAddr.HasValue) {
+                var tablePointerAddr = targetPriorityTablesAddr.Value;
                 ClassTargetPriorityTables = new ClassTargetPriorityTable[16];
-                var tablePointerAddr = 0xB7AC;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetInt32(tablePointerAddr) - RamAddress;
                     var tableName = $"{nameof(ClassTargetPriorityTable)} 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
                     tables.Add(ClassTargetPriorityTables[i] = ClassTargetPriorityTable.Create(Data, tableName, tableAddr));
                     tablePointerAddr += 0x04;
                 }
+            }
 
+            if (classAttackScoreBonusTablesAddr.HasValue) {
+                var tablePointerAddr = classAttackScoreBonusTablesAddr.Value;
                 ClassAttackScoreBonusTables = new ClassAttackScoreBonusTable[16];
-                tablePointerAddr = 0xB8DC;
                 for (int i = 0; i < 16; i++) {
                     var tableAddr = Data.GetInt32(tablePointerAddr) - RamAddress;
                     var tableName = $"{nameof(ClassAttackScoreBonusTable)} 0x" + i.ToString("X") + ": " + NameGetterContext.GetName(null, null, i, new object[] { NamedValueType.MovementType });
