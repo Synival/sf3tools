@@ -1,7 +1,7 @@
 ﻿using SF3.ByteData;
-using SF3.Models.Structs.X8;
+using SF3.Models.Structs.X8PC;
 
-namespace SF3.Models.Tables.X8 {
+namespace SF3.Models.Tables.X8PC {
     public class BattleModelChunkDefTable : FixedSizeTable<BattleModelChunkDef> {
         private static readonly string[] c_chunkNames = {
             "TexDefs",

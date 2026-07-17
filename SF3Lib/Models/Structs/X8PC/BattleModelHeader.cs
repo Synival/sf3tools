@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using SF3.ByteData;
 using SF3.Models.Tables;
-using SF3.Models.Tables.X8;
+using SF3.Models.Tables.X8PC;
 
-namespace SF3.Models.Structs.X8 {
+namespace SF3.Models.Structs.X8PC {
     public class BattleModelHeader : Struct, ITableContainer {
         private readonly int _battleModelChunkDefTableAddr;
 

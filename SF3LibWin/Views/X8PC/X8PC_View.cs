@@ -1,9 +1,9 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.X8;
+using SF3.Models.Files.X8PC;
 
-namespace SF3.Win.Views.X8 {
-    public class X8_View : TabView {
-        public X8_View(string name, IX8_File model) : base(name) {
+namespace SF3.Win.Views.X8PC {
+    public class X8PC_View : TabView {
+        public X8PC_View(string name, IX8PC_File model) : base(name) {
             Model = model;
         }
 
@@ -23,6 +23,6 @@ namespace SF3.Win.Views.X8 {
             return Control;
         }
 
-        public IX8_File Model { get; }
+        public IX8PC_File Model { get; }
     }
 }

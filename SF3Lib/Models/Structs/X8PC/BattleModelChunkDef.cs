@@ -1,7 +1,7 @@
 ﻿using CommonLib.Attributes;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.X8 {
+namespace SF3.Models.Structs.X8PC {
     public class BattleModelChunkDef : Struct {
         private readonly int _offsetAddr;
         private readonly int _dataSizeAddr;
