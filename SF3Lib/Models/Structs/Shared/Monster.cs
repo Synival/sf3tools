@@ -651,7 +651,7 @@ namespace SF3.Models.Structs.X019 {
             set => Data.SetUInt8(_movementTypeAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_orderChoiceModeAddr), displayOrder: 56.5f, displayGroup: "AI", minWidth: 200)]
+        [TableViewModelColumn(addressField: nameof(_orderChoiceModeAddr), displayOrder: 56.5f, displayGroup: "AI", minWidth: 230)]
         [BulkCopy]
         [NameGetter(NamedValueType.OrderChoiceMode)]
         public byte OrderChoiceMode {

@@ -2,16 +2,16 @@
 
 namespace SF3.Types {
     public enum OrderChoiceMode {
-        [EnumDisplayName("Move, Attack, Heal, X1 Func")]
+        [EnumDisplayName("Move, Attack, Heal, Debuffs (X1)")]
         MoveAttackHealX1 = 0,
 
-        [EnumDisplayName("Move, Heal, Attack, X1 Func")]
+        [EnumDisplayName("Move, Heal, Attack, Debuffs (X1)")]
         MoveHealAttackX1 = 1,
 
-        [EnumDisplayName("Move, X1 Func, Attack, Heal")]
+        [EnumDisplayName("Move, Debuffs (X1), Attack, Heal")]
         MoveX1HealAttack = 2,
 
-        [EnumDisplayName("Attack, Heal, X1 Func, Move")]
+        [EnumDisplayName("Attack, Heal, Debuffs (X1), Move")]
         AttackHealX1Move = 3,
     }
 }
