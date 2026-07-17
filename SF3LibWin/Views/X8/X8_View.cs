@@ -13,7 +13,10 @@ namespace SF3.Win.Views.X8 {
 
             var ngc = Model.NameGetterContext;
 
-            // TODO: tables!
+            if (Model?.Header != null) {
+                if (Model.Header.BattleModelChunkDefTable != null)
+                    CreateChild(new TableView("Chunks", Model.Header.BattleModelChunkDefTable, ngc));
+            }
 
             CreateChild(new TechnicalView("Technical Info", Model));
 

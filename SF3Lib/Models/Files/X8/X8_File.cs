@@ -1,23 +1,22 @@
 using System;
 using System.Collections.Generic;
+using CommonLib.Discovery;
 using CommonLib.NamedValues;
 using SF3.ByteData;
+using SF3.Models.Structs.X8;
 using SF3.Models.Tables;
 using SF3.Types;
 
 namespace SF3.Models.Files.X8 {
     public class X8_File : ScenarioTableFile, IX8_File {
+        public override int RamAddress      => 0x060A0000;
+        public override int RamAddressLimit => 0x060A8000; // TODO: confirm this!
+
         protected X8_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario)
         : base(data, nameContext, scenario) {
-        }
 
-        public override int RamAddress => 0; // TODO: what is it??? does it even have one???
-
-        public override int RamAddressLimit => 0; // TODO: what is it??? does it even have one???
-
-        public override IEnumerable<ITable> MakeTables() {
-            // TODO: make tables, omg
-            return new ITable[0];
+            Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
+            Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
         public static X8_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
@@ -26,5 +25,16 @@ namespace SF3.Models.Files.X8 {
                 throw new InvalidOperationException("Couldn't initialize X8_File");
             return newFile;
         }
+
+        public override IEnumerable<ITable> MakeTables() {
+            Header = new BattleModelHeader(Data, 0, nameof(BattleModelHeader), 0x00);
+
+            var tables = new List<ITable>();
+            tables.AddRange(Header.Tables);
+
+            return tables.ToArray();
+        }
+
+        public BattleModelHeader Header { get; private set; }
     }
 }
