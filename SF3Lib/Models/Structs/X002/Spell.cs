@@ -4,10 +4,10 @@ using SF3.Types;
 
 namespace SF3.Models.Structs.X002 {
     public class Spell : Struct {
-        private readonly int _spellTargetAddr;
-        private readonly int _spellTypeAddr;
+        private readonly int _targetTypeAddr;
+        private readonly int _spellEffectAddr;
         private readonly int _elementAddr;
-        private readonly int _iconHiddenAddr;
+        private readonly int _categoryAddr;
         private readonly int _lv1DistanceAddr;
         private readonly int _lv1TargetsAddr;
         private readonly int _lv1CostAddr;
@@ -27,10 +27,10 @@ namespace SF3.Models.Structs.X002 {
 
         public Spell(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x14) {
-            _spellTargetAddr = Address;
-            _spellTypeAddr   = Address + 1;
+            _targetTypeAddr  = Address + 0;
+            _spellEffectAddr = Address + 1;
             _elementAddr     = Address + 2;
-            _iconHiddenAddr  = Address + 3;
+            _categoryAddr    = Address + 3;
             _lv1DistanceAddr = Address + 4;
             _lv1TargetsAddr  = Address + 5;
             _lv1CostAddr     = Address + 6;
@@ -49,27 +49,27 @@ namespace SF3.Models.Structs.X002 {
             _lv4DamageAddr   = Address + 19;
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellTargetAddr), displayOrder: 0, minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_targetTypeAddr), displayOrder: 0, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
-        [NameGetter(NamedValueType.SpellTarget)]
-        public byte SpellTarget {
-            get => Data.GetUInt8(_spellTargetAddr);
-            set => Data.SetUInt8(_spellTargetAddr, value);
+        [NameGetter(NamedValueType.SpellTargetType)]
+        public byte TargetType {
+            get => Data.GetUInt8(_targetTypeAddr);
+            set => Data.SetUInt8(_targetTypeAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellTypeAddr), displayOrder: 1, minWidth: 100, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_spellEffectAddr), displayOrder: 1, minWidth: 100, displayFormat: "X2")]
         [BulkCopy]
-        [NameGetter(NamedValueType.SpellType)]
-        public byte SpellType {
-            get => (byte) (Data.GetUInt8(_spellTypeAddr) & 0x7F);
-            set => Data.SetUInt8(_spellTypeAddr, (byte) (value & 0x7F | (FieldSpell ? 0x80 : 0)));
+        [NameGetter(NamedValueType.SpellEffectType)]
+        public byte EffectType {
+            get => (byte) (Data.GetUInt8(_spellEffectAddr) & 0x7F);
+            set => Data.SetUInt8(_spellEffectAddr, (byte) (value & 0x7F | (IsFieldSpell ? 0x80 : 0)));
         }
 
-        [TableViewModelColumn(addressField: nameof(_spellTypeAddr), displayOrder: 1.5f)]
+        [TableViewModelColumn(addressField: nameof(_spellEffectAddr), displayOrder: 1.5f)]
         [BulkCopy]
-        public bool FieldSpell {
-            get => Data.GetBit(_spellTypeAddr, 8);
-            set => Data.SetBit(_spellTypeAddr, 8, value);
+        public bool IsFieldSpell {
+            get => Data.GetBit(_spellEffectAddr, 8);
+            set => Data.SetBit(_spellEffectAddr, 8, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_elementAddr), displayOrder: 2, minWidth: 100, displayFormat: "X2")]
@@ -80,11 +80,12 @@ namespace SF3.Models.Structs.X002 {
             set => Data.SetUInt8(_elementAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_iconHiddenAddr), displayOrder: 3)]
+        [TableViewModelColumn(addressField: nameof(_categoryAddr), displayOrder: 3, minWidth: 100)]
         [BulkCopy]
-        public byte IconHidden {
-            get => Data.GetUInt8(_iconHiddenAddr);
-            set => Data.SetUInt8(_iconHiddenAddr, value);
+        [NameGetter(NamedValueType.SpellCategory)]
+        public byte Category {
+            get => Data.GetUInt8(_categoryAddr);
+            set => Data.SetUInt8(_categoryAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_lv1DistanceAddr), displayOrder: 4, displayFormat: "X2")]

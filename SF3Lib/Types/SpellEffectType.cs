@@ -1,5 +1,5 @@
 ﻿namespace SF3.Types {
-    public enum SpellType {
+    public enum SpellEffectType {
         Attack  = 0,
         Effect  = 1,
         Heal    = 2,

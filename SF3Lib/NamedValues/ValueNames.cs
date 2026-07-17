@@ -87,10 +87,12 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("SpecialAnimations.xml");
         public static readonly NamedValueFromResourceForScenariosInfo SpellInfo
             = new NamedValueFromResourceForScenariosInfo("Spells.xml");
-        public static readonly NamedValueFromResourceInfo SpellTargetInfo
+        public static readonly NamedValueFromEnum<SpellCategoryType> SpellCategoryInfo
+            = new NamedValueFromEnum<SpellCategoryType>();
+        public static readonly NamedValueFromEnum<SpellEffectType> SpellEffectTypeInfo
+            = new NamedValueFromEnum<SpellEffectType>();
+        public static readonly NamedValueFromResourceInfo SpellTargetTypeInfo
             = new NamedValueFromResourceInfo("SpellTargets.xml");
-        public static readonly NamedValueFromEnum<SpellType> SpellTypeInfo
-            = new NamedValueFromEnum<SpellType>();
         public static readonly NamedValueFromResourceForScenariosInfo SpriteInfo
             = new NamedValueFromResourceForScenariosInfo("Sprites.xml", minValue: 0, maxValue: 300, formatString: "X3");
         public static readonly NamedValueFromEnum<SpriteDirectionCountType> SpriteDirectionCountInfo
