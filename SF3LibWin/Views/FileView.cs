@@ -27,6 +27,7 @@ using SF3.Models.Files.X033;
 using SF3.Models.Files.X035;
 using SF3.Models.Files.X044;
 using SF3.Models.Files.X1;
+using SF3.Models.Files.X8;
 using SF3.MPD.Interfaces;
 using SF3.Win.Views.CHP;
 using SF3.Win.Views.CHR;
@@ -55,6 +56,7 @@ using SF3.Win.Views.X033;
 using SF3.Win.Views.X035;
 using SF3.Win.Views.X044;
 using SF3.Win.Views.X1;
+using SF3.Win.Views.X8;
 
 namespace SF3.Win.Views {
     public class FileView : IView, IDisposable {
@@ -119,6 +121,7 @@ namespace SF3.Win.Views {
                 case ICHP_File  file: return new CHP_View ("CHP_File",  file);
                 case IDAT_File  file: return new DAT_View ("DAT_File",  file);
                 case IKAO_File  file: return new KAO_View ("KAO_File",  file);
+                case IX8_File   file: return new X8_View  ("X8_File",   file);
                 default:
                     return null;
             }

@@ -32,5 +32,6 @@ namespace SF3.Types {
         DAT_ITEM_CG  = 22,
         DAT_BTLENKEI = 23,
         KAO          = 24,
+        X8           = 32,
     }
 }
