@@ -33,7 +33,7 @@
     <item value="0x1E" name="BreathOfFire" />
     <item value="0x1F" name="BreathOfIce" />
     <item value="0x20" name="BreathOfThunder" />
-    <item value="0x21" name="MultipleTargetLaser" />
+    <item value="0x21" name="Negative Flash" />
     <item value="0x22" name="BreathOfDemon" />
     <item value="0x23" name="BreatheOfWater" />
     <item value="0x24" name="BreathOfAcid" />
@@ -45,7 +45,7 @@
     <item value="0x2A" name="RageIncreaseAttack" />
     <item value="0x2B" name="Meat" />
     <item value="0x2C" name="Elbesem Orb" />
-    <item value="0x2D" name="Titan Laser" />
+    <item value="0x2D" name="X Laser" />
     <item value="0x2E" name="Titan Punch" />
     <item value="0x2F" name="Titan Attack" />
     <item value="0x30" name="Panic and Confusion" />
