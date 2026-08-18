@@ -9,6 +9,7 @@ using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.Types;
+using static CommonLib.Utils.MemoryUtils;
 
 namespace TextureExtractor {
     public class Program {
@@ -44,12 +45,6 @@ namespace TextureExtractor {
             public byte[] ImageData { get; }
             public string Hash { get; }
         }
-
-        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int memcmp(byte[] lhs, byte[] rhs, long count);
-
-        private static bool ByteArraysAreEqual(byte[] lhs, byte[] rhs)
-            => lhs.Length == rhs.Length && memcmp(lhs, rhs, lhs.Length) == 0;
 
         private static string FileSortKey(string fullPath) {
             var filename = Path.GetFileNameWithoutExtension(fullPath);
@@ -127,7 +122,7 @@ namespace TextureExtractor {
                                     uniqueCount++;
                                 }
                                 else {
-                                    if (!ByteArraysAreEqual(texturesFound[tr.Hash][0].ImageData, tr.ImageData))
+                                    if (!MemEqual(texturesFound[tr.Hash][0].ImageData, tr.ImageData))
                                         throw new Exception("This ain't it, chief");
                                     texturesFound[tr.Hash].Add(tr);
                                 }

@@ -1,21 +1,15 @@
-﻿using System.Runtime.InteropServices;
-using CommonLib.Arrays;
+﻿using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using CommonLib.Tests;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.Types;
 using static CommonLib.Utils.Compression;
+using static CommonLib.Utils.MemoryUtils;
 
 namespace SF3.Tests.Compression {
     [TestClass]
     public class MPDChunkTests {
-        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int memcmp(byte[] lhs, byte[] rhs, long count);
-
-        private static bool ByteArraysAreEqual(byte[] lhs, byte[] rhs)
-            => lhs.Length == rhs.Length && memcmp(lhs, rhs, lhs.Length) == 0;
-
         private static SF3FileTestCase[] CreateAllTestCases() {
             var testCases = new List<SF3FileTestCase>();
 
@@ -61,7 +55,7 @@ namespace SF3.Tests.Compression {
                 var compressed1 = CompressLZSS(decompressed1);
                 var decompressed2 = DecompressLZSS(compressed1);
 
-                Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2));
+                Assert.IsTrue(MemEqual(decompressed1, decompressed2));
             });
         }
 
@@ -84,7 +78,7 @@ namespace SF3.Tests.Compression {
                     var compressed1 = CompressLZSS(decompressed1);
                     var decompressed2 = DecompressLZSS(compressed1);
 
-                    Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
+                    Assert.IsTrue(MemEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                 }
                 weDone = true;
             });
@@ -103,7 +97,7 @@ namespace SF3.Tests.Compression {
                     var compressed1 = CompressLZSS(decompressed1);
                     var decompressed2 = DecompressLZSS(compressed1);
 
-                    Assert.IsTrue(ByteArraysAreEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
+                    Assert.IsTrue(MemEqual(decompressed1, decompressed2), "Chunk" + i.ToString("D2") + " failed (" + data.Length + " bytes)");
                 }
             });
         }

@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Runtime.InteropServices;
 using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.Imaging;
 using SF3.Types;
 using static CommonLib.Types.CornerTypeConsts;
+using static CommonLib.Utils.MemoryUtils;
 
 namespace SF3.Win.ThirdParty.TexturePacker {
     public class TextureAtlas : IDisposable {
@@ -155,9 +155,6 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             DrawPackedNodesSub(atlas, _rootNode);
         }
 
-        [DllImport("msvcrt.dll",  SetLastError = false)]
-        static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
-
         private void DrawPackedNodesSub(Bitmap atlas, TextureAtlasNode node) {
             if (node == null)
                 return;
@@ -214,7 +211,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                         fixed (byte* imageDataPtr = imageData) {
                             nint posFrom = 0;
                             for (var row = 0; row < node.Rect.Height; row++) {
-                                _ = memcpy(bitmapToData.Scan0 + posTo, (nint) imageDataPtr + posFrom, strideFrom);
+                                _ = MemCpyUnsafe(bitmapToData.Scan0 + posTo, (nint) imageDataPtr + posFrom, strideFrom);
                                 posTo += strideTo;
                                 posFrom += strideFrom;
                             }

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using static CommonLib.Utils.MemoryUtils;
 
 namespace CommonLib.Arrays {
     /// <summary>
@@ -21,19 +21,6 @@ namespace CommonLib.Arrays {
         /// <param name="bytes">The byte array to transfer into the new ByteArray.</param>
         public ByteArray(byte[] bytes) {
             Bytes = (byte[]) bytes.Clone();
-        }
-
-        [DllImport("msvcrt.dll", SetLastError = false)]
-        private static extern IntPtr memcpy(IntPtr dest, IntPtr src, int count);
-
-        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int memcmp(IntPtr lhs, IntPtr rhs, long count);
-
-        private static bool ByteArraysAreEqual(byte[] lhs, byte[] rhs) {
-            unsafe {
-                fixed (byte* lhsPtr = lhs, rhsPtr = rhs)
-                    return lhs.Length == rhs.Length && memcmp((IntPtr) lhsPtr, (IntPtr) rhsPtr, lhs.Length) == 0;
-            }
         }
 
         public void Resize(int size)
@@ -59,12 +46,8 @@ namespace CommonLib.Arrays {
             Bytes = new byte[oldBytes.Length + bytesToAddOrRemove];
 
             // Copy all old data before 'offset'.
-            if (offset > 0) {
-                unsafe {
-                    fixed (byte* dest = Bytes, src = oldBytes)
-                        _ = memcpy((IntPtr) dest, (IntPtr) src, offset);
-                }
-            }
+            if (offset > 0)
+                MemCpy(Bytes, oldBytes, offset);
 
             if (bytesToAddOrRemove > 0) {
                 var bytesToAdd = bytesToAddOrRemove;
@@ -77,7 +60,7 @@ namespace CommonLib.Arrays {
                 var copySize = oldBytes.Length - offset;
                 unsafe {
                     fixed (byte* dest = Bytes, src = oldBytes)
-                        _ = memcpy((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
+                        _ = MemCpyUnsafe((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
                 }
                 if (invokeEvents)
                     RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, 0, 0, bytesToAdd, false));
@@ -93,7 +76,7 @@ namespace CommonLib.Arrays {
                 var copySize = oldBytes.Length - srcPos;
                 unsafe {
                     fixed (byte* dest = Bytes, src = oldBytes)
-                        _ = memcpy((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
+                        _ = MemCpyUnsafe((IntPtr) dest + destPos, (IntPtr) src + srcPos, copySize);
                 }
                 if (invokeEvents)
                     RangeModified?.Invoke(this, new ByteArrayRangeModifiedArgs(offset, bytesToRemove, 0, -bytesToRemove, false));
@@ -140,7 +123,7 @@ namespace CommonLib.Arrays {
             var bytes = new byte[length];
             unsafe {
                 fixed (byte* dest = bytes, src = Bytes)
-                    _ = memcpy((IntPtr) dest, (IntPtr) src + offset, length);
+                    _ = MemCpyUnsafe((IntPtr) dest, (IntPtr) src + offset, length);
             }
 
             return bytes;
@@ -187,7 +170,7 @@ namespace CommonLib.Arrays {
                         var destPtr = (IntPtr) dest + offset;
                         var srcPtr = (IntPtr) src;
                         if (needsModify)
-                            _ = memcpy(destPtr, srcPtr, data.Length);
+                            _ = MemCpyUnsafe(destPtr, srcPtr, data.Length);
                     }
                 }
             }

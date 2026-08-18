@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Text;
 using CommonLib;
 using CommonLib.Arrays;
@@ -60,9 +59,6 @@ namespace SF3.ByteData {
             => new ScopeGuard(() => _isModifiedGuard++, () => _isModifiedGuard--);
 
         public event EventHandler IsModifiedChanged;
-
-        [DllImport("msvcrt.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int memcmp(byte[] lhs, byte[] rhs, long count);
 
         public virtual bool SetDataTo(byte[] data) {
             if (data == null)
