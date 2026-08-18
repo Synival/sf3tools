@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>dfrtool</AssemblyName>
     <PublishSingleFile>true</PublishSingleFile>
     <Copyright>Copyright © Synival 2026</Copyright>

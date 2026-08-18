@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>sf3compress</AssemblyName>
     <Copyright>Copyright © Synival 2026</Copyright>
     <AssemblyVersion>0.1.1</AssemblyVersion>
