@@ -81,7 +81,7 @@ namespace SF3.Models.Structs.Shared {
 
         public ImageDataCanSet CanSetImageData {
             get {
-                if (!(CanLoadImage || HasImage))
+                if (!CanLoadImage || !HasImage)
                     return ImageDataCanSet.Never;
                 return
                     ((_textureData.CanSetImageData.HasFlag(ImageDataCanSet.CanSet8Bit)  && BytesPerPixel == 1) ? ImageDataCanSet.CanSet8Bit  : 0) |
@@ -101,7 +101,7 @@ namespace SF3.Models.Structs.Shared {
 
         protected abstract int StructImageDataOffset { get; set; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0.5f)]
+        [TableViewModelColumn(addressField: null, displayOrder: 0.75f)]
         public int Width {
             get => StructWidth;
             set {
