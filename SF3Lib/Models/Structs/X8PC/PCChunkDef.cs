@@ -2,13 +2,13 @@
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X8PC {
-    public class BattleModelChunkDef : Struct {
+    public class PCChunkDef : Struct {
         private readonly int _offsetAddr;
         private readonly int _dataSizeAddr;
         private readonly int _chunkSizeAddr;
         private readonly int _paddingAddr;
 
-        public BattleModelChunkDef(IByteData data, int id, string name, int address)
+        public PCChunkDef(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x10) {
             _offsetAddr    = Address + 0x00; // 4 bytes
             _dataSizeAddr  = Address + 0x04; // 4 bytes

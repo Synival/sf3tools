@@ -15,8 +15,11 @@ namespace SF3.Win.Views.X8PC {
 
             if (Model?.Header != null) {
                 if (Model.Header.BattleModelChunkDefTable != null)
-                    CreateChild(new TableView("Chunks", Model.Header.BattleModelChunkDefTable, ngc));
+                    CreateChild(new TableView("Header", Model.Header.BattleModelChunkDefTable, ngc));
             }
+
+            if (Model?.TexDefChunkHeader != null)
+                CreateChild(new PCTexChunkView("Textures", Model));
 
             CreateChild(new TechnicalView("Technical Info", Model));
 
