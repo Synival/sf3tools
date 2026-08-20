@@ -121,7 +121,7 @@ namespace SF3.Win.Views {
                 case ICHP_File  file: return new CHP_View ("CHP_File",  file);
                 case IDAT_File  file: return new DAT_View ("DAT_File",  file);
                 case IKAO_File  file: return new KAO_View ("KAO_File",  file);
-                case IX8PC_File   file: return new X8PC_View  ("X8_File",   file);
+                case IX8PC_File file: return new X8PC_View("X8PC_File", file);
                 default:
                     return null;
             }

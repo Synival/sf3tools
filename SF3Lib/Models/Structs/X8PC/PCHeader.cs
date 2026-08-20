@@ -12,11 +12,11 @@ namespace SF3.Models.Structs.X8PC {
             _battleModelChunkDefTableAddr = Address + 0x00; // 0x40 bytes
 
             Tables = new ITable[] {
-                BattleModelChunkDefTable = PCChunkDefTable.Create(Data, nameof(BattleModelChunkDefTable), _battleModelChunkDefTableAddr)
+                ChunkDefTable = PCChunkDefTable.Create(Data, nameof(ChunkDefTable), _battleModelChunkDefTableAddr)
             };
         }
 
-        public PCChunkDefTable BattleModelChunkDefTable { get; }
+        public PCChunkDefTable ChunkDefTable { get; }
 
         public IEnumerable<ITable> Tables { get; }
     }

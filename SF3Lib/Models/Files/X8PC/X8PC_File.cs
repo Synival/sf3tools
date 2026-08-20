@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using CommonLib.Discovery;
 using CommonLib.NamedValues;
 using SF3.ByteData;
-using SF3.Models.Structs.X8PC;
 using SF3.Models.Tables.X8PC;
 using SF3.Types;
 using SF3.Models.Tables;
-using CommonLib.Arrays;
+using System.Linq;
 
 namespace SF3.Models.Files.X8PC {
     public class X8PC_File : ScenarioTableFile, IX8PC_File {
@@ -16,7 +15,6 @@ namespace SF3.Models.Files.X8PC {
 
         protected X8PC_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario)
         : base(data, nameContext, scenario) {
-
             Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
@@ -28,75 +26,41 @@ namespace SF3.Models.Files.X8PC {
             return newFile;
         }
 
+        private static readonly byte[] g_headerSequence = new byte[] { 0x00, 0x00, 0x08, 0x00, 0x00, 0x00 };
+
         public override IEnumerable<ITable> MakeTables() {
             var tables = new List<ITable>();
 
-            // Build the first header, which is the chunk table.
-            Header = new PCHeader(Data, 0, nameof(PCHeader), 0x00);
+            // Discover where PolyChar headers could be. They all starts with 0x00000800 (offset of first chunk in
+            // bytes) then 0x0000 (higher bytes of an int with the size of the first chunk, which should definitely
+            // never be high enough to need those bytes!)
+            var addresses = new List<int>();
 
-            // Build all chunks.
-            Chunks = new ChunkData[Header.BattleModelChunkDefTable.Count];
-            for (int i = 0; i < Chunks.Length; i++) {
-                var isCompressed = (i == 1);
-                var def = Header.BattleModelChunkDefTable[i];
-                Chunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt((int) def.Offset, (int) def.DataSize)), isCompressed, i);
-                Chunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
+            var max = Data.Length - 0x40;
+            for (int offset = 0; offset < max; offset += 0x800) {
+                var data = Data.Data.GetDataCopyAt(offset, 0x06);
+                if (!data.AsSpan().SequenceEqual(g_headerSequence))
+                    continue;
+                addresses.Add(offset);
             }
 
-            // Store references to chunks by name as well as index.
-            TexDefChunk  = Chunks[0];
-            TexDataChunk = Chunks[1];
-
-            // Initialize structs and tables in chunks.
-            TexDefChunkHeader = new PCTexDefChunkHeader(TexDefChunk.DecompressedData, 0, nameof(TexDefChunkHeader), 0);
-            TextureTable      = PCTextureTable.Create(TexDefChunk.DecompressedData, TexDataChunk.DecompressedData.Data, "Textures", (int) TexDefChunkHeader.TexDefsOffset, (int) TexDefChunkHeader.NumTextures);
-
-            tables.AddRange(Header.Tables);
-            tables.Add(TextureTable);
+            // We have the addresses, now let's make the PolyChars.
+            PolyCharTable = PolyCharTable.Create(Data, nameof(PolyCharTable), addresses.ToArray());
+            foreach (var pc in PolyCharTable)
+                tables.AddRange(pc.Tables);
 
             return tables.ToArray();
         }
 
         public override bool OnFinish() {
             base.OnFinish();
-
-            // Rebuild the entire chunk table.
-            uint nextOffset = 0x800;
-            foreach (var chunk in Chunks) {
-                if (!chunk.DecompressedData.IsModified && !chunk.IsModified)
-                    continue;
-
-                // Recompress if necessary.
-                if (TexDataChunk.NeedsRecompression)
-                    if (!TexDataChunk.Recompress())
-                        return false;
-
-                // Update the chunk table entry.
-                var def = Header.BattleModelChunkDefTable[chunk.Index];
-                def.Offset = nextOffset;
-                def.DataSize = (uint) chunk.Data.Length;
-                def.ChunkSize = (uint) ((chunk.Data.Length + 0x7FF) / 0x800) * 0x800;
-
-                // Copy to the actual data.
-                Data.Data.SetDataAtTo((int) def.Offset, (int) def.DataSize, chunk.Data.GetDataCopyOrReference());
-
-                // Pad the rest of the chunk with 0xFF.
-                var paddingBytes = new byte[(int) def.ChunkSize - def.DataSize];
-                paddingBytes.AsSpan().Fill(0xFF);
-                Data.Data.SetDataAtTo((int) (def.Offset + def.DataSize), paddingBytes.Length, paddingBytes);
-
-                nextOffset += def.ChunkSize;
-            }
+            foreach (var pc in PolyCharTable)
+                if (!pc.UpdateAndCommitChunks())
+                    return false;
 
             return true;
         }
 
-        public PCHeader Header { get; private set; }
-        public PCTexDefChunkHeader TexDefChunkHeader { get; private set; }
-        public PCTextureTable TextureTable { get; private set; }
-
-        public ChunkData[] Chunks { get; private set; }
-        public ChunkData TexDefChunk { get; private set; }
-        public ChunkData TexDataChunk { get; private set; }
+        public PolyCharTable PolyCharTable { get; private set; }
     }
 }

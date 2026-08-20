@@ -1,9 +1,15 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Files.X8PC;
+using CommonLib.NamedValues;
+using SF3.Models.Structs.X8PC;
 
 namespace SF3.Win.Views.X8PC {
     public class PCTexChunkView : TabView {
-        public PCTexChunkView(string name, IX8PC_File model) : base(name) {
+        public PCTexChunkView(string name, PolyChar model, INameGetterContext ngc) : base(name) {
+            NameGetterContext = ngc;
+
+            TexDefChunkView  = new DataModelView("Header", model?.TexDefChunkHeader, ngc, modelType: typeof(PCTexDefChunkHeader));
+            TextureTableView = new PCTextureTableView("Textures", model?.TextureTable, ngc);
+
             Model = model;
         }
 
@@ -11,16 +17,28 @@ namespace SF3.Win.Views.X8PC {
             if (base.Create() == null)
                 return null;
 
-            var ngc = Model.NameGetterContext;
+            var ngc = NameGetterContext;
 
-            if (Model?.TexDefChunkHeader != null)
-                CreateChild(new DataModelView("Header", Model.TexDefChunkHeader, ngc));
-            if (Model?.TextureTable != null)
-                CreateChild(new PCTextureTableView("Textures", Model.TextureTable, ngc));
+            CreateChild(TexDefChunkView);
+            CreateChild(TextureTableView);
 
             return Control;
         }
 
-        public IX8PC_File Model { get; }
+        private PolyChar _model = null;
+        public PolyChar Model {
+            get => _model;
+            set {
+                if (_model != value) {
+                    _model = value;
+                    TexDefChunkView.Model  = _model?.TexDefChunkHeader;
+                    TextureTableView.Table = _model?.TextureTable;
+                }
+            }
+        }
+
+        public INameGetterContext NameGetterContext { get; }
+        public DataModelView TexDefChunkView { get; }
+        public PCTextureTableView TextureTableView { get; }
     }
 }
