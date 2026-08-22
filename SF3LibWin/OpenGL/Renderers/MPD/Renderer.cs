@@ -16,6 +16,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
     public class Renderer {
         public Renderer() {
             CollisionLineRenderer = new CollisionLineRenderer();
+            SurfaceModelRenderer  = new SurfaceModelRenderer();
             GradientRenderer      = new GradientRenderer();
             SkyRenderer           = new SkyRenderer(GradientRenderer);
             GroundRenderer        = new GroundRenderer(GradientRenderer);
@@ -123,7 +124,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 DrawSceneModelsNormals(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
 
             if (options.DrawSurfaceModel)
-                DrawSceneSurfaceModelNormals(general, surfaceModel);
+                SurfaceModelRenderer.DrawNormals(general, surfaceModel);
         }
 
         public void DrawSceneObjects(
@@ -147,7 +148,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: false, selectionColors: false);
 
             if (options.WillDrawSurfaceModel)
-                DrawSceneSurfaceModel(general, surfaceModel, lighting, options);
+                SurfaceModelRenderer.Draw(general, surfaceModel, lighting, options);
 
             if (options.DrawActors)
                 DrawActors(general, scenes, cameraYaw, cameraPitch, selectionColors: false);
@@ -178,7 +179,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     DrawSceneModelsWireframe(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
 
                 if (options.WillDrawSurfaceModelWireframe)
-                    DrawSceneSurfaceModelWireframe(general, surfaceModel);
+                    SurfaceModelRenderer.DrawWireframe(general, surfaceModel);
             }
 
             GL.Disable(EnableCap.PolygonOffsetLine);
@@ -219,20 +220,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             // Reset model matrices to their identity.
             general.NormalsShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
             general.NormalsShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
-        }
-
-        public void DrawSceneSurfaceModelNormals(GeneralResources general, SurfaceModelResources surfaceModel) {
-            if (!(surfaceModel?.Blocks?.Length > 0))
-                return;
-
-            using (general.NormalsShader.Use()) {
-                foreach (var block in surfaceModel.Blocks) {
-                    if (block.Model != null || block.UntexturedModel != null) {
-                        block.Model?.Draw(general.NormalsShader, null);
-                        block.UntexturedModel?.Draw(general.NormalsShader, null);
-                    }
-                }
-            }
         }
 
         public void DrawSceneModels(
@@ -341,49 +328,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 general.SolidShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
                 general.SolidShader.UpdateUniform(ShaderUniformType.NormalMatrix, Matrix3.Identity);
             }
-        }
-
-        public void DrawSceneSurfaceModel(
-            GeneralResources general,
-            SurfaceModelResources surfaceModel,
-            LightingResources lighting,
-            RendererOptions options
-        ) {
-            if (!(surfaceModel?.Blocks?.Length > 0))
-                return;
-
-            var terrainTypesTexture = options.DrawTerrainTypes ? surfaceModel.TerrainTypesTexture : general.TransparentBlackTexture;
-            var eventIdsTexture     = options.DrawEventIDs     ? surfaceModel.EventIDsTexture     : general.TransparentBlackTexture;
-            var lightingTexture     = lighting.LightingTexture ?? general.WhiteTexture;
-
-            GL.Enable(EnableCap.PolygonOffsetFill);
-            GL.PolygonOffset(-1.0f, -1.0f);
-
-            general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? options.UseOutsideLighting ? 2 : 1 : 0);
-            general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
-
-            using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-            using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
-            using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-            using (options.DrawSurfaceModel ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-            using (general.ObjectShader.Use()) {
-                foreach (var block in surfaceModel.Blocks) {
-                    if (options.DrawSurfaceModel)
-                        block.Model?.Draw(general.ObjectShader);
-                    else
-                        block.Model?.Draw(general.ObjectShader, null);
-
-                    if (block.MissingTexturesModel != null)
-                        using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas))
-                            block.MissingTexturesModel?.Draw(general.ObjectShader, null);
-
-                    if (block.UntexturedModel != null)
-                        using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
-                            block.UntexturedModel?.Draw(general.ObjectShader, null);
-                }
-            }
-
-            GL.Disable(EnableCap.PolygonOffsetFill);
         }
 
         public void DrawActors(
@@ -496,17 +440,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
 
             general.WireframeShader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
-        }
-
-        public void DrawSceneSurfaceModelWireframe(GeneralResources general, SurfaceModelResources surfaceModel) {
-            if (surfaceModel?.Blocks == null)
-                return;
-
-            foreach (var block in surfaceModel.Blocks) {
-                block.UntexturedModel?.Draw(general.WireframeShader, null);
-                block.MissingTexturesModel?.Draw(general.WireframeShader, null);
-                block.Model?.Draw(general.WireframeShader, null);
-            }
         }
 
         public void DrawOutlines(
@@ -799,6 +732,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         }
 
         public CollisionLineRenderer CollisionLineRenderer { get; }
+        public SurfaceModelRenderer SurfaceModelRenderer { get; }
         public GradientRenderer GradientRenderer { get; }
         public SkyRenderer SkyRenderer { get; }
         public GroundRenderer GroundRenderer { get; }

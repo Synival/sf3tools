@@ -1,0 +1,76 @@
+﻿using OpenTK.Graphics.OpenGL;
+using SF3.Win.OpenGL.GLResources.MPD;
+using SF3.Win.OpenGL.GLResources.Shared;
+using SF3.Win.Types;
+
+namespace SF3.Win.OpenGL.Renderers.MPD {
+    public class SurfaceModelRenderer {
+        public void Draw(
+            GeneralResources general,
+            SurfaceModelResources surfaceModel,
+            LightingResources lighting,
+            RendererOptions options
+        ) {
+            if (!(surfaceModel?.Blocks?.Length > 0))
+                return;
+
+            var terrainTypesTexture = options.DrawTerrainTypes ? surfaceModel.TerrainTypesTexture : general.TransparentBlackTexture;
+            var eventIdsTexture     = options.DrawEventIDs     ? surfaceModel.EventIDsTexture     : general.TransparentBlackTexture;
+            var lightingTexture     = lighting.LightingTexture ?? general.WhiteTexture;
+
+            GL.Enable(EnableCap.PolygonOffsetFill);
+            GL.PolygonOffset(-1.0f, -1.0f);
+
+            general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? options.UseOutsideLighting ? 2 : 1 : 0);
+            general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
+
+            using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
+            using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
+            using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+            using (options.DrawSurfaceModel ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+            using (general.ObjectShader.Use()) {
+                foreach (var block in surfaceModel.Blocks) {
+                    if (options.DrawSurfaceModel)
+                        block.Model?.Draw(general.ObjectShader);
+                    else
+                        block.Model?.Draw(general.ObjectShader, null);
+
+                    if (block.MissingTexturesModel != null)
+                        using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas))
+                            block.MissingTexturesModel?.Draw(general.ObjectShader, null);
+
+                    if (block.UntexturedModel != null)
+                        using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                            block.UntexturedModel?.Draw(general.ObjectShader, null);
+                }
+            }
+
+            GL.Disable(EnableCap.PolygonOffsetFill);
+        }
+
+        public void DrawWireframe(GeneralResources general, SurfaceModelResources surfaceModel) {
+            if (surfaceModel?.Blocks == null)
+                return;
+
+            foreach (var block in surfaceModel.Blocks) {
+                block.UntexturedModel?.Draw(general.WireframeShader, null);
+                block.MissingTexturesModel?.Draw(general.WireframeShader, null);
+                block.Model?.Draw(general.WireframeShader, null);
+            }
+        }
+
+        public void DrawNormals(GeneralResources general, SurfaceModelResources surfaceModel) {
+            if (!(surfaceModel?.Blocks?.Length > 0))
+                return;
+
+            using (general.NormalsShader.Use()) {
+                foreach (var block in surfaceModel.Blocks) {
+                    if (block.Model != null || block.UntexturedModel != null) {
+                        block.Model?.Draw(general.NormalsShader, null);
+                        block.UntexturedModel?.Draw(general.NormalsShader, null);
+                    }
+                }
+            }
+        }
+    }
+}
