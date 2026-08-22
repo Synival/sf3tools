@@ -9,6 +9,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
 using SF3.Win.Properties;
+using SF3.Win.OpenGL.Shared;
 
 namespace SF3.Win.OpenGL.MPD {
     public class SceneResources : ResourcesBase, IMPD_Resources {

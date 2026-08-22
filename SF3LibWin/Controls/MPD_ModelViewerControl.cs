@@ -8,6 +8,7 @@ using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.MPD;
+using SF3.Win.OpenGL.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.Controls {

@@ -4,6 +4,7 @@ using CommonLib;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
+using SF3.Win.OpenGL.Shared;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.MPD {

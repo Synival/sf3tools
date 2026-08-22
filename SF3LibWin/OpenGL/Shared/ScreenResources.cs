@@ -2,7 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.Shared {
     public class ScreenResources : ResourcesBase {
         protected override void PerformInit() { }
         public override void DeInit() { }
@@ -61,8 +61,8 @@ namespace SF3.Win.OpenGL.MPD {
             FocusedBox?.Dispose();
 
             const int c_focusedBorder = 3;
-            float inH = c_focusedBorder / (float) (Width / 2);
-            float inV = c_focusedBorder / (float) (Height / 2);
+            var inH = c_focusedBorder / (float) (Width / 2);
+            var inV = c_focusedBorder / (float) (Height / 2);
 
             var TL_outer  = new Vector3(-1, -1, 0);
             var TR_outer  = new Vector3( 1, -1, 0);

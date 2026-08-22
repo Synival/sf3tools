@@ -5,13 +5,13 @@ using OpenTK.Mathematics;
 using SF3.Win.Types;
 using System.ComponentModel;
 using CommonLib.Geometry;
-using SF3.Win.OpenGL.MPD;
 using SF3.MPD.Interfaces;
 using SF3.Win.App;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
 using CommonLib;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
+using SF3.Win.OpenGL.Shared;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {

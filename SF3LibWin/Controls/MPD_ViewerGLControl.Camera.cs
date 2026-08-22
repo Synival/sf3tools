@@ -4,7 +4,7 @@ using System.Linq;
 using OpenTK.Mathematics;
 using SF3.Win.App;
 using SF3.Win.Extensions;
-using SF3.Win.OpenGL.MPD;
+using SF3.Win.OpenGL.Shared;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerGLControl {

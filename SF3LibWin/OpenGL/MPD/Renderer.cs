@@ -7,6 +7,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Types;
+using SF3.Win.OpenGL.Shared;
 using SF3.Win.Types;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 
