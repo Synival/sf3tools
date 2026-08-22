@@ -13,7 +13,7 @@ using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 using SF3.MPD.Extensions;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class ModelResources : ResourcesBase, IMPD_Resources {
         public ModelResources(bool applyShadowTags, bool applyHideTags) : base() {
             ApplyShadowTags = applyShadowTags;

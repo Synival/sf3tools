@@ -9,9 +9,9 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
 using SF3.Win.Properties;
-using SF3.Win.OpenGL.Shared;
+using SF3.Win.OpenGL.GLResources.Shared;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class SceneResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() {}
         public override void DeInit() {}
@@ -184,7 +184,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             var zoneY = (mpdFile.Planes?.GroundY ?? 0) / -32.0f - 0.05f;
             Vector3 ZoneVertex(int x, int z)
-                => new Vector3(0.5f + x + GeneralResources.ModelOffsetX, zoneY, (63.5f - z) + GeneralResources.ModelOffsetZ);
+                => new Vector3(0.5f + x + GeneralResources.ModelOffsetX, zoneY, 63.5f - z + GeneralResources.ModelOffsetZ);
 
             var newZones = new List<QuadModel>();
 
@@ -220,7 +220,7 @@ namespace SF3.Win.OpenGL.MPD {
 
             // Build a texture atlas with all frames.
             var sprites = AppResources.Get().ActiveCHR?.CHR?.SpriteTable;
-            int offsetY = unknownImage.Height;
+            var offsetY = unknownImage.Height;
             if (sprites != null) {
                 foreach (var spriteId in spriteIds) {
                     var sprite = sprites.FirstOrDefault(x => x.Header.SpriteID == spriteId);
@@ -228,8 +228,8 @@ namespace SF3.Win.OpenGL.MPD {
                         continue;
 
                     // Use the idle animation if it exists, otherwise fall back on the still frame.
-                    var anim = (sprite.AnimationTable.Count >= 2) ? sprite.AnimationTable[1] :
-                               (sprite.AnimationTable.Count >= 1) ? sprite.AnimationTable[0] : null;
+                    var anim = sprite.AnimationTable.Count >= 2 ? sprite.AnimationTable[1] :
+                               sprite.AnimationTable.Count >= 1 ? sprite.AnimationTable[0] : null;
                     if (anim == null)
                         continue;
 
@@ -251,14 +251,14 @@ namespace SF3.Win.OpenGL.MPD {
                     var texBuf      = new uint[frameWidth * dirCount, frameHeight];
 
                     // Add the frames!
-                    int offsetX = 0;
-                    for (int i = 0; i < dirCount; i++) {
+                    var offsetX = 0;
+                    for (var i = 0; i < dirCount; i++) {
                         var frameIndex = firstFrameIndex + i;
-                        var frame = (frameIndex < sprite.FrameTable.Count) ? sprite.FrameTable[frameIndex] : firstFrame;
+                        var frame = frameIndex < sprite.FrameTable.Count ? sprite.FrameTable[frameIndex] : firstFrame;
                         var frameImageData = frame.Texture.GetBitmapDataARGB8888().ToUInts().To2DArrayColumnMajor(frameWidth, frameHeight);
 
-                        for (int y = 0; y < frameHeight; y++)
-                            for (int x = 0; x < frameWidth; x++)
+                        for (var y = 0; y < frameHeight; y++)
+                            for (var x = 0; x < frameWidth; x++)
                                 texBuf[x + offsetX, y] = frameImageData[x, y];
 
                         offsetX += frameWidth;
@@ -293,9 +293,9 @@ namespace SF3.Win.OpenGL.MPD {
                 var bufWidth  = texBuf.GetLength(0);
                 var bufHeight = texBuf.GetLength(1);
 
-                for (int y = 0; y < bufHeight; y++, offsetY++) {
-                    int offset = offsetY * width * 4;
-                    for (int x = 0; x < bufWidth; x++) {
+                for (var y = 0; y < bufHeight; y++, offsetY++) {
+                    var offset = offsetY * width * 4;
+                    for (var x = 0; x < bufWidth; x++) {
                         var value = texBuf[x, y];
                         textureData[offset++] = (byte) (value >> 24);
                         textureData[offset++] = (byte) (value >> 16);

@@ -2,7 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-namespace SF3.Win.OpenGL.Shared {
+namespace SF3.Win.OpenGL.GLResources.Shared {
     public class ScreenResources : ResourcesBase {
         protected override void PerformInit() { }
         public override void DeInit() { }

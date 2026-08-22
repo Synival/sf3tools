@@ -1,6 +1,6 @@
 ﻿using SF3.MPD.Interfaces;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public interface IMPD_Resources : IResources {
         /// <summary>
         /// Updates resources based on the MPD file given.

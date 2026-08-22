@@ -9,7 +9,7 @@ using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Win.Extensions;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class GroundModelResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }

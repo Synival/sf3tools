@@ -5,7 +5,7 @@ using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.MPD.Interfaces;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class LightingResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }

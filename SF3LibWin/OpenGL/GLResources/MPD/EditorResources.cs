@@ -4,10 +4,10 @@ using CommonLib;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
-using SF3.Win.OpenGL.Shared;
+using SF3.Win.OpenGL.GLResources.Shared;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class EditorResources : ResourcesBase {
         protected override void PerformInit() {
             Textures = [];
@@ -34,7 +34,7 @@ namespace SF3.Win.OpenGL.MPD {
 
         public void UpdateMouseoverObject(IMPD mpd, GeneralResources world, ISelectableObject obj) {
             var tile = obj as SelectableTile;
-            ReplaceTileModelAndTexture(mpd, world, (tile == null) ? [] : [tile], ref _mouseoverTileModel, ref _mouseoverTileTexture);
+            ReplaceTileModelAndTexture(mpd, world, tile == null ? [] : [tile], ref _mouseoverTileModel, ref _mouseoverTileTexture);
             MouseoverObject = obj;
         }
 
@@ -64,7 +64,7 @@ namespace SF3.Win.OpenGL.MPD {
                     // TODO: This is all wrong!! Build a texture atlas and use atlas texture coordinates.
                     if (texture == null) {
                         var texId = tile.TextureID;
-                        var tileTexture = (texId == 0xFF) ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
+                        var tileTexture = texId == 0xFF ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
                         if (tileTexture != null) 
                             Textures.Add(texture = new Texture(tileTexture.CreateBitmapARGB8888()));
                     }

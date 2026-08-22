@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Win.OpenGL.MPD;
+using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.ThirdParty.TexturePacker;
 using static CommonLib.Types.CornerTypeConsts;
 

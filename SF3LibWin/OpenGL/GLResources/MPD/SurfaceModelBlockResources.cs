@@ -11,12 +11,12 @@ using SF3.Types;
 using SF3.Win.Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
         public SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
-            TileX1 = (blockNum % 16) * 4;
-            TileY1 = (blockNum / 16) * 4;
+            TileX1 = blockNum % 16 * 4;
+            TileY1 = blockNum / 16 * 4;
             TileX2 = TileX1 + 4;
             TileY2 = TileY1 + 4;
         }
@@ -70,8 +70,8 @@ namespace SF3.Win.OpenGL.MPD {
                     var tile = mpdFile.Surface.GetTile(x, y);
 
                     IMPD_Animation    anim   = null;
-                    TextureRotateType rotate = TextureRotateType.NoRotation;
-                    TextureFlipType   flip   = TextureFlipType.NoFlip;
+                    var rotate = TextureRotateType.NoRotation;
+                    var   flip   = TextureFlipType.NoFlip;
 
                     if (hasModel) {
                         // Get texture. Fetch animated textures if possible.
@@ -103,8 +103,8 @@ namespace SF3.Win.OpenGL.MPD {
                     }
 
                     var terrainType = (int) tile.TerrainType;
-                    var ttX = (terrainType % 4) / 4.0f;
-                    var ttY = (terrainType / 4) / 4.0f;
+                    var ttX = terrainType % 4 / 4.0f;
+                    var ttY = terrainType / 4 / 4.0f;
                     const float ttWidth = 0.25f;
                     const float ttHeight = 0.25f;
 
@@ -116,8 +116,8 @@ namespace SF3.Win.OpenGL.MPD {
                     var terrainTypeVboData = terrainTypeData.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 2);
 
                     var eventId = (int) tile.EventID;
-                    var eidX = (eventId % 16) / 16.0f;
-                    var eidY = (eventId / 16) / 16.0f;
+                    var eidX = eventId % 16 / 16.0f;
+                    var eidY = eventId / 16 / 16.0f;
                     const float eidWidth = 0.0625f;
                     const float eidHeight = 0.0625f;
 

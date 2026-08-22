@@ -1,9 +1,9 @@
 ﻿using CommonLib;
 using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
-using SF3.Win.OpenGL.Shared;
+using SF3.Win.OpenGL.GLResources.Shared;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class BoundaryModelResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() {
             Models = [];

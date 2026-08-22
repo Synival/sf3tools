@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using OpenTK.Graphics.OpenGL;
-using SF3.Win.OpenGL.MPD;
+using SF3.Win.OpenGL.GLResources.MPD;
 
 namespace SF3.Win.OpenGL {
     public class Texture : IDisposable {

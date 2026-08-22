@@ -3,7 +3,7 @@ using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
-using SF3.Win.OpenGL.Shared;
+using SF3.Win.OpenGL.GLResources.Shared;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {

@@ -7,11 +7,13 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Types;
-using SF3.Win.OpenGL.Shared;
+using SF3.Win.OpenGL.GLResources.MPD;
+using SF3.Win.OpenGL.GLResources.Shared;
+using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.Renderers.MPD {
     public class Renderer {
         public const float c_selectionSurfaceTile     = 0;
         public const float c_selectionPrimaryModels   = 1;
@@ -111,8 +113,8 @@ namespace SF3.Win.OpenGL.MPD {
 
                 bool IsVisibleCollection(MPD_CollectionType collection) {
                     return
-                        (collection != MPD_CollectionType.ExtraModels && options.DrawModels) ||
-                        (collection == MPD_CollectionType.ExtraModels && options.DrawExtraModels);
+                        collection != MPD_CollectionType.ExtraModels && options.DrawModels ||
+                        collection == MPD_CollectionType.ExtraModels && options.DrawExtraModels;
                 }
 
                 _modelsWithGroups = models.ModelInstances
@@ -163,6 +165,12 @@ namespace SF3.Win.OpenGL.MPD {
             private bool[] _modelDirectionsFacingCamera;
         }
 
+        public Renderer() {
+            GradientRenderer = new GradientRenderer();
+            SkyRenderer      = new SkyRenderer(GradientRenderer);
+            GroundRenderer   = new GroundRenderer(GradientRenderer);
+        }
+
         public void DrawScene(
             RendererResources resources,
             RendererOptions options,
@@ -177,9 +185,9 @@ namespace SF3.Win.OpenGL.MPD {
             GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
 
             if (options.DrawSky)
-                DrawSceneSky(resources.General, resources.SkyModel, resources.Gradients, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix);
+                SkyRenderer.Draw(resources.General, resources.SkyModel, resources.Gradients, options, state.CameraYaw, state.CameraPitch, ref state.ProjectionMatrix, ref state.ViewMatrix);
             if (options.DrawGround)
-                DrawSceneGround(resources.General, resources.GroundModel, resources.Gradients, options.GroundAdj, options, ref state.ProjectionMatrix, ref state.ViewMatrix);
+                GroundRenderer.Draw(resources.General, resources.GroundModel, resources.Gradients, options.GroundAdj, options, ref state.ProjectionMatrix, ref state.ViewMatrix);
 
             var modelsWithGroups = state.GetModelsWithGroups(resources.Models, options);
             if (options.DrawNormals)
@@ -298,7 +306,7 @@ namespace SF3.Win.OpenGL.MPD {
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: true, selectionColors: false);
 
             if (options.DrawGradients)
-                DrawSceneGradient(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
+                GradientRenderer.Draw(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
         }
 
         public void DrawSceneCollisionLines(GeneralResources general, CollisionResources collisionModels, float cameraYaw, bool selectionColors) {
@@ -319,8 +327,8 @@ namespace SF3.Win.OpenGL.MPD {
 
             Vector4 ModelSelectionColor(CollisionResources.CollisionQuadModel model) {
                 var id = model.ID;
-                var r = (id % 64) / 64.0f;
-                var g = (id / 64) / 64.0f;
+                var r = id % 64 / 64.0f;
+                var g = id / 64 / 64.0f;
                 return new Vector4(r, g, model.IsPoint ? c_selectionCollisionPointsB : c_selectionCollisionLinesB, 1.0f);
             }
 
@@ -426,93 +434,6 @@ namespace SF3.Win.OpenGL.MPD {
             }
         }
 
-        public void DrawSceneSky(
-            GeneralResources general,
-            SkyModelResources skyModel,
-            GradientResources gradients,
-            RendererOptions options,
-            float cameraYaw,
-            float cameraPitch,
-            ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix
-        ) {
-            if (skyModel?.Model == null)
-                return;
-
-            GL.Disable(EnableCap.DepthTest);
-            GL.DepthMask(false);
-
-            general.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
-
-            const float c_horizRepeatCount = 2f;
-            const float c_vertRepeatCount = 15f;
-            const float c_width = 1.6f;
-            const float c_height = 1.0666f;
-            var xOffset = (MathHelpers.ActualMod(cameraYaw / 360f * c_horizRepeatCount - options.BackgroundX / 512.0f, 1.0f) * c_width - 0.5f) * 2.0f;
-            var yOffset = (MathHelpers.ActualMod(cameraPitch / -360f * c_vertRepeatCount + options.BackgroundY / 256.0f, 1.0f) * c_height - 0.5f) * 2.0f - 0.1f;
-
-            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix,
-                Matrix4.Identity *
-                Matrix4.CreateScale(c_width, c_height, 1.0f) *
-                Matrix4.CreateTranslation(xOffset, yOffset, 0)
-            );
-
-            GL.StencilFunc(StencilFunction.Always, 0x02, 0x02);
-            GL.StencilMask(0x02);
-
-            using (skyModel.Texture.Use(TextureUnit.Texture0))
-                skyModel.Model.Draw(general.TextureShader, null);
-
-            if (options.DrawGradients)
-                DrawSceneGradient(general, gradients?.SkyGradientModel, 0x02, false, ref projectionMatrix, ref viewMatrix);
-
-            general.TextureShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
-            general.TextureShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
-
-            GL.DepthMask(true);
-            GL.Enable(EnableCap.DepthTest);
-        }
-
-        public void DrawSceneGround(
-            GeneralResources general,
-            GroundModelResources groundModel,
-            GradientResources gradients,
-            IColorAdjustRGB555 groundAdj,
-            RendererOptions options,
-            ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix
-        ) {
-            if (groundModel?.Model == null)
-                return;
-
-            GL.Disable(EnableCap.DepthTest);
-            GL.DepthMask(false);
-
-            var glow = Vector3.Zero;
-            if (options.ApplyLighting && groundAdj != null) {
-                glow = new Vector3(
-                    groundAdj.R / (float) 0x1F, 
-                    groundAdj.G / (float) 0x1F, 
-                    groundAdj.B / (float) 0x1F
-                );
-            }
-            general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, ref glow);
-
-            GL.StencilFunc(StencilFunction.Always, 0x01, 0x01);
-            GL.StencilMask(0x01);
-
-            using (groundModel.Texture.Use(TextureUnit.Texture0))
-                groundModel.Model.Draw(general.TextureShader, null);
-
-            if (options.DrawGradients)
-                DrawSceneGradient(general, gradients?.GroundGradientModel, 0x01, false, ref projectionMatrix, ref viewMatrix);
-
-            general.TextureShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
-
-            GL.DepthMask(true);
-            GL.Enable(EnableCap.DepthTest);
-        }
-
         public void DrawSceneModels(
             GeneralResources general,
             ModelResources models,
@@ -536,12 +457,12 @@ namespace SF3.Win.OpenGL.MPD {
             }
 
             Vector4 ModelSelectionColor(IMPD_ModelInstance model) {
-                var r = (model.ID % 64) / 64.0f;
-                var g = (model.ID / 64) / 64.0f;
+                var r = model.ID % 64 / 64.0f;
+                var g = model.ID / 64 / 64.0f;
                 return new Vector4(r, g, model.Collection.Collection == MPD_CollectionType.Primary ? c_selectionPrimaryModelsB : c_selectionExtraModelsB, 1.0f);
             }
 
-            var lightingTexture = selectionColors ? null : (lighting.LightingTexture ?? general.WhiteTexture);
+            var lightingTexture = selectionColors ? null : lighting.LightingTexture ?? general.WhiteTexture;
             var usedSolidShader = false;
 
             using (selectionColors ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
@@ -675,8 +596,8 @@ namespace SF3.Win.OpenGL.MPD {
                 return;
 
             Vector4 ModelSelectionColor(SceneResources.ActorModelInstance actor) {
-                var r = (actor.ID % 64) / 64.0f;
-                var g = (actor.ID / 64) / 64.0f;
+                var r = actor.ID % 64 / 64.0f;
+                var g = actor.ID / 64 / 64.0f;
                 return new Vector4(r, g, c_selectionActorsB, 1.0f);
             }
 
@@ -752,38 +673,6 @@ namespace SF3.Win.OpenGL.MPD {
                 Matrix4.CreateRotationY(cameraYaw   / 180.0f * (float) Math.PI);
 
             return (baseMatrix, baseRotationMatrix);
-        }
-
-        public void DrawSceneGradient(
-            GeneralResources general,
-            QuadModel gradientModel,
-            int stencilBit,
-            bool depthCurrentlyEnabled,
-            ref Matrix4 projectionMatrix,
-            ref Matrix4 viewMatrix
-        ) {
-            if (gradientModel == null)
-                return;
-
-            // TODO: 'depthCurrentlyEnabled' is pretty stilly. We should track the state somehow, and just push it.
-            if (depthCurrentlyEnabled) {
-                GL.Disable(EnableCap.DepthTest);
-                GL.DepthMask(false);
-            }
-
-            general.SolidShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, Matrix4.Identity);
-            general.SolidShader.UpdateUniform(ShaderUniformType.ViewMatrix, Matrix4.Identity);
-
-            GL.StencilFunc(StencilFunction.Equal, stencilBit, stencilBit);
-            gradientModel.Draw(general.SolidShader, null);
-    
-            general.SolidShader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref projectionMatrix);
-            general.SolidShader.UpdateUniform(ShaderUniformType.ViewMatrix, ref viewMatrix);
-
-            if (depthCurrentlyEnabled) {
-                GL.DepthMask(true);
-                GL.Enable(EnableCap.DepthTest);
-            }
         }
 
         public void DrawSceneModelsWireframe(
@@ -994,7 +883,7 @@ namespace SF3.Win.OpenGL.MPD {
             else if (editor.MouseoverObject is SelectableModel mouseoverModel)
                 RenderModel(mouseoverModel, mouseoverModel.Collection == MPD_CollectionType.Primary ? new Vector4(0.5f, 0.375f, 0.25f, 0.5f) : new Vector4(0.5f, 0.25f, 0.25f, 0.5f));
             else if (editor.MouseoverObject is SelectableActor mouseoverActor)
-                RenderActor(mouseoverActor, new Vector4(0.25f, 0.25f + (0.25f / 4), 0.5f, 0.5f));
+                RenderActor(mouseoverActor, new Vector4(0.25f, 0.25f + 0.25f / 4, 0.5f, 0.5f));
             else if (editor.MouseoverObject is SelectableCollisionLine mouseoverLine)
                 RenderCollisionLine(mouseoverLine, new Vector4(1, 0.75f, 1, 0.5f));
             else if (editor.MouseoverObject is SelectableCollisionPoint mouseoverPoint)
@@ -1107,5 +996,9 @@ namespace SF3.Win.OpenGL.MPD {
             GL.Enable(EnableCap.DepthTest);
             GL.DepthMask(true);
         }
+
+        public GradientRenderer GradientRenderer;
+        public SkyRenderer SkyRenderer;
+        public GroundRenderer GroundRenderer;
     }
 }

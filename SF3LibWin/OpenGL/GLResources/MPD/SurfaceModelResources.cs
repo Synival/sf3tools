@@ -2,7 +2,7 @@
 using SF3.MPD.Interfaces;
 using SF3.Win.Properties;
 
-namespace SF3.Win.OpenGL.MPD {
+namespace SF3.Win.OpenGL.GLResources.MPD {
     public class SurfaceModelResources : ResourcesBase, IMPD_Resources {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
