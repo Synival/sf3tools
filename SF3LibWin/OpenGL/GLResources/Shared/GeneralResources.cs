@@ -1,13 +1,9 @@
 using CommonLib;
 using OpenTK.Mathematics;
-using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.GLResources.Shared {
     public class GeneralResources : ResourcesBase {
-        public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
-        public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
-
         protected override void PerformInit() {
             Shaders = [
                 (TextureShader           = new Shader(Resources.TextureVert,         Resources.TextureFrag)),

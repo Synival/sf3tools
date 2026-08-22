@@ -3,7 +3,7 @@ using CommonLib.Types;
 using OpenTK.Mathematics;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
-using SF3.Win.OpenGL.GLResources.Shared;
+using SF3.Win.OpenGL.GLResources.MPD;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {
@@ -28,8 +28,8 @@ namespace SF3.Win.Extensions {
             const int corner3Z = (Corner3Z * 2) - 1;
             const int corner4Z = (Corner4Z * 2) - 1;
 
-            const float modelOffX = GeneralResources.ModelOffsetX + 0.5f;
-            const float modelOffZ = GeneralResources.ModelOffsetZ + 0.5f;
+            const float modelOffX = ModelResources.ModelOffsetX + 0.5f;
+            const float modelOffZ = ModelResources.ModelOffsetZ + 0.5f;
 
             return [
                 (tile.X + (xzOff * corner1X) + modelOffX, heights[0], (63 - tile.Y) + (xzOff * corner1Z) + modelOffZ),

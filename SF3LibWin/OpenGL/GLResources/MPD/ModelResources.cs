@@ -15,6 +15,9 @@ using SF3.MPD.Extensions;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
     public class ModelResources : ResourcesBase, IMPD_Resources {
+        public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
+        public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
+
         public ModelResources(bool applyShadowTags, bool applyHideTags) : base() {
             ApplyShadowTags = applyShadowTags;
             ApplyHideTags   = applyHideTags;

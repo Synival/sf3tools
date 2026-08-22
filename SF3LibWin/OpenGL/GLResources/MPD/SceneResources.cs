@@ -9,7 +9,6 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.App;
 using SF3.Win.Properties;
-using SF3.Win.OpenGL.GLResources.Shared;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
     public class SceneResources : ResourcesBase, IMPD_Resources {
@@ -152,9 +151,9 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                         return new ActorModelInstance(
                             id: x.ID,
                             spriteId: x.SpriteID,
-                            x: actorX /  32.0f + GeneralResources.ModelOffsetX,
+                            x: actorX /  32.0f + ModelResources.ModelOffsetX,
                             y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
-                            z: actorZ / -32.0f - GeneralResources.ModelOffsetZ,
+                            z: actorZ / -32.0f - ModelResources.ModelOffsetZ,
                             verticalOffset: spriteTexInfo.VerticalOffset,
                             x.ActorDirection
                         );
@@ -184,7 +183,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
             var zoneY = (mpdFile.Planes?.GroundY ?? 0) / -32.0f - 0.05f;
             Vector3 ZoneVertex(int x, int z)
-                => new Vector3(0.5f + x + GeneralResources.ModelOffsetX, zoneY, 63.5f - z + GeneralResources.ModelOffsetZ);
+                => new Vector3(0.5f + x + ModelResources.ModelOffsetX, zoneY, 63.5f - z + ModelResources.ModelOffsetZ);
 
             var newZones = new List<QuadModel>();
 

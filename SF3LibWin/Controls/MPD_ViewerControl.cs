@@ -11,7 +11,7 @@ using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
 using CommonLib;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
-using SF3.Win.OpenGL.GLResources.Shared;
+using SF3.Win.OpenGL.GLResources.MPD;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -354,8 +354,8 @@ namespace SF3.Win.Controls {
 
                 width   = (x2 - x1) / 32.00f;
                 depth   = (z2 - z1) / 32.00f;
-                centerX = (x1 + x2) / 2.0f /  32.00f + GeneralResources.ModelOffsetX;
-                centerZ = (z1 + z2) / 2.0f / -32.00f + GeneralResources.ModelOffsetZ + 64.00f;
+                centerX = (x1 + x2) / 2.0f /  32.00f + ModelResources.ModelOffsetX;
+                centerZ = (z1 + z2) / 2.0f / -32.00f + ModelResources.ModelOffsetZ + 64.00f;
                 groundY = (MPD_File?.Planes?.GroundY ?? 0) / -32.0f;
             }
 
