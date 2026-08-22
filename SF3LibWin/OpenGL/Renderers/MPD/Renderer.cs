@@ -14,24 +14,11 @@ using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
     public class Renderer {
-        public const float c_selectionSurfaceTile     = 0;
-        public const float c_selectionPrimaryModels   = 1;
-        public const float c_selectionExtraModels     = 2;
-        public const float c_selectionActors          = 3;
-        public const float c_selectionCollisionLines  = 4;
-        public const float c_selectionCollisionPoints = 5;
-
-        public const float c_selectionSurfaceTileB     = c_selectionSurfaceTile     * (1.0f / 64.0f);
-        public const float c_selectionPrimaryModelsB   = c_selectionPrimaryModels   * (1.0f / 64.0f);
-        public const float c_selectionExtraModelsB     = c_selectionExtraModels     * (1.0f / 64.0f);
-        public const float c_selectionActorsB          = c_selectionActors          * (1.0f / 64.0f);
-        public const float c_selectionCollisionLinesB  = c_selectionCollisionLines  * (1.0f / 64.0f);
-        public const float c_selectionCollisionPointsB = c_selectionCollisionPoints * (1.0f / 64.0f);
-
         public Renderer() {
-            GradientRenderer = new GradientRenderer();
-            SkyRenderer      = new SkyRenderer(GradientRenderer);
-            GroundRenderer   = new GroundRenderer(GradientRenderer);
+            CollisionLineRenderer = new CollisionLineRenderer();
+            GradientRenderer      = new GradientRenderer();
+            SkyRenderer           = new SkyRenderer(GradientRenderer);
+            GroundRenderer        = new GroundRenderer(GradientRenderer);
         }
 
         public void DrawScene(
@@ -66,7 +53,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 GL.Disable(EnableCap.CullFace);
 
             if (options.DrawCollisionLines)
-                DrawSceneCollisionLines(resources.General, resources.CollisionModels, state.CameraYaw, selectionColors: false);
+                CollisionLineRenderer.Draw(resources.General, resources.CollisionModels, state.CameraYaw, selectionColors: false);
 
             if (options.DrawWireframe)
                 DrawSceneWireframes(resources.General, resources.Models, resources.SurfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
@@ -116,7 +103,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 DrawActors(resources.General, resources.Scene, state.CameraYaw, state.CameraPitch, selectionColors: true);
 
             if (options.DrawCollisionLines)
-                DrawSceneCollisionLines(resources.General, resources.CollisionModels, state.CameraYaw, selectionColors: true);
+                CollisionLineRenderer.Draw(resources.General, resources.CollisionModels, state.CameraYaw, selectionColors: true);
 
             // Disable 'CullFace' if previously enabled
             if (!options.ForceTwoSidedTextures)
@@ -170,55 +157,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
             if (options.DrawGradients)
                 GradientRenderer.Draw(general, gradients?.ModelsGradientModel, 0x04, true, ref projectionMatrix, ref viewMatrix);
-        }
-
-        public void DrawSceneCollisionLines(GeneralResources general, CollisionResources collisionModels, float cameraYaw, bool selectionColors) {
-            if (collisionModels == null)
-                return;
-
-            var shader = selectionColors ? general.ColorizeShader : general.SolidShader;
-            if (selectionColors)
-                shader.UpdateUniform("alwaysShow", true);
-
-            GL.Enable(EnableCap.PolygonOffsetFill);
-            GL.PolygonOffset(-4.0f, -4.0f);
-
-            var yawSinCos = Math.SinCos(MathHelper.DegreesToRadians(cameraYaw));
-            var sortedModels = collisionModels.IndividualModels
-                .OrderBy(x => x.Quads[0].Center.X * yawSinCos.Sin + x.Quads[0].Center.Z * yawSinCos.Cos)
-                .ToArray();
-
-            Vector4 ModelSelectionColor(CollisionResources.CollisionQuadModel model) {
-                var id = model.ID;
-                var r = id % 64 / 64.0f;
-                var g = id / 64 / 64.0f;
-                return new Vector4(r, g, model.IsPoint ? c_selectionCollisionPointsB : c_selectionCollisionLinesB, 1.0f);
-            }
-
-            using (shader.Use()) {
-                if (selectionColors) {
-                    GL.Disable(EnableCap.CullFace);
-                    foreach (var model in sortedModels) {
-                        shader.UpdateUniform("color", ModelSelectionColor(model));
-                        model.Draw(shader, null);
-                    }
-                    GL.Enable(EnableCap.CullFace);
-                }
-                else {
-                    foreach (var model in sortedModels)
-                        model.Draw(shader, null);
-
-                    GL.Disable(EnableCap.DepthTest);
-                    GL.DepthMask(false);
-
-                    collisionModels.FullModel.Draw(shader, null);
-
-                    GL.DepthMask(true);
-                    GL.Enable(EnableCap.DepthTest);
-                }
-            }
-
-            GL.Disable(EnableCap.PolygonOffsetFill);
         }
 
         public void DrawSceneWireframes(
@@ -322,7 +260,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             Vector4 ModelSelectionColor(IMPD_ModelInstance model) {
                 var r = model.ID % 64 / 64.0f;
                 var g = model.ID / 64 / 64.0f;
-                return new Vector4(r, g, model.Collection.Collection == MPD_CollectionType.Primary ? c_selectionPrimaryModelsB : c_selectionExtraModelsB, 1.0f);
+                return new Vector4(r, g, model.Collection.Collection == MPD_CollectionType.Primary ? RendererSelectionConstants.PrimaryModelsB : RendererSelectionConstants.ExtraModelsB, 1.0f);
             }
 
             var lightingTexture = selectionColors ? null : lighting.LightingTexture ?? general.WhiteTexture;
@@ -461,7 +399,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             Vector4 ModelSelectionColor(SceneResources.ActorModelInstance actor) {
                 var r = actor.ID % 64 / 64.0f;
                 var g = actor.ID / 64 / 64.0f;
-                return new Vector4(r, g, c_selectionActorsB, 1.0f);
+                return new Vector4(r, g, RendererSelectionConstants.ActorsB, 1.0f);
             }
 
             var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
@@ -860,8 +798,9 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GL.DepthMask(true);
         }
 
-        public GradientRenderer GradientRenderer;
-        public SkyRenderer SkyRenderer;
-        public GroundRenderer GroundRenderer;
+        public CollisionLineRenderer CollisionLineRenderer { get; }
+        public GradientRenderer GradientRenderer { get; }
+        public SkyRenderer SkyRenderer { get; }
+        public GroundRenderer GroundRenderer { get; }
     }
 }

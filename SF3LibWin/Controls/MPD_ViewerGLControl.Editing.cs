@@ -157,17 +157,17 @@ namespace SF3.Win.Controls {
                     pixel[i] = (byte) Math.Round(pixel[i] / (255f / 64f));
             }
 
-            if (pixel[2] == Renderer.c_selectionSurfaceTile)
+            if (pixel[2] == RendererSelectionConstants.SurfaceTile)
                 UpdateMouseoverObject(new SelectableTile(pixel[0], pixel[1]));
-            else if (pixel[2] == Renderer.c_selectionPrimaryModels)
+            else if (pixel[2] == RendererSelectionConstants.PrimaryModels)
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.Primary, pixel[0] + pixel[1] * 64));
-            else if (pixel[2] == Renderer.c_selectionExtraModels)
+            else if (pixel[2] == RendererSelectionConstants.ExtraModels)
                 UpdateMouseoverObject(new SelectableModel(MPD_CollectionType.ExtraModels, pixel[0] + pixel[1] * 64));
-            else if (pixel[2] == Renderer.c_selectionActors)
+            else if (pixel[2] == RendererSelectionConstants.Actors)
                 UpdateMouseoverObject(new SelectableActor(pixel[0] + pixel[1] * 64));
-            else if (pixel[2] == Renderer.c_selectionCollisionLines)
+            else if (pixel[2] == RendererSelectionConstants.CollisionLines)
                 UpdateMouseoverObject(new SelectableCollisionLine(pixel[0] + pixel[1] * 64));
-            else if (pixel[2] == Renderer.c_selectionCollisionPoints)
+            else if (pixel[2] == RendererSelectionConstants.CollisionPoints)
                 UpdateMouseoverObject(new SelectableCollisionPoint(pixel[0] + pixel[1] * 64));
             else
                 UpdateMouseoverObject(null);
