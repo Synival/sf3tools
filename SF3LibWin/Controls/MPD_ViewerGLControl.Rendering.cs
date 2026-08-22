@@ -306,7 +306,7 @@ namespace SF3.Win.Controls {
 
             // If we have input focus, draw a box to indicate it.
             if (Focused)
-                _renderer.DrawControlFocusedBox(resources, options, state);
+                _renderer.DrawControlFocusedBox(resources);
 
             SwapBuffers();
         }

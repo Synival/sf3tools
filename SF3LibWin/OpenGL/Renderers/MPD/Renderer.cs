@@ -18,6 +18,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             BoundaryRenderer      = new BoundaryRenderer();
             ZoneRenderer          = new ZoneRenderer();
             OutlineRenderer       = new OutlineRenderer(ModelRenderer, ActorRenderer);
+            FocusedBoxRenderer    = new FocusedBoxRenderer();
         }
 
         public void DrawScene(
@@ -87,13 +88,8 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             if (options.WillDrawAnyModels)
                 ModelRenderer.Draw(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: false, selectionColors: true);
 
-            if (options.DrawSurfaceModel && resources.SurfaceModel?.Blocks != null) {
-                using (resources.General.SolidShader.Use()) {
-                    foreach (var block in resources.SurfaceModel.Blocks)
-                        if (block.SelectionModel != null)
-                            block.SelectionModel.Draw(resources.General.SolidShader);
-                }
-            }
+            if (options.DrawSurfaceModel && resources.SurfaceModel?.Blocks != null)
+                SurfaceModelRenderer.DrawSelection(resources.General, resources.SurfaceModel);
 
             if (options.WillDrawAnyModels)
                 ModelRenderer.Draw(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
@@ -187,16 +183,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public void InvalidateModelMatrices() => ModelRenderer.InvalidateModelMatrices();
         public void InvalidateSpriteMatrices(ModelResources models) => ModelRenderer.InvalidateSpriteMatrices(models);
 
-        public void DrawControlFocusedBox(RendererResources resources, RendererOptions options, RendererState state) {
-            GL.Disable(EnableCap.DepthTest);
-            GL.DepthMask(false);
-
-            using (resources.General.ColorToScreenShader.Use())
-                resources.Screen.FocusedBox.Draw(resources.General.ColorToScreenShader);
-
-            GL.Enable(EnableCap.DepthTest);
-            GL.DepthMask(true);
-        }
+        public void DrawControlFocusedBox(RendererResources resources) => FocusedBoxRenderer.Draw(resources.General, resources.Screen);
 
         public CollisionLineRenderer CollisionLineRenderer { get; }
         public SurfaceModelRenderer SurfaceModelRenderer { get; }
@@ -208,5 +195,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public BoundaryRenderer BoundaryRenderer { get; }
         public ZoneRenderer ZoneRenderer { get; }
         public OutlineRenderer OutlineRenderer { get; }
+        public FocusedBoxRenderer FocusedBoxRenderer { get; }
     }
 }

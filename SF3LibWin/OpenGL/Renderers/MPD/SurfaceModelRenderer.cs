@@ -72,5 +72,16 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 }
             }
         }
+
+        public void DrawSelection(
+            GeneralResources general,
+            SurfaceModelResources surfaceModel
+        ) {
+            using (general.SolidShader.Use()) {
+                foreach (var block in surfaceModel.Blocks)
+                    if (block.SelectionModel != null)
+                        block.SelectionModel.Draw(general.SolidShader);
+            }
+        }
     }
 }
