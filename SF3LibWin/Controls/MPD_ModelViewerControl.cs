@@ -154,19 +154,19 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.DrawScene(
-                new Renderer.RendererResources() {
+                new RendererResources() {
                     General  = _general,
                     Models   = _models,
                     Lighting = _lighting,
                 },
-                new Renderer.RendererOptions() {
+                new RendererOptions() {
                     DrawModels      = true,
                     DrawExtraModels = true,
                     ApplyLighting   = true,
                     DrawWireframe   = true,
                     SmoothLighting  = true,
                 },
-                new Renderer.RendererState() {
+                new RendererState() {
                     CameraYaw        = Yaw,
                     CameraPitch      = Pitch,
                     ScreenWidth      = ClientSize.Width,

@@ -223,7 +223,7 @@ namespace SF3.Win.Controls {
             // Update models, textures, model switch groups, etc. that have been modified since the last frame.
             UpdateInvalidatedResources();
 
-            var resources = new Renderer.RendererResources() {
+            var resources = new RendererResources() {
                 General         = _general,
                 Models          = _models,
                 SurfaceModel    = _surfaceModel,
@@ -240,7 +240,7 @@ namespace SF3.Win.Controls {
 
             // TODO: these options should be cached!!!
             var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
-            var options = new Renderer.RendererOptions() {
+            var options = new RendererOptions() {
                 DrawModels         = DrawModels,
                 DrawExtraModels    = DrawExtraModels,
                 DrawSurfaceModel   = DrawSurfaceModel,
@@ -282,7 +282,7 @@ namespace SF3.Win.Controls {
             foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
-            var state = new Renderer.RendererState() {
+            var state = new RendererState() {
                 CameraYaw        = Yaw,
                 CameraPitch      = Pitch,
                 ScreenWidth      = ClientSize.Width,

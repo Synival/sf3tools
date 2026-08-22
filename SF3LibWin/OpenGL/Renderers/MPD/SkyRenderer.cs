@@ -5,7 +5,6 @@ using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
-using static SF3.Win.OpenGL.Renderers.MPD.Renderer;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
     public class SkyRenderer {
