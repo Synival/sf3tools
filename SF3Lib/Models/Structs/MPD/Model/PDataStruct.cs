@@ -10,13 +10,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class PDataStruct : Struct, IMPD_ModelLoD {
-        public readonly int _verticesOffsetAddr;
-        public readonly int _vertexCountAddr;
-        public readonly int _polygonsOffsetAddr;
-        public readonly int _faceCountAddr;
-        public readonly int _attributesOffsetAddr;
-
+    public class PDataStruct : Shared.PDataStruct, IMPD_ModelLoD {
         public PDataStruct(IByteData data, int id, string name, int address,
             MPD_CollectionType collection, IMPD_File mpdFile, int? chunkIndex, int modelId, int lod, int refs
         ) : base(data, id, name, address, 0x14) {
@@ -26,12 +20,6 @@ namespace SF3.Models.Structs.MPD.Model {
             ModelID       = modelId;
             LevelOfDetail = lod;
             Refs          = refs;
-
-            _verticesOffsetAddr   = Address + 0x00; // 4 bytes
-            _vertexCountAddr      = Address + 0x04; // 4 bytes
-            _polygonsOffsetAddr   = Address + 0x08; // 4 bytes
-            _faceCountAddr        = Address + 0x0C; // 4 bytes
-            _attributesOffsetAddr = Address + 0x10; // 4 bytes
 
             var faceCount = FaceCount;
             var mockFaces = Enumerable.Range(0, faceCount).Select(x => new MockFace(this, x)).ToArray();
@@ -61,46 +49,11 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: -2.14f)]
         public int LevelOfDetail { get; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0)]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.2f)]
         public int Refs { get; }
 
-        [TableViewModelColumn(addressField: null, displayOrder: 0.25f, isPointer: true, isReadOnly: true)]
+        [TableViewModelColumn(addressField: null, displayOrder: -0.1f, isPointer: true, isReadOnly: true)]
         public uint RamAddress { get; set; }
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_verticesOffsetAddr), displayOrder: 0.5f, isPointer: true)]
-        public uint VerticesOffset {
-            get => Data.GetUInt32(_verticesOffsetAddr);
-            set => Data.SetUInt32(_verticesOffsetAddr, value);
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_vertexCountAddr), displayOrder: 1)]
-        public int VertexCount {
-            get => Data.GetInt32(_vertexCountAddr);
-            set => Data.SetInt32(_vertexCountAddr, value);
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_polygonsOffsetAddr), displayOrder: 2, isPointer: true)]
-        public uint PolygonsOffset {
-            get => Data.GetUInt32(_polygonsOffsetAddr);
-            set => Data.SetUInt32(_polygonsOffsetAddr, value);
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_faceCountAddr), displayOrder: 3)]
-        public int FaceCount {
-            get => Data.GetInt32(_faceCountAddr);
-            set => Data.SetInt32(_faceCountAddr, value);
-        }
-
-        [BulkCopy]
-        [TableViewModelColumn(addressField: nameof(_attributesOffsetAddr), displayOrder: 4, isPointer: true)]
-        public uint AttributesOffset {
-            get => Data.GetUInt32(_attributesOffsetAddr);
-            set => Data.SetUInt32(_attributesOffsetAddr, value);
-        }
 
         private class MockFace : ISGL_ModelFace {
             public MockFace(PDataStruct pdata, int index) {
