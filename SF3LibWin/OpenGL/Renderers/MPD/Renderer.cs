@@ -20,6 +20,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GradientRenderer      = new GradientRenderer();
             SkyRenderer           = new SkyRenderer(GradientRenderer);
             GroundRenderer        = new GroundRenderer(GradientRenderer);
+            ActorRenderer         = new ActorRenderer();
         }
 
         public void DrawScene(
@@ -101,7 +102,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 DrawSceneModels(resources.General, resources.Models, null, options, state.CameraYaw, state.CameraPitch, modelsWithGroups, transparentPass: true, selectionColors:  true);
 
             if (options.DrawActors)
-                DrawActors(resources.General, resources.Scene, state.CameraYaw, state.CameraPitch, selectionColors: true);
+                ActorRenderer.Draw(resources.General, resources.Scene, state.CameraYaw, state.CameraPitch, selectionColors: true);
 
             if (options.DrawCollisionLines)
                 CollisionLineRenderer.Draw(resources.General, resources.CollisionModels, state.CameraYaw, selectionColors: true);
@@ -151,7 +152,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 SurfaceModelRenderer.Draw(general, surfaceModel, lighting, options);
 
             if (options.DrawActors)
-                DrawActors(general, scenes, cameraYaw, cameraPitch, selectionColors: false);
+                ActorRenderer.Draw(general, scenes, cameraYaw, cameraPitch, selectionColors: false);
 
             if (options.WillDrawAnyModels)
                 DrawSceneModels(general, models, lighting, options, cameraYaw, cameraPitch, modelsWithGroups, transparentPass: true, selectionColors: false);
@@ -330,60 +331,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
         }
 
-        public void DrawActors(
-            GeneralResources general,
-            SceneResources scene,
-            float cameraYaw,
-            float cameraPitch,
-            bool selectionColors
-        ) {
-            if (scene == null || scene.ModelsBySpriteID == null || scene.ModelsBySpriteID.Count == 0)
-                return;
-
-            Vector4 ModelSelectionColor(SceneResources.ActorModelInstance actor) {
-                var r = actor.ID % 64 / 64.0f;
-                var g = actor.ID / 64 / 64.0f;
-                return new Vector4(r, g, RendererSelectionConstants.ActorsB, 1.0f);
-            }
-
-            var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
-
-            var shader = general.SpriteShader;
-            using (shader.Use())
-            using (scene.ActorTextureAtlas.Use()) {
-                _ = shader.UpdateUniform("colorize", selectionColors);
-
-                if (!selectionColors) {
-                    // Render shadows first.
-                    _ = shader.UpdateUniform("direction", 0.0f);
-                    _ = shader.UpdateUniform("cameraDistAdjust", 0.25f);
-                    foreach (var actorGroup in scene.ActorsBySpriteID) {
-                        var spriteId = actorGroup.Key;
-                        var shadow = scene.ShadowsBySpriteID[spriteId];
-
-                        foreach (var actor in actorGroup.Value) {
-                            var modelMatrix = baseMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y, actor.Z));
-                            _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
-                            shadow.Draw(shader);
-                        }
-                    }
-                }
-
-                // Now render sprites.
-                _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
-                foreach (var actorGroup in scene.ActorsBySpriteID) {
-                    var spriteId = actorGroup.Key;
-                    var model    = scene.ModelsBySpriteID[spriteId];
-
-                    foreach (var actor in actorGroup.Value) {
-                        SetupSpriteShaderUniforms(shader, baseRotationMatrix, actor, cameraYaw, selectionColors ? ModelSelectionColor(actor) : null);
-                        model.Draw(shader);
-                    }
-                }
-                _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
-            }
-        }
-
         public void DrawZones(
             GeneralResources general,
             SceneResources scene
@@ -397,27 +344,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     zone.Draw(general.SolidShader, null);
                 GL.Enable(EnableCap.DepthTest);
             }
-        }
-
-        private void SetupSpriteShaderUniforms(Shader shader, Matrix4 rotationMatrix, SceneResources.ActorModelInstance actor, float cameraYaw, Vector4? color) {
-            var modelMatrix = rotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + actor.VerticalOffset, actor.Z));
-            _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
-
-            // Convert facing direction (0=north, 90=east, ...) to shader direction (0=south, 0.25=east, ...)
-            _ = shader.UpdateUniform("direction", MathHelpers.ActualMod((180.0f - actor.Direction - cameraYaw) / 360.0f, 1.0f));
-
-            if (color.HasValue)
-                _ = shader.UpdateUniform("color", color.Value);
-        }
-
-        private (Matrix4 BaseMatrix, Matrix4 BaseRotationMatrix) GetSpriteDrawMatrices(float cameraYaw, float cameraPitch) {
-            var baseMatrix = Matrix4.CreateScale(0.75f);
-
-            var baseRotationMatrix = baseMatrix *
-                Matrix4.CreateRotationX(cameraPitch / 180.0f * (float) Math.PI) *
-                Matrix4.CreateRotationY(cameraYaw   / 180.0f * (float) Math.PI);
-
-            return (baseMatrix, baseRotationMatrix);
         }
 
         public void DrawSceneModelsWireframe(
@@ -573,14 +499,14 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     return;
 
                 RenderOutlinesFor(() => {
-                    var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
+                    var (baseMatrix, baseRotationMatrix) = ActorRenderer.GetSpriteDrawMatrices(cameraYaw, cameraPitch);
 
                     var shader = general.SpriteShader;
                     using (scene.ActorTextureAtlas.Use()) {
                         _ = shader.UpdateUniform("colorize", true);
                         _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
 
-                        SetupSpriteShaderUniforms(shader, baseRotationMatrix, actor, cameraYaw, color);
+                        ActorRenderer.SetupSpriteShaderUniforms(shader, baseRotationMatrix, actor, cameraYaw, color);
                         model.Draw(shader);
 
                         _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, Matrix4.Identity);
@@ -736,5 +662,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public GradientRenderer GradientRenderer { get; }
         public SkyRenderer SkyRenderer { get; }
         public GroundRenderer GroundRenderer { get; }
+        public ActorRenderer ActorRenderer { get; }
     }
 }
