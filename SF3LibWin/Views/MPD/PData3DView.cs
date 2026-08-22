@@ -3,8 +3,8 @@ using SF3.Models.Structs.MPD.Model;
 using SF3.MPD.Interfaces;
 using SF3.Win.Controls;
 
-namespace SF3.Win.Views {
-    public class PData3DView : ControlView<PDataViewerControl> {
+namespace SF3.Win.Views.MPD {
+    public class PData3DView : ControlView<MPD_ModelViewerControl> {
         public PData3DView(string name, IMPD mpdFile) : base(name) {
             MPD_File = mpdFile;
         }
@@ -33,8 +33,8 @@ namespace SF3.Win.Views {
         }
 
         private void UpdateMPDModel() {
-            _models   = (_pdata == null) ? null : MPD_File.ModelCollections.TryGetValue(_pdata.Collection, out var mcOut) ? mcOut : null;
-            _mpdModel = (_pdata == null) ? null : _models?.GetModel(_pdata.ModelID, _pdata.LevelOfDetail);
+            _models   = _pdata == null ? null : MPD_File.ModelCollections.TryGetValue(_pdata.Collection, out var mcOut) ? mcOut : null;
+            _mpdModel = _pdata == null ? null : _models?.GetModel(_pdata.ModelID, _pdata.LevelOfDetail);
         }
 
         public IMPD MPD_File { get; }

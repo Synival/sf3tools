@@ -28,7 +28,7 @@ namespace SF3.Win.Views.MPD {
                 // Add a model viewer on the right side of the tab.
                 var tableParent = tableControl?.Parent;
                 if (tableParent != null) {
-                    var modelControl = (PDataViewerControl) ModelView.Create();
+                    var modelControl = (MPD_ModelViewerControl) ModelView.Create();
                     if (modelControl != null) {
                         modelControl.Dock = DockStyle.Right;
                         tableParent.Controls.Add(modelControl);

@@ -11,8 +11,8 @@ using SF3.Win.OpenGL.MPD;
 using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
-    public partial class PDataViewerControl : GLControl {
-        public PDataViewerControl() {
+    public partial class MPD_ModelViewerControl : GLControl {
+        public MPD_ModelViewerControl() {
             InitializeComponent();
             MaximumSize = MinimumSize = new System.Drawing.Size(320, 320);
         }
