@@ -21,6 +21,8 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GroundRenderer        = new GroundRenderer(GradientRenderer);
             ActorRenderer         = new ActorRenderer();
             ModelRenderer         = new ModelRenderer();
+            BoundaryRenderer      = new BoundaryRenderer();
+            ZoneRenderer          = new ZoneRenderer();
         }
 
         public void DrawScene(
@@ -61,10 +63,10 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 DrawSceneWireframes(resources.General, resources.Models, resources.SurfaceModel, options, state.CameraYaw, state.CameraPitch, modelsWithGroups);
 
             if (options.DrawBoundaries)
-                DrawSceneBoundaries(resources.General, resources.BoundaryModels);
+                BoundaryRenderer.Draw(resources.General, resources.BoundaryModels);
 
             if (options.DrawBattleZones)
-                DrawZones(resources.General, resources.Scene);
+                ZoneRenderer.Draw(resources.General, resources.Scene);
 
             if (options.DrawOutlines && resources.Screen != null) {
                 DrawOutlines(
@@ -185,33 +187,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
             GL.Disable(EnableCap.PolygonOffsetLine);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-        }
-
-        public void DrawSceneBoundaries(GeneralResources general, BoundaryModelResources boundaryModels) {
-            if (boundaryModels?.CameraBoundaryModel == null && boundaryModels?.BattleBoundaryModel == null)
-                return;
-
-            using (general.SolidShader.Use()) {
-                GL.Disable(EnableCap.DepthTest);
-                boundaryModels.BattleBoundaryModel?.Draw(general.SolidShader, null);
-                boundaryModels.CameraBoundaryModel?.Draw(general.SolidShader, null);
-                GL.Enable(EnableCap.DepthTest);
-            }
-        }
-
-        public void DrawZones(
-            GeneralResources general,
-            SceneResources scene
-        ) {
-            if (scene == null || scene.ZoneModels == null)
-                return;
-
-            using (general.SolidShader.Use()) {
-                GL.Disable(EnableCap.DepthTest);
-                foreach (var zone in scene.ZoneModels)
-                    zone.Draw(general.SolidShader, null);
-                GL.Enable(EnableCap.DepthTest);
-            }
         }
 
         public void DrawOutlines(
@@ -435,5 +410,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public GroundRenderer GroundRenderer { get; }
         public ActorRenderer ActorRenderer { get; }
         public ModelRenderer ModelRenderer { get; }
+        public BoundaryRenderer BoundaryRenderer { get; }
+        public ZoneRenderer ZoneRenderer { get; }
     }
 }
