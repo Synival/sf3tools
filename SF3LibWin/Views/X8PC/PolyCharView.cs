@@ -9,6 +9,7 @@ namespace SF3.Win.Views.X8PC {
 
             ChunkDefView = new TableView("Header", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
             TexturesView = new PCTexChunkView("Textures", model, NameGetterContext);
+            ModelsView   = new PCModelChunkView("Models", model, NameGetterContext);
 
             Model = model;
         }
@@ -19,6 +20,7 @@ namespace SF3.Win.Views.X8PC {
 
             CreateChild(ChunkDefView);
             CreateChild(TexturesView);
+            CreateChild(ModelsView);
 
             return Control;
         }
@@ -31,6 +33,7 @@ namespace SF3.Win.Views.X8PC {
                     _model = value;
                     ChunkDefView.Table = _model?.Header?.ChunkDefTable;
                     TexturesView.Model = _model;
+                    ModelsView.Model   = _model;
                 }
             }
         }
@@ -38,5 +41,6 @@ namespace SF3.Win.Views.X8PC {
         public INameGetterContext NameGetterContext { get; }
         public TableView ChunkDefView { get; }
         public PCTexChunkView TexturesView { get; }
+        public PCModelChunkView ModelsView { get; }
     }
 }

@@ -6,9 +6,17 @@ namespace X8PC_Analyzer {
             var strings = new List<string>();
 
             foreach (var pc in x8pcFile.PolyCharTable) {
-                var texHeader = pc.TexDefChunkHeader;
-                if (texHeader.TexDefsOffset != 0x14 || texHeader.Unknown0x0C != 0x00 || texHeader.Unknown0x10 != 0x00)
-                    strings.Add($"0x{texHeader.TexDefsOffset:X2}, 0x{texHeader.Unknown0x0C:X2}, 0x{texHeader.Unknown0x10:X2}");
+                {
+                    var texHeader = pc.TexDefChunkHeader;
+                    if (texHeader.TexDefsOffset != 0x14 || texHeader.Unknown0x0C != 0x00 || texHeader.Unknown0x10 != 0x00)
+                        strings.Add($"TexDefHeader: 0x{texHeader.TexDefsOffset:X2}, 0x{texHeader.Unknown0x0C:X2}, 0x{texHeader.Unknown0x10:X2}");
+                }
+
+                {
+                    var modelHeader = pc.ModelChunkHeader;
+                    if (modelHeader.ModelsOffset != 0x08)
+                        strings.Add($"ModelHeader: 0x{modelHeader.ModelsOffset:X2}");
+                }
             }
 
             return strings.ToArray();

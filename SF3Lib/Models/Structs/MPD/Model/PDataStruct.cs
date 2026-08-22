@@ -20,12 +20,12 @@ namespace SF3.Models.Structs.MPD.Model {
         public PDataStruct(IByteData data, int id, string name, int address,
             MPD_CollectionType collection, IMPD_File mpdFile, int? chunkIndex, int modelId, int lod, int refs
         ) : base(data, id, name, address, 0x14) {
-            Collection = collection;
-            MPD_File   = mpdFile;
-            ChunkIndex = chunkIndex;
-            ModelID    = modelId;
+            Collection    = collection;
+            MPD_File      = mpdFile;
+            ChunkIndex    = chunkIndex;
+            ModelID       = modelId;
             LevelOfDetail = lod;
-            Refs       = refs;
+            Refs          = refs;
 
             _verticesOffsetAddr   = Address + 0x00; // 4 bytes
             _vertexCountAddr      = Address + 0x04; // 4 bytes

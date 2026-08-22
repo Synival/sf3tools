@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Arrays;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PolyChar : Struct, ITableContainer {
-        public PCHeader Header { get; private set; }
-        public PCTexDefChunkHeader TexDefChunkHeader { get; private set; }
-        public PCTextureTable TextureTable { get; private set; }
-
-        public ChunkData[] Chunks { get; private set; }
-        public ChunkData TexDefChunk { get; private set; }
-        public ChunkData TexDataChunk { get; private set; }
-
         public PolyChar(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0 /* not applicable */) {
             var tables = new List<ITable>();
@@ -34,13 +28,19 @@ namespace SF3.Models.Structs.X8PC {
             // Store references to chunks by name as well as index.
             TexDefChunk  = Chunks[0];
             TexDataChunk = Chunks[1];
+            ModelChunk   = Chunks[2];
 
             // Initialize structs and tables in chunks.
             TexDefChunkHeader = new PCTexDefChunkHeader(TexDefChunk.DecompressedData, 0, nameof(TexDefChunkHeader), 0);
             TextureTable      = PCTextureTable.Create(TexDefChunk.DecompressedData, TexDataChunk.DecompressedData.Data, "Textures", (int) TexDefChunkHeader.TexDefsOffset, (int) TexDefChunkHeader.NumTextures);
+            ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
+            XPDataListTable   = XPDataListTable.Create(ModelChunk.DecompressedData, "XPDataLists", (int) ModelChunkHeader.ModelsOffset);
+            XPDataTables      = XPDataListTable.Select(x => XPDataTable.Create(ModelChunk.DecompressedData, $"XPDatas{x.ID}", x.XPDataListOffset)).ToArray();
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
+            tables.Add(XPDataListTable);
+            tables.AddRange(XPDataTables);
 
             Tables = tables.ToArray();
         }
@@ -82,5 +82,17 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         public IEnumerable<ITable> Tables { get; private set; }
+
+        public PCHeader Header { get; private set; }
+        public PCTexDefChunkHeader TexDefChunkHeader { get; private set; }
+        public PCTextureTable TextureTable { get; private set; }
+        public PCModelChunkHeader ModelChunkHeader { get; private set; }
+        public XPDataListTable XPDataListTable { get; private set; }
+        public XPDataTable[] XPDataTables { get; private set; }
+
+        public ChunkData[] Chunks { get; private set; }
+        public ChunkData TexDefChunk { get; private set; }
+        public ChunkData TexDataChunk { get; private set; }
+        public ChunkData ModelChunk { get; private set; }
     }
 }

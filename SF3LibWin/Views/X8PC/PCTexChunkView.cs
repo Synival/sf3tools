@@ -6,11 +6,9 @@ namespace SF3.Win.Views.X8PC {
     public class PCTexChunkView : TabView {
         public PCTexChunkView(string name, PolyChar model, INameGetterContext ngc) : base(name) {
             NameGetterContext = ngc;
-
-            TexDefChunkView  = new DataModelView("Header", model?.TexDefChunkHeader, ngc, modelType: typeof(PCTexDefChunkHeader));
-            TextureTableView = new PCTextureTableView("Textures", model?.TextureTable, ngc);
-
-            Model = model;
+            HeaderView        = new DataModelView("Header", model?.TexDefChunkHeader, ngc, modelType: typeof(PCTexDefChunkHeader));
+            TextureTableView  = new PCTextureTableView("Textures", model?.TextureTable, ngc);
+            Model             = model;
         }
 
         public override Control Create() {
@@ -19,7 +17,7 @@ namespace SF3.Win.Views.X8PC {
 
             var ngc = NameGetterContext;
 
-            CreateChild(TexDefChunkView);
+            CreateChild(HeaderView);
             CreateChild(TextureTableView);
 
             return Control;
@@ -31,14 +29,14 @@ namespace SF3.Win.Views.X8PC {
             set {
                 if (_model != value) {
                     _model = value;
-                    TexDefChunkView.Model  = _model?.TexDefChunkHeader;
+                    HeaderView.Model  = _model?.TexDefChunkHeader;
                     TextureTableView.Table = _model?.TextureTable;
                 }
             }
         }
 
         public INameGetterContext NameGetterContext { get; }
-        public DataModelView TexDefChunkView { get; }
+        public DataModelView HeaderView { get; }
         public PCTextureTableView TextureTableView { get; }
     }
 }
