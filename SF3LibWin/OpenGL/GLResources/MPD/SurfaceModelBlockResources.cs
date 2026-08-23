@@ -2,6 +2,7 @@
 using System.Linq;
 using CommonLib;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -69,7 +70,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 for (var x = TileX1; x < TileX2; x++) {
                     var tile = mpdFile.Surface.GetTile(x, y);
 
-                    IMPD_Animation    anim   = null;
+                    IAnimatedTexture anim = null;
                     var rotate = TextureRotateType.NoRotation;
                     var   flip   = TextureFlipType.NoFlip;
 

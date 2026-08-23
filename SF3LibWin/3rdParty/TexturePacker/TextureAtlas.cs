@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using CommonLib.Imaging;
 using CommonLib.Types;
 using OpenTK.Mathematics;
-using SF3.Imaging;
 using SF3.Types;
 using static CommonLib.Types.CornerTypeConsts;
 using static CommonLib.Utils.MemoryUtils;
@@ -24,7 +24,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             _rootNode = new TextureAtlasNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate);
         }
 
-        public TextureAtlas(IEnumerable<IMPD_AnimationFrame> textures, int padding, bool tryRotate) {
+        public TextureAtlas(IEnumerable<IAnimatedTextureFrame> textures, int padding, bool tryRotate) {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
@@ -51,7 +51,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                 _ = Insert(tex);
         }
 
-        public TextureAtlasNode Insert(IMPD_AnimationFrame tex) {
+        public TextureAtlasNode Insert(IAnimatedTextureFrame tex) {
             if (_nodeByTextureIDFrame.ContainsKey((tex.TextureID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 

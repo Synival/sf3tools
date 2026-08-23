@@ -4,7 +4,7 @@
 
 using System;
 using System.Drawing;
-using SF3.Imaging;
+using CommonLib.Imaging;
 
 namespace SF3.Win.ThirdParty.TexturePacker {
     public class TextureAtlasNode : IDisposable {
@@ -14,10 +14,10 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             TryRotate = tryRotate;
         }
 
-        public TextureAtlasNode Insert(IMPD_AnimationFrame tex)
+        public TextureAtlasNode Insert(IAnimatedTextureFrame tex)
             => Insert(tex, false, TryRotate);
 
-        private TextureAtlasNode Insert(IMPD_AnimationFrame tex, bool rotated, bool tryRotate) {
+        private TextureAtlasNode Insert(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
             var width  = rotated ? tex.Height : tex.Width;
             var height = rotated ? tex.Width  : tex.Height;
 
@@ -94,7 +94,7 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         public TextureAtlasNode Right { get; private set; } = null;
         public Rectangle Rect { get; private set; }
         public bool Rotated { get; private set; } = false;
-        public IMPD_AnimationFrame Texture { get; private set; } = null;
+        public IAnimatedTextureFrame Texture { get; private set; } = null;
 
         public int Padding { get; }
         public bool TryRotate { get; }

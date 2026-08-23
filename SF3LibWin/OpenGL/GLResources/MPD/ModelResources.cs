@@ -185,7 +185,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
                 var color = new Vector4(1);
                 var useTexture = attr.UseTexture;
-                IMPD_Animation anim = null;
+                IAnimatedTexture anim = null;
                 var isSemiTransparent = false;
                 var flip = TextureFlipType.NoFlip;
                 MPD_MockAnimation mockAnim = null;
