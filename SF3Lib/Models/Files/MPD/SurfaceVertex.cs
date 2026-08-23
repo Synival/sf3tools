@@ -19,7 +19,7 @@ namespace SF3.Models.Files.MPD {
         public VECTOR Normal {
             get {
                 if (MPD_File.SurfaceModelChunk?.VertexNormalBlockTable == null)
-                    return new VECTOR(0f, 1f, 0f);
+                    return new VECTOR(0f, -1f, 0f);
                 var bl = _sharedBlockVertexLocations[0];
                 return MPD_File.SurfaceModelChunk.VertexNormalBlockTable[bl.Num][bl.X, bl.Y];
             }
