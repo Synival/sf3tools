@@ -6,18 +6,20 @@ using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public class SGL_Model : ISGL_Model {
-        public SGL_Model(int modelId, int levelOfDetail = 0) {
-            Vertices = new VECTOR[0];
-            Faces    = new ISGL_ModelFace[0];
-            ModelID  = modelId;
-            LevelOfDetail = levelOfDetail;
+        public SGL_Model(int modelCollectionId, int modelId, int levelOfDetail) {
+            ModelCollectionID = modelCollectionId;
+            ModelID           = modelId;
+            LevelOfDetail     = levelOfDetail;
+            Vertices          = new VECTOR[0];
+            Faces             = new ISGL_ModelFace[0];
         }
 
         public SGL_Model(ISGL_Model original)
-        : this(original, original.ModelID, original.LevelOfDetail)
+        : this(original, original.ModelCollectionID, original.ModelID, original.LevelOfDetail)
         {}
 
-        public SGL_Model(ISGL_Model original, int modelId, int levelOfDetail = 0) {
+        public SGL_Model(ISGL_Model original, int modelCollectionId, int modelId, int levelOfDetail) {
+            ModelCollectionID = modelCollectionId;
             ModelID       = modelId;
             LevelOfDetail = levelOfDetail;
 
@@ -49,26 +51,32 @@ namespace CommonLib.SGL {
 
         public static SGL_Model FromJToken(JToken token) => new SGL_Model((JObject) token);
         public static SGL_Model FromJObject(JObject jObject) => new SGL_Model(jObject);
-        public static SGL_Model FromJObject(JObject jObject, int modelId, int levelOfDetail) => new SGL_Model(jObject, modelId, levelOfDetail);
+        public static SGL_Model FromJObject(JObject jObject, int modelCollectionId, int modelId, int levelOfDetail)
+            => new SGL_Model(jObject, modelCollectionId, modelId, levelOfDetail);
 
         private SGL_Model(JObject jObject) :
         this(
             jObject,
-            (int?) jObject.GetValueIfExists("ModelID",        t => (JValue) t) ?? 0,
-            (int?) jObject.GetValueIfExists("LevelOfDetail",  t => (JValue) t) ?? 0
+            (int?) jObject.GetValueIfExists("ModelCollectionID", t => (JValue) t) ?? 0,
+            (int?) jObject.GetValueIfExists("ModelID",           t => (JValue) t) ?? 0,
+            (int?) jObject.GetValueIfExists("LevelOfDetail",     t => (JValue) t) ?? 0
         ) {
         }
 
-        private SGL_Model(JObject jObject, int modelId, int levelOfDetail) {
-            Vertices      = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray());
-            Faces         = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray());
-            ModelID       = modelId;
-            LevelOfDetail = levelOfDetail;
+        private SGL_Model(JObject jObject, int modelCollectionId, int modelId, int levelOfDetail) {
+            ModelCollectionID = modelCollectionId;
+            ModelID           = modelId;
+            LevelOfDetail     = levelOfDetail;
+
+            Vertices = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray());
+            Faces    = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray());
         }
+
+        public int ModelCollectionID { get; }
+        public int ModelID { get; }
+        public int LevelOfDetail { get; }
 
         public IReadOnlyList<VECTOR> Vertices { get; }
         public IReadOnlyList<ISGL_ModelFace> Faces { get; }
-        public int ModelID { get; }
-        public int LevelOfDetail { get; }
     }
 }

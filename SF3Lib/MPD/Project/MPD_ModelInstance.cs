@@ -14,8 +14,8 @@ namespace SF3.MPD.Project {
 
         public MPD_ModelInstance(IMPD_ModelInstance original, IMPD_ModelCollection newCollection) {
             Collection = newCollection;
-            ModelInstanceID = original.ModelInstanceID;
             ModelID    = original.ModelID;
+            ModelInstanceID = original.ModelInstanceID;
             _positionX = original.PositionX;
             _positionY = original.PositionY;
             _positionZ = original.PositionZ;
@@ -62,8 +62,10 @@ namespace SF3.MPD.Project {
             => Collection.GetModel(ModelID, lod);
 
         public IMPD_ModelCollection Collection { get; set; }
-        public int ModelInstanceID { get; set; }
+
+        public int ModelCollectionID => (int) Collection.Collection;
         public int ModelID { get; set; }
+        public int ModelInstanceID { get; set; }
 
         private short _positionX = 0;
         public short PositionX {

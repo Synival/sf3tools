@@ -22,6 +22,8 @@ namespace SF3.MPD.Project {
         public MPD_CollectionType Collection { get; }
 
         private ISGL_Model _actualModel;
+
+        public int ModelCollectionID => (int) Collection;
         public int ModelID { get; }
         public int LevelOfDetail { get; }
 

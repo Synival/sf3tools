@@ -3,14 +3,9 @@
 namespace CommonLib.SGL {
     public interface ISGL_Model {
         /// <summary>
-        /// All vertices for the model.
+        /// "Meta" ID that this collection belongs to if you have to render multiple groups.
         /// </summary>
-        IReadOnlyList<VECTOR> Vertices { get; }
-
-        /// <summary>
-        /// All faces (quads) for the model. Contains the set of vertices to use for each quad and its ATTR information.
-        /// </summary>
-        IReadOnlyList<ISGL_ModelFace> Faces { get; }
+        int ModelCollectionID { get; }
 
         /// <summary>
         /// ID of the model this belongs to.
@@ -21,5 +16,15 @@ namespace CommonLib.SGL {
         /// Level-of-detail index for the model.
         /// </summary>
         int LevelOfDetail { get; }
+
+        /// <summary>
+        /// All vertices for the model.
+        /// </summary>
+        IReadOnlyList<VECTOR> Vertices { get; }
+
+        /// <summary>
+        /// All faces (quads) for the model. Contains the set of vertices to use for each quad and its ATTR information.
+        /// </summary>
+        IReadOnlyList<ISGL_ModelFace> Faces { get; }
     }
 }

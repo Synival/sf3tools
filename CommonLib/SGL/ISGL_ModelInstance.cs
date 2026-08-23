@@ -5,17 +5,22 @@ namespace CommonLib.SGL {
     /// Interface for an instance of an ISGL_Model.
     /// </summary>
     public interface ISGL_ModelInstance {
-        int ModelInstanceID { get; }
+        int ModelCollectionID { get; }
         int ModelID { get; set; }
+        int ModelInstanceID { get; }
+
         short PositionX { get; set; }
         short PositionY { get; set; }
         short PositionZ { get; set; }
+
         float AngleX { get; set; }
         float AngleY { get; set; }
         float AngleZ { get; set; }
+
         float ScaleX { get; set; }
         float ScaleY { get; set; }
         float ScaleZ { get; set; }
+
         bool AlwaysFacesCamera { get; set; }
 
         /// <summary>

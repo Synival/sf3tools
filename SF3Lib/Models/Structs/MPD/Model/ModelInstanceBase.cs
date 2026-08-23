@@ -37,6 +37,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public int ModelInstanceID => ID;
+        public int ModelCollectionID => (int) Collection.Collection;
 
         public ISGL_Model GetModel(int lod)
             => Collection.GetModel(ModelID, lod);

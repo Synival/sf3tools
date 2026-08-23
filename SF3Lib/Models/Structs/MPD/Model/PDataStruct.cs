@@ -26,6 +26,8 @@ namespace SF3.Models.Structs.MPD.Model {
             Faces = new MockFaceEnumerable(mockFaces);
         }
 
+        public int ModelCollectionID => (int) Collection;
+
         [TableViewModelColumn(addressField: null, displayOrder: -2.66f, displayName: "Collection", minWidth: 110)]
         public MPD_CollectionType Collection { get; }
 
