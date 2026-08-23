@@ -56,6 +56,7 @@ namespace SF3.MPD.Project {
             System.GC.SuppressFinalize(this);
         }
 
+        public int TextureCollectionID => (int) Collection;
         public int TextureID { get; }
         public MPD_CollectionType Collection { get; }
         public bool IsIgnored { get; set; }

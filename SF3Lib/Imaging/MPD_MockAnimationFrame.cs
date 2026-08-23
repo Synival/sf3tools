@@ -6,13 +6,13 @@ using SF3.Types;
 
 namespace SF3.Imaging {
     public class MPD_MockAnimationFrame : IMPD_AnimationFrame, IDisposable {
-        public MPD_MockAnimationFrame(IMPD_Texture texture) {
+        public MPD_MockAnimationFrame(ITexture texture) {
             _texture = texture;
             _texture.Invalidated += InvalidateSelfHandler;
         }
 
         private void InvalidateSelfHandler(object sender, EventArgs args)
-            => this.Invalidated?.Invoke(sender, args);
+            => Invalidated?.Invoke(sender, args);
 
         public void Dispose() {
             Dispose(disposing: true);
@@ -46,9 +46,11 @@ namespace SF3.Imaging {
         public string Validate16BitImageData(ushort[,] data, int? oldStoredSize, int? newStoredSize)
             => _texture.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
-        public MPD_CollectionType Collection => _texture.Collection;
+        public int TextureCollectionID => _texture.TextureCollectionID;
         public int TextureID => _texture.TextureID;
-        public Dictionary<TagKey, TagValue> Tags => _texture.Tags;
+
+        public MPD_CollectionType Collection => (MPD_CollectionType) TextureCollectionID;
+        public Dictionary<TagKey, TagValue> Tags => (_texture as IMPD_Texture)?.Tags;
         public int BytesPerPixel => _texture.BytesPerPixel;
         public TexturePixelFormat PixelFormat => _texture.PixelFormat;
         public int Width => _texture.Width;
@@ -64,7 +66,7 @@ namespace SF3.Imaging {
         public ImageDataCanSet CanSetImageData { get => _texture.CanSetImageData; set => _texture.CanSetImageData = value; }
         public bool IsIgnored => false;
 
-        private readonly IMPD_Texture _texture;
+        private readonly ITexture _texture;
         private bool _disposedValue;
 
         public event EventHandler Invalidated;

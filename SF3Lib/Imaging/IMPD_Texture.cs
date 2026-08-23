@@ -30,16 +30,11 @@ namespace SF3.Imaging {
     /// <summary>
     /// Interface for textures stored in an MPD.
     /// </summary>
-    public interface IMPD_Texture : ITextureData {
+    public interface IMPD_Texture : ITexture {
         /// <summary>
         /// Collection to which this texture belongs.
         /// </summary>
         MPD_CollectionType Collection { get; }
-
-        /// <summary>
-        /// ID for texture.
-        /// </summary>
-        int TextureID { get; }
 
         /// <summary>
         /// Tags for identifying textures with the same Hash.

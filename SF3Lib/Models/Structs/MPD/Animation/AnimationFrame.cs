@@ -16,7 +16,7 @@ namespace SF3.Models.Structs.MPD.Animation {
 
         public AnimationFrame(
             IByteData data, string name, int address, bool is32Bit, int frameNum, IMPD_File mpdFile, AnimationStruct animation
-        ) : base(data, (int) animation.TextureID, name, address, is32Bit ? 0x08 : 0x04) {
+        ) : base(data, animation.TextureID, name, address, is32Bit ? 0x08 : 0x04) {
             Is32Bit          = is32Bit;
             Frame            = frameNum;
             ImportExportName = $"Texture_{ID:X2}_Frame_{frameNum:X2}";
@@ -29,6 +29,7 @@ namespace SF3.Models.Structs.MPD.Animation {
             _durationAddr        = Address + 1 * _bytesPerProperty;
         }
 
+        public int TextureCollectionID => (int) Collection;
         public int TextureID => ID;
 
         public void SetImageData8Bit(byte[,] data, IPalette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);

@@ -64,6 +64,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
             return TexturePixelFormat.ABGR1555;
         }
 
+        public int TextureCollectionID => (int) Collection;
         public int TextureID => ID;
 
         protected override void OnImageUpdated() {}

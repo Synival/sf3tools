@@ -37,6 +37,7 @@ namespace SF3.Models.Structs.MPD.Animation {
             _originalStoredSize = StoredImageDataSize.Value;
         }
 
+        public int TextureCollectionID => (int) Collection;
         public int TextureID => ID;
 
         protected override void OnImageUpdated() {}

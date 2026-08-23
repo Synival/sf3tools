@@ -1,8 +1,9 @@
 ﻿using System;
+using CommonLib.Imaging;
 
 namespace SF3.Imaging {
     public class MPD_MockAnimation : IMPD_Animation, IDisposable {
-        public MPD_MockAnimation(IMPD_Texture texture) {
+        public MPD_MockAnimation(ITexture texture) {
             if (texture == null)
                 throw new ArgumentNullException(nameof(texture));
             Frames = new IMPD_AnimationFrame[] { new MPD_MockAnimationFrame(texture) };
