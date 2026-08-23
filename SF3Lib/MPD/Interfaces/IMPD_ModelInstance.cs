@@ -16,6 +16,6 @@ namespace SF3.MPD.Interfaces {
         /// </summary>
         /// <param name="lod">Level of detail to fetch.</param>
         /// <returns>An existing IMPD_ModelLoD if found, otherwise 'null'.</returns>
-        IMPD_ModelLoD GetMPD_ModelLoD(int lod);
+        new IMPD_ModelLoD GetModel(int lod);
     }
 }

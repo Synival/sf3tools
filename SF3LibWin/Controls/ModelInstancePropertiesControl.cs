@@ -169,7 +169,7 @@ namespace SF3.Win.Controls {
                     transformer(ref bounds);
 
                     var updatedModelBounds = bounds.ToVECTORs().UnrotateXYZ(eo.AngleX, eo.AngleY, eo.AngleZ).CreateBoundingBox();
-                    var originalModelBounds = eo.GetMPD_ModelLoD(0).Vertices.ToArray().CreateBoundingBox();
+                    var originalModelBounds = eo.GetModel(0).Vertices.ToArray().CreateBoundingBox();
 
                     if (originalModelBounds.Width > 0.01f)
                         eo.ScaleX = Math.Max(0.01f, updatedModelBounds.Width  / originalModelBounds.Width);
@@ -199,7 +199,7 @@ namespace SF3.Win.Controls {
                 IMPD_ModelLoD model = null;
                 try {
                     eo.ModelID = (int) nudModelID.Value;
-                    model = eo.GetMPD_ModelLoD(0);
+                    model = eo.GetModel(0);
                 }
                 catch {
                     model = null;

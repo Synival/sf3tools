@@ -55,10 +55,8 @@ namespace SF3.MPD.Project {
             }
         }
 
-        public ISGL_Model GetModel(int lod)
-            => Collection.GetModel(ModelID, lod);
-
-        public IMPD_ModelLoD GetMPD_ModelLoD(int lod)
+        ISGL_Model ISGL_ModelInstance.GetModel(int lod) => GetModel(lod);
+        public IMPD_ModelLoD GetModel(int lod)
             => Collection.GetModel(ModelID, lod);
 
         public IMPD_ModelCollection Collection { get; set; }
@@ -189,7 +187,7 @@ namespace SF3.MPD.Project {
         public BoundingBox BoundingBox {
             get {
                 if (!_boundingBox.HasValue) {
-                    _boundingBox = GetMPD_ModelLoD(0).Vertices.ToArray()
+                    _boundingBox = GetModel(0).Vertices.ToArray()
                         .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)

@@ -46,7 +46,7 @@ namespace SF3.Win.Views.MPD {
         }
 
         private void UpdateMPD_Model()
-            => _mpdModel = _modelInstance?.GetMPD_ModelLoD(0);
+            => _mpdModel = _modelInstance?.GetModel(0);
         private IMPD_ModelLoD _mpdModel = null;
 
         private void UpdateViewerControl() {
