@@ -23,6 +23,6 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
 
         public HashSet<int> ModelsToHide;
 
-        public Func<ISGL_ModelInstance, bool[] /*modelDirectionsFacingCamera*/, bool> ModelInstanceFilter;
+        public Func<RendererOptions, RendererState, ISGL_ModelInstance, bool> ModelInstanceFilter;
     }
 }

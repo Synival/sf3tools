@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using CommonLib;
+using CommonLib.SGL;
 using CommonLib.Utils;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
@@ -241,6 +242,17 @@ namespace SF3.Win.Controls {
                 Editor          = _editor,
             };
 
+            static bool DrawModelFilter(RendererOptions options, RendererState state, ISGL_ModelInstance model) {
+                var mpdModel = (IMPD_ModelInstance) model;
+                var isExtra = mpdModel.Collection.Collection == MPD_CollectionType.ExtraModels;
+                if ((!isExtra && !options.DrawModels) || (isExtra && !options.DrawExtraModels))
+                    return false;
+
+                var direction = mpdModel.OnlyVisibleFromDirection;
+                var modelDirs = state.ModelDirectionsFacingCamera;
+                return direction == ModelDirectionType.Unset || modelDirs == null || modelDirs[(int) direction];
+            };
+
             // TODO: these options should be cached!!!
             var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
             var options = new MPD_RendererOptions() {
@@ -278,15 +290,7 @@ namespace SF3.Win.Controls {
 
                 ModelsToHide       = _modelInstancesToHide,
 
-                ModelInstanceFilter = (model, modelDirectionsFacingCamera) => {
-                    var mpdModel = (IMPD_ModelInstance) model;
-                    var isExtra = mpdModel.Collection.Collection == MPD_CollectionType.ExtraModels;
-                    if ((!isExtra && !DrawModels) || (isExtra && !DrawExtraModels))
-                        return false;
-
-                    var direction = mpdModel.OnlyVisibleFromDirection;
-                    return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
-                }
+                ModelInstanceFilter = DrawModelFilter
             };
 
             // Make sure every shader has the latest view matrix.

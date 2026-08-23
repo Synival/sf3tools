@@ -18,24 +18,27 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
             if (_modelsWithGroups != null)
                 return _modelsWithGroups;
 
-            var modelDirectionsFacingCamera = GetModelDirectionsFacingCamera(options);
-
             if (models.ModelInstances == null) {
                 _modelsWithGroups = [];
                 return _modelsWithGroups;
             }
 
+            UpdateModelDirectionsFacingCamera(options);
+
             _modelsWithGroups = models.ModelInstances
                 .Select(x => (Model: x, ModelGroup: models.ModelGroupsByIDByCollection[x.ModelCollectionID].TryGetValue(x.ModelID, out var pd) ? pd : null))
                 .Where(x => x.ModelGroup != null)
-                .Where(x => options.ModelInstanceFilter == null || options.ModelInstanceFilter(x.Model, modelDirectionsFacingCamera))
+                .Where(x => options.ModelInstanceFilter == null || options.ModelInstanceFilter(options, this, x.Model))
                 .Where(x => options?.ModelsToHide?.Contains(x.Model.ModelInstanceID) != true)
                 .ToArray();
 
             return _modelsWithGroups;
         }
 
-        private bool[] GetModelDirectionsFacingCamera(RendererOptions options) {
+        private bool[] _modelDirectionsFacingCamera;
+        public bool[] ModelDirectionsFacingCamera => _modelDirectionsFacingCamera;
+
+        private bool[] UpdateModelDirectionsFacingCamera(RendererOptions options) {
             if (_modelDirectionsFacingCamera != null)
                 return _modelDirectionsFacingCamera;
 
@@ -67,6 +70,5 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
         }
 
         private (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] _modelsWithGroups;
-        private bool[] _modelDirectionsFacingCamera;
     }
 }
