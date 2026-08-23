@@ -5,7 +5,7 @@ using OpenTK.Mathematics;
 using SF3.Types;
 using SF3.Win.OpenGL.GLResources.Shared;
 
-namespace SF3.Win.OpenGL.Renderers.MPD {
+namespace SF3.Win.OpenGL.Renderers.Shared {
     public class RendererState {
         public float CameraYaw;
         public float CameraPitch;
@@ -25,16 +25,9 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 return _modelsWithGroups;
             }
 
-            bool IsVisibleCollection(int collection) {
-                var mpdCollection = (MPD_CollectionType) collection;
-                return
-                    mpdCollection != MPD_CollectionType.ExtraModels && options.DrawModels ||
-                    mpdCollection == MPD_CollectionType.ExtraModels && options.DrawExtraModels;
-            }
-
             _modelsWithGroups = models.ModelInstances
                 .Select(x => (Model: x, ModelGroup: models.ModelGroupsByIDByCollection[x.ModelCollectionID].TryGetValue(x.ModelID, out var pd) ? pd : null))
-                .Where(x => x.ModelGroup != null && IsVisibleCollection(x.Model.ModelCollectionID))
+                .Where(x => x.ModelGroup != null)
                 .Where(x => options.ModelInstanceFilter == null || options.ModelInstanceFilter(x.Model, modelDirectionsFacingCamera))
                 .Where(x => options?.ModelsToHide?.Contains(x.Model.ModelInstanceID) != true)
                 .ToArray();

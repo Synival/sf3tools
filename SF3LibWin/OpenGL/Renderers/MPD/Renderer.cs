@@ -23,7 +23,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawScene(
             RendererResources resources,
-            RendererOptions options,
+            MPD_RendererOptions options,
             RendererState state
         ) {
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
@@ -74,7 +74,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawSelectionScene(
             RendererResources resources,
-            RendererOptions options,
+            MPD_RendererOptions options,
             RendererState state
         ) {
             // Enable 'CullFace' to draw everything single-sided (as the game actually is)
@@ -109,7 +109,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
-            RendererOptions options,
+            MPD_RendererOptions options,
             float cameraYaw,
             float cameraPitch,
             (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
@@ -128,7 +128,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             SceneResources scenes,
             GradientResources gradients,
             LightingResources lighting,
-            RendererOptions options,
+            MPD_RendererOptions options,
             float cameraYaw,
             float cameraPitch,
             ref Matrix4 projectionMatrix,
@@ -158,7 +158,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GeneralResources general,
             ModelResources models,
             SurfaceModelResources surfaceModel,
-            RendererOptions options,
+            MPD_RendererOptions options,
             float cameraYaw,
             float cameraPitch,
             (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups

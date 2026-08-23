@@ -12,6 +12,7 @@ using SF3.Win.App;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.MPD;
+using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
@@ -241,7 +242,7 @@ namespace SF3.Win.Controls {
 
             // TODO: these options should be cached!!!
             var truncatedPaletteAdjustments = MPD_File?.BinaryReproductionFlags?.PaletteAdjustmentIsTruncated == true;
-            var options = new RendererOptions() {
+            var options = new MPD_RendererOptions() {
                 DrawModels         = DrawModels,
                 DrawExtraModels    = DrawExtraModels,
                 DrawSurfaceModel   = DrawSurfaceModel,
@@ -277,7 +278,12 @@ namespace SF3.Win.Controls {
                 ModelsToHide       = _modelInstancesToHide,
 
                 ModelInstanceFilter = (model, modelDirectionsFacingCamera) => {
-                    var direction = (model as IMPD_ModelInstance)?.OnlyVisibleFromDirection ?? ModelDirectionType.Unset;
+                    var mpdModel = (IMPD_ModelInstance) model;
+                    var isExtra = mpdModel.Collection.Collection == MPD_CollectionType.ExtraModels;
+                    if ((!isExtra && !DrawModels) || (isExtra && !DrawExtraModels))
+                        return false;
+
+                    var direction = mpdModel.OnlyVisibleFromDirection;
                     return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                 }
             };

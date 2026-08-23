@@ -16,7 +16,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GeneralResources general,
             SkyModelResources skyModel,
             GradientResources gradients,
-            RendererOptions options,
+            MPD_RendererOptions options,
             float cameraYaw,
             float cameraPitch,
             ref Matrix4 projectionMatrix,

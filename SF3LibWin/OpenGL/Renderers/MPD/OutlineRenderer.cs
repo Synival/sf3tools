@@ -6,6 +6,7 @@ using OpenTK.Mathematics;
 using SF3.Types;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
+using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 

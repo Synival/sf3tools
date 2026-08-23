@@ -10,6 +10,7 @@ using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.MPD;
+using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
@@ -159,7 +160,7 @@ namespace SF3.Win.Controls {
                     Models   = _models,
                     Lighting = _lighting,
                 },
-                new RendererOptions() {
+                new MPD_RendererOptions() {
                     DrawModels      = true,
                     DrawExtraModels = true,
                     ApplyLighting   = true,

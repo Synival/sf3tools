@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using CommonLib.Imaging;
-using CommonLib.SGL;
+﻿using CommonLib.Imaging;
+using SF3.Win.OpenGL.Renderers.Shared;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class RendererOptions {
-        public bool DrawModels;
-        public bool DrawExtraModels;
+    public class MPD_RendererOptions : RendererOptions {
         public bool DrawSurfaceModel;
         public bool DrawGround;
         public bool DrawSky;
-        public bool DrawGradients;
         public bool DrawActors;
-
-        public bool DrawNormals;
-        public bool DrawWireframe;
         public bool DrawOutlines;
 
         public bool DrawTerrainTypes;
@@ -23,24 +15,12 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public bool DrawBattleZones;
         public bool DrawCollisionLines;
 
-        public bool ApplyLighting;
-
-        public bool HideModelsNotFacingCamera;
-        public float ModelsYRotation = 0.0f;
-        public float ModelsViewAngleMax = 108.0f;
-        public float ModelsViewAngleMin = -108.0f;
-
         public bool UseOutsideLighting;
-        public bool RotateSpritesUp;
-        public bool ForceTwoSidedTextures;
-        public bool SmoothLighting;
 
         public float BackgroundX = 0.00f;
         public float BackgroundY = 0.00f;
 
         public IColorAdjustRGB555 GroundAdj;
-
-        public HashSet<int> ModelsToHide;
 
         public bool WillDrawSurfaceModel
             => DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs;
@@ -50,7 +30,5 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             => WillDrawAnyModels || WillDrawSurfaceModel;
         public bool WillDrawSurfaceModelWireframe
             => DrawWireframe && !DrawNormals && (DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs);
-
-        public Func<ISGL_ModelInstance, bool[] /*modelDirectionsFacingCamera*/, bool> ModelInstanceFilter;
     }
 }

@@ -9,7 +9,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GeneralResources general,
             SurfaceModelResources surfaceModel,
             LightingResources lighting,
-            RendererOptions options
+            MPD_RendererOptions options
         ) {
             if (!(surfaceModel?.Blocks?.Length > 0))
                 return;
