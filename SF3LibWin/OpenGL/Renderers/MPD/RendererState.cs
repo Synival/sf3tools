@@ -32,7 +32,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
 
             _modelsWithGroups = models.ModelInstances
-                .Select(x => (Model: x, ModelGroup: models.ModelsByIDByCollection[x.Collection.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
+                .Select(x => (Model: x, ModelGroup: models.ModelGroupsByIDByCollection[(int) x.Collection.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
                 .Where(x => x.ModelGroup != null && IsVisibleCollection(x.Model.Collection.Collection))
                 .Where(x => {
                     var direction = x.Model.OnlyVisibleFromDirection;

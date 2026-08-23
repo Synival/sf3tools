@@ -486,8 +486,8 @@ namespace SF3.Win.Controls {
                         if (block.Model?.UpdateAnimatedTextures() == true)
                             InvalidateFrame();
 
-                if (_models?.ModelsByIDByCollection != null)
-                    foreach (var mc in _models.ModelsByIDByCollection.Values)
+                if (_models?.ModelGroupsByIDByCollection != null)
+                    foreach (var mc in _models.ModelGroupsByIDByCollection.Values)
                         foreach (var modelGroup in mc.Values)
                             foreach (var model in modelGroup.Models)
                                 if (model.UpdateAnimatedTextures() == true)

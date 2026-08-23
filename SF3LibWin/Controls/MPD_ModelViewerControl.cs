@@ -249,7 +249,7 @@ namespace SF3.Win.Controls {
 
             // TODO: this doesn't update at 30fps, please fix!
             if (_models != null && Models != null)
-                foreach (var modelGroup in _models.ModelsByIDByCollection[Models.Collection].Values)
+                foreach (var modelGroup in _models.ModelGroupsByIDByCollection[(int) Models.Collection].Values)
                     foreach (var model in modelGroup.Models)
                         model.UpdateAnimatedTextures();
 

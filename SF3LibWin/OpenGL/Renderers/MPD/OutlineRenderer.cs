@@ -102,7 +102,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
 
             (IMPD_ModelInstance Model, ModelGroup ModelGroup) GetModelInstance(SelectableModel selectableModel) {
-                var modelGroups = models.ModelsByIDByCollection.TryGetValue(selectableModel.Collection, out var collectionObj) ? collectionObj : null;
+                var modelGroups = models.ModelGroupsByIDByCollection.TryGetValue((int) selectableModel.Collection, out var collectionObj) ? collectionObj : null;
                 if (modelGroups == null)
                     return (null, null);
 

@@ -149,7 +149,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             float cameraPitch,
             (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
-            if (models?.ModelsByIDByCollection == null)
+            if (models?.ModelGroupsByIDByCollection == null)
                 return;
 
             foreach (var mwg in modelsWithGroups) {
@@ -184,7 +184,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
                 if (modelInstance.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var mpdModel = models.MPD_ModelsByIDByCollection[modelInstance.Collection.Collection].TryGetValue(modelInstance.ModelID, out var mpdModelOut) ? mpdModelOut : null;
+                    var mpdModel = models.SGL_ModelsByIDByCollection[(int) modelInstance.Collection.Collection].TryGetValue(modelInstance.ModelID, out var mpdModelOut) ? mpdModelOut : null;
 
                     var topY     = mpdModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var bottomY  = mpdModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
