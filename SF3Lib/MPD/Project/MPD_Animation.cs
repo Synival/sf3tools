@@ -35,6 +35,7 @@ namespace SF3.MPD.Project {
             );
         }
 
+        IAnimatedTextureFrame IAnimatedTexture.GetFrame(int frameCounter) => GetFrame(frameCounter);
         public IMPD_AnimationFrame GetFrame(int frameCounter) {
             if (Frames.Length == 0)
                 return null;
@@ -70,10 +71,16 @@ namespace SF3.MPD.Project {
             }
         }
 
+        public int TextureCollectionID => Texture.TextureCollectionID;
+        public int TextureID => Texture.TextureID;
+
         public IMPD_AnimatableTexture Texture { get; }
 
         public int FrameTimerStart { get; }
+
+        IAnimatedTextureFrame[] IAnimatedTexture.Frames => Frames;
         public IMPD_AnimationFrame[] Frames { get; }
+
         public bool IsIgnored => Texture.IsIgnored;
 
         private bool _disposedValue;

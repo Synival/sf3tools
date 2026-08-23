@@ -22,12 +22,16 @@ namespace SF3.Imaging {
             }
         }
 
+        IAnimatedTextureFrame IAnimatedTexture.GetFrame(int frameCounter) => GetFrame(frameCounter);
         public IMPD_AnimationFrame GetFrame(int timeFrame) => Frames[0];
 
+        public int TextureCollectionID => Frames[0].TextureCollectionID;
         public int TextureID => Frames[0].TextureID;
         public int FrameTimerStart => 0;
 
+        IAnimatedTextureFrame[] IAnimatedTexture.Frames => Frames;
         public IMPD_AnimationFrame[] Frames { get; }
+
         public bool IsIgnored => Frames[0].IsIgnored;
 
         private bool _disposedValue;

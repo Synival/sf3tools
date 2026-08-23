@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
 using CommonLib.Attributes;
+using CommonLib.Imaging;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Imaging;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.Animation;
+using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Animation {
     public class AnimationStruct : Struct, IMPD_Animation, IDisposable {
@@ -71,6 +73,7 @@ namespace SF3.Models.Structs.MPD.Animation {
         public IMPD_File MPD_File { get; }
         public int FramesAddress { get; }
 
+        IAnimatedTextureFrame IAnimatedTexture.GetFrame(int frameCounter) => GetFrame(frameCounter);
         public IMPD_AnimationFrame GetFrame(int timeFrame) {
             return
                 AnimationFrameTable.Count == 0 ? null :
@@ -78,12 +81,16 @@ namespace SF3.Models.Structs.MPD.Animation {
                 _frameByTimeFrame[MathHelpers.ActualMod(timeFrame + FrameTimerStart, _frameByTimeFrame.Length)];
         }
 
+        IAnimatedTextureFrame[] IAnimatedTexture.Frames => Frames;
         public IMPD_AnimationFrame[] Frames => AnimationFrameTable.Rows;
 
         public uint TextureIDRaw {
             get => Data.GetData(_textureIdAddr, _bytesPerProperty);
             set => Data.SetData(_textureIdAddr, value, _bytesPerProperty);
         }
+
+        // Only primary collections have animations.
+        public int TextureCollectionID => (int) MPD_CollectionType.Primary;
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_textureIdAddr), displayName: "Texture ID", displayOrder: 0, displayFormat: "X2")]
