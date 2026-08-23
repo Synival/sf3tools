@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using CommonLib.SGL;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
@@ -101,12 +101,12 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 });
             }
 
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup) GetModelInstance(SelectableModel selectableModel) {
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup) GetModelInstance(SelectableModel selectableModel) {
                 var modelGroups = models.ModelGroupsByIDByCollection.TryGetValue((int) selectableModel.Collection, out var collectionObj) ? collectionObj : null;
                 if (modelGroups == null)
                     return (null, null);
 
-                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == selectableModel.InstanceID && x.Collection.Collection == selectableModel.Collection);
+                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == selectableModel.InstanceID && x.ModelCollectionID == (int) selectableModel.Collection);
                 if (modelInstance == null)
                     return (null, null);
 

@@ -336,7 +336,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
         public Dictionary<int, Dictionary<int, ModelGroup>> ModelGroupsByIDByCollection { get; } = [];
         public Dictionary<int, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
-        public IMPD_ModelInstance[] ModelInstances { get; private set; }
+        public ISGL_ModelInstance[] ModelInstances { get; private set; }
 
         public bool ApplyShadowTags { get; set; } = false;
         public bool ApplyHideTags { get; set; } = false;
