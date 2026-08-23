@@ -7,14 +7,14 @@ using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class SkyRenderer {
-        public SkyRenderer(GradientRenderer gradientRenderer) {
+    public class MPD_SkyRenderer {
+        public MPD_SkyRenderer(GradientRenderer gradientRenderer) {
             GradientRenderer = gradientRenderer;
         }
 
         public void Draw(
             GeneralResources general,
-            SkyModelResources skyModel,
+            MPD_SkyModelResources skyModel,
             GradientResources gradients,
             MPD_RendererOptions options,
             float cameraYaw,

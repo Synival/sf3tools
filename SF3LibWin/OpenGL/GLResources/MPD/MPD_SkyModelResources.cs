@@ -6,7 +6,7 @@ using static CommonLib.Types.CornerTypeConsts;
 using static SF3.Win.OpenGL.Shader;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class SkyModelResources : ResourcesBase, IMPD_Resources {
+    public class MPD_SkyModelResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() { }
         public override void DeInit() { }
 

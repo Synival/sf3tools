@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.OpenGL.Renderers.MPD {
-    public static class RendererSelectionConstants {
+    public static class MPD_RendererSelectionConstants {
         public const float SurfaceTile     = 0;
         public const float PrimaryModels   = 1;
         public const float ExtraModels     = 2;

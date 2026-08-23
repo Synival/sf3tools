@@ -8,7 +8,7 @@ using SF3.Win.OpenGL.GLResources.Shared;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class EditorResources : ResourcesBase {
+    public class MPD_EditorResources : ResourcesBase {
         protected override void PerformInit() {
             Textures = [];
             Models = [];

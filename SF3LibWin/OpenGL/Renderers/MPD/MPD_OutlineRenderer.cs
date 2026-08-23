@@ -11,8 +11,8 @@ using SF3.Win.Types;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class OutlineRenderer {
-        public OutlineRenderer(ModelRenderer modelRenderer, ActorRenderer actorRenderer) {
+    public class MPD_OutlineRenderer {
+        public MPD_OutlineRenderer(MPD_ModelRenderer modelRenderer, MPD_ActorRenderer actorRenderer) {
             ModelRenderer = modelRenderer;
             ActorRenderer = actorRenderer;
         }
@@ -20,10 +20,10 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public void Draw(
             GeneralResources general,
             ModelResources models,
-            SceneResources scene,
-            EditorResources editor,
+            MPD_SceneResources scene,
+            MPD_EditorResources editor,
             ScreenResources screen,
-            CollisionResources collision,
+            MPD_CollisionResources collision,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -217,7 +217,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GL.Enable(EnableCap.DepthTest);
         }
 
-        public ActorRenderer ActorRenderer { get; }
-        public ModelRenderer ModelRenderer { get; }
+        public MPD_ActorRenderer ActorRenderer { get; }
+        public MPD_ModelRenderer ModelRenderer { get; }
     }
 }

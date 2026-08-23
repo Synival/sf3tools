@@ -12,8 +12,8 @@ using SF3.Win.Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
-        public SurfaceModelBlockResources(int blockNum) {
+    public class MPD_SurfaceModelBlockResources : ResourcesBase, IMPD_Resources {
+        public MPD_SurfaceModelBlockResources(int blockNum) {
             BlockNum = blockNum;
             TileX1 = blockNum % 16 * 4;
             TileY1 = blockNum / 16 * 4;
@@ -153,7 +153,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                         untexturedSurfaceQuads.Add(newQuad);
                     }
 
-                    var selectionColor = new Vector4(x / (float) SurfaceModelResources.WidthInTiles, y / (float) SurfaceModelResources.HeightInTiles, 0, 1);
+                    var selectionColor = new Vector4(x / (float) MPD_SurfaceModelResources.WidthInTiles, y / (float) MPD_SurfaceModelResources.HeightInTiles, 0, 1);
                     surfaceSelectionQuads.Add(new Quad(vertices, selectionColor));
 
                     if (mockAnim != null)

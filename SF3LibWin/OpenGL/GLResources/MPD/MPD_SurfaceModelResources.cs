@@ -3,15 +3,15 @@ using SF3.MPD.Interfaces;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class SurfaceModelResources : ResourcesBase, IMPD_Resources {
+    public class MPD_SurfaceModelResources : ResourcesBase, IMPD_Resources {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 
-        public SurfaceModelResources() {
+        public MPD_SurfaceModelResources() {
             var numBlocks = 16 * 16;
-            Blocks = new SurfaceModelBlockResources[numBlocks];
+            Blocks = new MPD_SurfaceModelBlockResources[numBlocks];
             for (var i = 0; i < numBlocks; i++)
-                Blocks[i] = new SurfaceModelBlockResources(i);
+                Blocks[i] = new MPD_SurfaceModelBlockResources(i);
         }
 
         protected override void PerformInit() {
@@ -49,7 +49,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 block.Invalidate();
         }
 
-        public SurfaceModelBlockResources[] Blocks { get; }
+        public MPD_SurfaceModelBlockResources[] Blocks { get; }
 
         public Texture TerrainTypesTexture { get; private set; } = null;
         public Texture EventIDsTexture { get; private set; } = null;

@@ -7,14 +7,14 @@ using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class GroundRenderer {
-        public GroundRenderer(GradientRenderer gradientRenderer) {
+    public class MPD_GroundRenderer {
+        public MPD_GroundRenderer(GradientRenderer gradientRenderer) {
             GradientRenderer = gradientRenderer;
         }
 
         public void Draw(
             GeneralResources general,
-            GroundModelResources groundModel,
+            MPD_GroundModelResources groundModel,
             GradientResources gradients,
             IColorAdjustRGB555 groundAdj,
             RendererOptions options,

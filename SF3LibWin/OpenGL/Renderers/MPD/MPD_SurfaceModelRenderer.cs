@@ -4,10 +4,10 @@ using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class SurfaceModelRenderer {
+    public class MPD_SurfaceModelRenderer {
         public void Draw(
             GeneralResources general,
-            SurfaceModelResources surfaceModel,
+            MPD_SurfaceModelResources surfaceModel,
             LightingResources lighting,
             MPD_RendererOptions options
         ) {
@@ -48,7 +48,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             GL.Disable(EnableCap.PolygonOffsetFill);
         }
 
-        public void DrawWireframe(GeneralResources general, SurfaceModelResources surfaceModel) {
+        public void DrawWireframe(GeneralResources general, MPD_SurfaceModelResources surfaceModel) {
             if (surfaceModel?.Blocks == null)
                 return;
 
@@ -59,7 +59,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
         }
 
-        public void DrawNormals(GeneralResources general, SurfaceModelResources surfaceModel) {
+        public void DrawNormals(GeneralResources general, MPD_SurfaceModelResources surfaceModel) {
             if (!(surfaceModel?.Blocks?.Length > 0))
                 return;
 
@@ -75,7 +75,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawSelection(
             GeneralResources general,
-            SurfaceModelResources surfaceModel
+            MPD_SurfaceModelResources surfaceModel
         ) {
             using (general.SolidShader.Use()) {
                 foreach (var block in surfaceModel.Blocks)

@@ -11,7 +11,7 @@ using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class ModelRenderer {
+    public class MPD_ModelRenderer {
         public void Draw(
             GeneralResources general,
             ModelResources models,
@@ -37,7 +37,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             Vector4 ModelSelectionColor(ISGL_ModelInstance model) {
                 var r = model.ModelInstanceID % 64 / 64.0f;
                 var g = model.ModelInstanceID / 64 / 64.0f;
-                return new Vector4(r, g, model.ModelCollectionID == (int) MPD_CollectionType.Primary ? RendererSelectionConstants.PrimaryModelsB : RendererSelectionConstants.ExtraModelsB, 1.0f);
+                return new Vector4(r, g, model.ModelCollectionID == (int) MPD_CollectionType.Primary ? MPD_RendererSelectionConstants.PrimaryModelsB : MPD_RendererSelectionConstants.ExtraModelsB, 1.0f);
             }
 
             var lightingTexture = selectionColors ? null : lighting.LightingTexture ?? general.WhiteTexture;

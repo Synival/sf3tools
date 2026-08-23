@@ -3,8 +3,8 @@ using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class BoundaryRenderer {
-        public void Draw(GeneralResources general, BoundaryModelResources boundaryModels) {
+    public class MPD_BoundaryRenderer {
+        public void Draw(GeneralResources general, MPD_BoundaryModelResources boundaryModels) {
             if (boundaryModels?.CameraBoundaryModel == null && boundaryModels?.BattleBoundaryModel == null)
                 return;
 

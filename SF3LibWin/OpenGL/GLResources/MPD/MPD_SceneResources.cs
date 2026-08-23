@@ -11,7 +11,7 @@ using SF3.Win.App;
 using SF3.Win.Properties;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class SceneResources : ResourcesBase, IMPD_Resources {
+    public class MPD_SceneResources : ResourcesBase, IMPD_Resources {
         protected override void PerformInit() {}
         public override void DeInit() {}
 

@@ -6,8 +6,8 @@ using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class CollisionLineRenderer {
-        public void Draw(GeneralResources general, CollisionResources collisionModels, float cameraYaw, bool selectionColors) {
+    public class MPD_CollisionLineRenderer {
+        public void Draw(GeneralResources general, MPD_CollisionResources collisionModels, float cameraYaw, bool selectionColors) {
             if (collisionModels == null)
                 return;
 
@@ -23,11 +23,11 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 .OrderBy(x => x.Quads[0].Center.X * sin + x.Quads[0].Center.Z * cos)
                 .ToArray();
 
-            static Vector4 ModelSelectionColor(CollisionResources.CollisionQuadModel model) {
+            static Vector4 ModelSelectionColor(MPD_CollisionResources.CollisionQuadModel model) {
                 var id = model.ID;
                 var r = id % 64 / 64.0f;
                 var g = id / 64 / 64.0f;
-                return new Vector4(r, g, model.IsPoint ? RendererSelectionConstants.CollisionPointsB : RendererSelectionConstants.CollisionLinesB, 1.0f);
+                return new Vector4(r, g, model.IsPoint ? MPD_RendererSelectionConstants.CollisionPointsB : MPD_RendererSelectionConstants.CollisionLinesB, 1.0f);
             }
 
             using (shader.Use()) {

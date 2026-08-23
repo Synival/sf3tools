@@ -105,18 +105,18 @@ namespace SF3.Win.Controls {
 
             _general         = new GeneralResources();
             _models          = new MPD_ModelResources(_appSettings.ViewerApplyShadowTags, _appSettings.ViewerApplyHideTags);
-            _surfaceModel    = new SurfaceModelResources();
-            _groundModel     = new GroundModelResources();
-            _skyModel        = new SkyModelResources();
-            _collisionModels = new CollisionResources();
-            _editor          = new EditorResources();
+            _surfaceModel    = new MPD_SurfaceModelResources();
+            _groundModel     = new MPD_GroundModelResources();
+            _skyModel        = new MPD_SkyModelResources();
+            _collisionModels = new MPD_CollisionResources();
+            _editor          = new MPD_EditorResources();
             _gradients       = new MPD_GradientResources();
             _lighting        = new MPD_LightingResources();
-            _boundaryModels  = new BoundaryModelResources();
-            _sceneResources  = new SceneResources();
+            _boundaryModels  = new MPD_BoundaryModelResources();
+            _sceneResources  = new MPD_SceneResources();
             _screenResources = new ScreenResources();
 
-            _renderer = new Renderer();
+            _renderer = new MPD_Renderer();
 
             _general.Init();
             _models.Init();
@@ -225,19 +225,20 @@ namespace SF3.Win.Controls {
             // Update models, textures, model switch groups, etc. that have been modified since the last frame.
             UpdateInvalidatedResources();
 
-            var resources = new RendererResources() {
+            var resources = new MPD_RendererResources() {
                 General         = _general,
+                Screen          = _screenResources,
+                Gradients       = _gradients,
+                Lighting        = _lighting,
                 Models          = _models,
+
                 SurfaceModel    = _surfaceModel,
                 GroundModel     = _groundModel,
                 SkyModel        = _skyModel,
-                Gradients       = _gradients,
-                Lighting        = _lighting,
                 BoundaryModels  = _boundaryModels,
                 CollisionModels = _collisionModels,
                 Scene           = _sceneResources,
                 Editor          = _editor,
-                Screen          = _screenResources,
             };
 
             // TODO: these options should be cached!!!
@@ -719,19 +720,19 @@ namespace SF3.Win.Controls {
 
         private GeneralResources       _general         = null;
         private MPD_ModelResources     _models          = null;
-        private SurfaceModelResources  _surfaceModel    = null;
-        private GroundModelResources   _groundModel     = null;
-        private SkyModelResources      _skyModel        = null;
-        private CollisionResources     _collisionModels = null;
-        private EditorResources        _editor          = null;
+        private MPD_SurfaceModelResources  _surfaceModel    = null;
+        private MPD_GroundModelResources   _groundModel     = null;
+        private MPD_SkyModelResources      _skyModel        = null;
+        private MPD_CollisionResources     _collisionModels = null;
+        private MPD_EditorResources        _editor          = null;
         private MPD_GradientResources  _gradients       = null;
         private MPD_LightingResources  _lighting        = null;
-        private BoundaryModelResources _boundaryModels  = null;
-        private SceneResources         _sceneResources  = null;
+        private MPD_BoundaryModelResources _boundaryModels  = null;
+        private MPD_SceneResources         _sceneResources  = null;
         private ScreenResources        _screenResources = null;
         private HashSet<int>           _modelInstancesToHide = null;
 
-        private Renderer _renderer = null;
+        private MPD_Renderer _renderer = null;
         private int _inPaintCounter = 0;
 
         private DisposableEventHandlerCollection<EventHandler> _appSettingsRenderEventHandler;

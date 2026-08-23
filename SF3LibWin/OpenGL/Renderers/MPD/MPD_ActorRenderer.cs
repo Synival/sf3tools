@@ -6,10 +6,10 @@ using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class ActorRenderer {
+    public class MPD_ActorRenderer {
         public void Draw(
             GeneralResources general,
-            SceneResources scene,
+            MPD_SceneResources scene,
             float cameraYaw,
             float cameraPitch,
             bool selectionColors
@@ -17,10 +17,10 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             if (scene == null || scene.ModelsBySpriteID == null || scene.ModelsBySpriteID.Count == 0)
                 return;
 
-            Vector4 ModelSelectionColor(SceneResources.ActorModelInstance actor) {
+            Vector4 ModelSelectionColor(MPD_SceneResources.ActorModelInstance actor) {
                 var r = actor.ID % 64 / 64.0f;
                 var g = actor.ID / 64 / 64.0f;
-                return new Vector4(r, g, RendererSelectionConstants.ActorsB, 1.0f);
+                return new Vector4(r, g, MPD_RendererSelectionConstants.ActorsB, 1.0f);
             }
 
             var (baseMatrix, baseRotationMatrix) = GetSpriteDrawMatrices(cameraYaw, cameraPitch);
@@ -61,7 +61,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
         }
 
-        public void SetupSpriteShaderUniforms(Shader shader, Matrix4 rotationMatrix, SceneResources.ActorModelInstance actor, float cameraYaw, Vector4? color) {
+        public void SetupSpriteShaderUniforms(Shader shader, Matrix4 rotationMatrix, MPD_SceneResources.ActorModelInstance actor, float cameraYaw, Vector4? color) {
             var modelMatrix = rotationMatrix * Matrix4.CreateTranslation(new Vector3(actor.X, actor.Y + actor.VerticalOffset, actor.Z));
             _ = shader.UpdateUniform(ShaderUniformType.ModelMatrix, modelMatrix);
 

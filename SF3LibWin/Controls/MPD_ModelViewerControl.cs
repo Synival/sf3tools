@@ -38,7 +38,7 @@ namespace SF3.Win.Controls {
             _models.Init();
             _lighting.Init();
 
-            _renderer = new Renderer();
+            _renderer = new MPD_Renderer();
 
             if (MPD_File != null && Models != null && _mpdModel != null)
                 _models.Update(MPD_File, Models, _mpdModel);
@@ -155,10 +155,10 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.DrawScene(
-                new RendererResources() {
+                new MPD_RendererResources() {
                     General  = _general,
-                    Models   = _models,
                     Lighting = _lighting,
+                    Models   = _models,
                 },
                 new MPD_RendererOptions() {
                     DrawModels      = true,
@@ -285,7 +285,7 @@ namespace SF3.Win.Controls {
         private MPD_ModelResources _models   = null;
         private LightingResources  _lighting = null;
 
-        private Renderer _renderer = null;
+        private MPD_Renderer _renderer = null;
         private Timer _timer = null;
 
         private static Timer _globalTimer = null;

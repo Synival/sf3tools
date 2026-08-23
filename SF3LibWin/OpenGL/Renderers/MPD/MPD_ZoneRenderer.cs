@@ -3,10 +3,10 @@ using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class ZoneRenderer {
+    public class MPD_ZoneRenderer {
         public void Draw(
             GeneralResources general,
-            SceneResources scene
+            MPD_SceneResources scene
         ) {
             if (scene == null || scene.ZoneModels == null)
                 return;

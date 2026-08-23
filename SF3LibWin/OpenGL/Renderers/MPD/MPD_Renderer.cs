@@ -6,23 +6,23 @@ using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.Shared;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
-    public class Renderer {
-        public Renderer() {
-            CollisionLineRenderer = new CollisionLineRenderer();
-            SurfaceModelRenderer  = new SurfaceModelRenderer();
+    public class MPD_Renderer {
+        public MPD_Renderer() {
+            CollisionLineRenderer = new MPD_CollisionLineRenderer();
+            SurfaceModelRenderer  = new MPD_SurfaceModelRenderer();
             GradientRenderer      = new GradientRenderer();
-            SkyRenderer           = new SkyRenderer(GradientRenderer);
-            GroundRenderer        = new GroundRenderer(GradientRenderer);
-            ActorRenderer         = new ActorRenderer();
-            ModelRenderer         = new ModelRenderer();
-            BoundaryRenderer      = new BoundaryRenderer();
-            ZoneRenderer          = new ZoneRenderer();
-            OutlineRenderer       = new OutlineRenderer(ModelRenderer, ActorRenderer);
+            SkyRenderer           = new MPD_SkyRenderer(GradientRenderer);
+            GroundRenderer        = new MPD_GroundRenderer(GradientRenderer);
+            ActorRenderer         = new MPD_ActorRenderer();
+            ModelRenderer         = new MPD_ModelRenderer();
+            BoundaryRenderer      = new MPD_BoundaryRenderer();
+            ZoneRenderer          = new MPD_ZoneRenderer();
+            OutlineRenderer       = new MPD_OutlineRenderer(ModelRenderer, ActorRenderer);
             FocusedBoxRenderer    = new FocusedBoxRenderer();
         }
 
         public void DrawScene(
-            RendererResources resources,
+            MPD_RendererResources resources,
             MPD_RendererOptions options,
             RendererState state
         ) {
@@ -73,7 +73,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         }
 
         public void DrawSelectionScene(
-            RendererResources resources,
+            MPD_RendererResources resources,
             MPD_RendererOptions options,
             RendererState state
         ) {
@@ -108,7 +108,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public void DrawSceneObjectNormals(
             GeneralResources general,
             ModelResources models,
-            SurfaceModelResources surfaceModel,
+            MPD_SurfaceModelResources surfaceModel,
             MPD_RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -124,8 +124,8 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public void DrawSceneObjects(
             GeneralResources general,
             ModelResources models,
-            SurfaceModelResources surfaceModel,
-            SceneResources scenes,
+            MPD_SurfaceModelResources surfaceModel,
+            MPD_SceneResources scenes,
             GradientResources gradients,
             LightingResources lighting,
             MPD_RendererOptions options,
@@ -157,7 +157,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public void DrawSceneWireframes(
             GeneralResources general,
             ModelResources models,
-            SurfaceModelResources surfaceModel,
+            MPD_SurfaceModelResources surfaceModel,
             MPD_RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -183,18 +183,18 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public void InvalidateModelMatrices() => ModelRenderer.InvalidateModelMatrices();
         public void InvalidateSpriteMatrices(ModelResources models) => ModelRenderer.InvalidateSpriteMatrices(models);
 
-        public void DrawControlFocusedBox(RendererResources resources) => FocusedBoxRenderer.Draw(resources.General, resources.Screen);
+        public void DrawControlFocusedBox(MPD_RendererResources resources) => FocusedBoxRenderer.Draw(resources.General, resources.Screen);
 
-        public CollisionLineRenderer CollisionLineRenderer { get; }
-        public SurfaceModelRenderer SurfaceModelRenderer { get; }
+        public MPD_CollisionLineRenderer CollisionLineRenderer { get; }
+        public MPD_SurfaceModelRenderer SurfaceModelRenderer { get; }
         public GradientRenderer GradientRenderer { get; }
-        public SkyRenderer SkyRenderer { get; }
-        public GroundRenderer GroundRenderer { get; }
-        public ActorRenderer ActorRenderer { get; }
-        public ModelRenderer ModelRenderer { get; }
-        public BoundaryRenderer BoundaryRenderer { get; }
-        public ZoneRenderer ZoneRenderer { get; }
-        public OutlineRenderer OutlineRenderer { get; }
+        public MPD_SkyRenderer SkyRenderer { get; }
+        public MPD_GroundRenderer GroundRenderer { get; }
+        public MPD_ActorRenderer ActorRenderer { get; }
+        public MPD_ModelRenderer ModelRenderer { get; }
+        public MPD_BoundaryRenderer BoundaryRenderer { get; }
+        public MPD_ZoneRenderer ZoneRenderer { get; }
+        public MPD_OutlineRenderer OutlineRenderer { get; }
         public FocusedBoxRenderer FocusedBoxRenderer { get; }
     }
 }
