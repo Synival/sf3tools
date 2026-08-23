@@ -142,7 +142,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
             var modelInstance = new MPD_ModelInstance() {
                 Collection = models,
-                ID = 0,
+                ModelInstanceID = 0,
                 ModelID = sglModel.ModelID,
                 PositionX = 32 * 32,
                 PositionZ = 32 * 32,

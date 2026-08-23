@@ -490,7 +490,7 @@ namespace MPD_Analyzer {
         public static string[]? GetAllModelInstancesWithLessThanEightLoDs(MPD_File mpdFile) {
             return mpdFile.ModelCollections[MPD_CollectionType.Primary].ModelInstances
                 .Where(x => x.LevelsOfDetail != 8)
-                .Select(x => $"0x{x.ID:X3} (ModelID=0x{x.ModelID:X03})")
+                .Select(x => $"0x{x.ModelInstanceID:X3} (ModelID=0x{x.ModelID:X03})")
                 .ToArray();
         }
 

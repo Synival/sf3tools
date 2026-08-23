@@ -38,7 +38,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     var direction = x.Model.OnlyVisibleFromDirection;
                     return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                 })
-                .Where(x => options?.ModelsToHide?.Contains(x.Model.ID) != true)
+                .Where(x => options?.ModelsToHide?.Contains(x.Model.ModelInstanceID) != true)
                 .ToArray();
 
             return _modelsWithGroups;

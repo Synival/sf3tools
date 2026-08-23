@@ -36,7 +36,12 @@ namespace SF3.Models.Structs.MPD.Model {
             _scaleZAddress    = Address + positionXOffset + 0x14; // 4 bytes
         }
 
-        public IMPD_ModelLoD GetModel(int lod)
+        public int ModelInstanceID => ID;
+
+        public ISGL_Model GetModel(int lod)
+            => Collection.GetModel(ModelID, lod);
+
+        public IMPD_ModelLoD GetMPD_ModelLoD(int lod)
             => Collection.GetModel(ModelID, lod);
 
         public IMPD_ModelCollection Collection { get; }
@@ -163,7 +168,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public BoundingBox BoundingBox {
             get {
                 if (!_boundingBox.HasValue) {
-                    _boundingBox = GetModel(0).Vertices.ToArray()
+                    _boundingBox = GetMPD_ModelLoD(0).Vertices.ToArray()
                         .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)

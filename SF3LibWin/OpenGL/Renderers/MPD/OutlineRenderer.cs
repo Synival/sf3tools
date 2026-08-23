@@ -106,7 +106,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 if (modelGroups == null)
                     return (null, null);
 
-                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ID == selectableModel.InstanceID && x.Collection.Collection == selectableModel.Collection);
+                var modelInstance = models.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == selectableModel.InstanceID && x.Collection.Collection == selectableModel.Collection);
                 if (modelInstance == null)
                     return (null, null);
 

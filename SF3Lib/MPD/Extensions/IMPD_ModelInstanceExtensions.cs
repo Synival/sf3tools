@@ -8,7 +8,7 @@ namespace SF3.MPD.Extensions {
         public static JObject ToJObject(this IMPD_ModelInstance instance) {
             // 'Collection' is not serialized.
             var properties = new List<JProperty>() {
-                new JProperty("ID",        instance.ID),
+                new JProperty("ID",        instance.ModelInstanceID),
                 new JProperty("ModelID",   instance.ModelID),
                 new JProperty("PositionX", instance.PositionX),
                 new JProperty("PositionY", instance.PositionY),

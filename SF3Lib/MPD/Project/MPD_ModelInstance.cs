@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CommonLib.SGL;
 using Newtonsoft.Json.Linq;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
@@ -13,7 +14,7 @@ namespace SF3.MPD.Project {
 
         public MPD_ModelInstance(IMPD_ModelInstance original, IMPD_ModelCollection newCollection) {
             Collection = newCollection;
-            ID         = original.ID;
+            ModelInstanceID = original.ModelInstanceID;
             ModelID    = original.ModelID;
             _positionX = original.PositionX;
             _positionY = original.PositionY;
@@ -35,7 +36,7 @@ namespace SF3.MPD.Project {
 
             var jObject = (JObject) token;
 
-            ID        =    (int) jObject["ID"];
+            ModelInstanceID = (int) jObject["ID"];
             ModelID   =    (int) jObject["ModelID"];
             PositionX =  (short) jObject["PositionX"];
             PositionY =  (short) jObject["PositionY"];
@@ -54,11 +55,14 @@ namespace SF3.MPD.Project {
             }
         }
 
-        public IMPD_ModelLoD GetModel(int lod)
+        public ISGL_Model GetModel(int lod)
+            => Collection.GetModel(ModelID, lod);
+
+        public IMPD_ModelLoD GetMPD_ModelLoD(int lod)
             => Collection.GetModel(ModelID, lod);
 
         public IMPD_ModelCollection Collection { get; set; }
-        public int ID { get; set; }
+        public int ModelInstanceID { get; set; }
         public int ModelID { get; set; }
 
         private short _positionX = 0;
@@ -183,7 +187,7 @@ namespace SF3.MPD.Project {
         public BoundingBox BoundingBox {
             get {
                 if (!_boundingBox.HasValue) {
-                    _boundingBox = GetModel(0).Vertices.ToArray()
+                    _boundingBox = GetMPD_ModelLoD(0).Vertices.ToArray()
                         .CreateBoundingBox()
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)

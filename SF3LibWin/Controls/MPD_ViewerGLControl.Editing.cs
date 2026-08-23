@@ -108,7 +108,7 @@ namespace SF3.Win.Controls {
                 IMPD_ModelInstance modelInstance = null;
                 if (newModel != null) {
                     var collection = (MPD_File.ModelCollections?.TryGetValue(newModel.Collection, out var collectionObj) == true) ? collectionObj : null;
-                    modelInstance = collection?.ModelInstances?.FirstOrDefault(x => x.ID == newModel.InstanceID);
+                    modelInstance = collection?.ModelInstances?.FirstOrDefault(x => x.ModelInstanceID == newModel.InstanceID);
                 }
                 if (modelInstance != null)
                     newEventObject = modelInstance;

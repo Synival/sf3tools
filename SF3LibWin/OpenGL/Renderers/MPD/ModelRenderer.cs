@@ -34,8 +34,8 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
 
             Vector4 ModelSelectionColor(IMPD_ModelInstance model) {
-                var r = model.ID % 64 / 64.0f;
-                var g = model.ID / 64 / 64.0f;
+                var r = model.ModelInstanceID % 64 / 64.0f;
+                var g = model.ModelInstanceID / 64 / 64.0f;
                 return new Vector4(r, g, model.Collection.Collection == MPD_CollectionType.Primary ? RendererSelectionConstants.PrimaryModelsB : RendererSelectionConstants.ExtraModelsB, 1.0f);
             }
 

@@ -166,7 +166,7 @@ namespace SF3.MPD.Writer {
                 WriteATTRs(model);
 
                 // Now write the PDATA
-                pdataPosByInstanceIndex[instance.ID] = (uint) CurrentOffset;
+                pdataPosByInstanceIndex[instance.ModelInstanceID] = (uint) CurrentOffset;
                 WriteMPDPointer(verticesPos);
                 WriteInt(model.Vertices.Count);
                 WriteMPDPointer(polygonsPos);

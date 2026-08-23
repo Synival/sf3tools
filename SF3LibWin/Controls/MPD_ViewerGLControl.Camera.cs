@@ -67,7 +67,7 @@ namespace SF3.Win.Controls {
             }
             else if (obj is SelectableModel modelObj) {
                 if (MPD_File.ModelCollections.TryGetValue(modelObj.Collection, out var collection)) {
-                    var modelInstance = collection.ModelInstances.FirstOrDefault(x => x.ID == modelObj.InstanceID);
+                    var modelInstance = collection.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == modelObj.InstanceID);
                     if (modelInstance != null) {
                         target =
                             new Vector3(
