@@ -13,7 +13,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
     public class ModelRenderer {
         public void Draw(
             GeneralResources general,
-            MPD_ModelResources models,
+            ModelResources models,
             LightingResources lighting,
             RendererOptions options,
             float cameraYaw,
@@ -121,7 +121,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawWireframe(
             GeneralResources general,
-            MPD_ModelResources models,
+            ModelResources models,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -143,7 +143,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawNormals(
             GeneralResources general,
-            MPD_ModelResources models,
+            ModelResources models,
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
@@ -166,7 +166,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         }
 
         public void SetModelAndNormalMatricesForModel(
-            MPD_ModelResources models,
+            ModelResources models,
             ISGL_ModelInstance modelInstance,
             Shader shader,
             RendererOptions options,
@@ -230,7 +230,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             _modelMatricesByModel.Clear();
         }
 
-        public void InvalidateSpriteMatrices(MPD_ModelResources models) {
+        public void InvalidateSpriteMatrices(ModelResources models) {
             if (models?.ModelInstances == null)
                 return;
             var spriteModels = models.ModelInstances.Where(x => x.AlwaysFacesCamera).ToList();

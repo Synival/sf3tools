@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.SGL;
-using CommonLib.Types;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 using SF3.Types;
-using SF3.Win.Extensions;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 using SF3.MPD.Extensions;

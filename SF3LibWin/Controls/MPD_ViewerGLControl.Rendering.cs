@@ -7,6 +7,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Models.Files.MPD;
 using SF3.MPD.Interfaces;
+using SF3.Types;
 using SF3.Win.App;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
@@ -274,6 +275,11 @@ namespace SF3.Win.Controls {
                 UseOutsideLighting = MPD_File?.Flags?.Bit_0x2000_NarrowAngleBasedLightmap == true,
 
                 ModelsToHide       = _modelInstancesToHide,
+
+                ModelInstanceFilter = (model, modelDirectionsFacingCamera) => {
+                    var direction = (model as IMPD_ModelInstance)?.OnlyVisibleFromDirection ?? ModelDirectionType.Unset;
+                    return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
+                }
             };
 
             // Make sure every shader has the latest view matrix.
@@ -706,7 +712,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private GeneralResources       _general         = null;
-        private MPD_ModelResources         _models          = null;
+        private MPD_ModelResources     _models          = null;
         private SurfaceModelResources  _surfaceModel    = null;
         private GroundModelResources   _groundModel     = null;
         private SkyModelResources      _skyModel        = null;

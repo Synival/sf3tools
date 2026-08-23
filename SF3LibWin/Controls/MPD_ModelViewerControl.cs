@@ -280,9 +280,9 @@ namespace SF3.Win.Controls {
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
 
-        private GeneralResources  _general  = null;
-        private MPD_ModelResources    _models   = null;
-        private LightingResources _lighting = null;
+        private GeneralResources   _general  = null;
+        private MPD_ModelResources _models   = null;
+        private LightingResources  _lighting = null;
 
         private Renderer _renderer = null;
         private Timer _timer = null;

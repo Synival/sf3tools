@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.Imaging;
+using CommonLib.SGL;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
     public class RendererOptions {
@@ -48,5 +50,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             => WillDrawAnyModels || WillDrawSurfaceModel;
         public bool WillDrawSurfaceModelWireframe
             => DrawWireframe && !DrawNormals && (DrawSurfaceModel || DrawTerrainTypes || DrawEventIDs);
+
+        public Func<ISGL_ModelInstance, bool[] /*modelDirectionsFacingCamera*/, bool> ModelInstanceFilter;
     }
 }
