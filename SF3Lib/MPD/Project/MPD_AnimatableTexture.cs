@@ -1,7 +1,6 @@
 ﻿using System;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
-using CommonLib.Types;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.Types;
@@ -13,6 +12,7 @@ namespace SF3.MPD.Project {
                 Animation = new MPD_Animation(this, original.Animation);
         }
 
+        IAnimatedTexture IAnimatableTexture.Animation => Animation;
         public IMPD_Animation Animation { get; }
 
         public static MPD_AnimatableTexture FromJToken(JToken token, MPD_CollectionType collection, IPalette palette)

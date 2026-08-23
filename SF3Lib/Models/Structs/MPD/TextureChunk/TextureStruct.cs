@@ -122,6 +122,7 @@ namespace SF3.Models.Structs.MPD.TextureChunk {
 
         public override bool CanLoadImage => true;
 
+        IAnimatedTexture IAnimatableTexture.Animation => Animation;
         public IMPD_Animation Animation {
             get {
                 if (Collection != MPD_CollectionType.Primary)

@@ -341,6 +341,6 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
         public bool ApplyShadowTags { get; set; } = false;
         public bool ApplyHideTags { get; set; } = false;
 
-        private List<MPD_MockAnimation> _mockAnims = new List<MPD_MockAnimation>();
+        private List<MockAnimatedTexture> _mockAnims = new List<MockAnimatedTexture>();
     }
 }
