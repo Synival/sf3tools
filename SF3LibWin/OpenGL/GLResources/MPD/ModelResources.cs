@@ -8,7 +8,6 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Types;
 using SF3.Win.Extensions;
-using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Project;
 using SF3.MPD.Extensions;
@@ -52,11 +51,11 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 SGL_ModelsByIDByCollection[collection] = [];
         }
 
-        private Dictionary<int, IMPD_AnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
+        private Dictionary<int, IAnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
             var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
             return modelCollection.Textures
                 .Where(x => !hasIgnored || !x.IsIgnored)
-                .ToDictionary(x => x.TextureID, x => x);
+                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
         }
 
         public void Update(IMPD mpdFile) {
@@ -161,7 +160,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             IMPD mpdFile,
             int modelCollection,
             ISGL_Model model,
-            Dictionary<int, IMPD_AnimatableTexture> texturesById,
+            Dictionary<int, IAnimatableTexture> texturesById,
             bool forceSemiTransparent,
             bool isHideMesh
         ) {
@@ -188,7 +187,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 IAnimatedTexture anim = null;
                 var isSemiTransparent = false;
                 var flip = TextureFlipType.NoFlip;
-                MPD_MockAnimation mockAnim = null;
+                MockAnimatedTexture mockAnim = null;
 
                 if (!isHideMesh) {
                     // Get texture. Fetch animated textures if possible.
@@ -215,7 +214,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     else {
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId))
                             if (texturesById.TryGetValue(textureId, out var tex))
-                                anim = tex.Animation ?? (mockAnim = new MPD_MockAnimation(tex));
+                                anim = tex.Animation ?? (mockAnim = new MockAnimatedTexture(tex));
 
                         // If the texture is missing, mark this polygon bright red.
                         if (anim == null) {

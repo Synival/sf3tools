@@ -6,7 +6,6 @@ using CommonLib.Imaging;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
@@ -55,7 +54,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 .Where(x => !hasIgnored || !x.IsIgnored)
                 .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
-                .ToDictionary(x => x.TextureID, x => x);
+                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
 
             var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
             var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventIDs);
@@ -64,7 +63,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             var missingSurfaceQuads    = new List<Quad>();
             var untexturedSurfaceQuads = new List<Quad>();
             var surfaceSelectionQuads  = new List<Quad>();
-            MPD_MockAnimation mockAnim = null;
+            MockAnimatedTexture mockAnim = null;
 
             for (var y = TileY1; y < TileY2; y++) {
                 for (var x = TileX1; x < TileX2; x++) {
@@ -82,7 +81,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
                         if (textureId != 0xFF && texturesById.ContainsKey(textureId))
                             if (texturesById.TryGetValue(textureId, out var tex))
-                                anim = tex.Animation ?? (mockAnim = new MPD_MockAnimation(texturesById[textureId]));
+                                anim = tex.Animation ?? (mockAnim = new MockAnimatedTexture(texturesById[textureId]));
                     }
 
                     var vertexNormals = tile.GetVector3Normals();
@@ -203,6 +202,6 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
         public bool NeedsUpdate { get; private set; } = true;
 
-        private List<MPD_MockAnimation> _mockAnims = new List<MPD_MockAnimation>();
+        private List<MockAnimatedTexture> _mockAnims = new List<MockAnimatedTexture>();
     }
 }
