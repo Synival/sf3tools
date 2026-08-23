@@ -109,7 +109,7 @@ namespace SF3.Win.Controls {
             _collisionModels = new CollisionResources();
             _editor          = new EditorResources();
             _gradients       = new GradientResources();
-            _lighting        = new LightingResources();
+            _lighting        = new MPD_LightingResources();
             _boundaryModels  = new BoundaryModelResources();
             _sceneResources  = new SceneResources();
             _screenResources = new ScreenResources();
@@ -713,7 +713,7 @@ namespace SF3.Win.Controls {
         private CollisionResources     _collisionModels = null;
         private EditorResources        _editor          = null;
         private GradientResources      _gradients       = null;
-        private LightingResources      _lighting        = null;
+        private MPD_LightingResources  _lighting        = null;
         private BoundaryModelResources _boundaryModels  = null;
         private SceneResources         _sceneResources  = null;
         private ScreenResources        _screenResources = null;

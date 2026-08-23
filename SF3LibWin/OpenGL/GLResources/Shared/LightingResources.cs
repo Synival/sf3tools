@@ -3,16 +3,12 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using CommonLib.Imaging;
 using CommonLib.Utils;
-using SF3.MPD.Interfaces;
 
-namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class LightingResources : ResourcesBase, IMPD_Resources {
+namespace SF3.Win.OpenGL.GLResources.Shared {
+    public class LightingResources : ResourcesBase {
         protected override void PerformInit() { }
         public override void DeInit() { }
-
-        public override void Reset() {
-            ResetLightingTexture();
-        }
+        public override void Reset() => ResetLightingTexture();
 
         public void ResetLightingTexture() {
             if (LightingTexture != null) {
@@ -26,20 +22,12 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             LightingTexture = texture;
         }
 
-        public void Update(IMPD mpdFile) {
-            using (var textureBitmap = CreateLightPaletteBitmap(mpdFile))
-                SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
-        }
-
         public void Update(IPalette lightPal, IColorAdjustRGB555 lightAdj) {
             using (var textureBitmap = CreateLightPaletteBitmap(lightPal, lightAdj))
                 SetLightingTexture(textureBitmap != null ? new Texture(textureBitmap, minNearest: false, magNearest: false, clampToEdge: false) : null);
         }
 
-        private Bitmap CreateLightPaletteBitmap(IMPD mpdFile)
-            => CreateLightPaletteBitmap(mpdFile?.Lighting?.Palette, mpdFile?.Settings?.LightPaletteAdjustment);
-
-        private Bitmap CreateLightPaletteBitmap(IPalette lightPal, IColorAdjustRGB555 lightAdj) {
+        protected static Bitmap CreateLightPaletteBitmap(IPalette lightPal, IColorAdjustRGB555 lightAdj) {
             if (lightPal == null)
                 return null;
 
