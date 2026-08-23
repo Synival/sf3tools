@@ -102,7 +102,7 @@ namespace SF3.Win.Controls {
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _general         = new GeneralResources();
-            _models          = new ModelResources(_appSettings.ViewerApplyShadowTags, _appSettings.ViewerApplyHideTags);
+            _models          = new MPD_ModelResources(_appSettings.ViewerApplyShadowTags, _appSettings.ViewerApplyHideTags);
             _surfaceModel    = new SurfaceModelResources();
             _groundModel     = new GroundModelResources();
             _skyModel        = new SkyModelResources();
@@ -706,7 +706,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private GeneralResources       _general         = null;
-        private ModelResources         _models          = null;
+        private MPD_ModelResources         _models          = null;
         private SurfaceModelResources  _surfaceModel    = null;
         private GroundModelResources   _groundModel     = null;
         private SkyModelResources      _skyModel        = null;

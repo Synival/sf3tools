@@ -8,15 +8,9 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Types;
 using SF3.Win.Extensions;
-using SF3.MPD.Interfaces;
-using SF3.MPD.Project;
-using SF3.MPD.Extensions;
 
-namespace SF3.Win.OpenGL.GLResources.MPD {
-    public class ModelResources : ResourcesBase, IMPD_Resources {
-        public const float ModelOffsetX = SurfaceModelResources.WidthInTiles / -2f;
-        public const float ModelOffsetZ = SurfaceModelResources.HeightInTiles / -2f;
-
+namespace SF3.Win.OpenGL.GLResources.Shared {
+    public class ModelResources : ResourcesBase {
         public ModelResources(bool applyShadowTags, bool applyHideTags) : base() {
             ApplyShadowTags = applyShadowTags;
             ApplyHideTags   = applyHideTags;
@@ -40,10 +34,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             ModelInstances = null;
         }
 
-        private void InitDictsForType(MPD_CollectionType collection)
-            => InitDictsForType((int) collection);
-
-        private void InitDictsForType(int collection) {
+        protected void InitDictsForType(int collection) {
             // TODO: Just have one structure with all this info!
             if (!ModelGroupsByIDByCollection.ContainsKey(collection))
                 ModelGroupsByIDByCollection[collection] = [];
@@ -51,117 +42,11 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 SGL_ModelsByIDByCollection[collection] = [];
         }
 
-        private Dictionary<int, IAnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
-            var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
-            return modelCollection.Textures
-                .Where(x => !hasIgnored || !x.IsIgnored)
-                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
-        }
-
-        public void Update(IMPD mpdFile) {
-            Reset();
-
-            if (mpdFile?.ModelCollections == null)
-                return;
-
-            var modelInstanceList = new List<IMPD_ModelInstance>();
-            foreach (var mc in mpdFile.ModelCollections.Values) {
-                if (mc.Collection.IsHeaderModelCollection())
-                    continue;
-
-                // Get all instances of models in this collection.
-                var instances = mc.ModelInstances;
-                modelInstanceList.AddRange(instances);
-
-                // There is a function that scans for models with the tag '2000' and forcibly changes all the textures
-                // in their PDATAs to be semi-transparent. Yes, this is redundant to have on the *model* instead of the *PDATA*,
-                // so who knows why it works this way.
-                var modelsWith2000Tag = ApplyShadowTags ? instances
-                    .Where(x => x.Tag >= 2000 && x.Tag < 2100)
-                    .Select(x => x.ModelID)
-                    .Distinct()
-                    .ToHashSet()
-                    : [];
-
-                // There are some (usually) bright-red models in Scenario 3 that are removed when
-                // the 3000 tag is present. They are used to crop out models so the ground texture (VDP2) is visible instead.
-                var modelsWith3000Tag = ApplyHideTags ? instances
-                    .Where(x => x.Tag == 3000)
-                    .Select(x => x.ModelID)
-                    .Distinct()
-                    .ToHashSet()
-                    : [];
-
-                InitDictsForType(mc.Collection);
-                var sglModelsByID = SGL_ModelsByIDByCollection[(int) mc.Collection];
-
-                var uniqueModelIDs = instances
-                    .Select(x => x.ModelID)
-                    .Distinct()
-                    .ToArray();
-
-                var texturesById = GetTextureDictionaryByCollection(mc, mpdFile);
-
-                foreach (var id in uniqueModelIDs) {
-                    if (id == -1)
-                        continue;
-
-                    var sglModel = sglModelsByID.TryGetValue(id, out var sglModelOut) ? sglModelOut : null;
-                    if (sglModel == null)
-                        sglModelsByID[id] = sglModel = mc.GetModel(id, 0);
-                    if (sglModel == null)
-                        continue;
-
-                    // Don't render movable models; they're not placed on the map in that way.
-                    if (!mc.IsHeaderModelCollection()) {
-                        var isForcedSemiTransparent = modelsWith2000Tag.Contains(id);
-                        var isHideMesh = modelsWith3000Tag.Contains(id);
-                        CreateAndAddQuadModels(mpdFile, (int) mc.Collection, sglModel, texturesById, isForcedSemiTransparent, isHideMesh);
-                    }
-                }
-            }
-
-            ModelInstances = modelInstanceList.ToArray();
-        }
-
-        public void Update(IMPD mpdFile, IMPD_ModelCollection models, ISGL_Model sglModel,
-            bool forceSemiTransparent = false, bool isHideMesh = false,
-            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
-            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
-        ) {
-            Reset();
-            if (models == null || sglModel == null)
-                return;
-
-            InitDictsForType(models.Collection);
-            SGL_ModelsByIDByCollection[(int) models.Collection][sglModel.ModelID] = sglModel;
-
-            var texturesById = GetTextureDictionaryByCollection(models, mpdFile);
-            CreateAndAddQuadModels(mpdFile, (int) models.Collection, sglModel, texturesById, forceSemiTransparent, isHideMesh);
-
-            var modelInstance = new MPD_ModelInstance() {
-                Collection = models,
-                ModelInstanceID = 0,
-                ModelID = sglModel.ModelID,
-                PositionX = 32 * 32,
-                PositionZ = 32 * 32,
-                AngleX = rotX,
-                AngleY = rotY,
-                AngleZ = rotZ,
-                ScaleX = scaleX,
-                ScaleY = scaleY,
-                ScaleZ = scaleZ,
-            };
-
-            ModelInstances = [modelInstance];
-        }
-
-        private void CreateAndAddQuadModels(
-            IMPD mpdFile,
+        protected void CreateAndAddQuadModels(
             int modelCollection,
             ISGL_Model model,
             Dictionary<int, IAnimatableTexture> texturesById,
-            bool forceSemiTransparent,
+            float? forceSemiTransparentAlpha,
             bool isHideMesh
         ) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
@@ -204,8 +89,8 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
                     if (drawMode == DrawMode.CL_Trans || drawMode == DrawMode.CL_Shadow)
                         transparency *= 0.5f;
-                    else if (forceSemiTransparent)
-                        transparency *= 1.0f - (mpdFile.BinaryReproductionFlags.PaletteAdjustmentIsTruncated ? 0x0F : mpdFile.Settings.ShadowTransparency / (float) 0x1F);
+                    else if (forceSemiTransparentAlpha.HasValue)
+                        transparency *= forceSemiTransparentAlpha.Value;
 
                     if (!useTexture) {
                         var colorChannels = PixelConversion.ABGR1555toChannels(attr.ColorNo);
@@ -225,7 +110,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
                     // If forcing semi-transparency, and there aren't any already-indexed textures, force color to black.
                     // (This isn't how this actually works, but this is fine for display.)
-                    if (forceSemiTransparent && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
+                    if (forceSemiTransparentAlpha.HasValue && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
                         color[0] = color[1] = color[2] = 0.0f;
 
                     color[3] *= transparency;
@@ -335,7 +220,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
         public Dictionary<int, Dictionary<int, ModelGroup>> ModelGroupsByIDByCollection { get; } = [];
         public Dictionary<int, Dictionary<int, ISGL_Model>> SGL_ModelsByIDByCollection { get; } = [];
-        public ISGL_ModelInstance[] ModelInstances { get; private set; }
+        public ISGL_ModelInstance[] ModelInstances { get; protected set; }
 
         public bool ApplyShadowTags { get; set; } = false;
         public bool ApplyHideTags { get; set; } = false;

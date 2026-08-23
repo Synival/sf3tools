@@ -4,7 +4,7 @@ using SF3.Win.OpenGL.GLResources.Shared;
 namespace SF3.Win.OpenGL.Renderers.MPD {
     public class RendererResources {
         public GeneralResources General;
-        public ModelResources Models;
+        public MPD_ModelResources Models;
         public SurfaceModelResources SurfaceModel;
         public GroundModelResources GroundModel;
         public SkyModelResources SkyModel;

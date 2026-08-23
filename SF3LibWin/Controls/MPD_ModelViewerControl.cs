@@ -30,7 +30,7 @@ namespace SF3.Win.Controls {
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _general  = new GeneralResources();
-            _models   = new ModelResources(false, false);
+            _models   = new MPD_ModelResources(false, false);
             _lighting = new LightingResources();
 
             _general.Init();
@@ -281,7 +281,7 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private GeneralResources  _general  = null;
-        private ModelResources    _models   = null;
+        private MPD_ModelResources    _models   = null;
         private LightingResources _lighting = null;
 
         private Renderer _renderer = null;

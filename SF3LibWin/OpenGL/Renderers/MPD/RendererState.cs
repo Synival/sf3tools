@@ -15,7 +15,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public Matrix4 ProjectionMatrix;
         public Matrix4 ViewMatrix;
 
-        public (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] GetModelsWithGroups(ModelResources models, RendererOptions options) {
+        public (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] GetModelsWithGroups(MPD_ModelResources models, RendererOptions options) {
             if (_modelsWithGroups != null)
                 return _modelsWithGroups;
 

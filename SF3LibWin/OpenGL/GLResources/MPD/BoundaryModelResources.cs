@@ -33,17 +33,17 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             // Camera boundary coords
             try {
                 var camera = mpdFile.CameraBoundaries;
-                var ccX1 =  0.0f + (camera?.X1 ??   32) / 32.00f + ModelResources.ModelOffsetX;
-                var ccZ1 = 64.0f - (camera?.Y1 ??   32) / 32.00f + ModelResources.ModelOffsetZ;
-                var ccX2 =  0.0f + (camera?.X2 ?? 2016) / 32.00f + ModelResources.ModelOffsetX;
-                var ccZ2 = 64.0f - (camera?.Y2 ?? 2016) / 32.00f + ModelResources.ModelOffsetZ;
+                var ccX1 =  0.0f + (camera?.X1 ??   32) / 32.00f + MPD_ModelResources.ModelOffsetX;
+                var ccZ1 = 64.0f - (camera?.Y1 ??   32) / 32.00f + MPD_ModelResources.ModelOffsetZ;
+                var ccX2 =  0.0f + (camera?.X2 ?? 2016) / 32.00f + MPD_ModelResources.ModelOffsetX;
+                var ccZ2 = 64.0f - (camera?.Y2 ?? 2016) / 32.00f + MPD_ModelResources.ModelOffsetZ;
 
                 // Battle boundary coords
                 var battle = mpdFile.BattleCursorBoundaries;
-                var bcX1 =  0.0f + (battle?.X1 ??    0) / 32.00f + ModelResources.ModelOffsetX;
-                var bcZ1 = 64.0f - (battle?.Y1 ??    0) / 32.00f + ModelResources.ModelOffsetZ;
-                var bcX2 =  0.0f + (battle?.X2 ?? 2048) / 32.00f + ModelResources.ModelOffsetX;
-                var bcZ2 = 64.0f - (battle?.Y2 ?? 2048) / 32.00f + ModelResources.ModelOffsetZ;
+                var bcX1 =  0.0f + (battle?.X1 ??    0) / 32.00f + MPD_ModelResources.ModelOffsetX;
+                var bcZ1 = 64.0f - (battle?.Y1 ??    0) / 32.00f + MPD_ModelResources.ModelOffsetZ;
+                var bcX2 =  0.0f + (battle?.X2 ?? 2048) / 32.00f + MPD_ModelResources.ModelOffsetX;
+                var bcZ2 = 64.0f - (battle?.Y2 ?? 2048) / 32.00f + MPD_ModelResources.ModelOffsetZ;
 
                 var height = mpdFile.Planes.GroundY / -32.0f;
                 var cameraQuads = new Quad[] {

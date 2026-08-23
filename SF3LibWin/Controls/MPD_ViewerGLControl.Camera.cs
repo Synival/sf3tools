@@ -61,9 +61,9 @@ namespace SF3.Win.Controls {
                 var tile = MPD_File.Surface.GetTile(tileObj.X, tileObj.Y);
                 var tileVertices = tile.GetVector3Vertices();
                 target = new Vector3(
-                    tileObj.X + ModelResources.ModelOffsetX + 0.5f,
+                    tileObj.X + MPD_ModelResources.ModelOffsetX + 0.5f,
                     tileVertices.Select(x => x.Y).Average(),
-                    (63 - tileObj.Y) + ModelResources.ModelOffsetZ + 0.5f);
+                    (63 - tileObj.Y) + MPD_ModelResources.ModelOffsetZ + 0.5f);
             }
             else if (obj is SelectableModel modelObj) {
                 if (MPD_File.ModelCollections.TryGetValue(modelObj.Collection, out var collection)) {
@@ -76,7 +76,7 @@ namespace SF3.Win.Controls {
                                 modelInstance.PositionZ / -32.0f
                             )
                             * Matrix3.CreateRotationY(MPD_File.Settings.ModelsYRotation / -180.0f * (float) Math.PI)
-                            + new Vector3(ModelResources.ModelOffsetX, 0, -ModelResources.ModelOffsetZ);
+                            + new Vector3(MPD_ModelResources.ModelOffsetX, 0, -MPD_ModelResources.ModelOffsetZ);
                     }
                 }
             }
@@ -84,9 +84,9 @@ namespace SF3.Win.Controls {
                 var actor = AppResources.Get().ActiveScene?.Scene?.Actors?.FirstOrDefault(x => x.ID == actorObj.ID);
                 if (actor != null) {
                     target = new Vector3(
-                        actor.ActorX /  32.0f + ModelResources.ModelOffsetX,
+                        actor.ActorX /  32.0f + MPD_ModelResources.ModelOffsetX,
                         actor.ActorY / -32.0f,
-                        actor.ActorZ / -32.0f - ModelResources.ModelOffsetZ
+                        actor.ActorZ / -32.0f - MPD_ModelResources.ModelOffsetZ
                     );
                 }
             }

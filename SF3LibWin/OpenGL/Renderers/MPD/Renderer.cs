@@ -107,7 +107,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawSceneObjectNormals(
             GeneralResources general,
-            ModelResources models,
+            MPD_ModelResources models,
             SurfaceModelResources surfaceModel,
             RendererOptions options,
             float cameraYaw,
@@ -123,7 +123,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawSceneObjects(
             GeneralResources general,
-            ModelResources models,
+            MPD_ModelResources models,
             SurfaceModelResources surfaceModel,
             SceneResources scenes,
             GradientResources gradients,
@@ -156,7 +156,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawSceneWireframes(
             GeneralResources general,
-            ModelResources models,
+            MPD_ModelResources models,
             SurfaceModelResources surfaceModel,
             RendererOptions options,
             float cameraYaw,
@@ -181,7 +181,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         }
 
         public void InvalidateModelMatrices() => ModelRenderer.InvalidateModelMatrices();
-        public void InvalidateSpriteMatrices(ModelResources models) => ModelRenderer.InvalidateSpriteMatrices(models);
+        public void InvalidateSpriteMatrices(MPD_ModelResources models) => ModelRenderer.InvalidateSpriteMatrices(models);
 
         public void DrawControlFocusedBox(RendererResources resources) => FocusedBoxRenderer.Draw(resources.General, resources.Screen);
 

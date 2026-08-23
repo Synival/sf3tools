@@ -355,8 +355,8 @@ namespace SF3.Win.Controls {
 
                 width   = (x2 - x1) / 32.00f;
                 depth   = (z2 - z1) / 32.00f;
-                centerX = (x1 + x2) / 2.0f /  32.00f + ModelResources.ModelOffsetX;
-                centerZ = (z1 + z2) / 2.0f / -32.00f + ModelResources.ModelOffsetZ + 64.00f;
+                centerX = (x1 + x2) / 2.0f /  32.00f + MPD_ModelResources.ModelOffsetX;
+                centerZ = (z1 + z2) / 2.0f / -32.00f + MPD_ModelResources.ModelOffsetZ + 64.00f;
                 groundY = (MPD_File?.Planes?.GroundY ?? 0) / -32.0f;
             }
 

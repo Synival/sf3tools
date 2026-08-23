@@ -47,10 +47,10 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
         private Position GetPointPosition(int x, int y, IMPD_Surface surface, int groundY) {
             var groundYf = groundY / -32.0f;
 
-            var xf = x / 32.0f + ModelResources.ModelOffsetX;
+            var xf = x / 32.0f + MPD_ModelResources.ModelOffsetX;
             float? topY    = null;
             float? bottomY = null;
-            var zf = y / -32.0f - ModelResources.ModelOffsetZ;
+            var zf = y / -32.0f - MPD_ModelResources.ModelOffsetZ;
 
             for (var ty = -1; ty <= 1; ty++) {
                 for (var tx = -1; tx <= 1; tx++) {

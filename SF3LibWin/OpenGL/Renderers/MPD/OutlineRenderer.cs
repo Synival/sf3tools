@@ -18,7 +18,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void Draw(
             GeneralResources general,
-            ModelResources models,
+            MPD_ModelResources models,
             SceneResources scene,
             EditorResources editor,
             ScreenResources screen,
