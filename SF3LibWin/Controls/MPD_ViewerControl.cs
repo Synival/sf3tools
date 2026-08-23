@@ -12,6 +12,7 @@ using SF3.Models.Structs.X1.Town;
 using CommonLib;
 using static SF3.Win.Controls.MPD_ViewerGLControl;
 using SF3.Win.OpenGL.GLResources.MPD;
+using CommonLib.SGL;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ViewerControl : UserControl {
@@ -103,7 +104,7 @@ namespace SF3.Win.Controls {
                         // TODO: multiple selection!
                         SwitchToTileEditor((IMPD_SurfaceTile) objs[0]);
                     }
-                    else if (firstObj is IMPD_ModelInstance) {
+                    else if (firstObj is ISGL_ModelInstance) {
                         // TODO: multiple selection!
                         SwitchToModelInstanceEditor((IMPD_ModelInstance) objs[0]);
                     }

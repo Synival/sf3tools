@@ -1,6 +1,6 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using CommonLib.SGL;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.MPD.Interfaces;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.Shared;
@@ -112,7 +112,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             if (options.WillDrawAnyModels)
                 ModelRenderer.DrawNormals(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
@@ -133,7 +133,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             float cameraPitch,
             ref Matrix4 projectionMatrix,
             ref Matrix4 viewMatrix,
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             GL.StencilFunc(StencilFunction.Always, 0x04, 0x04);
             GL.StencilMask(0x04);
@@ -161,7 +161,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Enable(EnableCap.PolygonOffsetLine);

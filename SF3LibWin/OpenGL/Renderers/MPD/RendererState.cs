@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CommonLib.SGL;
 using CommonLib.Utils;
 using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
@@ -14,7 +15,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         public Matrix4 ProjectionMatrix;
         public Matrix4 ViewMatrix;
 
-        public (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] GetModelsWithGroups(ModelResources models, RendererOptions options) {
+        public (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] GetModelsWithGroups(ModelResources models, RendererOptions options) {
             if (_modelsWithGroups != null)
                 return _modelsWithGroups;
 
@@ -25,17 +26,18 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 return _modelsWithGroups;
             }
 
-            bool IsVisibleCollection(MPD_CollectionType collection) {
+            bool IsVisibleCollection(int collection) {
+                var mpdCollection = (MPD_CollectionType) collection;
                 return
-                    collection != MPD_CollectionType.ExtraModels && options.DrawModels ||
-                    collection == MPD_CollectionType.ExtraModels && options.DrawExtraModels;
+                    mpdCollection != MPD_CollectionType.ExtraModels && options.DrawModels ||
+                    mpdCollection == MPD_CollectionType.ExtraModels && options.DrawExtraModels;
             }
 
             _modelsWithGroups = models.ModelInstances
-                .Select(x => (Model: x, ModelGroup: models.ModelGroupsByIDByCollection[(int) x.Collection.Collection].TryGetValue(x.ModelID, out var pd) ? pd : null))
-                .Where(x => x.ModelGroup != null && IsVisibleCollection(x.Model.Collection.Collection))
+                .Select(x => (Model: (ISGL_ModelInstance) x, ModelGroup: models.ModelGroupsByIDByCollection[x.ModelCollectionID].TryGetValue(x.ModelID, out var pd) ? pd : null))
+                .Where(x => x.ModelGroup != null && IsVisibleCollection(x.Model.ModelCollectionID))
                 .Where(x => {
-                    var direction = x.Model.OnlyVisibleFromDirection;
+                    var direction = ((IMPD_ModelInstance) x.Model).OnlyVisibleFromDirection;
                     return direction == ModelDirectionType.Unset || modelDirectionsFacingCamera[(int) direction];
                 })
                 .Where(x => options?.ModelsToHide?.Contains(x.Model.ModelInstanceID) != true)
@@ -75,7 +77,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             return _modelDirectionsFacingCamera;
         }
 
-        private (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] _modelsWithGroups;
+        private (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] _modelsWithGroups;
         private bool[] _modelDirectionsFacingCamera;
     }
 }

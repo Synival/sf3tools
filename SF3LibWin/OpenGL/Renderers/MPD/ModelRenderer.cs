@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonLib.SGL;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
@@ -18,7 +18,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups,
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups,
             bool transparentPass,
             bool selectionColors
         ) {
@@ -33,10 +33,10 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 shader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
             }
 
-            Vector4 ModelSelectionColor(IMPD_ModelInstance model) {
+            Vector4 ModelSelectionColor(ISGL_ModelInstance model) {
                 var r = model.ModelInstanceID % 64 / 64.0f;
                 var g = model.ModelInstanceID / 64 / 64.0f;
-                return new Vector4(r, g, model.Collection.Collection == MPD_CollectionType.Primary ? RendererSelectionConstants.PrimaryModelsB : RendererSelectionConstants.ExtraModelsB, 1.0f);
+                return new Vector4(r, g, model.ModelCollectionID == (int) MPD_CollectionType.Primary ? RendererSelectionConstants.PrimaryModelsB : RendererSelectionConstants.ExtraModelsB, 1.0f);
             }
 
             var lightingTexture = selectionColors ? null : lighting.LightingTexture ?? general.WhiteTexture;
@@ -125,7 +125,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             if (models?.ModelInstances == null)
                 return;
@@ -147,7 +147,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             RendererOptions options,
             float cameraYaw,
             float cameraPitch,
-            (IMPD_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
+            (ISGL_ModelInstance Model, ModelGroup ModelGroup)[] modelsWithGroups
         ) {
             if (models?.ModelGroupsByIDByCollection == null)
                 return;
@@ -167,7 +167,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void SetModelAndNormalMatricesForModel(
             ModelResources models,
-            IMPD_ModelInstance modelInstance,
+            ISGL_ModelInstance modelInstance,
             Shader shader,
             RendererOptions options,
             float cameraYaw,
@@ -184,7 +184,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
                 if (modelInstance.AlwaysFacesCamera && options.RotateSpritesUp) {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
-                    var mpdModel = models.SGL_ModelsByIDByCollection[(int) modelInstance.Collection.Collection].TryGetValue(modelInstance.ModelID, out var mpdModelOut) ? mpdModelOut : null;
+                    var mpdModel = models.SGL_ModelsByIDByCollection[modelInstance.ModelCollectionID].TryGetValue(modelInstance.ModelID, out var mpdModelOut) ? mpdModelOut : null;
 
                     var topY     = mpdModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
                     var bottomY  = mpdModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
@@ -240,7 +240,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             }
         }
 
-        private Dictionary<IMPD_ModelInstance, Matrix4?> _modelMatricesByModel = [];
-        private Dictionary<IMPD_ModelInstance, Matrix3?> _normalMatricesByModel = [];
+        private Dictionary<ISGL_ModelInstance, Matrix4?> _modelMatricesByModel = [];
+        private Dictionary<ISGL_ModelInstance, Matrix3?> _normalMatricesByModel = [];
     }
 }
