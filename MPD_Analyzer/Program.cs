@@ -94,22 +94,7 @@ namespace MPD_Analyzer {
         public static Mutex s_meshesMutex = new Mutex();
 
         private static string[]? MPD_MatchFunc(MPD_File mpdFile, ScenarioType scenario, string filename) {
-#if false
-            // Gotta have the model collection!
-            if (mpdFile.ModelCollections == null || !mpdFile.ModelCollections.ContainsKey(MPD_CollectionType.Primary))
-                return null;
-
-#if false
-            // Gotta have textures!
-            if (!(mpdFile.ModelCollections[MPD_CollectionType.Primary]?.Textures?.Count() >= 1))
-                return null;
-
-            var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.ToDictionary(x => x.ID, x => x);
-            var modelsById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Models.ToDictionary(x => x.ID, x => x);
-#endif
-#endif
-
-            return mpdFile.Surface.GetAllTiles().Any(x => (x.EventID & 0x60) == 0x60) ? [] : null;
+            return MatchFuncs.ProjectCopyProducesSameMPDAsOriginal(mpdFile);
         }
 
         public static void Main(string[] args) {

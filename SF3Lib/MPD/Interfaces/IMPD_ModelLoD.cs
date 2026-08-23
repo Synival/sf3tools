@@ -7,16 +7,6 @@ namespace SF3.MPD.Interfaces {
     /// </summary>
     public interface IMPD_ModelLoD : ISGL_Model {
         /// <summary>
-        /// ID of the model this belongs to.
-        /// </summary>
-        int ModelID { get; }
-
-        /// <summary>
-        /// Level-of-detail index for the model.
-        /// </summary>
-        int LevelOfDetail { get; }
-
-        /// <summary>
         /// Collection or chunk this model belongs to.
         /// </summary>
         MPD_CollectionType Collection { get; }

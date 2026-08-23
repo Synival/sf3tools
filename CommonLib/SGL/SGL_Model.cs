@@ -6,12 +6,21 @@ using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public class SGL_Model : ISGL_Model {
-        public SGL_Model() {
+        public SGL_Model(int modelId, int levelOfDetail = 0) {
             Vertices = new VECTOR[0];
             Faces    = new ISGL_ModelFace[0];
+            ModelID  = modelId;
+            LevelOfDetail = levelOfDetail;
         }
 
-        public SGL_Model(ISGL_Model original) {
+        public SGL_Model(ISGL_Model original)
+        : this(original, original.ModelID, original.LevelOfDetail)
+        {}
+
+        public SGL_Model(ISGL_Model original, int modelId, int levelOfDetail = 0) {
+            ModelID       = modelId;
+            LevelOfDetail = levelOfDetail;
+
             if (original.Vertices != null) {
                 Vertices = original.Vertices.Select(x => new VECTOR(x)).ToArray();
 
@@ -26,24 +35,40 @@ namespace CommonLib.SGL {
                 Faces = original.Faces.Select(x => (ISGL_ModelFace) (new SGL_ModelFace(x))).ToArray();
         }
 
-        public SGL_Model(IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces) {
+        public SGL_Model(int modelId, int levelOfDetail, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces) {
             if (vertices == null)
                 throw new ArgumentNullException(nameof(vertices));
             if (faces == null)
                 throw new ArgumentNullException(nameof(faces));
 
-            Vertices = vertices.ToArray();
-            Faces    = faces.ToArray();
+            ModelID       = modelId;
+            LevelOfDetail = levelOfDetail;
+            Vertices      = vertices.ToArray();
+            Faces         = faces.ToArray();
         }
 
         public static SGL_Model FromJToken(JToken token) => new SGL_Model((JObject) token);
         public static SGL_Model FromJObject(JObject jObject) => new SGL_Model(jObject);
-        private SGL_Model(JObject jObject) {
-            Vertices = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray());
-            Faces    = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray());
+        public static SGL_Model FromJObject(JObject jObject, int modelId, int levelOfDetail) => new SGL_Model(jObject, modelId, levelOfDetail);
+
+        private SGL_Model(JObject jObject) :
+        this(
+            jObject,
+            (int?) jObject.GetValueIfExists("ModelID",        t => (JValue) t) ?? 0,
+            (int?) jObject.GetValueIfExists("LevelOfDetail",  t => (JValue) t) ?? 0
+        ) {
+        }
+
+        private SGL_Model(JObject jObject, int modelId, int levelOfDetail) {
+            Vertices      = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray());
+            Faces         = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray());
+            ModelID       = modelId;
+            LevelOfDetail = levelOfDetail;
         }
 
         public IReadOnlyList<VECTOR> Vertices { get; }
         public IReadOnlyList<ISGL_ModelFace> Faces { get; }
+        public int ModelID { get; }
+        public int LevelOfDetail { get; }
     }
 }

@@ -8,41 +8,38 @@ using SF3.Types;
 
 namespace SF3.MPD.Project {
     public class MPD_Model : IMPD_Model {
-        public MPD_Model(MPD_CollectionType collection, int modelID, int levelsOfDetail, ISGL_Model actualModel) {
+        public MPD_Model(MPD_CollectionType collection, int modelId, int levelsOfDetail, ISGL_Model actualModel) {
             Collection     = collection;
-            ModelID        = modelID;
-            LevelsOfDetail = levelsOfDetail;
-            _actualModel   = new SGL_Model(actualModel);
-
+            _actualModel   = new SGL_Model(actualModel, modelId, levelsOfDetail);
             ModelLoDs      = new ModelRetriever(this);
         }
 
         public MPD_Model(IMPD_Model original) {
             Collection     = original.Collection;
-            ModelID        = original.ModelID;
-            LevelsOfDetail = original.LevelsOfDetail;
-            _actualModel   = new SGL_Model(original.ModelLoDs[0]);
+            _actualModel   = new SGL_Model(original.ModelLoDs[0], original.ModelID, original.LevelsOfDetail);
+            ModelLoDs      = new ModelRetriever(this);
+        }
 
+        public MPD_Model(IMPD_Model original, int modelId, int levelsOfDetail) {
+            Collection     = original.Collection;
+            _actualModel   = new SGL_Model(original.ModelLoDs[0], modelId, levelsOfDetail);
             ModelLoDs      = new ModelRetriever(this);
         }
 
         public static MPD_Model FromJToken(JToken token, MPD_CollectionType collection) => new MPD_Model(token, collection);
         private MPD_Model(JToken token, MPD_CollectionType collection) {
-            Collection = collection;
-
-            var jObject = (JObject) token;
-
-            ModelID      = (int) jObject["ID"];
-            _actualModel = SGL_Model.FromJObject(jObject);
-            LevelsOfDetail = Collection.IsHeaderModelCollection() ? 1 : (int) jObject["LevelsOfDetail"];
-
-            ModelLoDs = new ModelRetriever(this);
+            Collection         = collection;
+            var jObject        = (JObject) token;
+            var modelId        = (int) jObject["ID"];
+            var levelsOfDetail = Collection.IsHeaderModelCollection() ? 1 : (int) jObject["LevelsOfDetail"];
+            _actualModel       = SGL_Model.FromJObject(jObject, modelId, levelsOfDetail);
+            ModelLoDs          = new ModelRetriever(this);
         }
 
-        public MPD_CollectionType Collection { get; }
-        public int ModelID { get; }
+        public int ModelID => _actualModel.ModelID;
+        public int LevelsOfDetail => _actualModel.LevelOfDetail;
 
-        public int LevelsOfDetail { get; }
+        public MPD_CollectionType Collection { get; }
 
         private SGL_Model _actualModel { get; }
 
