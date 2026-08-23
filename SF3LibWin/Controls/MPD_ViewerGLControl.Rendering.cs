@@ -108,7 +108,7 @@ namespace SF3.Win.Controls {
             _skyModel        = new SkyModelResources();
             _collisionModels = new CollisionResources();
             _editor          = new EditorResources();
-            _gradients       = new GradientResources();
+            _gradients       = new MPD_GradientResources();
             _lighting        = new MPD_LightingResources();
             _boundaryModels  = new BoundaryModelResources();
             _sceneResources  = new SceneResources();
@@ -712,7 +712,7 @@ namespace SF3.Win.Controls {
         private SkyModelResources      _skyModel        = null;
         private CollisionResources     _collisionModels = null;
         private EditorResources        _editor          = null;
-        private GradientResources      _gradients       = null;
+        private MPD_GradientResources  _gradients       = null;
         private MPD_LightingResources  _lighting        = null;
         private BoundaryModelResources _boundaryModels  = null;
         private SceneResources         _sceneResources  = null;
