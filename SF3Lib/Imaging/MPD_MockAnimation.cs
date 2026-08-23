@@ -23,7 +23,7 @@ namespace SF3.Imaging {
 
         public IMPD_AnimationFrame GetFrame(int timeFrame) => Frames[0];
 
-        public int ID => Frames[0].ID;
+        public int TextureID => Frames[0].TextureID;
         public int FrameTimerStart => 0;
 
         public IMPD_AnimationFrame[] Frames { get; }

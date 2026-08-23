@@ -64,7 +64,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     // TODO: This is all wrong!! Build a texture atlas and use atlas texture coordinates.
                     if (texture == null) {
                         var texId = tile.TextureID;
-                        var tileTexture = texId == 0xFF ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.ID == texId);
+                        var tileTexture = texId == 0xFF ? null : mpd.ModelCollections[MPD_CollectionType.Primary].Textures.FirstOrDefault(x => x.TextureID == texId);
                         if (tileTexture != null) 
                             Textures.Add(texture = new Texture(tileTexture.CreateBitmapARGB8888()));
                     }

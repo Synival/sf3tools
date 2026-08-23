@@ -39,7 +39,7 @@ namespace SF3.Imaging {
         /// <summary>
         /// ID for texture.
         /// </summary>
-        int ID { get; }
+        int TextureID { get; }
 
         /// <summary>
         /// Tags for identifying textures with the same Hash.

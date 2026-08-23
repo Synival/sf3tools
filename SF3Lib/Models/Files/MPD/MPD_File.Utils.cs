@@ -132,7 +132,7 @@ namespace SF3.Models.Files.MPD {
                     // One common texture used for the locked chest is encoded in an ever-so-slightly different way,
                     // so account for that to prevent "IsModified" from always being set.
                     bool applyEndCodesToBorder = true;
-                    if (texture != null && texture.ID == 0x109 && texture is TextureStruct tsb && tsb.ChunkIndex == 12)
+                    if (texture != null && texture.TextureID == 0x109 && texture is TextureStruct tsb && tsb.ChunkIndex == 12)
                         applyEndCodesToBorder = false;
                     imageData.FixSaturnTransparency(useEndCodes: true, applyEndCodesToBorder);
 

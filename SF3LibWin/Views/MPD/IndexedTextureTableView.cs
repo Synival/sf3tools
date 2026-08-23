@@ -13,7 +13,7 @@ namespace SF3.Win.Views.MPD {
         }
 
         protected override ITextureData GetTextureFromModel(TextureIDStruct model)
-            => (model == null) ? null : Collection.Textures.FirstOrDefault(x => x.ID == model.TextureID);
+            => (model == null) ? null : Collection.Textures.FirstOrDefault(x => x.TextureID == model.TextureID);
 
         public IMPD_ModelCollection Collection { get; }
     }

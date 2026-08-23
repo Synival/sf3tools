@@ -29,6 +29,8 @@ namespace SF3.Models.Structs.MPD.Animation {
             _durationAddr        = Address + 1 * _bytesPerProperty;
         }
 
+        public int TextureID => ID;
+
         public void SetImageData8Bit(byte[,] data, IPalette palette) => Chunk3Texture?.SetImageData8Bit(data, palette);
         public byte[] GetBitmapDataARGB1555(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB1555(highlightEndcodes);
         public byte[] GetBitmapDataARGB8888(bool highlightEndcodes = false) => Chunk3Texture?.GetBitmapDataARGB8888(highlightEndcodes);

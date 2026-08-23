@@ -52,14 +52,14 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         }
 
         public TextureAtlasNode Insert(IMPD_AnimationFrame tex) {
-            if (_nodeByTextureIDFrame.ContainsKey((tex.ID, tex.Frame)))
+            if (_nodeByTextureIDFrame.ContainsKey((tex.TextureID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 
             var node = _rootNode.Insert(tex);
             if (node == null)
                 throw new InvalidOperationException("Couldn't fit texture");
 
-            _nodeByTextureIDFrame[(tex.ID, tex.Frame)] = node;
+            _nodeByTextureIDFrame[(tex.TextureID, tex.Frame)] = node;
             return node;
         }
 

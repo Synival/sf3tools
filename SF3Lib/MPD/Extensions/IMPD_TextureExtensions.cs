@@ -9,7 +9,7 @@ namespace SF3.MPD.Extensions {
         public static JObject ToJObject(this IMPD_Texture texture) {
             var jObject = ITextureDataExtensions.ToJObject(texture, includePalette: false);
 
-            jObject.AddFirst(new JProperty("ID", texture.ID));
+            jObject.AddFirst(new JProperty("ID", texture.TextureID));
             if (texture.Collection == MPD_CollectionType.Primary)
                 jObject.Add("IsIgnored", texture.IsIgnored);
 

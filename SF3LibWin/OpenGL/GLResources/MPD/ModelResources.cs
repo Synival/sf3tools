@@ -56,7 +56,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
             return modelCollection.Textures
                 .Where(x => !hasIgnored || !x.IsIgnored)
-                .ToDictionary(x => x.ID, x => x);
+                .ToDictionary(x => x.TextureID, x => x);
         }
 
         public void Update(IMPD mpdFile) {

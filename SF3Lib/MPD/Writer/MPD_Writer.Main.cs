@@ -20,7 +20,7 @@ namespace SF3.MPD.Writer {
 
             _ = mpd.ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var pmc);
             var animations = pmc?.Textures?.Where(x => x.Animation != null && !x.Animation.IsIgnored)?.ToArray();
-            var ignoredTextureIds = pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.ID)?.ToArray() ?? null;
+            var ignoredTextureIds = pmc?.Textures?.Where(x => x.IsIgnored).Select(x => (ushort) x.TextureID)?.ToArray() ?? null;
 
             var lightPalettePos      = WritePaletteOrNull(mpd.Lighting?.Palette);
             var lightPositionPos     = WriteLightPosition(mpd.Lighting);
@@ -96,7 +96,7 @@ namespace SF3.MPD.Writer {
                     ? skyPalettePos
                     : WritePaletteOrNull(mpd.TexturePalette?.Colors?.Length >= 1 ? mpd.TexturePalette : null) ?? skyPalettePos;
 
-                var indexedTextureIds = pmc?.Textures?.Where(x => x.BytesPerPixel == 1).Select(x => (ushort) x.ID)?.ToArray() ?? null;
+                var indexedTextureIds = pmc?.Textures?.Where(x => x.BytesPerPixel == 1).Select(x => (ushort) x.TextureID)?.ToArray() ?? null;
                 indexedTexturesPos = WriteIndexedTexturesTableOrNull(indexedTextureIds);
             }
 
@@ -341,13 +341,13 @@ namespace SF3.MPD.Writer {
             // Special case for a few very specific files.
             foreach (var tex in textures) {
                 if (is32Bit) {
-                    WriteUInt((uint) (tex.ID | ((allowIndexed && tex.BytesPerPixel == 1) ? 0x100 : 0)));
+                    WriteUInt((uint) (tex.TextureID | ((allowIndexed && tex.BytesPerPixel == 1) ? 0x100 : 0)));
                     WriteUInt((uint) tex.Width);
                     WriteUInt((uint) tex.Height);
                     WriteUInt((uint) tex.Animation.FrameTimerStart);
                 }
                 else {
-                    WriteUShort((ushort) tex.ID);
+                    WriteUShort((ushort) tex.TextureID);
                     WriteUShort((ushort) tex.Width);
                     WriteUShort((ushort) tex.Height);
                     WriteUShort((ushort) tex.Animation.FrameTimerStart);

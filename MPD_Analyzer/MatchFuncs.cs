@@ -25,7 +25,7 @@ namespace MPD_Analyzer {
             var duplicatedTextures = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures.GroupBy(x => x.Hash).Where(x => x.Count() > 1).Select(x => x.ToArray()).ToArray();
             if (duplicatedTextures.Length == 0)
                 return null;
-            return duplicatedTextures.Select(x => x[0].Hash + ": " + string.Join(", ", x.Select(y => $"0x{y.ID:X2}"))).ToArray();
+            return duplicatedTextures.Select(x => x[0].Hash + ": " + string.Join(", ", x.Select(y => $"0x{y.TextureID:X2}"))).ToArray();
         }
 
         public static string[]? GetAnimationsWithDifferentFirstFrameThanAssignedTexture(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById) {
@@ -35,8 +35,8 @@ namespace MPD_Analyzer {
                 return ["Has duplicate animations!!"];
 
             var firstFrameByTexId = mpdFile.Animations.Where(x => x.NumFrames > 0).ToDictionary(x => x.TextureID, x => (ITextureData) x.AnimationFrameTable.First());
-            var nonMatchingTextures = texturesById.Values.Where(x => firstFrameByTexId.ContainsKey(x.ID) && x.Hash != firstFrameByTexId[x.ID].Hash).ToArray();
-            return nonMatchingTextures.Select(x => $"Tex0x{x.ID:X2}: Expected '{texturesById[x.ID].Hash}', was '{firstFrameByTexId[x.ID].Hash}'").ToArray();
+            var nonMatchingTextures = texturesById.Values.Where(x => firstFrameByTexId.ContainsKey(x.TextureID) && x.Hash != firstFrameByTexId[x.TextureID].Hash).ToArray();
+            return nonMatchingTextures.Select(x => $"Tex0x{x.TextureID:X2}: Expected '{texturesById[x.TextureID].Hash}', was '{firstFrameByTexId[x.TextureID].Hash}'").ToArray();
         }
 
         public static string[]? GetAnimationsWithAssignedTextureMissingFromAnimation(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById) {
@@ -46,8 +46,8 @@ namespace MPD_Analyzer {
                 return ["Has duplicate animations!!"];
 
             var framesByTexId = mpdFile.Animations.ToDictionary(x => x.TextureID, x => (ITextureData[]) x.AnimationFrameTable.ToArray());
-            var nonMatchingTextures = texturesById.Values.Where(x => framesByTexId.ContainsKey(x.ID) && !framesByTexId[x.ID].Any(y => y.Hash == x.Hash)).ToArray();
-            return nonMatchingTextures.Select(x => $"Tex0x{x.ID:X2}: Expected '{texturesById[x.ID].Hash}' to be in animation").ToArray();
+            var nonMatchingTextures = texturesById.Values.Where(x => framesByTexId.ContainsKey(x.TextureID) && !framesByTexId[x.TextureID].Any(y => y.Hash == x.Hash)).ToArray();
+            return nonMatchingTextures.Select(x => $"Tex0x{x.TextureID:X2}: Expected '{texturesById[x.TextureID].Hash}' to be in animation").ToArray();
         }
 
         public static string[]? GetModelsWithDuplicateInternalTextures(Dictionary<int, IMPD_AnimatableTexture> texturesById, Dictionary<int, IMPD_ModelLoD> modelsById) {
@@ -104,7 +104,7 @@ namespace MPD_Analyzer {
             var texturesInBoth = surfaceMapTextures.Where(modelTextures.Contains).Select(x => texturesById[x]).ToArray();
             if (texturesInBoth.Length == 0)
                 return null;
-            return texturesInBoth.Select(x => x.Hash + $": 0x{x.ID:X2}").ToArray();
+            return texturesInBoth.Select(x => x.Hash + $": 0x{x.TextureID:X2}").ToArray();
         }
 
         public static string[]? GetDifferentTexturesBetweenBochiAndBochiM(MPD_File mpdFile, string filename, Dictionary<int, IMPD_AnimatableTexture> texturesById) {
@@ -186,9 +186,9 @@ namespace MPD_Analyzer {
                 }
             }
             var fileKey = $"{GetShortScenarioName()}|{filename}";
-            s_texturesByFile[fileKey] = texturesById.Values.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
-            s_referencedTexturesByFile[fileKey] = usedTextures.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
-            s_unreferencedTexturesByFile[fileKey] = unusedTextures.Select(x => (x.Hash, x.ID)).Distinct().ToHashSet();
+            s_texturesByFile[fileKey] = texturesById.Values.Select(x => (x.Hash, x.TextureID)).Distinct().ToHashSet();
+            s_referencedTexturesByFile[fileKey] = usedTextures.Select(x => (x.Hash, x.TextureID)).Distinct().ToHashSet();
+            s_unreferencedTexturesByFile[fileKey] = unusedTextures.Select(x => (x.Hash, x.TextureID)).Distinct().ToHashSet();
 
             return []; //unusedTextures.Select(x => $"Tex0x{x.ID:X2} ({x.Hash})").ToArray();
         }
@@ -244,7 +244,7 @@ namespace MPD_Analyzer {
                 .Select(x => texturesById[x.TextureID])
                 .Where(x => !mpdFile.AnimationFrameChunk.UniqueAnimationFrameTable.Any(y => y.Hash == x.Hash))
                 .ToArray();
-            return ignoredTexturesNotInFrames.Select(x => $"Tex0x{x.ID}: Skipped, but not in Chunk[3]").ToArray();
+            return ignoredTexturesNotInFrames.Select(x => $"Tex0x{x.TextureID}: Skipped, but not in Chunk[3]").ToArray();
         }
 
         public static string[]? GetUniqueAnimationFramesWithMatchingTexturesButNotSkipped(MPD_File mpdFile, Dictionary<int, IMPD_AnimatableTexture> texturesById) {
@@ -273,7 +273,7 @@ namespace MPD_Analyzer {
                     .First(y => y.ImageDataOffset == x.ImageDataOffset)
                 )
                 .ToDictionary(x => x.Key, x => {
-                    var texId = texturesById.Values.First(y => y.Hash == x.Value.Hash).ID;
+                    var texId = texturesById.Values.First(y => y.Hash == x.Value.Hash).TextureID;
                     return (
                         AnimID:    x.Value.TexAnimID,
                         Frame:     x.Value.Frame,
@@ -342,7 +342,7 @@ namespace MPD_Analyzer {
                 ? frames.SelectMany((x, i) => x
                     .Select((y, j) => (outOfOrderArray[i][j] ? "!! " : "   ") + $"[{i}][{j}]: " +
                         $"{y.InChunk3.Name} (Offset=0x{y.InChunk3.ImageDataOffset:X4}), " +
-                        $"{y.Assigned.Name} (Offset=0x{y.Assigned.ImageDataOffset:X4}) (TexID=0x{y.Texture.ID:X2})"
+                        $"{y.Assigned.Name} (Offset=0x{y.Assigned.ImageDataOffset:X4}) (TexID=0x{y.Texture.TextureID:X2})"
                     )
                 ).ToArray()
                 : [];
@@ -364,7 +364,7 @@ namespace MPD_Analyzer {
                 .Concat(textureIdsFromAnimations)
                 .Distinct().ToHashSet();
 
-            var unusedTextures = texturesById.Values.Where(x => !usedFrames.Contains(x.ID)).ToArray();
+            var unusedTextures = texturesById.Values.Where(x => !usedFrames.Contains(x.TextureID)).ToArray();
             var possibleSkippedAnimationFrames = mpdFile.Animations
                 .SelectMany(x => x.AnimationFrameTable)
                 .GroupBy(x => x.Hash)
@@ -375,7 +375,7 @@ namespace MPD_Analyzer {
                 .Select(x => x.Value[0])
                 .ToArray();
 
-            var expectedIgnoredTextureList = definiteSkippedAnimationFrames.Select(x => x.ID).Order().ToArray();
+            var expectedIgnoredTextureList = definiteSkippedAnimationFrames.Select(x => x.TextureID).Order().ToArray();
             var actualIgnoredTextureList = mpdFile.IgnoredTextureTable.Select(x => (int) x.TextureID).ToArray();
 
             return !Enumerable.SequenceEqual(expectedIgnoredTextureList, actualIgnoredTextureList)
@@ -412,7 +412,7 @@ namespace MPD_Analyzer {
         public static string[]? HasMismatchedAnimationDimensions(Dictionary<int, IMPD_AnimatableTexture> texturesById) {
             var anims = texturesById.Values.Where(x => x.Animation != null && !x.IsIgnored && !x.Animation.IsIgnored).ToDictionary(x => x, x => (AnimationStruct) x.Animation);
             var mismatches = anims.Where(x => x.Key.Width != x.Value.Width || x.Key.Height != x.Value.Height).ToDictionary();
-            return mismatches.Select(x => $"0x{x.Key.ID:X2}: ({x.Key.Width}x{x.Key.Height}) => ({x.Value.Width}x{x.Value.Height})").ToArray();
+            return mismatches.Select(x => $"0x{x.Key.TextureID:X2}: ({x.Key.Width}x{x.Key.Height}) => ({x.Value.Width}x{x.Value.Height})").ToArray();
         }
 
         public static string[]? GetMultiReferenceModelSwitchGroups(MPD_File mpdFile) {

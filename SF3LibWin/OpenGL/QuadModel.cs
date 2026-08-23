@@ -21,7 +21,7 @@ namespace SF3.Win.OpenGL {
             var textures = quads
                 .Where(x => x.Animation != null)
                 .SelectMany(x => x.Animation.Frames)
-                .GroupBy(x => (x.ID, x.Frame))
+                .GroupBy(x => (x.TextureID, x.Frame))
                 .Select(x => x.First())
                 .ToArray();
 
@@ -154,7 +154,7 @@ namespace SF3.Win.OpenGL {
                 var frame = quad.Animation?.GetFrame(_frame);
                 var texCoords = (frame != null)
                     ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                        frame.ID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
+                        frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
                         pixelBorderWidth, pixelBorderHeight)
                     : c_noTextureCoords;
 

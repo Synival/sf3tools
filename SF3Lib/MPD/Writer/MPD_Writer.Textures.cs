@@ -12,7 +12,7 @@ namespace SF3.MPD.Writer {
                 textures = new IMPD_Texture[0];
 
             var sortedTextures = textures
-                .OrderBy(x => x.ID)
+                .OrderBy(x => x.TextureID)
                 .ToArray();
 
             for (int i = 0; i < chunkCount; i++) {

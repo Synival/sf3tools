@@ -47,7 +47,7 @@ namespace SF3.Imaging {
             => _texture.Validate16BitImageData(data, oldStoredSize, newStoredSize);
 
         public MPD_CollectionType Collection => _texture.Collection;
-        public int ID => _texture.ID;
+        public int TextureID => _texture.TextureID;
         public Dictionary<TagKey, TagValue> Tags => _texture.Tags;
         public int BytesPerPixel => _texture.BytesPerPixel;
         public TexturePixelFormat PixelFormat => _texture.PixelFormat;

@@ -52,9 +52,9 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
             var texturesById = mpdFile.ModelCollections[MPD_CollectionType.Primary].Textures
                 .Where(x => !hasIgnored || !x.IsIgnored)
-                .GroupBy(x => x.ID)
+                .GroupBy(x => x.TextureID)
                 .Select(x => x.First())
-                .ToDictionary(x => x.ID, x => x);
+                .ToDictionary(x => x.TextureID, x => x);
 
             var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
             var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventIDs);
