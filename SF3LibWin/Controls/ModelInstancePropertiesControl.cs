@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using CommonLib.SGL;
 using CommonLib.Utils;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -18,7 +19,7 @@ namespace SF3.Win.Controls {
             cbVisibleFrom.DataSource = Enum.GetValues<ModelDirectionType>().Select(x => OnlyVisibleFromToString(x)).ToArray();
 
             // Event handling for 'Movement' group.
-            void DoOnlyDirectlyAndInvalidate(Action<IMPD_ModelInstance> action) {
+            void DoOnlyDirectlyAndInvalidate(Action<ISGL_ModelInstance> action) {
                 DoOnlyDirectly(() => {
                     // TODO: support multiple selection!
                     var eo = EditingObjects[0];
@@ -118,11 +119,13 @@ namespace SF3.Win.Controls {
                 eo.AlwaysFacesCamera = cbAlwaysFaceCamera.Checked);
 
             cbVisibleFrom.SelectedValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
-                var dir = StringToOnlyVisibleFrom(cbVisibleFrom.Text);
-                if (!dir.HasValue)
-                    cbVisibleFrom.Text = OnlyVisibleFromToString(eo.OnlyVisibleFromDirection);
-                else
-                    eo.OnlyVisibleFromDirection = dir.Value;
+                if (eo is IMPD_ModelInstance mpdModelInst) {
+                    var dir = StringToOnlyVisibleFrom(cbVisibleFrom.Text);
+                    if (!dir.HasValue)
+                        cbVisibleFrom.Text = OnlyVisibleFromToString(mpdModelInst.OnlyVisibleFromDirection);
+                    else
+                        mpdModelInst.OnlyVisibleFromDirection = dir.Value;
+                }
             });
 
             // ---------------------------------------
@@ -196,7 +199,7 @@ namespace SF3.Win.Controls {
 
             nudModelID.ValueChanged += (s, e) => DoOnlyDirectlyAndInvalidate(eo => {
                 // Try to set the model to a valid one. If this doesn't work, set it back to the original value.
-                IMPD_ModelLoD model = null;
+                ISGL_Model model = null;
                 try {
                     eo.ModelID = (int) nudModelID.Value;
                     model = eo.GetModel(0);
@@ -215,7 +218,7 @@ namespace SF3.Win.Controls {
 
         private delegate void TransformSizeDelegate(ref BoundingBox bounds);
 
-        private void UpdateCoordinateValues(IMPD_ModelInstance eo) {
+        private void UpdateCoordinateValues(ISGL_ModelInstance eo) {
             var posX = eo.PositionX;
             var posY = eo.PositionY;
             var posZ = eo.PositionZ;
@@ -259,8 +262,12 @@ namespace SF3.Win.Controls {
 
             cbAlwaysFaceCamera.Checked = eo.AlwaysFacesCamera;
 
-            var dirStr = OnlyVisibleFromToString(eo.OnlyVisibleFromDirection);
-            cbVisibleFrom.Text = dirStr;
+            if (eo is IMPD_ModelInstance mpdModelInst) {
+                var dirStr = OnlyVisibleFromToString(mpdModelInst.OnlyVisibleFromDirection);
+                cbVisibleFrom.Text = dirStr;
+            }
+            else
+                cbVisibleFrom.Hide();
 
             UpdateCoordinateValues(eo);
 

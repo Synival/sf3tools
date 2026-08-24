@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using CommonLib;
+using CommonLib.SGL;
 using SF3.Models.Structs.X1.Battle;
 using SF3.Models.Structs.X1.Town;
 using SF3.MPD.Interfaces;
@@ -135,5 +136,5 @@ namespace SF3.Win.Controls {
     public class SurfaceTilePropertiesControlBase   : PropertiesControlBase<IMPD_SurfaceTile> {}
     public class ActorBattlePropertiesControlBase   : PropertiesControlBase<Unit> {}
     public class ActorNPCPropertiesControlBase      : PropertiesControlBase<Npc> {}
-    public class ModelInstancePropertiesControlBase : PropertiesControlBase<IMPD_ModelInstance> {}
+    public class ModelInstancePropertiesControlBase : PropertiesControlBase<ISGL_ModelInstance> {}
 }

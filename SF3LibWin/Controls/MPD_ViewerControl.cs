@@ -106,7 +106,7 @@ namespace SF3.Win.Controls {
                     }
                     else if (firstObj is ISGL_ModelInstance) {
                         // TODO: multiple selection!
-                        SwitchToModelInstanceEditor((IMPD_ModelInstance) objs[0]);
+                        SwitchToModelInstanceEditor((ISGL_ModelInstance) objs[0]);
                     }
                     else if (firstObj is Unit) {
                         // TODO: multiple selection!
@@ -172,7 +172,7 @@ namespace SF3.Win.Controls {
 
         private SurfaceTilePropertiesControl SwitchToTileEditor(IMPD_SurfaceTile tile)
             => SetSideEditorControl(ref _surfaceTilePropertiesControl, tile);
-        private ModelInstancePropertiesControl SwitchToModelInstanceEditor(IMPD_ModelInstance modelInstance)
+        private ModelInstancePropertiesControl SwitchToModelInstanceEditor(ISGL_ModelInstance modelInstance)
             => SetSideEditorControl(ref _modelInstancePropertiesControl, modelInstance);
         private ActorBattlePropertiesControl SwitchToActorBattleInstanceEditor(Unit actor)
             => SetSideEditorControl(ref _actorBattlePropertiesControl, actor);
