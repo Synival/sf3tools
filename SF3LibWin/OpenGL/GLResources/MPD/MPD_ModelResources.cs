@@ -104,30 +104,30 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
             Reset();
-            if (models == null || sglModel == null)
+            if (mpdFile == null || models == null || sglModel == null)
                 return;
 
-            InitDictsForType(models.Collection);
-            SGL_ModelsByIDByCollection[(int) models.Collection][sglModel.ModelID] = sglModel;
-
-            var texturesById = GetTextureDictionaryByCollection(models, mpdFile);
-            CreateAndAddQuadModels((int) models.Collection, sglModel, texturesById, forceSemiTransparent ? GetForceSemiTransparencyAlpha(mpdFile) : null, isHideMesh);
-
-            var modelInstance = new MPD_ModelInstance() {
-                Collection = models,
-                ModelInstanceID = 0,
-                ModelID = sglModel.ModelID,
-                PositionX = 32 * 32,
-                PositionZ = 32 * 32,
-                AngleX = rotX,
-                AngleY = rotY,
-                AngleZ = rotZ,
-                ScaleX = scaleX,
-                ScaleY = scaleY,
-                ScaleZ = scaleZ,
-            };
-
-            ModelInstances = [modelInstance];
+            Update(
+                sglModel,
+                GetTextureDictionaryByCollection(models, mpdFile),
+                () => {
+                    return new MPD_ModelInstance() {
+                        Collection = models,
+                        ModelInstanceID = 0,
+                        ModelID = sglModel.ModelID,
+                        PositionX = 32 * 32,
+                        PositionZ = 32 * 32,
+                        AngleX = rotX,
+                        AngleY = rotY,
+                        AngleZ = rotZ,
+                        ScaleX = scaleX,
+                        ScaleY = scaleY,
+                        ScaleZ = scaleZ,
+                    };
+                },
+                forceSemiTransparent ? GetForceSemiTransparencyAlpha(mpdFile) : null,
+                isHideMesh
+            );
         }
     }
 }

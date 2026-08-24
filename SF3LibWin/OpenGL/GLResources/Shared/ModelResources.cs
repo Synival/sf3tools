@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
@@ -40,6 +41,21 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 ModelGroupsByIDByCollection[collection] = [];
             if (!SGL_ModelsByIDByCollection.ContainsKey(collection))
                 SGL_ModelsByIDByCollection[collection] = [];
+        }
+
+        public void Update(
+            ISGL_Model sglModel, Dictionary<int, IAnimatableTexture> texturesById, Func<ISGL_ModelInstance> instCreator,
+            float? forceSemiTransparentValue = null, bool isHideMesh = false
+        ) {
+            Reset();
+            if (sglModel == null || texturesById == null || instCreator == null)
+                return;
+
+            var collectionId = sglModel.ModelCollectionID;
+            InitDictsForType(collectionId);
+            SGL_ModelsByIDByCollection[collectionId][sglModel.ModelID] = sglModel;
+            CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh);
+            ModelInstances = [instCreator()];
         }
 
         protected void CreateAndAddQuadModels(
