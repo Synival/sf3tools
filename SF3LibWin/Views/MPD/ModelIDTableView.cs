@@ -16,7 +16,7 @@ namespace SF3.Win.Views.MPD {
             MPD_File = mpdFile;
             _table = table;
             TableView = new TableView("Models", table, ngc, typeof(ModelIDStruct));
-            ModelView = new Model3DView("Model", mpdFile);
+            ModelView = new SGL_ModelInstance3DView("Model", mpdFile);
         }
 
         public override Control Create() {
@@ -50,7 +50,7 @@ namespace SF3.Win.Views.MPD {
             var collection = (MPD_File.ModelCollections?.TryGetValue(MPD_CollectionType.Primary, out var mc) == true) ? mc : null;
             var modelIdStr = (ModelIDStruct) item?.RowObject;
 
-            ModelView.Model = (collection != null && modelIdStr != null)
+            ModelView.ModelInstance = (collection != null && modelIdStr != null)
                 ? (ModelInstanceBase) (collection.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == modelIdStr.ModelID))
                 : null;
         }
@@ -84,6 +84,6 @@ namespace SF3.Win.Views.MPD {
         }
 
         public TableView TableView { get; }
-        public Model3DView ModelView { get; }
+        public SGL_ModelInstance3DView ModelView { get; }
     }
 }

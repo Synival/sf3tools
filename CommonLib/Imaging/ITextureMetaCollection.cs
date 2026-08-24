@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace CommonLib.Imaging {
-    public interface ITextureContainer {
+    public interface ITextureMetaCollection {
         /// <summary>
         /// Returns a dictionary ot IAnimatableTexture's, keyed by their TextureID.
         /// The textures returned should be usable with the ModelCollectionID provided.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonLib.Geometry;
 using CommonLib.Imaging;
+using CommonLib.SGL;
 using SF3.MPD.Interfaces.Flags;
 using SF3.Types;
 
@@ -10,14 +11,21 @@ namespace SF3.MPD.Interfaces {
     /// Abstract implementation of any kind of MPD, such as "in-place" editors like MPD_File or a fully deserialized
     /// resource.
     /// </summary>
-    public interface IMPD : ITextureContainer {
+    public interface IMPD : ISGL_ModelAndTextureMetaCollection {
         /// <summary>
         /// Returns a dictionary ot IAnimatableTexture's, keyed by their TextureID.
         /// The textures returned should be usable with the ModelCollectionID provided.
         /// </summary>
-        /// <param name="mcId">Corresponding ModelCollectionID that textures may be associated with.</param>
+        /// <param name="collectionType">Corresponding ModelCollectionID that textures may be associated with.</param>
         /// <returns>A non-null collection of textures, keyed by their TextureID.</returns>
-        Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(MPD_CollectionType mcId);
+        Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(MPD_CollectionType collectionType);
+
+        /// <summary>
+        /// Fetches a collection of models.
+        /// </summary>
+        /// <param name="collectionType">Corresponding ModelCollectionID.</param>
+        /// <returns>A collection if it exists, otherwise null.</returns>
+        ISGL_ModelCollection GetModelCollection(MPD_CollectionType collectionType);
 
         /// <summary>
         /// The flags for the MPD. Mostly technical information that should only be modified directly if you know what

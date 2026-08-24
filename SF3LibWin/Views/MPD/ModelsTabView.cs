@@ -14,9 +14,9 @@ namespace SF3.Win.Views.MPD {
             var allModelInstances = modelCollections.Select(x => x.ModelInstanceTable).ToList();
             var allPDatas = modelCollections.Select(x => x.PDataTable).ToList();
 
-            AllModelInstancesTable = AllModelInstancesTable.Create("AllModelInstances", allModelInstances);
-            AllPDatasTable = AllPDatasTable.Create("AllPDatas", allPDatas);
-            Model = model;
+            Model             = model;
+            AllModelsTable    = AllPDatasTable.Create("AllModels", allPDatas);
+            AllInstancesTable = AllModelInstancesTable.Create("AllInstances", allModelInstances);
         }
 
         public override Control Create() {
@@ -24,14 +24,15 @@ namespace SF3.Win.Views.MPD {
                 return null;
 
             var ngc = Model.NameGetterContext;
-            CreateChild(new ModelTableView("Model Instances", Model, AllModelInstancesTable, ngc));
-            CreateChild(new PDataTableView("PDATAs", Model, AllPDatasTable, ngc));
+
+            CreateChild(new PDataTableView("Models", Model, AllModelsTable, ngc));
+            CreateChild(new ModelTableView("Instances", Model, AllInstancesTable, ngc));
 
             return Control;
         }
 
         public IMPD_File Model { get; }
-        public AllModelInstancesTable AllModelInstancesTable { get; }
-        public AllPDatasTable AllPDatasTable { get; }
+        public AllPDatasTable AllModelsTable { get; }
+        public AllModelInstancesTable AllInstancesTable { get; }
     }
 }

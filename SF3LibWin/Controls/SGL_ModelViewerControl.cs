@@ -184,11 +184,11 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        public ITextureContainer TextureContainer { get; private set; } = null;
+        public ITextureMetaCollection TextureContainer { get; private set; } = null;
         private ISGL_Model _sglModel = null;
 
         public void Update(
-            ITextureContainer texContainer, ISGL_Model sglModel,
+            ITextureMetaCollection texContainer, ISGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {

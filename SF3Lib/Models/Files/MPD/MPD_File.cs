@@ -18,6 +18,7 @@ using CommonLib.Utils;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
 using SF3.Imaging;
+using CommonLib.SGL;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -104,6 +105,10 @@ namespace SF3.Models.Files.MPD {
                 .Where(x => !hasIgnored || !x.IsIgnored)
                 .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
         }
+
+        public ISGL_ModelCollection GetModelCollection(int mcId) => GetModelCollection((MPD_CollectionType) mcId);
+        public ISGL_ModelCollection GetModelCollection(MPD_CollectionType collectionType)
+            => ModelCollections.TryGetValue(collectionType, out var mcValue) ? mcValue : null;
 
         public override bool IsModified {
             get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);

@@ -12,7 +12,7 @@ namespace SF3.Win.Views.MPD {
         public PDataTableView(string name, IMPD_File mpdFile, ITable<PDataStruct> model, INameGetterContext ngc) : base(name) {
             Model = model;
             TableView = new TableView("PDATAs", model, ngc);
-            ModelView = new PData3DView("Model", mpdFile);
+            ModelView = new SGL_Model3DView("Model", mpdFile);
         }
 
         public override Control Create() {
@@ -39,7 +39,7 @@ namespace SF3.Win.Views.MPD {
 
         private void OnModelChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            ModelView.PData = (PDataStruct) item?.RowObject;
+            ModelView.Model = (PDataStruct) item?.RowObject;
         }
 
         public override void Destroy() {
@@ -56,7 +56,7 @@ namespace SF3.Win.Views.MPD {
 
         public ITable<PDataStruct> Model { get; }
         public TableView TableView { get; }
-        public PData3DView ModelView { get; }
+        public SGL_Model3DView ModelView { get; }
 
     }
 }
