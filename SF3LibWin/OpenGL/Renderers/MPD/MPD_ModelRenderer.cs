@@ -5,7 +5,6 @@ using CommonLib.SGL;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Types;
-using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
@@ -43,9 +42,9 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             var lightingTexture = selectionColors ? null : lighting.LightingTexture ?? general.WhiteTexture;
             var usedSolidShader = false;
 
-            using (selectionColors ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-            using (selectionColors ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureEventIDs))
-            using (selectionColors ? null : lightingTexture.Use(MPD_TextureUnit.TextureLighting))
+            using (selectionColors ? null : general.TransparentBlackTexture.Use(ObjectShaderTextureUnit.TextureOverlay1))
+            using (selectionColors ? null : general.TransparentBlackTexture.Use(ObjectShaderTextureUnit.TextureOverlay2))
+            using (selectionColors ? null : lightingTexture.Use(ObjectShaderTextureUnit.TextureLighting))
             using (selectionColors ? general.TransparentBlackTexture.Use() : null)
             using (shader.Use()) {
                 if (!transparentPass) {
@@ -74,7 +73,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     }
 
                     // Pass 3: Untextured models
-                    using (selectionColors ? general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas) : null) {
+                    using (selectionColors ? general.WhiteTexture.Use(ObjectShaderTextureUnit.TextureAtlas) : null) {
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
                             if (selectionColors)
                                 shader.UpdateUniform("color", ModelSelectionColor(mwg.Model));
@@ -96,7 +95,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     }
 
                     // Pass 4: Semi-transparent untextured models
-                    using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas)) {
+                    using (general.WhiteTexture.Use(ObjectShaderTextureUnit.TextureAtlas)) {
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SemiTransparentUntexturedModel != null).ToArray()) {
                             if (selectionColors)
                                 shader.UpdateUniform("color", ModelSelectionColor(mwg.Model));

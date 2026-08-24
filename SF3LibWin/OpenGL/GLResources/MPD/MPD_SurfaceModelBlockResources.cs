@@ -9,6 +9,7 @@ using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
+using SF3.Win.OpenGL.GLResources.Shared;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
@@ -56,8 +57,8 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 .Select(x => x.First())
                 .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
 
-            var terrainTypeTexInfo = Shader.GetTextureInfo(MPD_TextureUnit.TextureTerrainTypes);
-            var eventIdTexInfo     = Shader.GetTextureInfo(MPD_TextureUnit.TextureEventIDs);
+            var terrainTypeTexInfo = Shader.GetTextureInfo((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureTerrainTypes);
+            var eventIdTexInfo     = Shader.GetTextureInfo((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureEventIDs);
 
             var surfaceQuads           = new List<Quad>();
             var missingSurfaceQuads    = new List<Quad>();

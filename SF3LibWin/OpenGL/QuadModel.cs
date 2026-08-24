@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Win.OpenGL.GLResources.MPD;
+using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.ThirdParty.TexturePacker;
 using static CommonLib.Types.CornerTypeConsts;
 
@@ -46,7 +46,7 @@ namespace SF3.Win.OpenGL {
                 new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(TextureUnit.Texture1).TexCoordName),
             };
             if (_textureAtlas != null)
-                expectedAttrs.Add(new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas).TexCoordName));
+                expectedAttrs.Add(new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(ObjectShaderTextureUnit.TextureAtlas).TexCoordName));
 
             foreach (var ea in expectedAttrs.Where(ea => !quadAttrs.ContainsKey(ea.Name)).ToList())
                 if (!quadAttrs.ContainsKey(ea.Name))
@@ -137,7 +137,7 @@ namespace SF3.Win.OpenGL {
             if (_texture == null)
                 return false;
 
-            var vboAttr = _vbo.GetAttributeByName(Shader.GetTextureInfo(MPD_TextureUnit.TextureAtlas).TexCoordName);
+            var vboAttr = _vbo.GetAttributeByName(Shader.GetTextureInfo(ObjectShaderTextureUnit.TextureAtlas).TexCoordName);
             if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
                 return false;
 
@@ -232,7 +232,7 @@ namespace SF3.Win.OpenGL {
             using (_vao.Use())
                 shader.AssignAttributes(_vbo);
 
-            using ((textureAtlas != null) ? textureAtlas.Use(MPD_TextureUnit.TextureAtlas) : null)
+            using ((textureAtlas != null) ? textureAtlas.Use(ObjectShaderTextureUnit.TextureAtlas) : null)
             using (_vao.Use())
             using (_ebo.Use(BufferTarget.ElementArrayBuffer))
             using (shader.Use())

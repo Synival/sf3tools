@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Win.OpenGL.GLResources.MPD;
+using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.OpenGL {
@@ -39,12 +39,12 @@ namespace SF3.Win.OpenGL {
             new TextureInfo(2, TextureUnit.Texture2, "texture2",            "texCoord2"),
             new TextureInfo(3, TextureUnit.Texture3, "texture3",            "texCoord3"),
             new TextureInfo(4, TextureUnit.Texture4, "textureAtlas",        "texCoordAtlas"),
-            new TextureInfo(5, TextureUnit.Texture5, "textureTerrainTypes", "texCoordTerrainTypes"),
-            new TextureInfo(6, TextureUnit.Texture6, "textureEventIDs",     "texCoordEventIDs"),
+            new TextureInfo(5, TextureUnit.Texture5, "textureOverlay1",     "texCoordOverlay1"),
+            new TextureInfo(6, TextureUnit.Texture6, "textureOverlay2",     "texCoordOverlay2"),
             new TextureInfo(7, TextureUnit.Texture7, "textureLighting",     "texCoordLighting"),
         ];
 
-        public static TextureInfo GetTextureInfo(MPD_TextureUnit texUnit)
+        public static TextureInfo GetTextureInfo(ObjectShaderTextureUnit texUnit)
             => GetTextureInfo((TextureUnit) texUnit);
 
         public static TextureInfo GetTextureInfo(TextureUnit texUnit)

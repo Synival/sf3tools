@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using OpenTK.Graphics.OpenGL;
-using SF3.Win.OpenGL.GLResources.MPD;
+using SF3.Win.OpenGL.GLResources.Shared;
 
 namespace SF3.Win.OpenGL {
     public class Texture : IDisposable {
@@ -77,7 +77,7 @@ namespace SF3.Win.OpenGL {
             }
         }
 
-        public StackElement Use(MPD_TextureUnit activeTexture)
+        public StackElement Use(ObjectShaderTextureUnit activeTexture)
             => Use((TextureUnit) activeTexture);
 
         public StackElement Use(TextureUnit activeTexture = TextureUnit.Texture0) {

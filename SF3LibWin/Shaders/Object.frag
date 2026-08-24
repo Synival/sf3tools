@@ -1,8 +1,8 @@
 #version 330 core
 
 uniform sampler2D textureAtlas;
-uniform sampler2D textureTerrainTypes;
-uniform sampler2D textureEventIDs;
+uniform sampler2D textureOverlay1;
+uniform sampler2D textureOverlay2;
 
 in vec4 colorFrag;
 in vec3 glowFrag;
@@ -10,8 +10,8 @@ in vec4 lightColorFrag;
 in float meshFrag;
 
 in vec2 texCoordAtlasFrag;
-in vec2 texCoordTerrainTypesFrag;
-in vec2 texCoordEventIDsFrag;
+in vec2 texCoordOverlay1Frag;
+in vec2 texCoordOverlay2Frag;
 
 out vec4 FragColor;
 
@@ -23,8 +23,8 @@ void main() {
     surfaceTex = surfaceTex * colorFrag + vec4(glowFrag, 0.0);
 
     vec4 overlayTex =
-        texture(textureTerrainTypes, texCoordTerrainTypesFrag) +
-        texture(textureEventIDs,     texCoordEventIDsFrag);
+        texture(textureOverlay1, texCoordOverlay1Frag) +
+        texture(textureOverlay2, texCoordOverlay2Frag);
 
     vec4 compositeColor = vec4(mix(surfaceTex.rgb, overlayTex.rgb, overlayTex.a), surfaceTex.a + overlayTex.a * (1.0 - surfaceTex.a));
     if (compositeColor.a < 0.001)

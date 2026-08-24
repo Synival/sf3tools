@@ -15,8 +15,8 @@ layout (location = 2) in vec3 glow;
 layout (location = 3) in vec3 normal;
 
 layout (location = 4) in vec2 texCoordAtlas;
-layout (location = 5) in vec2 texCoordTerrainTypes;
-layout (location = 6) in vec2 texCoordEventIDs;
+layout (location = 5) in vec2 texCoordOverlay1;
+layout (location = 6) in vec2 texCoordOverlay2;
 
 layout (location = 7) in float applyLighting;
 layout (location = 8) in float mesh;
@@ -27,8 +27,8 @@ out vec4 lightColorFrag;
 out float meshFrag;
 
 out vec2 texCoordAtlasFrag;
-out vec2 texCoordTerrainTypesFrag;
-out vec2 texCoordEventIDsFrag;
+out vec2 texCoordOverlay1Frag;
+out vec2 texCoordOverlay2Frag;
 
 void main() {
     gl_Position   = projection * view * model * vec4(position, 1.0);
@@ -52,8 +52,8 @@ void main() {
 
     lighting = (smoothLighting ? lighting : floor(lighting * 32.0f) / 32.0f) + 0.015625;
 
-    lightColorFrag           = (lightingMode != 0 && applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
-    texCoordAtlasFrag        = texCoordAtlas;
-    texCoordTerrainTypesFrag = texCoordTerrainTypes;
-    texCoordEventIDsFrag     = texCoordEventIDs;
+    lightColorFrag       = (lightingMode != 0 && applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
+    texCoordAtlasFrag    = texCoordAtlas;
+    texCoordOverlay1Frag = texCoordOverlay1;
+    texCoordOverlay2Frag = texCoordOverlay2;
 }

@@ -24,10 +24,10 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? options.UseOutsideLighting ? 2 : 1 : 0);
             general.ObjectShader.UpdateUniform(ShaderUniformType.SmoothLighting, options.SmoothLighting);
 
-            using (terrainTypesTexture.Use(MPD_TextureUnit.TextureTerrainTypes))
-            using (eventIdsTexture.Use(MPD_TextureUnit.TextureEventIDs))
-            using (lightingTexture.Use(MPD_TextureUnit.TextureLighting))
-            using (options.DrawSurfaceModel ? null : general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+            using (terrainTypesTexture.Use((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureTerrainTypes))
+            using (eventIdsTexture.Use((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureEventIDs))
+            using (lightingTexture.Use((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureLighting))
+            using (options.DrawSurfaceModel ? null : general.TransparentBlackTexture.Use((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureAtlas))
             using (general.ObjectShader.Use()) {
                 foreach (var block in surfaceModel.Blocks) {
                     if (options.DrawSurfaceModel)
@@ -36,11 +36,11 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                         block.Model?.Draw(general.ObjectShader, null);
 
                     if (block.MissingTexturesModel != null)
-                        using (general.WhiteTexture.Use(MPD_TextureUnit.TextureAtlas))
+                        using (general.WhiteTexture.Use((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureAtlas))
                             block.MissingTexturesModel?.Draw(general.ObjectShader, null);
 
                     if (block.UntexturedModel != null)
-                        using (general.TransparentBlackTexture.Use(MPD_TextureUnit.TextureAtlas))
+                        using (general.TransparentBlackTexture.Use((ObjectShaderTextureUnit) MPD_ObjectShaderTextureUnit.TextureAtlas))
                             block.UntexturedModel?.Draw(general.ObjectShader, null);
                 }
             }
