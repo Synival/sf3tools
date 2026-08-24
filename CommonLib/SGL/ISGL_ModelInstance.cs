@@ -5,6 +5,13 @@ namespace CommonLib.SGL {
     /// Interface for an instance of an ISGL_Model.
     /// </summary>
     public interface ISGL_ModelInstance {
+        /// <summary>
+        /// Fetches the model referenced by this instance at a specific level of detail.
+        /// </summary>
+        /// <param name="lod">Level of detail to fetch.</param>
+        /// <returns>An existing IMPD_ModelLoD if found, otherwise 'null'.</returns>
+        ISGL_Model GetModel(int lod);
+
         int ModelCollectionID { get; }
         int ModelID { get; set; }
         int ModelInstanceID { get; }
@@ -28,13 +35,6 @@ namespace CommonLib.SGL {
         /// Mostly under-utilized.
         /// </summary>
         int LevelsOfDetail { get; set; }
-
-        /// <summary>
-        /// Fetches the model referenced by this instance at a specific level of detail.
-        /// </summary>
-        /// <param name="lod">Level of detail to fetch.</param>
-        /// <returns>An existing IMPD_ModelLoD if found, otherwise 'null'.</returns>
-        ISGL_Model GetModel(int lod);
 
         /// <summary>
         /// Bounding box of this model in world space, taking scale and rotation into account.
