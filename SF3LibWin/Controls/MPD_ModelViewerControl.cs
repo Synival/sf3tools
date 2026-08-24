@@ -34,7 +34,7 @@ namespace SF3.Win.Controls {
 
             _general  = new GeneralResources();
             _screen   = new ScreenResources();
-            _models   = new MPD_ModelResources(false, false);
+            _models   = new ModelResources(false, false);
             _lighting = new LightingResources();
 
             _general.Init();
@@ -45,7 +45,7 @@ namespace SF3.Win.Controls {
             _renderer = new SGL_ModelRenderer();
 
             if (MPD_File != null && Models != null && _sglModel != null)
-                _models.Update(MPD_File, Models, _sglModel);
+                Update(MPD_File, _sglModel);
 
             var lighting = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
@@ -215,8 +215,24 @@ namespace SF3.Win.Controls {
             if (_models != null) {
                 _models.Reset();
                 if (MPD_File != null && Models != null && sglModel != null) {
-                    _models.Update(MPD_File, Models, sglModel, forceSemiTransparent: false, isHideMesh: false,
-                        rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
+                    var texturesById = MPD_ModelResources.GetTextureDictionaryByCollection(Models, mpdFile);
+                    _models.Update(
+                        sglModel, texturesById, () => {
+                            return new SGL_ModelInstance((mi, lod) => sglModel) {
+                                ModelCollectionID = sglModel.ModelCollectionID,
+                                ModelID = sglModel.ModelID,
+                                PositionX = 32 * 32,
+                                PositionZ = 32 * 32,
+                                AngleX = rotX,
+                                AngleY = rotY,
+                                AngleZ = rotZ,
+                                ScaleX = scaleX,
+                                ScaleY = scaleY,
+                                ScaleZ = scaleZ,
+                            };
+                        },
+                        forceSemiTransparentValue: null, isHideMesh: false
+                    );
 
                     var verticesMatrix =
                         Matrix3.CreateScale(scaleX, scaleY, scaleZ) *
@@ -290,7 +306,7 @@ namespace SF3.Win.Controls {
 
         private GeneralResources   _general  = null;
         private ScreenResources    _screen   = null;
-        private MPD_ModelResources _models   = null;
+        private ModelResources     _models   = null;
         private LightingResources  _lighting = null;
 
         private SGL_ModelRenderer _renderer = null;

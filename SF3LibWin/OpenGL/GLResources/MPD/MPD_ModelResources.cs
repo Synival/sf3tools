@@ -20,9 +20,9 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
         private void InitDictsForType(MPD_CollectionType collection)
             => InitDictsForType((int) collection);
 
-        private Dictionary<int, IAnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
-            var hasIgnored = !mpdFile.Settings.AreIgnoredTexturesDummiedOut;
-            return modelCollection.Textures
+        public static Dictionary<int, IAnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
+            var hasIgnored = mpdFile?.Settings?.AreIgnoredTexturesDummiedOut != true;
+            return (modelCollection?.Textures ?? [])
                 .Where(x => !hasIgnored || !x.IsIgnored)
                 .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
         }
@@ -96,38 +96,6 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             }
 
             ModelInstances = modelInstanceList.ToArray();
-        }
-
-        public void Update(IMPD mpdFile, IMPD_ModelCollection models, ISGL_Model sglModel,
-            bool forceSemiTransparent = false, bool isHideMesh = false,
-            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
-            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
-        ) {
-            Reset();
-            if (mpdFile == null || models == null || sglModel == null)
-                return;
-
-            Update(
-                sglModel,
-                GetTextureDictionaryByCollection(models, mpdFile),
-                () => {
-                    return new MPD_ModelInstance() {
-                        Collection = models,
-                        ModelInstanceID = 0,
-                        ModelID = sglModel.ModelID,
-                        PositionX = 32 * 32,
-                        PositionZ = 32 * 32,
-                        AngleX = rotX,
-                        AngleY = rotY,
-                        AngleZ = rotZ,
-                        ScaleX = scaleX,
-                        ScaleY = scaleY,
-                        ScaleZ = scaleZ,
-                    };
-                },
-                forceSemiTransparent ? GetForceSemiTransparencyAlpha(mpdFile) : null,
-                isHideMesh
-            );
         }
     }
 }
