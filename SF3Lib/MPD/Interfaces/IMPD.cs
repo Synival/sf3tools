@@ -10,7 +10,15 @@ namespace SF3.MPD.Interfaces {
     /// Abstract implementation of any kind of MPD, such as "in-place" editors like MPD_File or a fully deserialized
     /// resource.
     /// </summary>
-    public interface IMPD {
+    public interface IMPD : ITextureContainer {
+        /// <summary>
+        /// Returns a dictionary ot IAnimatableTexture's, keyed by their TextureID.
+        /// The textures returned should be usable with the ModelCollectionID provided.
+        /// </summary>
+        /// <param name="mcId">Corresponding ModelCollectionID that textures may be associated with.</param>
+        /// <returns>A non-null collection of textures, keyed by their TextureID.</returns>
+        Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(MPD_CollectionType mcId);
+
         /// <summary>
         /// The flags for the MPD. Mostly technical information that should only be modified directly if you know what
         /// you're doing.

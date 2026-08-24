@@ -17,6 +17,7 @@ using CommonLib.Geometry;
 using CommonLib.Utils;
 using SF3.MPD.Interfaces;
 using SF3.MPD.Interfaces.Flags;
+using SF3.Imaging;
 
 namespace SF3.Models.Files.MPD {
     public partial class MPD_File : ScenarioTableFile, IMPD_File {
@@ -93,6 +94,16 @@ namespace SF3.Models.Files.MPD {
         public void UpdatePlaneImages() => ((MPD_Planes) Planes).UpdateImages();
 
         public void TriggerModelsUpdated() => ModelsUpdated?.Invoke(this, EventArgs.Empty);
+
+        public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(MPD_CollectionType mcId)
+            => GetAnimatableTexturesByModelCollectionID((int) mcId);
+        public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId) {
+            var hasIgnored = Settings?.AreIgnoredTexturesDummiedOut != true;
+            var collection = (ModelCollections?.TryGetValue((MPD_CollectionType) mcId, out var collectionValue) == true) ? collectionValue : null;
+            return (collection?.Textures ?? new IMPD_AnimatableTexture[0])
+                .Where(x => !hasIgnored || !x.IsIgnored)
+                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
+        }
 
         public override bool IsModified {
             get => base.IsModified | ChunkData.Any(x => x != null && x.IsModified);

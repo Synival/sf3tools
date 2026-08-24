@@ -61,7 +61,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     .Distinct()
                     .ToArray();
 
-                var texturesById = mpdFile.GetTextureDictionaryForCollection(mc.Collection);
+                var texturesById = mpdFile.GetAnimatableTexturesByModelCollectionID(mc.Collection);
 
                 foreach (var id in uniqueModelIDs) {
                     if (id == -1)

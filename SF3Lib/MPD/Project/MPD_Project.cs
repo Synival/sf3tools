@@ -8,6 +8,7 @@ using CommonLib.Geometry;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using Newtonsoft.Json.Linq;
+using SF3.Imaging;
 using SF3.Models.Files;
 using SF3.MPD.Extensions;
 using SF3.MPD.Interfaces;
@@ -184,6 +185,17 @@ namespace SF3.MPD.Project {
         public string[] GetErrors() => new string[0];
         public bool Finish() => true;
         public ScopeGuard IsModifiedChangeBlocker() => new ScopeGuard(() => {}, () => {});
+
+
+        public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(MPD_CollectionType mcId)
+            => GetAnimatableTexturesByModelCollectionID((int) mcId);
+        public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId) {
+            var hasIgnored = Settings?.AreIgnoredTexturesDummiedOut != true;
+            var collection = (ModelCollections?.TryGetValue((MPD_CollectionType) mcId, out var collectionValue) == true) ? collectionValue : null;
+            return (collection?.Textures ?? new IMPD_AnimatableTexture[0])
+                .Where(x => !hasIgnored || !x.IsIgnored)
+                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
+        }
 
         public IMPD_EditableFlags Flags { get; }
         public IMPD_Settings Settings { get; private set; }
