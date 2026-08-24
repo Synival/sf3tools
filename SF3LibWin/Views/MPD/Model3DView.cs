@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using SF3.Models.Structs.MPD.Model;
+using CommonLib.SGL;
 using SF3.MPD.Interfaces;
 using SF3.Win.Controls;
 
@@ -9,10 +9,10 @@ namespace SF3.Win.Views.MPD {
             MPD_File = mpdFile;
         }
 
-        public Model3DView(string name, IMPD mpdFile, ModelInstanceBase modelInstance) : base(name) {
+        public Model3DView(string name, IMPD mpdFile, ISGL_ModelInstance modelInstance) : base(name) {
             MPD_File = mpdFile;
             _modelInstance = modelInstance;
-            UpdateMPD_Model();
+            UpdateSGL_Model();
         }
 
         public override Control Create() {
@@ -31,13 +31,13 @@ namespace SF3.Win.Views.MPD {
 
         public IMPD MPD_File { get; }
 
-        private ModelInstanceBase _modelInstance = null;
-        public ModelInstanceBase Model {
+        private ISGL_ModelInstance _modelInstance = null;
+        public ISGL_ModelInstance Model {
             get => _modelInstance;
             set {
                 if (value != _modelInstance) {
                     _modelInstance = value;
-                    UpdateMPD_Model();
+                    UpdateSGL_Model();
 
                     if (Control != null)
                         UpdateViewerControl();
@@ -45,15 +45,15 @@ namespace SF3.Win.Views.MPD {
             }
         }
 
-        private void UpdateMPD_Model()
-            => _mpdModel = _modelInstance?.GetModel(0);
-        private IMPD_ModelLoD _mpdModel = null;
+        private void UpdateSGL_Model()
+            => _sglModel = _modelInstance?.GetModel(0);
+        private ISGL_Model _sglModel = null;
 
         private void UpdateViewerControl() {
             if (_modelInstance == null)
-                Control.Update(MPD_File, _mpdModel);
+                Control.Update(MPD_File, _sglModel);
             else
-                Control.Update(MPD_File, _mpdModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
+                Control.Update(MPD_File, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
         }
     }
 }
