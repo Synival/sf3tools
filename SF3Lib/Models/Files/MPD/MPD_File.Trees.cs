@@ -10,7 +10,7 @@ namespace SF3.Models.Files.MPD {
     public partial class MPD_File {
         private struct TreeModelInfo {
             public ModelChunk ModelCollection;
-            public ModelInstance ModelInstance;
+            public MPD_ModelInstance ModelInstance;
             public VECTOR TilePosition;
             public SurfaceTile Tile;
             public float Distance;
@@ -98,7 +98,7 @@ namespace SF3.Models.Files.MPD {
                     fileTile.TreeModelID = null;
         }
 
-        public PDataStruct GetTreePData0() {
+        public MPD_PDataStruct GetTreePData0() {
             var mc = ModelCollections.TryGetValue(MPD_CollectionType.Primary, out var mcOut) ? mcOut as ModelChunk : null;
             if (mc == null)
                 return null;

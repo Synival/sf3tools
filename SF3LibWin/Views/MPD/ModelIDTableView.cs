@@ -51,7 +51,7 @@ namespace SF3.Win.Views.MPD {
             var modelIdStr = (ModelIDStruct) item?.RowObject;
 
             ModelView.ModelInstance = (collection != null && modelIdStr != null)
-                ? (ModelInstanceBase) (collection.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == modelIdStr.ModelID))
+                ? (MPD_ModelInstanceBase) (collection.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == modelIdStr.ModelID))
                 : null;
         }
 

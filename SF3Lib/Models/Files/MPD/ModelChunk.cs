@@ -10,6 +10,7 @@ using SF3.Types;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using CommonLib.SGL;
+using SF3.Models.Tables.Shared.SGL;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {
@@ -52,7 +53,7 @@ namespace SF3.Models.Files.MPD {
                 HeaderModelInstanceTable = HeaderModelInstanceTable.Create(Data, this, nameof(HeaderModelInstanceTable), Address);
             else {
                 ModelsHeader = new ModelsHeader(Data, 0, nameof(ModelsHeader), Address + 0x0000);
-                ModelInstanceTable = ModelInstanceTable.Create(Data, this, nameof(ModelInstanceTable), Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Prototype);
+                ModelInstanceTable = MPD_ModelInstanceTable.Create(Data, this, nameof(ModelInstanceTable), Address + 0x000C, ModelsHeader.NumModels, Scenario >= ScenarioType.Prototype);
             }
 
             var pdataAddressesPre =
@@ -75,7 +76,7 @@ namespace SF3.Models.Files.MPD {
                 .ToArray();
 
             var pdataRefs = pdataAddresses
-                .Select(x => new PDataTable.PDataRef() {
+                .Select(x => new MPD_PDataTable.PDataRef() {
                     Address       = (int) GetOffsetInChunk(x.AddressInMemory),
                     Collection    = Collection,
                     ChunkIndex    = ChunkIndex,
@@ -85,7 +86,7 @@ namespace SF3.Models.Files.MPD {
                 })
                 .ToArray();
 
-            PDataTable = PDataTable.Create(Data, "PDATAs", MPD_File, pdataRefs);
+            PDataTable = MPD_PDataTable.Create(Data, "PDATAs", MPD_File, pdataRefs);
 
             try {
                 PDatasByMemoryAddress = PDataTable
@@ -96,7 +97,7 @@ namespace SF3.Models.Files.MPD {
             }
             catch {
                 // TODO: what to do on error??
-                PDatasByMemoryAddress = new Dictionary<uint, PDataStruct>();
+                PDatasByMemoryAddress = new Dictionary<uint, MPD_PDataStruct>();
             }
 
             try {
@@ -288,7 +289,7 @@ namespace SF3.Models.Files.MPD {
                 .ToDictionary(x => (ModelID: x.Value.ModelID, LoD: x.Value.LevelOfDetail), x => x.Key);
 
             foreach (var inst in instances) {
-                var fileInst = (ModelInstanceBase) inst;
+                var fileInst = (MPD_ModelInstanceBase) inst;
                 fileInst.ModelIDToPDataMap = null;
                 inst.ModelID = PDatasByMemoryAddress.TryGetValue(fileInst.PData0, out var pdata) ? pdata.ModelID : -1;
                 fileInst.ModelIDToPDataMap = pdataAddressesByID;
@@ -338,15 +339,15 @@ namespace SF3.Models.Files.MPD {
         public ModelsHeader ModelsHeader { get; private set; }
 
         [BulkCopyRecurse]
-        public ModelInstanceTable ModelInstanceTable { get; private set; }
+        public MPD_ModelInstanceTable ModelInstanceTable { get; private set; }
 
         [BulkCopyRecurse]
         public HeaderModelInstanceTable HeaderModelInstanceTable { get; private set; }
 
         [BulkCopyRecurse]
-        public PDataTable PDataTable { get; private set; }
+        public MPD_PDataTable PDataTable { get; private set; }
 
-        public Dictionary<uint, PDataStruct> PDatasByMemoryAddress { get; private set; }
+        public Dictionary<uint, MPD_PDataStruct> PDatasByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, VertexTable> VertexTablesByMemoryAddress { get; private set; }

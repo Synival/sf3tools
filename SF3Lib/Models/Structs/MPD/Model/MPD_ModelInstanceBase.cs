@@ -8,7 +8,7 @@ using SF3.Types;
 using static CommonLib.Extensions.VECTOR_Extensions;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public abstract class ModelInstanceBase : Struct, IMPD_ModelInstance {
+    public abstract class MPD_ModelInstanceBase : Struct, IMPD_ModelInstance {
         protected readonly int _pdata0Address;
         protected readonly int _positionXAddress;
         protected readonly int _positionYAddress;
@@ -20,7 +20,7 @@ namespace SF3.Models.Structs.MPD.Model {
         protected readonly int _scaleYAddress;
         protected readonly int _scaleZAddress;
 
-        public ModelInstanceBase(IByteData data, IMPD_ModelCollection collection, int id, string name, int address, int positionXOffset, int size)
+        public MPD_ModelInstanceBase(IByteData data, IMPD_ModelCollection collection, int id, string name, int address, int positionXOffset, int size)
         : base(data, id, name, address, size) {
             Collection = collection;
 

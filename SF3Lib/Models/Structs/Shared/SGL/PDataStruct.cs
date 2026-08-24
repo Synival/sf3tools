@@ -2,7 +2,7 @@
 using CommonLib.SGL;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.Shared {
+namespace SF3.Models.Structs.Shared.SGL {
     public class PDataStruct : Struct, IPDATA {
         private readonly int _verticesOffsetAddr;
         private readonly int _vertexCountAddr;

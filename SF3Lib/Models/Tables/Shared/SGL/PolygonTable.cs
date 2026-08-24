@@ -1,7 +1,7 @@
 ﻿using SF3.ByteData;
-using SF3.Models.Structs.MPD.Model;
+using SF3.Models.Structs.Shared.SGL;
 
-namespace SF3.Models.Tables.MPD.Model {
+namespace SF3.Models.Tables.Shared.SGL {
     public class PolygonTable : FixedSizeTable<PolygonStruct> {
         protected PolygonTable(IByteData data, string name, int address, int size) : base(data, name, address, size) {
         }

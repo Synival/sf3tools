@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using CommonLib.Arrays;
 using SF3.Models.Files.MPD;
 using SF3.Models.Tables.MPD.Model;
-using SF3.Types;
+using SF3.Models.Tables.Shared.SGL;
 
 namespace SF3.Win.Views.MPD {
     public class ModelChunkView : TabView {
@@ -23,7 +23,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataModelView("Header", Model.ModelsHeader, ngc));
 
             if (Model.ModelInstanceTable != null)
-                CreateChild(new ModelTableView("Model Instances", MPD_File, Model.ModelInstanceTable, ngc));
+                CreateChild(new MPD_ModelInstanceTableView("Model Instances", MPD_File, Model.ModelInstanceTable, ngc));
 
             if (Model.HeaderModelInstanceTable != null)
                 CreateChild(new TableView("Model Instances", Model.HeaderModelInstanceTable, ngc));
@@ -35,7 +35,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataHexView("Data After Instances", new ByteArray(model.Data.GetDataCopyAt(model.Address, model.SizeInBytesPlusTerminator)), 0x0C));
             }
 
-            CreateChild(new PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
+            CreateChild(new MPD_PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new AttrTableArrayView("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), mc, ngc));

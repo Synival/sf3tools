@@ -6,7 +6,7 @@ using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.MPD.Model {
+namespace SF3.Models.Structs.Shared.SGL {
     public class PolygonStruct : Struct {
         private readonly int _normalXAddr;
         private readonly int _normalYAddr;

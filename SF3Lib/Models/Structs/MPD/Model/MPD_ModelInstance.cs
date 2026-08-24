@@ -7,7 +7,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class ModelInstance : ModelInstanceBase {
+    public class MPD_ModelInstance : MPD_ModelInstanceBase {
         private readonly int _pdata1Address;
         private readonly int _pdata2Address;
         private readonly int _pdata3Address;
@@ -18,7 +18,7 @@ namespace SF3.Models.Structs.MPD.Model {
         private readonly int _tagAddress;
         private readonly int _flagsAddress;
 
-        public ModelInstance(IByteData data, IMPD_ModelCollection collection, int id, string name, int address, bool hasTagsAndFlags)
+        public MPD_ModelInstance(IByteData data, IMPD_ModelCollection collection, int id, string name, int address, bool hasTagsAndFlags)
         : base(data, collection, id, name, address, 0x20, hasTagsAndFlags ? 0x3C : 0x38) {
             PDatas = new PDataAccessorCollection(this);
             HasTagsAndFlags = hasTagsAndFlags;
@@ -84,7 +84,7 @@ namespace SF3.Models.Structs.MPD.Model {
         }
 
         public class PDataAccessor {
-            public PDataAccessor(ModelInstance model, int index) {
+            public PDataAccessor(MPD_ModelInstance model, int index) {
                 Model = model;
                 Index = index;
             }
@@ -94,14 +94,14 @@ namespace SF3.Models.Structs.MPD.Model {
                 set => Model.Data.SetUInt32(Model._pdata0Address + Index * 0x04, value);
             }
 
-            public ModelInstance Model { get; }
+            public MPD_ModelInstance Model { get; }
             public int Index { get; }
         };
 
         // Helper class to index PData's
         // TODO: This should be the other way around!!!! Make an array first, and let the properties access it
         public class PDataAccessorCollection : IEnumerable<PDataAccessor> {
-            public PDataAccessorCollection(ModelInstance model) {
+            public PDataAccessorCollection(MPD_ModelInstance model) {
                 _accessors = new PDataAccessor[] {
                     new PDataAccessor(model, 0),
                     new PDataAccessor(model, 1),

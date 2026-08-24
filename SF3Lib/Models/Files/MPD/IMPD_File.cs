@@ -61,10 +61,10 @@ namespace SF3.Models.Files.MPD {
         IPalette GetPalette(MPD_PaletteType paletteType);
 
         /// <summary>
-        /// Fetches the PDataModel for a PDATA that looks like a tree, if one could be found.
+        /// Fetches the MPD_PDataStruct for a PDATA that looks like a tree, if one could be found.
         /// </summary>
         /// <returns>A PDataModel reference if one with matching criteria was found. Otherwise, 'null'.</returns>
-        PDataStruct GetTreePData0();
+        MPD_PDataStruct GetTreePData0();
 
         /// <summary>
         /// Replaces a set of textures based on appropriately named files (e.g, Texture_0A.png).

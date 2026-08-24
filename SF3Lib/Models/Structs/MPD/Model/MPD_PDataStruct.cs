@@ -5,13 +5,14 @@ using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
-using SF3.Models.Tables.MPD.Model;
+using SF3.Models.Structs.Shared.SGL;
+using SF3.Models.Tables.Shared.SGL;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class PDataStruct : Shared.PDataStruct, IMPD_ModelLoD {
-        public PDataStruct(IByteData data, int id, string name, int address,
+    public class MPD_PDataStruct : PDataStruct, IMPD_ModelLoD {
+        public MPD_PDataStruct(IByteData data, int id, string name, int address,
             MPD_CollectionType collection, IMPD_File mpdFile, int? chunkIndex, int modelId, int lod, int refs
         ) : base(data, id, name, address, 0x14) {
             Collection    = collection;
@@ -58,7 +59,7 @@ namespace SF3.Models.Structs.MPD.Model {
         public uint RamAddress { get; set; }
 
         private class MockFace : ISGL_ModelFace {
-            public MockFace(PDataStruct pdata, int index) {
+            public MockFace(MPD_PDataStruct pdata, int index) {
                 PData = pdata;
                 Index = index;
             }
@@ -99,7 +100,7 @@ namespace SF3.Models.Structs.MPD.Model {
                 }
             }
 
-            public readonly PDataStruct PData;
+            public readonly MPD_PDataStruct PData;
             public readonly int Index;
 
             public PolygonStruct Polygon => ((Index < PData.Polygons?.Count) == true) ? PData.Polygons[Index] : null;

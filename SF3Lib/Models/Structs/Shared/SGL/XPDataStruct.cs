@@ -2,7 +2,7 @@
 using CommonLib.SGL;
 using SF3.ByteData;
 
-namespace SF3.Models.Structs.Shared {
+namespace SF3.Models.Structs.Shared.SGL {
     public class XPDataStruct : PDataStruct, IXPDATA {
         private readonly int _vertexNormalsOffsetAddr;
 

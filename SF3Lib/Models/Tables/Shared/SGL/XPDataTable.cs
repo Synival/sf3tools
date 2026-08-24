@@ -1,7 +1,7 @@
 using SF3.ByteData;
-using SF3.Models.Structs.Shared;
+using SF3.Models.Structs.Shared.SGL;
 
-namespace SF3.Models.Tables.Shared {
+namespace SF3.Models.Tables.Shared.SGL {
     public class XPDataTable : TerminatedTable<XPDataStruct> {
         protected XPDataTable(IByteData data, string name, int address)
         : base(data, name, address, terminatedBytes: 4, maxSize: 1000) {
