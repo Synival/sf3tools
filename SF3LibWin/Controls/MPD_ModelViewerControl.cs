@@ -2,14 +2,16 @@
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Imaging;
+using CommonLib.SGL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
+using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
-using SF3.Win.OpenGL.Renderers.MPD;
+using SF3.Win.OpenGL.Renderers.SGL_Model;
 using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
@@ -31,17 +33,19 @@ namespace SF3.Win.Controls {
             GL.BlendEquationSeparate(BlendEquationMode.FuncAdd, BlendEquationMode.Max);
 
             _general  = new GeneralResources();
+            _screen   = new ScreenResources();
             _models   = new MPD_ModelResources(false, false);
             _lighting = new LightingResources();
 
             _general.Init();
+            _screen.Init();
             _models.Init();
             _lighting.Init();
 
-            _renderer = new MPD_Renderer();
+            _renderer = new SGL_ModelRenderer();
 
-            if (MPD_File != null && Models != null && _mpdModel != null)
-                _models.Update(MPD_File, Models, _mpdModel);
+            if (MPD_File != null && Models != null && _sglModel != null)
+                _models.Update(MPD_File, Models, _sglModel);
 
             var lighting = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
@@ -84,11 +88,13 @@ namespace SF3.Win.Controls {
 
             Disposed += (s, e) => {
                 _general?.Dispose();
+                _screen?.Dispose();
                 _models?.Dispose();
                 _lighting?.Dispose();
                 _timer?.Dispose();
 
                 _general  = null;
+                _screen   = null;
                 _models   = null;
                 _lighting = null;
                 _timer    = null;
@@ -155,12 +161,13 @@ namespace SF3.Win.Controls {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.DrawScene(
-                new MPD_RendererResources() {
+                new SGL_ModelRendererResources() {
                     General  = _general,
-                    Lighting = _lighting,
+                    Screen   = _screen,
                     Models   = _models,
+                    Lighting = _lighting,
                 },
-                new MPD_RendererOptions() {
+                new RendererOptions() {
                     DrawModels      = true,
                     DrawExtraModels = true,
                     ApplyLighting   = true,
@@ -183,21 +190,21 @@ namespace SF3.Win.Controls {
         public IMPD MPD_File { get; private set; } = null;
         public IMPD_ModelCollection Models { get; private set; } = null;
 
-        private IMPD_ModelLoD _mpdModel = null;
+        private ISGL_Model _sglModel = null;
 
         public void Update(
-            IMPD mpdFile, IMPD_ModelLoD mpdModel,
+            IMPD mpdFile, ISGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
-            if (_mpdModel == mpdModel)
+            if (_sglModel == sglModel)
                 return;
 
             MPD_File = mpdFile;
-            _mpdModel = mpdModel;
-            var collection = mpdModel?.Collection;
-            Models = (mpdModel == null || collection == null) ? null
-                : mpdFile.ModelCollections.TryGetValue(collection.Value, out var mcOut)
+            _sglModel = sglModel;
+            var collection = sglModel?.ModelCollectionID;
+            Models = (sglModel == null || collection == null) ? null
+                : mpdFile.ModelCollections.TryGetValue((MPD_CollectionType) collection.Value, out var mcOut)
                 ? mcOut : null;
             _vertices = null;
 
@@ -207,8 +214,8 @@ namespace SF3.Win.Controls {
 
             if (_models != null) {
                 _models.Reset();
-                if (MPD_File != null && Models != null && mpdModel != null) {
-                    _models.Update(MPD_File, Models, mpdModel, forceSemiTransparent: false, isHideMesh: false,
+                if (MPD_File != null && Models != null && sglModel != null) {
+                    _models.Update(MPD_File, Models, sglModel, forceSemiTransparent: false, isHideMesh: false,
                         rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
 
                     var verticesMatrix =
@@ -217,7 +224,7 @@ namespace SF3.Win.Controls {
                         Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
                         Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
 
-                    _vertices = mpdModel.Vertices.Select(x => x.ToVector3() * verticesMatrix).ToArray();
+                    _vertices = sglModel.Vertices.Select(x => x.ToVector3() * verticesMatrix).ToArray();
 
                     _minX = _vertices.Min(x => x.X) / 32.0f;
                     _minY = _vertices.Min(x => x.Y) / 32.0f;
@@ -282,10 +289,11 @@ namespace SF3.Win.Controls {
         private Matrix4 _viewMatrix;
 
         private GeneralResources   _general  = null;
+        private ScreenResources    _screen   = null;
         private MPD_ModelResources _models   = null;
         private LightingResources  _lighting = null;
 
-        private MPD_Renderer _renderer = null;
+        private SGL_ModelRenderer _renderer = null;
         private Timer _timer = null;
 
         private static Timer _globalTimer = null;
