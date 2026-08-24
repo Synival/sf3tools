@@ -185,16 +185,17 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
 
         public void DrawControlFocusedBox(MPD_RendererResources resources) => FocusedBoxRenderer.Draw(resources.General, resources.Screen);
 
+        public FocusedBoxRenderer FocusedBoxRenderer { get; }
+        public GradientRenderer GradientRenderer { get; }
+        public ModelRenderer ModelRenderer { get; }
+
         public MPD_CollisionLineRenderer CollisionLineRenderer { get; }
         public MPD_SurfaceModelRenderer SurfaceModelRenderer { get; }
-        public GradientRenderer GradientRenderer { get; }
         public MPD_SkyRenderer SkyRenderer { get; }
         public MPD_GroundRenderer GroundRenderer { get; }
         public MPD_ActorRenderer ActorRenderer { get; }
-        public MPD_ModelRenderer ModelRenderer { get; }
         public MPD_BoundaryRenderer BoundaryRenderer { get; }
         public MPD_ZoneRenderer ZoneRenderer { get; }
         public MPD_OutlineRenderer OutlineRenderer { get; }
-        public FocusedBoxRenderer FocusedBoxRenderer { get; }
     }
 }

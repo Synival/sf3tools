@@ -12,7 +12,7 @@ using static SF3.Win.Controls.MPD_ViewerGLControl;
 
 namespace SF3.Win.OpenGL.Renderers.MPD {
     public class MPD_OutlineRenderer {
-        public MPD_OutlineRenderer(MPD_ModelRenderer modelRenderer, MPD_ActorRenderer actorRenderer) {
+        public MPD_OutlineRenderer(ModelRenderer modelRenderer, MPD_ActorRenderer actorRenderer) {
             ModelRenderer = modelRenderer;
             ActorRenderer = actorRenderer;
         }
@@ -218,6 +218,6 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         }
 
         public MPD_ActorRenderer ActorRenderer { get; }
-        public MPD_ModelRenderer ModelRenderer { get; }
+        public ModelRenderer ModelRenderer { get; }
     }
 }
