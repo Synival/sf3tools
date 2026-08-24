@@ -4,7 +4,7 @@ using SF3.MPD.Interfaces;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views.MPD {
-    public class PData3DView : ControlView<MPD_ModelViewerControl> {
+    public class PData3DView : ControlView<SGL_ModelViewerControl> {
         public PData3DView(string name, IMPD mpdFile) : base(name) {
             MPD_File = mpdFile;
         }

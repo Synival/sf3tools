@@ -1,16 +1,16 @@
 ﻿using System.Windows.Forms;
+using CommonLib.Imaging;
 using CommonLib.SGL;
-using SF3.MPD.Interfaces;
 using SF3.Win.Controls;
 
-namespace SF3.Win.Views.MPD {
-    public class Model3DView : ControlView<MPD_ModelViewerControl> {
-        public Model3DView(string name, IMPD mpdFile) : base(name) {
-            MPD_File = mpdFile;
+namespace SF3.Win.Views {
+    public class Model3DView : ControlView<SGL_ModelViewerControl> {
+        public Model3DView(string name, ITextureContainer texContainer) : base(name) {
+            TextureContainer = texContainer;
         }
 
-        public Model3DView(string name, IMPD mpdFile, ISGL_ModelInstance modelInstance) : base(name) {
-            MPD_File = mpdFile;
+        public Model3DView(string name, ITextureContainer texContainer, ISGL_ModelInstance modelInstance) : base(name) {
+            TextureContainer = texContainer;
             _modelInstance = modelInstance;
             UpdateSGL_Model();
         }
@@ -29,7 +29,7 @@ namespace SF3.Win.Views.MPD {
             UpdateViewerControl();
         }
 
-        public IMPD MPD_File { get; }
+        public ITextureContainer TextureContainer { get; }
 
         private ISGL_ModelInstance _modelInstance = null;
         public ISGL_ModelInstance Model {
@@ -51,9 +51,9 @@ namespace SF3.Win.Views.MPD {
 
         private void UpdateViewerControl() {
             if (_modelInstance == null)
-                Control.Update(MPD_File, _sglModel);
+                Control.Update(TextureContainer, _sglModel);
             else
-                Control.Update(MPD_File, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
+                Control.Update(TextureContainer, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
         }
     }
 }

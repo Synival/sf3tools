@@ -1,5 +1,5 @@
 ﻿namespace SF3.Win.Controls {
-    partial class MPD_ModelViewerControl {
+    partial class SGL_ModelViewerControl {
         /// <summary> 
         /// Required designer variable.
         /// </summary>

@@ -6,7 +6,6 @@ using CommonLib.SGL;
 using OpenTK.GLControl;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.MPD.Interfaces;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.SGL_Model;
@@ -14,8 +13,8 @@ using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 
 namespace SF3.Win.Controls {
-    public partial class MPD_ModelViewerControl : GLControl {
-        public MPD_ModelViewerControl() {
+    public partial class SGL_ModelViewerControl : GLControl {
+        public SGL_ModelViewerControl() {
             InitializeComponent();
             MaximumSize = MinimumSize = new System.Drawing.Size(320, 320);
         }
@@ -42,8 +41,8 @@ namespace SF3.Win.Controls {
 
             _renderer = new SGL_ModelRenderer();
 
-            if (MPD_File != null && _sglModel != null)
-                Update(MPD_File, _sglModel);
+            if (TextureContainer != null && _sglModel != null)
+                Update(TextureContainer, _sglModel);
 
             var lighting = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
@@ -185,30 +184,28 @@ namespace SF3.Win.Controls {
             SwapBuffers();
         }
 
-        public IMPD MPD_File { get; private set; } = null;
+        public ITextureContainer TextureContainer { get; private set; } = null;
         private ISGL_Model _sglModel = null;
 
         public void Update(
-            IMPD mpdFile, ISGL_Model sglModel,
+            ITextureContainer texContainer, ISGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
             if (_sglModel == sglModel)
                 return;
 
-            MPD_File = mpdFile;
-            _sglModel = sglModel;
-            var collection = sglModel?.ModelCollectionID;
-            _vertices = null;
-
-            _size = 1.0f;
-            _center = new Vector3();
-            _dist = 1.0f;
+            TextureContainer = texContainer;
+            _sglModel        = sglModel;
+            _vertices        = null;
+            _size            = 1.0f;
+            _center          = new Vector3();
+            _dist            = 1.0f;
 
             if (_models != null) {
                 _models.Reset();
-                if (MPD_File != null && sglModel != null) {
-                    var texturesById = mpdFile.GetAnimatableTexturesByModelCollectionID(collection.Value);
+                if (TextureContainer != null && sglModel != null) {
+                    var texturesById = texContainer.GetAnimatableTexturesByModelCollectionID(sglModel?.ModelCollectionID ?? -1);
                     _models.Update(
                         sglModel, texturesById, () => {
                             return new SGL_ModelInstance((mi, lod) => sglModel) {
