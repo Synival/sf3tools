@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
-using CommonLib.Types;
+using CommonLib.SGL;
 using Newtonsoft.Json.Linq;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
@@ -66,6 +66,7 @@ namespace SF3.MPD.Project {
             }
         }
 
+        ISGL_Model ISGL_ModelCollection.GetModel(int id, int lod) => GetModel(id, lod);
         public IMPD_ModelLoD GetModel(int id, int lod) {
             var model = Models.FirstOrDefault(x => x.ModelID == id);
             if (model == null || lod < 0 || lod >= model.LevelsOfDetail)

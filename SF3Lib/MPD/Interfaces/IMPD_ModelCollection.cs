@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using CommonLib.SGL;
 using SF3.Imaging;
 using SF3.Types;
 
 namespace SF3.MPD.Interfaces {
-    public interface IMPD_ModelCollection {
+    public interface IMPD_ModelCollection : ISGL_ModelCollection {
         /// <summary>
         /// Identifier for this collection of models.
         /// </summary>
@@ -15,7 +16,7 @@ namespace SF3.MPD.Interfaces {
         /// <param name="id">ID of the model to fetch.</param>
         /// <param name="lod">Level-of-detail index.</param>
         /// <returns>A model in a structure compatible with SGL.</returns>
-        IMPD_ModelLoD GetModel(int id, int lod);
+        new IMPD_ModelLoD GetModel(int id, int lod);
 
         /// <summary>
         /// All models that belong to this collection.

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CommonLib.SGL;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
@@ -17,6 +18,7 @@ namespace SF3.Models.Files.MPD {
 
         public IReadOnlyList<IMPD_ModelInstance> ModelInstances => new IMPD_ModelInstance[0];
 
+        ISGL_Model ISGL_ModelCollection.GetModel(int id, int lod) => GetModel(id, lod);
         public IMPD_ModelLoD GetModel(int id, int lod) => null;
 
         private bool _gotTextures = false;

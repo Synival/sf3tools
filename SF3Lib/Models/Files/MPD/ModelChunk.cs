@@ -9,6 +9,7 @@ using SF3.Models.Tables.MPD.Model;
 using SF3.Types;
 using SF3.Imaging;
 using SF3.MPD.Interfaces;
+using CommonLib.SGL;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {
@@ -294,6 +295,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
+        ISGL_Model ISGL_ModelCollection.GetModel(int id, int lod) => GetModel(id, lod);
         public IMPD_ModelLoD GetModel(int id, int lod)
             => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ModelID == id && x.LevelOfDetail == lod);
 
