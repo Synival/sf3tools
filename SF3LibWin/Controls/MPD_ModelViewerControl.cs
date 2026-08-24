@@ -44,7 +44,7 @@ namespace SF3.Win.Controls {
 
             _renderer = new SGL_ModelRenderer();
 
-            if (MPD_File != null && Models != null && _sglModel != null)
+            if (MPD_File != null && _sglModel != null)
                 Update(MPD_File, _sglModel);
 
             var lighting = new Palette(Enumerable.Range(0, 32)
@@ -188,8 +188,6 @@ namespace SF3.Win.Controls {
         }
 
         public IMPD MPD_File { get; private set; } = null;
-        public IMPD_ModelCollection Models { get; private set; } = null;
-
         private ISGL_Model _sglModel = null;
 
         public void Update(
@@ -203,9 +201,6 @@ namespace SF3.Win.Controls {
             MPD_File = mpdFile;
             _sglModel = sglModel;
             var collection = sglModel?.ModelCollectionID;
-            Models = (sglModel == null || collection == null) ? null
-                : mpdFile.ModelCollections.TryGetValue((MPD_CollectionType) collection.Value, out var mcOut)
-                ? mcOut : null;
             _vertices = null;
 
             _size = 1.0f;
@@ -214,7 +209,7 @@ namespace SF3.Win.Controls {
 
             if (_models != null) {
                 _models.Reset();
-                if (MPD_File != null && Models != null && sglModel != null) {
+                if (MPD_File != null && sglModel != null) {
                     var texturesById = mpdFile.GetTextureDictionaryForCollection((MPD_CollectionType) collection.Value);
                     _models.Update(
                         sglModel, texturesById, () => {
@@ -272,10 +267,12 @@ namespace SF3.Win.Controls {
                 return;
 
             // TODO: this doesn't update at 30fps, please fix!
-            if (_models != null && Models != null)
-                foreach (var modelGroup in _models.ModelGroupsByIDByCollection[(int) Models.Collection].Values)
+            if (_sglModel != null) {
+                var collectionId = _sglModel.ModelCollectionID;
+                foreach (var modelGroup in _models.ModelGroupsByIDByCollection[collectionId].Values)
                     foreach (var model in modelGroup.Models)
-                        model.UpdateAnimatedTextures();
+                        _ = model.UpdateAnimatedTextures();
+            }
 
             Invalidate();
         }
