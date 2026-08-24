@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -122,5 +125,16 @@ namespace SF3.MPD.Extensions {
                 { "Scenario1UnknownTable2",  project.Scenario1UnknownTable2?.Select(x => (short) x)?.ToArray()?.ToJArray() },
             };
         }
+
+        public static Dictionary<int, IAnimatableTexture> GetTextureDictionaryForCollection(this IMPD mpdFile, MPD_CollectionType collectionId) {
+            var hasIgnored = mpdFile?.Settings?.AreIgnoredTexturesDummiedOut != true;
+            var collection = (mpdFile.ModelCollections?.TryGetValue(collectionId, out var collectionValue) == true) ? collectionValue : null;
+            return (collection?.Textures ?? new IMPD_AnimatableTexture[0])
+                .Where(x => !hasIgnored || !x.IsIgnored)
+                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
+        }
+
+        public static float? GetForceSemiTransparencyAlpha(this IMPD mpdFile)
+            => 1.0f - (mpdFile.BinaryReproductionFlags.PaletteAdjustmentIsTruncated ? 0x0F : mpdFile.Settings.ShadowTransparency / (float) 0x1F);
     }
 }

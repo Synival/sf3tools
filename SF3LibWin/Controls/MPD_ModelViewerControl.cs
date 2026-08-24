@@ -9,11 +9,11 @@ using OpenTK.Mathematics;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
-using SF3.Win.OpenGL.GLResources.MPD;
 using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.SGL_Model;
 using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
+using SF3.MPD.Extensions;
 
 namespace SF3.Win.Controls {
     public partial class MPD_ModelViewerControl : GLControl {
@@ -215,7 +215,7 @@ namespace SF3.Win.Controls {
             if (_models != null) {
                 _models.Reset();
                 if (MPD_File != null && Models != null && sglModel != null) {
-                    var texturesById = MPD_ModelResources.GetTextureDictionaryByCollection(Models, mpdFile);
+                    var texturesById = mpdFile.GetTextureDictionaryForCollection((MPD_CollectionType) collection.Value);
                     _models.Update(
                         sglModel, texturesById, () => {
                             return new SGL_ModelInstance((mi, lod) => sglModel) {

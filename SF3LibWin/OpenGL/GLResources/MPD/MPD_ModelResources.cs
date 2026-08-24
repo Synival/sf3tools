@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CommonLib.Imaging;
-using CommonLib.SGL;
 using SF3.Types;
 using SF3.MPD.Interfaces;
-using SF3.MPD.Project;
 using SF3.MPD.Extensions;
 using SF3.Win.OpenGL.GLResources.Shared;
 
@@ -20,23 +17,13 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
         private void InitDictsForType(MPD_CollectionType collection)
             => InitDictsForType((int) collection);
 
-        public static Dictionary<int, IAnimatableTexture> GetTextureDictionaryByCollection(IMPD_ModelCollection modelCollection, IMPD mpdFile) {
-            var hasIgnored = mpdFile?.Settings?.AreIgnoredTexturesDummiedOut != true;
-            return (modelCollection?.Textures ?? [])
-                .Where(x => !hasIgnored || !x.IsIgnored)
-                .ToDictionary(x => x.TextureID, x => (IAnimatableTexture) x);
-        }
-
-        private float? GetForceSemiTransparencyAlpha(IMPD mpdFile)
-            => 1.0f - (mpdFile.BinaryReproductionFlags.PaletteAdjustmentIsTruncated ? 0x0F : mpdFile.Settings.ShadowTransparency / (float) 0x1F);
-
         public void Update(IMPD mpdFile) {
             Reset();
 
             if (mpdFile?.ModelCollections == null)
                 return;
 
-            var isForcedSemiTransparentAlpha = GetForceSemiTransparencyAlpha(mpdFile);
+            var isForcedSemiTransparentAlpha = mpdFile.GetForceSemiTransparencyAlpha();
 
             var modelInstanceList = new List<IMPD_ModelInstance>();
             foreach (var mc in mpdFile.ModelCollections.Values) {
@@ -74,7 +61,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     .Distinct()
                     .ToArray();
 
-                var texturesById = GetTextureDictionaryByCollection(mc, mpdFile);
+                var texturesById = mpdFile.GetTextureDictionaryForCollection(mc.Collection);
 
                 foreach (var id in uniqueModelIDs) {
                     if (id == -1)
