@@ -16,7 +16,8 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 _ = shader.UpdateUniform("alwaysShow", true);
 
             GL.Enable(EnableCap.PolygonOffsetFill);
-            GL.PolygonOffset(-4.0f, -4.0f);
+            GL.PolygonOffset(-0.4f, -0.4f);
+            GL.DepthFunc(DepthFunction.Lequal);
 
             var (sin, cos) = Math.SinCos(MathHelper.DegreesToRadians(cameraYaw));
             var sortedModels = collisionModels.IndividualModels
@@ -53,6 +54,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 }
             }
 
+            GL.DepthFunc(DepthFunction.Less);
             GL.Disable(EnableCap.PolygonOffsetFill);
         }
     }

@@ -165,7 +165,8 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Enable(EnableCap.PolygonOffsetLine);
-            GL.PolygonOffset(-2.0f, -2.0f);
+            GL.PolygonOffset(-0.2f, -0.2f);
+            GL.DepthFunc(DepthFunction.Lequal);
 
             using (general.WireframeShader.Use())
             using (general.TileWireframeTexture.Use(TextureUnit.Texture1)) {
@@ -176,6 +177,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     SurfaceModelRenderer.DrawWireframe(general, surfaceModel);
             }
 
+            GL.DepthFunc(DepthFunction.Less);
             GL.Disable(EnableCap.PolygonOffsetLine);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
         }

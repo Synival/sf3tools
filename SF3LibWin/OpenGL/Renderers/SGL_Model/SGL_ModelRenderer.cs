@@ -90,13 +90,15 @@ namespace SF3.Win.OpenGL.Renderers.SGL_Model {
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Enable(EnableCap.PolygonOffsetLine);
-            GL.PolygonOffset(-2.0f, -2.0f);
+            GL.PolygonOffset(-0.1f, -0.1f);
+            GL.DepthFunc(DepthFunction.Lequal);
 
             using (general.WireframeShader.Use())
             using (general.TileWireframeTexture.Use(TextureUnit.Texture1)) {
                 ModelRenderer.DrawWireframe(general, models, options, cameraYaw, cameraPitch, modelsWithGroups);
             }
 
+            GL.DepthFunc(DepthFunction.Less);
             GL.Disable(EnableCap.PolygonOffsetLine);
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
         }
