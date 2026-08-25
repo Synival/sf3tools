@@ -5,7 +5,7 @@ using SF3.ByteData;
 using SF3.Models.Structs.Shared;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCTexture : TextureStructBase {
+    public class PCTexture : TextureStructBase, IAnimatableTexture {
         private readonly int _widthAddr;
         private readonly int _heightAddr;
         private readonly int _dataOffsetAddr;
@@ -23,6 +23,10 @@ namespace SF3.Models.Structs.X8PC {
 
         public override bool HasImage => true;
         public override bool CanLoadImage => true;
+
+        public int TextureCollectionID => 0;
+        public int TextureID => ID;
+        public IAnimatedTexture Animation => null;
 
         [TableViewModelColumn(addressField: nameof(_dataOffsetAddr), displayOrder: 0.00f, displayFormat: "X2")]
         [BulkCopy]
