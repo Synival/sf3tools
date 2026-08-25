@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Arrays;
+using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
@@ -10,7 +11,7 @@ using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PolyChar : Struct, ITableContainer {
+    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection {
         public PolyChar(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0 /* not applicable */) {
             var tables = new List<ITable>();
@@ -35,6 +36,8 @@ namespace SF3.Models.Structs.X8PC {
             // Initialize structs and tables in chunks.
             TexDefChunkHeader = new PCTexDefChunkHeader(TexDefChunk.DecompressedData, 0, nameof(TexDefChunkHeader), 0);
             TextureTable      = PCTextureTable.Create(TexDefChunk.DecompressedData, TexDataChunk.DecompressedData.Data, "Textures", (int) TexDefChunkHeader.TexDefsOffset, (int) TexDefChunkHeader.NumTextures);
+            _animatableTextureDictionary = TextureTable.ToDictionary(x => x.ID, x => (IAnimatableTexture) x);
+
             ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
             XPDataListTable   = XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset);
             XPDataTables      = XPDataListTable.Select(x => PC_SGL_Model_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this)).ToArray();
@@ -65,8 +68,13 @@ namespace SF3.Models.Structs.X8PC {
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
+
             tables.Add(XPDataListTable);
             tables.AddRange(XPDataTables);
+            tables.AddRange(VertexTablesByOffset.Values);
+            tables.AddRange(PolygonTablesByOffset.Values);
+            tables.AddRange(AttrTablesByOffset.Values);
+            tables.AddRange(VertexNormalTablesByOffset.Values);
 
             Tables = tables.ToArray();
         }
@@ -119,6 +127,10 @@ namespace SF3.Models.Structs.X8PC {
 
             return true;
         }
+
+        private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;
+        public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId)
+            => _animatableTextureDictionary;
 
         public IEnumerable<ITable> Tables { get; private set; }
 
