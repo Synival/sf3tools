@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Arrays;
 using SF3.ByteData;
+using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.Shared.SGL;
@@ -35,8 +36,26 @@ namespace SF3.Models.Structs.X8PC {
             TexDefChunkHeader = new PCTexDefChunkHeader(TexDefChunk.DecompressedData, 0, nameof(TexDefChunkHeader), 0);
             TextureTable      = PCTextureTable.Create(TexDefChunk.DecompressedData, TexDataChunk.DecompressedData.Data, "Textures", (int) TexDefChunkHeader.TexDefsOffset, (int) TexDefChunkHeader.NumTextures);
             ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
-            XPDataListTable   = XPDataListTable.Create(ModelChunk.DecompressedData, "XPDataLists", (int) ModelChunkHeader.ModelsOffset);
-            XPDataTables      = XPDataListTable.Select(x => XPDataTable.Create(ModelChunk.DecompressedData, $"XPDatas{x.ID}", x.XPDataListOffset)).ToArray();
+            XPDataListTable   = XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset);
+            XPDataTables      = XPDataListTable.Select(x => XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset)).ToArray();
+
+            VertexTablesByOffset = FetchTablesByOffset(
+                XPDataTables,
+                x => (x.VertexCount, (int) x.VerticesOffset),
+                (count, offset, index) => VertexTable.Create(ModelChunk.DecompressedData, $"{nameof(VertexTable)}_{index:D3} @{offset:X4}", offset, count)
+            );
+
+            PolygonTablesByOffset = FetchTablesByOffset(
+                XPDataTables,
+                x => (x.FaceCount, (int) x.PolygonsOffset),
+                (count, offset, index) => PolygonTable.Create(ModelChunk.DecompressedData, $"{nameof(PolygonTable)}_{index:D3} @{offset:X4}", offset, count)
+            );
+
+            AttrTablesByOffset = FetchTablesByOffset(
+                XPDataTables,
+                x => (x.FaceCount, (int) x.AttributesOffset),
+                (count, offset, index) => AttrTable.Create(ModelChunk.DecompressedData, $"{nameof(AttrTable)}_{index:D3} @{offset:X4}", offset, count)
+            );
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
@@ -44,6 +63,19 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(XPDataTables);
 
             Tables = tables.ToArray();
+        }
+
+        private static Dictionary<int, T> FetchTablesByOffset<T>(XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
+            return tables
+                .SelectMany(x => x.Select(y => countOffsetFetcher(y)))
+                .OrderBy(x => x.Offset)
+                .ThenByDescending(x => x.Count)
+                .GroupBy(x => x.Offset)
+                .Select((x, i) => (Model: x.First(), Index: i))
+                .ToDictionary(
+                    x => x.Model.Offset,
+                    x => tableMaker(x.Model.Count, x.Model.Offset, x.Index)
+                );
         }
 
         public bool UpdateAndCommitChunks() {
@@ -85,11 +117,16 @@ namespace SF3.Models.Structs.X8PC {
         public IEnumerable<ITable> Tables { get; private set; }
 
         public PCHeader Header { get; private set; }
+
         public PCTexDefChunkHeader TexDefChunkHeader { get; private set; }
         public PCTextureTable TextureTable { get; private set; }
+
         public PCModelChunkHeader ModelChunkHeader { get; private set; }
         public XPDataListTable XPDataListTable { get; private set; }
         public XPDataTable[] XPDataTables { get; private set; }
+        public Dictionary<int, VertexTable> VertexTablesByOffset { get; }
+        public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
+        public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }

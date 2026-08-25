@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.Shared.SGL {
             => Create(() => new AttrTable(data, name, address, size));
 
         public override bool Load()
-            => Load((id, address) => new AttrStruct(Data, id, "ATTR" + id.ToString("D4"), address));
+            => Load((id, address) => new AttrStruct(Data, id, "ATTR_" + id.ToString("D4"), address));
     }
 }

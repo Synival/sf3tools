@@ -12,7 +12,7 @@ namespace SF3.Models.Tables.Shared.SGL {
 
         public override bool Load() {
             return Load(
-                (id, addr) => new XPDataStruct(Data, id, "XPData" + id.ToString("D3"), addr),
+                (id, addr) => new XPDataStruct(Data, id, "XPDATA_" + id.ToString("D3"), addr),
                 (rows, prevRow) => {
                     var data = prevRow.Data.GetInt32(prevRow.Address);
                     return data != -1;

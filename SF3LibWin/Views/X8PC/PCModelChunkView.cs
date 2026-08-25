@@ -8,8 +8,11 @@ namespace SF3.Win.Views.X8PC {
         public PCModelChunkView(string name, PolyChar model, INameGetterContext ngc) : base(name) {
             NameGetterContext = ngc;
             HeaderView        = new DataModelView("Header", model?.ModelChunk, ngc, modelType: typeof(PCModelChunkHeader));
-            XPDataListsView   = new TableView("XPData Pointers", model?.XPDataListTable, ngc, modelType: typeof(XPDataListStruct));
-            XPDataTablesView  = new XPDataTablesView("XPDatas", model, ngc);
+            XPDataListsView   = new TableView("XPDATA Pointers", model?.XPDataListTable, ngc, modelType: typeof(XPDataListStruct));
+            XPDataTablesView  = new XPDataTablesView("XPDATAs", model, ngc);
+            VertexTablesView  = new VertexTablesView("VERTEXes", model, ngc);
+            PolygonTablesView = new PolygonTablesView("POLYGONs", model, ngc);
+            AttrTablesView    = new AttrTablesView("ATTRs", model, ngc);
             Model             = model;
         }
 
@@ -22,6 +25,9 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(HeaderView);
             CreateChild(XPDataListsView);
             CreateChild(XPDataTablesView);
+            CreateChild(VertexTablesView);
+            CreateChild(PolygonTablesView);
+            CreateChild(AttrTablesView);
 
             return Control;
         }
@@ -32,9 +38,12 @@ namespace SF3.Win.Views.X8PC {
             set {
                 if (_model != value) {
                     _model = value;
-                    HeaderView.Model       = _model?.ModelChunkHeader;
-                    XPDataListsView.Table  = _model?.XPDataListTable;
-                    XPDataTablesView.Model = _model;
+                    HeaderView.Model        = _model?.ModelChunkHeader;
+                    XPDataListsView.Table   = _model?.XPDataListTable;
+                    XPDataTablesView.Model  = _model;
+                    VertexTablesView.Model  = _model;
+                    PolygonTablesView.Model = _model;
+                    AttrTablesView.Model    = _model;
                 }
             }
         }
@@ -43,5 +52,8 @@ namespace SF3.Win.Views.X8PC {
         public DataModelView HeaderView { get; }
         public TableView XPDataListsView { get; }
         public XPDataTablesView XPDataTablesView { get; }
+        public VertexTablesView VertexTablesView { get; }
+        public PolygonTablesView PolygonTablesView { get; }
+        public AttrTablesView AttrTablesView { get; }
     }
 }

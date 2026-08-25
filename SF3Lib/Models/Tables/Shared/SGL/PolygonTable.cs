@@ -10,6 +10,6 @@ namespace SF3.Models.Tables.Shared.SGL {
             => Create(() => new PolygonTable(data, name, address, size));
 
         public override bool Load()
-            => Load((id, address) => new PolygonStruct(Data, id, "POLYGON" + id.ToString("D4"), address));
+            => Load((id, address) => new PolygonStruct(Data, id, "POLYGON_" + id.ToString("D4"), address));
     }
 }

@@ -12,7 +12,7 @@ namespace SF3.Models.Tables.Shared {
 
         public override bool Load() {
             return Load(
-                (id, addr) => new XPDataListStruct(Data, id, "XPDataList" + id.ToString("D3"), addr),
+                (id, addr) => new XPDataListStruct(Data, id, "XPDATA_List_" + id.ToString("D3"), addr),
                 (rows, prevRow) => prevRow.XPDataListOffset != -1,
                 false
             );

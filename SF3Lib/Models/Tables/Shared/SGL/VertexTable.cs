@@ -12,7 +12,7 @@ namespace SF3.Models.Tables.Shared.SGL {
             => Create(() => new VertexTable(data, name, address, size));
 
         public override bool Load()
-            => Load((id, address) => new VertexStruct(Data, id, "VERTEX" + id.ToString("D4"), address));
+            => Load((id, address) => new VertexStruct(Data, id, "VERTEX_" + id.ToString("D4"), address));
 
         IEnumerator<VECTOR> IEnumerable<VECTOR>.GetEnumerator() {
             foreach (var row in Rows)
