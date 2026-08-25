@@ -5,7 +5,7 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class SGL_Model3DView : ControlView<SGL_ModelViewerControl> {
-        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model sglModel = null, bool forceLighting = false)
+        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model sglModel = null, bool? forceLighting = null)
         : base(name) {
             _texCollection = texContainer;
             _sglModel      = sglModel;
@@ -42,6 +42,6 @@ namespace SF3.Win.Views {
             }
         }
 
-        private readonly bool _forceLighting;
+        private readonly bool? _forceLighting;
     }
 }

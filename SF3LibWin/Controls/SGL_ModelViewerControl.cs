@@ -277,7 +277,7 @@ namespace SF3.Win.Controls {
         public static float Yaw { get; private set; }
         public float Pitch { get; private set; }
 
-        public bool ForceLighting { get; set; }
+        public bool? ForceLighting { get; set; }
 
         private float _minX = 0f;
         private float _minY = 0f;

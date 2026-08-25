@@ -11,7 +11,7 @@ namespace SF3.Win.Views {
     public class SGL_ModelTableView<TStruct, TTable> : ControlSpaceView
     where TStruct : ISGL_Model
     where TTable : ITable {
-        public SGL_ModelTableView(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool forceLighting = false)
+        public SGL_ModelTableView(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null)
         : base(name) {
             _textureCollection = texCollection;
             _table             = table;
