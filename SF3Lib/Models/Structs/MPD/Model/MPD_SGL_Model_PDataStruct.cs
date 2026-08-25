@@ -5,7 +5,6 @@ using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.Shared.SGL;
-using SF3.Models.Tables.Shared.SGL;
 using SF3.MPD.Interfaces;
 using SF3.Types;
 
@@ -53,8 +52,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: -0.1f, isPointer: true, isReadOnly: true)]
         public uint RamAddress { get; set; }
 
-        public override IReadOnlyList<VECTOR> Vertices => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
-        public override PolygonTable Polygons => (Chunk?.PolygonTablesByMemoryAddress?.TryGetValue(PolygonsOffset, out var polygons) == true) ? polygons : null;
-        public override AttrTable Attributes => (Chunk?.AttrTablesByMemoryAddress?.TryGetValue(AttributesOffset, out var attributes) == true) ? attributes : null;
+        public override IReadOnlyList<VECTOR> Vertices        => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
+        public override IReadOnlyList<PolygonStruct> Polygons => (Chunk?.PolygonTablesByMemoryAddress?.TryGetValue(PolygonsOffset, out var polygons) == true) ? polygons : null;
+        public override IReadOnlyList<AttrStruct> Attributes  => (Chunk?.AttrTablesByMemoryAddress?.TryGetValue(AttributesOffset, out var attributes) == true) ? attributes : null;
     }
 }

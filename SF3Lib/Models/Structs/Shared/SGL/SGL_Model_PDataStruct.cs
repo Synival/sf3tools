@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CommonLib.SGL;
 using SF3.ByteData;
-using SF3.Models.Tables.Shared.SGL;
 
 namespace SF3.Models.Structs.Shared.SGL {
     public abstract class SGL_Model_PDataStruct : PDataStruct, ISGL_Model {
@@ -82,8 +81,8 @@ namespace SF3.Models.Structs.Shared.SGL {
         public abstract int LevelOfDetail { get; }
 
         public abstract IReadOnlyList<VECTOR> Vertices { get; }
-        public abstract PolygonTable Polygons { get; }
-        public abstract AttrTable Attributes { get; }
+        public abstract IReadOnlyList<PolygonStruct> Polygons { get; }
+        public abstract IReadOnlyList<AttrStruct> Attributes { get; }
 
         public IReadOnlyList<ISGL_ModelFace> Faces { get; }
     }
