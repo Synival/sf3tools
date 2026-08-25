@@ -18,7 +18,7 @@
             RawInt = (int) (f * 65536f);
         }
 
-        public FIXED(CompressedFIXED cf) : this(cf.RawShort * 2, true) { }
+        public FIXED(Fractional cf) : this(cf.RawShort * 2, true) { }
 
         public int RawInt { get; set; }
 
@@ -33,7 +33,7 @@
         }
 
         public override bool Equals(object obj) {
-            return (obj is CompressedFIXED cf && RawInt == cf.RawShort) ||
+            return (obj is Fractional cf && RawInt == cf.RawShort) ||
                    (obj is FIXED f && RawInt == f.RawInt);
         }
 

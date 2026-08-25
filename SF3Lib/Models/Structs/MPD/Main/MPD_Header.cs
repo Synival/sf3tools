@@ -315,27 +315,27 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsYRotationAddr), displayOrder: 14, displayGroup: "Main")]
         public float ModelsYRotation {
-            get => Data.GetCompressedFIXED(_modelsYRotationAddr).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_modelsYRotationAddr, new CompressedFIXED(value / 180.0f, 0));
+            get => Data.GetFractional(_modelsYRotationAddr).Float * 180.0f;
+            set => Data.SetFractional(_modelsYRotationAddr, new Fractional(value / 180.0f, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsViewAngleMinAddr), displayOrder: 14.5f, visibilityProperty: nameof(HasMinMaxAngle), displayGroup: "Main")]
         public float ModelsViewAngleMin {
-            get => (HasMinMaxAngle ? Data.GetCompressedFIXED(_modelsViewAngleMinAddr).Float : -0.6f) * 180.0f;
+            get => (HasMinMaxAngle ? Data.GetFractional(_modelsViewAngleMinAddr).Float : -0.6f) * 180.0f;
             set {
                 if (HasMinMaxAngle)
-                    Data.SetCompressedFIXED(_modelsViewAngleMinAddr, new CompressedFIXED(value / 180.0f, 0));
+                    Data.SetFractional(_modelsViewAngleMinAddr, new Fractional(value / 180.0f, 0));
             }
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_modelsViewAngleMaxAddr), displayOrder: 15, visibilityProperty: nameof(HasMinMaxAngle), displayGroup: "Main")]
         public float ModelsViewAngleMax {
-            get => (HasMinMaxAngle ? Data.GetCompressedFIXED(_modelsViewAngleMaxAddr).Float : 0.6f) * 180.0f;
+            get => (HasMinMaxAngle ? Data.GetFractional(_modelsViewAngleMaxAddr).Float : 0.6f) * 180.0f;
             set {
                 if (HasMinMaxAngle)
-                    Data.SetCompressedFIXED(_modelsViewAngleMaxAddr, new CompressedFIXED(value / 180.0f, 0));
+                    Data.SetFractional(_modelsViewAngleMaxAddr, new Fractional(value / 180.0f, 0));
             }
         }
 
@@ -433,8 +433,8 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_groundAngleAddr), displayOrder: 21.5f, displayGroup: "Main")]
         public float GroundXRotation {
-            get => Data.GetCompressedFIXED(_groundAngleAddr).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_groundAngleAddr, new CompressedFIXED(value / 180.0f, 0));
+            get => Data.GetFractional(_groundAngleAddr).Float * 180.0f;
+            set => Data.SetFractional(_groundAngleAddr, new Fractional(value / 180.0f, 0));
         }
 
         [BulkCopy]

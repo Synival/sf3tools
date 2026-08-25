@@ -119,8 +119,8 @@ namespace SF3.Models.Structs.X1.Town {
         [TableViewModelColumn(addressField: nameof(_directionAddr), displayOrder: 9, displayName: "Direction")]
         [BulkCopy]
         public float ActorDirection {
-            get => Data.GetCompressedFIXED(_directionAddr).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_directionAddr, new CompressedFIXED(value / 180.0f, 0));
+            get => Data.GetFractional(_directionAddr).Float * 180.0f;
+            set => Data.SetFractional(_directionAddr, new Fractional(value / 180.0f, 0));
         }
 
         [TableViewModelColumn(addressField: nameof(_interactDirectionBehaviorAddr), displayOrder: 10, displayFormat: "X2")]

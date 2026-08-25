@@ -82,10 +82,10 @@ namespace CommonLib.Tests.SGL {
 
         [TestMethod]
         public void Constructor_WithCompressedFIXEDInput_ProducesExpectedResults() {
-            var cf1 = new FIXED(new CompressedFIXED(0));
-            var cf2 = new FIXED(new CompressedFIXED(7777));
-            var cf3 = new FIXED(new CompressedFIXED(32767));
-            var cf4 = new FIXED(new CompressedFIXED(-32768));
+            var cf1 = new FIXED(new Fractional(0));
+            var cf2 = new FIXED(new Fractional(7777));
+            var cf3 = new FIXED(new Fractional(32767));
+            var cf4 = new FIXED(new Fractional(-32768));
 
             Assert.AreEqual(0, cf1.RawInt);
             Assert.AreEqual(0, cf1.Int);

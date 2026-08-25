@@ -66,8 +66,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleAddr), displayOrder: 2, minWidth: 100)]
         public float Angle {
-            get => Data.GetCompressedFIXED(_angleAddr).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_angleAddr, new CompressedFIXED(value / 180.0f, 0));
+            get => Data.GetFractional(_angleAddr).Float * 180.0f;
+            set => Data.SetFractional(_angleAddr, new Fractional(value / 180.0f, 0));
         }
 
         [BulkCopy]

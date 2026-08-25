@@ -70,9 +70,9 @@ namespace SF3.MPD.Writer {
                 var (tile, corner) = GetNonFlatTileAtVertex(surface, blockX, blockY, inBlockX, inBlockY, mustBeInBlock: false);
                 if (tile != null) {
                     var normal = tile.GetVertexNormal(corner);
-                    WriteUShort(new CompressedFIXED(normal.X).WeirdRawShort);
-                    WriteUShort(new CompressedFIXED(normal.Y).WeirdRawShort);
-                    WriteUShort(new CompressedFIXED(normal.Z).WeirdRawShort);
+                    WriteUShort(new Fractional(normal.X).WeirdRawShort);
+                    WriteUShort(new Fractional(normal.Y).WeirdRawShort);
+                    WriteUShort(new Fractional(normal.Z).WeirdRawShort);
                 }
                 else {
                     WriteUShort(0);

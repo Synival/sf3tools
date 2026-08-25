@@ -99,9 +99,9 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleXAddress), displayOrder: 11)]
         public float AngleX {
-            get => Data.GetCompressedFIXED(_angleXAddress).Float * 180.0f;
+            get => Data.GetFractional(_angleXAddress).Float * 180.0f;
             set {
-                Data.SetCompressedFIXED(_angleXAddress, new CompressedFIXED(value / 180.0f, 0));
+                Data.SetFractional(_angleXAddress, new Fractional(value / 180.0f, 0));
                 _boundingBox = null;
             }
         }
@@ -109,9 +109,9 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleYAddress), displayOrder: 12)]
         public float AngleY {
-            get => Data.GetCompressedFIXED(_angleYAddress).Float * 180.0f;
+            get => Data.GetFractional(_angleYAddress).Float * 180.0f;
             set {
-                Data.SetCompressedFIXED(_angleYAddress, new CompressedFIXED(value / 180.0f, 0));
+                Data.SetFractional(_angleYAddress, new Fractional(value / 180.0f, 0));
                 _boundingBox = null;
             }
         }
@@ -119,9 +119,9 @@ namespace SF3.Models.Structs.MPD.Model {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_angleZAddress), displayOrder: 13)]
         public float AngleZ {
-            get => Data.GetCompressedFIXED(_angleZAddress).Float * 180.0f;
+            get => Data.GetFractional(_angleZAddress).Float * 180.0f;
             set {
-                Data.SetCompressedFIXED(_angleZAddress, new CompressedFIXED(value / 180.0f, 0));
+                Data.SetFractional(_angleZAddress, new Fractional(value / 180.0f, 0));
                 _boundingBox = null;
             }
         }

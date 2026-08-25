@@ -95,10 +95,10 @@ namespace SF3.ByteData {
         public uint GetUInt32(int offset)   => (uint)   GetData(offset, 4);
         public int GetInt32(int offset)     => (int)    GetData(offset, 4);
 
-        public CompressedFIXED GetCompressedFIXED(int offset)      => new CompressedFIXED(GetInt16(offset));
-        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => new CompressedFIXED(GetUInt16(offset), isWeird: true);
-
-        public FIXED GetFIXED(int offset) => new FIXED(GetInt32(offset), true);
+        public Fractional GetFractional(int offset)           => new Fractional(GetInt16(offset));
+        public Fractional GetWeirdFractional(int offset)      => new Fractional(GetUInt16(offset), isWeird: true);
+        public FIXED GetFIXED(int offset)                     => new FIXED(GetInt32(offset), true);
+        public CompressedFIXED GetCompressedFIXED(int offset) => new CompressedFIXED(GetInt16(offset));
 
         public string GetString(int offset, int length) {
             var value = new byte[length];
@@ -134,10 +134,10 @@ namespace SF3.ByteData {
         public void SetUInt32(int offset, uint value)   => SetData(offset, (uint) value, 4);
         public void SetInt32(int offset, int value)     => SetData(offset, (uint) value, 4);
 
-        public void SetCompressedFIXED(int offset, CompressedFIXED value)      => SetInt16(offset, value.RawShort);
-        public void SetWeirdCompressedFIXED(int offset, CompressedFIXED value) => SetUInt16(offset, value.WeirdRawShort);
-
-        public void SetFIXED(int offset, FIXED value) => SetInt32(offset, value.RawInt);
+        public void SetFractional(int offset, Fractional value)           => SetInt16 (offset, value.RawShort);
+        public void SetWeirdFractional(int offset, Fractional value)      => SetUInt16(offset, value.WeirdRawShort);
+        public void SetFIXED(int offset, FIXED value)                     => SetInt32 (offset, value.RawInt);
+        public void SetCompressedFIXED(int offset, CompressedFIXED value) => SetInt16 (offset, value.RawShort);
 
         public void SetString(int offset, int length, string value) {
             var encoding = Encoding.GetEncoding("shift-jis");

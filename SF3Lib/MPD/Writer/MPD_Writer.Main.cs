@@ -192,9 +192,9 @@ namespace SF3.MPD.Writer {
             barrelModelsPosPtr = (uint) CurrentOffset;
             WriteMPDPointer(null);
 
-            WriteShort(new CompressedFIXED(settings.ModelsYRotation / 180.0f, 0).RawShort);
-            WriteShort(new CompressedFIXED(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
-            WriteShort(new CompressedFIXED(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
+            WriteShort(new Fractional(settings.ModelsYRotation / 180.0f, 0).RawShort);
+            WriteShort(new Fractional(settings.ModelsViewAngleMin / 180.0f, 0).RawShort);
+            WriteShort(new Fractional(settings.ModelsViewAngleMax / 180.0f, 0).RawShort);
             WriteMPDPointer(ignoredTexturesPos);
             WriteMPDPointer(groundPalettePos ?? afterDataPos);
             WriteMPDPointer(skyPalettePos ?? (groundPalettePos.HasValue ? groundPalettePos.Value + 0x200 : afterDataPos));
@@ -208,7 +208,7 @@ namespace SF3.MPD.Writer {
             WriteShort(planes.GroundX);
             WriteShort(planes.GroundY);
             WriteShort(planes.GroundZ);
-            WriteShort(new CompressedFIXED(planes.GroundXRotation / 180.0f, 0).RawShort);
+            WriteShort(new Fractional(planes.GroundXRotation / 180.0f, 0).RawShort);
             WriteShort(settings.UnknownHeaderSetting);
             WriteShort(planes.BackgroundX);
             WriteShort(planes.BackgroundY);
@@ -227,8 +227,8 @@ namespace SF3.MPD.Writer {
             WriteToAlignTo(2);
             var pos = (uint) CurrentOffset;
 
-            WriteShort(new CompressedFIXED(lighting.Pitch / 180.0f, 0).RawShort);
-            WriteShort(new CompressedFIXED(lighting.Yaw / 180.0f, 0).RawShort);
+            WriteShort(new Fractional(lighting.Pitch / 180.0f, 0).RawShort);
+            WriteShort(new Fractional(lighting.Yaw / 180.0f, 0).RawShort);
 
             return pos;
         }

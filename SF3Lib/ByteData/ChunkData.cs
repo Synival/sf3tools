@@ -57,9 +57,10 @@ namespace SF3.ByteData {
         public short GetInt16(int offset)   => ChildData.GetInt16(offset);
         public uint GetUInt32(int offset)   => ChildData.GetUInt32(offset);
         public int GetInt32(int offset)     => ChildData.GetInt32(offset);
-        public CompressedFIXED GetCompressedFIXED(int offset) => ChildData.GetCompressedFIXED(offset);
-        public CompressedFIXED GetWeirdCompressedFIXED(int offset) => ChildData.GetWeirdCompressedFIXED(offset);
+        public Fractional GetFractional(int offset) => ChildData.GetFractional(offset);
+        public Fractional GetWeirdFractional(int offset) => ChildData.GetWeirdFractional(offset);
         public FIXED GetFIXED(int offset) => ChildData.GetFIXED(offset);
+        public CompressedFIXED GetCompressedFIXED(int offset) => ChildData.GetCompressedFIXED(offset);
         public string GetString(int offset, int length) => ChildData.GetString(offset, length);
         public bool GetBit(int offset, int bit) => ChildData.GetBit(offset, bit);
         public void SetData(int offset, uint value, int bytes) => ChildData.SetData(offset, value, bytes);
@@ -69,9 +70,10 @@ namespace SF3.ByteData {
         public void SetInt16(int offset, short value)   => ChildData.SetInt16(offset, value);
         public void SetUInt32(int offset, uint value)   => ChildData.SetUInt32(offset, value);
         public void SetInt32(int offset, int value)     => ChildData.SetInt32(offset, value);
-        public void SetCompressedFIXED(int offset, CompressedFIXED value) => ChildData.SetCompressedFIXED(offset, value);
-        public void SetWeirdCompressedFIXED(int offset, CompressedFIXED value) => ChildData.SetWeirdCompressedFIXED(offset, value);
+        public void SetFractional(int offset, Fractional value) => ChildData.SetFractional(offset, value);
+        public void SetWeirdFractional(int offset, Fractional value) => ChildData.SetWeirdFractional(offset, value);
         public void SetFIXED(int offset, FIXED value) => ChildData.SetFIXED(offset, value);
+        public void SetCompressedFIXED(int offset, CompressedFIXED value) => ChildData.SetCompressedFIXED(offset, value);
         public void SetString(int offset, int length, string value) => ChildData.SetString(offset, length, value);
         public void SetBit(int offset, int bit, bool value) => ChildData.SetBit(offset, bit, value);
         public bool Finish() => ChildData.Finish();

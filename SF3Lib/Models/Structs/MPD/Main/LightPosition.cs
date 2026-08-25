@@ -16,15 +16,15 @@ namespace SF3.Models.Structs.MPD.Main {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_pitchAddr), displayName: "Pitch")]
         public float Pitch {
-            get => Data.GetCompressedFIXED(_pitchAddr).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_pitchAddr, new CompressedFIXED(value / 180.0f, 0));
+            get => Data.GetFractional(_pitchAddr).Float * 180.0f;
+            set => Data.SetFractional(_pitchAddr, new Fractional(value / 180.0f, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_yawAddr), displayName: "Yaw")]
         public float Yaw {
-            get => Data.GetCompressedFIXED(_yawAddr).Float * 180.0f;
-            set => Data.SetCompressedFIXED(_yawAddr, new CompressedFIXED(value / 180.0f, 0));
+            get => Data.GetFractional(_yawAddr).Float * 180.0f;
+            set => Data.SetFractional(_yawAddr, new Fractional(value / 180.0f, 0));
         }
     }
 }

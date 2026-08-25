@@ -70,9 +70,9 @@ namespace SF3.MPD.Writer {
             WriteShort(instance.PositionY);
             WriteShort(instance.PositionZ);
 
-            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleX / 180.0f * 0x8000)).RawShort);
-            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleY / 180.0f * 0x8000)).RawShort);
-            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleZ / 180.0f * 0x8000)).RawShort);
+            WriteShort(new Fractional((short) Math.Round(instance.AngleX / 180.0f * 0x8000)).RawShort);
+            WriteShort(new Fractional((short) Math.Round(instance.AngleY / 180.0f * 0x8000)).RawShort);
+            WriteShort(new Fractional((short) Math.Round(instance.AngleZ / 180.0f * 0x8000)).RawShort);
 
             WriteInt(new FIXED(instance.ScaleX, 0).RawInt);
             WriteInt(new FIXED(instance.ScaleY, 0).RawInt);
@@ -195,9 +195,9 @@ namespace SF3.MPD.Writer {
             WriteShort(instance.PositionY);
             WriteShort(instance.PositionZ);
 
-            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleX / 180.0f * 0x8000)).RawShort);
-            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleY / 180.0f * 0x8000)).RawShort);
-            WriteShort(new CompressedFIXED((short) Math.Round(instance.AngleZ / 180.0f * 0x8000)).RawShort);
+            WriteShort(new Fractional((short) Math.Round(instance.AngleX / 180.0f * 0x8000)).RawShort);
+            WriteShort(new Fractional((short) Math.Round(instance.AngleY / 180.0f * 0x8000)).RawShort);
+            WriteShort(new Fractional((short) Math.Round(instance.AngleZ / 180.0f * 0x8000)).RawShort);
 
             WriteInt(new FIXED(instance.ScaleX, 0).RawInt);
             WriteInt(new FIXED(instance.ScaleY, 0).RawInt);
@@ -295,7 +295,7 @@ namespace SF3.MPD.Writer {
 
                 WriteUShort(index1.Value);
                 WriteUShort(index2.Value);
-                WriteShort(new CompressedFIXED(line.Angle / 180.0f, 0).RawShort);
+                WriteShort(new Fractional(line.Angle / 180.0f, 0).RawShort);
                 WriteByte(line.Tag);
                 WriteByte((line.FlagToDisable.HasValue && line.FlagToDisable.Value >= 0x201 && line.FlagToDisable.Value <= 0x2FF) ? (byte) (line.FlagToDisable & 0xFF) : (byte) 0);
 

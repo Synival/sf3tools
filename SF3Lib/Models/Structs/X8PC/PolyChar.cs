@@ -57,6 +57,12 @@ namespace SF3.Models.Structs.X8PC {
                 (count, offset, index) => AttrTable.Create(ModelChunk.DecompressedData, $"{nameof(AttrTable)}_{index:D3} @{offset:X4}", offset, count)
             );
 
+            VertexNormalTablesByOffset = FetchTablesByOffset(
+                XPDataTables,
+                x => (x.VertexCount, (int) x.VertexNormalsOffset),
+                (count, offset, index) => VertexNormalTable.Create(ModelChunk.DecompressedData, $"{nameof(VertexNormalTable)}_{index:D3} @{offset:X4}", offset, count)
+            );
+
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
             tables.Add(XPDataListTable);
@@ -127,6 +133,7 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, VertexTable> VertexTablesByOffset { get; }
         public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
+        public Dictionary<int, VertexNormalTable> VertexNormalTablesByOffset { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }

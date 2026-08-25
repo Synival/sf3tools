@@ -27,15 +27,15 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public VECTOR this[int x, int y] {
             get {
                 return new VECTOR(
-                    new FIXED(Data.GetWeirdCompressedFIXED(normalAddresses[x, y] + 0)),
-                    new FIXED(Data.GetWeirdCompressedFIXED(normalAddresses[x, y] + 2)),
-                    new FIXED(Data.GetWeirdCompressedFIXED(normalAddresses[x, y] + 4))
+                    new FIXED(Data.GetWeirdFractional(normalAddresses[x, y] + 0)),
+                    new FIXED(Data.GetWeirdFractional(normalAddresses[x, y] + 2)),
+                    new FIXED(Data.GetWeirdFractional(normalAddresses[x, y] + 4))
                 );
             }
             set {
-                Data.SetWeirdCompressedFIXED(normalAddresses[x, y] + 0, new CompressedFIXED(value.X));
-                Data.SetWeirdCompressedFIXED(normalAddresses[x, y] + 2, new CompressedFIXED(value.Y));
-                Data.SetWeirdCompressedFIXED(normalAddresses[x, y] + 4, new CompressedFIXED(value.Z));
+                Data.SetWeirdFractional(normalAddresses[x, y] + 0, new Fractional(value.X));
+                Data.SetWeirdFractional(normalAddresses[x, y] + 2, new Fractional(value.Y));
+                Data.SetWeirdFractional(normalAddresses[x, y] + 4, new Fractional(value.Z));
             }
         }
 

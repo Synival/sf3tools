@@ -72,24 +72,30 @@ namespace SF3.ByteData {
         int GetInt32(int offset);
 
         /// <summary>
-        /// Gets the value of a 16-bit compressed FIXED at a location.
+        /// Gets the value of a 16-bit fractional value at a location.
         /// </summary>
-        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
-        CompressedFIXED GetCompressedFIXED(int offset);
+        /// <param name="offset">The address of the 16-bit fractional value.</param>
+        Fractional GetFractional(int offset);
 
         /// <summary>
-        /// Gets the value of a 16-bit compressed FIXED at a location.
+        /// Gets the value of a 16-bit fractional value at a location.
         /// These numbers are 'weird' because the highest bit with the sign is moved
         /// to the *opposite* side.
         /// </summary>
-        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
-        CompressedFIXED GetWeirdCompressedFIXED(int offset);
+        /// <param name="offset">The address of the 16-bit fractional value.</param>
+        Fractional GetWeirdFractional(int offset);
 
         /// <summary>
         /// Gets the value of a 32-bit FIXED at a location.
         /// </summary>
         /// <param name="offset">The address of the 32-bit FIXED.</param>
         FIXED GetFIXED(int offset);
+
+        /// <summary>
+        /// Gets the value of a 16-bit CompressedFIXED at a location.
+        /// </summary>
+        /// <param name="offset">The address of the 16-bit CompressedFIXED.</param>
+        CompressedFIXED GetCompressedFIXED(int offset);
 
         /// <summary>
         /// Returns the value of string data of a specific size at a location.
@@ -139,20 +145,20 @@ namespace SF3.ByteData {
         void SetInt32(int offset, int value);
 
         /// <summary>
-        /// Sets the value of a 16-bit compressed FIXED at a location.
+        /// Sets the value of a 16-bit fractional value at a location.
         /// </summary>
-        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
-        /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
-        void SetCompressedFIXED(int offset, CompressedFIXED value);
+        /// <param name="offset">The address of the 16-bit fractional value.</param>
+        /// <param name="value">The new value of the 16-bit fractional value.</param>
+        void SetFractional(int offset, Fractional value);
 
         /// <summary>
-        /// Sets the value of a 16-bit compressed FIXED at a location.
+        /// Sets the value of a 16-bit FIXED at a location.
         /// These numbers are 'weird' because the highest bit with the sign is moved
         /// to the *opposite* side.
         /// </summary>
-        /// <param name="offset">The address of the 16-bit compressed FIXED.</param>
-        /// <param name="value">The new value of the 16-bit compressed FIXED.</param>
-        void SetWeirdCompressedFIXED(int offset, CompressedFIXED value);
+        /// <param name="offset">The address of the 16-bit fractional value.</param>
+        /// <param name="value">The new value of the 16-bit fractional value.</param>
+        void SetWeirdFractional(int offset, Fractional value);
 
         /// <summary>
         /// Sets the value of a 32-bit FIXED at a location.
@@ -160,6 +166,13 @@ namespace SF3.ByteData {
         /// <param name="offset">The address of the 32-bit FIXED.</param>
         /// <param name="value">The new value of the 32-bit FIXED.</param>
         void SetFIXED(int offset, FIXED value);
+
+        /// <summary>
+        /// Sets the value of a 16-bit CompressedFIXED at a location.
+        /// </summary>
+        /// <param name="offset">The address of the 16-bit CompressedFIXED.</param>
+        /// <param name="value">The new value of the 16-bit CompressedFIXED.</param>
+        void SetCompressedFIXED(int offset, CompressedFIXED value);
 
         /// <summary>
         /// Sets the value of string data of a specific size at a location.
