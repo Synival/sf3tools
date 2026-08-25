@@ -17,6 +17,7 @@ namespace SF3.Win.Controls {
         public SGL_ModelViewerControl() {
             InitializeComponent();
             MaximumSize = MinimumSize = new System.Drawing.Size(320, 320);
+            ForceLighting = false;
         }
 
         protected override void OnLoad(EventArgs e) {
@@ -221,7 +222,7 @@ namespace SF3.Win.Controls {
                                 ScaleZ = scaleZ,
                             };
                         },
-                        forceSemiTransparentValue: null, isHideMesh: false
+                        forceSemiTransparentValue: null, isHideMesh: false, forceLighting: ForceLighting
                     );
 
                     var verticesMatrix =
@@ -275,6 +276,8 @@ namespace SF3.Win.Controls {
         public Vector3 Position { get; private set; }
         public static float Yaw { get; private set; }
         public float Pitch { get; private set; }
+
+        public bool ForceLighting { get; set; }
 
         private float _minX = 0f;
         private float _minY = 0f;

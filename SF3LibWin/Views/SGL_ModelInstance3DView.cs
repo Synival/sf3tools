@@ -5,9 +5,11 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class SGL_ModelInstance3DView : ControlView<SGL_ModelViewerControl> {
-        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null) : base(name) {
+        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool forceLighting = false)
+        : base(name) {
             _texCollection = texContainer;
             _modelInstance = sglModelInstance;
+            _forceLighting = forceLighting;
             UpdateSGL_Model();
         }
 
@@ -20,6 +22,7 @@ namespace SF3.Win.Views {
         public override void RefreshContent() {
             if (!IsCreated)
                 return;
+            Control.ForceLighting = _forceLighting;
             Control.Update(null, null);
             UpdateViewerControl();
         }
@@ -28,6 +31,7 @@ namespace SF3.Win.Views {
         public ITextureMetaCollection TextureCollection => _texCollection;
 
         private ISGL_ModelInstance _modelInstance = null;
+
         public ISGL_ModelInstance ModelInstance => _modelInstance;
 
         public void SetModelInstance(ITextureMetaCollection texCollection, ISGL_ModelInstance modelInstance) {
@@ -51,5 +55,7 @@ namespace SF3.Win.Views {
                     Control.Update(_texCollection, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
             }
         }
+
+        private readonly bool _forceLighting;
     }
 }

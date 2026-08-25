@@ -45,7 +45,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
 
         public void Update(
             ISGL_Model sglModel, Dictionary<int, IAnimatableTexture> texturesById, Func<ISGL_ModelInstance> instCreator,
-            float? forceSemiTransparentValue = null, bool isHideMesh = false
+            float? forceSemiTransparentValue, bool isHideMesh, bool? forceLighting
         ) {
             Reset();
             if (sglModel == null || texturesById == null || instCreator == null)
@@ -54,7 +54,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             var collectionId = sglModel.ModelCollectionID;
             InitDictsForType(collectionId);
             SGL_ModelsByIDByCollection[collectionId][sglModel.ModelID] = sglModel;
-            CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh);
+            CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh, forceLighting);
             ModelInstances = [instCreator()];
         }
 
@@ -63,7 +63,8 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             ISGL_Model model,
             Dictionary<int, IAnimatableTexture> texturesById,
             float? forceSemiTransparentAlpha,
-            bool isHideMesh
+            bool isHideMesh,
+            bool? forceLighting
         ) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => flip & ~TextureFlipType.Horizontal | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
@@ -78,6 +79,8 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             var solidUntexturedQuads           = new List<Quad>();
             var semiTransparentTexturedQuads   = new List<Quad>();
             var semiTransparentUntexturedQuads = new List<Quad>();
+
+            var forceLightingValue = forceLighting.HasValue ? (forceLighting.Value ? 1.0f : 0.0f) : (float?) null;
 
             for (var i = 0; i < faces.Count; i++) {
                 var polygon = faces[i];
@@ -158,7 +161,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
                 var useGouraud = attr.CL_Gouraud && useTexture;
-                var applyLighting = (attr.UseLight || anim == null) && !useGouraud ? 1.0f : 0.0f;
+                var applyLighting = forceLightingValue ?? ((attr.UseLight || anim == null) && !useGouraud ? 1.0f : 0.0f);
                 var applyLightingVboData = new float[,] {{applyLighting}, {applyLighting}, {applyLighting}, {applyLighting}};
 
                 var mesh = attr.Mode_MESHon ? 1.00f : 0.00f;

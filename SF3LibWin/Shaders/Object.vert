@@ -31,10 +31,10 @@ out vec2 texCoordOverlay1Frag;
 out vec2 texCoordOverlay2Frag;
 
 void main() {
-    gl_Position   = projection * view * model * vec4(position, 1.0);
-    colorFrag     = color;
-    glowFrag      = glow;
-    meshFrag      = mesh;
+    gl_Position = projection * view * model * vec4(position, 1.0);
+    colorFrag   = color;
+    glowFrag    = glow;
+    meshFrag    = mesh;
 
     // Modify the normal based on the normal matrix.
     // Preserve the length of the normal for in-game accuracy.
@@ -50,7 +50,7 @@ void main() {
         // Reverse-engineered function. Don't ask me why it is what it is!
         ((normalLightDot < 0) ? 0.0f : (atan(normalLightDot, sqrt(1.0f - normalLightDot * normalLightDot)) * 1.27323954477 /* <-- 4/pi */ + 2.0f));
 
-    lighting = (smoothLighting ? lighting : floor(lighting * 32.0f) / 32.0f) + 0.015625;
+    lighting = (smoothLighting ? clamp(lighting, 0.0, 0.96875) : floor(lighting * 32.0f) / 32.0f) + 0.015625;
 
     lightColorFrag       = (lightingMode != 0 && applyLighting > 0.50) ? vec4(clamp(texture(textureLighting, vec2(0, lighting)).xyz - 0.5, -0.5, 0.5), 0) : vec4(0, 0, 0, 0);
     texCoordAtlasFrag    = texCoordAtlas;

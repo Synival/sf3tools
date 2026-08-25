@@ -77,7 +77,11 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     if (!mc.IsHeaderModelCollection()) {
                         var isForcedSemiTransparent = modelsWith2000Tag.Contains(id);
                         var isHideMesh = modelsWith3000Tag.Contains(id);
-                        CreateAndAddQuadModels((int) mc.Collection, sglModel, texturesById, isForcedSemiTransparent ? isForcedSemiTransparentAlpha : null, isHideMesh);
+                        CreateAndAddQuadModels(
+                            (int) mc.Collection, sglModel, texturesById,
+                            isForcedSemiTransparent ? isForcedSemiTransparentAlpha : null,
+                            isHideMesh, forceLighting: false
+                        );
                     }
                 }
             }
