@@ -69,8 +69,9 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => flip & ~TextureFlipType.Horizontal | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
 
-            var vertices = model.Vertices;
-            var faces = model.Faces;
+            var vertices      = model.Vertices;
+            var faces         = model.Faces;
+            var vertexNormals = model.VertexNormals;
 
             var modelExists = false;
 
@@ -145,20 +146,36 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                     }
                 }
 
-                VECTOR[] polyVertexModels = [
-                    vertices[polygon.VertexIndices[0]],
-                    vertices[polygon.VertexIndices[1]],
-                    vertices[polygon.VertexIndices[2]],
-                    vertices[polygon.VertexIndices[3]],
+                var vertexIndices = polygon.VertexIndices;
+                VECTOR[] polyVerticesOrig = [
+                    vertices[vertexIndices[0]],
+                    vertices[vertexIndices[1]],
+                    vertices[vertexIndices[2]],
+                    vertices[vertexIndices[3]],
                 ];
 
-                var polyVertices = polyVertexModels
+                var polyVertices = polyVerticesOrig
                     .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float) * new Vector3(1 / 32.0f))
                     .ToArray();
 
-                var normal = new Vector3(-polygon.Normal.X.Float, -polygon.Normal.Y.Float, polygon.Normal.Z.Float);
-                var vertexNormals = new Vector3[] { normal, normal, normal, normal };
-                var normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+                Vector3[] quadVertexNormals;
+                if (vertexNormals == null) {
+                    var normal = new Vector3(-polygon.Normal.X.Float, -polygon.Normal.Y.Float, polygon.Normal.Z.Float);
+                    quadVertexNormals = [normal, normal, normal, normal];
+                }
+                else {
+                    VECTOR[] quadVertexNormalsOrig = [
+                        vertexNormals[vertexIndices[0]],
+                        vertexNormals[vertexIndices[1]],
+                        vertexNormals[vertexIndices[2]],
+                        vertexNormals[vertexIndices[3]],
+                    ];
+                    quadVertexNormals = quadVertexNormalsOrig
+                        .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float))
+                        .ToArray();
+                }
+
+                var normalVboData = quadVertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
                 var useGouraud = attr.CL_Gouraud && useTexture;
                 var applyLighting = forceLightingValue ?? ((attr.UseLight || anim == null) && !useGouraud ? 1.0f : 0.0f);
@@ -205,9 +222,9 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                     flip = ToggleHorizontalFlipping(flip);
 
                     // Reverse the normal.
-                    normal = -normal;
-                    vertexNormals = [normal, normal, normal, normal];
-                    normalVboData = vertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
+                    for (var j = 0; j < 4; j++)
+                        quadVertexNormals[j] = -quadVertexNormals[j];
+                    normalVboData = quadVertexNormals.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3);
 
                     // Add the flipped quad.
                     AddQuad();

@@ -9,6 +9,8 @@ namespace CommonLib.Extensions {
                 { "Vertices", model.Vertices?.Select(x => x.ToJObject())?.ToArray()?.ToJArray() },
                 { "Faces",    model.Faces?.Select(x => x.ToJObject())?.ToArray()?.ToJArray() },
             };
+            if (model.VertexNormals != null)
+                jObj.Add("VertexNormals", model.VertexNormals?.Select(x => x.ToJObject())?.ToArray()?.ToJArray());
 
             if (serializeLoD)
                 jObj.AddFirst(new JProperty("LevelOfDetail", model.LevelOfDetail));

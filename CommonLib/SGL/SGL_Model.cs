@@ -12,6 +12,7 @@ namespace CommonLib.SGL {
             LevelOfDetail     = levelOfDetail;
             Vertices          = new VECTOR[0];
             Faces             = new ISGL_ModelFace[0];
+            VertexNormals     = new VECTOR[0];
         }
 
         public SGL_Model(ISGL_Model original)
@@ -23,21 +24,15 @@ namespace CommonLib.SGL {
             ModelID       = modelId;
             LevelOfDetail = levelOfDetail;
 
-            if (original.Vertices != null) {
+            if (original.Vertices != null)
                 Vertices = original.Vertices.Select(x => new VECTOR(x)).ToArray();
-
-                var left   = Vertices.Select(x => x.X.Float).Min();
-                var right  = Vertices.Select(x => x.X.Float).Max();
-                var top    = Vertices.Select(x => x.Y.Float).Min();
-                var bottom = Vertices.Select(x => x.Y.Float).Max();
-                var front  = Vertices.Select(x => x.Z.Float).Min();
-                var back   = Vertices.Select(x => x.Z.Float).Max();
-            }
             if (original.Faces != null)
                 Faces = original.Faces.Select(x => (ISGL_ModelFace) (new SGL_ModelFace(x))).ToArray();
+            if (original.VertexNormals != null)
+                VertexNormals = original.VertexNormals.Select(x => new VECTOR(x)).ToArray();
         }
 
-        public SGL_Model(int modelId, int levelOfDetail, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces) {
+        public SGL_Model(int modelId, int levelOfDetail, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces, IEnumerable<VECTOR> vertexNormals) {
             if (vertices == null)
                 throw new ArgumentNullException(nameof(vertices));
             if (faces == null)
@@ -47,6 +42,7 @@ namespace CommonLib.SGL {
             LevelOfDetail = levelOfDetail;
             Vertices      = vertices.ToArray();
             Faces         = faces.ToArray();
+            VertexNormals = vertexNormals?.ToArray();
         }
 
         public static SGL_Model FromJToken(JToken token) => new SGL_Model((JObject) token);
@@ -70,6 +66,7 @@ namespace CommonLib.SGL {
 
             Vertices = jObject.GetValueIfExists("Vertices", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray());
             Faces    = jObject.GetValueIfExists("Faces",    t => ((JArray) t).Select(x => (ISGL_ModelFace) SGL_ModelFace.FromJToken(x)).ToArray());
+            VertexNormals = jObject.GetValueIfExists("VertexNormals", t => ((JArray) t).Select(x => VECTOR.FromJToken(x)).ToArray());
         }
 
         public int ModelCollectionID { get; }
@@ -78,5 +75,6 @@ namespace CommonLib.SGL {
 
         public IReadOnlyList<VECTOR> Vertices { get; }
         public IReadOnlyList<ISGL_ModelFace> Faces { get; }
+        public IReadOnlyList<VECTOR> VertexNormals { get; }
     }
 }

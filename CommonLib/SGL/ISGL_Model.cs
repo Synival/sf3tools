@@ -26,5 +26,11 @@ namespace CommonLib.SGL {
         /// All faces (quads) for the model. Contains the set of vertices to use for each quad and its ATTR information.
         /// </summary>
         IReadOnlyList<ISGL_ModelFace> Faces { get; }
+
+        // TODO: these should be inside vertices!!
+        /// <summary>
+        /// Vertex normals available in XPDATA's.
+        /// </summary>
+        IReadOnlyList<VECTOR> VertexNormals { get; }
     }
 }

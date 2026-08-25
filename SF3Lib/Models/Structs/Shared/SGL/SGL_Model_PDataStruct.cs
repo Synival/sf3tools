@@ -86,6 +86,7 @@ namespace SF3.Models.Structs.Shared.SGL {
         public abstract IReadOnlyList<VECTOR> Vertices { get; }
         public abstract IReadOnlyList<PolygonStruct> Polygons { get; }
         public abstract IReadOnlyList<AttrStruct> Attributes { get; }
+        public IReadOnlyList<VECTOR> VertexNormals => null;
 
         public IReadOnlyList<ISGL_ModelFace> Faces { get; }
     }

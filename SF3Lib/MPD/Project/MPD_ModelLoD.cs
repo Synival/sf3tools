@@ -28,6 +28,7 @@ namespace SF3.MPD.Project {
         public int LevelOfDetail { get; }
 
         public IReadOnlyList<VECTOR> Vertices => _actualModel.Vertices;
+        public IReadOnlyList<VECTOR> VertexNormals => null;
 
         private class FaceCollectionWrapper : IReadOnlyList<ISGL_ModelFace> {
             public FaceCollectionWrapper(IReadOnlyList<ISGL_ModelFace> faces, int lod) {
