@@ -5,7 +5,6 @@ using BrightIdeasSoftware;
 using CommonLib.NamedValues;
 using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
-using SF3.Models.Structs.MPD.Model;
 using SF3.Models.Tables;
 using SF3.Types;
 using SF3.Win.Controls;
@@ -50,9 +49,10 @@ namespace SF3.Win.Views.MPD {
             var collection = (MPD_File.ModelCollections?.TryGetValue(MPD_CollectionType.Primary, out var mc) == true) ? mc : null;
             var modelIdStr = (ModelIDStruct) item?.RowObject;
 
-            ModelView.ModelInstance = (collection != null && modelIdStr != null)
-                ? (MPD_ModelInstanceBase) (collection.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == modelIdStr.ModelID))
-                : null;
+            ModelView.SetModelInstance(ModelView.TextureCollection, (collection != null && modelIdStr != null)
+                ? collection.ModelInstances.FirstOrDefault(x => x.ModelInstanceID == modelIdStr.ModelID)
+                : null
+            );
         }
 
         public override void Destroy() {

@@ -39,7 +39,7 @@ namespace SF3.Win.Views.MPD {
 
         private void OnModelChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl.SelectedItem;
-            ModelView.Model = (MPD_SGL_Model_PDataStruct) item?.RowObject;
+            ModelView.SetModel(ModelView.TextureCollection, (MPD_SGL_Model_PDataStruct) item?.RowObject);
         }
 
         public override void Destroy() {
