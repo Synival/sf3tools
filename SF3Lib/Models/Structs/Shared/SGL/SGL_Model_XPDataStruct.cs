@@ -6,15 +6,15 @@ using SF3.ByteData;
 using SF3.Models.Tables.Shared.SGL;
 
 namespace SF3.Models.Structs.Shared.SGL {
-    public abstract class SGL_Model_PDataStruct : PDataStruct, ISGL_Model {
-        protected SGL_Model_PDataStruct(IByteData data, int id, string name, int address) : base(data, id, name, address) {
+    public abstract class SGL_Model_XPDataStruct : XPDataStruct, ISGL_Model {
+        protected SGL_Model_XPDataStruct(IByteData data, int id, string name, int address) : base(data, id, name, address) {
             var faceCount = FaceCount;
             var mockFaces = Enumerable.Range(0, faceCount).Select(x => new MockFace(this, x)).ToArray();
             Faces = new MockFaceEnumerable(mockFaces);
         }
 
         private class MockFace : ISGL_ModelFace {
-            public MockFace(SGL_Model_PDataStruct sglModel, int index) {
+            public MockFace(SGL_Model_XPDataStruct sglModel, int index) {
                 SGL_Model = sglModel;
                 Index = index;
             }
@@ -55,7 +55,7 @@ namespace SF3.Models.Structs.Shared.SGL {
                 }
             }
 
-            public readonly SGL_Model_PDataStruct SGL_Model;
+            public readonly SGL_Model_XPDataStruct SGL_Model;
             public readonly int Index;
 
             public PolygonStruct Polygon => ((Index < SGL_Model.Polygons?.Count) == true) ? SGL_Model.Polygons[Index] : null;
@@ -84,6 +84,7 @@ namespace SF3.Models.Structs.Shared.SGL {
         public abstract IReadOnlyList<VECTOR> Vertices { get; }
         public abstract PolygonTable Polygons { get; }
         public abstract AttrTable Attributes { get; }
+        public abstract IReadOnlyList<VECTOR> VertexNormals { get; }
 
         public IReadOnlyList<ISGL_ModelFace> Faces { get; }
     }

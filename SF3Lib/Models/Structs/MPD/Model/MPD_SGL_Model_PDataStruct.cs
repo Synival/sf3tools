@@ -10,10 +10,10 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 
 namespace SF3.Models.Structs.MPD.Model {
-    public class MPD_PDataStruct : SGL_Model_PDataStruct, IMPD_ModelLoD {
-        public MPD_PDataStruct(IByteData data, int id, string name, int address,
+    public class MPD_SGL_Model_PDataStruct : SGL_Model_PDataStruct, IMPD_ModelLoD {
+        public MPD_SGL_Model_PDataStruct(IByteData data, int id, string name, int address,
             MPD_CollectionType collection, IMPD_File mpdFile, int? chunkIndex, int modelId, int lod, int refs
-        ) : base(data, id, name, address, 0x14) {
+        ) : base(data, id, name, address) {
             Collection    = collection;
             MPD_File      = mpdFile;
             ChunkIndex    = chunkIndex;
@@ -53,8 +53,8 @@ namespace SF3.Models.Structs.MPD.Model {
         [TableViewModelColumn(addressField: null, displayOrder: -0.1f, isPointer: true, isReadOnly: true)]
         public uint RamAddress { get; set; }
 
+        public override IReadOnlyList<VECTOR> Vertices => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
         public override PolygonTable Polygons => (Chunk?.PolygonTablesByMemoryAddress?.TryGetValue(PolygonsOffset, out var polygons) == true) ? polygons : null;
         public override AttrTable Attributes => (Chunk?.AttrTablesByMemoryAddress?.TryGetValue(AttributesOffset, out var attributes) == true) ? attributes : null;
-        public override IReadOnlyList<VECTOR> Vertices => (Chunk?.VertexTablesByMemoryAddress?.TryGetValue(VerticesOffset, out var vertices) == true) ? vertices : null;
     }
 }

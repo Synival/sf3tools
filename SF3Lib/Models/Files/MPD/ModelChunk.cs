@@ -76,7 +76,7 @@ namespace SF3.Models.Files.MPD {
                 .ToArray();
 
             var pdataRefs = pdataAddresses
-                .Select(x => new MPD_PDataTable.PDataRef() {
+                .Select(x => new MPD_SGL_Model_PDataTable.PDataRef() {
                     Address       = (int) GetOffsetInChunk(x.AddressInMemory),
                     Collection    = Collection,
                     ChunkIndex    = ChunkIndex,
@@ -86,7 +86,7 @@ namespace SF3.Models.Files.MPD {
                 })
                 .ToArray();
 
-            PDataTable = MPD_PDataTable.Create(Data, "PDATAs", MPD_File, pdataRefs);
+            PDataTable = MPD_SGL_Model_PDataTable.Create(Data, "PDATAs", MPD_File, pdataRefs);
 
             try {
                 PDatasByMemoryAddress = PDataTable
@@ -97,7 +97,7 @@ namespace SF3.Models.Files.MPD {
             }
             catch {
                 // TODO: what to do on error??
-                PDatasByMemoryAddress = new Dictionary<uint, MPD_PDataStruct>();
+                PDatasByMemoryAddress = new Dictionary<uint, MPD_SGL_Model_PDataStruct>();
             }
 
             try {
@@ -345,9 +345,9 @@ namespace SF3.Models.Files.MPD {
         public HeaderModelInstanceTable HeaderModelInstanceTable { get; private set; }
 
         [BulkCopyRecurse]
-        public MPD_PDataTable PDataTable { get; private set; }
+        public MPD_SGL_Model_PDataTable PDataTable { get; private set; }
 
-        public Dictionary<uint, MPD_PDataStruct> PDatasByMemoryAddress { get; private set; }
+        public Dictionary<uint, MPD_SGL_Model_PDataStruct> PDatasByMemoryAddress { get; private set; }
 
         [BulkCopyRecurse]
         public Dictionary<uint, VertexTable> VertexTablesByMemoryAddress { get; private set; }

@@ -64,7 +64,7 @@ namespace SF3.Models.Files.MPD {
         /// Fetches the MPD_PDataStruct for a PDATA that looks like a tree, if one could be found.
         /// </summary>
         /// <returns>A PDataModel reference if one with matching criteria was found. Otherwise, 'null'.</returns>
-        MPD_PDataStruct GetTreePData0();
+        MPD_SGL_Model_PDataStruct GetTreePData0();
 
         /// <summary>
         /// Replaces a set of textures based on appropriately named files (e.g, Texture_0A.png).

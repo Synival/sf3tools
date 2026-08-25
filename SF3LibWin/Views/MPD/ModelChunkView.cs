@@ -35,7 +35,7 @@ namespace SF3.Win.Views.MPD {
                 CreateChild(new DataHexView("Data After Instances", new ByteArray(model.Data.GetDataCopyAt(model.Address, model.SizeInBytesPlusTerminator)), 0x0C));
             }
 
-            CreateChild(new MPD_PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
+            CreateChild(new MPD_SGL_Model_PDataTableView("PDATAs", MPD_File, Model.PDataTable, ngc));
             CreateChild(new TableArrayView<VertexTable>("POINT[]s", Model.VertexTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new TableArrayView<PolygonTable>("POLYGON[]s", Model.PolygonTablesByMemoryAddress.Values.ToArray(), ngc));
             CreateChild(new AttrTableArrayView("ATTR[]s", Model.AttrTablesByMemoryAddress.Values.ToArray(), mc, ngc));
