@@ -7,6 +7,9 @@ using SF3.ByteData;
 namespace SF3.Models.Structs.Shared.SGL {
     public abstract class SGL_Model_PDataStruct : PDataStruct, ISGL_Model {
         protected SGL_Model_PDataStruct(IByteData data, int id, string name, int address) : base(data, id, name, address) {
+            if ((int) VerticesOffset == -1)
+                return;
+
             var faceCount = FaceCount;
             var mockFaces = Enumerable.Range(0, faceCount).Select(x => new MockFace(this, x)).ToArray();
             Faces = new MockFaceEnumerable(mockFaces);

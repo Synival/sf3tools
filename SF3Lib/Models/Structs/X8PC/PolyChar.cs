@@ -37,7 +37,7 @@ namespace SF3.Models.Structs.X8PC {
             TextureTable      = PCTextureTable.Create(TexDefChunk.DecompressedData, TexDataChunk.DecompressedData.Data, "Textures", (int) TexDefChunkHeader.TexDefsOffset, (int) TexDefChunkHeader.NumTextures);
             ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
             XPDataListTable   = XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset);
-            XPDataTables      = XPDataListTable.Select(x => XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset)).ToArray();
+            XPDataTables      = XPDataListTable.Select(x => PC_SGL_Model_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this)).ToArray();
 
             VertexTablesByOffset = FetchTablesByOffset(
                 XPDataTables,
@@ -71,7 +71,7 @@ namespace SF3.Models.Structs.X8PC {
             Tables = tables.ToArray();
         }
 
-        private static Dictionary<int, T> FetchTablesByOffset<T>(XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
+        private static Dictionary<int, T> FetchTablesByOffset<T>(PC_SGL_Model_XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
             return tables
                 .SelectMany(x => x.Select(y => countOffsetFetcher(y)))
                 .OrderBy(x => x.Offset)
@@ -129,7 +129,7 @@ namespace SF3.Models.Structs.X8PC {
 
         public PCModelChunkHeader ModelChunkHeader { get; private set; }
         public XPDataListTable XPDataListTable { get; private set; }
-        public XPDataTable[] XPDataTables { get; private set; }
+        public PC_SGL_Model_XPDataTable[] XPDataTables { get; private set; }
         public Dictionary<int, VertexTable> VertexTablesByOffset { get; }
         public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
