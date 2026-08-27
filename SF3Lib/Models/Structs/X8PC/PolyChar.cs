@@ -6,7 +6,6 @@ using CommonLib.Imaging;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
-using SF3.Models.Tables.Shared;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
 
@@ -39,8 +38,8 @@ namespace SF3.Models.Structs.X8PC {
             _animatableTextureDictionary = TextureTable.ToDictionary(x => x.ID, x => (IAnimatableTexture) x);
 
             ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
-            XPDataListTable   = XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset);
-            XPDataTables      = XPDataListTable.Select(x => PC_SGL_Model_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this)).ToArray();
+            XPDataListTable   = PC_XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset, this);
+            XPDataTables      = XPDataListTable.Select(x => PC_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this)).ToArray();
 
             VertexTablesByOffset = FetchTablesByOffset(
                 XPDataTables,
@@ -79,7 +78,7 @@ namespace SF3.Models.Structs.X8PC {
             Tables = tables.ToArray();
         }
 
-        private static Dictionary<int, T> FetchTablesByOffset<T>(PC_SGL_Model_XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
+        private static Dictionary<int, T> FetchTablesByOffset<T>(PC_XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
             return tables
                 .SelectMany(x => x.Select(y => countOffsetFetcher(y)))
                 .OrderBy(x => x.Offset)
@@ -140,8 +139,8 @@ namespace SF3.Models.Structs.X8PC {
         public PCTextureTable TextureTable { get; private set; }
 
         public PCModelChunkHeader ModelChunkHeader { get; private set; }
-        public XPDataListTable XPDataListTable { get; private set; }
-        public PC_SGL_Model_XPDataTable[] XPDataTables { get; private set; }
+        public PC_XPDataListTable XPDataListTable { get; private set; }
+        public PC_XPDataTable[] XPDataTables { get; private set; }
         public Dictionary<int, VertexTable> VertexTablesByOffset { get; }
         public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }

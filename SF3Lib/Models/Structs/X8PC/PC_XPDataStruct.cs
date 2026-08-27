@@ -4,8 +4,8 @@ using SF3.ByteData;
 using SF3.Models.Structs.Shared.SGL;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PC_SGL_Model_XPDataStruct : SGL_Model_XPDataStruct {
-        public PC_SGL_Model_XPDataStruct(IByteData data, int id, string name, int address, PolyChar polyChar) : base(data, id, name, address) {
+    public class PC_XPDataStruct : SGL_Model_XPDataStruct {
+        public PC_XPDataStruct(IByteData data, int id, string name, int address, PolyChar polyChar) : base(data, id, name, address) {
             PolyChar = polyChar;
         }
 

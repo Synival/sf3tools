@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using CommonLib.NamedValues;
-using SF3.Models.Structs.Shared;
 using SF3.Models.Structs.X8PC;
 
 namespace SF3.Win.Views.X8PC {
@@ -9,8 +8,8 @@ namespace SF3.Win.Views.X8PC {
             NameGetterContext      = ngc;
 
             HeaderView             = new DataModelView("Header", model?.ModelChunk, ngc, modelType: typeof(PCModelChunkHeader));
-            XPDataListsView        = new TableView("XPDATA Lists", model?.XPDataListTable, ngc, modelType: typeof(XPDataListStruct));
-            XPDataTablesView       = new PC_SGL_Model_XPDataTablesView("XPDATAs", model, ngc);
+            XPDataListsView        = new TableView("XPDATA Lists", model?.XPDataListTable, ngc, modelType: typeof(PC_XPDataListStruct));
+            XPDataTablesView       = new PC_XPDataTablesView("XPDATAs", model, ngc);
             VertexTablesView       = new VertexTablesView("VERTEXes", model, ngc);
             PolygonTablesView      = new PolygonTablesView("POLYGONs", model, ngc);
             AttrTablesView         = new AttrTablesView("ATTRs", model, ngc);
@@ -56,7 +55,7 @@ namespace SF3.Win.Views.X8PC {
         public INameGetterContext NameGetterContext { get; }
         public DataModelView HeaderView { get; }
         public TableView XPDataListsView { get; }
-        public PC_SGL_Model_XPDataTablesView XPDataTablesView { get; }
+        public PC_XPDataTablesView XPDataTablesView { get; }
         public VertexTablesView VertexTablesView { get; }
         public PolygonTablesView PolygonTablesView { get; }
         public AttrTablesView AttrTablesView { get; }
