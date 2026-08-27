@@ -65,7 +65,7 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
                     }
 
                     // Pass 3: Untextured models
-                    using (selectionColors ? general.WhiteTexture.Use(ObjectShaderTextureUnit.TextureAtlas) : null) {
+                    using (selectionColors ? null : general.WhiteTexture.Use(ObjectShaderTextureUnit.TextureAtlas)) {
                         foreach (var mwg in modelsWithGroups.Where(x => x.ModelGroup.SolidUntexturedModel != null).ToArray()) {
                             if (selectionColors)
                                 shader.UpdateUniform("color", ModelSelectionColor(mwg.Model));
