@@ -22,7 +22,7 @@ namespace SF3.Win.Views {
         public override void RefreshContent() {
             if (!IsCreated)
                 return;
-            Control.Update(null, null);
+            Control.Update(null, (ISGL_Model) null);
             Control.Update(_texCollection, _sglModel);
         }
 

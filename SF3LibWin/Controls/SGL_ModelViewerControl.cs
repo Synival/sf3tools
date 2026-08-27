@@ -42,8 +42,8 @@ namespace SF3.Win.Controls {
 
             _renderer = new SGL_ModelRenderer();
 
-            if (TextureContainer != null && _sglModel != null)
-                Update(TextureContainer, _sglModel);
+            if (TextureContainer != null && _sglModels.Length != 0)
+                Update(TextureContainer, _sglModels);
 
             var lighting = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
@@ -186,18 +186,34 @@ namespace SF3.Win.Controls {
         }
 
         public ITextureMetaCollection TextureContainer { get; private set; } = null;
-        private ISGL_Model _sglModel = null;
+        private ISGL_Model[] _sglModels = [];
 
         public void Update(
             ITextureMetaCollection texContainer, ISGL_Model sglModel,
             float rotX = 0f, float rotY = 0f, float rotZ = 0f,
             float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
         ) {
-            if (_sglModel == sglModel)
+            ISGL_Model[] sglModels = (sglModel == null) ? [] : [sglModel];
+            Update(texContainer, sglModels, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
+        }
+
+        public void Update(
+            ITextureMetaCollection texContainer, ISGL_Model[] sglModels,
+            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
+            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
+        ) {
+            if (sglModels == null)
+                sglModels = [];
+
+            if (Enumerable.SequenceEqual(_sglModels, sglModels))
                 return;
 
+            // Always use the first collection ID.
+            var collectionId = sglModels.Length == 0 ? -1 : sglModels[0].ModelCollectionID;
+            sglModels = sglModels.Where(x => x.ModelCollectionID == collectionId).ToArray();
+
             TextureContainer = texContainer;
-            _sglModel        = sglModel;
+            _sglModels       = sglModels;
             _vertices        = null;
             _size            = 1.0f;
             _center          = new Vector3();
@@ -205,10 +221,11 @@ namespace SF3.Win.Controls {
 
             if (_models != null) {
                 _models.Reset();
-                if (TextureContainer != null && sglModel != null) {
-                    var texturesById = texContainer.GetAnimatableTexturesByModelCollectionID(sglModel?.ModelCollectionID ?? -1);
+                if (TextureContainer != null) {
+                    var texturesById = texContainer.GetAnimatableTexturesByModelCollectionID(collectionId);
                     _models.Update(
-                        sglModel, texturesById, () => {
+                        sglModels, texturesById, (idx) => {
+                            var sglModel = sglModels[idx];
                             return new SGL_ModelInstance((mi, lod) => sglModel) {
                                 ModelCollectionID = sglModel.ModelCollectionID,
                                 ModelID = sglModel.ModelID,
@@ -231,7 +248,7 @@ namespace SF3.Win.Controls {
                         Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
                         Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
 
-                    _vertices = sglModel.Vertices.Select(x => x.ToVector3() * verticesMatrix).ToArray();
+                    _vertices = sglModels.SelectMany(x => x.Vertices.Select(y => y.ToVector3() * verticesMatrix)).ToArray();
 
                     _minX = _vertices.Min(x => x.X) / 32.0f;
                     _minY = _vertices.Min(x => x.Y) / 32.0f;
@@ -263,12 +280,11 @@ namespace SF3.Win.Controls {
                 return;
 
             // TODO: this doesn't update at 30fps, please fix!
-            if (_sglModel != null) {
-                var collectionId = _sglModel.ModelCollectionID;
+            var collectionIds = _sglModels.Select(x => x.ModelCollectionID).Distinct().ToArray();
+            foreach (var collectionId in collectionIds)
                 foreach (var modelGroup in _models.ModelGroupsByIDByCollection[collectionId].Values)
                     foreach (var model in modelGroup.Models)
                         _ = model.UpdateAnimatedTextures();
-            }
 
             Invalidate();
         }

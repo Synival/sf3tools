@@ -58,6 +58,26 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             ModelInstances = [instCreator()];
         }
 
+        public void Update(
+            ISGL_Model[] sglModels, Dictionary<int, IAnimatableTexture> texturesById, Func<int /*index*/, ISGL_ModelInstance> instCreator,
+            float? forceSemiTransparentValue, bool isHideMesh, bool? forceLighting
+        ) {
+            Reset();
+            if (sglModels == null || sglModels.Length == 0 || texturesById == null || instCreator == null)
+                return;
+
+            var insts = new List<ISGL_ModelInstance>();
+            int idx = 0;
+            foreach (var sglModel in sglModels) {
+                var collectionId = sglModel.ModelCollectionID;
+                InitDictsForType(collectionId);
+                SGL_ModelsByIDByCollection[collectionId][sglModel.ModelID] = sglModel;
+                CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh, forceLighting);
+                insts.Add(instCreator(idx++));
+            }
+            ModelInstances = insts.ToArray();
+        }
+
         protected void CreateAndAddQuadModels(
             int modelCollection,
             ISGL_Model model,

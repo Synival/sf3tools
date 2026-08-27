@@ -23,7 +23,7 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
             Control.ForceLighting = _forceLighting;
-            Control.Update(null, null);
+            Control.Update(null, (ISGL_Model) null);
             UpdateViewerControl();
         }
 

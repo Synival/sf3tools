@@ -9,7 +9,7 @@ namespace SF3.Win.Views.X8PC {
             NameGetterContext      = ngc;
 
             HeaderView             = new DataModelView("Header", model?.ModelChunk, ngc, modelType: typeof(PCModelChunkHeader));
-            XPDataListsView        = new TableView("XPDATA Pointers", model?.XPDataListTable, ngc, modelType: typeof(XPDataListStruct));
+            XPDataListsView        = new TableView("XPDATA Lists", model?.XPDataListTable, ngc, modelType: typeof(XPDataListStruct));
             XPDataTablesView       = new PC_SGL_Model_XPDataTablesView("XPDATAs", model, ngc);
             VertexTablesView       = new VertexTablesView("VERTEXes", model, ngc);
             PolygonTablesView      = new PolygonTablesView("POLYGONs", model, ngc);
