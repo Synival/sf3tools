@@ -11,13 +11,13 @@ namespace SF3.Win.Views {
     public class SGL_ModelInstanceTableView<TStruct, TTable> : ControlSpaceView
     where TStruct : ISGL_ModelInstance
     where TTable : ITable {
-        public SGL_ModelInstanceTableView(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null, float size = 1.0f)
+        public SGL_ModelInstanceTableView(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
         : base(name) {
             _textureCollection = texCollection;
             _table             = table;
 
             TableView = new TableView("ModelTable", table, ngc, typeof(TStruct));
-            ModelView = new SGL_ModelInstance3DView("ModelView", texCollection, forceLighting: forceLighting, size: size);
+            ModelView = new SGL_ModelInstance3DView("ModelView", texCollection, forceLighting: forceLighting, size: size, zoom: zoom);
         }
 
         public override Control Create() {

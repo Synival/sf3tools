@@ -5,19 +5,26 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class SGL_ModelInstance3DView : ControlView<SGL_ModelViewerControl> {
-        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool? forceLighting = null, float size = 1.0f)
+        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
         : base(name) {
             _texCollection = texContainer;
             _modelInstance = sglModelInstance;
             _forceLighting = forceLighting;
             _size = size;
+            _zoom = zoom;
             UpdateSGL_Model();
         }
 
         public override Control Create() {
             var rval = base.Create();
-            if (_size != 1.0f)
-                Control.Size = new System.Drawing.Size((int) (Control.Width * _size), (int) (Control.Height * _size));
+            if (_size != 1.0f) {
+                Control.MaximumSize = new System.Drawing.Size((int) (Control.MaximumSize.Width * _size), (int) (Control.MaximumSize.Height * _size));
+                Control.MinimumSize = new System.Drawing.Size((int) (Control.MinimumSize.Width * _size), (int) (Control.MinimumSize.Height * _size));
+                Control.Size = new System.Drawing.Size((int) (Control.Size.Width * _size), (int) (Control.Size.Height * _size));
+            }
+            Control.Zoom = _zoom;
+
+            Control.ForceLighting = _forceLighting;
             UpdateViewerControl();
             return rval;
         }
@@ -61,5 +68,6 @@ namespace SF3.Win.Views {
 
         private readonly bool? _forceLighting;
         private readonly float _size;
+        private readonly float _zoom;
     }
 }

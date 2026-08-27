@@ -9,13 +9,13 @@ using SF3.Win.Controls;
 namespace SF3.Win.Views {
     public abstract class SGL_ModelTableViewBase<TStruct, TTable> : ControlSpaceView
     where TTable : ITable {
-        public SGL_ModelTableViewBase(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null, float size = 1.0f)
+        public SGL_ModelTableViewBase(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
         : base(name) {
             _textureCollection = texCollection;
             _table             = table;
 
             TableView = new TableView("ModelTable", table, ngc, typeof(TStruct));
-            ModelView = new SGL_Model3DView("ModelView", texCollection, forceLighting: forceLighting, size: size);
+            ModelView = new SGL_Model3DView("ModelView", texCollection, forceLighting: forceLighting, size: size, zoom: zoom);
         }
 
         public override Control Create() {

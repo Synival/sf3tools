@@ -17,7 +17,7 @@ namespace SF3.Win.Controls {
         public SGL_ModelViewerControl() {
             InitializeComponent();
             MaximumSize = MinimumSize = new System.Drawing.Size(320, 320);
-            ForceLighting = false;
+            ForceLighting = null;
         }
 
         protected override void OnLoad(EventArgs e) {
@@ -272,7 +272,7 @@ namespace SF3.Win.Controls {
                     _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
                     _center = new Vector3((_minX + _maxX) / 2, (_minY + _maxY) / -2, (_minZ + _maxZ) / -2);
 
-                    _dist = (float) Math.Pow(_size, 0.875f) * 4f;
+                    _dist = (float) Math.Pow(_size, 0.875f) * 4f / Zoom;
                 }
                 else {
                     // TODO: throw?? what to do here???
@@ -301,6 +301,7 @@ namespace SF3.Win.Controls {
         public float Pitch { get; private set; }
 
         public bool? ForceLighting { get; set; }
+        public float Zoom { get; set; } = 1.0f;
 
         private float _minX = 0f;
         private float _minY = 0f;
