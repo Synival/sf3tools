@@ -23,7 +23,12 @@ namespace SF3.Models.Structs.X8PC {
 
         public ISGL_Model GetModel(int id, int lod) {
             var offset = XPDataListOffset;
-            return PolyChar.XPDataTables.SelectMany(x => x).FirstOrDefault(x => x.Address == offset);
+            return PolyChar.XPDataTables[ID][id];
+        }
+
+        public ISGL_Model[] GetAllModels() {
+            var offset = XPDataListOffset;
+            return PolyChar.XPDataTables[ID].ToArray();
         }
 
         public PolyChar PolyChar { get; }

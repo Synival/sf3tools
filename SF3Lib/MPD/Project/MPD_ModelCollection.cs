@@ -74,6 +74,10 @@ namespace SF3.MPD.Project {
             return model.ModelLoDs[lod];
         }
 
+        ISGL_Model[] ISGL_ModelCollection.GetAllModels() => GetAllModels();
+        public IMPD_ModelLoD[] GetAllModels()
+            => Models.SelectMany(x => x.ModelLoDs).ToArray();
+
         public MPD_CollectionType Collection { get; }
         public bool IsUnreferenced { get; set; }
         public bool HasMissingModels => Models == null;

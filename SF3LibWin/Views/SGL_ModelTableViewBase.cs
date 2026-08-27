@@ -3,21 +3,19 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using CommonLib.Imaging;
 using CommonLib.NamedValues;
-using CommonLib.SGL;
 using SF3.Models.Tables;
 using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
-    public class SGL_ModelInstanceTableView<TStruct, TTable> : ControlSpaceView
-    where TStruct : ISGL_ModelInstance
+    public abstract class SGL_ModelTableViewBase<TStruct, TTable> : ControlSpaceView
     where TTable : ITable {
-        public SGL_ModelInstanceTableView(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null, float size = 1.0f)
+        public SGL_ModelTableViewBase(string name, ITextureMetaCollection texCollection, ITable table, INameGetterContext ngc, bool? forceLighting = null, float size = 1.0f)
         : base(name) {
             _textureCollection = texCollection;
             _table             = table;
 
             TableView = new TableView("ModelTable", table, ngc, typeof(TStruct));
-            ModelView = new SGL_ModelInstance3DView("ModelView", texCollection, forceLighting: forceLighting, size: size);
+            ModelView = new SGL_Model3DView("ModelView", texCollection, forceLighting: forceLighting, size: size);
         }
 
         public override Control Create() {
@@ -44,9 +42,11 @@ namespace SF3.Win.Views {
             return Control;
         }
 
+        protected abstract void ModelSetter(SGL_Model3DView view, ITextureMetaCollection texCollection, TStruct model);
+
         private void OnModelChanged(object sender, EventArgs e) {
             var item = (OLVListItem) TableView.OLVControl?.SelectedItem;
-            ModelView.SetModelInstance(_textureCollection, (TStruct) item?.RowObject);
+            ModelSetter(ModelView, _textureCollection, (TStruct) item?.RowObject);
         }
 
         public override void Destroy() {
@@ -77,11 +77,11 @@ namespace SF3.Win.Views {
                     TableView.OLVControl.SelectedItem = (_table?.Count >= 1) ? TableView.OLVControl.Items[0] : null;
 
                 var item = (OLVListItem) TableView.OLVControl?.SelectedItem;
-                ModelView.SetModelInstance(_textureCollection, (TStruct) item?.RowObject);
+                ModelSetter(ModelView, _textureCollection, (TStruct) item?.RowObject);
             }
         }
 
         public TableView TableView { get; }
-        public SGL_ModelInstance3DView ModelView { get; }
+        public SGL_Model3DView ModelView { get; }
     }
 }

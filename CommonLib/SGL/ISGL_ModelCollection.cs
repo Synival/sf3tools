@@ -7,5 +7,8 @@
         /// <param name="lod">Level-of-detail index.</param>
         /// <returns>A model in a structure compatible with SGL.</returns>
         ISGL_Model GetModel(int id, int lod);
+
+        // TODO: Linq?
+        ISGL_Model[] GetAllModels();
     }
 }

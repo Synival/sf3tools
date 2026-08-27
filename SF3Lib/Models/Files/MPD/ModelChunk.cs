@@ -300,6 +300,10 @@ namespace SF3.Models.Files.MPD {
         public IMPD_ModelLoD GetModel(int id, int lod)
             => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ModelID == id && x.LevelOfDetail == lod);
 
+        ISGL_Model[] ISGL_ModelCollection.GetAllModels() => GetAllModels();
+        public IMPD_ModelLoD[] GetAllModels()
+            => PDatasByMemoryAddress.Values.ToArray();
+
         private class ModelWithLoD : IMPD_Model {
             public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_ModelLoD[] models) {
                 Collection     = collection;

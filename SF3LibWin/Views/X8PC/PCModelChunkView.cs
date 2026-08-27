@@ -8,7 +8,7 @@ namespace SF3.Win.Views.X8PC {
             NameGetterContext      = ngc;
 
             HeaderView             = new DataModelView("Header", model?.ModelChunk, ngc, modelType: typeof(PCModelChunkHeader));
-            XPDataListsView        = new TableView("XPDATA Lists", model?.XPDataListTable, ngc, modelType: typeof(PC_XPDataListStruct));
+            XPDataListsView        = new PC_XPDataListTableView("XPDATA Lists", model, model?.XPDataListTable, ngc);
             XPDataTablesView       = new PC_XPDataTablesView("XPDATAs", model, ngc);
             VertexTablesView       = new VertexTablesView("VERTEXes", model, ngc);
             PolygonTablesView      = new PolygonTablesView("POLYGONs", model, ngc);
@@ -42,7 +42,7 @@ namespace SF3.Win.Views.X8PC {
                 if (_model != value) {
                     _model = value;
                     HeaderView.Model             = _model?.ModelChunkHeader;
-                    XPDataListsView.Table        = _model?.XPDataListTable;
+                    XPDataListsView.SetTable(_model, _model?.XPDataListTable);
                     XPDataTablesView.Model       = _model;
                     VertexTablesView.Model       = _model;
                     PolygonTablesView.Model      = _model;
@@ -54,7 +54,7 @@ namespace SF3.Win.Views.X8PC {
 
         public INameGetterContext NameGetterContext { get; }
         public DataModelView HeaderView { get; }
-        public TableView XPDataListsView { get; }
+        public PC_XPDataListTableView XPDataListsView { get; }
         public PC_XPDataTablesView XPDataTablesView { get; }
         public VertexTablesView VertexTablesView { get; }
         public PolygonTablesView PolygonTablesView { get; }

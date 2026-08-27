@@ -251,13 +251,19 @@ namespace SF3.Win.Controls {
 
                     _vertices = sglModels.SelectMany(x => x.Vertices.Select(y => y.ToVector3() * verticesMatrix)).ToArray();
 
-                    _minX = _vertices.Min(x => x.X) / 32.0f;
-                    _minY = _vertices.Min(x => x.Y) / 32.0f;
-                    _minZ = _vertices.Min(x => x.Z) / 32.0f;
+                    if (_vertices.Length > 0) {
+                        _minX = _vertices.Min(x => x.X) / 32.0f;
+                        _minY = _vertices.Min(x => x.Y) / 32.0f;
+                        _minZ = _vertices.Min(x => x.Z) / 32.0f;
 
-                    _maxX = _vertices.Max(x => x.X) / 32.0f;
-                    _maxY = _vertices.Max(x => x.Y) / 32.0f;
-                    _maxZ = _vertices.Max(x => x.Z) / 32.0f;
+                        _maxX = _vertices.Max(x => x.X) / 32.0f;
+                        _maxY = _vertices.Max(x => x.Y) / 32.0f;
+                        _maxZ = _vertices.Max(x => x.Z) / 32.0f;
+                    }
+                    else {
+                        _minX = _minY = _minZ = -1.0f;
+                        _maxX = _maxY = _maxZ = 1.0f;
+                    }
 
                     _width  = _maxX - _minX;
                     _height = _maxY - _minY;

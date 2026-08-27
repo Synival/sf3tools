@@ -6,22 +6,29 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class SGL_Model3DView : ControlView<SGL_ModelViewerControl> {
-        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model sglModel = null, bool? forceLighting = null)
+        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model sglModel = null, bool? forceLighting = null, float size = 1.0f)
         : base(name) {
             _texCollection = texContainer;
             _sglModels     = sglModel == null ? [] : [sglModel];
             _forceLighting = forceLighting;
+            _size          = size;
         }
 
-        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model[] sglModels, bool? forceLighting = null)
+        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model[] sglModels, bool? forceLighting = null, float size = 1.0f)
         : base(name) {
             _texCollection = texContainer;
             _sglModels     = sglModels;
             _forceLighting = forceLighting;
+            _size          = size;
         }
 
         public override Control Create() {
             var rval = base.Create();
+            if (_size != 1.0f) {
+                Control.MaximumSize = new System.Drawing.Size((int) (Control.MaximumSize.Width * _size), (int) (Control.MaximumSize.Height * _size));
+                Control.MinimumSize = new System.Drawing.Size((int) (Control.MinimumSize.Width * _size), (int) (Control.MinimumSize.Height * _size));
+                Control.Size = new System.Drawing.Size((int) (Control.Size.Width * _size), (int) (Control.Size.Height * _size));
+            }
             Control.ForceLighting = _forceLighting;
             Control.Update(_texCollection, _sglModels);
             return rval;
@@ -55,5 +62,6 @@ namespace SF3.Win.Views {
         }
 
         private readonly bool? _forceLighting;
+        private readonly float _size;
     }
 }

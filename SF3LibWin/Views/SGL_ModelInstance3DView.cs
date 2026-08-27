@@ -5,16 +5,19 @@ using SF3.Win.Controls;
 
 namespace SF3.Win.Views {
     public class SGL_ModelInstance3DView : ControlView<SGL_ModelViewerControl> {
-        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool? forceLighting = null)
+        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool? forceLighting = null, float size = 1.0f)
         : base(name) {
             _texCollection = texContainer;
             _modelInstance = sglModelInstance;
             _forceLighting = forceLighting;
+            _size = size;
             UpdateSGL_Model();
         }
 
         public override Control Create() {
             var rval = base.Create();
+            if (_size != 1.0f)
+                Control.Size = new System.Drawing.Size((int) (Control.Width * _size), (int) (Control.Height * _size));
             UpdateViewerControl();
             return rval;
         }
@@ -57,5 +60,6 @@ namespace SF3.Win.Views {
         }
 
         private readonly bool? _forceLighting;
+        private readonly float _size;
     }
 }
