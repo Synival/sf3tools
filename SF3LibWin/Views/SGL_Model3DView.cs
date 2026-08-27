@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using CommonLib.Imaging;
 using CommonLib.SGL;
 using SF3.Win.Controls;
@@ -8,14 +9,21 @@ namespace SF3.Win.Views {
         public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model sglModel = null, bool? forceLighting = null)
         : base(name) {
             _texCollection = texContainer;
-            _sglModel      = sglModel;
+            _sglModels     = sglModel == null ? [] : [sglModel];
+            _forceLighting = forceLighting;
+        }
+
+        public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model[] sglModels, bool? forceLighting = null)
+        : base(name) {
+            _texCollection = texContainer;
+            _sglModels     = sglModels;
             _forceLighting = forceLighting;
         }
 
         public override Control Create() {
             var rval = base.Create();
             Control.ForceLighting = _forceLighting;
-            Control.Update(_texCollection, _sglModel);
+            Control.Update(_texCollection, _sglModels);
             return rval;
         }
 
@@ -23,22 +31,26 @@ namespace SF3.Win.Views {
             if (!IsCreated)
                 return;
             Control.Update(null, (ISGL_Model) null);
-            Control.Update(_texCollection, _sglModel);
+            Control.Update(_texCollection, _sglModels);
         }
 
         private ITextureMetaCollection _texCollection = null;
         public ITextureMetaCollection TextureCollection => _texCollection;
 
-        private ISGL_Model _sglModel = null;
+        private ISGL_Model[] _sglModels = [];
 
-        public ISGL_Model Model => _sglModel;
+        public ISGL_Model[] Models => _sglModels;
 
-        public void SetModel(ITextureMetaCollection texCollection, ISGL_Model sglModel) {
-            if (_texCollection != texCollection || _sglModel != sglModel) {
+        public void SetModel(ITextureMetaCollection texCollection, ISGL_Model sglModel)
+            => SetModels(texCollection, sglModel == null ? [] : [sglModel]);
+
+        public void SetModels(ITextureMetaCollection texCollection, ISGL_Model[] sglModels) {
+            sglModels ??= [];
+            if (_texCollection != texCollection || !Enumerable.SequenceEqual(_sglModels, sglModels)) {
                 _texCollection = texCollection;
-                _sglModel      = sglModel;
+                _sglModels     = sglModels;
                 if (Control != null)
-                    Control.Update(_texCollection, _sglModel);
+                    Control.Update(_texCollection, _sglModels);
             }
         }
 

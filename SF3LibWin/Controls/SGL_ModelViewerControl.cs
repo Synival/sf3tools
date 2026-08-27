@@ -197,13 +197,14 @@ namespace SF3.Win.Controls {
             Update(texContainer, sglModels, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
         }
 
-        public void Update(
+        public void Update(ITextureMetaCollection texContainer, ISGL_Model[] sglModels)
+            => Update(texContainer, sglModels, 0, 0, 0, 1, 1, 1);
+
+        private void Update(
             ITextureMetaCollection texContainer, ISGL_Model[] sglModels,
-            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
-            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
+            float rotX, float rotY, float rotZ, float scaleX, float scaleY, float scaleZ
         ) {
-            if (sglModels == null)
-                sglModels = [];
+            sglModels ??= [];
 
             if (Enumerable.SequenceEqual(_sglModels, sglModels))
                 return;
