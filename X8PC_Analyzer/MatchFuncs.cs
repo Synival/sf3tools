@@ -1,4 +1,5 @@
 ﻿using SF3.Models.Files.X8PC;
+using SF3.X8PC;
 
 namespace X8PC_Analyzer {
     public static class MatchFuncs {
@@ -20,6 +21,18 @@ namespace X8PC_Analyzer {
             }
 
             return strings.ToArray();
+        }
+
+        public static string[]? PrintSkeletons(IX8PC_File x8pcFile) {
+            var strings = new List<string>();
+
+            foreach (var pc in x8pcFile.PolyCharTable) {
+                var parser = new SkeletonParser(pc.ModelChunk.DecompressedData);
+                var skeleton = parser.Parse((int) pc.ModelChunkHeader.SkeletonOffset);
+                strings.Add($"{pc.Name}:\n" + skeleton.ToOutline());
+            }
+
+            return strings.Count > 0 ? strings.ToArray() : null;
         }
     }
 }
