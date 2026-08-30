@@ -27,9 +27,9 @@ namespace X8PC_Analyzer {
             var strings = new List<string>();
 
             foreach (var pc in x8pcFile.PolyCharTable) {
-                var parser = new SkeletonParser(pc.ModelChunk.DecompressedData);
-                var skeleton = parser.Parse((int) pc.ModelChunkHeader.SkeletonOffset);
-                strings.Add($"{pc.Name}:\n" + skeleton.ToOutline());
+                var parser = new SkeletonFactory();
+                var skeleton = parser.CreateSkeleton(pc.ModelChunk.DecompressedData, (int) pc.ModelChunkHeader.SkeletonOffset);
+                strings.Add($"{pc.Name}:\n" + skeleton.RootBone.ToOutline());
             }
 
             return strings.Count > 0 ? strings.ToArray() : null;
