@@ -40,7 +40,7 @@ namespace SF3.Models.Structs.X8PC {
 
             ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
             XPDataListTable   = PC_XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset, this);
-            XPDataTables      = XPDataListTable.Select(x => PC_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this)).ToArray();
+            XPDataTables      = XPDataListTable.Select((x, i) => PC_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this, i * 1000)).ToArray();
 
             VertexTablesByOffset = FetchTablesByOffset(
                 XPDataTables,
@@ -68,6 +68,7 @@ namespace SF3.Models.Structs.X8PC {
 
             var skelFact = new SkeletonFactory();
             var skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
+            BoneTable = PC_BoneWrapperTable.Create("BoneNodes", skeleton.RootBone, this);
 
             if (XPDataTables.Length > 0) {
                 var xpdataTable = XPDataTables[0];
@@ -84,6 +85,7 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(PolygonTablesByOffset.Values);
             tables.AddRange(AttrTablesByOffset.Values);
             tables.AddRange(VertexNormalTablesByOffset.Values);
+            tables.Add(BoneTable);
 
             Tables = tables.ToArray();
         }
@@ -156,6 +158,7 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
         public Dictionary<int, VertexNormalTable> VertexNormalTablesByOffset { get; }
         public Skeleton Skeleton { get; }
+        public PC_BoneWrapperTable BoneTable { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }

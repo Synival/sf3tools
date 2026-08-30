@@ -51,7 +51,7 @@ namespace SF3.X8PC {
                 }
                 // Model or tag placement.
                 else {
-                    Bone newModel = null;
+                    Bone newModel;
 
                     // New model for rendering.
                     if (skelArg == 0 || skelArg == 0x80) {

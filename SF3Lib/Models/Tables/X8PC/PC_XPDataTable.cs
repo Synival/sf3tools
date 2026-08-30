@@ -3,17 +3,18 @@ using SF3.Models.Structs.X8PC;
 
 namespace SF3.Models.Tables.X8PC {
     public class PC_XPDataTable : TerminatedTable<PC_XPDataStruct> {
-        protected PC_XPDataTable(IByteData data, string name, int address, PolyChar polyChar)
+        protected PC_XPDataTable(IByteData data, string name, int address, PolyChar polyChar, int startId)
         : base(data, name, address, terminatedBytes: 4, maxSize: 1000) {
             PolyChar = polyChar;
+            StartID  = startId;
         }
 
-        public static PC_XPDataTable Create(IByteData data, string name, int address, PolyChar polyChar)
-            => Create(() => new PC_XPDataTable(data, name, address, polyChar));
+        public static PC_XPDataTable Create(IByteData data, string name, int address, PolyChar polyChar, int startId)
+            => Create(() => new PC_XPDataTable(data, name, address, polyChar, startId));
 
         public override bool Load() {
             return Load(
-                (id, addr) => new PC_XPDataStruct(Data, id, "XPDATA_" + id.ToString("D3"), addr, PolyChar),
+                (id, addr) => new PC_XPDataStruct(Data, id, "XPDATA_" + id.ToString("D3"), addr, PolyChar, StartID),
                 (rows, prevRow) => {
                     var data = prevRow.Data.GetInt32(prevRow.Address);
                     return data != -1;
@@ -23,5 +24,6 @@ namespace SF3.Models.Tables.X8PC {
         }
 
         public PolyChar PolyChar { get; }
+        public int StartID { get; }
     }
 }

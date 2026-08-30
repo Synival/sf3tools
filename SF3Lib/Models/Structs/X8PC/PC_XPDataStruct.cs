@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -8,8 +7,10 @@ using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PC_XPDataStruct : SGL_Model_XPDataStruct {
-        public PC_XPDataStruct(IByteData data, int id, string name, int address, PolyChar polyChar) : base(data, id, name, address) {
+        public PC_XPDataStruct(IByteData data, int id, string name, int address, PolyChar polyChar, int modelIdIncr)
+        : base(data, id, name, address) {
             PolyChar = polyChar;
+            _modelIDIncr = modelIdIncr;
         }
 
         public void AssociateWithSkeleton(Skeleton skeleton) {
@@ -23,7 +24,7 @@ namespace SF3.Models.Structs.X8PC {
         public string BonePath { get; private set; } = "";
 
         public override int ModelCollectionID => 0;
-        public override int ModelID => ID;
+        public override int ModelID => ID + _modelIDIncr;
         public override int LevelOfDetail => 0;
 
         public override IReadOnlyList<VECTOR> Vertices        => PolyChar.VertexTablesByOffset.TryGetValue((int) VerticesOffset, out var table) ? table : null;
@@ -32,5 +33,7 @@ namespace SF3.Models.Structs.X8PC {
         public override IReadOnlyList<VECTOR> VertexNormals   => PolyChar.VertexNormalTablesByOffset.TryGetValue((int) VertexNormalsOffset, out var table) ? table : null;
 
         public PolyChar PolyChar { get; }
+
+        private int _modelIDIncr;
     }
 }
