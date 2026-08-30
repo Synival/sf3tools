@@ -8,6 +8,7 @@ using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
+using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PolyChar : Struct, ITableContainer, ITextureMetaCollection {
@@ -64,6 +65,15 @@ namespace SF3.Models.Structs.X8PC {
                 x => (x.VertexCount, (int) x.VertexNormalsOffset),
                 (count, offset, index) => VertexNormalTable.Create(ModelChunk.DecompressedData, $"{nameof(VertexNormalTable)}_{index:D3} @{offset:X4}", offset, count)
             );
+
+            var skelFact = new SkeletonFactory();
+            var skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
+
+            if (XPDataTables.Length > 0) {
+                var xpdataTable = XPDataTables[0];
+                foreach (var xpdata in xpdataTable)
+                    xpdata.AssociateWithSkeleton(skeleton);
+            }
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
@@ -145,6 +155,7 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
         public Dictionary<int, VertexNormalTable> VertexNormalTablesByOffset { get; }
+        public Skeleton Skeleton { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }

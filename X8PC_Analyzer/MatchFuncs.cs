@@ -27,10 +27,19 @@ namespace X8PC_Analyzer {
             var strings = new List<string>();
 
             foreach (var pc in x8pcFile.PolyCharTable) {
-                var parser = new SkeletonFactory();
-                var skeleton = parser.CreateSkeleton(pc.ModelChunk.DecompressedData, (int) pc.ModelChunkHeader.SkeletonOffset);
-                strings.Add($"{pc.Name}:\n" + skeleton.RootBone.ToOutline());
+                strings.Add($"{pc.Name}:\n" + pc.Skeleton.RootBone.ToOutline());
             }
+
+            return strings.Count > 0 ? strings.ToArray() : null;
+        }
+
+        public static string[]? HasUnassociatedXPData(IX8PC_File x8pcFile) {
+            var strings = new List<string>();
+
+            foreach (var pc in x8pcFile.PolyCharTable)
+                foreach (var xpdata in pc.XPDataTables.SelectMany(x => x))
+                    if (xpdata.BonePath == "(none)")
+                        strings.Add($"{pc.Name}:\n" + xpdata.Name);
 
             return strings.Count > 0 ? strings.ToArray() : null;
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CommonLib.SGL;
 
 namespace SF3.X8PC {
@@ -14,9 +15,11 @@ namespace SF3.X8PC {
         /// Constructor for a child bone.
         /// </summary>
         public Bone(int boneId, Bone[] children) {
-            BoneID  = boneId;
-            Tag     = 0xFE;
+            BoneID   = boneId;
+            Tag      = 0xFD;
             Children = children;
+            foreach (var bone in children)
+                bone.Parent = this;
         }
 
         /// <summary>
@@ -79,7 +82,28 @@ namespace SF3.X8PC {
             return bones.ToArray();
         }
 
+        public Bone FindTraverse(Func<Bone, bool> pred) {
+            if (pred(this))
+                return this;
+            if (Children == null)
+                return null;
+            foreach (var bone in Children) {
+                var found = bone.FindTraverse(pred);
+                if (found != null)
+                    return found;
+            }
+            return null;
+        }
+
+        public string GetBonePath() {
+            var boneName = "";
+            for (var bone = this; bone != null; bone = bone.Parent)
+                boneName = bone.BoneID.HasValue ? ($"0x{bone.BoneID:X02}" + (boneName == "" ? "" : $".{boneName}")) : boneName;
+            return boneName;
+        }
+
         public int? Tag { get; }
+        public Bone Parent { get; private set; }
         public int? BoneID { get; }
 
         public int? ModelID { get; }
