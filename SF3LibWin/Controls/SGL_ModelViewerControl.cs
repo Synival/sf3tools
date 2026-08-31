@@ -21,8 +21,8 @@ namespace SF3.Win.Controls {
         }
 
         protected override void OnLoad(EventArgs e) {
-            base.OnLoad(e);
             MakeCurrent();
+            base.OnLoad(e);
 
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Less);
@@ -85,6 +85,8 @@ namespace SF3.Win.Controls {
             _timer.Start();
 
             Disposed += (s, e) => {
+                MakeCurrent();
+
                 _general?.Dispose();
                 _screen?.Dispose();
                 _models?.Dispose();
@@ -100,8 +102,8 @@ namespace SF3.Win.Controls {
         }
 
         protected override void OnResize(EventArgs e) {
-            base.OnResize(e);
             MakeCurrent();
+            base.OnResize(e);
 
             GL.Viewport(0, 0, ClientSize.Width, ClientSize.Width);
             UpdateProjectionMatrices();
@@ -115,6 +117,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateProjectionMatrices() {
+            MakeCurrent();
             UpdateProjectionMatrix();
             if (_general?.Shaders?.Count > 0)
                 foreach (var shader in _general.Shaders)
@@ -122,6 +125,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateLightPos() {
+            MakeCurrent();
             var lightPos = new Vector3(-1.00f, 0.50f, 0.50f).Normalized()
                 * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
 
@@ -141,6 +145,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateViewMatrix() {
+            MakeCurrent();
             UpdateCameraPosition();
             UpdateLightPos();
             _viewMatrix = Matrix4.CreateTranslation(-Position)
@@ -208,6 +213,8 @@ namespace SF3.Win.Controls {
 
             if (Enumerable.SequenceEqual(_sglModels, sglModels))
                 return;
+
+            MakeCurrent();
 
             // Always use the first collection ID.
             var collectionId = sglModels.Length == 0 ? -1 : sglModels[0].ModelCollectionID;
@@ -283,8 +290,9 @@ namespace SF3.Win.Controls {
         }
 
         private void IncrementFrame() {
-            if (!Visible)
+            if (!Visible || IsDisposed)
                 return;
+            MakeCurrent();
 
             // TODO: this doesn't update at 30fps, please fix!
             var collectionIds = _sglModels.Select(x => x.ModelCollectionID).Distinct().ToArray();

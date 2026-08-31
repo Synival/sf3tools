@@ -335,6 +335,8 @@ namespace SF3.Win.Controls {
         }
 
         private void PerformClear() {
+            MakeCurrent();
+
             if (RenderOnBlackBackground)
                 GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             else
@@ -345,6 +347,7 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateInvalidatedResources() {
+            MakeCurrent();
             UpdateEditorResources();
 
             if (_actorsNeedUpdate) {
@@ -399,6 +402,7 @@ namespace SF3.Win.Controls {
 
         private void UpdateEditorResources() {
             if (_editorNeedsUpdate) {
+                MakeCurrent();
                 _editor.UpdateMouseoverObject(MPD_File, _general, _mouseoverObject);
                 _editor.UpdateSelectedObjects(MPD_File, _general, _selectedObjects);
                 _editorNeedsUpdate = false;
@@ -406,8 +410,10 @@ namespace SF3.Win.Controls {
         }
 
         private void OnFrameTickRendering(float deltaInMs) {
-            if (RunAnimations)
+            if (RunAnimations) {
+                MakeCurrent();
                 UpdateAnimatedTextures(deltaInMs);
+            }
         }
 
         private void OnTileModifiedRendering(object sender) {
@@ -426,6 +432,7 @@ namespace SF3.Win.Controls {
         }
 
         public void UpdateProjectionMatrices(int width, int height) {
+            MakeCurrent();
             UpdateProjectionMatrix(width, height);
             if (_general?.Shaders?.Count > 0)
                 foreach (var shader in _general.Shaders)
@@ -491,6 +498,7 @@ namespace SF3.Win.Controls {
         private float _frameDeltaTimeInMs = 0;
 
         private void UpdateAnimatedTextures(float deltaInMs) {
+            MakeCurrent();
             const float c_frameDurationInMs = (1000.0f / 30.0f);
 
             _frameDeltaTimeInMs += deltaInMs;

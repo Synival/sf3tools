@@ -18,9 +18,9 @@ namespace SF3.Win.Views.X8PC {
             if (base.Create() == null)
                 return null;
 
+            CreateChild(ModelsView);
             CreateChild(ChunkDefView);
             CreateChild(TexturesView);
-            CreateChild(ModelsView);
 
             return Control;
         }
