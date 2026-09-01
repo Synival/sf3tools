@@ -14,7 +14,7 @@ namespace SF3.Win.Views.X8PC {
             PolygonTablesView      = new PolygonTablesView("POLYGONs", model, ngc);
             AttrTablesView         = new AttrTablesView("ATTRs", model, ngc);
             VertexNormalTablesView = new VertexNormalTablesView("VERTEX NORMALs", model, ngc);
-            BonesView              = new PC_BoneWrapperTableView("Bones", model, model?.BoneTable, ngc);
+            BonesView              = new PCBoneWrapperTableView("Bones", model, model?.BoneTable, ngc);
 
             Model                  = model;
         }
@@ -63,6 +63,6 @@ namespace SF3.Win.Views.X8PC {
         public PolygonTablesView PolygonTablesView { get; }
         public AttrTablesView AttrTablesView { get; }
         public VertexNormalTablesView VertexNormalTablesView { get; }
-        public PC_BoneWrapperTableView BonesView { get; }
+        public PCBoneWrapperTableView BonesView { get; }
     }
 }

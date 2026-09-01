@@ -29,9 +29,10 @@ namespace SF3.Models.Structs.X8PC {
             }
 
             // Store references to chunks by name as well as index.
-            TexDefChunk  = Chunks[0];
-            TexDataChunk = Chunks[1];
-            ModelChunk   = Chunks[2];
+            TexDefChunk    = Chunks[0];
+            TexDataChunk   = Chunks[1];
+            ModelChunk     = Chunks[2];
+            AnimationChunk = Chunks[3];
 
             // Initialize structs and tables in chunks.
             TexDefChunkHeader = new PCTexDefChunkHeader(TexDefChunk.DecompressedData, 0, nameof(TexDefChunkHeader), 0);
@@ -76,6 +77,9 @@ namespace SF3.Models.Structs.X8PC {
                     xpdata.AssociateWithSkeleton(skeleton);
             }
 
+            AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
+            BoneKeyframeTable    = PCBoneKeyframeTable.Create(AnimationChunk.DecompressedData, "BoneKeyframeTable", (int) AnimationChunkHeader.BoneKeyframesTableOffset);
+
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
 
@@ -86,6 +90,8 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(AttrTablesByOffset.Values);
             tables.AddRange(VertexNormalTablesByOffset.Values);
             tables.Add(BoneTable);
+
+            tables.Add(BoneKeyframeTable);
 
             Tables = tables.ToArray();
         }
@@ -159,10 +165,13 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, VertexNormalTable> VertexNormalTablesByOffset { get; }
         public Skeleton Skeleton { get; }
         public PC_BoneWrapperTable BoneTable { get; }
+        public PCAnimationChunkHeader AnimationChunkHeader { get; }
+        public PCBoneKeyframeTable BoneKeyframeTable { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }
         public ChunkData TexDataChunk { get; private set; }
         public ChunkData ModelChunk { get; private set; }
+        public ChunkData AnimationChunk { get; private set; }
     }
 }

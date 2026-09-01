@@ -7,9 +7,10 @@ namespace SF3.Win.Views.X8PC {
         public PolyCharView(string name, PolyChar model, INameGetterContext ngc, TabAlignment tabAlignment) : base(name, tabAlignment: tabAlignment) {
             NameGetterContext = ngc;
 
-            ChunkDefView = new TableView("Header", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
-            TexturesView = new PCTexChunkView("Textures", model, NameGetterContext);
-            ModelsView   = new PCModelChunkView("Models", model, NameGetterContext);
+            ChunkDefView   = new TableView("Header", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
+            TexturesView   = new PCTexChunkView("Textures", model, NameGetterContext);
+            ModelsView     = new PCModelChunkView("Models", model, NameGetterContext);
+            AnimationsView = new PCAnimationChunkView("Animations", model, NameGetterContext);
 
             Model = model;
         }
@@ -21,6 +22,7 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(ModelsView);
             CreateChild(ChunkDefView);
             CreateChild(TexturesView);
+            CreateChild(AnimationsView);
 
             return Control;
         }
@@ -31,9 +33,10 @@ namespace SF3.Win.Views.X8PC {
             set {
                 if (_model != value) {
                     _model = value;
-                    ChunkDefView.Table = _model?.Header?.ChunkDefTable;
-                    TexturesView.Model = _model;
-                    ModelsView.Model   = _model;
+                    ChunkDefView.Table   = _model?.Header?.ChunkDefTable;
+                    TexturesView.Model   = _model;
+                    ModelsView.Model     = _model;
+                    AnimationsView.Model = _model;
                 }
             }
         }
@@ -42,5 +45,6 @@ namespace SF3.Win.Views.X8PC {
         public TableView ChunkDefView { get; }
         public PCTexChunkView TexturesView { get; }
         public PCModelChunkView ModelsView { get; }
+        public PCAnimationChunkView AnimationsView { get; }
     }
 }

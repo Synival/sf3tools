@@ -8,10 +8,9 @@ using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     // There is no "bone" struct in X8PC files; this is just a wrapper.
-    public class PC_BoneWrapperStruct : IStruct, IBone, ISGL_ModelCollection {
-        public PC_BoneWrapperStruct(int id, string name, IBone bone, PolyChar polyChar) {
-            ID       = id;
-            Name     = name;
+    public class PCBoneWrapperStruct : IStruct, IBone, ISGL_ModelCollection {
+        public PCBoneWrapperStruct(string name, IBone bone, PolyChar polyChar) {
+            Name = name;
 
             _actualBone = bone;
             PolyChar = polyChar;
@@ -57,9 +56,13 @@ namespace SF3.Models.Structs.X8PC {
             return subBones.Select(x => GetChildDepth(x, currentDepth + 1)).Max();
         }
 
-        [TableViewModelColumn(addressField: null, displayOrder: -3, displayFormat: "X2", minWidth: 45, displayGroup: "Metadata")]
-        public int ID { get; }
         public PolyChar PolyChar { get; }
+
+        public int ID => _actualBone.BoneID ?? -1;
+
+        [TableViewModelColumn(addressField: null, displayOrder: -3, displayFormat: "X2", minWidth: 45, displayGroup: "Metadata")]
+        public int? BoneID => _actualBone.BoneID;
+
         [TableViewModelColumn(addressField: null, displayOrder: -1, minWidth: 120, displayGroup: "Metadata")]
         public string Name { get; }
 
@@ -78,7 +81,6 @@ namespace SF3.Models.Structs.X8PC {
 
         public int? Tag             => _actualBone.Tag;
         public IBone Parent         => _actualBone.Parent;
-        public int? BoneID          => _actualBone.BoneID;
         public int? ModelID         => _actualBone.ModelID;
         public VECTOR? Position     => _actualBone.Position;
         public QUATERNION? Rotation => _actualBone.Rotation;

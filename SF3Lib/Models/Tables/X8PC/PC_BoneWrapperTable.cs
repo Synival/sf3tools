@@ -6,7 +6,7 @@ using SF3.Models.Structs.X8PC;
 using SF3.X8PC;
 
 namespace SF3.Models.Tables.X8PC {
-    public class PC_BoneWrapperTable : Table<PC_BoneWrapperStruct> {
+    public class PC_BoneWrapperTable : Table<PCBoneWrapperStruct> {
         protected PC_BoneWrapperTable(string name, IBone rootBone, PolyChar polyChar)
         : base(null /*N/A*/, name, 0 /*dummy value*/) {
             RootBone = rootBone;
@@ -21,11 +21,11 @@ namespace SF3.Models.Tables.X8PC {
                 _rows = RootBone
                     .Flatten()
                     .Where(x => x.Children != null)
-                    .Select((x, i) => new PC_BoneWrapperStruct(i, x == RootBone ? "Root" : $"Bone_0x{x.BoneID:X02}", x, PolyChar))
+                    .Select(x => new PCBoneWrapperStruct(x == RootBone ? "Root" : $"Bone_0x{x.BoneID:X02}", x, PolyChar))
                     .ToArray();
             }
             catch (Exception e) {
-                _rows = new PC_BoneWrapperStruct[0];
+                _rows = new PCBoneWrapperStruct[0];
                 Logger.WriteLine($"Error loading table '{this.GetType().Name}':", LogType.Error);
                 using (Logger.IndentedSection())
                     Logger.LogException(e);
