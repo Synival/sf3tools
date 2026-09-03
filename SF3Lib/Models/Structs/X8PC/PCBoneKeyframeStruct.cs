@@ -7,9 +7,9 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _numRotKeyframesAddr;
         private readonly int _numScaleKeyframesAddr;
 
-        private readonly int _posFrameListAddr;
-        private readonly int _rotFrameListAddr;
-        private readonly int _scaleFrameListAddr;
+        private readonly int _posFramesOffsetAddr;
+        private readonly int _rotFramesOffsetAddr;
+        private readonly int _scaleFramesOffsetAddr;
 
         private readonly int _posXPtrAddr;
         private readonly int _posYPtrAddr;
@@ -30,9 +30,9 @@ namespace SF3.Models.Structs.X8PC {
             _numRotKeyframesAddr   = Address + 0x04; // 4 bytes
             _numScaleKeyframesAddr = Address + 0x08; // 4 bytes
 
-            _posFrameListAddr      = Address + 0x0C; // 4 bytes
-            _rotFrameListAddr      = Address + 0x10; // 4 bytes
-            _scaleFrameListAddr    = Address + 0x14; // 4 bytes
+            _posFramesOffsetAddr   = Address + 0x0C; // 4 bytes
+            _rotFramesOffsetAddr   = Address + 0x10; // 4 bytes
+            _scaleFramesOffsetAddr = Address + 0x14; // 4 bytes
 
             _posXPtrAddr           = Address + 0x18; // 4 bytes
             _posYPtrAddr           = Address + 0x1C; // 4 bytes
@@ -69,25 +69,25 @@ namespace SF3.Models.Structs.X8PC {
             set => Data.SetUInt32(_numScaleKeyframesAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_posFrameListAddr), displayOrder: 3, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_posFramesOffsetAddr), displayOrder: 3, displayFormat: "X2")]
         [BulkCopy]
-        public uint PosFrameList {
-            get => Data.GetUInt32(_posFrameListAddr);
-            set => Data.SetUInt32(_posFrameListAddr, value);
+        public uint PosFramesOffset {
+            get => Data.GetUInt32(_posFramesOffsetAddr);
+            set => Data.SetUInt32(_posFramesOffsetAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_rotFrameListAddr), displayOrder: 4, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_rotFramesOffsetAddr), displayOrder: 4, displayFormat: "X2")]
         [BulkCopy]
-        public uint RotFrameList {
-            get => Data.GetUInt32(_rotFrameListAddr);
-            set => Data.SetUInt32(_rotFrameListAddr, value);
+        public uint RotFramesOffset {
+            get => Data.GetUInt32(_rotFramesOffsetAddr);
+            set => Data.SetUInt32(_rotFramesOffsetAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_scaleFrameListAddr), displayOrder: 5, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_scaleFramesOffsetAddr), displayOrder: 5, displayFormat: "X2")]
         [BulkCopy]
-        public uint ScaleFrameList {
-            get => Data.GetUInt32(_scaleFrameListAddr);
-            set => Data.SetUInt32(_scaleFrameListAddr, value);
+        public uint ScaleFramesOffset {
+            get => Data.GetUInt32(_scaleFramesOffsetAddr);
+            set => Data.SetUInt32(_scaleFramesOffsetAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_posXPtrAddr), displayOrder: 6, displayFormat: "X2")]

@@ -13,6 +13,10 @@ namespace SF3.Win.Views.X8PC {
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
             BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
 
+            PosFramesView     = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<short>>("PosFrames", model, ngc, x => x?.BoneKeyframePosFrameTablesById?.Values?.ToArray());
+            RotFramesView     = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<short>>("RotFrames", model, ngc, x => x?.BoneKeyframeRotFrameTablesById?.Values?.ToArray());
+            ScaleFramesView   = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<short>>("ScaleFames", model, ngc, x => x?.BoneKeyframeScaleFrameTablesById?.Values?.ToArray());
+
             PosXView          = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>>("PosX", model, ngc, x => x?.BoneKeyframePosXTablesById?.Values?.ToArray());
             RotWView          = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>>("RotW", model, ngc, x => x?.BoneKeyframeRotWTablesById?.Values?.ToArray());
             ScaleXView        = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>>("ScaleX", model, ngc, x => x?.BoneKeyframeScaleXTablesById?.Values?.ToArray());
@@ -28,6 +32,11 @@ namespace SF3.Win.Views.X8PC {
 
             CreateChild(HeaderView);
             CreateChild(BoneKeyframesView);
+
+            CreateChild(PosFramesView);
+            CreateChild(RotFramesView);
+            CreateChild(ScaleFramesView);
+
             CreateChild(PosXView);
             CreateChild(RotWView);
             CreateChild(ScaleXView);
@@ -43,6 +52,11 @@ namespace SF3.Win.Views.X8PC {
                     _model = value;
                     HeaderView.Model        = _model?.AnimationChunkHeader;
                     BoneKeyframesView.Table = _model?.BoneKeyframeTable;
+
+                    PosFramesView.Model     = _model;
+                    RotFramesView.Model     = _model;
+                    ScaleFramesView.Model   = _model;
+
                     PosXView.Model          = _model;
                     RotWView.Model          = _model;
                     ScaleXView.Model        = _model;
@@ -53,6 +67,9 @@ namespace SF3.Win.Views.X8PC {
         public INameGetterContext NameGetterContext { get; }
         public DataModelView HeaderView { get; }
         public TableView BoneKeyframesView { get; }
+        public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<short>> PosFramesView { get; }
+        public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<short>> RotFramesView { get; }
+        public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<short>> ScaleFramesView { get; }
         public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>> PosXView { get; }
         public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>> RotWView { get; }
         public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>> ScaleXView { get; }

@@ -81,6 +81,10 @@ namespace SF3.Models.Structs.X8PC {
             AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
             BoneKeyframeTable    = PCBoneKeyframeTable.Create(AnimationChunk.DecompressedData, "BoneKeyframeTable", (int) AnimationChunkHeader.BoneKeyframesTableOffset);
 
+            BoneKeyframePosFrameTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<short>.Create(AnimationChunk.DecompressedData, $"BoneKeyframePosXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_PosFrames", (int) x.PosFramesOffset, (int) x.NumPosKeyFrames, 4, _shortGetter, _shortSetter));
+            BoneKeyframeRotFrameTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<short>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeRotXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_RotFrames", (int) x.RotFramesOffset, (int) x.NumRotKeyFrames, 4, _shortGetter, _shortSetter));
+            BoneKeyframeScaleFrameTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<short>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeScaleXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_ScaleFrames", (int) x.ScaleFramesOffset, (int) x.NumScaleKeyFrames, 4, _shortGetter, _shortSetter));
+
             BoneKeyframePosXTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframePosXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_PosX", (int) x.PosXPtr, (int) x.NumPosKeyFrames, 4, _fixedGetter, _fixedSetter));
             BoneKeyframePosYTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframePosYTable_{x.ID:D2}", $"Bone_{x.ID:D2}_PosY", (int) x.PosYPtr, (int) x.NumPosKeyFrames, 4, _fixedGetter, _fixedSetter));
             BoneKeyframePosZTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframePosZTable_{x.ID:D2}", $"Bone_{x.ID:D2}_PosZ", (int) x.PosZPtr, (int) x.NumPosKeyFrames, 4, _fixedGetter, _fixedSetter));
@@ -161,8 +165,11 @@ namespace SF3.Models.Structs.X8PC {
 
         private static Func<IByteData, int /*addr*/, float> _fixedGetter             = (d, a) => d.GetFIXED(a).Float;
         private static Func<IByteData, int /*addr*/, float> _compressedFixedGetter   = (d, a) => d.GetCompressedFIXED(a, 14).Float;
+        private static Func<IByteData, int /*addr*/, short> _shortGetter             = (d, a) => d.GetInt16(a);
+
         private static Action<IByteData, int /*addr*/, float> _fixedSetter           = (d, a, v) => d.SetFIXED(a, new FIXED(v, 0));
         private static Action<IByteData, int /*addr*/, float> _compressedFixedSetter = (d, a, v) => d.SetCompressedFIXED(a, new CompressedFIXED(v, 14, 0));
+        private static Action<IByteData, int /*addr*/, short> _shortSetter           = (d, a, v) => d.SetInt16(a, v);
 
         private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;
         public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId)
@@ -187,6 +194,9 @@ namespace SF3.Models.Structs.X8PC {
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
         public PCBoneKeyframeTable BoneKeyframeTable { get; }
+        public Dictionary<int, GenericFixedSizeTable<short>> BoneKeyframePosFrameTablesById { get; }
+        public Dictionary<int, GenericFixedSizeTable<short>> BoneKeyframeRotFrameTablesById { get; }
+        public Dictionary<int, GenericFixedSizeTable<short>> BoneKeyframeScaleFrameTablesById { get; }
         public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframePosXTablesById { get; }
         public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframePosYTablesById { get; }
         public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframePosZTablesById { get; }
