@@ -60,7 +60,7 @@ namespace SF3.ByteData {
         public Fractional GetFractional(int offset) => ChildData.GetFractional(offset);
         public Fractional GetWeirdFractional(int offset) => ChildData.GetWeirdFractional(offset);
         public FIXED GetFIXED(int offset) => ChildData.GetFIXED(offset);
-        public CompressedFIXED GetCompressedFIXED(int offset) => ChildData.GetCompressedFIXED(offset);
+        public CompressedFIXED GetCompressedFIXED(int offset, int fracBits) => ChildData.GetCompressedFIXED(offset, fracBits);
         public string GetString(int offset, int length) => ChildData.GetString(offset, length);
         public bool GetBit(int offset, int bit) => ChildData.GetBit(offset, bit);
         public void SetData(int offset, uint value, int bytes) => ChildData.SetData(offset, value, bytes);

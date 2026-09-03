@@ -17,22 +17,22 @@ namespace SF3.Models.Structs.Shared.SGL {
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 0, minWidth: 75)]
         public float X {
-            get => Data.GetCompressedFIXED(_xAddr).Float;
-            set => Data.SetCompressedFIXED(_xAddr, new CompressedFIXED(value, 0));
+            get => Data.GetCompressedFIXED(_xAddr, 12).Float;
+            set => Data.SetCompressedFIXED(_xAddr, new CompressedFIXED(value, 12, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_yAddr), displayOrder: 1, minWidth: 75)]
         public float Y {
-            get => Data.GetCompressedFIXED(_yAddr).Float;
-            set => Data.SetCompressedFIXED(_yAddr, new CompressedFIXED(value, 0));
+            get => Data.GetCompressedFIXED(_yAddr, 12).Float;
+            set => Data.SetCompressedFIXED(_yAddr, new CompressedFIXED(value, 12, 0));
         }
 
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_zAddr), displayOrder: 2, minWidth: 75)]
         public float Z {
-            get => Data.GetCompressedFIXED(_zAddr).Float;
-            set => Data.SetCompressedFIXED(_zAddr, new CompressedFIXED(value, 0));
+            get => Data.GetCompressedFIXED(_zAddr, 12).Float;
+            set => Data.SetCompressedFIXED(_zAddr, new CompressedFIXED(value, 12, 0));
         }
 
         public VECTOR Vector {

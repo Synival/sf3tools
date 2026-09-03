@@ -95,7 +95,8 @@ namespace SF3.ByteData {
         /// Gets the value of a 16-bit CompressedFIXED at a location.
         /// </summary>
         /// <param name="offset">The address of the 16-bit CompressedFIXED.</param>
-        CompressedFIXED GetCompressedFIXED(int offset);
+        /// <param name="fracBits">Number of bits dedicated to the fractional component.</param>
+        CompressedFIXED GetCompressedFIXED(int offset, int fracBits);
 
         /// <summary>
         /// Returns the value of string data of a specific size at a location.

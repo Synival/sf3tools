@@ -98,7 +98,7 @@ namespace SF3.ByteData {
         public Fractional GetFractional(int offset)           => new Fractional(GetInt16(offset));
         public Fractional GetWeirdFractional(int offset)      => new Fractional(GetUInt16(offset), isWeird: true);
         public FIXED GetFIXED(int offset)                     => new FIXED(GetInt32(offset), true);
-        public CompressedFIXED GetCompressedFIXED(int offset) => new CompressedFIXED(GetInt16(offset));
+        public CompressedFIXED GetCompressedFIXED(int offset, int fracBits) => new CompressedFIXED(GetInt16(offset), fracBits);
 
         public string GetString(int offset, int length) {
             var value = new byte[length];
