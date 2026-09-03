@@ -89,17 +89,21 @@ namespace SF3.Models.Structs.X8PC {
                 )
             );
 
-            BoneKeyframeRotFrameTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<short>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeRotXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_RotFrames", (int) x.RotFramesOffset, (int) x.NumRotKeyFrames, 4, _shortGetter, _shortSetter));
-            BoneKeyframeScaleFrameTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<short>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeScaleXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_ScaleFrames", (int) x.ScaleFramesOffset, (int) x.NumScaleKeyFrames, 4, _shortGetter, _shortSetter));
+            BoneKeyframeRotTable = BoneKeyframeTable.ToDictionary(
+                x => x.ID,
+                x => PCBoneKeyframeRotTable.Create(
+                AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeRot", x.ID, (int) x.NumRotKeyFrames,
+                    (int) x.RotFramesOffset, (int) x.RotXPtr, (int) x.RotYPtr, (int) x.RotZPtr, (int) x.RotWPtr
+                )
+            );
 
-            BoneKeyframeRotXTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeRotXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_RotX", (int) x.RotXPtr, (int) x.NumRotKeyFrames, 2, _compressedFixedGetter, _compressedFixedSetter));
-            BoneKeyframeRotYTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeRotYTable_{x.ID:D2}", $"Bone_{x.ID:D2}_RotY", (int) x.RotYPtr, (int) x.NumRotKeyFrames, 2, _compressedFixedGetter, _compressedFixedSetter));
-            BoneKeyframeRotZTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeRotZTable_{x.ID:D2}", $"Bone_{x.ID:D2}_RotZ", (int) x.RotZPtr, (int) x.NumRotKeyFrames, 2, _compressedFixedGetter, _compressedFixedSetter));
-            BoneKeyframeRotWTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeRotWTable_{x.ID:D2}", $"Bone_{x.ID:D2}_RotW", (int) x.RotWPtr, (int) x.NumRotKeyFrames, 2, _compressedFixedGetter, _compressedFixedSetter));
-
-            BoneKeyframeScaleXTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeScaleXTable_{x.ID:D2}", $"Bone_{x.ID:D2}_ScaleX", (int) x.ScaleXPtr, (int) x.NumScaleKeyFrames, 4, _fixedGetter, _fixedSetter));
-            BoneKeyframeScaleYTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeScaleYTable_{x.ID:D2}", $"Bone_{x.ID:D2}_ScaleY", (int) x.ScaleYPtr, (int) x.NumScaleKeyFrames, 4, _fixedGetter, _fixedSetter));
-            BoneKeyframeScaleZTablesById = BoneKeyframeTable.ToDictionary(x => x.ID, x => GenericFixedSizeTable<float>.Create(AnimationChunk.DecompressedData, $"BoneKeyframeScaleZTable_{x.ID:D2}", $"Bone_{x.ID:D2}_ScaleZ", (int) x.ScaleZPtr, (int) x.NumScaleKeyFrames, 4, _fixedGetter, _fixedSetter));
+            BoneKeyframeScaleTable = BoneKeyframeTable.ToDictionary(
+                x => x.ID,
+                x => PCBoneKeyframeScaleTable.Create(
+                AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeScale", x.ID, (int) x.NumScaleKeyFrames,
+                    (int) x.ScaleFramesOffset, (int) x.ScaleXPtr, (int) x.ScaleYPtr, (int) x.ScaleZPtr
+                )
+            );
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
@@ -114,6 +118,8 @@ namespace SF3.Models.Structs.X8PC {
 
             tables.Add(BoneKeyframeTable);
             tables.AddRange(BoneKeyframePosTable.Values);
+            tables.AddRange(BoneKeyframeRotTable.Values);
+            tables.AddRange(BoneKeyframeScaleTable.Values);
 
             Tables = tables.ToArray();
         }
@@ -199,15 +205,8 @@ namespace SF3.Models.Structs.X8PC {
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
         public PCBoneKeyframeTable BoneKeyframeTable { get; }
         public Dictionary<int, PCBoneKeyframePosTable> BoneKeyframePosTable { get; }
-        public Dictionary<int, GenericFixedSizeTable<short>> BoneKeyframeRotFrameTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<short>> BoneKeyframeScaleFrameTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeRotXTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeRotYTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeRotZTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeRotWTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeScaleXTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeScaleYTablesById { get; }
-        public Dictionary<int, GenericFixedSizeTable<float>> BoneKeyframeScaleZTablesById { get; }
+        public Dictionary<int, PCBoneKeyframeRotTable> BoneKeyframeRotTable { get; }
+        public Dictionary<int, PCBoneKeyframeScaleTable> BoneKeyframeScaleTable { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }
