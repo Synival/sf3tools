@@ -15,10 +15,10 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _posYPtrAddr;
         private readonly int _posZPtrAddr;
 
-        private readonly int _rotWPtrAddr;
         private readonly int _rotXPtrAddr;
         private readonly int _rotYPtrAddr;
         private readonly int _rotZPtrAddr;
+        private readonly int _rotWPtrAddr;
 
         private readonly int _scaleXPtrAddr;
         private readonly int _scaleYPtrAddr;
@@ -38,10 +38,10 @@ namespace SF3.Models.Structs.X8PC {
             _posYPtrAddr           = Address + 0x1C; // 4 bytes
             _posZPtrAddr           = Address + 0x20; // 4 bytes
 
-            _rotWPtrAddr           = Address + 0x24; // 4 bytes
-            _rotXPtrAddr           = Address + 0x28; // 4 bytes
-            _rotYPtrAddr           = Address + 0x2C; // 4 bytes
-            _rotZPtrAddr           = Address + 0x30; // 4 bytes
+            _rotXPtrAddr           = Address + 0x24; // 4 bytes
+            _rotYPtrAddr           = Address + 0x28; // 4 bytes
+            _rotZPtrAddr           = Address + 0x2C; // 4 bytes
+            _rotWPtrAddr           = Address + 0x30; // 4 bytes
 
             _scaleXPtrAddr         = Address + 0x34; // 4 bytes
             _scaleYPtrAddr         = Address + 0x38; // 4 bytes
@@ -111,32 +111,32 @@ namespace SF3.Models.Structs.X8PC {
             set => Data.SetUInt32(_posZPtrAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_rotWPtrAddr), displayOrder: 9, displayFormat: "X2")]
-        [BulkCopy]
-        public uint RotWPtr {
-            get => Data.GetUInt32(_rotWPtrAddr);
-            set => Data.SetUInt32(_rotWPtrAddr, value);
-        }
-
-        [TableViewModelColumn(addressField: nameof(_rotXPtrAddr), displayOrder: 10, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_rotXPtrAddr), displayOrder: 9, displayFormat: "X2")]
         [BulkCopy]
         public uint RotXPtr {
             get => Data.GetUInt32(_rotXPtrAddr);
             set => Data.SetUInt32(_rotXPtrAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_rotYPtrAddr), displayOrder: 11, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_rotYPtrAddr), displayOrder: 10, displayFormat: "X2")]
         [BulkCopy]
         public uint RotYPtr {
             get => Data.GetUInt32(_rotYPtrAddr);
             set => Data.SetUInt32(_rotYPtrAddr, value);
         }
 
-        [TableViewModelColumn(addressField: nameof(_rotZPtrAddr), displayOrder: 12, displayFormat: "X2")]
+        [TableViewModelColumn(addressField: nameof(_rotZPtrAddr), displayOrder: 11, displayFormat: "X2")]
         [BulkCopy]
         public uint RotZPtr {
             get => Data.GetUInt32(_rotZPtrAddr);
             set => Data.SetUInt32(_rotZPtrAddr, value);
+        }
+
+        [TableViewModelColumn(addressField: nameof(_rotWPtrAddr), displayOrder: 12, displayFormat: "X2")]
+        [BulkCopy]
+        public uint RotWPtr {
+            get => Data.GetUInt32(_rotWPtrAddr);
+            set => Data.SetUInt32(_rotWPtrAddr, value);
         }
 
         [TableViewModelColumn(addressField: nameof(_scaleXPtrAddr), displayOrder: 13, displayFormat: "X2")]

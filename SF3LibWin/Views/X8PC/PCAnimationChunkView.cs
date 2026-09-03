@@ -1,6 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using CommonLib.NamedValues;
+using SF3.Models.Structs;
 using SF3.Models.Structs.X8PC;
+using SF3.Models.Tables;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationChunkView : TabView {
@@ -9,6 +12,10 @@ namespace SF3.Win.Views.X8PC {
 
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
             BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
+
+            PosXView          = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>>("PosX", model, ngc, x => x?.BoneKeyframePosXTablesById?.Values?.ToArray());
+            RotWView          = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>>("RotW", model, ngc, x => x?.BoneKeyframeRotWTablesById?.Values?.ToArray());
+            ScaleXView        = new BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>>("ScaleX", model, ngc, x => x?.BoneKeyframeScaleXTablesById?.Values?.ToArray());
 
             Model             = model;
         }
@@ -21,6 +28,9 @@ namespace SF3.Win.Views.X8PC {
 
             CreateChild(HeaderView);
             CreateChild(BoneKeyframesView);
+            CreateChild(PosXView);
+            CreateChild(RotWView);
+            CreateChild(ScaleXView);
 
             return Control;
         }
@@ -31,8 +41,11 @@ namespace SF3.Win.Views.X8PC {
             set {
                 if (_model != value) {
                     _model = value;
-                    HeaderView.Model = _model?.AnimationChunkHeader;
+                    HeaderView.Model        = _model?.AnimationChunkHeader;
                     BoneKeyframesView.Table = _model?.BoneKeyframeTable;
+                    PosXView.Model          = _model;
+                    RotWView.Model          = _model;
+                    ScaleXView.Model        = _model;
                 }
             }
         }
@@ -40,5 +53,8 @@ namespace SF3.Win.Views.X8PC {
         public INameGetterContext NameGetterContext { get; }
         public DataModelView HeaderView { get; }
         public TableView BoneKeyframesView { get; }
+        public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>> PosXView { get; }
+        public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>> RotWView { get; }
+        public BaseModelTablesView<GenericDataStruct<float>, GenericFixedSizeTable<float>> ScaleXView { get; }
     }
 }
