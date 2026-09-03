@@ -68,7 +68,7 @@ namespace SF3.X8PC {
         public static string GetBonePath(this IBone thisBone) {
             var boneName = "";
             for (var bone = thisBone; bone != null; bone = bone.Parent)
-                boneName = bone.BoneID.HasValue ? ($"0x{bone.BoneID:X02}" + (boneName == "" ? "" : $".{boneName}")) : boneName;
+                boneName = bone.BoneID.HasValue ? ($"{bone.BoneID:D2}" + (boneName == "" ? "" : $".{boneName}")) : boneName;
             return boneName;
         }
     }

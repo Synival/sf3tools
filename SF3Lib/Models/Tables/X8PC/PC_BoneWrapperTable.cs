@@ -21,7 +21,7 @@ namespace SF3.Models.Tables.X8PC {
                 _rows = RootBone
                     .Flatten()
                     .Where(x => x.Children != null)
-                    .Select(x => new PCBoneWrapperStruct(x == RootBone ? "Root" : $"Bone_0x{x.BoneID:X02}", x, PolyChar))
+                    .Select(x => new PCBoneWrapperStruct(x == RootBone ? "Root" : $"Bone_{x.BoneID:D2}", x, PolyChar))
                     .ToArray();
             }
             catch (Exception e) {

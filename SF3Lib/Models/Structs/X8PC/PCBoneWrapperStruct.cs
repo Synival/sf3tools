@@ -60,7 +60,7 @@ namespace SF3.Models.Structs.X8PC {
 
         public int ID => _actualBone.BoneID ?? -1;
 
-        [TableViewModelColumn(addressField: null, displayOrder: -3, displayFormat: "X2", minWidth: 45, displayGroup: "Metadata")]
+        [TableViewModelColumn(addressField: null, displayOrder: -3, minWidth: 45, displayGroup: "Metadata")]
         public int? BoneID => _actualBone.BoneID;
 
         [TableViewModelColumn(addressField: null, displayOrder: -1, minWidth: 120, displayGroup: "Metadata")]
