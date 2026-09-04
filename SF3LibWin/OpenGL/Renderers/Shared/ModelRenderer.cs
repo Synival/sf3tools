@@ -205,7 +205,7 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
                     Matrix4.CreateRotationY((float) Math.PI) *
                     Matrix4.CreateTranslation(modelInstance.PositionX / 32.0f, modelInstance.PositionY / -32.0f - prePostAdjustY + yAdjust, modelInstance.PositionZ / -32.0f) *
                     Matrix4.CreateRotationY(options.ModelsYRotation * (float) Math.PI / -180.00f) *
-                    Matrix4.CreateTranslation(-32.0f, 0, 32.0f);
+                    Matrix4.CreateTranslation(new Vector3(-ModelPositionOffset.X, ModelPositionOffset.Y, ModelPositionOffset.Z));
 
                 _modelMatricesByModel[modelInstance] = newModelMatrix;
                 modelMatrix = newModelMatrix;
@@ -238,6 +238,8 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
                 _normalMatricesByModel.Remove(sm);
             }
         }
+
+        public Vector3 ModelPositionOffset { get; set; }
 
         private Dictionary<ISGL_ModelInstance, Matrix4?> _modelMatricesByModel = [];
         private Dictionary<ISGL_ModelInstance, Matrix3?> _normalMatricesByModel = [];

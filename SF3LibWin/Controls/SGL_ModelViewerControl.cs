@@ -237,8 +237,6 @@ namespace SF3.Win.Controls {
                             return new SGL_ModelInstance((mi, lod) => sglModel) {
                                 ModelCollectionID = sglModel.ModelCollectionID,
                                 ModelID = sglModel.ModelID,
-                                PositionX = 32 * 32,
-                                PositionZ = 32 * 32,
                                 AngleX = rotX,
                                 AngleY = rotY,
                                 AngleZ = rotZ,
