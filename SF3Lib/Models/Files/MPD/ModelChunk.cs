@@ -11,6 +11,7 @@ using SF3.Imaging;
 using SF3.MPD.Interfaces;
 using CommonLib.SGL;
 using SF3.Models.Tables.Shared.SGL;
+using System.Collections;
 
 namespace SF3.Models.Files.MPD {
     public class ModelChunk : TableFile, IMPD_ModelCollection {
@@ -300,9 +301,10 @@ namespace SF3.Models.Files.MPD {
         public IMPD_ModelLoD GetModel(int id, int lod)
             => PDatasByMemoryAddress.Values.FirstOrDefault(x => x.Collection == Collection && x.ModelID == id && x.LevelOfDetail == lod);
 
-        ISGL_Model[] ISGL_ModelCollection.GetAllModels() => GetAllModels();
-        public IMPD_ModelLoD[] GetAllModels()
-            => PDatasByMemoryAddress.Values.ToArray();
+        public IMPD_ModelLoD[] GetAllModels() => PDatasByMemoryAddress.Values.ToArray();
+
+        public IEnumerator<ISGL_Model> GetEnumerator() => GetAllModels().AsEnumerable().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         private class ModelWithLoD : IMPD_Model {
             public ModelWithLoD(MPD_CollectionType collection, int modelID, IMPD_ModelLoD[] models) {

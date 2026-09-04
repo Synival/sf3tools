@@ -1,4 +1,5 @@
-﻿using CommonLib.Imaging;
+﻿using System.Linq;
+using CommonLib.Imaging;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
 using SF3.Models.Tables;
@@ -12,6 +13,6 @@ namespace SF3.Win.Views {
         }
 
         protected override void ModelSetter(SGL_Model3DView view, ITextureMetaCollection texCollection, TStruct model)
-            => view.SetModels(texCollection, model?.GetAllModels());
+            => view.SetModels(texCollection, model?.ToArray());
     }
 }

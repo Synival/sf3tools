@@ -1,5 +1,7 @@
-﻿namespace CommonLib.SGL {
-    public interface ISGL_ModelCollection {
+﻿using System.Collections.Generic;
+
+namespace CommonLib.SGL {
+    public interface ISGL_ModelCollection : IEnumerable<ISGL_Model> {
         /// <summary>
         /// Fetches a single model belonging to this collection by ID.
         /// </summary>
@@ -7,8 +9,5 @@
         /// <param name="lod">Level-of-detail index.</param>
         /// <returns>A model in a structure compatible with SGL.</returns>
         ISGL_Model GetModel(int id, int lod);
-
-        // TODO: Linq?
-        ISGL_Model[] GetAllModels();
     }
 }

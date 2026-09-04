@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.SGL;
 using SF3.Imaging;
@@ -21,8 +22,10 @@ namespace SF3.Models.Files.MPD {
         ISGL_Model ISGL_ModelCollection.GetModel(int id, int lod) => GetModel(id, lod);
         public IMPD_ModelLoD GetModel(int id, int lod) => null;
 
-        ISGL_Model[] ISGL_ModelCollection.GetAllModels() => GetAllModels();
         public IMPD_ModelLoD[] GetAllModels() => new IMPD_ModelLoD[0];
+
+        public IEnumerator<ISGL_Model> GetEnumerator() => GetAllModels().AsEnumerable().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         private bool _gotTextures = false;
         private IReadOnlyList<IMPD_AnimatableTexture> _textures = null;

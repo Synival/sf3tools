@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Extensions;
@@ -74,9 +75,10 @@ namespace SF3.MPD.Project {
             return model.ModelLoDs[lod];
         }
 
-        ISGL_Model[] ISGL_ModelCollection.GetAllModels() => GetAllModels();
-        public IMPD_ModelLoD[] GetAllModels()
-            => Models.SelectMany(x => x.ModelLoDs).ToArray();
+        public IMPD_ModelLoD[] GetAllModels() => Models.SelectMany(x => x.ModelLoDs).ToArray();
+
+        public IEnumerator<ISGL_Model> GetEnumerator() => GetAllModels().AsEnumerable().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public MPD_CollectionType Collection { get; }
         public bool IsUnreferenced { get; set; }

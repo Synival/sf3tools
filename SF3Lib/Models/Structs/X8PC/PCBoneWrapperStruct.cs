@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Attributes;
@@ -91,6 +91,8 @@ namespace SF3.Models.Structs.X8PC {
         private readonly ISGL_Model[] _models;
 
         public ISGL_Model GetModel(int id, int lod) => null;
-        public ISGL_Model[] GetAllModels() => _models;
+
+        public IEnumerator<ISGL_Model> GetEnumerator() => _models.AsEnumerable().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

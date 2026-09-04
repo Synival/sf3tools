@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -26,10 +27,8 @@ namespace SF3.Models.Structs.X8PC {
             return PolyChar.XPDataTables[ID][id];
         }
 
-        public ISGL_Model[] GetAllModels() {
-            var offset = XPDataListOffset;
-            return PolyChar.XPDataTables[ID].ToArray();
-        }
+        public IEnumerator<ISGL_Model> GetEnumerator() => PolyChar.XPDataTables[ID].GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public PolyChar PolyChar { get; }
     }
