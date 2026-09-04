@@ -191,24 +191,24 @@ namespace SF3.Win.Controls {
         }
 
         public ITextureMetaCollection TextureContainer { get; private set; } = null;
-        private ISGL_Model[] _sglModels = [];
+        private ISGL_ModelInstance[] _sglModels = [];
 
-        public void Update(
-            ITextureMetaCollection texContainer, ISGL_Model sglModel,
-            float rotX = 0f, float rotY = 0f, float rotZ = 0f,
-            float scaleX = 1f, float scaleY = 1f, float scaleZ = 1f
-        ) {
-            ISGL_Model[] sglModels = (sglModel == null) ? [] : [sglModel];
-            Update(texContainer, sglModels, rotX, rotY, rotZ, scaleX, scaleY, scaleZ);
+        public void Update(ITextureMetaCollection texContainer, ISGL_Model sglModel)
+            => Update(texContainer, (sglModel == null) ? [] : [sglModel]);
+
+        public void Update(ITextureMetaCollection texContainer, ISGL_Model[] sglModels) {
+            Update(texContainer, sglModels
+                .Select((x, i) => new SGL_ModelInstance((_, _) => x) {
+                    ModelID = x.ModelID, ModelCollectionID = x.ModelCollectionID, ModelInstanceID = i
+                })
+                .ToArray()
+            );
         }
 
-        public void Update(ITextureMetaCollection texContainer, ISGL_Model[] sglModels)
-            => Update(texContainer, sglModels, 0, 0, 0, 1, 1, 1);
+        public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance sglModel)
+            => Update(texContainer, (sglModel == null) ? [] : [sglModel]);
 
-        private void Update(
-            ITextureMetaCollection texContainer, ISGL_Model[] sglModels,
-            float rotX, float rotY, float rotZ, float scaleX, float scaleY, float scaleZ
-        ) {
+        private void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance[] sglModels) {
             sglModels ??= [];
 
             if (Enumerable.SequenceEqual(_sglModels, sglModels))
@@ -222,7 +222,6 @@ namespace SF3.Win.Controls {
 
             TextureContainer = texContainer;
             _sglModels       = sglModels;
-            _vertices        = null;
             _size            = 1.0f;
             _center          = new Vector3();
             _dist            = 1.0f;
@@ -231,39 +230,35 @@ namespace SF3.Win.Controls {
                 _models.Reset();
                 if (TextureContainer != null) {
                     var texturesById = texContainer.GetAnimatableTexturesByModelCollectionID(collectionId);
+
+                    // TODO: this should also use instances instead of models!!!
+                    var models = sglModels
+                        .Select(
+                            x => { return x.GetModel(0); }
+                        ).ToArray();
                     _models.Update(
-                        sglModels, texturesById, (idx) => {
-                            var sglModel = sglModels[idx];
-                            return new SGL_ModelInstance((mi, lod) => sglModel) {
-                                ModelCollectionID = sglModel.ModelCollectionID,
-                                ModelID = sglModel.ModelID,
-                                AngleX = rotX,
-                                AngleY = rotY,
-                                AngleZ = rotZ,
-                                ScaleX = scaleX,
-                                ScaleY = scaleY,
-                                ScaleZ = scaleZ,
-                            };
-                        },
+                        models, texturesById, (idx) => sglModels[idx],
                         forceSemiTransparentValue: null, isHideMesh: false, forceLighting: ForceLighting
                     );
 
-                    var verticesMatrix =
-                        Matrix3.CreateScale(scaleX, scaleY, scaleZ) *
-                        Matrix3.CreateRotationX(rotX * (float) Math.PI / 180.0f) *
-                        Matrix3.CreateRotationY(rotY * (float) Math.PI / 180.0f) *
-                        Matrix3.CreateRotationZ(rotZ * (float) Math.PI / 180.0f);
+                    var vertexMatrices = sglModels.Select(x =>
+                        Matrix4.CreateScale(x.ScaleX, x.ScaleY, x.ScaleZ) *
+                        Matrix4.CreateRotationX(x.AngleX * (float) Math.PI / 180.0f) *
+                        Matrix4.CreateRotationY(x.AngleY * (float) Math.PI / 180.0f) *
+                        Matrix4.CreateRotationZ(x.AngleZ * (float) Math.PI / 180.0f) *
+                        Matrix4.CreateTranslation(x.PositionX, x.PositionY, x.PositionZ)
+                    ).ToArray();
 
-                    _vertices = sglModels.SelectMany(x => x.Vertices.Select(y => y.ToVector3() * verticesMatrix)).ToArray();
+                    var transformedVertices = sglModels.SelectMany((x, i) => x.GetModel(0).Vertices.Select(y => (y.ToVector4() * vertexMatrices[i]).Xyz)).ToArray();
 
-                    if (_vertices.Length > 0) {
-                        _minX = _vertices.Min(x => x.X) / 32.0f;
-                        _minY = _vertices.Min(x => x.Y) / 32.0f;
-                        _minZ = _vertices.Min(x => x.Z) / 32.0f;
+                    if (transformedVertices.Length > 0) {
+                        _minX = transformedVertices.Min(x => x.X) / 32.0f;
+                        _minY = transformedVertices.Min(x => x.Y) / 32.0f;
+                        _minZ = transformedVertices.Min(x => x.Z) / 32.0f;
 
-                        _maxX = _vertices.Max(x => x.X) / 32.0f;
-                        _maxY = _vertices.Max(x => x.Y) / 32.0f;
-                        _maxZ = _vertices.Max(x => x.Z) / 32.0f;
+                        _maxX = transformedVertices.Max(x => x.X) / 32.0f;
+                        _maxY = transformedVertices.Max(x => x.Y) / 32.0f;
+                        _maxZ = transformedVertices.Max(x => x.Z) / 32.0f;
                     }
                     else {
                         _minX = _minY = _minZ = -1.0f;
@@ -325,7 +320,6 @@ namespace SF3.Win.Controls {
         private Vector3 _center;
         private float _dist = 0f;
 
-        private Vector3[] _vertices = null;
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
 

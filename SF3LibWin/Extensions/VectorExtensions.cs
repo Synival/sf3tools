@@ -14,5 +14,8 @@ namespace SF3.Win.Extensions {
 
         public static Vector3 ToVector3(this VECTOR vec)
             => new(vec.X.Float, vec.Y.Float, vec.Z.Float);
+
+        public static Vector4 ToVector4(this VECTOR vec)
+            => new(vec.X.Float, vec.Y.Float, vec.Z.Float, 1);
     }
 }

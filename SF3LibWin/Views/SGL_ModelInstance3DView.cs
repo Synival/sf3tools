@@ -8,11 +8,10 @@ namespace SF3.Win.Views {
         public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
         : base(name) {
             _texCollection = texContainer;
-            _modelInstance = sglModelInstance;
+            _sglModelInstance = sglModelInstance;
             _forceLighting = forceLighting;
             _size = size;
             _zoom = zoom;
-            UpdateSGL_Model();
         }
 
         public override Control Create() {
@@ -40,30 +39,21 @@ namespace SF3.Win.Views {
         private ITextureMetaCollection _texCollection = null;
         public ITextureMetaCollection TextureCollection => _texCollection;
 
-        private ISGL_ModelInstance _modelInstance = null;
+        private ISGL_ModelInstance _sglModelInstance = null;
 
-        public ISGL_ModelInstance ModelInstance => _modelInstance;
+        public ISGL_ModelInstance ModelInstance => _sglModelInstance;
 
         public void SetModelInstance(ITextureMetaCollection texCollection, ISGL_ModelInstance modelInstance) {
-            if (_texCollection != texCollection || _modelInstance != modelInstance) {
+            if (_texCollection != texCollection || _sglModelInstance != modelInstance) {
                 _texCollection = texCollection;
-                _modelInstance = modelInstance;
-                UpdateSGL_Model();
+                _sglModelInstance = modelInstance;
                 UpdateViewerControl();
             }
         }
 
-        private void UpdateSGL_Model()
-            => _sglModel = _modelInstance?.GetModel(0);
-        private ISGL_Model _sglModel = null;
-
         private void UpdateViewerControl() {
-            if (Control != null) {
-                if (_modelInstance == null)
-                    Control.Update(_texCollection, _sglModel);
-                else
-                    Control.Update(_texCollection, _sglModel, _modelInstance.AngleX, _modelInstance.AngleY, _modelInstance.AngleZ, _modelInstance.ScaleX, _modelInstance.ScaleY, _modelInstance.ScaleZ);
-            }
+            if (Control != null)
+                Control.Update(_texCollection, _sglModelInstance);
         }
 
         private readonly bool? _forceLighting;

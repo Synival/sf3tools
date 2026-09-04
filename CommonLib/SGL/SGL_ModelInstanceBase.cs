@@ -116,7 +116,7 @@ namespace CommonLib.SGL {
             }
         }
 
-        private float _scaleX = 0;
+        private float _scaleX = 1.0f;
         public float ScaleX {
             get => _scaleX;
             set {
@@ -127,7 +127,7 @@ namespace CommonLib.SGL {
             }
         }
 
-        private float _scaleY = 0;
+        private float _scaleY = 1.0f;
         public float ScaleY {
             get => _scaleY;
             set {
@@ -138,7 +138,7 @@ namespace CommonLib.SGL {
             }
         }
 
-        private float _scaleZ = 0;
+        private float _scaleZ = 1.0f;
         public float ScaleZ {
             get => _scaleZ;
             set {
