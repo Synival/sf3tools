@@ -135,6 +135,44 @@ namespace SF3.Win.Controls {
             }
         }
 
+        private void UpdateModelOffsets() {
+            // Build transformation matrices for each model instance.
+            var vertexMatrices = _sglModels.Select(x =>
+                Matrix4.CreateScale(x.ScaleX, x.ScaleY, x.ScaleZ) *
+                Matrix4.CreateRotationX(x.AngleX * (float) Math.PI / 180.0f) *
+                Matrix4.CreateRotationY(x.AngleY * (float) Math.PI / 180.0f) *
+                Matrix4.CreateRotationZ(x.AngleZ * (float) Math.PI / 180.0f) *
+                Matrix4.CreateTranslation(x.PositionX, x.PositionY, x.PositionZ)
+            ).ToArray();
+
+            // Build updated vertices for all models.
+            var transformedVertices = _sglModels.SelectMany((x, i) => x.GetModel(0).Vertices.Select(y => (y.ToVector4() * vertexMatrices[i]).Xyz)).ToArray();
+
+            // Recalculate bounds.
+            if (transformedVertices.Length > 0) {
+                _minX = transformedVertices.Min(x => x.X) / 32.0f;
+                _minY = transformedVertices.Min(x => x.Y) / 32.0f;
+                _minZ = transformedVertices.Min(x => x.Z) / 32.0f;
+
+                _maxX = transformedVertices.Max(x => x.X) / 32.0f;
+                _maxY = transformedVertices.Max(x => x.Y) / 32.0f;
+                _maxZ = transformedVertices.Max(x => x.Z) / 32.0f;
+            }
+            else {
+                _minX = _minY = _minZ = -1.0f;
+                _maxX = _maxY = _maxZ = 1.0f;
+            }
+
+            _width  = _maxX - _minX;
+            _height = _maxY - _minY;
+            _depth  = _maxZ - _minZ;
+
+            _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
+            _center = new Vector3((_minX + _maxX) / 2, (_minY + _maxY) / -2, (_minZ + _maxZ) / -2);
+
+            _dist = (float) Math.Pow(_size, 0.875f) * 4f / Zoom;
+        }
+
         private void UpdateCameraPosition() {
             var yawRadians = MathHelper.DegreesToRadians(Yaw);
 
@@ -146,6 +184,7 @@ namespace SF3.Win.Controls {
 
         private void UpdateViewMatrix() {
             MakeCurrent();
+            UpdateModelOffsets();
             UpdateCameraPosition();
             UpdateLightPos();
             _viewMatrix = Matrix4.CreateTranslation(-Position)
@@ -163,6 +202,7 @@ namespace SF3.Win.Controls {
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
+            _renderer.InvalidateModelMatrices();
             _renderer.DrawScene(
                 new SGL_ModelRendererResources() {
                     General  = _general,
@@ -215,7 +255,6 @@ namespace SF3.Win.Controls {
                 return;
 
             MakeCurrent();
-            _renderer.InvalidateModelMatrices();
 
             // Always use the first collection ID.
             var collectionId = sglModels.Length == 0 ? -1 : sglModels[0].ModelCollectionID;
@@ -241,39 +280,6 @@ namespace SF3.Win.Controls {
                         models, texturesById, (idx) => sglModels[idx],
                         forceSemiTransparentValue: null, isHideMesh: false, forceLighting: ForceLighting
                     );
-
-                    var vertexMatrices = sglModels.Select(x =>
-                        Matrix4.CreateScale(x.ScaleX, x.ScaleY, x.ScaleZ) *
-                        Matrix4.CreateRotationX(x.AngleX * (float) Math.PI / 180.0f) *
-                        Matrix4.CreateRotationY(x.AngleY * (float) Math.PI / 180.0f) *
-                        Matrix4.CreateRotationZ(x.AngleZ * (float) Math.PI / 180.0f) *
-                        Matrix4.CreateTranslation(x.PositionX, x.PositionY, x.PositionZ)
-                    ).ToArray();
-
-                    var transformedVertices = sglModels.SelectMany((x, i) => x.GetModel(0).Vertices.Select(y => (y.ToVector4() * vertexMatrices[i]).Xyz)).ToArray();
-
-                    if (transformedVertices.Length > 0) {
-                        _minX = transformedVertices.Min(x => x.X) / 32.0f;
-                        _minY = transformedVertices.Min(x => x.Y) / 32.0f;
-                        _minZ = transformedVertices.Min(x => x.Z) / 32.0f;
-
-                        _maxX = transformedVertices.Max(x => x.X) / 32.0f;
-                        _maxY = transformedVertices.Max(x => x.Y) / 32.0f;
-                        _maxZ = transformedVertices.Max(x => x.Z) / 32.0f;
-                    }
-                    else {
-                        _minX = _minY = _minZ = -1.0f;
-                        _maxX = _maxY = _maxZ = 1.0f;
-                    }
-
-                    _width  = _maxX - _minX;
-                    _height = _maxY - _minY;
-                    _depth  = _maxZ - _minZ;
-
-                    _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
-                    _center = new Vector3((_minX + _maxX) / 2, (_minY + _maxY) / -2, (_minZ + _maxZ) / -2);
-
-                    _dist = (float) Math.Pow(_size, 0.875f) * 4f / Zoom;
                 }
                 else {
                     // TODO: throw?? what to do here???
