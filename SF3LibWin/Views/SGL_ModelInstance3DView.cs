@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using CommonLib.Imaging;
 using CommonLib.SGL;
 using SF3.Win.Controls;
@@ -8,7 +9,16 @@ namespace SF3.Win.Views {
         public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance sglModelInstance = null, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
         : base(name) {
             _texCollection = texContainer;
-            _sglModelInstance = sglModelInstance;
+            _sglModelInstances = (sglModelInstance == null) ? [] : [sglModelInstance];
+            _forceLighting = forceLighting;
+            _size = size;
+            _zoom = zoom;
+        }
+
+        public SGL_ModelInstance3DView(string name, ITextureMetaCollection texContainer, ISGL_ModelInstance[] sglModelInstances, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
+        : base(name) {
+            _texCollection = texContainer;
+            _sglModelInstances = sglModelInstances ?? [];
             _forceLighting = forceLighting;
             _size = size;
             _zoom = zoom;
@@ -39,21 +49,25 @@ namespace SF3.Win.Views {
         private ITextureMetaCollection _texCollection = null;
         public ITextureMetaCollection TextureCollection => _texCollection;
 
-        private ISGL_ModelInstance _sglModelInstance = null;
+        private ISGL_ModelInstance[] _sglModelInstances = [];
 
-        public ISGL_ModelInstance ModelInstance => _sglModelInstance;
+        public ISGL_ModelInstance[] ModelInstances => _sglModelInstances;
 
-        public void SetModelInstance(ITextureMetaCollection texCollection, ISGL_ModelInstance modelInstance) {
-            if (_texCollection != texCollection || _sglModelInstance != modelInstance) {
+        public void SetModelInstance(ITextureMetaCollection texCollection, ISGL_ModelInstance sglModelInstance)
+            => SetModelInstances(texCollection, (sglModelInstance == null) ? [] : [sglModelInstance]);
+
+        public void SetModelInstances(ITextureMetaCollection texCollection, ISGL_ModelInstance[] sglModelInstances) {
+            sglModelInstances ??= [];
+            if (_texCollection != texCollection || !Enumerable.SequenceEqual(_sglModelInstances, sglModelInstances)) {
                 _texCollection = texCollection;
-                _sglModelInstance = modelInstance;
+                _sglModelInstances = sglModelInstances;
                 UpdateViewerControl();
             }
         }
 
         private void UpdateViewerControl() {
             if (Control != null)
-                Control.Update(_texCollection, _sglModelInstance);
+                Control.Update(_texCollection, _sglModelInstances);
         }
 
         private readonly bool? _forceLighting;

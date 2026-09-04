@@ -208,7 +208,7 @@ namespace SF3.Win.Controls {
         public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance sglModel)
             => Update(texContainer, (sglModel == null) ? [] : [sglModel]);
 
-        private void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance[] sglModels) {
+        public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance[] sglModels) {
             sglModels ??= [];
 
             if (Enumerable.SequenceEqual(_sglModels, sglModels))

@@ -18,7 +18,7 @@ namespace SF3.Win.Views {
         public SGL_Model3DView(string name, ITextureMetaCollection texContainer, ISGL_Model[] sglModels, bool? forceLighting = null, float size = 1.0f, float zoom = 1.0f)
         : base(name) {
             _texCollection = texContainer;
-            _sglModels     = sglModels;
+            _sglModels     = sglModels ?? [];
             _forceLighting = forceLighting;
             _size          = size;
             _zoom          = zoom;
