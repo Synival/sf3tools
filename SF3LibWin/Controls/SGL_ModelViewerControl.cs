@@ -215,6 +215,7 @@ namespace SF3.Win.Controls {
                 return;
 
             MakeCurrent();
+            _renderer.InvalidateModelMatrices();
 
             // Always use the first collection ID.
             var collectionId = sglModels.Length == 0 ? -1 : sglModels[0].ModelCollectionID;
