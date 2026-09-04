@@ -142,7 +142,8 @@ namespace SF3.Win.Controls {
                 Matrix4.CreateRotationX(x.AngleX * (float) Math.PI / 180.0f) *
                 Matrix4.CreateRotationY(x.AngleY * (float) Math.PI / 180.0f) *
                 Matrix4.CreateRotationZ(x.AngleZ * (float) Math.PI / 180.0f) *
-                Matrix4.CreateTranslation(x.PositionX, x.PositionY, x.PositionZ)
+                Matrix4.CreateTranslation(x.PositionX, x.PositionY, x.PositionZ) *
+                (x.Matrix?.ToOpenTKMarix() ?? Matrix4.Identity)
             ).ToArray();
 
             // Build updated vertices for all models.

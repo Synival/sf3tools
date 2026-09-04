@@ -70,7 +70,7 @@ namespace SF3.Models.Structs.X8PC {
 
             var skelFact = new SkeletonFactory();
             var skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
-            BoneTable = PC_BoneWrapperTable.Create("BoneNodes", skeleton.RootBone, this);
+            BoneTable = PCBoneWrapperTable.Create("BoneNodes", skeleton.RootBone, this);
 
             if (XPDataTables.Length > 0) {
                 var xpdataTable = XPDataTables[0];
@@ -200,7 +200,7 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
         public Dictionary<int, VertexNormalTable> VertexNormalTablesByOffset { get; }
         public Skeleton Skeleton { get; }
-        public PC_BoneWrapperTable BoneTable { get; }
+        public PCBoneWrapperTable BoneTable { get; }
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
         public PCBoneKeyframeTable BoneKeyframeTable { get; }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -155,6 +156,8 @@ namespace SF3.Models.Structs.MPD.Model {
                 _boundingBox = null;
             }
         }
+
+        public Matrix4x4? Matrix => null;
 
         public abstract ushort Tag { get; set; }
         public abstract ushort Flags { get; set; }

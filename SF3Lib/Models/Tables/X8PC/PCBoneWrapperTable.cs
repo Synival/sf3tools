@@ -6,15 +6,15 @@ using SF3.Models.Structs.X8PC;
 using SF3.X8PC;
 
 namespace SF3.Models.Tables.X8PC {
-    public class PC_BoneWrapperTable : Table<PCBoneWrapperStruct> {
-        protected PC_BoneWrapperTable(string name, IBone rootBone, PolyChar polyChar)
+    public class PCBoneWrapperTable : Table<PCBoneWrapperStruct> {
+        protected PCBoneWrapperTable(string name, IBone rootBone, PolyChar polyChar)
         : base(null /*N/A*/, name, 0 /*dummy value*/) {
             RootBone = rootBone;
             PolyChar = polyChar;
         }
 
-        public static PC_BoneWrapperTable Create(string name, IBone rootBone, PolyChar polyChar)
-            => Create(() => new PC_BoneWrapperTable(name, rootBone, polyChar));
+        public static PCBoneWrapperTable Create(string name, IBone rootBone, PolyChar polyChar)
+            => Create(() => new PCBoneWrapperTable(name, rootBone, polyChar));
 
         public override bool Load() {
             try {

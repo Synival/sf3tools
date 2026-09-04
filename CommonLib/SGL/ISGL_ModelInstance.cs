@@ -1,4 +1,5 @@
-﻿using static CommonLib.Extensions.VECTOR_Extensions;
+﻿using System.Numerics;
+using static CommonLib.Extensions.VECTOR_Extensions;
 
 namespace CommonLib.SGL {
     /// <summary>
@@ -27,6 +28,11 @@ namespace CommonLib.SGL {
         float ScaleX { get; set; }
         float ScaleY { get; set; }
         float ScaleZ { get; set; }
+
+        /// <summary>
+        /// Optional matrix as an addition to explicit Pos, Rot, Scale transformations. Should be considered *after* those transformations.
+        /// </summary>
+        Matrix4x4? Matrix { get; }
 
         bool AlwaysFacesCamera { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -8,7 +9,7 @@ using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     // There is no "bone" struct in X8PC files; this is just a wrapper.
-    public class PCBoneWrapperStruct : IStruct, IBone, ISGL_ModelCollection {
+    public class PCBoneWrapperStruct : IStruct, IBone, ISGL_ModelInstanceCollection {
         public PCBoneWrapperStruct(string name, IBone bone, PolyChar polyChar) {
             Name = name;
 
@@ -22,19 +23,45 @@ namespace SF3.Models.Structs.X8PC {
             var flattened = this.Flatten();
             var modelIds    = flattened.Where(x => x.ModelID.HasValue).Select(x => x.ModelID.Value).ToArray();
 
-            // TODO: Should be instances, not models.
             var allModels = ((polyChar.XPDataTables?.Length ?? 0) == 0)
-                ? new List<ISGL_Model>()
-                : polyChar.XPDataTables[0].Join(modelIds, x => x.ModelID, y => y, (x, y) => x).Cast<ISGL_Model>().ToList();
+                ? new List<SGL_ModelInstance>()
+                : polyChar.XPDataTables[0]
+                    .Join(modelIds, x => x.ModelID, y => y, (x, y) => x)
+                    .Select((x, i) => new SGL_ModelInstance((_1, _2) => x) {
+                        ModelInstanceID = i, ModelID = x.ModelID, ModelCollectionID = x.ModelCollectionID
+                    })
+                    .ToList();
 
             var weaponBones = flattened.Where(x => x.Tag.HasValue && (x.Tag.Value == 0x30 || x.Tag.Value == 0x81)).ToArray();
             if (weaponBones.Length > 0) {
-                // TODO: Add multiple times, as instances, with coordinates.
-                var weaponModel = polyChar.XPDataTables.Length >= 2 ? (polyChar.XPDataTables[1].Count > 0 ? polyChar.XPDataTables[1][0] : null) : null;
-                allModels.Add(weaponModel);
+                foreach (var weaponBone in weaponBones) {
+                    var pos  = weaponBone.Position.Value;
+                    var rotQ1 = weaponBone.Rotation.Value;
+                    var rotQ2 = new Quaternion(rotQ1.X.Float, rotQ1.Y.Float, rotQ1.Z.Float, rotQ1.W.Float);
+                    var scale = weaponBone.Scale.Value;
+
+                    var matrix
+                        = Matrix4x4.CreateScale(new Vector3(scale.X.Float, scale.Y.Float, scale.Z.Float))
+                        * Matrix4x4.CreateFromQuaternion(rotQ2)
+                        * Matrix4x4.CreateTranslation(pos.X.Float / 32.0f, pos.Y.Float / -32.0f, pos.Z.Float / -32.0f)
+                    ;
+
+                    var weaponModel = (polyChar.XPDataTables.Length >= 2 && polyChar.XPDataTables[1].Count >= 1) ? polyChar.XPDataTables[1][0] : null;
+                    var weaponModelInstance = (weaponModel != null)
+                        ? (polyChar.XPDataTables[1].Count > 0
+                            ? new SGL_ModelInstance((_1, _2) => weaponModel) {
+                                ModelInstanceID = allModels.Count, ModelID = weaponModel.ModelID, ModelCollectionID = weaponModel.ModelCollectionID,
+                                Matrix = matrix
+                            }
+                            : null
+                        )
+                        : null;
+                    if (weaponModel != null)
+                        allModels.Add(weaponModelInstance);
+                }
             }
 
-            _models = allModels.ToArray();
+            _sglModelInstancesById = allModels.ToDictionary(x => x.ModelInstanceID, x => (ISGL_ModelInstance) x);
 
             Depth = GetDepth();
             ChildDepth = GetChildDepth(_actualBone, 0);
@@ -88,11 +115,11 @@ namespace SF3.Models.Structs.X8PC {
         public IBone[] Children     => _actualBone.Children;
 
         private readonly IBone _actualBone;
-        private readonly ISGL_Model[] _models;
+        private readonly Dictionary<int, ISGL_ModelInstance> _sglModelInstancesById;
 
-        public ISGL_Model GetModel(int id, int lod) => null;
+        public ISGL_ModelInstance GetModelInstance(int id) => _sglModelInstancesById.TryGetValue(id, out var instance) ? instance : null;
 
-        public IEnumerator<ISGL_Model> GetEnumerator() => _models.AsEnumerable().GetEnumerator();
+        public IEnumerator<ISGL_ModelInstance> GetEnumerator() => _sglModelInstancesById.Values.AsEnumerable().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

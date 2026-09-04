@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using CommonLib.Extensions;
 using Newtonsoft.Json.Linq;
 using static CommonLib.Extensions.VECTOR_Extensions;
@@ -22,6 +23,7 @@ namespace CommonLib.SGL {
             _scaleX    = original.ScaleX;
             _scaleY    = original.ScaleY;
             _scaleZ    = original.ScaleZ;
+            _matrix    = original.Matrix;
 
             LevelsOfDetail = original.LevelsOfDetail;
         }
@@ -149,6 +151,17 @@ namespace CommonLib.SGL {
             }
         }
 
+        private Matrix4x4? _matrix = null;
+        public Matrix4x4? Matrix {
+            get => _matrix;
+            set {
+                if (_matrix != value) {
+                    _matrix = value;
+                    _boundingBox = null;
+                }
+            }
+        }
+
         public virtual bool AlwaysFacesCamera { get; set; } = false;
         public int LevelsOfDetail { get; set; }
 
@@ -161,6 +174,7 @@ namespace CommonLib.SGL {
                         .ToVECTORs()
                         .Scale(ScaleX, ScaleY, ScaleZ)
                         .RotateXYZ(AngleX, AngleY, AngleZ)
+                        // TODO: Apply matrix if exists!
                         .CreateBoundingBox();
                 }
                 return _boundingBox.Value;
