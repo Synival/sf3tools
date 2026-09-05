@@ -104,6 +104,8 @@ namespace SF3.Models.Structs.X8PC {
                     )
                 ).ToArray();
 
+            AnimationFramesTable = PCAnimationFrameTable.Create("AnimationFrames", this);
+
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
 
@@ -119,6 +121,7 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(BoneKeyframePosTables);
             tables.AddRange(BoneKeyframeRotTables);
             tables.AddRange(BoneKeyframeScaleTables);
+            tables.Add(AnimationFramesTable);
 
             Tables = tables.ToArray();
         }
@@ -199,6 +202,7 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframePosTable[] BoneKeyframePosTables { get; }
         public PCBoneKeyframeRotTable[] BoneKeyframeRotTables { get; }
         public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
+        public PCAnimationFrameTable AnimationFramesTable { get; }
 
         public ChunkData[] Chunks { get; }
         public ChunkData TexDefChunk { get; }
