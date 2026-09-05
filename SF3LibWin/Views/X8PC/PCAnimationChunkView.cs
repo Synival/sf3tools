@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using CommonLib.NamedValues;
-using SF3.Models.Structs;
 using SF3.Models.Structs.X8PC;
-using SF3.Models.Tables;
 using SF3.Models.Tables.X8PC;
 
 namespace SF3.Win.Views.X8PC {
@@ -14,9 +11,9 @@ namespace SF3.Win.Views.X8PC {
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
             BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
 
-            PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTable?.Values?.ToArray());
-            RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rototations", model, ngc, x => x?.BoneKeyframeRotTable?.Values?.ToArray());
-            ScaleView         = new BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable>("Scales", model, ngc, x => x?.BoneKeyframeScaleTable?.Values?.ToArray());
+            PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTables);
+            RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rototations", model, ngc, x => x?.BoneKeyframeRotTables);
+            ScaleView         = new BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable>("Scales", model, ngc, x => x?.BoneKeyframeScaleTables);
 
             Model             = model;
         }

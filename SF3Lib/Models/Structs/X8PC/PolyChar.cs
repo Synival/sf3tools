@@ -81,29 +81,26 @@ namespace SF3.Models.Structs.X8PC {
             AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
             BoneKeyframeTable    = PCBoneKeyframeTable.Create(AnimationChunk.DecompressedData, "BoneKeyframeTable", (int) AnimationChunkHeader.BoneKeyframesTableOffset);
 
-            BoneKeyframePosTable = BoneKeyframeTable.ToDictionary(
-                x => x.ID,
-                x => PCBoneKeyframePosTable.Create(
-                AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframePos", x.ID, (int) x.NumPosKeyFrames,
-                    (int) x.PosFramesOffset, (int) x.PosXPtr, (int) x.PosYPtr, (int) x.PosZPtr
-                )
-            );
+            BoneKeyframePosTables = BoneKeyframeTable
+                .Select(x => PCBoneKeyframePosTable.Create(
+                    AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframePos", x.ID, (int) x.NumPosKeyFrames,
+                        (int) x.PosFramesOffset, (int) x.PosXPtr, (int) x.PosYPtr, (int) x.PosZPtr
+                    )
+                ).ToArray();
 
-            BoneKeyframeRotTable = BoneKeyframeTable.ToDictionary(
-                x => x.ID,
-                x => PCBoneKeyframeRotTable.Create(
-                AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeRot", x.ID, (int) x.NumRotKeyFrames,
-                    (int) x.RotFramesOffset, (int) x.RotXPtr, (int) x.RotYPtr, (int) x.RotZPtr, (int) x.RotWPtr
-                )
-            );
+            BoneKeyframeRotTables = BoneKeyframeTable
+                .Select(x => PCBoneKeyframeRotTable.Create(
+                    AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeRot", x.ID, (int) x.NumRotKeyFrames,
+                        (int) x.RotFramesOffset, (int) x.RotXPtr, (int) x.RotYPtr, (int) x.RotZPtr, (int) x.RotWPtr
+                    )
+                ).ToArray();
 
-            BoneKeyframeScaleTable = BoneKeyframeTable.ToDictionary(
-                x => x.ID,
-                x => PCBoneKeyframeScaleTable.Create(
-                AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeScale", x.ID, (int) x.NumScaleKeyFrames,
-                    (int) x.ScaleFramesOffset, (int) x.ScaleXPtr, (int) x.ScaleYPtr, (int) x.ScaleZPtr
-                )
-            );
+            BoneKeyframeScaleTables = BoneKeyframeTable
+                .Select(x => PCBoneKeyframeScaleTable.Create(
+                    AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeScale", x.ID, (int) x.NumScaleKeyFrames,
+                        (int) x.ScaleFramesOffset, (int) x.ScaleXPtr, (int) x.ScaleYPtr, (int) x.ScaleZPtr
+                    )
+                ).ToArray();
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
@@ -117,9 +114,9 @@ namespace SF3.Models.Structs.X8PC {
             tables.Add(BoneTable);
 
             tables.Add(BoneKeyframeTable);
-            tables.AddRange(BoneKeyframePosTable.Values);
-            tables.AddRange(BoneKeyframeRotTable.Values);
-            tables.AddRange(BoneKeyframeScaleTable.Values);
+            tables.AddRange(BoneKeyframePosTables);
+            tables.AddRange(BoneKeyframeRotTables);
+            tables.AddRange(BoneKeyframeScaleTables);
 
             Tables = tables.ToArray();
         }
@@ -204,9 +201,9 @@ namespace SF3.Models.Structs.X8PC {
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
         public PCBoneKeyframeTable BoneKeyframeTable { get; }
-        public Dictionary<int, PCBoneKeyframePosTable> BoneKeyframePosTable { get; }
-        public Dictionary<int, PCBoneKeyframeRotTable> BoneKeyframeRotTable { get; }
-        public Dictionary<int, PCBoneKeyframeScaleTable> BoneKeyframeScaleTable { get; }
+        public PCBoneKeyframePosTable[] BoneKeyframePosTables { get; }
+        public PCBoneKeyframeRotTable[] BoneKeyframeRotTables { get; }
+        public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
 
         public ChunkData[] Chunks { get; private set; }
         public ChunkData TexDefChunk { get; private set; }
