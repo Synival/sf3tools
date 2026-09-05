@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
@@ -21,7 +20,7 @@ namespace SF3.Models.Structs.X8PC {
             var outline = _actualBone.ToOutline();
 
             var flattened = this.Flatten();
-            var modelIds    = flattened.Where(x => x.ModelID.HasValue).Select(x => x.ModelID.Value).ToArray();
+            var modelIds  = flattened.Where(x => x.ModelID.HasValue).Select(x => x.ModelID.Value).ToArray();
 
             var allModels = ((polyChar.XPDataTables?.Length ?? 0) == 0)
                 ? new List<SGL_ModelInstance>()
@@ -32,32 +31,18 @@ namespace SF3.Models.Structs.X8PC {
                     })
                     .ToList();
 
-            var weaponBones = flattened.Where(x => x.Tag.HasValue && (x.Tag.Value == 0x30 || x.Tag.Value == 0x81)).ToArray();
-            if (weaponBones.Length > 0) {
-                foreach (var weaponBone in weaponBones) {
-                    var pos  = weaponBone.Position.Value;
-                    var rotQ1 = weaponBone.Rotation.Value;
-                    var rotQ2 = new Quaternion(rotQ1.X.Float, rotQ1.Y.Float, rotQ1.Z.Float, rotQ1.W.Float);
-                    var scale = weaponBone.Scale.Value;
-
-                    var matrix
-                        = Matrix4x4.CreateScale(new Vector3(scale.X.Float, scale.Y.Float, scale.Z.Float))
-                        * Matrix4x4.CreateFromQuaternion(rotQ2)
-                        * Matrix4x4.CreateTranslation(pos.X.Float / 32.0f, pos.Y.Float / -32.0f, pos.Z.Float / -32.0f)
-                    ;
-
-                    var weaponModel = (polyChar.XPDataTables.Length >= 2 && polyChar.XPDataTables[1].Count >= 1) ? polyChar.XPDataTables[1][0] : null;
-                    var weaponModelInstance = (weaponModel != null)
-                        ? (polyChar.XPDataTables[1].Count > 0
-                            ? new SGL_ModelInstance((_1, _2) => weaponModel) {
-                                ModelInstanceID = allModels.Count, ModelID = weaponModel.ModelID, ModelCollectionID = weaponModel.ModelCollectionID,
-                                Matrix = matrix
-                            }
-                            : null
-                        )
-                        : null;
-                    if (weaponModel != null)
-                        allModels.Add(weaponModelInstance);
+            var weaponModel = polyChar.WeaponXPData;
+            if (weaponModel != null) {
+                var weaponBones = flattened.Where(x => x.Tag.HasValue && (x.Tag.Value == 0x30 || x.Tag.Value == 0x81)).ToArray();
+                if (weaponBones.Length > 0) {
+                    foreach (var weaponBone in weaponBones) {
+                        var weaponModelInstance = new SGL_ModelInstance((_1, _2) => weaponModel) {
+                            ModelInstanceID = allModels.Count, ModelID = weaponModel.ModelID, ModelCollectionID = weaponModel.ModelCollectionID,
+                            Matrix = weaponBone.CreateMatrix()
+                        };
+                        if (weaponModel != null)
+                            allModels.Add(weaponModelInstance);
+                    }
                 }
             }
 

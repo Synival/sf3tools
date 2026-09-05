@@ -44,6 +44,8 @@ namespace SF3.Models.Structs.X8PC {
             XPDataListTable   = PC_XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset, this);
             XPDataTables      = XPDataListTable.Select((x, i) => PC_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this, i * 1000)).ToArray();
 
+            WeaponXPData = (XPDataTables.Length >= 2 && XPDataTables[1].Count >= 1) ? XPDataTables[1][0] : null;
+
             VertexTablesByOffset = FetchTablesByOffset(
                 XPDataTables,
                 x => (x.VertexCount, (int) x.VerticesOffset),
@@ -170,28 +172,21 @@ namespace SF3.Models.Structs.X8PC {
             return true;
         }
 
-        private static Func<IByteData, int /*addr*/, float> _fixedGetter             = (d, a) => d.GetFIXED(a).Float;
-        private static Func<IByteData, int /*addr*/, float> _compressedFixedGetter   = (d, a) => d.GetCompressedFIXED(a, 14).Float;
-        private static Func<IByteData, int /*addr*/, short> _shortGetter             = (d, a) => d.GetInt16(a);
-
-        private static Action<IByteData, int /*addr*/, float> _fixedSetter           = (d, a, v) => d.SetFIXED(a, new FIXED(v, 0));
-        private static Action<IByteData, int /*addr*/, float> _compressedFixedSetter = (d, a, v) => d.SetCompressedFIXED(a, new CompressedFIXED(v, 14, 0));
-        private static Action<IByteData, int /*addr*/, short> _shortSetter           = (d, a, v) => d.SetInt16(a, v);
-
         private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;
         public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId)
             => _animatableTextureDictionary;
 
-        public IEnumerable<ITable> Tables { get; private set; }
+        public IEnumerable<ITable> Tables { get; }
 
-        public PCHeader Header { get; private set; }
+        public PCHeader Header { get; }
 
-        public PCTexDefChunkHeader TexDefChunkHeader { get; private set; }
-        public PCTextureTable TextureTable { get; private set; }
+        public PCTexDefChunkHeader TexDefChunkHeader { get; }
+        public PCTextureTable TextureTable { get; }
 
-        public PCModelChunkHeader ModelChunkHeader { get; private set; }
-        public PC_XPDataListTable XPDataListTable { get; private set; }
-        public PC_XPDataTable[] XPDataTables { get; private set; }
+        public PCModelChunkHeader ModelChunkHeader { get; }
+        public PC_XPDataListTable XPDataListTable { get; }
+        public PC_XPDataStruct WeaponXPData { get; }
+        public PC_XPDataTable[] XPDataTables { get; }
         public Dictionary<int, VertexTable> VertexTablesByOffset { get; }
         public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
@@ -205,10 +200,10 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframeRotTable[] BoneKeyframeRotTables { get; }
         public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
 
-        public ChunkData[] Chunks { get; private set; }
-        public ChunkData TexDefChunk { get; private set; }
-        public ChunkData TexDataChunk { get; private set; }
-        public ChunkData ModelChunk { get; private set; }
-        public ChunkData AnimationChunk { get; private set; }
+        public ChunkData[] Chunks { get; }
+        public ChunkData TexDefChunk { get; }
+        public ChunkData TexDataChunk { get; }
+        public ChunkData ModelChunk { get; }
+        public ChunkData AnimationChunk { get; }
     }
 }

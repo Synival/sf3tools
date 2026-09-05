@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using CommonLib.SGL;
 
 namespace SF3.X8PC {
@@ -70,6 +71,17 @@ namespace SF3.X8PC {
             for (var bone = thisBone; bone != null; bone = bone.Parent)
                 boneName = bone.BoneID.HasValue ? ($"{bone.BoneID:D2}" + (boneName == "" ? "" : $".{boneName}")) : boneName;
             return boneName;
+        }
+
+        public static Matrix4x4 CreateMatrix(this IBone bone) {
+            var pos  = bone.Position.Value;
+            var rotQ1 = bone.Rotation.Value;
+            var rotQ2 = new Quaternion(rotQ1.X.Float, rotQ1.Y.Float, rotQ1.Z.Float, rotQ1.W.Float);
+            var scale = bone.Scale.Value;
+
+            return Matrix4x4.CreateScale(new Vector3(scale.X.Float, scale.Y.Float, scale.Z.Float))
+                 * Matrix4x4.CreateFromQuaternion(rotQ2)
+                 * Matrix4x4.CreateTranslation(pos.X.Float / 32.0f, pos.Y.Float / -32.0f, pos.Z.Float / -32.0f);
         }
     }
 }
