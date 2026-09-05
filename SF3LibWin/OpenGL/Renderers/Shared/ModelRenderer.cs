@@ -112,11 +112,11 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
             }
         }
 
-        protected virtual OpenTK.Mathematics.Vector4 ModelSelectionColor(ISGL_ModelInstance model) {
+        protected virtual Vector4 ModelSelectionColor(ISGL_ModelInstance model) {
             var r = model.ModelInstanceID % 64 / 64.0f;
             var g = model.ModelInstanceID / 64 / 64.0f;
             var b = model.ModelCollectionID / 64.0f;
-            return new OpenTK.Mathematics.Vector4(r, g, b, 1.0f);
+            return new Vector4(r, g, b, 1.0f);
         }
 
         public void DrawWireframe(
@@ -207,7 +207,7 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
                     Matrix4.CreateTranslation(modelInstance.PositionX / 32.0f, modelInstance.PositionY / -32.0f - prePostAdjustY + yAdjust, modelInstance.PositionZ / -32.0f) *
                     Matrix4.CreateRotationY(options.ModelsYRotation * (float) Math.PI / -180.00f) *
                     (modelInstance.Matrix?.ToOpenTKMarix() ?? Matrix4.Identity) *
-                    Matrix4.CreateTranslation(new OpenTK.Mathematics.Vector3(-ModelPositionOffset.X, ModelPositionOffset.Y, ModelPositionOffset.Z));
+                    Matrix4.CreateTranslation(new Vector3(-ModelPositionOffset.X, ModelPositionOffset.Y, ModelPositionOffset.Z));
 
                 _modelMatricesByModel[modelInstance] = newModelMatrix;
                 modelMatrix = newModelMatrix;
@@ -241,7 +241,7 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
             }
         }
 
-        public OpenTK.Mathematics.Vector3 ModelPositionOffset { get; set; }
+        public Vector3 ModelPositionOffset { get; set; }
 
         private Dictionary<ISGL_ModelInstance, Matrix4?> _modelMatricesByModel = [];
         private Dictionary<ISGL_ModelInstance, Matrix3?> _normalMatricesByModel = [];

@@ -45,7 +45,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
 
         public void Update(
             ISGL_Model sglModel, Dictionary<int, IAnimatableTexture> texturesById, Func<ISGL_ModelInstance> instCreator,
-            float? forceSemiTransparentValue, bool isHideMesh, bool? forceLighting
+            float? forceSemiTransparentValue, bool isHideMesh, bool? forceLighting, bool forceBlackIfTransparentNonIndexed
         ) {
             Reset();
             if (sglModel == null || texturesById == null || instCreator == null)
@@ -54,13 +54,13 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             var collectionId = sglModel.ModelCollectionID;
             InitDictsForType(collectionId);
             SGL_ModelsByIDByCollection[collectionId][sglModel.ModelID] = sglModel;
-            CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh, forceLighting);
+            CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh, forceLighting, forceBlackIfTransparentNonIndexed);
             ModelInstances = [instCreator()];
         }
 
         public void Update(
             ISGL_Model[] sglModels, Dictionary<int, IAnimatableTexture> texturesById, Func<int /*index*/, ISGL_ModelInstance> instCreator,
-            float? forceSemiTransparentValue, bool isHideMesh, bool? forceLighting
+            float?[] forceSemiTransparentValues, bool isHideMesh, bool? forceLighting, bool forceBlackIfTransparentNonIndexed
         ) {
             Reset();
             if (sglModels == null || sglModels.Length == 0 || texturesById == null || instCreator == null)
@@ -72,8 +72,9 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 var collectionId = sglModel.ModelCollectionID;
                 InitDictsForType(collectionId);
                 SGL_ModelsByIDByCollection[collectionId][sglModel.ModelID] = sglModel;
-                CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValue, isHideMesh, forceLighting);
-                insts.Add(instCreator(idx++));
+                CreateAndAddQuadModels(collectionId, sglModel, texturesById, forceSemiTransparentValues[idx], isHideMesh, forceLighting, forceBlackIfTransparentNonIndexed);
+                insts.Add(instCreator(idx));
+                idx++;
             }
             ModelInstances = insts.ToArray();
         }
@@ -84,7 +85,8 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             Dictionary<int, IAnimatableTexture> texturesById,
             float? forceSemiTransparentAlpha,
             bool isHideMesh,
-            bool? forceLighting
+            bool? forceLighting,
+            bool forceBlackIfTransparentNonIndexed
         ) {
             TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
                 => flip & ~TextureFlipType.Horizontal | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
@@ -150,7 +152,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
 
                     // If forcing semi-transparency, and there aren't any already-indexed textures, force color to black.
                     // (This isn't how this actually works, but this is fine for display.)
-                    if (forceSemiTransparentAlpha.HasValue && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
+                    if (forceBlackIfTransparentNonIndexed && forceSemiTransparentAlpha.HasValue && (anim == null || anim.Frames.All(x => x.BytesPerPixel == 2)))
                         color[0] = color[1] = color[2] = 0.0f;
 
                     color[3] *= transparency;

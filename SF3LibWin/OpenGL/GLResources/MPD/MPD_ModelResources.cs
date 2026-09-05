@@ -80,7 +80,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                         CreateAndAddQuadModels(
                             (int) mc.Collection, sglModel, texturesById,
                             isForcedSemiTransparent ? isForcedSemiTransparentAlpha : null,
-                            isHideMesh, forceLighting: null
+                            isHideMesh, forceLighting: null, forceBlackIfTransparentNonIndexed: true
                         );
                     }
                 }

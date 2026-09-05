@@ -47,5 +47,10 @@ namespace CommonLib.SGL {
         /// Position is ignored; bounding box is as if the model is placed at (0, 0, 0).
         /// </summary>
         BoundingBox BoundingBox { get; }
+
+        /// <summary>
+        /// When set, forces the model to be semi-transparent.
+        /// </summary>
+        float? ForceTransparency { get; set; }
     }
 }

@@ -180,5 +180,7 @@ namespace CommonLib.SGL {
                 return _boundingBox.Value;
             }
         }
+
+        public float? ForceTransparency { get; set; }
     }
 }

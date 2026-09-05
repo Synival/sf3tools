@@ -20,14 +20,16 @@ namespace SF3.Models.Structs.X8PC {
             var outline = _actualBone.ToOutline();
 
             var flattened = this.Flatten();
-            var modelIds  = flattened.Where(x => x.ModelID.HasValue).Select(x => x.ModelID.Value).ToArray();
+            var flattenedModelIds = flattened.Where(x => x.ModelID.HasValue).Select(x => x.ModelID.Value).ToArray();
+            var boneModelIds      = (this.Children ?? new IBone[0]).Where(x => x.ModelID.HasValue).Select(x => x.ModelID.Value).ToArray();
 
             var allModels = ((polyChar.XPDataTables?.Length ?? 0) == 0)
                 ? new List<SGL_ModelInstance>()
                 : polyChar.XPDataTables[0]
-                    .Join(modelIds, x => x.ModelID, y => y, (x, y) => x)
+                    .Join(flattenedModelIds, x => x.ModelID, y => y, (x, y) => x)
                     .Select((x, i) => new SGL_ModelInstance((_1, _2) => x) {
-                        ModelInstanceID = i, ModelID = x.ModelID, ModelCollectionID = x.ModelCollectionID
+                        ModelInstanceID = i, ModelID = x.ModelID, ModelCollectionID = x.ModelCollectionID,
+                        ForceTransparency = boneModelIds.Contains(x.ModelID) ? (float?) null : 0.25f,
                     })
                     .ToList();
 
@@ -38,6 +40,7 @@ namespace SF3.Models.Structs.X8PC {
                     foreach (var weaponBone in weaponBones) {
                         var weaponModelInstance = new SGL_ModelInstance((_1, _2) => weaponModel) {
                             ModelInstanceID = allModels.Count, ModelID = weaponModel.ModelID, ModelCollectionID = weaponModel.ModelCollectionID,
+                            ForceTransparency = (weaponBone.Parent == _actualBone) ? (float?) null : 0.25f,
                             Matrix = weaponBone.CreateMatrix()
                         };
                         if (weaponModel != null)

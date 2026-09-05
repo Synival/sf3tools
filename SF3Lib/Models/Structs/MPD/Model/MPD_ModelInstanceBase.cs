@@ -184,5 +184,7 @@ namespace SF3.Models.Structs.MPD.Model {
         protected abstract void UpdatePDatas();
 
         public Dictionary<(int ModelID, int LoD), uint> ModelIDToPDataMap { get; set; }
+
+        public float? ForceTransparency { get => null; set {} }
     }
 }

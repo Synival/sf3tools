@@ -279,7 +279,8 @@ namespace SF3.Win.Controls {
                         ).ToArray();
                     _models.Update(
                         models, texturesById, (idx) => sglModels[idx],
-                        forceSemiTransparentValue: null, isHideMesh: false, forceLighting: ForceLighting
+                        forceSemiTransparentValues: sglModels.Select(x => x.ForceTransparency).ToArray(),
+                        isHideMesh: false, forceLighting: ForceLighting, forceBlackIfTransparentNonIndexed: false
                     );
                 }
                 else {
