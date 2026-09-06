@@ -14,7 +14,7 @@ namespace SF3.Win.Views.X8PC {
             BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
 
             PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTables);
-            RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rototations", model, ngc, x => x?.BoneKeyframeRotTables);
+            RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rotations", model, ngc, x => x?.BoneKeyframeRotTables);
             ScaleView         = new BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable>("Scales", model, ngc, x => x?.BoneKeyframeScaleTables);
 
             Model             = model;
