@@ -97,5 +97,31 @@ namespace SF3.X8PC {
 
             return matrix;
         }
+
+        public static Matrix4x4 CreateMatrix(
+            VECTOR pos1, VECTOR pos2, float posMix,
+            QUATERNION rot1, QUATERNION rot2, float rotMix,
+            VECTOR scale1, VECTOR scale2, float scaleMix
+        ) {
+            var scale = Vector3.Lerp(
+                new Vector3(scale1.X.Float, scale1.Y.Float, scale1.Z.Float),
+                new Vector3(scale2.X.Float, scale2.Y.Float, scale2.Z.Float),
+                scaleMix
+            );
+
+            var rot = Quaternion.Lerp(
+                new Quaternion(rot1.X.Float, -rot1.Y.Float, -rot1.Z.Float, rot1.W.Float),
+                new Quaternion(rot2.X.Float, -rot2.Y.Float, -rot2.Z.Float, rot2.W.Float),
+                rotMix
+            );
+
+            var pos = Vector3.Lerp(
+                new Vector3(pos1.X.Float / 32.0f, pos1.Y.Float / -32.0f, pos1.Z.Float / -32.0f),
+                new Vector3(pos2.X.Float / 32.0f, pos2.Y.Float / -32.0f, pos2.Z.Float / -32.0f),
+                posMix
+            );
+
+            return Matrix4x4.CreateScale(scale) * Matrix4x4.CreateFromQuaternion(rot) * Matrix4x4.CreateTranslation(pos);
+        }
     }
 }
