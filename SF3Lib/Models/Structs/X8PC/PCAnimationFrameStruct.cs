@@ -8,9 +8,10 @@ using SF3.ByteData;
 
 namespace SF3.Models.Structs.X8PC {
     public class PCAnimationFrameStruct : IStruct, ISGL_ModelInstanceCollection {
-        public PCAnimationFrameStruct(IByteData data, string name, int frame, PolyChar polyChar) {
+        public PCAnimationFrameStruct(IByteData data, string name, int id, float frame, PolyChar polyChar) {
             Data     = data;
             Name     = name;
+            ID       = id;
             Frame    = frame;
             PolyChar = polyChar;
 
@@ -47,9 +48,9 @@ namespace SF3.Models.Structs.X8PC {
 
         public IByteData Data { get; }
 
-        [TableViewModelColumn(displayOrder: -2)]
+        [TableViewModelColumn(displayOrder: -2, displayFormat: "000.0")]
         [BulkCopy]
-        public int Frame { get; }
+        public float Frame { get; }
 
         [TableViewModelColumn(displayOrder: -1, minWidth: 120)]
         [BulkCopy]
@@ -63,7 +64,7 @@ namespace SF3.Models.Structs.X8PC {
 
         private ISGL_ModelInstance[] _models;
 
-        public int ID => Frame;
+        public int ID { get; }
         public int Address => 0; /* N/A */
         public int Size => 0; /* N/A */
     }

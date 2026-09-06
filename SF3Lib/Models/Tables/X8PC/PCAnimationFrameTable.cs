@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Logging;
 using CommonLib.Types;
@@ -26,7 +27,11 @@ namespace SF3.Models.Tables.X8PC {
 
         public override bool Load() {
             try {
-                _rows = Enumerable.Range(MinFrame, MaxFrame - MinFrame + 1).Select(x => new PCAnimationFrameStruct(Data, $"Frame_{x:D3}", x, PolyChar)).ToArray();
+                var rows = new List<PCAnimationFrameStruct>();
+                int idx = 0;
+                for (float f = MinFrame; f <= MaxFrame; f += 0.5f)
+                    rows.Add(new PCAnimationFrameStruct(Data, $"Frame_{f:000.0}", idx++, f, PolyChar));
+                _rows = rows.ToArray();
             }
             catch (Exception e) {
                 _rows = new PCAnimationFrameStruct[0];
