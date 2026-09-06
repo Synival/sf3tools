@@ -25,7 +25,6 @@ namespace SF3.Win.Views.X8PC {
 
             var ngc = NameGetterContext;
 
-            CreateChild(BonesView);
             CreateChild(HeaderView);
             CreateChild(XPDataListsView);
             CreateChild(XPDataTablesView);
@@ -33,7 +32,9 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(PolygonTablesView);
             CreateChild(AttrTablesView);
             CreateChild(VertexNormalTablesView);
+            CreateChild(BonesView);
 
+            TabControl.SelectedIndex = 7;
             return Control;
         }
 

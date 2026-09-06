@@ -8,14 +8,12 @@ namespace SF3.Win.Views.X8PC {
         public PCAnimationChunkView(string name, PolyChar model, INameGetterContext ngc) : base(name) {
             NameGetterContext = ngc;
 
-            AnimationFrames   = new PCAnimationFrameView("Animation Frames", model, model?.AnimationFramesTable, ngc);
-
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
             BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
-
             PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTables);
             RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rotations", model, ngc, x => x?.BoneKeyframeRotTables);
             ScaleView         = new BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable>("Scales", model, ngc, x => x?.BoneKeyframeScaleTables);
+            AnimationFrames   = new PCAnimationFrameView("Animation Frames", model, model?.AnimationFramesTable, ngc);
 
             Model             = model;
         }
@@ -26,15 +24,14 @@ namespace SF3.Win.Views.X8PC {
 
             var ngc = NameGetterContext;
 
-            CreateChild(AnimationFrames);
-
             CreateChild(HeaderView);
             CreateChild(BoneKeyframesView);
-
             CreateChild(PosView);
             CreateChild(RotView);
             CreateChild(ScaleView);
+            CreateChild(AnimationFrames);
 
+            TabControl.SelectedIndex = 5;
             return Control;
         }
 
@@ -45,25 +42,23 @@ namespace SF3.Win.Views.X8PC {
                 if (_model != value) {
                     _model = value;
 
-                    AnimationFrames.SetTable(_model, _model?.AnimationFramesTable);
-
                     HeaderView.Model        = _model?.AnimationChunkHeader;
                     BoneKeyframesView.Table = _model?.BoneKeyframeTable;
-
                     PosView.Model           = _model;
                     RotView.Model           = _model;
                     ScaleView.Model         = _model;
+                    AnimationFrames.SetTable(_model, _model?.AnimationFramesTable);
                 }
             }
         }
 
         public INameGetterContext NameGetterContext { get; }
 
-        public PCAnimationFrameView AnimationFrames { get; }
         public DataModelView HeaderView { get; }
         public TableView BoneKeyframesView { get; }
         public BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable> PosView { get; }
         public BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable> RotView { get; }
         public BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable> ScaleView { get; }
+        public PCAnimationFrameView AnimationFrames { get; }
     }
 }
