@@ -73,15 +73,29 @@ namespace SF3.X8PC {
             return boneName;
         }
 
-        public static Matrix4x4 CreateMatrix(this IBone bone) {
-            var pos  = bone.Position.Value;
-            var rotQ1 = bone.Rotation.Value;
-            var rotQ2 = new Quaternion(rotQ1.X.Float, rotQ1.Y.Float, rotQ1.Z.Float, rotQ1.W.Float);
-            var scale = bone.Scale.Value;
+        public static Matrix4x4 CreateMatrix(this IBone bone)
+            => CreateMatrix(bone.Position, bone.Rotation, bone.Scale);
 
-            return Matrix4x4.CreateScale(new Vector3(scale.X.Float, scale.Y.Float, scale.Z.Float))
-                 * Matrix4x4.CreateFromQuaternion(rotQ2)
-                 * Matrix4x4.CreateTranslation(pos.X.Float / 32.0f, pos.Y.Float / -32.0f, pos.Z.Float / -32.0f);
+        public static Matrix4x4 CreateMatrix(VECTOR? posIn, QUATERNION? rotIn, VECTOR? scaleIn) {
+            var matrix = Matrix4x4.Identity;
+
+            if (scaleIn.HasValue) {
+                var scale = scaleIn.Value;
+                matrix *= Matrix4x4.CreateScale(new Vector3(scale.X.Float, scale.Y.Float, scale.Z.Float));
+            }
+
+            if (rotIn.HasValue) {
+                var rotQ1 = rotIn.Value;
+                var rotQ2 = new Quaternion(rotQ1.X.Float, -rotQ1.Y.Float, -rotQ1.Z.Float, rotQ1.W.Float);
+                matrix *= Matrix4x4.CreateFromQuaternion(rotQ2);
+            }
+
+            if (posIn.HasValue) {
+                var pos = posIn.Value;
+                matrix *= Matrix4x4.CreateTranslation(pos.X.Float / 32.0f, pos.Y.Float / -32.0f, pos.Z.Float / -32.0f);
+            }
+
+            return matrix;
         }
     }
 }
