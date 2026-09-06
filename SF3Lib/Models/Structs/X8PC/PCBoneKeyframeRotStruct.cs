@@ -75,5 +75,7 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetCompressedFIXED(_wAddr, 14).Float;
             set => Data.SetCompressedFIXED(_wAddr, new CompressedFIXED(value, 14, 0));
         }
+
+        public QUATERNION CreateQuaternion() => new QUATERNION(X, Y, Z, W);
     }
 }

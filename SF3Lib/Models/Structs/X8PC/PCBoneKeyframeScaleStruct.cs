@@ -66,5 +66,7 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetFIXED(_zAddr).Float;
             set => Data.SetFIXED(_zAddr, new FIXED(value, 0));
         }
+
+        public VECTOR CreateVector() => new VECTOR(X, Y, Z);
     }
 }
