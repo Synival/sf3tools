@@ -11,6 +11,7 @@ using SF3.Win.OpenGL.GLResources.Shared;
 using SF3.Win.OpenGL.Renderers.SGL_Model;
 using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
+using SF3.Win.Utils;
 
 namespace SF3.Win.Controls {
     public partial class SGL_ModelViewerControl : GLControl {
@@ -18,6 +19,14 @@ namespace SF3.Win.Controls {
             InitializeComponent();
             MaximumSize = MinimumSize = new System.Drawing.Size(320, 320);
             ForceLighting = null;
+
+            RenderOptions = new RendererOptions() {
+                DrawModels      = true,
+                DrawExtraModels = true,
+                ApplyLighting   = true,
+                DrawWireframe   = true,
+                SmoothLighting  = true,
+            };
         }
 
         protected override void OnLoad(EventArgs e) {
@@ -47,12 +56,12 @@ namespace SF3.Win.Controls {
 
             var lighting = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
-                    var level = i / 31f;
+                    var level = Math.Pow(i / 31f, 4.0f);
                     return new PixelChannels() {
                         A = 255,
-                        R = (byte) ((level * 0.75f  + 0.125f) * 255),
-                        G = (byte) ((level * 0.50f +  0.25f)  * 255),
-                        B = (byte) ((level * 0.25f  + 0.375f) * 255)
+                        R = (byte) ((level * 1.00f  + 0.000f) * 255),
+                        G = (byte) ((level * 0.75f +  0.125f) * 255),
+                        B = (byte) ((level * 0.33f  + 0.333f) * 255)
                     };
                 })
                 .ToArray()
@@ -71,17 +80,13 @@ namespace SF3.Win.Controls {
             }
 
             if (_globalTimer == null) {
-                // TODO: use good timer code from ViewerGLControl
-                // TODO: get this rendering at 60fps
-                _globalTimer = new Timer() { Interval = 1000 / 45 };
-                _globalTimer.Tick += (s, a) => Yaw = (Yaw + 1.0f) % 360f;
+                _globalTimer = new BetterTimer(60);
+                _globalTimer.FrameTick += (s, delta) => Yaw = (Yaw + delta * 0.0225f) % 360f;
                 _globalTimer.Start();
             }
 
-            // TODO: use good timer code from ViewerGLControl
-            // TODO: get this rendering at 60fps
-            _timer = new Timer() { Interval = 1000 / 45 };
-            _timer.Tick += (s, a) => IncrementFrame();
+            _timer = new BetterTimer(60);
+            _timer.FrameTick += (s, d) => IncrementFrame(d);
             _timer.Start();
 
             Disposed += (s, e) => {
@@ -126,7 +131,7 @@ namespace SF3.Win.Controls {
 
         private void UpdateLightPos() {
             MakeCurrent();
-            var lightPos = new Vector3(-1.00f, 0.50f, 0.50f).Normalized()
+            var lightPos = new Vector3(-0.50f, 0.25f, 0.75f).Normalized()
                 * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
 
             foreach (var shader in _general.Shaders) {
@@ -177,8 +182,10 @@ namespace SF3.Win.Controls {
         private void UpdateCameraPosition() {
             var yawRadians = MathHelper.DegreesToRadians(Yaw);
 
-            Position = new Vector3(0.66f * (float) Math.Sin(yawRadians), 0.45f, 0.66f * (float) Math.Cos(yawRadians)).Normalized() * _dist;
-            Pitch = -MathHelper.RadiansToDegrees((float) Math.Atan2(Position.Y, double.Hypot(Position.X, Position.Z)));
+            Position = new Vector3(0.0f, 0.0f, 1.0f)
+                * Matrix3.CreateRotationX(Pitch * (float) Math.PI / 180.0f)
+                * Matrix3.CreateRotationY(Yaw * (float) Math.PI / 180.0f)
+                * _dist;
 
             Position += _center;
         }
@@ -211,13 +218,7 @@ namespace SF3.Win.Controls {
                     Models   = _models,
                     Lighting = _lighting,
                 },
-                new RendererOptions() {
-                    DrawModels      = true,
-                    DrawExtraModels = true,
-                    ApplyLighting   = true,
-                    DrawWireframe   = true,
-                    SmoothLighting  = true,
-                },
+                RenderOptions,
                 new RendererState() {
                     CameraYaw        = Yaw,
                     CameraPitch      = Pitch,
@@ -291,27 +292,37 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
-        private void IncrementFrame() {
+        private float _updateTexMs = 0;
+
+        private void IncrementFrame(float delta) {
             if (!Visible || IsDisposed)
                 return;
             MakeCurrent();
 
-            // TODO: this doesn't update at 30fps, please fix!
-            var collectionIds = _sglModels.Select(x => x.ModelCollectionID).Distinct().ToArray();
-            foreach (var collectionId in collectionIds)
-                foreach (var modelGroup in _models.ModelGroupsByIDByCollection[collectionId].Values)
-                    foreach (var model in modelGroup.Models)
-                        _ = model.UpdateAnimatedTextures();
+            _updateTexMs += delta;
+            if (_updateTexMs > 500)
+                _updateTexMs = 500;
+
+            while (_updateTexMs >= 33.33f) {
+                _updateTexMs -= 33.33f;
+                var collectionIds = _sglModels.Select(x => x.ModelCollectionID).Distinct().ToArray();
+                foreach (var collectionId in collectionIds)
+                    foreach (var modelGroup in _models.ModelGroupsByIDByCollection[collectionId].Values)
+                        foreach (var model in modelGroup.Models)
+                            _ = model.UpdateAnimatedTextures();
+            }
 
             Invalidate();
         }
 
         public Vector3 Position { get; private set; }
         public static float Yaw { get; private set; }
-        public float Pitch { get; private set; }
+        public RendererOptions RenderOptions { get; }
 
+        public float Pitch { get; set; } = -30.0f;
         public bool? ForceLighting { get; set; }
         public float Zoom { get; set; } = 1.0f;
+        public float PosHeight { get; set; } = 0.45f;
 
         private float _minX = 0f;
         private float _minY = 0f;
@@ -338,8 +349,8 @@ namespace SF3.Win.Controls {
         private LightingResources  _lighting = null;
 
         private SGL_ModelRenderer _renderer = null;
-        private Timer _timer = null;
+        private BetterTimer _timer = null;
 
-        private static Timer _globalTimer = null;
+        private static BetterTimer _globalTimer = null;
     }
 }
