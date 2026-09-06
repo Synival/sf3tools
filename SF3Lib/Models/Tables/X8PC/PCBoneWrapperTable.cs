@@ -21,7 +21,7 @@ namespace SF3.Models.Tables.X8PC {
             try {
                 void AddBone(IBone bone, PCBoneWrapperStruct parent) {
                     var newBone = new PCBoneWrapperStruct(bone == RootBone ? "Root" : $"Bone_{bone.BoneID:D2}", bone, PolyChar, parent);
-                    if (newBone.BoneID.HasValue)
+                    if (newBone.BoneID.HasValue || bone == RootBone)
                         rows.Add(newBone);
                     if (bone.Children != null)
                         foreach (var b in bone.Children)
