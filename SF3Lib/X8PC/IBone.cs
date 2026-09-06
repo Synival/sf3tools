@@ -92,7 +92,7 @@ namespace SF3.X8PC {
 
             if (posIn.HasValue) {
                 var pos = posIn.Value;
-                matrix *= Matrix4x4.CreateTranslation(pos.X.Float / 32.0f, pos.Y.Float / -32.0f, pos.Z.Float / -32.0f);
+                matrix *= Matrix4x4.CreateTranslation(pos.X.Float, -pos.Y.Float, -pos.Z.Float);
             }
 
             return matrix;
@@ -116,8 +116,8 @@ namespace SF3.X8PC {
             );
 
             var pos = Vector3.Lerp(
-                new Vector3(pos1.X.Float / 32.0f, pos1.Y.Float / -32.0f, pos1.Z.Float / -32.0f),
-                new Vector3(pos2.X.Float / 32.0f, pos2.Y.Float / -32.0f, pos2.Z.Float / -32.0f),
+                new Vector3(pos1.X.Float, -pos1.Y.Float, -pos1.Z.Float),
+                new Vector3(pos2.X.Float, -pos2.Y.Float, -pos2.Z.Float),
                 posMix
             );
 

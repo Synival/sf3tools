@@ -47,15 +47,15 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
         private Position GetPointPosition(int x, int y, IMPD_Surface surface, int groundY) {
             var groundYf = groundY / -32.0f;
 
-            var xf = x / 32.0f + MPD_ModelResources.ModelOffsetX;
+            var xf = x + MPD_ModelResources.ModelOffsetX;
             float? topY    = null;
             float? bottomY = null;
-            var zf = y / -32.0f - MPD_ModelResources.ModelOffsetZ;
+            var zf = -(y + MPD_ModelResources.ModelOffsetZ);
 
             for (var ty = -1; ty <= 1; ty++) {
                 for (var tx = -1; tx <= 1; tx++) {
-                    var surfaceX = xf + 32f + tx * 0.5f;
-                    var surfaceY = -zf + 32f + ty * 0.5f;
+                    var surfaceX = (xf / 32.0f) + 32f + tx * 0.5f;
+                    var surfaceY = -(zf / 32.0f) + 32f + ty * 0.5f;
 
                     var tileX = (int) surfaceX;
                     var tileY = (int) surfaceY;
@@ -65,12 +65,12 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                         var xInTile = 1.00f - (surfaceX - tileX);
                         var yInTile = 1.00f - (surfaceY - tileY);
 
-                        var heights1 = (tile.GetVertexHeight(CornerType.BottomLeft) * xInTile + tile.GetVertexHeight(CornerType.BottomRight) * (1.0f - xInTile)) / 16.0f;
-                        var heights2 = (tile.GetVertexHeight(CornerType.TopLeft)    * xInTile + tile.GetVertexHeight(CornerType.TopRight)    * (1.0f - xInTile)) / 16.0f;
+                        var heights1 = (tile.GetVertexHeight(CornerType.BottomLeft) * xInTile + tile.GetVertexHeight(CornerType.BottomRight) * (1.0f - xInTile)) * 2.0f;
+                        var heights2 = (tile.GetVertexHeight(CornerType.TopLeft)    * xInTile + tile.GetVertexHeight(CornerType.TopRight)    * (1.0f - xInTile)) * 2.0f;
                         var height = heights1 * yInTile + heights2 * (1.0f - yInTile);
 
-                        topY    = topY == null ? height + 1.0f : Math.Max(topY.Value, height + 1.0f);
-                        bottomY = bottomY == null ? height : Math.Min(bottomY.Value, height);
+                        topY    = !(topY.HasValue)    ? height + 32.0f : Math.Max(topY.Value,    height + 32.0f);
+                        bottomY = !(bottomY.HasValue) ? height         : Math.Min(bottomY.Value, height);
                     }
                 }
             }

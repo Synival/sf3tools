@@ -7,8 +7,8 @@ using SF3.Win.OpenGL.GLResources.Shared;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {
     public class MPD_ModelResources : ModelResources, IMPD_Resources {
-        public const float ModelOffsetX = MPD_SurfaceModelResources.WidthInTiles / -2f;
-        public const float ModelOffsetZ = MPD_SurfaceModelResources.HeightInTiles / -2f;
+        public const float ModelOffsetX = MPD_SurfaceModelResources.WidthInWorldUnits / -2f;
+        public const float ModelOffsetZ = MPD_SurfaceModelResources.HeightInWorldUnits / -2f;
 
         public MPD_ModelResources(bool applyShadowTags, bool applyHideTags)
         : base(applyShadowTags, applyHideTags) {

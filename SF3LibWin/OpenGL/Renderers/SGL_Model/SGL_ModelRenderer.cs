@@ -90,7 +90,7 @@ namespace SF3.Win.OpenGL.Renderers.SGL_Model {
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Enable(EnableCap.PolygonOffsetLine);
-            GL.PolygonOffset(-0.1f, -0.1f);
+            GL.PolygonOffset(-3.0f, -3.0f);
             GL.DepthFunc(DepthFunction.Lequal);
 
             using (general.WireframeShader.Use())

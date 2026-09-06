@@ -8,15 +8,8 @@ using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.Extensions {
     public static class IMPD_SurfaceTileExtensions {
-        public static Vector3[] GetVector3Vertices(this IMPD_SurfaceTile tile, float scale = 1.00f) {
-            var xzOff = scale * 0.5f;
-
-            var heights = tile.GetVertexHeights().Select(x => x / 16.0f).ToArray();
-            if (scale != 1.00f) {
-                var centerHeight = heights.Average();
-                for (var i = 0; i < 4; i++)
-                    heights[i] = (heights[i] - centerHeight) * scale + centerHeight;
-            }
+        public static Vector3[] GetVector3Vertices(this IMPD_SurfaceTile tile) {
+            const float xzOff = 16f;
 
             const int corner1X = (Corner1X * 2) - 1;
             const int corner2X = (Corner2X * 2) - 1;
@@ -28,14 +21,16 @@ namespace SF3.Win.Extensions {
             const int corner3Z = (Corner3Z * 2) - 1;
             const int corner4Z = (Corner4Z * 2) - 1;
 
-            const float modelOffX = MPD_ModelResources.ModelOffsetX + 0.5f;
-            const float modelOffZ = MPD_ModelResources.ModelOffsetZ + 0.5f;
+            const float modelOffX = MPD_ModelResources.ModelOffsetX + xzOff;
+            const float modelOffZ = MPD_ModelResources.ModelOffsetZ + xzOff;
+
+            var heights = tile.GetVertexHeights().Select(x => x * 2.0f).ToArray();
 
             return [
-                (tile.X + (xzOff * corner1X) + modelOffX, heights[0], (63 - tile.Y) + (xzOff * corner1Z) + modelOffZ),
-                (tile.X + (xzOff * corner2X) + modelOffX, heights[1], (63 - tile.Y) + (xzOff * corner2Z) + modelOffZ),
-                (tile.X + (xzOff * corner3X) + modelOffX, heights[2], (63 - tile.Y) + (xzOff * corner3Z) + modelOffZ),
-                (tile.X + (xzOff * corner4X) + modelOffX, heights[3], (63 - tile.Y) + (xzOff * corner4Z) + modelOffZ),
+                ((tile.X * 32.0f + (xzOff * corner1X)) + modelOffX, heights[0], ((63 - tile.Y) * 32.0f + (xzOff * corner1Z)) + modelOffZ),
+                ((tile.X * 32.0f + (xzOff * corner2X)) + modelOffX, heights[1], ((63 - tile.Y) * 32.0f + (xzOff * corner2Z)) + modelOffZ),
+                ((tile.X * 32.0f + (xzOff * corner3X)) + modelOffX, heights[2], ((63 - tile.Y) * 32.0f + (xzOff * corner3Z)) + modelOffZ),
+                ((tile.X * 32.0f + (xzOff * corner4X)) + modelOffX, heights[3], ((63 - tile.Y) * 32.0f + (xzOff * corner4Z)) + modelOffZ),
             ];
         }
 

@@ -153,7 +153,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                     var shader = general.SpriteShader;
                     using (scene.ActorTextureAtlas.Use()) {
                         _ = shader.UpdateUniform("colorize", true);
-                        _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
+                        _ = shader.UpdateUniform("cameraDistAdjust", 16.0f);
 
                         ActorRenderer.SetupSpriteShaderUniforms(shader, baseRotationMatrix, actor, cameraYaw, color);
                         model.Draw(shader);

@@ -61,9 +61,10 @@ namespace SF3.Win.Controls {
                 var tile = MPD_File.Surface.GetTile(tileObj.X, tileObj.Y);
                 var tileVertices = tile.GetVector3Vertices();
                 target = new Vector3(
-                    tileObj.X + MPD_ModelResources.ModelOffsetX + 0.5f,
-                    tileVertices.Select(x => x.Y).Average(),
-                    (63 - tileObj.Y) + MPD_ModelResources.ModelOffsetZ + 0.5f);
+                    (tileObj.X + MPD_ModelResources.ModelOffsetX + 0.5f) * 32.0f,
+                    tileVertices.Select(x => x.Y).Average() * 32.0f,
+                    (63 - tileObj.Y + MPD_ModelResources.ModelOffsetZ + 0.5f) * 32.0f
+                );
             }
             else if (obj is SelectableModel modelObj) {
                 if (MPD_File.ModelCollections.TryGetValue(modelObj.Collection, out var collection)) {
@@ -71,9 +72,9 @@ namespace SF3.Win.Controls {
                     if (modelInstance != null) {
                         target =
                             new Vector3(
-                                modelInstance.PositionX /  32.0f,
-                                modelInstance.PositionY / -32.0f,
-                                modelInstance.PositionZ / -32.0f
+                                modelInstance.PositionX,
+                                -modelInstance.PositionY,
+                                -modelInstance.PositionZ
                             )
                             * Matrix3.CreateRotationY(MPD_File.Settings.ModelsYRotation / -180.0f * (float) Math.PI)
                             + new Vector3(MPD_ModelResources.ModelOffsetX, 0, -MPD_ModelResources.ModelOffsetZ);
@@ -84,9 +85,9 @@ namespace SF3.Win.Controls {
                 var actor = AppResources.Get().ActiveScene?.Scene?.Actors?.FirstOrDefault(x => x.ID == actorObj.ID);
                 if (actor != null) {
                     target = new Vector3(
-                        actor.ActorX /  32.0f + MPD_ModelResources.ModelOffsetX,
-                        actor.ActorY / -32.0f,
-                        actor.ActorZ / -32.0f - MPD_ModelResources.ModelOffsetZ
+                        actor.ActorX /  MPD_ModelResources.ModelOffsetX,
+                        -actor.ActorY,
+                        -actor.ActorZ - MPD_ModelResources.ModelOffsetZ
                     );
                 }
             }
@@ -104,10 +105,10 @@ namespace SF3.Win.Controls {
         }
 
         public void ResetCamera()
-            => ResetCamera((0, 5, 0), 140.0f);
+            => ResetCamera((0, 160.0f, 0), 140.0f);
 
         public void ResetCamera(Vector3 offset, float distance) {
-            Position = new Vector3(0.0f, 0.416f, 0.909f) * distance + offset;
+            Position = new Vector3(0.0f, 13.312f, 29.088f) * distance + offset;
             LookAtTarget(offset);
         }
 

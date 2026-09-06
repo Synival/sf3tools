@@ -16,7 +16,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 _ = shader.UpdateUniform("alwaysShow", true);
 
             GL.Enable(EnableCap.PolygonOffsetFill);
-            GL.PolygonOffset(-0.4f, -0.4f);
+            GL.PolygonOffset(-9.0f, -9.0f);
             GL.DepthFunc(DepthFunction.Lequal);
 
             var (sin, cos) = Math.SinCos(MathHelper.DegreesToRadians(cameraYaw));

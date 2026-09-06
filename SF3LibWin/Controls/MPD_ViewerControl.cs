@@ -333,8 +333,8 @@ namespace SF3.Win.Controls {
         }
 
         private CameraRefs CreateCameraRefs() {
-            float width   = 64.0f;
-            float depth   = 64.0f;
+            float width   = 2048.0f;
+            float depth   = 2048.0f;
             float centerX = 0.0f;
             float groundY = 0.0f;
             float centerZ = 0.0f;
@@ -353,11 +353,11 @@ namespace SF3.Win.Controls {
                 var x2 = boundaries.Max(x => x.X2);
                 var z2 = boundaries.Max(x => x.Y2);
 
-                width   = (x2 - x1) / 32.00f;
-                depth   = (z2 - z1) / 32.00f;
-                centerX = (x1 + x2) / 2.0f /  32.00f + MPD_ModelResources.ModelOffsetX;
-                centerZ = (z1 + z2) / 2.0f / -32.00f + MPD_ModelResources.ModelOffsetZ + 64.00f;
-                groundY = (MPD_File?.Planes?.GroundY ?? 0) / -32.0f;
+                width   = x2 - x1;
+                depth   = z2 - z1;
+                centerX = (x1 + x2) / 2.0f + MPD_ModelResources.ModelOffsetX;
+                centerZ = (z1 + z2) / -2.0f + MPD_ModelResources.ModelOffsetZ + 2048.00f;
+                groundY = -(MPD_File?.Planes?.GroundY ?? 0);
             }
 
             return new CameraRefs {
@@ -370,7 +370,7 @@ namespace SF3.Win.Controls {
         private void tsbCameraReset_Click(object sender, EventArgs e) {
             var refs = CreateCameraRefs();
             var size = Math.Max(refs.Width, refs.Height);
-            GLControl.ResetCamera(refs.Center + (0, size * 0.071f, 0), size * 2f);
+            GLControl.ResetCamera(refs.Center + (0, size * 0.071f, 0), size / 16f);
             GLControl.InvalidateFrame();
         }
 

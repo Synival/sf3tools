@@ -146,10 +146,10 @@ namespace SF3.Win.Controls {
             var rate = shiftFactor * (deltaInMs / c_expectedDelta);
 
             if (moveX != 0 || moveY != 0 || moveZ != 0) {
-                var move = new Vector3(moveX, moveY * 0.5f, moveZ * 2.5f)
+                var move = new Vector3(moveX * 8f, moveY * 4f, moveZ * 20f)
                     * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                     * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
-                Position += move * 0.25f * rate;
+                Position += move * rate;
                 InvalidateFrame();
             }
 

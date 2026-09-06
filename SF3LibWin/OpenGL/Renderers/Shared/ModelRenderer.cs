@@ -186,8 +186,8 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
                     // Not all sprites rotate around the X axis the same way, so get the center X to help with offsets.
                     var sglModel = models.SGL_ModelsByIDByCollection[modelInstance.ModelCollectionID].TryGetValue(modelInstance.ModelID, out var sglModelOut) ? sglModelOut : null;
 
-                    var topY     = sglModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
-                    var bottomY  = sglModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) / 32.0f ?? 0.00f;
+                    var topY     = sglModel.Vertices?.Min(x => Math.Min(x.Y.Float, x.Z.Float)) ?? 0.00f;
+                    var bottomY  = sglModel.Vertices?.Max(x => Math.Max(x.Y.Float, x.Z.Float)) ?? 0.00f;
                     var centerY  = (topY + bottomY) * 0.5f;
 
                     angleXAdjust = (float) (cameraPitch / 180.0f * Math.PI) * -1.00f;
@@ -204,7 +204,7 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
                     Matrix4.CreateRotationY(modelInstance.AngleY * (float) Math.PI / -180.00f + angleYAdjust) *
                     Matrix4.CreateRotationZ(modelInstance.AngleZ * (float) Math.PI / 180.00f) *
                     Matrix4.CreateRotationY((float) Math.PI) *
-                    Matrix4.CreateTranslation(modelInstance.PositionX / 32.0f, modelInstance.PositionY / -32.0f - prePostAdjustY + yAdjust, modelInstance.PositionZ / -32.0f) *
+                    Matrix4.CreateTranslation(modelInstance.PositionX, -modelInstance.PositionY - prePostAdjustY + yAdjust, -modelInstance.PositionZ) *
                     Matrix4.CreateRotationY(options.ModelsYRotation * (float) Math.PI / -180.00f) *
                     (modelInstance.Matrix?.ToOpenTKMarix() ?? Matrix4.Identity) *
                     Matrix4.CreateTranslation(new Vector3(-ModelPositionOffset.X, ModelPositionOffset.Y, ModelPositionOffset.Z));

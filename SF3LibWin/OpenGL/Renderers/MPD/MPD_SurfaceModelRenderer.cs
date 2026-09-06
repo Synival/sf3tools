@@ -19,7 +19,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
             var lightingTexture     = lighting.LightingTexture ?? general.WhiteTexture;
 
             GL.Enable(EnableCap.PolygonOffsetFill);
-            GL.PolygonOffset(-0.1f, -0.1f);
+            GL.PolygonOffset(-3.0f, -3.0f);
             GL.DepthFunc(DepthFunction.Lequal);
 
             general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, options.ApplyLighting ? options.UseOutsideLighting ? 2 : 1 : 0);

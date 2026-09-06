@@ -428,7 +428,7 @@ namespace SF3.Win.Controls {
         private void UpdateProjectionMatrix(int width, int height) {
             _projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
                 MathHelper.DegreesToRadians(22.50f), (float) width / height,
-                0.05f, 65536.0f) * Matrix4.CreateTranslation((float) (ProjectionXAdjustment * 2) / (float) ClientSize.Width, 0, 0);
+                32.00f, 2097152.0f) * Matrix4.CreateTranslation((float) (ProjectionXAdjustment * 2) / (float) ClientSize.Width, 0, 0);
         }
 
         public void UpdateProjectionMatrices(int width, int height) {

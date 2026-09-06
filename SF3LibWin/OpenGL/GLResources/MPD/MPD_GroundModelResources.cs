@@ -26,7 +26,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             Reset();
             if (mpdFile?.Planes?.GroundImage != null && mpdFile.Flags.Bit_0x0400_HasGroundImage) {
                 try {
-                    CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundImage, 65536.0f);
+                    CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundImage, 65536.0f * 8.0f);
                 }
                 catch (Exception e) {
                     Logger.LogException(e);
@@ -34,7 +34,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             }
             else if (mpdFile?.Planes?.GroundTiledImage != null && mpdFile.Flags.Bit_0x1000_HasTileBasedGroundImage) {
                 try {
-                    CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage.TiledImage, 128.0f);
+                    CreateGroundImageModel(mpdFile, mpdFile.Planes.GroundTiledImage.TiledImage, 4096.0f);
                 }
                 catch (Exception e) {
                     Logger.LogException(e);
@@ -48,17 +48,17 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             var planes = mpdFile.Planes;
 
             var position = new Vector3(
-                planes.GroundX / 32.0f,
-                planes.GroundY / -32.0f,
-                planes.GroundZ / -32.0f
+                planes.GroundX,
+                -planes.GroundY,
+                -planes.GroundZ
             );
 
             // A lot of maps like MUCHUR.MPD and BEER.MPD have some pretty stupid offsets for their ground planes.
             // Put the ground plane into the most ideal location based on the camera boundaries.
             MoveToMostIdealCameraBoundaries(mpdFile, ref position);
 
-            var uvWidth  = size / (Texture.Width  / 32.0f);
-            var uvHeight = size / (Texture.Height / 32.0f);
+            var uvWidth  = size / Texture.Width;
+            var uvHeight = size / Texture.Height;
 
             // TODO: *X-axis* rotation, not *Y-axis* rotation!
             var theta = Math.PI;// settings.GroundAngle * (float) Math.PI / 180.0f;
@@ -106,8 +106,8 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             var centerX = 0.0f;
             var centerZ = 0.0f;
             try {
-                centerX =   cameraBoundaries.Width  / 2.0f / 32.0f - 32.0f;
-                centerZ = -(cameraBoundaries.Height / 2.0f / 32.0f - 32.0f);
+                centerX =   cameraBoundaries.Width  / 2.0f - 1024.0f;
+                centerZ = -(cameraBoundaries.Height / 2.0f - 1024.0f);
             }
             catch {
                 // TODO: some error when reading camera bounds. What to do here???
@@ -116,13 +116,13 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             void MoveCoordNearestToCameraBounds(ref float positionCoord, float cameraCoord) {
                 // Move positionCoord to a +(0, 63) offset to cameraCoord.
                 while (positionCoord < cameraCoord)
-                    positionCoord += 64.0f;
-                while (positionCoord > cameraCoord + 64.0f)
-                    positionCoord -= 64.0f;
+                    positionCoord += 2048.0f;
+                while (positionCoord > cameraCoord + 2048.0f)
+                    positionCoord -= 2048.0f;
 
                 // Move to a negative position if it's closer than the positive one.
-                if (cameraCoord - (positionCoord - 64.0f) < positionCoord - cameraCoord)
-                    positionCoord -= 64.0f;
+                if (cameraCoord - (positionCoord - 2048.0f) < positionCoord - cameraCoord)
+                    positionCoord -= 2048.0f;
             }
 
             MoveCoordNearestToCameraBounds(ref position.X, centerX);

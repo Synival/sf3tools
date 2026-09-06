@@ -177,7 +177,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 ];
 
                 var polyVertices = polyVerticesOrig
-                    .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float) * new Vector3(1 / 32.0f))
+                    .Select(x => new Vector3(-x.X.Float, -x.Y.Float, x.Z.Float))
                     .ToArray();
 
                 Vector3[] quadVertexNormals;

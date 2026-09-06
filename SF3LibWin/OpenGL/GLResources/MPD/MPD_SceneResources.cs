@@ -66,9 +66,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
         private static readonly float[,] c_isRightVertex = { {1}, {1}, {0}, {0} };
 
-        private static readonly Vector4 c_enemyColor    = new(1, 0, 0, 1);
-        private static readonly Vector4 c_friendlyColor = new(0, 1, 0, 1);
-        private static readonly Vector4 c_white         = new(1, 1, 1, 1);
+        private static readonly Vector4 c_white = new(1, 1, 1, 1);
 
         public void Update(IMPD mpdFile) {
             UpdateActors(mpdFile);
@@ -151,9 +149,9 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                         return new ActorModelInstance(
                             id: x.ID,
                             spriteId: x.SpriteID,
-                            x: actorX /  32.0f + MPD_ModelResources.ModelOffsetX,
-                            y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) / 16.0f,
-                            z: actorZ / -32.0f - MPD_ModelResources.ModelOffsetZ,
+                            x: actorX  + MPD_ModelResources.ModelOffsetX,
+                            y: (mpdFile?.Surface?.GetHeightAt(actorX, actorZ) ?? 0) * 2.0f,
+                            z: -actorZ - MPD_ModelResources.ModelOffsetZ,
                             verticalOffset: spriteTexInfo.VerticalOffset,
                             x.ActorDirection
                         );
@@ -181,9 +179,9 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             if (currentScene == null || currentScene.NumZones == 0 || currentScene.Zones == null)
                 return;
 
-            var zoneY = (mpdFile.Planes?.GroundY ?? 0) / -32.0f - 0.05f;
+            var zoneY = -(mpdFile.Planes?.GroundY ?? 0) - 1f;
             Vector3 ZoneVertex(int x, int z)
-                => new Vector3(0.5f + x + MPD_ModelResources.ModelOffsetX, zoneY, 63.5f - z + MPD_ModelResources.ModelOffsetZ);
+                => new Vector3((0.5f + x) * 32 + MPD_ModelResources.ModelOffsetX, zoneY, (63.5f - z) * 32 + MPD_ModelResources.ModelOffsetZ);
 
             var newZones = new List<QuadModel>();
 
@@ -214,7 +212,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
             };
 
             TexInfoBySpriteID = new Dictionary<int, SpriteTexInfo>() {
-                { -1, new SpriteTexInfo(0, 0, unknownImage.Width, unknownImage.Height, SpriteDirectionCountType.OneNoFlip, 1, 1, 1, 0.1f) }
+                { -1, new SpriteTexInfo(0, 0, unknownImage.Width, unknownImage.Height, SpriteDirectionCountType.OneNoFlip, 32, 32, 32, 3.2f) }
             };
 
             // Build a texture atlas with all frames.
@@ -265,11 +263,12 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
                     texBuffers.Add(texBuf);
 
-                    TexInfoBySpriteID[spriteId] = new SpriteTexInfo(0, offsetY, frameWidth, frameHeight, aniCommand.Directions,
-                        frameWidth  / 32.0f * sprite.Header.Scale / 0x10000,
-                        frameHeight / 32.0f * sprite.Header.Scale / 0x10000,
-                        sprite.Header.CollisionShadowDiameter / 32.0f,
-                        sprite.Header.VerticalOffset / -32.0f
+                    TexInfoBySpriteID[spriteId] = new SpriteTexInfo(
+                        0, offsetY, frameWidth, frameHeight, aniCommand.Directions,
+                        frameWidth  * sprite.Header.Scale / 0x10000,
+                        frameHeight * sprite.Header.Scale / 0x10000,
+                        sprite.Header.CollisionShadowDiameter,
+                        -sprite.Header.VerticalOffset
                     );
 
                     offsetY += frameHeight;

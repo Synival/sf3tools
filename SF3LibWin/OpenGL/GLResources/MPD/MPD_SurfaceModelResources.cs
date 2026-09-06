@@ -7,6 +7,9 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
         public const int WidthInTiles = 64;
         public const int HeightInTiles = 64;
 
+        public const int WidthInWorldUnits = WidthInTiles * 32;
+        public const int HeightInWorldUnits = HeightInTiles * 32;
+
         public MPD_SurfaceModelResources() {
             var numBlocks = 16 * 16;
             Blocks = new MPD_SurfaceModelBlockResources[numBlocks];

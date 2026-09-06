@@ -64,7 +64,7 @@ namespace SF3.Win.Controls {
                 }
                 // For middle drag, pan around.
                 else if ((dragMouseButtons & MouseButtons.Middle) != 0) {
-                    Position += new Vector3(deltaX / -40.0f, deltaY / 40.0f, 0)
+                    Position += new Vector3(deltaX / -1.25f, deltaY / 1.25f, 0)
                         * Matrix3.CreateRotationX(MathHelper.DegreesToRadians(Pitch))
                         * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
                     InvalidateFrame();
@@ -132,7 +132,7 @@ namespace SF3.Win.Controls {
         }
 
         private void OnMouseWheelMouseControls(MouseEventArgs e)
-            => MoveCameraForward(e.Delta / -50 * GetShiftFactor());
+            => MoveCameraForward(e.Delta / 1.5f * GetShiftFactor());
 
         private void OnRightDoubleClickMouseControls()
             => LookAtSelectableObject(_mouseoverObject);

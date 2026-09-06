@@ -33,7 +33,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 if (!selectionColors) {
                     // Render shadows first.
                     _ = shader.UpdateUniform("direction", 0.0f);
-                    _ = shader.UpdateUniform("cameraDistAdjust", 0.25f);
+                    _ = shader.UpdateUniform("cameraDistAdjust", 8.0f);
                     foreach (var actorGroup in scene.ActorsBySpriteID) {
                         var spriteId = actorGroup.Key;
                         var shadow = scene.ShadowsBySpriteID[spriteId];
@@ -47,7 +47,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
                 }
 
                 // Now render sprites.
-                _ = shader.UpdateUniform("cameraDistAdjust", 0.5f);
+                _ = shader.UpdateUniform("cameraDistAdjust", 16.0f);
                 foreach (var actorGroup in scene.ActorsBySpriteID) {
                     var spriteId = actorGroup.Key;
                     var model    = scene.ModelsBySpriteID[spriteId];

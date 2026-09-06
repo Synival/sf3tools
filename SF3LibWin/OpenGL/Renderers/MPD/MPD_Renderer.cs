@@ -165,7 +165,7 @@ namespace SF3.Win.OpenGL.Renderers.MPD {
         ) {
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             GL.Enable(EnableCap.PolygonOffsetLine);
-            GL.PolygonOffset(-0.2f, -0.2f);
+            GL.PolygonOffset(-6.0f, -6.0f);
             GL.DepthFunc(DepthFunction.Lequal);
 
             using (general.WireframeShader.Use())
