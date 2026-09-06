@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using CommonLib.Logging;
 using CommonLib.Types;
 using SF3.Models.Structs.X8PC;
@@ -17,12 +17,18 @@ namespace SF3.Models.Tables.X8PC {
             => Create(() => new PCBoneWrapperTable(name, rootBone, polyChar));
 
         public override bool Load() {
+            var rows = new List<PCBoneWrapperStruct>();
             try {
-                _rows = RootBone
-                    .Flatten()
-                    .Where(x => x.Children != null)
-                    .Select(x => new PCBoneWrapperStruct(x == RootBone ? "Root" : $"Bone_{x.BoneID:D2}", x, PolyChar))
-                    .ToArray();
+                void AddBone(IBone bone, PCBoneWrapperStruct parent) {
+                    var newBone = new PCBoneWrapperStruct(bone == RootBone ? "Root" : $"Bone_{bone.BoneID:D2}", bone, PolyChar, parent);
+                    if (newBone.BoneID.HasValue)
+                        rows.Add(newBone);
+                    if (bone.Children != null)
+                        foreach (var b in bone.Children)
+                            AddBone(b, newBone);
+                }
+                AddBone(RootBone, null);
+                _rows = rows.ToArray();
             }
             catch (Exception e) {
                 _rows = new PCBoneWrapperStruct[0];

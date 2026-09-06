@@ -9,11 +9,12 @@ using SF3.X8PC;
 namespace SF3.Models.Structs.X8PC {
     // There is no "bone" struct in X8PC files; this is just a wrapper.
     public class PCBoneWrapperStruct : IStruct, IBone, ISGL_ModelInstanceCollection {
-        public PCBoneWrapperStruct(string name, IBone bone, PolyChar polyChar) {
+        public PCBoneWrapperStruct(string name, IBone bone, PolyChar polyChar, PCBoneWrapperStruct parent) {
             Name = name;
 
             _actualBone = bone;
             PolyChar = polyChar;
+            Parent = parent;
 
             Path = _actualBone.GetBonePath();
 
@@ -72,6 +73,7 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         public PolyChar PolyChar { get; }
+        public IBone Parent { get; }
 
         public int ID => _actualBone.BoneID ?? -1;
 
@@ -95,7 +97,6 @@ namespace SF3.Models.Structs.X8PC {
         public int Size => 0;
 
         public int? Tag             => _actualBone.Tag;
-        public IBone Parent         => _actualBone.Parent;
         public int? ModelID         => _actualBone.ModelID;
         public VECTOR? Position     => _actualBone.Position;
         public QUATERNION? Rotation => _actualBone.Rotation;
