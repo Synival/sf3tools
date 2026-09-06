@@ -12,6 +12,7 @@ using SF3.Win.OpenGL.Renderers.SGL_Model;
 using SF3.Win.OpenGL.Renderers.Shared;
 using SF3.Win.Types;
 using SF3.Win.Utils;
+using static SF3.Win.Utils.EventHandlers;
 
 namespace SF3.Win.Controls {
     public partial class SGL_ModelViewerControl : GLControl {
@@ -86,7 +87,7 @@ namespace SF3.Win.Controls {
             }
 
             _timer = new BetterTimer(60);
-            _timer.FrameTick += (s, d) => IncrementFrame(d);
+            _timer.FrameTick += IncrementFrame;
             _timer.Start();
 
             Disposed += (s, e) => {
@@ -96,6 +97,7 @@ namespace SF3.Win.Controls {
                 _screen?.Dispose();
                 _models?.Dispose();
                 _lighting?.Dispose();
+                _timer.FrameTick -= IncrementFrame;
                 _timer?.Dispose();
 
                 _general  = null;
@@ -294,7 +296,7 @@ namespace SF3.Win.Controls {
 
         private float _updateTexMs = 0;
 
-        private void IncrementFrame(float delta) {
+        private void IncrementFrame(object sender, float delta) {
             if (!Visible || IsDisposed)
                 return;
             MakeCurrent();
@@ -313,6 +315,9 @@ namespace SF3.Win.Controls {
             }
 
             Invalidate();
+
+            // Run any custom timers attached.
+            FrameTick?.Invoke(this, delta);
         }
 
         public Vector3 Position { get; private set; }
@@ -352,5 +357,7 @@ namespace SF3.Win.Controls {
         private BetterTimer _timer = null;
 
         private static BetterTimer _globalTimer = null;
+
+        public event FrameTickEventHandler FrameTick;
     }
 }
