@@ -7,6 +7,7 @@ namespace SF3.Win.Views.X8PC {
         public PolyCharView(string name, PolyChar model, INameGetterContext ngc, TabAlignment tabAlignment) : base(name, tabAlignment: tabAlignment) {
             NameGetterContext = ngc;
 
+            AnimationViewer = new PCAnimationView("Animation Viewer", model);
             ChunkDefView   = new TableView("Header", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
             TexturesView   = new PCTexChunkView("Textures", model, NameGetterContext);
             ModelsView     = new PCModelChunkView("Models", model, NameGetterContext);
@@ -19,12 +20,12 @@ namespace SF3.Win.Views.X8PC {
             if (base.Create() == null)
                 return null;
 
+            CreateChild(AnimationViewer);
             CreateChild(ChunkDefView);
             CreateChild(TexturesView);
             CreateChild(ModelsView);
             CreateChild(AnimationsView);
 
-            TabControl.SelectedIndex = 3;
             return Control;
         }
 
@@ -34,6 +35,7 @@ namespace SF3.Win.Views.X8PC {
             set {
                 if (_model != value) {
                     _model = value;
+                    AnimationViewer.PolyChar = _model;
                     ChunkDefView.Table   = _model?.Header?.ChunkDefTable;
                     TexturesView.Model   = _model;
                     ModelsView.Model     = _model;
@@ -42,6 +44,7 @@ namespace SF3.Win.Views.X8PC {
             }
         }
 
+        public PCAnimationView AnimationViewer { get; }
         public INameGetterContext NameGetterContext { get; }
         public TableView ChunkDefView { get; }
         public PCTexChunkView TexturesView { get; }

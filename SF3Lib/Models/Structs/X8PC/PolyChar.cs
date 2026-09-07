@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using CommonLib.Arrays;
 using CommonLib.Imaging;
 using CommonLib.SGL;
@@ -12,7 +14,7 @@ using SF3.Models.Tables.X8PC;
 using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection {
+    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelCollection {
         public PolyChar(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0 /* not applicable */) {
             var tables = new List<ITable>();
@@ -43,6 +45,7 @@ namespace SF3.Models.Structs.X8PC {
             ModelChunkHeader  = new PCModelChunkHeader(ModelChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
             XPDataListTable   = PC_XPDataListTable.Create(ModelChunk.DecompressedData, "XPDATA_Lists", (int) ModelChunkHeader.ModelsOffset, this);
             XPDataTables      = XPDataListTable.Select((x, i) => PC_XPDataTable.Create(ModelChunk.DecompressedData, $"XPDATAs_{x.ID}", x.XPDataListOffset, this, i * 1000)).ToArray();
+            _modelsById       = XPDataTables.SelectMany(x => x).ToDictionary(x => x.ModelID, x => (ISGL_Model) x);
 
             WeaponXPData = (XPDataTables.Length >= 2 && XPDataTables[1].Count >= 1) ? XPDataTables[1][0] : null;
 
@@ -71,13 +74,13 @@ namespace SF3.Models.Structs.X8PC {
             );
 
             var skelFact = new SkeletonFactory();
-            var skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
-            BoneTable = PCBoneWrapperTable.Create("BoneNodes", skeleton.RootBone, this);
+            Skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
+            BoneTable = PCBoneWrapperTable.Create("BoneNodes", Skeleton.RootBone, this);
 
             if (XPDataTables.Length > 0) {
                 var xpdataTable = XPDataTables[0];
                 foreach (var xpdata in xpdataTable)
-                    xpdata.AssociateWithSkeleton(skeleton);
+                    xpdata.AssociateWithSkeleton(Skeleton);
             }
 
             AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
@@ -104,8 +107,6 @@ namespace SF3.Models.Structs.X8PC {
                     )
                 ).ToArray();
 
-            AnimationFramesTable = PCAnimationFrameTable.Create("AnimationFrames", this);
-
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
 
@@ -121,7 +122,6 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(BoneKeyframePosTables);
             tables.AddRange(BoneKeyframeRotTables);
             tables.AddRange(BoneKeyframeScaleTables);
-            tables.Add(AnimationFramesTable);
 
             Tables = tables.ToArray();
         }
@@ -175,9 +175,99 @@ namespace SF3.Models.Structs.X8PC {
             return true;
         }
 
+        public struct KeyframeInfo {
+            public int IndexA, IndexB;
+            public float Mix;
+            public override string ToString() => $"({IndexA}, {IndexB}) ({Mix})";
+        }
+
+        private KeyframeInfo GetAnimationKeyframe<T>(T[] list, Func<T, int> frameGetter, float frame) {
+            int max = list.Length;
+            var lastF = 0;
+
+            for (int i = 0; i < max; i++) {
+                var element = list[i];
+                var f = frameGetter(element);
+                if ((frame >= lastF && frame < f) || i == max - 1) {
+                    if (i == 0)
+                        return new KeyframeInfo() { IndexA = 0, IndexB = 0, Mix = 0.0f };
+                    else if (i == max - 1)
+                        return new KeyframeInfo() { IndexA = i, IndexB = i, Mix = 1.0f };
+                    else
+                        return new KeyframeInfo() { IndexA = i - 1, IndexB = i, Mix = (frame - lastF) / (f - lastF) };
+                }
+                lastF = f;
+            }
+            return new KeyframeInfo() { IndexA = 0, IndexB = 0, Mix = 0.0f };
+        }
+
+        public struct BoneKeyframeInfo {
+            public KeyframeInfo Pos;
+            public KeyframeInfo Rot;
+            public KeyframeInfo Scale;
+        }
+
+        public BoneKeyframeInfo[] GetAnimationBoneKeyframes(float frame) {
+            var pos = BoneKeyframePosTables.Select(x => GetAnimationKeyframe(x.AsArray(), y => y.Frame, frame)).ToArray();
+            var rot = BoneKeyframeRotTables.Select(x => GetAnimationKeyframe(x.AsArray(), y => y.Frame, frame)).ToArray();
+            var scale = BoneKeyframeScaleTables.Select(x => GetAnimationKeyframe(x.AsArray(), y => y.Frame, frame)).ToArray();
+
+            var numBones = Math.Min(BoneKeyframePosTables.Length, Math.Min(BoneKeyframeRotTables.Length, BoneKeyframeScaleTables.Length));
+            var boneKeyframes = new BoneKeyframeInfo[numBones];
+            for (int i = 0; i < numBones; i++)
+                boneKeyframes[i] = new BoneKeyframeInfo { Pos = pos[i], Rot = rot[i], Scale = scale[i] };
+
+            return boneKeyframes;
+        }
+
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(ISGL_ModelInstance modelInstance, IBone bone, float frame)
+            => GetModelInstanceMatrixInAnimation(modelInstance, bone, GetAnimationBoneKeyframes(frame));
+
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(ISGL_ModelInstance modelInstance, IBone bone, BoneKeyframeInfo[] keyframeInfo) {
+            var matrix = Matrix4x4.Identity;
+
+            void ApplyMatrices(IBone b) {
+                if (b.BoneID.HasValue) {
+                    var bId = b.BoneID.Value;
+
+                    var boneFrame  = keyframeInfo[bId];
+                    var posFrame   = boneFrame.Pos;
+                    var rotFrame   = boneFrame.Rot;
+                    var scaleFrame = boneFrame.Scale;
+
+                    var pos1   = BoneKeyframePosTables[bId][posFrame.IndexA].CreateVector();
+                    var rot1   = BoneKeyframeRotTables[bId][rotFrame.IndexA].CreateQuaternion();
+                    var scale1 = BoneKeyframeScaleTables[bId][scaleFrame.IndexA].CreateVector();
+
+                    var pos2   = BoneKeyframePosTables[bId][posFrame.IndexB].CreateVector();
+                    var rot2   = BoneKeyframeRotTables[bId][rotFrame.IndexB].CreateQuaternion();
+                    var scale2 = BoneKeyframeScaleTables[bId][scaleFrame.IndexB].CreateVector();
+
+                    matrix *= IBoneExtensions.CreateMatrix(
+                        pos1,   pos2,   posFrame.Mix,
+                        rot1,   rot2,   rotFrame.Mix,
+                        scale1, scale2, scaleFrame.Mix
+                    );
+                }
+                else if (b.Tag == 0x30 || b.Tag == 0x81)
+                    matrix *= b.CreateMatrix();
+
+                if (b.Parent != null)
+                    ApplyMatrices(b.Parent);
+            }
+
+            ApplyMatrices(bone);
+
+            return matrix;
+        }
+
         private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;
         public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId)
             => _animatableTextureDictionary;
+
+        public ISGL_Model GetModel(int id, int lod) => _modelsById[id];
+        public IEnumerator<ISGL_Model> GetEnumerator() => _modelsById.Values.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IEnumerable<ITable> Tables { get; }
 
@@ -202,12 +292,13 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframePosTable[] BoneKeyframePosTables { get; }
         public PCBoneKeyframeRotTable[] BoneKeyframeRotTables { get; }
         public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
-        public PCAnimationFrameTable AnimationFramesTable { get; }
 
         public ChunkData[] Chunks { get; }
         public ChunkData TexDefChunk { get; }
         public ChunkData TexDataChunk { get; }
         public ChunkData ModelChunk { get; }
         public ChunkData AnimationChunk { get; }
+
+        private Dictionary<int, ISGL_Model> _modelsById;
     }
 }

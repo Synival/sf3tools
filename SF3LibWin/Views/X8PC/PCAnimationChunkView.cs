@@ -13,7 +13,6 @@ namespace SF3.Win.Views.X8PC {
             PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTables);
             RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rotations", model, ngc, x => x?.BoneKeyframeRotTables);
             ScaleView         = new BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable>("Scales", model, ngc, x => x?.BoneKeyframeScaleTables);
-            AnimationFrames   = new PCAnimationFrameView("Animation Frames", model, model?.AnimationFramesTable, ngc);
 
             Model             = model;
         }
@@ -29,9 +28,7 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(PosView);
             CreateChild(RotView);
             CreateChild(ScaleView);
-            CreateChild(AnimationFrames);
 
-            TabControl.SelectedIndex = 5;
             return Control;
         }
 
@@ -47,7 +44,6 @@ namespace SF3.Win.Views.X8PC {
                     PosView.Model           = _model;
                     RotView.Model           = _model;
                     ScaleView.Model         = _model;
-                    AnimationFrames.SetTable(_model, _model?.AnimationFramesTable);
                 }
             }
         }
@@ -59,6 +55,5 @@ namespace SF3.Win.Views.X8PC {
         public BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable> PosView { get; }
         public BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable> RotView { get; }
         public BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable> ScaleView { get; }
-        public PCAnimationFrameView AnimationFrames { get; }
     }
 }
