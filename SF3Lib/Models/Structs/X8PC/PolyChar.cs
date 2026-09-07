@@ -177,8 +177,10 @@ namespace SF3.Models.Structs.X8PC {
 
         public struct KeyframeInfo {
             public int IndexA, IndexB;
+            public float? FramesLeft;
             public float Mix;
-            public override string ToString() => $"({IndexA}, {IndexB}) ({Mix})";
+
+            public override string ToString() => $"{{ A={IndexA}, B={IndexB}) Frames={FramesLeft}, Mix={Mix} }}";
         }
 
         private KeyframeInfo GetAnimationKeyframe<T>(T[] list, Func<T, int> frameGetter, float frame) {
@@ -190,11 +192,11 @@ namespace SF3.Models.Structs.X8PC {
                 var f = frameGetter(element);
                 if ((frame >= lastF && frame < f) || i == max - 1) {
                     if (i == 0)
-                        return new KeyframeInfo() { IndexA = 0, IndexB = 0, Mix = 0.0f };
+                        return new KeyframeInfo() { IndexA = 0, IndexB = 0, FramesLeft = f - frame, Mix = 0.0f };
                     else if (i == max - 1)
-                        return new KeyframeInfo() { IndexA = i, IndexB = i, Mix = 1.0f };
+                        return new KeyframeInfo() { IndexA = i, IndexB = i, FramesLeft = null, Mix = 1.0f };
                     else
-                        return new KeyframeInfo() { IndexA = i - 1, IndexB = i, Mix = (frame - lastF) / (f - lastF) };
+                        return new KeyframeInfo() { IndexA = i - 1, IndexB = i, FramesLeft = f - frame, Mix = (frame - lastF) / (f - lastF) };
                 }
                 lastF = f;
             }
@@ -219,9 +221,6 @@ namespace SF3.Models.Structs.X8PC {
 
             return boneKeyframes;
         }
-
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(ISGL_ModelInstance modelInstance, IBone bone, float frame)
-            => GetModelInstanceMatrixInAnimation(modelInstance, bone, GetAnimationBoneKeyframes(frame));
 
         public Matrix4x4 GetModelInstanceMatrixInAnimation(ISGL_ModelInstance modelInstance, IBone bone, BoneKeyframeInfo[] keyframeInfo) {
             var matrix = Matrix4x4.Identity;

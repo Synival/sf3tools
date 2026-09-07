@@ -78,15 +78,53 @@ namespace SF3.Win.Views.X8PC {
             if (Control != null)
                 Control.Update(_polyChar, _instances);
 
-            UpdateModelMatrix();
+            UpdateModelInstancesState();
         }
 
         private void OnFrameTick(object sender, float delta) {
             Control.Zoom = Math.Min(Control.Width / (float) Control.Height, Control.Height / (float) Control.Width) * 1.25f;
 
-            _frame += delta * 15.0f / 1000.0f;
+            _frame += Math.Min(60, delta) * 15.0f / 1000.0f;
             _frame %= _maxFrame;
+
+            UpdateModelInstancesState();
+        }
+
+        private void UpdateModelInstancesState() {
+            UpdateKeyframeInfo();
+
+            var framesUntilNextKeyframe = GetFramesUntilNextKeyframe();
+            if (framesUntilNextKeyframe >= 30) {
+                _frame += framesUntilNextKeyframe;
+                if (_frame > _maxFrame)
+                    _frame = 0;
+                UpdateKeyframeInfo();
+            }
+
             UpdateModelMatrix();
+        }
+
+        private void UpdateKeyframeInfo()
+            => _keyframeInfo = (_polyChar == null) ? [] : _polyChar.GetAnimationBoneKeyframes(_frame);
+
+        private float GetFramesUntilNextKeyframe() {
+            if (_keyframeInfo.Length == 0)
+                return 0;
+
+            float posFrames = 1000000;
+            float rotFrames = 1000000;
+            float scaleFrames = 1000000;
+
+            foreach (var kfi in _keyframeInfo) {
+                if (kfi.Pos.FramesLeft.HasValue && kfi.Pos.FramesLeft.Value < posFrames)
+                    posFrames = kfi.Pos.FramesLeft.Value;
+                if (kfi.Rot.FramesLeft.HasValue && kfi.Rot.FramesLeft.Value < rotFrames)
+                    rotFrames = kfi.Rot.FramesLeft.Value;
+                if (kfi.Scale.FramesLeft.HasValue && kfi.Scale.FramesLeft.Value < scaleFrames)
+                    scaleFrames = kfi.Scale.FramesLeft.Value;
+            }
+
+            return Math.Min(posFrames, Math.Min(rotFrames, scaleFrames));
         }
 
         private void UpdateModelMatrix() {
@@ -95,7 +133,7 @@ namespace SF3.Win.Views.X8PC {
                 _lastFrameIdx = frameIdx;
                 for (int i = 0; i < _instances.Length; i++) {
                     var inst = _instances[i];
-                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(inst, _instBones[i], _frame);
+                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(inst, _instBones[i], _keyframeInfo);
                 }
             }
         }
@@ -117,5 +155,6 @@ namespace SF3.Win.Views.X8PC {
 
         private SGL_ModelInstance[] _instances = [];
         private IBone[] _instBones = [];
+        private PolyChar.BoneKeyframeInfo[] _keyframeInfo;
     }
 }
