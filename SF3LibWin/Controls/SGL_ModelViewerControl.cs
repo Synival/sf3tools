@@ -91,14 +91,16 @@ namespace SF3.Win.Controls {
             _timer.Start();
 
             Disposed += (s, e) => {
-                MakeCurrent();
+                if (Context != null) {
+                    MakeCurrent();
 
-                _general?.Dispose();
-                _screen?.Dispose();
-                _models?.Dispose();
-                _lighting?.Dispose();
-                _timer.FrameTick -= IncrementFrame;
-                _timer?.Dispose();
+                    _general?.Dispose();
+                    _screen?.Dispose();
+                    _models?.Dispose();
+                    _lighting?.Dispose();
+                    _timer.FrameTick -= IncrementFrame;
+                    _timer?.Dispose();
+                }
 
                 _general  = null;
                 _screen   = null;
