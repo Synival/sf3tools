@@ -30,7 +30,8 @@ namespace SF3.Win.Views {
         }
 
         public void UpdateData() {
-            Control.Text = Text;
+            if (Control != null)
+                Control.Text = Text;
         }
 
         private string _text;
