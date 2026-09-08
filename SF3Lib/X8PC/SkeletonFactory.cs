@@ -70,7 +70,7 @@ namespace SF3.X8PC {
                         var pos = new VECTOR(posX, posY, posZ);
 
                         // Weapon placements have rotation and scale.
-                        if (skelArg == 0x30 || skelArg == 0x81) {
+                        if (skelArg == 0x30 || skelArg == 0x81 || Scenario < ScenarioType.Scenario1) {
                             if (!AppendFIXED(ref offset, out var rotX)) break;
                             if (!AppendFIXED(ref offset, out var rotY)) break;
                             if (!AppendFIXED(ref offset, out var rotZ)) break;
