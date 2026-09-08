@@ -152,20 +152,22 @@ namespace SF3.Win.Controls {
         }
 
         private void OnDisposeRendering() {
-            MakeCurrent();
+            if (Context != null) {
+                MakeCurrent();
 
-            _general?.Dispose();
-            _models?.Dispose();
-            _surfaceModel?.Dispose();
-            _groundModel?.Dispose();
-            _skyModel?.Dispose();
-            _collisionModels?.Dispose();
-            _editor?.Dispose();
-            _gradients?.Dispose();
-            _lighting?.Dispose();
-            _boundaryModels?.Dispose();
-            _sceneResources?.Dispose();
-            _screenResources?.Dispose();
+                _general?.Dispose();
+                _models?.Dispose();
+                _surfaceModel?.Dispose();
+                _groundModel?.Dispose();
+                _skyModel?.Dispose();
+                _collisionModels?.Dispose();
+                _editor?.Dispose();
+                _gradients?.Dispose();
+                _lighting?.Dispose();
+                _boundaryModels?.Dispose();
+                _sceneResources?.Dispose();
+                _screenResources?.Dispose();
+            }
 
             _general           = null;
             _models            = null;
@@ -730,19 +732,19 @@ namespace SF3.Win.Controls {
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
 
-        private GeneralResources       _general         = null;
-        private MPD_ModelResources     _models          = null;
+        private GeneralResources           _general         = null;
+        private MPD_ModelResources         _models          = null;
         private MPD_SurfaceModelResources  _surfaceModel    = null;
         private MPD_GroundModelResources   _groundModel     = null;
         private MPD_SkyModelResources      _skyModel        = null;
         private MPD_CollisionResources     _collisionModels = null;
         private MPD_EditorResources        _editor          = null;
-        private MPD_GradientResources  _gradients       = null;
-        private MPD_LightingResources  _lighting        = null;
+        private MPD_GradientResources      _gradients       = null;
+        private MPD_LightingResources      _lighting        = null;
         private MPD_BoundaryModelResources _boundaryModels  = null;
         private MPD_SceneResources         _sceneResources  = null;
-        private ScreenResources        _screenResources = null;
-        private HashSet<int>           _modelInstancesToHide = null;
+        private ScreenResources            _screenResources = null;
+        private HashSet<int>               _modelInstancesToHide = null;
 
         private MPD_Renderer _renderer = null;
         private int _inPaintCounter = 0;

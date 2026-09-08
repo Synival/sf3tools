@@ -91,23 +91,35 @@ namespace SF3.Win.Controls {
             _timer.Start();
 
             Disposed += (s, e) => {
-                if (Context != null) {
-                    MakeCurrent();
-
-                    _general?.Dispose();
-                    _screen?.Dispose();
-                    _models?.Dispose();
-                    _lighting?.Dispose();
-                    _timer.FrameTick -= IncrementFrame;
-                    _timer?.Dispose();
-                }
-
-                _general  = null;
-                _screen   = null;
-                _models   = null;
-                _lighting = null;
-                _timer    = null;
+                _timer.FrameTick -= IncrementFrame;
+                _timer?.Dispose();
+                _timer = null;
             };
+        }
+
+        /// <summary>
+        /// We have to dispose of resources here because by the time OnDisposeRendering() would
+        /// be called via the Disposed event, the context is already gone.
+        /// </summary>
+        protected override void OnHandleDestroyed(EventArgs e) {
+            OnDisposeRendering();
+            base.OnHandleDestroyed(e);
+        }
+
+        void OnDisposeRendering() {
+            if (Context != null) {
+                MakeCurrent();
+
+                _general?.Dispose();
+                _screen?.Dispose();
+                _models?.Dispose();
+                _lighting?.Dispose();
+            }
+
+            _general  = null;
+            _screen   = null;
+            _models   = null;
+            _lighting = null;
         }
 
         protected override void OnResize(EventArgs e) {
