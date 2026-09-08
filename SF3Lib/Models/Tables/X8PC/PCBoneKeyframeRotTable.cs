@@ -7,7 +7,7 @@ using SF3.Models.Structs.X8PC;
 
 namespace SF3.Models.Tables.X8PC {
     public class PCBoneKeyframeRotTable : Table<PCBoneKeyframeRotStruct> {
-        protected PCBoneKeyframeRotTable(IByteData data, string name, int boneId, int keyframeCount, int framesAddr, int xsAddr, int ysAddr, int zsAddr, int wsAddr)
+        protected PCBoneKeyframeRotTable(IByteData data, string name, int boneId, int keyframeCount, int framesAddr, int xsAddr, int ysAddr, int zsAddr, int wsAddr, bool isFixed)
         : base(data, name, 0 /* N/A */) {
             BoneID         = boneId;
             _keyframeCount = keyframeCount;
@@ -16,13 +16,16 @@ namespace SF3.Models.Tables.X8PC {
             _ysAddr        = ysAddr;
             _zsAddr        = zsAddr;
             _wsAddr        = wsAddr;
+            IsFixed        = isFixed;
         }
 
-        public static PCBoneKeyframeRotTable Create(IByteData data, string name, int boneId, int keyframeCount, int framesAddr, int xsAddr, int ysAddr, int zsAddr, int wsAddr)
-            => Create(() => new PCBoneKeyframeRotTable(data, name, boneId, keyframeCount, framesAddr, xsAddr, ysAddr, zsAddr, wsAddr));
+        public static PCBoneKeyframeRotTable Create(IByteData data, string name, int boneId, int keyframeCount, int framesAddr, int xsAddr, int ysAddr, int zsAddr, int wsAddr, bool isFixed)
+            => Create(() => new PCBoneKeyframeRotTable(data, name, boneId, keyframeCount, framesAddr, xsAddr, ysAddr, zsAddr, wsAddr, isFixed));
 
         public override bool Load() {
             var rows = new List<PCBoneKeyframeRotStruct>();
+            var valueSize = IsFixed ? 4 : 2;
+
             try {
                 var frameAddr = _framesAddr;
                 var xAddr     = _xsAddr;
@@ -31,12 +34,12 @@ namespace SF3.Models.Tables.X8PC {
                 var wAddr     = _wsAddr;
 
                 for (int i = 0; i < _keyframeCount; i++) {
-                    rows.Add(new PCBoneKeyframeRotStruct(Data, BoneID, i, $"Bone{BoneID:D2}_KeyframeRot{i:D3}", frameAddr, xAddr, yAddr, zAddr, wAddr));
+                    rows.Add(new PCBoneKeyframeRotStruct(Data, BoneID, i, $"Bone{BoneID:D2}_KeyframeRot{i:D3}", frameAddr, xAddr, yAddr, zAddr, wAddr, IsFixed));
                     frameAddr += 2;
-                    xAddr     += 2;
-                    yAddr     += 2;
-                    zAddr     += 2;
-                    wAddr += 2;
+                    xAddr     += valueSize;
+                    yAddr     += valueSize;
+                    zAddr     += valueSize;
+                    wAddr     += valueSize;
                 }
             }
             catch (Exception e) {
@@ -52,6 +55,7 @@ namespace SF3.Models.Tables.X8PC {
         public override bool IsContiguous => false;
 
         public int BoneID { get; }
+        public bool IsFixed { get; }
 
         private readonly int _keyframeCount;
         private readonly int _framesAddr;

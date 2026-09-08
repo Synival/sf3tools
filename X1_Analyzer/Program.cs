@@ -3,7 +3,6 @@ using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Files.X1;
-using SF3.Models.Structs.X1.Battle;
 using SF3.NamedValues;
 using SF3.Types;
 

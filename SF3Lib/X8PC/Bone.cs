@@ -33,7 +33,7 @@ namespace SF3.X8PC {
         /// <summary>
         /// Constructor for a location tag.
         /// </summary>
-        public Bone(int tag, VECTOR pos) {
+        public Bone(int tag, VECTOR? pos) {
             Tag      = tag;
             Position = pos;
         }
@@ -41,7 +41,7 @@ namespace SF3.X8PC {
         /// <summary>
         /// Constructor for a weapon placement (tag 0x30 or 0x81).
         /// </summary>
-        public Bone(int tag, VECTOR pos, QUATERNION rot, VECTOR scale) {
+        public Bone(int tag, VECTOR? pos, QUATERNION? rot, VECTOR? scale) {
             Tag      = tag;
             Position = pos;
             Rotation = rot;

@@ -45,7 +45,7 @@ namespace SF3.Models.Files.X8PC {
             }
 
             // We have the addresses, now let's make the PolyChars.
-            PolyCharTable = PolyCharTable.Create(Data, nameof(PolyCharTable), addresses.ToArray());
+            PolyCharTable = PolyCharTable.Create(Data, nameof(PolyCharTable), addresses.ToArray(), Scenario);
             foreach (var pc in PolyCharTable)
                 tables.AddRange(pc.Tables);
 

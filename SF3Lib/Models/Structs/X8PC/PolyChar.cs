@@ -11,12 +11,15 @@ using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
+using SF3.Types;
 using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelCollection {
-        public PolyChar(IByteData data, int id, string name, int address)
+        public PolyChar(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0 /* not applicable */) {
+            Scenario = scenario;
+
             var tables = new List<ITable>();
 
             // Build the first header, which is the chunk table.
@@ -73,7 +76,7 @@ namespace SF3.Models.Structs.X8PC {
                 (count, offset, index) => VertexNormalTable.Create(ModelChunk.DecompressedData, $"{nameof(VertexNormalTable)}_{index:D3} @{offset:X4}", offset, count)
             );
 
-            var skelFact = new SkeletonFactory();
+            var skelFact = new SkeletonFactory(Scenario);
             Skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
             BoneTable = PCBoneWrapperTable.Create("BoneNodes", Skeleton.RootBone, this);
 
@@ -96,7 +99,7 @@ namespace SF3.Models.Structs.X8PC {
             BoneKeyframeRotTables = BoneKeyframeTable
                 .Select(x => PCBoneKeyframeRotTable.Create(
                     AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeRot", x.ID, (int) x.NumRotKeyFrames,
-                        (int) x.RotFramesOffset, (int) x.RotXPtr, (int) x.RotYPtr, (int) x.RotZPtr, (int) x.RotWPtr
+                        (int) x.RotFramesOffset, (int) x.RotXPtr, (int) x.RotYPtr, (int) x.RotZPtr, (int) x.RotWPtr, Scenario < ScenarioType.Scenario1
                     )
                 ).ToArray();
 
@@ -264,11 +267,13 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, IAnimatableTexture> GetAnimatableTexturesByModelCollectionID(int mcId)
             => _animatableTextureDictionary;
 
-        public ISGL_Model GetModel(int id, int lod) => _modelsById[id];
+        public ISGL_Model GetModel(int id, int lod) => _modelsById.TryGetValue(id, out var model) ? model : null;
         public IEnumerator<ISGL_Model> GetEnumerator() => _modelsById.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IEnumerable<ITable> Tables { get; }
+
+        public ScenarioType Scenario { get; }
 
         public PCHeader Header { get; }
 

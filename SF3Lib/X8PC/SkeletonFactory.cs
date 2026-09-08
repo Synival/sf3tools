@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using CommonLib.SGL;
 using SF3.ByteData;
+using SF3.Types;
 
 namespace SF3.X8PC {
     public class SkeletonFactory {
-        public SkeletonFactory() {
+        public SkeletonFactory(ScenarioType scenario) {
+            Scenario = scenario;
         }
 
         public Skeleton CreateSkeleton(IByteData data, int offset, int? maxUntil = null) {
@@ -75,10 +77,13 @@ namespace SF3.X8PC {
                             if (!AppendFIXED(ref offset, out var rotW)) break;
                             var rot = new QUATERNION(rotX, rotY, rotZ, rotW);
 
-                            if (!AppendFIXED(ref offset, out var scaleX)) break;
-                            if (!AppendFIXED(ref offset, out var scaleY)) break;
-                            if (!AppendFIXED(ref offset, out var scaleZ)) break;
-                            var scale = new VECTOR(scaleX, scaleY, scaleZ);
+                            VECTOR? scale = null;
+                            if (Scenario >= ScenarioType.Scenario1) {
+                                if (!AppendFIXED(ref offset, out var scaleX)) break;
+                                if (!AppendFIXED(ref offset, out var scaleY)) break;
+                                if (!AppendFIXED(ref offset, out var scaleZ)) break;
+                                scale = new VECTOR(scaleX, scaleY, scaleZ);
+                            }
 
                             newModel = new Bone(skelArg, pos, rot, scale);
                         }
@@ -97,5 +102,7 @@ namespace SF3.X8PC {
             var childrenArray = children.ToArray();
             return (thisBoneId >= 0) ? new Bone(thisBoneId, childrenArray) : new Bone(childrenArray);
         }
+
+        public ScenarioType Scenario { get; }
     }
 }

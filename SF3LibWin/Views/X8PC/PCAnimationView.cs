@@ -47,12 +47,14 @@ namespace SF3.Win.Views.X8PC {
                     .Where(x => x.ModelID.HasValue || ((x.Tag == 0x30 || x.Tag == 0x81) && _polyChar.WeaponXPData != null))
                     .Select((x, i) => {
                         var model = _polyChar.GetModel(x.ModelID ?? _polyChar.WeaponXPData.ModelID, 0);
-                        return (Bone: x, Instance: new SGL_ModelInstance((_, _) => model) {
+                        return (model == null) ? (Bone: x, Instance: null) : (Bone: x, Instance: new SGL_ModelInstance((_, _) => model) {
                             ModelCollectionID = model.ModelCollectionID,
                             ModelID           = model.ModelID,
                             ModelInstanceID   = instanceId++
                         });
-                    }).ToArray();
+                    })
+                    .Where(x => x.Instance != null)
+                    .ToArray();
             }
 
             _instBones = new IBone[instsWithBones.Length];

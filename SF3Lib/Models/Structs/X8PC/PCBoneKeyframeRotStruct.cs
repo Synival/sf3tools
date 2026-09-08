@@ -10,9 +10,9 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _zAddr;
         private readonly int _wAddr;
 
-        public PCBoneKeyframeRotStruct(IByteData data, int boneId, int keyframeId, string name, int frameAddr, int xAddr, int yAddr, int zAddr, int wAddr) {
-            Data        = data;
-            Name        = name;
+        public PCBoneKeyframeRotStruct(IByteData data, int boneId, int keyframeId, string name, int frameAddr, int xAddr, int yAddr, int zAddr, int wAddr, bool isFixed) {
+            Data       = data;
+            Name       = name;
 
             BoneID     = boneId;
             KeyframeID = keyframeId;
@@ -22,12 +22,15 @@ namespace SF3.Models.Structs.X8PC {
             _yAddr     = yAddr;
             _zAddr     = zAddr;
             _wAddr     = wAddr;
+
+            IsFixed    = isFixed;
         }
 
         public IByteData Data { get; }
         public int ID => BoneID * 1000 + KeyframeID;
         public int Address => 0; // N/A
         public int Size => 0; // N/A
+        public bool IsFixed { get; }
 
         [TableViewModelColumn(displayOrder: -3)]
         [BulkCopy]
@@ -51,29 +54,49 @@ namespace SF3.Models.Structs.X8PC {
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 1, minWidth: 100)]
         [BulkCopy]
         public float X {
-            get => Data.GetCompressedFIXED(_xAddr, 14).Float;
-            set => Data.SetCompressedFIXED(_xAddr, new CompressedFIXED(value, 14, 0));
+            get => IsFixed ? Data.GetFIXED(_xAddr).Float : Data.GetCompressedFIXED(_xAddr, 14).Float;
+            set {
+                if (IsFixed)
+                    Data.SetFIXED(_xAddr, new FIXED(value, 0));
+                else
+                    Data.SetCompressedFIXED(_xAddr, new CompressedFIXED(value, 14, 0));
+            }
         }
 
         [TableViewModelColumn(addressField: nameof(_yAddr), displayOrder: 2, minWidth: 100)]
         [BulkCopy]
         public float Y {
-            get => Data.GetCompressedFIXED(_yAddr, 14).Float;
-            set => Data.SetCompressedFIXED(_yAddr, new CompressedFIXED(value, 14, 0));
+            get => IsFixed ? Data.GetFIXED(_yAddr).Float : Data.GetCompressedFIXED(_yAddr, 14).Float;
+            set {
+                if (IsFixed)
+                    Data.SetFIXED(_yAddr, new FIXED(value, 0));
+                else
+                    Data.SetCompressedFIXED(_yAddr, new CompressedFIXED(value, 14, 0));
+            }
         }
 
         [TableViewModelColumn(addressField: nameof(_zAddr), displayOrder: 3, minWidth: 100)]
         [BulkCopy]
         public float Z {
-            get => Data.GetCompressedFIXED(_zAddr, 14).Float;
-            set => Data.SetCompressedFIXED(_zAddr, new CompressedFIXED(value, 14, 0));
+            get => IsFixed ? Data.GetFIXED(_zAddr).Float : Data.GetCompressedFIXED(_zAddr, 14).Float;
+            set {
+                if (IsFixed)
+                    Data.SetFIXED(_zAddr, new FIXED(value, 0));
+                else
+                    Data.SetCompressedFIXED(_zAddr, new CompressedFIXED(value, 14, 0));
+            }
         }
 
         [TableViewModelColumn(addressField: nameof(_wAddr), displayOrder: 4, minWidth: 100)]
         [BulkCopy]
         public float W {
-            get => Data.GetCompressedFIXED(_wAddr, 14).Float;
-            set => Data.SetCompressedFIXED(_wAddr, new CompressedFIXED(value, 14, 0));
+            get => IsFixed ? Data.GetFIXED(_wAddr).Float : Data.GetCompressedFIXED(_wAddr, 14).Float;
+            set {
+                if (IsFixed)
+                    Data.SetFIXED(_wAddr, new FIXED(value, 0));
+                else
+                    Data.SetCompressedFIXED(_wAddr, new CompressedFIXED(value, 14, 0));
+            }
         }
 
         public QUATERNION CreateQuaternion() => new QUATERNION(X, Y, Z, W);

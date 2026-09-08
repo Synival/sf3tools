@@ -19,7 +19,10 @@ namespace SF3.X8PC {
     }
 
     public static class IBoneExtensions {
-        public static string ToOutline(this IBone thisBone, int indentation = 0) {
+        public static string ToOutline(this IBone thisBone)
+            => ToOutlineSub(thisBone, 0);
+
+        private static string ToOutlineSub(this IBone thisBone, int indentation = 0) {
             string str = new string(' ', indentation * 2);
 
             if (thisBone.BoneID.HasValue)
@@ -36,13 +39,13 @@ namespace SF3.X8PC {
                 str += $" scale={thisBone.Scale.Value}";
 
             if (thisBone.Children != null && thisBone.Children.Length > 0) {
-                str += " {\n";
+                str += " {\r\n";
                 foreach (var bone in thisBone.Children)
-                    str += bone.ToOutline(indentation + 1);
+                    str += bone.ToOutlineSub(indentation + 1);
                 str += new string(' ', indentation * 2) + "}";
             }
 
-            return str.Substring(str.Length > 0 ? 1 : 0) + "\n";
+            return str.Substring(str.Length > 0 ? 1 : 0) + "\r\n";
         }
 
         public static IBone[] Flatten(this IBone thisBone) {
