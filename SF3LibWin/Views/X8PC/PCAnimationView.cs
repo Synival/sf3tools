@@ -22,6 +22,8 @@ namespace SF3.Win.Views.X8PC {
                 Control.RenderOptions.DrawWireframe = false;
                 Control.Pitch = PCModelViewConstants.Pitch;
                 Control.FrameTick += OnFrameTick;
+                Control.LightDirection = PCModelViewConstants.OutdoorLightDirection;
+                Control.LightPalette = PCModelViewConstants.DaytimePalette;
                 Control.Update(_polyChar, _instances);
             }
             return ctrl;

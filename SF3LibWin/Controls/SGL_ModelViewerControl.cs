@@ -55,7 +55,8 @@ namespace SF3.Win.Controls {
             if (TextureContainer != null && _sglModels.Length != 0)
                 Update(TextureContainer, _sglModels);
 
-            var lighting = new Palette(Enumerable.Range(0, 32)
+            _updateLightPalette = true;
+            _lightPalette = new Palette(Enumerable.Range(0, 32)
                 .Select(i => {
                     var level = Math.Pow(i / 31f, 4.0f);
                     return new PixelChannels() {
@@ -68,9 +69,7 @@ namespace SF3.Win.Controls {
                 .ToArray()
             );
 
-            _lighting.Update(lighting, null);
-
-            UpdateLightPos();
+            UpdateLighting();
 
             _general.ObjectShader.UpdateUniform(ShaderUniformType.LightingMode, 0);
             _general.ObjectShader.UpdateUniform(ShaderUniformType.GlobalGlow, Vector3.Zero);
@@ -146,9 +145,13 @@ namespace SF3.Win.Controls {
                     shader.UpdateUniform(ShaderUniformType.ProjectionMatrix, ref _projectionMatrix);
         }
 
-        private void UpdateLightPos() {
+        private void UpdateLighting() {
             MakeCurrent();
-            var lightPos = new Vector3(-0.50f, 0.25f, 0.75f).Normalized()
+
+            if (_updateLightPalette)
+                _lighting.Update(LightPalette, null);
+
+            var lightPos = LightDirection.Normalized()
                 * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
 
             foreach (var shader in _general.Shaders) {
@@ -211,7 +214,7 @@ namespace SF3.Win.Controls {
             MakeCurrent();
             UpdateModelOffsets();
             UpdateCameraPosition();
-            UpdateLightPos();
+            UpdateLighting();
             _viewMatrix = Matrix4.CreateTranslation(-Position)
                 * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
@@ -343,6 +346,23 @@ namespace SF3.Win.Controls {
         public bool? ForceLighting { get; set; }
         public float Zoom { get; set; } = 1.0f;
         public float PosHeight { get; set; } = 0.45f;
+        public Vector3 LightDirection { get; set; } = new Vector3(-0.50f, 0.25f, 0.75f);
+
+        private bool _updateLightPalette = false;
+        private Palette _lightPalette;
+        public Palette LightPalette {
+            get => _lightPalette;
+            set {
+                if (_lightPalette != value) {
+                    if (value == null)
+                        throw new ArgumentNullException(nameof(LightPalette));
+                    if (value.ColorCount != 0x20)
+                        throw new ArgumentOutOfRangeException(nameof(LightPalette));
+                    _lightPalette = value;
+                    _updateLightPalette = true;
+                }
+            }
+        }
 
         private float _minX = 0f;
         private float _minY = 0f;

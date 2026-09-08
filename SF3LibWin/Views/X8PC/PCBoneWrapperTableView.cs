@@ -16,6 +16,8 @@ namespace SF3.Win.Views.X8PC {
             if ((ctrl = base.Create()) != null) {
                 ModelView.Control.RenderOptions.DrawWireframe = false;
                 ModelView.Control.Pitch = PCModelViewConstants.Pitch;
+                ModelView.Control.LightDirection = PCModelViewConstants.OutdoorLightDirection;
+                ModelView.Control.LightPalette = PCModelViewConstants.DaytimePalette;
             }
             return ctrl;
         }
