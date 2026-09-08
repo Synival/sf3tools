@@ -87,7 +87,7 @@ namespace SF3.Win.Views.X8PC {
         private void OnFrameTick(object sender, float delta) {
             Control.Zoom = Math.Min(Control.Width / (float) Control.Height, Control.Height / (float) Control.Width) * 1.25f;
 
-            _frame += Math.Min(60, delta) * 15.0f / 1000.0f;
+            _frame += Math.Min(60, delta) * 20.0f / 1000.0f;
             _frame %= _maxFrame;
             if (_frame < 0)
                 _frame = GetFirstKeyframe();

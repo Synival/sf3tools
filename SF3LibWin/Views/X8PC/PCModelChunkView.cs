@@ -37,7 +37,7 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(SkeletonTextView);
             CreateChild(BonesView);
 
-            TabControl.SelectedIndex = 6;
+            TabControl.SelectedIndex = 8;
             return Control;
         }
 
