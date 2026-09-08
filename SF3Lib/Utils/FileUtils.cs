@@ -186,6 +186,8 @@ namespace SF3.Utils {
                 var drive = drives.FirstOrDefault(x => x.Name == drivePath);
                 if (drive != null) {
                     switch (drive.VolumeLabel) {
+                        case "FORCE31":
+                            return ScenarioType.Prototype;
                         case "SHINING_FORCE_3_1":
                             return ScenarioType.Scenario1;
                         case "SHINING_FORCE_3_2":

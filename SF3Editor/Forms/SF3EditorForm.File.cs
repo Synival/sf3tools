@@ -462,6 +462,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_OpenScenario_Scenario2.Checked   = _openScenario == ScenarioType.Scenario2;
             tsmiFile_OpenScenario_Scenario3.Checked   = _openScenario == ScenarioType.Scenario3;
             tsmiFile_OpenScenario_PremiumDisk.Checked = _openScenario == ScenarioType.PremiumDisk;
+            tsmiFile_OpenScenario_Prototype.Checked   = _openScenario == ScenarioType.Prototype;
         }
 
         private DialogResult PromptForSave(LoadedFile file) {
@@ -587,6 +588,9 @@ namespace SF3.Editor.Forms {
 
         private void tsmiFile_OpenScenario_PremiumDisk_Click(object sender, EventArgs e)
             => OpenScenario = ScenarioType.PremiumDisk;
+
+        private void tsmiFile_OpenScenario_Prototype_Click(object sender, EventArgs e)
+            => OpenScenario = ScenarioType.Prototype;
 
         private void tsmiFile_Save_Click(object sender, EventArgs e) {
             if (SelectedFile != null)

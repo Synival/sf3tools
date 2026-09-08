@@ -153,6 +153,8 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Prototype = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -182,7 +184,7 @@ namespace SF3.Editor.Forms {
             // tsmiFile_New_MPDProject
             // 
             tsmiFile_New_MPDProject.Name = "tsmiFile_New_MPDProject";
-            tsmiFile_New_MPDProject.Size = new Size(180, 22);
+            tsmiFile_New_MPDProject.Size = new Size(140, 22);
             tsmiFile_New_MPDProject.Text = "&MPD Project";
             tsmiFile_New_MPDProject.Click += tsmiFile_New_MPDProject_Click;
             // 
@@ -196,7 +198,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiFile_OpenScenario
             // 
-            tsmiFile_OpenScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_OpenScenario_Detect, tsmiFile_OpenScenario_Sep1, tsmiFile_OpenScenario_Scenario1, tsmiFile_OpenScenario_Scenario2, tsmiFile_OpenScenario_Scenario3, tsmiFile_OpenScenario_PremiumDisk });
+            tsmiFile_OpenScenario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_OpenScenario_Detect, tsmiFile_OpenScenario_Sep1, tsmiFile_OpenScenario_Scenario1, tsmiFile_OpenScenario_Scenario2, tsmiFile_OpenScenario_Scenario3, tsmiFile_OpenScenario_PremiumDisk, tsmiFile_OpenScenario_Sep2, tsmiFile_OpenScenario_Prototype });
             tsmiFile_OpenScenario.Name = "tsmiFile_OpenScenario";
             tsmiFile_OpenScenario.Size = new Size(259, 22);
             tsmiFile_OpenScenario.Text = "Open Scenar&io";
@@ -1039,6 +1041,19 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
             // 
+            // tsmiFile_OpenScenario_Prototype
+            // 
+            tsmiFile_OpenScenario_Prototype.Name = "tsmiFile_OpenScenario_Prototype";
+            tsmiFile_OpenScenario_Prototype.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9;
+            tsmiFile_OpenScenario_Prototype.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_Prototype.Text = "Proto&type";
+            tsmiFile_OpenScenario_Prototype.Click += tsmiFile_OpenScenario_Prototype_Click;
+            // 
+            // tsmiFile_OpenScenario_Sep2
+            // 
+            tsmiFile_OpenScenario_Sep2.Name = "tsmiFile_OpenScenario_Sep2";
+            tsmiFile_OpenScenario_Sep2.Size = new Size(246, 6);
+            // 
             // SF3EditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1183,5 +1198,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiIconOffsets_Assign;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MinimalChanges;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawBattleZones;
+        private System.Windows.Forms.ToolStripSeparator tsmiFile_OpenScenario_Sep2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_Prototype;
     }
 }

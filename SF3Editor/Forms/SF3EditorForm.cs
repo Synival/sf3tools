@@ -71,6 +71,8 @@ namespace SF3.Editor.Forms {
                 switch (_appSettings.OpenScenario) {
                     case -1:
                         return _versionTitle + " (Detect Scenario)";
+                    case 0:
+                        return _versionTitle + " (Open as Prototype)";
                     case 1:
                         return _versionTitle + " (Open as Scenario 1)";
                     case 2:
