@@ -63,7 +63,8 @@ namespace SF3.Win.Views.X8PC {
             }
 
             _lastFrameIdx = -1;
-            _frame = 0;
+            UpdateKeyframeInfo();
+            _frame = GetFirstKeyframe();
 
             if (PolyChar != null) {
                 _maxFrame = Math.Max(
@@ -86,6 +87,8 @@ namespace SF3.Win.Views.X8PC {
 
             _frame += Math.Min(60, delta) * 15.0f / 1000.0f;
             _frame %= _maxFrame;
+            if (_frame < 0)
+                _frame = GetFirstKeyframe();
 
             UpdateModelInstancesState();
         }
@@ -97,7 +100,7 @@ namespace SF3.Win.Views.X8PC {
             if (framesUntilNextKeyframe >= 30) {
                 _frame += framesUntilNextKeyframe;
                 if (_frame > _maxFrame)
-                    _frame = 0;
+                    _frame = GetFirstKeyframe();
                 UpdateKeyframeInfo();
             }
 
@@ -106,6 +109,21 @@ namespace SF3.Win.Views.X8PC {
 
         private void UpdateKeyframeInfo()
             => _keyframeInfo = (_polyChar == null) ? [] : _polyChar.GetAnimationBoneKeyframes(_frame);
+
+        private float GetFirstKeyframe() {
+            if (PolyChar == null)
+                return 0.00f;
+
+            float minFrame = 1000000;
+            if (PolyChar.BoneKeyframePosTables.Length > 0)
+                minFrame = PolyChar.BoneKeyframePosTables.Min(x => x.Count > 0 ? x[0].Frame : 1000000);
+            if (PolyChar.BoneKeyframeRotTables.Length > 0)
+                minFrame = PolyChar.BoneKeyframeRotTables.Min(x => x.Count > 0 ? x[0].Frame : 1000000);
+            if (PolyChar.BoneKeyframeScaleTables.Length > 0)
+                minFrame = PolyChar.BoneKeyframeScaleTables.Min(x => x.Count > 0 ? x[0].Frame : 1000000);
+
+            return minFrame == 1000000 ? 0 : minFrame;
+        }
 
         private float GetFramesUntilNextKeyframe() {
             if (_keyframeInfo.Length == 0)
