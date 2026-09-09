@@ -4,8 +4,9 @@ using System.Drawing;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using SF3.ThirdParty.TexturePacker;
+using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.Shared;
-using SF3.Win.ThirdParty.TexturePacker;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL {
@@ -153,9 +154,9 @@ namespace SF3.Win.OpenGL {
             foreach (var quad in Quads) {
                 var frame = quad.Animation?.GetFrame(_frame);
                 var texCoords = (frame != null)
-                    ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(
+                    ? (_textureAtlas.GetUVCoordinatesByTextureIDFrame(
                         frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
-                        pixelBorderWidth, pixelBorderHeight)
+                        pixelBorderWidth, pixelBorderHeight)).Select(x => x.ToOpenTKVector()).ToArray()
                     : c_noTextureCoords;
 
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {

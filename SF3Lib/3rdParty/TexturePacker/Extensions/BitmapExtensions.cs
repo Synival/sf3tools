@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace SF3.Win.ThirdParty.TexturePacker.Extensions {
+namespace SF3.ThirdParty.TexturePacker.Extensions {
     public static class BitmapExtensions {
         /// <summary>
         /// Returns a new Bitmap with trimmed content, or 'null' if no non-zero data is present.

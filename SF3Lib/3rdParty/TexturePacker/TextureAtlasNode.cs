@@ -6,7 +6,7 @@ using System;
 using System.Drawing;
 using CommonLib.Imaging;
 
-namespace SF3.Win.ThirdParty.TexturePacker {
+namespace SF3.ThirdParty.TexturePacker {
     public class TextureAtlasNode : IDisposable {
         public TextureAtlasNode(Rectangle rect, int padding, bool tryRotate) {
             Rect      = rect;

@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Numerics;
 using CommonLib.Imaging;
 using CommonLib.Types;
-using OpenTK.Mathematics;
 using SF3.Types;
 using static CommonLib.Types.CornerTypeConsts;
 using static CommonLib.Utils.MemoryUtils;
 
-namespace SF3.Win.ThirdParty.TexturePacker {
+namespace SF3.ThirdParty.TexturePacker {
     public class TextureAtlas : IDisposable {
         public TextureAtlas(int maxX, int maxY, int padding, bool tryRotate) {
             MaxX      = maxX;
@@ -115,12 +115,12 @@ namespace SF3.Win.ThirdParty.TexturePacker {
             };
 
             // Return the bitmap coordinates translated into UV coordinates (which may have some flipping).
-            return [
+            return new Vector2[] {
                 bitmapCoords[Corner1UVX, Corner1UVY],
                 bitmapCoords[Corner2UVX, Corner2UVY],
                 bitmapCoords[Corner3UVX, Corner3UVY],
                 bitmapCoords[Corner4UVX, Corner4UVY],
-            ];
+            };
         }
 
         public Bitmap CreateBitmap() {
@@ -209,9 +209,9 @@ namespace SF3.Win.ThirdParty.TexturePacker {
                     var posTo = strideTo * node.Rect.Top + (node.Rect.Left * bpp);
                     unsafe {
                         fixed (byte* imageDataPtr = imageData) {
-                            nint posFrom = 0;
+                            int posFrom = 0;
                             for (var row = 0; row < node.Rect.Height; row++) {
-                                _ = MemCpyUnsafe(bitmapToData.Scan0 + posTo, (nint) imageDataPtr + posFrom, strideFrom);
+                                _ = MemCpyUnsafe(bitmapToData.Scan0 + posTo, (IntPtr) (imageDataPtr + posFrom), strideFrom);
                                 posTo += strideTo;
                                 posFrom += strideFrom;
                             }
@@ -255,6 +255,6 @@ namespace SF3.Win.ThirdParty.TexturePacker {
         public bool HasTransparency { get; private set; } = false;
 
         private readonly TextureAtlasNode _rootNode;
-        private readonly Dictionary<(int, int), TextureAtlasNode> _nodeByTextureIDFrame = [];
+        private readonly Dictionary<(int, int), TextureAtlasNode> _nodeByTextureIDFrame = new Dictionary<(int, int), TextureAtlasNode>();
     }
 }
