@@ -16,7 +16,7 @@ using static CommonLib.Utils.MemoryUtils;
 
 namespace SF3.ThirdParty.TexturePacker {
     public class TextureAtlas : IDisposable {
-        public TextureAtlas(int maxX, int maxY, int padding, bool tryRotate) {
+        public TextureAtlas(int maxX, int maxY, int padding = 0, bool tryRotate = true) {
             MaxX      = maxX;
             MaxY      = maxY;
             Padding   = padding;
@@ -24,7 +24,11 @@ namespace SF3.ThirdParty.TexturePacker {
             _rootNode = new TextureAtlasNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate);
         }
 
-        public TextureAtlas(IEnumerable<IAnimatedTextureFrame> textures, int padding, bool tryRotate) {
+        public TextureAtlas(IEnumerable<ITexture> textures, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
+        : this(textures?.Select(x => new MockAnimatedTextureFrame(x)).ToArray(), padding, tryRotate, sortBySize, minWidth)
+        {}
+
+        public TextureAtlas(IEnumerable<IAnimatedTextureFrame> textures, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null) {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
@@ -33,13 +37,13 @@ namespace SF3.ThirdParty.TexturePacker {
                 MaxY = 0;
             }
             else {
-                var textureArray = textures.OrderByDescending(x => x.Height).ToArray();
+                var textureArray = sortBySize ? textures.OrderByDescending(x => x.Height).ToArray() : textures.ToArray();
                 textures = textureArray;
 
                 var totalArea = textures.Sum(x => (x.Width + padding) * (x.Height + padding));
-                var minWidth  = textures.Max(x => x.Width) + padding;
+                minWidth      = minWidth ?? textures.Max(x => x.Width) + padding;
 
-                MaxX = Math.Max(minWidth, (int) Math.Sqrt(totalArea));
+                MaxX = Math.Max((int) minWidth, (int) Math.Sqrt(totalArea));
                 MaxY = textures.Sum(x => x.Height + padding);
             }
 
