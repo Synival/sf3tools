@@ -14,7 +14,7 @@ namespace SF3.ThirdParty.TexturePacker.Extensions {
         /// <param name="ignoreTopLeft">Doesn't trim the upper-left corner.</param>
         /// <param name="source">The Bitmap to trim.</param>
         /// <returns>A new Bitmap with trimmed content, or 'null' if no non-zero data is present.</returns>
-        public static Bitmap Trim(this Bitmap source, bool ignoreTopLeft, bool clampToPow2) {
+        public static Bitmap Trim(this Bitmap source, bool ignoreTopLeft, bool clampToPow2, bool ignoreWidth = false) {
             Rectangle srcRect = default;
             BitmapData data = null;
 
@@ -62,6 +62,10 @@ namespace SF3.ThirdParty.TexturePacker.Extensions {
             int height = clampToPow2 ? 1 : srcRect.Height;
             while (height < srcRect.Height)
                 height *= 2;
+
+            // TODO: This could be done better...
+            if (ignoreWidth)
+                width = source.Width;
 
             Bitmap dest = new Bitmap(width, height);
             Rectangle destRect = new Rectangle(0, 0, srcRect.Width, srcRect.Height);
