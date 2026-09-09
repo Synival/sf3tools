@@ -171,8 +171,18 @@ namespace SF3.Win.Controls {
                 (x.Matrix?.ToOpenTKMarix() ?? Matrix4.Identity)
             ).ToArray();
 
-            // Build updated vertices for all models.
-            var transformedVertices = _sglModels.SelectMany((x, i) => x.GetModel(0).Vertices.Select(y => (y.ToVector4() * vertexMatrices[i]).Xyz)).ToArray();
+            static bool HasZeroVolume(Matrix4 m, float epsilon = 1e-6f) {
+                float det = m.M11 * (m.M22 * m.M33 - m.M23 * m.M32)
+                          - m.M12 * (m.M21 * m.M33 - m.M23 * m.M31)
+                          + m.M13 * (m.M21 * m.M32 - m.M22 * m.M31);
+                return Math.Abs(det) < epsilon;
+            }
+
+            var transformedVertices = _sglModels
+                .Select((x, i) => (Instance: x, Matrix: vertexMatrices[i]))
+                .Where(x => !HasZeroVolume(x.Matrix))
+                .SelectMany(x => x.Instance.GetModel(0).Vertices.Select(y => (y.ToVector4() * x.Matrix).Xyz))
+                .ToArray();
 
             // Recalculate bounds.
             if (transformedVertices.Length > 0) {
