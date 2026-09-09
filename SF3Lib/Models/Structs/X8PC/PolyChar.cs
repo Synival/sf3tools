@@ -11,6 +11,7 @@ using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
+using SF3.ThirdParty.TexturePacker;
 using SF3.Types;
 using SF3.X8PC;
 
@@ -110,6 +111,8 @@ namespace SF3.Models.Structs.X8PC {
                     )
                 ).ToArray();
 
+            TextureAtlas = new PCTextureAtlas(GetTextureAtlasesByModelID());
+
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);
 
@@ -127,6 +130,48 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(BoneKeyframeScaleTables);
 
             Tables = tables.ToArray();
+        }
+
+        private Dictionary<int, TextureAtlas> GetTextureAtlasesByModelID() {
+            // First, get a list of all textures used by ATTR lists.
+            var texturedAttrsWithTableOffsets = AttrTablesByOffset
+                .SelectMany(x => x.Value.Select(y => (Offset: x.Key, Attr: y)))
+                .Where(x => x.Attr.UseTexture)
+                .GroupBy(x => x.Offset * 10000 + x.Attr.TextureNo)
+                .Select(x => x.First())
+                .Select(x => (x.Offset, x.Attr.TextureNo))
+                .ToArray();
+
+            // Get a list of all XPDATAs.
+            var xpdatas = XPDataTables.SelectMany(x => x).ToArray();
+
+            // This is terrifying -- for each texture ID, get the first model that has it in its ATTR list.
+            var texturesByModelId = texturedAttrsWithTableOffsets
+                .Select(x => (xpdatas.FirstOrDefault(y => y.AttributesOffset == x.Offset)?.ModelID, x.TextureNo))
+                .Where(x => x.ModelID.HasValue)
+                // Paranoid filtering to make sure we only have 1 texture ID and it belongs to the first model (sorted).
+                .OrderBy(x => x.ModelID.Value)
+                .ThenBy(x => x.TextureNo)
+                .GroupBy(x => x.TextureNo)
+                .Select(x => x.First())
+                // All sorted -- now let's bundle them into a dictionary of textures by model ID.
+                .GroupBy(x => x.ModelID.Value)
+                .OrderBy(x => x.Key)
+                .ToDictionary(x => x.Key, x => x.Select(y => TextureTable[y.TextureNo]).Cast<ITexture>().OrderBy(y => y.TextureID));
+
+            // This code below is for paranoid checks that all textures are used. Seems to always work!
+#if false
+            var allTextureIdsUsed = texturesByModelId.SelectMany(x => x.Value).Select(x => x.TextureID).OrderBy(x => x).ToArray();
+            var actualTextureIds = TextureTable.Select(x => x.TextureID).OrderBy(x => x).ToArray();
+            if (!Enumerable.SequenceEqual(allTextureIdsUsed, actualTextureIds))
+                ;
+#endif
+
+            // Generate TextureAtlas's for each model.
+            var atlasesByModelId = texturesByModelId
+                .ToDictionary(x => x.Key, x => new TextureAtlas(x.Value));
+
+            return atlasesByModelId;
         }
 
         private static Dictionary<int, T> FetchTablesByOffset<T>(PC_XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
@@ -314,6 +359,8 @@ namespace SF3.Models.Structs.X8PC {
         public ChunkData TexDataChunk { get; }
         public ChunkData ModelChunk { get; }
         public ChunkData AnimationChunk { get; }
+
+        public PCTextureAtlas TextureAtlas { get; }
 
         private Dictionary<int, ISGL_Model> _modelsById;
     }
