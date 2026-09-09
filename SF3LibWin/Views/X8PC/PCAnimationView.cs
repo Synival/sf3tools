@@ -70,16 +70,7 @@ namespace SF3.Win.Views.X8PC {
             _lastFrameIdx = -1;
             UpdateKeyframeInfo();
             _frame = GetFirstKeyframe();
-
-            if (PolyChar != null) {
-                _maxFrame = Math.Max(
-                    PolyChar.BoneKeyframePosTables.Max(x => x.Max(y => y.Frame)),
-                    Math.Max(
-                        PolyChar.BoneKeyframeRotTables.Max(x => x.Max(y => y.Frame)),
-                        PolyChar.BoneKeyframeScaleTables.Max(x => x.Max(y => y.Frame))
-                    )
-                );
-            }
+            _maxFrame = PolyChar?.GetLastAnimationFrame() ?? 0;
 
             if (Control != null)
                 Control.Update(_polyChar, _instances);
