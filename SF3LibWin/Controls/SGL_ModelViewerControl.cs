@@ -81,7 +81,7 @@ namespace SF3.Win.Controls {
 
             if (_globalTimer == null) {
                 _globalTimer = new BetterTimer(60);
-                _globalTimer.FrameTick += (s, delta) => Yaw = (Yaw + delta * 0.0225f) % 360f;
+                _globalTimer.FrameTick += (s, delta) => GlobalYaw = (GlobalYaw + delta * 0.0225f) % 360f;
                 _globalTimer.Start();
             }
 
@@ -152,7 +152,7 @@ namespace SF3.Win.Controls {
                 _lighting.Update(LightPalette, null);
 
             var lightPos = LightDirection.Normalized()
-                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw));
+                * Matrix3.CreateRotationY(MathHelper.DegreesToRadians(Yaw ?? GlobalYaw));
 
             foreach (var shader in _general.Shaders) {
                 using (shader.Use())
@@ -200,11 +200,11 @@ namespace SF3.Win.Controls {
         }
 
         private void UpdateCameraPosition() {
-            var yawRadians = MathHelper.DegreesToRadians(Yaw);
+            var yawRadians = MathHelper.DegreesToRadians(Yaw ??GlobalYaw);
 
             Position = new Vector3(0.0f, 0.0f, 1.0f)
                 * Matrix3.CreateRotationX(Pitch * (float) Math.PI / 180.0f)
-                * Matrix3.CreateRotationY(Yaw * (float) Math.PI / 180.0f)
+                * Matrix3.CreateRotationY((Yaw ?? GlobalYaw) * (float) Math.PI / 180.0f)
                 * _dist;
 
             Position += _center;
@@ -216,7 +216,7 @@ namespace SF3.Win.Controls {
             UpdateCameraPosition();
             UpdateLighting();
             _viewMatrix = Matrix4.CreateTranslation(-Position)
-                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-Yaw))
+                * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(-(Yaw ?? GlobalYaw)))
                 * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(-Pitch));
         }
 
@@ -240,7 +240,7 @@ namespace SF3.Win.Controls {
                 },
                 RenderOptions,
                 new RendererState() {
-                    CameraYaw        = Yaw,
+                    CameraYaw        = Yaw ?? GlobalYaw,
                     CameraPitch      = Pitch,
                     ScreenWidth      = ClientSize.Width,
                     ScreenHeight     = ClientSize.Height,
@@ -339,9 +339,10 @@ namespace SF3.Win.Controls {
         }
 
         public Vector3 Position { get; private set; }
-        public static float Yaw { get; private set; }
+        public static float GlobalYaw { get; set; }
         public RendererOptions RenderOptions { get; }
 
+        public float? Yaw { get; set; } = null;
         public float Pitch { get; set; } = -30.0f;
         public bool? ForceLighting { get; set; }
         public float Zoom { get; set; } = 1.0f;

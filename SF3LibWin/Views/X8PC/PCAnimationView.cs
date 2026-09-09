@@ -24,6 +24,7 @@ namespace SF3.Win.Views.X8PC {
                 Control.FrameTick += OnFrameTick;
                 Control.LightDirection = PCModelViewConstants.OutdoorLightDirection;
                 Control.LightPalette = PCModelViewConstants.DaytimePalette;
+                Control.Yaw = 30;
                 Control.Update(_polyChar, _instances);
             }
             return ctrl;
