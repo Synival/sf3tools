@@ -8,6 +8,7 @@ namespace SF3.Win.Views.X8PC {
             NameGetterContext = ngc;
 
             AnimationViewer = new PCAnimationView("Animation Viewer", model);
+            TextureSheetView = new TextureView("Texture Sheet", model?.TextureAtlas, imageScale: 2.0f);
             ChunkDefView   = new TableView("Header", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
             TexturesView   = new PCTexChunkView("Textures", model, NameGetterContext);
             ModelsView     = new PCModelChunkView("Models", model, NameGetterContext);
@@ -21,6 +22,7 @@ namespace SF3.Win.Views.X8PC {
                 return null;
 
             CreateChild(AnimationViewer);
+            CreateChild(TextureSheetView);
             CreateChild(ChunkDefView);
             CreateChild(TexturesView);
             CreateChild(ModelsView);
@@ -36,6 +38,7 @@ namespace SF3.Win.Views.X8PC {
                 if (_model != value) {
                     _model = value;
                     AnimationViewer.PolyChar = _model;
+                    TextureSheetView.Texture = _model?.TextureAtlas;
                     ChunkDefView.Table   = _model?.Header?.ChunkDefTable;
                     TexturesView.Model   = _model;
                     ModelsView.Model     = _model;
@@ -50,5 +53,6 @@ namespace SF3.Win.Views.X8PC {
         public PCTexChunkView TexturesView { get; }
         public PCModelChunkView ModelsView { get; }
         public PCAnimationChunkView AnimationsView { get; }
+        public TextureView TextureSheetView { get; }
     }
 }
