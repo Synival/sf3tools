@@ -284,13 +284,17 @@ namespace SF3.Models.Structs.X8PC {
                     var rotFrame   = boneFrame.Rot;
                     var scaleFrame = boneFrame.Scale;
 
-                    var pos1   = BoneKeyframePosTables[bId][posFrame.IndexA].CreateVector();
-                    var rot1   = BoneKeyframeRotTables[bId][rotFrame.IndexA].CreateQuaternion();
-                    var scale1 = BoneKeyframeScaleTables[bId][scaleFrame.IndexA].CreateVector();
+                    var posTable = BoneKeyframePosTables[bId];
+                    var rotTable = BoneKeyframeRotTables[bId];
+                    var scaleTable = BoneKeyframeScaleTables[bId];
 
-                    var pos2   = BoneKeyframePosTables[bId][posFrame.IndexB].CreateVector();
-                    var rot2   = BoneKeyframeRotTables[bId][rotFrame.IndexB].CreateQuaternion();
-                    var scale2 = BoneKeyframeScaleTables[bId][scaleFrame.IndexB].CreateVector();
+                    var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].CreateVector()     : new VECTOR();
+                    var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].CreateQuaternion() : new QUATERNION();
+                    var scale1 = scaleTable.Count > scaleFrame.IndexA ? scaleTable[scaleFrame.IndexA].CreateVector() : new VECTOR();
+
+                    var pos2   = posTable.Count   > posFrame.IndexB   ? posTable[posFrame.IndexB].CreateVector()     : new VECTOR();
+                    var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].CreateQuaternion() : new QUATERNION();
+                    var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].CreateVector() : new VECTOR();
 
                     matrix *= IBoneExtensions.CreateMatrix(
                         pos1,   pos2,   posFrame.Mix,
@@ -312,10 +316,10 @@ namespace SF3.Models.Structs.X8PC {
 
         public int GetLastAnimationFrame() {
             return Math.Max(
-                BoneKeyframePosTables.Max(x => x.Max(y => y.Frame)),
+                BoneKeyframePosTables.Max(x => (x.Count > 0) ? x.Max(y => y.Frame) : 0),
                 Math.Max(
-                    BoneKeyframeRotTables.Max(x => x.Max(y => y.Frame)),
-                    BoneKeyframeScaleTables.Max(x => x.Max(y => y.Frame))
+                    BoneKeyframeRotTables.Max(x => (x.Count > 0) ? x.Max(y => y.Frame) : 0),
+                    BoneKeyframeScaleTables.Max(x => (x.Count > 0) ? x.Max(y => y.Frame) : 0)
                 )
             );
         }
