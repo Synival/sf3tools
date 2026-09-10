@@ -67,6 +67,9 @@ namespace SF3.ThirdParty.TexturePacker {
             return node;
         }
 
+        public TextureAtlasNode[] GetAllNodes()
+            => _nodeByTextureIDFrame.Values.ToArray();
+
         public TextureAtlasNode GetNodeByTextureIDFrame(int id, int frame) {
             var key = (id, frame);
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
