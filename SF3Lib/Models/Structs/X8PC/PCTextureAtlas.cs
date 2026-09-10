@@ -30,6 +30,8 @@ namespace SF3.Models.Structs.X8PC {
             var dimensions = _textureAtlas.GetDimensions();
             _width = dimensions.Width;
             _height = dimensions.Height;
+
+            Add16BitValidator((texData, _1, _2) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
         }
 
         public override TexturePixelFormat PixelFormat { get => TexturePixelFormat.ABGR1555; set => throw new NotSupportedException(); }
@@ -42,38 +44,56 @@ namespace SF3.Models.Structs.X8PC {
         public override void SetImageData8Bit(byte[,] data, IPalette palette) => throw new NotSupportedException();
 
         protected override ushort[,] FetchImageData16Bit() {
-            var data = _textureAtlas.CreateBitmap().Trim(ignoreTopLeft: false, clampToPow2: false, ignoreWidth: true).Get2DDataABGR1555();
+            var data = _textureAtlas.CreateBitmap()?.Trim(ignoreTopLeft: false, clampToPow2: false, ignoreWidth: true)?.Get2DDataABGR1555() ?? new ushort[0, 0];
             _width = data.GetLength(0);
             _height = data.GetLength(1);
             return data;
         }
 
         protected override void SetImageData16Bit(ushort[,] data) {
+            if (data != null) {
+                var error = Validate16BitImageData(data, ImageData16Bit.Length, data.Length);
+                if (error != null)
+                    throw new ArgumentException(error);
+            }
+
+            var metaAtlasNodes = _textureAtlas.GetAllNodes().OrderBy(x => x.Texture.TextureID).ToArray();
+
+            int metaAtlasIdx = 0;
             foreach (var sub in _subAtlasesByModelID) {
+                var metaAtlasNode = metaAtlasNodes[metaAtlasIdx++];
+                var metaAtlasNodeRect = metaAtlasNode.Rect;
+
                 var modelId = sub.Key;
                 var atlas = sub.Value;
 
-                ushort idx = 0;
-                foreach (var node in atlas.GetAllNodes()) {
-                    // TODO: this is all temporary test stuff.
+                foreach (var node in atlas.GetAllNodes().OrderBy(x => x.Texture.TextureID).ToArray()) {
                     var tex = node.Texture;
                     var newData = new ushort[tex.Width, tex.Height];
 
-                    float r = (idx >> 0) % 32;
-                    float g = modelId % 32;
-                    float b = (idx >> 5) % 32;
-                    var color = new PixelChannels() { R = (byte) (r / 31.0 * 255.0), G = (byte) (g / 31.0 * 255.0), B = (byte) (b / 31.0 * 255.0), A = 255 }.ToABGR1555();
+                    var rect = node.Rect;
+                    var (imageX, imageY) = (metaAtlasNodeRect.Left + rect.Left, metaAtlasNodeRect.Top + rect.Top);
 
-                    System.Diagnostics.Debug.WriteLine($"{color:X4}");
+                    int xx = 1, xy = 0;
+                    int yx = 0, yy = 1;
 
-                    unsafe {
-                        fixed (ushort* ptr = &newData[0, 0]) {
-                            Span<ushort> newDataSpan = new Span<ushort>(ptr, newData.Length);
-                            newDataSpan.Fill(color);
+                    var rotateCount = (node.Rotated ? 1 : 0) + (metaAtlasNode.Rotated ? 1 : 0);
+                    int width  = tex.Width;
+                    int height = tex.Height;
+
+                    for (int y = 0; y < height; y++) {
+                        for (int x = 0; x < width; x++) {
+                            var px = imageX + ((rotateCount == 0) ? x : (rotateCount == 1) ? (height - y - 1) : (width - x - 1));
+                            var py = imageY + ((rotateCount == 0) ? y : (rotateCount == 1) ? x : (height - y - 1));
+
+                            var pixel = data[px, py];
+
+                            var channels = PixelConversion.ABGR1555toChannels(pixel);
+                            newData[x, y] = channels.ToABGR1555();
                         }
                     }
+
                     tex.ImageData16Bit = newData;
-                    idx++;
                 }
             }
         }
