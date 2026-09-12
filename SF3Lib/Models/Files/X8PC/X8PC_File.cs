@@ -9,7 +9,7 @@ using SF3.Models.Tables;
 using System.Linq;
 
 namespace SF3.Models.Files.X8PC {
-    public class X8PC_File : ScenarioTableFile, IX8PC_File {
+    public class X8PC_File : ScenarioTableFile, IX8PC_File, IDisposable {
         public override int RamAddress      => 0x060A0000;
         public override int RamAddressLimit => 0x060A8000; // TODO: confirm this!
 
@@ -59,6 +59,12 @@ namespace SF3.Models.Files.X8PC {
                     return false;
 
             return true;
+        }
+
+        protected override void OnDispose(bool disposing) {
+            base.OnDispose(disposing);
+            if (disposing)
+                PolyCharTable?.Dispose();
         }
 
         public PolyCharTable PolyCharTable { get; private set; }

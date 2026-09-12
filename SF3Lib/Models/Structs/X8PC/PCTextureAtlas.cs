@@ -8,24 +8,78 @@ using SF3.ThirdParty.TexturePacker;
 using SF3.ThirdParty.TexturePacker.Extensions;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCTextureAtlas : CachedTextureDataBase {
-        private class MockTexture : InMemoryTextureData, ITexture {
-            public MockTexture(int id, ushort[,] data)
-            : base(data, ImageDataCanSet.Never, IndexedColorUpdateStrategy.DontUpdate) {
-                TextureID = id;
+    public class PCTextureAtlas : CachedTextureDataBase, IDisposable {
+        private class SubAtlasTexture : CachedTextureDataBase, ITexture, IDisposable {
+            public SubAtlasTexture(int textureId, TextureAtlas atlas) {
+                TextureID    = textureId;
+                TextureAtlas = atlas;
+                var dimensions = TextureAtlas.GetDimensions();
+
+                // Pre-cache the image data which builds the trimmed atlas bitmap. Set the width and height based on that.
+                var imageData = ImageData16Bit;
+                _width  = imageData.GetLength(0);
+                _height = imageData.GetLength(1);
+
+                var textures = TextureAtlas.GetAllNodes().Where(x => x.Texture != null).Select(x => x.Texture).ToArray();
+                foreach (var tex in textures)
+                    tex.Invalidated += OnAtlasTextureInvalidate;
             }
 
             public int TextureCollectionID => 0;
             public int TextureID { get; }
+            public TextureAtlas TextureAtlas { get; }
+
+            private int _width;
+            private int _height;
+
+            // Unsupported features.
+            public override IPalette Palette { get => null; set => throw new NotSupportedException(); }
+            public override bool ZeroIsTransparent { get => false; set => throw new NotSupportedException(); }
+            public override void SetImageData8Bit(byte[,] data, IPalette palette) => throw new NotSupportedException();
+            protected override byte[,] FetchImageData8Bit() => throw new NotSupportedException();
+            protected override void SetImageData16Bit(ushort[,] data) => throw new NotSupportedException();
+
+            // Read-only features.
+            public override TexturePixelFormat PixelFormat { get => TexturePixelFormat.ABGR1555; set => throw new NotSupportedException(); }
+            public override int Width { get => _width; set => throw new NotSupportedException(); }
+            public override int Height { get => _height; set => throw new NotSupportedException(); }
+            public override ImageDataCanSet CanSetImageData { get => ImageDataCanSet.CanSet16Bit; set => throw new NotSupportedException(); }
+
+            // Fully supported features.
+            protected override ushort[,] FetchImageData16Bit() => TextureAtlas.CreateBitmap().Trim(ignoreTopLeft: false, clampToPow2: false).Get2DDataABGR1555();
+
+            private bool disposedValue;
+            protected virtual void Dispose(bool disposing) {
+                if (!disposedValue) {
+                    if (disposing) {
+                        var textures = TextureAtlas.GetAllNodes().Where(x => x.Texture != null).Select(x => x.Texture).ToArray();
+                        foreach (var tex in textures)
+                            tex.Invalidated -= OnAtlasTextureInvalidate;
+                    }
+                    disposedValue = true;
+                }
+            }
+
+            private void OnAtlasTextureInvalidate(object sender, EventArgs args)
+                => Invalidate();
+
+            public void Dispose() {
+                Dispose(disposing: true);
+                GC.SuppressFinalize(this);
+            }
         }
 
         public PCTextureAtlas(Dictionary<int, TextureAtlas> atlasesByModelID) {
-            var bitmaps = atlasesByModelID.Select(x => x.Value.CreateBitmap().Trim(ignoreTopLeft: false, clampToPow2: false)).ToArray();
-            var textures = bitmaps.Select((x, i) => new MockTexture(i, x.Get2DDataABGR1555()))
+            _subAtlasesByModelID = atlasesByModelID;
+
+            var textures = atlasesByModelID.Select(x => new SubAtlasTexture(x.Key, x.Value))
                 .OrderByDescending(x => x.Height)
                 .ToArray();
 
-            _subAtlasesByModelID = atlasesByModelID;
+            _subAtlasTextures = textures;
+            foreach (var tex in _subAtlasTextures)
+                tex.Invalidated += OnSubAtlasTextureInvalidated;
+
             _textureAtlas = new TextureAtlas(textures, padding: 0, tryRotate: true, sortBySize: false, minWidth: 320);
             var dimensions = _textureAtlas.GetDimensions();
             _width = dimensions.Width;
@@ -33,6 +87,9 @@ namespace SF3.Models.Structs.X8PC {
 
             Add16BitValidator((texData, _1, _2) => TextureDataValidators.IsSameDimensions(texData, Width, Height));
         }
+
+        private void OnSubAtlasTextureInvalidated(object sender, EventArgs args)
+            => Invalidate();
 
         public override TexturePixelFormat PixelFormat { get => TexturePixelFormat.ABGR1555; set => throw new NotSupportedException(); }
         public override int Width { get => _width; set => throw new NotSupportedException(); }
@@ -99,8 +156,26 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         private readonly Dictionary<int, TextureAtlas> _subAtlasesByModelID;
+        private readonly SubAtlasTexture[] _subAtlasTextures;
         private readonly TextureAtlas _textureAtlas;
         private int _width;
         private int _height;
+
+        private bool disposedValue;
+        protected virtual void Dispose(bool disposing) {
+            if (!disposedValue) {
+                foreach (var tex in _subAtlasTextures) {
+                    tex.Invalidated -= OnSubAtlasTextureInvalidated;
+                    tex.Dispose();
+                }
+                _textureAtlas.Dispose();
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

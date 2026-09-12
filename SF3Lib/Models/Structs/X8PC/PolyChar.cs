@@ -16,7 +16,7 @@ using SF3.Types;
 using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelCollection {
+    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelCollection, IDisposable {
         public PolyChar(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0 /* not applicable */) {
             Scenario = scenario;
@@ -367,5 +367,19 @@ namespace SF3.Models.Structs.X8PC {
         public PCTextureAtlas TextureAtlas { get; }
 
         private Dictionary<int, ISGL_Model> _modelsById;
+
+        private bool disposedValue;
+        protected virtual void Dispose(bool disposing) {
+            if (!disposedValue) {
+                if (disposing)
+                    TextureAtlas?.Dispose();
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose() {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 }
