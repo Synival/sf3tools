@@ -26,9 +26,9 @@ namespace SF3.X8PC {
             string str = new string(' ', indentation * 2);
 
             if (thisBone.BoneID.HasValue)
-                str += $" bone=0x{thisBone.BoneID:X2}";
+                str += $" bone={thisBone.BoneID}";
             if (thisBone.ModelID.HasValue)
-                str += $" model=0x{thisBone.ModelID.Value:X2}";
+                str += $" model={thisBone.ModelID.Value}";
             if (thisBone.Tag.HasValue)
                 str += $" tag=0x{thisBone.Tag.Value:X2}";
             if (thisBone.Position != null)
