@@ -116,43 +116,59 @@ namespace SF3.Models.Structs.X8PC {
 
             var metaAtlasNodes = _textureAtlas.GetAllNodes().OrderBy(x => x.Texture.TextureID).ToArray();
 
-            int metaAtlasIdx = 0;
-            foreach (var sub in _subAtlasesByModelID) {
-                var metaAtlasNode = metaAtlasNodes[metaAtlasIdx++];
-                var metaAtlasNodeRect = metaAtlasNode.Rect;
+            // Don't auto-invalidate ourselves; do it manually after.
+            using (InvalidateGuard()) {
+                // Prevent invalidation of all subatlas textures to prevent excessive event-firing.
+                var texScopeGuards = _subAtlasTextures.Select(x => (Tex: x, Guard: x.InvalidateGuard())).ToArray();
 
-                var modelId = sub.Key;
-                var atlas = sub.Value;
+                try {
+                    int metaAtlasIdx = 0;
+                    foreach (var sub in _subAtlasesByModelID) {
+                        var metaAtlasNode = metaAtlasNodes[metaAtlasIdx++];
+                        var metaAtlasNodeRect = metaAtlasNode.Rect;
 
-                foreach (var node in atlas.GetAllNodes().OrderBy(x => x.Texture.TextureID).ToArray()) {
-                    var tex = node.Texture;
-                    var newData = new ushort[tex.Width, tex.Height];
+                        var modelId = sub.Key;
+                        var atlas = sub.Value;
 
-                    var rect = node.Rect;
-                    var (imageX, imageY) = (metaAtlasNodeRect.Left + rect.Left, metaAtlasNodeRect.Top + rect.Top);
+                        foreach (var node in atlas.GetAllNodes().OrderBy(x => x.Texture.TextureID).ToArray()) {
+                            var tex = node.Texture;
+                            var newData = new ushort[tex.Width, tex.Height];
 
-                    int xx = 1, xy = 0;
-                    int yx = 0, yy = 1;
+                            var rect = node.Rect;
+                            var (imageX, imageY) = (metaAtlasNodeRect.Left + rect.Left, metaAtlasNodeRect.Top + rect.Top);
 
-                    var rotateCount = (node.Rotated ? 1 : 0) + (metaAtlasNode.Rotated ? 1 : 0);
-                    int width  = tex.Width;
-                    int height = tex.Height;
+                            int xx = 1, xy = 0;
+                            int yx = 0, yy = 1;
 
-                    for (int y = 0; y < height; y++) {
-                        for (int x = 0; x < width; x++) {
-                            var px = imageX + ((rotateCount == 0) ? x : (rotateCount == 1) ? (height - y - 1) : (width - x - 1));
-                            var py = imageY + ((rotateCount == 0) ? y : (rotateCount == 1) ? x : (height - y - 1));
+                            var rotateCount = (node.Rotated ? 1 : 0) + (metaAtlasNode.Rotated ? 1 : 0);
+                            int width  = tex.Width;
+                            int height = tex.Height;
 
-                            var pixel = data[px, py];
+                            for (int y = 0; y < height; y++) {
+                                for (int x = 0; x < width; x++) {
+                                    var px = imageX + ((rotateCount == 0) ? x : (rotateCount == 1) ? (height - y - 1) : (width - x - 1));
+                                    var py = imageY + ((rotateCount == 0) ? y : (rotateCount == 1) ? x : (height - y - 1));
 
-                            var channels = PixelConversion.ABGR1555toChannels(pixel);
-                            newData[x, y] = channels.ToABGR1555();
+                                    var pixel = data[px, py];
+
+                                    var channels = PixelConversion.ABGR1555toChannels(pixel);
+                                    newData[x, y] = channels.ToABGR1555();
+                                }
+                            }
+
+                            tex.ImageData16Bit = newData;
                         }
                     }
-
-                    tex.ImageData16Bit = newData;
+                }
+                finally {
+                    foreach (var tsg in texScopeGuards) {
+                        tsg.Guard.Dispose();
+                        tsg.Tex.Invalidate();
+                    }
                 }
             }
+
+            Invalidate();
         }
 
         private readonly Dictionary<int, TextureAtlas> _subAtlasesByModelID;
