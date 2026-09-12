@@ -111,6 +111,11 @@ namespace SF3.Models.Structs.X8PC {
                     )
                 ).ToArray();
 
+            // Create all colors as a color palette that can be easily modified.
+            var attrsByColor = GetATTRsByColor();
+            Palette = new PCPalette(attrsByColor.Values.ToArray());
+
+            // Create a big texture atlas that can be used to change all textures at once.
             TextureAtlas = new PCTextureAtlas(GetTextureAtlasesByModelID());
 
             tables.AddRange(Header.Tables);
@@ -172,6 +177,20 @@ namespace SF3.Models.Structs.X8PC {
                 .ToDictionary(x => x.Key, x => new TextureAtlas(x.Value));
 
             return atlasesByModelId;
+        }
+
+        private Dictionary<ushort, AttrStruct[]> GetATTRsByColor() {
+            var allAttrs = AttrTablesByOffset
+                .SelectMany(x => x.Value
+                    .Where(y => !y.UseTexture)
+                    .Select(y => (Order: x.Key * 0x1000 + y.ID, Attr: y))
+                )
+                .OrderBy(x => x.Order)
+                .ToArray();
+
+            return allAttrs
+                .GroupBy(x => x.Attr.ColorNo)
+                .ToDictionary(x => x.Key, x => x.Select(y => y.Attr).ToArray());
         }
 
         private static Dictionary<int, T> FetchTablesByOffset<T>(PC_XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
@@ -363,7 +382,7 @@ namespace SF3.Models.Structs.X8PC {
         public ChunkData TexDataChunk { get; }
         public ChunkData ModelChunk { get; }
         public ChunkData AnimationChunk { get; }
-
+        public PCPalette Palette { get; }
         public PCTextureAtlas TextureAtlas { get; }
 
         private Dictionary<int, ISGL_Model> _modelsById;
