@@ -233,6 +233,11 @@ namespace SF3.Win.Controls {
         protected override void OnPaint(PaintEventArgs e) {
             MakeCurrent();
 
+            if (_modelsNeedUpdate) {
+                Update(TextureContainer, _sglModels, force: true);
+                _modelsNeedUpdate = false;
+            }
+
             UpdateViewMatrix();
             foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
@@ -265,25 +270,27 @@ namespace SF3.Win.Controls {
         public ITextureMetaCollection TextureContainer { get; private set; } = null;
         private ISGL_ModelInstance[] _sglModels = [];
 
-        public void Update(ITextureMetaCollection texContainer, ISGL_Model sglModel)
-            => Update(texContainer, (sglModel == null) ? [] : [sglModel]);
+        public void Update(ITextureMetaCollection texContainer, ISGL_Model sglModel, bool force = false)
+            => Update(texContainer, (sglModel == null) ? [] : [sglModel], force);
 
-        public void Update(ITextureMetaCollection texContainer, ISGL_Model[] sglModels) {
+        public void Update(ITextureMetaCollection texContainer, ISGL_Model[] sglModels, bool force = false) {
             Update(texContainer, sglModels
                 .Select((x, i) => new SGL_ModelInstance((_, _) => x) {
                     ModelID = x.ModelID, ModelCollectionID = x.ModelCollectionID, ModelInstanceID = i
                 })
-                .ToArray()
+                .ToArray(),
+                force
             );
         }
 
-        public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance sglModel)
-            => Update(texContainer, (sglModel == null) ? [] : [sglModel]);
+        public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance sglModel, bool force = false)
+            => Update(texContainer, (sglModel == null) ? [] : [sglModel], force);
 
-        public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance[] sglModels) {
+        public void Update(ITextureMetaCollection texContainer, ISGL_ModelInstance[] sglModels, bool force = false) {
             sglModels ??= [];
+            _modelsNeedUpdate = false;
 
-            if (Enumerable.SequenceEqual(_sglModels, sglModels))
+            if (!force && Enumerable.SequenceEqual(_sglModels, sglModels))
                 return;
 
             MakeCurrent();
@@ -322,11 +329,24 @@ namespace SF3.Win.Controls {
             Invalidate();
         }
 
+        public void InvalidateModels()
+            => _modelsNeedUpdate = true;
+
         private float _updateTexMs = 0;
+        private bool _wasInvisible = true;
 
         private void IncrementFrame(object sender, float delta) {
-            if (!Visible || IsDisposed)
+            if (IsDisposed)
                 return;
+
+            if (!Visible) {
+                if (!_wasInvisible)
+                    _modelsNeedUpdate = true;
+                _wasInvisible = true;
+                return;
+            }
+            _wasInvisible = false;
+
             MakeCurrent();
 
             _updateTexMs += delta;
@@ -393,6 +413,8 @@ namespace SF3.Win.Controls {
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
+
+        private bool _modelsNeedUpdate = false;
 
         private GeneralResources   _general  = null;
         private ScreenResources    _screen   = null;
