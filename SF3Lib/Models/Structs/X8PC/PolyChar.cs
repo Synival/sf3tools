@@ -112,8 +112,8 @@ namespace SF3.Models.Structs.X8PC {
                 ).ToArray();
 
             // Create all colors as a color palette that can be easily modified.
-            var attrsByColor = GetATTRsByColor();
-            Palette = new PCPalette(attrsByColor.Values.ToArray());
+            var attrsByModelThenColor = GetATTRsByModelThenColor();
+            Palette = new PCPalette(attrsByModelThenColor.Values.SelectMany(x => x.Select(y => y.Value)).ToArray());
 
             // Create a big texture atlas that can be used to change all textures at once.
             TextureAtlas = new PCTextureAtlas(GetTextureAtlasesByModelID());
@@ -179,18 +179,37 @@ namespace SF3.Models.Structs.X8PC {
             return atlasesByModelId;
         }
 
-        private Dictionary<ushort, AttrStruct[]> GetATTRsByColor() {
+        private Dictionary<int, Dictionary<ushort, AttrStruct[]>> GetATTRsByModelThenColor() {
+            int GetModelKey(int offset) {
+                var tableIdx = XPDataTables
+                    .Select((x, i) => (Table: x, Idx: i))
+                    .First(x => x.Table.Any(y => y.AttributesOffset == offset))
+                    .Idx;
+
+                // Only separate group 1, because 0 and 2 are the model + (if it exists) unarmed model (an arm for monks)
+                return tableIdx == 1 ? 1 : 0;
+            }
+
             var allAttrs = AttrTablesByOffset
                 .SelectMany(x => x.Value
                     .Where(y => !y.UseTexture)
-                    .Select(y => (Order: x.Key * 0x1000 + y.ID, Attr: y))
+                    .Select(y => (ModelKey: GetModelKey(x.Key), Attr: y))
                 )
-                .OrderBy(x => x.Order)
+                .OrderBy(x => x.ModelKey)
+                .ThenBy(x => x.Attr.ID)
                 .ToArray();
 
             return allAttrs
-                .GroupBy(x => x.Attr.ColorNo)
-                .ToDictionary(x => x.Key, x => x.Select(y => y.Attr).ToArray());
+                .GroupBy(x => x.ModelKey)
+                .ToDictionary(
+                    x => x.Key,
+                    x => x
+                        .GroupBy(y => y.Attr.ColorNo)
+                        .ToDictionary(
+                            y => y.Key,
+                            y => y.Select(z => z.Attr).ToArray()
+                        )
+                );
         }
 
         private static Dictionary<int, T> FetchTablesByOffset<T>(PC_XPDataTable[] tables, Func<XPDataStruct, (int Count, int Offset)> countOffsetFetcher, Func<int, int, int, T> tableMaker) {
