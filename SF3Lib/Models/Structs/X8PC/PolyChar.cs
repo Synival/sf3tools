@@ -116,7 +116,7 @@ namespace SF3.Models.Structs.X8PC {
             Palette = new PCPalette(attrsByModelThenColor.Values.SelectMany(x => x.Select(y => y.Value)).ToArray());
 
             // Create a big texture atlas that can be used to change all textures at once.
-            TextureAtlas = new PCTextureAtlas(GetTextureAtlasesByModelID());
+            TextureAtlas = new PCTextureAtlas(GetTextureAtlasesByModelID(), Palette);
 
             tables.AddRange(Header.Tables);
             tables.Add(TextureTable);

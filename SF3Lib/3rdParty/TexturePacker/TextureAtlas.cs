@@ -162,8 +162,8 @@ namespace SF3.ThirdParty.TexturePacker {
             GetDimensionsSub(node.Right, ref width, ref height, onlyTextures);
         }
 
-        public void DrawPackedNodes(Bitmap atlas) {
-            DrawPackedNodesSub(atlas, _rootNode);
+        public void DrawPackedNodes(Bitmap bitmap) {
+            DrawPackedNodesSub(bitmap, _rootNode);
         }
 
         private void DrawPackedNodesSub(Bitmap atlas, TextureAtlasNode node) {

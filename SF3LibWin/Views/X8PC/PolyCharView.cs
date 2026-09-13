@@ -8,8 +8,8 @@ namespace SF3.Win.Views.X8PC {
             NameGetterContext = ngc;
 
             AnimationViewer = new PCAnimationView("Animation Viewer", model);
+            TextureSheetView = new TextureView("Texture Atlas", model?.TextureAtlas, imageScale: 2.0f);
             PaletteView     = new TextureView("Palette", model?.Palette, imageScale: 16.00f);
-            TextureSheetView = new TextureView("Texture Sheet", model?.TextureAtlas, imageScale: 2.0f);
             ChunkDefView   = new TableView("Header", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
             TexturesView   = new PCTexChunkView("Textures", model, NameGetterContext);
             ModelsView     = new PCModelChunkView("Models", model, NameGetterContext);
