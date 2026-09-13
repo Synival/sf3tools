@@ -225,17 +225,12 @@ namespace SF3.Models.Structs.X8PC {
                 );
         }
 
-        public bool UpdateAndCommitChunks() {
+        public bool UpdateAndCommitChunks(bool neverShrinkChunks) {
             // Rebuild the entire chunk table.
             uint nextOffset = 0x800;
             uint polyCharOffset = (uint) Address;
             foreach (var chunk in Chunks) {
                 var def = Header.ChunkDefTable[chunk.Index];
-
-                if (!chunk.DecompressedData.IsModified && !chunk.IsModified) {
-                    nextOffset += def.ChunkSize;
-                    continue;
-                }
 
                 // Recompress if necessary.
                 if (TexDataChunk.NeedsRecompression)
@@ -245,7 +240,9 @@ namespace SF3.Models.Structs.X8PC {
                 // Update the chunk table entry.
                 def.Offset = nextOffset;
                 def.DataSize = (uint) chunk.Data.Length;
-                def.ChunkSize = (uint) ((chunk.Data.Length + 0x7FF) / 0x800) * 0x800;
+
+                var newChunkSize = (uint) ((chunk.Data.Length + 0x7FF) / 0x800) * 0x800;
+                def.ChunkSize = neverShrinkChunks ? Math.Max(def.ChunkSize, newChunkSize) : newChunkSize;
 
                 // Copy to the actual data.
                 Data.Data.SetDataAtTo((int) (polyCharOffset + def.Offset), (int) def.DataSize, chunk.Data.GetDataCopyOrReference());

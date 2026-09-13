@@ -54,9 +54,11 @@ namespace SF3.Models.Files.X8PC {
 
         public override bool OnFinish() {
             base.OnFinish();
-            foreach (var pc in PolyCharTable)
-                if (!pc.UpdateAndCommitChunks())
+            foreach (var pc in PolyCharTable) {
+                // TODO: Add options for chunk sizes!
+                if (!pc.UpdateAndCommitChunks(neverShrinkChunks: true))
                     return false;
+            }
 
             return true;
         }
