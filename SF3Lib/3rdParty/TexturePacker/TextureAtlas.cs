@@ -130,32 +130,36 @@ namespace SF3.ThirdParty.TexturePacker {
             };
         }
 
-        public Bitmap CreateBitmap() {
+        public Bitmap CreateBitmap(bool onlyTextures = false, bool forceEvenWidth = false) {
             if (MaxX <= 0 || MaxY <= 0)
                 return null;
 
-            var dimensions = GetDimensions();
+            var dimensions = GetDimensions(onlyTextures, forceEvenWidth);
             Bitmap atlas = new Bitmap(dimensions.Width, dimensions.Height);
             DrawPackedNodes(atlas);
             return atlas;
         }
 
-        public Rectangle GetDimensions() {
+        public Rectangle GetDimensions(bool onlyTextures = false, bool forceEvenWidth = false) {
             int width = 0;
             int height = 0;
-            GetDimensionsSub(_rootNode, ref width, ref height);
+            GetDimensionsSub(_rootNode, ref width, ref height, onlyTextures);
+            if (forceEvenWidth)
+                width = ((width + 1) / 2) * 2;
             return new Rectangle(0, 0, width, height);
         }
 
-        private void GetDimensionsSub(TextureAtlasNode node, ref int width, ref int height) {
+        private void GetDimensionsSub(TextureAtlasNode node, ref int width, ref int height, bool onlyTextures) {
             if (node == null)
                 return;
-            if (node.Rect.Right > width)
-                width = node.Rect.Right;
-            if (node.Rect.Bottom > height)
-                height = node.Rect.Bottom;
-            GetDimensionsSub(node.Left, ref width, ref height);
-            GetDimensionsSub(node.Right, ref width, ref height);
+            if (!onlyTextures || node.Texture != null) {
+                if (node.Rect.Right > width)
+                    width = node.Rect.Right;
+                if (node.Rect.Bottom > height)
+                    height = node.Rect.Bottom;
+            }
+            GetDimensionsSub(node.Left, ref width, ref height, onlyTextures);
+            GetDimensionsSub(node.Right, ref width, ref height, onlyTextures);
         }
 
         public void DrawPackedNodes(Bitmap atlas) {

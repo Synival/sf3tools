@@ -256,7 +256,7 @@ namespace SF3.Sprites {
                             var y2 = y1 + frameSize.Height;
 
                             if (x1 >= 0 && y1 >= 0 && x2 <= bitmap.Width && y2 <= bitmap.Height) {
-                                var bitmapData = bitmap.GetDataAt(x1, y1, frameSize.Width, frameSize.Height);
+                                var bitmapData = bitmap.Get2DDataAtABGR1555(x1, y1, frameSize.Width, frameSize.Height);
                                 if (frame.Coding != SpriteImageCodingType.Ignore)
                                     bitmapData.FixSaturnTransparency(frame.Coding == SpriteImageCodingType.On);
 

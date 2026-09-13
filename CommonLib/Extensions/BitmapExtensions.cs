@@ -10,12 +10,21 @@ namespace CommonLib.Extensions {
         /// Gets image data in ABGR1555 format for a subsection.
         /// </summary>
         /// <param name="bitmap">Bitmap to get image data from.</param>
+        /// <param name="rect">Rectangle of subsection to get.</param>
+        /// <returns>A 2D array[width, height] of ushorts representting colors in ABGR1555 format.</returns>
+        public static ushort[,] Get2DDataAtABGR1555(this Bitmap bitmap, Rectangle rect)
+            => Get2DDataAtABGR1555(bitmap, rect.X, rect.Y, rect.Width, rect.Height);
+
+        /// <summary>
+        /// Gets image data in ABGR1555 format for a subsection.
+        /// </summary>
+        /// <param name="bitmap">Bitmap to get image data from.</param>
         /// <param name="x">Topleft X coordinate of subsection.</param>
         /// <param name="y">Topleft Y coordinate of subsection.</param>
         /// <param name="width">Width of subsection.</param>
         /// <param name="height">Height of subsection.</param>
         /// <returns>A 2D array[width, height] of ushorts representting colors in ABGR1555 format.</returns>
-        public static ushort[,] GetDataAt(this Bitmap bitmap, int x, int y, int width, int height) {
+        public static ushort[,] Get2DDataAtABGR1555(this Bitmap bitmap, int x, int y, int width, int height) {
             // Only 16- or 32-bit bitmaps are currently supported.
             if (bitmap == null || !(bitmap.PixelFormat == PixelFormat.Format16bppArgb1555 || bitmap.PixelFormat == PixelFormat.Format32bppArgb))
                 return null;
@@ -30,12 +39,13 @@ namespace CommonLib.Extensions {
             var data = new ushort[width * height];
             var bytesPerPixel = (bitmap.PixelFormat == PixelFormat.Format32bppArgb) ? 4 : 2;
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+            var stride = Math.Abs(bitmapData.Stride);
 
             unsafe {
                 var bitmapDataPtr = (byte*) bitmapData.Scan0.ToPointer();
                 int writePos = 0;
                 for (var iy = y; iy < y2; iy++) {
-                    var readPos = (iy * bitmap.Width + x) * bytesPerPixel;
+                    var readPos = (iy * stride) + (x * bytesPerPixel);
                     for (var ix = x; ix < x2; ix++) {
                         uint bitmapColor = 0;
                         for (int i = 0; i < bytesPerPixel; i++)
@@ -60,7 +70,7 @@ namespace CommonLib.Extensions {
         /// <param name="y">Topleft Y coordinate of subsection.</param>
         /// <param name="data">2D array[width, height] of color data in ABGR1555 format.</param>
         /// <returns>Returns 'true' if the subsection was written, otherwise 'false'.</returns>
-        public static bool SetDataAt(this Bitmap bitmap, int x, int y, ushort[,] data) {
+        public static bool SetDataAtABGR1555(this Bitmap bitmap, int x, int y, ushort[,] data) {
             // Only 16- or 32-bit bitmaps are currently supported.
             if (bitmap == null || !(bitmap.PixelFormat == PixelFormat.Format16bppArgb1555 || bitmap.PixelFormat == PixelFormat.Format32bppArgb))
                 return false;
@@ -76,12 +86,13 @@ namespace CommonLib.Extensions {
             // Looks like we should be able to set a sub-image. Get the image data.
             var bytesPerPixel = (bitmap.PixelFormat == PixelFormat.Format32bppArgb) ? 4 : 2;
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            var stride = Math.Abs(bitmapData.Stride);
 
             unsafe {
                 var bitmapDataPtr = (byte*) bitmapData.Scan0.ToPointer();
                 int readY = 0;
                 for (var iy = y; iy < y2; iy++, readY++) {
-                    var writePos = (iy * bitmap.Width + x) * bytesPerPixel;
+                    var writePos = (iy * stride) + (x * bytesPerPixel);
 
                     int readX = 0;
                     for (var ix = x; ix < x2; ix++, readX++) {
@@ -157,6 +168,5 @@ namespace CommonLib.Extensions {
 
         public static ushort[,] Get2DDataABGR1555(this Bitmap bitmap, bool zeroIsTransparent = false)
             => bitmap.Get1DDataABGR1555(zeroIsTransparent).To2DArrayColumnMajor(bitmap.Width, bitmap.Height);
-
     }
 }

@@ -220,10 +220,10 @@ namespace CHRTool {
                         var bitmap = LoadSpritesheet(loadedSpritesheets, spriteDef, frameRef.FrameWidth, frameRef.FrameHeight, verbose);
                         if (bitmap != null) {
                             var newData = texture.ImageData16Bit;
-                            var existingData = bitmap.GetDataAt(frame.SpritesheetX, frame.SpritesheetY, frameRef.FrameWidth, frameRef.FrameHeight);
+                            var existingData = bitmap.Get2DDataAtABGR1555(frame.SpritesheetX, frame.SpritesheetY, frameRef.FrameWidth, frameRef.FrameHeight);
                             if (Enumerable.SequenceEqual(newData.To1DArray(), existingData.To1DArray()))
                                 framesUnchanged++;
-                            else if (bitmap.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, newData)) {
+                            else if (bitmap.SetDataAtABGR1555(frame.SpritesheetX, frame.SpritesheetY, newData)) {
                                 framesAdded++;
                                 spritesheetsUpdated.Add(SpriteResources.SpritesheetImageFile(spriteDef.Name, frameRef.FrameWidth, frameRef.FrameHeight));
                             }
@@ -303,7 +303,7 @@ namespace CHRTool {
                     // Place that red box at all frame locations.
                     foreach (var frameGroup in spritesheet.FrameGroupsByName.Values)
                         foreach (var frame in frameGroup.Frames.Values)
-                            newImage.SetDataAt(frame.SpritesheetX, frame.SpritesheetY, box);
+                            newImage.SetDataAtABGR1555(frame.SpritesheetX, frame.SpritesheetY, box);
                 }
 
                 // Save the image out.

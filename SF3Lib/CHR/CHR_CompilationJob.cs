@@ -698,7 +698,7 @@ namespace SF3.CHR {
                 }
                 // It looks like a valid image. Copy it into the data.
                 else {
-                    var data2D = bitmap.GetDataAt(x1, y1, spritesheetFrame.Width, spritesheetFrame.Height);
+                    var data2D = bitmap.Get2DDataAtABGR1555(x1, y1, spritesheetFrame.Width, spritesheetFrame.Height);
                     if (spritesheetFrame.Coding != SpriteImageCodingType.Ignore)
                         data2D.FixSaturnTransparency(spritesheetFrame.Coding == SpriteImageCodingType.On);
                     data = data2D.To1DArrayTransposed();
