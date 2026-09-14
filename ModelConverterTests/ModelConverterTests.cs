@@ -1,8 +1,8 @@
 ﻿using CommonLib.SGL;
 
-namespace GLTF_Converter.Tests.Utils {
+namespace ModelConverter.Tests.Utils {
     [TestClass]
-    public class GLTF_ConverterTests {
+    public class ModelConverterTests {
         public static readonly VECTOR[] c_cubeVertices = [
             new VECTOR(-1, -1,  1), // 0: Top-back-left
             new VECTOR( 1, -1,  1), // 1: Top-back-right
@@ -42,7 +42,7 @@ namespace GLTF_Converter.Tests.Utils {
         public void CompressThenDecompress_WithCube_ProducesOriginal() {
             var originalModel = new SGL_Model(0, 0, 0, c_cubeVertices, c_cubePolys, c_cubeVertexNormals);
 
-            var converter = new GLTF_Converter();
+            var converter = new ModelConverter();
             var gltf = converter.ModelToGLTF(originalModel);
             var convertedModel = converter.GLTF_ToModel(gltf, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
 
@@ -75,7 +75,6 @@ namespace GLTF_Converter.Tests.Utils {
                 Assert.AreEqual(originalModel.VertexNormals[i].Y.Float, convertedModel.VertexNormals[i].Y.Float, 0.001f, $"Not equal: VertexNormals[{i}].Y");
                 Assert.AreEqual(originalModel.VertexNormals[i].Z.Float, convertedModel.VertexNormals[i].Z.Float, 0.001f, $"Not equal: VertexNormals[{i}].Z");
             }
-
         }
     }
 }

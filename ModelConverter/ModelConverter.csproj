@@ -7,6 +7,10 @@
     <FileVersion>0.4.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="SharpGLTF.Core" Version="1.0.7" />
+    <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.7" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
   </ItemGroup>
 </Project>

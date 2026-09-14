@@ -1,7 +1,7 @@
 ﻿using CommonLib.SGL;
 
-namespace GLTF_Converter {
-    public class GLTF_Converter {
+namespace ModelConverter {
+    public class ModelConverter {
         public string ModelToGLTF(ISGL_Model model) {
             // WIP: The entire thing
             return "{}";
