@@ -32,17 +32,18 @@ namespace CommonLib.SGL {
                 VertexNormals = original.VertexNormals.Select(x => new VECTOR(x)).ToArray();
         }
 
-        public SGL_Model(int modelId, int levelOfDetail, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces, IEnumerable<VECTOR> vertexNormals) {
+        public SGL_Model(int modelCollectionId, int modelId, int levelOfDetail, IEnumerable<VECTOR> vertices, IEnumerable<ISGL_ModelFace> faces, IEnumerable<VECTOR> vertexNormals) {
             if (vertices == null)
                 throw new ArgumentNullException(nameof(vertices));
             if (faces == null)
                 throw new ArgumentNullException(nameof(faces));
 
-            ModelID       = modelId;
-            LevelOfDetail = levelOfDetail;
-            Vertices      = vertices.ToArray();
-            Faces         = faces.ToArray();
-            VertexNormals = vertexNormals?.ToArray();
+            ModelCollectionID = modelCollectionId;
+            ModelID           = modelId;
+            LevelOfDetail     = levelOfDetail;
+            Vertices          = vertices.ToArray();
+            Faces             = faces.ToArray();
+            VertexNormals     = vertexNormals?.ToArray();
         }
 
         public static SGL_Model FromJToken(JToken token) => new SGL_Model((JObject) token);
