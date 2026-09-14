@@ -43,8 +43,8 @@ namespace ModelConverter.Tests.Utils {
             var originalModel = new SGL_Model(0, 0, 0, c_cubeVertices, c_cubePolys, c_cubeVertexNormals);
 
             var converter = new ModelConverter();
-            var gltf = converter.ModelToGLTF(originalModel);
-            var convertedModel = converter.GLTF_ToModel(gltf, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
+            var glb = converter.ModelToGLB(originalModel);
+            var convertedModel = converter.GLB_ToModel(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
 
             Assert.IsNotNull(convertedModel.Vertices, $"Not null: Vertices");
             Assert.AreEqual(originalModel.Vertices.Count, convertedModel.Vertices.Count, $"Not equal: Vertices.Count");

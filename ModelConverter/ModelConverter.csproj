@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="SharpGLTF.Core" Version="1.0.7" />
     <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.7" />
+    <PackageReference Include="System.Text.Json" Version="10.0.12" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLib\CommonLib.csproj" />
