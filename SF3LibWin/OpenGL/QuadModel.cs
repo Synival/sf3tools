@@ -156,7 +156,7 @@ namespace SF3.Win.OpenGL {
                 var texCoords = (frame != null)
                     ? (_textureAtlas.GetUVCoordinatesByTextureIDFrame(
                         frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
-                        pixelBorderWidth, pixelBorderHeight)).Select(x => x.ToOpenTKVector()).ToArray()
+                        pixelBorderWidth, pixelBorderHeight)).Select(x => x.ToOpenTKVector2()).ToArray()
                     : c_noTextureCoords;
 
                 for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {

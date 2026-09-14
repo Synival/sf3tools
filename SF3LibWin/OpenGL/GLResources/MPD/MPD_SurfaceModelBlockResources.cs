@@ -10,6 +10,7 @@ using SF3.MPD.Interfaces;
 using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.Shared;
+using static CommonLib.Extensions.VECTOR_Extensions;
 using static CommonLib.Types.CornerTypeConsts;
 
 namespace SF3.Win.OpenGL.GLResources.MPD {

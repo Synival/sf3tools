@@ -35,9 +35,9 @@ namespace SF3.Win.Extensions {
         }
 
         public static Vector3 GetVector3Normal(this IMPD_SurfaceTile tile, CornerType corner)
-            => tile.GetVertexNormal(corner).ToVector3();
+            => tile.GetVertexNormal(corner).ToOpenTKVector3();
 
         public static Vector3[] GetVector3Normals(this IMPD_SurfaceTile tile)
-            => tile.GetVertexNormals().Select(x => x.ToVector3()).ToArray();
+            => tile.GetVertexNormals().Select(x => x.ToOpenTKVector3()).ToArray();
     }
 }

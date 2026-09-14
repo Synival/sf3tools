@@ -181,7 +181,7 @@ namespace SF3.Win.Controls {
             var transformedVertices = _sglModels
                 .Select((x, i) => (Instance: x, Matrix: vertexMatrices[i]))
                 .Where(x => !HasZeroVolume(x.Matrix))
-                .SelectMany(x => x.Instance.GetModel(0).Vertices.Select(y => (y.ToVector4() * x.Matrix).Xyz))
+                .SelectMany(x => x.Instance.GetModel(0).Vertices.Select(y => (y.ToOpenTKVector4() * x.Matrix).Xyz))
                 .ToArray();
 
             // Recalculate bounds.

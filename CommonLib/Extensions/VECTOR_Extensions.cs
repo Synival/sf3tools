@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using CommonLib.SGL;
 
 namespace CommonLib.Extensions {
@@ -144,5 +145,14 @@ namespace CommonLib.Extensions {
 
             return newVectors;
         }
+
+        public static float[] ToFloatArray(this VECTOR vec)
+            => new float[] { vec.X.Float, vec.Y.Float, vec.Z.Float };
+
+        public static Vector3 ToNumericsVector3(this VECTOR vec)
+            => new Vector3(vec.X.Float, vec.Y.Float, vec.Z.Float);
+
+        public static Vector4 ToNumericsVector4(this VECTOR vec)
+            => new Vector4(vec.X.Float, vec.Y.Float, vec.Z.Float, 1);
     }
 }

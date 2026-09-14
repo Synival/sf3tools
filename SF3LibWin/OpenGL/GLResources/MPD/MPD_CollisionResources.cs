@@ -112,7 +112,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                 var indivColors = colors.Select(x => new Vector4(x, 0.66f)).ToArray();
                 var fullColors  = colors.Select(x => new Vector4(x, 0.25f)).ToArray();
 
-                var vertices  = poly.Vertices.Select(x => x.ToVector3()).ToArray();
+                var vertices  = poly.Vertices.Select(x => x.ToOpenTKVector3()).ToArray();
                 var indivQuad = new Quad(vertices, indivColors);
                 var fullQuad  = new Quad(vertices, fullColors);
 
@@ -178,7 +178,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
 
                 var indivQuads = new List<Quad>();
                 foreach (var poly in polys) {
-                    var vertices  = poly.Vertices.Select(x => x.ToVector3()).ToArray();
+                    var vertices  = poly.Vertices.Select(x => x.ToOpenTKVector3()).ToArray();
                     var indivQuad = new Quad(vertices, indivColors);
                     var fullQuad  = new Quad(vertices, fullColors);
 

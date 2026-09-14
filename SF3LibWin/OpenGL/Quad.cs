@@ -4,8 +4,8 @@ using System.Linq;
 using CommonLib.Imaging;
 using OpenTK.Mathematics;
 using SF3.Types;
+using CommonLib.Extensions;
 using SF3.Win.Extensions;
-using static CommonLib.Extensions.ArrayExtensions;
 
 namespace SF3.Win.OpenGL {
     public class Quad {
