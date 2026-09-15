@@ -57,16 +57,20 @@ namespace ModelConverter {
             var mesh = modelRoot.CreateMesh();
             var primitive = mesh.CreatePrimitive();
 
-            var vertexData = model.Vertices.Select(x => x.ToNumericsVector3()).ToArray();
+            // Build vertices. Flip Y/Z coordinates.
+            var vertexData = model.Vertices.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
             var vertexAccessor = CreateVector3Accessor("vertices", vertexData);
             primitive.SetVertexAccessor("POSITION", vertexAccessor);
 
+            // Build vertex normals, if available. Flip Y/Z coordinates.
             if (model.VertexNormals != null) {
-                var vertexNormalData = model.VertexNormals.Select(x => x.ToNumericsVector3()).ToArray();
+                var vertexNormalData = model.VertexNormals.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
                 var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", vertexNormalData);
                 primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
             }
 
+            // Build faces, breaking down quads into triangles.
+            // TODO: we need to have unique IDs for each quad for reassembly later
             var faceIndexData = model.Faces
                 .SelectMany(x => {
                     var indices = x.VertexIndices;
@@ -81,15 +85,16 @@ namespace ModelConverter {
             var indexAccessor = CreateTriangeIndiciesAccessor("indices", faceIndexData);
             primitive.IndexAccessor = indexAccessor;
 
+            // Make our model visible.
             var scene = modelRoot.UseScene("scene");
             scene.CreateNode("node").WithMesh(mesh);
 
+            // Write GLTF, ignoring errors (we don't care if they're broken).
             var settings = new WriteSettings {
                 JsonIndented = true,
                 JsonOptions = new JsonWriterOptions() { NewLine = "\n" },
                 Validation = SharpGLTF.Validation.ValidationMode.Skip,
             };
-
             using (var stream = new MemoryStream()) {
                 modelRoot.WriteGLB(stream, settings);
                 return stream.ToArray();
@@ -99,15 +104,19 @@ namespace ModelConverter {
         public ISGL_Model GLB_ToModel(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
             var modelRoot = ModelRoot.ParseGLB(new ArraySegment<byte>(glbFile));
 
+            // Fetch vertices.
             var vertexAccessor = modelRoot.LogicalMeshes[0].Primitives[0].GetVertexAccessor("POSITION");
             var vertices = new Vector3[vertexAccessor.Count];
             vertexAccessor.AsVector3Array().CopyTo(vertices, 0);
 
+            // Fetch vertex normals, if available.
             var vertexNormalAccessor = modelRoot.LogicalMeshes[0].Primitives[0].GetVertexAccessor("NORMAL");
             var vertexNormals = (vertexNormalAccessor == null) ? null : new Vector3[vertexNormalAccessor.Count];
             if (vertexNormalAccessor != null)
                 vertexNormalAccessor.AsVector3Array().CopyTo(vertexNormals, 0);
 
+            // Fetch indicies, converting triangles back into quads.
+            // TODO: we need to reassemble these in a much better fashion!
             var indexAccessor = modelRoot.LogicalMeshes[0].Primitives[0].IndexAccessor;
             var indices = modelRoot.LogicalMeshes[0].Primitives[0].GetTriangleIndices().ToArray();
 
@@ -123,10 +132,11 @@ namespace ModelConverter {
                 idx += 2;
             }
 
+            // Build our model.
             return new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
-                vertices.Select(x => x.ToVECTOR()).ToArray(),
+                vertices.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray(),
                 quadIndices.Select(x => new SGL_ModelFace(x, new VECTOR(0, -1, 0), new ATTR())).ToArray(),
-                vertexNormals.Select(x => x.ToVECTOR()).ToArray()
+                vertexNormals.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray()
             );
         }
     }

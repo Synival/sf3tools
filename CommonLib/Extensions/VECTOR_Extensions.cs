@@ -154,5 +154,8 @@ namespace CommonLib.Extensions {
 
         public static Vector4 ToNumericsVector4(this VECTOR vec)
             => new Vector4(vec.X.Float, vec.Y.Float, vec.Z.Float, 1);
+
+        public static VECTOR ToSwappedYZ(this VECTOR vec)
+            => new VECTOR(vec.X, -vec.Y, -vec.Z);
     }
 }

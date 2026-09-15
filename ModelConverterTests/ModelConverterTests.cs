@@ -39,7 +39,7 @@ namespace ModelConverter.Tests.Utils {
         ];
 
         [TestMethod]
-        public void CompressThenDecompress_WithCube_ProducesOriginal() {
+        public void ExportThenImport_WithCube_ProducesOriginal() {
             var originalModel = new SGL_Model(0, 0, 0, c_cubeVertices, c_cubePolys, c_cubeVertexNormals);
 
             var converter = new ModelConverter();

@@ -33,5 +33,10 @@ namespace SF3.Win.Extensions {
         public static VECTOR ToVECTOR(this Vector3 vec)
             => new(vec.X, vec.Y, vec.Z);
 
+        public static Vector3 ToSwappedYZ(this Vector3 vec)
+            => new Vector3(vec.X, -vec.Y, -vec.Z);
+
+        public static Vector4 ToSwappedYZ(this Vector4 vec)
+            => new Vector4(vec.X, -vec.Y, -vec.Z, vec.W);
     }
 }
