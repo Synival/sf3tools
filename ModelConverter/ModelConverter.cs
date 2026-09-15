@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -11,46 +12,60 @@ using SharpGLTF.Schema2;
 
 namespace ModelConverter {
     public class ModelConverter {
+        private struct ConvertedVertex {
+            public ConvertedVertex(int index, int originalIndex, Vector3 position, Vector3? normal) {
+                Index    = index;
+                OriginalIndex = originalIndex;
+                Position = position;
+                Normal   = normal;
+            }
+
+            public readonly int Index;
+            public readonly int OriginalIndex;
+            public readonly Vector3 Position;
+            public readonly Vector3? Normal;
+        }
+
+        private struct Quad {
+            public Quad(int index, ConvertedVertex[] vertices) {
+                Index    = index;
+                Vertices = vertices;
+            }
+
+            public readonly int Index;
+            public readonly ConvertedVertex[] Vertices;
+        }
+
         public byte[] ModelToGLB(ISGL_Model[] models) {
             var modelRoot = ModelRoot.CreateModel();
+
+            Accessor CreateUShortAccessor(string name, ushort[] data) {
+                var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(ushort));
+                MemoryMarshal.Cast<ushort, byte>(data.AsSpan()).CopyTo(bufferView.Content.AsSpan());
+                var accessor = modelRoot.CreateAccessor(name);
+                var attrFormat = new AttributeFormat(DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT, nrm: false);
+                accessor.SetData(bufferView, 0, data.Length, attrFormat);
+                accessor.UpdateBounds();
+                return accessor;
+            }
 
             Accessor CreateVector3Accessor(string name, Vector3[] data) {
                 var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(float) * 3);
                 MemoryMarshal.Cast<Vector3, byte>(data.AsSpan()).CopyTo(bufferView.Content.AsSpan());
-
                 var accessor = modelRoot.CreateAccessor(name);
-                accessor.SetData(
-                    bufferView,
-                    0,
-                    data.Length,
-                    new AttributeFormat(
-                        DimensionType.VEC3,
-                        EncodingType.FLOAT,
-                        nrm: false
-                    )
-                );
+                var attrFormat = new AttributeFormat(DimensionType.VEC3, EncodingType.FLOAT, nrm: false);
+                accessor.SetData(bufferView, 0, data.Length, attrFormat);                    
                 accessor.UpdateBounds();
-
                 return accessor;
             }
 
             Accessor CreateTriangeIndiciesAccessor(string name, ushort[,] data) {
                 var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(ushort));
                 MemoryMarshal.Cast<ushort, byte>(data.To1DArray().AsSpan()).CopyTo(bufferView.Content.AsSpan());
-
                 var accessor = modelRoot.CreateAccessor(name);
-                accessor.SetData(
-                    bufferView,
-                    0,
-                    data.Length,
-                    new AttributeFormat(
-                        DimensionType.SCALAR,
-                        EncodingType.UNSIGNED_SHORT,
-                        nrm: false
-                    )
-                );
+                var attrFormat = new AttributeFormat(DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT, nrm: false);
+                accessor.SetData(bufferView, 0, data.Length, attrFormat);
                 accessor.UpdateBounds();
-
                 return accessor;
             }
 
@@ -61,26 +76,49 @@ namespace ModelConverter {
                 var mesh = modelRoot.CreateMesh();
                 var primitive = mesh.CreatePrimitive();
 
-                // Build vertices. Flip Y/Z coordinates.
-                var vertexData = model.Vertices.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
+                // Build quads, each with its own vertices. We're not going to have *ANY* shared vertices because we
+                // *must* store unique ATTR data per-polygon. (We can at least share them between triangles)
+                // Swap Y/Z coordinates to match the standard coordinate system.
+                var quadList = new List<Quad>();
+                int quadIdx = 0;
+                int vertexIdx = 0;
+                foreach (var face in model.Faces) {
+                    var vertices = (model.VertexNormals != null)
+                        ? face.VertexIndices.Select((x, i) => new ConvertedVertex(vertexIdx + i, x, model.Vertices[x].ToNumericsVector3().ToSwappedYZ(), model.VertexNormals[x].ToNumericsVector3().ToSwappedYZ())).ToArray()
+                        : face.VertexIndices.Select((x, i) => new ConvertedVertex(vertexIdx + i, x, model.Vertices[x].ToNumericsVector3().ToSwappedYZ(), null)).ToArray();
+                    vertexIdx += 4;
+                    quadList.Add(new Quad(quadIdx++, vertices));
+                }
+
+                // Build vertices.
+                var vertexData = quadList.SelectMany(x => x.Vertices.Select(y => y.Position)).ToArray();
                 var vertexAccessor = CreateVector3Accessor("vertices", vertexData);
                 primitive.SetVertexAccessor("POSITION", vertexAccessor);
 
-                // Build vertex normals, if available. Flip Y/Z coordinates.
+                // Build vertex normals, if available.
                 if (model.VertexNormals != null) {
-                    var vertexNormalData = model.VertexNormals.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
+                    var vertexNormalData = quadList.SelectMany(x => x.Vertices.Select(y => y.Normal.Value)).ToArray();
                     var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", vertexNormalData);
                     primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
                 }
 
+                // Attach a buffer that associates each vertex with a particular quad.
+                var vertexQuadData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) x.Index)).ToArray();
+                var vertexQuadAccessor = CreateUShortAccessor("quadIndices", vertexQuadData);
+                primitive.SetVertexAccessor("_QUAD_INDEX", vertexQuadAccessor);
+
+                // Attach a buffer that associates each vertex with a particular quad.
+                var vertexIndexData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) y.OriginalIndex)).ToArray();
+                var vertexIndexAccessor = CreateUShortAccessor("originalIndices", vertexIndexData);
+                primitive.SetVertexAccessor("_ORIGINAL_INDEX", vertexIndexAccessor);
+
                 // Build faces, breaking down quads into triangles.
-                // TODO: we need to have unique IDs for each quad for reassembly later
-                var faceIndexData = model.Faces
+                var faceIndexData = quadList
                     .SelectMany(x => {
-                        var indices = x.VertexIndices;
+                        var firstIndex = x.Vertices[0].Index;
                         return new ushort[] {
-                            (ushort) indices[0], (ushort) indices[1], (ushort) indices[2],
-                            (ushort) indices[2], (ushort) indices[3], (ushort) indices[0],
+                            (ushort) (firstIndex + 0), (ushort) (firstIndex + 1), (ushort) (firstIndex + 2),
+                            (ushort) (firstIndex + 2), (ushort) (firstIndex + 3), (ushort) (firstIndex + 0),
                         };
                     })
                     .ToArray()
@@ -106,6 +144,9 @@ namespace ModelConverter {
         }
 
         public ISGL_Model GLB_ToModel(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
+            // TODO: merge duplicate vertices based on extra data provided
+            // TODO: we need to reassemble quads in a much better fashion!
+
             var modelRoot = ModelRoot.ParseGLB(new ArraySegment<byte>(glbFile));
 
             // Fetch vertices.
@@ -120,7 +161,6 @@ namespace ModelConverter {
                 vertexNormalAccessor.AsVector3Array().CopyTo(vertexNormals, 0);
 
             // Fetch indicies, converting triangles back into quads.
-            // TODO: we need to reassemble these in a much better fashion!
             var indexAccessor = modelRoot.LogicalMeshes[0].Primitives[0].IndexAccessor;
             var indices = modelRoot.LogicalMeshes[0].Primitives[0].GetTriangleIndices().ToArray();
 
