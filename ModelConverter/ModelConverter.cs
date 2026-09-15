@@ -13,17 +13,19 @@ using SharpGLTF.Schema2;
 namespace ModelConverter {
     public class ModelConverter {
         private struct ConvertedVertex {
-            public ConvertedVertex(int index, int originalIndex, Vector3 position, Vector3? normal) {
-                Index    = index;
+            public ConvertedVertex(int index, int originalIndex, Vector3 position, Vector3? normal, Vector2? texCoord0) {
+                Index         = index;
                 OriginalIndex = originalIndex;
-                Position = position;
-                Normal   = normal;
+                Position      = position;
+                Normal        = normal;
+                TexCoord0     = texCoord0;
             }
 
             public readonly int Index;
             public readonly int OriginalIndex;
             public readonly Vector3 Position;
             public readonly Vector3? Normal;
+            public readonly Vector2? TexCoord0;
         }
 
         private struct Quad {
@@ -37,30 +39,36 @@ namespace ModelConverter {
         }
 
         public byte[] ModelToGLB(ISGL_Model[] models) {
+            // TODO: actual UV coordinates!
+
             var modelRoot = ModelRoot.CreateModel();
 
-            Accessor CreateUShortAccessor(string name, ushort[] data) {
-                var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(ushort));
-                MemoryMarshal.Cast<ushort, byte>(data.AsSpan()).CopyTo(bufferView.Content.AsSpan());
+            Accessor CreateUShortAccessor(string name, BufferView bufferView, int offset, int count) {
                 var accessor = modelRoot.CreateAccessor(name);
                 var attrFormat = new AttributeFormat(DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT, nrm: false);
-                accessor.SetData(bufferView, 0, data.Length, attrFormat);
+                accessor.SetData(bufferView, offset, count, attrFormat);
                 accessor.UpdateBounds();
                 return accessor;
             }
 
-            Accessor CreateVector3Accessor(string name, Vector3[] data) {
-                var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(float) * 3);
-                MemoryMarshal.Cast<Vector3, byte>(data.AsSpan()).CopyTo(bufferView.Content.AsSpan());
+            Accessor CreateVector2Accessor(string name, BufferView bufferView, int offset, int count) {
+                var accessor = modelRoot.CreateAccessor(name);
+                var attrFormat = new AttributeFormat(DimensionType.VEC2, EncodingType.FLOAT, nrm: false);
+                accessor.SetData(bufferView, offset, count, attrFormat);                    
+                accessor.UpdateBounds();
+                return accessor;
+            }
+
+            Accessor CreateVector3Accessor(string name, BufferView bufferView, int offset, int count) {
                 var accessor = modelRoot.CreateAccessor(name);
                 var attrFormat = new AttributeFormat(DimensionType.VEC3, EncodingType.FLOAT, nrm: false);
-                accessor.SetData(bufferView, 0, data.Length, attrFormat);                    
+                accessor.SetData(bufferView, offset, count, attrFormat);                    
                 accessor.UpdateBounds();
                 return accessor;
             }
 
             Accessor CreateTriangeIndiciesAccessor(string name, ushort[,] data) {
-                var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(ushort));
+                var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(ushort), 0, BufferMode.ELEMENT_ARRAY_BUFFER);
                 MemoryMarshal.Cast<ushort, byte>(data.To1DArray().AsSpan()).CopyTo(bufferView.Content.AsSpan());
                 var accessor = modelRoot.CreateAccessor(name);
                 var attrFormat = new AttributeFormat(DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT, nrm: false);
@@ -82,35 +90,85 @@ namespace ModelConverter {
                 var quadList = new List<Quad>();
                 int quadIdx = 0;
                 int vertexIdx = 0;
+
+                Vector3? GetVertexNormal(int idx) => (model.VertexNormals != null) ? model.VertexNormals[idx].ToNumericsVector3().ToSwappedYZ() : (Vector3?) null;
+                Vector2 GetTexCoord0(int idx) => new Vector2(
+                    ((idx + 1) / 2) % 2,
+                    ((idx + 0) / 2) % 2
+                );
+
                 foreach (var face in model.Faces) {
-                    var vertices = (model.VertexNormals != null)
-                        ? face.VertexIndices.Select((x, i) => new ConvertedVertex(vertexIdx + i, x, model.Vertices[x].ToNumericsVector3().ToSwappedYZ(), model.VertexNormals[x].ToNumericsVector3().ToSwappedYZ())).ToArray()
-                        : face.VertexIndices.Select((x, i) => new ConvertedVertex(vertexIdx + i, x, model.Vertices[x].ToNumericsVector3().ToSwappedYZ(), null)).ToArray();
+                    var vertices = face.VertexIndices
+                        .Select((x, i) => new ConvertedVertex(
+                            vertexIdx + i,
+                            x,
+                            model.Vertices[x].ToNumericsVector3().ToSwappedYZ(),
+                            GetVertexNormal(x),
+                            GetTexCoord0(i)
+                        ))
+                        .ToArray();
+
                     vertexIdx += 4;
                     quadList.Add(new Quad(quadIdx++, vertices));
                 }
 
-                // Build vertices.
+                // Create a big buffer for the entire model.
+                var vertexCount = quadList.Count * 4;
+                var stride = (12 /*pos*/ + 12 /*normal*/ + 2/*quadIdx*/ + 2/*padding*/ + 2/*normalIdx*/ + 2/*padding*/ + 8/*texcoord_0*/);
+                var bufferViewData = new byte[vertexCount * stride];
+                var bufferView = modelRoot.UseBufferView(bufferViewData, 0, byteStride: stride, target: BufferMode.ARRAY_BUFFER);
+
+                // Vertex attribute for position.
                 var vertexData = quadList.SelectMany(x => x.Vertices.Select(y => y.Position)).ToArray();
-                var vertexAccessor = CreateVector3Accessor("vertices", vertexData);
+                for (int i = 0; i < vertexCount; i++) {
+                    var dataFloats = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride, 12));
+                    dataFloats[0] = vertexData[i].X;
+                    dataFloats[1] = vertexData[i].Y;
+                    dataFloats[2] = vertexData[i].Z;
+                }
+                var vertexAccessor = CreateVector3Accessor("vertices", bufferView, 0, vertexCount);
                 primitive.SetVertexAccessor("POSITION", vertexAccessor);
 
-                // Build vertex normals, if available.
+                // Vertex attribute for normals, if available.
                 if (model.VertexNormals != null) {
                     var vertexNormalData = quadList.SelectMany(x => x.Vertices.Select(y => y.Normal.Value)).ToArray();
-                    var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", vertexNormalData);
+                    for (int i = 0; i < vertexCount; i++) {
+                        var dataFloats = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 12, 12));
+                        dataFloats[0] = vertexNormalData[i].X;
+                        dataFloats[1] = vertexNormalData[i].Y;
+                        dataFloats[2] = vertexNormalData[i].Z;
+                    }
+                    var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", bufferView, 12, vertexCount);
                     primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
                 }
 
-                // Attach a buffer that associates each vertex with a particular quad.
+                // Vertex attribute that associates each vertex with a particular quad.
                 var vertexQuadData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) x.Index)).ToArray();
-                var vertexQuadAccessor = CreateUShortAccessor("quadIndices", vertexQuadData);
+                for (int i = 0; i < vertexCount; i++) {
+                    var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 24, 2));
+                    dataUShorts[0] = vertexQuadData[i];
+                }
+                var vertexQuadAccessor = CreateUShortAccessor("quadIndices", bufferView, 24, vertexCount);
                 primitive.SetVertexAccessor("_QUAD_INDEX", vertexQuadAccessor);
 
-                // Attach a buffer that associates each vertex with a particular quad.
+                // Vertex attribute that associates each vertex with a particular quad.
                 var vertexIndexData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) y.OriginalIndex)).ToArray();
-                var vertexIndexAccessor = CreateUShortAccessor("originalIndices", vertexIndexData);
+                for (int i = 0; i < vertexCount; i++) {
+                    var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 28, 2));
+                    dataUShorts[0] = vertexIndexData[i];
+                }
+                var vertexIndexAccessor = CreateUShortAccessor("originalIndices", bufferView, 28, vertexCount);
                 primitive.SetVertexAccessor("_ORIGINAL_INDEX", vertexIndexAccessor);
+
+                // Vertex attribute for texture coordinates.
+                var texCoord0Data = quadList.SelectMany(x => x.Vertices.Select(y => y.TexCoord0)).ToArray();
+                for (int i = 0; i < vertexCount; i++) {
+                    var dataFloats = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 32, 8));
+                    dataFloats[0] = texCoord0Data[i].Value.X;
+                    dataFloats[1] = texCoord0Data[i].Value.Y;
+                }
+                var texCoord0Accessor = CreateVector2Accessor("texCoords0", bufferView, 32, vertexCount);
+                primitive.SetVertexAccessor("TEXCOORD_0", texCoord0Accessor);
 
                 // Build faces, breaking down quads into triangles.
                 var faceIndexData = quadList
