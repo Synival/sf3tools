@@ -49,10 +49,9 @@ namespace X8PC_Analyzer {
             foreach (var pc in x8pcFile.PolyCharTable) {
                 var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
                 Directory.CreateDirectory(directory);
-                foreach (var xpdata in pc.XPDataTables.SelectMany(x => x)) {
-                    var data = converter.ModelToGLB(xpdata);
-                    File.WriteAllBytes(directory + $"{xpdata.ID:D3}.glb", data);
-                }
+                var xpdatas = pc.XPDataTables.SelectMany(x => x).ToArray();
+                var data = converter.ModelToGLB(xpdatas);
+                    File.WriteAllBytes(directory + $"{pc.ID}.glb", data);
             }
             return [];
         }

@@ -11,7 +11,7 @@ using SharpGLTF.Schema2;
 
 namespace ModelConverter {
     public class ModelConverter {
-        public byte[] ModelToGLB(ISGL_Model model) {
+        public byte[] ModelToGLB(ISGL_Model[] models) {
             var modelRoot = ModelRoot.CreateModel();
 
             Accessor CreateVector3Accessor(string name, Vector3[] data) {
@@ -54,40 +54,44 @@ namespace ModelConverter {
                 return accessor;
             }
 
-            var mesh = modelRoot.CreateMesh();
-            var primitive = mesh.CreatePrimitive();
-
-            // Build vertices. Flip Y/Z coordinates.
-            var vertexData = model.Vertices.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
-            var vertexAccessor = CreateVector3Accessor("vertices", vertexData);
-            primitive.SetVertexAccessor("POSITION", vertexAccessor);
-
-            // Build vertex normals, if available. Flip Y/Z coordinates.
-            if (model.VertexNormals != null) {
-                var vertexNormalData = model.VertexNormals.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
-                var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", vertexNormalData);
-                primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
-            }
-
-            // Build faces, breaking down quads into triangles.
-            // TODO: we need to have unique IDs for each quad for reassembly later
-            var faceIndexData = model.Faces
-                .SelectMany(x => {
-                    var indices = x.VertexIndices;
-                    return new ushort[] {
-                        (ushort) indices[0], (ushort) indices[1], (ushort) indices[2],
-                        (ushort) indices[2], (ushort) indices[3], (ushort) indices[0],
-                    };
-                })
-                .ToArray()
-                .To2DArray(model.Faces.Count * 2, 3);
-
-            var indexAccessor = CreateTriangeIndiciesAccessor("indices", faceIndexData);
-            primitive.IndexAccessor = indexAccessor;
-
-            // Make our model visible.
+            // Default scene.
             var scene = modelRoot.UseScene("scene");
-            scene.CreateNode("node").WithMesh(mesh);
+
+            foreach (var model in models) {
+                var mesh = modelRoot.CreateMesh();
+                var primitive = mesh.CreatePrimitive();
+
+                // Build vertices. Flip Y/Z coordinates.
+                var vertexData = model.Vertices.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
+                var vertexAccessor = CreateVector3Accessor("vertices", vertexData);
+                primitive.SetVertexAccessor("POSITION", vertexAccessor);
+
+                // Build vertex normals, if available. Flip Y/Z coordinates.
+                if (model.VertexNormals != null) {
+                    var vertexNormalData = model.VertexNormals.Select(x => x.ToNumericsVector3().ToSwappedYZ()).ToArray();
+                    var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", vertexNormalData);
+                    primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
+                }
+
+                // Build faces, breaking down quads into triangles.
+                // TODO: we need to have unique IDs for each quad for reassembly later
+                var faceIndexData = model.Faces
+                    .SelectMany(x => {
+                        var indices = x.VertexIndices;
+                        return new ushort[] {
+                            (ushort) indices[0], (ushort) indices[1], (ushort) indices[2],
+                            (ushort) indices[2], (ushort) indices[3], (ushort) indices[0],
+                        };
+                    })
+                    .ToArray()
+                    .To2DArray(model.Faces.Count * 2, 3);
+
+                var indexAccessor = CreateTriangeIndiciesAccessor("indices", faceIndexData);
+                primitive.IndexAccessor = indexAccessor;
+
+                // Make our model visible.
+                scene.CreateNode("node").WithMesh(mesh);
+            }
 
             // Write GLTF, ignoring errors (we don't care if they're broken).
             var settings = new WriteSettings {
