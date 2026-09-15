@@ -81,6 +81,9 @@ namespace ModelConverter {
             var indexAccessor = CreateTriangeIndiciesAccessor("indices", faceIndexData);
             primitive.IndexAccessor = indexAccessor;
 
+            var scene = modelRoot.UseScene("scene");
+            scene.CreateNode("node").WithMesh(mesh);
+
             var settings = new WriteSettings {
                 JsonIndented = true,
                 JsonOptions = new JsonWriterOptions() { NewLine = "\n" }
