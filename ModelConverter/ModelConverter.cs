@@ -86,7 +86,8 @@ namespace ModelConverter {
 
             var settings = new WriteSettings {
                 JsonIndented = true,
-                JsonOptions = new JsonWriterOptions() { NewLine = "\n" }
+                JsonOptions = new JsonWriterOptions() { NewLine = "\n" },
+                Validation = SharpGLTF.Validation.ValidationMode.Skip,
             };
 
             using (var stream = new MemoryStream()) {
