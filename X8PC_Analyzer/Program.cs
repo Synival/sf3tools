@@ -23,7 +23,7 @@ namespace X8PC_Analyzer {
         /// <param name="x1File"></param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X8PC_Match_Func(string filename, IX8PC_File x8pcFile) {
-            return MatchFuncs.HasUnassociatedXPData(x8pcFile);
+            return MatchFuncs.WriteGLBs(x8pcFile, filename);
         }
 
         private static int s_logIndex = 0;
@@ -161,26 +161,6 @@ namespace X8PC_Analyzer {
             Console.WriteLine($"NoMatch: {nomatchSet.Count}/{totalCount}");
             foreach (var str in nomatchSet)
                 Console.WriteLine("  " + str);
-        }
-
-        private static string BitString(uint bits) {
-            var str = "";
-            for (var i = 0; i < 32; i++) {
-                if (i % 4 == 0 && i != 0)
-                    str += ",";
-                str += (bits & (0x8000_0000 >> i)) != 0 ? "1" : "0";
-            }
-            return str;
-        }
-
-        private static string BitString(ushort bits) {
-            var str = "";
-            for (var i = 0; i < 16; i++) {
-                if (i % 4 == 0 && i != 0)
-                    str += ",";
-                str += (bits & (0x8000 >> i)) != 0 ? "1" : "0";
-            }
-            return str;
         }
 
         private static string GetFileString(ScenarioType inputScenario, string filename, IX8PC_File x8pcFile) {

@@ -43,5 +43,18 @@ namespace X8PC_Analyzer {
 
             return strings.Count > 0 ? strings.ToArray() : null;
         }
+
+        public static string[]? WriteGLBs(IX8PC_File x8pcFile, string filename) {
+            var converter = new ModelConverter.ModelConverter();
+            foreach (var pc in x8pcFile.PolyCharTable) {
+                var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
+                Directory.CreateDirectory(directory);
+                foreach (var xpdata in pc.XPDataTables.SelectMany(x => x)) {
+                    var data = converter.ModelToGLB(xpdata);
+                    File.WriteAllBytes(directory + $"{xpdata.ID:D3}.glb", data);
+                }
+            }
+            return [];
+        }
     }
 }

@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModelConverter\ModelConverter.csproj" />
     <ProjectReference Include="..\SF3Lib\SF3Lib.csproj" />
   </ItemGroup>
 
