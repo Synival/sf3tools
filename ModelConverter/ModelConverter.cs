@@ -201,45 +201,57 @@ namespace ModelConverter {
             }
         }
 
-        public ISGL_Model GLB_ToModel(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
+        public SGL_Model[] GLB_ToModels(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
             // TODO: merge duplicate vertices based on extra data provided
             // TODO: we need to reassemble quads in a much better fashion!
+            // TODO: in the future, there could be multiple primitives.
+
+            var sglModels = new List<SGL_Model>();
 
             var modelRoot = ModelRoot.ParseGLB(new ArraySegment<byte>(glbFile));
 
-            // Fetch vertices.
-            var vertexAccessor = modelRoot.LogicalMeshes[0].Primitives[0].GetVertexAccessor("POSITION");
-            var vertices = new Vector3[vertexAccessor.Count];
-            vertexAccessor.AsVector3Array().CopyTo(vertices, 0);
+            foreach (var mesh in modelRoot.LogicalMeshes) {
+                // We always only have 1 primitive.
+                var primitive = mesh.Primitives[0];
 
-            // Fetch vertex normals, if available.
-            var vertexNormalAccessor = modelRoot.LogicalMeshes[0].Primitives[0].GetVertexAccessor("NORMAL");
-            var vertexNormals = (vertexNormalAccessor == null) ? null : new Vector3[vertexNormalAccessor.Count];
-            if (vertexNormalAccessor != null)
-                vertexNormalAccessor.AsVector3Array().CopyTo(vertexNormals, 0);
+                // Fetch vertices.
+                var vertexAccessor = primitive.GetVertexAccessor("POSITION");
+                var vertices = new Vector3[vertexAccessor.Count];
+                vertexAccessor.AsVector3Array().CopyTo(vertices, 0);
 
-            // Fetch indicies, converting triangles back into quads.
-            var indexAccessor = modelRoot.LogicalMeshes[0].Primitives[0].IndexAccessor;
-            var indices = modelRoot.LogicalMeshes[0].Primitives[0].GetTriangleIndices().ToArray();
+                // Fetch vertex normals, if available.
+                var vertexNormalAccessor = primitive.GetVertexAccessor("NORMAL");
+                var vertexNormals = (vertexNormalAccessor == null) ? null : new Vector3[vertexNormalAccessor.Count];
+                if (vertexNormalAccessor != null)
+                    vertexNormalAccessor.AsVector3Array().CopyTo(vertexNormals, 0);
 
-            var quadIndices = new int[indices.Length / 2][];
-            int idx = 0;
-            for (int i = 0; i < quadIndices.Length; i++) {
-                quadIndices[i] = new int[] {
-                    indices[idx].A,
-                    indices[idx].B,
-                    indices[idx].C,
-                    indices[idx + 1].B
-                };
-                idx += 2;
+                // Fetch indicies, converting triangles back into quads.
+                var indexAccessor = primitive.IndexAccessor;
+                var indices = primitive.GetTriangleIndices().ToArray();
+
+                var quadIndices = new int[indices.Length / 2][];
+                int idx = 0;
+                for (int i = 0; i < quadIndices.Length; i++) {
+                    quadIndices[i] = new int[] {
+                        indices[idx].A,
+                        indices[idx].B,
+                        indices[idx].C,
+                        indices[idx + 1].B
+                    };
+                    idx += 2;
+                }
+
+                // Build our SGL_Model.
+                var newSglModel = new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
+                    vertices.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray(),
+                    quadIndices.Select(x => new SGL_ModelFace(x, new VECTOR(0, -1, 0), new ATTR())).ToArray(),
+                    vertexNormals.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray()
+                );
+
+                sglModels.Add(newSglModel);
             }
 
-            // Build our model.
-            return new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
-                vertices.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray(),
-                quadIndices.Select(x => new SGL_ModelFace(x, new VECTOR(0, -1, 0), new ATTR())).ToArray(),
-                vertexNormals.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray()
-            );
+            return sglModels.ToArray();
         }
     }
 }

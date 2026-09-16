@@ -44,7 +44,10 @@ namespace ModelConverter.Tests.Utils {
 
             var converter = new ModelConverter();
             var glb = converter.ModelToGLB([originalModel]);
-            var convertedModel = converter.GLB_ToModel(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
+            var convertedModels = converter.GLB_ToModels(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
+
+            Assert.AreEqual(1, convertedModels.Length, "Not equal: convertedModels.Length");
+            var convertedModel = convertedModels[0];
 
             Assert.IsNotNull(convertedModel.Vertices, $"Not null: Vertices");
             Assert.AreEqual(originalModel.Vertices.Count, convertedModel.Vertices.Count, $"Not equal: Vertices.Count");
