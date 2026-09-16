@@ -202,9 +202,8 @@ namespace ModelConverter {
         }
 
         public SGL_Model[] GLB_ToModels(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
-            // TODO: merge duplicate vertices based on extra data provided
-            // TODO: we need to reassemble quads in a much better fashion!
             // TODO: in the future, there could be multiple primitives.
+            // TODO: someone integrate triangle indices back into quad generation.
 
             var sglModels = new List<SGL_Model>();
 
@@ -225,27 +224,46 @@ namespace ModelConverter {
                 if (vertexNormalAccessor != null)
                     vertexNormalAccessor.AsVector3Array().CopyTo(vertexNormals, 0);
 
-                // Fetch indicies, converting triangles back into quads.
+                // Fetch indicies.
+                // TODO: currently unused, but should be part of quad reconstruction.
                 var indexAccessor = primitive.IndexAccessor;
                 var indices = primitive.GetTriangleIndices().ToArray();
 
-                var quadIndices = new int[indices.Length / 2][];
+                // Fetch original vertex IDs for each vertex. This is part of mesh reconstruction.
+                var vertexOrigIndicesAccessor = primitive.GetVertexAccessor("_ORIGINAL_INDEX");
+                var vertexOrigIndices = vertexOrigIndicesAccessor.AsScalarArray();
+                var exportedVertexMap = vertexOrigIndices
+                    .Select((x, i) => (OrigVertexID: (ushort) x, ExportedVertexID: (ushort) i))
+                    .GroupBy(x => x.OrigVertexID)
+                    .OrderBy(x => x.Key)
+                    .ToDictionary(x => x.Key, x => x.Select(y => y.ExportedVertexID).ToArray());
+                var origVertexMap = exportedVertexMap.Select(x => x.Value[0]).ToArray();
+
+                // Fetch the quads that each vertex belong to. This is part of quad reconstruction.
+                var vertexQuadIndicesAccessor = primitive.GetVertexAccessor("_QUAD_INDEX");
+                var vertexQuadIndices = vertexQuadIndicesAccessor.AsScalarArray();
+                var quadVertexMap = vertexQuadIndices
+                    .Select((x, i) => (QuadID: (ushort) x, ExportedVertexID: (ushort) i))
+                    .GroupBy(x => x.QuadID)
+                    .ToDictionary(x => x.Key, x => x.Select(y => y.ExportedVertexID).ToArray());
+
+                var quadIndices = new int[quadVertexMap.Count][];
                 int idx = 0;
-                for (int i = 0; i < quadIndices.Length; i++) {
+                for (ushort i = 0; i < quadIndices.Length; i++) {
                     quadIndices[i] = new int[] {
-                        indices[idx].A,
-                        indices[idx].B,
-                        indices[idx].C,
-                        indices[idx + 1].B
+                        (ushort) vertexOrigIndices[quadVertexMap[i][0]],
+                        (ushort) vertexOrigIndices[quadVertexMap[i][1]],
+                        (ushort) vertexOrigIndices[quadVertexMap[i][2]],
+                        (ushort) vertexOrigIndices[quadVertexMap[i][3]]
                     };
-                    idx += 2;
+                    idx++;
                 }
 
                 // Build our SGL_Model.
                 var newSglModel = new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
-                    vertices.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray(),
+                    exportedVertexMap.Select(x => vertices[x.Value[0]].ToVECTOR().ToSwappedYZ()).ToArray(),
                     quadIndices.Select(x => new SGL_ModelFace(x, new VECTOR(0, -1, 0), new ATTR())).ToArray(),
-                    vertexNormals.Select(x => x.ToVECTOR().ToSwappedYZ()).ToArray()
+                    origVertexMap.Select(i => vertexNormals[i].ToVECTOR().ToSwappedYZ()).ToArray()
                 );
 
                 sglModels.Add(newSglModel);
