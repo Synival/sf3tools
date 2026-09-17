@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -65,48 +66,6 @@ namespace ModelConverter {
 
             var modelRoot = ModelRoot.CreateModel();
 
-            Accessor CreateUShortAccessor(string name, BufferView bufferView, int offset, int count) {
-                var accessor = modelRoot.CreateAccessor(name);
-                var attrFormat = new AttributeFormat(DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT, nrm: false);
-                accessor.SetData(bufferView, offset, count, attrFormat);
-                accessor.UpdateBounds();
-                return accessor;
-            }
-
-            Accessor CreateVector2Accessor(string name, BufferView bufferView, int offset, int count) {
-                var accessor = modelRoot.CreateAccessor(name);
-                var attrFormat = new AttributeFormat(DimensionType.VEC2, EncodingType.FLOAT, nrm: false);
-                accessor.SetData(bufferView, offset, count, attrFormat);                    
-                accessor.UpdateBounds();
-                return accessor;
-            }
-
-            Accessor CreateVector3Accessor(string name, BufferView bufferView, int offset, int count) {
-                var accessor = modelRoot.CreateAccessor(name);
-                var attrFormat = new AttributeFormat(DimensionType.VEC3, EncodingType.FLOAT, nrm: false);
-                accessor.SetData(bufferView, offset, count, attrFormat);                    
-                accessor.UpdateBounds();
-                return accessor;
-            }
-
-            Accessor CreateVector4Accessor(string name, BufferView bufferView, int offset, int count) {
-                var accessor = modelRoot.CreateAccessor(name);
-                var attrFormat = new AttributeFormat(DimensionType.VEC4, EncodingType.FLOAT, nrm: false);
-                accessor.SetData(bufferView, offset, count, attrFormat);                    
-                accessor.UpdateBounds();
-                return accessor;
-            }
-
-            Accessor CreateTriangeIndiciesAccessor(string name, ushort[,] data) {
-                var bufferView = modelRoot.CreateBufferView(data.Length * sizeof(ushort), 0, BufferMode.ELEMENT_ARRAY_BUFFER);
-                MemoryMarshal.Cast<ushort, byte>(data.To1DArray().AsSpan()).CopyTo(bufferView.Content.AsSpan());
-                var accessor = modelRoot.CreateAccessor(name);
-                var attrFormat = new AttributeFormat(DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT, nrm: false);
-                accessor.SetData(bufferView, 0, data.Length, attrFormat);
-                accessor.UpdateBounds();
-                return accessor;
-            }
-
             // Default scene.
             var scene = modelRoot.UseScene("scene");
 
@@ -119,40 +78,43 @@ namespace ModelConverter {
 
                 var facesByAttr = sglModel.Faces
                     .Select((x, i) => (Face: x, Index: i, AttrKey: new AttrKey(x.Attributes)))
-                    .GroupBy(x => x.AttrKey.Key)
+                    .GroupBy(x => x.AttrKey)
                     .ToDictionary(x => x.Key, x => x.ToArray());
 
-                if (facesByAttr.Count > 2)
-                    ;
-
                 foreach (var attrFaces in facesByAttr) {
+                    var attrKey = attrFaces.Key;
                     var faces = attrFaces.Value;
 
                     var primitive = mesh.CreatePrimitive();
 
                     // Build a texture atlas for this model.
-                    var textureIds = faces.Select(x => x.Face.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
-                    var texturesForMcId = texturesByMcId[sglModel.ModelCollectionID];
-                    var textures = textureIds.Where(x => texturesForMcId.ContainsKey(x)).Select(x => texturesForMcId[x]).ToArray();
-                    var textureAtlas = new TextureAtlas(textures, tryRotate: false);
-                    var textureAtlasDimensions = textureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+                    TextureAtlas textureAtlas = null;
+                    Rectangle textureAtlasDimensions;
 
-                    if (textures.Length > 0) {
-                        byte[] textureAtlasBitmapContent;
-                        using (var textureAtlasBitmap = textureAtlas.CreateBitmap(onlyTextures: true, forceEvenWidth: true)) {
-                            using (var bitmapStream = new MemoryStream()) {
-                                textureAtlasBitmap.Save(bitmapStream, ImageFormat.Png);
-                                textureAtlasBitmapContent = bitmapStream.ToArray();
+                    if (attrKey.HasTextures) {
+                        var textureIds = faces.Select(x => x.Face.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
+                        var texturesForMcId = texturesByMcId[sglModel.ModelCollectionID];
+                        var textures = textureIds.Where(x => texturesForMcId.ContainsKey(x)).Select(x => texturesForMcId[x]).ToArray();
+                        textureAtlas = new TextureAtlas(textures, tryRotate: false);
+                        textureAtlasDimensions = textureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+
+                        if (textures.Length > 0) {
+                            byte[] textureAtlasBitmapContent;
+                            using (var textureAtlasBitmap = textureAtlas.CreateBitmap(onlyTextures: true, forceEvenWidth: true)) {
+                                using (var bitmapStream = new MemoryStream()) {
+                                    textureAtlasBitmap.Save(bitmapStream, ImageFormat.Png);
+                                    textureAtlasBitmapContent = bitmapStream.ToArray();
+                                }
                             }
-                        }
 
-                        // Add the texture.
-                        var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
-                        var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
-                        var materialBuilder = new MaterialBuilder("textureAtlas")
-                            .WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
-                        var material = modelRoot.CreateMaterial(materialBuilder);
-                        primitive.Material = material;
+                            // Add the texture.
+                            var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
+                            var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
+                            var materialBuilder = new MaterialBuilder("textureAtlas")
+                                .WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
+                            var material = modelRoot.CreateMaterial(materialBuilder);
+                            primitive.Material = material;
+                        }
                     }
 
                     // Build quads, each with its own vertices. We're not going to have *ANY* shared vertices because we
@@ -168,7 +130,7 @@ namespace ModelConverter {
                         var idxX = ((idx + 1) / 2) % 2;
                         var idxY = ((idx + 0) / 2) % 2;
 
-                        if (attr.UseTexture) {
+                        if (attrKey.HasTextures) {
                             var node = textureAtlas.GetNodeByTextureIDFrame(attr.TextureNo, 0);
                             var nodeRect = node.Rect;
 
@@ -227,7 +189,7 @@ namespace ModelConverter {
                         dataFloats[1] = vertexData[i].Y;
                         dataFloats[2] = vertexData[i].Z;
                     }
-                    var vertexAccessor = CreateVector3Accessor("vertices", bufferView, 0, vertexCount);
+                    var vertexAccessor = modelRoot.CreateVector3Accessor("vertices", bufferView, 0, vertexCount);
                     primitive.SetVertexAccessor("POSITION", vertexAccessor);
 
                     // Vertex attribute for normals, if available.
@@ -239,7 +201,7 @@ namespace ModelConverter {
                             dataFloats[1] = vertexNormalData[i].Y;
                             dataFloats[2] = vertexNormalData[i].Z;
                         }
-                        var vertexNormalAccessor = CreateVector3Accessor("vertexNormals", bufferView, 12, vertexCount);
+                        var vertexNormalAccessor = modelRoot.CreateVector3Accessor("vertexNormals", bufferView, 12, vertexCount);
                         primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
                     }
 
@@ -249,7 +211,7 @@ namespace ModelConverter {
                         var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 24, 2));
                         dataUShorts[0] = vertexQuadData[i];
                     }
-                    var vertexQuadAccessor = CreateUShortAccessor("quadIndices", bufferView, 24, vertexCount);
+                    var vertexQuadAccessor = modelRoot.CreateUShortAccessor("quadIndices", bufferView, 24, vertexCount);
                     primitive.SetVertexAccessor("_QUAD_INDEX", vertexQuadAccessor);
 
                     // Vertex attribute that associates each vertex with a particular quad.
@@ -258,7 +220,7 @@ namespace ModelConverter {
                         var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 28, 2));
                         dataUShorts[0] = vertexIndexData[i];
                     }
-                    var vertexIndexAccessor = CreateUShortAccessor("originalIndices", bufferView, 28, vertexCount);
+                    var vertexIndexAccessor = modelRoot.CreateUShortAccessor("originalIndices", bufferView, 28, vertexCount);
                     primitive.SetVertexAccessor("_ORIGINAL_INDEX", vertexIndexAccessor);
 
                     // Vertex attribute for texture coordinates.
@@ -268,7 +230,7 @@ namespace ModelConverter {
                         dataVec2[0] = texCoord0Data[i].Value.X;
                         dataVec2[1] = texCoord0Data[i].Value.Y;
                     }
-                    var texCoord0Accessor = CreateVector2Accessor("texCoords0", bufferView, 32, vertexCount);
+                    var texCoord0Accessor = modelRoot.CreateVector2Accessor("texCoords0", bufferView, 32, vertexCount);
                     primitive.SetVertexAccessor("TEXCOORD_0", texCoord0Accessor);
 
                     // Vertex attribute for polygon colors.
@@ -280,7 +242,7 @@ namespace ModelConverter {
                         dataVec4[2] = texColor0Data[i].Z;
                         dataVec4[3] = texColor0Data[i].W;
                     }
-                    var texColor0Accessor = CreateVector4Accessor("color0", bufferView, 40, vertexCount);
+                    var texColor0Accessor = modelRoot.CreateVector4Accessor("color0", bufferView, 40, vertexCount);
                     primitive.SetVertexAccessor("COLOR_0", texColor0Accessor);
 
                     // Build faces, breaking down quads into triangles.
@@ -295,7 +257,7 @@ namespace ModelConverter {
                         .ToArray()
                         .To2DArray(faces.Length * 2, 3);
 
-                    var indexAccessor = CreateTriangeIndiciesAccessor("indices", faceIndexData);
+                    var indexAccessor = modelRoot.CreateTriangeIndiciesAccessor("indices", faceIndexData);
                     primitive.IndexAccessor = indexAccessor;
                 }
 
