@@ -68,7 +68,9 @@ namespace ModelConverter {
 
             // Get all textures for applicable ModelCollectionID's.
             var mcIds = sglModels.Select(x => x.ModelCollectionID).Distinct().OrderBy(x => x).ToArray();
-            var texturesByMcId = mcIds.ToDictionary(x => x, x => texMetaCollection.GetAnimatableTexturesByModelCollectionID(x));
+            var texturesByMcId = (texMetaCollection != null)
+                ? mcIds.ToDictionary(x => x, x => texMetaCollection.GetAnimatableTexturesByModelCollectionID(x))
+                : new Dictionary<int, Dictionary<int, IAnimatableTexture>>();
 
             foreach (var sglModel in sglModels) {
                 var mesh = modelRoot.CreateMesh();
@@ -84,7 +86,7 @@ namespace ModelConverter {
 
                     var primitive = mesh.CreatePrimitive();
 
-                    var vertexIdxPrimitiveToMesh = faces.SelectMany(x => x.Face.VertexIndices).Distinct().ToArray();
+                    var vertexIdxPrimitiveToMesh = faces.SelectMany(x => x.Face.VertexIndices).Distinct().OrderBy(x => x).ToArray();
                     var vertexIdxMeshToPrimitive = new int?[sglModel.Vertices.Count];
                     for (int i = 0; i < vertexIdxPrimitiveToMesh.Length; i++)
                         vertexIdxMeshToPrimitive[vertexIdxPrimitiveToMesh[i]] = i;

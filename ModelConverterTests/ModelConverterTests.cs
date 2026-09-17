@@ -1,8 +1,16 @@
-﻿using CommonLib.SGL;
+﻿using CommonLib.Arrays;
+using CommonLib.Imaging;
+using CommonLib.SGL;
+using SF3.ByteData;
+using SF3.Models.Files.X8PC;
+using SF3.NamedValues;
+using SF3.Types;
 
 namespace ModelConverter.Tests.Utils {
     [TestClass]
     public class ModelConverterTests {
+        public static string c_barrelPath = "C:/SF3/Scenario1/X8PC795.BIN";
+
         public static readonly VECTOR[] c_cubeVertices = [
             new VECTOR(-1, -1,  1), // 0: Top-back-left
             new VECTOR( 1, -1,  1), // 1: Top-back-right
@@ -38,12 +46,9 @@ namespace ModelConverter.Tests.Utils {
             new VECTOR(-0.577f,  0.577f, -0.577f),
         ];
 
-        [TestMethod]
-        public void ExportThenImport_WithCube_ProducesOriginal() {
-            var originalModel = new SGL_Model(0, 0, 0, c_cubeVertices, c_cubePolys, c_cubeVertexNormals);
-
+        private void TestModelConversion(ISGL_Model originalModel, ITextureMetaCollection? texMetaCollection) {
             var converter = new ModelConverter();
-            var glb = converter.ModelToGLB([originalModel], null);
+            var glb = converter.ModelToGLB([originalModel], texMetaCollection);
             var convertedModels = converter.GLB_ToModels(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
 
             Assert.AreEqual(1, convertedModels.Length, "Not equal: convertedModels.Length");
@@ -78,6 +83,20 @@ namespace ModelConverter.Tests.Utils {
                 Assert.AreEqual(originalModel.VertexNormals[i].Y.Float, convertedModel.VertexNormals[i].Y.Float, 0.001f, $"Not equal: VertexNormals[{i}].Y");
                 Assert.AreEqual(originalModel.VertexNormals[i].Z.Float, convertedModel.VertexNormals[i].Z.Float, 0.001f, $"Not equal: VertexNormals[{i}].Z");
             }
+        }
+
+        [TestMethod]
+        public void ExportThenImport_WithCube_ProducesOriginal() {
+            var originalModel = new SGL_Model(0, 0, 0, c_cubeVertices, c_cubePolys, c_cubeVertexNormals);
+            TestModelConversion(originalModel, null);
+        }
+
+        [TestMethod]
+        public void ExportThenImport_WithBarrelFromX8PC_ProducesOriginal() {
+            var barrelData = File.ReadAllBytes(c_barrelPath);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var polyChar = x8pcFile.PolyCharTable[0];
+            TestModelConversion(polyChar.GetModel(0, 0), polyChar);
         }
     }
 }
