@@ -61,9 +61,6 @@ namespace ModelConverter {
         }
 
         public byte[] ModelToGLB(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
-            // TODO: Determine unique ATTRs (don't separate by texture, just "UseTexture"). Each of them will be a unique material.
-            // TODO: Don't copy *ALL* vertices for each primitive.
-
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
@@ -86,6 +83,11 @@ namespace ModelConverter {
                     var faces = attrFaces.Value;
 
                     var primitive = mesh.CreatePrimitive();
+
+                    var vertexIdxPrimitiveToMesh = faces.SelectMany(x => x.Face.VertexIndices).Distinct().ToArray();
+                    var vertexIdxMeshToPrimitive = new int?[sglModel.Vertices.Count];
+                    for (int i = 0; i < vertexIdxPrimitiveToMesh.Length; i++)
+                        vertexIdxMeshToPrimitive[vertexIdxPrimitiveToMesh[i]] = i;
 
                     // Build a texture atlas for this model.
                     TextureAtlas textureAtlas = null;
@@ -121,9 +123,9 @@ namespace ModelConverter {
                     // *must* store unique ATTR data per-polygon. (We can at least share them between triangles)
                     // Swap Y/Z coordinates to match the standard coordinate system.
                     var quadList = new List<Quad>();
-                    int vertexIdx = 0;
 
-                    Vector3? GetVertexNormal(int idx) => (sglModel.VertexNormals != null) ? sglModel.VertexNormals[idx].ToNumericsVector3().ToSwappedYZ() : (Vector3?) null;
+                    Vector3? GetVertexNormal(int idx)
+                        => (sglModel.VertexNormals != null) ? sglModel.VertexNormals[idx].ToNumericsVector3().ToSwappedYZ() : (Vector3?) null;
 
                     Vector2 GetTexCoord0(ISGL_ModelFace face, int idx) {
                         var attr = face.Attributes;
@@ -158,21 +160,26 @@ namespace ModelConverter {
                         }
                     }
 
+                    // Build quads for this primitive.
+                    int quadFirstVertIdx = 0;
                     foreach (var face in faces) {
                         var color = GetColor0(face.Face);
-                        var vertices = face.Face.VertexIndices
-                            .Select((x, i) => new ConvertedVertex(
-                                vertexIdx + i,
-                                x,
-                                sglModel.Vertices[x].ToNumericsVector3().ToSwappedYZ(),
-                                GetVertexNormal(x),
-                                GetTexCoord0(face.Face, i),
-                                color
-                            ))
+                        var faceVertices = face.Face.VertexIndices
+                            .Select((modelVertIdx, faceVertIdx) => {
+                                var primVertIdx = vertexIdxMeshToPrimitive[modelVertIdx].Value;
+                                return new ConvertedVertex(
+                                    quadFirstVertIdx + faceVertIdx,
+                                    primVertIdx,
+                                    sglModel.Vertices[modelVertIdx].ToNumericsVector3().ToSwappedYZ(),
+                                    GetVertexNormal(modelVertIdx),
+                                    GetTexCoord0(face.Face, faceVertIdx),
+                                    color
+                                );
+                            })
                             .ToArray();
 
-                        vertexIdx += 4;
-                        quadList.Add(new Quad(face.Index, vertices));
+                        quadFirstVertIdx += 4;
+                        quadList.Add(new Quad(face.Index, faceVertices));
                     }
 
                     // Create a big buffer for the entire model.
