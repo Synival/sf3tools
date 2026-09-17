@@ -43,7 +43,7 @@ namespace ModelConverter.Tests.Utils {
             var originalModel = new SGL_Model(0, 0, 0, c_cubeVertices, c_cubePolys, c_cubeVertexNormals);
 
             var converter = new ModelConverter();
-            var glb = converter.ModelToGLB([originalModel]);
+            var glb = converter.ModelToGLB([originalModel], null);
             var convertedModels = converter.GLB_ToModels(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
 
             Assert.AreEqual(1, convertedModels.Length, "Not equal: convertedModels.Length");

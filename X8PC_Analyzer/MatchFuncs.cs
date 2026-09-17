@@ -1,4 +1,5 @@
 ﻿using SF3.Models.Files.X8PC;
+using SF3.Models.Structs.X8PC;
 using SF3.X8PC;
 
 namespace X8PC_Analyzer {
@@ -46,11 +47,11 @@ namespace X8PC_Analyzer {
 
         public static string[]? WriteGLBs(IX8PC_File x8pcFile, string filename) {
             var converter = new ModelConverter.ModelConverter();
-            foreach (var pc in x8pcFile.PolyCharTable) {
+            foreach (PolyChar pc in x8pcFile.PolyCharTable) {
                 var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
                 Directory.CreateDirectory(directory);
                 var xpdatas = pc.XPDataTables.SelectMany(x => x).ToArray();
-                var data = converter.ModelToGLB(xpdatas);
+                var data = converter.ModelToGLB(xpdatas, pc);
                     File.WriteAllBytes(directory + $"{pc.ID}.glb", data);
             }
             return [];

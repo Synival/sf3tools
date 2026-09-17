@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using CommonLib.Extensions;
+using CommonLib.Imaging;
 using CommonLib.SGL;
+using CommonLib.ThirdParty.TexturePacker;
+using SharpGLTF.Materials;
 using SharpGLTF.Memory;
 using SharpGLTF.Schema2;
 
@@ -38,8 +42,9 @@ namespace ModelConverter {
             public readonly ConvertedVertex[] Vertices;
         }
 
-        public byte[] ModelToGLB(ISGL_Model[] models) {
-            // TODO: actual UV coordinates!
+        public byte[] ModelToGLB(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
+            // TODO: Determine unique ATTRs (don't separate by texture, just "UseTexture"). Each of them will be a unique material.
+            // TODO: Create primitives for each material.
 
             var modelRoot = ModelRoot.CreateModel();
 
@@ -80,9 +85,38 @@ namespace ModelConverter {
             // Default scene.
             var scene = modelRoot.UseScene("scene");
 
-            foreach (var model in models) {
+            // Get all textures for applicable ModelCollectionID's.
+            var mcIds = sglModels.Select(x => x.ModelCollectionID).Distinct().OrderBy(x => x).ToArray();
+            var texturesByMcId = mcIds.ToDictionary(x => x, x => texMetaCollection.GetAnimatableTexturesByModelCollectionID(x));
+
+            foreach (var sglModel in sglModels) {
                 var mesh = modelRoot.CreateMesh();
                 var primitive = mesh.CreatePrimitive();
+
+                // Build a texture atlas for this model.
+                var textureIds = sglModel.Faces.Select(x => x.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
+                var texturesForMcId = texturesByMcId[sglModel.ModelCollectionID];
+                var textures = textureIds.Where(x => texturesForMcId.ContainsKey(x)).Select(x => texturesForMcId[x]).ToArray();
+                var textureAtlas = new TextureAtlas(textures, tryRotate: false);
+                var textureAtlasDimensions = textureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+
+                if (textures.Length > 0) {
+                    byte[] textureAtlasBitmapContent;
+                    using (var textureAtlasBitmap = textureAtlas.CreateBitmap(onlyTextures: true, forceEvenWidth: true)) {
+                        using (var bitmapStream = new MemoryStream()) {
+                            textureAtlasBitmap.Save(bitmapStream, ImageFormat.Png);
+                            textureAtlasBitmapContent = bitmapStream.ToArray();
+                        }
+                    }
+
+                    // Add the texture.
+                    var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
+                    var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
+                    var materialBuilder = new MaterialBuilder("textureAtlas")
+                        .WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
+                    var material = modelRoot.CreateMaterial(materialBuilder);
+                    primitive.Material = material;
+                }
 
                 // Build quads, each with its own vertices. We're not going to have *ANY* shared vertices because we
                 // *must* store unique ATTR data per-polygon. (We can at least share them between triangles)
@@ -91,20 +125,38 @@ namespace ModelConverter {
                 int quadIdx = 0;
                 int vertexIdx = 0;
 
-                Vector3? GetVertexNormal(int idx) => (model.VertexNormals != null) ? model.VertexNormals[idx].ToNumericsVector3().ToSwappedYZ() : (Vector3?) null;
-                Vector2 GetTexCoord0(int idx) => new Vector2(
-                    ((idx + 1) / 2) % 2,
-                    ((idx + 0) / 2) % 2
-                );
+                Vector3? GetVertexNormal(int idx) => (sglModel.VertexNormals != null) ? sglModel.VertexNormals[idx].ToNumericsVector3().ToSwappedYZ() : (Vector3?) null;
+                Vector2 GetTexCoord0(ISGL_ModelFace face, int idx) {
+                    var attr = face.Attributes;
+                    var idxX = ((idx + 1) / 2) % 2;
+                    var idxY = ((idx + 0) / 2) % 2;
 
-                foreach (var face in model.Faces) {
+                    if (attr.UseTexture) {
+                        var node = textureAtlas.GetNodeByTextureIDFrame(attr.TextureNo, 0);
+                        var nodeRect = node.Rect;
+
+                        if (attr.HFlip)
+                            idxX = 1 - idxX;
+                        if (attr.VFlip)
+                            idxY = 1 - idxY;
+
+                        return new Vector2(
+                            (nodeRect.Left + idxX * nodeRect.Width)  / (float) textureAtlasDimensions.Width,
+                            (nodeRect.Top  + idxY * nodeRect.Height) / (float) textureAtlasDimensions.Height
+                        );
+                    }
+                    else
+                        return new Vector2(idxX, idxY);
+                }
+
+                foreach (var face in sglModel.Faces) {
                     var vertices = face.VertexIndices
                         .Select((x, i) => new ConvertedVertex(
                             vertexIdx + i,
                             x,
-                            model.Vertices[x].ToNumericsVector3().ToSwappedYZ(),
+                            sglModel.Vertices[x].ToNumericsVector3().ToSwappedYZ(),
                             GetVertexNormal(x),
-                            GetTexCoord0(i)
+                            GetTexCoord0(face, i)
                         ))
                         .ToArray();
 
@@ -130,7 +182,7 @@ namespace ModelConverter {
                 primitive.SetVertexAccessor("POSITION", vertexAccessor);
 
                 // Vertex attribute for normals, if available.
-                if (model.VertexNormals != null) {
+                if (sglModel.VertexNormals != null) {
                     var vertexNormalData = quadList.SelectMany(x => x.Vertices.Select(y => y.Normal.Value)).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
                         var dataFloats = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 12, 12));
@@ -180,7 +232,7 @@ namespace ModelConverter {
                         };
                     })
                     .ToArray()
-                    .To2DArray(model.Faces.Count * 2, 3);
+                    .To2DArray(sglModel.Faces.Count * 2, 3);
 
                 var indexAccessor = CreateTriangeIndiciesAccessor("indices", faceIndexData);
                 primitive.IndexAccessor = indexAccessor;
