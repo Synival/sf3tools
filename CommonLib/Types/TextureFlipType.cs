@@ -1,5 +1,5 @@
 ﻿namespace CommonLib.Types {
-    public enum CommonTextureFlipType {
+    public enum TextureFlipType {
         NoFlip,
         Horizontal,
         Vertical,

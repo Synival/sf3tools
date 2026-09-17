@@ -88,12 +88,12 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             bool? forceLighting,
             bool forceBlackIfTransparentNonIndexed
         ) {
-            CommonTextureFlipType ConvertFlipping(int flipVal) {
+            TextureFlipType ConvertFlipping(int flipVal) {
                 switch (flipVal) {
-                    case 0x00: return CommonTextureFlipType.Horizontal;
-                    case 0x10: return CommonTextureFlipType.NoFlip;
-                    case 0x20: return CommonTextureFlipType.Both;
-                    case 0x30: return CommonTextureFlipType.Vertical;
+                    case 0x00: return TextureFlipType.Horizontal;
+                    case 0x10: return TextureFlipType.NoFlip;
+                    case 0x20: return TextureFlipType.Both;
+                    case 0x30: return TextureFlipType.Vertical;
                     // Shouldn't ever happen.
                     default:   throw new InvalidOperationException();
                 }
@@ -121,7 +121,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 var useTexture = attr.UseTexture;
                 IAnimatedTexture anim = null;
                 var isSemiTransparent = false;
-                var flip = CommonTextureFlipType.NoFlip;
+                var flip = TextureFlipType.NoFlip;
                 MockAnimatedTexture mockAnim = null;
 
                 if (!isHideMesh) {
@@ -214,7 +214,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 var meshVboData = new float[,] {{mesh}, {mesh}, {mesh}, {mesh}};
 
                 void AddQuad() {
-                    var newQuad = new Quad(polyVertices, anim, CommonTextureRotateType.NoRotation, flip, color);
+                    var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
 
                     if (isHideMesh)
                         hideQuads.Add(newQuad);
@@ -248,7 +248,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                         (polyVertices[1], polyVertices[0], polyVertices[3], polyVertices[2]);
 
                     // Flip the texture.
-                    flip ^= CommonTextureFlipType.Horizontal;
+                    flip ^= TextureFlipType.Horizontal;
 
                     // Reverse the normal.
                     for (var j = 0; j < 4; j++)

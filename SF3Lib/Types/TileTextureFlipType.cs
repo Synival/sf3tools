@@ -17,13 +17,13 @@ namespace SF3.Types {
     }
 
     public static class TextureFlipTypeExtensions {
-        public static CommonTextureFlipType ToCommon(this TileTextureFlipType type) {
+        public static TextureFlipType ToCommon(this TileTextureFlipType type) {
             switch (type) {
-                case TileTextureFlipType.NoFlip:     return CommonTextureFlipType.NoFlip;
-                case TileTextureFlipType.Horizontal: return CommonTextureFlipType.Horizontal;
-                case TileTextureFlipType.Vertical:   return CommonTextureFlipType.Vertical;
-                case TileTextureFlipType.Both:       return CommonTextureFlipType.Both;
-                default: return CommonTextureFlipType.NoFlip;
+                case TileTextureFlipType.NoFlip:     return TextureFlipType.NoFlip;
+                case TileTextureFlipType.Horizontal: return TextureFlipType.Horizontal;
+                case TileTextureFlipType.Vertical:   return TextureFlipType.Vertical;
+                case TileTextureFlipType.Both:       return TextureFlipType.Both;
+                default: return TextureFlipType.NoFlip;
             }
         }
     }

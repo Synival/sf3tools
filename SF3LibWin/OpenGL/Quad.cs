@@ -12,15 +12,15 @@ namespace SF3.Win.OpenGL {
         private static readonly Vector4 c_white = new Vector4(1, 1, 1, 1);
         private static readonly Vector4[] c_allWhite = [c_white, c_white, c_white, c_white];
 
-        public Quad(Vector3[] vertices) : this(vertices, null, CommonTextureRotateType.NoRotation, CommonTextureFlipType.NoFlip, c_white) { }
-        public Quad(Vector3[] vertices, Vector4 color) : this(vertices, null, CommonTextureRotateType.NoRotation, CommonTextureFlipType.NoFlip, [color, color, color, color]) { }
-        public Quad(Vector3[] vertices, Vector4[] colors) : this(vertices, null, CommonTextureRotateType.NoRotation, CommonTextureFlipType.NoFlip, colors) { }
-        public Quad(Vector3[] vertices, IAnimatedTexture animation, CommonTextureRotateType rotate, CommonTextureFlipType flip)
+        public Quad(Vector3[] vertices) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, c_white) { }
+        public Quad(Vector3[] vertices, Vector4 color) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, [color, color, color, color]) { }
+        public Quad(Vector3[] vertices, Vector4[] colors) : this(vertices, null, TextureRotateType.NoRotation, TextureFlipType.NoFlip, colors) { }
+        public Quad(Vector3[] vertices, IAnimatedTexture animation, TextureRotateType rotate, TextureFlipType flip)
             : this(vertices, animation, rotate, flip, c_allWhite) { }
-        public Quad(Vector3[] vertices, IAnimatedTexture animation, CommonTextureRotateType rotate, CommonTextureFlipType flip, Vector4 color)
+        public Quad(Vector3[] vertices, IAnimatedTexture animation, TextureRotateType rotate, TextureFlipType flip, Vector4 color)
             : this(vertices, animation, rotate, flip, [color, color, color, color]) { }
 
-        public Quad(Vector3[] vertices, IAnimatedTexture animation, CommonTextureRotateType rotate, CommonTextureFlipType flip, Vector4[] colors) {
+        public Quad(Vector3[] vertices, IAnimatedTexture animation, TextureRotateType rotate, TextureFlipType flip, Vector4[] colors) {
             if (vertices == null || vertices.Length != 4)
                 throw new ArgumentException(nameof(vertices));
             if (colors == null || colors.Length != 4)
@@ -113,8 +113,8 @@ namespace SF3.Win.OpenGL {
 
         public IAnimatedTexture Animation { get; }
 
-        public CommonTextureRotateType TextureRotate { get; }
-        public CommonTextureFlipType TextureFlip { get; }
+        public TextureRotateType TextureRotate { get; }
+        public TextureFlipType TextureFlip { get; }
 
         public bool HasCenterVertex { get; }
         public int Vertices { get; }

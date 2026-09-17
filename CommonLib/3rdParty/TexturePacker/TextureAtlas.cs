@@ -74,7 +74,7 @@ namespace CommonLib.ThirdParty.TexturePacker {
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
 
-        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, CommonTextureRotateType rotation, CommonTextureFlipType flip, float borderUVWidth = 0.00f, float borderUVHeight = 0.00f) {
+        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip, float borderUVWidth = 0.00f, float borderUVHeight = 0.00f) {
             var node = GetNodeByTextureIDFrame(id, frame);
             if (node == null)
                 throw new ArgumentException(nameof(id) + ", " + nameof(frame));
@@ -98,19 +98,19 @@ namespace CommonLib.ThirdParty.TexturePacker {
                 (tl, tr, br, bl) = (tr, br, bl, tl);
 
             // Rotation is applied first...
-            if (rotation == CommonTextureRotateType.Rotate270CW)
+            if (rotation == TextureRotateType.Rotate270CW)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
-            else if (rotation == CommonTextureRotateType.Rotate180)
+            else if (rotation == TextureRotateType.Rotate180)
                 (tl, tr, br, bl) = (br, bl, tl, tr);
-            else if (rotation == CommonTextureRotateType.Rotate90CW)
+            else if (rotation == TextureRotateType.Rotate90CW)
                 (tl, tr, br, bl) = (bl, tl, tr, br);
 
             // ... then flipping.
-            if (flip == CommonTextureFlipType.Horizontal)
+            if (flip == TextureFlipType.Horizontal)
                 (tl, tr, br, bl) = (tr, tl, bl, br);
-            else if (flip == CommonTextureFlipType.Vertical)
+            else if (flip == TextureFlipType.Vertical)
                 (tl, tr, br, bl) = (bl, br, tr, tl);
-            else if (flip == CommonTextureFlipType.Both)
+            else if (flip == TextureFlipType.Both)
                 (tl, tr, br, bl) = (br, bl, tl, tr);
 
             // Convert coordinates to a grid so we can more easily flip them based on some (0 or 1) constants.

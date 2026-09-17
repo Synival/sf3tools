@@ -17,13 +17,13 @@ namespace SF3.Types {
     }
 
     public static class TextureRotateTypeExtensions {
-        public static CommonTextureRotateType ToCommon(this TileTextureRotateType type) {
+        public static TextureRotateType ToCommon(this TileTextureRotateType type) {
             switch (type) {
-                case TileTextureRotateType.NoRotation:  return CommonTextureRotateType.NoRotation;
-                case TileTextureRotateType.Rotate90CW:  return CommonTextureRotateType.Rotate90CW;
-                case TileTextureRotateType.Rotate180:   return CommonTextureRotateType.Rotate180;
-                case TileTextureRotateType.Rotate270CW: return CommonTextureRotateType.Rotate270CW;
-                default: return CommonTextureRotateType.NoRotation;
+                case TileTextureRotateType.NoRotation:  return TextureRotateType.NoRotation;
+                case TileTextureRotateType.Rotate90CW:  return TextureRotateType.Rotate90CW;
+                case TileTextureRotateType.Rotate180:   return TextureRotateType.Rotate180;
+                case TileTextureRotateType.Rotate270CW: return TextureRotateType.Rotate270CW;
+                default: return TextureRotateType.NoRotation;
             }
         }
     }

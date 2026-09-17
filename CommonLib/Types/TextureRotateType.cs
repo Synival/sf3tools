@@ -1,5 +1,5 @@
 ﻿namespace CommonLib.Types {
-    public enum CommonTextureRotateType {
+    public enum TextureRotateType {
         NoRotation,
         Rotate90CW,
         Rotate180,
