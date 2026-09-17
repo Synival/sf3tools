@@ -182,7 +182,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public TextureFlipType TextureFlip {
+        public TileTextureFlipType TextureFlip {
             get => (MPD_File.SurfaceModelChunk != null) ? MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].GetFlip(X) : 0;
             set {
                 MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetFlip(X, value);
@@ -190,7 +190,7 @@ namespace SF3.Models.Files.MPD {
             }
         }
 
-        public TextureRotateType TextureRotate {
+        public TileTextureRotateType TextureRotate {
             get => (MPD_File.SurfaceModelChunk != null) ? MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].GetRotate(X) : 0;
             set {
                 MPD_File.SurfaceModelChunk.TileTextureRowTable[Y].SetRotate(X, value);

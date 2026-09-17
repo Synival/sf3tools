@@ -26,8 +26,8 @@ namespace SF3.Win.Controls {
 
             // Set up combo box values.
             cbMoveTerrain.DataSource = Enum.GetValues<TerrainType>();
-            cbModelRotate.DataSource = Enum.GetValues<TextureRotateType>();
-            cbModelFlip.DataSource   = Enum.GetValues<TextureFlipType>();
+            cbModelRotate.DataSource = Enum.GetValues<TileTextureRotateType>();
+            cbModelFlip.DataSource   = Enum.GetValues<TileTextureFlipType>();
 
             void DoOnlyDirectly(Action<IMPD_SurfaceTile> action) {
                 // TODO: support multiple selection!
@@ -48,8 +48,8 @@ namespace SF3.Win.Controls {
 
             // Event handling for 'Model' group.
             nudModelTextureID.ValueChanged     += (s, e) => DoOnlyDirectly(eo => eo.TextureID = (byte) nudModelTextureID.Value);
-            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(eo => eo.TextureRotate = (TextureRotateType) cbModelRotate.SelectedValue);
-            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(eo => eo.TextureFlip = (TextureFlipType) cbModelFlip.SelectedValue);
+            cbModelRotate.SelectedValueChanged += (s, e) => DoOnlyDirectly(eo => eo.TextureRotate = (TileTextureRotateType) cbModelRotate.SelectedValue);
+            cbModelFlip.SelectedValueChanged   += (s, e) => DoOnlyDirectly(eo => eo.TextureFlip = (TileTextureFlipType) cbModelFlip.SelectedValue);
             cbModelTileIsFlat.CheckedChanged   += (s, e) => DoOnlyDirectly(eo => SetIsFlat(cbModelTileIsFlat.Checked));
             cbModelHasTree.CheckedChanged      += (s, e) => DoOnlyDirectly(eo => SetHasTree(cbModelHasTree.Checked));
         }

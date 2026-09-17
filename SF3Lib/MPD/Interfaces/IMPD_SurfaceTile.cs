@@ -42,12 +42,12 @@ namespace SF3.MPD.Interfaces {
         /// <summary>
         /// Horizontal or vertical flipping for the texture of this tile.
         /// </summary>
-        TextureFlipType TextureFlip { get; set; }
+        TileTextureFlipType TextureFlip { get; set; }
 
         /// <summary>
         /// Rotation of the texture of this tile in increments of 90 degrees.
         /// </summary>
-        TextureRotateType TextureRotate { get; set; }
+        TileTextureRotateType TextureRotate { get; set; }
 
         /// <summary>
         /// Texture flags that are set but are likely invalid.

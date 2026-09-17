@@ -2,7 +2,7 @@
 using CommonLib.Types;
 
 namespace SF3.Types {
-    public enum TextureRotateType : byte {
+    public enum TileTextureRotateType : byte {
         [EnumDisplayName("No Rotation")]
         NoRotation   = 0x00,
 
@@ -17,12 +17,12 @@ namespace SF3.Types {
     }
 
     public static class TextureRotateTypeExtensions {
-        public static CommonTextureRotateType ToCommon(this TextureRotateType type) {
+        public static CommonTextureRotateType ToCommon(this TileTextureRotateType type) {
             switch (type) {
-                case TextureRotateType.NoRotation:  return CommonTextureRotateType.NoRotation;
-                case TextureRotateType.Rotate90CW:  return CommonTextureRotateType.Rotate90CW;
-                case TextureRotateType.Rotate180:   return CommonTextureRotateType.Rotate180;
-                case TextureRotateType.Rotate270CW: return CommonTextureRotateType.Rotate270CW;
+                case TileTextureRotateType.NoRotation:  return CommonTextureRotateType.NoRotation;
+                case TileTextureRotateType.Rotate90CW:  return CommonTextureRotateType.Rotate90CW;
+                case TileTextureRotateType.Rotate180:   return CommonTextureRotateType.Rotate180;
+                case TileTextureRotateType.Rotate270CW: return CommonTextureRotateType.Rotate270CW;
                 default: return CommonTextureRotateType.NoRotation;
             }
         }

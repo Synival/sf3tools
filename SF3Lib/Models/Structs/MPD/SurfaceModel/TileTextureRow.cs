@@ -36,16 +36,16 @@ namespace SF3.Models.Structs.MPD.SurfaceModel {
         public void SetTextureID(int x, byte value)
             => this[x] = (ushort) ((this[x] & 0xFF00) + value);
 
-        public TextureRotateType GetRotate(int x)
-            => HasRotation ? (TextureRotateType) (GetTextureFlags(x) & 0x03) : 0x00;
-        public void SetRotate(int x, TextureRotateType value) {
+        public TileTextureRotateType GetRotate(int x)
+            => HasRotation ? (TileTextureRotateType) (GetTextureFlags(x) & 0x03) : 0x00;
+        public void SetRotate(int x, TileTextureRotateType value) {
             if (HasRotation)
                 SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x03 | (byte) value));
         }
 
-        public TextureFlipType GetFlip(int x)
-            => (TextureFlipType) (GetTextureFlags(x) & 0x30);
-        public void SetFlip(int x, TextureFlipType value)
+        public TileTextureFlipType GetFlip(int x)
+            => (TileTextureFlipType) (GetTextureFlags(x) & 0x30);
+        public void SetFlip(int x, TileTextureFlipType value)
             => SetTextureFlags(x, (byte) (GetTextureFlags(x) & ~0x30 | (byte) value));
 
         public bool GetIsFlatFlag(int x)

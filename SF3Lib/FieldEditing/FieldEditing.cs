@@ -105,8 +105,8 @@ namespace SF3.FieldEditing {
             if (validTileDefs.Length == 0) {
                 if (setDefaultIfNothingFound) {
                     tile.TextureID     = defaultTexId;
-                    tile.TextureFlip   = TextureFlipType.NoFlip;
-                    tile.TextureRotate = TextureRotateType.NoRotation;
+                    tile.TextureFlip   = TileTextureFlipType.NoFlip;
+                    tile.TextureRotate = TileTextureRotateType.NoRotation;
                 }
                 return;
             }

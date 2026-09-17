@@ -2,7 +2,7 @@
 using CommonLib.Types;
 
 namespace SF3.Types {
-    public enum TextureFlipType : byte {
+    public enum TileTextureFlipType : byte {
         [EnumDisplayName("No Flip")]
         NoFlip     = 0x00,
 
@@ -17,12 +17,12 @@ namespace SF3.Types {
     }
 
     public static class TextureFlipTypeExtensions {
-        public static CommonTextureFlipType ToCommon(this TextureFlipType type) {
+        public static CommonTextureFlipType ToCommon(this TileTextureFlipType type) {
             switch (type) {
-                case TextureFlipType.NoFlip:     return CommonTextureFlipType.NoFlip;
-                case TextureFlipType.Horizontal: return CommonTextureFlipType.Horizontal;
-                case TextureFlipType.Vertical:   return CommonTextureFlipType.Vertical;
-                case TextureFlipType.Both:       return CommonTextureFlipType.Both;
+                case TileTextureFlipType.NoFlip:     return CommonTextureFlipType.NoFlip;
+                case TileTextureFlipType.Horizontal: return CommonTextureFlipType.Horizontal;
+                case TileTextureFlipType.Vertical:   return CommonTextureFlipType.Vertical;
+                case TileTextureFlipType.Both:       return CommonTextureFlipType.Both;
                 default: return CommonTextureFlipType.NoFlip;
             }
         }

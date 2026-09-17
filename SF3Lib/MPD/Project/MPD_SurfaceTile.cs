@@ -69,8 +69,8 @@ namespace SF3.MPD.Project {
         public byte TextureFlags {
             get => (byte) ((byte) TextureFlip | (byte) TextureRotate | (IsFlat ? 0x80 : 0));
             set {
-                TextureFlip   = (TextureFlipType)   (value & 0x30);
-                TextureRotate = (TextureRotateType) (value & 0x03);
+                TextureFlip   = (TileTextureFlipType)   (value & 0x30);
+                TextureRotate = (TileTextureRotateType) (value & 0x03);
                 IsFlat        = (value & 0x80) == 0x80;
             }
         }
@@ -94,14 +94,14 @@ namespace SF3.MPD.Project {
             set => SetAndUpdateModified(ref _textureId, value);
         }
 
-        private TextureFlipType _textureFlip;
-        public TextureFlipType TextureFlip {
+        private TileTextureFlipType _textureFlip;
+        public TileTextureFlipType TextureFlip {
             get => _textureFlip;
             set => SetAndUpdateModified(ref _textureFlip, value);
         }
 
-        private TextureRotateType _textureRotate;
-        public TextureRotateType TextureRotate {
+        private TileTextureRotateType _textureRotate;
+        public TileTextureRotateType TextureRotate {
             get => _textureRotate;
             set => SetAndUpdateModified(ref _textureRotate, value);
         }

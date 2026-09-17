@@ -88,8 +88,16 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
             bool? forceLighting,
             bool forceBlackIfTransparentNonIndexed
         ) {
-            TextureFlipType ToggleHorizontalFlipping(TextureFlipType flip)
-                => flip & ~TextureFlipType.Horizontal | (TextureFlipType) (TextureFlipType.Horizontal - (flip & TextureFlipType.Horizontal));
+            CommonTextureFlipType ConvertFlipping(int flipVal) {
+                switch (flipVal) {
+                    case 0x00: return CommonTextureFlipType.Horizontal;
+                    case 0x10: return CommonTextureFlipType.NoFlip;
+                    case 0x20: return CommonTextureFlipType.Both;
+                    case 0x30: return CommonTextureFlipType.Vertical;
+                    // Shouldn't ever happen.
+                    default:   throw new InvalidOperationException();
+                }
+            }
 
             var vertices      = model.Vertices;
             var faces         = model.Faces;
@@ -113,7 +121,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 var useTexture = attr.UseTexture;
                 IAnimatedTexture anim = null;
                 var isSemiTransparent = false;
-                var flip = TextureFlipType.NoFlip;
+                var flip = CommonTextureFlipType.NoFlip;
                 MockAnimatedTexture mockAnim = null;
 
                 if (!isHideMesh) {
@@ -121,8 +129,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                     var textureId = attr.TextureNo;
 
                     // Get texture flipping. Manually flip them horizontally to account for the weird thing where the X coordinates are reversed.
-                    flip = (TextureFlipType) (attr.Dir & 0x0030);
-                    flip = ToggleHorizontalFlipping(flip);
+                    flip = ConvertFlipping(attr.Dir & 0x0030);
 
                     // Apply semi-transparency for the appropriate draw mode.
                     var transparency = 1.0f;
@@ -207,7 +214,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 var meshVboData = new float[,] {{mesh}, {mesh}, {mesh}, {mesh}};
 
                 void AddQuad() {
-                    var newQuad = new Quad(polyVertices, anim, TextureRotateType.NoRotation, flip, color);
+                    var newQuad = new Quad(polyVertices, anim, CommonTextureRotateType.NoRotation, flip, color);
 
                     if (isHideMesh)
                         hideQuads.Add(newQuad);
@@ -241,7 +248,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                         (polyVertices[1], polyVertices[0], polyVertices[3], polyVertices[2]);
 
                     // Flip the texture.
-                    flip = ToggleHorizontalFlipping(flip);
+                    flip ^= CommonTextureFlipType.Horizontal;
 
                     // Reverse the normal.
                     for (var j = 0; j < 4; j++)

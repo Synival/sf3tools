@@ -72,8 +72,8 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     var tile = mpdFile.Surface.GetTile(x, y);
 
                     IAnimatedTexture anim = null;
-                    var rotate = TextureRotateType.NoRotation;
-                    var   flip   = TextureFlipType.NoFlip;
+                    var rotate = TileTextureRotateType.NoRotation;
+                    var flip   = TileTextureFlipType.NoFlip;
 
                     if (hasModel) {
                         // Get texture. Fetch animated textures if possible.
@@ -140,7 +140,7 @@ namespace SF3.Win.OpenGL.GLResources.MPD {
                     }
 
                     if (anim != null) {
-                        var newQuad = new Quad(vertices, anim, rotate, flip);
+                        var newQuad = new Quad(vertices, anim, rotate.ToCommon(), flip.ToCommon());
                         AddAttributes(newQuad);
                         surfaceQuads.Add(newQuad);
                     }
