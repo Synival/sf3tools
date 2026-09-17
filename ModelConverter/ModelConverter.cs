@@ -48,7 +48,10 @@ namespace ModelConverter {
         private struct AttrKey {
             public AttrKey(IATTR attr) {
                 HasTextures = attr.UseTexture;
-                Key = HasTextures ? 1 : 0;
+                IsTwoSided  = attr.IsTwoSided;
+
+                Key = (HasTextures ? 0x01 : 0)
+                    | (IsTwoSided  ? 0x02 : 0);
             }
 
             public override int GetHashCode() => Key;
@@ -57,6 +60,8 @@ namespace ModelConverter {
                 => (obj is AttrKey other) ? Key == other.Key : base.Equals(obj);
 
             public readonly bool HasTextures;
+            public readonly bool IsTwoSided;
+
             public readonly int Key;
         }
 
@@ -95,6 +100,7 @@ namespace ModelConverter {
                     TextureAtlas textureAtlas = null;
                     Rectangle textureAtlasDimensions;
 
+                    Material material = null;
                     if (attrKey.HasTextures) {
                         var textureIds = faces.Select(x => x.Face.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
                         var texturesForMcId = texturesByMcId[sglModel.ModelCollectionID];
@@ -114,12 +120,16 @@ namespace ModelConverter {
                             // Add the texture.
                             var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
                             var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
-                            var materialBuilder = new MaterialBuilder("textureAtlas")
+                            var materialBuilder = new MaterialBuilder("material")
                                 .WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
-                            var material = modelRoot.CreateMaterial(materialBuilder);
-                            primitive.Material = material;
+                            material = modelRoot.CreateMaterial(materialBuilder);
                         }
                     }
+                    else
+                        material = modelRoot.CreateMaterial("material");
+
+                    material.DoubleSided = attrKey.IsTwoSided;
+                    primitive.Material = material;
 
                     // Build quads, each with its own vertices. We're not going to have *ANY* shared vertices because we
                     // *must* store unique ATTR data per-polygon. (We can at least share them between triangles)
