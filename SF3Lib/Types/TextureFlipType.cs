@@ -1,4 +1,5 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.Types;
 
 namespace SF3.Types {
     public enum TextureFlipType : byte {
@@ -13,5 +14,17 @@ namespace SF3.Types {
 
         [EnumDisplayName("Both")]
         Both       = 0x30,
+    }
+
+    public static class TextureFlipTypeExtensions {
+        public static CommonTextureFlipType ToCommon(this TextureFlipType type) {
+            switch (type) {
+                case TextureFlipType.NoFlip:     return CommonTextureFlipType.NoFlip;
+                case TextureFlipType.Horizontal: return CommonTextureFlipType.Horizontal;
+                case TextureFlipType.Vertical:   return CommonTextureFlipType.Vertical;
+                case TextureFlipType.Both:       return CommonTextureFlipType.Both;
+                default: return CommonTextureFlipType.NoFlip;
+            }
+        }
     }
 }

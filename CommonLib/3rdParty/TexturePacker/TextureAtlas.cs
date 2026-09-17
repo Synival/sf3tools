@@ -10,11 +10,10 @@ using System.Linq;
 using System.Numerics;
 using CommonLib.Imaging;
 using CommonLib.Types;
-using SF3.Types;
 using static CommonLib.Types.CornerTypeConsts;
 using static CommonLib.Utils.MemoryUtils;
 
-namespace SF3.ThirdParty.TexturePacker {
+namespace CommonLib.ThirdParty.TexturePacker {
     public class TextureAtlas : IDisposable {
         public TextureAtlas(int maxX, int maxY, int padding = 0, bool tryRotate = true) {
             MaxX      = maxX;
@@ -75,7 +74,7 @@ namespace SF3.ThirdParty.TexturePacker {
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
 
-        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip, float borderUVWidth = 0.00f, float borderUVHeight = 0.00f) {
+        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, CommonTextureRotateType rotation, CommonTextureFlipType flip, float borderUVWidth = 0.00f, float borderUVHeight = 0.00f) {
             var node = GetNodeByTextureIDFrame(id, frame);
             if (node == null)
                 throw new ArgumentException(nameof(id) + ", " + nameof(frame));
@@ -99,19 +98,19 @@ namespace SF3.ThirdParty.TexturePacker {
                 (tl, tr, br, bl) = (tr, br, bl, tl);
 
             // Rotation is applied first...
-            if (rotation == TextureRotateType.Rotate270CW)
+            if (rotation == CommonTextureRotateType.Rotate270CW)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
-            else if (rotation == TextureRotateType.Rotate180)
+            else if (rotation == CommonTextureRotateType.Rotate180)
                 (tl, tr, br, bl) = (br, bl, tl, tr);
-            else if (rotation == TextureRotateType.Rotate90CW)
+            else if (rotation == CommonTextureRotateType.Rotate90CW)
                 (tl, tr, br, bl) = (bl, tl, tr, br);
 
             // ... then flipping.
-            if (flip == TextureFlipType.Horizontal)
+            if (flip == CommonTextureFlipType.Horizontal)
                 (tl, tr, br, bl) = (tr, tl, bl, br);
-            else if (flip == TextureFlipType.Vertical)
+            else if (flip == CommonTextureFlipType.Vertical)
                 (tl, tr, br, bl) = (bl, br, tr, tl);
-            else if (flip == TextureFlipType.Both)
+            else if (flip == CommonTextureFlipType.Both)
                 (tl, tr, br, bl) = (br, bl, tl, tr);
 
             // Convert coordinates to a grid so we can more easily flip them based on some (0 or 1) constants.

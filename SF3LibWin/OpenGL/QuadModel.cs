@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using CommonLib.ThirdParty.TexturePacker;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.ThirdParty.TexturePacker;
+using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.Shared;
 using static CommonLib.Types.CornerTypeConsts;
@@ -155,7 +156,7 @@ namespace SF3.Win.OpenGL {
                 var frame = quad.Animation?.GetFrame(_frame);
                 var texCoords = (frame != null)
                     ? (_textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                        frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
+                        frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate.ToCommon(), quad.TextureFlip.ToCommon(),
                         pixelBorderWidth, pixelBorderHeight)).Select(x => x.ToOpenTKVector2()).ToArray()
                     : c_noTextureCoords;
 

@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.ThirdParty.TexturePacker;
 using CommonLib.Types;
-using SF3.ThirdParty.TexturePacker;
 
 namespace SF3.Models.Structs.X8PC {
     public class PCTextureAtlas : CachedTextureDataBase, IDisposable {

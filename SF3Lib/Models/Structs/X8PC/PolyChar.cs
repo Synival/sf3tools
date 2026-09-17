@@ -6,12 +6,12 @@ using System.Numerics;
 using CommonLib.Arrays;
 using CommonLib.Imaging;
 using CommonLib.SGL;
+using CommonLib.ThirdParty.TexturePacker;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
-using SF3.ThirdParty.TexturePacker;
 using SF3.Types;
 using SF3.X8PC;
 
