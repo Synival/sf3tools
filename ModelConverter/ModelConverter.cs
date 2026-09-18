@@ -27,6 +27,8 @@ namespace ModelConverter {
                 Color0        = color0;
             }
 
+            public override string ToString() => $"{{ Idx: {Index}, OrigIdx: {OriginalIndex}: Pos: {Position}, Normal: {Normal}, TexCoord: {TexCoord0}, Color: {Color0} }}";
+
             public readonly int Index;
             public readonly int OriginalIndex;
             public readonly Vector3 Position;
@@ -40,6 +42,8 @@ namespace ModelConverter {
                 Index    = index;
                 Vertices = vertices;
             }
+
+            public override string ToString() => $"{{ OrigIdx: {Index}, Vertices: [{Vertices[0].OriginalIndex}, {Vertices[1].OriginalIndex}, {Vertices[2].OriginalIndex}, {Vertices[3].OriginalIndex}] }}";
 
             public readonly int Index;
             public readonly ConvertedVertex[] Vertices;

@@ -14,6 +14,8 @@ namespace SF3.Models.Structs.Shared.SGL {
             _zAddr = Address + 0x08; // 4 bytes
         }
 
+        public override string ToString() => $"{{ ID: {ID}, Vector: {Vector} }}";
+
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_xAddr), displayOrder: 0, minWidth: 75)]
         public float X {

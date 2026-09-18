@@ -28,6 +28,8 @@ namespace SF3.Models.Structs.Shared.SGL {
             Vertices = new MockVertices(this);
         }
 
+        public override string ToString() => $"{{ ID: {ID}, Vertices: [{Vertex1}, {Vertex2}, {Vertex3}, {Vertex4}], Normal: {Normal} }}";
+
         [BulkCopy]
         [TableViewModelColumn(addressField: nameof(_normalXAddr), displayOrder: 0, minWidth: 75)]
         public float NormalX {
@@ -47,6 +49,15 @@ namespace SF3.Models.Structs.Shared.SGL {
         public float NormalZ {
             get => Data.GetFIXED(_normalZAddr).Float;
             set => Data.SetFIXED(_normalZAddr, new FIXED(value, 0));
+        }
+
+        public VECTOR Normal {
+            get => new VECTOR(NormalX, NormalY, NormalZ);
+            set {
+                NormalX = value.X.Float;
+                NormalY = value.Y.Float;
+                NormalZ = value.Z.Float;
+            }
         }
 
         [BulkCopy]
@@ -75,6 +86,21 @@ namespace SF3.Models.Structs.Shared.SGL {
         public ushort Vertex4 {
             get => Data.GetUInt16(_vertex4Addr);
             set => Data.SetUInt16(_vertex4Addr, value);
+        }
+
+        public ushort[] VertexIndices {
+            get => new ushort[] { Vertex1, Vertex2, Vertex3, Vertex4 };
+            set {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(value));
+                if (value.Length != 4)
+                    throw new ArgumentException(nameof(value));
+
+                Vertex1 = value[0];
+                Vertex2 = value[1];
+                Vertex3 = value[2];
+                Vertex4 = value[3];
+            }
         }
 
         private class MockVertices : IReadOnlyList<int> {
