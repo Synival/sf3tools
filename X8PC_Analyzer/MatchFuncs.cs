@@ -57,6 +57,20 @@ namespace X8PC_Analyzer {
             return [];
         }
 
+        public static string[]? WriteGLBsTwoPasses(IX8PC_File x8pcFile, string filename) {
+            var converter = new ModelConverter.ModelConverter();
+            foreach (PolyChar pc in x8pcFile.PolyCharTable) {
+                var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
+                Directory.CreateDirectory(directory);
+                var input1  = pc.XPDataTables.SelectMany(x => x).ToArray();
+                var output1 = converter.ModelToGLTF_ModelRoot(input1, pc);
+                var input2  = converter.GLTF_ModelRootToModels(output1, null, null, null);
+                var output2 = converter.ModelToGLB_Data(input2, pc);
+                File.WriteAllBytes(directory + $"{pc.ID}.glb", output2);
+            }
+            return [];
+        }
+
         public static string[]? GLTFsWithTwoPrimitives(IX8PC_File x8pcFile, string filename) {
             var converter = new ModelConverter.ModelConverter();
 

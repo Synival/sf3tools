@@ -318,8 +318,8 @@ namespace ModelConverter {
 
             var sglModels = new List<SGL_Model>();
             foreach (var mesh in modelRoot.LogicalMeshes) {
-                var meshVerticesIn = new List<ConvertedVertex>();
-                var meshQuadsIn    = new List<Quad>();
+                var meshVertices = new List<ConvertedVertex>();
+                var meshQuads    = new List<Quad>();
 
                 foreach (var primitive in mesh.Primitives) {
                     // Fetch vertices.
@@ -347,7 +347,7 @@ namespace ModelConverter {
                         .ToDictionary(x => x.Key, x => x.Select(y => y.ExportedVertexID).ToArray());
 
                     // Reconstruct the transitionary 'ConvertedVertex' classes
-                    var verticesIn = Enumerable
+                    var primVertices = Enumerable
                         .Range(0, vertexAccessor.Count)
                         .Select((x, i) => new ConvertedVertex(
                             i,
@@ -361,24 +361,26 @@ namespace ModelConverter {
                         ))
                         .ToArray();
 
-                    // Keep track of these globally.
-                    meshVerticesIn.AddRange(verticesIn);
+                    // Keep track of vertices for the entire mesh.
+                    meshVertices.AddRange(primVertices);
 
-                    var quadsIn = quadVertexMap
-                        .Select(x => new Quad(x.Key, x.Value.Select(y => verticesIn[y]).ToArray()))
+                    var primQuads = quadVertexMap
+                        .Select(x => new Quad(x.Key, x.Value.Select(y => primVertices[y]).ToArray()))
                         .ToArray();
-                    meshQuadsIn.AddRange(quadsIn);
+
+                    // Keep track of quads for the entire mesh.
+                    meshQuads.AddRange(primQuads);
                 }
 
                 // Sort vertices and quads by their original ID.
-                meshVerticesIn = meshVerticesIn.OrderBy(x => x.OriginalIndex).GroupBy(x => x.OriginalIndex).Select(x => x.First()).ToList();
-                meshQuadsIn = meshQuadsIn.OrderBy(x => x.OriginalIndex).GroupBy(x => x.OriginalIndex).Select(x => x.First()).ToList();
+                meshVertices = meshVertices.OrderBy(x => x.OriginalIndex).GroupBy(x => x.OriginalIndex).Select(x => x.First()).ToList();
+                meshQuads = meshQuads.OrderBy(x => x.OriginalIndex).GroupBy(x => x.OriginalIndex).Select(x => x.First()).ToList();
 
                 // Build our SGL_Model.
                 var newSglModel = new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
-                    meshVerticesIn.Select(x => x.Position.ToVECTOR().ToSwappedYZ()).ToArray(),
-                    meshQuadsIn.Select(x => new SGL_ModelFace(x.Vertices.Select(y => y.OriginalIndex).ToArray(), new VECTOR(0, -1, 0), new ATTR())).ToArray(),
-                    meshVerticesIn.Select(x => x.Normal.Value.ToVECTOR().ToSwappedYZ()).ToArray()
+                    meshVertices.Select(x => x.Position.ToVECTOR().ToSwappedYZ()).ToArray(),
+                    meshQuads.Select(x => new SGL_ModelFace(x.Vertices.Select(y => y.OriginalIndex).ToArray(), new VECTOR(0, -1, 0), new ATTR())).ToArray(),
+                    meshVertices.Select(x => x.Normal.Value.ToVECTOR().ToSwappedYZ()).ToArray()
                 );
 
                 sglModels.Add(newSglModel);

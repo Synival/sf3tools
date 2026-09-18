@@ -47,42 +47,48 @@ namespace ModelConverter.Tests.Utils {
             new VECTOR(-0.577f,  0.577f, -0.577f),
         ];
 
-        private void TestModelConversion(ISGL_Model originalModel, ITextureMetaCollection? texMetaCollection) {
+        private void TestModelConversion(ISGL_Model originalModel, ITextureMetaCollection? texMetaCollection)
+            => TestModelConversion([originalModel], texMetaCollection);
+
+        private void TestModelConversion(ISGL_Model[] originalModels, ITextureMetaCollection? texMetaCollection) {
             var converter = new ModelConverter();
-            var glb = converter.ModelToGLB_Data([originalModel], texMetaCollection);
-            var convertedModels = converter.GLB_DataToModels(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
+            var glb = converter.ModelToGLB_Data(originalModels, texMetaCollection);
+            var convertedModels = converter.GLB_DataToModels(glb, null, null, null);
 
-            Assert.AreEqual(1, convertedModels.Length, "Not equal: convertedModels.Length");
-            var convertedModel = convertedModels[0];
+            Assert.AreEqual(originalModels.Length, convertedModels.Length, "Not equal: convertedModels.Length");
+            for (int modelIdx = 0; modelIdx < originalModels.Length; modelIdx++) {
+                var convertedModel = convertedModels[modelIdx];
+                var originalModel = originalModels[modelIdx];
 
-            Assert.IsNotNull(convertedModel.Vertices, $"Not null: Vertices");
-            Assert.AreEqual(originalModel.Vertices.Count, convertedModel.Vertices.Count, $"Not equal: Vertices.Count");
-            for (int i = 0; i < originalModel.Vertices.Count; i++) {
-                Assert.IsNotNull(convertedModel.Vertices[i], $"Not null: Vertices[{i}]");
-                Assert.AreEqual(originalModel.Vertices[i].X.Float, convertedModel.Vertices[i].X.Float, 0.001f, $"Not equal: Vertices[{i}].X");
-                Assert.AreEqual(originalModel.Vertices[i].Y.Float, convertedModel.Vertices[i].Y.Float, 0.001f, $"Not equal: Vertices[{i}].Y");
-                Assert.AreEqual(originalModel.Vertices[i].Z.Float, convertedModel.Vertices[i].Z.Float, 0.001f, $"Not equal: Vertices[{i}].Z");
-            }
+                Assert.IsNotNull(convertedModel.Vertices, $"Not null: Vertices");
+                Assert.AreEqual(originalModel.Vertices.Count, convertedModel.Vertices.Count, $"Not equal: Vertices.Count");
+                for (int i = 0; i < originalModel.Vertices.Count; i++) {
+                    Assert.IsNotNull(convertedModel.Vertices[i], $"Not null: Vertices[{i}]");
+                    Assert.AreEqual(originalModel.Vertices[i].X.Float, convertedModel.Vertices[i].X.Float, 0.001f, $"Not equal: Vertices[{i}].X");
+                    Assert.AreEqual(originalModel.Vertices[i].Y.Float, convertedModel.Vertices[i].Y.Float, 0.001f, $"Not equal: Vertices[{i}].Y");
+                    Assert.AreEqual(originalModel.Vertices[i].Z.Float, convertedModel.Vertices[i].Z.Float, 0.001f, $"Not equal: Vertices[{i}].Z");
+                }
 
-            Assert.IsNotNull(convertedModel.Faces, $"Not null: Faces");
-            Assert.AreEqual(originalModel.Faces.Count, convertedModel.Faces.Count, $"Not equal: Faces.Count");
-            for (int i = 0; i < originalModel.Faces.Count; i++) {
-                Assert.IsNotNull(convertedModel.Faces[i], $"Not null: Faces[{i}]");
-                Assert.IsNotNull(convertedModel.Faces[i].VertexIndices, $"Not null: Faces[{i}].VertexIndices");
-                Assert.AreEqual(4, convertedModel.Faces[i].VertexIndices.Count, $"Not equal: Faces[{i}].VertexIndices.Count");
-                for (int j = 0; j < 4; j++)
-                    Assert.AreEqual(originalModel.Faces[i].VertexIndices[j], convertedModel.Faces[i].VertexIndices[j], $"Not equal: Faces[{i}].VertexIndices[{j}]");
+                Assert.IsNotNull(convertedModel.Faces, $"Not null: Faces");
+                Assert.AreEqual(originalModel.Faces.Count, convertedModel.Faces.Count, $"Not equal: Faces.Count");
+                for (int i = 0; i < originalModel.Faces.Count; i++) {
+                    Assert.IsNotNull(convertedModel.Faces[i], $"Not null: Faces[{i}]");
+                    Assert.IsNotNull(convertedModel.Faces[i].VertexIndices, $"Not null: Faces[{i}].VertexIndices");
+                    Assert.AreEqual(4, convertedModel.Faces[i].VertexIndices.Count, $"Not equal: Faces[{i}].VertexIndices.Count");
+                    for (int j = 0; j < 4; j++)
+                        Assert.AreEqual(originalModel.Faces[i].VertexIndices[j], convertedModel.Faces[i].VertexIndices[j], $"Not equal: Faces[{i}].VertexIndices[{j}]");
 
-                // TODO: Check ATTRs
-            }
+                    // TODO: Check ATTRs
+                }
 
-            Assert.IsNotNull(convertedModel.VertexNormals, $"Not null: VertexNormals");
-            Assert.AreEqual(originalModel.VertexNormals.Count, convertedModel.VertexNormals.Count, $"Not equal: Vertices.Count");
-            for (int i = 0; i < originalModel.VertexNormals.Count; i++) {
-                Assert.IsNotNull(convertedModel.VertexNormals[i], $"Not null: VertexNormals[{i}]");
-                Assert.AreEqual(originalModel.VertexNormals[i].X.Float, convertedModel.VertexNormals[i].X.Float, 0.001f, $"Not equal: VertexNormals[{i}].X");
-                Assert.AreEqual(originalModel.VertexNormals[i].Y.Float, convertedModel.VertexNormals[i].Y.Float, 0.001f, $"Not equal: VertexNormals[{i}].Y");
-                Assert.AreEqual(originalModel.VertexNormals[i].Z.Float, convertedModel.VertexNormals[i].Z.Float, 0.001f, $"Not equal: VertexNormals[{i}].Z");
+                Assert.IsNotNull(convertedModel.VertexNormals, $"Not null: VertexNormals");
+                Assert.AreEqual(originalModel.VertexNormals.Count, convertedModel.VertexNormals.Count, $"Not equal: Vertices.Count");
+                for (int i = 0; i < originalModel.VertexNormals.Count; i++) {
+                    Assert.IsNotNull(convertedModel.VertexNormals[i], $"Not null: VertexNormals[{i}]");
+                    Assert.AreEqual(originalModel.VertexNormals[i].X.Float, convertedModel.VertexNormals[i].X.Float, 0.001f, $"Not equal: VertexNormals[{i}].X");
+                    Assert.AreEqual(originalModel.VertexNormals[i].Y.Float, convertedModel.VertexNormals[i].Y.Float, 0.001f, $"Not equal: VertexNormals[{i}].Y");
+                    Assert.AreEqual(originalModel.VertexNormals[i].Z.Float, convertedModel.VertexNormals[i].Z.Float, 0.001f, $"Not equal: VertexNormals[{i}].Z");
+                }
             }
         }
 
@@ -106,6 +112,14 @@ namespace ModelConverter.Tests.Utils {
             var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
             var polyChar = x8pcFile.PolyCharTable[0];
             TestModelConversion(polyChar.GetModel(0, 0), polyChar);
+        }
+
+        [TestMethod]
+        public void ExportThenImport_WithSynbiosPolyChar_ProducesOriginal() {
+            var barrelData = File.ReadAllBytes(c_synbiosPath);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var polyChar = x8pcFile.PolyCharTable[0];
+            TestModelConversion(polyChar.ToArray(), polyChar);
         }
     }
 }
