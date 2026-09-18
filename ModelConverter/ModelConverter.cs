@@ -18,19 +18,23 @@ using SharpGLTF.Schema2;
 namespace ModelConverter {
     public class ModelConverter {
         private struct ConvertedVertex {
-            public ConvertedVertex(int index, int originalIndex, Vector3 position, Vector3? normal, Vector2? texCoord0, Vector4 color0) {
-                Index         = index;
-                OriginalIndex = originalIndex;
-                Position      = position;
-                Normal        = normal;
-                TexCoord0     = texCoord0;
-                Color0        = color0;
+            public ConvertedVertex(int primIndex, int originalIndex, int quadIndex, int indexInQuad, Vector3 position, Vector3? normal, Vector2? texCoord0, Vector4 color0) {
+                PrimitiveIndex = primIndex;
+                OriginalIndex  = originalIndex;
+                QuadIndex      = quadIndex;
+                IndexInQuad    = indexInQuad;
+                Position       = position;
+                Normal         = normal;
+                TexCoord0      = texCoord0;
+                Color0         = color0;
             }
 
-            public override string ToString() => $"{{ Idx: {Index}, OrigIdx: {OriginalIndex}: Pos: {Position}, Normal: {Normal}, TexCoord: {TexCoord0}, Color: {Color0} }}";
+            public override string ToString() => $"{{ Idx: {PrimitiveIndex}, OrigIdx: {OriginalIndex}: QuadIdx: {QuadIndex}.{IndexInQuad}, Pos: {Position}, Normal: {Normal}, TexCoord: {TexCoord0}, Color: {Color0} }}";
 
-            public readonly int Index;
+            public readonly int PrimitiveIndex;
             public readonly int OriginalIndex;
+            public readonly int QuadIndex;
+            public readonly int IndexInQuad;
             public readonly Vector3 Position;
             public readonly Vector3? Normal;
             public readonly Vector2? TexCoord0;
@@ -195,6 +199,8 @@ namespace ModelConverter {
                                 return new ConvertedVertex(
                                     quadFirstVertIdx + faceVertIdx,
                                     modelVertIdx,
+                                    face.Index,
+                                    faceVertIdx,
                                     sglModel.Vertices[modelVertIdx].ToNumericsVector3().ToSwappedYZ(),
                                     GetVertexNormal(modelVertIdx),
                                     GetTexCoord0(face.Face, faceVertIdx),
@@ -209,7 +215,7 @@ namespace ModelConverter {
 
                     // Create a big buffer for the entire model.
                     var vertexCount = quadList.Count * 4;
-                    var stride = (12 /*pos*/ + 12 /*normal*/ + 2/*quadIdx*/ + 2/*padding*/ + 2/*normalIdx*/ + 2/*padding*/ + 8/*texcoord_0*/ + 16/*color_0*/);
+                    var stride = (12 /*pos*/ + 12 /*normal*/ + 8/*quadIdx*/ + 2/*normalIdx*/ + 2/*padding*/ + 8/*texcoord_0*/ + 16/*color_0*/);
                     var bufferViewData = new byte[vertexCount * stride];
                     var bufferView = modelRoot.UseBufferView(bufferViewData, 0, byteStride: stride, target: BufferMode.ARRAY_BUFFER);
 
@@ -238,49 +244,50 @@ namespace ModelConverter {
                     }
 
                     // Vertex attribute that associates each vertex with a particular quad.
-                    var vertexQuadData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) x.OriginalIndex)).ToArray();
+                    var vertexQuadData = quadList.SelectMany(x => x.Vertices.Select(y => new Vector2(y.QuadIndex, y.IndexInQuad))).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
-                        var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 24, 2));
-                        dataUShorts[0] = vertexQuadData[i];
+                        var dataVec2 = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 24, 8));
+                        dataVec2[0] = vertexQuadData[i].X;
+                        dataVec2[1] = vertexQuadData[i].Y;
                     }
-                    var vertexQuadAccessor = modelRoot.CreateUShortAccessor("quadIndices", bufferView, 24, vertexCount);
+                    var vertexQuadAccessor = modelRoot.CreateVector2Accessor("quadIndices", bufferView, 24, vertexCount);
                     primitive.SetVertexAccessor("_QUAD_INDEX", vertexQuadAccessor);
 
                     // Vertex attribute that associates each vertex with a particular quad.
                     var vertexIndexData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) y.OriginalIndex)).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
-                        var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 28, 2));
+                        var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 32, 2));
                         dataUShorts[0] = vertexIndexData[i];
                     }
-                    var vertexIndexAccessor = modelRoot.CreateUShortAccessor("originalIndices", bufferView, 28, vertexCount);
+                    var vertexIndexAccessor = modelRoot.CreateUShortAccessor("originalIndices", bufferView, 32, vertexCount);
                     primitive.SetVertexAccessor("_ORIGINAL_INDEX", vertexIndexAccessor);
 
                     // Vertex attribute for texture coordinates.
                     var texCoord0Data = quadList.SelectMany(x => x.Vertices.Select(y => y.TexCoord0)).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
-                        var dataVec2 = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 32, 8));
+                        var dataVec2 = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 36, 8));
                         dataVec2[0] = texCoord0Data[i].Value.X;
                         dataVec2[1] = texCoord0Data[i].Value.Y;
                     }
-                    var texCoord0Accessor = modelRoot.CreateVector2Accessor("texCoords0", bufferView, 32, vertexCount);
+                    var texCoord0Accessor = modelRoot.CreateVector2Accessor("texCoords0", bufferView, 36, vertexCount);
                     primitive.SetVertexAccessor("TEXCOORD_0", texCoord0Accessor);
 
                     // Vertex attribute for polygon colors.
                     var texColor0Data = quadList.SelectMany(x => x.Vertices.Select(y => y.Color0)).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
-                        var dataVec4 = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 40, 16));
+                        var dataVec4 = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 44, 16));
                         dataVec4[0] = texColor0Data[i].X;
                         dataVec4[1] = texColor0Data[i].Y;
                         dataVec4[2] = texColor0Data[i].Z;
                         dataVec4[3] = texColor0Data[i].W;
                     }
-                    var texColor0Accessor = modelRoot.CreateVector4Accessor("color0", bufferView, 40, vertexCount);
+                    var texColor0Accessor = modelRoot.CreateVector4Accessor("color0", bufferView, 44, vertexCount);
                     primitive.SetVertexAccessor("COLOR_0", texColor0Accessor);
 
                     // Build faces, breaking down quads into triangles.
                     var faceIndexData = quadList
                         .SelectMany(x => {
-                            var firstIndex = x.Vertices[0].Index;
+                            var firstIndex = x.Vertices[0].PrimitiveIndex;
                             return new ushort[] {
                                 (ushort) (firstIndex + 0), (ushort) (firstIndex + 1), (ushort) (firstIndex + 2),
                                 (ushort) (firstIndex + 2), (ushort) (firstIndex + 3), (ushort) (firstIndex + 0),
@@ -326,31 +333,36 @@ namespace ModelConverter {
                     if (vertexNormalAccessor != null)
                         vertexNormalAccessor.AsVector3Array().CopyTo(vertexNormals, 0);
 
-                    // Fetch indicies.
-                    // TODO: currently unused, but should be part of quad reconstruction.
-                    var indexAccessor = primitive.IndexAccessor;
-                    var indices = primitive.GetTriangleIndices().ToArray();
-
                     // Fetch original vertex IDs for each vertex. This is part of mesh reconstruction.
                     var vertexOrigIndicesAccessor = primitive.GetVertexAccessor("_ORIGINAL_INDEX");
                     var vertexOrigIndices = vertexOrigIndicesAccessor.AsScalarArray();
 
+                    // Fetch the quads that each vertex belong to. This is part of quad reconstruction.
+                    var vertexQuadIndicesAccessor = primitive.GetVertexAccessor("_QUAD_INDEX");
+                    var vertexQuadIndices = vertexQuadIndicesAccessor.AsVector2Array();
+                    var quadVertexMap = vertexQuadIndices
+                        .Select((x, i) => (QuadID: (ushort) x.X, IndexInQuad: (ushort) x.Y, ExportedVertexID: (ushort) i))
+                        .OrderBy(x => x.IndexInQuad)
+                        .GroupBy(x => x.QuadID)
+                        .ToDictionary(x => x.Key, x => x.Select(y => y.ExportedVertexID).ToArray());
+
                     // Reconstruct the transitionary 'ConvertedVertex' classes
                     var verticesIn = Enumerable
                         .Range(0, vertexAccessor.Count)
-                        .Select((x, i) => new ConvertedVertex(i, (int) vertexOrigIndices[x], vertexPositions[x], vertexNormals[x], null, new Vector4(1, 1, 1, 1)))
+                        .Select((x, i) => new ConvertedVertex(
+                            i,
+                            (int) Math.Round(vertexOrigIndices[x]),
+                            (int) Math.Round(vertexQuadIndices[x].X),
+                            (int) Math.Round(vertexQuadIndices[x].Y),
+                            vertexPositions[x],
+                            vertexNormals[x],
+                            null, // TODO: ATTR
+                            new Vector4(1, 1, 1, 1)
+                        ))
                         .ToArray();
 
                     // Keep track of these globally.
                     meshVerticesIn.AddRange(verticesIn);
-
-                    // Fetch the quads that each vertex belong to. This is part of quad reconstruction.
-                    var vertexQuadIndicesAccessor = primitive.GetVertexAccessor("_QUAD_INDEX");
-                    var vertexQuadIndices = vertexQuadIndicesAccessor.AsScalarArray();
-                    var quadVertexMap = vertexQuadIndices
-                        .Select((x, i) => (QuadID: (ushort) x, ExportedVertexID: (ushort) i))
-                        .GroupBy(x => x.QuadID)
-                        .ToDictionary(x => x.Key, x => x.Select(y => y.ExportedVertexID).ToArray());
 
                     var quadsIn = quadVertexMap
                         .Select(x => new Quad(x.Key, x.Value.Select(y => verticesIn[y]).ToArray()))
