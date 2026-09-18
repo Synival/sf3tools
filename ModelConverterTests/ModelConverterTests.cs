@@ -9,7 +9,8 @@ using SF3.Types;
 namespace ModelConverter.Tests.Utils {
     [TestClass]
     public class ModelConverterTests {
-        public static string c_barrelPath = "C:/SF3/Scenario1/X8PC795.BIN";
+        public static string c_synbiosPath = "C:/SF3/Scenario1/X8PC00A.BIN";
+        public static string c_barrelPath  = "C:/SF3/Scenario1/X8PC795.BIN";
 
         public static readonly VECTOR[] c_cubeVertices = [
             new VECTOR(-1, -1,  1), // 0: Top-back-left
@@ -48,8 +49,8 @@ namespace ModelConverter.Tests.Utils {
 
         private void TestModelConversion(ISGL_Model originalModel, ITextureMetaCollection? texMetaCollection) {
             var converter = new ModelConverter();
-            var glb = converter.ModelToGLB([originalModel], texMetaCollection);
-            var convertedModels = converter.GLB_ToModels(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
+            var glb = converter.ModelToGLB_Data([originalModel], texMetaCollection);
+            var convertedModels = converter.GLB_DataToModels(glb, originalModel.ModelCollectionID, originalModel.ModelID, originalModel.LevelOfDetail);
 
             Assert.AreEqual(1, convertedModels.Length, "Not equal: convertedModels.Length");
             var convertedModel = convertedModels[0];
@@ -94,6 +95,14 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void ExportThenImport_WithBarrelFromX8PC_ProducesOriginal() {
             var barrelData = File.ReadAllBytes(c_barrelPath);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var polyChar = x8pcFile.PolyCharTable[0];
+            TestModelConversion(polyChar.GetModel(0, 0), polyChar);
+        }
+
+        [TestMethod]
+        public void ExportThenImport_WithSynbiosPart1FromX8PC_ProducesOriginal() {
+            var barrelData = File.ReadAllBytes(c_synbiosPath);
             var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
             var polyChar = x8pcFile.PolyCharTable[0];
             TestModelConversion(polyChar.GetModel(0, 0), polyChar);

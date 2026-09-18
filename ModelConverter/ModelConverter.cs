@@ -65,7 +65,22 @@ namespace ModelConverter {
             public readonly int Key;
         }
 
-        public byte[] ModelToGLB(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
+        public byte[] ModelToGLB_Data(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(sglModels, texMetaCollection);
+
+            // Write GLTF, ignoring errors (we don't care if they're broken).
+            var settings = new WriteSettings {
+                JsonIndented = true,
+                JsonOptions = new JsonWriterOptions() { NewLine = "\n" },
+                Validation = SharpGLTF.Validation.ValidationMode.Skip,
+            };
+            using (var stream = new MemoryStream()) {
+                modelRoot.WriteGLB(stream, settings);
+                return stream.ToArray();
+            }
+        }
+
+        public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
@@ -284,26 +299,19 @@ namespace ModelConverter {
                 scene.CreateNode("node").WithMesh(mesh);
             }
 
-            // Write GLTF, ignoring errors (we don't care if they're broken).
-            var settings = new WriteSettings {
-                JsonIndented = true,
-                JsonOptions = new JsonWriterOptions() { NewLine = "\n" },
-                Validation = SharpGLTF.Validation.ValidationMode.Skip,
-            };
-            using (var stream = new MemoryStream()) {
-                modelRoot.WriteGLB(stream, settings);
-                return stream.ToArray();
-            }
+            return modelRoot;
         }
 
-        public SGL_Model[] GLB_ToModels(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
+        public SGL_Model[] GLB_DataToModels(byte[] glbFile, int? modelCollectionId, int? modelId, int? levelOfDetail) {
+            var modelRoot = ModelRoot.ParseGLB(new ArraySegment<byte>(glbFile));
+            return GLTF_ModelRootToModels(modelRoot, modelCollectionId, modelId, levelOfDetail);
+        }
+
+        public SGL_Model[] GLTF_ModelRootToModels(ModelRoot modelRoot, int? modelCollectionId, int? modelId, int? levelOfDetail) {
             // TODO: in the future, there could be multiple primitives.
             // TODO: someone integrate triangle indices back into quad generation.
 
             var sglModels = new List<SGL_Model>();
-
-            var modelRoot = ModelRoot.ParseGLB(new ArraySegment<byte>(glbFile));
-
             foreach (var mesh in modelRoot.LogicalMeshes) {
                 // We always only have 1 primitive.
                 var primitive = mesh.Primitives[0];
