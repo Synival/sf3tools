@@ -155,7 +155,10 @@ namespace ModelConverter {
                             var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
                             var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
 
-                            materialBuilder = materialBuilder.WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
+                            materialBuilder.UseChannel(KnownChannel.BaseColor)
+                                .UseTexture()
+                                .WithPrimaryImage(textureAtlasImage)
+                                .WithSampler(TextureWrapMode.CLAMP_TO_EDGE, TextureWrapMode.CLAMP_TO_EDGE, mag: TextureInterpolationFilter.NEAREST);
                         }
                     }
 
