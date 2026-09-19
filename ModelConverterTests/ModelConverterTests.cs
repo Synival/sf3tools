@@ -90,6 +90,7 @@ namespace ModelConverter.Tests.Utils {
                     Assert.AreEqual(originalAttr.ColorNo,    convertedAttr.ColorNo,    $"Not equal: Faces[{i}].Attributes.ColorNo");
                     Assert.AreEqual(originalAttr.IsTwoSided, convertedAttr.IsTwoSided, $"Not equal: Faces[{i}].Attributes.IsTwoSided");
                     Assert.AreEqual(originalAttr.UseTexture, convertedAttr.UseTexture, $"Not equal: Faces[{i}].Attributes.UseTexture");
+                    Assert.AreEqual(originalAttr.UseLight,   convertedAttr.UseLight,   $"Not equal: Faces[{i}].Attributes.UseLight");
                 }
 
                 Assert.IsNotNull(convertedModel.VertexNormals, $"Not null: VertexNormals");

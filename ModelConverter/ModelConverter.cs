@@ -44,12 +44,20 @@ namespace ModelConverter {
         }
 
         private struct Quad {
-            public Quad(int originalIndex, ConvertedVertex[] vertices, ushort? colorNo = null, bool? isTwoSided = null, bool? useTexture = null) {
+            public Quad(
+                int originalIndex,
+                ConvertedVertex[] vertices,
+                ushort? colorNo = null,
+                bool? isTwoSided = null,
+                bool? useTexture = null,
+                bool? useLight = null
+            ) {
                 OriginalIndex = originalIndex;
                 Vertices      = vertices;
                 ColorNo       = colorNo;
                 IsTwoSided    = isTwoSided;
                 UseTexture    = useTexture;
+                UseLight      = useLight;
             }
 
             public override string ToString() => $"{{ OrigIdx: {OriginalIndex}, Vertices: [{Vertices[0].OriginalIndex}, {Vertices[1].OriginalIndex}, {Vertices[2].OriginalIndex}, {Vertices[3].OriginalIndex}] }}";
@@ -59,15 +67,18 @@ namespace ModelConverter {
             public readonly ushort? ColorNo;
             public readonly bool? IsTwoSided;
             public readonly bool? UseTexture;
+            public readonly bool? UseLight;
         }
 
         private struct AttrKey {
             public AttrKey(IATTR attr) {
                 HasTextures = attr.UseTexture;
                 IsTwoSided  = attr.IsTwoSided;
+                UseLight    = attr.UseLight;
 
                 Key = (HasTextures ? 0x01 : 0)
-                    | (IsTwoSided  ? 0x02 : 0);
+                    | (IsTwoSided  ? 0x02 : 0)
+                    | (UseLight    ? 0x04 : 0);
             }
 
             public override int GetHashCode() => Key;
@@ -77,6 +88,7 @@ namespace ModelConverter {
 
             public readonly bool HasTextures;
             public readonly bool IsTwoSided;
+            public readonly bool UseLight;
 
             public readonly int Key;
         }
@@ -126,7 +138,7 @@ namespace ModelConverter {
                     TextureAtlas textureAtlas = null;
                     Rectangle textureAtlasDimensions;
 
-                    Material material = null;
+                    var materialBuilder = new MaterialBuilder("material");
                     if (attrKey.HasTextures) {
                         var textureIds = faces.Select(x => x.Face.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
                         var texturesForMcId = texturesByMcId[sglModel.ModelCollectionID];
@@ -146,15 +158,17 @@ namespace ModelConverter {
                             // Add the texture.
                             var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
                             var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
-                            var materialBuilder = new MaterialBuilder("material")
-                                .WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
-                            material = modelRoot.CreateMaterial(materialBuilder);
+
+                            materialBuilder = materialBuilder.WithChannelImage(KnownChannel.BaseColor, textureAtlasImage);
                         }
                     }
-                    else
-                        material = modelRoot.CreateMaterial("material");
 
-                    material.DoubleSided = attrKey.IsTwoSided;
+                    // Build additional properties.
+                    materialBuilder = materialBuilder.WithDoubleSide(attrKey.IsTwoSided);
+                    if (!attrKey.UseLight)
+                        materialBuilder = materialBuilder.WithUnlitShader();
+
+                    var material = modelRoot.CreateMaterial(materialBuilder);
                     primitive.Material = material;
 
                     // Build quads, each with its own vertices. We're not going to have *ANY* shared vertices because we
@@ -394,7 +408,8 @@ namespace ModelConverter {
                                 x.Value.Select(y => primVertices[y]).ToArray(),
                                 colorNo:    colorChannels.ToABGR1555(),
                                 isTwoSided: material.DoubleSided,
-                                useTexture: (materialTexture != null)
+                                useTexture: (materialTexture != null),
+                                useLight:   !material.Unlit
                             );
                         })
                         .ToArray();
@@ -414,6 +429,7 @@ namespace ModelConverter {
                         ColorNo    = x.ColorNo.Value,
                         IsTwoSided = x.IsTwoSided.Value,
                         UseTexture = x.UseTexture.Value,
+                        UseLight   = x.UseLight.Value
                     })).ToArray(),
                     meshVertices.Select(x => x.Normal.Value.ToVECTOR().ToSwappedYZ()).ToArray()
                 );
