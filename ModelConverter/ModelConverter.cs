@@ -44,11 +44,12 @@ namespace ModelConverter {
         }
 
         private struct Quad {
-            public Quad(int originalIndex, ConvertedVertex[] vertices, ushort? colorNo = null, bool? isTwoSided = null) {
+            public Quad(int originalIndex, ConvertedVertex[] vertices, ushort? colorNo = null, bool? isTwoSided = null, bool? useTexture = null) {
                 OriginalIndex = originalIndex;
                 Vertices      = vertices;
                 ColorNo       = colorNo;
                 IsTwoSided    = isTwoSided;
+                UseTexture    = useTexture;
             }
 
             public override string ToString() => $"{{ OrigIdx: {OriginalIndex}, Vertices: [{Vertices[0].OriginalIndex}, {Vertices[1].OriginalIndex}, {Vertices[2].OriginalIndex}, {Vertices[3].OriginalIndex}] }}";
@@ -57,6 +58,7 @@ namespace ModelConverter {
             public readonly ConvertedVertex[] Vertices;
             public readonly ushort? ColorNo;
             public readonly bool? IsTwoSided;
+            public readonly bool? UseTexture;
         }
 
         private struct AttrKey {
@@ -365,7 +367,7 @@ namespace ModelConverter {
                             (int) Math.Round(vertexQuadIndices[x].Y),
                             vertexPositions[x],
                             vertexNormals[x],
-                            null, // TODO: ATTR
+                            null, // TODO: texCoord0
                             new Vector4(1, 1, 1, 1)
                         ))
                         .ToArray();
@@ -390,8 +392,9 @@ namespace ModelConverter {
                             return new Quad(
                                 x.Key,
                                 x.Value.Select(y => primVertices[y]).ToArray(),
-                                colorChannels.ToABGR1555(),
-                                material.DoubleSided
+                                colorNo:    colorChannels.ToABGR1555(),
+                                isTwoSided: material.DoubleSided,
+                                useTexture: (materialTexture != null)
                             );
                         })
                         .ToArray();
@@ -409,7 +412,8 @@ namespace ModelConverter {
                     meshVertices.Select(x => x.Position.ToVECTOR().ToSwappedYZ()).ToArray(),
                     meshQuads.Select(x => new SGL_ModelFace(x.Vertices.Select(y => y.OriginalIndex).ToArray(), new VECTOR(0, -1, 0), new ATTR() {
                         ColorNo    = x.ColorNo.Value,
-                        IsTwoSided = x.IsTwoSided.Value
+                        IsTwoSided = x.IsTwoSided.Value,
+                        UseTexture = x.UseTexture.Value,
                     })).ToArray(),
                     meshVertices.Select(x => x.Normal.Value.ToVECTOR().ToSwappedYZ()).ToArray()
                 );
