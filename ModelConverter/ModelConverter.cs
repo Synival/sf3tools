@@ -17,6 +17,8 @@ using SharpGLTF.Schema2;
 
 namespace ModelConverter {
     public class ModelConverter {
+        private readonly Vector4 c_black = new Vector4(0, 0, 0, 0);
+
         private struct ConvertedVertex {
             public ConvertedVertex(int primIndex, int originalIndex, int quadIndex, int indexInQuad, Vector3 position, Vector3? normal, Vector2? texCoord0, Vector4 color0) {
                 PrimitiveIndex = primIndex;
@@ -42,15 +44,19 @@ namespace ModelConverter {
         }
 
         private struct Quad {
-            public Quad(int originalIndex, ConvertedVertex[] vertices) {
+            public Quad(int originalIndex, ConvertedVertex[] vertices, ushort? colorNo = null, bool? isTwoSided = null) {
                 OriginalIndex = originalIndex;
                 Vertices      = vertices;
+                ColorNo       = colorNo;
+                IsTwoSided    = isTwoSided;
             }
 
             public override string ToString() => $"{{ OrigIdx: {OriginalIndex}, Vertices: [{Vertices[0].OriginalIndex}, {Vertices[1].OriginalIndex}, {Vertices[2].OriginalIndex}, {Vertices[3].OriginalIndex}] }}";
 
             public readonly int OriginalIndex;
             public readonly ConvertedVertex[] Vertices;
+            public readonly ushort? ColorNo;
+            public readonly bool? IsTwoSided;
         }
 
         private struct AttrKey {
@@ -322,6 +328,9 @@ namespace ModelConverter {
                 var meshQuads    = new List<Quad>();
 
                 foreach (var primitive in mesh.Primitives) {
+                    var material = primitive.Material;
+                    var materialTexture = material.GetDiffuseTexture();
+
                     // Fetch vertices.
                     var vertexAccessor = primitive.GetVertexAccessor("POSITION");
                     var vertexPositions = new Vector3[vertexAccessor.Count];
@@ -364,8 +373,27 @@ namespace ModelConverter {
                     // Keep track of vertices for the entire mesh.
                     meshVertices.AddRange(primVertices);
 
+                    // Fetch colors.
+                    var color0Accessor = primitive.GetVertexAccessor("COLOR_0");
+                    var vertexColors = new Vector4[color0Accessor.Count];
+                    color0Accessor.AsVector4Array().CopyTo(vertexColors, 0);
+
                     var primQuads = quadVertexMap
-                        .Select(x => new Quad(x.Key, x.Value.Select(y => primVertices[y]).ToArray()))
+                        .Select(x => {
+                            var colorVec4 = (materialTexture == null) ? vertexColors[x.Value[0]] : c_black;
+                            var colorChannels = new PixelChannels() {
+                                R = (byte) (colorVec4.X * 255),
+                                G = (byte) (colorVec4.Y * 255),
+                                B = (byte) (colorVec4.Z * 255),
+                                A = (byte) (colorVec4.W * 255),
+                            };
+                            return new Quad(
+                                x.Key,
+                                x.Value.Select(y => primVertices[y]).ToArray(),
+                                colorChannels.ToABGR1555(),
+                                material.DoubleSided
+                            );
+                        })
                         .ToArray();
 
                     // Keep track of quads for the entire mesh.
@@ -379,7 +407,10 @@ namespace ModelConverter {
                 // Build our SGL_Model.
                 var newSglModel = new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
                     meshVertices.Select(x => x.Position.ToVECTOR().ToSwappedYZ()).ToArray(),
-                    meshQuads.Select(x => new SGL_ModelFace(x.Vertices.Select(y => y.OriginalIndex).ToArray(), new VECTOR(0, -1, 0), new ATTR())).ToArray(),
+                    meshQuads.Select(x => new SGL_ModelFace(x.Vertices.Select(y => y.OriginalIndex).ToArray(), new VECTOR(0, -1, 0), new ATTR() {
+                        ColorNo    = x.ColorNo.Value,
+                        IsTwoSided = x.IsTwoSided.Value
+                    })).ToArray(),
                     meshVertices.Select(x => x.Normal.Value.ToVECTOR().ToSwappedYZ()).ToArray()
                 );
 

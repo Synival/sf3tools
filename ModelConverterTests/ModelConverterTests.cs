@@ -64,21 +64,31 @@ namespace ModelConverter.Tests.Utils {
                 Assert.AreEqual(originalModel.Vertices.Count, convertedModel.Vertices.Count, $"Not equal: Vertices.Count");
                 for (int i = 0; i < originalModel.Vertices.Count; i++) {
                     Assert.IsNotNull(convertedModel.Vertices[i], $"Not null: Vertices[{i}]");
-                    Assert.AreEqual(originalModel.Vertices[i].X.Float, convertedModel.Vertices[i].X.Float, 0.001f, $"Not equal: Vertices[{i}].X");
-                    Assert.AreEqual(originalModel.Vertices[i].Y.Float, convertedModel.Vertices[i].Y.Float, 0.001f, $"Not equal: Vertices[{i}].Y");
-                    Assert.AreEqual(originalModel.Vertices[i].Z.Float, convertedModel.Vertices[i].Z.Float, 0.001f, $"Not equal: Vertices[{i}].Z");
+
+                    var originalVertex  = originalModel.Vertices[i];
+                    var convertedVertex = convertedModel.Vertices[i];
+                    Assert.AreEqual(originalVertex.X.Float, convertedVertex.X.Float, 0.001f, $"Not equal: Vertices[{i}].X");
+                    Assert.AreEqual(originalVertex.Y.Float, convertedVertex.Y.Float, 0.001f, $"Not equal: Vertices[{i}].Y");
+                    Assert.AreEqual(originalVertex.Z.Float, convertedVertex.Z.Float, 0.001f, $"Not equal: Vertices[{i}].Z");
                 }
 
                 Assert.IsNotNull(convertedModel.Faces, $"Not null: Faces");
                 Assert.AreEqual(originalModel.Faces.Count, convertedModel.Faces.Count, $"Not equal: Faces.Count");
                 for (int i = 0; i < originalModel.Faces.Count; i++) {
                     Assert.IsNotNull(convertedModel.Faces[i], $"Not null: Faces[{i}]");
-                    Assert.IsNotNull(convertedModel.Faces[i].VertexIndices, $"Not null: Faces[{i}].VertexIndices");
-                    Assert.AreEqual(4, convertedModel.Faces[i].VertexIndices.Count, $"Not equal: Faces[{i}].VertexIndices.Count");
-                    for (int j = 0; j < 4; j++)
-                        Assert.AreEqual(originalModel.Faces[i].VertexIndices[j], convertedModel.Faces[i].VertexIndices[j], $"Not equal: Faces[{i}].VertexIndices[{j}]");
 
-                    // TODO: Check ATTRs
+                    var originalFace  = originalModel.Faces[i];
+                    var convertedFace = convertedModel.Faces[i];
+                    Assert.IsNotNull(convertedFace.VertexIndices, $"Not null: Faces[{i}].VertexIndices");
+                    Assert.AreEqual(4, convertedFace.VertexIndices.Count, $"Not equal: Faces[{i}].VertexIndices.Count");
+                    for (int j = 0; j < 4; j++)
+                        Assert.AreEqual(originalFace.VertexIndices[j], convertedFace.VertexIndices[j], $"Not equal: Faces[{i}].VertexIndices[{j}]");
+
+                    // TODO: Check remaining ATTR properties
+                    var originalAttr  = originalFace.Attributes;
+                    var convertedAttr = convertedFace.Attributes;
+                    Assert.AreEqual(originalAttr.ColorNo,    convertedAttr.ColorNo,    $"Not equal: Faces[{i}].Attributes.ColorNo");
+                    Assert.AreEqual(originalAttr.IsTwoSided, convertedAttr.IsTwoSided, $"Not equal: Faces[{i}].Attributes.IsTwoSided");
                 }
 
                 Assert.IsNotNull(convertedModel.VertexNormals, $"Not null: VertexNormals");
