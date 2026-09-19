@@ -7,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.SGL;
@@ -44,30 +45,17 @@ namespace ModelConverter {
         }
 
         private struct Quad {
-            public Quad(
-                int originalIndex,
-                ConvertedVertex[] vertices,
-                ushort? colorNo = null,
-                bool? isTwoSided = null,
-                bool? useTexture = null,
-                bool? useLight = null
-            ) {
+            public Quad(int originalIndex, ConvertedVertex[] vertices, IATTR attr) {
                 OriginalIndex = originalIndex;
                 Vertices      = vertices;
-                ColorNo       = colorNo;
-                IsTwoSided    = isTwoSided;
-                UseTexture    = useTexture;
-                UseLight      = useLight;
+                ATTR          = attr;
             }
 
             public override string ToString() => $"{{ OrigIdx: {OriginalIndex}, Vertices: [{Vertices[0].OriginalIndex}, {Vertices[1].OriginalIndex}, {Vertices[2].OriginalIndex}, {Vertices[3].OriginalIndex}] }}";
 
             public readonly int OriginalIndex;
             public readonly ConvertedVertex[] Vertices;
-            public readonly ushort? ColorNo;
-            public readonly bool? IsTwoSided;
-            public readonly bool? UseTexture;
-            public readonly bool? UseLight;
+            public readonly IATTR ATTR;
         }
 
         private struct AttrKey {
@@ -75,10 +63,14 @@ namespace ModelConverter {
                 HasTextures = attr.UseTexture;
                 IsTwoSided  = attr.IsTwoSided;
                 UseLight    = attr.UseLight;
+                HFlip       = attr.HFlip;
+                VFlip       = attr.VFlip;
 
                 Key = (HasTextures ? 0x01 : 0)
                     | (IsTwoSided  ? 0x02 : 0)
-                    | (UseLight    ? 0x04 : 0);
+                    | (UseLight    ? 0x04 : 0)
+                    | (HFlip       ? 0x08 : 0)
+                    | (VFlip       ? 0x10 : 0);
             }
 
             public override int GetHashCode() => Key;
@@ -89,6 +81,8 @@ namespace ModelConverter {
             public readonly bool HasTextures;
             public readonly bool IsTwoSided;
             public readonly bool UseLight;
+            public readonly bool HFlip;
+            public readonly bool VFlip;
 
             public readonly int Key;
         }
@@ -109,6 +103,8 @@ namespace ModelConverter {
         }
 
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
+            // TODO: four-way split for crazy quads
+
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
@@ -167,6 +163,10 @@ namespace ModelConverter {
                     materialBuilder = materialBuilder.WithDoubleSide(attrKey.IsTwoSided);
                     if (!attrKey.UseLight)
                         materialBuilder = materialBuilder.WithUnlitShader();
+                    materialBuilder.Extras = new JsonObject() {
+                        ["hFlip"] = attrKey.HFlip,
+                        ["vFlip"] = attrKey.VFlip,
+                    };
 
                     var material = modelRoot.CreateMaterial(materialBuilder);
                     primitive.Material = material;
@@ -188,6 +188,8 @@ namespace ModelConverter {
                             var node = textureAtlas.GetNodeByTextureIDFrame(attr.TextureNo, 0);
                             var nodeRect = node.Rect;
 
+                            // Also flip UV coordinates so the face appears correct when importing.
+                            // (They'll need to be flipped back on re-import.)
                             if (attr.HFlip)
                                 idxX = 1 - idxX;
                             if (attr.VFlip)
@@ -232,7 +234,7 @@ namespace ModelConverter {
                             .ToArray();
 
                         quadFirstVertIdx += 4;
-                        quadList.Add(new Quad(face.Index, faceVertices));
+                        quadList.Add(new Quad(face.Index, faceVertices, face.Face.Attributes));
                     }
 
                     // Create a big buffer for the entire model.
@@ -335,8 +337,8 @@ namespace ModelConverter {
         }
 
         public SGL_Model[] GLTF_ModelRootToModels(ModelRoot modelRoot, int? modelCollectionId, int? modelId, int? levelOfDetail) {
-            // TODO: in the future, there could be multiple primitives.
-            // TODO: someone integrate triangle indices back into quad generation.
+            // TODO: (maybe not?) somehow integrate triangle indices back into quad generation.
+            // TODO: swap UV coordinates based on HFlip and VFlip
 
             var sglModels = new List<SGL_Model>();
             foreach (var mesh in modelRoot.LogicalMeshes) {
@@ -406,10 +408,14 @@ namespace ModelConverter {
                             return new Quad(
                                 x.Key,
                                 x.Value.Select(y => primVertices[y]).ToArray(),
-                                colorNo:    colorChannels.ToABGR1555(),
-                                isTwoSided: material.DoubleSided,
-                                useTexture: (materialTexture != null),
-                                useLight:   !material.Unlit
+                                new ATTR() {
+                                    ColorNo    = colorChannels.ToABGR1555(),
+                                    IsTwoSided = material.DoubleSided,
+                                    UseTexture = (materialTexture != null),
+                                    UseLight   = !material.Unlit,
+                                    HFlip      = (bool) material.Extras["hFlip"],
+                                    VFlip      = (bool) material.Extras["vFlip"],
+                                }
                             );
                         })
                         .ToArray();
@@ -426,10 +432,12 @@ namespace ModelConverter {
                 var newSglModel = new SGL_Model(modelCollectionId ?? 0, modelId ?? 0, levelOfDetail ?? 0,
                     meshVertices.Select(x => x.Position.ToVECTOR().ToSwappedYZ()).ToArray(),
                     meshQuads.Select(x => new SGL_ModelFace(x.Vertices.Select(y => y.OriginalIndex).ToArray(), new VECTOR(0, -1, 0), new ATTR() {
-                        ColorNo    = x.ColorNo.Value,
-                        IsTwoSided = x.IsTwoSided.Value,
-                        UseTexture = x.UseTexture.Value,
-                        UseLight   = x.UseLight.Value
+                        ColorNo    = x.ATTR.ColorNo,
+                        IsTwoSided = x.ATTR.IsTwoSided,
+                        UseTexture = x.ATTR.UseTexture,
+                        UseLight   = x.ATTR.UseLight,
+                        HFlip      = x.ATTR.HFlip,
+                        VFlip      = x.ATTR.VFlip,
                     })).ToArray(),
                     meshVertices.Select(x => x.Normal.Value.ToVECTOR().ToSwappedYZ()).ToArray()
                 );

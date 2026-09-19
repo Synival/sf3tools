@@ -1,4 +1,5 @@
-﻿using SF3.Models.Files.X8PC;
+﻿using CommonLib.SGL;
+using SF3.Models.Files.X8PC;
 using SF3.Models.Structs.X8PC;
 using SF3.X8PC;
 
@@ -76,15 +77,24 @@ namespace X8PC_Analyzer {
 
             var report = new List<string>();
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
-                var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
-                Directory.CreateDirectory(directory);
                 var xpdatas = pc.XPDataTables.SelectMany(x => x).ToArray();
                 var modelRoot = converter.ModelToGLTF_ModelRoot(xpdatas, pc);
                 foreach (var mesh in modelRoot.LogicalMeshes.Select((x, i) => (Mesh: x, Index: i)).Where(x => x.Mesh.Primitives.Count == 2))
                     report.Add($"{pc.ID}.{mesh.Index}");
             }
+            return report.ToArray();
+        }
 
-            return report.Count == 0 ? null : report.ToArray();
+        public static string[]? PolyCharsWithFlippingInATTRs(IX8PC_File x8pcFile, string filename) {
+            var converter = new ModelConverter.ModelConverter();
+
+            var report = new List<string>();
+            foreach (PolyChar pc in x8pcFile.PolyCharTable) {
+                var models = pc.XPDataTables.SelectMany(x => x).Cast<ISGL_Model>().ToArray();
+                foreach (var model in models.Select((x, i) => (Model: x, Index: i)).Where(x => x.Model.Faces.Any(y => y.Attributes.HFlip || y.Attributes.VFlip)))
+                    report.Add($"{pc.ID}.{model.Index}");
+            }
+            return report.ToArray();
         }
     }
 }
