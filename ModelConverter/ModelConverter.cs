@@ -102,6 +102,18 @@ namespace ModelConverter {
             }
         }
 
+        private class FaceWithIndex {
+            public ISGL_ModelFace Face;
+            public int Index;
+        }
+
+        private class MaterialWithFaces {
+            public Material Material;
+            public TextureAtlas TextureAtlas;
+            public Rectangle TextureAtlasDimensions;
+            public Dictionary<ISGL_Model, FaceWithIndex[]> FacesByModel;
+        }
+
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
             // TODO: four-way split for crazy quads
 
@@ -116,19 +128,28 @@ namespace ModelConverter {
                 ? mcIds.ToDictionary(x => x, x => texMetaCollection.GetAnimatableTexturesByModelCollectionID(x))
                 : new Dictionary<int, Dictionary<int, IAnimatableTexture>>();
 
-            foreach (var sglModel in sglModels) {
-                var mesh = modelRoot.CreateMesh();
+            var allFaces = sglModels.SelectMany(x => x.Faces.Select((y, i) => (Model: x, Face: new FaceWithIndex() { Face = y, Index = i }))).ToArray();
 
-                var facesByAttr = sglModel.Faces
-                    .Select((x, i) => (Face: x, Index: i, AttrKey: new AttrKey(x.Attributes)))
-                    .GroupBy(x => x.AttrKey)
-                    .ToDictionary(x => x.Key, x => x.ToArray());
+            var facesByMcIdThenAttrKeyThenModel = allFaces
+                .OrderBy(x => x.Model.ModelCollectionID)
+                .GroupBy(x => x.Model.ModelCollectionID)
+                .ToDictionary(x => x.Key, x => x
+                    .Select(y => (AttrKey: new AttrKey(y.Face.Face.Attributes), Model: y.Model, Face: y.Face))
+                    .OrderBy(y => y.AttrKey.Key)
+                    .GroupBy(y => y.AttrKey)
+                    .ToDictionary(y => y.Key, y => new MaterialWithFaces() {
+                        Material = null,
+                        FacesByModel = y
+                            .OrderBy(z => z.Model.ModelID)
+                            .GroupBy(z => z.Model)
+                            .ToDictionary(z => z.Key, z => z.Select(a => a.Face).ToArray())
+                    })
+                );
 
-                foreach (var attrFaces in facesByAttr) {
-                    var attrKey = attrFaces.Key;
-                    var faces = attrFaces.Value;
-
-                    var primitive = mesh.CreatePrimitive();
+            foreach (var mcId in mcIds) {
+                foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[mcId]) {
+                    AttrKey attrKey = attrFaces.Key;
+                    var faces = attrFaces.Value.FacesByModel.SelectMany(x => x.Value).ToArray();
 
                     // Build a texture atlas for this model.
                     TextureAtlas textureAtlas = null;
@@ -137,7 +158,7 @@ namespace ModelConverter {
                     var materialBuilder = new MaterialBuilder("material");
                     if (attrKey.HasTextures) {
                         var textureIds = faces.Select(x => x.Face.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
-                        var texturesForMcId = texturesByMcId[sglModel.ModelCollectionID];
+                        var texturesForMcId = texturesByMcId[mcId];
                         var textures = textureIds.Where(x => texturesForMcId.ContainsKey(x)).Select(x => texturesForMcId[x]).ToArray();
                         textureAtlas = new TextureAtlas(textures, tryRotate: false);
                         textureAtlasDimensions = textureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
@@ -171,8 +192,26 @@ namespace ModelConverter {
                         ["vFlip"] = attrKey.VFlip,
                     };
 
-                    var material = modelRoot.CreateMaterial(materialBuilder);
-                    primitive.Material = material;
+                    attrFaces.Value.TextureAtlas           = textureAtlas;
+                    attrFaces.Value.TextureAtlasDimensions = textureAtlasDimensions;
+                    attrFaces.Value.Material               = modelRoot.CreateMaterial(materialBuilder);
+                }
+            }
+
+            foreach (var sglModel in sglModels) {
+                var mesh = modelRoot.CreateMesh();
+
+                foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[sglModel.ModelCollectionID]) {
+                    if (!attrFaces.Value.FacesByModel.ContainsKey(sglModel))
+                        continue;
+
+                    var attrKey                = attrFaces.Key;
+                    var textureAtlas           = attrFaces.Value.TextureAtlas;
+                    var textureAtlasDimensions = attrFaces.Value.TextureAtlasDimensions;
+                    var faces                  = attrFaces.Value.FacesByModel[sglModel];
+
+                    var primitive = mesh.CreatePrimitive();
+                    primitive.Material = attrFaces.Value.Material;
 
                     // Build quads, each with its own vertices. We're not going to have *ANY* shared vertices because we
                     // *must* store unique ATTR data per-polygon. (We can at least share them between triangles)
