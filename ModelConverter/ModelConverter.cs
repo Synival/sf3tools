@@ -109,73 +109,87 @@ namespace ModelConverter {
 
         private class MaterialWithFaces {
             public Material Material;
+            public Dictionary<ISGL_Model, FaceWithIndex[]> FacesByModel;
+        }
+
+        private class ModelCollectionWithAtlas {
             public TextureAtlas TextureAtlas;
             public Rectangle TextureAtlasDimensions;
-            public Dictionary<ISGL_Model, FaceWithIndex[]> FacesByModel;
+            internal MemoryImage TextureAtlasMemoryImage;
+            public Dictionary<AttrKey, MaterialWithFaces> ModelsByAttr;
         }
 
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
             // TODO: four-way split for crazy quads
+            // TODO: name stuff better (e.g, "Material001" instead of "material")
 
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
             var scene = modelRoot.UseScene("scene");
 
-            // Get all textures for applicable ModelCollectionID's.
             var mcIds = sglModels.Select(x => x.ModelCollectionID).Distinct().OrderBy(x => x).ToArray();
-            var texturesByMcId = (texMetaCollection != null)
-                ? mcIds.ToDictionary(x => x, x => texMetaCollection.GetAnimatableTexturesByModelCollectionID(x))
-                : new Dictionary<int, Dictionary<int, IAnimatableTexture>>();
-
             var allFaces = sglModels.SelectMany(x => x.Faces.Select((y, i) => (Model: x, Face: new FaceWithIndex() { Face = y, Index = i }))).ToArray();
-
             var facesByMcIdThenAttrKeyThenModel = allFaces
                 .OrderBy(x => x.Model.ModelCollectionID)
                 .GroupBy(x => x.Model.ModelCollectionID)
-                .ToDictionary(x => x.Key, x => x
-                    .Select(y => (AttrKey: new AttrKey(y.Face.Face.Attributes), Model: y.Model, Face: y.Face))
-                    .OrderBy(y => y.AttrKey.Key)
-                    .GroupBy(y => y.AttrKey)
-                    .ToDictionary(y => y.Key, y => new MaterialWithFaces() {
-                        Material = null,
-                        FacesByModel = y
-                            .OrderBy(z => z.Model.ModelID)
-                            .GroupBy(z => z.Model)
-                            .ToDictionary(z => z.Key, z => z.Select(a => a.Face).ToArray())
-                    })
+                .ToDictionary(x => x.Key, x => new ModelCollectionWithAtlas() { 
+                    ModelsByAttr = x
+                        .Select(y => (AttrKey: new AttrKey(y.Face.Face.Attributes), Model: y.Model, Face: y.Face))
+                        .OrderBy(y => y.AttrKey.Key)
+                        .GroupBy(y => y.AttrKey)
+                        .ToDictionary(y => y.Key, y => new MaterialWithFaces() {
+                            Material = null,
+                            FacesByModel = y
+                                .OrderBy(z => z.Model.ModelID)
+                                .GroupBy(z => z.Model)
+                                .ToDictionary(z => z.Key, z => z.Select(a => a.Face).ToArray())
+                        })
+                    }
                 );
 
+            // Generate the texture atlas and materials for each model collection.
             foreach (var mcId in mcIds) {
-                foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[mcId]) {
+                var mc = facesByMcIdThenAttrKeyThenModel[mcId];
+
+                // Start by generating the atlas.
+                var texturesById = (texMetaCollection != null)
+                    ? texMetaCollection.GetAnimatableTexturesByModelCollectionID(mcId)
+                    : new Dictionary<int, IAnimatableTexture>();
+                var mcTextures = texturesById.Values.ToArray();
+
+                mc.TextureAtlas = new TextureAtlas(mcTextures, tryRotate: false);
+                mc.TextureAtlasDimensions = mc.TextureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+
+                // If the atlas has images, create a shared 'MemoryImage' for it.
+                if (mcTextures.Length > 0) {
+                    byte[] textureAtlasBitmapContent;
+                    using (var textureAtlasBitmap = mc.TextureAtlas.CreateBitmap(onlyTextures: true, forceEvenWidth: true)) {
+                        using (var bitmapStream = new MemoryStream()) {
+                            textureAtlasBitmap.Save(bitmapStream, ImageFormat.Png);
+                            textureAtlasBitmapContent = bitmapStream.ToArray();
+                        }
+                    }
+
+                    // Add the texture.
+                    mc.TextureAtlasMemoryImage = new MemoryImage(textureAtlasBitmapContent);
+                }
+
+                // Create unique materials.
+                foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[mcId].ModelsByAttr) {
                     AttrKey attrKey = attrFaces.Key;
                     var faces = attrFaces.Value.FacesByModel.SelectMany(x => x.Value).ToArray();
 
-                    // Build a texture atlas for this model.
-                    TextureAtlas textureAtlas = null;
-                    Rectangle textureAtlasDimensions;
-
                     var materialBuilder = new MaterialBuilder("material");
+
+                    // If this AttrKey has textures, apply them.
                     if (attrKey.HasTextures) {
                         var textureIds = faces.Select(x => x.Face.Attributes).Where(x => x.UseTexture).Select(x => x.TextureNo).Distinct().OrderBy(x => x).ToArray();
-                        var texturesForMcId = texturesByMcId[mcId];
-                        var textures = textureIds.Where(x => texturesForMcId.ContainsKey(x)).Select(x => texturesForMcId[x]).ToArray();
-                        textureAtlas = new TextureAtlas(textures, tryRotate: false);
-                        textureAtlasDimensions = textureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+                        var textures = textureIds.Where(x => texturesById.ContainsKey(x)).Select(x => texturesById[x]).ToArray();
 
                         if (textures.Length > 0) {
-                            byte[] textureAtlasBitmapContent;
-                            using (var textureAtlasBitmap = textureAtlas.CreateBitmap(onlyTextures: true, forceEvenWidth: true)) {
-                                using (var bitmapStream = new MemoryStream()) {
-                                    textureAtlasBitmap.Save(bitmapStream, ImageFormat.Png);
-                                    textureAtlasBitmapContent = bitmapStream.ToArray();
-                                }
-                            }
-
                             // Add the texture.
-                            var textureAtlasImageContent = new MemoryImage(textureAtlasBitmapContent);
-                            var textureAtlasImage = ImageBuilder.From(textureAtlasImageContent);
-
+                            var textureAtlasImage = ImageBuilder.From(mc.TextureAtlasMemoryImage);
                             materialBuilder.UseChannel(KnownChannel.BaseColor)
                                 .UseTexture()
                                 .WithPrimaryImage(textureAtlasImage)
@@ -192,22 +206,23 @@ namespace ModelConverter {
                         ["vFlip"] = attrKey.VFlip,
                     };
 
-                    attrFaces.Value.TextureAtlas           = textureAtlas;
-                    attrFaces.Value.TextureAtlasDimensions = textureAtlasDimensions;
-                    attrFaces.Value.Material               = modelRoot.CreateMaterial(materialBuilder);
+                    attrFaces.Value.Material = modelRoot.CreateMaterial(materialBuilder);
                 }
             }
 
+            // Build all the meshes.
             foreach (var sglModel in sglModels) {
                 var mesh = modelRoot.CreateMesh();
 
-                foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[sglModel.ModelCollectionID]) {
+                // All the faces to create for this model are already nested in the 'facesByMcIdThenAttrKeyThenModel' dictionary.
+                foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[sglModel.ModelCollectionID].ModelsByAttr) {
                     if (!attrFaces.Value.FacesByModel.ContainsKey(sglModel))
                         continue;
 
                     var attrKey                = attrFaces.Key;
-                    var textureAtlas           = attrFaces.Value.TextureAtlas;
-                    var textureAtlasDimensions = attrFaces.Value.TextureAtlasDimensions;
+                    var mc                     = facesByMcIdThenAttrKeyThenModel[sglModel.ModelCollectionID];
+                    var textureAtlas           = mc.TextureAtlas;
+                    var textureAtlasDimensions = mc.TextureAtlasDimensions;
                     var faces                  = attrFaces.Value.FacesByModel[sglModel];
 
                     var primitive = mesh.CreatePrimitive();
@@ -242,8 +257,10 @@ namespace ModelConverter {
                                 (nodeRect.Top  + idxY * nodeRect.Height) / (float) textureAtlasDimensions.Height
                             );
                         }
-                        else
-                            return new Vector2(idxX, idxY);
+                        else {
+                            // Dummy UV coordinates.
+                            return new Vector2(0, 0);
+                        }
                     }
 
                     Vector4 GetColor0(ISGL_ModelFace face) {
