@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using CommonLib.Imaging;
 using OpenTK.Mathematics;
 
@@ -13,22 +14,22 @@ namespace SF3.Win.Views.X8PC {
             = new(buildLightingPalette(0x11, 0x09, 0x1f, 0x0c).Select(PixelConversion.ABGR1555toChannels).ToArray());
 
         private static ushort[] buildLightingPalette(byte low, byte mid, byte high, byte midIdx) {   
-            byte aboveBase; 
+            sbyte aboveBase; 
             byte baseVal;
 
             var colors = new ushort[0x20];
             for (int i = 0; i < 0x20; ++i) {
-            if (i < midIdx) {
-                baseVal = low;
-                aboveBase = (byte) (i * (mid - low) / midIdx);
-            }
-            else {
-                baseVal = mid;
-                aboveBase = (byte) ((i - midIdx) * (high - mid) / (0x1f - midIdx));
-            }
+                if (i < midIdx) {
+                    baseVal = low;
+                    aboveBase = (sbyte) (i * (mid - low) / midIdx);
+                }
+                else {
+                    baseVal = mid;
+                    aboveBase = (sbyte) ((i - midIdx) * (high - mid) / (0x1f - midIdx));
+                }
     
-            int v = baseVal + aboveBase;
-            colors[i] = (ushort) (0x8000 | v * 0x400 | v * 0x20 | v);
+                int v = Math.Clamp(baseVal + aboveBase, 0, 0x1F);
+                colors[i] = (ushort) (0x8000 | v * 0x400 | v * 0x20 | v);
             }
 
             return colors;
