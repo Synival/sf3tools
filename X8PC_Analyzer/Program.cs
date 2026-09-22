@@ -20,10 +20,11 @@ namespace X8PC_Analyzer {
         /// <summary>
         /// Check for matching X8PC files for certain conditions.
         /// </summary>
-        /// <param name="x1File"></param>
+        /// <param name="filename">Filename of the file opened.</param>
+        /// <param name="x8pcFile">Deserialized IX8PC_File to analyze.</param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X8PC_Match_Func(string filename, IX8PC_File x8pcFile) {
-            return MatchFuncs.WriteGLBsTwoPasses(x8pcFile, filename);
+            return MatchFuncs.WriteGLBs(x8pcFile, filename, forceLit: true);
         }
 
         private static int s_logIndex = 0;

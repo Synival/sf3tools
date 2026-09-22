@@ -1,4 +1,5 @@
 ﻿using CommonLib.SGL;
+using ModelConverter;
 using SF3.Models.Files.X8PC;
 using SF3.Models.Structs.X8PC;
 using SF3.X8PC;
@@ -9,17 +10,13 @@ namespace X8PC_Analyzer {
             var strings = new List<string>();
 
             foreach (var pc in x8pcFile.PolyCharTable) {
-                {
-                    var texHeader = pc.TexDefChunkHeader;
-                    if (texHeader.TexDefsOffset != 0x14 || texHeader.Unknown0x0C != 0x00 || texHeader.Unknown0x10 != 0x00)
-                        strings.Add($"TexDefHeader: 0x{texHeader.TexDefsOffset:X2}, 0x{texHeader.Unknown0x0C:X2}, 0x{texHeader.Unknown0x10:X2}");
-                }
+                var texHeader = pc.TexDefChunkHeader;
+                if (texHeader.TexDefsOffset != 0x14 || texHeader.Unknown0x0C != 0x00 || texHeader.Unknown0x10 != 0x00)
+                    strings.Add($"TexDefHeader: 0x{texHeader.TexDefsOffset:X2}, 0x{texHeader.Unknown0x0C:X2}, 0x{texHeader.Unknown0x10:X2}");
 
-                {
-                    var modelHeader = pc.ModelChunkHeader;
-                    if (modelHeader.ModelsOffset != 0x08)
-                        strings.Add($"ModelHeader: 0x{modelHeader.ModelsOffset:X2}");
-                }
+                var modelHeader = pc.ModelChunkHeader;
+                if (modelHeader.ModelsOffset != 0x08)
+                    strings.Add($"ModelHeader: 0x{modelHeader.ModelsOffset:X2}");
             }
 
             return strings.ToArray();
@@ -46,8 +43,10 @@ namespace X8PC_Analyzer {
             return strings.Count > 0 ? strings.ToArray() : null;
         }
 
-        public static string[]? WriteGLBs(IX8PC_File x8pcFile, string filename) {
-            var converter = new ModelConverter.ModelConverter();
+        public static string[]? WriteGLBs(IX8PC_File x8pcFile, string filename, bool forceLit) {
+            var flags = new ModelConversionFlags() { ForceLit = forceLit };
+            var converter = new ModelConverter.ModelConverter(flags);
+
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
                 var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
                 Directory.CreateDirectory(directory);
@@ -60,6 +59,7 @@ namespace X8PC_Analyzer {
 
         public static string[]? WriteGLBsTwoPasses(IX8PC_File x8pcFile, string filename) {
             var converter = new ModelConverter.ModelConverter();
+
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
                 var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
                 Directory.CreateDirectory(directory);

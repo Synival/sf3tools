@@ -20,6 +20,15 @@ namespace ModelConverter {
     public class ModelConverter {
         private readonly Vector4 c_black = new Vector4(0, 0, 0, 0);
 
+        public ModelConverter() : this(new ModelConversionFlags()) {
+        }
+
+        public ModelConverter(ModelConversionFlags flags) {
+            if (flags == null)
+                throw new ArgumentNullException(nameof(flags));
+            Flags = flags;
+        }
+
         private struct ConvertedVertex {
             public ConvertedVertex(int primIndex, int originalIndex, int quadIndex, int indexInQuad, Vector3 position, Vector3? normal, Vector2? texCoord0, Vector4 color0) {
                 PrimitiveIndex = primIndex;
@@ -59,10 +68,10 @@ namespace ModelConverter {
         }
 
         private struct AttrKey {
-            public AttrKey(IATTR attr) {
+            public AttrKey(IATTR attr, bool forceLit) {
                 HasTextures = attr.UseTexture;
                 IsTwoSided  = attr.IsTwoSided;
-                UseLight    = attr.UseLight;
+                UseLight    = attr.UseLight || forceLit;
                 HFlip       = attr.HFlip;
                 VFlip       = attr.VFlip;
 
@@ -71,12 +80,31 @@ namespace ModelConverter {
                     | (UseLight    ? 0x04 : 0)
                     | (HFlip       ? 0x08 : 0)
                     | (VFlip       ? 0x10 : 0);
+
+                var newName = "";
+                if (HasTextures)
+                    newName += "_Tex";
+                if (IsTwoSided)
+                    newName += "_TwoSided";
+                if (UseLight)
+                    newName += "_Lit";
+
+                if (HFlip && VFlip)
+                    newName += "_HVFlip";
+                else if (HFlip)
+                    newName += "_HFlip";
+                else if (VFlip)
+                    newName += "_VFlip";
+
+                Name = (newName == "") ? "NoFlags" : newName.Substring(1);
             }
 
             public override int GetHashCode() => Key;
 
             public override bool Equals(object obj)
                 => (obj is AttrKey other) ? Key == other.Key : base.Equals(obj);
+
+            public readonly string Name;
 
             public readonly bool HasTextures;
             public readonly bool IsTwoSided;
@@ -121,12 +149,12 @@ namespace ModelConverter {
 
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
             // TODO: four-way split for crazy quads
-            // TODO: name stuff better (e.g, "Material001" instead of "material")
 
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
-            var scene = modelRoot.UseScene("scene");
+            var scene = modelRoot.UseScene("Scene");
+            int nodeIndex = 0;
 
             var mcIds = sglModels.Select(x => x.ModelCollectionID).Distinct().OrderBy(x => x).ToArray();
             var allFaces = sglModels.SelectMany(x => x.Faces.Select((y, i) => (Model: x, Face: new FaceWithIndex() { Face = y, Index = i }))).ToArray();
@@ -135,7 +163,7 @@ namespace ModelConverter {
                 .GroupBy(x => x.Model.ModelCollectionID)
                 .ToDictionary(x => x.Key, x => new ModelCollectionWithAtlas() { 
                     ModelsByAttr = x
-                        .Select(y => (AttrKey: new AttrKey(y.Face.Face.Attributes), Model: y.Model, Face: y.Face))
+                        .Select(y => (AttrKey: new AttrKey(y.Face.Face.Attributes, Flags.ForceLit), Model: y.Model, Face: y.Face))
                         .OrderBy(y => y.AttrKey.Key)
                         .GroupBy(y => y.AttrKey)
                         .ToDictionary(y => y.Key, y => new MaterialWithFaces() {
@@ -180,7 +208,7 @@ namespace ModelConverter {
                     AttrKey attrKey = attrFaces.Key;
                     var faces = attrFaces.Value.FacesByModel.SelectMany(x => x.Value).ToArray();
 
-                    var materialBuilder = new MaterialBuilder("material");
+                    var materialBuilder = new MaterialBuilder("Material_" + attrKey.Name);
 
                     // If this AttrKey has textures, apply them.
                     if (attrKey.HasTextures) {
@@ -189,7 +217,7 @@ namespace ModelConverter {
 
                         if (textures.Length > 0) {
                             // Add the texture.
-                            var textureAtlasImage = ImageBuilder.From(mc.TextureAtlasMemoryImage);
+                            var textureAtlasImage = ImageBuilder.From(mc.TextureAtlasMemoryImage, $"TextureAtlas_{mcId}");
                             materialBuilder.UseChannel(KnownChannel.BaseColor)
                                 .UseTexture()
                                 .WithPrimaryImage(textureAtlasImage)
@@ -202,8 +230,8 @@ namespace ModelConverter {
                     if (!attrKey.UseLight)
                         materialBuilder = materialBuilder.WithUnlitShader();
                     materialBuilder.Extras = new JsonObject() {
-                        ["hFlip"] = attrKey.HFlip,
-                        ["vFlip"] = attrKey.VFlip,
+                        ["HFlip"] = attrKey.HFlip,
+                        ["VFlip"] = attrKey.VFlip,
                     };
 
                     attrFaces.Value.Material = modelRoot.CreateMaterial(materialBuilder);
@@ -212,7 +240,7 @@ namespace ModelConverter {
 
             // Build all the meshes.
             foreach (var sglModel in sglModels) {
-                var mesh = modelRoot.CreateMesh();
+                var mesh = modelRoot.CreateMesh($"Mesh_{sglModel.ModelCollectionID}_{sglModel.ModelID:D2}");
 
                 // All the faces to create for this model are already nested in the 'facesByMcIdThenAttrKeyThenModel' dictionary.
                 foreach (var attrFaces in facesByMcIdThenAttrKeyThenModel[sglModel.ModelCollectionID].ModelsByAttr) {
@@ -310,7 +338,7 @@ namespace ModelConverter {
                         dataFloats[1] = vertexData[i].Y;
                         dataFloats[2] = vertexData[i].Z;
                     }
-                    var vertexAccessor = modelRoot.CreateVector3Accessor("vertices", bufferView, 0, vertexCount);
+                    var vertexAccessor = modelRoot.CreateVector3Accessor("VertexPositions", bufferView, 0, vertexCount);
                     primitive.SetVertexAccessor("POSITION", vertexAccessor);
 
                     // Vertex attribute for normals, if available.
@@ -322,19 +350,20 @@ namespace ModelConverter {
                             dataFloats[1] = vertexNormalData[i].Y;
                             dataFloats[2] = vertexNormalData[i].Z;
                         }
-                        var vertexNormalAccessor = modelRoot.CreateVector3Accessor("vertexNormals", bufferView, 12, vertexCount);
+                        var vertexNormalAccessor = modelRoot.CreateVector3Accessor("VertexNormals", bufferView, 12, vertexCount);
                         primitive.SetVertexAccessor("NORMAL", vertexNormalAccessor);
                     }
 
                     // Vertex attribute that associates each vertex with a particular quad.
+                    // This is used for quad reconstruction, which must be done if re-importing the glTF.
                     var vertexQuadData = quadList.SelectMany(x => x.Vertices.Select(y => new Vector2(y.QuadIndex, y.IndexInQuad))).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
                         var dataVec2 = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 24, 8));
                         dataVec2[0] = vertexQuadData[i].X;
                         dataVec2[1] = vertexQuadData[i].Y;
                     }
-                    var vertexQuadAccessor = modelRoot.CreateVector2Accessor("quadIndices", bufferView, 24, vertexCount);
-                    primitive.SetVertexAccessor("_QUAD_INDEX", vertexQuadAccessor);
+                    var vertexQuadAccessor = modelRoot.CreateVector2Accessor("QuadInfo", bufferView, 24, vertexCount);
+                    primitive.SetVertexAccessor("_QUAD_INFO", vertexQuadAccessor);
 
                     // Vertex attribute that associates each vertex with a particular quad.
                     var vertexIndexData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) y.OriginalIndex)).ToArray();
@@ -342,7 +371,7 @@ namespace ModelConverter {
                         var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 32, 2));
                         dataUShorts[0] = vertexIndexData[i];
                     }
-                    var vertexIndexAccessor = modelRoot.CreateUShortAccessor("originalIndices", bufferView, 32, vertexCount);
+                    var vertexIndexAccessor = modelRoot.CreateUShortAccessor("OriginalIndices", bufferView, 32, vertexCount);
                     primitive.SetVertexAccessor("_ORIGINAL_INDEX", vertexIndexAccessor);
 
                     // Vertex attribute for texture coordinates.
@@ -352,7 +381,7 @@ namespace ModelConverter {
                         dataVec2[0] = texCoord0Data[i].Value.X;
                         dataVec2[1] = texCoord0Data[i].Value.Y;
                     }
-                    var texCoord0Accessor = modelRoot.CreateVector2Accessor("texCoords0", bufferView, 36, vertexCount);
+                    var texCoord0Accessor = modelRoot.CreateVector2Accessor("TexCoord_0", bufferView, 36, vertexCount);
                     primitive.SetVertexAccessor("TEXCOORD_0", texCoord0Accessor);
 
                     // Vertex attribute for polygon colors.
@@ -364,7 +393,7 @@ namespace ModelConverter {
                         dataVec4[2] = texColor0Data[i].Z;
                         dataVec4[3] = texColor0Data[i].W;
                     }
-                    var texColor0Accessor = modelRoot.CreateVector4Accessor("color0", bufferView, 44, vertexCount);
+                    var texColor0Accessor = modelRoot.CreateVector4Accessor("Color_0", bufferView, 44, vertexCount);
                     primitive.SetVertexAccessor("COLOR_0", texColor0Accessor);
 
                     // Build faces, breaking down quads into triangles.
@@ -379,12 +408,13 @@ namespace ModelConverter {
                         .ToArray()
                         .To2DArray(faces.Length * 2, 3);
 
-                    var indexAccessor = modelRoot.CreateTriangeIndiciesAccessor("indices", faceIndexData);
+                    var indexAccessor = modelRoot.CreateTriangeIndiciesAccessor("TriangleIndices", faceIndexData);
                     primitive.IndexAccessor = indexAccessor;
                 }
 
                 // Make our model visible.
-                scene.CreateNode("node").WithMesh(mesh);
+                scene.CreateNode($"Node_{nodeIndex:D2}").WithMesh(mesh);
+                nodeIndex++;
             }
 
             return modelRoot;
@@ -424,7 +454,7 @@ namespace ModelConverter {
                     var vertexOrigIndices = vertexOrigIndicesAccessor.AsScalarArray();
 
                     // Fetch the quads that each vertex belong to. This is part of quad reconstruction.
-                    var vertexQuadIndicesAccessor = primitive.GetVertexAccessor("_QUAD_INDEX");
+                    var vertexQuadIndicesAccessor = primitive.GetVertexAccessor("_QUAD_INFO");
                     var vertexQuadIndices = vertexQuadIndicesAccessor.AsVector2Array();
                     var quadVertexMap = vertexQuadIndices
                         .Select((x, i) => (QuadID: (ushort) x.X, IndexInQuad: (ushort) x.Y, ExportedVertexID: (ushort) i))
@@ -471,7 +501,7 @@ namespace ModelConverter {
                                     ColorNo    = colorChannels.ToABGR1555(),
                                     IsTwoSided = material.DoubleSided,
                                     UseTexture = (materialTexture != null),
-                                    UseLight   = !material.Unlit,
+                                    UseLight   = !material.Unlit || Flags.ForceLit,
                                     HFlip      = (bool) material.Extras["hFlip"],
                                     VFlip      = (bool) material.Extras["vFlip"],
                                 }
@@ -506,5 +536,7 @@ namespace ModelConverter {
 
             return sglModels.ToArray();
         }
+
+        public ModelConversionFlags Flags { get; }
     }
 }

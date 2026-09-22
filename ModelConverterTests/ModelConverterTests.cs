@@ -52,6 +52,7 @@ namespace ModelConverter.Tests.Utils {
 
         private void TestModelConversion(ISGL_Model[] originalModels, ITextureMetaCollection? texMetaCollection) {
             var converter = new ModelConverter();
+
             var glb = converter.ModelToGLB_Data(originalModels, texMetaCollection);
             var convertedModels = converter.GLB_DataToModels(glb, null, null, null);
 
