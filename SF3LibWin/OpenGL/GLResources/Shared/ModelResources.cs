@@ -7,7 +7,6 @@ using CommonLib.SGL;
 using CommonLib.Types;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Types;
 using SF3.Win.Extensions;
 
 namespace SF3.Win.OpenGL.GLResources.Shared {

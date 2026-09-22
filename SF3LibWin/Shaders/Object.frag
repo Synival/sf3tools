@@ -19,8 +19,8 @@ void main() {
     if (meshFrag > 0 && (int(gl_FragCoord.x / 2) + int(gl_FragCoord.y / 2)) % 2 == 0)
         discard;
 
-    vec4 surfaceTex = (texture(textureAtlas, texCoordAtlasFrag) + lightColorFrag);
-    surfaceTex = surfaceTex * colorFrag + vec4(glowFrag, 0.0);
+    vec4 surfaceTex = ((texture(textureAtlas, texCoordAtlasFrag) * colorFrag) + lightColorFrag);
+    surfaceTex = surfaceTex + vec4(glowFrag, 0.0);
 
     vec4 overlayTex =
         texture(textureOverlay1, texCoordOverlay1Frag) +
