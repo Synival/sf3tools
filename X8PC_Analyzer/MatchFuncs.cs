@@ -4,6 +4,8 @@ using SF3.Models.Files.X8PC;
 using SF3.Models.Structs.X8PC;
 using CommonLib.Extensions;
 using CommonLib.Rigging;
+using System.Numerics;
+using static SF3.Models.Structs.X8PC.PolyChar;
 
 namespace X8PC_Analyzer {
     public static class MatchFuncs {
@@ -52,6 +54,8 @@ namespace X8PC_Analyzer {
             var converter = new ModelConverter.ModelConverter(flags);
 
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
+                var rig = new ModelRig(pc.Rig);
+
                 ISGL_Model? ModelGetter(IBone bone) {
                     if (bone.ModelID.HasValue)
                         return pc.GetModel(bone.ModelID.Value, 0);
@@ -61,9 +65,13 @@ namespace X8PC_Analyzer {
                         return null;
                 }
 
-                var rig = new ModelRig(pc.Rig);
+                var keyframes = pc.GetAnimationBoneKeyframes(0f);
+                Matrix4x4 MatrixGetter(IBone bone) {
+                    var keyframe = bone.BoneID.HasValue ? keyframes[bone.BoneID!.Value] : (BoneKeyframeInfo?) null;
+                    return pc.GetModelInstanceMatrixInAnimation(bone, keyframe);
+                }
 
-                var data = converter.ModelToGLB_Data(rig, pc, ModelGetter, pc);
+                var data = converter.ModelToGLB_Data(rig, pc, ModelGetter, MatrixGetter, pc);
                 File.WriteAllBytes(directory + $"{pc.ID}.glb", data);
             }
             return [];

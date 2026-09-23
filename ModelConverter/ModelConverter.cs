@@ -134,44 +134,40 @@ namespace ModelConverter {
         }
 
         private class BoneAsNode {
-            public BoneAsNode(IBone rootBone, Func<IBone, ISGL_Model> modelGetter)
-            : this(null, rootBone, modelGetter)
+            public BoneAsNode(IBone rootBone, Func<IBone, ISGL_Model> modelGetter, Func<IBone, Matrix4x4> matrixGetter)
+            : this(null, rootBone, modelGetter, matrixGetter)
             { }
 
-            private BoneAsNode(string name, IBone bone, Func<IBone, ISGL_Model> modelGetter) {
+            private BoneAsNode(string name, IBone bone, Func<IBone, ISGL_Model> modelGetter, Func<IBone, Matrix4x4> matrixGetter) {
                 Name = name ?? "RootNode";
 
                 var model = modelGetter(bone);
-                if (model != null) {
-                    var newInstance = new SGL_ModelInstance((_1, _2) => model);
+                if (model != null)
+                    Instance = new SGL_ModelInstance((_1, _2) => model);
 
-                    var matrix = Matrix4x4.Identity;
-                    if (bone.Position.HasValue)
-                        matrix *= Matrix4x4.CreateTranslation(bone.Position.Value.X.Float, -bone.Position.Value.Y.Float, -bone.Position.Value.Z.Float);
-                    if (bone.Rotation.HasValue)
-                        matrix *= Matrix4x4.CreateFromYawPitchRoll(bone.Rotation.Value.X.Float, -bone.Rotation.Value.Y.Float, -bone.Rotation.Value.Z.Float);
-                    if (bone.Scale.HasValue)
-                        matrix *= Matrix4x4.CreateScale(bone.Scale.Value.X.Float, bone.Scale.Value.Y.Float, bone.Scale.Value.Z.Float);
+                Matrix = matrixGetter(bone);
 
-                    newInstance.Matrix = matrix;
-                    Instance = newInstance;
-                }
+                // This can happen from time to time.
+                if (float.IsNaN(Matrix.M11))
+                    Matrix = Matrix4x4.Identity;
 
                 var nodeName = name ?? "Node";
                 Children = (bone.Children == null)
                     ? (new BoneAsNode[0])
-                    : bone.Children.Select((x, i) => new BoneAsNode($"{nodeName}_{i:D2}", x, modelGetter)).ToArray();
+                    : bone.Children.Select((x, i) => new BoneAsNode($"{nodeName}_{i:D2}", x, modelGetter, matrixGetter)).ToArray();
             }
 
             public BoneAsNode(ISGL_ModelInstance[] instances) {
                 Name = "RootNode";
                 Children = instances.Select((x, i) => new BoneAsNode($"Node_{i:D2}", x)).ToArray();
+                Matrix = Matrix4x4.Identity;
             }
 
             public BoneAsNode(string name, ISGL_ModelInstance instance) {
                 Name     = name;
                 Instance = instance;
                 Children = new BoneAsNode[0];
+                Matrix = Matrix4x4.Identity;
             }
 
             public BoneAsNode[] Flatten() {
@@ -183,6 +179,8 @@ namespace ModelConverter {
 
             public readonly string Name;
             public readonly ISGL_ModelInstance Instance;
+            public readonly Matrix4x4 Matrix;
+
             public readonly BoneAsNode[] Children;
         }
 
@@ -196,8 +194,8 @@ namespace ModelConverter {
             return ModelRootToGLB_Data(modelRoot);
         }
 
-        public byte[] ModelToGLB_Data(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, Func<IBone, ISGL_Model> modelGetter, ITextureMetaCollection texMetaCollection) {
-            var modelRoot = ModelToGLTF_ModelRoot(rig, modelMetaCollection, modelGetter, texMetaCollection);
+        public byte[] ModelToGLB_Data(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, Func<IBone, ISGL_Model> modelGetter, Func<IBone, Matrix4x4> matrixGetter, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(rig, modelMetaCollection, modelGetter, matrixGetter, texMetaCollection);
             return ModelRootToGLB_Data(modelRoot);
         }
 
@@ -222,10 +220,10 @@ namespace ModelConverter {
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection)
             => ModelToGLTF_ModelRoot(new BoneAsNode(sglModelInstances), texMetaCollection);
 
-        public ModelRoot ModelToGLTF_ModelRoot(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, Func<IBone, ISGL_Model> modelGetter, ITextureMetaCollection texMetaCollection) {
+        public ModelRoot ModelToGLTF_ModelRoot(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, Func<IBone, ISGL_Model> modelGetter, Func<IBone, Matrix4x4> matrixGetter, ITextureMetaCollection texMetaCollection) {
             var rootBone = rig.RootBone;
             var modelCollectionZero = modelMetaCollection.GetModelCollection(0);
-            var rootBoneAsNode = new BoneAsNode(rig.RootBone, modelGetter);
+            var rootBoneAsNode = new BoneAsNode(rig.RootBone, modelGetter, matrixGetter);
             return ModelToGLTF_ModelRoot(rootBoneAsNode, texMetaCollection);
         }
 
@@ -514,17 +512,10 @@ namespace ModelConverter {
                 if (boneAsNode.Instance != null) {
                     var instance = boneAsNode.Instance;
                     var mesh = meshBySglModel[instance.GetModel(0)];
-
-                    node = node
-                        .WithMesh(mesh)
-                        // Position node, flipping Y and Z axes.
-                        .WithLocalTranslation(new Vector3(instance.PositionX, -instance.PositionY, -instance.PositionZ))
-                        .WithLocalRotation(Quaternion.CreateFromYawPitchRoll(instance.AngleX, instance.AngleY, instance.AngleZ))
-                        .WithLocalScale(new Vector3(instance.ScaleX, instance.ScaleY, instance.ScaleZ));
-
-                    if (instance.Matrix.HasValue)
-                        node.LocalMatrix *= instance.Matrix.Value;
+                    node = node.WithMesh(mesh);
                 }
+
+                node.LocalMatrix = boneAsNode.Matrix;
 
                 foreach (var child in boneAsNode.Children)
                     AddNode(child, node);
