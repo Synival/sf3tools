@@ -326,7 +326,7 @@ namespace ModelConverter {
 
                     // Create a big buffer for the entire model.
                     var vertexCount = quadList.Count * 4;
-                    var stride = (12 /*pos*/ + 12 /*normal*/ + 8/*quadIdx*/ + 2/*normalIdx*/ + 2/*padding*/ + 8/*texcoord_0*/ + 16/*color_0*/);
+                    var stride = (12 /*VertexPositions*/ + 12 /*VertexNormals*/ + 8/*QuadInfo*/ + 4/*OriginalIndices*/ + 8/*TexCoord_0*/ + 16/*Color_0*/);
                     var bufferViewData = new byte[vertexCount * stride];
                     var bufferView = modelRoot.UseBufferView(bufferViewData, 0, byteStride: stride, target: BufferMode.ARRAY_BUFFER);
 
@@ -368,10 +368,10 @@ namespace ModelConverter {
                     // Vertex attribute that associates each vertex with a particular quad.
                     var vertexIndexData = quadList.SelectMany(x => x.Vertices.Select(y => (ushort) y.OriginalIndex)).ToArray();
                     for (int i = 0; i < vertexCount; i++) {
-                        var dataUShorts = MemoryMarshal.Cast<byte, ushort>(bufferViewData.AsSpan().Slice(i * stride + 32, 2));
-                        dataUShorts[0] = vertexIndexData[i];
+                        var dataFloats = MemoryMarshal.Cast<byte, float>(bufferViewData.AsSpan().Slice(i * stride + 32, 4));
+                        dataFloats[0] = vertexIndexData[i];
                     }
-                    var vertexIndexAccessor = modelRoot.CreateUShortAccessor("OriginalIndices", bufferView, 32, vertexCount);
+                    var vertexIndexAccessor = modelRoot.CreateFloatAccessor("OriginalIndices", bufferView, 32, vertexCount);
                     primitive.SetVertexAccessor("_ORIGINAL_INDEX", vertexIndexAccessor);
 
                     // Vertex attribute for texture coordinates.

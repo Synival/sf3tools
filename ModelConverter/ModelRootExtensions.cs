@@ -14,8 +14,8 @@ namespace ModelConverter {
             return accessor;
         }
 
-        public static Accessor CreateUShortAccessor(this ModelRoot modelRoot, string name, BufferView bufferView, int offset, int count)
-            => CreateStandardAccessor(modelRoot, name, bufferView, offset, count, DimensionType.SCALAR, EncodingType.UNSIGNED_SHORT);
+        public static Accessor CreateFloatAccessor(this ModelRoot modelRoot, string name, BufferView bufferView, int offset, int count)
+            => CreateStandardAccessor(modelRoot, name, bufferView, offset, count, DimensionType.SCALAR, EncodingType.FLOAT);
 
         public static Accessor CreateVector2Accessor(this ModelRoot modelRoot, string name, BufferView bufferView, int offset, int count)
             => CreateStandardAccessor(modelRoot, name, bufferView, offset, count, DimensionType.VEC2, EncodingType.FLOAT);
