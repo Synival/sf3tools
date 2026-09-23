@@ -134,29 +134,27 @@ namespace ModelConverter {
         }
 
         private class BoneAsNode {
-            public BoneAsNode(IBone rootBone, Func<int, ISGL_Model> modelGetter)
+            public BoneAsNode(IBone rootBone, Func<IBone, ISGL_Model> modelGetter)
             : this(null, rootBone, modelGetter)
             { }
 
-            private BoneAsNode(string name, IBone bone, Func<int, ISGL_Model> modelGetter) {
+            private BoneAsNode(string name, IBone bone, Func<IBone, ISGL_Model> modelGetter) {
                 Name = name ?? "RootNode";
 
-                if (bone.ModelID.HasValue) {
-                    var model = bone.ModelID.HasValue ? modelGetter(bone.ModelID.Value) : null;
-                    if (model != null) {
-                        var newInstance = new SGL_ModelInstance((_1, _2) => model);
+                var model = modelGetter(bone);
+                if (model != null) {
+                    var newInstance = new SGL_ModelInstance((_1, _2) => model);
 
-                        var matrix = Matrix4x4.Identity;
-                        if (bone.Position.HasValue)
-                            matrix *= Matrix4x4.CreateTranslation(bone.Position.Value.X.Float, -bone.Position.Value.Y.Float, -bone.Position.Value.Z.Float);
-                        if (bone.Rotation.HasValue)
-                            matrix *= Matrix4x4.CreateFromYawPitchRoll(bone.Rotation.Value.X.Float, -bone.Rotation.Value.Y.Float, -bone.Rotation.Value.Z.Float);
-                        if (bone.Scale.HasValue)
-                            matrix *= Matrix4x4.CreateScale(bone.Scale.Value.X.Float, bone.Scale.Value.Y.Float, bone.Scale.Value.Z.Float);
+                    var matrix = Matrix4x4.Identity;
+                    if (bone.Position.HasValue)
+                        matrix *= Matrix4x4.CreateTranslation(bone.Position.Value.X.Float, -bone.Position.Value.Y.Float, -bone.Position.Value.Z.Float);
+                    if (bone.Rotation.HasValue)
+                        matrix *= Matrix4x4.CreateFromYawPitchRoll(bone.Rotation.Value.X.Float, -bone.Rotation.Value.Y.Float, -bone.Rotation.Value.Z.Float);
+                    if (bone.Scale.HasValue)
+                        matrix *= Matrix4x4.CreateScale(bone.Scale.Value.X.Float, bone.Scale.Value.Y.Float, bone.Scale.Value.Z.Float);
 
-                        newInstance.Matrix = matrix;
-                        Instance = newInstance;
-                    }
+                    newInstance.Matrix = matrix;
+                    Instance = newInstance;
                 }
 
                 var nodeName = name ?? "Node";
@@ -198,8 +196,8 @@ namespace ModelConverter {
             return ModelRootToGLB_Data(modelRoot);
         }
 
-        public byte[] ModelToGLB_Data(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, ITextureMetaCollection texMetaCollection) {
-            var modelRoot = ModelToGLTF_ModelRoot(rig, modelMetaCollection, texMetaCollection);
+        public byte[] ModelToGLB_Data(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, Func<IBone, ISGL_Model> modelGetter, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(rig, modelMetaCollection, modelGetter, texMetaCollection);
             return ModelRootToGLB_Data(modelRoot);
         }
 
@@ -224,10 +222,10 @@ namespace ModelConverter {
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection)
             => ModelToGLTF_ModelRoot(new BoneAsNode(sglModelInstances), texMetaCollection);
 
-        public ModelRoot ModelToGLTF_ModelRoot(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, ITextureMetaCollection texMetaCollection) {
+        public ModelRoot ModelToGLTF_ModelRoot(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, Func<IBone, ISGL_Model> modelGetter, ITextureMetaCollection texMetaCollection) {
             var rootBone = rig.RootBone;
             var modelCollectionZero = modelMetaCollection.GetModelCollection(0);
-            var rootBoneAsNode = new BoneAsNode(rig.RootBone, (modelId) => modelCollectionZero.GetModel(modelId, 0));
+            var rootBoneAsNode = new BoneAsNode(rig.RootBone, modelGetter);
             return ModelToGLTF_ModelRoot(rootBoneAsNode, texMetaCollection);
         }
 

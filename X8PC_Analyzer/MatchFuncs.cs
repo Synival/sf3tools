@@ -3,6 +3,7 @@ using ModelConverter;
 using SF3.Models.Files.X8PC;
 using SF3.Models.Structs.X8PC;
 using CommonLib.Extensions;
+using CommonLib.Rigging;
 
 namespace X8PC_Analyzer {
     public static class MatchFuncs {
@@ -48,13 +49,18 @@ namespace X8PC_Analyzer {
             var converter = new ModelConverter.ModelConverter(flags);
 
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
+                ISGL_Model? ModelGetter(IBone bone) {
+                    if (bone.ModelID.HasValue)
+                        return pc.GetModel(bone.ModelID.Value, 0);
+                    else if (bone.Tag == 0x30 || bone.Tag == 0x81)
+                        return pc.WeaponXPData;
+                    else
+                        return null;
+                }
+
                 var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
                 Directory.CreateDirectory(directory);
-/*
-                var xpdatas = pc.XPDataTables.SelectMany(x => x).ToArray();
-                var data = converter.ModelToGLB_Data(xpdatas, pc);
-*/
-                var data = converter.ModelToGLB_Data(pc.Rig, pc, pc);
+                var data = converter.ModelToGLB_Data(pc.Rig, pc, ModelGetter, pc);
 
                 File.WriteAllBytes(directory + $"{pc.ID}.glb", data);
             }
