@@ -10,7 +10,11 @@ namespace ModelConverter.Tests.Utils {
     [TestClass]
     public class ModelConverterTests {
         public static string c_synbiosPath = "C:/SF3/Scenario1/X8PC00A.BIN";
+        public static string c_synbiosPathPD = "C:/SF3/PremiumDisk/X8PC00X.BIN";
         public static string c_barrelPath  = "C:/SF3/Scenario1/X8PC795.BIN";
+        public static string c_barrelFromBlender = "TestData/Barrel_FromBlender.glb";
+        public static string c_barrelFromBlenderPostQuadReconstruction = "TestData/Barrel_FromBlenderPostQuadReconstruction.glb";
+        public static string c_synbiosFromBlender = "TestData/Synbios_FromBlender.glb";
 
         public static readonly VECTOR[] c_cubeVertices = [
             new VECTOR(-1, -1,  1), // 0: Top-back-left
@@ -56,6 +60,10 @@ namespace ModelConverter.Tests.Utils {
             var glb = converter.ModelToGLB_Data(originalModels, texMetaCollection);
             var convertedModels = converter.GLB_DataToModels(glb, null, null, null);
 
+            TestCompareModels(originalModels, convertedModels);
+        }
+
+        private void TestCompareModels(ISGL_Model[] originalModels, ISGL_Model[] convertedModels) {
             Assert.AreEqual(originalModels.Length, convertedModels.Length, "Not equal: convertedModels.Length");
             for (int modelIdx = 0; modelIdx < originalModels.Length; modelIdx++) {
                 var convertedModel = convertedModels[modelIdx];
@@ -135,6 +143,49 @@ namespace ModelConverter.Tests.Utils {
             var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
             var polyChar = x8pcFile.PolyCharTable[0];
             TestModelConversion(polyChar.ToArray(), polyChar);
+        }
+
+        [TestMethod]
+        public void CompareModels_BarrelFromBlender_SameAsOriginal() {
+            var barrelData = File.ReadAllBytes(c_barrelPath);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var polyChar = x8pcFile.PolyCharTable[0];
+            var polyCharModels = polyChar.ToArray();
+
+            var blenderBarrelData = File.ReadAllBytes(c_barrelFromBlender);
+            var converter = new ModelConverter();
+            var blenderModels = converter.GLB_DataToModels(blenderBarrelData, null, null, null);
+
+            TestCompareModels(polyCharModels, blenderModels);
+        }
+
+        [TestMethod]
+        public void CompareModels_BarrelFromBlenderPostQuadReconstruction_SameAsOriginal() {
+            var barrelData = File.ReadAllBytes(c_barrelPath);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var polyChar = x8pcFile.PolyCharTable[0];
+            var polyCharModels = polyChar.ToArray();
+
+            var blenderBarrelData = File.ReadAllBytes(c_barrelFromBlenderPostQuadReconstruction);
+            var converter = new ModelConverter();
+            var blenderModels = converter.GLB_DataToModels(blenderBarrelData, null, null, null);
+
+            TestCompareModels(polyCharModels, blenderModels);
+        }
+
+
+        [TestMethod]
+        public void CompareModels_SynbiosFromBlender_SameAsOriginal() {
+            var barrelData = File.ReadAllBytes(c_synbiosPathPD);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var polyChar = x8pcFile.PolyCharTable[0];
+            var polyCharModels = polyChar.ToArray();
+
+            var blenderBarrelData = File.ReadAllBytes(c_synbiosFromBlender);
+            var converter = new ModelConverter();
+            var blenderModels = converter.GLB_DataToModels(blenderBarrelData, null, null, null);
+
+            TestCompareModels(polyCharModels, blenderModels);
         }
     }
 }
