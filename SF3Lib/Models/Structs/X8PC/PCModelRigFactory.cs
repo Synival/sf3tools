@@ -2,10 +2,11 @@
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Types;
+using SF3.X8PC;
 
-namespace SF3.X8PC {
-    public class ModelRigFactory {
-        public ModelRigFactory(ScenarioType scenario) {
+namespace SF3.Models.Structs.X8PC {
+    public class PCModelRigFactory {
+        public PCModelRigFactory(ScenarioType scenario) {
             Scenario = scenario;
         }
 
@@ -56,9 +57,7 @@ namespace SF3.X8PC {
                     Bone newModel;
 
                     // New model for rendering.
-                    if (skelArg == 0 || skelArg == 0x80) {
-                        newModel = new Bone(skelArg, nextModelId++);
-                    }
+                    if (skelArg == 0 || skelArg == 0x80)                         newModel = new Bone(skelArg, nextModelId++);
                     // Tag or weapon placement.
                     else {
                         if (!AlignToFour(ref offset))
@@ -100,7 +99,7 @@ namespace SF3.X8PC {
 
             // Create the bone with all its children. This is either root bone or real one, depending on the ID.
             var childrenArray = children.ToArray();
-            return (thisBoneId >= 0) ? new Bone(thisBoneId, childrenArray) : new Bone(childrenArray);
+            return thisBoneId >= 0 ? new Bone(thisBoneId, childrenArray) : new Bone(childrenArray);
         }
 
         public ScenarioType Scenario { get; }

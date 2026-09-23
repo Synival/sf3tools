@@ -77,7 +77,7 @@ namespace SF3.Models.Structs.X8PC {
                 (count, offset, index) => VertexNormalTable.Create(ModelChunk.DecompressedData, $"{nameof(VertexNormalTable)}_{index:D3} @{offset:X4}", offset, count)
             );
 
-            var rigFact = new ModelRigFactory(Scenario);
+            var rigFact = new PCModelRigFactory(Scenario);
             Rig = rigFact.CreateModelRig(ModelChunk.DecompressedData, (int) ModelChunkHeader.RigOffset);
             BoneTable = PCBoneWrapperTable.Create("BoneNodes", Rig.RootBone, this);
 
