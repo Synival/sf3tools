@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using CommonLib.NamedValues;
+using CommonLib.Extensions;
 using SF3.Models.Structs.X8PC;
-using SF3.X8PC;
 
 namespace SF3.Win.Views.X8PC {
     public class PCModelChunkView : TabView {

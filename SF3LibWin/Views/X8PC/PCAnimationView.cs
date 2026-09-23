@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Windows.Forms;
 using CommonLib.SGL;
+using CommonLib.Extensions;
 using SF3.Models.Structs.X8PC;
-using SF3.X8PC;
+using CommonLib.Rigging;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationView : SGL_ModelInstance3DView {

@@ -2,7 +2,7 @@
 using ModelConverter;
 using SF3.Models.Files.X8PC;
 using SF3.Models.Structs.X8PC;
-using SF3.X8PC;
+using CommonLib.Extensions;
 
 namespace X8PC_Analyzer {
     public static class MatchFuncs {

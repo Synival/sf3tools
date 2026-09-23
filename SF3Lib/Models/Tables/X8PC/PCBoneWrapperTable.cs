@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using CommonLib.Logging;
+using CommonLib.Rigging;
 using CommonLib.Types;
 using SF3.Models.Structs.X8PC;
-using SF3.X8PC;
 
 namespace SF3.Models.Tables.X8PC {
     public class PCBoneWrapperTable : Table<PCBoneWrapperStruct> {

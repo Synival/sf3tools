@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using CommonLib.Rigging;
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Types;
-using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PCModelRigFactory {

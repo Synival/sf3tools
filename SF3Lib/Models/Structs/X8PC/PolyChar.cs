@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using CommonLib.Arrays;
+using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Rigging;
 using CommonLib.SGL;
 using CommonLib.ThirdParty.TexturePacker;
 using SF3.ByteData;
@@ -13,7 +15,6 @@ using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
 using SF3.Types;
-using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelCollection, IDisposable {

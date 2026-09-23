@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
+using CommonLib.Rigging;
 using CommonLib.SGL;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared.SGL;
-using SF3.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PC_XPDataStruct : SGL_Model_XPDataStruct {
@@ -13,7 +14,7 @@ namespace SF3.Models.Structs.X8PC {
             _modelIDIncr = modelIdIncr;
         }
 
-        public void AssociateWithRig(ModelRig rig) {
+        public void AssociateWithRig(IModelRig rig) {
             var thisId = ID;
 
             var bone = rig.RootBone.FindTraverse(x => x.ModelID == thisId);

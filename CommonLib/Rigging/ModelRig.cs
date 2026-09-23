@@ -1,5 +1,5 @@
-﻿namespace SF3.X8PC {
-    public class ModelRig {
+﻿namespace CommonLib.Rigging {
+    public class ModelRig : IModelRig {
         public ModelRig(Bone rootBone) {
             RootBone = rootBone;
         }

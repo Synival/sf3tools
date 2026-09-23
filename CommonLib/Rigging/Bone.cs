@@ -1,6 +1,6 @@
 ﻿using CommonLib.SGL;
 
-namespace SF3.X8PC {
+namespace CommonLib.Rigging {
     public class Bone : IBone {
         /// <summary>
         /// Constructor for a root bone.
