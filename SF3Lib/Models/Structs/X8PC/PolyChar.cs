@@ -17,7 +17,7 @@ using SF3.Models.Tables.X8PC;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelCollection, IDisposable {
+    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelMetaCollection, ISGL_ModelCollection, IDisposable {
         public PolyChar(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0 /* not applicable */) {
             Scenario = scenario;
@@ -417,5 +417,8 @@ namespace SF3.Models.Structs.X8PC {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
+        // TODO: Support more than one model collection perhaps?
+        public ISGL_ModelCollection GetModelCollection(int mcId) => (mcId == 0) ? this : null;
     }
 }

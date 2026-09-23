@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
+using CommonLib.Rigging;
 using CommonLib.SGL;
 using CommonLib.ThirdParty.TexturePacker;
 using SharpGLTF.Materials;
@@ -115,29 +116,6 @@ namespace ModelConverter {
             public readonly int Key;
         }
 
-        public byte[] ModelToGLB_Data(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
-            var modelRoot = ModelToGLTF_ModelRoot(sglModels, texMetaCollection);
-            return ModelRootToGLB_Data(modelRoot);
-        }
-
-        public byte[] ModelToGLB_Data(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection) {
-            var modelRoot = ModelToGLTF_ModelRoot(sglModelInstances, texMetaCollection);
-            return ModelRootToGLB_Data(modelRoot);
-        }
-
-        private byte[] ModelRootToGLB_Data(ModelRoot modelRoot) {
-            // Write GLTF, ignoring errors (we don't care if they're broken).
-            var settings = new WriteSettings {
-                JsonIndented = true,
-                JsonOptions = new JsonWriterOptions() { NewLine = "\n" },
-                Validation = SharpGLTF.Validation.ValidationMode.Skip,
-            };
-            using (var stream = new MemoryStream()) {
-                modelRoot.WriteGLB(stream, settings);
-                return stream.ToArray();
-            }
-        }
-
         private class FaceWithIndex {
             public ISGL_ModelFace Face;
             public int Index;
@@ -155,19 +133,117 @@ namespace ModelConverter {
             public Dictionary<AttrKey, MaterialWithFaces> ModelsByAttr;
         }
 
+        private class BoneAsNode {
+            public BoneAsNode(IBone rootBone, Func<int, ISGL_Model> modelGetter)
+            : this(null, rootBone, modelGetter)
+            { }
+
+            private BoneAsNode(string name, IBone bone, Func<int, ISGL_Model> modelGetter) {
+                Name = name ?? "RootNode";
+
+                if (bone.ModelID.HasValue) {
+                    var model = bone.ModelID.HasValue ? modelGetter(bone.ModelID.Value) : null;
+                    if (model != null) {
+                        var newInstance = new SGL_ModelInstance((_1, _2) => model);
+
+                        var matrix = Matrix4x4.Identity;
+                        if (bone.Position.HasValue)
+                            matrix *= Matrix4x4.CreateTranslation(bone.Position.Value.X.Float, -bone.Position.Value.Y.Float, -bone.Position.Value.Z.Float);
+                        if (bone.Rotation.HasValue)
+                            matrix *= Matrix4x4.CreateFromYawPitchRoll(bone.Rotation.Value.X.Float, -bone.Rotation.Value.Y.Float, -bone.Rotation.Value.Z.Float);
+                        if (bone.Scale.HasValue)
+                            matrix *= Matrix4x4.CreateScale(bone.Scale.Value.X.Float, bone.Scale.Value.Y.Float, bone.Scale.Value.Z.Float);
+
+                        newInstance.Matrix = matrix;
+                        Instance = newInstance;
+                    }
+                }
+
+                var nodeName = name ?? "Node";
+                Children = (bone.Children == null)
+                    ? (new BoneAsNode[0])
+                    : bone.Children.Select((x, i) => new BoneAsNode($"{nodeName}_{i:D2}", x, modelGetter)).ToArray();
+            }
+
+            public BoneAsNode(ISGL_ModelInstance[] instances) {
+                Name = "RootNode";
+                Children = instances.Select((x, i) => new BoneAsNode($"Node_{i:D2}", x)).ToArray();
+            }
+
+            public BoneAsNode(string name, ISGL_ModelInstance instance) {
+                Name     = name;
+                Instance = instance;
+                Children = new BoneAsNode[0];
+            }
+
+            public BoneAsNode[] Flatten() {
+                var bones = new List<BoneAsNode>() { this };
+                foreach (var bone in Children)
+                    bones.AddRange(bone.Flatten());
+                return bones.ToArray();
+            }
+
+            public readonly string Name;
+            public readonly ISGL_ModelInstance Instance;
+            public readonly BoneAsNode[] Children;
+        }
+
+        public byte[] ModelToGLB_Data(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(sglModels, texMetaCollection);
+            return ModelRootToGLB_Data(modelRoot);
+        }
+
+        public byte[] ModelToGLB_Data(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(sglModelInstances, texMetaCollection);
+            return ModelRootToGLB_Data(modelRoot);
+        }
+
+        public byte[] ModelToGLB_Data(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(rig, modelMetaCollection, texMetaCollection);
+            return ModelRootToGLB_Data(modelRoot);
+        }
+
+        private byte[] ModelRootToGLB_Data(ModelRoot modelRoot) {
+            // Write GLTF, ignoring errors (we don't care if they're broken).
+            var settings = new WriteSettings {
+                JsonIndented = true,
+                JsonOptions = new JsonWriterOptions() { NewLine = "\n" },
+                Validation = SharpGLTF.Validation.ValidationMode.Skip,
+            };
+            using (var stream = new MemoryStream()) {
+                modelRoot.WriteGLB(stream, settings);
+                return stream.ToArray();
+            }
+        }
+
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
             var instances = sglModels.Select(x => new SGL_ModelInstance((_1, _2) => x)).ToArray();
             return ModelToGLTF_ModelRoot(instances, texMetaCollection);
         }
 
-        public ModelRoot ModelToGLTF_ModelRoot(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection) {
+        public ModelRoot ModelToGLTF_ModelRoot(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection)
+            => ModelToGLTF_ModelRoot(new BoneAsNode(sglModelInstances), texMetaCollection);
+
+        public ModelRoot ModelToGLTF_ModelRoot(IModelRig rig, ISGL_ModelMetaCollection modelMetaCollection, ITextureMetaCollection texMetaCollection) {
+            var rootBone = rig.RootBone;
+            var modelCollectionZero = modelMetaCollection.GetModelCollection(0);
+            var rootBoneAsNode = new BoneAsNode(rig.RootBone, (modelId) => modelCollectionZero.GetModel(modelId, 0));
+            return ModelToGLTF_ModelRoot(rootBoneAsNode, texMetaCollection);
+        }
+
+        private ModelRoot ModelToGLTF_ModelRoot(BoneAsNode rootBoneAsNode, ITextureMetaCollection texMetaCollection) {
             // TODO: four-way split for crazy quads
+            // TODO: upgrade BoneAsNode for actual animations and rigging
+            // TODO: IModelRig and IBone must support ModelCollectionID
 
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
             var scene = modelRoot.UseScene("Scene");
 
+            // Build instances, models, and faces (which will need to be reconstructed thanks to glTF not supporting quads).
+            var flattenedNodes = rootBoneAsNode.Flatten();
+            var sglModelInstances = flattenedNodes.Where(x => x.Instance != null).Select(x => x.Instance).ToArray();
             var sglModels = sglModelInstances.Select(x => x.GetModel(0)).GroupBy(x => (x.ModelCollectionID, x.ModelID)).Select(x => x.First()).ToArray();
             var meshBySglModel = new Dictionary<ISGL_Model, Mesh>();
 
@@ -431,22 +507,31 @@ namespace ModelConverter {
                 meshBySglModel[sglModel] = mesh;
             }
 
-            // Create a root node that will contain all our instances.
-            var rootNode = scene.CreateNode("RootNode");
+            // Add nodes recursively.
+            void AddNode(BoneAsNode boneAsNode, Node parentNode = null) {
+                var node = (parentNode == null)
+                    ? scene.CreateNode(boneAsNode.Name)
+                    : parentNode.CreateNode(boneAsNode.Name);
 
-            // Add nodes (instances).
-            int nodeIndex = 0;
-            foreach (var instance in sglModelInstances) {
-                var mesh = meshBySglModel[instance.GetModel(0)];
-                var node = rootNode
-                    .CreateNode($"Node_{nodeIndex++}")
-                    .WithMesh(mesh)
-                    // Position node, flipping Y and Z axes.
-                    .WithLocalTranslation(new Vector3(instance.PositionX, -instance.PositionY, -instance.PositionZ))
-                    .WithLocalRotation(Quaternion.CreateFromYawPitchRoll(instance.AngleX, instance.AngleY, instance.AngleZ))
-                    .WithLocalScale(new Vector3(instance.ScaleX, instance.ScaleY, instance.ScaleZ))
-                    ;
+                if (boneAsNode.Instance != null) {
+                    var instance = boneAsNode.Instance;
+                    var mesh = meshBySglModel[instance.GetModel(0)];
+
+                    node = node
+                        .WithMesh(mesh)
+                        // Position node, flipping Y and Z axes.
+                        .WithLocalTranslation(new Vector3(instance.PositionX, -instance.PositionY, -instance.PositionZ))
+                        .WithLocalRotation(Quaternion.CreateFromYawPitchRoll(instance.AngleX, instance.AngleY, instance.AngleZ))
+                        .WithLocalScale(new Vector3(instance.ScaleX, instance.ScaleY, instance.ScaleZ));
+
+                    if (instance.Matrix.HasValue)
+                        node.LocalMatrix *= instance.Matrix.Value;
+                }
+
+                foreach (var child in boneAsNode.Children)
+                    AddNode(child, node);
             }
+            AddNode(rootBoneAsNode);
 
             return modelRoot;
         }
