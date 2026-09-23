@@ -308,39 +308,45 @@ namespace SF3.Models.Structs.X8PC {
             return boneKeyframes;
         }
 
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(ISGL_ModelInstance modelInstance, IBone bone, BoneKeyframeInfo[] keyframeInfo) {
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, BoneKeyframeInfo? boneFrame) {
+            var matrix = Matrix4x4.Identity;
+
+            if (bone.BoneID.HasValue && boneFrame.HasValue) {
+                var bId = bone.BoneID.Value;
+
+                var posFrame   = boneFrame.Value.Pos;
+                var rotFrame   = boneFrame.Value.Rot;
+                var scaleFrame = boneFrame.Value.Scale;
+
+                var posTable = BoneKeyframePosTables[bId];
+                var rotTable = BoneKeyframeRotTables[bId];
+                var scaleTable = BoneKeyframeScaleTables[bId];
+
+                var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].CreateVector()     : new VECTOR(0, 0, 0);
+                var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].CreateQuaternion() : new QUATERNION(0, 0, 0, 1);
+                var scale1 = scaleTable.Count > scaleFrame.IndexA ? scaleTable[scaleFrame.IndexA].CreateVector() : new VECTOR(1, 1, 1);
+
+                var pos2   = posTable.Count   > posFrame.IndexB   ? posTable[posFrame.IndexB].CreateVector()     : new VECTOR(0, 0, 0);
+                var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].CreateQuaternion() : new QUATERNION(0, 0, 0, 1);
+                var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].CreateVector() : new VECTOR(1, 1, 1);
+
+                matrix *= IBoneExtensions.CreateMatrix(
+                    pos1,   pos2,   posFrame.Mix,
+                    rot1,   rot2,   rotFrame.Mix,
+                    scale1, scale2, scaleFrame.Mix
+                );
+            }
+            else if (bone.Tag == 0x30 || bone.Tag == 0x81)
+                matrix *= bone.CreateMatrix();
+
+            return matrix;
+        }
+
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, BoneKeyframeInfo[] keyframeInfo) {
             var matrix = Matrix4x4.Identity;
 
             void ApplyMatrices(IBone b) {
-                if (b.BoneID.HasValue) {
-                    var bId = b.BoneID.Value;
-
-                    var boneFrame  = keyframeInfo[bId];
-                    var posFrame   = boneFrame.Pos;
-                    var rotFrame   = boneFrame.Rot;
-                    var scaleFrame = boneFrame.Scale;
-
-                    var posTable = BoneKeyframePosTables[bId];
-                    var rotTable = BoneKeyframeRotTables[bId];
-                    var scaleTable = BoneKeyframeScaleTables[bId];
-
-                    var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].CreateVector()     : new VECTOR();
-                    var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].CreateQuaternion() : new QUATERNION();
-                    var scale1 = scaleTable.Count > scaleFrame.IndexA ? scaleTable[scaleFrame.IndexA].CreateVector() : new VECTOR();
-
-                    var pos2   = posTable.Count   > posFrame.IndexB   ? posTable[posFrame.IndexB].CreateVector()     : new VECTOR();
-                    var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].CreateQuaternion() : new QUATERNION();
-                    var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].CreateVector() : new VECTOR();
-
-                    matrix *= IBoneExtensions.CreateMatrix(
-                        pos1,   pos2,   posFrame.Mix,
-                        rot1,   rot2,   rotFrame.Mix,
-                        scale1, scale2, scaleFrame.Mix
-                    );
-                }
-                else if (b.Tag == 0x30 || b.Tag == 0x81)
-                    matrix *= b.CreateMatrix();
-
+                matrix *= GetModelInstanceMatrixInAnimation(b, (b.BoneID.HasValue) ? keyframeInfo[b.BoneID.Value] : (BoneKeyframeInfo?) null);
                 if (b.Parent != null)
                     ApplyMatrices(b.Parent);
             }

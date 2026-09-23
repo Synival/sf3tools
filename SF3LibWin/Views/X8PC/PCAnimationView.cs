@@ -148,7 +148,7 @@ namespace SF3.Win.Views.X8PC {
                 _lastFrameIdx = frameIdx;
                 for (int i = 0; i < _instances.Length; i++) {
                     var inst = _instances[i];
-                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(inst, _instBones[i], _keyframeInfo);
+                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(_instBones[i], _keyframeInfo);
                 }
             }
         }
