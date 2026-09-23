@@ -117,7 +117,15 @@ namespace ModelConverter {
 
         public byte[] ModelToGLB_Data(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
             var modelRoot = ModelToGLTF_ModelRoot(sglModels, texMetaCollection);
+            return ModelRootToGLB_Data(modelRoot);
+        }
 
+        public byte[] ModelToGLB_Data(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection) {
+            var modelRoot = ModelToGLTF_ModelRoot(sglModelInstances, texMetaCollection);
+            return ModelRootToGLB_Data(modelRoot);
+        }
+
+        private byte[] ModelRootToGLB_Data(ModelRoot modelRoot) {
             // Write GLTF, ignoring errors (we don't care if they're broken).
             var settings = new WriteSettings {
                 JsonIndented = true,
@@ -148,13 +156,20 @@ namespace ModelConverter {
         }
 
         public ModelRoot ModelToGLTF_ModelRoot(ISGL_Model[] sglModels, ITextureMetaCollection texMetaCollection) {
+            var instances = sglModels.Select(x => new SGL_ModelInstance((_1, _2) => x)).ToArray();
+            return ModelToGLTF_ModelRoot(instances, texMetaCollection);
+        }
+
+        public ModelRoot ModelToGLTF_ModelRoot(ISGL_ModelInstance[] sglModelInstances, ITextureMetaCollection texMetaCollection) {
             // TODO: four-way split for crazy quads
 
             var modelRoot = ModelRoot.CreateModel();
 
             // Default scene.
             var scene = modelRoot.UseScene("Scene");
-            int nodeIndex = 0;
+
+            var sglModels = sglModelInstances.Select(x => x.GetModel(0)).GroupBy(x => (x.ModelCollectionID, x.ModelID)).Select(x => x.First()).ToArray();
+            var meshBySglModel = new Dictionary<ISGL_Model, Mesh>();
 
             var mcIds = sglModels.Select(x => x.ModelCollectionID).Distinct().OrderBy(x => x).ToArray();
             var allFaces = sglModels.SelectMany(x => x.Faces.Select((y, i) => (Model: x, Face: new FaceWithIndex() { Face = y, Index = i }))).ToArray();
@@ -412,9 +427,25 @@ namespace ModelConverter {
                     primitive.IndexAccessor = indexAccessor;
                 }
 
-                // Make our model visible.
-                scene.CreateNode($"Node_{nodeIndex:D2}").WithMesh(mesh);
-                nodeIndex++;
+                // Register the model for usage with instances.
+                meshBySglModel[sglModel] = mesh;
+            }
+
+            // Create a root node that will contain all our instances.
+            var rootNode = scene.CreateNode("RootNode");
+
+            // Add nodes (instances).
+            int nodeIndex = 0;
+            foreach (var instance in sglModelInstances) {
+                var mesh = meshBySglModel[instance.GetModel(0)];
+                var node = rootNode
+                    .CreateNode($"Node_{nodeIndex++}")
+                    .WithMesh(mesh)
+                    // Position node, flipping Y and Z axes.
+                    .WithLocalTranslation(new Vector3(instance.PositionX, -instance.PositionY, -instance.PositionZ))
+                    .WithLocalRotation(Quaternion.CreateFromYawPitchRoll(instance.AngleX, instance.AngleY, instance.AngleZ))
+                    .WithLocalScale(new Vector3(instance.ScaleX, instance.ScaleY, instance.ScaleZ))
+                    ;
             }
 
             return modelRoot;
