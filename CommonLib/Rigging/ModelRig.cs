@@ -1,6 +1,6 @@
 ﻿namespace CommonLib.Rigging {
     public class ModelRig : IModelRig {
-        public ModelRig(Bone rootBone) {
+        public ModelRig(IBone rootBone) {
             RootBone = rootBone;
         }
 
@@ -8,6 +8,6 @@
             RootBone = new Bone(rig.RootBone);
         }
 
-        public Bone RootBone { get; }
+        public IBone RootBone { get; }
     }
 }
