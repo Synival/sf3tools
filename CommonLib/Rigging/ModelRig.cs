@@ -4,6 +4,10 @@
             RootBone = rootBone;
         }
 
+        public ModelRig(ModelRig rig) {
+            RootBone = new Bone(rig.RootBone);
+        }
+
         public Bone RootBone { get; }
     }
 }

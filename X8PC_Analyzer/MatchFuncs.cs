@@ -45,6 +45,9 @@ namespace X8PC_Analyzer {
         }
 
         public static string[]? WriteGLBs(IX8PC_File x8pcFile, string filename, bool forceLit) {
+            var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
+            _ = Directory.CreateDirectory(directory);
+
             var flags = new ModelConversionFlags() { ForceLit = forceLit };
             var converter = new ModelConverter.ModelConverter(flags);
 
@@ -58,21 +61,21 @@ namespace X8PC_Analyzer {
                         return null;
                 }
 
-                var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
-                Directory.CreateDirectory(directory);
-                var data = converter.ModelToGLB_Data(pc.Rig, pc, ModelGetter, pc);
+                var rig = new ModelRig(pc.Rig);
 
+                var data = converter.ModelToGLB_Data(rig, pc, ModelGetter, pc);
                 File.WriteAllBytes(directory + $"{pc.ID}.glb", data);
             }
             return [];
         }
 
         public static string[]? WriteGLBsTwoPasses(IX8PC_File x8pcFile, string filename) {
+            var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
+            _ = Directory.CreateDirectory(directory);
+
             var converter = new ModelConverter.ModelConverter();
 
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
-                var directory = $"./PolyCharXPDatas/{x8pcFile.Scenario}/{filename}/";
-                Directory.CreateDirectory(directory);
                 var input1  = pc.XPDataTables.SelectMany(x => x).ToArray();
                 var output1 = converter.ModelToGLTF_ModelRoot(input1, pc);
                 var input2  = converter.GLTF_ModelRootToModels(output1, null, null, null);

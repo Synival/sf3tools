@@ -1,4 +1,5 @@
-﻿using CommonLib.SGL;
+﻿using System.Linq;
+using CommonLib.SGL;
 
 namespace CommonLib.Rigging {
     public class Bone : IBone {
@@ -9,6 +10,24 @@ namespace CommonLib.Rigging {
             Children = children;
             foreach (var bone in children)
                 bone.Parent = this;
+        }
+
+        /// <summary>
+        /// Copy constructor for a bone.
+        /// </summary>
+        /// <param name="bone"></param>
+        public Bone(IBone bone, IBone parent = null) {
+            Parent   = parent;
+            Tag      = bone.Tag;
+            BoneID   = bone.BoneID;
+
+            ModelID  = bone.ModelID;
+            Position = bone.Position;
+            Rotation = bone.Rotation;
+            Scale    = bone.Scale;
+
+            if (bone.Children != null)
+                Children = bone.Children.Select(x => new Bone(x, this)).ToArray();
         }
 
         /// <summary>
@@ -54,7 +73,6 @@ namespace CommonLib.Rigging {
 
         public int? ModelID { get; }
         public VECTOR? Position { get; }
-
         public QUATERNION? Rotation { get; }
         public VECTOR? Scale { get; }
 
