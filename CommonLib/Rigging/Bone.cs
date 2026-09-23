@@ -67,15 +67,15 @@ namespace CommonLib.Rigging {
             Scale    = scale;
         }
 
-        public int? Tag { get; }
-        public IBone Parent { get; private set; }
-        public int? BoneID { get; }
+        public int? Tag { get; set; }
+        public IBone Parent { get; set; }
+        public int? BoneID { get; set; }
 
-        public int? ModelID { get; }
-        public VECTOR? Position { get; }
-        public QUATERNION? Rotation { get; }
-        public VECTOR? Scale { get; }
+        public int? ModelID { get; set; }
+        public VECTOR? Position { get; set; }
+        public QUATERNION? Rotation { get; set; }
+        public VECTOR? Scale { get; set; }
 
-        public IBone[] Children { get; }
+        public IBone[] Children { get; set; }
     }
 }
