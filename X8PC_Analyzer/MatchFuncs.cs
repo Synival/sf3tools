@@ -22,11 +22,11 @@ namespace X8PC_Analyzer {
             return strings.ToArray();
         }
 
-        public static string[]? PrintSkeletons(IX8PC_File x8pcFile) {
+        public static string[]? PrintRigs(IX8PC_File x8pcFile) {
             var strings = new List<string>();
 
             foreach (var pc in x8pcFile.PolyCharTable) {
-                strings.Add($"{pc.Name}:\n" + pc.Skeleton.RootBone.ToOutline());
+                strings.Add($"{pc.Name}:\n" + pc.Rig.RootBone.ToOutline());
             }
 
             return strings.Count > 0 ? strings.ToArray() : null;
@@ -92,6 +92,18 @@ namespace X8PC_Analyzer {
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
                 var models = pc.XPDataTables.SelectMany(x => x).Cast<ISGL_Model>().ToArray();
                 foreach (var model in models.Select((x, i) => (Model: x, Index: i)).Where(x => x.Model.Faces.Any(y => y.Attributes.HFlip || y.Attributes.VFlip)))
+                    report.Add($"{pc.ID}.{model.Index}");
+            }
+            return report.ToArray();
+        }
+
+        public static string[]? PolyCharsWithUseLightAttrs(IX8PC_File x8pcFile, string filename) {
+            var converter = new ModelConverter.ModelConverter();
+
+            var report = new List<string>();
+            foreach (PolyChar pc in x8pcFile.PolyCharTable) {
+                var models = pc.XPDataTables.SelectMany(x => x).Cast<ISGL_Model>().ToArray();
+                foreach (var model in models.Select((x, i) => (Model: x, Index: i)).Where(x => x.Model.Faces.Any(y => y.Attributes.UseLight)))
                     report.Add($"{pc.ID}.{model.Index}");
             }
             return report.ToArray();

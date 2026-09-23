@@ -45,8 +45,8 @@ namespace SF3.Win.Views.X8PC {
             var instanceId = 0;
 
             (IBone Bone, SGL_ModelInstance Instance)[] instsWithBones = [];
-            if (_polyChar?.Skeleton?.RootBone != null) {
-                instsWithBones = _polyChar.Skeleton.RootBone.Flatten()
+            if (_polyChar?.Rig?.RootBone != null) {
+                instsWithBones = _polyChar.Rig.RootBone.Flatten()
                     .Where(x => x.ModelID.HasValue || ((x.Tag == 0x30 || x.Tag == 0x81) && _polyChar.WeaponXPData != null))
                     .Select((x, i) => {
                         var model = _polyChar.GetModel(x.ModelID ?? _polyChar.WeaponXPData.ModelID, 0);

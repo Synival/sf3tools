@@ -4,12 +4,12 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.X8PC {
-    public class SkeletonFactory {
-        public SkeletonFactory(ScenarioType scenario) {
+    public class ModelRigFactory {
+        public ModelRigFactory(ScenarioType scenario) {
             Scenario = scenario;
         }
 
-        public Skeleton CreateSkeleton(IByteData data, int offset, int? maxUntil = null) {
+        public ModelRig CreateModelRig(IByteData data, int offset, int? maxUntil = null) {
             if (!maxUntil.HasValue)
                 maxUntil = data.Length;
             var maxUntilValue = maxUntil.Value;
@@ -17,7 +17,7 @@ namespace SF3.X8PC {
             var nextBoneId  = -1;
             var nextModelId = 0;
 
-            return new Skeleton(CreateBone(data, ref offset, maxUntilValue, ref nextBoneId, ref nextModelId));
+            return new ModelRig(CreateBone(data, ref offset, maxUntilValue, ref nextBoneId, ref nextModelId));
         }
 
         private Bone CreateBone(IByteData data, ref int offset, int maxUntil, ref int nextBoneId, ref int nextModelId) {

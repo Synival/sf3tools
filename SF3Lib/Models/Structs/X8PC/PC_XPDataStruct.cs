@@ -13,10 +13,10 @@ namespace SF3.Models.Structs.X8PC {
             _modelIDIncr = modelIdIncr;
         }
 
-        public void AssociateWithSkeleton(Skeleton skeleton) {
+        public void AssociateWithRig(ModelRig rig) {
             var thisId = ID;
 
-            var bone = skeleton.RootBone.FindTraverse(x => x.ModelID == thisId);
+            var bone = rig.RootBone.FindTraverse(x => x.ModelID == thisId);
             BonePath = (bone == null) ? "(none)" : bone.GetBonePath();
         }
 

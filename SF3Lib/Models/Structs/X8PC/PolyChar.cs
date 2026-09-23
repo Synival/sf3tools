@@ -77,14 +77,14 @@ namespace SF3.Models.Structs.X8PC {
                 (count, offset, index) => VertexNormalTable.Create(ModelChunk.DecompressedData, $"{nameof(VertexNormalTable)}_{index:D3} @{offset:X4}", offset, count)
             );
 
-            var skelFact = new SkeletonFactory(Scenario);
-            Skeleton = skelFact.CreateSkeleton(ModelChunk.DecompressedData, (int) ModelChunkHeader.SkeletonOffset);
-            BoneTable = PCBoneWrapperTable.Create("BoneNodes", Skeleton.RootBone, this);
+            var rigFact = new ModelRigFactory(Scenario);
+            Rig = rigFact.CreateModelRig(ModelChunk.DecompressedData, (int) ModelChunkHeader.RigOffset);
+            BoneTable = PCBoneWrapperTable.Create("BoneNodes", Rig.RootBone, this);
 
             if (XPDataTables.Length > 0) {
                 var xpdataTable = XPDataTables[0];
                 foreach (var xpdata in xpdataTable)
-                    xpdata.AssociateWithSkeleton(Skeleton);
+                    xpdata.AssociateWithRig(Rig);
             }
 
             AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
@@ -384,7 +384,7 @@ namespace SF3.Models.Structs.X8PC {
         public Dictionary<int, PolygonTable> PolygonTablesByOffset { get; }
         public Dictionary<int, AttrTable> AttrTablesByOffset { get; }
         public Dictionary<int, VertexNormalTable> VertexNormalTablesByOffset { get; }
-        public Skeleton Skeleton { get; }
+        public ModelRig Rig { get; }
         public PCBoneWrapperTable BoneTable { get; }
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }

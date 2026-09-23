@@ -15,7 +15,7 @@ namespace SF3.Win.Views.X8PC {
             PolygonTablesView      = new PolygonTablesView("POLYGONs", model, ngc);
             AttrTablesView         = new AttrTablesView("ATTRs", model, ngc);
             VertexNormalTablesView = new VertexNormalTablesView("VERTEX NORMALs", model, ngc);
-            SkeletonTextView       = new TextView("Skeleton (Text)", "");
+            RigTextView            = new TextView("Rig (Text)", "");
             BonesView              = new PCBoneWrapperTableView("Bones", model, model?.BoneTable, ngc);
 
             Model                  = model;
@@ -34,7 +34,7 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(PolygonTablesView);
             CreateChild(AttrTablesView);
             CreateChild(VertexNormalTablesView);
-            CreateChild(SkeletonTextView);
+            CreateChild(RigTextView);
             CreateChild(BonesView);
 
             TabControl.SelectedIndex = 8;
@@ -54,7 +54,7 @@ namespace SF3.Win.Views.X8PC {
                     VertexTablesView.Model       = _model;
                     PolygonTablesView.Model      = _model;
                     AttrTablesView.Model         = _model;
-                    SkeletonTextView.Text        = _model?.Skeleton?.RootBone?.ToOutline() ?? "";
+                    RigTextView.Text             = _model?.Rig?.RootBone?.ToOutline() ?? "";
                     VertexNormalTablesView.Model = _model;
                 }
             }
@@ -68,7 +68,7 @@ namespace SF3.Win.Views.X8PC {
         public PolygonTablesView PolygonTablesView { get; }
         public AttrTablesView AttrTablesView { get; }
         public VertexNormalTablesView VertexNormalTablesView { get; }
-        public TextView SkeletonTextView { get; }
+        public TextView RigTextView { get; }
         public PCBoneWrapperTableView BonesView { get; }
     }
 }
