@@ -533,8 +533,8 @@ namespace ModelConverter {
                                     IsTwoSided = material.DoubleSided,
                                     UseTexture = (materialTexture != null),
                                     UseLight   = !material.Unlit || Flags.ForceLit,
-                                    HFlip      = (bool) material.Extras["hFlip"],
-                                    VFlip      = (bool) material.Extras["vFlip"],
+                                    HFlip      = (bool) material.Extras["HFlip"],
+                                    VFlip      = (bool) material.Extras["VFlip"],
                                 }
                             );
                         })
