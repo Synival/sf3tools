@@ -18,6 +18,6 @@ namespace SF3.Models.Tables.X8PC {
             => Create(() => new PCChunkDefTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new PCChunkDef(Data, id, "Chunk_" + ((id < 4) ? c_chunkNames[id] : $"ExtraAnim_{id - 3:D2}"), address));
+            => Load((id, address) => new PCChunkDef(Data, id, "Chunk_" + c_chunkNames[id], address));
     }
 }

@@ -67,12 +67,14 @@ namespace SF3.NamedValues {
             = new NamedValueFromResourceForScenariosInfo("Monsters.xml");
         public static readonly MonsterForUnitInfo MonsterForUnitInfo
             = new MonsterForUnitInfo();
-        public static readonly NamedValueFromEnum<OrderChoiceMode> OrderChoiceModeInfo
-            = new NamedValueFromEnum<OrderChoiceMode>();
         public static readonly NamedValueFromEnum<MovementType> MovementTypeInfo
             = new NamedValueFromEnum<MovementType>();
         public static readonly NamedValueFromResourceForScenariosInfo MusicInfo
             = new NamedValueFromResourceForScenariosInfo("Music.xml");
+        public static readonly NamedValueFromEnum<OrderChoiceMode> OrderChoiceModeInfo
+            = new NamedValueFromEnum<OrderChoiceMode>();
+        public static readonly NamedValueFromEnum<PCAnimationType> PCAnimationTypeInfo
+            = new NamedValueFromEnum<PCAnimationType>();
         public static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
         public static readonly NamedValueFromEnum<SpawnType> SpawnTypeInfo

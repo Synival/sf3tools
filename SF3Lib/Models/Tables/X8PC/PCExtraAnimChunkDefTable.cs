@@ -11,7 +11,7 @@ namespace SF3.Models.Tables.X8PC {
             => Create(() => new PCExtraAnimChunkDefTable(data, name, address));
 
         public override bool Load()
-            => Load((id, address) => new PCChunkDef(Data, id, "Chunk_" + $"ExtraAnim_{id + 1:D2}", address),
+            => Load((id, address) => new PCChunkDef(Data, id, "Chunk_" + $"ExtraAnim_{id}", address),
                     (rowsLoaded, thisRow) => Data.GetUInt32(thisRow.Address) != 0xFFFFFFFF,
                     addEndModel: false);
     }

@@ -1,9 +1,12 @@
-﻿using CommonLib.Attributes;
+﻿using System.Collections.Generic;
+using CommonLib.Attributes;
 using CommonLib.SGL;
 using SF3.ByteData;
+using SF3.Models.Tables;
+using SF3.Models.Tables.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCAnimationChunkHeader : Struct {
+    public class PCAnimationChunkHeader : Struct, ITableContainer {
         private readonly int _centerXAddr;
         private readonly int _centerYAddr;
         private readonly int _centerZAddr;
@@ -11,6 +14,8 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _halfBoundingBoxYAddr;
         private readonly int _halfBoundingBoxZAddr;
         private readonly int _boneKeyframesTableOffsetAddr;
+
+        public PCAnimationDefTable AnimationDefTable { get; }
 
         public PCAnimationChunkHeader(IByteData data, int id, string name, int address)
         : base(data, id, name, address, 0x1C) {
@@ -21,6 +26,11 @@ namespace SF3.Models.Structs.X8PC {
             _halfBoundingBoxYAddr         = Address + 0x10; // 4 bytes
             _halfBoundingBoxZAddr         = Address + 0x14; // 4 bytes
             _boneKeyframesTableOffsetAddr = Address + 0x18; // 4 bytes
+
+            AnimationDefTable = PCAnimationDefTable.Create(Data, nameof(PCAnimationDefTable), Address + 0x1C);
+            Size = 0x1C + AnimationDefTable.SizeInBytes;
+
+            Tables = new ITable[] { AnimationDefTable };
         }
 
         [TableViewModelColumn(addressField: nameof(_centerXAddr), displayOrder: 0)]
@@ -71,5 +81,7 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetUInt32(_boneKeyframesTableOffsetAddr);
             set => Data.SetUInt32(_boneKeyframesTableOffsetAddr, value);
         }
+
+        public IEnumerable<ITable> Tables { get; }
     }
 }

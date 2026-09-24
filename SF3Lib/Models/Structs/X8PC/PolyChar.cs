@@ -130,6 +130,8 @@ namespace SF3.Models.Structs.X8PC {
             TextureAtlas = new PCTextureAtlas(GetTextureAtlasesByModelID(), Palette);
 
             tables.AddRange(Header.Tables);
+            tables.AddRange(AnimationChunkHeader.Tables);
+
             tables.Add(TextureTable);
 
             tables.Add(XPDataListTable);

@@ -9,6 +9,7 @@ namespace SF3.Win.Views.X8PC {
             NameGetterContext = ngc;
 
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
+            AnimationDefView  = new TableView("Animations", model?.AnimationChunkHeader?.AnimationDefTable, ngc, typeof(PCAnimationDefStruct));
             BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
             PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTables);
             RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rotations", model, ngc, x => x?.BoneKeyframeRotTables);
@@ -24,6 +25,7 @@ namespace SF3.Win.Views.X8PC {
             var ngc = NameGetterContext;
 
             CreateChild(HeaderView);
+            CreateChild(AnimationDefView);
             CreateChild(BoneKeyframesView);
             CreateChild(PosView);
             CreateChild(RotView);
@@ -40,6 +42,7 @@ namespace SF3.Win.Views.X8PC {
                     _model = value;
 
                     HeaderView.Model        = _model?.AnimationChunkHeader;
+                    AnimationDefView.Table  = _model?.AnimationChunkHeader?.AnimationDefTable;
                     BoneKeyframesView.Table = _model?.BoneKeyframeTable;
                     PosView.Model           = _model;
                     RotView.Model           = _model;
@@ -51,6 +54,7 @@ namespace SF3.Win.Views.X8PC {
         public INameGetterContext NameGetterContext { get; }
 
         public DataModelView HeaderView { get; }
+        public TableView AnimationDefView { get; }
         public TableView BoneKeyframesView { get; }
         public BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable> PosView { get; }
         public BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable> RotView { get; }
