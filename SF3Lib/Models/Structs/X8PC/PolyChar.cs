@@ -37,6 +37,15 @@ namespace SF3.Models.Structs.X8PC {
                 Chunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
             }
 
+            if (hasAnimations) {
+                ExtraAnimChunks = new ChunkData[Header.ExtraAnimChunkDefTable.Count];
+                for (int i = 0; i < ExtraAnimChunks.Length; i++) {
+                    var def = Header.ExtraAnimChunkDefTable[i];
+                    ExtraAnimChunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)), false, i);
+                    ExtraAnimChunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
+                }
+            }
+
             // Store references to chunks by name as well as index.
             TexDefChunk    = Chunks[0];
             TexDataChunk   = Chunks[1];
@@ -227,12 +236,29 @@ namespace SF3.Models.Structs.X8PC {
                 );
         }
 
+        private struct ChunkWithDef {
+            public ChunkWithDef(ChunkData data, PCChunkDef def) {
+                Chunk = data;
+                Def  = def;
+            }
+
+            public readonly ChunkData Chunk;
+            public readonly PCChunkDef Def;
+        };
+
         public bool UpdateAndCommitChunks(bool neverShrinkChunks) {
             // Rebuild the entire chunk table.
             uint nextOffset = 0x800;
             uint polyCharOffset = (uint) Address;
-            foreach (var chunk in Chunks) {
-                var def = Header.ChunkDefTable[chunk.Index];
+
+            var allChunksWithDefs = Chunks
+                .Select((x, i) => new ChunkWithDef(x, Header.ChunkDefTable[x.Index]))
+                .Concat(ExtraAnimChunks?.Select((x, i) => new ChunkWithDef(x, Header.ExtraAnimChunkDefTable[x.Index]))?.ToArray() ?? new ChunkWithDef[0])
+                .ToArray();
+
+            foreach (var chunkWithDef in allChunksWithDefs) {
+                var chunk = chunkWithDef.Chunk;
+                var def   = chunkWithDef.Def;
 
                 // Recompress if necessary.
                 if (TexDataChunk.NeedsRecompression)
@@ -402,10 +428,13 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
 
         public ChunkData[] Chunks { get; }
+        public ChunkData[] ExtraAnimChunks { get; }
+
         public ChunkData TexDefChunk { get; }
         public ChunkData TexDataChunk { get; }
         public ChunkData ModelChunk { get; }
         public ChunkData AnimationChunk { get; }
+
         public PCPalette Palette { get; }
         public PCTextureAtlas TextureAtlas { get; }
 
