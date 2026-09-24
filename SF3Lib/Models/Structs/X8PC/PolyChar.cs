@@ -25,7 +25,8 @@ namespace SF3.Models.Structs.X8PC {
             var tables = new List<ITable>();
 
             // Build the first header, which is the chunk table.
-            Header = new PCHeader(Data, 0, nameof(PCHeader), Address);
+            var hasAnimations = Scenario >= ScenarioType.Scenario2;
+            Header = new PCHeader(Data, 0, nameof(PCHeader), Address, hasAnimations);
 
             // Build all chunks.
             Chunks = new ChunkData[Header.ChunkDefTable.Count];
