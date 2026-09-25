@@ -31,7 +31,7 @@ namespace SF3.Win.Views {
         }
 
         public void UpdateData() {
-            var rawData = Data.GetDataCopy();
+            var rawData = Data?.GetDataCopyOrReference() ?? [];
             var stringBuilder = new StringBuilder("", rawData.Length * 3 + (rawData.Length / 16) + 1);
 
             var pos = 0;
@@ -45,7 +45,19 @@ namespace SF3.Win.Views {
             Control.Text = stringBuilder.ToString();
         }
 
-        public IByteArray Data { get; }
+        private IByteArray _data = null;
+
+        public IByteArray Data {
+            get => _data;
+            set {
+                if (_data != value) {
+                    _data = value;
+                    if (IsCreated)
+                        UpdateData();
+                }
+            }
+        }
+
         public int BytesPerRow { get; }
     }
 }
