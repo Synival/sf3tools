@@ -22,31 +22,31 @@ namespace SF3.Models.Structs.X8PC {
             _aniCommandsOffsetAddr = Address + 0x08; // 4 bytes
         }
 
+        [TableViewModelColumn(addressField: nameof(_startFrameAddr), displayOrder: -0.3f)]
+        [BulkCopy]
+        public bool IsInAttackAnimChunk {
+            get => Data.GetBit(_startFrameAddr, 5);
+            set => Data.SetBit(_startFrameAddr, 5, value);
+        }
+
+        private int CurrentAttackChunkIdx => PrevAttackAnimChunkIdx + (IsInAttackAnimChunk ? 1 : 0);
+        private int PrevAttackAnimChunkIdx => _neighborGetter(ID - 1)?.CurrentAttackChunkIdx ?? -1;
+
+        private int CurrentIdxInMainAnimChunk => PrevIdxInMainAnimChunk + (IsInAttackAnimChunk ? 0 : 1);
+        private int PrevIdxInMainAnimChunk => _neighborGetter(ID - 1)?.CurrentIdxInMainAnimChunk ?? -1;
+
+        [TableViewModelColumn(displayName: nameof(AttackAnimChunkIdx), displayOrder: -0.2f)]
+        public int? AttackAnimChunkIdx => IsInAttackAnimChunk ? CurrentAttackChunkIdx : (int?) null;
+
+        [TableViewModelColumn(displayName: nameof(IdxInMainAnimChunk), displayOrder: -0.1f)]
+        public int? IdxInMainAnimChunk => IsInAttackAnimChunk ? (int?) null : CurrentIdxInMainAnimChunk;
+
         [TableViewModelColumn(addressField: nameof(_startFrameAddr), displayOrder: 0)]
         [BulkCopy]
         public ushort StartFrame {
             get => (ushort) (Data.GetUInt16(_startFrameAddr) & 0xEFFF);
             set => Data.SetUInt16(_startFrameAddr, (ushort) ((value & 0xEFFF) | (Data.GetUInt16(_startFrameAddr) & 0x1000)));
         }
-
-        [TableViewModelColumn(addressField: nameof(_startFrameAddr), displayOrder: 0.1f)]
-        [BulkCopy]
-        public bool IsSeparateChunk {
-            get => Data.GetBit(_startFrameAddr, 5);
-            set => Data.SetBit(_startFrameAddr, 5, value);
-        }
-
-        private int CurrentChunkID => PrevChunkID + (IsSeparateChunk ? 1 : 0);
-        private int PrevChunkID => _neighborGetter(ID - 1)?.CurrentChunkID ?? -1;
-
-        private int CurrentAnimInChunkID => PrevAnimInChunkID + (IsSeparateChunk ? 0 : 1);
-        private int PrevAnimInChunkID => _neighborGetter(ID - 1)?.CurrentAnimInChunkID ?? -1;
-
-        [TableViewModelColumn(displayName: nameof(ChunkID), displayOrder: 0.2f)]
-        public int? ChunkID => IsSeparateChunk ? CurrentChunkID : (int?) null;
-
-        [TableViewModelColumn(displayName: nameof(AnimInChunkID), displayOrder: 0.3f)]
-        public int? AnimInChunkID => IsSeparateChunk ? (int?) null : CurrentAnimInChunkID;
 
         [TableViewModelColumn(addressField: nameof(_frameCountAddr), displayOrder: 1)]
         [BulkCopy]

@@ -144,7 +144,7 @@ namespace X8PC_Analyzer {
             };
 
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
-                var attackAnims = pc.AnimationChunkHeader.AnimationDefTable.Where(x => x.IsSeparateChunk).ToArray();
+                var attackAnims = pc.AnimationChunkHeader.AnimationDefTable.Where(x => x.IsInAttackAnimChunk).ToArray();
                 var attackAnimIds = attackAnims.Select(x => (PCAnimationType) x.AnimID).ToArray();
                 var isExpected = !attackAnimIds.Any() || attackAnimIds.Any(x => expectedTypes.Contains(x));
                 if (!isExpected)
