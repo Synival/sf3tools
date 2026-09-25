@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -488,6 +489,110 @@ breakEntireLoop:
 
             // Returned 'dataOut' and 'bitstreamOut' combined.
             return dataOut.Take((int) posDataOut).Concat(bitstreamOut.Take((int) posBitstreamOut)).ToArray();
+        }
+
+        // TODO: Nice description
+        public static unsafe ushort[] DecompressZigZag(byte[] dataIn) {
+            fixed (byte* dataInPtr = dataIn) {
+                var frameCount = BinaryPrimitives.ReverseEndianness(*((int*) dataInPtr));
+                return DecompressZigZag(dataIn, frameCount, 0x04, 0x08);
+            }
+        }
+
+        // TODO: Nice description
+        public static unsafe ushort[] DecompressZigZag(byte[] dataIn, int frameCount, int bitstreamOffset, int dataOffset) {
+            // TODO: This needs many, many rounds of clean-up.
+
+            var dataOut = new ushort[frameCount];
+
+            fixed (ushort* dataOutHeadPtr = dataOut)
+            fixed (byte* dataInBytePtr = dataIn) {
+                ushort *dataOutPtr = dataOutHeadPtr;
+
+                ushort* dataInPtr = (ushort*) (dataInBytePtr + dataOffset);
+
+                uint* bitstreamPtr = (uint*) (dataInBytePtr + bitstreamOffset);
+                var bitstreamValue = BinaryPrimitives.ReverseEndianness(*bitstreamPtr);
+                bitstreamPtr = (uint*) ((byte*) bitstreamPtr + bitstreamValue);
+
+                uint previousState = 0;
+                uint predictedState = 0;
+                uint bitBuffer = 0x80000000;
+
+                bool useCompression = false;
+                bool carryFlag = false;
+
+                for (int i = 0; i < frameCount; i++) {
+                    uint decodedDelta;
+
+                    if (carryFlag) {
+                        uint unaryPrefix = 0;
+                        int bitCount = 0;
+                        uint shiftedBuffer = bitBuffer * 2;
+                        uint tempBuffer;
+
+                        carryFlag = shiftedBuffer < bitBuffer;
+                        decodedDelta = 0;
+                        bitBuffer = shiftedBuffer;
+
+                        if (carryFlag) {
+                            bool skipFirst = (shiftedBuffer == 0);
+                            do {
+                                if (!skipFirst) {
+                                    do {
+                                        tempBuffer = unaryPrefix & 0x20000000;
+                                        unaryPrefix = unaryPrefix * 8 + 1;
+                                        shiftedBuffer = bitBuffer * 2;
+                                        tempBuffer = shiftedBuffer + (tempBuffer != 0 ? 1u : 0u);
+                                        carryFlag = bitBuffer <= shiftedBuffer;
+                                        bitCount += 3;
+                                        bitBuffer = tempBuffer;
+                                        if (carryFlag && shiftedBuffer <= tempBuffer)
+                                            goto exitOuterLoop;
+                                        carryFlag = tempBuffer == 0;
+                                    } while (!carryFlag);
+                                }
+                                skipFirst = false;
+
+                                tempBuffer = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
+                                shiftedBuffer = tempBuffer * 2;
+                                bitBuffer = shiftedBuffer + (carryFlag ? 1u : 0u);
+                            } while (shiftedBuffer < tempBuffer || bitBuffer < shiftedBuffer);
+                        }
+                        exitOuterLoop:
+
+                        for (; bitCount != 0; bitCount--) {
+                            shiftedBuffer = bitBuffer * 2;
+                            tempBuffer = shiftedBuffer + (bitCount == 0 ? 1u : 0u);
+                            decodedDelta = decodedDelta * 2 | ((shiftedBuffer < bitBuffer || tempBuffer < shiftedBuffer) ? 1u : 0u);
+                            if ((shiftedBuffer < bitBuffer || tempBuffer < shiftedBuffer) && (tempBuffer == 0)) {
+                                shiftedBuffer = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
+                                bitBuffer = shiftedBuffer * 2;
+                                tempBuffer = bitBuffer + ((decodedDelta & 1) == 1 ? 1u : 0u);
+                                decodedDelta = (decodedDelta & ~0x1u) | ((bitBuffer < shiftedBuffer || tempBuffer < bitBuffer) ? 1u : 0u);
+                            }
+                            bitBuffer = tempBuffer;
+                        }
+                        decodedDelta += unaryPrefix;
+                    }
+                    else {
+                        decodedDelta = BinaryPrimitives.ReverseEndianness(*dataInPtr++);
+                    }
+
+                    int currentValue = (int) ((((int) decodedDelta >> 1) ^ -(decodedDelta & 1)) + predictedState);
+                    *dataOutPtr++ = (ushort) currentValue;
+
+                    ushort nextMaybe = (ushort) (currentValue * 2 - previousState);
+
+                    previousState  = (previousState  >> 16) | (uint) ((ushort) currentValue << 16);
+                    predictedState = (predictedState >> 16) | (uint) (nextMaybe << 16);
+
+                    carryFlag = useCompression;
+                    useCompression = (int) decodedDelta < 0x249;
+                }
+            }
+
+            return dataOut;
         }
     }
 }
