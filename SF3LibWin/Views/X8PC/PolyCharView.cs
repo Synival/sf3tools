@@ -7,14 +7,10 @@ namespace SF3.Win.Views.X8PC {
         public PolyCharView(string name, PolyChar model, INameGetterContext ngc, TabAlignment tabAlignment) : base(name, tabAlignment: tabAlignment) {
             NameGetterContext = ngc;
 
-            AnimationViewer     = new PCAnimationView("Animation Viewer", model);
-            TextureSheetView    = new TextureView("Texture Atlas", model?.TextureAtlas, imageScale: 2.0f);
-            PaletteView         = new TextureView("Palette", model?.Palette, imageScale: 16.00f);
-
-            HeaderChunkView     = new PCHeaderChunkView("Header Chunk", model, NameGetterContext);
-            TextureChunkView    = new PCTexChunkView("Texture Chunk", model, NameGetterContext);
-            ModelChunkView      = new PCModelChunkView("Model Chunk", model, NameGetterContext);
-            AnimationChunkView  = new PCAnimationChunkView("Animation Chunk", model, NameGetterContext);
+            AnimationViewer  = new PCAnimationView("Animation Viewer", model);
+            TextureSheetView = new TextureView("Texture Atlas", model?.TextureAtlas, imageScale: 2.0f);
+            PaletteView      = new TextureView("Palette", model?.Palette, imageScale: 16.00f);
+            ChunkView        = new PCChunkView("Chunks", model, NameGetterContext);
 
             Model = model;
         }
@@ -26,11 +22,7 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(AnimationViewer);
             CreateChild(TextureSheetView);
             CreateChild(PaletteView);
-
-            CreateChild(HeaderChunkView);
-            CreateChild(TextureChunkView);
-            CreateChild(ModelChunkView);
-            CreateChild(AnimationChunkView);
+            CreateChild(ChunkView);
 
             return Control;
         }
@@ -44,12 +36,8 @@ namespace SF3.Win.Views.X8PC {
 
                     AnimationViewer.PolyChar = _model;
                     TextureSheetView.Texture = _model?.TextureAtlas;
-                    PaletteView.Texture  = _model?.Palette;
-
-                    HeaderChunkView.Model    = _model;
-                    TextureChunkView.Model   = _model;
-                    ModelChunkView.Model     = _model;
-                    AnimationChunkView.Model = _model;
+                    PaletteView.Texture      = _model?.Palette;
+                    ChunkView.Model          = _model;
                 }
             }
         }
@@ -59,10 +47,6 @@ namespace SF3.Win.Views.X8PC {
         public PCAnimationView AnimationViewer { get; }
         public TextureView TextureSheetView { get; }
         public TextureView PaletteView { get; }
-
-        public PCHeaderChunkView HeaderChunkView { get; }
-        public PCTexChunkView TextureChunkView { get; }
-        public PCModelChunkView ModelChunkView { get; }
-        public PCAnimationChunkView AnimationChunkView { get; }
+        public PCChunkView ChunkView { get; }
     }
 }
