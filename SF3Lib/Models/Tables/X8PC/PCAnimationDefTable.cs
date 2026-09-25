@@ -10,9 +10,13 @@ namespace SF3.Models.Tables.X8PC {
         public static PCAnimationDefTable Create(IByteData data, string name, int address)
             => Create(() => new PCAnimationDefTable(data, name, address));
 
-        public override bool Load()
-            => Load((id, address) => new PCAnimationDefStruct(Data, id, $"Animation_{id:D2}", address),
-                    (rowsLoaded, thisRow) => Data.GetUInt16(thisRow.Address) != 0xFFFF,
-                    addEndModel: false);
+        public override bool Load() {
+            PCAnimationDefStruct NeighborGetter(int id) => (id >= 0 && id < _rows.Length) ? _rows[id] : null;
+            return Load(
+                (id, address) => new PCAnimationDefStruct(Data, id, $"Animation_{id:D2}", address, NeighborGetter),
+                (rowsLoaded, thisRow) => Data.GetUInt16(thisRow.Address) != 0xFFFF,
+                addEndModel: false
+            );
+        }
     }
 }

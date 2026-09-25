@@ -1,4 +1,5 @@
-﻿using CommonLib.Attributes;
+﻿using System;
+using CommonLib.Attributes;
 using SF3.ByteData;
 using SF3.Types;
 
@@ -10,7 +11,10 @@ namespace SF3.Models.Structs.X8PC {
         public readonly int _distanceFromEnemyAddr;
         public readonly int _aniCommandsOffsetAddr;
 
-        public PCAnimationDefStruct(IByteData data, int id, string name, int address) : base(data, id, name, address, 0x0c) {
+        public PCAnimationDefStruct(IByteData data, int id, string name, int address, Func<int, PCAnimationDefStruct> neighborGetter)
+        : base(data, id, name, address, 0x0c) {
+            _neighborGetter = neighborGetter;
+
             _startFrameAddr        = Address + 0x00; // 2 bytes
             _frameCountAddr        = Address + 0x02; // 2 bytes
             _animIdAddr            = Address + 0x04; // 2 bytes
@@ -25,12 +29,24 @@ namespace SF3.Models.Structs.X8PC {
             set => Data.SetUInt16(_startFrameAddr, (ushort) ((value & 0xEFFF) | (Data.GetUInt16(_startFrameAddr) & 0x1000)));
         }
 
-        [TableViewModelColumn(addressField: nameof(_frameCountAddr), displayOrder: 0.5f)]
+        [TableViewModelColumn(addressField: nameof(_startFrameAddr), displayOrder: 0.1f)]
         [BulkCopy]
         public bool IsSeparateChunk {
             get => Data.GetBit(_startFrameAddr, 5);
             set => Data.SetBit(_startFrameAddr, 5, value);
         }
+
+        private int CurrentChunkID => PrevChunkID + (IsSeparateChunk ? 1 : 0);
+        private int PrevChunkID => _neighborGetter(ID - 1)?.CurrentChunkID ?? -1;
+
+        private int CurrentAnimInChunkID => PrevAnimInChunkID + (IsSeparateChunk ? 0 : 1);
+        private int PrevAnimInChunkID => _neighborGetter(ID - 1)?.CurrentAnimInChunkID ?? -1;
+
+        [TableViewModelColumn(displayName: nameof(ChunkID), displayOrder: 0.2f)]
+        public int? ChunkID => IsSeparateChunk ? CurrentChunkID : (int?) null;
+
+        [TableViewModelColumn(displayName: nameof(AnimInChunkID), displayOrder: 0.3f)]
+        public int? AnimInChunkID => IsSeparateChunk ? (int?) null : CurrentAnimInChunkID;
 
         [TableViewModelColumn(addressField: nameof(_frameCountAddr), displayOrder: 1)]
         [BulkCopy]
@@ -60,5 +76,7 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetUInt32(_aniCommandsOffsetAddr);
             set => Data.SetUInt32(_aniCommandsOffsetAddr, value);
         }
+
+        private readonly Func<int, PCAnimationDefStruct> _neighborGetter;
     }
 }
