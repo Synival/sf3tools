@@ -25,8 +25,8 @@ namespace SF3.Models.Structs.X8PC {
             var tables = new List<ITable>();
 
             // Build the first header, which is the chunk table.
-            var hasAnimations = Scenario >= ScenarioType.Scenario2;
-            Header = new PCHeader(Data, 0, nameof(PCHeader), Address, hasAnimations);
+            var hasAttackAnims = Scenario >= ScenarioType.Scenario2;
+            Header = new PCHeader(Data, 0, nameof(PCHeader), Address, hasAttackAnims);
 
             // Build all chunks.
             Chunks = new ChunkData[Header.ChunkDefTable.Count];
@@ -37,12 +37,12 @@ namespace SF3.Models.Structs.X8PC {
                 Chunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
             }
 
-            if (hasAnimations) {
-                ExtraAnimChunks = new ChunkData[Header.ExtraAnimChunkDefTable.Count];
-                for (int i = 0; i < ExtraAnimChunks.Length; i++) {
-                    var def = Header.ExtraAnimChunkDefTable[i];
-                    ExtraAnimChunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)), false, i);
-                    ExtraAnimChunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
+            if (hasAttackAnims) {
+                AttackAnimChunks = new ChunkData[Header.AttackAnimChunkDefTable.Count];
+                for (int i = 0; i < AttackAnimChunks.Length; i++) {
+                    var def = Header.AttackAnimChunkDefTable[i];
+                    AttackAnimChunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)), false, i);
+                    AttackAnimChunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
                 }
             }
 
@@ -255,7 +255,7 @@ namespace SF3.Models.Structs.X8PC {
 
             var allChunksWithDefs = Chunks
                 .Select((x, i) => new ChunkWithDef(x, Header.ChunkDefTable[x.Index]))
-                .Concat(ExtraAnimChunks?.Select((x, i) => new ChunkWithDef(x, Header.ExtraAnimChunkDefTable[x.Index]))?.ToArray() ?? new ChunkWithDef[0])
+                .Concat(AttackAnimChunks?.Select((x, i) => new ChunkWithDef(x, Header.AttackAnimChunkDefTable[x.Index]))?.ToArray() ?? new ChunkWithDef[0])
                 .ToArray();
 
             foreach (var chunkWithDef in allChunksWithDefs) {
@@ -430,7 +430,7 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
 
         public ChunkData[] Chunks { get; }
-        public ChunkData[] ExtraAnimChunks { get; }
+        public ChunkData[] AttackAnimChunks { get; }
 
         public ChunkData TexDefChunk { get; }
         public ChunkData TexDataChunk { get; }

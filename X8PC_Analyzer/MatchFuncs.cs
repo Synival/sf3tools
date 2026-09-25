@@ -6,6 +6,7 @@ using CommonLib.Extensions;
 using CommonLib.Rigging;
 using System.Numerics;
 using static SF3.Models.Structs.X8PC.PolyChar;
+using SF3.Types;
 
 namespace X8PC_Analyzer {
     public static class MatchFuncs {
@@ -119,13 +120,35 @@ namespace X8PC_Analyzer {
         }
 
         public static string[]? PolyCharsWithUseLightAttrs(IX8PC_File x8pcFile, string filename) {
-            var converter = new ModelConverter.ModelConverter();
-
             var report = new List<string>();
             foreach (PolyChar pc in x8pcFile.PolyCharTable) {
                 var models = pc.XPDataTables.SelectMany(x => x).Cast<ISGL_Model>().ToArray();
                 foreach (var model in models.Select((x, i) => (Model: x, Index: i)).Where(x => x.Model.Faces.Any(y => y.Attributes.UseLight)))
                     report.Add($"{pc.ID}.{model.Index}");
+            }
+            return report.ToArray();
+        }
+
+        public static string[]? PolyCharsWithExtraNonAttackAnimChunks(IX8PC_File x8pcFile, string filename) {
+            var report = new List<string>();
+            var expectedTypes = new PCAnimationType[] {
+                PCAnimationType.AttackClose,
+                PCAnimationType.AttackFar,
+                PCAnimationType.Special1,
+                PCAnimationType.Special2,
+                PCAnimationType.Special3,
+                PCAnimationType.Magic,
+                PCAnimationType.Item,
+                PCAnimationType.Extra1,
+                PCAnimationType.Extra2
+            };
+
+            foreach (PolyChar pc in x8pcFile.PolyCharTable) {
+                var attackAnims = pc.AnimationChunkHeader.AnimationDefTable.Where(x => x.IsSeparateChunk).ToArray();
+                var attackAnimIds = attackAnims.Select(x => (PCAnimationType) x.AnimID).ToArray();
+                var isExpected = !attackAnimIds.Any() || attackAnimIds.Any(x => expectedTypes.Contains(x));
+                if (!isExpected)
+                    report.Add($"{pc.ID}");
             }
             return report.ToArray();
         }

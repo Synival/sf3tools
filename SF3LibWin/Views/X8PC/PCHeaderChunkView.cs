@@ -7,7 +7,7 @@ namespace SF3.Win.Views.X8PC {
         public PCHeaderChunkView(string name, PolyChar model, INameGetterContext ngc) : base(name) {
             NameGetterContext = ngc;
             ChunkDefView      = new TableView("Chunks", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
-            ExtraAnimChunkDefView = new TableView("Extra Anim. Chunks", model?.Header?.ExtraAnimChunkDefTable, ngc, modelType: typeof(PCChunkDef));
+            AttackAnimChunkDefView = new TableView("Attack Anim. Chunks", model?.Header?.AttackAnimChunkDefTable, ngc, modelType: typeof(PCChunkDef));
             Model             = model;
         }
 
@@ -16,15 +16,15 @@ namespace SF3.Win.Views.X8PC {
                 return null;
 
             CreateChild(ChunkDefView);
-            CreateChild(ExtraAnimChunkDefView);
+            CreateChild(AttackAnimChunkDefView);
 
             foreach (var tabObj in TabControl.TabPages) {
                 var tab = tabObj as TabPage;
                 if (tab != null) {
                     if (tab.Text == "Chunks")
                         _chunkDefViewTab = tab;
-                    else if (tab.Text == "Extra Anim. Chunks")
-                        _extraAnimChunkDefViewTab = tab;
+                    else if (tab.Text == "Attack Anim. Chunks")
+                        _attackAnimChunkDefViewTab = tab;
                 }
             }
 
@@ -37,11 +37,11 @@ namespace SF3.Win.Views.X8PC {
             if (TabControl == null || TabControl.TabPages == null)
                 return;
 
-            var showExtraAnims = _model?.Header?.ExtraAnimChunkDefTable != null;
-            if (showExtraAnims && !TabControl.TabPages.Contains(_extraAnimChunkDefViewTab))
-                TabControl.TabPages.Insert(TabControl.TabPages.IndexOf(_chunkDefViewTab) + 1, _extraAnimChunkDefViewTab);
-            else if (!showExtraAnims && TabControl.TabPages.Contains(_extraAnimChunkDefViewTab))
-                TabControl.TabPages.Remove(_extraAnimChunkDefViewTab);
+            var showAttackAnims = _model?.Header?.AttackAnimChunkDefTable != null;
+            if (showAttackAnims && !TabControl.TabPages.Contains(_attackAnimChunkDefViewTab))
+                TabControl.TabPages.Insert(TabControl.TabPages.IndexOf(_chunkDefViewTab) + 1, _attackAnimChunkDefViewTab);
+            else if (!showAttackAnims && TabControl.TabPages.Contains(_attackAnimChunkDefViewTab))
+                TabControl.TabPages.Remove(_attackAnimChunkDefViewTab);
         }
 
         private PolyChar _model = null;
@@ -50,8 +50,8 @@ namespace SF3.Win.Views.X8PC {
             set {
                 if (_model != value) {
                     _model = value;
-                    ChunkDefView.Table          = _model?.Header?.ChunkDefTable;
-                    ExtraAnimChunkDefView.Table = _model?.Header?.ExtraAnimChunkDefTable;
+                    ChunkDefView.Table           = _model?.Header?.ChunkDefTable;
+                    AttackAnimChunkDefView.Table = _model?.Header?.AttackAnimChunkDefTable;
 
                     ShowHideTables();
                 }
@@ -60,9 +60,9 @@ namespace SF3.Win.Views.X8PC {
 
         public INameGetterContext NameGetterContext { get; }
         public TableView ChunkDefView { get; }
-        public TableView ExtraAnimChunkDefView { get; }
+        public TableView AttackAnimChunkDefView { get; }
 
         public TabPage _chunkDefViewTab;
-        public TabPage _extraAnimChunkDefViewTab;
+        public TabPage _attackAnimChunkDefViewTab;
     }
 }
