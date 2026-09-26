@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SF3.Models.Structs.MPD;
+using SF3.Types;
 using SF3.Win.Forms;
 using SF3.Win.Types;
 
@@ -76,7 +77,7 @@ namespace SF3.Editor.Forms {
                 rbUncompressed.Enabled = true;
             }
             else if (Type == ManipulateChunkDialogType.ExportChunk) {
-                if (SelectedChunk.CompressionType == SF3.Types.CompressionType.Compressed) {
+                if (SelectedChunk.CompressionType == MPDChunkCompressionType.Compressed) {
                     rbCompressed.Enabled = true;
                     rbUncompressed.Enabled = true;
                 }

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using CommonLib.Arrays;
+using CommonLib.Types;
 using SF3.ByteData;
 using static CommonLib.Utils.Compression;
 
@@ -11,7 +12,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void Constructor_ResultsInExpectedState() {
             // Arrange + Act
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Assert
             Assert.IsFalse(data.NeedsRecompression);
@@ -22,7 +23,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void Recompress_WithoutDeCompressedDataChanges_ResultsInExpectedState() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Act
             var recompressResult = data.Recompress();
@@ -37,7 +38,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void DeCompressedData_IsModifiedIsSet_ResultsInExpectedState() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Act
             data.DecompressedData.IsModified = true;
@@ -51,7 +52,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void DeCompressedData_IsModifiedIsToggled_ResultsInExpectedState() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Act
             data.DecompressedData.IsModified = true;
@@ -66,7 +67,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void Recompress_AfterModificationsInDeCompressedData_ResultsInExpectedState() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
             data.DecompressedData.IsModified = true;
 
             // Act
@@ -82,7 +83,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void NeedsRecompression_SetToTrue_SetsItselfAndIsModifiedToTrue() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Act
             data.NeedsRecompression = true;
@@ -96,7 +97,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void NeedsRecompression_ToggledOnAndOff_StillHasIsModifiedFlagSet() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Act
             data.NeedsRecompression = true;
@@ -111,7 +112,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void IsModified_SetToTrue_ResultsInTrue() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
 
             // Act
             data.IsModified = true;
@@ -125,7 +126,7 @@ namespace SF3.Tests.ByteData {
         [TestMethod]
         public void IsModified_SetWhenNeedsRecompressionIsTrue_IsModifiedIsStillTrue() {
             // Arrange
-            var data = new CompressedData(new ByteArray(_compressedTestData));
+            var data = new CompressedData(new ByteArray(_compressedTestData), CompressionType.LZSS);
             data.NeedsRecompression = true;
 
             // Act

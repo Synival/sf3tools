@@ -276,9 +276,9 @@ breakEntireLoop:
         /// </summary>
         /// <param name="data">Data which contains the compressed data (e.g, a CHR/CHP file).</param>
         /// <param name="offset">Offset to the chunk of data pointed to by an offset in the FrameTable of a Sprite.</param>
-        /// <param name="sizeOut">The amount of bytes read.</param>
+        /// <param name="bytesRead">The amount of bytes read.</param>
         /// <returns></returns>
-        public static ushort[] DecompressSpriteData(byte[] data, uint offset, out uint sizeOut) {
+        public static ushort[] DecompressSpriteData(byte[] data, uint offset, out uint bytesRead) {
             var decompressedData = new List<ushort>();
             var dataPos = offset + 0x04u;
             var nextFeedPos = data.GetUInt32((int) offset);
@@ -355,7 +355,7 @@ breakEntireLoop:
                     decompressedData.Add(value);
             }
 
-            sizeOut = nextFeedPos + (nextFeedPos % 2);
+            bytesRead = nextFeedPos + (nextFeedPos % 2);
             return decompressedData.ToArray();
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CommonLib.Arrays;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Structs.MPD;
 using SF3.Models.Structs.MPD.Main;
@@ -70,17 +71,17 @@ namespace SF3.Models.Files.MPD {
             Data.Data.SetDataAtTo(0x2100, newChunkData.Length, newChunkData);
         }
 
-        public IChunkData MakeChunkData(int chunkIndex, ChunkType type, CompressionType compressionType) {
+        public IChunkData MakeChunkData(int chunkIndex, ChunkType type, MPDChunkCompressionType compressionType) {
             if (ChunkData[chunkIndex] != null)
                 throw new ArgumentException($"Chunk[{nameof(chunkIndex)}] already has data");
 
-            var isCompressed = (compressionType == CompressionType.Compressed);
+            var isCompressed = (compressionType == MPDChunkCompressionType.Compressed);
             ByteArray byteArray = null;
             ChunkData chunkData = null;
 
             try {
                 byteArray = new ByteArray(Data.Data.GetDataCopyAt(ChunkLocations[chunkIndex].ChunkFileAddress, ChunkLocations[chunkIndex].ChunkSize));
-                chunkData = new ChunkData(byteArray, isCompressed, chunkIndex);
+                chunkData = new ChunkData(byteArray, isCompressed ? CompressionType.LZSS : CompressionType.None, chunkIndex);
             }
             catch {
                 // TODO: what to do???
@@ -198,44 +199,44 @@ namespace SF3.Models.Files.MPD {
             ModelChunkIndices = new HashSet<int>(modelChunkDescriptors.Select(x => x.Index).ToArray());
             var modelChunksList = new List<IChunkData>();
             foreach (var i in ModelChunkIndices)
-                modelChunksList.Add(MakeChunkData(i, ChunkType.Models, CompressionType.Uncompressed));
+                modelChunksList.Add(MakeChunkData(i, ChunkType.Models, MPDChunkCompressionType.Uncompressed));
 
             // Surface model chunk
             var smci = ((MPD_FlagsFromHeader) Flags).SurfaceModelChunkIndex;
             if (smci < chunks.Length && smci >= 0 && chunks[smci].ChunkSize == 0xCF00)
-                SurfaceModelChunkData = MakeChunkData(smci, ChunkType.SurfaceModel, CompressionType.Uncompressed);
+                SurfaceModelChunkData = MakeChunkData(smci, ChunkType.SurfaceModel, MPDChunkCompressionType.Uncompressed);
             else if (ChunkData[2] == null && chunks[2].ChunkSize == 0xCF00)
-                SurfaceModelChunkData = MakeChunkData(2, ChunkType.SurfaceModel, CompressionType.Uncompressed);
+                SurfaceModelChunkData = MakeChunkData(2, ChunkType.SurfaceModel, MPDChunkCompressionType.Uncompressed);
             else if (ChunkData[20] == null && chunks[20].ChunkSize == 0xCF00)
-                SurfaceModelChunkData = MakeChunkData(20, ChunkType.SurfaceModel, CompressionType.Uncompressed);
+                SurfaceModelChunkData = MakeChunkData(20, ChunkType.SurfaceModel, MPDChunkCompressionType.Uncompressed);
 
             // Sometimes we didn't find a models chunk at all (MOVESEL.MPD). Make sure we have one.
             var modelsChunk = modelChunkDescriptors.FirstOrDefault(x => x.Collection == MPD_CollectionType.Primary);
             if (modelsChunk == null) {
                 if (ChunkData[20] == null && chunks[20].Exists)
-                    modelChunksList.Add(MakeChunkData(20, ChunkType.Models, CompressionType.Uncompressed));
+                    modelChunksList.Add(MakeChunkData(20, ChunkType.Models, MPDChunkCompressionType.Uncompressed));
                 else if (ChunkData[1] == null && chunks[1].Exists)
-                    modelChunksList.Add(MakeChunkData(1, ChunkType.Models, CompressionType.Uncompressed));
+                    modelChunksList.Add(MakeChunkData(1, ChunkType.Models, MPDChunkCompressionType.Uncompressed));
             }
 
             ModelChunkDatas = modelChunksList.ToArray();
 
             // Animated textures chunk
             if (chunks[3].Exists)
-                _ = MakeChunkData(3, ChunkType.AnimationFrames, CompressionType.IndividuallyCompressed);
+                _ = MakeChunkData(3, ChunkType.AnimationFrames, MPDChunkCompressionType.IndividuallyCompressed);
 
             // Surface chunk (heightmap, terrain, event IDs)
             if (chunks[5].Exists)
-                _ = MakeChunkData(5, ChunkType.Surface, CompressionType.Compressed);
+                _ = MakeChunkData(5, ChunkType.Surface, MPDChunkCompressionType.Compressed);
 
             // Texture data, in chunks (6...13)
             for (var i = PrimaryTextureChunksFirstIndex; i <= MeshTextureChunksLastIndex; i++)
                 if (chunks[i].Exists)
-                    _ = MakeChunkData(i, ChunkType.Textures, CompressionType.Compressed);
+                    _ = MakeChunkData(i, ChunkType.Textures, MPDChunkCompressionType.Compressed);
 
             // In Scenario 2+, Chunk[21] is a set of extra textures for things like the Kraken.
             if (chunks[21].Exists)
-                _ = MakeChunkData(21, ChunkType.Textures, CompressionType.Compressed);
+                _ = MakeChunkData(21, ChunkType.Textures, MPDChunkCompressionType.Compressed);
 
             var groundImageChunks   = new List<IChunkData>();
             var groundTilesetChunks = new List<IChunkData>();
@@ -244,32 +245,32 @@ namespace SF3.Models.Files.MPD {
             // 512x256 image ground planes
             if (Flags.Bit_0x0400_HasGroundImage) {
                 if (chunks[GroundImageChunk1Index].Exists)
-                    groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk1Index, ChunkType.GroundPaletteImage, CompressionType.Compressed));
+                    groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk1Index, ChunkType.GroundPaletteImage, MPDChunkCompressionType.Compressed));
                 if (chunks[GroundImageChunk2Index].Exists)
-                    groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk2Index, ChunkType.GroundPaletteImage, CompressionType.Compressed));
+                    groundImageChunks.Add(_ = MakeChunkData(GroundImageChunk2Index, ChunkType.GroundPaletteImage, MPDChunkCompressionType.Compressed));
             }
             // Tiled-based ground plane tilesets
             else if (Flags.Bit_0x1000_HasTileBasedGroundImage) {
                 if (chunks[GroundTilesetChunk1Index].Exists)
-                    groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk1Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                    groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk1Index, ChunkType.TiledGroundTiles, MPDChunkCompressionType.Compressed));
                 if (chunks[GroundTilesetChunk2Index].Exists)
-                    groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk2Index, ChunkType.TiledGroundTiles, CompressionType.Compressed));
+                    groundTilesetChunks.Add(_ = MakeChunkData(GroundTilesetChunk2Index, ChunkType.TiledGroundTiles, MPDChunkCompressionType.Compressed));
             }
             // Background image
             else if (Flags.Bit_0x0040_HasBackgroundImage) {
                 if (chunks[BackgroundChunk1Index].Exists)
-                    backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk1Index, ChunkType.GroundPaletteImage, CompressionType.Compressed));
+                    backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk1Index, ChunkType.GroundPaletteImage, MPDChunkCompressionType.Compressed));
                 if (chunks[BackgroundChunk2Index].Exists)
-                    backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk2Index, ChunkType.GroundPaletteImage, CompressionType.Compressed));
+                    backgroundChunks.Add(_ = MakeChunkData(BackgroundChunk2Index, ChunkType.GroundPaletteImage, MPDChunkCompressionType.Compressed));
             }
             // If no flags are set, and these chunks exist, try to figure out what they could be.
             else {
                 bool looksLikeTiledGroundPlane = chunks[GroundTileAssignmentChunk1Index].Exists;
                 var unhandledGroundChunks = looksLikeTiledGroundPlane ? groundTilesetChunks : groundImageChunks;
                 if (chunks[GroundImageChunk1Index].Exists)
-                    unhandledGroundChunks.Add(_ = MakeChunkData(GroundImageChunk1Index, ChunkType.GroundPaletteImage, CompressionType.Compressed));
+                    unhandledGroundChunks.Add(_ = MakeChunkData(GroundImageChunk1Index, ChunkType.GroundPaletteImage, MPDChunkCompressionType.Compressed));
                 if (chunks[GroundImageChunk2Index].Exists)
-                    unhandledGroundChunks.Add(_ = MakeChunkData(GroundImageChunk2Index, ChunkType.GroundPaletteImage, CompressionType.Compressed));
+                    unhandledGroundChunks.Add(_ = MakeChunkData(GroundImageChunk2Index, ChunkType.GroundPaletteImage, MPDChunkCompressionType.Compressed));
 
             }
 
@@ -281,10 +282,10 @@ namespace SF3.Models.Files.MPD {
             // (Sometimes these chunks exist even though they're unused and would be broken anyway)
             var groundTileAssignmentChunks = new List<IChunkData>();
             if (chunks[GroundTileAssignmentChunk1Index].Exists)
-                groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk1Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk1Index, ChunkType.TiledGroundMap, MPDChunkCompressionType.Compressed));
             // Chunks 'GroundTileAssignmentChunk2Index', 'ForegroundTileAssignmentChunkIndex', and the Titan model are shared. Don't steal a chunk!
             if (chunks[GroundTileAssignmentChunk2Index].Exists && !Flags.Bit_0x0010_HasTileBasedForegroundImage && !Flags.Bit_0x0080_HasChunk19ModelWithChunk10Textures)
-                groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk2Index, ChunkType.TiledGroundMap, CompressionType.Compressed));
+                groundTileAssignmentChunks.Add(_ = MakeChunkData(GroundTileAssignmentChunk2Index, ChunkType.TiledGroundMap, MPDChunkCompressionType.Compressed));
             GroundTileAssignmentChunkDatas = groundTileAssignmentChunks.ToArray();
 
             var skyChunks            = new List<IChunkData>();
@@ -294,20 +295,20 @@ namespace SF3.Models.Files.MPD {
             // 512x256 sky images. Always assume the chunks here are for a sky unless a tiled foreground image is explicitly stated.
             if (Flags.HasAnySky || !Flags.Bit_0x0010_HasTileBasedForegroundImage) {
                 if (chunks[SkyChunk1Index].Exists)
-                    skyChunks.Add(_ = MakeChunkData(SkyChunk1Index, ChunkType.SkyPaletteImage, CompressionType.Compressed));
+                    skyChunks.Add(_ = MakeChunkData(SkyChunk1Index, ChunkType.SkyPaletteImage, MPDChunkCompressionType.Compressed));
                 if (chunks[SkyChunk2Index].Exists)
-                    skyChunks.Add(_ = MakeChunkData(SkyChunk2Index, ChunkType.SkyPaletteImage, CompressionType.Compressed));
+                    skyChunks.Add(_ = MakeChunkData(SkyChunk2Index, ChunkType.SkyPaletteImage, MPDChunkCompressionType.Compressed));
             }
             // Foreground image tiles
             else {
                 if (chunks[ForegroundTilesetChunk1Index].Exists)
-                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTilesetChunk1Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
+                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTilesetChunk1Index, ChunkType.ForegroundTiles, MPDChunkCompressionType.Compressed));
                 if (chunks[ForegroundTilesetChunk2Index].Exists)
-                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTilesetChunk2Index, ChunkType.ForegroundTiles, CompressionType.Compressed));
+                    foregroundTileChunks.Add(_ = MakeChunkData(ForegroundTilesetChunk2Index, ChunkType.ForegroundTiles, MPDChunkCompressionType.Compressed));
             }
 
             if (Flags.Bit_0x0010_HasTileBasedForegroundImage && chunks[ForegroundTileAssignmentChunkIndex].Exists)
-                foregroundTileAssignmentChunk = MakeChunkData(ForegroundTileAssignmentChunkIndex, ChunkType.ForegroundMap, CompressionType.Compressed);
+                foregroundTileAssignmentChunk = MakeChunkData(ForegroundTileAssignmentChunkIndex, ChunkType.ForegroundMap, MPDChunkCompressionType.Compressed);
 
             SkyChunkDatas            = skyChunks.ToArray();
             ForegroundTileChunkDatas = foregroundTileChunks.ToArray();
@@ -316,7 +317,7 @@ namespace SF3.Models.Files.MPD {
             // Add remaining unhandled chunks.
             for (var i = 0; i < chunks.Length; i++)
                 if (ChunkData[i] == null && chunks[i].Exists)
-                    _ = MakeChunkData(i, ChunkType.Unknown, CompressionType.Uncompressed);
+                    _ = MakeChunkData(i, ChunkType.Unknown, MPDChunkCompressionType.Uncompressed);
 
             return ChunkData;
         }

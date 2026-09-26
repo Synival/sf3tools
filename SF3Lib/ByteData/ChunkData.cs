@@ -2,18 +2,19 @@
 using CommonLib;
 using CommonLib.Arrays;
 using CommonLib.SGL;
+using CommonLib.Types;
 
 namespace SF3.ByteData {
     public class ChunkData : IChunkData {
-        public ChunkData(IByteArray byteArray, bool chunkIsCompressed, int index) {
+        public ChunkData(IByteArray byteArray, CompressionType compressionType, int index) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
 
-            IsCompressed = chunkIsCompressed;
-            Index        = index;
+            CompressionType = compressionType;
+            Index = index;
 
-            if (chunkIsCompressed) {
-                CompressedData = new CompressedData(byteArray);
+            if (compressionType != CompressionType.None) {
+                CompressedData = new CompressedData(byteArray, compressionType);
                 ChildData = CompressedData;
                 DecompressedData = CompressedData.DecompressedData;
             }
@@ -91,7 +92,8 @@ namespace SF3.ByteData {
                 childDataDisposable.Dispose();
         }
 
-        public bool IsCompressed { get; }
+        public CompressionType CompressionType { get; }
+        public bool IsCompressed => CompressionType != CompressionType.None;
         public int Index { get; }
         private ICompressedData CompressedData { get; }
         private IByteData ChildData { get; }

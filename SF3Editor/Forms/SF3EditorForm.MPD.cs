@@ -62,8 +62,10 @@ namespace SF3.Editor.Forms {
             try {
                 var chunk = dialog.SelectedChunk;
                 var chunkData = mpdFile.ChunkData[chunk.ID];
-                if (chunkData == null)
-                    chunkData = ((MPD_File) mpdFile).MakeChunkData(chunk.ID, ChunkType.Unknown, dialog.Uncompressed ? CompressionType.Uncompressed : CompressionType.Compressed);
+                if (chunkData == null) {
+                    chunkData = ((MPD_File) mpdFile).MakeChunkData(chunk.ID, ChunkType.Unknown,
+                        dialog.Uncompressed ? MPDChunkCompressionType.Uncompressed : MPDChunkCompressionType.Compressed);
+                }
 
                 var chunkDataBytes = System.IO.File.ReadAllBytes(dialog.FileName);
                 if (dialog.Uncompressed)

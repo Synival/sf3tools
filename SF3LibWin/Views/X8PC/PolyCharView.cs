@@ -15,14 +15,10 @@ namespace SF3.Win.Views.X8PC {
             ChunkView        = new PCChunkView("Chunks", model, NameGetterContext);
 
             // Testing only!!
-            AttackAnimChunkView = new DataHexView("Test", (model?.AttackAnimChunks?.Length >= 1) ? DecompressedAttackAnimChunk(model.AttackAnimChunks[0].DecompressedData.Data) : null);
+            AttackAnimChunkView = new DataHexView("Test", (model?.AttackAnimChunks?.Length >= 1) ? model.AttackAnimChunks[0].DecompressedData.Data : null);
 
             Model = model;
         }
-
-        // Testing only!!
-        private IByteArray DecompressedAttackAnimChunk(IByteArray dataIn)
-            => new ByteArray(Compression.DecompressAttackAnimChunk(dataIn.GetDataCopyOrReference()).ToBytes());
 
         public override Control Create() {
             if (base.Create() == null)
@@ -52,7 +48,7 @@ namespace SF3.Win.Views.X8PC {
                     ChunkView.Model          = _model;
 
                     // Testing only!!
-                    AttackAnimChunkView.Data = (_model?.AttackAnimChunks?.Length >= 1) ? DecompressedAttackAnimChunk(_model.AttackAnimChunks[0].DecompressedData.Data) : null;
+                    AttackAnimChunkView.Data = (_model?.AttackAnimChunks?.Length >= 1) ? _model.AttackAnimChunks[0].DecompressedData.Data : null;
                 }
             }
         }

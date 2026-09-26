@@ -9,6 +9,7 @@ using CommonLib.Imaging;
 using CommonLib.Rigging;
 using CommonLib.SGL;
 using CommonLib.ThirdParty.TexturePacker;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
@@ -33,7 +34,8 @@ namespace SF3.Models.Structs.X8PC {
             for (int i = 0; i < Chunks.Length; i++) {
                 var isCompressed = (i == 1);
                 var def = Header.ChunkDefTable[i];
-                Chunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)), isCompressed, i);
+                Chunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)),
+                    isCompressed ? CompressionType.LZSS : CompressionType.None, i);
                 Chunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
             }
 
@@ -41,7 +43,8 @@ namespace SF3.Models.Structs.X8PC {
                 AttackAnimChunks = new ChunkData[Header.AttackAnimChunkDefTable.Count];
                 for (int i = 0; i < AttackAnimChunks.Length; i++) {
                     var def = Header.AttackAnimChunkDefTable[i];
-                    AttackAnimChunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)), false, i);
+                    AttackAnimChunks[i] = new ChunkData(new ByteArray(Data.Data.GetDataCopyAt(Address + (int) def.Offset, (int) def.DataSize)),
+                        CompressionType.AttackAnim, i);
                     AttackAnimChunks[i].DecompressedData.IsModifiedChanged += (s, e) => Data.IsModified |= ((IByteData) s).IsModified;
                 }
             }

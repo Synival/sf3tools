@@ -1,5 +1,5 @@
 ﻿namespace SF3.Types {
-    public enum CompressionType {
+    public enum MPDChunkCompressionType {
         Unset = 0,
         Compressed = 1,
         Uncompressed = 2,

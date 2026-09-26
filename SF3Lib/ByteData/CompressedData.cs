@@ -1,13 +1,16 @@
 ﻿using System;
 using CommonLib.Arrays;
+using CommonLib.Types;
+using CommonLib.Utils;
 using static CommonLib.Utils.Compression;
 
 namespace SF3.ByteData {
     public class CompressedData : ByteData, ICompressedData {
-        public CompressedData(IByteArray byteArray, int? maxDecompressedSize = null) : base(byteArray) {
+        public CompressedData(IByteArray byteArray, CompressionType compressionType, int? maxDecompressedSize = null) : base(byteArray) {
             if (byteArray == null)
                 throw new NullReferenceException(nameof(byteArray));
 
+            CompressionType = compressionType;
             MaxDecompressedSize = maxDecompressedSize;
             _hasInit = true;
             InitData();
@@ -38,7 +41,7 @@ namespace SF3.ByteData {
         }
 
         private void UpdateDecompressedData() {
-            var decompressedData = DecompressLZSS(Data.GetDataCopyOrReference(), 0, MaxDecompressedSize, out var bytesRead, out var endCodeFound);
+            var decompressedData = Decompress(Data.GetDataCopyOrReference(), 0, MaxDecompressedSize, out var bytesRead, out var endCodeFound);
             LastDecompressBytesRead = bytesRead;
             LastDecompressEndCodeFound = endCodeFound;
 
@@ -62,13 +65,60 @@ namespace SF3.ByteData {
 
         public bool Recompress() {
             using (var modifyGuard2 = DecompressedData.IsModifiedChangeBlocker()) {
-                if (!SetDataTo(CompressLZSS(DecompressedData.GetDataCopy())))
+                if (!SetDataTo(Compress(DecompressedData.GetDataCopy())))
                     return false;
                 NeedsRecompression = false;
             }
             DecompressedData.IsModified = false;
             Recompressed?.Invoke(this, EventArgs.Empty);
             return true;
+        }
+
+        private byte[] Compress(byte[] data) {
+            switch (CompressionType) {
+                case CompressionType.None:
+                    return data;
+                case CompressionType.LZSS:
+                    return CompressLZSS(data);
+                case CompressionType.Sprite:
+                    return CompressSpriteData(data.ToUShorts(), 0, data.Length / 2);
+                case CompressionType.AttackAnim:
+                    throw new NotImplementedException($"{nameof(CompressionType.AttackAnim)} not yet supported");
+                default:
+                    throw new InvalidOperationException($"Unhandled compression type: {CompressionType}");
+            }
+        }
+
+        private byte[] Decompress(byte[] data, int offset, int? maxOutput, out int bytesRead, out bool endDataFound) {
+            switch (CompressionType) {
+                case CompressionType.None:
+                    // TODO: support maxOutput
+                    bytesRead = data.Length;
+                    endDataFound = true;
+                    return data;
+
+                case CompressionType.LZSS:
+                    return DecompressLZSS(data, offset, maxOutput, out bytesRead, out endDataFound);
+
+                case CompressionType.Sprite: {
+                    // TODO: support maxOutput
+                    var outData = DecompressSpriteData(data, 0, out var bytesReadUInt).ToBytes();
+                    bytesRead = (int) bytesReadUInt;
+                    endDataFound = true;
+                    return outData;
+                }
+
+                case CompressionType.AttackAnim: {
+                    // TODO: support maxOutput
+                    var outData = DecompressAttackAnimChunk(data).ToBytes();
+                    bytesRead = outData.Length;
+                    endDataFound = true;
+                    return outData;
+                }
+
+                default:
+                    throw new InvalidOperationException($"Unhandled compression type: {CompressionType}");
+            }
         }
 
         public override bool OnFinish() {
@@ -110,6 +160,7 @@ namespace SF3.ByteData {
             }
         }
 
+        public CompressionType CompressionType { get; }
         public int? MaxDecompressedSize { get; }
         public int? LastDecompressBytesRead { get; private set; } = null;
         public bool? LastDecompressEndCodeFound { get; private set; } = null;

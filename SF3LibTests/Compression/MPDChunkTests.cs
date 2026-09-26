@@ -141,7 +141,7 @@ namespace SF3.Tests.Compression {
         [TestMethod]
         public void RebuildChunkTable_WithUncompressedChunkMovedToEnd_ChunkTableIsAccurate() {
             RunOnAllTestCases((testCase, mpdFile) => {
-                var firstUncompressedChunk = mpdFile.ChunkLocations.FirstOrDefault(x => x.Exists && x.CompressionType != CompressionType.Compressed);
+                var firstUncompressedChunk = mpdFile.ChunkLocations.FirstOrDefault(x => x.Exists && x.CompressionType != MPDChunkCompressionType.Compressed);
                 if (firstUncompressedChunk == null)
                     return;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CommonLib.Arrays;
 using CommonLib.Logging;
+using CommonLib.Types;
 using CommonLib.Utils;
 using SF3.ByteData;
 using SF3.Models.Structs.KAO;
@@ -42,7 +43,7 @@ namespace SF3.Models.Tables.KAO {
                         continue;
                     }
 
-                    var compressedData = new CompressedData(new ByteArray(Data.GetDataCopyAt(address, bytesRead)));
+                    var compressedData = new CompressedData(new ByteArray(Data.GetDataCopyAt(address, bytesRead)), CompressionType.LZSS);
                     newFace = new FaceChunk(compressedData.DecompressedData, currentId, $"{nameof(FaceChunk)}_{currentId:D2}", 0, address, compressedData);
                 }
                 catch (Exception e) {

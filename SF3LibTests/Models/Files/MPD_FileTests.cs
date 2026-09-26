@@ -1,6 +1,7 @@
 using CommonLib.Arrays;
 using CommonLib.NamedValues;
 using CommonLib.Tests;
+using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
@@ -53,7 +54,7 @@ namespace SF3.Tests.Models.Files {
         public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_Recompress_PerformsNoUpdates() {
             // Arrange
             var mpdFile = MakeFile();
-            var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()));
+            var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()), CompressionType.LZSS);
             Assert.IsFalse(data.NeedsRecompression);
             Assert.IsFalse(data.IsModified);
             Assert.IsFalse(data.DecompressedData.IsModified);
@@ -72,7 +73,7 @@ namespace SF3.Tests.Models.Files {
         public void ChunkData_WithDifferentOriginalCompressionAlgorithmForData_RecompressAgain_IsModifiedIsFalse() {
             // Arrange
             var mpdFile = MakeFile();
-            var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()));
+            var data = new CompressedData(new ByteArray(mpdFile.ChunkData[5].GetDataCopy()), CompressionType.LZSS);
             data.Recompress();
             data.IsModified = false;
             Assert.IsFalse(data.NeedsRecompression);

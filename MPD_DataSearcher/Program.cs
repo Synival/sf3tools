@@ -145,7 +145,7 @@ namespace MPD_DataSearcher {
                             // Add compressed data as tracked data streams. This will prevent the *compressed data* from being
                             // analyzed, but the *uncompressed data* will still be looked at.
                             foreach (var cd in mpdFile.ChunkLocations)
-                                if (cd.Exists && (cd.CompressionType != CompressionType.Uncompressed || cd.ChunkType == ChunkType.Unknown))
+                                if (cd.Exists && (cd.CompressionType != MPDChunkCompressionType.Uncompressed || cd.ChunkType == ChunkType.Unknown))
                                     dataRanges.Add(new DataRange(mpdFileData, "Chunk" + cd.ID, cd.ChunkFileAddress, cd.ChunkFileAddress + cd.ChunkSize));
 
                             // Add textures as tracked data ranges.

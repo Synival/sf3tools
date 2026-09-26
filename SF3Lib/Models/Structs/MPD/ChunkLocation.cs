@@ -47,7 +47,7 @@ namespace SF3.Models.Structs.MPD {
         [TableViewModelColumn(addressField: null, displayName: "Type", displayOrder: 3, isReadOnly: true, minWidth: 150)]
         public string ChunkTypeForView => Exists ? ChunkType.ToString() : "--";
 
-        public CompressionType CompressionType { get; set; } = CompressionType.Unset;
+        public MPDChunkCompressionType CompressionType { get; set; } = MPDChunkCompressionType.Unset;
 
         [TableViewModelColumn(addressField: null, displayName: "Compression Type", displayOrder: 3.1f, isReadOnly: true, minWidth: 150)]
         public string CompressionTypeForView => Exists ? CompressionType.ToString() : "--";
