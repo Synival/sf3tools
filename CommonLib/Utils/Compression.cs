@@ -501,8 +501,6 @@ breakEntireLoop:
 
         // TODO: Nice description
         public static unsafe ushort[] DecompressZigZag(byte[] dataIn, int frameCount, int bitstreamOffset, int dataOffset) {
-            // TODO: This needs many, many rounds of clean-up.
-
             var dataOut = new ushort[frameCount];
 
             fixed (ushort* dataOutHeadPtr = dataOut)
@@ -514,66 +512,58 @@ breakEntireLoop:
                 var bitstreamValue = BinaryPrimitives.ReverseEndianness(*bitstreamPtr);
                 bitstreamPtr = (uint*) ((byte*) bitstreamPtr + bitstreamValue);
 
+                // Start bit buffer at this value so the first read sees it needs to be fed.
                 uint bitBuffer = 0x80000000;
 
-                (int Bitcount, uint Adjustment) GetBitCountAndAdjustment() {
-                    int bitCount = 0;
-                    uint adjustment = 0;
+                // Pops the top bit in the bit stream and replenishes it when required.
+                bool PopAndReplenish() {
+                    bool bit = (bitBuffer & 0x80000000) != 0;
+                    bitBuffer <<= 1;
 
-                    uint shiftedBuffer = bitBuffer << 1;
-                    var someCheck = shiftedBuffer < bitBuffer;
-                    bitBuffer = shiftedBuffer;
-
-                    if (someCheck) {
-                        bool skipFirst = (shiftedBuffer == 0);
-                        uint nextBitstream;
-                        do {
-                            if (!skipFirst) {
-                                do {
-                                    var hadBit30 = (adjustment & 0x20000000) != 0;
-                                    adjustment = (adjustment << 3) + 1;
-                                    shiftedBuffer = bitBuffer * 2;
-                                    var tmp = shiftedBuffer + (hadBit30 ? 1u : 0u);
-                                    someCheck = bitBuffer <= shiftedBuffer;
-                                    bitCount += 3;
-                                    bitBuffer = tmp;
-                                    if (someCheck && shiftedBuffer <= tmp)
-                                        return (bitCount, adjustment);
-                                    someCheck = tmp == 0;
-                                } while (!someCheck);
-                            }
-                            skipFirst = false;
-
-                            nextBitstream = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
-                            shiftedBuffer = nextBitstream << 1;
-                            bitBuffer = shiftedBuffer + (someCheck ? 1u : 0u);
-                        } while (shiftedBuffer < nextBitstream || bitBuffer < shiftedBuffer);
+                    // Popping the last bit is -- apparently -- an indicator that more bits are required.
+                    // So toss the bit we just read, read some more, then pop another.
+                    if (bit && bitBuffer == 0) {
+                        var newBuffer = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
+                        bitBuffer = newBuffer << 1;
+                        bit = (newBuffer & 0x80000000) != 0;
+                        // TODO: Why do this?
+                        bitBuffer |= 1;
                     }
-                    return (bitCount, adjustment);
+                    return bit;
+                }
+
+                (int Bitcount, uint LowestValue) GetDeltaBitCountAndLowestValue() {
+                    int  bitCount  = 0;
+                    uint lowestValue = 0;
+
+                    while (PopAndReplenish()) {
+                        // TODO: Keep reading in case of overflow? Not sure.
+                        if ((lowestValue & 0x20000000) != 0)
+                            bitBuffer |= 1;
+
+                        // Each zero bit read accounts for 3 more bits of data.
+                        // Values at lower "tiers" are subtracted but higher tiers to cut down on redundancy.
+                        // Build up the lowest possible number at the current "tier" as the base value.
+                        lowestValue = (lowestValue << 3) + 1;
+                        bitCount += 3;
+                    }
+
+                    return (bitCount, lowestValue);
                 }
 
                 ushort GetCompressedDelta() {
-                    var (bitCount, adjustment) = GetBitCountAndAdjustment();
+                    var (bitCount, lowestValue) = GetDeltaBitCountAndLowestValue();
 
                     uint value = 0;
                     for (int j = 0; j < bitCount; j++) {
-                        var shiftedBuffer = bitBuffer * 2;
-                        var newBitBuffer = shiftedBuffer;
-                        value = (value << 1) | ((shiftedBuffer < bitBuffer) ? 1u : 0u);
-
-                        uint nextBitstream;
-                        if ((shiftedBuffer < bitBuffer) && (shiftedBuffer == 0)) {
-                            nextBitstream = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
-                            bitBuffer = (nextBitstream << 1);
-                            newBitBuffer = bitBuffer + ((value & 1) == 1 ? 1u : 0u);
-
-                            value = (value & ~0x1u) | ((bitBuffer < nextBitstream || newBitBuffer < bitBuffer) ? 1u : 0u);
-                        }
-                        bitBuffer = newBitBuffer;
+                        value <<= 1;
+                        if (PopAndReplenish())
+                            value |= 1;
                     }
-                    value += adjustment;
 
-                    return (ushort) value;
+                    // Return the decoded value, re-applying the "base value" (or lowest possible value) for the
+                    // set of values with this number of bits.
+                    return (ushort) (value + lowestValue);
                 }
 
                 // For *some reason*, compression is done in two channels...
