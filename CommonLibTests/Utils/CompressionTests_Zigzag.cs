@@ -1340,7 +1340,7 @@ namespace CommonLib.Tests.Utils {
 
         [TestMethod]
         public void Decompress_WithSynbiosAttackAnimChunk_ReturnsExpectedData() {
-            var results = Compression.DecompressZigZag(c_compressedData);
+            var results = Compression.DecompressAttackAnimChunk(c_compressedData);
             var resultBytes = results.ToBytes();
             Assert.IsTrue(Enumerable.SequenceEqual(resultBytes, c_decompressedData));
         }

@@ -491,20 +491,71 @@ breakEntireLoop:
             return dataOut.Take((int) posDataOut).Concat(bitstreamOut.Take((int) posBitstreamOut)).ToArray();
         }
 
-        // TODO: Nice description
-        public static unsafe ushort[] DecompressZigZag(byte[] dataIn) {
+        /// <summary>
+        /// Decompress a chunk of data with the following qualities:
+        ///     1. Values are deltas
+        ///     2. Values are interlaced as two channels, each with its own state
+        ///     3. Values are stored in two separate streams (each interlaced):
+        ///         1. Literal delta values
+        ///         2. Compressed delta values from a bitstream
+        ///     4. Values are stored with ZigZag encoding (i.e, all are converted to unsigned)
+        ///     5. Compression is used when a ZigZag'ed delta less than 0x249 is seen
+        ///     6. Values in the bitstream are stored as:
+        ///         1. n "on" bits to determine size terminated by an "off" terminator bit
+        ///         2. n*3 bits to determine the value
+        ///         3. Value is reduced by a minimum value stored for size value n (n0:0, n1:1, n2:9, n3:65, n4:261, etc)
+        ///
+        /// The format of the data in 'dataIn' must be:
+        ///     +0x00: int (4 bytes): number of words
+        ///     +0x04: int (4 bytes): offset within the buffer to the compressed delta values bitstream
+        ///     +0x08: word[]:        literal delta values
+        /// </summary>
+        /// <param name="dataIn">Chunk data in its specific format (see method description).</param>
+        /// <returns>An uncompressed blob of ushort's.</returns>
+        /// <exception cref="IndexOutOfRangeException">Thrown when dataIn is exceeded or offsets are before where it begins.</exception>
+        public static unsafe ushort[] DecompressAttackAnimChunk(byte[] dataIn) {
             fixed (byte* dataInPtr = dataIn) {
                 var frameCount = BinaryPrimitives.ReverseEndianness(*((int*) dataInPtr));
-                return DecompressZigZag(dataIn, frameCount, 0x04, 0x08);
+                return DecompressAttackAnimChunk(dataIn, frameCount, 0x04, 0x08);
             }
         }
 
-        // TODO: Nice description
-        public static unsafe ushort[] DecompressZigZag(byte[] dataIn, int frameCount, int bitstreamOffset, int literalsOffset) {
+        /// <summary>
+        /// Decompress a chunk of data with the following qualities:
+        ///     1. Values are deltas
+        ///     2. Values are interlaced as two channels, each with its own state
+        ///     3. Values are stored in two separate streams (each interlaced):
+        ///         1. Literal delta values
+        ///         2. Compressed delta values from a bitstream
+        ///     4. Values are stored with ZigZag encoding (i.e, all are converted to unsigned)
+        ///     5. Compression is used when a ZigZag'ed delta less than 0x249 is seen
+        ///     6. Values in the bitstream are stored as:
+        ///         1. n "on" bits to determine size terminated by an "off" terminator bit
+        ///         2. n*3 bits to determine the value
+        ///         3. Value is reduced by a minimum value stored for size value n (n0:0, n1:1, n2:9, n3:65, n4:261, etc)
+        /// </summary>
+        /// <param name="dataIn">Chunk of data that contains the bitstream and literals offset.</param>
+        /// <param name="frameCount">Number of words to output.</param>
+        /// <param name="bitstreamOffset">Offset in bytes for the compressed delta value bitstream buffer.</param>
+        /// <param name="literalsOffset">Offset in bytes for the literal delta value bitstream buffer.</param>
+        /// <returns>An uncompressed blob of ushort's.</returns>
+        /// <exception cref="IndexOutOfRangeException">Thrown when dataIn is exceeded or offsets are before where it begins.</exception>
+        public static unsafe ushort[] DecompressAttackAnimChunk(byte[] dataIn, int frameCount, int bitstreamOffset, int literalsOffset) {
+            if (dataIn == null)
+                throw new ArgumentNullException(nameof(dataIn));
+            if (frameCount < 0)
+                throw new ArgumentOutOfRangeException(nameof(frameCount));
+            if (bitstreamOffset < 0 || bitstreamOffset > dataIn.Length)
+                throw new ArgumentOutOfRangeException(nameof(bitstreamOffset));
+            if (literalsOffset < 0 || literalsOffset > dataIn.Length)
+                throw new ArgumentOutOfRangeException(nameof(literalsOffset));
+
             var dataOut = new ushort[frameCount];
 
             fixed (ushort* dataOutHeadPtr = dataOut)
             fixed (byte* dataInBytePtr = dataIn) {
+                var readLimit = dataInBytePtr + dataIn.Length;
+
                 ushort *dataOutPtr = dataOutHeadPtr;
                 ushort* literalsPtr = (ushort*) (dataInBytePtr + literalsOffset);
 
@@ -516,13 +567,16 @@ breakEntireLoop:
                 uint bitBuffer = 0x80000000;
 
                 // Pops the top bit in the bit stream and replenishes it when required.
-                bool PopAndReplenish() {
+                bool PopCompressedStreamBitAndReplenish() {
                     bool bit = (bitBuffer & 0x80000000) != 0;
                     bitBuffer <<= 1;
 
                     // Popping the last bit is -- apparently -- an indicator that more bits are required.
                     // So toss the bit we just read, read some more, then pop another.
                     if (bit && bitBuffer == 0) {
+                        if ((byte *) bitstreamPtr + 4 > readLimit)
+                            throw new IndexOutOfRangeException($"{nameof(DecompressAttackAnimChunk)}: Read limit exceeded when reading bitstream");
+
                         var newBuffer = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
                         bitBuffer = newBuffer << 1;
                         bit = (newBuffer & 0x80000000) != 0;
@@ -538,7 +592,7 @@ breakEntireLoop:
                     int  bitCount  = 0;
                     uint lowestValue = 0;
 
-                    while (PopAndReplenish()) {
+                    while (PopCompressedStreamBitAndReplenish()) {
                         // TODO: Keep reading in case of overflow? Not sure.
                         if ((lowestValue & 0x20000000) != 0)
                             bitBuffer |= 1;
@@ -561,13 +615,20 @@ breakEntireLoop:
                     uint value = 0;
                     for (int j = 0; j < bitCount; j++) {
                         value <<= 1;
-                        if (PopAndReplenish())
+                        if (PopCompressedStreamBitAndReplenish())
                             value |= 1;
                     }
 
                     // Return the decoded value, re-applying the "base value" (or lowest possible value) for the
                     // set of values with this number of bits.
                     return (ushort) (value + lowestValue);
+                }
+
+                // Fetches uncompressed data stored in the literal stream.
+                ushort GetUncompressedDelta() {
+                    if ((byte *) literalsPtr + 2 > readLimit)
+                        throw new IndexOutOfRangeException($"{nameof(DecompressAttackAnimChunk)}: Read limit exceeded when reading literals");
+                    return BinaryPrimitives.ReverseEndianness(*literalsPtr++);
                 }
 
                 // For *some reason*, compression is done in two channels...
@@ -583,13 +644,11 @@ breakEntireLoop:
                     // small deltas.
                     var zigZaggedDelta = isCompressed[channel]
                         ? GetCompressedDelta()
-                        : BinaryPrimitives.ReverseEndianness(*literalsPtr++);
+                        : GetUncompressedDelta();
 
                     // Reverse ZigZag encoding. Apply the offset provided by the predicted value.
                     var value = (ushort) (((zigZaggedDelta >> 1) ^ -(zigZaggedDelta & 1)) + predictedValue[channel]);
                     *dataOutPtr++ = value;
-
-                    ushort predictedNextValue = 
 
                     predictedValue[channel] = (ushort) ((value * 2) - lastValue[channel]);
                     lastValue[channel]      = value;

@@ -22,7 +22,7 @@ namespace SF3.Win.Views.X8PC {
 
         // Testing only!!
         private IByteArray DecompressedAttackAnimChunk(IByteArray dataIn)
-            => new ByteArray(Compression.DecompressZigZag(dataIn.GetDataCopyOrReference()).ToBytes());
+            => new ByteArray(Compression.DecompressAttackAnimChunk(dataIn.GetDataCopyOrReference()).ToBytes());
 
         public override Control Create() {
             if (base.Create() == null)
