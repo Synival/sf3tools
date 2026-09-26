@@ -500,13 +500,13 @@ breakEntireLoop:
         }
 
         // TODO: Nice description
-        public static unsafe ushort[] DecompressZigZag(byte[] dataIn, int frameCount, int bitstreamOffset, int dataOffset) {
+        public static unsafe ushort[] DecompressZigZag(byte[] dataIn, int frameCount, int bitstreamOffset, int literalsOffset) {
             var dataOut = new ushort[frameCount];
 
             fixed (ushort* dataOutHeadPtr = dataOut)
             fixed (byte* dataInBytePtr = dataIn) {
                 ushort *dataOutPtr = dataOutHeadPtr;
-                ushort* dataInPtr = (ushort*) (dataInBytePtr + dataOffset);
+                ushort* literalsPtr = (ushort*) (dataInBytePtr + literalsOffset);
 
                 uint* bitstreamPtr = (uint*) (dataInBytePtr + bitstreamOffset);
                 var bitstreamValue = BinaryPrimitives.ReverseEndianness(*bitstreamPtr);
@@ -532,6 +532,8 @@ breakEntireLoop:
                     return bit;
                 }
 
+                // Fetches the size and lowest value for a compressed delta stored in the bitstream immediately
+                // after.
                 (int Bitcount, uint LowestValue) GetDeltaBitCountAndLowestValue() {
                     int  bitCount  = 0;
                     uint lowestValue = 0;
@@ -541,16 +543,18 @@ breakEntireLoop:
                         if ((lowestValue & 0x20000000) != 0)
                             bitBuffer |= 1;
 
-                        // Each zero bit read accounts for 3 more bits of data.
-                        // Values at lower "tiers" are subtracted but higher tiers to cut down on redundancy.
-                        // Build up the lowest possible number at the current "tier" as the base value.
-                        lowestValue = (lowestValue << 3) + 1;
+                        // Each single bit read here accounts for three more bits of data for the delta.
                         bitCount += 3;
+
+                        // Build up the lowest possible number at the current "tier" as the base value.
+                        // Values at lower "tiers" are subtracted but higher tiers to cut down on redundancy.
+                        lowestValue = (lowestValue << 3) + 1;
                     }
 
                     return (bitCount, lowestValue);
                 }
 
+                // Fetches compressed data stored in the bitstream.
                 ushort GetCompressedDelta() {
                     var (bitCount, lowestValue) = GetDeltaBitCountAndLowestValue();
 
@@ -574,18 +578,21 @@ breakEntireLoop:
                 for (int i = 0; i < frameCount; i++) {
                     int channel = i % 2;
 
+                    // Data is stored as deltas with ZigZag encoding, and it may be in the form of a simple streamed
+                    // value or a compact value in a byte stream. Compression is only turned on when we start to see
+                    // small deltas.
                     var zigZaggedDelta = isCompressed[channel]
                         ? GetCompressedDelta()
-                        : BinaryPrimitives.ReverseEndianness(*dataInPtr++);
+                        : BinaryPrimitives.ReverseEndianness(*literalsPtr++);
 
                     // Reverse ZigZag encoding. Apply the offset provided by the predicted value.
                     var value = (ushort) (((zigZaggedDelta >> 1) ^ -(zigZaggedDelta & 1)) + predictedValue[channel]);
                     *dataOutPtr++ = value;
 
-                    ushort predictedNextValue = (ushort) ((value * 2) - lastValue[channel]);
+                    ushort predictedNextValue = 
 
+                    predictedValue[channel] = (ushort) ((value * 2) - lastValue[channel]);
                     lastValue[channel]      = value;
-                    predictedValue[channel] = predictedNextValue;
                     isCompressed[channel]   = zigZaggedDelta < 0x249;
                 }
             }
