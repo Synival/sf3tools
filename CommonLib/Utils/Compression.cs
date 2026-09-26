@@ -508,88 +508,95 @@ breakEntireLoop:
             fixed (ushort* dataOutHeadPtr = dataOut)
             fixed (byte* dataInBytePtr = dataIn) {
                 ushort *dataOutPtr = dataOutHeadPtr;
-
                 ushort* dataInPtr = (ushort*) (dataInBytePtr + dataOffset);
 
                 uint* bitstreamPtr = (uint*) (dataInBytePtr + bitstreamOffset);
                 var bitstreamValue = BinaryPrimitives.ReverseEndianness(*bitstreamPtr);
                 bitstreamPtr = (uint*) ((byte*) bitstreamPtr + bitstreamValue);
 
-                uint previousState = 0;
-                uint predictedState = 0;
                 uint bitBuffer = 0x80000000;
 
-                bool useCompression = false;
-                bool carryFlag = false;
+                (int Bitcount, uint Adjustment) GetBitCountAndAdjustment() {
+                    int bitCount = 0;
+                    uint adjustment = 0;
 
-                uint GetDelta() {
-                    if (!carryFlag)
-                        return BinaryPrimitives.ReverseEndianness(*dataInPtr++);
-
-                    uint unaryPrefix = 0;
-
-                    uint shiftedBuffer = bitBuffer * 2;
-                    carryFlag = shiftedBuffer < bitBuffer;
+                    uint shiftedBuffer = bitBuffer << 1;
+                    var someCheck = shiftedBuffer < bitBuffer;
                     bitBuffer = shiftedBuffer;
 
-                    int bitCount = 0;
-                    if (carryFlag) {
+                    if (someCheck) {
                         bool skipFirst = (shiftedBuffer == 0);
                         uint nextBitstream;
                         do {
                             if (!skipFirst) {
                                 do {
-                                    var hadBit30 = (unaryPrefix & 0x20000000) != 0;
-                                    unaryPrefix = unaryPrefix * 8 + 1;
+                                    var hadBit30 = (adjustment & 0x20000000) != 0;
+                                    adjustment = (adjustment << 3) + 1;
                                     shiftedBuffer = bitBuffer * 2;
                                     var tmp = shiftedBuffer + (hadBit30 ? 1u : 0u);
-                                    carryFlag = bitBuffer <= shiftedBuffer;
+                                    someCheck = bitBuffer <= shiftedBuffer;
                                     bitCount += 3;
                                     bitBuffer = tmp;
-                                    if (carryFlag && shiftedBuffer <= tmp)
-                                        goto exitOuterLoop;
-                                    carryFlag = tmp == 0;
-                                } while (!carryFlag);
+                                    if (someCheck && shiftedBuffer <= tmp)
+                                        return (bitCount, adjustment);
+                                    someCheck = tmp == 0;
+                                } while (!someCheck);
                             }
                             skipFirst = false;
 
                             nextBitstream = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
-                            shiftedBuffer = nextBitstream * 2;
-                            bitBuffer = shiftedBuffer + (carryFlag ? 1u : 0u);
+                            shiftedBuffer = nextBitstream << 1;
+                            bitBuffer = shiftedBuffer + (someCheck ? 1u : 0u);
                         } while (shiftedBuffer < nextBitstream || bitBuffer < shiftedBuffer);
                     }
-                exitOuterLoop:
+                    return (bitCount, adjustment);
+                }
 
-                    uint delta = 0;
+                ushort GetCompressedDelta() {
+                    var (bitCount, adjustment) = GetBitCountAndAdjustment();
+
+                    uint value = 0;
                     for (int j = 0; j < bitCount; j++) {
-                        shiftedBuffer = bitBuffer * 2;
+                        var shiftedBuffer = bitBuffer * 2;
                         var newBitBuffer = shiftedBuffer;
-                        delta = delta * 2 | ((shiftedBuffer < bitBuffer) ? 1u : 0u);
+                        value = (value << 1) | ((shiftedBuffer < bitBuffer) ? 1u : 0u);
+
+                        uint nextBitstream;
                         if ((shiftedBuffer < bitBuffer) && (shiftedBuffer == 0)) {
-                            shiftedBuffer = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
-                            bitBuffer = shiftedBuffer * 2;
-                            newBitBuffer = bitBuffer + ((delta & 1) == 1 ? 1u : 0u);
-                            delta = (delta & ~0x1u) | ((bitBuffer < shiftedBuffer || newBitBuffer < bitBuffer) ? 1u : 0u);
+                            nextBitstream = BinaryPrimitives.ReverseEndianness(*bitstreamPtr++);
+                            bitBuffer = (nextBitstream << 1);
+                            newBitBuffer = bitBuffer + ((value & 1) == 1 ? 1u : 0u);
+
+                            value = (value & ~0x1u) | ((bitBuffer < nextBitstream || newBitBuffer < bitBuffer) ? 1u : 0u);
                         }
                         bitBuffer = newBitBuffer;
                     }
-                    delta += unaryPrefix;
-                    return delta;
+                    value += adjustment;
+
+                    return (ushort) value;
                 }
 
+                // For *some reason*, compression is done in two channels...
+                ushort[] lastValue      = new ushort[2];
+                ushort[] predictedValue = new ushort[2];
+                bool[]   isCompressed   = new bool[2];
+
                 for (int i = 0; i < frameCount; i++) {
-                    var delta = GetDelta();
+                    int channel = i % 2;
 
-                    var currentValue = (int) (((delta >> 1) ^ -(delta & 1)) + predictedState);
-                    *dataOutPtr++ = (ushort) currentValue;
+                    var zigZaggedDelta = isCompressed[channel]
+                        ? GetCompressedDelta()
+                        : BinaryPrimitives.ReverseEndianness(*dataInPtr++);
 
-                    ushort nextMaybe = (ushort) (currentValue * 2 - previousState);
+                    // Reverse ZigZag encoding. Apply the offset provided by the predicted value.
+                    var value = (ushort) (((zigZaggedDelta >> 1) ^ -(zigZaggedDelta & 1)) + predictedValue[channel]);
+                    *dataOutPtr++ = value;
 
-                    previousState  = (previousState  >> 16) | (uint) ((ushort) currentValue << 16);
-                    predictedState = (predictedState >> 16) | (uint) (nextMaybe << 16);
+                    ushort predictedNextValue = (ushort) ((value * 2) - lastValue[channel]);
 
-                    carryFlag = useCompression;
-                    useCompression = (int) delta < 0x249;
+                    lastValue[channel]      = value;
+                    predictedValue[channel] = predictedNextValue;
+                    isCompressed[channel]   = zigZaggedDelta < 0x249;
                 }
             }
 
