@@ -276,9 +276,10 @@ breakEntireLoop:
         /// </summary>
         /// <param name="data">Data which contains the compressed data (e.g, a CHR/CHP file).</param>
         /// <param name="offset">Offset to the chunk of data pointed to by an offset in the FrameTable of a Sprite.</param>
+        /// <param name="maxOutput">Maximum number of bytes that can be written.</param>
         /// <param name="bytesRead">The amount of bytes read.</param>
         /// <returns></returns>
-        public static ushort[] DecompressSpriteData(byte[] data, uint offset, out uint bytesRead) {
+        public static ushort[] DecompressSpriteData(byte[] data, uint offset, uint? maxOutput, out uint bytesRead) {
             var decompressedData = new List<ushort>();
             var dataPos = offset + 0x04u;
             var nextFeedPos = data.GetUInt32((int) offset);
@@ -351,8 +352,14 @@ breakEntireLoop:
                 }
 
                 // We have the value, and the count -- add it.
+                // Account for the optional maximum output size.
+                bool hitLimit = maxOutput.HasValue ? ((decompressedData.Count + count) * 2 > maxOutput.Value) : false;
+                if (hitLimit)
+                    count = (int) (maxOutput.Value / 2 - decompressedData.Count);
                 for (int i = 0; i < count; i++)
                     decompressedData.Add(value);
+                if (hitLimit)
+                    break;
             }
 
             bytesRead = nextFeedPos + (nextFeedPos % 2);

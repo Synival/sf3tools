@@ -398,7 +398,7 @@ namespace CommonLib.Tests.Utils {
 
         [TestMethod]
         public void CHR_DecompressSpriteData_ProducesExpectedDataForFrame() {
-            var decompressed = DecompressSpriteData(c_testSpriteFrameCompressed, 0, out _);
+            var decompressed = DecompressSpriteData(c_testSpriteFrameCompressed, 0, null, out _);
             Assert.AreEqual(1600, decompressed.Length);
             Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameUncompressed, decompressed));
         }
@@ -413,8 +413,17 @@ namespace CommonLib.Tests.Utils {
         [TestMethod]
         public void CHR_CompressThenDecompressSpriteFrameProducesTheOriginalFrame() {
             var compressed = CompressSpriteData(c_testSpriteFrameUncompressed, 0, c_testSpriteFrameUncompressed.Length);
-            var decompressed = DecompressSpriteData(compressed, 0, out _);
+            var decompressed = DecompressSpriteData(compressed, 0, null, out _);
             Assert.IsTrue(Enumerable.SequenceEqual(c_testSpriteFrameUncompressed, decompressed));
+        }
+
+        [TestMethod]
+        public void DecompressSpriteData_WithMaxSize_DoesntExceedLimit() {
+            var decompressed1 = DecompressSpriteData(c_testSpriteFrameCompressed, 0, 10, out _);
+            var decompressed2 = DecompressSpriteData(c_testSpriteFrameCompressed, 0, 11, out _);
+
+            Assert.AreEqual(5, decompressed1.Length);
+            Assert.AreEqual(5, decompressed2.Length);
         }
     }
 }

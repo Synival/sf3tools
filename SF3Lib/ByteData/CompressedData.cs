@@ -101,8 +101,7 @@ namespace SF3.ByteData {
                     return DecompressLZSS(data, offset, maxOutput, out bytesRead, out endDataFound);
 
                 case CompressionType.Sprite: {
-                    // TODO: support maxOutput
-                    var outData = DecompressSpriteData(data, 0, out var bytesReadUInt).ToBytes();
+                    var outData = DecompressSpriteData(data, (uint) offset, (uint?) maxOutput, out var bytesReadUInt).ToBytes();
                     bytesRead = (int) bytesReadUInt;
                     endDataFound = true;
                     return outData;
