@@ -15,6 +15,7 @@ using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
 using SF3.Models.Tables.X8PC;
+using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X8PC {
@@ -106,6 +107,19 @@ namespace SF3.Models.Structs.X8PC {
                 AnimationChunk.DecompressedData, nameof(BoneKeyframesTable), (int) AnimationChunkHeader.BoneKeyframesTableOffset,
                 Scenario < ScenarioType.Scenario1
             );
+
+            // BoneKeyframesTables from attack animation chunks
+            if (AttackAnimChunks != null) {
+                var ngc = new NameGetterContext(Scenario);
+                AttackAnimBoneKeyframesTable = AttackAnimChunks.Select((x, i) => {
+                    var animDef        = AnimationChunkHeader.AnimationDefTable.FirstOrDefault(y => y.AttackAnimChunkIdx == i);
+                    var animIdProperty = animDef.GetType().GetProperty(nameof(animDef.AnimID));
+                    string animName    = (animDef == null) ? "Unknown" : animDef.GetPropertyValueName(animIdProperty, ngc);
+                    return PCBoneKeyframesTable.Create(
+                        x.DecompressedData, $"AttackAnimBoneKeyframes_{i:D2}_{animName}", (int) x.DecompressedData.GetUInt32(0), Scenario < ScenarioType.Scenario1
+                    );
+                }).ToArray();
+            }
 
             // Create all colors as a color palette that can be easily modified.
             var attrsByModelThenColor = GetATTRsByModelThenColor();
@@ -410,6 +424,7 @@ namespace SF3.Models.Structs.X8PC {
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
         public PCBoneKeyframesTable BoneKeyframesTable { get; }
+        public PCBoneKeyframesTable[] AttackAnimBoneKeyframesTable { get; }
 
         public ChunkData[] Chunks { get; }
         public ChunkData[] AttackAnimChunks { get; }
@@ -422,7 +437,7 @@ namespace SF3.Models.Structs.X8PC {
         public PCPalette Palette { get; }
         public PCTextureAtlas TextureAtlas { get; }
 
-        private Dictionary<int, ISGL_Model> _modelsById;
+        private readonly Dictionary<int, ISGL_Model> _modelsById;
 
         private bool disposedValue;
         protected virtual void Dispose(bool disposing) {

@@ -6,8 +6,8 @@ namespace SF3.Win.Views.X8PC {
     public class PCHeaderChunkView : TabView {
         public PCHeaderChunkView(string name, PolyChar model, INameGetterContext ngc) : base(name) {
             NameGetterContext = ngc;
-            ChunkDefView      = new TableView("Chunks", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
-            AttackAnimChunkDefView = new TableView("Attack Anim. Chunks", model?.Header?.AttackAnimChunkDefTable, ngc, modelType: typeof(PCChunkDef));
+            ChunkDefView      = new TableView("Chunk Defs", model?.Header?.ChunkDefTable, ngc, modelType: typeof(PCChunkDef));
+            AttackAnimChunkDefView = new TableView("Attack Anim. Chunk Defs", model?.Header?.AttackAnimChunkDefTable, ngc, modelType: typeof(PCChunkDef));
             Model             = model;
         }
 
@@ -21,9 +21,9 @@ namespace SF3.Win.Views.X8PC {
             foreach (var tabObj in TabControl.TabPages) {
                 var tab = tabObj as TabPage;
                 if (tab != null) {
-                    if (tab.Text == "Chunks")
+                    if (tab.Text == "Chunk Defs")
                         _chunkDefViewTab = tab;
-                    else if (tab.Text == "Attack Anim. Chunks")
+                    else if (tab.Text == "Attack Anim. Chunk Defs")
                         _attackAnimChunkDefViewTab = tab;
                 }
             }
