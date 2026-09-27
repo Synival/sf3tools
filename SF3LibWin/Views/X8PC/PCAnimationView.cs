@@ -8,9 +8,10 @@ using CommonLib.Rigging;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationView : SGL_ModelInstance3DView {
-        public PCAnimationView(string name, PolyChar polyChar)
+        public PCAnimationView(string name, PolyChar polyChar, PCAnimationDefStruct animation)
         : base(name, polyChar, sglModelInstance: null, forceLighting: true) {
-            _polyChar = polyChar;
+            _polyChar  = polyChar;
+            _animation = animation;
             UpdateModelInstances();
         }
 
@@ -70,8 +71,17 @@ namespace SF3.Win.Views.X8PC {
 
             _lastFrameIdx = -1;
             UpdateKeyframeInfo();
-            _frame = GetFirstKeyframe();
-            _maxFrame = PolyChar?.GetLastAnimationFrame() ?? 0;
+
+            if (_animation != null) {
+                _minFrame = _animation.StartFrame;
+                _maxFrame = _animation.StartFrame + _animation.FrameCount;
+            }
+            else {
+                _minFrame = PolyChar?.GetEarliestKeyframe() ?? 0;
+                _maxFrame = PolyChar?.GetLatestKeyframe() ?? 0;
+            }
+
+            _frame = _minFrame;
 
             if (Control != null)
                 Control.Update(_polyChar, _instances);
@@ -83,9 +93,8 @@ namespace SF3.Win.Views.X8PC {
             Control.Zoom = Math.Min(Control.Width / (float) Control.Height, Control.Height / (float) Control.Width) * 1.25f;
 
             _frame += Math.Min(60, delta) * 20.0f / 1000.0f;
-            _frame %= _maxFrame;
-            if (_frame < 0)
-                _frame = GetFirstKeyframe();
+            while (_frame >= _maxFrame)
+                _frame -= Math.Max(1, _maxFrame - _minFrame);
 
             UpdateModelInstancesState();
         }
@@ -97,7 +106,7 @@ namespace SF3.Win.Views.X8PC {
             if (framesUntilNextKeyframe >= 30) {
                 _frame += framesUntilNextKeyframe;
                 if (_frame > _maxFrame)
-                    _frame = GetFirstKeyframe();
+                    _frame -= Math.Max(1, _maxFrame - _minFrame) + framesUntilNextKeyframe;
                 UpdateKeyframeInfo();
             }
 
@@ -106,23 +115,6 @@ namespace SF3.Win.Views.X8PC {
 
         private void UpdateKeyframeInfo()
             => _keyframeInfo = (_polyChar == null) ? [] : _polyChar.GetAnimationBoneKeyframes(_frame);
-
-        private float GetFirstKeyframe() {
-            if (PolyChar == null)
-                return 0.00f;
-
-            float minFrame = 1000000;
-            foreach (var bkf in PolyChar.BoneKeyframesTable) {
-            if (bkf.PosTable.Count > 0)
-                minFrame = Math.Min(minFrame, bkf.PosTable.Min(x => x.Frame));
-            if (bkf.RotTable.Count > 0)
-                minFrame = Math.Min(minFrame, bkf.RotTable.Min(x => x.Frame));
-            if (bkf.ScaleTable.Count > 0)
-                minFrame = Math.Min(minFrame, bkf.ScaleTable.Min(x => x.Frame));
-            }
-
-            return minFrame == 1000000 ? 0 : minFrame;
-        }
 
         private float GetFramesUntilNextKeyframe() {
             if (_keyframeInfo.Length == 0)
@@ -156,17 +148,21 @@ namespace SF3.Win.Views.X8PC {
         }
 
         private PolyChar _polyChar = null;
-        public PolyChar PolyChar {
-            get => _polyChar;
-            set {
-                if (_polyChar != value) {
-                    _polyChar = value;
-                    UpdateModelInstances();
-                }
+        private IAnimation _animation = null;
+
+        public PolyChar PolyChar => _polyChar;
+        public IAnimation Animation => _animation;
+
+        public void SetAnimation(PolyChar polyChar, PCAnimationDefStruct animation) {
+            if (_polyChar != polyChar || _animation != animation) {
+                _polyChar  = polyChar;
+                _animation = animation;
+                UpdateModelInstances();
             }
         }
 
         private float _frame = 0;
+        private float _minFrame = 0;
         private float _maxFrame = 0;
         private int _lastFrameIdx = -1;
 

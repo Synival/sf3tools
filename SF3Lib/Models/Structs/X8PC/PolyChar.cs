@@ -102,7 +102,9 @@ namespace SF3.Models.Structs.X8PC {
                     xpdata.AssociateWithRig(Rig);
             }
 
-            AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
+            var ngc = new NameGetterContext(Scenario);
+
+            AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0, ngc);
             BoneKeyframesTable   = PCBoneKeyframesTable.Create(
                 AnimationChunk.DecompressedData, nameof(BoneKeyframesTable), (int) AnimationChunkHeader.BoneKeyframesTableOffset,
                 Scenario < ScenarioType.Scenario1
@@ -110,7 +112,6 @@ namespace SF3.Models.Structs.X8PC {
 
             // BoneKeyframesTables from attack animation chunks
             if (AttackAnimChunks != null) {
-                var ngc = new NameGetterContext(Scenario);
                 AttackAnimBoneKeyframesTable = AttackAnimChunks.Select((x, i) => {
                     var animDef        = AnimationChunkHeader.AnimationDefTable.FirstOrDefault(y => y.AttackAnimChunkIdx == i);
                     var animIdProperty = animDef.GetType().GetProperty(nameof(animDef.AnimID));
@@ -320,7 +321,7 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         public BoneKeyframeInfo[] GetAnimationBoneKeyframes(float frame) {
-            var totalFrames = GetLastAnimationFrame();
+            var totalFrames = GetLatestKeyframe();
 
             var numBones = BoneKeyframesTable.Count;
             var pos   = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.PosTable.AsArray(),   y => y.Frame, frame, totalFrames)).ToArray();
@@ -382,7 +383,19 @@ namespace SF3.Models.Structs.X8PC {
             return matrix;
         }
 
-        public int GetLastAnimationFrame() {
+        public int GetEarliestKeyframe() {
+            return BoneKeyframesTable.Count > 0
+                ? BoneKeyframesTable.Min(x => Math.Min(
+                    x.PosTable.Count > 0 ? x.PosTable.Min(y => y.Frame) : 0,
+                    Math.Min(
+                        x.RotTable.Count   > 0 ? x.RotTable.Min(y => y.Frame) : 0,
+                        x.ScaleTable.Count > 0 ? x.ScaleTable.Min(y => y.Frame) : 0
+                    )
+                ))
+                : 0;
+        }
+
+        public int GetLatestKeyframe() {
             return BoneKeyframesTable.Count > 0
                 ? BoneKeyframesTable.Max(x => Math.Max(
                     x.PosTable.Count > 0 ? x.PosTable.Max(y => y.Frame) : 0,

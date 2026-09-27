@@ -1,19 +1,23 @@
 ﻿using System;
 using CommonLib.Attributes;
+using CommonLib.Extensions;
+using CommonLib.NamedValues;
+using CommonLib.Rigging;
 using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCAnimationDefStruct : Struct {
+    public class PCAnimationDefStruct : Struct, IAnimation {
         public readonly int _startFrameAddr;
         public readonly int _frameCountAddr;
         public readonly int _animIdAddr;
         public readonly int _distanceFromEnemyAddr;
         public readonly int _aniCommandsOffsetAddr;
 
-        public PCAnimationDefStruct(IByteData data, int id, string name, int address, Func<int, PCAnimationDefStruct> neighborGetter)
+        public PCAnimationDefStruct(IByteData data, int id, string name, int address, Func<int, PCAnimationDefStruct> neighborGetter, INameGetterContext ngc)
         : base(data, id, name, address, 0x0c) {
             _neighborGetter = neighborGetter;
+            NameGetterContext = ngc;
 
             _startFrameAddr        = Address + 0x00; // 2 bytes
             _frameCountAddr        = Address + 0x02; // 2 bytes
@@ -21,6 +25,8 @@ namespace SF3.Models.Structs.X8PC {
             _distanceFromEnemyAddr = Address + 0x06; // 2 bytes
             _aniCommandsOffsetAddr = Address + 0x08; // 4 bytes
         }
+
+        public string AnimationName => this.GetPropertyValueName(typeof(PCAnimationDefStruct).GetProperty(nameof(AnimID)), NameGetterContext);
 
         [TableViewModelColumn(addressField: nameof(_startFrameAddr), displayOrder: -0.3f)]
         [BulkCopy]
@@ -43,16 +49,16 @@ namespace SF3.Models.Structs.X8PC {
 
         [TableViewModelColumn(addressField: nameof(_startFrameAddr), displayOrder: 0)]
         [BulkCopy]
-        public ushort StartFrame {
+        public int StartFrame {
             get => (ushort) (Data.GetUInt16(_startFrameAddr) & 0xEFFF);
             set => Data.SetUInt16(_startFrameAddr, (ushort) ((value & 0xEFFF) | (Data.GetUInt16(_startFrameAddr) & 0x1000)));
         }
 
         [TableViewModelColumn(addressField: nameof(_frameCountAddr), displayOrder: 1)]
         [BulkCopy]
-        public ushort FrameCount {
+        public int FrameCount {
             get => Data.GetUInt16(_frameCountAddr);
-            set => Data.SetUInt16(_frameCountAddr, value);
+            set => Data.SetUInt16(_frameCountAddr, (ushort) value);
         }
 
         [TableViewModelColumn(addressField: nameof(_animIdAddr), displayOrder: 2, minWidth: 120)]
@@ -78,5 +84,7 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         private readonly Func<int, PCAnimationDefStruct> _neighborGetter;
+
+        public INameGetterContext NameGetterContext { get; }
     }
 }

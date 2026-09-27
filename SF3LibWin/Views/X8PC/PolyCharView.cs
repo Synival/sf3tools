@@ -7,7 +7,7 @@ namespace SF3.Win.Views.X8PC {
         public PolyCharView(string name, PolyChar model, INameGetterContext ngc, TabAlignment tabAlignment) : base(name, tabAlignment: tabAlignment) {
             NameGetterContext = ngc;
 
-            AnimationViewer  = new PCAnimationView("Animation Viewer", model);
+            AnimationViewer  = new PCAnimationArrayView("Animation Viewer", model);
             TextureSheetView = new TextureView("Texture Atlas", model?.TextureAtlas, imageScale: 2.0f);
             PaletteView      = new TextureView("Palette", model?.Palette, imageScale: 16.00f);
             ChunkView        = new PCChunkView("Chunks", model, NameGetterContext);
@@ -44,7 +44,7 @@ namespace SF3.Win.Views.X8PC {
 
         public INameGetterContext NameGetterContext { get; }
 
-        public PCAnimationView AnimationViewer { get; }
+        public PCAnimationArrayView AnimationViewer { get; }
         public TextureView TextureSheetView { get; }
         public TextureView PaletteView { get; }
         public PCChunkView ChunkView { get; }
