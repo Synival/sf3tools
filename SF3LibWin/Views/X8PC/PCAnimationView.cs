@@ -112,12 +112,14 @@ namespace SF3.Win.Views.X8PC {
                 return 0.00f;
 
             float minFrame = 1000000;
-            if (PolyChar.BoneKeyframePosTables.Length > 0)
-                minFrame = PolyChar.BoneKeyframePosTables.Min(x => x.Count > 0 ? x[0].Frame : 1000000);
-            if (PolyChar.BoneKeyframeRotTables.Length > 0)
-                minFrame = PolyChar.BoneKeyframeRotTables.Min(x => x.Count > 0 ? x[0].Frame : 1000000);
-            if (PolyChar.BoneKeyframeScaleTables.Length > 0)
-                minFrame = PolyChar.BoneKeyframeScaleTables.Min(x => x.Count > 0 ? x[0].Frame : 1000000);
+            foreach (var bkf in PolyChar.BoneKeyframesTable) {
+            if (bkf.PosTable.Count > 0)
+                minFrame = Math.Min(minFrame, bkf.PosTable.Min(x => x.Frame));
+            if (bkf.RotTable.Count > 0)
+                minFrame = Math.Min(minFrame, bkf.RotTable.Min(x => x.Frame));
+            if (bkf.ScaleTable.Count > 0)
+                minFrame = Math.Min(minFrame, bkf.ScaleTable.Min(x => x.Frame));
+            }
 
             return minFrame == 1000000 ? 0 : minFrame;
         }

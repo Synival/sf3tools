@@ -102,28 +102,10 @@ namespace SF3.Models.Structs.X8PC {
             }
 
             AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0);
-            BoneKeyframeTable    = PCBoneKeyframeTable.Create(AnimationChunk.DecompressedData, "BoneKeyframeTable", (int) AnimationChunkHeader.BoneKeyframesTableOffset);
-
-            BoneKeyframePosTables = BoneKeyframeTable
-                .Select(x => PCBoneKeyframePosTable.Create(
-                    AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframePos", x.ID, (int) x.NumPosKeyFrames,
-                        (int) x.PosFramesOffset, (int) x.PosXPtr, (int) x.PosYPtr, (int) x.PosZPtr
-                    )
-                ).ToArray();
-
-            BoneKeyframeRotTables = BoneKeyframeTable
-                .Select(x => PCBoneKeyframeRotTable.Create(
-                    AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeRot", x.ID, (int) x.NumRotKeyFrames,
-                        (int) x.RotFramesOffset, (int) x.RotXPtr, (int) x.RotYPtr, (int) x.RotZPtr, (int) x.RotWPtr, Scenario < ScenarioType.Scenario1
-                    )
-                ).ToArray();
-
-            BoneKeyframeScaleTables = BoneKeyframeTable
-                .Select(x => PCBoneKeyframeScaleTable.Create(
-                    AnimationChunk.DecompressedData, $"Bone{x.ID:D2}_KeyframeScale", x.ID, (int) x.NumScaleKeyFrames,
-                        (int) x.ScaleFramesOffset, (int) x.ScaleXPtr, (int) x.ScaleYPtr, (int) x.ScaleZPtr
-                    )
-                ).ToArray();
+            BoneKeyframesTable   = PCBoneKeyframesTable.Create(
+                AnimationChunk.DecompressedData, nameof(BoneKeyframesTable), (int) AnimationChunkHeader.BoneKeyframesTableOffset,
+                Scenario < ScenarioType.Scenario1
+            );
 
             // Create all colors as a color palette that can be easily modified.
             var attrsByModelThenColor = GetATTRsByModelThenColor();
@@ -145,10 +127,8 @@ namespace SF3.Models.Structs.X8PC {
             tables.AddRange(VertexNormalTablesByOffset.Values);
             tables.Add(BoneTable);
 
-            tables.Add(BoneKeyframeTable);
-            tables.AddRange(BoneKeyframePosTables);
-            tables.AddRange(BoneKeyframeRotTables);
-            tables.AddRange(BoneKeyframeScaleTables);
+            tables.Add(BoneKeyframesTable);
+            tables.AddRange(BoneKeyframesTable.SelectMany(x => x.Tables).ToArray());
 
             Tables = tables.ToArray();
         }
@@ -328,11 +308,11 @@ namespace SF3.Models.Structs.X8PC {
         public BoneKeyframeInfo[] GetAnimationBoneKeyframes(float frame) {
             var totalFrames = GetLastAnimationFrame();
 
-            var pos = BoneKeyframePosTables.Select(x => GetAnimationKeyframe(x.AsArray(), y => y.Frame, frame, totalFrames)).ToArray();
-            var rot = BoneKeyframeRotTables.Select(x => GetAnimationKeyframe(x.AsArray(), y => y.Frame, frame, totalFrames)).ToArray();
-            var scale = BoneKeyframeScaleTables.Select(x => GetAnimationKeyframe(x.AsArray(), y => y.Frame, frame, totalFrames)).ToArray();
+            var numBones = BoneKeyframesTable.Count;
+            var pos   = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.PosTable.AsArray(),   y => y.Frame, frame, totalFrames)).ToArray();
+            var rot   = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.RotTable.AsArray(),   y => y.Frame, frame, totalFrames)).ToArray();
+            var scale = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.ScaleTable.AsArray(), y => y.Frame, frame, totalFrames)).ToArray();
 
-            var numBones = Math.Min(BoneKeyframePosTables.Length, Math.Min(BoneKeyframeRotTables.Length, BoneKeyframeScaleTables.Length));
             var boneKeyframes = new BoneKeyframeInfo[numBones];
             for (int i = 0; i < numBones; i++)
                 boneKeyframes[i] = new BoneKeyframeInfo { Pos = pos[i], Rot = rot[i], Scale = scale[i] };
@@ -350,9 +330,9 @@ namespace SF3.Models.Structs.X8PC {
                 var rotFrame   = boneFrame.Value.Rot;
                 var scaleFrame = boneFrame.Value.Scale;
 
-                var posTable = BoneKeyframePosTables[bId];
-                var rotTable = BoneKeyframeRotTables[bId];
-                var scaleTable = BoneKeyframeScaleTables[bId];
+                var posTable = BoneKeyframesTable[bId].PosTable;
+                var rotTable = BoneKeyframesTable[bId].RotTable;
+                var scaleTable = BoneKeyframesTable[bId].ScaleTable;
 
                 var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].CreateVector()     : new VECTOR(0, 0, 0);
                 var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].CreateQuaternion() : new QUATERNION(0, 0, 0, 1);
@@ -389,13 +369,15 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         public int GetLastAnimationFrame() {
-            return Math.Max(
-                BoneKeyframePosTables.Max(x => (x.Count > 0) ? x.Max(y => y.Frame) : 0),
-                Math.Max(
-                    BoneKeyframeRotTables.Max(x => (x.Count > 0) ? x.Max(y => y.Frame) : 0),
-                    BoneKeyframeScaleTables.Max(x => (x.Count > 0) ? x.Max(y => y.Frame) : 0)
-                )
-            );
+            return BoneKeyframesTable.Count > 0
+                ? BoneKeyframesTable.Max(x => Math.Max(
+                    x.PosTable.Count > 0 ? x.PosTable.Max(y => y.Frame) : 0,
+                    Math.Max(
+                        x.RotTable.Count   > 0 ? x.RotTable.Max(y => y.Frame) : 0,
+                        x.ScaleTable.Count > 0 ? x.ScaleTable.Max(y => y.Frame) : 0
+                    )
+                ))
+                : 0;
         }
 
         private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;
@@ -427,10 +409,7 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneWrapperTable BoneTable { get; }
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
-        public PCBoneKeyframeTable BoneKeyframeTable { get; }
-        public PCBoneKeyframePosTable[] BoneKeyframePosTables { get; }
-        public PCBoneKeyframeRotTable[] BoneKeyframeRotTables { get; }
-        public PCBoneKeyframeScaleTable[] BoneKeyframeScaleTables { get; }
+        public PCBoneKeyframesTable BoneKeyframesTable { get; }
 
         public ChunkData[] Chunks { get; }
         public ChunkData[] AttackAnimChunks { get; }

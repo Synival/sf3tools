@@ -1,7 +1,5 @@
 ﻿using System.Windows.Forms;
-using CommonLib.Arrays;
 using CommonLib.NamedValues;
-using CommonLib.Utils;
 using SF3.Models.Structs.X8PC;
 
 namespace SF3.Win.Views.X8PC {
@@ -14,9 +12,6 @@ namespace SF3.Win.Views.X8PC {
             PaletteView      = new TextureView("Palette", model?.Palette, imageScale: 16.00f);
             ChunkView        = new PCChunkView("Chunks", model, NameGetterContext);
 
-            // Testing only!!
-            AttackAnimChunkView = new DataHexView("Test", (model?.AttackAnimChunks?.Length >= 1) ? model.AttackAnimChunks[0].DecompressedData.Data : null);
-
             Model = model;
         }
 
@@ -28,9 +23,6 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(TextureSheetView);
             CreateChild(PaletteView);
             CreateChild(ChunkView);
-
-            // Testing only!!
-            CreateChild(AttackAnimChunkView);
 
             return Control;
         }
@@ -46,9 +38,6 @@ namespace SF3.Win.Views.X8PC {
                     TextureSheetView.Texture = _model?.TextureAtlas;
                     PaletteView.Texture      = _model?.Palette;
                     ChunkView.Model          = _model;
-
-                    // Testing only!!
-                    AttackAnimChunkView.Data = (_model?.AttackAnimChunks?.Length >= 1) ? _model.AttackAnimChunks[0].DecompressedData.Data : null;
                 }
             }
         }
@@ -59,8 +48,5 @@ namespace SF3.Win.Views.X8PC {
         public TextureView TextureSheetView { get; }
         public TextureView PaletteView { get; }
         public PCChunkView ChunkView { get; }
-
-        // Testing only!!
-        public DataHexView AttackAnimChunkView { get; }
     }
 }

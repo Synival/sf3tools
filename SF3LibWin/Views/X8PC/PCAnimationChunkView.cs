@@ -1,7 +1,6 @@
 ﻿using System.Windows.Forms;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.X8PC;
-using SF3.Models.Tables.X8PC;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationChunkView : TabView {
@@ -10,10 +9,7 @@ namespace SF3.Win.Views.X8PC {
 
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
             AnimationDefView  = new TableView("Animations", model?.AnimationChunkHeader?.AnimationDefTable, ngc, typeof(PCAnimationDefStruct));
-            BoneKeyframesView = new TableView("Bone Keyframes", model?.BoneKeyframeTable, ngc, typeof(PCBoneKeyframeStruct));
-            PosView           = new BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable>("Translations", model, ngc, x => x?.BoneKeyframePosTables);
-            RotView           = new BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable>("Rotations", model, ngc, x => x?.BoneKeyframeRotTables);
-            ScaleView         = new BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable>("Scales", model, ngc, x => x?.BoneKeyframeScaleTables);
+            BoneKeyframesView = new PCBoneKeyframesTableView("Bone Keyframes", model?.BoneKeyframesTable, ngc);
 
             Model             = model;
         }
@@ -27,9 +23,6 @@ namespace SF3.Win.Views.X8PC {
             CreateChild(HeaderView);
             CreateChild(AnimationDefView);
             CreateChild(BoneKeyframesView);
-            CreateChild(PosView);
-            CreateChild(RotView);
-            CreateChild(ScaleView);
 
             return Control;
         }
@@ -43,10 +36,7 @@ namespace SF3.Win.Views.X8PC {
 
                     HeaderView.Model        = _model?.AnimationChunkHeader;
                     AnimationDefView.Table  = _model?.AnimationChunkHeader?.AnimationDefTable;
-                    BoneKeyframesView.Table = _model?.BoneKeyframeTable;
-                    PosView.Model           = _model;
-                    RotView.Model           = _model;
-                    ScaleView.Model         = _model;
+                    BoneKeyframesView.Table = _model?.BoneKeyframesTable;
                 }
             }
         }
@@ -55,9 +45,6 @@ namespace SF3.Win.Views.X8PC {
 
         public DataModelView HeaderView { get; }
         public TableView AnimationDefView { get; }
-        public TableView BoneKeyframesView { get; }
-        public BaseModelTablesView<PCBoneKeyframePosStruct, PCBoneKeyframePosTable> PosView { get; }
-        public BaseModelTablesView<PCBoneKeyframeRotStruct, PCBoneKeyframeRotTable> RotView { get; }
-        public BaseModelTablesView<PCBoneKeyframeScaleStruct, PCBoneKeyframeScaleTable> ScaleView { get; }
+        public PCBoneKeyframesTableView BoneKeyframesView { get; }
     }
 }

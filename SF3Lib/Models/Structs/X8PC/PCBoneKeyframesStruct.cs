@@ -1,8 +1,11 @@
-﻿using CommonLib.Attributes;
+﻿using System.Collections.Generic;
+using CommonLib.Attributes;
 using SF3.ByteData;
+using SF3.Models.Tables;
+using SF3.Models.Tables.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCBoneKeyframeStruct : Struct {
+    public class PCBoneKeyframesStruct : Struct, ITableContainer {
         private readonly int _numPosKeyframesAddr;
         private readonly int _numRotKeyframesAddr;
         private readonly int _numScaleKeyframesAddr;
@@ -24,7 +27,7 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _scaleYPtrAddr;
         private readonly int _scaleZPtrAddr;
 
-        public PCBoneKeyframeStruct(IByteData data, int id, string name, int address)
+        public PCBoneKeyframesStruct(IByteData data, int id, string name, int address, bool hasFixedRotations)
         : base(data, id, name, address, 0x40) {
             _numPosKeyframesAddr   = Address + 0x00; // 4 bytes
             _numRotKeyframesAddr   = Address + 0x04; // 4 bytes
@@ -46,6 +49,23 @@ namespace SF3.Models.Structs.X8PC {
             _scaleXPtrAddr         = Address + 0x34; // 4 bytes
             _scaleYPtrAddr         = Address + 0x38; // 4 bytes
             _scaleZPtrAddr         = Address + 0x3C; // 4 bytes
+
+            Tables = new ITable[] {
+                PosTable = PCBoneKeyframePosTable.Create(
+                    data, $"Bone{ID:D2}_KeyframePos", ID, (int) NumPosKeyFrames,
+                        (int) PosFramesOffset, (int) PosXPtr, (int) PosYPtr, (int) PosZPtr
+                    ),
+
+                RotTable = PCBoneKeyframeRotTable.Create(
+                    data, $"Bone{ID:D2}_KeyframeRot", ID, (int) NumRotKeyFrames,
+                        (int) RotFramesOffset, (int) RotXPtr, (int) RotYPtr, (int) RotZPtr, (int) RotWPtr, hasFixedRotations
+                    ),
+
+                ScaleTable = PCBoneKeyframeScaleTable.Create(
+                    data, $"Bone{ID:D2}_KeyframeScale", ID, (int) NumScaleKeyFrames,
+                        (int) ScaleFramesOffset, (int) ScaleXPtr, (int) ScaleYPtr, (int) ScaleZPtr
+                    ),
+            };
         }
 
         [TableViewModelColumn(addressField: nameof(_numPosKeyframesAddr), displayOrder: 0)]
@@ -159,5 +179,11 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetUInt32(_scaleZPtrAddr);
             set => Data.SetUInt32(_scaleZPtrAddr, value);
         }
+
+        public IEnumerable<ITable> Tables { get; }
+
+        public PCBoneKeyframePosTable PosTable { get; }
+        public PCBoneKeyframeRotTable RotTable { get; }
+        public PCBoneKeyframeScaleTable ScaleTable { get; }
     }
 }
