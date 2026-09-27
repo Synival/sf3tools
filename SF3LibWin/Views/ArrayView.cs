@@ -19,8 +19,8 @@ namespace SF3.Win.Views {
 
             DropdownList = new DarkModeComboBox();
             DropdownList.Width = 400;
-            DropdownList.DataSource = new BindingSource(Elements ?? [], null);
             DropdownList.DisplayMember = KeyProperty;
+            DropdownList.DataSource = new BindingSource(Elements ?? [], null);
             DropdownList.SelectedValueChanged += OnSelectValue;
             control.Controls.Add(DropdownList);
 
@@ -45,8 +45,12 @@ namespace SF3.Win.Views {
             set {
                 if (_elements != value) {
                     _elements = value;
-                    if (DropdownList != null)
-                        DropdownList.DataSource = new BindingSource(_elements, null);
+                    if (DropdownList != null) {
+                        if (DropdownList.DataSource is BindingSource bs)
+                            bs.DataSource = _elements;
+                        else
+                            DropdownList.DataSource = new BindingSource(_elements, null);
+                    }
                 }
             }
         }
