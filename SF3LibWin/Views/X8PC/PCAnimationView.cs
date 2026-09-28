@@ -74,7 +74,7 @@ namespace SF3.Win.Views.X8PC {
 
             if (_animation != null) {
                 _minFrame = _animation.StartFrame;
-                _maxFrame = _animation.StartFrame + _animation.FrameCount;
+                _maxFrame = _animation.StartFrame + _animation.FrameCount - 1;
             }
             else {
                 _minFrame = PolyChar?.GetEarliestKeyframe() ?? 0;
@@ -102,12 +102,15 @@ namespace SF3.Win.Views.X8PC {
         private void UpdateModelInstancesState() {
             UpdateKeyframeInfo();
 
+            if (_animation == null) {
             var framesUntilNextKeyframe = GetFramesUntilNextKeyframe();
-            if (framesUntilNextKeyframe >= 30) {
-                _frame += framesUntilNextKeyframe;
-                if (_frame > _maxFrame)
-                    _frame -= Math.Max(1, _maxFrame - _minFrame) + framesUntilNextKeyframe;
-                UpdateKeyframeInfo();
+                if (framesUntilNextKeyframe >= 30) {
+                    if (_frame + framesUntilNextKeyframe >= _maxFrame)
+                        _frame -= Math.Max(1, _maxFrame - _minFrame);
+                    else
+                        _frame += framesUntilNextKeyframe;
+                    UpdateKeyframeInfo();
+                }
             }
 
             UpdateModelMatrix();
