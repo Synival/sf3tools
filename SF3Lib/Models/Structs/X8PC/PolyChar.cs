@@ -335,7 +335,7 @@ namespace SF3.Models.Structs.X8PC {
             return boneKeyframes;
         }
 
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, BoneKeyframeInfo? boneFrame) {
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, BoneKeyframeInfo? boneFrame, IReadOnlyList<IBoneKeyframe> keyframes) {
             var matrix = Matrix4x4.Identity;
 
             if (bone.BoneID.HasValue && boneFrame.HasValue) {
@@ -345,17 +345,17 @@ namespace SF3.Models.Structs.X8PC {
                 var rotFrame   = boneFrame.Value.Rot;
                 var scaleFrame = boneFrame.Value.Scale;
 
-                var posTable = BoneKeyframesTable[bId].PosTable;
-                var rotTable = BoneKeyframesTable[bId].RotTable;
-                var scaleTable = BoneKeyframesTable[bId].ScaleTable;
+                var posTable = keyframes[bId].PosTable;
+                var rotTable = keyframes[bId].RotTable;
+                var scaleTable = keyframes[bId].ScaleTable;
 
-                var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].CreateVector()     : new VECTOR(0, 0, 0);
-                var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].CreateQuaternion() : new QUATERNION(0, 0, 0, 1);
-                var scale1 = scaleTable.Count > scaleFrame.IndexA ? scaleTable[scaleFrame.IndexA].CreateVector() : new VECTOR(1, 1, 1);
+                var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].Vector     : new VECTOR(0, 0, 0);
+                var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].Quaternion : new QUATERNION(0, 0, 0, 1);
+                var scale1 = scaleTable.Count > scaleFrame.IndexA ? scaleTable[scaleFrame.IndexA].Vector : new VECTOR(1, 1, 1);
 
-                var pos2   = posTable.Count   > posFrame.IndexB   ? posTable[posFrame.IndexB].CreateVector()     : new VECTOR(0, 0, 0);
-                var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].CreateQuaternion() : new QUATERNION(0, 0, 0, 1);
-                var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].CreateVector() : new VECTOR(1, 1, 1);
+                var pos2   = posTable.Count   > posFrame.IndexB   ? posTable[posFrame.IndexB].Vector     : new VECTOR(0, 0, 0);
+                var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].Quaternion : new QUATERNION(0, 0, 0, 1);
+                var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].Vector : new VECTOR(1, 1, 1);
 
                 matrix *= IBoneExtensions.CreateMatrix(
                     pos1,   pos2,   posFrame.Mix,
@@ -373,7 +373,7 @@ namespace SF3.Models.Structs.X8PC {
             var matrix = Matrix4x4.Identity;
 
             void ApplyMatrices(IBone b) {
-                matrix *= GetModelInstanceMatrixInAnimation(b, (b.BoneID.HasValue) ? keyframeInfo[b.BoneID.Value] : (BoneKeyframeInfo?) null);
+                matrix *= GetModelInstanceMatrixInAnimation(b, (b.BoneID.HasValue) ? keyframeInfo[b.BoneID.Value] : (BoneKeyframeInfo?) null, BoneKeyframesTable);
                 if (b.Parent != null)
                     ApplyMatrices(b.Parent);
             }

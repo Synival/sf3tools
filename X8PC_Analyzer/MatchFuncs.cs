@@ -69,7 +69,7 @@ namespace X8PC_Analyzer {
                 var keyframes = pc.GetAnimationBoneKeyframes(0f);
                 Matrix4x4 MatrixGetter(IBone bone) {
                     var keyframe = bone.BoneID.HasValue ? keyframes[bone.BoneID!.Value] : (BoneKeyframeInfo?) null;
-                    return pc.GetModelInstanceMatrixInAnimation(bone, keyframe);
+                    return pc.GetModelInstanceMatrixInAnimation(bone, keyframe, pc.BoneKeyframesTable);
                 }
 
                 var data = converter.ModelToGLB_Data(rig, pc, ModelGetter, MatrixGetter, pc);

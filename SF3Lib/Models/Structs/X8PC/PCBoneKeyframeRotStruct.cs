@@ -1,9 +1,10 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.Rigging;
 using CommonLib.SGL;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCBoneKeyframeRotStruct : IStruct {
+    public class PCBoneKeyframeRotStruct : IStruct, IBoneKeyframeQuaternion {
         private readonly int _frameAddr;
         private readonly int _xAddr;
         private readonly int _yAddr;
@@ -99,6 +100,7 @@ namespace SF3.Models.Structs.X8PC {
             }
         }
 
-        public QUATERNION CreateQuaternion() => new QUATERNION(X, Y, Z, W);
+        public QUATERNION Quaternion => new QUATERNION(X, Y, Z, W);
+        public int FrameNum => Frame;
     }
 }

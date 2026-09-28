@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using CommonLib.Attributes;
+using CommonLib.Rigging;
 using SF3.ByteData;
 using SF3.Models.Tables;
 using SF3.Models.Tables.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCBoneKeyframesStruct : Struct, ITableContainer {
+    public class PCBoneKeyframesStruct : Struct, ITableContainer, IBoneKeyframe {
         private readonly int _numPosKeyframesAddr;
         private readonly int _numRotKeyframesAddr;
         private readonly int _numScaleKeyframesAddr;
@@ -185,5 +186,9 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframePosTable PosTable { get; }
         public PCBoneKeyframeRotTable RotTable { get; }
         public PCBoneKeyframeScaleTable ScaleTable { get; }
+
+        IReadOnlyList<IBoneKeyframeVector> IBoneKeyframe.PosTable => PosTable;
+        IReadOnlyList<IBoneKeyframeQuaternion> IBoneKeyframe.RotTable => RotTable;
+        IReadOnlyList<IBoneKeyframeVector> IBoneKeyframe.ScaleTable => ScaleTable;
     }
 }

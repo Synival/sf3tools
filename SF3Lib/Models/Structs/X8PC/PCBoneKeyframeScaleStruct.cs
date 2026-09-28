@@ -1,17 +1,18 @@
 ﻿using CommonLib.Attributes;
+using CommonLib.Rigging;
 using CommonLib.SGL;
 using SF3.ByteData;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCBoneKeyframeScaleStruct : IStruct {
+    public class PCBoneKeyframeScaleStruct : IStruct, IBoneKeyframeVector {
         private readonly int _frameAddr;
         private readonly int _xAddr;
         private readonly int _yAddr;
         private readonly int _zAddr;
 
         public PCBoneKeyframeScaleStruct(IByteData data, int boneId, int keyframeId, string name, int frameAddr, int xAddr, int yAddr, int zAddr) {
-            Data        = data;
-            Name        = name;
+            Data       = data;
+            Name       = name;
 
             BoneID     = boneId;
             KeyframeID = keyframeId;
@@ -67,6 +68,7 @@ namespace SF3.Models.Structs.X8PC {
             set => Data.SetFIXED(_zAddr, new FIXED(value, 0));
         }
 
-        public VECTOR CreateVector() => new VECTOR(X, Y, Z);
+        public VECTOR Vector => new VECTOR(X, Y, Z);
+        public int FrameNum => Frame;
     }
 }
