@@ -104,7 +104,7 @@ namespace SF3.Models.Structs.X8PC {
 
             var ngc = new NameGetterContext(Scenario);
 
-            AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0, ngc);
+            AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0, this, ngc);
             BoneKeyframesTable   = PCBoneKeyframesTable.Create(
                 AnimationChunk.DecompressedData, nameof(BoneKeyframesTable), (int) AnimationChunkHeader.BoneKeyframesTableOffset,
                 Scenario < ScenarioType.Scenario1

@@ -81,9 +81,7 @@ namespace SF3.Win.Views.X8PC {
                 _maxFrame = PolyChar?.BoneKeyframesTable?.GetLatestKeyframe() ?? 0;
             }
             _frame = _minFrame;
-
-            // TODO: Animation-specific keyframes.
-            _keyframes = PolyChar?.BoneKeyframesTable;
+            _keyframes = _animation?.BoneKeyframes ?? PolyChar?.BoneKeyframesTable;
             UpdateKeyframeInfo();
 
             if (Control != null)

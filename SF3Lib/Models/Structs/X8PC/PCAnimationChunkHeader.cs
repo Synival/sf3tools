@@ -8,6 +8,7 @@ using SF3.Models.Tables.X8PC;
 
 namespace SF3.Models.Structs.X8PC {
     public class PCAnimationChunkHeader : Struct, ITableContainer {
+        public PolyChar PolyChar { get; }
         public INameGetterContext NameGetterContext { get; }
 
         private readonly int _centerXAddr;
@@ -20,8 +21,9 @@ namespace SF3.Models.Structs.X8PC {
 
         public PCAnimationDefTable AnimationDefTable { get; }
 
-        public PCAnimationChunkHeader(IByteData data, int id, string name, int address, INameGetterContext ngc)
+        public PCAnimationChunkHeader(IByteData data, int id, string name, int address, PolyChar polyChar, INameGetterContext ngc)
         : base(data, id, name, address, 0x1C) {
+            PolyChar = polyChar;
             NameGetterContext = ngc;
 
             _centerXAddr                  = Address + 0x00; // 4 bytes
@@ -32,7 +34,7 @@ namespace SF3.Models.Structs.X8PC {
             _halfBoundingBoxZAddr         = Address + 0x14; // 4 bytes
             _boneKeyframesTableOffsetAddr = Address + 0x18; // 4 bytes
 
-            AnimationDefTable = PCAnimationDefTable.Create(Data, nameof(PCAnimationDefTable), Address + 0x1C, NameGetterContext);
+            AnimationDefTable = PCAnimationDefTable.Create(Data, nameof(PCAnimationDefTable), Address + 0x1C, PolyChar, NameGetterContext);
             Size = 0x1C + AnimationDefTable.SizeInBytes;
 
             Tables = new ITable[] { AnimationDefTable };

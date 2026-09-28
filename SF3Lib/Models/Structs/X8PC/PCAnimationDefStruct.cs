@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CommonLib.Attributes;
 using CommonLib.Extensions;
 using CommonLib.NamedValues;
@@ -14,10 +15,11 @@ namespace SF3.Models.Structs.X8PC {
         public readonly int _distanceFromEnemyAddr;
         public readonly int _aniCommandsOffsetAddr;
 
-        public PCAnimationDefStruct(IByteData data, int id, string name, int address, Func<int, PCAnimationDefStruct> neighborGetter, INameGetterContext ngc)
+        public PCAnimationDefStruct(IByteData data, int id, string name, int address, Func<int, PCAnimationDefStruct> neighborGetter, PolyChar polyChar, INameGetterContext ngc)
         : base(data, id, name, address, 0x0c) {
-            _neighborGetter = neighborGetter;
+            PolyChar = polyChar;
             NameGetterContext = ngc;
+            _neighborGetter = neighborGetter;
 
             _startFrameAddr        = Address + 0x00; // 2 bytes
             _frameCountAddr        = Address + 0x02; // 2 bytes
@@ -82,9 +84,22 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetUInt32(_aniCommandsOffsetAddr);
             set => Data.SetUInt32(_aniCommandsOffsetAddr, value);
         }
+        public PolyChar PolyChar { get; }
+        public INameGetterContext NameGetterContext { get; }
+
+        public IReadOnlyList<IBoneKeyframe> BoneKeyframes {
+            get {
+                if (!IsInAttackAnimChunk)
+                    return PolyChar.BoneKeyframesTable;
+
+                var idx = AttackAnimChunkIdx.Value;
+                if (idx >= 0 && idx < PolyChar.AttackAnimBoneKeyframesTable.Length)
+                    return PolyChar.AttackAnimBoneKeyframesTable[idx];
+                    
+                return null;
+            }
+        }
 
         private readonly Func<int, PCAnimationDefStruct> _neighborGetter;
-
-        public INameGetterContext NameGetterContext { get; }
     }
 }

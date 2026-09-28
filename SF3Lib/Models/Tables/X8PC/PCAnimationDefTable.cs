@@ -4,23 +4,25 @@ using SF3.Models.Structs.X8PC;
 
 namespace SF3.Models.Tables.X8PC {
     public class PCAnimationDefTable : TerminatedTable<PCAnimationDefStruct> {
-        protected PCAnimationDefTable(IByteData data, string name, int address, INameGetterContext ngc)
+        protected PCAnimationDefTable(IByteData data, string name, int address, PolyChar polyChar, INameGetterContext ngc)
         : base(data, name, address, 2, null) {
+            PolyChar = polyChar;
             NameGetterContext = ngc;
         }
 
-        public INameGetterContext NameGetterContext { get; }
-
-        public static PCAnimationDefTable Create(IByteData data, string name, int address, INameGetterContext ngc)
-            => Create(() => new PCAnimationDefTable(data, name, address, ngc));
+        public static PCAnimationDefTable Create(IByteData data, string name, int address, PolyChar polyChar, INameGetterContext ngc)
+            => Create(() => new PCAnimationDefTable(data, name, address, polyChar, ngc));
 
         public override bool Load() {
             PCAnimationDefStruct NeighborGetter(int id) => (id >= 0 && id < _rows.Length) ? _rows[id] : null;
             return Load(
-                (id, address) => new PCAnimationDefStruct(Data, id, $"Animation_{id:D2}", address, NeighborGetter, NameGetterContext),
+                (id, address) => new PCAnimationDefStruct(Data, id, $"Animation_{id:D2}", address, NeighborGetter, PolyChar, NameGetterContext),
                 (rowsLoaded, thisRow) => Data.GetUInt16(thisRow.Address) != 0xFFFF,
                 addEndModel: false
             );
         }
+
+        public PolyChar PolyChar { get; }
+        public INameGetterContext NameGetterContext { get; }
     }
 }
