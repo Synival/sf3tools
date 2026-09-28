@@ -93,9 +93,13 @@ namespace SF3.Win.Views.X8PC {
         private void OnFrameTick(object sender, float delta) {
             Control.Zoom = Math.Min(Control.Width / (float) Control.Height, Control.Height / (float) Control.Width) * 1.25f;
 
-            _frame += Math.Min(60, delta) * 20.0f / 1000.0f;
-            while (_frame >= _maxFrame)
-                _frame -= Math.Max(1, _maxFrame - _minFrame);
+            if (_maxFrame <= _minFrame)
+                _frame = _minFrame;
+            else {
+                _frame += Math.Min(60, delta) * 20.0f / 1000.0f;
+                while (_frame >= _maxFrame)
+                    _frame -= Math.Max(1, _maxFrame - _minFrame);
+            }
 
             UpdateModelInstancesState();
         }
@@ -104,7 +108,7 @@ namespace SF3.Win.Views.X8PC {
             UpdateKeyframeInfo();
 
             if (_animation == null) {
-            var framesUntilNextKeyframe = GetFramesUntilNextKeyframe();
+                var framesUntilNextKeyframe = GetFramesUntilNextKeyframe();
                 if (framesUntilNextKeyframe >= 30) {
                     if (_frame + framesUntilNextKeyframe >= _maxFrame)
                         _frame -= Math.Max(1, _maxFrame - _minFrame);
