@@ -66,10 +66,10 @@ namespace X8PC_Analyzer {
                         return null;
                 }
 
-                var keyframes = pc.GetAnimationBoneKeyframes(0f);
+                var keyframes = pc.GetAnimationBoneKeyframeInfos(pc.BoneKeyframesTable, 0f);
                 Matrix4x4 MatrixGetter(IBone bone) {
                     var keyframe = bone.BoneID.HasValue ? keyframes[bone.BoneID!.Value] : (BoneKeyframeInfo?) null;
-                    return pc.GetModelInstanceMatrixInAnimation(bone, keyframe, pc.BoneKeyframesTable);
+                    return pc.GetModelInstanceMatrixInAnimation(bone, pc.BoneKeyframesTable, keyframe);
                 }
 
                 var data = converter.ModelToGLB_Data(rig, pc, ModelGetter, MatrixGetter, pc);

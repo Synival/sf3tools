@@ -5,6 +5,7 @@ using CommonLib.SGL;
 using CommonLib.Extensions;
 using SF3.Models.Structs.X8PC;
 using CommonLib.Rigging;
+using System.Collections.Generic;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationView : SGL_ModelInstance3DView {
@@ -70,18 +71,20 @@ namespace SF3.Win.Views.X8PC {
             }
 
             _lastFrameIdx = -1;
-            UpdateKeyframeInfo();
 
             if (_animation != null) {
                 _minFrame = _animation.StartFrame;
                 _maxFrame = _animation.StartFrame + _animation.FrameCount - 1;
             }
             else {
-                _minFrame = PolyChar?.GetEarliestKeyframe() ?? 0;
-                _maxFrame = PolyChar?.GetLatestKeyframe() ?? 0;
+                _minFrame = PolyChar?.BoneKeyframesTable?.GetEarliestKeyframe() ?? 0;
+                _maxFrame = PolyChar?.BoneKeyframesTable?.GetLatestKeyframe() ?? 0;
             }
-
             _frame = _minFrame;
+
+            // TODO: Animation-specific keyframes.
+            _keyframes = PolyChar?.BoneKeyframesTable;
+            UpdateKeyframeInfo();
 
             if (Control != null)
                 Control.Update(_polyChar, _instances);
@@ -117,7 +120,7 @@ namespace SF3.Win.Views.X8PC {
         }
 
         private void UpdateKeyframeInfo()
-            => _keyframeInfo = (_polyChar == null) ? [] : _polyChar.GetAnimationBoneKeyframes(_frame);
+            => _keyframeInfo = (_polyChar == null) ? [] : _polyChar.GetAnimationBoneKeyframeInfos(_keyframes, _frame);
 
         private float GetFramesUntilNextKeyframe() {
             if (_keyframeInfo.Length == 0)
@@ -145,7 +148,7 @@ namespace SF3.Win.Views.X8PC {
                 _lastFrameIdx = frameIdx;
                 for (int i = 0; i < _instances.Length; i++) {
                     var inst = _instances[i];
-                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(_instBones[i], _keyframeInfo);
+                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(_instBones[i], _keyframes, _keyframeInfo);
                 }
             }
         }
@@ -172,5 +175,6 @@ namespace SF3.Win.Views.X8PC {
         private SGL_ModelInstance[] _instances = [];
         private IBone[] _instBones = [];
         private PolyChar.BoneKeyframeInfo[] _keyframeInfo;
+        private IReadOnlyList<IBoneKeyframe> _keyframes;
     }
 }

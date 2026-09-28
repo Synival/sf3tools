@@ -294,8 +294,8 @@ namespace SF3.Models.Structs.X8PC {
             public override string ToString() => $"{{ A={IndexA}, B={IndexB}) Frames={FramesLeft}, Mix={Mix} }}";
         }
 
-        private KeyframeInfo GetAnimationKeyframe<T>(T[] list, Func<T, int> frameGetter, float frame, int totalFrames) {
-            int max = list.Length;
+        private KeyframeInfo GetAnimationKeyframe<T>(IReadOnlyList<T> list, Func<T, int> frameGetter, float frame, int totalFrames) {
+            int max = list.Count;
             var lastF = 0;
 
             for (int i = 0; i < max; i++) {
@@ -320,13 +320,13 @@ namespace SF3.Models.Structs.X8PC {
             public KeyframeInfo Scale;
         }
 
-        public BoneKeyframeInfo[] GetAnimationBoneKeyframes(float frame) {
-            var totalFrames = GetLatestKeyframe();
+        public BoneKeyframeInfo[] GetAnimationBoneKeyframeInfos(IReadOnlyList<IBoneKeyframe> keyframes, float frame) {
+            var totalFrames = keyframes.GetLatestKeyframe();
 
-            var numBones = BoneKeyframesTable.Count;
-            var pos   = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.PosTable.AsArray(),   y => y.Frame, frame, totalFrames)).ToArray();
-            var rot   = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.RotTable.AsArray(),   y => y.Frame, frame, totalFrames)).ToArray();
-            var scale = BoneKeyframesTable.Select(x => GetAnimationKeyframe(x.ScaleTable.AsArray(), y => y.Frame, frame, totalFrames)).ToArray();
+            var numBones = keyframes.Count;
+            var pos   = keyframes.Select(x => GetAnimationKeyframe(x.PosTable,   y => y.FrameNum, frame, totalFrames)).ToArray();
+            var rot   = keyframes.Select(x => GetAnimationKeyframe(x.RotTable,   y => y.FrameNum, frame, totalFrames)).ToArray();
+            var scale = keyframes.Select(x => GetAnimationKeyframe(x.ScaleTable, y => y.FrameNum, frame, totalFrames)).ToArray();
 
             var boneKeyframes = new BoneKeyframeInfo[numBones];
             for (int i = 0; i < numBones; i++)
@@ -335,7 +335,7 @@ namespace SF3.Models.Structs.X8PC {
             return boneKeyframes;
         }
 
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, BoneKeyframeInfo? boneFrame, IReadOnlyList<IBoneKeyframe> keyframes) {
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, IReadOnlyList<IBoneKeyframe> keyframes, BoneKeyframeInfo? boneFrame) {
             var matrix = Matrix4x4.Identity;
 
             if (bone.BoneID.HasValue && boneFrame.HasValue) {
@@ -369,11 +369,11 @@ namespace SF3.Models.Structs.X8PC {
             return matrix;
         }
 
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, BoneKeyframeInfo[] keyframeInfo) {
+        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, IReadOnlyList<IBoneKeyframe> keyframes, BoneKeyframeInfo[] keyframeInfo) {
             var matrix = Matrix4x4.Identity;
 
             void ApplyMatrices(IBone b) {
-                matrix *= GetModelInstanceMatrixInAnimation(b, (b.BoneID.HasValue) ? keyframeInfo[b.BoneID.Value] : (BoneKeyframeInfo?) null, BoneKeyframesTable);
+                matrix *= GetModelInstanceMatrixInAnimation(b, keyframes, (b.BoneID.HasValue) ? keyframeInfo[b.BoneID.Value] : (BoneKeyframeInfo?) null);
                 if (b.Parent != null)
                     ApplyMatrices(b.Parent);
             }
@@ -381,30 +381,6 @@ namespace SF3.Models.Structs.X8PC {
             ApplyMatrices(bone);
 
             return matrix;
-        }
-
-        public int GetEarliestKeyframe() {
-            return BoneKeyframesTable.Count > 0
-                ? BoneKeyframesTable.Min(x => Math.Min(
-                    x.PosTable.Count > 0 ? x.PosTable.Min(y => y.Frame) : 0,
-                    Math.Min(
-                        x.RotTable.Count   > 0 ? x.RotTable.Min(y => y.Frame) : 0,
-                        x.ScaleTable.Count > 0 ? x.ScaleTable.Min(y => y.Frame) : 0
-                    )
-                ))
-                : 0;
-        }
-
-        public int GetLatestKeyframe() {
-            return BoneKeyframesTable.Count > 0
-                ? BoneKeyframesTable.Max(x => Math.Max(
-                    x.PosTable.Count > 0 ? x.PosTable.Max(y => y.Frame) : 0,
-                    Math.Max(
-                        x.RotTable.Count   > 0 ? x.RotTable.Max(y => y.Frame) : 0,
-                        x.ScaleTable.Count > 0 ? x.ScaleTable.Max(y => y.Frame) : 0
-                    )
-                ))
-                : 0;
         }
 
         private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;
