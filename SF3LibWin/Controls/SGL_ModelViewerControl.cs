@@ -204,9 +204,14 @@ namespace SF3.Win.Controls {
             _depth  = _maxZ - _minZ;
 
             _size   = Math.Max(0.1f, Math.Max(_width, Math.Max(_height, _depth)));
-            _center = new Vector3((_minX + _maxX) / 2, (_minY + _maxY) / 2, (_minZ + _maxZ) / 2);
 
-            _dist = (float) Math.Pow(_size, 0.875f) * 6.5f / Zoom;
+            _targetCenter = new Vector3((_minX + _maxX) / 2, (_minY + _maxY) / 2, (_minZ + _maxZ) / 2);
+            _targetDist   = (float) Math.Pow(_size, 0.875f) * 6.5f / Zoom;
+
+            if (!(_center.HasValue && _dist.HasValue)) {
+                _center = _targetCenter;
+                _dist   = _targetDist;
+            }
         }
 
         private void UpdateCameraPosition() {
@@ -215,9 +220,9 @@ namespace SF3.Win.Controls {
             Position = new Vector3(0.0f, 0.0f, 1.0f)
                 * Matrix3.CreateRotationX(Pitch * (float) Math.PI / 180.0f)
                 * Matrix3.CreateRotationY((Yaw ?? GlobalYaw) * (float) Math.PI / 180.0f)
-                * _dist;
+                * (_dist ?? 1f);
 
-            Position += _center;
+            Position += (_center ?? new Vector3());
         }
 
         private void UpdateViewMatrix() {
@@ -301,9 +306,11 @@ namespace SF3.Win.Controls {
 
             TextureContainer = texContainer;
             _sglModels       = sglModels;
+            _center          = null;
+            _dist            = null;
+            _targetCenter    = null;
+            _targetDist      = null;
             _size            = 1.0f;
-            _center          = new Vector3();
-            _dist            = 1.0f;
 
             if (_models != null) {
                 _models.Reset();
@@ -335,7 +342,7 @@ namespace SF3.Win.Controls {
         private float _updateTexMs = 0;
         private bool _wasInvisible = true;
 
-        private void IncrementFrame(object sender, float delta) {
+        private void IncrementFrame(object sender, float deltaInMs) {
             if (IsDisposed)
                 return;
 
@@ -347,9 +354,21 @@ namespace SF3.Win.Controls {
             }
             _wasInvisible = false;
 
+            if (_targetCenter.HasValue && _targetDist.HasValue) {
+                if (_center.HasValue && _dist.HasValue) {
+                    _center = Approach(_center.Value, _targetCenter.Value, 250f, deltaInMs);
+                    _dist   = Approach(_dist.Value, _targetDist.Value, 250f, deltaInMs);
+                    System.Diagnostics.Debug.WriteLine($"{_center.Value.X}, {_center.Value.Y}, {_center.Value.Z}, {_dist.Value}");
+                }
+                else {
+                    _center = _targetCenter;
+                    _dist = _targetDist;
+                }
+            }
+
             MakeCurrent();
 
-            _updateTexMs += delta;
+            _updateTexMs += deltaInMs;
             if (_updateTexMs > 500)
                 _updateTexMs = 500;
 
@@ -365,7 +384,22 @@ namespace SF3.Win.Controls {
             Invalidate();
 
             // Run any custom timers attached.
-            FrameTick?.Invoke(this, delta);
+            FrameTick?.Invoke(this, deltaInMs);
+        }
+
+        private Vector3 Approach(Vector3 start, Vector3 target, float halfDistTime, float t) {
+            var distVec = target - start;
+            var dist = distVec.Length;
+            if (dist < 0.01f)
+                return target;
+            var approachedDist = Approach(0, dist, halfDistTime, t);
+            return start + distVec.Normalized() * approachedDist;
+        }
+
+        private float Approach(float start, float target, float halfDistTime, float t) {
+            if (Math.Abs(target - start) < 0.01f)
+                return target;
+            return target + (start - target) * (float) Math.Pow(2.0f, -t / halfDistTime);
         }
 
         public Vector3 Position { get; private set; }
@@ -408,8 +442,10 @@ namespace SF3.Win.Controls {
         private float _depth  = 0f;
 
         private float _size = 0f;
-        private Vector3 _center;
-        private float _dist = 0f;
+        private Vector3? _targetCenter;
+        private float? _targetDist;
+        private Vector3? _center;
+        private float? _dist = 0f;
 
         private Matrix4 _projectionMatrix;
         private Matrix4 _viewMatrix;
