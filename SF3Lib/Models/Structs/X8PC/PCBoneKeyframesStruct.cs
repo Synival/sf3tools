@@ -50,7 +50,7 @@ namespace SF3.Models.Structs.X8PC {
             _scaleYPtrAddr         = Address + 0x38; // 4 bytes
             _scaleZPtrAddr         = Address + 0x3C; // 4 bytes
 
-            Tables = new ITable[] {
+            Tables = ((int) NumPosKeyFrames == -1) ? new ITable[0] : new ITable[] {
                 PosTable = PCBoneKeyframePosTable.Create(
                     data, $"Bone{ID:D2}_KeyframePos", ID, (int) NumPosKeyFrames,
                         (int) PosFramesOffset, (int) PosXPtr, (int) PosYPtr, (int) PosZPtr
