@@ -409,7 +409,18 @@ namespace SF3.Win.Controls {
         public float? Yaw { get; set; } = null;
         public float Pitch { get; set; } = -30.0f;
         public bool? ForceLighting { get; set; }
-        public float Zoom { get; set; } = 1.0f;
+
+        public float _zoom = 1.0f;
+        public float Zoom {
+            get => _zoom;
+            set {
+                if (_zoom != value) {
+                    _zoom = value;
+                    _dist = null;
+                }
+            }
+        }
+
         public float PosHeight { get; set; } = 0.45f;
         public Vector3 LightDirection { get; set; } = new Vector3(-0.50f, 0.25f, 0.75f);
 
