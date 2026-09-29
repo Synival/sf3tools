@@ -8,7 +8,7 @@ using SF3.ByteData;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PCAnimationDefStruct : Struct, IAnimation {
+    public class PCAnimationDefStruct : Struct, IModelAnimation {
         public readonly int _startFrameAddr;
         public readonly int _frameCountAddr;
         public readonly int _animIdAddr;

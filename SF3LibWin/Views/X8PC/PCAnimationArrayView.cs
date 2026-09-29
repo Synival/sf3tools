@@ -4,7 +4,7 @@ using CommonLib.Rigging;
 using SF3.Models.Structs.X8PC;
 
 namespace SF3.Win.Views.X8PC {
-    public class PCAnimationArrayView : ArrayView<IAnimation, PCAnimationView> {
+    public class PCAnimationArrayView : ArrayView<IModelAnimation, PCAnimationView> {
         public PCAnimationArrayView(string name, PolyChar model) : base(
             name,
             model?.AnimationChunkHeader?.AnimationDefTable?.ToArray(),

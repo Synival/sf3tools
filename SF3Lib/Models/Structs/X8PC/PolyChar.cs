@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using CommonLib.Arrays;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
@@ -284,103 +283,6 @@ namespace SF3.Models.Structs.X8PC {
             }
 
             return true;
-        }
-
-        public struct KeyframeInfo {
-            public int IndexA, IndexB;
-            public float? FramesLeft;
-            public float Mix;
-
-            public override string ToString() => $"{{ A={IndexA}, B={IndexB}) Frames={FramesLeft}, Mix={Mix} }}";
-        }
-
-        private KeyframeInfo GetAnimationKeyframe<T>(IReadOnlyList<T> list, Func<T, int> frameGetter, float frame, int totalFrames) {
-            int max = list.Count;
-            var lastF = 0;
-
-            for (int i = 0; i < max; i++) {
-                var element = list[i];
-                var f = frameGetter(element);
-                if ((frame >= lastF && frame < f) || i == max - 1) {
-                    if (i == 0)
-                        return new KeyframeInfo() { IndexA = 0, IndexB = 0, FramesLeft = f - frame, Mix = 0.0f };
-                    else if (frame < f)
-                        return new KeyframeInfo() { IndexA = i - 1, IndexB = i, FramesLeft = f - frame, Mix = (frame - lastF) / Math.Max(1, (f - lastF)) };
-                    else
-                        return new KeyframeInfo() { IndexA = i, IndexB = 0, FramesLeft = totalFrames - frame, Mix = (frame - f) / Math.Max(1, (totalFrames - f)) };
-                }
-                lastF = f;
-            }
-            return new KeyframeInfo() { IndexA = 0, IndexB = 0, Mix = 0.0f };
-        }
-
-        public struct BoneKeyframeInfo {
-            public KeyframeInfo Pos;
-            public KeyframeInfo Rot;
-            public KeyframeInfo Scale;
-        }
-
-        public BoneKeyframeInfo[] GetAnimationBoneKeyframeInfos(IReadOnlyList<IBoneKeyframe> keyframes, float frame) {
-            var totalFrames = keyframes.GetLatestKeyframe();
-
-            var numBones = keyframes.Count;
-            var pos   = keyframes.Select(x => GetAnimationKeyframe(x.PosTable,   y => y.FrameNum, frame, totalFrames)).ToArray();
-            var rot   = keyframes.Select(x => GetAnimationKeyframe(x.RotTable,   y => y.FrameNum, frame, totalFrames)).ToArray();
-            var scale = keyframes.Select(x => GetAnimationKeyframe(x.ScaleTable, y => y.FrameNum, frame, totalFrames)).ToArray();
-
-            var boneKeyframes = new BoneKeyframeInfo[numBones];
-            for (int i = 0; i < numBones; i++)
-                boneKeyframes[i] = new BoneKeyframeInfo { Pos = pos[i], Rot = rot[i], Scale = scale[i] };
-
-            return boneKeyframes;
-        }
-
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, IReadOnlyList<IBoneKeyframe> keyframes, BoneKeyframeInfo? boneFrame) {
-            var matrix = Matrix4x4.Identity;
-
-            if (bone.BoneID.HasValue && boneFrame.HasValue) {
-                var bId = bone.BoneID.Value;
-
-                var posFrame   = boneFrame.Value.Pos;
-                var rotFrame   = boneFrame.Value.Rot;
-                var scaleFrame = boneFrame.Value.Scale;
-
-                var posTable = keyframes[bId].PosTable;
-                var rotTable = keyframes[bId].RotTable;
-                var scaleTable = keyframes[bId].ScaleTable;
-
-                var pos1   = posTable.Count   > posFrame.IndexA   ? posTable[posFrame.IndexA].Vector     : new VECTOR(0, 0, 0);
-                var rot1   = rotTable.Count   > rotFrame.IndexA   ? rotTable[rotFrame.IndexA].Quaternion : new QUATERNION(0, 0, 0, 1);
-                var scale1 = scaleTable.Count > scaleFrame.IndexA ? scaleTable[scaleFrame.IndexA].Vector : new VECTOR(1, 1, 1);
-
-                var pos2   = posTable.Count   > posFrame.IndexB   ? posTable[posFrame.IndexB].Vector     : new VECTOR(0, 0, 0);
-                var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].Quaternion : new QUATERNION(0, 0, 0, 1);
-                var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].Vector : new VECTOR(1, 1, 1);
-
-                matrix *= IBoneExtensions.CreateMatrix(
-                    pos1,   pos2,   posFrame.Mix,
-                    rot1,   rot2,   rotFrame.Mix,
-                    scale1, scale2, scaleFrame.Mix
-                );
-            }
-            else if (bone.Tag == 0x30 || bone.Tag == 0x81)
-                matrix *= bone.CreateMatrix();
-
-            return matrix;
-        }
-
-        public Matrix4x4 GetModelInstanceMatrixInAnimation(IBone bone, IReadOnlyList<IBoneKeyframe> keyframes, BoneKeyframeInfo[] keyframeInfo) {
-            var matrix = Matrix4x4.Identity;
-
-            void ApplyMatrices(IBone b) {
-                matrix *= GetModelInstanceMatrixInAnimation(b, keyframes, (b.BoneID.HasValue) ? keyframeInfo[b.BoneID.Value] : (BoneKeyframeInfo?) null);
-                if (b.Parent != null)
-                    ApplyMatrices(b.Parent);
-            }
-
-            ApplyMatrices(bone);
-
-            return matrix;
         }
 
         private Dictionary<int, IAnimatableTexture> _animatableTextureDictionary;

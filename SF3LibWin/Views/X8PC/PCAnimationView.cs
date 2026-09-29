@@ -122,7 +122,7 @@ namespace SF3.Win.Views.X8PC {
         }
 
         private void UpdateKeyframeInfo()
-            => _keyframeInfo = (_polyChar == null) ? [] : _polyChar.GetAnimationBoneKeyframeInfos(_keyframes, _frame);
+            => _keyframeInfo = _keyframes?.GetAnimationBoneKeyframeInfos(_frame) ?? [];
 
         private float GetFramesUntilNextKeyframe() {
             if (_keyframeInfo.Length == 0)
@@ -150,16 +150,16 @@ namespace SF3.Win.Views.X8PC {
                 _lastFrameIdx = frameIdx;
                 for (int i = 0; i < _instances.Length; i++) {
                     var inst = _instances[i];
-                    inst.Matrix = _polyChar.GetModelInstanceMatrixInAnimation(_instBones[i], _keyframes, _keyframeInfo);
+                    inst.Matrix = _keyframes.GetModelInstanceMatrixInAnimation(_keyframeInfo, _instBones[i]);
                 }
             }
         }
 
         private PolyChar _polyChar = null;
-        private IAnimation _animation = null;
+        private IModelAnimation _animation = null;
 
         public PolyChar PolyChar => _polyChar;
-        public IAnimation Animation => _animation;
+        public IModelAnimation Animation => _animation;
 
         public void SetAnimation(PolyChar polyChar, PCAnimationDefStruct animation) {
             if (_polyChar != polyChar || _animation != animation) {
@@ -176,7 +176,7 @@ namespace SF3.Win.Views.X8PC {
 
         private SGL_ModelInstance[] _instances = [];
         private IBone[] _instBones = [];
-        private PolyChar.BoneKeyframeInfo[] _keyframeInfo;
+        private BoneKeyframeIndices[] _keyframeInfo;
         private IReadOnlyList<IBoneKeyframe> _keyframes;
     }
 }

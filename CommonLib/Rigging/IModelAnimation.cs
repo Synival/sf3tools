@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace CommonLib.Rigging {
-    public interface IAnimation {
+    public interface IModelAnimation {
         string AnimationName { get; }
         int StartFrame { get; }
         int FrameCount { get; }

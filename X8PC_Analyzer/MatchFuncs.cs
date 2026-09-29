@@ -5,7 +5,6 @@ using SF3.Models.Structs.X8PC;
 using CommonLib.Extensions;
 using CommonLib.Rigging;
 using System.Numerics;
-using static SF3.Models.Structs.X8PC.PolyChar;
 using SF3.Types;
 
 namespace X8PC_Analyzer {
@@ -66,10 +65,10 @@ namespace X8PC_Analyzer {
                         return null;
                 }
 
-                var keyframes = pc.GetAnimationBoneKeyframeInfos(pc.BoneKeyframesTable, 0f);
+                var keyframes = pc.BoneKeyframesTable.GetAnimationBoneKeyframeInfos(0f);
                 Matrix4x4 MatrixGetter(IBone bone) {
-                    var keyframe = bone.BoneID.HasValue ? keyframes[bone.BoneID!.Value] : (BoneKeyframeInfo?) null;
-                    return pc.GetModelInstanceMatrixInAnimation(bone, pc.BoneKeyframesTable, keyframe);
+                    var keyframe = bone.BoneID.HasValue ? keyframes[bone.BoneID!.Value] : (BoneKeyframeIndices?) null;
+                    return pc.BoneKeyframesTable.GetModelInstanceMatrixInAnimation(bone, keyframe);
                 }
 
                 var data = converter.ModelToGLB_Data(rig, pc, ModelGetter, MatrixGetter, pc);

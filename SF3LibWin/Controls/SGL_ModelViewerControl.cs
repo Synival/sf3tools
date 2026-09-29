@@ -358,7 +358,6 @@ namespace SF3.Win.Controls {
                 if (_center.HasValue && _dist.HasValue) {
                     _center = Approach(_center.Value, _targetCenter.Value, 250f, deltaInMs);
                     _dist   = Approach(_dist.Value, _targetDist.Value, 250f, deltaInMs);
-                    System.Diagnostics.Debug.WriteLine($"{_center.Value.X}, {_center.Value.Y}, {_center.Value.Z}, {_dist.Value}");
                 }
                 else {
                     _center = _targetCenter;
