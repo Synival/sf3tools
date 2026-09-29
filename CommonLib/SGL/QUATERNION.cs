@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 
 namespace CommonLib.SGL {
     public struct QUATERNION {
@@ -104,6 +105,15 @@ namespace CommonLib.SGL {
                 { "Z", Z.Float },
                 { "W", W.Float },
             };
+        }
+
+        public void Normalize() {
+            float x = X.Float, y = Y.Float, z = Z.Float, w = W.Float;
+            var length = (float) Math.Sqrt(x*x + y*y + z*z + w*w);
+            X.Float /= length;
+            Y.Float /= length;
+            Z.Float /= length;
+            W.Float /= length;
         }
     }
 }

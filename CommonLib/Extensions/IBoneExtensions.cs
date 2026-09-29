@@ -99,11 +99,22 @@ namespace CommonLib.Extensions {
                 scaleMix
             );
 
-            var rot = Quaternion.Lerp(
-                new Quaternion(rot1.X.Float, -rot1.Y.Float, -rot1.Z.Float, rot1.W.Float),
-                new Quaternion(rot2.X.Float, -rot2.Y.Float, -rot2.Z.Float, rot2.W.Float),
-                rotMix
-            );
+            // Using Lerp instead of Slerp because that's what SF3 does.
+            // It also doesn't correct for "long-way-round" rotations, so we can't use the Lerp() / Slerp() provided
+            // by System.Numerics.Quaternion. We're doing it manually!
+            var r1 = new Quaternion(rot1.X.Float, -rot1.Y.Float, -rot1.Z.Float, rot1.W.Float);
+            var r2 = new Quaternion(rot2.X.Float, -rot2.Y.Float, -rot2.Z.Float, rot2.W.Float);
+
+            var t = rotMix;
+            var t1 = 1 - t;
+            var rot = new Quaternion();
+            rot.X = t1 * r1.X + t * r2.X;
+            rot.Y = t1 * r1.Y + t * r2.Y;
+            rot.Z = t1 * r1.Z + t * r2.Z;
+            rot.W = t1 * r1.W + t * r2.W;
+
+            // (It also doesn't normalize, but it looks terrible sometimes if we don't, so do it anyway.)
+            rot = Quaternion.Normalize(rot);
 
             var pos = Vector3.Lerp(
                 new Vector3(pos1.X.Float, -pos1.Y.Float, -pos1.Z.Float),
