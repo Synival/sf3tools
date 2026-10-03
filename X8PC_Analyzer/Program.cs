@@ -24,7 +24,7 @@ namespace X8PC_Analyzer {
         /// <param name="x8pcFile">Deserialized IX8PC_File to analyze.</param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X8PC_Match_Func(string filename, IX8PC_File x8pcFile) {
-            return MatchFuncs.WriteGLBs(x8pcFile, filename, forceLit: true);
+            return MatchFuncs.PolyCharsWithAnimationCommand(x8pcFile, 0x02);
         }
 
         private static int s_logIndex = 0;

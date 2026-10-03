@@ -93,7 +93,7 @@ namespace SF3.Models.Structs.X8PC {
                     return PolyChar.BoneKeyframesTable;
 
                 var idx = AttackAnimChunkIdx.Value;
-                if (idx >= 0 && idx < PolyChar.AttackAnimBoneKeyframesTable.Length)
+                if (idx >= 0 && idx < PolyChar.AttackAnimBoneKeyframesTable?.Length)
                     return PolyChar.AttackAnimBoneKeyframesTable[idx];
                     
                 return null;

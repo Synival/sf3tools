@@ -9,6 +9,19 @@ using SF3.Types;
 
 namespace X8PC_Analyzer {
     public static class MatchFuncs {
+        public static string[]? MatchPolyChars(IX8PC_File x8pcFile, Func<PolyChar, string[]?> func) {
+            var stringGroups = x8pcFile.PolyCharTable.ToDictionary(x => x, x => func(x)).ToArray();
+            if (stringGroups.All(x => x.Value == null))
+                return null;
+            return stringGroups
+                .Where(x => x.Value != null)
+                .SelectMany(x => (x.Value ?? [])
+                    .Select(y => $"{x.Key.Name}: {(y ?? "(null)")}")
+                    .ToArray()
+                )
+                .ToArray();
+        }
+
         public static string[]? HasUnexpectedValuesInTexHeader(IX8PC_File x8pcFile) {
             var strings = new List<string>();
 
@@ -150,6 +163,13 @@ namespace X8PC_Analyzer {
                     report.Add($"{pc.ID}");
             }
             return report.ToArray();
+        }
+
+        public static string[]? PolyCharsWithAnimationCommand(IX8PC_File x8pcFile, int cmd) {
+            return MatchPolyChars(x8pcFile, pc => {
+                var animationsWithCmd = pc.AnimationChunkHeader.AnimationCmdTables.Where(x => x.Any(y => y.Command == cmd)).ToArray();
+                return animationsWithCmd.Select(x => x.Name).ToArray();
+            });
         }
     }
 }
