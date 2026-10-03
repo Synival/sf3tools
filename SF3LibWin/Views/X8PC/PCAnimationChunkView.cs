@@ -1,6 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using CommonLib.NamedValues;
 using SF3.Models.Structs.X8PC;
+using SF3.Models.Tables.X8PC;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationChunkView : TabView {
@@ -9,6 +11,7 @@ namespace SF3.Win.Views.X8PC {
 
             HeaderView        = new DataModelView("Header", model?.AnimationChunkHeader, ngc, typeof(PCAnimationChunkHeader));
             AnimationDefView  = new TableView("Animations", model?.AnimationChunkHeader?.AnimationDefTable, ngc, typeof(PCAnimationDefStruct));
+            AnimCmdsView      = new TableArrayView<PCAnimationCmdTable>("Animation Commands", model?.AnimationChunkHeader?.AnimationCmdTables?.ToArray(), ngc);
             BoneKeyframesView = new PCBoneKeyframesTableView("Bone Keyframes", model?.BoneKeyframesTable, ngc);
 
             Model             = model;
@@ -22,6 +25,7 @@ namespace SF3.Win.Views.X8PC {
 
             CreateChild(HeaderView);
             CreateChild(AnimationDefView);
+            CreateChild(AnimCmdsView);
             CreateChild(BoneKeyframesView);
 
             return Control;
@@ -36,6 +40,7 @@ namespace SF3.Win.Views.X8PC {
 
                     HeaderView.Model        = _model?.AnimationChunkHeader;
                     AnimationDefView.Table  = _model?.AnimationChunkHeader?.AnimationDefTable;
+                    AnimCmdsView.Elements   = _model?.AnimationChunkHeader?.AnimationCmdTables?.ToArray();
                     BoneKeyframesView.Table = _model?.BoneKeyframesTable;
                 }
             }
@@ -45,6 +50,7 @@ namespace SF3.Win.Views.X8PC {
 
         public DataModelView HeaderView { get; }
         public TableView AnimationDefView { get; }
+        public TableArrayView<PCAnimationCmdTable> AnimCmdsView { get; }
         public PCBoneKeyframesTableView BoneKeyframesView { get; }
     }
 }

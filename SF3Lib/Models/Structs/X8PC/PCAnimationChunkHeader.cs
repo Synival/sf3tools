@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommonLib.Attributes;
 using CommonLib.NamedValues;
 using CommonLib.SGL;
@@ -19,8 +20,6 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _halfBoundingBoxZAddr;
         private readonly int _boneKeyframesTableOffsetAddr;
 
-        public PCAnimationDefTable AnimationDefTable { get; }
-
         public PCAnimationChunkHeader(IByteData data, int id, string name, int address, PolyChar polyChar, INameGetterContext ngc)
         : base(data, id, name, address, 0x1C) {
             PolyChar = polyChar;
@@ -37,7 +36,9 @@ namespace SF3.Models.Structs.X8PC {
             AnimationDefTable = PCAnimationDefTable.Create(Data, nameof(PCAnimationDefTable), Address + 0x1C, PolyChar, NameGetterContext);
             Size = 0x1C + AnimationDefTable.SizeInBytes;
 
-            Tables = new ITable[] { AnimationDefTable };
+            var tables = new List<ITable>() { AnimationDefTable };
+            tables.AddRange(AnimationCmdTables = AnimationDefTable.Select(x => PCAnimationCmdTable.Create(Data, x.AnimationName, (int) x.AniCommandsOffset, x)).ToArray());
+            Tables = tables.ToArray();
         }
 
         [TableViewModelColumn(addressField: nameof(_centerXAddr), displayOrder: 0)]
@@ -90,5 +91,8 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         public IEnumerable<ITable> Tables { get; }
+
+        public PCAnimationDefTable AnimationDefTable { get; }
+        public PCAnimationCmdTable[] AnimationCmdTables { get; }
     }
 }
