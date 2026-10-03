@@ -37,18 +37,18 @@ namespace CommonLib.Extensions {
 
             for (int i = 0; i < max; i++) {
                 var element = list[i];
-                var f = frameGetter(element);
-                if ((frame >= lastF && frame < f) || i == max - 1) {
+                var nextF = frameGetter(element);
+                if ((frame >= lastF && frame < nextF) || i == max - 1) {
                     if (i == 0)
-                        return new BoneKeyframeComponentIndices() { IndexA = 0, IndexB = 0, FramesLeft = f - frame, Mix = 0.0f };
-                    else if (frame < f)
-                        return new BoneKeyframeComponentIndices() { IndexA = i - 1, IndexB = i, FramesLeft = f - frame, Mix = (frame - lastF) / Math.Max(1, (f - lastF)) };
+                        return new BoneKeyframeComponentIndices(0, 0, 0, nextF, 0);
+                    else if (frame < nextF)
+                        return new BoneKeyframeComponentIndices(i - 1, i, lastF, nextF, frame);
                     else
-                        return new BoneKeyframeComponentIndices() { IndexA = i, IndexB = 0, FramesLeft = totalFrames - frame, Mix = (frame - f) / Math.Max(1, (totalFrames - f)) };
+                        return new BoneKeyframeComponentIndices(i, 0, nextF, totalFrames, frame);
                 }
-                lastF = f;
+                lastF = nextF;
             }
-            return new BoneKeyframeComponentIndices() { IndexA = 0, IndexB = 0, Mix = 0.0f };
+            return new BoneKeyframeComponentIndices(0, 0, 0, 0, 0.0f);
         }
 
         public static BoneKeyframeIndices[] GetAnimationBoneKeyframeInfos(this IReadOnlyList<IBoneKeyframe> keyframes, float frame) {
@@ -88,10 +88,13 @@ namespace CommonLib.Extensions {
                 var rot2   = rotTable.Count   > rotFrame.IndexB   ? rotTable[rotFrame.IndexB].Quaternion : new QUATERNION(0, 0, 0, 1);
                 var scale2 = scaleTable.Count > scaleFrame.IndexB ? scaleTable[scaleFrame.IndexB].Vector : new VECTOR(1, 1, 1);
 
+                // A keyframe that is 1 frame away is just a snap. If the lerp distance looks extreme, disable interpolation.
+                // Don't interpolate position or scale either if they're the same span of frames.
+                var noRotInterp = rotFrame.TotalFrames <= 1 && rot1.GetLerpDist(rot2) > 1.00f;
                 matrix *= IBoneExtensions.CreateMatrix(
-                    pos1,   pos2,   posFrame.Mix,
-                    rot1,   rot2,   rotFrame.Mix,
-                    scale1, scale2, scaleFrame.Mix
+                    pos1,   pos2,   (noRotInterp && posFrame.SharesKeyframe(rotFrame)) ? 0 : posFrame.Mix,
+                    rot1,   rot2,   noRotInterp ? 0 : rotFrame.Mix,
+                    scale1, scale2, (noRotInterp && scaleFrame.SharesKeyframe(rotFrame)) ? 0 : scaleFrame.Mix
                 );
             }
             else if (bone.Tag == 0x30 || bone.Tag == 0x81)

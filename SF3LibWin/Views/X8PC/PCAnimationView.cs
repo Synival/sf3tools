@@ -133,12 +133,12 @@ namespace SF3.Win.Views.X8PC {
             float scaleFrames = 1000000;
 
             foreach (var kfi in _keyframeInfo) {
-                if (kfi.Pos.FramesLeft.HasValue && kfi.Pos.FramesLeft.Value < posFrames)
-                    posFrames = kfi.Pos.FramesLeft.Value;
-                if (kfi.Rot.FramesLeft.HasValue && kfi.Rot.FramesLeft.Value < rotFrames)
-                    rotFrames = kfi.Rot.FramesLeft.Value;
-                if (kfi.Scale.FramesLeft.HasValue && kfi.Scale.FramesLeft.Value < scaleFrames)
-                    scaleFrames = kfi.Scale.FramesLeft.Value;
+                if (kfi.Pos.FramesLeft < posFrames)
+                    posFrames = kfi.Pos.FramesLeft;
+                if (kfi.Rot.FramesLeft < rotFrames)
+                    rotFrames = kfi.Rot.FramesLeft;
+                if (kfi.Scale.FramesLeft < scaleFrames)
+                    scaleFrames = kfi.Scale.FramesLeft;
             }
 
             return Math.Min(posFrames, Math.Min(rotFrames, scaleFrames));
