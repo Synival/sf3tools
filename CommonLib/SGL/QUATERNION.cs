@@ -115,5 +115,38 @@ namespace CommonLib.SGL {
             Z.Float /= length;
             W.Float /= length;
         }
+
+        public void Negate() {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
+            W = -W;
+        }
+
+        public float Dot(QUATERNION q2) {
+            return
+                X.Float * q2.X.Float +
+                Y.Float * q2.Y.Float +
+                Z.Float * q2.Z.Float +
+                W.Float * q2.W.Float;
+        }
+
+        public float AngularDistance(QUATERNION q2) {
+            float dot = Dot(q2);
+            float absDot = Math.Min(Math.Abs(dot), 1.0f);
+            return 2.0f * (float) Math.Acos(absDot);
+        }
+
+        public float AngularDistanceInDegrees(QUATERNION q2)
+            => AngularDistance(q2) * (180.0f / (float) Math.PI);
+
+        public float GetLerpDist(QUATERNION rot2) {
+            return (float) (
+                Math.Abs(X.Float - rot2.X.Float) +
+                Math.Abs(Y.Float - rot2.Y.Float) +
+                Math.Abs(Z.Float - rot2.Z.Float) +
+                Math.Abs(W.Float - rot2.W.Float)
+            );
+        }
     }
 }
