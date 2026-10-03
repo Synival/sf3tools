@@ -70,7 +70,7 @@ namespace SF3.Win.Views.X8PC {
                 _instBones[i] = instsWithBones[i].Bone;
             }
 
-            _lastFrameIdx = -1;
+            _lastFrame = -1;
 
             if (_animation != null) {
                 _minFrame = _animation.StartFrame;
@@ -96,7 +96,7 @@ namespace SF3.Win.Views.X8PC {
             if (_maxFrame <= _minFrame)
                 _frame = _minFrame;
             else {
-                _frame += Math.Min(60, delta) * 20.0f / 1000.0f;
+                _frame += Math.Min(60, delta) * 30.0f / 1000.0f;
                 while (_frame >= _maxFrame)
                     _frame -= Math.Max(1, _maxFrame - _minFrame);
             }
@@ -145,9 +145,8 @@ namespace SF3.Win.Views.X8PC {
         }
 
         private void UpdateModelMatrix() {
-            int frameIdx = (int) (_frame * 4.0f);
-            if (_lastFrameIdx != frameIdx) {
-                _lastFrameIdx = frameIdx;
+            if (_lastFrame != _frame) {
+                _lastFrame = _frame;
                 for (int i = 0; i < _instances.Length; i++) {
                     var inst = _instances[i];
                     inst.Matrix = _keyframes.GetModelInstanceMatrixInAnimation(_keyframeInfo, _instBones[i]);
@@ -169,10 +168,10 @@ namespace SF3.Win.Views.X8PC {
             }
         }
 
+        private float _lastFrame = -1;
         private float _frame = 0;
         private float _minFrame = 0;
         private float _maxFrame = 0;
-        private int _lastFrameIdx = -1;
 
         private SGL_ModelInstance[] _instances = [];
         private IBone[] _instBones = [];
