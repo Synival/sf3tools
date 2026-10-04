@@ -40,6 +40,7 @@ namespace SF3.Types {
         Music,
         OrderChoiceMode,
         PCAnimationType,
+        PCAnimationCmdType,
         Sex,
         SpawnType,
         Special,

@@ -79,6 +79,7 @@ namespace SF3.NamedValues {
                 { NamedValueType.Music,               new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.MusicInfo.Info[Scenario])) },
                 { NamedValueType.OrderChoiceMode,     new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.OrderChoiceModeInfo)) },
                 { NamedValueType.PCAnimationType,     new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.PCAnimationTypeInfo)) },
+                { NamedValueType.PCAnimationCmdType,  new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.PCAnimationCmdTypeInfo)) },
                 { NamedValueType.Sex,                 new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SexInfo)) },
                 { NamedValueType.SpawnType,           new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpawnTypeInfo)) },
                 { NamedValueType.Special,             new SubMethods((o, p, v, a) => new NameAndInfo(v, ValueNames.SpecialInfo.Info[Scenario])) },

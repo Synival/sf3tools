@@ -75,6 +75,8 @@ namespace SF3.NamedValues {
             = new NamedValueFromEnum<OrderChoiceMode>();
         public static readonly NamedValueFromEnum<PCAnimationType> PCAnimationTypeInfo
             = new NamedValueFromEnum<PCAnimationType>();
+        public static readonly NamedValueFromEnum<PCAnimationCmdType> PCAnimationCmdTypeInfo
+            = new NamedValueFromEnum<PCAnimationCmdType>();
         public static readonly NamedValueFromResourceInfo SexInfo
             = new NamedValueFromResourceInfo("Sexes.xml");
         public static readonly NamedValueFromEnum<SpawnType> SpawnTypeInfo

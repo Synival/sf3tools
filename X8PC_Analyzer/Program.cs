@@ -24,7 +24,7 @@ namespace X8PC_Analyzer {
         /// <param name="x8pcFile">Deserialized IX8PC_File to analyze.</param>
         /// <returns>'null' if this file should be skipped, otherwise a list of results/reports that, if a match was found, will be non-empty.
         private static string[]? X8PC_Match_Func(string filename, IX8PC_File x8pcFile) {
-            return MatchFuncs.PolyCharsWithAnimationCommand(x8pcFile, 0x02);
+            return MatchFuncs.PolyCharsWithUnknownCommands(x8pcFile);
         }
 
         private static int s_logIndex = 0;
@@ -53,9 +53,11 @@ namespace X8PC_Analyzer {
         }
 
         public static void DoneWithLogIndex(int index) {
-            s_logsDone.Add(index);
-            while (s_logsDone.Contains(s_logIndex))
-                NextLogIndex();
+            lock(s_logsDone) {
+                _ = s_logsDone.Add(index);
+                while (s_logsDone.Contains(s_logIndex))
+                    NextLogIndex();
+            }
         }
 
         public static void ResetLogging() {

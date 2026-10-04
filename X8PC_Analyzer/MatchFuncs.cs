@@ -167,8 +167,15 @@ namespace X8PC_Analyzer {
 
         public static string[]? PolyCharsWithAnimationCommand(IX8PC_File x8pcFile, int cmd) {
             return MatchPolyChars(x8pcFile, pc => {
-                var animationsWithCmd = pc.AnimationChunkHeader.AnimationCmdTables.Where(x => x.Any(y => y.Command == cmd)).ToArray();
-                return animationsWithCmd.Select(x => x.Name).ToArray();
+                var animationsWithCmd = pc.AnimationChunkHeader.AnimationCmdTables.Where(x => x.Any(y => y.CommandRaw == cmd)).ToArray();
+                return animationsWithCmd.Any() ? animationsWithCmd.Select(x => x.Name).ToArray() : null;
+            });
+        }
+
+        public static string[]? PolyCharsWithUnknownCommands(IX8PC_File x8pcFile) {
+            return MatchPolyChars(x8pcFile, pc => {
+                var animationsWithCmd = pc.AnimationChunkHeader.AnimationCmdTables.Where(x => x.Any(y => !y.IsSfx && !Enum.IsDefined((PCAnimationCmdType) y.CommandRaw))).ToArray();
+                return animationsWithCmd.Any() ? animationsWithCmd.Select(x => x.Name).ToArray() : null;
             });
         }
     }
