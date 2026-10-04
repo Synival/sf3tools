@@ -247,7 +247,7 @@ namespace SF3.Win.Controls {
             foreach (var shader in _general.Shaders)
                 shader.UpdateUniform(ShaderUniformType.ViewMatrix, ref _viewMatrix);
 
-            GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            GL.ClearColor(BackgroundColor);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
 
             _renderer.InvalidateModelMatrices();
@@ -438,6 +438,8 @@ namespace SF3.Win.Controls {
                 }
             }
         }
+
+        public Color4 BackgroundColor = new(0.2f, 0.3f, 0.3f, 1.0f);
 
         private float _minX = 0f;
         private float _minY = 0f;
