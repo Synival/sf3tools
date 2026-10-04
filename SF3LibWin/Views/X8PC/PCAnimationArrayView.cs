@@ -16,7 +16,10 @@ namespace SF3.Win.Views.X8PC {
 
         protected override void OnSelectValue(object sender, EventArgs args) {
             var selected = (PCAnimationDefStruct) DropdownList.SelectedValue;
-            ElementView.SetAnimation(_polyChar, selected);
+            var selectedId = selected?.ID ?? -1;
+            var animCmds = (_polyChar != null && selected != null && selectedId >= 0 && selectedId < _polyChar.AnimationChunkHeader?.AnimationCmdTables?.Length)
+                ? _polyChar.AnimationChunkHeader.AnimationCmdTables[selectedId] : null;
+            ElementView.SetAnimation(_polyChar, selected, animCmds);
         }
 
         private PolyChar _polyChar = null;

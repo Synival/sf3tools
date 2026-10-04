@@ -6,6 +6,8 @@ using CommonLib.Extensions;
 using SF3.Models.Structs.X8PC;
 using CommonLib.Rigging;
 using System.Collections.Generic;
+using CommonLib.Imaging;
+using OpenTK.Mathematics;
 
 namespace SF3.Win.Views.X8PC {
     public class PCAnimationView : SGL_ModelInstance3DView {
@@ -28,6 +30,7 @@ namespace SF3.Win.Views.X8PC {
                 Control.LightDirection = PCModelViewConstants.OutdoorLightDirection;
                 Control.LightPalette = PCModelViewConstants.DaytimePalette;
                 Control.Yaw = 30;
+                Control.BackgroundColor = _backgroundColor;
                 Control.Update(_polyChar, _instances);
             }
             return ctrl;
@@ -146,6 +149,7 @@ namespace SF3.Win.Views.X8PC {
 
         private void UpdateModelMatrix() {
             if (_lastFrame != _frame) {
+                UpdateAnimationCommandDisplay();
                 _lastFrame = _frame;
                 for (int i = 0; i < _instances.Length; i++) {
                     var inst = _instances[i];
@@ -154,16 +158,74 @@ namespace SF3.Win.Views.X8PC {
             }
         }
 
+        private int _bgTick = 0;
+        private void UpdateAnimationCommandDisplay() {
+            // TODO: Something way better than this!
+            var color = new PixelChannels() { A = 255 };
+            if (_animCmds != null) {
+                var frameInt = (int) _frame;
+                var cmdsAtFrame = _animCmds.Where(x => x.Frame == frameInt).Select(x => x.Command).ToArray();
+
+                if (cmdsAtFrame.Length > 0) {
+                    var cmdIdx = (_bgTick / 4) % cmdsAtFrame.Length;
+
+                    var cmd = cmdsAtFrame[cmdIdx];
+                    switch (cmd % 0x10) {
+                        case 0x00: color.R += 63; color.G +=  0; color.B +=  0; break;
+                        case 0x01: color.R +=  0; color.G += 63; color.B +=  0; break;
+                        case 0x02: color.R +=  0; color.G +=  0; color.B += 63; break;
+                        case 0x03: color.R += 48; color.G += 48; color.B +=  0; break;
+                        case 0x04: color.R +=  0; color.G += 48; color.B += 48; break;
+                        case 0x05: color.R += 48; color.G +=  0; color.B += 48; break;
+                        case 0x06: color.R += 32; color.G += 56; color.B +=  0; break;
+                        case 0x07: color.R +=  0; color.G += 32; color.B += 56; break;
+                        case 0x08: color.R += 56; color.G +=  0; color.B += 32; break;
+                        case 0x09: color.R += 56; color.G += 32; color.B +=  0; break;
+                        case 0x0a: color.R +=  0; color.G += 56; color.B += 32; break;
+                        case 0x0b: color.R += 32; color.G +=  0; color.B += 56; break;
+                        case 0x0c: color.R += 16; color.G += 16; color.B += 16; break;
+                        case 0x0d: color.R += 32; color.G += 32; color.B += 32; break;
+                        case 0x0e: color.R += 48; color.G += 48; color.B += 48; break;
+                        case 0x0f: color.R += 64; color.G += 64; color.B += 64; break;
+                    }
+                }
+            }
+
+            var mult = (float) Math.Pow(1.0f - (_frame - (int) _frame), 0.25f);
+
+            _bgTick++;
+            BackgroundColor = new Color4(
+                color.R / 255.0f * mult,
+                color.G / 255.0f * mult,
+                color.B / 255.0f * mult,
+                color.A / 255.0f
+            );
+        }
+
         private PolyChar _polyChar = null;
         private IModelAnimation _animation = null;
+        private IReadOnlyList<PCAnimationCmdStruct> _animCmds;
 
         public PolyChar PolyChar => _polyChar;
         public IModelAnimation Animation => _animation;
 
-        public void SetAnimation(PolyChar polyChar, PCAnimationDefStruct animation) {
+        private Color4 _backgroundColor = new(0.2f, 0.3f, 0.3f, 1.0f);
+        public Color4 BackgroundColor {
+            get => _backgroundColor;
+            set {
+                if (_backgroundColor != value) {
+                    _backgroundColor = value;
+                    if (IsCreated)
+                        Control.BackgroundColor = value;
+                }
+            }
+        }
+
+        public void SetAnimation(PolyChar polyChar, PCAnimationDefStruct animation, IReadOnlyList<PCAnimationCmdStruct> animCmds) {
             if (_polyChar != polyChar || _animation != animation) {
                 _polyChar  = polyChar;
                 _animation = animation;
+                _animCmds  = animCmds;
                 UpdateModelInstances();
             }
         }
