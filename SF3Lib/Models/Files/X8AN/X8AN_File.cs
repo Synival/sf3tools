@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.Models.Tables.X8AN;
 using SF3.Models.Tables.X8PC;
 using SF3.Types;
 
@@ -23,12 +25,11 @@ namespace SF3.Models.Files.X8AN {
         }
 
         public override IEnumerable<ITable> MakeTables() {
+            AttackAnimBoneKeyframesTables = X8ANAttackAnimChunkTable.Create(Data, nameof(X8ANAttackAnimChunkTable), 0, hasFixedRotations: false);
+
             var tables = new List<ITable>() {};
-
-            // TODO: Actual table!
-            AttackAnimBoneKeyframesTables = new PCBoneKeyframesTable[0];
-
             tables.AddRange(AttackAnimBoneKeyframesTables);
+            tables.AddRange(AttackAnimBoneKeyframesTables.SelectMany(x => x.SelectMany(y => y.Tables)).ToArray());
             return tables;
         }
 
