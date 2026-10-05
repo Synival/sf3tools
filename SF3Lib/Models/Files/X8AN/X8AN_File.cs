@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommonLib.NamedValues;
 using SF3.ByteData;
 using SF3.Models.Tables;
+using SF3.Models.Tables.X8PC;
 using SF3.Types;
 
 namespace SF3.Models.Files.X8AN {
@@ -22,9 +23,15 @@ namespace SF3.Models.Files.X8AN {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            var tables = new List<ITable>();
-            // TODO: X8 animation chunks
+            var tables = new List<ITable>() {};
+
+            // TODO: Actual table!
+            AttackAnimBoneKeyframesTables = new PCBoneKeyframesTable[0];
+
+            tables.AddRange(AttackAnimBoneKeyframesTables);
             return tables;
         }
+
+        public IReadOnlyList<PCBoneKeyframesTable> AttackAnimBoneKeyframesTables { get; private set; }
     }
 }

@@ -45,7 +45,7 @@ namespace SF3.Win.Views.X8PC {
             if (TabControl == null || TabControl.TabPages == null)
                 return;
 
-            var showAttackAnims = _model?.AttackAnimBoneKeyframesTable != null;
+            var showAttackAnims = _model?.AttackAnimBoneKeyframesTables != null;
             if (showAttackAnims && !TabControl.TabPages.Contains(_attackAnimChunksViewTab))
                 TabControl.TabPages.Insert(TabControl.TabPages.IndexOf(_animationChunkViewTab) + 1, _attackAnimChunksViewTab);
             else if (!showAttackAnims && TabControl.TabPages.Contains(_attackAnimChunksViewTab))

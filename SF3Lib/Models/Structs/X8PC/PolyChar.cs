@@ -10,6 +10,7 @@ using CommonLib.SGL;
 using CommonLib.ThirdParty.TexturePacker;
 using CommonLib.Types;
 using SF3.ByteData;
+using SF3.Models.Files.X8PC;
 using SF3.Models.Structs.Shared.SGL;
 using SF3.Models.Tables;
 using SF3.Models.Tables.Shared.SGL;
@@ -18,7 +19,7 @@ using SF3.NamedValues;
 using SF3.Types;
 
 namespace SF3.Models.Structs.X8PC {
-    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelMetaCollection, ISGL_ModelCollection, IDisposable {
+    public class PolyChar : Struct, ITableContainer, ITextureMetaCollection, ISGL_ModelMetaCollection, ISGL_ModelCollection, IDisposable, IPCAttackAnimBoneKeyframesTableContainer {
         public PolyChar(IByteData data, int id, string name, int address, ScenarioType scenario)
         : base(data, id, name, address, 0 /* not applicable */) {
             Scenario = scenario;
@@ -111,7 +112,7 @@ namespace SF3.Models.Structs.X8PC {
 
             // BoneKeyframesTables from attack animation chunks
             if (AttackAnimChunks != null) {
-                AttackAnimBoneKeyframesTable = AttackAnimChunks.Select((x, i) => {
+                AttackAnimBoneKeyframesTables = AttackAnimChunks.Select((x, i) => {
                     var animDef        = AnimationChunkHeader.AnimationDefTable.FirstOrDefault(y => y.AttackAnimChunkIdx == i);
                     var animIdProperty = animDef.GetType().GetProperty(nameof(animDef.AnimID));
                     string animName    = (animDef == null) ? "Unknown" : animDef.GetPropertyValueName(animIdProperty, ngc);
@@ -315,7 +316,7 @@ namespace SF3.Models.Structs.X8PC {
 
         public PCAnimationChunkHeader AnimationChunkHeader { get; }
         public PCBoneKeyframesTable BoneKeyframesTable { get; }
-        public PCBoneKeyframesTable[] AttackAnimBoneKeyframesTable { get; }
+        public IReadOnlyList<PCBoneKeyframesTable> AttackAnimBoneKeyframesTables { get; }
 
         public ChunkData[] Chunks { get; }
         public ChunkData[] AttackAnimChunks { get; }
