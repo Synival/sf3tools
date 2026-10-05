@@ -106,7 +106,7 @@ namespace SF3.Models.Structs.X8PC {
 
             AnimationChunkHeader = new PCAnimationChunkHeader(AnimationChunk.DecompressedData, 0, nameof(ModelChunkHeader), 0, this, ngc);
             BoneKeyframesTable   = PCBoneKeyframesTable.Create(
-                AnimationChunk.DecompressedData, nameof(BoneKeyframesTable), (int) AnimationChunkHeader.BoneKeyframesTableOffset,
+                AnimationChunk.DecompressedData, nameof(BoneKeyframesTable), 0, (int) AnimationChunkHeader.BoneKeyframesTableOffset,
                 Scenario < ScenarioType.Scenario1
             );
 
@@ -117,7 +117,7 @@ namespace SF3.Models.Structs.X8PC {
                     var animIdProperty = animDef.GetType().GetProperty(nameof(animDef.AnimID));
                     string animName    = (animDef == null) ? "Unknown" : animDef.GetPropertyValueName(animIdProperty, ngc);
                     return PCBoneKeyframesTable.Create(
-                        x.DecompressedData, $"AttackAnimBoneKeyframes_{i:D2}_{animName}", (int) x.DecompressedData.GetUInt32(0), Scenario < ScenarioType.Scenario1
+                        x.DecompressedData, $"AttackAnimBoneKeyframes_{i:D2}_{animName}", 0, (int) x.DecompressedData.GetUInt32(0), Scenario < ScenarioType.Scenario1
                     );
                 }).ToArray();
             }

@@ -28,8 +28,10 @@ namespace SF3.Models.Structs.X8PC {
         private readonly int _scaleYPtrAddr;
         private readonly int _scaleZPtrAddr;
 
-        public PCBoneKeyframesStruct(IByteData data, int id, string name, int address, bool hasFixedRotations)
+        public PCBoneKeyframesStruct(IByteData data, int id, string name, int chunkOffset, int address, bool hasFixedRotations)
         : base(data, id, name, address, 0x40) {
+            ChunkOffset = chunkOffset;
+
             _numPosKeyframesAddr   = Address + 0x00; // 4 bytes
             _numRotKeyframesAddr   = Address + 0x04; // 4 bytes
             _numScaleKeyframesAddr = Address + 0x08; // 4 bytes
@@ -54,17 +56,17 @@ namespace SF3.Models.Structs.X8PC {
             Tables = ((int) NumPosKeyFrames == -1) ? new ITable[0] : new ITable[] {
                 PosTable = PCBoneKeyframePosTable.Create(
                     data, $"Bone{ID:D2}_KeyframePos", ID, (int) NumPosKeyFrames,
-                        (int) PosFramesOffset, (int) PosXPtr, (int) PosYPtr, (int) PosZPtr
+                        ChunkOffset + (int) PosFramesOffset, ChunkOffset + (int) PosXPtr, ChunkOffset + (int) PosYPtr, ChunkOffset + (int) PosZPtr
                     ),
 
                 RotTable = PCBoneKeyframeRotTable.Create(
                     data, $"Bone{ID:D2}_KeyframeRot", ID, (int) NumRotKeyFrames,
-                        (int) RotFramesOffset, (int) RotXPtr, (int) RotYPtr, (int) RotZPtr, (int) RotWPtr, hasFixedRotations
+                        ChunkOffset + (int) RotFramesOffset, ChunkOffset + (int) RotXPtr, ChunkOffset + (int) RotYPtr, ChunkOffset + (int) RotZPtr, ChunkOffset + (int) RotWPtr, hasFixedRotations
                     ),
 
                 ScaleTable = PCBoneKeyframeScaleTable.Create(
                     data, $"Bone{ID:D2}_KeyframeScale", ID, (int) NumScaleKeyFrames,
-                        (int) ScaleFramesOffset, (int) ScaleXPtr, (int) ScaleYPtr, (int) ScaleZPtr
+                        ChunkOffset + (int) ScaleFramesOffset, ChunkOffset + (int) ScaleXPtr, ChunkOffset + (int) ScaleYPtr, ChunkOffset + (int) ScaleZPtr
                     ),
             };
         }
@@ -186,6 +188,7 @@ namespace SF3.Models.Structs.X8PC {
         public PCBoneKeyframePosTable PosTable { get; }
         public PCBoneKeyframeRotTable RotTable { get; }
         public PCBoneKeyframeScaleTable ScaleTable { get; }
+        public int ChunkOffset { get; }
 
         IReadOnlyList<IBoneKeyframeVector> IBoneKeyframe.PosTable => PosTable;
         IReadOnlyList<IBoneKeyframeQuaternion> IBoneKeyframe.RotTable => RotTable;
