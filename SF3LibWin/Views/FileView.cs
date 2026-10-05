@@ -27,6 +27,7 @@ using SF3.Models.Files.X033;
 using SF3.Models.Files.X035;
 using SF3.Models.Files.X044;
 using SF3.Models.Files.X1;
+using SF3.Models.Files.X8AN;
 using SF3.Models.Files.X8PC;
 using SF3.MPD.Interfaces;
 using SF3.Win.Views.CHP;
@@ -56,6 +57,7 @@ using SF3.Win.Views.X033;
 using SF3.Win.Views.X035;
 using SF3.Win.Views.X044;
 using SF3.Win.Views.X1;
+using SF3.Win.Views.X8AN;
 using SF3.Win.Views.X8PC;
 
 namespace SF3.Win.Views {
@@ -122,6 +124,7 @@ namespace SF3.Win.Views {
                 case IDAT_File  file: return new DAT_View ("DAT_File",  file);
                 case IKAO_File  file: return new KAO_View ("KAO_File",  file);
                 case IX8PC_File file: return new X8PC_View("X8PC_File", file);
+                case IX8AN_File file: return new X8AN_View("X8AN_File", file);
                 default:
                     return null;
             }

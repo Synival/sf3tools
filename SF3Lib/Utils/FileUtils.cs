@@ -33,6 +33,7 @@ using SF3.Models.Files.X033;
 using SF3.Models.Files.X035;
 using SF3.Models.Files.X044;
 using SF3.Models.Files.X1;
+using SF3.Models.Files.X8AN;
 using SF3.Models.Files.X8PC;
 using SF3.MPD.Project;
 using SF3.Types;
@@ -106,6 +107,7 @@ namespace SF3.Utils {
                 else if (preExtension.Contains("X035"))    return SF3FileType.X035;
                 else if (preExtension.Contains("X044"))    return SF3FileType.X044;
                 else if (preExtension.Contains("X8PC"))    return SF3FileType.X8PC;
+                else if (preExtension.Contains("X8AN"))    return SF3FileType.X8AN;
             }
             else if (filenameUpper.Contains(".DAT")) {
                 if (filenameUpper.Contains("FACE32"))
@@ -133,6 +135,7 @@ namespace SF3.Utils {
                 case SF3FileType.CHP:
                 case SF3FileType.DAT_FACE32:
                 case SF3FileType.DAT_FACE64:
+                case SF3FileType.X8AN:
                     return false;
 
                 default:
@@ -250,6 +253,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_BTLENKEI: return BTLENKEI_File.Create(byteData, ngc, scenario);
                 case SF3FileType.KAO:     return KAO_File.Create(byteData, ngc, scenario);
                 case SF3FileType.X8PC:    return X8PC_File.Create(byteData, ngc, scenario.Value);
+                case SF3FileType.X8AN:    return X8AN_File.Create(byteData, ngc);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
@@ -290,6 +294,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_BTLENKEI: return "BTLENKEI.DAT File";
                 case SF3FileType.KAO:     return "KAO*.DAT Files";
                 case SF3FileType.X8PC:    return "X8PC Files";
+                case SF3FileType.X8AN:    return "X8AN Files";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -330,6 +335,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_BTLENKEI: return "*BTLENKEI*.DAT";
                 case SF3FileType.KAO:     return "*KAO*.DAT";
                 case SF3FileType.X8PC:    return "*X8PC*.BIN";
+                case SF3FileType.X8AN:    return "*X8AN*.BIN";
                 default:
                     throw new ArgumentException($"Unhandled value '{type}' for '{nameof(type)}'");
             }
@@ -370,6 +376,7 @@ namespace SF3.Utils {
                 case "*BTLENKEI*.DAT": return new SF3FileType[] { SF3FileType.DAT_BTLENKEI };
                 case "*KAO*.DAT":     return new SF3FileType[] { SF3FileType.KAO };
                 case "*X8PC*.BIN":    return new SF3FileType[] { SF3FileType.X8PC };
+                case "*X8AN*.BIN":    return new SF3FileType[] { SF3FileType.X8AN };
                 default:
                     return new SF3FileType[] {};
             }
