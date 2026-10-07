@@ -27,6 +27,10 @@
     <Compile Update="Forms\InsertDataDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\SF3EditorForm.PolyChar.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>SF3EditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Update="Forms\SF3EditorForm.File.cs">
       <DependentUpon>SF3EditorForm.cs</DependentUpon>
     </Compile>

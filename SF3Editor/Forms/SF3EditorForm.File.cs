@@ -17,6 +17,7 @@ using SF3.Win.App;
 using SF3.Models.Files.CHR;
 using SF3.Win.Views.MPD;
 using SF3.Models.Files.DAT;
+using SF3.Models.Files.X8PC;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -442,14 +443,17 @@ namespace SF3.Editor.Forms {
             tsmiBlacksmith.Visible  = tsmiBlacksmith.Enabled  = hasFile && (file?.Loader?.Model as IBlacksmithTableFile)?.BlacksmithTables?.Any() == true;
             tsmiMPD.Visible         = tsmiMPD.Enabled         = hasFile && isIMPD;
             tsmiIconOffsets.Visible = tsmiIconOffsets.Enabled = hasFile && (file?.Loader?.Model is IItemIconTableFile || file?.Loader?.Model is ISpellIconTableFile);
+            tsmiPolyChar.Visible    = tsmiPolyChar.Enabled    = hasFile && fileType == SF3FileType.X8PC;
 
-            var mpdFile = (isIMPD && file?.Loader?.Model != null) ? (IMPD) file.Loader.Model : null;
             tsmiMPD_Textures.Enabled = (fileType == SF3FileType.MPD);
             tsmiMPD_Chunks.Enabled   = (fileType == SF3FileType.MPD);
+
+            tsmiPolyChar_LoadAnimations.Enabled = (file?.Loader?.Model is IX8PC_File x8pc) && x8pc.Scenario <= ScenarioType.Scenario1;
 
             // Little hack to force the MPD_View to update actors wheneve we change files.
             (file?.View?.ActualView as MPD_View)?.ViewerView?.ViewerGLControl?.InvalidateActors();
 
+            var mpdFile = (isIMPD && file?.Loader?.Model != null) ? (IMPD) file.Loader.Model : null;
             UpdateMPD_ModelSwitchGroupsMenu(mpdFile);
         }
 

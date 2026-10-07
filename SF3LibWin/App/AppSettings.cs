@@ -503,6 +503,18 @@ namespace SF3.Win.App {
         private bool _minimalChangesWhenImportingSpritesheets = false;
         public event EventHandler MinimalChangesWhenImportingSpritesheetsChanged;
 
+        /// <summary>
+        /// When enabled, animations for X8PC files are automatically loaded on demand. Requires a single X014 file to be loaded
+        /// for the appropriate, an X8PC file recognizable with a distinct recognizable filename, and an X8AN file with a disinct
+        /// recognizable filename. All files involved must be of the same scenario. Only applies for Scenario 1 and earlier.
+        /// </summary>
+        public bool AutoLoadPolyCharAnimations {
+            get => _autoLoadPolyCharAnimations;
+            set => SetValue(ref _autoLoadPolyCharAnimations, value, AutoLoadPolyCharAnimationsChanged);
+        }
+        private bool _autoLoadPolyCharAnimations = true;
+        public event EventHandler AutoLoadPolyCharAnimationsChanged;
+
         public struct RecentFile {
             public string Filename { get; set; }
             public ScenarioType? Scenario { get; set; }

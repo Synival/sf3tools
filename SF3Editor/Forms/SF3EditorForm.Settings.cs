@@ -18,6 +18,8 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize.Checked    = _appSettings.AutoUpdateMPDChunkTableOnChunkResize;
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Checked         = _appSettings.AutoRebuildMPDChunkTableOnSave;
 
+            tsmiSettings_PolyChar_AutoLoadAnimations.Checked          = _appSettings.AutoLoadPolyCharAnimations;
+
             StatGrowthStatistics.DebugGrowthValues = _appSettings.EnableDebugSettings;
             MPD_File.UpdateChunkTableOnChunkResize = _appSettings.AutoUpdateMPDChunkTableOnChunkResize;
             MPD_File.RebuildChunkTableOnFinish     = _appSettings.AutoRebuildMPDChunkTableOnSave;
@@ -54,6 +56,9 @@ namespace SF3.Editor.Forms {
                 MPD_File.RebuildChunkTableOnFinish = _appSettings.AutoRebuildMPDChunkTableOnSave;
                 _appSettings.Serialize();
             };
+
+            _appSettings.AutoLoadPolyCharAnimationsChanged += (s, e)
+                => { tsmiSettings_PolyChar_AutoLoadAnimations.Checked = _appSettings.AutoLoadPolyCharAnimations; _appSettings.Serialize(); };
         }
 
         private void tsmiSettings_UseDropdowns_Click(object sender, EventArgs e)
@@ -77,5 +82,8 @@ namespace SF3.Editor.Forms {
             => _appSettings.AutoUpdateMPDChunkTableOnChunkResize = !_appSettings.AutoUpdateMPDChunkTableOnChunkResize;
         private void tsmiSettings_MPD_AutoRebuildMPDChunkTable_Click(object sender, EventArgs e)
             => _appSettings.AutoRebuildMPDChunkTableOnSave = !_appSettings.AutoRebuildMPDChunkTableOnSave;
+
+        private void tsmiSettings_PolyChar_AutoLoadAnimations_Click(object sender, EventArgs e)
+            => _appSettings.AutoLoadPolyCharAnimations = ! _appSettings.AutoLoadPolyCharAnimations;
     }
 }

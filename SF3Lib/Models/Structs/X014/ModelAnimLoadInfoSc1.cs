@@ -50,7 +50,7 @@ namespace SF3.Models.Structs.X014 {
 
         [TableViewModelColumn(addressField: nameof(_sizeInSectorsAddr), displayOrder: 4, displayFormat: "X4")]
         [BulkCopy]
-        public short sizeInSectors {
+        public short SizeInSectors {
             get => Data.GetInt16(_sizeInSectorsAddr);
             set => Data.SetInt16(_sizeInSectorsAddr, value);
         }

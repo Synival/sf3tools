@@ -40,6 +40,8 @@ namespace SF3.Editor.Forms {
             tsmiFile_OpenScenario_Scenario2 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_OpenScenario_Scenario3 = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_OpenScenario_PremiumDisk = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_OpenScenario_Sep2 = new System.Windows.Forms.ToolStripSeparator();
+            tsmiFile_OpenScenario_Prototype = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Save = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_SaveAll = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,6 +139,8 @@ namespace SF3.Editor.Forms {
             tsmiMPD_RecalculateSurfaceModelNormals = new System.Windows.Forms.ToolStripMenuItem();
             tsmiIconOffsets = new System.Windows.Forms.ToolStripMenuItem();
             tsmiIconOffsets_Assign = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiPolyChar = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiPolyChar_LoadAnimations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_UseDropdowns = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_EnableDebugSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,16 +155,16 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_Separator = new System.Windows.Forms.ToolStripSeparator();
             tsmiSettings_MPD_UpdateChunkTableOnChunkResize = new System.Windows.Forms.ToolStripMenuItem();
             tsmiSettings_MPD_AutoRebuildMPDChunkTable = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_PolyChar = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiSettings_PolyChar_AutoLoadAnimations = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
             tsmiHelp_About = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiFile_OpenScenario_Prototype = new System.Windows.Forms.ToolStripMenuItem();
-            tsmiFile_OpenScenario_Sep2 = new System.Windows.Forms.ToolStripSeparator();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiActiveResources, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiIconOffsets, tsmiSettings, tsmiHelp });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile, tsmiView, tsmiActiveResources, tsmiTools, tsmiMonsters, tsmiBlacksmith, tsmiMPD, tsmiIconOffsets, tsmiPolyChar, tsmiSettings, tsmiHelp });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(891, 24);
@@ -247,6 +251,19 @@ namespace SF3.Editor.Forms {
             tsmiFile_OpenScenario_PremiumDisk.Size = new Size(249, 22);
             tsmiFile_OpenScenario_PremiumDisk.Text = "&Premium Disk";
             tsmiFile_OpenScenario_PremiumDisk.Click += tsmiFile_OpenScenario_PremiumDisk_Click;
+            // 
+            // tsmiFile_OpenScenario_Sep2
+            // 
+            tsmiFile_OpenScenario_Sep2.Name = "tsmiFile_OpenScenario_Sep2";
+            tsmiFile_OpenScenario_Sep2.Size = new Size(246, 6);
+            // 
+            // tsmiFile_OpenScenario_Prototype
+            // 
+            tsmiFile_OpenScenario_Prototype.Name = "tsmiFile_OpenScenario_Prototype";
+            tsmiFile_OpenScenario_Prototype.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9;
+            tsmiFile_OpenScenario_Prototype.Size = new Size(249, 22);
+            tsmiFile_OpenScenario_Prototype.Text = "Proto&type";
+            tsmiFile_OpenScenario_Prototype.Click += tsmiFile_OpenScenario_Prototype_Click;
             // 
             // tsmiFile_Save
             // 
@@ -933,9 +950,25 @@ namespace SF3.Editor.Forms {
             tsmiIconOffsets_Assign.Text = "&Assign from Active Icons";
             tsmiIconOffsets_Assign.Click += tsmiIconOffsets_Assign_Click;
             // 
+            // tsmiPolyChar
+            // 
+            tsmiPolyChar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiPolyChar_LoadAnimations });
+            tsmiPolyChar.Enabled = false;
+            tsmiPolyChar.Name = "tsmiPolyChar";
+            tsmiPolyChar.Size = new Size(67, 20);
+            tsmiPolyChar.Text = "&PolyChar";
+            tsmiPolyChar.Visible = false;
+            // 
+            // tsmiPolyChar_LoadAnimations
+            // 
+            tsmiPolyChar_LoadAnimations.Name = "tsmiPolyChar_LoadAnimations";
+            tsmiPolyChar_LoadAnimations.Size = new Size(277, 22);
+            tsmiPolyChar_LoadAnimations.Text = "&Load Animations from X014 and X8AN";
+            tsmiPolyChar_LoadAnimations.Click += tsmiPolyChar_LoadAnimations_Click;
+            // 
             // tsmiSettings
             // 
-            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_ShowErrorsOnFileLoad, tsmiSettings_MinimalChanges, tsmiSettings_Sep1, tsmiSettings_MPD });
+            tsmiSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_UseDropdowns, tsmiSettings_EnableDebugSettings, tsmiSettings_ShowErrorsOnFileLoad, tsmiSettings_MinimalChanges, tsmiSettings_Sep1, tsmiSettings_MPD, tsmiSettings_PolyChar });
             tsmiSettings.Name = "tsmiSettings";
             tsmiSettings.Size = new Size(61, 20);
             tsmiSettings.Text = "&Settings";
@@ -1027,6 +1060,20 @@ namespace SF3.Editor.Forms {
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Text = "Rebuild Chunk Table on Save";
             tsmiSettings_MPD_AutoRebuildMPDChunkTable.Click += tsmiSettings_MPD_AutoRebuildMPDChunkTable_Click;
             // 
+            // tsmiSettings_PolyChar
+            // 
+            tsmiSettings_PolyChar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSettings_PolyChar_AutoLoadAnimations });
+            tsmiSettings_PolyChar.Name = "tsmiSettings_PolyChar";
+            tsmiSettings_PolyChar.Size = new Size(321, 22);
+            tsmiSettings_PolyChar.Text = "&PolyChar";
+            // 
+            // tsmiSettings_PolyChar_AutoLoadAnimations
+            // 
+            tsmiSettings_PolyChar_AutoLoadAnimations.Name = "tsmiSettings_PolyChar_AutoLoadAnimations";
+            tsmiSettings_PolyChar_AutoLoadAnimations.Size = new Size(308, 22);
+            tsmiSettings_PolyChar_AutoLoadAnimations.Text = "Auto-&Load Animations from X014 and X8AN";
+            tsmiSettings_PolyChar_AutoLoadAnimations.Click += tsmiSettings_PolyChar_AutoLoadAnimations_Click;
+            // 
             // tsmiHelp
             // 
             tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiHelp_About });
@@ -1040,19 +1087,6 @@ namespace SF3.Editor.Forms {
             tsmiHelp_About.Size = new Size(107, 22);
             tsmiHelp_About.Text = "&About";
             tsmiHelp_About.Click += tsmiHelp_About_Click;
-            // 
-            // tsmiFile_OpenScenario_Prototype
-            // 
-            tsmiFile_OpenScenario_Prototype.Name = "tsmiFile_OpenScenario_Prototype";
-            tsmiFile_OpenScenario_Prototype.ShortcutKeys =  System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D9;
-            tsmiFile_OpenScenario_Prototype.Size = new Size(249, 22);
-            tsmiFile_OpenScenario_Prototype.Text = "Proto&type";
-            tsmiFile_OpenScenario_Prototype.Click += tsmiFile_OpenScenario_Prototype_Click;
-            // 
-            // tsmiFile_OpenScenario_Sep2
-            // 
-            tsmiFile_OpenScenario_Sep2.Name = "tsmiFile_OpenScenario_Sep2";
-            tsmiFile_OpenScenario_Sep2.Size = new Size(246, 6);
             // 
             // SF3EditorForm
             // 
@@ -1200,5 +1234,9 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiView_MPD_DrawBattleZones;
         private System.Windows.Forms.ToolStripSeparator tsmiFile_OpenScenario_Sep2;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile_OpenScenario_Prototype;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPolyChar;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPolyChar_LoadAnimations;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_PolyChar;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings_PolyChar_AutoLoadAnimations;
     }
 }
