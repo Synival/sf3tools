@@ -6,6 +6,7 @@ using OpenTK.Mathematics;
 using CommonLib.Extensions;
 using SF3.Win.Extensions;
 using CommonLib.Types;
+using OpenTK.Graphics.OpenGL;
 
 namespace SF3.Win.OpenGL {
     public class Quad {
@@ -54,10 +55,26 @@ namespace SF3.Win.OpenGL {
             Vertices = HasCenterVertex ? 5 : 4;
 
             Attributes = [];
-            AddAttribute(new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec3, "position", 4,
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "position", 4,
                 vertices.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 3)));
-            AddAttribute(new PolyAttribute(1, OpenTK.Graphics.OpenGL.ActiveAttribType.FloatVec4, "color", 4,
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec4, "color", 4,
                 colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 4)));
+
+            // TODO: One big array?
+            // TODO: No more linq nonsense
+            float[,] allVertices0 = Enumerable.Repeat(vertices[0].ToFloatArray(), 4)
+                .SelectMany(x => x).ToArray().To2DArray(4, 3);
+            float[,] allVertices1 = Enumerable.Repeat(vertices[1].ToFloatArray(), 4)
+                .SelectMany(x => x).ToArray().To2DArray(4, 3);
+            float[,] allVertices2 = Enumerable.Repeat(vertices[2].ToFloatArray(), 4)
+                .SelectMany(x => x).ToArray().To2DArray(4, 3);
+            float[,] allVertices3 = Enumerable.Repeat(vertices[3].ToFloatArray(), 4)
+                .SelectMany(x => x).ToArray().To2DArray(4, 3);
+
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices0", 4, allVertices0));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices1", 4, allVertices1));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices2", 4, allVertices2));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices3", 4, allVertices3));
         }
 
         private bool VerticesAreBasicallyEqual(Vector3 lhs, Vector3 rhs, float tolerance) {

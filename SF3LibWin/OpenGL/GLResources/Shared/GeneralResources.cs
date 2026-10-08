@@ -14,6 +14,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
                 (ObjectShader            = new Shader(Resources.ObjectVert,          Resources.ObjectFrag)),
                 (SpriteShader            = new Shader(Resources.SpriteVert,          Resources.SpriteFrag)),
                 (ColorizeShader          = new Shader(Resources.ColorizeVert,        Resources.ColorizeFrag)),
+                (QuadTestShader          = new Shader(Resources.QuadTestVert,        Resources.QuadTestFrag)),
 
                 (OutlineBlurPassShader   = new Shader(Resources.OutlineBlurPassVert, Resources.OutlineBlurPassFrag)),
                 (OutlineToScreenShader   = new Shader(Resources.OutlineToScreenVert, Resources.OutlineToScreenFrag)),
@@ -79,6 +80,7 @@ namespace SF3.Win.OpenGL.GLResources.Shared {
         public Shader ObjectShader { get; private set; } = null;
         public Shader SpriteShader { get; private set; } = null;
         public Shader ColorizeShader { get; private set; } = null;
+        public Shader QuadTestShader { get; private set; } = null;
 
         public Shader OutlineBlurPassShader { get; private set; } = null;
         public Shader OutlineToScreenShader { get; private set; } = null;

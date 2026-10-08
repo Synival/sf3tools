@@ -48,10 +48,18 @@
     <None Remove="Images\TransparentWhite.bmp" />
     <None Remove="Images\UnknownSprite.bmp" />
     <None Remove="Images\White.bmp" />
+    <None Remove="Shaders\Colorize.frag" />
+    <None Remove="Shaders\Colorize.vert" />
+    <None Remove="Shaders\ColorToScreen.frag" />
+    <None Remove="Shaders\ColorToScreen.vert" />
     <None Remove="Shaders\Normals.frag" />
     <None Remove="Shaders\Normals.vert" />
     <None Remove="Shaders\Object.frag" />
     <None Remove="Shaders\Object.vert" />
+    <None Remove="Shaders\OutlineBlurPass.frag" />
+    <None Remove="Shaders\OutlineBlurPass.vert" />
+    <None Remove="Shaders\OutlineToScreen.frag" />
+    <None Remove="Shaders\OutlineToScreen.vert" />
     <None Remove="Shaders\Solid.frag" />
     <None Remove="Shaders\Solid.vert" />
     <None Remove="Shaders\Texture.frag" />
@@ -98,12 +106,22 @@
     <EmbeddedResource Include="Images\TransparentWhite.bmp" />
     <EmbeddedResource Include="Images\UnknownSprite.bmp" />
     <EmbeddedResource Include="Images\White.bmp" />
+    <EmbeddedResource Include="Shaders\Colorize.frag" />
+    <EmbeddedResource Include="Shaders\Colorize.vert" />
+    <EmbeddedResource Include="Shaders\ColorToScreen.frag" />
+    <EmbeddedResource Include="Shaders\ColorToScreen.vert" />
     <EmbeddedResource Include="Shaders\Normals.frag">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Shaders\Normals.vert">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\OutlineBlurPass.frag" />
+    <EmbeddedResource Include="Shaders\OutlineBlurPass.vert" />
+    <EmbeddedResource Include="Shaders\OutlineToScreen.frag" />
+    <EmbeddedResource Include="Shaders\OutlineToScreen.vert" />
+    <EmbeddedResource Include="Shaders\QuadTest.frag" />
+    <EmbeddedResource Include="Shaders\QuadTest.vert" />
     <EmbeddedResource Include="Shaders\Object.frag">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

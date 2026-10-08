@@ -326,26 +326,23 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///uniform sampler2D textureAtlas;
-        ///uniform sampler2D textureTerrainTypes;
-        ///uniform sampler2D textureEventIDs;
-        ///
-        ///in vec4 colorFrag;
-        ///in vec3 glowFrag;
-        ///in vec4 lightColorFrag;
-        ///in float meshFrag;
-        ///
-        ///in vec2 texCoordAtlasFrag;
-        ///in vec2 texCoordTerrainTypesFrag;
-        ///in vec2 texCoordEventIDsFrag;
+        ///noperspective in vec2 relativePos2DFrag;
+        ///flat in vec2 edgeBottomFrag;
+        ///flat in vec2 edgeLeftFrag;
+        ///flat in vec2 quadDistortionFrag;
+        ///flat in float coeffAFrag;
         ///
         ///out vec4 FragColor;
         ///
-        ///void main() {
-        ///    if (meshFrag &gt; 0 &amp;&amp; (int(gl_FragCoord.x / 2) + int(gl_FragCoord.y / 2)) % 2 == 0)
-        ///        discard;
+        ///float cross2D(vec2 a, vec2 b) {
+        ///    return a.x * b.y - a.y * b.x;
+        ///}
         ///
-        ///    vec4 surfaceTex = (texture(textureAtlas, texCoord [rest of string was truncated]&quot;;.
+        ///vec2 getPosInQuad() {
+        ///    // Position is determined using inverse bilinear interpolation.
+        ///    // Several variables are pre-calculated in the vertex shader and passed along.
+        ///    float a = coeffAFrag;
+        ///    float b = cross2D(relativ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -359,20 +356,21 @@ namespace SF3.Win.Properties {
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
-        ///uniform mat3 normalMatrix;
-        ///uniform vec3 lightPosition;
-        ///uniform sampler2D textureLighting;
-        ///uniform int lightingMode;
-        ///uniform bool smoothLighting;
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec4 color;
-        ///layout (location = 2) in vec3 glow;
-        ///layout (location = 3) in vec3 normal;
+        ///layout (location = 1) in vec3 allVertices0;
+        ///layout (location = 2) in vec3 allVertices1;
+        ///layout (location = 3) in vec3 allVertices2;
+        ///layout (location = 4) in vec3 allVertices3;
         ///
-        ///layout (location = 4) in vec2 texCoordAtlas;
-        ///layout (location = 5) in vec2 texCoordTerrainTypes;
-        ///layout (location [rest of string was truncated]&quot;;.
+        ///noperspective out vec2 relativePos2DFrag;
+        ///flat out vec2 edgeBottomFrag;
+        ///flat out vec2 edgeLeftFrag;
+        ///flat out vec2 quadDistortionFrag;
+        ///flat out float coeffAFrag;
+        ///
+        ///out vec2 texCoordAtlasFrag;
+        ///ou [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {
@@ -472,6 +470,61 @@ namespace SF3.Win.Properties {
         internal static string OutlineToScreenVert {
             get {
                 return ResourceManager.GetString("OutlineToScreenVert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///noperspective in vec2 relativePos2DFrag;
+        ///flat in vec2 edgeBottomFrag;
+        ///flat in vec2 edgeLeftFrag;
+        ///flat in vec2 quadDistortionFrag;
+        ///flat in float coeffAFrag;
+        ///
+        ///out vec4 FragColor;
+        ///
+        ///float cross2D(vec2 a, vec2 b) {
+        ///    return a.x * b.y - a.y * b.x;
+        ///}
+        ///
+        ///vec2 getPosInQuad() {
+        ///    // Position is determined using inverse bilinear interpolation.
+        ///    // Several variables are pre-calculated in the vertex shader and passed along.
+        ///    float a = coeffAFrag;
+        ///    float b = cross2D(relativ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string QuadTestFrag {
+            get {
+                return ResourceManager.GetString("QuadTestFrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #version 330 core
+        ///
+        ///uniform mat4 model;
+        ///uniform mat4 view;
+        ///uniform mat4 projection;
+        ///
+        ///layout (location = 0) in vec3 position;
+        ///layout (location = 1) in vec3 allVertices0;
+        ///layout (location = 2) in vec3 allVertices1;
+        ///layout (location = 3) in vec3 allVertices2;
+        ///layout (location = 4) in vec3 allVertices3;
+        ///
+        ///noperspective out vec2 relativePos2DFrag;
+        ///flat out vec2 edgeBottomFrag;
+        ///flat out vec2 edgeLeftFrag;
+        ///flat out vec2 quadDistortionFrag;
+        ///flat out float coeffAFrag;
+        ///
+        ///out vec2 texCoordAtlasFrag;
+        ///ou [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string QuadTestVert {
+            get {
+                return ResourceManager.GetString("QuadTestVert", resourceCulture);
             }
         }
         
@@ -904,11 +957,12 @@ namespace SF3.Win.Properties {
         ///uniform sampler2D texture1;
         ///
         ///in vec2 texCoord1Frag;
+        ///in float alphaFrag;
         ///
         ///out vec4 FragColor;
         ///
         ///void main() {
-        ///    vec4 texColor = texture(texture1, texCoord1Frag);
+        ///    vec4 texColor = texture(texture1, texCoord1Frag) * vec4(1, 1, 1, alphaFrag);
         ///    if (texColor.a &lt; 0.001)
         ///        discard;
         ///
@@ -927,16 +981,19 @@ namespace SF3.Win.Properties {
         ///
         ///layout (location = 0) in vec3 position;
         ///layout (location = 1) in vec2 texCoord1;
+        ///layout (location = 2) in vec4 color;
         ///
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
         ///
         ///out vec2 texCoord1Frag;
+        ///out float alphaFrag;
         ///
         ///void main() {
         ///    gl_Position = projection * view * model * vec4(position, 1.0);
         ///    texCoord1Frag = texCoord1;
+        ///    alphaFrag = color.a;
         ///}
         ///.
         /// </summary>
