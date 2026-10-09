@@ -27,6 +27,28 @@ float cross2D(vec2 a, vec2 b) {
     return a.x * b.y - a.y * b.x;
 }
 
+float calcV(float u) {
+    vec2 denomV = edgeLeftFrag + u * quadDistortionFrag;
+    vec2 denomVAbs = abs(denomV);
+    
+    float denom;
+    float denomMax;
+    float num;
+
+    if (denomVAbs.x > denomVAbs.y) {
+        denom    = denomV.x;
+        denomMax = denomVAbs.x;
+        num      = relativePos2DFrag.x - u * edgeBottomFrag.x;
+    }
+    else {
+        denom    = denomV.y;
+        denomMax = denomVAbs.y;
+        num      = relativePos2DFrag.y - u * edgeBottomFrag.y;
+    }
+    
+    return (denomMax < 1e-5) ? 0.5 : (num / denom);
+}
+
 vec2 getPosInQuad() {
     // Position is determined using inverse bilinear interpolation.
     // Several variables are pre-calculated in the vertex shader and passed along.
@@ -34,39 +56,49 @@ vec2 getPosInQuad() {
     float b = cross2D(relativePos2DFrag, quadDistortionFrag) + cross2D(edgeLeftFrag, edgeBottomFrag);
     float c = cross2D(relativePos2DFrag, edgeLeftFrag);
 
-    // Determine 'u'. We need a lot of branching to account for possible triangles and
-    // avoid division-by-zero errors.
+    // Determine 'u' and 'v' using a lot of fancy checks.
     float u = 0.0;
+    float v = 0.0;
     
     // Parallelograms and top/bottom-collapsed triangles (a == 0)
     if (interpolateLinearlyFrag > 0) {
         u = (abs(b) < 1e-5)
-            ? 0.5       // Utterly degenerate point; safely sample center
-            : (-c / b); // Linear root
+            ? 0.5             // Utterly degenerate point; safely sample center
+            : (-c * (1.0/b)); // Linear root
+        v = calcV(u);
     } 
-    // Normal quads and left/right-collapsed triangles
+    // Normal and distorted quads
     else {
         float discriminant = max(b*b - 4.0*a*c, 0.0);
-        float discriminantSq = sqrt(discriminant);
 
-        // Compute both standard quadratic possibilities and choose the closest to 0.5
-        float u1 = (-b + discriminantSq) / (2.0 * a);
-        float u2 = (-b - discriminantSq) / (2.0 * a);
-        u = (abs(u1 - 0.5) < abs(u2 - 0.5)) ? u1 : u2;
+        // Calculate the discriminant in a way that matches the sign of b,
+        // so the signs of the numbers added are always the same, avoiding cancellation.
+        float signB = (b >= 0.0) ? 1.0 : -1.0;
+        float discriminantSqrt = signB * sqrt(discriminant);
+
+        // Full quadradic formula without dividing by 'a'.
+        float q = -0.5 * (b + discriminantSqrt);
+
+        u = q / a;
+        v = calcV(u);
+
+        // If (u, v) does not land inside the quad (with a tiny epsilon for edge floating point inaccuracy), use the other root.
+        if (!(u >= -0.001 && u <= 1.001 && v >= -0.001 && v <= 1.001)) {
+            // Fancy-shmancy way to calculate the other root for 'u' by using formulas by a
+            // 16th century gentleman named "Vieta".
+            u = c / q;
+            v = calcV(u);
+        }
     }
-
-    // Determine 'v'.
-    vec2 denomV = edgeLeftFrag + u * quadDistortionFrag;
-    float v = (abs(denomV.x) > abs(denomV.y))
-        ? ((abs(denomV.x) < 1e-5) ? 0.5 : (relativePos2DFrag.x - u * edgeBottomFrag.x) / denomV.x)
-        : ((abs(denomV.y) < 1e-5) ? 0.5 : (relativePos2DFrag.y - u * edgeBottomFrag.y) / denomV.y);
 
     return clamp(vec2(u, v), 0.0, 1.0);
 }
 
 void main() {
-    if (meshFrag > 0 && (int(gl_FragCoord.x / 2) + int(gl_FragCoord.y / 2)) % 2 == 0)
-        discard;
+    if (meshFrag > 0.0) {
+        ivec2 fragInt = ivec2(gl_FragCoord.xy) >> 1;
+        if (((fragInt.x + fragInt.y) & 1) == 0) discard;
+    }
 
     vec2 posInQuad = getPosInQuad();
 
