@@ -10,15 +10,18 @@ layout (location = 2) in vec3 allVertices1;
 layout (location = 3) in vec3 allVertices2;
 layout (location = 4) in vec3 allVertices3;
 
+layout (location = 5) in vec2 texCoordAtlasUV0;
+layout (location = 6) in vec2 texCoordAtlasUV1;
+layout (location = 7) in vec2 texCoordAtlasUV2;
+layout (location = 8) in vec2 texCoordAtlasUV3;
+
 noperspective out vec2 relativePos2DFrag;
 flat out vec2 edgeBottomFrag;
 flat out vec2 edgeLeftFrag;
 flat out vec2 quadDistortionFrag;
 flat out float coeffAFrag;
 
-out vec2 texCoordAtlasFrag;
-out vec2 texCoordOverlay1Frag;
-out vec2 texCoordOverlay2Frag;
+flat out vec2 texCoordAtlasUVFrag[4];
 
 vec2 projectTo2D(vec3 pos, mat4 mvp) {
     vec4 clip = mvp * vec4(pos, 1.0);
@@ -44,4 +47,9 @@ void main() {
     quadDistortionFrag = allVertices2D0 - allVertices2D1 + allVertices2D2 - allVertices2D3; // BL - BR + TR - TL
 
     coeffAFrag         = cross2D(quadDistortionFrag, edgeBottomFrag);
+
+    texCoordAtlasUVFrag[0] = texCoordAtlasUV0;
+    texCoordAtlasUVFrag[1] = texCoordAtlasUV1;
+    texCoordAtlasUVFrag[2] = texCoordAtlasUV2;
+    texCoordAtlasUVFrag[3] = texCoordAtlasUV3;
 }

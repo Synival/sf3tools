@@ -5,7 +5,6 @@ using System.Linq;
 using CommonLib.ThirdParty.TexturePacker;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
-using SF3.Types;
 using SF3.Win.Extensions;
 using SF3.Win.OpenGL.GLResources.Shared;
 using static CommonLib.Types.CornerTypeConsts;
@@ -47,10 +46,19 @@ namespace SF3.Win.OpenGL {
                 new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(TextureUnit.Texture0).TexCoordName),
                 new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(TextureUnit.Texture1).TexCoordName),
             };
-            if (_textureAtlas != null)
-                expectedAttrs.Add(new VBO_Attribute(1, ActiveAttribType.FloatVec2, Shader.GetTextureInfo(ObjectShaderTextureUnit.TextureAtlas).TexCoordName));
 
-            foreach (var ea in expectedAttrs.Where(ea => !quadAttrs.ContainsKey(ea.Name)).ToList())
+            if (_textureAtlas != null) {
+                var texCoordName = Shader.GetTextureInfo(ObjectShaderTextureUnit.TextureAtlas).TexCoordName;
+                expectedAttrs.AddRange([
+                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName),
+                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV0"),
+                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV1"),
+                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV2"),
+                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV3"),
+                ]);
+            }
+
+            foreach (var ea in expectedAttrs)
                 if (!quadAttrs.ContainsKey(ea.Name))
                     quadAttrs.Add(ea.Name, ea);
 
@@ -139,11 +147,19 @@ namespace SF3.Win.OpenGL {
             if (_texture == null)
                 return false;
 
+            // Get texture atlas coordinates and, for bilinear interpolated quad textures,
             var vboAttr = _vbo.GetAttributeByName(Shader.GetTextureInfo(ObjectShaderTextureUnit.TextureAtlas).TexCoordName);
-            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
-                return false;
+            var uvVboAttrs = new string[] { "UV0", "UV1", "UV2", "UV3" }
+                .Select(x => _vbo.GetAttributeByName(Shader.GetTextureInfo(ObjectShaderTextureUnit.TextureAtlas).TexCoordName + x))
+                .ToArray();
 
-            var pos = vboAttr.OffsetInBytes.Value / sizeof(float);
+            // No atlas coordinates exist at all, don't bother with this.
+            if (vboAttr == null || !vboAttr.OffsetInBytes.HasValue)
+                if (uvVboAttrs.All(x => x == null || !x.OffsetInBytes.HasValue))
+                    return false;
+
+            var pos   = vboAttr.OffsetInBytes.HasValue ? (vboAttr.OffsetInBytes.Value / sizeof(float)) : (int?) null;
+            var uvPos = uvVboAttrs.Select(x => x.OffsetInBytes.HasValue ? (x.OffsetInBytes.Value / sizeof(float)) : (int?) null).ToArray();
             var stride = _vbo.StrideInBytes / sizeof(float);
 
             var pixelBorderWidth  = -0.25f / _textureBitmap.Width;
@@ -152,29 +168,48 @@ namespace SF3.Win.OpenGL {
             // Update UV coordinates
             var modified = false;
 
+            var vb = _vertexBuffer;
             foreach (var quad in Quads) {
                 var frame = quad.Animation?.GetFrame(_frame);
-                var texCoords = (frame != null)
+                var tc = (frame != null)
                     ? (_textureAtlas.GetUVCoordinatesByTextureIDFrame(
                         frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
                         pixelBorderWidth, pixelBorderHeight)).Select(x => x.ToOpenTKVector2()).ToArray()
                     : c_noTextureCoords;
 
-                for (var vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
-                    if (!modified && (_vertexBuffer[pos] != texCoords[vertexIndex].X || _vertexBuffer[pos + 1] != texCoords[vertexIndex].Y))
-                        modified = true;
-                    _vertexBuffer[pos + 0] = texCoords[vertexIndex].X;
-                    _vertexBuffer[pos + 1] = texCoords[vertexIndex].Y;
-                    pos += stride;
+                // Set triangle-based atlas UV coords.
+                if (pos.HasValue) {
+                    for (var vIdx = 0; vIdx < 4; vIdx++) {
+                        var p = pos.Value;
+                        if (!modified && (vb[p] != tc[vIdx].X || vb[p + 1] != tc[vIdx].Y))
+                            modified = true;
+                        vb[p + 0] = tc[vIdx].X;
+                        vb[p + 1] = tc[vIdx].Y;
+                        pos += stride;
+                    }
+
+                    if (quad.Vertices == 5 && pos.HasValue) {
+                        vb[pos.Value + 0] = tc.Select(x => x.X).Average();
+                        vb[pos.Value + 1] = tc.Select(x => x.Y).Average();
+                        pos += stride;
+                    }
+                    else if (quad.Vertices != 4)
+                        throw new InvalidOperationException("Quad should have either 4 or 5 (4+extra) vertices");
                 }
 
-                if (quad.Vertices == 5) {
-                    _vertexBuffer[pos + 0] = texCoords.Select(x => x.X).Average();
-                    _vertexBuffer[pos + 1] = texCoords.Select(x => x.Y).Average();
-                    pos += stride;
+                // Set all fou UV coordinates for each vertex to perform bilinear interpolation in the shader.
+                for (int vIdx = 0; vIdx < quad.Vertices; vIdx++) {
+                    for (int uvIdx = 0; uvIdx < 4; uvIdx++) {
+                        if (uvPos[uvIdx].HasValue) {
+                            var uvp = uvPos[uvIdx].Value;
+                            if (!modified && (vb[uvPos[uvIdx].Value] != tc[vIdx].X || vb[uvp + 1] != tc[vIdx].Y))
+                                modified = true;
+                            vb[uvp + 0] = tc[uvIdx].X;
+                            vb[uvp + 1] = tc[uvIdx].Y;
+                            uvPos[uvIdx] += stride;
+                        }
+                    }
                 }
-                else if (quad.Vertices != 4)
-                    throw new InvalidOperationException("Quad should have either 4 or 5 (4+extra) vertices");
             }
 
             return modified;

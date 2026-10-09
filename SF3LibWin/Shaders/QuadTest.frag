@@ -1,10 +1,14 @@
 #version 330 core
 
+uniform sampler2D textureAtlas;
+
 noperspective in vec2 relativePos2DFrag;
 flat in vec2 edgeBottomFrag;
 flat in vec2 edgeLeftFrag;
 flat in vec2 quadDistortionFrag;
 flat in float coeffAFrag;
+
+flat in vec2 texCoordAtlasUVFrag[4];
 
 out vec4 FragColor;
 
@@ -50,7 +54,15 @@ vec2 getPosInQuad() {
 }
 
 void main() {
-    // TESTING: Just show the position in the quad in R,G components.
     vec2 posInQuad = getPosInQuad();
-    FragColor = vec4(posInQuad, 0, 1);
+
+    vec2 uvCoord = mix(
+        mix(texCoordAtlasUVFrag[0], texCoordAtlasUVFrag[1], posInQuad.x),
+        mix(texCoordAtlasUVFrag[3], texCoordAtlasUVFrag[2], posInQuad.x),
+        posInQuad.y
+    );
+
+    FragColor = vec4(texture(textureAtlas, uvCoord));
+    if (FragColor.a < 0.0001)
+        discard;
 }

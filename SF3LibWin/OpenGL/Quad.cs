@@ -61,20 +61,22 @@ namespace SF3.Win.OpenGL {
                 colors.SelectMany(x => x.ToFloatArray()).ToArray().To2DArray(4, 4)));
 
             // TODO: One big array?
-            // TODO: No more linq nonsense
-            float[,] allVertices0 = Enumerable.Repeat(vertices[0].ToFloatArray(), 4)
-                .SelectMany(x => x).ToArray().To2DArray(4, 3);
-            float[,] allVertices1 = Enumerable.Repeat(vertices[1].ToFloatArray(), 4)
-                .SelectMany(x => x).ToArray().To2DArray(4, 3);
-            float[,] allVertices2 = Enumerable.Repeat(vertices[2].ToFloatArray(), 4)
-                .SelectMany(x => x).ToArray().To2DArray(4, 3);
-            float[,] allVertices3 = Enumerable.Repeat(vertices[3].ToFloatArray(), 4)
-                .SelectMany(x => x).ToArray().To2DArray(4, 3);
+            float[][,] allVertices = new float[4][,];
+            float[][,] allUVs      = new float[4][,];
+            for (int i = 0; i < 4; i++) {
+                var thisVertex = new float[4, 3];
+                for (var j = 0; j < 4; j++) {
+                    thisVertex[j, 0] = vertices[i].X;
+                    thisVertex[j, 1] = vertices[i].Y;
+                    thisVertex[j, 2] = vertices[i].Z;
+                }
+                allVertices[i] = thisVertex;
+            }
 
-            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices0", 4, allVertices0));
-            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices1", 4, allVertices1));
-            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices2", 4, allVertices2));
-            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices3", 4, allVertices3));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices0", 4, allVertices[0]));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices1", 4, allVertices[1]));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices2", 4, allVertices[2]));
+            AddAttribute(new PolyAttribute(1, ActiveAttribType.FloatVec3, "allVertices3", 4, allVertices[3]));
         }
 
         private bool VerticesAreBasicallyEqual(Vector3 lhs, Vector3 rhs, float tolerance) {
