@@ -7,7 +7,7 @@ uniform sampler2D textureOverlay2;
 in vec4 colorFrag;
 in vec3 glowFrag;
 in vec4 lightColorFrag;
-in float meshFrag;
+flat in int meshFrag;
 
 in vec2 texCoordOverlay1Frag;
 in vec2 texCoordOverlay2Frag;
@@ -17,6 +17,7 @@ flat in vec2 edgeBottomFrag;
 flat in vec2 edgeLeftFrag;
 flat in vec2 quadDistortionFrag;
 flat in float coeffAFrag;
+flat in int interpolateLinearlyFrag;
 
 flat in vec2 texCoordAtlasUVFrag[4];
 
@@ -38,7 +39,7 @@ vec2 getPosInQuad() {
     float u = 0.0;
     
     // Parallelograms and top/bottom-collapsed triangles (a == 0)
-    if (abs(a) < 1e-5) {
+    if (interpolateLinearlyFrag > 0) {
         u = (abs(b) < 1e-5)
             ? 0.5       // Utterly degenerate point; safely sample center
             : (-c / b); // Linear root

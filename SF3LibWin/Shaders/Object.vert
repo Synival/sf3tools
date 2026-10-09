@@ -35,13 +35,14 @@ flat out vec2 edgeBottomFrag;
 flat out vec2 edgeLeftFrag;
 flat out vec2 quadDistortionFrag;
 flat out float coeffAFrag;
+flat out int interpolateLinearlyFrag;
 
 flat out vec2 texCoordAtlasUVFrag[4];
 
 out vec4 colorFrag;
 out vec3 glowFrag;
 out vec4 lightColorFrag;
-out float meshFrag;
+flat out int meshFrag;
 
 out vec2 texCoordOverlay1Frag;
 out vec2 texCoordOverlay2Frag;
@@ -60,7 +61,7 @@ void main() {
     gl_Position = mvp * vec4(position, 1.0);
     colorFrag   = color;
     glowFrag    = glow;
-    meshFrag    = mesh;
+    meshFrag    = mesh > 0.5 ? 1 : 0;
 
     // Modify the normal based on the normal matrix.
     // Preserve the length of the normal for in-game accuracy.
@@ -91,8 +92,8 @@ void main() {
     edgeBottomFrag     = allVertices2D1 - allVertices2D0; // BR - BL
     edgeLeftFrag       = allVertices2D3 - allVertices2D0; // TL - BL
     quadDistortionFrag = allVertices2D0 - allVertices2D1 + allVertices2D2 - allVertices2D3; // BL - BR + TR - TL
-
     coeffAFrag         = cross2D(quadDistortionFrag, edgeBottomFrag);
+    interpolateLinearlyFrag = (abs(coeffAFrag) < 1e-5) ? 1 : 0;
 
     texCoordAtlasUVFrag[0] = texCoordAtlasUV0;
     texCoordAtlasUVFrag[1] = texCoordAtlasUV1;
