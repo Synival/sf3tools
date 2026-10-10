@@ -588,5 +588,8 @@ namespace MPD_Analyzer {
 
             return AnalysisUtils.GetByteComparisonErrors(bytes1, bytes2);
         }
+
+        public static string[]? HasErrors(MPD_File mpdFile)
+            => mpdFile.GetErrors();
     }
 }

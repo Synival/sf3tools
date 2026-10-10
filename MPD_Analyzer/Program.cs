@@ -95,7 +95,7 @@ namespace MPD_Analyzer {
         public static Mutex s_meshesMutex = new Mutex();
 
         private static string[]? MPD_MatchFunc(MPD_File mpdFile, ScenarioType scenario, string filename) {
-            return MatchFuncs.ProjectCopyProducesSameMPDAsOriginal(mpdFile);
+            return MatchFuncs.HasErrors(mpdFile);
         }
 
         public static void Main(string[] args) {

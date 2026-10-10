@@ -14,15 +14,16 @@ namespace SF3.Tests.Models.Structs {
                 bool hasModels,
                 bool hasSurfaceModel,
                 bool has0x8000,
-                int? expectedModelChunkIndex,
-                int? expectedSurfaceModelChunkIndex,
+                int expectedModelChunkIndex,
+                int expectedSurfaceModelChunkIndex,
                 ChunkType expectedChunk1Type,
                 ChunkType expectedChunk2Type,
-                MemoryLocationType? expectedChunk1PointersMemoryLocation,
-                MemoryLocationType? expectedModelsMemoryLocation,
-                MemoryLocationType? expectedSurfaceModelMemoryLocation
+                MemoryLocationType expectedChunk1PointersMemoryLocation,
+                MemoryLocationType expectedModelsMemoryLocation,
+                MemoryLocationType expectedSurfaceModelMemoryLocation
             ) {
                 string TF(bool x) => x ? "T" : "F";
+                string PF(bool x) => x ? "P" : "F";
                 var settingsString = $"{TF(hasModels)}{TF(hasSurfaceModel)}{TF(has0x8000)}";
 
                 flags.Bit_0x0100_HasModels = hasModels;
@@ -30,29 +31,37 @@ namespace SF3.Tests.Models.Structs {
                 flags.Bit_0x8000_ModelsAreStillLowMemoryWithSurfaceModel = has0x8000;
 
                 var resultsString =
-                    TF(expectedModelChunkIndex              == flags.ModelsChunkIndex) +
-                    TF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
-                    TF(expectedChunk1Type                   == flags.Chunk1Type) +
-                    TF(expectedChunk2Type                   == flags.Chunk2Type) +
-                    TF(expectedChunk1PointersMemoryLocation == flags.Chunk1PointersMemoryLocation) +
-                    TF(expectedModelsMemoryLocation         == flags.ModelsMemoryLocation) +
-                    TF(expectedSurfaceModelMemoryLocation   == flags.SurfaceModelMemoryLocation);
+                    PF(expectedModelChunkIndex              == flags.ModelsChunkIndex) +
+                    PF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
+                    PF(expectedChunk1Type                   == flags.Chunk1Type) +
+                    PF(expectedChunk2Type                   == flags.Chunk2Type) +
+                    PF(expectedChunk1PointersMemoryLocation == flags.Chunk1PointersMemoryLocation) +
+                    PF(expectedModelsMemoryLocation         == flags.ModelsMemoryLocation) +
+                    PF(expectedSurfaceModelMemoryLocation   == flags.SurfaceModelMemoryLocation);
 
-                if (resultsString != "TTTTTTT")
+                if (resultsString != "PPPPPPP")
                     return $"{settingsString}: {resultsString}";
                 else
                     return null;
             }
 
             var results = new List<string?>() {
-                RunTestCase(false, false, false, null, null, ChunkType.Unset,  ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false, false,  true, null, null, ChunkType.Unset,  ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false,  true, false, null,    2, ChunkType.Unset,  ChunkType.SurfaceModel, null,                          null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true, null,    2, ChunkType.Unset,  ChunkType.SurfaceModel, null,                          null,                          MemoryLocationType.LowMemory),
-                RunTestCase( true, false, false,    1, null, ChunkType.Models, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true, false,  true,    1, null, ChunkType.Models, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true,  true, false,    1,    2, ChunkType.Models, ChunkType.SurfaceModel, MemoryLocationType.HighMemory, MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
-                RunTestCase( true,  true,  true,    1,    2, ChunkType.Models, ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                // Some notes in Scenario 1:
+                // - Surface models are always chunk[2]
+                // - Surface models (chunk[2]) are always low memory
+                // - Models are always chunk[1]
+                // - Models (chunk[1]) can be either low or high memory depending on whether the surface model exists and bit 0x8000 is set
+                // - Extra models (Titan) are in chunk[19]. Probaby always low memory? The Titan is special, so who knows!
+                // - No rotatable textures
+
+                RunTestCase(false, false, false, 1, 2, ChunkType.Unset,  ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase(false, false,  true, 1, 2, ChunkType.Unset,  ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase(false,  true, false, 1, 2, ChunkType.Unset,  ChunkType.SurfaceModel, MemoryLocationType.HighMemory, MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true, 1, 2, ChunkType.Unset,  ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase( true, false, false, 1, 2, ChunkType.Models, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase( true, false,  true, 1, 2, ChunkType.Models, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase( true,  true, false, 1, 2, ChunkType.Models, ChunkType.SurfaceModel, MemoryLocationType.HighMemory, MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true, 1, 2, ChunkType.Models, ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
             };
 
             results = results.Where(x => x != null).ToList();
@@ -70,16 +79,17 @@ namespace SF3.Tests.Models.Structs {
                 bool hasSurfaceModel,
                 bool has0x8000,
                 bool hasKraken,
-                int? expectedModelChunkIndex,
-                int? expectedSurfaceModelChunkIndex,
+                int expectedModelChunkIndex,
+                int expectedSurfaceModelChunkIndex,
                 ChunkType expectedChunk1Type,
                 ChunkType expectedChunk2Type,
                 ChunkType expectedChunk20Type,
-                MemoryLocationType? expectedChunk1PointersMemoryLocation,
-                MemoryLocationType? expectedModelsMemoryLocation,
-                MemoryLocationType? expectedSurfaceModelMemoryLocation
+                MemoryLocationType expectedChunk1PointersMemoryLocation,
+                MemoryLocationType expectedModelsMemoryLocation,
+                MemoryLocationType expectedSurfaceModelMemoryLocation
             ) {
                 string TF(bool x) => x ? "T" : "F";
+                string PF(bool x) => x ? "P" : "F";
                 var settingsString = $"{TF(hasModels)}{TF(hasSurfaceModel)}{TF(has0x8000)}{TF(hasKraken)}";
 
                 flags.Bit_0x0100_HasModels = hasModels;
@@ -88,43 +98,50 @@ namespace SF3.Tests.Models.Structs {
                 flags.Bit_0x4000_HasExtraChunk1ModelWithChunk21Textures = hasKraken;
 
                 var resultsString =
-                    TF(expectedModelChunkIndex              == flags.ModelsChunkIndex) +
-                    TF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
-                    TF(expectedChunk1Type                   == flags.Chunk1Type) +
-                    TF(expectedChunk2Type                   == flags.Chunk2Type) +
-                    TF(expectedChunk20Type                  == flags.Chunk20Type) +
-                    TF(expectedChunk1PointersMemoryLocation == flags.Chunk1PointersMemoryLocation) +
-                    TF(expectedModelsMemoryLocation         == flags.ModelsMemoryLocation) +
-                    TF(expectedSurfaceModelMemoryLocation   == flags.SurfaceModelMemoryLocation);
+                    PF(expectedModelChunkIndex              == flags.ModelsChunkIndex) +
+                    PF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
+                    PF(expectedChunk1Type                   == flags.Chunk1Type) +
+                    PF(expectedChunk2Type                   == flags.Chunk2Type) +
+                    PF(expectedChunk20Type                  == flags.Chunk20Type) +
+                    PF(expectedChunk1PointersMemoryLocation == flags.Chunk1PointersMemoryLocation) +
+                    PF(expectedModelsMemoryLocation         == flags.ModelsMemoryLocation) +
+                    PF(expectedSurfaceModelMemoryLocation   == flags.SurfaceModelMemoryLocation);
 
-                if (resultsString != "TTTTTTTT")
+                if (resultsString != "PPPPPPPP")
                     return $"{settingsString}: {resultsString}";
                 else
                     return null;
             }
 
             var results = new List<string?>() {
+                // Some notes in Scenario 2:
+                // - Chunk[1] is always low memory
+                // - Chunk[2] is always low memory
+                // - Chunk[20] is always high memory
+                // - Surface models are in either chunk[2] (low) or chunk[20] (high) depending on bit 0x8000 and the existance of extra models (Kraken)
+                // - Models are in either chunk[1] (low) or chunk[20] (high) depending on the existance of the surface model, bit 0x8000, and the existance of extra models (Kraken)
+                // - Extra models (Kraken) are in chunk[1] (low memory)
+                // - No rotatable textures
+
                 // Without Kraken
-                RunTestCase(false, false, false, false, null, null, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false, false,  true, false, null, null, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false,  true, false, false, null,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        null,                          null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true, false, null,   20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.SurfaceModel, null,                          null,                          MemoryLocationType.HighMemory),
-                RunTestCase( true, false, false, false,    1, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true, false,  true, false,    1, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true,  true, false, false,   20,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Models,       null,                          MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
-                RunTestCase( true,  true,  true, false,    1,   20, ChunkType.Models, ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase(false, false, false, false,  1, 20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase(false, false,  true, false,  1, 20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase(false,  true, false, false, 20,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true, false,  1, 20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase( true, false, false, false,  1, 20, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase( true, false,  true, false,  1, 20, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase( true,  true, false, false, 20,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true, false,  1, 20, ChunkType.Models, ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
 
-                // With Kraken
-                RunTestCase(false, false, false,  true, null, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          null),
-                RunTestCase(false, false,  true,  true, null, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          null),
-                RunTestCase(false,  true, false,  true, null,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true,  true, null,   20, ChunkType.Models, ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  null,                          MemoryLocationType.HighMemory),
-                RunTestCase( true, false, false,  true,   20, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, null),
-                RunTestCase( true, false,  true,  true,   20, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, null),
-                RunTestCase( true,  true, false,  true,   20,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
-
-                // (Contradictory case)
-                //RunTestCase( true,  true,  true,  true, null, null, ChunkType.Models, ChunkType.Unknown,      ChunkType.Unknown,      MemoryLocationType.LowMemory,  null,                          null),
+                // With Kraken (bit 0x8000 is effectively ignored, AFAIK)
+                RunTestCase(false, false, false,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false, false,  true,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true, false,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true, false, false,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true, false,  true,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true, false,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
             };
 
             results = results.Where(x => x != null).ToList();
@@ -153,6 +170,7 @@ namespace SF3.Tests.Models.Structs {
                 MemoryLocationType? expectedSurfaceModelMemoryLocation
             ) {
                 string TF(bool x) => x ? "T" : "F";
+                string PF(bool x) => x ? "P" : "F";
                 var settingsString = $"{TF(hasModels)}{TF(hasSurfaceModel)}{TF(has0x8000)}{TF(hasKraken)}{TF(hasRotatableTextures)}";
 
                 flags.Bit_0x0100_HasModels = hasModels;
@@ -162,69 +180,72 @@ namespace SF3.Tests.Models.Structs {
                 flags.Bit_0x0002_HasSurfaceTextureRotation = hasRotatableTextures;
 
                 var resultsString =
-                    TF(expectedModelChunkIndex              == flags.ModelsChunkIndex) +
-                    TF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
-                    TF(expectedChunk1Type                   == flags.Chunk1Type) +
-                    TF(expectedChunk2Type                   == flags.Chunk2Type) +
-                    TF(expectedChunk20Type                  == flags.Chunk20Type) +
-                    TF(expectedChunk1PointersMemoryLocation == flags.Chunk1PointersMemoryLocation) +
-                    TF(expectedModelsMemoryLocation         == flags.ModelsMemoryLocation) +
-                    TF(expectedSurfaceModelMemoryLocation   == flags.SurfaceModelMemoryLocation);
+                    PF(expectedModelChunkIndex              == flags.ModelsChunkIndex) +
+                    PF(expectedSurfaceModelChunkIndex       == flags.SurfaceModelChunkIndex) +
+                    PF(expectedChunk1Type                   == flags.Chunk1Type) +
+                    PF(expectedChunk2Type                   == flags.Chunk2Type) +
+                    PF(expectedChunk20Type                  == flags.Chunk20Type) +
+                    PF(expectedChunk1PointersMemoryLocation == flags.Chunk1PointersMemoryLocation) +
+                    PF(expectedModelsMemoryLocation         == flags.ModelsMemoryLocation) +
+                    PF(expectedSurfaceModelMemoryLocation   == flags.SurfaceModelMemoryLocation);
 
-                if (resultsString != "TTTTTTTT")
+                if (resultsString != "PPPPPPPP")
                     return $"{settingsString}: {resultsString}";
                 else
                     return null;
             }
 
             var results = new List<string?>() {
-                // No rotatable textures
-                // -------------------------
-                // Without Kraken
-                RunTestCase(false, false, false, false, false, null, null, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false, false,  true, false, false, null, null, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false,  true, false, false, false, null,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        null,                          null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true, false, false, null,   20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.SurfaceModel, null,                          null,                          MemoryLocationType.HighMemory),
-                RunTestCase( true, false, false, false, false,    1, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true, false,  true, false, false,    1, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true,  true, false, false, false,   20,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Models,       null,                          MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
-                RunTestCase( true,  true,  true, false, false,    1,   20, ChunkType.Models, ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                // Some notes in Scenario 3 + PD:
+                // - Chunk[1] is always low memory
+                // - Chunk[2] is always low memory
+                // - Chunk[20] is always high memory
+                // - Surface models are in either chunk[2] (low) or chunk[20] (high) depending on bit 0x8000, the existance of extra models (Kraken), and rotatable textures
+                // - Models are in either chunk[1] (low) or chunk[20] (high) depending on the existance of the surface model, bit 0x8000, the existance of extra models (Kraken), and rotatable textures
+                // - Extra models (Kraken) are in chunk[1] (low memory)
+                // - Has rotatable textures; forces surface models to chunk[2] (low memory)
 
-                // With Kraken
-                RunTestCase(false, false, false,  true, false, null, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          null),
-                RunTestCase(false, false,  true,  true, false, null, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          null),
-                RunTestCase(false,  true, false,  true, false, null,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true,  true, false, null,   20, ChunkType.Models, ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  null,                          MemoryLocationType.HighMemory),
-                RunTestCase( true, false, false,  true, false,   20, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, null),
-                RunTestCase( true, false,  true,  true, false,   20, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, null),
-                RunTestCase( true,  true, false,  true, false,   20,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                // Without Kraken, no rotatable textures
+                RunTestCase(false, false, false, false, false,  1, 20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase(false, false,  true, false, false,  1, 20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase(false,  true, false, false, false, 20,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true, false, false,  1, 20, ChunkType.Unset,  ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase( true, false, false, false, false,  1, 20, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase( true, false,  true, false, false,  1, 20, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
+                RunTestCase( true,  true, false, false, false, 20,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true, false, false,  1, 20, ChunkType.Models, ChunkType.Unset,        ChunkType.SurfaceModel, MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory),
 
-                // (Contradictory cases)
-                //RunTestCase( true,  true,  true,  true, false, null, null, ChunkType.Models, ChunkType.Unknown,      ChunkType.Unknown,      MemoryLocationType.LowMemory,  null,                          null),
+                // With Kraken, no rotatable textures (bit 0x8000 is effectively ignored, AFAIK)
+                RunTestCase(false, false, false,  true, false, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false, false,  true,  true, false, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true, false,  true, false, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true,  true, false, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true, false, false,  true, false, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true, false,  true,  true, false, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true, false,  true, false, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true,  true, false, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
 
-                // Rotatable textures
-                // -------------------------
-                // Without Kraken
-                RunTestCase(false, false, false, false,  true, null, null, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false, false,  true, false,  true, null, null, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        null,                          null,                          null),
-                RunTestCase(false,  true, false, false,  true, null,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        null,                          null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true, false,  true, null,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        null,                          null,                          MemoryLocationType.LowMemory),
-                RunTestCase( true, false, false, false,  true,    1, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true, false,  true, false,  true,    1, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  null),
-                RunTestCase( true,  true, false, false,  true,   20,    2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Models,       null,                          MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
-                RunTestCase( true,  true,  true, false,  true,    1,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                // -------------------------------------
 
-                // With Kraken
-                RunTestCase(false, false, false,  true,  true, null, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          null),
-                RunTestCase(false, false,  true,  true,  true, null, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          null),
-                RunTestCase(false,  true, false,  true,  true, null,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          MemoryLocationType.LowMemory),
-                RunTestCase(false,  true,  true,  true,  true, null,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  null,                          MemoryLocationType.LowMemory),
-                RunTestCase( true, false, false,  true,  true,   20, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, null),
-                RunTestCase( true, false,  true,  true,  true,   20, null, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, null),
-                RunTestCase( true,  true, false,  true,  true,   20,    2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                // Without Kraken, rotatable textures
+                RunTestCase(false, false, false, false,  true,  1,  2, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase(false, false,  true, false,  true,  1,  2, ChunkType.Unset,  ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase(false,  true, false, false,  true, 20,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true, false,  true,  1,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase( true, false, false, false,  true,  1,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase( true, false,  true, false,  true,  1,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
+                RunTestCase( true,  true, false, false,  true, 20,  2, ChunkType.Unset,  ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true, false,  true,  1,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory,  MemoryLocationType.LowMemory),
 
-                // (Contradictory cases)
-                //RunTestCase( true,  true,  true,  true, false, null, null, ChunkType.Models, ChunkType.Unknown,      ChunkType.Unknown,      MemoryLocationType.LowMemory,  null,                          null),
+                // With Kraken, rotatable textures (bit 0x8000 is effectively ignored, AFAIK)
+                RunTestCase(false, false, false,  true,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false, false,  true,  true,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true, false,  true,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase(false,  true,  true,  true,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Unset,        MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true, false, false,  true,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true, false,  true,  true,  true, 20,  2, ChunkType.Models, ChunkType.Unset,        ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true, false,  true,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
+                RunTestCase( true,  true,  true,  true,  true, 20,  2, ChunkType.Models, ChunkType.SurfaceModel, ChunkType.Models,       MemoryLocationType.LowMemory,  MemoryLocationType.HighMemory, MemoryLocationType.LowMemory),
             };
 
             results = results.Where(x => x != null).ToList();
