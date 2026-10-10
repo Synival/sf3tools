@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using CommonLib.Win.Utils;
 using SF3.ModelLoaders;
 
 namespace SF3.Win.ModelLoader {
     public class InteractiveModelFileLoader : ModelFileLoader {
+        public static Action<InteractiveModelFileLoader> GlobalOnLoad { get;  set; }
+
         protected override bool OnFinished() {
             var errors = Model.GetErrors();
 
@@ -23,6 +26,11 @@ namespace SF3.Win.ModelLoader {
             }
 
             return true;
+        }
+
+        protected override void OnLoad() {
+            base.OnLoad();
+            GlobalOnLoad?.Invoke(this);
         }
     }
 }

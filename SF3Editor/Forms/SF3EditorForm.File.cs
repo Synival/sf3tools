@@ -18,6 +18,8 @@ using SF3.Models.Files.CHR;
 using SF3.Win.Views.MPD;
 using SF3.Models.Files.DAT;
 using SF3.Models.Files.X8PC;
+using System.Collections.Generic;
+using CommonLib.Rigging;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -36,6 +38,24 @@ namespace SF3.Editor.Forms {
 
             UpdateRecentFilesMenu();
             _appSettings.RecentFilesChanged += (s, e) => UpdateRecentFilesMenu();
+    
+            InteractiveModelFileLoader.GlobalOnLoad = OnFileLoad;
+        }
+
+        private void OnFileLoad(InteractiveModelFileLoader loader) {
+            var model = loader.Model;
+
+            // X8PC files for Scenario 1 and earlier get their attack animation keyframes from a separate X8AN file.
+            // Provide a loader for them.
+            if (model is IX8PC_File x8pc && x8pc.Scenario <= ScenarioType.Scenario1) {
+                foreach (var pc in x8pc.PolyCharTable)
+                    pc.KeyframeLoader = PolyCharKeyframeLoader;
+            }
+        }
+
+        private IReadOnlyList<IBoneKeyframe>? PolyCharKeyframeLoader(int modelId, PCAnimationType animId) {
+            // TODO: Cross-reference with X014 to load X8AN file (if not loaded) and fetch animations.
+            return null;
         }
 
         /// <summary>
