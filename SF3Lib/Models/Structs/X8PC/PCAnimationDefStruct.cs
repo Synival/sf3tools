@@ -84,11 +84,17 @@ namespace SF3.Models.Structs.X8PC {
             get => Data.GetUInt32(_aniCommandsOffsetAddr);
             set => Data.SetUInt32(_aniCommandsOffsetAddr, value);
         }
+
         public PolyChar PolyChar { get; }
         public INameGetterContext NameGetterContext { get; }
 
+        public IReadOnlyList<IBoneKeyframe> LoadedKeyframes { get; set; }
+
         public IReadOnlyList<IBoneKeyframe> BoneKeyframes {
             get {
+                if (LoadedKeyframes != null)
+                    return LoadedKeyframes;
+
                 if (!IsInAttackAnimChunk)
                     return PolyChar.BoneKeyframesTable;
 
@@ -101,5 +107,14 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         private readonly Func<int, PCAnimationDefStruct> _neighborGetter;
+
+        public IReadOnlyList<IBoneKeyframe> GetOrLoadKeyframes() {
+            var keyframes = BoneKeyframes;
+            if (keyframes == null && LoadedKeyframes == null && PolyChar?.KeyframeLoader != null) {
+                LoadedKeyframes = PolyChar.KeyframeLoader(PolyChar.ID, (PCAnimationType) AnimID);
+                keyframes = LoadedKeyframes;
+            }
+            return keyframes;
+        }
     }
 }

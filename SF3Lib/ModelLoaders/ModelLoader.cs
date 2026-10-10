@@ -60,6 +60,7 @@ namespace SF3.ModelLoaders {
 
             Model.IsModifiedChanged += _onModifiedChangedDelegate;
 
+            OnLoad();
             Loaded?.Invoke(this, EventArgs.Empty);
             if (!IsLoaded)
                 return false;
@@ -190,6 +191,11 @@ namespace SF3.ModelLoaders {
         /// </summary>
         /// <returns>'true' if closing was successful and can continue. Otherwise, 'false'.</returns>
         protected virtual bool OnClose() => true;
+
+        /// <summary>
+        /// Invoked after a load is attempted.
+        /// </summary>
+        protected virtual void OnLoad() {}
 
         public bool Close() {
             if (!IsLoaded)

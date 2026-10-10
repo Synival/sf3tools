@@ -6,5 +6,7 @@ namespace CommonLib.Rigging {
         int StartFrame { get; }
         int FrameCount { get; }
         IReadOnlyList<IBoneKeyframe> BoneKeyframes { get; }
+
+        IReadOnlyList<IBoneKeyframe> GetOrLoadKeyframes();
     }
 }

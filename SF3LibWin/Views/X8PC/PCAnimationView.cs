@@ -6,7 +6,6 @@ using CommonLib.Extensions;
 using SF3.Models.Structs.X8PC;
 using CommonLib.Rigging;
 using System.Collections.Generic;
-using CommonLib.Imaging;
 using OpenTK.Mathematics;
 
 namespace SF3.Win.Views.X8PC {
@@ -84,7 +83,7 @@ namespace SF3.Win.Views.X8PC {
                 _maxFrame = PolyChar?.BoneKeyframesTable?.GetLatestKeyframe() ?? 0;
             }
             _frame = _minFrame;
-            _keyframes = _animation?.BoneKeyframes ?? PolyChar?.BoneKeyframesTable;
+            _keyframes = _animation?.GetOrLoadKeyframes() ?? PolyChar?.BoneKeyframesTable;
             UpdateKeyframeInfo();
 
             if (Control != null)
