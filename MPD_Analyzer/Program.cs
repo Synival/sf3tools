@@ -8,6 +8,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.MPD;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace MPD_Analyzer {
     public class Program {
@@ -147,7 +148,7 @@ namespace MPD_Analyzer {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario, FileUtils.DetermineFileID(scenario, file))) {
                             var header = mpdFile.MPDHeader;
                             var chunkHeaders = mpdFile.ChunkLocations;
                             var mapFlags = mpdFile.MPDHeader.MapFlags;

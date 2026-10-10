@@ -6,6 +6,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Structs.Shared;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace Grayscaler {
     public class Program {
@@ -37,7 +38,7 @@ namespace Grayscaler {
                 var byteData = new ByteData(new ByteArray(File.ReadAllBytes(fileIn)));
 
                 // Create an MPD file that works with our new ByteData.
-                var mpdFile = MPD_File.Create(byteData, nameGetters, scenario);
+                var mpdFile = MPD_File.Create(byteData, nameGetters, scenario, FileUtils.DetermineFileID(scenario, fileIn));
 
                 // Gather all textures into one collection.
                 var textures1 = (mpdFile.TextureChunks == null) ? [] : mpdFile.TextureChunks

@@ -38,7 +38,7 @@ namespace SF3.Tests.MPD.Writer {
             if (performByteComparison)
                 errors.AddRange(AnalysisUtils.GetByteComparisonErrors(mpdFile, outputData, rawDataSkipRegions));
 
-            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), mpdFile.NameGetterContext, scenario);
+            var newFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(outputData)), mpdFile.NameGetterContext, scenario, null);
             errors.AddRange(AnalysisUtils.GetMPDContentComparisonErrors(mpdFile, newFile, chunkSkipRegions));
 
             if (errors.Count > 0)

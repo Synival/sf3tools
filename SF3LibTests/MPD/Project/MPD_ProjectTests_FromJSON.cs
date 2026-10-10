@@ -44,8 +44,8 @@ namespace SF3.Tests.MPD.Project {
 
             var errorMsg = "\r\n============================================\r\n" + string.Join("\r\n", byteErrors);
 
-            var mpdFileOriginal = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(exportOriginal)), mpdOriginal.NameGetterContext, mpdOriginal.Scenario);
-            var mpdFileCopy     = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(exportCopy)), mpdOriginal.NameGetterContext, mpdOriginal.Scenario);
+            var mpdFileOriginal = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(exportOriginal)), mpdOriginal.NameGetterContext, mpdOriginal.Scenario, mpdOriginal.FileID);
+            var mpdFileCopy     = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(exportCopy)), mpdOriginal.NameGetterContext, mpdOriginal.Scenario, mpdOriginal.FileID);
 
             var mpdErrors = AnalysisUtils.GetMPDContentComparisonErrors(mpdFileOriginal, mpdFileCopy);
             if (mpdErrors?.Length > 0)

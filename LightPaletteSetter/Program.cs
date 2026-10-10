@@ -5,6 +5,7 @@ using SF3.Models.Files.MPD;
 using SF3.Models.Tables.Shared;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 using static CommonLib.Imaging.PixelConversion;
 
 namespace LightPaletteSetter {
@@ -76,7 +77,7 @@ namespace LightPaletteSetter {
                 var byteData = new ByteData(new ByteArray(File.ReadAllBytes(fileIn)));
 
                 // Create an MPD file that works with our new ByteData.
-                var mpdFile = MPD_File.Create(byteData, nameGetters, scenario);
+                var mpdFile = MPD_File.Create(byteData, nameGetters, scenario, FileUtils.DetermineFileID(scenario, fileIn));
 
                 // Update light palette.
                 var lightingPalette = mpdFile.LightPaletteColorTable;

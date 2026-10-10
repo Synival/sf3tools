@@ -5,6 +5,7 @@ using SF3.ByteData;
 using SF3.Models.Files.X8PC;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace ModelConverter.Tests.Utils {
     [TestClass]
@@ -124,7 +125,7 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void ExportThenImport_WithBarrelFromX8PC_ProducesOriginal() {
             var barrelData = File.ReadAllBytes(c_barrelPath);
-            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, FileUtils.DetermineFileID(ScenarioType.Scenario1, c_barrelPath));
             var polyChar = x8pcFile.PolyCharTable[0];
             TestModelConversion(polyChar.GetModel(0, 0), polyChar);
         }
@@ -132,7 +133,7 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void ExportThenImport_WithSynbiosPart1FromX8PC_ProducesOriginal() {
             var barrelData = File.ReadAllBytes(c_synbiosPath);
-            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, FileUtils.DetermineFileID(ScenarioType.Scenario1, c_synbiosPath));
             var polyChar = x8pcFile.PolyCharTable[0];
             TestModelConversion(polyChar.GetModel(0, 0), polyChar);
         }
@@ -140,7 +141,7 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void ExportThenImport_WithSynbiosPolyChar_ProducesOriginal() {
             var barrelData = File.ReadAllBytes(c_synbiosPath);
-            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, FileUtils.DetermineFileID(ScenarioType.Scenario1, c_synbiosPath));
             var polyChar = x8pcFile.PolyCharTable[0];
             TestModelConversion(polyChar.ToArray(), polyChar);
         }
@@ -148,7 +149,7 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void CompareModels_BarrelFromBlender_SameAsOriginal() {
             var barrelData = File.ReadAllBytes(c_barrelPath);
-            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, FileUtils.DetermineFileID(ScenarioType.Scenario1, c_barrelPath));
             var polyChar = x8pcFile.PolyCharTable[0];
             var polyCharModels = polyChar.ToArray();
 
@@ -162,7 +163,7 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void CompareModels_BarrelFromBlenderPostQuadReconstruction_SameAsOriginal() {
             var barrelData = File.ReadAllBytes(c_barrelPath);
-            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, FileUtils.DetermineFileID(ScenarioType.Scenario1, c_barrelPath));
             var polyChar = x8pcFile.PolyCharTable[0];
             var polyCharModels = polyChar.ToArray();
 
@@ -177,7 +178,7 @@ namespace ModelConverter.Tests.Utils {
         [TestMethod]
         public void CompareModels_SynbiosFromBlender_SameAsOriginal() {
             var barrelData = File.ReadAllBytes(c_synbiosPathPD);
-            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var x8pcFile = X8PC_File.Create(new ByteData(new ByteArray(barrelData)), new NameGetterContext(ScenarioType.PremiumDisk), ScenarioType.PremiumDisk, FileUtils.DetermineFileID(ScenarioType.PremiumDisk, c_synbiosPathPD));
             var polyChar = x8pcFile.PolyCharTable[0];
             var polyCharModels = polyChar.ToArray();
 

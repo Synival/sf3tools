@@ -14,13 +14,14 @@ namespace SF3.Models.Files.X011 {
         public override int RamAddress => 0x06068000;
         public override int RamAddressLimit => 0x06070000;
 
-        protected X011_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected X011_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
-        public static X011_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new X011_File(data, nameContext, scenario);
+        public static X011_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X011_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X011_File");
             return newFile;

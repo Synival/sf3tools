@@ -15,7 +15,8 @@ namespace SF3.Models.Files.X014 {
         public override int RamAddress => 0x06088000;
         public override int RamAddressLimit => 0x0609D800;
 
-        protected X014_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected X014_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             if (Scenario == ScenarioType.Scenario2) {
                 var versionCheckValue = data.GetInt32(0x08);
                 if (versionCheckValue == 0x06094A60)
@@ -30,8 +31,8 @@ namespace SF3.Models.Files.X014 {
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
-        public static X014_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new X014_File(data, nameContext, scenario);
+        public static X014_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X014_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X014_File");
             return newFile;

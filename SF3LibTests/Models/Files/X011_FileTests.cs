@@ -3,6 +3,7 @@ using CommonLib.Tests;
 using SF3.Models.Files.X011;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -16,7 +17,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X011_File Create()
-                => X011_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
+                => X011_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario, FileUtils.DetermineFileID(Scenario, Filename));
 
             public int ExpectedItemIconRows { get; }
             public int ExpectedSpellIconRows { get; }

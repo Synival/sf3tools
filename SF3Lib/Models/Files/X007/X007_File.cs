@@ -14,7 +14,8 @@ namespace SF3.Models.Files.X007 {
         public override int RamAddress { get; }
         public override int RamAddressLimit { get; }
 
-        protected X007_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected X007_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             switch (scenario) {
                 case ScenarioType.Scenario1:
                     RamAddress = 0x06056000;
@@ -40,8 +41,8 @@ namespace SF3.Models.Files.X007 {
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
-        public static X007_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new X007_File(data, nameContext, scenario);
+        public static X007_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X007_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X007_File");
             return newFile;

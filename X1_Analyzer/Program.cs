@@ -5,6 +5,7 @@ using SF3.ByteData;
 using SF3.Models.Files.X1;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace X1_Analyzer {
     public class Program {
@@ -111,7 +112,7 @@ namespace X1_Analyzer {
                     // Create an MPD file that works with our new ByteData.
                     try {
                         var isBTL99 = filename == "X1BTL99";
-                        using (var x1File = X1_File.Create(byteData, nameGetterContexts[scenario], scenario, isBTL99)) {
+                        using (var x1File = X1_File.Create(byteData, nameGetterContexts[scenario], scenario, FileUtils.DetermineFileID(scenario, file), isBTL99)) {
                             var matchReports = X1_Match_Func(filename, x1File);
 
                             // If the match is 'null', that means we're just skipping this file completely.

@@ -5,6 +5,7 @@ using SF3.ByteData;
 using SF3.Models.Files.X8PC;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace X8PC_Analyzer {
     public class Program {
@@ -108,7 +109,7 @@ namespace X8PC_Analyzer {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var x8pcFile = X8PC_File.Create(byteData, nameGetterContexts[scenario], scenario)) {
+                        using (var x8pcFile = X8PC_File.Create(byteData, nameGetterContexts[scenario], scenario, FileUtils.DetermineFileID(scenario, file))) {
                             var matchReports = X8PC_Match_Func(filename, x8pcFile);
 
                             // If the match is 'null', that means we're just skipping this file completely.

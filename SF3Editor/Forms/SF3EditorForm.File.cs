@@ -20,6 +20,7 @@ using SF3.Models.Files.DAT;
 using SF3.Models.Files.X8PC;
 using System.Collections.Generic;
 using CommonLib.Rigging;
+using SF3.Utils;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -125,7 +126,7 @@ namespace SF3.Editor.Forms {
 
             try {
                 if (!fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
-                    (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario)))
+                    (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario, FileUtils.DetermineFileID(scenario, filename))))
                 {
                     fileLoader.Close();
                     return null;

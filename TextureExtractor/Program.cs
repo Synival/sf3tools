@@ -9,6 +9,7 @@ using SF3.ByteData;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 using static CommonLib.Utils.MemoryUtils;
 
 namespace TextureExtractor {
@@ -83,7 +84,7 @@ namespace TextureExtractor {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario, FileUtils.DetermineFileID(scenario, file))) {
                             // Let's only gather tiles used in surface character rows.
                             if (mpdFile.SurfaceModelChunk == null) {
                                 Console.WriteLine("No surface textures");

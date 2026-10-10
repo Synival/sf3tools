@@ -3,6 +3,7 @@ using CommonLib.Tests;
 using SF3.Models.Files.X002;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -25,7 +26,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X002_File Create()
-                => X002_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
+                => X002_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario, FileUtils.DetermineFileID(Scenario, Filename));
 
             public int ExpectedItems { get; }
             public int ExpectedSpells { get; }
@@ -241,15 +242,15 @@ namespace SF3.Tests.Models.Files {
                     return;
                 }
 
-                Assert.AreEqual(0, table[0].SubLoadID);
-                Assert.AreEqual(0, table[0].IfFlagUnset);
-                Assert.AreEqual(0, table[0].WarpTrigger);
-                Assert.AreEqual(3, table[0].LoadID);
+                Assert.AreEqual(0,     table[0].SubLoadID);
+                Assert.AreEqual(0,     table[0].IfFlagUnset);
+                Assert.AreEqual(0,     table[0].WarpTrigger);
+                Assert.AreEqual(3,     table[0].LoadID);
 
-                Assert.AreEqual(1, table[1].SubLoadID);
+                Assert.AreEqual(1,     table[1].SubLoadID);
                 Assert.AreEqual(0xFFF, table[1].IfFlagUnset);
-                Assert.AreEqual(1, table[1].WarpTrigger);
-                Assert.AreEqual(0x02, table[1].LoadID);
+                Assert.AreEqual(1,     table[1].WarpTrigger);
+                Assert.AreEqual(0x02,  table[1].LoadID);
 
                 Assert.AreEqual(779, table.Count);
             });

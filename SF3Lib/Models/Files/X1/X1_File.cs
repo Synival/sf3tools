@@ -26,7 +26,8 @@ namespace SF3.Models.Files.X1 {
         public override int RamAddressLimit => (int) X1RamUpperLimit;
         public const uint X1RamUpperLimit = 0x06068000;
 
-        protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) : base(data, nameContext, scenario) {
+        protected X1_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId, bool isBTL99)
+        : base(data, nameContext, scenario, fileId) {
             IsBTL99 = isBTL99;
             RamAddress = IsBTL99 ? 0x06060000 : Scenario == ScenarioType.Scenario1 ? 0x0605f000 : 0x0605e000;
 
@@ -34,8 +35,8 @@ namespace SF3.Models.Files.X1 {
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
-        public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, bool isBTL99) {
-            var newFile = new X1_File(data, nameContext, scenario, isBTL99);
+        public static X1_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId, bool isBTL99) {
+            var newFile = new X1_File(data, nameContext, scenario, fileId, isBTL99);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X1_File");
             return newFile;

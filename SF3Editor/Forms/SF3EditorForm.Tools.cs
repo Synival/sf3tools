@@ -10,6 +10,7 @@ using CommonLib.Types;
 using DFRLib.Types;
 using DFRLib.Win.Forms;
 using SF3.Models.Files;
+using SF3.Utils;
 using SF3.Win.ModelLoader;
 using static CommonLib.Win.Utils.MessageUtils;
 using static SF3.Utils.FileUtils;
@@ -96,7 +97,7 @@ namespace SF3.Editor.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new InteractiveModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyToFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario)))
+                if (!copyModelLoader.LoadFile(copyToFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario, DetermineFileID(scenario, copyToFilename))))
                     return;
 
                 result = file.Loader.Model.BulkCopyProperties(copyModelLoader.Model);
@@ -137,7 +138,7 @@ namespace SF3.Editor.Forms {
             ObjectExtensions.BulkCopyPropertiesResult result = null;
             try {
                 var copyModelLoader = new InteractiveModelFileLoader();
-                if (!copyModelLoader.LoadFile(copyFromFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario)))
+                if (!copyModelLoader.LoadFile(copyFromFilename, null, (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario, DetermineFileID(scenario, copyFromFilename))))
                     return;
 
                 result = copyModelLoader.Model.BulkCopyProperties(file.Loader.Model);

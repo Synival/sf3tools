@@ -6,6 +6,7 @@ using SF3.Models.Structs;
 using SF3.Models.Structs.MPD;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace MPD_DataSearcher {
     public class Program {
@@ -93,7 +94,7 @@ namespace MPD_DataSearcher {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario)) {
+                        using (var mpdFile = MPD_File.Create(byteData, nameGetterContexts, scenario, FileUtils.DetermineFileID(scenario, file))) {
                             var mpdFileData = mpdFile.Data.Data;
 
                             var fileStr = GetFileString(scenario, file, mpdFile);

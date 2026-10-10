@@ -462,7 +462,7 @@ namespace MPD_Analyzer {
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, mpdFile.Scenario);
                 writer.WriteMPD(mpdFile);
-                newMpd = MPD_File.Create(new ByteData(new ByteArray(stream.ToArray())), mpdFile.NameGetterContext, mpdFile.Scenario);
+                newMpd = MPD_File.Create(new ByteData(new ByteArray(stream.ToArray())), mpdFile.NameGetterContext, mpdFile.Scenario, mpdFile.FileID);
             }
 
             return AnalysisUtils.GetMPDContentComparisonErrors(mpdFile, newMpd);
@@ -479,7 +479,7 @@ namespace MPD_Analyzer {
             byte[] bytes2;
             using (var stream = new MemoryStream()) {
                 var writer = new MPD_Writer(stream, mpdFile.Scenario);
-                var mpd = MPD_File.Create(new ByteData(new ByteArray(bytes1)), mpdFile.NameGetterContext, mpdFile.Scenario);
+                var mpd = MPD_File.Create(new ByteData(new ByteArray(bytes1)), mpdFile.NameGetterContext, mpdFile.Scenario, mpdFile.FileID);
                 writer.WriteMPD(mpd);
                 bytes2 = stream.ToArray();
             }

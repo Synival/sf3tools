@@ -4,6 +4,7 @@ using CommonLib.Tests;
 using SF3.Models.Files.MPD;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 using static CommonLib.Utils.Compression;
 using static CommonLib.Utils.MemoryUtils;
 
@@ -38,7 +39,7 @@ namespace SF3.Tests.Compression {
             var testCases = CreateAllTestCases();
             TestCase.Run(testCases, testCase => {
                 var byteData = new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(testCase.Filename)));
-                using (var mpdFile = MPD_File.Create(byteData, nameGetters, testCase.Scenario))
+                using (var mpdFile = MPD_File.Create(byteData, nameGetters, testCase.Scenario, FileUtils.DetermineFileID(testCase.Scenario, testCase.Filename)))
                     func(testCase, mpdFile);
             });
         }
@@ -134,7 +135,7 @@ namespace SF3.Tests.Compression {
                 };
 
                 mpdFile.CommitChunks();
-                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters, testCase.Scenario);
+                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters, testCase.Scenario, FileUtils.DetermineFileID(testCase.Scenario, testCase.Filename));
             });
         }
 
@@ -154,7 +155,7 @@ namespace SF3.Tests.Compression {
                     { mpdFile.Scenario, mpdFile.NameGetterContext }
                 };
                 firstUncompressedChunk.ChunkRAMAddress = newChunkPos + 0x290000;
-                mpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters, testCase.Scenario);
+                mpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters, testCase.Scenario, FileUtils.DetermineFileID(testCase.Scenario, testCase.Filename));
 
                 // Act
                 var orderedChunkLocationsOrig = mpdFile.ChunkLocations
@@ -181,7 +182,7 @@ namespace SF3.Tests.Compression {
                 }
 
                 // Attempt to create the file to make sure it's not corrupted.
-                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters, testCase.Scenario);
+                var recreatedMpdFile = MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(mpdFile.Data.GetDataCopy())), nameGetters, testCase.Scenario, FileUtils.DetermineFileID(testCase.Scenario, testCase.Filename));
             });
         }
     }

@@ -13,14 +13,14 @@ namespace SF3.Models.Files.X8PC {
         public override int RamAddress      => 0x060A0000;
         public override int RamAddressLimit => 0x060A8000; // TODO: confirm this!
 
-        protected X8PC_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario)
-        : base(data, nameContext, scenario) {
+        protected X8PC_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
-        public static X8PC_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new X8PC_File(data, nameContext, scenario);
+        public static X8PC_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X8PC_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException($"Couldn't initialize {nameof(X8PC_File)}");
             return newFile;

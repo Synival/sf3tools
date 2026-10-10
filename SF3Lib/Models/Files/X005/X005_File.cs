@@ -12,7 +12,8 @@ namespace SF3.Models.Files.X005 {
         public override int RamAddress { get; }
         public override int RamAddressLimit { get; }
 
-        protected X005_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected X005_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             RamAddress = GetRamAddress();
             RamAddressLimit = GetRamAddressLimit();
 
@@ -42,8 +43,8 @@ namespace SF3.Models.Files.X005 {
             }
         }
 
-        public static X005_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new X005_File(data, nameContext, scenario);
+        public static X005_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X005_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X005_File");
             return newFile;

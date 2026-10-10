@@ -13,12 +13,13 @@ namespace SF3.Models.Files.X8AN {
         public override int RamAddress => 0x00200000; // TODO: Where?
         public override int RamAddressLimit => 0x002FFFFF; // TODO: Where?
 
-        protected X8AN_File(IByteData data, INameGetterContext nameContext) : base(data, nameContext, ScenarioType.Scenario1) {
+        protected X8AN_File(IByteData data, INameGetterContext nameContext, int? fileId)
+        : base(data, nameContext, ScenarioType.Scenario1, fileId) {
             Discoveries = null;
         }
 
-        public static X8AN_File Create(IByteData data, INameGetterContext nameContext) {
-            var newFile = new X8AN_File(data, nameContext);
+        public static X8AN_File Create(IByteData data, INameGetterContext nameContext, int? fileId) {
+            var newFile = new X8AN_File(data, nameContext, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X8AN_File");
             return newFile;

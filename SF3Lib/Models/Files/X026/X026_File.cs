@@ -14,13 +14,14 @@ namespace SF3.Models.Files.X026 {
         public override int RamAddress => 0x06078000;
         public override int RamAddressLimit => 0x06080000;
 
-        protected X026_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext, scenario) {
+        protected X026_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             Discoveries = new DiscoveryContext(Data.GetDataCopy(), (uint) RamAddress);
             Discoveries.DiscoverUnknownPointersToValueRange((uint) RamAddress, (uint) RamAddressLimit - 1);
         }
 
-        public static X026_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario) {
-            var newFile = new X026_File(data, nameContext, scenario);
+        public static X026_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X026_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X026_File");
             return newFile;

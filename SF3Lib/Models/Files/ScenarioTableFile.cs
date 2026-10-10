@@ -9,12 +9,14 @@ namespace SF3.Models.Files {
     /// we might as well have it to avoid lots of code duplication.
     /// </summary>
     public abstract class ScenarioTableFile : TableFile, IScenarioTableFile {
-        protected ScenarioTableFile(IByteData data, INameGetterContext nameContext, ScenarioType scenario) : base(data, nameContext) {
+        protected ScenarioTableFile(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) : base(data, nameContext) {
             Scenario = scenario;
+            FileID   = fileId;
         }
 
         ScenarioType? IGameFile.Scenario => Scenario;
         public ScenarioType Scenario { get; }
+        public int? FileID { get; }
         public abstract int RamAddress { get; }
         public abstract int RamAddressLimit { get; }
         public override string Title => base.Title + Scenario.ToString();

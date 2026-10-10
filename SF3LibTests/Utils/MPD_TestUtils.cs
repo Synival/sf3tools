@@ -3,13 +3,14 @@ using SF3.Models.Files.MPD;
 using SF3.MPD.Writer;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Tests.Utils {
     public static class MPD_TestUtils {
         public static MPD_File MakeMPD_File(ScenarioType scenario, string filename) {
             var filePath = TestDataPaths.ResourcePath(scenario, Path.GetFileName(filename))!;
             var fileData = File.ReadAllBytes(filePath);
-            return MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(fileData)), new NameGetterContext(scenario), scenario);
+            return MPD_File.Create(new SF3.ByteData.ByteData(new ByteArray(fileData)), new NameGetterContext(scenario), scenario, FileUtils.DetermineFileID(scenario, filename));
         }
 
         public static IMPD_File RecreateMPD_File(IMPD_File mpd) {
@@ -23,7 +24,8 @@ namespace SF3.Tests.Utils {
             return MPD_File.Create(
                 new SF3.ByteData.ByteData(new ByteArray(outputData)),
                 mpd.NameGetterContext,
-                mpd.Scenario
+                mpd.Scenario,
+                mpd.FileID
             );
         }
 

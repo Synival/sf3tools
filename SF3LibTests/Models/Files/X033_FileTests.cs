@@ -3,6 +3,7 @@ using CommonLib.Tests;
 using SF3.Models.Files.X033;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace SF3.Tests.Models.Files {
     [TestClass]
@@ -20,7 +21,7 @@ namespace SF3.Tests.Models.Files {
             }
 
             public X033_File Create()
-                => X033_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario);
+                => X033_File.Create(new SF3.ByteData.ByteData(new ByteArray(File.ReadAllBytes(Filename))), new NameGetterContext(Scenario), Scenario, FileUtils.DetermineFileID(Scenario, Filename));
 
             public int ExpectedStatsRows { get; }
             public int ExpectedInitialInfoRows { get; }

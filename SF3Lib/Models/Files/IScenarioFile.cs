@@ -9,5 +9,10 @@ namespace SF3.Models.Files {
         /// The scenario/disc/file to edit.
         /// </summary>
         new ScenarioType Scenario { get; }
+
+        /// <summary>
+        /// Hard-coded disc-specific FileID for the file.
+        /// </summary>
+        int? FileID { get; }
     }
 }

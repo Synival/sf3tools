@@ -6,6 +6,7 @@ using SF3.Models.Structs.Shared;
 using SF3.Models.Tables.Shared;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace Randomizer {
     public class Program {
@@ -633,7 +634,7 @@ namespace Randomizer {
         }
 
         private static NameGetterContext s_ngc = new NameGetterContext(c_scenario);
-        private static IX031_File s_x033 = X031_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X033.BIN"))), s_ngc, c_scenario);
-        private static IX033_File s_x031 = X033_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X031.BIN"))), s_ngc, c_scenario);
+        private static IX031_File s_x033 = X031_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X033.BIN"))), s_ngc, c_scenario, FileUtils.DetermineFileID(c_scenario, "X033.BIN"));
+        private static IX033_File s_x031 = X033_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(c_filePath + "X031.BIN"))), s_ngc, c_scenario, FileUtils.DetermineFileID(c_scenario, "X031.BIN"));
     }
 }

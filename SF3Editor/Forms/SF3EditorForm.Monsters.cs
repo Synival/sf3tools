@@ -53,7 +53,7 @@ namespace SF3.Editor.Forms {
             X002_File? x002File = null;
             try {
                 var data = new ByteData.ByteData(new ByteArray(File.ReadAllBytes(x002Filename)));
-                x002File = X002_File.Create(data, new NameGetterContext(scenario), scenario);
+                x002File = X002_File.Create(data, new NameGetterContext(scenario), scenario, FileUtils.DetermineFileID(scenario, x002Filename));
             }
             catch (Exception e) {
                 ErrorMessage($"Couldn't open '{x002Filename}':\r\n\r\n{e.GetTypeAndMessage()}");
