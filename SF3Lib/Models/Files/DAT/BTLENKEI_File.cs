@@ -15,12 +15,12 @@ namespace SF3.Models.Files.DAT {
         // TODO: To where is this loaded?
         public override int RamAddressLimit => 0x00000000;
 
-        protected BTLENKEI_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario)
-        : base(data, nameGetterContext, scenario, DAT_FileType.BTLENKEI) {
+        protected BTLENKEI_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId)
+        : base(data, nameGetterContext, scenario, fileId, DAT_FileType.BTLENKEI) {
         }
 
-        public static BTLENKEI_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario) {
-            var newFile = new BTLENKEI_File(data, nameGetterContext, scenario);
+        public static BTLENKEI_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId) {
+            var newFile = new BTLENKEI_File(data, nameGetterContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize " + newFile.GetType().Name);
             return newFile;

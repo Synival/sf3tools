@@ -11,6 +11,7 @@ using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHRTool {
     public static class Decompile {
@@ -159,7 +160,7 @@ namespace CHRTool {
                 Logger.WriteLine("Creating CHP_File...");
             using (Logger.IndentedSection(verbose ? 1 : 0)) {
                 var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+                chpFile = CHP_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1, null);
             }
 
             // Get a CHR_Def from the CHR_File.
@@ -189,7 +190,7 @@ namespace CHRTool {
                 Logger.WriteLine("Creating CHR_File...");
             using (Logger.IndentedSection(verbose ? 1 : 0)) {
                 var nameGetterContext = new NameGetterContext(ScenarioType.Scenario1);
-                chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1);
+                chrFile = CHR_File.Create(new ByteData(new ByteArray(inputBytes)), nameGetterContext, ScenarioType.Scenario1, null);
             }
 
             // Get a CHR_Def from the CHR_File.

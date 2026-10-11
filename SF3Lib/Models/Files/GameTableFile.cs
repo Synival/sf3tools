@@ -9,8 +9,10 @@ namespace SF3.Models.Files {
     /// Seems like overkill, but this is so frequent, we might as well have it to avoid lots of code duplication.
     /// </summary>
     public abstract class GameTableFile : TableFile, IGameTableFile {
-        protected GameTableFile(IByteData data, INameGetterContext nameContext, ScenarioType? scenario) : base(data, nameContext) {
+        protected GameTableFile(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int? fileId)
+        : base(data, nameContext) {
             Scenario = scenario;
+            FileID   = fileId;
         }
 
         public ScenarioType? Scenario { get; }
@@ -18,5 +20,6 @@ namespace SF3.Models.Files {
         public abstract int RamAddressLimit { get; }
         public override string Title => base.Title + Scenario.ToString();
         public DiscoveryContext Discoveries { get; protected set; }
+        public int? FileID { get; set; }
     }
 }

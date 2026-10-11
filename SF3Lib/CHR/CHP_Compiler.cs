@@ -15,11 +15,11 @@ namespace SF3.CHR {
         /// <param name="nameGetterContext">Context for getting named values.</param>
         /// <param name="scenario">Scenario to which this CHP belongs.</param>
         /// <returns>A new CHP_File on success. Otherwise, 'null'.</returns>
-        public CHP_File Compile(CHP_Def chpDef, INameGetterContext nameGetterContext, ScenarioType scenario) {
+        public CHP_File Compile(CHP_Def chpDef, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId) {
             try {
                 using (var stream = new MemoryStream()) {
                     _ = Compile(chpDef, stream);
-                    return CHP_File.Create(new ByteData.ByteData(new ByteArray(stream.ToArray())), nameGetterContext, scenario);
+                    return CHP_File.Create(new ByteData.ByteData(new ByteArray(stream.ToArray())), nameGetterContext, scenario, fileId);
                 }
             }
             catch {
@@ -36,9 +36,9 @@ namespace SF3.CHR {
         /// CHR files will be skipped rather than written with zeroes. This buffer must be large enough to
         /// contain the entire CHP file.</param>
         /// <returns></returns>
-        public CHP_File Compile(CHP_Def chpDef, INameGetterContext nameGetterContext, ScenarioType scenario, byte[] buffer) {
+        public CHP_File Compile(CHP_Def chpDef, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId, byte[] buffer) {
             _ = Compile(chpDef, buffer);
-            return CHP_File.Create(new ByteData.ByteData(new ByteArray(buffer)), nameGetterContext, scenario);
+            return CHP_File.Create(new ByteData.ByteData(new ByteArray(buffer)), nameGetterContext, scenario, fileId);
         }
 
         /// <summary>

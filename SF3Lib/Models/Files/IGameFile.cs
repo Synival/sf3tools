@@ -13,6 +13,11 @@ namespace SF3.Models.Files {
         ScenarioType? Scenario { get; }
 
         /// <summary>
+        /// Hard-coded disc-specific FileID for the file.
+        /// </summary>
+        int? FileID { get; }
+
+        /// <summary>
         /// Binary data loaded in.
         /// </summary>
         IByteData Data { get; }

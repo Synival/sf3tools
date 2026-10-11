@@ -682,11 +682,11 @@ namespace SF3.Editor.Forms {
 
         private void tsmiFile_FileInfoAndErrors_Click(object sender, EventArgs e) {
             if (SelectedFile != null) {
-                var scenarioFile = SelectedFile?.Loader?.Model as IScenarioFile;
+                var gameFile = SelectedFile?.Loader?.Model as IGameFile;
                 var infoMsg = "";
-                if (scenarioFile != null) {
-                    infoMsg = $"Scenario: {scenarioFile.Scenario}\r\n";
-                    infoMsg += $"FileID: {(scenarioFile.FileID.HasValue ? ("0x" + scenarioFile.FileID.Value.ToString("X3")) : "(unknown)")}";
+                if (gameFile != null) {
+                    infoMsg = $"Scenario: {gameFile.Scenario}\r\n";
+                    infoMsg += $"FileID: {(gameFile.FileID.HasValue ? ("0x" + gameFile.FileID.Value.ToString("X3")) : "(unknown)")}";
                 }
 
                 var errors = SelectedFile?.Loader?.Model?.GetErrors() ?? [];

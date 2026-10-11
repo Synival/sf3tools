@@ -11,6 +11,7 @@ using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHRTool {
     public static class Describe {
@@ -83,7 +84,7 @@ namespace CHRTool {
 
         private static void DescribeCHR(string inputFile, bool verbose) {
             var bytes = File.ReadAllBytes(inputFile);
-            var chrFile = CHR_File.Create(new ByteData(new ByteArray(bytes)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var chrFile = CHR_File.Create(new ByteData(new ByteArray(bytes)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, null);
             DescribeCHR(chrFile, verbose);
         }
 
@@ -180,7 +181,7 @@ namespace CHRTool {
 
         private static void DescribeCHP(string inputFile, bool verbose) {
             var bytes = File.ReadAllBytes(inputFile);
-            var chpFile = CHP_File.Create(new ByteData(new ByteArray(bytes)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1);
+            var chpFile = CHP_File.Create(new ByteData(new ByteArray(bytes)), new NameGetterContext(ScenarioType.Scenario1), ScenarioType.Scenario1, null);
 
             int index = 0;
             foreach (var chrKv in chpFile.CHR_EntriesByOffset) {

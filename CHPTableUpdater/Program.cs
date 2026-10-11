@@ -11,6 +11,7 @@ using SF3.Models.Files.CHP;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHPTableUpdater {
     public class Program {
@@ -83,7 +84,8 @@ namespace CHPTableUpdater {
 
         private static ushort[] GetCompiledCHPTableData(ScenarioType scenario, string chpFile, INameGetterContext nameGetter) {
             var chpFullPath = $"{c_chpPaths[scenario]}/{chpFile}";
-            var chp = CHP_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(chpFullPath))), nameGetter, scenario);
+            var fileId = FileUtils.DetermineFileID(scenario, chpFile);
+            var chp = CHP_File.Create(new ByteData(new ByteArray(File.ReadAllBytes(chpFullPath))), nameGetter, scenario, fileId);
 
             var memberSize = (scenario == ScenarioType.Scenario1) ? 4 : 2;
             var dataSize = chp.CHR_EntriesByOffset.Count * memberSize * 2;

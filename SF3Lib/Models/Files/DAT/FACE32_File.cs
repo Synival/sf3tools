@@ -16,12 +16,12 @@ namespace SF3.Models.Files.DAT {
         // TODO: To where is this loaded?
         public override int RamAddressLimit => 0x00000000;
 
-        protected FACE32_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario)
-        : base(data, nameGetterContext, scenario, DAT_FileType.FACE32) {
+        protected FACE32_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId)
+        : base(data, nameGetterContext, scenario, fileId, DAT_FileType.FACE32) {
         }
 
-        public static FACE32_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario) {
-            var newFile = new FACE32_File(data, nameGetterContext, scenario);
+        public static FACE32_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId) {
+            var newFile = new FACE32_File(data, nameGetterContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize " + newFile.GetType().Name);
             return newFile;

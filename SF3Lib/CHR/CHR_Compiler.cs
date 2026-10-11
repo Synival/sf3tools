@@ -16,11 +16,11 @@ namespace SF3.CHR {
         /// <param name="nameGetterContext">INameGetterContext required by the CHR_File.</param>
         /// <param name="scenario">Scenario required by the CHR_File.</param>
         /// <returns>A new CHR_File on success. Otherwise, 'null'.</returns>
-        public CHR_File Compile(CHR_Def chrDef, INameGetterContext nameGetterContext, ScenarioType scenario) {
+        public CHR_File Compile(CHR_Def chrDef, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId) {
             try {
                 using (var outputStream = new MemoryStream()) {
                     Compile(chrDef, outputStream);
-                    return CHR_File.Create(new ByteData.ByteData(new ByteArray(outputStream.ToArray())), nameGetterContext, scenario);
+                    return CHR_File.Create(new ByteData.ByteData(new ByteArray(outputStream.ToArray())), nameGetterContext, scenario, fileId);
                 }
             }
             catch {

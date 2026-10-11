@@ -18,13 +18,13 @@ namespace SF3.Models.Files.DAT {
         public override int RamAddress => 0x002D0000;
         public override int RamAddressLimit => 0x002E8000;
 
-        protected ITEM_CG_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario)
-        : base(data, nameGetterContext, scenario, DAT_FileType.ITEM_CG) {
+        protected ITEM_CG_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId)
+        : base(data, nameGetterContext, scenario, fileId, DAT_FileType.ITEM_CG) {
             SpellIconIndex = ValueNames.ItemInfo.Info[scenario.Value].Values.Max(x => x.Key) + 1;
         }
 
-        public static ITEM_CG_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario) {
-            var newFile = new ITEM_CG_File(data, nameGetterContext, scenario);
+        public static ITEM_CG_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId) {
+            var newFile = new ITEM_CG_File(data, nameGetterContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize " + newFile.GetType().Name);
             return newFile;

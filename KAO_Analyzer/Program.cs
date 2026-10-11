@@ -5,6 +5,7 @@ using SF3.Models.Files.KAO;
 using SF3.Models.Structs.KAO;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
 
 namespace MPD_Analyzer {
     public class Program {
@@ -53,7 +54,8 @@ namespace MPD_Analyzer {
 
                     // Create an MPD file that works with our new ByteData.
                     try {
-                        using (var kaoFile = KAO_File.Create(byteData, nameGetter, scenario)) {
+                        var fileId = FileUtils.DetermineFileID(scenario, file);
+                        using (var kaoFile = KAO_File.Create(byteData, nameGetter, scenario, fileId)) {
                             foreach (var face in kaoFile.FaceChunkTable) {
                                 // Condition for match checks here
                                 var matchReports = KAO_MatchFunc(face, filename);

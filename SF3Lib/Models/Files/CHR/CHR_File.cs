@@ -13,21 +13,22 @@ namespace SF3.Models.Files.CHR {
         public override int RamAddress => 0x00210000;
         public override int RamAddressLimit => 0x00290000;
 
-        protected CHR_File(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int startId, uint dataOffset, bool isInCHP) : base(data, nameContext, scenario) {
+        protected CHR_File(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int? fileId, int startId, uint dataOffset, bool isInCHP)
+        : base(data, nameContext, scenario, fileId) {
             StartID = startId;
             DataOffset = dataOffset;
             IsInCHP = isInCHP;
         }
 
-        public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario) {
-            var newFile = new CHR_File(data, nameContext, scenario, 0, 0, false);
+        public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int? fileId) {
+            var newFile = new CHR_File(data, nameContext, scenario, fileId, 0, 0, false);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize CHR_File");
             return newFile;
         }
 
-        public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int startId, uint dataOffset) {
-            var newFile = new CHR_File(data, nameContext, scenario, startId, dataOffset, true);
+        public static CHR_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int? fileId, int startId, uint dataOffset) {
+            var newFile = new CHR_File(data, nameContext, scenario, fileId, startId, dataOffset, true);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize CHR_File");
             return newFile;

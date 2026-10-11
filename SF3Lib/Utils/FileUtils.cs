@@ -247,13 +247,13 @@ namespace SF3.Utils {
                 case SF3FileType.X044:    return X044_File.Create(byteData, ngc, scenario.Value, fileId);
                 case SF3FileType.MPD:     return MPD_File .Create(byteData, nameGetterContexts, scenario, fileId);
                 case SF3FileType.MPD_Project: return MPD_Project.FromJSON(byteData.GetDataCopyOrReference().AsTXTFileString());
-                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario);
-                case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario);
-                case SF3FileType.DAT_FACE32:   return FACE32_File.Create(byteData, ngc, scenario);
-                case SF3FileType.DAT_FACE64:   return FACE64_File.Create(byteData, ngc, scenario);
-                case SF3FileType.DAT_ITEM_CG:  return ITEM_CG_File.Create(byteData, ngc, scenario);
-                case SF3FileType.DAT_BTLENKEI: return BTLENKEI_File.Create(byteData, ngc, scenario);
-                case SF3FileType.KAO:     return KAO_File.Create(byteData, ngc, scenario);
+                case SF3FileType.CHR:     return CHR_File .Create(byteData, ngc, scenario, fileId);
+                case SF3FileType.CHP:     return CHP_File .Create(byteData, ngc, scenario, fileId);
+                case SF3FileType.DAT_FACE32:   return FACE32_File.Create(byteData, ngc, scenario, fileId);
+                case SF3FileType.DAT_FACE64:   return FACE64_File.Create(byteData, ngc, scenario, fileId);
+                case SF3FileType.DAT_ITEM_CG:  return ITEM_CG_File.Create(byteData, ngc, scenario, fileId);
+                case SF3FileType.DAT_BTLENKEI: return BTLENKEI_File.Create(byteData, ngc, scenario, fileId);
+                case SF3FileType.KAO:     return KAO_File.Create(byteData, ngc, scenario, fileId);
                 case SF3FileType.X8PC:    return X8PC_File.Create(byteData, ngc, scenario.Value, fileId);
                 case SF3FileType.X8AN:    return X8AN_File.Create(byteData, ngc, fileId);
                 default:

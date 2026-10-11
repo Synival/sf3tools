@@ -13,12 +13,12 @@ namespace SF3.Models.Files.KAO {
         // Not applicable
         public override int RamAddressLimit => 0x00000000;
 
-        protected KAO_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario)
-        : base(data, nameGetterContext, scenario) {
+        protected KAO_File(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId)
+        : base(data, nameGetterContext, scenario, fileId) {
         }
 
-        public static KAO_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario) {
-            var newFile = new KAO_File(data, nameGetterContext, scenario);
+        public static KAO_File Create(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId) {
+            var newFile = new KAO_File(data, nameGetterContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize " + newFile.GetType().Name);
             return newFile;

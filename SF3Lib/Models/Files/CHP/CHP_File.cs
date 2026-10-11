@@ -14,11 +14,12 @@ namespace SF3.Models.Files.CHP {
         public override int RamAddress => 0x002E8000;
         public override int RamAddressLimit => 0x00300000;
 
-        protected CHP_File(IByteData data, INameGetterContext nameContext, ScenarioType? scenario) : base(data, nameContext, scenario) {
+        protected CHP_File(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
         }
 
-        public static CHP_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario) {
-            var newFile = new CHP_File(data, nameContext, scenario);
+        public static CHP_File Create(IByteData data, INameGetterContext nameContext, ScenarioType? scenario, int? fileId) {
+            var newFile = new CHP_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize CHP_File");
             return newFile;
@@ -34,7 +35,7 @@ namespace SF3.Models.Files.CHP {
             while (addr + 0x18 < dataEof) {
                 var header = new SpriteHeader(Data, 0, "", addr, (uint) addr, isInCHP: true);
                 if (header.IsValid()) {
-                    var newFile = CHR_File.Create(Data, NameGetterContext, Scenario, globalId, (uint) addr);
+                    var newFile = CHR_File.Create(Data, NameGetterContext, Scenario, FileID, globalId, (uint) addr);
                     globalId += newFile.SpriteTable.Count;
                     CHR_EntriesByOffset[addr] = newFile;
                 }

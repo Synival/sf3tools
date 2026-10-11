@@ -9,6 +9,8 @@ using SF3.Models.Files.CHP;
 using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Types;
+using SF3.Utils;
+
 
 #if !OPTIMIZE
 using SF3.Models.Structs.CHR;
@@ -90,9 +92,10 @@ namespace CHR_Extractor {
                     // Create a CHR/CHP file that works with our new ByteData.
                     try {
                         bool isChr = file.EndsWith(".CHR");
+                        var fileId = FileUtils.DetermineFileID(scenario, file);
                         using (GameTableFile chrChpFile = isChr
-                            ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario)
-                            : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario)
+                            ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, fileId)
+                            : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario, fileId)
                         ) {
                             var chrFiles = isChr
                                 ? [(CHR_File) chrChpFile]
@@ -153,8 +156,8 @@ namespace CHR_Extractor {
                             }
 
                             var deserializedFile = isChr
-                                ? (object) (chrCompiler.Compile((CHR_Def) chrChpDef, nameGetter, scenario))
-                                : (object) (chpCompiler.Compile((CHP_Def) chrChpDef, nameGetter, scenario, chpBuf));
+                                ? (object) (chrCompiler.Compile((CHR_Def) chrChpDef, nameGetter, scenario, fileId))
+                                : (object) (chpCompiler.Compile((CHP_Def) chrChpDef, nameGetter, scenario, fileId, chpBuf));
 
                             // Make some very specific corrections to some S1 CHR's that have errors.
                             if (isChr) {

@@ -122,11 +122,11 @@ namespace CHRTool {
             // Gather the frame refs and textures from either the CHR or CHP file
             ExtractInfo[] extractInfos;
             if (file.ToLower().EndsWith(".chr")) {
-                var chrFile = CHR_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1);
+                var chrFile = CHR_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1, null);
                 extractInfos = GetExtractInfos(chrFile);
             }
             else {
-                var chpFile = CHP_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1);
+                var chpFile = CHP_File.Create(byteData, nameGetterContext, ScenarioType.Scenario1, null);
                 extractInfos = GetExtractInfos(chpFile);
             }
 

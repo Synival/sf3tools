@@ -8,8 +8,8 @@ using SF3.Types;
 
 namespace SF3.Models.Files.DAT {
     public abstract class DAT_FileBase : GameTableFile, IDAT_File {
-        protected DAT_FileBase(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, DAT_FileType fileType)
-        : base(data, nameGetterContext, scenario) {
+        protected DAT_FileBase(IByteData data, INameGetterContext nameGetterContext, ScenarioType? scenario, int? fileId, DAT_FileType fileType)
+        : base(data, nameGetterContext, scenario, fileId) {
             FileType = fileType;
         }
 

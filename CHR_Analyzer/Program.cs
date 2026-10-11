@@ -10,6 +10,7 @@ using SF3.Models.Files.CHR;
 using SF3.NamedValues;
 using SF3.Sprites;
 using SF3.Types;
+using SF3.Utils;
 
 namespace CHR_Analyzer {
     public class Program {
@@ -204,9 +205,10 @@ namespace CHR_Analyzer {
                     // Create a CHR file that works with our new ByteData.
                     try {
                         bool isChr = file.EndsWith(".CHR");
+                        var fileId = FileUtils.DetermineFileID(scenario, filename);
                         using (GameTableFile chrChpFile = isChr
-                            ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario)
-                            : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario)
+                            ? CHR_File.Create(byteData, nameGetterContexts[scenario], scenario, fileId)
+                            : CHP_File.Create(byteData, nameGetterContexts[scenario], scenario, fileId)
                         ) {
                             var chrFiles = isChr
                                 ? [(CHR_File) chrChpFile]

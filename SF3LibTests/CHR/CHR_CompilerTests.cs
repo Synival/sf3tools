@@ -40,7 +40,7 @@ namespace SF3.Tests.CHR
             var emptyCHR = CHR_Def.FromJSON(TestCHRs.EmptyCHR);
 
             var compiler = new CHR_Compiler();
-            var chrFile  = compiler.Compile(emptyCHR, nameGetterContext, nameGetterContext.Scenario);
+            var chrFile  = compiler.Compile(emptyCHR, nameGetterContext, nameGetterContext.Scenario, null);
 
             Assert.AreEqual(0, chrFile.SpriteTable.Count);
         }
@@ -51,7 +51,7 @@ namespace SF3.Tests.CHR
             var minimalCHR = CHR_Def.FromJSON(TestCHRs.MinimalCHR);
 
             var compiler = new CHR_Compiler();
-            var chrFile  = compiler.Compile(minimalCHR, nameGetterContext, nameGetterContext.Scenario);
+            var chrFile  = compiler.Compile(minimalCHR, nameGetterContext, nameGetterContext.Scenario, null);
 
             Assert.AreEqual(1, chrFile.SpriteTable.Count);
 
@@ -73,7 +73,7 @@ namespace SF3.Tests.CHR
             var twoEmptySpriteCHR = CHR_Def.FromJSON(TestCHRs.TwoEmptySpriteCHR);
 
             var compiler = new CHR_Compiler();
-            var chrFile  = compiler.Compile(twoEmptySpriteCHR, nameGetterContext, nameGetterContext.Scenario);
+            var chrFile  = compiler.Compile(twoEmptySpriteCHR, nameGetterContext, nameGetterContext.Scenario, null);
 
             Assert.AreEqual(2, chrFile.SpriteTable.Count);
 
