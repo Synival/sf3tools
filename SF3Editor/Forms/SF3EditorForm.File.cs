@@ -21,6 +21,11 @@ using SF3.Models.Files.X8PC;
 using System.Collections.Generic;
 using CommonLib.Rigging;
 using SF3.Utils;
+using SF3.Models.Structs.X8PC;
+using SF3.Models.Files.X014;
+using SF3.Models.Files.X8AN;
+using SF3.Models.Tables.X8AN;
+using SF3.Models.Structs.X8AN;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -49,13 +54,62 @@ namespace SF3.Editor.Forms {
             // X8PC files for Scenario 1 and earlier get their attack animation keyframes from a separate X8AN file.
             // Provide a loader for them.
             if (model is IX8PC_File x8pc && x8pc.Scenario <= ScenarioType.Scenario1) {
+                IReadOnlyList<IBoneKeyframe>? KeyframeLoader(PolyChar pc, int modelId, PCAnimationType animId)
+                    => PolyCharKeyframeLoader(loader, x8pc, pc, modelId, animId);
                 foreach (var pc in x8pc.PolyCharTable)
-                    pc.KeyframeLoader = PolyCharKeyframeLoader;
+                    pc.KeyframeLoader = KeyframeLoader;
             }
         }
 
-        private IReadOnlyList<IBoneKeyframe>? PolyCharKeyframeLoader(int modelId, PCAnimationType animId) {
-            // TODO: Cross-reference with X014 to load X8AN file (if not loaded) and fetch animations.
+        private IReadOnlyList<IBoneKeyframe>? PolyCharKeyframeLoader(InteractiveModelFileLoader loader, IX8PC_File x8pc, PolyChar polyChar, int modelId, PCAnimationType animId) {
+            // Can't load the animation if the FileID was indeterminable.
+            if (!x8pc.FileID.HasValue)
+                return null;
+
+            var scenario = polyChar.Scenario;
+            var x014File = GetOrTemporarilyLoadX014File(loader, scenario);
+            if (x014File == null)
+                return null;
+
+            var animToLoadRow = x014File.CharacterBattleModelAnimsSc1Table.FirstOrDefault(x => x.ModelFileID == x8pc.FileID && x.AnimID == (int) animId);
+            if (animToLoadRow == null)
+                return null;
+
+            var x8anFile = GetOrTemporarilyLoadX8ANFile(loader, scenario, animToLoadRow.AnimFileID);
+            if (x8anFile == null)
+                return null;
+
+            var keyframes = ((IReadOnlyList<X8ANAttackAnimChunkStruct>) x8anFile.AttackAnimChunkTable).FirstOrDefault(x => {
+                return (x.Address / 0x800) == animToLoadRow.FilePosInSectors;
+            });
+            return keyframes?.BoneKeyframesTable;
+        }
+
+        private IX014_File? GetOrTemporarilyLoadX014File(InteractiveModelFileLoader loader, ScenarioType scenario) {
+            var loadedX014Files = _loadedFiles
+                .Select(x => x.Loader.Model as IX014_File)
+                .Where(x => x != null && x.Scenario == scenario)
+                .Select(x => x!)
+                .ToArray();
+
+            if (loadedX014Files.Length == 1)
+                return loadedX014Files[0];
+
+            // TODO: load!
+            return null;
+        }
+
+        private IX8AN_File? GetOrTemporarilyLoadX8ANFile(InteractiveModelFileLoader loader, ScenarioType scenario, int fileId) {
+            var loadedX8ANFiles = _loadedFiles
+                .Select(x => x.Loader.Model as IX8AN_File)
+                .Where(x => x != null && x.Scenario == scenario && x.FileID == fileId)
+                .Select(x => x!)
+                .ToArray();
+
+            if (loadedX8ANFiles.Length == 1)
+                return loadedX8ANFiles[0];
+
+            // TODO: load!
             return null;
         }
 

@@ -345,7 +345,7 @@ namespace SF3.Models.Structs.X8PC {
             GC.SuppressFinalize(this);
         }
 
-        public Func<int /* modelID */, PCAnimationType /* animID */, IReadOnlyList<IBoneKeyframe>> KeyframeLoader { get; set; }
+        public Func<PolyChar, int /* modelID */, PCAnimationType /* animID */, IReadOnlyList<IBoneKeyframe>> KeyframeLoader { get; set; }
 
         // TODO: Support more than one model collection perhaps?
         public ISGL_ModelCollection GetModelCollection(int mcId) => (mcId == 0) ? this : null;

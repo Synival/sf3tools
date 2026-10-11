@@ -111,7 +111,7 @@ namespace SF3.Models.Structs.X8PC {
         public IReadOnlyList<IBoneKeyframe> GetOrLoadKeyframes() {
             var keyframes = BoneKeyframes;
             if (keyframes == null && LoadedKeyframes == null && PolyChar?.KeyframeLoader != null) {
-                LoadedKeyframes = PolyChar.KeyframeLoader(PolyChar.ID, (PCAnimationType) AnimID);
+                LoadedKeyframes = PolyChar.KeyframeLoader(PolyChar, PolyChar.ID, (PCAnimationType) AnimID);
                 keyframes = LoadedKeyframes;
             }
             return keyframes;

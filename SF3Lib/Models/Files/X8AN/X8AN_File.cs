@@ -26,7 +26,8 @@ namespace SF3.Models.Files.X8AN {
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            AttackAnimBoneKeyframesTables = X8ANAttackAnimChunkTable.Create(Data, nameof(X8ANAttackAnimChunkTable), 0, hasFixedRotations: false);
+            AttackAnimChunkTable = X8ANAttackAnimChunkTable.Create(Data, nameof(AttackAnimChunkTable), 0, hasFixedRotations: false);
+            AttackAnimBoneKeyframesTables = AttackAnimChunkTable;
 
             var tables = new List<ITable>() {};
             tables.AddRange(AttackAnimBoneKeyframesTables);
@@ -34,6 +35,7 @@ namespace SF3.Models.Files.X8AN {
             return tables;
         }
 
+        public X8ANAttackAnimChunkTable AttackAnimChunkTable { get; private set; }
         public IReadOnlyList<PCBoneKeyframesTable> AttackAnimBoneKeyframesTables { get; private set; }
     }
 }
