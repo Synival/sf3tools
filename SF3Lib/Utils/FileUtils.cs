@@ -169,6 +169,8 @@ namespace SF3.Utils {
 
             // These paths are used for mods in the SF3 Patch Wizard. Those should be enough to know the scenario.
             switch (paths[paths.Length - 1]) {
+                case "PROTOTYPE":
+                    return ScenarioType.Prototype;
                 case "GS-9175":
                 case "MK-81383":
                 case "SCENARIO1":

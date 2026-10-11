@@ -31,8 +31,13 @@ namespace SF3.Utils {
         /// <exception cref="ArgumentException">Thrown if the scenario is invalid.</exception>
         public static string ResourceFileForScenario(ScenarioType scenario, string resourceName) {
             switch (scenario) {
-                case ScenarioType.Ship2:
-                case ScenarioType.Prototype: // (Not actually present)
+                case ScenarioType.Prototype:
+                    // Only one file here, for now...
+                    return resourceName == "FileIndexes.xml"
+                        ? ResourceFile("Prototype/" + resourceName)
+                        : ResourceFile("S1/" + resourceName);
+
+                case ScenarioType.Ship2: // (Not actually present)
                 case ScenarioType.Scenario1:
                     return ResourceFile("S1/" + resourceName);
                 case ScenarioType.Scenario2:
