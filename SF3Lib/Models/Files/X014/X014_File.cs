@@ -41,8 +41,16 @@ namespace SF3.Models.Files.X014 {
         private uint GetCharacterBattleModelSc1TableAddr()
             => (Scenario == ScenarioType.Scenario1) ? 0xF5A8u : 0;
 
-        private uint GetCharacterBattleModelAnimSc1TableAddr()
-            => (Scenario == ScenarioType.Scenario1) ? 0x108ECu : 0;
+        private uint GetCharacterBattleModelAnimSc1TableAddr() {
+            switch (Scenario) {
+                case ScenarioType.Scenario1:
+                    return 0x108ECu;
+                case ScenarioType.Prototype:
+                    return 0x0BF78u;
+                default:
+                    return 0;
+            }
+        }
 
         private uint GetEnemyBattleModelSc1TableAddr()
             => (Scenario == ScenarioType.Scenario1) ? 0xF848u : 0;
@@ -119,7 +127,7 @@ namespace SF3.Models.Files.X014 {
 
             var tables = new List<ITable>() {
                 (CharacterBattleModelsSc1Table = (characterBattleModelSc1Addr   == 0) ? null : CharacterBattleModelsSc1Table.Create(Data, nameof(CharacterBattleModelsSc1Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc1Addr)),
-                (CharacterBattleModelAnimsSc1Table = (characterBattleModelAnimSc1Addr == 0) ? null : ModelAnimLoadInfoSc1Table.Create(Data, nameof(ModelAnimLoadInfoSc1Table), (int) characterBattleModelAnimSc1Addr)),
+                (CharacterBattleModelAnimsSc1Table = (characterBattleModelAnimSc1Addr == 0) ? null : ModelAnimLoadInfoSc1Table.Create(Data, nameof(ModelAnimLoadInfoSc1Table), (int) characterBattleModelAnimSc1Addr, Scenario < ScenarioType.Scenario1)),
                 (CharacterBattleModelsSc2Table = (characterBattleModelSc2Addr   == 0) ? null : CharacterBattleModelsSc2Table.Create(Data, nameof(CharacterBattleModelsSc2Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc2Addr)),
                 (CharacterBattleModelsSc3Table = (characterBattleModelSc3Addr   == 0) ? null : CharacterBattleModelsSc3Table.Create(Data, nameof(CharacterBattleModelsSc3Table), ResourceFileForScenario(Scenario, "ClassEquip.xml"), (int) characterBattleModelSc3Addr)),
                 (EnemyBattleModelSc1Table      = (enemyBattleModelsSc1Addr      == 0) ? null : FileIdTable                  .Create(Data, nameof(CharacterBattleModelsSc1Table), ResourceFileForScenario(Scenario, "EnemyModels.xml"), (int) enemyBattleModelsSc1Addr)),
