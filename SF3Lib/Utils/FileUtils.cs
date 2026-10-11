@@ -403,9 +403,6 @@ namespace SF3.Utils {
             return filters[filterIndex - 1][1];
         }
 
-        private static Dictionary<ScenarioType, Dictionary<string, int>> s_fileIdLookupTable
-            = new Dictionary<ScenarioType, Dictionary<string, int>>();
-
         private struct FileIDWildcardLookup {
             public FileIDWildcardLookup(string filename, int fileId) {
                 var periodIdx = filename.IndexOf('.');
@@ -419,8 +416,29 @@ namespace SF3.Utils {
             public readonly int FileID;
         }
 
-        private static Dictionary<ScenarioType, FileIDWildcardLookup[]> s_fileIdWildcardLookupTable
-            = new Dictionary<ScenarioType, FileIDWildcardLookup[]>();
+        private struct FileLookupTables {
+            public FileLookupTables(ScenarioType scenario) {
+                Scenario = scenario;
+                IDToNameLookup = GetValueNameDictionaryFromXML(ResourceFileForScenario(scenario, "FileIndexes.xml"));
+                NameToIDLookup = IDToNameLookup.ToDictionary(x => x.Value.ToUpper(), x => x.Key);
+                WildcardLookup = NameToIDLookup.Select(x => new FileIDWildcardLookup(x.Key, x.Value)).ToArray();
+            }
+
+            public readonly ScenarioType Scenario;
+            public readonly Dictionary<int, string> IDToNameLookup;
+            public readonly Dictionary<string, int> NameToIDLookup;
+            public readonly FileIDWildcardLookup[] WildcardLookup;
+        }
+
+        private static Dictionary<ScenarioType, FileLookupTables> s_fileLookupTables = new Dictionary<ScenarioType, FileLookupTables>();
+
+        // One-time read and generation of lookup tables -- a dictionary for literal names (first check), and a big array for
+        // wildcard lookups (second check).
+        private static FileLookupTables GetFileLookupTables(ScenarioType scenario) {
+            if (!s_fileLookupTables.TryGetValue(scenario, out var fileLookupTables))
+                s_fileLookupTables.Add(scenario, fileLookupTables = new FileLookupTables(scenario));
+            return fileLookupTables;
+        }
 
         public static int? DetermineFileID(ScenarioType? scenario, string fullFilename, SF3FileType? fileType = null) {
             // Make sure the scenario is available.
@@ -429,27 +447,11 @@ namespace SF3.Utils {
             if (!scenario.HasValue)
                 return null;
 
-            // One-time read and generation of lookup tables -- a dictionary for literal names (first check), and a big array for
-            // wildcard lookups (second check).
-            var scn = scenario.Value;
-            FileIDWildcardLookup[] wildcardLookup = null;
-
-            if (!s_fileIdLookupTable.TryGetValue(scn, out var lookup)) {
-                lookup = GetValueNameDictionaryFromXML(ResourceFileForScenario(scn, "FileIndexes.xml"))
-                    .ToDictionary(x => x.Value.ToUpper(), x => x.Key);
-                s_fileIdLookupTable.Add(scn, lookup);
-
-                wildcardLookup = lookup
-                    .Select(x => new FileIDWildcardLookup(x.Key, x.Value))
-                    .ToArray();
-                s_fileIdWildcardLookupTable.Add(scn, wildcardLookup);
-            }
-            else
-                wildcardLookup = s_fileIdWildcardLookupTable[scn];
+            var lookupTables = GetFileLookupTables(scenario.Value);
 
             // Try the literal lookup by name.
             var filename = Path.GetFileName(fullFilename).ToUpper();
-            if (lookup.TryGetValue(filename, out int fileId))
+            if (lookupTables.NameToIDLookup.TryGetValue(filename, out int fileId))
                 return fileId;
 
             // That didn't work, so see if there's a matching name + extension by substring.
@@ -458,7 +460,7 @@ namespace SF3.Utils {
             // - Files with a prefix or postfix in the name before the extension
             var asWildcard = new FileIDWildcardLookup(filename, fileId: -1 /* irrelevant */);
 
-            var wildcardMatches = wildcardLookup.Where(x => asWildcard.Ext.Contains(x.Ext) && asWildcard.WithoutExt.Contains(x.WithoutExt)).ToArray();
+            var wildcardMatches = lookupTables.WildcardLookup.Where(x => asWildcard.Ext.Contains(x.Ext) && asWildcard.WithoutExt.Contains(x.WithoutExt)).ToArray();
             if (wildcardMatches.Length == 0)
                 return null;
             if (wildcardMatches.Length == 1)
@@ -473,6 +475,11 @@ namespace SF3.Utils {
 
             // Too ambiguous -- don't return a match.
             return null;
+        }
+
+        public static string GetFilenameFromFileID(ScenarioType scenario, int fileId) {
+            var tables = GetFileLookupTables(scenario);
+            return tables.IDToNameLookup.TryGetValue(fileId, out var filename) ? filename : null;
         }
     }
 }

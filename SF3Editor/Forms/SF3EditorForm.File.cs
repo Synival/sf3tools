@@ -24,8 +24,9 @@ using SF3.Utils;
 using SF3.Models.Structs.X8PC;
 using SF3.Models.Files.X014;
 using SF3.Models.Files.X8AN;
-using SF3.Models.Tables.X8AN;
 using SF3.Models.Structs.X8AN;
+using CommonLib.Arrays;
+using SF3.NamedValues;
 
 namespace SF3.Editor.Forms {
     public partial class SF3EditorForm {
@@ -66,26 +67,40 @@ namespace SF3.Editor.Forms {
             if (!x8pc.FileID.HasValue)
                 return null;
 
-            var scenario = polyChar.Scenario;
-            var x014File = GetOrTemporarilyLoadX014File(loader, scenario);
-            if (x014File == null)
-                return null;
+            IX014_File? x014File = null;
+            IX8AN_File? x8ANFile = null;
+            bool isX014Temporary = false;
+            bool isX8ANTemporary = false;
 
-            var animToLoadRow = x014File.CharacterBattleModelAnimsSc1Table.FirstOrDefault(x => x.ModelFileID == x8pc.FileID && x.AnimID == (int) animId);
-            if (animToLoadRow == null)
-                return null;
+            try {
+                var scenario = polyChar.Scenario;
+                x014File = GetOrTemporarilyLoadX014File(loader, scenario, out isX014Temporary);
+                if (x014File == null)
+                    return null;
 
-            var x8anFile = GetOrTemporarilyLoadX8ANFile(loader, scenario, animToLoadRow.AnimFileID);
-            if (x8anFile == null)
-                return null;
+                var animToLoadRow = x014File.CharacterBattleModelAnimsSc1Table.FirstOrDefault(x => x.ModelFileID == x8pc.FileID && x.AnimID == (int) animId);
+                if (animToLoadRow == null)
+                    return null;
 
-            var keyframes = ((IReadOnlyList<X8ANAttackAnimChunkStruct>) x8anFile.AttackAnimChunkTable).FirstOrDefault(x => {
-                return (x.Address / 0x800) == animToLoadRow.FilePosInSectors;
-            });
-            return keyframes?.BoneKeyframesTable;
+                x8ANFile = GetOrTemporarilyLoadX8ANFile(loader, scenario, animToLoadRow.AnimFileID, out isX8ANTemporary);
+                if (x8ANFile == null)
+                    return null;
+
+                var keyframes = ((IReadOnlyList<X8ANAttackAnimChunkStruct>) x8ANFile.AttackAnimChunkTable).FirstOrDefault(x => {
+                    return (x.Address / 0x800) == animToLoadRow.FilePosInSectors;
+                });
+                return keyframes?.BoneKeyframesTable;
+            }
+            finally {
+                if (isX014Temporary && x014File is X014_File x014File2)
+                    x014File2.Dispose();
+                if (isX8ANTemporary && x8ANFile is X8AN_File x8ANFile2)
+                    x8ANFile2.Dispose();
+            }
         }
 
-        private IX014_File? GetOrTemporarilyLoadX014File(InteractiveModelFileLoader loader, ScenarioType scenario) {
+        private IX014_File? GetOrTemporarilyLoadX014File(InteractiveModelFileLoader loader, ScenarioType scenario, out bool isTemporary) {
+            isTemporary = false;
             var loadedX014Files = _loadedFiles
                 .Select(x => x.Loader.Model as IX014_File)
                 .Where(x => x != null && x.Scenario == scenario)
@@ -95,11 +110,27 @@ namespace SF3.Editor.Forms {
             if (loadedX014Files.Length == 1)
                 return loadedX014Files[0];
 
-            // TODO: load!
-            return null;
+            // Try to load the file!
+            var targetPath = Path.Combine(Path.GetPathRoot(loader.Filename) ?? "", "X014.BIN");
+            if (!File.Exists(targetPath))
+                return null;
+
+            try {
+                var x014File = X014_File.Create(
+                    new ByteData.ByteData(new ByteArray(File.ReadAllBytes(targetPath))), new NameGetterContext(scenario), scenario,
+                    DetermineFileID(scenario, "X014.BIN")
+                );
+                isTemporary = true;
+                return x014File;
+            }
+            catch {
+                return null;
+            }
         }
 
-        private IX8AN_File? GetOrTemporarilyLoadX8ANFile(InteractiveModelFileLoader loader, ScenarioType scenario, int fileId) {
+        private IX8AN_File? GetOrTemporarilyLoadX8ANFile(InteractiveModelFileLoader loader, ScenarioType scenario, int fileId, out bool isTemporary) {
+            isTemporary = false;
+
             var loadedX8ANFiles = _loadedFiles
                 .Select(x => x.Loader.Model as IX8AN_File)
                 .Where(x => x != null && x.Scenario == scenario && x.FileID == fileId)
@@ -109,8 +140,20 @@ namespace SF3.Editor.Forms {
             if (loadedX8ANFiles.Length == 1)
                 return loadedX8ANFiles[0];
 
-            // TODO: load!
-            return null;
+            // Try to load the file!
+            var x8ANFilename = FileUtils.GetFilenameFromFileID(scenario, fileId);
+            var targetPath = Path.Combine(Path.GetPathRoot(loader.Filename) ?? "", x8ANFilename);
+            if (!File.Exists(targetPath))
+                return null;
+
+            try {
+                var x8ANFle = X8AN_File.Create(new ByteData.ByteData(new ByteArray(File.ReadAllBytes(targetPath))), new NameGetterContext(scenario), scenario, fileId);
+                isTemporary = true;
+                return x8ANFle;
+            }
+            catch {
+                return null;
+            }
         }
 
         /// <summary>
