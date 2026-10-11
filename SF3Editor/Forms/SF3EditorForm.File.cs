@@ -446,7 +446,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_CloseAll.Enabled     = hasFile;
             tsmiFile_SwapToPrev.Enabled   = hasFile;
             tsmiFile_SwapToNext.Enabled   = hasFile;
-            tsmiFile_ScanForErrors.Enabled = hasFile;
+            tsmiFile_FileInfoAndErrors.Enabled = hasFile;
 
             tsmiTools_ApplyDFR.Enabled    = hasFile;
             tsmiTools_CreateDFR.Enabled   = hasFile;
@@ -680,13 +680,21 @@ namespace SF3.Editor.Forms {
 
         private void tsmiFile_Exit_Click(object sender, EventArgs e) => Close();
 
-        private void tsmiFile_ScanForErrors_Click(object sender, EventArgs e) {
+        private void tsmiFile_FileInfoAndErrors_Click(object sender, EventArgs e) {
             if (SelectedFile != null) {
-                var errors = SelectedFile?.Loader?.Model?.GetErrors() ?? new string[0];
-                if (errors.Length == 0)
-                    InfoMessage("File has no known errors");
-                else
-                    InfoMessage($"File contains {errors.Length} known error(s):\r\n\r\n" + string.Join("\r\n", errors.Select(x => "- " + x).ToArray()));
+                var scenarioFile = SelectedFile?.Loader?.Model as IScenarioFile;
+                var infoMsg = "";
+                if (scenarioFile != null) {
+                    infoMsg = $"Scenario: {scenarioFile.Scenario}\r\n";
+                    infoMsg += $"FileID: {(scenarioFile.FileID.HasValue ? ("0x" + scenarioFile.FileID.Value.ToString("X3")) : "(unknown)")}";
+                }
+
+                var errors = SelectedFile?.Loader?.Model?.GetErrors() ?? [];
+                var errorMsg = (errors.Length == 0)
+                    ? "File has no known errors"
+                    : $"File contains {errors.Length} known error(s):\r\n\r\n" + string.Join("\r\n", errors.Select(x => "- " + x).ToArray());
+
+                InfoMessage(infoMsg + (infoMsg == "" ? "" : "\r\n\r\n") + errorMsg);
             }
         }
     }

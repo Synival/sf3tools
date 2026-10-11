@@ -52,7 +52,7 @@ namespace SF3.Editor.Forms {
             tsmiFile_SwapToPrev = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_SwapToNext = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep3 = new System.Windows.Forms.ToolStripSeparator();
-            tsmiFile_ScanForErrors = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiFile_FileInfoAndErrors = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_Sep4 = new System.Windows.Forms.ToolStripSeparator();
             tsmiFile_RecentFiles = new System.Windows.Forms.ToolStripMenuItem();
             tsmiFile_RecentFiles_1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -173,7 +173,7 @@ namespace SF3.Editor.Forms {
             // 
             // tsmiFile
             // 
-            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_New, tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_SaveAll, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_CloseAll, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_ScanForErrors, tsmiFile_Sep4, tsmiFile_RecentFiles, tsmiFile_Sep5, tsmiFile_Exit });
+            tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiFile_New, tsmiFile_Open, tsmiFile_OpenScenario, tsmiFile_Save, tsmiFile_SaveAs, tsmiFile_SaveAll, tsmiFile_Sep1, tsmiFile_Close, tsmiFile_CloseAll, tsmiFile_Sep2, tsmiFile_SwapToPrev, tsmiFile_SwapToNext, tsmiFile_Sep3, tsmiFile_FileInfoAndErrors, tsmiFile_Sep4, tsmiFile_RecentFiles, tsmiFile_Sep5, tsmiFile_Exit });
             tsmiFile.Name = "tsmiFile";
             tsmiFile.Size = new Size(37, 20);
             tsmiFile.Text = "&File";
@@ -345,13 +345,13 @@ namespace SF3.Editor.Forms {
             tsmiFile_Sep3.Name = "tsmiFile_Sep3";
             tsmiFile_Sep3.Size = new Size(256, 6);
             // 
-            // tsmiFile_ScanForErrors
+            // tsmiFile_FileInfoAndErrors
             // 
-            tsmiFile_ScanForErrors.Enabled = false;
-            tsmiFile_ScanForErrors.Name = "tsmiFile_ScanForErrors";
-            tsmiFile_ScanForErrors.Size = new Size(259, 22);
-            tsmiFile_ScanForErrors.Text = "Scan for &Errors...";
-            tsmiFile_ScanForErrors.Click += tsmiFile_ScanForErrors_Click;
+            tsmiFile_FileInfoAndErrors.Enabled = false;
+            tsmiFile_FileInfoAndErrors.Name = "tsmiFile_FileInfoAndErrors";
+            tsmiFile_FileInfoAndErrors.Size = new Size(259, 22);
+            tsmiFile_FileInfoAndErrors.Text = "File Info and &Errors...";
+            tsmiFile_FileInfoAndErrors.Click += tsmiFile_FileInfoAndErrors_Click;
             // 
             // tsmiFile_Sep4
             // 
@@ -1200,7 +1200,7 @@ namespace SF3.Editor.Forms {
         private System.Windows.Forms.ToolStripMenuItem tsmiMPD_Chunks_RecompressAllChunks;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_MPD_UpdateChunkTableOnChunkResize;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings_ShowErrorsOnFileLoad;
-        private System.Windows.Forms.ToolStripMenuItem tsmiFile_ScanForErrors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile_FileInfoAndErrors;
         private System.Windows.Forms.ToolStripSeparator tsmiFile_Sep5;
         private System.Windows.Forms.ToolStripMenuItem tsmiView_HighlightEndcodesInTextureViews;
         private System.Windows.Forms.ToolStripSeparator tsmiView_Sep1;
