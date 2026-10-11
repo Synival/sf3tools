@@ -180,7 +180,7 @@ namespace SF3.Editor.Forms {
 
             try {
                 if (!fileLoader.LoadFile(filename, GetFileDialogFilterForFileType(fileType), stream,
-                    (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario, FileUtils.DetermineFileID(scenario, filename))))
+                    (byteData) => CreateFile(byteData, fileType, c_nameGetterContexts, scenario, DetermineFileID(scenario, filename))))
                 {
                     fileLoader.Close();
                     return null;

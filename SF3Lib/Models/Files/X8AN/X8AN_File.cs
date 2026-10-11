@@ -13,20 +13,20 @@ namespace SF3.Models.Files.X8AN {
         public override int RamAddress => 0x00200000; // TODO: Where?
         public override int RamAddressLimit => 0x002FFFFF; // TODO: Where?
 
-        protected X8AN_File(IByteData data, INameGetterContext nameContext, int? fileId)
-        : base(data, nameContext, ScenarioType.Scenario1, fileId) {
+        protected X8AN_File(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId)
+        : base(data, nameContext, scenario, fileId) {
             Discoveries = null;
         }
 
-        public static X8AN_File Create(IByteData data, INameGetterContext nameContext, int? fileId) {
-            var newFile = new X8AN_File(data, nameContext, fileId);
+        public static X8AN_File Create(IByteData data, INameGetterContext nameContext, ScenarioType scenario, int? fileId) {
+            var newFile = new X8AN_File(data, nameContext, scenario, fileId);
             if (!newFile.Init())
                 throw new InvalidOperationException("Couldn't initialize X8AN_File");
             return newFile;
         }
 
         public override IEnumerable<ITable> MakeTables() {
-            AttackAnimChunkTable = X8ANAttackAnimChunkTable.Create(Data, nameof(AttackAnimChunkTable), 0, hasFixedRotations: false);
+            AttackAnimChunkTable = X8ANAttackAnimChunkTable.Create(Data, nameof(AttackAnimChunkTable), 0, hasFixedRotations: Scenario < ScenarioType.Scenario1);
             AttackAnimBoneKeyframesTables = AttackAnimChunkTable;
 
             var tables = new List<ITable>() {};

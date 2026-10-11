@@ -257,7 +257,7 @@ namespace SF3.Utils {
                 case SF3FileType.DAT_BTLENKEI: return BTLENKEI_File.Create(byteData, ngc, scenario, fileId);
                 case SF3FileType.KAO:     return KAO_File.Create(byteData, ngc, scenario, fileId);
                 case SF3FileType.X8PC:    return X8PC_File.Create(byteData, ngc, scenario.Value, fileId);
-                case SF3FileType.X8AN:    return X8AN_File.Create(byteData, ngc, fileId);
+                case SF3FileType.X8AN:    return X8AN_File.Create(byteData, ngc, scenario.Value, fileId);
                 default:
                     throw new InvalidOperationException($"Unhandled file type '{fileType}'");
             }
