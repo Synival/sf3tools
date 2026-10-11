@@ -1,5 +1,6 @@
 ﻿using SF3.Types;
 using static SF3.Utils.FileUtils;
+using static SF3.Utils.ResourceUtils;
 using static SF3.Tests.TestDataPaths;
 
 namespace SF3.Tests.Utils {
@@ -87,6 +88,41 @@ namespace SF3.Tests.Utils {
             Assert.AreEqual(ScenarioType.Scenario2,   DetermineScenario(ScenarioDataPaths[ScenarioType.Scenario2] + "FOO.BIN"));
             Assert.AreEqual(ScenarioType.Scenario3,   DetermineScenario(ScenarioDataPaths[ScenarioType.Scenario3] + "FOO.BIN"));
             Assert.AreEqual(ScenarioType.PremiumDisk, DetermineScenario(ScenarioDataPaths[ScenarioType.PremiumDisk] + "FOO.BIN"));
+        }
+
+        [TestMethod]
+        public void DetermineFileID_WithAllScenarioFiles_ReturnsExpectedFileID() {
+            var allDicts = GetValueNameDictionaryForAllScenariosFromXML("FileIndexes.xml");
+            foreach (var scnDict in allDicts) {
+                foreach (var idName in scnDict.Value) {
+                    var resultFileId = DetermineFileID(scnDict.Key, idName.Value);
+                    Assert.AreEqual(idName.Key, resultFileId, $"Mismatch for {scnDict.Key}, {idName.Value}: Expected {idName.Key}, got {resultFileId}");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void DetermineFileID_WithAllScenarioFiles_WithExtraExtension_ReturnsExpectedFileID() {
+            var allDicts = GetValueNameDictionaryForAllScenariosFromXML("FileIndexes.xml");
+            foreach (var scnDict in allDicts) {
+                foreach (var idName in scnDict.Value) {
+                    var searchFilename = idName.Value + ".BAK";
+                    var resultFileId = DetermineFileID(scnDict.Key, searchFilename);
+                    Assert.AreEqual(idName.Key, resultFileId, $"Mismatch for {scnDict.Key}, {searchFilename}: Expected {idName.Key}, got {resultFileId}");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void DetermineFileID_WithAllScenarioFiles_WithPrefix_ReturnsExpectedFileID() {
+            var allDicts = GetValueNameDictionaryForAllScenariosFromXML("FileIndexes.xml");
+            foreach (var scnDict in allDicts) {
+                foreach (var idName in scnDict.Value) {
+                    var searchFilename = "New_" + idName.Value;
+                    var resultFileId = DetermineFileID(scnDict.Key, searchFilename);
+                    Assert.AreEqual(idName.Key, resultFileId, $"Mismatch for {scnDict.Key}, {searchFilename}: Expected {idName.Key}, got {resultFileId}");
+                }
+            }
         }
     }
 }
