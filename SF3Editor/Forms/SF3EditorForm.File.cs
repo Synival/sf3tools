@@ -52,7 +52,7 @@ namespace SF3.Editor.Forms {
             if (model is IX8PC_File x8pc && x8pc.Scenario <= ScenarioType.Scenario1) {
                 IReadOnlyList<IBoneKeyframe>? KeyframeLoader(PolyChar pc, int modelFileId, PCAnimationType animId) {
                     return (_appSettings.AutoLoadPolyCharAnimations && x8pc.FileID.HasValue)
-                        ? X8AnimLoader.PolyCharKeyframeLoader(_loadedFiles, Path.GetPathRoot(loader.Filename) ?? "", pc, x8pc.FileID.Value, animId)
+                        ? X8AnimLoader.GetPolyCharAnimationFrromOpenFilesOrPath(_loadedFiles, Path.GetPathRoot(loader.Filename) ?? "", pc, x8pc.FileID.Value, animId)
                         : null;
                 }
                 foreach (var pc in x8pc.PolyCharTable)

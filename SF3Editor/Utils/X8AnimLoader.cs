@@ -15,23 +15,24 @@ using static SF3.Utils.FileUtils;
 namespace SF3.Editor.Utils {
     public class X8AnimLoader {
         /// <summary>
-        /// 
+        /// Gets a set of bone animation for a Scenario 1 or Prototype PolyChar based on files already open or files at the path specified.
+        /// Any non-loaded X014 and X8AN files are opened temporarily if they can be found.
         /// </summary>
         /// <param name="loadedFiles">Collection of files already loaded in SF3Editor.</param>
-        /// <param name="loadedFileDirectory">Directory to look for files that need to be loaded on-demand.</param>
+        /// <param name="loadDir">Directory to look for files that need to be loaded on-demand.</param>
         /// <param name="polyChar">PolyChar that needs an animation.</param>
         /// <param name="x8pcFileId">FileID of the X8PC file that needs to be loaded. Required for finding the appropiate X8AN file.</param>
         /// <param name="animId">Animation to be loaded.</param>
-        /// <returns></returns>
-        public static IReadOnlyList<IBoneKeyframe>? PolyCharKeyframeLoader(IEnumerable<LoadedFile> loadedFiles, string loadedFileDirectory, PolyChar polyChar, int x8pcFileId, PCAnimationType animId) {
+        /// <returns>A new table of bone keyframes on success, otherwise null.</returns>
+        public static IReadOnlyList<IBoneKeyframe>? GetPolyCharAnimationFrromOpenFilesOrPath(IEnumerable<LoadedFile> loadedFiles, string loadDir, PolyChar polyChar, int x8pcFileId, PCAnimationType animId) {
             IX014_File? x014File = null;
             IX8AN_File? x8ANFile = null;
-            bool isX014Temporary = false;
-            bool isX8ANTemporary = false;
+            bool wasX014Loaded = false;
+            bool wasX8ANLoaded = false;
 
             try {
                 var scenario = polyChar.Scenario;
-                x014File = GetOrTemporarilyLoadX014File(loadedFiles, loadedFileDirectory, scenario, out isX014Temporary);
+                x014File = GetOrLoadX014File(loadedFiles, loadDir, scenario, out wasX014Loaded);
                 if (x014File == null)
                     return null;
 
@@ -39,7 +40,7 @@ namespace SF3.Editor.Utils {
                 if (animToLoadRow == null)
                     return null;
 
-                x8ANFile = GetOrTemporarilyLoadX8ANFile(loadedFiles, loadedFileDirectory, scenario, animToLoadRow.AnimFileID, out isX8ANTemporary);
+                x8ANFile = GetOrLoadX8ANFile(loadedFiles, loadDir, scenario, animToLoadRow.AnimFileID, out wasX8ANLoaded);
                 if (x8ANFile == null)
                     return null;
 
@@ -49,35 +50,44 @@ namespace SF3.Editor.Utils {
                 return keyframes?.BoneKeyframesTable;
             }
             finally {
-                if (isX014Temporary && x014File is X014_File x014File2)
+                if (wasX014Loaded && x014File is X014_File x014File2)
                     x014File2.Dispose();
-                if (isX8ANTemporary && x8ANFile is X8AN_File x8ANFile2)
+                if (wasX8ANLoaded && x8ANFile is X8AN_File x8ANFile2)
                     x8ANFile2.Dispose();
             }
         }
 
-        public static IX014_File? GetOrTemporarilyLoadX014File(IEnumerable<LoadedFile> loadedFiles, string loadedFileDirectory, ScenarioType scenario, out bool isTemporary) {
-            isTemporary = false;
+        /// <summary>
+        /// Fetches a single X014 file loaded if one is already loaded. If it's not loaded, it attempts to load it from a given path.
+        /// If more than one X014 file for the requested scenario is currently loaded, it falls back to loading from the filesystem as the tie-breaker.
+        /// </summary>
+        /// <param name="loadedFiles">Collection of files already loaded in SF3Editor.</param>
+        /// <param name="loadDir">Directory to look for files that need to be loaded on-demand.</param>
+        /// <param name="scenario">Scenario of the file to be loaded.</param>
+        /// <param name="wasLoadedOut">When set, the file returned was loaded from the filesystem.</param>
+        /// <returns>A matching file that is already loaded or, if found, a matching file from the filesystem.</returns>
+        public static IX014_File? GetOrLoadX014File(IEnumerable<LoadedFile> loadedFiles, string loadDir, ScenarioType scenario, out bool wasLoadedOut) {
+            wasLoadedOut = false;
+
+            // If one single matching file was loaded, use that one.
             var loadedX014Files = loadedFiles
                 .Select(x => x.Loader.Model as IX014_File)
                 .Where(x => x != null && x.Scenario == scenario)
                 .Select(x => x!)
                 .ToArray();
-
             if (loadedX014Files.Length == 1)
                 return loadedX014Files[0];
 
-            // Try to load the file!
-            var targetPath = Path.Combine(loadedFileDirectory, "X014.BIN");
-            if (!File.Exists(targetPath))
-                return null;
-
+            // No single file found, so try to load from the filesystem.
             try {
+                var targetPath = Path.Combine(loadDir, "X014.BIN");
+                if (!File.Exists(targetPath))
+                    return null;
                 var x014File = X014_File.Create(
                     new ByteData.ByteData(new ByteArray(File.ReadAllBytes(targetPath))), new NameGetterContext(scenario), scenario,
                     DetermineFileID(scenario, "X014.BIN")
                 );
-                isTemporary = true;
+                wasLoadedOut = true;
                 return x014File;
             }
             catch {
@@ -85,27 +95,35 @@ namespace SF3.Editor.Utils {
             }
         }
 
-        public static IX8AN_File? GetOrTemporarilyLoadX8ANFile(IEnumerable<LoadedFile> loadedFiles, string loadedFileDirectory, ScenarioType scenario, int fileId, out bool isTemporary) {
-            isTemporary = false;
+        /// <summary>
+        /// Fetches a single X8AN file with the requested FileID if one is already loaded. If it's not loaded, it attempts to load it from a given path.
+        /// If more than one X8AN file for the requested scenario and FileID is currently loaded, it falls back to loading from the filesystem as the tie-breaker.
+        /// </summary>
+        /// <param name="loadedFiles">Collection of files already loaded in SF3Editor.</param>
+        /// <param name="loadDir">Directory to look for files that need to be loaded on-demand.</param>
+        /// <param name="scenario">Scenario of the file to be loaded.</param>
+        /// <param name="wasLoadedOut">When set, the file returned was loaded from the filesystem.</param>
+        /// <returns>A matching file that is already loaded or, if found, a matching file from the filesystem.</returns>
+        public static IX8AN_File? GetOrLoadX8ANFile(IEnumerable<LoadedFile> loadedFiles, string loadDir, ScenarioType scenario, int fileId, out bool wasLoadedOut) {
+            wasLoadedOut = false;
 
+            // If one single matching file was loaded, use that one.
             var loadedX8ANFiles = loadedFiles
                 .Select(x => x.Loader.Model as IX8AN_File)
                 .Where(x => x != null && x.Scenario == scenario && x.FileID == fileId)
                 .Select(x => x!)
                 .ToArray();
-
             if (loadedX8ANFiles.Length == 1)
                 return loadedX8ANFiles[0];
 
-            // Try to load the file!
-            var x8ANFilename = GetFilenameFromFileID(scenario, fileId);
-            var targetPath = Path.Combine(loadedFileDirectory, x8ANFilename);
-            if (!File.Exists(targetPath))
-                return null;
-
+            // No single file found, so try to load from the filesystem.
             try {
+                var x8ANFilename = GetFilenameFromFileID(scenario, fileId);
+                var targetPath = Path.Combine(loadDir, x8ANFilename);
+                if (!File.Exists(targetPath))
+                    return null;
                 var x8ANFle = X8AN_File.Create(new ByteData.ByteData(new ByteArray(File.ReadAllBytes(targetPath))), new NameGetterContext(scenario), scenario, fileId);
-                isTemporary = true;
+                wasLoadedOut = true;
                 return x8ANFle;
             }
             catch {
