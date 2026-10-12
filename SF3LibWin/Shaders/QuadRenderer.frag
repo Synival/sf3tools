@@ -42,7 +42,7 @@ float calcY(float x) {
     float denomMax;
     float num;
 
-    // Each branch is mathematically equivalent, but the larger denominator produces more accurate results // due to
+    // Each branch is mathematically equivalent, but the larger denominator produces more accurate results due to
     // floating point imprecisions.
     if (denomVAbs.x > denomVAbs.y) {
         denom    = denomV.x;
