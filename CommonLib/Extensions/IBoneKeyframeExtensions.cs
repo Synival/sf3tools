@@ -40,7 +40,7 @@ namespace CommonLib.Extensions {
                 var nextF = frameGetter(element);
                 if ((frame >= lastF && frame < nextF) || i == max - 1) {
                     if (i == 0)
-                        return new BoneKeyframeComponentIndices(0, 0, 0, nextF, 0);
+                        return new BoneKeyframeComponentIndices(0, 0, nextF, nextF, nextF);
                     else if (frame < nextF)
                         return new BoneKeyframeComponentIndices(i - 1, i, lastF, nextF, frame);
                     else

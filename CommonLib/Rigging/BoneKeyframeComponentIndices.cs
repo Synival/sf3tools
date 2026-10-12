@@ -13,7 +13,7 @@ namespace CommonLib.Rigging {
             FramesIn     = currentFrame - frameStart;
             FramesLeft   = TotalFrames - FramesIn;
 
-            Mix          = FramesIn / TotalFrames;
+            Mix          = FramesIn / Math.Max(TotalFrames, 1);
         }
 
         public readonly int IndexA;
