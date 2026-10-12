@@ -24,7 +24,7 @@ namespace SF3.Win.OpenGL.Renderers.Shared {
             if (models?.ModelInstances == null)
                 return;
 
-            var shader = selectionColors ? general.ColorizeShader : general.QuadTestShader;
+            var shader = selectionColors ? general.ColorizeShader : general.QuadRendererShader;
             if (selectionColors)
                 shader.UpdateUniform("alwaysShow", false);
             else {

@@ -1,7 +1,7 @@
 #version 330 core
 
-// QuadTest
-// --------
+// QuadRenderer
+// ------------
 // Template shader that performs Saturn-like bilinear interpolation for texturing quads.
 // See QuadTest.vert for more details.
 

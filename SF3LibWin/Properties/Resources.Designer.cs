@@ -326,23 +326,26 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
+        ///uniform sampler2D textureAtlas;
+        ///uniform sampler2D textureOverlay1;
+        ///uniform sampler2D textureOverlay2;
+        ///
+        ///in vec4 colorFrag;
+        ///in vec3 glowFrag;
+        ///in vec4 lightColorFrag;
+        ///flat in int meshFrag;
+        ///
+        ///in vec2 texCoordOverlay1Frag;
+        ///in vec2 texCoordOverlay2Frag;
+        ///
         ///noperspective in vec2 relativePos2DFrag;
         ///flat in vec2 edgeBottomFrag;
         ///flat in vec2 edgeLeftFrag;
         ///flat in vec2 quadDistortionFrag;
         ///flat in float coeffAFrag;
+        ///flat in int interpolateLinearlyFrag;
         ///
-        ///out vec4 FragColor;
-        ///
-        ///float cross2D(vec2 a, vec2 b) {
-        ///    return a.x * b.y - a.y * b.x;
-        ///}
-        ///
-        ///vec2 getPosInQuad() {
-        ///    // Position is determined using inverse bilinear interpolation.
-        ///    // Several variables are pre-calculated in the vertex shader and passed along.
-        ///    float a = coeffAFrag;
-        ///    float b = cross2D(relativ [rest of string was truncated]&quot;;.
+        ///flat in vec2 texCoordAtlasUVFr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectFrag {
             get {
@@ -356,21 +359,21 @@ namespace SF3.Win.Properties {
         ///uniform mat4 model;
         ///uniform mat4 view;
         ///uniform mat4 projection;
+        ///uniform mat3 normalMatrix;
+        ///uniform vec3 lightPosition;
+        ///uniform sampler2D textureLighting;
+        ///uniform int lightingMode;
+        ///uniform bool smoothLighting;
         ///
         ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec3 allVertices0;
-        ///layout (location = 2) in vec3 allVertices1;
-        ///layout (location = 3) in vec3 allVertices2;
-        ///layout (location = 4) in vec3 allVertices3;
+        ///layout (location = 1) in vec4 color;
+        ///layout (location = 2) in vec3 glow;
+        ///layout (location = 3) in vec3 normal;
         ///
-        ///noperspective out vec2 relativePos2DFrag;
-        ///flat out vec2 edgeBottomFrag;
-        ///flat out vec2 edgeLeftFrag;
-        ///flat out vec2 quadDistortionFrag;
-        ///flat out float coeffAFrag;
+        ///layout (location = 5) in vec2 texCoordOverlay1;
+        ///layout (location = 6) in vec2 texCoordOverlay2;
         ///
-        ///out vec2 texCoordAtlasFrag;
-        ///ou [rest of string was truncated]&quot;;.
+        ///layout (locatio [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ObjectVert {
             get {
@@ -476,55 +479,45 @@ namespace SF3.Win.Properties {
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
+        ///// QuadRenderer
+        ///// ------------
+        ///// Template shader that performs Saturn-like bilinear interpolation for texturing quads.
+        ///// See QuadRenderer.vert for more details.
+        ///
+        ///// Texture to use.
+        ///// NOTE: The &apos;Atlas&apos; part is just because this originally was only used for texture atlases. It&apos;s a
+        /////       bit vestigial and will be renamed in due time.
+        ///uniform sampler2D textureAtlas;
+        ///
+        ///// Linearly-interpreted position of the current pixel relative to allVertices0.
         ///noperspective in vec2 relativePos2DFrag;
-        ///flat in vec2 edgeBottomFrag;
-        ///flat in vec2 edgeLeftFrag;
-        ///flat in vec2 quadDistortionFrag;
-        ///flat in float coeffAFrag;
         ///
-        ///out vec4 FragColor;
-        ///
-        ///float cross2D(vec2 a, vec2 b) {
-        ///    return a.x * b.y - a.y * b.x;
-        ///}
-        ///
-        ///vec2 getPosInQuad() {
-        ///    // Position is determined using inverse bilinear interpolation.
-        ///    // Several variables are pre-calculated in the vertex shader and passed along.
-        ///    float a = coeffAFrag;
-        ///    float b = cross2D(relativ [rest of string was truncated]&quot;;.
+        ///// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string QuadTestFrag {
+        internal static string QuadRendererFrag {
             get {
-                return ResourceManager.GetString("QuadTestFrag", resourceCulture);
+                return ResourceManager.GetString("QuadRendererFrag", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to #version 330 core
         ///
-        ///uniform mat4 model;
-        ///uniform mat4 view;
-        ///uniform mat4 projection;
-        ///
-        ///layout (location = 0) in vec3 position;
-        ///layout (location = 1) in vec3 allVertices0;
-        ///layout (location = 2) in vec3 allVertices1;
-        ///layout (location = 3) in vec3 allVertices2;
-        ///layout (location = 4) in vec3 allVertices3;
-        ///
-        ///noperspective out vec2 relativePos2DFrag;
-        ///flat out vec2 edgeBottomFrag;
-        ///flat out vec2 edgeLeftFrag;
-        ///flat out vec2 quadDistortionFrag;
-        ///flat out float coeffAFrag;
-        ///
-        ///out vec2 texCoordAtlasFrag;
-        ///ou [rest of string was truncated]&quot;;.
+        ///// QuadRenderer
+        ///// ------------
+        ///// Template shader that performs Saturn-like bilinear interpolation for texturing quads.
+        /////
+        ///// To use, the following requirements must be met:
+        /////
+        ///// 1. Vertices cannot be shared between multiple quads, so you&apos;ll need to duplicate them
+        ///// 2. All four vertices must be supplied to each vertex as allVertices0...3
+        ///// 3. All four UV coordinates must be supplied to each vertex as texCoordAtlasUV0...3 *
+        /////
+        ///// * Why &apos;Atlas&apos;? Because this originally came from an atla [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string QuadTestVert {
+        internal static string QuadRendererVert {
             get {
-                return ResourceManager.GetString("QuadTestVert", resourceCulture);
+                return ResourceManager.GetString("QuadRendererVert", resourceCulture);
             }
         }
         

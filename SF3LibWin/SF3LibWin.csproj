@@ -120,8 +120,8 @@
     <EmbeddedResource Include="Shaders\OutlineBlurPass.vert" />
     <EmbeddedResource Include="Shaders\OutlineToScreen.frag" />
     <EmbeddedResource Include="Shaders\OutlineToScreen.vert" />
-    <EmbeddedResource Include="Shaders\QuadTest.frag" />
-    <EmbeddedResource Include="Shaders\QuadTest.vert" />
+    <EmbeddedResource Include="Shaders\QuadRenderer.frag" />
+    <EmbeddedResource Include="Shaders\QuadRenderer.vert" />
     <EmbeddedResource Include="Shaders\Object.frag">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
