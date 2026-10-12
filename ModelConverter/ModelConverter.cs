@@ -274,12 +274,12 @@ namespace ModelConverter {
                 var mcTextures = texturesById.Values.ToArray();
 
                 mc.TextureAtlas = new TextureAtlas(mcTextures, tryRotate: false);
-                mc.TextureAtlasDimensions = mc.TextureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+                mc.TextureAtlasDimensions = mc.TextureAtlas.GetDimensions(onlyTextures: true, TextureAtlas.DimensionsMode.CompactEvenOnly);
 
                 // If the atlas has images, create a shared 'MemoryImage' for it.
                 if (mcTextures.Length > 0) {
                     byte[] textureAtlasBitmapContent;
-                    using (var textureAtlasBitmap = mc.TextureAtlas.CreateBitmap(onlyTextures: true, forceEvenWidth: true)) {
+                    using (var textureAtlasBitmap = mc.TextureAtlas.CreateBitmap(onlyTextures: true, TextureAtlas.DimensionsMode.CompactEvenOnly)) {
                         using (var bitmapStream = new MemoryStream()) {
                             textureAtlasBitmap.Save(bitmapStream, ImageFormat.Png);
                             textureAtlasBitmapContent = bitmapStream.ToArray();

@@ -74,7 +74,7 @@ namespace CommonLib.ThirdParty.TexturePacker {
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
 
-        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip, float borderUVWidth = 0.00f, float borderUVHeight = 0.00f) {
+        public Vector2[] GetUVCoordinatesByTextureIDFrame(int id, int frame, int width, int height, TextureRotateType rotation, TextureFlipType flip, float pixelBorder = 0.0f) {
             var node = GetNodeByTextureIDFrame(id, frame);
             if (node == null)
                 throw new ArgumentException(nameof(id) + ", " + nameof(frame));
@@ -83,10 +83,10 @@ namespace CommonLib.ThirdParty.TexturePacker {
             var heightf = (float) height;
 
             // Perform calculations in texture coordinates, where (0, 0) is the top-left corner.
-            var x1 = node.Rect.Left   / widthf  + CornerType.TopLeft.GetUVDirectionX() * borderUVWidth;
-            var y1 = node.Rect.Top    / heightf + CornerType.TopLeft.GetUVDirectionY() * borderUVHeight;
-            var x2 = node.Rect.Right  / widthf  + CornerType.BottomRight.GetUVDirectionX() * borderUVWidth;
-            var y2 = node.Rect.Bottom / heightf + CornerType.BottomRight.GetUVDirectionY() * borderUVHeight;
+            var x1 = (node.Rect.Left   + CornerType.TopLeft.GetUVDirectionX()     * pixelBorder) / widthf;
+            var y1 = (node.Rect.Top    + CornerType.TopLeft.GetUVDirectionY()     * pixelBorder) / heightf;
+            var x2 = (node.Rect.Right  + CornerType.BottomRight.GetUVDirectionX() * pixelBorder) / widthf;
+            var y2 = (node.Rect.Bottom + CornerType.BottomRight.GetUVDirectionY() * pixelBorder) / heightf;
 
             var tl = new Vector2(x1, y1);
             var tr = new Vector2(x2, y1);
@@ -129,22 +129,51 @@ namespace CommonLib.ThirdParty.TexturePacker {
             };
         }
 
-        public Bitmap CreateBitmap(bool onlyTextures = false, bool forceEvenWidth = false) {
+        public enum DimensionsMode {
+            Compact,
+            CompactEvenOnly,
+            PowersOfTwo
+        }
+
+        public Bitmap CreateBitmap(bool onlyTextures = false, DimensionsMode dimensionsMode = DimensionsMode.Compact) {
             if (MaxX <= 0 || MaxY <= 0)
                 return null;
 
-            var dimensions = GetDimensions(onlyTextures, forceEvenWidth);
+            var dimensions = GetDimensions(onlyTextures, dimensionsMode);
             Bitmap atlas = new Bitmap(dimensions.Width, dimensions.Height);
             DrawPackedNodes(atlas);
             return atlas;
         }
 
-        public Rectangle GetDimensions(bool onlyTextures = false, bool forceEvenWidth = false) {
+        public Rectangle GetDimensions(bool onlyTextures = false, DimensionsMode dimensionsMode = DimensionsMode.Compact) {
             int width = 0;
             int height = 0;
             GetDimensionsSub(_rootNode, ref width, ref height, onlyTextures);
-            if (forceEvenWidth)
-                width = ((width + 1) / 2) * 2;
+
+            switch (dimensionsMode) {
+                case DimensionsMode.Compact:
+                    // Nothing to do here.
+                    break;
+
+                case DimensionsMode.CompactEvenOnly:
+                    width = (width + 1) / 2 * 2;
+                    break;
+
+                case DimensionsMode.PowersOfTwo: {
+                    var oldWidth = width;
+                    var oldHeight = height;
+
+                    width = 1;
+                    while (width < oldWidth)
+                        width <<= 1;
+
+                    height = 1;
+                    while (height < oldHeight)
+                        height <<= 1;
+                    break;
+                }
+            }
+
             return new Rectangle(0, 0, width, height);
         }
 

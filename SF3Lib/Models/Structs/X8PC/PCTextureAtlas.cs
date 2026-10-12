@@ -108,7 +108,7 @@ namespace SF3.Models.Structs.X8PC {
 
         protected override ushort[,] FetchImageData16Bit() {
             // TODO: Why do we have to force an even width here??? This breaks if we don't, but why???
-            var bitmapDimensions = _textureAtlas.GetDimensions(onlyTextures: true, forceEvenWidth: true);
+            var bitmapDimensions = _textureAtlas.GetDimensions(onlyTextures: true, TextureAtlas.DimensionsMode.CompactEvenOnly);
 
             // Enforce minimum width and extra pixels for the palette.
             bitmapDimensions.Width = Math.Max(16, bitmapDimensions.Width);

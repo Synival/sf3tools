@@ -27,7 +27,7 @@ namespace SF3.Win.OpenGL {
                 .ToArray();
 
             if (textures.Length > 0) {
-                _textureAtlas = new TextureAtlas(textures, 0, true);
+                _textureAtlas = new TextureAtlas(textures, 0, tryRotate: true);
                 _textureBitmap = _textureAtlas.CreateBitmap();
                 _texture = _textureBitmap != null ? new Texture(_textureBitmap, minNearest: _textureAtlas.HasTransparency) : null;
             }
@@ -55,6 +55,7 @@ namespace SF3.Win.OpenGL {
                     new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV1"),
                     new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV2"),
                     new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV3"),
+                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, "pixelSize"),
                 ]);
             }
 
@@ -158,12 +159,16 @@ namespace SF3.Win.OpenGL {
                 if (uvVboAttrs.All(x => x == null || !x.OffsetInBytes.HasValue))
                     return false;
 
-            var pos   = vboAttr.OffsetInBytes.HasValue ? (vboAttr.OffsetInBytes.Value / sizeof(float)) : (int?) null;
+            var pos   = (vboAttr?.OffsetInBytes.HasValue == true) ? (vboAttr.OffsetInBytes.Value / sizeof(float)) : (int?) null;
             var uvPos = uvVboAttrs.Select(x => x.OffsetInBytes.HasValue ? (x.OffsetInBytes.Value / sizeof(float)) : (int?) null).ToArray();
-            var stride = _vbo.StrideInBytes / sizeof(float);
 
-            var pixelBorderWidth  = -0.25f / _textureBitmap.Width;
-            var pixelBorderHeight = -0.25f / _textureBitmap.Height;
+            // VBO for pixel sizes for the atlas texture.
+            var pixelSizeVboAttr = _vbo.GetAttributeByName("pixelSize");
+            var pixelSizePos = (pixelSizeVboAttr?.OffsetInBytes.HasValue == true) ? (pixelSizeVboAttr.OffsetInBytes.Value / sizeof(float)) : (int?) null;
+            var pixelWidth  = 1.0f / _textureBitmap.Width;
+            var pixelHeight = 1.0f / _textureBitmap.Height;
+
+            var stride = _vbo.StrideInBytes / sizeof(float);
 
             // Update UV coordinates
             var modified = false;
@@ -172,9 +177,9 @@ namespace SF3.Win.OpenGL {
             foreach (var quad in Quads) {
                 var frame = quad.Animation?.GetFrame(_frame);
                 var tc = (frame != null)
-                    ? (_textureAtlas.GetUVCoordinatesByTextureIDFrame(
-                        frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip,
-                        pixelBorderWidth, pixelBorderHeight)).Select(x => x.ToOpenTKVector2()).ToArray()
+                    ? _textureAtlas.GetUVCoordinatesByTextureIDFrame(frame.TextureID, frame.Frame, _textureBitmap.Width, _textureBitmap.Height, quad.TextureRotate, quad.TextureFlip)
+                        .Select(x => x.ToOpenTKVector2())
+                        .ToArray()
                     : c_noTextureCoords;
 
                 // Set triangle-based atlas UV coords.
@@ -208,6 +213,13 @@ namespace SF3.Win.OpenGL {
                             vb[uvp + 1] = tc[uvIdx].Y;
                             uvPos[uvIdx] += stride;
                         }
+                    }
+
+                    if (pixelSizePos.HasValue) {
+                        var psPos = pixelSizePos.Value;
+                        vb[psPos + 0] = pixelWidth;
+                        vb[psPos + 1] = pixelHeight;
+                        pixelSizePos += stride;
                     }
                 }
             }
