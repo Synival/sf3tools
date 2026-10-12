@@ -108,6 +108,12 @@ namespace SF3.Models.Structs.X8PC {
 
         private readonly Func<int, PCAnimationDefStruct> _neighborGetter;
 
+        public void SetLoadedKeyframes(IReadOnlyList<IBoneKeyframe> keyframes) {
+            if (!IsInAttackAnimChunk)
+                throw new InvalidOperationException("Animation keyframes are not in an attack animation chunk and cannot be loaded");
+            LoadedKeyframes = keyframes;
+        }
+
         public IReadOnlyList<IBoneKeyframe> GetOrLoadKeyframes() {
             var keyframes = BoneKeyframes;
             if (keyframes == null && LoadedKeyframes == null && PolyChar?.KeyframeLoader != null) {
