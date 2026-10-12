@@ -17,6 +17,9 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+// Dimensions of individual pixels used for clamping UV coordinates.
+uniform vec2 pixelSize;
+
 // Position of the current vertex.
 layout (location = 0) in vec3 position;
 
@@ -33,9 +36,6 @@ layout (location = 5) in vec2 texCoordAtlasUV0;
 layout (location = 6) in vec2 texCoordAtlasUV1;
 layout (location = 7) in vec2 texCoordAtlasUV2;
 layout (location = 8) in vec2 texCoordAtlasUV3;
-
-// Dimensions of individual pixels used for clamping UV coordinates.
-layout (location = 9) in vec2 pixelSize;
 
 // Linearly-interpreted position of the current pixel relative to allVertices0.
 noperspective out vec2 relativePos2DFrag;

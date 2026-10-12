@@ -55,7 +55,6 @@ namespace SF3.Win.OpenGL {
                     new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV1"),
                     new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV2"),
                     new VBO_Attribute(1, ActiveAttribType.FloatVec2, texCoordName + "UV3"),
-                    new VBO_Attribute(1, ActiveAttribType.FloatVec2, "pixelSize"),
                 ]);
             }
 
@@ -162,12 +161,6 @@ namespace SF3.Win.OpenGL {
             var pos   = (vboAttr?.OffsetInBytes.HasValue == true) ? (vboAttr.OffsetInBytes.Value / sizeof(float)) : (int?) null;
             var uvPos = uvVboAttrs.Select(x => x.OffsetInBytes.HasValue ? (x.OffsetInBytes.Value / sizeof(float)) : (int?) null).ToArray();
 
-            // VBO for pixel sizes for the atlas texture.
-            var pixelSizeVboAttr = _vbo.GetAttributeByName("pixelSize");
-            var pixelSizePos = (pixelSizeVboAttr?.OffsetInBytes.HasValue == true) ? (pixelSizeVboAttr.OffsetInBytes.Value / sizeof(float)) : (int?) null;
-            var pixelWidth  = 1.0f / _textureBitmap.Width;
-            var pixelHeight = 1.0f / _textureBitmap.Height;
-
             var stride = _vbo.StrideInBytes / sizeof(float);
 
             // Update UV coordinates
@@ -213,13 +206,6 @@ namespace SF3.Win.OpenGL {
                             vb[uvp + 1] = tc[uvIdx].Y;
                             uvPos[uvIdx] += stride;
                         }
-                    }
-
-                    if (pixelSizePos.HasValue) {
-                        var psPos = pixelSizePos.Value;
-                        vb[psPos + 0] = pixelWidth;
-                        vb[psPos + 1] = pixelHeight;
-                        pixelSizePos += stride;
                     }
                 }
             }
@@ -284,8 +270,11 @@ namespace SF3.Win.OpenGL {
             using ((textureAtlas != null) ? textureAtlas.Use(ObjectShaderTextureUnit.TextureAtlas) : null)
             using (_vao.Use())
             using (_ebo.Use(BufferTarget.ElementArrayBuffer))
-            using (shader.Use())
+            using (shader.Use()) {
+                if (textureAtlas != null)
+                    shader.UpdateUniform("pixelSize", new Vector2(1.0f / textureAtlas.Width, 1.0f / textureAtlas.Height));
                 GL.DrawElements(PrimitiveType.Triangles, _elementBuffer.Length, DrawElementsType.UnsignedInt, 0);
+            }
         }
 
         private bool disposed = false;
