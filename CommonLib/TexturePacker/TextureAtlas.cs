@@ -16,11 +16,8 @@ using static CommonLib.Utils.MemoryUtils;
 namespace CommonLib.TexturePacker {
     public class TextureAtlas : IDisposable {
         public TextureAtlas(int maxX, int maxY, int padding = 0, bool tryRotate = true) {
-            MaxX      = maxX;
-            MaxY      = maxY;
-            Padding   = padding;
-            TryRotate = tryRotate;
-            _rootNode = new TextureAtlasNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate);
+            Strategy  = new TightTextureStrategy(maxX, maxY, padding, tryRotate);
+            _rootNode = new TightTextureNode(new Rectangle(padding, padding, maxX, maxY), padding, tryRotate);
         }
 
         public TextureAtlas(IEnumerable<ITexture> textures, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
@@ -31,9 +28,12 @@ namespace CommonLib.TexturePacker {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
+            int maxX;
+            int maxY;
+
             if (!textures.Any()) {
-                MaxX = 0;
-                MaxY = 0;
+                maxX = 0;
+                maxY = 0;
             }
             else {
                 var textureArray = sortBySize ? textures.OrderByDescending(x => x.Height).ToArray() : textures.ToArray();
@@ -42,19 +42,18 @@ namespace CommonLib.TexturePacker {
                 var totalArea = textures.Sum(x => (x.Width + padding) * (x.Height + padding));
                 minWidth      = minWidth ?? textures.Max(x => x.Width) + padding;
 
-                MaxX = Math.Max((int) minWidth, (int) Math.Sqrt(totalArea));
-                MaxY = textures.Sum(x => x.Height + padding);
+                maxX = Math.Max((int) minWidth, (int) Math.Sqrt(totalArea));
+                maxY = textures.Sum(x => x.Height + padding);
             }
 
-            Padding   = padding;
-            TryRotate = tryRotate;
-            _rootNode = new TextureAtlasNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate);
+            Strategy  = new TightTextureStrategy(maxX, maxY, padding, tryRotate);
+            _rootNode = new TightTextureNode(new Rectangle(padding, padding, maxX, maxY), padding, tryRotate);
 
             foreach (var tex in textures)
                 _ = Insert(tex);
         }
 
-        public TextureAtlasNode Insert(IAnimatedTextureFrame tex) {
+        public ITextureNode Insert(IAnimatedTextureFrame tex) {
             if (_nodeByTextureIDFrame.ContainsKey((tex.TextureID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 
@@ -66,10 +65,10 @@ namespace CommonLib.TexturePacker {
             return node;
         }
 
-        public TextureAtlasNode[] GetAllNodes()
+        public ITextureNode[] GetAllNodes()
             => _nodeByTextureIDFrame.Values.ToArray();
 
-        public TextureAtlasNode GetNodeByTextureIDFrame(int id, int frame) {
+        public ITextureNode GetNodeByTextureIDFrame(int id, int frame) {
             var key = (id, frame);
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
@@ -136,7 +135,7 @@ namespace CommonLib.TexturePacker {
         }
 
         public Bitmap CreateBitmap(bool onlyTextures = false, DimensionsMode dimensionsMode = DimensionsMode.Compact) {
-            if (MaxX <= 0 || MaxY <= 0)
+            if (Strategy.MaxX <= 0 || Strategy.MaxY <= 0)
                 return null;
 
             var dimensions = GetDimensions(onlyTextures, dimensionsMode);
@@ -177,7 +176,7 @@ namespace CommonLib.TexturePacker {
             return new Rectangle(0, 0, width, height);
         }
 
-        private void GetDimensionsSub(TextureAtlasNode node, ref int width, ref int height, bool onlyTextures) {
+        private void GetDimensionsSub(ITextureNode node, ref int width, ref int height, bool onlyTextures) {
             if (node == null)
                 return;
             if (!onlyTextures || node.Texture != null) {
@@ -194,7 +193,7 @@ namespace CommonLib.TexturePacker {
             DrawPackedNodesSub(bitmap, _rootNode);
         }
 
-        private void DrawPackedNodesSub(Bitmap atlas, TextureAtlasNode node) {
+        private void DrawPackedNodesSub(Bitmap atlas, ITextureNode node) {
             if (node == null)
                 return;
 
@@ -273,7 +272,7 @@ namespace CommonLib.TexturePacker {
                 return;
 
             if (disposing)
-                _rootNode.Dispose();
+                (_rootNode as IDisposable)?.Dispose();
 
             disposed = true;
         }
@@ -287,13 +286,10 @@ namespace CommonLib.TexturePacker {
             Dispose(false);
         }
 
-        public int MaxX { get; }
-        public int MaxY { get; }
-        public int Padding { get; }
-        public bool TryRotate { get; }
+        public ITexturePackerStrategy Strategy { get; }
         public bool HasTransparency { get; private set; } = false;
 
-        private readonly TextureAtlasNode _rootNode;
-        private readonly Dictionary<(int, int), TextureAtlasNode> _nodeByTextureIDFrame = new Dictionary<(int, int), TextureAtlasNode>();
+        private readonly ITextureNode _rootNode;
+        private readonly Dictionary<(int, int), ITextureNode> _nodeByTextureIDFrame = new Dictionary<(int, int), ITextureNode>();
     }
 }

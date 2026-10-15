@@ -7,17 +7,17 @@ using System.Drawing;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
-    public class TextureAtlasNode : IDisposable {
-        public TextureAtlasNode(Rectangle rect, int padding, bool tryRotate) {
+    public class TightTextureNode : ITextureNode, IDisposable {
+        public TightTextureNode(Rectangle rect, int padding, bool tryRotate) {
             Rect      = rect;
             Padding   = padding;
             TryRotate = tryRotate;
         }
 
-        public TextureAtlasNode Insert(IAnimatedTextureFrame tex)
+        public ITextureNode Insert(IAnimatedTextureFrame tex)
             => Insert(tex, false, TryRotate);
 
-        private TextureAtlasNode Insert(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
+        private ITextureNode Insert(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
             var width  = rotated ? tex.Height : tex.Width;
             var height = rotated ? tex.Width  : tex.Height;
 
@@ -29,11 +29,11 @@ namespace CommonLib.TexturePacker {
 
                     // If there's room to the right, add an empty node to the right.
                     if (Rect.Width - width > 0)
-                        Right = new TextureAtlasNode(new Rectangle(Rect.X + width + Padding, Rect.Y, Rect.Width - width - Padding, height), Padding, TryRotate);
+                        Right = new TightTextureNode(new Rectangle(Rect.X + width + Padding, Rect.Y, Rect.Width - width - Padding, height), Padding, TryRotate);
 
                     // If this node is all the way on the left side, add an empty node below.
                     if (Rect.X <= Padding)
-                        Left = new TextureAtlasNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
+                        Left = new TightTextureNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
                     // TODO: else, if there's remaining space below, add that as 'Left'.  we'll need a parent reference for that.
 
                     Rect = new Rectangle(Rect.X, Rect.Y, width, height);
@@ -74,8 +74,8 @@ namespace CommonLib.TexturePacker {
                 return;
 
             if (disposing) {
-                Left?.Dispose();
-                Right?.Dispose();
+                (Left as IDisposable)?.Dispose();
+                (Right as IDisposable)?.Dispose();
             }
 
             disposed = true;
@@ -86,12 +86,12 @@ namespace CommonLib.TexturePacker {
             GC.SuppressFinalize(this);
         }
 
-        ~TextureAtlasNode() {
+        ~TightTextureNode() {
             Dispose(false);
         }
 
-        public TextureAtlasNode Left { get; private set; } = null;
-        public TextureAtlasNode Right { get; private set; } = null;
+        public ITextureNode Left { get; private set; } = null;
+        public ITextureNode Right { get; private set; } = null;
         public Rectangle Rect { get; private set; }
         public bool Rotated { get; private set; } = false;
         public IAnimatedTextureFrame Texture { get; private set; } = null;
