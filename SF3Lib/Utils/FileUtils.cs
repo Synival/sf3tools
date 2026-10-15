@@ -435,9 +435,11 @@ namespace SF3.Utils {
         // One-time read and generation of lookup tables -- a dictionary for literal names (first check), and a big array for
         // wildcard lookups (second check).
         private static FileLookupTables GetFileLookupTables(ScenarioType scenario) {
-            if (!s_fileLookupTables.TryGetValue(scenario, out var fileLookupTables))
-                s_fileLookupTables.Add(scenario, fileLookupTables = new FileLookupTables(scenario));
-            return fileLookupTables;
+            lock (s_fileLookupTables) {
+                if (!s_fileLookupTables.TryGetValue(scenario, out var fileLookupTables))
+                    s_fileLookupTables.Add(scenario, fileLookupTables = new FileLookupTables(scenario));
+                return fileLookupTables;
+            }
         }
 
         public static int? DetermineFileID(ScenarioType? scenario, string fullFilename, SF3FileType? fileType = null) {
