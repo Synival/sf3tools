@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using CommonLib.ThirdParty.TexturePacker;
+using CommonLib.TexturePacker;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using SF3.Win.Extensions;

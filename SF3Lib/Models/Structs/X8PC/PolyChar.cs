@@ -7,7 +7,7 @@ using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Rigging;
 using CommonLib.SGL;
-using CommonLib.ThirdParty.TexturePacker;
+using CommonLib.TexturePacker;
 using CommonLib.Types;
 using SF3.ByteData;
 using SF3.Models.Files.X8PC;

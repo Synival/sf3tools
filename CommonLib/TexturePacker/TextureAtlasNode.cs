@@ -6,7 +6,7 @@ using System;
 using System.Drawing;
 using CommonLib.Imaging;
 
-namespace CommonLib.ThirdParty.TexturePacker {
+namespace CommonLib.TexturePacker {
     public class TextureAtlasNode : IDisposable {
         public TextureAtlasNode(Rectangle rect, int padding, bool tryRotate) {
             Rect      = rect;
@@ -44,21 +44,21 @@ namespace CommonLib.ThirdParty.TexturePacker {
                 // If the image couldn't be added, attempt to add it again with 90 degree rotation.
                 // (Don't bother if it's a square image)
                 if (tryRotate && width != height) {
-                    TextureAtlasNode ret = Insert(tex, true, false);
+                    var ret = Insert(tex, true, false);
                     return ret;
                 }
             }
 
             // An image already exists, or we couldn't add it. Attempt to add it to the right.
             if (Right != null) {
-                TextureAtlasNode ret = Right.Insert(tex);
+                var ret = Right.Insert(tex);
                 if (ret != null)
                     return ret;
             }
 
             // Couldn't add to the right - attempt to add to the left.
             if (Left != null) {
-                TextureAtlasNode ret = Left.Insert(tex);
+                var ret = Left.Insert(tex);
                 if (ret != null)
                     return ret;
             }

@@ -12,7 +12,7 @@ using CommonLib.Extensions;
 using CommonLib.Imaging;
 using CommonLib.Rigging;
 using CommonLib.SGL;
-using CommonLib.ThirdParty.TexturePacker;
+using CommonLib.TexturePacker;
 using SharpGLTF.Materials;
 using SharpGLTF.Memory;
 using SharpGLTF.Schema2;

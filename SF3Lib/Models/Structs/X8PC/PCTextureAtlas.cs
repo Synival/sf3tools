@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using CommonLib.Extensions;
 using CommonLib.Imaging;
-using CommonLib.ThirdParty.TexturePacker;
+using CommonLib.TexturePacker;
 using CommonLib.Types;
 
 namespace SF3.Models.Structs.X8PC {

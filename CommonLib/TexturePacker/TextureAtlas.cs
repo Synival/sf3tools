@@ -13,7 +13,7 @@ using CommonLib.Types;
 using static CommonLib.Types.CornerTypeConsts;
 using static CommonLib.Utils.MemoryUtils;
 
-namespace CommonLib.ThirdParty.TexturePacker {
+namespace CommonLib.TexturePacker {
     public class TextureAtlas : IDisposable {
         public TextureAtlas(int maxX, int maxY, int padding = 0, bool tryRotate = true) {
             MaxX      = maxX;
@@ -114,7 +114,7 @@ namespace CommonLib.ThirdParty.TexturePacker {
                 (tl, tr, br, bl) = (br, bl, tl, tr);
 
             // Convert coordinates to a grid so we can more easily flip them based on some (0 or 1) constants.
-            Vector2[,] bitmapCoords = new Vector2[2, 2] {
+            var bitmapCoords = new Vector2[2, 2] {
                         /* y1, y2 */
                 /* x1 */ { tl, bl },
                 /* x2 */ { tr, br }
@@ -140,14 +140,14 @@ namespace CommonLib.ThirdParty.TexturePacker {
                 return null;
 
             var dimensions = GetDimensions(onlyTextures, dimensionsMode);
-            Bitmap atlas = new Bitmap(dimensions.Width, dimensions.Height);
+            var atlas = new Bitmap(dimensions.Width, dimensions.Height);
             DrawPackedNodes(atlas);
             return atlas;
         }
 
         public Rectangle GetDimensions(bool onlyTextures = false, DimensionsMode dimensionsMode = DimensionsMode.Compact) {
-            int width = 0;
-            int height = 0;
+            var width = 0;
+            var height = 0;
             GetDimensionsSub(_rootNode, ref width, ref height, onlyTextures);
 
             switch (dimensionsMode) {
@@ -208,7 +208,7 @@ namespace CommonLib.ThirdParty.TexturePacker {
 
                     // Scan for transparent pixels. If there are any, turn the flag on.
                     if (!HasTransparency) {
-                        for (int i = 3; i < imageData.Length; i += 4) {
+                        for (var i = 3; i < imageData.Length; i += 4) {
                             if (imageData[i] != 255) {
                                 HasTransparency = true;
                                 break;
@@ -220,12 +220,12 @@ namespace CommonLib.ThirdParty.TexturePacker {
                     if (node.Rotated) {
                         var newImageData = new byte[imageData.Length];
                         var posIn = 0;
-                        for (int inY = 0; inY < node.Texture.Height; inY++) {
+                        for (var inY = 0; inY < node.Texture.Height; inY++) {
                             var outX = node.Rect.Width - inY - 1;
-                            for (int inX = 0; inX < node.Texture.Width; inX++) {
+                            for (var inX = 0; inX < node.Texture.Width; inX++) {
                                 var outY = inX;
-                                int posOut = (outY * node.Rect.Width + outX) * 4;
-                                for (int c = 0; c < 4; c++)
+                                var posOut = (outY * node.Rect.Width + outX) * 4;
+                                for (var c = 0; c < 4; c++)
                                     newImageData[posOut++] = imageData[posIn++];
                             }
                         }
@@ -245,10 +245,10 @@ namespace CommonLib.ThirdParty.TexturePacker {
                     var strideFrom = node.Rect.Width * 4;
 
                     // Start writing, row by row.
-                    var posTo = strideTo * node.Rect.Top + (node.Rect.Left * bpp);
+                    var posTo = strideTo * node.Rect.Top + node.Rect.Left * bpp;
                     unsafe {
                         fixed (byte* imageDataPtr = imageData) {
-                            int posFrom = 0;
+                            var posFrom = 0;
                             for (var row = 0; row < node.Rect.Height; row++) {
                                 _ = MemCpyUnsafe(bitmapToData.Scan0 + posTo, (IntPtr) (imageDataPtr + posFrom), strideFrom);
                                 posTo += strideTo;
