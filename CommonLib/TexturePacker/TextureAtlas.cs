@@ -17,7 +17,7 @@ namespace CommonLib.TexturePacker {
     public class TextureAtlas : IDisposable {
         public TextureAtlas(int maxX, int maxY, int padding = 0, bool tryRotate = true) {
             Strategy  = new TightTextureStrategy(maxX, maxY, padding, tryRotate);
-            _rootNode = new TightTextureNode(new Rectangle(padding, padding, maxX, maxY), padding, tryRotate);
+            _rootNode = Strategy.CreateRootNode();
         }
 
         public TextureAtlas(IEnumerable<ITexture> textures, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
@@ -47,10 +47,12 @@ namespace CommonLib.TexturePacker {
             }
 
             Strategy  = new TightTextureStrategy(maxX, maxY, padding, tryRotate);
-            _rootNode = new TightTextureNode(new Rectangle(padding, padding, maxX, maxY), padding, tryRotate);
-
+            _rootNode = Strategy.CreateRootNode();
             foreach (var tex in textures)
                 _ = Insert(tex);
+
+            if (Strategy.NeedsFinish)
+                Strategy.Finish();
         }
 
         public ITextureNode Insert(IAnimatedTextureFrame tex) {
@@ -185,8 +187,8 @@ namespace CommonLib.TexturePacker {
                 if (node.Rect.Bottom > height)
                     height = node.Rect.Bottom;
             }
-            GetDimensionsSub(node.Left, ref width, ref height, onlyTextures);
-            GetDimensionsSub(node.Right, ref width, ref height, onlyTextures);
+            foreach (var childNode in node.Children)
+                GetDimensionsSub(childNode, ref width, ref height, onlyTextures);
         }
 
         public void DrawPackedNodes(Bitmap bitmap) {
@@ -261,8 +263,8 @@ namespace CommonLib.TexturePacker {
                 CopyImage();
             }
 
-            DrawPackedNodesSub(atlas, node.Left);
-            DrawPackedNodesSub(atlas, node.Right);
+            foreach (var childNode in node.Children)
+                DrawPackedNodesSub(atlas, childNode);
         }
 
         private bool disposed = false;

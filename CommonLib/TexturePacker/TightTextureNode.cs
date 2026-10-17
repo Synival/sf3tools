@@ -3,7 +3,9 @@
 // Modified by Synival
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
@@ -90,13 +92,37 @@ namespace CommonLib.TexturePacker {
             Dispose(false);
         }
 
-        public ITextureNode Left { get; private set; } = null;
-        public ITextureNode Right { get; private set; } = null;
+
+        private ITextureNode _left = null;
+        private ITextureNode _right = null;
+
+        public ITextureNode Left {
+            get => _left;
+            set {
+                if (_left != value) {
+                    _left = value;
+                    Children = new List<ITextureNode>() { _left, _right }.Where(x => x != null).ToArray();
+                }
+            }
+        }
+
+        public ITextureNode Right {
+            get => _right;
+            set {
+                if (_right != value) {
+                    _right = value;
+                    Children = new List<ITextureNode>() { _left, _right }.Where(x => x != null).ToArray();
+                }
+            }
+        }
+
         public Rectangle Rect { get; private set; }
         public bool Rotated { get; private set; } = false;
         public IAnimatedTextureFrame Texture { get; private set; } = null;
 
         public int Padding { get; }
         public bool TryRotate { get; }
+        public IEnumerable<ITextureNode> Children { get; private set; } = new ITextureNode[0];
+
     }
 }

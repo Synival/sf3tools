@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
@@ -7,8 +8,8 @@ namespace CommonLib.TexturePacker {
 
         IAnimatedTextureFrame Texture { get; }
         Rectangle Rect { get; }
-        ITextureNode Left { get; }
-        ITextureNode Right { get; }
         bool Rotated { get; }
+
+        IEnumerable<ITextureNode> Children { get; }
     }
 }
