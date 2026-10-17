@@ -17,46 +17,15 @@ namespace CommonLib.TexturePacker {
     public class TextureAtlas : IDisposable {
         public TextureAtlas(ITexturePackerStrategyImpl strategy) {
             _strategyImpl = strategy;
-            _strategyImpl.CreateRootNode();
+            PopulateTextureDictionarySub(strategy.RootNode);
         }
 
-        public TextureAtlas(IEnumerable<ITexture> textures, ITexturePackerStrategyImpl strategy, bool sortBySize = true, int? minWidth = null)
-        : this(textures?.Select(x => new MockAnimatedTextureFrame(x)).ToArray(), strategy, sortBySize, minWidth)
-        {}
-
-        public TextureAtlas(IEnumerable<IAnimatedTextureFrame> textures, ITexturePackerStrategyImpl strategy, bool sortBySize = true, int? minWidth = null) {
-            if (textures == null)
-                throw new ArgumentNullException(nameof(textures));
-
-            int maxX;
-            int maxY;
-
-            if (!textures.Any()) {
-                maxX = 0;
-                maxY = 0;
-            }
-            else {
-                var textureArray = sortBySize ? textures.OrderByDescending(x => x.Height).ToArray() : textures.ToArray();
-                textures = textureArray;
-
-                var padding   = strategy.Padding;
-                var totalArea = textures.Sum(x => (x.Width + padding) * (x.Height + padding));
-                minWidth      = minWidth ?? textures.Max(x => x.Width) + padding;
-
-                maxX = Math.Max((int) minWidth, (int) Math.Sqrt(totalArea));
-                maxY = textures.Sum(x => x.Height + padding);
-            }
-
-            _strategyImpl  = strategy;
-            _strategyImpl.MaxX = maxX;
-            _strategyImpl.MaxY = maxY;
-
-            _strategyImpl.CreateRootNode();
-            foreach (var tex in textures)
-                _ = Insert(tex);
-
-            if (Strategy.NeedsFinish)
-                Strategy.Finish();
+        private void PopulateTextureDictionarySub(ITextureNode node) {
+            var tex = node.Texture;
+            if (tex != null)
+                _nodeByTextureIDFrame[(tex.TextureID, tex.Frame)] = node;
+            foreach (var childNode in node.Children)
+                PopulateTextureDictionarySub(childNode);
         }
 
         public ITextureNode Insert(IAnimatedTextureFrame tex) {

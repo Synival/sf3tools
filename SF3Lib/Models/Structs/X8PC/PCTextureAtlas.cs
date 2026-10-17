@@ -86,7 +86,7 @@ namespace SF3.Models.Structs.X8PC {
             foreach (var tex in _subAtlasTextures)
                 tex.Invalidated += OnSubAtlasTextureInvalidated;
 
-            _textureAtlas = new TextureAtlas(textures, new TightTextureStrategy(padding: 0, tryRotate: false), sortBySize: false, minWidth: 320);
+            _textureAtlas = new TextureAtlas(new TightTextureStrategy(textures, padding: 0, tryRotate: false, sortBySize: false, minWidth: 320));
 
             // Pre-cache the image data which builds the trimmed atlas bitmap. Set the width and height based on that.
             _ = ImageData16Bit;

@@ -27,7 +27,7 @@ namespace SF3.Win.OpenGL {
                 .ToArray();
 
             if (textures.Length > 0) {
-                _textureAtlas = new TextureAtlas(textures, new TightTextureStrategy(padding: 0, tryRotate: true));
+                _textureAtlas = new TextureAtlas(new TightTextureStrategy(textures, padding: 0, tryRotate: true));
                 _textureBitmap = _textureAtlas.CreateBitmap();
                 _texture = _textureBitmap != null ? new Texture(_textureBitmap, minNearest: _textureAtlas.HasTransparency) : null;
             }

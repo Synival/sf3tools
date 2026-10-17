@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
@@ -9,6 +11,41 @@ namespace CommonLib.TexturePacker {
             MaxY      = maxY;
             Padding   = padding;
             TryRotate = tryRotate;
+            CreateRootNode();
+        }
+
+        public TightTextureStrategy(IEnumerable<ITexture> textures, int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
+        : this(textures?.Select(x => new MockAnimatedTextureFrame(x)).ToArray(), maxX, maxY, padding, tryRotate, sortBySize, minWidth)
+        {}
+
+        public TightTextureStrategy(IEnumerable<IAnimatedTextureFrame> textures, int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null) {
+            if (textures == null)
+                throw new ArgumentNullException(nameof(textures));
+
+            if (!textures.Any()) {
+                maxX = 0;
+                maxY = 0;
+            }
+            else {
+                var textureArray = sortBySize ? textures.OrderByDescending(x => x.Height).ToArray() : textures.ToArray();
+                textures = textureArray;
+
+                var totalArea = textures.Sum(x => (x.Width + padding) * (x.Height + padding));
+                minWidth      = minWidth ?? textures.Max(x => x.Width) + padding;
+
+                maxX = Math.Max((int) minWidth, (int) Math.Sqrt(totalArea));
+                maxY = textures.Sum(x => x.Height + padding);
+            }
+
+            MaxX = maxX;
+            MaxY = maxY;
+
+            CreateRootNode();
+            foreach (var tex in textures)
+                _ = Insert(tex);
+
+            if (NeedsFinish)
+                Finish();
         }
 
         public int MaxX { get; set; }
@@ -23,7 +60,7 @@ namespace CommonLib.TexturePacker {
             // Nothing to finish.
         }
 
-        public ITextureNode CreateRootNode() {
+        private ITextureNode CreateRootNode() {
             if (_rootNode != null)
                 throw new InvalidOperationException("Strategy already has a root node created");
             return (_rootNode = new TightTextureNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate));
