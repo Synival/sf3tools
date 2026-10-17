@@ -32,7 +32,7 @@ namespace CommonLib.TexturePacker {
             if (_nodeByTextureIDFrame.ContainsKey((tex.TextureID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 
-            var node = _strategyImpl.Insert(tex);
+            var node = _strategyImpl.Add(tex);
             if (node == null)
                 throw new InvalidOperationException("Couldn't fit texture");
 

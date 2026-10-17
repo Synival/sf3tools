@@ -42,22 +42,10 @@ namespace CommonLib.TexturePacker {
 
             CreateRootNode();
             foreach (var tex in textures)
-                _ = Insert(tex);
+                _ = Add(tex);
 
             if (NeedsFinish)
                 Finish();
-        }
-
-        public int MaxX { get; set; }
-        public int MaxY { get; set; }
-        public int Padding { get; set; }
-        public bool TryRotate { get; set; }
-
-        // Finish() is never necessary for this strategy.
-        public bool NeedsFinish => false;
-
-        public void Finish() {
-            // Nothing to finish.
         }
 
         private ITextureNode CreateRootNode() {
@@ -65,12 +53,6 @@ namespace CommonLib.TexturePacker {
                 throw new InvalidOperationException("Strategy already has a root node created");
             return (_rootNode = new TightTextureNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate));
         }
-
-        public ITextureNode Insert(IAnimatedTextureFrame tex)
-            => _rootNode.Insert(tex);
-
-        private TightTextureNode _rootNode = null;
-        public ITextureNode RootNode => _rootNode;
 
         ~TightTextureStrategy() {
             Dispose(false);
@@ -89,5 +71,23 @@ namespace CommonLib.TexturePacker {
                 disposedValue = true;
             }
         }
+
+        public void Finish() {
+            // Nothing to finish.
+        }
+
+        public ITextureNode Add(IAnimatedTextureFrame tex)
+            => _rootNode.Add(tex);
+
+        private TightTextureNode _rootNode = null;
+        public ITextureNode RootNode => _rootNode;
+
+        public int MaxX { get; set; }
+        public int MaxY { get; set; }
+        public int Padding { get; set; }
+        public bool TryRotate { get; set; }
+
+        // Finish() is never necessary for this strategy.
+        public bool NeedsFinish => false;
     }
 }

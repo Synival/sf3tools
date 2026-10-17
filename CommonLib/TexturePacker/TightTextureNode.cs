@@ -16,10 +16,33 @@ namespace CommonLib.TexturePacker {
             TryRotate = tryRotate;
         }
 
-        public ITextureNode Insert(IAnimatedTextureFrame tex)
-            => Insert(tex, false, TryRotate);
+        ~TightTextureNode() {
+            Dispose(false);
+        }
 
-        private ITextureNode Insert(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing) {
+            if (disposed)
+                return;
+
+            if (disposing) {
+                (Left as IDisposable)?.Dispose();
+                (Right as IDisposable)?.Dispose();
+            }
+
+            disposed = true;
+        }
+
+        public void Dispose() {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public ITextureNode Add(IAnimatedTextureFrame tex)
+            => Add(tex, false, TryRotate);
+
+        private ITextureNode Add(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
             var width  = rotated ? tex.Height : tex.Width;
             var height = rotated ? tex.Width  : tex.Height;
 
@@ -46,21 +69,21 @@ namespace CommonLib.TexturePacker {
                 // If the image couldn't be added, attempt to add it again with 90 degree rotation.
                 // (Don't bother if it's a square image)
                 if (tryRotate && width != height) {
-                    var ret = Insert(tex, true, false);
+                    var ret = Add(tex, true, false);
                     return ret;
                 }
             }
 
             // An image already exists, or we couldn't add it. Attempt to add it to the right.
             if (Right != null) {
-                var ret = Right.Insert(tex);
+                var ret = Right.Add(tex);
                 if (ret != null)
                     return ret;
             }
 
             // Couldn't add to the right - attempt to add to the left.
             if (Left != null) {
-                var ret = Left.Insert(tex);
+                var ret = Left.Add(tex);
                 if (ret != null)
                     return ret;
             }
@@ -68,30 +91,6 @@ namespace CommonLib.TexturePacker {
             // Not enough room for this image anywhere.
             return null;
         }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing) {
-            if (disposed)
-                return;
-
-            if (disposing) {
-                (Left as IDisposable)?.Dispose();
-                (Right as IDisposable)?.Dispose();
-            }
-
-            disposed = true;
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~TightTextureNode() {
-            Dispose(false);
-        }
-
 
         private TightTextureNode _left = null;
         private TightTextureNode _right = null;

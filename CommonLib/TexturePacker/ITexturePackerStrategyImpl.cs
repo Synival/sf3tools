@@ -2,7 +2,7 @@
 
 namespace CommonLib.TexturePacker {
     public interface ITexturePackerStrategyImpl : ITexturePackerStrategy {
-        ITextureNode Insert(IAnimatedTextureFrame tex);
+        ITextureNode Add(IAnimatedTextureFrame tex);
 
         new int MaxX { get; set; }
         new int MaxY { get; set; }
