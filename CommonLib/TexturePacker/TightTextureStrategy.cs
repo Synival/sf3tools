@@ -82,10 +82,10 @@ namespace CommonLib.TexturePacker {
         private TightTextureNode _rootNode = null;
         public ITextureNode RootNode => _rootNode;
 
-        public int MaxX { get; set; }
-        public int MaxY { get; set; }
-        public int Padding { get; set; }
-        public bool TryRotate { get; set; }
+        public int MaxX { get; }
+        public int MaxY { get; }
+        public int Padding { get; }
+        public bool TryRotate { get; }
 
         // Finish() is never necessary for this strategy.
         public bool NeedsFinish => false;

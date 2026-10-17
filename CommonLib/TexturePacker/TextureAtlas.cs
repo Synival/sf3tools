@@ -110,10 +110,10 @@ namespace CommonLib.TexturePacker {
         }
 
         public Bitmap CreateBitmap(bool onlyTextures = false, DimensionsMode dimensionsMode = DimensionsMode.Compact) {
-            if (Strategy.MaxX <= 0 || Strategy.MaxY <= 0)
+            var dimensions = GetDimensions(onlyTextures, dimensionsMode);
+            if (dimensions.Width == 0 || dimensions.Height == 0)
                 return null;
 
-            var dimensions = GetDimensions(onlyTextures, dimensionsMode);
             var atlas = new Bitmap(dimensions.Width, dimensions.Height);
             DrawPackedNodes(atlas);
             return atlas;
@@ -134,16 +134,20 @@ namespace CommonLib.TexturePacker {
                     break;
 
                 case DimensionsMode.PowersOfTwo: {
-                    var oldWidth = width;
-                    var oldHeight = height;
+                    if (width >= 2) {
+                        var oldWidth = width;
+                        width = 1;
+                        while (width < oldWidth)
+                            width <<= 1;
+                    }
 
-                    width = 1;
-                    while (width < oldWidth)
-                        width <<= 1;
+                    if (height >= 2) {
+                        var oldHeight = height;
+                        height = 1;
+                        while (height < oldHeight)
+                            height <<= 1;
+                    }
 
-                    height = 1;
-                    while (height < oldHeight)
-                        height <<= 1;
                     break;
                 }
             }
