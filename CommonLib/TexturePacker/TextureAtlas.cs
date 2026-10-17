@@ -15,16 +15,16 @@ using static CommonLib.Utils.MemoryUtils;
 
 namespace CommonLib.TexturePacker {
     public class TextureAtlas : IDisposable {
-        public TextureAtlas(int maxX, int maxY, int padding = 0, bool tryRotate = true) {
-            Strategy  = new TightTextureStrategy(maxX, maxY, padding, tryRotate);
-            _rootNode = Strategy.CreateRootNode();
+        public TextureAtlas(ITexturePackerStrategyImpl strategy) {
+            _strategyImpl = strategy;
+            _strategyImpl.CreateRootNode();
         }
 
-        public TextureAtlas(IEnumerable<ITexture> textures, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
-        : this(textures?.Select(x => new MockAnimatedTextureFrame(x)).ToArray(), padding, tryRotate, sortBySize, minWidth)
+        public TextureAtlas(IEnumerable<ITexture> textures, ITexturePackerStrategyImpl strategy, bool sortBySize = true, int? minWidth = null)
+        : this(textures?.Select(x => new MockAnimatedTextureFrame(x)).ToArray(), strategy, sortBySize, minWidth)
         {}
 
-        public TextureAtlas(IEnumerable<IAnimatedTextureFrame> textures, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null) {
+        public TextureAtlas(IEnumerable<IAnimatedTextureFrame> textures, ITexturePackerStrategyImpl strategy, bool sortBySize = true, int? minWidth = null) {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
@@ -39,6 +39,7 @@ namespace CommonLib.TexturePacker {
                 var textureArray = sortBySize ? textures.OrderByDescending(x => x.Height).ToArray() : textures.ToArray();
                 textures = textureArray;
 
+                var padding   = strategy.Padding;
                 var totalArea = textures.Sum(x => (x.Width + padding) * (x.Height + padding));
                 minWidth      = minWidth ?? textures.Max(x => x.Width) + padding;
 
@@ -46,8 +47,11 @@ namespace CommonLib.TexturePacker {
                 maxY = textures.Sum(x => x.Height + padding);
             }
 
-            Strategy  = new TightTextureStrategy(maxX, maxY, padding, tryRotate);
-            _rootNode = Strategy.CreateRootNode();
+            _strategyImpl  = strategy;
+            _strategyImpl.MaxX = maxX;
+            _strategyImpl.MaxY = maxY;
+
+            _strategyImpl.CreateRootNode();
             foreach (var tex in textures)
                 _ = Insert(tex);
 
@@ -59,7 +63,7 @@ namespace CommonLib.TexturePacker {
             if (_nodeByTextureIDFrame.ContainsKey((tex.TextureID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 
-            var node = _rootNode.Insert(tex);
+            var node = _strategyImpl.Insert(tex);
             if (node == null)
                 throw new InvalidOperationException("Couldn't fit texture");
 
@@ -149,7 +153,7 @@ namespace CommonLib.TexturePacker {
         public Rectangle GetDimensions(bool onlyTextures = false, DimensionsMode dimensionsMode = DimensionsMode.Compact) {
             var width = 0;
             var height = 0;
-            GetDimensionsSub(_rootNode, ref width, ref height, onlyTextures);
+            GetDimensionsSub(_strategyImpl.RootNode, ref width, ref height, onlyTextures);
 
             switch (dimensionsMode) {
                 case DimensionsMode.Compact:
@@ -191,9 +195,8 @@ namespace CommonLib.TexturePacker {
                 GetDimensionsSub(childNode, ref width, ref height, onlyTextures);
         }
 
-        public void DrawPackedNodes(Bitmap bitmap) {
-            DrawPackedNodesSub(bitmap, _rootNode);
-        }
+        public void DrawPackedNodes(Bitmap bitmap)
+            => DrawPackedNodesSub(bitmap, _strategyImpl.RootNode);
 
         private void DrawPackedNodesSub(Bitmap atlas, ITextureNode node) {
             if (node == null)
@@ -273,8 +276,10 @@ namespace CommonLib.TexturePacker {
             if (disposed)
                 return;
 
-            if (disposing)
-                (_rootNode as IDisposable)?.Dispose();
+            if (disposing) {
+                (_strategyImpl as IDisposable)?.Dispose();
+                _strategyImpl = null;
+            }
 
             disposed = true;
         }
@@ -288,10 +293,10 @@ namespace CommonLib.TexturePacker {
             Dispose(false);
         }
 
-        public ITexturePackerStrategy Strategy { get; }
-        public bool HasTransparency { get; private set; } = false;
+        private ITexturePackerStrategyImpl _strategyImpl = null;
+        public ITexturePackerStrategy Strategy => _strategyImpl;
 
-        private readonly ITextureNode _rootNode;
+        public bool HasTransparency { get; private set; } = false;
         private readonly Dictionary<(int, int), ITextureNode> _nodeByTextureIDFrame = new Dictionary<(int, int), ITextureNode>();
     }
 }

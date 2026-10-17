@@ -93,10 +93,10 @@ namespace CommonLib.TexturePacker {
         }
 
 
-        private ITextureNode _left = null;
-        private ITextureNode _right = null;
+        private TightTextureNode _left = null;
+        private TightTextureNode _right = null;
 
-        public ITextureNode Left {
+        private TightTextureNode Left {
             get => _left;
             set {
                 if (_left != value) {
@@ -106,7 +106,7 @@ namespace CommonLib.TexturePacker {
             }
         }
 
-        public ITextureNode Right {
+        private TightTextureNode Right {
             get => _right;
             set {
                 if (_right != value) {

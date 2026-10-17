@@ -273,7 +273,7 @@ namespace ModelConverter {
                     : new Dictionary<int, IAnimatableTexture>();
                 var mcTextures = texturesById.Values.ToArray();
 
-                mc.TextureAtlas = new TextureAtlas(mcTextures, tryRotate: false);
+                mc.TextureAtlas = new TextureAtlas(mcTextures, new TightTextureStrategy(tryRotate: false));
                 mc.TextureAtlasDimensions = mc.TextureAtlas.GetDimensions(onlyTextures: true, TextureAtlas.DimensionsMode.CompactEvenOnly);
 
                 // If the atlas has images, create a shared 'MemoryImage' for it.
