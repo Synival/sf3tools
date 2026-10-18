@@ -11,6 +11,7 @@ namespace CommonLib.TexturePacker {
             MaxY      = maxY;
             Padding   = padding;
             TryRotate = tryRotate;
+
             CreateRootNode();
         }
 
@@ -37,8 +38,10 @@ namespace CommonLib.TexturePacker {
                 maxY = textures.Sum(x => x.Height + padding);
             }
 
-            MaxX = maxX;
-            MaxY = maxY;
+            MaxX      = maxX;
+            MaxY      = maxY;
+            Padding   = padding;
+            TryRotate = tryRotate;
 
             CreateRootNode();
             foreach (var tex in textures)
