@@ -5,8 +5,8 @@ using System.Linq;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
-    public class TightTextureStrategy : ITexturePackerStrategyImpl, IDisposable {
-        public TightTextureStrategy(int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true) {
+    public class TightTexturePackerStrategy : ITexturePackerStrategyImpl, IDisposable {
+        public TightTexturePackerStrategy(int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true) {
             MaxX      = maxX;
             MaxY      = maxY;
             Padding   = padding;
@@ -14,11 +14,11 @@ namespace CommonLib.TexturePacker {
             CreateRootNode();
         }
 
-        public TightTextureStrategy(IEnumerable<ITexture> textures, int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
+        public TightTexturePackerStrategy(IEnumerable<ITexture> textures, int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null)
         : this(textures?.Select(x => new MockAnimatedTextureFrame(x)).ToArray(), maxX, maxY, padding, tryRotate, sortBySize, minWidth)
         {}
 
-        public TightTextureStrategy(IEnumerable<IAnimatedTextureFrame> textures, int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null) {
+        public TightTexturePackerStrategy(IEnumerable<IAnimatedTextureFrame> textures, int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true, bool sortBySize = true, int? minWidth = null) {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
@@ -48,13 +48,13 @@ namespace CommonLib.TexturePacker {
                 Finish();
         }
 
-        private ITextureNode CreateRootNode() {
+        private ITexturePackerNode CreateRootNode() {
             if (_rootNode != null)
                 throw new InvalidOperationException("Strategy already has a root node created");
-            return (_rootNode = new TightTextureNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate));
+            return (_rootNode = new TightTexturePackerNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate));
         }
 
-        ~TightTextureStrategy() {
+        ~TightTexturePackerStrategy() {
             Dispose(false);
         }
 
@@ -76,11 +76,11 @@ namespace CommonLib.TexturePacker {
             // Nothing to finish.
         }
 
-        public ITextureNode Add(IAnimatedTextureFrame tex)
+        public ITexturePackerNode Add(IAnimatedTextureFrame tex)
             => _rootNode.Add(tex);
 
-        private TightTextureNode _rootNode = null;
-        public ITextureNode RootNode => _rootNode;
+        private TightTexturePackerNode _rootNode = null;
+        public ITexturePackerNode RootNode => _rootNode;
 
         public int MaxX { get; }
         public int MaxY { get; }

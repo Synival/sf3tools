@@ -2,7 +2,7 @@
 
 namespace CommonLib.TexturePacker {
     public interface ITexturePackerStrategyImpl : ITexturePackerStrategy {
-        ITextureNode Add(IAnimatedTextureFrame tex);
-        ITextureNode RootNode { get; }
+        ITexturePackerNode Add(IAnimatedTextureFrame tex);
+        ITexturePackerNode RootNode { get; }
     }
 }

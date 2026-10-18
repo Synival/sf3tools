@@ -3,11 +3,11 @@ using System.Drawing;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
-    public interface ITextureNode {
+    public interface ITexturePackerNode {
         IAnimatedTextureFrame Texture { get; }
         Rectangle Rect { get; }
         bool Rotated { get; }
 
-        IEnumerable<ITextureNode> Children { get; }
+        IEnumerable<ITexturePackerNode> Children { get; }
     }
 }

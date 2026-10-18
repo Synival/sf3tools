@@ -20,7 +20,7 @@ namespace CommonLib.TexturePacker {
             PopulateTextureDictionarySub(strategy.RootNode);
         }
 
-        private void PopulateTextureDictionarySub(ITextureNode node) {
+        private void PopulateTextureDictionarySub(ITexturePackerNode node) {
             var tex = node.Texture;
             if (tex != null)
                 _nodeByTextureIDFrame[(tex.TextureID, tex.Frame)] = node;
@@ -28,7 +28,7 @@ namespace CommonLib.TexturePacker {
                 PopulateTextureDictionarySub(childNode);
         }
 
-        public ITextureNode Insert(IAnimatedTextureFrame tex) {
+        public ITexturePackerNode Insert(IAnimatedTextureFrame tex) {
             if (_nodeByTextureIDFrame.ContainsKey((tex.TextureID, tex.Frame)))
                 throw new ArgumentException(nameof(tex));
 
@@ -40,10 +40,10 @@ namespace CommonLib.TexturePacker {
             return node;
         }
 
-        public ITextureNode[] GetAllNodes()
+        public ITexturePackerNode[] GetAllNodes()
             => _nodeByTextureIDFrame.Values.ToArray();
 
-        public ITextureNode GetNodeByTextureIDFrame(int id, int frame) {
+        public ITexturePackerNode GetNodeByTextureIDFrame(int id, int frame) {
             var key = (id, frame);
             return _nodeByTextureIDFrame.ContainsKey(key) ? _nodeByTextureIDFrame[key] : null;
         }
@@ -155,7 +155,7 @@ namespace CommonLib.TexturePacker {
             return new Rectangle(0, 0, width, height);
         }
 
-        private void GetDimensionsSub(ITextureNode node, ref int width, ref int height, bool onlyTextures) {
+        private void GetDimensionsSub(ITexturePackerNode node, ref int width, ref int height, bool onlyTextures) {
             if (node == null)
                 return;
             if (!onlyTextures || node.Texture != null) {
@@ -171,7 +171,7 @@ namespace CommonLib.TexturePacker {
         public void DrawPackedNodes(Bitmap bitmap)
             => DrawPackedNodesSub(bitmap, _strategyImpl.RootNode);
 
-        private void DrawPackedNodesSub(Bitmap atlas, ITextureNode node) {
+        private void DrawPackedNodesSub(Bitmap atlas, ITexturePackerNode node) {
             if (node == null)
                 return;
 
@@ -270,6 +270,6 @@ namespace CommonLib.TexturePacker {
         public ITexturePackerStrategy Strategy => _strategyImpl;
 
         public bool HasTransparency { get; private set; } = false;
-        private readonly Dictionary<(int, int), ITextureNode> _nodeByTextureIDFrame = new Dictionary<(int, int), ITextureNode>();
+        private readonly Dictionary<(int, int), ITexturePackerNode> _nodeByTextureIDFrame = new Dictionary<(int, int), ITexturePackerNode>();
     }
 }

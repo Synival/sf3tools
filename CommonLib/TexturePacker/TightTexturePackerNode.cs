@@ -9,14 +9,14 @@ using System.Linq;
 using CommonLib.Imaging;
 
 namespace CommonLib.TexturePacker {
-    public class TightTextureNode : ITextureNode, IDisposable {
-        public TightTextureNode(Rectangle rect, int padding, bool tryRotate) {
+    public class TightTexturePackerNode : ITexturePackerNode, IDisposable {
+        public TightTexturePackerNode(Rectangle rect, int padding, bool tryRotate) {
             Rect      = rect;
             Padding   = padding;
             TryRotate = tryRotate;
         }
 
-        ~TightTextureNode() {
+        ~TightTexturePackerNode() {
             Dispose(false);
         }
 
@@ -39,10 +39,10 @@ namespace CommonLib.TexturePacker {
             GC.SuppressFinalize(this);
         }
 
-        public ITextureNode Add(IAnimatedTextureFrame tex)
+        public ITexturePackerNode Add(IAnimatedTextureFrame tex)
             => Add(tex, false, TryRotate);
 
-        private ITextureNode Add(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
+        private ITexturePackerNode Add(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
             var width  = rotated ? tex.Height : tex.Width;
             var height = rotated ? tex.Width  : tex.Height;
 
@@ -54,11 +54,11 @@ namespace CommonLib.TexturePacker {
 
                     // If there's room to the right, add an empty node to the right.
                     if (Rect.Width - width > 0)
-                        Right = new TightTextureNode(new Rectangle(Rect.X + width + Padding, Rect.Y, Rect.Width - width - Padding, height), Padding, TryRotate);
+                        Right = new TightTexturePackerNode(new Rectangle(Rect.X + width + Padding, Rect.Y, Rect.Width - width - Padding, height), Padding, TryRotate);
 
                     // If this node is all the way on the left side, add an empty node below.
                     if (Rect.X <= Padding)
-                        Left = new TightTextureNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
+                        Left = new TightTexturePackerNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
                     // TODO: else, if there's remaining space below, add that as 'Left'.  we'll need a parent reference for that.
 
                     Rect = new Rectangle(Rect.X, Rect.Y, width, height);
@@ -92,25 +92,25 @@ namespace CommonLib.TexturePacker {
             return null;
         }
 
-        private TightTextureNode _left = null;
-        private TightTextureNode _right = null;
+        private TightTexturePackerNode _left = null;
+        private TightTexturePackerNode _right = null;
 
-        private TightTextureNode Left {
+        private TightTexturePackerNode Left {
             get => _left;
             set {
                 if (_left != value) {
                     _left = value;
-                    Children = new List<ITextureNode>() { _left, _right }.Where(x => x != null).ToArray();
+                    Children = new List<ITexturePackerNode>() { _left, _right }.Where(x => x != null).ToArray();
                 }
             }
         }
 
-        private TightTextureNode Right {
+        private TightTexturePackerNode Right {
             get => _right;
             set {
                 if (_right != value) {
                     _right = value;
-                    Children = new List<ITextureNode>() { _left, _right }.Where(x => x != null).ToArray();
+                    Children = new List<ITexturePackerNode>() { _left, _right }.Where(x => x != null).ToArray();
                 }
             }
         }
@@ -121,7 +121,7 @@ namespace CommonLib.TexturePacker {
 
         public int Padding { get; }
         public bool TryRotate { get; }
-        public IEnumerable<ITextureNode> Children { get; private set; } = new ITextureNode[0];
+        public IEnumerable<ITexturePackerNode> Children { get; private set; } = new ITexturePackerNode[0];
 
     }
 }
