@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using CommonLib.Imaging;
+using CommonLib.Types;
 
 namespace CommonLib.TexturePacker {
     public class TightTexturePackerNode : ITexturePackerNode, IDisposable {
@@ -62,7 +63,7 @@ namespace CommonLib.TexturePacker {
                     // TODO: else, if there's remaining space below, add that as 'Left'.  we'll need a parent reference for that.
 
                     Rect = new Rectangle(Rect.X, Rect.Y, width, height);
-                    Rotated = rotated;
+                    Rotation = rotated ? TextureRotateType.Rotate90CW : TextureRotateType.NoRotation;
                     return this;
                 }
 
@@ -116,7 +117,7 @@ namespace CommonLib.TexturePacker {
         }
 
         public Rectangle Rect { get; private set; }
-        public bool Rotated { get; private set; } = false;
+        public TextureRotateType Rotation { get; private set; } = TextureRotateType.NoRotation;
         public IAnimatedTextureFrame Texture { get; private set; } = null;
 
         public int Padding { get; }

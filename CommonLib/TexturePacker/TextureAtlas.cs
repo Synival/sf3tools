@@ -67,8 +67,9 @@ namespace CommonLib.TexturePacker {
             var br = new Vector2(x2, y2);
             var bl = new Vector2(x1, y2);
 
-            // If the node was rotated clockwise, the UV coordinates must be rotated counter-clockwise to reverse it.
-            if (node.Rotated)
+            // If the node was rotated, the UV coordinates must be rotated in reverse order here.
+            var cwRotateCount = GetCWRotationCount(node.Rotation);
+            for (int i = 0; i < cwRotateCount; i++)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
 
             // Rotation is applied first...
@@ -101,6 +102,16 @@ namespace CommonLib.TexturePacker {
                 bitmapCoords[Corner3UVX, Corner3UVY],
                 bitmapCoords[Corner4UVX, Corner4UVY],
             };
+        }
+
+        private int GetCWRotationCount(TextureRotateType type) {
+            switch (type) {
+                case TextureRotateType.NoRotation:  return 0;
+                case TextureRotateType.Rotate90CW:  return 1;
+                case TextureRotateType.Rotate180:   return 2;
+                case TextureRotateType.Rotate270CW: return 3;
+                default:                            return 0;
+            }
         }
 
         public enum DimensionsMode {
@@ -194,7 +205,7 @@ namespace CommonLib.TexturePacker {
                     }
 
                     // Rotate the byte array clockwise if 'node.Rotated' is on.
-                    if (node.Rotated) {
+                    if (node.Rotation == TextureRotateType.Rotate90CW) {
                         var newImageData = new byte[imageData.Length];
                         var posIn = 0;
                         for (var inY = 0; inY < node.Texture.Height; inY++) {

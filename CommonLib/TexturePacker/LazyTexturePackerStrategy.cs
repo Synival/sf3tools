@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using CommonLib.Imaging;
+using CommonLib.Types;
 
 namespace CommonLib.TexturePacker {
     public class LazyTexturePackerStrategy : ITexturePackerStrategyImpl, ITexturePackerNode {
@@ -54,7 +55,7 @@ namespace CommonLib.TexturePacker {
         public bool NeedsFinish => false;
 
         public IAnimatedTextureFrame Texture => null;
-        public bool Rotated => false;
+        public TextureRotateType Rotation => TextureRotateType.NoRotation;
 
         public Rectangle Rect { get; private set; } = new Rectangle(0, 0, 0, 0);
         public List<ITexturePackerNode> _childList = new List<ITexturePackerNode>();

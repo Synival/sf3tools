@@ -168,7 +168,7 @@ namespace SF3.Models.Structs.X8PC {
                             var rect = node.Rect;
                             var (imageX, imageY) = (metaAtlasNodeRect.Left + rect.Left, metaAtlasNodeRect.Top + rect.Top);
 
-                            var rotateCount = (node.Rotated ? 1 : 0) + (metaAtlasNode.Rotated ? 1 : 0);
+                            var rotateCount = GetCWRotationCount(node.Rotation) + GetCWRotationCount(metaAtlasNode.Rotation);
                             int width  = tex.Width;
                             int height = tex.Height;
 
@@ -205,6 +205,16 @@ namespace SF3.Models.Structs.X8PC {
             }
 
             Invalidate();
+        }
+
+        private int GetCWRotationCount(TextureRotateType type) {
+            switch (type) {
+                case TextureRotateType.NoRotation:  return 0;
+                case TextureRotateType.Rotate90CW:  return 1;
+                case TextureRotateType.Rotate180:   return 2;
+                case TextureRotateType.Rotate270CW: return 3;
+                default:                            return 0;
+            }
         }
 
         private readonly Dictionary<int, TextureAtlas> _subAtlasesByModelID;
