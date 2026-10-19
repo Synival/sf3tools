@@ -57,10 +57,10 @@ namespace CommonLib.TexturePacker {
             var heightf = (float) height;
 
             // Perform calculations in texture coordinates, where (0, 0) is the top-left corner.
-            var x1 = (node.Rect.Left   + CornerType.TopLeft.GetUVDirectionX()     * pixelBorder) / widthf;
-            var y1 = (node.Rect.Top    + CornerType.TopLeft.GetUVDirectionY()     * pixelBorder) / heightf;
-            var x2 = (node.Rect.Right  + CornerType.BottomRight.GetUVDirectionX() * pixelBorder) / widthf;
-            var y2 = (node.Rect.Bottom + CornerType.BottomRight.GetUVDirectionY() * pixelBorder) / heightf;
+            var x1 = (node.InnerRect.Left   + CornerType.TopLeft.GetUVDirectionX()     * pixelBorder) / widthf;
+            var y1 = (node.InnerRect.Top    + CornerType.TopLeft.GetUVDirectionY()     * pixelBorder) / heightf;
+            var x2 = (node.InnerRect.Right  + CornerType.BottomRight.GetUVDirectionX() * pixelBorder) / widthf;
+            var y2 = (node.InnerRect.Bottom + CornerType.BottomRight.GetUVDirectionY() * pixelBorder) / heightf;
 
             var tl = new Vector2(x1, y1);
             var tr = new Vector2(x2, y1);
@@ -170,10 +170,10 @@ namespace CommonLib.TexturePacker {
             if (node == null)
                 return;
             if (!onlyTextures || node.Texture != null) {
-                if (node.Rect.Right > width)
-                    width = node.Rect.Right;
-                if (node.Rect.Bottom > height)
-                    height = node.Rect.Bottom;
+                if (node.OuterRect.Right > width)
+                    width = node.OuterRect.Right;
+                if (node.OuterRect.Bottom > height)
+                    height = node.OuterRect.Bottom;
             }
             foreach (var childNode in node.Children)
                 GetDimensionsSub(childNode, ref width, ref height, onlyTextures);
@@ -205,14 +205,15 @@ namespace CommonLib.TexturePacker {
                     }
 
                     // Rotate the byte array clockwise if 'node.Rotated' is on.
+                    // TODO: What about 180 and 270?
                     if (node.Rotation == TextureRotateType.Rotate90CW) {
                         var newImageData = new byte[imageData.Length];
                         var posIn = 0;
                         for (var inY = 0; inY < node.Texture.Height; inY++) {
-                            var outX = node.Rect.Width - inY - 1;
+                            var outX = node.InnerRect.Width - inY - 1;
                             for (var inX = 0; inX < node.Texture.Width; inX++) {
                                 var outY = inX;
-                                var posOut = (outY * node.Rect.Width + outX) * 4;
+                                var posOut = (outY * node.InnerRect.Width + outX) * 4;
                                 for (var c = 0; c < 4; c++)
                                     newImageData[posOut++] = imageData[posIn++];
                             }
@@ -230,14 +231,14 @@ namespace CommonLib.TexturePacker {
                         throw new InvalidOperationException();
 
                     // Determine the stride for the input data.
-                    var strideFrom = node.Rect.Width * 4;
+                    var strideFrom = node.InnerRect.Width * 4;
 
                     // Start writing, row by row.
-                    var posTo = strideTo * node.Rect.Top + node.Rect.Left * bpp;
+                    var posTo = strideTo * node.InnerRect.Top + node.InnerRect.Left * bpp;
                     unsafe {
                         fixed (byte* imageDataPtr = imageData) {
                             var posFrom = 0;
-                            for (var row = 0; row < node.Rect.Height; row++) {
+                            for (var row = 0; row < node.InnerRect.Height; row++) {
                                 _ = MemCpyUnsafe(bitmapToData.Scan0 + posTo, (IntPtr) (imageDataPtr + posFrom), strideFrom);
                                 posTo += strideTo;
                                 posFrom += strideFrom;

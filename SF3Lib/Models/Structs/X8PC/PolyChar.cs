@@ -185,7 +185,7 @@ namespace SF3.Models.Structs.X8PC {
 
             // Generate TextureAtlas's for each model.
             var atlasesByModelId = texturesByModelId
-                .ToDictionary(x => x.Key, x => new TextureAtlas(new TightTexturePackerStrategy(x.Value)));
+                .ToDictionary(x => x.Key, x => new TextureAtlas(new TightTexturePackerStrategy(x.Value, padding: 1)));
 
             return atlasesByModelId;
         }

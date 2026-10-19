@@ -47,8 +47,8 @@ namespace SF3.Models.Structs.X8PC {
                 ushort[,] data;
                 using (var bitmap = TextureAtlas.CreateBitmap(onlyTextures: true))
                     data = bitmap.Get2DDataAtABGR1555(TextureAtlas.GetDimensions(onlyTextures: true));
-                _width  = data.GetLength(0);
-                _height = data.GetLength(1);
+                _width  = data?.GetLength(0) ?? 0;
+                _height = data?.GetLength(1) ?? 0;
                 return data;
             }
 
@@ -156,7 +156,7 @@ namespace SF3.Models.Structs.X8PC {
                     int metaAtlasIdx = 0;
                     foreach (var sub in _subAtlasesByModelID) {
                         var metaAtlasNode = metaAtlasNodes[metaAtlasIdx++];
-                        var metaAtlasNodeRect = metaAtlasNode.Rect;
+                        var metaAtlasNodeRect = metaAtlasNode.InnerRect;
 
                         var modelId = sub.Key;
                         var atlas = sub.Value;
@@ -165,7 +165,7 @@ namespace SF3.Models.Structs.X8PC {
                             var tex = node.Texture;
                             var newData = new ushort[tex.Width, tex.Height];
 
-                            var rect = node.Rect;
+                            var rect = node.InnerRect;
                             var (imageX, imageY) = (metaAtlasNodeRect.Left + rect.Left, metaAtlasNodeRect.Top + rect.Top);
 
                             var rotateCount = GetCWRotationCount(node.Rotation) + GetCWRotationCount(metaAtlasNode.Rotation);

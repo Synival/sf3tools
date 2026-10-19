@@ -8,7 +8,6 @@ using CommonLib.Types;
 namespace CommonLib.TexturePacker {
     public class LazyTexturePackerStrategy : ITexturePackerStrategyImpl, ITexturePackerNode {
         public LazyTexturePackerStrategy(int padding) {
-            Width   = 0;
             Padding = padding;
         }
 
@@ -20,6 +19,7 @@ namespace CommonLib.TexturePacker {
             if (textures == null)
                 throw new ArgumentNullException(nameof(textures));
 
+            Padding = padding;
             foreach (var tex in textures)
                 _ = Add(tex);
 
@@ -32,23 +32,28 @@ namespace CommonLib.TexturePacker {
         }
 
         public ITexturePackerNode Add(IAnimatedTextureFrame tex) {
-            var padding = Padding;
-            var width   = tex.Width;
-            var height  = tex.Height;
+            var padding     = Padding;
+            var innerWidth  = tex.Width;
+            var innerHeight = tex.Height;
+            var outerWidth  = innerWidth  + padding * 2;
+            var outerHeight = innerHeight + padding * 2;
 
-            var newChild = new LazyTexturePackerNode(tex, new Rectangle(Width + padding, padding, width, height));
+            var newChild = new LazyTexturePackerNode(
+                tex,
+                new Rectangle(OuterRect.Width + padding, padding, innerWidth, innerHeight),
+                new Rectangle(OuterRect.Width, 0, outerWidth, outerHeight)
+            );
+
             _childList.Add(newChild);
-            Width += width + Padding * 2;
-            Height = Math.Max(Height, height + Padding * 2);
-            Rect   = new Rectangle(0, 0, Width, Height);
+            outerHeight = Math.Max(OuterRect.Height, newChild.OuterRect.Height);
+            OuterRect = new Rectangle(0, 0, newChild.OuterRect.Right, outerHeight);
+            InnerRect = new Rectangle(padding, padding, OuterRect.Width - padding * 2, OuterRect.Height - padding * 2);
 
             return newChild;
         }
 
         public ITexturePackerNode RootNode => this;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
         public int Padding { get; }
 
         // Finish() is never necessary for this strategy.
@@ -57,7 +62,8 @@ namespace CommonLib.TexturePacker {
         public IAnimatedTextureFrame Texture => null;
         public TextureRotateType Rotation => TextureRotateType.NoRotation;
 
-        public Rectangle Rect { get; private set; } = new Rectangle(0, 0, 0, 0);
+        public Rectangle InnerRect { get; private set; } = new Rectangle(0, 0, 0, 0);
+        public Rectangle OuterRect { get; private set; } = new Rectangle(0, 0, 0, 0);
         public List<ITexturePackerNode> _childList = new List<ITexturePackerNode>();
         public IEnumerable<ITexturePackerNode> Children => _childList;
     }

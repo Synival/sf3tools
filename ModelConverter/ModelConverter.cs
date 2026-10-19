@@ -358,7 +358,8 @@ namespace ModelConverter {
 
                         if (attrKey.HasTextures) {
                             var node = textureAtlas.GetNodeByTextureIDFrame(attr.TextureNo, 0);
-                            var nodeRect = node.Rect;
+                            // TODO: Maybe instead use GetUVCoordinatesByTextureIDFrame()?
+                            var nodeRect = node.InnerRect;
 
                             // Also flip UV coordinates so the face appears correct when importing.
                             // (They'll need to be flipped back on re-import.)

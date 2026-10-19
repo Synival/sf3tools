@@ -7,8 +7,8 @@ using CommonLib.Imaging;
 namespace CommonLib.TexturePacker {
     public class TightTexturePackerStrategy : ITexturePackerStrategyImpl, IDisposable {
         public TightTexturePackerStrategy(int maxX = 0, int maxY = 0, int padding = 0, bool tryRotate = true) {
-            MaxX      = maxX;
-            MaxY      = maxY;
+            MaxX      = Math.Max(maxX, padding * 2);
+            MaxY      = Math.Max(maxY, padding * 2);
             Padding   = padding;
             TryRotate = tryRotate;
 
@@ -38,8 +38,8 @@ namespace CommonLib.TexturePacker {
                 maxY = textures.Sum(x => x.Height + padding);
             }
 
-            MaxX      = maxX;
-            MaxY      = maxY;
+            MaxX      = Math.Max(maxX, padding * 2);
+            MaxY      = Math.Max(maxY, padding * 2);
             Padding   = padding;
             TryRotate = tryRotate;
 
@@ -54,7 +54,12 @@ namespace CommonLib.TexturePacker {
         private ITexturePackerNode CreateRootNode() {
             if (_rootNode != null)
                 throw new InvalidOperationException("Strategy already has a root node created");
-            return (_rootNode = new TightTexturePackerNode(new Rectangle(Padding, Padding, MaxX, MaxY), Padding, TryRotate));
+            var padding = Padding;
+            return _rootNode = new TightTexturePackerNode(
+                new Rectangle(padding, padding, MaxX - padding * 2, MaxY - padding * 2), 
+                new Rectangle(0, 0, MaxX, MaxY), 
+                Padding, TryRotate
+            );
         }
 
         ~TightTexturePackerStrategy() {

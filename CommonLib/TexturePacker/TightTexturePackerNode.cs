@@ -11,8 +11,12 @@ using CommonLib.Types;
 
 namespace CommonLib.TexturePacker {
     public class TightTexturePackerNode : ITexturePackerNode, IDisposable {
-        public TightTexturePackerNode(Rectangle rect, int padding, bool tryRotate) {
-            Rect      = rect;
+        public TightTexturePackerNode(Rectangle innerRect, Rectangle outerRect, int padding, bool tryRotate) {
+            if (innerRect.Width < 0 || innerRect.Height < 0)
+                throw new ArgumentOutOfRangeException(nameof(innerRect));
+
+            InnerRect = innerRect;
+            OuterRect = outerRect;
             Padding   = padding;
             TryRotate = tryRotate;
         }
@@ -44,32 +48,56 @@ namespace CommonLib.TexturePacker {
             => Add(tex, false, TryRotate);
 
         private ITexturePackerNode Add(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
-            var width  = rotated ? tex.Height : tex.Width;
-            var height = rotated ? tex.Width  : tex.Height;
+            var padding = Padding;
+            var padding2 = padding * 2;
+            var innerWidth  = rotated ? tex.Height : tex.Width;
+            var innerHeight = rotated ? tex.Width  : tex.Height;
+            var outerWidth  = innerWidth  + padding2;
+            var outerHeight = innerHeight + padding2;
 
             // If there's no image assigned yet, attempt to add it.
             if (Texture == null) {
                 // If the image fits within the bounds of the PackedNode, add it.
-                if (width + Padding <= Rect.Width && height + Padding <= Rect.Height) {
+                if (outerWidth <= OuterRect.Width && outerHeight <= OuterRect.Height) {
                     Texture = tex;
 
                     // If there's room to the right, add an empty node to the right.
-                    if (Rect.Width - width > 0)
-                        Right = new TightTexturePackerNode(new Rectangle(Rect.X + width + Padding, Rect.Y, Rect.Width - width - Padding, height), Padding, TryRotate);
+                    if (OuterRect.Width - outerWidth - padding2 > 0) {
+                        Right = new TightTexturePackerNode(
+                            new Rectangle(
+                                OuterRect.X     + outerWidth + padding,  OuterRect.Y + padding,
+                                OuterRect.Width - outerWidth - padding2, outerHeight - padding2
+                            ),
+                            new Rectangle(OuterRect.X + outerWidth, OuterRect.Y, OuterRect.Width - outerWidth, outerHeight),
+                            Padding, TryRotate
+                        );
+                    }
 
                     // If this node is all the way on the left side, add an empty node below.
-                    if (Rect.X <= Padding)
-                        Left = new TightTexturePackerNode(new Rectangle(Padding, Rect.Y + height + Padding, Rect.Width, Rect.Height), Padding, TryRotate);
+                    if (OuterRect.X == 0) {
+                        Left = new TightTexturePackerNode(
+                            new Rectangle(
+                                padding, OuterRect.Y + outerHeight + padding,
+                                OuterRect.Width - padding2, outerHeight - padding2
+                            ),
+                            new Rectangle(0, OuterRect.Y + outerHeight, OuterRect.Width, OuterRect.Height),
+                            Padding, TryRotate
+                        );
+                    }
                     // TODO: else, if there's remaining space below, add that as 'Left'.  we'll need a parent reference for that.
 
-                    Rect = new Rectangle(Rect.X, Rect.Y, width, height);
+                    OuterRect = new Rectangle(OuterRect.X, OuterRect.Y, outerWidth, outerHeight);
+                    InnerRect = new Rectangle(OuterRect.X + padding, OuterRect.Y + padding, outerWidth - padding2, outerHeight - padding2);
+                    if (InnerRect.Width < 0 || InnerRect.Height < 0)
+                        throw new InvalidOperationException($"{nameof(InnerRect)} somehow has negative size");
+
                     Rotation = rotated ? TextureRotateType.Rotate90CW : TextureRotateType.NoRotation;
                     return this;
                 }
 
                 // If the image couldn't be added, attempt to add it again with 90 degree rotation.
                 // (Don't bother if it's a square image)
-                if (tryRotate && width != height) {
+                if (tryRotate && outerWidth != outerHeight) {
                     var ret = Add(tex, true, false);
                     return ret;
                 }
@@ -116,7 +144,8 @@ namespace CommonLib.TexturePacker {
             }
         }
 
-        public Rectangle Rect { get; private set; }
+        public Rectangle InnerRect { get; private set; }
+        public Rectangle OuterRect { get; private set; }
         public TextureRotateType Rotation { get; private set; } = TextureRotateType.NoRotation;
         public IAnimatedTextureFrame Texture { get; private set; } = null;
 

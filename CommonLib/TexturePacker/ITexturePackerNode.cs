@@ -6,7 +6,8 @@ using CommonLib.Types;
 namespace CommonLib.TexturePacker {
     public interface ITexturePackerNode {
         IAnimatedTextureFrame Texture { get; }
-        Rectangle Rect { get; }
+        Rectangle InnerRect { get; }
+        Rectangle OuterRect { get; }
         TextureRotateType Rotation { get; }
 
         IEnumerable<ITexturePackerNode> Children { get; }
