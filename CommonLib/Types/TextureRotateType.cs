@@ -1,9 +1,11 @@
 ﻿namespace CommonLib.Types {
     public enum TextureRotateType {
-        NoRotation,
-        Rotate90CW,
-        Rotate180,
-        Rotate270CW
+        NoRotation   = 0,
+        Rotate90CW   = 1,
+        Rotate270CCW = Rotate90CW,
+        Rotate180    = 2,
+        Rotate270CW  = 3,
+        Rotate90CCW  = Rotate270CW,
     }
 
     public static class TextureRotateTypeExtensions {

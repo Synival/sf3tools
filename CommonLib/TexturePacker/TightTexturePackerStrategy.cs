@@ -85,7 +85,7 @@ namespace CommonLib.TexturePacker {
         }
 
         public ITexturePackerNode Add(IAnimatedTextureFrame tex)
-            => _rootNode.Add(tex);
+            => _rootNode.AddRecursive(tex);
 
         private TightTexturePackerNode _rootNode = null;
         public ITexturePackerNode RootNode => _rootNode;

@@ -194,21 +194,28 @@ namespace CommonLib.TexturePacker {
                         }
                     }
 
-                    // Rotate the byte array clockwise if 'node.Rotated' is on.
-                    // TODO: What about 180 and 270?
-                    if (node.Rotation == TextureRotateType.Rotate90CW) {
-                        var newImageData = new byte[imageData.Length];
-                        var posIn = 0;
-                        for (var inY = 0; inY < node.Texture.Height; inY++) {
-                            var outX = node.InnerRect.Width - inY - 1;
-                            for (var inX = 0; inX < node.Texture.Width; inX++) {
-                                var outY = inX;
-                                var posOut = (outY * node.InnerRect.Width + outX) * 4;
-                                for (var c = 0; c < 4; c++)
-                                    newImageData[posOut++] = imageData[posIn++];
+                    // Rotate the byte array clockwise if rotated.
+                    // This does kind of a lazy method of rotating clockwise 'n' times to avoid branching. Is slow!
+                    var rotations = node.Rotation.GetCWRotationCount();
+                    if (rotations > 0) {
+                        var dataWidth  = node.Texture.Width;
+                        var dataHeight = node.Texture.Height;
+                        for (int i = 0; i < rotations; i++) {
+                            var newImageData = new byte[imageData.Length];
+                            var posIn = 0;
+                            for (var inY = 0; inY < dataHeight; inY++) {
+                                var outX = dataHeight - inY - 1;
+                                for (var inX = 0; inX < dataWidth; inX++) {
+                                    var outY = inX;
+                                    var posOut = (outY * dataHeight + outX) * 4;
+                                    for (var c = 0; c < 4; c++)
+                                        newImageData[posOut++] = imageData[posIn++];
+                                }
                             }
+
+                            imageData = newImageData;
+                            (dataWidth, dataHeight) = (dataHeight, dataWidth);
                         }
-                        imageData = newImageData;
                     }
 
                     // Write to the texture atlas!

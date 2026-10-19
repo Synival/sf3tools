@@ -44,12 +44,12 @@ namespace CommonLib.TexturePacker {
             GC.SuppressFinalize(this);
         }
 
-        public ITexturePackerNode Add(IAnimatedTextureFrame tex)
-            => Add(tex, false, TryRotate);
+        public ITexturePackerNode AddRecursive(IAnimatedTextureFrame tex)
+            => AddRecursive(tex, false, TryRotate);
 
-        private ITexturePackerNode Add(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
-            var padding = Padding;
-            var padding2 = padding * 2;
+        private ITexturePackerNode AddRecursive(IAnimatedTextureFrame tex, bool rotated, bool tryRotate) {
+            var padding     = Padding;
+            var padding2    = padding * 2;
             var innerWidth  = rotated ? tex.Height : tex.Width;
             var innerHeight = rotated ? tex.Width  : tex.Height;
             var outerWidth  = innerWidth  + padding2;
@@ -91,28 +91,28 @@ namespace CommonLib.TexturePacker {
                     if (InnerRect.Width < 0 || InnerRect.Height < 0)
                         throw new InvalidOperationException($"{nameof(InnerRect)} somehow has negative size");
 
-                    Rotation = rotated ? TextureRotateType.Rotate90CW : TextureRotateType.NoRotation;
+                    Rotation = rotated ? TextureRotateType.Rotate270CW : TextureRotateType.NoRotation;
                     return this;
                 }
 
                 // If the image couldn't be added, attempt to add it again with 90 degree rotation.
                 // (Don't bother if it's a square image)
                 if (tryRotate && outerWidth != outerHeight) {
-                    var ret = Add(tex, true, false);
+                    var ret = AddRecursive(tex, true, false);
                     return ret;
                 }
             }
 
             // An image already exists, or we couldn't add it. Attempt to add it to the right.
             if (Right != null) {
-                var ret = Right.Add(tex);
+                var ret = Right.AddRecursive(tex);
                 if (ret != null)
                     return ret;
             }
 
             // Couldn't add to the right - attempt to add to the left.
             if (Left != null) {
-                var ret = Left.Add(tex);
+                var ret = Left.AddRecursive(tex);
                 if (ret != null)
                     return ret;
             }
