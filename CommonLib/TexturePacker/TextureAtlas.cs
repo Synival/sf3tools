@@ -68,7 +68,7 @@ namespace CommonLib.TexturePacker {
             var bl = new Vector2(x1, y2);
 
             // If the node was rotated, the UV coordinates must be rotated in reverse order here.
-            var cwRotateCount = GetCWRotationCount(node.Rotation);
+            var cwRotateCount = node.Rotation.GetCWRotationCount();
             for (int i = 0; i < cwRotateCount; i++)
                 (tl, tr, br, bl) = (tr, br, bl, tl);
 
@@ -102,16 +102,6 @@ namespace CommonLib.TexturePacker {
                 bitmapCoords[Corner3UVX, Corner3UVY],
                 bitmapCoords[Corner4UVX, Corner4UVY],
             };
-        }
-
-        private int GetCWRotationCount(TextureRotateType type) {
-            switch (type) {
-                case TextureRotateType.NoRotation:  return 0;
-                case TextureRotateType.Rotate90CW:  return 1;
-                case TextureRotateType.Rotate180:   return 2;
-                case TextureRotateType.Rotate270CW: return 3;
-                default:                            return 0;
-            }
         }
 
         public enum DimensionsMode {
