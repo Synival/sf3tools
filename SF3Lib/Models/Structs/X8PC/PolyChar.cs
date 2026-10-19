@@ -149,43 +149,19 @@ namespace SF3.Models.Structs.X8PC {
         }
 
         private Dictionary<int, TextureAtlas> GetTextureAtlasesByModelID() {
-            // First, get a list of all textures used by ATTR lists.
-            var texturedAttrsWithTableOffsets = AttrTablesByOffset
-                .SelectMany(x => x.Value.Select(y => (Offset: x.Key, Attr: y)))
-                .Where(x => x.Attr.UseTexture)
-                .GroupBy(x => x.Offset * 10000 + x.Attr.TextureNo)
-                .Select(x => x.First())
-                .Select(x => (x.Offset, x.Attr.TextureNo))
-                .ToArray();
-
             // Get a list of all XPDATAs.
             var xpdatas = XPDataTables.SelectMany(x => x).ToArray();
 
-            // This is terrifying -- for each texture ID, get the first model that has it in its ATTR list.
-            var texturesByModelId = texturedAttrsWithTableOffsets
-                .Select(x => (xpdatas.FirstOrDefault(y => y.AttributesOffset == x.Offset)?.ModelID, x.TextureNo))
-                .Where(x => x.ModelID.HasValue)
-                // Paranoid filtering to make sure we only have 1 texture ID and it belongs to the first model (sorted).
-                .OrderBy(x => x.ModelID.Value)
-                .ThenBy(x => x.TextureNo)
-                .GroupBy(x => x.TextureNo)
-                .Select(x => x.First())
-                // All sorted -- now let's bundle them into a dictionary of textures by model ID.
-                .GroupBy(x => x.ModelID.Value)
-                .OrderBy(x => x.Key)
-                .ToDictionary(x => x.Key, x => x.Select(y => TextureTable[y.TextureNo]).Cast<ITexture>().OrderBy(y => y.TextureID));
-
-            // This code below is for paranoid checks that all textures are used. Seems to always work!
-#if false
-            var allTextureIdsUsed = texturesByModelId.SelectMany(x => x.Value).Select(x => x.TextureID).OrderBy(x => x).ToArray();
-            var actualTextureIds = TextureTable.Select(x => x.TextureID).OrderBy(x => x).ToArray();
-            if (!Enumerable.SequenceEqual(allTextureIdsUsed, actualTextureIds))
-                ;
-#endif
-
-            // Generate TextureAtlas's for each model.
-            var atlasesByModelId = texturesByModelId
-                .ToDictionary(x => x.Key, x => new TextureAtlas(new TightTexturePackerStrategy(x.Value, padding: 1)));
+            // Generate TextureAtlas's for each model. Don't duplicate textures.
+            var texturesLeftDict = new Dictionary<int, IAnimatableTexture>(_animatableTextureDictionary);
+            var atlasesByModelId = xpdatas
+                .ToDictionary(x => x.ModelCollectionID * 1000 + x.ModelID, x => {
+                    var newAtlas = new TextureAtlas(new ModelTexturePackerStrategy(x, texturesLeftDict, padding: 1));
+                    var idsUsed = newAtlas.GetAllNodes().Where(y => y.Texture != null).Select(y => y.Texture.TextureID).Distinct().ToArray();
+                    foreach (var id in idsUsed)
+                        texturesLeftDict.Remove(id);
+                    return newAtlas;
+                });
 
             return atlasesByModelId;
         }
